@@ -679,6 +679,7 @@
     <Content Include="SiteConfig\Web.Staging.config" />
     <Content Include="Views\Desktop\BetList\CardClubDetail\Main.cshtml" />
     <Content Include="Views\Desktop\Module\PlayerAdmin\Main.cshtml" />
+    <Content Include="Views\Desktop\Module\PlayerAdmin\PlayerAccountInfo\Index.cshtml" />
     <None Include="www\css\source\reactpages\components\custom3rd\react-toastify.scss" />
     <None Include="www\css\source\pages\betlist\result\result.happy5.scss" />
     <Content Include="www\css\source\reactpages\pages\betlist\images\bonus.png" />
@@ -2495,6 +2496,7 @@
     <Content Include="www\js\source\reactpages\pages\casinoturnover\components\FormFilter.jsx" />
     <Content Include="www\js\source\reactpages\pages\casinoturnover\components\index.jsx" />
     <Content Include="www\js\source\reactpages\pages\casinoturnover\components\DataGrid.jsx" />
+    <Content Include="www\css\source\reactpages\pages\playeradmin\index.scss" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="SiteConfig\WebConfigTransforms\SIT.config">
