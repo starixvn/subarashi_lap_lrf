@@ -154,15 +154,24 @@
 /************************************************************************/
 /******/ ({
 
+<<<<<<< HEAD:Fanex.Athena/Web/www/js/build/dev/reactpages/playeradmin/playeradmin.chunk.js
 /***/ "./www/js/source/reactpages/actions/loaderAction.js":
 /*!**********************************************************!*\
   !*** ./www/js/source/reactpages/actions/loaderAction.js ***!
   \**********************************************************/
 /*! exports provided: toggleLoader */
+=======
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/actions/commonAction.js":
+/*!****************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/actions/commonAction.js ***!
+  \****************************************************************************************/
+/*! exports provided: setSelectedPlayer */
+>>>>>>> 112658 - Build front-end:Fanex.Athena/www/js/build/dev/reactpages/playeradmin/playerlist.chunk.js
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+<<<<<<< HEAD:Fanex.Athena/Web/www/js/build/dev/reactpages/playeradmin/playeradmin.chunk.js
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toggleLoader", function() { return toggleLoader; });
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./www/js/source/reactpages/actions/types.js");
 
@@ -170,6 +179,15 @@ var toggleLoader = function toggleLoader(show) {
   return {
     type: _types__WEBPACK_IMPORTED_MODULE_0__["TOGGLE_LOADER"],
     data: show
+=======
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSelectedPlayer", function() { return setSelectedPlayer; });
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/actions/types.js");
+
+var setSelectedPlayer = function setSelectedPlayer(data) {
+  return {
+    type: _types__WEBPACK_IMPORTED_MODULE_0__["SET_SELECTED_PLAYER"],
+    data: data
+>>>>>>> 112658 - Build front-end:Fanex.Athena/www/js/build/dev/reactpages/playeradmin/playerlist.chunk.js
   };
 };
 
@@ -206,12 +224,30 @@ var FETCH_DATA = 'FETCH_DATA';
 var SET_GRID_DATA = "SET_GRID_DATA";
 /* Product */
 
+<<<<<<< HEAD:Fanex.Athena/Web/www/js/build/dev/reactpages/playeradmin/playeradmin.chunk.js
 var SET_SELECTED_PRODUCT = "SET_SELECTED_PRODUCT";
 /* Base Currency */
 
 var SET_SELECTED_BASECURRENCY = "SET_SELECTED_BASECURRENCY";
 var SET_BASECURRENCY_LIST = "SET_BASECURRENCY_LIST";
 /* Currency */
+=======
+var searchPlayer = function searchPlayer(param) {
+  return function (dispatch) {
+    var service = new _lib_playerListService__WEBPACK_IMPORTED_MODULE_1__["default"]();
+    service.getPlayerList(param).then(function (result) {
+      var playerList = result.playerList;
+      dispatch(setPlayerList(playerList));
+
+      if (playerList.length === 0) {
+        dispatch(Object(_commonAction__WEBPACK_IMPORTED_MODULE_2__["setSelectedPlayer"])(null));
+      } else if (playerList.length === 1) {
+        dispatch(Object(_commonAction__WEBPACK_IMPORTED_MODULE_2__["setSelectedPlayer"])(playerList[0].CustId));
+      }
+    });
+  };
+};
+>>>>>>> 112658 - Build front-end:Fanex.Athena/www/js/build/dev/reactpages/playeradmin/playerlist.chunk.js
 
 var SET_SELECTED_CURRENCY = "SET_SELECTED_CURRENCY";
 /* Loader */
@@ -245,17 +281,31 @@ var SET_REPORT_TITLE = "SET_REPORT_TITLE";
 
 /***/ }),
 
+<<<<<<< HEAD:Fanex.Athena/Web/www/js/build/dev/reactpages/playeradmin/playeradmin.chunk.js
 /***/ "./www/js/source/reactpages/components/Loader.jsx":
 /*!********************************************************!*\
   !*** ./www/js/source/reactpages/components/Loader.jsx ***!
   \********************************************************/
 /*! exports provided: default */
+=======
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/actions/playerDetailHandlerAction.js":
+/*!*****************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/actions/playerDetailHandlerAction.js ***!
+  \*****************************************************************************************************/
+/*! exports provided: getLink, getTabList */
+>>>>>>> 112658 - Build front-end:Fanex.Athena/www/js/build/dev/reactpages/playeradmin/playerlist.chunk.js
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+<<<<<<< HEAD:Fanex.Athena/Web/www/js/build/dev/reactpages/playeradmin/playeradmin.chunk.js
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+=======
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getLink", function() { return getLink; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTabList", function() { return getTabList; });
+/* harmony import */ var _lib_playerListService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../lib/playerListService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerListService.js");
+>>>>>>> 112658 - Build front-end:Fanex.Athena/www/js/build/dev/reactpages/playeradmin/playerlist.chunk.js
 
 
 var Loader = function Loader(_ref) {
@@ -271,25 +321,48 @@ var Loader = function Loader(_ref) {
     className: "loader-inner ball-beat"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null))));
 };
+var getTabList = function getTabList() {
+  return function () {
+    var service = new _lib_playerListService__WEBPACK_IMPORTED_MODULE_0__["default"]();
+    return service.getTabList();
+  };
+};
 
 /* harmony default export */ __webpack_exports__["default"] = (Loader);
 
 /***/ }),
 
+<<<<<<< HEAD:Fanex.Athena/Web/www/js/build/dev/reactpages/playeradmin/playeradmin.chunk.js
 /***/ "./www/js/source/reactpages/constants/config.js":
 /*!******************************************************!*\
   !*** ./www/js/source/reactpages/constants/config.js ***!
   \******************************************************/
 /*! exports provided: debuggingConfig */
+=======
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/actions/types.js":
+/*!*********************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/actions/types.js ***!
+  \*********************************************************************************/
+/*! exports provided: SET_PARAM, SET_PLAYER_LIST, SET_SELECTED_PLAYER */
+>>>>>>> 112658 - Build front-end:Fanex.Athena/www/js/build/dev/reactpages/playeradmin/playerlist.chunk.js
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+<<<<<<< HEAD:Fanex.Athena/Web/www/js/build/dev/reactpages/playeradmin/playeradmin.chunk.js
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "debuggingConfig", function() { return debuggingConfig; });
 var debuggingConfig = {
   name: "__lrfConfig__",
   env: "local"
 };
+=======
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_PARAM", function() { return SET_PARAM; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_PLAYER_LIST", function() { return SET_PLAYER_LIST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SELECTED_PLAYER", function() { return SET_SELECTED_PLAYER; });
+var SET_PARAM = 'PLAYER_ADMIN/SET_PARAM';
+var SET_PLAYER_LIST = 'PLAYER_ADMIN/SET_PLAYER_LIST';
+var SET_SELECTED_PLAYER = 'PLAYER_ADMIN/SET_SELECTED_PLAYER';
+>>>>>>> 112658 - Build front-end:Fanex.Athena/www/js/build/dev/reactpages/playeradmin/playerlist.chunk.js
 
 /***/ }),
 
@@ -376,7 +449,13 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+<<<<<<< HEAD:Fanex.Athena/Web/www/js/build/dev/reactpages/playeradmin/playeradmin.chunk.js
 var AppLayout =
+=======
+
+var MAX_WIDTH_PAGE = 1920;
+var DataGrid =
+>>>>>>> 112658 - Build front-end:Fanex.Athena/www/js/build/dev/reactpages/playeradmin/playerlist.chunk.js
 /*#__PURE__*/
 function (_Component) {
   _inherits(AppLayout, _Component);
@@ -384,10 +463,122 @@ function (_Component) {
   function AppLayout(props) {
     _classCallCheck(this, AppLayout);
 
+<<<<<<< HEAD:Fanex.Athena/Web/www/js/build/dev/reactpages/playeradmin/playeradmin.chunk.js
     return _possibleConstructorReturn(this, _getPrototypeOf(AppLayout).call(this, props));
   }
 
   _createClass(AppLayout, [{
+=======
+    _this.state = {
+      clientWidth: Math.min(document.body.clientWidth, MAX_WIDTH_PAGE)
+    };
+    return _this;
+  }
+
+  _createClass(DataGrid, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate() {
+      var maxWidth = Math.min(document.body.clientWidth, MAX_WIDTH_PAGE);
+
+      if (this.state.clientWidth !== maxWidth) {
+        this.setState({
+          clientWidth: document.body.clientWidth
+        });
+      }
+    }
+  }, {
+    key: "_renderHeader",
+    value: function _renderHeader() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderRow"], {
+        style: {
+          height: 32
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
+        colWidth: 30
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "checkbox"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
+        colWidth: 80
+      }, "Status"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
+        colWidth: 80
+      }, "Username"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
+        colWidth: 100
+      }, "SystemId"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
+        colWidth: 60
+      }, "Currency"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
+        colWidth: 80
+      }, "Current Balance"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
+        colWidth: 80
+      }, "Outstanding Balance"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
+        colWidth: 70
+      }, "Odds Group"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
+        colWidth: 70
+      }, "BA Status"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
+        colWidth: 70
+      }, "Special Level"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
+        colWidth: 100
+      }, "Last Transaction"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
+        colWidth: 100
+      }, "Email"));
+    }
+  }, {
+    key: "_renderDataSection",
+    value: function _renderDataSection(dataList) {
+      var dataRows = [];
+
+      for (var i = 0; i < dataList.length; i++) {
+        var dataItem = dataList[i];
+        dataRows.push(this._buildDataRow(dataItem, i));
+      }
+
+      return dataRows;
+    }
+  }, {
+    key: "_buildDataRow",
+    value: function _buildDataRow(dataItem, index) {
+      var _this2 = this;
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Row"], {
+        key: index
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+        className: "center-align"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "checkbox",
+        defaultChecked: false
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+        className: "center-align"
+      }, dataItem.Status), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+        className: "center-align"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "javascript:;",
+        onClick: function onClick(e) {
+          return _this2._handleSelectPlayer(e, dataItem.CustId);
+        }
+      }, dataItem.UserName)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+        className: "center-align"
+      }, dataItem.SystemId), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+        className: "center-align"
+      }, dataItem.Currency), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+        className: "center-align"
+      }, dataItem.CurrentBalance), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+        className: "center-align"
+      }, dataItem.OutstandingBalance), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+        className: "center-align"
+      }, dataItem.OddsGroup), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+        className: "center-align"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "checkbox",
+        defaultChecked: dataItem.BaStatus
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+        className: "center-align"
+      }, dataItem.SpecialLevel), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+        className: "center-align"
+      }, dataItem.LastTransaction), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+        className: "center-align"
+      }, dataItem.Email));
+    }
+  }, {
+>>>>>>> 112658 - Build front-end:Fanex.Athena/www/js/build/dev/reactpages/playeradmin/playerlist.chunk.js
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -503,6 +694,7 @@ var loggerMiddleware = Object(redux_logger__WEBPACK_IMPORTED_MODULE_0__["createL
 
 var Logger =
 /*#__PURE__*/
+<<<<<<< HEAD:Fanex.Athena/Web/www/js/build/dev/reactpages/playeradmin/playeradmin.chunk.js
 function () {
   function Logger() {
     _classCallCheck(this, Logger);
@@ -517,6 +709,157 @@ function () {
 
   return Logger;
 }();
+=======
+function (_PureComponent) {
+  _inherits(PlayerDetail, _PureComponent);
+
+  function PlayerDetail(props) {
+    var _this;
+
+    _classCallCheck(this, PlayerDetail);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(PlayerDetail).call(this, props));
+
+    _defineProperty(_assertThisInitialized(_this), "handleClickMenu", function (event, actionLink, tabIndex) {
+      event.preventDefault();
+
+      _this.setState({
+        targetUrl: actionLink,
+        selectedTabIndex: tabIndex
+      });
+    });
+
+    _this.state = {
+      selectedTabIndex: 0,
+      targetUrl: ''
+    };
+    _this._tabList = _this.props.getTabList();
+    return _this;
+  }
+
+  _createClass(PlayerDetail, [{
+    key: "_buildActionUrl",
+    value: function _buildActionUrl(systemType, action) {
+      var selectedPlayer = this.props.selectedPlayer;
+      var queryString = (action.indexOf('?') !== -1 ? '&custId=' : '?custId=') + selectedPlayer;
+      var urlByPlayer = action + queryString;
+      return this.props.getLink(systemType, urlByPlayer);
+    }
+  }, {
+    key: "_renderTabList",
+    value: function _renderTabList(tabList) {
+      var _this2 = this;
+
+      var selectedTabIndex = this.state.selectedTabIndex;
+      return tabList.map(function (item, index) {
+        var actionUrl = _this2._buildActionUrl(item.SystemType, item.Action);
+
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          className: "tab",
+          key: item.Name
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+          className: selectedTabIndex === index ? "active" : "",
+          href: actionUrl,
+          onClick: function onClick(event) {
+            return _this2.handleClickMenu(event, actionUrl, index);
+          }
+        }, item.Text));
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var targetUrl = this.state.targetUrl;
+      var selectedPlayer = this.props.selectedPlayer;
+
+      if (!selectedPlayer) {
+        return null;
+      }
+
+      if (this._tabList.length === 0) {
+        return null;
+      }
+
+      var src = targetUrl || this._buildActionUrl(this._tabList[0].SystemType, this._tabList[0].Action);
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "pa-detail-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "page-filter-tab"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "header-tab"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "content-tab"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "tabs"
+      }, this._renderTabList(this._tabList)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "tab-panel"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "pa-frame-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("iframe", {
+        id: "paDetailFrame",
+        style: {
+          height: window.innerHeight - 340
+        },
+        name: "paDetailFrame",
+        frameBorder: "0",
+        src: src
+      })))));
+    }
+  }]);
+
+  return PlayerDetail;
+}(react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"]);
+
+function mapDispatchToProps(dispatch) {
+  var getLink = _actions__WEBPACK_IMPORTED_MODULE_3__["ActionCreators"].getLink,
+      getTabList = _actions__WEBPACK_IMPORTED_MODULE_3__["ActionCreators"].getTabList;
+  return Object(redux__WEBPACK_IMPORTED_MODULE_2__["bindActionCreators"])({
+    getLink: getLink,
+    getTabList: getTabList
+  }, dispatch);
+}
+
+function mapStateToProps(state) {
+  var selectedPlayer = state.selectedPlayer;
+  return Object.assign({}, {
+    selectedPlayer: selectedPlayer
+  });
+}
+
+;
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(PlayerDetail));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/components/index.jsx":
+/*!*************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/components/index.jsx ***!
+  \*************************************************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _AppContainer_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AppContainer.jsx */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/components/AppContainer.jsx");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _reducers_index_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../reducers/index.js */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/reducers/index.js");
+/* harmony import */ var _lib_store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../lib/store */ "./www/js/source/reactpages/lib/store.js");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+
+>>>>>>> 112658 - Build front-end:Fanex.Athena/www/js/build/dev/reactpages/playeradmin/playerlist.chunk.js
 
 
 
@@ -549,12 +892,24 @@ function () {
     _classCallCheck(this, Site);
   }
 
+<<<<<<< HEAD:Fanex.Athena/Web/www/js/build/dev/reactpages/playeradmin/playeradmin.chunk.js
   _createClass(Site, null, [{
     key: "getXsrfToken",
     value: function getXsrfToken() {
       if (!_xsrfToken) {
         _xsrfToken = document.querySelector("input[name=__RequestVerificationToken]").value;
       }
+=======
+  _createClass(PlayerListService, [{
+    key: "getTabList",
+    value: function getTabList() {
+      return this.commonService.getTabList();
+    }
+  }, {
+    key: "_mergePlayerList",
+    value: function _mergePlayerList(lrfList, lapList) {
+      var result = [];
+>>>>>>> 112658 - Build front-end:Fanex.Athena/www/js/build/dev/reactpages/playeradmin/playerlist.chunk.js
 
       return _xsrfToken;
     }
@@ -613,10 +968,53 @@ function () {
 
 /***/ }),
 
+<<<<<<< HEAD:Fanex.Athena/Web/www/js/build/dev/reactpages/playeradmin/playeradmin.chunk.js
 /***/ "./www/js/source/reactpages/lib/store.js":
 /*!***********************************************!*\
   !*** ./www/js/source/reactpages/lib/store.js ***!
   \***********************************************/
+=======
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/reducers/filterHandlerReducer.js":
+/*!*************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/reducers/filterHandlerReducer.js ***!
+  \*************************************************************************************************/
+/*! exports provided: param, playerList */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "param", function() { return param; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "playerList", function() { return playerList; });
+/* harmony import */ var _lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
+/* harmony import */ var _actions_types_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/types.js */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/actions/types.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+var param = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])({}, _defineProperty({}, _actions_types_js__WEBPACK_IMPORTED_MODULE_1__["SET_PARAM"], function (preState, action) {
+  return _objectSpread({}, action.data);
+}));
+var playerList = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(null, _defineProperty({}, _actions_types_js__WEBPACK_IMPORTED_MODULE_1__["SET_PLAYER_LIST"], function (preState, action) {
+  return _toConsumableArray(action.data);
+}));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/reducers/index.js":
+/*!**********************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/reducers/index.js ***!
+  \**********************************************************************************/
+>>>>>>> 112658 - Build front-end:Fanex.Athena/www/js/build/dev/reactpages/playeradmin/playerlist.chunk.js
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -691,9 +1089,51 @@ var setParam = function setParam(data) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+<<<<<<< HEAD:Fanex.Athena/Web/www/js/build/dev/reactpages/playeradmin/playeradmin.chunk.js
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ActionCreators", function() { return ActionCreators; });
 /* harmony import */ var _actions_loaderAction__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../actions/loaderAction */ "./www/js/source/reactpages/actions/loaderAction.js");
 /* harmony import */ var _filterHandlerAction__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./filterHandlerAction */ "./www/js/source/reactpages/pages/playeradmin/actions/filterHandlerAction.js");
+=======
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var BaseCommonService =
+/*#__PURE__*/
+function () {
+  function BaseCommonService() {
+    _classCallCheck(this, BaseCommonService);
+
+    if (this.constructor == BaseCommonService) {
+      throw new Error("Abstract classes can't be instantiated.");
+    }
+  }
+
+  _createClass(BaseCommonService, [{
+    key: "getTabList",
+    value: function getTabList() {
+      throw new Error("Method 'getTabList()' must be implemented.");
+    }
+  }, {
+    key: "getLink",
+    value: function getLink(sysType, action) {
+      throw new Error("Method 'getTabLink()' must be implemented.");
+    }
+  }, {
+    key: "fetchData",
+    value: function fetchData(sType, action, params) {
+      var configOption = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
+      throw new Error("Method 'fetchData()' must be implemented.");
+    }
+  }, {
+    key: "fetchMultiple",
+    value: function fetchMultiple(promiseList, callback) {
+      throw new Error("Method 'fetchMultiple()' must be implemented.");
+    }
+  }]);
+>>>>>>> 112658 - Build front-end:Fanex.Athena/www/js/build/dev/reactpages/playeradmin/playerlist.chunk.js
 
 
 var ActionCreators = Object.assign({}, _actions_loaderAction__WEBPACK_IMPORTED_MODULE_0__, _filterHandlerAction__WEBPACK_IMPORTED_MODULE_1__);
@@ -737,12 +1177,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+<<<<<<< HEAD:Fanex.Athena/Web/www/js/build/dev/reactpages/playeradmin/playeradmin.chunk.js
+=======
+      var applyApiTokenUrl = pageConfig.applyApiTokenUrl,
+          tabList = pageConfig.tabList;
+>>>>>>> 112658 - Build front-end:Fanex.Athena/www/js/build/dev/reactpages/playeradmin/playerlist.chunk.js
 
 
 
 
 
 
+<<<<<<< HEAD:Fanex.Athena/Web/www/js/build/dev/reactpages/playeradmin/playeradmin.chunk.js
 var AppContainer = function AppContainer(props) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_7__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Loader__WEBPACK_IMPORTED_MODULE_6__["default"], {
     isLoading: props.isLoading
@@ -750,6 +1196,17 @@ var AppContainer = function AppContainer(props) {
     className: "result-content"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DataGrid__WEBPACK_IMPORTED_MODULE_4__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PlayerDetail__WEBPACK_IMPORTED_MODULE_8__["default"], null));
 };
+=======
+      var initialConfig = {
+        tabList: tabList,
+        baseUrl: RootUrl,
+        applyApiTokenUrl: applyApiTokenUrl,
+        applyLinkTokenUrl: Identity.ApplyTokenUrl
+      };
+      return new _lapCommonService__WEBPACK_IMPORTED_MODULE_0__["default"](initialConfig);
+    }
+  }]);
+>>>>>>> 112658 - Build front-end:Fanex.Athena/www/js/build/dev/reactpages/playeradmin/playerlist.chunk.js
 
 function mapDispatchToProps(dispatch) {
   var setParams = _actions_index__WEBPACK_IMPORTED_MODULE_3__["ActionCreators"].setParams;
@@ -786,6 +1243,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+<<<<<<< HEAD:Fanex.Athena/Web/www/js/build/dev/reactpages/playeradmin/playeradmin.chunk.js
+=======
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+>>>>>>> 112658 - Build front-end:Fanex.Athena/www/js/build/dev/reactpages/playeradmin/playerlist.chunk.js
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -824,6 +1296,7 @@ function (_PureComponent) {
       event.preventDefault();
     });
 
+<<<<<<< HEAD:Fanex.Athena/Web/www/js/build/dev/reactpages/playeradmin/playeradmin.chunk.js
     return _this;
   }
 
@@ -831,6 +1304,43 @@ function (_PureComponent) {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps, prevState) {
       var param = this.props.param;
+=======
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(LapCommonService).call(this));
+    var baseUrl = initialConfig.baseUrl,
+        applyLinkTokenUrl = initialConfig.applyLinkTokenUrl,
+        applyApiTokenUrl = initialConfig.applyApiTokenUrl,
+        tabList = initialConfig.tabList;
+    _this._applyLinkTokenUrl = applyLinkTokenUrl;
+    _this._applyApiTokenUrl = applyApiTokenUrl;
+    _this._baseUrl = baseUrl;
+    _this._tabList = tabList || [];
+    return _this;
+  }
+
+  _createClass(LapCommonService, [{
+    key: "getTabList",
+    value: function getTabList() {
+      return _toConsumableArray(this._tabList);
+    }
+  }, {
+    key: "_buildApplyTokenQueryString",
+    value: function _buildApplyTokenQueryString(sysType, action) {
+      return "ActionLink=".concat(encodeURIComponent(action), "&Type=").concat(sysType);
+    }
+  }, {
+    key: "getLink",
+    value: function getLink(sysType, action) {
+      return sysType === _constants_configInfo__WEBPACK_IMPORTED_MODULE_1__["systemType"].newAdmin ? this._baseUrl + action : "".concat(this._applyLinkTokenUrl, "?").concat(this._buildApplyTokenQueryString(sysType, action));
+    }
+  }, {
+    key: "_buildCommonAjaxConfig",
+    value: function _buildCommonAjaxConfig(configOption, apiActionUrl, params) {
+      var commonConfig = _objectSpread({}, configOption, {
+        url: apiActionUrl
+      });
+
+      var configWithParam = this._getConfigParam(commonConfig, params);
+>>>>>>> 112658 - Build front-end:Fanex.Athena/www/js/build/dev/reactpages/playeradmin/playerlist.chunk.js
 
       if (param !== prevProps.param) {
         this._fetchData();
