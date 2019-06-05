@@ -81,10 +81,11 @@
                 var metaModel = new BetListExcelMetaModel
                 {
                     IsExportExcel = true,
-                    CurrencyId = 0
+                    CurrencyId = 0,
+                    Date = new DateTime(2019, 2, 1)
                 };
 
-                var expectedTitle = $"{ViewResources.ProductVB} - {ViewResources.BetList} - {ViewResources.DetailTickets}";
+                var expectedTitle = $"{ViewResources.ProductVB} - {ViewResources.DetailedBetlist} - {metaModel.Date.ToString("MM/dd/yyyy")}";
 
                 SessionService.GenerateAgentListXml(metaModel.CurrencyId, false).Returns(AgentListXml);
 

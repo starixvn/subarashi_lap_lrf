@@ -42,26 +42,16 @@ namespace Fanex.Athena.Controllers.BetList
             return await ProcessDefaultRequest(metaModel, "~/Views/Desktop/BetList/RngCasinoDetail/Main.cshtml", "Lrf_BetList_RNG_Detail").ConfigureAwait(false);
         }
 
-        protected override void AssignViewBag(BetListMetaModel model)
-        {
-            ViewBag.BetListTitle = GetRNGCasinoBetListTitle(model.TransType);
-        }
-
         protected override async Task<ActionResult> ExportExcel(BetListExcelMetaModel metaModel)
         {
-            metaModel.Title = GetRNGCasinoBetListTitle(metaModel.TransType);
+            metaModel.Title = GetBetListDetailTitle(ViewResources.ProductCS, metaModel.Date);
+
             metaModel.ShowingOption = new BetListShowingOption
             {
                 CustomerCommVisible = SessionService.LicenseeSession.IsAllowedCustomerComm
             };
             metaModel.HiddenColumns = HiddenColumns;
             return await ProcessExportExcel(metaModel, "RngCasinoDetail").ConfigureAwait(false);
-        }
-
-        private static string GetRNGCasinoBetListTitle(long transType)
-        {
-            var title = ViewResources.ProductCS + " - ";
-            return GetTitleByTransType(title, transType);
         }
     }
 }

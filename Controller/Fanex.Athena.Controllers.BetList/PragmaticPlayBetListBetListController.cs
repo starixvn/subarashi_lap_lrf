@@ -16,9 +16,6 @@
     {
         private static readonly int[] HiddenColumns = new[] { ExternalIdColumn, SystemIdColumn, BetEffectiveColumn, LicenseeWLColumn };
 
-        private readonly string _title =
-            ViewResources.ProductPP + " - " + ViewResources.BetList + " - " + ViewResources.DetailTickets;
-
         public PragmaticPlayBetListController(
             ILanguageService languageService,
             ISessionService sessionService,
@@ -39,11 +36,6 @@
             return await ProcessDefaultRequest(metaModel, "~/Views/Desktop/BetList/PragmaticPlayDetail/Main.cshtml", "Lrf_BetList_RNG_Detail").ConfigureAwait(false);
         }
 
-        protected override void AssignViewBag(BetListMetaModel model)
-        {
-            ViewBag.BetListTitle = _title;
-        }
-
         protected override async Task<ActionResult> ExportExcel(BetListExcelMetaModel metaModel)
         {
             metaModel.ShowingOption = new BetListShowingOption
@@ -51,7 +43,8 @@
                 CustomerCommVisible = SessionService.LicenseeSession.IsAllowedCustomerComm
             };
             metaModel.HiddenColumns = HiddenColumns;
-            metaModel.Title = _title;
+            metaModel.Title = GetBetListDetailTitle(ViewResources.ProductPP, metaModel.Date);
+
             return await ProcessExportExcel(metaModel, "PPDetail").ConfigureAwait(false);
         }
     }

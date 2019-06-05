@@ -1,5 +1,4 @@
-﻿using Fanex.Athena.Model.Core.MetaModel;
-
+﻿
 namespace Fanex.Athena.Model.BetList.MetaModel
 {
     public class BetListExcelMetaModel : BetListMetaModel
