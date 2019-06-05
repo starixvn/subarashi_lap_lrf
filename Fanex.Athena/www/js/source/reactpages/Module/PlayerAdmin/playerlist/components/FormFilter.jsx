@@ -12,8 +12,7 @@ export class FormFilter extends PureComponent {
 
         this.state = {
             userName: '',
-            isShowAdvancedSearch: false,
-            isOpenDropdown: false
+            isShowAdvancedSearch: false
         }
     }
 
@@ -29,24 +28,12 @@ export class FormFilter extends PureComponent {
         this.setState({ [name]: value });
     }
 
-    handleToggleDropdown = () => {
-        const isOpen = !this.state.isOpenDropdown;
-        this.setState({
-            isOpenDropdown: isOpen
-        });
-    }
-
-    handleClose = () => {
-        this.setState({
-            isOpenDropdown: false
-        });
-    }
-
     render() {
-        const { userName, isShowAdvancedSearch, isOpenDropdown } = this.state;
+        const { userName, isShowAdvancedSearch } = this.state;
 
         return (
             <div className="page-filter">
+            <button className="btn-outline btn-outline-secondary" type="button">Outline Button</button>
                 <div className="row">
                     <div className="col-12 col-md-4 col-sm-4 col-lg-3 col-xl-2">
                         <div className="form-group">
@@ -55,14 +42,6 @@ export class FormFilter extends PureComponent {
                                 onChange={this.handleChange} />
                         </div>
                     </div>
-
-                    <DropdownButton isOpen={isOpenDropdown}
-                        onToggle={this.handleToggleDropdown}
-                        buttonLabel={'Dropdown Button'}
-                        onClose={this.handleClose}>
-                        <DropdownItem>Item1</DropdownItem>
-                        <DropdownItem>Item2</DropdownItem>
-                    </DropdownButton>
 
                     {isShowAdvancedSearch && <AdvancedSearch />}
 

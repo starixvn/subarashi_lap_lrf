@@ -39,11 +39,16 @@ export default class Overlay extends Component {
             const { onOpen } = this.props;
             this.props.isOpening && onOpen && onOpen();
             this.setState({ isOpening: this.props.isOpening });
-        }
-    }
 
-    componentDidMount() {
-        this._registerEvents();
+            window.setTimeout(() => {
+                if (this.props.isOpening) {
+                    this._registerEvents();
+                }
+                else {
+                    this._unRegisterEvents();
+                }
+            }, 0);
+        }
     }
 
     componentWillUnmount() {
@@ -54,7 +59,7 @@ export default class Overlay extends Component {
         const { closeOnOutsideClick } = this.props;
 
         if (closeOnOutsideClick) {
-            document.addEventListener('click', this._handleClickOutSide, true);
+            document.addEventListener('click', this._handleClickOutSide);
         }
     }
 
@@ -62,7 +67,7 @@ export default class Overlay extends Component {
         const { closeOnOutsideClick } = this.props;
 
         if (closeOnOutsideClick) {
-            document.removeEventListener('click', this._handleClickOutSide, true);
+            document.removeEventListener('click', this._handleClickOutSide);
         }
     }
 
@@ -76,7 +81,7 @@ export default class Overlay extends Component {
 
     _close() {
         const { onClose } = this.props;
-        this.setState({isOpening: false}, () => onClose && onClose());
+        this.setState({ isOpening: false }, () => onClose && onClose());
     }
 
     render() {

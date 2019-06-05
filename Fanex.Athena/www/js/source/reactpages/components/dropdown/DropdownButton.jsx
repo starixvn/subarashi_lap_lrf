@@ -10,7 +10,7 @@ const DropdownButton = (props) => {
 
     return (
         <div className={classes} {...attrs}>
-            <DropdownToggle {...toggleButton} onClick={onToggle}>{buttonLabel}</DropdownToggle>
+            <DropdownToggle className="toggle-default" {...toggleButton} onClick={onToggle}>{buttonLabel}</DropdownToggle>
             <DropdownMenu {...dropdownMenu} isOpen={isOpen} onOpen={onOpen} onClose={onClose}>
                 {children}
             </DropdownMenu>

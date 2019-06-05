@@ -9,6 +9,7 @@ import LangHelper from '../../../../lib/langHelper';
 import Switcher from '../../../../components/Switcher';
 import { specialLevelListWithColor, oddsGroupListWithStyle, columnList } from '../lib/constants';
 import MultipleSelect from '@9softstudio/react-multiselect';
+import BatchUpdateButton from './BatchUpdateButton';
 
 const MAX_WIDTH_PAGE = 1920;
 
@@ -168,8 +169,8 @@ export class DataGrid extends PureComponent {
         else if (selectedPlayerIdList.length > 0) {
             titleContentList.push(
                 <React.Fragment key="batchUpdate">
-                    <button>BATCH UPDATE</button>
-                    <button>{selectedPlayerIdList.length} Player(s) Selected</button>
+                    <BatchUpdateButton />
+                    <button className="btn-outline btn-outline-light" type="button">{selectedPlayerIdList.length} Player(s) Selected</button>
                 </React.Fragment>
             )
         }

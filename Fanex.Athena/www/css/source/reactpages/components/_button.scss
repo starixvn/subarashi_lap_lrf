@@ -1,6 +1,7 @@
 ﻿$button-height: 25px;
 $btnSubmit-background: #f05b1f;
 $btnCancelBackground: #757985;
+$btnOulineSecondaryColor: #6c757d;
 
 %buttonDisabled {
     background-color: #DFDFDF !important;
@@ -26,12 +27,13 @@ $btnCancelBackground: #757985;
     padding: 0 2rem;
     vertical-align: middle;
     -webkit-tap-highlight-color: transparent;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 
     &:hover {
         opacity: 0.9;
     }
 
-    &:disabled{
+    &:disabled {
         @extend %buttonDisabled;
     }
 }
@@ -51,7 +53,42 @@ button {
         outline: none;
     }
 
-    &:disabled{
+    &:disabled {
         @extend %buttonDisabled;
+    }
+
+    &:not(:disabled) {
+        cursor: pointer;
+    }
+}
+
+.btn-outline {
+    display: inline-block;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: 4px 10px;
+    font-size: 12px;
+    border-radius: 3px;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+    &-light {
+        color: #fff;
+        border-color: #fff;
+
+        &:hover {
+            color: #e6c95a;
+            border-color: #e6c95a;
+        }
+    }
+
+    &-secondary {
+        color: $btnOulineSecondaryColor;
+        border-color: $btnOulineSecondaryColor;
+
+        &:hover {
+            color: #fff;
+            background-color: $btnOulineSecondaryColor;
+            border-color: $btnOulineSecondaryColor;
+        }
     }
 }
