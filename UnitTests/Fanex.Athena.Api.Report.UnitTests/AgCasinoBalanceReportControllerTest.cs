@@ -224,7 +224,7 @@
 
             var expectedFromDate = drillDownLevel > 0 ? metaModel.DrillDownFromDate : metaModel.FromDate;
             var expectedToDate = drillDownLevel > 0 ? metaModel.DrillDownToDate : metaModel.ToDate;
-            var expectedCurrencyId = drillDownLevel > 0 && currencyId > 0 ? metaModel.DrillDownCurrencyId : metaModel.CurrencyId;
+            var expectedCurrencyId = drillDownLevel > 0 && currencyId >= 0 ? metaModel.DrillDownCurrencyId : metaModel.CurrencyId;
             MockDataAccess(_dataAccess, metaModel);
 
             // Action

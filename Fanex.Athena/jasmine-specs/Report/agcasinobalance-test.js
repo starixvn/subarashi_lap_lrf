@@ -130,9 +130,9 @@
                 return '1/1/2016';
             });
 
-            AgCasinoBalance.setReportTitle('20', new Date(), new Date(), 'USD');
+            AgCasinoBalance.setReportTitle('-1', new Date(), new Date());
             
-            expect($title.html()).toBe('AGCasinoBalance, 1/1/2016 → 1/1/2016, Currency: , BaseCurrency: USD');
+            expect($title.html()).toBe('AGCasinoBalance, 1/1/2016 → 1/1/2016, Viewin');
         });
     });
 

@@ -29,15 +29,7 @@
         </label>
     </div>
     <div class="grid_4 filter-input">
-        @RazorHelper.CurrencyList(Model.CurrencyList, "currency-list", Model.Param.CurrencyId)
-    </div>
-        <div class="grid_3 filter-label">
-            <label>
-                @ViewResources.BaseCurrency
-            </label>
-        </div>
-    <div class="grid_4 filter-input">
-        @RazorHelper.BasedCurrency(Model.Param.BaseCurrency)
+        @RazorHelper.CurrencyList(Model.CurrencyList, "currency-list", Model.Param.CurrencyId, true, true)
     </div>
     <div class="grid_3 filter-label">
         <label for="IsExcludedTestData">
