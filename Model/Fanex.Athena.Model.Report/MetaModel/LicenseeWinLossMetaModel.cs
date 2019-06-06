@@ -22,6 +22,6 @@ namespace Fanex.Athena.Model.Report.MetaModel
 
         public string SortOrder { get; set; }
         public override bool IsValid => base.IsValid && string.IsNullOrEmpty(BaseCurrency)
-            || SystemConstants.BaseCurrencyList.Contains(BaseCurrency);
+            || SystemConstants.BaseCurrencyList.Contains(BaseCurrency.ToUpperInvariant());
     }
 }
