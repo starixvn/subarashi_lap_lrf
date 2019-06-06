@@ -86,6 +86,7 @@
         public async Task ReadData_WithoutBaseCurrency_ReturnCorrectResult()
         {
             // Arrange
+            _metaModel.BaseCurrency = string.Empty;
             DataAccess.GetObjectDb(Arg.Is(GetSummaryWinlossSp)).Returns(ObjectDb);
 
             Reader.Read().Returns(true, false);
@@ -124,8 +125,8 @@
                 Assert.That(firstOriginalItem.CustomerId, Is.EqualTo(readerDataMapping.custid));
                 Assert.That(firstOriginalItem.LicenseeWL["SB"], Is.EqualTo(orignalLicenseeWL));
                 Assert.That(firstOriginalItem.TurnOver["SB"], Is.EqualTo(originalTurnover));
-                Assert.That(firstOriginalItem.LicenseeWL["SB"], Is.EqualTo(firstOriginalItem.LicenseeWL["SB"]));
-                Assert.That(firstOriginalItem.TurnOver["SB"], Is.EqualTo(firstOriginalItem.TurnOver["SB"]));
+                Assert.That(firstOriginalItem.LicenseeWL["SB"], Is.EqualTo(firstTotalItem.LicenseeWL["SB"]));
+                Assert.That(firstOriginalItem.TurnOver["SB"], Is.EqualTo(firstTotalItem.TurnOver["SB"]));
                 Assert.That(result.AdditionalInfo, Is.EqualTo(readerDataMapping.PromotionPrize.ToString()));
 
             });
