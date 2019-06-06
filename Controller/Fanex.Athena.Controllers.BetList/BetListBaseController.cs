@@ -161,23 +161,26 @@
         /// <returns>The bet list metal model.</returns>
         protected BetListMetaModel CreateDefaultMetaModel(BetListMetaModel metaModel = null)
         {
-            var licenseeId = SessionService.LicenseeSession.LicenseeId;
-
+            var licenseeSession = SessionService.LicenseeSession;
+            var userSession = SessionService.UserSession;
             var defaultMetaModel = metaModel ?? new BetListMetaModel();
-            defaultMetaModel.LicenseeId = licenseeId;
-            defaultMetaModel.UserId = SessionService.UserSession.UserId;
+            defaultMetaModel.LicenseeId = licenseeSession.LicenseeId;
+            defaultMetaModel.UserId = userSession.UserId;
             defaultMetaModel.HasPlayerCom = SessionService.LicenseeSession.IsAllowedCustomerComm;
             defaultMetaModel.FromDate = DateTime.SpecifyKind(defaultMetaModel.FromDate.Date, DateTimeKind.Unspecified);
             defaultMetaModel.ToDate = DateTime.SpecifyKind(defaultMetaModel.ToDate.Date, DateTimeKind.Unspecified);
             defaultMetaModel.Date = DateTime.SpecifyKind(defaultMetaModel.Date.Date, DateTimeKind.Unspecified);
-            defaultMetaModel.IsFakeLicensee = IsFakeLicensee(licenseeId);
+            defaultMetaModel.IsFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeId);
             defaultMetaModel.CurrencyList = UserCurrencyList;
             defaultMetaModel.AgentListXml = SessionService.GenerateAgentListXml(defaultMetaModel.CurrencyId);
 
             var balanceUp = GetBalanceUp();
             defaultMetaModel.BalanceUpDay = DateTime.SpecifyKind(balanceUp.BalanceUpDay.Date, DateTimeKind.Unspecified);
             defaultMetaModel.MoveBetsDay = DateTime.SpecifyKind(balanceUp.MoveBetsDay.Date, DateTimeKind.Unspecified);
-
+            if (string.IsNullOrEmpty(defaultMetaModel.BaseCurrency))
+            {
+                defaultMetaModel.BaseCurrency = userSession.DefaultBaseCurrency;
+            }
             return defaultMetaModel;
         }
 

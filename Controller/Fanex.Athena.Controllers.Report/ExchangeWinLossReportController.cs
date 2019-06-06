@@ -56,7 +56,6 @@
                 MinDate = reportSetting.MinDate,
                 MaxDate = reportSetting.MaxDate,
                 CurrencyList = currencyList,
-                CurrencyId = GetConvetedUSDCurrencyId(licensee.LicenseeId),
                 IsAllowedCustomerComm = licensee.IsAllowedCustomerComm,
                 LicenseeId = licensee.LicenseeId,
                 ReportByOption = new Dictionary<byte, string>

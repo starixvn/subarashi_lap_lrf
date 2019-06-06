@@ -62,10 +62,10 @@ namespace Fanex.Athena.Controllers.Report
                 UserId = userSession.UserId,
                 IsViewedHistory = isViewedHistory,
                 CurrencyId = 0,
-                LiveIndicator = 1
-            };
+                LiveIndicator = 1,
+                BaseCurrency = userSession.DefaultBaseCurrency
 
-            SetConvetedUSDCurrencyName(metaModel);
+            };
 
             var productAccess = GetProductAccess(licenseeSession.LicenseeId, userSession.Language);
 

@@ -18,6 +18,7 @@ namespace Fanex.Athena.Service.Core.Users
     using Constant.DataDomain;
     using DataAccess.Core.Common.Interfaces;
     using DataAccess.Core.Users.Interfaces;
+    using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Core.DTO.Users;
     using Fanex.Athena.Service.Core.Common.Interfaces;
     using Fanex.Athena.Service.Core.Users.Interfaces;
@@ -41,17 +42,19 @@ namespace Fanex.Athena.Service.Core.Users
         private readonly ICurrencyDataAccess _currencyDataAccess;
 
         private readonly ISessionStorage _sessionStorage;
-
+        private readonly IAppSettings _appSettings;
         public SessionService(
             IFunctionService functionService,
             ILicenseeDataAccess licenseeDataAccess,
             ICurrencyDataAccess currencyDataAccess,
+            IAppSettings appSettings,
             ISessionStorage sessionStorage)
         {
             _functionService = functionService;
             _licenseeDataAccess = licenseeDataAccess;
             _currencyDataAccess = currencyDataAccess;
             _sessionStorage = sessionStorage;
+            _appSettings = appSettings;
         }
 
         #region Public Properties
@@ -105,7 +108,8 @@ namespace Fanex.Athena.Service.Core.Users
                 FunctionIdList = functionIdList,
                 Language = language,
                 DefaultReportUrl = GetDefaultReportUrl(functionIdList, functionList),
-                ApplicationMode = AppMode.Self
+                ApplicationMode = AppMode.Self,
+                DefaultBaseCurrency = _appSettings.DefaultBaseCurrency
             };
 
             AssignCurrenciesToUserSession(userSession, licenseeId);

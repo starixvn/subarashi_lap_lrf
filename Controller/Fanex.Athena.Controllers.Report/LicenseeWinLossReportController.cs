@@ -94,10 +94,10 @@ namespace Fanex.Athena.Controllers.Report
                 IsExcludedTestData = true,
                 DrawFilter = DrawFilterType.Normal,
                 ReportBy = ReportByType.Daily,
-                ProductOptions = ToProductOptions(productAccess.ProductList)
+                ProductOptions = ToProductOptions(productAccess.ProductList),
+                BaseCurrency = userSession.DefaultBaseCurrency
+
             };
-            SetConvetedUSDCurrencyName(param);
-            SetConvetedUSDCurrencyId(param);
 
             var model = new LicenseeWinLossViewModel
             {
@@ -122,10 +122,9 @@ namespace Fanex.Athena.Controllers.Report
                 FromDate = new DateTime(selectedDate.Year, selectedDate.Month, 1),
                 ToDate = selectedDate,
                 ReportBy = ReportByType.Daily,
-                ProductOptions = ToProductOptions(productAccess.ProductList)
+                ProductOptions = ToProductOptions(productAccess.ProductList),
+                BaseCurrency = userSession.DefaultBaseCurrency
             };
-            SetConvetedUSDCurrencyName(param);
-            SetConvetedUSDCurrencyId(param);
 
             var model = new SpecialLicenseeWinLossViewModel
             {

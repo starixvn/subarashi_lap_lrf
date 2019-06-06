@@ -46,9 +46,12 @@ namespace Fanex.Athena.Controllers.BetList
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            var metaModel = new BetListMetaModel { LicenseeId = SessionService.LicenseeSession.LicenseeId };
-
-            SetConvetedUSDCurrencyName(metaModel);
+            var metaModel = new BetListMetaModel
+            {
+                LicenseeId =
+                SessionService.LicenseeSession.LicenseeId,
+                BaseCurrency = SessionService.UserSession.DefaultBaseCurrency
+            };
 
             var model = new LastBetsMonitoringViewModel
             {

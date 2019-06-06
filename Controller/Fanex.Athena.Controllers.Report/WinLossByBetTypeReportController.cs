@@ -55,10 +55,9 @@ namespace Fanex.Athena.Controllers.Report
             var metaModel = new WinLossByBetTypeMetaModel
             {
                 LicenseeId = licenseeSession.LicenseeId,
-                UserId = userSession.UserId
+                UserId = userSession.UserId,
+                BaseCurrency = userSession.DefaultBaseCurrency
             };
-
-            SetConvetedUSDCurrencyName(metaModel);
 
             var model = new WinLossByBetTypeViewModel
             {

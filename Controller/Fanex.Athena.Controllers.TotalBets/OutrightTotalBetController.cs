@@ -37,10 +37,9 @@ namespace Fanex.Athena.Controllers.TotalBets
         {
             var param = new OutrightMetaModel
             {
-                LicenseeId = SessionService.LicenseeSession.LicenseeId
+                LicenseeId = SessionService.LicenseeSession.LicenseeId,
+                BaseCurrency = SessionService.UserSession.DefaultBaseCurrency
             };
-
-            SetConvetedUSDCurrencyName(param);
 
             return await this.GetView(param).ConfigureAwait(false);
         }

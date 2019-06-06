@@ -101,8 +101,6 @@ namespace Fanex.Athena.Controllers.BetList
                 return EmptyExcel();
             }
 
-            SetConvetedUSDCurrencyName(metaModel);
-
             var model = new BetListBaseViewModel
             {
                 ShowEmptyContent = true,

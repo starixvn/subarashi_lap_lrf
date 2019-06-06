@@ -105,8 +105,6 @@ namespace Fanex.Athena.Controllers.Customer
                 OddsGroups = GetOddsGroups()
             };
 
-            SetConvetedUSDCurrencyName(metaModel);
-
             var model = await CreateCustomerViewModel(metaModel);
 
             if (!model.IsSubsidiary)

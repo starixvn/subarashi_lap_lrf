@@ -67,10 +67,10 @@
             var metaModel = new MatchWinLossMetaModel
             {
                 BalanceUpDay = _balanceUpDataAccess.GetBalanceUp().BalanceUpDay.ToShortDateString(),
-                LicenseeId = licenseeSession.LicenseeId
-            };
+                LicenseeId = licenseeSession.LicenseeId,
+                BaseCurrency = userSession.DefaultBaseCurrency
 
-            SetConvetedUSDCurrencyName(metaModel);
+            };
 
             var productAccess = ProductService.GetSingleWalletProductAccess(
                 licenseeSession.LicenseeId,

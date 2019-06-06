@@ -36,9 +36,10 @@ namespace Fanex.Athena.Controllers.Report
             var metaModel = new CustomerPendingFundsMetaModel
             {
                 LicenseeId = licenseeSession.LicenseeId,
-                UserId = userSession.UserId
+                UserId = userSession.UserId,
+                BaseCurrency = userSession.DefaultBaseCurrency
+
             };
-            SetConvetedUSDCurrencyName(metaModel);
             var productAccess = ProductService.GetSingleWalletProductAccess(
                 metaModel.LicenseeId,
                 userSession.Language,

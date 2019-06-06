@@ -41,10 +41,9 @@ namespace Fanex.Athena.Controllers.Report
                 ToDate = date,
                 LicenseeId = licenseeSession.LicenseeId,
                 IsExcludedTestData = true,
-                ReportBy = 1
+                ReportBy = 1,
+                BaseCurrency = userSession.DefaultBaseCurrency
             };
-
-            SetConvetedUSDCurrencyId(metaModel);
 
             var model = new ThirdPartyWinLossViewModel
             {

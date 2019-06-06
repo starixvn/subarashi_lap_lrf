@@ -44,8 +44,6 @@ namespace Fanex.Athena.Controllers.BetList
         {
             var metaModel = CreateDefaultMetaModel();
 
-            SetConvetedUSDCurrencyName(metaModel);
-
             var licenseeSession = SessionService.LicenseeSession;
             var userSession = SessionService.UserSession;
 
@@ -56,6 +54,7 @@ namespace Fanex.Athena.Controllers.BetList
                 CurrencyList = userSession.CurrencyList,
                 ProductAccess = ProductService.GetProductAccess(metaModel.LicenseeId, userSession.Language),
                 IsAllowedCustomerCommission = licenseeSession.IsAllowedCustomerComm
+               
             };
 
             return View("~/Views/Desktop/BetList/CorrectScoreBetList/Main.cshtml", model);

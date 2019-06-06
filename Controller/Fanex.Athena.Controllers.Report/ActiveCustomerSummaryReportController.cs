@@ -41,10 +41,9 @@ namespace Fanex.Athena.Controllers.Report
                 FromDate = defaultDate,
                 ToDate = defaultDate,
                 LicenseeId = licenseeSession.LicenseeId,
-                ProductOptions = ToProductOptions(productAccess.ProductList)
+                ProductOptions = ToProductOptions(productAccess.ProductList),
+                BaseCurrency = userSession.DefaultBaseCurrency
             };
-
-            SetConvetedUSDCurrencyId(metaModel);
 
             var model = new ActiveCustomerViewModel
             {

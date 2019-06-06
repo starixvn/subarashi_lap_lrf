@@ -46,11 +46,11 @@ namespace Fanex.Athena.Controllers.Report
                 IsExcludedTestData = true,
                 DrawFilter = DrawFilterType.Normal,
                 ReportBy = ReportByType.Daily,
-                ProductOptions = ToProductOptions(productAccess.ProductList)
+                ProductOptions = ToProductOptions(productAccess.ProductList),
+                BaseCurrency = userSession.DefaultBaseCurrency
+
             };
             
-            SetConvetedUSDCurrencyId(metaModel);
-
             var model = new WinLossByProductViewModel
             {
                 ShowEmptyContent = true,

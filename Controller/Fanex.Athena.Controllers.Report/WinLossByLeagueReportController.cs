@@ -62,11 +62,11 @@ namespace Fanex.Athena.Controllers.Report
                 UserId = userSession.UserId,
                 FromDate = new DateTime(date.Year, date.Month, 1),
                 ToDate = date,
-                ProductOptions = ToProductOptions(productList)
+                ProductOptions = ToProductOptions(productList),
+                BaseCurrency = userSession.DefaultBaseCurrency
+
             };
 
-            SetConvetedUSDCurrencyName(metaModel);
-            SetConvetedUSDCurrencyId(metaModel);
             var sports = (await this._sportTypeDataAccess.GetSportsAndProducts(licenseeSession.LicenseeId, userSession.Language, Product.SB).ConfigureAwait(true))
                 .Where(x => x.ParentId >= 0);
             var leagues = await this._leagueDataAccess.GetLeaguesBySport(

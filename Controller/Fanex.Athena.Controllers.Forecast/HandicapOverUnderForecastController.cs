@@ -53,8 +53,6 @@ namespace Fanex.Athena.Controllers.Forecast
                 UserId = SessionService.UserSession.UserId
             };
 
-            SetConvetedUSDCurrencyName(metaModel);
-
             var model = await GetViewModel(metaModel).ConfigureAwait(false);
 
             return View("~/Views/Desktop/Forecast/ForecastHDPOU/Main.cshtml", model);

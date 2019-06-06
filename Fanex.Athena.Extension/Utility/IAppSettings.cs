@@ -42,7 +42,7 @@
 
         bool IsEnabledMoveBetNotification { get; }
 
-        string[] BasedCurrency { get; }
+        string DefaultBaseCurrency { get; }
 
         bool EnableAssignCurrency { get; }
 

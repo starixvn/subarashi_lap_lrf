@@ -40,10 +40,9 @@ namespace Fanex.Athena.Controllers.Report
                 FromDate = new DateTime(toDate.Year, toDate.Month, 1),
                 ToDate = toDate,
                 LicenseeId = licenseeSession.LicenseeId,
-                IsExcludedTestData = true
+                IsExcludedTestData = true,
+                BaseCurrency = userSession.DefaultBaseCurrency
             };
-
-            SetConvetedUSDCurrencyId(metaModel);
 
             var model = new AgCasinoBalanceViewModel
             {
