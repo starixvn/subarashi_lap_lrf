@@ -917,7 +917,7 @@
                         LicenseeWinLoss.openBetlistPopUp(dataDrilldown);
 
                         var url = 'LicenseeWinLossBetList/Index?fromdate=01/01/2017&todate=03/20/2017&excludetest=true&currencyid=9&currencyname=AUD&' +
-                            'drawfilter=0&custid=6507355&systemid=12BETAUD01159&externalid=DEWSNIP&basecurrency=EUR';
+                            'drawfilter=0&custid=6507355&systemid=12BETAUD01159&externalid=DEWSNIP&basecurrency=';
                         var popupOption = { id: "betlist-popup", width: 970, height: 250, title: "CustomerBetList" };
 
                         var args = Popup.openPopupWithIframe.calls.mostRecent().args;
