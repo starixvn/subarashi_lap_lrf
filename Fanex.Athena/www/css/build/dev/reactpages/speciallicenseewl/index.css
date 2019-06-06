@@ -385,6 +385,9 @@
 .multiple-select-item label {
   margin-bottom: 0; }
 
+.multiple-select-options-container .multiple-select-item label {
+  color: #2c2c2c; }
+
 /* z-index */
 /* Table */
 /* Label Text */

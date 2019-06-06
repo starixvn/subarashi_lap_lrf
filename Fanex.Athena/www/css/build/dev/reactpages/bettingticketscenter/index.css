@@ -515,6 +515,9 @@ input[type="checkbox"].checkbox {
 .multiple-select-item label {
   margin-bottom: 0; }
 
+.multiple-select-options-container .multiple-select-item label {
+  color: #2c2c2c; }
+
 .ac-container {
   position: relative; }
   .ac-container > ul {
