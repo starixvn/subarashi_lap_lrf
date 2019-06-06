@@ -69,6 +69,36 @@
             return title;
         }
 
+        public static string GetTitleCurrencyName(int currencyId, string defaultName = "")
+        {
+            string title;
+
+            switch (currencyId)
+            {
+                case BaseCurrencyType.All:
+                    title = ViewResources.AllCurrencies;
+                    break;
+
+                case BaseCurrencyType.Eur:
+                    title = string.Format(ViewResources.Viewin, FormatKey.Eur);
+                    break;
+
+                case BaseCurrencyType.Usd:
+                    title = string.Format(ViewResources.Viewin, FormatKey.Usd);
+                    break;
+
+                case BaseCurrencyType.Gbp:
+                    title = string.Format(ViewResources.Viewin, FormatKey.Gbp);
+                    break;
+
+                default:
+                    title = string.Format(ViewResources.Viewin, defaultName);
+                    break;
+            }
+
+            return title;
+        }
+
         public static string GetTitleBaseCurrency(string baseCurrency, string currencyName)
         {
             var currency = string.IsNullOrEmpty(baseCurrency) ?

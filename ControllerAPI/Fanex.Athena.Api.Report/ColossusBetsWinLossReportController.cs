@@ -90,16 +90,12 @@ namespace Fanex.Athena.Api.Report
                 metaModel.DrillDownLevel > 0 ? metaModel.DrillDownFromDate : metaModel.FromDate,
                 currency.Key == 0 ? "All" : currency.Value);
 
-            if (metaModel.DrillDownLevel > 0 && metaModel.CurrencyId > 0)
-            {
-                metaModel.CurrencyId = metaModel.DrillDownCurrencyId;
-            }
-
             if (metaModel.DrillDownLevel > 0)
             {
                 metaModel.FromDate = metaModel.DrillDownFromDate;
                 metaModel.ToDate = metaModel.DrillDownToDate;
                 metaModel.CurrencyName = currency.Key == 0 ? ViewResources.All : currency.Value;
+                metaModel.CurrencyId = metaModel.CurrencyId >= 0 ? metaModel.DrillDownCurrencyId : metaModel.CurrencyId;
             }
 
             var excelModel = new ColossusBetWinLossViewModel

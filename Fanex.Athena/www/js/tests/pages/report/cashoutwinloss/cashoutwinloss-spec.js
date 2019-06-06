@@ -555,7 +555,7 @@
 
                         ajaxOption.success(response);
 
-                        expect(CashOutWinLoss.setExcelUrl).toHaveBeenCalledWith(currencyId, currencyId, customerId, new Date(2017, 3, 1), new Date(2017, 3, 20));
+                        expect(CashOutWinLoss.setExcelUrl).toHaveBeenCalledWith(level, currencyId, customerId, new Date(2017, 3, 1), new Date(2017, 3, 20));
                     });
                 });
             });
