@@ -4218,7 +4218,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                     _urlExcelData = _urlExcelData.replace('level=2', 'level=1');
                 }
                 if (level === 0) {
-                    _me.setReportTitle(_submitData.CurrencyId, _submitData.FromDate, _submitData.ToDate, _submitData.BaseCurrency);
+                    _me.setReportTitle(_submitData.CurrencyId, _submitData.FromDate, _submitData.ToDate);
                     setExcelUrl(0);
                 }
             });
@@ -4280,7 +4280,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                     setExcelUrl(level, currencyId, custId, fromDate, toDate);
                     ajaxComplete(level, response, postdata);
 
-                    _me.setReportTitle(currencyId, fromDate, toDate, postdata.BaseCurrency.toUpperCase());
+                    const currencyName = level > 0 && postdata.BaseCurrency ? postdata.BaseCurrency.toUpperCase() : '';
+                    _me.setReportTitle(currencyId, fromDate, toDate, currencyName);
                 },
                 beforeSend: function () {
                     Site.blockUI();
@@ -4335,10 +4336,12 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             jqGridAdditional.setGroupFooters(colspan, summaryColspan, summaryRowCount);
         }
 
-        function setReportTitle(currencyId, fromdate, todate, baseCurrency) {
+        function setReportTitle(currencyId, fromdate, todate, currencyName) {
             const titlePattern = _reportTitle + ', {0} → {1}, {2}';
             
-            const currencyTitle = Report.getCurrencyTitle(currencyId, baseCurrency);
+            const currencyTitle = currencyName
+                                    ? Site.getSingleResource('Viewin').replace('{0}', currencyName)
+                                    : Report.getCurrencyNameForReportTitle(currencyId);
             const title = $.format(titlePattern, fromdate, todate, currencyTitle);
 
             $(_selector.Title).html(title);
