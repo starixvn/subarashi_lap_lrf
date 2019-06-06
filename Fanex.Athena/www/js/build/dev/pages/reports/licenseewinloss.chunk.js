@@ -8263,7 +8263,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 dataDrillDown.IsExcludedTestData = _submitData.IsExcludedTestData;
                 dataDrillDown.CurrencyId = _submitData.CurrencyId;
                 dataDrillDown.CurrencyName = _submitData.CurrencyName;
-                dataDrillDown.BaseCurrency = $('#BaseCurrency').attr('data-original');
+                dataDrillDown.BaseCurrency = "";
 
                 if (typeof dataDrillDown.DrillDownFromDate === 'string') {
                     dataDrillDown.DrillDownFromDate = new Date(dataDrillDown.DrillDownFromDate);
