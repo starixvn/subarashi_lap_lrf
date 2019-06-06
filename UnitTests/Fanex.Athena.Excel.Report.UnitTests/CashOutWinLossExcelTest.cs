@@ -55,9 +55,7 @@ namespace Fanex.Athena.Excel.Report.UnitTests
                         Code = "SB",
                         Status = true
                     }
-                },
-            CurrencyName = "AUD",
-            BaseCurrency = "USD"
+                }
         };
 
         private static readonly CashOutWinLossViewModel ViewModel = new CashOutWinLossViewModel
@@ -139,7 +137,7 @@ namespace Fanex.Athena.Excel.Report.UnitTests
             // Arrange
             var row = ExcelTestHelper.MockGetRow(FakeSheet, ColumnCount, 0);
             var excel = CreateExcel();
-            const string ExpectedTitle = "Cash Out Win Loss, 01/01/2017 --> 02/02/2017, Currency: AUD, Base Currency: USD";
+            var expectedTitle = ReportExcelHelper.GenerateReportTitle(ViewResources.CashOutWinLoss, new ConvertingOption(), MetaModel);
 
             // Action
             excel.Public_AssignTitle(FakeSheet);
@@ -147,7 +145,7 @@ namespace Fanex.Athena.Excel.Report.UnitTests
             // Assert
             Assert.Multiple(() =>
             {
-                row.Cells[0].Received(1).SetCellValue(ExpectedTitle);
+                row.Cells[0].Received(1).SetCellValue(expectedTitle);
                 FakeSheet.Received(1).CreateFreezePane(0, 3);
                 FakeSheet.ReceivedWithAnyArgs().DeleteRow(0);
             });
