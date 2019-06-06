@@ -9,13 +9,8 @@
             </div>
 
             <div class="input-field col l2 m3 s12">
-                @DesktopRazorHelper.CurrencyList(Model.CurrencyList, "select", Model.Param.CurrencyId)
+                @DesktopRazorHelper.CurrencyList(Model.CurrencyList, "select", Model.Param.CurrencyId, true, true)
                 <label>@ViewResources.Currency</label>
-            </div>
-
-            <div class="input-field col l2 m3 s12">
-                @DesktopRazorHelper.BasedCurrency(Model.Param.BaseCurrency)
-                <label>@ViewResources.BaseCurrency</label>
             </div>
 
             @DesktopRazorHelper.RenderProductFilter(Model.Param.ProductOptions)
@@ -59,7 +54,7 @@
             </div>
 
             <div class="input-field input col l2 m3 s12">
-                <input type="radio" value="true" class="with-gap" @(Model.Param.IsExcludedTestData == true ? "checked=checked" : "") name="IsExcludedTestData" id="IsExcludedTestData0"/>
+                <input type="radio" value="true" class="with-gap" @(Model.Param.IsExcludedTestData == true ? "checked=checked" : "") name="IsExcludedTestData" id="IsExcludedTestData0" />
                 <label for="IsExcludedTestData0">
                     @ViewResources.Yes
                 </label>

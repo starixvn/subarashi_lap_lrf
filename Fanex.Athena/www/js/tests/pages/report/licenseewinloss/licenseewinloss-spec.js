@@ -208,23 +208,23 @@
             describe("setReportTitle(currencyId, fromdate, todate, currencyName)", function () {
                 it("currencyName is empty - .report-title should has correct html content with currency name gotten by CurrencyId", function () {
                     setFixtures('<div class="report-title"></div>');
-                    spyOn(Report, "getCurrencyNameForReportTitle").and.returnValue("Viewin EUR");
+                    spyOn(Report, "getCurrencyNameForReportTitle").and.returnValue("View in EUR");
                     var date = new Date(2001, 1, 1);
 
                     LicenseeWinLoss.setReportTitle('-1', date, date);
 
-                    expect($('.report-title').html()).toBe('LicenseeWinLoss, 02/01/2001 → 02/01/2001, Currency: , BaseCurrency: ');
+                    expect($('.report-title').html()).toBe('LicenseeWinLoss, 02/01/2001 → 02/01/2001, View in EUR');
                 });
 
                 it("currencyName is not empty - .report-title should has correct html content with currency name", function () {
                     setFixtures('<div class="report-title"></div>');
-                    spyOn(Report, "getCurrencyNameForReportTitle").and.returnValue("Viewin EUR");
+                    spyOn(Report, "getCurrencyNameForReportTitle").and.returnValue("View in EUR");
                     var date = new Date(2001, 1, 1);
                     var currencyName = "USD";
 
                     LicenseeWinLoss.setReportTitle('-1', date, date, currencyName);
 
-                    expect($('.report-title').html()).toBe('LicenseeWinLoss, 02/01/2001 → 02/01/2001, Currency: , BaseCurrency: USD');
+                    expect($('.report-title').html()).toBe('LicenseeWinLoss, 02/01/2001 → 02/01/2001, View in EUR');
                 });
 
                 it("class 'hide' should be removed in .panel-heading", function () {
@@ -917,7 +917,7 @@
                         LicenseeWinLoss.openBetlistPopUp(dataDrilldown);
 
                         var url = 'LicenseeWinLossBetList/Index?fromdate=01/01/2017&todate=03/20/2017&excludetest=true&currencyid=9&currencyname=AUD&' +
-                            'drawfilter=0&custid=6507355&systemid=12BETAUD01159&externalid=DEWSNIP&basecurrency=';
+                            'drawfilter=0&custid=6507355&systemid=12BETAUD01159&externalid=DEWSNIP&basecurrency=EUR';
                         var popupOption = { id: "betlist-popup", width: 970, height: 250, title: "CustomerBetList" };
 
                         var args = Popup.openPopupWithIframe.calls.mostRecent().args;
