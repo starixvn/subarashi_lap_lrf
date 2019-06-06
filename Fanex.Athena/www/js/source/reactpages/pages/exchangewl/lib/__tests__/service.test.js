@@ -26,7 +26,7 @@ describe('Service ', () => {
             const toDate = "10/10/2017";
             const selectedCurrency = "USD";
 
-            const expectedResult = `ExchangeWinLoss, ${fromDate} - ${toDate} - Viewin ${selectedCurrency}`
+            const expectedResult = `ExchangeWinLoss, ${fromDate} - ${toDate}, Viewin ${selectedCurrency}`
             const dateRange = { fromDate, toDate };
 
             const result = Service.getReportTitle(dateRange, selectedCurrency);
@@ -39,7 +39,7 @@ describe('Service ', () => {
             const toDate = "10/10/2017";
             const selectedCurrency = "EUR";
 
-            const expectedResult = `ExchangeWinLoss, ${fromDate} - ${toDate} - AllCurrencies`
+            const expectedResult = `ExchangeWinLoss, ${fromDate} - ${toDate}, AllCurrencies`
             const dateRange = { fromDate, toDate };
 
             const result = Service.getReportTitle(dateRange, selectedCurrency, true);

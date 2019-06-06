@@ -15,7 +15,6 @@ describe('FormFilter ', () => {
     const props = {
         dateRange: { fromDate: '01/01/2017', toDate: '10/10/2017' },
         selectedCurrency: { value: '1', label: '1' },
-        selectedBaseCurrency: 'EUR',
         reportByOption: [{ value: '1', label: '1' }, { value: '2', label: '2' }],
         selectedReportBy: 1,
         isExcludeTest: true,
@@ -29,8 +28,7 @@ describe('FormFilter ', () => {
     beforeAll(() => {
         Object.assign(AppData, {
             dateConstraint: { maxDate: '01/01/2010', minDate: '10/10/2030' },
-            currencyList: [{ value: '1', label: '1' }, { value: '2', label: '2' }],
-            baseCurrencyList: [{ "value": "EUR", "label": "EUR" }, { "value": "USD", "label": "USD" }, { "value": "GBP", "label": "GBP" }]
+            currencyList: [{ value: '1', label: '1' }, { value: '2', label: '2' }]
         });
         LangHelper.getSingleResource = jest.fn((resource) => {
             if (resource === 'DateRangeExceedMsg') {
@@ -271,7 +269,8 @@ describe('FormFilter ', () => {
                 const expectedResult = {
                     data: {
                         CurrencyId: filterProps.selectedCurrency.value,
-                        BaseCurrency: "EUR",
+                        CurrencyName: filterProps.selectedCurrency.label,
+                        BaseCurrency: "",
                         FromDate: filterProps.dateRange.fromDate,
                         ToDate: filterProps.dateRange.toDate,
                         ReportBy: filterProps.selectedReportBy,
@@ -291,6 +290,7 @@ describe('FormFilter ', () => {
                 const expectedResult = {
                     data: {
                         CurrencyId: filterProps.selectedCurrency.value,
+                        CurrencyName: 'EUR',
                         BaseCurrency: 'EUR',
                         FromDate: filterProps.dateRange.fromDate,
                         ToDate: filterProps.dateRange.toDate,
