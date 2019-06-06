@@ -10,6 +10,7 @@ import Switcher from '../../../../components/Switcher';
 import { specialLevelListWithColor, oddsGroupListWithStyle, columnList } from '../lib/constants';
 import MultipleSelect from '@9softstudio/react-multiselect';
 import BatchUpdateButton from './BatchUpdateButton';
+import ContextMenu from './ContextMenu';
 
 const MAX_WIDTH_PAGE = 1920;
 
@@ -26,7 +27,9 @@ export class DataGrid extends PureComponent {
                 PageSize: 50,
                 PageList: [50, 100, 200, 500],
                 TotalItem: 1000
-            }
+            },
+            contextMenuPosition: null,
+            isOpenContextMenu: false
         }
 
         this.specialLevelList = Object.keys(specialLevelListWithColor).map(item => {
@@ -65,15 +68,14 @@ export class DataGrid extends PureComponent {
         )
     }
 
-    _renderDropdownColumn(){
-        console.log(this.columnList);
+    _renderDropdownColumn() {
         return (
             <MultipleSelect id="columnList" className="selection-column"
-                        dataSource={this.columnList}
-                        keyField={"id"}
-                        valueField={"value"}
-                        statusField={"status"}
-                        onChange={(currentItem, selectedItemsKey) => console.log(selectedItemsKey)} />
+                dataSource={this.columnList}
+                keyField={"id"}
+                valueField={"value"}
+                statusField={"status"}
+                onChange={(currentItem, selectedItemsKey) => console.log(selectedItemsKey)} />
         )
     }
 
@@ -112,6 +114,30 @@ export class DataGrid extends PureComponent {
         console.log(e.target)
     }
 
+    handleEnterContextMenu = (event) => {
+        const { isOpenContextMenu } = this.state;
+        if (!isOpenContextMenu) {
+            var rect = event.target.getBoundingClientRect();
+            const position = {
+                x: rect.left,
+                y: rect.top
+            };
+
+            this.setState({ 
+                contextMenuPosition: position,
+                isOpenContextMenu: true 
+            });
+        }
+    }
+
+    handleLeaveContextMenu = () => {
+        window.setTimeout(() => {
+            if (this.state.isOpenContextMenu) {
+                this.setState({ isOpenContextMenu: false });
+            }
+        });
+    }
+
     _buildDataRow(dataItem, isChecked) {
         return (
             <Row key={dataItem.CustId}>
@@ -121,7 +147,10 @@ export class DataGrid extends PureComponent {
                 <Cell className="center-align">{dataItem.Status}</Cell>
                 <Cell className="center-align">
                     <button className="btn-default btn-link username-link" onClick={(e) => this._handleSelectPlayer(e, dataItem)}>{dataItem.UserName}</button>
-                    <button className="btn-default btn-link btn-icon cell-menu"><i className="material-icons">edit</i></button>
+                    <button className="btn-default btn-link btn-icon cell-menu"
+                        onMouseEnter={this.handleEnterContextMenu} onMouseLeave={this.handleLeaveContextMenu}>
+                        <i className="material-icons">edit</i>
+                    </button>
                 </Cell>
                 <Cell className="center-align">{dataItem.SystemId}</Cell>
                 <Cell className="center-align">{dataItem.Currency}</Cell>
@@ -131,7 +160,7 @@ export class DataGrid extends PureComponent {
                     <select className="select-default select-oddsgroup" value={dataItem.OddsGroup} onChange={(e) => console.log(e)}>
                         {
                             Object.keys(oddsGroupListWithStyle).map(item => {
-                                return(
+                                return (
                                     <option key={item} style={oddsGroupListWithStyle[item]}>{item}</option>
                                 )
                             })
@@ -142,8 +171,8 @@ export class DataGrid extends PureComponent {
                 <Cell className="center-align">
                     <select className="select-default select-special-level" value={dataItem.SpecialLevel} onChange={(e) => console.log(e)}>
                         {this.specialLevelList.map(item => {
-                            const style = {backgroundColor: specialLevelListWithColor[item.value]};
-                            return(
+                            const style = { backgroundColor: specialLevelListWithColor[item.value] };
+                            return (
                                 <option key={item.value} style={style}>{item.label}</option>
                             )
                         })}
@@ -196,7 +225,7 @@ export class DataGrid extends PureComponent {
 
     render() {
         const { playerList, selectedPlayer } = this.props;
-        const { pagingOption } = this.state;
+        const { pagingOption, contextMenuPosition, isOpenContextMenu } = this.state;
 
         const dataList = selectedPlayer ? [playerList.find(item => item.CustId === selectedPlayer.custId)] : playerList;
 
@@ -214,6 +243,7 @@ export class DataGrid extends PureComponent {
                     body={this._renderDataSection(dataList)}
                     containerPadding={30}
                 />
+                <ContextMenu isOpenContextMenu={isOpenContextMenu} position={contextMenuPosition} />
             </div>
         );
     }

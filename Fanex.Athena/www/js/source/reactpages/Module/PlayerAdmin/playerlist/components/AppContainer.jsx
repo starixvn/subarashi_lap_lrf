@@ -13,9 +13,7 @@ const AppContainer = (props) => {
         <AppLayout>
             <Loader isLoading={props.isLoading} />
             <FormFilter />
-            <div className="result-content">
-                <DataGrid />
-            </div>
+            <DataGrid />
             <PlayerDetail />
         </AppLayout>
     );
