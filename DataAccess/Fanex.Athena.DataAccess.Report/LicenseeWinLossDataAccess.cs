@@ -50,7 +50,7 @@
         }
 
         public async Task<SortableReportResultModel<LicenseeWinLoss>> GetCustomerWinlossDetail(
-            LicenseeWinLossMetaModel metaModel, 
+            LicenseeWinLossMetaModel metaModel,
             IDictionary<int, string> currencyList)
         {
             const string UspName = "Lrf_Rpt_LicWinlossDetail";
@@ -90,24 +90,26 @@
             return IgnoredTurnoverProducts.Contains(productCode);
         }
 
-        private static IDictionary<string, decimal> ReadTurnoverList(IDataReader reader, IDictionary<string, string> turnoverColumns)
+        private static IDictionary<string, decimal> ReadTurnoverList(IDataReader reader,
+            IDictionary<string, string> turnoverColumns, string baseCurrency = "")
         {
             var turnOver = new Dictionary<string, decimal>();
             foreach (var column in turnoverColumns)
             {
-                turnOver.Add(column.Value, reader.ToDecimal(column.Key));
+                turnOver.Add(column.Value, reader.ToDecimal(column.Key + baseCurrency));
             }
 
             return turnOver;
         }
 
-        private static IDictionary<string, decimal> ReadLicenseeWinLossList(IDataReader reader, IDictionary<string, string> licenseeWLColumns)
+        private static IDictionary<string, decimal> ReadLicenseeWinLossList(IDataReader reader,
+            IDictionary<string, string> licenseeWLColumns, string baseCurrency = "")
         {
             var licenseeWl = new Dictionary<string, decimal>();
 
             foreach (var column in licenseeWLColumns)
             {
-                licenseeWl.Add(column.Value, reader.ToDecimal(column.Key));
+                licenseeWl.Add(column.Value, reader.ToDecimal(column.Key + baseCurrency));
             }
 
             return licenseeWl;
@@ -224,15 +226,14 @@
             LicenseeWinLossMetaModel metaModel,
             bool drilldown)
         {
-            var baseCurrency = metaModel.BaseCurrency;
             var licenseeWLColumns = new Dictionary<string, string>();
             var turnoverColumns = new Dictionary<string, string>();
             if (reader.FieldCount > 0)
             {
                 foreach (var product in metaModel.ProductOptions)
                 {
-                    var licenseeWlColumnName = "LicenseeWL" + product.Code + baseCurrency;
-                    var turnOverColumnName = "turnover" + product.Code + baseCurrency;
+                    var licenseeWlColumnName = "LicenseeWL" + product.Code;
+                    var turnOverColumnName = "turnover" + product.Code;
 
                     if (!IsIgnoredLicenseeWLProduct(product.Code) && reader.HasColumn(licenseeWlColumnName))
                     {
@@ -258,20 +259,19 @@
             bool drilldown)
         {
             var dataList = new SortableList<LicenseeWinLoss>();
+            var originalDataList = new SortableList<LicenseeWinLoss>();
             var summaryTotal = InitSummaryTotal();
             var hasSystemId = reader.HasColumn("username");
             var hasExternalId = reader.HasColumn("nickname");
             var hasCustomerId = reader.HasColumn("custid");
             var baseCurrency = metaModel.BaseCurrency;
             var isMonthly = metaModel.ReportBy == ReportByType.Monthly;
-            var index = 1;
             var sumPromotionPrize = 0;
             while (reader.Read())
             {
                 var currencyId = reader.ToInt("currency");
                 var item = new LicenseeWinLoss
                 {
-                    Index = index++,
                     SystemId = hasSystemId ? reader.ToString("username") : string.Empty,
                     ExternalId = hasExternalId ? reader.ToString("nickname") : string.Empty,
                     CustomerId = hasCustomerId ? reader.ToInt("custid") : 0,
@@ -282,28 +282,59 @@
                     ActualStake = reader.ToDecimal("BTActualStake" + baseCurrency),
                     BuyBackAmountSB = reader.ToDecimal("BuyBackAmtSB" + baseCurrency),
                     BuyBackAmountBA = reader.ToDecimal("BuyBackAmtBA" + baseCurrency),
-                    LicenseeWL = ReadLicenseeWinLossList(reader, licenseeWLColumns),
-                    TurnOver = ReadTurnoverList(reader, turnoverColumns),
-                    TotalTransaction = reader.ToInt("betcount"),
                     BACommission = reader.ToDecimal("commba" + baseCurrency),
                     CashOutCommission = reader.ToDecimal("cashoutcomm" + baseCurrency),
                     BetTradeCommission = reader.ToDecimal("bettradecomm" + baseCurrency),
                     AmtDueToBetTrade = reader.ToDecimal("AmtDueToBT" + baseCurrency),
                     AmtDueToBA = reader.ToDecimal("amtduetoba" + baseCurrency),
+                    LicenseeWL = ReadLicenseeWinLossList(reader, licenseeWLColumns, baseCurrency),
+                    TurnOver = ReadTurnoverList(reader, turnoverColumns, baseCurrency),
+                    TotalTransaction = reader.ToInt("betcount"),
                     Date = drilldown ? metaModel.DrillDownFromDate : ConvertHelper.ToDateTime(reader.ToString("reporttype"), isMonthly)
                 };
                 sumPromotionPrize += reader.ToInt("PromotionPrize");
 
+                var originalItem = ReadOriginalData(reader, licenseeWLColumns, turnoverColumns, item);
+                originalDataList.Add(originalItem);
                 dataList.Add(item);
                 ReadSummaryTotal(reader, metaModel.ProductOptions, summaryTotal);
             }
 
             return new SortableReportResultModel<LicenseeWinLoss>
             {
-                DataList = dataList,
+                DataList = originalDataList,
                 TotalDataList = CalculateTotal(dataList),
                 SummaryTotal = summaryTotal,
                 AdditionalInfo = sumPromotionPrize.ToString()
+            };
+        }
+
+        private static LicenseeWinLoss ReadOriginalData(IDataReader reader,
+            IDictionary<string, string> licenseeWLColumns,
+            IDictionary<string, string> turnoverColumns,
+            LicenseeWinLoss item)
+        {
+            return new LicenseeWinLoss
+            {
+                SystemId = item.SystemId,
+                ExternalId = item.ExternalId,
+                CustomerId = item.CustomerId,
+                CurrencyId = item.CurrencyId,
+                CurrencyName = item.CurrencyName,
+                CustomerWinLoss = reader.ToDecimal("winlost"),
+                CustomerComm = reader.ToDecimal("playercomm"),
+                ActualStake = reader.ToDecimal("BTActualStake"),
+                BuyBackAmountSB = reader.ToDecimal("BuyBackAmtSB"),
+                BuyBackAmountBA = reader.ToDecimal("BuyBackAmtBA"),
+                BACommission = reader.ToDecimal("commba"),
+                CashOutCommission = reader.ToDecimal("cashoutcomm"),
+                BetTradeCommission = reader.ToDecimal("bettradecomm"),
+                AmtDueToBetTrade = reader.ToDecimal("AmtDueToBT"),
+                AmtDueToBA = reader.ToDecimal("amtduetoba"),
+                LicenseeWL = ReadLicenseeWinLossList(reader, licenseeWLColumns),
+                TurnOver = ReadTurnoverList(reader, turnoverColumns),
+                TotalTransaction = item.TotalTransaction,
+                Date = item.Date
             };
         }
     }
