@@ -264,7 +264,6 @@
             var hasSystemId = reader.HasColumn("username");
             var hasExternalId = reader.HasColumn("nickname");
             var hasCustomerId = reader.HasColumn("custid");
-            var baseCurrency = metaModel.BaseCurrency;
             var isMonthly = metaModel.ReportBy == ReportByType.Monthly;
             var sumPromotionPrize = 0;
             while (reader.Read())
@@ -296,9 +295,9 @@
                 sumPromotionPrize += reader.ToInt("PromotionPrize");
                 originalDataList.Add(originalItem);
 
-                if (!string.IsNullOrEmpty(baseCurrency))
+                if (metaModel.IsConvert)
                 {
-                    var convertedItem = ReadConvertedData(reader, licenseeWLColumns, turnoverColumns, baseCurrency, originalItem);
+                    var convertedItem = ReadConvertedData(reader, licenseeWLColumns, turnoverColumns, metaModel.BaseCurrency, originalItem);
                     convertedDataList.Add(convertedItem);
                 }
 
@@ -308,7 +307,7 @@
             return new SortableReportResultModel<LicenseeWinLoss>
             {
                 DataList = originalDataList,
-                TotalDataList = CalculateTotal(string.IsNullOrEmpty(baseCurrency) ? originalDataList : convertedDataList),
+                TotalDataList = CalculateTotal(metaModel.IsConvert ? convertedDataList : originalDataList),
                 SummaryTotal = summaryTotal,
                 AdditionalInfo = sumPromotionPrize.ToString()
             };
