@@ -329,7 +329,7 @@ namespace Fanex.Athena.Api.Report
 
             var fromDate = metaModel.DrillDownLevel == 0 ? metaModel.FromDate : metaModel.DrillDownFromDate;
             var toDate = metaModel.DrillDownLevel == 0 ? metaModel.ToDate : metaModel.DrillDownToDate;
-            return DateTimeHelper.IsBetween(fromDate, setting.MinDate, setting.MaxDate) &&
+            return metaModel.IsValid && DateTimeHelper.IsBetween(fromDate, setting.MinDate, setting.MaxDate) &&
                 DateTimeHelper.IsBetween(toDate, setting.MinDate, setting.MaxDate);
         }
     }

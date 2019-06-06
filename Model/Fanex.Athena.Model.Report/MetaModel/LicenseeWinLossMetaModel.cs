@@ -4,6 +4,8 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
+using Fanex.Athena.Model.Core.DataDomain;
+
 namespace Fanex.Athena.Model.Report.MetaModel
 {
     public class LicenseeWinLossMetaModel : BaseDrilldownReportMetaModel
@@ -19,5 +21,7 @@ namespace Fanex.Athena.Model.Report.MetaModel
         public string SortBy { get; set; }
 
         public string SortOrder { get; set; }
+        public override bool IsValid => string.IsNullOrEmpty(BaseCurrency)
+            || SystemConstants.BaseCurrencyList.Contains(BaseCurrency);
     }
 }
