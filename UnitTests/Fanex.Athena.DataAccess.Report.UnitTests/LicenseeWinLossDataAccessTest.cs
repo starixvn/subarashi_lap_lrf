@@ -122,8 +122,8 @@
                 Assert.That(firstOriginalItem.SystemId, Is.EqualTo(readerDataMapping.username));
                 Assert.That(firstOriginalItem.ExternalId, Is.EqualTo(readerDataMapping.nickname));
                 Assert.That(firstOriginalItem.CustomerId, Is.EqualTo(readerDataMapping.custid));
-                Assert.That(firstOriginalItem.LicenseeWL["SB"], Is.EqualTo(orignalLicenseeWL));
-                Assert.That(firstOriginalItem.TurnOver["SB"], Is.EqualTo(originalTurnover));
+                Assert.That(firstOriginalItem.LicenseeWL["SB"], Is.EqualTo(licenseeWLUSD));
+                Assert.That(firstOriginalItem.TurnOver["SB"], Is.EqualTo(turnoverUSD));
                 Assert.That(result.AdditionalInfo, Is.EqualTo(readerDataMapping.PromotionPrize.ToString()));
 
             });
