@@ -19,6 +19,14 @@
             }
         }
 
+        &.toggle-outline {
+            background: transparent;
+
+            &-light {
+                color: #333;
+            }
+        }
+
         &:after {
             display: inline-block;
             margin-left: 0.255em;

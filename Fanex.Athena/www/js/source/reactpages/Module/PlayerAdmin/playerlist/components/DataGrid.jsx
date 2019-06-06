@@ -120,7 +120,8 @@ export class DataGrid extends PureComponent {
                 </Cell>
                 <Cell className="center-align">{dataItem.Status}</Cell>
                 <Cell className="center-align">
-                    <a href="javascript:;" onClick={(e) => this._handleSelectPlayer(e, dataItem)}>{dataItem.UserName}</a>
+                    <button className="btn-default btn-link username-link" onClick={(e) => this._handleSelectPlayer(e, dataItem)}>{dataItem.UserName}</button>
+                    <button className="btn-default btn-link btn-icon cell-menu"><i className="material-icons">edit</i></button>
                 </Cell>
                 <Cell className="center-align">{dataItem.SystemId}</Cell>
                 <Cell className="center-align">{dataItem.Currency}</Cell>
@@ -170,7 +171,9 @@ export class DataGrid extends PureComponent {
             titleContentList.push(
                 <React.Fragment key="batchUpdate">
                     <BatchUpdateButton />
-                    <button className="btn-outline btn-outline-light" type="button">{selectedPlayerIdList.length} Player(s) Selected</button>
+                    <button className="btn-outline btn-outline-light" type="button">
+                        {selectedPlayerIdList.length} Player(s) Selected <span className="close">&times;</span>
+                    </button>
                 </React.Fragment>
             )
         }
@@ -182,7 +185,6 @@ export class DataGrid extends PureComponent {
         titleContentList.push(
             (
                 <span key="caretBlock" className="caret-block">
-                    {/* <button>Select column</button> */}
                     {this._renderDropdownColumn()}
                     <span className="icon-excel-wrapper"><i className="icon-excel" title={LangHelper.getSingleResource('ExportToExcel')}></i></span>
                 </span>

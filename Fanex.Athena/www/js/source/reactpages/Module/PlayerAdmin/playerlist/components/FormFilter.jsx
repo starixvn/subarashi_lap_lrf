@@ -4,7 +4,7 @@ import { ActionCreators } from '../actions/index.js'
 import { bindActionCreators } from 'redux'
 import CheckBox from '@jsroot/components/CheckBox'
 import AdvancedSearch from './AdvancedSearch';
-import { DropdownButton, DropdownItem } from '../../../../components/dropdown';
+import SearchOption from './SearchOption';
 
 export class FormFilter extends PureComponent {
     constructor(props) {
@@ -33,11 +33,10 @@ export class FormFilter extends PureComponent {
 
         return (
             <div className="page-filter">
-            <button className="btn-outline btn-outline-secondary" type="button">Outline Button</button>
                 <div className="row">
                     <div className="col-12 col-md-4 col-sm-4 col-lg-3 col-xl-2">
                         <div className="form-group">
-                            <label className="label-text">UserName *</label>
+                            <label className="label-text">UserName {(<SearchOption />)}</label>
                             <input className="input-text" id="userName" name="userName" type="text" value={userName}
                                 onChange={this.handleChange} />
                         </div>

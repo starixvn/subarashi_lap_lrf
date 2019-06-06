@@ -10,7 +10,7 @@ const DropdownButton = (props) => {
 
     return (
         <div className={classes} {...attrs}>
-            <DropdownToggle className="toggle-default" {...toggleButton} onClick={onToggle}>{buttonLabel}</DropdownToggle>
+            <DropdownToggle {...toggleButton} onClick={onToggle}>{buttonLabel}</DropdownToggle>
             <DropdownMenu {...dropdownMenu} isOpen={isOpen} onOpen={onOpen} onClose={onClose}>
                 {children}
             </DropdownMenu>
@@ -19,7 +19,7 @@ const DropdownButton = (props) => {
 }
 
 const propTypes = {
-    buttonLabel: PropTypes.string,
+    buttonLabel: PropTypes.any,
     children: PropTypes.node.isRequired,
     className: PropTypes.string,
     isOpen: PropTypes.bool,
@@ -39,6 +39,13 @@ const propTypes = {
         className: PropTypes.string
     })
 };
+const defaultProps = {
+    toggleButton: {
+        className: 'toggle-default'
+    }
+};
+
 DropdownButton.propTypes = propTypes;
+DropdownButton.defaultProps = defaultProps;
 
 export default DropdownButton;

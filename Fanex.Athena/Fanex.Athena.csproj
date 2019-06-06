@@ -1115,6 +1115,7 @@
     <Content Include="www\css\source\reactpages\components\_paging.scss" />
     <Content Include="www\css\source\reactpages\components\_switch.scss" />
     <Content Include="www\css\source\reactpages\components\vendors\_switches.scss" />
+    <Content Include="www\css\source\reactpages\components\_dropdown.scss" />
     <None Include="www\css\source\reactpages\main.scss" />
     <Content Include="www\css\build\dev\reactpages\vendor.css" />
     <Content Include="www\css\build\pro\reactpages\vendor.css" />
