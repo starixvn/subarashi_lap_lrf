@@ -309,7 +309,7 @@
 
                         WinLossByProduct.setReportTitle(1, new Date("Apr 10, 2015"), new Date("Apr 15, 2015"), "USD");
 
-                        expect($('.report-title').html()).toBe('WinLossByProduct, 04/10/2015 → 04/15/2015, Currency: , BaseCurrency: USD');
+                        expect($('.report-title').html()).toBe('WinLossByProduct, 04/10/2015 → 04/15/2015 - Viewin');
                     });
 
                     it("'div.report-title' should be correct  with product option value", function () {
@@ -319,7 +319,16 @@
 
                         WinLossByProduct.setReportTitle(1, new Date("Apr 10, 2015"), new Date("Apr 15, 2015"), "USD");
 
-                        expect($('.report-title').html()).toBe('WinLossByProduct, 04/10/2015 → 04/15/2015, Currency: , BaseCurrency: USD, LicenseeW_L (SB)');
+                        expect($('.report-title').html()).toBe('WinLossByProduct, 04/10/2015 → 04/15/2015 - Viewin, LicenseeW_L (SB)');
+                    });
+
+                    it("When not pass currencyName param - Report.getCurrencyNameForReportTitle(currencyId) should be called with correct parameter", function () {
+                        spyOn(Report, "getCurrencyNameForReportTitle");
+                        setFixtures("<div class='report-title' />");
+
+                        WinLossByProduct.setReportTitle(1, new Date("Apr 10, 2015"), new Date("Apr 15, 2015"));
+
+                        expect(Report.getCurrencyNameForReportTitle).toHaveBeenCalledWith(1);
                     });
 
                     it("'div.report-title' should be correct", function () {
@@ -355,7 +364,7 @@
 
                         WinLossByProduct.setReportTitle(1, new Date("Apr 10, 2015"), new Date("Apr 15, 2015"), "USD");
 
-                        expect($('.report-title').html()).toBe('WinLossByProduct, 04/10/2015 → 04/15/2015, Currency: , BaseCurrency: USD, LicenseeW_L (SB)');
+                        expect($('.report-title').html()).toBe('WinLossByProduct, 04/10/2015 → 04/15/2015 - Viewin, LicenseeW_L (SB)');
                     });
                 });
 
@@ -746,7 +755,8 @@
                         var level = 1,
                             currencyId = "0",
                             customerId = 1,
-                            datetime = "01/01/2017";
+                            datetime = "01/01/2017",
+                            currencyName = "ALL";
 
                         var response = {
                             Data: [{
@@ -755,12 +765,12 @@
                         };
                         createSubmitData({ CurrencyId: "0" }, response);
 
-                        WinLossByProduct.drillDown(level, currencyId, customerId, datetime);
+                        WinLossByProduct.drillDown(level, currencyId, customerId, datetime, currencyName);
                         ajaxOption.success(response);
 
                         var result = WinLossByProduct.setReportTitle.calls.mostRecent().args;
 
-                        expect(result).toEqual([currencyId, dateRange.FromDate, dateRange.ToDate, undefined]);
+                        expect(result).toEqual([currencyId, dateRange.FromDate, dateRange.ToDate, currencyName]);
                     });
                 });
             });

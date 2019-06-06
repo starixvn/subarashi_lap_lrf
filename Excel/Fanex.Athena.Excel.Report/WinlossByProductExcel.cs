@@ -11,6 +11,7 @@ namespace Fanex.Athena.Excel.Report
     using Base;
     using Fanex.Athena.Excel.Base.Extension;
     using Helpers;
+    using Model.Core.DataDomain;
     using Model.Report.DTO;
     using Models;
     using NPOI.SS.UserModel;
@@ -131,21 +132,7 @@ namespace Fanex.Athena.Excel.Report
 
         protected override void AssignTitle(ISheet sheet)
         {
-            var fromdate = _excelModel.MetaModel.Level == 0
-                              ? _excelModel.MetaModel.FromDate.ToString(FormatDate)
-                              : _excelModel.MetaModel.DrillDownFromDate.ToString(FormatDate);
-
-            var todate = _excelModel.MetaModel.Level == 0
-                            ? _excelModel.MetaModel.ToDate.ToString(FormatDate)
-                            : _excelModel.MetaModel.DrillDownToDate.ToString(FormatDate);
-
-            var currencyName = ReportExcelHelper.GetTitleBaseCurrency(
-                _excelModel.MetaModel.BaseCurrency,
-                _excelModel.MetaModel.CurrencyName);
-            var productsTitle = ReportExcelHelper.GetLicenseeWLProduct(_excelModel.MetaModel.ProductOptions, _excelModel.SystemId);
-            var reportTitle = string.Format(ViewResources.WinLossByProductTitle, fromdate, todate, currencyName + productsTitle);
-
-            sheet.SetTextRowValue(TemplateSheet, RowTitleTemplate, ColumnTemplateCount, reportTitle);
+            sheet.SetTextRowValue(TemplateSheet, RowTitleTemplate, ColumnTemplateCount, CreateTitle());
 
             // Freeze 2 rows title and header
             sheet.CreateFreezePane(0, RowContentTitleTemplate);
@@ -186,6 +173,37 @@ namespace Fanex.Athena.Excel.Report
             {
                 sheet.HideColumn(ColumnAmtDueTo);
             }
+        }
+
+        private string CreateTitle()
+        {
+            string fromdate;
+            string todate;
+            string currencyName;
+
+            if (_excelModel.MetaModel.Level == (int)ReportLevel.Main)
+            {
+                fromdate = _excelModel.MetaModel.FromDate.ToString(FormatDate);
+
+                todate = _excelModel.MetaModel.ToDate.ToString(FormatDate);
+
+                currencyName = ReportExcelHelper.GetTitleCurrencyName(
+                    _excelModel.MetaModel.CurrencyId,
+                    _excelModel.MetaModel.CurrencyName);
+            }
+            else
+            {
+                fromdate = _excelModel.MetaModel.DrillDownFromDate.ToString(FormatDate);
+
+                todate = _excelModel.MetaModel.DrillDownToDate.ToString(FormatDate);
+
+                currencyName = ReportExcelHelper.GetTitleCurrencyName(
+                    _excelModel.MetaModel.CurrencyId >= 0 ? _excelModel.MetaModel.DrillDownCurrencyId : _excelModel.MetaModel.CurrencyId,
+                    _excelModel.MetaModel.DrillDownCurrencyName);
+            }
+
+            var productsTitle = ReportExcelHelper.GetLicenseeWLProduct(_excelModel.MetaModel.ProductOptions, _excelModel.SystemId);
+            return string.Format(ViewResources.WinLossByProductTitle, fromdate, todate, currencyName + productsTitle);
         }
 
         private static void AssignCommonData(IRow row, WinLossByProduct dataItem)

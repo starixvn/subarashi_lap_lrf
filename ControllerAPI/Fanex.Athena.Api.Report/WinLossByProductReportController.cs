@@ -179,13 +179,6 @@ namespace Fanex.Athena.Api.Report
             var userSession = SessionService.UserSession;
             var productAccess = ProductService.GetProductAccess(licenseeSession.LicenseeId, userSession.Language);
 
-            if (metaModel.Level > 0)
-            {
-                metaModel.FromDate = metaModel.DrillDownFromDate;
-                metaModel.ToDate = metaModel.DrillDownToDate;
-                metaModel.CurrencyName = metaModel.DrillDownCurrencyName;
-            }
-
             var excelModel = new WinLossByProductExcelModel
             {
                 DataList = resultModel.DataList,

@@ -13,18 +13,13 @@
             </div>
 
             <div class="input-field col l2 m2 s12">
-                @DesktopRazorHelper.CurrencyList(Model.CurrencyList, "select", Model.Param.CurrencyId)
+                @DesktopRazorHelper.CurrencyList(Model.CurrencyList, "select", Model.Param.CurrencyId, true, true)
                 <label>@ViewResources.Currency</label>
-            </div>
-            <div class="input-field col l2 m3 s12">
-                @DesktopRazorHelper.BasedCurrency(Model.Param.BaseCurrency)
-                <label>@ViewResources.BaseCurrency</label>
             </div>
 
             @DesktopRazorHelper.RenderProductFilter(Model.Param.ProductOptions, 3, 3)
-            </div>
-        <div class="row">
-            <div class="input-field col l3 m4 s12">
+
+            <div class="input-field col l3 m3 s12">
                 @Html.TextBox("Username", Model.Param.Username, new { placeholder = (Model.IsFakeLicensee ? ViewResources.ExternalId : ViewResources.ExternalIdOrSystemId), autocomplete = "off" })
                 <label>@ViewResources.Username</label>
                 <ul id="suggestionDropdown" class="dropdown-content ac-dropdown"></ul>
@@ -37,22 +32,22 @@
                 }
                 <i class="icon-excel right" title="@ViewResources.ExportToExcel" id="ExportToExcel"></i>
             </div>
-
-            <div class="input-field input col l3 m3 s12">
-                @DesktopRazorHelper.DrawFilter(Model.Param.DrawFilter)
-            </div>
-
-            <div class="input-field input col l2 m3 s12">
-                @DesktopRazorHelper.ReportBy(Model.Param.ReportBy)
-            </div>
-
-            <div class="input-field input col l2 m3 s12">
-                @DesktopRazorHelper.ExcludeTestData(Model.Param.IsExcludedTestData)
-            </div>
         </div>
 
         <div class="row">
-            <div class="col l2 m2 s12 button-block">
+            <div class="input-field input col l3 m4 s12">
+                @DesktopRazorHelper.DrawFilter(Model.Param.DrawFilter)
+            </div>
+
+            <div class="input-field input col l2 m2 s12">
+                @DesktopRazorHelper.ReportBy(Model.Param.ReportBy)
+            </div>
+
+            <div class="input-field input col l3 m3 s12">
+                @DesktopRazorHelper.ExcludeTestData(Model.Param.IsExcludedTestData)
+            </div>
+
+            <div class="col l3 m3 s12 button-block">
                 <button type="button" id="SubmitButton" class="btn btn-primary">@ViewResources.Submit</button>
             </div>
         </div>
