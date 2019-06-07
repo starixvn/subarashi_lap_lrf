@@ -34,7 +34,7 @@
         [TestCase(BaseCurrencyType.Eur, true)]
         [TestCase(100, true)]
         [TestCase(101, false)]
-        [TestCase(-4, false)]
+        [TestCase(-9, false)]
         public void IsValidRequest_WhenCall_ReturnCorrectResult(int metaModelCurrencyId, bool expectedResult)
         {
             // Arrange

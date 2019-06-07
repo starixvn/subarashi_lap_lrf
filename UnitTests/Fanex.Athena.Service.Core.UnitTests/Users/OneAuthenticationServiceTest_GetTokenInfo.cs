@@ -3,6 +3,7 @@
     using Core.Users.Interfaces;
     using Core.Utility.Interfaces;
     using DataAccess.Core.Users.Interfaces;
+    using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Service.Core.Users;
     using Fanex.Logging;
     using Model.Core.DTO.OneAuth;
@@ -15,18 +16,23 @@
     {
         private OneAuthenticationService _oneAuthenticationService;
         private IOneBookSecurityWrapper _oneBookSecurityWrapper;
-
+        private IAppSettings _appSettings;
         [SetUp]
         public void SetUp()
         {
             _oneBookSecurityWrapper = Substitute.For<IOneBookSecurityWrapper>();
+            _appSettings = Substitute.For<IAppSettings>();
+            _appSettings.DefaultBaseCurrency.Returns("EUR");
             _oneAuthenticationService = Substitute.ForPartsOf<OneAuthenticationService>(
                 null,
                 null,
                 null,
                 _oneBookSecurityWrapper,
                 Substitute.For<ILogger>(),
-                Substitute.For<IOneAuthDataAccess>());
+                 _appSettings,
+                Substitute.For<IOneAuthDataAccess>()
+               
+                );
         }
 
         [TearDown]
@@ -34,6 +40,7 @@
         {
             _oneAuthenticationService = null;
             _oneBookSecurityWrapper = null;
+            _appSettings = null;
         }
 
         [Test]

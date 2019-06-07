@@ -43,7 +43,7 @@
             MockSessionData();
 
             _reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss)
-               .Returns(new ReportSetting { MinDate = new DateTime(2018, 1, 1), MaxDate = new DateTime(2018, 1, 31), BaseCurrencies = "USD,MYR" });
+               .Returns(new ReportSetting { MinDate = new DateTime(2018, 1, 1), MaxDate = new DateTime(2018, 1, 31), BaseCurrencies = "USD" });
         }
 
         [OneTimeTearDown]

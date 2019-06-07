@@ -172,10 +172,10 @@
         }
 
         [Test]
-        public void GetCustomerWinloss_WhenCall_ParametersPassedCorrectly()
+        public async Task GetCustomerWinloss_WhenCall_ParametersPassedCorrectlyAsync()
         {
             // Action
-            DataAccess.GetCustomerWinloss(_metaModel, UserCurrencyList);
+            await DataAccess.GetCustomerWinloss(_metaModel, UserCurrencyList);
 
             // Assert
             Assert.Multiple(() =>
@@ -285,10 +285,12 @@
             // main data
             ConfigureDataForReader(firstExpected, expectedList, string.Empty, 1);
 
-            SystemConstants.BaseCurrencyList.ForEach(currency =>
-            {
-                ConfigureDataForReader(firstExpected, expectedList, currency.Value, _baseCurrencyExchangeRate[currency.Value]);
-            });
+            Action<string> action = currency =>
+               {
+                   ConfigureDataForReader(firstExpected, expectedList, currency, _baseCurrencyExchangeRate[currency]);
+               };
+
+            SystemConstants.BaseCurrencyListOfSummaryTotalRow.ForEach(action);
         }
 
         private void ConfigureDataForReader(ExchangeWinLoss firstExpected, IEnumerable<ExchangeWinLoss> expectedList, string baseCurrency, decimal rate)
@@ -370,7 +372,7 @@
             ReportResultModel<ExchangeWinLoss> result,
             ExchangeWinLoss firstExpected,
             List<ExchangeWinLoss> expectedList,
-            string baseCurrenct = "")
+            string baseCurrency = "")
         {
             var firstItem = result.DataList.First();
 
@@ -380,7 +382,7 @@
 
             AssertCommonResultData(firstItem, firstExpected);
             AssertTotalResultData(result, expectedList);
-            AssertSummaryTotalResultData(result, expectedList, baseCurrenct);
+            AssertSummaryTotalResultData(result, expectedList, baseCurrency);
         }
 
         private void AssertCommonSpParameters()

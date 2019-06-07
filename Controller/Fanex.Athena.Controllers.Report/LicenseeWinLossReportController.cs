@@ -51,16 +51,9 @@ namespace Fanex.Athena.Controllers.Report
 
         private static IDictionary<int, string> GetFakeBaseCurrencies(string baseCurrencySetting)
         {
-            var allBaseCurrencies = new Dictionary<int, string>
-            {
-                { BaseCurrencyType.Eur, "EUR" },
-                { BaseCurrencyType.Usd, "USD" },
-                { BaseCurrencyType.Gbp, "GBP" }
-            };
-
             return string.IsNullOrWhiteSpace(baseCurrencySetting)
-                    ? allBaseCurrencies
-                    : allBaseCurrencies.Where(x => baseCurrencySetting.Split(',').Contains(x.Value)).ToDictionary(x => x.Key, x => x.Value);
+                    ? SystemConstants.BaseCurrencyList
+                    : SystemConstants.BaseCurrencyList.Where(x => baseCurrencySetting.Split(',').Contains(x.Value)).ToDictionary(x => x.Key, x => x.Value);
         }
 
         private static DateTime GetSelectedDate(ReportSetting reportSetting)

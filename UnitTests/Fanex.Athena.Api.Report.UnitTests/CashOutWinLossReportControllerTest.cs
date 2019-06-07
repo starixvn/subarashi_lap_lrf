@@ -48,7 +48,7 @@
         public async Task Index_InvalidRequest_ReturnEmptyResult()
         {
             // Arrange
-            var metaModel = new ThirdPartyWinLossMetaModel { CurrencyId = -4 };
+            var metaModel = new ThirdPartyWinLossMetaModel { CurrencyId = -9 };
 
             // Action
             var result = await _controller.Index(metaModel);
