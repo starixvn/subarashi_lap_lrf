@@ -54,7 +54,7 @@
                     Checked = true
                 }).ToList()
             };
-
+            ViewBag.DefaultSelectedBaseCurrency = userSession.DefaultBaseCurrency;
             return View("~/Views/Desktop/Report/SubsidiaryPerformance/Main.cshtml", model);
         }
     }

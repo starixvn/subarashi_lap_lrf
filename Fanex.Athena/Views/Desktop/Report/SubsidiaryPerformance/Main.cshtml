@@ -4,6 +4,7 @@
     Layout = "~/Views/Desktop/Shared/_ReactPageLayout.cshtml";
 }
 @using Fanex.Athena.Model.Core.DataDomain;
+@using Fanex.Athena.Service.Core;
 @model Fanex.Athena.Model.Report.ViewModel.SubsidiaryPerformanceViewModel
 @{
     var productOptions = Model.ProductOptionList;
@@ -29,7 +30,7 @@
 @section globaljscode{
     window.initialState = {
         selectedProduct: '@(selectedProductCode)',
-        selectedBaseCurrency: '@(baseCurrencyList.Any() ? baseCurrencyList.First().value : string.Empty)',
+        selectedBaseCurrency: '@ViewBag.DefaultSelectedBaseCurrency',
         selectedSubsidiary: '@(selectedSubsidiary)',
         convertAll: false,
         dateRange: {fromDate: '@Model.FromDate.ToString("MM/dd/yyyy")', toDate: '@Model.ToDate.ToString("MM/dd/yyyy")'},
