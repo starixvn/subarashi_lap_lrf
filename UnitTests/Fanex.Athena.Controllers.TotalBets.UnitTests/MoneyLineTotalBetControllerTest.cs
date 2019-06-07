@@ -27,8 +27,6 @@
             SetUpDefaultFakeData();
 
             SepUpForService();
-
-            StubGetValueAppSettings("BaseUsdLicensees", "usd");
         }
 
         [OneTimeTearDown]

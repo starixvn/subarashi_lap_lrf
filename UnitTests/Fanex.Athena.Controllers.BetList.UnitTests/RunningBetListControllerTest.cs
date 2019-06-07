@@ -25,7 +25,6 @@
 
             SetUpDefaultFakeData();
 
-            StubGetValueAppSettings("BaseUsdLicensees", "usd");
         }
 
         [Test]
@@ -108,7 +107,7 @@
             }
         }
 
-        [TestCase("USD", null, "USD")]
+        [TestCase("USD", null, "EUR")]
         [TestCase("USD", "eur", "EUR")]
         public async Task CleanSheet_ExportExcel_PassCorrectParam(string currency, string baseCurrency, string expectedCurrency)
         {
@@ -138,7 +137,7 @@
             }
         }
 
-        [TestCase("USD", null, "USD")]
+        [TestCase("USD", null, "EUR")]
         [TestCase("USD", "eur", "EUR")]
         public async Task ToWinToNil_ExportExcel_PassCorrectParam(string currency, string baseCurrency, string expectedCurrency)
         {
@@ -168,7 +167,7 @@
             }
         }
 
-        [TestCase("USD", null, "USD")]
+        [TestCase("USD", null, "EUR")]
         [TestCase("USD", "eur", "EUR")]
         public async Task ThreeWayHandicap_ExportExcel_PassCorrectParam(string currency, string baseCurrency, string expectedCurrency)
         {

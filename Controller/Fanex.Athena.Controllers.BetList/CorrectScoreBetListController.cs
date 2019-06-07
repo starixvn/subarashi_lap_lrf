@@ -53,8 +53,7 @@ namespace Fanex.Athena.Controllers.BetList
                 Param = metaModel,
                 CurrencyList = userSession.CurrencyList,
                 ProductAccess = ProductService.GetProductAccess(metaModel.LicenseeId, userSession.Language),
-                IsAllowedCustomerCommission = licenseeSession.IsAllowedCustomerComm
-               
+                IsAllowedCustomerCommission = licenseeSession.IsAllowedCustomerComm,
             };
 
             return View("~/Views/Desktop/BetList/CorrectScoreBetList/Main.cshtml", model);

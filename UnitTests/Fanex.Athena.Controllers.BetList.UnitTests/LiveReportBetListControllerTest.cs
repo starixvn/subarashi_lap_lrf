@@ -155,7 +155,7 @@
             }
         }
 
-        [TestCase("USD", null, "USD")]
+        [TestCase("USD", null, "EUR")]
         [TestCase("USD", "eur", "EUR")]
         public async Task Match_ExportExcel_PassCorrectParam(string currency, string baseCurrency, string expectedCurrency)
         {
@@ -194,7 +194,7 @@
             }
         }
 
-        [TestCase("USD", null, "USD")]
+        [TestCase("USD", null, "EUR")]
         [TestCase("USD", "eur", "EUR")]
         public async Task MixParlay_ExportExcel_PassCorrectParam(string currency, string baseCurrency, string expectedCurrency)
         {
@@ -230,7 +230,7 @@
             }
         }
 
-        [TestCase("USD", null, "USD")]
+        [TestCase("USD", null, "EUR")]
         [TestCase("USD", "eur", "EUR")]
         public async Task Outright_ExportExcel_PassCorrectParam(string currency, string baseCurrency, string expectedCurrency)
         {
@@ -264,7 +264,7 @@
             }
         }
 
-        [TestCase("USD", null, "USD")]
+        [TestCase("USD", null, "EUR")]
         [TestCase("USD", "eur", "EUR")]
         public async Task NumberGame_ExportExcel_PassCorrectParam(string currency, string baseCurrency, string expectedCurrency)
         {
@@ -298,7 +298,7 @@
             }
         }
 
-        [TestCase("USD", null, "USD")]
+        [TestCase("USD", null, "EUR")]
         [TestCase("USD", "eur", "EUR")]
         public async Task VirtualSports_ExportExcel_PassCorrectParam(string currency, string baseCurrency, string expectedCurrency)
         {

@@ -22,7 +22,6 @@
 
             SetUpDefaultFakeData();
 
-            StubGetValueAppSettings("BaseUsdLicensees", "usd");
         }
 
         [Test]

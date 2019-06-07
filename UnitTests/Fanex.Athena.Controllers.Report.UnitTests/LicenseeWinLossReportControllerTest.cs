@@ -57,7 +57,7 @@
         {
             // Arrange
             var reportSettingService = Substitute.For<IReportSettingService>();
-            reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss).Returns(new ReportSetting { BaseCurrencies = "USD,MYR", TimeZone = 8 });
+            reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss).Returns(new ReportSetting { BaseCurrencies = "USD,KKK", TimeZone = 8 });
 
             AppSettings.FakeLicenseeList.Returns(new[] { DefaultLicenseeSession.LicenseeId });
 

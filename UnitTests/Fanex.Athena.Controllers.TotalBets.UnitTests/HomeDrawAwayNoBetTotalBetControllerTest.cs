@@ -26,7 +26,6 @@
 
             SepUpForService();
 
-            StubGetValueAppSettings("BaseUsdLicensees", "usd");
         }
 
         [OneTimeTearDown]

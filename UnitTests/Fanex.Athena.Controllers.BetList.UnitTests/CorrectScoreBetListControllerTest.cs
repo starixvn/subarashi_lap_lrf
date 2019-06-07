@@ -22,7 +22,6 @@
 
             SetUpDefaultFakeData();
 
-            StubGetValueAppSettings("BaseUsdLicensees", "usd");
         }
 
         [Test]
@@ -78,7 +77,7 @@
             }
         }
 
-        [TestCase("USD", null, "USD")]
+        [TestCase("USD", null, "EUR")]
         [TestCase("USD", "eur", "EUR")]
         public async Task Index_ExportExcel_PassCorrectParam(string currency, string baseCurrency, string expectedCurrency)
         {

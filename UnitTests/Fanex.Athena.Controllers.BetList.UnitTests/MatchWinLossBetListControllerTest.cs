@@ -137,7 +137,8 @@
                     FromDate = new DateTime(2018, 11, 11),
                     BetType = betTypeId,
                     HomeId = 2,
-                    AwayId = 0
+                    AwayId = 0,
+                    BaseCurrency = "USD"
                 };
 
                 CacheRefAdapter.GetBettype(metaModel.BetType).Returns("BetType");
@@ -155,7 +156,7 @@
             }
         }
 
-        [TestCase("USD", null, "USD")]
+        [TestCase("USD", null, "EUR")]
         [TestCase("USD", "eur", "EUR")]
         public async Task MixParlay_ExportExcel_PassCorrectParam(string currency, string baseCurrency, string expectedCurrency)
         {
@@ -203,12 +204,12 @@
                     IsExportExcel = true,
                     CurrencyId = 0,
                     CurrencyName = "USD",
-                    FromDate = new DateTime(2018, 11, 11)
+                    FromDate = new DateTime(2018, 11, 11),
                 };
 
                 CacheRefAdapter.GetBettype(metaModel.BetType).Returns(string.Empty);
 
-                var currencyTitle = string.Format(ViewResources.Viewin, "USD");
+                var currencyTitle = string.Format(ViewResources.Viewin, "EUR");
                 var expectedTitle = $"{ViewResources.BetList} - 11/11/2018 - {currencyTitle}";
 
                 SetUpForExportingExcel(metaModel, controller);
