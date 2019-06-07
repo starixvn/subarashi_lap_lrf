@@ -44,7 +44,7 @@
         private static IDictionary<string, PromotionPrize> InitSummaryTotal()
         {
             var summaryTotal = new Dictionary<string, PromotionPrize>();
-            foreach (var currency in SystemConstants.BaseCurrencyList)
+            foreach (var currency in SystemConstants.BaseCurrencyListOfSummaryTotalRow)
             {
                 summaryTotal.Add(
                     currency,

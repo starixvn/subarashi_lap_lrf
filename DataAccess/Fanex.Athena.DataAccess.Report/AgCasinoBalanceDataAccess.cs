@@ -83,7 +83,7 @@ namespace Fanex.Athena.DataAccess.Report
 
         private static void ReadSummaryTotal(IDataReader reader, Dictionary<string, AgCasinoBalance> summaryTotal)
         {
-            foreach (var currencySuffix in SystemConstants.BaseCurrencyList)
+            foreach (var currencySuffix in SystemConstants.BaseCurrencyListOfSummaryTotalRow)
             {
                 summaryTotal[currencySuffix].CustomerWinLoss += reader.ToDecimal("winlost" + currencySuffix);
                 summaryTotal[currencySuffix].TotalTransaction += reader.ToInt("totaltrans");
@@ -110,7 +110,7 @@ namespace Fanex.Athena.DataAccess.Report
         {
             var dataList = new SortableList<AgCasinoBalance>();
 
-            var summaryTotal = SystemConstants.BaseCurrencyList.ToDictionary(x => x, x => new AgCasinoBalance());
+            var summaryTotal = SystemConstants.BaseCurrencyListOfSummaryTotalRow.ToDictionary(x => x, x => new AgCasinoBalance());
 
             var winlostColumn = "winlost" + metaModel.BaseCurrency;
             var licenseewlColumn = "licenseewinlost" + metaModel.BaseCurrency;

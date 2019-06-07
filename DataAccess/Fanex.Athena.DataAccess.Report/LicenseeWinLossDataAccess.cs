@@ -118,7 +118,7 @@
         private static IDictionary<string, LicenseeWinLoss> InitSummaryTotal()
         {
             var summaryTotal = new Dictionary<string, LicenseeWinLoss>();
-            foreach (var currency in SystemConstants.BaseCurrencyList)
+            foreach (var currency in SystemConstants.BaseCurrencyListOfSummaryTotalRow)
             {
                 summaryTotal.Add(
                     currency,
@@ -137,7 +137,7 @@
             IList<ProductOption> productOptions,
             IDictionary<string, LicenseeWinLoss> summaryTotal)
         {
-            foreach (var currency in SystemConstants.BaseCurrencyList.ToArray())
+            foreach (var currency in SystemConstants.BaseCurrencyListOfSummaryTotalRow.ToArray())
             {
                 var summaryItem = summaryTotal[currency];
                 summaryItem.CustomerWinLoss += reader.ToDecimal("winlost" + currency);

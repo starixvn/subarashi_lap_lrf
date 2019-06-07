@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Web.Mvc;
     using Constant.DataDomain;
     using Extension.Utility;
@@ -44,7 +45,7 @@
                 FromDate = DateTime.Today,
                 ToDate = DateTime.Today,
                 CurrencyList = SessionService.UserSession.CurrencyList,
-                BaseCurrencies = SystemConstants.NewBaseCurrencyList,
+                BaseCurrencies = SystemConstants.BaseCurrencyList.Select(i => i.Value),
                 ProductOptions = ToProductOptions(productAccess.ProductList),
                 Status = GetStatusList(),
                 MinDate = setting.MinDate,

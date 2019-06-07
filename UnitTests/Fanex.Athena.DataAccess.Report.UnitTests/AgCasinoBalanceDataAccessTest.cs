@@ -392,7 +392,7 @@
             Reader["TransferOutuus"].Returns(expected.TransferOut);
             Reader["ClosingBalanceuus"].Returns(expected.ClosingBalance);
 
-            foreach (var currencySuffix in SystemConstants.BaseCurrencyList)
+            foreach (var currencySuffix in SystemConstants.BaseCurrencyListOfSummaryTotalRow)
             {
                 Reader["winlost" + currencySuffix].Returns(1);
                 Reader["licenseewinlost" + currencySuffix].Returns(0);

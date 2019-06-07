@@ -6,6 +6,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Core.UnitTests.TestHelpers;
+    using Fanex.Common.Extensions;
     using Model.Core.DataDomain;
     using Model.Core.ResultModel;
     using Model.Report.DTO;
@@ -41,19 +42,19 @@
             };
 
             _baseCurrencyExchangeRate = new Dictionary<string, decimal>();
-            for (int i = 0; i < SystemConstants.BaseCurrencyList.Count; i++)
+            for (int i = 0; i < SystemConstants.BaseCurrencyListOfSummaryTotalRow.Count; i++)
             {
-                _baseCurrencyExchangeRate.Add(SystemConstants.BaseCurrencyList[i], (i + 1) * 0.1m);
+                _baseCurrencyExchangeRate.Add(SystemConstants.BaseCurrencyListOfSummaryTotalRow[i], (i + 1) * 0.1m);
             }
 
             DataAccess.GetObjectDb(Arg.Is<string>(x => x.Contains(GetMainWinlossSp))).Returns(ObjectDb);
         }
 
         [Test]
-        public void GetMainWinloss_WhenCall_ParametersPassedCorrectly()
+        public async Task GetMainWinloss_WhenCall_ParametersPassedCorrectlyAsync()
         {
             // Action
-            DataAccess.GetMainWinloss(_metaModel, UserCurrencyList);
+            await DataAccess.GetMainWinloss(_metaModel, UserCurrencyList);
 
             // Assert
             Assert.Multiple(() =>
@@ -284,10 +285,10 @@
             // main data
             ConfigureDataForReader(firstExpected, expectedList, string.Empty, 1);
 
-            foreach (var currency in SystemConstants.BaseCurrencyList)
+            SystemConstants.BaseCurrencyList.ForEach(currency =>
             {
-                ConfigureDataForReader(firstExpected, expectedList, currency, _baseCurrencyExchangeRate[currency]);
-            }
+                ConfigureDataForReader(firstExpected, expectedList, currency.Value, _baseCurrencyExchangeRate[currency.Value]);
+            });
         }
 
         private void ConfigureDataForReader(ExchangeWinLoss firstExpected, IEnumerable<ExchangeWinLoss> expectedList, string baseCurrency, decimal rate)
@@ -392,10 +393,10 @@
 
         private void AssertSummaryTotalResultData(ReportResultModel<ExchangeWinLoss> result, IEnumerable<ExchangeWinLoss> expectedList, string baseCurrency)
         {
-            Assert.That(result.SummaryTotal.Count, Is.EqualTo(SystemConstants.BaseCurrencyList.Count));
+            Assert.That(result.SummaryTotal.Count, Is.EqualTo(SystemConstants.BaseCurrencyListOfSummaryTotalRow.Count));
 
             var exchangeBaseRate = string.IsNullOrEmpty(baseCurrency) ? 1 : _baseCurrencyExchangeRate[baseCurrency];
-            foreach (var currency in SystemConstants.BaseCurrencyList)
+            foreach (var currency in SystemConstants.BaseCurrencyListOfSummaryTotalRow)
             {
                 var exchangeRate = _baseCurrencyExchangeRate[currency];
 

@@ -95,7 +95,7 @@ namespace Fanex.Athena.DataAccess.Report
 
         private static void ReadSummary(IDataReader reader, IDictionary<string, IList<WinLossByProduct>> summaryTotalTemp)
         {
-            foreach (var currency in SystemConstants.BaseCurrencyList)
+            foreach (var currency in SystemConstants.BaseCurrencyListOfSummaryTotalRow)
             {
                 var code = reader.ToString("productcode");
                 var summaryItem = new WinLossByProduct
@@ -118,7 +118,7 @@ namespace Fanex.Athena.DataAccess.Report
             IDictionary<string, IList<WinLossByProduct>> summaryTotalTemp)
         {
             var summaryTotal = new Dictionary<string, IEnumerable<WinLossByProduct>>();
-            foreach (var currency in SystemConstants.BaseCurrencyList)
+            foreach (var currency in SystemConstants.BaseCurrencyListOfSummaryTotalRow)
             {
                 summaryTotal[currency] = summaryTotalTemp[currency].GroupBy(i => new { i.ProductCode })
                                     .Select(i => new WinLossByProduct
@@ -176,7 +176,7 @@ namespace Fanex.Athena.DataAccess.Report
         {
             var result = new List<WinLossByProduct>();
             var summaryTotalTemp = new Dictionary<string, IList<WinLossByProduct>>();
-            foreach (var currency in SystemConstants.BaseCurrencyList)
+            foreach (var currency in SystemConstants.BaseCurrencyListOfSummaryTotalRow)
             {
                 summaryTotalTemp.Add(currency, new List<WinLossByProduct>());
             }

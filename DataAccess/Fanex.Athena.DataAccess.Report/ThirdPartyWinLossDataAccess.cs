@@ -105,14 +105,15 @@ namespace Fanex.Athena.DataAccess.Report
 
         protected virtual void ReadSummaryTotal(IDataReader reader, IDictionary<string, T> summaryTotal)
         {
-            foreach (var currency in SystemConstants.BaseCurrencyList)
+            SystemConstants.BaseCurrencyListOfSummaryTotalRow.ForEach(currency =>
             {
                 var item = summaryTotal[currency];
                 item.CustomerWinLoss += reader.ToDecimal("winlost" + currency);
                 item.TotalTransaction += reader.ToInt("totaltrans");
                 item.LicenseeWL += reader.ToDecimal("licenseewinlost" + currency);
                 item.TurnOver += reader.ToDecimal("turnover" + currency);
-            }
+            });
+
         }
 
         private ReportResultModel<T> GetData(IDataReader reader, IDictionary<int, string> currencyList, ThirdPartyWinLossMetaModel metaModel, int rowSpan = 0)
@@ -120,7 +121,7 @@ namespace Fanex.Athena.DataAccess.Report
             var result = new SortableList<T>();
 
             var summaryTotal = new Dictionary<string, T>();
-            foreach (var currency in SystemConstants.BaseCurrencyList)
+            foreach (var currency in SystemConstants.BaseCurrencyListOfSummaryTotalRow)
             {
                 summaryTotal.Add(currency, Activator.CreateInstance<T>());
             }

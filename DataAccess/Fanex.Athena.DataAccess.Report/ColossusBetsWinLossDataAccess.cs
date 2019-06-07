@@ -46,7 +46,7 @@ namespace Fanex.Athena.DataAccess.Report
 
         private static void ReadSummaryTotal(IDataReader reader, IDictionary<string, ColossusBetWinLoss> summaryTotal)
         {
-            foreach (var currency in SystemConstants.BaseCurrencyList)
+            foreach (var currency in SystemConstants.BaseCurrencyListOfSummaryTotalRow)
             {
                 summaryTotal[currency].TotalTransaction += reader.ToInt("totaltrans");
                 summaryTotal[currency].TurnOver += reader.ToDecimal("turnover" + currency);
@@ -102,7 +102,7 @@ namespace Fanex.Athena.DataAccess.Report
             var isMonthly = metaModel.ReportBy == ReportByType.Monthly;
             var result = new SortableList<ColossusBetWinLoss>();
             var summaryTotal = new Dictionary<string, ColossusBetWinLoss>();
-            foreach (var currency in SystemConstants.BaseCurrencyList)
+            foreach (var currency in SystemConstants.BaseCurrencyListOfSummaryTotalRow)
             {
                 summaryTotal.Add(currency, new ColossusBetWinLoss());
             }

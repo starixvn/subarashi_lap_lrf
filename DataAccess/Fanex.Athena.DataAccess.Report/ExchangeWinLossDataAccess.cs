@@ -116,7 +116,7 @@
         private ReportResultModel<ExchangeWinLoss> GetData(IDataReader reader, ExchangeWinLossMetaModel metaModel, IDictionary<int, string> currencyList)
         {
             var dataList = new List<ExchangeWinLoss>();
-            var summaryTotal = SystemConstants.BaseCurrencyList.ToDictionary(x => x, x => new ExchangeWinLoss());
+            var summaryTotal = SystemConstants.BaseCurrencyListOfSummaryTotalRow.ToDictionary(x => x, x => new ExchangeWinLoss());
             var hasSystemId = reader.HasColumn("username");
             var hasExternalId = reader.HasColumn("nickname");
             var hasCustomerId = reader.HasColumn("custid");

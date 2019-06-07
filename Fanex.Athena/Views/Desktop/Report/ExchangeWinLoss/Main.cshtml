@@ -8,6 +8,7 @@
     var currencyList = Model.CurrencyList.Select(c => new { value = c.Key, label = c.Value }).ToList();
     var reportByOption = Model.ReportByOption.Select(c => new { value = c.Key, label = c.Value }).ToList();
     var today = DateTime.Today.ToString("MM/dd/yyyy");
+    var baseCurrencyList = SystemConstants.BaseCurrencyList.Select(c => new { value = c.Value, label = c.Value }).ToList();
 }
 
 @section pagecss {

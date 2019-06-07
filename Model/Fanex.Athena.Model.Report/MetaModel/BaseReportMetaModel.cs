@@ -46,7 +46,7 @@ namespace Fanex.Athena.Model.Report.MetaModel
         {
             get
             {
-                return SystemConstants.BaseCurrencyList.Any(t => t.Equals(BaseCurrency, StringComparison.OrdinalIgnoreCase));
+                return SystemConstants.BaseCurrencyList.Any(t => t.Value.Equals(BaseCurrency, StringComparison.OrdinalIgnoreCase));
             }
         }
 

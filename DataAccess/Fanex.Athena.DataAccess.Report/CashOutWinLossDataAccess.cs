@@ -70,7 +70,7 @@ namespace Fanex.Athena.DataAccess.Report
 
         private static void ReadSummaryTotal(IDataReader reader, IDictionary<string, CashOutWinLoss> summaryTotal)
         {
-            foreach (var currency in SystemConstants.BaseCurrencyList)
+            foreach (var currency in SystemConstants.BaseCurrencyListOfSummaryTotalRow)
             {
                 summaryTotal[currency].CashOutValue += reader.ToDecimal("cashoutvalue" + currency);
                 summaryTotal[currency].CashOutTickets += reader.ToInt("cashoutticket");
@@ -142,7 +142,7 @@ namespace Fanex.Athena.DataAccess.Report
             var result = new SortableList<CashOutWinLoss>();
 
             var summaryTotal = new Dictionary<string, CashOutWinLoss>();
-            foreach (var currency in SystemConstants.BaseCurrencyList)
+            foreach (var currency in SystemConstants.BaseCurrencyListOfSummaryTotalRow)
             {
                 summaryTotal.Add(currency, new CashOutWinLoss());
             }

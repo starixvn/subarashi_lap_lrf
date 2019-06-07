@@ -283,7 +283,7 @@
             Reader["grandamtuus"].Returns(0);
             Reader["commamtuus"].Returns(0);
 
-            foreach (var suffix in SystemConstants.BaseCurrencyList)
+            foreach (var suffix in SystemConstants.BaseCurrencyListOfSummaryTotalRow)
             {
                 Reader["turnover" + suffix].Returns(0);
                 Reader["winningprize" + suffix].Returns(1);

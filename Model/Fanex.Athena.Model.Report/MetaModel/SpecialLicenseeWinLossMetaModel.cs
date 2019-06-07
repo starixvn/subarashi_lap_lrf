@@ -38,5 +38,6 @@
         public string SiteName { get; set; }
 
         public string CurrencyListXml { get; set; }
+
     }
 }

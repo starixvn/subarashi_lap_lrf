@@ -32,8 +32,9 @@
 
         protected override void ReadSummaryTotal(IDataReader reader, IDictionary<string, GoldDeluxeWinLoss> summaryTotal)
         {
-            foreach (var currency in SystemConstants.BaseCurrencyList)
+            SystemConstants.BaseCurrencyListOfSummaryTotalRow.ForEach(currency =>
             {
+
                 var item = summaryTotal[currency];
                 item.CustomerWinLoss += reader.ToDecimal("winlost" + currency);
                 item.TotalTransaction += reader.ToInt("totaltrans");
@@ -42,7 +43,7 @@
                 item.TipAmount += reader.ToDecimal("tipsamount" + currency);
                 item.TipSharing += reader.ToDecimal("tipssharing" + currency);
                 item.AmountDue += reader.ToDecimal("amountdue" + currency);
-            }
+            });
         }
 
         [CLSCompliant(false)]

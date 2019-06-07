@@ -90,9 +90,10 @@
 
             if (IsValidParams(metaModel, setting))
             {
+                var baseCurrencies = SystemConstants.BaseCurrencyList.Select(i => i.Value).ToArray();
                 metaModel.BaseCurrencies = string.IsNullOrWhiteSpace(setting.BaseCurrencies)
-                    ? SystemConstants.BaseCurrencyList.ToArray()
-                    : setting.BaseCurrencies.Split(',').Intersect(SystemConstants.BaseCurrencyList).ToArray();
+                    ? baseCurrencies
+                    : setting.BaseCurrencies.Split(',').Intersect(baseCurrencies).ToArray();
                 metaModel.SiteName = _siteNameList[SessionService.LicenseeSession.LicenseeId];
                 metaModel.CurrencyListXml = GenerateCurrencyListXml(metaModel);
 
@@ -130,7 +131,7 @@
         protected internal virtual bool IsValidParams(SpecialLicenseeWinLossMetaModel metaModel, ReportSetting setting)
         {
             return IsValidDateRange(metaModel, setting) &&
-                IsValidProduct(metaModel) && 
+                IsValidProduct(metaModel) &&
                 IsValidCurrency(metaModel);
         }
 
