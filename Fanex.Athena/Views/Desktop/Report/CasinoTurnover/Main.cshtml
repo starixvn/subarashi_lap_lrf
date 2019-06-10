@@ -33,7 +33,7 @@
     window.initialState = {
     dateRange: {fromDate: '@Model.FromDate.ToString("MM/dd/yyyy")', toDate: '@Model.ToDate.ToString("MM/dd/yyyy")'},
     selectedCurrency: @Html.Raw(currencyList.First().ToJson()),
-    selectedBaseCurrency: '@Model.SelectedBaseCurrency',
+    selectedBaseCurrency: '@ViewBag.DefaultSelectedBaseCurrency',
     isConvertAll: true,
     selectedProduct: '@(selectedProductCode)',
     username: '',

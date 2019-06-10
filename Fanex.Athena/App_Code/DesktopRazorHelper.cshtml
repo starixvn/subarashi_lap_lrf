@@ -139,16 +139,12 @@ string baseCurrencies = null)
     </select>
 }
 
-@helper BasedCurrency(string selectedBasedCurrency, string CurrencyName = null)
+@helper BasedCurrency(string selectedBasedCurrency = "", string CurrencyName = null)
 {
-
-    selectedBasedCurrency = string.IsNullOrEmpty(selectedBasedCurrency) ? string.Empty : selectedBasedCurrency;
-    selectedBasedCurrency = selectedBasedCurrency.ToLower();
-
     <select class="based-currency hide" name="BaseCurrency" id="BaseCurrency" data-original="@selectedBasedCurrency">
         @foreach (var item in SystemConstants.BaseCurrencyList)
         {
-            <option value="@item.Value.ToLowerInvariant()" @(selectedBasedCurrency == item.Value ? new HtmlString("selected=selected") : new HtmlString(""))>@item.Value</option>
+            <option value="@item.Value.ToLowerInvariant()" @(selectedBasedCurrency.Equals(item.Value, StringComparison.OrdinalIgnoreCase) ? "selected='selected'" : string.Empty)>@item.Value</option>
         }
         <option value="" @(selectedBasedCurrency == "" ? new HtmlString("selected=selected") : new HtmlString(""))>@CurrencyName</option>
     </select>
@@ -324,173 +320,173 @@ string baseCurrencies = null)
     {
         <span title="@value.Replace("'", "&#39;")">@HttpUtility.HtmlEncode(value.Substring(0, maxLength - 2) + "..")</span>
 
-        }
-        else if (hasSpanReturn)
-        {
+    }
+    else if (hasSpanReturn)
+    {
         <span>@HttpUtility.HtmlEncode(value)</span>
 
-        }
-        else
-        {
+    }
+    else
+    {
         @value
-        }
-        }
+    }
+}
 
-        <!--Example:@RazorHelper.Paging("MainForm", 5000, 1)-->
-        @helper Paging(string formId, int NoOfItems, int currentIndex = 1, int pageSize = 1000, string method = "POST")
-        {
-            /**/
+<!--Example:@RazorHelper.Paging("MainForm", 5000, 1)-->
+@helper Paging(string formId, int NoOfItems, int currentIndex = 1, int pageSize = 1000, string method = "POST")
+{
+    /**/
 
-            var noOfPage = NoOfItems / pageSize + (NoOfItems % pageSize == 0 ? 0 : 1);
-            var pagingVisible = NoOfItems > 1000;
-            if (pagingVisible)
-            {
-                <div class="pagingContainer center-align">
-                    <a href="javascript:;" class="icon pagingFirst @(currentIndex == 1 ? "pagingDisable" : string.Empty)"></a>
-                    <a href="javascript:;" class="icon pagingPrev @(currentIndex == 1 ? "pagingDisable" : string.Empty)"></a>
-                    <span class="pagingSeperator"></span>
-                    <div class="paging-info">
-                        @ViewResources.Page
-                        <input type="text" name="PageIndex" class="pagingCurrent paging-form" maxlength="4" size="2" value="@currentIndex" />
-                        @ViewResources.of @noOfPage
-                    </div>
-                    <span class="pagingSeperator"></span>
-                    <a href="javascript:;" class="icon pagingNext @(currentIndex == noOfPage ? "pagingDisable" : string.Empty)"></a>
-                    <a href="javascript:;" class="icon pagingLast @(currentIndex == noOfPage ? "pagingDisable" : string.Empty)"></a>
-
-                    <select class="pageSizeSelected">
-                        @for (var i = 1000; i <= 2000; i += 1000)
-                        {
-                            <option value="@i" @(pageSize == i ? "selected=selected" : string.Empty)>
-                                @i
-                            </option>
-                        }
-                    </select>
-
-                    <input type="hidden" name="PageSize" value="@pageSize" />
-                    <input type="hidden" name="Method" value="@method" />
-                    <input type="hidden" name="FormName" value="@formId" />
-                    <input type="hidden" name="NoOfPage" value="@noOfPage" />
-                </div>
-            }
-        }
-
-        @helper ViewInCurrency(int currencyId, string currencyName)
-        {
-            /**/
-
-            string title;
-
-            switch (currencyId)
-            {
-                case BaseCurrencyType.All:
-                    title = ViewResources.AllCurrencies;
-                    break;
-                case BaseCurrencyType.Eur:
-                    title = string.Format(ViewResources.Viewin, FormatKey.Eur);
-                    break;
-                case BaseCurrencyType.Usd:
-                    title = string.Format(ViewResources.Viewin, FormatKey.Usd);
-                    break;
-                case BaseCurrencyType.Gbp:
-                    title = string.Format(ViewResources.Viewin, FormatKey.Gbp);
-                    break;
-                default:
-                    title = string.Format(ViewResources.Viewin, currencyName);
-                    break;
-            }
-            @(title)
-        }
-
-        @helper TicketFilter()
-        {
-            /**/
-
-            var Url = new UrlHelper(Context.Request.RequestContext);
-            <div id="TickerFilter">
-                <input type="checkbox" id="AllTicket" />
-                <label for="AllTicket">@ViewResources.All</label>
-                <input type="checkbox" id="ShowWin" name="ShowWin" value="true" checked />
-                <label for="ShowWin">@ViewResources.Won</label>
-                <input type="checkbox" id="ShowLoss" name="ShowLoss" value="true" checked />
-                <label for="ShowLoss">@ViewResources.Lose</label>
-                <input type="checkbox" id="ShowDraw" name="ShowDraw" value="true" checked />
-                <label for="ShowDraw">@ViewResources.Draw</label>
+    var noOfPage = NoOfItems / pageSize + (NoOfItems % pageSize == 0 ? 0 : 1);
+    var pagingVisible = NoOfItems > 1000;
+    if (pagingVisible)
+    {
+        <div class="pagingContainer center-align">
+            <a href="javascript:;" class="icon pagingFirst @(currentIndex == 1 ? "pagingDisable" : string.Empty)"></a>
+            <a href="javascript:;" class="icon pagingPrev @(currentIndex == 1 ? "pagingDisable" : string.Empty)"></a>
+            <span class="pagingSeperator"></span>
+            <div class="paging-info">
+                @ViewResources.Page
+                <input type="text" name="PageIndex" class="pagingCurrent paging-form" maxlength="4" size="2" value="@currentIndex" />
+                @ViewResources.of @noOfPage
             </div>
-            <label>@ViewResources.TicketFilter *</label>
-        }
+            <span class="pagingSeperator"></span>
+            <a href="javascript:;" class="icon pagingNext @(currentIndex == noOfPage ? "pagingDisable" : string.Empty)"></a>
+            <a href="javascript:;" class="icon pagingLast @(currentIndex == noOfPage ? "pagingDisable" : string.Empty)"></a>
 
-        @helper DrawFilter(int drawFilterType)
-        {
-            /**/
-            <input type="radio" value="1" class="with-gap" @(drawFilterType == DrawFilterType.Normal ? "checked=checked" : "") name="DrawFilter" id="DrawFilter" />
-            <label for="DrawFilter">
-                @ViewResources.Normal
-            </label>
-            <input type="radio" value="2" class="with-gap" @(drawFilterType == DrawFilterType.NoDraws ? "checked=checked" : "") name="DrawFilter" id="DrawFilterNoDraw" />
-            <label for="DrawFilterNoDraw">
-                @ViewResources.NoDraws
-            </label>
-            <input type="radio" value="3" class="with-gap" @(drawFilterType == DrawFilterType.NoDrawsForTurnoverOnly ? "checked=checked" : "") name="DrawFilter" id="DrawFilterNoDrawsForTurnoverOnly" />
-            <label for="DrawFilterNoDrawsForTurnoverOnly">
-                @ViewResources.NoDrawsForTurnoverOnly
-            </label>
-
-            <label class="active">@ViewResources.DrawFilter</label>
-        }
-
-        @helper ReportBy(int reportByType)
-        {
-            /**/
-            <input type="radio" class="with-gap" value="1" @(reportByType == ReportByType.Daily ? "checked=checked" : "") name="ReportBy" id="reportbydaily" />
-            <label for="reportbydaily">
-                @ViewResources.Daily
-            </label>
-            <input type="radio" class="with-gap" value="2" @(reportByType == ReportByType.Monthly ? "checked=checked" : "") name="ReportBy" id="reportbymonthly" />
-            <label for="reportbymonthly">
-                @ViewResources.Monthly
-            </label>
-
-            <label class="active">@ViewResources.ReportBy</label>
-        }
-
-        @helper ExcludeTestData(bool isExcludedTestData)
-        {
-            /**/
-            <input type="radio" value="true" class="with-gap" @(isExcludedTestData == true ? "checked=checked" : "") name="IsExcludedTestData" id="IsExcludedTestData0" />
-            <label for="IsExcludedTestData0">
-                @ViewResources.Yes
-            </label>
-            <input type="radio" class="with-gap" value="false" @(isExcludedTestData == false ? "checked=checked" : "") name="IsExcludedTestData" id="IsExcludedTestData1" />
-            <label for="IsExcludedTestData1">
-                @ViewResources.No
-            </label>
-
-            <label class="active">@ViewResources.ExcludeTestData</label>
-        }
-
-        @helper ReportTitleLicenseeWLProductCodeList(IEnumerable<ProductOption> productOptions)
-        {
-            /**/
-
-            var productCodeList = string.Empty;
-            foreach (var product in productOptions)
-            {
-                if (product.Status)
+            <select class="pageSizeSelected">
+                @for (var i = 1000; i <= 2000; i += 1000)
                 {
-                    productCodeList += product.Code + ", ";
+                    <option value="@i" @(pageSize == i ? "selected=selected" : string.Empty)>
+                        @i
+                    </option>
                 }
-            }
-            productCodeList = string.IsNullOrEmpty(productCodeList) ? string.Empty : string.Format(", {0} ({1})", ViewResources.LicenseeW_L, productCodeList.TrimEnd(' ', ','));
+            </select>
 
-            
-        }
-        @helper FullDateFormat(DateTime? date)
+            <input type="hidden" name="PageSize" value="@pageSize" />
+            <input type="hidden" name="Method" value="@method" />
+            <input type="hidden" name="FormName" value="@formId" />
+            <input type="hidden" name="NoOfPage" value="@noOfPage" />
+        </div>
+    }
+}
+
+@helper ViewInCurrency(int currencyId, string currencyName)
+{
+    /**/
+
+    string title;
+
+    switch (currencyId)
+    {
+        case BaseCurrencyType.All:
+            title = ViewResources.AllCurrencies;
+            break;
+        case BaseCurrencyType.Eur:
+            title = string.Format(ViewResources.Viewin, FormatKey.Eur);
+            break;
+        case BaseCurrencyType.Usd:
+            title = string.Format(ViewResources.Viewin, FormatKey.Usd);
+            break;
+        case BaseCurrencyType.Gbp:
+            title = string.Format(ViewResources.Viewin, FormatKey.Gbp);
+            break;
+        default:
+            title = string.Format(ViewResources.Viewin, currencyName);
+            break;
+    }
+    @(title)
+}
+
+@helper TicketFilter()
+{
+    /**/
+
+    var Url = new UrlHelper(Context.Request.RequestContext);
+    <div id="TickerFilter">
+        <input type="checkbox" id="AllTicket" />
+        <label for="AllTicket">@ViewResources.All</label>
+        <input type="checkbox" id="ShowWin" name="ShowWin" value="true" checked />
+        <label for="ShowWin">@ViewResources.Won</label>
+        <input type="checkbox" id="ShowLoss" name="ShowLoss" value="true" checked />
+        <label for="ShowLoss">@ViewResources.Lose</label>
+        <input type="checkbox" id="ShowDraw" name="ShowDraw" value="true" checked />
+        <label for="ShowDraw">@ViewResources.Draw</label>
+    </div>
+    <label>@ViewResources.TicketFilter *</label>
+}
+
+@helper DrawFilter(int drawFilterType)
+{
+    /**/
+    <input type="radio" value="1" class="with-gap" @(drawFilterType == DrawFilterType.Normal ? "checked=checked" : "") name="DrawFilter" id="DrawFilter" />
+    <label for="DrawFilter">
+        @ViewResources.Normal
+    </label>
+    <input type="radio" value="2" class="with-gap" @(drawFilterType == DrawFilterType.NoDraws ? "checked=checked" : "") name="DrawFilter" id="DrawFilterNoDraw" />
+    <label for="DrawFilterNoDraw">
+        @ViewResources.NoDraws
+    </label>
+    <input type="radio" value="3" class="with-gap" @(drawFilterType == DrawFilterType.NoDrawsForTurnoverOnly ? "checked=checked" : "") name="DrawFilter" id="DrawFilterNoDrawsForTurnoverOnly" />
+    <label for="DrawFilterNoDrawsForTurnoverOnly">
+        @ViewResources.NoDrawsForTurnoverOnly
+    </label>
+
+    <label class="active">@ViewResources.DrawFilter</label>
+}
+
+@helper ReportBy(int reportByType)
+{
+    /**/
+    <input type="radio" class="with-gap" value="1" @(reportByType == ReportByType.Daily ? "checked=checked" : "") name="ReportBy" id="reportbydaily" />
+    <label for="reportbydaily">
+        @ViewResources.Daily
+    </label>
+    <input type="radio" class="with-gap" value="2" @(reportByType == ReportByType.Monthly ? "checked=checked" : "") name="ReportBy" id="reportbymonthly" />
+    <label for="reportbymonthly">
+        @ViewResources.Monthly
+    </label>
+
+    <label class="active">@ViewResources.ReportBy</label>
+}
+
+@helper ExcludeTestData(bool isExcludedTestData)
+{
+    /**/
+    <input type="radio" value="true" class="with-gap" @(isExcludedTestData == true ? "checked=checked" : "") name="IsExcludedTestData" id="IsExcludedTestData0" />
+    <label for="IsExcludedTestData0">
+        @ViewResources.Yes
+    </label>
+    <input type="radio" class="with-gap" value="false" @(isExcludedTestData == false ? "checked=checked" : "") name="IsExcludedTestData" id="IsExcludedTestData1" />
+    <label for="IsExcludedTestData1">
+        @ViewResources.No
+    </label>
+
+    <label class="active">@ViewResources.ExcludeTestData</label>
+}
+
+@helper ReportTitleLicenseeWLProductCodeList(IEnumerable<ProductOption> productOptions)
+{
+    /**/
+
+    var productCodeList = string.Empty;
+    foreach (var product in productOptions)
+    {
+        if (product.Status)
         {
-            /**/
-
-            if (date != null)
-            {
-                @(date.Value.ToString("MM/dd/yyyy hh:mm:ss tt"))
-            }
+            productCodeList += product.Code + ", ";
         }
+    }
+    productCodeList = string.IsNullOrEmpty(productCodeList) ? string.Empty : string.Format(", {0} ({1})", ViewResources.LicenseeW_L, productCodeList.TrimEnd(' ', ','));
+
+
+}
+@helper FullDateFormat(DateTime? date)
+{
+    /**/
+
+    if (date != null)
+    {
+        @(date.Value.ToString("MM/dd/yyyy hh:mm:ss tt"))
+    }
+}

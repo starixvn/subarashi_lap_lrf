@@ -51,8 +51,9 @@
                 Status = GetStatusList(),
                 MinDate = setting.MinDate,
                 MaxDate = setting.MaxDate,
-                SelectedBaseCurrency = userSession.DefaultBaseCurrency
             };
+
+            ViewBag.DefaultSelectedBaseCurrency = userSession.DefaultBaseCurrency;
 
             return View("~/Views/Desktop/Report/CasinoTurnover/Main.cshtml", viewModel);
         }

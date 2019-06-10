@@ -37,7 +37,7 @@ namespace Fanex.Athena.Controllers.Report
             var metaModel = new PlatformWinLossMetaModel
             {
                 LicenseeId = licenseeId,
-                BaseCurrency = userSession.DefaultBaseCurrency
+                BaseCurrency = userSession.DefaultBaseCurrency,
 
             };
             var productAccess = ProductService.GetSingleWalletProductAccess(
@@ -52,7 +52,7 @@ namespace Fanex.Athena.Controllers.Report
                 Param = metaModel,
                 CurrencyList = userSession.CurrencyList,
                 ProductAccess = productAccess,
-                IsAllowedCustomerCommission = licenseeSession.IsAllowedCustomerComm
+                IsAllowedCustomerCommission = licenseeSession.IsAllowedCustomerComm,
             };
 
             return View("~/Views/Desktop/Report/PlatformWinLoss/Main.cshtml", model);

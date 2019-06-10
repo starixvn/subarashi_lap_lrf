@@ -7,7 +7,9 @@
 namespace Fanex.Athena.Model.Core.MetaModel
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Linq;
     using System.Web.Script.Serialization;
     using Fanex.Athena.Model.Core.DataDomain;
 
@@ -48,21 +50,11 @@ namespace Fanex.Athena.Model.Core.MetaModel
         {
             get
             {
-                var baseCurrencyName = BaseCurrency.ToUpperInvariant();
-                switch (baseCurrencyName)
-                {
-                    case "EUR":
-                        return BaseCurrencyType.Eur;
+                return SystemConstants.BaseCurrencyList
+                     .Where(x => BaseCurrency.Equals(x.Value, StringComparison.OrdinalIgnoreCase))
+                     .DefaultIfEmpty(new KeyValuePair<int, string>(BaseCurrencyType.All, string.Empty))
+                     .Select(x => x.Key).FirstOrDefault();
 
-                    case "USD":
-                        return BaseCurrencyType.Usd;
-
-                    case "GBP":
-                        return BaseCurrencyType.Gbp;
-
-                    default:
-                        return BaseCurrencyType.All;
-                }
             }
         }
 
