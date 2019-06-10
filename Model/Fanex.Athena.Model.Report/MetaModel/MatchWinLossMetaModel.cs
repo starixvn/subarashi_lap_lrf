@@ -6,7 +6,9 @@
 
 namespace Fanex.Athena.Model.Report.MetaModel
 {
+    using Fanex.Athena.Model.Core.DataDomain;
     using System;
+    using System.Linq;
 
     /// <summary>
     /// MatchWinLossMetaModel class.
@@ -26,12 +28,8 @@ namespace Fanex.Athena.Model.Report.MetaModel
 
         public DateTime Date { get; set; }
 
-        public override bool IsValid
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public bool IsValidDetailRequest => !string.IsNullOrEmpty(ProductCodeList) && MatchId > 0 && LeagueId > 0
+            && SystemConstants.BaseCurrencyList.Any(x => x.Value.Equals(BaseCurrency, StringComparison.OrdinalIgnoreCase));
+
     }
 }

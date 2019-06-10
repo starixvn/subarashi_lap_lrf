@@ -94,6 +94,10 @@
         [CustomValidateAntiForgery]
         public async Task<ActionResult> Index(MatchWinLossMetaModel metaModel)
         {
+            if (!metaModel.IsValid)
+            {
+                return await Task.FromResult(HttpNotFound());
+            }
             var licenseeSession = SessionService.LicenseeSession;
             var userSession = SessionService.UserSession;
             var currencies = userSession.CurrencyList;
@@ -119,8 +123,8 @@
             var total = GetTotal(reportData);
             var grandTotal = GetGrandTotal(reportDataOutrightParlay, total);
             var productAccess = ProductService.GetSingleWalletProductAccess(
-                licenseeSession.LicenseeId, 
-                userSession.Language, 
+                licenseeSession.LicenseeId,
+                userSession.Language,
                 FunctionNames.MatchWinLoss);
             var model = new MatchWinLossViewModel
             {
@@ -142,6 +146,10 @@
         [CustomValidateAntiForgery]
         public async Task<ActionResult> Detail(MatchWinLossMetaModel metaModel)
         {
+            if (!metaModel.IsValidDetailRequest)
+            {
+                return await Task.FromResult(HttpNotFound());
+            }
             var licenseeSession = SessionService.LicenseeSession;
             metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
             var reportData = await _matchWinLossService.GetDetailDataList(metaModel);
@@ -149,8 +157,8 @@
             {
                 MainResult = reportData,
                 ProductAccess = ProductService.GetSingleWalletProductAccess(
-                    licenseeSession.LicenseeId, 
-                    SessionService.UserSession.Language, 
+                    licenseeSession.LicenseeId,
+                    SessionService.UserSession.Language,
                     FunctionNames.MatchWinLoss),
                 IsAllowedCustomerCommission = licenseeSession.IsAllowedCustomerComm
             };
@@ -162,6 +170,10 @@
         [CustomValidateAntiForgery]
         public async Task<ActionResult> Excel(MatchWinLossMetaModel metaModel)
         {
+            if (!metaModel.IsValid)
+            {
+                return await Task.FromResult(HttpNotFound());
+            }
             const int PageSize = 63000;
             const string FileName = nameof(MatchWinLoss);
 
