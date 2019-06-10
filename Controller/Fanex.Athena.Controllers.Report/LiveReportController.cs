@@ -70,10 +70,10 @@ namespace Fanex.Athena.Controllers.Report
             var productAccess = GetProductAccess(licenseeSession.LicenseeId, userSession.Language);
 
             var model = CreateViewModel(
-                licenseeSession.LicenseeId, 
-                licenseeSession.IsAllowedCustomerComm, 
-                userSession.CurrencyList, 
-                metaModel, 
+                licenseeSession.LicenseeId,
+                licenseeSession.IsAllowedCustomerComm,
+                userSession.CurrencyList,
+                metaModel,
                 productAccess);
 
             return View("~/Views/Desktop/Report/LiveReport/Main.cshtml", model);
@@ -83,6 +83,10 @@ namespace Fanex.Athena.Controllers.Report
         [CustomValidateAntiForgery]
         public async Task<ActionResult> Index(LiveReportMetaModel metaModel)
         {
+            if (!metaModel.IsValid)
+            {
+                return await Task.FromResult(HttpNotFound());
+            }
             var licenseeSession = SessionService.LicenseeSession;
             var userSession = SessionService.UserSession;
             metaModel.LicenseeId = licenseeSession.LicenseeId;
@@ -92,10 +96,10 @@ namespace Fanex.Athena.Controllers.Report
             metaModel.ProductCodeList = string.Join(",", productAccess.ProductList.Select(x => x.ProductCode));
 
             var model = CreateViewModel(
-                licenseeSession.LicenseeId, 
-                licenseeSession.IsAllowedCustomerComm, 
-                userSession.CurrencyList, 
-                metaModel, 
+                licenseeSession.LicenseeId,
+                licenseeSession.IsAllowedCustomerComm,
+                userSession.CurrencyList,
+                metaModel,
                 productAccess);
             model.MainResult = await _liveReportService.GetLiveReportSummary(metaModel);
             model.ShowEmptyContent = false;
@@ -107,6 +111,10 @@ namespace Fanex.Athena.Controllers.Report
         [HttpGet]
         public async Task<ActionResult> MatchList(LiveReportMatchListMetalModel metaModel)
         {
+            if (!metaModel.IsValid)
+            {
+                return await Task.FromResult(HttpNotFound());
+            }
             var licenseeSession = SessionService.LicenseeSession;
             metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
 
@@ -130,6 +138,10 @@ namespace Fanex.Athena.Controllers.Report
         [CustomValidateAntiForgery]
         public async Task<ActionResult> Detail(LiveReportMetaModel metaModel, string productCode)
         {
+            if (!metaModel.IsValid)
+            {
+                return await Task.FromResult(HttpNotFound());
+            }
             var licenseeSession = this.SessionService.LicenseeSession;
             metaModel.LicenseeId = licenseeSession.LicenseeId;
             metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
@@ -157,7 +169,7 @@ namespace Fanex.Athena.Controllers.Report
             int licenseeId,
             bool isAllowedCustomerComm,
             IDictionary<int, string> currencyList,
-            LiveReportMetaModel metaModel, 
+            LiveReportMetaModel metaModel,
             ProductAccess productAccess)
         {
             return new LiveReportViewModel

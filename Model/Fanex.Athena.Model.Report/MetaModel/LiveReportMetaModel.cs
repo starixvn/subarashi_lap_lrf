@@ -6,7 +6,9 @@
 
 namespace Fanex.Athena.Model.Report.MetaModel
 {
+    using Fanex.Athena.Model.Core.DataDomain;
     using System;
+    using System.Linq;
 
     [Serializable]
     public class LiveReportMetaModel : BaseReportMetaModel
@@ -19,7 +21,8 @@ namespace Fanex.Athena.Model.Report.MetaModel
         {
             get
             {
-                return FromDate <= ToDate;
+                return FromDate <= ToDate
+                   && SystemConstants.BaseCurrencyList.Any(i => i.Value.Equals(BaseCurrency, StringComparison.OrdinalIgnoreCase));
             }
         }
     }
