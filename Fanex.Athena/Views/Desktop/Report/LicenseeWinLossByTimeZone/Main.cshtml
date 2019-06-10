@@ -45,7 +45,7 @@
     window.initialState = {
         selectedProduct: '@(selectedProductCode)',
         selectedCurrency: @Html.Raw(currencyList.First().ToJson()),
-        selectedBaseCurrency: '@(baseCurrencyList.Any() ? baseCurrencyList.First().value : string.Empty)',
+        selectedBaseCurrency: '@(ViewBag.DefaultSelectedBaseCurrency)',
         timeZoneList: @Html.Raw(timeZoneList.ToJson()),
         selectedTimeZone: 8,
         reportByList: @Html.Raw(reportByList.ToJson()),

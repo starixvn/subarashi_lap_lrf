@@ -35,7 +35,7 @@ namespace Fanex.Athena.Controllers.Report
                 CurrencyList = userSession.CurrencyList,
                 ProductOptionList = ToProductOptions(productAccess.ProductList)
             };
-
+            ViewBag.DefaultSelectedBaseCurrency = userSession.DefaultBaseCurrency;
             return View("~/Views/Desktop/Report/LicenseeWinLossByTimeZone/Main.cshtml", model);
         }
     }

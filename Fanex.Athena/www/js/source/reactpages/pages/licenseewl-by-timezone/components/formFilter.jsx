@@ -12,6 +12,7 @@ import service from '../lib/service'
 import { SettingConst } from '../constants/settingConst'
 import UserGuide from '@jsroot/components/UserGuide'
 import AppData from '@jsroot/lib/AppData'
+import { validateBaseCurrency } from '../../../lib/validationHelper'
 
 const RANGE_MONTH_CONSTRAINT = 3;
 
@@ -21,7 +22,7 @@ export class FormFilter extends Component {
     }
 
     get isValidModel() {
-        return this.props.selectedProduct !== "";
+        return this.props.selectedProduct !== "" && validateBaseCurrency(this.props.selectedBaseCurrency);
     }
 
     submit = (event) => {
