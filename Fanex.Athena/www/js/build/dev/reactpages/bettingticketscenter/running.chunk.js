@@ -3338,7 +3338,7 @@ function (_Component) {
       var userGuideContent = _this.props.userGuideContent;
 
       if (!userGuideContent || userGuideContent.length === 0) {
-        _this.props.getUserGuideContent('BettingTicketsCenterRunning');
+        _this.props.getUserGuideContent('BettingTicketCenterRunning');
       }
     });
 
@@ -3409,7 +3409,7 @@ function (_Component) {
       var userGuideContent = this.props.userGuideContent;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_UserGuide__WEBPACK_IMPORTED_MODULE_15__["default"], {
         title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("UserGuide"),
-        contentTitle: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("BettingTicketsCenter"),
+        contentTitle: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("BettingTicketCenter"),
         onClick: this.showUserGuide,
         content: userGuideContent
       });

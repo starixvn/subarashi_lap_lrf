@@ -63,7 +63,7 @@ exports[`FormFilter  render correctly 1`] = `
       <UserGuide
         className="icon-book right"
         content=""
-        contentTitle="BettingTicketsCenter"
+        contentTitle="BettingTicketCenter"
         onClick={[Function]}
         title="UserGuide"
       />

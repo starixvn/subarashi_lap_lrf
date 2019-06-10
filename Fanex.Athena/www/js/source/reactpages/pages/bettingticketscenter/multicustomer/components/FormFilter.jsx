@@ -153,7 +153,7 @@ export class FormFilter extends Component {
         const userGuideContent = this.props.userGuideContent;
 
         if (!userGuideContent || userGuideContent.length === 0) {
-            this.props.getUserGuideContent('BettingTicketsCenterMultiple');
+            this.props.getUserGuideContent('BettingTicketCenterMultiple');
         }
     }
 
@@ -162,7 +162,7 @@ export class FormFilter extends Component {
 
         return (<UserGuide 
                 title={LangHelper.getSingleResource("UserGuide")} 
-                contentTitle={LangHelper.getSingleResource("BettingTicketsCenter")}
+                contentTitle={LangHelper.getSingleResource("BettingTicketCenter")}
                 onClick={this.showUserGuide}
                 content={userGuideContent} />)
     }
