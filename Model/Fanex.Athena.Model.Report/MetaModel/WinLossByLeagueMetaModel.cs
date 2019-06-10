@@ -46,12 +46,5 @@ namespace Fanex.Athena.Model.Report.MetaModel
 
         public bool ShowDraw { get; set; }
 
-        public override bool IsValid
-        {
-            get
-            {
-                return FromDate <= ToDate;
-            }
-        }
     }
 }
