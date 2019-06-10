@@ -10,6 +10,7 @@ import { DateRange } from '@jsroot/components/date-range/index'
 import AutoComplete from '@jsroot/components/auto-complete'
 import CheckBox from '@jsroot/components/CheckBox'
 import CollapsiblePanel from '@jsroot/components/collapsible-panel'
+import UserGuide from '@jsroot/components/UserGuide'
 
 import { ActionCreators } from '../actions/index.js'
 import LangHelper from '@jsroot/lib/langHelper'
@@ -146,6 +147,24 @@ export class FormFilter extends Component {
             alert(LangHelper.getSingleResource("ErrorProcessingMsg"));
             this.props.toggleLoader(false);
         });
+    }
+
+    showUserGuide = () => {
+        const userGuideContent = this.props.userGuideContent;
+
+        if (!userGuideContent || userGuideContent.length === 0) {
+            this.props.getUserGuideContent('BettingTicketsCenterMultiple');
+        }
+    }
+
+    _renderUserGuide() {
+        const userGuideContent = this.props.userGuideContent;
+
+        return (<UserGuide 
+                title={LangHelper.getSingleResource("UserGuide")} 
+                contentTitle={LangHelper.getSingleResource("BettingTicketsCenter")}
+                onClick={this.showUserGuide}
+                content={userGuideContent} />)
     }
 
     _renderDateRange() {
@@ -323,7 +342,10 @@ export class FormFilter extends Component {
     }
 
     render() {
-        const excelButton = <i className="icon-excel right" onClick={this.exportExcel} title={LangHelper.getSingleResource("ExportToExcel")}></i>
+        const excelButton = <div>
+                                <i className="icon-excel right" onClick={this.exportExcel} title={LangHelper.getSingleResource("ExportToExcel")}></i>
+                                {this._renderUserGuide()}
+                            </div>;
 
        return (
             <CollapsiblePanel className="page-filter" stickyFooter={excelButton}>
@@ -454,10 +476,10 @@ function mapDispatchToProps(dispatch) {
                }
 function mapStateToProps(state) {
     const { requestParam, dateRange, selectedProduct, sportList, selectedSport, selectedBettype, bettypeList, selectedLeague, leagueList, selectedMatch, matchList,
-        selectedCurrency, baseCurrencyList, selectedBaseCurrency, selectedStatus, selectedLiveStatus, username, isConvertAll } = state;
+        selectedCurrency, baseCurrencyList, selectedBaseCurrency, selectedStatus, selectedLiveStatus, username, isConvertAll, userGuideContent } = state;
 
     return Object.assign({}, { requestParam, dateRange, selectedProduct, sportList, selectedSport, selectedBettype, bettypeList, selectedLeague, leagueList, selectedMatch, matchList,
-        selectedCurrency, baseCurrencyList, selectedBaseCurrency, selectedStatus, selectedLiveStatus, username, isConvertAll });
+        selectedCurrency, baseCurrencyList, selectedBaseCurrency, selectedStatus, selectedLiveStatus, username, isConvertAll, userGuideContent });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FormFilter);

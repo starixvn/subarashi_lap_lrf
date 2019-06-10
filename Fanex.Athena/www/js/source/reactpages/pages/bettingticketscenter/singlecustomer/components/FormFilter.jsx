@@ -8,6 +8,7 @@ import { DateRange } from '@jsroot/components/date-range/index'
 import AutoComplete from '@jsroot/components/auto-complete'
 import CheckBox from '@jsroot/components/CheckBox'
 import CollapsiblePanel from '@jsroot/components/collapsible-panel'
+import UserGuide from '@jsroot/components/UserGuide'
 
 import { ActionCreators } from '../actions/index.js'
 import LangHelper from '@jsroot/lib/langHelper'
@@ -95,6 +96,24 @@ export class FormFilter extends Component {
         });
     }
 
+    showUserGuide = () => {
+        const userGuideContent = this.props.userGuideContent;
+
+        if (!userGuideContent || userGuideContent.length === 0) {
+            this.props.getUserGuideContent('BettingTicketsCenterSingle');
+        }
+    }
+
+    _renderUserGuide() {
+        const userGuideContent = this.props.userGuideContent;
+
+        return (<UserGuide 
+                title={LangHelper.getSingleResource("UserGuide")} 
+                contentTitle={LangHelper.getSingleResource("BettingTicketsCenter")}
+                onClick={this.showUserGuide}
+                content={userGuideContent} />)
+    }
+
     _renderDateRange() {
         const dateRange = this.props.dateRange;
         const dateConstraint = AppData.dateConstraint;
@@ -170,7 +189,11 @@ export class FormFilter extends Component {
       }
 
      render() {
-     const excelButton = <i className="icon-excel right" onClick={this.exportExcel} title={LangHelper.getSingleResource("ExportToExcel")}></i>
+        const excelButton = <div>
+                                <i className="icon-excel right" onClick={this.exportExcel} title={LangHelper.getSingleResource("ExportToExcel")}></i>
+                                {this._renderUserGuide()}
+                            </div>;
+
         return (
             <CollapsiblePanel className="page-filter" stickyFooter={excelButton}>
                 <div className="row">
@@ -254,8 +277,8 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators(ActionCreators, dispatch);
 }
 function mapStateToProps(state) {
-    const { requestParam, dateRange, selectedProduct, selectedBaseCurrency, username, selectedStatus, selectedPlatform, selectedLiveStatus, isConvertAll } = state;
-    return Object.assign({}, { requestParam, dateRange, selectedProduct, selectedBaseCurrency, username, selectedStatus, selectedPlatform, selectedLiveStatus, isConvertAll });
+    const { requestParam, dateRange, selectedProduct, selectedBaseCurrency, username, selectedStatus, selectedPlatform, selectedLiveStatus, isConvertAll, userGuideContent } = state;
+    return Object.assign({}, { requestParam, dateRange, selectedProduct, selectedBaseCurrency, username, selectedStatus, selectedPlatform, selectedLiveStatus, isConvertAll, userGuideContent });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FormFilter);

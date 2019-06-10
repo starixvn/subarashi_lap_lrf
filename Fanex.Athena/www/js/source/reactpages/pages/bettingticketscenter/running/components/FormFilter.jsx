@@ -15,6 +15,7 @@ import AppData from '@jsroot/lib/AppData'
 import DataService from '@jsroot/lib/DataService.js'
 import ApiUrl from '../../common/constants/apiUrl'
 import Service from '../../common/lib/Service'
+import UserGuide from '@jsroot/components/UserGuide'
 
 export class FormFilter extends Component {
     constructor(props) {
@@ -87,7 +88,25 @@ export class FormFilter extends Component {
             this.props.toggleLoader(false);
         });
     }
+    
+    showUserGuide = () => {
+        const userGuideContent = this.props.userGuideContent;
 
+        if (!userGuideContent || userGuideContent.length === 0) {
+            this.props.getUserGuideContent('BettingTicketsCenterRunning');
+        }
+    }
+
+    _renderUserGuide() {
+        const userGuideContent = this.props.userGuideContent;
+
+        return (<UserGuide 
+                title={LangHelper.getSingleResource("UserGuide")} 
+                contentTitle={LangHelper.getSingleResource("BettingTicketsCenter")}
+                onClick={this.showUserGuide}
+                content={userGuideContent} />)
+    }
+    
     _renderProductSelectList() {
         const productOptions = AppData.productOptions;
 
@@ -164,7 +183,10 @@ export class FormFilter extends Component {
     }
 
      render() {
-         const excelButton = <i className="icon-excel right" onClick={this.exportExcel} title={LangHelper.getSingleResource("ExportToExcel")}></i>
+         const excelButton = <div>
+                                <i className="icon-excel right" onClick={this.exportExcel} title={LangHelper.getSingleResource("ExportToExcel")}></i>
+                                {this._renderUserGuide()}
+                            </div>;
          
         return (
             <CollapsiblePanel className="page-filter" stickyFooter={excelButton}>
@@ -234,8 +256,8 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators(ActionCreators, dispatch);
 }
 function mapStateToProps(state) {
-    const { requestParam, selectedProduct, selectedCurrency, selectedBaseCurrency, username, selectedStatus, isConvertAll } = state;
-    return Object.assign({}, { requestParam, selectedProduct, selectedCurrency, selectedBaseCurrency, username, selectedStatus, isConvertAll });
+    const { requestParam, selectedProduct, selectedCurrency, selectedBaseCurrency, username, selectedStatus, isConvertAll, userGuideContent } = state;
+    return Object.assign({}, { requestParam, selectedProduct, selectedCurrency, selectedBaseCurrency, username, selectedStatus, isConvertAll, userGuideContent });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FormFilter);

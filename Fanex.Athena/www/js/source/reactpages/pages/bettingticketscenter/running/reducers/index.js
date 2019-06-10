@@ -9,6 +9,7 @@ import * as requestParamReducer from '@jsroot/reducers/requestParamReducer'
 import * as reportTitleReducer from '@jsroot/reducers/reportTitleReducer'
 import * as statusReducer from '@jsroot/reducers/statusReducer'
 import * as convertAllReducer from '@jsroot/reducers/convertAllReducer'
+import * as userGuideReducer from '@jsroot/reducers/userGuideReducer'
 
 export default combineReducers(Object.assign(
     gridDataReducer,
@@ -20,5 +21,6 @@ export default combineReducers(Object.assign(
     requestParamReducer,
     reportTitleReducer,
     statusReducer,
-    convertAllReducer
+    convertAllReducer,
+    userGuideReducer
 ));
