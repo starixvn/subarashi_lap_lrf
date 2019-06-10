@@ -147,22 +147,17 @@ namespace Fanex.Athena.Api.Report
 
         private async Task<dynamic> ProcessRequest(PlatformWinLossMetaModel metaModel)
         {
-            if (!IsValidCurrency(metaModel.CurrencyId))
+            if (!metaModel.IsValid || !IsValidCurrency(metaModel.CurrencyId))
             {
-                return BadRequest(ViewResources.InvalidParams);
+                return BadRequest(ViewResources.InvalidRequestMsg);
             }
 
             metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId, metaModel.IsExcludedTestData);
 
             if (metaModel.Level == 0)
             {
-                var result = metaModel.IsValid ?
-                    await _platformWinLossDataAccess.GetSummaryData(metaModel) :
-                    new ReportResultModel<PlatformWinLossSummary>
-                    {
-                        DataList = new List<PlatformWinLossSummary>(),
-                        TotalData = new PlatformWinLossSummary()
-                    };
+                var result = await _platformWinLossDataAccess.GetSummaryData(metaModel);
+                   
                 return metaModel.IsExportExcel ?
                     ExportExcelSummary(metaModel, result.DataList, result.TotalData) :
                    (dynamic)new
@@ -174,13 +169,8 @@ namespace Fanex.Athena.Api.Report
             }
             else
             {
-                var result = metaModel.IsValid ?
-                    await _platformWinLossDataAccess.GetMemberData(metaModel, SessionService.UserSession.CurrencyList) :
-                    new SortableReportResultModel<PlatformWinLossMember>
-                    {
-                        DataList = new SortableList<PlatformWinLossMember>(),
-                        TotalData = new PlatformWinLossMember()
-                    };
+                var result = await _platformWinLossDataAccess.GetMemberData(metaModel, SessionService.UserSession.CurrencyList);
+                   
 
                 return metaModel.IsExportExcel
                     ? ExportExcelMember(metaModel, result.DataList, result.TotalData)

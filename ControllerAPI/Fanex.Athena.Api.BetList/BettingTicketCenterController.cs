@@ -34,7 +34,7 @@
         {
             if (!metaModel.IsValid)
             {
-                throw new ArgumentException(ViewResources.InvalidRequestMsg);
+                return BadRequest(ViewResources.InvalidRequestMsg);
             }
 
             var userSession = SessionService.UserSession;
@@ -54,7 +54,7 @@
         {
             if (!metaModel.IsValid)
             {
-                throw new ArgumentException(ViewResources.InvalidRequestMsg);
+                return BadRequest(ViewResources.InvalidRequestMsg);
             }
             var userSession = SessionService.UserSession;
             metaModel.AgentListXml = SessionService.GenerateAgentListXml();
@@ -75,7 +75,7 @@
             var currencyList = metaModel.CurrencyIdList?.Split(',').Select(x => int.Parse(x)).ToArray();
             if (!metaModel.IsValid || !BetListHelper.IsValidCurrencyId(currencyList, userCurrencyList))
             {
-                throw new ArgumentException(ViewResources.InvalidRequestMsg);
+                return BadRequest(ViewResources.InvalidRequestMsg);
             }
 
             metaModel.AgentListXml = SessionService.GenerateAgentListXml(currencyList);

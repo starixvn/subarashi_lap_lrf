@@ -70,7 +70,7 @@ namespace Fanex.Athena.Api.Report
         {
             if (!metaModel.IsValid || !IsValidCurrency(metaModel.CurrencyId))
             {
-                return Request.CreateErrorResponse(HttpStatusCode.Forbidden, ViewResources.InvalidParams + "1");
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ViewResources.InvalidRequestMsg);
             }
 
             metaModel.PageIndex = 1;

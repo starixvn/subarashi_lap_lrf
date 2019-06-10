@@ -1,11 +1,13 @@
 ﻿namespace Fanex.Athena.Api.Report
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Http;
     using Base.Attributes;
     using Constant.DataDomain;
+    using Fanex.Athena.Resources;
     using Model.Core.DataDomain;
     using Model.Report.DTO.SubsidiaryPerformance;
     using Model.Report.MetaModel;
@@ -33,7 +35,7 @@
         }
 
         [HttpPost]
-        public async Task<SubsidiaryResultViewModel> Index(SubsidiaryPerformanceMetaModel metaModel)
+        public async Task<dynamic> Index(SubsidiaryPerformanceMetaModel metaModel)
         {
             var userSession = SessionService.UserSession;
             CheckValidProducts(FunctionNames.SubsidiaryPerformance, metaModel.ProductCodeList);
@@ -41,10 +43,7 @@
             var isValidSubsidiaryList = isSubsidiary || (userSession.IsManageableSubsidiary && !string.IsNullOrWhiteSpace(metaModel.SubsidiaryList));
             if (!isValidSubsidiaryList || !metaModel.IsValid)
             {
-                return new SubsidiaryResultViewModel
-                {
-                    Data = new List<SubsidiaryPerformanceDataModel>()
-                };
+                return BadRequest(ViewResources.InvalidRequestMsg);
             }
 
             var licenseeName = SessionService.LicenseeSession.LicenseeName;
@@ -67,28 +66,30 @@
         [HttpPost]
         public async Task<dynamic> Detail(SubsidiaryPerformanceMetaModel metaModel)
         {
-            if (metaModel.IsValid)
+            if (!metaModel.IsValid)
             {
-                CheckValidProducts(FunctionNames.SubsidiaryPerformance, metaModel.ProductCodeList);
-                var licenseeName = SessionService.LicenseeSession.LicenseeName;
-                metaModel.LicenseeName = licenseeName;
-                var agentIdListByCurrency = _subsidiaryService.GetCurrencyAgentList(metaModel.SubsidiaryId, metaModel.IsExcludeTest);
-
-                if (agentIdListByCurrency.Any())
-                {
-                    metaModel.AgentListXml = SessionService.GenerateAgentListXml(agentIdListByCurrency);
-
-                    var result = await _subsidiaryPerformanceService.GetDetailData(metaModel, SessionService.UserSession.CurrencyList).ConfigureAwait(false);
-
-                    return new
-                    {
-                        Data = result.DataList,
-                        Total = result.SummaryTotal,
-                        GrandTotal = result.TotalData
-                    };
-                }
+                return BadRequest(ViewResources.InvalidRequestMsg);
             }
 
+            CheckValidProducts(FunctionNames.SubsidiaryPerformance, metaModel.ProductCodeList);
+            var licenseeName = SessionService.LicenseeSession.LicenseeName;
+            metaModel.LicenseeName = licenseeName;
+            var agentIdListByCurrency = _subsidiaryService.GetCurrencyAgentList(metaModel.SubsidiaryId, metaModel.IsExcludeTest);
+
+            if (agentIdListByCurrency.Any())
+            {
+                metaModel.AgentListXml = SessionService.GenerateAgentListXml(agentIdListByCurrency);
+
+                var result = await _subsidiaryPerformanceService.GetDetailData(metaModel, SessionService.UserSession.CurrencyList).ConfigureAwait(false);
+
+                return new
+                {
+                    Data = result.DataList,
+                    Total = result.SummaryTotal,
+                    GrandTotal = result.TotalData
+                };
+            }
+            
             return new
             {
                 Data = new List<SubsidiaryPerformanceDetail>()

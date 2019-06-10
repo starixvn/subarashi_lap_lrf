@@ -5,6 +5,7 @@
     using System.Web.Http;
     using Base.Attributes;
     using DataAccess.Report.Interfaces;
+    using Fanex.Athena.Resources;
     using Model.Core.DataDomain;
     using Model.Report.DTO;
     using Model.Report.MetaModel;
@@ -29,24 +30,22 @@
         [HttpPost]
         public async Task<dynamic> GetData(CasinoTurnoverMetaModel metaModel)
         {
-            CheckValidProducts(FunctionNames.CasinoTurnover, metaModel.ProductCode);
-            if (metaModel.IsValid && IsValidCurrency(metaModel.CurrencyId))
+            if (!metaModel.IsValid || !IsValidCurrency(metaModel.CurrencyId))
             {
-                metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
-                var result = await _casinoTurnoverDataAccess.GetData(metaModel).ConfigureAwait(false);
-                return new
-                {
-                    Data = result.DataList,
-                    Total = result.TotalData,
-                    result.TotalRows
-                };
+                return BadRequest(ViewResources.InvalidRequestMsg);
             }
 
+            CheckValidProducts(FunctionNames.CasinoTurnover, metaModel.ProductCode);
+
+            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
+            var result = await _casinoTurnoverDataAccess.GetData(metaModel).ConfigureAwait(false);
             return new
             {
-                Data = Enumerable.Empty<CasinoTurnover>(),
-                Total = new CasinoTurnover()
+                Data = result.DataList,
+                Total = result.TotalData,
+                result.TotalRows
             };
+
         }
     }
 }
