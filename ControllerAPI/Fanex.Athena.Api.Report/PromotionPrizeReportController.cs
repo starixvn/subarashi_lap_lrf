@@ -61,7 +61,7 @@
 
         private bool ValidateRequest(PromotionPrizeMetaModel metaModel)
         {
-            return metaModel.FromDate <= metaModel.ToDate && IsValidRequest(metaModel.CurrencyId);
+            return metaModel.FromDate <= metaModel.ToDate && IsValidCurrency(metaModel.CurrencyId);
         }
     }
 }

@@ -103,7 +103,7 @@
 
         private async Task<ReportResultModel<CustomerWinLoss>> GetData(CustomerWinLossMetaModel metaModel)
         {
-            if (!metaModel.IsValid || !IsValidRequest(metaModel.CurrencyId))
+            if (!metaModel.IsValid || !IsValidCurrency(metaModel.CurrencyId))
             {
                 return new ReportResultModel<CustomerWinLoss>
                 {

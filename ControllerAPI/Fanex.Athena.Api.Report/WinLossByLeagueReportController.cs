@@ -51,7 +51,7 @@ namespace Fanex.Athena.Api.Report
         [HttpPost]
         public async Task<dynamic> Index([FromBody] WinLossByLeagueMetaModel metaModel)
         {
-            if (!IsValidRequest(metaModel.CurrencyId))
+            if (!IsValidCurrency(metaModel.CurrencyId))
             {
                 return BadRequest(ViewResources.InvalidParams);
             }
@@ -68,7 +68,7 @@ namespace Fanex.Athena.Api.Report
         [HttpPost]
         public async Task<HttpResponseMessage> Excel(WinLossByLeagueMetaModel metaModel)
         {
-            if (!IsValidRequest(metaModel.CurrencyId))
+            if (!IsValidCurrency(metaModel.CurrencyId))
             {
                 return Request.CreateErrorResponse(HttpStatusCode.Forbidden, ViewResources.InvalidParams + "1");
             }

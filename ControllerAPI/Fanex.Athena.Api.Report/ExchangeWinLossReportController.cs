@@ -38,7 +38,7 @@
         public async Task<dynamic> Index(ExchangeWinLossMetaModel metaModel)
         {
             var currencyList = SessionService.UserSession.CurrencyList;
-            if (metaModel.IsValid && IsValidParams(metaModel) && IsValidRequest(metaModel.CurrencyId))
+            if (metaModel.IsValid && IsValidParams(metaModel) && IsValidCurrency(metaModel.CurrencyId))
             {
                 metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId, metaModel.ExcludeTestData);
                 metaModel.LicenseeId = SessionService.LicenseeSession.LicenseeId;

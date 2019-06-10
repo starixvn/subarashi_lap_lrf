@@ -45,6 +45,10 @@ export default class Report {
             toDate: tdate
         };
     }
+    static validateBaseCurrency(baseCurrency = "") {
+        return baseCurrency &&
+            window._AppData.baseCurrencyList.find(x => x.value === baseCurrency);
+    }
 
     static fetchGridData(relativeUrl, params) {
         return fetchData(relativeUrl, params);

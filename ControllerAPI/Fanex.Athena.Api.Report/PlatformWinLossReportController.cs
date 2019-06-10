@@ -147,7 +147,7 @@ namespace Fanex.Athena.Api.Report
 
         private async Task<dynamic> ProcessRequest(PlatformWinLossMetaModel metaModel)
         {
-            if (!IsValidRequest(metaModel.CurrencyId))
+            if (!IsValidCurrency(metaModel.CurrencyId))
             {
                 return BadRequest(ViewResources.InvalidParams);
             }

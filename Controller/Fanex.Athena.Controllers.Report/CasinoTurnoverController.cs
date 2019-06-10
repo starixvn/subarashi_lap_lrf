@@ -34,9 +34,10 @@
         [HttpGet]
         public ActionResult Index()
         {
+            var userSession = SessionService.UserSession;
             var productAccess = ProductService.GetSingleWalletProductAccess(
                 SessionService.LicenseeSession.LicenseeId,
-                SessionService.UserSession.Language,
+                userSession.Language,
                 FunctionNames.CasinoTurnover);
             var setting = _reportSettingService.GetSetting(PermissionKeys.ReportCasinoTurnover);
 
@@ -49,7 +50,8 @@
                 ProductOptions = ToProductOptions(productAccess.ProductList),
                 Status = GetStatusList(),
                 MinDate = setting.MinDate,
-                MaxDate = setting.MaxDate
+                MaxDate = setting.MaxDate,
+                SelectedBaseCurrency = userSession.DefaultBaseCurrency
             };
 
             return View("~/Views/Desktop/Report/CasinoTurnover/Main.cshtml", viewModel);

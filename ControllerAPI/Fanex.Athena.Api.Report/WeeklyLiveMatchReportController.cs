@@ -38,7 +38,7 @@ namespace Fanex.Athena.Api.Report
         [HttpPost]
         public async Task<dynamic> Index(WeeklyLiveMatchMetaModel metaModel)
         {
-            if (IsValidRequest(metaModel.CurrencyId))
+            if (IsValidCurrency(metaModel.CurrencyId))
             {
                 var result = await _weeklyLiveMatchService.GetData(metaModel);
 

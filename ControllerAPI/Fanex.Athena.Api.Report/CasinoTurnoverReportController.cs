@@ -30,7 +30,7 @@
         public async Task<dynamic> GetData(CasinoTurnoverMetaModel metaModel)
         {
             CheckValidProducts(FunctionNames.CasinoTurnover, metaModel.ProductCode);
-            if (IsValidRequest(metaModel.CurrencyId))
+            if (metaModel.IsValid && IsValidCurrency(metaModel.CurrencyId))
             {
                 metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
                 var result = await _casinoTurnoverDataAccess.GetData(metaModel).ConfigureAwait(false);
@@ -38,7 +38,7 @@
                 {
                     Data = result.DataList,
                     Total = result.TotalData,
-                    TotalRows = result.TotalRows
+                    result.TotalRows
                 };
             }
 

@@ -152,7 +152,7 @@ namespace Fanex.Athena.Api.Report
 
         private async Task<dynamic> ProcessRequest(ThirdPartyWinLossMetaModel metaModel)
         {
-            if (IsValidRequest(metaModel.CurrencyId, metaModel.DrillDownCurrencyId))
+            if (IsValidCurrency(metaModel.CurrencyId, metaModel.DrillDownCurrencyId))
             {
                 metaModel.LicenseeId = SessionService.LicenseeSession.LicenseeId;
                 var result = await GetData(metaModel);

@@ -130,7 +130,7 @@ namespace Fanex.Athena.Api.Report
 
         private async Task<dynamic> ProcessRequest(ActiveCustomerMetaModel metaModel)
         {
-            if (IsValidRequest(metaModel.CurrencyId))
+            if (IsValidCurrency(metaModel.CurrencyId))
             {
                 metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId, metaModel.IsExcludeTest);
 

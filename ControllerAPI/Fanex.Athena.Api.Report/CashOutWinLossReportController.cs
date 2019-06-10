@@ -128,7 +128,7 @@ namespace Fanex.Athena.Api.Report
             int currencyId = 0,
             int custId = 0)
         {
-            if (!IsValidRequest(metaModel.CurrencyId, currencyId))
+            if (!IsValidCurrency(metaModel.CurrencyId, currencyId))
             {
                 return GetEmptyResult();
             }

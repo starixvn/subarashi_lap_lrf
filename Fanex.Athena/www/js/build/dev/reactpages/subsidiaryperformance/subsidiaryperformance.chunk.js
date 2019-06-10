@@ -3262,6 +3262,14 @@ function () {
       };
     }
   }, {
+    key: "validateBaseCurrency",
+    value: function validateBaseCurrency() {
+      var baseCurrency = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
+      return baseCurrency && window._AppData.baseCurrencyList.find(function (x) {
+        return x.value === baseCurrency;
+      });
+    }
+  }, {
     key: "fetchGridData",
     value: function fetchGridData(relativeUrl, params) {
       return fetchData(relativeUrl, params);
@@ -4402,7 +4410,7 @@ function (_Component) {
       var _this$props = this.props,
           selectedSubsidiary = _this$props.selectedSubsidiary,
           selectedProduct = _this$props.selectedProduct;
-      return (!_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].subsidiaryList || selectedSubsidiary !== "") && selectedProduct !== "";
+      return (!_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].subsidiaryList || selectedSubsidiary !== "") && selectedProduct !== "" && _lib_report__WEBPACK_IMPORTED_MODULE_13__["default"].validateBaseCurrency(this.props.selectedBaseCurrency);
     }
   }]);
 

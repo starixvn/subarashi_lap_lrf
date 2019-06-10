@@ -20,7 +20,8 @@
         {
         }
 
-        protected internal virtual bool IsValidRequest(int currencyId, int drillDownCurrencyId = 0)
+       
+        protected internal virtual bool IsValidCurrency(int currencyId, int drillDownCurrencyId = 0)
         {
             var currencyList = SessionService.UserSession.CurrencyList;
             return (currencyId <= 0 && currencyId >= SystemConstants.MinBaseCurrencyType)

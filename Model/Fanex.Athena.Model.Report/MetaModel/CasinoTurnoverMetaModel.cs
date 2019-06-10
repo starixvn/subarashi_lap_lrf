@@ -1,5 +1,6 @@
 ﻿namespace Fanex.Athena.Model.Report.MetaModel
 {
+    using Fanex.Athena.Model.Core.DataDomain;
     using System;
     using System.Linq;
 
@@ -55,6 +56,8 @@
 
         public bool IsExportExcel { get; set; }
 
-        public bool IsValid => FromDate <= ToDate && ProductCode.Any() && Status.Any();
+        public bool IsValid => FromDate <= ToDate && ProductCode.Any() && Status.Any()
+            && SystemConstants.BaseCurrencyList.Any(
+                i => i.Value.Equals(BaseCurrency, StringComparison.OrdinalIgnoreCase));
     }
 }
