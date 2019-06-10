@@ -66,7 +66,7 @@ namespace Fanex.Athena.Model.Core.MetaModel
             }
         }
 
-        public bool IsConvert
+        public virtual bool IsConvert
         {
             get
             {

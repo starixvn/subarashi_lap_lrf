@@ -42,7 +42,7 @@ namespace Fanex.Athena.Model.Report.MetaModel
             set;
         }
 
-        public new bool IsConvert
+        public override bool IsConvert
         {
             get
             {

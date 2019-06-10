@@ -16,6 +16,7 @@ namespace Fanex.Athena.Api.Report
     using Base.Attributes;
     using DataAccess.Report.Interfaces;
     using Excel.Report.Models;
+    using Fanex.Athena.Excel.Base.Entities;
     using Fanex.Athena.Excel.Report;
     using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Extension.Utility;
@@ -213,6 +214,12 @@ namespace Fanex.Athena.Api.Report
                 metaModel.CurrencyId = metaModel.CurrencyId > 0 ? metaModel.DrillDownCurrencyId : metaModel.CurrencyId;
                 metaModel.CurrencyName = metaModel.DrillDownCurrencyName;
             }
+            var convertingOption = new ConvertingOption
+            {
+                IsConvert = metaModel.IsConvert,
+                BaseCurrency = metaModel.BaseCurrency,
+                CurrencyName = metaModel.DrillDownLevel == 0 ? metaModel.CurrencyName : metaModel.DrillDownCurrencyName
+            };
 
             if (data.DataList.Any())
             {
@@ -221,6 +228,7 @@ namespace Fanex.Athena.Api.Report
 
             var excelModel = new LicenseeWinLossExcelModel
             {
+                ConvertingOption = convertingOption,
                 DataList = data.DataList,
                 MetaModel = metaModel,
                 SummaryTotal = data.SummaryTotal,
@@ -329,7 +337,7 @@ namespace Fanex.Athena.Api.Report
 
             var fromDate = metaModel.DrillDownLevel == 0 ? metaModel.FromDate : metaModel.DrillDownFromDate;
             var toDate = metaModel.DrillDownLevel == 0 ? metaModel.ToDate : metaModel.DrillDownToDate;
-            return DateTimeHelper.IsBetween(fromDate, setting.MinDate, setting.MaxDate) &&
+            return metaModel.IsValid && DateTimeHelper.IsBetween(fromDate, setting.MinDate, setting.MaxDate) &&
                 DateTimeHelper.IsBetween(toDate, setting.MinDate, setting.MaxDate);
         }
     }

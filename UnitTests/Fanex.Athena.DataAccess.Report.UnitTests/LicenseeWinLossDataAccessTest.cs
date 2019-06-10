@@ -88,39 +88,44 @@
             DataAccess.GetObjectDb(Arg.Is(GetSummaryWinlossSp)).Returns(ObjectDb);
 
             Reader.Read().Returns(true, false);
-            Reader.FieldCount.Returns(5);
+            Reader.FieldCount.Returns(7);
             Reader.GetName(0).Returns("LicenseeWLSBUSD");
             Reader.GetName(1).Returns("turnoverSBUSD");
             Reader.GetName(2).Returns("username");
             Reader.GetName(3).Returns("nickname");
             Reader.GetName(4).Returns("custid");
+            Reader.GetName(5).Returns("LicenseeWLSB");
+            Reader.GetName(6).Returns("turnoverSB");
 
+            const decimal licenseeWLUSD = 100;
+            const decimal turnoverUSD = 200;
             var readerDataMapping = new
             {
                 username = "testacc",
-                LicenseeWLSBUSD = 100,
-                turnoverSBUSD = 200,
+                LicenseeWLSBUSD = licenseeWLUSD,
+                turnoverSBUSD = turnoverUSD,
                 reporttype = "20170101",
                 nickname = "nickname test",
                 custid = 108,
                 PromotionPrize = 1
             };
+
             MapReaderData(readerDataMapping);
 
             // Action
             var result = await DataAccess.GetSummaryWinloss(_metaModel, UserCurrencyList);
-            var firstItem = result.DataList.First();
-
+            var firstOriginalItem = result.DataList.First();
             // Assert
             Assert.Multiple(() =>
             {
                 Assert.That(result.DataList.Count, Is.EqualTo(1));
-                Assert.That(firstItem.SystemId, Is.EqualTo(readerDataMapping.username));
-                Assert.That(firstItem.ExternalId, Is.EqualTo(readerDataMapping.nickname));
-                Assert.That(firstItem.CustomerId, Is.EqualTo(readerDataMapping.custid));
-                Assert.That(firstItem.LicenseeWL["SB"], Is.EqualTo(100));
-                Assert.That(firstItem.TurnOver["SB"], Is.EqualTo(200));
+                Assert.That(firstOriginalItem.SystemId, Is.EqualTo(readerDataMapping.username));
+                Assert.That(firstOriginalItem.ExternalId, Is.EqualTo(readerDataMapping.nickname));
+                Assert.That(firstOriginalItem.CustomerId, Is.EqualTo(readerDataMapping.custid));
+                Assert.That(firstOriginalItem.LicenseeWL["SB"], Is.EqualTo(licenseeWLUSD));
+                Assert.That(firstOriginalItem.TurnOver["SB"], Is.EqualTo(turnoverUSD));
                 Assert.That(result.AdditionalInfo, Is.EqualTo(readerDataMapping.PromotionPrize.ToString()));
+
             });
         }
 

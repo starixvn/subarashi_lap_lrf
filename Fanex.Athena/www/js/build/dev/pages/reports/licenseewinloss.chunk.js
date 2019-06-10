@@ -7949,7 +7949,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 });
             },
 
-            exportExcel: function(url, data, fileName) {
+            exportExcel: function (url, data, fileName) {
                 const option = {
                     type: 'POST',
                     data: data,
@@ -7976,21 +7976,24 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 let temp = 'api/LicenseeWinLossReport/Index';
                 if (level > 0) {
                     temp += '?level=' + level + '&currencyId='
-                    + currencyId + '&custId=' + custId + '&fdate=' + fdate
-                     + '&tdate=' + tdate + '&currencyName=' + currencyName;
+                        + currencyId + '&custId=' + custId + '&fdate=' + fdate
+                        + '&tdate=' + tdate + '&currencyName=' + currencyName;
                 }
                 LicenseeWinLossOption.urlExcelData = temp;
             },
 
-            setReportTitle: function (currencyId, fromdate, todate, baseCurrency) {
-                const titlePattern = Site.getSingleResource('LicenseeWinLoss') + ', {0} → {1}, {2}';
-                const currencyNameTitle = Report.getCurrencyTitle(currencyId, baseCurrency);
+            setReportTitle: function (currencyId, fromdate, todate, currencyName) {
+
+                const titlePattern = Site.getSingleResource('LicenseeWinLoss') + ', {0} → {1} - {2}';
+                const currencyNameOnTitle = currencyName ? Site.getSingleResource('Viewin').replace('{0}', currencyName.toUpperCase())
+                    : Report.getCurrencyNameForReportTitle(currencyId);
                 const title = $.format(titlePattern,
                     moment(fromdate, 'MM/DD/YYYY').format('MM/DD/YYYY'),
                     moment(todate, 'MM/DD/YYYY').format('MM/DD/YYYY'),
-                    currencyNameTitle);
+                    currencyNameOnTitle);
                 $('.report-title').html(title);
                 $('.panel-heading').removeClass('hide');
+
             },
 
             showPromotionPrizeLink: function (isShow) {
@@ -8094,7 +8097,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                     ReportBy: _submitData.ReportBy,
                     FromDate: _submitData.FromDate,
                     ToDate: _submitData.ToDate,
-                    BaseCurrency: _submitData.BaseCurrency
+                    BaseCurrency: $('#BaseCurrency').attr('data-original')
                 };
                 const drilldownDate = new Date(datetime);
                 const dateRange = Report.GetDrilldownDateRange(param.ReportBy, param.FromDate, param.ToDate, drilldownDate);
@@ -8114,7 +8117,12 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                     success: function (response) {
                         _me.ajaxComplete(levelNumber, response);
                         if (response !== null && response.Data.length > 0) {
-                            _me.setReportTitle(currencyId, dateRange.FromDate, dateRange.ToDate, _submitData.BaseCurrency);
+                            if (levelNumber > 0 && Number(param.CurrencyId) === 0) {
+                                const viewInCurrency = param.BaseCurrency ? param.BaseCurrency.toUpperCase() : currencyName;
+                                _me.setReportTitle(currencyId, dateRange.FromDate, dateRange.ToDate, viewInCurrency);
+                            } else {
+                                _me.setReportTitle(param.CurrencyId, dateRange.FromDate, dateRange.ToDate);
+                            }
                         }
 
                         //update excel ULR
@@ -8157,7 +8165,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
                 if (level === 0) {
                     _me.setExcelUrl(0, 0, 0, '', '', '');
-                    _me.setReportTitle(_submitData.CurrencyId, _submitData.FromDate, _submitData.ToDate, _submitData.BaseCurrency);
+                    _me.setReportTitle(_submitData.CurrencyId, _submitData.FromDate, _submitData.ToDate);
                 }
                 else if (level === 1) {
                     _me.updateDrilldownData(drillDownData.CurrencyId, drillDownData.CurrencyName, drillDownData.FromDate, drillDownData.ToDate, 0);

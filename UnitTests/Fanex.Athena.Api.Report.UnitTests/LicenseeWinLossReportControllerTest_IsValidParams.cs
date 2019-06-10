@@ -1,8 +1,10 @@
 ﻿namespace Fanex.Athena.Api.Report.UnitTests
 {
     using System;
+    using System.Collections.Generic;
     using Base.UnitTests;
     using DataAccess.Report.Interfaces;
+    using Fanex.Athena.Model.Core.MetaModel.Product;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Configuration;
     using Model.Report.MetaModel;
@@ -63,7 +65,14 @@
             var metaModel = new LicenseeWinLossMetaModel
             {
                 FromDate = DateTime.Parse(fromDate),
-                ToDate = DateTime.Parse(toDate)
+                ToDate = DateTime.Parse(toDate),
+                ProductOptions = new List<ProductOption> {
+                    new ProductOption {
+                        Code ="SB",
+                        Name ="SB",
+                        Status=true
+                    }
+                }
             };
 
             // Action
@@ -87,7 +96,15 @@
             {
                 DrillDownLevel = 1,
                 DrillDownFromDate = DateTime.Parse(fromDate),
-                DrillDownToDate = DateTime.Parse(toDate)
+                DrillDownToDate = DateTime.Parse(toDate),
+                ProductOptions = new List<ProductOption> {
+                    new ProductOption {
+                        Code ="SB",
+                        Name ="SB",
+                        Status=true
+                    }
+                }
+
             };
 
             // Action
