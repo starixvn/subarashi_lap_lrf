@@ -55,7 +55,8 @@ namespace Fanex.Athena.Model.Report.MetaModel
             get
             {
                 return FromDate <= ToDate
-                    && ProductOptions.Any(p => p.Status);
+                    && ProductOptions.Any(p => p.Status)
+                    && SystemConstants.BaseCurrencyList.Any(i => i.Value.Equals(BaseCurrency, StringComparison.OrdinalIgnoreCase));
             }
         }
     }
