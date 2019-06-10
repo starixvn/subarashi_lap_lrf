@@ -78,13 +78,15 @@ namespace Fanex.Athena.Controllers.Report
         [CustomValidateAntiForgery]
         public async Task<ActionResult> Index(WinLossByBetTypeMetaModel metaModel)
         {
+            if (!metaModel.IsValid)
+            {
+                return await Task.FromResult(HttpNotFound());
+            }
             var licenseeSession = SessionService.LicenseeSession;
             var userSession = SessionService.UserSession;
             metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
 
-            var reportData = metaModel.IsValid
-                       ? await _winLossByBetTypeDataAccess.GetDataList(metaModel)
-                       : new SortableList<WinLossByBetType>();
+            var reportData = await _winLossByBetTypeDataAccess.GetDataList(metaModel);
 
             reportData.Sort(metaModel.SortColumn, metaModel.SortDirection.Equals("ASC", StringComparison.OrdinalIgnoreCase));
             var productAccess = ProductService.GetProductAccess(licenseeSession.LicenseeId, userSession.Language);
