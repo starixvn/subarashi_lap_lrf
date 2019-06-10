@@ -3,13 +3,9 @@ import { connect } from 'react-redux';
 import { ActionCreators } from '../actions/index.js';
 import { bindActionCreators } from 'redux';
 
-import { Table, HeaderRow, HeaderCell, Row, Cell, Pager } from '@9softstudio/react-grid';
-import ReportTitle from '../../../../components/ReportTitle';
-import LangHelper from '../../../../lib/langHelper';
+import { Table, HeaderRow, HeaderCell, Row, Cell } from '@9softstudio/react-grid';
 import Switcher from '../../../../components/Switcher';
-import { specialLevelListWithColor, oddsGroupListWithStyle, columnList } from '../lib/constants';
-import MultipleSelect from '@9softstudio/react-multiselect';
-import BatchUpdateButton from './BatchUpdateButton';
+import { specialLevelListWithColor, oddsGroupListWithStyle } from '../lib/constants';
 import ContextMenu from './ContextMenu';
 
 const MAX_WIDTH_PAGE = 1920;
@@ -21,13 +17,6 @@ export class DataGrid extends PureComponent {
         this.maxWidth = Math.min(document.body.clientWidth, MAX_WIDTH_PAGE);
 
         this.state = {
-            selectedPlayerIdList: [],
-            pagingOption: {
-                PageIndex: 1,
-                PageSize: 50,
-                PageList: [50, 100, 200, 500],
-                TotalItem: 1000
-            },
             contextMenuPosition: null,
             isOpenContextMenu: false
         }
@@ -38,16 +27,7 @@ export class DataGrid extends PureComponent {
                 label: item === '0' ? 'None' : item
             }
         })
-
-        this.columnList = columnList.map(item => {
-            return {
-                id: item,
-                value: item,
-                status: true
-            }
-        })
     }
-
 
     _renderHeader() {
         return (
@@ -68,23 +48,11 @@ export class DataGrid extends PureComponent {
         )
     }
 
-    _renderDropdownColumn() {
-        return (
-            <MultipleSelect id="columnList" className="selection-column"
-                dataSource={this.columnList}
-                keyField={"id"}
-                valueField={"value"}
-                statusField={"status"}
-                onChange={(currentItem, selectedItemsKey) => console.log(selectedItemsKey)} />
-        )
-    }
-
     _renderDataSection(dataList) {
         const dataRows = [];
-
         for (let i = 0; i < dataList.length; i++) {
             const dataItem = dataList[i];
-            const isChecked = this.state.selectedPlayerIdList.includes(dataItem.CustId);
+            const isChecked = this.props.selectedPlayerIdList.includes(dataItem.CustId);
             dataRows.push(this._buildDataRow(dataItem, isChecked));
         }
 
@@ -98,16 +66,16 @@ export class DataGrid extends PureComponent {
             userName: playerInfo.UserName,
             currency: playerInfo.Currency
         };
+
         this.props.setSelectedPlayer(player);
     }
 
     _handleCheckPlayer = (custId) => {
-        const { selectedPlayerIdList } = this.state;
-
+        const { selectedPlayerIdList } = this.props;
         const newIdList = selectedPlayerIdList.includes(custId) ?
             selectedPlayerIdList.filter(item => item !== custId) : [...selectedPlayerIdList, custId];
 
-        this.setState({ selectedPlayerIdList: newIdList });
+        this.props.setSelectedPlayerIdList(newIdList);
     }
 
     _handleChangeBaStatus = (e) => {
@@ -123,9 +91,9 @@ export class DataGrid extends PureComponent {
                 y: rect.top
             };
 
-            this.setState({ 
+            this.setState({
                 contextMenuPosition: position,
-                isOpenContextMenu: true 
+                isOpenContextMenu: true
             });
         }
     }
@@ -135,7 +103,46 @@ export class DataGrid extends PureComponent {
             if (this.state.isOpenContextMenu) {
                 this.setState({ isOpenContextMenu: false });
             }
-        });
+        }, 10);
+    }
+
+    _buildUserNameCell(dataItem) {
+        return (
+            <>
+                <button className="btn-default btn-link username-link"
+                    onClick={(e) => this._handleSelectPlayer(e, dataItem)}>
+                    {dataItem.UserName}
+                </button>
+                <button className="btn-default btn-link btn-icon cell-menu"
+                    onMouseEnter={this.handleEnterContextMenu} onMouseLeave={this.handleLeaveContextMenu}>
+                    <i className="material-icons">edit</i>
+                </button>
+            </>
+        )
+    }
+
+    _buildOddsGroupCell(selectedOddsGroup) {
+        return (
+            <select className="select-default select-oddsgroup" value={selectedOddsGroup} onChange={(e) => console.log(e)}>
+                {
+                    Object.keys(oddsGroupListWithStyle).map(item => {
+                        return (<option key={item} style={oddsGroupListWithStyle[item]}>{item}</option>)
+                    })
+                }
+            </select>
+        )
+    }
+
+    _buildSpecialLevelCell(selectedSpecialLevel) {
+        return (
+            <select className="select-default select-special-level" value={selectedSpecialLevel} onChange={(e) => console.log(e)}>
+                {this.specialLevelList.map(item => {
+                    const style = { backgroundColor: specialLevelListWithColor[item.value] };
+
+                    return (<option key={item.value} style={style}>{item.label}</option>)
+                })}
+            </select>
+        )
     }
 
     _buildDataRow(dataItem, isChecked) {
@@ -145,94 +152,27 @@ export class DataGrid extends PureComponent {
                     <input type="checkbox" checked={isChecked} onChange={() => this._handleCheckPlayer(dataItem.CustId)} />
                 </Cell>
                 <Cell className="center-align">{dataItem.Status}</Cell>
-                <Cell className="center-align">
-                    <button className="btn-default btn-link username-link" onClick={(e) => this._handleSelectPlayer(e, dataItem)}>{dataItem.UserName}</button>
-                    <button className="btn-default btn-link btn-icon cell-menu"
-                        onMouseEnter={this.handleEnterContextMenu} onMouseLeave={this.handleLeaveContextMenu}>
-                        <i className="material-icons">edit</i>
-                    </button>
-                </Cell>
+                <Cell className="center-align">{this._buildUserNameCell(dataItem)}</Cell>
                 <Cell className="center-align">{dataItem.SystemId}</Cell>
                 <Cell className="center-align">{dataItem.Currency}</Cell>
                 <Cell className="center-align">{dataItem.CurrentBalance}</Cell>
                 <Cell className="center-align">{dataItem.OutstandingBalance}</Cell>
-                <Cell className="center-align">
-                    <select className="select-default select-oddsgroup" value={dataItem.OddsGroup} onChange={(e) => console.log(e)}>
-                        {
-                            Object.keys(oddsGroupListWithStyle).map(item => {
-                                return (
-                                    <option key={item} style={oddsGroupListWithStyle[item]}>{item}</option>
-                                )
-                            })
-                        }
-                    </select>
-                </Cell>
+                <Cell className="center-align">{this._buildOddsGroupCell(dataItem.OddsGroup)}</Cell>
                 <Cell className="center-align"><Switcher checked={dataItem.BaStatus} onChange={this._handleChangeBaStatus} /></Cell>
-                <Cell className="center-align">
-                    <select className="select-default select-special-level" value={dataItem.SpecialLevel} onChange={(e) => console.log(e)}>
-                        {this.specialLevelList.map(item => {
-                            const style = { backgroundColor: specialLevelListWithColor[item.value] };
-                            return (
-                                <option key={item.value} style={style}>{item.label}</option>
-                            )
-                        })}
-                    </select>
-                </Cell>
+                <Cell className="center-align">{this._buildSpecialLevelCell(dataItem.SpecialLevel)}</Cell>
                 <Cell className="center-align">{dataItem.LastTransaction}</Cell>
                 <Cell className="center-align">{dataItem.Email}</Cell>
             </Row>
         )
     }
 
-    _buildReportTitleContent() {
-        const { selectedPlayer } = this.props;
-        const { selectedPlayerIdList } = this.state;
-        const titleContentList = [];
-        if (selectedPlayer) {
-            titleContentList.push(
-                <React.Fragment key="selectedPlayer">
-                    <span className="link" onClick={() => this.props.setSelectedPlayer(null)}>Previous search result</span>
-                    <span> <strong>></strong> Player: {selectedPlayer.userName} ({selectedPlayer.currency})</span>
-                </React.Fragment>
-            )
-        }
-        else if (selectedPlayerIdList.length > 0) {
-            titleContentList.push(
-                <React.Fragment key="batchUpdate">
-                    <BatchUpdateButton />
-                    <button className="btn-outline btn-outline-light" type="button">
-                        {selectedPlayerIdList.length} Player(s) Selected <span className="close">&times;</span>
-                    </button>
-                </React.Fragment>
-            )
-        }
-        else {
-            const { playerList } = this.props;
-            titleContentList.push(<span key="searchResult">{`Search Result: ${playerList.length} Player(s)`}</span>);
-        }
-
-        titleContentList.push(
-            (
-                <span key="caretBlock" className="caret-block">
-                    {this._renderDropdownColumn()}
-                    <span className="icon-excel-wrapper"><i className="icon-excel" title={LangHelper.getSingleResource('ExportToExcel')}></i></span>
-                </span>
-            )
-        );
-
-        return titleContentList;
-    }
-
     render() {
         const { playerList, selectedPlayer } = this.props;
-        const { pagingOption, contextMenuPosition, isOpenContextMenu } = this.state;
-
+        const { contextMenuPosition, isOpenContextMenu } = this.state;
         const dataList = selectedPlayer ? [playerList.find(item => item.CustId === selectedPlayer.custId)] : playerList;
 
-        return playerList && (
-            <div className="result-content">
-                <Pager pageOption={pagingOption} />
-                <ReportTitle content={this._buildReportTitleContent()} />
+        return (
+            <>
                 <Table minWidth={650}
                     autoWidth={true}
                     maxWidth={this.maxWidth}
@@ -241,22 +181,21 @@ export class DataGrid extends PureComponent {
                     adjustedHeight={32}
                     header={this._renderHeader()}
                     body={this._renderDataSection(dataList)}
-                    containerPadding={30}
-                />
+                    containerPadding={30} />
                 <ContextMenu isOpenContextMenu={isOpenContextMenu} position={contextMenuPosition} />
-            </div>
+            </>
         );
     }
 }
 
 function mapDispatchToProps(dispatch) {
-    const { setSelectedPlayer } = ActionCreators;
-    return bindActionCreators({ setSelectedPlayer }, dispatch);
+    const { setSelectedPlayer, setSelectedPlayerIdList } = ActionCreators;
+    return bindActionCreators({ setSelectedPlayer, setSelectedPlayerIdList }, dispatch);
 }
 
 function mapStateToProps(state) {
-    const { playerList, selectedPlayer } = state;
-    return Object.assign({}, { playerList, selectedPlayer });
+    const { playerList, selectedPlayer, selectedPlayerIdList } = state;
+    return Object.assign({}, { playerList, selectedPlayer, selectedPlayerIdList });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DataGrid);

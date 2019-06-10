@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
-import { ActionCreators } from '../actions/index'
-import DataGrid from './DataGrid'
+import { ActionCreators } from '../actions'
+import Content from './Content'
 import FormFilter from './FormFilter'
 import Loader from '../../../../components/Loader'
 import AppLayout from '../../../../layouts/AppLayout'
@@ -13,15 +13,15 @@ const AppContainer = (props) => {
         <AppLayout>
             <Loader isLoading={props.isLoading} />
             <FormFilter />
-            <DataGrid />
+            <Content />
             <PlayerDetail />
         </AppLayout>
     );
 }
 
 function mapDispatchToProps(dispatch) {
-    const { setParams } = ActionCreators;
-    return bindActionCreators({ setParams }, dispatch);
+    const { } = ActionCreators;
+    return bindActionCreators({ }, dispatch);
 }
 
 function mapStateToProps(state) {

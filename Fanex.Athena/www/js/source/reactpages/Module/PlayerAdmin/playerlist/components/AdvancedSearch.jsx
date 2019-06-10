@@ -42,7 +42,7 @@ export class AdvancedSearch extends PureComponent {
         console.log(this.specialLevelList);
 
         return (
-            <React.Fragment>
+            <>
                 <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
                     <div className="form-group">
                         <label className="label-text">Currency</label>
@@ -112,7 +112,7 @@ export class AdvancedSearch extends PureComponent {
                             onChange={(currentItem, selectedItemsKey) => console.log(selectedItemsKey)} />
                     </div>
                 </div>
-            </React.Fragment>
+            </>
         );
     }
 }
