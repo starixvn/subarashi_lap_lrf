@@ -889,6 +889,7 @@
     <Content Include="www\js\source\reactpages\lib\site.js" />
     <Content Include="www\js\source\reactpages\lib\Cache.js" />
     <Content Include="www\js\source\reactpages\lib\store.js" />
+    <Content Include="www\js\source\reactpages\lib\validationHelper.js" />
     <Content Include="www\js\source\reactpages\lib\__tests__\DataService.test.js" />
     <Content Include="www\js\source\reactpages\lib\__tests__\Cache.test.js" />
     <Content Include="www\js\source\reactpages\lib\__tests__\excel.test.js" />

@@ -12,7 +12,7 @@ import AppData from '@jsroot/lib/AppData'
 import { Service, Api } from '../lib/service'
 import { ReportLevel } from '../../../constants/report'
 import Report from '../../../lib/report'
-
+import { validateBaseCurrency } from '../../../lib/validationHelper'
 const RANGE_MONTH_CONSTRAINT = 3;
 
 export class FormFilter extends Component {
@@ -23,7 +23,7 @@ export class FormFilter extends Component {
     get isValidModel() {
         const { selectedSubsidiary, selectedProduct } = this.props;
         return (!AppData.subsidiaryList || selectedSubsidiary !== "") && selectedProduct !== ""
-            && Report.validateBaseCurrency(this.props.selectedBaseCurrency);
+            && validateBaseCurrency(this.props.selectedBaseCurrency);
     }
 
     submit = (event) => {

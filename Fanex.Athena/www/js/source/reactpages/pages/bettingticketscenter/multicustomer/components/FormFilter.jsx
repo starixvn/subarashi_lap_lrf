@@ -20,6 +20,7 @@ import AppData from '@jsroot/lib/AppData'
 import DataService from '@jsroot/lib/DataService.js'
 import Service from '../../common/lib/Service'
 import ApiUrl from '../../common/constants/apiUrl'
+import { validateBaseCurrency } from '@jsroot/lib/validationHelper'
 
 const ToastMsg = () => (
     <div>
@@ -49,7 +50,10 @@ export class FormFilter extends Component {
     }
 
     get isValidModel() {
-        return !!this.props.selectedProduct && !!this.props.selectedStatus && !!this.props.selectedLiveStatus && !!this.props.selectedCurrency;
+        return !!this.props.selectedProduct &&
+            !!this.props.selectedStatus && !!this.props.selectedLiveStatus
+            && !!this.props.selectedCurrency
+            && validateBaseCurrency(this.props.selectedBaseCurrency);
     }
 
     isSingleDate = (dateRange) => {

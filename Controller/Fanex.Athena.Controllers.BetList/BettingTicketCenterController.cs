@@ -49,7 +49,8 @@
                 StatusList = GetStatusList(),
                 ProductOptionList = GetProductOptionList(FunctionNames.BettingTicketCenterMultiCustomers),
                 MinDate = _balanceUpDataAccess.GetBalanceUp().BalanceUpDay,
-                IsAllowedCustomerComm = SessionService.LicenseeSession.IsAllowedCustomerComm
+                IsAllowedCustomerComm = SessionService.LicenseeSession.IsAllowedCustomerComm,
+                SelectedBaseCurrency = SessionService.UserSession.DefaultBaseCurrency
             };
             return View("~/Views/Desktop/BetList/BettingTicketCenter/MultiCustomer.cshtml", viewModel);
         }
@@ -62,7 +63,9 @@
                 StatusList = GetStatusList(),
                 PlatformList = GetPlatformList(),
                 ProductOptionList = GetProductOptionList(),
-                IsAllowedCustomerComm = SessionService.LicenseeSession.IsAllowedCustomerComm
+                IsAllowedCustomerComm = SessionService.LicenseeSession.IsAllowedCustomerComm,
+                SelectedBaseCurrency = SessionService.UserSession.DefaultBaseCurrency
+
             };
             return View("~/Views/Desktop/BetList/BettingTicketCenter/SingleCustomer.cshtml", viewModel);
         }
@@ -70,6 +73,7 @@
         public ActionResult RefNo()
         {
             ViewBag.BalanceUpDay = _balanceUpDataAccess.GetBalanceUp().BalanceUpDay;
+            ViewBag.SelectedBaseCurrency = SessionService.UserSession.DefaultBaseCurrency;
             return View(
                 "~/Views/Desktop/BetList/BettingTicketCenter/RefNo.cshtml",
                 SessionService.LicenseeSession.IsAllowedCustomerComm);
@@ -82,7 +86,9 @@
                 StatusList = GetRunningStatusList(),
                 CurrencyList = GetCurrencyList(),
                 ProductOptionList = GetProductOptionList(FunctionNames.BettingTicketCenterRunning),
-                IsAllowedCustomerComm = SessionService.LicenseeSession.IsAllowedCustomerComm
+                IsAllowedCustomerComm = SessionService.LicenseeSession.IsAllowedCustomerComm,
+                SelectedBaseCurrency = SessionService.UserSession.DefaultBaseCurrency
+
             };
 
             return View("~/Views/Desktop/BetList/BettingTicketCenter/Running.cshtml", viewModel);

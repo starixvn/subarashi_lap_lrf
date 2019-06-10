@@ -16,6 +16,7 @@ import DataService from '@jsroot/lib/DataService.js'
 import ApiUrl from '../../common/constants/apiUrl'
 import Service from '../../common/lib/Service'
 import UserGuide from '@jsroot/components/UserGuide'
+import { validateBaseCurrency } from '@jsroot/lib/validationHelper'
 
 export class FormFilter extends Component {
     constructor(props) {
@@ -26,7 +27,10 @@ export class FormFilter extends Component {
     }
 
     get isValidModel() {
-        return !!this.props.selectedProduct && !!this.props.selectedStatus && !!this.props.selectedCurrency;
+        return !!this.props.selectedProduct
+            && !!this.props.selectedStatus
+            && !!this.props.selectedCurrency
+            && validateBaseCurrency(this.props.selectedBaseCurrency);
     }
 
     submit = (event) => {

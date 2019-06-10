@@ -6,7 +6,7 @@
 @using Fanex.Athena.Model.Core.DataDomain;
 @model bool
 @{
-    var baseCurrencyList = SystemConstants.BaseCurrencyList.Select(c => 
+    var baseCurrencyList = SystemConstants.BaseCurrencyList.Select(c =>
     new { value = c.Value, label = c.Value }).ToList();
 }
 @section pagecss {
@@ -19,16 +19,16 @@
 
 @section globaljscode{
     window.initialState = {
-        refno: "",
-        username: "",
-        selectedBaseCurrency: '@(baseCurrencyList.Any() ? baseCurrencyList.First().value : string.Empty)',
-        isLoading: false,
-        isConvertAll: true
+    refno: "",
+    username: "",
+    selectedBaseCurrency: '@ViewBag.SelectedBaseCurrency',
+    isLoading: false,
+    isConvertAll: true
     };
     window._AppData = {
-        isAllowedCustomerComm: @Model.ToJson(),
-        baseCurrencyList:@Html.Raw(baseCurrencyList.ToJson()),
-        balanceUpDay: '@(ViewBag.BalanceUpDay.ToString("MM/dd/yyyy"))'
+    isAllowedCustomerComm: @Model.ToJson(),
+    baseCurrencyList:@Html.Raw(baseCurrencyList.ToJson()),
+    balanceUpDay: '@(ViewBag.BalanceUpDay.ToString("MM/dd/yyyy"))'
     };
 }
 <div id="app-container">

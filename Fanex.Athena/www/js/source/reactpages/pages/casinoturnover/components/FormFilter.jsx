@@ -14,7 +14,8 @@ import CheckBox from '@jsroot/components/CheckBox'
 import DataService from '@jsroot/lib/DataService.js'
 import { Service } from '../lib/service'
 import ReportExcel from '../lib/reportExcel'
-import Report from '../../../lib/report.js';
+
+import { validateBaseCurrency } from '../../../lib/validationHelper'
 
 const RANGE_MONTH_CONSTRAINT = 1;
 const CUSTOMER_SEARCH_URL = Site.resolveClientUrl("SearchCustomerAPI/SearchCustomer");
@@ -29,7 +30,7 @@ export class FormFilter extends Component {
 
     get isValidModel() {
         return this.props.selectedProduct && this.props.selectedStatus
-            && Report.validateBaseCurrency(this.props.selectedBaseCurrency);
+            && validateBaseCurrency(this.props.selectedBaseCurrency);
     }
 
     onSubmit = () => {

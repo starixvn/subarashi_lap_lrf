@@ -3410,29 +3410,6 @@ var grandTotalCellStyle = {
 
 /***/ }),
 
-/***/ "./www/js/source/reactpages/constants/report.js":
-/*!******************************************************!*\
-  !*** ./www/js/source/reactpages/constants/report.js ***!
-  \******************************************************/
-/*! exports provided: ReportLevel, ReportBy */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReportLevel", function() { return ReportLevel; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReportBy", function() { return ReportBy; });
-var ReportLevel = {
-  MAIN: 0,
-  LICENSEE: 1,
-  CUSTOMER: 2
-};
-var ReportBy = {
-  DAILY: 1,
-  MONTHLY: 2
-};
-
-/***/ }),
-
 /***/ "./www/js/source/reactpages/layouts/AppLayout.jsx":
 /*!********************************************************!*\
   !*** ./www/js/source/reactpages/layouts/AppLayout.jsx ***!
@@ -3879,101 +3856,6 @@ function () {
 
 /***/ }),
 
-/***/ "./www/js/source/reactpages/lib/report.js":
-/*!************************************************!*\
-  !*** ./www/js/source/reactpages/lib/report.js ***!
-  \************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Report; });
-/* harmony import */ var _constants_report__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants/report */ "./www/js/source/reactpages/constants/report.js");
-/* harmony import */ var _site__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./site */ "./www/js/source/reactpages/lib/site.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-
-
-
-
-var fetchData = function fetchData(relativeUrl, params) {
-  var url = _site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl(relativeUrl);
-  return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(url, params.data, {
-    headers: {
-      'X-Requested-With': 'XMLHttpRequest',
-      '__RequestVerificationToken': _site__WEBPACK_IMPORTED_MODULE_1__["default"].getXsrfToken()
-    }
-  });
-};
-
-var Report =
-/*#__PURE__*/
-function () {
-  function Report() {
-    _classCallCheck(this, Report);
-  }
-
-  _createClass(Report, null, [{
-    key: "getDrilldownDateRange",
-    value: function getDrilldownDateRange(reportBy, fromDate, toDate, drilldownDate) {
-      var fdate = typeof drilldownDate === "string" ? new Date(drilldownDate) : drilldownDate;
-      var tdate = fdate;
-
-      if (Number(reportBy) === _constants_report__WEBPACK_IMPORTED_MODULE_0__["ReportBy"].MONTHLY) {
-        var fday = 1;
-        var month = fdate.getMonth();
-        var year = fdate.getFullYear();
-        var orignalFDate = new Date(fromDate);
-
-        if (month === orignalFDate.getMonth()) {
-          fday = orignalFDate.getDate();
-        }
-
-        fdate = new Date(year, month, fday, 0, 0, 0, 0);
-        var originalTDate = new Date(toDate);
-
-        if (month === originalTDate.getMonth()) {
-          var tday = originalTDate.getDate();
-          tdate = new Date(year, month, tday, 0, 0, 0, 0);
-        } else {
-          tdate = new Date(year, month + 1, 0);
-        }
-      }
-
-      return {
-        fromDate: fdate,
-        toDate: tdate
-      };
-    }
-  }, {
-    key: "validateBaseCurrency",
-    value: function validateBaseCurrency() {
-      var baseCurrency = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
-      return baseCurrency && window._AppData.baseCurrencyList.find(function (x) {
-        return x.value === baseCurrency;
-      });
-    }
-  }, {
-    key: "fetchGridData",
-    value: function fetchGridData(relativeUrl, params) {
-      return fetchData(relativeUrl, params);
-    }
-  }]);
-
-  return Report;
-}();
-
-
-
-/***/ }),
-
 /***/ "./www/js/source/reactpages/lib/site.js":
 /*!**********************************************!*\
   !*** ./www/js/source/reactpages/lib/site.js ***!
@@ -4110,6 +3992,25 @@ function () {
 }();
 
 
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/lib/validationHelper.js":
+/*!**********************************************************!*\
+  !*** ./www/js/source/reactpages/lib/validationHelper.js ***!
+  \**********************************************************/
+/*! exports provided: validateBaseCurrency */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "validateBaseCurrency", function() { return validateBaseCurrency; });
+var validateBaseCurrency = function validateBaseCurrency() {
+  var baseCurrency = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
+  return baseCurrency && window._AppData.baseCurrencyList.find(function (x) {
+    return x.value === baseCurrency;
+  });
+};
 
 /***/ }),
 
@@ -4533,7 +4434,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @jsroot/lib/DataService.js */ "./www/js/source/reactpages/lib/DataService.js");
 /* harmony import */ var _lib_service__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../lib/service */ "./www/js/source/reactpages/pages/casinoturnover/lib/service.js");
 /* harmony import */ var _lib_reportExcel__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../lib/reportExcel */ "./www/js/source/reactpages/pages/casinoturnover/lib/reportExcel.js");
-/* harmony import */ var _lib_report_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../../lib/report.js */ "./www/js/source/reactpages/lib/report.js");
+/* harmony import */ var _lib_validationHelper__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../../lib/validationHelper */ "./www/js/source/reactpages/lib/validationHelper.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
@@ -4863,7 +4764,7 @@ function (_Component) {
   }, {
     key: "isValidModel",
     get: function get() {
-      return this.props.selectedProduct && this.props.selectedStatus && _lib_report_js__WEBPACK_IMPORTED_MODULE_15__["default"].validateBaseCurrency(this.props.selectedBaseCurrency);
+      return this.props.selectedProduct && this.props.selectedStatus && Object(_lib_validationHelper__WEBPACK_IMPORTED_MODULE_15__["validateBaseCurrency"])(this.props.selectedBaseCurrency);
     }
   }]);
 

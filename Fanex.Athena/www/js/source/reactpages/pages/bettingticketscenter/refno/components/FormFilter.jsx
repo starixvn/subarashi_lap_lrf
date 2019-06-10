@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import Select from 'react-select'
-import { DateRange } from '@jsroot/components/date-range/index'
 import AutoComplete from '@jsroot/components/auto-complete'
 import CheckBox from '@jsroot/components/CheckBox'
 import CollapsiblePanel from '@jsroot/components/collapsible-panel'
@@ -15,6 +14,7 @@ import DataService from '@jsroot/lib/DataService.js'
 import ApiUrl from '../../common/constants/apiUrl'
 import Service from '../../common/lib/Service'
 import UserGuide from '@jsroot/components/UserGuide'
+import { validateBaseCurrency } from '@jsroot/lib/validationHelper'
 
 export class FormFilter extends Component {
     constructor(props) {
@@ -22,7 +22,7 @@ export class FormFilter extends Component {
     }
 
     get isValidModel() {
-        return this.props.refno !== "";
+        return this.props.refno !== "" && validateBaseCurrency(this.props.selectedBaseCurrency);
     }
 
     submit = (event) => {
