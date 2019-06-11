@@ -6,13 +6,14 @@
 
 namespace Fanex.Athena.Model.Forecast.MetaModel
 {
+    using Fanex.Athena.Model.Core.MetaModel;
     using System;
 
     /// <summary>
     /// ForecastAhMetaModel class.
     /// </summary>
     [Serializable]
-    public class ForecastAHMetaModel : ForecastBaseMetaModel
+    public class ForecastAHMetaModel : ForecastBaseMetaModel, IMetalModelValidation
     {
         public int CurrentScore { get; set; }
 

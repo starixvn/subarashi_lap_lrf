@@ -4,12 +4,14 @@
 // </copyright>
 // --------------------------------------------------------------------------
 
+using Fanex.Athena.Model.Core.MetaModel;
+
 namespace Fanex.Athena.Model.Forecast.MetaModel
 {
     /// <summary>
     /// Forecast HDP OU MetaModel class.
     /// </summary>
-    public class ForecastHandicapOverUnderMetaModel : ForecastBaseMetaModel
+    public class ForecastHandicapOverUnderMetaModel : ForecastBaseMetaModel, IMetalModelValidation
     {
         public ForecastHandicapOverUnderMetaModel()
         {

@@ -37,6 +37,7 @@ namespace Fanex.Athena.Controllers.Forecast
             _forecastAhService = forecastAhService;
         }
 
+        [ValidationWebRequest]
         public async Task<ActionResult> Index(ForecastAHMetaModel metaModel)
         {
             metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);

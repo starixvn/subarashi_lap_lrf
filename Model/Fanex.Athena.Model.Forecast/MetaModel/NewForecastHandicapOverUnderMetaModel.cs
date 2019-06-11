@@ -4,12 +4,14 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
+using Fanex.Athena.Model.Core.MetaModel;
+
 namespace Fanex.Athena.Model.Forecast.MetaModel
 {
     /// <summary>
     /// NewForecast HDP OU MetaModel class.
     /// </summary>
-    public class NewForecastHandicapOverUnderMetaModel : ForecastBaseMetaModel
+    public class NewForecastHandicapOverUnderMetaModel : ForecastBaseMetaModel, IMetalModelValidation
     {
         public NewForecastHandicapOverUnderMetaModel()
         {
@@ -37,11 +39,11 @@ namespace Fanex.Athena.Model.Forecast.MetaModel
 
         public bool IsShowFT { get; set; }
 
-        public bool IsValid
+        public override bool IsValid
         {
             get
             {
-                return LeagueId > 0 && MatchId > 0;
+                return base.IsValid && LeagueId > 0 && MatchId > 0;
             }
         }
     }
