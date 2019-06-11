@@ -4,11 +4,20 @@ exports[`FormFilter  render correctly 1`] = `
 <CollapsiblePanel
   className="page-filter"
   stickyFooter={
-    <i
-      className="icon-excel right"
-      onClick={[Function]}
-      title="ExportToExcel"
-    />
+    <div>
+      <i
+        className="icon-excel right"
+        onClick={[Function]}
+        title="ExportToExcel"
+      />
+      <UserGuide
+        className="icon-book right"
+        content=""
+        contentTitle="BettingTicketCenter"
+        onClick={[Function]}
+        title="UserGuide"
+      />
+    </div>
   }
 >
   <div

@@ -216,7 +216,7 @@
         [TestCase(0, -2)]
         [TestCase(1, -2)]
         [TestCase(1, 1)]
-        public void Index_IsExportExcelTrueWithDifferentLevelAndCurrency_UpdateMetanData(int level, int currencyId)
+        public async Task Index_IsExportExcelTrueWithDifferentLevelAndCurrency_UpdateMetanData(int level, int currencyId)
         {
             // Arrange
             const int CustId = 1, DrilldownCurrency = 2;
@@ -252,10 +252,10 @@
 
             var expectedFromDate = level > 0 && currencyId <= 0 ? fromDate : metaModel.FromDate;
             var expectedToDate = level > 0 && currencyId <= 0 ? toDate : metaModel.ToDate;
-            var expectedCurrency = level > 0 && currencyId > 0 ? DrilldownCurrency : metaModel.CurrencyId;
+            var expectedCurrency = level > 0 && currencyId >= 0 ? DrilldownCurrency : metaModel.CurrencyId;
 
             // Action
-            _controller.Index(metaModel, fromDate, toDate, level, DrilldownCurrency, CustId);
+            await _controller.Index(metaModel, fromDate, toDate, level, DrilldownCurrency, CustId);
 
             // Assert
             Assert.Multiple(() =>

@@ -48,9 +48,7 @@ namespace Fanex.Athena.Excel.Report.UnitTests
                         Code = "SB",
                         Status = true
                     }
-                },
-            CurrencyName = "AUD",
-            BaseCurrency = "USD"
+                }
         };
 
         private static readonly ColossusBetWinLossViewModel ViewModel = new ColossusBetWinLossViewModel
@@ -138,7 +136,7 @@ namespace Fanex.Athena.Excel.Report.UnitTests
             // Arrange
             var row = ExcelTestHelper.MockGetRow(FakeSheet, ColumnCount, 0);
             var excel = CreateExcel();
-            const string ExpectedTitle = "Colossus Bets Win Loss, 01/01/2017 --> 02/02/2017, Currency: AUD, Base Currency: USD";
+            const string ExpectedTitle = "Colossus Bets Win Loss, 01/01/2017 --> 02/02/2017, All Currencies";
 
             // Action
             excel.Public_AssignTitle(FakeSheet);

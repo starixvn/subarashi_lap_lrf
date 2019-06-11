@@ -94,10 +94,9 @@ namespace Fanex.Athena.Api.Report
                 metaModel.DrillDownLevel > 0 ? metaModel.DrillDownFromDate : metaModel.FromDate,
                 currency.Key == 0 ? "All" : currency.Value);
 
-            if (metaModel.DrillDownLevel > 0 && metaModel.CurrencyId > 0)
-            {
-                metaModel.CurrencyId = metaModel.DrillDownCurrencyId;
-            }
+            metaModel.CurrencyId = metaModel.DrillDownLevel > 0 && metaModel.CurrencyId >= 0
+                                    ? metaModel.DrillDownCurrencyId
+                                    : metaModel.CurrencyId;
 
             if (metaModel.DrillDownLevel > 0 && metaModel.CurrencyId <= 0)
             {

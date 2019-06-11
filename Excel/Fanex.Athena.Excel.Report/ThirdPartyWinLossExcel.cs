@@ -114,7 +114,7 @@ namespace Fanex.Athena.Excel.Report
         protected override void AssignTitle(ISheet sheet)
         {
             var reportName = _metaModel.ProductName + " " + ViewResources.WinLoss;
-            var currencyTitle = ReportExcelHelper.GetTitleBaseCurrency(_metaModel.BaseCurrency, _metaModel.CurrencyName);
+            var currencyTitle = ReportExcelHelper.GetTitleCurrencyName(_metaModel.CurrencyId, _metaModel.CurrencyName);
             var reportTitle = ReportExcelHelper.GenerateReportTitle(reportName, _metaModel.FromDate, _metaModel.ToDate, currencyTitle);
             
             sheet.SetTextRowValue(TemplateSheet, RowTitleTemplate, ColumnTemplateCount, reportTitle);

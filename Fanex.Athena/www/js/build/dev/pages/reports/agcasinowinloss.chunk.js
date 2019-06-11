@@ -4011,10 +4011,10 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                 AgCasinoWinLossOption.urlExcelData = temp;
             },
 
-            setReportTitle: function (currencyId, fromdate, todate, baseCurrency) {
+            setReportTitle: function (currencyId, fromdate, todate) {
                 const titlePattern = Site.getSingleResource('AGCasinoWinLoss') + ', {0} → {1}, {2}';
-                const currencyTitle = Report.getCurrencyTitle(currencyId, baseCurrency);
-                const title = $.format(titlePattern, moment(fromdate).format('MM/DD/YYYY'), moment(todate).format('MM/DD/YYYY'), currencyTitle);
+                const currencyName = Report.getCurrencyNameForReportTitle(currencyId);
+                const title = $.format(titlePattern, moment(fromdate).format('MM/DD/YYYY'), moment(todate).format('MM/DD/YYYY'), currencyName);
                 $('.report-title').html(title);
                 $('.panel-heading').removeClass('hide');
             },
@@ -4036,7 +4036,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                             BaseCurrency: _submitData.BaseCurrency
                         };
 
-                        _me.setReportTitle($('#CurrencyId').val(), _submitData.FromDate, _submitData.ToDate, _submitData.BaseCurrency);
+                        _me.setReportTitle($('#CurrencyId').val(), _submitData.FromDate, _submitData.ToDate);
                     }
 
                     Report.renderBreadCrumb(levelNumber);
@@ -4129,7 +4129,11 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                     success: function (response) {
                         _me.ajaxComplete(data.level, response);
                         if (response != null && response.Data.length > 0) {
-                            _me.setReportTitle(data.currencyId, fdate, tdate, _drilldownData.BaseCurrency);
+                            if (data.level > 0 && Number(param.CurrencyId) === 0) {
+                                _me.setReportTitle(data.currencyId, fdate, tdate);
+                            } else {
+                                _me.setReportTitle(param.CurrencyId, fdate, tdate);
+                            }
                         }
 
                         _me.setExcelUrl(data.level, data.currencyId, data.custId, fdate, tdate);
@@ -4157,7 +4161,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                     const fromdate = new Date(_drilldownData.FromDate);
                     const todate = new Date(_drilldownData.ToDate);
                     const currencyId = _drilldownData.CurrencyId;
-                    _me.setReportTitle(currencyId, fromdate, todate, _submitData.BaseCurrency);
+                    _me.setReportTitle(currencyId, fromdate, todate);
                 }
                 else if (level === 1) {
                     _me.bindData(1, cacheData[level]);

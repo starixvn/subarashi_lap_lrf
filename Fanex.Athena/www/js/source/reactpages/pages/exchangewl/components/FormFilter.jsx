@@ -18,8 +18,6 @@ const RANGE_MONTH_CONSTRAINT = 3;
 export class FormFilter extends Component {
     constructor(props) {
         super(props);
-        this.baseCurrencyList = AppData.baseCurrencyList;
-        this.defaultBaseCurrency = props.selectedBaseCurrency;
     }
 
     submit = (event) => {
@@ -90,8 +88,7 @@ export class FormFilter extends Component {
 
         const title = Service.getReportTitle(
             { fromDate: excelData.FromDate, toDate: excelData.ToDate }, 
-            excelData.CurrencyName,
-            excelData.BaseCurrency || excelData.CurrencyName , 
+            excelData.BaseCurrency ? excelData.BaseCurrency : excelData.CurrencyName,
             level === ReportLevel.MAIN ? excelData.CurrencyId === 0 : false);
         const excel = new ReportExcel(gridData, title, level, isAllowedCustomerComm, excelData.ReportBy);
         excel.export(() => {
@@ -103,11 +100,12 @@ export class FormFilter extends Component {
         let param = {};
 
         const { fromDate, toDate } = this.props.dateRange;
+        const baseCurrency = BaseCurrency.find(x => x.value === this.props.selectedCurrency.value);
         
         param = {
             CurrencyId: this.props.selectedCurrency.value,
-            CurrencyName: this.props.selectedCurrency.label,
-            BaseCurrency: this.props.selectedBaseCurrency,
+            BaseCurrency: baseCurrency ? baseCurrency.text : "",
+            CurrencyName: baseCurrency ? baseCurrency.text : this.props.selectedCurrency.label,
             FromDate: Site.convertDateToString(fromDate),
             ToDate: Site.convertDateToString(toDate),
             ReportBy: this.props.selectedReportBy,
@@ -155,35 +153,8 @@ export class FormFilter extends Component {
             name='form-field-name'
             value={selectedCurrency}
             options={currencyList}
-            onChange={(item) => this._onChangeCurrency(item)} />
+            onChange={(item) => this.props.setSelectedCurrency(item)} />
    }
-
-   _onChangeCurrency = (currency) => {
-       const currencyName = currency.label;
-       const baseCurrencyList = AppData.baseCurrencyList;
-       let baseCurrency = this.defaultBaseCurrency;
-       if(currency.value > 0 && !this.baseCurrencyList.find(x => x.label === currencyName)){
-            this.baseCurrencyList = AppData.baseCurrencyList.slice(0);
-            this.baseCurrencyList.push({value: currencyName, label: currencyName});      
-            baseCurrency = currencyName;
-        } else {
-            this.baseCurrencyList = AppData.baseCurrencyList;
-        }
-
-        this.props.setSelectedCurrency(currency)
-        this.props.setSelectedBaseCurrency(baseCurrency);
-    }
-    
-    _renderBaseCurrencySelectList() {
-        const { selectedBaseCurrency } = this.props;
-        const baseCurrencyList = this.baseCurrencyList;
-        return baseCurrencyList && baseCurrencyList.length ? (
-            <Select instanceId="ddlBased"
-                value={selectedBaseCurrency}
-            options={baseCurrencyList}
-            onChange={(item) => this.props.setSelectedBaseCurrency(item.value)} />
-        ) : null;
-    }
 
     _renderReportByOption() {
         const { reportByOption, selectedReportBy } = this.props;
@@ -226,13 +197,6 @@ export class FormFilter extends Component {
                         <div className='form-group'>
                             <label className='label-text'>{LangHelper.getSingleResource('Currency')}</label>
                             {this._renderCurrencySelectList()}
-                        </div>
-                    </div>
-
-                    <div className="col-12 col-md-2 col-sm-3 col-lg-2 col-xl-2">
-                        <div className="form-group">
-                            <label className="label-text">{LangHelper.getSingleResource("BaseCurrency")}</label>
-                            {this._renderBaseCurrencySelectList()}
                         </div>
                     </div>
 

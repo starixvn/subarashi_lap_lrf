@@ -147,7 +147,7 @@
 
                         _systemId = response.SystemId;
                         _memberId = response.MemberId;
-                        _me.setReportTitle(_submitData.CurrencyId, _submitData.FromDate, _submitData.ToDate, _submitData.BaseCurrency);
+                        _me.setReportTitle(_submitData.CurrencyId, _submitData.FromDate, _submitData.ToDate);
                         _me.setExcelUrl(0, 0, 0, '', '', '');
                         _me.ajaxComplete(0, response);
                     },
@@ -176,9 +176,10 @@
                 WinLossByProductOption.urlExcelData = temp;
             },
 
-            setReportTitle: function (currencyId, fromdate, todate, baseCurrency) {
-                const titlePattern = Site.getSingleResource('WinLossByProduct') + ', {0} → {1}, {2}{3}';
-                const currencyNameOnTitle = Report.getCurrencyTitle(currencyId, baseCurrency)
+            setReportTitle: function (currencyId, fromdate, todate, currencyName) {
+                const titlePattern = Site.getSingleResource('WinLossByProduct') + ', {0} → {1} - {2}{3}';
+                const currencyNameOnTitle = currencyName ? Site.getSingleResource('Viewin').replace('{0}', currencyName)
+                                                        : Report.getCurrencyNameForReportTitle(currencyId);
                 let licenseeWLNote = getLicenseeWLNote(_submitData.ProductOptions, _systemId);
                 licenseeWLNote = licenseeWLNote === '' ? '' : ', ' + licenseeWLNote;
 
@@ -325,7 +326,7 @@
 
                 if (level === 0) {
                     _me.setExcelUrl(0, 0, 0, '', '', '');
-                    _me.setReportTitle(_submitData.CurrencyId, _submitData.FromDate, _submitData.ToDate, _submitData.BaseCurrency);
+                    _me.setReportTitle(_submitData.CurrencyId, _submitData.FromDate, _submitData.ToDate);
                 }
                 else {
                     WinLossByProductOption.urlExcelData = WinLossByProductOption.urlExcelData.replace('level=2', 'level=1');
@@ -399,8 +400,13 @@
                     success: function (response) {
                         _me.ajaxComplete(level, response);
                         if (response !== null && response.Data.length > 0) {
-                            _me.setReportTitle(currencyId, dateRange.FromDate, dateRange.ToDate, _submitData.BaseCurrency);
-                            
+                            if (level > 0 && param.CurrencyId === '0') {
+                                const viewInCurrency = param.BaseCurrency ? param.BaseCurrency.toUpperCase() : currencyName;
+                                _me.setReportTitle(currencyId, dateRange.FromDate, dateRange.ToDate, viewInCurrency);
+                            } else {
+                                _me.setReportTitle(param.CurrencyId, dateRange.FromDate, dateRange.ToDate);
+                            }
+
                             _me.setExcelUrl(level, currencyId, customerId, dateRange.FromDate, dateRange.ToDate, currencyName);
                         }
                     },

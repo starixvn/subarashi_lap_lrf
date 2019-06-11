@@ -246,9 +246,6 @@
                 Level = level
             };
 
-            var expectedFromDate = level == 0 ? metaModel.FromDate : fromDate;
-            var expectedToDate = level == 0 ? metaModel.ToDate : toDate;
-
             // Action
             await _controller.Index(metaModel, fromDate, toDate, level, CurrencyId, CustId);
 
@@ -256,8 +253,8 @@
             Assert.Multiple(() =>
             {
                 _controller.Received().ExcelStream(Arg.Any<IWorkbook>(), Arg.Any<string>());
-                Assert.That(metaModel.FromDate, Is.EqualTo(expectedFromDate));
-                Assert.That(metaModel.ToDate, Is.EqualTo(expectedToDate));
+                Assert.That(metaModel.DrillDownFromDate, Is.EqualTo(fromDate));
+                Assert.That(metaModel.DrillDownToDate, Is.EqualTo(toDate));
             });
         }
 

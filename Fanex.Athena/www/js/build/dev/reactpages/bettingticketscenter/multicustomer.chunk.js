@@ -4588,6 +4588,50 @@ var SET_REPORT_TITLE = "SET_REPORT_TITLE";
 
 /***/ }),
 
+/***/ "./www/js/source/reactpages/actions/userGuideAction.js":
+/*!*************************************************************!*\
+  !*** ./www/js/source/reactpages/actions/userGuideAction.js ***!
+  \*************************************************************/
+/*! exports provided: getUserGuideContent, setUserGuideContent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getUserGuideContent", function() { return getUserGuideContent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setUserGuideContent", function() { return setUserGuideContent; });
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./www/js/source/reactpages/actions/types.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _lib_site__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../lib/site */ "./www/js/source/reactpages/lib/site.js");
+
+
+
+
+var fetchData = function fetchData(resourceName) {
+  var url = _lib_site__WEBPACK_IMPORTED_MODULE_2__["default"].resolveClientUrl('UserGuide/Index?resourcename=' + resourceName) + "&_=" + new Date().getTime();
+  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(url, {
+    headers: {
+      'X-Requested-With': 'XMLHttpRequest'
+    }
+  });
+};
+
+function getUserGuideContent(params) {
+  return function (dispatch) {
+    fetchData(params).then(function (response) {
+      dispatch(setUserGuideContent(response.data));
+    });
+  };
+}
+var setUserGuideContent = function setUserGuideContent(data) {
+  return {
+    type: _types__WEBPACK_IMPORTED_MODULE_0__["USER_GUIDE_CONTENT"],
+    data: data
+  };
+};
+
+/***/ }),
+
 /***/ "./www/js/source/reactpages/actions/usernameAction.js":
 /*!************************************************************!*\
   !*** ./www/js/source/reactpages/actions/usernameAction.js ***!
@@ -4902,6 +4946,124 @@ var ReportTitle = function ReportTitle(_ref) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (ReportTitle);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/components/UserGuide.jsx":
+/*!***********************************************************!*\
+  !*** ./www/js/source/reactpages/components/UserGuide.jsx ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return UserGuide; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _popup_Popup__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./popup/Popup */ "./www/js/source/reactpages/components/popup/Popup.jsx");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+var UserGuide =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(UserGuide, _React$Component);
+
+  function UserGuide(props) {
+    var _this;
+
+    _classCallCheck(this, UserGuide);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(UserGuide).call(this, props));
+
+    _defineProperty(_assertThisInitialized(_this), "onClickHandler", function () {
+      _this.setState({
+        isShow: true
+      });
+
+      _this.props.onClick && _this.props.onClick();
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "onCloseHandler", function () {
+      _this.setState({
+        isShow: false
+      });
+    });
+
+    _this.state = {
+      isShow: false
+    };
+    return _this;
+  }
+
+  _createClass(UserGuide, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          className = _this$props.className,
+          title = _this$props.title,
+          content = _this$props.content,
+          contentTitle = _this$props.contentTitle;
+      var isShow = this.state.isShow && content.length > 0;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: className,
+        onClick: this.onClickHandler,
+        title: title
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_popup_Popup__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        width: 640,
+        height: 480,
+        isShow: isShow,
+        title: contentTitle,
+        onClose: this.onCloseHandler,
+        isHtml: true
+      }, content));
+    }
+  }]);
+
+  return UserGuide;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+_defineProperty(UserGuide, "propTypes", {
+  title: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
+  className: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
+  content: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
+  contentTitle: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string
+});
+
+_defineProperty(UserGuide, "defaultProps", {
+  className: 'icon-book right',
+  content: ''
+});
+
+
+;
 
 /***/ }),
 
@@ -9040,6 +9202,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _matchAction__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./matchAction */ "./www/js/source/reactpages/pages/bettingticketscenter/multicustomer/actions/matchAction.js");
 /* harmony import */ var _jsroot_actions_usernameAction__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @jsroot/actions/usernameAction */ "./www/js/source/reactpages/actions/usernameAction.js");
 /* harmony import */ var _jsroot_actions_convertAllAction__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @jsroot/actions/convertAllAction */ "./www/js/source/reactpages/actions/convertAllAction.js");
+/* harmony import */ var _jsroot_actions_userGuideAction__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @jsroot/actions/userGuideAction */ "./www/js/source/reactpages/actions/userGuideAction.js");
 
 
 
@@ -9056,7 +9219,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var ActionCreators = Object.assign({}, _jsroot_actions_gridDataAction__WEBPACK_IMPORTED_MODULE_0__, _jsroot_actions_productAction__WEBPACK_IMPORTED_MODULE_1__, _jsroot_actions_currencyAction__WEBPACK_IMPORTED_MODULE_2__, _jsroot_actions_baseCurrencyAction__WEBPACK_IMPORTED_MODULE_3__, _jsroot_actions_statusAction__WEBPACK_IMPORTED_MODULE_4__, _jsroot_actions_liveStatusAction__WEBPACK_IMPORTED_MODULE_5__, _jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_6__, _jsroot_actions_dateRangeAction__WEBPACK_IMPORTED_MODULE_7__, _jsroot_actions_requestParamAction__WEBPACK_IMPORTED_MODULE_8__, _jsroot_actions_reportTitleAction__WEBPACK_IMPORTED_MODULE_9__, _sportAction__WEBPACK_IMPORTED_MODULE_10__, _bettypeAction__WEBPACK_IMPORTED_MODULE_11__, _leagueAction__WEBPACK_IMPORTED_MODULE_12__, _matchAction__WEBPACK_IMPORTED_MODULE_13__, _jsroot_actions_usernameAction__WEBPACK_IMPORTED_MODULE_14__, _jsroot_actions_convertAllAction__WEBPACK_IMPORTED_MODULE_15__);
+
+var ActionCreators = Object.assign({}, _jsroot_actions_gridDataAction__WEBPACK_IMPORTED_MODULE_0__, _jsroot_actions_productAction__WEBPACK_IMPORTED_MODULE_1__, _jsroot_actions_currencyAction__WEBPACK_IMPORTED_MODULE_2__, _jsroot_actions_baseCurrencyAction__WEBPACK_IMPORTED_MODULE_3__, _jsroot_actions_statusAction__WEBPACK_IMPORTED_MODULE_4__, _jsroot_actions_liveStatusAction__WEBPACK_IMPORTED_MODULE_5__, _jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_6__, _jsroot_actions_dateRangeAction__WEBPACK_IMPORTED_MODULE_7__, _jsroot_actions_requestParamAction__WEBPACK_IMPORTED_MODULE_8__, _jsroot_actions_reportTitleAction__WEBPACK_IMPORTED_MODULE_9__, _sportAction__WEBPACK_IMPORTED_MODULE_10__, _bettypeAction__WEBPACK_IMPORTED_MODULE_11__, _leagueAction__WEBPACK_IMPORTED_MODULE_12__, _matchAction__WEBPACK_IMPORTED_MODULE_13__, _jsroot_actions_usernameAction__WEBPACK_IMPORTED_MODULE_14__, _jsroot_actions_convertAllAction__WEBPACK_IMPORTED_MODULE_15__, _jsroot_actions_userGuideAction__WEBPACK_IMPORTED_MODULE_16__);
 
 /***/ }),
 
@@ -9575,13 +9739,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_components_auto_complete__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @jsroot/components/auto-complete */ "./www/js/source/reactpages/components/auto-complete/index.jsx");
 /* harmony import */ var _jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @jsroot/components/CheckBox */ "./www/js/source/reactpages/components/CheckBox.jsx");
 /* harmony import */ var _jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @jsroot/components/collapsible-panel */ "./www/js/source/reactpages/components/collapsible-panel/index.jsx");
-/* harmony import */ var _actions_index_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../actions/index.js */ "./www/js/source/reactpages/pages/bettingticketscenter/multicustomer/actions/index.js");
-/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
-/* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
-/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
-/* harmony import */ var _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @jsroot/lib/DataService.js */ "./www/js/source/reactpages/lib/DataService.js");
-/* harmony import */ var _common_lib_Service__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../common/lib/Service */ "./www/js/source/reactpages/pages/bettingticketscenter/common/lib/Service.js");
-/* harmony import */ var _common_constants_apiUrl__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../common/constants/apiUrl */ "./www/js/source/reactpages/pages/bettingticketscenter/common/constants/apiUrl.js");
+/* harmony import */ var _jsroot_components_UserGuide__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @jsroot/components/UserGuide */ "./www/js/source/reactpages/components/UserGuide.jsx");
+/* harmony import */ var _actions_index_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../actions/index.js */ "./www/js/source/reactpages/pages/bettingticketscenter/multicustomer/actions/index.js");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+/* harmony import */ var _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @jsroot/lib/DataService.js */ "./www/js/source/reactpages/lib/DataService.js");
+/* harmony import */ var _common_lib_Service__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../common/lib/Service */ "./www/js/source/reactpages/pages/bettingticketscenter/common/lib/Service.js");
+/* harmony import */ var _common_constants_apiUrl__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../common/constants/apiUrl */ "./www/js/source/reactpages/pages/bettingticketscenter/common/constants/apiUrl.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -9621,8 +9786,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 var ToastMsg = function ToastMsg() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].getSingleResource("BTCExportExcelMsg1")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].getSingleResource("BTCExportExcelMsg2")));
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("BTCExportExcelMsg1")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("BTCExportExcelMsg2")));
 };
 
 var FormFilter =
@@ -9664,7 +9830,7 @@ function (_Component) {
       }
 
       react_toastify__WEBPACK_IMPORTED_MODULE_4__["toast"].dismiss();
-      var title = _common_lib_Service__WEBPACK_IMPORTED_MODULE_16__["default"].getTitle(params.FromDate, params.ToDate, params.CurrencyName, params.BaseCurrency);
+      var title = _common_lib_Service__WEBPACK_IMPORTED_MODULE_17__["default"].getTitle(params.FromDate, params.ToDate, params.CurrencyName, params.BaseCurrency);
 
       _this.props.setReportTitle(title);
 
@@ -9672,7 +9838,7 @@ function (_Component) {
 
       _this.props.toggleLoader(true);
 
-      _this.props.getGridData(_common_constants_apiUrl__WEBPACK_IMPORTED_MODULE_17__["default"].MULTICUSTOMER_DATA_URL, params);
+      _this.props.getGridData(_common_constants_apiUrl__WEBPACK_IMPORTED_MODULE_18__["default"].MULTICUSTOMER_DATA_URL, params);
     });
 
     _defineProperty(_assertThisInitialized(_this), "exportExcel", function (event) {
@@ -9688,17 +9854,17 @@ function (_Component) {
 
       _this.props.toggleLoader(true);
 
-      _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_15__["default"].getFile(_common_constants_apiUrl__WEBPACK_IMPORTED_MODULE_17__["default"].MULTICUSTOMER_DATA_URL, params).then(function (response) {
+      _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_16__["default"].getFile(_common_constants_apiUrl__WEBPACK_IMPORTED_MODULE_18__["default"].MULTICUSTOMER_DATA_URL, params).then(function (response) {
         react_toastify__WEBPACK_IMPORTED_MODULE_4__["toast"].dismiss();
         var contentType = response.headers["content-type"];
 
         if (contentType && contentType.indexOf('application/json') > -1) {
           var RowsExceedLimitErrorCode = 1001;
-          _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_13__["default"].readAsJson(response.data, function (result) {
+          _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_14__["default"].readAsJson(response.data, function (result) {
             if (result.ErrorCode === RowsExceedLimitErrorCode) {
               _this._showExportWarning();
             } else {
-              var msg = result.ErrorMsg || _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].getSingleResource("ErrorProcessingMsg");
+              var msg = result.ErrorMsg || _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("ErrorProcessingMsg");
               alert(msg);
             }
           });
@@ -9706,19 +9872,27 @@ function (_Component) {
           var NoContentStatusCode = 204;
 
           if (response.status === NoContentStatusCode) {
-            alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].getSingleResource("NoInfo"));
+            alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("NoInfo"));
           } else {
             var fileName = "BettingTicketsCenter_MultiCustomer." + (response.headers["content-type"] === "application/zip" ? "zip" : "xls");
-            _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_13__["default"].downloadFile(response.data, fileName);
+            _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_14__["default"].downloadFile(response.data, fileName);
           }
         }
 
         _this.props.toggleLoader(false);
       }).catch(function (error) {
-        alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].getSingleResource("ErrorProcessingMsg"));
+        alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("ErrorProcessingMsg"));
 
         _this.props.toggleLoader(false);
       });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "showUserGuide", function () {
+      var userGuideContent = _this.props.userGuideContent;
+
+      if (!userGuideContent || userGuideContent.length === 0) {
+        _this.props.getUserGuideContent('BettingTicketCenterMultiple');
+      }
     });
 
     _defineProperty(_assertThisInitialized(_this), "_onChangeDateRange", function (date) {
@@ -9736,7 +9910,7 @@ function (_Component) {
           _this.props.getLeagueList(_this.props.selectedSport.value, date.startDate);
         }
       } else {
-        var message = _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].getSingleResource("DateRangeExceedMsg").replace("{0}", _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_14__["default"].dateConstraint.limitedMonthRange);
+        var message = _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("DateRangeExceedMsg").replace("{0}", _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_15__["default"].dateConstraint.limitedMonthRange);
         alert(message);
       }
     });
@@ -9770,12 +9944,12 @@ function (_Component) {
 
       if (!currencyIdList || currencyIdList.indexOf(',') > 0) {
         // none or multi currencies
-        _this.baseCurrencyList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_14__["default"].baseCurrencyList;
+        _this.baseCurrencyList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_15__["default"].baseCurrencyList;
         baseCurrency = _this.baseCurrencyList.find(function (x) {
           return x.label === _this.props.selectedBaseCurrency;
         }) ? _this.props.selectedBaseCurrency : _this.defaultBaseCurrency;
       } else {
-        var currencyName = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_14__["default"].currencyList.find(function (x) {
+        var currencyName = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_15__["default"].currencyList.find(function (x) {
           return x.Id == currencyIdList;
         }).Value;
         baseCurrency = currencyName;
@@ -9783,7 +9957,7 @@ function (_Component) {
         if (!_this.baseCurrencyList.find(function (x) {
           return x.label === currencyName;
         })) {
-          _this.baseCurrencyList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_14__["default"].baseCurrencyList.slice(0);
+          _this.baseCurrencyList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_15__["default"].baseCurrencyList.slice(0);
 
           _this.baseCurrencyList.push({
             value: currencyName,
@@ -9797,7 +9971,7 @@ function (_Component) {
       _this.props.setSelectedBaseCurrency(baseCurrency);
     });
 
-    _this.baseCurrencyList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_14__["default"].baseCurrencyList;
+    _this.baseCurrencyList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_15__["default"].baseCurrencyList;
     _this.defaultBaseCurrency = props.selectedBaseCurrency;
     return _this;
   }
@@ -9827,8 +10001,8 @@ function (_Component) {
       return {
         PageSize: PageSize,
         PageIndex: 1,
-        FromDate: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_13__["default"].convertDateToString(fromDate),
-        ToDate: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_13__["default"].convertDateToString(toDate),
+        FromDate: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_14__["default"].convertDateToString(fromDate),
+        ToDate: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_14__["default"].convertDateToString(toDate),
         ProductCodeList: this.props.selectedProduct,
         Username: this.props.username,
         CurrencyIdList: this.props.selectedCurrency,
@@ -9845,10 +10019,21 @@ function (_Component) {
       };
     }
   }, {
+    key: "_renderUserGuide",
+    value: function _renderUserGuide() {
+      var userGuideContent = this.props.userGuideContent;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_UserGuide__WEBPACK_IMPORTED_MODULE_11__["default"], {
+        title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("UserGuide"),
+        contentTitle: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("BettingTicketCenter"),
+        onClick: this.showUserGuide,
+        content: userGuideContent
+      });
+    }
+  }, {
     key: "_renderDateRange",
     value: function _renderDateRange() {
       var dateRange = this.props.dateRange;
-      var dateConstraint = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_14__["default"].dateConstraint;
+      var dateConstraint = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_15__["default"].dateConstraint;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_date_range_index__WEBPACK_IMPORTED_MODULE_7__["DateRange"], {
         startDate: dateRange.fromDate,
         endDate: dateRange.toDate,
@@ -9864,7 +10049,7 @@ function (_Component) {
     value: function _renderProductSelectList() {
       var _this2 = this;
 
-      var productList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_14__["default"].productList;
+      var productList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_15__["default"].productList;
       return productList && productList.length && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_5__["default"], {
         instanceId: "ProductList",
         value: this.props.selectedProduct,
@@ -9941,10 +10126,10 @@ function (_Component) {
     value: function _renderCurrencySelectList() {
       var _this7 = this;
 
-      var currencyList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_14__["default"].currencyList;
+      var currencyList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_15__["default"].currencyList;
       return currencyList && currencyList.length && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_6___default.a, {
         id: "ddlCurrency",
-        language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].currentLanguage,
+        language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].currentLanguage,
         dataSource: currencyList,
         keyField: "Id",
         valueField: "Value",
@@ -9974,10 +10159,10 @@ function (_Component) {
     value: function _renderStatusSelectList() {
       var _this9 = this;
 
-      var statusList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_14__["default"].statusList;
+      var statusList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_15__["default"].statusList;
       return statusList && statusList.length && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_6___default.a, {
         id: "StatusList",
-        language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].currentLanguage,
+        language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].currentLanguage,
         dataSource: statusList,
         keyField: "Id",
         valueField: "Value",
@@ -9992,10 +10177,10 @@ function (_Component) {
     value: function _renderLiveStatusSelectList() {
       var _this10 = this;
 
-      var liveStatusList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_14__["default"].liveStatusList;
+      var liveStatusList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_15__["default"].liveStatusList;
       return liveStatusList && liveStatusList.length && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_6___default.a, {
         id: "LiveStatusList",
-        language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].currentLanguage,
+        language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].currentLanguage,
         dataSource: liveStatusList,
         keyField: "Id",
         valueField: "Value",
@@ -10010,11 +10195,11 @@ function (_Component) {
     value: function render() {
       var _this11 = this;
 
-      var excelButton = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      var excelButton = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "icon-excel right",
         onClick: this.exportExcel,
-        title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].getSingleResource("ExportToExcel")
-      });
+        title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("ExportToExcel")
+      }), this._renderUserGuide());
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_10__["default"], {
         className: "page-filter",
         stickyFooter: excelButton
@@ -10033,37 +10218,37 @@ function (_Component) {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "label-text"
-      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].getSingleResource("Date")), this._renderDateRange())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("Date")), this._renderDateRange())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "label-text"
-      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].getSingleResource("Product")), this._renderProductSelectList())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("Product")), this._renderProductSelectList())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "label-text"
-      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].getSingleResource("Sport")), this._renderSportSelectList())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("Sport")), this._renderSportSelectList())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "label-text"
-      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].getSingleResource("BetType")), this._renderBettypeSelectList())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("BetType")), this._renderBettypeSelectList())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "label-text"
-      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].getSingleResource("League")), this._renderLeagueSelectList())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("League")), this._renderLeagueSelectList())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "label-text"
-      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].getSingleResource("Match")), this._renderMatchSelectList()))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("Match")), this._renderMatchSelectList()))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2"
@@ -10071,8 +10256,8 @@ function (_Component) {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "label-text"
-      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].getSingleResource("Username")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_auto_complete__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        url: _common_constants_apiUrl__WEBPACK_IMPORTED_MODULE_17__["default"].CUSTOMER_SEARCH_URL,
+      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("Username")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_auto_complete__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        url: _common_constants_apiUrl__WEBPACK_IMPORTED_MODULE_18__["default"].CUSTOMER_SEARCH_URL,
         onSelect: function onSelect(value) {
           return _this11.props.setUsername(value);
         },
@@ -10080,7 +10265,7 @@ function (_Component) {
           return _this11.props.setUsername(value);
         },
         htmlAttributes: {
-          placeholder: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].getSingleResource("ExternalIdOrSystemId")
+          placeholder: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("ExternalIdOrSystemId")
         }
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2"
@@ -10088,13 +10273,13 @@ function (_Component) {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "label-text"
-      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].getSingleResource("Currency")), this._renderCurrencySelectList())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("Currency")), this._renderCurrencySelectList())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "label-text"
-      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].getSingleResource("BaseCurrency")), this._renderBaseCurrencySelectList())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("BaseCurrency")), this._renderBaseCurrencySelectList())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
@@ -10104,20 +10289,20 @@ function (_Component) {
         onChange: function onChange(checked) {
           return _this11.props.changeIsConvertAll(checked);
         },
-        label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].getSingleResource("ConvertAllFiguresToBaseCurrency")
+        label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("ConvertAllFiguresToBaseCurrency")
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "label-text"
-      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].getSingleResource("Status")), this._renderStatusSelectList())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("Status")), this._renderStatusSelectList())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "label-text"
-      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].getSingleResource("Live")), this._renderLiveStatusSelectList())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("Live")), this._renderLiveStatusSelectList())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-12 col-md-2 col-sm-2 col-lg-2 col-xl-1"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
@@ -10128,16 +10313,16 @@ function (_Component) {
         disabled: !this.isValidModel,
         className: "btn btn-submit",
         onClick: this.submit
-      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].getSingleResource("Submit")))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("Submit")))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-1",
         style: {
           flex: "0 0 4%"
         }
-      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].getSingleResource('Note'), ":"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource('Note'), ":"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-9"
-      }, "* ", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].getSingleResource('BettingTicketCenter_MultiCustomersTabNote1'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "* ", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].getSingleResource('BettingTicketCenter_MultiCustomersTabNote2').replace("{0}", _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_14__["default"].dateConstraint.minDate))));
+      }, "* ", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource('BettingTicketCenter_MultiCustomersTabNote1'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "* ", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource('BettingTicketCenter_MultiCustomersTabNote2').replace("{0}", _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_15__["default"].dateConstraint.minDate))));
     }
   }, {
     key: "isValidModel",
@@ -10150,7 +10335,7 @@ function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 function mapDispatchToProps(dispatch) {
-  return Object(redux__WEBPACK_IMPORTED_MODULE_2__["bindActionCreators"])(_actions_index_js__WEBPACK_IMPORTED_MODULE_11__["ActionCreators"], dispatch);
+  return Object(redux__WEBPACK_IMPORTED_MODULE_2__["bindActionCreators"])(_actions_index_js__WEBPACK_IMPORTED_MODULE_12__["ActionCreators"], dispatch);
 }
 
 function mapStateToProps(state) {
@@ -10171,7 +10356,8 @@ function mapStateToProps(state) {
       selectedStatus = state.selectedStatus,
       selectedLiveStatus = state.selectedLiveStatus,
       username = state.username,
-      isConvertAll = state.isConvertAll;
+      isConvertAll = state.isConvertAll,
+      userGuideContent = state.userGuideContent;
   return Object.assign({}, {
     requestParam: requestParam,
     dateRange: dateRange,
@@ -10190,7 +10376,8 @@ function mapStateToProps(state) {
     selectedStatus: selectedStatus,
     selectedLiveStatus: selectedLiveStatus,
     username: username,
-    isConvertAll: isConvertAll
+    isConvertAll: isConvertAll,
+    userGuideContent: userGuideContent
   });
 }
 
@@ -10241,7 +10428,9 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-var defaultState = Object.assign({}, window.initialState);
+var defaultState = Object.assign({}, window.initialState, {
+  userGuideContent: ''
+});
 var store = _lib_store__WEBPACK_IMPORTED_MODULE_5__["default"].createStore(_reducers_index_js__WEBPACK_IMPORTED_MODULE_4__["default"], defaultState);
 
 var App =
@@ -10324,6 +10513,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _matchReducer__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./matchReducer */ "./www/js/source/reactpages/pages/bettingticketscenter/multicustomer/reducers/matchReducer.js");
 /* harmony import */ var _jsroot_reducers_usernameReducer__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @jsroot/reducers/usernameReducer */ "./www/js/source/reactpages/reducers/usernameReducer.js");
 /* harmony import */ var _jsroot_reducers_convertAllReducer__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @jsroot/reducers/convertAllReducer */ "./www/js/source/reactpages/reducers/convertAllReducer.js");
+/* harmony import */ var _jsroot_reducers_userGuideReducer__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @jsroot/reducers/userGuideReducer */ "./www/js/source/reactpages/reducers/userGuideReducer.js");
 
 
 
@@ -10341,7 +10531,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(Object.assign(_jsroot_reducers_gridDataReducer_js__WEBPACK_IMPORTED_MODULE_1__, _jsroot_reducers_productReducer__WEBPACK_IMPORTED_MODULE_2__, _jsroot_reducers_currencyReducer__WEBPACK_IMPORTED_MODULE_3__, _jsroot_reducers_baseCurrencyReducer__WEBPACK_IMPORTED_MODULE_4__, _jsroot_reducers_statusReducer__WEBPACK_IMPORTED_MODULE_5__, _jsroot_reducers_liveStatusReducer__WEBPACK_IMPORTED_MODULE_6__, _jsroot_reducers_loaderReducer__WEBPACK_IMPORTED_MODULE_7__, _jsroot_reducers_dateRangeReducer__WEBPACK_IMPORTED_MODULE_8__, _jsroot_reducers_requestParamReducer__WEBPACK_IMPORTED_MODULE_9__, _jsroot_reducers_reportTitleReducer__WEBPACK_IMPORTED_MODULE_10__, _sportReducer__WEBPACK_IMPORTED_MODULE_11__, _bettypeReducer__WEBPACK_IMPORTED_MODULE_12__, _leagueReducer__WEBPACK_IMPORTED_MODULE_13__, _matchReducer__WEBPACK_IMPORTED_MODULE_14__, _jsroot_reducers_usernameReducer__WEBPACK_IMPORTED_MODULE_15__, _jsroot_reducers_convertAllReducer__WEBPACK_IMPORTED_MODULE_16__)));
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(Object.assign(_jsroot_reducers_gridDataReducer_js__WEBPACK_IMPORTED_MODULE_1__, _jsroot_reducers_productReducer__WEBPACK_IMPORTED_MODULE_2__, _jsroot_reducers_currencyReducer__WEBPACK_IMPORTED_MODULE_3__, _jsroot_reducers_baseCurrencyReducer__WEBPACK_IMPORTED_MODULE_4__, _jsroot_reducers_statusReducer__WEBPACK_IMPORTED_MODULE_5__, _jsroot_reducers_liveStatusReducer__WEBPACK_IMPORTED_MODULE_6__, _jsroot_reducers_loaderReducer__WEBPACK_IMPORTED_MODULE_7__, _jsroot_reducers_dateRangeReducer__WEBPACK_IMPORTED_MODULE_8__, _jsroot_reducers_requestParamReducer__WEBPACK_IMPORTED_MODULE_9__, _jsroot_reducers_reportTitleReducer__WEBPACK_IMPORTED_MODULE_10__, _sportReducer__WEBPACK_IMPORTED_MODULE_11__, _bettypeReducer__WEBPACK_IMPORTED_MODULE_12__, _leagueReducer__WEBPACK_IMPORTED_MODULE_13__, _matchReducer__WEBPACK_IMPORTED_MODULE_14__, _jsroot_reducers_usernameReducer__WEBPACK_IMPORTED_MODULE_15__, _jsroot_reducers_convertAllReducer__WEBPACK_IMPORTED_MODULE_16__, _jsroot_reducers_userGuideReducer__WEBPACK_IMPORTED_MODULE_17__)));
 
 /***/ }),
 
@@ -10664,6 +10855,28 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 var selectedStatus = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, _defineProperty({}, _actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_SELECTED_STATUS"], function (state, action) {
+  return action.data;
+}));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/reducers/userGuideReducer.js":
+/*!***************************************************************!*\
+  !*** ./www/js/source/reactpages/reducers/userGuideReducer.js ***!
+  \***************************************************************/
+/*! exports provided: userGuideContent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "userGuideContent", function() { return userGuideContent; });
+/* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/types */ "./www/js/source/reactpages/actions/types.js");
+/* harmony import */ var _lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+var userGuideContent = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, _defineProperty({}, _actions_types__WEBPACK_IMPORTED_MODULE_0__["USER_GUIDE_CONTENT"], function (state, action) {
   return action.data;
 }));
 

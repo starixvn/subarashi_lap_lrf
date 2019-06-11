@@ -90,7 +90,7 @@ namespace Fanex.Athena.Api.Report
             {
                 metaModel.FromDate = metaModel.DrillDownFromDate;
                 metaModel.ToDate = metaModel.DrillDownToDate;
-                metaModel.CurrencyId = metaModel.CurrencyId > 0 ? metaModel.DrillDownCurrencyId : metaModel.CurrencyId;
+                metaModel.CurrencyId = metaModel.CurrencyId >= 0 ? metaModel.DrillDownCurrencyId : metaModel.CurrencyId;
                 metaModel.CurrencyName = currencyText;
             }
 

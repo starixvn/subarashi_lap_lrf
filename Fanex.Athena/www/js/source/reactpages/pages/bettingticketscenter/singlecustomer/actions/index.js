@@ -10,6 +10,7 @@ import * as dateRangeAction from '@jsroot/actions/dateRangeAction'
 import * as convertAllAction from '@jsroot/actions/convertAllAction'
 import * as requestParamAction from '@jsroot/actions/requestParamAction'
 import * as reportTitleAction from '@jsroot/actions/reportTitleAction'
+import * as userGuideAction from '@jsroot/actions/userGuideAction'
 
 export const ActionCreators = Object.assign({},
     gridDataAction,
@@ -23,5 +24,6 @@ export const ActionCreators = Object.assign({},
     dateRangeAction,
     convertAllAction,
     requestParamAction,
-    reportTitleAction
+    reportTitleAction,
+    userGuideAction
 );

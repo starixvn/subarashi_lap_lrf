@@ -61,14 +61,6 @@ var AgCasinoBalance = (function ($) {
         });
     }
 
-    function getCurrencyTitle(currencyId, baseCurrency) {
-        const currencyName = Number(currencyId) === 0 ? 
-                           Site.getSingleResource('All') :
-                           $('#CurrencyId option[value="' + currencyId + '"]').text();
-        return Site.getSingleResource('Currency') + ': ' + currencyName + ', ' +
-            Site.getSingleResource('BaseCurrency') + ': ' + (baseCurrency || currencyName).toUpperCase();
-    }
-
     return {
         initialize: function () {
             AgCasinoBalance.initEvent();
@@ -138,10 +130,22 @@ var AgCasinoBalance = (function ($) {
             }
         },
 
-        setReportTitle: function (currencyId, fromdate, todate, baseCurrency) {
+        setReportTitle: function (currencyId, fromdate, todate) {
             var titlePattern = Site.getSingleResource('AGCasinoBalance') + ', {0} → {1}, {2}';
             
-            var currencyTitle = getCurrencyTitle(currencyId, baseCurrency);
+            var viewinKey = Site.getSingleResource("Viewin");
+            //get currencyName
+            var currencyTextList =
+            {
+                "-3": viewinKey.replace("{0}", "GBP"),
+                "-2": viewinKey.replace("{0}", "USD"),
+                "-1": viewinKey.replace("{0}", "EUR"),
+                "0": Site.getSingleResource('AllCurrencies')
+            };
+
+            var currencyTitle = currencyTextList[currencyId] === undefined
+                ? viewinKey.replace("{0}", $('#CurrencyId option[value="' + currencyId + '"]').text())
+                : currencyTextList[currencyId];
 
             var title = $.format(titlePattern, fromdate.toString("M/dd/yyyy"), todate.toString("M/dd/yyyy"), currencyTitle);
             $("div.report-title").html(title);
@@ -154,7 +158,7 @@ var AgCasinoBalance = (function ($) {
             if (response != null) {
                 cacheData[level] = response;
                 if (level === 0) {
-                    AgCasinoBalance.setReportTitle($("#CurrencyId").val(), $("#FromDate").val(), $("#ToDate").val(), _submitData.BaseCurrency);
+                    AgCasinoBalance.setReportTitle($("#CurrencyId").val(), $("#FromDate").val(), $("#ToDate").val());
                 }
 
                 AgCasinoBalance.renderBreadCrumb(level);
@@ -249,7 +253,11 @@ var AgCasinoBalance = (function ($) {
                 success: function (response) {
                     AgCasinoBalance.ajaxComplete(level, response);
                     if (response != null && response.Data.length > 0) {
-                        AgCasinoBalance.setReportTitle(currencyId, fdate, tdate, _submitData.BaseCurrency);
+                        if (level > 0 && Number(param.CurrencyId) === 0) {
+                            AgCasinoBalance.setReportTitle(currencyId, fdate, tdate);
+                        } else {
+                            AgCasinoBalance.setReportTitle(param.CurrencyId, fdate, tdate);
+                        }
                         
                         //update excel ULR
                         AgCasinoBalance.setExcelUrl(level, currencyId, customerId, fdate, tdate);
@@ -278,7 +286,7 @@ var AgCasinoBalance = (function ($) {
                 var fromdate = _submitData.FromDate;
                 var todate = _submitData.ToDate;
                 var currencyId = _submitData.CurrencyId;
-                AgCasinoBalance.setReportTitle(currencyId, fromdate, todate, _submitData.BaseCurrency);
+                AgCasinoBalance.setReportTitle(currencyId, fromdate, todate);
             }
             else if (level === 1) {
                 $("#DrillDownLevel").val(level);

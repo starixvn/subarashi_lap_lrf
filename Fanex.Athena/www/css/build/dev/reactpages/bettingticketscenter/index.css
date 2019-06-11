@@ -682,5 +682,8 @@ input[type="checkbox"].checkbox {
 .table {
   line-height: inherit; }
 
+.caret-block div {
+  display: inherit; }
+
 
 /*# sourceMappingURL=index.css.map*/
