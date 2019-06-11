@@ -12,6 +12,7 @@ namespace Fanex.Athena.Model.Core.MetaModel
     using System.Linq;
     using System.Web.Script.Serialization;
     using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Model.Core.Helper;
 
     [Serializable]
     public class BaseMetaModel
@@ -65,5 +66,6 @@ namespace Fanex.Athena.Model.Core.MetaModel
                 return !string.IsNullOrEmpty(BaseCurrency);
             }
         }
+        public virtual bool IsValid => MetalModelValidationHelper.ValidateBaseCurrency(BaseCurrency);
     }
 }

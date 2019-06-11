@@ -124,6 +124,7 @@
     <Compile Include="DTO\Users\Subsidiary.cs" />
     <Compile Include="DTO\Users\User.cs" />
     <Compile Include="DTO\Users\UserRole.cs" />
+    <Compile Include="Helper\MetalModelValidationHelper.cs" />
     <Compile Include="Helper\ProductHelper.cs" />
     <Compile Include="MetaModel\Account\AssignCurrencyMetaModel.cs" />
     <Compile Include="MetaModel\Account\EditAccountMetaModel.cs" />
@@ -133,6 +134,7 @@
     <Compile Include="MetaModel\BaseMetaModel.cs" />
     <Compile Include="MetaModel\Common\LeagueMetaModel.cs" />
     <Compile Include="MetaModel\Common\UserLogMetaModel.cs" />
+    <Compile Include="MetaModel\IMetalModelValidation.cs" />
     <Compile Include="MetaModel\Product\ProductOption.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResultModel\SortableReportResultModel.cs" />

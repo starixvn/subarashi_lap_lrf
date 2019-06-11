@@ -11,7 +11,7 @@ namespace Fanex.Athena.Model.TotalBet.MetaModel
     using System;
     using System.Linq;
 
-    public class TotalBetsBaseMetaModel : BaseMetaModel
+    public class TotalBetsBaseMetaModel : BaseMetaModel, IMetalModelValidation
     {
         private const int DefaultPageSize = 1000;
 
@@ -27,7 +27,6 @@ namespace Fanex.Athena.Model.TotalBet.MetaModel
         public int PageIndex { get; set; }
 
         public int TotalRows { get; set; }
-        public bool IsValid => string.IsNullOrEmpty(BaseCurrency) || SystemConstants.BaseCurrencyList
-                    .Any(x => x.Value.Equals(BaseCurrency, StringComparison.OrdinalIgnoreCase));
+
     }
 }

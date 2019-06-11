@@ -4,12 +4,14 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
+using Fanex.Athena.Model.Core.MetaModel;
+
 namespace Fanex.Athena.Model.TotalBet.MetaModel
 {
     /// <summary>
     /// OddEvenDrawNoDrawMetaModel class.
     /// </summary>
-    public class OddEvenDrawNoDrawMetaModel : TotalBetsBaseMetaModel
+    public class OddEvenDrawNoDrawMetaModel : TotalBetsBaseMetaModel, IMetalModelValidation
     {
     }
 }

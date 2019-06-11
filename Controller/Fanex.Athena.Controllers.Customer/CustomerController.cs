@@ -102,7 +102,8 @@ namespace Fanex.Athena.Controllers.Customer
                 LicenseeId = licenseeId,
                 IsShowStatusDropdown = allowLicensees.Contains(licenseeId),
                 GridColumns = InitGridColumns(productAccess.IsAllow(Product.BA), allowLicensees),
-                OddsGroups = GetOddsGroups()
+                OddsGroups = GetOddsGroups(),
+                BaseCurrency = userSession.DefaultBaseCurrency
             };
 
             var model = await CreateCustomerViewModel(metaModel);

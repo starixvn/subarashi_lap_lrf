@@ -48,8 +48,10 @@ namespace Fanex.Athena.Controllers.TotalBets
 
         [HttpPost]
         [CustomValidateAntiForgery]
+        [ValidationWebRequest]
         public async Task<ActionResult> Index(TotalGoalMetaModel metaModel)
         {
+           
             metaModel.LicenseeId = SessionService.LicenseeSession.LicenseeId;
             return await this.GetView(metaModel).ConfigureAwait(false);
         }

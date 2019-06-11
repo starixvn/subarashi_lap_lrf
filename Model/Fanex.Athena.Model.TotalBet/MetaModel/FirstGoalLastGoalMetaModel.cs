@@ -4,12 +4,14 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
+using Fanex.Athena.Model.Core.MetaModel;
+
 namespace Fanex.Athena.Model.TotalBet.MetaModel
 {
     /// <summary>
     /// FirstGoalLastGoalMetaModel class.
     /// </summary>
-    public class FirstGoalLastGoalMetaModel : TotalBetsBaseMetaModel
+    public class FirstGoalLastGoalMetaModel : TotalBetsBaseMetaModel, IMetalModelValidation
     {
     }
 }
