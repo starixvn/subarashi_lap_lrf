@@ -7,6 +7,8 @@
 @import "../../components/switch";
 @import "../../components/dropdown";
 
+$borderContainer: #d6d6d6;
+
 #app-container {
     max-width: 1920px;
 }
@@ -73,9 +75,18 @@
 }
 
 .header-tab {
-    margin-top: 0;
+    margin: 0;
+    border-left: 1px solid $borderContainer;
+    border-right: 1px solid $borderContainer;
+    background: #fff;
+
+    .content-tab {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
 
     .tabs .tab a {
+        font-size: 12px;
         &.active {
             color: #f05b1f;
         }

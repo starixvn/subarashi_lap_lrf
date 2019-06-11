@@ -12,6 +12,7 @@ const entry = {
     [`${cssPath}/vendor`]: pathConfig.cssPaths.layout,
     [`${jsPath}/playeradmin/playerlist`]: pathConfig.scriptPaths.playerlist,
     [`${cssPath}/playeradmin/index`]: pathConfig.cssPaths.playeradmin,
+    [`${cssPath}/playeradmin/account-info`]: pathConfig.cssPaths.accountInfo,
     [`${jsPath}/playeradmin/playeraccountinfo`]: pathConfig.scriptPaths.playeraccountinfo,
 }
 

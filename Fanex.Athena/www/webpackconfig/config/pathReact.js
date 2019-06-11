@@ -13,7 +13,8 @@ var cssPaths = {
     bettingticketscenter: "./www/css/source/reactpages/pages/bettingticketscenter/index.scss",
     betlist: "./www/css/source/reactpages/pages/betlist/index.scss",
     casinoturnover: "./www/css/source/reactpages/pages/casinoturnover/index.scss",
-    playeradmin: "./www/css/source/reactpages/pages/playeradmin/index.scss"
+    playeradmin: "./www/css/source/reactpages/pages/playeradmin/index.scss",
+    accountInfo: "./www/css/source/reactpages/pages/playeradmin/account-info.scss"
 };
 
 var scriptPaths = {

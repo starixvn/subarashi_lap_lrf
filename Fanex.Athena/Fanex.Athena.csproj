@@ -2513,6 +2513,7 @@
     <Content Include="www\css\source\reactpages\pages\playeradmin\index.scss" />
     <Content Include="www\js\build\dev\reactpages\playeradmin\playeraccountinfo.chunk.js.map" />
     <Content Include="www\js\build\dev\reactpages\playeradmin\playerlist.chunk.js.map" />
+    <Content Include="www\css\source\reactpages\pages\playeradmin\account-info.scss" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="SiteConfig\WebConfigTransforms\SIT.config">

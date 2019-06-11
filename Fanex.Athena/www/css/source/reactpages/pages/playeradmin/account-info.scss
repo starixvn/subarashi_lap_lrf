@@ -1,0 +1,86 @@
+﻿@import "../../abstracts/variables";
+@import "../../components/react-grid";
+@import "../../components/tab";
+
+$borderContainer: #d6d6d6;
+
+.header-tab {
+    margin-top: 0;
+
+    .tabs .tab a {
+        font-size: 12px;
+
+        &.active {
+            color: #f05b1f;
+        }
+    }
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    background: #fff;
+}
+
+#app-container {
+    width: 100%;
+    border-left: 1px solid $borderContainer;
+    border-right: 1px solid $borderContainer;
+    border-bottom: 1px solid $borderContainer;
+    padding: 10px 0;
+}
+
+.account-info-container {
+    display: flex;
+    flex-direction: row;
+
+    .outer-col-1 {
+        flex: 1;
+        margin-right: 5px;
+    }
+
+    .outer-col-2 {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        margin-left: 5px;
+    }
+
+    .account-profile-container,
+    .cust-betting-container,
+    .fast-cross-link-container {
+        padding: 10px;
+        border: 1px solid $borderContainer;
+    }
+
+    .cust-betting-container {
+        min-height: 70%;
+    }
+
+    .fast-cross-link-container {
+        min-height: calc(30% - 10px);
+        margin-top: 10px;
+
+        .divider{
+            margin: 0 5px;
+        }
+    }
+
+    .account-profile-container {
+        padding-top: 0;
+
+        .tab-panel {
+            .table {
+                width: 100%;
+
+                tr {
+                    height: 28px;
+
+                    .first-cell {
+                        width: 25%;
+                    }
+                }
+            }
+        }
+    }
+}

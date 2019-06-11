@@ -10,6 +10,12 @@ export class AccountProfile extends PureComponent {
         this.state = {
             data: null
         }
+
+        this.tabList = [
+            { name: 'accountProfile', text: 'Account Profile' },
+            { name: 'bankInformation', text: 'Bank Information' },
+            { name: 'accountRecord', text: 'Account Record' }
+        ]
     }
 
     componentDidMount() {
@@ -27,11 +33,94 @@ export class AccountProfile extends PureComponent {
             });
     }
 
+    _renderTabList() {
+        return (
+            this.tabList.map((item, index) => {
+                return (
+                    <li className="tab" key={item.name}>
+                        <a href="javascript:;" className={index === 0 ? 'active' : ''}>
+                            {item.text}
+                        </a>
+                    </li>
+                )
+            })
+        )
+    }
+
     render() {
         const { data } = this.state;
         return data && (
-            <div>
-                <h4>Account Profile (Call From LRF & LAP)</h4>
+            <div className="acc-infor-group">
+                <div className="header-tab">
+                    <div className="content-tab">
+                        <ul className="tabs">
+                            {this._renderTabList()}
+                        </ul>
+                    </div>
+                </div>
+                <div className="tab-panel">
+                    <table className="table">
+                        <tbody>
+                            <tr>
+                                <td className="first-cell">AG UserID</td>
+                                <td>qatest01</td>
+                            </tr>
+                            <tr>
+                                <td>Gold Deluxe UserID</td>
+                                <td>qatest01</td>
+                            </tr>
+                            <tr>
+                                <td>VoidBridge UserID</td>
+                                <td>qatest01</td>
+                            </tr>
+                            <tr>
+                                <td colSpan="2"></td>
+                            </tr>
+                            <tr>
+                                <td>First name</td>
+                                <td>qatest01</td>
+                            </tr>
+                            <tr>
+                                <td>Last name</td>
+                                <td>101</td>
+                            </tr>
+                            <tr>
+                                <td>Gender</td>
+                                <td>Male</td>
+                            </tr>
+                            <tr>
+                                <td>Date of birth</td>
+                                <td>34335</td>
+                            </tr>
+                            <tr>
+                                <td>Mobile</td>
+                                <td>111</td>
+                            </tr>
+                            <tr>
+                                <td>Country</td>
+                                <td>Togo</td>
+                            </tr>
+                            <tr>
+                                <td>Address</td>
+                                <td>12</td>
+                            </tr>
+                            <tr>
+                                <td>City/ Town</td>
+                                <td>22</td>
+                            </tr>
+                            <tr>
+                                <td>State</td>
+                                <td>33</td>
+                            </tr>
+                            <tr>
+                                <td>Zip Code</td>
+                                <td>44</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                {/* <h4>Account Profile (Call From LRF & LAP)</h4>
                 <ul>
                     <li>Created Date: {data.CreatedDate}</li>
                     <li>Last Login: {data.LastLogin}</li>
@@ -39,7 +128,7 @@ export class AccountProfile extends PureComponent {
                     <li>Email (LAP): {data.Email}</li>
                     <li>LapInfo1 (LAP): {data.LapInfo1}</li>
                     <li>LapInfo2 (LAP): {data.LapInfo2}</li>
-                </ul>
+                </ul> */}
             </div>
         );
     }

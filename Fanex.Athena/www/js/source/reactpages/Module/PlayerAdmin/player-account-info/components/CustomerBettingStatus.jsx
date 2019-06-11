@@ -32,11 +32,9 @@ export class CustomerBettingStatus extends PureComponent {
         return data && (
             <div>
                 <h4>Customer Betting Status (Call From LRF)</h4>
-                <ul>
-                    <li>Win: {data.Win}</li>
-                    <li>Loss: {data.Loss}</li>
-                    <li>Void/Reject/Cancel: {data.VoidRejectCancel}</li>
-                </ul>
+                <p>Win: {data.Win}</p>
+                <p>Loss: {data.Loss}</p>
+                <p>Void/Reject/Cancel: {data.VoidRejectCancel}</p>
             </div>
         );
     }
