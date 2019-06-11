@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Web.Script.Serialization;
+using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Model.Core.MetaModel;
 
 namespace Fanex.Athena.Model.BetList.MetaModel
@@ -122,7 +124,9 @@ namespace Fanex.Athena.Model.BetList.MetaModel
             get
             {
                 return FromDate <= ToDate
-                    && !string.IsNullOrWhiteSpace(ProductCodeList);
+                    && !string.IsNullOrWhiteSpace(ProductCodeList)
+                    && (string.IsNullOrEmpty(BaseCurrency) || SystemConstants.BaseCurrencyList
+                    .Any(x => x.Value.Equals(BaseCurrency, StringComparison.OrdinalIgnoreCase)));
             }
         }
 

@@ -6,7 +6,10 @@
 
 namespace Fanex.Athena.Model.TotalBet.MetaModel
 {
+    using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.MetaModel;
+    using System;
+    using System.Linq;
 
     public class TotalBetsBaseMetaModel : BaseMetaModel
     {
@@ -24,5 +27,7 @@ namespace Fanex.Athena.Model.TotalBet.MetaModel
         public int PageIndex { get; set; }
 
         public int TotalRows { get; set; }
+        public bool IsValid => string.IsNullOrEmpty(BaseCurrency) || SystemConstants.BaseCurrencyList
+                    .Any(x => x.Value.Equals(BaseCurrency, StringComparison.OrdinalIgnoreCase));
     }
 }

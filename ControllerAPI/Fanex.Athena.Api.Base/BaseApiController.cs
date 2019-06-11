@@ -12,7 +12,9 @@ namespace Fanex.Athena.Api.Base
     using System.Net;
     using System.Net.Http;
     using System.Net.Http.Headers;
+    using System.Threading.Tasks;
     using System.Web.Http;
+    using Fanex.Athena.Resources;
     using Fanex.Athena.Service.Core.Common.Interfaces;
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using NPOI.SS.UserModel;
@@ -100,6 +102,15 @@ namespace Fanex.Athena.Api.Base
 
             var validProductCodes = productCodeList.Split(',').Where(x => productList.Any(y => y.ProductCode.Equals(x, StringComparison.OrdinalIgnoreCase)));
             return string.Join(",", validProductCodes.ToArray());
+        }
+
+        protected async Task<HttpResponseMessage> HandleForbiddenReuest()
+        {
+            return await Task.FromResult(new HttpResponseMessage
+            {
+                StatusCode = HttpStatusCode.Forbidden,
+                Content = new StringContent(ViewResources.InvalidRequestMsg)
+            });
         }
     }
 }
