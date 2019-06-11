@@ -51,5 +51,8 @@ namespace Fanex.Athena.Model.Report.MetaModel
         public string ProductCode { get; set; }
 
         public string ProductName { get; set; }
+
+        public string DefaultBaseCurrency { get; set; }
+
     }
 }

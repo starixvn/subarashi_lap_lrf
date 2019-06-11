@@ -17,5 +17,7 @@
                 return FromDate <= ToDate;
             }
         }
+        public string DefaultBaseCurrency { get; set; }
+
     }
 }

@@ -41,5 +41,7 @@ namespace Fanex.Athena.Model.Report.MetaModel
         public DateTime DrillDownToDate { get; set; }
 
         public string Username { get; set; }
+        public string DefaultBaseCurrency { get; set; }
+
     }
 }
