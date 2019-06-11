@@ -5,10 +5,11 @@
 // -----------------------------------------------------------------------
 
 using Fanex.Athena.Model.Core.DataDomain;
+using Fanex.Athena.Model.Core.MetaModel;
 
 namespace Fanex.Athena.Model.Report.MetaModel
 {
-    public class LicenseeWinLossMetaModel : BaseDrilldownReportMetaModel
+    public class LicenseeWinLossMetaModel : BaseDrilldownReportMetaModel, IMetaModelValidation
     {
         public byte ReportBy { get; set; }
 
@@ -21,7 +22,6 @@ namespace Fanex.Athena.Model.Report.MetaModel
         public string SortBy { get; set; }
 
         public string SortOrder { get; set; }
-        public override bool IsValid => base.IsValid && string.IsNullOrEmpty(BaseCurrency)
-            || SystemConstants.BaseCurrencyList.Contains(BaseCurrency.ToUpperInvariant());
+        public string DefaultBaseCurrency { get; set; }
     }
 }

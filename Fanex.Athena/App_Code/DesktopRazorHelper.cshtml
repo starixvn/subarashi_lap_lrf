@@ -85,8 +85,7 @@
 @helper CurrencyList(IDictionary<int, string> currencyList,
 string className = "", int selected = 0,
 bool addMoreAllOption = true,
-bool addBasedOption = false,
-string baseCurrencies = null)
+bool addBasedOption = false)
 {
 
     var selectedName = currencyList.Where(p => p.Key == selected).FirstOrDefault().Key;

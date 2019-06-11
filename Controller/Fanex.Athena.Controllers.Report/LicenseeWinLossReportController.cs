@@ -88,7 +88,10 @@ namespace Fanex.Athena.Controllers.Report
                 DrawFilter = DrawFilterType.Normal,
                 ReportBy = ReportByType.Daily,
                 ProductOptions = ToProductOptions(productAccess.ProductList),
-                BaseCurrency = userSession.DefaultBaseCurrency
+                BaseCurrency = userSession.DefaultBaseCurrency,
+                                CurrencyId = SystemConstants.BaseCurrencyList
+                .FirstOrDefault(x => x.Value.Equals(userSession.DefaultBaseCurrency, StringComparison.OrdinalIgnoreCase))
+                .Key
 
             };
 
@@ -116,7 +119,10 @@ namespace Fanex.Athena.Controllers.Report
                 ToDate = selectedDate,
                 ReportBy = ReportByType.Daily,
                 ProductOptions = ToProductOptions(productAccess.ProductList),
-                BaseCurrency = userSession.DefaultBaseCurrency
+                BaseCurrency = userSession.DefaultBaseCurrency,
+                CurrencyId = SystemConstants.BaseCurrencyList
+                .FirstOrDefault(x => x.Value.Equals(userSession.DefaultBaseCurrency, StringComparison.OrdinalIgnoreCase))
+                .Key
             };
 
             var model = new SpecialLicenseeWinLossViewModel
