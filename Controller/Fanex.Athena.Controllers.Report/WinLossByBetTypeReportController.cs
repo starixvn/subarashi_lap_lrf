@@ -76,12 +76,9 @@ namespace Fanex.Athena.Controllers.Report
 
         [HttpPost]
         [CustomValidateAntiForgery]
+        [ValidationWebRequest]
         public async Task<ActionResult> Index(WinLossByBetTypeMetaModel metaModel)
         {
-            if (!metaModel.IsValid)
-            {
-                return await Task.FromResult(HttpNotFound());
-            }
             var licenseeSession = SessionService.LicenseeSession;
             var userSession = SessionService.UserSession;
             metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);

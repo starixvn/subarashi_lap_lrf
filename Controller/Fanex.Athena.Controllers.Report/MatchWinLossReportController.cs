@@ -92,12 +92,9 @@
 
         [HttpPost]
         [CustomValidateAntiForgery]
+        [ValidationWebRequest]
         public async Task<ActionResult> Index(MatchWinLossMetaModel metaModel)
         {
-            if (!metaModel.IsValid)
-            {
-                return await Task.FromResult(HttpNotFound());
-            }
             var licenseeSession = SessionService.LicenseeSession;
             var userSession = SessionService.UserSession;
             var currencies = userSession.CurrencyList;
@@ -144,6 +141,7 @@
 
         [HttpPost]
         [CustomValidateAntiForgery]
+        [ValidationWebRequest]
         public async Task<ActionResult> Detail(MatchWinLossMetaModel metaModel)
         {
             if (!metaModel.IsValidDetailRequest)
@@ -168,12 +166,9 @@
 
         [HttpPost]
         [CustomValidateAntiForgery]
+        [ValidationWebRequest]
         public async Task<ActionResult> Excel(MatchWinLossMetaModel metaModel)
         {
-            if (!metaModel.IsValid)
-            {
-                return await Task.FromResult(HttpNotFound());
-            }
             const int PageSize = 63000;
             const string FileName = nameof(MatchWinLoss);
 

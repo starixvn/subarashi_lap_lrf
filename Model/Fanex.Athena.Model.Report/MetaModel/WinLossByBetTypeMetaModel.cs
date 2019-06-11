@@ -7,13 +7,14 @@
 namespace Fanex.Athena.Model.Report.MetaModel
 {
     using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Model.Core.MetaModel;
     using System;
     using System.Linq;
 
     /// <summary>
     /// WinLossByBetTypeMetaModel class.
     /// </summary>
-    public class WinLossByBetTypeMetaModel : BaseReportMetaModel
+    public class WinLossByBetTypeMetaModel : BaseReportMetaModel, IMetaModelValidation
     {
         public WinLossByBetTypeMetaModel()
         {

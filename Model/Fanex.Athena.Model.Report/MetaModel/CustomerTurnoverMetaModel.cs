@@ -11,8 +11,9 @@ namespace Fanex.Athena.Model.Report.MetaModel
     using System.Linq;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Athena.Model.Core.MetaModel;
 
-    public class CustomerTurnoverMetaModel : BaseReportMetaModel
+    public class CustomerTurnoverMetaModel : BaseReportMetaModel, IMetaModelValidation
     {
         public CustomerTurnoverMetaModel()
         {

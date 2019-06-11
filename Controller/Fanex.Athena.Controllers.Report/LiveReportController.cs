@@ -109,12 +109,9 @@ namespace Fanex.Athena.Controllers.Report
         }
 
         [HttpGet]
+        [ValidationWebRequest]
         public async Task<ActionResult> MatchList(LiveReportMatchListMetalModel metaModel)
         {
-            if (!metaModel.IsValid)
-            {
-                return await Task.FromResult(HttpNotFound());
-            }
             var licenseeSession = SessionService.LicenseeSession;
             metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
 
@@ -136,12 +133,9 @@ namespace Fanex.Athena.Controllers.Report
         [HttpPost]
         [AjaxRequest]
         [CustomValidateAntiForgery]
+        [ValidationWebRequest]
         public async Task<ActionResult> Detail(LiveReportMetaModel metaModel, string productCode)
         {
-            if (!metaModel.IsValid)
-            {
-                return await Task.FromResult(HttpNotFound());
-            }
             var licenseeSession = this.SessionService.LicenseeSession;
             metaModel.LicenseeId = licenseeSession.LicenseeId;
             metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);

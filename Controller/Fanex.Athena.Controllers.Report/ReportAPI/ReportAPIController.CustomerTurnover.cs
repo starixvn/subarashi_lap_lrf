@@ -35,6 +35,7 @@ namespace Fanex.Athena.Controllers.Report
         [HttpPost]
         [FunctionAuthorization(PermissionKeys.ReportCustomerTurnover)]
         [CustomValidateAntiForgery]
+        [ValidationWebRequest]
         public async Task<ActionResult> CustomerTurnover(CustomerTurnoverMetaModel metaModel)
         {
             metaModel.IsExportExcel = false;

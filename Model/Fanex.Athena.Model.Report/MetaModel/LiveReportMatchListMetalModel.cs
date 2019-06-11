@@ -7,6 +7,7 @@
 namespace Fanex.Athena.Model.Report.MetaModel
 {
     using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Model.Core.MetaModel;
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
@@ -15,7 +16,7 @@ namespace Fanex.Athena.Model.Report.MetaModel
     /// LiveReportMatchListMetalModel class.
     /// </summary>
     [Serializable]
-    public class LiveReportMatchListMetalModel : BaseReportMetaModel
+    public class LiveReportMatchListMetalModel : BaseReportMetaModel, IMetaModelValidation
     {
         [Required]
         public int SportId { get; set; }
