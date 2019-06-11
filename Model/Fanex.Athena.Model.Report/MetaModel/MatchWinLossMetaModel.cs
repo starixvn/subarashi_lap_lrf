@@ -27,9 +27,10 @@ namespace Fanex.Athena.Model.Report.MetaModel
         public int LeagueId { get; set; }
 
         public DateTime Date { get; set; }
-
+        private bool IsValidBaseCurrency => string.IsNullOrEmpty(BaseCurrency) || SystemConstants.BaseCurrencyList
+           .Any(x => x.Value.Equals(BaseCurrency, StringComparison.OrdinalIgnoreCase));
         public bool IsValidDetailRequest => !string.IsNullOrEmpty(ProductCodeList) && MatchId > 0 && LeagueId > 0
-            && SystemConstants.BaseCurrencyList.Any(x => x.Value.Equals(BaseCurrency, StringComparison.OrdinalIgnoreCase));
+            && IsValidBaseCurrency;
 
     }
 }

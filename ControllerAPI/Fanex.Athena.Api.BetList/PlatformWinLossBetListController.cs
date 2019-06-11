@@ -14,6 +14,7 @@ namespace Fanex.Athena.Api.BetList
     using Base.Attributes;
     using DataAccess.Core.Configuration.Interfaces;
     using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Model.Core.Helper;
     using Model.BetList.MetaModel;
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
@@ -38,11 +39,13 @@ namespace Fanex.Athena.Api.BetList
         }
 
         [HttpPost]
+        [ValidationApiRequest]
         public async Task<dynamic> Index(BetListMetaModel metaModel)
         {
             var licenseeId = SessionService.LicenseeSession.LicenseeId;
 
-            if (!KeanOceanBusinessHelper.VerifyKeanOceanCurrencyRequest(SessionService.UserSession.CurrencyList, licenseeId, metaModel.CurrencyId))
+            if (!MetaModelValidationHelper.ValidateCurrencyForKeanOcean(metaModel.CurrencyId,
+                SessionService.UserSession.CurrencyList, licenseeId))
             {
                 return null;
             }

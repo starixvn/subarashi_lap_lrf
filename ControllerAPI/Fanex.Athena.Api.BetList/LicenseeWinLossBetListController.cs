@@ -7,6 +7,7 @@
     using DataAccess.Core.Configuration.Interfaces;
     using Extension.Helper;
     using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Model.Core.Helper;
     using Model.BetList.MetaModel;
     using Service.Core.Common.Interfaces;
     using Service.Core.Configuration.Interfaces;
@@ -35,6 +36,7 @@
         }
 
         [HttpPost]
+        [ValidationApiRequest]
         public async Task<dynamic> Index(BetListMetaModel metaModel)
         {
             if (!IsValidDateRange(metaModel.FromDate, metaModel.ToDate))
@@ -46,7 +48,8 @@
             var licenseeId = SessionService.LicenseeSession.LicenseeId;
             var currencyList = userSession.CurrencyList;
 
-            if (!KeanOceanBusinessHelper.VerifyKeanOceanCurrencyRequest(currencyList, licenseeId, metaModel.CurrencyId))
+            if (!MetaModelValidationHelper.ValidateCurrencyForKeanOcean(metaModel.CurrencyId,
+                currencyList, licenseeId))
             {
                 return null;
             }

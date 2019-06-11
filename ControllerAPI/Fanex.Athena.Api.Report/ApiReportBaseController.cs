@@ -5,6 +5,7 @@
     using System.Linq;
     using Base;
     using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Model.Core.Helper;
     using Model.Report.MetaModel;
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
@@ -20,33 +21,33 @@
         {
         }
 
-       
+
         protected internal virtual bool IsValidCurrency(int currencyId, int drillDownCurrencyId = 0)
         {
             var currencyList = SessionService.UserSession.CurrencyList;
-            return (currencyId <= 0 && currencyId >= SystemConstants.MinBaseCurrencyType)
-                             || currencyList.ContainsKey(currencyId)
-                             || KeanOceanBusinessHelper.VerifyKeanOceanCurrencyRequest(currencyList, SessionService.LicenseeSession.LicenseeId, drillDownCurrencyId);
+            return MetaModelValidationHelper.ValidateCurrencyAndBaseCurrencyID(currencyId, currencyList)
+                             || MetaModelValidationHelper.ValidateCurrencyForKeanOcean(drillDownCurrencyId,
+                             currencyList, SessionService.LicenseeSession.LicenseeId);
         }
 
-        protected internal virtual void CheckValidProducts(string functionKey, BaseReportMetaModel metaModel)
+        protected internal virtual void IsValidProducts(string functionKey, BaseReportMetaModel metaModel)
         {
             var passedProductCodes = string.IsNullOrEmpty(metaModel.ProductCodeList) ?
                 metaModel.ProductOptions.Select(x => x.Code) : metaModel.ProductCodeList.Split(',');
-            CheckValidProducts(functionKey, passedProductCodes);
+            IsValidProducts(functionKey, passedProductCodes);
         }
 
-        protected internal virtual void CheckValidProducts(string functionKey, string productCodeList)
+        protected internal virtual void IsValidProducts(string functionKey, string productCodeList)
         {
             var passedProductCodes = productCodeList?.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-            CheckValidProducts(functionKey, passedProductCodes);
+            IsValidProducts(functionKey, passedProductCodes);
         }
 
-        protected internal virtual void CheckValidProducts(string functionKey, IEnumerable<string> productCodes)
+        protected internal virtual bool IsValidProducts(string functionKey, IEnumerable<string> productCodes)
         {
             if (productCodes == null || !productCodes.Any())
             {
-                throw new ArgumentNullException(nameof(productCodes));
+                return false;
             }
 
             var productAccess = ProductService.GetSingleWalletProductAccess(
@@ -57,10 +58,7 @@
 
             var invalidProduct = productCodes.FirstOrDefault(x => !allowedProductCodes.Contains(x));
 
-            if (invalidProduct != null)
-            {
-                throw new ArgumentException($"Invalid product: {invalidProduct}");
-            }
+            return invalidProduct == null;
         }
     }
 }

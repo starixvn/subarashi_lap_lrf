@@ -50,13 +50,12 @@ namespace Fanex.Athena.Model.Report.MetaModel
             }
         }
 
-        public virtual bool IsValid
+        public override bool IsValid
         {
             get
             {
-                return FromDate <= ToDate
-                    && ProductOptions.Any(p => p.Status)
-                    && SystemConstants.BaseCurrencyList.Any(i => i.Value.Equals(BaseCurrency, StringComparison.OrdinalIgnoreCase));
+                return base.IsValid && FromDate <= ToDate
+                    && ProductOptions.Any(p => p.Status);
             }
         }
     }

@@ -1,10 +1,11 @@
 ﻿namespace Fanex.Athena.Model.Report.MetaModel
 {
     using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Model.Core.MetaModel;
     using System;
     using System.Linq;
 
-    public class SubsidiaryPerformanceMetaModel
+    public class SubsidiaryPerformanceMetaModel: IMetaModelValidation
     {
         public string AgentListXml { get; set; }
 

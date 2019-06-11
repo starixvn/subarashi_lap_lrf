@@ -4,6 +4,7 @@
     using System.Web.Mvc;
     using DataAccess.Core.Configuration.Interfaces;
     using Extension.Utility;
+    using Fanex.Athena.Web.ActionFilter;
     using Model.BetList.MetaModel;
     using Model.BetList.ViewModel;
     using Service.Core.Common.Interfaces;
@@ -29,6 +30,7 @@
         }
 
         [HttpGet]
+        [ValidationWebRequest]
         public async Task<ActionResult> Detail(CashOutBetListDetailMetaModel metaModel)
         {
             var userSession = SessionService.UserSession;

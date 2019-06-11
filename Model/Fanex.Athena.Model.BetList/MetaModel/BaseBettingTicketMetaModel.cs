@@ -1,12 +1,13 @@
 ﻿namespace Fanex.Athena.Model.BetList.MetaModel
 {
     using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Model.Core.MetaModel;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Script.Serialization;
 
-    public class BaseBettingTicketMetaModel
+    public class BaseBettingTicketMetaModel : IMetaModelValidation
     {
         private const int DefaultPageSize = 50;
 

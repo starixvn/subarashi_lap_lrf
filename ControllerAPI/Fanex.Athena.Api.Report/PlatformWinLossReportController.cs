@@ -46,6 +46,7 @@ namespace Fanex.Athena.Api.Report
         }
 
         [HttpPost]
+        [ValidationApiRequest]
         public Task<dynamic> Index(PlatformWinLossMetaModel metaModel)
         {
             return ProcessRequest(metaModel);
@@ -147,7 +148,7 @@ namespace Fanex.Athena.Api.Report
 
         private async Task<dynamic> ProcessRequest(PlatformWinLossMetaModel metaModel)
         {
-            if (!metaModel.IsValid || !IsValidCurrency(metaModel.CurrencyId))
+            if (!IsValidCurrency(metaModel.CurrencyId))
             {
                 return BadRequest(ViewResources.InvalidRequestMsg);
             }

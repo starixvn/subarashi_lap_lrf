@@ -9,6 +9,7 @@ namespace Fanex.Athena.Api.BetList
     #region Using
 
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Http;
     using Base.Attributes;
@@ -42,7 +43,7 @@ namespace Fanex.Athena.Api.BetList
             int rows,
             [FromUri]BetListMetaModel metaModel)
         {
-            if (!IsValidCurrencyId(metaModel.CurrencyId))
+            if (!metaModel.IsValid || !IsValidCurrencyId(metaModel.CurrencyId))
             {
                 return null;
             }
@@ -58,6 +59,7 @@ namespace Fanex.Athena.Api.BetList
         /// <param name="metaModel">Meta model object.</param>
         /// <returns>Bet list data for match win loss outright.</returns>
         [HttpPost]
+        [ValidationApiRequest]
         public async Task<dynamic> Outright(BetListMetaModel metaModel)
         {
             if (IsValidCurrencyId(metaModel.CurrencyId))
@@ -86,7 +88,9 @@ namespace Fanex.Athena.Api.BetList
             string sortOrder = null)
 #pragma warning restore S107 // Methods should not have too many parameters
         {
-            if (IsValidCurrencyId(currencyId))
+            var isValidBaseCurrency = string.IsNullOrEmpty(baseCurrency)
+                || SystemConstants.BaseCurrencyList.Any(x => x.Value.Equals(baseCurrency, StringComparison.OrdinalIgnoreCase));
+            if (isValidBaseCurrency && IsValidCurrencyId(currencyId))
             {
                 const string UspKey = "Lrf_BetList_MatchWL_Parlay";
                 var metaModel = new BetListMetaModel

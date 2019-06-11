@@ -66,6 +66,7 @@ namespace Fanex.Athena.Model.Core.MetaModel
                 return !string.IsNullOrEmpty(BaseCurrency);
             }
         }
-        public virtual bool IsValid => MetalModelValidationHelper.ValidateBaseCurrency(BaseCurrency);
+        public virtual bool IsValid =>
+            MetaModelValidationHelper.ValidateBaseCurrency(BaseCurrency);
     }
 }

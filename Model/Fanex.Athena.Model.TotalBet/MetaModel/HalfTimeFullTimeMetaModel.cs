@@ -11,7 +11,7 @@ namespace Fanex.Athena.Model.TotalBet.MetaModel
     /// <summary>
     /// HalfTimeFullTimeMetaModel class.
     /// </summary>
-    public class HalfTimeFullTimeMetaModel : TotalBetsBaseMetaModel, IMetalModelValidation
+    public class HalfTimeFullTimeMetaModel : TotalBetsBaseMetaModel, IMetaModelValidation
     {
     }
 }

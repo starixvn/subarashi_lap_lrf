@@ -166,10 +166,10 @@ namespace Fanex.Athena.Api.Report
                 {
                     return new
                     {
-                        TotalRows = result.TotalRows,
+                        result.TotalRows,
                         Data = result.DataList,
                         Total = CalculateTotal(result.DataList),
-                        SummaryTotal = result.SummaryTotal
+                        result.SummaryTotal
                     };
                 }
             }

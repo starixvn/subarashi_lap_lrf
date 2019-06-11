@@ -37,6 +37,7 @@ namespace Fanex.Athena.Controllers.BetList
         }
 
         [HttpGet]
+        [ValidationWebRequest]
         public async Task<ActionResult> Index(WinLossByLeagueBetListMetaModel metaModel)
         {
             CreateDefaultMetaModel(metaModel);

@@ -47,6 +47,7 @@ namespace Fanex.Athena.Api.BetList
         }
 
         [HttpPost]
+        [ValidationApiRequest]
         [ApiFunctionAuthorization(PermissionKeys.TotalBetCleanSheet)]
         public async Task<dynamic> CleanSheet(BetListMetaModel metaModel)
         {
@@ -55,6 +56,7 @@ namespace Fanex.Athena.Api.BetList
         }
 
         [HttpPost]
+        [ValidationApiRequest]
         [ApiFunctionAuthorization(PermissionKeys.TotalBetToWinToNil)]
         public async Task<dynamic> ToWinToNil(BetListMetaModel metaModel)
         {
@@ -63,6 +65,7 @@ namespace Fanex.Athena.Api.BetList
         }
 
         [HttpPost]
+        [ValidationApiRequest]
         [ApiFunctionAuthorization(PermissionKeys.TotalBet3WayHandicap)]
         public async Task<dynamic> ThreeWayHandicap(BetListMetaModel metaModel)
         {

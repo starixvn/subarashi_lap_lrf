@@ -1,9 +1,10 @@
 ﻿namespace Fanex.Athena.Model.Report.MetaModel
 {
+    using Fanex.Athena.Model.Core.MetaModel;
     using System;
     using System.ComponentModel;
 
-    public class SpecialLicenseeWinLossMetaModel
+    public class SpecialLicenseeWinLossMetaModel: IMetaModelValidation
     {
         private string _baseCurrency = string.Empty;
 
@@ -39,5 +40,6 @@
 
         public string CurrencyListXml { get; set; }
 
+        public bool IsValid => throw new NotImplementedException();
     }
 }

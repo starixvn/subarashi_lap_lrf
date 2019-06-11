@@ -28,8 +28,9 @@ namespace Fanex.Athena.Model.Report.MetaModel
         {
             get
             {
-                return FromDate <= ToDate 
-                    && SystemConstants.BaseCurrencyList.Any(i => i.Value.Equals(BaseCurrency, StringComparison.OrdinalIgnoreCase));
+                return FromDate <= ToDate
+                    && (string.IsNullOrEmpty(BaseCurrency) || SystemConstants.BaseCurrencyList
+           .Any(x => x.Value.Equals(BaseCurrency, StringComparison.OrdinalIgnoreCase)));
 
             }
         }

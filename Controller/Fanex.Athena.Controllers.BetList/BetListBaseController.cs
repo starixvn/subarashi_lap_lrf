@@ -1,6 +1,7 @@
 ﻿namespace Fanex.Athena.Controllers.BetList
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
@@ -18,6 +19,7 @@
     using Service.Core.Utility;
     using Service.Core.Utility.Interfaces;
     using VendorAdapter.Interfaces;
+    using Fanex.Athena.Model.Core.Helper;
 
     [SessionState(SessionStateBehavior.ReadOnly)]
     [CheckUMFilter]
@@ -110,31 +112,14 @@
 
         protected static string GetViewInCurrency(int curencyId, string defaultCurrencyName)
         {
-            string viewinCurrency;
-            switch (curencyId)
+            if (curencyId == BaseCurrencyType.All)
             {
-                case BaseCurrencyType.All:
-                    viewinCurrency = ViewResources.AllCurrencies;
-                    break;
-
-                case BaseCurrencyType.Eur:
-                    viewinCurrency = string.Format(ViewResources.Viewin, FormatKey.Eur);
-                    break;
-
-                case BaseCurrencyType.Usd:
-                    viewinCurrency = string.Format(ViewResources.Viewin, FormatKey.Usd);
-                    break;
-
-                case BaseCurrencyType.Gbp:
-                    viewinCurrency = string.Format(ViewResources.Viewin, FormatKey.Gbp);
-                    break;
-
-                default:
-                    viewinCurrency = string.Format(ViewResources.Viewin, defaultCurrencyName);
-                    break;
+                return ViewResources.AllCurrencies;
             }
 
-            return viewinCurrency;
+            return SystemConstants.BaseCurrencyList.ContainsKey(curencyId) ?
+                string.Format(ViewResources.Viewin, SystemConstants.BaseCurrencyList[curencyId]) :
+                string.Format(ViewResources.Viewin, defaultCurrencyName);
         }
 
         protected static string GetCustomerBetListTitle(BetListMetaModel metaModel, string currencyTitle)
@@ -177,7 +162,7 @@
             var balanceUp = GetBalanceUp();
             defaultMetaModel.BalanceUpDay = DateTime.SpecifyKind(balanceUp.BalanceUpDay.Date, DateTimeKind.Unspecified);
             defaultMetaModel.MoveBetsDay = DateTime.SpecifyKind(balanceUp.MoveBetsDay.Date, DateTimeKind.Unspecified);
-            if (string.IsNullOrEmpty(defaultMetaModel.BaseCurrency))
+            if (!MetaModelValidationHelper.ValidateBaseCurrency(defaultMetaModel.BaseCurrency, false))
             {
                 defaultMetaModel.BaseCurrency = userSession.DefaultBaseCurrency;
             }

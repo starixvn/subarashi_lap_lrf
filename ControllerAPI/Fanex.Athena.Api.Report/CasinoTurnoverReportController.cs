@@ -28,14 +28,14 @@
         }
 
         [HttpPost]
+        [ValidationApiRequest]
         public async Task<dynamic> GetData(CasinoTurnoverMetaModel metaModel)
         {
-            if (!metaModel.IsValid || !IsValidCurrency(metaModel.CurrencyId))
+            if (!IsValidCurrency(metaModel.CurrencyId)
+                || !IsValidProducts(FunctionNames.CasinoTurnover, metaModel.ProductCode))
             {
                 return BadRequest(ViewResources.InvalidRequestMsg);
             }
-
-            CheckValidProducts(FunctionNames.CasinoTurnover, metaModel.ProductCode);
 
             metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
             var result = await _casinoTurnoverDataAccess.GetData(metaModel).ConfigureAwait(false);

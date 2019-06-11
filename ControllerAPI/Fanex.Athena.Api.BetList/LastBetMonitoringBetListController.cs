@@ -70,12 +70,9 @@
         }
 
         [HttpPost]
+        [ValidationApiRequest(ObjectName = "metaModel")]
         public async Task<HttpResponseMessage> Index(LastBetsMonitoringMetaModel metaModel)
         {
-            if (!metaModel.IsValid)
-            {
-                return await HandleForbiddenReuest();
-            }
             if (string.IsNullOrWhiteSpace(metaModel.Currency))
             {
                 metaModel.AgentListXml = SessionService.GenerateAgentListXml();

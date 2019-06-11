@@ -11,7 +11,7 @@ namespace Fanex.Athena.Model.TotalBet.MetaModel
     /// <summary>
     /// HomeDrawAwayNoBetMetaModel class.
     /// </summary>
-    public class HomeDrawAwayNoBetMetaModel : TotalBetsBaseMetaModel, IMetalModelValidation
+    public class HomeDrawAwayNoBetMetaModel : TotalBetsBaseMetaModel, IMetaModelValidation
     {
     }
 }

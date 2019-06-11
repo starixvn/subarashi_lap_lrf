@@ -7,6 +7,7 @@
 
 namespace Fanex.Athena.Api.BetList
 {
+    using System;
     using System.Net.Http;
     using System.Threading.Tasks;
     using System.Web.Http;
@@ -47,6 +48,7 @@ namespace Fanex.Athena.Api.BetList
         }
 
         [HttpPost]
+        [ValidationApiRequest]
         public async Task<dynamic> Outright(LiveReportBetListMetaModel metaModel)
         {
             if (IsValidCurrencyId(metaModel.CurrencyId))
@@ -61,7 +63,7 @@ namespace Fanex.Athena.Api.BetList
         [HttpGet]
         public async Task<dynamic> NumberGame([FromUri] LiveReportBetListMetaModel metaModel, int page, int rows)
         {
-            if (IsValidCurrencyId(metaModel.CurrencyId))
+            if (metaModel.IsValid && IsValidCurrencyId(metaModel.CurrencyId))
             {
                 metaModel.IsServerPaging = true;
                 const string UspKey = "Lrf_BetList_LiveReport_SelWinlossNumberGame";
@@ -75,7 +77,7 @@ namespace Fanex.Athena.Api.BetList
         [HttpGet]
         public async Task<dynamic> MixParlay([FromUri] LiveReportBetListMetaModel metaModel, int page, int rows)
         {
-            if (IsValidCurrencyId(metaModel.CurrencyId))
+            if (metaModel.IsValid && IsValidCurrencyId(metaModel.CurrencyId))
             {
                 const string UspKey = "Lrf_BetList_LiveReport_SelWinlossParlay";
 
@@ -90,7 +92,7 @@ namespace Fanex.Athena.Api.BetList
         [HttpGet]
         public async Task<dynamic> VirtualSports([FromUri] LiveReportBetListMetaModel metaModel, int page, int rows)
         {
-            if (IsValidCurrencyId(metaModel.CurrencyId))
+            if (metaModel.IsValid && IsValidCurrencyId(metaModel.CurrencyId))
             {
                 const string UspName = "Lrf_BetList_LiveReport_SelWinlossVHRacing";
 

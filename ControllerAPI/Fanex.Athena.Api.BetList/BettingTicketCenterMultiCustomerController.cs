@@ -7,7 +7,7 @@
     using Base;
     using Base.Attributes;
     using Extension.Utility;
-    using Helpers;
+    using Fanex.Athena.Model.Core.Helper;
     using Model.BetList.MetaModel;
     using Model.Core.DataDomain;
     using Resources;
@@ -37,6 +37,7 @@
         }
 
         [HttpPost]
+        [ValidationApiRequest]
         public async Task<dynamic> GetData(MultipleCustomersBetListMetaModel metaModel)
         {
             var licenseeSession = SessionService.LicenseeSession;
@@ -55,7 +56,7 @@
 
             var userCurrencyList = userSession.CurrencyList;
             var currencyList = metaModel.CurrencyIdList?.Split(',').Select(x => int.Parse(x)).ToArray();
-            if (!metaModel.IsValid || !BetListHelper.IsValidCurrencyId(currencyList, userCurrencyList))
+            if (!MetaModelValidationHelper.IsValidCurrencyIdList(currencyList, userCurrencyList))
             {
                 return BadRequest(ViewResources.InvalidRequestMsg);
             }

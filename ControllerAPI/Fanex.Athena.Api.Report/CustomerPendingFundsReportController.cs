@@ -41,6 +41,7 @@
         }
 
         [HttpPost]
+        [ValidationApiRequest]
         public async Task<dynamic> Index(CustomerPendingFundsMetaModel metaModel)
         {
             var data = await GetData(metaModel).ConfigureAwait(false);
@@ -49,13 +50,15 @@
             {
                 Data = data.DataList,
                 Total = data.TotalData,
-                TotalRows = data.TotalRows
+                data.TotalRows
             };
         }
 
         [HttpPost]
+        [ValidationApiRequest]
         public async Task<HttpResponseMessage> ExportExcel(CustomerPendingFundsMetaModel metaModel)
         {
+           
             const string FileName = "CustomerPendingFunds.xls";
             const string TemplatePath = @"~/App_Data/Template/CustomerReports/CustomerPendingFunds.xls";
 

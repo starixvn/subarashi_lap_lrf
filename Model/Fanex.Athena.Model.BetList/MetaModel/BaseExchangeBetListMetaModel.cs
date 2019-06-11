@@ -1,4 +1,8 @@
-﻿namespace Fanex.Athena.Model.BetList.MetaModel
+﻿using Fanex.Athena.Model.Core.DataDomain;
+using System;
+using System.Linq;
+
+namespace Fanex.Athena.Model.BetList.MetaModel
 {
     public class BaseExchangeBetListMetaModel
     {
@@ -27,6 +31,10 @@
             }
         }
 
-        public virtual bool IsValid => CustId > 0;
+        public virtual bool IsValid => CustId > 0
+            && (string.IsNullOrEmpty(BaseCurrency) ||
+            SystemConstants.BaseCurrencyList.Any(x => x.Value == BaseCurrency));
+
+
     }
 }

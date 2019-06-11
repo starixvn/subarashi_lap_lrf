@@ -55,6 +55,8 @@ namespace Fanex.Athena.Controllers.BetList
 
         [HttpGet]
         [FunctionAuthorization(PermissionKeys.TotalBetMixParlay)]
+        [ValidationWebRequest]
+
         public async Task<ActionResult> MixParlay(BetListExcelMetaModel metaModel)
         {
             metaModel.MultipleBettype = ((int)BetType.CombinationMixParlay).ToString();
@@ -65,6 +67,8 @@ namespace Fanex.Athena.Controllers.BetList
 
         [HttpGet]
         [FunctionAuthorization(PermissionKeys.TotalBetDoubleChance)]
+        [ValidationWebRequest]
+
         public async Task<ActionResult> DoubleChange(BetListExcelMetaModel metaModel)
         {
             metaModel.MultipleBettype = DoubleChangeBettypes;
@@ -75,6 +79,8 @@ namespace Fanex.Athena.Controllers.BetList
 
         [HttpGet]
         [FunctionAuthorization(PermissionKeys.TotalBetBONTeamToScore)]
+        [ValidationWebRequest]
+
         public async Task<ActionResult> BONTeamToScore(BetListExcelMetaModel metaModel)
         {
             metaModel.MultipleBettype = BONTeamToScoreBettypes;

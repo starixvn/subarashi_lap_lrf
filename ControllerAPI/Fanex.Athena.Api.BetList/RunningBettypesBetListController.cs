@@ -50,6 +50,7 @@ namespace Fanex.Athena.Api.BetList
         }
 
         [HttpPost]
+        [ValidationApiRequest]
         [ApiFunctionAuthorization(PermissionKeys.TotalBetMixParlay)]
         public async Task<dynamic> MixParlay(BetListMetaModel metaModel)
         {
@@ -59,6 +60,7 @@ namespace Fanex.Athena.Api.BetList
 
         [HttpPost]
         [ApiFunctionAuthorization(PermissionKeys.TotalBetDoubleChance)]
+        [ValidationApiRequest]
         public async Task<dynamic> DoubleChange(BetListMetaModel metaModel)
         {
             metaModel.MultipleBettype = DoubleChangeBettypes;
@@ -67,6 +69,7 @@ namespace Fanex.Athena.Api.BetList
 
         [HttpPost]
         [ApiFunctionAuthorization(PermissionKeys.TotalBetBONTeamToScore)]
+        [ValidationApiRequest]
         public async Task<dynamic> BONTeamToScore(BetListMetaModel metaModel)
         {
             metaModel.MultipleBettype = BONTeamToScoreBettypes;

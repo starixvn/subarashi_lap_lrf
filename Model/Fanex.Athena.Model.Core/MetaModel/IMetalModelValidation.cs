@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Fanex.Athena.Model.Core.MetaModel
 {
-    public interface IMetalModelValidation
+    public interface IMetaModelValidation
     {
         bool IsValid { get; }
     }

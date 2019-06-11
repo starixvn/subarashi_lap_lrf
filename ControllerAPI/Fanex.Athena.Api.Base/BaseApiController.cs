@@ -56,8 +56,9 @@ namespace Fanex.Athena.Api.Base
         [System.CLSCompliant(false)]
         protected internal virtual HttpResponseMessage ExcelStream(IWorkbook workbook, string fileName)
         {
-            var result = new HttpResponseMessage(HttpStatusCode.OK);
-            result.Content = new PushStreamContent(
+            var result = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new PushStreamContent(
               (stream, context, transportContext) =>
               {
                   try
@@ -71,7 +72,8 @@ namespace Fanex.Athena.Api.Base
                       context.Dispose();
                   }
               },
-              new MediaTypeHeaderValue("application/octet-stream"));
+              new MediaTypeHeaderValue("application/octet-stream"))
+            };
             result.Headers.TransferEncodingChunked = true;
             result.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
             {
@@ -102,15 +104,6 @@ namespace Fanex.Athena.Api.Base
 
             var validProductCodes = productCodeList.Split(',').Where(x => productList.Any(y => y.ProductCode.Equals(x, StringComparison.OrdinalIgnoreCase)));
             return string.Join(",", validProductCodes.ToArray());
-        }
-
-        protected async Task<HttpResponseMessage> HandleForbiddenReuest()
-        {
-            return await Task.FromResult(new HttpResponseMessage
-            {
-                StatusCode = HttpStatusCode.Forbidden,
-                Content = new StringContent(ViewResources.InvalidRequestMsg)
-            });
         }
     }
 }

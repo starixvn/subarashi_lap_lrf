@@ -8,7 +8,7 @@ using Fanex.Athena.Model.Core.MetaModel;
 
 namespace Fanex.Athena.Model.BetList.MetaModel
 {
-    public class BetListMetaModel : BaseMetaModel
+    public class BetListMetaModel : BaseMetaModel, IMetaModelValidation
     {
         public BetListMetaModel()
         {
@@ -119,14 +119,12 @@ namespace Fanex.Athena.Model.BetList.MetaModel
 
         public long RefCode { get; set; }
 
-        public virtual bool IsValid
+        public override bool IsValid
         {
             get
             {
-                return FromDate <= ToDate
-                    && !string.IsNullOrWhiteSpace(ProductCodeList)
-                    && (string.IsNullOrEmpty(BaseCurrency) || SystemConstants.BaseCurrencyList
-                    .Any(x => x.Value.Equals(BaseCurrency, StringComparison.OrdinalIgnoreCase)));
+                return base.IsValid && FromDate <= ToDate
+                    && !string.IsNullOrWhiteSpace(ProductCodeList);
             }
         }
 

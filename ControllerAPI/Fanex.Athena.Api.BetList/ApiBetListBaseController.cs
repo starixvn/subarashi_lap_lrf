@@ -10,6 +10,7 @@ namespace Fanex.Athena.Api.BetList
     using System.Threading.Tasks;
     using Base;
     using DataAccess.Core.Configuration.Interfaces;
+    using Fanex.Athena.Model.Core.Helper;
     using Model.BetList.MetaModel;
     using Model.Core.DTO.Configuration;
     using Service.Core.Common.Interfaces;
@@ -109,7 +110,7 @@ namespace Fanex.Athena.Api.BetList
 
         protected bool IsValidCurrencyId(int currencyId)
         {
-            return currencyId == 0 || SessionService.UserSession.CurrencyList.ContainsKey(currencyId);
+            return MetaModelValidationHelper.ValidateCurrency(currencyId, SessionService.UserSession.CurrencyList);
         }
     }
 }

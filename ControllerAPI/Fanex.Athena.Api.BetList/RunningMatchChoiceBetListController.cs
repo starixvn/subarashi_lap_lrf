@@ -9,6 +9,7 @@ namespace Fanex.Athena.Api.BetList
     using System.Threading.Tasks;
     using System.Web.Http;
     using DataAccess.Core.Configuration.Interfaces;
+    using Fanex.Athena.Api.Base.Attributes;
     using Model.BetList.MetaModel;
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
@@ -29,6 +30,7 @@ namespace Fanex.Athena.Api.BetList
         }
 
         [HttpPost]
+        [ValidationApiRequest]
         public async Task<dynamic> Index(BetListMetaModel metaModel)
         {
             if (!IsValidCurrencyId(metaModel.CurrencyId))

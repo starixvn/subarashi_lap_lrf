@@ -33,9 +33,10 @@
         }
 
         [HttpPost]
+        [ValidationApiRequest]
         public async Task<dynamic> Index(BetListMetaModel metaModel)
         {
-            if (!metaModel.IsValid || !IsValidCurrencyId(metaModel.CurrencyId))
+            if (!IsValidCurrencyId(metaModel.CurrencyId))
             {
                 return null;
             }

@@ -44,6 +44,7 @@
         }
 
         [HttpPost]
+        [ValidationApiRequest]
         public Task<dynamic> Index(SpecialLicenseeWinLossMetaModel metaModel)
         {
             return ProcessRequest(metaModel);
@@ -137,7 +138,7 @@
 
         private bool IsValidCurrency(SpecialLicenseeWinLossMetaModel metaModel)
         {
-            return metaModel.CurrencyId <= 0
+            return metaModel.CurrencyId >= SystemConstants.MinBaseCurrencyType
                 || SessionService.UserSession.CurrencyList.ContainsKey(metaModel.CurrencyId);
         }
 

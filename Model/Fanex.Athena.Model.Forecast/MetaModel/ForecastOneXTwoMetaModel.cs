@@ -10,7 +10,7 @@ namespace Fanex.Athena.Model.Forecast.MetaModel
     /// <summary>
     /// ForecastOneXTwoMetaModel class.
     /// </summary>
-    public class ForecastOneXTwoMetaModel : ForecastBaseMetaModel, IMetalModelValidation
+    public class ForecastOneXTwoMetaModel : ForecastBaseMetaModel, IMetaModelValidation
     {
         public ForecastOneXTwoMetaModel()
         {

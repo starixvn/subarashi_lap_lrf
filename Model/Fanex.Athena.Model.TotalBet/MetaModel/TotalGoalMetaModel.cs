@@ -11,7 +11,7 @@ namespace Fanex.Athena.Model.TotalBet.MetaModel
     /// <summary>
     /// TotalGoalMetaModel class.
     /// </summary>
-    public class TotalGoalMetaModel : TotalBetsBaseMetaModel, IMetalModelValidation
+    public class TotalGoalMetaModel : TotalBetsBaseMetaModel, IMetaModelValidation
     {
     }
 }

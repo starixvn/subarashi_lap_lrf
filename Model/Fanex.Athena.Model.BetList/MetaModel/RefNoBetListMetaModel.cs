@@ -1,6 +1,8 @@
-﻿namespace Fanex.Athena.Model.BetList.MetaModel
+﻿using Fanex.Athena.Model.Core.MetaModel;
+
+namespace Fanex.Athena.Model.BetList.MetaModel
 {
-    public class RefNoBetListMetaModel : BaseBettingTicketMetaModel
+    public class RefNoBetListMetaModel : BaseBettingTicketMetaModel, IMetaModelValidation
     {
         public long RefNo { get; set; }
 

@@ -1,11 +1,12 @@
 ﻿using Fanex.Athena.Model.Core.DataDomain;
+using Fanex.Athena.Model.Core.MetaModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Fanex.Athena.Model.BetList.MetaModel
 {
-    public class LastBetsMonitoringMetaModel
+    public class LastBetsMonitoringMetaModel : IMetaModelValidation
     {
         private const int DefaultPageSize = 10;
 

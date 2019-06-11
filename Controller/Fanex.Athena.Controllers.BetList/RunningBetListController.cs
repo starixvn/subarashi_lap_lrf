@@ -47,6 +47,7 @@ namespace Fanex.Athena.Controllers.BetList
 
         [HttpGet]
         [FunctionAuthorization(PermissionKeys.TotalBetCleanSheet)]
+        [ValidationWebRequest]
         public async Task<ActionResult> CleanSheet(BetListExcelMetaModel metaModel)
         {
             metaModel.BetType = (int)BetType.CleanSheet;
@@ -57,6 +58,7 @@ namespace Fanex.Athena.Controllers.BetList
 
         [HttpGet]
         [FunctionAuthorization(PermissionKeys.TotalBetToWinToNil)]
+        [ValidationWebRequest]
         public async Task<ActionResult> ToWinToNil(BetListExcelMetaModel metaModel)
         {
             metaModel.BetType = (int)BetType.ToWinToNil;
@@ -67,6 +69,8 @@ namespace Fanex.Athena.Controllers.BetList
 
         [HttpGet]
         [FunctionAuthorization(PermissionKeys.TotalBet3WayHandicap)]
+        [ValidationWebRequest]
+
         public async Task<ActionResult> ThreeWayHandicap(BetListExcelMetaModel metaModel)
         {
             metaModel.BetType = (int)BetType.ThreeWayHandicap;

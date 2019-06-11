@@ -61,6 +61,7 @@ namespace Fanex.Athena.Controllers.BetList
 
         [HttpPost]
         [CustomValidateAntiForgery]
+        [ValidationWebRequest]
         public async Task<ActionResult> Index(BetListExcelMetaModel metaModel)
         {
             var licenseeSession = SessionService.LicenseeSession;

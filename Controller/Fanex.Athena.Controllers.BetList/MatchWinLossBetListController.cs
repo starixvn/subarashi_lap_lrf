@@ -41,18 +41,24 @@ namespace Fanex.Athena.Controllers.BetList
         }
 
         [HttpGet]
+        [ValidationWebRequest]
+
         public Task<ActionResult> MatchBetType(BetListExcelMetaModel metaModel)
         {
             return ProcessRequest(metaModel, null, "~/Views/Desktop/BetList/MatchWl/MatchBetType.cshtml");
         }
 
         [HttpGet]
+        [ValidationWebRequest]
+
         public Task<ActionResult> MixParlay(BetListExcelMetaModel metaModel)
         {
             return ProcessRequest(metaModel, "Lrf_BetList_MatchWL_Parlay", "~/Views/Desktop/BetList/MatchWl/MixParlay.cshtml");
         }
 
         [HttpGet]
+        [ValidationWebRequest]
+
         public Task<ActionResult> Outright(BetListExcelMetaModel metaModel)
         {
             return ProcessRequest(metaModel, "Lrf_BetList_MatchWL_Outright", "~/Views/Desktop/BetList/MatchWl/Outright.cshtml");

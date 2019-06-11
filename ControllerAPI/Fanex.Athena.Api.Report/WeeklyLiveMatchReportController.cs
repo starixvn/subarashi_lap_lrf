@@ -13,6 +13,7 @@ namespace Fanex.Athena.Api.Report
     using System.Web.Hosting;
     using System.Web.Http;
     using Excel.Report;
+    using Fanex.Athena.Api.Base.Attributes;
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Service.Report;
@@ -36,6 +37,7 @@ namespace Fanex.Athena.Api.Report
         }
 
         [HttpPost]
+        [ValidationApiRequest]
         public async Task<dynamic> Index(WeeklyLiveMatchMetaModel metaModel)
         {
             if (IsValidCurrency(metaModel.CurrencyId))

@@ -11,7 +11,7 @@ namespace Fanex.Athena.Model.TotalBet.MetaModel
     using System;
     using System.Linq;
 
-    public class TotalBetsBaseMetaModel : BaseMetaModel, IMetalModelValidation
+    public class TotalBetsBaseMetaModel : BaseMetaModel, IMetaModelValidation
     {
         private const int DefaultPageSize = 1000;
 

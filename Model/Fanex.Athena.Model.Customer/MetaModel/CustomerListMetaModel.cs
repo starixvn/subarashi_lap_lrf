@@ -54,5 +54,6 @@ namespace Fanex.Athena.Model.Customer.MetaModel
         public IEnumerable<CheckedItem> OddsGroups { get; set; }
 
         public string SubsidiaryList { get; set; }
+
     }
 }

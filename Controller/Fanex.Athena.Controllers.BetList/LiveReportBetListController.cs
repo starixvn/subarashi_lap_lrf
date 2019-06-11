@@ -31,6 +31,7 @@
         }
 
         [HttpGet]
+        [ValidationWebRequest]
         public Task<ActionResult> Match(LiveReportBetListMetaModel metaModel)
         {
             return ProcessRequest(
@@ -40,6 +41,7 @@
         }
 
         [HttpGet]
+        [ValidationWebRequest]
         public Task<ActionResult> MixParlay(LiveReportBetListMetaModel metaModel)
         {
             return ProcessRequest(
@@ -49,6 +51,7 @@
         }
 
         [HttpGet]
+        [ValidationWebRequest]
         public Task<ActionResult> Outright(LiveReportBetListMetaModel metaModel)
         {
             return ProcessRequest(
@@ -59,6 +62,8 @@
         }
 
         [HttpGet]
+        [ValidationWebRequest]
+
         public Task<ActionResult> NumberGame(LiveReportBetListMetaModel metaModel)
         {
             return ProcessRequest(
@@ -69,6 +74,8 @@
         }
 
         [HttpGet]
+        [ValidationWebRequest]
+
         public async Task<ActionResult> VirtualSports(LiveReportBetListMetaModel metaModel)
         {
             var caption = CacheRefAdapter.GetSportName(metaModel.SportType);

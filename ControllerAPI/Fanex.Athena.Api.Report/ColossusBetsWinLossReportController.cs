@@ -41,6 +41,7 @@ namespace Fanex.Athena.Api.Report
         }
 
         [HttpPost]
+        [ValidationApiRequest]
         public Task<dynamic> Index(
             ColossusBetsWinLossMetaModel metaModel,
             DateTime? fdate,
@@ -53,6 +54,7 @@ namespace Fanex.Athena.Api.Report
         }
 
         [HttpPost]
+        [ValidationApiRequest]
         public Task<dynamic> Index([FromBody] ColossusBetsWinLossMetaModel metaModel)
         {
             return ProcessRequest(metaModel, null, null);

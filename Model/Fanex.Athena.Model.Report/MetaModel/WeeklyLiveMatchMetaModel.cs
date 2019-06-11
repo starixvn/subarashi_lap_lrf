@@ -8,8 +8,9 @@ namespace Fanex.Athena.Model.Report.MetaModel
 {
     using System;
     using Extension.Helper;
+    using Fanex.Athena.Model.Core.MetaModel;
 
-    public class WeeklyLiveMatchMetaModel : BaseReportMetaModel
+    public class WeeklyLiveMatchMetaModel : BaseReportMetaModel, IMetaModelValidation
     {
         public WeeklyLiveMatchMetaModel()
         {

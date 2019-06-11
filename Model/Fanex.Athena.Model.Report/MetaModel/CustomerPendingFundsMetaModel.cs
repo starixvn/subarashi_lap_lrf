@@ -4,12 +4,17 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
+using Fanex.Athena.Model.Core.DataDomain;
+using Fanex.Athena.Model.Core.MetaModel;
+using System;
+using System.Linq;
+
 namespace Fanex.Athena.Model.Report.MetaModel
 {
     /// <summary>
     /// CustomerPendingFundsMetaModel class.
     /// </summary>
-    public class CustomerPendingFundsMetaModel : BaseReportMetaModel
+    public class CustomerPendingFundsMetaModel : BaseReportMetaModel, IMetaModelValidation
     {
         public CustomerPendingFundsMetaModel()
         {
@@ -27,7 +32,8 @@ namespace Fanex.Athena.Model.Report.MetaModel
         {
             get
             {
-                return true;
+                return string.IsNullOrEmpty(BaseCurrency) || SystemConstants.BaseCurrencyList
+            .Any(x => x.Value.Equals(BaseCurrency, StringComparison.OrdinalIgnoreCase));
             }
         }
     }

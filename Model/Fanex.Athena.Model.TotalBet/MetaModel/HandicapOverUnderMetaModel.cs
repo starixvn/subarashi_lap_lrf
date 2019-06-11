@@ -11,7 +11,7 @@ namespace Fanex.Athena.Model.TotalBet.MetaModel
     /// <summary>
     /// HandicapOverUnderMetaModel class.
     /// </summary>
-    public class HandicapOverUnderMetaModel : TotalBetsBaseMetaModel, IMetalModelValidation
+    public class HandicapOverUnderMetaModel : TotalBetsBaseMetaModel, IMetaModelValidation
     {
     }
 }

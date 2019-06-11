@@ -39,6 +39,7 @@ namespace Fanex.Athena.Api.BetList
         }
 
         [HttpPost]
+        [ValidationApiRequest]
         public async Task<dynamic> Index(BetListMetaModel metaModel)
         {
             var licenseeSession = SessionService.LicenseeSession;

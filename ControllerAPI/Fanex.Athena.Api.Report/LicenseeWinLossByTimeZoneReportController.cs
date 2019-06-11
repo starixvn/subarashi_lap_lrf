@@ -29,13 +29,9 @@
         }
 
         [HttpPost]
+        [ValidationApiRequest]
         public async Task<dynamic> Index(LicenseeWinLossByTimeZoneMetaModel metaModel)
         {
-            if (!metaModel.IsValid)
-            {
-                return BadRequest(ViewResources.InvalidRequestMsg);
-            }
-
             var userCurrencyList = SessionService.UserSession.CurrencyList;
             metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId, metaModel.IsExcludeTestData);
 

@@ -11,7 +11,7 @@ namespace Fanex.Athena.Model.TotalBet.MetaModel
     /// <summary>
     /// OutrightMetaModel class.
     /// </summary>
-    public class OutrightMetaModel : TotalBetsBaseMetaModel, IMetalModelValidation
+    public class OutrightMetaModel : TotalBetsBaseMetaModel, IMetaModelValidation
     {
     }
 }

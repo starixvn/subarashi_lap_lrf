@@ -1,6 +1,7 @@
 ﻿namespace Fanex.Athena.Api.BetList
 {
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Http;
     using Base.Attributes;
@@ -41,7 +42,10 @@
             string sortOrder = null)
 #pragma warning restore S107 // Methods should not have too many parameters
         {
-            if (!IsValidCurrencyId(currencyId))
+            var isValidBaseCurrency = string.IsNullOrEmpty(baseCurrency)
+    || SystemConstants.BaseCurrencyList.Any(x => x.Value.Equals(baseCurrency, StringComparison.OrdinalIgnoreCase));
+
+            if (!isValidBaseCurrency || !IsValidCurrencyId(currencyId))
             {
                 return null;
             }
