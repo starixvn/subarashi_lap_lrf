@@ -25,7 +25,7 @@
         protected internal virtual bool IsValidCurrency(int currencyId, int drillDownCurrencyId = 0)
         {
             var currencyList = SessionService.UserSession.CurrencyList;
-            return MetaModelValidationHelper.ValidateCurrencyAndBaseCurrencyID(currencyId, currencyList)
+            return MetaModelValidationHelper.ValidateCurrency(currencyId, currencyList)
                              || MetaModelValidationHelper.ValidateCurrencyForKeanOcean(drillDownCurrencyId,
                              currencyList, SessionService.LicenseeSession.LicenseeId);
         }

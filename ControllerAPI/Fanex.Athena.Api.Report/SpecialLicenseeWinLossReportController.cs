@@ -8,6 +8,7 @@
     using DataAccess.Report.Interfaces;
     using Extension.Utility;
     using Fanex.Athena.Extension.Helper;
+    using Fanex.Athena.Model.Core.Helper;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
     using Model.Core.DataDomain;
@@ -138,8 +139,8 @@
 
         private bool IsValidCurrency(SpecialLicenseeWinLossMetaModel metaModel)
         {
-            return metaModel.CurrencyId >= SystemConstants.MinBaseCurrencyType
-                || SessionService.UserSession.CurrencyList.ContainsKey(metaModel.CurrencyId);
+            return MetaModelValidationHelper.ValidateCurrency(metaModel.CurrencyId,
+                SessionService.UserSession.CurrencyList);
         }
 
         private bool IsValidProduct(SpecialLicenseeWinLossMetaModel metaModel)
