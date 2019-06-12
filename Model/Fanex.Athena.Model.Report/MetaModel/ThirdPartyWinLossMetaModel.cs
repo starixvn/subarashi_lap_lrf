@@ -6,9 +6,11 @@
 
 namespace Fanex.Athena.Model.Report.MetaModel
 {
+    using Fanex.Athena.Model.Core.Helper;
+    using Fanex.Athena.Model.Core.MetaModel;
     using System;
 
-    public class ThirdPartyWinLossMetaModel : BaseDrilldownReportMetaModel
+    public class ThirdPartyWinLossMetaModel : BaseDrilldownReportMetaModel, IMetaModelValidation
     {
         private DateTime? _fromDate;
 
@@ -42,7 +44,8 @@ namespace Fanex.Athena.Model.Report.MetaModel
         {
             get
             {
-                return true;
+                return MetaModelValidationHelper.ValidateBaseCurrency(BaseCurrency);
+
             }
         }
 

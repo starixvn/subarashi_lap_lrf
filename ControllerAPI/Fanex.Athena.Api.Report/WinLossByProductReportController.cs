@@ -49,6 +49,7 @@ namespace Fanex.Athena.Api.Report
         }
 
         [HttpPost]
+        [ValidationApiRequest(ObjectName = "metaModel")]
 #pragma warning disable S107 // Methods should not have too many parameters
         public Task<dynamic> Index(
            WinLossByProductMetaModel metaModel,
@@ -66,6 +67,7 @@ namespace Fanex.Athena.Api.Report
         }
 
         [HttpPost]
+        [ValidationApiRequest(ObjectName = "metaModel")]
         public Task<dynamic> Index([FromBody] WinLossByProductMetaModel metaModel)
         {
             return ProcessRequest(metaModel, null, null);
@@ -246,6 +248,7 @@ namespace Fanex.Athena.Api.Report
                 return BadRequest(ViewResources.InvalidParams);
             }
 
+            metaModel.DefaultBaseCurrency = SessionService.UserSession.DefaultBaseCurrency;
             metaModel.Username = ValidateUserName(metaModel.Username);
             metaModel.AgentListXml = SessionService.GenerateAgentListXml(level == 0 ? metaModel.CurrencyId : currencyId, metaModel.IsExcludedTestData);
             metaModel.DrillDownCurrencyId = currencyId;

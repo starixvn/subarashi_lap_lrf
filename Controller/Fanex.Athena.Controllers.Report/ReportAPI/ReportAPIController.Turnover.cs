@@ -19,13 +19,9 @@ namespace Fanex.Athena.Controllers.Report
         [HttpPost]
         [FunctionAuthorization(PermissionKeys.ReportTurnover)]
         [CustomValidateAntiForgery]
+        [ValidationWebRequest]
         public async Task<ActionResult> Turnover(TurnoverMetaModel metaModel)
         {
-            if (!metaModel.IsValid)
-            {
-                return await Task.FromResult(HttpNotFound());
-            }
-
             var placeholderUsername = _appSettings.FakeLicenseeList.Contains(SessionService.LicenseeSession.LicenseeId) ?
                 ViewResources.ExternalId :
                 ViewResources.ExternalIdOrSystemId;

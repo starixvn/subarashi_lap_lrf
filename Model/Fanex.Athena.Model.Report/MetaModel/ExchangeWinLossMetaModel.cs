@@ -1,6 +1,9 @@
-﻿namespace Fanex.Athena.Model.Report.MetaModel
+﻿using Fanex.Athena.Model.Core.Helper;
+using Fanex.Athena.Model.Core.MetaModel;
+
+namespace Fanex.Athena.Model.Report.MetaModel
 {
-    public class ExchangeWinLossMetaModel : BaseReportMetaModel
+    public class ExchangeWinLossMetaModel : BaseReportMetaModel, IMetaModelValidation
     {
         public byte ReportBy { get; set; }
 
@@ -14,7 +17,8 @@
         {
             get
             {
-                return FromDate <= ToDate;
+                return FromDate <= ToDate && MetaModelValidationHelper
+                    .ValidateBaseCurrency(BaseCurrency);
             }
         }
         public string DefaultBaseCurrency { get; set; }

@@ -33,6 +33,7 @@
         }
 
         [HttpPost]
+        [ValidationApiRequest(ObjectName = "metaModel")]
         public Task<dynamic> Index(
             ThirdPartyWinLossMetaModel metaModel,
             DateTime? fdate,
@@ -45,6 +46,7 @@
         }
 
         [HttpPost]
+        [ValidationApiRequest(ObjectName = "metaModel")]
         public Task<dynamic> Index([FromBody] ThirdPartyWinLossMetaModel metaModel)
         {
             return ProcessRequest(metaModel, null, null);
@@ -126,6 +128,7 @@
                 metaModel.DrillDownToDate = tdate.HasValue ? tdate.Value : metaModel.DrillDownToDate;
                 metaModel.AgentListXml = SessionService.GenerateAgentListXml(level == 0 ? metaModel.CurrencyId : currencyId, metaModel.IsExcludedTestData);
                 metaModel.LicenseeId = SessionService.LicenseeSession.LicenseeId;
+                metaModel.DefaultBaseCurrency = SessionService.UserSession.DefaultBaseCurrency;
 
                 var result = await GetData(metaModel);
 

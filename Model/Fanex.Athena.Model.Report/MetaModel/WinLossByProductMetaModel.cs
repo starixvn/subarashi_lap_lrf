@@ -6,9 +6,10 @@
 
 namespace Fanex.Athena.Model.Report.MetaModel
 {
+    using Fanex.Athena.Model.Core.MetaModel;
     using System;
 
-    public class WinLossByProductMetaModel : BaseReportMetaModel
+    public class WinLossByProductMetaModel : BaseReportMetaModel, IMetaModelValidation
     {
         public int DrillDownCurrencyId { get; set; }
 

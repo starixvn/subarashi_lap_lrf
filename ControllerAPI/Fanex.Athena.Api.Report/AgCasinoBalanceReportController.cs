@@ -40,6 +40,7 @@ namespace Fanex.Athena.Api.Report
         }
 
         [HttpPost]
+        [ValidationApiRequest]
         public Task<dynamic> Index(ThirdPartyWinLossMetaModel metaModel)
         {
             return ProcessRequest(metaModel);
@@ -155,6 +156,7 @@ namespace Fanex.Athena.Api.Report
             if (IsValidCurrency(metaModel.CurrencyId, metaModel.DrillDownCurrencyId))
             {
                 metaModel.LicenseeId = SessionService.LicenseeSession.LicenseeId;
+                metaModel.DefaultBaseCurrency = SessionService.UserSession.DefaultBaseCurrency;
                 var result = await GetData(metaModel);
 
                 if (metaModel.IsExportExcel)

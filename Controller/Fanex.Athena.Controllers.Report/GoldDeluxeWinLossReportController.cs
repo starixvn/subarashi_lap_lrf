@@ -56,7 +56,10 @@ namespace Fanex.Athena.Controllers.Report
                 ProductId = product.ProductID,
                 ProductCode = product.ProductCode,
                 ProductName = product.ProductName,
-                BaseCurrency = userSession.DefaultBaseCurrency
+                BaseCurrency = userSession.DefaultBaseCurrency,
+                CurrencyId = SystemConstants.BaseCurrencyList
+                .FirstOrDefault(x => x.Value.Equals(userSession.DefaultBaseCurrency, StringComparison.OrdinalIgnoreCase))
+                .Key
 
             };
 

@@ -1,6 +1,8 @@
 ﻿namespace Fanex.Athena.Controllers.Report
 {
+    using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Web.Mvc;
     using Extension.Utility;
     using Fanex.Athena.Model.Report.ViewModel;
@@ -37,6 +39,7 @@
         private ExchangeWinLossViewModel CreateViewModel()
         {
             var licensee = SessionService.LicenseeSession;
+            var userSession = SessionService.UserSession;
             var currencyList = new Dictionary<int, string>
             {
                 { BaseCurrencyType.All, ViewResources.All },
@@ -45,7 +48,7 @@
                 { BaseCurrencyType.Gbp, $"{ViewResources.Based} {ViewResources.GBP}" }
             };
 
-            foreach (var item in SessionService.UserSession.CurrencyList)
+            foreach (var item in userSession.CurrencyList)
             {
                 currencyList.Add(item.Key, item.Value);
             }
@@ -58,6 +61,9 @@
                 CurrencyList = currencyList,
                 IsAllowedCustomerComm = licensee.IsAllowedCustomerComm,
                 LicenseeId = licensee.LicenseeId,
+                CurrencyId = SystemConstants.BaseCurrencyList
+                .FirstOrDefault(x => x.Value.Equals(userSession.DefaultBaseCurrency, StringComparison.OrdinalIgnoreCase))
+                .Key,
                 ReportByOption = new Dictionary<byte, string>
                 {
                     { ReportByType.Daily, ViewResources.Daily },

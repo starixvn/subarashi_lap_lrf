@@ -7,6 +7,7 @@
 namespace Fanex.Athena.Controllers.Report
 {
     using System;
+    using System.Linq;
     using System.Web.Mvc;
     using Extension.Utility;
     using Fanex.Athena.Model.Report.MetaModel;
@@ -41,7 +42,11 @@ namespace Fanex.Athena.Controllers.Report
                 ToDate = toDate,
                 LicenseeId = licenseeSession.LicenseeId,
                 IsExcludedTestData = true,
-                BaseCurrency = userSession.DefaultBaseCurrency
+                BaseCurrency = userSession.DefaultBaseCurrency,
+                CurrencyId = SystemConstants.BaseCurrencyList
+                .FirstOrDefault(x => x.Value.Equals(userSession.DefaultBaseCurrency, StringComparison.OrdinalIgnoreCase))
+                .Key
+
             };
 
             var model = new AgCasinoBalanceViewModel

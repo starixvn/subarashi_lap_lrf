@@ -5899,9 +5899,15 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         getCurrencyNameForReportTitle: function (currencyId) {
             const viewinKey = Site.getSingleResource('Viewin');
             const currencyTextList = {
+                '-8': viewinKey.replace('{0}', 'INH'),
+                '-7': viewinKey.replace('{0}', 'IDR'),
+                '-6': viewinKey.replace('{0}', 'THB'),
+                '-5': viewinKey.replace('{0}', 'CNY'),
+                '-4': viewinKey.replace('{0}', 'MYR'),
                 '-3': viewinKey.replace('{0}', 'GBP'),
                 '-2': viewinKey.replace('{0}', 'USD'),
                 '-1': viewinKey.replace('{0}', 'EUR'),
+               
                 '0': Site.getSingleResource('AllCurrencies')
             };
 
