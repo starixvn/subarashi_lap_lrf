@@ -11,7 +11,6 @@ namespace Fanex.Athena.DataAccess.TotalBet
     using System.Threading.Tasks;
     using Core;
     using DataAccess.TotalBet.Interfaces;
-    using Extension.Helper;
     using Fanex.Common.Extensions;
     using Model.TotalBet.DTO;
     using Model.TotalBet.MetaModel;
@@ -34,24 +33,22 @@ namespace Fanex.Athena.DataAccess.TotalBet
                 AgentList = metaModel.AgentListXml,
                 PageSize = metaModel.PageSize,
                 PageIndex = metaModel.PageIndex,
-                TotalRows = metaModel.TotalRows
+                TotalRows = metaModel.TotalRows,
+                BaseCurrency = metaModel.BaseCurrency
             };
 
             using (var db = this.GetObjectDb(SpName))
             {
                 using (var reader = await db.ExecuteReaderAsync(uspParams).ConfigureAwait(false))
                 {
-                    return SetToList(reader, metaModel.IsConvert, metaModel.BaseCurrency);
+                    return SetToList(reader);
                 }
             }
         }
 
-        private IList<Outright> SetToList(IDataReader reader, bool isConvert, string baseCurrency)
+        private IList<Outright> SetToList(IDataReader reader)
         {
             var dataList = new List<Outright>();
-
-            var forecastColumn = DataHelper.GetCurrencyColumnName("totalwinlost", isConvert, baseCurrency);
-            var balanceColumn = DataHelper.GetCurrencyColumnName("balance", isConvert, baseCurrency);
 
             while (reader.Read())
             {
@@ -62,8 +59,8 @@ namespace Fanex.Athena.DataAccess.TotalBet
                     TeamId = teamId,
                     TeamName = _cacheRefAdapter.GetTeamName(teamId),
                     MatchId = reader.ToInt("orid"),
-                    Forecast = reader.ToDecimal(forecastColumn),
-                    Balance = reader.ToDecimal(balanceColumn)
+                    Forecast = reader.ToDecimal("totalwinlost"),
+                    Balance = reader.ToDecimal("balance")
                 };
 
                 dataList.Add(item);

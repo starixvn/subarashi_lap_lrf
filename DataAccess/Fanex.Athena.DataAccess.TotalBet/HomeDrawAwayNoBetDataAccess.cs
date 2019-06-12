@@ -11,7 +11,6 @@ namespace Fanex.Athena.DataAccess.TotalBet
     using System.Threading.Tasks;
     using Core;
     using DataAccess.TotalBet.Interfaces;
-    using Extension.Helper;
     using Fanex.Common.Extensions;
     using Model.TotalBet.DTO;
     using Model.TotalBet.MetaModel;
@@ -26,14 +25,15 @@ namespace Fanex.Athena.DataAccess.TotalBet
                 AgentList = metaModel.AgentListXml,
                 PageSize = metaModel.PageSize,
                 PageIndex = metaModel.PageIndex,
-                TotalRows = metaModel.TotalRows
+                TotalRows = metaModel.TotalRows,
+                BaseCurrency = metaModel.BaseCurrency
             };
 
             using (var db = this.GetObjectDb(SpName))
             {
                 using (var reader = await db.ExecuteReaderAsync(uspParams).ConfigureAwait(false))
                 {
-                    return GetData(reader, metaModel.IsConvert, metaModel.BaseCurrency);
+                    return GetData(reader);
                 }
             }
         }
@@ -47,16 +47,9 @@ namespace Fanex.Athena.DataAccess.TotalBet
         /// <param name="isConvert">Is convert value.</param>
         /// <param name="baseCurrency">Base currency value.</param>
         /// <returns>A list of Home/Draw/Away no bet.</returns>
-        private static IList<HomeDrawAwayNoBet> GetData(IDataReader reader, bool isConvert, string baseCurrency)
+        private static IList<HomeDrawAwayNoBet> GetData(IDataReader reader)
         {
             var dataList = new List<HomeDrawAwayNoBet>();
-
-            var homOddsHnbColumn = DataHelper.GetCurrencyColumnName("home_odds_hnb", isConvert, baseCurrency);
-            var awayOddsHnbColumn = DataHelper.GetCurrencyColumnName("away_odds_hnb", isConvert, baseCurrency);
-            var homeOddsDnbColumn = DataHelper.GetCurrencyColumnName("home_odds_dnb", isConvert, baseCurrency);
-            var awayOddsDnbColumn = DataHelper.GetCurrencyColumnName("away_odds_dnb", isConvert, baseCurrency);
-            var homeOddsAnbColumn = DataHelper.GetCurrencyColumnName("home_odds_anb", isConvert, baseCurrency);
-            var awayOddsAnbColumn = DataHelper.GetCurrencyColumnName("away_odds_anb", isConvert, baseCurrency);
 
             while (reader.Read())
             {
@@ -74,12 +67,12 @@ namespace Fanex.Athena.DataAccess.TotalBet
                     BetCountHomeNoBet = reader.ToInt("betcount_hnb"),
                     BetCountDrawNoBet = reader.ToInt("betcount_dnb"),
                     BetCountAwayNoBet = reader.ToInt("betcount_anb"),
-                    HomeOddsHomeNoBet = reader.ToDecimal(homOddsHnbColumn),
-                    AwayOddsHomeNoBet = reader.ToDecimal(awayOddsHnbColumn),
-                    HomeOddsDrawNoBet = reader.ToDecimal(homeOddsDnbColumn),
-                    AwayOddsDrawNoBet = reader.ToDecimal(awayOddsDnbColumn),
-                    HomeOddsAwayNoBet = reader.ToDecimal(homeOddsAnbColumn),
-                    AwayOddsAwayNoBet = reader.ToDecimal(awayOddsAnbColumn)
+                    HomeOddsHomeNoBet = reader.ToDecimal("home_odds_hnb"),
+                    AwayOddsHomeNoBet = reader.ToDecimal("away_odds_hnb"),
+                    HomeOddsDrawNoBet = reader.ToDecimal("home_odds_dnb"),
+                    AwayOddsDrawNoBet = reader.ToDecimal("away_odds_dnb"),
+                    HomeOddsAwayNoBet = reader.ToDecimal("home_odds_anb"),
+                    AwayOddsAwayNoBet = reader.ToDecimal("away_odds_anb")
                 };
 
                 dataList.Add(item);

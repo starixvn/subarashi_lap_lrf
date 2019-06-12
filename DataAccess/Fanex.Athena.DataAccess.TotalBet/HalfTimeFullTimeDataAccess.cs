@@ -11,7 +11,6 @@ namespace Fanex.Athena.DataAccess.TotalBet
     using System.Threading.Tasks;
     using Core;
     using DataAccess.TotalBet.Interfaces;
-    using Extension.Helper;
     using Fanex.Common.Extensions;
     using Model.Core.ResultModel;
     using Model.TotalBet.DTO;
@@ -30,13 +29,14 @@ namespace Fanex.Athena.DataAccess.TotalBet
                     AgentList = metaModel.AgentListXml,
                     PageSize = metaModel.PageSize,
                     PageIndex = metaModel.PageIndex,
-                    TotalRows = metaModel.TotalRows
+                    TotalRows = metaModel.TotalRows,
+                    BaseCurrency = metaModel.BaseCurrency
                 };
                 using (var reader = await db.ExecuteReaderAsync(uspParams).ConfigureAwait(false))
                 {
-                    var data = SetToList(reader, metaModel.IsConvert, metaModel.BaseCurrency);
+                    var data = SetToList(reader);
                     reader.NextResult();
-                    var totalData = ReadTotalData(reader, metaModel.IsConvert, metaModel.BaseCurrency);
+                    var totalData = ReadTotalData(reader);
                     return new ReportResultModel<HalfTimeFullTime>
                     {
                         DataList = data,
@@ -46,19 +46,9 @@ namespace Fanex.Athena.DataAccess.TotalBet
             }
         }
 
-        private static IList<HalfTimeFullTime> SetToList(IDataReader reader, bool isConvert, string baseCurrency)
+        private static IList<HalfTimeFullTime> SetToList(IDataReader reader)
         {
             var dataList = new List<HalfTimeFullTime>();
-
-            var totalHh = DataHelper.GetCurrencyColumnName("totalHH", isConvert, baseCurrency);
-            var totalHd = DataHelper.GetCurrencyColumnName("totalHD", isConvert, baseCurrency);
-            var totalHa = DataHelper.GetCurrencyColumnName("totalHA", isConvert, baseCurrency);
-            var totalDh = DataHelper.GetCurrencyColumnName("totalDH", isConvert, baseCurrency);
-            var totalDd = DataHelper.GetCurrencyColumnName("totalDD", isConvert, baseCurrency);
-            var totalDa = DataHelper.GetCurrencyColumnName("totalDA", isConvert, baseCurrency);
-            var totalAh = DataHelper.GetCurrencyColumnName("totalAH", isConvert, baseCurrency);
-            var totalAd = DataHelper.GetCurrencyColumnName("totalAD", isConvert, baseCurrency);
-            var totalAa = DataHelper.GetCurrencyColumnName("totalAA", isConvert, baseCurrency);
 
             while (reader.Read())
             {
@@ -68,15 +58,15 @@ namespace Fanex.Athena.DataAccess.TotalBet
                     HomeId = reader.ToInt("homeID"),
                     AwayId = reader.ToInt("awayID"),
                     IsNeutral = reader.ToInt("isNeutral"),
-                    HomeHome = reader.ToDecimal(totalHh),
-                    HomeDraw = reader.ToDecimal(totalHd),
-                    HomeAway = reader.ToDecimal(totalHa),
-                    DrawHome = reader.ToDecimal(totalDh),
-                    DrawDraw = reader.ToDecimal(totalDd),
-                    DrawAway = reader.ToDecimal(totalDa),
-                    AwayHome = reader.ToDecimal(totalAh),
-                    AwayDraw = reader.ToDecimal(totalAd),
-                    AwayAway = reader.ToDecimal(totalAa),
+                    HomeHome = reader.ToDecimal("totalHH"),
+                    HomeDraw = reader.ToDecimal("totalHD"),
+                    HomeAway = reader.ToDecimal("totalHA"),
+                    DrawHome = reader.ToDecimal("totalDH"),
+                    DrawDraw = reader.ToDecimal("totalDD"),
+                    DrawAway = reader.ToDecimal("totalDA"),
+                    AwayHome = reader.ToDecimal("totalAH"),
+                    AwayDraw = reader.ToDecimal("totalAD"),
+                    AwayAway = reader.ToDecimal("totalAA"),
                 };
 
                 dataList.Add(item);
@@ -85,31 +75,21 @@ namespace Fanex.Athena.DataAccess.TotalBet
             return dataList;
         }
 
-        private static HalfTimeFullTime ReadTotalData(IDataReader reader, bool isConvert, string baseCurrency)
+        private static HalfTimeFullTime ReadTotalData(IDataReader reader)
         {
             if (reader.Read())
             {
-                var totalHh = DataHelper.GetCurrencyColumnName("totalHH", isConvert, baseCurrency);
-                var totalHd = DataHelper.GetCurrencyColumnName("totalHD", isConvert, baseCurrency);
-                var totalHa = DataHelper.GetCurrencyColumnName("totalHA", isConvert, baseCurrency);
-                var totalDh = DataHelper.GetCurrencyColumnName("totalDH", isConvert, baseCurrency);
-                var totalDd = DataHelper.GetCurrencyColumnName("totalDD", isConvert, baseCurrency);
-                var totalDa = DataHelper.GetCurrencyColumnName("totalDA", isConvert, baseCurrency);
-                var totalAh = DataHelper.GetCurrencyColumnName("totalAH", isConvert, baseCurrency);
-                var totalAd = DataHelper.GetCurrencyColumnName("totalAD", isConvert, baseCurrency);
-                var totalAa = DataHelper.GetCurrencyColumnName("totalAA", isConvert, baseCurrency);
-
                 return new HalfTimeFullTime
                 {
-                    HomeHome = reader.ToDecimal(totalHh),
-                    HomeDraw = reader.ToDecimal(totalHd),
-                    HomeAway = reader.ToDecimal(totalHa),
-                    DrawHome = reader.ToDecimal(totalDh),
-                    DrawDraw = reader.ToDecimal(totalDd),
-                    DrawAway = reader.ToDecimal(totalDa),
-                    AwayHome = reader.ToDecimal(totalAh),
-                    AwayDraw = reader.ToDecimal(totalAd),
-                    AwayAway = reader.ToDecimal(totalAa),
+                    HomeHome = reader.ToDecimal("totalHH"),
+                    HomeDraw = reader.ToDecimal("totalHD"),
+                    HomeAway = reader.ToDecimal("totalHA"),
+                    DrawHome = reader.ToDecimal("totalDH"),
+                    DrawDraw = reader.ToDecimal("totalDD"),
+                    DrawAway = reader.ToDecimal("totalDA"),
+                    AwayHome = reader.ToDecimal("totalAH"),
+                    AwayDraw = reader.ToDecimal("totalAD"),
+                    AwayAway = reader.ToDecimal("totalAA"),
                 };
             }
 
