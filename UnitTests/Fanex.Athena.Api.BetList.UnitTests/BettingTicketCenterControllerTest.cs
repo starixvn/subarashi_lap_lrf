@@ -40,27 +40,6 @@
             _betListApiClient.ClearReceivedCalls();
         }
 
-        [TestCase(0)]
-        [TestCase(-1)]
-        [TestCase(-80)]
-        public void GetByRefno_RefNoIsInvalid_ReturnNull(int refNo)
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var metaModel = new RefNoBetListMetaModel
-                {
-                    RefNo = refNo
-                };
-
-                // Action
-                AsyncTestDelegate testDelegate = () => controller.GetByRefno(metaModel);
-
-                // Assert
-                Assert.ThrowsAsync<ArgumentException>(testDelegate);
-            }
-        }
-
         [Test]
         public async Task GetByRefno_ValidMetaModel_CallBetListApiWithCorrectParameters()
         {
@@ -85,26 +64,6 @@
                     NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
                     _betListApiClient.Received().PostAsync((string)ApiPath, (object)metaModel, (string)SessionLanguage);
                 }));
-            }
-        }
-
-        [Test]
-        public void GetByRunning_DateRangeIsInvalid_ThrowException()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var metaModel = new BaseBettingTicketMetaModel
-                {
-                    FromDate = DateTime.Today,
-                    ToDate = DateTime.Today.AddDays(-1)
-                };
-
-                // Action
-                AsyncTestDelegate testDelegate = async () => await controller.GetByRunning(metaModel);
-
-                // Assert
-                Assert.ThrowsAsync<ArgumentException>(testDelegate);
             }
         }
 
