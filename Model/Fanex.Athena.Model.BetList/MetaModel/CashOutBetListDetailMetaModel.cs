@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using Fanex.Athena.Model.Core.Helper;
+using Fanex.Athena.Model.Core.MetaModel;
+using System.Collections.Generic;
 
 namespace Fanex.Athena.Model.BetList.MetaModel
 {
-    public class CashOutBetListDetailMetaModel
+    public class CashOutBetListDetailMetaModel : IMetaModelValidation
     {
         public string BaseCurrency { get; set; }
 
@@ -21,5 +23,7 @@ namespace Fanex.Athena.Model.BetList.MetaModel
         public bool HasPlayerComm { get; set; }
 
         public IDictionary<int, string> UserCurrencyList { get; set; }
+
+        public bool IsValid => MetaModelValidationHelper.ValidateBaseCurrency(BaseCurrency);
     }
 }
