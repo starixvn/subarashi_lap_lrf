@@ -4,12 +4,14 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
+using Fanex.Athena.Model.Core.MetaModel;
+
 namespace Fanex.Athena.Model.Report.MetaModel
 {
     /// <summary>
     /// ActiveCustomerMetaModel class.
     /// </summary>
-    public class ActiveCustomerMetaModel : BaseReportMetaModel
+    public class ActiveCustomerMetaModel : BaseReportMetaModel, IMetaModelValidation
     {
         public ActiveCustomerMetaModel()
         {

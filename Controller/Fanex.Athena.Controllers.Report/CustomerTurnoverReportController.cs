@@ -79,15 +79,22 @@ namespace Fanex.Athena.Controllers.Report
         [HttpPost]
         [ValidateInput(false)]
         [CustomValidateAntiForgery]
-        [ValidationWebRequest]
-        public async Task<ActionResult> Excel(CustomerTurnoverMetaModel metaModel)
+        public async Task<ActionResult> Excel(string excelParam)
         {
-            const string FileName = "CustomerTurnover";
-            
+            if (string.IsNullOrEmpty(excelParam))
+            {
+                return null;
+            }
+            var metaModel = JsonConvert.DeserializeObject<CustomerTurnoverMetaModel>(excelParam);
+            if(!metaModel.IsValid)
+            {
+                return null;
+            }
+
             var licenseeSession = SessionService.LicenseeSession;
             var userSession = SessionService.UserSession;
             metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
-
+            const string FileName = "CustomerTurnover";
             metaModel.IsExportExcel = true;
 
             var templatePath = HostingEnvironment.MapPath(@"~/App_Data/Template/CustomerReports/CustomerTurnover.xls");

@@ -35,13 +35,14 @@
         }
 
         [HttpPost]
+        [ValidationApiRequest]
         public async Task<dynamic> Index(SubsidiaryPerformanceMetaModel metaModel)
         {
             var userSession = SessionService.UserSession;
             IsValidProducts(FunctionNames.SubsidiaryPerformance, metaModel.ProductCodeList);
             var isSubsidiary = userSession.UserLevel == UserLevelType.Subsidiary;
             var isValidSubsidiaryList = isSubsidiary || (userSession.IsManageableSubsidiary && !string.IsNullOrWhiteSpace(metaModel.SubsidiaryList));
-            if (!isValidSubsidiaryList || !metaModel.IsValid)
+            if (!isValidSubsidiaryList)
             {
                 return BadRequest(ViewResources.InvalidRequestMsg);
             }
@@ -85,7 +86,7 @@
                     GrandTotal = result.TotalData
                 };
             }
-            
+
             return new
             {
                 Data = new List<SubsidiaryPerformanceDetail>()

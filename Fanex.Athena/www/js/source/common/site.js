@@ -1,15 +1,15 @@
 ﻿/*global _language_en_US*/
-define(['jquery', 'common/querystring', 'common/popup', 'extensions/prototype', 'components/selectlist'],  
+define(['jquery', 'common/querystring', 'common/popup', 'extensions/prototype', 'components/selectlist'],
     function ($, QueryString, Popup) {// jshint ignore:line
         'use strict';
-        const BASE_CURRENT_LIST = ['EUR', 'USD', 'GBP'];
+        const BASE_CURRENT_LIST = ['EUR', 'USD', 'GBP', 'IDR', 'MYR', 'INH', 'CNY', 'THB'];
         let REQUEST_VERIFICATION_TOKEN;
         let _historyDate = null;
         let _rootUrl = null;
         let _pageLanguage = null;
         let _isFakeLicensee = null;
 
-        function setProductCodeListParam(url, productCodeList){
+        function setProductCodeListParam(url, productCodeList) {
             return QueryString.setParam(url, 'ProductCodeList', productCodeList);
         }
 
@@ -248,6 +248,7 @@ define(['jquery', 'common/querystring', 'common/popup', 'extensions/prototype', 
 
             // Handle outside based currency list in some reports (customer wl, balance)
             var $baseCurrency = $('#BaseCurrency');
+            let currentBaseCurrencyValue = $baseCurrency.val();
             var noConvertOption = $('option[value=""]', $baseCurrency);
             if (currency === 0 || isBaseCurrency(currencyName)) {
                 noConvertOption.remove();
@@ -268,7 +269,12 @@ define(['jquery', 'common/querystring', 'common/popup', 'extensions/prototype', 
                     $('option[value=""]', $baseCurrency).text(currencyName);
                 }
             }
+            let defaultBaseCurrency = $("#defaultBaseCurrency").val();
 
+            if (userChange && currency == 0 && defaultBaseCurrency &&
+                !isBaseCurrency(currentBaseCurrencyValue.toUpperCase())) {
+                $baseCurrency.val(defaultBaseCurrency.toLowerCase());
+            }
             // Handle inside based currency list in some reports(licensee wl, wl by product)
             const hasBaseCurrencyInDropdown = $('#CurrencyId option').filter(function () {
                 return $(this).val() < 0;

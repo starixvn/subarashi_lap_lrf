@@ -1,6 +1,7 @@
 ﻿namespace Fanex.Athena.Model.Report.MetaModel
 {
     using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Model.Core.Helper;
     using Fanex.Athena.Model.Core.MetaModel;
     using System;
     using System.Linq;
@@ -31,8 +32,6 @@
 
         public bool IsValid => FromDate <= ToDate &&
                                 !string.IsNullOrEmpty(ProductCodeList) &&
-                                !string.IsNullOrEmpty(BaseCurrency)
-            && SystemConstants.BaseCurrencyList.Any(
-                i => i.Value.Equals(BaseCurrency, StringComparison.OrdinalIgnoreCase));
+                                MetaModelValidationHelper.ValidateBaseCurrency(BaseCurrency, false);
     }
 }

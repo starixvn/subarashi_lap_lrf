@@ -1,10 +1,12 @@
 ﻿namespace Fanex.Athena.Model.Report.MetaModel
 {
     using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Model.Core.Helper;
+    using Fanex.Athena.Model.Core.MetaModel;
     using System;
     using System.Linq;
 
-    public class LicenseeWinLossByTimeZoneMetaModel
+    public class LicenseeWinLossByTimeZoneMetaModel : IMetaModelValidation
     {
         public string AgentListXml { get; set; }
 
@@ -31,8 +33,7 @@
         public byte GroupBy { get; set; }
 
         public bool IsValid => FromDate <= ToDate &&
-                                !string.IsNullOrEmpty(ProductCodeList) &&
-                                !string.IsNullOrEmpty(BaseCurrency)
-            && SystemConstants.BaseCurrencyList.Any(x => x.Value.Equals(BaseCurrency, StringComparison.OrdinalIgnoreCase));
+                                !string.IsNullOrEmpty(ProductCodeList)
+            && MetaModelValidationHelper.ValidateBaseCurrency(BaseCurrency, false);
     }
 }

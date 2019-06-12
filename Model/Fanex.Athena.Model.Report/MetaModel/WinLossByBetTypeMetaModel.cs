@@ -7,6 +7,7 @@
 namespace Fanex.Athena.Model.Report.MetaModel
 {
     using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Model.Core.Helper;
     using Fanex.Athena.Model.Core.MetaModel;
     using System;
     using System.Linq;
@@ -32,8 +33,8 @@ namespace Fanex.Athena.Model.Report.MetaModel
         {
             get
             {
-                return FromDate <= ToDate
-                    && SystemConstants.BaseCurrencyList.Any(i => i.Value.Equals(BaseCurrency, StringComparison.OrdinalIgnoreCase));
+                return FromDate <= ToDate && MetaModelValidationHelper
+                    .ValidateBaseCurrency(BaseCurrency);
             }
         }
     }

@@ -8,11 +8,6 @@ namespace Fanex.Athena.Model.Core.DTO.Common
 {
     using System;
 
-    /// <summary>
-    /// Check box item class.
-    /// used for multiple selected drop down list.
-    /// </summary>
-    [Serializable]
     public class CheckedItem
     {
         public string Name { get; set; }

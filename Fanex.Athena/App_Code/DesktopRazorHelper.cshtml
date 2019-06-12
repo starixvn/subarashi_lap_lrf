@@ -147,6 +147,7 @@ bool addBasedOption = false)
         }
         <option value="" @(selectedBasedCurrency == "" ? new HtmlString("selected=selected") : new HtmlString(""))>@CurrencyName</option>
     </select>
+    <input type="hidden" id="defaultBaseCurrency" value="@selectedBasedCurrency" />
 }
 @helper HighlightNegativeFormat(decimal value, bool isHiglight = true)
 {

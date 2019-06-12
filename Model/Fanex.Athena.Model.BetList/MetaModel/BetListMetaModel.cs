@@ -123,8 +123,7 @@ namespace Fanex.Athena.Model.BetList.MetaModel
         {
             get
             {
-                return base.IsValid && FromDate <= ToDate
-                    && !string.IsNullOrWhiteSpace(ProductCodeList);
+                return base.IsValid && FromDate <= ToDate;
             }
         }
 
