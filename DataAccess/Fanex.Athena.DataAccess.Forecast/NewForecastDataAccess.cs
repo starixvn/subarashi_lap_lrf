@@ -39,10 +39,10 @@ namespace Fanex.Athena.DataAccess.Forecast
                             {
                                 Type = Converter.ToInt(dr["Type"]),
                                 TicketNo = Converter.ToInt(dr["TotalTickets"]),
-                                TotalTurnoverHome = Converter.ToDecimal(dr["HomeTurnover" + metaModel.BaseCurrency]),
-                                TotalTurnoverAway = Converter.ToDecimal(dr["AwayTurnover" + metaModel.BaseCurrency]),
-                                TotalTurnoverOver = Converter.ToDecimal(dr["OverTurnover" + metaModel.BaseCurrency]),
-                                TotalTurnoverUnder = Converter.ToDecimal(dr["UnderTurnover" + metaModel.BaseCurrency]),
+                                TotalTurnoverHome = Converter.ToDecimal(dr["HomeTurnover"]),
+                                TotalTurnoverAway = Converter.ToDecimal(dr["AwayTurnover"]),
+                                TotalTurnoverOver = Converter.ToDecimal(dr["OverTurnover"]),
+                                TotalTurnoverUnder = Converter.ToDecimal(dr["UnderTurnover"]),
                             });
                         }
 
@@ -52,8 +52,8 @@ namespace Fanex.Athena.DataAccess.Forecast
                             {
                                 Bettype = Converter.ToInt(dr["Bettype"]),
                                 Hdp = Converter.ToDecimal(dr["Hdp"]),
-                                HomeWinLoss = Converter.ToDecimal(dr["HomeWinloss" + metaModel.BaseCurrency]),
-                                AwayWinLoss = Converter.ToDecimal(dr["AwayWinloss" + metaModel.BaseCurrency]),
+                                HomeWinLoss = Converter.ToDecimal(dr["HomeWinloss"]),
+                                AwayWinLoss = Converter.ToDecimal(dr["AwayWinloss"]),
                             });
                         }
                     }
@@ -76,6 +76,7 @@ namespace Fanex.Athena.DataAccess.Forecast
             db.SetParameterValue("HomeScore", null);
             db.SetParameterValue("AwayScore", null);
             db.SetParameterValue("MatchTime", null);
+            db.SetParameterValue("BaseCurrency", metaModel.BaseCurrency);
         }
     }
 }

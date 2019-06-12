@@ -86,18 +86,18 @@
             var dataTable = new DataTable();
             dataTable.Columns.Add("Type");
             dataTable.Columns.Add("TotalTickets");
-            dataTable.Columns.Add("HomeTurnoverUUS");
-            dataTable.Columns.Add("AwayTurnoverUUS");
-            dataTable.Columns.Add("OverTurnoverUUS");
-            dataTable.Columns.Add("UnderTurnoverUUS");
+            dataTable.Columns.Add("HomeTurnover");
+            dataTable.Columns.Add("AwayTurnover");
+            dataTable.Columns.Add("OverTurnover");
+            dataTable.Columns.Add("UnderTurnover");
 
             var row = dataTable.NewRow();
             row["Type"] = expected.Type;
             row["TotalTickets"] = expected.TicketNo;
-            row["HomeTurnoverUUS"] = expected.TotalTurnoverHome;
-            row["AwayTurnoverUUS"] = expected.TotalTurnoverAway;
-            row["OverTurnoverUUS"] = expected.TotalTurnoverOver;
-            row["UnderTurnoverUUS"] = expected.TotalTurnoverUnder;
+            row["HomeTurnover"] = expected.TotalTurnoverHome;
+            row["AwayTurnover"] = expected.TotalTurnoverAway;
+            row["OverTurnover"] = expected.TotalTurnoverOver;
+            row["UnderTurnover"] = expected.TotalTurnoverUnder;
 
             dataTable.Rows.Add(row);
 
@@ -109,14 +109,14 @@
             var dataTable = new DataTable();
             dataTable.Columns.Add("Bettype");
             dataTable.Columns.Add("Hdp");
-            dataTable.Columns.Add("HomeWinlossUUS");
-            dataTable.Columns.Add("AwayWinlossUUS");
+            dataTable.Columns.Add("HomeWinloss");
+            dataTable.Columns.Add("AwayWinloss");
 
             var row = dataTable.NewRow();
             row["Bettype"] = expected.Bettype;
             row["Hdp"] = expected.Hdp;
-            row["HomeWinlossUUS"] = expected.HomeWinLoss;
-            row["AwayWinlossUUS"] = expected.AwayWinLoss;
+            row["HomeWinloss"] = expected.HomeWinLoss;
+            row["AwayWinloss"] = expected.AwayWinLoss;
 
             dataTable.Rows.Add(row);
 

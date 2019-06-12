@@ -301,8 +301,8 @@
             var dt = new DataTable();
 
             dt.Columns.Add("offset");
-            dt.Columns.Add("aleur");
-            dt.Columns.Add("hleur");
+            dt.Columns.Add("al");
+            dt.Columns.Add("hl");
 
             var index = 0;
             var dataRow = dt.NewRow();
@@ -324,8 +324,8 @@
         private static void SetFakeForecastHandicapValue(Dictionary<string, object> data, int index, decimal offsetValue, object alvalue, object hlvalue)
         {
             data.Add("offset" + index, offsetValue);
-            data.Add("alEUR" + index, alvalue);
-            data.Add("hlEUR" + index, hlvalue);
+            data.Add("al" + index, alvalue);
+            data.Add("hl" + index, hlvalue);
         }
     }
 }

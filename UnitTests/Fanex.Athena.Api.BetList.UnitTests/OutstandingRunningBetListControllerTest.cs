@@ -32,7 +32,7 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                var metaModel = new BetListMetaModel { CurrencyId = 1, ProductCodeList = "1,2,3" };
+                var metaModel = new BetListExcelMetaModel { CurrencyId = 1, ProductCodeList = "1,2,3" };
 
                 StubUserSessionData(new UserSession { CurrencyList = new Dictionary<int, string>() });
 
@@ -50,7 +50,7 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                var metaModel = new BetListMetaModel { CurrencyId = 1, FromDate = new DateTime(2018, 1, 3), ToDate = new DateTime(2018, 1, 1) };
+                var metaModel = new BetListExcelMetaModel { CurrencyId = 1, FromDate = new DateTime(2018, 1, 3), ToDate = new DateTime(2018, 1, 1) };
 
                 StubUserSessionData(new UserSession { CurrencyList = new Dictionary<int, string>() });
 
@@ -68,7 +68,7 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                var metaModel = new BetListMetaModel { CurrencyId = 1, ProductCodeList = string.Empty };
+                var metaModel = new BetListExcelMetaModel { CurrencyId = 1, ProductCodeList = string.Empty };
 
                 StubUserSessionData(new UserSession { CurrencyList = new Dictionary<int, string> { { metaModel.CurrencyId, "Currency" } } });
 
@@ -88,7 +88,7 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                var metaModel = new BetListMetaModel { CurrencyId = currencyId, ProductCodeList = "Product1,Product2" };
+                var metaModel = new BetListExcelMetaModel { CurrencyId = currencyId, ProductCodeList = "Product1,Product2" };
 
                 StubUserSessionData(new UserSession { Language = SessionLanguage, CurrencyList = new Dictionary<int, string> { { currencyId, "Currency" } } });
 
