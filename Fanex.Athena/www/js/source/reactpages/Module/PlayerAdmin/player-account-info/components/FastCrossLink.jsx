@@ -21,10 +21,12 @@ export class FastCrossLink extends PureComponent {
 
     render() {
         return (
-            <div>
-                <h4>Fast Cross Link</h4>
-                <div><span><a href="#">Betting Ticket Center</a></span><strong className="divider">></strong> <span><a href="#">Running</a></span></div>
-                <div><span><a href="#">Customer Win Loss</a></span></div>
+            <div className="panel">
+                <div className="panel-header">Fast Cross-Link</div>
+                <div className="panel-body">
+                    <div><span><a className="link" href="#">Betting Ticket Center</a></span><strong className="divider">></strong> <span><a className="link" href="#">Running</a></span></div>
+                    <div><span><a className="link" href="#">Customer Win Loss</a></span></div>
+                </div>
             </div>
         );
     }

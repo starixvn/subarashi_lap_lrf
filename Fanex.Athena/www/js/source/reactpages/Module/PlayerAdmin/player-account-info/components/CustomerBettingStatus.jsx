@@ -30,11 +30,15 @@ export class CustomerBettingStatus extends PureComponent {
     render() {
         const { data } = this.state;
         return data && (
-            <div>
-                <h4>Customer Betting Status (Call From LRF)</h4>
-                <p>Win: {data.Win}</p>
-                <p>Loss: {data.Loss}</p>
-                <p>Void/Reject/Cancel: {data.VoidRejectCancel}</p>
+            <div className="panel">
+                <div className="panel-header">
+                    Player Betting Status
+                </div>
+                <div className="panel-body">
+                    <p>Win: {data.Win}</p>
+                    <p>Loss: {data.Loss}</p>
+                    <p>Void/Reject/Cancel: {data.VoidRejectCancel}</p>
+                </div>
             </div>
         );
     }
