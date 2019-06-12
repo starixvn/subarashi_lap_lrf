@@ -14,7 +14,7 @@ function generateConfig(environment) {
         },
         entry: {
             /*js*/
-            
+
             [`${jsPath}/lib/langHelper`]: pathConfig.scriptPaths.languageResource,
             [`${jsPath}/lib/lang-zh-CN`]: pathConfig.scriptPaths.langCN,
             [`${jsPath}/lib/lang-zh-Hans`]: pathConfig.scriptPaths.langHans,
@@ -42,7 +42,8 @@ function generateConfig(environment) {
             [`${cssPath}/bettingticketscenter/index`]: pathConfig.cssPaths.bettingticketscenter,
             [`${cssPath}/betlist/index`]: pathConfig.cssPaths.betlist,
             [`${cssPath}/casinoturnover/index`]: pathConfig.cssPaths.casinoturnover,
-            [`${cssPath}/playeradmin/index`]: pathConfig.cssPaths.playeradmin
+            [`${cssPath}/playeradmin/index`]: pathConfig.cssPaths.playeradmin,
+            [`${cssPath}/playeradmin/account-info`]: pathConfig.cssPaths.accountInfo
         },
         output: {
             path: pathConfig.projectRoot,
@@ -77,9 +78,9 @@ function generateConfig(environment) {
         ],
         optimization: {
             minimizer: [
-             new UglifyJsPlugin({
-                 sourceMap: true
-             })
+                new UglifyJsPlugin({
+                    sourceMap: true
+                })
             ],
             splitChunks: {
                 chunks: 'all',

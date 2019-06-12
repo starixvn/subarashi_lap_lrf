@@ -620,6 +620,8 @@
     <Content Include="www\css\build\dev\reactpages\notification\index.chunk.js.map" />
     <Content Include="www\css\build\dev\reactpages\notification\index.css" />
     <Content Include="www\css\build\dev\reactpages\notification\index.css.map" />
+    <Content Include="www\css\build\dev\reactpages\playeradmin\account-info.chunk.js" />
+    <Content Include="www\css\build\dev\reactpages\playeradmin\account-info.css" />
     <Content Include="www\css\build\dev\reactpages\playeradmin\index.chunk.js" />
     <Content Include="www\css\build\dev\reactpages\playeradmin\index.css" />
     <Content Include="www\css\build\dev\reactpages\speciallicenseewl\index.chunk.js" />
@@ -657,6 +659,7 @@
     <Content Include="www\css\build\pro\reactpages\licenseewlbytimezone\index.css" />
     <Content Include="www\css\build\pro\reactpages\notification\index.chunk.js" />
     <Content Include="www\css\build\pro\reactpages\notification\index.css" />
+    <Content Include="www\css\build\pro\reactpages\playeradmin\account-info.css" />
     <Content Include="www\css\build\pro\reactpages\playeradmin\index.css" />
     <Content Include="www\css\build\pro\reactpages\speciallicenseewl\index.chunk.js" />
     <Content Include="www\css\build\pro\reactpages\speciallicenseewl\index.css" />
@@ -687,6 +690,8 @@
     <Content Include="Views\Desktop\Module\PlayerAdmin\PlayerBetList\Index.cshtml" />
     <Content Include="www\css\build\dev\reactpages\playeradmin\index.chunk.js.map" />
     <Content Include="www\css\build\dev\reactpages\playeradmin\index.css.map" />
+    <Content Include="www\css\build\dev\reactpages\playeradmin\account-info.chunk.js.map" />
+    <Content Include="www\css\build\dev\reactpages\playeradmin\account-info.css.map" />
     <None Include="www\css\source\reactpages\components\custom3rd\react-toastify.scss" />
     <None Include="www\css\source\pages\betlist\result\result.happy5.scss" />
     <Content Include="www\css\source\reactpages\pages\betlist\images\bonus.png" />
@@ -1116,6 +1121,7 @@
     <Content Include="www\css\source\reactpages\components\_switch.scss" />
     <Content Include="www\css\source\reactpages\components\vendors\_switches.scss" />
     <Content Include="www\css\source\reactpages\components\_dropdown.scss" />
+    <Content Include="www\css\source\reactpages\components\_panel.scss" />
     <None Include="www\css\source\reactpages\main.scss" />
     <Content Include="www\css\build\dev\reactpages\vendor.css" />
     <Content Include="www\css\build\pro\reactpages\vendor.css" />
@@ -5530,7 +5536,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Logs\" />
-    <Folder Include="www\js\source\reactpages\Module\PlayerAdmin\pages\" />
+    <Folder Include="www\js\source\reactpages\Module\PlayerAdmin\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="www\js\source\reactpages\pages\subsidiaryperformance\components\index.jsx" />

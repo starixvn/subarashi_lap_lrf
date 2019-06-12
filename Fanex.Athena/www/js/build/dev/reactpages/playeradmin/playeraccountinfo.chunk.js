@@ -239,6 +239,16 @@ function (_PureComponent) {
     _this.state = {
       data: null
     };
+    _this.tabList = [{
+      name: 'accountProfile',
+      text: 'Account Profile'
+    }, {
+      name: 'bankInformation',
+      text: 'Bank Information'
+    }, {
+      name: 'accountRecord',
+      text: 'Account Record'
+    }];
     return _this;
   }
 
@@ -264,10 +274,39 @@ function (_PureComponent) {
       });
     }
   }, {
+    key: "_renderTabList",
+    value: function _renderTabList() {
+      return this.tabList.map(function (item, index) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          className: "tab",
+          key: item.name
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+          href: "javascript:;",
+          className: index === 0 ? 'active' : ''
+        }, item.text));
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var data = this.state.data;
-      return data && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Account Profile (Call From LRF & LAP)"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Created Date: ", data.CreatedDate), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Last Login: ", data.LastLogin), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Last Txn: ", data.LastTxn), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Email (LAP): ", data.Email), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "LapInfo1 (LAP): ", data.LapInfo1), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "LapInfo2 (LAP): ", data.LapInfo2)));
+      return data && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "acc-infor-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "header-tab"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "content-tab"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "tabs"
+      }, this._renderTabList()))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "tab-panel"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+        className: "table"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        className: "first-cell"
+      }, "AG UserID"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "qatest01")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Gold Deluxe UserID"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "qatest01")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "VoidBridge UserID"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "qatest01")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        colSpan: "2"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "First name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "qatest01")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Last name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "101")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Gender"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Male")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Date of birth"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "34335")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Mobile"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "111")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Country"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Togo")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Address"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "12")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "City/ Town"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "22")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "State"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "33")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Zip Code"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "44"))))));
     }
   }]);
 
@@ -318,7 +357,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var AppContainer = function AppContainer(props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_4__["default"], null, "PlayerAccountInfo from LAP", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AccountProfile__WEBPACK_IMPORTED_MODULE_5__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CustomerBettingStatus__WEBPACK_IMPORTED_MODULE_6__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FastCrossLink__WEBPACK_IMPORTED_MODULE_7__["default"], null));
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_4__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "account-info-container"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "outer-col-1"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "account-profile-container"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AccountProfile__WEBPACK_IMPORTED_MODULE_5__["default"], null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "outer-col-2"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "cust-betting-container"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CustomerBettingStatus__WEBPACK_IMPORTED_MODULE_6__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "fast-cross-link-container"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FastCrossLink__WEBPACK_IMPORTED_MODULE_7__["default"], null)))));
 };
 
 function mapDispatchToProps(dispatch) {
@@ -410,7 +461,13 @@ function (_PureComponent) {
     key: "render",
     value: function render() {
       var data = this.state.data;
-      return data && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Customer Betting Status (Call From LRF)"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Win: ", data.Win), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Loss: ", data.Loss), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Void/Reject/Cancel: ", data.VoidRejectCancel)));
+      return data && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "panel"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "panel-header"
+      }, "Player Betting Status"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "panel-body"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Win: ", data.Win), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Loss: ", data.Loss), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Void/Reject/Cancel: ", data.VoidRejectCancel)));
     }
   }]);
 
@@ -498,12 +555,24 @@ function (_PureComponent) {
   }, {
     key: "render",
     value: function render() {
-      var data = this.state.data;
-      return data && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Fast Cross Link"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "panel"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "panel-header"
+      }, "Fast Cross-Link"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "panel-body"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        className: "link",
         href: "#"
-      }, "Betting Ticket Center")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      }, "Betting Ticket Center")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", {
+        className: "divider"
+      }, ">"), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        className: "link",
         href: "#"
-      }, "Customer Win Loss"))));
+      }, "Running"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        className: "link",
+        href: "#"
+      }, "Customer Win Loss")))));
     }
   }]);
 
