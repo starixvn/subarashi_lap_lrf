@@ -26,7 +26,7 @@ export class PlayerDetail extends PureComponent {
 
     _buildActionUrl(systemType, action) {
         const { selectedPlayer } = this.props;
-        const queryString = (action.indexOf('?') !== -1 ? '&custId=' : '?custId=') + selectedPlayer;
+        const queryString = (action.indexOf('?') !== -1 ? '&custId=' : '?custId=') + selectedPlayer.custId;
         const urlByPlayer = action + queryString;
 
         return this.props.getLink(systemType, urlByPlayer);
