@@ -69,6 +69,41 @@ describe("Overlay ", () => {
 
             expect(overlay.setState).toHaveBeenCalledWith(expectedState);
         })
+
+        it("Change isOpening of next prop to true - _registerEvents should be called", () => {
+            jest.useFakeTimers();
+            const prevProps = {...defaultProps, isOpening: false};
+            const nextProps = { ...defaultProps, isOpening: true };
+            const overlay = new Overlay(nextProps);
+
+            overlay.setState = jest.fn();
+            let callback = null;
+            window.setTimeout = jest.fn((cb) => { callback = cb});
+            overlay._registerEvents = jest.fn();
+
+            
+            overlay.componentDidUpdate({...prevProps});
+            callback();
+
+            expect(overlay._registerEvents).toHaveBeenCalled();
+        })
+
+        it("Change isOpening of next prop to true - _unRegisterEvents should be called", () => {
+            jest.useFakeTimers();
+            const prevProps = {...defaultProps, isOpening: true};
+            const nextProps = { ...defaultProps, isOpening: false };
+            const overlay = new Overlay(nextProps);
+
+            overlay.setState = jest.fn();
+            let callback = null;
+            window.setTimeout = jest.fn((cb) => { callback = cb});
+            overlay._unRegisterEvents = jest.fn();
+
+            overlay.componentDidUpdate({...prevProps});
+            callback();
+
+            expect(overlay._unRegisterEvents).toHaveBeenCalled();
+        })
     })
 
     it("componentWillUnmount - _unRegisterEvents should be called", () => {
