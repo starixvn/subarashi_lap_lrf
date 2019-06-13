@@ -8,8 +8,8 @@ class DropdownItem extends Component {
     }
 
     handleClick = (e) => {
+        e.preventDefault();
         if (this.props.disabled) {
-            e.preventDefault();
             return;
         }
 
@@ -18,7 +18,7 @@ class DropdownItem extends Component {
 
     render() {
         const { tag, className, active, ...props } = this.props;
-        const Tag = tag || 'button';
+        const Tag = tag;
         const type = (Tag === 'button' && (props.onClick)) ? 'button' : undefined;
         const classes = classNames('dropdown-item', className, {
             disabled: props.disabled,

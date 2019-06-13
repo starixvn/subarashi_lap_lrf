@@ -71,15 +71,6 @@ describe("Overlay ", () => {
         })
     })
 
-    it("componentDidMount - _registerEvents should be called", () => {
-        const overlay = new Overlay(defaultProps);
-        overlay._registerEvents = jest.fn();
-
-        overlay.componentDidMount();
-
-        expect(overlay._registerEvents).toHaveBeenCalled();
-    })
-
     it("componentWillUnmount - _unRegisterEvents should be called", () => {
         const overlay = new Overlay(defaultProps);
         overlay._unRegisterEvents = jest.fn();
@@ -107,7 +98,7 @@ describe("Overlay ", () => {
 
             overlay._registerEvents();
 
-            expect(document.addEventListener).not.toHaveBeenCalledWith("click", overlay._handleClickOutSide, true);
+            expect(document.addEventListener).not.toHaveBeenCalledWith("click", overlay._handleClickOutSide);
         })
 
         it("closeOnOutsideClick = true - register _handleClickOutSide on document click event", () => {
@@ -115,7 +106,7 @@ describe("Overlay ", () => {
 
             overlay._registerEvents();
 
-            expect(document.addEventListener).toHaveBeenCalledWith("click", overlay._handleClickOutSide, true);
+            expect(document.addEventListener).toHaveBeenCalledWith("click", overlay._handleClickOutSide);
         })
     })
 
@@ -145,7 +136,7 @@ describe("Overlay ", () => {
 
             overlay._unRegisterEvents();
 
-            expect(document.removeEventListener).toHaveBeenCalledWith("click", overlay._handleClickOutSide, true);
+            expect(document.removeEventListener).toHaveBeenCalledWith("click", overlay._handleClickOutSide);
         })
     })
 
