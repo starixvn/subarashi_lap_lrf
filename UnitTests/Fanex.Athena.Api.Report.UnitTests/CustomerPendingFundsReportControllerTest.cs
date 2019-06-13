@@ -105,6 +105,7 @@
         {
             return new CustomerPendingFundsMetaModel
             {
+                CurrencyId = 1,
                 AgentListXml = string.Empty
             };
         }

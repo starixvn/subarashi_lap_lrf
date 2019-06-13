@@ -106,19 +106,19 @@
         }
 
         [Test]
-        public void Index_Level0_GetMainData()
+        public async Task Index_Level0_GetMainDataAsync()
         {
             // Arrange
             var model = new ExchangeWinLossMetaModel
             {
-                CurrencyId = 0,
+                CurrencyId = 1,
                 Level = 0,
                 FromDate = _minDate,
                 ToDate = _minDate
             };
 
             // Action
-            var result = _controller.Index(model);
+            await _controller.Index(model);
 
             // Assert
             Assert.Multiple(() =>
@@ -129,19 +129,19 @@
         }
 
         [Test]
-        public void Index_Level2_GetCustomerData()
+        public async Task Index_Level2_GetCustomerDataAsync()
         {
             // Arrange
             var model = new ExchangeWinLossMetaModel
             {
-                CurrencyId = 0,
+                CurrencyId = 1,
                 Level = 2,
                 FromDate = _minDate,
                 ToDate = _minDate
             };
 
             // Action
-            var result = _controller.Index(model);
+            await _controller.Index(model);
 
             // Assert
             Assert.Multiple(() =>
@@ -152,7 +152,7 @@
         }
 
         [Test]
-        public void Index_Level1AndIsNotOneTwoBet_GetCustomerData()
+        public async Task Index_Level1AndIsNotOneTwoBet_GetCustomerDataAsync()
         {
             // Arrange
             const int LicenseeId = LicenseeIdentity.OneTwoBet + 1;
@@ -163,14 +163,14 @@
 
             var model = new ExchangeWinLossMetaModel
             {
-                CurrencyId = 0,
+                CurrencyId = 1,
                 Level = 1,
                 FromDate = _minDate,
                 ToDate = _minDate
             };
 
             // Action
-            var result = _controller.Index(model);
+            await _controller.Index(model);
 
             // Assert
             Assert.Multiple(() =>
@@ -181,7 +181,7 @@
         }
 
         [Test]
-        public void Index_Level1AndIsOneTwoBet_GetLicenseeData()
+        public async Task Index_Level1AndIsOneTwoBet_GetLicenseeDataAsync()
         {
             // Arrange
             StubLicenseeSessionData(new LicenseeSession
@@ -191,14 +191,14 @@
 
             var model = new ExchangeWinLossMetaModel
             {
-                CurrencyId = 0,
+                CurrencyId = 1,
                 Level = 1,
                 FromDate = _minDate,
                 ToDate = _minDate
             };
 
             // Action
-            var result = _controller.Index(model);
+            await _controller.Index(model);
 
             // Assert
             Assert.Multiple(() =>

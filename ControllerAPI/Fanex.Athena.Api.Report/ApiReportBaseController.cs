@@ -22,25 +22,24 @@
         }
 
 
-        protected internal virtual bool IsValidCurrency(int currencyId, int drillDownCurrencyId = 0)
+        protected internal virtual bool IsValidCurrency(int currencyId)
         {
             var currencyList = SessionService.UserSession.CurrencyList;
-            return MetaModelValidationHelper.ValidateCurrency(currencyId, currencyList)
-                             || MetaModelValidationHelper.ValidateCurrencyForKeanOcean(drillDownCurrencyId,
+            return MetaModelValidationHelper.ValidateCurrencyForKeanOcean(currencyId,
                              currencyList, SessionService.LicenseeSession.LicenseeId);
         }
 
-        protected internal virtual void IsValidProducts(string functionKey, BaseReportMetaModel metaModel)
+        protected internal virtual bool IsValidProducts(string functionKey, BaseReportMetaModel metaModel)
         {
             var passedProductCodes = string.IsNullOrEmpty(metaModel.ProductCodeList) ?
                 metaModel.ProductOptions.Select(x => x.Code) : metaModel.ProductCodeList.Split(',');
-            IsValidProducts(functionKey, passedProductCodes);
+            return IsValidProducts(functionKey, passedProductCodes);
         }
 
-        protected internal virtual void IsValidProducts(string functionKey, string productCodeList)
+        protected internal virtual bool IsValidProducts(string functionKey, string productCodeList)
         {
             var passedProductCodes = productCodeList?.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-            IsValidProducts(functionKey, passedProductCodes);
+            return IsValidProducts(functionKey, passedProductCodes);
         }
 
         protected internal virtual bool IsValidProducts(string functionKey, IEnumerable<string> productCodes)

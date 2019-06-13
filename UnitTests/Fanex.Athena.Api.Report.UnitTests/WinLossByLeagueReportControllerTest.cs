@@ -11,6 +11,7 @@
     using DataAccess.Report.Interfaces;
     using Excel.Report;
     using Extension.Utility;
+    using Fanex.Athena.Model.Core.MetaModel.Product;
     using Model.Core.DTO.Configuration;
     using Model.Core.ResultModel;
     using Model.Report.DTO;
@@ -32,7 +33,6 @@
         {
             base.FixtureSetUp();
 
-            var productService = Substitute.For<IProductService>();
             var balanceUpDataAccess = Substitute.For<IBalanceUpDataAccess>();
             var appSettings = Substitute.For<IAppSettings>();
             _dataAccess = Substitute.For<IWinLossByLeagueDataAccess>();
@@ -63,7 +63,7 @@
         public async Task Index_InvalidModel_ReturnBadRequestWithCorrectMessage()
         {
             // Arrange
-            var metaModel = new WinLossByLeagueMetaModel { CurrencyId = 1 };
+            var metaModel = new WinLossByLeagueMetaModel { CurrencyId = -400 };
 
             // Action
             var result = await _controller.Index(metaModel) as BadRequestErrorMessageResult;
@@ -91,7 +91,10 @@
             _dataAccess.GetSummary(Arg.Any<WinLossByLeagueMetaModel>()).Returns(dataListResult);
 
             // Action
-            var result = await _controller.Index(new WinLossByLeagueMetaModel());
+            var result = await _controller.Index(new WinLossByLeagueMetaModel
+            {
+                CurrencyId = 1
+            });
 
             // Assert
             Assert.Multiple(() =>
@@ -128,7 +131,8 @@
             // Action
             var result = await _controller.Index(new WinLossByLeagueMetaModel
             {
-                Level = 1
+                Level = 1,
+                CurrencyId = 1
             });
 
             // Assert
@@ -142,16 +146,16 @@
         }
 
         [Test]
-        public async Task Excel_InvalidModel_ReturnBadRequestWithCorrectMessage()
+        public async Task Excel_InvalidCurrency_ReturnBadRequestWithCorrectMessage()
         {
             // Arrange
-            var metaModel = new WinLossByLeagueMetaModel { CurrencyId = 1 };
+            var metaModel = new WinLossByLeagueMetaModel { CurrencyId = -100 };
 
             // Action
             var result = await _controller.Excel(metaModel);
 
             // Assert
-            Assert.That(result.StatusCode, Is.EqualTo(HttpStatusCode.Forbidden));
+            Assert.That(result.StatusCode, Is.EqualTo(HttpStatusCode.NotFound));
         }
 
         [Test]
@@ -160,14 +164,15 @@
             // Arrange
             var metaModel = new WinLossByLeagueMetaModel
             {
-                CurrencyId = -1,
-                BaseCurrency = "ABC"
+                CurrencyId = 1,
+                BaseCurrency = "USD",
+                ProductOptions = new List<ProductOption> { new ProductOption { Status = true, Code = "SB" } }
             };
             var excel = Substitute.ForPartsOf<WinlossByLeagueExcel>(
                 string.Empty,
                 new ReportResultModel<WinLossByLeague>
                 {
-                    DataList = new List<WinLossByLeague>(),
+                    DataList = new List<WinLossByLeague> { new WinLossByLeague { } },
                     TotalData = new WinLossByLeague()
                 },
                 metaModel,

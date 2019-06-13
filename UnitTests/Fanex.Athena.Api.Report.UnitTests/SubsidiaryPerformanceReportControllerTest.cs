@@ -3,8 +3,10 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using System.Web.Http.Results;
     using Base.UnitTests;
     using Constant.DataDomain;
+    using Fanex.Athena.Resources;
     using Fanex.Athena.Service.Report.Interfaces;
     using Model.Report.DTO.SubsidiaryPerformance;
     using Model.Report.MetaModel;
@@ -27,7 +29,6 @@
             _subsidiaryService = Substitute.For<ISubsidiaryService>();
             _service = Substitute.For<ISubsidiaryPerformanceService>();
             _controller = Substitute.ForPartsOf<SubsidiaryPerformanceReportController>(SessionService, ProductService, LangService, _subsidiaryService, _service);
-            _controller.When(x => x.IsValidProducts(Arg.Any<string>(), Arg.Any<string>())).DoNotCallBase();
             MockSessionData();
         }
 
@@ -168,20 +169,23 @@
         }
 
         [Test]
-        public async Task Index_MetaModelIsNotValid_ReturnEmptyList()
+        public async Task Index_InvalidProduct_ReturnBadRequest()
         {
             // Arrange
-            var metaModel = new SubsidiaryPerformanceMetaModel();
-
+            var metaModel = new SubsidiaryPerformanceMetaModel
+            {
+                ProductCodeList = "SX"
+            };
+            StubSingleWalletProductAccess(new[] { "SB" });
             // Action
-            var result = await _controller.Index(metaModel);
+            var result = await _controller.Index(metaModel) as BadRequestErrorMessageResult;
 
             // Assert
-            Assert.That(result.Data, Is.Empty);
+            Assert.AreEqual(result.Message, ViewResources.InvalidRequestMsg);
         }
 
         [Test]
-        public async Task Index_InvalidSubsidiaryList_ReturnEmptyList()
+        public async Task Index_InvalidSubsidiaryList_ReturnBadRequest()
         {
             // Arrange
             var metaModel = new SubsidiaryPerformanceMetaModel
@@ -192,12 +196,12 @@
                 SubsidiaryList = string.Empty,
                 BaseCurrency = "USD"
             };
-
+            StubSingleWalletProductAccess(new[] { "SB" });
             // Action
-            var result = await _controller.Index(metaModel);
+            var result = await _controller.Index(metaModel) as BadRequestErrorMessageResult;
 
             // Assert
-            Assert.That(result.Data, Is.Empty);
+            Assert.AreEqual(result.Message, ViewResources.InvalidRequestMsg);
         }
 
         private SubsidiaryPerformanceMetaModel GetMetaModel()

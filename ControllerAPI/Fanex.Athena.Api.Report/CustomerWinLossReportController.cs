@@ -112,10 +112,15 @@
         private async Task<ReportResultModel<CustomerWinLoss>> GetData(CustomerWinLossMetaModel metaModel)
         {
 
-            IsValidProducts(FunctionNames.CustomerWinLoss, metaModel);
+            if (IsValidProducts(FunctionNames.CustomerWinLoss, metaModel))
+            {
 
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId, metaModel.IsExcludedTestData);
-            return await _custWinlossDataAccess.GetDataList(metaModel).ConfigureAwait(false);
+                metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId, metaModel.IsExcludedTestData);
+                return await _custWinlossDataAccess.GetDataList(metaModel).ConfigureAwait(false);
+            }
+
+            return await Task.FromResult(new ReportResultModel<CustomerWinLoss> {
+            });
         }
     }
 }

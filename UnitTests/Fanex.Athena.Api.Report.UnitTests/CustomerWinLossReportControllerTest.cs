@@ -4,11 +4,13 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using System.Web.Http.Results;
     using Base.UnitTests;
     using Excel.Report;
     using Excel.Report.Models;
     using Extension.Utility;
     using Fanex.Athena.DataAccess.Report.Interfaces;
+    using Fanex.Athena.Resources;
     using Model.Core.DTO.Common;
     using Model.Core.MetaModel.Product;
     using Model.Core.ResultModel;
@@ -47,7 +49,7 @@
         }
 
         [Test]
-        public async Task Index_InvalidModel_ReturnEmptyData()
+        public async Task Index_InvalidCurrency_ReturnBadRequest()
         {
             var model = new CustomerWinLossMetaModel
             {
@@ -60,8 +62,10 @@
 
             Assert.Multiple(() =>
             {
-                Assert.IsEmpty(result.Data);
-                Assert.That(result.TotalRows, Is.Zero);
+                Assert.IsTrue(result is BadRequestErrorMessageResult);
+                Assert.AreEqual((result as BadRequestErrorMessageResult).Message,
+                    ViewResources.InvalidRequestMsg
+                    );
             });
         }
 
@@ -70,7 +74,7 @@
         public async Task Index_ValidModel_GetDataFromDataAccess(string sortColumn, string sortDirection)
         {
             // Arrange
-            var metaModel = CreateValidMetaModel(sortColumn, sortDirection);
+            var metaModel = CreateValidMetaModel();
             var expectedData = SetUpForGettingData(metaModel);
 
             // Action
@@ -85,7 +89,7 @@
         public async Task Index_ExportToExcel_ExportWithCorrectData(bool isFakeLicensee)
         {
             // Arrange
-            var metaModel = CreateValidMetaModel(nameof(CustomerWinLoss.CustId), "asc");
+            var metaModel = CreateValidMetaModel();
             metaModel.IsExportExcel = true;
             var expectedDataList = SetUpForGettingData(metaModel);
 
@@ -118,14 +122,15 @@
             });
         }
 
-        private static CustomerWinLossMetaModel CreateValidMetaModel(string sortColumn, string sortDirection)
+        private static CustomerWinLossMetaModel CreateValidMetaModel()
         {
             return new CustomerWinLossMetaModel
             {
                 FromDate = DateTime.Now,
                 ToDate = DateTime.Now.AddDays(1),
                 ProductOptions = new List<ProductOption> { new ProductOption { Status = true } },
-                AgentListXml = string.Empty
+                AgentListXml = string.Empty,
+                CurrencyId = 1
             };
         }
 

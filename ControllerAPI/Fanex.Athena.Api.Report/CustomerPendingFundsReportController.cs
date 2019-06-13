@@ -94,7 +94,7 @@
 
         private async Task<ReportResultModel<CustPendingFunds>> GetData(CustomerPendingFundsMetaModel metaModel)
         {
-            if (!metaModel.IsValid || !IsValidCurrency(metaModel.CurrencyId))
+            if (!IsValidCurrency(metaModel.CurrencyId))
             {
                 return new ReportResultModel<CustPendingFunds>
                 {

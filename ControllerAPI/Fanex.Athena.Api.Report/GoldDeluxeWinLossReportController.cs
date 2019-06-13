@@ -119,7 +119,7 @@
             int currencyId = 0,
             int custId = 0)
         {
-            if (IsValidCurrency(metaModel.CurrencyId, currencyId))
+            if (IsValidCurrency(metaModel.CurrencyId) && IsValidCurrency(currencyId))
             {
                 metaModel.DrillDownCurrencyId = currencyId;
                 metaModel.DrillDownLevel = level;

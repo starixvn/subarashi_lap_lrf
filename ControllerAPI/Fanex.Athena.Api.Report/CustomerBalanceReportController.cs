@@ -42,7 +42,7 @@
             {
                 Data = result.DataList,
                 Total = result.TotalData,
-                TotalRows = result.TotalRows
+                result.TotalRows
             };
         }
 
@@ -96,7 +96,6 @@
 
         private async Task<ReportResultModel<CustBalance>> GetData(CustomerBalanceMetaModel metaModel)
         {
-
             metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId, metaModel.IsExcludeTest);
             return await _custBalanceDataAccess.GetDataList(metaModel).ConfigureAwait(false);
         }

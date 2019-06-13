@@ -39,10 +39,10 @@
         public async Task<dynamic> Index(SubsidiaryPerformanceMetaModel metaModel)
         {
             var userSession = SessionService.UserSession;
-            IsValidProducts(FunctionNames.SubsidiaryPerformance, metaModel.ProductCodeList);
             var isSubsidiary = userSession.UserLevel == UserLevelType.Subsidiary;
             var isValidSubsidiaryList = isSubsidiary || (userSession.IsManageableSubsidiary && !string.IsNullOrWhiteSpace(metaModel.SubsidiaryList));
-            if (!isValidSubsidiaryList)
+            if (!IsValidProducts(FunctionNames.SubsidiaryPerformance, metaModel.ProductCodeList) ||
+                !isValidSubsidiaryList)
             {
                 return BadRequest(ViewResources.InvalidRequestMsg);
             }
@@ -68,7 +68,11 @@
         [ValidationApiRequest]
         public async Task<dynamic> Detail(SubsidiaryPerformanceMetaModel metaModel)
         {
-            IsValidProducts(FunctionNames.SubsidiaryPerformance, metaModel.ProductCodeList);
+            if(!IsValidProducts(FunctionNames.SubsidiaryPerformance, metaModel.ProductCodeList))
+            {
+                return BadRequest(ViewResources.InvalidRequestMsg);
+            }
+
             var licenseeName = SessionService.LicenseeSession.LicenseeName;
             metaModel.LicenseeName = licenseeName;
             var agentIdListByCurrency = _subsidiaryService.GetCurrencyAgentList(metaModel.SubsidiaryId, metaModel.IsExcludeTest);

@@ -224,7 +224,7 @@
             var model = new SpecialLicenseeWinLossMetaModel
             {
                 ProductCodeList = new[] { "P1" },
-                CurrencyId = 0,
+                CurrencyId = 1,
                 FromDate = new DateTime(2018, 1, 1),
                 ToDate = new DateTime(2018, 1, 31)
             };

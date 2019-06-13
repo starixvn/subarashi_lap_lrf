@@ -17,8 +17,8 @@ namespace Fanex.Athena.Model.Core.Helper
 
         public static bool ValidateCurrency(int currencyId, IDictionary<int, string> currencyList)
         {
-            return (currencyId >= SystemConstants.MinBaseCurrencyType && currencyId < 0)
-                || currencyList.ContainsKey(currencyId);
+            return (currencyId < 0 && currencyId >= SystemConstants.MinBaseCurrencyType)
+               || currencyId == BaseCurrencyType.All || currencyList.ContainsKey(currencyId);
         }
         private static bool VerifyKeanOceanCurrency(int currencyId, int licenseeId)
         {

@@ -69,7 +69,7 @@
         }
 
         [Test]
-        public async Task Index_WhenCallWithInvalidModel_ReturnBadRequestWithCorrectMessage()
+        public async Task Index_WhenCallWithInvalidCurrency_ReturnBadRequestWithCorrectMessage()
         {
             // Arrange
             var metaModel = new PlatformWinLossMetaModel { CurrencyId = 99 };
@@ -78,7 +78,7 @@
             var result = await _controller.Index(metaModel) as BadRequestErrorMessageResult;
 
             // Assert
-            Assert.That(result.Message, Is.EqualTo(ViewResources.InvalidParams));
+            Assert.That(result.Message, Is.EqualTo(ViewResources.InvalidRequestMsg));
         }
 
         [Test]
@@ -109,6 +109,7 @@
                 Month = 1,
                 FromDay = 1,
                 ToDay = 2,
+                CurrencyId = 1,
                 IsExportExcel = isExportExcel,
                 ProductOptions = new List<ProductOption>
                 {

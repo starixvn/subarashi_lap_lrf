@@ -153,7 +153,8 @@ namespace Fanex.Athena.Api.Report
 
         private async Task<dynamic> ProcessRequest(ThirdPartyWinLossMetaModel metaModel)
         {
-            if (IsValidCurrency(metaModel.CurrencyId, metaModel.DrillDownCurrencyId))
+            if (IsValidCurrency(metaModel.CurrencyId) && IsValidCurrency(
+                metaModel.DrillDownCurrencyId))
             {
                 metaModel.LicenseeId = SessionService.LicenseeSession.LicenseeId;
                 metaModel.DefaultBaseCurrency = SessionService.UserSession.DefaultBaseCurrency;

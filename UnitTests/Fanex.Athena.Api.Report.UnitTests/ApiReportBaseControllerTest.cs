@@ -55,64 +55,42 @@
             Assert.That(result, Is.EqualTo(expectedResult));
         }
 
-        [TestCase("SBX")]
-        [TestCase("NGX")]
-        [TestCase("SBX,NGX")]
-        public void CheckValidProducts_ValidProducts_DoesNotThrowException(string productCodeList)
+        [TestCase("SB,NGX,XXX", false)]
+        [TestCase("XXX", false)]
+        [TestCase("SB,NG", true)]
+        public void CheckValidProducts_RandomProductlist_ReturnCorrectResult(
+            string productCodeList, bool expectedValue)
         {
             // Arrange
             MockSessionData();
             const string FunctionKey = "ACBdfsd";
             var productList = new List<Product>
             {
-                new Product { ProductCode = "SBX" },
-                new Product { ProductCode = "NGX" }
+                new Product { ProductCode = "SB" },
+                new Product { ProductCode = "NG" }
             };
             var productAccess = new ProductAccess(productList);
             ProductService.GetSingleWalletProductAccess(Arg.Any<int>(), Arg.Any<string>(), FunctionKey).Returns(productAccess);
 
             // Action
-            TestDelegate testDelegate = () => _controller.IsValidProducts(FunctionKey, productCodeList);
+            var result = _controller.IsValidProducts(FunctionKey, productCodeList);
 
             // Assert
-            Assert.That(testDelegate, Throws.Nothing);
-        }
-
-        [TestCase("SBX,NGX,XXX")]
-        [TestCase("XXX")]
-        [TestCase("XXX,YYY")]
-        public void CheckValidProducts_InvalidProduct_ThrowException(string productCodeList)
-        {
-            // Arrange
-            MockSessionData();
-            const string FunctionKey = "ACBdfsd";
-            var productList = new List<Product>
-            {
-                new Product { ProductCode = "SBX" },
-                new Product { ProductCode = "NGX" }
-            };
-            var productAccess = new ProductAccess(productList);
-            ProductService.GetSingleWalletProductAccess(Arg.Any<int>(), Arg.Any<string>(), FunctionKey).Returns(productAccess);
-
-            // Action
-            TestDelegate testDelegate = () => _controller.IsValidProducts(FunctionKey, productCodeList);
-
-            // Assert
-            Assert.Throws<ArgumentException>(testDelegate, "Invalid product: XXX");
+            Assert.AreEqual(result, expectedValue);
         }
 
         [TestCase("")]
         [TestCase(null)]
-        public void CheckValidProducts_NullProduct_ThrowException(string productCodeList)
+        public void CheckValidProducts_NullProduct_ReturnFalse(string productCodeList)
         {
             // Arrange
             MockSessionData();
 
             // Action
-            TestDelegate testDelegate = () => _controller.IsValidProducts("any string", productCodeList);
+            var result = _controller.IsValidProducts("any string", productCodeList);
 
             // Assert
-            Assert.Throws<ArgumentNullException>(testDelegate);
+            Assert.IsFalse(result);
         }
     }
 }

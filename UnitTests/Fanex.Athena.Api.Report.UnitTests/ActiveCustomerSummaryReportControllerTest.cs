@@ -80,11 +80,11 @@
         }
 
         [Test]
-        public async Task Index_InvalidModel_ReturnEmptyData()
+        public async Task Index_InvalidCurrency_ReturnEmptyData()
         {
             // Arrange
             var model = CreateValidMetaModel();
-            model.FromDate = model.ToDate.AddDays(1);
+            model.CurrencyId = -100;
 
             // Action
             var result = await _controller.Index(model);

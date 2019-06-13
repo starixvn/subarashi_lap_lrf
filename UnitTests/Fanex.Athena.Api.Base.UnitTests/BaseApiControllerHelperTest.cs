@@ -65,7 +65,7 @@
             {
                 UserId = SessionUserId,
                 UserName = SessionUserName,
-                CurrencyList = new Dictionary<int, string> { { -1, "EUR" }, { -2, "USD" } },
+                CurrencyList = new Dictionary<int, string> {{ 1, "EUR" }, { 2, "USD" } },
                 Language = SessionLanguage
             };
 
