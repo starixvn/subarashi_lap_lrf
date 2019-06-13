@@ -272,15 +272,9 @@
                 Site.getSingleResource('Currency') + ' ' + selectedCurrency;
 
             const viewinKey = Site.getSingleResource('Viewin');
-            const baseCurrency = {
-                'gbp': viewinKey.replace('{0}', 'GBP'),
-                'usd': viewinKey.replace('{0}', 'USD'),
-                'eur': viewinKey.replace('{0}', 'EUR')
-            };
+
             const baseCurrencyKey = $('#BaseCurrency').val();
-            const baseCurrencyText = baseCurrency[baseCurrencyKey] ?
-                baseCurrency[baseCurrencyKey]
-                : viewinKey.replace('{0}', selectedCurrency);
+            const baseCurrencyText = viewinKey.replace('{0}', baseCurrencyKey ? baseCurrencyKey.toUpperCase() : selectedCurrency);
 
             const platformName = _platformNameMap[data.PlatformType];
 

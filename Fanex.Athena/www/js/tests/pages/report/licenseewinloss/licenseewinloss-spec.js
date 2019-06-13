@@ -213,7 +213,7 @@
 
                     LicenseeWinLoss.setReportTitle('-1', date, date);
 
-                    expect($('.report-title').html()).toBe('LicenseeWinLoss, 02/01/2001 → 02/01/2001, View in EUR');
+                    expect($('.report-title').html()).toBe('LicenseeWinLoss, 02/01/2001 → 02/01/2001 - View in EUR');
                 });
 
                 it("currencyName is not empty - .report-title should has correct html content with currency name", function () {
@@ -224,7 +224,7 @@
 
                     LicenseeWinLoss.setReportTitle('-1', date, date, currencyName);
 
-                    expect($('.report-title').html()).toBe('LicenseeWinLoss, 02/01/2001 → 02/01/2001, View in EUR');
+                    expect($('.report-title').html()).toBe('LicenseeWinLoss, 02/01/2001 → 02/01/2001 - Viewin USD');
                 });
 
                 it("class 'hide' should be removed in .panel-heading", function () {
@@ -623,7 +623,7 @@
                         ajaxOptionForDrillingDown.success({ Data: [{ Name: "Test" }] });
 
                         var args = LicenseeWinLoss.setReportTitle.calls.mostRecent().args;
-                        expect(args[0]).toBe(9);
+                        expect(args[0]).toBe(1);
                         expect(args[1]).toEqual(new Date(2017, 2, 1));
                         expect(args[2]).toEqual(new Date(2017, 2, 31));
                     });
