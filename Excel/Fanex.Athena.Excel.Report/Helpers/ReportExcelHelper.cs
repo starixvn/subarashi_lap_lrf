@@ -41,62 +41,25 @@
 
         public static string GetExactTitleCurrencyName(ConvertingOption convertingOption, int currencyId)
         {
-            string title;
-
-            switch (currencyId)
+            if (currencyId == 0 && !convertingOption.IsConvert)
             {
-                case BaseCurrencyType.All:
-                    title = ViewResources.AllCurrencies;
-                    break;
-
-                case BaseCurrencyType.Eur:
-                    title = string.Format(ViewResources.Viewin, FormatKey.Eur);
-                    break;
-
-                case BaseCurrencyType.Usd:
-                    title = string.Format(ViewResources.Viewin, FormatKey.Usd);
-                    break;
-
-                case BaseCurrencyType.Gbp:
-                    title = string.Format(ViewResources.Viewin, FormatKey.Gbp);
-                    break;
-
-                default:
-                    title = GetTitleCurrencyName(convertingOption);
-                    break;
+                return ViewResources.AllCurrencies;
             }
 
-            return title;
+            return SystemConstants.BaseCurrencyList.ContainsKey(currencyId) ?
+                string.Format(ViewResources.Viewin, SystemConstants.BaseCurrencyList[currencyId])
+                : GetTitleCurrencyName(convertingOption);
         }
 
         public static string GetTitleCurrencyName(int currencyId, string defaultName = "")
         {
-            string title;
-
-            switch (currencyId)
+            if (currencyId == 0 && string.IsNullOrEmpty(defaultName))
             {
-                case BaseCurrencyType.All:
-                    title = ViewResources.AllCurrencies;
-                    break;
-
-                case BaseCurrencyType.Eur:
-                    title = string.Format(ViewResources.Viewin, FormatKey.Eur);
-                    break;
-
-                case BaseCurrencyType.Usd:
-                    title = string.Format(ViewResources.Viewin, FormatKey.Usd);
-                    break;
-
-                case BaseCurrencyType.Gbp:
-                    title = string.Format(ViewResources.Viewin, FormatKey.Gbp);
-                    break;
-
-                default:
-                    title = string.Format(ViewResources.Viewin, defaultName);
-                    break;
+                return ViewResources.AllCurrencies;
             }
-
-            return title;
+            return SystemConstants.BaseCurrencyList.ContainsKey(currencyId) ?
+                string.Format(ViewResources.Viewin, SystemConstants.BaseCurrencyList[currencyId])
+                : string.Format(ViewResources.Viewin, defaultName);
         }
 
         public static string GetTitleBaseCurrency(string baseCurrency, string currencyName)
@@ -104,7 +67,7 @@
             var currency = string.IsNullOrEmpty(baseCurrency) ?
                 currencyName :
                 baseCurrency;
-            return ViewResources.Currency + ": " + currencyName + ", " + 
+            return ViewResources.Currency + ": " + currencyName + ", " +
                 ViewResources.BaseCurrency + ": " + currency.ToUpperInvariant();
         }
 

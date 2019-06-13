@@ -81,12 +81,9 @@ namespace Fanex.Athena.Controllers.Report
 
         [HttpPost]
         [CustomValidateAntiForgery]
+        [ValidationWebRequest]
         public async Task<ActionResult> Index(LiveReportMetaModel metaModel)
         {
-            if (!metaModel.IsValid)
-            {
-                return await Task.FromResult(HttpNotFound());
-            }
             var licenseeSession = SessionService.LicenseeSession;
             var userSession = SessionService.UserSession;
             metaModel.LicenseeId = licenseeSession.LicenseeId;

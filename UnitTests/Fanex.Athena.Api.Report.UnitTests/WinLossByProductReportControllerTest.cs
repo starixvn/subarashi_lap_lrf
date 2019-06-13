@@ -48,7 +48,7 @@
         public async Task Index_InvalidModel_ReturnBadRequestWithCorrectMessage()
         {
             // Arrange
-            var metaModel = new WinLossByProductMetaModel { CurrencyId = 1 };
+            var metaModel = new WinLossByProductMetaModel { CurrencyId = -100 };
 
             // Action
             var result = await _controller.Index(metaModel) as BadRequestErrorMessageResult;

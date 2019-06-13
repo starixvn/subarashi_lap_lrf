@@ -119,8 +119,11 @@
         [TestCase("AB", false, true)]
         [TestCase("BA,AB", true, false)]
         [TestCase("AB", false, false)]
-        public async Task IndexPost_ExportExcel_PassParamsToCreateExcelCorrectly(string productCodeList, bool expectedBaVisible, bool expectedRbVisible)
+        public async Task IndexPost_ExportExcel_PassParamsToCreateExcelCorrectly(
+            string productCodeList,
+            bool expectedBaVisible, bool expectedRbVisible)
         {
+           
             using (var controller = CreateController(productCodeList))
             {
                 // Arrange

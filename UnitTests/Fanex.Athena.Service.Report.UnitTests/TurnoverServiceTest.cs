@@ -29,36 +29,6 @@
         }
 
         [Test]
-        public async Task GetDataList_InvalidMetaModel_ReturnEmptyData()
-        {
-            // Arrange
-            var metaModel = new TurnoverMetaModel { Year = 2018, Month = 2, FromDay = 2, ToDay = 1 };
-
-            // Action
-            var result = await _service.GetDataList(metaModel);
-
-            // Assert
-            Assert.Multiple(() =>
-            {
-                Assert.That(result, Is.Empty);
-                _dataAccess.DidNotReceive().GetDataList(metaModel);
-            });
-        }
-
-        [Test]
-        public void GetDataList_ValidMetaModel_ReturnDataFromDataAccess()
-        {
-            // Arrange
-            var metaModel = new TurnoverMetaModel();
-
-            // Action
-            var result = _service.GetDataList(metaModel);
-
-            // Assert
-            _dataAccess.Received().GetDataList(metaModel);
-        }
-
-        [Test]
         public void SumTotalData_WhenCall_ReturnCorrectData()
         {
             // Arrange

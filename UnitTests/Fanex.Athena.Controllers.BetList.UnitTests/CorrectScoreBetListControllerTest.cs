@@ -77,9 +77,13 @@
             }
         }
 
-        [TestCase("USD", null, "EUR")]
-        [TestCase("USD", "eur", "EUR")]
-        public async Task Index_ExportExcel_PassCorrectParam(string currency, string baseCurrency, string expectedCurrency)
+        [TestCase(1,"CNY", null, "CNY")]
+        [TestCase(0,"", "", "EUR")]
+        [TestCase(0, "", "GBP", "GBP")]
+        public async Task Index_ExportExcel_PassCorrectParam(
+            int currencyId,
+            string currency,
+            string baseCurrency, string expectedCurrency)
         {
             using (var controller = CreateController())
             {
@@ -89,12 +93,13 @@
                 var metaModel = new BetListExcelMetaModel
                 {
                     IsExportExcel = true,
-                    CurrencyId = 0,
+                    CurrencyId = currencyId,
                     CurrencyName = currency,
                     BaseCurrency = baseCurrency
                 };
 
-                var currencyTitle = string.Format(ViewResources.Viewin, expectedCurrency);
+                var currencyTitle = string.Format(ViewResources.Viewin,
+                    expectedCurrency);
                 var expectedTitle = $"{ViewResources.CorrectScore} - {currencyTitle}";
 
                 SessionService.GenerateAgentListXml(metaModel.CurrencyId, false).Returns(AgentListXml);

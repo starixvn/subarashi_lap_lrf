@@ -156,9 +156,13 @@
             }
         }
 
-        [TestCase("USD", null, "EUR")]
-        [TestCase("USD", "eur", "EUR")]
-        public async Task MixParlay_ExportExcel_PassCorrectParam(string currency, string baseCurrency, string expectedCurrency)
+        [TestCase(1,"USD", null, "USD")]
+        [TestCase(1,"USD", "eur", "EUR")]
+        [TestCase(0, "", "", "EUR")]
+        [TestCase(0, "", "CNY", "CNY")]
+        public async Task MixParlay_ExportExcel_PassCorrectParam(
+            int currencyId,
+            string currency, string baseCurrency, string expectedCurrency)
         {
             using (var controller = CreateController())
             {
@@ -166,7 +170,7 @@
                 var metaModel = new BetListExcelMetaModel
                 {
                     IsExportExcel = true,
-                    CurrencyId = 0,
+                    CurrencyId = currencyId,
                     CurrencyName = currency,
                     BaseCurrency = baseCurrency,
                     FromDate = new DateTime(2018, 11, 11),

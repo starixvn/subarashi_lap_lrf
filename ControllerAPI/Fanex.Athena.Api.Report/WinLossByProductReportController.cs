@@ -243,7 +243,7 @@ namespace Fanex.Athena.Api.Report
             string currencyName = null)
 #pragma warning restore S107 // Methods should not have too many parameters
         {
-            if (!IsValidCurrency(metaModel.CurrencyId) || IsValidCurrency(currencyId))
+            if (!IsValidCurrency(metaModel.CurrencyId) || !IsValidCurrency(currencyId))
             {
                 return BadRequest(ViewResources.InvalidParams);
             }

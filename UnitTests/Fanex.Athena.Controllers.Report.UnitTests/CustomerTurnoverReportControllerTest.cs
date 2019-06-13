@@ -109,7 +109,7 @@
                 var result = await controller.Excel(excelParam) as RedirectResult;
 
                 // Assert
-                Assert.That(result.Url, Is.EqualTo("~/Utility/Error?errCode=400"));
+                Assert.IsNull(result);
             }
         }
 

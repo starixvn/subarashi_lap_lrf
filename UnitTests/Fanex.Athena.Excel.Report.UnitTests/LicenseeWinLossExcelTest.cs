@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Fanex.Athena.Excel.Base;
+using Fanex.Athena.Excel.Base.Entities;
 using Fanex.Athena.Excel.Report.Helpers;
 using Fanex.Athena.Excel.Report.Models;
 using Fanex.Athena.Excel.Report.UnitTests.TestableClasses;
@@ -61,6 +62,7 @@ namespace Fanex.Athena.Excel.Report.UnitTests
             CurrencyName = "INH",
             FromDate = new DateTime(2018, 1, 1),
             ToDate = new DateTime(2018, 2, 2),
+            CurrencyId = 1
         };
 
         private static readonly LicenseeWinLossExcelModel ExcelModel = new LicenseeWinLossExcelModel
@@ -117,9 +119,15 @@ namespace Fanex.Athena.Excel.Report.UnitTests
             // Arrange
             var row = ExcelTestHelper.MockGetRow(FakeSheet, ColumnTemplateCount, 0);
             var excel = CreateExcel();
-            var title = ReportExcelHelper.GetTitleBaseCurrency(
-                ExcelModel.MetaModel.BaseCurrency, 
+            var title = ReportExcelHelper.GetTitleCurrencyName(
+                ExcelModel.MetaModel.CurrencyId,
                 ExcelModel.MetaModel.CurrencyName);
+            ExcelModel.ConvertingOption = new ConvertingOption
+            {
+                BaseCurrency = string.Empty,
+                CurrencyName = "INH",
+                IsConvert = false
+            };
             var reportTitle = ReportExcelHelper.GenerateReportTitle(
                 ViewResources.LicenseeWinLoss,
                 ExcelModel.MetaModel.FromDate,

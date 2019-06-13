@@ -113,7 +113,8 @@ namespace Fanex.Athena.Api.Report
             int currencyId = 0,
             int custId = 0)
         {
-            if (IsValidCurrency(metaModel.CurrencyId) && IsValidCurrency(currencyId))
+            if (IsValidCurrency(metaModel.CurrencyId) 
+                && IsValidCurrency(currencyId))
             {
                 metaModel.DrillDownCurrencyId = currencyId;
                 metaModel.DrillDownLevel = level;
@@ -135,7 +136,7 @@ namespace Fanex.Athena.Api.Report
                     {
                         Data = data.DataList,
                         Total = data.TotalDataList,
-                        SummaryTotal = data.SummaryTotal
+                        data.SummaryTotal
                     };
                 }
             }

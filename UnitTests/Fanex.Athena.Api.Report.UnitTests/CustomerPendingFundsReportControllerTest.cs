@@ -43,24 +43,6 @@
         }
 
         [Test]
-        public async Task Index_InvalidModel_ReturnEmptyData()
-        {
-            // Arrange
-            var model = Substitute.ForPartsOf<CustomerPendingFundsMetaModel>();
-            model.IsValid.Returns(false);
-
-            // Action
-            var result = await _controller.Index(model);
-
-            // Assert
-            Assert.Multiple(() =>
-            {
-                Assert.IsEmpty(result.Data);
-                Assert.That(result.TotalRows, Is.Zero);
-            });
-        }
-
-        [Test]
         public async Task Index_ValidModel_GetDataFromDataAccess()
         {
             // Arrange

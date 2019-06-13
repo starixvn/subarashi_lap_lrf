@@ -84,7 +84,7 @@
                 };
 
                 // Action
-                var result= await controller.GetByRunning(metaModel);
+                var result = await controller.GetByRunning(metaModel);
 
                 // Assert
                 Assert.IsTrue(result is BadRequestErrorMessageResult);
@@ -103,7 +103,7 @@
                     FromDate = DateTime.Today,
                     ToDate = DateTime.Today,
                     ProductCodeList = "C1,C2",
-                    CurrencyIdList = BaseCurrencyType.Eur.ToString()
+                    CurrencyIdList = "1,2"
                 };
 
                 var expect = new HttpResponseMessage();

@@ -25,9 +25,7 @@ namespace Fanex.Athena.Service.Report
 
         public async Task<IList<TurnoverDTO>> GetDataList(TurnoverMetaModel metaModel)
         {
-            return metaModel.IsValid
-                       ? await _turnoverDataAccess.GetDataList(metaModel).ConfigureAwait(false)
-                       : new List<TurnoverDTO>();
+            return await _turnoverDataAccess.GetDataList(metaModel).ConfigureAwait(false);
         }
 
         public TurnoverDTO SumTotalData(IList<TurnoverDTO> dataList)

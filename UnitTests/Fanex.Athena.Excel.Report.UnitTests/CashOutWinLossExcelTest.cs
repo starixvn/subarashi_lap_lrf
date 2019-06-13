@@ -137,7 +137,8 @@ namespace Fanex.Athena.Excel.Report.UnitTests
             // Arrange
             var row = ExcelTestHelper.MockGetRow(FakeSheet, ColumnCount, 0);
             var excel = CreateExcel();
-            var expectedTitle = ReportExcelHelper.GenerateReportTitle(ViewResources.CashOutWinLoss, new ConvertingOption(), MetaModel);
+            var expectedTitle = ReportExcelHelper.GenerateReportTitle(ViewResources.CashOutWinLoss,
+                new ConvertingOption { IsConvert = false }, MetaModel);
 
             // Action
             excel.Public_AssignTitle(FakeSheet);

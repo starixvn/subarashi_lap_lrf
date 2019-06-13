@@ -44,13 +44,13 @@
         }
 
         [Test]
-        public async Task Index_WhenCallWithInvalidModel_ReturnEmptyResult()
+        public async Task Index_WhenCallWithInvalidCurrency_ReturnEmptyResult()
         {
             // Arrange
             var metaModel = new ThirdPartyWinLossMetaModel
             {
-                CurrencyId = 1,
-                DrillDownCurrencyId = 1
+                CurrencyId = -100,
+                DrillDownCurrencyId = -100
             };
 
             var expectedResult = GetSerializationData();

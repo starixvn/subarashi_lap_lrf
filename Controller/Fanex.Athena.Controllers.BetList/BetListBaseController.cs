@@ -152,7 +152,7 @@
             {
                 BaseCurrency = userSession.DefaultBaseCurrency
             };
-
+            InitBaseCurrencyValue(metaModel);
             defaultMetaModel.LicenseeId = licenseeSession.LicenseeId;
             defaultMetaModel.UserId = userSession.UserId;
             defaultMetaModel.HasPlayerCom = SessionService.LicenseeSession.IsAllowedCustomerComm;
@@ -168,6 +168,16 @@
             defaultMetaModel.MoveBetsDay = DateTime.SpecifyKind(balanceUp.MoveBetsDay.Date, DateTimeKind.Unspecified);
 
             return defaultMetaModel;
+        }
+
+        protected void InitBaseCurrencyValue(BetListMetaModel metaModel)
+        {
+            if (metaModel != null && string.IsNullOrEmpty(metaModel.BaseCurrency)
+                && metaModel.CurrencyId == 0)
+
+            {
+                metaModel.BaseCurrency = SessionService.UserSession.DefaultBaseCurrency;
+            }
         }
 
         protected bool IsValidCurrency(int currencyId)

@@ -76,7 +76,7 @@
             }
         }
 
-        [TestCase(1, "USD", null, "EUR", true)]
+        [TestCase(1, "USD", null, "USD", true)]
         [TestCase(1, "USD", "eur", "EUR", false)]
         public async Task Index_ExportExcel_PassCorrectParam(int currencyId, string currency, string baseCurrency, string expectedCurrency, bool isFakeLicensee)
         {

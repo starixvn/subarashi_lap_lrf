@@ -211,14 +211,17 @@
             var model = CreateValidMetaModel(modelCurrencyId, drilldownCurrencyId);
             model.IsExportExcel = true;
             var level = 1;
-            var fdate = DateTime.Now;
-            var tdate = DateTime.Now.AddDays(1);
+            var fdate = new DateTime(2018,01,01);
+            var tdate = new DateTime(2018, 01, 05);
             var currencyId = 3;
             var custId = 4;
 
             StubUserSessionData(new UserSession
             {
-                CurrencyList = new Dictionary<int, string> { { currencyId, "Currency" } },
+                CurrencyList = new Dictionary<int, string> {
+                    { modelCurrencyId, "Currency" },
+                    { drilldownCurrencyId, "Currency" },
+                    { currencyId, "Currency" } },
             });
 
             var expectedFileName = $"ColossusBetsWinLoss_{fdate:ddMMMyyy}_Currency.xls";
@@ -245,8 +248,8 @@
             // Assert
             Assert.Multiple(() =>
             {
-                Assert.That(model.DrillDownFromDate, Is.EqualTo(model.FromDate));
-                Assert.That(model.DrillDownToDate, Is.EqualTo(model.ToDate));
+                Assert.That(model.DrillDownFromDate, Is.EqualTo(fdate));
+                Assert.That(model.DrillDownToDate, Is.EqualTo(tdate));
                 _controller.Received().ExcelStream(Arg.Any<IWorkbook>(), expectedFileName);
             });
         }

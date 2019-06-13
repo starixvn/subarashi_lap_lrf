@@ -151,10 +151,10 @@
             using (var controller = CreateContoller())
             {
                 // Arrange
-                const string CurrencyName = "Currency";
-                const string BaseCurrency = "BaseCurrency";
+                const string CurrencyName = "CNY";
+                const string BaseCurrency = "USD";
                 const string Path = "";
-                var excelParam = "{'CurrencyName': 'Currency', " + (isConvert ? "'BaseCurrency': 'BaseCurrency' ," : string.Empty)
+                var excelParam = "{'CurrencyName': 'CNY', " + (isConvert ? "'BaseCurrency': 'USD' ," : string.Empty)
                     + "'GridColumns': [{'Name': 'Column1', 'Checked': 'true'}]}";
 
                 controller.Server.MapPath(Arg.Any<string>()).Returns(Path);
@@ -186,7 +186,7 @@
                 controller.When(x => x.CreateExcel(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<CustomerListViewModel>())).Do(x => actualReportTitle = (string)x[1]);
 
                 // Action
-                var result = controller.ExportExcel(excelParam);
+                controller.ExportExcel(excelParam);
 
                 // Assert
                 Assert.Multiple(() =>

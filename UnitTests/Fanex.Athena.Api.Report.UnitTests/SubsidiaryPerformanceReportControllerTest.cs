@@ -54,7 +54,7 @@
         {
             // Arrange
             var metaModel = GetMetaModel();
-
+            StubSingleWalletProductAccess(new[] { "SB", "BA" });
             SessionService.GenerateAgentListXml(Arg.Any<int>(), Arg.Any<bool>()).Returns("<Root></Root>");
             SessionService.UserSession.Returns(new Session.Model.UserSession
             {
@@ -84,7 +84,7 @@
         {
             // Arrange
             var metaModel = GetMetaModel();
-
+            StubSingleWalletProductAccess(new[] { "SB", "BA" });
             SessionService.GenerateAgentListXml(Arg.Any<IDictionary<int, IEnumerable<int>>>()).Returns("<Root></Root>");
             SessionService.UserSession.Returns(new Session.Model.UserSession
             {
@@ -212,7 +212,7 @@
                 ToDate = new DateTime(2017, 8, 30),
                 ProductCodeList = "SB,BA",
                 SubsidiaryList = "New York,India",
-                BaseCurrency = "USD"
+                BaseCurrency = "USD",
             };
         }
     }

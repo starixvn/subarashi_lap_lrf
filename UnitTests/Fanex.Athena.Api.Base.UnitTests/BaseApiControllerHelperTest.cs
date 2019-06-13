@@ -31,7 +31,8 @@
 
         protected ILanguageService LangService { get; private set; }
 
-        protected IDictionary<int, string> UserCurrencyList => SessionService.UserSession.CurrencyList;
+        protected IDictionary<int, string> UserCurrencyList => 
+            SessionService.UserSession.CurrencyList;
 
         [OneTimeSetUp]
         public virtual void FixtureSetUp()

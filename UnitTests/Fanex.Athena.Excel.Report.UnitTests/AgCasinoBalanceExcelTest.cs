@@ -56,7 +56,7 @@ namespace Fanex.Athena.Excel.Report.UnitTests
             // Arrange
             var row = ExcelTestHelper.MockGetRow(FakeSheet, ColumnCount, ReportBase.RowHeaderTemplate);
             var excel = CreateExcel();
-            var headers = new[] 
+            var headers = new[]
             {
                 "#", ViewResources.Date, ViewResources.ExternalId, ViewResources.SystemId,
                 ViewResources.Currency, ViewResources.OpeningBalance, ViewResources.TransferIn,
@@ -110,7 +110,8 @@ namespace Fanex.Athena.Excel.Report.UnitTests
             // Arrange
             var row = ExcelTestHelper.MockGetRow(FakeSheet, ColumnCount, 0);
             var excel = CreateExcel();
-            var expectedTitle = ReportExcelHelper.GenerateReportTitle(ViewResources.AGCasinoBalance, new ConvertingOption(), MetaModel);
+            var expectedTitle = ReportExcelHelper.GenerateReportTitle(ViewResources.AGCasinoBalance,
+                MetaModel.FromDate, MetaModel.ToDate, "All Currencies");
 
             // Action
             excel.Public_AssignTitle(FakeSheet);

@@ -60,7 +60,8 @@
             var model = new ExchangeWinLossMetaModel
             {
                 FromDate = _maxDate,
-                ToDate = _maxDate.AddDays(-1)
+                ToDate = _maxDate.AddDays(-1),
+                CurrencyId=-100
             };
 
             // Action

@@ -36,8 +36,7 @@
             SetUpDefaultFakeData();
         }
 
-        [TestCase("chf", "chf")]
-        [TestCase("", "eur")]
+        [TestCase("CNY", "cny")]
         public async Task Index_WhenGet_LicenseeOffersNewForecase_ReturnCorrectViewResult(string baseCurrency, string expectedBaseCurrency)
         {
             using (var controler = CreateController())

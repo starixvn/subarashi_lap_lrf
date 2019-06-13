@@ -79,9 +79,12 @@
             }
         }
 
-        [TestCase("USD", null, "EUR", true)]
-        [TestCase("USD", "eur", "EUR", false)]
-        public async Task Index_ExportExcel_PassCorrectParam(string currency, string baseCurrency, string expectedCurrency, bool hasMainTickets)
+        [TestCase(1,"USD", null, "USD", true)]
+        [TestCase(1,"USD", "eur", "EUR", false)]
+        public async Task Index_ExportExcel_PassCorrectParam(
+            int currencyId,
+            string currency, string baseCurrency, 
+            string expectedCurrency, bool hasMainTickets)
         {
             using (var controller = CreateController())
             {
@@ -91,7 +94,7 @@
                 var metaModel = new BetListExcelMetaModel
                 {
                     IsExportExcel = true,
-                    CurrencyId = 1,
+                    CurrencyId = currencyId,
                     CurrencyName = currency,
                     BaseCurrency = baseCurrency,
                     FromDate = new DateTime(2018, 1, 1),

@@ -76,14 +76,15 @@
             }
         }
 
-        [TestCase("USD", null, "EUR", true, "Test", "Test")]
-        [TestCase("USD", "eur", "EUR", false, null, "LicenseeWinLossBetList")]
+        [TestCase(1, "USD", null, "USD", true, "Test", "Test")]
+        [TestCase(1, "USD", "eur", "EUR", false, null, "LicenseeWinLossBetList")]
         public async Task Index_ExportExcel_PassCorrectParam(
-            string currency, 
-            string baseCurrency, 
-            string expCurrency, 
-            bool isFakeLic, 
-            string fileName, 
+            int currencyId,
+            string currency,
+            string baseCurrency,
+            string expCurrency,
+            bool isFakeLic,
+            string fileName,
             string expFileName)
         {
             using (var controller = CreateController())
@@ -93,14 +94,14 @@
                 var metaModel = new BetListExcelMetaModel
                 {
                     IsExportExcel = true,
-                    CurrencyId = 1,
+                    CurrencyId = currencyId,
                     CurrencyName = currency,
                     BaseCurrency = baseCurrency,
                     FromDate = new DateTime(2018, 11, 1),
                     ToDate = new DateTime(2018, 12, 2),
                     ExternalId = "External",
                     SystemId = "System",
-                    ExcelFileName = fileName
+                    ExcelFileName = fileName,
                 };
                 var fakeLicensees = isFakeLic ? new[] { DefaultLicenseeSession.LicenseeId } : Enumerable.Empty<int>();
                 AppSettings.FakeLicenseeList.Returns(fakeLicensees);

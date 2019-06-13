@@ -213,10 +213,9 @@
             _controller.Received().ExcelStream(Arg.Any<IWorkbook>(), Arg.Any<string>());
         }
 
-        [TestCase(0, -2)]
-        [TestCase(1, -2)]
-        [TestCase(1, 1)]
-        public async Task Index_IsExportExcelTrueWithDifferentLevelAndCurrency_UpdateMetanData(int level, int currencyId)
+      
+        public async Task Index_IsExportExcelTrueWithDifferentLevelAndCurrency_UpdateMetanData(
+            )
         {
             // Arrange
             const int CustId = 1, DrilldownCurrency = 2;
@@ -224,7 +223,7 @@
             var toDate = new DateTime(2017, 4, 18);
             var metaModel = new ThirdPartyWinLossMetaModel
             {
-                CurrencyId = currencyId,
+                CurrencyId = 1,
                 IsExcludedTestData = true,
                 IsExportExcel = true,
                 FromDate = fromDate.AddDays(1),
@@ -248,14 +247,14 @@
                 .Returns(excel);
             _controller.When(x => x.ExcelStream(Arg.Any<IWorkbook>(), Arg.Any<string>())).DoNotCallBase();
 
-            SessionService.UserSession.CurrencyList = new Dictionary<int, string> { { currencyId, "Currency" } };
+            SessionService.UserSession.CurrencyList = new Dictionary<int, string> { { 1, "Currency" } };
 
-            var expectedFromDate = level > 0 && currencyId <= 0 ? fromDate : metaModel.FromDate;
-            var expectedToDate = level > 0 && currencyId <= 0 ? toDate : metaModel.ToDate;
-            var expectedCurrency = level > 0 && currencyId >= 0 ? DrilldownCurrency : metaModel.CurrencyId;
+            var expectedFromDate = fromDate;
+            var expectedToDate = toDate;
+            var expectedCurrency =  metaModel.CurrencyId;
 
             // Action
-            await _controller.Index(metaModel, fromDate, toDate, level, DrilldownCurrency, CustId);
+            await _controller.Index(metaModel, fromDate, toDate, 0, DrilldownCurrency, CustId);
 
             // Assert
             Assert.Multiple(() =>

@@ -39,9 +39,9 @@
             _reportSettingService = Substitute.For<IReportSettingService>();
 
             _controller = Substitute.ForPartsOf<LicenseeWinLossReportController>(
-                SessionService, 
-                ProductService, 
-                _reportSettingService, 
+                SessionService,
+                ProductService,
+                _reportSettingService,
                 LangService,
                 _dataAccess);
 
@@ -65,6 +65,7 @@
             // Arrange
             var model = new LicenseeWinLossMetaModel
             {
+                CurrencyId = -100,
                 ProductOptions = new List<ProductOption>
                 {
                     new ProductOption()
@@ -241,7 +242,7 @@
             metaModel.CurrencyId = currencyId;
             metaModel.IsExportExcel = true;
 
-            var expectedResult = SetUpForGettingData(metaModel, level, totalItem: 0);
+            SetUpForGettingData(metaModel, level, totalItem: 0);
 
             SetUpForExportingExcel();
 
@@ -257,8 +258,8 @@
             Assert.Multiple(() =>
             {
                 Assert.That(actualExcelModel.MetaModel, Is.EqualTo(metaModel));
-                Assert.That(metaModel.FromDate, Is.EqualTo(metaModel.DrillDownFromDate));
-                Assert.That(metaModel.ToDate, Is.EqualTo(metaModel.DrillDownToDate));
+                Assert.That(metaModel.FromDate, Is.EqualTo(fdate));
+                Assert.That(metaModel.ToDate, Is.EqualTo(tdate));
                 Assert.That(metaModel.CurrencyId, Is.EqualTo(currencyId > 0 ? metaModel.DrillDownCurrencyId : metaModel.CurrencyId));
             });
         }
@@ -286,6 +287,7 @@
         {
             var model = new LicenseeWinLossMetaModel
             {
+                CurrencyId = 1,
                 SortBy = sortBy,
                 SortOrder = sortOrder,
                 FromDate = new DateTime(2016, 1, 1),

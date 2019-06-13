@@ -141,7 +141,6 @@
 
         [HttpPost]
         [CustomValidateAntiForgery]
-        [ValidationWebRequest]
         public async Task<ActionResult> Detail(MatchWinLossMetaModel metaModel)
         {
             if (!metaModel.IsValidDetailRequest)

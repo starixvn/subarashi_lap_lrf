@@ -53,6 +53,7 @@
         {
             var model = new CustomerWinLossMetaModel
             {
+                CurrencyId=-100,
                 IsExportExcel = false,
                 FromDate = DateTime.Now.AddDays(1),
                 ToDate = DateTime.Now
