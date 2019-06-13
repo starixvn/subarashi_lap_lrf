@@ -8,7 +8,7 @@ import Loader from '../../../../components/Loader'
 import AppLayout from '../../../../layouts/AppLayout'
 import PlayerDetail from './PlayerDetail';
 
-const AppContainer = (props) => {
+export const AppContainer = (props) => {
     return (
         <AppLayout>
             <Loader isLoading={props.isLoading} />

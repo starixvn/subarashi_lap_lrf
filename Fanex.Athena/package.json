@@ -20,6 +20,7 @@
     "css-loader": "^0.28.7",
     "enzyme": "^3.2.0",
     "enzyme-adapter-react-16": "^1.1.1",
+    "enzyme-to-json": "^3.3.5",
     "eslint": "^4.19.1",
     "eslint-plugin-react": "^7.12.4",
     "expose-loader": "^0.7.3",
@@ -118,6 +119,12 @@
     },
     "setupFilesAfterEnv": [
       "raf/polyfill"
+    ],
+    "setupFiles": [
+      "./www/js/source/reactpages/setupTests.js"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
     ]
   }
 }
