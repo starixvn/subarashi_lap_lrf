@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Net.Http;
     using System.Threading.Tasks;
+    using System.Web.Http.Results;
     using Base.UnitTests;
     using Model.BetList.MetaModel;
     using Model.Core.DataDomain;
@@ -68,31 +69,8 @@
         }
 
         [TestCase(null)]
-        [TestCase("")]
-        [TestCase("  ")]
-        public void GetByRunning_NoProduct_ThrowException(string productCode)
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var metaModel = new BaseBettingTicketMetaModel
-                {
-                    FromDate = DateTime.Today,
-                    ToDate = DateTime.Today,
-                    ProductCodeList = productCode
-                };
-
-                // Action
-                AsyncTestDelegate testDelegate = async () => await controller.GetByRunning(metaModel);
-
-                // Assert
-                Assert.ThrowsAsync<ArgumentException>(testDelegate);
-            }
-        }
-
-        [TestCase(null)]
         [TestCase("-100")]
-        public void GetByRunning_InvalidCurrency_ThrowException(string currencyIdList)
+        public async Task GetByRunning_InvalidCurrency_ReturnBadRequestAsync(string currencyIdList)
         {
             using (var controller = CreateController())
             {
@@ -106,10 +84,10 @@
                 };
 
                 // Action
-                AsyncTestDelegate testDelegate = async () => await controller.GetByRunning(metaModel);
+                var result= await controller.GetByRunning(metaModel);
 
                 // Assert
-                Assert.ThrowsAsync<ArgumentException>(testDelegate);
+                Assert.IsTrue(result is BadRequestErrorMessageResult);
             }
         }
 
@@ -163,47 +141,6 @@
 
                 // Assert
                 Assert.That(result, Is.Null);
-            }
-        }
-
-        [Test]
-        public void GetBySingleCustomer_DateRangeIsInvalid_ReturnNull()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var metaModel = new SingleCustomersBetListMetaModel
-                {
-                    FromDate = DateTime.Today,
-                    ToDate = DateTime.Today.AddDays(-1),
-                    UserName = FakeHelper.Create<string>()
-                };
-
-                // Action
-                AsyncTestDelegate testDelegate = () => controller.GetBySingleCustomer(metaModel);
-
-                // Assert
-                Assert.ThrowsAsync<ArgumentException>(testDelegate);
-            }
-        }
-
-        [Test]
-        public void GetBySingleCustomer_UserNameIsEmpty_ReturnNull()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var metaModel = new SingleCustomersBetListMetaModel
-                {
-                    FromDate = DateTime.Today,
-                    ToDate = DateTime.Today
-                };
-
-                // Action
-                AsyncTestDelegate testDelegate = () => controller.GetBySingleCustomer(metaModel);
-
-                // Assert
-                Assert.ThrowsAsync<ArgumentException>(testDelegate);
             }
         }
 

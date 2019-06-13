@@ -33,9 +33,7 @@
         [ValidationApiRequest]
         public async Task<dynamic> GetBySingleCustomer(SingleCustomersBetListMetaModel metaModel)
         {
-           
             var userSession = SessionService.UserSession;
-
             metaModel.HasPlayerCom = SessionService.LicenseeSession.IsAllowedCustomerComm;
             metaModel.UserCurrencyList = userSession.CurrencyList;
             metaModel.AgentListXml = SessionService.GenerateAgentListXml();

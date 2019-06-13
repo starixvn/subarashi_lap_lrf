@@ -17,14 +17,14 @@ namespace Fanex.Athena.Model.Core.Helper
 
         public static bool ValidateCurrency(int currencyId, IDictionary<int, string> currencyList)
         {
-            return currencyId >= SystemConstants.MinBaseCurrencyType
+            return (currencyId >= SystemConstants.MinBaseCurrencyType && currencyId < 0)
                 || currencyList.ContainsKey(currencyId);
         }
         private static bool VerifyKeanOceanCurrency(int currencyId, int licenseeId)
         {
             return licenseeId == LicenseeIdentity.KeenOcean && currencyId == CurrencyType.Cny;
         }
-        
+
         public static bool ValidateCurrencyForKeanOcean(int currencyId, IDictionary<int, string> currencyList, int licenseeId)
         {
             return ValidateCurrency(currencyId, currencyList) || VerifyKeanOceanCurrency(currencyId, licenseeId);

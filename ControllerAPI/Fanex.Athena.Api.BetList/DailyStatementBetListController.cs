@@ -12,6 +12,7 @@ namespace Fanex.Athena.Api.BetList
     using Base.Attributes;
     using DataAccess.Core.Configuration.Interfaces;
     using Fanex.Athena.Model.Core.Helper;
+    using Fanex.Athena.Resources;
     using Model.BetList.MetaModel;
     using Model.Core.DataDomain;
     using Service.Core.Common.Interfaces;
@@ -41,7 +42,7 @@ namespace Fanex.Athena.Api.BetList
             if (!MetaModelValidationHelper.ValidateCurrency(metaModel.CurrencyId,
                 SessionService.UserSession.CurrencyList))
             {
-                return null;
+                return BadRequest(ViewResources.InvalidRequestMsg);
             }
 
             const string UspKey = "Lrf_BetList_SelByDayAll_Mem";

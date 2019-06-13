@@ -5,6 +5,8 @@
     using System.Net.Http;
     using System.Text;
     using System.Threading.Tasks;
+    using System.Web.Http.Results;
+    using Fanex.Athena.Resources;
     using Model.BetList.MetaModel;
     using Model.Core.DTO.Configuration;
     using Newtonsoft.Json;
@@ -32,23 +34,25 @@
 
         [TestCase(-100)]
         [TestCase(100)]
-        public async Task Index_InvalidCurrencyId_ReturnNull(int currencyId)
+        public async Task Index_InvalidCurrencyId_ReturnBadRequest(int currencyId)
         {
             using (var controller = CreateController())
             {
                 // Arrange
-                var expect = new HttpResponseMessage();
                 var metaModel = new BetListMetaModel
                 {
                     CurrencyId = currencyId
                 };
+
                 StubUserSessionData(new UserSession { CurrencyList = new Dictionary<int, string>() });
 
                 // Action
                 var actual = await controller.Index(metaModel);
 
                 // Assert
-                Assert.That(actual, Is.Null);
+                Assert.IsTrue(actual is BadRequestErrorMessageResult);
+                Assert.IsTrue((actual as BadRequestErrorMessageResult)
+                    .Message.Equals(ViewResources.InvalidRequestMsg));
             }
         }
 
