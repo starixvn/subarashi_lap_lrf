@@ -39,12 +39,5 @@ namespace Fanex.Athena.Model.Forecast.MetaModel
 
         public bool IsShowFT { get; set; }
 
-        public override bool IsValid
-        {
-            get
-            {
-                return base.IsValid && LeagueId > 0 && MatchId > 0;
-            }
-        }
     }
 }
