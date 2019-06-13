@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Data;
     using System.Linq;
     using System.Threading.Tasks;
     using Core.Configuration.Interfaces;
@@ -52,7 +51,8 @@
                 AgentListXml = "3",
                 FromDate = new DateTime(2017, 1, 1),
                 ToDate = new DateTime(2017, 2, 2),
-                DrawFilter = 4
+                DrawFilter = 4,
+                DefaultBaseCurrency = "AAA"
             };
         }
 
@@ -89,21 +89,21 @@
 
             Reader.Read().Returns(true, false);
             Reader.FieldCount.Returns(7);
-            Reader.GetName(0).Returns("LicenseeWLSBUSD");
-            Reader.GetName(1).Returns("turnoverSBUSD");
+            Reader.GetName(0).Returns("LicenseeWLSB");
+            Reader.GetName(1).Returns("turnoverSB");
             Reader.GetName(2).Returns("username");
             Reader.GetName(3).Returns("nickname");
             Reader.GetName(4).Returns("custid");
             Reader.GetName(5).Returns("LicenseeWLSB");
             Reader.GetName(6).Returns("turnoverSB");
 
-            const decimal licenseeWLUSD = 100;
-            const decimal turnoverUSD = 200;
+            const decimal licenseeWL = 100;
+            const decimal turnover = 200;
             var readerDataMapping = new
             {
                 username = "testacc",
-                LicenseeWLSBUSD = licenseeWLUSD,
-                turnoverSBUSD = turnoverUSD,
+                LicenseeWLSB = licenseeWL,
+                turnoverSB = turnover,
                 reporttype = "20170101",
                 nickname = "nickname test",
                 custid = 108,
@@ -122,29 +122,35 @@
                 Assert.That(firstOriginalItem.SystemId, Is.EqualTo(readerDataMapping.username));
                 Assert.That(firstOriginalItem.ExternalId, Is.EqualTo(readerDataMapping.nickname));
                 Assert.That(firstOriginalItem.CustomerId, Is.EqualTo(readerDataMapping.custid));
-                Assert.That(firstOriginalItem.LicenseeWL["SB"], Is.EqualTo(licenseeWLUSD));
-                Assert.That(firstOriginalItem.TurnOver["SB"], Is.EqualTo(turnoverUSD));
+                Assert.That(firstOriginalItem.LicenseeWL["SB"], Is.EqualTo(licenseeWL));
+                Assert.That(firstOriginalItem.TurnOver["SB"], Is.EqualTo(turnover));
                 Assert.That(result.AdditionalInfo, Is.EqualTo(readerDataMapping.PromotionPrize.ToString()));
-
             });
         }
 
         [Test]
-        public async Task ReadSummaryTotal_WhenCall_ReturnSummaryTotalCorrectly()
+        public async Task GetSummaryTotal_HasSummaryData_ReturnSummaryTotalCorrectly()
         {
             // Arrange
             DataAccess.GetObjectDb(Arg.Is(GetSummaryWinlossSp)).Returns(ObjectDb);
 
-            Reader.Read().Returns(true, false);
-            Reader.FieldCount.Returns(2);
+            Reader.Read().Returns(false, true);
+            Reader.NextResult().Returns(true);
+            Reader.FieldCount.Returns(4);
             Reader.GetName(0).Returns("LicenseeWLSBUSD");
             Reader.GetName(1).Returns("turnoverSBUSD");
+            Reader.GetName(2).Returns("LicenseeWLSB");
+            Reader.GetName(3).Returns("turnoverSB");
 
             var readerDataMapping = new
             {
                 LicenseeWLSBUSD = 100,
                 turnoverSBUSD = 200,
-                reporttype = "20170101"
+                reporttype = "20170101",
+                LicenseeWLSB = 300,
+                turnoverSB = 400,
+                winlost = 500,
+                winlostUSD = 600
             };
             MapReaderData(readerDataMapping);
 
@@ -154,8 +160,44 @@
             // Assert
             Assert.Multiple(() =>
             {
-                Assert.That(result.SummaryTotal["USD"].LicenseeWL["SB"], Is.EqualTo(100));
-                Assert.That(result.SummaryTotal["USD"].TurnOver["SB"], Is.EqualTo(200));
+                Assert.That(result.SummaryTotal["USD"].CustomerWinLoss, Is.EqualTo(readerDataMapping.winlostUSD));
+                Assert.That(result.SummaryTotal["USD"].LicenseeWL["SB"], Is.EqualTo(readerDataMapping.LicenseeWLSBUSD));
+                Assert.That(result.SummaryTotal["USD"].TurnOver["SB"], Is.EqualTo(readerDataMapping.turnoverSBUSD));
+                Assert.That(result.SummaryTotal[_metaModel.DefaultBaseCurrency].CustomerWinLoss, Is.EqualTo(readerDataMapping.winlost));
+                Assert.That(result.SummaryTotal[_metaModel.DefaultBaseCurrency].LicenseeWL["SB"], Is.EqualTo(readerDataMapping.LicenseeWLSB));
+                Assert.That(result.SummaryTotal[_metaModel.DefaultBaseCurrency].TurnOver["SB"], Is.EqualTo(readerDataMapping.turnoverSB));
+            });
+        }
+
+        [TestCase(false, true)]
+        [TestCase(false, false)]
+        [TestCase(true, false)]
+        public async Task GetSummaryTotal_HasNoSummaryData_ReturnSummaryTotalCorrectly(bool hasReturnedData, bool isNotEmpty)
+        {
+            // Arrange
+            DataAccess.GetObjectDb(Arg.Is(GetSummaryWinlossSp)).Returns(ObjectDb);
+
+            Reader.Read().Returns(false, isNotEmpty);
+            Reader.NextResult().Returns(hasReturnedData);
+            Reader.FieldCount.Returns(0);
+
+            var readerDataMapping = new
+            {
+                winlost = 500,
+                winlostUSD = 600
+            };
+            MapReaderData(readerDataMapping);
+
+            // Action
+            var result = await DataAccess.GetSummaryWinloss(_metaModel, UserCurrencyList);
+
+            // Assert
+            Assert.Multiple(() =>
+            {
+                Assert.That(result.SummaryTotal["USD"].CustomerWinLoss, Is.Zero);
+                Assert.That(result.SummaryTotal["USD"].LicenseeWL, Is.Empty);
+                Assert.That(result.SummaryTotal[_metaModel.DefaultBaseCurrency].CustomerWinLoss, Is.Zero);
+                Assert.That(result.SummaryTotal[_metaModel.DefaultBaseCurrency].TurnOver, Is.Empty);
             });
         }
 
@@ -198,6 +240,8 @@
             ObjectDb.Received(1).SetParameterValue("drawfilter", _metaModel.DrawFilter);
             ObjectDb.Received(1).SetParameterValue("showSB", true);
             ObjectDb.Received(1).SetParameterValue("showNG", false);
+            ObjectDb.Received(1).SetParameterValue("BaseCurrency", _metaModel.BaseCurrency);
+            ObjectDb.Received(1).SetParameterValue("DefaultBaseCurrency", _metaModel.DefaultBaseCurrency);
         }
 
         private IList<ProductOption> GetProductOptions()
