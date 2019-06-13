@@ -2724,13 +2724,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BaseCurrency", function() { return BaseCurrency; });
 var BaseCurrency = [{
   value: -1,
-  text: "EUR"
+  text: 'EUR'
 }, {
   value: -2,
-  text: "USD"
+  text: 'USD'
 }, {
   value: -3,
-  text: "GBP"
+  text: 'GBP'
+}, {
+  value: -4,
+  text: 'MYR'
+}, {
+  value: -5,
+  text: 'CNY'
+}, {
+  value: -6,
+  text: 'THB'
+}, {
+  value: -7,
+  text: 'IDR'
+}, {
+  value: -8,
+  text: 'INH'
 }];
 
 /***/ }),

@@ -19921,7 +19921,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿///
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/*global _language_en_US*/
 !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js?fe57"), __webpack_require__(/*! common/querystring */ "./www/js/source/common/querystring.js"), __webpack_require__(/*! common/popup */ "./www/js/source/common/popup.js"), __webpack_require__(/*! extensions/prototype */ "./www/js/source/extensions/prototype.js"), __webpack_require__(/*! components/selectlist */ "./www/js/source/components/selectlist.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, QueryString, Popup) {// jshint ignore:line
         'use strict';
-        const BASE_CURRENT_LIST = ['EUR', 'USD', 'GBP', 'IDR', 'MYR', 'INH', 'CNY', 'THB'];
+        const BASE_CURRENCY = { 'eur': '-1', 'usd': '-2', 'gbp': '-3', 'myr': '-4', 'cny': '-5', 'thb': '-6', 'idr': '-7', 'inh': '-8' };
         let REQUEST_VERIFICATION_TOKEN;
         let _historyDate = null;
         let _rootUrl = null;
@@ -20007,7 +20007,17 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/*global _lan
             return _historyDate;
         }
         function isBaseCurrency(currencyName) {
-            return $.inArray(currencyName.toUpperCase(), BASE_CURRENT_LIST) > -1;
+            return BASE_CURRENCY[currencyName.toLowerCase()] !== undefined;
+        }
+        function getBaseCurrencyName(currencyId) {
+            const currency = currencyId.toString();
+            for (let currencyName in BASE_CURRENCY) {
+                if (BASE_CURRENCY[currencyName] === currency) {
+                    return currencyName;
+                }
+            }
+
+            return '';
         }
         function addUserGuide(options) {
             const defaultOptions = {
@@ -20191,7 +20201,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/*global _lan
             let defaultBaseCurrency = $("#defaultBaseCurrency").val();
 
             if (userChange && currency == 0 && defaultBaseCurrency &&
-                !isBaseCurrency(currentBaseCurrencyValue.toUpperCase())) {
+                !isBaseCurrency(currentBaseCurrencyValue)) {
                 $baseCurrency.val(defaultBaseCurrency.toLowerCase());
             }
             // Handle inside based currency list in some reports(licensee wl, wl by product)
@@ -20199,9 +20209,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/*global _lan
                 return $(this).val() < 0;
             }).length > 0;
             if (hasBaseCurrencyInDropdown) {
-                const basedCurrencyMap = { '-1': 'eur', '-2': 'usd', '-3': 'gbp' };
-                let basedCurrency = basedCurrencyMap[currency.toString()];
-                basedCurrency = basedCurrency === undefined ? '' : basedCurrency;
+                const basedCurrency = getBaseCurrencyName(currency);
                 $baseCurrency.val(basedCurrency);
             }
 
@@ -20407,7 +20415,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/*global _lan
             debounce: debounce,
             addFilterCollapseExpand: addFilterCollapseExpand,
             isFakeLicensee: isFakeLicensee,
-            getXsrfToken: getXsrfToken
+            getXsrfToken: getXsrfToken,
+            getBaseCurrencyName: getBaseCurrencyName
         };
     }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
