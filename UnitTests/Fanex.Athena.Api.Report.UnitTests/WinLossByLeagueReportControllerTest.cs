@@ -60,19 +60,6 @@
         }
 
         [Test]
-        public async Task Index_InvalidModel_ReturnBadRequestWithCorrectMessage()
-        {
-            // Arrange
-            var metaModel = new WinLossByLeagueMetaModel { CurrencyId = -400 };
-
-            // Action
-            var result = await _controller.Index(metaModel) as BadRequestErrorMessageResult;
-
-            // Assert
-            Assert.That(result.Message, Is.EqualTo(ViewResources.InvalidParams));
-        }
-
-        [Test]
         public async Task Index_Level0_GetCorrectDataFromService()
         {
             // Arrange
@@ -143,19 +130,6 @@
                 Assert.That(result.TotalRows, Is.EqualTo(ExpectedTotalRows));
                 Assert.That(result.Data.Count, Is.EqualTo(1));
             });
-        }
-
-        [Test]
-        public async Task Excel_InvalidCurrency_ReturnBadRequestWithCorrectMessage()
-        {
-            // Arrange
-            var metaModel = new WinLossByLeagueMetaModel { CurrencyId = -100 };
-
-            // Action
-            var result = await _controller.Excel(metaModel);
-
-            // Assert
-            Assert.That(result.StatusCode, Is.EqualTo(HttpStatusCode.NotFound));
         }
 
         [Test]

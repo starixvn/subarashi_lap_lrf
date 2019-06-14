@@ -8,6 +8,7 @@
     using Fanex.Athena.Excel.Base.Entities;
     using Fanex.Athena.Excel.Report;
     using Fanex.Athena.Model.Report.ViewModel;
+    using Fanex.Athena.Service.Core.Utility.Interfaces;
     using Model.Core.ResultModel;
     using Model.Report.DTO;
     using Model.Report.MetaModel;
@@ -20,6 +21,7 @@
     {
         private IThirdPartyWinLossDataAccess<ThirdPartyWinLoss> _dataAccess;
         private AgCasinoWinLossReportController _controller;
+        private IValidationService _validationService;
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
@@ -32,8 +34,12 @@
         [SetUp]
         public void SetUp()
         {
+            _validationService = Substitute.For<IValidationService>();
+            _validationService.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
+
             _dataAccess = Substitute.For<IThirdPartyWinLossDataAccess<ThirdPartyWinLoss>>();
-            _controller = Substitute.ForPartsOf<AgCasinoWinLossReportController>(_dataAccess, SessionService, ProductService, LangService);
+            _controller = Substitute.ForPartsOf<AgCasinoWinLossReportController>(_dataAccess, SessionService,
+                ProductService, LangService, _validationService);
             _controller.When(x => x.ExcelStream(Arg.Any<IWorkbook>(), Arg.Any<string>())).DoNotCallBase();
 
         }
@@ -46,6 +52,7 @@
         [TearDown]
         public void TearDown()
         {
+            _validationService = null;
             SessionService.ClearReceivedCalls();
             _dataAccess.ClearReceivedCalls();
             _dataAccess = null;
@@ -55,9 +62,11 @@
         }
 
         [Test]
-        public async Task Index_InvalidModel_ReturnEmptyData()
+        public async Task Index_InvalidCurrency_ReturnEmptyData()
         {
             // Arrange
+            _validationService.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(false);
+
             var model = new ThirdPartyWinLossMetaModel
             {
                 CurrencyId = 1

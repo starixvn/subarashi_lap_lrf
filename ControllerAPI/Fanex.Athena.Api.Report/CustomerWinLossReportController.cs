@@ -39,15 +39,10 @@
         }
 
         [HttpPost]
-        [ValidationApiRequest]
+        [ValidationApiRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
         public async Task<dynamic> Index(CustomerWinLossMetaModel metaModel)
         {
-            if (!IsValidCurrency(metaModel.CurrencyId))
-            {
-                return BadRequest(ViewResources.InvalidRequestMsg);
-
-            }
-
+           
             return metaModel.IsExportExcel ?
                 await ExportExcel(metaModel).ConfigureAwait(false) :
                 await ProcessRequest(metaModel).ConfigureAwait(false);

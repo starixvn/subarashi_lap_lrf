@@ -41,28 +41,6 @@
         }
 
         [Test]
-        public async Task Index_InvalidRequest_ReturnEmptyData()
-        {
-            // Arrange
-            var model = new WeeklyLiveMatchMetaModel
-            {
-                CurrencyId = 1
-            };
-
-            // Action
-            var result = await _controller.Index(model);
-
-            // Assert
-            Assert.Multiple(() =>
-            {
-                Assert.IsEmpty(result.WeekHeaders);
-                Assert.Zero(result.NumberOfWeeks);
-                Assert.IsEmpty(result.Data);
-                Assert.IsEmpty(result.TotalData);
-            });
-        }
-
-        [Test]
         public async Task Index_NoDataReturned_ReturnEmptyData()
         {
             // Arrange

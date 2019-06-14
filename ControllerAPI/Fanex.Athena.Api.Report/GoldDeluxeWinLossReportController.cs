@@ -12,6 +12,7 @@
     using Fanex.Athena.Excel.Report;
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
+    using Fanex.Athena.Service.Core.Utility.Interfaces;
     using Model.Core.DataDomain;
     using Model.Core.ResultModel;
     using Service.Core.Common.Interfaces;
@@ -21,19 +22,23 @@
     public class GoldDeluxeWinLossReportController : ApiReportBaseController
     {
         private readonly IGoldDeluxeWinLossDataAccess _dataAccess;
+        private readonly IValidationService _validationService;
 
         public GoldDeluxeWinLossReportController(
             IGoldDeluxeWinLossDataAccess dataAccess,
             ISessionService sessionService,
             IProductService productService,
-            ILanguageService langService)
+            ILanguageService langService,
+            IValidationService validationService
+            )
             : base(sessionService, productService, langService)
         {
             _dataAccess = dataAccess;
+            _validationService = validationService;
         }
 
         [HttpPost]
-        [ValidationApiRequest(ObjectName = "metaModel")]
+        [ValidationApiRequest(ObjectName = "metaModel", IsValidCurrency = true, IsIncludeKeanOcean = true)]
         public Task<dynamic> Index(
             ThirdPartyWinLossMetaModel metaModel,
             DateTime? fdate,
@@ -46,7 +51,7 @@
         }
 
         [HttpPost]
-        [ValidationApiRequest(ObjectName = "metaModel")]
+        [ValidationApiRequest(ObjectName = "metaModel", IsValidCurrency = true, IsIncludeKeanOcean = true)]
         public Task<dynamic> Index([FromBody] ThirdPartyWinLossMetaModel metaModel)
         {
             return ProcessRequest(metaModel, null, null);
@@ -119,7 +124,7 @@
             int currencyId = 0,
             int custId = 0)
         {
-            if (IsValidCurrency(metaModel.CurrencyId) && IsValidCurrency(currencyId))
+            if (_validationService.IsValidCurrency(currencyId, true))
             {
                 metaModel.DrillDownCurrencyId = currencyId;
                 metaModel.DrillDownLevel = level;
@@ -143,7 +148,7 @@
                     {
                         Data = result.DataList,
                         Total = result.TotalDataList,
-                        SummaryTotal = result.SummaryTotal
+                        result.SummaryTotal
                     };
                 }
             }

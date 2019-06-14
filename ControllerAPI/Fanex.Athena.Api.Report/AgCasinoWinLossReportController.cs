@@ -18,6 +18,7 @@ namespace Fanex.Athena.Api.Report
     using Fanex.Athena.Excel.Report;
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
+    using Fanex.Athena.Service.Core.Utility.Interfaces;
     using Model.Core.DataDomain;
     using Model.Core.ResultModel;
     using Resources;
@@ -28,19 +29,23 @@ namespace Fanex.Athena.Api.Report
     public class AgCasinoWinLossReportController : ApiReportBaseController
     {
         private readonly IThirdPartyWinLossDataAccess<ThirdPartyWinLoss> _thirdPartyWinLossDataAccess;
+        private readonly IValidationService _validationService;
 
         public AgCasinoWinLossReportController(
             IThirdPartyWinLossDataAccess<ThirdPartyWinLoss> thirdPartyWinLossDataAccess,
             ISessionService sessionService,
             IProductService productService,
-            ILanguageService langService)
+            ILanguageService langService,
+            IValidationService validationService
+            )
             : base(sessionService, productService, langService)
         {
             _thirdPartyWinLossDataAccess = thirdPartyWinLossDataAccess;
+            _validationService = validationService;
         }
 
         [HttpPost]
-        [ValidationApiRequest(ObjectName = "metaModel")]
+        [ValidationApiRequest(ObjectName = "metaModel", IsValidCurrency = true, IsIncludeKeanOcean = true)]
         public Task<dynamic> Index(
             ThirdPartyWinLossMetaModel metaModel,
             DateTime? fdate,
@@ -53,7 +58,7 @@ namespace Fanex.Athena.Api.Report
         }
 
         [HttpPost]
-        [ValidationApiRequest(ObjectName = "metaModel")]
+        [ValidationApiRequest(ObjectName = "metaModel", IsValidCurrency = true, IsIncludeKeanOcean = true)]
         public Task<dynamic> Index([FromBody] ThirdPartyWinLossMetaModel metaModel)
         {
             return ProcessRequest(metaModel, null, null);
@@ -113,8 +118,7 @@ namespace Fanex.Athena.Api.Report
             int currencyId = 0,
             int custId = 0)
         {
-            if (IsValidCurrency(metaModel.CurrencyId) 
-                && IsValidCurrency(currencyId))
+            if (_validationService.IsValidCurrency(currencyId, true))
             {
                 metaModel.DrillDownCurrencyId = currencyId;
                 metaModel.DrillDownLevel = level;

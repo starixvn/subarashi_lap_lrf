@@ -59,39 +59,9 @@
             // Arrange
             var model = new ExchangeWinLossMetaModel
             {
-                FromDate = _maxDate,
-                ToDate = _maxDate.AddDays(-1),
-                CurrencyId=-100
-            };
-
-            // Action
-            var result = await _controller.Index(model);
-
-            // Assert
-            Assert.Multiple(() =>
-            {
-                Assert.IsEmpty(result.DataList);
-                Assert.IsEmpty(result.TotalDataList);
-                Assert.IsEmpty(result.SummaryTotal);
-            });
-        }
-
-        [Test]
-        public async Task Index_InvalidRequest_ReturnEmptyData()
-        {
-            // Arrange
-            StubUserSessionData(new UserSession
-            {
-                CurrencyList = new Dictionary<int, string>
-                {
-                    { 1, "Currency 1" },
-                    { 2, "Currency 2" }
-                }
-            });
-
-            var model = new ExchangeWinLossMetaModel
-            {
-                CurrencyId = 3
+                FromDate = DateTime.Now,
+                ToDate = DateTime.Now.AddDays(-1),
+                CurrencyId = -100
             };
 
             // Action

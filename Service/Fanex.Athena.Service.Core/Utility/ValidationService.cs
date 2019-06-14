@@ -48,7 +48,7 @@ namespace Fanex.Athena.Service.Core.Utility
             return !currencyList.Any(x => !userCurrencyList.ContainsKey(x));
 
         }
-        public bool IsValidMetalModel(IMetaModelValidation model)
+        private static bool IsValidMetalModel(IMetaModelValidation model)
         {
             return model != null && model.IsValid;
         }
@@ -77,17 +77,17 @@ namespace Fanex.Athena.Service.Core.Utility
             return result;
         }
 
-        public bool IsValidProductCode(IMetaModelProductCodeList model)
+        private static bool IsValidProductCode(IMetaModelProductCodeList model)
         {
             throw new NotImplementedException();
         }
 
-        public bool IsValidCurrency(IMetaModelCurrency model, bool isIncludeKeanOcean = false)
+        private bool IsValidCurrency(IMetaModelCurrency model, bool isIncludeKeanOcean = false)
         {
             return IsValidCurrency(model.CurrencyId, isIncludeKeanOcean);
         }
 
-        public bool IsValidCurrency(IMetaModelCurrencyList currencyList)
+        private static bool IsValidCurrency(IMetaModelCurrencyList currencyList)
         {
             throw new NotImplementedException();
         }

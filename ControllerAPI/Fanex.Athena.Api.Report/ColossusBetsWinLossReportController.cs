@@ -18,6 +18,7 @@ namespace Fanex.Athena.Api.Report
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
+    using Fanex.Athena.Service.Core.Utility.Interfaces;
     using Model.Core.DataDomain;
     using Model.Core.ResultModel;
     using Resources;
@@ -29,19 +30,22 @@ namespace Fanex.Athena.Api.Report
     public class ColossusBetsWinLossReportController : ApiReportBaseController
     {
         private readonly IColossusBetsWinLossService _colossusBetsWinLossService;
-
+        private readonly IValidationService _validationService;
         public ColossusBetsWinLossReportController(
             IColossusBetsWinLossService colossusBetsWinLossService,
             ISessionService sessionService,
             IProductService productService,
-            ILanguageService langService)
+            ILanguageService langService,
+            IValidationService validationService)
             : base(sessionService, productService, langService)
         {
             _colossusBetsWinLossService = colossusBetsWinLossService;
+
+            _validationService = validationService;
         }
 
         [HttpPost]
-        [ValidationApiRequest]
+        [ValidationApiRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
         public Task<dynamic> Index(
             ColossusBetsWinLossMetaModel metaModel,
             DateTime? fdate,
@@ -54,7 +58,7 @@ namespace Fanex.Athena.Api.Report
         }
 
         [HttpPost]
-        [ValidationApiRequest]
+        [ValidationApiRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
         public Task<dynamic> Index([FromBody] ColossusBetsWinLossMetaModel metaModel)
         {
             return ProcessRequest(metaModel, null, null);
@@ -128,7 +132,7 @@ namespace Fanex.Athena.Api.Report
             int currencyId = 0,
             int custId = 0)
         {
-            if (IsValidCurrency(metaModel.CurrencyId) && IsValidCurrency(currencyId))
+            if (_validationService.IsValidCurrency(currencyId, true))
             {
                 metaModel.DrillDownCurrencyId = currencyId;
                 metaModel.DrillDownLevel = level;

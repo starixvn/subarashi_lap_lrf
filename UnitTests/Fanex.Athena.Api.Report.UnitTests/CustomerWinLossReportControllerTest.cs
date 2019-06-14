@@ -47,29 +47,7 @@
             _controller = null;
             _dataAccess = null;
         }
-
-        [Test]
-        public async Task Index_InvalidCurrency_ReturnBadRequest()
-        {
-            var model = new CustomerWinLossMetaModel
-            {
-                CurrencyId=-100,
-                IsExportExcel = false,
-                FromDate = DateTime.Now.AddDays(1),
-                ToDate = DateTime.Now
-            };
-
-            var result = await _controller.Index(model);
-
-            Assert.Multiple(() =>
-            {
-                Assert.IsTrue(result is BadRequestErrorMessageResult);
-                Assert.AreEqual((result as BadRequestErrorMessageResult).Message,
-                    ViewResources.InvalidRequestMsg
-                    );
-            });
-        }
-
+     
         [TestCase("", "")]
         [TestCase(nameof(CustomerWinLoss.CustId), "asc")]
         public async Task Index_ValidModel_GetDataFromDataAccess(string sortColumn, string sortDirection)

@@ -70,8 +70,8 @@
 
             return new
             {
-                DataList = result.DataList,
-                TotalRows = result.TotalRows
+                result.DataList,
+                result.TotalRows
             };
         }
 
@@ -85,9 +85,9 @@
 
             return new
             {
-                Code = result.Code,
-                Message = result.Message,
-                IsSuccessful = result.IsSuccessful
+                result.Code,
+                result.Message,
+                result.IsSuccessful
             };
         }
 

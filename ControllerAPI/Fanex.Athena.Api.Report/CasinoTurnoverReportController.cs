@@ -28,11 +28,10 @@
         }
 
         [HttpPost]
-        [ValidationApiRequest]
+        [ValidationApiRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
         public async Task<dynamic> GetData(CasinoTurnoverMetaModel metaModel)
         {
-            if (!IsValidCurrency(metaModel.CurrencyId)
-                || !IsValidProducts(FunctionNames.CasinoTurnover, metaModel.ProductCode))
+            if (!IsValidProducts(FunctionNames.CasinoTurnover, metaModel.ProductCode))
             {
                 return BadRequest(ViewResources.InvalidRequestMsg);
             }

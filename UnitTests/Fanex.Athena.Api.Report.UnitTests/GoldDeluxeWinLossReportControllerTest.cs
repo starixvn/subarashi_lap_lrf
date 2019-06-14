@@ -8,6 +8,7 @@
     using DataAccess.Report.Interfaces;
     using Excel.Base.Entities;
     using Excel.Report;
+    using Fanex.Athena.Service.Core.Utility.Interfaces;
     using Model.Core.ResultModel;
     using Model.Report.DTO;
     using Model.Report.MetaModel;
@@ -21,38 +22,41 @@
     {
         private IGoldDeluxeWinLossDataAccess _dataAccess;
         private GoldDeluxeWinLossReportController _controller;
-
-        [OneTimeSetUp]
-        public override void FixtureSetUp()
+        private IValidationService _validationService;
+        [SetUp]
+        public void SetUp()
         {
-            base.FixtureSetUp();
-
+            _validationService = Substitute.For<IValidationService>();
+            _validationService.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
             _dataAccess = Substitute.For<IGoldDeluxeWinLossDataAccess>();
 
             _controller = Substitute.ForPartsOf<GoldDeluxeWinLossReportController>(
                 _dataAccess,
                 SessionService,
                 ProductService,
-                LangService);
+                LangService,
+                _validationService
+                );
 
             _controller.When(x => x.ExcelStream(Arg.Any<IWorkbook>(), Arg.Any<string>())).DoNotCallBase();
 
             MockSessionData();
         }
 
-        [OneTimeTearDown]
-        public override void FixtureTearDown()
+        [TearDown]
+        public void TearDown()
         {
-            base.FixtureTearDown();
-
+            _validationService = null;
             _controller = null;
             _dataAccess = null;
         }
 
         [Test]
-        public async Task Index_InvalidModel_ReturnEmptyData()
+        public async Task Index_InvalidCurrency_ReturnEmptyData()
         {
             // Arrange
+            _validationService.IsValidCurrency(Arg.Any<int>(),
+                Arg.Any<bool>()).Returns(false);
             var model = new ThirdPartyWinLossMetaModel
             {
                 CurrencyId = 1,

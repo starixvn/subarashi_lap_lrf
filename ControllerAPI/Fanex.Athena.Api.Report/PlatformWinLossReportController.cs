@@ -46,7 +46,7 @@ namespace Fanex.Athena.Api.Report
         }
 
         [HttpPost]
-        [ValidationApiRequest]
+        [ValidationApiRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
         public Task<dynamic> Index(PlatformWinLossMetaModel metaModel)
         {
             return ProcessRequest(metaModel);
@@ -148,11 +148,6 @@ namespace Fanex.Athena.Api.Report
 
         private async Task<dynamic> ProcessRequest(PlatformWinLossMetaModel metaModel)
         {
-            if (!IsValidCurrency(metaModel.CurrencyId))
-            {
-                return BadRequest(ViewResources.InvalidRequestMsg);
-            }
-
             metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId, metaModel.IsExcludedTestData);
 
             if (metaModel.Level == 0)

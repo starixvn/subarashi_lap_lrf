@@ -49,14 +49,9 @@ namespace Fanex.Athena.Api.Report
         }
 
         [HttpPost]
-        [ValidationApiRequest]
+        [ValidationApiRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
         public async Task<dynamic> Index([FromBody] WinLossByLeagueMetaModel metaModel)
         {
-            if (!IsValidCurrency(metaModel.CurrencyId))
-            {
-                return BadRequest(ViewResources.InvalidParams);
-            }
-
             var resultModel = await GetData(metaModel).ConfigureAwait(false);
             return new
             {
@@ -67,14 +62,9 @@ namespace Fanex.Athena.Api.Report
         }
 
         [HttpPost]
-        [ValidationApiRequest]
+        [ValidationApiRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
         public async Task<HttpResponseMessage> Excel(WinLossByLeagueMetaModel metaModel)
         {
-            if (!IsValidCurrency(metaModel.CurrencyId))
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ViewResources.InvalidRequestMsg);
-            }
-
             metaModel.PageIndex = 1;
             metaModel.PageSize = int.MaxValue - 1;
 
@@ -127,7 +117,7 @@ namespace Fanex.Athena.Api.Report
             if (metaModel.Level == 0)
             {
                 var dataList = await _winlossByLeagueDataAccess.GetSummary(metaModel).ConfigureAwait(false);
-                     
+
                 resultModel = new ReportResultModel<WinLossByLeague>
                 {
                     DataList = dataList,

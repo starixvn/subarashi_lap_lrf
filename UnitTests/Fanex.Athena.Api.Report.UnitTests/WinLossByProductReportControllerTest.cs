@@ -8,6 +8,7 @@
     using DataAccess.Report.Interfaces;
     using Excel.Report;
     using Excel.Report.Models;
+    using Fanex.Athena.Service.Core.Utility.Interfaces;
     using Model.Core.DTO.Common;
     using Model.Core.MetaModel.Product;
     using Model.Report.DTO;
@@ -24,30 +25,37 @@
         private IWinLossByProductDataAccess _dataAccess;
         private WinLossByProductReportController _controller;
 
-        [OneTimeSetUp]
-        public override void FixtureSetUp()
+        private IValidationService _validationService;
+        [SetUp]
+        public void SetUp()
         {
-            base.FixtureSetUp();
-
-            _dataAccess = Substitute.For<IWinLossByProductDataAccess>();
-            _controller = Substitute.ForPartsOf<WinLossByProductReportController>(SessionService, ProductService, AppSetting, LangService, _dataAccess);
-
             MockSessionData();
+
+            _validationService = Substitute.For<IValidationService>();
+            _validationService.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
+            _dataAccess = Substitute.For<IWinLossByProductDataAccess>();
+            _controller = Substitute.ForPartsOf<WinLossByProductReportController>(
+                SessionService, ProductService,
+                AppSetting, LangService, _dataAccess,
+                _validationService
+                );
+
         }
 
-        [OneTimeTearDown]
+        [TearDown]
         public override void FixtureTearDown()
         {
-            base.FixtureTearDown();
-
+            _validationService = null;
             _dataAccess = null;
             _controller = null;
         }
 
         [Test]
-        public async Task Index_InvalidModel_ReturnBadRequestWithCorrectMessage()
+        public async Task Index_InvalidCurrency_ReturnBadRequestWithCorrectMessage()
         {
             // Arrange
+            _validationService.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(false);
+
             var metaModel = new WinLossByProductMetaModel { CurrencyId = -100 };
 
             // Action
@@ -246,6 +254,23 @@
                 Level = level
             };
 
+            var summaryTotalResult = new Dictionary<string, IEnumerable<WinLossByProduct>> { { "EUR", new List<WinLossByProduct>() } };
+            _dataAccess.GetWinlossByProducts(metaModel, UserCurrencyList).Returns(new WinLossByProductResultModel
+            {
+                SummaryTotal = summaryTotalResult,
+                ResultInfo = new ResultInfo
+                {
+                    Code = 0
+                },
+                DataList = new List<WinLossByProduct>()
+            });
+            _dataAccess.GetWinlossByProductAgents(Arg.Any<WinLossByProductMetaModel>(), UserCurrencyList).Returns(
+                new WinLossByProductResultModel
+                {
+                    SummaryTotal = summaryTotalResult,
+                    DataList = new List<WinLossByProduct>(),
+                    ResultInfo = new ResultInfo()
+                });
             // Action
             await _controller.Index(metaModel, fromDate, toDate, level, CurrencyId, CustId);
 
@@ -279,7 +304,15 @@
             var expectedToDate = toDate.HasValue ? toDate : metaModel.DrillDownToDate;
             var expectedmemberId = memberId == 0 ? MemberId : metaModel.MemberId;
             var expectedUserName = isFakeLicensee ? string.Empty : metaModel.Username;
+            var summaryTotalResult = new Dictionary<string, IEnumerable<WinLossByProduct>> { { "EUR", new List<WinLossByProduct>() } };
 
+            _dataAccess.GetWinlossByProductAgents(Arg.Any<WinLossByProductMetaModel>(), UserCurrencyList).Returns(
+                new WinLossByProductResultModel
+                {
+                    SummaryTotal = summaryTotalResult,
+                    DataList = new List<WinLossByProduct>(),
+                    ResultInfo = new ResultInfo()
+                });
             // Action
             await _controller.Index(metaModel, fromDate, toDate, Level, CurrencyId, CustId, MemberId, SystemId, CurrencyName);
 
