@@ -46,10 +46,10 @@ namespace Fanex.Athena.Controllers.TotalBets
 
         [HttpPost]
         [CustomValidateAntiForgery]
-        [ValidationWebRequest]
+        [ValidationWebRequest(IsValidCurrency = true)]
         public async Task<ActionResult> Index(OutrightMetaModel metaModel)
         {
-          
+
             metaModel.LicenseeId = SessionService.LicenseeSession.LicenseeId;
             return await this.GetView(metaModel).ConfigureAwait(false);
         }
@@ -58,21 +58,17 @@ namespace Fanex.Athena.Controllers.TotalBets
         {
             var currencies = SessionService.UserSession.CurrencyList;
 
-            if (metaModel.CurrencyId == 0 || currencies.ContainsKey(metaModel.CurrencyId))
+            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
+            var dataList = await _outrightDataAccess.GetOutrightDataList(metaModel).ConfigureAwait(false);
+            var model = new OutrightViewModel
             {
-                metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
-                var dataList = await _outrightDataAccess.GetOutrightDataList(metaModel).ConfigureAwait(false);
-                var model = new OutrightViewModel
-                {
-                    Param = metaModel,
-                    MainData = dataList,
-                    CurrencyList = currencies
-                };
+                Param = metaModel,
+                MainData = dataList,
+                CurrencyList = currencies
+            };
 
-                return View("~/Views/Desktop/TotalBets/Outright/Main.cshtml", model);
-            }
+            return View("~/Views/Desktop/TotalBets/Outright/Main.cshtml", model);
 
-            return Redirect("~/Utility/AccessDenied");
         }
     }
 }

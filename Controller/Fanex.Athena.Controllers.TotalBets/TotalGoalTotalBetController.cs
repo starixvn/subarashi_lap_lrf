@@ -48,7 +48,7 @@ namespace Fanex.Athena.Controllers.TotalBets
 
         [HttpPost]
         [CustomValidateAntiForgery]
-        [ValidationWebRequest]
+        [ValidationWebRequest(IsValidCurrency = true)]
         public async Task<ActionResult> Index(TotalGoalMetaModel metaModel)
         {
             metaModel.LicenseeId = SessionService.LicenseeSession.LicenseeId;
@@ -61,22 +61,18 @@ namespace Fanex.Athena.Controllers.TotalBets
         {
             var currencies = SessionService.UserSession.CurrencyList;
 
-            if (metaModel.CurrencyId == 0 || currencies.ContainsKey(metaModel.CurrencyId))
+            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
+            var result = await _totalGoalDataAccess.GetTotalGoalDataList(metaModel).ConfigureAwait(false);
+            var model = new TotalGoalViewModel
             {
-                metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
-                var result = await _totalGoalDataAccess.GetTotalGoalDataList(metaModel).ConfigureAwait(false);
-                var model = new TotalGoalViewModel
-                {
-                    Param = metaModel,
-                    MainData = result.DataList.ToList(),
-                    CurrencyList = currencies,
-                    TotalData = result.TotalData
-                };
+                Param = metaModel,
+                MainData = result.DataList.ToList(),
+                CurrencyList = currencies,
+                TotalData = result.TotalData
+            };
 
-                return View("~/Views/Desktop/TotalBets/TotalGoal/Main.cshtml", model);
-            }
+            return View("~/Views/Desktop/TotalBets/TotalGoal/Main.cshtml", model);
 
-            return Redirect("~/Utility/AccessDenied");
         }
 
         #endregion Utility

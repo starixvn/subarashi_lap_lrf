@@ -88,24 +88,7 @@
             }
         }
 
-        [Test]
-        public async Task Index_WhenPostWithInvalidCurrency_AccessDenied()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var metaModel = new HandicapOverUnderMetaModel
-                {
-                    CurrencyId = -999
-                };
-
-                // Action
-                var viewResult = await controller.Index(metaModel) as RedirectResult;
-
-                // Assert
-                Assert.That(viewResult.Url, Is.EqualTo("~/Utility/AccessDenied"));
-            }
-        }
+       
 
         [Test]
         public async Task Index_LicenseeIsNotOfferedNewForecast_ReturnNormalLicenseeView()

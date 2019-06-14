@@ -65,25 +65,6 @@
             }
         }
 
-        [Test]
-        public async Task Index_InvalidCurrency_ViewNameIsAccessDenied()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var metaModel = new MoneyLineMetaModel
-                {
-                    CurrencyId = -999
-                };
-
-                // Action
-                var viewResult = await controller.Index(metaModel) as RedirectResult;
-
-                // Assert
-                Assert.That(viewResult.Url, Is.EqualTo("~/Utility/AccessDenied"));
-            }
-        }
-
         private void SepUpForService()
         {
             _moneyLineDataAccess = Substitute.For<IMoneyLineDataAccess>();

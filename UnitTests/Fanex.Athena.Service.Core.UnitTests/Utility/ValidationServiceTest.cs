@@ -122,5 +122,41 @@ namespace Fanex.Athena.Service.Core.UnitTests.Utility
             Assert.AreEqual(result, expected);
         }
 
+        [TestCase("", true, true)]
+        [TestCase("", false, false)]
+        [TestCase("usd", false, true)]
+        [TestCase("KKK", false, false)]
+        public void IsValidBaseCurrency_WhenCalled_ReturnCorrectResult(
+            string baseCurrency,
+           bool isAllowEmpty,
+            bool expectedValue)
+        {
+            //Arrange
+
+            //Action
+
+            var result = _validationService.IsValidBaseCurrency(baseCurrency, isAllowEmpty);
+            //Assert
+            Assert.AreEqual(result, expectedValue);
+        }
+
+        [TestCase(CurrencyType.Cny, LicenseeIdentity.KeenOcean, true)]
+        [TestCase(CurrencyType.Cny, LicenseeIdentity.OneTwoBet, false)]
+        [TestCase(100, 1, false)]
+        [TestCase(2, 1, true)]
+        public void IsValidCurrency_WhenCalled_ReturnCorrectResult(
+            int currency,
+            int licenseeId,
+            bool expectedValue)
+        {
+            //Arrange
+            _sessionService.LicenseeSession.Returns(new LicenseeSession { LicenseeId = licenseeId });
+
+            //Action
+
+            var result = _validationService.IsValidCurrency(currency, true);
+            //Assert
+            Assert.AreEqual(result, expectedValue);
+        }
     }
 }
