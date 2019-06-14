@@ -6,7 +6,7 @@
     using System.ComponentModel;
     using System.Linq;
 
-    public class SpecialLicenseeWinLossMetaModel : IMetaModelValidation
+    public class SpecialLicenseeWinLossMetaModel : IMetaModelValidation, IMetaModelCurrency
     {
         private string _baseCurrency = string.Empty;
 

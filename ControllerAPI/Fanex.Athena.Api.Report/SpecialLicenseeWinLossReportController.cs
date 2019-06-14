@@ -45,7 +45,7 @@
         }
 
         [HttpPost]
-        [ValidationApiRequest]
+        [ValidationApiRequest(IsValidCurrency = true)]
         public Task<dynamic> Index(SpecialLicenseeWinLossMetaModel metaModel)
         {
             return ProcessRequest(metaModel);
@@ -133,14 +133,8 @@
         protected internal virtual bool IsValidParams(SpecialLicenseeWinLossMetaModel metaModel, ReportSetting setting)
         {
             return IsValidDateRange(metaModel, setting) &&
-                IsValidProduct(metaModel) &&
-                IsValidCurrency(metaModel);
-        }
-
-        private bool IsValidCurrency(SpecialLicenseeWinLossMetaModel metaModel)
-        {
-            return MetaModelValidationHelper.ValidateCurrency(metaModel.CurrencyId,
-                SessionService.UserSession.CurrencyList);
+                IsValidProduct(metaModel);
+              
         }
 
         private bool IsValidProduct(SpecialLicenseeWinLossMetaModel metaModel)

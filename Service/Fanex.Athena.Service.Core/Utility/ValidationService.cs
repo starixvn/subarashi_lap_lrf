@@ -1,4 +1,5 @@
 ﻿using Fanex.Athena.Model.Core.DataDomain;
+using Fanex.Athena.Model.Core.Helper;
 using Fanex.Athena.Model.Core.MetaModel;
 using Fanex.Athena.Service.Core.Users.Interfaces;
 using Fanex.Athena.Service.Core.Utility.Interfaces;
@@ -19,8 +20,7 @@ namespace Fanex.Athena.Service.Core.Utility
         }
         public bool IsValidBaseCurrency(string baseCurrency, bool isAllowEmpty = true)
         {
-            return (isAllowEmpty && string.IsNullOrEmpty(baseCurrency)) || SystemConstants.BaseCurrencyList
-           .Any(x => x.Value.Equals(baseCurrency, StringComparison.OrdinalIgnoreCase));
+            return MetaModelValidationHelper.ValidateBaseCurrency(baseCurrency, isAllowEmpty);
         }
 
         private static bool ValidateCurrency(int currencyId, IDictionary<int, string> currencyList)

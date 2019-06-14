@@ -43,10 +43,13 @@
             var currencyList = new Dictionary<int, string>
             {
                 { BaseCurrencyType.All, ViewResources.All },
-                { BaseCurrencyType.Eur, $"{ViewResources.Based} {ViewResources.EUR}" },
-                { BaseCurrencyType.Usd, $"{ViewResources.Based} {ViewResources.USD}" },
-                { BaseCurrencyType.Gbp, $"{ViewResources.Based} {ViewResources.GBP}" }
+
             };
+
+            foreach (var item in SystemConstants.BaseCurrencyList)
+            {
+                currencyList.Add(item.Key, $"{ViewResources.Based} {item.Value}");
+            }
 
             foreach (var item in userSession.CurrencyList)
             {
