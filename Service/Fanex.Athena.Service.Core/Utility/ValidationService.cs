@@ -84,20 +84,25 @@ namespace Fanex.Athena.Service.Core.Utility
 
         public bool IsValidCurrency(IMetaModelCurrency model, bool isIncludeKeanOcean = false)
         {
+            return IsValidCurrency(model.CurrencyId, isIncludeKeanOcean);
+        }
+
+        public bool IsValidCurrency(IMetaModelCurrencyList currencyList)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsValidCurrency(int currencyId, bool isIncludeKeanOcean = false)
+        {
             var currencyList = _sessionService.UserSession.CurrencyList;
             if (isIncludeKeanOcean)
             {
-                return ValidateCurrencyWithKeanOceanOption(model.CurrencyId
+                return ValidateCurrencyWithKeanOceanOption(currencyId
                     , currencyList
                     , _sessionService.LicenseeSession.LicenseeId);
             }
 
-            return ValidateCurrency(model.CurrencyId, currencyList);
-        }
-
-        public bool IsValidCurrency(IMetaModelCurrencyList currencieList)
-        {
-            throw new NotImplementedException();
+            return ValidateCurrency(currencyId, currencyList);
         }
     }
 }

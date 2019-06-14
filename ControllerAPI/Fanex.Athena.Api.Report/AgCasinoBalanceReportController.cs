@@ -19,6 +19,7 @@ namespace Fanex.Athena.Api.Report
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
+    using Fanex.Athena.Service.Core.Utility.Interfaces;
     using Model.Core.DataDomain;
     using Model.Core.ResultModel;
     using Service.Core.Common.Interfaces;
@@ -28,19 +29,22 @@ namespace Fanex.Athena.Api.Report
     public class AgCasinoBalanceReportController : ApiReportBaseController
     {
         private readonly IAgCasinoBalanceDataAccess _agcasinoBalanceDataAccess;
-
+        private readonly IValidationService _validationService;
         public AgCasinoBalanceReportController(
             IAgCasinoBalanceDataAccess agcasinoBalanceDataAccess,
             ISessionService sessionService,
             IProductService productService,
-            ILanguageService langService)
+            ILanguageService langService,
+            IValidationService validationService
+            )
             : base(sessionService, productService, langService)
         {
             _agcasinoBalanceDataAccess = agcasinoBalanceDataAccess;
+            _validationService = validationService;
         }
 
         [HttpPost]
-        [ValidationApiRequest]
+        [ValidationApiRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
         public Task<dynamic> Index(ThirdPartyWinLossMetaModel metaModel)
         {
             return ProcessRequest(metaModel);
@@ -153,8 +157,8 @@ namespace Fanex.Athena.Api.Report
 
         private async Task<dynamic> ProcessRequest(ThirdPartyWinLossMetaModel metaModel)
         {
-            if (IsValidCurrency(metaModel.CurrencyId) && IsValidCurrency(
-                metaModel.DrillDownCurrencyId))
+            if (_validationService.IsValidCurrency(
+                metaModel.DrillDownCurrencyId, true))
             {
                 metaModel.LicenseeId = SessionService.LicenseeSession.LicenseeId;
                 metaModel.DefaultBaseCurrency = SessionService.UserSession.DefaultBaseCurrency;

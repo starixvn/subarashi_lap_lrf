@@ -9,6 +9,7 @@
     using Excel.Base.Entities;
     using Excel.Report;
     using Extension.Utility;
+    using Fanex.Athena.Service.Core.Utility.Interfaces;
     using Model.Core.ResultModel;
     using Model.Report.DTO;
     using Model.Report.MetaModel;
@@ -23,33 +24,36 @@
     {
         private ICashOutWinLossDataAccess _dataAccess;
         private CashOutWinLossReportController _controller;
+        private IValidationService _validationService;
 
-        [OneTimeSetUp]
-        public override void FixtureSetUp()
+        [SetUp]
+        public void Setup()
         {
-            base.FixtureSetUp();
 
             MockSessionData();
-
             _dataAccess = Substitute.For<ICashOutWinLossDataAccess>();
-            _controller = Substitute.ForPartsOf<CashOutWinLossReportController>(_dataAccess, SessionService, ProductService, LangService);
+            _validationService = Substitute.For<IValidationService>();
+            _validationService.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
+
+            _controller = Substitute.ForPartsOf<CashOutWinLossReportController>(_dataAccess,
+                SessionService,
+                ProductService, LangService, _validationService);
         }
 
-        [OneTimeTearDown]
-        public override void FixtureTearDown()
+        [TearDown]
+        public void TearDown()
         {
-            base.FixtureTearDown();
-
             _dataAccess = null;
             _controller = null;
+            _validationService = null;
         }
 
         [Test]
-        public async Task Index_InvalidRequest_ReturnEmptyResult()
+        public async Task Index_InvalidCurrency_ReturnEmptyResult()
         {
             // Arrange
             var metaModel = new ThirdPartyWinLossMetaModel { CurrencyId = -9 };
-
+            _validationService.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(false);
             // Action
             var result = await _controller.Index(metaModel);
 
@@ -213,7 +217,7 @@
             _controller.Received().ExcelStream(Arg.Any<IWorkbook>(), Arg.Any<string>());
         }
 
-      
+
         public async Task Index_IsExportExcelTrueWithDifferentLevelAndCurrency_UpdateMetanData(
             )
         {
@@ -251,7 +255,7 @@
 
             var expectedFromDate = fromDate;
             var expectedToDate = toDate;
-            var expectedCurrency =  metaModel.CurrencyId;
+            var expectedCurrency = metaModel.CurrencyId;
 
             // Action
             await _controller.Index(metaModel, fromDate, toDate, 0, DrilldownCurrency, CustId);

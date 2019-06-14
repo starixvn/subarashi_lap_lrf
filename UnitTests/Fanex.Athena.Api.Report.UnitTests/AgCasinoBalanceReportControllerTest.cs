@@ -8,6 +8,7 @@
     using Excel.Base.Entities;
     using Excel.Report;
     using Extension.Utility;
+    using Fanex.Athena.Service.Core.Utility.Interfaces;
     using Model.Core.ResultModel;
     using Model.Report.DTO;
     using Model.Report.MetaModel;
@@ -21,24 +22,24 @@
     {
         private IAgCasinoBalanceDataAccess _dataAccess;
         private AgCasinoBalanceReportController _controller;
+        private IValidationService _validationService;
 
-        [OneTimeSetUp]
-        public override void FixtureSetUp()
+        [SetUp]
+        public void Setup()
         {
-            base.FixtureSetUp();
-
             MockSessionData();
 
+            _validationService = Substitute.For<IValidationService>();
             _dataAccess = Substitute.For<IAgCasinoBalanceDataAccess>();
 
-            _controller = Substitute.ForPartsOf<AgCasinoBalanceReportController>(_dataAccess, SessionService, ProductService, LangService);
+            _controller = Substitute.ForPartsOf<AgCasinoBalanceReportController>(_dataAccess,
+                SessionService, ProductService, LangService, _validationService);
         }
-
-        [OneTimeTearDown]
+        [TearDown]
         public override void FixtureTearDown()
         {
-            base.FixtureTearDown();
 
+            _validationService = null;
             _dataAccess = null;
             _controller = null;
         }
@@ -52,7 +53,7 @@
                 CurrencyId = -100,
                 DrillDownCurrencyId = -100
             };
-
+            _validationService.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(false);
             var expectedResult = GetSerializationData();
 
             // Action
@@ -70,6 +71,7 @@
             {
                 CurrencyId = -1
             };
+            _validationService.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
 
             var resultModel = new SortableReportResultModel<AgCasinoBalance>
             {
@@ -91,6 +93,8 @@
         public async Task Index_Level0_ReturnCorrectDataFromDataAccess()
         {
             // Arrange
+            _validationService.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
+
             const int CurrencyId = -2;
             const bool IsExcludedTestData = true;
             var metaModel = new ThirdPartyWinLossMetaModel
@@ -134,6 +138,8 @@
         public async Task Index_Level1_CallGetAgentBalanceDetailInService_ReturnCorrectData()
         {
             // Arrange
+            _validationService.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
+
             const int CurrencyId = -2;
             const bool IsExcludedTestData = true;
             var metaModel = new ThirdPartyWinLossMetaModel
@@ -164,6 +170,8 @@
         public async Task Index_Level2_CallGetCustomerBalanceDetailInService_ReturnCorrectData()
         {
             // Arrange
+            _validationService.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
+
             const int CurrencyId = -2;
             const bool IsExcludedTestData = true;
             var metaModel = new ThirdPartyWinLossMetaModel
@@ -198,6 +206,8 @@
         public void Index_IsExportExcelTrue_CallExcelStreamWithCorrectData(int drillDownLevel, int currencyId)
         {
             // Arrange
+            _validationService.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
+
             var fromDate = new DateTime(2017, 4, 1);
             var toDate = new DateTime(2017, 4, 18);
             var metaModel = new ThirdPartyWinLossMetaModel

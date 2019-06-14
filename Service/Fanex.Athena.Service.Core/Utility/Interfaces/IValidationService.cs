@@ -13,6 +13,7 @@ namespace Fanex.Athena.Service.Core.Utility.Interfaces
         bool IsValidMetalModel(IMetaModelValidation model);
         bool IsValidProductCode(IMetaModelProductCodeList model);
         bool IsValidCurrency(IMetaModelCurrency model, bool isIncludeKeanOcean = false);
-        bool IsValidCurrency(IMetaModelCurrencyList currencieList);
+        bool IsValidCurrency(int currencyId, bool isIncludeKeanOcean = false);
+        bool IsValidCurrency(IMetaModelCurrencyList currencyList);
     }
 }

@@ -6,6 +6,7 @@
     using Base;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.Helper;
+    using Fanex.Athena.Service.Core.Utility.Interfaces;
     using Model.Report.MetaModel;
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
