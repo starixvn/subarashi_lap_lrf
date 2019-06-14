@@ -16,9 +16,7 @@ namespace Fanex.Athena.Web.ActionFilter
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
     public class ValidationWebRequestAttribute : ActionFilterAttribute
     {
-#pragma warning disable S3459 // Unassigned members should be removed
-        private readonly IValidationService _validationService;
-#pragma warning restore S3459 // Unassigned members should be removed
+        public IValidationService ValidationService { get; set; }
 
         public string ObjectName { get; set; }
         public bool IsValidCurrency { get; set; }
@@ -29,11 +27,11 @@ namespace Fanex.Athena.Web.ActionFilter
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             base.OnActionExecuting(filterContext);
-            var model = !string.IsNullOrEmpty(ObjectName) ? filterContext.ActionParameters[ObjectName] 
+            var model = !string.IsNullOrEmpty(ObjectName) ? filterContext.ActionParameters[ObjectName]
                  : filterContext.ActionParameters.Where(x => x.Value is IMetaModelValidation)
                       .Select(x => x.Value).FirstOrDefault();
 
-            var result = _validationService.IsValid(new ValidationMetaModelOption
+            var result = ValidationService.IsValid(new ValidationMetaModelOption
             {
                 IsIncludeKeanOcean = IsIncludeKeanOcean,
                 IsValidCurrency = IsValidCurrency,
