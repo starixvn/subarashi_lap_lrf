@@ -72,7 +72,7 @@
         private bool IsValidRequest(BaseExchangeBetListMetaModel metaModel)
         {
             var licenseId = SessionService.LicenseeSession.LicenseeId;
-            return MetaModelValidationHelper.ValidateCurrencyForKeanOcean(metaModel.CurrencyId,
+            return MetaModelValidationHelper.ValidateCurrencyWithKeanOceanOption(metaModel.CurrencyId,
                 SessionService.UserSession.CurrencyList, licenseId)
                 && _authorizationService.HasPermissionOnData(licenseId, metaModel.CustId, 0);
         }

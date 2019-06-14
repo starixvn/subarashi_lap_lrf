@@ -135,7 +135,9 @@
     <Compile Include="Users\UserService.cs" />
     <Compile Include="Utility\BetListApiClient.cs" />
     <Compile Include="Utility\Interfaces\IBetListApiClient.cs" />
+    <Compile Include="Utility\Interfaces\IValidationService.cs" />
     <Compile Include="Utility\KeanOceanBusinessHelper.cs" />
+    <Compile Include="Utility\ValidationService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -44,7 +44,7 @@ namespace Fanex.Athena.Api.BetList
         {
             var licenseeId = SessionService.LicenseeSession.LicenseeId;
 
-            if (!MetaModelValidationHelper.ValidateCurrencyForKeanOcean(metaModel.CurrencyId,
+            if (!MetaModelValidationHelper.ValidateCurrencyWithKeanOceanOption(metaModel.CurrencyId,
                 SessionService.UserSession.CurrencyList, licenseeId))
             {
                 return null;

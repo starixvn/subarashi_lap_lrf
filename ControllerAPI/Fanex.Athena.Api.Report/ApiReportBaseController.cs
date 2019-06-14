@@ -25,7 +25,7 @@
         protected internal virtual bool IsValidCurrency(int currencyId)
         {
             var currencyList = SessionService.UserSession.CurrencyList;
-            return MetaModelValidationHelper.ValidateCurrencyForKeanOcean(currencyId,
+            return MetaModelValidationHelper.ValidateCurrencyWithKeanOceanOption(currencyId,
                              currencyList, SessionService.LicenseeSession.LicenseeId);
         }
 

@@ -48,7 +48,7 @@
             var licenseeId = SessionService.LicenseeSession.LicenseeId;
             var currencyList = userSession.CurrencyList;
 
-            if (!MetaModelValidationHelper.ValidateCurrencyForKeanOcean(metaModel.CurrencyId,
+            if (!MetaModelValidationHelper.ValidateCurrencyWithKeanOceanOption(metaModel.CurrencyId,
                 currencyList, licenseeId))
             {
                 return null;

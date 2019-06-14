@@ -1,4 +1,6 @@
 ﻿using Fanex.Athena.Model.Core.MetaModel;
+using Fanex.Athena.Service.Core.Utility;
+using Fanex.Athena.Service.Core.Utility.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +14,19 @@ namespace Fanex.Athena.Web.ActionFilter
     [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
     public class ValidationWebRequestAttribute : ActionFilterAttribute
     {
-        public string ObjectName { get; set; }
+        private readonly IValidationService _validationService;
+        public ValidationWebRequestAttribute() : this(null)
+        {
 
+        }
+        public ValidationWebRequestAttribute(IValidationService validationService)
+        {
+            _validationService = validationService ?? new ValidationService();
+        }
+        public string ObjectName { get; set; }
+        public bool IsValidCurrency { get; set; }
+        public bool IsIncludeKeanOcean { get; set; }
+        public bool IsValidProductCodeList { get; set; }
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             base.OnActionExecuting(filterContext);
@@ -21,7 +34,9 @@ namespace Fanex.Athena.Web.ActionFilter
                  : filterContext.ActionParameters.Where(x => x.Value is IMetaModelValidation)
                       .Select(x => (IMetaModelValidation)x.Value).FirstOrDefault();
 
-            if (model is null || !model.IsValid)
+            var result = _validationService.IsValidMetalModel(model);
+
+            if(!result)
             {
                 filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new
                 {

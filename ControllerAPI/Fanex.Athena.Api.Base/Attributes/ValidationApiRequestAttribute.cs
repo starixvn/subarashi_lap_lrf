@@ -1,5 +1,7 @@
-﻿using Fanex.Athena.Model.Core.MetaModel;
+﻿using Fanex.Athena.Api.Base.Attributes.Extensions;
+using Fanex.Athena.Model.Core.MetaModel;
 using Fanex.Athena.Resources;
+using Fanex.Athena.Service.Core.Utility.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +20,10 @@ namespace Fanex.Athena.Api.Base.Attributes
     {
         public string ObjectName { get; set; }
 
+        public bool IsValidCurrency { get; set; }
+        public bool IsIncludeKeanOcean { get; set; }
+        public bool IsValidProductCodeList { get; set; }
+
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
             base.OnActionExecuting(actionContext);
@@ -31,7 +37,11 @@ namespace Fanex.Athena.Api.Base.Attributes
                  : actionContext.ActionArguments.Where(x => x.Value is IMetaModelValidation)
                       .Select(x => (IMetaModelValidation)x.Value).FirstOrDefault();
 
-            if (model is null || !model.IsValid)
+            var scope = actionContext.Request.GetDependencyScope();
+
+            var validationService = scope.Resolve<IValidationService>();
+            var result = validationService.IsValidMetalModel(model);
+            if (!result)
             {
                 actionContext.Response = new HttpResponseMessage
                 {

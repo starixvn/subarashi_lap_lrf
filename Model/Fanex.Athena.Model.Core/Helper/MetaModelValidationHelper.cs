@@ -25,7 +25,7 @@ namespace Fanex.Athena.Model.Core.Helper
             return licenseeId == LicenseeIdentity.KeenOcean && currencyId == CurrencyType.Cny;
         }
 
-        public static bool ValidateCurrencyForKeanOcean(int currencyId, IDictionary<int, string> currencyList, int licenseeId)
+        public static bool ValidateCurrencyWithKeanOceanOption(int currencyId, IDictionary<int, string> currencyList, int licenseeId)
         {
             return ValidateCurrency(currencyId, currencyList) || VerifyKeanOceanCurrency(currencyId, licenseeId);
 
@@ -37,15 +37,8 @@ namespace Fanex.Athena.Model.Core.Helper
                 return false;
             }
 
-            foreach (var currency in currencyList)
-            {
-                if (!userCurrencyList.ContainsKey(currency))
-                {
-                    return false;
-                }
-            }
+            return !currencyList.Any(x => !userCurrencyList.ContainsKey(x));
 
-            return true;
         }
     }
 }
