@@ -61,30 +61,24 @@ namespace Fanex.Athena.Controllers.BetList
 
         [HttpPost]
         [CustomValidateAntiForgery]
-        [ValidationWebRequest]
+        [ValidationWebRequest(IsValidCurrency = true)]
         public async Task<ActionResult> Index(BetListExcelMetaModel metaModel)
         {
             var licenseeSession = SessionService.LicenseeSession;
-            var currencies = SessionService.UserSession.CurrencyList;
-            if (metaModel.CurrencyId == BaseCurrencyType.All || currencies.ContainsKey(metaModel.CurrencyId))
+            const string UspKey = "Lrf_TotalBets_Sel430";
+
+            CreateDefaultMetaModel(metaModel);
+            metaModel.IsShowSumStake = true;
+            metaModel.UspKey = UspKey;
+
+            metaModel.ShowingOption = new BetListShowingOption
             {
-                const string UspKey = "Lrf_TotalBets_Sel430";
+                CustomerCommVisible = licenseeSession.IsAllowedCustomerComm,
+            };
 
-                CreateDefaultMetaModel(metaModel);
-                metaModel.IsShowSumStake = true;
-                metaModel.UspKey = UspKey;
-
-                metaModel.ShowingOption = new BetListShowingOption
-                {
-                    CustomerCommVisible = licenseeSession.IsAllowedCustomerComm,
-                };
-
-                metaModel.Title = ViewResources.CorrectScore + " - " + GetViewInCurrency(metaModel);
-                metaModel.HiddenColumns = HiddenColumnIndexes;
-                return await ProcessExportExcel(metaModel, "CorrectScoreBetList").ConfigureAwait(false);
-            }
-
-            return EmptyExcel();
+            metaModel.Title = ViewResources.CorrectScore + " - " + GetViewInCurrency(metaModel);
+            metaModel.HiddenColumns = HiddenColumnIndexes;
+            return await ProcessExportExcel(metaModel, "CorrectScoreBetList").ConfigureAwait(false);
         }
     }
 }

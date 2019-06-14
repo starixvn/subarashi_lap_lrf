@@ -85,28 +85,6 @@
             }
         }
 
-        [Test]
-        public async Task CleanSheet_ExportExcel_InvalidCurrency_ReturnEmptyResult()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var metaModel = new LiveReportBetListMetaModel
-                {
-                    IsExportExcel = true,
-                    CurrencyId = -1000
-                };
-
-                controller.When(x => x.EmptyExcel()).DoNotCallBase();
-
-                // Action
-                await controller.CleanSheet(metaModel);
-
-                // Assert
-                controller.Received().EmptyExcel();
-            }
-        }
-
         [TestCase("USD", null, "EUR")]
         [TestCase("USD", "eur", "EUR")]
         public async Task CleanSheet_ExportExcel_PassCorrectParam(string currency, string baseCurrency, string expectedCurrency)

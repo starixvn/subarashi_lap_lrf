@@ -47,7 +47,7 @@ namespace Fanex.Athena.Controllers.BetList
 
         [HttpGet]
         [FunctionAuthorization(PermissionKeys.TotalBetCleanSheet)]
-        [ValidationWebRequest]
+        [ValidationWebRequest(IsValidCurrency = true)]
         public async Task<ActionResult> CleanSheet(BetListExcelMetaModel metaModel)
         {
             metaModel.BetType = (int)BetType.CleanSheet;
@@ -58,7 +58,7 @@ namespace Fanex.Athena.Controllers.BetList
 
         [HttpGet]
         [FunctionAuthorization(PermissionKeys.TotalBetToWinToNil)]
-        [ValidationWebRequest]
+        [ValidationWebRequest(IsValidCurrency = true)]
         public async Task<ActionResult> ToWinToNil(BetListExcelMetaModel metaModel)
         {
             metaModel.BetType = (int)BetType.ToWinToNil;
@@ -69,8 +69,7 @@ namespace Fanex.Athena.Controllers.BetList
 
         [HttpGet]
         [FunctionAuthorization(PermissionKeys.TotalBet3WayHandicap)]
-        [ValidationWebRequest]
-
+        [ValidationWebRequest(IsValidCurrency = true)]
         public async Task<ActionResult> ThreeWayHandicap(BetListExcelMetaModel metaModel)
         {
             metaModel.BetType = (int)BetType.ThreeWayHandicap;
@@ -88,13 +87,8 @@ namespace Fanex.Athena.Controllers.BetList
 
             if (metaModel.IsExportExcel)
             {
-                if (metaModel.CurrencyId == BaseCurrencyType.All || currencies.ContainsKey(metaModel.CurrencyId))
-                {
-                    metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
-                    return await Excel(metaModel, uspKey).ConfigureAwait(false);
-                }
-
-                return EmptyExcel();
+                metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
+                return await Excel(metaModel, uspKey).ConfigureAwait(false);
             }
 
             var model = new BetListBaseViewModel

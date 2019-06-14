@@ -101,27 +101,6 @@
             }
         }
 
-        [Test]
-        public async Task MatchBetType_ExportExcel_InvalidCurrency_ReturnEmptyResult()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var metaModel = new LiveReportBetListMetaModel
-                {
-                    IsExportExcel = true,
-                    CurrencyId = -1000
-                };
-
-                controller.When(x => x.EmptyExcel()).DoNotCallBase();
-
-                // Action
-                await controller.MatchBetType(metaModel);
-
-                // Assert
-                controller.Received().EmptyExcel();
-            }
-        }
 
         [TestCase(1, "Lrf_BetList_MatchWL_Bettype")]
         public async Task MatchBetType_ExportExcel_PassCorrectParam(int betTypeId, string uspKey)

@@ -41,23 +41,23 @@ namespace Fanex.Athena.Controllers.BetList
         }
 
         [HttpGet]
-        [ValidationWebRequest]
 
+        [ValidationWebRequest(IsValidCurrency = true)]
         public Task<ActionResult> MatchBetType(BetListExcelMetaModel metaModel)
         {
             return ProcessRequest(metaModel, null, "~/Views/Desktop/BetList/MatchWl/MatchBetType.cshtml");
         }
 
         [HttpGet]
-        [ValidationWebRequest]
 
+        [ValidationWebRequest(IsValidCurrency = true)]
         public Task<ActionResult> MixParlay(BetListExcelMetaModel metaModel)
         {
             return ProcessRequest(metaModel, "Lrf_BetList_MatchWL_Parlay", "~/Views/Desktop/BetList/MatchWl/MixParlay.cshtml");
         }
 
         [HttpGet]
-        [ValidationWebRequest]
+        [ValidationWebRequest(IsValidCurrency = true)]
 
         public Task<ActionResult> Outright(BetListExcelMetaModel metaModel)
         {
@@ -69,12 +69,6 @@ namespace Fanex.Athena.Controllers.BetList
             CreateDefaultMetaModel(metaModel);
             metaModel.IsServerPaging = true;
             return await ProcessDefaultRequest(metaModel, viewPath, uspKey).ConfigureAwait(false);
-        }
-
-        protected override bool IsValidExportExcel(BetListMetaModel model)
-        {
-            var currencyList = SessionService.UserSession.CurrencyList;
-            return model.CurrencyId == BaseCurrencyType.All || currencyList.ContainsKey(model.CurrencyId);
         }
 
         protected override async Task<ActionResult> ExportExcel(BetListExcelMetaModel metaModel)

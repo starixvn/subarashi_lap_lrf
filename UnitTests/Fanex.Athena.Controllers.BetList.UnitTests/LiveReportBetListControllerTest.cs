@@ -133,28 +133,6 @@
             }
         }
 
-        [Test]
-        public async Task Match_ExportExcel_InvalidCurrency_ReturnEmptyResult()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var metaModel = new LiveReportBetListMetaModel
-                {
-                    IsExportExcel = true,
-                    CurrencyId = -1000
-                };
-
-                controller.When(x => x.EmptyExcel()).DoNotCallBase();
-
-                // Action
-                await controller.Match(metaModel);
-
-                // Assert
-                controller.Received().EmptyExcel();
-            }
-        }
-
         [TestCase(1,"USD", null, "USD")]
         [TestCase(1,"USD", "eur", "EUR")]
         [TestCase(0, "", "CNY", "CNY")]

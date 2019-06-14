@@ -84,28 +84,6 @@
             }
         }
 
-        [Test]
-        public async Task MixParlay_ExportExcel_InvalidCurrency_ReturnEmptyResult()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var metaModel = new BetListExcelMetaModel
-                {
-                    IsExportExcel = true,
-                    CurrencyId = -1000,
-                    MultipleBettype = "29"
-                };
-
-                controller.When(x => x.EmptyExcel()).DoNotCallBase();
-
-                // Action
-                await controller.MixParlay(metaModel);
-
-                // Assert
-                controller.Received().EmptyExcel();
-            }
-        }
 
         [TestCase("USD", null, "EUR")]
         [TestCase("USD", "eur", "EUR")]

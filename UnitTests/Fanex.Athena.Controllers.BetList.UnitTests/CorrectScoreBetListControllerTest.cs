@@ -55,27 +55,6 @@
             }
         }
 
-        [Test]
-        public async Task Index_ExportExcel_InvalidCurrency_ReturnEmptyResult()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var metaModel = new BetListExcelMetaModel
-                {
-                    IsExportExcel = true,
-                    CurrencyId = -1000
-                };
-
-                controller.When(x => x.EmptyExcel()).DoNotCallBase();
-
-                // Action
-                await controller.Index(metaModel);
-
-                // Assert
-                controller.Received().EmptyExcel();
-            }
-        }
 
         [TestCase(1,"CNY", null, "CNY")]
         [TestCase(0,"", "", "EUR")]

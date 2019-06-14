@@ -42,8 +42,7 @@ namespace Fanex.Athena.Controllers.BetList
         }
 
         [HttpGet]
-        [ValidationWebRequest]
-
+        [ValidationWebRequest(IsValidCurrency = true)]
         public async Task<ActionResult> Index(BetListExcelMetaModel metaModel)
         {
             CreateDefaultMetaModel(metaModel);

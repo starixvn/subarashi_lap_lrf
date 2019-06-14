@@ -55,28 +55,6 @@
             }
         }
 
-        [Test]
-        public async Task Index_ExportExcel_InvalidCurrency_ReturnEmptyResult()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var metaModel = new BetListExcelMetaModel
-                {
-                    IsExportExcel = true,
-                    CurrencyId = -1000
-                };
-
-                controller.When(x => x.EmptyExcel()).DoNotCallBase();
-
-                // Action
-                await controller.Index(metaModel);
-
-                // Assert
-                controller.Received().EmptyExcel();
-            }
-        }
-
         [TestCase(1,"USD", "eur", "EUR", false, PlatformType.Asia, nameof(PlatformType.Asia))]
         [TestCase(1,"USD", "usd", "USD", true, PlatformType.China, nameof(PlatformType.China))]
         [TestCase(1,"USD", "gbp", "GBP", true, PlatformType.Euro, nameof(PlatformType.Euro))]

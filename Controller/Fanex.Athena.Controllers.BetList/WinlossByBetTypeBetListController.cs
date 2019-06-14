@@ -32,7 +32,7 @@
         }
 
         [HttpGet]
-        [ValidationWebRequest]
+        [ValidationWebRequest(IsValidCurrency = true)]
         public async Task<ActionResult> Index(BetListExcelMetaModel metaModel)
         {
             CreateDefaultMetaModel(metaModel);
@@ -41,9 +41,7 @@
 
         protected override bool IsValidExportExcel(BetListMetaModel model)
         {
-            var currencyList = SessionService.UserSession.CurrencyList;
             return model.CurrencyId != BaseCurrencyType.All &&
-                currencyList.ContainsKey(model.CurrencyId) &&
                 model.FromDate.Date == model.ToDate.Date;
         }
 

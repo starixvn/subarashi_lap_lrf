@@ -174,17 +174,9 @@
         {
             if (metaModel != null && string.IsNullOrEmpty(metaModel.BaseCurrency)
                 && metaModel.CurrencyId == 0)
-
             {
                 metaModel.BaseCurrency = SessionService.UserSession.DefaultBaseCurrency;
             }
-        }
-
-        protected bool IsValidCurrency(int currencyId)
-        {
-            return currencyId == BaseCurrencyType.All ||
-                KeanOceanBusinessHelper.VerifyKeanOceanCurrencyRequest(
-                    SessionService.UserSession.CurrencyList, SessionService.LicenseeSession.LicenseeId, currencyId);
         }
 
         protected internal virtual FileContentResult EmptyExcel()
@@ -203,7 +195,7 @@
 
         protected virtual bool IsValidExportExcel(BetListMetaModel model)
         {
-            return IsValidCurrency(model.CurrencyId);
+            return true;
         }
 
         protected internal virtual async Task<ActionResult> ProcessExportExcel(
