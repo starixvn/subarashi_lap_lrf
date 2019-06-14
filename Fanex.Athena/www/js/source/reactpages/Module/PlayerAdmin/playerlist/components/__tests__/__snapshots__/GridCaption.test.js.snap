@@ -1,0 +1,155 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GridCaption _buildDropdownColumn - should match snapshot 1`] = `
+<div>
+  <t
+    className="selection-column"
+    dataSource={
+      Array [
+        Object {
+          "id": "Status",
+          "status": true,
+          "value": "Status",
+        },
+        Object {
+          "id": "Username",
+          "status": true,
+          "value": "Username",
+        },
+        Object {
+          "id": "SystemID",
+          "status": true,
+          "value": "SystemID",
+        },
+        Object {
+          "id": "Currency",
+          "status": true,
+          "value": "Currency",
+        },
+        Object {
+          "id": "Current Balance",
+          "status": true,
+          "value": "Current Balance",
+        },
+        Object {
+          "id": "Outstanding Balance",
+          "status": true,
+          "value": "Outstanding Balance",
+        },
+        Object {
+          "id": "Odds Group",
+          "status": true,
+          "value": "Odds Group",
+        },
+        Object {
+          "id": "BA Status",
+          "status": true,
+          "value": "BA Status",
+        },
+        Object {
+          "id": "Special Level",
+          "status": true,
+          "value": "Special Level",
+        },
+        Object {
+          "id": "Last Transaction",
+          "status": true,
+          "value": "Last Transaction",
+        },
+      ]
+    }
+    hasAllOption={true}
+    hasSearchBox={false}
+    id="columnList"
+    keyField="id"
+    language="en-US"
+    onChange={[Function]}
+    statusField="status"
+    valueField="value"
+  />
+</div>
+`;
+
+exports[`GridCaption _buildLeftPart have not selected any item yet - should render player count information 1`] = `
+<div>
+  <span>
+    Search Result: 3 Player(s)
+  </span>
+</div>
+`;
+
+exports[`GridCaption _buildLeftPart selectedPlayer is not null - should render correct breadcrumb information 1`] = `
+<div>
+  <React.Fragment>
+    <span
+      className="link"
+      onClick={[Function]}
+    >
+      Previous search result
+    </span>
+    <span>
+       
+      <strong>
+        &gt;
+      </strong>
+       Player: 
+      test
+       (
+      USD
+      )
+    </span>
+  </React.Fragment>
+</div>
+`;
+
+exports[`GridCaption _buildLeftPart selectedPlayer is null and selectedPlayerIdList has value - should render buttons for batch update 1`] = `
+<div>
+  <React.Fragment>
+    <BatchUpdateButton />
+    <button
+      className="btn-outline btn-outline-light"
+      type="button"
+    >
+      2
+       Player(s) Selected 
+      <span
+        className="close"
+      >
+        ×
+      </span>
+    </button>
+  </React.Fragment>
+</div>
+`;
+
+exports[`GridCaption _buildRightPart - should render correctly with dropdown column and excel icon 1`] = `
+<div>
+  <span
+    className="caret-block"
+  >
+    Dropdown Column List
+    <span
+      className="icon-excel-wrapper"
+    >
+      <i
+        className="icon-excel"
+        title="ExportToExcel"
+      />
+    </span>
+  </span>
+</div>
+`;
+
+exports[`GridCaption render - should match snapshot 1`] = `
+<div>
+  <ReportTitle
+    content={
+      <React.Fragment>
+        Left Part
+        Right Part
+      </React.Fragment>
+    }
+    tag="div"
+  />
+</div>
+`;

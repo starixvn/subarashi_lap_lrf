@@ -1,5 +1,4 @@
 import React from 'react';
-import ShallowRenderer from 'react-test-renderer/shallow';
 import { shallow } from 'enzyme';
 import { FormFilter } from '../FormFilter';
 
@@ -59,8 +58,7 @@ describe('FormFilter', () => {
 
     describe('render', () => {
         it('isShowAdvancedSearch = false - should match snapshot without AdvancedSearch', () => {
-            const renderer = new ShallowRenderer();
-            const result = renderer.render(<FormFilter {...defaultProps} />);
+            const result = shallow(<FormFilter {...defaultProps} />);
     
             expect(result).toMatchSnapshot();
         })

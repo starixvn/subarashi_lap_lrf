@@ -1,0 +1,424 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DataGrid _buildDataRow - should match snapshot 1`] = `
+<div>
+  <Unknown>
+    <Unknown
+      className="center-align"
+    >
+      <input
+        checked={true}
+        onChange={[Function]}
+        type="checkbox"
+      />
+    </Unknown>
+    <Unknown
+      className="center-align"
+    >
+      online
+    </Unknown>
+    <Unknown
+      className="center-align"
+    >
+      UserNameCell
+    </Unknown>
+    <Unknown
+      className="center-align"
+    >
+      abc
+    </Unknown>
+    <Unknown
+      className="center-align"
+    >
+      USD
+    </Unknown>
+    <Unknown
+      className="center-align"
+    >
+      100
+    </Unknown>
+    <Unknown
+      className="center-align"
+    >
+      200
+    </Unknown>
+    <Unknown
+      className="center-align"
+    >
+      OddsGroupCell
+    </Unknown>
+    <Unknown
+      className="center-align"
+    >
+      <Switcher
+        checked={true}
+        onChange={[Function]}
+      />
+    </Unknown>
+    <Unknown
+      className="center-align"
+    >
+      SpecialLevelCell
+    </Unknown>
+    <Unknown
+      className="center-align"
+    >
+      06/14/2019
+    </Unknown>
+    <Unknown
+      className="center-align"
+    >
+      abc@yahoo.com
+    </Unknown>
+  </Unknown>
+</div>
+`;
+
+exports[`DataGrid _buildOddsGroupCell - should match snapshot 1`] = `
+<div>
+  <select
+    className="select-default select-oddsgroup"
+    onChange={[Function]}
+    value="B"
+  >
+    <option
+      style={
+        Object {
+          "backgroundColor": "#007C00",
+          "color": "#fff",
+        }
+      }
+    >
+      A
+    </option>
+    <option
+      style={
+        Object {
+          "backgroundColor": "#3298FD",
+          "color": "#fff",
+        }
+      }
+    >
+      B
+    </option>
+    <option
+      style={null}
+    >
+      C
+    </option>
+    <option
+      style={null}
+    >
+      D
+    </option>
+    <option
+      style={null}
+    >
+      E
+    </option>
+    <option
+      style={null}
+    >
+      F
+    </option>
+  </select>
+</div>
+`;
+
+exports[`DataGrid _buildSpecialLevelCell - should match snapshot 1`] = `
+<div>
+  <select
+    className="select-default select-special-level"
+    onChange={[Function]}
+    value={1}
+  >
+    <option
+      style={
+        Object {
+          "backgroundColor": "#fcfcfc",
+        }
+      }
+    >
+      None
+    </option>
+    <option
+      style={
+        Object {
+          "backgroundColor": "#98b516",
+        }
+      }
+    >
+      1
+    </option>
+    <option
+      style={
+        Object {
+          "backgroundColor": "#007d00",
+        }
+      }
+    >
+      2
+    </option>
+    <option
+      style={
+        Object {
+          "backgroundColor": "#b87856",
+        }
+      }
+    >
+      3
+    </option>
+    <option
+      style={
+        Object {
+          "backgroundColor": "#fcc50f",
+        }
+      }
+    >
+      4
+    </option>
+    <option
+      style={
+        Object {
+          "backgroundColor": "#418a86",
+        }
+      }
+    >
+      5
+    </option>
+    <option
+      style={
+        Object {
+          "backgroundColor": "#969036",
+        }
+      }
+    >
+      6
+    </option>
+    <option
+      style={
+        Object {
+          "backgroundColor": "#944937",
+        }
+      }
+    >
+      7
+    </option>
+    <option
+      style={
+        Object {
+          "backgroundColor": "#3297fc",
+        }
+      }
+    >
+      8
+    </option>
+    <option
+      style={
+        Object {
+          "backgroundColor": "#c98402",
+        }
+      }
+    >
+      9
+    </option>
+    <option
+      style={
+        Object {
+          "backgroundColor": "#fc0000",
+        }
+      }
+    >
+      10
+    </option>
+  </select>
+</div>
+`;
+
+exports[`DataGrid _buildUserNameCell - should match snapshot 1`] = `
+<div>
+  <React.Fragment>
+    <button
+      className="btn-default btn-link username-link"
+      onClick={[Function]}
+    >
+      test1
+    </button>
+    <button
+      className="btn-default btn-link btn-icon cell-menu"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <i
+        className="material-icons"
+      >
+        edit
+      </i>
+    </button>
+  </React.Fragment>
+</div>
+`;
+
+exports[`DataGrid _renderHeader - should match snapshot 1`] = `
+<div>
+  <t
+    onSort={null}
+    style={
+      Object {
+        "height": 32,
+      }
+    }
+  >
+    <t
+      colWidth={30}
+      onSort={null}
+      sortBy={null}
+      sortOrder={null}
+    >
+      <input
+        type="checkbox"
+      />
+    </t>
+    <t
+      colWidth={80}
+      onSort={null}
+      sortBy={null}
+      sortOrder={null}
+    >
+      Status
+    </t>
+    <t
+      colWidth={80}
+      onSort={null}
+      sortBy={null}
+      sortOrder={null}
+    >
+      Username
+    </t>
+    <t
+      colWidth={100}
+      onSort={null}
+      sortBy={null}
+      sortOrder={null}
+    >
+      SystemId
+    </t>
+    <t
+      colWidth={60}
+      onSort={null}
+      sortBy={null}
+      sortOrder={null}
+    >
+      Currency
+    </t>
+    <t
+      colWidth={80}
+      onSort={null}
+      sortBy={null}
+      sortOrder={null}
+    >
+      Current Balance
+    </t>
+    <t
+      colWidth={80}
+      onSort={null}
+      sortBy={null}
+      sortOrder={null}
+    >
+      Outstanding Balance
+    </t>
+    <t
+      colWidth={50}
+      onSort={null}
+      sortBy={null}
+      sortOrder={null}
+    >
+      Odds Group
+    </t>
+    <t
+      colWidth={50}
+      onSort={null}
+      sortBy={null}
+      sortOrder={null}
+    >
+      BA Status
+    </t>
+    <t
+      colWidth={50}
+      onSort={null}
+      sortBy={null}
+      sortOrder={null}
+    >
+      Special Level
+    </t>
+    <t
+      colWidth={100}
+      onSort={null}
+      sortBy={null}
+      sortOrder={null}
+    >
+      Last Transaction
+    </t>
+    <t
+      colWidth={100}
+      onSort={null}
+      sortBy={null}
+      sortOrder={null}
+    >
+      Email
+    </t>
+  </t>
+</div>
+`;
+
+exports[`DataGrid render selectedPlayer has no value - should render all items in dataList 1`] = `
+<div>
+  <React.Fragment>
+    <t
+      adjustedHeight={32}
+      autoHeight={false}
+      autoWidth={true}
+      body="Data List"
+      bodyHeight={300}
+      containerPadding={30}
+      header="Header"
+      isPaging={false}
+      maxWidth={0}
+      minWidth={650}
+      onSort={null}
+      shouldResetScrollPosition={true}
+      width={0}
+    />
+    <ContextMenu
+      isOpenContextMenu={false}
+      position={null}
+    />
+  </React.Fragment>
+</div>
+`;
+
+exports[`DataGrid render selectedPlayer has value - should render only one row 1`] = `
+<div>
+  <React.Fragment>
+    <t
+      adjustedHeight={32}
+      autoHeight={false}
+      autoWidth={true}
+      body="Data List"
+      bodyHeight={300}
+      containerPadding={30}
+      header="Header"
+      isPaging={false}
+      maxWidth={0}
+      minWidth={650}
+      onSort={null}
+      shouldResetScrollPosition={true}
+      width={0}
+    />
+    <ContextMenu
+      isOpenContextMenu={false}
+      position={null}
+    />
+  </React.Fragment>
+</div>
+`;
