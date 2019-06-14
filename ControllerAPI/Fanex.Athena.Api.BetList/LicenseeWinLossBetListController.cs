@@ -36,24 +36,14 @@
         }
 
         [HttpPost]
-        [ValidationApiRequest]
+        [ValidationApiRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
         public async Task<dynamic> Index(BetListMetaModel metaModel)
         {
             if (!IsValidDateRange(metaModel.FromDate, metaModel.ToDate))
             {
                 return null;
             }
-
-            var userSession = SessionService.UserSession;
-            var licenseeId = SessionService.LicenseeSession.LicenseeId;
-            var currencyList = userSession.CurrencyList;
-
-            if (!MetaModelValidationHelper.ValidateCurrencyWithKeanOceanOption(metaModel.CurrencyId,
-                currencyList, licenseeId))
-            {
-                return null;
-            }
-
+            
             const string UspKey = "Lrf_BetList_SelWinloss_Mem";
             return await GetBetListResult(metaModel, UspKey).ConfigureAwait(false);
         }

@@ -33,15 +33,9 @@ namespace Fanex.Athena.Api.BetList
         }
 
         [HttpPost]
-        [ValidationApiRequest]
+        [ValidationApiRequest(IsValidCurrency = true)]
         public async Task<dynamic> Index(BetListMetaModel metaModel)
         {
-            if (!MetaModelValidationHelper.ValidateCurrency(metaModel.CurrencyId,
-                SessionService.UserSession.CurrencyList))
-            {
-                return null;
-            }
-
             const string UspKey = "Lrf_TotalBets_Sel430";
 
             return await GetBetListResult(metaModel, UspKey).ConfigureAwait(false);

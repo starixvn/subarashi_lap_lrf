@@ -29,14 +29,9 @@ namespace Fanex.Athena.Api.BetList
         }
 
         [HttpPost]
-        [ValidationApiRequest]
+        [ValidationApiRequest(IsValidCurrency = true)]
         public async Task<dynamic> Index(BetListMetaModel metaModel)
         {
-            if (!IsValidCurrencyId(metaModel.CurrencyId))
-            {
-                return null;
-            }
-
             return await GetBetListResult(metaModel, "Lrf_BetList_SelRunningByMultipleBettypeMatch").ConfigureAwait(false);
         }
     }

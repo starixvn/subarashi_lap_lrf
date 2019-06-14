@@ -11,6 +11,7 @@ namespace Fanex.Athena.Service.Core.Utility.Interfaces
     {
         bool IsValid(ValidationMetaModelOption option, object model);
         bool IsValidCurrency(int currencyId, bool isIncludeKeanOcean = false);
-       
+        bool IsValidBaseCurrency(string baseCurrency, bool isAllowEmpty = true);
+
     }
 }

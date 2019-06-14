@@ -37,7 +37,7 @@
         }
 
         [HttpPost]
-        [ValidationApiRequest]
+        [ValidationApiRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
         public async Task<dynamic> Index(ExchangeBetListMetaModel metaModel)
         {
             if (!IsValidRequest(metaModel))
@@ -55,7 +55,7 @@
         }
 
         [HttpPost]
-        [ValidationApiRequest]
+        [ValidationApiRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
         public async Task<dynamic> Detail(ExchangeBetListDetailMetaModel metaModel)
         {
             if (!IsValidRequest(metaModel))
@@ -72,9 +72,7 @@
         private bool IsValidRequest(BaseExchangeBetListMetaModel metaModel)
         {
             var licenseId = SessionService.LicenseeSession.LicenseeId;
-            return MetaModelValidationHelper.ValidateCurrencyWithKeanOceanOption(metaModel.CurrencyId,
-                SessionService.UserSession.CurrencyList, licenseId)
-                && _authorizationService.HasPermissionOnData(licenseId, metaModel.CustId, 0);
+            return _authorizationService.HasPermissionOnData(licenseId, metaModel.CustId, 0);
         }
     }
 }

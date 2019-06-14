@@ -37,14 +37,9 @@ namespace Fanex.Athena.Api.BetList
         }
 
         [HttpPost]
-        [ValidationApiRequest]
+        [ValidationApiRequest(IsValidCurrency = true)]
         public async Task<dynamic> Index(BetListMetaModel metaModel)
         {
-            if (!IsValidCurrencyId(metaModel.CurrencyId))
-            {
-                return null;
-            }
-
             const string UspKey = "Lrf_BetList_SelRunningByDate_Mem";
 
             metaModel.FromDate = DateTime.Today.AddYears(-1);

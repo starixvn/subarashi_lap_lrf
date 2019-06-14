@@ -63,29 +63,6 @@
         }
 
         [Test]
-        public async Task Index_InValidCurrency_ReturnNullData()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var metaModel = new ExchangeBetListMetaModel
-                {
-                    FromDate = new DateTime(2018, 1, 1),
-                    ToDate = new DateTime(2018, 1, 2),
-                    CurrencyId = 1
-                };
-
-                StubUserSessionData(new UserSession { CurrencyList = new Dictionary<int, string>() });
-
-                // Action
-                var result = await controller.Index(metaModel);
-
-                // Assert
-                Assert.That(result.MainData, Is.Null);
-            }
-        }
-
-        [Test]
         public async Task Index_NoPermission_ReturnNullData()
         {
             using (var controller = CreateController())
@@ -172,29 +149,7 @@
             }
         }
 
-        [Test]
-        public async Task Detail_InValidCurrency_ReturnEmptyData()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var metaModel = new ExchangeBetListDetailMetaModel
-                {
-                    CurrencyId = 1,
-                    BetId = 1,
-                    CustId = 1,
-                };
-
-                StubUserSessionData(new UserSession { CurrencyList = new Dictionary<int, string>() });
-
-                // Action
-                var result = await controller.Detail(metaModel);
-
-                // Assert
-                Assert.That(result, Is.Empty);
-            }
-        }
-
+      
         [Test]
         public async Task Detail_NoPermission_ReturnEmptyData()
         {

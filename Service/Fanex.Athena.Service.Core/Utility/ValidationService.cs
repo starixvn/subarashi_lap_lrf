@@ -17,7 +17,7 @@ namespace Fanex.Athena.Service.Core.Utility
         {
             _sessionService = sessionService;
         }
-        private static bool ValidateBaseCurrency(string baseCurrency, bool isAllowEmpty = true)
+        public bool IsValidBaseCurrency(string baseCurrency, bool isAllowEmpty = true)
         {
             return (isAllowEmpty && string.IsNullOrEmpty(baseCurrency)) || SystemConstants.BaseCurrencyList
            .Any(x => x.Value.Equals(baseCurrency, StringComparison.OrdinalIgnoreCase));

@@ -69,7 +69,7 @@ namespace Fanex.Athena.Api.BetList
 
         [HttpPost]
         [ApiFunctionAuthorization(PermissionKeys.TotalBetBONTeamToScore)]
-        [ValidationApiRequest]
+        [ValidationApiRequest(IsValidCurrency = true)]
         public async Task<dynamic> BONTeamToScore(BetListMetaModel metaModel)
         {
             metaModel.MultipleBettype = BONTeamToScoreBettypes;
@@ -78,11 +78,6 @@ namespace Fanex.Athena.Api.BetList
 
         private async Task<dynamic> ProcessRequest(BetListMetaModel metaModel)
         {
-            if (!IsValidCurrencyId(metaModel.CurrencyId))
-            {
-                return null;
-            }
-
             const string UspKey = "Lrf_BetList_SelRunningByBettypeList";
             return await GetBetListResult(metaModel, UspKey).ConfigureAwait(false);
         }

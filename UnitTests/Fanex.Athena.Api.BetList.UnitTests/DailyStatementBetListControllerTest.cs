@@ -32,29 +32,6 @@
             AuthorizationService.HasPermissionOnData(SessionLicenseeId, Arg.Any<int>(), Arg.Any<long>()).Returns(true);
         }
 
-        [TestCase(-100)]
-        [TestCase(100)]
-        public async Task Index_InvalidCurrencyId_ReturnBadRequest(int currencyId)
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var metaModel = new BetListMetaModel
-                {
-                    CurrencyId = currencyId
-                };
-
-                StubUserSessionData(new UserSession { CurrencyList = new Dictionary<int, string>() });
-
-                // Action
-                var actual = await controller.Index(metaModel);
-
-                // Assert
-                Assert.IsTrue(actual is BadRequestErrorMessageResult);
-                Assert.IsTrue((actual as BadRequestErrorMessageResult)
-                    .Message.Equals(ViewResources.InvalidRequestMsg));
-            }
-        }
 
         [TestCase(0, "01/01/2018", "01/02/2018", UspKeyOld)]
         [TestCase(1, "01/03/2018", "01/02/2018", UspKey)]

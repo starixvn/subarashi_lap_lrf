@@ -108,9 +108,5 @@ namespace Fanex.Athena.Api.BetList
                 ).ConfigureAwait(false);
         }
 
-        protected bool IsValidCurrencyId(int currencyId)
-        {
-            return MetaModelValidationHelper.ValidateCurrency(currencyId, SessionService.UserSession.CurrencyList);
-        }
     }
 }

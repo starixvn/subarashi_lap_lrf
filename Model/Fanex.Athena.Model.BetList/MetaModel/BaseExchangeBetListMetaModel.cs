@@ -1,10 +1,11 @@
 ﻿using Fanex.Athena.Model.Core.DataDomain;
+using Fanex.Athena.Model.Core.MetaModel;
 using System;
 using System.Linq;
 
 namespace Fanex.Athena.Model.BetList.MetaModel
 {
-    public class BaseExchangeBetListMetaModel
+    public class BaseExchangeBetListMetaModel: IMetaModelCurrency
     {
         private string _baseCurrency = string.Empty;
 

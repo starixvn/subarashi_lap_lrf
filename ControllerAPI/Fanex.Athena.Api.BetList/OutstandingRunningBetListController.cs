@@ -33,14 +33,9 @@
         }
 
         [HttpPost]
-        [ValidationApiRequest]
+        [ValidationApiRequest(IsValidCurrency = true)]
         public async Task<dynamic> Index(BetListExcelMetaModel metaModel)
         {
-            if (!IsValidCurrencyId(metaModel.CurrencyId))
-            {
-                return null;
-            }
-
             metaModel.ProductCodeList = RemoveInvalidProducts(metaModel.ProductCodeList, BetListCustomerOutstandingRunningName);
 
             const string UspKey = "Lrf_BetList_SelRunningByDate_Mem";

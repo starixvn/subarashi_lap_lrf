@@ -26,38 +26,7 @@
             AuthorizationService.HasPermissionOnData(SessionLicenseeId, Arg.Any<int>(), Arg.Any<long>()).Returns(true);
         }
 
-        [Test]
-        public async Task CleanSheet_InvalidCurrency_ReturnNull()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var metaModel = SetUpForGetBetListResult(FakeHelper.Create<int>(), new Dictionary<int, string>());
-
-                // Action
-                var result = await controller.CleanSheet(metaModel);
-
-                // Assert
-                Assert.That(result, Is.Null);
-            }
-        }
-
-        [Test]
-        public async Task ToWinToNil_InvalidCurrency_ReturnNull()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var metaModel = SetUpForGetBetListResult(FakeHelper.Create<int>(), new Dictionary<int, string>());
-
-                // Action
-                var result = await controller.ToWinToNil(metaModel);
-
-                // Assert
-                Assert.That(result, Is.Null);
-            }
-        }
-
+      
         [Test]
         public async Task ThreeWayHandicap_InvalidCurrency_ReturnNull()
         {

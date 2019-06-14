@@ -65,7 +65,7 @@ namespace Fanex.Athena.Api.BetList
         }
 
         [HttpPost]
-        [ValidationApiRequest]
+        [ValidationApiRequest(IsValidCurrency = true)]
         [ApiFunctionAuthorization(PermissionKeys.TotalBet3WayHandicap)]
         public async Task<dynamic> ThreeWayHandicap(BetListMetaModel metaModel)
         {
@@ -75,11 +75,7 @@ namespace Fanex.Athena.Api.BetList
 
         private async Task<dynamic> ProcessRequest(BetListMetaModel metaModel, string uspKey = "Lrf_BetList_SelRunningByBettype")
         {
-            if (!IsValidCurrencyId(metaModel.CurrencyId))
-            {
-                return null;
-            }
-
+            
             return await GetBetListResult(metaModel, uspKey).ConfigureAwait(false);
         }
     }

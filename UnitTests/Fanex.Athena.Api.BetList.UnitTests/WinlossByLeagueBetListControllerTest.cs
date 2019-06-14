@@ -22,23 +22,6 @@
             AuthorizationService.HasPermissionOnData(SessionLicenseeId, Arg.Any<int>(), Arg.Any<long>()).Returns(true);
         }
 
-        [Test]
-        public async Task Detail_InvalidCurrency_ReturnNull()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var metaModel = new WinLossByLeagueBetListMetaModel { CurrencyId = 1 };
-
-                StubUserSessionData(new UserSession { CurrencyList = new Dictionary<int, string>() });
-
-                // Action
-                var result = await controller.Index(metaModel);
-
-                // Assert
-                Assert.That(result, Is.Null);
-            }
-        }
 
         [TestCase(0)]
         [TestCase(1)]

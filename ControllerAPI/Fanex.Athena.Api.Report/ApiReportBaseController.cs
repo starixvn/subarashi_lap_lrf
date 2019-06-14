@@ -22,14 +22,6 @@
         {
         }
 
-
-        protected internal virtual bool IsValidCurrency(int currencyId)
-        {
-            var currencyList = SessionService.UserSession.CurrencyList;
-            return MetaModelValidationHelper.ValidateCurrencyWithKeanOceanOption(currencyId,
-                             currencyList, SessionService.LicenseeSession.LicenseeId);
-        }
-
         protected internal virtual bool IsValidProducts(string functionKey, BaseReportMetaModel metaModel)
         {
             var passedProductCodes = string.IsNullOrEmpty(metaModel.ProductCodeList) ?

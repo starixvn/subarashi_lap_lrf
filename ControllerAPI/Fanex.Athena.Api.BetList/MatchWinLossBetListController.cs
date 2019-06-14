@@ -26,28 +26,29 @@ namespace Fanex.Athena.Api.BetList
     [ApiFunctionAuthorization(PermissionKeys.ReportMatchWinLoss)]
     public class MatchWinLossBetListController : ApiBetListBaseController
     {
+        private readonly IValidationService _validationService;
+
         public MatchWinLossBetListController(
             ISessionService sessionService,
             IProductService productService,
             ILanguageService languageService,
             IAuthorizationService authorizationService,
             IBetListApiClient betListApiClient,
-            IBalanceUpDataAccess balanceUpDataAccess)
+            IBalanceUpDataAccess balanceUpDataAccess,
+             IValidationService validationService
+            )
         : base(sessionService, productService, languageService, authorizationService, betListApiClient, balanceUpDataAccess)
         {
+            _validationService = validationService;
         }
 
         [HttpGet]
+        [ValidationApiRequest(ObjectName = "metaModel", IsValidCurrency = true)]
         public async Task<dynamic> MatchBetType(
             int page,
             int rows,
             [FromUri]BetListMetaModel metaModel)
         {
-            if (!metaModel.IsValid || !IsValidCurrencyId(metaModel.CurrencyId))
-            {
-                return null;
-            }
-
             const string UspKey = "Lrf_BetList_MatchWL_Bettype";
 
             return await GetPagingBetListResult(metaModel, UspKey, page, rows).ConfigureAwait(false);
@@ -59,18 +60,14 @@ namespace Fanex.Athena.Api.BetList
         /// <param name="metaModel">Meta model object.</param>
         /// <returns>Bet list data for match win loss outright.</returns>
         [HttpPost]
-        [ValidationApiRequest]
+        [ValidationApiRequest(IsValidCurrency = true)]
         public async Task<dynamic> Outright(BetListMetaModel metaModel)
         {
-            if (IsValidCurrencyId(metaModel.CurrencyId))
-            {
-                metaModel.IsServerPaging = true;
+            metaModel.IsServerPaging = true;
 
-                const string UspKey = "Lrf_BetList_MatchWL_Outright";
-                return await GetBetListResult(metaModel, UspKey).ConfigureAwait(false);
-            }
+            const string UspKey = "Lrf_BetList_MatchWL_Outright";
+            return await GetBetListResult(metaModel, UspKey).ConfigureAwait(false);
 
-            return null;
         }
 
         [HttpGet]
@@ -88,9 +85,9 @@ namespace Fanex.Athena.Api.BetList
             string sortOrder = null)
 #pragma warning restore S107 // Methods should not have too many parameters
         {
-            var isValidBaseCurrency = string.IsNullOrEmpty(baseCurrency)
-                || SystemConstants.BaseCurrencyList.Any(x => x.Value.Equals(baseCurrency, StringComparison.OrdinalIgnoreCase));
-            if (isValidBaseCurrency && IsValidCurrencyId(currencyId))
+           
+            if (_validationService.IsValidBaseCurrency(baseCurrency)
+                && _validationService.IsValidCurrency(currencyId))
             {
                 const string UspKey = "Lrf_BetList_MatchWL_Parlay";
                 var metaModel = new BetListMetaModel

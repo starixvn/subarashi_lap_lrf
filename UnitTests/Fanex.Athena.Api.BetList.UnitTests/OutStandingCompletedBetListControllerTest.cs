@@ -27,42 +27,6 @@
         }
 
         [Test]
-        public async Task Detail_InvalidCurrency_ReturnNull()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var metaModel = new BetListMetaModel { CurrencyId = 1, ProductCodeList = "1,2,3" };
-
-                StubUserSessionData(new UserSession { CurrencyList = new Dictionary<int, string>() });
-
-                // Action
-                var result = await controller.Index(1, 10, metaModel);
-
-                // Assert
-                Assert.That(result, Is.Null);
-            }
-        }
-
-        [Test]
-        public async Task Detail_InvalidDate_ReturnNull()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var metaModel = new BetListMetaModel { CurrencyId = 1, FromDate = new DateTime(2018, 1, 3), ToDate = new DateTime(2018, 1, 1) };
-
-                StubUserSessionData(new UserSession { CurrencyList = new Dictionary<int, string>() });
-
-                // Action
-                var result = await controller.Index(1, 10, metaModel);
-
-                // Assert
-                Assert.That(result, Is.Null);
-            }
-        }
-
-        [Test]
         public async Task Detail_InvalidProductCodeList_ReturnNull()
         {
             using (var controller = CreateController())
@@ -73,7 +37,8 @@
                 StubUserSessionData(new UserSession { CurrencyList = new Dictionary<int, string> { { metaModel.CurrencyId, "Currency" } } });
 
                 // Action
-                var result = await controller.Index(1, 10, metaModel);
+                var result = await 
+controller.Index(1, 10, metaModel);
 
                 // Assert
                 Assert.That(result, Is.Null);

@@ -30,31 +30,6 @@
             _controller = null;
         }
 
-        [TestCase(BaseCurrencyType.Gbp, true)]
-        [TestCase(BaseCurrencyType.Eur, true)]
-        [TestCase(100, true)]
-        [TestCase(101, false)]
-        [TestCase(-9, false)]
-        public void IsValidRequest_WhenCall_ReturnCorrectResult(int metaModelCurrencyId, bool expectedResult)
-        {
-            // Arrange
-            var userSession = new UserSession
-            {
-                CurrencyList = new Dictionary<int, string> { { 100, "AMC" } }
-            };
-            StubUserSessionData(userSession);
-            var metaModel = new BaseMetaModel
-            {
-                CurrencyId = metaModelCurrencyId
-            };
-
-            // Action
-            var result = _controller.IsValidCurrency(metaModel.CurrencyId);
-
-            // Assert
-            Assert.That(result, Is.EqualTo(expectedResult));
-        }
-
         [TestCase("SB,NGX,XXX", false)]
         [TestCase("XXX", false)]
         [TestCase("SB,NG", true)]

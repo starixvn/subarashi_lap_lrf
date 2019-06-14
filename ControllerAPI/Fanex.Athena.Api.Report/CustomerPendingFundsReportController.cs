@@ -41,7 +41,7 @@
         }
 
         [HttpPost]
-        [ValidationApiRequest]
+        [ValidationApiRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
         public async Task<dynamic> Index(CustomerPendingFundsMetaModel metaModel)
         {
             var data = await GetData(metaModel).ConfigureAwait(false);
@@ -94,15 +94,6 @@
 
         private async Task<ReportResultModel<CustPendingFunds>> GetData(CustomerPendingFundsMetaModel metaModel)
         {
-            if (!IsValidCurrency(metaModel.CurrencyId))
-            {
-                return new ReportResultModel<CustPendingFunds>
-                {
-                    DataList = new List<CustPendingFunds>(),
-                    TotalData = new CustPendingFunds()
-                };
-            }
-
             metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
             return await _custPendingFundsDataAccess.GetDataList(metaModel).ConfigureAwait(false);
         }

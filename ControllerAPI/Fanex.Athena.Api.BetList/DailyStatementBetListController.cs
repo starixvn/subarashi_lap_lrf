@@ -35,16 +35,9 @@ namespace Fanex.Athena.Api.BetList
         }
 
         [HttpPost]
-        [ValidationApiRequest]
-
+        [ValidationApiRequest(IsValidCurrency = true)]
         public async Task<dynamic> Index(BetListMetaModel metaModel)
         {
-            if (!MetaModelValidationHelper.ValidateCurrency(metaModel.CurrencyId,
-                SessionService.UserSession.CurrencyList))
-            {
-                return BadRequest(ViewResources.InvalidRequestMsg);
-            }
-
             const string UspKey = "Lrf_BetList_SelByDayAll_Mem";
             const string UspKeyOld = "Lrf_BetList_SelByDayAll_Mem_Old";
 

@@ -37,21 +37,6 @@
             AuthorizationService.HasPermissionOnData(SessionLicenseeId, Arg.Any<int>(), Arg.Any<long>()).Returns(true);
         }
 
-        [Test]
-        public async Task Match_InvalidCurrency_ReturnNull()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var metaModel = CreateInvalidCurrencyMetaModel();
-
-                // Action
-                var result = await controller.Match(metaModel);
-
-                // Assert
-                Assert.That(result, Is.Null);
-            }
-        }
 
         [Test]
         public async Task Outright_InvalidCurrency_ReturnNull()
@@ -69,67 +54,11 @@
             }
         }
 
-        [Test]
-        public async Task NumberGame_InvalidCurrency_ReturnNull()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var page = FakeHelper.Create<int>();
-                var rows = FakeHelper.Create<int>();
-
-                var metaModel = CreateInvalidCurrencyMetaModel();
-
-                // Action
-                var result = await controller.NumberGame(metaModel, page, rows);
-
-                // Assert
-                Assert.That(result, Is.Null);
-            }
-        }
-
-        [Test]
-        public async Task MixParlay_InvalidCurrency_ReturnNull()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var page = FakeHelper.Create<int>();
-                var rows = FakeHelper.Create<int>();
-
-                var metaModel = CreateInvalidCurrencyMetaModel();
-
-                // Action
-                var result = await controller.MixParlay(metaModel, page, rows);
-
-                // Assert
-                Assert.That(result, Is.Null);
-            }
-        }
-
-        [Test]
-        public async Task VirtualSports_InvalidCurrency_ReturnNull()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var page = FakeHelper.Create<int>();
-                var rows = FakeHelper.Create<int>();
-
-                var metaModel = CreateInvalidCurrencyMetaModel();
-
-                // Action
-                var result = await controller.VirtualSports(metaModel, page, rows);
-
-                // Assert
-                Assert.That(result, Is.Null);
-            }
-        }
-
+       
         [TestCase(0)]
         [TestCase(1)]
         [TestCase(2)]
-        public async Task Match_ValidCurrency_CallBetListApiWithCorrectParameters(int currencyId)
+        public async Task Match_WhenCalled_CallBetListApiWithCorrectParameters(int currencyId)
         {
             using (var controller = CreateController())
             {
@@ -155,7 +84,7 @@
         [TestCase(0)]
         [TestCase(1)]
         [TestCase(2)]
-        public async Task Outright_ValidCurrency_CallBetListApiWithCorrectParameters(int currencyId)
+        public async Task Outright_WhenCalled_CallBetListApiWithCorrectParameters(int currencyId)
         {
             using (var controller = CreateController())
             {
@@ -214,7 +143,7 @@
         [TestCase(0, 1, 50, 1, 50)]
         [TestCase(1, -1, 100, DefaultPageIndex, 100)]
         [TestCase(2, 2, -1, 2, DefaultPageSize)]
-        public async Task MixParlay_ValidCurrency_CallBetListApiWithCorrectParameters(
+        public async Task MixParlay_WhenCalled_CallBetListApiWithCorrectParameters(
             int currencyId,
             int pageIndex,
             int pageSize,

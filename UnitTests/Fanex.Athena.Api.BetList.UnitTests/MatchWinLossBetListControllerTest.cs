@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Net.Http;
     using System.Threading.Tasks;
+    using Fanex.Athena.Service.Core.Utility.Interfaces;
     using Model.BetList.MetaModel;
     using NSubstitute;
     using NUnit.Framework;
@@ -26,17 +27,20 @@
         private const string ApiPath = "/BetList/GetBetList";
 
         private const string PageApiPath = "/BetList/GetBetListPaging";
+        private IValidationService _validationService;
 
         [SetUp]
         public void SetUp()
         {
             MockSessionData();
-
+            _validationService = Substitute.For<IValidationService>();
+            _validationService.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
+            _validationService.IsValidBaseCurrency(Arg.Any<string>(), Arg.Any<bool>()).Returns(true);
             AuthorizationService.HasPermissionOnData(SessionLicenseeId, Arg.Any<int>(), Arg.Any<long>()).Returns(true);
         }
 
         [Test]
-        public async Task MatchBetType_InvalidCurrency_ReturnNull()
+        public async Task MatchBetType_InWhenCalled_ReturnNull()
         {
             using (var controller = CreateController())
             {
@@ -52,7 +56,7 @@
         }
 
         [Test]
-        public async Task Outright_InvalidCurrency_ReturnNull()
+        public async Task Outright_InWhenCalled_ReturnNull()
         {
             using (var controller = CreateController())
             {
@@ -68,7 +72,7 @@
         }
 
         [Test]
-        public async Task MixParlay_InvalidCurrency_ReturnNull()
+        public async Task MixParlay_InWhenCalled_ReturnNull()
         {
             using (var controller = CreateController())
             {
@@ -86,7 +90,7 @@
         [TestCase(0)]
         [TestCase(1)]
         [TestCase(2)]
-        public async Task MatchBetType_ValidCurrency_CallBetListApiWithCorrectParameters(int currencyId)
+        public async Task MatchBetType_WhenCalled_CallBetListApiWithCorrectParameters(int currencyId)
         {
             using (var controller = CreateController())
             {
@@ -116,7 +120,7 @@
         [TestCase(0)]
         [TestCase(1)]
         [TestCase(2)]
-        public async Task Outright_ValidCurrency_CallBetListApiWithCorrectParameters(int currencyId)
+        public async Task Outright_WhenCalled_CallBetListApiWithCorrectParameters(int currencyId)
         {
             using (var controller = CreateController())
             {
@@ -143,7 +147,7 @@
         [TestCase(0, "", "")]
         [TestCase(1, null, "")]
         [TestCase(2, "usd", "usd")]
-        public async Task MixParlay_ValidCurrency_CallBetListApiWithCorrectParameters(int currencyId, string baseCurrency, string expectedBaseCurrency)
+        public async Task MixParlay_WhenCalled_CallBetListApiWithCorrectParameters(int currencyId, string baseCurrency, string expectedBaseCurrency)
         {
             using (var controller = CreateController())
             {
@@ -195,7 +199,7 @@
                 LangService,
                 AuthorizationService,
                 BetListApiClient,
-                BalanceUpDataAccess);
+                BalanceUpDataAccess, _validationService);
         }
     }
 }

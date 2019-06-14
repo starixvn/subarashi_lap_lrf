@@ -39,6 +39,7 @@
             return ExcelStream(excel.Workbook, fileName);
         }
 
+        [ValidationApiRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
         public HttpResponseMessage ExportExcel(PromotionPrizeMetaModel metaModel)
         {
             const string FileName = "PP_PromotionPrize.xls";
@@ -46,9 +47,7 @@
 
             metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId, metaModel.IsExcludedTestData);
 
-            var data = ValidateRequest(metaModel)
-                ? _dataAccess.GetData(metaModel, SessionService.UserSession.CurrencyList)
-                : new ReportResultModel<PromotionPrize>();
+            var data = _dataAccess.GetData(metaModel, SessionService.UserSession.CurrencyList);
 
             var title = ReportExcelHelper.GenerateReportTitle(
                 ViewResources.ProductPP + " - " + @ViewResources.PromotionPrize,
@@ -59,9 +58,6 @@
             return CreareExcel(templatePath, title, FileName, data);
         }
 
-        private bool ValidateRequest(PromotionPrizeMetaModel metaModel)
-        {
-            return metaModel.FromDate <= metaModel.ToDate && IsValidCurrency(metaModel.CurrencyId);
-        }
+
     }
 }
