@@ -11,7 +11,7 @@ namespace Fanex.Athena.Model.Customer.MetaModel
     using Core.MetaModel;
     using Fanex.Athena.Model.Core.DTO.Common;
 
-    public class CustomerListMetaModel : BaseMetaModel, IMetaModelValidation
+    public class CustomerListMetaModel : BaseMetaModel
     {
         private const int DefaultPageSize = 1000;
 

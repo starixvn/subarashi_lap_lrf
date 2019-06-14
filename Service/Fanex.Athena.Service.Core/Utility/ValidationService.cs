@@ -1,5 +1,6 @@
 ﻿using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Model.Core.MetaModel;
+using Fanex.Athena.Service.Core.Users.Interfaces;
 using Fanex.Athena.Service.Core.Utility.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -11,24 +12,10 @@ namespace Fanex.Athena.Service.Core.Utility
 {
     public class ValidationService : IValidationService
     {
-        public bool IsValidCurrency(int currencyId, bool isIncludeKeanOcean = false)
+        private readonly ISessionService _sessionService;
+        public ValidationService(ISessionService sessionService)
         {
-            throw new NotImplementedException();
-        }
-
-        public bool IsValidCurrency(int[] currencies)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool IsValidMetalModel(IMetaModelValidation model)
-        {
-            return model != null && model.IsValid;
-        }
-
-        public bool IsValidProductCode(string productCodeList)
-        {
-            throw new NotImplementedException();
+            _sessionService = sessionService;
         }
         private static bool ValidateBaseCurrency(string baseCurrency, bool isAllowEmpty = true)
         {
@@ -60,6 +47,57 @@ namespace Fanex.Athena.Service.Core.Utility
 
             return !currencyList.Any(x => !userCurrencyList.ContainsKey(x));
 
+        }
+        public bool IsValidMetalModel(IMetaModelValidation model)
+        {
+            return model != null && model.IsValid;
+        }
+
+        public bool IsValid(ValidationMetaModelOption option, object model)
+        {
+            if (option is null || model is null)
+            {
+                return false;
+            }
+
+            var result = IsValidMetalModel(model as IMetaModelValidation);
+            if (option.IsValidCurrency)
+            {
+                result &= IsValidCurrency(model as IMetaModelCurrency, option.IsIncludeKeanOcean);
+            }
+            if (option.IsValidCurrencyList)
+            {
+                result &= IsValidCurrency(model as IMetaModelCurrencyList);
+            }
+            if (option.IsValidProductCodeList)
+            {
+                result &= IsValidProductCode(model as IMetaModelProductCodeList);
+            }
+
+            return result;
+        }
+
+        public bool IsValidProductCode(IMetaModelProductCodeList model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsValidCurrency(IMetaModelCurrency model, bool isIncludeKeanOcean = false)
+        {
+            var currencyList = _sessionService.UserSession.CurrencyList;
+            if (isIncludeKeanOcean)
+            {
+                return ValidateCurrencyWithKeanOceanOption(model.CurrencyId
+                    , currencyList
+                    , _sessionService.LicenseeSession.LicenseeId);
+            }
+
+            return ValidateCurrency(model.CurrencyId, currencyList);
+        }
+
+        public bool IsValidCurrency(IMetaModelCurrencyList currencieList)
+        {
+            throw new NotImplementedException();
         }
     }
 }

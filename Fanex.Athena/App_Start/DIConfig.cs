@@ -40,7 +40,7 @@ namespace Fanex.Athena
 
             builder.RegisterFilterProvider();
             builder.RegisterWebApiFilterProvider(config);
-
+            
             RegisterThirdpartyServices(builder);
 
             // generic types

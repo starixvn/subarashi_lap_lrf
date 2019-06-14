@@ -15,7 +15,7 @@ namespace Fanex.Athena.Model.Core.MetaModel
     using Fanex.Athena.Model.Core.Helper;
 
     [Serializable]
-    public class BaseMetaModel
+    public class BaseMetaModel : IMetaModelCurrency, IMetaModelValidation
     {
         private string _baseCurrency = string.Empty;
 

@@ -8,7 +8,7 @@ using Fanex.Athena.Model.Core.MetaModel;
 
 namespace Fanex.Athena.Model.Report.MetaModel
 {
-    public class LicenseeWinLossMetaModel : BaseDrilldownReportMetaModel, IMetaModelValidation
+    public class LicenseeWinLossMetaModel : BaseDrilldownReportMetaModel
     {
         public byte ReportBy { get; set; }
 

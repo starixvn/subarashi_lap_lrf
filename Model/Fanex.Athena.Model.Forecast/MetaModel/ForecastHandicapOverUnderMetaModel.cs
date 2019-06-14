@@ -11,7 +11,7 @@ namespace Fanex.Athena.Model.Forecast.MetaModel
     /// <summary>
     /// Forecast HDP OU MetaModel class.
     /// </summary>
-    public class ForecastHandicapOverUnderMetaModel : ForecastBaseMetaModel, IMetaModelValidation
+    public class ForecastHandicapOverUnderMetaModel : ForecastBaseMetaModel
     {
         public ForecastHandicapOverUnderMetaModel()
         {

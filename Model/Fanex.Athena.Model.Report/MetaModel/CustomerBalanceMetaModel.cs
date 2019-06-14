@@ -9,7 +9,7 @@ namespace Fanex.Athena.Model.Report.MetaModel
     using Fanex.Athena.Model.Core.MetaModel;
     using System;
 
-    public class CustomerBalanceMetaModel : BaseReportMetaModel, IMetaModelValidation
+    public class CustomerBalanceMetaModel : BaseReportMetaModel
     {
         public CustomerBalanceMetaModel()
         {

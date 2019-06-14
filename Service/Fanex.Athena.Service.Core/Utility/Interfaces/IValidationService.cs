@@ -9,9 +9,10 @@ namespace Fanex.Athena.Service.Core.Utility.Interfaces
 {
     public interface IValidationService
     {
-        bool IsValidMetalModel(IMetaModelValidation item);
-        bool IsValidProductCode(string productCodeList);
-        bool IsValidCurrency(int currencyId, bool isIncludeKeanOcean = false);
-        bool IsValidCurrency(int[] currencies);
+        bool IsValid(ValidationMetaModelOption option, object model);
+        bool IsValidMetalModel(IMetaModelValidation model);
+        bool IsValidProductCode(IMetaModelProductCodeList model);
+        bool IsValidCurrency(IMetaModelCurrency model, bool isIncludeKeanOcean = false);
+        bool IsValidCurrency(IMetaModelCurrencyList currencieList);
     }
 }

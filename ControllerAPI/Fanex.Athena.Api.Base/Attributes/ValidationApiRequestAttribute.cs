@@ -21,6 +21,7 @@ namespace Fanex.Athena.Api.Base.Attributes
         public string ObjectName { get; set; }
 
         public bool IsValidCurrency { get; set; }
+        public bool IsValidCurrencyList { get; set; }
         public bool IsIncludeKeanOcean { get; set; }
         public bool IsValidProductCodeList { get; set; }
 
@@ -33,15 +34,21 @@ namespace Fanex.Athena.Api.Base.Attributes
 
         private void ValidateRequest(HttpActionContext actionContext)
         {
-            var model = !string.IsNullOrEmpty(ObjectName) ? actionContext.ActionArguments[ObjectName] as IMetaModelValidation
+            var root = !string.IsNullOrEmpty(ObjectName) ? actionContext.ActionArguments[ObjectName]
                  : actionContext.ActionArguments.Where(x => x.Value is IMetaModelValidation)
-                      .Select(x => (IMetaModelValidation)x.Value).FirstOrDefault();
+                      .Select(x => x.Value).FirstOrDefault();
 
             var scope = actionContext.Request.GetDependencyScope();
 
             var validationService = scope.Resolve<IValidationService>();
-            var result = validationService.IsValidMetalModel(model);
-            if (!result)
+
+            if (!validationService.IsValid(new ValidationMetaModelOption
+            {
+                IsValidProductCodeList = IsValidProductCodeList,
+                IsIncludeKeanOcean = IsIncludeKeanOcean,
+                IsValidCurrency = IsValidCurrency,
+                IsValidCurrencyList = IsValidCurrencyList
+            }, root))
             {
                 actionContext.Response = new HttpResponseMessage
                 {

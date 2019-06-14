@@ -11,7 +11,7 @@ namespace Fanex.Athena.Model.Report.MetaModel
     /// <summary>
     /// ActiveCustomerMetaModel class.
     /// </summary>
-    public class ActiveCustomerMetaModel : BaseReportMetaModel, IMetaModelValidation
+    public class ActiveCustomerMetaModel : BaseReportMetaModel
     {
         public ActiveCustomerMetaModel()
         {

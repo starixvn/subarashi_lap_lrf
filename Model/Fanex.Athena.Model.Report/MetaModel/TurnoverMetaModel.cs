@@ -12,7 +12,7 @@ namespace Fanex.Athena.Model.Report.MetaModel
     /// <summary>
     /// TurnoverMetaModel class.
     /// </summary>
-    public class TurnoverMetaModel : BaseReportMetaModel, IMetaModelValidation
+    public class TurnoverMetaModel : BaseReportMetaModel
     {
         public TurnoverMetaModel()
         {

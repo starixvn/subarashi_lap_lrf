@@ -13,7 +13,7 @@ namespace Fanex.Athena.Model.Report.MetaModel
     using Fanex.Athena.Model.Core.MetaModel.Product;
     using Model.Core.MetaModel;
 
-    public class BaseReportMetaModel : BaseMetaModel
+    public class BaseReportMetaModel : BaseMetaModel, IMetaModelProductCodeList, IMetaModelValidation
     {
         protected const int DefaultPageSize = 1000;
 

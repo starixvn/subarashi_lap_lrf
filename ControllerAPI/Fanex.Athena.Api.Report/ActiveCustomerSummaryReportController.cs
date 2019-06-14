@@ -44,7 +44,7 @@ namespace Fanex.Athena.Api.Report
         }
 
         [HttpPost]
-        [ValidationApiRequest]
+        [ValidationApiRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
         public Task<dynamic> Index(ActiveCustomerMetaModel metaModel)
         {
             return ProcessRequest(metaModel);
@@ -131,30 +131,29 @@ namespace Fanex.Athena.Api.Report
 
         private async Task<dynamic> ProcessRequest(ActiveCustomerMetaModel metaModel)
         {
-            if (IsValidCurrency(metaModel.CurrencyId))
+
+            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId, metaModel.IsExcludeTest);
+
+            var result =
+                await _activeCustomerSummaryDataAccess.GetActiveCustomers(metaModel);
+
+            if (metaModel.IsExportExcel)
             {
-                metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId, metaModel.IsExcludeTest);
-
-                var result =
-                    await _activeCustomerSummaryDataAccess.GetActiveCustomers(metaModel);
-
-                if (metaModel.IsExportExcel)
-                {
-                    return ExportExcel(metaModel, result);
-                }
-
-                if (result.DataList.Any())
-                {
-                    SortData(result.DataList, metaModel.SortBy, metaModel.SortOrder);
-
-                    return new
-                    {
-                        Data = result.DataList,
-                        GrantTotalCustomer = result.TotalCustomer,
-                        ProductOptions = metaModel.ProductOptions.ToJson()
-                    };
-                }
+                return ExportExcel(metaModel, result);
             }
+
+            if (result.DataList.Any())
+            {
+                SortData(result.DataList, metaModel.SortBy, metaModel.SortOrder);
+
+                return new
+                {
+                    Data = result.DataList,
+                    GrantTotalCustomer = result.TotalCustomer,
+                    ProductOptions = metaModel.ProductOptions.ToJson()
+                };
+            }
+
 
             return GetEmptyResult(metaModel);
         }

@@ -1,4 +1,6 @@
 ﻿using Fanex.Athena.Model.Core.MetaModel;
+using Fanex.Athena.Service.Core.Users;
+using Fanex.Athena.Service.Core.Users.Interfaces;
 using Fanex.Athena.Service.Core.Utility;
 using Fanex.Athena.Service.Core.Utility.Interfaces;
 using System;
@@ -11,32 +13,35 @@ using System.Web.Routing;
 
 namespace Fanex.Athena.Web.ActionFilter
 {
-    [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
+    [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
     public class ValidationWebRequestAttribute : ActionFilterAttribute
     {
+#pragma warning disable S3459 // Unassigned members should be removed
         private readonly IValidationService _validationService;
-        public ValidationWebRequestAttribute() : this(null)
-        {
+#pragma warning restore S3459 // Unassigned members should be removed
 
-        }
-        public ValidationWebRequestAttribute(IValidationService validationService)
-        {
-            _validationService = validationService ?? new ValidationService();
-        }
         public string ObjectName { get; set; }
         public bool IsValidCurrency { get; set; }
         public bool IsIncludeKeanOcean { get; set; }
         public bool IsValidProductCodeList { get; set; }
+        public bool IsValidCurrencyList { get; set; }
+
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             base.OnActionExecuting(filterContext);
-            var model = !string.IsNullOrEmpty(ObjectName) ? filterContext.ActionParameters[ObjectName] as IMetaModelValidation
+            var model = !string.IsNullOrEmpty(ObjectName) ? filterContext.ActionParameters[ObjectName] 
                  : filterContext.ActionParameters.Where(x => x.Value is IMetaModelValidation)
-                      .Select(x => (IMetaModelValidation)x.Value).FirstOrDefault();
+                      .Select(x => x.Value).FirstOrDefault();
 
-            var result = _validationService.IsValidMetalModel(model);
+            var result = _validationService.IsValid(new ValidationMetaModelOption
+            {
+                IsIncludeKeanOcean = IsIncludeKeanOcean,
+                IsValidCurrency = IsValidCurrency,
+                IsValidProductCodeList = IsValidProductCodeList
 
-            if(!result)
+            }, model);
+
+            if (!result)
             {
                 filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new
                 {

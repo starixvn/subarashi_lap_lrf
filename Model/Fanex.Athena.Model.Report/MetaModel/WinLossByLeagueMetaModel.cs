@@ -12,7 +12,7 @@ namespace Fanex.Athena.Model.Report.MetaModel
     /// <summary>
     /// TurnoverMetaModel class.
     /// </summary>
-    public class WinLossByLeagueMetaModel : BaseReportMetaModel, IMetaModelValidation
+    public class WinLossByLeagueMetaModel : BaseReportMetaModel
     {
         public int CustomerId { get; set; }
 
