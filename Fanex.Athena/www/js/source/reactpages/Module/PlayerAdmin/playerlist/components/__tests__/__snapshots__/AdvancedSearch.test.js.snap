@@ -1,0 +1,270 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AdvancedSearch render with initial state - should match snapshot 1`] = `
+<Fragment>
+  <div
+    className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2"
+  >
+    <div
+      className="form-group"
+    >
+      <label
+        className="label-text"
+      >
+        Currency
+      </label>
+      <t
+        dataSource={
+          Array [
+            Object {
+              "Id": "eur",
+              "Status": true,
+              "Value": "EUR",
+            },
+            Object {
+              "Id": "usd",
+              "Status": false,
+              "Value": "usd",
+            },
+          ]
+        }
+        hasAllOption={true}
+        hasSearchBox={false}
+        id="currency"
+        keyField="Id"
+        language="en-US"
+        onChange={[Function]}
+        statusField="Status"
+        valueField="Value"
+      />
+    </div>
+  </div>
+  <div
+    className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2"
+  >
+    <div
+      className="form-group"
+    >
+      <label
+        className="label-text"
+      >
+        Based
+      </label>
+      <Select
+        arrowRenderer={[Function]}
+        autosize={true}
+        backspaceRemoves={true}
+        backspaceToRemoveMessage="Press backspace to remove {label}"
+        clearAllText="Clear all"
+        clearRenderer={[Function]}
+        clearValueText="Clear value"
+        clearable={true}
+        closeOnSelect={true}
+        deleteRemoves={true}
+        delimiter=","
+        disabled={false}
+        escapeClearsValue={true}
+        filterOptions={[Function]}
+        ignoreAccents={true}
+        ignoreCase={true}
+        inputProps={Object {}}
+        instanceId="ddlBased"
+        isLoading={false}
+        joinValues={false}
+        labelKey="label"
+        matchPos="any"
+        matchProp="any"
+        menuBuffer={0}
+        menuRenderer={[Function]}
+        multi={false}
+        name="basedCurrency"
+        noResultsText="No results found"
+        onBlurResetsInput={true}
+        onChange={[Function]}
+        onCloseResetsInput={true}
+        onSelectResetsInput={true}
+        openOnClick={true}
+        optionComponent={[Function]}
+        options={
+          Array [
+            Object {
+              "label": "EUR",
+              "value": "eur",
+            },
+            Object {
+              "label": "USD",
+              "value": "usd",
+            },
+          ]
+        }
+        pageSize={5}
+        placeholder="Select..."
+        removeSelected={true}
+        required={false}
+        rtl={false}
+        scrollMenuIntoView={true}
+        searchable={true}
+        simpleValue={false}
+        tabSelectsValue={true}
+        trimFilter={true}
+        value="usd"
+        valueComponent={[Function]}
+        valueKey="value"
+      />
+    </div>
+  </div>
+  <div
+    className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2"
+  >
+    <div
+      className="form-group"
+    >
+      <label
+        className="label-text"
+      >
+        Odds Group
+      </label>
+      <t
+        dataSource={
+          Array [
+            Object {
+              "Id": "A",
+              "Status": true,
+              "Value": "A",
+            },
+            Object {
+              "Id": "B",
+              "Status": false,
+              "Value": "B",
+            },
+            Object {
+              "Id": "C",
+              "Status": true,
+              "Value": "C",
+            },
+          ]
+        }
+        hasAllOption={true}
+        hasSearchBox={false}
+        id="oddsGroup"
+        keyField="Id"
+        language="en-US"
+        onChange={[Function]}
+        statusField="Status"
+        valueField="Value"
+      />
+    </div>
+  </div>
+  <div
+    className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2"
+  >
+    <div
+      className="form-group"
+    >
+      <label
+        className="label-text"
+      >
+        Subsidiary
+      </label>
+      <t
+        dataSource={
+          Array [
+            Object {
+              "Id": "s1",
+              "Status": true,
+              "Value": "S1",
+            },
+            Object {
+              "Id": "s2",
+              "Status": true,
+              "Value": "S2",
+            },
+          ]
+        }
+        hasAllOption={true}
+        hasSearchBox={false}
+        id="subsidiary"
+        keyField="Id"
+        language="en-US"
+        onChange={[Function]}
+        statusField="Status"
+        valueField="Value"
+      />
+    </div>
+  </div>
+  <div
+    className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2"
+  >
+    <div
+      className="form-group"
+    >
+      <label
+        className="label-text"
+      >
+        Special Level
+      </label>
+      <t
+        dataSource={
+          Array [
+            Object {
+              "Id": "1",
+              "Status": true,
+              "Value": "1",
+            },
+            Object {
+              "Id": "2",
+              "Status": true,
+              "Value": "2",
+            },
+          ]
+        }
+        hasAllOption={true}
+        hasSearchBox={false}
+        id="specialLevel"
+        keyField="Id"
+        language="en-US"
+        onChange={[Function]}
+        statusField="Status"
+        valueField="Value"
+      />
+    </div>
+  </div>
+  <div
+    className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2"
+  >
+    <div
+      className="form-group"
+    >
+      <label
+        className="label-text"
+      >
+        BA
+      </label>
+      <t
+        dataSource={
+          Array [
+            Object {
+              "Id": "On",
+              "Status": true,
+              "Value": "On",
+            },
+            Object {
+              "Id": "Off",
+              "Status": true,
+              "Value": "Off",
+            },
+          ]
+        }
+        hasAllOption={true}
+        hasSearchBox={false}
+        id="ba"
+        keyField="Id"
+        language="en-US"
+        onChange={[Function]}
+        statusField="Status"
+        valueField="Value"
+      />
+    </div>
+  </div>
+</Fragment>
+`;
