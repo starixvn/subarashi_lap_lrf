@@ -8,6 +8,7 @@ namespace Fanex.Athena.DataAccess.Report
 {
     using System.Collections.Generic;
     using System.Data;
+    using System.Linq;
     using System.Threading.Tasks;
     using Core;
     using Core.Configuration.Interfaces;
@@ -44,17 +45,38 @@ namespace Fanex.Athena.DataAccess.Report
             return GetData("Lrf_Rpt_ColossusBetsWinloss_detail", currencyList, metaModel);
         }
 
-        private static void ReadSummaryTotal(IDataReader reader, IDictionary<string, ColossusBetWinLoss> summaryTotal)
+        private static Dictionary<string, ColossusBetWinLoss> InitSummaryTotalList(string defaultBaseCurrency)
         {
+            var summary = new Dictionary<string, ColossusBetWinLoss>();
             foreach (var currency in SystemConstants.BaseCurrencyListOfSummaryTotalRow)
             {
-                summaryTotal[currency].TotalTransaction += reader.ToInt("totaltrans");
-                summaryTotal[currency].TurnOver += reader.ToDecimal("turnover" + currency);
-                summaryTotal[currency].MemberWinning += reader.ToDecimal("winningprize" + currency);
-                summaryTotal[currency].CashOut += reader.ToDecimal("cashoutamt" + currency);
-                summaryTotal[currency].CashOutShare += reader.ToDecimal("cashinamt" + currency);
-                summaryTotal[currency].CommissionShare += reader.ToDecimal("commamt" + currency);
-                summaryTotal[currency].GrandPrize += reader.ToDecimal("grandamt" + currency);
+                summary.Add(currency, new ColossusBetWinLoss());
+            }
+
+            if (!string.IsNullOrEmpty(defaultBaseCurrency) &&
+                !SystemConstants.BaseCurrencyListOfSummaryTotalRow.Any(x => x.Equals(defaultBaseCurrency, System.StringComparison.OrdinalIgnoreCase)))
+            {
+                summary.Add(defaultBaseCurrency.ToUpperInvariant(), new ColossusBetWinLoss());
+            }
+
+            return summary;
+        }
+
+        private static void ReadSummaryTotal(IDataReader reader, IDictionary<string, ColossusBetWinLoss> summaryTotal, string defaultBaseCurrency)
+        {
+            foreach (var summary in summaryTotal)
+            {
+                var suffixColumn = !string.IsNullOrEmpty(defaultBaseCurrency) && summary.Key.Equals(defaultBaseCurrency, System.StringComparison.OrdinalIgnoreCase)
+                                     ? "Base"
+                                     : summary.Key;
+
+                summary.Value.TotalTransaction += reader.ToInt("totaltrans");
+                summary.Value.TurnOver += reader.ToDecimal("turnover" + suffixColumn);
+                summary.Value.MemberWinning += reader.ToDecimal("winningprize" + suffixColumn);
+                summary.Value.CashOut += reader.ToDecimal("cashoutamt" + suffixColumn);
+                summary.Value.CashOutShare += reader.ToDecimal("cashinamt" + suffixColumn);
+                summary.Value.CommissionShare += reader.ToDecimal("commamt" + suffixColumn);
+                summary.Value.GrandPrize += reader.ToDecimal("grandamt" + suffixColumn);
             }
         }
 
@@ -65,7 +87,7 @@ namespace Fanex.Athena.DataAccess.Report
         {
             using (var db = this.GetObjectDb(spname))
             {
-                UpdateUspParams(db, metaModel, metaModel.DrillDownLevel > 0);
+                UpdateUspParams(db, metaModel, metaModel.DrillDownLevel > (int)ReportLevel.Main);
                 using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))
                 {
                     return ReadData(reader, currencyList, metaModel);
@@ -81,6 +103,8 @@ namespace Fanex.Athena.DataAccess.Report
             db.SetParameterValue("ReportType", metaModel.ReportBy);
             db.SetParameterValue("AgentList", metaModel.AgentListXml);
             db.SetParameterValue("TicketType", metaModel.TicketType);
+            db.SetParameterValue("BaseCurrency", metaModel.BaseCurrency);
+            db.SetParameterValue("DefaultBaseCurrency", metaModel.DefaultBaseCurrency);
         }
 
         private SortableReportResultModel<ColossusBetWinLoss> ReadData(
@@ -88,24 +112,14 @@ namespace Fanex.Athena.DataAccess.Report
              IDictionary<int, string> currencyList,
             ColossusBetsWinLossMetaModel metaModel)
         {
-            var turnoverColumn = "turnover" + metaModel.BaseCurrency;
-            var memberWinningColumn = "winningprize" + metaModel.BaseCurrency;
-            var cashOutColumn = "cashoutamt" + metaModel.BaseCurrency;
-            var cashOutShareColumn = "cashinamt" + metaModel.BaseCurrency;
-            var grantPrizeColumn = "grandamt" + metaModel.BaseCurrency;
-            var commColumn = "commamt" + metaModel.BaseCurrency;
             var hasSystemId = reader.HasColumn("systemid");
             var hasExternalId = reader.HasColumn("externalid");
             var hasCustomerId = reader.HasColumn("custid");
             var index = 1;
-            var isFirstLevel = metaModel.DrillDownLevel == 0;
+            var isFirstLevel = metaModel.DrillDownLevel == (int)ReportLevel.Main;
             var isMonthly = metaModel.ReportBy == ReportByType.Monthly;
             var result = new SortableList<ColossusBetWinLoss>();
-            var summaryTotal = new Dictionary<string, ColossusBetWinLoss>();
-            foreach (var currency in SystemConstants.BaseCurrencyListOfSummaryTotalRow)
-            {
-                summaryTotal.Add(currency, new ColossusBetWinLoss());
-            }
+            var summaryTotal = InitSummaryTotalList(metaModel.DefaultBaseCurrency);
 
             while (reader.Read())
             {
@@ -118,16 +132,16 @@ namespace Fanex.Athena.DataAccess.Report
                     CustomerId = hasCustomerId ? reader.ToInt("custid") : 0,
                     CurrencyId = currencyId,
                     CurrencyName = currencyList?.GetValueOrDefault(currencyId, currencyId.ToString()),
-                    TurnOver = reader.ToDecimal(turnoverColumn),
+                    TurnOver = reader.ToDecimal("turnover"),
                     TotalTransaction = reader.ToInt("totaltrans"),
-                    MemberWinning = reader.ToDecimal(memberWinningColumn),
-                    CashOut = reader.ToDecimal(cashOutColumn),
-                    CashOutShare = reader.ToDecimal(cashOutShareColumn),
-                    CommissionShare = reader.ToDecimal(commColumn),
-                    GrandPrize = reader.ToDecimal(grantPrizeColumn),
+                    MemberWinning = reader.ToDecimal("winningprize"),
+                    CashOut = reader.ToDecimal("cashoutamt"),
+                    CashOutShare = reader.ToDecimal("cashinamt"),
+                    CommissionShare = reader.ToDecimal("commamt"),
+                    GrandPrize = reader.ToDecimal("grandamt"),
                     Date = isFirstLevel ? ConvertHelper.ToDateTime(reader.ToString("reporttype"), isMonthly) : metaModel.DrillDownFromDate
                 });
-                ReadSummaryTotal(reader, summaryTotal);
+                ReadSummaryTotal(reader, summaryTotal, metaModel.DefaultBaseCurrency);
             }
 
             return new SortableReportResultModel<ColossusBetWinLoss>
