@@ -68,20 +68,24 @@ namespace Fanex.Athena.DataAccess.Report
             }
         }
 
-        private static void ReadSummaryTotal(IDataReader reader, IDictionary<string, CashOutWinLoss> summaryTotal)
+        private static void ReadSummaryTotal(IDataReader reader, IDictionary<string, CashOutWinLoss> summaryTotal, string defaultBaseCurrency)
         {
-            foreach (var currency in SystemConstants.BaseCurrencyListOfSummaryTotalRow)
+            foreach (var summary in summaryTotal)
             {
-                summaryTotal[currency].CashOutValue += reader.ToDecimal("cashoutvalue" + currency);
-                summaryTotal[currency].CashOutTickets += reader.ToInt("cashoutticket");
-                summaryTotal[currency].CashOutTimes += reader.ToInt("cashouttime");
-                summaryTotal[currency].BuyBackAmountSB += reader.ToDecimal("buybackamountSB" + currency);
-                summaryTotal[currency].BuyBackAmountBA += reader.ToDecimal("buybackamountBA" + currency);
-                summaryTotal[currency].TicketPayout += reader.ToDecimal("ticketpayout" + currency);
-                summaryTotal[currency].CashOutCommission += reader.ToDecimal("cashoutcomm" + currency);
-                summaryTotal[currency].SettleAmountTicketPayout += reader.ToDecimal("AmountDue_TicketPayout" + currency);
-                summaryTotal[currency].SettleAmountBuyBackComm += reader.ToDecimal("AmountDue_Comm" + currency);
-                summaryTotal[currency].SettleAmountTotal += reader.ToDecimal("Amount_Total" + currency);
+                var suffixColumn = !string.IsNullOrEmpty(defaultBaseCurrency) && summary.Key.Equals(defaultBaseCurrency, System.StringComparison.OrdinalIgnoreCase)
+                                     ? "Base"
+                                     : summary.Key;
+
+                summary.Value.CashOutValue += reader.ToDecimal("cashoutvalue" + suffixColumn);
+                summary.Value.CashOutTickets += reader.ToInt("cashoutticket");
+                summary.Value.CashOutTimes += reader.ToInt("cashouttime");
+                summary.Value.BuyBackAmountSB += reader.ToDecimal("buybackamountSB" + suffixColumn);
+                summary.Value.BuyBackAmountBA += reader.ToDecimal("buybackamountBA" + suffixColumn);
+                summary.Value.TicketPayout += reader.ToDecimal("ticketpayout" + suffixColumn);
+                summary.Value.CashOutCommission += reader.ToDecimal("cashoutcomm" + suffixColumn);
+                summary.Value.SettleAmountTicketPayout += reader.ToDecimal("AmountDue_TicketPayout" + suffixColumn);
+                summary.Value.SettleAmountBuyBackComm += reader.ToDecimal("AmountDue_Comm" + suffixColumn);
+                summary.Value.SettleAmountTotal += reader.ToDecimal("Amount_Total" + suffixColumn);
             }
         }
 
@@ -127,12 +131,31 @@ namespace Fanex.Athena.DataAccess.Report
             }).ToList();
         }
 
+        private static Dictionary<string, CashOutWinLoss> InitSummaryTotalList(string defaultBaseCurrency)
+        {
+            var summary = new Dictionary<string, CashOutWinLoss>();
+            foreach (var currency in SystemConstants.BaseCurrencyListOfSummaryTotalRow)
+            {
+                summary.Add(currency, new CashOutWinLoss());
+            }
+
+            if (!string.IsNullOrEmpty(defaultBaseCurrency) &&
+                !SystemConstants.BaseCurrencyListOfSummaryTotalRow.Any(x => x.Equals(defaultBaseCurrency, System.StringComparison.OrdinalIgnoreCase)))
+            {
+                summary.Add(defaultBaseCurrency.ToUpperInvariant(), new CashOutWinLoss());
+            }
+
+            return summary;
+        }
+
         private void UpdateUspParams(IObjectDb db, ThirdPartyWinLossMetaModel metaModel, bool drilldown)
         {
             db.SetParameterValue("fromdate", drilldown ? metaModel.DrillDownFromDate : metaModel.FromDate.Date);
             db.SetParameterValue("todate", drilldown ? metaModel.DrillDownToDate : metaModel.ToDate.Date);
             db.SetParameterValue("AgentList", metaModel.AgentListXml);
             db.SetParameterValue("MoveBetsDay", _balanceUpDataAccess.GetBalanceUp().MoveBetsDay);
+            db.SetParameterValue("BaseCurrency", metaModel.BaseCurrency);
+            db.SetParameterValue("DefaultBaseCurrency", metaModel.DefaultBaseCurrency);
         }
 
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules", "SP2101:MethodMustNotContainMoreLinesThan",
@@ -141,23 +164,7 @@ namespace Fanex.Athena.DataAccess.Report
         {
             var result = new SortableList<CashOutWinLoss>();
 
-            var summaryTotal = new Dictionary<string, CashOutWinLoss>();
-            foreach (var currency in SystemConstants.BaseCurrencyListOfSummaryTotalRow)
-            {
-                summaryTotal.Add(currency, new CashOutWinLoss());
-            }
-
-            var cashOutValueColumn = "cashoutvalue" + metaModel.BaseCurrency;
-
-            var buybackAmountSBColumn = "buybackamountSB" + metaModel.BaseCurrency;
-            var buybackAmountBAColumn = "buybackamountBA" + metaModel.BaseCurrency;
-
-            var ticketPayoutColumn = "ticketpayout" + metaModel.BaseCurrency;
-            var cashOutCommColumn = "cashoutcomm" + metaModel.BaseCurrency;
-
-            var settleTicketPayoutColumn = "AmountDue_TicketPayout" + metaModel.BaseCurrency;
-            var settleCommColumn = "AmountDue_Comm" + metaModel.BaseCurrency;
-            var settleTotalColumn = "Amount_Total" + metaModel.BaseCurrency;
+            var summaryTotal = InitSummaryTotalList(metaModel.DefaultBaseCurrency);
 
             var hasSystemId = reader.HasColumn("systemid");
             var hasExternalId = reader.HasColumn("externalid");
@@ -176,22 +183,22 @@ namespace Fanex.Athena.DataAccess.Report
                     CurrencyId = currencyId,
                     CurrencyName = currencyList?.GetValueOrDefault(currencyId, currencyId.ToString()),
                     CashOutTimes = reader.ToInt("cashouttime"),
-                    CashOutValue = reader.ToDecimal(cashOutValueColumn),
+                    CashOutValue = reader.ToDecimal("cashoutvalue"),
                     CashOutTickets = reader.ToInt("cashoutticket"),
-                    BuyBackAmountSB = reader.ToDecimal(buybackAmountSBColumn),
-                    BuyBackAmountBA = reader.ToDecimal(buybackAmountBAColumn),
-                    TicketPayout = reader.ToDecimal(ticketPayoutColumn),
-                    CashOutCommission = reader.ToDecimal(cashOutCommColumn),
-                    SettleAmountTicketPayout = reader.ToDecimal(settleTicketPayoutColumn),
-                    SettleAmountBuyBackComm = reader.ToDecimal(settleCommColumn),
-                    SettleAmountTotal = reader.ToDecimal(settleTotalColumn),
+                    BuyBackAmountSB = reader.ToDecimal("buybackamountSB"),
+                    BuyBackAmountBA = reader.ToDecimal("buybackamountBA"),
+                    TicketPayout = reader.ToDecimal("ticketpayout"),
+                    CashOutCommission = reader.ToDecimal("cashoutcomm"),
+                    SettleAmountTicketPayout = reader.ToDecimal("AmountDue_TicketPayout"),
+                    SettleAmountBuyBackComm = reader.ToDecimal("AmountDue_Comm"),
+                    SettleAmountTotal = reader.ToDecimal("Amount_Total"),
                     Date = isDrilldown
                         ? metaModel.DrillDownFromDate
                         : ConvertHelper.ToDateTime(reader.ToString("reporttype"), metaModel.ReportBy == ReportByType.Monthly)
                 };
 
                 result.Add(item);
-                ReadSummaryTotal(reader, summaryTotal);
+                ReadSummaryTotal(reader, summaryTotal, metaModel.DefaultBaseCurrency);
             }
 
             return new SortableReportResultModel<CashOutWinLoss>
