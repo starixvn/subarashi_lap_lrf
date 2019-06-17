@@ -91,44 +91,57 @@ namespace Fanex.Athena.DataAccess.Report
             }
         }
 
+        private static Dictionary<string, T> InitSummaryTotalList(string defaultBaseCurrency)
+        {
+            var summary = new Dictionary<string, T>();
+            foreach (var currency in SystemConstants.BaseCurrencyListOfSummaryTotalRow)
+            {
+                summary.Add(currency, Activator.CreateInstance<T>());
+            }
+
+            if (!string.IsNullOrEmpty(defaultBaseCurrency) &&
+                !SystemConstants.BaseCurrencyListOfSummaryTotalRow.Any(x => x.Equals(defaultBaseCurrency, System.StringComparison.OrdinalIgnoreCase)))
+            {
+                summary.Add(defaultBaseCurrency.ToUpperInvariant(), Activator.CreateInstance<T>());
+            }
+
+            return summary;
+        }
+
         [CLSCompliant(false)]
         protected virtual void UpdateUspParams(IObjectDb db, ThirdPartyWinLossMetaModel metaModel, bool drilldown)
         {
             db.SetParameterValue("AgentList", metaModel.AgentListXml);
             db.SetParameterValue("fromdate", drilldown ? metaModel.DrillDownFromDate : metaModel.FromDate.Date);
             db.SetParameterValue("todate", drilldown ? metaModel.DrillDownToDate : metaModel.ToDate.Date);
+            db.SetParameterValue("BaseCurrency", metaModel.BaseCurrency);
+            db.SetParameterValue("DefaultBaseCurrency", metaModel.DefaultBaseCurrency);
             if (metaModel.ProductId > 0)
             {
                 db.SetParameterValue("productid", metaModel.ProductId);
             }
         }
 
-        protected virtual void ReadSummaryTotal(IDataReader reader, IDictionary<string, T> summaryTotal)
+        protected virtual void ReadSummaryTotal(IDataReader reader, IDictionary<string, T> summaryTotal, string defaultBaseCurrency)
         {
-            SystemConstants.BaseCurrencyListOfSummaryTotalRow.ForEach(currency =>
+            foreach (var summary in summaryTotal)
             {
-                var item = summaryTotal[currency];
-                item.CustomerWinLoss += reader.ToDecimal("winlost" + currency);
-                item.TotalTransaction += reader.ToInt("totaltrans");
-                item.LicenseeWL += reader.ToDecimal("licenseewinlost" + currency);
-                item.TurnOver += reader.ToDecimal("turnover" + currency);
-            });
+                var suffixColumn = !string.IsNullOrEmpty(defaultBaseCurrency) && summary.Key.Equals(defaultBaseCurrency, System.StringComparison.OrdinalIgnoreCase)
+                                     ? "Base"
+                                     : summary.Key;
 
+                var item = summary.Value;
+                item.CustomerWinLoss += reader.ToDecimal("winlost" + suffixColumn);
+                item.TotalTransaction += reader.ToInt("totaltrans");
+                item.LicenseeWL += reader.ToDecimal("licenseewinlost" + suffixColumn);
+                item.TurnOver += reader.ToDecimal("turnover" + suffixColumn);
+            }
         }
 
         private ReportResultModel<T> GetData(IDataReader reader, IDictionary<int, string> currencyList, ThirdPartyWinLossMetaModel metaModel, int rowSpan = 0)
         {
             var result = new SortableList<T>();
-
-            var summaryTotal = new Dictionary<string, T>();
-            foreach (var currency in SystemConstants.BaseCurrencyListOfSummaryTotalRow)
-            {
-                summaryTotal.Add(currency, Activator.CreateInstance<T>());
-            }
-
-            var winlostColumn = "winlost" + metaModel.BaseCurrency;
-            var licenseewlColumn = "licenseewinlost" + metaModel.BaseCurrency;
-            var turnoverColumn = "turnover" + metaModel.BaseCurrency;
+            var summaryTotal = InitSummaryTotalList(metaModel.DefaultBaseCurrency);
 
             var hasSystemId = reader.HasColumn("username");
             var hasExternalId = reader.HasColumn("nickname");
@@ -147,16 +160,16 @@ namespace Fanex.Athena.DataAccess.Report
                 item.CustomerId = hasCustomerId ? reader.ToInt("custid") : 0;
                 item.CurrencyId = currencyId;
                 item.CurrencyName = currencyList?.GetValueOrDefault(currencyId, currencyId.ToString());
-                item.CustomerWinLoss = reader.ToDecimal(winlostColumn);
-                item.LicenseeWL = reader.ToDecimal(licenseewlColumn);
-                item.TurnOver = reader.ToDecimal(turnoverColumn);
+                item.CustomerWinLoss = reader.ToDecimal("winlost");
+                item.LicenseeWL = reader.ToDecimal("licenseewinlost");
+                item.TurnOver = reader.ToDecimal("turnover");
                 item.TotalTransaction = reader.ToInt("totaltrans");
                 item.Date = hasWinlostDate ? (DateTime?)reader.ToDateTime("winlostdate") : metaModel.DrillDownFromDate;
                 item.RowSpan = rowSpan;
-                PostReadItem(reader, item, metaModel.BaseCurrency);
+                PostReadItem(reader, item);
 
                 result.Add(item);
-                ReadSummaryTotal(reader, summaryTotal);
+                ReadSummaryTotal(reader, summaryTotal, metaModel.DefaultBaseCurrency);
             }
 
             return new ReportResultModel<T>
@@ -167,7 +180,7 @@ namespace Fanex.Athena.DataAccess.Report
             };
         }
 
-        protected virtual void PostReadItem(IDataReader reader, T item, string baseCurrency)
+        protected virtual void PostReadItem(IDataReader reader, T item)
         {
             // Read other columns for other products.
         }

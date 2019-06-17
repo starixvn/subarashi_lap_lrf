@@ -113,6 +113,7 @@
             // Action
             var result = await DataAccess.GetSummaryWinloss(_metaModel, UserCurrencyList);
             var firstOriginalItem = result.DataList.First();
+            
             // Assert
             Assert.Multiple(() =>
             {

@@ -385,7 +385,6 @@
                 SettleAmountTicketPayout = 15m,
                 SettleAmountBuyBackComm = 16m,
                 SettleAmountTotal = 17m
-
             };
         }
 
