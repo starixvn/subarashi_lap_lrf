@@ -6,7 +6,6 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Fanex.Athena.DataAccess.Report.Interfaces;
-    using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Common.Extensions;
@@ -30,20 +29,23 @@
             return GetAgentWinlossDetail(metaModel, currencyList, "Lrf_Rpt_GoldDeluxeWinloss_Ag");
         }
 
-        protected override void ReadSummaryTotal(IDataReader reader, IDictionary<string, GoldDeluxeWinLoss> summaryTotal)
+        protected override void ReadSummaryTotal(IDataReader reader, IDictionary<string, GoldDeluxeWinLoss> summaryTotal, string defaultBaseCurrency)
         {
-            SystemConstants.BaseCurrencyListOfSummaryTotalRow.ForEach(currency =>
+            foreach (var summary in summaryTotal)
             {
+                var suffixColumn = !string.IsNullOrEmpty(defaultBaseCurrency) && summary.Key.Equals(defaultBaseCurrency, System.StringComparison.OrdinalIgnoreCase)
+                                     ? "Base"
+                                     : summary.Key;
 
-                var item = summaryTotal[currency];
-                item.CustomerWinLoss += reader.ToDecimal("winlost" + currency);
+                var item = summary.Value;
+                item.CustomerWinLoss += reader.ToDecimal("winlost" + suffixColumn);
                 item.TotalTransaction += reader.ToInt("totaltrans");
-                item.LicenseeWL += reader.ToDecimal("licenseewinlost" + currency);
-                item.TurnOver += reader.ToDecimal("turnover" + currency);
-                item.TipAmount += reader.ToDecimal("tipsamount" + currency);
-                item.TipSharing += reader.ToDecimal("tipssharing" + currency);
-                item.AmountDue += reader.ToDecimal("amountdue" + currency);
-            });
+                item.LicenseeWL += reader.ToDecimal("licenseewinlost" + suffixColumn);
+                item.TurnOver += reader.ToDecimal("turnover" + suffixColumn);
+                item.TipAmount += reader.ToDecimal("tipsamount" + suffixColumn);
+                item.TipSharing += reader.ToDecimal("tipssharing" + suffixColumn);
+                item.AmountDue += reader.ToDecimal("amountdue" + suffixColumn);
+            }
         }
 
         [CLSCompliant(false)]
@@ -53,11 +55,11 @@
             db.SetParameterValue("licenseeId", metaModel.LicenseeId);
         }
 
-        protected override void PostReadItem(IDataReader reader, GoldDeluxeWinLoss item, string baseCurrency)
+        protected override void PostReadItem(IDataReader reader, GoldDeluxeWinLoss item)
         {
-            item.TipAmount = reader.ToDecimal("tipsamount" + baseCurrency);
-            item.TipSharing = reader.ToDecimal("tipssharing" + baseCurrency);
-            item.AmountDue = reader.ToDecimal("amountdue" + baseCurrency);
+            item.TipAmount = reader.ToDecimal("tipsamount");
+            item.TipSharing = reader.ToDecimal("tipssharing");
+            item.AmountDue = reader.ToDecimal("amountdue");
         }
 
         protected override IEnumerable<GoldDeluxeWinLoss> CalculateTotal(IEnumerable<GoldDeluxeWinLoss> dataList)

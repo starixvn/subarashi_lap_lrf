@@ -8,9 +8,9 @@ namespace Fanex.Athena.DataAccess.Report.UnitTests.Testable
 {
     public class GoldDeluxeWinLossDataAccessTestable : GoldDeluxeWinLossDataAccess
     {
-        public void Public_ReadSummaryTotal(IDataReader reader, IDictionary<string, GoldDeluxeWinLoss> summaryTotal)
+        public void Public_ReadSummaryTotal(IDataReader reader, IDictionary<string, GoldDeluxeWinLoss> summaryTotal, string defaultBaseCurrency)
         {
-            ReadSummaryTotal(reader, summaryTotal);
+            ReadSummaryTotal(reader, summaryTotal, defaultBaseCurrency);
         }
 
         public void Public_UpdateUspParams(IObjectDb db, ThirdPartyWinLossMetaModel metaModel, bool drilldown)
@@ -18,9 +18,9 @@ namespace Fanex.Athena.DataAccess.Report.UnitTests.Testable
             UpdateUspParams(db, metaModel, drilldown);
         }
 
-        public void Public_PostReadItem(IDataReader reader, GoldDeluxeWinLoss item, string baseCurrency)
+        public void Public_PostReadItem(IDataReader reader, GoldDeluxeWinLoss item)
         {
-            PostReadItem(reader, item, baseCurrency);
+            PostReadItem(reader, item);
         }
 
         public IEnumerable<GoldDeluxeWinLoss> Public_CalculateTotal(IEnumerable<GoldDeluxeWinLoss> dataList)

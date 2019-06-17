@@ -97,13 +97,11 @@
             Reader.GetName(5).Returns("LicenseeWLSB");
             Reader.GetName(6).Returns("turnoverSB");
 
-            const decimal licenseeWL = 100;
-            const decimal turnover = 200;
             var readerDataMapping = new
             {
                 username = "testacc",
-                LicenseeWLSB = licenseeWL,
-                turnoverSB = turnover,
+                LicenseeWLSB = 100,
+                turnoverSB = 200,
                 reporttype = "20170101",
                 nickname = "nickname test",
                 custid = 108,
@@ -122,8 +120,8 @@
                 Assert.That(firstOriginalItem.SystemId, Is.EqualTo(readerDataMapping.username));
                 Assert.That(firstOriginalItem.ExternalId, Is.EqualTo(readerDataMapping.nickname));
                 Assert.That(firstOriginalItem.CustomerId, Is.EqualTo(readerDataMapping.custid));
-                Assert.That(firstOriginalItem.LicenseeWL["SB"], Is.EqualTo(licenseeWL));
-                Assert.That(firstOriginalItem.TurnOver["SB"], Is.EqualTo(turnover));
+                Assert.That(firstOriginalItem.LicenseeWL["SB"], Is.EqualTo(readerDataMapping.LicenseeWLSB));
+                Assert.That(firstOriginalItem.TurnOver["SB"], Is.EqualTo(readerDataMapping.turnoverSB));
                 Assert.That(result.AdditionalInfo, Is.EqualTo(readerDataMapping.PromotionPrize.ToString()));
             });
         }
