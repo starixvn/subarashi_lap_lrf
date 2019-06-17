@@ -127,7 +127,8 @@
         {
             var summaryTotal = new Dictionary<string, LicenseeWinLoss>();
             var baseCurrencies = SystemConstants.BaseCurrencyListOfSummaryTotalRow.Select(x => new { Name = x, SuffixColumn = x }).ToList();
-            if (!SystemConstants.BaseCurrencyListOfSummaryTotalRow.Any(x => x.Equals(metaModel.DefaultBaseCurrency, StringComparison.OrdinalIgnoreCase)))
+            if (!string.IsNullOrEmpty(metaModel.DefaultBaseCurrency) &&
+                !SystemConstants.BaseCurrencyListOfSummaryTotalRow.Any(x => x.Equals(metaModel.DefaultBaseCurrency, StringComparison.OrdinalIgnoreCase)))
             {
                 baseCurrencies.Add(new { Name = metaModel.DefaultBaseCurrency.ToUpperInvariant(), SuffixColumn = string.Empty });
             }
