@@ -1,0 +1,136 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PlayerDetail _renderTabList - should match snapshot 1`] = `
+<div>
+  <li
+    className="tab"
+    key="test1"
+  >
+    <a
+      className="active"
+      href="test1/action1?systemType=0"
+      onClick={[Function]}
+    >
+      Test 1
+    </a>
+  </li>
+  <li
+    className="tab"
+    key="test2"
+  >
+    <a
+      className=""
+      href="test1/action2?systemType=1"
+      onClick={[Function]}
+    >
+      Test 2
+    </a>
+  </li>
+  <li
+    className="tab"
+    key="test3"
+  >
+    <a
+      className=""
+      href="test2/action2?systemType=0"
+      onClick={[Function]}
+    >
+      Test 3
+    </a>
+  </li>
+</div>
+`;
+
+exports[`PlayerDetail render targetUrl has value - _buildActionUrl should not be called - match snapshot 1`] = `
+<div
+  className="wrapper"
+>
+  <div
+    className="pa-detail-container"
+  >
+    <div
+      className="page-filter-tab"
+    >
+      <div
+        className="header-tab"
+      >
+        <div
+          className="content-tab"
+        >
+          <ul
+            className="tabs"
+          >
+            This is tab list
+          </ul>
+        </div>
+      </div>
+      <div
+        className="tab-panel"
+      >
+        <div
+          className="pa-frame-container"
+        >
+          <iframe
+            frameBorder="0"
+            id="paDetailFrame"
+            name="paDetailFrame"
+            src="test/action"
+            style={
+              Object {
+                "height": 428,
+              }
+            }
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`PlayerDetail render with initial state - should match snapshot 1`] = `
+<div
+  className="wrapper"
+>
+  <div
+    className="pa-detail-container"
+  >
+    <div
+      className="page-filter-tab"
+    >
+      <div
+        className="header-tab"
+      >
+        <div
+          className="content-tab"
+        >
+          <ul
+            className="tabs"
+          >
+            This is tab list
+          </ul>
+        </div>
+      </div>
+      <div
+        className="tab-panel"
+      >
+        <div
+          className="pa-frame-container"
+        >
+          <iframe
+            frameBorder="0"
+            id="paDetailFrame"
+            name="paDetailFrame"
+            src="test1/index?systemType=0"
+            style={
+              Object {
+                "height": 428,
+              }
+            }
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
