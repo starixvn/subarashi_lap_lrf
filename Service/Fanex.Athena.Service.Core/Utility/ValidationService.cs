@@ -45,15 +45,15 @@ namespace Fanex.Athena.Service.Core.Utility
             }
             if (productValidationOption != null && productValidationOption.IsValidProductCodeList)
             {
-                result &= IsValidProductCode(model as IMetaModelProductCodeList, productValidationOption.FunctionKey);
+                result &= IsValidProductCode(model as IMetaModelProductCodeList, productValidationOption);
             }
 
             return result;
         }
 
-        private bool IsValidProductCode(IMetaModelProductCodeList model, string functionKey)
+        private bool IsValidProductCode(IMetaModelProductCodeList model, ProductValidationOption option)
         {
-            return model != null && _productValidation.IsValid(model, functionKey);
+            return model != null && _productValidation.IsValid(model, option);
         }
 
         private bool IsValidCurrency(IMetaModelCurrency model, bool isIncludeKeanOcean = false)

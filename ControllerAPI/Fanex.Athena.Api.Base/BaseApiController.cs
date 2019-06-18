@@ -89,21 +89,5 @@ namespace Fanex.Athena.Api.Base
             _langService.SetPageCulture(currentLanguage);
         }
 
-        protected string RemoveInvalidProducts(string productCodeList, string functionProductConfigKey)
-        {
-            if (string.IsNullOrWhiteSpace(productCodeList))
-            {
-                return string.Empty;
-            }
-
-            var productAccess = ProductService.GetProductAccess(
-                SessionService.LicenseeSession.LicenseeId,
-                SessionService.UserSession.Language,
-                functionProductConfigKey);
-            var productList = productAccess.ProductList;
-
-            var validProductCodes = productCodeList.Split(',').Where(x => productList.Any(y => y.ProductCode.Equals(x, StringComparison.OrdinalIgnoreCase)));
-            return string.Join(",", validProductCodes.ToArray());
-        }
     }
 }

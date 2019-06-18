@@ -153,7 +153,7 @@ namespace Fanex.Athena.Api.Report
                 {
                     Data = result.DataList,
                     Total = result.TotalDataList,
-                    SummaryTotal = result.SummaryTotal
+                    result.SummaryTotal
                 };
             }
 
@@ -171,8 +171,8 @@ namespace Fanex.Athena.Api.Report
             metaModel.DrillDownCurrencyId = currencyId;
             metaModel.DrillDownLevel = level;
             metaModel.DrillDownCustomerId = custId;
-            metaModel.DrillDownFromDate = fdate.HasValue ? fdate.Value : metaModel.DrillDownFromDate;
-            metaModel.DrillDownToDate = tdate.HasValue ? tdate.Value : metaModel.DrillDownToDate;
+            metaModel.DrillDownFromDate = fdate ?? metaModel.DrillDownFromDate;
+            metaModel.DrillDownToDate = tdate ?? metaModel.DrillDownToDate;
             metaModel.AgentListXml = SessionService.GenerateAgentListXml(level > 0 ? currencyId : metaModel.CurrencyId, metaModel.IsExcludedTestData);
             metaModel.DefaultBaseCurrency = SessionService.UserSession.DefaultBaseCurrency;
         }

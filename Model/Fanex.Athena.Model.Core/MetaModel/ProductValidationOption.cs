@@ -12,6 +12,8 @@ namespace Fanex.Athena.Model.Core.MetaModel
         /// <summary>
         /// Required by IsValidProductCodeList
         /// </summary>
-        public string FunctionKey { get; set; }
+        public string FunctionConfig { get; set; }
+
+        public bool IsSingleWallet { get; set; }
     }
 }

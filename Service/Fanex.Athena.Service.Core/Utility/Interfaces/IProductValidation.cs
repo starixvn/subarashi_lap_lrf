@@ -9,6 +9,6 @@ namespace Fanex.Athena.Service.Core.Utility.Interfaces
 {
     public interface IProductValidation
     {
-        bool IsValid(IMetaModelProductCodeList model, string functionKey);
+        bool IsValid(IMetaModelProductCodeList model, ProductValidationOption option);
     }
 }

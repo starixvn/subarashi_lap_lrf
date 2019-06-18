@@ -130,7 +130,7 @@ namespace Fanex.Athena.Service.Core.UnitTests.Utility
         {
             //Arrange
             const string functionKey = "winloss";
-            var option = new ProductValidationOption { IsValidProductCodeList = true, FunctionKey = functionKey };
+            var option = new ProductValidationOption { IsValidProductCodeList = true, FunctionConfig = functionKey };
             var model = new CasinoTurnoverMetaModel { ProductCodeList = "SB", BaseCurrency = "USD", Status = new[] { 1 } };
             _productValidation.IsValid(Arg.Any<IMetaModelProductCodeList>(), Arg.Any<string>()).Returns(true);
             //Action

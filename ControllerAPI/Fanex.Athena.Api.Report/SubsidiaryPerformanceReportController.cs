@@ -35,7 +35,8 @@
         }
 
         [HttpPost]
-        [ValidationApiRequest(IsValidProductCodeList = true, FunctionKey = FunctionNames.SubsidiaryPerformance)]
+        [ValidationApiRequest(IsValidProductCodeList = true,
+            FunctionConfig = FunctionNames.SubsidiaryPerformance, IsSingleWalletProduct = true)]
         public async Task<dynamic> Index(SubsidiaryPerformanceMetaModel metaModel)
         {
             var userSession = SessionService.UserSession;
@@ -64,7 +65,8 @@
         }
 
         [HttpPost]
-        [ValidationApiRequest(IsValidProductCodeList = true, FunctionKey = FunctionNames.SubsidiaryPerformance)]
+        [ValidationApiRequest(IsValidProductCodeList = true,
+            FunctionConfig = FunctionNames.SubsidiaryPerformance, IsSingleWalletProduct = true)]
         public async Task<dynamic> Detail(SubsidiaryPerformanceMetaModel metaModel)
         {
             var licenseeName = SessionService.LicenseeSession.LicenseeName;

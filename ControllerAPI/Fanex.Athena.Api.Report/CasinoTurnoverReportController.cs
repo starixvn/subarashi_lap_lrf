@@ -29,7 +29,7 @@
 
         [HttpPost]
         [ValidationApiRequest(IsValidCurrency = true, IsIncludeKeanOcean = true,
-            IsValidProductCodeList = true, FunctionKey = FunctionNames.CasinoTurnover)]
+            IsValidProductCodeList = true, FunctionConfig = FunctionNames.CasinoTurnover, IsSingleWalletProduct = true)]
         public async Task<dynamic> GetData(CasinoTurnoverMetaModel metaModel)
         {
 

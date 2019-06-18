@@ -39,13 +39,12 @@ namespace Fanex.Athena.Api.BetList
         }
 
         [HttpGet]
-        [ValidationApiRequest(IsValidCurrency = true)]
+        [ValidationApiRequest(IsValidCurrency = true, IsValidProductCodeList = true, FunctionConfig = BetListCustomerOutstandingName)]
         public async Task<dynamic> Index(
             int page,
             int rows,
             [FromUri]BetListMetaModel metaModel)
         {
-            metaModel.ProductCodeList = RemoveInvalidProducts(metaModel.ProductCodeList, BetListCustomerOutstandingName);
             return await GetPagingBetListResult(metaModel, "Lrf_BetList_CustomerList_Mem", page, rows).ConfigureAwait(false);
         }
     }

@@ -32,7 +32,8 @@ namespace Fanex.Athena.Api.Base.Attributes
         /// Required :FunctionKey
         /// </summary>
         public bool IsValidProductCodeList { get; set; }
-        public string FunctionKey { get; set; }
+        public string FunctionConfig { get; set; }
+        public bool IsSingleWalletProduct { get; set; }
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
             base.OnActionExecuting(actionContext);
@@ -60,7 +61,8 @@ namespace Fanex.Athena.Api.Base.Attributes
                }, new ProductValidationOption
                {
                    IsValidProductCodeList = IsValidProductCodeList,
-                   FunctionKey = FunctionKey
+                   FunctionConfig = FunctionConfig,
+                   IsSingleWallet = IsSingleWalletProduct
 
                }))
             {

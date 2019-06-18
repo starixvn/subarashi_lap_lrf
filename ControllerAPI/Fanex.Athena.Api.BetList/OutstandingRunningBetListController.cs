@@ -33,11 +33,9 @@
         }
 
         [HttpPost]
-        [ValidationApiRequest(IsValidCurrency = true)]
+        [ValidationApiRequest(IsValidCurrency = true, IsValidProductCodeList = true, FunctionConfig = BetListCustomerOutstandingRunningName)]
         public async Task<dynamic> Index(BetListExcelMetaModel metaModel)
         {
-            metaModel.ProductCodeList = RemoveInvalidProducts(metaModel.ProductCodeList, BetListCustomerOutstandingRunningName);
-
             const string UspKey = "Lrf_BetList_SelRunningByDate_Mem";
             metaModel.ToDate = metaModel.ToDate.Date.AddDays(1).AddMinutes(-1);
             return await GetBetListResult(metaModel, UspKey).ConfigureAwait(false);

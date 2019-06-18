@@ -19,17 +19,17 @@ namespace Fanex.Athena.Service.Core.Utility
             _productService = productService;
             _sessionService = sessionService;
         }
-        public bool IsValid(IMetaModelProductCodeList model, string functionKey)
+        public bool IsValid(IMetaModelProductCodeList model, ProductValidationOption option)
         {
-            if (string.IsNullOrEmpty(functionKey) || model is null
+            if (string.IsNullOrEmpty(option.FunctionConfig) || model is null
                 || string.IsNullOrEmpty(model.ProductCodeList))
             {
                 return false;
             }
-            return IsValidProducts(functionKey, model.ProductCodeList);
+            return IsValidProducts(option, model.ProductCodeList);
         }
 
-        private bool IsValidProducts(string functionKey, string productCodeList)
+        private bool IsValidProducts(ProductValidationOption option, string productCodeList)
         {
             var productCodes = productCodeList?.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
@@ -38,10 +38,13 @@ namespace Fanex.Athena.Service.Core.Utility
                 return false;
             }
 
-            var productAccess = _productService.GetSingleWalletProductAccess(
+            var productAccess = option.IsSingleWallet ? _productService.GetSingleWalletProductAccess(
                 _sessionService.LicenseeSession.LicenseeId,
                 _sessionService.UserSession.Language,
-                functionKey);
+                option.FunctionConfig) : _productService.GetProductAccess(
+                _sessionService.LicenseeSession.LicenseeId,
+                _sessionService.UserSession.Language,
+                option.FunctionConfig);
 
             var allowedProductCodes = productAccess.ProductList.Select(x => x.ProductCode).ToArray();
 
