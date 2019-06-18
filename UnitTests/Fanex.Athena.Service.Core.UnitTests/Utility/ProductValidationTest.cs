@@ -69,7 +69,7 @@ namespace Fanex.Athena.Service.Core.UnitTests.Utility
         public void IsValid_NullOrEmptyFunctionKey_ReturnFalse(string functionKey)
         {
             //Arrange
-            var option = new ProductValidationOption { FunctionConfig = "winloss" };
+            var option = new ProductValidationOption { FunctionConfig = functionKey };
 
             var model = _fixture.Create<IMetaModelProductCodeList>();
             //Action
