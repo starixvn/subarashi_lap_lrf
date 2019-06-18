@@ -20,11 +20,19 @@ namespace Fanex.Athena.Api.Base.Attributes
     {
         public string ObjectName { get; set; }
 
+        /// <summary>
+        /// Option: IsIncludeKeanOcean
+        /// </summary>
         public bool IsValidCurrency { get; set; }
-        public bool IsValidCurrencyList { get; set; }
-        public bool IsIncludeKeanOcean { get; set; }
-        public bool IsValidProductCodeList { get; set; }
 
+        public bool IsValidCurrencyList { get; set; }
+
+        public bool IsIncludeKeanOcean { get; set; }
+        /// <summary>
+        /// Required :FunctionKey
+        /// </summary>
+        public bool IsValidProductCodeList { get; set; }
+        public string FunctionKey { get; set; }
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
             base.OnActionExecuting(actionContext);
@@ -42,13 +50,19 @@ namespace Fanex.Athena.Api.Base.Attributes
 
             var validationService = scope.Resolve<IValidationService>();
 
-            if (!validationService.IsValid(new ValidationMetaModelOption
-            {
-                IsValidProductCodeList = IsValidProductCodeList,
-                IsIncludeKeanOcean = IsIncludeKeanOcean,
-                IsValidCurrency = IsValidCurrency,
-                IsValidCurrencyList = IsValidCurrencyList
-            }, root))
+            if (!validationService.IsValid(root,
+               new CurrencyValidationOption
+               {
+                   IsValidCurrency = IsValidCurrency,
+                   IsIncludeKeanOcean = IsIncludeKeanOcean,
+                   IsValidCurrencyList = IsValidCurrencyList
+
+               }, new ProductValidationOption
+               {
+                   IsValidProductCodeList = IsValidProductCodeList,
+                   FunctionKey = FunctionKey
+
+               }))
             {
                 actionContext.Response = new HttpResponseMessage
                 {

@@ -36,19 +36,19 @@ namespace Fanex.Athena.Api.Report
         private readonly IAppSettings _appSettings;
 
         private readonly IWinLossByProductDataAccess _winlossByProductDataAccess;
-        private readonly IValidationService _validationService;
+        private readonly ICurrencyValidation _currencyValidation;
         public WinLossByProductReportController(
             ISessionService sessionService,
             IProductService productService,
             IAppSettings appSettings,
             ILanguageService langService,
             IWinLossByProductDataAccess winlossByProductDataAccess,
-             IValidationService validationService)
+             ICurrencyValidation currencyValidation)
             : base(sessionService, productService, langService)
         {
             _appSettings = appSettings;
             _winlossByProductDataAccess = winlossByProductDataAccess;
-            _validationService = validationService;
+            _currencyValidation = currencyValidation;
         }
 
         [HttpPost]
@@ -235,7 +235,7 @@ namespace Fanex.Athena.Api.Report
             string currencyName = null)
 #pragma warning restore S107 // Methods should not have too many parameters
         {
-            if (!_validationService.IsValidCurrency(currencyId, true))
+            if (!_currencyValidation.IsValidCurrency(currencyId, true))
             {
                 return BadRequest(ViewResources.InvalidParams);
             }

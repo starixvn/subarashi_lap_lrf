@@ -29,18 +29,18 @@ namespace Fanex.Athena.Api.Report
     public class AgCasinoBalanceReportController : ApiReportBaseController
     {
         private readonly IAgCasinoBalanceDataAccess _agcasinoBalanceDataAccess;
-        private readonly IValidationService _validationService;
+        private readonly ICurrencyValidation _currencyValidation;
         public AgCasinoBalanceReportController(
             IAgCasinoBalanceDataAccess agcasinoBalanceDataAccess,
             ISessionService sessionService,
             IProductService productService,
             ILanguageService langService,
-            IValidationService validationService
+            ICurrencyValidation currencyValidation
             )
             : base(sessionService, productService, langService)
         {
             _agcasinoBalanceDataAccess = agcasinoBalanceDataAccess;
-            _validationService = validationService;
+            _currencyValidation = currencyValidation;
         }
 
         [HttpPost]
@@ -157,7 +157,7 @@ namespace Fanex.Athena.Api.Report
 
         private async Task<dynamic> ProcessRequest(ThirdPartyWinLossMetaModel metaModel)
         {
-            if (_validationService.IsValidCurrency(
+            if (_currencyValidation.IsValidCurrency(
                 metaModel.DrillDownCurrencyId, true))
             {
                 metaModel.LicenseeId = SessionService.LicenseeSession.LicenseeId;

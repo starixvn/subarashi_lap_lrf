@@ -15,14 +15,14 @@
         private const string UspKey = "Lrf_BetList_SelWinLossByBetType";
 
         private const string ApiPath = "/BetList/GetBetListPaging";
-        private IValidationService _validationService;
+        private ICurrencyValidation _currencyValidation;
         [SetUp]
         public void SetUp()
         {
             MockSessionData();
-            _validationService = Substitute.For<IValidationService>();
-            _validationService.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
-            _validationService.IsValidBaseCurrency(Arg.Any<string>(), Arg.Any<bool>()).Returns(true);
+            _currencyValidation = Substitute.For<ICurrencyValidation>();
+            _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
+            _currencyValidation.IsValidBaseCurrency(Arg.Any<string>(), Arg.Any<bool>()).Returns(true);
 
             AuthorizationService.HasPermissionOnData(SessionLicenseeId, Arg.Any<int>(), Arg.Any<long>()).Returns(true);
         }
@@ -37,8 +37,8 @@
 
             using (var controller = CreateController())
             {
-                _validationService.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(validCurrency);
-                _validationService.IsValidBaseCurrency(Arg.Any<string>(), Arg.Any<bool>()).Returns(validBaseCurrency);
+                _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(validCurrency);
+                _currencyValidation.IsValidBaseCurrency(Arg.Any<string>(), Arg.Any<bool>()).Returns(validBaseCurrency);
 
                 // Arrange
                 const int CurrencyId = 1;
@@ -109,7 +109,7 @@
                 AuthorizationService,
                 BetListApiClient,
                 BalanceUpDataAccess,
-                _validationService
+                _currencyValidation
                 );
         }
     }

@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace Fanex.Athena.Model.Core.MetaModel
 {
-    public class ValidationMetaModelOption
+    public class ProductValidationOption
     {
-        public bool IsValidCurrency { get; set; }
-        public bool IsValidCurrencyList { get; set; }
-        public bool IsIncludeKeanOcean { get; set; }
         public bool IsValidProductCodeList { get; set; }
+        /// <summary>
+        /// Required by IsValidProductCodeList
+        /// </summary>
+        public string FunctionKey { get; set; }
     }
 }

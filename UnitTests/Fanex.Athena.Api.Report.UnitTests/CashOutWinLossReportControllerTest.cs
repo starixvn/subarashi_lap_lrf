@@ -24,7 +24,7 @@
     {
         private ICashOutWinLossDataAccess _dataAccess;
         private CashOutWinLossReportController _controller;
-        private IValidationService _validationService;
+        private ICurrencyValidation _currencyValidation;
 
         [SetUp]
         public void Setup()
@@ -32,12 +32,12 @@
 
             MockSessionData();
             _dataAccess = Substitute.For<ICashOutWinLossDataAccess>();
-            _validationService = Substitute.For<IValidationService>();
-            _validationService.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
+            _currencyValidation = Substitute.For<ICurrencyValidation>();
+            _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
 
             _controller = Substitute.ForPartsOf<CashOutWinLossReportController>(_dataAccess,
                 SessionService,
-                ProductService, LangService, _validationService);
+                ProductService, LangService, _currencyValidation);
         }
 
         [TearDown]
@@ -45,7 +45,7 @@
         {
             _dataAccess = null;
             _controller = null;
-            _validationService = null;
+            _currencyValidation = null;
         }
 
         [Test]
@@ -53,7 +53,7 @@
         {
             // Arrange
             var metaModel = new ThirdPartyWinLossMetaModel { CurrencyId = -9 };
-            _validationService.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(false);
+            _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(false);
             // Action
             var result = await _controller.Index(metaModel);
 

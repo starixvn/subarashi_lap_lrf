@@ -22,24 +22,24 @@
     {
         private IAgCasinoBalanceDataAccess _dataAccess;
         private AgCasinoBalanceReportController _controller;
-        private IValidationService _validationService;
+        private ICurrencyValidation _currencyValidation;
 
         [SetUp]
         public void Setup()
         {
             MockSessionData();
 
-            _validationService = Substitute.For<IValidationService>();
+            _currencyValidation = Substitute.For<ICurrencyValidation>();
             _dataAccess = Substitute.For<IAgCasinoBalanceDataAccess>();
 
             _controller = Substitute.ForPartsOf<AgCasinoBalanceReportController>(_dataAccess,
-                SessionService, ProductService, LangService, _validationService);
+                SessionService, ProductService, LangService, _currencyValidation);
         }
         [TearDown]
         public override void FixtureTearDown()
         {
 
-            _validationService = null;
+            _currencyValidation = null;
             _dataAccess = null;
             _controller = null;
         }
@@ -53,7 +53,7 @@
                 CurrencyId = -100,
                 DrillDownCurrencyId = -100
             };
-            _validationService.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(false);
+            _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(false);
             var expectedResult = GetSerializationData();
 
             // Action
@@ -71,7 +71,7 @@
             {
                 CurrencyId = -1
             };
-            _validationService.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
+            _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
 
             var resultModel = new SortableReportResultModel<AgCasinoBalance>
             {
@@ -93,7 +93,7 @@
         public async Task Index_Level0_ReturnCorrectDataFromDataAccess()
         {
             // Arrange
-            _validationService.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
+            _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
 
             const int CurrencyId = -2;
             const bool IsExcludedTestData = true;
@@ -138,7 +138,7 @@
         public async Task Index_Level1_CallGetAgentBalanceDetailInService_ReturnCorrectData()
         {
             // Arrange
-            _validationService.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
+            _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
 
             const int CurrencyId = -2;
             const bool IsExcludedTestData = true;
@@ -170,7 +170,7 @@
         public async Task Index_Level2_CallGetCustomerBalanceDetailInService_ReturnCorrectData()
         {
             // Arrange
-            _validationService.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
+            _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
 
             const int CurrencyId = -2;
             const bool IsExcludedTestData = true;
@@ -206,7 +206,7 @@
         public void Index_IsExportExcelTrue_CallExcelStreamWithCorrectData(int drillDownLevel, int currencyId)
         {
             // Arrange
-            _validationService.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
+            _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
 
             var fromDate = new DateTime(2017, 4, 1);
             var toDate = new DateTime(2017, 4, 18);

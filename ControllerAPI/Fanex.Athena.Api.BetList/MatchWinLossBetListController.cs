@@ -26,7 +26,7 @@ namespace Fanex.Athena.Api.BetList
     [ApiFunctionAuthorization(PermissionKeys.ReportMatchWinLoss)]
     public class MatchWinLossBetListController : ApiBetListBaseController
     {
-        private readonly IValidationService _validationService;
+        private readonly ICurrencyValidation _currencyValidation;
 
         public MatchWinLossBetListController(
             ISessionService sessionService,
@@ -35,11 +35,11 @@ namespace Fanex.Athena.Api.BetList
             IAuthorizationService authorizationService,
             IBetListApiClient betListApiClient,
             IBalanceUpDataAccess balanceUpDataAccess,
-             IValidationService validationService
+             ICurrencyValidation currencyValidation
             )
         : base(sessionService, productService, languageService, authorizationService, betListApiClient, balanceUpDataAccess)
         {
-            _validationService = validationService;
+            _currencyValidation = currencyValidation;
         }
 
         [HttpGet]
@@ -86,8 +86,8 @@ namespace Fanex.Athena.Api.BetList
 #pragma warning restore S107 // Methods should not have too many parameters
         {
            
-            if (_validationService.IsValidBaseCurrency(baseCurrency)
-                && _validationService.IsValidCurrency(currencyId))
+            if (_currencyValidation.IsValidBaseCurrency(baseCurrency)
+                && _currencyValidation.IsValidCurrency(currencyId))
             {
                 const string UspKey = "Lrf_BetList_MatchWL_Parlay";
                 var metaModel = new BetListMetaModel

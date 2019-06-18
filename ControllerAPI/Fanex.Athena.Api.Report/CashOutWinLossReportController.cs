@@ -30,18 +30,18 @@ namespace Fanex.Athena.Api.Report
     public class CashOutWinLossReportController : ApiReportBaseController
     {
         private readonly ICashOutWinLossDataAccess _cashOutWinLossDataAccess;
-        private readonly IValidationService _validationService;
+        private readonly ICurrencyValidation _currencyValidation;
         public CashOutWinLossReportController(
             ICashOutWinLossDataAccess cashOutWinLossDataAccess,
             ISessionService sessionService,
             IProductService productService,
             ILanguageService langService,
-            IValidationService validationService
+            ICurrencyValidation currencyValidation
             )
             : base(sessionService, productService, langService)
         {
             _cashOutWinLossDataAccess = cashOutWinLossDataAccess;
-            _validationService = validationService;
+            _currencyValidation = currencyValidation;
         }
 
         [HttpPost]
@@ -134,7 +134,7 @@ namespace Fanex.Athena.Api.Report
             int currencyId = 0,
             int custId = 0)
         {
-            if (!_validationService.IsValidCurrency(currencyId, true))
+            if (!_currencyValidation.IsValidCurrency(currencyId, true))
             {
                 return GetEmptyResult();
             }

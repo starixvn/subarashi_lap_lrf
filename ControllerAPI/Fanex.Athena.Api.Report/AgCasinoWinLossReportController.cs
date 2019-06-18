@@ -29,19 +29,19 @@ namespace Fanex.Athena.Api.Report
     public class AgCasinoWinLossReportController : ApiReportBaseController
     {
         private readonly IThirdPartyWinLossDataAccess<ThirdPartyWinLoss> _thirdPartyWinLossDataAccess;
-        private readonly IValidationService _validationService;
+        private readonly ICurrencyValidation _currencyValidation;
 
         public AgCasinoWinLossReportController(
             IThirdPartyWinLossDataAccess<ThirdPartyWinLoss> thirdPartyWinLossDataAccess,
             ISessionService sessionService,
             IProductService productService,
             ILanguageService langService,
-            IValidationService validationService
+            ICurrencyValidation currencyValidation
             )
             : base(sessionService, productService, langService)
         {
             _thirdPartyWinLossDataAccess = thirdPartyWinLossDataAccess;
-            _validationService = validationService;
+            _currencyValidation = currencyValidation;
         }
 
         [HttpPost]
@@ -118,7 +118,7 @@ namespace Fanex.Athena.Api.Report
             int currencyId = 0,
             int custId = 0)
         {
-            if (_validationService.IsValidCurrency(currencyId, true))
+            if (_currencyValidation.IsValidCurrency(currencyId, true))
             {
                 metaModel.DrillDownCurrencyId = currencyId;
                 metaModel.DrillDownLevel = level;

@@ -42,8 +42,6 @@ namespace Fanex.Athena.Api.BetList
         [ValidationApiRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
         public async Task<dynamic> Index(BetListMetaModel metaModel)
         {
-            var licenseeId = SessionService.LicenseeSession.LicenseeId;
-
             const string UspKey = "Lrf_BetList_PlatformWinLoss_Mem";
             return await GetBetListResult(metaModel, UspKey).ConfigureAwait(false);
         }

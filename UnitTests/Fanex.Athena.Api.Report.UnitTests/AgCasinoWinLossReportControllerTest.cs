@@ -21,7 +21,7 @@
     {
         private IThirdPartyWinLossDataAccess<ThirdPartyWinLoss> _dataAccess;
         private AgCasinoWinLossReportController _controller;
-        private IValidationService _validationService;
+        private ICurrencyValidation _currencyValidation;
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
@@ -34,12 +34,12 @@
         [SetUp]
         public void SetUp()
         {
-            _validationService = Substitute.For<IValidationService>();
-            _validationService.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
+            _currencyValidation = Substitute.For<ICurrencyValidation>();
+            _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
 
             _dataAccess = Substitute.For<IThirdPartyWinLossDataAccess<ThirdPartyWinLoss>>();
             _controller = Substitute.ForPartsOf<AgCasinoWinLossReportController>(_dataAccess, SessionService,
-                ProductService, LangService, _validationService);
+                ProductService, LangService, _currencyValidation);
             _controller.When(x => x.ExcelStream(Arg.Any<IWorkbook>(), Arg.Any<string>())).DoNotCallBase();
 
         }
@@ -52,7 +52,7 @@
         [TearDown]
         public void TearDown()
         {
-            _validationService = null;
+            _currencyValidation = null;
             SessionService.ClearReceivedCalls();
             _dataAccess.ClearReceivedCalls();
             _dataAccess = null;
@@ -65,7 +65,7 @@
         public async Task Index_InvalidCurrency_ReturnEmptyData()
         {
             // Arrange
-            _validationService.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(false);
+            _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(false);
 
             var model = new ThirdPartyWinLossMetaModel
             {

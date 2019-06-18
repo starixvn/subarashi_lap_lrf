@@ -13,96 +13,59 @@ namespace Fanex.Athena.Service.Core.Utility
 {
     public class ValidationService : IValidationService
     {
-        private readonly ISessionService _sessionService;
-        public ValidationService(ISessionService sessionService)
+        private readonly ICurrencyValidation _currencyValidation;
+        private readonly IProductValidation _productValidation;
+        public ValidationService(ICurrencyValidation currencyValidation, IProductValidation productValidation)
         {
-            _sessionService = sessionService;
-        }
-        public bool IsValidBaseCurrency(string baseCurrency, bool isAllowEmpty = true)
-        {
-            return MetaModelValidationHelper.ValidateBaseCurrency(baseCurrency, isAllowEmpty);
+            _currencyValidation = currencyValidation;
+            _productValidation = productValidation;
         }
 
-        private static bool ValidateCurrency(int currencyId, IDictionary<int, string> currencyList)
-        {
-            return (currencyId < 0 && currencyId >= SystemConstants.MinBaseCurrencyType)
-               || currencyId == BaseCurrencyType.All || currencyList.ContainsKey(currencyId);
-        }
-        private static bool VerifyKeanOceanCurrency(int currencyId, int licenseeId)
-        {
-            return licenseeId == LicenseeIdentity.KeenOcean && currencyId == CurrencyType.Cny;
-        }
-
-        private static bool ValidateCurrencyWithKeanOceanOption(int currencyId, IDictionary<int, string> currencyList, int licenseeId)
-        {
-            return ValidateCurrency(currencyId, currencyList) || VerifyKeanOceanCurrency(currencyId, licenseeId);
-
-        }
-        private static bool IsValidCurrencyIdList(int[] currencyList, IDictionary<int, string> userCurrencyList)
-        {
-            if (currencyList == null || currencyList.Length == 0)
-            {
-                return false;
-            }
-
-            return !currencyList.Any(x => !userCurrencyList.ContainsKey(x));
-
-        }
         private static bool IsValidMetalModel(IMetaModelValidation model)
         {
             return model != null && model.IsValid;
         }
 
-        public bool IsValid(ValidationMetaModelOption option, object model)
+        public bool IsValid(object model, CurrencyValidationOption currencyValidationOption = null,
+            ProductValidationOption productValidationOption = null)
         {
-            if (option is null || model is null)
+            if (model is null)
             {
                 return false;
             }
 
             var result = IsValidMetalModel(model as IMetaModelValidation);
-            if (option.IsValidCurrency)
+            if (currencyValidationOption != null && currencyValidationOption.IsValidCurrency)
             {
-                result &= IsValidCurrency(model as IMetaModelCurrency, option.IsIncludeKeanOcean);
+                result &= IsValidCurrency(model as IMetaModelCurrency, currencyValidationOption.IsIncludeKeanOcean);
             }
-            if (option.IsValidCurrencyList)
+            if (currencyValidationOption != null && currencyValidationOption.IsValidCurrencyList)
             {
                 result &= IsValidCurrency(model as IMetaModelCurrencyList);
             }
-            if (option.IsValidProductCodeList)
+            if (productValidationOption != null && productValidationOption.IsValidProductCodeList)
             {
-                result &= IsValidProductCode(model as IMetaModelProductCodeList);
+                result &= IsValidProductCode(model as IMetaModelProductCodeList, productValidationOption.FunctionKey);
             }
 
             return result;
         }
 
-        private static bool IsValidProductCode(IMetaModelProductCodeList model)
+        private bool IsValidProductCode(IMetaModelProductCodeList model, string functionKey)
         {
-            throw new NotImplementedException();
+            return model != null && _productValidation.IsValid(model, functionKey);
         }
 
         private bool IsValidCurrency(IMetaModelCurrency model, bool isIncludeKeanOcean = false)
         {
-            return IsValidCurrency(model.CurrencyId, isIncludeKeanOcean);
+            return model != null && _currencyValidation.IsValidCurrency(model.CurrencyId, isIncludeKeanOcean);
         }
 
-        private static bool IsValidCurrency(IMetaModelCurrencyList currencyList)
+        private bool IsValidCurrency(IMetaModelCurrencyList model)
         {
-            throw new NotImplementedException();
+            return model != null &&
+                _currencyValidation.IsValidCurrency(model.CurrencyIdList);
         }
 
-        public bool IsValidCurrency(int currencyId, bool isIncludeKeanOcean = false)
-        {
-            var currencyList = _sessionService.UserSession.CurrencyList;
-            if (isIncludeKeanOcean)
-            {
-                return ValidateCurrencyWithKeanOceanOption(currencyId
-                    , currencyList
-                    , _sessionService.LicenseeSession.LicenseeId);
-            }
-
-            return ValidateCurrency(currencyId, currencyList);
-        }
     }
 }

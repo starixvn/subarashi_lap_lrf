@@ -1,13 +1,14 @@
 ﻿namespace Fanex.Athena.Model.BetList.MetaModel
 {
     using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Model.Core.Helper;
     using Fanex.Athena.Model.Core.MetaModel;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Script.Serialization;
 
-    public class BaseBettingTicketMetaModel : IMetaModelValidation
+    public class BaseBettingTicketMetaModel : IMetaModelValidation , IMetaModelCurrencyList
     {
         private const int DefaultPageSize = 50;
 
@@ -70,12 +71,10 @@
         public string SortBy { get; set; }
 
         public string SortOrder { get; set; }
-
         public virtual bool IsValid => FromDate <= ToDate
             && !string.IsNullOrWhiteSpace(ProductCodeList)
-            && !string.IsNullOrEmpty(BaseCurrency)
-            && SystemConstants.BaseCurrencyList.Any(
-                x => x.Value.Equals(BaseCurrency, StringComparison.OrdinalIgnoreCase));
+            &&
+            MetaModelValidationHelper.ValidateBaseCurrency(BaseCurrency, false);
 
         public bool HasPlayerCom { get; set; }
 

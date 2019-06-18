@@ -6,7 +6,7 @@
     using System;
     using System.Linq;
 
-    public class SubsidiaryPerformanceMetaModel: IMetaModelValidation
+    public class SubsidiaryPerformanceMetaModel: IMetaModelValidation, IMetaModelProductCodeList
     {
         public string AgentListXml { get; set; }
 

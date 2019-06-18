@@ -4506,10 +4506,7 @@ function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "exportExcel", function () {
-      var _this$props = _this.props,
-          dateRange = _this$props.dateRange,
-          selectedCurrency = _this$props.selectedCurrency,
-          selectedBaseCurrency = _this$props.selectedBaseCurrency;
+      var selectedBaseCurrency = _this.props.selectedBaseCurrency;
       var params = Object.assign({
         IsExportExcel: true
       }, _this._getParams());
@@ -4558,15 +4555,15 @@ function (_Component) {
   _createClass(FormFilter, [{
     key: "_getParams",
     value: function _getParams() {
-      var _this$props2 = this.props,
-          dateRange = _this$props2.dateRange,
-          selectedCurrency = _this$props2.selectedCurrency,
-          selectedBaseCurrency = _this$props2.selectedBaseCurrency,
-          isConvertAll = _this$props2.isConvertAll,
-          selectedProduct = _this$props2.selectedProduct,
-          username = _this$props2.username,
-          selectedStatus = _this$props2.selectedStatus,
-          requestParam = _this$props2.requestParam;
+      var _this$props = this.props,
+          dateRange = _this$props.dateRange,
+          selectedCurrency = _this$props.selectedCurrency,
+          selectedBaseCurrency = _this$props.selectedBaseCurrency,
+          isConvertAll = _this$props.isConvertAll,
+          selectedProduct = _this$props.selectedProduct,
+          username = _this$props.username,
+          selectedStatus = _this$props.selectedStatus,
+          requestParam = _this$props.requestParam;
       return {
         FromDate: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_6__["default"].convertDateToString(dateRange.fromDate),
         ToDate: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_6__["default"].convertDateToString(dateRange.toDate),
@@ -4574,7 +4571,7 @@ function (_Component) {
         CurrencyName: selectedCurrency.label,
         BaseCurrency: selectedBaseCurrency,
         IsConvertAll: isConvertAll,
-        ProductCode: selectedProduct.split(','),
+        ProductCodeList: selectedProduct,
         UserName: username,
         Status: selectedStatus.split(','),
         PageIndex: 1,
@@ -4693,9 +4690,9 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this$props3 = this.props,
-          selectedProduct = _this$props3.selectedProduct,
-          selectedStatus = _this$props3.selectedStatus;
+      var _this$props2 = this.props,
+          selectedProduct = _this$props2.selectedProduct,
+          selectedStatus = _this$props2.selectedStatus;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "page-filter"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {

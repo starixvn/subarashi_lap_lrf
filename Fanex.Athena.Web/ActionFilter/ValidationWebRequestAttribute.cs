@@ -21,8 +21,6 @@ namespace Fanex.Athena.Web.ActionFilter
         public string ObjectName { get; set; }
         public bool IsValidCurrency { get; set; }
         public bool IsIncludeKeanOcean { get; set; }
-        public bool IsValidProductCodeList { get; set; }
-        public bool IsValidCurrencyList { get; set; }
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
@@ -31,13 +29,14 @@ namespace Fanex.Athena.Web.ActionFilter
                  : filterContext.ActionParameters.Where(x => x.Value is IMetaModelValidation)
                       .Select(x => x.Value).FirstOrDefault();
 
-            var result = ValidationService.IsValid(new ValidationMetaModelOption
-            {
-                IsIncludeKeanOcean = IsIncludeKeanOcean,
-                IsValidCurrency = IsValidCurrency,
-                IsValidProductCodeList = IsValidProductCodeList
+            var result = ValidationService.IsValid(model
+                ,
+                 new CurrencyValidationOption
+                 {
+                     IsValidCurrency = IsValidCurrency,
+                     IsIncludeKeanOcean = IsIncludeKeanOcean,
 
-            }, model);
+                 });
 
             if (!result)
             {

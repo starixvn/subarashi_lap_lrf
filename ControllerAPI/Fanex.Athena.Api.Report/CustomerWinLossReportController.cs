@@ -42,7 +42,7 @@
         [ValidationApiRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
         public async Task<dynamic> Index(CustomerWinLossMetaModel metaModel)
         {
-           
+
             return metaModel.IsExportExcel ?
                 await ExportExcel(metaModel).ConfigureAwait(false) :
                 await ProcessRequest(metaModel).ConfigureAwait(false);
@@ -106,16 +106,9 @@
 
         private async Task<ReportResultModel<CustomerWinLoss>> GetData(CustomerWinLossMetaModel metaModel)
         {
+            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId, metaModel.IsExcludedTestData);
+            return await _custWinlossDataAccess.GetDataList(metaModel).ConfigureAwait(false);
 
-            if (IsValidProducts(FunctionNames.CustomerWinLoss, metaModel))
-            {
-
-                metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId, metaModel.IsExcludedTestData);
-                return await _custWinlossDataAccess.GetDataList(metaModel).ConfigureAwait(false);
-            }
-
-            return await Task.FromResult(new ReportResultModel<CustomerWinLoss> {
-            });
         }
     }
 }

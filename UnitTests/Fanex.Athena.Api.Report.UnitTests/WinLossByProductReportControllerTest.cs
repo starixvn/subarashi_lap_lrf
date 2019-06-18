@@ -25,19 +25,19 @@
         private IWinLossByProductDataAccess _dataAccess;
         private WinLossByProductReportController _controller;
 
-        private IValidationService _validationService;
+        private ICurrencyValidation _currencyValidation;
         [SetUp]
         public void SetUp()
         {
             MockSessionData();
 
-            _validationService = Substitute.For<IValidationService>();
-            _validationService.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
+            _currencyValidation = Substitute.For<ICurrencyValidation>();
+            _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
             _dataAccess = Substitute.For<IWinLossByProductDataAccess>();
             _controller = Substitute.ForPartsOf<WinLossByProductReportController>(
                 SessionService, ProductService,
                 AppSetting, LangService, _dataAccess,
-                _validationService
+                _currencyValidation
                 );
 
         }
@@ -45,7 +45,7 @@
         [TearDown]
         public override void FixtureTearDown()
         {
-            _validationService = null;
+            _currencyValidation = null;
             _dataAccess = null;
             _controller = null;
         }
@@ -54,7 +54,7 @@
         public async Task Index_InvalidCurrency_ReturnBadRequestWithCorrectMessage()
         {
             // Arrange
-            _validationService.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(false);
+            _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(false);
 
             var metaModel = new WinLossByProductMetaModel { CurrencyId = -100 };
 

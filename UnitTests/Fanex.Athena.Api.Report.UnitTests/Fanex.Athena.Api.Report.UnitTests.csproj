@@ -103,7 +103,6 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="ApiReportBaseControllerTest.cs" />
     <Compile Include="AgCasinoWinLossReportControllerTest.cs" />
     <Compile Include="ExchangeWinLossReportControllerTest.cs" />
     <Compile Include="LicenseeWinLossReportControllerTest_IsValidParams.cs" />

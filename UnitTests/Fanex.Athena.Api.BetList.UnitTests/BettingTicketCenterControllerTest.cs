@@ -68,28 +68,6 @@
             }
         }
 
-        [TestCase(null)]
-        [TestCase("-100")]
-        public async Task GetByRunning_InvalidCurrency_ReturnBadRequestAsync(string currencyIdList)
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var metaModel = new BaseBettingTicketMetaModel
-                {
-                    FromDate = DateTime.Today,
-                    ToDate = DateTime.Today,
-                    ProductCodeList = "C1,C2",
-                    CurrencyIdList = currencyIdList
-                };
-
-                // Action
-                var result = await controller.GetByRunning(metaModel);
-
-                // Assert
-                Assert.IsTrue(result is BadRequestErrorMessageResult);
-            }
-        }
 
         [Test]
         public async Task GetByRunning_ValidMetaModel_CallApiWithCorrectParameters()

@@ -24,17 +24,17 @@
     {
         private IColossusBetsWinLossService _service;
         private ColossusBetsWinLossReportController _controller;
-        private IValidationService _validationService;
+        private ICurrencyValidation _currencyValidation;
         [SetUp]
         public void SetUp()
         {
 
-            _validationService = Substitute.For<IValidationService>();
-            _validationService.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
+            _currencyValidation = Substitute.For<ICurrencyValidation>();
+            _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
             _service = Substitute.For<IColossusBetsWinLossService>();
 
             _controller = Substitute.ForPartsOf<ColossusBetsWinLossReportController>(_service,
-                SessionService, ProductService, LangService, _validationService);
+                SessionService, ProductService, LangService, _currencyValidation);
 
             _controller.When(x => x.ExcelStream(Arg.Any<IWorkbook>(), Arg.Any<string>())).DoNotCallBase();
         }
@@ -42,7 +42,7 @@
         [TearDown]
         public void TearDown()
         {
-            _validationService = null;
+            _currencyValidation = null;
             _controller = null;
             _service = null;
         }
@@ -51,7 +51,7 @@
         public async Task Index_InvalidCurrency_ReturnEmptyData()
         {
             // Arrange
-            _validationService.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(false);
+            _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(false);
             var model = new ColossusBetsWinLossMetaModel
             {
                 IsExportExcel = false,

@@ -37,7 +37,7 @@
         }
 
         [HttpPost]
-        [ValidationApiRequest]
+        [ValidationApiRequest(IsValidCurrencyList = true)]
         public async Task<dynamic> GetData(MultipleCustomersBetListMetaModel metaModel)
         {
             var licenseeSession = SessionService.LicenseeSession;
@@ -56,11 +56,7 @@
 
             var userCurrencyList = userSession.CurrencyList;
             var currencyList = metaModel.CurrencyIdList?.Split(',').Select(x => int.Parse(x)).ToArray();
-            if (!MetaModelValidationHelper.IsValidCurrencyIdList(currencyList, userCurrencyList))
-            {
-                return BadRequest(ViewResources.InvalidRequestMsg);
-            }
-
+            
             metaModel.AgentListXml = SessionService.GenerateAgentListXml(currencyList);
             metaModel.HasPlayerCom = SessionService.LicenseeSession.IsAllowedCustomerComm;
             metaModel.UserCurrencyList = userCurrencyList;

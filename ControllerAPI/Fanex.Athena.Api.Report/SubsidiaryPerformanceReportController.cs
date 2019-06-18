@@ -35,14 +35,13 @@
         }
 
         [HttpPost]
-        [ValidationApiRequest]
+        [ValidationApiRequest(IsValidProductCodeList = true, FunctionKey = FunctionNames.SubsidiaryPerformance)]
         public async Task<dynamic> Index(SubsidiaryPerformanceMetaModel metaModel)
         {
             var userSession = SessionService.UserSession;
             var isSubsidiary = userSession.UserLevel == UserLevelType.Subsidiary;
             var isValidSubsidiaryList = isSubsidiary || (userSession.IsManageableSubsidiary && !string.IsNullOrWhiteSpace(metaModel.SubsidiaryList));
-            if (!IsValidProducts(FunctionNames.SubsidiaryPerformance, metaModel.ProductCodeList) ||
-                !isValidSubsidiaryList)
+            if (!isValidSubsidiaryList)
             {
                 return BadRequest(ViewResources.InvalidRequestMsg);
             }
@@ -65,14 +64,9 @@
         }
 
         [HttpPost]
-        [ValidationApiRequest]
+        [ValidationApiRequest(IsValidProductCodeList = true, FunctionKey = FunctionNames.SubsidiaryPerformance)]
         public async Task<dynamic> Detail(SubsidiaryPerformanceMetaModel metaModel)
         {
-            if(!IsValidProducts(FunctionNames.SubsidiaryPerformance, metaModel.ProductCodeList))
-            {
-                return BadRequest(ViewResources.InvalidRequestMsg);
-            }
-
             var licenseeName = SessionService.LicenseeSession.LicenseeName;
             metaModel.LicenseeName = licenseeName;
             var agentIdListByCurrency = _subsidiaryService.GetCurrencyAgentList(metaModel.SubsidiaryId, metaModel.IsExcludeTest);

@@ -27,15 +27,15 @@
         private const string ApiPath = "/BetList/GetBetList";
 
         private const string PageApiPath = "/BetList/GetBetListPaging";
-        private IValidationService _validationService;
+        private ICurrencyValidation _currencyValidation;
 
         [SetUp]
         public void SetUp()
         {
             MockSessionData();
-            _validationService = Substitute.For<IValidationService>();
-            _validationService.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
-            _validationService.IsValidBaseCurrency(Arg.Any<string>(), Arg.Any<bool>()).Returns(true);
+            _currencyValidation = Substitute.For<ICurrencyValidation>();
+            _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
+            _currencyValidation.IsValidBaseCurrency(Arg.Any<string>(), Arg.Any<bool>()).Returns(true);
             AuthorizationService.HasPermissionOnData(SessionLicenseeId, Arg.Any<int>(), Arg.Any<long>()).Returns(true);
         }
 
@@ -199,7 +199,7 @@
                 LangService,
                 AuthorizationService,
                 BetListApiClient,
-                BalanceUpDataAccess, _validationService);
+                BalanceUpDataAccess, _currencyValidation);
         }
     }
 }

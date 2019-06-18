@@ -16,7 +16,7 @@
     [ApiFunctionAuthorization(PermissionKeys.ReportWinLossByBetType)]
     public class WinlossByBetTypeBetListController : ApiBetListBaseController
     {
-        private readonly IValidationService _validationService;
+        private readonly ICurrencyValidation _currencyValidation;
         public WinlossByBetTypeBetListController(
             ISessionService sessionService,
             IProductService productService,
@@ -24,11 +24,11 @@
             IAuthorizationService authorizationService,
             IBetListApiClient betListApiClient,
             IBalanceUpDataAccess balanceUpDataAccess,
-             IValidationService validationService
+             ICurrencyValidation currencyValidation
             )
         : base(sessionService, productService, languageService, authorizationService, betListApiClient, balanceUpDataAccess)
         {
-            _validationService = validationService;
+            _currencyValidation = currencyValidation;
         }
 
         [HttpGet]
@@ -46,8 +46,8 @@
             string sortOrder = null)
 #pragma warning restore S107 // Methods should not have too many parameters
         {
-            if (!_validationService.IsValidBaseCurrency(baseCurrency)
-                || !_validationService.IsValidCurrency(currencyId))
+            if (!_currencyValidation.IsValidBaseCurrency(baseCurrency)
+                || !_currencyValidation.IsValidCurrency(currencyId))
             {
                 return null;
             }

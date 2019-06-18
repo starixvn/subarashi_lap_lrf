@@ -1,4 +1,5 @@
-﻿using Fanex.Athena.Model.Core.DataDomain;
+﻿using Fanex.Athena.Model.BetList.MetaModel;
+using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Model.Core.MetaModel;
 using Fanex.Athena.Model.Core.MetaModel.Product;
 using Fanex.Athena.Model.Report.MetaModel;
@@ -19,20 +20,15 @@ namespace Fanex.Athena.Service.Core.UnitTests.Utility
     public class ValidationServiceTest
     {
         private IValidationService _validationService;
-        private ISessionService _sessionService;
         private IMetaModelValidation _metaModelValidation;
-
+        private ICurrencyValidation _currencyValidation;
+        private IProductValidation _productValidation;
         [SetUp]
         public void Setup()
         {
-            _sessionService = Substitute.For<ISessionService>();
-
-            _sessionService.UserSession.Returns(new UserSession
-            {
-                CurrencyList = new Dictionary<int, string> { { 1, "USD" }, { 2, "EUR" }, { 4, "IDR" } }
-            });
-            _sessionService.LicenseeSession.Returns(new LicenseeSession { LicenseeId = 1 });
-            _validationService = new ValidationService(_sessionService);
+            _productValidation = Substitute.For<IProductValidation>();
+            _currencyValidation = Substitute.For<ICurrencyValidation>();
+            _validationService = new ValidationService(_currencyValidation, _productValidation);
             _metaModelValidation = Substitute.For<IMetaModelValidation>();
         }
 
@@ -40,7 +36,7 @@ namespace Fanex.Athena.Service.Core.UnitTests.Utility
         public void TearDown()
         {
             _validationService = null;
-            _sessionService = null;
+            _currencyValidation = null;
             _metaModelValidation = null;
         }
 
@@ -48,21 +44,9 @@ namespace Fanex.Athena.Service.Core.UnitTests.Utility
         public void IsValid_NullModel_ReturnFalse()
         {
             //Arrange
-            var option = new ValidationMetaModelOption();
-            //Action
-            var result = _validationService.IsValid(option, null);
-
-            //Assert
-            Assert.IsFalse(result);
-        }
-
-        [Test]
-        public void IsValid_NullOption_ReturnFalse()
-        {
-            //Arrange
 
             //Action
-            var result = _validationService.IsValid(null, _metaModelValidation);
+            var result = _validationService.IsValid(null);
 
             //Assert
             Assert.IsFalse(result);
@@ -74,12 +58,11 @@ namespace Fanex.Athena.Service.Core.UnitTests.Utility
             bool expected)
         {
             //Arrange
-            var option = new ValidationMetaModelOption();
             _metaModelValidation.IsValid.Returns(expected);
 
             //Action
 
-            var result = _validationService.IsValid(option, _metaModelValidation);
+            var result = _validationService.IsValid(_metaModelValidation);
             //Assert
             Assert.AreEqual(result, expected);
         }
@@ -93,14 +76,15 @@ namespace Fanex.Athena.Service.Core.UnitTests.Utility
           bool expected)
         {
             //Arrange
-            var option = new ValidationMetaModelOption { IsValidCurrency = true };
+            var option = new CurrencyValidationOption { IsValidCurrency = true };
             var model = new BaseMetaModel { CurrencyId = currencyId, BaseCurrency = "USD" };
-
+            _currencyValidation.IsValidCurrency(currencyId).Returns(expected);
             //Action
 
-            var result = _validationService.IsValid(option, model);
+            var result = _validationService.IsValid(model, option);
             //Assert
             Assert.AreEqual(result, expected);
+            _currencyValidation.Received(1).IsValidCurrency(currencyId);
         }
 
         [TestCase(CurrencyType.Cny, LicenseeIdentity.KeenOcean, true)]
@@ -112,51 +96,48 @@ namespace Fanex.Athena.Service.Core.UnitTests.Utility
         bool expected)
         {
             //Arrange
-            _sessionService.LicenseeSession.Returns(new LicenseeSession { LicenseeId = licenseeId });
-            var option = new ValidationMetaModelOption { IsValidCurrency = true, IsIncludeKeanOcean = true };
+            var option = new CurrencyValidationOption { IsValidCurrency = true, IsIncludeKeanOcean = true };
             var model = new BaseMetaModel { CurrencyId = currencyId, BaseCurrency = "USD" };
+            _currencyValidation.IsValidCurrency(currencyId, true).Returns(expected);
+
             //Action
 
-            var result = _validationService.IsValid(option, model);
+            var result = _validationService.IsValid(model, option);
             //Assert
             Assert.AreEqual(result, expected);
+            _currencyValidation.Received(1).IsValidCurrency(currencyId, true);
+
         }
 
-        [TestCase("", true, true)]
-        [TestCase("", false, false)]
-        [TestCase("usd", false, true)]
-        [TestCase("KKK", false, false)]
-        public void IsValidBaseCurrency_WhenCalled_ReturnCorrectResult(
-            string baseCurrency,
-           bool isAllowEmpty,
-            bool expectedValue)
+        [Test]
+        public void IsValid_ByCurrencyList_ReturnExpectedResult()
         {
             //Arrange
+            const string currencyIdList = "1,2";
+            var option = new CurrencyValidationOption { IsValidCurrencyList = true };
+            var model = new BaseBettingTicketMetaModel { CurrencyIdList = currencyIdList };
+            _currencyValidation.IsValidCurrency(Arg.Any<string>()).Returns(true);
 
             //Action
-
-            var result = _validationService.IsValidBaseCurrency(baseCurrency, isAllowEmpty);
+            _validationService.IsValid(model, option);
             //Assert
-            Assert.AreEqual(result, expectedValue);
+            _currencyValidation.Received(1).IsValidCurrency(currencyIdList);
+
         }
 
-        [TestCase(CurrencyType.Cny, LicenseeIdentity.KeenOcean, true)]
-        [TestCase(CurrencyType.Cny, LicenseeIdentity.OneTwoBet, false)]
-        [TestCase(100, 1, false)]
-        [TestCase(2, 1, true)]
-        public void IsValidCurrency_WhenCalled_ReturnCorrectResult(
-            int currency,
-            int licenseeId,
-            bool expectedValue)
+        [Test]
+        public void IsValid_ByProduct_HavingCallProducationValidation()
         {
             //Arrange
-            _sessionService.LicenseeSession.Returns(new LicenseeSession { LicenseeId = licenseeId });
-
+            const string functionKey = "winloss";
+            var option = new ProductValidationOption { IsValidProductCodeList = true, FunctionKey = functionKey };
+            var model = new CasinoTurnoverMetaModel { ProductCodeList = "SB", BaseCurrency = "USD", Status = new[] { 1 } };
+            _productValidation.IsValid(Arg.Any<IMetaModelProductCodeList>(), Arg.Any<string>()).Returns(true);
             //Action
-
-            var result = _validationService.IsValidCurrency(currency, true);
+            _validationService.IsValid(model, null, option);
             //Assert
-            Assert.AreEqual(result, expectedValue);
+            _productValidation.Received(1).IsValid(model, functionKey);
+
         }
     }
 }

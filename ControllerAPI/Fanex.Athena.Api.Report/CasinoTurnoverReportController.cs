@@ -28,13 +28,10 @@
         }
 
         [HttpPost]
-        [ValidationApiRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
+        [ValidationApiRequest(IsValidCurrency = true, IsIncludeKeanOcean = true,
+            IsValidProductCodeList = true, FunctionKey = FunctionNames.CasinoTurnover)]
         public async Task<dynamic> GetData(CasinoTurnoverMetaModel metaModel)
         {
-            if (!IsValidProducts(FunctionNames.CasinoTurnover, metaModel.ProductCode))
-            {
-                return BadRequest(ViewResources.InvalidRequestMsg);
-            }
 
             metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
             var result = await _casinoTurnoverDataAccess.GetData(metaModel).ConfigureAwait(false);

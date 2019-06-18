@@ -24,7 +24,7 @@
         {
             IsConvertAll = false,
             Status = new[] { 0 },
-            ProductCode = new[] { string.Empty }
+            ProductCodeList = string.Empty
         };
 
         protected override void SetUpDataAccess()
@@ -64,7 +64,7 @@
                 ObjectDb.Received(1).SetParameterValue("basecurrency", metaModel.BaseCurrency);
                 ObjectDb.Received(1).SetParameterValue("UserName", metaModel.UserName);
                 ObjectDb.Received(1).SetParameterValue("StatusList", string.Join(",", metaModel.Status));
-                ObjectDb.Received(1).SetParameterValue("ProductCodes", string.Join(",", metaModel.ProductCode));
+                ObjectDb.Received(1).SetParameterValue("ProductCodes", metaModel.ProductCodeList);
                 ObjectDb.Received(1).SetParameterValue("MoveBetsDay", _moveBetsDay);
                 ObjectDb.Received(1).SetParameterValue("AgentList", metaModel.AgentListXml);
 
@@ -104,7 +104,7 @@
             Reader.Read().Returns(true, false, true, false);
             Reader.NextResult().Returns(true);
             DataAccessTestHelper.MapReaderData(
-                Reader, 
+                Reader,
                 new
                 {
                     Date = expectedResult.Date,

@@ -22,19 +22,19 @@
     public class GoldDeluxeWinLossReportController : ApiReportBaseController
     {
         private readonly IGoldDeluxeWinLossDataAccess _dataAccess;
-        private readonly IValidationService _validationService;
+        private readonly ICurrencyValidation _currencyValidation;
 
         public GoldDeluxeWinLossReportController(
             IGoldDeluxeWinLossDataAccess dataAccess,
             ISessionService sessionService,
             IProductService productService,
             ILanguageService langService,
-            IValidationService validationService
+            ICurrencyValidation currencyValidation
             )
             : base(sessionService, productService, langService)
         {
             _dataAccess = dataAccess;
-            _validationService = validationService;
+            _currencyValidation = currencyValidation;
         }
 
         [HttpPost]
@@ -124,7 +124,7 @@
             int currencyId = 0,
             int custId = 0)
         {
-            if (_validationService.IsValidCurrency(currencyId, true))
+            if (_currencyValidation.IsValidCurrency(currencyId, true))
             {
                 metaModel.DrillDownCurrencyId = currencyId;
                 metaModel.DrillDownLevel = level;

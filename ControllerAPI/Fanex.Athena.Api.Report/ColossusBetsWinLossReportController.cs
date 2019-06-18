@@ -30,18 +30,18 @@ namespace Fanex.Athena.Api.Report
     public class ColossusBetsWinLossReportController : ApiReportBaseController
     {
         private readonly IColossusBetsWinLossService _colossusBetsWinLossService;
-        private readonly IValidationService _validationService;
+        private readonly ICurrencyValidation _currencyValidation;
         public ColossusBetsWinLossReportController(
             IColossusBetsWinLossService colossusBetsWinLossService,
             ISessionService sessionService,
             IProductService productService,
             ILanguageService langService,
-            IValidationService validationService)
+            ICurrencyValidation currencyValidation)
             : base(sessionService, productService, langService)
         {
             _colossusBetsWinLossService = colossusBetsWinLossService;
 
-            _validationService = validationService;
+            _currencyValidation = currencyValidation;
         }
 
         [HttpPost]
@@ -132,7 +132,7 @@ namespace Fanex.Athena.Api.Report
             int currencyId = 0,
             int custId = 0)
         {
-            if (_validationService.IsValidCurrency(currencyId, true))
+            if (_currencyValidation.IsValidCurrency(currencyId, true))
             {
                 metaModel.DrillDownCurrencyId = currencyId;
                 metaModel.DrillDownLevel = level;
