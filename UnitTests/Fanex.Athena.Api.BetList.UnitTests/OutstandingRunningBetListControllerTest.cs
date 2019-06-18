@@ -45,24 +45,7 @@
             }
         }
 
-        [Test]
-        public async Task Detail_InvalidProductCodeList_ReturnNull()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var metaModel = new BetListExcelMetaModel { CurrencyId = 1, ProductCodeList = string.Empty };
-
-                StubUserSessionData(new UserSession { CurrencyList = new Dictionary<int, string> { { metaModel.CurrencyId, "Currency" } } });
-
-                // Action
-                var result = await controller.Index(metaModel);
-
-                // Assert
-                Assert.That(result, Is.Null);
-            }
-        }
-
+       
         [TestCase(0)]
         [TestCase(1)]
         [TestCase(2)]
@@ -75,12 +58,6 @@
 
                 StubUserSessionData(new UserSession { Language = SessionLanguage, CurrencyList = new Dictionary<int, string> { { currencyId, "Currency" } } });
 
-                ProductService.GetProductAccess(
-                    SessionLicenseeId,
-                    SessionLanguage,
-                    BetListCustomerOutstandingRunningName)
-                .Returns(new ProductAccess(new List<Product> { new Product { ProductCode = "Product1" }, new Product { ProductCode = "Product3" } }));
-
                 var expect = new HttpResponseMessage();
                 StubBetListApiPostAsync(Arg.Any<BetListMetaModel>(), ApiPath, expect);
 
@@ -92,7 +69,6 @@
                 {
                     NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
                     Assert.That(metaModel.ToDate.Hour, Is.EqualTo(23));
-                    Assert.That(metaModel.ProductCodeList, Is.EqualTo("Product1"));
                     Assert.That(metaModel.UspKey, Is.EqualTo(UspKey));
                     BetListApiClient.Received().PostAsync((string)ApiPath, (object)metaModel, (string)SessionLanguage);
                 }));
