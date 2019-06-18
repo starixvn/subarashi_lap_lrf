@@ -8,7 +8,7 @@ using Fanex.Athena.Model.Core.MetaModel;
 
 namespace Fanex.Athena.Model.BetList.MetaModel
 {
-    public class BetListMetaModel : BaseMetaModel, IMetaModelValidation
+    public class BetListMetaModel : BaseMetaModel, IMetaModelValidation, IMetaModelProductCodeList
     {
         public BetListMetaModel()
         {
