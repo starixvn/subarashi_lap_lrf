@@ -1,6 +1,9 @@
-﻿namespace Fanex.Athena.Model.BetList.MetaModel
+﻿using Fanex.Athena.Model.Core.Helper;
+using Fanex.Athena.Model.Core.MetaModel;
+
+namespace Fanex.Athena.Model.BetList.MetaModel
 {
-    public class ColossusBetDetailMetaModel
+    public class ColossusBetDetailMetaModel : IMetaModelValidation
     {
         public int UserId { get; set; }
 
@@ -13,5 +16,8 @@
         public long BetCheck { get; set; }
 
         public string AgentListXml { get; set; }
+
+        public bool IsValid => CustId > 0 && MetaModelValidationHelper
+            .ValidateBaseCurrency(BaseCurrency);
     }
 }
