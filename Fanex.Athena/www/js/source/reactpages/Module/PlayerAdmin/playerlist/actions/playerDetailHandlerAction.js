@@ -14,6 +14,6 @@ export const getTabList = () => () => {
 export const setSelectedPlayerIdList = (data) => {
     return {
         type: SET_SELECTED_PLAYERID_LIST,
-        data
+        data: [...data]
     }
 }
