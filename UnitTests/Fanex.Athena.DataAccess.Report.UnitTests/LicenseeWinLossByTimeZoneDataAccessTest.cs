@@ -1,7 +1,6 @@
 ﻿namespace Fanex.Athena.DataAccess.Report.UnitTests
 {
     using System;
-    using System.Data;
     using System.Linq;
     using System.Threading.Tasks;
     using Core.Configuration.Interfaces;
