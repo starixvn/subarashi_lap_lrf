@@ -375,26 +375,17 @@ bool addBasedOption = false)
 {
     /**/
 
-    string title;
+    string title = string.Empty;
 
-    switch (currencyId)
+    if (currencyId == BaseCurrencyType.All)
     {
-        case BaseCurrencyType.All:
-            title = ViewResources.AllCurrencies;
-            break;
-        case BaseCurrencyType.Eur:
-            title = string.Format(ViewResources.Viewin, FormatKey.Eur);
-            break;
-        case BaseCurrencyType.Usd:
-            title = string.Format(ViewResources.Viewin, FormatKey.Usd);
-            break;
-        case BaseCurrencyType.Gbp:
-            title = string.Format(ViewResources.Viewin, FormatKey.Gbp);
-            break;
-        default:
-            title = string.Format(ViewResources.Viewin, currencyName);
-            break;
+        title = ViewResources.AllCurrencies;
     }
+
+    title = SystemConstants.BaseCurrencyList.ContainsKey(currencyId) ?
+        string.Format(ViewResources.Viewin, SystemConstants.BaseCurrencyList[currencyId]) :
+        string.Format(ViewResources.Viewin, currencyName);
+
     @(title)
 }
 
