@@ -22,7 +22,7 @@
 
         private readonly IAppSettings _appSetting;
 
-        private readonly IDictionary<string, HttpClient> _clients = new Dictionary<string, HttpClient>();
+        private static readonly IDictionary<string, HttpClient> _clients = new Dictionary<string, HttpClient>();
 
         public BetListApiClient(IAppSettings appSettings)
         {
