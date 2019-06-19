@@ -5,6 +5,11 @@ import { bindActionCreators } from 'redux'
 import CheckBox from '@jsroot/components/CheckBox'
 import AdvancedSearch from './AdvancedSearch';
 import SearchOption from './SearchOption';
+import AthenaSearch from './AthenaSearch';
+import { licenseeType } from '../lib/constants';
+import CollapsiblePanel from '@jsroot/components/collapsible-panel';
+import UserGuide from '@jsroot/components/UserGuide';
+import LangHelper from '@jsroot/lib/langHelper';
 
 export class FormFilter extends PureComponent {
     constructor(props) {
@@ -12,8 +17,12 @@ export class FormFilter extends PureComponent {
 
         this.state = {
             userName: '',
+            bankAccountNumber: '', 
+            email: '',
             isShowAdvancedSearch: false
         }
+
+        this.userGuide = this._renderUserGuide();
     }
 
     handleSubmit = (event) => {
@@ -28,20 +37,37 @@ export class FormFilter extends PureComponent {
         this.setState({ [name]: value });
     }
 
+    showUserGuide(){
+
+    }
+
+    _renderUserGuide() {
+        const userGuideContent = '';
+
+        return (<UserGuide 
+                title={LangHelper.getSingleResource("UserGuide")} 
+                contentTitle={LangHelper.getSingleResource("")}
+                onClick={this.showUserGuide}
+                content={userGuideContent} />)
+    }
+
     render() {
-        const { userName, isShowAdvancedSearch } = this.state;
+        const { userName, bankAccountNumber, email, isShowAdvancedSearch } = this.state;
+        const { type } = this.props;
 
         return (
-            <div className="page-filter">
+            <CollapsiblePanel className="page-filter">
                 <div className="row">
                     <div className="col-12 col-md-4 col-sm-4 col-lg-3 col-xl-2">
                         <div className="form-group">
                             <label className="label-text">UserName {(<SearchOption />)}</label>
                             <input className="input-text" id="userName" name="userName" type="text" value={userName}
-                                onChange={this.handleChange} />
+                                autoComplete="off" onChange={this.handleChange} />
                         </div>
                     </div>
 
+                    {type === licenseeType.nonApi && <AthenaSearch onChange={this.handleChange} 
+                                                        bankAccountNumber={bankAccountNumber} email={email} />}
                     {isShowAdvancedSearch && <AdvancedSearch />}
 
                     <div className="col-12 col-md-2 col-sm-2 col-lg-1 col-xl-1">
@@ -61,7 +87,7 @@ export class FormFilter extends PureComponent {
                         </div>
                     </div>
                 </div>
-            </div>
+            </CollapsiblePanel>
         );
     }
 }
@@ -70,8 +96,8 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators({ searchPlayer, setSelectedPlayer }, dispatch);
 }
 function mapStateToProps(state) {
-    const { isLoading, ...rest } = state;
-    return Object.assign({}, rest);
+    const { isLoading, type, ...rest } = state;
+    return Object.assign({ type }, rest);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FormFilter);

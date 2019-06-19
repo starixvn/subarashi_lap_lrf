@@ -44,8 +44,7 @@ export default class PlayerListService {
             const playerList = this._mergePlayerList(lrfPlayerList, lapResponseData.PlayerList);
 
             return {
-                playerList,
-                tabList: lapResponseData.TabList
+                playerList
             };
         })
     }

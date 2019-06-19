@@ -2,6 +2,12 @@
 
 $textColor: #2c2c2c;
 
+.multiple-select-label {
+    height: 23px;
+    padding-top: 3px;
+    padding-bottom: 5px;
+}
+
 .multiple-select-options-container {
     .multiple-select-item label {
         color: $textColor;

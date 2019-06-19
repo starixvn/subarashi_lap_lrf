@@ -25,3 +25,8 @@ export const columnList = [
     'Status', 'Username', 'SystemID', 'Currency', 'Current Balance',
     'Outstanding Balance', 'Odds Group', 'BA Status', 'Special Level', 'Last Transaction'
 ]
+
+export const licenseeType = {
+    api: 0,
+    nonApi: 1
+}

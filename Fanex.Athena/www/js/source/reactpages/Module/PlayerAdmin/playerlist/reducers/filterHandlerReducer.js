@@ -12,3 +12,5 @@ export const playerList = createReducer(null, {
         return [...action.data];
     }
 })
+
+export const type = createReducer(null, {});
