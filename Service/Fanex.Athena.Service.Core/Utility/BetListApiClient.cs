@@ -35,10 +35,7 @@
                 return _clients[language];
             }
 
-            var client = new HttpClient
-            {
-                Timeout = TimeSpan.FromMinutes(_appSetting.BetListApiClientTimeOutMinutes)
-            };
+            var client = new HttpClient();
 
             client.DefaultRequestHeaders.Add(KEYNAME, _appSetting.GetValue("BetListApiTokenValue"));
             client.DefaultRequestHeaders.Add(LANGUAGEKEY, language);
@@ -48,13 +45,13 @@
         }
         private async Task<T> Handle<T>(string path, object value, string language, Func<HttpResponseMessage, Task<T>> codeBlock)
         {
-
+            var source = new CancellationTokenSource(TimeSpan.FromMinutes(_appSetting.BetListApiClientTimeOutMinutes));
             try
             {
                 var client = GetHttpClient(language);
                 var url = new Uri(_appSetting.BetListApiHostUrl + path);
                 var stringContent = new StringContent(JsonConvert.SerializeObject(value), Encoding.UTF8, "application/json");
-                var response = await client.PostAsync(url, stringContent).ConfigureAwait(false);
+                var response = await client.PostAsync(url, stringContent, source.Token).ConfigureAwait(false);
                 response.EnsureSuccessStatusCode();
                 return await codeBlock(response);
             }
@@ -74,6 +71,14 @@
                 message.Append($"\n InnerExceptionMsg={ex.InnerException?.Message}");
                 throw new ServiceException(message.ToString(), "BetListApiClient");
             }
+            finally
+            {
+                if (source != null)
+                {
+                    source.Dispose();
+                }
+            }
+
 
         }
 
