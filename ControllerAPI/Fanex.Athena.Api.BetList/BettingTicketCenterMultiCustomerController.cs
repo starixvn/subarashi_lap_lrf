@@ -37,7 +37,7 @@
         }
 
         [HttpPost]
-        public async Task<dynamic> GetData(MultipleCustomersBetListMetaModel metaModel)
+        public dynamic GetData(MultipleCustomersBetListMetaModel metaModel)
         {
             var licenseeSession = SessionService.LicenseeSession;
             if (metaModel.IsExport &&
@@ -64,8 +64,8 @@
             metaModel.HasPlayerCom = SessionService.LicenseeSession.IsAllowedCustomerComm;
             metaModel.UserCurrencyList = userCurrencyList;
 
-            return await _betListApiClient.PostAsync("/BettingTicketCenterMultiCustomer/GetData",
-                metaModel, userSession.Language).ConfigureAwait(false);
+            return _betListApiClient.Post("/BettingTicketCenterMultiCustomer/GetData",
+                metaModel, userSession.Language);
         }
     }
 }

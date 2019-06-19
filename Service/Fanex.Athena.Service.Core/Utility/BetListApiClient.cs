@@ -3,6 +3,8 @@
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
+    using System.Net;
     using System.Net.Http;
     using System.Text;
     using System.Threading;
@@ -13,6 +15,7 @@
     using Fanex.Athena.Service.Core.Utility.Interfaces;
     using Fanex.Athena.Session.Interfaces;
     using Newtonsoft.Json;
+    using RestSharp;
 
     public class BetListApiClient : IBetListApiClient
     {
@@ -44,53 +47,60 @@
 
             return client;
         }
-        private async Task<T> Handle<T>(string path, object value, string language, Func<HttpResponseMessage, Task<T>> codeBlock)
+        private async Task<T> HandleAsync<T>(string path, object value, string language, Func<HttpResponseMessage, Task<T>> codeBlock)
         {
-            var source = new CancellationTokenSource(TimeSpan.FromMinutes(_appSetting.BetListApiClientTimeOutMinutes));
-            try
+            using (var source = new CancellationTokenSource(TimeSpan.FromMinutes(_appSetting.BetListApiClientTimeOutMinutes)))
             {
                 var client = GetHttpClient(language);
                 var url = new Uri(_appSetting.BetListApiHostUrl + path);
                 var stringContent = new StringContent(JsonConvert.SerializeObject(value), Encoding.UTF8, "application/json");
-                var response = await client.PostAsync(url, stringContent, source.Token).ConfigureAwait(false);
-
+                var response = await client.PostAsync(url, stringContent, source.Token);
+                response.EnsureSuccessStatusCode();
                 return await codeBlock(response);
             }
-            catch (Exception ex)
-            {
-                var message = new StringBuilder($"Error when calling LAP.BETLIST API - Path = { path }");
-                if (ex is TaskCanceledException)
-                {
-                    var temp = ex as TaskCanceledException;
-                    message.Append($"\n IsCancellationRequested={temp.CancellationToken.IsCancellationRequested}");
-                    if (!temp.CancellationToken.IsCancellationRequested)
-                    {
-                        message.Append("\n Request timed out");
-                    }
-                }
-                message.Append($"\n ErrMsg={ex.Message}");
-                message.Append($"\n InnerExceptionMsg={ex.InnerException?.Message}");
-                throw new ServiceException(message.ToString(), "BetListApiClient");
-            }
-            finally
-            {
-                if (source != null)
-                {
-                    source.Dispose();
-                }
-            }
 
+        }
+        private T Handle<T>(string path, object value, string language, Func<IRestResponse, T> codeBlock)
+        {
+
+            var client = new RestClient(_appSetting.BetListApiHostUrl);
+
+            var request = new RestRequest(path)
+            {
+                Method = Method.POST
+
+            };
+
+            var timeOut = 60000 * _appSetting.BetListApiClientTimeOutMinutes;
+            request.Timeout = timeOut;
+            request.AddJsonBody(value);
+
+            request.AddHeader(KEYNAME, _appSetting.GetValue("BetListApiTokenValue"));
+            request.AddHeader(LANGUAGEKEY, language);
+
+            return codeBlock(client.Post(request));
 
         }
 
         public Task<HttpResponseMessage> PostAsync(string path, object value, string language)
         {
-            return Handle(path, value, language, x => Task.FromResult(x));
+            return HandleAsync(path, value, language, x => Task.FromResult(x));
         }
+        public HttpResponseMessage Post(string path, object value, string language)
+        {
+            return Handle(path, value, language, x => {
+                var result = new HttpResponseMessage
+                {
+                    StatusCode=x.StatusCode,
+                    RequestMessage = new HttpRequestMessage { }
+                }
+            }
+            );
 
+        }
         public Task<T> PostAsync<T>(string path, object value, string language)
         {
-            return Handle<T>(
+            return HandleAsync<T>(
                 path,
                 value,
                 language,
@@ -103,12 +113,12 @@
 
         public Task<Stream> PostAsyncStream(string path, object value, string language)
         {
-            return Handle(path, value, language, async (x) => await x.Content.ReadAsStreamAsync());
+            return HandleAsync(path, value, language, async (x) => await x.Content.ReadAsStreamAsync());
         }
 
         public Task<string> PostAsyncString(string path, object value, string language)
         {
-            return Handle(path, value, language, async (x) => await x.Content.ReadAsStringAsync());
+            return HandleAsync(path, value, language, async (x) => await x.Content.ReadAsStringAsync());
         }
     }
 }

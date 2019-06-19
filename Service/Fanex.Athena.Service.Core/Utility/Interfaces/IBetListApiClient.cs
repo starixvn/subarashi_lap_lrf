@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RestSharp;
+using System;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -14,5 +15,7 @@ namespace Fanex.Athena.Service.Core.Utility.Interfaces
         Task<Stream> PostAsyncStream(string path, object value, string language);
 
         Task<string> PostAsyncString(string path, object value, string language);
+
+        HttpResponseMessage Post(string path, object value, string language);
     }
 }
