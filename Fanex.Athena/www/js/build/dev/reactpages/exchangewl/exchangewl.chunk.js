@@ -3568,6 +3568,18 @@ function () {
       return text;
     }
   }, {
+    key: "streamContent",
+    value: function streamContent(id, filename) {
+      var url = Site.resolveClientUrl("api/DataStream/zip?filename=" + id);
+      var link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', filename);
+      document.body.appendChild(link);
+      link.click();
+      link.parentNode.removeChild(link);
+      window.URL.revokeObjectURL(url);
+    }
+  }, {
     key: "downloadFile",
     value: function downloadFile(data, fileName) {
       var url = window.URL.createObjectURL(new Blob([data]));
