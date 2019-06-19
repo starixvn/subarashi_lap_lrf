@@ -48,80 +48,6 @@ exports[`AdvancedSearch render with initial state - should match snapshot 1`] = 
       <label
         className="label-text"
       >
-        Based
-      </label>
-      <Select
-        arrowRenderer={[Function]}
-        autosize={true}
-        backspaceRemoves={true}
-        backspaceToRemoveMessage="Press backspace to remove {label}"
-        clearAllText="Clear all"
-        clearRenderer={[Function]}
-        clearValueText="Clear value"
-        clearable={true}
-        closeOnSelect={true}
-        deleteRemoves={true}
-        delimiter=","
-        disabled={false}
-        escapeClearsValue={true}
-        filterOptions={[Function]}
-        ignoreAccents={true}
-        ignoreCase={true}
-        inputProps={Object {}}
-        instanceId="ddlBased"
-        isLoading={false}
-        joinValues={false}
-        labelKey="label"
-        matchPos="any"
-        matchProp="any"
-        menuBuffer={0}
-        menuRenderer={[Function]}
-        multi={false}
-        name="basedCurrency"
-        noResultsText="No results found"
-        onBlurResetsInput={true}
-        onChange={[Function]}
-        onCloseResetsInput={true}
-        onSelectResetsInput={true}
-        openOnClick={true}
-        optionComponent={[Function]}
-        options={
-          Array [
-            Object {
-              "label": "EUR",
-              "value": "eur",
-            },
-            Object {
-              "label": "USD",
-              "value": "usd",
-            },
-          ]
-        }
-        pageSize={5}
-        placeholder="Select..."
-        removeSelected={true}
-        required={false}
-        rtl={false}
-        scrollMenuIntoView={true}
-        searchable={true}
-        simpleValue={false}
-        tabSelectsValue={true}
-        trimFilter={true}
-        value="usd"
-        valueComponent={[Function]}
-        valueKey="value"
-      />
-    </div>
-  </div>
-  <div
-    className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2"
-  >
-    <div
-      className="form-group"
-    >
-      <label
-        className="label-text"
-      >
         Odds Group
       </label>
       <t
@@ -147,43 +73,6 @@ exports[`AdvancedSearch render with initial state - should match snapshot 1`] = 
         hasAllOption={true}
         hasSearchBox={false}
         id="oddsGroup"
-        keyField="Id"
-        language="en-US"
-        onChange={[Function]}
-        statusField="Status"
-        valueField="Value"
-      />
-    </div>
-  </div>
-  <div
-    className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2"
-  >
-    <div
-      className="form-group"
-    >
-      <label
-        className="label-text"
-      >
-        Subsidiary
-      </label>
-      <t
-        dataSource={
-          Array [
-            Object {
-              "Id": "s1",
-              "Status": true,
-              "Value": "S1",
-            },
-            Object {
-              "Id": "s2",
-              "Status": true,
-              "Value": "S2",
-            },
-          ]
-        }
-        hasAllOption={true}
-        hasSearchBox={false}
-        id="subsidiary"
         keyField="Id"
         language="en-US"
         onChange={[Function]}

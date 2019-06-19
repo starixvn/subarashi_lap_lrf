@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`FormFilter render isShowAdvancedSearch = false - should match snapshot without AdvancedSearch 1`] = `
-<div
+<CollapsiblePanel
   className="page-filter"
 >
   <div
@@ -20,6 +20,7 @@ exports[`FormFilter render isShowAdvancedSearch = false - should match snapshot 
           <SearchOption />
         </label>
         <input
+          autoComplete="off"
           className="input-text"
           id="userName"
           name="userName"
@@ -64,11 +65,11 @@ exports[`FormFilter render isShowAdvancedSearch = false - should match snapshot 
       </div>
     </div>
   </div>
-</div>
+</CollapsiblePanel>
 `;
 
 exports[`FormFilter render isShowAdvancedSearch = true - should match snapshot with AdvancedSearch 1`] = `
-<div
+<CollapsiblePanel
   className="page-filter"
 >
   <div
@@ -87,6 +88,7 @@ exports[`FormFilter render isShowAdvancedSearch = true - should match snapshot w
           <SearchOption />
         </label>
         <input
+          autoComplete="off"
           className="input-text"
           id="userName"
           name="userName"
@@ -96,7 +98,17 @@ exports[`FormFilter render isShowAdvancedSearch = true - should match snapshot w
         />
       </div>
     </div>
-    <Connect(AdvancedSearch) />
+    <AdvancedSearch
+      onChange={[Function]}
+      param={
+        Object {
+          "ba": "",
+          "currency": "",
+          "oddsGroup": "",
+          "specialLevel": "",
+        }
+      }
+    />
     <div
       className="col-12 col-md-2 col-sm-2 col-lg-1 col-xl-1"
     >
@@ -132,5 +144,5 @@ exports[`FormFilter render isShowAdvancedSearch = true - should match snapshot w
       </div>
     </div>
   </div>
-</div>
+</CollapsiblePanel>
 `;

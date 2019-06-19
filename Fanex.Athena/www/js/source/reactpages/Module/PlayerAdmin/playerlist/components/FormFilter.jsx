@@ -19,6 +19,10 @@ export class FormFilter extends PureComponent {
             userName: '',
             bankAccountNumber: '', 
             email: '',
+            currency: '',
+            oddsGroup: '',
+            specialLevel: '',
+            baStatus: '',
             isShowAdvancedSearch: false
         }
 
@@ -29,11 +33,17 @@ export class FormFilter extends PureComponent {
         event.preventDefault();
         this.props.setSelectedPlayer(null);
         this.props.searchPlayer({ userName: this.state.userName });
+
+        console.log(this.state);
     }
 
     handleChange = (event) => {
         const { name, value } = event.target;
 
+        this.setState({ [name]: value });
+    }
+
+    handleAdvancedSearchChange = (name, value) => {
         this.setState({ [name]: value });
     }
 
@@ -52,7 +62,7 @@ export class FormFilter extends PureComponent {
     }
 
     render() {
-        const { userName, bankAccountNumber, email, isShowAdvancedSearch } = this.state;
+        const { userName, bankAccountNumber, email, isShowAdvancedSearch, ...advancedSearchParam } = this.state;
         const { type } = this.props;
 
         return (
@@ -68,7 +78,7 @@ export class FormFilter extends PureComponent {
 
                     {type === licenseeType.nonApi && <AthenaSearch onChange={this.handleChange} 
                                                         bankAccountNumber={bankAccountNumber} email={email} />}
-                    {isShowAdvancedSearch && <AdvancedSearch />}
+                    {isShowAdvancedSearch && <AdvancedSearch param={advancedSearchParam} onChange={this.handleAdvancedSearchChange} />}
 
                     <div className="col-12 col-md-2 col-sm-2 col-lg-1 col-xl-1">
                         <div className="form-group">

@@ -1,21 +1,31 @@
-﻿using System.Web.Http;
+﻿using System.Collections.Generic;
+using System.Web.Http;
 using Fanex.Athena.Api.Base;
+using Fanex.Athena.Module.PlayerAdmin.DTO;
+using Fanex.Athena.Module.PlayerAdmin.MetaModel;
+using Fanex.Athena.Module.PlayerAdmin.Repository;
 
 namespace Fanex.Athena.Module.PlayerAdmin.Api
 {
     public class PlayerMainController : ExternalApiBaseController
     {
+        private readonly IPlayerListRepository _playerListRepository;
+
+        public PlayerMainController(IPlayerListRepository playerListRepository)
+        {
+            _playerListRepository = playerListRepository;
+        }
 
         /**
          * search player list
          */
         [HttpPost]
-        public dynamic Search(string userName = "")
+        public dynamic Search(SearchPlayerMetaModel searchParam)
         {
-            return new[] {
-                new {
-                    CustId = 1,
-                    UserNameInput = userName,
+            var dataList = new List<Player>
+            {
+                new Player
+                {
                     UserName = "qatest01",
                     SystemId = "qatestIN0194315",
                     Currency = "RMB",
@@ -23,12 +33,11 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api
                     OutstandingBalance = 0m,
                     OddsGroup = "A",
                     BaStatus = true,
-                    SpecialLevel = "None",
-                    LastTransaction = "2/9/2019 8:49:00 AM"
+                    SpecialLevel = 1,
+                    CustId = 1
                 },
-                new {
-                    CustId = 2,
-                    UserNameInput = userName,
+                new Player
+                {
                     UserName = "qatest02",
                     SystemId = "qatestIN0208741",
                     Currency = "RMB",
@@ -36,9 +45,15 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api
                     OutstandingBalance = 0m,
                     OddsGroup = "A",
                     BaStatus = false,
-                    SpecialLevel = "None",
-                    LastTransaction = "2/9/2019 8:49:00 AM"
+                    SpecialLevel = 2,
+                    CustId = 2
                 }
+            };
+
+            return new EntityResult<Player>
+            {
+                MainData = dataList,
+                TotalItem = 2
             };
         }
     }
