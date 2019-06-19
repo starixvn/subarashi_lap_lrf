@@ -1,22 +1,16 @@
 ﻿namespace Fanex.Athena.Service.Core.Utility
 {
+    using Fanex.Athena.Extension.Utility;
+    using Fanex.Athena.Service.Core.Utility.Interfaces;
+    using Newtonsoft.Json;
+    using RestSharp;
     using System;
     using System.Collections.Generic;
     using System.IO;
-    using System.Linq;
-    using System.Net;
     using System.Net.Http;
-    using System.Net.Http.Headers;
     using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
-    using System.Web;
-    using Fanex.Athena.Extension.Utility;
-    using Fanex.Athena.Service.Core.Exception;
-    using Fanex.Athena.Service.Core.Utility.Interfaces;
-    using Fanex.Athena.Session.Interfaces;
-    using Newtonsoft.Json;
-    using RestSharp;
 
     public class BetListApiClient : IBetListApiClient
     {
@@ -64,7 +58,7 @@
         private T Handle<T>(string path, object value, string language, Func<HttpResponseMessage, T> codeBlock)
         {
 
-            var client = new RestClient(_appSetting.BetListApiHostUrl);
+            var client = new RestClient(new Uri(_appSetting.BetListApiHostUrl));
 
             var request = new RestRequest(path)
             {
