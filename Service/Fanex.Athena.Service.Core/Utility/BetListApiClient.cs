@@ -6,6 +6,7 @@
     using System.Linq;
     using System.Net;
     using System.Net.Http;
+    using System.Net.Http.Headers;
     using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
@@ -60,7 +61,7 @@
             }
 
         }
-        private T Handle<T>(string path, object value, string language, Func<IRestResponse, T> codeBlock)
+        private T Handle<T>(string path, object value, string language, Func<HttpResponseMessage, T> codeBlock)
         {
 
             var client = new RestClient(_appSetting.BetListApiHostUrl);
@@ -78,7 +79,13 @@
             request.AddHeader(KEYNAME, _appSetting.GetValue("BetListApiTokenValue"));
             request.AddHeader(LANGUAGEKEY, language);
 
-            return codeBlock(client.Post(request));
+            var data = client.Post(request);
+
+            HttpResponseMessage response = new HttpResponseMessage(data.StatusCode);
+            var mem = new MemoryStream(data.RawBytes);
+            response.Content = new StreamContent(mem);
+
+            return codeBlock(response);
 
         }
 
@@ -88,13 +95,7 @@
         }
         public HttpResponseMessage Post(string path, object value, string language)
         {
-            return Handle(path, value, language, x => {
-                var result = new HttpResponseMessage
-                {
-                    StatusCode=x.StatusCode,
-                    RequestMessage = new HttpRequestMessage { }
-                }
-            }
+            return Handle(path, value, language, x => x
             );
 
         }
