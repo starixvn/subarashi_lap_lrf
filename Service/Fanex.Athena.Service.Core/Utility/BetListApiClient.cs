@@ -27,6 +27,7 @@
         public BetListApiClient(IAppSettings appSettings)
         {
             _appSetting = appSettings;
+
         }
         private HttpClient GetHttpClient(string language)
         {
@@ -45,7 +46,7 @@
         }
         private async Task<T> Handle<T>(string path, object value, string language, Func<HttpResponseMessage, Task<T>> codeBlock)
         {
-            var source = new CancellationTokenSource(1000 * 60 * _appSetting.BetListApiClientTimeOutMinutes);
+            var source = new CancellationTokenSource(TimeSpan.FromMinutes(_appSetting.BetListApiClientTimeOutMinutes));
             try
             {
                 var client = GetHttpClient(language);
