@@ -52,7 +52,7 @@
                 var url = new Uri(_appSetting.BetListApiHostUrl + path);
                 var stringContent = new StringContent(JsonConvert.SerializeObject(value), Encoding.UTF8, "application/json");
                 var response = await client.PostAsync(url, stringContent, source.Token).ConfigureAwait(false);
-                response.EnsureSuccessStatusCode();
+                
                 return await codeBlock(response);
             }
             catch (Exception ex)
