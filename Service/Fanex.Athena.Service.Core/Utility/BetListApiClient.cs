@@ -1,6 +1,7 @@
 ﻿namespace Fanex.Athena.Service.Core.Utility
 {
     using System;
+    using System.Collections.Generic;
     using System.IO;
     using System.Net.Http;
     using System.Text;
@@ -21,24 +22,39 @@
 
         private readonly IAppSettings _appSetting;
 
+        private readonly IDictionary<string, HttpClient> _clients = new Dictionary<string, HttpClient>();
+
         public BetListApiClient(IAppSettings appSettings)
         {
             _appSetting = appSettings;
         }
+        private HttpClient GetHttpClient(string language)
+        {
+            if (_clients.ContainsKey(language))
+            {
+                return _clients[language];
+            }
 
+            var client = new HttpClient
+            {
+                Timeout = TimeSpan.FromMinutes(_appSetting.BetListApiClientTimeOutMinutes)
+            };
+
+            client.DefaultRequestHeaders.Add(KEYNAME, _appSetting.GetValue("BetListApiTokenValue"));
+            client.DefaultRequestHeaders.Add(LANGUAGEKEY, language);
+            _clients.Add(language, client);
+
+            return client;
+        }
         private async Task<T> Handle<T>(string path, object value, string language, Func<HttpResponseMessage, Task<T>> codeBlock)
         {
-            var source = new CancellationTokenSource();
-            var client = new HttpClient();
 
             try
             {
-                client.Timeout = TimeSpan.FromMinutes(_appSetting.BetListApiClientTimeOutMinutes);
-                client.DefaultRequestHeaders.Add(KEYNAME, _appSetting.GetValue("BetListApiTokenValue"));
-                client.DefaultRequestHeaders.Add(LANGUAGEKEY, language);
+                var client = GetHttpClient(language);
                 var url = new Uri(_appSetting.BetListApiHostUrl + path);
                 var stringContent = new StringContent(JsonConvert.SerializeObject(value), Encoding.UTF8, "application/json");
-                var response = await client.PostAsync(url, stringContent, source.Token).ConfigureAwait(false);
+                var response = await client.PostAsync(url, stringContent).ConfigureAwait(false);
                 response.EnsureSuccessStatusCode();
                 return await codeBlock(response);
             }
@@ -57,17 +73,6 @@
                 message.Append($"\n ErrMsg={ex.Message}");
                 message.Append($"\n InnerExceptionMsg={ex.InnerException?.Message}");
                 throw new ServiceException(message.ToString(), "BetListApiClient");
-            }
-            finally
-            {
-                if (client != null)
-                {
-                    client.Dispose();
-                }
-                if (source != null)
-                {
-                    source.Dispose();
-                }
             }
 
         }
