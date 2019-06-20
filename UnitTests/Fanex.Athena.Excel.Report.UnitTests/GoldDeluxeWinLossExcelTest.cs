@@ -31,12 +31,11 @@ namespace Fanex.Athena.Excel.Report.UnitTests
             var excel = CreateExcel();
 
             // Action
-            excel.Public_PostAssignHeader(FakeSheet);
+            excel.Public_PostAssignHeader(row);
 
             // Assert
             Assert.Multiple(() =>
             {
-                FakeSheet.Received().CopyRow(excel.TemplateSheet, ReportBase.RowHeaderTemplate, ReportBase.RowHeaderTemplate);
                 row.Cells[ColumnTipsAmount].Received(1).SetCellValue(ViewResources.TipAmount);
                 row.Cells[ColumnTipsSharing].Received(1).SetCellValue(ViewResources.TipSharing);
                 row.Cells[ColumnAmountDue].Received(1).SetCellValue(ViewResources.AmountDue);

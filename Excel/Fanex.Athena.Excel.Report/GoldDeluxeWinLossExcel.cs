@@ -1,6 +1,5 @@
 ﻿namespace Fanex.Athena.Excel.Report
 {
-    using Base.Entities;
     using Fanex.Athena.Excel.Base.Extension;
     using Model.Core.ResultModel;
     using Model.Report.DTO;
@@ -22,9 +21,8 @@
         {
         }
 
-        protected override void PostAssignHeader(ISheet sheet)
+        protected override void PostAssignHeader(IRow row)
         {
-            var row = sheet.CopyRow(TemplateSheet, RowHeaderTemplate);
             row.Cells[ColumnTipsAmount].SetCellValue(ViewResources.TipAmount);
             row.Cells[ColumnTipsSharing].SetCellValue(ViewResources.TipSharing);
             row.Cells[ColumnAmountDue].SetCellValue(ViewResources.AmountDue);

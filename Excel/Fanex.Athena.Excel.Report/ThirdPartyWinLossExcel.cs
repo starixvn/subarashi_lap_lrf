@@ -8,7 +8,6 @@ namespace Fanex.Athena.Excel.Report
 {
     using System.Linq;
     using Base;
-    using Base.Entities;
     using Fanex.Athena.Excel.Base.Extension;
     using Helpers;
     using Model.Core.ResultModel;
@@ -61,10 +60,10 @@ namespace Fanex.Athena.Excel.Report
             row.Cells[ColumnTotalTransaction].SetCellValue(ViewResources.TotalTransaction);
             row.Cells[ColumnCustomerWl].SetCellValue(ViewResources.CustomerW_L);
             row.Cells[ColumnLicenseeWl].SetCellValue(ViewResources.LicenseeW_L);
-            PostAssignHeader(sheet);
+            PostAssignHeader(row);
         }
 
-        protected virtual void PostAssignHeader(ISheet sheet)
+        protected virtual void PostAssignHeader(IRow row)
         {
             // implement in children
         }
@@ -116,7 +115,7 @@ namespace Fanex.Athena.Excel.Report
             var reportName = _metaModel.ProductName + " " + ViewResources.WinLoss;
             var currencyTitle = ReportExcelHelper.GetTitleCurrencyName(_metaModel.CurrencyId, _metaModel.CurrencyName);
             var reportTitle = ReportExcelHelper.GenerateReportTitle(reportName, _metaModel.FromDate, _metaModel.ToDate, currencyTitle);
-            
+
             sheet.SetTextRowValue(TemplateSheet, RowTitleTemplate, ColumnTemplateCount, reportTitle);
 
             // Freeze 2 rows title and header
