@@ -37,14 +37,15 @@
             try
             {
 
-                var url = new Uri(_appSetting.BetListApiHostUrl + path);
+                //var url = new Uri(_appSetting.BetListApiHostUrl + path);
                 //var stringContent = new StringContent(JsonConvert.SerializeObject(value), Encoding.UTF8, "application/json");
                 //var response = await client.PostAsync(url, stringContent);
                 //response.EnsureSuccessStatusCode();
                 //return await codeBlock(response);
 
                 var client = new RestClient();
-                var request = new RestRequest(url);
+                client.BaseUrl = new Uri(_appSetting.BetListApiHostUrl);
+                var request = new RestRequest(path);
                 request.AddHeader(KEYNAME, _appSetting.GetValue("BetListApiTokenValue"));
                 request.AddHeader(LANGUAGEKEY, language);
                 request.AddJsonBody(value);
