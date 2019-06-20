@@ -30,3 +30,9 @@ export const licenseeType = {
     api: 0,
     nonApi: 1
 }
+
+export const heightSlicing = {
+    default: 300,
+    withAdvancedSearch: 357,
+    whenCollapsing: 235
+}

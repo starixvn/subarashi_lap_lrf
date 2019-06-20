@@ -99,8 +99,11 @@
     <Compile Include="Controllers\PlayerRunningBetlistController.cs" />
     <Compile Include="Controllers\PlayerStatementController.cs" />
     <Compile Include="Controllers\BetLimitController.cs" />
+    <Compile Include="DTO\EntityResult.cs" />
     <Compile Include="DTO\Player.cs" />
+    <Compile Include="MetaModel\SearchPlayerMetaModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\IPlayerListRepository.cs" />
     <Compile Include="Services\Interfaces\IPlayerAdminService.cs" />
     <Compile Include="ViewModels\PlayerAdminViewModel.cs" />
   </ItemGroup>

@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 import PropTypes from 'prop-types';
 
-export default class CollapsiblePanel extends React.Component {
+class CollapsiblePanel extends React.Component {
     constructor(props) {
         super(props);
 
@@ -12,29 +12,39 @@ export default class CollapsiblePanel extends React.Component {
 
     static propTypes = {
         stickyFooter: PropTypes.node,
+        onCollapse: PropTypes.func,
+        onExpand: PropTypes.func
     }
 
     onClick = () => {
         const newState = !this.state.isCollapsed;
 
+        const { onCollapse, onExpand } = this.props;
+        if (newState) {
+            onCollapse && onCollapse();
+        }
+
         this.setState({ isCollapsed: newState }, () => {
             window.dispatchEvent(new Event('resize'));
+            if (!newState) {
+                onExpand && onExpand();
+            }
         });
     }
 
     render() {
-        const { stickyFooter } = this.props;
-        const arrowStyle = {
+        const { stickyFooter, iconContainerStyle, iconToggle } = this.props;
+        const { tag, className, style, ...attrs } = iconToggle;
+        const IconTag = tag;
+        const iconStyle = style || {
             transform: this.state.isCollapsed ? null : 'rotate(180deg)',
             color: '#fff',
             textAlign: 'center',
-            marginTop: '10px',
             background: '#4c6274',
-            height: "20px",
-            width: "25px",
+            height: "15px",
+            width: "20px",
             float: 'left'
         };
-
 
         return (
             <div className={`${this.props.className}`}>
@@ -44,10 +54,38 @@ export default class CollapsiblePanel extends React.Component {
                 <div className='caret-block'>
                     {stickyFooter}
                 </div>
-                <div className="filter-handle" style={{ height: "20px", width: "25px", margin: 'auto', cursor: 'pointer' }}>
-                    <i className="icon-arrow" onClick={this.onClick} style={arrowStyle}></i>
+                <div className="filter-handle" style={iconContainerStyle} onClick={this.onClick}>
+                    <IconTag className={className} style={iconStyle} {...attrs} />
                 </div>
             </div>
         )
     }
 }
+
+const propTypes = {
+    stickyFooter: PropTypes.node,
+    onCollapse: PropTypes.func,
+    onExpand: PropTypes.func,
+    iconToggle: PropTypes.object
+}
+const defaultProps = {
+    iconContainerStyle: {
+        height: "15px",
+        width: "20px",
+        cursor: 'pointer',
+        position: 'absolute',
+        left: 'calc(50% - 10px)',
+        bottom: 0,
+        padding: '1px 5px'
+    },
+    iconToggle: {
+        tag: 'i',
+        className: 'icon-arrow',
+        style: null
+    }
+};
+
+CollapsiblePanel.propTypes = propTypes;
+CollapsiblePanel.defaultProps = defaultProps;
+
+export default CollapsiblePanel;

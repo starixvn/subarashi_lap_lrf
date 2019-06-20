@@ -23,7 +23,24 @@ export default class PlayerListService {
             const lapItem = lapList.find(x => x.CustId === lrfItem.CustId);
 
             if (lrfItem && lapItem) {
-                result.push({...lapItem, ...lrfItem });
+                const { CustId, UserName, SystemId, Currency, CurrentBalance, OutstandingBalance, OddsGroup, BaStatus, SpecialLevel } = lrfItem;
+                const { Status, RealName, IP, email } = lapItem;
+
+                result.push({
+                    CustId: CustId || lapItem.CustId,
+                    UserName: UserName || lapItem.UserName,
+                    SystemId,
+                    Currency,
+                    CurrentBalance,
+                    OutstandingBalance,
+                    OddsGroup,
+                    BaStatus,
+                    SpecialLevel,
+                    Status,
+                    RealName,
+                    IP,
+                    Email: email
+                });
             }
         }
 
@@ -32,13 +49,12 @@ export default class PlayerListService {
 
     getPlayerList(param) {
         const { lrfPlayerList, lapPlayerList } = apiInfo;
-        const params = { userName: '', ...param };
 
-        const lrfPromise = this.commonService.fetchData(lrfPlayerList.type, lrfPlayerList.action, {...params });
-        const lapPromise = this.commonService.fetchData(lapPlayerList.type, lapPlayerList.action, {...params });
+        const lrfPromise = this.commonService.fetchData(lrfPlayerList.type, lrfPlayerList.action, {...param });
+        const lapPromise = this.commonService.fetchData(lapPlayerList.type, lapPlayerList.action, {...param });
 
         return this.commonService.fetchMultiple([lrfPromise, lapPromise], (lrfResponse, lapResponse) => {
-            const lrfPlayerList = lrfResponse.data;
+            const lrfPlayerList = lrfResponse.data.MainData;
             const lapResponseData = lapResponse.data;
 
             const playerList = this._mergePlayerList(lrfPlayerList, lapResponseData.PlayerList);

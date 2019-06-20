@@ -102,7 +102,7 @@ exports[`FormFilter render isShowAdvancedSearch = true - should match snapshot w
       onChange={[Function]}
       param={
         Object {
-          "ba": "",
+          "baStatus": "",
           "currency": "",
           "oddsGroup": "",
           "specialLevel": "",

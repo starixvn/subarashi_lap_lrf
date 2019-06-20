@@ -22,8 +22,7 @@ export class FormFilter extends PureComponent {
             currency: '',
             oddsGroup: '',
             specialLevel: '',
-            baStatus: '',
-            isShowAdvancedSearch: false
+            baStatus: ''
         }
 
         this.userGuide = this._renderUserGuide();
@@ -32,7 +31,7 @@ export class FormFilter extends PureComponent {
     handleSubmit = (event) => {
         event.preventDefault();
         this.props.setSelectedPlayer(null);
-        this.props.searchPlayer({ userName: this.state.userName });
+        this.props.searchPlayer({ ...this.state });
 
         console.log(this.state);
     }
@@ -62,11 +61,28 @@ export class FormFilter extends PureComponent {
     }
 
     render() {
-        const { userName, bankAccountNumber, email, isShowAdvancedSearch, ...advancedSearchParam } = this.state;
-        const { type } = this.props;
+        const { userName, bankAccountNumber, email, ...advancedSearchParam } = this.state;
+        const { type, isAdvancedSearch, isFilterCollapsing } = this.props;
+        const iconToggle = {
+            tag: 'div',
+            className: isFilterCollapsing ? 'chevron down' : 'chevron up',
+            style: {}
+        }
+
+        const iconContainerStyle = {
+            height: '15px',
+            width: '20px',
+            cursor: 'pointer',
+            position: 'absolute',
+            left: 'calc(50% - 10px)',
+            bottom: 0,
+            paddingLeft: 5,
+            background: '#4c6274'
+        }
 
         return (
-            <CollapsiblePanel className="page-filter">
+            <CollapsiblePanel className="page-filter" iconToggle={iconToggle} iconContainerStyle={iconContainerStyle}
+                onCollapse={() => this.props.setCollapseFilter(true)} onExpand={() => this.props.setCollapseFilter(false)}>
                 <div className="row">
                     <div className="col-12 col-md-4 col-sm-4 col-lg-3 col-xl-2">
                         <div className="form-group">
@@ -78,7 +94,7 @@ export class FormFilter extends PureComponent {
 
                     {type === licenseeType.nonApi && <AthenaSearch onChange={this.handleChange} 
                                                         bankAccountNumber={bankAccountNumber} email={email} />}
-                    {isShowAdvancedSearch && <AdvancedSearch param={advancedSearchParam} onChange={this.handleAdvancedSearchChange} />}
+                    {isAdvancedSearch && <AdvancedSearch param={advancedSearchParam} onChange={this.handleAdvancedSearchChange} />}
 
                     <div className="col-12 col-md-2 col-sm-2 col-lg-1 col-xl-1">
                         <div className="form-group">
@@ -90,9 +106,9 @@ export class FormFilter extends PureComponent {
 
                     <div className="col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2">
                         <div className="form-group">
-                            <CheckBox id="isShowAdvancedSearch"
-                                checked={isShowAdvancedSearch}
-                                onChange={(checked) => this.setState({ isShowAdvancedSearch: checked })}
+                            <CheckBox id="isAdvancedSearch"
+                                checked={isAdvancedSearch}
+                                onChange={checked => this.props.setAdvancedSearch(checked)}
                                 label="Advanced Search" />
                         </div>
                     </div>
@@ -102,12 +118,12 @@ export class FormFilter extends PureComponent {
     }
 }
 function mapDispatchToProps(dispatch) {
-    const { searchPlayer, setSelectedPlayer } = ActionCreators;
-    return bindActionCreators({ searchPlayer, setSelectedPlayer }, dispatch);
+    const { searchPlayer, setSelectedPlayer, setAdvancedSearch, setCollapseFilter } = ActionCreators;
+    return bindActionCreators({ searchPlayer, setSelectedPlayer, setAdvancedSearch, setCollapseFilter }, dispatch);
 }
 function mapStateToProps(state) {
-    const { isLoading, type, ...rest } = state;
-    return Object.assign({ type }, rest);
+    const { type, isAdvancedSearch, isFilterCollapsing } = state;
+    return Object.assign({}, { type, isAdvancedSearch, isFilterCollapsing });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FormFilter);

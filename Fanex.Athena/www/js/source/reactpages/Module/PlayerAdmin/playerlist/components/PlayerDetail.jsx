@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions';
+import { heightSlicing } from '../lib/constants';
 
 export class PlayerDetail extends PureComponent {
     constructor(props) {
@@ -51,6 +52,21 @@ export class PlayerDetail extends PureComponent {
         )
     }
 
+    _getFrameHeight() {
+        const { isAdvancedSearch, isFilterCollapsing } = this.props;
+        let omittedHeight;
+
+        if(isFilterCollapsing){
+            omittedHeight = heightSlicing.whenCollapsing;
+        }
+        else{
+            const key = isAdvancedSearch ? 'withAdvancedSearch' : 'default';
+            omittedHeight = heightSlicing[key];
+        }
+
+        return window.innerHeight - omittedHeight;
+    }
+
     render() {
         const { targetUrl } = this.state;
         const { selectedPlayer } = this.props;
@@ -63,6 +79,7 @@ export class PlayerDetail extends PureComponent {
             return null;
         }
 
+        const frameHeight = this._getFrameHeight();
         const src = targetUrl || this._buildActionUrl(this._tabList[0].SystemType, this._tabList[0].Action);
 
         return (
@@ -77,7 +94,7 @@ export class PlayerDetail extends PureComponent {
                     </div>
                     <div className="tab-panel">
                         <div className="pa-frame-container">
-                            <iframe id="paDetailFrame" style={{ height: window.innerHeight - 340 }} name="paDetailFrame" frameBorder="0" src={src}></iframe>
+                            <iframe id="paDetailFrame" style={{ height: frameHeight }} name="paDetailFrame" frameBorder="0" src={src}></iframe>
                         </div>
                     </div>
                 </div>
@@ -92,8 +109,8 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-    const { selectedPlayer } = state;
-    return Object.assign({}, { selectedPlayer });
+    const { selectedPlayer, isAdvancedSearch, isFilterCollapsing } = state;
+    return Object.assign({}, { selectedPlayer, isAdvancedSearch, isFilterCollapsing });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlayerDetail);

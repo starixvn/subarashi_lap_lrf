@@ -11,6 +11,11 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api
     {
         private readonly IPlayerListRepository _playerListRepository;
 
+        public PlayerMainController()
+        {
+
+        }
+
         public PlayerMainController(IPlayerListRepository playerListRepository)
         {
             _playerListRepository = playerListRepository;
