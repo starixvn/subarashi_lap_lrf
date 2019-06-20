@@ -50,8 +50,6 @@ namespace Fanex.Athena
             // static services
             builder.RegisterInstance(new CustomMemoryCache()).As<ICustomMemoryCache>();
 
-            builder.RegisterType<BetListApiClient>().As<IBetListApiClient>().SingleInstance();
-
             builder.RegisterType<ApiExceptionLogger>().As<IExceptionLogger>();
 
             var container = builder.Build();

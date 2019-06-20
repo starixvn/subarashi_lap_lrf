@@ -85,11 +85,11 @@
                 var actual = await controller.Index(metaModel);
 
                 // Assert
-                Assert.Multiple(() =>
+                Assert.Multiple((TestDelegate)(() =>
                 {
                     Assert.That(metaModel.UspKey, Is.EqualTo(uspKey));
-                    BetListApiClient.Received().PostAsync(ApiPath, metaModel, SessionLanguage);
-                });
+                    BetListApiClient.Received().PostAsync((string)ApiPath, (object)metaModel, (string)SessionLanguage);
+                }));
             }
         }
 

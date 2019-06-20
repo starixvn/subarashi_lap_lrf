@@ -92,13 +92,13 @@
                 var actual = await controller.MixParlay(metaModel);
 
                 // Assert
-                Assert.Multiple(() =>
+                Assert.Multiple((TestDelegate)(() =>
                 {
-                    Assert.That(expect, Is.EqualTo(actual));
+                    NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
                     Assert.That(metaModel.UspKey, Is.EqualTo(UspKey));
                     Assert.That(metaModel.MultipleBettype, Is.EqualTo(((int)BetType.CombinationMixParlay).ToString()));
-                    BetListApiClient.Received().PostAsync(ApiPath, metaModel, SessionLanguage);
-                });
+                    BetListApiClient.Received().PostAsync((string)ApiPath, (object)metaModel, (string)SessionLanguage);
+                }));
             }
         }
 
@@ -119,13 +119,13 @@
                 var actual = await controller.DoubleChange(metaModel);
 
                 // Assert
-                Assert.Multiple(() =>
+                Assert.Multiple((TestDelegate)(() =>
                 {
-                    Assert.That(expect, Is.EqualTo(actual));
+                    NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
                     Assert.That(metaModel.UspKey, Is.EqualTo(UspKey));
                     Assert.That(metaModel.MultipleBettype, Is.EqualTo(DoubleChangeBettypes));
-                    BetListApiClient.Received().PostAsync(ApiPath, metaModel, SessionLanguage);
-                });
+                    BetListApiClient.Received().PostAsync((string)ApiPath, (object)metaModel, (string)SessionLanguage);
+                }));
             }
         }
 
@@ -146,13 +146,13 @@
                 var actual = await controller.BONTeamToScore(metaModel);
 
                 // Assert
-                Assert.Multiple(() =>
+                Assert.Multiple((TestDelegate)(() =>
                 {
-                    Assert.That(expect, Is.EqualTo(actual));
+                    NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
                     Assert.That(metaModel.UspKey, Is.EqualTo(UspKey));
                     Assert.That(metaModel.MultipleBettype, Is.EqualTo(BONTeamToScoreBettypes));
-                    BetListApiClient.Received().PostAsync(ApiPath, metaModel, SessionLanguage);
-                });
+                    BetListApiClient.Received().PostAsync((string)ApiPath, (object)metaModel, (string)SessionLanguage);
+                }));
             }
         }
 

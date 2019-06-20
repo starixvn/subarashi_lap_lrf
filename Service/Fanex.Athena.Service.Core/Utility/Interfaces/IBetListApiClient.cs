@@ -16,6 +16,5 @@ namespace Fanex.Athena.Service.Core.Utility.Interfaces
 
         Task<string> PostAsyncString(string path, object value, string language);
 
-        HttpResponseMessage Post(string path, object value, string language);
     }
 }

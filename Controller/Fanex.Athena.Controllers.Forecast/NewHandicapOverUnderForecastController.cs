@@ -109,7 +109,7 @@ namespace Fanex.Athena.Controllers.Forecast
         [CustomValidateAntiForgery]
         public async Task<ViewResult> GetMatchListByLeague(int leagueId)
         {
-            var matchList = (await _matchService.GetForecastMatchListByLeague(leagueId)).OrderBy(x => x.MatchName).ToList();
+            var matchList = (await _matchService.GetForecastMatchListByLeagueAsync(leagueId)).OrderBy(x => x.MatchName).ToList();
             return View("~/Views/Desktop/Forecast/NewForecastHdpOu/MatchOptionList.cshtml", matchList);
         }
 
@@ -169,7 +169,7 @@ namespace Fanex.Athena.Controllers.Forecast
 
         private async Task AssignMatchData(NewForecastHandicapOverUnderMetaModel metaModel, NewForecastHdpOuViewModel model)
         {
-            model.MatchList = (await _matchService.GetForecastMatchListByLeague(metaModel.LeagueId)).OrderBy(x => x.MatchName).ToList();
+            model.MatchList = (await _matchService.GetForecastMatchListByLeagueAsync(metaModel.LeagueId)).OrderBy(x => x.MatchName).ToList();
 
             if (model.MatchList.Count > 0)
             {

@@ -164,7 +164,7 @@
                 var leagueList = new List<League> { new League { LeagueId = LeagueId } };
                 _leagueDataAccess.GetRunningLeagues(Arg.Any<string>(), Arg.Any<string>()).Returns(leagueList);
 
-                _matchService.GetForecastMatchListByLeague(LeagueId).Returns(Task.FromResult<IList<Match>>(new List<Match>()));
+                _matchService.GetForecastMatchListByLeagueAsync(LeagueId).Returns(Task.FromResult<IList<Match>>(new List<Match>()));
 
                 // Action
                 var result = await controler.Index(leagueId: LeagueId) as ViewResult;
@@ -207,7 +207,7 @@
                 const int MatchId = 2;
                 var match = new Match { MatchId = 0, HomeId = 1, AwayId = 2, IsNeutral = true };
                 var matchList = new List<Match> { match };
-                _matchService.GetForecastMatchListByLeague(LeagueId).Returns(matchList);
+                _matchService.GetForecastMatchListByLeagueAsync(LeagueId).Returns(matchList);
 
                 // Action
                 var result = await controler.Index(leagueId: LeagueId, matchId: MatchId) as ViewResult;
@@ -250,7 +250,7 @@
                 const int MatchId = 2;
                 var match = new Match { MatchId = MatchId, HomeId = 1, AwayId = 2, IsNeutral = true };
                 var matchList = new List<Match> { match };
-                _matchService.GetForecastMatchListByLeague(LeagueId).Returns(matchList);
+                _matchService.GetForecastMatchListByLeagueAsync(LeagueId).Returns(matchList);
 
                 // Action
                 var result = await controler.Index(leagueId: LeagueId, matchId: MatchId) as ViewResult;
@@ -339,7 +339,7 @@
             using (var controler = CreateController())
             {
                 // Arrange
-                _matchService.GetForecastMatchListByLeague(0).Returns(new List<Match>
+                _matchService.GetForecastMatchListByLeagueAsync(0).Returns(new List<Match>
                 {
                     new Match { MatchName = "A" },
                     new Match { MatchName = "C" },

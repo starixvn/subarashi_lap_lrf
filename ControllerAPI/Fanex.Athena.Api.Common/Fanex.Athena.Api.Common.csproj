@@ -134,7 +134,6 @@
   <ItemGroup>
     <Compile Include="CommonDataApiController.cs" />
     <Compile Include="CommonApiController.cs" />
-    <Compile Include="DataStreamApiController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

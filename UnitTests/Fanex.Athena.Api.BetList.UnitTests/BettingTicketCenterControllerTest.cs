@@ -80,11 +80,11 @@
                 var actual = await controller.GetByRefno(metaModel);
 
                 // Assert
-                Assert.Multiple(() =>
+                Assert.Multiple((TestDelegate)(() =>
                 {
-                    Assert.That(expect, Is.EqualTo(actual));
-                    _betListApiClient.Received().PostAsync(ApiPath, metaModel, SessionLanguage);
-                });
+                    NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
+                    _betListApiClient.Received().PostAsync((string)ApiPath, (object)metaModel, (string)SessionLanguage);
+                }));
             }
         }
 
@@ -176,11 +176,11 @@
                 var actual = await controller.GetByRunning(metaModel);
 
                 // Assert
-                Assert.Multiple(() =>
+                Assert.Multiple((TestDelegate)(() =>
                 {
-                    Assert.That(expect, Is.EqualTo(actual));
-                    _betListApiClient.Received().PostAsync(ApiPath, metaModel, SessionLanguage);
-                });
+                    NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
+                    _betListApiClient.Received().PostAsync((string)ApiPath, (object)metaModel, (string)SessionLanguage);
+                }));
             }
         }
 
@@ -271,11 +271,11 @@
                 var actual = await controller.GetBySingleCustomer(metaModel);
 
                 // Assert
-                Assert.Multiple(() =>
+                Assert.Multiple((TestDelegate)(() =>
                 {
-                    Assert.That(expect, Is.EqualTo(actual));
-                    _betListApiClient.Received().PostAsync(ApiPath, metaModel, SessionLanguage);
-                });
+                    NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
+                    _betListApiClient.Received().PostAsync((string)ApiPath, (object)metaModel, (string)SessionLanguage);
+                }));
             }
         }
 

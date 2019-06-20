@@ -139,8 +139,6 @@
     <Compile Include="Users\UserService.cs" />
     <Compile Include="Utility\BetListApiClient.cs" />
     <Compile Include="Utility\CoreLogger.cs" />
-    <Compile Include="Utility\DataStream.cs" />
-    <Compile Include="Utility\Interfaces\IDataStreamService.cs" />
     <Compile Include="Utility\Interfaces\IBetListApiClient.cs" />
     <Compile Include="Utility\Interfaces\ICoreLogger.cs" />
     <Compile Include="Utility\KeanOceanBusinessHelper.cs" />

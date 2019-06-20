@@ -37,14 +37,14 @@
                 var actual = await controller.Detail(transId, custId);
 
                 // Assert
-                Assert.Multiple(() =>
+                Assert.Multiple((TestDelegate)(() =>
                 {
                     Assert.That(expect, Is.EqualTo(actual));
-                    BetListApiClient.Received().PostAsync(MixParlayApiPath,
-                        Arg.Is<MixParlayDetailMetaModel>(x => x.CustId == custId && x.TransId == transId),
-                        SessionLanguage
+                    BetListApiClient.Received().PostAsync((string)MixParlayApiPath,
+(object)Arg.Is<MixParlayDetailMetaModel>((System.Linq.Expressions.Expression<System.Predicate<MixParlayDetailMetaModel>>)(x => (bool)(x.CustId == custId && x.TransId == transId))),
+(string)SessionLanguage
                         );
-                });
+                }));
             }
         }
 
@@ -68,19 +68,19 @@
                 var actual = await controller.NewParlayDetail(transId, betTeam, betCheck, handicap1, handicap2, custId);
 
                 // Assert
-                Assert.Multiple(() =>
+                Assert.Multiple((TestDelegate)(() =>
                 {
                     Assert.That(expect, Is.EqualTo(actual));
                     BetListApiClient.Received().PostAsync(
-                        NewMixParlayApiPath,
-                        Arg.Is<NewParlayDetailMetaModel>(x => x.TransId == transId
+(string)NewMixParlayApiPath,
+(object)Arg.Is<NewParlayDetailMetaModel>((System.Linq.Expressions.Expression<System.Predicate<NewParlayDetailMetaModel>>)(x => (bool)(x.TransId == transId
                                                             && x.BetTeam == betTeam
                                                             && x.BetCheck == betCheck
                                                             && x.Handicap1 == handicap1
                                                             && x.Handicap2 == handicap2
-                                                            && x.CustId == custId),
-                                                            SessionLanguage);
-                });
+                                                            && x.CustId == custId))),
+(string)SessionLanguage);
+                }));
             }
         }
 

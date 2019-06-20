@@ -67,12 +67,12 @@
                 var actual = await controller.Index(Page, Rows, currencyId, CurrencyName, baseCurrency, fromDate, toDate, BetType, SortBy, SortOrder);
 
                 // Assert
-                Assert.Multiple(() =>
+                Assert.Multiple((TestDelegate)(() =>
                 {
-                    Assert.That(expect, Is.EqualTo(actual));
+                    NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
                     BetListApiClient.Received().PostAsync(
-                        ApiPath,
-                        Arg.Is<BetListMetaModel>(x => x.UspKey == UspKey
+(string)ApiPath,
+(object)Arg.Is<BetListMetaModel>((System.Linq.Expressions.Expression<Predicate<BetListMetaModel>>)(x => (bool)(x.UspKey == UspKey
                             && x.PageIndex == Page
                             && x.PageSize == Rows
                             && x.BetType == BetType
@@ -81,10 +81,10 @@
                             && x.CurrencyName == CurrencyName
                             && x.BaseCurrency == expectedBaseCurrency
                             && x.SortBy == SortBy
-                            && x.SortOrder == SortOrder),
-                        SessionLanguage
+                            && x.SortOrder == SortOrder))),
+(string)SessionLanguage
                         );
-                });
+                }));
             }
         }
 

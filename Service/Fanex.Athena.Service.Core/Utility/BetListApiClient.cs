@@ -2,6 +2,7 @@
 {
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Service.Core.Utility.Interfaces;
+    using Fanex.Logging;
     using Newtonsoft.Json;
     using RestSharp;
     using System;
@@ -19,9 +20,6 @@
         private const string LANGUAGEKEY = "Language";
 
         private readonly IAppSettings _appSetting;
-
-        private static readonly IDictionary<string, HttpClient> _clients = new Dictionary<string, HttpClient>();
-
         public BetListApiClient(IAppSettings appSettings)
         {
             _appSetting = appSettings;
@@ -29,67 +27,47 @@
         }
         private HttpClient GetHttpClient(string language)
         {
-            if (_clients.ContainsKey(language))
-            {
-                return _clients[language];
-            }
-
             var client = new HttpClient();
 
             client.DefaultRequestHeaders.Add(KEYNAME, _appSetting.GetValue("BetListApiTokenValue"));
             client.DefaultRequestHeaders.Add(LANGUAGEKEY, language);
-            _clients.Add(language, client);
 
             return client;
         }
         private async Task<T> HandleAsync<T>(string path, object value, string language, Func<HttpResponseMessage, Task<T>> codeBlock)
         {
             var client = GetHttpClient(language);
-            var url = new Uri(_appSetting.BetListApiHostUrl + path);
-            var stringContent = new StringContent(JsonConvert.SerializeObject(value), Encoding.UTF8, "application/json");
-            var response = await client.PostAsync(url, stringContent);
-            response.EnsureSuccessStatusCode();
-            return await codeBlock(response);
-
-        }
-        private T Handle<T>(string path, object value, string language, Func<HttpResponseMessage, T> codeBlock)
-        {
-            Logging.LogService.Info("Start Call BTC");
-            var client = new RestClient(new Uri(_appSetting.BetListApiHostUrl));
-
-            var request = new RestRequest(path)
+            LogService.Info("Start to query BTC/Mutilple cust");
+            try
             {
-                Method = Method.POST
+                var url = new Uri(_appSetting.BetListApiHostUrl + path);
+                var stringContent = new StringContent(JsonConvert.SerializeObject(value), Encoding.UTF8, "application/json");
+                var response = await client.PostAsync(url, stringContent);
+                response.EnsureSuccessStatusCode();
 
-            };
+                return await codeBlock(response);
+            }
+            catch (TaskCanceledException ex)
+            {
+                LogService.Error(ex.Message, ex);
+            }
+            finally
+            {
+                if (client != null)
+                {
+                    client.Dispose();
+                }
+                LogService.Info("End query BTC/Mutilple cust");
+            }
 
-            request.AddJsonBody(value);
-
-            request.AddHeader(KEYNAME, _appSetting.GetValue("BetListApiTokenValue"));
-            request.AddHeader(LANGUAGEKEY, language);
-
-            var data = client.Post(request);
-
-            HttpResponseMessage response = new HttpResponseMessage(data.StatusCode);
-            var mem = new MemoryStream(data.RawBytes);
-            response.Content = new StreamContent(mem);
-
-            Logging.LogService.Info("End Call BTC");
-
-            return codeBlock(response);
-
+            return default;
         }
 
         public Task<HttpResponseMessage> PostAsync(string path, object value, string language)
         {
             return HandleAsync(path, value, language, x => Task.FromResult(x));
         }
-        public HttpResponseMessage Post(string path, object value, string language)
-        {
-            return Handle(path, value, language, x => x
-            );
 
-        }
         public Task<T> PostAsync<T>(string path, object value, string language)
         {
             return HandleAsync<T>(
