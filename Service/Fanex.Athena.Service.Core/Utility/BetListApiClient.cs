@@ -54,7 +54,7 @@
         }
         private T Handle<T>(string path, object value, string language, Func<HttpResponseMessage, T> codeBlock)
         {
-
+            Logging.LogService.Info("Start Call BTC");
             var client = new RestClient(new Uri(_appSetting.BetListApiHostUrl));
 
             var request = new RestRequest(path)
@@ -73,6 +73,8 @@
             HttpResponseMessage response = new HttpResponseMessage(data.StatusCode);
             var mem = new MemoryStream(data.RawBytes);
             response.Content = new StreamContent(mem);
+
+            Logging.LogService.Info("End Call BTC");
 
             return codeBlock(response);
 
