@@ -44,15 +44,12 @@
         }
         private async Task<T> HandleAsync<T>(string path, object value, string language, Func<HttpResponseMessage, Task<T>> codeBlock)
         {
-            using (var source = new CancellationTokenSource(TimeSpan.FromMinutes(_appSetting.BetListApiClientTimeOutMinutes)))
-            {
-                var client = GetHttpClient(language);
-                var url = new Uri(_appSetting.BetListApiHostUrl + path);
-                var stringContent = new StringContent(JsonConvert.SerializeObject(value), Encoding.UTF8, "application/json");
-                var response = await client.PostAsync(url, stringContent, source.Token);
-                response.EnsureSuccessStatusCode();
-                return await codeBlock(response);
-            }
+            var client = GetHttpClient(language);
+            var url = new Uri(_appSetting.BetListApiHostUrl + path);
+            var stringContent = new StringContent(JsonConvert.SerializeObject(value), Encoding.UTF8, "application/json");
+            var response = await client.PostAsync(url, stringContent);
+            response.EnsureSuccessStatusCode();
+            return await codeBlock(response);
 
         }
         private T Handle<T>(string path, object value, string language, Func<HttpResponseMessage, T> codeBlock)
@@ -66,8 +63,6 @@
 
             };
 
-            var timeOut = 60000 * _appSetting.BetListApiClientTimeOutMinutes;
-            request.Timeout = timeOut;
             request.AddJsonBody(value);
 
             request.AddHeader(KEYNAME, _appSetting.GetValue("BetListApiTokenValue"));

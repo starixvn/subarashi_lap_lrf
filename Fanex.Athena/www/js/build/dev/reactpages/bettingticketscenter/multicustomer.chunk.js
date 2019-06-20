@@ -8219,18 +8219,6 @@ function () {
       return text;
     }
   }, {
-    key: "streamContent",
-    value: function streamContent(id, filename) {
-      var url = Site.resolveClientUrl("api/DataStream/zip?filename=" + id);
-      var link = document.createElement('a');
-      link.href = url;
-      link.setAttribute('download', filename);
-      document.body.appendChild(link);
-      link.click();
-      link.parentNode.removeChild(link);
-      window.URL.revokeObjectURL(url);
-    }
-  }, {
     key: "downloadFile",
     value: function downloadFile(data, fileName) {
       var url = window.URL.createObjectURL(new Blob([data]));
@@ -9886,15 +9874,8 @@ function (_Component) {
           if (response.status === NoContentStatusCode) {
             alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("NoInfo"));
           } else {
-            if (response.headers["content-type"] === "application/xls") {
-              var fileName = "BettingTicketsCenter_MultiCustomer.xls" + _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_14__["default"].downloadFile(response.data, fileName);
-            } else {
-              _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_14__["default"].readAsJson(response.data, function (result) {
-                if (result.StreamId) {
-                  _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_14__["default"].streamContent(result.StreamId, "BettingTicketsCenter_MultiCustomer.zip");
-                }
-              });
-            }
+            var fileName = "BettingTicketsCenter_MultiCustomer." + (response.headers["content-type"] === "application/zip" ? "zip" : "xls");
+            _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_14__["default"].downloadFile(response.data, fileName);
           }
         }
 

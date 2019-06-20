@@ -16,7 +16,8 @@ namespace Fanex.Athena.Api.Common
         {
             _appSettings = appSettings;
         }
-        [HttpGet]
+        [HttpGet, HttpPost]
+        [Route("api/datastream/zip/{id}/")]
         public HttpResponseMessage Zip(string id)
         {
             if (string.IsNullOrEmpty(id))

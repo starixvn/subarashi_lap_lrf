@@ -134,19 +134,10 @@ export class FormFilter extends Component {
                     alert(LangHelper.getSingleResource("NoInfo"));
                 }
                 else {
-                    if (response.headers["content-type"] === "application/xls") {
-                        const fileName = "BettingTicketsCenter_MultiCustomer.xls" +
+                    const fileName = "BettingTicketsCenter_MultiCustomer." +
+                        (response.headers["content-type"] === "application/zip" ? "zip" : "xls");
 
-                            Site.downloadFile(response.data, fileName);
-                    }
-                    else {
-                        Site.readAsJson(response.data, (result) => {
-                            if (result.StreamId) {
-                                Site.streamContent(result.StreamId, "BettingTicketsCenter_MultiCustomer.zip");
-                            }
-                        });
-                    }
-
+                    Site.downloadFile(response.data, fileName);
                 }
             }
 
