@@ -34,7 +34,7 @@ namespace Fanex.Athena.DataAccess.Report
                     var index = ((metaModel.PageIndex - 1) * metaModel.PageSize) + 1;
                     while (reader.Read())
                     {
-                        dataList.Add(ReadData(reader, metaModel.BaseCurrency, index++));
+                        dataList.Add(ReadData(reader, index++));
                     }
 
                     var result = new ReportResultModel<CustPendingFunds>
@@ -47,7 +47,7 @@ namespace Fanex.Athena.DataAccess.Report
                         result.TotalData = new CustPendingFunds
                         {
                             BetCounts = reader.ToInt("SumBetCounts"),
-                            PendingFunds = reader.ToDecimal("SumOutstanding" + metaModel.BaseCurrency)
+                            PendingFunds = reader.ToDecimal("SumOutstanding")
                         };
                         result.TotalRows = reader.ToInt("TotalRows");
                     }
@@ -67,7 +67,7 @@ namespace Fanex.Athena.DataAccess.Report
             db.SetParameterValue("pageindex", metaModel.PageIndex);
             db.SetParameterValue("OrderItem", metaModel.OrderItem);
             db.SetParameterValue("IsAscSort", metaModel.IsAscSort);
-            db.SetParameterValue("BaseCurrency", metaModel.BaseCurrency.ToUpperInvariant());
+            db.SetParameterValue("BaseCurrency", metaModel.BaseCurrency);
             db.SetParameterValue("AgentList", metaModel.AgentListXml);
             foreach (var item in metaModel.ProductOptions)
             {
@@ -75,7 +75,7 @@ namespace Fanex.Athena.DataAccess.Report
             }
         }
 
-        private static CustPendingFunds ReadData(IDataReader reader, string baseCurrency, int index)
+        private static CustPendingFunds ReadData(IDataReader reader, int index)
         {
             return new CustPendingFunds
             {
@@ -84,7 +84,7 @@ namespace Fanex.Athena.DataAccess.Report
                 ExternalId = reader.ToString("nickname"),
                 SystemId = reader.ToString("username"),
                 BetCounts = reader.ToInt("BetCounts"),
-                PendingFunds = reader.ToDecimal("Outstanding" + baseCurrency)
+                PendingFunds = reader.ToDecimal("Outstanding")
             };
         }
     }

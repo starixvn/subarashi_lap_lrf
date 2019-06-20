@@ -101,7 +101,7 @@ namespace Fanex.Athena.DataAccess.Report
             db.SetParameterValue("username", metaModel.Username);
             db.SetParameterValue("OrderItem", metaModel.OrderItem);
             db.SetParameterValue("IsAscSort", metaModel.IsAscSort);
-            db.SetParameterValue("BaseCurrency", metaModel.BaseCurrency.ToUpperInvariant());
+            db.SetParameterValue("BaseCurrency", metaModel.BaseCurrency);
             foreach (var item in metaModel.ProductOptions)
             {
                 db.SetParameterValue("show" + item.Code, item.Status);
