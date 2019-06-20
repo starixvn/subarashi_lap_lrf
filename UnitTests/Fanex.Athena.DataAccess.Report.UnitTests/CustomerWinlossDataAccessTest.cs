@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Data;
     using System.Linq;
     using System.Threading.Tasks;
     using Core.Configuration.Interfaces;
@@ -71,6 +70,7 @@
                 ObjectDb.Received(1).SetParameterValue("pageindex", _metaModel.PageIndex);
                 ObjectDb.Received(1).SetParameterValue("movebetsday", _balance.MoveBetsDay);
                 ObjectDb.Received(1).SetParameterValue("AgentList", _metaModel.AgentListXml);
+                ObjectDb.Received(1).SetParameterValue("BaseCurrency", _metaModel.BaseCurrency.ToUpperInvariant());
                 ObjectDb.Received(1).SetParameterValue("showSB", true);
                 ObjectDb.Received(1).SetParameterValue("showNG", false);
             });
@@ -185,16 +185,16 @@
         private void MapReader(CustomerWinLoss expected, bool isSum)
         {
             var prefix = isSum ? "sum" : string.Empty;
-            var turnoverColumn = prefix + "turnover" + _metaModel.BaseCurrency;
-            var memberWinLostColumn = prefix + "memberwinlost" + _metaModel.BaseCurrency;
-            var betEffectiveColumn = prefix + "beteffective" + _metaModel.BaseCurrency;
-            var playerCommColumn = prefix + "playercomm" + _metaModel.BaseCurrency;
-            var licenseeWinLostColumn = prefix + "licenseewl" + _metaModel.BaseCurrency;
-            var bacommColumn = prefix + "commba" + _metaModel.BaseCurrency;
-            var winlossrbColumn = prefix + "winlossrb" + _metaModel.BaseCurrency;
-            var commrbColumn = prefix + "commrb" + _metaModel.BaseCurrency;
-            var amtduetobaColumn = prefix + "amtduetoba" + _metaModel.BaseCurrency;
-            var sumcustomertotalwlColumn = prefix + "customertotalwl" + _metaModel.BaseCurrency;
+            var turnoverColumn = prefix + "turnover";
+            var memberWinLostColumn = prefix + "memberwinlost";
+            var betEffectiveColumn = prefix + "beteffective";
+            var playerCommColumn = prefix + "playercomm";
+            var licenseeWinLostColumn = prefix + "licenseewl";
+            var bacommColumn = prefix + "commba";
+            var winlossrbColumn = prefix + "winlossrb";
+            var commrbColumn = prefix + "commrb";
+            var amtduetobaColumn = prefix + "amtduetoba";
+            var sumcustomertotalwlColumn = prefix + "customertotalwl";
 
             Reader[turnoverColumn].Returns(expected.Turnover);
             Reader[prefix + "betcount"].Returns(expected.TotalTransaction);

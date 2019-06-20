@@ -46,7 +46,7 @@ namespace Fanex.Athena.DataAccess.Report
                     var index = ((metaModel.PageIndex - 1) * metaModel.PageSize) + 1;
                     while (reader.Read())
                     {
-                        dataList.Add(ReadDataItem(reader, metaModel.BaseCurrency, index++));
+                        dataList.Add(ReadDataItem(reader, index++));
                     }
 
                     var result = new ReportResultModel<CustomerWinLoss>
@@ -56,7 +56,7 @@ namespace Fanex.Athena.DataAccess.Report
 
                     if (dataList.Any() && reader.NextResult() && reader.Read())
                     {
-                        result.TotalData = ReadTotalData(reader, metaModel.BaseCurrency);
+                        result.TotalData = ReadTotalData(reader);
                         result.TotalRows = reader.ToInt("TotalRows");
                         result.AdditionalInfo = reader.ToString("SumPromotionPrize");
                     }
@@ -70,7 +70,7 @@ namespace Fanex.Athena.DataAccess.Report
             }
         }
 
-        private static CustomerWinLoss ReadDataItem(IDataReader reader, string baseCurrency, int index)
+        private static CustomerWinLoss ReadDataItem(IDataReader reader, int index)
         {
             return new CustomerWinLoss
             {
@@ -78,15 +78,15 @@ namespace Fanex.Athena.DataAccess.Report
                 CustId = reader.ToInt("CustID"),
                 ExternalId = reader.ToString("nickname"),
                 SystemId = reader.ToString("username"),
-                Turnover = reader.ToDecimal("turnover" + baseCurrency),
+                Turnover = reader.ToDecimal("turnover"),
                 TotalTransaction = reader.ToInt("betcount"),
-                CustomerWL = reader.ToDecimal("memberwinlost" + baseCurrency),
-                BetEffective = reader.ToDecimal("beteffective" + baseCurrency),
-                PlayerComm = reader.ToDecimal("playercomm" + baseCurrency),
-                CustomerTotalWL = reader.ToDecimal("customertotalwl" + baseCurrency),
-                LicenseeWL = reader.ToDecimal("licenseewl" + baseCurrency),
-                BAComm = reader.ToDecimal("commba" + baseCurrency),
-                AmtDueToBA = reader.ToDecimal("amtduetoba" + baseCurrency)
+                CustomerWL = reader.ToDecimal("memberwinlost"),
+                BetEffective = reader.ToDecimal("beteffective"),
+                PlayerComm = reader.ToDecimal("playercomm"),
+                CustomerTotalWL = reader.ToDecimal("customertotalwl"),
+                LicenseeWL = reader.ToDecimal("licenseewl"),
+                BAComm = reader.ToDecimal("commba"),
+                AmtDueToBA = reader.ToDecimal("amtduetoba")
             };
         }
 
@@ -108,19 +108,19 @@ namespace Fanex.Athena.DataAccess.Report
             }
         }
 
-        private static CustomerWinLoss ReadTotalData(IDataReader reader, string baseCurrency)
+        private static CustomerWinLoss ReadTotalData(IDataReader reader)
         {
             return new CustomerWinLoss
             {
-                Turnover = reader.ToDecimal("sumturnover" + baseCurrency),
+                Turnover = reader.ToDecimal("sumturnover"),
                 TotalTransaction = reader.ToInt("sumbetcount"),
-                CustomerWL = reader.ToDecimal("summemberwinlost" + baseCurrency),
-                PlayerComm = reader.ToDecimal("sumplayercomm" + baseCurrency),
-                LicenseeWL = reader.ToDecimal("sumlicenseewl" + baseCurrency),
-                BAComm = reader.ToDecimal("sumcommba" + baseCurrency),
-                AmtDueToBA = reader.ToDecimal("sumamtduetoba" + baseCurrency),
-                BetEffective = reader.ToDecimal("sumbeteffective" + baseCurrency),
-                CustomerTotalWL = reader.ToDecimal("sumcustomertotalwl" + baseCurrency)
+                CustomerWL = reader.ToDecimal("summemberwinlost"),
+                PlayerComm = reader.ToDecimal("sumplayercomm"),
+                LicenseeWL = reader.ToDecimal("sumlicenseewl"),
+                BAComm = reader.ToDecimal("sumcommba"),
+                AmtDueToBA = reader.ToDecimal("sumamtduetoba"),
+                BetEffective = reader.ToDecimal("sumbeteffective"),
+                CustomerTotalWL = reader.ToDecimal("sumcustomertotalwl")
             };
         }
     }
