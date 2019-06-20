@@ -50,6 +50,7 @@
             catch (TaskCanceledException ex)
             {
                 LogService.Error(ex.Message, ex);
+                throw;
             }
             finally
             {
@@ -60,7 +61,6 @@
                 LogService.Info("End query BTC/Mutilple cust");
             }
 
-            return default;
         }
 
         public Task<HttpResponseMessage> PostAsync(string path, object value, string language)
