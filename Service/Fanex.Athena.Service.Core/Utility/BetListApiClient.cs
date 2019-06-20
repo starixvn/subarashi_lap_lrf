@@ -4,13 +4,10 @@
     using Fanex.Athena.Service.Core.Utility.Interfaces;
     using Fanex.Logging;
     using Newtonsoft.Json;
-    using RestSharp;
     using System;
-    using System.Collections.Generic;
     using System.IO;
     using System.Net.Http;
     using System.Text;
-    using System.Threading;
     using System.Threading.Tasks;
 
     public class BetListApiClient : IBetListApiClient
