@@ -36,6 +36,7 @@
                 var param = new Hashtable();
                 param.Add("LicenseeID", metaModel.LicenseeId);
                 param.Add("CurrencyIDList", metaModel.CurrencyIDList);
+                param.Add("BaseCurrency", metaModel.BaseCurrency);
                 if (hasReportDate)
                 {
                     param.Add("ReportDate", metaModel.FromDate);
@@ -43,7 +44,7 @@
 
                 using (var reader = await db.ExecuteReaderAsync(param).ConfigureAwait(false))
                 {
-                    return reader.Read() ? reader.ToDecimal(columnName + metaModel.BaseCurrency) : 0;
+                    return reader.Read() ? reader.ToDecimal(columnName) : 0;
                 }
             }
         }
