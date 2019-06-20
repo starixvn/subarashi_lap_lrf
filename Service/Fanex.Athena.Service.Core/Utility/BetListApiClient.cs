@@ -9,7 +9,6 @@
     using System.Net.Http;
     using System.Text;
     using System.Threading.Tasks;
-
     public class BetListApiClient : IBetListApiClient
     {
         private const string KEYNAME = "BETLIST_TOKEN_KEY";
@@ -41,8 +40,8 @@
                 var stringContent = new StringContent(JsonConvert.SerializeObject(value), Encoding.UTF8, "application/json");
                 var response = await client.PostAsync(url, stringContent);
                 response.EnsureSuccessStatusCode();
-
                 return await codeBlock(response);
+
             }
             catch (TaskCanceledException ex)
             {
@@ -60,9 +59,31 @@
 
         }
 
-        public Task<HttpResponseMessage> PostAsync(string path, object value, string language)
+        public async Task<HttpResponseMessage> PostAsync(string path, object value, string language)
         {
-            return HandleAsync(path, value, language, x => Task.FromResult(x));
+            var client = GetHttpClient(language);
+            LogService.Info("Start to query BTC/Mutilple cust");
+            try
+            {
+                var url = new Uri(_appSetting.BetListApiHostUrl + path);
+                var stringContent = new StringContent(JsonConvert.SerializeObject(value), Encoding.UTF8, "application/json");
+                var response = await client.PostAsync(url, stringContent);
+                response.EnsureSuccessStatusCode();
+                return response;
+            }
+            catch (TaskCanceledException ex)
+            {
+                LogService.Error(ex.Message, ex);
+                throw;
+            }
+            finally
+            {
+                if (client != null)
+                {
+                    client.Dispose();
+                }
+                LogService.Info("End query BTC/Mutilple cust");
+            }
         }
 
         public Task<T> PostAsync<T>(string path, object value, string language)
