@@ -35,7 +35,7 @@ namespace Fanex.Athena.Excel.Report
         private const int RowContentTemplate = 4;
         private const int RowContentTitleTemplate = 3;
         private const int RowGrandTotal = 10;
-        private const int RowNoInfoTemplate = 12;
+        private const int RowNoInfoTemplate = 11;
         private const int RowTableHeaderTemplate = 1;
         private const int RowTotalNoSolidBorder = 9;
         private const int RowTotalSolidBorder = 8;
@@ -223,8 +223,6 @@ namespace Fanex.Athena.Excel.Report
             var currencyList = _excelModel.SummaryTotal.Keys.ToList();
             currencyList.Reverse();
 
-            var temp = 0;
-
             foreach (string currency in currencyList)
             {
                 var rowBegin = currentRow;
@@ -232,7 +230,7 @@ namespace Fanex.Athena.Excel.Report
 
                 foreach (WinLossByProduct productSummary in productSummaryList)
                 {
-                    var row = sheet.CopyRow(TemplateSheet, RowGrandTotal + temp, currentRow);
+                    var row = sheet.CopyRow(TemplateSheet, RowGrandTotal, currentRow);
                     row.Cells[ColumnProduct].SetCellValue(productSummary.ProductName);
                     row.Cells[ColumnIndex].SetCellValue(ViewResources.Totalin + " " + currency.ToUpperInvariant());
                     AssignCommonData(row, productSummary);
@@ -240,7 +238,6 @@ namespace Fanex.Athena.Excel.Report
                 }
 
                 sheet.MergeCells(rowBegin, ColumnIndex, currentRow - 1, ColumnCurrency);
-                temp++;
             }
         }
 

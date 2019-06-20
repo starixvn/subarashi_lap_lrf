@@ -53,7 +53,7 @@ namespace Fanex.Athena.DataAccess.Report
 
                 using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))
                 {
-                    return SetToList(reader, metaModel.BaseCurrency);
+                    return SetToList(reader);
                 }
             }
         }
@@ -96,7 +96,7 @@ namespace Fanex.Athena.DataAccess.Report
 
                 using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))
                 {
-                    return SetToList(reader, metaModel.BaseCurrency);
+                    return SetToList(reader);
                 }
             }
         }
@@ -119,22 +119,14 @@ namespace Fanex.Athena.DataAccess.Report
 
                 using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))
                 {
-                    return SetToList(reader, metaModel.BaseCurrency);
+                    return SetToList(reader);
                 }
             }
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules", "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
-        private IList<MatchWinLoss> SetToList(IDataReader reader, string baseCurrency)
+        private IList<MatchWinLoss> SetToList(IDataReader reader)
         {
-            var turnoverColumn = "Turnover" + baseCurrency;
-            var winlossColumn = "MemberWinLost" + baseCurrency;
-            var custCommColumn = "PlayerComm" + baseCurrency;
-            var licenseeWlColumn = "LicenseeWL" + baseCurrency;
-            var commBaColumn = "CommBA" + baseCurrency;
-            var amtDueToBaComumn = "AmtDueToBA" + baseCurrency;
-            var hasCustComm = reader.HasColumn(custCommColumn);
+            var hasCustComm = reader.HasColumn("PlayerComm");
             var hasBetType = reader.HasColumn("bettype");
             var hasProductName = reader.HasColumn("productname");
             var hasLiveIndicator = reader.HasColumn("liveindicator");
@@ -154,13 +146,13 @@ namespace Fanex.Athena.DataAccess.Report
                     MatchCode = reader.ToString("matchcode"),
                     HomeId = reader.ToInt("homeid"),
                     AwayId = reader.ToInt("awayid"),
-                    Turnover = reader.ToDecimal(turnoverColumn),
+                    Turnover = reader.ToDecimal("Turnover"),
                     TotalTransaction = reader.ToInt("betcount"),
-                    CustomerWL = reader.ToDecimal(winlossColumn),
-                    CustomerComm = hasCustComm ? reader.ToDecimal(custCommColumn) : 0,
-                    LicenseeWL = reader.ToDecimal(licenseeWlColumn),
-                    BACommission = reader.ToDecimal(commBaColumn),
-                    AmtDueToBA = reader.ToDecimal(amtDueToBaComumn),
+                    CustomerWL = reader.ToDecimal("MemberWinLost"),
+                    CustomerComm = hasCustComm ? reader.ToDecimal("PlayerComm") : 0,
+                    LicenseeWL = reader.ToDecimal("LicenseeWL"),
+                    BACommission = reader.ToDecimal("CommBA"),
+                    AmtDueToBA = reader.ToDecimal("AmtDueToBA"),
                     RaceNo = reader.ToString("race"),
                     BetType = betType,
                     BettypeName = _cacheRefAdapter.GetBettype(betType, isLive),
@@ -180,6 +172,7 @@ namespace Fanex.Athena.DataAccess.Report
         {
             db.SetParameterValue("AgentList", metaModel.AgentListXml);
             db.SetParameterValue("MoveBetsDay", _balanceUpDataAccess.GetBalanceUp().MoveBetsDay);
+            db.SetParameterValue("BaseCurrency", metaModel.BaseCurrency);
         }
     }
 }
