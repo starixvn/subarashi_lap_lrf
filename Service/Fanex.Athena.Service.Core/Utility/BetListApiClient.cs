@@ -8,6 +8,7 @@
     using System;
     using System.IO;
     using System.Net.Http;
+    using System.Net.Http.Headers;
     using System.Threading.Tasks;
     public class BetListApiClient : IBetListApiClient
     {
@@ -47,8 +48,21 @@
            {
                var result = new HttpResponseMessage(x.StatusCode)
                {
-                   Content = new StreamContent(new MemoryStream(x.RawBytes))
+                   Content = new StreamContent(new MemoryStream(x.RawBytes)),
+
                };
+               if (x.ContentType.IndexOf("application/json") > -1)
+               {
+                   result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+               }else if(x.ContentType.IndexOf("application/zip") >-1)
+               {
+                   result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/zip");
+
+               }else
+               {
+                   result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/xls");
+
+               }
                LogService.Info("End to query BTC/Mutilple cust");
 
                return Task.FromResult(result);
