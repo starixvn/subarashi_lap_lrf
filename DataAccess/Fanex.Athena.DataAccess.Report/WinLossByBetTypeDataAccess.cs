@@ -43,14 +43,15 @@ namespace Fanex.Athena.DataAccess.Report
                 metaModel.FromDate,
                 metaModel.ToDate,
                 balanceUp.MoveBetsDay,
-                balanceUp.BalanceUpDay
+                balanceUp.BalanceUpDay,
+                metaModel.BaseCurrency
             };
 
             using (var db = this.GetObjectDb(UspName))
             {
                 using (var reader = await db.ExecuteReaderAsync(uspParams).ConfigureAwait(false))
                 {
-                    return ReadData(reader, metaModel.BaseCurrency);
+                    return ReadData(reader);
                 }
             }
         }
@@ -80,15 +81,9 @@ namespace Fanex.Athena.DataAccess.Report
             return string.Empty;
         }
 
-        private SortableList<WinLossByBetType> ReadData(IDataReader reader, string baseCurrency)
+        private SortableList<WinLossByBetType> ReadData(IDataReader reader)
         {
             var dataList = new SortableList<WinLossByBetType>();
-            var turnoverColumn = "Turnover" + baseCurrency;
-            var winlossColumn = "MemberWinLost" + baseCurrency;
-            var custCommColumn = "PlayerComm" + baseCurrency;
-            var licenseeWlColumn = "LicenseeWL" + baseCurrency;
-            var commBaColumn = "CommBA" + baseCurrency;
-            var amtDueToBaComumn = "AmtDueToBA" + baseCurrency;
 
             while (reader.Read())
             {
@@ -99,12 +94,12 @@ namespace Fanex.Athena.DataAccess.Report
                     LiveIndicator = liveIndicator,
                     BetType = bettype,
                     BetTypeName = _cacheRefAdapter.GetBettype(bettype, liveIndicator) + GetSportName(bettype),
-                    Turnover = reader.ToDecimal(turnoverColumn),
-                    CustomerWinLoss = reader.ToDecimal(winlossColumn),
-                    CustomerComm = reader.ToDecimal(custCommColumn),
-                    LicenseeWL = reader.ToDecimal(licenseeWlColumn),
-                    BACommission = reader.ToDecimal(commBaColumn),
-                    AmtDueToBA = reader.ToDecimal(amtDueToBaComumn)
+                    Turnover = reader.ToDecimal("Turnover"),
+                    CustomerWinLoss = reader.ToDecimal("MemberWinLost"),
+                    CustomerComm = reader.ToDecimal("PlayerComm"),
+                    LicenseeWL = reader.ToDecimal("LicenseeWL"),
+                    BACommission = reader.ToDecimal("CommBA"),
+                    AmtDueToBA = reader.ToDecimal("AmtDueToBA")
                 };
 
                 dataList.Add(item);
