@@ -21,52 +21,23 @@
             _appSetting = appSettings;
 
         }
-        private HttpClient GetHttpClient(string language)
-        {
-            var client = new HttpClient();
-
-            client.DefaultRequestHeaders.Add(KEYNAME, _appSetting.GetValue("BetListApiTokenValue"));
-            client.DefaultRequestHeaders.Add(LANGUAGEKEY, language);
-
-            return client;
-        }
         private async Task<T> HandleAsync<T>(string path, object value, string language, Func<IRestResponse, Task<T>> codeBlock)
         {
-            //var client = GetHttpClient(language);
             LogService.Info("Start to query BTC/Mutilple cust");
-            try
-            {
 
-                //var url = new Uri(_appSetting.BetListApiHostUrl + path);
-                //var stringContent = new StringContent(JsonConvert.SerializeObject(value), Encoding.UTF8, "application/json");
-                //var response = await client.PostAsync(url, stringContent);
-                //response.EnsureSuccessStatusCode();
-                //return await codeBlock(response);
-
-                var client = new RestClient();
-                client.BaseUrl = new Uri(_appSetting.BetListApiHostUrl);
-                var request = new RestRequest(path);
-                request.AddHeader(KEYNAME, _appSetting.GetValue("BetListApiTokenValue"));
-                request.AddHeader(LANGUAGEKEY, language);
-                request.AddJsonBody(value);
-                request.Method = Method.POST;
-
-                var task = await client.ExecuteTaskAsync(request);
-                return await codeBlock(task);
-            }
-            catch (TaskCanceledException ex)
+            var client = new RestClient
             {
-                LogService.Error(ex.Message, ex);
-                throw;
-            }
-            finally
-            {
-                //if (client != null)
-                //{
-                //    client.Dispose();
-                //}
-                LogService.Info("End query BTC/Mutilple cust");
-            }
+                BaseUrl = new Uri(_appSetting.BetListApiHostUrl)
+            };
+            var request = new RestRequest(path);
+            request.AddHeader(KEYNAME, _appSetting.GetValue("BetListApiTokenValue"));
+            request.AddHeader(LANGUAGEKEY, language);
+            request.AddJsonBody(value);
+            request.Method = Method.POST;
+
+            var task = await client.ExecuteTaskAsync(request);
+            return await codeBlock(task);
+
 
         }
 
@@ -78,6 +49,7 @@
                {
                    Content = new StreamContent(new MemoryStream(x.RawBytes))
                };
+               LogService.Info("End to query BTC/Mutilple cust");
 
                return Task.FromResult(result);
            });
@@ -92,6 +64,8 @@
                 language,
                   (x) =>
              {
+                 LogService.Info("End to query BTC/Mutilple cust");
+
                  return Task.FromResult(JsonConvert.DeserializeObject<T>(x.Content));
              });
         }
@@ -101,6 +75,8 @@
             return HandleAsync(path, value, language, (x) =>
             {
 
+                LogService.Info("End to query BTC/Mutilple cust");
+
                 Stream stream = new MemoryStream(x.RawBytes);
                 return Task.FromResult(stream);
 
@@ -109,6 +85,8 @@
 
         public Task<string> PostAsyncString(string path, object value, string language)
         {
+            LogService.Info("End to query BTC/Mutilple cust");
+
             return HandleAsync(path, value, language, (x) => Task.FromResult(x.Content));
         }
     }
