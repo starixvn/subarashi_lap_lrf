@@ -29,6 +29,7 @@
             {
                 BaseUrl = new Uri(_appSetting.BetListApiHostUrl)
             };
+         
             var request = new RestRequest(path);
             request.AddHeader(KEYNAME, _appSetting.GetValue("BetListApiTokenValue"));
             request.AddHeader(LANGUAGEKEY, language);
@@ -36,7 +37,7 @@
             request.Method = Method.POST;
             if (timeout > 0)
             {
-                request.Timeout = oneMinInMillisecond * timeout;
+                client.Timeout = oneMinInMillisecond * timeout;
             }
             var task = await client.ExecuteTaskAsync(request).ConfigureAwait(false);
             return await codeBlock(task).ConfigureAwait(false);
