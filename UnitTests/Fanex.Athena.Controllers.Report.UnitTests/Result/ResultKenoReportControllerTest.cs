@@ -3,6 +3,7 @@
     using System.Web.Mvc;
     using System.Web.Script.Serialization;
     using Base.UnitTests;
+    using Fanex.Logging;
     using NSubstitute;
     using NUnit.Framework;
     using Report.Result;
@@ -12,14 +13,14 @@
     [TestFixture]
     public class ResultKenoReportControllerTest : CultureBaseControllerHelperTest
     {
-        private ICoreLogger _logger;
+        private ILogger _logger;
 
         private IBetListApiClient _betListApiClient;
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
         {
-            _logger = Substitute.For<ICoreLogger>();
+            _logger = Substitute.For<ILogger>();
             _betListApiClient = Substitute.For<IBetListApiClient>();
             base.FixtureSetUp();
 
@@ -60,9 +61,11 @@
                 AppSettings,
                 Substitute.For<IProductService>(),
                 _logger,
-                _betListApiClient);
-            controller.ControllerContext = ControllerContext;
-            controller.Url = Substitute.ForPartsOf<UrlHelper>(ControllerContext.RequestContext);
+                _betListApiClient)
+            {
+                ControllerContext = ControllerContext,
+                Url = Substitute.ForPartsOf<UrlHelper>(ControllerContext.RequestContext)
+            };
             return controller;
         }
     }

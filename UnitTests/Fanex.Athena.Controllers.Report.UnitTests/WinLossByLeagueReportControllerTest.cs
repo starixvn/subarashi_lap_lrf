@@ -61,7 +61,7 @@
                     Product.SB).Returns(sports);
 
                 _leagueDataAccess.GetLeaguesBySport(Arg.Any<LeagueMetaModel>()).Returns(leagues);
-                _matchService.GetMatchesByLeague(LeagueId, Arg.Any<DateTime>(), Arg.Any<DateTime>()).Returns(matches);
+                _matchService.GetMatchesByLeagueAsync(LeagueId, Arg.Any<DateTime>(), Arg.Any<DateTime>()).Returns(matches);
 
                 // Action
                 var viewResult = await controller.Index() as ViewResult;
@@ -122,7 +122,7 @@
                 {
                     new Match { MatchId = 2, MatchName = "abc" }
                 };
-                _matchService.GetMatchesByLeague(LeagueId, fromDate, toDate).Returns(data);
+                _matchService.GetMatchesByLeagueAsync(LeagueId, fromDate, toDate).Returns(data);
 
                 // Action
                 var result = await controller.GetMatchesByLeague(LeagueId, fromDate, toDate) as JsonResult;

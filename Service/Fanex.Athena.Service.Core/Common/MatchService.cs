@@ -28,7 +28,7 @@ namespace Fanex.Athena.Service.Core.Common
             _cache = cache;
         }
 
-        public async Task<IList<Match>> GetAllRunningMatch(int sportId, string languageCode)
+        public async Task<IList<Match>> GetAllRunningMatchAsync(int sportId, string languageCode)
         {
             var cacheKey = RunningMatchCacheKey + sportId + languageCode;
             var isInCache = _cache.Contains(cacheKey);
@@ -45,12 +45,12 @@ namespace Fanex.Athena.Service.Core.Common
             }
         }
 
-        public Task<IList<Match>> GetForecastMatchListByLeague(int leagueId)
+        public Task<IList<Match>> GetForecastMatchListByLeagueAsync(int leagueId)
         {
             return _matchDataAccess.GetForecastMatchListByLeague(leagueId);
         }
 
-        public Task<IList<Match>> GetMatchesByLeague(int leagueId, DateTime fromDate, DateTime toDate)
+        public Task<IList<Match>> GetMatchesByLeagueAsync(int leagueId, DateTime fromDate, DateTime toDate)
         {
             return _matchDataAccess.GetMatchesByLeague(leagueId, fromDate, toDate);
         }

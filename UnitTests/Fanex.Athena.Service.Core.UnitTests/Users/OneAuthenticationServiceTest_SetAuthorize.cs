@@ -8,6 +8,7 @@
     using DataAccess.Core.Users.Interfaces;
     using Extension.Utility.Interfaces;
     using Fanex.Athena.Service.Core.Users;
+    using Fanex.Logging;
     using Model.Core.DTO.Common;
     using Model.Core.DTO.OneAuth;
     using NSubstitute;
@@ -40,7 +41,7 @@
                 _licenseeDataAccess,
                 _formAuthenticationService,
                 _oneBookSecurityWrapper,
-                Substitute.For<ICoreLogger>(),
+                Substitute.For<ILogger>(),
                 _oneAuthDataAccess);
         }
 
@@ -79,7 +80,7 @@
             var expectedAuthName = $"{tokenInfo.VendorID}_{tokenInfo.SiteName}_{tokenInfo.UserID}";
 
             // Action
-            var result = await _oneAuthenticationService.SignIn(fakeHttpContext, tokenInfo);
+            var result = _oneAuthenticationService.SignIn(fakeHttpContext, tokenInfo);
 
             // Result
             Assert.Multiple(() =>

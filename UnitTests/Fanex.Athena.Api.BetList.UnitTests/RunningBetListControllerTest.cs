@@ -91,13 +91,13 @@
                 var actual = await controller.CleanSheet(metaModel);
 
                 // Assert
-                Assert.Multiple(() =>
+                Assert.Multiple((TestDelegate)(() =>
                 {
-                    Assert.That(expect, Is.EqualTo(actual));
+                    NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
                     Assert.That(metaModel.UspKey, Is.EqualTo(UspKey));
                     Assert.That(metaModel.BetType, Is.EqualTo((int)BetType.CleanSheet));
-                    BetListApiClient.Received().PostAsync(ApiPath, metaModel, SessionLanguage);
-                });
+                    BetListApiClient.Received().PostAsync((string)ApiPath, (object)metaModel, (string)SessionLanguage);
+                }));
             }
         }
 
@@ -118,13 +118,13 @@
                 var actual = await controller.ToWinToNil(metaModel);
 
                 // Assert
-                Assert.Multiple(() =>
+                Assert.Multiple((TestDelegate)(() =>
                 {
-                    Assert.That(expect, Is.EqualTo(actual));
+                    NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
                     Assert.That(metaModel.UspKey, Is.EqualTo(UspKey));
                     Assert.That(metaModel.BetType, Is.EqualTo((int)BetType.ToWinToNil));
-                    BetListApiClient.Received().PostAsync(ApiPath, metaModel, SessionLanguage);
-                });
+                    BetListApiClient.Received().PostAsync((string)ApiPath, (object)metaModel, (string)SessionLanguage);
+                }));
             }
         }
 
@@ -145,13 +145,13 @@
                 var actual = await controller.ThreeWayHandicap(metaModel);
 
                 // Assert
-                Assert.Multiple(() =>
+                Assert.Multiple((TestDelegate)(() =>
                 {
-                    Assert.That(expect, Is.EqualTo(actual));
+                    NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
                     Assert.That(metaModel.UspKey, Is.EqualTo(MultipleBettypeUspKey));
                     Assert.That(metaModel.MultipleBettype, Is.EqualTo($"{(int)BetType.ThreeWayHandicap},{(int)BetType.FirstHalfThreeWayHandicap}"));
-                    BetListApiClient.Received().PostAsync(ApiPath, metaModel, SessionLanguage);
-                });
+                    BetListApiClient.Received().PostAsync((string)ApiPath, (object)metaModel, (string)SessionLanguage);
+                }));
             }
         }
 

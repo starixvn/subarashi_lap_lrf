@@ -143,12 +143,12 @@
                 var actual = await controller.Match(metaModel);
 
                 // Assert
-                Assert.Multiple(() =>
+                Assert.Multiple((TestDelegate)(() =>
                 {
-                    Assert.That(expect, Is.EqualTo(actual));
+                    NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
                     Assert.That(metaModel.UspKey, Is.EqualTo(SelWinlossByMatchUsp));
-                    BetListApiClient.Received().PostAsync(ApiPath, metaModel, SessionLanguage);
-                });
+                    BetListApiClient.Received().PostAsync((string)ApiPath, (object)metaModel, (string)SessionLanguage);
+                }));
             }
         }
 
@@ -169,12 +169,12 @@
                 var actual = await controller.Outright(metaModel);
 
                 // Assert
-                Assert.Multiple(() =>
+                Assert.Multiple((TestDelegate)(() =>
                 {
-                    Assert.That(expect, Is.EqualTo(actual));
+                    NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
                     Assert.That(metaModel.UspKey, Is.EqualTo(SelWinlossOutrightUsp));
-                    BetListApiClient.Received().PostAsync(ApiPath, metaModel, SessionLanguage);
-                });
+                    BetListApiClient.Received().PostAsync((string)ApiPath, (object)metaModel, (string)SessionLanguage);
+                }));
             }
         }
 
@@ -200,14 +200,14 @@
                 var actual = await controller.NumberGame(metaModel, pageIndex, pageSize);
 
                 // Assert
-                Assert.Multiple(() =>
+                Assert.Multiple((TestDelegate)(() =>
                 {
-                    Assert.That(expect, Is.EqualTo(actual));
+                    NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
                     Assert.That(metaModel.UspKey, Is.EqualTo(SelWinlossNumberGameUsp));
                     Assert.That(metaModel.PageIndex, Is.EqualTo(expectedPageIndex));
                     Assert.That(metaModel.PageSize, Is.EqualTo(expectedPageSize));
-                    BetListApiClient.Received().PostAsync(PageApiPath, metaModel, SessionLanguage);
-                });
+                    BetListApiClient.Received().PostAsync((string)PageApiPath, (object)metaModel, (string)SessionLanguage);
+                }));
             }
         }
 
@@ -233,14 +233,14 @@
                 var actual = await controller.MixParlay(metaModel, pageIndex, pageSize);
 
                 // Assert
-                Assert.Multiple(() =>
+                Assert.Multiple((TestDelegate)(() =>
                 {
-                    Assert.That(expect, Is.EqualTo(actual));
+                    NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
                     Assert.That(metaModel.UspKey, Is.EqualTo(SelWinlossParlayUsp));
                     Assert.That(metaModel.PageIndex, Is.EqualTo(expectedPageIndex));
                     Assert.That(metaModel.PageSize, Is.EqualTo(expectedPageSize));
-                    BetListApiClient.Received().PostAsync(PageApiPath, metaModel, SessionLanguage);
-                });
+                    BetListApiClient.Received().PostAsync((string)PageApiPath, (object)metaModel, (string)SessionLanguage);
+                }));
             }
         }
 
@@ -266,14 +266,14 @@
                 var actual = await controller.VirtualSports(metaModel, pageIndex, pageSize);
 
                 // Assert
-                Assert.Multiple(() =>
+                Assert.Multiple((TestDelegate)(() =>
                 {
-                    Assert.That(expect, Is.EqualTo(actual));
+                    NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
                     Assert.That(metaModel.UspKey, Is.EqualTo(SelWinlossVHRacingUsp));
                     Assert.That(metaModel.PageIndex, Is.EqualTo(expectedPageIndex));
                     Assert.That(metaModel.PageSize, Is.EqualTo(expectedPageSize));
-                    BetListApiClient.Received().PostAsync(PageApiPath, metaModel, SessionLanguage);
-                });
+                    BetListApiClient.Received().PostAsync((string)PageApiPath, (object)metaModel, (string)SessionLanguage);
+                }));
             }
         }
 

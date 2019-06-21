@@ -13,10 +13,10 @@ namespace Fanex.Athena.Service.Core.Common.Interfaces
 
     public interface IMatchService
     {
-        Task<IList<Match>> GetAllRunningMatch(int sportId, string languageCode);
+        Task<IList<Match>> GetAllRunningMatchAsync(int sportId, string languageCode);
 
-        Task<IList<Match>> GetForecastMatchListByLeague(int leagueId);
+        Task<IList<Match>> GetForecastMatchListByLeagueAsync(int leagueId);
 
-        Task<IList<Match>> GetMatchesByLeague(int leagueId, DateTime fromDate, DateTime toDate);
+        Task<IList<Match>> GetMatchesByLeagueAsync(int leagueId, DateTime fromDate, DateTime toDate);
     }
 }

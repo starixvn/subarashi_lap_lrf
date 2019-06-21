@@ -105,13 +105,13 @@
                 var actual = await controller.Index(1, 10, metaModel);
 
                 // Assert
-                Assert.Multiple(() =>
+                Assert.Multiple((TestDelegate)(() =>
                 {
-                    Assert.That(actual, Is.EqualTo(expect));
+                    NUnit.Framework.Assert.That(actual, Is.EqualTo(expect));
                     Assert.That(metaModel.UspKey, Is.EqualTo(UspKey));
                     Assert.That(metaModel.ProductCodeList, Is.EqualTo("Product1"));
-                    BetListApiClient.Received().PostAsync(ApiPath, metaModel, SessionLanguage);
-                });
+                    BetListApiClient.Received().PostAsync((string)ApiPath, (object)metaModel, (string)SessionLanguage);
+                }));
             }
         }
 

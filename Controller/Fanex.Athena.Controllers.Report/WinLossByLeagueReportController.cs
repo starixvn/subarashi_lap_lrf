@@ -82,7 +82,7 @@ namespace Fanex.Athena.Controllers.Report
             var firstLeague = leagues.FirstOrDefault();
 
             var matches = firstLeague == null ? new List<Match>()
-                            : await this._matchService.GetMatchesByLeague(firstLeague.LeagueId, metaModel.FromDate, metaModel.ToDate).ConfigureAwait(true);
+                            : await this._matchService.GetMatchesByLeagueAsync(firstLeague.LeagueId, metaModel.FromDate, metaModel.ToDate).ConfigureAwait(true);
             var viewModel = new WinLossByLeagueViewModel
             {
                 Param = metaModel,
@@ -115,7 +115,7 @@ namespace Fanex.Athena.Controllers.Report
         [CustomValidateAntiForgery]
         public async Task<ActionResult> GetMatchesByLeague(int leagueid, DateTime fromDate, DateTime toDate)
         {
-            var matches = await _matchService.GetMatchesByLeague(leagueid, fromDate, toDate).ConfigureAwait(false);
+            var matches = await _matchService.GetMatchesByLeagueAsync(leagueid, fromDate, toDate).ConfigureAwait(false);
             matches.Insert(0, new Match { MatchName = ViewResources.All, MatchId = 0 });
 
             return Json(matches.Select(x => new { Key = x.MatchId, Value = x.MatchName }));

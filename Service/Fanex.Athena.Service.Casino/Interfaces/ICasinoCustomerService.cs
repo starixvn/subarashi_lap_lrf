@@ -10,6 +10,6 @@ namespace Fanex.Athena.Service.Casino.Interfaces
 
         bool UpdateSuspend(CustomerStatusMetaModel metaModel);
 
-        Task<bool> UpdateCommission(RNGCasinoUpdateMemberComMetaModel metaModel);
+        bool UpdateCommission(RNGCasinoUpdateMemberComMetaModel metaModel);
     }
 }

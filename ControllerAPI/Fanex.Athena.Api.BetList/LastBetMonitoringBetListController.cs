@@ -40,7 +40,7 @@
         [HttpGet]
         public async Task<dynamic> GetRunningMatchList(int sportId)
         {
-            var matchList = await _matchService.GetAllRunningMatch(sportId, SessionService.UserSession.Language).ConfigureAwait(false);
+            var matchList = await _matchService.GetAllRunningMatchAsync(sportId, SessionService.UserSession.Language).ConfigureAwait(false);
 
             var leagueListNormal = matchList.Where(i => !i.IsOutRight).Select(m => m.LeagueId).Distinct()
                                       .Select(l => new League

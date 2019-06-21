@@ -12,6 +12,7 @@
     using Extension.Utility.Interfaces;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Service.Core.Users.Interfaces;
+    using Fanex.Logging;
     using Model.Core.DataDomain;
     using Model.Core.DTO;
     using Model.Core.DTO.OneAuth;
@@ -28,7 +29,7 @@
         private readonly ILicenseeDataAccess _licenseeDataAccess;
         private readonly IFormsAuthenticationService _formsAuthenticationService;
         private readonly IOneBookSecurityWrapper _oneBookSecurityWrapper;
-        private readonly ICoreLogger _logger;
+        private readonly ILogger _logger;
         private readonly IOneAuthDataAccess _oneAuthDataAccess;
 
         public OneAuthenticationService(
@@ -36,7 +37,7 @@
             ILicenseeDataAccess licenseeDataAccess,
             IFormsAuthenticationService formsAuthenticationService,
             IOneBookSecurityWrapper oneBookSecurityWrapper,
-            ICoreLogger logger,
+            ILogger logger,
             IOneAuthDataAccess oneAuthDataAccess)
         {
             _sessionService = sessionService;
@@ -55,7 +56,7 @@
             }
         }
 
-        public async Task<IResultInfo> SignIn(HttpContextBase currentContext, OneAuthToken tokenInfo)
+        public IResultInfo SignIn(HttpContextBase currentContext, OneAuthToken tokenInfo)
         {
             var licensee = _licenseeDataAccess.GetLicenseeByName(tokenInfo.SiteName);
             if (licensee == null)
@@ -78,7 +79,7 @@
                 };
             }
 
-            var result = await ValidateCurrencyList(userInfo);
+            var result = ValidateCurrencyList(userInfo);
             if (!result.IsSuccessful)
             {
                 return result;
@@ -143,7 +144,7 @@
             };
         }
 
-        protected internal virtual async Task<IResultInfo> ValidateCurrencyList(OneAuthUserInfo userInfo)
+        protected internal virtual IResultInfo ValidateCurrencyList(OneAuthUserInfo userInfo)
         {
             if (userInfo.CurrencyUserList == null || !userInfo.CurrencyUserList.Any())
             {
@@ -159,8 +160,8 @@
                 var duplicateAgents = currency.AgentIdList.GroupBy(x => x).Where(x => x.Count() > 1).Select(x => x.Key).ToList();
                 if (duplicateAgents.Any())
                 {
-                    await _logger.ErrorAsync($"Duplicate agentid in currency permissions: currency ({currency.CurrencyId}-{currency.CurrencyName})" +
-                        $", duplicate agents ({string.Join(",", duplicateAgents)})").ConfigureAwait(false);
+                    _logger.Error($"Duplicate agentid in currency permissions: currency ({currency.CurrencyId}-{currency.CurrencyName})" +
+                       $", duplicate agents ({string.Join(",", duplicateAgents)})");
 
                     return new ResultInfo
                     {

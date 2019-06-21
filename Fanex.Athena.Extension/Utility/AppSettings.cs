@@ -26,11 +26,6 @@ namespace Fanex.Athena.Extension.Utility
             get { return GetValue("HasAmountDueToColumn") == "1"; }
         }
 
-        public int BetListApiClientTimeOutMinutes
-        {
-            get { return int.Parse(GetValue("BetListApiClientTimeOutMinutes")); }
-        }
-
         public string BetListApiHostUrl
         {
             get { return GetValue("BetListApiHostUrl"); }
@@ -191,7 +186,7 @@ namespace Fanex.Athena.Extension.Utility
         {
             return ConfigurationManager.AppSettings[key];
         }
-
+        public int BetListApiClientTimeOutMinutes => int.Parse(GetValue("BetListApiClientTimeOutMinutes"));
         private IEnumerable<int> GetIntegers(string key)
         {
             var value = GetValue(key);

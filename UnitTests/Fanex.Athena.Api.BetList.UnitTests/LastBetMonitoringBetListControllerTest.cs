@@ -59,7 +59,7 @@
                     new Match { MatchName = "Match4", IsOutRight = true, LeagueId = 3 },
                     new Match { MatchName = "Match2", IsOutRight = true, LeagueId = 5 },
                 };
-                _matchService.GetAllRunningMatch(SportId, Arg.Any<string>()).Returns(matchList);
+                _matchService.GetAllRunningMatchAsync(SportId, Arg.Any<string>()).Returns(matchList);
 
                 _cacheRefAdapter.GetLeagueName(Arg.Any<int>()).Returns(x => { return x[0].ToString(); });
 
@@ -96,12 +96,12 @@
                 var actual = await controller.Index(metaModel);
 
                 // Assert
-                Assert.Multiple(() =>
+                Assert.Multiple((TestDelegate)(() =>
                 {
                     Assert.That(expect, Is.EqualTo(actual));
                     Assert.That(metaModel.AgentListXml, Is.EqualTo(AgentListXml));
-                    _betListApiClient.Received().PostAsync(ApiPath, metaModel, SessionLanguage);
-                });
+                    _betListApiClient.Received().PostAsync((string)ApiPath, (object)metaModel, (string)SessionLanguage);
+                }));
             }
         }
 
@@ -123,12 +123,12 @@
                 var actual = await controller.Index(metaModel);
 
                 // Assert
-                Assert.Multiple(() =>
+                Assert.Multiple((TestDelegate)(() =>
                 {
                     Assert.That(expect, Is.EqualTo(actual));
                     Assert.That(metaModel.AgentListXml, Is.EqualTo(AgentListXml));
-                    _betListApiClient.Received().PostAsync(ApiPath, metaModel, SessionLanguage);
-                });
+                    _betListApiClient.Received().PostAsync((string)ApiPath, (object)metaModel, (string)SessionLanguage);
+                }));
             }
         }
 

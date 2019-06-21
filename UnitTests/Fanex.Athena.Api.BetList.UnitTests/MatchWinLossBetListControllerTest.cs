@@ -103,13 +103,13 @@
                 var actual = await controller.MatchBetType(page, row, metaModel);
 
                 // Assert
-                Assert.Multiple(() =>
+                Assert.Multiple((TestDelegate)(() =>
                 {
-                    Assert.That(expect, Is.EqualTo(actual));
+                    NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
                     Assert.That(metaModel.UspKey, Is.EqualTo(MatchBetTypeUspKey));
-                    BetListApiClient.Received().PostAsync(PageApiPath,
-                        Arg.Is<BetListMetaModel>(x => x.PageIndex == page && x.PageSize == row), SessionLanguage);
-                });
+                    BetListApiClient.Received().PostAsync((string)PageApiPath,
+(object)Arg.Is<BetListMetaModel>((System.Linq.Expressions.Expression<Predicate<BetListMetaModel>>)(x => (bool)(x.PageIndex == page && x.PageSize == row))), (string)SessionLanguage);
+                }));
             }
         }
 
@@ -130,13 +130,13 @@
                 var actual = await controller.Outright(metaModel);
 
                 // Assert
-                Assert.Multiple(() =>
+                Assert.Multiple((TestDelegate)(() =>
                 {
-                    Assert.That(expect, Is.EqualTo(actual));
+                    NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
                     Assert.That(metaModel.UspKey, Is.EqualTo(OutrightUspKey));
-                    BetListApiClient.Received().PostAsync(ApiPath,
-                        Arg.Is<BetListMetaModel>(x => x.IsServerPaging), SessionLanguage);
-                });
+                    BetListApiClient.Received().PostAsync((string)ApiPath,
+(object)Arg.Is<BetListMetaModel>((System.Linq.Expressions.Expression<Predicate<BetListMetaModel>>)(x => (bool)x.IsServerPaging)), (string)SessionLanguage);
+                }));
             }
         }
 
@@ -166,15 +166,15 @@
                 var actual = await controller.MixParlay(page, rows, currencyId, baseCurrency, betType, fromDate, toDate, productCodeList, sortBy, sortOrder);
 
                 // Assert
-                Assert.Multiple(() =>
+                Assert.Multiple((TestDelegate)(() =>
                 {
-                    Assert.That(expect, Is.EqualTo(actual));
+                    NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
                     BetListApiClient.Received().PostAsync(
-                        PageApiPath,
-                        Arg.Is<BetListMetaModel>(x => x.UspKey == MixParlayUspKey && x.BaseCurrency == expectedBaseCurrency),
-                        SessionService.UserSession.Language
+(string)PageApiPath,
+(object)Arg.Is<BetListMetaModel>((System.Linq.Expressions.Expression<Predicate<BetListMetaModel>>)(x => (bool)(x.UspKey == MixParlayUspKey && x.BaseCurrency == expectedBaseCurrency))),
+(string)SessionService.UserSession.Language
                         );
-                });
+                }));
             }
         }
 

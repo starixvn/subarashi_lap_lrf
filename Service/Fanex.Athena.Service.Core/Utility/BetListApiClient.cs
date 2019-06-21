@@ -1,18 +1,15 @@
 ﻿namespace Fanex.Athena.Service.Core.Utility
 {
+    using Fanex.Athena.Extension.Utility;
+    using Fanex.Athena.Service.Core.Utility.Interfaces;
+    using Fanex.Logging;
+    using Newtonsoft.Json;
+    using RestSharp;
     using System;
     using System.IO;
     using System.Net.Http;
-    using System.Text;
-    using System.Threading;
+    using System.Net.Http.Headers;
     using System.Threading.Tasks;
-    using System.Web;
-    using Fanex.Athena.Extension.Utility;
-    using Fanex.Athena.Service.Core.Exception;
-    using Fanex.Athena.Service.Core.Utility.Interfaces;
-    using Fanex.Athena.Session.Interfaces;
-    using Newtonsoft.Json;
-
     public class BetListApiClient : IBetListApiClient
     {
         private const string KEYNAME = "BETLIST_TOKEN_KEY";
@@ -20,75 +17,75 @@
         private const string LANGUAGEKEY = "Language";
 
         private readonly IAppSettings _appSetting;
-
         public BetListApiClient(IAppSettings appSettings)
         {
             _appSetting = appSettings;
         }
-
-        private async Task<T> Handle<T>(string path, object value, string language, Func<HttpResponseMessage, Task<T>> codeBlock)
+        private async Task<T> HandleAsync<T>(string path, object value,
+            string language, Func<IRestResponse, Task<T>> codeBlock, int timeout = 0)
         {
-            using (var source = new CancellationTokenSource())
+            const int oneMinInMillisecond = 60000;
+            var client = new RestClient
             {
-                using (var client = new HttpClient())
-                {
-                    try
-                    {
-                        client.Timeout = TimeSpan.FromMinutes(_appSetting.BetListApiClientTimeOutMinutes);
-                        client.DefaultRequestHeaders.Add(KEYNAME, _appSetting.GetValue("BetListApiTokenValue"));
-                        client.DefaultRequestHeaders.Add(LANGUAGEKEY, language);
-                        var url = new Uri(_appSetting.BetListApiHostUrl + path);
-                        var stringContent = new StringContent(JsonConvert.SerializeObject(value), Encoding.UTF8, "application/json");
-                        var response = await client.PostAsync(url, stringContent, source.Token).ConfigureAwait(false);
-                        response.EnsureSuccessStatusCode();
-                        return await codeBlock(response);
-                    }
-                    catch (Exception ex)
-                    {
-                        var message = new StringBuilder($"Error when calling LAP.BETLIST API - Path = { path }");
-                        if (ex is TaskCanceledException)
-                        {
-                            var temp = ex as TaskCanceledException;
-                            message.Append($"\n IsCancellationRequested={temp.CancellationToken.IsCancellationRequested}");
-                            if (!temp.CancellationToken.IsCancellationRequested)
-                            {
-                                message.Append("\n Request timed out");
-                            }
-                        }
-                        message.Append($"\n ErrMsg={ex.Message}");
-                        message.Append($"\n InnerExceptionMsg={ex.InnerException?.Message}");
-                        throw new ServiceException(message.ToString(), "BetListApiClient");
-                    }
-                }
+                BaseUrl = new Uri(_appSetting.BetListApiHostUrl)
+            };
+            var request = new RestRequest(path);
+            request.AddHeader(KEYNAME, _appSetting.GetValue("BetListApiTokenValue"));
+            request.AddHeader(LANGUAGEKEY, language);
+            request.AddJsonBody(value);
+            request.Method = Method.POST;
+            if (timeout > 0)
+            {
+                request.Timeout = oneMinInMillisecond * timeout;
             }
+            var task = await client.ExecuteTaskAsync(request).ConfigureAwait(false);
+            return await codeBlock(task).ConfigureAwait(false);
+
         }
 
-        public Task<HttpResponseMessage> PostAsync(string path, object value, string language)
+        public async Task<HttpResponseMessage> PostAsync(string path, object value, string language, int timeout = 0)
         {
-            return Handle(path, value, language, x => Task.FromResult(x));
+            return await HandleAsync<HttpResponseMessage>(path, value, language, (x) =>
+          {
+              var result = new HttpResponseMessage(x.StatusCode)
+              {
+                  Content = new StreamContent(new MemoryStream(x.RawBytes)),
+
+              };
+              var contentType = x.ContentType.Split(';')[0];
+
+              result.Content.Headers.ContentType = new MediaTypeHeaderValue(contentType);
+
+              return Task.FromResult(result);
+          }, timeout).ConfigureAwait(false);
+
         }
 
-        public Task<T> PostAsync<T>(string path, object value, string language)
+        public async Task<T> PostAsync<T>(string path, object value, string language, int timeout = 0)
         {
-            return Handle<T>(
+            return await HandleAsync<T>(
                 path,
                 value,
                 language,
-                 async (x) =>
+                  (x) =>
              {
-                 var data = await x.Content.ReadAsStringAsync();
-                 return JsonConvert.DeserializeObject<T>(data);
-             });
+                 return Task.FromResult(JsonConvert.DeserializeObject<T>(x.Content));
+             }, timeout).ConfigureAwait(false);
         }
 
-        public Task<Stream> PostAsyncStream(string path, object value, string language)
+        public async Task<Stream> PostAsyncStream(string path, object value, string language, int timeout = 0)
         {
-            return Handle(path, value, language, async (x) => await x.Content.ReadAsStreamAsync());
+            return await HandleAsync(path, value, language, (x) =>
+            {
+                Stream stream = new MemoryStream(x.RawBytes);
+                return Task.FromResult(stream);
+
+            }, timeout).ConfigureAwait(false);
         }
 
-        public Task<string> PostAsyncString(string path, object value, string language)
+        public async Task<string> PostAsyncString(string path, object value, string language, int timeout = 0)
         {
-            return Handle(path, value, language, async (x) => await x.Content.ReadAsStringAsync());
+            return await HandleAsync(path, value, language, (x) => Task.FromResult(x.Content), timeout).ConfigureAwait(false);
         }
     }
 }

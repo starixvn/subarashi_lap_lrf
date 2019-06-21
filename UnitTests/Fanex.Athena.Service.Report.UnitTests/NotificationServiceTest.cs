@@ -5,6 +5,7 @@
     using Core.Utility.Interfaces;
     using Extension.Utility;
     using Extension.Utility.Interfaces;
+    using Fanex.Logging;
     using Interfaces;
     using Model.Core.DTO.Common;
     using Model.Report.DTO;
@@ -15,7 +16,7 @@
 
     public class NotificationServiceTest
     {
-        private ICoreLogger _logger;
+        private ILogger _logger;
 
         private IAppSettings _appSettings;
 
@@ -26,7 +27,7 @@
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            _logger = Substitute.For<ICoreLogger>();
+            _logger = Substitute.For<ILogger>();
             _appSettings = Substitute.For<IAppSettings>();
             _webClientService = Substitute.For<IWebClientService>();
             _notificationService = new NotificationService(_logger, _appSettings, _webClientService);
@@ -361,7 +362,7 @@
 
         private void AssertWriteLogException(string exceptionMsg, string api)
         {
-            _logger.Received().Error(Arg.Any<Exception>(), $"{exceptionMsg}\nApiUrl: {api}");
+            _logger.Received().Error($"{exceptionMsg}\nApiUrl: {api}", Arg.Any<Exception>());
         }
     }
 }

@@ -16,6 +16,7 @@ namespace Fanex.Athena.Controllers.Forecast
     using DataAccess.Forecast.Interfaces;
     using Extension.Utility;
     using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Logging;
     using Model.Core.DataDomain;
     using Model.Forecast.DTO.NewForecastHdpOu;
     using Model.Forecast.MetaModel;
@@ -30,7 +31,7 @@ namespace Fanex.Athena.Controllers.Forecast
     [FunctionAuthorization(PermissionKeys.ForecastHandicapOverUnderLive)]
     public class NewHandicapOverUnderForecastController : ForecastBaseController
     {
-        private readonly ICoreLogger _logger;
+        private readonly ILogger _logger;
 
         private readonly ICacheRefAdapter _cacheRefAdapter;
 
@@ -47,7 +48,7 @@ namespace Fanex.Athena.Controllers.Forecast
             ISessionService sessionService,
             IAppSettings appSetting,
             INewForecastDataAccess forecastDataAccess,
-            ICoreLogger logger,
+            ILogger logger,
             ICacheRefAdapter cacheRefAdapter,
             IMatchService matchService,
             ILeagueDataAccess leagueDataAccess)
@@ -109,7 +110,7 @@ namespace Fanex.Athena.Controllers.Forecast
         [CustomValidateAntiForgery]
         public async Task<ViewResult> GetMatchListByLeague(int leagueId)
         {
-            var matchList = (await _matchService.GetForecastMatchListByLeague(leagueId)).OrderBy(x => x.MatchName).ToList();
+            var matchList = (await _matchService.GetForecastMatchListByLeagueAsync(leagueId)).OrderBy(x => x.MatchName).ToList();
             return View("~/Views/Desktop/Forecast/NewForecastHdpOu/MatchOptionList.cshtml", matchList);
         }
 
@@ -146,7 +147,7 @@ namespace Fanex.Athena.Controllers.Forecast
             }
             catch (Exception exception)
             {
-                _logger.Error(exception);
+                _logger.Error(exception.Message, exception);
             }
 
             return model;
@@ -169,7 +170,7 @@ namespace Fanex.Athena.Controllers.Forecast
 
         private async Task AssignMatchData(NewForecastHandicapOverUnderMetaModel metaModel, NewForecastHdpOuViewModel model)
         {
-            model.MatchList = (await _matchService.GetForecastMatchListByLeague(metaModel.LeagueId)).OrderBy(x => x.MatchName).ToList();
+            model.MatchList = (await _matchService.GetForecastMatchListByLeagueAsync(metaModel.LeagueId)).OrderBy(x => x.MatchName).ToList();
 
             if (model.MatchList.Count > 0)
             {

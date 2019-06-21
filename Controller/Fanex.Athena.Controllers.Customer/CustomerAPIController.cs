@@ -23,6 +23,7 @@ namespace Fanex.Athena.Controllers.Customer
     using Fanex.Athena.Service.Core.Common.Interfaces;
     using Fanex.Athena.Service.Customer.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
+    using Fanex.Logging;
     using Model.Core.DataDomain;
     using Model.Core.ViewModel;
     using ONEbook.UM.Filters;
@@ -40,7 +41,7 @@ namespace Fanex.Athena.Controllers.Customer
     {
         private const string CustomerAPIRemoveFromGroupComName = "CustomerAPI_RemoveFromGroupCom";
 
-        private readonly ICoreLogger _logger;
+        private readonly ILogger _logger;
         private readonly ICustomerCommService _customerCommService;
         private readonly ICustomerListService _customerListService;
         private readonly IGroupComService _groupComService;
@@ -55,7 +56,7 @@ namespace Fanex.Athena.Controllers.Customer
             ILanguageService languageService,
             ISessionService sessionService,
             IAppSettings appSetting,
-            ICoreLogger logger,
+            ILogger logger,
             ICustomerCommService customerCommService,
             ICustomerListService customerListService,
             IGroupComService groupComService,
@@ -114,7 +115,7 @@ namespace Fanex.Athena.Controllers.Customer
             }
             catch (Exception exception)
             {
-                _logger.Error(exception);
+                _logger.Error(exception.Message, exception);
             }
 
             return Json(new ResultInfo { Code = 1, Message = ViewResources.HttpError_Default });
@@ -152,7 +153,7 @@ namespace Fanex.Athena.Controllers.Customer
                 }
                 catch (Exception exception)
                 {
-                    _logger.Error(exception);
+                    _logger.Error(exception.Message, exception);
                 }
             }
 
@@ -204,7 +205,7 @@ namespace Fanex.Athena.Controllers.Customer
                 }
                 catch (Exception exception)
                 {
-                    _logger.Error(exception);
+                    _logger.Error(exception.Message, exception);
                 }
             }
 

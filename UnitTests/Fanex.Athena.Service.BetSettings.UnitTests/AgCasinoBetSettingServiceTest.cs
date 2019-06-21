@@ -9,6 +9,7 @@
     using DataAccess.BetSettings.Interfaces;
     using Extension.Utility;
     using Extension.Utility.Interfaces;
+    using Fanex.Logging;
     using Model.BetSettings.DTO;
     using Model.BetSettings.DTO.AgCasino;
     using Model.Core.DTO.Common;
@@ -28,7 +29,7 @@
         private IAppSettings _appSettings;
         private IWebClientService _webClientService;
         private IAgCasinoBetSettingService _service;
-        private ICoreLogger _logger;
+        private ILogger _logger;
 
         [OneTimeSetUp]
         public void SetUp()
@@ -37,7 +38,7 @@
             _dataAccess = Substitute.For<IAgCasinoBetSettingDataAccess>();
             _appSettings = Substitute.For<IAppSettings>();
             _webClientService = Substitute.For<IWebClientService>();
-            _logger = Substitute.For<ICoreLogger>();
+            _logger = Substitute.For<ILogger>();
             _service = new AgCasinoBetSettingService(
                 _authorizationService,
                 _logger,
@@ -165,7 +166,7 @@
             var result = await _service.GetViewModelAsync(licenseeId, custId, licenseeName);
 
             // Assert
-            _logger.Received().Error(Arg.Any<Exception>());
+            _logger.Received().Error(Arg.Any<string>(), Arg.Any<Exception>());
         }
 
         [Test]

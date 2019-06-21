@@ -7,6 +7,7 @@
     using Core.Utility.Interfaces;
     using DataAccess.Core.Configuration.Interfaces;
     using Extension.Utility.Interfaces;
+    using Fanex.Logging;
     using Model.Core.DTO.Configuration;
     using NSubstitute;
     using NUnit.Framework;
@@ -19,14 +20,14 @@
         private IMoveBetDataAccess _moveBetDataAccess;
         private IMoveBetService _moveBetService;
         private IMemoryCacheService _cache;
-        private ICoreLogger _logger;
+        private ILogger _logger;
 
         [SetUp]
         public void SetUp()
         {
             _moveBetDataAccess = Substitute.For<IMoveBetDataAccess>();
             _cache = Substitute.For<IMemoryCacheService>();
-            _logger = Substitute.For<ICoreLogger>();
+            _logger = Substitute.For<ILogger>();
             _moveBetService = new MoveBetService(_logger, _moveBetDataAccess, _cache);
         }
 
@@ -122,7 +123,7 @@
             var result = _moveBetService.GetMoveBetNotificationAsync("vi-VN");
 
             // Assert
-            _logger.Received().Error(Arg.Is<System.Exception>(x => x.Message == exceptionMsg));
+            _logger.Received().Error(Arg.Any<string>(), Arg.Is<System.Exception>(x => x.Message == exceptionMsg));
         }
     }
 }

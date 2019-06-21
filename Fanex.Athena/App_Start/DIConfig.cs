@@ -14,6 +14,8 @@ using Fanex.Athena.Api.Base.Logger;
 using Fanex.Athena.DataAccess.Report;
 using Fanex.Athena.DataAccess.Report.Interfaces;
 using Fanex.Athena.Extension.Utility.Internal;
+using Fanex.Athena.Service.Core.Utility;
+using Fanex.Athena.Service.Core.Utility.Interfaces;
 using Fanex.Logging;
 using ONEbook.UM.Services;
 using ONEbook.UM.Services.Impl;

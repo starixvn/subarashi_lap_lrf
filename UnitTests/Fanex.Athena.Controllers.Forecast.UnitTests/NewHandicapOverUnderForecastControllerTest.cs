@@ -1,12 +1,9 @@
 ﻿namespace Fanex.Athena.Controllers.Forecast.UnitTests
 {
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
     using Base.UnitTests;
     using DataAccess.Core.Common.Interfaces;
     using DataAccess.Forecast.Interfaces;
+    using Fanex.Logging;
     using Model.Core.DTO.Common;
     using Model.Forecast.DTO.NewForecastHdpOu;
     using Model.Forecast.MetaModel;
@@ -14,8 +11,10 @@
     using NSubstitute;
     using NUnit.Framework;
     using Service.Core.Common.Interfaces;
-    using Service.Core.Utility.Interfaces;
-    using Service.Forecast.Interfaces;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using VendorAdapter.Interfaces;
 
     public class NewHandicapOverUnderForecastControllerTest : CultureBaseControllerHelperTest
@@ -164,7 +163,7 @@
                 var leagueList = new List<League> { new League { LeagueId = LeagueId } };
                 _leagueDataAccess.GetRunningLeagues(Arg.Any<string>(), Arg.Any<string>()).Returns(leagueList);
 
-                _matchService.GetForecastMatchListByLeague(LeagueId).Returns(Task.FromResult<IList<Match>>(new List<Match>()));
+                _matchService.GetForecastMatchListByLeagueAsync(LeagueId).Returns(Task.FromResult<IList<Match>>(new List<Match>()));
 
                 // Action
                 var result = await controler.Index(leagueId: LeagueId) as ViewResult;
@@ -207,7 +206,7 @@
                 const int MatchId = 2;
                 var match = new Match { MatchId = 0, HomeId = 1, AwayId = 2, IsNeutral = true };
                 var matchList = new List<Match> { match };
-                _matchService.GetForecastMatchListByLeague(LeagueId).Returns(matchList);
+                _matchService.GetForecastMatchListByLeagueAsync(LeagueId).Returns(matchList);
 
                 // Action
                 var result = await controler.Index(leagueId: LeagueId, matchId: MatchId) as ViewResult;
@@ -250,7 +249,7 @@
                 const int MatchId = 2;
                 var match = new Match { MatchId = MatchId, HomeId = 1, AwayId = 2, IsNeutral = true };
                 var matchList = new List<Match> { match };
-                _matchService.GetForecastMatchListByLeague(LeagueId).Returns(matchList);
+                _matchService.GetForecastMatchListByLeagueAsync(LeagueId).Returns(matchList);
 
                 // Action
                 var result = await controler.Index(leagueId: LeagueId, matchId: MatchId) as ViewResult;
@@ -339,7 +338,7 @@
             using (var controler = CreateController())
             {
                 // Arrange
-                _matchService.GetForecastMatchListByLeague(0).Returns(new List<Match>
+                _matchService.GetForecastMatchListByLeagueAsync(0).Returns(new List<Match>
                 {
                     new Match { MatchName = "A" },
                     new Match { MatchName = "C" },
@@ -349,7 +348,7 @@
                 var expectedMatchNames = "A,B,C";
 
                 // Action
-                var result = (await controler.GetMatchListByLeague(0)) as ViewResult;
+                var result = (await controler.GetMatchListByLeague(0));
                 var viewModel = (List<Match>)result.Model;
 
                 // Assert
@@ -388,7 +387,7 @@
                 SessionService,
                 AppSettings,
                 _forecastDataAccess,
-                Substitute.For<ICoreLogger>(),
+                Substitute.For<ILogger>(),
                 _cacheRefAdapter,
                 _matchService,
                 _leagueDataAccess)

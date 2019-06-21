@@ -12,7 +12,7 @@ namespace Fanex.Athena.Service.Core.Configuration
     using Extension.Utility.Interfaces;
     using Fanex.Athena.Model.Core.DTO.Configuration;
     using Fanex.Athena.Service.Core.Configuration.Interfaces;
-    using Utility.Interfaces;
+    using Fanex.Logging;
 
     public class MoveBetService : IMoveBetService
     {
@@ -20,13 +20,13 @@ namespace Fanex.Athena.Service.Core.Configuration
 
         private const int CacheTimeoutSeconds = 60;
 
-        private readonly ICoreLogger _logger;
+        private readonly ILogger _logger;
 
         private readonly IMoveBetDataAccess _moveBetDataAccess;
 
         private readonly IMemoryCacheService _cache;
-        
-        public MoveBetService(ICoreLogger logger, IMoveBetDataAccess moveBetDataAccess, IMemoryCacheService cache)
+
+        public MoveBetService(ILogger logger, IMoveBetDataAccess moveBetDataAccess, IMemoryCacheService cache)
         {
             _logger = logger;
             _moveBetDataAccess = moveBetDataAccess;
@@ -50,7 +50,7 @@ namespace Fanex.Athena.Service.Core.Configuration
             }
             catch (Exception exception)
             {
-                _logger.Error(exception);
+                _logger.Error(exception.Message, exception);
             }
 
             return string.Empty;

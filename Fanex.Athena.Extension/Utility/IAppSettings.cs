@@ -8,8 +8,6 @@
     {
         bool HasAmountDueToColumn { get; }
 
-        int BetListApiClientTimeOutMinutes { get; }
-
         [SuppressMessage("Sonar Code Smell", "S3996:UriPropertiesShouldNotBeStrings",
             Justification = "Reviewed. Suppression is OK here.")]
         string BetListApiHostUrl { get; }
@@ -73,5 +71,6 @@
         string TempFilePath { get; }
 
         string GetValue(string key);
+        int BetListApiClientTimeOutMinutes { get; }
     }
 }

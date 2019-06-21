@@ -22,10 +22,10 @@ import Service from '../../common/lib/Service'
 import ApiUrl from '../../common/constants/apiUrl'
 
 const ToastMsg = () => (
-  <div>
-    <div>{LangHelper.getSingleResource("BTCExportExcelMsg1")}</div>
-    <div>{LangHelper.getSingleResource("BTCExportExcelMsg2")}</div>
-  </div>
+    <div>
+        <div>{LangHelper.getSingleResource("BTCExportExcelMsg1")}</div>
+        <div>{LangHelper.getSingleResource("BTCExportExcelMsg2")}</div>
+    </div>
 )
 
 export class FormFilter extends Component {
@@ -104,7 +104,7 @@ export class FormFilter extends Component {
 
     exportExcel = (event) => {
         event.preventDefault();
-        
+
         const params = this._getParams();
         if (!params) {
             return;
@@ -115,33 +115,32 @@ export class FormFilter extends Component {
         DataService.getFile(ApiUrl.MULTICUSTOMER_DATA_URL, params).then((response) => {
             toast.dismiss();
             const contentType = response.headers["content-type"];
-            if(contentType && contentType.indexOf('application/json') > -1)
-            {
+            if (contentType && contentType.indexOf('application/json') > -1) {
                 const RowsExceedLimitErrorCode = 1001;
                 Site.readAsJson(response.data, (result) => {
-                   
-                    if(result.ErrorCode === RowsExceedLimitErrorCode){
+
+                    if (result.ErrorCode === RowsExceedLimitErrorCode) {
                         this._showExportWarning();
                     }
-                    else
-                    {
+                    else {
                         const msg = result.ErrorMsg || LangHelper.getSingleResource("ErrorProcessingMsg");
                         alert(msg);
                     }
+
                 });
             } else {
                 const NoContentStatusCode = 204;
-                if(response.status === NoContentStatusCode){
+                if (response.status === NoContentStatusCode) {
                     alert(LangHelper.getSingleResource("NoInfo"));
                 }
                 else {
                     const fileName = "BettingTicketsCenter_MultiCustomer." +
                         (response.headers["content-type"] === "application/zip" ? "zip" : "xls");
-                
+
                     Site.downloadFile(response.data, fileName);
                 }
             }
-            
+
             this.props.toggleLoader(false);
         }).catch(error => {
             alert(LangHelper.getSingleResource("ErrorProcessingMsg"));
@@ -160,11 +159,11 @@ export class FormFilter extends Component {
     _renderUserGuide() {
         const userGuideContent = this.props.userGuideContent;
 
-        return (<UserGuide 
-                title={LangHelper.getSingleResource("UserGuide")} 
-                contentTitle={LangHelper.getSingleResource("BettingTicketCenter")}
-                onClick={this.showUserGuide}
-                content={userGuideContent} />)
+        return (<UserGuide
+            title={LangHelper.getSingleResource("UserGuide")}
+            contentTitle={LangHelper.getSingleResource("BettingTicketCenter")}
+            onClick={this.showUserGuide}
+            content={userGuideContent} />)
     }
 
     _renderDateRange() {
@@ -182,8 +181,8 @@ export class FormFilter extends Component {
     _onChangeDateRange = (date, isValidMonthRange = true) => {
         if (isValidMonthRange) {
             this.props.setDateRange(date);
-            this.props.getBettypeList(this.props.selectedProduct, this.isSingleDate({fromDate: date.startDate, toDate: date.endDate}));
-            if(this._isEnableLeagueMatch()){
+            this.props.getBettypeList(this.props.selectedProduct, this.isSingleDate({ fromDate: date.startDate, toDate: date.endDate }));
+            if (this._isEnableLeagueMatch()) {
                 this.props.getLeagueList(this.props.selectedSport.value, date.startDate);
             }
         }
@@ -197,40 +196,40 @@ export class FormFilter extends Component {
         const productList = AppData.productList;
 
         return productList && productList.length && (
-           <Select instanceId="ProductList"
+            <Select instanceId="ProductList"
                 value={this.props.selectedProduct}
                 options={productList}
                 onChange={(item) => this._onChangeProduct(item.value)} />
         );
     }
-    
+
     _onChangeProduct = (productCode) => {
         this.props.setSelectedProduct(productCode);
         this.props.getSportList(productCode, this.isSingleDate() && this.props.dateRange.fromDate);
         this.props.getBettypeList(productCode, this.isSingleDate());
     }
 
-   _renderSportSelectList() {
-       const sportList = this.props.sportList;
-       
+    _renderSportSelectList() {
+        const sportList = this.props.sportList;
+
         return sportList && sportList.length && (
             <Select instanceId="SportList"
-            value={this.props.selectedSport}
-            options={sportList}
-            onChange={(item) => this._onChangeSport(item.value)} />
+                value={this.props.selectedSport}
+                options={sportList}
+                onChange={(item) => this._onChangeSport(item.value)} />
         );
     }
 
     _onChangeSport = (sportId) => {
         this.props.setSelectedSport(sportId);
-        if(this._isEnableLeagueMatch()){
+        if (this._isEnableLeagueMatch()) {
             this.props.getLeagueList(sportId, this.props.dateRange.fromDate);
         }
     }
 
     _renderBettypeSelectList() {
         const bettypeList = this.props.bettypeList;
-       
+
         return bettypeList && bettypeList.length && (
             <Select instanceId="BettypeList"
                 value={this.props.selectedBettype}
@@ -239,40 +238,40 @@ export class FormFilter extends Component {
         );
     }
 
-      _renderLeagueSelectList() {
-         const leagueList = this.props.leagueList;
-       
+    _renderLeagueSelectList() {
+        const leagueList = this.props.leagueList;
+
         return leagueList && leagueList.length && (
             <Select disabled={!this._isEnableLeagueMatch()} instanceId="LeagueList"
-            value={this.props.selectedLeague}
-            options={leagueList}
-            onChange={(item) => this._onChangeLeague(item.value)} />
-         );
-      }
+                value={this.props.selectedLeague}
+                options={leagueList}
+                onChange={(item) => this._onChangeLeague(item.value)} />
+        );
+    }
 
     _onChangeLeague = (leagueId) => {
         this.props.setSelectedLeague(leagueId);
-        if(this.isSingleDate()){
+        if (this.isSingleDate()) {
             this.props.getMatchList(this.props.selectedSport.value, leagueId, this.props.dateRange.fromDate);
         }
     }
 
     _renderMatchSelectList() {
         const matchList = this.props.matchList;
-       
+
         return matchList && matchList.length && (
-                <Select disabled={!this._isEnableLeagueMatch()} instanceId="MatchList"
-            value={this.props.selectedMatch}
-            options={matchList}
-            onChange={(item) => this.props.setSelectedMatch(item.value)} />
+            <Select disabled={!this._isEnableLeagueMatch()} instanceId="MatchList"
+                value={this.props.selectedMatch}
+                options={matchList}
+                onChange={(item) => this.props.setSelectedMatch(item.value)} />
         );
-     }
-    
+    }
+
     _renderCurrencySelectList() {
         const currencyList = AppData.currencyList;
-       
+
         return currencyList && currencyList.length && (
-                <MultipleSelect id="ddlCurrency"
+            <MultipleSelect id="ddlCurrency"
                 language={LangHelper.currentLanguage}
                 dataSource={currencyList}
                 keyField={"Id"}
@@ -284,19 +283,18 @@ export class FormFilter extends Component {
     _onChangeCurrency = (currencyIdList) => {
         let baseCurrency = "";
 
-        if(!currencyIdList || currencyIdList.indexOf(',') > 0){ // none or multi currencies
+        if (!currencyIdList || currencyIdList.indexOf(',') > 0) { // none or multi currencies
             this.baseCurrencyList = AppData.baseCurrencyList;
             baseCurrency = this.baseCurrencyList.find(x => x.label === this.props.selectedBaseCurrency) ?
-                            this.props.selectedBaseCurrency :
-                            this.defaultBaseCurrency;
+                this.props.selectedBaseCurrency :
+                this.defaultBaseCurrency;
         }
-        else
-        {
-            const currencyName =  AppData.currencyList.find(x => x.Id == currencyIdList).Value;
+        else {
+            const currencyName = AppData.currencyList.find(x => x.Id == currencyIdList).Value;
             baseCurrency = currencyName;
-            if(!this.baseCurrencyList.find(x => x.label === currencyName)){
+            if (!this.baseCurrencyList.find(x => x.label === currencyName)) {
                 this.baseCurrencyList = AppData.baseCurrencyList.slice(0);
-                this.baseCurrencyList.push({value: currencyName, label: currencyName});      
+                this.baseCurrencyList.push({ value: currencyName, label: currencyName });
             }
         }
 
@@ -319,43 +317,43 @@ export class FormFilter extends Component {
         const statusList = AppData.statusList;
 
         return statusList && statusList.length && (
-                <MultipleSelect id="StatusList"
-                    language={LangHelper.currentLanguage}
-                    dataSource={statusList}
-                    keyField={"Id"}
-                    valueField={"Value"}
-                    statusField={"Status"}
-                    onChange={(currentItem, selectedItemsKey) => this.props.setSelectedStatus(selectedItemsKey)} />);
+            <MultipleSelect id="StatusList"
+                language={LangHelper.currentLanguage}
+                dataSource={statusList}
+                keyField={"Id"}
+                valueField={"Value"}
+                statusField={"Status"}
+                onChange={(currentItem, selectedItemsKey) => this.props.setSelectedStatus(selectedItemsKey)} />);
     }
 
-      _renderLiveStatusSelectList() {
-          const liveStatusList = AppData.liveStatusList;
+    _renderLiveStatusSelectList() {
+        const liveStatusList = AppData.liveStatusList;
 
-          return liveStatusList && liveStatusList.length && (
-                <MultipleSelect id="LiveStatusList"
-                    language={LangHelper.currentLanguage}
-                    dataSource={liveStatusList}
-                    keyField={"Id"}
-                    valueField={"Value"}
-                    statusField={"Status"}
-                    onChange={(currentItem, selectedItemsKey) => this.props.setSelectedLiveStatus(selectedItemsKey)} />);
+        return liveStatusList && liveStatusList.length && (
+            <MultipleSelect id="LiveStatusList"
+                language={LangHelper.currentLanguage}
+                dataSource={liveStatusList}
+                keyField={"Id"}
+                valueField={"Value"}
+                statusField={"Status"}
+                onChange={(currentItem, selectedItemsKey) => this.props.setSelectedLiveStatus(selectedItemsKey)} />);
     }
 
     render() {
         const excelButton = <div>
-                                <i className="icon-excel right" onClick={this.exportExcel} title={LangHelper.getSingleResource("ExportToExcel")}></i>
-                                {this._renderUserGuide()}
-                            </div>;
+            <i className="icon-excel right" onClick={this.exportExcel} title={LangHelper.getSingleResource("ExportToExcel")}></i>
+            {this._renderUserGuide()}
+        </div>;
 
-       return (
+        return (
             <CollapsiblePanel className="page-filter" stickyFooter={excelButton}>
                 <div className="row">
-                    <ToastContainer 
-                            autoClose={10000} 
-                            pauseOnFocusLoss={false} 
-                            style={{width:"500px"}}
-                            transition={Flip}/>
-                     <div className="col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2">
+                    <ToastContainer
+                        autoClose={10000}
+                        pauseOnFocusLoss={false}
+                        style={{ width: "500px" }}
+                        transition={Flip} />
+                    <div className="col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2">
                         <div className="form-group">
                             <label className="label-text">{LangHelper.getSingleResource("Date")}</label>
                             {this._renderDateRange()}
@@ -372,99 +370,99 @@ export class FormFilter extends Component {
                     <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
                         <div className="form-group">
                             <label className="label-text">{LangHelper.getSingleResource("Sport")}</label>
-                        {this._renderSportSelectList()}
+                            {this._renderSportSelectList()}
                         </div>
                     </div>
 
                     <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
                         <div className="form-group">
                             <label className="label-text">{LangHelper.getSingleResource("BetType")}</label>
-                        {this._renderBettypeSelectList()}
+                            {this._renderBettypeSelectList()}
                         </div>
                     </div>
 
-                     <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
+                    <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
                         <div className="form-group">
                             <label className="label-text">{LangHelper.getSingleResource("League")}</label>
-                        {this._renderLeagueSelectList()}
+                            {this._renderLeagueSelectList()}
                         </div>
                     </div>
 
-                     <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
+                    <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
                         <div className="form-group">
                             <label className="label-text">{LangHelper.getSingleResource("Match")}</label>
                             {this._renderMatchSelectList()}
                         </div>
                     </div>
-                    
-                    </div>
-                    <div className="row">
 
-                        <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
+                </div>
+                <div className="row">
+
+                    <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
                         <div className="form-group">
                             <label className="label-text">{LangHelper.getSingleResource("Username")}</label>
-                            <AutoComplete url={ApiUrl.CUSTOMER_SEARCH_URL} 
-                            onSelect={(value) => this.props.setUsername(value)}
-                            onInput={(value) => this.props.setUsername(value)}
-                            htmlAttributes={{placeholder:LangHelper.getSingleResource("ExternalIdOrSystemId")}} />
-                    </div>
-                     </div>
-                     <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
-                        <div className="form-group">
-                            <label className="label-text">{LangHelper.getSingleResource("Currency")}</label>
-                        {this._renderCurrencySelectList()}
+                            <AutoComplete url={ApiUrl.CUSTOMER_SEARCH_URL}
+                                onSelect={(value) => this.props.setUsername(value)}
+                                onInput={(value) => this.props.setUsername(value)}
+                                htmlAttributes={{ placeholder: LangHelper.getSingleResource("ExternalIdOrSystemId") }} />
                         </div>
                     </div>
-                    
+                    <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
+                        <div className="form-group">
+                            <label className="label-text">{LangHelper.getSingleResource("Currency")}</label>
+                            {this._renderCurrencySelectList()}
+                        </div>
+                    </div>
+
                     <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
                         <div className="form-group">
                             <label className="label-text">{LangHelper.getSingleResource("BaseCurrency")}</label>
-                        {this._renderBaseCurrencySelectList()}
+                            {this._renderBaseCurrencySelectList()}
                         </div>
                     </div>
 
                     <div className="col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2">
                         <div className="form-group">
                             <CheckBox id="IsConvertAll"
-                            checked={this.props.isConvertAll}
-                            onChange={(checked) => this.props.changeIsConvertAll(checked)}
-                            label={LangHelper.getSingleResource("ConvertAllFiguresToBaseCurrency")} />
-                        </div>    
+                                checked={this.props.isConvertAll}
+                                onChange={(checked) => this.props.changeIsConvertAll(checked)}
+                                label={LangHelper.getSingleResource("ConvertAllFiguresToBaseCurrency")} />
+                        </div>
                     </div>
 
-                     <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
+                    <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
                         <div className="form-group">
                             <label className="label-text">{LangHelper.getSingleResource("Status")}</label>
-                                {this._renderStatusSelectList()}
+                            {this._renderStatusSelectList()}
                         </div>
                     </div>
 
                     <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
                         <div className="form-group">
                             <label className="label-text">{LangHelper.getSingleResource("Live")}</label>
-                        {this._renderLiveStatusSelectList()}
+                            {this._renderLiveStatusSelectList()}
                         </div>
                     </div>
 
                     <div className="col-12 col-md-2 col-sm-2 col-lg-2 col-xl-1">
                         <div className="form-group">
                             <div className="button-group">
-                            <button type="button" disabled={!this.isValidModel} className="btn btn-submit" onClick={this.submit}>{LangHelper.getSingleResource("Submit")}</button>
+                                <button type="button" disabled={!this.isValidModel} className="btn btn-submit" onClick={this.submit}>{LangHelper.getSingleResource("Submit")}</button>
                             </div>
                         </div>
                     </div>
                 </div>
-               
-               <div className="row">
-                   <div className="col-1" style={{flex: "0 0 4%"}}>
-                       {LangHelper.getSingleResource('Note')}:
+
+                <div className="row">
+                    <div className="col-1" style={{ flex: "0 0 4%" }}>
+                        {LangHelper.getSingleResource('Note')}:
                     </div>
                     <div className="col-9">
                         * {LangHelper.getSingleResource('BettingTicketCenter_MultiCustomersTabNote1')}
                         <br />
                         * {LangHelper.getSingleResource('BettingTicketCenter_MultiCustomersTabNote2').replace("{0}", AppData.dateConstraint.minDate)}
                     </div>
-               </div>
+                </div>
 
             </CollapsiblePanel>
         )
@@ -473,13 +471,15 @@ export class FormFilter extends Component {
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators(ActionCreators, dispatch);
-               }
+}
 function mapStateToProps(state) {
     const { requestParam, dateRange, selectedProduct, sportList, selectedSport, selectedBettype, bettypeList, selectedLeague, leagueList, selectedMatch, matchList,
         selectedCurrency, baseCurrencyList, selectedBaseCurrency, selectedStatus, selectedLiveStatus, username, isConvertAll, userGuideContent } = state;
 
-    return Object.assign({}, { requestParam, dateRange, selectedProduct, sportList, selectedSport, selectedBettype, bettypeList, selectedLeague, leagueList, selectedMatch, matchList,
-        selectedCurrency, baseCurrencyList, selectedBaseCurrency, selectedStatus, selectedLiveStatus, username, isConvertAll, userGuideContent });
+    return Object.assign({}, {
+        requestParam, dateRange, selectedProduct, sportList, selectedSport, selectedBettype, bettypeList, selectedLeague, leagueList, selectedMatch, matchList,
+        selectedCurrency, baseCurrencyList, selectedBaseCurrency, selectedStatus, selectedLiveStatus, username, isConvertAll, userGuideContent
+    });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FormFilter);

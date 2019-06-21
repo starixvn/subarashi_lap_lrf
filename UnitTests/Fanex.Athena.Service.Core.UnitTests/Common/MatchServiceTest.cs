@@ -49,7 +49,7 @@
             _cache.Get<IList<Match>>(Arg.Any<string>()).Returns(ExpectedResultDataList);
 
             // Action
-            var result = await _matchService.GetAllRunningMatch(sportId, Language);
+            var result = await _matchService.GetAllRunningMatchAsync(sportId, Language);
 
             // Assert
             Assert.Multiple(() =>
@@ -67,7 +67,7 @@
             _matchDataAccess.GetAllRunningMatch(sportId).Returns(ExpectedResultDataList);
 
             // Action
-            var result = await _matchService.GetAllRunningMatch(sportId, Language);
+            var result = await _matchService.GetAllRunningMatchAsync(sportId, Language);
 
             // Assert
             Assert.Multiple(() =>
@@ -83,10 +83,10 @@
             // Arrange
             var sportId = FakeHelper.Create<int>();
             _matchDataAccess.GetAllRunningMatch(sportId).Returns(ExpectedResultDataList);
-            var firstCall = await _matchService.GetAllRunningMatch(sportId, Language);
+            var firstCall = await _matchService.GetAllRunningMatchAsync(sportId, Language);
 
             // Action
-            var result = await _matchService.GetAllRunningMatch(sportId, Language);
+            var result = await _matchService.GetAllRunningMatchAsync(sportId, Language);
 
             // Assert
             Assert.That(result, Is.EqualTo(ExpectedResultDataList));
@@ -100,7 +100,7 @@
             _matchDataAccess.GetForecastMatchListByLeague(leagueId).Returns(ExpectedResultDataList);
 
             // Action
-            var result = await _matchService.GetForecastMatchListByLeague(leagueId);
+            var result = await _matchService.GetForecastMatchListByLeagueAsync(leagueId);
 
             // Assert
             Assert.That(result[0].MatchId, Is.EqualTo(ExpectedResultDataList[0].MatchId));
@@ -116,7 +116,7 @@
             _matchDataAccess.GetMatchesByLeague(leagueId, fromDate, toDate).Returns(ExpectedResultDataList);
 
             // Action
-            var result = await _matchService.GetMatchesByLeague(leagueId, fromDate, toDate);
+            var result = await _matchService.GetMatchesByLeagueAsync(leagueId, fromDate, toDate);
 
             // Assert
             Assert.That(result[0].MatchId, Is.EqualTo(ExpectedResultDataList[0].MatchId));

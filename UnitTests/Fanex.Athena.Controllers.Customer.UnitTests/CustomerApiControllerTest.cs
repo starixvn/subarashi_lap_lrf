@@ -7,6 +7,7 @@
     using Base.UnitTests;
     using Customer;
     using DataAccess.Core.Users.Interfaces;
+    using Fanex.Logging;
     using Model.Core.DTO.Common;
     using Model.Core.ViewModel;
     using Model.Customer.MetaModel;
@@ -22,7 +23,7 @@
     [TestFixture]
     public partial class CustomerApiControllerTest : CultureBaseControllerHelperTest
     {
-        private ICoreLogger _logger;
+        private ILogger _logger;
         private ICustomerCommService _customerCommService;
         private ICustomerListService _customerListService;
         private IGroupComService _groupComService;
@@ -34,7 +35,7 @@
         {
             base.FixtureSetUp();
             SetUpDefaultFakeData();
-            _logger = Substitute.For<ICoreLogger>();
+            _logger = Substitute.For<ILogger>();
             _customerCommService = Substitute.For<ICustomerCommService>();
             _customerListService = Substitute.For<ICustomerListService>();
             _groupComService = Substitute.For<IGroupComService>();
@@ -133,7 +134,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    _logger.Received(1).Error(exception);
+                    _logger.Received(1).Error(exception.Message, exception);
                     Assert.That(resultInfo.Code, Is.EqualTo(1));
                     Assert.That(resultInfo.Message, Is.EqualTo(ViewResources.HttpError_Default));
                 });
