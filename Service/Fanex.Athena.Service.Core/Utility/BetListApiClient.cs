@@ -20,12 +20,9 @@
         public BetListApiClient(IAppSettings appSettings)
         {
             _appSetting = appSettings;
-
         }
         private async Task<T> HandleAsync<T>(string path, object value, string language, Func<IRestResponse, Task<T>> codeBlock)
         {
-            LogService.Info("Start to query BTC/Mutilple cust");
-
             var client = new RestClient
             {
                 BaseUrl = new Uri(_appSetting.BetListApiHostUrl)
@@ -36,72 +33,54 @@
             request.AddJsonBody(value);
             request.Method = Method.POST;
 
-            var task = await client.ExecuteTaskAsync(request);
-            return await codeBlock(task);
-
-
-        }
-
-        public Task<HttpResponseMessage> PostAsync(string path, object value, string language)
-        {
-            return HandleAsync<HttpResponseMessage>(path, value, language, (x) =>
-           {
-               var result = new HttpResponseMessage(x.StatusCode)
-               {
-                   Content = new StreamContent(new MemoryStream(x.RawBytes)),
-
-               };
-               if (x.ContentType.IndexOf("application/json") > -1)
-               {
-                   result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-               }else if(x.ContentType.IndexOf("application/zip") >-1)
-               {
-                   result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/zip");
-
-               }else
-               {
-                   result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/xls");
-
-               }
-               LogService.Info("End to query BTC/Mutilple cust");
-
-               return Task.FromResult(result);
-           });
+            var task = await client.ExecuteTaskAsync(request).ConfigureAwait(false);
+            return await codeBlock(task).ConfigureAwait(false);
 
         }
 
-        public Task<T> PostAsync<T>(string path, object value, string language)
+        public async Task<HttpResponseMessage> PostAsync(string path, object value, string language)
         {
-            return HandleAsync<T>(
+            return await HandleAsync<HttpResponseMessage>(path, value, language, (x) =>
+          {
+              var result = new HttpResponseMessage(x.StatusCode)
+              {
+                  Content = new StreamContent(new MemoryStream(x.RawBytes)),
+
+              };
+              var contentType = x.ContentType.Split(';')[0];
+
+              result.Content.Headers.ContentType = new MediaTypeHeaderValue(contentType);
+
+              return Task.FromResult(result);
+          }).ConfigureAwait(false);
+
+        }
+
+        public async Task<T> PostAsync<T>(string path, object value, string language)
+        {
+            return await HandleAsync<T>(
                 path,
                 value,
                 language,
                   (x) =>
              {
-                 LogService.Info("End to query BTC/Mutilple cust");
-
                  return Task.FromResult(JsonConvert.DeserializeObject<T>(x.Content));
-             });
+             }).ConfigureAwait(false);
         }
 
-        public Task<Stream> PostAsyncStream(string path, object value, string language)
+        public async Task<Stream> PostAsyncStream(string path, object value, string language)
         {
-            return HandleAsync(path, value, language, (x) =>
+            return await HandleAsync(path, value, language, (x) =>
             {
-
-                LogService.Info("End to query BTC/Mutilple cust");
-
                 Stream stream = new MemoryStream(x.RawBytes);
                 return Task.FromResult(stream);
 
-            });
+            }).ConfigureAwait(false);
         }
 
-        public Task<string> PostAsyncString(string path, object value, string language)
+        public async Task<string> PostAsyncString(string path, object value, string language)
         {
-            LogService.Info("End to query BTC/Mutilple cust");
-
-            return HandleAsync(path, value, language, (x) => Task.FromResult(x.Content));
+            return await HandleAsync(path, value, language, (x) => Task.FromResult(x.Content)).ConfigureAwait(false);
         }
     }
 }
