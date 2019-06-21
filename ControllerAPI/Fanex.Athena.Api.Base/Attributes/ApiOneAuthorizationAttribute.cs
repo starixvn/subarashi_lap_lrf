@@ -12,6 +12,7 @@
     using System.Web.Http.Filters;
     using DataAccess.Core.Users.Interfaces;
     using Extensions;
+    using Fanex.Logging;
     using Model.Core.DTO.OneAuth;
     using ONEbook.UM.Services;
     using Resources;
@@ -29,7 +30,7 @@
             Func<Task<HttpResponseMessage>> continuation)
         {
             var scope = actionContext.Request.GetDependencyScope();
-            var logger = scope.Resolve<ICoreLogger>();
+            var logger = scope.Resolve<ILogger>();
             var maintainanceService = scope.Resolve<IMaintenanceService>();
 
             try
@@ -70,7 +71,7 @@
             }
             catch (Exception exception)
             {
-                logger.Error(exception);
+                logger.Error(exception.Message, exception);
                 return UnauthorizeAccessHandlerAsync(actionContext, ViewResources.AccessDeniedMsg);
             }
         }
@@ -86,8 +87,7 @@
 
         private static string GetAuthToken(HttpRequestMessage request)
         {
-            IEnumerable<string> headerValues = null;
-            if (request.Headers.TryGetValues(KeyName, out headerValues))
+            if (request.Headers.TryGetValues(KeyName, out IEnumerable<string> headerValues))
             {
                 return headerValues.FirstOrDefault();
             }
@@ -109,12 +109,12 @@
             return source.Task;
         }
 
-        private static void LogInfo(ICoreLogger logger, HttpRequestMessage request, string message)
+        private static void LogInfo(ILogger logger, HttpRequestMessage request, string message)
         {
             var content = new StringBuilder("ApiOneAuthorization: ");
             content.AppendLine(message);
             content.AppendLine("Url: " + request.RequestUri);
-            logger.InfoAsync(content.ToString());
+            logger.Info(content.ToString());
         }
     }
 }

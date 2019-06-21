@@ -7,6 +7,7 @@
     using Attributes;
     using Autofac;
     using DataAccess.Core.Users.Interfaces;
+    using Fanex.Logging;
     using Model.Core.DTO.Common;
     using Model.Core.DTO.OneAuth;
     using NSubstitute;
@@ -22,7 +23,7 @@
 
         private const string TokenValue = "abcdef";
 
-        private ICoreLogger _logger;
+        private ILogger _logger;
 
         private IOneAuthenticationService _oneAuthenticationService;
 
@@ -33,7 +34,7 @@
         [SetUp]
         public void SetUp()
         {
-            _logger = Substitute.For<ICoreLogger>();
+            _logger = Substitute.For<ILogger>();
             _oneAuthenticationService = Substitute.For<IOneAuthenticationService>();
             _licenseeDataAccess = Substitute.For<ILicenseeDataAccess>();
             _maintenanceService = Substitute.For<IMaintenanceService>();
@@ -140,7 +141,7 @@
             var result = attribute.ExecuteAuthorizationFilterAsync(actionContext, new CancellationToken(), null);
 
             // Assert
-            _logger.Received(1).Error(exception);
+            _logger.Received(1).Error(exception.Message, exception);
         }
 
         private HttpActionContext CreateActionContext(bool hasAuthToken = false)

@@ -7,6 +7,7 @@
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Service.Core.Users.Interfaces;
+    using Fanex.Logging;
     using Model.Core.DTO.OneAuth;
     using Newtonsoft.Json;
     using ONEbook.UM.Services;
@@ -17,13 +18,13 @@
         private readonly IMaintenanceService _maintenanceService;
         private readonly IOneAuthenticationService _oneAuthenticationService;
         private readonly IAppSettings _appSetting;
-        private readonly ICoreLogger _logger;
+        private readonly ILogger _logger;
 
         public OneAuthorizationController(
             IMaintenanceService maintenanceService,
             IOneAuthenticationService oneAuthenticationService,
             IAppSettings appSetting,
-            ICoreLogger logger)
+            ILogger logger)
         {
             _maintenanceService = maintenanceService;
             _oneAuthenticationService = oneAuthenticationService;
@@ -35,7 +36,7 @@
         [HttpGet]
         [Route("Auth/CreateSession")]
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
-        public async Task<RedirectResult> CreateSession(string token)
+        public RedirectResult CreateSession(string token)
         {
             if (_maintenanceService.IsUnderMaintenance())
             {
@@ -56,10 +57,10 @@
 
             if (VerifyToken(tokenInfo))
             {
-                return Redirect(Url.Content(await GetReturnPathForValidToken(ReturnUrl, tokenInfo).ConfigureAwait(false)));
+                return Redirect(Url.Content(GetReturnPathForValidToken(ReturnUrl, tokenInfo)));
             }
 
-            await WriteLog(JsonConvert.SerializeObject(tokenInfo)).ConfigureAwait(false);
+            WriteLog(JsonConvert.SerializeObject(tokenInfo));
             return Redirect(Url.Content(ReturnUrl + OneAuthorizationErrorCode.TokenIsInValid));
         }
 
@@ -69,7 +70,7 @@
                 !StringHelper.IsAnyNullOrEmpty(token.SiteName, token.VendorID, token.UserID, token.Language, token.ActionLink);
         }
 
-        private async Task<string> GetReturnPathForValidToken(string returnPath, OneAuthToken tokenInfo)
+        private string GetReturnPathForValidToken(string returnPath, OneAuthToken tokenInfo)
         {
             if (IsInternalDomain(tokenInfo.ActionLink))
             {
@@ -77,7 +78,7 @@
             }
             else
             {
-                var result = await _oneAuthenticationService.SignIn(HttpContext, tokenInfo).ConfigureAwait(false);
+                var result = _oneAuthenticationService.SignIn(HttpContext, tokenInfo);
                 return result.IsSuccessful ? "~/" + result.ExtendedData : returnPath + result.Code;
             }
         }
@@ -88,7 +89,7 @@
             return !string.IsNullOrEmpty(internalSubDomain) && actionLink.Contains(internalSubDomain);
         }
 
-        private async Task WriteLog(string errMsg)
+        private void WriteLog(string errMsg)
         {
             if (string.IsNullOrEmpty(errMsg) || _appSetting.GetValue("EnableLogForOneAuthorization") != "1")
             {
@@ -105,7 +106,7 @@
             message.AppendLine(" - Platform: " + Request.Browser.Platform);
             message.AppendLine(" - Version: " + Request.Browser.Version);
             message.AppendLine(" - Crawler: " + Request.Browser.Crawler);
-            await _logger.ErrorAsync(message.ToString()).ConfigureAwait(false);
+            _logger.Error(message.ToString());
         }
     }
 }

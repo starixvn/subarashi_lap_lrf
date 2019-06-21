@@ -7,6 +7,7 @@
     using Core.Exception;
     using Core.Utility.Interfaces;
     using Fanex.Athena.Model.Casino.MetaModel.ApiInputParameter;
+    using Fanex.Logging;
     using Model.BetSettings.DTO.RngCasino;
     using NSubstitute;
     using NUnit.Framework;
@@ -21,7 +22,7 @@
 
         private IBasicInfoApiWrapper _basicInfoApiWrapper;
 
-        private ICoreLogger _logger;
+        private ILogger _logger;
 
         private CasinoSettingService _casinoSettingService;
 
@@ -30,7 +31,7 @@
         {
             _customerApiWrapper = Substitute.For<ICustomerApiWrapper>();
             _basicInfoApiWrapper = Substitute.For<IBasicInfoApiWrapper>();
-            _logger = Substitute.For<ICoreLogger>();
+            _logger = Substitute.For<ILogger>();
 
             _casinoSettingService = new CasinoSettingService(
                 _logger,
@@ -116,7 +117,7 @@
             Assert.Multiple(() =>
             {
                 Assert.That(result, Is.Empty);
-                _logger.Received().Error(Arg.Any<Exception>());
+                _logger.Received().Error(Arg.Any<string>(), Arg.Any<Exception>());
             });
         }
 

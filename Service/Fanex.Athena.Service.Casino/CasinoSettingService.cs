@@ -17,19 +17,20 @@ namespace Fanex.Athena.Service.Casino
     using Fanex.Athena.Service.Casino.Interfaces;
     using Fanex.Athena.Service.Core.Exception;
     using Fanex.Common;
+    using Fanex.Logging;
     using Wrappers;
 
     public class CasinoSettingService : ICasinoSettingService
     {
         private const string CasinoNoDeposit = "01";
 
-        private readonly ICoreLogger _logger;
+        private readonly ILogger _logger;
 
         private readonly ICustomerApiWrapper _customerApiWrapper;
 
         private readonly IBasicInfoApiWrapper _basicInfoApiWrapper;
-        
-        public CasinoSettingService(ICoreLogger logger, ICustomerApiWrapper customerApiWrapper, IBasicInfoApiWrapper basicInfoApiWrapper)
+
+        public CasinoSettingService(ILogger logger, ICustomerApiWrapper customerApiWrapper, IBasicInfoApiWrapper basicInfoApiWrapper)
         {
             _logger = logger;
             _customerApiWrapper = customerApiWrapper;
@@ -68,7 +69,7 @@ namespace Fanex.Athena.Service.Casino
             catch (Exception exception)
             {
                 gameKinds = new List<GameKind>();
-                _logger.Error(exception);
+                _logger.Error(exception.Message, exception);
             }
 
             return gameKinds;

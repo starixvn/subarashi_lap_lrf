@@ -7,10 +7,10 @@
     using Constant.DataDomain;
     using Core;
     using Fanex.Common.Extensions;
+    using Fanex.Logging;
     using Interfaces;
     using Model.BetSettings.DTO;
     using Model.Core.DTO.Common;
-    using Service.Core.Utility.Interfaces;
     using VendorAdapter.Interfaces;
 
     public class DcsBetSettingDataAccess : BaseDataAccess, IDcsBetSettingDataAccess
@@ -43,12 +43,12 @@
             { ProductTypes.Sportsbooks2, 1}
         };
 
-        private readonly ICoreLogger _logger;
+        private readonly ILogger _logger;
 
         private readonly ICacheRefAdapter _cacheRefAdapter;
 
         public DcsBetSettingDataAccess(
-            ICoreLogger logger,
+            ILogger logger,
             ICacheRefAdapter cacheRefAdapter)
         {
             _logger = logger;
@@ -94,7 +94,7 @@
                 await db.ExecuteNonQueryAsync().ConfigureAwait(false);
 
                 var result = GetResult(db);
-                result.Message = await GetErrorMessage(result.Message).ConfigureAwait(false);
+                result.Message = GetErrorMessage(result.Message);
                 return result;
             }
         }
@@ -152,7 +152,7 @@
                 await db.ExecuteNonQueryAsync().ConfigureAwait(false);
 
                 var result = GetResult(db);
-                result.Message = await GetErrorMessage(result.Message).ConfigureAwait(false);
+                result.Message = GetErrorMessage(result.Message);
                 return result;
             }
         }
@@ -162,7 +162,7 @@
             return string.Format(UpdateStatusXmlFormat, ProductSporttypeMap[productId], ProductBettypeMap[productId], status ? 0 : 1);
         }
 
-        private async Task<string> GetErrorMessage(string xmlErrorMessage)
+        private string GetErrorMessage(string xmlErrorMessage)
         {
             if (!string.IsNullOrEmpty(xmlErrorMessage) && xmlErrorMessage.StartsWith("<"))
             {
@@ -173,7 +173,8 @@
                 }
                 catch (Exception)
                 {
-                    await _logger.ErrorAsync("Invalid xml content: " + xmlErrorMessage).ConfigureAwait(false);
+                    _logger.Error("Invalid xml content: " + xmlErrorMessage);
+
                 }
             }
 

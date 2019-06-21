@@ -7,7 +7,7 @@
 
     public interface IOneAuthenticationService
     {
-        Task<IResultInfo> SignIn(HttpContextBase currentContext, OneAuthToken tokenInfo);
+        IResultInfo SignIn(HttpContextBase currentContext, OneAuthToken tokenInfo);
 
         OneAuthToken GetTokenInfo(string token);
     }

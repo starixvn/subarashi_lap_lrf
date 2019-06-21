@@ -3,6 +3,7 @@
     using System.Data;
     using System.Threading.Tasks;
     using Core.UnitTests.TestHelpers;
+    using Fanex.Logging;
     using Model.BetSettings.DTO;
     using Model.Core.DTO.Common;
     using NSubstitute;
@@ -17,7 +18,7 @@
         protected override void SetUpDataAccess()
         {
             DataAccess = Substitute.ForPartsOf<DcsBetSettingDataAccess>(
-                Substitute.For<ICoreLogger>(),
+                Substitute.For<ILogger>(),
                 Substitute.For<ICacheRefAdapter>());
         }
 

@@ -3,6 +3,7 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Extension.Utility;
+    using Fanex.Logging;
     using Model.Core.DataDomain;
     using Model.Report.DTO.Result;
     using Service.Core.Common.Interfaces;
@@ -13,7 +14,7 @@
     [FunctionAuthorization(PermissionKeys.ReportResults)]
     public class ResultKenoReportController : ReportBaseController
     {
-        private readonly ICoreLogger _logger;
+        private readonly ILogger _logger;
 
         private readonly IBetListApiClient _betListApiClient;
 
@@ -22,7 +23,7 @@
             ISessionService sessionService,
             IAppSettings appSetting,
             IProductService productService,
-            ICoreLogger logger,
+            ILogger logger,
             IBetListApiClient betListApiClient)
             : base(languageService, sessionService, appSetting, productService)
         {
@@ -47,7 +48,7 @@
                 new
                 {
                     Url = kenoUrl,
-                    UserId = userSession.UserId
+                    userSession.UserId
                 },
             JsonRequestBehavior.AllowGet);
         }
@@ -60,7 +61,7 @@
             var userSession = SessionService.UserSession;
             if (string.IsNullOrEmpty(userId) || !userSession.UserId.ToString().Equals(userId))
             {
-                await _logger.ErrorAsync("Keno Result page just submited invalid userId").ConfigureAwait(false);
+                _logger.Error("Keno Result page just submited invalid userId");
 
                 return Url.Action("AccessDenied", "Utility", null, Request.Url.Scheme);
             }
@@ -76,7 +77,7 @@
 
             if (result.ErrorCode > 0)
             {
-                await _logger.ErrorAsync("Keno Session: " + result.ErrorMsg).ConfigureAwait(false);
+                _logger.Error("Keno Session: " + result.ErrorMsg);
                 return Url.Action("AccessDenied", "Utility", null, Request.Url.Scheme);
             }
 

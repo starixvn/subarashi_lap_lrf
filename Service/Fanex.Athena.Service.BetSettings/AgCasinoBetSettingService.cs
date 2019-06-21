@@ -17,6 +17,7 @@ namespace Fanex.Athena.Service.BetSettings
     using Extension.Utility;
     using Extension.Utility.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Logging;
     using Interfaces;
     using Model.BetSettings.DTO;
     using Model.BetSettings.DTO.AgCasino;
@@ -26,17 +27,17 @@ namespace Fanex.Athena.Service.BetSettings
 
     public class AgCasinoBetSettingService : BetSettingBaseService, IAgCasinoBetSettingService
     {
-        private readonly ICoreLogger _logger;
+        private readonly ILogger _logger;
 
         private readonly IAgCasinoBetSettingDataAccess _betSettingDataAccess;
 
         private readonly IAppSettings _appSettings;
 
         private readonly IWebClientService _webClientService;
-        
+
         public AgCasinoBetSettingService(
             IAuthorizationService authorizationService,
-            ICoreLogger logger,
+            ILogger logger,
             IAgCasinoBetSettingDataAccess betSettingDataAccess,
             IAppSettings appSettings,
             IWebClientService webClientService)
@@ -137,7 +138,7 @@ namespace Fanex.Athena.Service.BetSettings
             }
             catch (Exception exception)
             {
-                _logger.Error(exception);
+                _logger.Error(exception.Message, exception);
             }
 
             return games;

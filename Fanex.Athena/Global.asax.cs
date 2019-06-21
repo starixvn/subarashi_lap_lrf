@@ -6,6 +6,14 @@
 
 namespace Fanex.Athena
 {
+    using Api.Base.Attributes;
+    using Data;
+    using Fanex.Athena.Extension.Helpers;
+    using Fanex.Athena.Web.ActionFilter;
+    using Fanex.Athena.Web.RouterConfig;
+    using Logging;
+    using Logging.RabbitMQ;
+    using RemotingRef;
     using System;
     using System.Collections.Generic;
     using System.Configuration;
@@ -16,16 +24,6 @@ namespace Fanex.Athena
     using System.Web.Mvc;
     using System.Web.Optimization;
     using System.Web.Routing;
-    using Api.Base.Attributes;
-    using Data;
-    using Fanex.Athena.Web.ActionFilter;
-    using Fanex.Athena.Web.RouterConfig;
-    using Logging;
-    using Logging.Extensions.Database;
-    using Logging.Extensions.Web;
-    using Logging.RabbitMQ;
-    using RemotingRef;
-    using Service.Core.Utility.Interfaces;
 
     public class MvcApplication : HttpApplication
     {
@@ -38,16 +36,16 @@ namespace Fanex.Athena
             {
                 // Code that runs when an unhandled error occurs
                 var exception = Server.GetLastError();
-
+                var isIgnore = exception is HttpAntiForgeryException
+                              || exception is HttpException
+                           || (exception.TargetSite.DeclaringType == typeof(ActionDescriptor) &&
+                                exception.TargetSite.Name == "ExtractParameterFromDictionary");
                 // Exception when passing wrong data type to action method
-                if (exception.TargetSite.DeclaringType == typeof(ActionDescriptor) &&
-                    exception.TargetSite.Name == "ExtractParameterFromDictionary")
+                if (!isIgnore)
                 {
-                    return;
+                    LogService.Error(LogMessageHelper.GenerateMessage(exception));
                 }
 
-                var logger = DependencyResolver.Current.GetService<ICoreLogger>();
-                logger.Error(exception);
             }
         }
 
@@ -93,11 +91,6 @@ namespace Fanex.Athena
                 RefDataTypeContainer
                 .ConnectTo(new Uri(ConfigurationManager.AppSettings["Fanex.RemotingRef.Service.Url"]))
                 .FromApplication("Fanex.LAP");
-
-                ExceptionHandler.UseConfig(new LoggingConfiguration())
-                    .IgnoreException<HttpAntiForgeryException>()
-                    .GetHttpHeaderInfo()
-                    .UseGetDbExceptionInfo(DatabaseInfoGetters.GetDbExceptionInfo);
 
                 DIConfig.Register();
             }

@@ -10,6 +10,7 @@
     using DataAccess.Core.Users.Interfaces;
     using Extension.Utility.Interfaces;
     using Fanex.Athena.Service.Core.Users;
+    using Fanex.Logging;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using Model.Core.DTO.OneAuth;
@@ -30,7 +31,7 @@
         private ILicenseeDataAccess _licenseeDataAccess;
         private IFormsAuthenticationService _formAuthenticationService;
         private IOneBookSecurityWrapper _oneBookSecurityWrapper;
-        private ICoreLogger _logger;
+        private ILogger _logger;
         private IOneAuthDataAccess _oneAuthDataAccess;
 
         [SetUp]
@@ -40,7 +41,7 @@
             _licenseeDataAccess = Substitute.For<ILicenseeDataAccess>();
             _formAuthenticationService = Substitute.For<IFormsAuthenticationService>();
             _oneBookSecurityWrapper = Substitute.For<IOneBookSecurityWrapper>();
-            _logger = Substitute.For<ICoreLogger>();
+            _logger = Substitute.For<ILogger>();
             _oneAuthDataAccess = Substitute.For<IOneAuthDataAccess>();
             _oneAuthDataAccess.GetUserInfo(Arg.Any<int>(), Arg.Any<string>()).Returns(new OneAuthUserInfo());
 
@@ -63,7 +64,7 @@
         }
 
         [Test]
-        public async Task SignIn_GetLicenseeByNameReturnNull_ReturnCorrectErrorResultInfo()
+        public void SignIn_GetLicenseeByNameReturnNull_ReturnCorrectErrorResultInfo()
         {
             // Arrange
             var tokenInfo = FakeHelper.Create<OneAuthToken>();
@@ -76,7 +77,7 @@
             };
 
             // Action
-            var result = await _oneAuthenticationService.SignIn(Arg.Any<HttpContextBase>(), tokenInfo);
+            var result = _oneAuthenticationService.SignIn(Arg.Any<HttpContextBase>(), tokenInfo);
 
             // Assert
             Assert.Multiple(() =>
@@ -87,7 +88,7 @@
         }
 
         [Test]
-        public async Task SignIn_InvalidCurrencyList_ReturnCorrectErrorResultInfo()
+        public void SignIn_InvalidCurrencyList_ReturnCorrectErrorResultInfo()
         {
             // Arrange
             var tokenInfo = new OneAuthToken
@@ -105,11 +106,11 @@
                 Message = ViewResources.UserNotHaveCurrency
             };
 
-            _oneAuthenticationService.When(async x => await x.ValidateCurrencyList(Arg.Any<OneAuthUserInfo>())).DoNotCallBase();
+            _oneAuthenticationService.When(x => x.ValidateCurrencyList(Arg.Any<OneAuthUserInfo>())).DoNotCallBase();
             _oneAuthenticationService.ValidateCurrencyList(Arg.Any<OneAuthUserInfo>()).Returns(expectedResult);
 
             // Action
-            var result = await _oneAuthenticationService.SignIn(Arg.Any<HttpContextBase>(), tokenInfo);
+            var result = _oneAuthenticationService.SignIn(Arg.Any<HttpContextBase>(), tokenInfo);
 
             // Assert
             Assert.Multiple(() =>
@@ -120,7 +121,7 @@
         }
 
         [Test]
-        public async Task SignIn_NotHaveUserSession_CreateNewSession()
+        public void SignIn_NotHaveUserSession_CreateNewSession()
         {
             // Arrange
             var tokenInfo = CreateValidFakeToken(false);
@@ -134,7 +135,7 @@
             var fakeHttpContext = Substitute.For<HttpContextBase>();
 
             // Action
-            await _oneAuthenticationService.SignIn(fakeHttpContext, tokenInfo);
+            _oneAuthenticationService.SignIn(fakeHttpContext, tokenInfo);
 
             // Result
             Assert.Multiple(() =>
@@ -150,7 +151,7 @@
         }
 
         [Test]
-        public async Task SignIn_IsInValidIdentity_CreateNewSession()
+        public void SignIn_IsInValidIdentity_CreateNewSession()
         {
             // Arrange
             var tokenInfo = CreateValidFakeToken(false);
@@ -165,7 +166,7 @@
             fakeHttpContext.User.Identity.Returns(x => { return null; });
 
             // Action
-            await _oneAuthenticationService.SignIn(fakeHttpContext, tokenInfo);
+            _oneAuthenticationService.SignIn(fakeHttpContext, tokenInfo);
 
             // Result
             Assert.Multiple(() =>
@@ -181,7 +182,7 @@
         }
 
         [Test]
-        public async Task SignIn_IsInValidSessionUser_CreateNewSession()
+        public void SignIn_IsInValidSessionUser_CreateNewSession()
         {
             // Arrange
             var tokenInfo = CreateValidFakeToken(false);
@@ -208,7 +209,7 @@
             var fakeHttpContext = CreateValidFakeContext(tokenInfo.UserID);
 
             // Action
-            await _oneAuthenticationService.SignIn(fakeHttpContext, tokenInfo);
+            _oneAuthenticationService.SignIn(fakeHttpContext, tokenInfo);
 
             // Result
             Assert.Multiple(() =>
@@ -224,7 +225,7 @@
         }
 
         [Test]
-        public async Task SignIn_IsInValidLicenseeUser_CreateNewSession()
+        public void SignIn_IsInValidLicenseeUser_CreateNewSession()
         {
             // Arrange
             var tokenInfo = CreateValidFakeToken(false);
@@ -251,7 +252,7 @@
             var fakeHttpContext = CreateValidFakeContext(tokenInfo.UserID);
 
             // Action
-            await _oneAuthenticationService.SignIn(fakeHttpContext, tokenInfo);
+            _oneAuthenticationService.SignIn(fakeHttpContext, tokenInfo);
 
             // Result
             Assert.Multiple(() =>
@@ -267,7 +268,7 @@
         }
 
         [Test]
-        public async Task SignIn_SessionIsAnotherUser_CreateNewSession()
+        public void SignIn_SessionIsAnotherUser_CreateNewSession()
         {
             // Arrange
             var tokenInfo = CreateValidFakeToken(false);
@@ -295,7 +296,7 @@
             var fakeHttpContext = CreateValidFakeContext(tokenInfo.UserID);
 
             // Action
-            await _oneAuthenticationService.SignIn(fakeHttpContext, tokenInfo);
+            _oneAuthenticationService.SignIn(fakeHttpContext, tokenInfo);
 
             // Result
             Assert.Multiple(() =>
@@ -311,7 +312,7 @@
         }
 
         [Test]
-        public async Task SignIn_IsAuthenticatedAndIsSameSession_UpdateCurrentSession()
+        public void SignIn_IsAuthenticatedAndIsSameSession_UpdateCurrentSession()
         {
             // Arrange
             var tokenInfo = CreateValidFakeToken(false, "en");
@@ -340,7 +341,7 @@
             var fakeHttpContext = CreateValidFakeContext(tokenInfo.UserID);
 
             // Action
-            await _oneAuthenticationService.SignIn(fakeHttpContext, tokenInfo);
+            _oneAuthenticationService.SignIn(fakeHttpContext, tokenInfo);
 
             // Result
             Assert.Multiple(() =>
@@ -361,7 +362,7 @@
         [TestCase("th", "th-TH")]
         [TestCase("vn", "vi-VN")]
         [TestCase("invalid", "en-Us")]
-        public async Task SignIn_IsAuthenticatedAndIsSameSession_LanguageIsChanged_UpdateLanguage(string tokenLanguage, string expectedLanguageChanged)
+        public void SignIn_IsAuthenticatedAndIsSameSession_LanguageIsChanged_UpdateLanguage(string tokenLanguage, string expectedLanguageChanged)
         {
             // Arrange
             var tokenInfo = CreateValidFakeToken(false, tokenLanguage);
@@ -390,14 +391,14 @@
             var fakeHttpContext = CreateValidFakeContext(tokenInfo.UserID);
 
             // Action
-            await _oneAuthenticationService.SignIn(fakeHttpContext, tokenInfo);
+            _oneAuthenticationService.SignIn(fakeHttpContext, tokenInfo);
 
             // Result
             _sessionService.Received().UpdateLanguage(expectedLanguageChanged);
         }
 
         [Test]
-        public async Task SignIn_GetPermissionList_IsNotAdminstrator_GetFromToken_ReturnCorrectData()
+        public void SignIn_GetPermissionList_IsNotAdminstrator_GetFromToken_ReturnCorrectData()
         {
             // Arrange
             var tokenInfo = CreateValidFakeToken(false);
@@ -411,7 +412,7 @@
             var fakeHttpContext = Substitute.For<HttpContextBase>();
 
             // Action
-            await _oneAuthenticationService.SignIn(fakeHttpContext, tokenInfo);
+            _oneAuthenticationService.SignIn(fakeHttpContext, tokenInfo);
 
             // Result
             Assert.Multiple(() =>
@@ -441,7 +442,7 @@
             var fakeHttpContext = Substitute.For<HttpContextBase>();
 
             // Action
-            await _oneAuthenticationService.SignIn(fakeHttpContext, tokenInfo);
+            _oneAuthenticationService.SignIn(fakeHttpContext, tokenInfo);
 
             // Result
             Assert.Multiple(() =>
@@ -455,7 +456,7 @@
         }
 
         [Test]
-        public async Task SignIn_GetPermissionList_IsAdminstrator_GetFromFile_HasData_ReturnEmptyData()
+        public void SignIn_GetPermissionList_IsAdminstrator_GetFromFile_HasData_ReturnEmptyData()
         {
             // Arrange
             var tokenInfo = CreateValidFakeToken(true);
@@ -477,7 +478,7 @@
             var fakeHttpContext = Substitute.For<HttpContextBase>();
 
             // Action
-            await _oneAuthenticationService.SignIn(fakeHttpContext, tokenInfo);
+            _oneAuthenticationService.SignIn(fakeHttpContext, tokenInfo);
 
             // Result
             Assert.Multiple(() =>
@@ -498,7 +499,7 @@
             var userInfo = new OneAuthUserInfo { CurrencyUserList = isNull ? null : new List<CurrencyUser>() };
 
             // Action
-            var result = await _oneAuthenticationService.ValidateCurrencyList(userInfo);
+            var result = _oneAuthenticationService.ValidateCurrencyList(userInfo);
 
             // Assert
             Assert.Multiple(() =>
@@ -509,7 +510,7 @@
         }
 
         [Test]
-        public async Task ValidateCurrencyList_CurrencyListHasDuplicateAgent_ReturnErrorResultInfo()
+        public void ValidateCurrencyList_CurrencyListHasDuplicateAgent_ReturnErrorResultInfo()
         {
             // Arrange
             var currency = new CurrencyUser
@@ -521,12 +522,12 @@
             var userInfo = new OneAuthUserInfo { CurrencyUserList = new[] { currency } };
 
             // Action
-            var result = await _oneAuthenticationService.ValidateCurrencyList(userInfo);
+            var result = _oneAuthenticationService.ValidateCurrencyList(userInfo);
 
             // Assert
             Assert.Multiple(() =>
             {
-                _logger.Received(1).ErrorAsync($"Duplicate agentid in currency permissions: currency ({currency.CurrencyId}-{currency.CurrencyName})" +
+                _logger.Received(1).Error($"Duplicate agentid in currency permissions: currency ({currency.CurrencyId}-{currency.CurrencyName})" +
                         $", duplicate agents (34)");
                 Assert.That(result.Code, Is.EqualTo(OneAuthorizationErrorCode.InvalidCurrencyPermission));
                 Assert.That(result.Message, Is.EqualTo(ViewResources.InvalidCurrencyPermission));

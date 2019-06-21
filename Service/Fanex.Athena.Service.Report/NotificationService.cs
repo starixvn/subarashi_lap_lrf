@@ -7,6 +7,7 @@
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Resources;
     using Fanex.Athena.Service.Core.Utility.Interfaces;
+    using Fanex.Logging;
     using Interfaces;
     using Model.Core.DTO.Common;
     using Model.Core.ResultModel;
@@ -29,7 +30,7 @@
             { "zhcn", "Cs" }
         };
 
-        private readonly ICoreLogger _logger;
+        private readonly ILogger _logger;
 
         private readonly IAppSettings _appSetting;
 
@@ -37,7 +38,7 @@
 
         [CLSCompliant(false)]
         public NotificationService(
-            ICoreLogger logger,
+            ILogger logger,
             IAppSettings appSetting,
             IWebClientService webClientService)
         {
@@ -223,7 +224,7 @@
 
         private void LogError(string api, Exception exception)
         {
-            _logger.Error(exception, exception.Message + "\nApiUrl: " + api);
+            _logger.Error(exception.Message + "\nApiUrl: " + api, exception);
         }
     }
 }

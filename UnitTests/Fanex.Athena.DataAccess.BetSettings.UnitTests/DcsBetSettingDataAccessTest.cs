@@ -1,12 +1,11 @@
 ﻿namespace Fanex.Athena.DataAccess.BetSettings.UnitTests
 {
-    using System.Data;
     using System.Threading.Tasks;
     using Constant.DataDomain;
     using Core.UnitTests.TestHelpers;
+    using Fanex.Logging;
     using NSubstitute;
     using NUnit.Framework;
-    using Service.Core.Utility.Interfaces;
     using VendorAdapter.Interfaces;
 
     [TestFixture]
@@ -15,7 +14,7 @@
         protected override void SetUpDataAccess()
         {
             DataAccess = Substitute.ForPartsOf<DcsBetSettingDataAccess>(
-                Substitute.For<ICoreLogger>(),
+                Substitute.For<ILogger>(),
                 Substitute.For<ICacheRefAdapter>());
         }
 

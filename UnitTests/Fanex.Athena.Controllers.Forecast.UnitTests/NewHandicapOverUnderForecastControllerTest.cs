@@ -1,12 +1,9 @@
 ﻿namespace Fanex.Athena.Controllers.Forecast.UnitTests
 {
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
     using Base.UnitTests;
     using DataAccess.Core.Common.Interfaces;
     using DataAccess.Forecast.Interfaces;
+    using Fanex.Logging;
     using Model.Core.DTO.Common;
     using Model.Forecast.DTO.NewForecastHdpOu;
     using Model.Forecast.MetaModel;
@@ -14,8 +11,10 @@
     using NSubstitute;
     using NUnit.Framework;
     using Service.Core.Common.Interfaces;
-    using Service.Core.Utility.Interfaces;
-    using Service.Forecast.Interfaces;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using VendorAdapter.Interfaces;
 
     public class NewHandicapOverUnderForecastControllerTest : CultureBaseControllerHelperTest
@@ -349,7 +348,7 @@
                 var expectedMatchNames = "A,B,C";
 
                 // Action
-                var result = (await controler.GetMatchListByLeague(0)) as ViewResult;
+                var result = (await controler.GetMatchListByLeague(0));
                 var viewModel = (List<Match>)result.Model;
 
                 // Assert
@@ -388,7 +387,7 @@
                 SessionService,
                 AppSettings,
                 _forecastDataAccess,
-                Substitute.For<ICoreLogger>(),
+                Substitute.For<ILogger>(),
                 _cacheRefAdapter,
                 _matchService,
                 _leagueDataAccess)

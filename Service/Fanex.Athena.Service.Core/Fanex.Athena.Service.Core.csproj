@@ -45,14 +45,6 @@
       <HintPath>..\..\packages\Fanex.Logging.2.0.0\lib\net461\Fanex.Logging.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Fanex.Logging.Extensions, Version=1.0.6.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Fanex.Logging.Extensions.1.0.6\lib\net461\Fanex.Logging.Extensions.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Fanex.Logging.Extensions.Web, Version=1.0.6.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Fanex.Logging.Extensions.Web.1.0.6\lib\net40\Fanex.Logging.Extensions.Web.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Flurl, Version=2.8.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Flurl.2.8.2\lib\net40\Flurl.dll</HintPath>
     </Reference>
@@ -142,9 +134,7 @@
     <Compile Include="Users\SessionService.cs" />
     <Compile Include="Users\UserService.cs" />
     <Compile Include="Utility\BetListApiClient.cs" />
-    <Compile Include="Utility\CoreLogger.cs" />
     <Compile Include="Utility\Interfaces\IBetListApiClient.cs" />
-    <Compile Include="Utility\Interfaces\ICoreLogger.cs" />
     <Compile Include="Utility\KeanOceanBusinessHelper.cs" />
   </ItemGroup>
   <ItemGroup>

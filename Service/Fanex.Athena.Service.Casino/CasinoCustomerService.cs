@@ -6,16 +6,17 @@ using Fanex.Athena.Service.Casino.Interfaces;
 using Fanex.Athena.Service.Casino.Wrappers;
 using Fanex.Athena.Service.Core.Exception;
 using Fanex.Athena.Service.Core.Utility.Interfaces;
+using Fanex.Logging;
 
 namespace Fanex.Athena.Service.Casino
 {
     public class CasinoCustomerService : ICasinoCustomerService
     {
-        private readonly ICoreLogger _logger;
+        private readonly ILogger _logger;
 
         private readonly ICustomerApiWrapper _customerApiWrapper;
 
-        public CasinoCustomerService(ICoreLogger logger, ICustomerApiWrapper customerApiWrapper)
+        public CasinoCustomerService(ILogger logger, ICustomerApiWrapper customerApiWrapper)
         {
             _logger = logger;
             _customerApiWrapper = customerApiWrapper;
@@ -46,7 +47,7 @@ namespace Fanex.Athena.Service.Casino
             }
         }
 
-        public async Task<bool> UpdateCommission(RNGCasinoUpdateMemberComMetaModel metaModel)
+        public bool UpdateCommission(RNGCasinoUpdateMemberComMetaModel metaModel)
         {
             const string API_ERROR_MSG = "Found errors when calling casino API to update customer commission.\n customers=";
             const string AdditionErrorMsgPattern = "\n IP={0},CustomerId={1},ModifyBy={2},ModifyBy={3},Site={4}";
@@ -63,12 +64,12 @@ namespace Fanex.Athena.Service.Casino
                 success = _customerApiWrapper.UpdateComm(metaModel);
                 if (!success)
                 {
-                    await _logger.ErrorAsync(API_ERROR_MSG + string.Join(",", metaModel.CustomerId) + additionalErrorMsg).ConfigureAwait(false);
+                    _logger.Error(API_ERROR_MSG + string.Join(",", metaModel.CustomerId) + additionalErrorMsg);
                 }
             }
             catch (Exception exception)
             {
-                _logger.Error(exception, "UpdateCommission:" + exception.Message + additionalErrorMsg);
+                _logger.Error("UpdateCommission:" + exception.Message + additionalErrorMsg, exception);
             }
 
             return success;

@@ -6,6 +6,7 @@
     using Casino.Wrappers;
     using Core.Exception;
     using Core.Utility.Interfaces;
+    using Fanex.Logging;
     using Model.Casino.MetaModel;
     using Model.Customer.MetaModel;
     using NSubstitute;
@@ -15,7 +16,7 @@
     [TestFixture]
     public class CasinoCustomerServiceTest
     {
-        private ICoreLogger _logger;
+        private ILogger _logger;
 
         private ICustomerApiWrapper _customerApiWrapper;
 
@@ -24,7 +25,7 @@
         [SetUp]
         public void SetUp()
         {
-            _logger = Substitute.For<ICoreLogger>();
+            _logger = Substitute.For<ILogger>();
             _customerApiWrapper = Substitute.For<ICustomerApiWrapper>();
 
             _casinoCustomerService = new CasinoCustomerService(_logger, _customerApiWrapper);
@@ -43,7 +44,7 @@
             var metaModel = FakeHelper.Create<CustomerStatusMetaModel>();
 
             // Action
-            var result = _casinoCustomerService.UpdateSuspend(metaModel);
+            _casinoCustomerService.UpdateSuspend(metaModel);
 
             // Assert
             _customerApiWrapper.Received().UpdateCustSuspend(metaModel);
@@ -118,14 +119,14 @@
             _customerApiWrapper.UpdateComm(metaModel).Returns(false);
 
             // Action
-            var result = _casinoCustomerService.UpdateCommission(metaModel);
+            _casinoCustomerService.UpdateCommission(metaModel);
 
             // Assert
-            await _logger.Received(1).ErrorAsync(Arg.Is<string>(x => x.Contains(string.Join(",", metaModel.CustomerId))));
+            _logger.Received(1).Error(Arg.Is<string>(x => x.Contains(string.Join(",", metaModel.CustomerId))));
         }
 
         [Test]
-        public async Task UpdateCommission_ApiThrowException_LogException()
+        public void UpdateCommission_ApiThrowException_LogException()
         {
             // Arrange
             var exception = new Exception("Hello");
@@ -137,10 +138,10 @@
             });
 
             // Action
-            await _casinoCustomerService.UpdateCommission(metaModel);
+            _casinoCustomerService.UpdateCommission(metaModel);
 
             // Assert
-            _logger.ReceivedWithAnyArgs().Error(exception);
+            _logger.ReceivedWithAnyArgs().Error(exception.Message, exception);
         }
     }
 }
