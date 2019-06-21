@@ -76,15 +76,15 @@
             const byte GroupByProduct = 1;
             const int ReportBySummary = 1;
             const int ReportByMonthly = 3;
-            var baseCurrency = metaModel.BaseCurrency;
+
             var item = new LicenseeWinLossByTimeZone
             {
                 GroupBy = reader["GroupBy"].ToString(),
                 BetCount = reader.ToInt("BetCount"),
-                Turnover = reader.ToDecimal("Turnover" + baseCurrency),
-                CustomerComm = reader.ToDecimal("PlayerComm" + baseCurrency),
-                LicenseeWinLoss = reader.ToDecimal("LicenseeWL" + baseCurrency),
-                LicenseeComm = reader.ToDecimal("LicenseeComm" + baseCurrency)
+                Turnover = reader.ToDecimal("TurnoverBase"),
+                CustomerComm = reader.ToDecimal("PlayerCommBase"),
+                LicenseeWinLoss = reader.ToDecimal("LicenseeWLBase"),
+                LicenseeComm = reader.ToDecimal("LicenseeCommBase")
             };
             if (metaModel.ReportBy != ReportBySummary)
             {
@@ -109,6 +109,7 @@
             objectDb.SetParameterValue("ReportBy", metaModel.ReportBy);
             objectDb.SetParameterValue("GroupBy", metaModel.GroupBy);
             objectDb.SetParameterValue("IncludeDraw", metaModel.IsIncludeDrawData);
+            objectDb.SetParameterValue("BaseCurrency", metaModel.BaseCurrency);
         }
     }
 }
