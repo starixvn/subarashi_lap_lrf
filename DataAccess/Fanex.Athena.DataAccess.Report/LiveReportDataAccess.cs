@@ -49,7 +49,6 @@ namespace Fanex.Athena.DataAccess.Report
                 using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))
                 {
                     var list = new List<LiveReport>();
-                    var currency = metaModel.BaseCurrency;
                     while (reader.Read())
                     {
                         var productCode = reader.ToString("ProductCode");
@@ -59,7 +58,7 @@ namespace Fanex.Athena.DataAccess.Report
                             ProductName = ProductHelper.GetProductName(productCode),
                             ProductCode = productCode
                         };
-                        ReadCommonColumns(reader, currency, item);
+                        ReadCommonColumns(reader, item);
                         list.Add(item);
                     }
 
@@ -73,7 +72,6 @@ namespace Fanex.Athena.DataAccess.Report
             const string UspName = "Lrf_Rpt_LiveReportBySport";
             var moveBetsDate = _balanceUpDataAccess.GetBalanceUp().MoveBetsDay;
 
-            var currency = metaModel.BaseCurrency;
             var list = new List<LiveReport>();
             using (var db = this.GetObjectDb(UspName))
             {
@@ -88,7 +86,7 @@ namespace Fanex.Athena.DataAccess.Report
                             ProductName = GetProductNameBySport(sportType),
                             ProductCode = sportType
                         };
-                        ReadCommonColumns(reader, currency, item);
+                        ReadCommonColumns(reader, item);
                         list.Add(item);
                     }
 
@@ -102,7 +100,6 @@ namespace Fanex.Athena.DataAccess.Report
             IDictionary<int, string> currencyList,
              IEnumerable<Product> products)
         {
-            var currency = metaModel.BaseCurrency;
             const string UspName = "Lrf_Rpt_LiveReportSummaryDetail";
             var moveBetsDate = _balanceUpDataAccess.GetBalanceUp().MoveBetsDay;
 
@@ -111,9 +108,9 @@ namespace Fanex.Athena.DataAccess.Report
                 AddParameters(db, metaModel, moveBetsDate);
                 using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))
                 {
-                    var resultByCurrency = ReadDetailByCurrency(reader, currencyList, currency);
+                    var resultByCurrency = ReadDetailByCurrency(reader, currencyList);
 
-                    var resultByBettype = reader.NextResult() ? ReadDetailByBettype(reader, products, currency) : new List<LiveReportByBetType>();
+                    var resultByBettype = reader.NextResult() ? ReadDetailByBettype(reader, products) : new List<LiveReportByBetType>();
 
                     return new Tuple<IList<LiveReport>, IList<LiveReportByBetType>>(resultByCurrency, resultByBettype);
                 }
@@ -133,6 +130,7 @@ namespace Fanex.Athena.DataAccess.Report
                 db.SetParameterValue("movebetsday", moveBetsDate);
                 db.SetParameterValue("sportid", metaModel.SportId);
                 db.SetParameterValue("liveindicator", metaModel.LiveIndicator);
+                db.SetParameterValue("BaseCurrency", metaModel.BaseCurrency);
                 var productList = metaModel.ProductCodeList.Split(',');
                 foreach (var product in productList)
                 {
@@ -141,7 +139,6 @@ namespace Fanex.Athena.DataAccess.Report
 
                 using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))
                 {
-                    var currency = metaModel.BaseCurrency;
                     var data = new List<LiveReportWinLossByMatch>();
 
                     while (reader.Read())
@@ -154,12 +151,12 @@ namespace Fanex.Athena.DataAccess.Report
                             BetType = reader.ToInt("bettype"),
                             ShowTime = reader.ToString("showtime"),
                             BetCount = reader.ToInt("Betcount"),
-                            TurnOver = reader.ToDecimal("Turnover" + currency),
-                            CustomerWinLoss = reader.ToDecimal("Winlost" + currency),
-                            CustomerComm = reader.ToDecimal("PlayerComm" + currency),
-                            LicenseeComm = reader.ToDecimal("Comm" + currency),
-                            LicenseeWinLoss = reader.ToDecimal("LicenseeWL" + currency),
-                            AmountDue = reader.ToDecimal("AmtDueto3rd" + currency),
+                            TurnOver = reader.ToDecimal("Turnover"),
+                            CustomerWinLoss = reader.ToDecimal("Winlost"),
+                            CustomerComm = reader.ToDecimal("PlayerComm"),
+                            LicenseeComm = reader.ToDecimal("Comm"),
+                            LicenseeWinLoss = reader.ToDecimal("LicenseeWL"),
+                            AmountDue = reader.ToDecimal("AmtDueto3rd"),
                             SportId = metaModel.SportId
                         });
                     }
@@ -177,16 +174,17 @@ namespace Fanex.Athena.DataAccess.Report
             db.SetParameterValue("todate", metaModel.ToDate);
             db.SetParameterValue("movebetsday", moveBetsDate);
             db.SetParameterValue("liveindicator", metaModel.LiveIndicator);
+            db.SetParameterValue("BaseCurrency", metaModel.BaseCurrency);
         }
 
-        private static void ReadCommonColumns(IDataReader reader, string currency, LiveReport item)
+        private static void ReadCommonColumns(IDataReader reader, LiveReport item)
         {
-            item.TurnOver = reader.ToDecimal("Turnover" + currency);
-            item.CustomerWinLoss = reader.ToDecimal("Winlost" + currency);
-            item.CustomerComm = reader.ToDecimal("PlayerComm" + currency);
-            item.LicenseeComm = reader.ToDecimal("Comm" + currency);
-            item.LicenseeWinLoss = reader.ToDecimal("LicenseeWL" + currency);
-            item.AmountDue = reader.ToDecimal("AmtDueto3rd" + currency);
+            item.TurnOver = reader.ToDecimal("Turnover");
+            item.CustomerWinLoss = reader.ToDecimal("Winlost");
+            item.CustomerComm = reader.ToDecimal("PlayerComm");
+            item.LicenseeComm = reader.ToDecimal("Comm");
+            item.LicenseeWinLoss = reader.ToDecimal("LicenseeWL");
+            item.AmountDue = reader.ToDecimal("AmtDueto3rd");
             item.BetCount = reader.ToInt("Betcount");
         }
 
@@ -219,7 +217,7 @@ namespace Fanex.Athena.DataAccess.Report
             }
         }
 
-        private IList<LiveReport> ReadDetailByCurrency(IDataReader reader, IDictionary<int, string> currencyList, string currency)
+        private IList<LiveReport> ReadDetailByCurrency(IDataReader reader, IDictionary<int, string> currencyList)
         {
             var list = new List<LiveReport>();
             while (reader.Read())
@@ -232,14 +230,14 @@ namespace Fanex.Athena.DataAccess.Report
                     ProductCode = currencyName
                 };
 
-                ReadCommonColumns(reader, currency, item);
+                ReadCommonColumns(reader, item);
                 list.Add(item);
             }
 
             return list.OrderBy(x => x.ProductName).ToList();
         }
 
-        private IList<LiveReportByBetType> ReadDetailByBettype(IDataReader reader, IEnumerable<Product> products, string currency)
+        private IList<LiveReportByBetType> ReadDetailByBettype(IDataReader reader, IEnumerable<Product> products)
         {
             var dataList = new List<LiveReport>();
             while (reader.Read())
@@ -250,7 +248,7 @@ namespace Fanex.Athena.DataAccess.Report
                     ProductName = GetBetTypeName(Convert.ToInt32(bettype)),
                     ProductCode = reader.ToString("ProductCode")
                 };
-                ReadCommonColumns(reader, currency, item);
+                ReadCommonColumns(reader, item);
 
                 dataList.Add(item);
             }

@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Data;
     using System.Threading.Tasks;
     using Constant.DataDomain;
     using Core.Configuration.Interfaces;
@@ -95,8 +94,8 @@
 
             var readerDataMapping = new Dictionary<string, object>(StringComparer.InvariantCultureIgnoreCase)
             {
-                { "ProductCode", "SB" }, { "TurnoverUUS", 100 }, { "WinlostUUS", 200 },
-                { "PlayerCommUUS", 300 }, { "CommUUS", 400 }, { "LicenseeWLUUS", 500 }, { "AmtDueto3rdUUS", 600 }, { "Betcount", 700 },
+                { "ProductCode", "SB" }, { "Turnover", 100 }, { "Winlost", 200 },
+                { "PlayerComm", 300 }, { "Comm", 400 }, { "LicenseeWL", 500 }, { "AmtDueto3rd", 600 }, { "Betcount", 700 },
             };
 
             MapReaderData(readerDataMapping);
@@ -144,7 +143,7 @@
 
             var readerDataMapping = new Dictionary<string, object>(StringComparer.InvariantCultureIgnoreCase)
             {
-                { "SportType", "1" }, { "ProductCode", "SB" }, { "TurnoverUUS", 100 }, { "WinlostUUS", 200 }
+                { "SportType", "1" }, { "ProductCode", "SB" }, { "Turnover", 100 }, { "Winlost", 200 }
             };
 
             MapReaderData(readerDataMapping);
@@ -217,8 +216,8 @@
 
             var readerDataMapping = new Dictionary<string, object>(StringComparer.InvariantCultureIgnoreCase)
             {
-                { "Currency", "1" }, { "TurnoverUUS", 100 },
-                { "WinlostUUS", 200 }, { "bettype", "1" }, { "ProductCode", "SB" }
+                { "Currency", "1" }, { "Turnover", 100 },
+                { "Winlost", 200 }, { "bettype", "1" }, { "ProductCode", "SB" }
             };
 
             MapReaderData(readerDataMapping);
@@ -258,8 +257,8 @@
 
             var readerDataMapping = new Dictionary<string, object>(StringComparer.InvariantCultureIgnoreCase)
             {
-                { "Currency", "20" }, { "TurnoverUUS", 200 },
-                { "WinlostUUS", 400 }, { "bettype", betType }, { "ProductCode", "VS2" }
+                { "Currency", "20" }, { "Turnover", 200 },
+                { "Winlost", 400 }, { "bettype", betType }, { "ProductCode", "VS2" }
             };
 
             MapReaderData(readerDataMapping);
@@ -326,6 +325,7 @@
                 ObjectDb.Received(1).SetParameterValue("liveindicator", metaModel.LiveIndicator);
                 ObjectDb.Received(1).SetParameterValue("movebetsday", _balance.MoveBetsDay);
                 ObjectDb.Received(1).SetParameterValue("sportid", metaModel.SportId);
+                ObjectDb.Received(1).SetParameterValue("BaseCurrency", metaModel.BaseCurrency);
                 ObjectDb.Received(1).SetParameterValue("showNG", true);
             });
         }
@@ -368,6 +368,7 @@
             ObjectDb.Received(1).SetParameterValue("liveindicator", _metaModel.LiveIndicator);
             ObjectDb.Received(1).SetParameterValue("movebetsday", _balance.MoveBetsDay);
             ObjectDb.Received(1).SetParameterValue("ProductCodes", _metaModel.ProductCodeList);
+            ObjectDb.Received(1).SetParameterValue("BaseCurrency", _metaModel.BaseCurrency);
         }
     }
 }
