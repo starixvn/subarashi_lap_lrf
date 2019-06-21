@@ -64,8 +64,11 @@
             metaModel.HasPlayerCom = SessionService.LicenseeSession.IsAllowedCustomerComm;
             metaModel.UserCurrencyList = userCurrencyList;
 
+            var timeout = _appSettings.LicenseesWithLargeData.Contains(licenseeSession.LicenseeId) ? 
+                _appSettings.BetListApiClientTimeOutMinutes :
+                0;
             return await _betListApiClient.PostAsync("/BettingTicketCenterMultiCustomer/GetData",
-                metaModel, userSession.Language).ConfigureAwait(false);
+                metaModel, userSession.Language, timeout).ConfigureAwait(false);
         }
     }
 }
