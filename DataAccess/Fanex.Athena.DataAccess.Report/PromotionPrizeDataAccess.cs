@@ -7,7 +7,6 @@
     using Core.Configuration.Interfaces;
     using Extension.Utility;
     using Interfaces;
-    using Model.Core.DataDomain;
     using Model.Core.ResultModel;
     using Model.Report;
     using Model.Report.MetaModel;
@@ -33,35 +32,19 @@
                 db.SetParameterValue("ToDate", metaModel.ToDate);
                 db.SetParameterValue("MoveBetsDay", _balanceUpDataAccess.GetBalanceUp().MoveBetsDay);
                 db.SetParameterValue("AgentList", metaModel.AgentListXml);
+                db.SetParameterValue("DefaultBaseCurrency", metaModel.DefaultBaseCurrency);
 
                 using (var reader = db.ExecuteReader())
                 {
-                    return GetData(reader, currencyList);
+                    return GetData(reader, currencyList, metaModel.DefaultBaseCurrency);
                 }
             }
         }
 
-        private static IDictionary<string, PromotionPrize> InitSummaryTotal()
-        {
-            var summaryTotal = new Dictionary<string, PromotionPrize>();
-            foreach (var currency in SystemConstants.BaseCurrencyListOfSummaryTotalRow)
-            {
-                summaryTotal.Add(
-                    currency,
-                    new PromotionPrize
-                    {
-                        Amount = 0,
-                        CurrencyName = currency
-                    });
-            }
-
-            return summaryTotal;
-        }
-
-        private ReportResultModel<PromotionPrize> GetData(IDataReader reader, IDictionary<int, string> currencyList)
+        private ReportResultModel<PromotionPrize> GetData(IDataReader reader, IDictionary<int, string> currencyList, string defaultBaseCurrency)
         {
             var dataList = new List<PromotionPrize>();
-            var summaryTotal = InitSummaryTotal();
+            var summaryTotal = InitSummaryTotalList<PromotionPrize>(defaultBaseCurrency);
 
             while (reader.Read())
             {
@@ -83,7 +66,12 @@
             {
                 foreach (var total in summaryTotal)
                 {
-                    total.Value.Amount = reader.ToDecimal("SumAmount" + total.Key);
+                    var suffixColumn = !string.IsNullOrEmpty(defaultBaseCurrency) && total.Key.Equals(defaultBaseCurrency, System.StringComparison.OrdinalIgnoreCase)
+                                     ? "Base"
+                                     : total.Key;
+
+                    total.Value.CurrencyName = total.Key;
+                    total.Value.Amount = reader.ToDecimal("SumAmount" + suffixColumn);
                 }
             }
 

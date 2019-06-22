@@ -45,9 +45,12 @@
             const string FileName = "PP_PromotionPrize.xls";
             var templatePath = HostingEnvironment.MapPath(@"~/App_Data/Template/Reports/PP_PromotionPrize.xls");
 
+            var userSession = SessionService.UserSession;
+
+            metaModel.DefaultBaseCurrency = userSession.DefaultBaseCurrency;
             metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId, metaModel.IsExcludedTestData);
 
-            var data = _dataAccess.GetData(metaModel, SessionService.UserSession.CurrencyList);
+            var data = _dataAccess.GetData(metaModel, userSession.CurrencyList);
 
             var title = ReportExcelHelper.GenerateReportTitle(
                 ViewResources.ProductPP + " - " + @ViewResources.PromotionPrize,
