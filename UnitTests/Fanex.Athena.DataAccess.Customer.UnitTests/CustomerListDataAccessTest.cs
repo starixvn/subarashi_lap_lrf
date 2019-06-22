@@ -1,7 +1,6 @@
 ﻿namespace Fanex.Athena.DataAccess.Customer.UnitTests
 {
     using System.Collections.Generic;
-    using System.Data;
     using System.Linq;
     using System.Threading.Tasks;
     using Core.UnitTests.TestHelpers;
@@ -11,7 +10,6 @@
     using NSubstitute;
     using NUnit.Framework;
     using Resources;
-    using UnitTest.Common.Helpers;
 
     public class CustomerListDataAccessTest : BaseDataAccessHelperTest<CustomerListDataAccess>
     {
@@ -49,6 +47,7 @@
                 ObjectDb.Received(1).SetParameterValue("GroupCommId", metaModel.GroupCommId);
                 ObjectDb.Received(1).SetParameterValue("OddsGroups", "A,C");
                 ObjectDb.Received(1).SetParameterValue("TotalRows", null);
+                ObjectDb.Received(1).SetParameterValue("BaseCurrency", metaModel.BaseCurrency);
             });
         }
 
@@ -59,19 +58,19 @@
         public async Task GetActiveCustomers_WhenCall_ReturnCorrectData(bool isClosed, bool isSuspended, string expectedStatusRes)
         {
             // Arrange
-            const int ExpectedCustId = 999;
             DataAccess.GetObjectDb(Arg.Is("Lrf_CustomerSel")).Returns(ObjectDb);
-            var reader = Substitute.For<IDataReader>();
-            reader.Read().Returns(true, false);
-            ObjectDb.ExecuteReaderAsync().ReturnsForAnyArgs(reader);
-            DataAccessTestHelper.MapReaderData(
-                reader,
-                new
-                {
-                    custid = ExpectedCustId,
-                    closed = isClosed,
-                    suspended = isSuspended
-                });
+            Reader.Read().Returns(true, false);
+
+            var expectedData = new
+            {
+                custid = 999,
+                closed = isClosed,
+                suspended = isSuspended,
+                TotalBalance = 100,
+                OutStanding = 100
+            };
+            MapReaderData(expectedData);
+
             var expectedStatus = ViewResources.ResourceManager.GetString(expectedStatusRes);
 
             var metaModel = new CustomerListMetaModel();
@@ -83,8 +82,10 @@
             // Assert
             Assert.Multiple(() =>
             {
-                Assert.That(firstItem.CustId, Is.EqualTo(ExpectedCustId));
+                Assert.That(firstItem.CustId, Is.EqualTo(expectedData.custid));
                 Assert.That(firstItem.Status, Is.EqualTo(expectedStatus));
+                Assert.That(firstItem.AvailableFunds, Is.EqualTo(expectedData.TotalBalance));
+                Assert.That(firstItem.PendingFunds, Is.EqualTo(expectedData.OutStanding));
             });
         }
 
