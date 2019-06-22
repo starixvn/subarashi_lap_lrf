@@ -31,7 +31,7 @@ namespace Fanex.Athena.DataAccess.Report
                     var index = 1;
                     while (reader.Read())
                     {
-                        var item = ReadDataItem(reader, metaModel.BaseCurrency, index++);
+                        var item = ReadDataItem(reader, index++);
                         result.Add(item);
                     }
                 }
@@ -40,29 +40,29 @@ namespace Fanex.Athena.DataAccess.Report
             return result;
         }
 
-        private static TurnoverDTO ReadDataItem(IDataReader reader, string baseCurrency, int index)
+        private static TurnoverDTO ReadDataItem(IDataReader reader, int index)
         {
             return new TurnoverDTO
             {
                 Index = index,
                 Date = reader.ToDateTime("winlostdate").ToString("MM/dd/yyyy"),
-                OpeningBalance = reader.ToDecimal("OpeningBalance" + baseCurrency),
-                Deposit = reader.ToDecimal("Deposit" + baseCurrency),
-                Withdrawal = reader.ToDecimal("Withdrawal" + baseCurrency),
-                AffiliateTransfer = reader.ToDecimal("AffiliateTransfer" + baseCurrency),
-                Bonus = reader.ToDecimal("Bonus" + baseCurrency),
-                Adjustment = reader.ToDecimal("Adjustment" + baseCurrency),
-                Turnover = reader.ToDecimal("Turnover" + baseCurrency),
-                PendingFunds = reader.ToDecimal("PendingFund" + baseCurrency),
-                WinLoss = reader.ToDecimal("WinLoss" + baseCurrency),
-                ClosingBalance = reader.ToDecimal("ClosingBalance" + baseCurrency),
-                Transfer3rd = reader.ToDecimal("Transfer3rd" + baseCurrency),
-                DrawGame = reader.ToDecimal("DrawGame" + baseCurrency),
-                TurnoverBA = reader.ToDecimal("TurnoverBA" + baseCurrency),
-                CommBA = reader.ToDecimal("CommBA" + baseCurrency),
-                AmountDueToBA = reader.ToDecimal("AmountDueToBA" + baseCurrency),
-                NetTurnover = reader.ToDecimal("Turnover" + baseCurrency) - reader.ToDecimal("DrawGame" + baseCurrency),
-                PlayerComm = reader.ToDecimal("PlayerComm" + baseCurrency),
+                OpeningBalance = reader.ToDecimal("OpeningBalance"),
+                Deposit = reader.ToDecimal("Deposit"),
+                Withdrawal = reader.ToDecimal("Withdrawal"),
+                AffiliateTransfer = reader.ToDecimal("AffiliateTransfer"),
+                Bonus = reader.ToDecimal("Bonus"),
+                Adjustment = reader.ToDecimal("Adjustment"),
+                Turnover = reader.ToDecimal("Turnover"),
+                PendingFunds = reader.ToDecimal("PendingFund"),
+                WinLoss = reader.ToDecimal("WinLoss"),
+                ClosingBalance = reader.ToDecimal("ClosingBalance"),
+                Transfer3rd = reader.ToDecimal("Transfer3rd"),
+                DrawGame = reader.ToDecimal("DrawGame"),
+                TurnoverBA = reader.ToDecimal("TurnoverBA"),
+                CommBA = reader.ToDecimal("CommBA"),
+                AmountDueToBA = reader.ToDecimal("AmountDueToBA"),
+                NetTurnover = reader.ToDecimal("Turnover") - reader.ToDecimal("DrawGame"),
+                PlayerComm = reader.ToDecimal("PlayerComm"),
             };
         }
 
@@ -77,6 +77,7 @@ namespace Fanex.Athena.DataAccess.Report
             db.SetParameterValue("todate", metaModel.ToDate);
             db.SetParameterValue("username", metaModel.Username);
             db.SetParameterValue("AgentList", metaModel.AgentListXml);
+            db.SetParameterValue("BaseCurrency", metaModel.BaseCurrency);
         }
     }
 }
