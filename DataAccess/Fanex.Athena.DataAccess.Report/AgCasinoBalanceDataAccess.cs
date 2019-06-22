@@ -81,7 +81,7 @@ namespace Fanex.Athena.DataAccess.Report
             }
         }
 
-        private static void ReadSummaryTotal(IDataReader reader, Dictionary<string, AgCasinoBalance> summaryTotal, string defaultBaseCurrency)
+        private static void ReadSummaryTotal(IDataReader reader, IDictionary<string, AgCasinoBalance> summaryTotal, string defaultBaseCurrency)
         {
             foreach (var summary in summaryTotal)
             {
@@ -109,23 +109,6 @@ namespace Fanex.Athena.DataAccess.Report
             db.SetParameterValue("DefaultBaseCurrency", metaModel.DefaultBaseCurrency);
         }
 
-        private static Dictionary<string, AgCasinoBalance> InitSummaryTotalList(string defaultBaseCurrency)
-        {
-            var summary = new Dictionary<string, AgCasinoBalance>();
-            foreach (var currency in SystemConstants.BaseCurrencyListOfSummaryTotalRow)
-            {
-                summary.Add(currency, new AgCasinoBalance());
-            }
-
-            if (!string.IsNullOrEmpty(defaultBaseCurrency) &&
-                !SystemConstants.BaseCurrencyListOfSummaryTotalRow.Any(x => x.Equals(defaultBaseCurrency, System.StringComparison.OrdinalIgnoreCase)))
-            {
-                summary.Add(defaultBaseCurrency.ToUpperInvariant(), new AgCasinoBalance());
-            }
-
-            return summary;
-        }
-
         private SortableReportResultModel<AgCasinoBalance> GetData(
             IDataReader reader,
             IDictionary<int, string> currencyList,
@@ -133,7 +116,7 @@ namespace Fanex.Athena.DataAccess.Report
         {
             var dataList = new SortableList<AgCasinoBalance>();
 
-            var summaryTotal = InitSummaryTotalList(metaModel.DefaultBaseCurrency);
+            var summaryTotal = InitSummaryTotalList<AgCasinoBalance>(metaModel.DefaultBaseCurrency);
 
             var hasSystemIdColumn = reader.HasColumn("username");
             var hasExternalIdColumn = reader.HasColumn("nickname");

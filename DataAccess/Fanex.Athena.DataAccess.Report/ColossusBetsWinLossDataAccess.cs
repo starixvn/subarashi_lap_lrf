@@ -45,23 +45,6 @@ namespace Fanex.Athena.DataAccess.Report
             return GetData("Lrf_Rpt_ColossusBetsWinloss_detail", currencyList, metaModel);
         }
 
-        private static Dictionary<string, ColossusBetWinLoss> InitSummaryTotalList(string defaultBaseCurrency)
-        {
-            var summary = new Dictionary<string, ColossusBetWinLoss>();
-            foreach (var currency in SystemConstants.BaseCurrencyListOfSummaryTotalRow)
-            {
-                summary.Add(currency, new ColossusBetWinLoss());
-            }
-
-            if (!string.IsNullOrEmpty(defaultBaseCurrency) &&
-                !SystemConstants.BaseCurrencyListOfSummaryTotalRow.Any(x => x.Equals(defaultBaseCurrency, System.StringComparison.OrdinalIgnoreCase)))
-            {
-                summary.Add(defaultBaseCurrency.ToUpperInvariant(), new ColossusBetWinLoss());
-            }
-
-            return summary;
-        }
-
         private static void ReadSummaryTotal(IDataReader reader, IDictionary<string, ColossusBetWinLoss> summaryTotal, string defaultBaseCurrency)
         {
             foreach (var summary in summaryTotal)
@@ -119,7 +102,7 @@ namespace Fanex.Athena.DataAccess.Report
             var isFirstLevel = metaModel.DrillDownLevel == (int)ReportLevel.Main;
             var isMonthly = metaModel.ReportBy == ReportByType.Monthly;
             var result = new SortableList<ColossusBetWinLoss>();
-            var summaryTotal = InitSummaryTotalList(metaModel.DefaultBaseCurrency);
+            var summaryTotal = InitSummaryTotalList<ColossusBetWinLoss>(metaModel.DefaultBaseCurrency);
 
             while (reader.Read())
             {

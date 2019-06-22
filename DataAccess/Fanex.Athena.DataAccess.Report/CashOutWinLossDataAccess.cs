@@ -131,23 +131,6 @@ namespace Fanex.Athena.DataAccess.Report
             }).ToList();
         }
 
-        private static Dictionary<string, CashOutWinLoss> InitSummaryTotalList(string defaultBaseCurrency)
-        {
-            var summary = new Dictionary<string, CashOutWinLoss>();
-            foreach (var currency in SystemConstants.BaseCurrencyListOfSummaryTotalRow)
-            {
-                summary.Add(currency, new CashOutWinLoss());
-            }
-
-            if (!string.IsNullOrEmpty(defaultBaseCurrency) &&
-                !SystemConstants.BaseCurrencyListOfSummaryTotalRow.Any(x => x.Equals(defaultBaseCurrency, System.StringComparison.OrdinalIgnoreCase)))
-            {
-                summary.Add(defaultBaseCurrency.ToUpperInvariant(), new CashOutWinLoss());
-            }
-
-            return summary;
-        }
-
         private void UpdateUspParams(IObjectDb db, ThirdPartyWinLossMetaModel metaModel, bool drilldown)
         {
             db.SetParameterValue("fromdate", drilldown ? metaModel.DrillDownFromDate : metaModel.FromDate.Date);
@@ -164,7 +147,7 @@ namespace Fanex.Athena.DataAccess.Report
         {
             var result = new SortableList<CashOutWinLoss>();
 
-            var summaryTotal = InitSummaryTotalList(metaModel.DefaultBaseCurrency);
+            var summaryTotal = InitSummaryTotalList<CashOutWinLoss>(metaModel.DefaultBaseCurrency);
 
             var hasSystemId = reader.HasColumn("systemid");
             var hasExternalId = reader.HasColumn("externalid");
