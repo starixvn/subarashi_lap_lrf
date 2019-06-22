@@ -70,22 +70,24 @@
             db.SetParameterValue("Fromdate", metaModel.FromDate.Date);
             db.SetParameterValue("Todate", metaModel.ToDate.Date);
             db.SetParameterValue("LicenseeId", metaModel.LicenseeId);
+            db.SetParameterValue("BaseCurrency", metaModel.BaseCurrency);
+            db.SetParameterValue("DefaultBaseCurrency", metaModel.DefaultBaseCurrency);
         }
 
-        private static void ReadSummaryTotal(IDataReader reader, IDictionary<string, ExchangeWinLoss> summaryTotal)
+        private static void ReadSummaryTotal(IDataReader reader, IDictionary<string, ExchangeWinLoss> summaryTotal, string defaultBaseCurrency)
         {
             foreach (var item in summaryTotal)
             {
-                var currency = item.Key;
+                var suffixColumn = item.Key.Equals(defaultBaseCurrency, System.StringComparison.OrdinalIgnoreCase) ? "Base" : item.Key;
                 var detail = item.Value;
-                detail.Turnover += reader.ToDecimal("TurnOver" + currency);
-                detail.NetTurnover += reader.ToDecimal("NetTurnOver" + currency);
-                detail.CustomerWL += reader.ToDecimal("Winlost" + currency);
-                detail.CustomerComm += reader.ToDecimal("CustComm" + currency);
-                detail.LicenseeWL += reader.ToDecimal("LicenseeWinlost" + currency);
-                detail.LicenseeNetWL += reader.ToDecimal("LicNetWL" + currency);
-                detail.LicenseeComm += reader.ToDecimal("AgentComm" + currency);
-                detail.AmountDueTo += reader.ToDecimal("AmountDueTo" + currency);
+                detail.Turnover += reader.ToDecimal("TurnOver" + suffixColumn);
+                detail.NetTurnover += reader.ToDecimal("NetTurnOver" + suffixColumn);
+                detail.CustomerWL += reader.ToDecimal("Winlost" + suffixColumn);
+                detail.CustomerComm += reader.ToDecimal("CustComm" + suffixColumn);
+                detail.LicenseeWL += reader.ToDecimal("LicenseeWinlost" + suffixColumn);
+                detail.LicenseeNetWL += reader.ToDecimal("LicNetWL" + suffixColumn);
+                detail.LicenseeComm += reader.ToDecimal("AgentComm" + suffixColumn);
+                detail.AmountDueTo += reader.ToDecimal("AmountDueTo" + suffixColumn);
                 detail.TotalTransaction += reader.ToInt("TotalTrans");
             }
         }
@@ -116,12 +118,11 @@
         private ReportResultModel<ExchangeWinLoss> GetData(IDataReader reader, ExchangeWinLossMetaModel metaModel, IDictionary<int, string> currencyList)
         {
             var dataList = new List<ExchangeWinLoss>();
-            var summaryTotal = SystemConstants.BaseCurrencyListOfSummaryTotalRow.ToDictionary(x => x, x => new ExchangeWinLoss());
+            var summaryTotal = InitSummaryTotalList<ExchangeWinLoss>(metaModel.DefaultBaseCurrency);
             var hasSystemId = reader.HasColumn("username");
             var hasExternalId = reader.HasColumn("nickname");
             var hasCustomerId = reader.HasColumn("custid");
             var hasWinlostdate = reader.HasColumn("Winlostdate");
-            var baseCurrency = metaModel.IsConvert ? metaModel.BaseCurrency.ToUpperInvariant() : string.Empty;
 
             while (reader.Read())
             {
@@ -135,18 +136,18 @@
                     SystemId = hasSystemId ? reader.ToString("username") : string.Empty,
                     CustId = hasCustomerId ? reader.ToInt("CustID") : 0,
                     TotalTransaction = reader.ToInt("TotalTrans"),
-                    Turnover = reader.ToDecimal("TurnOver" + baseCurrency),
-                    NetTurnover = reader.ToDecimal("NetTurnOver" + baseCurrency),
-                    CustomerWL = reader.ToDecimal("Winlost" + baseCurrency),
-                    CustomerComm = reader.ToDecimal("CustComm" + baseCurrency),
-                    LicenseeWL = reader.ToDecimal("LicenseeWinlost" + baseCurrency),
-                    LicenseeNetWL = reader.ToDecimal("LicNetWL" + baseCurrency),
-                    LicenseeComm = reader.ToDecimal("AgentComm" + baseCurrency),
-                    AmountDueTo = reader.ToDecimal("AmountDueTo" + baseCurrency)
+                    Turnover = reader.ToDecimal("TurnOver"),
+                    NetTurnover = reader.ToDecimal("NetTurnOver"),
+                    CustomerWL = reader.ToDecimal("Winlost"),
+                    CustomerComm = reader.ToDecimal("CustComm"),
+                    LicenseeWL = reader.ToDecimal("LicenseeWinlost"),
+                    LicenseeNetWL = reader.ToDecimal("LicNetWL"),
+                    LicenseeComm = reader.ToDecimal("AgentComm"),
+                    AmountDueTo = reader.ToDecimal("AmountDueTo")
                 };
 
                 dataList.Add(item);
-                ReadSummaryTotal(reader, summaryTotal);
+                ReadSummaryTotal(reader, summaryTotal, metaModel.DefaultBaseCurrency);
             }
 
             return new ReportResultModel<ExchangeWinLoss>
@@ -154,7 +155,7 @@
                 DataList = dataList,
                 TotalDataList = CalculateTotal(dataList),
                 SummaryTotal = summaryTotal,
-                AdditionalInfo = baseCurrency
+                AdditionalInfo = metaModel.IsConvert ? metaModel.BaseCurrency.ToUpperInvariant() : string.Empty
             };
         }
     }
