@@ -10,6 +10,7 @@ namespace Fanex.Athena.Service.Core.Configuration
     using System.Threading.Tasks;
     using DataAccess.Core.Configuration.Interfaces;
     using Extension.Utility.Interfaces;
+    using Fanex.Athena.Extension.Helpers;
     using Fanex.Athena.Model.Core.DTO.Configuration;
     using Fanex.Athena.Service.Core.Configuration.Interfaces;
     using Fanex.Logging;
@@ -50,7 +51,7 @@ namespace Fanex.Athena.Service.Core.Configuration
             }
             catch (Exception exception)
             {
-                _logger.Error(exception.Message, exception);
+                _logger.Error(LogMessageHelper.GenerateMessage(exception), exception);
             }
 
             return string.Empty;

@@ -57,7 +57,7 @@
 
             if (VerifyToken(tokenInfo))
             {
-                return Redirect(Url.Content(GetReturnPathForValidToken(ReturnUrl, tokenInfo)));
+                return Redirect(Url.Content(Authorize(ReturnUrl, tokenInfo)));
             }
 
             WriteLog(JsonConvert.SerializeObject(tokenInfo));
@@ -70,7 +70,7 @@
                 !StringHelper.IsAnyNullOrEmpty(token.SiteName, token.VendorID, token.UserID, token.Language, token.ActionLink);
         }
 
-        private string GetReturnPathForValidToken(string returnPath, OneAuthToken tokenInfo)
+        private string Authorize(string returnPath, OneAuthToken tokenInfo)
         {
             if (IsInternalDomain(tokenInfo.ActionLink))
             {

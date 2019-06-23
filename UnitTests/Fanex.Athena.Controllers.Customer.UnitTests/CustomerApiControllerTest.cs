@@ -7,6 +7,7 @@
     using Base.UnitTests;
     using Customer;
     using DataAccess.Core.Users.Interfaces;
+    using Fanex.Athena.Extension.Helpers;
     using Fanex.Logging;
     using Model.Core.DTO.Common;
     using Model.Core.ViewModel;
@@ -126,15 +127,16 @@
                 AppSettings.LicenseeOfferStatusFunction.Returns(new[] { licenseeId });
                 _customerListService.When(x => x.UpdateCustClosed(Arg.Any<CustomerStatusMetaModel>(), Arg.Any<string>()))
                     .Throw(exception);
-
                 // Action
                 var result = controller.UpdateCustStatus(0, false, false) as JsonResult;
                 var resultInfo = result.Data as ResultInfo;
+                var errorMessage = LogMessageHelper.GenerateMessage(exception);
 
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    _logger.Received(1).Error(exception.Message, exception);
+
+                    _logger.Received(1).Error(errorMessage, exception);
                     Assert.That(resultInfo.Code, Is.EqualTo(1));
                     Assert.That(resultInfo.Message, Is.EqualTo(ViewResources.HttpError_Default));
                 });

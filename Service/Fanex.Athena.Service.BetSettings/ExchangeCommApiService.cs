@@ -15,6 +15,7 @@ namespace Fanex.Athena.Service.BetSettings
     using DataAccess.Core.Common.Constants;
     using DataAccess.Core.Common.Interfaces;
     using Extension.Utility;
+    using Fanex.Athena.Extension.Helpers;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Interfaces;
     using Logging;
@@ -110,7 +111,9 @@ namespace Fanex.Athena.Service.BetSettings
             }
             catch (Exception exception)
             {
-                _logger.Error("Exchange Api updateCommission: " + exception.Message);
+                var message = "Exchange Api updateCommission:\n" + LogMessageHelper.GenerateMessage(exception);
+
+                _logger.Error(message, exception);
                 return CreateApiErrorResult();
             }
         }

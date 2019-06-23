@@ -43,7 +43,7 @@ namespace Fanex.Athena
                 // Exception when passing wrong data type to action method
                 if (!isIgnore)
                 {
-                    LogService.Error(LogMessageHelper.GenerateMessage(exception));
+                    LogService.Error(LogMessageHelper.GenerateMessage(exception), exception);
                 }
 
             }

@@ -18,6 +18,7 @@ namespace Fanex.Athena.Controllers.Customer
     using DataAccess.Core.Users.Interfaces;
     using Extension.Utility;
     using Fanex.Athena.Extension.Helper;
+    using Fanex.Athena.Extension.Helpers;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Customer.MetaModel;
     using Fanex.Athena.Service.Core.Common.Interfaces;
@@ -115,7 +116,7 @@ namespace Fanex.Athena.Controllers.Customer
             }
             catch (Exception exception)
             {
-                _logger.Error(exception.Message, exception);
+                _logger.Error(LogMessageHelper.GenerateMessage(exception), exception);
             }
 
             return Json(new ResultInfo { Code = 1, Message = ViewResources.HttpError_Default });
@@ -153,7 +154,7 @@ namespace Fanex.Athena.Controllers.Customer
                 }
                 catch (Exception exception)
                 {
-                    _logger.Error(exception.Message, exception);
+                    _logger.Error(LogMessageHelper.GenerateMessage(exception));
                 }
             }
 
@@ -205,7 +206,7 @@ namespace Fanex.Athena.Controllers.Customer
                 }
                 catch (Exception exception)
                 {
-                    _logger.Error(exception.Message, exception);
+                    _logger.Error(LogMessageHelper.GenerateMessage(exception));
                 }
             }
 

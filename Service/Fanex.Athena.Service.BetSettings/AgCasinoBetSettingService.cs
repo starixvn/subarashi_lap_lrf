@@ -16,6 +16,7 @@ namespace Fanex.Athena.Service.BetSettings
     using DataAccess.BetSettings.Interfaces;
     using Extension.Utility;
     using Extension.Utility.Interfaces;
+    using Fanex.Athena.Extension.Helpers;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Logging;
     using Interfaces;
@@ -138,7 +139,7 @@ namespace Fanex.Athena.Service.BetSettings
             }
             catch (Exception exception)
             {
-                _logger.Error(exception.Message, exception);
+                _logger.Error(LogMessageHelper.GenerateMessage(exception));
             }
 
             return games;

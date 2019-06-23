@@ -2,6 +2,7 @@
 {
     using System;
     using CasinoLibrary.Model.UserException;
+    using Fanex.Athena.Extension.Helpers;
     using Logging;
 
     public class ApiMethodOperationHandler<T>
@@ -34,7 +35,7 @@
             {
                 if (exception is ErrorException)
                 {
-                    _logger.Error(exception.Message, exception);
+                    _logger.Error(LogMessageHelper.GenerateMessage(exception), exception);
                 }
                 else
                 {

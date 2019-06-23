@@ -15,6 +15,7 @@ namespace Fanex.Athena.Controllers.Forecast
     using DataAccess.Core.Common.Interfaces;
     using DataAccess.Forecast.Interfaces;
     using Extension.Utility;
+    using Fanex.Athena.Extension.Helpers;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Logging;
     using Model.Core.DataDomain;
@@ -147,7 +148,7 @@ namespace Fanex.Athena.Controllers.Forecast
             }
             catch (Exception exception)
             {
-                _logger.Error(exception.Message, exception);
+                _logger.Error(LogMessageHelper.GenerateMessage(exception));
             }
 
             return model;

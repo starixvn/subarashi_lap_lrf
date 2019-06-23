@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Text;
 using System.Threading.Tasks;
+using Fanex.Athena.Extension.Helpers;
 using Fanex.Athena.Model.Casino.MetaModel;
 using Fanex.Athena.Model.Customer.MetaModel;
 using Fanex.Athena.Service.Casino.Interfaces;
@@ -69,7 +71,9 @@ namespace Fanex.Athena.Service.Casino
             }
             catch (Exception exception)
             {
-                _logger.Error("UpdateCommission:" + exception.Message + additionalErrorMsg, exception);
+                var message = new StringBuilder(LogMessageHelper.GenerateMessage(exception));
+                message.Append("\nUpdateCommission:" + additionalErrorMsg);
+                _logger.Error(message.ToString(), exception);
             }
 
             return success;

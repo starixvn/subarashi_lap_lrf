@@ -159,7 +159,7 @@
         [TestCase("USD", "eur", "EUR")]
         public async Task Match_ExportExcel_PassCorrectParam(string currency, string baseCurrency, string expectedCurrency)
         {
-            using (var controller = CreateController())
+            var controller = CreateController())
             {
                 // Arrange
                 var metaModel = new LiveReportBetListMetaModel

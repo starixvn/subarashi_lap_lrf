@@ -13,7 +13,7 @@ namespace Fanex.Athena.Extension.Helpers
     {
         public static string GenerateMessage(Exception exception)
         {
-            var webInfo = GetRequestInfo(HttpContext.Current.Request);
+            var webInfo = GetRequestInfo();
             var dbInfo = GetObjectDbExceptionInfo(exception);
             var messageBuilder = new StringBuilder();
 
@@ -28,6 +28,8 @@ namespace Fanex.Athena.Extension.Helpers
 
             messageBuilder.Append($"\t ErrMsg: {exception.Message}");
             messageBuilder.Append($"\t StackTrace: {exception.StackTrace}");
+            messageBuilder.Append($"\t Source: {exception.Source}");
+            messageBuilder.Append($"\t TargetSite: {exception.TargetSite}");
 
             return messageBuilder.ToString();
         }
@@ -58,19 +60,22 @@ namespace Fanex.Athena.Extension.Helpers
                        .Select(parameter => $"{parameter.Key}={parameter.Value}")
                        .Aggregate((firstPair, secondPair) => $"{firstPair};{secondPair}")
                : string.Empty;
-        private static IDictionary<string, object> GetRequestInfo(
-            HttpRequest request)
-            => request == null
-                ? new Dictionary<string, object>()
-                : new Dictionary<string, object>
-                {
-                    [nameof(request.Url)] = request.Url,
-                    [nameof(request.UrlReferrer)] = request.UrlReferrer,
-                    [nameof(request.Form)] = request.Form,
-                    [nameof(request.UserHostAddress)] = request.UserHostAddress,
-                    [nameof(request.UserAgent)] = GetUserAgent(request.ServerVariables),
-                    ["Client IP"] = GetClientIP(request.ServerVariables),
-                };
+        private static IDictionary<string, object> GetRequestInfo()
+        {
+            var request = HttpContext.Current?.Request;
+            return request == null
+                    ? new Dictionary<string, object>()
+                    : new Dictionary<string, object>
+                    {
+                        [nameof(request.Url)] = request.Url,
+                        [nameof(request.UrlReferrer)] = request.UrlReferrer,
+                        [nameof(request.Form)] = request.Form,
+                        [nameof(request.UserHostAddress)] = request.UserHostAddress,
+                        [nameof(request.UserAgent)] = GetUserAgent(request.ServerVariables),
+                        ["Client IP"] = GetClientIP(request?.ServerVariables),
+                        ["Identity"] = HttpContext.Current.User?.Identity?.Name
+                    };
+        }
         private static string GetClientIP(NameValueCollection serverVariables)
         {
             var clientIP = serverVariables["HTTP_X_FORWARDED_FOR"]

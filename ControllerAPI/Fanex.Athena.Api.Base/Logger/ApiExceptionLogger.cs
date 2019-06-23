@@ -1,8 +1,8 @@
 ﻿namespace Fanex.Athena.Api.Base.Logger
 {
     using System.Web.Http.ExceptionHandling;
+    using Fanex.Athena.Extension.Helpers;
     using Fanex.Logging;
-    using Service.Core.Utility.Interfaces;
 
     public class ApiExceptionLogger : ExceptionLogger
     {
@@ -15,7 +15,7 @@
 
         public override void Log(ExceptionLoggerContext context)
         {
-            _logger.Error(context.Exception.Message, context.Exception);
+            _logger.Error(LogMessageHelper.GenerateMessage(context.Exception));
         }
     }
 }

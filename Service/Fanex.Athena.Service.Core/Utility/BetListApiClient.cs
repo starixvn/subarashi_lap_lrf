@@ -29,7 +29,7 @@
             {
                 BaseUrl = new Uri(_appSetting.BetListApiHostUrl)
             };
-         
+
             var request = new RestRequest(path);
             request.AddHeader(KEYNAME, _appSetting.GetValue("BetListApiTokenValue"));
             request.AddHeader(LANGUAGEKEY, language);
@@ -39,25 +39,30 @@
             {
                 client.Timeout = oneMinInMillisecond * timeout;
             }
-            var task = await client.ExecuteTaskAsync(request).ConfigureAwait(false);
-            return await codeBlock(task).ConfigureAwait(false);
+            var result = await client.ExecuteTaskAsync(request).ConfigureAwait(false);
+            return await codeBlock(result).ConfigureAwait(false);
 
         }
 
         public async Task<HttpResponseMessage> PostAsync(string path, object value, string language, int timeout = 0)
         {
-            return await HandleAsync<HttpResponseMessage>(path, value, language, (x) =>
+            return await HandleAsync<HttpResponseMessage>(path, value, language, async (x) =>
           {
               var result = new HttpResponseMessage(x.StatusCode)
               {
                   Content = new StreamContent(new MemoryStream(x.RawBytes)),
 
               };
-              var contentType = x.ContentType.Split(';')[0];
+              if (!string.IsNullOrEmpty(x.ContentType))
+              {
+                  var contentType = x.ContentType.Split(';')[0];
+                  if (!string.IsNullOrEmpty(contentType))
+                  {
+                      result.Content.Headers.ContentType = new MediaTypeHeaderValue(contentType);
+                  }
+              }
 
-              result.Content.Headers.ContentType = new MediaTypeHeaderValue(contentType);
-
-              return Task.FromResult(result);
+              return await Task.FromResult(result).ConfigureAwait(false);
           }, timeout).ConfigureAwait(false);
 
         }
@@ -68,25 +73,26 @@
                 path,
                 value,
                 language,
-                  (x) =>
+                  async (x) =>
              {
-                 return Task.FromResult(JsonConvert.DeserializeObject<T>(x.Content));
+                 return await Task.FromResult(JsonConvert.DeserializeObject<T>(x.Content)).ConfigureAwait(false);
              }, timeout).ConfigureAwait(false);
         }
 
         public async Task<Stream> PostAsyncStream(string path, object value, string language, int timeout = 0)
         {
-            return await HandleAsync(path, value, language, (x) =>
+            return await HandleAsync(path, value, language, async (x) =>
             {
                 Stream stream = new MemoryStream(x.RawBytes);
-                return Task.FromResult(stream);
+                return await Task.FromResult(stream).ConfigureAwait(false);
 
             }, timeout).ConfigureAwait(false);
         }
 
         public async Task<string> PostAsyncString(string path, object value, string language, int timeout = 0)
         {
-            return await HandleAsync(path, value, language, (x) => Task.FromResult(x.Content), timeout).ConfigureAwait(false);
+            return await HandleAsync(path, value, language, async (x) => await Task.FromResult(x.Content).ConfigureAwait(false)
+            , timeout).ConfigureAwait(false);
         }
     }
 }

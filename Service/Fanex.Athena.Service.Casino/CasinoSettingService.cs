@@ -12,6 +12,7 @@ namespace Fanex.Athena.Service.Casino
     using System.Linq;
     using Core.Utility.Interfaces;
     using Extension.Helper;
+    using Fanex.Athena.Extension.Helpers;
     using Fanex.Athena.Model.BetSettings.DTO.RngCasino;
     using Fanex.Athena.Model.Casino.MetaModel.ApiInputParameter;
     using Fanex.Athena.Service.Casino.Interfaces;
@@ -69,7 +70,7 @@ namespace Fanex.Athena.Service.Casino
             catch (Exception exception)
             {
                 gameKinds = new List<GameKind>();
-                _logger.Error(exception.Message, exception);
+                _logger.Error(LogMessageHelper.GenerateMessage(exception), exception);
             }
 
             return gameKinds;
