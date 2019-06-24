@@ -44,7 +44,7 @@
         private ReportResultModel<PromotionPrize> GetData(IDataReader reader, IDictionary<int, string> currencyList, string defaultBaseCurrency)
         {
             var dataList = new List<PromotionPrize>();
-            var summaryTotal = InitSummaryTotalList<PromotionPrize>(defaultBaseCurrency);
+            var summaryTotal = InitSummaryTotalList(defaultBaseCurrency, () => new PromotionPrize());
 
             while (reader.Read())
             {

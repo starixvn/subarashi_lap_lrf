@@ -10,7 +10,6 @@
     using Data;
     using Extension.Utility;
     using Interfaces;
-    using Model.Core.DataDomain;
     using Model.Core.ResultModel;
     using Model.Report.DTO;
     using Model.Report.MetaModel;
@@ -118,7 +117,7 @@
         private ReportResultModel<ExchangeWinLoss> GetData(IDataReader reader, ExchangeWinLossMetaModel metaModel, IDictionary<int, string> currencyList)
         {
             var dataList = new List<ExchangeWinLoss>();
-            var summaryTotal = InitSummaryTotalList<ExchangeWinLoss>(metaModel.DefaultBaseCurrency);
+            var summaryTotal = InitSummaryTotalList(metaModel.DefaultBaseCurrency, () => new ExchangeWinLoss());
             var hasSystemId = reader.HasColumn("username");
             var hasExternalId = reader.HasColumn("nickname");
             var hasCustomerId = reader.HasColumn("custid");

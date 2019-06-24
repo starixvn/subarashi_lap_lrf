@@ -124,7 +124,7 @@ namespace Fanex.Athena.DataAccess.Report
         private ReportResultModel<T> GetData(IDataReader reader, IDictionary<int, string> currencyList, ThirdPartyWinLossMetaModel metaModel, int rowSpan = 0)
         {
             var result = new SortableList<T>();
-            var summaryTotal = InitSummaryTotalList<T>(metaModel.DefaultBaseCurrency);
+            var summaryTotal = InitSummaryTotalList(metaModel.DefaultBaseCurrency, () => Activator.CreateInstance<T>());
 
             var hasSystemId = reader.HasColumn("username");
             var hasExternalId = reader.HasColumn("nickname");

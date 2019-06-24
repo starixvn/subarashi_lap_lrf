@@ -45,18 +45,22 @@ namespace Fanex.Athena.DataAccess.Core
             return new ObjectDb(spname, timeout);
         }
 
-        protected static IDictionary<string, T> InitSummaryTotalList<T>(string defaultBaseCurrency) where T : class
+        protected static IDictionary<string, T> InitSummaryTotalList<T>(string defaultBaseCurrency, Func<T> initialData, string baseCurrencySetting = "") where T : class
         {
+            var baseCurrencies = string.IsNullOrEmpty(baseCurrencySetting)
+                                ? SystemConstants.BaseCurrencyListOfSummaryTotalRow
+                                : baseCurrencySetting.Split(',').Where(x => SystemConstants.BaseCurrencyListOfSummaryTotalRow.Contains(x));
+
             var summary = new Dictionary<string, T>();
-            foreach (var currency in SystemConstants.BaseCurrencyListOfSummaryTotalRow)
+            foreach (var currency in baseCurrencies)
             {
-                summary.Add(currency, Activator.CreateInstance<T>());
+                summary.Add(currency, initialData());
             }
 
             if (!string.IsNullOrEmpty(defaultBaseCurrency) &&
-                !SystemConstants.BaseCurrencyListOfSummaryTotalRow.Any(x => x.Equals(defaultBaseCurrency, System.StringComparison.OrdinalIgnoreCase)))
+                !baseCurrencies.Any(x => x.Equals(defaultBaseCurrency, StringComparison.OrdinalIgnoreCase)) )
             {
-                summary.Add(defaultBaseCurrency.ToUpperInvariant(), Activator.CreateInstance<T>());
+                summary.Add(defaultBaseCurrency.ToUpperInvariant(), initialData());
             }
 
             return summary;

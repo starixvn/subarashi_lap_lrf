@@ -102,7 +102,7 @@ namespace Fanex.Athena.DataAccess.Report
             var isFirstLevel = metaModel.DrillDownLevel == (int)ReportLevel.Main;
             var isMonthly = metaModel.ReportBy == ReportByType.Monthly;
             var result = new SortableList<ColossusBetWinLoss>();
-            var summaryTotal = InitSummaryTotalList<ColossusBetWinLoss>(metaModel.DefaultBaseCurrency);
+            var summaryTotal = InitSummaryTotalList(metaModel.DefaultBaseCurrency, () => new ColossusBetWinLoss());
 
             while (reader.Read())
             {

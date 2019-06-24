@@ -147,7 +147,7 @@ namespace Fanex.Athena.DataAccess.Report
         {
             var result = new SortableList<CashOutWinLoss>();
 
-            var summaryTotal = InitSummaryTotalList<CashOutWinLoss>(metaModel.DefaultBaseCurrency);
+            var summaryTotal = InitSummaryTotalList(metaModel.DefaultBaseCurrency, () => new CashOutWinLoss());
 
             var hasSystemId = reader.HasColumn("systemid");
             var hasExternalId = reader.HasColumn("externalid");

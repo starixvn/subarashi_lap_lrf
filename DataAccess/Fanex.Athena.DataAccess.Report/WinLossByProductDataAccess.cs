@@ -160,23 +160,6 @@ namespace Fanex.Athena.DataAccess.Report
             return temp.OrderBy(i => i.CurrencyName).ToList();
         }
 
-        private static Dictionary<string, IList<WinLossByProduct>> InitSummaryDataList(string defaultBaseCurrency)
-        {
-            var summaryDataList = new Dictionary<string, IList<WinLossByProduct>>();
-            foreach (var currency in SystemConstants.BaseCurrencyListOfSummaryTotalRow)
-            {
-                summaryDataList.Add(currency, new List<WinLossByProduct>());
-            }
-
-            if (!string.IsNullOrEmpty(defaultBaseCurrency) &&
-                !SystemConstants.BaseCurrencyListOfSummaryTotalRow.Any(x => x.Equals(defaultBaseCurrency, System.StringComparison.OrdinalIgnoreCase)))
-            {
-                summaryDataList.Add(defaultBaseCurrency.ToUpperInvariant(), new List<WinLossByProduct>());
-            }
-
-            return summaryDataList;
-        }
-
         private void UpdateUspParams(IObjectDb db, WinLossByProductMetaModel metaModel, bool drilldown)
         {
             db.SetParameterValue("AgentList", metaModel.AgentListXml);
@@ -196,7 +179,7 @@ namespace Fanex.Athena.DataAccess.Report
             bool drilldown)
         {
             var result = new List<WinLossByProduct>();
-            var summaryTotalTemp = InitSummaryDataList(metaModel.DefaultBaseCurrency);
+            var summaryTotalTemp = InitSummaryTotalList<IList<WinLossByProduct>>(metaModel.DefaultBaseCurrency, () => new List<WinLossByProduct>());
 
             var hasSystemId = reader.HasColumn("username");
             var hasExternalId = reader.HasColumn("nickname");

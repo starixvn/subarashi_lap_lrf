@@ -116,7 +116,7 @@ namespace Fanex.Athena.DataAccess.Report
         {
             var dataList = new SortableList<AgCasinoBalance>();
 
-            var summaryTotal = InitSummaryTotalList<AgCasinoBalance>(metaModel.DefaultBaseCurrency);
+            var summaryTotal = InitSummaryTotalList(metaModel.DefaultBaseCurrency, () => new AgCasinoBalance());
 
             var hasSystemIdColumn = reader.HasColumn("username");
             var hasExternalIdColumn = reader.HasColumn("nickname");
