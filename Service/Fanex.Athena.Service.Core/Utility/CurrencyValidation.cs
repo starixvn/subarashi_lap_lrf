@@ -58,7 +58,8 @@ namespace Fanex.Athena.Service.Core.Utility
             }
             var items = currencyIdList.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
-            return !items.Any(x => !int.TryParse(x, out int n) || !_sessionService.UserSession.CurrencyList.ContainsKey(n));
+            int n;
+            return !items.Any(x => !int.TryParse(x, out n) || !_sessionService.UserSession.CurrencyList.ContainsKey(n));
         }
     }
 }

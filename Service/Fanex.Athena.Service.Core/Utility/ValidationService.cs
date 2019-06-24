@@ -29,7 +29,7 @@ namespace Fanex.Athena.Service.Core.Utility
         public bool IsValid(object model, CurrencyValidationOption currencyValidationOption = null,
             ProductValidationOption productValidationOption = null)
         {
-            if (model is null)
+            if (model == null)
             {
                 return false;
             }

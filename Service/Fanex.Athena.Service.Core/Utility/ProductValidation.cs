@@ -21,7 +21,7 @@ namespace Fanex.Athena.Service.Core.Utility
         }
         public bool IsValid(IMetaModelProductCodeList model, ProductValidationOption option)
         {
-            if (string.IsNullOrEmpty(option.FunctionConfig) || model is null
+            if (string.IsNullOrEmpty(option.FunctionConfig) || model == null
                 || string.IsNullOrEmpty(model.ProductCodeList))
             {
                 return false;
