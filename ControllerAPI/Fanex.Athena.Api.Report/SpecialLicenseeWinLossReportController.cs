@@ -8,7 +8,6 @@
     using DataAccess.Report.Interfaces;
     using Extension.Utility;
     using Fanex.Athena.Extension.Helper;
-    using Fanex.Athena.Model.Core.Helper;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
     using Model.Core.DataDomain;
@@ -92,14 +91,13 @@
 
             if (IsValidParams(metaModel, setting))
             {
-                var baseCurrencies = SystemConstants.BaseCurrencyList.Select(i => i.Value).ToArray();
-                metaModel.BaseCurrencies = string.IsNullOrWhiteSpace(setting.BaseCurrencies)
-                    ? baseCurrencies
-                    : setting.BaseCurrencies.Split(',').Intersect(baseCurrencies).ToArray();
+                var userSession = SessionService.UserSession;
+                metaModel.BaseCurrencySetting = setting.BaseCurrencies;
                 metaModel.SiteName = _siteNameList[SessionService.LicenseeSession.LicenseeId];
                 metaModel.CurrencyListXml = GenerateCurrencyListXml(metaModel);
+                metaModel.DefaultBaseCurrency = userSession.DefaultBaseCurrency;
 
-                var result = await _licenseeWinLossDataAccess.GetData(metaModel, SessionService.UserSession.CurrencyList);
+                var result = await _licenseeWinLossDataAccess.GetData(metaModel, userSession.CurrencyList);
 
                 if (result.DataList.Any())
                 {

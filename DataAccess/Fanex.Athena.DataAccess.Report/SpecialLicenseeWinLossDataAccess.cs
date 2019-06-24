@@ -1,5 +1,6 @@
 ﻿namespace Fanex.Athena.DataAccess.Report
 {
+    using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Linq;
@@ -39,7 +40,7 @@
             {
                 foreach (var code in metaModel.ProductCodeList)
                 {
-                    var columnBase = columnName + code + metaModel.BaseCurrency;
+                    var columnBase = columnName + code;
 
                     if (reader.HasColumn(columnBase))
                     {
@@ -51,21 +52,15 @@
             return cols;
         }
 
-        private static IDictionary<string, LicenseeWinLoss> CreateSummaryTotal(string[] baseCurrencies)
+        private static IDictionary<string, LicenseeWinLoss> CreateSummaryTotal(string defaultBaseCurrency, string baseCurrencySetting)
         {
-            var summaryTotal = new Dictionary<string, LicenseeWinLoss>();
-            foreach (var currency in baseCurrencies)
+            Func<LicenseeWinLoss> initialfunc = () => new LicenseeWinLoss
             {
-                summaryTotal.Add(
-                    currency,
-                     new LicenseeWinLoss
-                     {
-                         LicenseeWL = new Dictionary<string, decimal>(),
-                         TurnOver = new Dictionary<string, decimal>()
-                     });
-            }
+                LicenseeWL = new Dictionary<string, decimal>(),
+                TurnOver = new Dictionary<string, decimal>()
+            };
 
-            return summaryTotal;
+            return InitSummaryTotalList(defaultBaseCurrency, initialfunc, baseCurrencySetting);
         }
 
         private static void ReadSummaryTotal(
@@ -73,10 +68,14 @@
             SpecialLicenseeWinLossMetaModel metaModel,
             IDictionary<string, LicenseeWinLoss> summaryTotal)
         {
-            foreach (var currency in metaModel.BaseCurrencies)
+            foreach (var summary in summaryTotal)
             {
-                var summaryItem = summaryTotal[currency];
-                summaryItem.CustomerWinLoss += reader.ToDecimal("winlost" + currency);
+                var suffixColumn = summary.Key.Equals(metaModel.DefaultBaseCurrency, System.StringComparison.OrdinalIgnoreCase)
+                                    ? "Base"
+                                    : summary.Key;
+
+                var summaryItem = summary.Value;
+                summaryItem.CustomerWinLoss += reader.ToDecimal("winlost" + suffixColumn);
                 summaryItem.TotalTransaction += reader.ToInt("betcount");
 
                 decimal temp;
@@ -84,8 +83,8 @@
                 var turnOverSummary = new Dictionary<string, decimal>();
                 foreach (var code in metaModel.ProductCodeList)
                 {
-                    var licenseeWlColumnName = "LicenseeWL" + code + currency;
-                    var turnOverColumnName = "turnover" + code + currency;
+                    var licenseeWlColumnName = "LicenseeWL" + code + suffixColumn;
+                    var turnOverColumnName = "turnover" + code + suffixColumn;
 
                     if (reader.HasColumn(licenseeWlColumnName))
                     {
@@ -155,6 +154,8 @@
             db.SetParameterValue("productCodes", string.Join(",", metaModel.ProductCodeList));
             db.SetParameterValue("currencylist", metaModel.CurrencyListXml);
             db.SetParameterValue("siteName", metaModel.SiteName);
+            db.SetParameterValue("BaseCurrency", metaModel.BaseCurrency);
+            db.SetParameterValue("DefaultBaseCurrency", metaModel.DefaultBaseCurrency);
         }
 
         private ReportResultModel<LicenseeWinLoss> ReadData(
@@ -163,7 +164,7 @@
             SpecialLicenseeWinLossMetaModel metaModel)
         {
             var dataList = new List<LicenseeWinLoss>();
-            var summaryTotal = CreateSummaryTotal(metaModel.BaseCurrencies);
+            var summaryTotal = CreateSummaryTotal(metaModel.DefaultBaseCurrency, metaModel.BaseCurrencySetting);
             var licenseeWLColumns = CreateGroupedColumns(reader, "licenseeWL", metaModel);
             var turnoverColumns = CreateGroupedColumns(reader, "turnover", metaModel);
 
@@ -174,7 +175,7 @@
                 {
                     CurrencyId = currencyId,
                     CurrencyName = currencyList?.GetValueOrDefault(currencyId, currencyId.ToString()),
-                    CustomerWinLoss = reader.ToDecimal("winlost" + metaModel.BaseCurrency),
+                    CustomerWinLoss = reader.ToDecimal("winlost"),
                     LicenseeWL = ReadLicenseeWinLossList(reader, licenseeWLColumns),
                     TurnOver = ReadTurnoverList(reader, turnoverColumns),
                     TotalTransaction = reader.ToInt("betcount"),

@@ -36,11 +36,13 @@
 
         public string[] ProductCodeList { get; set; }
 
-        public string[] BaseCurrencies { get; set; }
+        public string BaseCurrencySetting { get; set; }
 
         public string SiteName { get; set; }
 
         public string CurrencyListXml { get; set; }
+
+        public string DefaultBaseCurrency { get; set; }
 
         public bool IsValid => CurrencyId >= SystemConstants.MinBaseCurrencyType
             && (string.IsNullOrEmpty(BaseCurrency) || SystemConstants.BaseCurrencyList

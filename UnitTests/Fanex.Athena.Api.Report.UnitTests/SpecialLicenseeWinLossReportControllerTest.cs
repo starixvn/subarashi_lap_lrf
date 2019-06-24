@@ -168,7 +168,7 @@
             Assert.Multiple(() =>
             {
                 _dataAccess.Received().GetData(model, Arg.Any<IDictionary<int, string>>());
-                Assert.That(string.Join(",", model.BaseCurrencies), Is.EqualTo("USD"));
+                Assert.That(string.Join(",", model.BaseCurrencySetting), Is.EqualTo("USD"));
                 Assert.That(model.SiteName, Is.EqualTo(expectedSiteName));
                 Assert.That(model.CurrencyListXml, Is.EqualTo(expectedCurrencyXML));
             });
