@@ -1,8 +1,6 @@
-﻿using Fanex.Athena.Model.Core.DataDomain;
+﻿using System.Collections.Generic;
+using Fanex.Athena.Model.Core.Helper;
 using Fanex.Athena.Model.Core.MetaModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Fanex.Athena.Model.BetList.MetaModel
 {
@@ -48,7 +46,7 @@ namespace Fanex.Athena.Model.BetList.MetaModel
         public string AgentListXml { get; set; }
 
         public IDictionary<int, string> UserCurrencyList { get; set; }
-        public bool IsValid => SystemConstants.BaseCurrencyList
-            .Any(x => x.Value.Equals(BasedCurrency, StringComparison.OrdinalIgnoreCase));
+
+        public bool IsValid => MetaModelValidationHelper.ValidateBaseCurrency(BasedCurrency);
     }
 }

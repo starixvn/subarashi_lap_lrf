@@ -140,7 +140,7 @@
             int currencyId,
             string currency, string baseCurrency, string expectedCurrency)
         {
-            var controller = CreateController())
+            using (var controller = CreateController())
             {
                 // Arrange
                 var metaModel = new LiveReportBetListMetaModel
