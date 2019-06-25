@@ -470,7 +470,7 @@ bool addBasedOption = false)
     }
     productCodeList = string.IsNullOrEmpty(productCodeList) ? string.Empty : string.Format(", {0} ({1})", ViewResources.LicenseeW_L, productCodeList.TrimEnd(' ', ','));
 
-
+    @productCodeList
 }
 @helper FullDateFormat(DateTime? date)
 {
