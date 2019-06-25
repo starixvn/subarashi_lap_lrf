@@ -71,10 +71,10 @@
         public string SortBy { get; set; }
 
         public string SortOrder { get; set; }
+
         public virtual bool IsValid => FromDate <= ToDate
             && !string.IsNullOrWhiteSpace(ProductCodeList)
-            &&
-            MetaModelValidationHelper.ValidateBaseCurrency(BaseCurrency, false);
+            && MetaModelValidationHelper.ValidateBaseCurrency(BaseCurrency, false);
 
         public bool HasPlayerCom { get; set; }
 
