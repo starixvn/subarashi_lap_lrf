@@ -16,7 +16,7 @@
         {
             var messageBuilder = new StringBuilder();
 
-            messageBuilder.Append($"ErrMsg: {exception.Message}");
+            messageBuilder.AppendLine($"ErrMsg: {exception.Message}");
 
             AddRequestInfo(messageBuilder);
 
