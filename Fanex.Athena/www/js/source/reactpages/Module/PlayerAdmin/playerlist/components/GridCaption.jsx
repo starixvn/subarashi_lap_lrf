@@ -42,7 +42,7 @@ export class GridCaption extends React.PureComponent {
             return (
                 <>
                     <span className="link" onClick={() => this.props.setSelectedPlayer(null)}>Previous search result</span>
-                    <span> <strong>></strong> Player: {selectedPlayer.userName} ({selectedPlayer.currency})</span>
+                    <span><i className="chevron right icon-separator"></i> Player: {selectedPlayer.userName} ({selectedPlayer.currency})</span>
                 </>
             )
         }

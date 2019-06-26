@@ -3,7 +3,7 @@
 exports[`ContextMenu onMouseEnter - isOpen should be true 1`] = `
 <DropdownButton
   className="context-menu"
-  isOpen={true}
+  isOpen={false}
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
   style={
@@ -35,12 +35,6 @@ exports[`ContextMenu onMouseEnter - isOpen should be true 1`] = `
     disabled={false}
     tag="button"
   >
-    Bank Information
-  </DropdownItem>
-  <DropdownItem
-    disabled={false}
-    tag="button"
-  >
     Fundtransfer Limit
   </DropdownItem>
   <DropdownItem
@@ -48,6 +42,12 @@ exports[`ContextMenu onMouseEnter - isOpen should be true 1`] = `
     tag="button"
   >
     Bet Limit
+  </DropdownItem>
+  <DropdownItem
+    disabled={false}
+    tag="button"
+  >
+    Statement
   </DropdownItem>
   <DropdownItem
     disabled={false}
@@ -61,7 +61,7 @@ exports[`ContextMenu onMouseEnter - isOpen should be true 1`] = `
 exports[`ContextMenu onMouseLeave - isOpen should rely on props.isOpenContextMenu 1`] = `
 <DropdownButton
   className="context-menu"
-  isOpen={true}
+  isOpen={false}
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
   style={
@@ -93,12 +93,6 @@ exports[`ContextMenu onMouseLeave - isOpen should rely on props.isOpenContextMen
     disabled={false}
     tag="button"
   >
-    Bank Information
-  </DropdownItem>
-  <DropdownItem
-    disabled={false}
-    tag="button"
-  >
     Fundtransfer Limit
   </DropdownItem>
   <DropdownItem
@@ -106,6 +100,12 @@ exports[`ContextMenu onMouseLeave - isOpen should rely on props.isOpenContextMen
     tag="button"
   >
     Bet Limit
+  </DropdownItem>
+  <DropdownItem
+    disabled={false}
+    tag="button"
+  >
+    Statement
   </DropdownItem>
   <DropdownItem
     disabled={false}
@@ -151,12 +151,6 @@ exports[`ContextMenu onMouseLeave - isOpen should rely on props.isOpenContextMen
     disabled={false}
     tag="button"
   >
-    Bank Information
-  </DropdownItem>
-  <DropdownItem
-    disabled={false}
-    tag="button"
-  >
     Fundtransfer Limit
   </DropdownItem>
   <DropdownItem
@@ -164,6 +158,12 @@ exports[`ContextMenu onMouseLeave - isOpen should rely on props.isOpenContextMen
     tag="button"
   >
     Bet Limit
+  </DropdownItem>
+  <DropdownItem
+    disabled={false}
+    tag="button"
+  >
+    Statement
   </DropdownItem>
   <DropdownItem
     disabled={false}
@@ -209,12 +209,6 @@ exports[`ContextMenu with default props and inital state - should match snapshot
     disabled={false}
     tag="button"
   >
-    Bank Information
-  </DropdownItem>
-  <DropdownItem
-    disabled={false}
-    tag="button"
-  >
     Fundtransfer Limit
   </DropdownItem>
   <DropdownItem
@@ -222,6 +216,12 @@ exports[`ContextMenu with default props and inital state - should match snapshot
     tag="button"
   >
     Bet Limit
+  </DropdownItem>
+  <DropdownItem
+    disabled={false}
+    tag="button"
+  >
+    Statement
   </DropdownItem>
   <DropdownItem
     disabled={false}

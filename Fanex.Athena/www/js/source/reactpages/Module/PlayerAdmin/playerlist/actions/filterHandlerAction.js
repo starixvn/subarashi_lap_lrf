@@ -1,9 +1,10 @@
-import { SET_PARAM, SET_PLAYER_LIST, SET_ADVANCED_SEARCH, SET_COLLAPSE_FILTER } from './types'
+import { SET_PARAM, SET_ADVANCED_SEARCH, SET_COLLAPSE_FILTER } from './types'
 import PlayerListService from '../lib/playerListService';
 import { setSelectedPlayer } from './commonAction';
+import { setPlayerList } from './gridHandlerAction';
 
 export const searchPlayer = (param) => (dispatch) => {
-    let service = new PlayerListService();
+    const service = new PlayerListService();
     service.getPlayerList(param).then(result => {
         const { playerList } = result;
         dispatch(setPlayerList(playerList));
@@ -14,13 +15,6 @@ export const searchPlayer = (param) => (dispatch) => {
             dispatch(setSelectedPlayer(playerList[0]));
         }
     })
-}
-
-const setPlayerList = (data) => {
-    return {
-        type: SET_PLAYER_LIST,
-        data
-    }
 }
 
 export const setParam = (data) => {

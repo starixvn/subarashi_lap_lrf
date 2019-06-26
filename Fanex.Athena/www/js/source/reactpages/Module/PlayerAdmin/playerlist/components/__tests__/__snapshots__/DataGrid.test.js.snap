@@ -70,7 +70,6 @@ exports[`DataGrid _buildOddsGroupCell - should match snapshot 1`] = `
   <select
     className="select-default select-oddsgroup"
     onChange={[Function]}
-    value="B"
   >
     <option
       style={
@@ -118,111 +117,14 @@ exports[`DataGrid _buildOddsGroupCell - should match snapshot 1`] = `
 
 exports[`DataGrid _buildSpecialLevelCell - should match snapshot 1`] = `
 <div>
-  <select
-    className="select-default select-special-level"
-    onChange={[Function]}
-    value={1}
-  >
-    <option
-      style={
-        Object {
-          "backgroundColor": "#fcfcfc",
-        }
+  <Memo(DropdownLabel)
+    labelStyle={
+      Object {
+        "backgroundColor": undefined,
       }
-    >
-      None
-    </option>
-    <option
-      style={
-        Object {
-          "backgroundColor": "#98b516",
-        }
-      }
-    >
-      1
-    </option>
-    <option
-      style={
-        Object {
-          "backgroundColor": "#007d00",
-        }
-      }
-    >
-      2
-    </option>
-    <option
-      style={
-        Object {
-          "backgroundColor": "#b87856",
-        }
-      }
-    >
-      3
-    </option>
-    <option
-      style={
-        Object {
-          "backgroundColor": "#fcc50f",
-        }
-      }
-    >
-      4
-    </option>
-    <option
-      style={
-        Object {
-          "backgroundColor": "#418a86",
-        }
-      }
-    >
-      5
-    </option>
-    <option
-      style={
-        Object {
-          "backgroundColor": "#969036",
-        }
-      }
-    >
-      6
-    </option>
-    <option
-      style={
-        Object {
-          "backgroundColor": "#944937",
-        }
-      }
-    >
-      7
-    </option>
-    <option
-      style={
-        Object {
-          "backgroundColor": "#3297fc",
-        }
-      }
-    >
-      8
-    </option>
-    <option
-      style={
-        Object {
-          "backgroundColor": "#c98402",
-        }
-      }
-    >
-      9
-    </option>
-    <option
-      style={
-        Object {
-          "backgroundColor": "#fc0000",
-        }
-      }
-    >
-      10
-    </option>
-  </select>
+    }
+    onClick={[Function]}
+  />
 </div>
 `;
 

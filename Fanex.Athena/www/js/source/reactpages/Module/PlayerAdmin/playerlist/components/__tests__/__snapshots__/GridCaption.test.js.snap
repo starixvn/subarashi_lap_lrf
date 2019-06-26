@@ -168,10 +168,9 @@ exports[`GridCaption _buildLeftPart selectedPlayer is not null - should render c
       Previous search result
     </span>
     <span>
-       
-      <strong>
-        &gt;
-      </strong>
+      <i
+        className="chevron right icon-separator"
+      />
        Player: 
       test
        (

@@ -25,12 +25,12 @@ const ContextMenu = (props) => {
             isOpen={isOpen} toggleButton={toggleButton}>
             <DropdownItem>Note</DropdownItem>
             <DropdownItem>Password</DropdownItem>
-            <DropdownItem>Bank Information</DropdownItem>
             <DropdownItem>Fundtransfer Limit</DropdownItem>
             <DropdownItem>Bet Limit</DropdownItem>
+            <DropdownItem>Statement</DropdownItem>
             <DropdownItem>Personal Message</DropdownItem>
         </DropdownButton>)
     )
 }
 
-export default ContextMenu;
+export default React.memo(ContextMenu);

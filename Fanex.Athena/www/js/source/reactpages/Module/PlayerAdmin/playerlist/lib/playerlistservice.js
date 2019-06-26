@@ -38,7 +38,7 @@ export default class PlayerListService {
                     SpecialLevel,
                     Status,
                     RealName,
-                    IP,
+                    LastLoginIp: IP,
                     Email: email
                 });
             }

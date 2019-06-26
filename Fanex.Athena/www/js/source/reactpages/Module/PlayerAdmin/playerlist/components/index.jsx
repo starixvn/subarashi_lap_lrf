@@ -1,11 +1,14 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import AppContainer from './AppContainer.jsx'
-import { Provider } from 'react-redux'
-import reducer from '../reducers/index.js'
-import Store from '../../../../lib/store'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import AppContainer from './AppContainer.jsx';
+import { Provider } from 'react-redux';
+import reducer from '../reducers';
+import Store from '../../../../lib/store';
+import { columnList } from '../lib/constants';
 
-const defaultState = {...window.initialState};
+const { type } = window.initialState;
+const displayedColumnList = columnList(type).map(item => ({...item }));
+const defaultState = {...window.initialState, displayedColumnList};
 const store = Store.createStore(reducer, defaultState);
 
 const App = React.memo(() => {

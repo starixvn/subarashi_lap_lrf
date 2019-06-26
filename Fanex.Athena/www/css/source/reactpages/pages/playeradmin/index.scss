@@ -6,6 +6,7 @@
 @import "../../components/forms/checkbox";
 @import "../../components/switch";
 @import "../../components/dropdown";
+@import "../../components/dropdownlabel";
 
 $borderContainer: #d6d6d6;
 
@@ -139,9 +140,37 @@ $borderContainer: #d6d6d6;
 }
 
 .result-content {
-    .context-menu {
+    .context-menu, .special-level-menu, .oddsgroup-menu {
         position: fixed;
         z-index: 1;
+    }
+
+    .icon-separator {
+        border-top-width: 2px;
+        border-right-width: 2px;
+        margin: 0 5px;
+    }
+
+    .special-level-menu, .oddsgroup-menu {
+        .dropdown-menu {
+            min-width: 100px;
+        }
+
+        .dropdown-item {
+            padding: 1px 0;
+            border-top: 1px solid #fff;
+            text-align: center;
+
+            &:hover {
+                border: 1px solid #d4d4d4;
+            }
+        }
+    }
+
+    .oddsgroup-menu {
+        .oddsgroup-item {
+            border-top: 1px solid #ddd;
+        }
     }
 }
 /*End Grid*/

@@ -21,24 +21,26 @@ export const oddsGroupListWithStyle = {
     F: null
 }
 
-export const columnList = [
+export const licenseeType = {
+    api: 0,
+    nonApi: 1
+}
+
+export const columnList = (licType) => [
     { key: 'Status', value: 'Status', show: true },
     { key: 'Username', value: 'Username', show: true },
     { key: 'SystemID', value: 'SystemID', show: true },
+    licType === licenseeType.nonApi ? { key: 'RealName', value: 'Real Name', show: true } : null,
     { key: 'Currency', value: 'Currency', show: true },
     { key: 'CurrentBalance', value: 'Current Balance', show: true },
     { key: 'OutstandingBalance', value: 'Outstanding Balance', show: true },
     { key: 'OddsGroup', value: 'Odds Group', show: true },
     { key: 'BAStatus', value: 'BA Status', show: true },
     { key: 'SpecialLevel', value: 'Special Level', show: true },
+    licType === licenseeType.nonApi ? { key: 'LastLoginIp', value: 'Last Login IP', show: true } : null,
     { key: 'LastTransaction', value: 'Last Transaction', show: true },
-    { key: 'Email', value: 'Email', show: true }
+    licType === licenseeType.nonApi ? { key: 'Email', value: 'Email', show: true } : null
 ]
-
-export const licenseeType = {
-    api: 0,
-    nonApi: 1
-}
 
 export const heightSlicing = {
     default: 300,
