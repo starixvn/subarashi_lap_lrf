@@ -172,7 +172,7 @@
         }
 
         [Test]
-        public async Task CreateSession_AuthenticatedTokenButWrongDomain_RedirectToRestrictionPage()
+        public void CreateSession_AuthenticatedTokenButWrongDomain_RedirectToRestrictionPage()
         {
             using (var controller = CreateController())
             {
@@ -203,7 +203,7 @@
         }
 
         [TestCase("spondemo", "hLicenseeWinLossReport")]
-        public async Task CreateSession_Authenticated_RedirectToActionLink(string siteName, string actionLink)
+        public void CreateSession_Authenticated_RedirectToActionLink(string siteName, string actionLink)
         {
             using (var controller = CreateController())
             {
@@ -236,7 +236,7 @@
         }
 
         [TestCase(500)]
-        public async Task CreateSession_NotAuthenticated_RedirectToRestrictionPageWithErrorCode(int expectedErrorCode)
+        public void CreateSession_NotAuthenticated_RedirectToRestrictionPageWithErrorCode(int expectedErrorCode)
         {
             using (var controller = CreateController())
             {

@@ -186,7 +186,7 @@
             _appSettings.MarkNotificationAsReadApiUrl.Returns(url);
 
             // Action
-            var result = _notificationService.MarkNotificationAsRead(metaModel);
+            _notificationService.MarkNotificationAsRead(metaModel);
 
             // Assert
             _webClientService.Received().UploadString(new Uri(url), "MessageType=1&MessageId=2&UserName=3&LicenseeName=Name");
@@ -211,7 +211,7 @@
             _webClientService.UploadString(new Uri(url), Arg.Any<string>()).Returns(jsonString);
 
             // Action
-            var result = _notificationService.MarkNotificationAsRead(metaModel);
+            _notificationService.MarkNotificationAsRead(metaModel);
 
             // Assert
             _webClientService.Received().UploadString(new Uri(url), "MessageType=1&MessageId=2&UserName=3&LicenseeName=Name");
@@ -299,7 +299,7 @@
             var expectedUrl = "API?name=FileName1";
 
             // Action
-            var result = _notificationService.GetFileAttachmentData(metaModel);
+            _notificationService.GetFileAttachmentData(metaModel);
 
             // Assert
             _webClientService.Received().DownloadString(expectedUrl);

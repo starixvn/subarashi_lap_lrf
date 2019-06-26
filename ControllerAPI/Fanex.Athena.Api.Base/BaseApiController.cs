@@ -1,4 +1,5 @@
-﻿// --------------------------------------------------------------------------
+﻿using System;
+// --------------------------------------------------------------------------
 // <copyright file="BaseApiController.cs" company="">
 // Copyright (c) . All rights reserved.
 // </copyright>
@@ -30,9 +31,9 @@ namespace Fanex.Athena.Api.Base
 
         protected internal BaseApiController(ISessionService sessionService, IProductService productService, ILanguageService languageService)
         {
-            _sessionService = sessionService;
-            _productService = productService;
-            _langService = languageService;
+            _sessionService = sessionService ?? throw new ArgumentNullException(nameof(sessionService));
+            _productService = productService ?? throw new ArgumentNullException(nameof(productService));
+            _langService = languageService ?? throw new ArgumentNullException(nameof(languageService));
         }
 
         protected IDictionary<int, string> UserCurrencyList => _sessionService.UserSession.CurrencyList;
@@ -67,7 +68,6 @@ namespace Fanex.Athena.Api.Base
                   }
                   finally
                   {
-                      workbook.Clear();
                       stream.Close();
                       context.Dispose();
                   }

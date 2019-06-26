@@ -59,7 +59,7 @@
         }
 
         [Test]
-        public async Task SignIn_SetAuthorize_UpdateCookieAndReturnCorrectResult()
+        public void SignIn_SetAuthorize_UpdateCookieAndReturnCorrectResult()
         {
             // Arrange
             var tokenInfo = new OneAuthToken

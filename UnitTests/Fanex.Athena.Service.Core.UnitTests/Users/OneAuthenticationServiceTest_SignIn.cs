@@ -431,7 +431,7 @@
         }
 
         [Test]
-        public async Task SignIn_GetPermissionList_IsAdminstrator_GetFromFile_NoData_ReturnEmptyData()
+        public void SignIn_GetPermissionList_IsAdminstrator_GetFromFile_NoData_ReturnEmptyData()
         {
             // Arrange
             var tokenInfo = CreateValidFakeToken(true);
@@ -498,7 +498,7 @@
 
         [TestCase(true)]
         [TestCase(false)]
-        public async Task ValidateCurrencyList_CurrencyListIsNullOrEmpty_ReturnErrorResultInfo(bool isNull)
+        public void ValidateCurrencyList_CurrencyListIsNullOrEmpty_ReturnErrorResultInfo(bool isNull)
         {
             // Arrange
             var userInfo = new OneAuthUserInfo { CurrencyUserList = isNull ? null : new List<CurrencyUser>() };

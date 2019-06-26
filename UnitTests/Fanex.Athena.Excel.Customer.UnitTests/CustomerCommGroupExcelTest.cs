@@ -92,9 +92,9 @@ namespace Fanex.Athena.Excel.Customer.UnitTests
             {
                 _sheet.Received().SetTextRowValue(
                     excel.TemplateSheet,
-                    Arg.Any<int>(),
-                    Arg.Any<int>(),
-                    Arg.Any<int>(),
+                   0,
+                    0,
+                    5,
                     ViewResources.CommissionGroupList);
                 _sheet.Received(1).CreateFreezePane(0, 2);
                 _sheet.ReceivedWithAnyArgs().DeleteRow(0);
