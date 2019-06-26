@@ -3604,9 +3604,12 @@ function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "validateBaseCurrency", function() { return validateBaseCurrency; });
+/* harmony import */ var _AppData__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AppData */ "./www/js/source/reactpages/lib/AppData.js");
+
 var validateBaseCurrency = function validateBaseCurrency() {
   var baseCurrency = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
-  return baseCurrency && window._AppData.baseCurrencyList.find(function (x) {
+  var allowEmpty = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+  return allowEmpty && !baseCurrency || !!baseCurrency && _AppData__WEBPACK_IMPORTED_MODULE_0__["default"].baseCurrencyList.find(function (x) {
     return x.value === baseCurrency;
   });
 };
@@ -4606,7 +4609,7 @@ function (_Component) {
   }, {
     key: "isValidModel",
     get: function get() {
-      return this.props.selectedProduct !== "" && Object(_lib_validationHelper__WEBPACK_IMPORTED_MODULE_14__["validateBaseCurrency"])(this.props.selectedBaseCurrency);
+      return this.props.selectedProduct !== "" && Object(_lib_validationHelper__WEBPACK_IMPORTED_MODULE_14__["validateBaseCurrency"])(this.props.selectedBaseCurrency, false);
     }
   }]);
 

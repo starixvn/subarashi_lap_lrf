@@ -2146,9 +2146,12 @@ function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "validateBaseCurrency", function() { return validateBaseCurrency; });
+/* harmony import */ var _AppData__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AppData */ "./www/js/source/reactpages/lib/AppData.js");
+
 var validateBaseCurrency = function validateBaseCurrency() {
   var baseCurrency = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
-  return baseCurrency && window._AppData.baseCurrencyList.find(function (x) {
+  var allowEmpty = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+  return allowEmpty && !baseCurrency || !!baseCurrency && _AppData__WEBPACK_IMPORTED_MODULE_0__["default"].baseCurrencyList.find(function (x) {
     return x.value === baseCurrency;
   });
 };
@@ -2938,11 +2941,10 @@ function () {
     }
   }, {
     key: "getTitle",
-    value: function getTitle(fromDate, toDate, currencyName, baseCurrency) {
+    value: function getTitle(fromDate, toDate, baseCurrency) {
       var dateRangeText = fromDate && toDate ? ", ".concat(_jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].convertDateToString(fromDate), " \u2192 ").concat(_jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].convertDateToString(toDate)) : '';
-      var currencyNameText = currencyName ? ", ".concat(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("Currency"), ": ").concat(currencyName) : '';
       var baseCurrencyText = baseCurrency ? ", ".concat(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("BaseCurrency"), ": ").concat(baseCurrency) : '';
-      return _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("BettingTicketCenter") + dateRangeText + currencyNameText + baseCurrencyText;
+      return _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("BettingTicketCenter") + dateRangeText + baseCurrencyText;
     }
   }]);
 
@@ -3128,7 +3130,7 @@ function (_BaseDataGrid) {
     value: function _buildFooter() {
       var item = this.props.gridData.Total;
       var colSpan = 8;
-      var baseCurrency = this.props.requestParam.BaseCurrency;
+      var baseCurrency = this.props.requestParam.BaseCurrencyName;
       return [react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Row"], {
         className: "fixed-table-grant-total",
         key: 1
@@ -3316,7 +3318,7 @@ function (_Component) {
         return;
       }
 
-      _this.props.setReportTitle(_common_lib_Service__WEBPACK_IMPORTED_MODULE_14__["default"].getTitle(null, null, params.CurrencyName, params.BaseCurrency));
+      _this.props.setReportTitle(_common_lib_Service__WEBPACK_IMPORTED_MODULE_14__["default"].getTitle(null, null, params.IsConvertAll ? params.BaseCurrencyName : ''));
 
       _this.props.setRequestParam(params);
 
@@ -3376,17 +3378,19 @@ function (_Component) {
         var currencyName = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].currencyList.find(function (x) {
           return x.Id == currencyIdList;
         }).Value;
-        baseCurrency = currencyName;
 
         if (!_this.baseCurrencyList.find(function (x) {
           return x.label === currencyName;
         })) {
+          baseCurrency = '';
           _this.baseCurrencyList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].baseCurrencyList.slice(0);
 
           _this.baseCurrencyList.push({
-            value: currencyName,
+            value: baseCurrency,
             label: currencyName
           });
+        } else {
+          baseCurrency = currencyName;
         }
       }
 
@@ -3403,6 +3407,8 @@ function (_Component) {
   _createClass(FormFilter, [{
     key: "_getParams",
     value: function _getParams() {
+      var _this2 = this;
+
       if (!this.isValidModel) {
         return null;
       }
@@ -3411,6 +3417,9 @@ function (_Component) {
           PageSize = _this$props$requestPa.PageSize,
           SortBy = _this$props$requestPa.SortBy,
           SortOrder = _this$props$requestPa.SortOrder;
+      var baseCurrency = this.baseCurrencyList.find(function (x) {
+        return x.value === _this2.props.selectedBaseCurrency;
+      });
       return {
         PageSize: PageSize,
         PageIndex: 1,
@@ -3421,7 +3430,8 @@ function (_Component) {
         Status: this.props.selectedStatus,
         SortBy: SortBy,
         SortOrder: SortOrder,
-        IsConvertAll: this.props.isConvertAll
+        IsConvertAll: this.props.isConvertAll,
+        BaseCurrencyName: baseCurrency ? baseCurrency.label : ''
       };
     }
   }, {
@@ -3452,7 +3462,7 @@ function (_Component) {
   }, {
     key: "_renderCurrencySelectList",
     value: function _renderCurrencySelectList() {
-      var _this2 = this;
+      var _this3 = this;
 
       var currencyList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].currencyList;
       return currencyList && currencyList.length && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_4___default.a, {
@@ -3463,14 +3473,14 @@ function (_Component) {
         valueField: "Value",
         statusField: "Status",
         onChange: function onChange(currentItem, selectedItemsKey) {
-          return _this2._onChangeCurrency(selectedItemsKey);
+          return _this3._onChangeCurrency(selectedItemsKey);
         }
       });
     }
   }, {
     key: "_renderBaseCurrencySelectList",
     value: function _renderBaseCurrencySelectList() {
-      var _this3 = this;
+      var _this4 = this;
 
       var baseCurrencyList = this.baseCurrencyList;
       return baseCurrencyList && baseCurrencyList.length && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -3478,14 +3488,14 @@ function (_Component) {
         value: this.props.selectedBaseCurrency,
         options: baseCurrencyList,
         onChange: function onChange(item) {
-          return _this3.props.setSelectedBaseCurrency(item.value);
+          return _this4.props.setSelectedBaseCurrency(item.value);
         }
       });
     }
   }, {
     key: "_renderStatusSelectList",
     value: function _renderStatusSelectList() {
-      var _this4 = this;
+      var _this5 = this;
 
       var statusList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].statusList;
       return statusList && statusList.length && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_4___default.a, {
@@ -3496,14 +3506,14 @@ function (_Component) {
         valueField: "Value",
         statusField: "Status",
         onChange: function onChange(currentItem, selectedItemsKey) {
-          return _this4.props.setSelectedStatus(selectedItemsKey);
+          return _this5.props.setSelectedStatus(selectedItemsKey);
         }
       });
     }
   }, {
     key: "render",
     value: function render() {
-      var _this5 = this;
+      var _this6 = this;
 
       var excelButton = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "icon-excel right",
@@ -3530,10 +3540,10 @@ function (_Component) {
       }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("Username")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_auto_complete__WEBPACK_IMPORTED_MODULE_5__["default"], {
         url: _common_constants_apiUrl__WEBPACK_IMPORTED_MODULE_13__["default"].CUSTOMER_SEARCH_URL,
         onSelect: function onSelect(value) {
-          return _this5.props.setUsername(value);
+          return _this6.props.setUsername(value);
         },
         onInput: function onInput(value) {
-          return _this5.props.setUsername(value);
+          return _this6.props.setUsername(value);
         },
         htmlAttributes: {
           placeholder: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("ExternalIdOrSystemId")
@@ -3558,7 +3568,7 @@ function (_Component) {
         id: "IsConvertAll",
         checked: this.props.isConvertAll,
         onChange: function onChange(checked) {
-          return _this5.props.changeIsConvertAll(checked);
+          return _this6.props.changeIsConvertAll(checked);
         },
         label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("ConvertAllFiguresToBaseCurrency")
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {

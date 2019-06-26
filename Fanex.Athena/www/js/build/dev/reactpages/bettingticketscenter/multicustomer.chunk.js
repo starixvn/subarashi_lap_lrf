@@ -8308,9 +8308,12 @@ function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "validateBaseCurrency", function() { return validateBaseCurrency; });
+/* harmony import */ var _AppData__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AppData */ "./www/js/source/reactpages/lib/AppData.js");
+
 var validateBaseCurrency = function validateBaseCurrency() {
   var baseCurrency = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
-  return baseCurrency && window._AppData.baseCurrencyList.find(function (x) {
+  var allowEmpty = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+  return allowEmpty && !baseCurrency || !!baseCurrency && _AppData__WEBPACK_IMPORTED_MODULE_0__["default"].baseCurrencyList.find(function (x) {
     return x.value === baseCurrency;
   });
 };
@@ -9100,11 +9103,10 @@ function () {
     }
   }, {
     key: "getTitle",
-    value: function getTitle(fromDate, toDate, currencyName, baseCurrency) {
+    value: function getTitle(fromDate, toDate, baseCurrency) {
       var dateRangeText = fromDate && toDate ? ", ".concat(_jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].convertDateToString(fromDate), " \u2192 ").concat(_jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].convertDateToString(toDate)) : '';
-      var currencyNameText = currencyName ? ", ".concat(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("Currency"), ": ").concat(currencyName) : '';
       var baseCurrencyText = baseCurrency ? ", ".concat(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("BaseCurrency"), ": ").concat(baseCurrency) : '';
-      return _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("BettingTicketCenter") + dateRangeText + currencyNameText + baseCurrencyText;
+      return _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("BettingTicketCenter") + dateRangeText + baseCurrencyText;
     }
   }]);
 
@@ -9622,7 +9624,7 @@ function (_BaseDataGrid) {
     value: function _buildFooter() {
       var item = this.props.gridData.Total;
       var isNegativeWL = item.SumLicenseeWL.substring(0, 1) === '-';
-      var baseCurrency = this.props.requestParam.BaseCurrency;
+      var baseCurrency = this.props.requestParam.BaseCurrencyName;
       return [react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Row"], {
         className: "fixed-table-grant-total",
         key: 1
@@ -9851,7 +9853,7 @@ function (_Component) {
       }
 
       react_toastify__WEBPACK_IMPORTED_MODULE_4__["toast"].dismiss();
-      var title = _common_lib_Service__WEBPACK_IMPORTED_MODULE_17__["default"].getTitle(params.FromDate, params.ToDate, params.CurrencyName, params.BaseCurrency);
+      var title = _common_lib_Service__WEBPACK_IMPORTED_MODULE_17__["default"].getTitle(params.FromDate, params.ToDate, params.IsConvertAll ? params.BaseCurrencyName : '');
 
       _this.props.setReportTitle(title);
 
@@ -9973,17 +9975,19 @@ function (_Component) {
         var currencyName = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_15__["default"].currencyList.find(function (x) {
           return x.Id == currencyIdList;
         }).Value;
-        baseCurrency = currencyName;
 
         if (!_this.baseCurrencyList.find(function (x) {
           return x.label === currencyName;
         })) {
+          baseCurrency = '';
           _this.baseCurrencyList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_15__["default"].baseCurrencyList.slice(0);
 
           _this.baseCurrencyList.push({
-            value: currencyName,
+            value: baseCurrency,
             label: currencyName
           });
+        } else {
+          baseCurrency = currencyName;
         }
       }
 
@@ -10005,6 +10009,8 @@ function (_Component) {
   }, {
     key: "_getParams",
     value: function _getParams() {
+      var _this2 = this;
+
       if (!this.isValidModel) {
         return null;
       }
@@ -10019,6 +10025,9 @@ function (_Component) {
 
       var isEnableLeagueMatch = this._isEnableLeagueMatch();
 
+      var baseCurrency = this.baseCurrencyList.find(function (x) {
+        return x.value === _this2.props.selectedBaseCurrency;
+      });
       return {
         PageSize: PageSize,
         PageIndex: 1,
@@ -10036,7 +10045,8 @@ function (_Component) {
         MatchId: isEnableLeagueMatch ? this.props.selectedMatch : 0,
         SortBy: SortBy,
         SortOrder: SortOrder,
-        IsConvertAll: this.props.isConvertAll
+        IsConvertAll: this.props.isConvertAll,
+        BaseCurrencyName: baseCurrency ? baseCurrency.label : ''
       };
     }
   }, {
@@ -10068,7 +10078,7 @@ function (_Component) {
   }, {
     key: "_renderProductSelectList",
     value: function _renderProductSelectList() {
-      var _this2 = this;
+      var _this3 = this;
 
       var productList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_15__["default"].productList;
       return productList && productList.length && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -10076,14 +10086,14 @@ function (_Component) {
         value: this.props.selectedProduct,
         options: productList,
         onChange: function onChange(item) {
-          return _this2._onChangeProduct(item.value);
+          return _this3._onChangeProduct(item.value);
         }
       });
     }
   }, {
     key: "_renderSportSelectList",
     value: function _renderSportSelectList() {
-      var _this3 = this;
+      var _this4 = this;
 
       var sportList = this.props.sportList;
       return sportList && sportList.length && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -10091,14 +10101,14 @@ function (_Component) {
         value: this.props.selectedSport,
         options: sportList,
         onChange: function onChange(item) {
-          return _this3._onChangeSport(item.value);
+          return _this4._onChangeSport(item.value);
         }
       });
     }
   }, {
     key: "_renderBettypeSelectList",
     value: function _renderBettypeSelectList() {
-      var _this4 = this;
+      var _this5 = this;
 
       var bettypeList = this.props.bettypeList;
       return bettypeList && bettypeList.length && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -10106,14 +10116,14 @@ function (_Component) {
         value: this.props.selectedBettype,
         options: bettypeList,
         onChange: function onChange(item) {
-          return _this4.props.setSelectedBettype(item.value);
+          return _this5.props.setSelectedBettype(item.value);
         }
       });
     }
   }, {
     key: "_renderLeagueSelectList",
     value: function _renderLeagueSelectList() {
-      var _this5 = this;
+      var _this6 = this;
 
       var leagueList = this.props.leagueList;
       return leagueList && leagueList.length && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -10122,14 +10132,14 @@ function (_Component) {
         value: this.props.selectedLeague,
         options: leagueList,
         onChange: function onChange(item) {
-          return _this5._onChangeLeague(item.value);
+          return _this6._onChangeLeague(item.value);
         }
       });
     }
   }, {
     key: "_renderMatchSelectList",
     value: function _renderMatchSelectList() {
-      var _this6 = this;
+      var _this7 = this;
 
       var matchList = this.props.matchList;
       return matchList && matchList.length && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -10138,14 +10148,14 @@ function (_Component) {
         value: this.props.selectedMatch,
         options: matchList,
         onChange: function onChange(item) {
-          return _this6.props.setSelectedMatch(item.value);
+          return _this7.props.setSelectedMatch(item.value);
         }
       });
     }
   }, {
     key: "_renderCurrencySelectList",
     value: function _renderCurrencySelectList() {
-      var _this7 = this;
+      var _this8 = this;
 
       var currencyList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_15__["default"].currencyList;
       return currencyList && currencyList.length && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_6___default.a, {
@@ -10156,14 +10166,14 @@ function (_Component) {
         valueField: "Value",
         statusField: "Status",
         onChange: function onChange(currentItem, selectedItemsKey) {
-          return _this7._onChangeCurrency(selectedItemsKey);
+          return _this8._onChangeCurrency(selectedItemsKey);
         }
       });
     }
   }, {
     key: "_renderBaseCurrencySelectList",
     value: function _renderBaseCurrencySelectList() {
-      var _this8 = this;
+      var _this9 = this;
 
       var baseCurrencyList = this.baseCurrencyList;
       return baseCurrencyList && baseCurrencyList.length && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -10171,14 +10181,14 @@ function (_Component) {
         value: this.props.selectedBaseCurrency,
         options: baseCurrencyList,
         onChange: function onChange(item) {
-          return _this8.props.setSelectedBaseCurrency(item.value);
+          return _this9.props.setSelectedBaseCurrency(item.value);
         }
       });
     }
   }, {
     key: "_renderStatusSelectList",
     value: function _renderStatusSelectList() {
-      var _this9 = this;
+      var _this10 = this;
 
       var statusList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_15__["default"].statusList;
       return statusList && statusList.length && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_6___default.a, {
@@ -10189,14 +10199,14 @@ function (_Component) {
         valueField: "Value",
         statusField: "Status",
         onChange: function onChange(currentItem, selectedItemsKey) {
-          return _this9.props.setSelectedStatus(selectedItemsKey);
+          return _this10.props.setSelectedStatus(selectedItemsKey);
         }
       });
     }
   }, {
     key: "_renderLiveStatusSelectList",
     value: function _renderLiveStatusSelectList() {
-      var _this10 = this;
+      var _this11 = this;
 
       var liveStatusList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_15__["default"].liveStatusList;
       return liveStatusList && liveStatusList.length && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_6___default.a, {
@@ -10207,14 +10217,14 @@ function (_Component) {
         valueField: "Value",
         statusField: "Status",
         onChange: function onChange(currentItem, selectedItemsKey) {
-          return _this10.props.setSelectedLiveStatus(selectedItemsKey);
+          return _this11.props.setSelectedLiveStatus(selectedItemsKey);
         }
       });
     }
   }, {
     key: "render",
     value: function render() {
-      var _this11 = this;
+      var _this12 = this;
 
       var excelButton = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "icon-excel right",
@@ -10280,10 +10290,10 @@ function (_Component) {
       }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("Username")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_auto_complete__WEBPACK_IMPORTED_MODULE_8__["default"], {
         url: _common_constants_apiUrl__WEBPACK_IMPORTED_MODULE_18__["default"].CUSTOMER_SEARCH_URL,
         onSelect: function onSelect(value) {
-          return _this11.props.setUsername(value);
+          return _this12.props.setUsername(value);
         },
         onInput: function onInput(value) {
-          return _this11.props.setUsername(value);
+          return _this12.props.setUsername(value);
         },
         htmlAttributes: {
           placeholder: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("ExternalIdOrSystemId")
@@ -10308,7 +10318,7 @@ function (_Component) {
         id: "IsConvertAll",
         checked: this.props.isConvertAll,
         onChange: function onChange(checked) {
-          return _this11.props.changeIsConvertAll(checked);
+          return _this12.props.changeIsConvertAll(checked);
         },
         label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("ConvertAllFiguresToBaseCurrency")
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {

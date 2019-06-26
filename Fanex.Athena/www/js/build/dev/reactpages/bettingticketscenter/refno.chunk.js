@@ -2083,9 +2083,12 @@ function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "validateBaseCurrency", function() { return validateBaseCurrency; });
+/* harmony import */ var _AppData__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AppData */ "./www/js/source/reactpages/lib/AppData.js");
+
 var validateBaseCurrency = function validateBaseCurrency() {
   var baseCurrency = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
-  return baseCurrency && window._AppData.baseCurrencyList.find(function (x) {
+  var allowEmpty = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+  return allowEmpty && !baseCurrency || !!baseCurrency && _AppData__WEBPACK_IMPORTED_MODULE_0__["default"].baseCurrencyList.find(function (x) {
     return x.value === baseCurrency;
   });
 };
@@ -2875,11 +2878,10 @@ function () {
     }
   }, {
     key: "getTitle",
-    value: function getTitle(fromDate, toDate, currencyName, baseCurrency) {
+    value: function getTitle(fromDate, toDate, baseCurrency) {
       var dateRangeText = fromDate && toDate ? ", ".concat(_jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].convertDateToString(fromDate), " \u2192 ").concat(_jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].convertDateToString(toDate)) : '';
-      var currencyNameText = currencyName ? ", ".concat(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("Currency"), ": ").concat(currencyName) : '';
       var baseCurrencyText = baseCurrency ? ", ".concat(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("BaseCurrency"), ": ").concat(baseCurrency) : '';
-      return _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("BettingTicketCenter") + dateRangeText + currencyNameText + baseCurrencyText;
+      return _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("BettingTicketCenter") + dateRangeText + baseCurrencyText;
     }
   }]);
 
@@ -3257,7 +3259,7 @@ function (_Component) {
         return;
       }
 
-      _this.props.setReportTitle(_common_lib_Service__WEBPACK_IMPORTED_MODULE_13__["default"].getTitle(null, null, null, params.BaseCurrency));
+      _this.props.setReportTitle(_common_lib_Service__WEBPACK_IMPORTED_MODULE_13__["default"].getTitle(null, null, params.BaseCurrency));
 
       _this.props.setRequestParam(params);
 
