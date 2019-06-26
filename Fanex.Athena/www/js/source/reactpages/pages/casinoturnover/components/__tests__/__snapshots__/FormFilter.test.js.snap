@@ -328,7 +328,7 @@ exports[`FormFilter  render render with correct props 1`] = `
         >
           <button
             className="btn btn-submit"
-            disabled={false}
+            disabled={true}
             onClick={[Function]}
             type="button"
           >

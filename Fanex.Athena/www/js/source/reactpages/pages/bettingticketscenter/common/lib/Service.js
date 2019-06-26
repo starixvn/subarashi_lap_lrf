@@ -24,13 +24,13 @@ export default class Service {
         return HeaderText;
     }
 
-    static getTitle(fromDate, toDate, currencyName, baseCurrency) {
+    static getTitle(fromDate, toDate, baseCurrency) {
         const dateRangeText = fromDate && toDate 
             ? `, ${Site.convertDateToString(fromDate)} → ${Site.convertDateToString(toDate)}` 
             : '';
-        const currencyNameText = currencyName ? `, ${LangHelper.getSingleResource("Currency")}: ${currencyName}` : '';
+
         const baseCurrencyText = baseCurrency ? `, ${LangHelper.getSingleResource("BaseCurrency")}: ${baseCurrency}` : '';
 
-        return LangHelper.getSingleResource("BettingTicketCenter") + dateRangeText + currencyNameText + baseCurrencyText;
+        return LangHelper.getSingleResource("BettingTicketCenter") + dateRangeText + baseCurrencyText;
     }
 }

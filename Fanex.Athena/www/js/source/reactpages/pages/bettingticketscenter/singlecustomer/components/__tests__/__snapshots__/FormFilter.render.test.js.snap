@@ -164,7 +164,14 @@ exports[`FormFilter  render correctly 1`] = `
           optionComponent={[Function]}
           options={
             Array [
-              "EUR",
+              Object {
+                "label": "EUR",
+                "value": "EUR",
+              },
+              Object {
+                "label": "USD",
+                "value": "USD",
+              },
             ]
           }
           pageSize={5}

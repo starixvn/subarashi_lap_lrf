@@ -26,7 +26,7 @@ export class DataGrid extends BaseDataGrid {
     _buildFooter() {
         const item = this.props.gridData.Total;
         const colSpan = 8;
-        const baseCurrency = this.props.requestParam.BaseCurrency;
+        const baseCurrency = this.props.requestParam.BaseCurrencyName;
 
         return [(
             <Row className="fixed-table-grant-total" key={1}>
@@ -34,7 +34,7 @@ export class DataGrid extends BaseDataGrid {
                <Cell className="right-align">{item.SumStake}</Cell>
                <Cell className="right-align" colSpan={5}></Cell>
             </Row>
-            )]
+        )]
     }
 
     _buildHeader() {

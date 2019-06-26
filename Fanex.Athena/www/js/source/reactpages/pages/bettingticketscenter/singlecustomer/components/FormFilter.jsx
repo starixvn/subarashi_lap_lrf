@@ -37,7 +37,7 @@ export class FormFilter extends Component {
             return;
         }
 
-        this.props.setReportTitle(Service.getTitle(params.FromDate, params.ToDate, null, params.BaseCurrency));
+        this.props.setReportTitle(Service.getTitle(params.FromDate, params.ToDate, params.BaseCurrency));
         this.props.setRequestParam(params);
         this.props.toggleLoader(true);
         this.props.getGridData(ApiUrl.SINGLECUSTOMER_DATA_URL, params);

@@ -21,36 +21,28 @@ describe('Service ', () => {
 
     describe('getTitle', () => {
         it('return correct content', () => {
-            const expectedResult = `BettingTicketCenter, ${fromDate} → ${toDate}, Currency: ${currency}, BaseCurrency: ${baseCurrency}`;
+            const expectedResult = `BettingTicketCenter, ${fromDate} → ${toDate}, BaseCurrency: ${baseCurrency}`;
             
-            const result = Service.getTitle(fromDate, toDate, currency, baseCurrency);
+            const result = Service.getTitle(fromDate, toDate, baseCurrency);
 
             expect(result).toBe(expectedResult);
         });
 
         it('fromDate, toDate are null - return correct content', () => {
-            const expectedResult = `BettingTicketCenter, Currency: ${currency}, BaseCurrency: ${baseCurrency}`;
+            const expectedResult = `BettingTicketCenter, BaseCurrency: ${baseCurrency}`;
             
-            const result = Service.getTitle(null, null, currency, baseCurrency);
+            const result = Service.getTitle(null, null, baseCurrency);
 
             expect(result).toBe(expectedResult);
         });
 
-        it('currency is null - return correct content', () => {
-            const expectedResult = `BettingTicketCenter, ${fromDate} → ${toDate}, BaseCurrency: ${baseCurrency}`;
+        it('BaseCurrency is null - return correct content', () => {
+            const expectedResult = `BettingTicketCenter, ${fromDate} → ${toDate}`;
             
-            const result = Service.getTitle(fromDate, toDate, null, baseCurrency);
+            const result = Service.getTitle(fromDate, toDate, null);
 
             expect(result).toBe(expectedResult);
         })
-
-        it('baseCurrency is null - return correct content', () => {
-            const expectedResult = `BettingTicketCenter, ${fromDate} → ${toDate}, Currency: ${currency}`;
-            
-            const result = Service.getTitle(fromDate, toDate, currency);
-
-            expect(result).toBe(expectedResult);
-        });
     })
 
     describe('HeaderText', () => {

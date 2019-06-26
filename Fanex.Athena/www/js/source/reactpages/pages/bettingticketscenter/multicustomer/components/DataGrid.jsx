@@ -22,7 +22,7 @@ export class DataGrid extends BaseDataGrid {
     _buildFooter() {
         const item = this.props.gridData.Total;
         const isNegativeWL = item.SumLicenseeWL.substring(0, 1) === '-';
-        const baseCurrency = this.props.requestParam.BaseCurrency;
+        const baseCurrency = this.props.requestParam.BaseCurrencyName;
         
         return [(
             <Row className="fixed-table-grant-total" key={1}>

@@ -74,7 +74,7 @@
 
         public virtual bool IsValid => FromDate <= ToDate
             && !string.IsNullOrWhiteSpace(ProductCodeList)
-            && MetaModelValidationHelper.ValidateBaseCurrency(BaseCurrency, false);
+            && MetaModelValidationHelper.ValidateBaseCurrency(BaseCurrency);
 
         public bool HasPlayerCom { get; set; }
 

@@ -40,7 +40,7 @@ export class FormFilter extends Component {
             return;
         }
 
-        this.props.setReportTitle(Service.getTitle(null, null, params.CurrencyName, params.BaseCurrency));
+        this.props.setReportTitle(Service.getTitle(null, null, params.IsConvertAll ? params.BaseCurrencyName : ''));
         this.props.setRequestParam(params);
         this.props.toggleLoader(true);
         this.props.getGridData(ApiUrl.RUNNING_DATA_URL, params);
@@ -52,7 +52,7 @@ export class FormFilter extends Component {
         }
 
         const { PageSize, SortBy, SortOrder } = this.props.requestParam;
-
+        const baseCurrency = this.baseCurrencyList.find(x => x.value === this.props.selectedBaseCurrency);
         return {
             PageSize: PageSize,
             PageIndex: 1,
@@ -63,7 +63,8 @@ export class FormFilter extends Component {
             Status: this.props.selectedStatus,
             SortBy: SortBy,
             SortOrder: SortOrder,
-            IsConvertAll: this.props.isConvertAll
+            IsConvertAll: this.props.isConvertAll,
+            BaseCurrencyName: baseCurrency ? baseCurrency.label : ''
         }
     }
 
@@ -150,10 +151,13 @@ export class FormFilter extends Component {
         else
         {
              const currencyName =  AppData.currencyList.find(x => x.Id == currencyIdList).Value;
-             baseCurrency = currencyName;
              if(!this.baseCurrencyList.find(x => x.label === currencyName)){
+                 baseCurrency = '';
                  this.baseCurrencyList = AppData.baseCurrencyList.slice(0);
-                 this.baseCurrencyList.push({value: currencyName, label: currencyName});      
+                 this.baseCurrencyList.push({value: baseCurrency, label: currencyName});      
+             }
+             else {
+                 baseCurrency = currencyName;
              }
         }
 

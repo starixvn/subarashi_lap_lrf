@@ -263,7 +263,7 @@ describe('FormFilter ', () => {
                 CurrencyName: props.selectedCurrency.label,
                 BaseCurrency: props.selectedBaseCurrency,
                 IsConvertAll: props.isConvertAll,
-                ProductCode: ['P1', 'P2'],
+                ProductCodeList: 'P1,P2',
                 UserName: props.username,
                 Status: ['Won', 'Lose'],
                 PageIndex: 1,
@@ -305,7 +305,8 @@ describe('FormFilter ', () => {
         it('valid data - return true', () => {
             const props = { 
                 selectedProduct: 'P1',
-                selectedStatus: 'Won'
+                selectedStatus: 'Won',
+                selectedBaseCurrency: 'EUR'
             };
 
             const filter = new FormFilter(props);
@@ -337,6 +338,7 @@ describe('FormFilter ', () => {
                 setReportTitle: jest.fn(),
                 setRequestParam: jest.fn(),
                 getGridData: jest.fn(),
+                selectedBaseCurrency: 'EUR'
             };
             const params = { FromDate: '01-01-2019', ToDate: '01-02-2019', CurrencyName: 'C1', BaseCurrency: 'EUR' };
 

@@ -30,7 +30,7 @@ export class FormFilter extends Component {
 
     get isValidModel() {
         return this.props.selectedProduct && this.props.selectedStatus
-            && validateBaseCurrency(this.props.selectedBaseCurrency);
+            && validateBaseCurrency(this.props.selectedBaseCurrency, false);
     }
 
     onSubmit = () => {

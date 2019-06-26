@@ -9,8 +9,6 @@ namespace Fanex.Athena.Model.BetList.MetaModel
 
         public string LiveStatus { get; set; }
 
-        public override bool IsValid => FromDate <= ToDate
-            && !string.IsNullOrWhiteSpace(ProductCodeList)
-            && MetaModelValidationHelper.ValidateBaseCurrency(BaseCurrency);
+        public override bool IsValid => base.IsValid && !string.IsNullOrWhiteSpace(UserName);
     }
 }

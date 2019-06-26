@@ -32,7 +32,7 @@ export class FormFilter extends Component {
             return;
         }
 
-        this.props.setReportTitle(Service.getTitle(null, null, null, params.BaseCurrency));
+        this.props.setReportTitle(Service.getTitle(null, null, params.BaseCurrency));
         this.props.setRequestParam(params);
         this.props.toggleLoader(true);
         this.props.getGridData(ApiUrl.REFNO_DATA_URL, params);

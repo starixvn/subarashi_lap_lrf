@@ -23,7 +23,7 @@ describe('FormFilter ', () => {
                 platformList: ["Asia", "China", "US"],
                 liveStatusList: [{"Id":0,"Value":"Non-Live","Status":true}],
                 productOptions: ["SB", "BA"],
-                baseCurrencyList: ['EUR'],
+                baseCurrencyList: [{value: 'EUR', label: 'EUR'}, {value: 'USD', label: 'USD'}],
                 dateConstraint: { minDate: '06/01/2012', maxDate: '07/27/2018', limitedMonthRange: 3 }
             });
     });

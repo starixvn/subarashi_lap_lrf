@@ -22,7 +22,7 @@ describe('FormFilter ', () => {
 
     beforeAll(() => {
         LangHelper.getSingleResource = jest.fn((resource) => resource);
-        Object.assign(AppData,             {                 baseCurrencyList: ['EUR'],                 dateConstraint: { minDate: '06/01/2012', maxDate: '07/27/2018', limitedMonthRange: 12 }            });
+        Object.assign(AppData,             {                 baseCurrencyList: [{value: 'EUR', label: 'EUR'}, {value: 'USD', label: 'USD'}],                 dateConstraint: { minDate: '06/01/2012', maxDate: '07/27/2018', limitedMonthRange: 12 }            });
     });
 
     it('render correctly', () => {

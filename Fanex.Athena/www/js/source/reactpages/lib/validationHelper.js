@@ -1,5 +1,5 @@
-﻿
-export const validateBaseCurrency=(baseCurrency = "")=> {
-    return baseCurrency &&
-        window._AppData.baseCurrencyList.find(x => x.value === baseCurrency);
+﻿import AppData from './AppData';
+
+export const validateBaseCurrency=(baseCurrency = "", allowEmpty = true)=> {
+    return (allowEmpty && !baseCurrency) || (!!baseCurrency && AppData.baseCurrencyList.find(x => x.value === baseCurrency));
 }

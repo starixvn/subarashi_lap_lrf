@@ -22,7 +22,7 @@ export class FormFilter extends Component {
     }
 
     get isValidModel() {
-        return this.props.selectedProduct !== "" && validateBaseCurrency(this.props.selectedBaseCurrency);
+        return this.props.selectedProduct !== "" && validateBaseCurrency(this.props.selectedBaseCurrency, false);
     }
 
     submit = (event) => {
