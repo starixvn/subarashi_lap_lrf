@@ -1,37 +1,66 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Web;
-using Fanex.Data;
-namespace Fanex.Athena.Extension.Helpers
+﻿namespace Fanex.Athena.Extension.Helpers
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Collections.Specialized;
+    using System.Data.SqlClient;
+    using System.Linq;
+    using System.Text;
+    using System.Web;
+    using Fanex.Data;
+
     public static class LogMessageHelper
     {
         public static string GenerateMessage(Exception exception)
         {
-            var webInfo = GetRequestInfo();
-            var dbInfo = GetObjectDbExceptionInfo(exception);
             var messageBuilder = new StringBuilder();
+
+            messageBuilder.AppendLine($"ErrMsg: {exception.Message}");
+
+            AddRequestInfo(messageBuilder);
+
+            AddDatabaseInfo(messageBuilder, exception);
+
+            AddExceptionInfo(messageBuilder, exception);
+
+            return messageBuilder.ToString();
+        }
+
+        private static void AddRequestInfo(StringBuilder builder)
+        {
+            builder.AppendLine();
+            builder.AppendLine("REQUEST INFO");
+
+            var webInfo = GetRequestInfo();
 
             foreach (var item in webInfo)
             {
-                messageBuilder.AppendLine($"\t{item.Key}: {item.Value}");
+                builder.AppendLine($"{item.Key}: {item.Value}");
             }
+        }
+
+        private static void AddDatabaseInfo(StringBuilder builder, Exception exception)
+        {
+            builder.AppendLine();
+            builder.AppendLine("DATABASE INFO");
+
+            var dbInfo = GetObjectDbExceptionInfo(exception);
+
             foreach (var item in dbInfo)
             {
-                messageBuilder.AppendLine($"\t{item.Key}: {item.Value}");
+                builder.AppendLine($"{item.Key}: {item.Value}");
             }
+        }
 
-            messageBuilder.Append($"\t ErrMsg: {exception.Message}");
-            messageBuilder.Append($"\t StackTrace: {exception.StackTrace}");
-            messageBuilder.Append($"\t Source: {exception.Source}");
-            messageBuilder.Append($"\t TargetSite: {exception.TargetSite}");
+        private static void AddExceptionInfo(StringBuilder builder, Exception exception)
+        {
+            builder.AppendLine();
+            builder.AppendLine("EXCEPTION INFO");
 
-            return messageBuilder.ToString();
+            builder.AppendLine($"Source: {exception.Source}");
+            builder.AppendLine($"TargetSite: {exception.TargetSite}");
+            builder.AppendLine($"StackTrace: {exception.StackTrace}");
         }
 
         private static IDictionary<string, object> GetObjectDbExceptionInfo(Exception ex)
@@ -60,6 +89,7 @@ namespace Fanex.Athena.Extension.Helpers
                        .Select(parameter => $"{parameter.Key}={parameter.Value}")
                        .Aggregate((firstPair, secondPair) => $"{firstPair};{secondPair}")
                : string.Empty;
+
         private static IDictionary<string, object> GetRequestInfo()
         {
             var request = HttpContext.Current?.Request;
@@ -76,6 +106,7 @@ namespace Fanex.Athena.Extension.Helpers
                         ["Identity"] = HttpContext.Current.User?.Identity?.Name
                     };
         }
+
         private static string GetClientIP(NameValueCollection serverVariables)
         {
             var clientIP = serverVariables["HTTP_X_FORWARDED_FOR"]
