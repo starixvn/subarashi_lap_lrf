@@ -7,54 +7,134 @@ exports[`GridCaption _buildDropdownColumn - should match snapshot 1`] = `
     dataSource={
       Array [
         Object {
-          "id": "Status",
+          "id": Object {
+            "key": "Status",
+            "show": true,
+            "value": "Status",
+          },
           "status": true,
-          "value": "Status",
+          "value": Object {
+            "key": "Status",
+            "show": true,
+            "value": "Status",
+          },
         },
         Object {
-          "id": "Username",
+          "id": Object {
+            "key": "Username",
+            "show": true,
+            "value": "Username",
+          },
           "status": true,
-          "value": "Username",
+          "value": Object {
+            "key": "Username",
+            "show": true,
+            "value": "Username",
+          },
         },
         Object {
-          "id": "SystemID",
+          "id": Object {
+            "key": "SystemID",
+            "show": true,
+            "value": "SystemID",
+          },
           "status": true,
-          "value": "SystemID",
+          "value": Object {
+            "key": "SystemID",
+            "show": true,
+            "value": "SystemID",
+          },
         },
         Object {
-          "id": "Currency",
+          "id": Object {
+            "key": "Currency",
+            "show": true,
+            "value": "Currency",
+          },
           "status": true,
-          "value": "Currency",
+          "value": Object {
+            "key": "Currency",
+            "show": true,
+            "value": "Currency",
+          },
         },
         Object {
-          "id": "Current Balance",
+          "id": Object {
+            "key": "CurrentBalance",
+            "show": true,
+            "value": "Current Balance",
+          },
           "status": true,
-          "value": "Current Balance",
+          "value": Object {
+            "key": "CurrentBalance",
+            "show": true,
+            "value": "Current Balance",
+          },
         },
         Object {
-          "id": "Outstanding Balance",
+          "id": Object {
+            "key": "OutstandingBalance",
+            "show": true,
+            "value": "Outstanding Balance",
+          },
           "status": true,
-          "value": "Outstanding Balance",
+          "value": Object {
+            "key": "OutstandingBalance",
+            "show": true,
+            "value": "Outstanding Balance",
+          },
         },
         Object {
-          "id": "Odds Group",
+          "id": Object {
+            "key": "OddsGroup",
+            "show": true,
+            "value": "Odds Group",
+          },
           "status": true,
-          "value": "Odds Group",
+          "value": Object {
+            "key": "OddsGroup",
+            "show": true,
+            "value": "Odds Group",
+          },
         },
         Object {
-          "id": "BA Status",
+          "id": Object {
+            "key": "BAStatus",
+            "show": true,
+            "value": "BA Status",
+          },
           "status": true,
-          "value": "BA Status",
+          "value": Object {
+            "key": "BAStatus",
+            "show": true,
+            "value": "BA Status",
+          },
         },
         Object {
-          "id": "Special Level",
+          "id": Object {
+            "key": "SpecialLevel",
+            "show": true,
+            "value": "Special Level",
+          },
           "status": true,
-          "value": "Special Level",
+          "value": Object {
+            "key": "SpecialLevel",
+            "show": true,
+            "value": "Special Level",
+          },
         },
         Object {
-          "id": "Last Transaction",
+          "id": Object {
+            "key": "LastTransaction",
+            "show": true,
+            "value": "Last Transaction",
+          },
           "status": true,
-          "value": "Last Transaction",
+          "value": Object {
+            "key": "LastTransaction",
+            "show": true,
+            "value": "Last Transaction",
+          },
         },
       ]
     }
@@ -127,7 +207,17 @@ exports[`GridCaption _buildRightPart - should render correctly with dropdown col
   <span
     className="caret-block"
   >
-    Dropdown Column List
+    <t
+      className="selection-column"
+      hasAllOption={true}
+      hasSearchBox={false}
+      id="columnList"
+      keyField="key"
+      language="en-US"
+      onChange={[Function]}
+      statusField="show"
+      valueField="value"
+    />
     <span
       className="icon-excel-wrapper"
     >

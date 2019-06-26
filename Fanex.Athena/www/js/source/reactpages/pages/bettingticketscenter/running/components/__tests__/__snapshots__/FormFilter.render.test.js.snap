@@ -53,6 +53,24 @@ exports[`FormFilter  render Base Currency Select List correctly 1`] = `
 exports[`FormFilter  render correctly 1`] = `
 <CollapsiblePanel
   className="page-filter"
+  iconContainerStyle={
+    Object {
+      "bottom": 0,
+      "cursor": "pointer",
+      "height": "15px",
+      "left": "calc(50% - 10px)",
+      "padding": "1px 5px",
+      "position": "absolute",
+      "width": "20px",
+    }
+  }
+  iconToggle={
+    Object {
+      "className": "icon-arrow",
+      "style": null,
+      "tag": "i",
+    }
+  }
   stickyFooter={
     <div>
       <i

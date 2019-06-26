@@ -23,28 +23,30 @@ exports[`CollapsiblePanel render isCollapsed = true - should render arrowStyle c
   />
   <div
     className="filter-handle"
+    onClick={[Function]}
     style={
       Object {
+        "bottom": 0,
         "cursor": "pointer",
-        "height": "20px",
-        "margin": "auto",
-        "width": "25px",
+        "height": "15px",
+        "left": "calc(50% - 10px)",
+        "padding": "1px 5px",
+        "position": "absolute",
+        "width": "20px",
       }
     }
   >
     <i
       className="icon-arrow"
-      onClick={[Function]}
       style={
         Object {
           "background": "#4c6274",
           "color": "#fff",
           "float": "left",
-          "height": "20px",
-          "marginTop": "10px",
+          "height": "15px",
           "textAlign": "center",
           "transform": "rotate(180deg)",
-          "width": "25px",
+          "width": "20px",
         }
       }
     />

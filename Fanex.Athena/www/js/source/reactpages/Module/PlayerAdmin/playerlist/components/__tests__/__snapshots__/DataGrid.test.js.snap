@@ -6,15 +6,6 @@ exports[`DataGrid _buildDataRow - should match snapshot 1`] = `
     <Unknown
       className="center-align"
     >
-      <input
-        checked={true}
-        onChange={[Function]}
-        type="checkbox"
-      />
-    </Unknown>
-    <Unknown
-      className="center-align"
-    >
       online
     </Unknown>
     <Unknown
@@ -269,16 +260,6 @@ exports[`DataGrid _renderHeader - should match snapshot 1`] = `
       }
     }
   >
-    <t
-      colWidth={30}
-      onSort={null}
-      sortBy={null}
-      sortOrder={null}
-    >
-      <input
-        type="checkbox"
-      />
-    </t>
     <t
       colWidth={80}
       onSort={null}

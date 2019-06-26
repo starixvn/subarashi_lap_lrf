@@ -22,8 +22,17 @@ export const oddsGroupListWithStyle = {
 }
 
 export const columnList = [
-    'Status', 'Username', 'SystemID', 'Currency', 'Current Balance',
-    'Outstanding Balance', 'Odds Group', 'BA Status', 'Special Level', 'Last Transaction'
+    { key: 'Status', value: 'Status', show: true },
+    { key: 'Username', value: 'Username', show: true },
+    { key: 'SystemID', value: 'SystemID', show: true },
+    { key: 'Currency', value: 'Currency', show: true },
+    { key: 'CurrentBalance', value: 'Current Balance', show: true },
+    { key: 'OutstandingBalance', value: 'Outstanding Balance', show: true },
+    { key: 'OddsGroup', value: 'Odds Group', show: true },
+    { key: 'BAStatus', value: 'BA Status', show: true },
+    { key: 'SpecialLevel', value: 'Special Level', show: true },
+    { key: 'LastTransaction', value: 'Last Transaction', show: true },
+    { key: 'Email', value: 'Email', show: true }
 ]
 
 export const licenseeType = {
