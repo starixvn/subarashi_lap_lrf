@@ -1,6 +1,6 @@
-import React, { PureComponent } from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../actions';
 import { heightSlicing } from '../lib/constants';
 
@@ -8,21 +8,16 @@ export class PlayerDetail extends PureComponent {
     constructor(props) {
         super(props);
 
-        this.state = {
-            selectedTabIndex: 0,
-            targetUrl: ''
-        }
-
         this._tabList = this.props.getTabList();
     }
 
-    handleClickMenu = (event, actionLink, tabIndex) => {
-        event.preventDefault();
+    _getDefaultSelectedTab(){
+        return this._tabList && this._tabList.length && this._tabList[0].Name;
+    }
 
-        this.setState({
-            targetUrl: actionLink,
-            selectedTabIndex: tabIndex
-        });
+    handleClickMenu = (event, tabName) => {
+        event.preventDefault();
+        this.props.setSelectedTabName(tabName);
     }
 
     _buildActionUrl(systemType, action) {
@@ -34,16 +29,16 @@ export class PlayerDetail extends PureComponent {
     }
 
     _renderTabList(tabList) {
-        const { selectedTabIndex } = this.state;
+        const selectedTabName = this.props.selectedTabName || this._getDefaultSelectedTab();
 
         return (
-            tabList.map((item, index) => {
+            tabList.map((item) => {
                 const actionUrl = this._buildActionUrl(item.SystemType, item.Action);
 
                 return (
                     <li className="tab" key={item.Name}>
-                        <a className={selectedTabIndex === index ? "active" : ""}
-                            href={actionUrl} onClick={(event) => this.handleClickMenu(event, actionUrl, index)}>
+                        <a className={selectedTabName === item.Name ? "active" : ""}
+                            href={actionUrl} onClick={(event) => this.handleClickMenu(event, item.Name)}>
                             {item.Text}
                         </a>
                     </li>
@@ -67,8 +62,14 @@ export class PlayerDetail extends PureComponent {
         return window.innerHeight - omittedHeight;
     }
 
+    _getActionUrl(){
+        const { selectedTabName } = this.props;
+        const tabItem = selectedTabName ? this._tabList.find(t => t.Name === selectedTabName) : this._tabList[0];
+
+        return tabItem && this._buildActionUrl(tabItem.SystemType, tabItem.Action);
+    }
+
     render() {
-        const { targetUrl } = this.state;
         const { selectedPlayer } = this.props;
 
         if (!selectedPlayer) {
@@ -79,8 +80,12 @@ export class PlayerDetail extends PureComponent {
             return null;
         }
 
+        const src = this._getActionUrl();
+        if(!src){
+            return;
+        }
+
         const frameHeight = this._getFrameHeight();
-        const src = targetUrl || this._buildActionUrl(this._tabList[0].SystemType, this._tabList[0].Action);
 
         return (
             <div className="pa-detail-container">
@@ -104,13 +109,13 @@ export class PlayerDetail extends PureComponent {
 }
 
 function mapDispatchToProps(dispatch) {
-    const { getLink, getTabList } = ActionCreators;
-    return bindActionCreators({ getLink, getTabList }, dispatch);
+    const { getLink, getTabList, setSelectedTabName } = ActionCreators;
+    return bindActionCreators({ getLink, getTabList, setSelectedTabName }, dispatch);
 }
 
 function mapStateToProps(state) {
-    const { selectedPlayer, isAdvancedSearch, isFilterCollapsing } = state;
-    return Object.assign({}, { selectedPlayer, isAdvancedSearch, isFilterCollapsing });
+    const { selectedPlayer, isAdvancedSearch, isFilterCollapsing, selectedTabName } = state;
+    return Object.assign({}, { selectedPlayer, isAdvancedSearch, isFilterCollapsing, selectedTabName });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlayerDetail);

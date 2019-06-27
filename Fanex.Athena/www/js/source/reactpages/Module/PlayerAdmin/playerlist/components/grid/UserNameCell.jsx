@@ -4,27 +4,38 @@ import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../../actions';
 
 const UserNameCell = (props) => {
-    const {dataItem, setSelectedPlayer, handleEnterContextMenu, handleLeaveContextMenu} = props;
+    const {dataItem, setSelectedPlayer, handleEnterContextMenu, handleLeaveContextMenu, setCurrentActivePlayer } = props;
 
-    const handleSelectPlayer = (event, playerInfo) => {
+    const handleSelectPlayer = (event) => {
         event.preventDefault();
         const player = {
-            custId: playerInfo.CustId,
-            userName: playerInfo.UserName,
-            currency: playerInfo.Currency
+            custId: dataItem.CustId,
+            userName: dataItem.UserName,
+            currency: dataItem.Currency
         };
 
         setSelectedPlayer(player);
     }
 
+    const handleMouseEnter = (event) => {
+        event.preventDefault();
+        handleEnterContextMenu(event);
+        const currentActivePlayer = {
+            custId: dataItem.CustId,
+            userName: dataItem.UserName,
+            currency: dataItem.Currency
+        };
+        setCurrentActivePlayer(currentActivePlayer);
+    }
+
     return (
         <div className="username-cell">
             <button className="btn-default btn-link username-link"
-                onClick={(e) => handleSelectPlayer(e, dataItem)}>
+                onClick={handleSelectPlayer}>
                 {dataItem.UserName}
             </button>
             <button className="btn-default btn-link btn-icon cell-menu"
-                onMouseEnter={handleEnterContextMenu} onMouseLeave={handleLeaveContextMenu}>
+                onMouseEnter={handleMouseEnter} onMouseLeave={handleLeaveContextMenu}>
                 <i className="material-icons">edit</i>
             </button>
         </div>
@@ -32,8 +43,8 @@ const UserNameCell = (props) => {
 }
 
 function mapDispatchToProps(dispatch) {
-    const { setSelectedPlayer } = ActionCreators;
-    return bindActionCreators({ setSelectedPlayer }, dispatch);
+    const { setSelectedPlayer, setCurrentActivePlayer } = ActionCreators;
+    return bindActionCreators({ setSelectedPlayer, setCurrentActivePlayer }, dispatch);
 }
 
 export default connect(null, mapDispatchToProps)(React.memo(UserNameCell));

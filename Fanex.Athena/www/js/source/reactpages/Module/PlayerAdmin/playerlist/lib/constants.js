@@ -42,6 +42,15 @@ export const columnList = (licType) => [
     licType === licenseeType.nonApi ? { key: 'Email', value: 'Email', show: true } : null
 ].filter(x => !!x);
 
+export const contextMenuList = [
+    { key: 'note', name: 'Note', tabName: 'Note' },
+    { key: 'password', name: 'Password', tabName: 'Setting' },
+    { key: 'fundtransferLimit', name: 'Fundtransfer Limit', tabName: 'TransferFund' },
+    { key: 'betLimit', name: 'Bet Limit', tabName: 'BetLimit' },
+    { key: 'statement', name: 'Statement', tabName: 'Statement' },
+    { key: 'personalMessage', name: 'Personal Message', tabName: 'Message' }
+]
+
 export const heightSlicing = {
     default: 300,
     withAdvancedSearch: 357,
