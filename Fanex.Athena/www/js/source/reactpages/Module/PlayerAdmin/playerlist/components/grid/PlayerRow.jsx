@@ -1,4 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { ActionCreators } from '../../actions';
 
 import { Row, Cell } from '@9softstudio/react-grid';
 import Switcher from '../../../../../components/Switcher';
@@ -78,4 +81,9 @@ const PlayerRow = (props) => {
     )
 }
 
-export default React.memo(PlayerRow);
+function mapDispatchToProps(dispatch) {
+    const { setSelectedPlayer, setCurrentActivePlayer } = ActionCreators;
+    return bindActionCreators({ setSelectedPlayer, setCurrentActivePlayer }, dispatch);
+}
+
+export default connect(null, mapDispatchToProps)(React.memo(PlayerRow));
