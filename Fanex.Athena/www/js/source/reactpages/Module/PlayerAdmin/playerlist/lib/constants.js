@@ -40,7 +40,7 @@ export const columnList = (licType) => [
     licType === licenseeType.nonApi ? { key: 'LastLoginIp', value: 'Last Login IP', show: true } : null,
     { key: 'LastTransaction', value: 'Last Transaction', show: true },
     licType === licenseeType.nonApi ? { key: 'Email', value: 'Email', show: true } : null
-]
+].filter(x => !!x);
 
 export const heightSlicing = {
     default: 300,

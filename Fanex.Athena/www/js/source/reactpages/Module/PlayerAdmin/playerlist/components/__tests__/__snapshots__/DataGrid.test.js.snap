@@ -67,51 +67,9 @@ exports[`DataGrid _buildDataRow - should match snapshot 1`] = `
 
 exports[`DataGrid _buildOddsGroupCell - should match snapshot 1`] = `
 <div>
-  <select
-    className="select-default select-oddsgroup"
-    onChange={[Function]}
-  >
-    <option
-      style={
-        Object {
-          "backgroundColor": "#007C00",
-          "color": "#fff",
-        }
-      }
-    >
-      A
-    </option>
-    <option
-      style={
-        Object {
-          "backgroundColor": "#3298FD",
-          "color": "#fff",
-        }
-      }
-    >
-      B
-    </option>
-    <option
-      style={null}
-    >
-      C
-    </option>
-    <option
-      style={null}
-    >
-      D
-    </option>
-    <option
-      style={null}
-    >
-      E
-    </option>
-    <option
-      style={null}
-    >
-      F
-    </option>
-  </select>
+  <Memo(DropdownLabel)
+    onClick={[Function]}
+  />
 </div>
 `;
 
