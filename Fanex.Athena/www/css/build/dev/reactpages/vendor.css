@@ -1348,5 +1348,21 @@ button.close {
   padding: 5px;
   background: #fff; }
 
+.chevron {
+  width: 8px;
+  height: 8px;
+  border-top: 1px solid #fff;
+  border-right: 1px solid #fff;
+  transition: 0.3s all cubic-bezier(1, 0.25, 0.25, 0.8);
+  will-change: transform;
+  display: inline-block; }
+  .chevron.down {
+    transform: rotate(135deg);
+    margin-bottom: 3px; }
+  .chevron.up {
+    transform: rotate(-45deg); }
+  .chevron.right {
+    transform: rotate(45deg); }
+
 
 /*# sourceMappingURL=vendor.css.map*/

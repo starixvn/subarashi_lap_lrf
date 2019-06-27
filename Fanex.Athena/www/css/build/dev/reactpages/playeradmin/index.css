@@ -330,6 +330,11 @@
 .multiple-select-item label {
   margin-bottom: 0; }
 
+.multiple-select-label {
+  height: 23px;
+  padding-top: 3px;
+  padding-bottom: 5px; }
+
 .multiple-select-options-container .multiple-select-item label {
   color: #2c2c2c; }
 
@@ -494,8 +499,8 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::after {
   /* Dropdown Button */
   /* Dropdown Content */ }
   .dropdown .dropdown-toggle {
-    padding: 4px 10px;
-    font-size: 12px;
+    padding: 0 10px;
+    font-size: 11px;
     border: none;
     cursor: pointer;
     border-radius: 3px; }
@@ -537,6 +542,26 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::after {
       .dropdown .dropdown-menu .dropdown-item:hover {
         background-color: #ddd; }
 
+.dropdown-label-container {
+  border: 1px solid #C0C0BE;
+  border-radius: 3px;
+  cursor: pointer;
+  background-color: #f7f2f2; }
+  .dropdown-label-container .dropdown-label {
+    width: calc(100% - 17px);
+    border: 1px solid #fff;
+    border-radius: 3px;
+    color: #000;
+    display: inline-block;
+    margin-right: 4px;
+    padding: 2px 0; }
+    .dropdown-label-container .dropdown-label-icon.chevron {
+      border-top: 2px solid #7d7d65;
+      border-right: 2px solid #7d7d65; }
+      .dropdown-label-container .dropdown-label-icon.chevron.down {
+        margin-bottom: 1px;
+        margin-right: 1px; }
+
 #app-container {
   max-width: 1920px; }
 
@@ -546,12 +571,26 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::after {
 .material-icons {
   font-size: 12px; }
 
+/*Filter*/
 .page-filter .search-option .dropdown-menu {
   width: 200px; }
 
 .page-filter .search-option .keyword {
   color: #f31111; }
 
+/*End Filter*/
+/*Search Option*/
+.search-option.dropdown .dropdown-menu .dropdown-item {
+  padding: 0; }
+
+.search-option .selection-item {
+  margin-bottom: 0;
+  padding: 5px 10px;
+  width: 100%;
+  height: 100%;
+  cursor: pointer; }
+
+/*End Search Option*/
 /*Right part*/
 .caret-block {
   bottom: 0;
@@ -577,6 +616,8 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::after {
       .caret-block .multiple-select-container .multiple-select-label:hover {
         color: #dec5c5; }
 
+/*End Right part*/
+/*Tab*/
 .header-tab {
   margin: 0;
   border-left: 1px solid #d6d6d6;
@@ -590,6 +631,8 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::after {
     .header-tab .tabs .tab a.active {
       color: #f05b1f; }
 
+/*End Tab*/
+/*Grid*/
 .btn-outline {
   margin-left: 10px; }
   .btn-outline .close {
@@ -602,10 +645,30 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::after {
 .cell-menu {
   float: right; }
 
-.result-content .context-menu {
+.result-content .context-menu, .result-content .special-level-menu, .result-content .oddsgroup-menu {
   position: fixed;
   z-index: 1; }
 
+.result-content .icon-separator {
+  border-top-width: 2px;
+  border-right-width: 2px;
+  margin: 0 5px; }
+
+.result-content .special-level-menu .dropdown-menu, .result-content .oddsgroup-menu .dropdown-menu {
+  min-width: 100px; }
+
+.result-content .special-level-menu .dropdown-item, .result-content .oddsgroup-menu .dropdown-item {
+  padding: 1px 0;
+  border-top: 1px solid #fff;
+  text-align: center; }
+  .result-content .special-level-menu .dropdown-item:hover, .result-content .oddsgroup-menu .dropdown-item:hover {
+    border: 1px solid #d4d4d4; }
+
+.result-content .oddsgroup-menu .oddsgroup-item {
+  border-top: 1px solid #ddd; }
+
+/*End Grid*/
+/*Paging*/
 .page-container .icon {
   font-family: 'Material Icons' !important;
   font-weight: normal;
@@ -653,6 +716,8 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::after {
     content: '' !important; }
   .page-container .page-last.disable {
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAQAAABIkb+zAAABgElEQVR4Ae2aAUTEYBiG5xSBIIIgdAR12/cBAYDDHbpCHAQQAqAQAEEBAupABAEUAAhBSEgChCR0EI5aHF7CN6G5/+V9XgDwsG3PtmV/QQghhBBCCCGEEEIIu1iazf4RL38vqxsv7SVfoxbw0r78MJsiFhjvLm+SCmCfvsMqgNn18hynAGZv1qYVwE4WZzgFMHvyFVIBbOR7WYNTALOb1gKpADa0Hq0Ado5aIhVALdEKoJYoBB4CCdRS4gK2bqf2HSigllIW6Fin2PXXQAG1lLDAWGHDrgIF1FLSAmOJAx8GEqilRAWwvt96GddSwgJYNz/2UVUtJSyAbdtzVS0lLID1fFBVSwQCdhYLFFvpH0KPvIdQtziqOIn3swbxZbRV6EZWY0psxinh79amjrnV+dRzekCd0/El0+/zJvUjpU/roX4yAnbJ/Frlw/p6tTghAZQOpUBQOvrAUQNx6VAKxKWjz6x1EZcOkUB16ehnj3pB6UxQQAghhBBCCCGEEEKIH7YvWTW0vN9CAAAAAElFTkSuQmCC); }
+
+/*End Paging*/
 
 
 /*# sourceMappingURL=index.css.map*/

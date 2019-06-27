@@ -1305,12 +1305,17 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return CollapsiblePanel; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -1347,11 +1352,22 @@ function (_React$Component) {
 
     _defineProperty(_assertThisInitialized(_this), "onClick", function () {
       var newState = !_this.state.isCollapsed;
+      var _this$props = _this.props,
+          onCollapse = _this$props.onCollapse,
+          onExpand = _this$props.onExpand;
+
+      if (newState) {
+        onCollapse && onCollapse();
+      }
 
       _this.setState({
         isCollapsed: newState
       }, function () {
         window.dispatchEvent(new Event('resize'));
+
+        if (!newState) {
+          onExpand && onExpand();
+        }
       });
     });
 
@@ -1364,16 +1380,24 @@ function (_React$Component) {
   _createClass(CollapsiblePanel, [{
     key: "render",
     value: function render() {
-      var stickyFooter = this.props.stickyFooter;
-      var handler = null;
-      var arrowStyle = {
+      var _this$props2 = this.props,
+          stickyFooter = _this$props2.stickyFooter,
+          iconContainerStyle = _this$props2.iconContainerStyle,
+          iconToggle = _this$props2.iconToggle;
+
+      var tag = iconToggle.tag,
+          className = iconToggle.className,
+          style = iconToggle.style,
+          attrs = _objectWithoutProperties(iconToggle, ["tag", "className", "style"]);
+
+      var IconTag = tag;
+      var iconStyle = style || {
         transform: this.state.isCollapsed ? null : 'rotate(180deg)',
         color: '#fff',
         textAlign: 'center',
-        marginTop: '10px',
         background: '#4c6274',
-        height: "20px",
-        width: "25px",
+        height: "15px",
+        width: "20px",
         float: 'left'
       };
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1386,17 +1410,12 @@ function (_React$Component) {
         className: "caret-block"
       }, stickyFooter), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "filter-handle",
-        style: {
-          height: "20px",
-          width: "25px",
-          margin: 'auto',
-          cursor: 'pointer'
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "icon-arrow",
-        onClick: this.onClick,
-        style: arrowStyle
-      })));
+        style: iconContainerStyle,
+        onClick: this.onClick
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(IconTag, _extends({
+        className: className,
+        style: iconStyle
+      }, attrs))));
     }
   }]);
 
@@ -1404,10 +1423,36 @@ function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 _defineProperty(CollapsiblePanel, "propTypes", {
-  stickyFooter: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node
+  stickyFooter: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node,
+  onCollapse: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  onExpand: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func
 });
 
-
+var propTypes = {
+  stickyFooter: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node,
+  onCollapse: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  onExpand: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  iconToggle: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object
+};
+var defaultProps = {
+  iconContainerStyle: {
+    height: "15px",
+    width: "20px",
+    cursor: 'pointer',
+    position: 'absolute',
+    left: 'calc(50% - 10px)',
+    bottom: 0,
+    padding: '1px 5px'
+  },
+  iconToggle: {
+    tag: 'i',
+    className: 'icon-arrow',
+    style: null
+  }
+};
+CollapsiblePanel.propTypes = propTypes;
+CollapsiblePanel.defaultProps = defaultProps;
+/* harmony default export */ __webpack_exports__["default"] = (CollapsiblePanel);
 
 /***/ }),
 
