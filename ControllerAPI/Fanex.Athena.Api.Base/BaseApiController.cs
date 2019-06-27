@@ -68,6 +68,8 @@ namespace Fanex.Athena.Api.Base
                   }
                   finally
                   {
+                      workbook.Close();
+                      workbook = null;
                       stream.Close();
                       context.Dispose();
                   }
