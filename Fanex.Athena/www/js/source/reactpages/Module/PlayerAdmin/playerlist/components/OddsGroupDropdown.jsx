@@ -3,7 +3,7 @@ import { DropdownMenu, DropdownItem } from '../../../../components/dropdown';
 import { oddsGroupListWithStyle } from '../lib/constants';
 
 const SpecialLevelDropdown = (props) => {
-    const { position, onClose } = props;
+    const { position, onClose, onChange } = props;
     const isOpen = position !== null;
 
     const style = position && {
@@ -18,7 +18,8 @@ const SpecialLevelDropdown = (props) => {
                     Object.keys(oddsGroupListWithStyle).map(item => {
                         const style = oddsGroupListWithStyle[item];
 
-                        return <DropdownItem key={item} className="oddsgroup-item" style={style}>{item}</DropdownItem>
+                        return <DropdownItem key={item} className="oddsgroup-item" style={style} 
+                                    onClick={e => onChange(e, item)}>{item}</DropdownItem>
                     })
                 }
             </DropdownMenu>

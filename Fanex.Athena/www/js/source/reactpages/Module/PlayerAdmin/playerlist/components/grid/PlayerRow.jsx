@@ -1,4 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { ActionCreators } from '../../actions';
+import { bindActionCreators } from 'redux';
+
 import { Row, Cell } from '@9softstudio/react-grid';
 import Switcher from '../../../../../components/Switcher';
 
@@ -15,23 +19,33 @@ const PlayerRow = (props) => {
         handleEnterContextMenu, 
         handleLeaveContextMenu,
         handleToggleOddsGroup,
-        handleToggleSpecialLevel
+        handleToggleSpecialLevel,
+        setCurrentActivePlayer
     } = props;
 
     const userNameProps = {
         dataItem: dataItem,
-        handleEnterContextMenu,
+        handleEnterContextMenu: (e) => {
+            handleEnterContextMenu(e);
+            setCurrentActivePlayer({custId: dataItem.CustId});
+        },
         handleLeaveContextMenu
     }
 
     const oddsGroupProps = {
         value: dataItem.OddsGroup,
-        handleToggleOddsGroup
+        handleToggleOddsGroup: (e) => {
+            handleToggleOddsGroup(e);
+            setCurrentActivePlayer({custId: dataItem.CustId});
+        }
     }
 
     const specialProps = {
         value: dataItem.SpecialLevel,
-        handleToggleSpecialLevel
+        handleToggleSpecialLevel: (e) => {
+            handleToggleSpecialLevel(e);
+            setCurrentActivePlayer({custId: dataItem.CustId});
+        }
     }
 
     // handleCheckPlayer = (custId) => {
@@ -70,4 +84,9 @@ const PlayerRow = (props) => {
     )
 }
 
-export default PlayerRow;
+function mapDispatchToProps(dispatch) {
+    const { setCurrentActivePlayer } = ActionCreators;
+    return bindActionCreators({ setCurrentActivePlayer }, dispatch);
+}
+
+export default connect(null, mapDispatchToProps)(React.memo(PlayerRow));

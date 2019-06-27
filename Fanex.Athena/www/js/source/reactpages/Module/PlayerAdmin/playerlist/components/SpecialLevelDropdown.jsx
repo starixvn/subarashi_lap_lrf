@@ -7,7 +7,7 @@ const SpecialLevelDropdown = (props) => {
         return level === '0' ? 'None' : level;
     }
 
-    const { position, onClose } = props;
+    const { position, onClose, onChange } = props;
     const isOpen = position !== null;
     const style = position && {
         top: position.y + 20,
@@ -21,7 +21,7 @@ const SpecialLevelDropdown = (props) => {
                     Object.keys(specialLevelListWithColor).map(item => {
                         const color = specialLevelListWithColor[item];
                         return <DropdownItem key={item} className="special-level-item" 
-                                style={{ backgroundColor: color }}>{getLabel(item)}</DropdownItem>
+                                style={{ backgroundColor: color }} onClick={e => onChange(e, item)}>{getLabel(item)}</DropdownItem>
                     })
                 }
             </DropdownMenu>

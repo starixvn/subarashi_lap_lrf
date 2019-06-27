@@ -32,7 +32,6 @@ export class DataGrid extends PureComponent {
 
         return displayedColumnList.reduce((accumulator, currentItem) => {
             accumulator[currentItem.key] = currentItem.show;
-
             return accumulator;
         }, {})
     }
@@ -82,10 +81,10 @@ export class DataGrid extends PureComponent {
         }, 10);
     }
 
-    handleToggleSpecialLevel = (event) => {
-        const { specialLevelDropdownPosition } = this.state;
-        if (specialLevelDropdownPosition) {
-            this.setState({ specialLevelDropdownPosition: null });
+    _handlerToggleDropdownLabel(event, stateName) {
+        const currentPosition = this.state[stateName];
+        if (currentPosition) {
+            this.setState({ [stateName]: null });
         }
         else {
             var rect = event.target.getBoundingClientRect();
@@ -94,24 +93,16 @@ export class DataGrid extends PureComponent {
                 y: rect.top
             };
 
-            this.setState({ specialLevelDropdownPosition: position });
+            this.setState({ [stateName]: position });
         }
     }
 
-    handleToggleOddsGroup = (event) => {
-        const { oddsGroupDropdownPosition } = this.state;
-        if (oddsGroupDropdownPosition) {
-            this.setState({ oddsGroupDropdownPosition: null });
-        }
-        else {
-            var rect = event.target.getBoundingClientRect();
-            const position = {
-                x: rect.left,
-                y: rect.top
-            };
+    handleToggleSpecialLevel = (event) => {
+        this._handlerToggleDropdownLabel(event, 'specialLevelDropdownPosition');
+    }
 
-            this.setState({ oddsGroupDropdownPosition: position });
-        }
+    handleToggleOddsGroup = (event) => {
+        this._handlerToggleDropdownLabel(event, 'oddsGroupDropdownPosition');
     }
 
     handleChangeUpdatePlayerItem = (custId, value, fieldName) => {
@@ -127,12 +118,22 @@ export class DataGrid extends PureComponent {
         this.handleChangeUpdatePlayerItem(custId, value, 'BaStatus');
     }
 
-    handleChangeOddsGroup = (custId, value) => {
-        this.handleChangeUpdatePlayerItem(custId, value, 'OddsGroup');
+    handleChangeOddsGroup = (event, value) => {
+        event.preventDefault();
+        const { currentActivePlayer } = this.props;
+        if (currentActivePlayer) {
+            this.handleChangeUpdatePlayerItem(currentActivePlayer.custId, value, 'OddsGroup');
+            this.handleToggleOddsGroup();
+        }
     }
 
-    handleChangeSpecialLevel = (custId, value) => {
-        this.handleChangeUpdatePlayerItem(custId, value, 'SpecialLevel');
+    handleChangeSpecialLevel = (event, value) => {
+        event.preventDefault();
+        const { currentActivePlayer } = this.props;
+        if (currentActivePlayer) {
+            this.handleChangeUpdatePlayerItem(currentActivePlayer.custId, value, 'SpecialLevel');
+            this.handleToggleSpecialLevel();
+        }
     }
 
     render() {
@@ -153,21 +154,23 @@ export class DataGrid extends PureComponent {
                     body={this._renderDataSection(dataList, displayedColumn)}
                     containerPadding={30} />
                 <ContextMenu isOpenContextMenu={isOpenContextMenu} position={contextMenuPosition} />
-                <SpecialLevelDropdown position={specialLevelDropdownPosition} onClose={this.handleToggleSpecialLevel} />
-                <OddsGroupDropdown position={oddsGroupDropdownPosition} onClose={this.handleToggleOddsGroup} />
+                <SpecialLevelDropdown position={specialLevelDropdownPosition} 
+                    onClose={this.handleToggleSpecialLevel} onChange={this.handleChangeSpecialLevel} />
+                <OddsGroupDropdown position={oddsGroupDropdownPosition} 
+                    onClose={this.handleToggleOddsGroup} onChange={this.handleChangeOddsGroup} />
             </>
         );
     }
 }
 
 function mapDispatchToProps(dispatch) {
-    const { setSelectedPlayerIdList, setPlayerList } = ActionCreators;
-    return bindActionCreators({ setSelectedPlayerIdList, setPlayerList }, dispatch);
+    const { setSelectedPlayerIdList, setPlayerList, setCurrentActivePlayer } = ActionCreators;
+    return bindActionCreators({ setSelectedPlayerIdList, setPlayerList, setCurrentActivePlayer }, dispatch);
 }
 
 function mapStateToProps(state) {
-    const { playerList, selectedPlayer, selectedPlayerIdList, displayedColumnList } = state;
-    return Object.assign({}, { playerList, selectedPlayer, selectedPlayerIdList, displayedColumnList });
+    const { playerList, selectedPlayer, selectedPlayerIdList, displayedColumnList, currentActivePlayer } = state;
+    return Object.assign({}, { playerList, selectedPlayer, selectedPlayerIdList, displayedColumnList, currentActivePlayer });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DataGrid);
