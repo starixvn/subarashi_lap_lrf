@@ -7,9 +7,9 @@ import { Table } from '@9softstudio/react-grid';
 import ContextMenu from './ContextMenu';
 import SpecialLevelDropdown from './SpecialLevelDropdown';
 import { updateObjectInArray } from '../../../../lib/dataReducer';
+import GridHelper from '../lib/gridHelper';
 import OddsGroupDropdown from './OddsGroupDropdown.jsx';
 import PlayerRow from './grid/PlayerRow.jsx';
-import GridHeader from './grid/GridHeader';
 
 const MAX_WIDTH_PAGE = 1920;
 
@@ -20,8 +20,8 @@ export class DataGrid extends PureComponent {
         this.maxWidth = Math.min(document.body.clientWidth, MAX_WIDTH_PAGE);
 
         this.state = {
-            contextMenuPosition: null,
             isOpenContextMenu: false,
+            contextMenuPosition: null,
             specialLevelDropdownPosition: null,
             oddsGroupDropdownPosition: null
         }
@@ -98,10 +98,6 @@ export class DataGrid extends PureComponent {
         }
     }
 
-    handleCloseSpecialLevel = () => {
-        this.setState({ specialLevelDropdownPosition: null });
-    }
-
     handleToggleOddsGroup = (event) => {
         const { oddsGroupDropdownPosition } = this.state;
         if (oddsGroupDropdownPosition) {
@@ -116,10 +112,6 @@ export class DataGrid extends PureComponent {
 
             this.setState({ oddsGroupDropdownPosition: position });
         }
-    }
-
-    handleCloseOddsGroup = () => {
-        this.setState({ oddsGroupDropdownPosition: null });
     }
 
     handleChangeUpdatePlayerItem = (custId, value, fieldName) => {
@@ -157,12 +149,12 @@ export class DataGrid extends PureComponent {
                     autoHeight={false}
                     bodyHeight={300}
                     adjustedHeight={32}
-                    header={<GridHeader displayedColumn={displayedColumn} />}
+                    header={GridHelper.renderHeader(displayedColumn)}
                     body={this._renderDataSection(dataList, displayedColumn)}
                     containerPadding={30} />
                 <ContextMenu isOpenContextMenu={isOpenContextMenu} position={contextMenuPosition} />
-                <SpecialLevelDropdown position={specialLevelDropdownPosition} onClose={this.handleCloseSpecialLevel} />
-                <OddsGroupDropdown position={oddsGroupDropdownPosition} onClose={this.handleCloseOddsGroup} />
+                <SpecialLevelDropdown position={specialLevelDropdownPosition} onClose={this.handleToggleSpecialLevel} />
+                <OddsGroupDropdown position={oddsGroupDropdownPosition} onClose={this.handleToggleOddsGroup} />
             </>
         );
     }

@@ -11,7 +11,7 @@ const DropdownLabel = (props) => {
 
     return (
         <div className={classes} {...attrs}>
-            <span class="dropdown-label" style={labelStyle}>{text}</span>
+            <span className="dropdown-label" style={labelStyle}>{text}</span>
             {iconElement}
         </div>
     )
@@ -22,14 +22,14 @@ const propTypes = {
     disabled: PropTypes.bool,
     onClick: PropTypes.func,
     className: PropTypes.string,
-    text: PropTypes.string,
+    text: PropTypes.any,
     iconElement: PropTypes.any,
     labelStyle: PropTypes.object
 };
 
 const defaultProps = {
     disabled: false,
-    iconElement: (<i class="dropdown-label-icon chevron down"></i>)
+    iconElement: (<i className="dropdown-label-icon chevron down"></i>)
 };
 
 DropdownLabel.propTypes = propTypes;
