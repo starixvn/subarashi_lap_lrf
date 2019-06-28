@@ -7,6 +7,7 @@
 @import "../../components/switch";
 @import "../../components/dropdown";
 @import "../../components/dropdownlabel";
+@import "../../components/popup";
 
 $borderContainer: #d6d6d6;
 
@@ -24,6 +25,7 @@ $borderContainer: #d6d6d6;
 
 /*Filter*/
 .page-filter {
+    min-height: 30px;
     .search-option {
         .dropdown {
             &-menu {
