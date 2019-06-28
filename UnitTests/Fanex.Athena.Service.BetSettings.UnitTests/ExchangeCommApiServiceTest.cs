@@ -179,25 +179,6 @@
             });
         }
 
-        [Test]
-        public async Task UpdateCommissionAsync_ApiThrowException_LogAndReturnFailedResult()
-        {
-            // Arrange
-            var errorMsg = FakeHelper.Create<string>();
-            _authorizationService.HasPermissionOnData(_licenseeId, _custId, 0).ReturnsForAnyArgs(true);
-            _betSettingDataAccess.GetStatusAsync(_custId, ProductTypes.Exchange).ReturnsForAnyArgs(Task.FromResult((bool?)true));
-            _apiClient.updateCommission(_custId, 0, Enviro.PRD).ReturnsForAnyArgs(x => { throw new Exception(errorMsg); });
-
-            // Action
-            var result = await _service.UpdateCommissionAsync(_licenseeId, _userId, _custId, 0, 0);
-
-            // Assert
-            Assert.Multiple(() =>
-            {
-                _logger.Received(1).Error("Exchange Api updateCommission: " + errorMsg);
-                Assert.That(result.IsSuccessful, Is.False);
-            });
-        }
 
         [Test]
         public async Task UpdateCommissionAsync_CallApiSuccess_CallWriteLogRunSP()

@@ -89,7 +89,7 @@ namespace Fanex.Athena.Excel.Report.UnitTests
             excel.Public_AssignNoInfoRow(FakeSheet);
 
             // Assert
-            FakeSheet.Received().SetTextRowValue(excel.TemplateSheet, Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(), ViewResources.NoInfo);
+            FakeSheet.Received().SetTextRowValue(excel.TemplateSheet, 0,1, 5, ViewResources.NoInfo);
         }
 
         [Test]
