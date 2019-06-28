@@ -54,13 +54,14 @@ export default class PlayerListService {
         const lapPromise = this.commonService.fetchData(lapPlayerList.type, lapPlayerList.action, {...param });
 
         return this.commonService.fetchMultiple([lrfPromise, lapPromise], (lrfResponse, lapResponse) => {
-            const lrfPlayerList = lrfResponse.data.MainData;
+            const { MainData: lrfPlayerList, TotalItem: lrfTotalItem } = lrfResponse.data;
             const lapResponseData = lapResponse.data;
 
             const playerList = this._mergePlayerList(lrfPlayerList, lapResponseData.PlayerList);
 
             return {
-                playerList
+                playerList,
+                totalItem: 1000
             };
         })
     }

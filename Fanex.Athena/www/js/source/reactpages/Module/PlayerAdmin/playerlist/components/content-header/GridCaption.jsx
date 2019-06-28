@@ -2,11 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { ActionCreators } from '../actions/index.js';
-import ReportTitle from '../../../../components/ReportTitle';
+import { ActionCreators } from '../../actions';
+import ReportTitle from '@jsroot/components/ReportTitle';
 import MultipleSelect from '@9softstudio/react-multiselect';
 import BatchUpdateButton from './BatchUpdateButton';
-import LangHelper from '../../../../lib/langHelper';
+import LangHelper from '@jsroot/lib/langHelper';
 
 export class GridCaption extends React.PureComponent {
     constructor(props) {
@@ -58,8 +58,8 @@ export class GridCaption extends React.PureComponent {
         //     )
         // }
         else {
-            const { playerList } = this.props;
-            return (<span key="searchResult">{`Search Result: ${playerList.length} Player(s)`}</span>);
+            const { playerCount } = this.props;
+            return (<span key="searchResult">{`Search Result: ${playerCount} Player(s)`}</span>);
         }
     }
 
@@ -86,7 +86,8 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
     const { playerList, selectedPlayer, selectedPlayerIdList, displayedColumnList } = state;
-    return Object.assign({}, { playerList, selectedPlayer, selectedPlayerIdList, displayedColumnList });
+    const playerCount = (playerList && playerList.length) ? playerList.length : 0;
+    return Object.assign({}, { playerCount, selectedPlayer, selectedPlayerIdList, displayedColumnList });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(GridCaption);

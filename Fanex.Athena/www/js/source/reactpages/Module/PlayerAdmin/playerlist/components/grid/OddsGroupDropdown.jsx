@@ -1,13 +1,13 @@
 import React from 'react';
-import { DropdownMenu, DropdownItem } from '../../../../components/dropdown';
-import { oddsGroupListWithStyle } from '../lib/constants';
+import { DropdownMenu, DropdownItem } from '@jsroot/components/dropdown';
+import { oddsGroupListWithStyle } from '../../lib/constants';
 
-const SpecialLevelDropdown = (props) => {
+const OddsGroupDropdown = (props) => {
     const { position, onClose, onChange } = props;
     const isOpen = position !== null;
 
     const style = position && {
-        top: position.y + 20,
+        top: position.y,
         left: position.x
     }
 
@@ -27,4 +27,4 @@ const SpecialLevelDropdown = (props) => {
     )
 }
 
-export default React.memo(SpecialLevelDropdown);
+export default React.memo(OddsGroupDropdown);

@@ -175,52 +175,7 @@ exports[`ContextMenu onMouseLeave - isOpen should rely on props.isOpenContextMen
 `;
 
 exports[`ContextMenu with default props and inital state - should match snapshot 1`] = `
-<div
-  className="dropdown context-menu"
-  style={null}
->
-  <DropdownMenu
-    isOpen={false}
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-    tag="div"
-  >
-    <DropdownItem
-      disabled={false}
-      tag="button"
-    >
-      Note
-    </DropdownItem>
-    <DropdownItem
-      disabled={false}
-      tag="button"
-    >
-      Password
-    </DropdownItem>
-    <DropdownItem
-      disabled={false}
-      tag="button"
-    >
-      Fundtransfer Limit
-    </DropdownItem>
-    <DropdownItem
-      disabled={false}
-      tag="button"
-    >
-      Bet Limit
-    </DropdownItem>
-    <DropdownItem
-      disabled={false}
-      tag="button"
-    >
-      Statement
-    </DropdownItem>
-    <DropdownItem
-      disabled={false}
-      tag="button"
-    >
-      Personal Message
-    </DropdownItem>
-  </DropdownMenu>
-</div>
+<ContextConsumer>
+  <Component />
+</ContextConsumer>
 `;

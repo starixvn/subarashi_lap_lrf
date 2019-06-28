@@ -1,11 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux'
-import { ActionCreators } from '../actions'
-import Content from './Content'
-import FormFilter from './FormFilter'
-import Loader from '../../../../components/Loader'
-import AppLayout from '../../../../layouts/AppLayout'
+import Content from './Content';
+import FormFilter from './FormFilter';
+import Loader from '@jsroot/components/Loader';
+import AppLayout from '@jsroot/layouts/AppLayout';
 import PlayerDetail from './PlayerDetail';
 
 export const AppContainer = (props) => {
@@ -19,14 +17,9 @@ export const AppContainer = (props) => {
     );
 }
 
-function mapDispatchToProps(dispatch) {
-    const { } = ActionCreators;
-    return bindActionCreators({ }, dispatch);
-}
-
 function mapStateToProps(state) {
     const { isLoading } = state;
     return Object.assign({}, { isLoading });
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(React.memo(AppContainer));
+export default connect(mapStateToProps)(React.memo(AppContainer));

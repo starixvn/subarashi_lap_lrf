@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { DropdownButton, DropdownItem } from '../../../../components/dropdown';
+import { DropdownButton, DropdownItem } from '@jsroot/components/dropdown';
 
 const BatchUpdateButton = (props) => {
     const [isOpen, setIsOpen] = useState(false);

@@ -3,44 +3,44 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { Pager } from '@9softstudio/react-grid';
-import GridCaption from './GridCaption';
+import GridCaption from './content-header/GridCaption';
 import DataGrid from './DataGrid';
+import { ActionCreators } from '../actions';
 
-export class Content extends React.PureComponent {
-    constructor(props) {
-        super(props);
+export const Content = (props) => {
+    const { pagingOption } = props;
 
-        this.state = {
-            pagingOption: {
-                PageIndex: 1,
-                PageSize: 50,
-                PageList: [50, 100, 200, 500],
-                TotalItem: 1000
-            }
+    if (pagingOption.TotalItem === null) {
+        return;
+    }
+
+    const handlePaging = (pageIndex, pageSize) => {
+        const { param, searchPlayer } = props;
+        const newParam = {
+            ...param,
+            pageIndex,
+            pageSize,
         }
+
+        searchPlayer(newParam);
     }
 
-    render() {
-        const { playerList } = this.props;
-        const { pagingOption } = this.state;
-
-        return ( playerList &&
-            <div className="result-content">
-                <Pager pageOption={pagingOption} />
-                <GridCaption />
-                <DataGrid />
-            </div>
-        )
-    }
+    return (
+        <div className="result-content">
+            <Pager pageOption={pagingOption} onPaging={handlePaging} />
+            <GridCaption />
+            <DataGrid />
+        </div>
+    )
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ }, dispatch);
+    const { searchPlayer } = ActionCreators;
+    return bindActionCreators({ searchPlayer }, dispatch);
 }
-
 function mapStateToProps(state) {
-    const { playerList } = state;
-    return Object.assign({}, { playerList });
+    const { pagingOption, param } = state;
+    return Object.assign({}, { pagingOption, param });
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Content);
+export default connect(mapStateToProps, mapDispatchToProps)(React.memo(Content));

@@ -22,6 +22,5 @@ const devByPageConfig = {...devConfig,
         new MiniCssExtractPlugin({ filename: "[name].css", chunkFilename: '[id].css' })
     ]
 };
-console.log(devByPageConfig.entry);
 
 module.exports = devByPageConfig;

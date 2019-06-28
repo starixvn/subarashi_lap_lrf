@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { ActionCreators } from '../actions';
+import { ActionCreators } from '../../actions';
 
-import { DropdownMenu, DropdownItem } from '../../../../components/dropdown';
-import { contextMenuList } from '../lib/constants';
+import { DropdownMenu, DropdownItem } from '@jsroot/components/dropdown';
+import { contextMenuList } from '../../lib/constants';
 
 
 const ContextMenu = (props) => {

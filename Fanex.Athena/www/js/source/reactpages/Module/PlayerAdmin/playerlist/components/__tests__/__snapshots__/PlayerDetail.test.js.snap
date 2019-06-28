@@ -7,7 +7,7 @@ exports[`PlayerDetail _renderTabList - should match snapshot 1`] = `
     key="test1"
   >
     <a
-      className="active"
+      className=""
       href="test1/action1?systemType=0"
       onClick={[Function]}
     >

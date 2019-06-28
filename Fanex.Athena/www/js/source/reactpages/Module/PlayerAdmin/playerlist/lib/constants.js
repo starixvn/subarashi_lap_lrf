@@ -56,3 +56,16 @@ export const heightSlicing = {
     withAdvancedSearch: 357,
     whenCollapsing: 235
 }
+
+export const searchOptions = {
+    matchPrefix: '1',
+    matchCase: '2',
+    matchWholeWord: '3'
+}
+
+export const defaultPagingOption = {
+    PageIndex: 1,
+    PageSize: 50,
+    PageList: [50, 100, 200, 500],
+    TotalItem: null
+}

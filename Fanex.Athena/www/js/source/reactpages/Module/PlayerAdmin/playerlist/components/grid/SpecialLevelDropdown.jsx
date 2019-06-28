@@ -1,6 +1,6 @@
 import React from 'react';
-import { DropdownMenu, DropdownItem } from '../../../../components/dropdown';
-import { specialLevelListWithColor } from '../lib/constants';
+import { DropdownMenu, DropdownItem } from '@jsroot/components/dropdown';
+import { specialLevelListWithColor } from '../../lib/constants';
 
 const SpecialLevelDropdown = (props) => {
     const getLabel = (level) => {
@@ -10,7 +10,7 @@ const SpecialLevelDropdown = (props) => {
     const { position, onClose, onChange } = props;
     const isOpen = position !== null;
     const style = position && {
-        top: position.y + 20,
+        top: position.y,
         left: position.x
     }
 

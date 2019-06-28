@@ -3,13 +3,14 @@ import { connect } from 'react-redux'
 import { ActionCreators } from '../actions/index.js'
 import { bindActionCreators } from 'redux'
 import CheckBox from '@jsroot/components/CheckBox'
-import AdvancedSearch from './AdvancedSearch';
-import SearchOption from './SearchOption';
-import AthenaSearch from './AthenaSearch';
+import AdvancedSearch from './filter/AdvancedSearch';
+import SearchOption from './filter/SearchOption';
+import AthenaSearch from './filter/AthenaSearch';
 import { licenseeType } from '../lib/constants';
 import CollapsiblePanel from '@jsroot/components/collapsible-panel';
 import UserGuide from '@jsroot/components/UserGuide';
 import LangHelper from '@jsroot/lib/langHelper';
+import { searchOptions } from '../lib/constants';
 
 export class FormFilter extends PureComponent {
     constructor(props) {
@@ -22,7 +23,8 @@ export class FormFilter extends PureComponent {
             currency: '',
             oddsGroup: '',
             specialLevel: '',
-            baStatus: ''
+            baStatus: '',
+            searchOption: searchOptions.matchCase
         }
 
         this.userGuide = this._renderUserGuide();
@@ -30,10 +32,16 @@ export class FormFilter extends PureComponent {
 
     handleSubmit = (event) => {
         event.preventDefault();
+        const {pagingOption} = this.props;
         this.props.setSelectedPlayer(null);
-        this.props.searchPlayer({ ...this.state });
+        const param = { 
+            ...this.state, 
+            pageSize: pagingOption.PageSize, 
+            pageIndex: pagingOption.PageIndex 
+        };
+        this.props.searchPlayer(param);
 
-        console.log(this.state);
+        console.log(param);
     }
 
     handleChange = (event) => {
@@ -61,7 +69,7 @@ export class FormFilter extends PureComponent {
     }
 
     render() {
-        const { userName, bankAccountNumber, email, ...advancedSearchParam } = this.state;
+        const { userName, bankAccountNumber, email, searchOption, ...advancedSearchParam } = this.state;
         const { type, isAdvancedSearch, isFilterCollapsing } = this.props;
         const iconToggle = {
             tag: 'div',
@@ -86,7 +94,7 @@ export class FormFilter extends PureComponent {
                 <div className="row">
                     <div className="col-12 col-md-4 col-sm-4 col-lg-3 col-xl-2">
                         <div className="form-group">
-                            <label className="label-text">UserName {(<SearchOption />)}</label>
+                            <label className="label-text">UserName {(<SearchOption value={searchOption} onChange={this.handleChange} />)}</label>
                             <input className="input-text" id="userName" name="userName" type="text" value={userName}
                                 autoComplete="off" onChange={this.handleChange} />
                         </div>
@@ -122,8 +130,8 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators({ searchPlayer, setSelectedPlayer, setAdvancedSearch, setCollapseFilter }, dispatch);
 }
 function mapStateToProps(state) {
-    const { type, isAdvancedSearch, isFilterCollapsing } = state;
-    return Object.assign({}, { type, isAdvancedSearch, isFilterCollapsing });
+    const { type, isAdvancedSearch, isFilterCollapsing, pagingOption } = state;
+    return Object.assign({}, { type, isAdvancedSearch, isFilterCollapsing, pagingOption });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FormFilter);

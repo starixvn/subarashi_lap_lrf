@@ -1,7 +1,9 @@
-import React, {useState} from 'react';
-import { DropdownButton, DropdownItem } from '../../../../components/dropdown';
+import React, { useState } from 'react';
+import { DropdownButton, DropdownItem } from '@jsroot/components/dropdown';
+import { searchOptions } from '../../lib/constants';
 
 const SearchOption = (props) => {
+    const { value, onChange } = props;
     const [isOpen, setIsOpen] = useState(false);
     const handleToggleDropdown = () => {
         setIsOpen(!isOpen);
@@ -15,6 +17,8 @@ const SearchOption = (props) => {
         className: 'toggle-outline toggle-outline-light'
     }
 
+    const selectedValue = value || searchOptions.matchCase;
+
     return (
         <DropdownButton className="search-option" isOpen={isOpen} toggleButton={toggleButton}
             onToggle={handleToggleDropdown}
@@ -22,13 +26,15 @@ const SearchOption = (props) => {
             onClose={handleClose}>
             <DropdownItem tag="div">
                 <label className="selection-item">
-                <input type="radio" name="searchOption" defaultChecked={true} />
+                    <input type="radio" name="searchOption" value={searchOptions.matchPrefix}
+                        checked={selectedValue === searchOptions.matchPrefix} onChange={onChange} />
                     Match prefix e.g. "<span className="keyword">test</span>"ABCD
                 </label>
             </DropdownItem>
             <DropdownItem tag="div">
                 <label className="selection-item">
-                <input type="radio" name="searchOption" />
+                    <input type="radio" name="searchOption" value={searchOptions.matchCase}
+                        checked={selectedValue === searchOptions.matchCase} onChange={onChange} />
                     Match case e.g. AB"<span className="keyword">test</span>"CD
                 </label>
             </DropdownItem>

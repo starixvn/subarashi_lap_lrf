@@ -7,11 +7,10 @@ import { heightSlicing } from '../lib/constants';
 export class PlayerDetail extends PureComponent {
     constructor(props) {
         super(props);
-
         this._tabList = this.props.getTabList();
     }
 
-    _getDefaultSelectedTab(){
+    _getDefaultSelectedTab() {
         return this._tabList && this._tabList.length && this._tabList[0].Name;
     }
 
@@ -51,10 +50,10 @@ export class PlayerDetail extends PureComponent {
         const { isAdvancedSearch, isFilterCollapsing } = this.props;
         let omittedHeight;
 
-        if(isFilterCollapsing){
+        if (isFilterCollapsing) {
             omittedHeight = heightSlicing.whenCollapsing;
         }
-        else{
+        else {
             const key = isAdvancedSearch ? 'withAdvancedSearch' : 'default';
             omittedHeight = heightSlicing[key];
         }
@@ -62,7 +61,7 @@ export class PlayerDetail extends PureComponent {
         return window.innerHeight - omittedHeight;
     }
 
-    _getActionUrl(){
+    _getActionUrl() {
         const { selectedTabName } = this.props;
         const tabItem = selectedTabName ? this._tabList.find(t => t.Name === selectedTabName) : this._tabList[0];
 
@@ -81,7 +80,7 @@ export class PlayerDetail extends PureComponent {
         }
 
         const src = this._getActionUrl();
-        if(!src){
+        if (!src) {
             return;
         }
 

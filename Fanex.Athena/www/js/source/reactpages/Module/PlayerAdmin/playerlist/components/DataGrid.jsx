@@ -4,11 +4,11 @@ import { ActionCreators } from '../actions/index.js';
 import { bindActionCreators } from 'redux';
 
 import { Table } from '@9softstudio/react-grid';
-import ContextMenu from './ContextMenu';
-import SpecialLevelDropdown from './SpecialLevelDropdown';
-import { updateObjectInArray } from '../../../../lib/dataReducer';
+import ContextMenu from './grid/ContextMenu';
+import SpecialLevelDropdown from './grid/SpecialLevelDropdown';
+import { updateObjectInArray } from '@jsroot/lib/dataReducer';
 import GridHelper from '../lib/gridHelper';
-import OddsGroupDropdown from './OddsGroupDropdown.jsx';
+import OddsGroupDropdown from './grid/OddsGroupDropdown.jsx';
 import PlayerRow from './grid/PlayerRow.jsx';
 
 const MAX_WIDTH_PAGE = 1920;
@@ -90,7 +90,7 @@ export class DataGrid extends PureComponent {
             var rect = event.target.getBoundingClientRect();
             const position = {
                 x: rect.left,
-                y: rect.top
+                y: rect.top + 20
             };
 
             this.setState({ [stateName]: position });
