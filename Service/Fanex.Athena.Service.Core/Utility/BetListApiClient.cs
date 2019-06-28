@@ -1,6 +1,7 @@
 ﻿namespace Fanex.Athena.Service.Core.Utility
 {
     using Fanex.Athena.Extension.Utility;
+    using Fanex.Athena.Service.Core.Exception;
     using Fanex.Athena.Service.Core.Utility.Interfaces;
     using Fanex.Logging;
     using Newtonsoft.Json;
@@ -40,6 +41,13 @@
                 client.Timeout = oneMinInMillisecond * timeout;
             }
             var result = await client.ExecuteTaskAsync(request).ConfigureAwait(false);
+
+            if (result.ResponseStatus != ResponseStatus.Completed)
+            {
+                var errorMessage = $"Http Error ={result.ResponseStatus}\n Error occur when query betlist data";
+                throw new ServiceException(errorMessage, "BetListApiClient");
+            }
+
             return await codeBlock(result).ConfigureAwait(false);
 
         }
