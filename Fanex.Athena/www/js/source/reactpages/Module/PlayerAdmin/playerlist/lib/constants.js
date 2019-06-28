@@ -69,3 +69,10 @@ export const defaultPagingOption = {
     PageList: [50, 100, 200, 500],
     TotalItem: null
 }
+
+export const playerStatus = {
+    '0': 'Active',
+    '1': 'Locked',
+    '2': 'Closed',
+    '3': 'Archived'
+}

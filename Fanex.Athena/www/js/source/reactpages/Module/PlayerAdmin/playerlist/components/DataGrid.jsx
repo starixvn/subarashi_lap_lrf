@@ -10,6 +10,7 @@ import { updateObjectInArray } from '@jsroot/lib/dataReducer';
 import GridHelper from '../lib/gridHelper';
 import OddsGroupDropdown from './grid/OddsGroupDropdown.jsx';
 import PlayerRow from './grid/PlayerRow.jsx';
+import StatusDropdown from './grid/StatusDropdown';
 
 const MAX_WIDTH_PAGE = 1920;
 
@@ -23,7 +24,8 @@ export class DataGrid extends PureComponent {
             isOpenContextMenu: false,
             contextMenuPosition: null,
             specialLevelDropdownPosition: null,
-            oddsGroupDropdownPosition: null
+            oddsGroupDropdownPosition: null,
+            statusDropdownPosition: null
         }
     }
 
@@ -49,7 +51,8 @@ export class DataGrid extends PureComponent {
                 handleEnterContextMenu: this.handleEnterContextMenu,
                 handleLeaveContextMenu: this.handleLeaveContextMenu,
                 handleToggleOddsGroup: this.handleToggleOddsGroup,
-                handleToggleSpecialLevel: this.handleToggleSpecialLevel
+                handleToggleSpecialLevel: this.handleToggleSpecialLevel,
+                handleToggleStatus: this.handleToggleStatus
             }
             dataRows.push(<PlayerRow key={dataItem.CustId} {...rowProps} />);
         }
@@ -105,6 +108,10 @@ export class DataGrid extends PureComponent {
         this._handlerToggleDropdownLabel(event, 'oddsGroupDropdownPosition');
     }
 
+    handleToggleStatus = (event) => {
+        this._handlerToggleDropdownLabel(event, 'statusDropdownPosition');
+    }
+
     handleChangeUpdatePlayerItem = (custId, value, fieldName) => {
         const { playerList, setPlayerList } = this.props;
         const itemIndex = playerList.findIndex(x => x.CustId === custId);
@@ -118,27 +125,30 @@ export class DataGrid extends PureComponent {
         this.handleChangeUpdatePlayerItem(custId, value, 'BaStatus');
     }
 
-    handleChangeOddsGroup = (event, value) => {
+    _handleChangeDropdownValue = (event, value, fieldName, onChangeSuccess) => {
         event.preventDefault();
         const { currentActivePlayer } = this.props;
         if (currentActivePlayer) {
-            this.handleChangeUpdatePlayerItem(currentActivePlayer.custId, value, 'OddsGroup');
-            this.handleToggleOddsGroup();
+            this.handleChangeUpdatePlayerItem(currentActivePlayer.custId, value, fieldName);
+            onChangeSuccess();
         }
     }
 
+    handleChangeOddsGroup = (event, value) => {
+        this._handleChangeDropdownValue(event, value, 'OddsGroup', this.handleToggleOddsGroup);
+    }
+
     handleChangeSpecialLevel = (event, value) => {
-        event.preventDefault();
-        const { currentActivePlayer } = this.props;
-        if (currentActivePlayer) {
-            this.handleChangeUpdatePlayerItem(currentActivePlayer.custId, value, 'SpecialLevel');
-            this.handleToggleSpecialLevel();
-        }
+        this._handleChangeDropdownValue(event, value, 'SpecialLevel', this.handleToggleSpecialLevel);
+    }
+
+    handleChangeStatus = (event, value) => {
+        this._handleChangeDropdownValue(event, value, 'Status', this.handleToggleStatus);
     }
 
     render() {
         const { playerList, selectedPlayer } = this.props;
-        const { contextMenuPosition, isOpenContextMenu, specialLevelDropdownPosition, oddsGroupDropdownPosition } = this.state;
+        const { contextMenuPosition, isOpenContextMenu, specialLevelDropdownPosition, oddsGroupDropdownPosition, statusDropdownPosition } = this.state;
         const dataList = selectedPlayer ? [playerList.find(item => item.CustId === selectedPlayer.custId)] : playerList;
         const displayedColumn = this._buildDisplayedColumn();
 
@@ -158,6 +168,8 @@ export class DataGrid extends PureComponent {
                     onClose={this.handleToggleSpecialLevel} onChange={this.handleChangeSpecialLevel} />
                 <OddsGroupDropdown position={oddsGroupDropdownPosition} 
                     onClose={this.handleToggleOddsGroup} onChange={this.handleChangeOddsGroup} />
+                <StatusDropdown position={statusDropdownPosition} 
+                    onClose={this.handleToggleStatus} onChange={this.handleChangeStatus} />
             </>
         );
     }

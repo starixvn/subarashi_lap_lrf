@@ -9,6 +9,7 @@ import Switcher from '../../../../../components/Switcher';
 import UserNameCell from './UserNameCell';
 import OddsGroupCell from './OddsGroupCell';
 import SpecialLevelCell from './SpecialLevelCell';
+import StatusCell from './StatusCell';
 
 const PlayerRow = (props) => {
     const { 
@@ -20,7 +21,8 @@ const PlayerRow = (props) => {
         handleLeaveContextMenu,
         handleToggleOddsGroup,
         handleToggleSpecialLevel,
-        setCurrentActivePlayer
+        setCurrentActivePlayer,
+        handleToggleStatus
     } = props;
 
     const userNameProps = {
@@ -45,6 +47,15 @@ const PlayerRow = (props) => {
         }
     }
 
+    const statusProps = {
+        value: dataItem.Status,
+        isOnline: dataItem.IsOnline,
+        handleToggleStatus: (e) => {
+            handleToggleStatus(e);
+            setCurrentActivePlayer({custId: dataItem.CustId});
+        }
+    }
+
     // handleCheckPlayer = (custId) => {
     //     const { selectedPlayerIdList } = this.props;
     //     const newIdList = selectedPlayerIdList.includes(custId) ?
@@ -59,7 +70,7 @@ const PlayerRow = (props) => {
             {/* <Cell className="center-align">
                     <input type="checkbox" checked={isChecked} onChange={() => handleCheckPlayer(dataItem.CustId)} />
                 </Cell> */}
-            {displayedColumn['Status'] && <Cell className="center-align">{dataItem.Status}</Cell>}
+            {displayedColumn['Status'] && <Cell className="center-align"><StatusCell {...statusProps} /></Cell>}
             {displayedColumn['Username'] && <Cell className="center-align"><UserNameCell {...userNameProps} /></Cell>}
             {displayedColumn['SystemID'] && <Cell className="center-align">{dataItem.SystemId}</Cell>}
             {displayedColumn['RealName'] && <Cell className="center-align">{dataItem.RealName}</Cell>}

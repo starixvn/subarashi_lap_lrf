@@ -24,7 +24,7 @@ export default class PlayerListService {
 
             if (lrfItem && lapItem) {
                 const { CustId, UserName, SystemId, Currency, CurrentBalance, OutstandingBalance, OddsGroup, BaStatus, SpecialLevel } = lrfItem;
-                const { Status, RealName, IP, email } = lapItem;
+                const { Status, RealName, IP, email, isOnline } = lapItem;
 
                 result.push({
                     CustId: CustId || lapItem.CustId,
@@ -39,7 +39,8 @@ export default class PlayerListService {
                     Status,
                     RealName,
                     LastLoginIp: IP,
-                    Email: email
+                    Email: email,
+                    IsOnline: isOnline
                 });
             }
         }

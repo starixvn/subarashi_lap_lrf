@@ -5,7 +5,7 @@ import classNames from 'classnames';
 const DropdownToggle = (props) => {
     const { className, tag, caret, ...attrs } = props;
     const classes = classNames('dropdown-toggle', className, {
-        caret: caret
+        'site-caret': caret
     });
     const Tag = tag;
 

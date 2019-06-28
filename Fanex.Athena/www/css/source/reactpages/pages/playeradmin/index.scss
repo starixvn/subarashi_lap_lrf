@@ -124,8 +124,6 @@ $borderContainer: #d6d6d6;
 
 /*Grid*/
 .btn-outline {
-    margin-left: 10px;
-
     .close {
         padding-left: 5px;
         text-shadow: none;
@@ -141,10 +139,40 @@ $borderContainer: #d6d6d6;
     float: right;
 }
 
+.status-cell {
+    position: relative;
+
+    .btn-status-menu {
+        position: absolute;
+        right: 0;
+        top: 4px;
+    }
+
+    .status-text {
+        margin: 0;
+    }
+}
+
 .result-content {
-    .context-menu, .special-level-menu, .oddsgroup-menu {
+    .context-menu, .special-level-menu, .oddsgroup-menu, .status-menu {
         position: fixed;
         z-index: 1;
+    }
+
+    .Active {
+        color: #00ff00 !important;
+    }
+
+    .Locked {
+        color: #333333 !important;
+    }
+
+    .Closed {
+        color: #ff0000 !important;
+    }
+
+    .Archived {
+        color: #333333 !important;
     }
 
     .icon-separator {
