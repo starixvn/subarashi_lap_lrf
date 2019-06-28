@@ -72,7 +72,7 @@
                 {
                     StringAssert.Contains("Report/SpecialLicenseeWinLoss/Main.cshtml", viewResult.ViewName);
                     Assert.That(viewModel.Param.ReportBy, Is.EqualTo(ReportByType.Daily));
-                    Assert.That(string.Join(",", viewModel.BaseCurrencyList.Values), Is.EqualTo("USD"));
+                    Assert.That(string.Join(",", viewModel.BaseCurrencyList.Values), Is.EqualTo("USD,EUR"));
                 });
             }
         }
