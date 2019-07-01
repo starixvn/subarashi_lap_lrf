@@ -28,16 +28,6 @@ export class FormFilter extends PureComponent {
         }
 
         this.userGuide = this._renderUserGuide();
-        this.iconContainerStyle = {
-            height: '15px',
-            width: '20px',
-            cursor: 'pointer',
-            position: 'absolute',
-            left: 'calc(50% - 10px)',
-            bottom: 0,
-            paddingLeft: 5,
-            background: '#4c6274'
-        }
     }
 
     handleSubmit = (event) => {
@@ -88,8 +78,7 @@ export class FormFilter extends PureComponent {
         }
 
         return (
-            <CollapsiblePanel className="page-filter" iconToggle={iconToggle} 
-                iconContainerStyle={this.iconContainerStyle} stickyFooter={this.userGuide}
+            <CollapsiblePanel className="page-filter" iconToggle={iconToggle} stickyFooter={this.userGuide}
                 onCollapse={() => this.props.setCollapseFilter(true)} onExpand={() => this.props.setCollapseFilter(false)}>
                 <div className="row">
                     <div className="col-12 col-md-4 col-sm-4 col-lg-3 col-xl-2">
