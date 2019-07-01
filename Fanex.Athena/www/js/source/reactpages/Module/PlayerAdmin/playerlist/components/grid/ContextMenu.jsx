@@ -7,7 +7,7 @@ import { DropdownMenu, DropdownItem } from '@jsroot/components/dropdown';
 import { contextMenuList } from '../../lib/constants';
 
 
-const ContextMenu = (props) => {
+export const ContextMenu = (props) => {
     const { position, isOpenContextMenu, setSelectedPlayer, currentActivePlayer, setSelectedTabName, getTabList } = props;
     const [isOpen, setIsOpen] = useState(false);
     const handleMouseEnter = () => {

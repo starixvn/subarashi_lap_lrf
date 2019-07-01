@@ -1,6 +1,6 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
-import BatchUpdateButton from '../BatchUpdateButton';
+import { shallow } from 'enzyme';
+import BatchUpdateButton from '../../content-header/BatchUpdateButton';
 
 describe('BatchUpdateButton', () => {
     describe('render', () => {

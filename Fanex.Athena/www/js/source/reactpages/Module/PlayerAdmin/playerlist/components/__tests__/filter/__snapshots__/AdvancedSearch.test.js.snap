@@ -23,7 +23,7 @@ exports[`AdvancedSearch render with initial state - should match snapshot 1`] = 
             },
             Object {
               "Id": "usd",
-              "Status": false,
+              "Status": true,
               "Value": "usd",
             },
           ]
@@ -60,7 +60,7 @@ exports[`AdvancedSearch render with initial state - should match snapshot 1`] = 
             },
             Object {
               "Id": "B",
-              "Status": false,
+              "Status": true,
               "Value": "B",
             },
             Object {
@@ -146,7 +146,7 @@ exports[`AdvancedSearch render with initial state - should match snapshot 1`] = 
         }
         hasAllOption={true}
         hasSearchBox={false}
-        id="ba"
+        id="baStatus"
         keyField="Id"
         language="en-US"
         onChange={[Function]}

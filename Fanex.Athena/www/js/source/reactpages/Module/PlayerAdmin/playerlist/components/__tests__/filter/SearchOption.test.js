@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import SearchOption from '../SearchOption';
+import SearchOption from '../../filter/SearchOption';
 
 describe('SearchOption', () => {
     it('with initial state - should match snapshot', () => {

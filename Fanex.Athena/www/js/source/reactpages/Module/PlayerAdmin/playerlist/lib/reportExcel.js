@@ -1,7 +1,7 @@
 import Excel from '@jsroot/lib/excel';
 import { headerCellStyle, bodyCellStyle } from '@jsroot/constants/excelStyle';
 import { headerText } from '../lib/constants';
-import './public-path';
+import { setupWebpackPublicPath } from '../../../lib/publicPathUtils';
 
 const HEADER_ROW_INDEX = 0;
 const DATA_ROW_INDEX = 1;
@@ -38,6 +38,7 @@ export default class ReportExcel {
     }
 
     export (onFinished) {
+        setupWebpackPublicPath();
         Excel.process(() => {
             this._createHeader();
             this._createBodyData();
