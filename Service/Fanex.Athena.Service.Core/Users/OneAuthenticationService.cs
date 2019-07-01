@@ -1,9 +1,9 @@
 ﻿namespace Fanex.Athena.Service.Core.Users
 {
+    using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-    using System.Threading.Tasks;
     using System.Web;
     using System.Web.Hosting;
     using Constant.DataDomain;
@@ -21,8 +21,8 @@
     using Resources;
     using Session.Enum;
     using Session.Model;
-    using Utility.Interfaces;
 
+    [CLSCompliant(false)]
     public class OneAuthenticationService : IOneAuthenticationService
     {
         private readonly ISessionService _sessionService;

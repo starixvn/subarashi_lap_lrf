@@ -1,9 +1,11 @@
 ﻿namespace Fanex.Athena.Api.Base.Logger
 {
+    using System;
     using System.Web.Http.ExceptionHandling;
     using Fanex.Athena.Extension.Helpers;
     using Fanex.Logging;
 
+    [CLSCompliant(false)]
     public class ApiExceptionLogger : ExceptionLogger
     {
         private readonly ILogger _logger;

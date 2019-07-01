@@ -54,29 +54,12 @@ namespace Fanex.Athena.Excel.Report.UnitTests
 
         private const int RowContentTemplate = 3;
 
-        private static readonly LicenseeWinLoss DataItem = FakeHelper.Create<LicenseeWinLoss>();
-
-        private static readonly LicenseeWinLossMetaModel MetaModel = new LicenseeWinLossMetaModel
-        {
-            BaseCurrency = string.Empty,
-            CurrencyName = "INH",
-            FromDate = new DateTime(2018, 1, 1),
-            ToDate = new DateTime(2018, 2, 2),
-            CurrencyId = 1
-        };
-
-        private static readonly LicenseeWinLossExcelModel ExcelModel = new LicenseeWinLossExcelModel
-        {
-            MetaModel = MetaModel,
-            DataList = new List<LicenseeWinLoss> { DataItem }
-        };
-
         [Test]
         public void AssignNoInfoRow_WhenCall_CallRelevantMethods()
         {
             // Arrange
             var row = ExcelTestHelper.MockGetRow(FakeSheet, ColumnTemplateCount, RowContentTemplate);
-            var excel = CreateExcel();
+            var excel = CreateExcel(CreateExcelModel());
 
             // Action
             excel.Public_AssignNoInfoRow(FakeSheet);
@@ -90,7 +73,11 @@ namespace Fanex.Athena.Excel.Report.UnitTests
         {
             // Arrange
             var row = ExcelTestHelper.MockGetRow(FakeSheet, ColumnTemplateCount, RowContentTemplate);
-            var excel = CreateExcel();
+            var dataItem = FakeHelper.Create<LicenseeWinLoss>();
+            var excelModel = CreateExcelModel();
+            excelModel.DataList = new List<LicenseeWinLoss> { dataItem };
+
+            var excel = CreateExcel(excelModel);
             excel.WhenForAnyArgs(x => x.AssignCommonData(Arg.Any<IRow>(), Arg.Any<LicenseeWinLoss>())).DoNotCallBase();
             excel.WhenForAnyArgs(x => x.AssignTotalData(Arg.Any<ISheet>(), Arg.Any<int>())).DoNotCallBase();
             excel.WhenForAnyArgs(x => x.AssignGrandTotalInEurData(Arg.Any<ISheet>(), Arg.Any<int>())).DoNotCallBase();
@@ -102,12 +89,12 @@ namespace Fanex.Athena.Excel.Report.UnitTests
             Assert.Multiple(() =>
             {
                 row.Cells[0].Received(1).SetCellValue(1);
-                row.Cells[ColumnExternalId].Received(1).SetCellValue(DataItem.ExternalId);
-                row.Cells[ColumnSystemId].Received(1).SetCellValue(DataItem.SystemId);
-                row.Cells[ColumnDate].Received(1).SetCellValue(DataItem.Date.ToShortDateString());
-                row.Cells[ColumnCurrency].Received(1).SetCellValue(DataItem.CurrencyName);
+                row.Cells[ColumnExternalId].Received(1).SetCellValue(dataItem.ExternalId);
+                row.Cells[ColumnSystemId].Received(1).SetCellValue(dataItem.SystemId);
+                row.Cells[ColumnDate].Received(1).SetCellValue(dataItem.Date.ToShortDateString());
+                row.Cells[ColumnCurrency].Received(1).SetCellValue(dataItem.CurrencyName);
 
-                excel.Received(1).AssignCommonData(row, DataItem);
+                excel.Received(1).AssignCommonData(row, dataItem);
                 excel.Received(1).AssignTotalData(FakeSheet, 4);
                 excel.Received(1).AssignGrandTotalInEurData(FakeSheet, Arg.Any<int>());
             });
@@ -118,20 +105,23 @@ namespace Fanex.Athena.Excel.Report.UnitTests
         {
             // Arrange
             var row = ExcelTestHelper.MockGetRow(FakeSheet, ColumnTemplateCount, 0);
-            var excel = CreateExcel();
-            var title = ReportExcelHelper.GetTitleCurrencyName(
-                ExcelModel.MetaModel.CurrencyId,
-                ExcelModel.MetaModel.CurrencyName);
-            ExcelModel.ConvertingOption = new ConvertingOption
+            var excelModel = CreateExcelModel();
+            excelModel.ConvertingOption = new ConvertingOption
             {
                 BaseCurrency = string.Empty,
                 CurrencyName = "INH",
                 IsConvert = false
             };
+            var excel = CreateExcel(excelModel);
+
+            var title = ReportExcelHelper.GetTitleCurrencyName(
+                excelModel.ConvertingOption,
+                excelModel.MetaModel);
+            
             var reportTitle = ReportExcelHelper.GenerateReportTitle(
                 ViewResources.LicenseeWinLoss,
-                ExcelModel.MetaModel.FromDate,
-                ExcelModel.MetaModel.ToDate,
+                excelModel.MetaModel.FromDate,
+                excelModel.MetaModel.ToDate,
                 title);
 
             // Action
@@ -151,12 +141,14 @@ namespace Fanex.Athena.Excel.Report.UnitTests
             // Arrange
             const int RowIndex = 10;
             var item = FakeHelper.Create<LicenseeWinLoss>();
-            ExcelModel.SummaryTotal = new Dictionary<string, LicenseeWinLoss>
+            var excelModel = CreateExcelModel();
+            excelModel.SummaryTotal = new Dictionary<string, LicenseeWinLoss>
             {
                 { "USD", item }
             };
+
             var row = ExcelTestHelper.MockGetRow(FakeSheet, ColumnTemplateCount, RowIndex);
-            var excel = CreateExcel();
+            var excel = CreateExcel(excelModel);
             excel.WhenForAnyArgs(x => x.AssignCommonData(Arg.Any<IRow>(), Arg.Any<LicenseeWinLoss>())).DoNotCallBase();
 
             // Action
@@ -177,10 +169,12 @@ namespace Fanex.Athena.Excel.Report.UnitTests
             const int RowIndex = 10;
             var item1 = FakeHelper.Create<LicenseeWinLoss>();
             var item2 = FakeHelper.Create<LicenseeWinLoss>();
-            ExcelModel.TotalData = new List<LicenseeWinLoss> { item1, item2 };
+            var excelModel = CreateExcelModel();
+            excelModel.TotalData = new List<LicenseeWinLoss> { item1, item2 };
+
             var row1 = ExcelTestHelper.MockGetRow(FakeSheet, ColumnTemplateCount, RowIndex);
             var row2 = ExcelTestHelper.MockGetRow(FakeSheet, ColumnTemplateCount, RowIndex + 1);
-            var excel = CreateExcel();
+            var excel = CreateExcel(excelModel);
             excel.WhenForAnyArgs(x => x.AssignCommonData(Arg.Any<IRow>(), Arg.Any<LicenseeWinLoss>())).DoNotCallBase();
 
             // Action
@@ -204,7 +198,8 @@ namespace Fanex.Athena.Excel.Report.UnitTests
         {
             // Arrange
             var cell = ExcelTestHelper.MockGetCell(FakeSheet, ReportBase.RowHeaderTemplate, ColumnLicenseeWlSportsBook);
-            var excel = CreateExcel(productCodes: new[] { Product.SB, Product.BA });
+            var excelModel = CreateExcelModel(productCodes: new[] { Product.SB, Product.BA });
+            var excel = CreateExcel(excelModel);
 
             // Action
             excel.ProcessUILicenseeWinLoss(FakeSheet);
@@ -222,7 +217,8 @@ namespace Fanex.Athena.Excel.Report.UnitTests
         {
             // Arrange
             var cell = ExcelTestHelper.MockGetCell(FakeSheet, ReportBase.RowHeaderTemplate, ColumnTurnoverSportBook);
-            var excel = CreateExcel(productCodes: new[] { Product.SB, Product.BT });
+            var excelModel = CreateExcelModel(productCodes: new[] { Product.SB, Product.BT });
+            var excel = CreateExcel(excelModel);
 
             // Action
             excel.ProcessUITurnover(FakeSheet);
@@ -241,7 +237,8 @@ namespace Fanex.Athena.Excel.Report.UnitTests
         public void HideColumnsByLevel_WhenCall_HideColumns(int level, int[] hiddenColumns)
         {
             // Arrange
-            var excel = CreateExcel(level);
+            var excelModel = CreateExcelModel(level);
+            var excel = CreateExcel(excelModel);
 
             // Action
             excel.HideColumnsByLevel(FakeSheet);
@@ -250,20 +247,40 @@ namespace Fanex.Athena.Excel.Report.UnitTests
             AssertHideColumns(FakeSheet, hiddenColumns);
         }
 
-        private static LicenseeWinLossExcelTestable CreateExcel(int level = 0, string[] productCodes = null)
+        private static LicenseeWinLossExcelTestable CreateExcel(LicenseeWinLossExcelModel excelModel)
         {
-            MetaModel.DrillDownLevel = level;
-            MetaModel.ProductOptions = (productCodes ?? new string[] { }).Select(x => new ProductOption
-            {
-                Code = x,
-                Status = true,
-                Name = x
-            }).ToList();
             var excel = Substitute.ForPartsOf<LicenseeWinLossExcelTestable>(
                 string.Empty,
-                ExcelModel);
+                excelModel);
             excel.TemplateSheet.Returns(Substitute.For<ISheet>());
             return excel;
+        }
+
+        private static LicenseeWinLossExcelModel CreateExcelModel(int level = 0, string[] productCodes = null)
+        {
+            var metaModel = new LicenseeWinLossMetaModel
+            {
+                BaseCurrency = string.Empty,
+                CurrencyName = "INH",
+                FromDate = new DateTime(2018, 1, 1),
+                ToDate = new DateTime(2018, 2, 2),
+                CurrencyId = 1,
+                DrillDownLevel = level,
+                ProductOptions = (productCodes ?? new string[] { }).Select(x => new ProductOption
+                {
+                    Code = x,
+                    Status = true,
+                    Name = x
+                }).ToList()
+            };
+
+            var excelModel = new LicenseeWinLossExcelModel
+            {
+                MetaModel = metaModel,
+                DataList = new List<LicenseeWinLoss>()
+            };
+
+            return excelModel;
         }
     }
 }

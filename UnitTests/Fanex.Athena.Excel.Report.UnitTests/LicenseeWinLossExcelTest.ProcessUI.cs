@@ -11,11 +11,13 @@ namespace Fanex.Athena.Excel.Report.UnitTests
         public void ProcessUI_AllOptionsIsInvisible_HideColumnsCorrectly()
         {
             // Arrange
-            ExcelModel.CustomerCommVisible = false;
-            ExcelModel.COVisible = false;
-            ExcelModel.BTVisible = false;
-            ExcelModel.BAVisible = false;
-            var excel = CreateExcel();
+            var excelModel = CreateExcelModel();
+            excelModel.CustomerCommVisible = false;
+            excelModel.COVisible = false;
+            excelModel.BTVisible = false;
+            excelModel.BAVisible = false;
+
+            var excel = CreateExcel(excelModel);
             excel.WhenForAnyArgs(x => x.ProcessUITurnover(Arg.Any<ISheet>())).DoNotCallBase();
             excel.WhenForAnyArgs(x => x.ProcessUILicenseeWinLoss(Arg.Any<ISheet>())).DoNotCallBase();
             excel.WhenForAnyArgs(x => x.HideColumnsByLevel(Arg.Any<ISheet>())).DoNotCallBase();
@@ -43,12 +45,14 @@ namespace Fanex.Athena.Excel.Report.UnitTests
         public void ProcessUI_AllOptionsIsVisible_HideColumnsCorrectly()
         {
             // Arrange
-            ExcelModel.SBVisible = true;
-            ExcelModel.CustomerCommVisible = true;
-            ExcelModel.COVisible = true;
-            ExcelModel.BTVisible = true;
-            ExcelModel.BAVisible = true;
-            var excel = CreateExcel();
+            var excelModel = CreateExcelModel();
+            excelModel.SBVisible = true;
+            excelModel.CustomerCommVisible = true;
+            excelModel.COVisible = true;
+            excelModel.BTVisible = true;
+            excelModel.BAVisible = true;
+
+            var excel = CreateExcel(excelModel);
             excel.WhenForAnyArgs(x => x.ProcessUITurnover(Arg.Any<ISheet>())).DoNotCallBase();
             excel.WhenForAnyArgs(x => x.ProcessUILicenseeWinLoss(Arg.Any<ISheet>())).DoNotCallBase();
             excel.WhenForAnyArgs(x => x.HideColumnsByLevel(Arg.Any<ISheet>())).DoNotCallBase();

@@ -15,6 +15,7 @@ namespace Fanex.Athena.Service.Core.Configuration
     using Fanex.Athena.Service.Core.Configuration.Interfaces;
     using Fanex.Logging;
 
+    [CLSCompliant(false)]
     public class MoveBetService : IMoveBetService
     {
         private const string DefaultLanguage = "en-US";

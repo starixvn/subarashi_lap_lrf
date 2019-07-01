@@ -46,18 +46,21 @@
         }
 
         [Test]
-        public void CopyRow_SourceSheetRowNull_ReturnNull()
+        public void CopyRow_SourceSheetRowNull_ReturnEmptyRow()
         {
             // Arrange
             var sheet = Substitute.For<ISheet>();
             var sourceSheet = Substitute.For<ISheet>();
             sourceSheet.GetRow(0).ReturnsForAnyArgs((IRow)null);
 
+            var expectedRow = Substitute.For<IRow>();
+            sheet.GetRow(0).ReturnsForAnyArgs(expectedRow);
+
             // Action
             var row = sheet.CopyRow(sourceSheet, 0, 0);
 
             // Assert
-            Assert.That(row, Is.Null);
+            Assert.That(row, Is.EqualTo(expectedRow));
         }
 
         [Test]
