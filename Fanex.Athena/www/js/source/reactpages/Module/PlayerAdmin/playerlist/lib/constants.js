@@ -76,3 +76,19 @@ export const playerStatus = {
     '2': 'Closed',
     '3': 'Archived'
 }
+
+export const headerText = {
+    Status: 'Status',
+    UserName: 'Username',
+    SystemId: 'SystemId',
+    RealName: 'Real Name',
+    Currency: 'Currency',
+    CurrentBalance: 'Current Balance',
+    OutstandingBalance: 'Outstanding Balance',
+    OddsGroup: 'Odds Group',
+    BaStatus: 'BA Status',
+    SpecialLevel: 'Special Level',
+    LastLoginIp: 'Last Login IP',
+    LastTransaction: 'LastTransaction',
+    Email: 'Email'
+}

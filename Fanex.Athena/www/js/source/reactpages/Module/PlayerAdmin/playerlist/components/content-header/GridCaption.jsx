@@ -14,12 +14,12 @@ export class GridCaption extends React.PureComponent {
     }
 
     handleChangeDisplayedColumn = (currentItem, selectedItemsKey) => {
-        const {displayedColumnList, setDisplayedColumnList} = this.props;
+        const { displayedColumnList, setDisplayedColumnList } = this.props;
         const selectedKeyList = selectedItemsKey.split(',');
         const newColumnList = displayedColumnList.map(item => {
             const isShow = selectedKeyList.indexOf(item.key) !== -1;
 
-            return item.show === isShow ? item : {...item, show: isShow};
+            return item.show === isShow ? item : { ...item, show: isShow };
         })
 
         setDisplayedColumnList(newColumnList);
@@ -67,9 +67,16 @@ export class GridCaption extends React.PureComponent {
         return (
             <span className="caret-block">
                 {this._buildDisplayedColumnList()}
-                <span className="icon-excel-wrapper"><i className="icon-excel" title={LangHelper.getSingleResource('ExportToExcel')}></i></span>
+                <span className="icon-excel-wrapper" onClick={this.handleExportExcel}>
+                    <i className="icon-excel" title={LangHelper.getSingleResource('ExportToExcel')}></i>
+                </span>
             </span>
         )
+    }
+
+    handleExportExcel = () => {
+        const { type, param, exportExcel } = this.props;
+        exportExcel(type, param);
     }
 
     render() {
@@ -80,14 +87,14 @@ export class GridCaption extends React.PureComponent {
 }
 
 function mapDispatchToProps(dispatch) {
-    const { setSelectedPlayer, setDisplayedColumnList } = ActionCreators;
-    return bindActionCreators({ setSelectedPlayer, setDisplayedColumnList }, dispatch);
+    const { setSelectedPlayer, setDisplayedColumnList, exportExcel } = ActionCreators;
+    return bindActionCreators({ setSelectedPlayer, setDisplayedColumnList, exportExcel }, dispatch);
 }
 
 function mapStateToProps(state) {
-    const { playerList, selectedPlayer, selectedPlayerIdList, displayedColumnList } = state;
+    const { playerList, selectedPlayer, selectedPlayerIdList, displayedColumnList, type, param } = state;
     const playerCount = (playerList && playerList.length) ? playerList.length : 0;
-    return Object.assign({}, { playerCount, selectedPlayer, selectedPlayerIdList, displayedColumnList });
+    return Object.assign({}, { playerCount, selectedPlayer, selectedPlayerIdList, displayedColumnList, type, param });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(GridCaption);

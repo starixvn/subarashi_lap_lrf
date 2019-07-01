@@ -1,5 +1,6 @@
 import FactoryCommonService from '../../../lib/factoryCommonService';
 import { systemType } from '../../../constants/configInfo';
+import ReportExcel from './reportExcel';
 
 const apiInfo = {
     lrfPlayerList: { action: 'api/PlayerMain/Search', type: systemType.lrf },
@@ -69,5 +70,14 @@ export default class PlayerListService {
 
     getLink(systemType, action) {
         return this.commonService.getLink(systemType, action);
+    }
+
+    exportExcel(licType, param) {
+        const postParam = {...param, isExportExcel: true };
+        this.getPlayerList(postParam).then((response) => {
+            const { playerList } = response;
+            const reportExcel = new ReportExcel(licType, playerList, 'Player List');
+            reportExcel.export();
+        });
     }
 }
