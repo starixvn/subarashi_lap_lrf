@@ -53,14 +53,14 @@ namespace Fanex.Athena.Service.Customer
             _appSettings = appSettings;
         }
 
-        public Task<ReportResultModel<CustomerDTO>> GetActiveCustomers(CustomerListMetaModel metaModel)
+        public async Task<ReportResultModel<CustomerDTO>> GetActiveCustomers(CustomerListMetaModel metaModel)
         {
-            return _customerListDataAccess.GetActiveCustomers(metaModel);
+            return await _customerListDataAccess.GetActiveCustomers(metaModel).ConfigureAwait(false);
         }
 
-        public Task<ReportResultModel<DormantCustomer>> GetDormantCustomers(CustomerListMetaModel metaModel)
+        public async Task<ReportResultModel<DormantCustomer>> GetDormantCustomers(CustomerListMetaModel metaModel)
         {
-            return _dormantCustomerListDataAccess.GetDormantCustomers(metaModel);
+            return await _dormantCustomerListDataAccess.GetDormantCustomers(metaModel).ConfigureAwait(false);
         }
 
         public LogInfo GetCustomerLoginInfo(int custId, int licenseeId, string siteName)

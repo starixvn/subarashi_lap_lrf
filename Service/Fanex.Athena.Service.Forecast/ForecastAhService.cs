@@ -24,9 +24,9 @@ namespace Fanex.Athena.Service.Forecast
             _forecastAhDataAccess = forecastDataAccess;
         }
 
-        public Task<ForecastAH> GetForecastTopOddsByMatch(int matchId, int betType)
+        public async Task<ForecastAH> GetForecastTopOddsByMatch(int matchId, int betType)
         {
-            return _forecastAhDataAccess.GetForecastTopOddsByMatch(matchId, betType);
+            return await _forecastAhDataAccess.GetForecastTopOddsByMatch(matchId, betType).ConfigureAwait(false);
         }
 
         public async Task<ForecastValue> GetForecastHandicap(ForecastAHMetaModel metaModel, int userId)

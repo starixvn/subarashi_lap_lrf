@@ -12,14 +12,14 @@
 
     public class LicenseeDataByPlatformDataAccess : BaseDataAccess, ILicenseeDataByPlatformDataAccess
     {
-        public Task<WidgetByPlatformViewModel> GetWinLoss(DashboardBaseModel metaModel)
+        public async Task<WidgetByPlatformViewModel> GetWinLoss(DashboardBaseModel metaModel)
         {
-            return GetData(metaModel, "Lrf_GetLicenseeWLByPlatform", "LicenseeWL");
+            return await GetData(metaModel, "Lrf_GetLicenseeWLByPlatform", "LicenseeWL").ConfigureAwait(false);
         }
 
-        public Task<WidgetByPlatformViewModel> GetTurnover(DashboardBaseModel metaModel)
+        public async Task<WidgetByPlatformViewModel> GetTurnover(DashboardBaseModel metaModel)
         {
-            return GetData(metaModel, "Lrf_GetLicenseeTurnoverByPlatform", "Turnover");
+            return await GetData(metaModel, "Lrf_GetLicenseeTurnoverByPlatform", "Turnover").ConfigureAwait(false);
         }
 
         private static WidgetByPlatformViewModel ReadData(IDataReader reader, string winlossColumnName)

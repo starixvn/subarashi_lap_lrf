@@ -23,11 +23,11 @@ namespace Fanex.Athena.Service.Report
             this._colossusBetsWinLossDataAccess = dataAccess;
         }
 
-        public Task<SortableReportResultModel<ColossusBetWinLoss>> GetWinlossDetail(
+        public async Task<SortableReportResultModel<ColossusBetWinLoss>> GetWinlossDetail(
             ColossusBetsWinLossMetaModel metaModel, 
             IDictionary<int, string> currencyList)
         {
-            return _colossusBetsWinLossDataAccess.GetWinlossDetail(metaModel, currencyList);
+            return await _colossusBetsWinLossDataAccess.GetWinlossDetail(metaModel, currencyList).ConfigureAwait(false);
         }
 
         public async Task<SortableReportResultModel<ColossusBetWinLoss>> GetSummaryWinloss(

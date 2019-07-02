@@ -62,19 +62,19 @@ namespace Fanex.Athena.Service.Report
             return OrderByProduct(dataList);
         }
 
-        public Task<DataSet> GetDetailDataSet(MatchWinLossMetaModel metaModel)
+        public async Task<DataSet> GetDetailDataSet(MatchWinLossMetaModel metaModel)
         {
-            return _matchWinLossDataAccess.GetDetailDataSet(metaModel);
+            return await _matchWinLossDataAccess.GetDetailDataSet(metaModel).ConfigureAwait(false);
         }
 
-        public Task<IList<MatchWinLoss>> GetDetailDataList(MatchWinLossMetaModel metaModel)
+        public async Task<IList<MatchWinLoss>> GetDetailDataList(MatchWinLossMetaModel metaModel)
         {
-            return _matchWinLossDataAccess.GetDetailDataList(metaModel);
+            return await _matchWinLossDataAccess.GetDetailDataList(metaModel).ConfigureAwait(false);
         }
 
-        public Task<IList<MatchWinLoss>> GetOutrightParlayList(MatchWinLossMetaModel metaModel)
+        public async Task<IList<MatchWinLoss>> GetOutrightParlayList(MatchWinLossMetaModel metaModel)
         {
-            return _matchWinLossDataAccess.GetOutrightParlayList(metaModel);
+            return await _matchWinLossDataAccess.GetOutrightParlayList(metaModel).ConfigureAwait(false);
         }
 
         #endregion IMatchWinLossService Members

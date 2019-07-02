@@ -9,24 +9,24 @@
 
     public class SingleValueDataAccess : BaseDataAccess, ISingleValueDataAccess
     {
-        public Task<decimal> GetCustomerBalance(DashboardBaseModel metaModel)
+        public async Task<decimal> GetCustomerBalance(DashboardBaseModel metaModel)
         {
-            return GetData(metaModel, "Lrf_GetCustomerBalance", "ClosingBalance");
+            return await GetData(metaModel, "Lrf_GetCustomerBalance", "ClosingBalance").ConfigureAwait(false);
         }
 
-        public Task<decimal> GetPendingFunds(DashboardBaseModel metaModel)
+        public async Task<decimal> GetPendingFunds(DashboardBaseModel metaModel)
         {
-            return GetData(metaModel, "Lrf_GetLicenseePendingFunds", "PendingFund", false);
+            return await GetData(metaModel, "Lrf_GetLicenseePendingFunds", "PendingFund", false).ConfigureAwait(false);
         }
 
-        public Task<decimal> GetTodayDeposit(DashboardBaseModel metaModel)
+        public async Task<decimal> GetTodayDeposit(DashboardBaseModel metaModel)
         {
-            return GetData(metaModel, "Lrf_GetLicenseeTodayDeposit", "Deposit");
+            return await GetData(metaModel, "Lrf_GetLicenseeTodayDeposit", "Deposit").ConfigureAwait(false);
         }
 
-        public Task<decimal> GetTodayWithdrawal(DashboardBaseModel metaModel)
+        public async Task<decimal> GetTodayWithdrawal(DashboardBaseModel metaModel)
         {
-            return GetData(metaModel, "Lrf_GetLicenseeTodayWithdrawal", "Withdrawal");
+            return await GetData(metaModel, "Lrf_GetLicenseeTodayWithdrawal", "Withdrawal").ConfigureAwait(false);
         }
 
         private async Task<decimal> GetData(DashboardBaseModel metaModel, string uspName, string columnName, bool hasReportDate = true)
