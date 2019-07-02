@@ -5,7 +5,7 @@ exports[`DropdownButton render with default props - render correctly 1`] = `
   className="dropdown"
 >
   <button
-    className="dropdown-toggle toggle-default caret"
+    className="dropdown-toggle toggle-default site-caret"
   />
   <div
     className="overlay"
@@ -34,7 +34,7 @@ exports[`DropdownButton render with specific props - render correctly 1`] = `
   className="dropdown custom-button-dropdown"
 >
   <div
-    className="dropdown-toggle custom-toggle-button caret"
+    className="dropdown-toggle custom-toggle-button site-caret"
     disabled={true}
     onClick={[MockFunction]}
   >

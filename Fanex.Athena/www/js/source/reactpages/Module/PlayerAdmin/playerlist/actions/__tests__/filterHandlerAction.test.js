@@ -40,7 +40,7 @@ describe('filterHandlerAction', () => {
             filterHandlerAction.searchPlayer(param)(mockDispatch);
 
             Promise.resolve().then(() => {
-                expect(mockDispatch).toHaveBeenCalledTimes(1);
+                expect(mockDispatch).toHaveBeenCalledTimes(2);
                 expect(mockDispatch).toHaveBeenCalledWith(expectedSetPlayerListParam);
                 done();
             })
@@ -57,7 +57,7 @@ describe('filterHandlerAction', () => {
             filterHandlerAction.searchPlayer(param)(mockDispatch);
 
             Promise.resolve().then(() => {
-                expect(mockDispatch).toHaveBeenCalledTimes(2);
+                expect(mockDispatch).toHaveBeenCalledTimes(3);
                 expect(mockDispatch.mock.calls[1][0]).toEqual(expectedSetPlayerListParam);
                 done();
             })
@@ -74,7 +74,7 @@ describe('filterHandlerAction', () => {
             filterHandlerAction.searchPlayer(param)(mockDispatch);
 
             Promise.resolve().then(() => {
-                expect(mockDispatch).toHaveBeenCalledTimes(2);
+                expect(mockDispatch).toHaveBeenCalledTimes(3);
                 expect(mockDispatch.mock.calls[1][0]).toEqual(expectedSetPlayerListParam);
                 done();
             })

@@ -16,7 +16,11 @@ describe('CollapsiblePanel', () => {
         it('setState should call with correct new state and callback', () => {
             let changedState = null;
             let callback = null;
-            const instance = new CollapsiblePanel();
+            const prop = {
+                onCollapse: jest.fn(),
+                onExpand: jest.fn()
+            }
+            const instance = new CollapsiblePanel(prop);
             instance.setState = jest.fn((newState, cb) => {
                 changedState = newState;
                 callback = cb;

@@ -2,23 +2,24 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { DataGrid } from '../DataGrid';
-import { specialLevelListWithColor, oddsGroupListWithStyle } from '../../lib/constants';
+import PlayerRow from '../grid/PlayerRow';
+import GridHelper from '../../lib/gridHelper';
 
 describe('DataGrid', () => {
     const defaultProps = {
         playerList: null,
         selectedPlayer: null,
         selectedPlayerIdList: [],
-        setSelectedPlayer: undefined,
-        setSelectedPlayerIdList: undefined
+        displayedColumnList: [
+            { key: 'Status', value: 'Status', show: true },
+            { key: 'Username', value: 'Username', show: true },
+            { key: 'SystemID', value: 'SystemID', show: true }
+        ],
+        currentActivePlayer: null,
+        setSelectedPlayerIdList: jest.fn(),
+        setPlayerList: jest.fn(),
+        setCurrentActivePlayer: jest.fn()
     }
-
-    const specialLevelList = Object.keys(specialLevelListWithColor).map(item => {
-        return {
-            value: item,
-            label: item === '0' ? 'None' : item
-        }
-    })
 
     let originalClientWidth;
     beforeEach(() => {
@@ -29,112 +30,118 @@ describe('DataGrid', () => {
         const instance = new DataGrid({ ...defaultProps });
 
         const expectedState = {
+            isOpenContextMenu: false,
             contextMenuPosition: null,
-            isOpenContextMenu: false
+            specialLevelDropdownPosition: null,
+            oddsGroupDropdownPosition: null,
+            statusDropdownPosition: null
         }
 
         expect(instance.state).toEqual(expectedState);
-        expect(instance.specialLevelList).toEqual(specialLevelList);
         expect(instance.maxWidth).toBe(originalClientWidth);
     })
 
-    it('_renderHeader - should match snapshot', () => {
+    it('_buildDisplayedColumn - return correct data', () => {
         const instance = new DataGrid({ ...defaultProps });
-        const header = instance._renderHeader();
 
-        const wrapper = shallow(<div>{header}</div>).getElement();
+        const expectedResult = {
+            Status: true,
+            Username: true,
+            SystemID: true
+        }
 
-        expect(wrapper).toMatchSnapshot();
+        const result = instance._buildDisplayedColumn();
+
+        expect(result).toEqual(expectedResult);
     })
 
-    it('_renderDataSection - should return expected value', () => {
-        const props = { ...defaultProps, selectedPlayerIdList: [1] };
+    it('_renderDataSection - row list should be correct', () => {
+        const props = { ...defaultProps };
         const instance = new DataGrid({ ...props });
         const dataList = [
             { CustId: 1, userName: 'test1' },
             { CustId: 2, userName: 'test2' }
         ];
 
-        instance._buildDataRow = jest.fn((dataItem, isChecked) => {
-            return {
-                ...dataItem,
-                isChecked
-            }
-        });
+        const displayedColumn = {
+            Status: true,
+            Username: true,
+            SystemID: true
+        }
 
+        const firstRowProps = {
+            dataItem: dataList[0],
+            isChecked: false,
+            displayedColumn,
+            handleChangeBaStatus: instance.handleChangeBaStatus,
+            handleEnterContextMenu: instance.handleEnterContextMenu,
+            handleLeaveContextMenu: instance.handleLeaveContextMenu,
+            handleToggleOddsGroup: instance.handleToggleOddsGroup,
+            handleToggleSpecialLevel: instance.handleToggleSpecialLevel,
+            handleToggleStatus: instance.handleToggleStatus
+        }
+        const secondRowProps = {
+            dataItem: dataList[1],
+            isChecked: false,
+            displayedColumn,
+            handleChangeBaStatus: instance.handleChangeBaStatus,
+            handleEnterContextMenu: instance.handleEnterContextMenu,
+            handleLeaveContextMenu: instance.handleLeaveContextMenu,
+            handleToggleOddsGroup: instance.handleToggleOddsGroup,
+            handleToggleSpecialLevel: instance.handleToggleSpecialLevel,
+            handleToggleStatus: instance.handleToggleStatus
+        }
         const expectedResult = [
-            { CustId: 1, userName: 'test1', isChecked: true },
-            { CustId: 2, userName: 'test2', isChecked: false }
+            <PlayerRow key={1} {...firstRowProps} />,
+            <PlayerRow key={2} {...secondRowProps} />
         ];
 
-        const result = instance._renderDataSection(dataList);
+        const result = instance._renderDataSection(dataList, displayedColumn);
 
         expect(result).toEqual(expectedResult);
     })
 
-    it('_handleSelectPlayer - this.props.setSelectedPlayer should be called with correct parameter', () => {
-        const props = { ...defaultProps, setSelectedPlayer: jest.fn() };
-        const instance = new DataGrid({ ...props });
-        const event = {
-            preventDefault: () => { }
-        }
+    describe('handleEnterContextMenu', () => {
+        it('contextMenu is not opening - setState should be called with correct parameter', () => {
+            const instance = new DataGrid({ ...defaultProps });
+            instance.state = {
+                isOpenContextMenu: false
+            };
 
-        const playerInfo = {
-            CustId: 1,
-            UserName: 'test1',
-            Currency: 'USD'
-        }
-
-        const expectedParam = {
-            custId: playerInfo.CustId,
-            userName: playerInfo.UserName,
-            currency: playerInfo.Currency
-        };
-
-        instance._handleSelectPlayer(event, playerInfo);
-
-        expect(props.setSelectedPlayer).toHaveBeenCalledWith(expectedParam);
-    })
-
-    it('handleEnterContextMenu - contextMenu is not opening - setState should be called with correct parameter', () => {
-        const instance = new DataGrid({ ...defaultProps });
-        instance.state = {
-            isOpenContextMenu: false
-        };
-
-        const event = {
-            target: {
-                getBoundingClientRect: () => {
-                    return {
-                        left: 100,
-                        top: 50
+            const event = {
+                target: {
+                    getBoundingClientRect: () => {
+                        return {
+                            left: 100,
+                            top: 50
+                        }
                     }
                 }
             }
-        }
 
-        instance.setState = jest.fn();
-        const expectedState = {
-            contextMenuPosition: { x: 100, y: 50 },
-            isOpenContextMenu: true
-        }
+            instance.setState = jest.fn();
+            const expectedState = {
+                contextMenuPosition: { x: 100, y: 50 },
+                isOpenContextMenu: true
+            }
 
-        instance.handleEnterContextMenu(event);
+            instance.handleEnterContextMenu(event);
 
-        expect(instance.setState).toHaveBeenCalledWith(expectedState);
-    })
+            expect(instance.setState).toHaveBeenCalledWith(expectedState);
+        })
 
-    it('handleEnterContextMenu - contextMenu is opening - do nothing', () => {
-        const instance = new DataGrid({ ...defaultProps });
-        instance.state = {
-            isOpenContextMenu: true
-        };
+        it('contextMenu is opening - do nothing', () => {
+            const instance = new DataGrid({ ...defaultProps });
+            instance.state = {
+                isOpenContextMenu: true
+            };
 
-        instance.setState = jest.fn();
+            instance.setState = jest.fn();
 
-        instance.handleEnterContextMenu({});
+            instance.handleEnterContextMenu({});
 
-        expect(instance.setState).not.toHaveBeenCalled();
+            expect(instance.setState).not.toHaveBeenCalled();
+        })
     })
 
     it('handleLeaveContextMenu - contextMenu is opening - close contextMenu by setting state', () => {
@@ -162,62 +169,169 @@ describe('DataGrid', () => {
         expect(instance.setState).toHaveBeenCalledWith(expectedState);
     })
 
-    it('_buildUserNameCell - should match snapshot', () => {
-        const instance = new DataGrid({ ...defaultProps });
-        const dataItem = {
-            UserName: 'test1'
+    describe('_handlerToggleDropdownLabel', () => {
+        it('currentPosition has value - should toggle to null', () => {
+            const stateName = 'statusDropdownPosition';
+            const instance = new DataGrid({ ...defaultProps });
+            instance.state = {
+                [stateName]: { x: 100, y: 130 }
+            }
+
+            const expectedParam = { [stateName]: null };
+            instance.setState = jest.fn();
+
+            instance._handlerToggleDropdownLabel({}, stateName);
+
+            expect(instance.setState).toHaveBeenCalledWith(expectedParam);
+        })
+
+        it('currentPosition is null - should call setState with correct parameter', () => {
+            const stateName = 'statusDropdownPosition';
+            const instance = new DataGrid({ ...defaultProps });
+            instance.state = {
+                [stateName]: null
+            }
+
+            const event = {
+                target: {
+                    getBoundingClientRect: () => {
+                        return {
+                            left: 100,
+                            top: 50
+                        }
+                    }
+                }
+            }
+
+            const expectedParam = {
+                [stateName]: { x: 100, y: 70 }
+            };
+            instance.setState = jest.fn();
+
+            instance._handlerToggleDropdownLabel(event, stateName);
+
+            expect(instance.setState).toHaveBeenCalledWith(expectedParam);
+        })
+    })
+
+    describe('handling toggle dropdown on grid', () => {
+        const runTest = ({ methodName, expectedStateName }) => {
+            it(`${methodName} - should call _handlerToggleDropdownLabel with correct parameter`, () => {
+                const instance = new DataGrid({ ...defaultProps });
+                const event = {};
+                instance._handlerToggleDropdownLabel = jest.fn();
+
+                instance[methodName](event);
+
+                expect(instance._handlerToggleDropdownLabel).toHaveBeenCalledWith(event, expectedStateName);
+            })
         }
-        const userNameCell = instance._buildUserNameCell(dataItem);
 
-        const wrapper = shallow(<div>{userNameCell}</div>).getElement();
+        const testCaseList = [
+            { methodName: 'handleToggleSpecialLevel', expectedStateName: 'specialLevelDropdownPosition' },
+            { methodName: 'handleToggleOddsGroup', expectedStateName: 'oddsGroupDropdownPosition' },
+            { methodName: 'handleToggleStatus', expectedStateName: 'statusDropdownPosition' }
+        ]
 
-        expect(wrapper).toMatchSnapshot();
+        testCaseList.forEach(runTest);
     })
 
-    it('_buildOddsGroupCell - should match snapshot', () => {
-        const instance = new DataGrid({ ...defaultProps });
-        const selectedOddsGroup = 'B';
-        const oddsGroupCell = instance._buildOddsGroupCell(selectedOddsGroup);
+    it('handleChangeUpdatePlayerItem - should call action props.setPlayerList with correct parameter', () => {
+        const props = {
+            ...defaultProps,
+            playerList: [
+                { CustId: 1, UserName: 'test1', Currency: 'USD', BaStatus: true },
+                { CustId: 2, UserName: 'test2', Currency: 'USD', BaStatus: true }
+            ],
+            setPlayerList: jest.fn()
+        }
+        const instance = new DataGrid({ ...props });
+        const custId = 1;
+        const value = false;
+        const fieldName = 'BaStatus';
 
-        const wrapper = shallow(<div>{oddsGroupCell}</div>).getElement();
+        const expectedPlayerList = [
+            { CustId: 1, UserName: 'test1', Currency: 'USD', BaStatus: false },
+            { CustId: 2, UserName: 'test2', Currency: 'USD', BaStatus: true }
+        ]
 
-        expect(wrapper).toMatchSnapshot();
+        instance.handleChangeUpdatePlayerItem(custId, value, fieldName);
+
+        expect(props.setPlayerList).toHaveBeenCalledWith(expectedPlayerList);
     })
 
-    it('_buildSpecialLevelCell - should match snapshot', () => {
+    it('handleChangeBaStatus - should call handleChangeUpdatePlayerItem with correct parameter', () => {
         const instance = new DataGrid({ ...defaultProps });
-        const selectedSpecialLevel = 1;
-        const specialLevelCell = instance._buildSpecialLevelCell(selectedSpecialLevel);
+        instance.handleChangeUpdatePlayerItem = jest.fn();
+        const custId = 1;
+        const value = false;
 
-        const wrapper = shallow(<div>{specialLevelCell}</div>).getElement();
+        instance.handleChangeBaStatus(custId, value);
 
-        expect(wrapper).toMatchSnapshot();
+        expect(instance.handleChangeUpdatePlayerItem).toHaveBeenCalledWith(custId, value, 'BaStatus');
     })
 
-    it('_buildDataRow - should match snapshot', () => {
-        const instance = new DataGrid({ ...defaultProps });
-        const dataItem = {
-            CustId: 1,
-            Status: 'online',
-            SystemId: 'abc',
-            Currency: 'USD',
-            CurrentBalance: 100,
-            OutstandingBalance: '200',
-            OddsGroup: 'A',
-            BaStatus: true,
-            SpecialLevel: 1,
-            LastTransaction: '06/14/2019',
-            Email: 'abc@yahoo.com'
-        };
-        instance._buildUserNameCell = jest.fn(() => 'UserNameCell');
-        instance._buildOddsGroupCell = jest.fn(() => 'OddsGroupCell');
-        instance._buildSpecialLevelCell = jest.fn(() => 'SpecialLevelCell');
+    describe('_handleChangeDropdownValue', () => {
+        const value = 'Closed';
+        const fieldName = 'Status';
+        it('currentActivePlayer has value - handleChangeUpdatePlayerItem and onChangeSuccess should be called', () => {
+            const custId = 1;
+            const props = {
+                ...defaultProps,
+                currentActivePlayer: { custId }
+            }
+            const instance = new DataGrid({ ...props });
+            instance.handleChangeUpdatePlayerItem = jest.fn();
+            const event = {
+                preventDefault: () => { }
+            }
 
-        const dataRow = instance._buildDataRow(dataItem, true);
+            const onChangeSuccess = jest.fn();
 
-        const wrapper = shallow(<div>{dataRow}</div>).getElement();
+            instance._handleChangeDropdownValue(event, value, fieldName, onChangeSuccess);
 
-        expect(wrapper).toMatchSnapshot();
+            expect(instance.handleChangeUpdatePlayerItem).toHaveBeenCalledWith(custId, value, fieldName);
+            expect(onChangeSuccess).toHaveBeenCalled();
+        })
+
+        it('currentActivePlayer has no value - do nothing', () => {
+            const props = {
+                ...defaultProps,
+                currentActivePlayer: null
+            }
+            const instance = new DataGrid({ ...props });
+            instance.handleChangeUpdatePlayerItem = jest.fn();
+
+            const event = {
+                preventDefault: () => { }
+            }
+            instance._handleChangeDropdownValue(event, value, fieldName, null);
+
+            expect(instance.handleChangeUpdatePlayerItem).not.toHaveBeenCalled();
+        })
+    })
+
+    describe('handling Change dropdown values on grid', () => {
+        const runTest = ({ methodName, expectedValue, expectedFieldName, callbackName }) => {
+            it(`${methodName} - should call _handleChangeDropdownValue with correct parameter`, () => {
+                const instance = new DataGrid({ ...defaultProps });
+                const event = {};
+                instance._handleChangeDropdownValue = jest.fn();
+                const onChangeSuccess = instance[callbackName];
+
+                instance[methodName](event, expectedValue);
+
+                expect(instance._handleChangeDropdownValue).toHaveBeenCalledWith(event, expectedValue, expectedFieldName, onChangeSuccess);
+            })
+        }
+
+        const testCaseList = [
+            { methodName: 'handleChangeOddsGroup', expectedValue: 'A', expectedFieldName: 'OddsGroup', callbackName: 'handleToggleOddsGroup' },
+            { methodName: 'handleChangeSpecialLevel', expectedValue: '1', expectedFieldName: 'SpecialLevel', callbackName: 'handleToggleSpecialLevel' },
+            { methodName: 'handleChangeStatus', expectedValue: 'Archive', expectedFieldName: 'Status', callbackName: 'handleToggleStatus' }
+        ]
+
+        testCaseList.forEach(runTest);
     })
 
     describe('render', () => {
@@ -241,7 +355,8 @@ describe('DataGrid', () => {
             };
 
             const instance = new DataGrid(props);
-            instance._renderHeader = jest.fn(() => 'Header');
+            GridHelper.renderHeader = jest.fn(() => 'Header');
+            instance._buildDisplayedColumn = jest.fn(() => 'DisplayedColumn');
 
             let dataList;
             instance._renderDataSection = jest.fn((data) => {
@@ -262,7 +377,8 @@ describe('DataGrid', () => {
             };
 
             const instance = new DataGrid(props);
-            instance._renderHeader = jest.fn(() => 'Header');
+            GridHelper.renderHeader = jest.fn(() => 'Header');
+            instance._buildDisplayedColumn = jest.fn(() => 'DisplayedColumn');
 
             let dataList;
             instance._renderDataSection = jest.fn((data) => {

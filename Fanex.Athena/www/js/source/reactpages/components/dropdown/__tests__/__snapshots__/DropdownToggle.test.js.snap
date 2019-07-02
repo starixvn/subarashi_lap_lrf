@@ -2,7 +2,7 @@
 
 exports[`DropdownToggle render with default props - render correctly 1`] = `
 <button
-  className="dropdown-toggle caret"
+  className="dropdown-toggle site-caret"
 >
   Toggle Button
 </button>

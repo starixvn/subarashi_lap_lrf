@@ -81,7 +81,7 @@ export class PlayerDetail extends PureComponent {
 
         const src = this._getActionUrl();
         if (!src) {
-            return;
+            return null;
         }
 
         const frameHeight = this._getFrameHeight();

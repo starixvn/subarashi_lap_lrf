@@ -26,12 +26,13 @@ exports[`CollapsiblePanel render isCollapsed = true - should render arrowStyle c
     onClick={[Function]}
     style={
       Object {
+        "background": "#4c6274",
         "bottom": 0,
         "cursor": "pointer",
         "height": "15px",
         "left": "calc(50% - 10px)",
-        "padding": "1px 5px",
         "position": "absolute",
+        "textAlign": "center",
         "width": "20px",
       }
     }
