@@ -929,6 +929,64 @@
     <Content Include="www\js\source\reactpages\lib\__tests__\QueryString.test.js" />
     <Content Include="www\js\source\reactpages\lib\__tests__\report.test.js" />
     <Content Include="www\js\source\reactpages\lib\__tests__\site.test.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\player-account-info\actions\index.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\player-account-info\actions\types.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\player-account-info\components\AccountProfile.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\player-account-info\components\AppContainer.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\player-account-info\components\CustomerBettingStatus.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\player-account-info\components\FastCrossLink.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\player-account-info\components\index.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\player-account-info\lib\playerAccountService.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\player-account-info\reducers\index.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\actions\commonAction.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\actions\filterHandlerAction.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\actions\gridHandlerAction.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\actions\index.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\actions\playerDetailHandlerAction.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\actions\types.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\actions\__tests__\commonAction.test.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\actions\__tests__\filterHandlerAction.test.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\actions\__tests__\playerDetailHandlerAction.test.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\AppContainer.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\content-header\BatchUpdateButton.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\content-header\GridCaption.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\Content.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\DataGrid.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\filter\AdvancedSearch.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\filter\AthenaSearch.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\filter\SearchOption.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\FormFilter.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\grid\ContextMenu.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\grid\OddsGroupCell.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\grid\OddsGroupDropdown.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\grid\PlayerRow.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\grid\SpecialLevelCell.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\grid\SpecialLevelDropdown.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\grid\StatusCell.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\grid\StatusDropdown.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\grid\UserNameCell.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\index.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\PlayerDetail.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\__tests__\AppContainer.test.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\__tests__\content-header\BatchUpdateButton.test.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\__tests__\content-header\GridCaption.test.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\__tests__\Content.test.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\__tests__\DataGrid.test.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\__tests__\filter\AdvancedSearch.test.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\__tests__\filter\SearchOption.test.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\__tests__\FormFilter.test.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\__tests__\grid\ContextMenu.test.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\__tests__\PlayerDetail.test.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\lib\constants.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\lib\gridHelper.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\lib\playerlistservice.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\lib\reportExcel.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\reducers\filterHandlerReducer.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\reducers\gridHandlerReducer.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\reducers\index.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\reducers\playerDetailHandlerReducer.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\reducers\__tests__\filterHandlerReducer.test.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\reducers\__tests__\playerDetailHandlerReducer.test.js" />
     <Content Include="www\js\source\reactpages\pages\bettingticketscenter\common\components\action.js" />
     <Content Include="www\js\source\reactpages\pages\bettingticketscenter\common\components\__tests__\PageLayout.redux.test.js" />
     <Content Include="www\js\source\reactpages\pages\bettingticketscenter\common\constants\apiUrl.js" />
@@ -2522,6 +2580,11 @@
     <Content Include="www\js\build\dev\reactpages\playeradmin\playeraccountinfo.chunk.js.map" />
     <Content Include="www\js\build\dev\reactpages\playeradmin\playerlist.chunk.js.map" />
     <Content Include="www\css\source\reactpages\pages\playeradmin\account-info.scss" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\__tests__\content-header\__snapshots__\BatchUpdateButton.test.js.snap" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\__tests__\content-header\__snapshots__\GridCaption.test.js.snap" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\__tests__\filter\__snapshots__\AdvancedSearch.test.js.snap" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\__tests__\filter\__snapshots__\SearchOption.test.js.snap" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\__tests__\grid\__snapshots__\ContextMenu.test.js.snap" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="SiteConfig\WebConfigTransforms\SIT.config">
@@ -5538,7 +5601,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Logs\" />
-    <Folder Include="www\js\source\reactpages\Module\PlayerAdmin\" />
+    <Folder Include="www\js\source\reactpages\Module\PlayerAdmin\pages\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="www\js\source\reactpages\pages\subsidiaryperformance\components\index.jsx" />
