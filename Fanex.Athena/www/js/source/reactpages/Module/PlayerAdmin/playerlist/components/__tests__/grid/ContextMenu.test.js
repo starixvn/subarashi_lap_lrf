@@ -1,12 +1,12 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import {ContextMenu} from '../../grid/ContextMenu';
-import { DropdownMenu, DropdownItem } from '@jsroot/components/dropdown';
+import { ContextMenu } from '../../grid/ContextMenu';
+import { DropdownMenu } from '@jsroot/components/dropdown';
 
 describe('ContextMenu', () => {
     const defaultProps = {
-        currentActivePlayer: {custId: 1},
+        currentActivePlayer: { custId: 1 },
         position: null,
         isOpenContextMenu: false,
         setSelectedPlayer: jest.fn(),
@@ -26,7 +26,7 @@ describe('ContextMenu', () => {
     })
 
     it('onMouseEnter - isOpen should be true', () => {
-        const props = {...defaultProps};
+        const props = { ...defaultProps };
         const wrapper = shallow(<ContextMenu {...props} />);
         const menuProps = wrapper.find(DropdownMenu).props();
         menuProps.onMouseEnter();
@@ -55,7 +55,7 @@ describe('ContextMenu', () => {
         }];
 
         testCaseList.forEach(item => {
-            runTest(item);  
+            runTest(item);
         })
     })
 })

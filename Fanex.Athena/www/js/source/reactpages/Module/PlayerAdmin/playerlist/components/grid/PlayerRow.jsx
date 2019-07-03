@@ -4,14 +4,14 @@ import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../../actions';
 
 import { Row, Cell } from '@9softstudio/react-grid';
-import Switcher from '../../../../../components/Switcher';
+import Switcher from '@jsroot/components/Switcher';
 
 import UserNameCell from './UserNameCell';
 import OddsGroupCell from './OddsGroupCell';
 import SpecialLevelCell from './SpecialLevelCell';
 import StatusCell from './StatusCell';
 
-const PlayerRow = (props) => {
+export const PlayerRow = (props) => {
     const { 
         dataItem, 
         isChecked, 

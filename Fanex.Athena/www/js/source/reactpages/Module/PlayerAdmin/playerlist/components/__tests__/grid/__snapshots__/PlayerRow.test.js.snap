@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PlayerRow render - match snapshot 1`] = `
+<Component
+  key="1"
+>
+  <Component
+    className="center-align"
+  >
+    <Memo(StatusCell)
+      handleToggleStatus={[Function]}
+      isOnline={true}
+      value="online"
+    />
+  </Component>
+  <Component
+    className="center-align"
+  >
+    <Connect(Component)
+      dataItem={
+        Object {
+          "BaStatus": true,
+          "Currency": "USD",
+          "CurrentBalance": 100,
+          "CustId": 1,
+          "Email": "abc@yahoo.com",
+          "IsOnline": true,
+          "LastLoginIp": "1.1.1.",
+          "LastTransaction": "06/14/2019",
+          "OddsGroup": "A",
+          "OutstandingBalance": "200",
+          "RealName": "test1 real",
+          "SpecialLevel": 1,
+          "Status": "online",
+          "SystemId": "abc",
+          "UserName": "test1",
+        }
+      }
+      handleEnterContextMenu={[MockFunction]}
+      handleLeaveContextMenu={[MockFunction]}
+    />
+  </Component>
+  <Component
+    className="center-align"
+  >
+    abc
+  </Component>
+  <Component
+    className="center-align"
+  >
+    test1 real
+  </Component>
+  <Component
+    className="center-align"
+  >
+    USD
+  </Component>
+  <Component
+    className="center-align"
+  >
+    100
+  </Component>
+  <Component
+    className="center-align"
+  >
+    200
+  </Component>
+  <Component
+    className="center-align"
+  >
+    <Memo(OddsGroupCell)
+      handleToggleOddsGroup={[Function]}
+      value="A"
+    />
+  </Component>
+  <Component
+    className="center-align"
+  >
+    <Switcher
+      checked={true}
+      onChange={[Function]}
+    />
+  </Component>
+  <Component
+    className="center-align"
+  >
+    <Memo(SpecialLevelCell)
+      handleToggleSpecialLevel={[Function]}
+      value={1}
+    />
+  </Component>
+</Component>
+`;

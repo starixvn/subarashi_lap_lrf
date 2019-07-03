@@ -3,7 +3,7 @@ import React from 'react';
 import { oddsGroupListWithStyle } from '../../lib/constants';
 import DropdownLabel from '../../../../../components/DropdownLabel';
 
-const OddsGroupCell = (props) => {
+export const OddsGroupCell = (props) => {
     const { value, handleToggleOddsGroup } = props;
     const style = oddsGroupListWithStyle[value];
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { DropdownMenu, DropdownItem } from '@jsroot/components/dropdown';
 import { oddsGroupListWithStyle } from '../../lib/constants';
 
-const OddsGroupDropdown = (props) => {
+export const OddsGroupDropdown = (props) => {
     const { position, onClose, onChange } = props;
     const isOpen = position !== null;
 

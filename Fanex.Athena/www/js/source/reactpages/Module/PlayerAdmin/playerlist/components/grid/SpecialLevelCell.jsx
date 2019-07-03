@@ -3,7 +3,7 @@ import React from 'react';
 import { specialLevelListWithColor } from '../../lib/constants';
 import DropdownLabel from '../../../../../components/DropdownLabel';
 
-const SpecialLevelCell = (props) => {
+export const SpecialLevelCell = (props) => {
     const { value, handleToggleSpecialLevel } = props;
     const style = { backgroundColor: specialLevelListWithColor[value] };
 

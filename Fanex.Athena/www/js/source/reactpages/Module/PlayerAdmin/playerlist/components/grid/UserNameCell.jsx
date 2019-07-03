@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../../actions';
 
-const UserNameCell = (props) => {
+export const UserNameCell = (props) => {
     const {dataItem, setSelectedPlayer, handleEnterContextMenu, handleLeaveContextMenu, setCurrentActivePlayer } = props;
 
     const handleSelectPlayer = (event) => {

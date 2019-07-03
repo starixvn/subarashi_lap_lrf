@@ -1,7 +1,7 @@
 import React from 'react';
 import { playerStatus } from '../../lib/constants';
 
-const StatusCell = (props) => {
+export const StatusCell = (props) => {
     const {value, isOnline, handleToggleStatus} = props;
 
     const statusName = playerStatus[value];
