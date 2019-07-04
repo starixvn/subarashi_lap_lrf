@@ -2,18 +2,22 @@
 {
     public class SearchPlayerMetaModel
     {
-        public string UserName { get; set; }
+        public int LicenseeId { get; set; }
 
-        public string BankAccountNumber { get; set; }
+        public byte SearchOption { get; set; }
 
-        public string Email { get; set; }
+        public string UserName { get; set; } = string.Empty;
 
-        public string Currency { get; set; }
+        public string BankAccountNumber { get; set; } = string.Empty;
 
-        public string OddsGroup { get; set; }
+        public string Email { get; set; } = string.Empty;
 
-        public string SpecialLevel { get; set; }
+        public string Currency { get; set; } = string.Empty;
 
-        public bool BaStatus { get; set; }
+        public string OddsGroup { get; set; } = string.Empty;
+
+        public string SpecialLevel { get; set; } = string.Empty;
+
+        public byte BaFilter { get; set; }
     }
 }

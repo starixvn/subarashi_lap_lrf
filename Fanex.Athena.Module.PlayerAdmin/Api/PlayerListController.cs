@@ -1,31 +1,34 @@
-﻿using System.Collections.Generic;
-using System.Web.Http;
-using Fanex.Athena.Api.Base;
+﻿using Fanex.Athena.Api.Base;
 using Fanex.Athena.Module.PlayerAdmin.DTO;
 using Fanex.Athena.Module.PlayerAdmin.MetaModel;
-using Fanex.Athena.Module.PlayerAdmin.Repository;
+using Fanex.Athena.Module.PlayerAdmin.Services.Interfaces;
+using System.Collections.Generic;
+using System.Web.Http;
 
 namespace Fanex.Athena.Module.PlayerAdmin.Api
 {
-    public class PlayerMainController : ExternalApiBaseController
+    public class PlayerListController : ExternalApiBaseController
     {
-        private readonly IPlayerListRepository _playerListRepository;
+        private readonly IPlayerListService _playerListService;
 
-        public PlayerMainController()
+        public PlayerListController(IPlayerListService playerListService)
         {
-
-        }
-
-        public PlayerMainController(IPlayerListRepository playerListRepository)
-        {
-            _playerListRepository = playerListRepository;
+            _playerListService = playerListService;
         }
 
         /**
          * search player list
          */
+
         [HttpPost]
         public dynamic Search(SearchPlayerMetaModel searchParam)
+        {
+            searchParam.LicenseeId = LicenseeId;
+
+            return _playerListService.SearchPlayer(searchParam);
+        }
+
+        private EntityResult<Player> CreateFakeResult()
         {
             var dataList = new List<Player>
             {

@@ -149,6 +149,7 @@
   <ItemGroup>
     <Compile Include="Constraints\SamePropertiesConstraint.cs" />
     <Compile Include="Helpers\ApiControllerTestHelper.cs" />
+    <Compile Include="Helpers\ExternalApiHelper.cs" />
     <Compile Include="Helpers\FakeHelper.cs" />
     <Compile Include="Helpers\MvcHelper.cs" />
     <Compile Include="Helpers\ObjectHelper.cs" />
