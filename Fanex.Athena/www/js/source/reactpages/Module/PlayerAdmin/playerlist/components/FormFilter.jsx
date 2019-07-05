@@ -10,7 +10,7 @@ import { licenseeType } from '../lib/constants';
 import CollapsiblePanel from '@jsroot/components/collapsible-panel';
 import UserGuide from '@jsroot/components/UserGuide';
 import LangHelper from '@jsroot/lib/langHelper';
-import { searchOptions } from '../lib/constants';
+import { searchOptions, baStatusList, specialLevelListWithColor } from '../lib/constants';
 
 export class FormFilter extends PureComponent {
     constructor(props) {
@@ -23,19 +23,24 @@ export class FormFilter extends PureComponent {
             currency: '',
             oddsGroup: '',
             specialLevel: '',
-            baStatus: '',
+            baFilter: baStatusList.All,
             searchOption: searchOptions.matchCase
         }
 
         this.userGuide = this._renderUserGuide();
+        this.allSpecialLevel = Object.keys(specialLevelListWithColor).map(item => item).join(',');
     }
 
     handleSubmit = (event) => {
         event.preventDefault();
         const {pagingOption} = this.props;
         this.props.setSelectedPlayer(null);
+
+        const {specialLevel, ...allParam} = this.state;
+        const actualSpecialLevel = specialLevel.trim();
         const param = { 
-            ...this.state, 
+            ...allParam, 
+            specialLevel: actualSpecialLevel === '' ? this.allSpecialLevel : actualSpecialLevel,
             pageSize: pagingOption.PageSize, 
             pageIndex: pagingOption.PageIndex 
         };
@@ -70,7 +75,7 @@ export class FormFilter extends PureComponent {
 
     render() {
         const { userName, bankAccountNumber, email, searchOption, ...advancedSearchParam } = this.state;
-        const { type, isAdvancedSearch, isFilterCollapsing } = this.props;
+        const { type, isAdvancedSearch, isFilterCollapsing, currencyList } = this.props;
         const iconToggle = {
             tag: 'div',
             className: isFilterCollapsing ? 'chevron down' : 'chevron up',
@@ -91,7 +96,7 @@ export class FormFilter extends PureComponent {
 
                     {type === licenseeType.nonApi && <AthenaSearch onChange={this.handleChange} 
                                                         bankAccountNumber={bankAccountNumber} email={email} />}
-                    {isAdvancedSearch && <AdvancedSearch param={advancedSearchParam} onChange={this.handleAdvancedSearchChange} />}
+                    {isAdvancedSearch && <AdvancedSearch currencyList={currencyList} param={advancedSearchParam} onChange={this.handleAdvancedSearchChange} />}
 
                     <div className="col-12 col-md-2 col-sm-2 col-lg-1 col-xl-1">
                         <div className="form-group">
@@ -119,8 +124,8 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators({ searchPlayer, setSelectedPlayer, setAdvancedSearch, setCollapseFilter }, dispatch);
 }
 function mapStateToProps(state) {
-    const { type, isAdvancedSearch, isFilterCollapsing, pagingOption } = state;
-    return Object.assign({}, { type, isAdvancedSearch, isFilterCollapsing, pagingOption });
+    const { type, isAdvancedSearch, isFilterCollapsing, pagingOption, currencyList } = state;
+    return Object.assign({}, { type, isAdvancedSearch, isFilterCollapsing, pagingOption, currencyList });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FormFilter);

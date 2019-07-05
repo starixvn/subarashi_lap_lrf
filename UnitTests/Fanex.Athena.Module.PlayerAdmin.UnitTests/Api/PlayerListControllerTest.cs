@@ -2,6 +2,8 @@
 using Fanex.Athena.Module.PlayerAdmin.DTO;
 using Fanex.Athena.Module.PlayerAdmin.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Services.Interfaces;
+using Fanex.Athena.Service.Core.Users.Interfaces;
+using Fanex.Athena.Session.Model;
 using Fanex.Athena.UnitTest.Common.Helpers;
 using NSubstitute;
 using NUnit.Framework;
@@ -11,12 +13,12 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Api
     [TestFixture]
     public class PlayerListControllerTest
     {
-        private IPlayerListService _playerListService;
+        private IPlayerListQueryService _playerListService;
 
         [OneTimeSetUp]
         public void Setup()
         {
-            _playerListService = Substitute.For<IPlayerListService>();
+            _playerListService = Substitute.For<IPlayerListQueryService>();
         }
 
         [OneTimeTearDown]
@@ -29,14 +31,14 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Api
         public void Search_WhenCall_AssignParamValueCorrectly()
         {
             // Arrange
-            var searchParam = new SearchPlayerMetaModel
+            var searchParam = new SearchPlayerByUserNameMetaModel
             {
                 UserName = "Test",
                 Currency = "4"
             };
 
             var expectedReturnedData = new EntityResult<Player>();
-            _playerListService.SearchPlayer(searchParam).Returns(expectedReturnedData);
+            _playerListService.SearchPlayerByUserName(searchParam).Returns(expectedReturnedData);
 
             using (var controller = CreateController())
             {
@@ -48,11 +50,16 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Api
             }
         }
 
-        private PlayerListController CreateController()
+        private PlayerListQueryController CreateController()
         {
             var actionContext = ExternalApiHelper.CreateMockActionContext();
+            var sessionService = Substitute.For<ISessionService>();
+            sessionService.LicenseeSession.Returns(new LicenseeSession
+            {
+                LicenseeId = 1
+            });
 
-            return new PlayerListController(_playerListService)
+            return new PlayerListQueryController(sessionService, _playerListService)
             {
                 ActionContext = actionContext
             };

@@ -12,7 +12,7 @@
   <Function Name="Licensee">
     <Setting Key="Acc_SelCurrencyByLicensee" SpName="Acc_SelCurrencyByLicensee" DbName="DBEXT.bodb02.bodbLicenseeNet" />
     <Setting Key="Lrf_SelCurrencyByLicenseeUser" SpName="Lrf_SelCurrencyByLicenseeUser" DbName="DBEXT.bodb02.bodbLicenseeNet">
-      <Mapping DataField="Currency" ObjectProperty="CurrencyId"/>
+      <Mapping DataField="Currency" ObjectProperty="CurrencyId" />
     </Setting>
     <Setting Key="Lrf_LicenseeProduct3rdSel" SpName="Lrf_LicenseeProduct3rdSel" DbName="DBLIC.bodb_Licensee.bodbLicenseeNet" />
     <Setting Key="Lrf_LicenseeProduct3rdSel_active" SpName="Lrf_LicenseeProduct3rdSel_active" DbName="DBLIC.bodb_Licensee.bodbLicenseeNet" />
@@ -27,10 +27,10 @@
     <Setting Key="Lrf_CustomerSelCheckBelonging" SpName="Lrf_CustomerSelCheckBelonging" DbName="DBEXT.bodb02.bodbLicenseeNet" />
     <Setting Key="Lrf_LicenseeProductSel" SpName="Lrf_LicenseeProductSel" DbName="DBLIC.bodb_Licensee.bodbLicenseeNet" />
     <Setting Key="Lrf_LicenseeSelBySiteName" SpName="Lrf_LicenseeSelBySiteName" DbName="DBLIC.bodb_Licensee.bodbLicenseeNet">
-      <Mapping DataField="LicenseeID" ObjectProperty="Id"/>
-      <Mapping DataField="LicenseeName" ObjectProperty="Name"/>
-      <Mapping DataField="IsAllowedMemberComm" ObjectProperty="IsAllowedCustomerComm"/>
-      <Mapping DataField="EnableBA" ObjectProperty="IsEnableBA"/>
+      <Mapping DataField="LicenseeID" ObjectProperty="Id" />
+      <Mapping DataField="LicenseeName" ObjectProperty="Name" />
+      <Mapping DataField="IsAllowedMemberComm" ObjectProperty="IsAllowedCustomerComm" />
+      <Mapping DataField="EnableBA" ObjectProperty="IsEnableBA" />
     </Setting>
     <Setting Key="Lrf_SyncInternalUser" SpName="Lrf_SyncInternalUser" DbName="DBCUST.bodb_Licensee.bodbLicenseeNet" />
   </Function>
@@ -118,6 +118,10 @@
     <Setting Key="Lrf_CustomerLoginInfo" SpName="Lrf_CustomerLoginInfo" DbName="DBEXT.bodb02.bodbLicenseeNet" />
     <Setting Key="Lrf_CustomerSelStatus" SpName="Lrf_CustomerSelStatus" DbName="DBEXT.bodb02.bodbLicenseeNet" />
     <Setting Key="Lrf_CustomerUpdUgroup" SpName="Lrf_CustomerUpdUgroup" DbName="DBCUST.CustDB.bodbLicenseeNet" />
+  </Function>
+
+  <Function Name="PlayerAdmin">
+    <Setting Key="Lrf_CustomerSelByUsername" SpName="Lrf_CustomerSelByUsername" DbName="DBEXT.bodb02.bodbLicenseeNet" />
   </Function>
 
   <Function Name="GroupComm">

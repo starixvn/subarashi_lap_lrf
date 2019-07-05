@@ -3,11 +3,11 @@ import { systemType } from '../../../constants/configInfo';
 import ReportExcel from './reportExcel';
 
 const apiInfo = {
-    lrfPlayerList: { action: 'api/PlayerMain/Search', type: systemType.lrf },
+    lrfPlayerList: { action: 'api/PlayerListQuery/Search', type: systemType.lrf },
     lapPlayerList: { action: 'PlayerAdminContainer/Search', type: systemType.newAdmin }
 }
 
-export default class PlayerListService {
+export default class PlayerListQueryService {
     constructor() {
         this.commonService = FactoryCommonService.createInstance();
     }
@@ -21,7 +21,7 @@ export default class PlayerListService {
 
         for (let i = 0; i < lrfList.length; i++) {
             const lrfItem = lrfList[i];
-            const lapItem = lapList.find(x => x.CustId === lrfItem.CustId);
+            const lapItem = lapList.find(x => x.CustId === lrfItem.CustId) || {};
 
             if (lrfItem && lapItem) {
                 const { CustId, UserName, SystemId, Currency, CurrentBalance, OutstandingBalance, OddsGroup, BaStatus, SpecialLevel } = lrfItem;

@@ -1,11 +1,11 @@
 import { SET_PARAM, SET_ADVANCED_SEARCH, SET_COLLAPSE_FILTER } from './types'
-import PlayerListService from '../lib/playerListService';
+import PlayerListQueryService from '../lib/playerListQueryService';
 import { setSelectedPlayer } from './commonAction';
 import { setPlayerList, setPagingOption } from './gridHandlerAction';
 import { defaultPagingOption } from '../lib/constants.js';
 
 export const searchPlayer = (param) => (dispatch) => {
-    const service = new PlayerListService();
+    const service = new PlayerListQueryService();
     service.getPlayerList(param).then(result => {
         const { playerList, totalItem } = result;
         dispatch(setPlayerList(playerList));

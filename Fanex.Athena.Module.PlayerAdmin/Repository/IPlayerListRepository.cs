@@ -5,6 +5,6 @@ namespace Fanex.Athena.Module.PlayerAdmin.Repository
 {
     public interface IPlayerListRepository
     {
-        EntityResult<Player> SearchPlayerList(SearchPlayerMetaModel searchParam);
+        EntityResult<Player> SearchPlayerList(SearchPlayerByUserNameMetaModel searchParam);
     }
 }

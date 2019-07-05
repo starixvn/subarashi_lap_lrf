@@ -15,6 +15,8 @@ export const playerList = createReducer(null, {
 
 export const type = createReducer(null, {});
 
+export const currencyList = createReducer([], {});
+
 export const isAdvancedSearch = createReducer(false, {
     [SET_ADVANCED_SEARCH](preState, action) {
         return action.data;

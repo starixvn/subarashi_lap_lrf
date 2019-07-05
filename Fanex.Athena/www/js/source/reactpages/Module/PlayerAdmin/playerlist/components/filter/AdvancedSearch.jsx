@@ -1,22 +1,19 @@
 import React, { PureComponent } from 'react';
 import MultipleSelect from '@9softstudio/react-multiselect';
 import PropTypes from 'prop-types';
+import Select from 'react-select';
+import { baStatusList, specialLevelListWithColor, oddsGroupListWithStyle } from '../../lib/constants';
 
 export class AdvancedSearch extends PureComponent {
     constructor(props) {
         super(props);
 
-        this.currencyList = [{ Id: 'eur', Value: 'EUR', Status: true }, { Id: 'usd', Value: 'usd', Status: true }];
-        this.oddsGroupList = [{ Id: 'A', Value: 'A', Status: true }, { Id: 'B', Value: 'B', Status: true }, { Id: 'C', Value: 'C', Status: true }];
-        this.specialLevelList = [{ Id: '1', Value: '1', Status: true }, { Id: '2', Value: '2', Status: true }];
-        this.baStatusList = [{ Id: 'On', Value: 'On', Status: true }, { Id: 'Off', Value: 'Off', Status: true }];
+        this.oddsGroupList = Object.keys(oddsGroupListWithStyle).map(item => ({ Id: item, Value: item, Status: true }));
+        this.specialLevelList = Object.keys(specialLevelListWithColor).map(item => ({ Id: item, Value: item, Status: true }));
+        this.baStatusList = Object.keys(baStatusList).map(item => ({ value: baStatusList[item], label: item }));
     }
 
     _createSelectData(originalList, selectedItemString) {
-        if (selectedItemString === '') {
-            return [...originalList];
-        }
-
         const selectedItemList = selectedItemString.split(',').filter(x => x !== '');
 
         return originalList.map(item => {
@@ -25,7 +22,7 @@ export class AdvancedSearch extends PureComponent {
             return {
                 Id,
                 Value,
-                Status: selectedItemList.indexOf(Id) !== -1
+                Status: selectedItemString === '' || selectedItemList.indexOf(Id) !== -1
             }
         })
     }
@@ -34,12 +31,17 @@ export class AdvancedSearch extends PureComponent {
         this.props.onChange(name, value);
     }
 
+    handleChangeSingleDropdown = (name, item) => {
+        this.props.onChange(name, item.value);
+    }
+
     render() {
-        const { currency, oddsGroup, specialLevel, baStatus } = this.props.param;
-        const currencyList = this._createSelectData(this.currencyList, currency);
+        const { currencyList, param } = this.props;
+        const { currency, oddsGroup, specialLevel, baFilter } = param;
+        const convertedCurrencyList = this._createSelectData(currencyList, currency);
         const oddsGroupList = this._createSelectData(this.oddsGroupList, oddsGroup);
         const specialLevelList = this._createSelectData(this.specialLevelList, specialLevel);
-        const baStatusList = this._createSelectData(this.baStatusList, baStatus);
+        const selectedBaStatus = this.baStatusList.find(x => x.value === baFilter);
 
         return (
             <>
@@ -47,7 +49,7 @@ export class AdvancedSearch extends PureComponent {
                     <div className="form-group">
                         <label className="label-text">Currency</label>
                         <MultipleSelect id="currency"
-                            dataSource={currencyList}
+                            dataSource={convertedCurrencyList}
                             keyField={"Id"}
                             valueField={"Value"}
                             statusField={"Status"}
@@ -82,12 +84,11 @@ export class AdvancedSearch extends PureComponent {
                 <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
                     <div className="form-group">
                         <label className="label-text">BA</label>
-                        <MultipleSelect id="baStatus"
-                            dataSource={baStatusList}
-                            keyField={"Id"}
-                            valueField={"Value"}
-                            statusField={"Status"}
-                            onChange={(currentItem, selectedItemsKey) => this.handleChange('baStatus', selectedItemsKey)} />
+                        <Select instanceId='ddlBaStatus'
+                            name='form-field-name'
+                            value={selectedBaStatus}
+                            options={this.baStatusList}
+                            onChange={(item) => this.handleChangeSingleDropdown('baFilter', item)} />
                     </div>
                 </div>
             </>
@@ -100,7 +101,7 @@ const propTypes = {
         currency: PropTypes.string.isRequired,
         oddsGroup: PropTypes.string.isRequired,
         specialLevel: PropTypes.string.isRequired,
-        baStatus: PropTypes.string.isRequired
+        baFilter: PropTypes.number.isRequired
     }).isRequired,
     onChange: PropTypes.func.isRequired
 };

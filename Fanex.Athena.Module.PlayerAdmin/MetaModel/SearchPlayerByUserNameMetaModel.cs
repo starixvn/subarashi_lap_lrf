@@ -1,9 +1,7 @@
 ﻿namespace Fanex.Athena.Module.PlayerAdmin.MetaModel
 {
-    public class SearchPlayerMetaModel
+    public class SearchPlayerByUserNameMetaModel : PlayerAdminBaseMetaModel
     {
-        public int LicenseeId { get; set; }
-
         public byte SearchOption { get; set; }
 
         public string UserName { get; set; } = string.Empty;
@@ -19,5 +17,9 @@
         public string SpecialLevel { get; set; } = string.Empty;
 
         public byte BaFilter { get; set; }
+
+        public int PageSize { get; set; }
+
+        public int PageIndex { get; set; }
     }
 }

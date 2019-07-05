@@ -1,12 +1,4 @@
-﻿using System;
-using System.Configuration;
-using System.Linq;
-using System.Reflection;
-using System.Web.Compilation;
-using System.Web.Http;
-using System.Web.Http.ExceptionHandling;
-using System.Web.Mvc;
-
+﻿
 using Autofac;
 using Autofac.Integration.Mvc;
 using Autofac.Integration.WebApi;
@@ -21,6 +13,14 @@ using Fanex.Logging;
 
 using ONEbook.UM.Services;
 using ONEbook.UM.Services.Impl;
+using System;
+using System.Configuration;
+using System.Linq;
+using System.Reflection;
+using System.Web.Compilation;
+using System.Web.Http;
+using System.Web.Http.ExceptionHandling;
+using System.Web.Mvc;
 
 namespace Fanex.Athena
 {
@@ -36,9 +36,14 @@ namespace Fanex.Athena
             var serviceAssemblies = GetServiceAssemblies(assemblies);
             var controllerAssemblies = GetControllerAssemblies(assemblies);
             var apiControllerAssemblies = GetApiControllerAssemblies(assemblies);
+            var moduleAssemblies = GetModuleAssemblies(assemblies);
             builder.RegisterAssemblyTypes(serviceAssemblies).AsImplementedInterfaces();
             builder.RegisterControllers(controllerAssemblies);
             builder.RegisterApiControllers(apiControllerAssemblies);
+
+            builder.RegisterAssemblyTypes(moduleAssemblies).AsImplementedInterfaces();
+            builder.RegisterControllers(moduleAssemblies);
+            builder.RegisterApiControllers(moduleAssemblies);
 
             builder.RegisterFilterProvider();
             builder.RegisterWebApiFilterProvider(config);
@@ -91,20 +96,24 @@ namespace Fanex.Athena
             var controllerFileNames = new[]
             {
                 "Fanex.Athena.Controllers",
-                "Fanex.Athena.Api",
-				"Fanex.Athena.Module.Controllers"
+                "Fanex.Athena.Api"
             };
             return assemblies.Where(ass => !controllerFileNames.Any(x => ass.FullName.Contains(x))).ToArray();
         }
 
         private static Assembly[] GetControllerAssemblies(Assembly[] assemblies)
         {
-            return assemblies.Where(ass => ass.FullName.Contains("Fanex.Athena.Controllers") || ass.FullName.Contains("Fanex.Athena.Module")).ToArray();
+            return assemblies.Where(ass => ass.FullName.Contains("Fanex.Athena.Controllers")).ToArray();
         }
 
         private static Assembly[] GetApiControllerAssemblies(Assembly[] assemblies)
         {
             return assemblies.Where(ass => ass.FullName.Contains("Fanex.Athena.Api") || FilterDashboardApi(ass)).ToArray();
+        }
+
+        private static Assembly[] GetModuleAssemblies(Assembly[] assemblies)
+        {
+            return assemblies.Where(ass => ass.FullName.Contains("Fanex.Athena.Module")).ToArray();
         }
     }
 }

@@ -1,5 +1,5 @@
 import { SET_DISPLAYED_COLUMN_LIST, SET_PLAYER_LIST, SET_CURRENT_ACTIVE_PLAYER, SET_PAGING } from './types';
-import PlayerListService from '../lib/playerListService';
+import PlayerListQueryService from '../lib/playerListQueryService';
 
 export const setDisplayedColumnList = (data) => {
     return {
@@ -30,6 +30,6 @@ export const setPagingOption = (data) => {
 }
 
 export const exportExcel = (licType, param) => () => {
-    const service = new PlayerListService();
+    const service = new PlayerListQueryService();
     service.exportExcel(licType, param);
 }

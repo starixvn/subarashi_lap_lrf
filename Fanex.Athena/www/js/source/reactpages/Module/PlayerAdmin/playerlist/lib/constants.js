@@ -58,9 +58,9 @@ export const heightSlicing = {
 }
 
 export const searchOptions = {
-    matchPrefix: '1',
-    matchCase: '2',
-    matchWholeWord: '3'
+    matchWholeWord: '1',
+    matchPrefix: '2',
+    matchCase: '3'
 }
 
 export const defaultPagingOption = {
@@ -75,6 +75,12 @@ export const playerStatus = {
     '1': 'Locked',
     '2': 'Closed',
     '3': 'Archived'
+}
+
+export const baStatusList = {
+    'All': 0,
+    'On': 1,
+    'Off': 2
 }
 
 export const headerText = {
