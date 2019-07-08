@@ -2370,4 +2370,8 @@
     <value>Live Casino</value>
     <comment>117900</comment>
   </data>
+  <data name="ProductCC" xml:space="preserve">
+    <value>Card Club</value>
+    <comment>115449</comment>
+  </data>
 </root>
