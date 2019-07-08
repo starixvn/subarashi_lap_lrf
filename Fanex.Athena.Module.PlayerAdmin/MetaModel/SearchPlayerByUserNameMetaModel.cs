@@ -4,17 +4,15 @@
     {
         public byte SearchOption { get; set; }
 
-        public string UserName { get; set; } = string.Empty;
+        public string UserName { get; set; }
 
-        public string BankAccountNumber { get; set; } = string.Empty;
+        public string BankAccountNumber { get; set; }
 
-        public string Email { get; set; } = string.Empty;
+        public string Email { get; set; }
 
-        public string Currency { get; set; } = string.Empty;
+        public string OddsGroup { get; set; }
 
-        public string OddsGroup { get; set; } = string.Empty;
-
-        public string SpecialLevel { get; set; } = string.Empty;
+        public string SpecialLevel { get; set; }
 
         public byte BaFilter { get; set; }
 

@@ -96,7 +96,8 @@ namespace Fanex.Athena
             var controllerFileNames = new[]
             {
                 "Fanex.Athena.Controllers",
-                "Fanex.Athena.Api"
+                "Fanex.Athena.Api",
+                "Fanex.Athena.Module"
             };
             return assemblies.Where(ass => !controllerFileNames.Any(x => ass.FullName.Contains(x))).ToArray();
         }

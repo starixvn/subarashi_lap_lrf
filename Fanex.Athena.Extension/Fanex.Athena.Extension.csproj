@@ -130,7 +130,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="External\CurrencyValidator.cs" />
     <Compile Include="Helper\CasinoHelper.cs" />
+    <Compile Include="Helper\ClientRequestHelper.cs" />
     <Compile Include="Helper\DataHelper.cs" />
     <Compile Include="HashtableExtensions.cs" />
     <Compile Include="Helper\ConvertHelper.cs" />

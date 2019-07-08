@@ -40,6 +40,9 @@
     <Reference Include="Fanex.Data, Version=3.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.Data.3.1.0\lib\net461\Fanex.Data.dll</HintPath>
     </Reference>
+    <Reference Include="Fanex.Logging, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.Logging.2.0.0\lib\net461\Fanex.Logging.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
@@ -106,6 +109,7 @@
   <ItemGroup>
     <Compile Include="Api\PlayerDetailedInfoController.cs" />
     <Compile Include="Api\PlayerExtController.cs" />
+    <Compile Include="Api\PlayerListCommandController.cs" />
     <Compile Include="Api\PlayerLogController.cs" />
     <Compile Include="Api\PlayerListQueryController.cs" />
     <Compile Include="Controllers\PlayerRunningBetlistController.cs" />
@@ -113,12 +117,20 @@
     <Compile Include="Controllers\BetLimitController.cs" />
     <Compile Include="DTO\EntityResult.cs" />
     <Compile Include="DTO\Player.cs" />
+    <Compile Include="MetaModel\PlayerListCommandBaseDbParam.cs" />
     <Compile Include="MetaModel\PlayerAdminBaseMetaModel.cs" />
     <Compile Include="MetaModel\SearchPlayerByIdListMetaModel.cs" />
     <Compile Include="MetaModel\SearchPlayerByUserNameMetaModel.cs" />
+    <Compile Include="MetaModel\UpdateBaStatusMetaModel.cs" />
+    <Compile Include="MetaModel\UpdateOddsGroupMetaModel.cs" />
+    <Compile Include="MetaModel\UpdateSpecialLevelMetaModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\IPlayerListCommandRepository.cs" />
     <Compile Include="Repository\IPlayerListRepository.cs" />
+    <Compile Include="Repository\PlayerListCommandRepository.cs" />
+    <Compile Include="Services\Interfaces\IPlayerListCommandService.cs" />
     <Compile Include="Services\Interfaces\IPlayerListQueryService.cs" />
+    <Compile Include="Services\PlayerListCommandService.cs" />
     <Compile Include="Services\PlayerListQueryService.cs" />
     <Compile Include="ViewModels\PlayerAdminViewModel.cs" />
   </ItemGroup>
@@ -138,6 +150,10 @@
       <Project>{255E120A-83BF-4F72-9E31-6050D5704069}</Project>
       <Name>Fanex.Athena.Controllers.Base</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DataAccess\Fanex.Athena.DataAccess.Core\Fanex.Athena.DataAccess.Core.csproj">
+      <Project>{A6BE21E8-6895-4863-BA3A-E6B21D3CE78D}</Project>
+      <Name>Fanex.Athena.DataAccess.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Fanex.Athena.Extension\Fanex.Athena.Extension.csproj">
       <Project>{71F95E53-36D0-4091-828D-ED14C9939C35}</Project>
       <Name>Fanex.Athena.Extension</Name>
@@ -146,6 +162,10 @@
       <Project>{B41E38EF-54AD-4866-968F-C856DE9DC072}</Project>
       <Name>Fanex.Athena.Session</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Model\Fanex.Athena.Model.Core\Fanex.Athena.Model.Core.csproj">
+      <Project>{5F410090-94C0-46A5-9FEC-B6C3B745B7A0}</Project>
+      <Name>Fanex.Athena.Model.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Resources\Fanex.Athena.Resources\Fanex.Athena.Resources.csproj">
       <Project>{17B0022C-4902-4C61-908A-5DB81568DC3A}</Project>
       <Name>Fanex.Athena.Resources</Name>
@@ -153,6 +173,10 @@
     <ProjectReference Include="..\Service\Fanex.Athena.Service.Core\Fanex.Athena.Service.Core.csproj">
       <Project>{FCFD7434-085B-4C93-848F-E1CBCEDCC5A0}</Project>
       <Name>Fanex.Athena.Service.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Service\Fanex.Athena.Service.StatelessCore\Fanex.Athena.Service.StatelessCore.csproj">
+      <Project>{DA9A50E3-C62D-4F12-96C2-3AC289D423FE}</Project>
+      <Name>Fanex.Athena.Service.StatelessCore</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

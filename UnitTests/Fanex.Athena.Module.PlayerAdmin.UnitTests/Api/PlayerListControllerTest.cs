@@ -2,8 +2,6 @@
 using Fanex.Athena.Module.PlayerAdmin.DTO;
 using Fanex.Athena.Module.PlayerAdmin.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Services.Interfaces;
-using Fanex.Athena.Service.Core.Users.Interfaces;
-using Fanex.Athena.Session.Model;
 using Fanex.Athena.UnitTest.Common.Helpers;
 using NSubstitute;
 using NUnit.Framework;
@@ -53,13 +51,8 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Api
         private PlayerListQueryController CreateController()
         {
             var actionContext = ExternalApiHelper.CreateMockActionContext();
-            var sessionService = Substitute.For<ISessionService>();
-            sessionService.LicenseeSession.Returns(new LicenseeSession
-            {
-                LicenseeId = 1
-            });
 
-            return new PlayerListQueryController(sessionService, _playerListService)
+            return new PlayerListQueryController(_playerListService)
             {
                 ActionContext = actionContext
             };

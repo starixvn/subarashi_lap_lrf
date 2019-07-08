@@ -46,7 +46,6 @@ namespace Fanex.Athena.Module.PlayerAdmin.Services
             objectDb.SetParameterValue("BaFilter", searchParam.BaFilter);
             objectDb.SetParameterValue("SpecialLevel", searchParam.SpecialLevel);
             objectDb.SetParameterValue("OddsGroups", searchParam.OddsGroup);
-            objectDb.SetParameterValue("AgentList", searchParam.AgentListXml);
             objectDb.SetParameterValue("PageSize", searchParam.PageSize);
             objectDb.SetParameterValue("PageIndex", searchParam.PageIndex);
 

@@ -66,7 +66,7 @@ export const searchOptions = {
 export const defaultPagingOption = {
     PageIndex: 1,
     PageSize: 50,
-    PageList: [50, 100, 200, 500],
+    PageList: [50, 100, 200, 300, 400, 500, 1000, 2000],
     TotalItem: null
 }
 

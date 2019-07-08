@@ -1,12 +1,9 @@
 ﻿using Fanex.Athena.Api.Base;
+using Fanex.Athena.Extension.External;
 using Fanex.Athena.Module.PlayerAdmin.DTO;
 using Fanex.Athena.Module.PlayerAdmin.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Services.Interfaces;
-using Fanex.Athena.Resources;
-using Fanex.Athena.Service.Core.Users.Interfaces;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web.Http;
 
 namespace Fanex.Athena.Module.PlayerAdmin.Api
@@ -14,35 +11,32 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api
     public class PlayerListQueryController : ExternalApiBaseController
     {
         private readonly IPlayerListQueryService _playerListService;
-        private readonly ISessionService _sessionService;
 
-        public PlayerListQueryController(ISessionService sessionService, IPlayerListQueryService playerListService)
+        public PlayerListQueryController(IPlayerListQueryService playerListService)
         {
             _playerListService = playerListService;
-            _sessionService = sessionService;
         }
 
         [HttpPost]
-        public dynamic Search(SearchPlayerByUserNameMetaModel searchParam)
+        public EntityResult<Player> Search(SearchPlayerByUserNameMetaModel searchParam)
         {
+            searchParam.Currency = searchParam.Currency?.Trim();
+            var isValidCurrency = CurrencyValidator.IsValid(CurrencyIDList?.Trim(), searchParam.Currency);
+            if (!isValidCurrency)
+            {
+                return new EntityResult<Player>();
+            }
+
             AssignSearchByUserNameParam(searchParam);
 
-            return _playerListService.SearchPlayerByUserName(searchParam);
+            return CreateFakeResult();
+
+            // return _playerListService.SearchPlayerByUserName(searchParam);
         }
 
         private void AssignSearchByUserNameParam(SearchPlayerByUserNameMetaModel searchParam)
         {
             searchParam.LicenseeId = LicenseeId;
-
-            var currencyListString = searchParam.Currency?.Trim();
-            if (string.IsNullOrEmpty(currencyListString))
-            {
-                throw new ArgumentException(ViewResources.InvalidRequestMsg);
-            }
-
-            var currencyIdList = currencyListString.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(x => Convert.ToInt32(x));
-
-            searchParam.AgentListXml = _sessionService.GenerateAgentListXml(currencyIdList);
         }
 
         private EntityResult<Player> CreateFakeResult()
