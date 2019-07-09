@@ -878,7 +878,7 @@
                             .andReturn({
                                 responseText: JSON.stringify({
                                     Data: [{ index: 1 }, { index: 2 }, { index: 4 }],
-                                    ProductOptions: '[{"Code":"SB","Status":true}, {"Code":"RB","Status":false}, {"Code":"AB","Status":true}, {"Code":"PP","Status":true}]'
+                                    ProductOptions: '[{"Code":"SB","Status":true}, {"Code":"RB","Status":false}, {"Code":"AB","Status":true}, {"Code":"PP","Status":true}, {"Code":"CC","Status":true}]'
                                 })
                             });
 

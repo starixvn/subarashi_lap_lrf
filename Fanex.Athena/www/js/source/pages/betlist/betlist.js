@@ -393,7 +393,7 @@
             },
 
             viewCardClubResult: function (custId, gameTypeId, transId3rd, title) {
-                const url = Site.resolveClientUrl('CardClubResultPopupPopup/Index');
+                const url = Site.resolveClientUrl('CardClubResultPopup/Index');
                 Site.blockUI();
                 $.get(url + '?custid=' + custId + '&gameTypeId=' + gameTypeId + '&transId3rd' + transId3rd, function (result) {
                     if (result !== '') {
