@@ -9,10 +9,10 @@
     using UnitTest.Common.Extensions;
 
     [TestFixture]
-    public partial class PPResultPopupControllerTest : CultureBaseControllerHelperTest
+    public partial class CardClubResultPopupControllerTest : CultureBaseControllerHelperTest
     {
         [Test]
-        public async Task Index_WhenCall_RedirectToErrorPage()
+        public async Task Index_WhenCall_CallBetListApi()
         {
             // Arrange
             const string CustId = "123";

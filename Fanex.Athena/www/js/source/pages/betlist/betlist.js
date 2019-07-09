@@ -14,6 +14,7 @@
         const SPORT_VOIDBRIDGE = 212;
         const SPORT_PP = 248;
         const SPORT_GLOBALGAMING = 219;
+        const SPORT_CARDCLUB = 165;
         const BETLIST_META_MODEL = '#BetListMetaModel';
 
         let _sortColumnName, _sortOrder;
@@ -391,6 +392,17 @@
                 });
             },
 
+            viewCardClubResult: function (custId, gameTypeId, transId3rd, title) {
+                const url = Site.resolveClientUrl('CardClubResultPopupPopup/Index');
+                Site.blockUI();
+                $.get(url + '?custid=' + custId + '&gameTypeId=' + gameTypeId + '&transId3rd' + transId3rd, function (result) {
+                    if (result !== '') {
+                        showResultPopUp(result, { width: 800, height: 380, title: title });
+                        Site.unBlockUI();
+                    }
+                });
+            },
+
             viewAllBetResult: function (trasdesc, betcheck, bettype, title) {
                 const url = Site.resolveClientUrl('ResultReport/AllBetResult?transdesc=' +
                     encodeURIComponent(trasdesc) + '&betcheck=' + betcheck + '&bettype=' + bettype);
@@ -426,6 +438,9 @@
                 }
                 else if (sporttype === SPORT_PP) {
                     _me.viewPPResult(custid, extension2, title);
+                }
+                else if (sporttype === SPORT_CARDCLUB) {
+                    _me.viewCardClubResult(custid, bettype, extension2, title);
                 }
                 else if (sporttype === SPORT_ALLBET) {
                     _me.viewAllBetResult(transdecs, extension2, bettype, title);
@@ -722,7 +737,6 @@
                 window.showRnGCasinoDetails = _me.showRnGCasinoDetails;
                 window.showVoidBridgeDetails = _me.showVoidBridgeDetails;
                 window.showVoidbridgeResult = _me.viewVoidbridgeResult;
-                window.showPPResult = _me.viewPPResult;
                 window.showTodayRunningBetsDetails = _me.showAllBetDetails;
                 window.showColossusBetsDetails = _me.showColossusBetsDetails;
                 window.showGlobalGaming = _me.showGlobalGamingDetails;

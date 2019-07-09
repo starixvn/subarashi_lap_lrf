@@ -698,6 +698,15 @@
                     expect(BetList.viewPPResult).toHaveBeenCalled();
                 });
 
+                it("BetList.viewCardClubResult() should be called if sporttype is SPORT_PP", function () {
+                    spyOn(BetList, 'viewCardClubResult');
+                    var SPORT_CARDCLUB = 165;
+
+                    BetList.viewResult(null, null, null, SPORT_CARDCLUB);
+
+                    expect(BetList.viewCardClubResult).toHaveBeenCalled();
+                });
+
                 it("BetList.viewAllBetResult() should be called if sporttype is SPORT_ALLBET", function () {
                     spyOn(BetList, 'viewAllBetResult');
                     var SPORT_ALLBET = 211;
@@ -1047,6 +1056,34 @@
                     spyOn(Popup, "openPopupWithIframe");
 
                     BetList.viewPPResult(0, 0, title);
+
+                    expect(Popup.openPopupWithIframe).not.toHaveBeenCalled();
+                });
+            });
+
+            describe("viewCardClubResult(custId, gameTypeId, transId3rd, title)", function () {
+                it("shows showResultPopUp with correct params if result is not empty", function () {
+                    var result = "viewCardClubResult";
+                    spyOn($, "get").and.callFake(function (url, success) {
+                        success(result);
+                    });
+                    var title = "Card Club Result";
+                    spyOn(Popup, "openPopupWithIframe");
+
+                    BetList.viewCardClubResult(0, 0, 0, title);
+
+                    expect(Popup.openPopupWithIframe).toHaveBeenCalledWith(result, { width: 800, height: 380, title: title, id: 'betlist-popup-result' });
+                });
+
+                it("does not show showResultPopUp with correct params if result is empty", function () {
+                    var result = "";
+                    spyOn($, "get").and.callFake(function (url, success) {
+                        success(result);
+                    });
+                    var title = "Card Club Result";
+                    spyOn(Popup, "openPopupWithIframe");
+
+                    BetList.viewCardClubResult(0, 0, 0, title);
 
                     expect(Popup.openPopupWithIframe).not.toHaveBeenCalled();
                 });
