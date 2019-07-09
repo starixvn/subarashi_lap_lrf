@@ -1218,7 +1218,7 @@
                     });
                     spyOn($.fn, "height").and.returnValue(700);
                     var transId = "transId", winlostDate = "06/01/2017", custId = "custId", transType = "transType";
-                    var url = "PragmaticPlayBetList/Detail?transId=" + transId +
+                    var url = "RnGCasinoBetList/Detail?transId=" + transId +
                         "&date=" + winlostDate +
                         "&custId=" + custId +
                         "&transType=" + transType +
@@ -1227,6 +1227,28 @@
                     var title = "ProductPP - DetailedBetlist - 06/01/2017";
 
                     BetList.showPPDetails(transId, winlostDate, custId, transType);
+
+                    expect(Popup.openPopupWithIframe).toHaveBeenCalledWith(expectedUrl, { width: 890, height: 600, title: title, id: "betlist-popup-detail" });
+                });
+            });
+
+            describe("showVideoPokerGameDetails(transId, winlostDate, custId, transType)", function () {
+                it("shows showResultPopUp with correct params", function () {
+                    spyOn(Popup, "openPopupWithIframe");
+                    spyOn($, "parseJSON").and.returnValue({
+                        BaseCurrency: "usd"
+                    });
+                    spyOn($.fn, "height").and.returnValue(700);
+                    var transId = "transId", winlostDate = "06/01/2017", custId = "custId", transType = "transType";
+                    var url = "RnGCasinoBetList/Detail?transId=" + transId +
+                        "&winlostDate=" + winlostDate +
+                        "&custId=" + custId +
+                        "&transType=" + transType +
+                        "&BaseCurrency=usd";
+                    var expectedUrl = transformQueryParamNameToLowerCase(url);
+                    var title = "ProductCC - DetailedBetlist - 06/01/2017";
+
+                    BetList.showVideoPokerGameDetails(transId, winlostDate, custId, transType);
 
                     expect(Popup.openPopupWithIframe).toHaveBeenCalledWith(expectedUrl, { width: 890, height: 600, title: title, id: "betlist-popup-detail" });
                 });

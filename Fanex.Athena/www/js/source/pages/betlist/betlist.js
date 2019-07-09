@@ -649,7 +649,7 @@
                 showDetailPopUp(url, { width: 890, height: popH + 50, title: title });
             },
             showPPDetails: function (transId, winlostDate, custId, transType) {
-                let url = Site.resolveClientUrl('PragmaticPlayBetList/Detail');
+                let url = Site.resolveClientUrl('RnGCasinoBetList/Detail');
                 url = QueryString.setParam(url, 'transId', transId);
                 url = QueryString.setParam(url, 'date', winlostDate);
                 url = QueryString.setParam(url, 'custId', custId);
@@ -658,6 +658,20 @@
 
                 const popH = Math.min($(window).height() - 100, 550);
                 const title = Site.getSingleResource('ProductPP') + ' - ' +
+                    Site.getSingleResource('DetailedBetlist') + ' - ' + moment(new Date(winlostDate)).format('MM/DD/YYYY');
+
+                showDetailPopUp(url, { width: 890, height: popH + 50, title: title });
+            },
+            showVideoPokerGameDetails: function (transId, winlostDate, custId, transType) {
+                let url = Site.resolveClientUrl('RnGCasinoBetList/Detail');
+                url = QueryString.setParam(url, 'transId', transId);
+                url = QueryString.setParam(url, 'winlostDate', winlostDate);
+                url = QueryString.setParam(url, 'custId', custId);
+                url = QueryString.setParam(url, 'transType', transType);
+                url = QueryString.setParam(url, 'BaseCurrency', getBaseCurrency());
+
+                const popH = Math.min($(window).height() - 100, 550);
+                const title = Site.getSingleResource('ProductCC') + ' - ' +
                     Site.getSingleResource('DetailedBetlist') + ' - ' + moment(new Date(winlostDate)).format('MM/DD/YYYY');
 
                 showDetailPopUp(url, { width: 890, height: popH + 50, title: title });
@@ -743,6 +757,7 @@
                 window.ViewCashOutHistory = _me.viewCashOutHistory;
                 window.ShowBonusDetails = _me.showBonusDetails;
                 window.showPPDetails = _me.showPPDetails;
+                window.showVideoPokerGameDetails = _me.showVideoPokerGameDetails;
 
                 const betList = {
                     ViewCasinoHandHistory: _me.ViewCasinoHandHistory
