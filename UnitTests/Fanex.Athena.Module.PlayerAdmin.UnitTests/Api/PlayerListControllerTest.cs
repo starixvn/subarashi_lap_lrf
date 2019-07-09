@@ -1,7 +1,7 @@
 ﻿using Fanex.Athena.Module.PlayerAdmin.Api;
-using Fanex.Athena.Module.PlayerAdmin.DTO;
 using Fanex.Athena.Module.PlayerAdmin.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Services.Interfaces;
+using Fanex.Athena.Module.PlayerAdmin.ViewModels;
 using Fanex.Athena.UnitTest.Common.Helpers;
 using NSubstitute;
 using NUnit.Framework;
@@ -35,7 +35,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Api
                 AgentListXml = "4"
             };
 
-            var expectedReturnedData = new EntityResult<Player>();
+            var expectedReturnedData = new PlayerQueryResultViewModel();
             _playerListService.SearchPlayerByUserName(searchParam).Returns(expectedReturnedData);
 
             using (var controller = CreateController())

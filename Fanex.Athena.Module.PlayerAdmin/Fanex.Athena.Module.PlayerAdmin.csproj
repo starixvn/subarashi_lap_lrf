@@ -125,7 +125,6 @@
     <Compile Include="MetaModel\UpdateSpecialLevelMetaModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IPlayerListCommandRepository.cs" />
-    <Compile Include="Repository\IPlayerListRepository.cs" />
     <Compile Include="Repository\PlayerListCommandRepository.cs" />
     <Compile Include="Services\Interfaces\IPlayerListCommandService.cs" />
     <Compile Include="Services\Interfaces\IPlayerListQueryService.cs" />
