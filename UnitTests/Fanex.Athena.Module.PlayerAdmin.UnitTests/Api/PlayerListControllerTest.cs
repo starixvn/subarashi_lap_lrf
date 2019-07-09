@@ -1,7 +1,7 @@
 ﻿using Fanex.Athena.Module.PlayerAdmin.Api;
-using Fanex.Athena.Module.PlayerAdmin.MetaModel;
-using Fanex.Athena.Module.PlayerAdmin.Services.Interfaces;
-using Fanex.Athena.Module.PlayerAdmin.ViewModels;
+using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
+using Fanex.Athena.Module.PlayerAdmin.Api.Services.Interfaces;
+using Fanex.Athena.Module.PlayerAdmin.Api.ViewModels;
 using Fanex.Athena.UnitTest.Common.Helpers;
 using NSubstitute;
 using NUnit.Framework;
