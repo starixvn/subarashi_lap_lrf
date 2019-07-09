@@ -11,18 +11,18 @@ namespace Fanex.Athena.Service.Core.Users.Interfaces
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Core.DTO.Users;
-    using Session.Model;
 
     public interface ISessionService
     {
         string CaptchaCode { get; set; }
 
-        LicenseeSession LicenseeSession { get; }
+        LicenseeAuthInfo LicenseeSession { get; }
 
-        UserSession UserSession { get; }
+        UserAuthInfo UserSession { get; }
 
-        void AssignSessions(UserSession userSession, LicenseeSession licenseeSession);
+        void AssignSessions(UserAuthInfo userSession, LicenseeAuthInfo licenseeSession);
 
         void CreateNewSession(
             int userId,
@@ -40,12 +40,12 @@ namespace Fanex.Athena.Service.Core.Users.Interfaces
 
         string GenerateAgentListXml(IEnumerable<int> currencyIdList, bool isExcludeTestData = false);
 
-        bool IsAllowedEditCommission(UserSession user);
+        bool IsAllowedEditCommission(UserAuthInfo user);
 
-        bool IsAllowedSpecialBA(UserSession user);
+        bool IsAllowedSpecialBA(UserAuthInfo user);
 
         string GenerateAgentListXml(IDictionary<int, IEnumerable<int>> currencyAgentList);
 
-        void AssignCurrenciesToUserSession(UserSession userSession, int licenseeId, IEnumerable<CurrencyUser> currencyUserList = null);
+        void AssignCurrenciesToUserSession(UserAuthInfo userSession, int licenseeId, IEnumerable<CurrencyUser> currencyUserList = null);
     }
 }

@@ -9,19 +9,26 @@ namespace Fanex.Athena.Controllers.BetSettings
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using System.Web.SessionState;
+
     using Extension.Utility;
+
+    using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.BetSettings.DTO;
     using Fanex.Athena.Model.Core.DataDomain;
+
     using Model.BetSettings.MetaModel;
     using Model.BetSettings.ViewModel;
     using Model.Core.DTO.Common;
     using Model.Customer.DTO;
+
     using ONEbook.UM.Filters;
+
     using Resources;
+
     using Service.BetSettings.Interfaces;
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-    using Session.Model;
+
     using Web.ActionFilter;
 
     [SessionState(SessionStateBehavior.ReadOnly)]
@@ -86,7 +93,7 @@ namespace Fanex.Athena.Controllers.BetSettings
             return commonItem;
         }
 
-        protected bool IsBetSettingEditable(UserSession userSession)
+        protected bool IsBetSettingEditable(UserAuthInfo userSession)
         {
             return _coreBetSettingService.IsBetSettingEditable(userSession);
         }
@@ -117,7 +124,7 @@ namespace Fanex.Athena.Controllers.BetSettings
                        : value;
         }
 
-        protected bool CheckPermission(UserSession userSession, int productId)
+        protected bool CheckPermission(UserAuthInfo userSession, int productId)
         {
             if (!IsBetSettingEditable(userSession))
             {

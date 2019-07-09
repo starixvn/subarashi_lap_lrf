@@ -302,7 +302,7 @@
                 }
             };
 
-            StubUserSessionData(new UserSession
+            StubUserSessionData(new UserAuthInfo
             {
                 CurrencyList = new Dictionary<int, string>
                 {
@@ -310,7 +310,7 @@
                 },
                 FunctionIdList = new int[0]
             });
-            StubLicenseeSessionData(new LicenseeSession { LicenseeId = 1 });
+            StubLicenseeSessionData(new LicenseeAuthInfo { LicenseeId = 1 });
             SessionService.GenerateAgentListXml(Arg.Any<int>(), Arg.Any<bool>()).Returns(string.Empty);
 
             return model;

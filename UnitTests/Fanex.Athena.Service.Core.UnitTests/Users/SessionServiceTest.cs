@@ -38,8 +38,8 @@
         {
             _sessionStorage = Substitute.For<ISessionStorage>();
             _sessionStorage.AssignSessions(
-                Arg.Do<UserSession>(x => _sessionStorage.UserSession.Returns(x)),
-                Arg.Do<LicenseeSession>(x => _sessionStorage.LicenseeSession.Returns(x)));
+                Arg.Do<UserAuthInfo>(x => _sessionStorage.UserAuthInfo.Returns(x)),
+                Arg.Do<LicenseeAuthInfo>(x => _sessionStorage.LicenseeAuthInfo.Returns(x)));
 
             _appSettings = Substitute.For<IAppSettings>();
             _functionService = Substitute.For<IFunctionService>();
@@ -259,7 +259,7 @@
         {
             // Arrange
             var functionList = new string[] { "CommissionGroupList55" };
-            var userSession = new UserSession { PortalFunctionList = functionList, ApplicationMode = AppMode.Parasitic };
+            var userSession = new UserAuthInfo { PortalFunctionList = functionList, ApplicationMode = AppMode.Parasitic };
 
             // Action
             var result = _sessionService.IsAllowedEditCommission(userSession);
@@ -273,7 +273,7 @@
         {
             // Arrange
             var functionList = new string[] { "CommissionGroupList56" };
-            var userSession = new UserSession { PortalFunctionList = functionList, ApplicationMode = AppMode.Parasitic };
+            var userSession = new UserAuthInfo { PortalFunctionList = functionList, ApplicationMode = AppMode.Parasitic };
 
             // Action
             var result = _sessionService.IsAllowedEditCommission(userSession);
@@ -287,7 +287,7 @@
         {
             // Arrange
             var functionIdList = new int[] { 55 };
-            var userSession = new UserSession { FunctionIdList = functionIdList, ApplicationMode = AppMode.Self };
+            var userSession = new UserAuthInfo { FunctionIdList = functionIdList, ApplicationMode = AppMode.Self };
 
             // Action
             var result = _sessionService.IsAllowedEditCommission(userSession);
@@ -301,7 +301,7 @@
         {
             // Arrange
             var functionIdList = new int[] { 56 };
-            var userSession = new UserSession { FunctionIdList = functionIdList, ApplicationMode = AppMode.Self };
+            var userSession = new UserAuthInfo { FunctionIdList = functionIdList, ApplicationMode = AppMode.Self };
 
             // Action
             var result = _sessionService.IsAllowedEditCommission(userSession);
@@ -315,7 +315,7 @@
         {
             // Arrange
             var functionList = new string[] { "SpecialBA54" };
-            var userSession = new UserSession { PortalFunctionList = functionList, ApplicationMode = AppMode.Parasitic };
+            var userSession = new UserAuthInfo { PortalFunctionList = functionList, ApplicationMode = AppMode.Parasitic };
 
             // Action
             var result = _sessionService.IsAllowedSpecialBA(userSession);
@@ -329,7 +329,7 @@
         {
             // Arrange
             var functionList = new string[] { "SpecialBA55" };
-            var userSession = new UserSession { PortalFunctionList = functionList, ApplicationMode = AppMode.Parasitic };
+            var userSession = new UserAuthInfo { PortalFunctionList = functionList, ApplicationMode = AppMode.Parasitic };
 
             // Action
             var result = _sessionService.IsAllowedSpecialBA(userSession);
@@ -343,7 +343,7 @@
         {
             // Arrange
             var functionIdList = new int[] { 54 };
-            var userSession = new UserSession { FunctionIdList = functionIdList, ApplicationMode = AppMode.Self };
+            var userSession = new UserAuthInfo { FunctionIdList = functionIdList, ApplicationMode = AppMode.Self };
 
             // Action
             var result = _sessionService.IsAllowedSpecialBA(userSession);
@@ -357,7 +357,7 @@
         {
             // Arrange
             var functionIdList = new int[] { 55 };
-            var userSession = new UserSession { FunctionIdList = functionIdList, ApplicationMode = AppMode.Self };
+            var userSession = new UserAuthInfo { FunctionIdList = functionIdList, ApplicationMode = AppMode.Self };
 
             // Action
             var result = _sessionService.IsAllowedSpecialBA(userSession);
@@ -590,7 +590,7 @@
             };
             var activeCurrencyUsers = currencyUserList.Where(x => x.IsActive);
 
-            var userSession = new UserSession();
+            var userSession = new UserAuthInfo();
 
             // Action
             _sessionService.AssignCurrenciesToUserSession(userSession, LicenseeId, currencyUserList);
@@ -625,7 +625,7 @@
             };
             var activeCurrencyUsers = currencyUserList.Where(x => x.IsActive);
 
-            var userSession = new UserSession();
+            var userSession = new UserAuthInfo();
 
             // Action
             _sessionService.AssignCurrenciesToUserSession(userSession, LicenseeId, currencyUserList);

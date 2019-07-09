@@ -127,7 +127,7 @@
         {
             // Arrange
             const int LicenseeId = LicenseeIdentity.OneTwoBet + 1;
-            StubLicenseeSessionData(new LicenseeSession
+            StubLicenseeSessionData(new LicenseeAuthInfo
             {
                 LicenseeId = LicenseeId
             });
@@ -155,7 +155,7 @@
         public async Task Index_Level1AndIsOneTwoBet_GetLicenseeDataAsync()
         {
             // Arrange
-            StubLicenseeSessionData(new LicenseeSession
+            StubLicenseeSessionData(new LicenseeAuthInfo
             {
                 LicenseeId = LicenseeIdentity.OneTwoBet
             });

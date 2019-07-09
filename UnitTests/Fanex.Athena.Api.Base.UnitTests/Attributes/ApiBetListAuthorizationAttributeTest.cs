@@ -1,18 +1,23 @@
 ﻿namespace Fanex.Athena.Api.Base.Attributes.UnitTests
 {
+    using Attributes;
+
+    using Autofac;
+
+    using NSubstitute;
+
+    using NUnit.Framework;
+
+    using Service.Core.Configuration.Interfaces;
+    using Service.Core.Users.Interfaces;
+
     using System;
     using System.Net;
     using System.Net.Http;
     using System.Threading;
     using System.Threading.Tasks;
     using System.Web.Http.Controllers;
-    using Attributes;
-    using Autofac;
-    using NSubstitute;
-    using NUnit.Framework;
-    using Service.Core.Configuration.Interfaces;
-    using Service.Core.Users.Interfaces;
-    using Session.Model;
+
     using UnitTest.Common.Helpers;
 
     public class ApiBetListAuthorizationAttributeTest
@@ -32,7 +37,7 @@
         {
             _licenseeSettingService = Substitute.For<ILicenseeSettingService>();
             _sessionService = Substitute.For<ISessionService>();
-            _sessionService.LicenseeSession.Returns(new LicenseeSession
+            _sessionService.LicenseeSession.Returns(new LicenseeAuthInfo
             {
                 LicenseeName = LicenseeName
             });

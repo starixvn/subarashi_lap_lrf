@@ -76,7 +76,7 @@
             SetUpUserRequestParameter();
             using (var controller = CreateController())
             {
-                StubUserSessionData(new UserSession
+                StubUserSessionData(new UserAuthInfo
                 {
                     UserId = DefaultUserSession.UserId,
                     IsInternal = true
@@ -99,7 +99,7 @@
             SetUpUserRequestParameter();
             using (var controller = CreateController())
             {
-                StubUserSessionData(new UserSession
+                StubUserSessionData(new UserAuthInfo
                 {
                     UserId = DefaultUserSession.UserId,
                     IsInternal = true
@@ -126,7 +126,7 @@
 
                 AppSettings.EnableAssignCurrency.Returns(false);
 
-                StubUserSessionData(new UserSession
+                StubUserSessionData(new UserAuthInfo
                 {
                     UserId = DefaultUserSession.UserId,
                     IsInternal = true
@@ -151,7 +151,7 @@
 
                 AppSettings.EnableAssignCurrency.Returns(false);
 
-                StubUserSessionData(new UserSession
+                StubUserSessionData(new UserAuthInfo
                 {
                     UserId = DefaultUserSession.UserId,
                     IsInternal = false

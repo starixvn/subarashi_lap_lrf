@@ -19,7 +19,7 @@ namespace Fanex.Athena.Api.Base.Attributes
         {
             var scope = actionContext.Request.GetDependencyScope();
             var sessionStorage = scope.Resolve<ISessionStorage>();
-            return sessionStorage.LicenseeSession != null && sessionStorage.UserSession != null;
+            return sessionStorage.LicenseeAuthInfo != null && sessionStorage.UserAuthInfo != null;
         }
 
         protected override void HandleUnauthorizedRequest(System.Web.Http.Controllers.HttpActionContext actionContext)

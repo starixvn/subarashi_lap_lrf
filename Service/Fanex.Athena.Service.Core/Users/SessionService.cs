@@ -19,14 +19,14 @@ namespace Fanex.Athena.Service.Core.Users
     using DataAccess.Core.Common.Interfaces;
     using DataAccess.Core.Users.Interfaces;
     using Fanex.Athena.Extension.Utility;
+    using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Model.Auth.Enum;
     using Fanex.Athena.Model.Core.DTO.Users;
     using Fanex.Athena.Service.Core.Common.Interfaces;
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
-    using Session.Enum;
     using Session.Interfaces;
-    using Session.Model;
     using Utility;
 
     public class SessionService : ISessionService
@@ -59,19 +59,19 @@ namespace Fanex.Athena.Service.Core.Users
 
         #region Public Properties
 
-        public LicenseeSession LicenseeSession
+        public LicenseeAuthInfo LicenseeSession
         {
             get
             {
-                return _sessionStorage.LicenseeSession;
+                return _sessionStorage.LicenseeAuthInfo;
             }
         }
 
-        public UserSession UserSession
+        public UserAuthInfo UserSession
         {
             get
             {
-                return _sessionStorage.UserSession;
+                return _sessionStorage.UserAuthInfo;
             }
         }
 
@@ -81,7 +81,7 @@ namespace Fanex.Athena.Service.Core.Users
             set { _sessionStorage.CaptchaCode = value; }
         }
 
-        public void AssignSessions(UserSession userSession, LicenseeSession licenseeSession)
+        public void AssignSessions(UserAuthInfo userSession, LicenseeAuthInfo licenseeSession)
         {
             _sessionStorage.AssignSessions(userSession, licenseeSession);
         }
@@ -97,7 +97,7 @@ namespace Fanex.Athena.Service.Core.Users
             var licenseeList = _licenseeDataAccess.GetByUser(userId);
             var functionList = _functionService.GetUserFunctionList(licenseeId, userId);
             var functionIdList = functionList.Select(f => f.FunctionId).ToArray();
-            var userSession = new UserSession
+            var userSession = new UserAuthInfo
             {
                 UserLevel = UserLevelType.Licensee,
                 IsManageableSubsidiary = false,
@@ -153,14 +153,14 @@ namespace Fanex.Athena.Service.Core.Users
             return false;
         }
 
-        public bool IsAllowedEditCommission(UserSession user)
+        public bool IsAllowedEditCommission(UserAuthInfo user)
         {
             return user.ApplicationMode == AppMode.Parasitic ?
                     user.PortalFunctionList != null && user.PortalFunctionList.Any(i => i == PermissionKeys.CustomerInfoCommissionGroupList)
                     : user.FunctionIdList != null && user.FunctionIdList.Contains((int)FunctionType.CommissionGroupList);
         }
 
-        public bool IsAllowedSpecialBA(UserSession user)
+        public bool IsAllowedSpecialBA(UserAuthInfo user)
         {
             return user.ApplicationMode == AppMode.Parasitic ?
                     user.PortalFunctionList != null && user.PortalFunctionList.Any(i => i == PermissionKeys.CustomerInfoSpecialBA)
@@ -248,9 +248,9 @@ namespace Fanex.Athena.Service.Core.Users
             return DefaultReportPath;
         }
 
-        private static LicenseeSession GenerateLicenseeInfo(Licensee selectedLicensee)
+        private static LicenseeAuthInfo GenerateLicenseeInfo(Licensee selectedLicensee)
         {
-            return new LicenseeSession
+            return new LicenseeAuthInfo
             {
                 LicenseeId = selectedLicensee.Id,
                 LicenseeName = selectedLicensee.Name,
@@ -259,7 +259,7 @@ namespace Fanex.Athena.Service.Core.Users
             };
         }
 
-        public void AssignCurrenciesToUserSession(UserSession userSession, int licenseeId, IEnumerable<CurrencyUser> currencyUserList = null)
+        public void AssignCurrenciesToUserSession(UserAuthInfo userSession, int licenseeId, IEnumerable<CurrencyUser> currencyUserList = null)
         {
             var currencyUsers = currencyUserList ?? _currencyDataAccess.GetCurrenciesByUser(licenseeId, userSession.UserId);
 

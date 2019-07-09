@@ -4,12 +4,12 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Fanex.Athena.Session.Model
+namespace Fanex.Athena.Model.Auth
 {
     using System;
 
     [Serializable]
-    public class LicenseeSession
+    public class LicenseeAuthInfo
     {
         public int LicenseeId { get; set; }
 

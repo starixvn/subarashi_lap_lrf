@@ -1,6 +1,7 @@
 ﻿namespace Fanex.Athena.Session
 {
     using System.Web;
+    using Fanex.Athena.Model.Auth;
     using Interfaces;
     using Model;
 
@@ -11,21 +12,21 @@
         private const string UserSessionKey = "UserSessionKey";
         private const string CaptchaCodeKey = "CaptchaCodeKey";
 
-        public LicenseeSession LicenseeSession
+        public LicenseeAuthInfo LicenseeAuthInfo
         {
             get
             {
                 var temp = HttpContext.Current.Session[LicenseeSessionKey];
-                return temp as LicenseeSession;
+                return temp as LicenseeAuthInfo;
             }
         }
 
-        public UserSession UserSession
+        public UserAuthInfo UserAuthInfo
         {
             get
             {
                 var temp = HttpContext.Current.Session[UserSessionKey];
-                return temp as UserSession;
+                return temp as UserAuthInfo;
             }
         }
 
@@ -35,10 +36,10 @@
             set { HttpContext.Current.Session[CaptchaCodeKey] = value; }
         }
 
-        public void AssignSessions(UserSession userSession, LicenseeSession licenseeSession)
+        public void AssignSessions(UserAuthInfo userAuthInfo, LicenseeAuthInfo licenseeAuthInfo)
         {
-            HttpContext.Current.Session[UserSessionKey] = userSession;
-            HttpContext.Current.Session[LicenseeSessionKey] = licenseeSession;
+            HttpContext.Current.Session[UserSessionKey] = userAuthInfo;
+            HttpContext.Current.Session[LicenseeSessionKey] = licenseeAuthInfo;
         }
     }
 }

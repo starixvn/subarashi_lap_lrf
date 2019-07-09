@@ -3,7 +3,7 @@
     using Base.UnitTests;
     using DataAccess.Core.Common.Interfaces;
     using DataAccess.Forecast.Interfaces;
-    using Fanex.Athena.Session.Model;
+    using Fanex.Athena.Model.Auth;
     using Fanex.Logging;
     using Model.Core.DTO.Common;
     using Model.Forecast.DTO.NewForecastHdpOu;

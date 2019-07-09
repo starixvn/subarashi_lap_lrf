@@ -146,12 +146,12 @@
             Assert.Multiple(() =>
             {
                 _sessionService.Received().AssignCurrenciesToUserSession(
-                    Arg.Is<UserSession>(x => AssertNewUserSession(x, tokenInfo)),
+                    Arg.Is<UserAuthInfo>(x => AssertNewUserSession(x, tokenInfo)),
                     licensee.Id,
                     Arg.Any<IEnumerable<CurrencyUser>>());
                 _sessionService.Received().AssignSessions(
-                    Arg.Is<UserSession>(x => AssertNewUserSession(x, tokenInfo)),
-                    Arg.Is<LicenseeSession>(x => AssertNewLicenseeSession(x, licensee)));
+                    Arg.Is<UserAuthInfo>(x => AssertNewUserSession(x, tokenInfo)),
+                    Arg.Is<LicenseeAuthInfo>(x => AssertNewLicenseeSession(x, licensee)));
             });
         }
 
@@ -164,8 +164,8 @@
             var licensee = FakeHelper.Create<Licensee>();
             _licenseeDataAccess.GetLicenseeByName(tokenInfo.SiteName).Returns(licensee);
 
-            _sessionService.UserSession.Returns(new UserSession());
-            _sessionService.LicenseeSession.Returns(new LicenseeSession());
+            _sessionService.UserSession.Returns(new UserAuthInfo());
+            _sessionService.LicenseeSession.Returns(new LicenseeAuthInfo());
 
             var fakeHttpContext = Substitute.For<HttpContextBase>();
             fakeHttpContext.User.Identity.Returns(x => { return null; });
@@ -177,12 +177,12 @@
             Assert.Multiple(() =>
             {
                 _sessionService.Received().AssignCurrenciesToUserSession(
-                    Arg.Is<UserSession>(x => AssertNewUserSession(x, tokenInfo)),
+                    Arg.Is<UserAuthInfo>(x => AssertNewUserSession(x, tokenInfo)),
                     licensee.Id,
                     Arg.Any<IEnumerable<CurrencyUser>>());
                 _sessionService.Received().AssignSessions(
-                    Arg.Is<UserSession>(x => AssertNewUserSession(x, tokenInfo)),
-                    Arg.Is<LicenseeSession>(x => AssertNewLicenseeSession(x, licensee)));
+                    Arg.Is<UserAuthInfo>(x => AssertNewUserSession(x, tokenInfo)),
+                    Arg.Is<LicenseeAuthInfo>(x => AssertNewLicenseeSession(x, licensee)));
             });
         }
 
@@ -195,7 +195,7 @@
             var licensee = FakeHelper.Create<Licensee>();
             _licenseeDataAccess.GetLicenseeByName(tokenInfo.SiteName).Returns(licensee);
 
-            var inValidUser = new UserSession
+            var inValidUser = new UserAuthInfo
             {
                 UserId = 0,
                 VendorIdentityID = null,
@@ -205,7 +205,7 @@
             };
             _sessionService.UserSession.Returns(inValidUser);
 
-            var validLicensee = new LicenseeSession
+            var validLicensee = new LicenseeAuthInfo
             {
                 LicenseeId = Math.Abs(FakeHelper.Create<int>()) + 1
             };
@@ -220,12 +220,12 @@
             Assert.Multiple(() =>
             {
                 _sessionService.Received().AssignCurrenciesToUserSession(
-                    Arg.Is<UserSession>(x => AssertNewUserSession(x, tokenInfo)),
+                    Arg.Is<UserAuthInfo>(x => AssertNewUserSession(x, tokenInfo)),
                     licensee.Id,
                     Arg.Any<IEnumerable<CurrencyUser>>());
                 _sessionService.Received().AssignSessions(
-                    Arg.Is<UserSession>(x => AssertNewUserSession(x, tokenInfo)),
-                    Arg.Is<LicenseeSession>(x => AssertNewLicenseeSession(x, licensee)));
+                    Arg.Is<UserAuthInfo>(x => AssertNewUserSession(x, tokenInfo)),
+                    Arg.Is<LicenseeAuthInfo>(x => AssertNewLicenseeSession(x, licensee)));
             });
         }
 
@@ -238,7 +238,7 @@
             var licensee = FakeHelper.Create<Licensee>();
             _licenseeDataAccess.GetLicenseeByName(tokenInfo.SiteName).Returns(licensee);
 
-            var validUser = new UserSession
+            var validUser = new UserAuthInfo
             {
                 UserId = Math.Abs(FakeHelper.Create<int>()) + 1,
                 VendorIdentityID = FakeHelper.Create<string>(),
@@ -248,7 +248,7 @@
             };
             _sessionService.UserSession.Returns(validUser);
 
-            var inValidLicensee = new LicenseeSession
+            var inValidLicensee = new LicenseeAuthInfo
             {
                 LicenseeId = 0
             };
@@ -263,12 +263,12 @@
             Assert.Multiple(() =>
             {
                 _sessionService.Received().AssignCurrenciesToUserSession(
-                    Arg.Is<UserSession>(x => AssertNewUserSession(x, tokenInfo)),
+                    Arg.Is<UserAuthInfo>(x => AssertNewUserSession(x, tokenInfo)),
                     licensee.Id,
                     Arg.Any<IEnumerable<CurrencyUser>>());
                 _sessionService.Received().AssignSessions(
-                    Arg.Is<UserSession>(x => AssertNewUserSession(x, tokenInfo)),
-                    Arg.Is<LicenseeSession>(x => AssertNewLicenseeSession(x, licensee)));
+                    Arg.Is<UserAuthInfo>(x => AssertNewUserSession(x, tokenInfo)),
+                    Arg.Is<LicenseeAuthInfo>(x => AssertNewLicenseeSession(x, licensee)));
             });
         }
 
@@ -281,7 +281,7 @@
             var licensee = new Licensee { Id = Math.Abs(FakeHelper.Create<int>()) + 1 };
             _licenseeDataAccess.GetLicenseeByName(tokenInfo.SiteName).Returns(licensee);
 
-            var validAnotherUser = new UserSession
+            var validAnotherUser = new UserAuthInfo
             {
                 UserId = Math.Abs(FakeHelper.Create<int>()) + 1,
                 IsInternal = true,
@@ -292,7 +292,7 @@
             };
             _sessionService.UserSession.Returns(validAnotherUser);
 
-            var validAnotherLicensee = new LicenseeSession
+            var validAnotherLicensee = new LicenseeAuthInfo
             {
                 LicenseeId = licensee.Id + 1
             };
@@ -307,12 +307,12 @@
             Assert.Multiple(() =>
             {
                 _sessionService.Received().AssignCurrenciesToUserSession(
-                    Arg.Is<UserSession>(x => AssertNewUserSession(x, tokenInfo)),
+                    Arg.Is<UserAuthInfo>(x => AssertNewUserSession(x, tokenInfo)),
                     licensee.Id,
                     Arg.Any<IEnumerable<CurrencyUser>>());
                 _sessionService.Received().AssignSessions(
-                    Arg.Is<UserSession>(x => AssertNewUserSession(x, tokenInfo)),
-                    Arg.Is<LicenseeSession>(x => AssertNewLicenseeSession(x, licensee)));
+                    Arg.Is<UserAuthInfo>(x => AssertNewUserSession(x, tokenInfo)),
+                    Arg.Is<LicenseeAuthInfo>(x => AssertNewLicenseeSession(x, licensee)));
             });
         }
 
@@ -325,7 +325,7 @@
             var licensee = new Licensee { Id = Math.Abs(FakeHelper.Create<int>()) + 1 };
             _licenseeDataAccess.GetLicenseeByName(tokenInfo.SiteName).Returns(licensee);
 
-            var validUser = new UserSession
+            var validUser = new UserAuthInfo
             {
                 UserId = Math.Abs(FakeHelper.Create<int>()) + 1,
                 IsInternal = true,
@@ -337,7 +337,7 @@
             };
             _sessionService.UserSession.Returns(validUser);
 
-            var validLicensee = new LicenseeSession
+            var validLicensee = new LicenseeAuthInfo
             {
                 LicenseeId = licensee.Id
             };
@@ -375,7 +375,7 @@
             var licensee = new Licensee { Id = Math.Abs(FakeHelper.Create<int>()) + 1 };
             _licenseeDataAccess.GetLicenseeByName(tokenInfo.SiteName).Returns(licensee);
 
-            var validUser = new UserSession
+            var validUser = new UserAuthInfo
             {
                 UserId = Math.Abs(FakeHelper.Create<int>()) + 1,
                 IsInternal = true,
@@ -387,7 +387,7 @@
             };
             _sessionService.UserSession.Returns(validUser);
 
-            var validLicensee = new LicenseeSession
+            var validLicensee = new LicenseeAuthInfo
             {
                 LicenseeId = licensee.Id
             };
@@ -423,7 +423,7 @@
             Assert.Multiple(() =>
             {
                 _sessionService.Received().AssignCurrenciesToUserSession(
-                    Arg.Is<UserSession>(
+                    Arg.Is<UserAuthInfo>(
                         x => string.Join(",", x.PortalFunctionList) == string.Join(",", tokenInfo.Permissions.Select(y => y.FunctionKey))),
                     licensee.Id,
                     Arg.Any<IEnumerable<CurrencyUser>>());
@@ -453,7 +453,7 @@
             Assert.Multiple(() =>
             {
                 _sessionService.Received().AssignCurrenciesToUserSession(
-                    Arg.Is<UserSession>(
+                    Arg.Is<UserAuthInfo>(
                         x => !x.PortalFunctionList.Any()),
                     licensee.Id,
                     Arg.Any<IEnumerable<CurrencyUser>>());
@@ -489,7 +489,7 @@
             Assert.Multiple(() =>
             {
                 _sessionService.Received().AssignCurrenciesToUserSession(
-                    Arg.Is<UserSession>(
+                    Arg.Is<UserAuthInfo>(
                         x => string.Join(",", x.PortalFunctionList) == string.Join(",", expected.Select(y => y.FunctionKey))),
                     licensee.Id,
                     Arg.Any<IEnumerable<CurrencyUser>>());
@@ -562,7 +562,7 @@
             };
         }
 
-        private bool AssertNewUserSession(UserSession newUser, OneAuthToken token)
+        private bool AssertNewUserSession(UserAuthInfo newUser, OneAuthToken token)
         => newUser.UserId == token.UserSEQ
                 && newUser.OnUserId == token.UserSEQ
                 && newUser.UserName == token.UserID
@@ -573,7 +573,7 @@
                 && newUser.VendorID == token.VendorID
                 && newUser.VendorIdentityID == token.UserID;
 
-        private bool AssertNewLicenseeSession(LicenseeSession newLicensee, Licensee licenseeInfo)
+        private bool AssertNewLicenseeSession(LicenseeAuthInfo newLicensee, Licensee licenseeInfo)
         => newLicensee.LicenseeId == licenseeInfo.Id
                 && newLicensee.IsAllowedCustomerComm == licenseeInfo.IsAllowedCustomerComm
                 && newLicensee.IsEnableBA == licenseeInfo.IsEnableBA

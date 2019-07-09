@@ -10,6 +10,8 @@
     using DataAccess.Core.Users.Interfaces;
     using Extension.Utility;
     using Extension.Utility.Interfaces;
+    using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Model.Auth.Enum;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Logging;
@@ -19,8 +21,6 @@
     using Model.Core.DTO.Users;
     using Newtonsoft.Json;
     using Resources;
-    using Session.Enum;
-    using Session.Model;
 
     [CLSCompliant(false)]
     public class OneAuthenticationService : IOneAuthenticationService
@@ -111,14 +111,14 @@
             return _oneBookSecurityWrapper.Authenticate(token);
         }
 
-        private static bool IsSameSession(UserSession userSession, LicenseeSession licenseeSession, OneAuthToken tokenInfo, int licenseeId)
+        private static bool IsSameSession(UserAuthInfo userSession, LicenseeAuthInfo licenseeSession, OneAuthToken tokenInfo, int licenseeId)
         {
             return userSession.UserName == tokenInfo.UserID
                 && userSession.VendorID == tokenInfo.VendorID && userSession.VendorIdentityID == tokenInfo.UserID
                 && licenseeSession.LicenseeId == licenseeId;
         }
 
-        private static bool IsAuthenticated(HttpContextBase currentContext, UserSession userSession, LicenseeSession licenseeSession)
+        private static bool IsAuthenticated(HttpContextBase currentContext, UserAuthInfo userSession, LicenseeAuthInfo licenseeSession)
         {
             if (userSession == null || licenseeSession == null || !IsValidIdentity(currentContext))
             {
@@ -177,7 +177,7 @@
             return new ResultInfo { Code = 0 };
         }
 
-        private void UpdateUserSession(UserSession userSession, OneAuthToken tokenInfo, int licenseeId, OneAuthUserInfo userInfo, string language)
+        private void UpdateUserSession(UserAuthInfo userSession, OneAuthToken tokenInfo, int licenseeId, OneAuthUserInfo userInfo, string language)
         {
             if (!language.Equals(userSession.Language))
             {
@@ -214,7 +214,7 @@
             Licensee licenseeInfo,
             OneAuthUserInfo userInfo)
         {
-            var licSession = new LicenseeSession
+            var licSession = new LicenseeAuthInfo
             {
                 LicenseeId = licenseeInfo.Id,
                 IsAllowedCustomerComm = licenseeInfo.IsAllowedCustomerComm,
@@ -222,7 +222,7 @@
                 LicenseeName = licenseeInfo.Name
             };
 
-            var userSession = new UserSession
+            var userSession = new UserAuthInfo
             {
                 UserId = tokenInfo.UserSEQ,
                 OnUserId = tokenInfo.UserSEQ,

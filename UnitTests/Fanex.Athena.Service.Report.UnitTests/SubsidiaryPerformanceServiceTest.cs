@@ -40,7 +40,7 @@
             _subsidiaryService = Substitute.For<ISubsidiaryService>();
             _service = new SubsidiaryPerformanceService(_sessionService, _subsidiaryService, _dataAccess);
 
-            _sessionService.UserSession.Returns(new Session.Model.UserSession());
+            _sessionService.UserSession.Returns(new Session.Model.UserAuthInfo());
         }
 
         [TearDown]
@@ -116,7 +116,7 @@
                 LicenseeName = LicenseeName
             };
 
-            _sessionService.UserSession.Returns(new Session.Model.UserSession { UserLevel = UserLevelType.Subsidiary, OperatorId = "123" });
+            _sessionService.UserSession.Returns(new Session.Model.UserAuthInfo { UserLevel = UserLevelType.Subsidiary, OperatorId = "123" });
             _subsidiaryService.GetSubsidiaryList().Returns(_subsidiaryList);
 
             var resultData = GetFakeEntityDataList();

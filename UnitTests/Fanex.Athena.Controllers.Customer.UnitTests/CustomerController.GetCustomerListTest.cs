@@ -121,7 +121,7 @@
 
                 AppSettings.FakeLicenseeList.Returns(Enumerable.Empty<int>());
                 _productService.GetProductAccess(Arg.Any<int>(), Arg.Any<string>()).Returns(new ProductAccess(new List<Product>()));
-                StubLicenseeSessionData(new LicenseeSession { IsAllowedCustomerComm = true });
+                StubLicenseeSessionData(new LicenseeAuthInfo { IsAllowedCustomerComm = true });
 
                 // Action
                 var result = (CustomerListViewModel)(await controller.CustomerList() as ViewResult).Model;
@@ -146,7 +146,7 @@
 
                 AppSettings.FakeLicenseeList.Returns(Enumerable.Empty<int>());
                 _productService.GetProductAccess(Arg.Any<int>(), Arg.Any<string>()).Returns(new ProductAccess(new List<Product>()));
-                StubLicenseeSessionData(new LicenseeSession { IsAllowedCustomerComm = true, LicenseeId = 2 });
+                StubLicenseeSessionData(new LicenseeAuthInfo { IsAllowedCustomerComm = true, LicenseeId = 2 });
 
                 // Action
                 var result = (CustomerListViewModel)(await controller.CustomerList(groupId: GroupCommId) as ViewResult).Model;

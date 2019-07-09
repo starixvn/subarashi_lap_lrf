@@ -7,14 +7,20 @@
     using System.Threading;
     using System.Threading.Tasks;
     using System.Web.Http.Controllers;
+
     using Attributes;
+
     using Autofac;
+
     using Extension.Utility;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Service.Core.Users.Interfaces;
     using Service.StatelessCore.Interfaces;
-    using Session.Model;
+
     using UnitTest.Common.Helpers;
 
     public class ApiFunctionAuthorizationAttributeTest
@@ -119,8 +125,8 @@
             // Arrange
             var permissionKeys = new[] { "abc", "def" };
             var attribute = new ApiFunctionAuthorizationAttribute(permissionKeys);
-            _sessionService.UserSession.Returns(new UserSession());
-            _sessionService.LicenseeSession.Returns(new LicenseeSession());
+            _sessionService.UserSession.Returns(new UserAuthInfo());
+            _sessionService.LicenseeSession.Returns(new LicenseeAuthInfo());
             var actionContext = CreateActionContext();
             var continuation = Substitute.For<Func<Task<HttpResponseMessage>>>();
 
@@ -137,7 +143,7 @@
             // Arrange
             var attribute = new ApiFunctionAuthorizationAttribute();
             var actionContext = CreateActionContext();
-            _sessionService.UserSession.Returns(new UserSession { ApplicationMode = Session.Enum.AppMode.Parasitic });
+            _sessionService.UserSession.Returns(new UserAuthInfo { ApplicationMode = Session.Enum.AppMode.Parasitic });
             _authorizationService.HasPermissions(Arg.Any<IEnumerable<string>>(), Arg.Any<string[]>()).Returns(true);
 
             // Action
@@ -153,7 +159,7 @@
             // Arrange
             var attribute = new ApiFunctionAuthorizationAttribute();
             var actionContext = CreateActionContext();
-            _sessionService.UserSession.Returns(new UserSession { ApplicationMode = Session.Enum.AppMode.Self });
+            _sessionService.UserSession.Returns(new UserAuthInfo { ApplicationMode = Session.Enum.AppMode.Self });
             _authorizationService.HasPermissions(Arg.Any<IEnumerable<int>>(), Arg.Any<string[]>()).Returns(true);
 
             // Action

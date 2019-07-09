@@ -1,4 +1,4 @@
-﻿using Fanex.Athena.Session.Model;
+﻿using Fanex.Athena.Model.Auth;
 
 namespace Fanex.Athena.Session.Interfaces
 {
@@ -6,10 +6,10 @@ namespace Fanex.Athena.Session.Interfaces
     {
         string CaptchaCode { get; set; }
 
-        LicenseeSession LicenseeSession { get; }
+        LicenseeAuthInfo LicenseeAuthInfo { get; }
 
-        UserSession UserSession { get; }
+        UserAuthInfo UserAuthInfo { get; }
 
-        void AssignSessions(UserSession userSession, LicenseeSession licenseeSession);
+        void AssignSessions(UserAuthInfo userAuthInfo, LicenseeAuthInfo licenseeAuthInfo);
     }
 }

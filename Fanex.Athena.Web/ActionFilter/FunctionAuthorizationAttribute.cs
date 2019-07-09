@@ -10,8 +10,9 @@ namespace Fanex.Athena.Web.ActionFilter
     using System.Net;
     using System.Web.Mvc;
     using System.Web.Routing;
+    using Fanex.Athena.Model.Auth.Enum;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Session.Enum;
+
     using Session.Interfaces;
 
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true)]
@@ -36,8 +37,8 @@ namespace Fanex.Athena.Web.ActionFilter
         {
             var context = filterContext.HttpContext;
 
-            var licenseeSession = SessionStorage.LicenseeSession;
-            var userSession = SessionStorage.UserSession;
+            var licenseeSession = SessionStorage.LicenseeAuthInfo;
+            var userSession = SessionStorage.UserAuthInfo;
             var authorized = userSession != null && licenseeSession != null;
             if (authorized)
             {

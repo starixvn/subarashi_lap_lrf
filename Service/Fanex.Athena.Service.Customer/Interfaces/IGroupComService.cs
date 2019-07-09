@@ -9,15 +9,15 @@ namespace Fanex.Athena.Service.Customer.Interfaces
     using System.Collections.Generic;
     using System.Data;
     using System.Threading.Tasks;
+    using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Customer.MetaModel;
-    using Session.Model;
 
     public interface IGroupComService
     {
         Task<IResultInfo> InsertGroup(GroupCommMetaModel item, IRequest request, int userId);
 
-        Task<IResultInfo> UpdateGroup(GroupCommMetaModel newItem, IRequest request, UserSession user);
+        Task<IResultInfo> UpdateGroup(GroupCommMetaModel newItem, IRequest request, UserAuthInfo user);
 
         Task<IList<GroupCommMetaModel>> GetAll(int licenseeId);
 

@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
-using Fanex.Athena.Service.Core.Users.Interfaces;
+using Fanex.Athena.Model.Auth;
+using Fanex.Athena.Model.Auth.Enum;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
-using Fanex.Athena.Session.Enum;
 using Fanex.Athena.Session.Interfaces;
-using Fanex.Athena.Session.Model;
 using Fanex.Athena.UnitTest.Common.Helpers;
 using Fanex.Athena.UnitTest.Common.NUnitExtensions;
 using Fanex.Athena.Web.ActionFilter;
@@ -41,8 +40,8 @@ namespace Fanex.Athena.Web.UnitTests.ActionFilter
         public void OnActionExecuting_IsAuthorized_FilterContextResultNull(AppMode appMode)
         {
             // Arrange
-            _sessionStorage.LicenseeSession.Returns(new LicenseeSession());
-            _sessionStorage.UserSession.Returns(new UserSession { ApplicationMode = appMode });
+            _sessionStorage.LicenseeAuthInfo.Returns(new LicenseeAuthInfo());
+            _sessionStorage.UserAuthInfo.Returns(new UserAuthInfo { ApplicationMode = appMode });
             _authorizationService.HasPermissions(Arg.Any<IEnumerable<int>>(), Arg.Any<string[]>()).Returns(true);
             _authorizationService.HasPermissions(Arg.Any<IEnumerable<string>>(), Arg.Any<string[]>()).Returns(true);
 

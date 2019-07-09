@@ -248,7 +248,7 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                SessionService.LicenseeSession.Returns(new LicenseeSession
+                SessionService.LicenseeSession.Returns(new LicenseeAuthInfo
                 {
                     IsAllowedCustomerComm = false
                 });
@@ -275,7 +275,7 @@
                 const string CustmerIds = "1,2";
                 bool isRemovePlayerComm = true;
                 _productService.GetProductAccess(0, string.Empty, string.Empty).ReturnsForAnyArgs(new ProductAccess(new List<Product>()));
-                SessionService.LicenseeSession.Returns(new LicenseeSession
+                SessionService.LicenseeSession.Returns(new LicenseeAuthInfo
                 {
                     IsAllowedCustomerComm = true
                 });

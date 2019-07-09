@@ -39,8 +39,8 @@
             _subsidiaryService = Substitute.For<ISubsidiaryService>();
 
             AppSettings.GetValue(Arg.Any<string>()).Returns(string.Empty);
-            SessionService.IsAllowedEditCommission(Arg.Any<UserSession>()).Returns(false);
-            SessionService.IsAllowedSpecialBA(Arg.Any<UserSession>()).Returns(true);
+            SessionService.IsAllowedEditCommission(Arg.Any<UserAuthInfo>()).Returns(false);
+            SessionService.IsAllowedSpecialBA(Arg.Any<UserAuthInfo>()).Returns(true);
 
             _groupComService.GetAll(Arg.Any<int>()).Returns(new List<GroupCommMetaModel>());
             _groupComService.GetById(Arg.Any<int>(), Arg.Any<int>()).Returns(new GroupCommMetaModel());

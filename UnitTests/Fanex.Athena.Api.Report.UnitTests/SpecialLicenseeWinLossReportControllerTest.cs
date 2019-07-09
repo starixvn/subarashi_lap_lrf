@@ -185,7 +185,7 @@
                             new Product { ProductCode = "P1" }
                         }));
 
-            StubUserSessionData(new UserSession { CurrencyList = new Dictionary<int, string> { { 1, "C1" }, { 2, "C2" } } });
+            StubUserSessionData(new UserAuthInfo { CurrencyList = new Dictionary<int, string> { { 1, "C1" }, { 2, "C2" } } });
 
             var model = new SpecialLicenseeWinLossMetaModel
             {

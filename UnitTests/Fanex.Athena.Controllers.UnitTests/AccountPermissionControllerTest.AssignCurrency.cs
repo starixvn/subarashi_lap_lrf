@@ -75,7 +75,7 @@
                 // Arrange
                 AppSettings.EnableAssignCurrency.Returns(true);
 
-                StubLicenseeSessionData(new LicenseeSession
+                StubLicenseeSessionData(new LicenseeAuthInfo
                 {
                     LicenseeId = LicenseeIdentity.KeenOcean
                 });

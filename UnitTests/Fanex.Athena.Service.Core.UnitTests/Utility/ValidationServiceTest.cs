@@ -6,7 +6,7 @@ using Fanex.Athena.Model.Report.MetaModel;
 using Fanex.Athena.Service.Core.Users.Interfaces;
 using Fanex.Athena.Service.Core.Utility;
 using Fanex.Athena.Service.Core.Utility.Interfaces;
-using Fanex.Athena.Session.Model;
+using Fanex.Athena.Model.Auth;
 using NSubstitute;
 using NUnit.Framework;
 using System;

@@ -99,7 +99,7 @@
         {
             // Arrange
             var groupCommMetaModel = new GroupCommMetaModel { IsUpdateCS = false };
-            var userSession = FakeHelper.Create<UserSession>();
+            var userSession = FakeHelper.Create<UserAuthInfo>();
             var request = FakeHelper.Create<Request>();
 
             var expectedResult = FakeHelper.Create<ResultInfo>();
@@ -122,7 +122,7 @@
         {
             // Arrange
             var newItem = new GroupCommMetaModel { IsUpdateCS = true };
-            var userSession = FakeHelper.Create<UserSession>();
+            var userSession = FakeHelper.Create<UserAuthInfo>();
             var request = FakeHelper.Create<Request>();
 
             var expectedResult = new ResultInfo { ExtendedData = string.Empty };
@@ -145,7 +145,7 @@
         {
             // Arrange
             var newItem = new GroupCommMetaModel { IsUpdateCS = true };
-            var userSession = FakeHelper.Create<UserSession>();
+            var userSession = FakeHelper.Create<UserAuthInfo>();
             var request = FakeHelper.Create<Request>();
 
             var expectedResult = new ResultInfo { ExtendedData = "1,2,3" };
@@ -176,7 +176,7 @@
         {
             // Arrange
             var newItem = new GroupCommMetaModel { IsUpdateCS = true };
-            var userSession = FakeHelper.Create<UserSession>();
+            var userSession = FakeHelper.Create<UserAuthInfo>();
             var request = FakeHelper.Create<Request>();
 
             _groupDataAccess.UpdateGroup(newItem, request, userSession.UserId)

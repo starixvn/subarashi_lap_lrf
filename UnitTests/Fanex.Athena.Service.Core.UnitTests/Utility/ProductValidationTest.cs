@@ -8,7 +8,7 @@ using Fanex.Athena.Service.Core.Common.Interfaces;
 using Fanex.Athena.Service.Core.Users.Interfaces;
 using Fanex.Athena.Service.Core.Utility;
 using Fanex.Athena.Service.Core.Utility.Interfaces;
-using Fanex.Athena.Session.Model;
+using Fanex.Athena.Model.Auth;
 using NSubstitute;
 using NUnit.Framework;
 using System;
@@ -31,7 +31,7 @@ namespace Fanex.Athena.Service.Core.UnitTests.Utility
             _sessionService = Substitute.For<ISessionService>();
             _fixture.Register<IMetaModelProductCodeList>(() =>
             _fixture.Create<BaseReportMetaModel>());
-            _sessionService.LicenseeSession.Returns(new LicenseeSession { LicenseeId = 1 });
+            _sessionService.LicenseeSession.Returns(new LicenseeAuthInfo { LicenseeId = 1 });
             _productService = Substitute.For<IProductService>();
             _productValidation = new ProductValidation(_productService, _sessionService);
         }
@@ -88,8 +88,8 @@ namespace Fanex.Athena.Service.Core.UnitTests.Utility
             //Arrange
             var model = new BaseReportMetaModel { ProductCodeList = productCodeList };
             var option = new ProductValidationOption { FunctionConfig = "winloss" };
-            _sessionService.UserSession.Returns(new UserSession { Language = "en-US" });
-            _sessionService.LicenseeSession.Returns(new LicenseeSession { LicenseeId = 1 });
+            _sessionService.UserSession.Returns(new UserAuthInfo { Language = "en-US" });
+            _sessionService.LicenseeSession.Returns(new LicenseeAuthInfo { LicenseeId = 1 });
             _productService.GetProductAccess(Arg.Any<int>(), Arg.Any<string>(), Arg.Any<string>())
                 .Returns(new ProductAccess(new List<Product> { new Product { ProductCode = "SB" } }));
             //Action
@@ -108,8 +108,8 @@ namespace Fanex.Athena.Service.Core.UnitTests.Utility
             //Arrange
             var model = new BaseReportMetaModel { ProductCodeList = productCodeList };
             var option = new ProductValidationOption { FunctionConfig = "winloss", IsSingleWallet = true };
-            _sessionService.UserSession.Returns(new UserSession { Language = "en-US" });
-            _sessionService.LicenseeSession.Returns(new LicenseeSession { LicenseeId = 1 });
+            _sessionService.UserSession.Returns(new UserAuthInfo { Language = "en-US" });
+            _sessionService.LicenseeSession.Returns(new LicenseeAuthInfo { LicenseeId = 1 });
             _productService.GetSingleWalletProductAccess(Arg.Any<int>(), Arg.Any<string>(), Arg.Any<string>())
                 .Returns(new ProductAccess(new List<Product> { new Product { ProductCode = "SB" } }));
             //Action

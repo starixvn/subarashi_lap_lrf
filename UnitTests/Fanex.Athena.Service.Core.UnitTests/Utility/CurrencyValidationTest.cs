@@ -5,7 +5,7 @@ using Fanex.Athena.Model.Report.MetaModel;
 using Fanex.Athena.Service.Core.Users.Interfaces;
 using Fanex.Athena.Service.Core.Utility;
 using Fanex.Athena.Service.Core.Utility.Interfaces;
-using Fanex.Athena.Session.Model;
+using Fanex.Athena.Model.Auth;
 using NSubstitute;
 using NUnit.Framework;
 using System;
@@ -26,11 +26,11 @@ namespace Fanex.Athena.Service.Core.UnitTests.Utility
         {
             _sessionService = Substitute.For<ISessionService>();
 
-            _sessionService.UserSession.Returns(new UserSession
+            _sessionService.UserSession.Returns(new UserAuthInfo
             {
                 CurrencyList = new Dictionary<int, string> { { 1, "USD" }, { 2, "EUR" }, { 4, "IDR" } }
             });
-            _sessionService.LicenseeSession.Returns(new LicenseeSession { LicenseeId = 1 });
+            _sessionService.LicenseeSession.Returns(new LicenseeAuthInfo { LicenseeId = 1 });
             _currencyValidation = new CurrencyValidation(_sessionService);
         }
 
@@ -69,7 +69,7 @@ namespace Fanex.Athena.Service.Core.UnitTests.Utility
         bool expected)
         {
             //Arrange
-            _sessionService.LicenseeSession.Returns(new LicenseeSession { LicenseeId = licenseeId });
+            _sessionService.LicenseeSession.Returns(new LicenseeAuthInfo { LicenseeId = licenseeId });
 
             //Action
 

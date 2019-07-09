@@ -51,7 +51,7 @@ namespace Fanex.Athena.Service.Customer
             return await _groupDataAccess.InsertGroup(item, request, userId).ConfigureAwait(false);
         }
 
-        public async Task<IResultInfo> UpdateGroup(GroupCommMetaModel newItem, IRequest request, UserSession user)
+        public async Task<IResultInfo> UpdateGroup(GroupCommMetaModel newItem, IRequest request, UserAuthInfo user)
         {
             var resultInfo = await _groupDataAccess.UpdateGroup(newItem, request, user.UserId).ConfigureAwait(false);
             var callApiSuccess = true;

@@ -7,12 +7,15 @@
 namespace Fanex.Athena.Controllers
 {
     using System.Web.Mvc;
+
     using Extension.Utility;
+    using Fanex.Athena.Model.Auth.Enum;
     using ONEbook.UM.Filters;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Configuration.Interfaces;
     using Service.Core.Users.Interfaces;
-    using Session.Enum;
+
     using Web.ActionFilter;
 
     [CheckUMFilter]

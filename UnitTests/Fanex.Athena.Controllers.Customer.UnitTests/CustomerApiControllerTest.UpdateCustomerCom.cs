@@ -23,7 +23,7 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                SessionService.LicenseeSession.Returns(new LicenseeSession
+                SessionService.LicenseeSession.Returns(new LicenseeAuthInfo
                 {
                     IsAllowedCustomerComm = false
                 });
@@ -47,7 +47,7 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                SessionService.LicenseeSession.Returns(new LicenseeSession
+                SessionService.LicenseeSession.Returns(new LicenseeAuthInfo
                 {
                     IsAllowedCustomerComm = true
                 });
@@ -71,7 +71,7 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                SessionService.LicenseeSession.Returns(new LicenseeSession
+                SessionService.LicenseeSession.Returns(new LicenseeAuthInfo
                 {
                     IsAllowedCustomerComm = true
                 });
@@ -101,7 +101,7 @@
             {
                 // Arrange
                 _productService.GetProductAccess(0, string.Empty).ReturnsForAnyArgs(new ProductAccess(new List<Product>()));
-                SessionService.LicenseeSession.Returns(new LicenseeSession
+                SessionService.LicenseeSession.Returns(new LicenseeAuthInfo
                 {
                     IsAllowedCustomerComm = true
                 });
@@ -132,7 +132,7 @@
             {
                 // Arrange
                 _productService.GetProductAccess(0, string.Empty).ReturnsForAnyArgs(new ProductAccess(new List<Product>()));
-                SessionService.LicenseeSession.Returns(new LicenseeSession
+                SessionService.LicenseeSession.Returns(new LicenseeAuthInfo
                 {
                     IsAllowedCustomerComm = true
                 });

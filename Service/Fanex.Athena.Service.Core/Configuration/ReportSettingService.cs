@@ -108,7 +108,7 @@ namespace Fanex.Athena.Service.Core.Configuration
 
         private void AssignFakeLicenseeSetting(ReportSetting reportSetting)
         {
-            var fakeLicenseeSetting = _licenseeSettingService.GetFakeLicenseeSetting(_sessionStorage.LicenseeSession?.LicenseeName);
+            var fakeLicenseeSetting = _licenseeSettingService.GetFakeLicenseeSetting(_sessionStorage.LicenseeAuthInfo?.LicenseeName);
             if (fakeLicenseeSetting != null)
             {
                 reportSetting.MinDateString = fakeLicenseeSetting.MinDate;

@@ -208,14 +208,14 @@
 
         private LiveReportBetListMetaModel CreateInvalidCurrencyMetaModel()
         {
-            StubUserSessionData(new UserSession { CurrencyList = new Dictionary<int, string>() });
+            StubUserSessionData(new UserAuthInfo { CurrencyList = new Dictionary<int, string>() });
 
             return new LiveReportBetListMetaModel { CurrencyId = FakeHelper.Create<int>() };
         }
 
         private LiveReportBetListMetaModel CreateValidCurrencyMetaModel(int currency)
         {
-            StubUserSessionData(new UserSession { Language = SessionLanguage, CurrencyList = new Dictionary<int, string> { { currency, "Currency Name" } } });
+            StubUserSessionData(new UserAuthInfo { Language = SessionLanguage, CurrencyList = new Dictionary<int, string> { { currency, "Currency Name" } } });
 
             return new LiveReportBetListMetaModel { CurrencyId = currency };
         }

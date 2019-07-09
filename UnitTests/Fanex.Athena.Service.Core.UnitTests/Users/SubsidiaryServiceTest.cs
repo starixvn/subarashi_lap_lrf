@@ -27,11 +27,11 @@
             _dataAccess = Substitute.For<ISubsidiaryDataAccess>();
             _cache = Substitute.For<IMemoryCacheService>();
             _sessionService = Substitute.For<ISessionService>();
-            _sessionService.LicenseeSession.Returns(new LicenseeSession
+            _sessionService.LicenseeSession.Returns(new LicenseeAuthInfo
             {
                 LicenseeName = LicenseeName
             });
-            _sessionService.UserSession.Returns(new UserSession
+            _sessionService.UserSession.Returns(new UserAuthInfo
             {
                 CurrencyList = new Dictionary<int, string>() { { 20, "UUS" }, { 51, "IDR" }, { 13, "CNY" } },
                 CurrencyAgentList = GetAgentByCurrencyData()

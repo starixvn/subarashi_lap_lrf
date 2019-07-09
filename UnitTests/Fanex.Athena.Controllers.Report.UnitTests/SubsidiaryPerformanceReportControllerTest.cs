@@ -51,7 +51,7 @@
                 var operatorList = new List<string> { "New York", "India", "Irag", "China" };
                 _subsidiaryService.GetSubsidiaryNames().Returns(operatorList);
 
-                SessionService.UserSession.Returns(new Session.Model.UserSession
+                SessionService.UserSession.Returns(new Session.Model.UserAuthInfo
                 {
                     IsManageableSubsidiary = true,
                     Language = DefaultUserSession.Language
@@ -86,7 +86,7 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                SessionService.UserSession.Returns(new Session.Model.UserSession
+                SessionService.UserSession.Returns(new Session.Model.UserAuthInfo
                 {
                     IsManageableSubsidiary = false,
                     Language = DefaultUserSession.Language

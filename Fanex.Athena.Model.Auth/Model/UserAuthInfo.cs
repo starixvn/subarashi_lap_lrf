@@ -4,14 +4,14 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Fanex.Athena.Session.Model
+namespace Fanex.Athena.Model.Auth
 {
+    using Fanex.Athena.Model.Auth.Enum;
     using System;
     using System.Collections.Generic;
-    using Enum;
 
     [Serializable]
-    public class UserSession
+    public class UserAuthInfo
     {
         public string VendorID { get; set; }
 

@@ -3,8 +3,8 @@
     using System;
     using System.Web.Mvc;
     using System.Web.Routing;
+    using Fanex.Athena.Model.Auth.Enum;
     using Session;
-    using Session.Enum;
     using Session.Interfaces;
 
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
@@ -35,7 +35,7 @@
             if (!skipAuthorization)
             {
                 base.OnAuthorization(filterContext);
-                var userSession = _sessionStorage.UserSession;
+                var userSession = _sessionStorage.UserAuthInfo;
                 var authorized = userSession != null && userSession.ApplicationMode == _appMode;
                 if (!authorized)
                 {

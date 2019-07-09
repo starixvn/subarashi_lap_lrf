@@ -35,7 +35,7 @@
         {
             // Arrange
             var expectedLanguage = FakeHelper.Create<string>();
-            _sessionService.UserSession.Returns(new UserSession
+            _sessionService.UserSession.Returns(new UserAuthInfo
             {
                 Language = expectedLanguage
             });
@@ -69,7 +69,7 @@
             HttpContext.Current = GetHttpContext();
             HttpContext.Current.Request.Cookies.Add(new HttpCookie(CookieName, ExpectedLanguage));
 
-            _sessionService.UserSession.Returns(new UserSession
+            _sessionService.UserSession.Returns(new UserAuthInfo
             {
                 Language = string.Empty
             });
@@ -88,7 +88,7 @@
             const string DefaultLanguage = "en-US";
             HttpContext.Current = GetHttpContext();
 
-            _sessionService.UserSession.Returns(new UserSession
+            _sessionService.UserSession.Returns(new UserAuthInfo
             {
                 Language = string.Empty
             });
@@ -139,7 +139,7 @@
             HttpContext.Current = GetHttpContext();
             HttpContext.Current.Request.Cookies.Add(new HttpCookie(CookieName, LanguageCode));
 
-            _sessionService.UserSession.Returns(new UserSession
+            _sessionService.UserSession.Returns(new UserAuthInfo
             {
                 Language = LanguageCode
             });

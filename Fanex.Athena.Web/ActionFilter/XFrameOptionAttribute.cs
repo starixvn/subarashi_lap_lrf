@@ -4,8 +4,8 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
+    using Fanex.Athena.Model.Auth.Enum;
     using Service.Core.Users.Interfaces;
-    using Session.Enum;
 
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public sealed class XFrameOptionAttribute : ActionFilterAttribute

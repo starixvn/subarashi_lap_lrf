@@ -59,7 +59,7 @@
         public void IsBetSettingEditable_IsParasiticMode_GetPermissionFromPortalFunctionList()
         {
             // Arrange
-            var userSession = new UserSession
+            var userSession = new UserAuthInfo
             {
                 ApplicationMode = AppMode.Parasitic,
                 UserId = 234234,
@@ -77,7 +77,7 @@
         public void IsBetSettingEditable_IsNotParasiticMode_GetPermissionFromFunctionIdList()
         {
             // Arrange
-            var userSession = new UserSession
+            var userSession = new UserAuthInfo
             {
                 ApplicationMode = AppMode.Self,
                 UserId = 324234,

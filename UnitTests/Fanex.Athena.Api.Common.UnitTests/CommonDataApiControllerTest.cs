@@ -30,8 +30,8 @@
         [OneTimeSetUp]
         public void FixtureSetUp()
         {
-            _sessionService.LicenseeSession.Returns(new LicenseeSession { LicenseeId = FakeHelper.Create<int>() });
-            _sessionService.UserSession.Returns(new UserSession { UserId = FakeHelper.Create<int>(), Language = FakeHelper.Create<string>() });
+            _sessionService.LicenseeSession.Returns(new LicenseeAuthInfo { LicenseeId = FakeHelper.Create<int>() });
+            _sessionService.UserSession.Returns(new UserAuthInfo { UserId = FakeHelper.Create<int>(), Language = FakeHelper.Create<string>() });
             _sessionService.GenerateAgentListXml(Arg.Any<int>()).Returns(FakeHelper.Create<string>());
         }
 

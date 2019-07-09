@@ -6,14 +6,20 @@
 
 namespace Fanex.Athena.Controllers.Account
 {
-    using System.Web.Mvc;
     using Extension.Utility;
+
+    using Fanex.Athena.Model.Auth.Enum;
+
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
+
     using ONEbook.UM.Filters;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-    using Session.Enum;
+
+    using System.Web.Mvc;
+
     using Web.ActionFilter;
 
     [CheckUMFilter]

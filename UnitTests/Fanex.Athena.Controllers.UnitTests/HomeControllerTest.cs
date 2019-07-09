@@ -31,7 +31,7 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                StubUserSessionData(new UserSession
+                StubUserSessionData(new UserAuthInfo
                 {
                     UserId = 0
                 });
@@ -78,7 +78,7 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                StubUserSessionData(new UserSession
+                StubUserSessionData(new UserAuthInfo
                 {
                     UserId = 1,
                     UserName = string.Empty
@@ -163,7 +163,7 @@
 
                 AppSettings.LocalTest.Returns(true);
 
-                StubUserSessionData(new UserSession
+                StubUserSessionData(new UserAuthInfo
                 {
                     UserId = 0,
                     IsInternal = isInternal
@@ -220,7 +220,7 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                StubUserSessionData(new UserSession
+                StubUserSessionData(new UserAuthInfo
                 {
                     UserId = 0
                 });

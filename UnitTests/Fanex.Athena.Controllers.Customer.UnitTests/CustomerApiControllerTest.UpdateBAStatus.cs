@@ -50,7 +50,7 @@
                 // Arrange
                 const string ResultMessage = "konnichiwa";
                 bool isAllowBa = true;
-                SessionService.IsAllowedSpecialBA(Arg.Any<UserSession>()).Returns(false);
+                SessionService.IsAllowedSpecialBA(Arg.Any<UserAuthInfo>()).Returns(false);
                 var productAccess = new ProductAccess(new List<Product>
                 {
                     new Product { ProductCode = Product.BA }
@@ -89,7 +89,7 @@
                 const string OddsGroup = "Z";
                 const int CustId = 100;
                 bool isAllowBa = true;
-                SessionService.IsAllowedSpecialBA(Arg.Any<UserSession>()).Returns(true);
+                SessionService.IsAllowedSpecialBA(Arg.Any<UserAuthInfo>()).Returns(true);
                 var productAccess = new ProductAccess(new List<Product>
                 {
                     new Product { ProductCode = Product.BA }

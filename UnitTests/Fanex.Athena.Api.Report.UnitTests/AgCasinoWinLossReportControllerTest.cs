@@ -71,11 +71,11 @@
             {
                 CurrencyId = 1
             };
-            StubUserSessionData(new UserSession
+            StubUserSessionData(new UserAuthInfo
             {
                 CurrencyList = new Dictionary<int, string>()
             });
-            StubLicenseeSessionData(new LicenseeSession { LicenseeId = 0 });
+            StubLicenseeSessionData(new LicenseeAuthInfo { LicenseeId = 0 });
 
             // Action
             var result = await _controller.Index(model);
@@ -216,7 +216,7 @@
         public void Index_ExportExcelLevel0_ExportWithCorrectData()
         {
             // Arrange
-            StubUserSessionData(new UserSession
+            StubUserSessionData(new UserAuthInfo
             {
                 CurrencyList = new Dictionary<int, string> { { 0, "CurrencyName0" }, { 1, "CurrencyName1" } },
             });
@@ -254,7 +254,7 @@
             // Arrange
             var currencyId = 2;
 
-            StubUserSessionData(new UserSession
+            StubUserSessionData(new UserAuthInfo
             {
                 CurrencyList = new Dictionary<int, string> { { 1, "CurrencyName1" }, { 2, "CurrencyName2" } },
             });

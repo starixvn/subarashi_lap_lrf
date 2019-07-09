@@ -1,5 +1,16 @@
 ﻿namespace Fanex.Athena.Api.Base.Attributes
 {
+    using Extension.Utility;
+
+    using Extensions;
+
+    using Fanex.Athena.Model.Auth.Enum;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
+    using Resources;
+
+    using Service.Core.Users.Interfaces;
+
     using System;
     using System.Linq;
     using System.Net;
@@ -11,12 +22,6 @@
     using System.Web.Http.Controllers;
     using System.Web.Http.Dependencies;
     using System.Web.Http.Filters;
-    using Extension.Utility;
-    using Extensions;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Resources;
-    using Service.Core.Users.Interfaces;
-    using Session.Enum;
 
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true)]
     public sealed class ApiFunctionAuthorizationAttribute : FilterAttribute, IAuthorizationFilter

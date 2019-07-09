@@ -7,8 +7,9 @@
     using System.Threading;
     using System.Threading.Tasks;
     using System.Web.Http.Filters;
+
     using Attributes.Extensions;
-    using Session.Enum;
+    using Fanex.Athena.Model.Auth.Enum;
     using Session.Interfaces;
 
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
@@ -35,7 +36,7 @@
             {
                 var scope = actionExecutedContext.Request.GetDependencyScope();
                 var sessionStorage = scope.Resolve<ISessionStorage>();
-                var user = sessionStorage.UserSession;
+                var user = sessionStorage.UserAuthInfo;
 
                 IEnumerable<string> headerValues;
 

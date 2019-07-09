@@ -125,7 +125,7 @@
                     BaseCurrency = inputBaseCurrency
                 };
 
-                StubUserSessionData(new UserSession
+                StubUserSessionData(new UserAuthInfo
                 {
                     Language = SessionLanguage,
                     CurrencyList = new Dictionary<int, string> { { currencyId, "Currency" } }
@@ -230,7 +230,7 @@
                     CustId = 200
                 };
 
-                StubUserSessionData(new UserSession
+                StubUserSessionData(new UserAuthInfo
                 {
                     Language = SessionLanguage,
                     CurrencyList = new Dictionary<int, string> { { currencyId, "Currency" } }

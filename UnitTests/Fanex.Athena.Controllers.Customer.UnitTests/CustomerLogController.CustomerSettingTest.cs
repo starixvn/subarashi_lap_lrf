@@ -35,7 +35,7 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                var fakeLicensee = new LicenseeSession
+                var fakeLicensee = new LicenseeAuthInfo
                 {
                     IsAllowedCustomerComm = true
                 };

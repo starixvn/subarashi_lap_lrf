@@ -2,7 +2,7 @@
 using System.Web.Mvc;
 using Fanex.Athena.Service.Core.Configuration.Interfaces;
 using Fanex.Athena.Service.Core.Users.Interfaces;
-using Fanex.Athena.Session.Model;
+using Fanex.Athena.Model.Auth;
 using Fanex.Athena.UnitTest.Common.Helpers;
 using Fanex.Athena.UnitTest.Common.NUnitExtensions;
 using Fanex.Athena.Web.ActionFilter;
@@ -31,7 +31,7 @@ namespace Fanex.Athena.Web.UnitTests.ActionFilter
             _filterContext = CreateFilterContext();
             _licenseeSettingService = Substitute.For<ILicenseeSettingService>();
             _sessionService = Substitute.For<ISessionService>();
-            _sessionService.LicenseeSession.Returns(new LicenseeSession
+            _sessionService.LicenseeSession.Returns(new LicenseeAuthInfo
             {
                 LicenseeName = LicenseeName
             });

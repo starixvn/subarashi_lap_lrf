@@ -1,17 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
 using Fanex.Athena.Constant.DataDomain;
 using Fanex.Athena.DataAccess.BetSettings.Interfaces;
+using Fanex.Athena.Model.Auth;
+using Fanex.Athena.Model.Auth.Enum;
 using Fanex.Athena.Model.BetSettings.DTO;
 using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Model.Customer.DTO;
 using Fanex.Athena.Service.BetSettings.Interfaces;
-using Fanex.Athena.Service.Core.Users.Interfaces;
 using Fanex.Athena.Service.Customer.Interfaces;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
-using Fanex.Athena.Session.Enum;
-using Fanex.Athena.Session.Model;
 
 namespace Fanex.Athena.Service.BetSettings
 {
@@ -38,7 +38,7 @@ namespace Fanex.Athena.Service.BetSettings
             return _customerService.GetCustomerInfo(licenseeId, custId);
         }
 
-        public bool IsBetSettingEditable(UserSession userSession)
+        public bool IsBetSettingEditable(UserAuthInfo userSession)
         {
             return userSession.ApplicationMode == AppMode.Parasitic ?
                       _authorizationService.HasPermissions(userSession.PortalFunctionList, PermissionKeys.CustomerInfoEditBetSetting) :

@@ -57,11 +57,11 @@
                 IsExportExcel = false,
                 CurrencyId = 1,
             };
-            StubUserSessionData(new UserSession
+            StubUserSessionData(new UserAuthInfo
             {
                 CurrencyList = new Dictionary<int, string>()
             });
-            StubLicenseeSessionData(new LicenseeSession { LicenseeId = 0 });
+            StubLicenseeSessionData(new LicenseeAuthInfo { LicenseeId = 0 });
 
             // Action
             var result = await _controller.Index(model);
@@ -219,7 +219,7 @@
             var currencyId = 3;
             var custId = 4;
 
-            StubUserSessionData(new UserSession
+            StubUserSessionData(new UserAuthInfo
             {
                 CurrencyList = new Dictionary<int, string> {
                     { modelCurrencyId, "Currency" },
@@ -267,7 +267,7 @@
                 ToDate = DateTime.Now.AddDays(-1),
                 DrillDownCurrencyId = drillDownCurrencyId
             };
-            StubUserSessionData(new UserSession
+            StubUserSessionData(new UserAuthInfo
             {
                 CurrencyList = new Dictionary<int, string>
                 {
@@ -275,7 +275,7 @@
                     { drillDownCurrencyId, nameof(model.DrillDownCurrencyId) }
                 }
             });
-            StubLicenseeSessionData(new LicenseeSession { LicenseeId = 0 });
+            StubLicenseeSessionData(new LicenseeAuthInfo { LicenseeId = 0 });
             SessionService.GenerateAgentListXml(Arg.Any<int>(), Arg.Any<bool>()).Returns(string.Empty);
 
             return model;

@@ -20,7 +20,7 @@
             const string ExpectedResult = "aaaaaaaaaaaa";
             const string Url = "/PPResultPopup/Index";
             const string Language = "vi-VN";
-            StubUserSessionData(new Session.Model.UserSession
+            StubUserSessionData(new Session.Model.UserAuthInfo
             {
                 Language = Language
             });

@@ -44,7 +44,7 @@
                 // Arrange
                 var metaModel = new BetListMetaModel { FromDate = new DateTime(2018, 1, 1) };
 
-                StubUserSessionData(new UserSession { CurrencyList = new Dictionary<int, string>() });
+                StubUserSessionData(new UserAuthInfo { CurrencyList = new Dictionary<int, string>() });
 
                 _reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss).Returns(new ReportSetting
                 {
@@ -70,7 +70,7 @@
                 // Arrange
                 var metaModel = new BetListMetaModel { CurrencyId = currencyId };
 
-                StubUserSessionData(new UserSession
+                StubUserSessionData(new UserAuthInfo
                 {
                     Language = SessionLanguage,
                     CurrencyList = new Dictionary<int, string> { { currencyId, "Currency" } }

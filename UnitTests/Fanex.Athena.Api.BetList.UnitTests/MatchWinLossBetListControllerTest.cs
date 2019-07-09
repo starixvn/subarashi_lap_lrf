@@ -77,7 +77,7 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                StubUserSessionData(new UserSession { CurrencyList = new Dictionary<int, string>() });
+                StubUserSessionData(new UserAuthInfo { CurrencyList = new Dictionary<int, string>() });
 
                 // Action
                 var result = await controller.MixParlay(0, 0, 1, string.Empty, 0, DateTime.Today, DateTime.Today, string.Empty);
@@ -161,7 +161,7 @@
                 var sortBy = FakeHelper.Create<string>();
                 var sortOrder = FakeHelper.Create<string>();
 
-                StubUserSessionData(new UserSession { Language = "en-US", CurrencyList = new Dictionary<int, string> { { currencyId, "Currency" } } });
+                StubUserSessionData(new UserAuthInfo { Language = "en-US", CurrencyList = new Dictionary<int, string> { { currencyId, "Currency" } } });
 
                 var expect = new HttpResponseMessage();
                 StubBetListApiPostAsync(Arg.Any<BetListMetaModel>(), PageApiPath, expect);
@@ -186,7 +186,7 @@
         {
             var metaModel = new BetListMetaModel { CurrencyId = currencyId };
 
-            StubUserSessionData(new UserSession { Language = SessionLanguage, CurrencyList = sessionCurrencyList });
+            StubUserSessionData(new UserAuthInfo { Language = SessionLanguage, CurrencyList = sessionCurrencyList });
 
             return metaModel;
         }

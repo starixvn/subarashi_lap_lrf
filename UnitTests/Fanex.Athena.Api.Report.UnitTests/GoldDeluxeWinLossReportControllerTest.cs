@@ -62,7 +62,7 @@
                 CurrencyId = 1,
                 ProductId = ProductTypes.GoldDeluxe
             };
-            StubUserSessionData(new UserSession
+            StubUserSessionData(new UserAuthInfo
             {
                 CurrencyList = new Dictionary<int, string>(),
                 ApplicationMode = AppMode.Self,
@@ -270,7 +270,7 @@
                 ProductId = ProductTypes.GoldDeluxe,
                 ProductCode = nameof(ThirdPartyWinLossMetaModel.ProductCode)
             };
-            StubUserSessionData(new UserSession
+            StubUserSessionData(new UserAuthInfo
             {
                 CurrencyList = new Dictionary<int, string>
                 {
