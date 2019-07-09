@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { ActionCreators } from '../actions/index.js';
 import { bindActionCreators } from 'redux';
 
+import { gridItemDropdownHeight } from '../lib/constants';
 import { Table } from '@9softstudio/react-grid';
 import ContextMenu from './grid/ContextMenu';
 import SpecialLevelDropdown from './grid/SpecialLevelDropdown';
@@ -70,10 +71,11 @@ export class DataGrid extends PureComponent {
     handleEnterContextMenu = (event) => {
         const { isOpenContextMenu } = this.state;
         if (!isOpenContextMenu) {
-            var rect = event.target.getBoundingClientRect();
+            const contextMenuHeight = 140;
+            const rect = event.target.getBoundingClientRect();
             const position = {
                 x: rect.left,
-                y: GridHelper.getContextMenuTop(rect.top)
+                y: GridHelper.calculateTopPosition(contextMenuHeight, rect.top)
             };
 
             this.setState({
@@ -104,10 +106,12 @@ export class DataGrid extends PureComponent {
             });
         }
         else {
-            var rect = event.target.getBoundingClientRect();
+            const dropdownItemName = stateName.replace('Position', '');
+            const dropdownHeight = gridItemDropdownHeight[dropdownItemName];
+            const rect = event.target.getBoundingClientRect();
             const position = {
                 x: rect.left,
-                y: rect.top + 20
+                y: GridHelper.calculateTopPosition(dropdownHeight, rect.top + 20)
             };
 
             this.setState({ 

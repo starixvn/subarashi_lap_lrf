@@ -98,3 +98,9 @@ export const headerText = {
     LastTransaction: 'LastTransaction',
     Email: 'Email'
 }
+
+export const gridItemDropdownHeight = {
+    'specialLevelDropdown': 231,
+    'oddsGroupDropdown': 126,
+    'statusDropdown': 112
+}

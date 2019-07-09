@@ -24,11 +24,10 @@ export default class GridHelper {
         )
     }
 
-    static getContextMenuTop(currentTop){
+    static calculateTopPosition(dropdownHeight, currentTop){
         const innerHeight = window.innerHeight;
-        const contextMenuHeight = 140;
-        const expectedHeight = contextMenuHeight + currentTop + 20;
+        const expectedHeight = dropdownHeight + currentTop + 20;
 
-        return expectedHeight > innerHeight ? currentTop - contextMenuHeight : currentTop;
+        return expectedHeight > innerHeight ? currentTop - dropdownHeight : currentTop;
     }
 }
