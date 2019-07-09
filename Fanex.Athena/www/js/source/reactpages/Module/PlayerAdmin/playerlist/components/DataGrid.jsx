@@ -25,7 +25,14 @@ export class DataGrid extends PureComponent {
             contextMenuPosition: null,
             specialLevelDropdownPosition: null,
             oddsGroupDropdownPosition: null,
-            statusDropdownPosition: null
+            statusDropdownPosition: null,
+            shouldResetScrollPosition: false
+        }
+    }
+
+    componentDidUpdate(prevProp) {
+        if (prevProp.playerList !== this.props.playerList) {
+            this.setState({ shouldResetScrollPosition: true });
         }
     }
 
@@ -66,12 +73,13 @@ export class DataGrid extends PureComponent {
             var rect = event.target.getBoundingClientRect();
             const position = {
                 x: rect.left,
-                y: rect.top
+                y: GridHelper.getContextMenuTop(rect.top)
             };
 
             this.setState({
                 contextMenuPosition: position,
-                isOpenContextMenu: true
+                isOpenContextMenu: true,
+                shouldResetScrollPosition: false
             });
         }
     }
@@ -79,7 +87,10 @@ export class DataGrid extends PureComponent {
     handleLeaveContextMenu = () => {
         window.setTimeout(() => {
             if (this.state.isOpenContextMenu) {
-                this.setState({ isOpenContextMenu: false });
+                this.setState({ 
+                    isOpenContextMenu: false,
+                    shouldResetScrollPosition: false
+                 });
             }
         }, 10);
     }
@@ -87,7 +98,10 @@ export class DataGrid extends PureComponent {
     _handlerToggleDropdownLabel(event, stateName) {
         const currentPosition = this.state[stateName];
         if (currentPosition) {
-            this.setState({ [stateName]: null });
+            this.setState({ 
+                [stateName]: null,
+                shouldResetScrollPosition: false
+            });
         }
         else {
             var rect = event.target.getBoundingClientRect();
@@ -96,7 +110,10 @@ export class DataGrid extends PureComponent {
                 y: rect.top + 20
             };
 
-            this.setState({ [stateName]: position });
+            this.setState({ 
+                [stateName]: position,
+                shouldResetScrollPosition: false
+             });
         }
     }
 
@@ -121,8 +138,15 @@ export class DataGrid extends PureComponent {
         setPlayerList(newPlayerList);
     }
 
-    handleChangeBaStatus = (custId, value) => {
-        this.handleChangeUpdatePlayerItem(custId, value, 'BaStatus');
+    handleChangeBaStatus = (custId, checked) => {
+        const param = {
+            custId,
+            isBa: checked
+        }
+        this.props.updateBaStatus(param).then(response => {
+            console.log(response.data);
+            this.handleChangeUpdatePlayerItem(custId, checked, 'BaStatus');
+        })
     }
 
     _handleChangeDropdownValue = (event, value, fieldName, onChangeSuccess) => {
@@ -146,9 +170,20 @@ export class DataGrid extends PureComponent {
         this._handleChangeDropdownValue(event, value, 'Status', this.handleToggleStatus);
     }
 
+    handleGridItem = () => {
+        this.setState({ shouldResetScrollPosition: false });
+    }
+
     render() {
         const { playerList, selectedPlayer } = this.props;
-        const { contextMenuPosition, isOpenContextMenu, specialLevelDropdownPosition, oddsGroupDropdownPosition, statusDropdownPosition } = this.state;
+        const {
+            contextMenuPosition,
+            isOpenContextMenu,
+            specialLevelDropdownPosition,
+            oddsGroupDropdownPosition,
+            statusDropdownPosition,
+            shouldResetScrollPosition
+        } = this.state;
         const dataList = selectedPlayer ? [playerList.find(item => item.CustId === selectedPlayer.custId)] : playerList;
         const displayedColumn = this._buildDisplayedColumn();
 
@@ -157,18 +192,17 @@ export class DataGrid extends PureComponent {
                 <Table minWidth={650}
                     autoWidth={true}
                     maxWidth={this.maxWidth}
-                    autoHeight={false}
-                    bodyHeight={300}
-                    adjustedHeight={32}
+                    autoHeight={true}
                     header={GridHelper.renderHeader(displayedColumn)}
                     body={this._renderDataSection(dataList, displayedColumn)}
-                    containerPadding={30} />
-                <ContextMenu isOpenContextMenu={isOpenContextMenu} position={contextMenuPosition} />
-                <SpecialLevelDropdown position={specialLevelDropdownPosition} 
+                    containerPadding={30}
+                    shouldResetScrollPosition={shouldResetScrollPosition} />
+                <ContextMenu isOpenContextMenu={isOpenContextMenu} position={contextMenuPosition} onToggle={this.handleGridItem} />
+                <SpecialLevelDropdown position={specialLevelDropdownPosition}
                     onClose={this.handleToggleSpecialLevel} onChange={this.handleChangeSpecialLevel} />
-                <OddsGroupDropdown position={oddsGroupDropdownPosition} 
+                <OddsGroupDropdown position={oddsGroupDropdownPosition}
                     onClose={this.handleToggleOddsGroup} onChange={this.handleChangeOddsGroup} />
-                <StatusDropdown position={statusDropdownPosition} 
+                <StatusDropdown position={statusDropdownPosition}
                     onClose={this.handleToggleStatus} onChange={this.handleChangeStatus} />
             </>
         );
@@ -176,8 +210,8 @@ export class DataGrid extends PureComponent {
 }
 
 function mapDispatchToProps(dispatch) {
-    const { setSelectedPlayerIdList, setPlayerList, setCurrentActivePlayer } = ActionCreators;
-    return bindActionCreators({ setSelectedPlayerIdList, setPlayerList, setCurrentActivePlayer }, dispatch);
+    const { setSelectedPlayerIdList, setPlayerList, setCurrentActivePlayer, updateBaStatus } = ActionCreators;
+    return bindActionCreators({ setSelectedPlayerIdList, setPlayerList, setCurrentActivePlayer, updateBaStatus }, dispatch);
 }
 
 function mapStateToProps(state) {

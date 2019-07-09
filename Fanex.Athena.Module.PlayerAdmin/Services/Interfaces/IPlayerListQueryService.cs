@@ -1,12 +1,10 @@
-﻿using Fanex.Athena.Module.PlayerAdmin.DTO;
-using Fanex.Athena.Module.PlayerAdmin.MetaModel;
+﻿using Fanex.Athena.Module.PlayerAdmin.MetaModel;
+using Fanex.Athena.Module.PlayerAdmin.ViewModels;
 
 namespace Fanex.Athena.Module.PlayerAdmin.Services.Interfaces
 {
     public interface IPlayerListQueryService
     {
-        EntityResult<Player> SearchPlayerByUserName(SearchPlayerByUserNameMetaModel searchParam);
-
-        EntityResult<Player> SearchPlayerByIdList(SearchPlayerByIdListMetaModel searchParam);
+        PlayerQueryResultViewModel SearchPlayerByUserName(SearchPlayerByUserNameMetaModel searchParam);
     }
 }

@@ -2,6 +2,7 @@
 using Fanex.Athena.Module.PlayerAdmin.DTO;
 using Fanex.Athena.Module.PlayerAdmin.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Services.Interfaces;
+using Fanex.Athena.Module.PlayerAdmin.ViewModels;
 using Fanex.Common.Extensions;
 using Fanex.Data;
 using System.Collections.Generic;
@@ -17,25 +18,20 @@ namespace Fanex.Athena.Module.PlayerAdmin.Services
             _dbFactory = dbFactory;
         }
 
-        public EntityResult<Player> SearchPlayerByUserName(SearchPlayerByUserNameMetaModel searchParam)
+        public PlayerQueryResultViewModel SearchPlayerByUserName(SearchPlayerByUserNameMetaModel searchParam)
         {
             const string SpKey = "Lrf_CustomerSelByUsername";
-            var result = new EntityResult<Player>();
+            var result = new PlayerQueryResultViewModel();
 
             using (var objectDb = _dbFactory.GetObjectDb(SpKey))
             {
                 AssignParamByUserName(objectDb, searchParam);
 
-                result.MainData = ReadPlayerList(objectDb);
+                result.DataList = ReadPlayerList(objectDb);
                 result.TotalItem = Common.Converter.ToInt(objectDb.GetParameterValue("TotalRows"));
             }
 
             return result;
-        }
-
-        public EntityResult<Player> SearchPlayerByIdList(SearchPlayerByIdListMetaModel searchParam)
-        {
-            throw new System.NotImplementedException();
         }
 
         private static void AssignParamByUserName(IObjectDb objectDb, SearchPlayerByUserNameMetaModel searchParam)
@@ -48,6 +44,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Services
             objectDb.SetParameterValue("OddsGroups", searchParam.OddsGroup);
             objectDb.SetParameterValue("PageSize", searchParam.PageSize);
             objectDb.SetParameterValue("PageIndex", searchParam.PageIndex);
+            objectDb.SetParameterValue("AgentList", searchParam.AgentListXml);
 
             objectDb.SetParameterValue("TotalRows", 0);
         }

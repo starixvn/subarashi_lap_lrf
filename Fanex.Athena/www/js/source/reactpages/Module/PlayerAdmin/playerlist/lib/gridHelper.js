@@ -23,4 +23,12 @@ export default class GridHelper {
             </HeaderRow>
         )
     }
+
+    static getContextMenuTop(currentTop){
+        const innerHeight = window.innerHeight;
+        const contextMenuHeight = 140;
+        const expectedHeight = contextMenuHeight + currentTop + 20;
+
+        return expectedHeight > innerHeight ? currentTop - contextMenuHeight : currentTop;
+    }
 }

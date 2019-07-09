@@ -1,5 +1,12 @@
 ﻿namespace Fanex.Athena.Api.Base.Attributes
 {
+    using DataAccess.Core.Users.Interfaces;
+    using Extensions;
+    using Fanex.Logging;
+    using Model.Core.DTO.OneAuth;
+    using ONEbook.UM.Services;
+    using Resources;
+    using Service.Core.Users.Interfaces;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -10,14 +17,6 @@
     using System.Threading.Tasks;
     using System.Web.Http.Controllers;
     using System.Web.Http.Filters;
-    using DataAccess.Core.Users.Interfaces;
-    using Extensions;
-    using Fanex.Logging;
-    using Model.Core.DTO.OneAuth;
-    using ONEbook.UM.Services;
-    using Resources;
-    using Service.Core.Users.Interfaces;
-    using Service.Core.Utility.Interfaces;
 
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true)]
     public sealed class ApiOneAuthorizationAttribute : FilterAttribute, IAuthorizationFilter
@@ -83,6 +82,7 @@
             actionContext.ActionArguments["username"] = token.UserID;
             actionContext.ActionArguments["sitename"] = token.SiteName;
             actionContext.ActionArguments["language"] = token.Language;
+            actionContext.ActionArguments["currencyAgentList"] = token.Currency;
         }
 
         private static string GetAuthToken(HttpRequestMessage request)

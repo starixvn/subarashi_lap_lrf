@@ -11,5 +11,7 @@
         public string Ip { get; set; }
 
         public string Language { get; set; }
+
+        public string AgentListXml { get; set; }
     }
 }

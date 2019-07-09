@@ -19,6 +19,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Repository
                 db.SetParameterValue("IsBA", metaModel.IsBa);
                 db.SetParameterValue("langkey", metaModel.Language);
                 db.SetParameterValue("IP", metaModel.Ip);
+                db.SetParameterValue("AgentList", metaModel.AgentListXml);
                 db.SetParameterValue("OddsGroup", null);
                 AddResultParam(db);
                 db.ExecuteNonQuery();

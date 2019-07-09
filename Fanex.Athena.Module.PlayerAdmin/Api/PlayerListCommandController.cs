@@ -40,17 +40,23 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api
             var productAccess = _productService.GetProductAccess(metaModel.LicenseeId, metaModel.Language);
             if (!productAccess.IsAllowBA)
             {
-                return CreateUpdatingBaResult(metaModel.IsBa, false, ViewResources.NotAllowBA);
+                return CreateUpdatingBaResult(false, ViewResources.NotAllowBA);
             }
+
+            return new
+            {
+                param = metaModel,
+                productAccess.IsAllowBA
+            };
 
             var updateResult = _playerListCommandService.UpdateBaStatus(metaModel);
 
             if (updateResult.IsSuccessful)
             {
-                return CreateUpdatingBaResult(metaModel.IsBa, true, updateResult.Message, updateResult.ExtendedData);
+                return CreateUpdatingBaResult(true, updateResult.Message, updateResult.ExtendedData);
             }
 
-            return CreateUpdatingBaResult(metaModel.IsBa, false, updateResult.Message);
+            return CreateUpdatingBaResult(false, updateResult.Message);
         }
 
         [HttpPost]
@@ -69,13 +75,13 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api
                     var message = !dataResult.IsSuccessful && string.IsNullOrWhiteSpace(dataResult.Message) ?
                                    ViewResources.HttpError_Default : dataResult.Message;
 
-                    return Json(new ResultViewModel
+                    return new ResultViewModel
                     {
                         Success = dataResult.IsSuccessful,
                         Message = message,
                         ErrorCode = dataResult.Code,
                         ErrorMessage = message
-                    });
+                    };
                 }
                 catch (Exception exception)
                 {
@@ -85,13 +91,13 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api
 
             var errorMessage = isFakeLicensee ? ViewResources.FunctionDeniedMsg : ViewResources.HttpError_Default;
 
-            return Json(new ResultViewModel
+            return new ResultViewModel
             {
                 Success = false,
                 Message = errorMessage,
                 ErrorCode = 1,
                 ErrorMessage = errorMessage
-            });
+            };
         }
 
         [HttpPost]
@@ -107,13 +113,13 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api
                 {
                     var dataResult = _playerListCommandService.UpdateSpecialLevel(metaModel);
 
-                    return Json(new ResultViewModel
+                    return new ResultViewModel
                     {
                         Success = dataResult.IsSuccessful,
                         Message = dataResult.Message,
                         ErrorCode = dataResult.Code,
                         ErrorMessage = dataResult.Message
-                    });
+                    };
                 }
                 catch (Exception exception)
                 {
@@ -123,34 +129,32 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api
 
             var errorMessage = isFakeLicensee ? ViewResources.FunctionDeniedMsg : ViewResources.HttpError_Default;
 
-            return Json(new ResultViewModel
+            return new ResultViewModel
             {
                 Success = false,
                 Message = errorMessage,
                 ErrorCode = 1,
                 ErrorMessage = errorMessage
-            });
+            };
         }
 
         private void AssignCommonProperties(PlayerListCommandBaseDbParam param)
         {
+            const string DefaultLanguageCode = "en";
+
             param.LicenseeId = LicenseeId;
             param.UserId = UserId;
-            param.Language = Language;
+            param.Language = Util.MapIetfLanguageCodes.ContainsKey(Language) ? Util.MapIetfLanguageCodes[Language] : Util.MapIetfLanguageCodes[DefaultLanguageCode];
             param.Ip = string.Empty;
         }
 
-        protected internal virtual dynamic CreateUpdatingBaResult(bool isAllowBA, bool isSuccessful, string message, string oddsGroup = null)
+        private static ResultViewModel CreateUpdatingBaResult(bool isSuccessful, string message, string oddsGroup = null)
         {
-            return new
+            return new ResultViewModel
             {
-                IsSuccessful = isSuccessful,
+                Success = isSuccessful,
                 Message = message,
-                IsBA = isAllowBA,
-                BAStatus = isAllowBA ? "On" : "Off",
-                ConfirmMessage = isAllowBA ? ViewResources.AlertTurnOffBAMsg : ViewResources.AlertTurnOnBAMsg,
-                Tooltip = isAllowBA ? ViewResources.TurnOffBaTooltip : ViewResources.TurnOnBaTooltip,
-                OddsGroup = oddsGroup
+                ExtendedData = oddsGroup
             };
         }
 

@@ -32,7 +32,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Api
             var searchParam = new SearchPlayerByUserNameMetaModel
             {
                 UserName = "Test",
-                Currency = "4"
+                AgentListXml = "4"
             };
 
             var expectedReturnedData = new EntityResult<Player>();
