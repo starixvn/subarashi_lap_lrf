@@ -16,7 +16,6 @@ namespace Fanex.Athena.Excel.Report
     using Base.Helpers;
     using Common;
     using Constant.DataDomain;
-    using Extension.Helper;
     using Fanex.Athena.Excel.Base.Extension;
     using Helpers;
     using Model.Report.MetaModel;
@@ -48,6 +47,18 @@ namespace Fanex.Athena.Excel.Report
         private static readonly IEnumerable<int> SpecialBettypes = new[]
         {
             (int)BetType.MixParlay, (int)BetType.Outright, (int)BetType.CombinationMixParlay, (int)BetType.VirtualSports2MixParlay
+        };
+
+        private static readonly IList<string> _commonColumnNameList = new List<string>
+        {
+            "turnover",
+            "betcount",
+            "memberwinlost",
+            "playercomm",
+            "totalwl",
+            "licenseewl",
+            "commba",
+            "amtduetoba"
         };
 
         private readonly MatchWinLossMetaModel _model;
@@ -124,7 +135,7 @@ namespace Fanex.Athena.Excel.Report
             var matchId = 0;
             var matchName = "Default";
             var formatMatchName = string.Empty;
-            var columnNameList = GetColumnNameList();
+            var columnNameList = _commonColumnNameList;
             var rowCount = _exportData.Rows.Count;
             var matchInfoList = new List<DataRow>();
             var currentIndex = 1;
@@ -211,21 +222,6 @@ namespace Fanex.Athena.Excel.Report
             }
         }
 
-        private static IList<string> GetCommonColumnNameList()
-        {
-            return new List<string>
-            {
-                "turnover",
-                "betcount",
-                "memberwinlost",
-                "playercomm",
-                "totalwl",
-                "licenseewl",
-                "commba",
-                "amtduetoba"
-            };
-        }
-
         private static int AssignDecimalData(IRow row, int cellIndex, params decimal[] decimalValues)
         {
             for (int i = 0, j = decimalValues.Length; i < j && cellIndex < row.Cells.Count; i++)
@@ -261,11 +257,8 @@ namespace Fanex.Athena.Excel.Report
 
         private void AddExtraColumns()
         {
-            var totalExpression = string.Format("{0} + {1}", GetCurrencyColumn("memberwinlost"), GetCurrencyColumn("playercomm"));
-            var sumtotal = string.Format("{0} + {1}", GetCurrencyColumn("summemberwinlost"), GetCurrencyColumn("sumplayercomm"));
-
-            _exportData.Columns.Add(GetCurrencyColumn("totalwl"), typeof(decimal), totalExpression);
-            _totalData.Columns.Add(GetCurrencyColumn("sumtotalwl"), typeof(decimal), sumtotal);
+            _exportData.Columns.Add("totalwl", typeof(decimal), "memberwinlost + playercomm");
+            _totalData.Columns.Add("sumtotalwl", typeof(decimal), "summemberwinlost + sumplayercomm");
         }
 
         protected internal virtual void AssignGrandTotalSummary(ISheet sheet, int currentRow)
@@ -299,7 +292,7 @@ namespace Fanex.Athena.Excel.Report
             }
 
             var rowStartIndex = currentRow;
-            var columnNameList = GetColumnNameList();
+            var columnNameList = _commonColumnNameList;
             var rowCount = matchInfoList.Count;
 
             // Assign match data
@@ -359,7 +352,6 @@ namespace Fanex.Athena.Excel.Report
         private int AssignSpecialBetType(ISheet sheet, IList<DataRow> exportData, int currentRowIndex)
         {
             var rowCount = exportData.Count;
-            var columnNameList = GetColumnNameList();
 
             // Assign bettype
             for (int i = 0; i < rowCount; i++)
@@ -372,7 +364,7 @@ namespace Fanex.Athena.Excel.Report
                     _cacheRefAdapter.GetBettype(betType, false);
 
                 betTypeRow.Cells[0].SetCellValue(betTypeName);
-                ExcelHelper.AssignRowContent(betTypeRow, dataRow, columnNameList, ColumnNumbericDataStartIndex);
+                ExcelHelper.AssignRowContent(betTypeRow, dataRow, _commonColumnNameList, ColumnNumbericDataStartIndex);
                 sheet.MergeCols(0, 1, currentRowIndex);
                 currentRowIndex++;
             }
@@ -403,29 +395,6 @@ namespace Fanex.Athena.Excel.Report
             return currentRow + 1;
         }
 
-        private IList<string> GetColumnNameList()
-        {
-            var currencyColumnList = GetCommonColumnNameList();
-
-            return currencyColumnList.Select(name => name == "betcount" ? name : GetCurrencyColumn(name))
-                   .ToList();
-        }
-
-        private IList<string> GetTotalColumnNameList()
-        {
-            var currencyColumnList = GetCommonColumnNameList();
-
-            for (int i = 0; i < currencyColumnList.Count; i++)
-            {
-                currencyColumnList[i] = "sum" + currencyColumnList[i];
-            }
-
-            return currencyColumnList.Select(item => item.Equals("sumbetcount", StringComparison.OrdinalIgnoreCase) ? item : GetCurrencyColumn(item)).ToList();
-        }
-
-        private string GetCurrencyColumn(string columnName)
-        {
-            return DataHelper.GetCurrencyColumnName(columnName, _convertingOption.IsConvert, _convertingOption.BaseCurrency);
-        }
+        private static IList<string> GetTotalColumnNameList() => _commonColumnNameList.Select( x => "sum" + x).ToList();
     }
 }

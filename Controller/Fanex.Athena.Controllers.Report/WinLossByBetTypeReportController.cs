@@ -55,10 +55,9 @@ namespace Fanex.Athena.Controllers.Report
             var metaModel = new WinLossByBetTypeMetaModel
             {
                 LicenseeId = licenseeSession.LicenseeId,
-                UserId = userSession.UserId
+                UserId = userSession.UserId,
+                BaseCurrency = userSession.DefaultBaseCurrency
             };
-
-            SetConvetedUSDCurrencyName(metaModel);
 
             var model = new WinLossByBetTypeViewModel
             {
@@ -77,15 +76,14 @@ namespace Fanex.Athena.Controllers.Report
 
         [HttpPost]
         [CustomValidateAntiForgery]
+        [ValidationWebRequest]
         public async Task<ActionResult> Index(WinLossByBetTypeMetaModel metaModel)
         {
             var licenseeSession = SessionService.LicenseeSession;
             var userSession = SessionService.UserSession;
             metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
 
-            var reportData = metaModel.IsValid
-                       ? await _winLossByBetTypeDataAccess.GetDataList(metaModel)
-                       : new SortableList<WinLossByBetType>();
+            var reportData = await _winLossByBetTypeDataAccess.GetDataList(metaModel);
 
             reportData.Sort(metaModel.SortColumn, metaModel.SortDirection.Equals("ASC", StringComparison.OrdinalIgnoreCase));
             var productAccess = ProductService.GetProductAccess(licenseeSession.LicenseeId, userSession.Language);

@@ -64,7 +64,7 @@ namespace Fanex.Athena.Model.Customer.MetaModel.CustomerLog
 
         public string SiteName { get; set; }
 
-        public bool IsValid
+        public override bool IsValid
         {
             get
             {

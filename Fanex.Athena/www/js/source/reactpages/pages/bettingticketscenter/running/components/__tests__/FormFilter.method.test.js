@@ -22,7 +22,7 @@ describe('FormFilter ', () => {
         Object.assign(AppData, 
             { 
                 productOptions: ["SB", "BA"],
-                baseCurrencyList: ['EUR'],
+                baseCurrencyList: [{value: 'USD', label: 'USD'}, {value: 'EUR', label: 'EUR'}],
                 currencyList: [{Id: CurrencyId, Value: CurrencyName}]
             });
     });
@@ -157,7 +157,8 @@ describe('FormFilter ', () => {
                 Status: '1',
                 SortBy: props.requestParam.SortBy,
                 SortOrder: props.requestParam.SortOrder,
-                IsConvertAll: props.isConvertAll
+                IsConvertAll: props.isConvertAll,
+                BaseCurrencyName: props.selectedBaseCurrency
             }
 
             const filter = new FormFilter(props);
@@ -249,7 +250,7 @@ describe('FormFilter ', () => {
             filter._onChangeCurrency(currencyIdList);
 
             expect(props.setSelectedCurrency).toHaveBeenCalledWith(currencyIdList);
-            expect(props.setSelectedBaseCurrency).toHaveBeenCalledWith(CurrencyName);
+            expect(props.setSelectedBaseCurrency).toHaveBeenCalledWith('');
         });
 
         it('onChange Convert All check box - update value' ,() => {

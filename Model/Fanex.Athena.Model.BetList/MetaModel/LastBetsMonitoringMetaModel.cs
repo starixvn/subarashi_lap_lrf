@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using Fanex.Athena.Model.Core.Helper;
+using Fanex.Athena.Model.Core.MetaModel;
 
 namespace Fanex.Athena.Model.BetList.MetaModel
 {
-    public class LastBetsMonitoringMetaModel
+    public class LastBetsMonitoringMetaModel : IMetaModelValidation
     {
         private const int DefaultPageSize = 10;
 
@@ -44,5 +46,7 @@ namespace Fanex.Athena.Model.BetList.MetaModel
         public string AgentListXml { get; set; }
 
         public IDictionary<int, string> UserCurrencyList { get; set; }
+
+        public bool IsValid => MetaModelValidationHelper.ValidateBaseCurrency(BasedCurrency);
     }
 }

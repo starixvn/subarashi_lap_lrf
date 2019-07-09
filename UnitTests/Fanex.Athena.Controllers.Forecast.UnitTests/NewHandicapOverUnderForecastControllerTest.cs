@@ -3,6 +3,7 @@
     using Base.UnitTests;
     using DataAccess.Core.Common.Interfaces;
     using DataAccess.Forecast.Interfaces;
+    using Fanex.Athena.Session.Model;
     using Fanex.Logging;
     using Model.Core.DTO.Common;
     using Model.Forecast.DTO.NewForecastHdpOu;
@@ -35,8 +36,7 @@
             SetUpDefaultFakeData();
         }
 
-        [TestCase("chf", "chf")]
-        [TestCase("", "usd")]
+        [TestCase("CNY", "cny")]
         public async Task Index_WhenGet_LicenseeOffersNewForecase_ReturnCorrectViewResult(string baseCurrency, string expectedBaseCurrency)
         {
             using (var controler = CreateController())
@@ -44,8 +44,6 @@
                 // Arrange
                 controler.HttpContext.Request["X-Requested-With"].Returns("XMLHttpRequest");
                 AppSettings.LicenseeOfferNewForecast.Returns(new[] { DefaultLicenseeSession.LicenseeId });
-                StubGetValueAppSettings("BaseUsdLicensees", DefaultLicenseeSession.LicenseeId.ToString());
-
                 const string TeamName = "";
                 _cacheRefAdapter.GetTeamName(0).Returns(TeamName);
 
@@ -367,7 +365,6 @@
             NewForecastHdpOuData mainData,
             NewForecastHdpOuMatchInfo headerInfo)
         {
-            Assert.That(viewModel.Param.LicenseeId, Is.EqualTo(DefaultLicenseeSession.LicenseeId));
             Assert.That(viewModel.Param.UserId, Is.EqualTo(DefaultUserSession.UserId));
             Assert.That(viewModel.Param.HomeTeamName, Is.EqualTo(homeTeamName));
             Assert.That(viewModel.Param.AwayTeamName, Is.EqualTo(awayTeamName));

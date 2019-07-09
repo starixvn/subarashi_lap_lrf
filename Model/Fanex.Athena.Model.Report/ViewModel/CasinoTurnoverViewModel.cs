@@ -19,7 +19,6 @@
         public IEnumerable<CheckedItem> Status { get; set; }
 
         public IEnumerable<string> BaseCurrencies { get; set; }
-
         public IEnumerable<ProductOption> ProductOptions { get; set; }
     }
 }

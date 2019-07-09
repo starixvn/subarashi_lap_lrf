@@ -1,6 +1,7 @@
 ﻿namespace Fanex.Athena.Controllers.BetList
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
@@ -18,6 +19,7 @@
     using Service.Core.Utility;
     using Service.Core.Utility.Interfaces;
     using VendorAdapter.Interfaces;
+    using Fanex.Athena.Model.Core.Helper;
 
     [SessionState(SessionStateBehavior.ReadOnly)]
     [CheckUMFilter]
@@ -110,31 +112,14 @@
 
         protected static string GetViewInCurrency(int curencyId, string defaultCurrencyName)
         {
-            string viewinCurrency;
-            switch (curencyId)
+            if (curencyId == BaseCurrencyType.All)
             {
-                case BaseCurrencyType.All:
-                    viewinCurrency = ViewResources.AllCurrencies;
-                    break;
-
-                case BaseCurrencyType.Eur:
-                    viewinCurrency = string.Format(ViewResources.Viewin, FormatKey.Eur);
-                    break;
-
-                case BaseCurrencyType.Usd:
-                    viewinCurrency = string.Format(ViewResources.Viewin, FormatKey.Usd);
-                    break;
-
-                case BaseCurrencyType.Gbp:
-                    viewinCurrency = string.Format(ViewResources.Viewin, FormatKey.Gbp);
-                    break;
-
-                default:
-                    viewinCurrency = string.Format(ViewResources.Viewin, defaultCurrencyName);
-                    break;
+                return ViewResources.AllCurrencies;
             }
 
-            return viewinCurrency;
+            return SystemConstants.BaseCurrencyList.ContainsKey(curencyId) ?
+                string.Format(ViewResources.Viewin, SystemConstants.BaseCurrencyList[curencyId]) :
+                string.Format(ViewResources.Viewin, defaultCurrencyName);
         }
 
         protected static string GetCustomerBetListTitle(BetListMetaModel metaModel, string currencyTitle)
@@ -161,16 +146,20 @@
         /// <returns>The bet list metal model.</returns>
         protected BetListMetaModel CreateDefaultMetaModel(BetListMetaModel metaModel = null)
         {
-            var licenseeId = SessionService.LicenseeSession.LicenseeId;
-
-            var defaultMetaModel = metaModel ?? new BetListMetaModel();
-            defaultMetaModel.LicenseeId = licenseeId;
-            defaultMetaModel.UserId = SessionService.UserSession.UserId;
+            var licenseeSession = SessionService.LicenseeSession;
+            var userSession = SessionService.UserSession;
+            var defaultMetaModel = metaModel ?? new BetListMetaModel
+            {
+                BaseCurrency = userSession.DefaultBaseCurrency
+            };
+            InitBaseCurrencyValue(metaModel);
+            defaultMetaModel.LicenseeId = licenseeSession.LicenseeId;
+            defaultMetaModel.UserId = userSession.UserId;
             defaultMetaModel.HasPlayerCom = SessionService.LicenseeSession.IsAllowedCustomerComm;
             defaultMetaModel.FromDate = DateTime.SpecifyKind(defaultMetaModel.FromDate.Date, DateTimeKind.Unspecified);
             defaultMetaModel.ToDate = DateTime.SpecifyKind(defaultMetaModel.ToDate.Date, DateTimeKind.Unspecified);
             defaultMetaModel.Date = DateTime.SpecifyKind(defaultMetaModel.Date.Date, DateTimeKind.Unspecified);
-            defaultMetaModel.IsFakeLicensee = IsFakeLicensee(licenseeId);
+            defaultMetaModel.IsFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeId);
             defaultMetaModel.CurrencyList = UserCurrencyList;
             defaultMetaModel.AgentListXml = SessionService.GenerateAgentListXml(defaultMetaModel.CurrencyId);
 
@@ -181,11 +170,13 @@
             return defaultMetaModel;
         }
 
-        protected bool IsValidCurrency(int currencyId)
+        protected void InitBaseCurrencyValue(BetListMetaModel metaModel)
         {
-            return currencyId == BaseCurrencyType.All ||
-                KeanOceanBusinessHelper.VerifyKeanOceanCurrencyRequest(
-                    SessionService.UserSession.CurrencyList, SessionService.LicenseeSession.LicenseeId, currencyId);
+            if (metaModel != null && string.IsNullOrEmpty(metaModel.BaseCurrency)
+                && metaModel.CurrencyId == 0)
+            {
+                metaModel.BaseCurrency = SessionService.UserSession.DefaultBaseCurrency;
+            }
         }
 
         protected internal virtual FileContentResult EmptyExcel()
@@ -204,7 +195,7 @@
 
         protected virtual bool IsValidExportExcel(BetListMetaModel model)
         {
-            return IsValidCurrency(model.CurrencyId);
+            return true;
         }
 
         protected internal virtual async Task<ActionResult> ProcessExportExcel(

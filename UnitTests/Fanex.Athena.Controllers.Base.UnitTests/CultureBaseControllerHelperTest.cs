@@ -20,7 +20,8 @@
             Language = "lan",
             UserName = "alex.vn",
             OnUserId = 999,
-            FunctionIdList = new int[0]
+            FunctionIdList = new int[0],
+            DefaultBaseCurrency = "EUR"
         };
 
         protected static readonly LicenseeSession DefaultLicenseeSession = new LicenseeSession

@@ -73,27 +73,6 @@
             }
         }
 
-        [Test]
-        public async Task Detail_ExportExcel_InvalidCurrency_ReturnEmptyResult()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var metaModel = new BetListExcelMetaModel
-                {
-                    IsExportExcel = true,
-                    CurrencyId = -1000
-                };
-
-                controller.When(x => x.EmptyExcel()).DoNotCallBase();
-
-                // Action
-                await controller.Detail(metaModel);
-
-                // Assert
-                controller.Received().EmptyExcel();
-            }
-        }
 
         [Test]
         public async Task Detail_ExportExcel_PassCorrectParam()

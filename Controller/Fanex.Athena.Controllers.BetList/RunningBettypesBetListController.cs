@@ -55,6 +55,8 @@ namespace Fanex.Athena.Controllers.BetList
 
         [HttpGet]
         [FunctionAuthorization(PermissionKeys.TotalBetMixParlay)]
+        [ValidationWebRequest]
+
         public async Task<ActionResult> MixParlay(BetListExcelMetaModel metaModel)
         {
             metaModel.MultipleBettype = ((int)BetType.CombinationMixParlay).ToString();
@@ -65,6 +67,8 @@ namespace Fanex.Athena.Controllers.BetList
 
         [HttpGet]
         [FunctionAuthorization(PermissionKeys.TotalBetDoubleChance)]
+        [ValidationWebRequest]
+
         public async Task<ActionResult> DoubleChange(BetListExcelMetaModel metaModel)
         {
             metaModel.MultipleBettype = DoubleChangeBettypes;
@@ -75,6 +79,7 @@ namespace Fanex.Athena.Controllers.BetList
 
         [HttpGet]
         [FunctionAuthorization(PermissionKeys.TotalBetBONTeamToScore)]
+        [ValidationWebRequest(IsValidCurrency = true)]
         public async Task<ActionResult> BONTeamToScore(BetListExcelMetaModel metaModel)
         {
             metaModel.MultipleBettype = BONTeamToScoreBettypes;
@@ -92,16 +97,9 @@ namespace Fanex.Athena.Controllers.BetList
 
             if (metaModel.IsExportExcel)
             {
-                if (metaModel.CurrencyId == BaseCurrencyType.All || currencies.ContainsKey(metaModel.CurrencyId))
-                {
-                    metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
-                    return await Excel(metaModel).ConfigureAwait(false);
-                }
-
-                return EmptyExcel();
+                metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
+                return await Excel(metaModel).ConfigureAwait(false);
             }
-
-            SetConvetedUSDCurrencyName(metaModel);
 
             var model = new BetListBaseViewModel
             {

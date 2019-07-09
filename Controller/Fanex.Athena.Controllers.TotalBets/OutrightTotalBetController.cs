@@ -37,18 +37,19 @@ namespace Fanex.Athena.Controllers.TotalBets
         {
             var param = new OutrightMetaModel
             {
-                LicenseeId = SessionService.LicenseeSession.LicenseeId
+                LicenseeId = SessionService.LicenseeSession.LicenseeId,
+                BaseCurrency = SessionService.UserSession.DefaultBaseCurrency
             };
-
-            SetConvetedUSDCurrencyName(param);
 
             return await this.GetView(param).ConfigureAwait(false);
         }
 
         [HttpPost]
         [CustomValidateAntiForgery]
+        [ValidationWebRequest(IsValidCurrency = true)]
         public async Task<ActionResult> Index(OutrightMetaModel metaModel)
         {
+
             metaModel.LicenseeId = SessionService.LicenseeSession.LicenseeId;
             return await this.GetView(metaModel).ConfigureAwait(false);
         }
@@ -57,21 +58,17 @@ namespace Fanex.Athena.Controllers.TotalBets
         {
             var currencies = SessionService.UserSession.CurrencyList;
 
-            if (metaModel.CurrencyId == 0 || currencies.ContainsKey(metaModel.CurrencyId))
+            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
+            var dataList = await _outrightDataAccess.GetOutrightDataList(metaModel).ConfigureAwait(false);
+            var model = new OutrightViewModel
             {
-                metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
-                var dataList = await _outrightDataAccess.GetOutrightDataList(metaModel).ConfigureAwait(false);
-                var model = new OutrightViewModel
-                {
-                    Param = metaModel,
-                    MainData = dataList,
-                    CurrencyList = currencies
-                };
+                Param = metaModel,
+                MainData = dataList,
+                CurrencyList = currencies
+            };
 
-                return View("~/Views/Desktop/TotalBets/Outright/Main.cshtml", model);
-            }
+            return View("~/Views/Desktop/TotalBets/Outright/Main.cshtml", model);
 
-            return Redirect("~/Utility/AccessDenied");
         }
     }
 }

@@ -11,6 +11,8 @@ namespace Fanex.Athena.Api.BetList
     using System.Web.Http;
     using Base.Attributes;
     using DataAccess.Core.Configuration.Interfaces;
+    using Fanex.Athena.Model.Core.Helper;
+    using Fanex.Athena.Resources;
     using Model.BetList.MetaModel;
     using Model.Core.DataDomain;
     using Service.Core.Common.Interfaces;
@@ -33,13 +35,9 @@ namespace Fanex.Athena.Api.BetList
         }
 
         [HttpPost]
+        [ValidationApiRequest(IsValidCurrency = true)]
         public async Task<dynamic> Index(BetListMetaModel metaModel)
         {
-            if (!IsValidCurrencyId(metaModel.CurrencyId))
-            {
-                return null;
-            }
-
             const string UspKey = "Lrf_BetList_SelByDayAll_Mem";
             const string UspKeyOld = "Lrf_BetList_SelByDayAll_Mem_Old";
 

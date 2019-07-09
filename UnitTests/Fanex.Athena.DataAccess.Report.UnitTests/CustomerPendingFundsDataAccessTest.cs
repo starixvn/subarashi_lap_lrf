@@ -1,7 +1,6 @@
 ﻿namespace Fanex.Athena.DataAccess.Report.UnitTests
 {
     using System.Collections.Generic;
-    using System.Data;
     using System.Linq;
     using System.Threading.Tasks;
     using Core.UnitTests.TestHelpers;
@@ -33,10 +32,10 @@
         }
 
         [Test]
-        public void GetDataList_WhenCall_ParametersPassedCorrectly()
+        public async Task GetDataList_WhenCall_ParametersPassedCorrectly()
         {
             // Action
-            DataAccess.GetDataList(_metaModel);
+            await DataAccess.GetDataList(_metaModel);
 
             // Assert
             Assert.Multiple(() =>
@@ -44,6 +43,7 @@
                 ObjectDb.Received(1).SetParameterValue("pagesize", _metaModel.PageSize);
                 ObjectDb.Received(1).SetParameterValue("pageindex", _metaModel.PageIndex);
                 ObjectDb.Received(1).SetParameterValue("AgentList", _metaModel.AgentListXml);
+                ObjectDb.Received(1).SetParameterValue("BaseCurrency", _metaModel.BaseCurrency);
                 ObjectDb.Received(1).SetParameterValue("showSB", true);
                 ObjectDb.Received(1).SetParameterValue("showNG", false);
             });
@@ -149,21 +149,17 @@
 
         private void ConfigureReaderForResult(CustPendingFunds expected)
         {
-            var outstandingColumn = "Outstanding" + _metaModel.BaseCurrency;
-
             Reader["CustID"].Returns(expected.CustId);
             Reader["nickname"].Returns(expected.ExternalId);
             Reader["username"].Returns(expected.SystemId);
             Reader["BetCounts"].Returns(expected.BetCounts);
-            Reader[outstandingColumn].Returns(expected.PendingFunds);
+            Reader["Outstanding"].Returns(expected.PendingFunds);
         }
 
         private void ConfigureReaderForTotalData(CustPendingFunds expected, int expectedTotalRow)
         {
-            var outstandingColumn = "SumOutstanding" + _metaModel.BaseCurrency;
-
             Reader["SumBetCounts"].Returns(expected.BetCounts);
-            Reader[outstandingColumn].Returns(expected.PendingFunds);
+            Reader["SumOutstanding"].Returns(expected.PendingFunds);
 
             Reader["TotalRows"].Returns(expectedTotalRow);
         }

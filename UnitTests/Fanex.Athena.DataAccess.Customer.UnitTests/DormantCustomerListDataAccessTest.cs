@@ -1,7 +1,6 @@
 ﻿namespace Fanex.Athena.DataAccess.Customer.UnitTests
 {
     using System;
-    using System.Data;
     using System.Linq;
     using System.Threading.Tasks;
     using Core.UnitTests.TestHelpers;
@@ -9,7 +8,6 @@
     using Model.Customer.MetaModel;
     using NSubstitute;
     using NUnit.Framework;
-    using UnitTest.Common.Helpers;
 
     public class DormantCustomerListDataAccessTest : BaseDataAccessHelperTest<DormantCustomerListDataAccess>
     {
@@ -36,6 +34,7 @@
                 ObjectDb.Received(1).SetParameterValue("PageSize", metaModel.PageSize);
                 ObjectDb.Received(1).SetParameterValue("PageIndex", metaModel.PageIndex);
                 ObjectDb.Received(1).SetParameterValue("AgentList", metaModel.AgentListXml);
+                ObjectDb.Received(1).SetParameterValue("BaseCurrency", metaModel.BaseCurrency);
                 ObjectDb.Received(1).SetParameterValue("TotalRows", null);
             });
         }
@@ -44,25 +43,19 @@
         public async Task GetDormantCustomers_WhenCall_ReturnCorrectData()
         {
             // Arrange
-            const int ExpectedCustId = 999;
-            const string ExpectedUserName = "BillDate";
-            const string ExpectedNickName = "Bill";
-            const decimal ExpectedBalance = 123.5m;
-            var expectedArchivedDate = new DateTime(2018, 4, 5);
             DataAccess.GetObjectDb(Arg.Is("Lrf_DormantCustomerSel")).Returns(ObjectDb);
-            var reader = Substitute.For<IDataReader>();
-            reader.Read().Returns(true, false);
-            ObjectDb.ExecuteReaderAsync().ReturnsForAnyArgs(reader);
-            DataAccessTestHelper.MapReaderData(
-                reader,
-                new
-                {
-                    custid = ExpectedCustId,
-                    username = ExpectedUserName,
-                    nickname = ExpectedNickName,
-                    BalanceGBP = ExpectedBalance,
-                    ArchivedDate = expectedArchivedDate
-                });
+            Reader.Read().Returns(true, false);
+
+            var expectedData = new
+            {
+                custid = 999,
+                username = "BillDate",
+                nickname = "Bill",
+                Balance = 123.5m,
+                ArchivedDate = new DateTime(2018, 4, 5)
+            };
+
+            MapReaderData(expectedData);
 
             var metaModel = new CustomerListMetaModel { BaseCurrency = "GBP" };
 
@@ -73,11 +66,11 @@
             // Assert
             Assert.Multiple(() =>
             {
-                Assert.That(firstItem.CustId, Is.EqualTo(ExpectedCustId));
-                Assert.That(firstItem.SystemId, Is.EqualTo(ExpectedUserName));
-                Assert.That(firstItem.ExternalId, Is.EqualTo(ExpectedNickName));
-                Assert.That(firstItem.Balance, Is.EqualTo(ExpectedBalance));
-                Assert.That(firstItem.ArchivedDate, Is.EqualTo(expectedArchivedDate));
+                Assert.That(firstItem.CustId, Is.EqualTo(expectedData.custid));
+                Assert.That(firstItem.SystemId, Is.EqualTo(expectedData.username));
+                Assert.That(firstItem.ExternalId, Is.EqualTo(expectedData.nickname));
+                Assert.That(firstItem.Balance, Is.EqualTo(expectedData.Balance));
+                Assert.That(firstItem.ArchivedDate, Is.EqualTo(expectedData.ArchivedDate));
             });
         }
     }

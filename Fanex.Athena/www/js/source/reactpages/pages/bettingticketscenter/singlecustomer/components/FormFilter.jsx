@@ -17,6 +17,7 @@ import AppData from '@jsroot/lib/AppData'
 import DataService from '@jsroot/lib/DataService.js'
 import ApiUrl from '../../common/constants/apiUrl'
 import Service from '../../common/lib/Service'
+import { validateBaseCurrency } from '@jsroot/lib/validationHelper'
 
 export class FormFilter extends Component {
     constructor(props) {
@@ -24,7 +25,9 @@ export class FormFilter extends Component {
     }
 
     get isValidModel() {
-        return !!this.props.username && !!this.props.selectedProduct && !!this.props.selectedStatus && !!this.props.selectedLiveStatus;
+        return !!this.props.username && !!this.props.selectedProduct
+            && !!this.props.selectedStatus && !!this.props.selectedLiveStatus
+            && validateBaseCurrency(this.props.selectedBaseCurrency);
     }
 
     submit = (event) => {
@@ -34,7 +37,7 @@ export class FormFilter extends Component {
             return;
         }
 
-        this.props.setReportTitle(Service.getTitle(params.FromDate, params.ToDate, null, params.BaseCurrency));
+        this.props.setReportTitle(Service.getTitle(params.FromDate, params.ToDate, params.BaseCurrency));
         this.props.setRequestParam(params);
         this.props.toggleLoader(true);
         this.props.getGridData(ApiUrl.SINGLECUSTOMER_DATA_URL, params);

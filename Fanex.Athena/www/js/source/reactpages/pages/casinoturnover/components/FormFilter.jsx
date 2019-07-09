@@ -15,6 +15,8 @@ import DataService from '@jsroot/lib/DataService.js'
 import { Service } from '../lib/service'
 import ReportExcel from '../lib/reportExcel'
 
+import { validateBaseCurrency } from '../../../lib/validationHelper'
+
 const RANGE_MONTH_CONSTRAINT = 1;
 const CUSTOMER_SEARCH_URL = Site.resolveClientUrl("SearchCustomerAPI/SearchCustomer");
 
@@ -27,7 +29,8 @@ export class FormFilter extends Component {
     }
 
     get isValidModel() {
-        return this.props.selectedProduct && this.props.selectedStatus;
+        return this.props.selectedProduct && this.props.selectedStatus
+            && validateBaseCurrency(this.props.selectedBaseCurrency, false);
     }
 
     onSubmit = () => {
@@ -43,7 +46,7 @@ export class FormFilter extends Component {
     }
 
     exportExcel = () => {
-        const { dateRange, selectedCurrency, selectedBaseCurrency } = this.props;
+        const { selectedBaseCurrency } = this.props;
         const params = Object.assign({ IsExportExcel: true }, this._getParams());
 
         this.props.toggleLoader(true);
@@ -92,7 +95,7 @@ export class FormFilter extends Component {
             CurrencyName: selectedCurrency.label,
             BaseCurrency: selectedBaseCurrency,
             IsConvertAll: isConvertAll,
-            ProductCode: selectedProduct.split(','),
+            ProductCodeList: selectedProduct,
             UserName: username,
             Status: selectedStatus.split(','),
             PageIndex: 1,

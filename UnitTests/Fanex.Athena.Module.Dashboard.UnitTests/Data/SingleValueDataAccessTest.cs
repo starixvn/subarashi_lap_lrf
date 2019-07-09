@@ -39,9 +39,10 @@
             // Assert
             Assert.Multiple(() =>
             {
-                Assert.That(passedParam.Count, Is.EqualTo(2));
+                Assert.That(passedParam.Count, Is.EqualTo(3));
                 Assert.That(passedParam["LicenseeID"], Is.EqualTo(metaModel.LicenseeId));
                 Assert.That(passedParam["CurrencyIDList"], Is.EqualTo(metaModel.CurrencyIDList));
+                Assert.That(passedParam["BaseCurrency"], Is.EqualTo(metaModel.BaseCurrency));
             });
         }
 
@@ -52,7 +53,7 @@
             var expected = 500M;
 
             Reader.Read().Returns(true, false);
-            Reader["PendingFundEUR"].Returns(expected);
+            Reader["PendingFund"].Returns(expected);
 
             var metaModel = new DashboardBaseModel { BaseCurrency = "EUR" };
 
@@ -83,10 +84,11 @@
             // Assert
             Assert.Multiple(() =>
             {
-                Assert.That(passedParam.Count, Is.EqualTo(3));
+                Assert.That(passedParam.Count, Is.EqualTo(4));
                 Assert.That(passedParam["LicenseeID"], Is.EqualTo(metaModel.LicenseeId));
                 Assert.That(passedParam["CurrencyIDList"], Is.EqualTo(metaModel.CurrencyIDList));
                 Assert.That(passedParam["ReportDate"], Is.EqualTo(metaModel.FromDate));
+                Assert.That(passedParam["BaseCurrency"], Is.EqualTo(metaModel.BaseCurrency));
             });
         }
 
@@ -97,7 +99,7 @@
             var expected = 600M;
 
             Reader.Read().Returns(true, false);
-            Reader["WithdrawalEUR"].Returns(expected);
+            Reader["Withdrawal"].Returns(expected);
 
             var metaModel = new DashboardBaseModel { BaseCurrency = "EUR" };
 
@@ -122,10 +124,11 @@
             // Assert
             Assert.Multiple(() =>
             {
-                Assert.That(passedParam.Count, Is.EqualTo(3));
+                Assert.That(passedParam.Count, Is.EqualTo(4));
                 Assert.That(passedParam["LicenseeID"], Is.EqualTo(metaModel.LicenseeId));
                 Assert.That(passedParam["CurrencyIDList"], Is.EqualTo(metaModel.CurrencyIDList));
                 Assert.That(passedParam["ReportDate"], Is.EqualTo(metaModel.FromDate));
+                Assert.That(passedParam["BaseCurrency"], Is.EqualTo(metaModel.BaseCurrency));
             });
         }
 
@@ -136,7 +139,7 @@
             var expected = 800M;
 
             Reader.Read().Returns(true, false);
-            Reader["ClosingBalanceEUR"].Returns(expected);
+            Reader["ClosingBalance"].Returns(expected);
 
             var metaModel = new DashboardBaseModel { BaseCurrency = "EUR" };
 
@@ -161,10 +164,11 @@
             // Assert
             Assert.Multiple(() =>
             {
-                Assert.That(passedParam.Count, Is.EqualTo(3));
+                Assert.That(passedParam.Count, Is.EqualTo(4));
                 Assert.That(passedParam["LicenseeID"], Is.EqualTo(metaModel.LicenseeId));
                 Assert.That(passedParam["CurrencyIDList"], Is.EqualTo(metaModel.CurrencyIDList));
                 Assert.That(passedParam["ReportDate"], Is.EqualTo(metaModel.FromDate));
+                Assert.That(passedParam["BaseCurrency"], Is.EqualTo(metaModel.BaseCurrency));
             });
         }
 
@@ -175,7 +179,7 @@
             var expected = 900M;
 
             Reader.Read().Returns(true, false);
-            Reader["DepositEUR"].Returns(expected);
+            Reader["Deposit"].Returns(expected);
 
             var metaModel = new DashboardBaseModel { BaseCurrency = "EUR" };
 

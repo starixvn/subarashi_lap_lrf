@@ -4,6 +4,7 @@
     using System.Web.Mvc;
     using DataAccess.Core.Configuration.Interfaces;
     using Extension.Utility;
+    using Fanex.Athena.Web.ActionFilter;
     using Model.BetList.MetaModel;
     using Resources;
     using Service.Core.Common.Interfaces;
@@ -31,6 +32,7 @@
         }
 
         [HttpGet]
+        [ValidationWebRequest(IsValidCurrency = true)]
         public async Task<ActionResult> Detail(BetListExcelMetaModel metaModel)
         {
             CreateDefaultMetaModel(metaModel);

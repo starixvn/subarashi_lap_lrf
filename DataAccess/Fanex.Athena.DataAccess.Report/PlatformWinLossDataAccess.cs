@@ -42,7 +42,7 @@ namespace Fanex.Athena.DataAccess.Report
                 UpdateUspParams(db, metaModel);
                 using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))
                 {
-                    return ReadSummaryData(reader, metaModel);
+                    return ReadSummaryData(reader);
                 }
             }
         }
@@ -56,7 +56,7 @@ namespace Fanex.Athena.DataAccess.Report
                 UpdateUspParams(db, metaModel);
                 using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))
                 {
-                    return ReadMemberData(reader, currencyList, metaModel.BaseCurrency);
+                    return ReadMemberData(reader, currencyList);
                 }
             }
         }
@@ -65,15 +65,11 @@ namespace Fanex.Athena.DataAccess.Report
 
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules", "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
-        private static ReportResultModel<PlatformWinLossSummary> ReadSummaryData(IDataReader reader, PlatformWinLossMetaModel metaModel)
+        private static ReportResultModel<PlatformWinLossSummary> ReadSummaryData(IDataReader reader)
         {
             var dataList = new List<PlatformWinLossSummary>();
             var totalData = new PlatformWinLossSummary();
 
-            var turnoverColumn = "Turnover" + metaModel.BaseCurrency;
-            var winlostComumn = "Winlost" + metaModel.BaseCurrency;
-            var playerCommColumn = "PlayerComm" + metaModel.BaseCurrency;
-            var licenseeWlColumn = "LicenseeWL" + metaModel.BaseCurrency;
             var parentRows = new Dictionary<int, PlatformWinLossSummary>();
             var childId = -1;
             while (reader.Read())
@@ -105,10 +101,10 @@ namespace Fanex.Athena.DataAccess.Report
                     Level = 1,
                     Name = DataHelper.GetProductName(productCode),
                     TotalTransactions = reader.ToInt("Betcount"),
-                    Turnover = reader.ToDecimal(turnoverColumn),
-                    CustomerWinLoss = reader.ToDecimal(winlostComumn),
-                    CustomerComm = reader.ToDecimal(playerCommColumn),
-                    LicenseeWL = reader.ToDecimal(licenseeWlColumn),
+                    Turnover = reader.ToDecimal("Turnover"),
+                    CustomerWinLoss = reader.ToDecimal("Winlost"),
+                    CustomerComm = reader.ToDecimal("PlayerComm"),
+                    LicenseeWL = reader.ToDecimal("LicenseeWL"),
                     ProductCode = productCode
                 };
 
@@ -166,18 +162,10 @@ namespace Fanex.Athena.DataAccess.Report
 
         private SortableReportResultModel<PlatformWinLossMember> ReadMemberData(
              IDataReader reader,
-             IDictionary<int, string> currencyList,
-             string baseCurrency)
+             IDictionary<int, string> currencyList)
         {
             var dataList = new SortableList<PlatformWinLossMember>();
             var totalData = new PlatformWinLossMember();
-
-            var turnoverColumn = "Turnover" + baseCurrency;
-            var winlostComumn = "Winlost" + baseCurrency;
-            var playerCommColumn = "PlayerComm" + baseCurrency;
-            var licenseeWlColumn = "LicenseeWL" + baseCurrency;
-            var commBaColumn = "CommBA" + baseCurrency;
-            var amtDueToBaComumn = "AmtDueToBA" + baseCurrency;
 
             var index = 1;
             while (reader.Read())
@@ -188,12 +176,12 @@ namespace Fanex.Athena.DataAccess.Report
                     Index = index,
                     CurrencyName = currencyList?.GetValueOrDefault(currencyId, currencyId.ToString()),
                     TotalTransactions = reader.ToInt("Betcount"),
-                    Turnover = reader.ToDecimal(turnoverColumn),
-                    CustomerWinLoss = reader.ToDecimal(winlostComumn),
-                    CustomerComm = reader.ToDecimal(playerCommColumn),
-                    LicenseeWL = reader.ToDecimal(licenseeWlColumn),
-                    BACommission = reader.ToDecimal(commBaColumn),
-                    AmtDueToBA = reader.ToDecimal(amtDueToBaComumn),
+                    Turnover = reader.ToDecimal("Turnover"),
+                    CustomerWinLoss = reader.ToDecimal("Winlost"),
+                    CustomerComm = reader.ToDecimal("PlayerComm"),
+                    LicenseeWL = reader.ToDecimal("LicenseeWL"),
+                    BACommission = reader.ToDecimal("CommBA"),
+                    AmtDueToBA = reader.ToDecimal("AmtDueToBA"),
                     CurrencyId = reader.ToInt("Currency"),
                     SystemId = reader.ToString("username"),
                     CustomerId = reader.ToInt("custid"),
@@ -220,6 +208,7 @@ namespace Fanex.Athena.DataAccess.Report
             db.SetParameterValue("FromDate", metaModel.FromDate);
             db.SetParameterValue("ToDate", metaModel.ToDate);
             db.SetParameterValue("AgentList", metaModel.AgentListXml);
+            db.SetParameterValue("BaseCurrency", metaModel.BaseCurrency);
 
             foreach (var product in metaModel.ProductOptions)
             {

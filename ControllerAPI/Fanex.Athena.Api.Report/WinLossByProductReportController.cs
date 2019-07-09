@@ -23,6 +23,7 @@ namespace Fanex.Athena.Api.Report
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
+    using Fanex.Athena.Service.Core.Utility.Interfaces;
     using Model.Core.MetaModel.Product;
     using Model.Report.ResultModel;
     using Resources;
@@ -35,20 +36,23 @@ namespace Fanex.Athena.Api.Report
         private readonly IAppSettings _appSettings;
 
         private readonly IWinLossByProductDataAccess _winlossByProductDataAccess;
-
+        private readonly ICurrencyValidation _currencyValidation;
         public WinLossByProductReportController(
             ISessionService sessionService,
             IProductService productService,
             IAppSettings appSettings,
             ILanguageService langService,
-            IWinLossByProductDataAccess winlossByProductDataAccess)
+            IWinLossByProductDataAccess winlossByProductDataAccess,
+             ICurrencyValidation currencyValidation)
             : base(sessionService, productService, langService)
         {
             _appSettings = appSettings;
             _winlossByProductDataAccess = winlossByProductDataAccess;
+            _currencyValidation = currencyValidation;
         }
 
         [HttpPost]
+        [ValidationApiRequest(ObjectName = "metaModel", IsValidCurrency = true, IsIncludeKeanOcean = true)]
 #pragma warning disable S107 // Methods should not have too many parameters
         public Task<dynamic> Index(
            WinLossByProductMetaModel metaModel,
@@ -66,6 +70,7 @@ namespace Fanex.Athena.Api.Report
         }
 
         [HttpPost]
+        [ValidationApiRequest(ObjectName = "metaModel", IsValidCurrency = true, IsIncludeKeanOcean = true)]
         public Task<dynamic> Index([FromBody] WinLossByProductMetaModel metaModel)
         {
             return ProcessRequest(metaModel, null, null);
@@ -201,17 +206,6 @@ namespace Fanex.Athena.Api.Report
 
         private async Task<WinLossByProductResultModel> GetData(WinLossByProductMetaModel metaModel)
         {
-            if (!metaModel.IsValid)
-            {
-                return new WinLossByProductResultModel
-                {
-                    DataList = new List<WinLossByProduct>(),
-                    TotalData = new List<WinLossByProduct>(),
-                    SummaryTotal = new Dictionary<string, IEnumerable<WinLossByProduct>>(),
-                    ResultInfo = new ResultInfo()
-                };
-            }
-
             var userCurrencyList = SessionService.UserSession.CurrencyList;
             if (metaModel.Level == 0)
             {
@@ -241,11 +235,12 @@ namespace Fanex.Athena.Api.Report
             string currencyName = null)
 #pragma warning restore S107 // Methods should not have too many parameters
         {
-            if (!IsValidRequest(metaModel.CurrencyId, currencyId))
+            if (!_currencyValidation.IsValidCurrency(currencyId, true))
             {
                 return BadRequest(ViewResources.InvalidParams);
             }
 
+            metaModel.DefaultBaseCurrency = SessionService.UserSession.DefaultBaseCurrency;
             metaModel.Username = ValidateUserName(metaModel.Username);
             metaModel.AgentListXml = SessionService.GenerateAgentListXml(level == 0 ? metaModel.CurrencyId : currencyId, metaModel.IsExcludedTestData);
             metaModel.DrillDownCurrencyId = currencyId;
@@ -281,7 +276,7 @@ namespace Fanex.Athena.Api.Report
                 {
                     Data = RestructureData(result.DataList, level),
                     Total = result.TotalData,
-                    SummaryTotal = result.SummaryTotal,
+                    result.SummaryTotal,
                     ProductOptions = metaModel.ProductOptions.ToJson(),
                     MemberId = drillDownMemberId,
                     SystemId = drillDownSystemId,

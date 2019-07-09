@@ -3594,6 +3594,28 @@ function () {
 
 /***/ }),
 
+/***/ "./www/js/source/reactpages/lib/validationHelper.js":
+/*!**********************************************************!*\
+  !*** ./www/js/source/reactpages/lib/validationHelper.js ***!
+  \**********************************************************/
+/*! exports provided: validateBaseCurrency */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "validateBaseCurrency", function() { return validateBaseCurrency; });
+/* harmony import */ var _AppData__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AppData */ "./www/js/source/reactpages/lib/AppData.js");
+
+var validateBaseCurrency = function validateBaseCurrency() {
+  var baseCurrency = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
+  var allowEmpty = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+  return allowEmpty && !baseCurrency || !!baseCurrency && _AppData__WEBPACK_IMPORTED_MODULE_0__["default"].baseCurrencyList.find(function (x) {
+    return x.value === baseCurrency;
+  });
+};
+
+/***/ }),
+
 /***/ "./www/js/source/reactpages/pages/licenseewl-by-timezone/actions/dataHandlerAction.js":
 /*!********************************************************************************************!*\
   !*** ./www/js/source/reactpages/pages/licenseewl-by-timezone/actions/dataHandlerAction.js ***!
@@ -4169,6 +4191,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _constants_settingConst__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../constants/settingConst */ "./www/js/source/reactpages/pages/licenseewl-by-timezone/constants/settingConst.js");
 /* harmony import */ var _jsroot_components_UserGuide__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @jsroot/components/UserGuide */ "./www/js/source/reactpages/components/UserGuide.jsx");
 /* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+/* harmony import */ var _lib_validationHelper__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../../lib/validationHelper */ "./www/js/source/reactpages/lib/validationHelper.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
@@ -4192,6 +4215,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -4585,7 +4609,7 @@ function (_Component) {
   }, {
     key: "isValidModel",
     get: function get() {
-      return this.props.selectedProduct !== "";
+      return this.props.selectedProduct !== "" && Object(_lib_validationHelper__WEBPACK_IMPORTED_MODULE_14__["validateBaseCurrency"])(this.props.selectedBaseCurrency, false);
     }
   }]);
 

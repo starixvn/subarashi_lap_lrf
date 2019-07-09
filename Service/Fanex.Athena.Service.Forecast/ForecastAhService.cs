@@ -24,9 +24,9 @@ namespace Fanex.Athena.Service.Forecast
             _forecastAhDataAccess = forecastDataAccess;
         }
 
-        public Task<ForecastAH> GetForecastTopOddsByMatch(int matchId, int betType)
+        public async Task<ForecastAH> GetForecastTopOddsByMatch(int matchId, int betType)
         {
-            return _forecastAhDataAccess.GetForecastTopOddsByMatch(matchId, betType);
+            return await _forecastAhDataAccess.GetForecastTopOddsByMatch(matchId, betType).ConfigureAwait(false);
         }
 
         public async Task<ForecastValue> GetForecastHandicap(ForecastAHMetaModel metaModel, int userId)
@@ -49,14 +49,12 @@ namespace Fanex.Athena.Service.Forecast
             DataRow dataRow,
             int currentScore,
             int scoreOffset,
-            decimal forecast,
-            bool isConvert,
-            string baseCurrency)
+            decimal forecast)
         {
             const decimal OneHalf = 0.5m;
 
-            var alcolumnName = DataHelper.GetCurrencyColumnName("al", isConvert, baseCurrency);
-            var hlcolumnName = DataHelper.GetCurrencyColumnName("hl", isConvert, baseCurrency);
+            const string AlColumnName = "al";
+            const string HlColumnName = "hl";
             var offset = ConvertToDec(dataRow["offset"].ToString());
             var forecastScore = currentScore - offset + scoreOffset;
 
@@ -67,20 +65,20 @@ namespace Fanex.Athena.Service.Forecast
 #pragma warning disable S109 // Magic numbers should not be used
             if (forecastScore > 0 && forecastScore < OneHalf)
             {
-                return forecast + (ConvertToDec(dataRow[alcolumnName].ToString()) / 2);
+                return forecast + (ConvertToDec(dataRow[AlColumnName].ToString()) / 2);
             }
             else if (forecastScore >= OneHalf)
             {
-                return forecast + ConvertToDec(dataRow[alcolumnName].ToString());
+                return forecast + ConvertToDec(dataRow[AlColumnName].ToString());
             }
             else if (forecastScore < 0 && forecastScore > -OneHalf)
             {
-                return forecast + (ConvertToDec(dataRow[hlcolumnName].ToString()) / 2);
+                return forecast + (ConvertToDec(dataRow[HlColumnName].ToString()) / 2);
             }
 #pragma warning restore S109 // Magic numbers should not be used
             else
             {
-                return forecast + ConvertToDec(dataRow[hlcolumnName].ToString());
+                return forecast + ConvertToDec(dataRow[HlColumnName].ToString());
             }
         }
 
@@ -104,15 +102,15 @@ namespace Fanex.Athena.Service.Forecast
                 foreach (DataRow row in foreCastData.Rows)
                 {
                     result.ForeCastValue0 =
-                        GetForecastValue(row, metaModel.CurrentScore, offset, result.ForeCastValue0, metaModel.IsConvert, metaModel.BaseCurrency);
+                        GetForecastValue(row, metaModel.CurrentScore, offset, result.ForeCastValue0);
                     result.ForeCastValue1 =
-                        GetForecastValue(row, metaModel.CurrentScore, ++offset, result.ForeCastValue1, metaModel.IsConvert, metaModel.BaseCurrency);
+                        GetForecastValue(row, metaModel.CurrentScore, ++offset, result.ForeCastValue1);
                     result.ForeCastValue2 =
-                        GetForecastValue(row, metaModel.CurrentScore, ++offset, result.ForeCastValue2, metaModel.IsConvert, metaModel.BaseCurrency);
+                        GetForecastValue(row, metaModel.CurrentScore, ++offset, result.ForeCastValue2);
                     result.ForeCastValue3 =
-                        GetForecastValue(row, metaModel.CurrentScore, ++offset, result.ForeCastValue3, metaModel.IsConvert, metaModel.BaseCurrency);
+                        GetForecastValue(row, metaModel.CurrentScore, ++offset, result.ForeCastValue3);
                     result.ForeCastValue4 =
-                        GetForecastValue(row, metaModel.CurrentScore, ++offset, result.ForeCastValue4, metaModel.IsConvert, metaModel.BaseCurrency);
+                        GetForecastValue(row, metaModel.CurrentScore, ++offset, result.ForeCastValue4);
 
                     offset = startOffsetIndex;
                 }

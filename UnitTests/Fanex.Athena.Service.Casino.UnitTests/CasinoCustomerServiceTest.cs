@@ -73,7 +73,7 @@
             var metaModel = FakeHelper.Create<CustomerStatusMetaModel>();
 
             // Action
-            var result = _casinoCustomerService.UpdateClosed(metaModel);
+            _casinoCustomerService.UpdateClosed(metaModel);
 
             // Assert
             _customerApiWrapper.Received().UpdateCustClosed(metaModel);
@@ -104,14 +104,14 @@
             _customerApiWrapper.UpdateComm(metaModel).Returns(true);
 
             // Action
-            var result = _casinoCustomerService.UpdateCommission(metaModel);
+            _casinoCustomerService.UpdateCommission(metaModel);
 
             // Assert
             _customerApiWrapper.Received().UpdateComm(metaModel);
         }
 
         [Test]
-        public async Task UpdateCommission_CallApi_UpdateFail_LogError()
+        public void UpdateCommission_CallApi_UpdateFail_LogError()
         {
             // Arrange
             var metaModel = FakeHelper.Create<RNGCasinoUpdateMemberComMetaModel>();

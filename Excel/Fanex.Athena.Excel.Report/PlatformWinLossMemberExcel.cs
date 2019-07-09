@@ -12,6 +12,7 @@ namespace Fanex.Athena.Excel.Report
     using Base.Entities;
     using Fanex.Athena.Excel.Base.Extension;
     using Fanex.Athena.Model.Core.DataDomain;
+    using Helpers;
     using Model.Core.MetaModel.Product;
     using Model.Report.DTO;
     using Model.Report.ViewModel;
@@ -125,7 +126,7 @@ namespace Fanex.Athena.Excel.Report
                                          metaModel.FromDate.ToString(FormatDate),
                                          metaModel.ToDate.ToString(FormatDate),
                                          currencyText,
-                                         GetBaseCurrencyTitle(),
+                                         ReportExcelHelper.GetTitleCurrencyName(metaModel.BaseCurrencyId, metaModel.CurrencyName),
                                          platformText) + ", " + GetProductTitle();
 
             sheet.SetTextRowValue(TemplateSheet, RowTitleTemplate, ColumnTemplateCount, reportTitle);
@@ -194,32 +195,6 @@ namespace Fanex.Athena.Excel.Report
                 .Aggregate(string.Empty, (current, x) => current + (string.IsNullOrEmpty(current) ? x.Code : ", " + x.Code));
 
             return $"{ViewResources.Product}: {text}";
-        }
-
-        private string GetBaseCurrencyTitle()
-        {
-            string title;
-            var baseCurrencyId = _model.Param.BaseCurrencyId;
-            switch (baseCurrencyId)
-            {
-                case BaseCurrencyType.Eur:
-                    title = string.Format(ViewResources.Viewin, FormatKey.Eur);
-                    break;
-
-                case BaseCurrencyType.Usd:
-                    title = string.Format(ViewResources.Viewin, FormatKey.Usd);
-                    break;
-
-                case BaseCurrencyType.Gbp:
-                    title = string.Format(ViewResources.Viewin, FormatKey.Gbp);
-                    break;
-
-                default:
-                    title = string.Format(ViewResources.Viewin, _model.Param.CurrencyName);
-                    break;
-            }
-
-            return title;
         }
     }
 }

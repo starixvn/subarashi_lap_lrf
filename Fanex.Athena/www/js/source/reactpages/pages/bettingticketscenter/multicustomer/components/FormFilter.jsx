@@ -20,6 +20,7 @@ import AppData from '@jsroot/lib/AppData'
 import DataService from '@jsroot/lib/DataService.js'
 import Service from '../../common/lib/Service'
 import ApiUrl from '../../common/constants/apiUrl'
+import { validateBaseCurrency } from '@jsroot/lib/validationHelper'
 
 const ToastMsg = () => (
     <div>
@@ -49,7 +50,11 @@ export class FormFilter extends Component {
     }
 
     get isValidModel() {
-        return !!this.props.selectedProduct && !!this.props.selectedStatus && !!this.props.selectedLiveStatus && !!this.props.selectedCurrency;
+        return !!this.props.selectedProduct 
+            && !!this.props.selectedStatus 
+            && !!this.props.selectedLiveStatus
+            && !!this.props.selectedCurrency
+            && validateBaseCurrency(this.props.selectedBaseCurrency);
     }
 
     isSingleDate = (dateRange) => {
@@ -65,7 +70,7 @@ export class FormFilter extends Component {
         }
 
         toast.dismiss();
-        const title = Service.getTitle(params.FromDate, params.ToDate, params.CurrencyName, params.BaseCurrency);
+        const title = Service.getTitle(params.FromDate, params.ToDate, params.IsConvertAll ? params.BaseCurrencyName : '');
         this.props.setReportTitle(title);
         this.props.setRequestParam(params);
         this.props.toggleLoader(true);
@@ -81,6 +86,7 @@ export class FormFilter extends Component {
         const { PageSize, SortBy, SortOrder } = this.props.requestParam;
 
         const isEnableLeagueMatch = this._isEnableLeagueMatch();
+        const baseCurrency = this.baseCurrencyList.find(x => x.value === this.props.selectedBaseCurrency);
         return {
             PageSize: PageSize,
             PageIndex: 1,
@@ -98,7 +104,8 @@ export class FormFilter extends Component {
             MatchId: isEnableLeagueMatch ? this.props.selectedMatch : 0,
             SortBy: SortBy,
             SortOrder: SortOrder,
-            IsConvertAll: this.props.isConvertAll
+            IsConvertAll: this.props.isConvertAll,
+            BaseCurrencyName: baseCurrency ? baseCurrency.label : ''
         }
     }
 
@@ -291,10 +298,14 @@ export class FormFilter extends Component {
         }
         else {
             const currencyName = AppData.currencyList.find(x => x.Id == currencyIdList).Value;
-            baseCurrency = currencyName;
+            
             if (!this.baseCurrencyList.find(x => x.label === currencyName)) {
+                baseCurrency = '';
                 this.baseCurrencyList = AppData.baseCurrencyList.slice(0);
-                this.baseCurrencyList.push({ value: currencyName, label: currencyName });
+                this.baseCurrencyList.push({ value: baseCurrency, label: currencyName });
+            }
+            else {
+                baseCurrency = currencyName;
             }
         }
 

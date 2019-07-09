@@ -51,6 +51,7 @@ namespace Fanex.Athena.Api.Report
         }
 
         [HttpPost]
+        [ValidationApiRequest(ObjectName = "metaModel", IsValidCurrency = true, IsIncludeKeanOcean = true)]
         public Task<dynamic> Index(
             LicenseeWinLossMetaModel metaModel,
             DateTime? fdate,
@@ -64,6 +65,7 @@ namespace Fanex.Athena.Api.Report
         }
 
         [HttpPost]
+        [ValidationApiRequest(ObjectName = "metaModel", IsValidCurrency = true, IsIncludeKeanOcean = true)]
         public Task<dynamic> Index([FromBody] LicenseeWinLossMetaModel metaModel)
         {
             return ProcessRequest(metaModel, null, null);
@@ -291,11 +293,12 @@ namespace Fanex.Athena.Api.Report
             int custId = 0,
             string currencyName = null)
         {
+            metaModel.DefaultBaseCurrency = SessionService.UserSession.DefaultBaseCurrency;
             metaModel.DrillDownLevel = level;
             metaModel.DrillDownFromDate = fdate.HasValue ? fdate.Value : metaModel.DrillDownFromDate;
             metaModel.DrillDownToDate = tdate.HasValue ? tdate.Value : metaModel.DrillDownToDate;
 
-            if (IsValidParams(metaModel) && IsValidRequest(metaModel.CurrencyId, currencyId))
+            if (IsValidParams(metaModel))
             {
                 metaModel.LicenseeId = SessionService.LicenseeSession.LicenseeId;
                 metaModel.DrillDownCurrencyId = currencyId;
@@ -337,7 +340,7 @@ namespace Fanex.Athena.Api.Report
 
             var fromDate = metaModel.DrillDownLevel == 0 ? metaModel.FromDate : metaModel.DrillDownFromDate;
             var toDate = metaModel.DrillDownLevel == 0 ? metaModel.ToDate : metaModel.DrillDownToDate;
-            return metaModel.IsValid && DateTimeHelper.IsBetween(fromDate, setting.MinDate, setting.MaxDate) &&
+            return DateTimeHelper.IsBetween(fromDate, setting.MinDate, setting.MaxDate) &&
                 DateTimeHelper.IsBetween(toDate, setting.MinDate, setting.MaxDate);
         }
     }

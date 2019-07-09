@@ -44,6 +44,7 @@ namespace Fanex.Athena.Controllers.BetList
 
         [HttpGet]
         [OutputCache(NoStore = true, Duration = 0, Location = OutputCacheLocation.None, VaryByParam = "*")]
+        [ValidationWebRequest]
         public async Task<ActionResult> Detail(ColossusBetDetailMetaModel metaModel)
         {
             var userSession = SessionService.UserSession;

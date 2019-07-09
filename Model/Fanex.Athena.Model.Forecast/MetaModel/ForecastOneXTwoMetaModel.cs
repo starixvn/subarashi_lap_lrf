@@ -3,6 +3,8 @@
 // Copyright (c) . All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
+using Fanex.Athena.Model.Core.MetaModel;
+
 namespace Fanex.Athena.Model.Forecast.MetaModel
 {
     /// <summary>

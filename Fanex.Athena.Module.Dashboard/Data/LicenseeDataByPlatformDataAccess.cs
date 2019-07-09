@@ -12,19 +12,19 @@
 
     public class LicenseeDataByPlatformDataAccess : BaseDataAccess, ILicenseeDataByPlatformDataAccess
     {
-        public Task<WidgetByPlatformViewModel> GetWinLoss(DashboardBaseModel metaModel)
+        public async Task<WidgetByPlatformViewModel> GetWinLoss(DashboardBaseModel metaModel)
         {
-            return GetData(metaModel, "Lrf_GetLicenseeWLByPlatform", "LicenseeWL");
+            return await GetData(metaModel, "Lrf_GetLicenseeWLByPlatform", "LicenseeWL").ConfigureAwait(false);
         }
 
-        public Task<WidgetByPlatformViewModel> GetTurnover(DashboardBaseModel metaModel)
+        public async Task<WidgetByPlatformViewModel> GetTurnover(DashboardBaseModel metaModel)
         {
-            return GetData(metaModel, "Lrf_GetLicenseeTurnoverByPlatform", "Turnover");
+            return await GetData(metaModel, "Lrf_GetLicenseeTurnoverByPlatform", "Turnover").ConfigureAwait(false);
         }
 
-        private static WidgetByPlatformViewModel ReadData(IDataReader reader, string winlossColumnName, string baseCurrency)
+        private static WidgetByPlatformViewModel ReadData(IDataReader reader, string winlossColumnName)
         {
-            var winlossColumn = winlossColumnName + baseCurrency;
+            var winlossColumn = winlossColumnName;
 
             var dataList = new List<KeyValuePair<string, decimal>>();
             var total = 0m;
@@ -53,12 +53,13 @@
                     LicenseeID = metaModel.LicenseeId,
                     metaModel.CurrencyIDList,
                     FromDate = metaModel.FromDate,
-                    ToDate = metaModel.ToDate
+                    ToDate = metaModel.ToDate,
+                    BaseCurrency = metaModel.BaseCurrency
                 };
 
                 using (var reader = await db.ExecuteReaderAsync(param).ConfigureAwait(false))
                 {
-                    return ReadData(reader, winlossColumnName, metaModel.BaseCurrency);
+                    return ReadData(reader, winlossColumnName);
                 }
             }
         }

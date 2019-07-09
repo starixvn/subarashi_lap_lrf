@@ -42,6 +42,7 @@ namespace Fanex.Athena.DataAccess.Forecast
                 db.SetParameterValue("AgentList", metaModel.AgentListXml);
                 db.SetParameterValue("matchid", metaModel.MatchId);
                 db.SetParameterValue("betType", metaModel.BetType);
+                db.SetParameterValue("BaseCurrency", metaModel.BaseCurrency);
                 var dataset = await db.ExecuteDataSetAsync().ConfigureAwait(false);
                 return dataset != null && dataset.Tables.Count > 0 ? dataset.Tables[0] : null;
             }
@@ -56,6 +57,7 @@ namespace Fanex.Athena.DataAccess.Forecast
                 db.SetParameterValue("AgentList", metaModel.AgentListXml);
                 db.SetParameterValue("matchid", metaModel.MatchId);
                 db.SetParameterValue("betType", metaModel.BetType);
+                db.SetParameterValue("BaseCurrency", metaModel.BaseCurrency);
                 var dataset = await db.ExecuteDataSetAsync().ConfigureAwait(false);
                 return dataset != null && dataset.Tables.Count > 0 ? dataset.Tables[0] : null;
             }

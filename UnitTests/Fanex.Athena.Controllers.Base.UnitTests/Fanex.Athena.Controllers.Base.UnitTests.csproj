@@ -137,7 +137,6 @@
   </Choose>
   <ItemGroup>
     <Compile Include="CultureBaseControllerHelperTest.cs" />
-    <Compile Include="ContentBaseControllerTest.cs" />
     <Compile Include="CultureBaseControllerTest.cs" />
     <Compile Include="FakeCultureBaseController.cs" />
     <Compile Include="FakeContentBaseController.cs" />

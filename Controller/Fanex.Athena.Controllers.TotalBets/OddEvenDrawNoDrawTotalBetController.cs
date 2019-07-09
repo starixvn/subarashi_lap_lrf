@@ -38,15 +38,16 @@ namespace Fanex.Athena.Controllers.TotalBets
         {
             var param = new OddEvenDrawNoDrawMetaModel
             {
-                LicenseeId = SessionService.LicenseeSession.LicenseeId
+                LicenseeId = SessionService.LicenseeSession.LicenseeId,
+                BaseCurrency = SessionService.UserSession.DefaultBaseCurrency
             };
 
-            SetConvetedUSDCurrencyName(param);
             return await this.GetView(param).ConfigureAwait(false);
         }
 
         [HttpPost]
         [CustomValidateAntiForgery]
+        [ValidationWebRequest(IsValidCurrency = true)]
         public async Task<ActionResult> Index(OddEvenDrawNoDrawMetaModel metaModel)
         {
             metaModel.LicenseeId = SessionService.LicenseeSession.LicenseeId;
@@ -59,22 +60,17 @@ namespace Fanex.Athena.Controllers.TotalBets
         {
             var currencies = SessionService.UserSession.CurrencyList;
 
-            if (metaModel.CurrencyId == 0 || currencies.ContainsKey(metaModel.CurrencyId))
+            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
+            var result = await _oddEvenDrawNoDrawDataAccess.GetOddEvenDrawNoDrawDataList(metaModel).ConfigureAwait(false);
+            var model = new OddEvenDrawNoDrawViewModel
             {
-                metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
-                var result = await _oddEvenDrawNoDrawDataAccess.GetOddEvenDrawNoDrawDataList(metaModel).ConfigureAwait(false);
-                var model = new OddEvenDrawNoDrawViewModel
-                {
-                    Param = metaModel,
-                    MainData = result.DataList.ToList(),
-                    CurrencyList = currencies,
-                    TotalData = result.TotalData
-                };
+                Param = metaModel,
+                MainData = result.DataList.ToList(),
+                CurrencyList = currencies,
+                TotalData = result.TotalData
+            };
 
-                return View("~/Views/Desktop/TotalBets/OddEvenDrawNoDraw/Main.cshtml", model);
-            }
-
-            return Redirect("~/Utility/AccessDenied");
+            return View("~/Views/Desktop/TotalBets/OddEvenDrawNoDraw/Main.cshtml", model);
         }
 
         #endregion Utility

@@ -31,7 +31,7 @@
             };
 
             // Action
-            DataAccess.Public_ReadSummaryTotal(Reader, summaryTotal);
+            DataAccess.Public_ReadSummaryTotal(Reader, summaryTotal, string.Empty);
 
             // Assert
             Assert.Multiple(() =>
@@ -62,24 +62,25 @@
         public void PostReadItem_WhenCall_ReadDataCorrectly()
         {
             // Arrange
-            const string BaseCurrency = "ABC";
-            MapReaderData(new
+            var data = new
             {
-                tipsamountABC = 1.5m,
-                tipssharingABC = 2.4m,
-                amountdueABC = 3.3m
-            });
+                tipsamount = 1.5m,
+                tipssharing = 2.4m,
+                amountdue = 3.3m,
+                amountdueeur = 4.3m
+            };
+            MapReaderData(data);
             var item = new GoldDeluxeWinLoss();
 
             // Action
-            DataAccess.Public_PostReadItem(Reader, item, BaseCurrency);
+            DataAccess.Public_PostReadItem(Reader, item);
 
             // Assert
             Assert.Multiple(() =>
             {
-                Assert.That(item.TipAmount, Is.EqualTo(1.5m));
-                Assert.That(item.TipSharing, Is.EqualTo(2.4m));
-                Assert.That(item.AmountDue, Is.EqualTo(3.3m));
+                Assert.That(item.TipAmount, Is.EqualTo(data.tipsamount));
+                Assert.That(item.TipSharing, Is.EqualTo(data.tipssharing));
+                Assert.That(item.AmountDue, Is.EqualTo(data.amountdue));
             });
         }
 

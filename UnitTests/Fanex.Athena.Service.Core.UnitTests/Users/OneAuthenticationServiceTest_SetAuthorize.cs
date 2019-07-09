@@ -7,6 +7,7 @@
     using Core.Utility.Interfaces;
     using DataAccess.Core.Users.Interfaces;
     using Extension.Utility.Interfaces;
+    using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Service.Core.Users;
     using Fanex.Logging;
     using Model.Core.DTO.Common;
@@ -24,7 +25,7 @@
         private IFormsAuthenticationService _formAuthenticationService;
         private IOneBookSecurityWrapper _oneBookSecurityWrapper;
         private IOneAuthDataAccess _oneAuthDataAccess;
-
+        private IAppSettings _appSettings;
         [SetUp]
         public void SetUp()
         {
@@ -33,7 +34,8 @@
             _formAuthenticationService = Substitute.For<IFormsAuthenticationService>();
             _oneBookSecurityWrapper = Substitute.For<IOneBookSecurityWrapper>();
             _oneAuthDataAccess = Substitute.For<IOneAuthDataAccess>();
-
+            _appSettings = Substitute.For<IAppSettings>();
+            _appSettings.DefaultBaseCurrency.Returns("EUR");
             _oneAuthDataAccess.GetUserInfo(Arg.Any<int>(), Arg.Any<string>()).Returns(new OneAuthUserInfo());
 
             _oneAuthenticationService = Substitute.ForPartsOf<OneAuthenticationService>(
@@ -42,6 +44,7 @@
                 _formAuthenticationService,
                 _oneBookSecurityWrapper,
                 Substitute.For<ILogger>(),
+                _appSettings,
                 _oneAuthDataAccess);
         }
 
@@ -52,10 +55,11 @@
             _sessionService = null;
             _licenseeDataAccess = null;
             _formAuthenticationService = null;
+            _appSettings = null;
         }
 
         [Test]
-        public async Task SignIn_SetAuthorize_UpdateCookieAndReturnCorrectResult()
+        public void SignIn_SetAuthorize_UpdateCookieAndReturnCorrectResult()
         {
             // Arrange
             var tokenInfo = new OneAuthToken

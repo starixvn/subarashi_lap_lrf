@@ -53,35 +53,12 @@
             }
         }
 
-        [TestCase(0, 1, 1)]
-        [TestCase(1, 1, 2)]
-        [TestCase(-1000, 1, 1)]
-        public async Task Index_ExportExcel_InvalidCurrency_ReturnEmptyResult(int currencyId, int fromDay, int toDay)
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var metaModel = new BetListExcelMetaModel
-                {
-                    IsExportExcel = true,
-                    CurrencyId = currencyId,
-                    FromDate = new DateTime(2018, 1, fromDay),
-                    ToDate = new DateTime(2018, 1, toDay)
-                };
-
-                controller.When(x => x.EmptyExcel()).DoNotCallBase();
-
-                // Action
-                await controller.Index(metaModel);
-
-                // Assert
-                controller.Received().EmptyExcel();
-            }
-        }
-
-        [TestCase("USD", null, "USD", true)]
-        [TestCase("USD", "eur", "EUR", false)]
-        public async Task Index_ExportExcel_PassCorrectParam(string currency, string baseCurrency, string expectedCurrency, bool hasMainTickets)
+        [TestCase(1,"USD", null, "USD", true)]
+        [TestCase(1,"USD", "eur", "EUR", false)]
+        public async Task Index_ExportExcel_PassCorrectParam(
+            int currencyId,
+            string currency, string baseCurrency, 
+            string expectedCurrency, bool hasMainTickets)
         {
             using (var controller = CreateController())
             {
@@ -91,7 +68,7 @@
                 var metaModel = new BetListExcelMetaModel
                 {
                     IsExportExcel = true,
-                    CurrencyId = 1,
+                    CurrencyId = currencyId,
                     CurrencyName = currency,
                     BaseCurrency = baseCurrency,
                     FromDate = new DateTime(2018, 1, 1),

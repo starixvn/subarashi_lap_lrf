@@ -121,7 +121,7 @@
             db.SetParameterValue("basecurrency", metaModel.BaseCurrency);
             db.SetParameterValue("UserName", metaModel.UserName);
             db.SetParameterValue("StatusList", string.Join(",", metaModel.Status));
-            db.SetParameterValue("ProductCodes", string.Join(",", metaModel.ProductCode));
+            db.SetParameterValue("ProductCodes", metaModel.ProductCodeList);
             db.SetParameterValue("MoveBetsDay", _balanceUpDataAccess.GetBalanceUp().MoveBetsDay);
             db.SetParameterValue("AgentList", metaModel.AgentListXml);
 

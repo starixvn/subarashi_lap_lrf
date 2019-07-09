@@ -58,6 +58,7 @@
                 _functionService,
                 _licenseeDataAccess,
                 _currencyDataAccess,
+                _appSettings,
                 _sessionStorage);
         }
 

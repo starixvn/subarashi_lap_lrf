@@ -164,6 +164,7 @@
             objectDb.SetParameterValue("SpecialLevel", metaModel.SpecialLevel);
             objectDb.SetParameterValue("GroupCommId", metaModel.GroupCommId);
             objectDb.SetParameterValue("AgentList", metaModel.AgentListXml);
+            objectDb.SetParameterValue("BaseCurrency", metaModel.BaseCurrency);
             objectDb.SetParameterValue("TotalRows", null);
         }
 
@@ -183,9 +184,6 @@
             var dataList = new List<CustomerDTO>();
             using (var reader = await objectDb.ExecuteReaderAsync().ConfigureAwait(false))
             {
-                var availableFundsCol = "TotalBalance" + metaModel.BaseCurrency;
-                var pendingFundsCol = "OutStanding" + metaModel.BaseCurrency;
-
                 var startIndex = ((metaModel.PageIndex - 1) * metaModel.PageSize) + 1;
                 while (reader.Read())
                 {
@@ -200,8 +198,8 @@
                         BAStatus = reader.ToBool("BAStatus"),
                         SpecialLevel = reader.ToInt("SpecialLevel"),
                         IsPowerBAUserTurnoff = reader.ToBool("IsPowerBAUserTurnoff"),
-                        AvailableFunds = reader.ToDecimal(availableFundsCol),
-                        PendingFunds = reader.ToDecimal(pendingFundsCol),
+                        AvailableFunds = reader.ToDecimal("TotalBalance"),
+                        PendingFunds = reader.ToDecimal("OutStanding"),
                         GroupCommId = reader.ToInt("GroupCommId"),
                         GroupColor = reader.ToString("GroupColor"),
                         Group = reader.ToString("GroupName"),

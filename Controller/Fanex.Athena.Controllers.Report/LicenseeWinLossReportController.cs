@@ -49,18 +49,22 @@ namespace Fanex.Athena.Controllers.Report
             return MapToView();
         }
 
-        private static IDictionary<int, string> GetFakeBaseCurrencies(string baseCurrencySetting)
+        private static IDictionary<int, string> GetFakeBaseCurrencies(string baseCurrencySetting, string defaultBaseCurrency)
         {
-            var allBaseCurrencies = new Dictionary<int, string>
-            {
-                { BaseCurrencyType.Eur, "EUR" },
-                { BaseCurrencyType.Usd, "USD" },
-                { BaseCurrencyType.Gbp, "GBP" }
-            };
+            var baseCurrencyList = string.IsNullOrWhiteSpace(baseCurrencySetting)
+                    ? SystemConstants.BaseCurrencyList
+                    : SystemConstants.BaseCurrencyList.Where(x => baseCurrencySetting.Split(',').Contains(x.Value)).ToDictionary(x => x.Key, x => x.Value);
 
-            return string.IsNullOrWhiteSpace(baseCurrencySetting)
-                    ? allBaseCurrencies
-                    : allBaseCurrencies.Where(x => baseCurrencySetting.Split(',').Contains(x.Value)).ToDictionary(x => x.Key, x => x.Value);
+            var defaultBaseCurrencyKey = defaultBaseCurrency?.ToUpperInvariant();
+
+            if (defaultBaseCurrencyKey != null
+                && !baseCurrencyList.Any(x => x.Value == defaultBaseCurrencyKey)
+                && SystemConstants.BaseCurrencyList.Any(x => x.Value == defaultBaseCurrencyKey))
+            {
+                baseCurrencyList.Add(SystemConstants.BaseCurrencyList.First(x => x.Value == defaultBaseCurrencyKey));
+            }
+
+            return baseCurrencyList;
         }
 
         private static DateTime GetSelectedDate(ReportSetting reportSetting)
@@ -94,10 +98,13 @@ namespace Fanex.Athena.Controllers.Report
                 IsExcludedTestData = true,
                 DrawFilter = DrawFilterType.Normal,
                 ReportBy = ReportByType.Daily,
-                ProductOptions = ToProductOptions(productAccess.ProductList)
+                ProductOptions = ToProductOptions(productAccess.ProductList),
+                BaseCurrency = userSession.DefaultBaseCurrency,
+                                CurrencyId = SystemConstants.BaseCurrencyList
+                .FirstOrDefault(x => x.Value.Equals(userSession.DefaultBaseCurrency, StringComparison.OrdinalIgnoreCase))
+                .Key
+
             };
-            SetConvetedUSDCurrencyName(param);
-            SetConvetedUSDCurrencyId(param);
 
             var model = new LicenseeWinLossViewModel
             {
@@ -116,23 +123,24 @@ namespace Fanex.Athena.Controllers.Report
             var reportSetting = _reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss);
             var selectedDate = GetSelectedDate(reportSetting);
             var productAccess = GetProducts(SessionService.LicenseeSession.LicenseeId, userSession.Language);
+            var baseCurrencyList = GetFakeBaseCurrencies(reportSetting.BaseCurrencies, userSession.DefaultBaseCurrency);
+            var defaultBaseCurrency = baseCurrencyList.FirstOrDefault(x => x.Value.Equals(userSession.DefaultBaseCurrency, StringComparison.OrdinalIgnoreCase));
 
             var param = new LicenseeWinLossMetaModel
             {
                 FromDate = new DateTime(selectedDate.Year, selectedDate.Month, 1),
                 ToDate = selectedDate,
                 ReportBy = ReportByType.Daily,
-                ProductOptions = ToProductOptions(productAccess.ProductList)
+                ProductOptions = ToProductOptions(productAccess.ProductList),
+                CurrencyId = defaultBaseCurrency.Key
             };
-            SetConvetedUSDCurrencyName(param);
-            SetConvetedUSDCurrencyId(param);
 
             var model = new SpecialLicenseeWinLossViewModel
             {
                 Param = param,
                 CurrencyList = userSession.CurrencyList,
                 ReportSetting = reportSetting,
-                BaseCurrencyList = GetFakeBaseCurrencies(reportSetting.BaseCurrencies)
+                BaseCurrencyList = baseCurrencyList
             };
 
             return View("~/Views/Desktop/Report/SpecialLicenseeWinLoss/Main.cshtml", model);

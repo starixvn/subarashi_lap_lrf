@@ -28,15 +28,16 @@ namespace Fanex.Athena.DataAccess.TotalBet
                 AgentList = metaModel.AgentListXml,
                 PageSize = metaModel.PageSize,
                 PageIndex = metaModel.PageIndex,
-                TotalRows = metaModel.TotalRows
+                TotalRows = metaModel.TotalRows,
+                BaseCurrency = metaModel.BaseCurrency
             };
             using (var db = this.GetObjectDb(UspName))
             {
                 using (var reader = await db.ExecuteReaderAsync(uspParams).ConfigureAwait(false))
                 {
-                    var data = SetToList(reader, metaModel.IsConvert, metaModel.BaseCurrency);
+                    var data = SetToList(reader);
                     reader.NextResult();
-                    var totalData = ReadTotalData(reader, metaModel.IsConvert, metaModel.BaseCurrency);
+                    var totalData = ReadTotalData(reader);
                     return new ReportResultModel<TotalGoal>
                     {
                         DataList = data,
@@ -46,17 +47,9 @@ namespace Fanex.Athena.DataAccess.TotalBet
             }
         }
 
-        private static IList<TotalGoal> SetToList(IDataReader reader, bool isConvert, string baseCurrency)
+        private static IList<TotalGoal> SetToList(IDataReader reader)
         {
             var dataList = new List<TotalGoal>();
-
-            var total01Column = DataHelper.GetCurrencyColumnName("total01", isConvert, baseCurrency);
-            var total23Column = DataHelper.GetCurrencyColumnName("total23", isConvert, baseCurrency);
-            var total46Column = DataHelper.GetCurrencyColumnName("total46", isConvert, baseCurrency);
-            var total07OverColumn = DataHelper.GetCurrencyColumnName("total7over", isConvert, baseCurrency);
-            var totalFirst01Column = DataHelper.GetCurrencyColumnName("fhtotal01", isConvert, baseCurrency);
-            var totalFirst23Column = DataHelper.GetCurrencyColumnName("fhtotal23", isConvert, baseCurrency);
-            var total04OverColumn = DataHelper.GetCurrencyColumnName("fhtotal4over", isConvert, baseCurrency);
 
             while (reader.Read())
             {
@@ -67,13 +60,13 @@ namespace Fanex.Athena.DataAccess.TotalBet
                     HomeId = reader.ToInt("homeID"),
                     AwayId = reader.ToInt("awayID"),
                     IsNeutral = reader.ToInt("isNeutral"),
-                    Total01 = reader.ToDecimal(total01Column),
-                    Total23 = reader.ToDecimal(total23Column),
-                    Total46 = reader.ToDecimal(total46Column),
-                    Total7Over = reader.ToDecimal(total07OverColumn),
-                    TotalFirstHalf01 = reader.ToNullableDecimal(totalFirst01Column),
-                    TotalFirstHalf23 = reader.ToNullableDecimal(totalFirst23Column),
-                    Total4Over = reader.ToNullableDecimal(total04OverColumn)
+                    Total01 = reader.ToDecimal("total01"),
+                    Total23 = reader.ToDecimal("total23"),
+                    Total46 = reader.ToDecimal("total46"),
+                    Total7Over = reader.ToDecimal("total7over"),
+                    TotalFirstHalf01 = reader.ToNullableDecimal("fhtotal01"),
+                    TotalFirstHalf23 = reader.ToNullableDecimal("fhtotal23"),
+                    Total4Over = reader.ToNullableDecimal("fhtotal4over")
                 };
 
                 dataList.Add(item);
@@ -82,22 +75,14 @@ namespace Fanex.Athena.DataAccess.TotalBet
             return dataList;
         }
 
-        private static TotalGoal ReadTotalData(IDataReader reader, bool isConvert, string baseCurrency)
+        private static TotalGoal ReadTotalData(IDataReader reader)
         {
             if (reader.Read())
             {
-                var total01Column = DataHelper.GetCurrencyColumnName("total01", isConvert, baseCurrency);
-                var total23Column = DataHelper.GetCurrencyColumnName("total23", isConvert, baseCurrency);
-                var total46Column = DataHelper.GetCurrencyColumnName("total46", isConvert, baseCurrency);
-                var total07OverColumn = DataHelper.GetCurrencyColumnName("total7over", isConvert, baseCurrency);
-                var totalFirst01Column = DataHelper.GetCurrencyColumnName("fhtotal01", isConvert, baseCurrency);
-                var totalFirst23Column = DataHelper.GetCurrencyColumnName("fhtotal23", isConvert, baseCurrency);
-                var total04OverColumn = DataHelper.GetCurrencyColumnName("fhtotal4over", isConvert, baseCurrency);
-
                 return new TotalGoal
                 {
-                    Total01 = reader.ToDecimal(total01Column) + reader.ToDecimal(total23Column) + reader.ToDecimal(total46Column) + reader.ToDecimal(total07OverColumn),
-                    TotalFirstHalf01 = reader.ToDecimal(totalFirst01Column) + reader.ToDecimal(totalFirst23Column) + reader.ToDecimal(total04OverColumn)
+                    Total01 = reader.ToDecimal("total01") + reader.ToDecimal("total23") + reader.ToDecimal("total46") + reader.ToDecimal("total7over"),
+                    TotalFirstHalf01 = reader.ToDecimal("fhtotal01") + reader.ToDecimal("fhtotal23") + reader.ToDecimal("fhtotal4over")
                 };
             }
 

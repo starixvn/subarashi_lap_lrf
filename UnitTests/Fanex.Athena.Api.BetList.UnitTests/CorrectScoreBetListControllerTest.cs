@@ -22,28 +22,6 @@
             AuthorizationService.HasPermissionOnData(SessionLicenseeId, Arg.Any<int>(), Arg.Any<long>()).Returns(true);
         }
 
-        [TestCase(-100)]
-        [TestCase(100)]
-        public async Task Index_InvalidCurrencyId_ReturnNull(int currencyId)
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var expect = new HttpResponseMessage();
-                var metaModel = new BetListMetaModel
-                {
-                    CurrencyId = currencyId
-                };
-                StubUserSessionData(new UserSession { CurrencyList = new Dictionary<int, string>() });
-
-                // Action
-                var actual = await controller.Index(metaModel);
-
-                // Assert
-                Assert.That(actual, Is.Null);
-            }
-        }
-
         [TestCase(0)]
         [TestCase(-1)]
         public async Task Index_ValidMetaModel_CallBetListApiWithCorrectParameters(int currencyId)

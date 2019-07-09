@@ -11,6 +11,7 @@
     using NSubstitute;
     using NUnit.Framework;
     using UnitTest.Common.Extensions;
+
     [TestFixture]
     public class LicenseeDataByPlatformDataAccessTest : BaseDataAccessHelperTest<LicenseeDataByPlatformDataAccess>
     {
@@ -37,7 +38,7 @@
 
             Reader.Read().Returns(true, false);
             Reader["PlatformType"].Returns(8);
-            Reader["LicenseeWLEUR"].Returns(100M);
+            Reader["LicenseeWL"].Returns(100M);
 
             // Action
             await DataAccess.GetWinLoss(metaModel);
@@ -60,7 +61,7 @@
             var metaModel = new DashboardBaseModel { BaseCurrency = "EUR" };
             Reader.Read().Returns(true, false);
             Reader["PlatformType"].Returns(PlatformType.Asia);
-            Reader["LicenseeWLEUR"].Returns(100M);
+            Reader["LicenseeWL"].Returns(100M);
 
             // Action
             var result = await DataAccess.GetWinLoss(metaModel);
@@ -85,7 +86,7 @@
 
             Reader.Read().Returns(true, false);
             Reader["PlatformType"].Returns(8);
-            Reader["TurnoverEUR"].Returns(100M);
+            Reader["Turnover"].Returns(100M);
 
             // Action
             await DataAccess.GetTurnover(metaModel);
@@ -108,7 +109,7 @@
             var metaModel = new DashboardBaseModel { BaseCurrency = "EUR" };
             Reader.Read().Returns(true, false);
             Reader["PlatformType"].Returns(PlatformType.Asia);
-            Reader["TurnoverEUR"].Returns(100M);
+            Reader["Turnover"].Returns(100M);
 
             // Action
             var result = await DataAccess.GetTurnover(metaModel);
@@ -131,6 +132,7 @@
                 Assert.That(passedParam.GetValue("CurrencyIDList"), Is.EqualTo(metaModel.CurrencyIDList));
                 Assert.That(passedParam.GetValue("FromDate"), Is.EqualTo(metaModel.FromDate));
                 Assert.That(passedParam.GetValue("ToDate"), Is.EqualTo(metaModel.ToDate));
+                Assert.That(passedParam.GetValue("BaseCurrency"), Is.EqualTo(metaModel.BaseCurrency));
             });
         }
     }

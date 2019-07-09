@@ -33,6 +33,7 @@
         }
 
         [HttpPost]
+        [ValidationApiRequest]
         public async Task<dynamic> Index(CustomerBalanceMetaModel metaModel)
         {
             var result = await GetData(metaModel).ConfigureAwait(false);
@@ -41,11 +42,12 @@
             {
                 Data = result.DataList,
                 Total = result.TotalData,
-                TotalRows = result.TotalRows
+                result.TotalRows
             };
         }
 
         [HttpPost]
+        [ValidationApiRequest]
         public async Task<HttpResponseMessage> ExportExcel(CustomerBalanceMetaModel metaModel)
         {
             const string FileName = "CustomerBalance.xls";
@@ -94,16 +96,6 @@
 
         private async Task<ReportResultModel<CustBalance>> GetData(CustomerBalanceMetaModel metaModel)
         {
-            if (!metaModel.IsValid)
-            {
-                return new ReportResultModel<CustBalance>
-                {
-                    TotalData = new CustBalance(),
-                    TotalRows = 0,
-                    DataList = new List<CustBalance>()
-                };
-            }
-
             metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId, metaModel.IsExcludeTest);
             return await _custBalanceDataAccess.GetDataList(metaModel).ConfigureAwait(false);
         }

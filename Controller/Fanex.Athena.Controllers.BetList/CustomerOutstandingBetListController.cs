@@ -43,6 +43,7 @@ namespace Fanex.Athena.Controllers.BetList
         {
         }
 
+        [ValidationWebRequest]
         public ActionResult Index(BetListMetaModel metaModel)
         {
             var isRunningBetlist = !string.IsNullOrEmpty(metaModel.BetListName) && metaModel.BetListName.Equals("betlistrunning", StringComparison.OrdinalIgnoreCase);

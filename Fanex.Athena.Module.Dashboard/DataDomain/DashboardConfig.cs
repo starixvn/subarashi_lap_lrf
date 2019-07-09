@@ -6,7 +6,7 @@
     {
         public static readonly IEnumerable<string> SupportedBaseCurrencies = new[]
         {
-            "EUR", "USD", "GBP", "MYR", "CNY", "THB", "IDR"
+            "EUR", "USD", "GBP", "MYR", "CNY", "THB", "IDR", "INH"
         };
     }
 }

@@ -31,7 +31,8 @@
 
         protected ILanguageService LangService { get; private set; }
 
-        protected IDictionary<int, string> UserCurrencyList => SessionService.UserSession.CurrencyList;
+        protected IDictionary<int, string> UserCurrencyList => 
+            SessionService.UserSession.CurrencyList;
 
         [OneTimeSetUp]
         public virtual void FixtureSetUp()
@@ -65,7 +66,7 @@
             {
                 UserId = SessionUserId,
                 UserName = SessionUserName,
-                CurrencyList = new Dictionary<int, string> { { -1, "EUR" }, { -2, "USD" } },
+                CurrencyList = new Dictionary<int, string> {{ 1, "EUR" }, { 2, "USD" } },
                 Language = SessionLanguage
             };
 

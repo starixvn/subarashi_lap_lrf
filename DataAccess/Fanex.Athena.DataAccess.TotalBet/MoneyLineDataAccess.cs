@@ -11,7 +11,6 @@ namespace Fanex.Athena.DataAccess.TotalBet
     using System.Threading.Tasks;
     using Core;
     using DataAccess.TotalBet.Interfaces;
-    using Extension.Helper;
     using Fanex.Common.Extensions;
     using Model.Core.ResultModel;
     using Model.TotalBet.DTO;
@@ -30,14 +29,15 @@ namespace Fanex.Athena.DataAccess.TotalBet
                     AgentList = metaModel.AgentListXml,
                     PageSize = metaModel.PageSize,
                     PageIndex = metaModel.PageIndex,
-                    TotalRows = metaModel.TotalRows
+                    TotalRows = metaModel.TotalRows,
+                    BaseCurrency = metaModel.BaseCurrency
                 };
                 using (var reader = await db.ExecuteReaderAsync(uspParams).ConfigureAwait(false))
                 {
-                    var data = SetToList(reader, metaModel.IsConvert, metaModel.BaseCurrency);
+                    var data = SetToList(reader);
 
                     reader.NextResult();
-                    var totalData = ReadTotalData(reader, metaModel.IsConvert, metaModel.BaseCurrency);
+                    var totalData = ReadTotalData(reader);
 
                     return new ReportResultModel<MoneyLine>
                     {
@@ -50,21 +50,9 @@ namespace Fanex.Athena.DataAccess.TotalBet
 
         #region Utility
 
-        private static IList<MoneyLine> SetToList(IDataReader reader, bool isConvert, string baseCurrency)
+        private static IList<MoneyLine> SetToList(IDataReader reader)
         {
             var dataList = new List<MoneyLine>();
-
-            // Fulltime column name
-            var totalHomeScoreColumnName = DataHelper.GetCurrencyColumnName("home_odds", isConvert, baseCurrency);
-            var totalAwayScoreColumnName = DataHelper.GetCurrencyColumnName("away_odds", isConvert, baseCurrency);
-            var homeScoreColumnName = DataHelper.GetCurrencyColumnName("winlost_home", isConvert, baseCurrency);
-            var awayScoreColumnName = DataHelper.GetCurrencyColumnName("winlost_away", isConvert, baseCurrency);
-
-            // First half column name
-            var totalHomeScore1StHalfColumnName = DataHelper.GetCurrencyColumnName("home_odds_HT", isConvert, baseCurrency);
-            var totalAwayScore1StHalfColumnName = DataHelper.GetCurrencyColumnName("away_odds_HT", isConvert, baseCurrency);
-            var homeScore1StHalfColumnName = DataHelper.GetCurrencyColumnName("winlost_home_HT", isConvert, baseCurrency);
-            var awayScore1StHalfColumnName = DataHelper.GetCurrencyColumnName("winlost_away_HT", isConvert, baseCurrency);
 
             while (reader.Read())
             {
@@ -75,14 +63,14 @@ namespace Fanex.Athena.DataAccess.TotalBet
                     MatchId = reader.ToInt("matchid"),
                     HomeId = reader.ToInt("homeID"),
                     AwayId = reader.ToInt("awayID"),
-                    TotalHomeFt = reader.ToDecimal(totalHomeScoreColumnName),
-                    TotalAwayFt = reader.ToDecimal(totalAwayScoreColumnName),
-                    ForecastHomeFt = reader.ToDecimal(homeScoreColumnName),
-                    ForecastAwayFt = reader.ToDecimal(awayScoreColumnName),
-                    TotalHomeFirstHalf = reader.ToDecimal(totalHomeScore1StHalfColumnName),
-                    TotalAwayFirstHalf = reader.ToDecimal(totalAwayScore1StHalfColumnName),
-                    ForecastHomeFirstHalf = reader.ToDecimal(homeScore1StHalfColumnName),
-                    ForecastAwayFirstHalf = reader.ToDecimal(awayScore1StHalfColumnName),
+                    TotalHomeFt = reader.ToDecimal("home_odds"),
+                    TotalAwayFt = reader.ToDecimal("away_odds"),
+                    ForecastHomeFt = reader.ToDecimal("winlost_home"),
+                    ForecastAwayFt = reader.ToDecimal("winlost_away"),
+                    TotalHomeFirstHalf = reader.ToDecimal("home_odds_HT"),
+                    TotalAwayFirstHalf = reader.ToDecimal("away_odds_HT"),
+                    ForecastHomeFirstHalf = reader.ToDecimal("winlost_home_HT"),
+                    ForecastAwayFirstHalf = reader.ToDecimal("winlost_away_HT"),
                     LiveHomeScore = reader.ToString("livehomescore"),
                     LiveAwayScore = reader.ToString("liveawayscore"),
                     LiveIndicator = reader.ToInt("liveindicator"),
@@ -94,24 +82,16 @@ namespace Fanex.Athena.DataAccess.TotalBet
             return dataList;
         }
 
-        private static MoneyLine ReadTotalData(IDataReader reader, bool isConvert, string baseCurrency)
+        private static MoneyLine ReadTotalData(IDataReader reader)
         {
             if (reader.Read())
             {
-                // Fulltime column name
-                var totalHomeScoreColumnName = DataHelper.GetCurrencyColumnName("home_odds", isConvert, baseCurrency);
-                var totalAwayScoreColumnName = DataHelper.GetCurrencyColumnName("away_odds", isConvert, baseCurrency);
-
-                // First half column name
-                var totalHomeScore1StHalfColumnName = DataHelper.GetCurrencyColumnName("home_odds_HT", isConvert, baseCurrency);
-                var totalAwayScore1StHalfColumnName = DataHelper.GetCurrencyColumnName("away_odds_HT", isConvert, baseCurrency);
-
                 return new MoneyLine
                 {
-                    TotalHomeFt = reader.ToDecimal(totalHomeScoreColumnName),
-                    TotalAwayFt = reader.ToDecimal(totalAwayScoreColumnName),
-                    TotalHomeFirstHalf = reader.ToDecimal(totalHomeScore1StHalfColumnName),
-                    TotalAwayFirstHalf = reader.ToDecimal(totalAwayScore1StHalfColumnName)
+                    TotalHomeFt = reader.ToDecimal("home_odds"),
+                    TotalAwayFt = reader.ToDecimal("away_odds"),
+                    TotalHomeFirstHalf = reader.ToDecimal("home_odds_HT"),
+                    TotalAwayFirstHalf = reader.ToDecimal("away_odds_HT")
                 };
             }
 

@@ -3,6 +3,7 @@
     using System.Threading.Tasks;
     using System.Web.Http;
     using DataAccess.Core.Configuration.Interfaces;
+    using Fanex.Athena.Api.Base.Attributes;
     using Model.BetList.MetaModel;
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
@@ -23,6 +24,7 @@
         }
 
         [HttpPost]
+        [ValidationApiRequest]
         public Task<dynamic> Detail(BetListMetaModel metaModel)
         {
             const string UspKey = "Lrf_BetList_LicenseeBonus_Detail";

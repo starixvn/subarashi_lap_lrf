@@ -1,7 +1,6 @@
 ﻿namespace Fanex.Athena.DataAccess.Report.UnitTests
 {
     using System.Collections.Generic;
-    using System.Data;
     using System.Threading.Tasks;
     using Core.UnitTests.TestHelpers;
     using Model.Core.MetaModel.Product;
@@ -44,6 +43,7 @@
                 ObjectDb.Received(1).SetParameterValue("AgentList", metaModel.AgentListXml);
                 ObjectDb.Received(1).SetParameterValue("fromdate", metaModel.FromDate);
                 ObjectDb.Received(1).SetParameterValue("todate", metaModel.ToDate);
+                ObjectDb.Received(1).SetParameterValue("BaseCurrency", metaModel.BaseCurrency);
                 ObjectDb.Received(1).SetParameterValue("showSB", true);
                 ObjectDb.Received(1).SetParameterValue("showNG", false);
             });
@@ -58,7 +58,7 @@
             Reader.Read().Returns(true, false);
             var readerDataMapping = new
             {
-                OpeningBalanceUSD = 999
+                OpeningBalance = 999
             };
 
             MapReaderData(readerDataMapping);

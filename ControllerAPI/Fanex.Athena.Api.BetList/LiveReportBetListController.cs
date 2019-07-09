@@ -7,6 +7,7 @@
 
 namespace Fanex.Athena.Api.BetList
 {
+    using System;
     using System.Net.Http;
     using System.Threading.Tasks;
     using System.Web.Http;
@@ -34,70 +35,51 @@ namespace Fanex.Athena.Api.BetList
         }
 
         [HttpPost]
+        [ValidationApiRequest(IsValidCurrency = true)]
         public async Task<dynamic> Match(LiveReportBetListMetaModel metaModel)
         {
-            if (!IsValidCurrencyId(metaModel.CurrencyId))
-            {
-                return null;
-            }
-
             const string UspKey = "Lrf_BetList_LiveReport_SelWinlossByMatch";
 
             return await GetData(metaModel, UspKey).ConfigureAwait(false);
         }
 
         [HttpPost]
+        [ValidationApiRequest(IsValidCurrency = true)]
         public async Task<dynamic> Outright(LiveReportBetListMetaModel metaModel)
         {
-            if (IsValidCurrencyId(metaModel.CurrencyId))
-            {
-                const string UspKey = "Lrf_BetList_LiveReport_SelWinlossOutright";
-                return await GetData(metaModel, UspKey).ConfigureAwait(false);
-            }
-
-            return null;
+            const string UspKey = "Lrf_BetList_LiveReport_SelWinlossOutright";
+            return await GetData(metaModel, UspKey).ConfigureAwait(false);
         }
 
         [HttpGet]
+        [ValidationApiRequest(ObjectName = "metaModel", IsValidCurrency = true)]
         public async Task<dynamic> NumberGame([FromUri] LiveReportBetListMetaModel metaModel, int page, int rows)
         {
-            if (IsValidCurrencyId(metaModel.CurrencyId))
-            {
-                metaModel.IsServerPaging = true;
-                const string UspKey = "Lrf_BetList_LiveReport_SelWinlossNumberGame";
-
-                return await GetPagingData(metaModel, UspKey, page, rows).ConfigureAwait(false);
-            }
-
-            return null;
+            metaModel.IsServerPaging = true;
+            const string UspKey = "Lrf_BetList_LiveReport_SelWinlossNumberGame";
+            return await GetPagingData(metaModel, UspKey, page, rows).ConfigureAwait(false);
         }
 
         [HttpGet]
+        [ValidationApiRequest(ObjectName = "metaModel", IsValidCurrency = true)]
         public async Task<dynamic> MixParlay([FromUri] LiveReportBetListMetaModel metaModel, int page, int rows)
         {
-            if (IsValidCurrencyId(metaModel.CurrencyId))
-            {
-                const string UspKey = "Lrf_BetList_LiveReport_SelWinlossParlay";
+            const string UspKey = "Lrf_BetList_LiveReport_SelWinlossParlay";
 
-                metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
+            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
 
-                return await GetPagingData(metaModel, UspKey, page, rows).ConfigureAwait(false);
-            }
-
-            return null;
+            return await GetPagingData(metaModel, UspKey, page, rows).ConfigureAwait(false);
         }
 
         [HttpGet]
+        [ValidationApiRequest(ObjectName = "metaModel", IsValidCurrency = true)]
         public async Task<dynamic> VirtualSports([FromUri] LiveReportBetListMetaModel metaModel, int page, int rows)
         {
-            if (IsValidCurrencyId(metaModel.CurrencyId))
-            {
-                const string UspName = "Lrf_BetList_LiveReport_SelWinlossVHRacing";
+            const string UspName = "Lrf_BetList_LiveReport_SelWinlossVHRacing";
 
-                return await GetPagingData(metaModel, UspName, page, rows).ConfigureAwait(false);
-            }
+            return await GetPagingData(metaModel, UspName, page, rows).ConfigureAwait(false);
 
-            return null;
+
         }
 
         #region Utility

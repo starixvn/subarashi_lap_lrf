@@ -24,31 +24,5 @@ namespace Fanex.Athena.Controllers
         {
         }
 
-        protected void SetConvetedUSDCurrencyId(BaseMetaModel metaModel)
-        {
-            metaModel.CurrencyId = GetConvetedUSDCurrencyId(metaModel.LicenseeId);
-        }
-
-        protected int GetConvetedUSDCurrencyId(int licenseeId)
-        {
-            return GetBaseUsdLicensees().Contains(licenseeId.ToString())
-                ? BaseCurrencyType.Usd : BaseCurrencyType.All;
-        }
-
-        protected void SetConvetedUSDCurrencyName(BaseMetaModel metaModel)
-        {
-            metaModel.BaseCurrency = GetBaseUsdLicensees().Contains(metaModel.LicenseeId.ToString()) ? "usd" : "eur";
-        }
-
-        private IEnumerable<string> GetBaseUsdLicensees()
-        {
-            var items = AppSettings.GetValue("BaseUsdLicensees");
-            if (!string.IsNullOrEmpty(items))
-            {
-                return items.Split(',');
-            }
-
-            return new string[] { };
-        }
     }
 }

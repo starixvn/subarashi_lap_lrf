@@ -6,6 +6,7 @@
 
 namespace Fanex.Athena.Model.Report.MetaModel
 {
+    using Fanex.Athena.Model.Core.MetaModel;
     using System;
 
     /// <summary>
@@ -46,12 +47,5 @@ namespace Fanex.Athena.Model.Report.MetaModel
 
         public bool ShowDraw { get; set; }
 
-        public override bool IsValid
-        {
-            get
-            {
-                return FromDate <= ToDate;
-            }
-        }
     }
 }

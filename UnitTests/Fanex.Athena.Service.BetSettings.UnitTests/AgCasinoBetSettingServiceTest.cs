@@ -5,7 +5,6 @@
     using System.Threading.Tasks;
     using BetSettings;
     using BetSettings.Interfaces;
-    using Core.Utility.Interfaces;
     using DataAccess.BetSettings.Interfaces;
     using Extension.Utility;
     using Extension.Utility.Interfaces;
@@ -145,28 +144,6 @@
 
             // Assert
             Assert.That(result, Is.EqualTo(null));
-        }
-
-        [Test]
-        public async Task GetViewModelAsync_GetExceptionWhileProcessing_WriteErrorLog()
-        {
-            // Arrange
-            var licenseeId = FakeHelper.Create<int>();
-            var licenseeName = FakeHelper.Create<string>();
-            var custId = FakeHelper.Create<int>();
-
-            _authorizationService.HasPermissionOnData(licenseeId, custId, 0).Returns(true);
-
-            _dataAccess.GetBetSettingAsync(custId).Returns(Task.FromResult(FakeHelper.Create<AgCasinoBetSetting>()));
-
-            _webClientService.UploadStringAsync(new Uri(FakeApiUrl), $"SiteName={licenseeName}&Currency=0")
-                .Returns(Task.FromResult("Wrong format"));
-
-            // Action
-            var result = await _service.GetViewModelAsync(licenseeId, custId, licenseeName);
-
-            // Assert
-            _logger.Received().Error(Arg.Any<string>(), Arg.Any<Exception>());
         }
 
         [Test]

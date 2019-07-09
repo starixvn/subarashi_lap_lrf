@@ -19,6 +19,7 @@ namespace Fanex.Athena.Api.Report
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
+    using Fanex.Athena.Service.Core.Utility.Interfaces;
     using Model.Core.DataDomain;
     using Model.Core.ResultModel;
     using Service.Core.Common.Interfaces;
@@ -28,18 +29,22 @@ namespace Fanex.Athena.Api.Report
     public class AgCasinoBalanceReportController : ApiReportBaseController
     {
         private readonly IAgCasinoBalanceDataAccess _agcasinoBalanceDataAccess;
-
+        private readonly ICurrencyValidation _currencyValidation;
         public AgCasinoBalanceReportController(
             IAgCasinoBalanceDataAccess agcasinoBalanceDataAccess,
             ISessionService sessionService,
             IProductService productService,
-            ILanguageService langService)
+            ILanguageService langService,
+            ICurrencyValidation currencyValidation
+            )
             : base(sessionService, productService, langService)
         {
             _agcasinoBalanceDataAccess = agcasinoBalanceDataAccess;
+            _currencyValidation = currencyValidation;
         }
 
         [HttpPost]
+        [ValidationApiRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
         public Task<dynamic> Index(ThirdPartyWinLossMetaModel metaModel)
         {
             return ProcessRequest(metaModel);
@@ -152,9 +157,11 @@ namespace Fanex.Athena.Api.Report
 
         private async Task<dynamic> ProcessRequest(ThirdPartyWinLossMetaModel metaModel)
         {
-            if (IsValidRequest(metaModel.CurrencyId, metaModel.DrillDownCurrencyId))
+            if (_currencyValidation.IsValidCurrency(
+                metaModel.DrillDownCurrencyId, true))
             {
                 metaModel.LicenseeId = SessionService.LicenseeSession.LicenseeId;
+                metaModel.DefaultBaseCurrency = SessionService.UserSession.DefaultBaseCurrency;
                 var result = await GetData(metaModel);
 
                 if (metaModel.IsExportExcel)
@@ -166,10 +173,10 @@ namespace Fanex.Athena.Api.Report
                 {
                     return new
                     {
-                        TotalRows = result.TotalRows,
+                        result.TotalRows,
                         Data = result.DataList,
                         Total = CalculateTotal(result.DataList),
-                        SummaryTotal = result.SummaryTotal
+                        result.SummaryTotal
                     };
                 }
             }

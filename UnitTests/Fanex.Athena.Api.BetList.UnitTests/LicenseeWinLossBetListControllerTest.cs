@@ -60,24 +60,6 @@
             }
         }
 
-        [Test]
-        public async Task Index_InvalidCurrency_ReturnNull()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var metaModel = new BetListMetaModel { CurrencyId = 1 };
-
-                StubUserSessionData(new UserSession { CurrencyList = new Dictionary<int, string>() });
-
-                // Action
-                var result = await controller.Index(metaModel);
-
-                // Assert
-                Assert.That(result, Is.Null);
-            }
-        }
-
         [TestCase(0)]
         [TestCase(1)]
         [TestCase(2)]

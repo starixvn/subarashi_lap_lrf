@@ -18,6 +18,7 @@ namespace Fanex.Athena.Api.Report
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
+    using Fanex.Athena.Service.Core.Utility.Interfaces;
     using Model.Core.DataDomain;
     using Model.Core.ResultModel;
     using Resources;
@@ -29,18 +30,22 @@ namespace Fanex.Athena.Api.Report
     public class ColossusBetsWinLossReportController : ApiReportBaseController
     {
         private readonly IColossusBetsWinLossService _colossusBetsWinLossService;
-
+        private readonly ICurrencyValidation _currencyValidation;
         public ColossusBetsWinLossReportController(
             IColossusBetsWinLossService colossusBetsWinLossService,
             ISessionService sessionService,
             IProductService productService,
-            ILanguageService langService)
+            ILanguageService langService,
+            ICurrencyValidation currencyValidation)
             : base(sessionService, productService, langService)
         {
             _colossusBetsWinLossService = colossusBetsWinLossService;
+
+            _currencyValidation = currencyValidation;
         }
 
         [HttpPost]
+        [ValidationApiRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
         public Task<dynamic> Index(
             ColossusBetsWinLossMetaModel metaModel,
             DateTime? fdate,
@@ -53,6 +58,7 @@ namespace Fanex.Athena.Api.Report
         }
 
         [HttpPost]
+        [ValidationApiRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
         public Task<dynamic> Index([FromBody] ColossusBetsWinLossMetaModel metaModel)
         {
             return ProcessRequest(metaModel, null, null);
@@ -126,7 +132,7 @@ namespace Fanex.Athena.Api.Report
             int currencyId = 0,
             int custId = 0)
         {
-            if (IsValidRequest(metaModel.CurrencyId, currencyId))
+            if (_currencyValidation.IsValidCurrency(currencyId, true))
             {
                 metaModel.DrillDownCurrencyId = currencyId;
                 metaModel.DrillDownLevel = level;
@@ -134,6 +140,7 @@ namespace Fanex.Athena.Api.Report
                 metaModel.DrillDownFromDate = fdate.HasValue ? fdate.Value : metaModel.DrillDownFromDate;
                 metaModel.DrillDownToDate = tdate.HasValue ? tdate.Value : metaModel.DrillDownToDate;
                 metaModel.AgentListXml = SessionService.GenerateAgentListXml(level > 0 ? currencyId : metaModel.CurrencyId, metaModel.IsExcludedTestData);
+                metaModel.DefaultBaseCurrency = SessionService.UserSession.DefaultBaseCurrency;
 
                 var result = await GetData(metaModel);
 

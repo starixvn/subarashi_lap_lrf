@@ -27,8 +27,6 @@
             SetUpDefaultFakeData();
 
             SepUpForService();
-
-            StubGetValueAppSettings("BaseUsdLicensees", "usd");
         }
 
         [OneTimeTearDown]
@@ -64,25 +62,6 @@
                 // Assert
                 await _moneyLineDataAccess.ReceivedWithAnyArgs().GetMoneyLineDataList(Arg.Any<MoneyLineMetaModel>());
                 Assert.That(viewModel.MainData.Count, Is.EqualTo(1));
-            }
-        }
-
-        [Test]
-        public async Task Index_InvalidCurrency_ViewNameIsAccessDenied()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var metaModel = new MoneyLineMetaModel
-                {
-                    CurrencyId = -999
-                };
-
-                // Action
-                var viewResult = await controller.Index(metaModel) as RedirectResult;
-
-                // Assert
-                Assert.That(viewResult.Url, Is.EqualTo("~/Utility/AccessDenied"));
             }
         }
 

@@ -5,6 +5,7 @@
     using Core.Configuration.Interfaces;
     using Core.UnitTests.TestHelpers;
     using Data;
+    using Model.Core.DataDomain;
     using Model.Core.DTO.Configuration;
     using Model.Report.MetaModel;
     using NSubstitute;
@@ -48,6 +49,7 @@
                 ObjectDb.Received(1).SetParameterValue("ToDate", metaModel.ToDate);
                 ObjectDb.Received(1).SetParameterValue("MoveBetsDay", _balanceUp.MoveBetsDay);
                 ObjectDb.Received(1).SetParameterValue("AgentList", metaModel.AgentListXml);
+                ObjectDb.Received(1).SetParameterValue("DefaultBaseCurrency", metaModel.DefaultBaseCurrency);
             });
         }
 
@@ -83,16 +85,19 @@
             });
         }
 
-        [Test]
-        public void GetData_WhenCall_ReturnSummaryDataCorrectly()
+        [TestCase("AAA")]
+        [TestCase("Bbb")]
+        [TestCase("ccc")]
+        public void GetData_ValidDefaultBaseCurrency_IncludeDefaultBaseCurrencyIntoSummary(string defaultBaseCurrency)
         {
             // Assert
-            var metaModel = FakeHelper.Create<PromotionPrizeMetaModel>();
+            var metaModel = FakeHelper.Create<PromotionPrizeMetaModel>(x => x.DefaultBaseCurrency, defaultBaseCurrency);
             var expectedData = new
             {
                 SumAmountUSD = FakeHelper.Create<decimal>(),
                 SumAmountEUR = FakeHelper.Create<decimal>(),
-                SumAmountGBP = FakeHelper.Create<decimal>()
+                SumAmountGBP = FakeHelper.Create<decimal>(),
+                SumAmountBase = FakeHelper.Create<decimal>()
             };
             MapReaderData(expectedData);
             Reader.Read().Returns(false, true);
@@ -107,6 +112,54 @@
                 Assert.That(item["USD"].Amount, Is.EqualTo(expectedData.SumAmountUSD));
                 Assert.That(item["EUR"].Amount, Is.EqualTo(expectedData.SumAmountEUR));
                 Assert.That(item["GBP"].Amount, Is.EqualTo(expectedData.SumAmountGBP));
+                Assert.That(item[defaultBaseCurrency.ToUpperInvariant()].Amount, Is.EqualTo(expectedData.SumAmountBase));
+            });
+        }
+
+        [TestCase("")]
+        [TestCase(null)]
+        public void GetData_InvalidDefaultBaseCurrency_ReturnFixedBaseCurrencySummary(string defaultBaseCurrency)
+        {
+            // Assert
+            var metaModel = FakeHelper.Create<PromotionPrizeMetaModel>(x => x.DefaultBaseCurrency, defaultBaseCurrency);
+
+            // Action
+            var actual = DataAccess.GetData(metaModel, UserCurrencyList);
+            var item = actual.SummaryTotal;
+
+            // Assert
+            Assert.Multiple(() =>
+            {
+                Assert.That(item.Count, Is.EqualTo(SystemConstants.BaseCurrencyListOfSummaryTotalRow.Count));
+            });
+        }
+
+        [TestCase("EuR")]
+        [TestCase("usd")]
+        [TestCase("GBP")]
+        public void GetData_DefaultBaseCurrencyIsFixedBaseCurrency_ReturnFixedBaseCurrencySummary(string defaultBaseCurrency)
+        {
+            // Assert
+            var metaModel = FakeHelper.Create<PromotionPrizeMetaModel>(x => x.DefaultBaseCurrency, defaultBaseCurrency);
+            var expectedData = new
+            {
+                SumAmountUSD = FakeHelper.Create<decimal>(),
+                SumAmountEUR = FakeHelper.Create<decimal>(),
+                SumAmountGBP = FakeHelper.Create<decimal>(),
+                SumAmountBase = FakeHelper.Create<decimal>()
+            };
+            MapReaderData(expectedData);
+            Reader.Read().Returns(false, true);
+
+            // Action
+            var actual = DataAccess.GetData(metaModel, UserCurrencyList);
+            var item = actual.SummaryTotal;
+
+            // Assert
+            Assert.Multiple(() =>
+            {
+                Assert.That(item.Count, Is.EqualTo(SystemConstants.BaseCurrencyListOfSummaryTotalRow.Count));
+                Assert.That(item[defaultBaseCurrency.ToUpperInvariant()].Amount, Is.EqualTo(expectedData.SumAmountBase));
             });
         }
     }

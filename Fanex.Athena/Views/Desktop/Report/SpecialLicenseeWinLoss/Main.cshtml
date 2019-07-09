@@ -11,7 +11,7 @@
     {
         new { value = BaseCurrencyType.All, label = ViewResources.All, baseCurrency = string.Empty }
     })
-    .Union(Model.BaseCurrencyList.Select(x => new { value = x.Key, label = ViewResources.Based + " " + ViewResources.ResourceManager.GetString(x.Value), baseCurrency = x.Value.ToUpperInvariant() }))
+    .Union(Model.BaseCurrencyList.Select(x => new { value = x.Key, label = ViewResources.Based + " " + x.Value, baseCurrency = x.Value }))
     .Union(Model.CurrencyList.Select(x => new { value = x.Key, label = x.Value, baseCurrency = string.Empty }));
     
     var productOptions = Model.Param.ProductOptions;

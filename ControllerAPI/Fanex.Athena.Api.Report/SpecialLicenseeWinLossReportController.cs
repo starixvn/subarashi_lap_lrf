@@ -44,6 +44,7 @@
         }
 
         [HttpPost]
+        [ValidationApiRequest(IsValidCurrency = true)]
         public Task<dynamic> Index(SpecialLicenseeWinLossMetaModel metaModel)
         {
             return ProcessRequest(metaModel);
@@ -90,13 +91,13 @@
 
             if (IsValidParams(metaModel, setting))
             {
-                metaModel.BaseCurrencies = string.IsNullOrWhiteSpace(setting.BaseCurrencies)
-                    ? SystemConstants.BaseCurrencyList.ToArray()
-                    : setting.BaseCurrencies.Split(',').Intersect(SystemConstants.BaseCurrencyList).ToArray();
+                var userSession = SessionService.UserSession;
+                metaModel.BaseCurrencySetting = setting.BaseCurrencies;
                 metaModel.SiteName = _siteNameList[SessionService.LicenseeSession.LicenseeId];
                 metaModel.CurrencyListXml = GenerateCurrencyListXml(metaModel);
+                metaModel.DefaultBaseCurrency = userSession.DefaultBaseCurrency;
 
-                var result = await _licenseeWinLossDataAccess.GetData(metaModel, SessionService.UserSession.CurrencyList);
+                var result = await _licenseeWinLossDataAccess.GetData(metaModel, userSession.CurrencyList);
 
                 if (result.DataList.Any())
                 {
@@ -130,14 +131,8 @@
         protected internal virtual bool IsValidParams(SpecialLicenseeWinLossMetaModel metaModel, ReportSetting setting)
         {
             return IsValidDateRange(metaModel, setting) &&
-                IsValidProduct(metaModel) && 
-                IsValidCurrency(metaModel);
-        }
-
-        private bool IsValidCurrency(SpecialLicenseeWinLossMetaModel metaModel)
-        {
-            return metaModel.CurrencyId <= 0
-                || SessionService.UserSession.CurrencyList.ContainsKey(metaModel.CurrencyId);
+                IsValidProduct(metaModel);
+              
         }
 
         private bool IsValidProduct(SpecialLicenseeWinLossMetaModel metaModel)

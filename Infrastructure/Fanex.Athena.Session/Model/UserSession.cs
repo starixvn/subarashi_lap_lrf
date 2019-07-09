@@ -57,5 +57,6 @@ namespace Fanex.Athena.Session.Model
         public string DefaultReportUrl { get; set; }
 
         public AppMode ApplicationMode { get; set; }
+        public string DefaultBaseCurrency { get; set; } = string.Empty;
     }
 }

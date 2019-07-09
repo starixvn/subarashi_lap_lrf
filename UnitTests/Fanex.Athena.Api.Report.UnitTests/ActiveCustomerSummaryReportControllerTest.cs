@@ -51,54 +51,6 @@
         }
 
         [Test]
-        public async Task Index_InvalidRequest_ReturnEmptyData()
-        {
-            // Arrange
-            var model = new ActiveCustomerMetaModel
-            {
-                CurrencyId = 1,
-                ProductOptions = new List<ProductOption>()
-            };
-            StubUserSessionData(new UserSession
-            {
-                CurrencyList = new Dictionary<int, string>(),
-                ApplicationMode = AppMode.Self,
-                FunctionIdList = new int[0]
-            });
-            StubLicenseeSessionData(new LicenseeSession { LicenseeId = 0 });
-
-            // Action
-            var result = await _controller.Index(model);
-
-            // Assert
-            Assert.Multiple(() =>
-            {
-                Assert.IsEmpty(result.Data);
-                Assert.That(result.GrantTotalCustomer, Is.EqualTo(0));
-                Assert.That(result.ProductOptions, Is.EqualTo(model.ProductOptions.ToJson()));
-            });
-        }
-
-        [Test]
-        public async Task Index_InvalidModel_ReturnEmptyData()
-        {
-            // Arrange
-            var model = CreateValidMetaModel();
-            model.FromDate = model.ToDate.AddDays(1);
-
-            // Action
-            var result = await _controller.Index(model);
-
-            // Assert
-            Assert.Multiple(() =>
-            {
-                Assert.IsEmpty(result.Data);
-                Assert.That(result.GrantTotalCustomer, Is.EqualTo(0));
-                Assert.That(result.ProductOptions, Is.EqualTo(model.ProductOptions.ToJson()));
-            });
-        }
-
-        [Test]
         public async Task Index_NoDataReturnedFromDataAccess_ReturnEmptyData()
         {
             // Arrange

@@ -41,6 +41,7 @@
         }
 
         [HttpPost]
+        [ValidationApiRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
         public async Task<dynamic> Index(CustomerPendingFundsMetaModel metaModel)
         {
             var data = await GetData(metaModel).ConfigureAwait(false);
@@ -49,13 +50,15 @@
             {
                 Data = data.DataList,
                 Total = data.TotalData,
-                TotalRows = data.TotalRows
+                data.TotalRows
             };
         }
 
         [HttpPost]
+        [ValidationApiRequest]
         public async Task<HttpResponseMessage> ExportExcel(CustomerPendingFundsMetaModel metaModel)
         {
+           
             const string FileName = "CustomerPendingFunds.xls";
             const string TemplatePath = @"~/App_Data/Template/CustomerReports/CustomerPendingFunds.xls";
 
@@ -91,15 +94,6 @@
 
         private async Task<ReportResultModel<CustPendingFunds>> GetData(CustomerPendingFundsMetaModel metaModel)
         {
-            if (!metaModel.IsValid || !IsValidRequest(metaModel.CurrencyId))
-            {
-                return new ReportResultModel<CustPendingFunds>
-                {
-                    DataList = new List<CustPendingFunds>(),
-                    TotalData = new CustPendingFunds()
-                };
-            }
-
             metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
             return await _custPendingFundsDataAccess.GetDataList(metaModel).ConfigureAwait(false);
         }

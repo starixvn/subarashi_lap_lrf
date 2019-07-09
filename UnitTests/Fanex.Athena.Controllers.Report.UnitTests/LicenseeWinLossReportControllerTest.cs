@@ -57,7 +57,7 @@
         {
             // Arrange
             var reportSettingService = Substitute.For<IReportSettingService>();
-            reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss).Returns(new ReportSetting { BaseCurrencies = "USD,MYR", TimeZone = 8 });
+            reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss).Returns(new ReportSetting { BaseCurrencies = "USD,KKK", TimeZone = 8 });
 
             AppSettings.FakeLicenseeList.Returns(new[] { DefaultLicenseeSession.LicenseeId });
 
@@ -72,7 +72,7 @@
                 {
                     StringAssert.Contains("Report/SpecialLicenseeWinLoss/Main.cshtml", viewResult.ViewName);
                     Assert.That(viewModel.Param.ReportBy, Is.EqualTo(ReportByType.Daily));
-                    Assert.That(string.Join(",", viewModel.BaseCurrencyList.Values), Is.EqualTo("USD"));
+                    Assert.That(string.Join(",", viewModel.BaseCurrencyList.Values), Is.EqualTo("USD,EUR"));
                 });
             }
         }

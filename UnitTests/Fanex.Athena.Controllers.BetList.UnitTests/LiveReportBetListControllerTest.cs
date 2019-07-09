@@ -133,8 +133,12 @@
             }
         }
 
-        [Test]
-        public async Task Match_ExportExcel_InvalidCurrency_ReturnEmptyResult()
+        [TestCase(1,"USD", null, "USD")]
+        [TestCase(1,"USD", "eur", "EUR")]
+        [TestCase(0, "", "CNY", "CNY")]
+        public async Task Match_ExportExcel_PassCorrectParam(
+            int currencyId,
+            string currency, string baseCurrency, string expectedCurrency)
         {
             using (var controller = CreateController())
             {
@@ -142,30 +146,7 @@
                 var metaModel = new LiveReportBetListMetaModel
                 {
                     IsExportExcel = true,
-                    CurrencyId = -1000
-                };
-
-                controller.When(x => x.EmptyExcel()).DoNotCallBase();
-
-                // Action
-                await controller.Match(metaModel);
-
-                // Assert
-                controller.Received().EmptyExcel();
-            }
-        }
-
-        [TestCase("USD", null, "USD")]
-        [TestCase("USD", "eur", "EUR")]
-        public async Task Match_ExportExcel_PassCorrectParam(string currency, string baseCurrency, string expectedCurrency)
-        {
-            var controller = CreateController())
-            {
-                // Arrange
-                var metaModel = new LiveReportBetListMetaModel
-                {
-                    IsExportExcel = true,
-                    CurrencyId = 0,
+                    CurrencyId = currencyId,
                     CurrencyName = currency,
                     BaseCurrency = baseCurrency,
                     FromDate = new DateTime(2018, 11, 11),
@@ -194,9 +175,12 @@
             }
         }
 
-        [TestCase("USD", null, "USD")]
-        [TestCase("USD", "eur", "EUR")]
-        public async Task MixParlay_ExportExcel_PassCorrectParam(string currency, string baseCurrency, string expectedCurrency)
+
+        [TestCase(1, "USD", null, "USD")]
+        [TestCase(1, "USD", "eur", "EUR")]
+        public async Task MixParlay_ExportExcel_PassCorrectParam(
+            int currencyId,
+            string currency, string baseCurrency, string expectedCurrency)
         {
             using (var controller = CreateController())
             {
@@ -204,7 +188,7 @@
                 var metaModel = new LiveReportBetListMetaModel
                 {
                     IsExportExcel = true,
-                    CurrencyId = 0,
+                    CurrencyId = currencyId,
                     CurrencyName = currency,
                     BaseCurrency = baseCurrency,
                     FromDate = new DateTime(2018, 11, 11),
@@ -230,9 +214,11 @@
             }
         }
 
-        [TestCase("USD", null, "USD")]
-        [TestCase("USD", "eur", "EUR")]
-        public async Task Outright_ExportExcel_PassCorrectParam(string currency, string baseCurrency, string expectedCurrency)
+        [TestCase(1,"USD", null, "USD")]
+        [TestCase(1,"USD", "eur", "EUR")]
+        public async Task Outright_ExportExcel_PassCorrectParam(
+            int currencyId,
+            string currency, string baseCurrency, string expectedCurrency)
         {
             using (var controller = CreateController())
             {
@@ -240,7 +226,7 @@
                 var metaModel = new LiveReportBetListMetaModel
                 {
                     IsExportExcel = true,
-                    CurrencyId = 0,
+                    CurrencyId = currencyId,
                     CurrencyName = currency,
                     BaseCurrency = baseCurrency,
                     FromDate = new DateTime(2018, 11, 11),
@@ -264,9 +250,13 @@
             }
         }
 
-        [TestCase("USD", null, "USD")]
-        [TestCase("USD", "eur", "EUR")]
-        public async Task NumberGame_ExportExcel_PassCorrectParam(string currency, string baseCurrency, string expectedCurrency)
+
+        [TestCase(1, "USD", null, "USD")]
+        [TestCase(1, "USD", "eur", "EUR")]
+        [TestCase(0, "", "CNY", "CNY")]
+        public async Task NumberGame_ExportExcel_PassCorrectParam(
+            int currencyId,
+            string currency, string baseCurrency, string expectedCurrency)
         {
             using (var controller = CreateController())
             {
@@ -274,7 +264,7 @@
                 var metaModel = new LiveReportBetListMetaModel
                 {
                     IsExportExcel = true,
-                    CurrencyId = 0,
+                    CurrencyId = currencyId,
                     CurrencyName = currency,
                     BaseCurrency = baseCurrency,
                     FromDate = new DateTime(2018, 11, 11),
@@ -298,9 +288,13 @@
             }
         }
 
-        [TestCase("USD", null, "USD")]
-        [TestCase("USD", "eur", "EUR")]
-        public async Task VirtualSports_ExportExcel_PassCorrectParam(string currency, string baseCurrency, string expectedCurrency)
+
+        [TestCase(1, "USD", null, "USD")]
+        [TestCase(1, "USD", "eur", "EUR")]
+        [TestCase(0, "", "CNY", "CNY")]
+        public async Task VirtualSports_ExportExcel_PassCorrectParam(
+            int currencyId,
+            string currency, string baseCurrency, string expectedCurrency)
         {
             using (var controller = CreateController())
             {
@@ -308,7 +302,7 @@
                 var metaModel = new LiveReportBetListMetaModel
                 {
                     IsExportExcel = true,
-                    CurrencyId = 0,
+                    CurrencyId = currencyId,
                     CurrencyName = currency,
                     BaseCurrency = baseCurrency,
                     FromDate = new DateTime(2018, 11, 11),

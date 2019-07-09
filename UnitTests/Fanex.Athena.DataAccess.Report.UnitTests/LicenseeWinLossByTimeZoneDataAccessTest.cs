@@ -1,7 +1,6 @@
 ﻿namespace Fanex.Athena.DataAccess.Report.UnitTests
 {
     using System;
-    using System.Data;
     using System.Linq;
     using System.Threading.Tasks;
     using Core.Configuration.Interfaces;
@@ -13,6 +12,7 @@
     using NSubstitute;
     using NUnit.Framework;
     using Resources;
+    using UnitTest.Common.Helpers;
 
     [TestFixture]
     public class LicenseeWinLossByTimeZoneDataAccessTest : BaseDataAccessHelperTest<LicenseeWinLossByTimeZoneDataAccess>
@@ -56,21 +56,24 @@
         }
 
         [Test]
-        public async Task GetData_WhenCall_ReturnCorrectData()
+        public async Task GetData_ConvertAll_ReturnCorrectData()
         {
             // Arrange
             var metaModel = GetDefaultMetaModel();
 
+            Reader.Read().Returns(true, false);
+            Reader["GroupBy"].Returns(CurrencyId.ToString());
+            Reader["BetCount"].Returns(1);
+
             var expectedData = new LicenseeWinLossByTimeZone
             {
-                GroupBy = CurrencyId.ToString(),
                 BetCount = 1,
                 Turnover = 2,
                 CustomerComm = 3,
                 LicenseeWinLoss = 4,
                 LicenseeComm = 5
             };
-            MapReaderData(expectedData, metaModel.BaseCurrency);
+            MapBaseCurrencyReaderData(expectedData);
 
             // Action
             var result = await DataAccess.GetData(metaModel, UserCurrencyList);
@@ -91,8 +94,10 @@
         {
             // Arrange
             var metaModel = GetDefaultMetaModel();
-            metaModel.BaseCurrency = "BASE";
+            metaModel.BaseCurrency = "AAA";
             metaModel.IsConvertAll = false;
+
+            Reader.Read().Returns(true, false);
 
             var expectedData = new LicenseeWinLossByTimeZone
             {
@@ -103,7 +108,7 @@
                 LicenseeWinLoss = 4,
                 LicenseeComm = 5
             };
-            MapReaderData(expectedData, string.Empty);
+            MapReaderData(expectedData);
 
             var expectedBaseData = new LicenseeWinLossByTimeZone
             {
@@ -114,7 +119,7 @@
                 LicenseeWinLoss = 40,
                 LicenseeComm = 50
             };
-            MapReaderData(expectedBaseData, metaModel.BaseCurrency);
+            MapBaseCurrencyReaderData(expectedBaseData);
 
             // Action
             var result = await DataAccess.GetData(metaModel, UserCurrencyList);
@@ -139,12 +144,16 @@
 
             const string ReportBy = "20170102";
             Reader["reportby"].Returns(ReportBy);
+            Reader.Read().Returns(true, false);
 
             var data = new LicenseeWinLossByTimeZone
             {
                 GroupBy = CurrencyId.ToString(),
             };
-            MapReaderData(data, string.Empty);
+            MapReaderData(data);
+
+            var baseData = FakeHelper.Create<LicenseeWinLossByTimeZone>();
+            MapBaseCurrencyReaderData(baseData);
 
             var expected = new DateTime(2017, 1, 1);
 
@@ -163,11 +172,15 @@
             var metaModel = GetDefaultMetaModel();
             metaModel.GroupBy = GroupByProduct;
 
+            Reader.Read().Returns(true, false);
             var data = new LicenseeWinLossByTimeZone
             {
                 GroupBy = Product.BA,
             };
-            MapReaderData(data, string.Empty);
+            MapReaderData(data);
+
+            var baseData = FakeHelper.Create<LicenseeWinLossByTimeZone>();
+            MapBaseCurrencyReaderData(baseData);
 
             // Action
             var result = await DataAccess.GetData(metaModel, UserCurrencyList);
@@ -216,16 +229,22 @@
             ObjectDb.Received(1).SetParameterValue("IncludeDraw", metaModel.IsIncludeDrawData);
         }
 
-        private void MapReaderData(LicenseeWinLossByTimeZone data, string baseCurrency)
+        private void MapBaseCurrencyReaderData(LicenseeWinLossByTimeZone data)
         {
-            Reader.Read().Returns(true, false);
+            Reader["TurnoverBase"].Returns(data.Turnover);
+            Reader["PlayerCommBase"].Returns(data.CustomerComm);
+            Reader["LicenseeWLBase"].Returns(data.LicenseeWinLoss);
+            Reader["LicenseeCommBase"].Returns(data.LicenseeComm);
+        }
 
-            Reader["GroupBy" + baseCurrency].Returns(data.GroupBy);
-            Reader["BetCount" + baseCurrency].Returns(data.BetCount);
-            Reader["Turnover" + baseCurrency].Returns(data.Turnover);
-            Reader["PlayerComm" + baseCurrency].Returns(data.CustomerComm);
-            Reader["LicenseeWL" + baseCurrency].Returns(data.LicenseeWinLoss);
-            Reader["LicenseeComm" + baseCurrency].Returns(data.LicenseeComm);
+        private void MapReaderData(LicenseeWinLossByTimeZone data)
+        {
+            Reader["GroupBy"].Returns(data.GroupBy);
+            Reader["BetCount"].Returns(data.BetCount);
+            Reader["Turnover"].Returns(data.Turnover);
+            Reader["PlayerComm"].Returns(data.CustomerComm);
+            Reader["LicenseeWL"].Returns(data.LicenseeWinLoss);
+            Reader["LicenseeComm"].Returns(data.LicenseeComm);
         }
     }
 }

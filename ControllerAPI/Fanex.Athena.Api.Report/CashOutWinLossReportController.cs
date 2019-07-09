@@ -19,6 +19,7 @@ namespace Fanex.Athena.Api.Report
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
+    using Fanex.Athena.Service.Core.Utility.Interfaces;
     using Model.Core.DataDomain;
     using Model.Core.ResultModel;
     using Resources;
@@ -29,18 +30,22 @@ namespace Fanex.Athena.Api.Report
     public class CashOutWinLossReportController : ApiReportBaseController
     {
         private readonly ICashOutWinLossDataAccess _cashOutWinLossDataAccess;
-
+        private readonly ICurrencyValidation _currencyValidation;
         public CashOutWinLossReportController(
             ICashOutWinLossDataAccess cashOutWinLossDataAccess,
             ISessionService sessionService,
             IProductService productService,
-            ILanguageService langService)
+            ILanguageService langService,
+            ICurrencyValidation currencyValidation
+            )
             : base(sessionService, productService, langService)
         {
             _cashOutWinLossDataAccess = cashOutWinLossDataAccess;
+            _currencyValidation = currencyValidation;
         }
 
         [HttpPost]
+        [ValidationApiRequest(ObjectName = "metaModel", IsValidCurrency = true, IsIncludeKeanOcean = true)]
         public Task<dynamic> Index(
             ThirdPartyWinLossMetaModel metaModel,
             DateTime? fdate,
@@ -53,6 +58,7 @@ namespace Fanex.Athena.Api.Report
         }
 
         [HttpPost]
+        [ValidationApiRequest(ObjectName = "metaModel", IsValidCurrency = true, IsIncludeKeanOcean = true)]
         public Task<dynamic> Index([FromBody] ThirdPartyWinLossMetaModel metaModel)
         {
             return ProcessRequest(metaModel, null, null);
@@ -98,7 +104,7 @@ namespace Fanex.Athena.Api.Report
                                     ? metaModel.DrillDownCurrencyId
                                     : metaModel.CurrencyId;
 
-            if (metaModel.DrillDownLevel > 0 && metaModel.CurrencyId <= 0)
+            if (metaModel.DrillDownLevel > 0)
             {
                 metaModel.FromDate = metaModel.DrillDownFromDate;
                 metaModel.ToDate = metaModel.DrillDownToDate;
@@ -128,7 +134,7 @@ namespace Fanex.Athena.Api.Report
             int currencyId = 0,
             int custId = 0)
         {
-            if (!IsValidRequest(metaModel.CurrencyId, currencyId))
+            if (!_currencyValidation.IsValidCurrency(currencyId, true))
             {
                 return GetEmptyResult();
             }
@@ -147,7 +153,7 @@ namespace Fanex.Athena.Api.Report
                 {
                     Data = result.DataList,
                     Total = result.TotalDataList,
-                    SummaryTotal = result.SummaryTotal
+                    result.SummaryTotal
                 };
             }
 
@@ -165,9 +171,10 @@ namespace Fanex.Athena.Api.Report
             metaModel.DrillDownCurrencyId = currencyId;
             metaModel.DrillDownLevel = level;
             metaModel.DrillDownCustomerId = custId;
-            metaModel.DrillDownFromDate = fdate.HasValue ? fdate.Value : metaModel.DrillDownFromDate;
-            metaModel.DrillDownToDate = tdate.HasValue ? tdate.Value : metaModel.DrillDownToDate;
+            metaModel.DrillDownFromDate = fdate ?? metaModel.DrillDownFromDate;
+            metaModel.DrillDownToDate = tdate ?? metaModel.DrillDownToDate;
             metaModel.AgentListXml = SessionService.GenerateAgentListXml(level > 0 ? currencyId : metaModel.CurrencyId, metaModel.IsExcludedTestData);
+            metaModel.DefaultBaseCurrency = SessionService.UserSession.DefaultBaseCurrency;
         }
 
         private async Task<SortableReportResultModel<CashOutWinLoss>> GetData(ThirdPartyWinLossMetaModel metaModel)

@@ -35,13 +35,15 @@
         }
 
         [HttpPost]
+        [ValidationApiRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
         public async Task<dynamic> Index(ExchangeWinLossMetaModel metaModel)
         {
             var currencyList = SessionService.UserSession.CurrencyList;
-            if (metaModel.IsValid && IsValidParams(metaModel) && IsValidRequest(metaModel.CurrencyId))
+            if (IsValidParams(metaModel))
             {
                 metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId, metaModel.ExcludeTestData);
                 metaModel.LicenseeId = SessionService.LicenseeSession.LicenseeId;
+                metaModel.DefaultBaseCurrency = SessionService.UserSession.DefaultBaseCurrency;
                 if (metaModel.Level == (int)ReportLevel.Main)
                 {
                     return await _dataAccess.GetMainWinloss(metaModel, currencyList).ConfigureAwait(false);

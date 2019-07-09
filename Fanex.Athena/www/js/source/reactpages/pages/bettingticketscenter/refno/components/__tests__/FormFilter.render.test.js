@@ -15,7 +15,7 @@ jest.mock('@jsroot/lib/AppData');
 describe('FormFilter ', () => {
     beforeAll(() => {
         LangHelper.getSingleResource = jest.fn((resource) => resource);
-        Object.assign(AppData, { baseCurrencyList: ['EUR'] });
+        Object.assign(AppData, { baseCurrencyList: [{value: 'EUR', label: 'EUR'}, {value: 'USD', label: 'USD'}] });
     });
 
     describe('isValidModel ', () => {

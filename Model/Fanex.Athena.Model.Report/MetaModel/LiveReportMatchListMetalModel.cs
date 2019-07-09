@@ -6,14 +6,17 @@
 
 namespace Fanex.Athena.Model.Report.MetaModel
 {
+    using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Model.Core.MetaModel;
     using System;
     using System.ComponentModel.DataAnnotations;
+    using System.Linq;
 
     /// <summary>
     /// LiveReportMatchListMetalModel class.
     /// </summary>
     [Serializable]
-    public class LiveReportMatchListMetalModel : BaseReportMetaModel
+    public class LiveReportMatchListMetalModel : BaseReportMetaModel, IMetaModelValidation
     {
         [Required]
         public int SportId { get; set; }
@@ -26,7 +29,10 @@ namespace Fanex.Athena.Model.Report.MetaModel
         {
             get
             {
-                return FromDate <= ToDate;
+                return FromDate <= ToDate
+                    && (string.IsNullOrEmpty(BaseCurrency) || SystemConstants.BaseCurrencyList
+           .Any(x => x.Value.Equals(BaseCurrency, StringComparison.OrdinalIgnoreCase)));
+
             }
         }
     }

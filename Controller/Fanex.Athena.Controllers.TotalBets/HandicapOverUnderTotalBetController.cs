@@ -38,16 +38,16 @@ namespace Fanex.Athena.Controllers.TotalBets
         {
             var param = new HandicapOverUnderMetaModel
             {
-                LicenseeId = SessionService.LicenseeSession.LicenseeId
+                LicenseeId = SessionService.LicenseeSession.LicenseeId,
+                BaseCurrency = SessionService.UserSession.DefaultBaseCurrency
             };
-
-            SetConvetedUSDCurrencyName(param);
 
             return await this.GetView(param).ConfigureAwait(false);
         }
 
         [HttpPost]
         [CustomValidateAntiForgery]
+        [ValidationWebRequest(IsValidCurrency = true)]
         public async Task<ActionResult> Index(HandicapOverUnderMetaModel metaModel)
         {
             metaModel.LicenseeId = SessionService.LicenseeSession.LicenseeId;
@@ -60,27 +60,23 @@ namespace Fanex.Athena.Controllers.TotalBets
             var licenseeSession = SessionService.LicenseeSession;
             var currencies = userSession.CurrencyList;
 
-            if (metaModel.CurrencyId == 0 || currencies.ContainsKey(metaModel.CurrencyId))
+            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
+            var result = await _handicapOverUnderDataAccess.GetHandicapOverUnderDataList(metaModel).ConfigureAwait(false);
+
+            var model = new HandicapOverUnderViewModel
             {
-                metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
-                var result = await _handicapOverUnderDataAccess.GetHandicapOverUnderDataList(metaModel).ConfigureAwait(false);
+                Param = metaModel,
+                MainData = result.DataList.ToList(),
+                CurrencyList = currencies,
+                TotalData = result.TotalData
+            };
 
-                var model = new HandicapOverUnderViewModel
-                {
-                    Param = metaModel,
-                    MainData = result.DataList.ToList(),
-                    CurrencyList = currencies,
-                    TotalData = result.TotalData
-                };
+            ViewBag.LicenseeView = AppSettings.LicenseeOfferNewForecast.Contains(licenseeSession.LicenseeId) ?
+                "ContentDataBodog.cshtml" :
+                "ContentData.cshtml";
 
-                ViewBag.LicenseeView = AppSettings.LicenseeOfferNewForecast.Contains(licenseeSession.LicenseeId) ?
-                    "ContentDataBodog.cshtml" :
-                    "ContentData.cshtml";
+            return View("~/Views/Desktop/TotalBets/HandicapOverUnder/Main.cshtml", model);
 
-                return View("~/Views/Desktop/TotalBets/HandicapOverUnder/Main.cshtml", model);
-            }
-
-            return Redirect("~/Utility/AccessDenied");
         }
     }
 }

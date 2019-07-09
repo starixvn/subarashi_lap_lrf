@@ -12,6 +12,7 @@
     using Extension.Utility;
     using Fanex.Athena.Api.Base.Attributes;
     using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Resources;
     using Model.Core.ResultModel;
     using Model.Report.DTO;
     using Model.Report.MetaModel;
@@ -38,10 +39,12 @@
         }
 
         [HttpPost]
+        [ValidationApiRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
         public async Task<dynamic> Index(CustomerWinLossMetaModel metaModel)
         {
-            return metaModel.IsExportExcel ? 
-                await ExportExcel(metaModel).ConfigureAwait(false) : 
+
+            return metaModel.IsExportExcel ?
+                await ExportExcel(metaModel).ConfigureAwait(false) :
                 await ProcessRequest(metaModel).ConfigureAwait(false);
         }
 
@@ -58,7 +61,7 @@
             {
                 Data = result.DataList,
                 Total = result.TotalData,
-                TotalRows = result.TotalRows,
+                result.TotalRows,
                 PromotionPrize = result.AdditionalInfo
             };
         }
@@ -72,8 +75,8 @@
 
             var licenseeSession = SessionService.LicenseeSession;
             var productAccess = ProductService.GetSingleWalletProductAccess(
-                licenseeSession.LicenseeId, 
-                SessionService.UserSession.Language, 
+                licenseeSession.LicenseeId,
+                SessionService.UserSession.Language,
                 FunctionNames.CustomerBalance);
 
             var convertingOption = new ConvertingOption
@@ -103,19 +106,9 @@
 
         private async Task<ReportResultModel<CustomerWinLoss>> GetData(CustomerWinLossMetaModel metaModel)
         {
-            if (!metaModel.IsValid || !IsValidRequest(metaModel.CurrencyId))
-            {
-                return new ReportResultModel<CustomerWinLoss>
-                {
-                    TotalData = new CustomerWinLoss(),
-                    DataList = new SortableList<CustomerWinLoss>()
-                };
-            }
-
-            CheckValidProducts(FunctionNames.CustomerWinLoss, metaModel);
-
             metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId, metaModel.IsExcludedTestData);
             return await _custWinlossDataAccess.GetDataList(metaModel).ConfigureAwait(false);
+
         }
     }
 }

@@ -7,7 +7,7 @@
 namespace Fanex.Athena.Controllers.Report
 {
     using System;
-    using System.Threading.Tasks;
+    using System.Linq;
     using System.Web.Mvc;
     using Extension.Utility;
     using Fanex.Athena.Model.Core.DataDomain;
@@ -46,10 +46,12 @@ namespace Fanex.Athena.Controllers.Report
                 IsExcludedTestData = true,
                 DrawFilter = DrawFilterType.Normal,
                 ReportBy = ReportByType.Daily,
-                ProductOptions = ToProductOptions(productAccess.ProductList)
+                ProductOptions = ToProductOptions(productAccess.ProductList),
+                BaseCurrency = userSession.DefaultBaseCurrency,
+                CurrencyId = SystemConstants.BaseCurrencyList
+                .FirstOrDefault(x => x.Value.Equals(userSession.DefaultBaseCurrency, StringComparison.OrdinalIgnoreCase))
+                .Key
             };
-            
-            SetConvetedUSDCurrencyId(metaModel);
 
             var model = new WinLossByProductViewModel
             {
@@ -61,7 +63,7 @@ namespace Fanex.Athena.Controllers.Report
                 IsFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeId),
                 HasAmountDueToColumn = AppSettings.HasAmountDueToColumn
             };
-            
+
             return View("~/Views/Desktop/Report/WinLossByProduct/Main.cshtml", model);
         }
     }

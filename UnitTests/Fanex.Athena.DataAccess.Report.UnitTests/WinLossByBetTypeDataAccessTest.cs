@@ -57,7 +57,8 @@
                 FromDate = metaModel.FromDate,
                 ToDate = metaModel.ToDate,
                 MoveBetsDay = _balanceUp.MoveBetsDay,
-                BalanceUpDay = _balanceUp.BalanceUpDay
+                BalanceUpDay = _balanceUp.BalanceUpDay,
+                BaseCurrency = metaModel.BaseCurrency
             };
             dynamic uspParam = null;
             ObjectDb.ExecuteReaderAsync(Arg.Do<dynamic>(arg => uspParam = arg));
@@ -74,7 +75,7 @@
         {
             // Arrange
             Reader.Read().Returns(true, false);
-            MapReaderData(new { TurnoverUSD = 999 });
+            MapReaderData(new { Turnover = 999 });
 
             // Action
             var result = await DataAccess.GetDataList(new WinLossByBetTypeMetaModel

@@ -61,7 +61,7 @@ namespace Fanex.Athena.DataAccess.Report
                     result = GetData(reader, currencyList, metaModel);
                 }
 
-                result.TotalRows = (int)db.GetParameterValue("TotalRows");
+                result.TotalRows = Convert.ToInt32(db.GetParameterValue("TotalRows"));
 
                 return result;
             }
@@ -81,18 +81,22 @@ namespace Fanex.Athena.DataAccess.Report
             }
         }
 
-        private static void ReadSummaryTotal(IDataReader reader, Dictionary<string, AgCasinoBalance> summaryTotal)
+        private static void ReadSummaryTotal(IDataReader reader, IDictionary<string, AgCasinoBalance> summaryTotal, string defaultBaseCurrency)
         {
-            foreach (var currencySuffix in SystemConstants.BaseCurrencyList)
+            foreach (var summary in summaryTotal)
             {
-                summaryTotal[currencySuffix].CustomerWinLoss += reader.ToDecimal("winlost" + currencySuffix);
-                summaryTotal[currencySuffix].TotalTransaction += reader.ToInt("totaltrans");
-                summaryTotal[currencySuffix].LicenseeWL += reader.ToDecimal("licenseewinlost" + currencySuffix);
-                summaryTotal[currencySuffix].TurnOver += reader.ToDecimal("turnover" + currencySuffix);
-                summaryTotal[currencySuffix].OpeningBalance += reader.ToDecimal("OpeningBalance" + currencySuffix);
-                summaryTotal[currencySuffix].TransferIn += reader.ToDecimal("TransferIn" + currencySuffix);
-                summaryTotal[currencySuffix].TransferOut += reader.ToDecimal("TransferOut" + currencySuffix);
-                summaryTotal[currencySuffix].ClosingBalance += reader.ToDecimal("ClosingBalance" + currencySuffix);
+                var suffixColumn = !string.IsNullOrEmpty(defaultBaseCurrency) && summary.Key.Equals(defaultBaseCurrency, StringComparison.OrdinalIgnoreCase)
+                                     ? "Base"
+                                     : summary.Key;
+
+                summary.Value.CustomerWinLoss += reader.ToDecimal("winlost" + suffixColumn);
+                summary.Value.TotalTransaction += reader.ToInt("totaltrans");
+                summary.Value.LicenseeWL += reader.ToDecimal("licenseewinlost" + suffixColumn);
+                summary.Value.TurnOver += reader.ToDecimal("turnover" + suffixColumn);
+                summary.Value.OpeningBalance += reader.ToDecimal("OpeningBalance" + suffixColumn);
+                summary.Value.TransferIn += reader.ToDecimal("TransferIn" + suffixColumn);
+                summary.Value.TransferOut += reader.ToDecimal("TransferOut" + suffixColumn);
+                summary.Value.ClosingBalance += reader.ToDecimal("ClosingBalance" + suffixColumn);
             }
         }
 
@@ -101,6 +105,8 @@ namespace Fanex.Athena.DataAccess.Report
             db.SetParameterValue("AgentList", metaModel.AgentListXml);
             db.SetParameterValue("fromdate", drilldown ? metaModel.DrillDownFromDate : metaModel.FromDate.Date);
             db.SetParameterValue("todate", drilldown ? metaModel.DrillDownToDate : metaModel.ToDate.Date);
+            db.SetParameterValue("BaseCurrency", metaModel.BaseCurrency);
+            db.SetParameterValue("DefaultBaseCurrency", metaModel.DefaultBaseCurrency);
         }
 
         private SortableReportResultModel<AgCasinoBalance> GetData(
@@ -110,15 +116,7 @@ namespace Fanex.Athena.DataAccess.Report
         {
             var dataList = new SortableList<AgCasinoBalance>();
 
-            var summaryTotal = SystemConstants.BaseCurrencyList.ToDictionary(x => x, x => new AgCasinoBalance());
-
-            var winlostColumn = "winlost" + metaModel.BaseCurrency;
-            var licenseewlColumn = "licenseewinlost" + metaModel.BaseCurrency;
-            var turnoverColumn = "turnover" + metaModel.BaseCurrency;
-            var openingBalanceColumn = "OpeningBalance" + metaModel.BaseCurrency;
-            var transferInColumn = "TransferIn" + metaModel.BaseCurrency;
-            var transferOutColumn = "TransferOut" + metaModel.BaseCurrency;
-            var closingBalanceColumn = "ClosingBalance" + metaModel.BaseCurrency;
+            var summaryTotal = InitSummaryTotalList(metaModel.DefaultBaseCurrency, () => new AgCasinoBalance());
 
             var hasSystemIdColumn = reader.HasColumn("username");
             var hasExternalIdColumn = reader.HasColumn("nickname");
@@ -136,19 +134,19 @@ namespace Fanex.Athena.DataAccess.Report
                     CustomerId = hasCustomerIdColumn ? reader.ToInt("custid") : 0,
                     CurrencyId = currencyId,
                     CurrencyName = currencyList?.GetValueOrDefault(currencyId, currencyId.ToString()),
-                    CustomerWinLoss = reader.ToDecimal(winlostColumn),
-                    LicenseeWL = reader.ToDecimal(licenseewlColumn),
-                    TurnOver = reader.ToDecimal(turnoverColumn),
+                    CustomerWinLoss = reader.ToDecimal("winlost"),
+                    LicenseeWL = reader.ToDecimal("licenseewinlost"),
+                    TurnOver = reader.ToDecimal("turnover"),
                     TotalTransaction = reader.ToInt("totaltrans"),
                     Date = hasWinlostDateColumn ? (DateTime?)reader.ToDateTime("date") : metaModel.DrillDownFromDate,
-                    OpeningBalance = reader.ToDecimal(openingBalanceColumn),
-                    TransferIn = reader.ToDecimal(transferInColumn),
-                    TransferOut = reader.ToDecimal(transferOutColumn),
-                    ClosingBalance = reader.ToDecimal(closingBalanceColumn),
+                    OpeningBalance = reader.ToDecimal("OpeningBalance"),
+                    TransferIn = reader.ToDecimal("TransferIn"),
+                    TransferOut = reader.ToDecimal("TransferOut"),
+                    ClosingBalance = reader.ToDecimal("ClosingBalance"),
                 };
 
                 dataList.Add(item);
-                ReadSummaryTotal(reader, summaryTotal);
+                ReadSummaryTotal(reader, summaryTotal, metaModel.DefaultBaseCurrency);
             }
 
             return new SortableReportResultModel<AgCasinoBalance>

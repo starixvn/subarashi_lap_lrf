@@ -108,33 +108,6 @@ describe('FormFilter ', () => {
             })
         })
 
-        describe('IsConvertAll checkbox fired click event - props.changeIsConvertAll should be called with correct parameter', () => {
-            const findCheckBoxElement = (children) => {
-                for(let i = 0; i < children.length; i++){
-                    const child = children[i];
-
-                    if(child.props && child.props.id === "IsConvertAll"){
-                        return child;
-                    }
-
-                    if(child.children && child.children.length){
-                        const result = findCheckBoxElement(child.children);
-
-                        if(result){
-                            return result;
-                        }
-                    }
-                }
-
-                return null;
-            }
-            const formFilter = renderer.create(<FormFilter {...formFilterPropsForEventHandler} />).toJSON();
-            const checkBox = findCheckBoxElement(formFilter.children);
-
-            checkBox.props.onChange();
-            expect(formFilterPropsForEventHandler.changeIsConvertAll).toHaveBeenCalledWith(!checkBox.props.checked);
-        })
-
         describe('isValidModel', () => {
             it('selectedProduct is not empty - return true', () => {
                 const formFilter = new FormFilter(formFilterPropsForEventHandler);

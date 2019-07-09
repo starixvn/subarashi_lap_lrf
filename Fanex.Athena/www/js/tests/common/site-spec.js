@@ -666,5 +666,33 @@
                 expect(result).toBe(true);
             });
         });
+
+        describe("getBaseCurrencyName(currencyId)", function () {
+            it("invalid currencyId - returns empty", function () {
+                var result = Site.getBaseCurrencyName(0);
+
+                expect(result).toBe('');
+            });
+
+            it("returns correct name", function () {
+                var result = Site.getBaseCurrencyName("-1");
+
+                expect(result).toBe("eur");
+            });
+        });
+
+        describe("isBaseCurrency(currencyId)", function () {
+            it("invalid base currency - returns false", function () {
+                var result = Site.isBaseCurrency("aaa");
+
+                expect(result).toBe(false);
+            });
+
+            it("valid base currency - returns true", function () {
+                var result = Site.isBaseCurrency("USD");
+
+                expect(result).toBe(true);
+            });
+        });
     });
 });

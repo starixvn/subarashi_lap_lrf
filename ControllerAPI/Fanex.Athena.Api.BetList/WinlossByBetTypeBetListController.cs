@@ -1,6 +1,7 @@
 ﻿namespace Fanex.Athena.Api.BetList
 {
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Http;
     using Base.Attributes;
@@ -15,15 +16,19 @@
     [ApiFunctionAuthorization(PermissionKeys.ReportWinLossByBetType)]
     public class WinlossByBetTypeBetListController : ApiBetListBaseController
     {
+        private readonly ICurrencyValidation _currencyValidation;
         public WinlossByBetTypeBetListController(
             ISessionService sessionService,
             IProductService productService,
             ILanguageService languageService,
             IAuthorizationService authorizationService,
             IBetListApiClient betListApiClient,
-            IBalanceUpDataAccess balanceUpDataAccess)
+            IBalanceUpDataAccess balanceUpDataAccess,
+             ICurrencyValidation currencyValidation
+            )
         : base(sessionService, productService, languageService, authorizationService, betListApiClient, balanceUpDataAccess)
         {
+            _currencyValidation = currencyValidation;
         }
 
         [HttpGet]
@@ -41,7 +46,8 @@
             string sortOrder = null)
 #pragma warning restore S107 // Methods should not have too many parameters
         {
-            if (!IsValidCurrencyId(currencyId))
+            if (!_currencyValidation.IsValidBaseCurrency(baseCurrency)
+                || !_currencyValidation.IsValidCurrency(currencyId))
             {
                 return null;
             }

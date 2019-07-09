@@ -34,14 +34,16 @@ namespace Fanex.Athena.Controllers.Report
             var licenseeSession = SessionService.LicenseeSession;
             var userSession = SessionService.UserSession;
             var licenseeId = licenseeSession.LicenseeId;
-            var metaModel = new PlatformWinLossMetaModel { LicenseeId = licenseeId };
+            var metaModel = new PlatformWinLossMetaModel
+            {
+                LicenseeId = licenseeId,
+                BaseCurrency = userSession.DefaultBaseCurrency,
+
+            };
             var productAccess = ProductService.GetSingleWalletProductAccess(
                 licenseeId,
                 userSession.Language,
                 FunctionNames.PlatformWinloss);
-
-            SetConvetedUSDCurrencyId(metaModel);
-            SetConvetedUSDCurrencyName(metaModel);
 
             metaModel.ProductOptions = ToProductOptions(productAccess.ProductList);
 
@@ -50,7 +52,7 @@ namespace Fanex.Athena.Controllers.Report
                 Param = metaModel,
                 CurrencyList = userSession.CurrencyList,
                 ProductAccess = productAccess,
-                IsAllowedCustomerCommission = licenseeSession.IsAllowedCustomerComm
+                IsAllowedCustomerCommission = licenseeSession.IsAllowedCustomerComm,
             };
 
             return View("~/Views/Desktop/Report/PlatformWinLoss/Main.cshtml", model);

@@ -5,6 +5,8 @@
     using System.Net.Http;
     using System.Text;
     using System.Threading.Tasks;
+    using System.Web.Http.Results;
+    using Fanex.Athena.Resources;
     using Model.BetList.MetaModel;
     using Model.Core.DTO.Configuration;
     using Newtonsoft.Json;
@@ -30,27 +32,6 @@
             AuthorizationService.HasPermissionOnData(SessionLicenseeId, Arg.Any<int>(), Arg.Any<long>()).Returns(true);
         }
 
-        [TestCase(-100)]
-        [TestCase(100)]
-        public async Task Index_InvalidCurrencyId_ReturnNull(int currencyId)
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var expect = new HttpResponseMessage();
-                var metaModel = new BetListMetaModel
-                {
-                    CurrencyId = currencyId
-                };
-                StubUserSessionData(new UserSession { CurrencyList = new Dictionary<int, string>() });
-
-                // Action
-                var actual = await controller.Index(metaModel);
-
-                // Assert
-                Assert.That(actual, Is.Null);
-            }
-        }
 
         [TestCase(0, "01/01/2018", "01/02/2018", UspKeyOld)]
         [TestCase(1, "01/03/2018", "01/02/2018", UspKey)]

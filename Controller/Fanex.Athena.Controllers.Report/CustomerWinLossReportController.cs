@@ -52,10 +52,12 @@ namespace Fanex.Athena.Controllers.Report
             var metaModel = new CustomerWinLossMetaModel
             {
                 IsExcludedTestData = true,
-                FromDate = isHistory ? new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1) : DateTime.Today
+                FromDate = isHistory ? new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1)
+                : DateTime.Today,
+                BaseCurrency = userSession.DefaultBaseCurrency
+
             };
 
-            SetConvetedUSDCurrencyName(metaModel);
             var productAccess = ProductService.GetSingleWalletProductAccess(
                 licenseeSession.LicenseeId,
                 userSession.Language,

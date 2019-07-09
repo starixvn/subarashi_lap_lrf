@@ -9,6 +9,7 @@
     using Core.Utility.Interfaces;
     using DataAccess.Core.Users.Interfaces;
     using Extension.Utility.Interfaces;
+    using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Service.Core.Users;
     using Fanex.Logging;
     using Model.Core.DataDomain;
@@ -33,6 +34,7 @@
         private IOneBookSecurityWrapper _oneBookSecurityWrapper;
         private ILogger _logger;
         private IOneAuthDataAccess _oneAuthDataAccess;
+        private IAppSettings _appSettings;
 
         [SetUp]
         public void SetUp()
@@ -44,13 +46,15 @@
             _logger = Substitute.For<ILogger>();
             _oneAuthDataAccess = Substitute.For<IOneAuthDataAccess>();
             _oneAuthDataAccess.GetUserInfo(Arg.Any<int>(), Arg.Any<string>()).Returns(new OneAuthUserInfo());
-
+            _appSettings = Substitute.For<IAppSettings>();
+            _appSettings.DefaultBaseCurrency.Returns("EUR");
             _oneAuthenticationService = Substitute.ForPartsOf<OneAuthenticationService>(
                 _sessionService,
                 _licenseeDataAccess,
                 _formAuthenticationService,
                 _oneBookSecurityWrapper,
                 _logger,
+                _appSettings,
                 _oneAuthDataAccess);
         }
 
@@ -61,6 +65,7 @@
             _sessionService = null;
             _licenseeDataAccess = null;
             _formAuthenticationService = null;
+            _appSettings = null;
         }
 
         [Test]
@@ -426,7 +431,7 @@
         }
 
         [Test]
-        public async Task SignIn_GetPermissionList_IsAdminstrator_GetFromFile_NoData_ReturnEmptyData()
+        public void SignIn_GetPermissionList_IsAdminstrator_GetFromFile_NoData_ReturnEmptyData()
         {
             // Arrange
             var tokenInfo = CreateValidFakeToken(true);
@@ -493,7 +498,7 @@
 
         [TestCase(true)]
         [TestCase(false)]
-        public async Task ValidateCurrencyList_CurrencyListIsNullOrEmpty_ReturnErrorResultInfo(bool isNull)
+        public void ValidateCurrencyList_CurrencyListIsNullOrEmpty_ReturnErrorResultInfo(bool isNull)
         {
             // Arrange
             var userInfo = new OneAuthUserInfo { CurrencyUserList = isNull ? null : new List<CurrencyUser>() };

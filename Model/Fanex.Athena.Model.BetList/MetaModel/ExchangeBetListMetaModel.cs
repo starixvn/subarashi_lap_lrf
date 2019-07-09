@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Fanex.Athena.Model.Core.MetaModel;
+using System;
 
 namespace Fanex.Athena.Model.BetList.MetaModel
 {
-    public class ExchangeBetListMetaModel : BaseExchangeBetListMetaModel
+    public class ExchangeBetListMetaModel : BaseExchangeBetListMetaModel, IMetaModelValidation
     {
         public DateTime FromDate { get; set; }
 

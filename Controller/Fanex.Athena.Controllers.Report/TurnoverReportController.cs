@@ -51,10 +51,8 @@ namespace Fanex.Athena.Controllers.Report
             {
                 LicenseeId = licenseeSession.LicenseeId,
                 UserId = userSession.UserId,
+                BaseCurrency = userSession.DefaultBaseCurrency
             };
-
-            SetConvetedUSDCurrencyName(metaModel);
-            SetConvetedUSDCurrencyId(metaModel);
 
             var productAccess = ProductService.GetSingleWalletProductAccess(
                 licenseeSession.LicenseeId,
@@ -77,6 +75,7 @@ namespace Fanex.Athena.Controllers.Report
 
         [HttpPost]
         [CustomValidateAntiForgery]
+        [ValidationWebRequest]
         public async Task<ActionResult> Excel(TurnoverMetaModel metaModel)
         {
             var licenseeSession = SessionService.LicenseeSession;

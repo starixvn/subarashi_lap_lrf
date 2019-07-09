@@ -102,10 +102,9 @@ namespace Fanex.Athena.Controllers.Customer
                 LicenseeId = licenseeId,
                 IsShowStatusDropdown = allowLicensees.Contains(licenseeId),
                 GridColumns = InitGridColumns(productAccess.IsAllow(Product.BA), allowLicensees),
-                OddsGroups = GetOddsGroups()
+                OddsGroups = GetOddsGroups(),
+                BaseCurrency = userSession.DefaultBaseCurrency
             };
-
-            SetConvetedUSDCurrencyName(metaModel);
 
             var model = await CreateCustomerViewModel(metaModel);
 
@@ -121,6 +120,7 @@ namespace Fanex.Athena.Controllers.Customer
         [HttpPost]
         [AjaxRequest]
         [CustomValidateAntiForgery]
+        [ValidationWebRequest]
         public async Task<dynamic> CustomerList(CustomerListMetaModel metaModel)
         {
             AssignMetaModelData(metaModel);
@@ -140,6 +140,7 @@ namespace Fanex.Athena.Controllers.Customer
         [HttpPost]
         [AjaxRequest]
         [CustomValidateAntiForgery]
+        [ValidationWebRequest]
         public async Task<dynamic> DormantCustomerList(CustomerListMetaModel metaModel)
         {
             AssignMetaModelData(metaModel);
@@ -166,7 +167,7 @@ namespace Fanex.Athena.Controllers.Customer
             }
 
             var metaModel = JsonConvert.DeserializeObject<CustomerListMetaModel>(excelParam);
-            if (metaModel != null)
+            if (metaModel != null && metaModel.IsValid)
             {
                 var licenseeId = SessionService.LicenseeSession.LicenseeId;
                 metaModel.IsShowStatusDropdown = AppSettings.LicenseeOfferStatusFunction.Contains(licenseeId);
@@ -203,7 +204,7 @@ namespace Fanex.Athena.Controllers.Customer
             }
 
             var metaModel = JsonConvert.DeserializeObject<CustomerListMetaModel>(excelParam);
-            if (metaModel != null)
+            if (metaModel != null && metaModel.IsValid)
             {
                 metaModel.LicenseeId = SessionService.LicenseeSession.LicenseeId;
                 metaModel.AgentListXml = GetAgentListXml(metaModel.SubsidiaryList, metaModel.CurrencyId);

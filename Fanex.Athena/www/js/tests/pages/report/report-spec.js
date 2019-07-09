@@ -91,6 +91,7 @@
             describe("getCurrencyNameForReportTitle(currencyId)", function () {
                 it("return correct title for correct currencyid", function () {
                     Site.getSingleResource = jasmine.createSpy().and.returnValue("View in {0}");
+                    Site.getBaseCurrencyName = jasmine.createSpy().and.returnValue("gbp");
 
                     var result = Report.getCurrencyNameForReportTitle("-3");
 
@@ -99,10 +100,18 @@
                 it("return correct title for currencyid from dropdownlist", function () {
                     setFixtures('<select id="CurrencyId"><option value="1">UUS</option></select>');
                     Site.getSingleResource = jasmine.createSpy().and.returnValue("View in {0}");
+                    Site.getBaseCurrencyName = jasmine.createSpy().and.returnValue("");
 
                     var result = Report.getCurrencyNameForReportTitle("1");
 
                     expect(result).toBe("View in UUS");
+                });
+                it("return correct title if currencyid is 0", function () {
+                    Site.getSingleResource = jasmine.createSpy().and.returnValue("All");
+
+                    var result = Report.getCurrencyNameForReportTitle(0);
+
+                    expect(result).toBe("All");
                 });
             });
 

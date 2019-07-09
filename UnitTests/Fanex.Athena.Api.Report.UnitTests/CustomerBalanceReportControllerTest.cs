@@ -46,25 +46,6 @@
         }
 
         [Test]
-        public async Task Index_InvalidModel_ReturnEmptyData()
-        {
-            var model = new CustomerBalanceMetaModel
-            {
-                IsExportExcel = false,
-                FromDate = DateTime.Now.AddDays(1),
-                ToDate = DateTime.Now
-            };
-
-            var result = await _controller.Index(model);
-
-            Assert.Multiple(() =>
-            {
-                Assert.IsEmpty(result.Data);
-                Assert.That(result.TotalRows, Is.Zero);
-            });
-        }
-
-        [Test]
         public async Task Index_ValidModel_GetDataFromDataAccess()
         {
             // Arrange

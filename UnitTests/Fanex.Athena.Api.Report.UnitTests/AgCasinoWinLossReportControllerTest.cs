@@ -8,6 +8,7 @@
     using Fanex.Athena.Excel.Base.Entities;
     using Fanex.Athena.Excel.Report;
     using Fanex.Athena.Model.Report.ViewModel;
+    using Fanex.Athena.Service.Core.Utility.Interfaces;
     using Model.Core.ResultModel;
     using Model.Report.DTO;
     using Model.Report.MetaModel;
@@ -20,6 +21,7 @@
     {
         private IThirdPartyWinLossDataAccess<ThirdPartyWinLoss> _dataAccess;
         private AgCasinoWinLossReportController _controller;
+        private ICurrencyValidation _currencyValidation;
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
@@ -27,32 +29,44 @@
             base.FixtureSetUp();
 
             MockSessionData();
-
-            _dataAccess = Substitute.For<IThirdPartyWinLossDataAccess<ThirdPartyWinLoss>>();
-            _controller = Substitute.ForPartsOf<AgCasinoWinLossReportController>(_dataAccess, SessionService, ProductService, LangService);
-
-            _controller.When(x => x.ExcelStream(Arg.Any<IWorkbook>(), Arg.Any<string>())).DoNotCallBase();
         }
 
+        [SetUp]
+        public void SetUp()
+        {
+            _currencyValidation = Substitute.For<ICurrencyValidation>();
+            _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
+
+            _dataAccess = Substitute.For<IThirdPartyWinLossDataAccess<ThirdPartyWinLoss>>();
+            _controller = Substitute.ForPartsOf<AgCasinoWinLossReportController>(_dataAccess, SessionService,
+                ProductService, LangService, _currencyValidation);
+            _controller.When(x => x.ExcelStream(Arg.Any<IWorkbook>(), Arg.Any<string>())).DoNotCallBase();
+
+        }
         [OneTimeTearDown]
         public override void FixtureTearDown()
         {
             base.FixtureTearDown();
-
-            _dataAccess = null;
-            _controller = null;
         }
 
         [TearDown]
         public void TearDown()
         {
+            _currencyValidation = null;
             SessionService.ClearReceivedCalls();
+            _dataAccess.ClearReceivedCalls();
+            _dataAccess = null;
+            _controller.ClearReceivedCalls();
+            _controller.Dispose();
+            _controller = null;
         }
 
         [Test]
-        public async Task Index_InvalidModel_ReturnEmptyData()
+        public async Task Index_InvalidCurrency_ReturnEmptyData()
         {
             // Arrange
+            _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(false);
+
             var model = new ThirdPartyWinLossMetaModel
             {
                 CurrencyId = 1
@@ -144,41 +158,6 @@
                 Assert.That(result.Data, Is.EqualTo(expectedData.DataList));
                 Assert.That(result.Total, Is.EqualTo(expectedData.TotalDataList));
                 Assert.That(result.SummaryTotal, Is.EqualTo(expectedData.SummaryTotal));
-            });
-        }
-
-        [Test]
-        public void Index_ValidModelLevel1_CallServiceWithCorrectParameter()
-        {
-            // Arrange
-            const string UspName = "LRF_Rpt_AGCasinoWinloss_Ag";
-            var level = 1;
-            var fdate = DateTime.Now;
-            var tdate = DateTime.Now.AddDays(1);
-            var currencyId = 2;
-            var custId = 3;
-            var model = new ThirdPartyWinLossMetaModel
-            {
-                CurrencyId = -1
-            };
-
-            var expectedData = SetUpForGettingData();
-            var expectedTotal = expectedData.DataList;
-            _dataAccess.GetAgentWinlossDetail(model, UserCurrencyList, UspName).Returns(new ReportResultModel<ThirdPartyWinLoss>());
-            
-            // Action
-            _controller.Index(model, fdate, tdate, level, currencyId, custId);
-
-            // Assert
-            Assert.Multiple(() =>
-            {
-                _dataAccess.Received(1).GetAgentWinlossDetail(model, UserCurrencyList, UspName);
-                SessionService.Received(1).GenerateAgentListXml(currencyId, Arg.Any<bool>());
-                Assert.That(model.DrillDownCurrencyId, Is.EqualTo(currencyId));
-                Assert.That(model.DrillDownLevel, Is.EqualTo(level));
-                Assert.That(model.DrillDownCustomerId, Is.EqualTo(custId));
-                Assert.That(model.DrillDownFromDate, Is.EqualTo(fdate));
-                Assert.That(model.DrillDownToDate, Is.EqualTo(tdate));
             });
         }
 

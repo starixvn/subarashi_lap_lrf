@@ -12,6 +12,7 @@ namespace Fanex.Athena.Controllers.BetList
     using System.Web.Mvc;
     using DataAccess.Core.Configuration.Interfaces;
     using Extension.Utility;
+    using Fanex.Athena.Web.ActionFilter;
     using Model.BetList.MetaModel;
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
@@ -35,6 +36,7 @@ namespace Fanex.Athena.Controllers.BetList
         }
 
         [HttpGet]
+        [ValidationWebRequest(IsValidCurrency = true)]
         public async Task<ActionResult> Index(BetListExcelMetaModel metaModel)
         {
             CreateDefaultMetaModel(metaModel);

@@ -13,7 +13,7 @@ namespace Fanex.Athena.Model.Report.MetaModel
     using Fanex.Athena.Model.Core.MetaModel.Product;
     using Model.Core.MetaModel;
 
-    public class BaseReportMetaModel : BaseMetaModel
+    public class BaseReportMetaModel : BaseMetaModel, IMetaModelProductCodeList, IMetaModelValidation
     {
         protected const int DefaultPageSize = 1000;
 
@@ -46,15 +46,15 @@ namespace Fanex.Athena.Model.Report.MetaModel
         {
             get
             {
-                return SystemConstants.BaseCurrencyList.Any(t => t.Equals(BaseCurrency, StringComparison.OrdinalIgnoreCase));
+                return SystemConstants.BaseCurrencyList.Any(t => t.Value.Equals(BaseCurrency, StringComparison.OrdinalIgnoreCase));
             }
         }
 
-        public virtual bool IsValid
+        public override bool IsValid
         {
             get
             {
-                return FromDate <= ToDate
+                return base.IsValid && FromDate <= ToDate
                     && ProductOptions.Any(p => p.Status);
             }
         }

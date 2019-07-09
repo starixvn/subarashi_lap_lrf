@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Data;
     using System.Linq;
     using System.Threading.Tasks;
     using Core.Configuration.Interfaces;
@@ -68,7 +67,7 @@
             var readerDataMapping = new Dictionary<string, object>(StringComparer.InvariantCultureIgnoreCase)
             {
                 { "PlatformType", PlatformType.Asia },
-                { "TurnoverUSD", 300 },
+                { "Turnover", 300 },
                 { "productprefix", "SB" }
             };
 
@@ -117,8 +116,8 @@
             Reader.Read().Returns(true, false);
             var readerDataMapping = new
             {
-                TurnoverUSD = 100,
-                WinlostUSD = 200
+                Turnover = 100,
+                Winlost = 200
             };
 
             MapReaderData(readerDataMapping);
@@ -147,6 +146,7 @@
                 ObjectDb.Received(1).SetParameterValue("FromDate", _metaModel.FromDate);
                 ObjectDb.Received(1).SetParameterValue("ToDate", _metaModel.ToDate);
                 ObjectDb.Received(1).SetParameterValue("AgentList", _metaModel.AgentListXml);
+                ObjectDb.Received(1).SetParameterValue("BaseCurrency", _metaModel.BaseCurrency);
             });
         }
     }

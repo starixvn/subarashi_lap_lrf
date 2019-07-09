@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Data;
     using System.Threading.Tasks;
     using Core.Configuration.Interfaces;
     using Core.UnitTests.TestHelpers;
@@ -69,6 +68,7 @@
                 ObjectDb.Received(1).SetParameterValue("MoveBetsDay", _balance.MoveBetsDay);
                 ObjectDb.Received(1).SetParameterValue("showSB", true);
                 ObjectDb.Received(1).SetParameterValue("showNG", false);
+                ObjectDb.Received(1).SetParameterValue("BaseCurrency", _metaModel.BaseCurrency);
             });
         }
 
@@ -84,8 +84,8 @@
             {
                 leagueid = 1,
                 matchid = 2,
-                TurnoverUSD = 100,
-                MemberWinLostUSD = 200
+                Turnover = 100,
+                MemberWinLost = 200
             };
 
             MapReaderData(expected);
@@ -99,8 +99,8 @@
                 Assert.That(result.Count, Is.EqualTo(1));
                 Assert.That(result[0].LeagueId, Is.EqualTo(expected.leagueid));
                 Assert.That(result[0].MatchId, Is.EqualTo(expected.matchid));
-                Assert.That(result[0].Turnover, Is.EqualTo(expected.TurnoverUSD));
-                Assert.That(result[0].CustomerWL, Is.EqualTo(expected.MemberWinLostUSD));
+                Assert.That(result[0].Turnover, Is.EqualTo(expected.Turnover));
+                Assert.That(result[0].CustomerWL, Is.EqualTo(expected.MemberWinLost));
             });
         }
 
@@ -112,11 +112,11 @@
 
             Reader.Read().Returns(true, false);
             Reader.FieldCount.Returns(1);
-            Reader.GetName(0).Returns("PlayerCommUSD");
+            Reader.GetName(0).Returns("PlayerComm");
 
             var expected = new
             {
-                PlayerCommUSD = 200
+                PlayerComm = 200
             };
             MapReaderData(expected);
 
@@ -124,7 +124,7 @@
             var result = await DataAccess.GetDataList(_metaModel);
 
             // Assert
-            Assert.That(result[0].CustomerComm, Is.EqualTo(expected.PlayerCommUSD));
+            Assert.That(result[0].CustomerComm, Is.EqualTo(expected.PlayerComm));
         }
 
         [Test]
@@ -283,11 +283,12 @@
                 ObjectDb.Received(1).SetParameterValue("PageSize", _metaModel.PageSize);
                 ObjectDb.Received(1).SetParameterValue("showSB", true);
                 ObjectDb.Received(1).SetParameterValue("showNG", false);
+                ObjectDb.Received(1).SetParameterValue("BaseCurrency", _metaModel.BaseCurrency);
             });
         }
 
         [Test]
-        public async Task GetDetailDataList_WhenCall_ReturnCorrectResult()
+        public async Task GetDetailDataList_WhenCall_ParametersPassedCorrectly()
         {
             // Arrange
             DataAccess.GetObjectDb(Arg.Is(GetDetailDataListSp)).Returns(ObjectDb);
@@ -304,11 +305,12 @@
                 ObjectDb.Received(1).SetParameterValue("MoveBetsDay", _balance.MoveBetsDay);
                 ObjectDb.Received(1).SetParameterValue("LeagueId", _metaModel.LeagueId);
                 ObjectDb.Received(1).SetParameterValue("showSB", true);
+                ObjectDb.Received(1).SetParameterValue("BaseCurrency", _metaModel.BaseCurrency);
             });
         }
 
         [Test]
-        public async Task GetOutrightParlayList_WhenCall_ReturnCorrectResult()
+        public async Task GetOutrightParlayList_WhenCall_ParametersPassedCorrectly()
         {
             // Arrange
             DataAccess.GetObjectDb(Arg.Is(GetOutrightParlayListSp)).Returns(ObjectDb);
@@ -324,6 +326,7 @@
                 ObjectDb.Received(1).SetParameterValue("MoveBetsDay", _balance.MoveBetsDay);
                 ObjectDb.Received(1).SetParameterValue("showsb", true);
                 ObjectDb.Received(1).SetParameterValue("showba", false);
+                ObjectDb.Received(1).SetParameterValue("BaseCurrency", _metaModel.BaseCurrency);
             });
         }
     }

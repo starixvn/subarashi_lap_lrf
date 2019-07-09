@@ -1,9 +1,11 @@
-﻿namespace Fanex.Athena.Model.BetList.MetaModel
+﻿using Fanex.Athena.Model.Core.MetaModel;
+
+namespace Fanex.Athena.Model.BetList.MetaModel
 {
-    public class MultipleCustomersBetListMetaModel : BaseBettingTicketMetaModel
+    public class MultipleCustomersBetListMetaModel : BaseBettingTicketMetaModel, IMetaModelValidation
     {
         public string LiveStatus { get; set; }
-        
+
         public int SportId { get; set; }
 
         public int BetTypeId { get; set; }

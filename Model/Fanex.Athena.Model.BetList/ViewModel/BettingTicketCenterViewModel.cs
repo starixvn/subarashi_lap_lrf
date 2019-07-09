@@ -33,7 +33,7 @@
         public IEnumerable<CheckedItem> StatusList { get; set; }
 
         public IDictionary<int, string> PlatformList { get; set; }
-
+        public string SelectedBaseCurrency { get; set; }
         public IDictionary<int, string> LiveStatusList { get; set; }
     }
 }

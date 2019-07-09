@@ -32,13 +32,9 @@ namespace Fanex.Athena.Api.BetList
         }
 
         [HttpPost]
+        [ValidationApiRequest(IsValidCurrency = true)]
         public async Task<dynamic> Index(WinLossByLeagueBetListMetaModel metaModel)
         {
-            if (!IsValidCurrencyId(metaModel.CurrencyId))
-            {
-                return null;
-            }
-
             const string UspKey = "Lrf_BetList_WinlostByLeague_Mem";
             return await GetBetListResult(metaModel, UspKey, "/BetList/GetWinLossByLeagueData").ConfigureAwait(false);
         }

@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Data;
     using System.Linq;
     using System.Threading.Tasks;
     using Core.UnitTests.TestHelpers;
@@ -70,7 +69,7 @@
             Reader.Read().Returns(true, false);
             var readerDataMapping = new
             {
-                turnoverUSD = 999
+                turnover = 999
             };
             MapReaderData(readerDataMapping);
 
@@ -141,7 +140,7 @@
             Reader.NextResult().Returns(true);
             var readerDataMapping = new
             {
-                turnoverUSD = 999
+                turnover = 999
             };
             MapReaderData(readerDataMapping);
 
@@ -256,6 +255,7 @@
             ObjectDb.Received(1).SetParameterValue("showsb", showSB);
             ObjectDb.Received(1).SetParameterValue("showba", showBA);
             ObjectDb.Received(1).SetParameterValue("AgentList", metaModel.AgentListXml);
+            ObjectDb.Received(1).SetParameterValue("BaseCurrency", metaModel.BaseCurrency);
         }
     }
 }

@@ -54,31 +54,13 @@
             }
         }
 
-        [Test]
-        public async Task Index_ExportExcel_InvalidCurrency_ReturnEmptyResult()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var metaModel = new BetListExcelMetaModel
-                {
-                    IsExportExcel = true,
-                    CurrencyId = -1000
-                };
-
-                controller.When(x => x.EmptyExcel()).DoNotCallBase();
-
-                // Action
-                await controller.Index(metaModel);
-
-                // Assert
-                controller.Received().EmptyExcel();
-            }
-        }
-
-        [TestCase("USD", null, "USD", true)]
-        [TestCase("USD", "eur", "EUR", false)]
-        public async Task Index_ExportExcel_PassCorrectParam(string currency, string baseCurrency, string expectedCurrency, bool isFakeLicensee)
+ 
+        [TestCase(1, "USD", null, "USD", true)]
+        [TestCase(1, "USD", "eur", "EUR", false)]
+        public async Task Index_ExportExcel_PassCorrectParam(
+            int currencyId,
+            string currency,
+            string baseCurrency, string expectedCurrency, bool isFakeLicensee)
         {
             using (var controller = CreateController())
             {
@@ -92,7 +74,8 @@
                     FromDate = new DateTime(2018, 11, 11),
                     ToDate = new DateTime(2018, 12, 12),
                     ExternalId = "External",
-                    SystemId = "System"
+                    SystemId = "System",
+                    CurrencyId = currencyId
                 };
 
                 var fakeLicensees = isFakeLicensee ? new[] { DefaultLicenseeSession.LicenseeId } : Enumerable.Empty<int>();

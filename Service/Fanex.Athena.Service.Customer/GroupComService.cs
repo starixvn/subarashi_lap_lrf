@@ -32,14 +32,14 @@ namespace Fanex.Athena.Service.Customer
             _groupDataAccess = groupDataAccess;
         }
 
-        public Task<IList<GroupCommMetaModel>> GetAll(int licenseeId)
+        public async Task<IList<GroupCommMetaModel>> GetAll(int licenseeId)
         {
-            return _groupDataAccess.GetAll(licenseeId);
+            return await _groupDataAccess.GetAll(licenseeId).ConfigureAwait(false);
         }
 
-        public Task<DataTable> GetDataForExcel(int licenseeId)
+        public async Task<DataTable> GetDataForExcel(int licenseeId)
         {
-            return _groupDataAccess.GetDataForExcel(licenseeId);
+            return await _groupDataAccess.GetDataForExcel(licenseeId).ConfigureAwait(false);
         }
 
         public GroupCommMetaModel GetById(int groupCommId, int licenseeId)
@@ -47,9 +47,9 @@ namespace Fanex.Athena.Service.Customer
             return _groupDataAccess.GetById(groupCommId, licenseeId);
         }
 
-        public Task<IResultInfo> InsertGroup(GroupCommMetaModel item, IRequest request, int userId)
+        public async Task<IResultInfo> InsertGroup(GroupCommMetaModel item, IRequest request, int userId)
         {
-            return _groupDataAccess.InsertGroup(item, request, userId);
+            return await _groupDataAccess.InsertGroup(item, request, userId).ConfigureAwait(false);
         }
 
         public async Task<IResultInfo> UpdateGroup(GroupCommMetaModel newItem, IRequest request, UserSession user)

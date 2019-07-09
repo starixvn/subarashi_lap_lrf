@@ -76,16 +76,9 @@ namespace Fanex.Athena.Controllers.Forecast
                     MatchId = matchId,
                     CurrencyId = currencyId,
                     LeagueId = leagueId,
+                    BaseCurrency = string.IsNullOrEmpty(baseCurrency) ? SessionService.UserSession.DefaultBaseCurrency
+                    : baseCurrency
                 };
-
-                if (string.IsNullOrEmpty(baseCurrency))
-                {
-                    SetConvetedUSDCurrencyName(metaModel);
-                }
-                else
-                {
-                    metaModel.BaseCurrency = baseCurrency;
-                }
 
                 var viewModel = await GetViewModel(metaModel);
                 return View("~/Views/Desktop/Forecast/NewForecastHdpOu/Main.cshtml", viewModel);
@@ -98,6 +91,7 @@ namespace Fanex.Athena.Controllers.Forecast
 
         [HttpPost]
         [CustomValidateAntiForgery]
+        [ValidationWebRequest]
         public async Task<ActionResult> Index(NewForecastHandicapOverUnderMetaModel metaModel)
         {
             metaModel.LicenseeId = SessionService.LicenseeSession.LicenseeId;

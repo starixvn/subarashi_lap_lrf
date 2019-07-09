@@ -8,6 +8,7 @@
     using Excel.Base.Entities;
     using Excel.Report;
     using Extension.Utility;
+    using Fanex.Athena.Service.Core.Utility.Interfaces;
     using Fanex.Athena.Service.Report.Interfaces;
     using Model.Core.DTO.Users;
     using Model.Core.ResultModel;
@@ -23,32 +24,34 @@
     {
         private IColossusBetsWinLossService _service;
         private ColossusBetsWinLossReportController _controller;
-
-        [OneTimeSetUp]
-        public override void FixtureSetUp()
+        private ICurrencyValidation _currencyValidation;
+        [SetUp]
+        public void SetUp()
         {
-            base.FixtureSetUp();
 
+            _currencyValidation = Substitute.For<ICurrencyValidation>();
+            _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
             _service = Substitute.For<IColossusBetsWinLossService>();
 
-            _controller = Substitute.ForPartsOf<ColossusBetsWinLossReportController>(_service, SessionService, ProductService, LangService);
+            _controller = Substitute.ForPartsOf<ColossusBetsWinLossReportController>(_service,
+                SessionService, ProductService, LangService, _currencyValidation);
 
             _controller.When(x => x.ExcelStream(Arg.Any<IWorkbook>(), Arg.Any<string>())).DoNotCallBase();
         }
 
-        [OneTimeTearDown]
-        public override void FixtureTearDown()
+        [TearDown]
+        public void TearDown()
         {
-            base.FixtureTearDown();
-
+            _currencyValidation = null;
             _controller = null;
             _service = null;
         }
 
         [Test]
-        public async Task Index_InvalidModel_ReturnEmptyData()
+        public async Task Index_InvalidCurrency_ReturnEmptyData()
         {
             // Arrange
+            _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(false);
             var model = new ColossusBetsWinLossMetaModel
             {
                 IsExportExcel = false,
@@ -211,14 +214,17 @@
             var model = CreateValidMetaModel(modelCurrencyId, drilldownCurrencyId);
             model.IsExportExcel = true;
             var level = 1;
-            var fdate = DateTime.Now;
-            var tdate = DateTime.Now.AddDays(1);
+            var fdate = new DateTime(2018, 01, 01);
+            var tdate = new DateTime(2018, 01, 05);
             var currencyId = 3;
             var custId = 4;
 
             StubUserSessionData(new UserSession
             {
-                CurrencyList = new Dictionary<int, string> { { currencyId, "Currency" } },
+                CurrencyList = new Dictionary<int, string> {
+                    { modelCurrencyId, "Currency" },
+                    { drilldownCurrencyId, "Currency" },
+                    { currencyId, "Currency" } },
             });
 
             var expectedFileName = $"ColossusBetsWinLoss_{fdate:ddMMMyyy}_Currency.xls";
@@ -245,8 +251,8 @@
             // Assert
             Assert.Multiple(() =>
             {
-                Assert.That(model.DrillDownFromDate, Is.EqualTo(model.FromDate));
-                Assert.That(model.DrillDownToDate, Is.EqualTo(model.ToDate));
+                Assert.That(model.DrillDownFromDate, Is.EqualTo(fdate));
+                Assert.That(model.DrillDownToDate, Is.EqualTo(tdate));
                 _controller.Received().ExcelStream(Arg.Any<IWorkbook>(), expectedFileName);
             });
         }

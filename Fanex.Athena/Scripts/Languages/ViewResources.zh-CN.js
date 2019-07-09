@@ -1,4 +1,4 @@
-﻿// Generated at: 05/31/2019 4:02:22 PM
+﻿// Generated at: 06/12/2019 5:48:06 PM
 var _language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -237,8 +237,8 @@ Events:"项目",
 ExcludeTestData:"排除测试数据",
 ExpiredTimeParamMsg:"该网址已过期",
 ExportToExcel:"导出至Excel",
-ExternalId:"外部ID",
-ExternalIdOrSystemId:"外部识别或系统识别",
+ExternalId:"用户名",
+ExternalIdOrSystemId:"用户名或系统账号",
 Fail:"失败",
 Feb:"二月",
 February:"二月",

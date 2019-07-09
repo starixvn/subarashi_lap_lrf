@@ -101,27 +101,6 @@
             }
         }
 
-        [Test]
-        public async Task MatchBetType_ExportExcel_InvalidCurrency_ReturnEmptyResult()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var metaModel = new LiveReportBetListMetaModel
-                {
-                    IsExportExcel = true,
-                    CurrencyId = -1000
-                };
-
-                controller.When(x => x.EmptyExcel()).DoNotCallBase();
-
-                // Action
-                await controller.MatchBetType(metaModel);
-
-                // Assert
-                controller.Received().EmptyExcel();
-            }
-        }
 
         [TestCase(1, "Lrf_BetList_MatchWL_Bettype")]
         public async Task MatchBetType_ExportExcel_PassCorrectParam(int betTypeId, string uspKey)
@@ -137,7 +116,8 @@
                     FromDate = new DateTime(2018, 11, 11),
                     BetType = betTypeId,
                     HomeId = 2,
-                    AwayId = 0
+                    AwayId = 0,
+                    BaseCurrency = "USD"
                 };
 
                 CacheRefAdapter.GetBettype(metaModel.BetType).Returns("BetType");
@@ -155,9 +135,13 @@
             }
         }
 
-        [TestCase("USD", null, "USD")]
-        [TestCase("USD", "eur", "EUR")]
-        public async Task MixParlay_ExportExcel_PassCorrectParam(string currency, string baseCurrency, string expectedCurrency)
+        [TestCase(1,"USD", null, "USD")]
+        [TestCase(1,"USD", "eur", "EUR")]
+        [TestCase(0, "", "", "EUR")]
+        [TestCase(0, "", "CNY", "CNY")]
+        public async Task MixParlay_ExportExcel_PassCorrectParam(
+            int currencyId,
+            string currency, string baseCurrency, string expectedCurrency)
         {
             using (var controller = CreateController())
             {
@@ -165,7 +149,7 @@
                 var metaModel = new BetListExcelMetaModel
                 {
                     IsExportExcel = true,
-                    CurrencyId = 0,
+                    CurrencyId = currencyId,
                     CurrencyName = currency,
                     BaseCurrency = baseCurrency,
                     FromDate = new DateTime(2018, 11, 11),
@@ -203,12 +187,12 @@
                     IsExportExcel = true,
                     CurrencyId = 0,
                     CurrencyName = "USD",
-                    FromDate = new DateTime(2018, 11, 11)
+                    FromDate = new DateTime(2018, 11, 11),
                 };
 
                 CacheRefAdapter.GetBettype(metaModel.BetType).Returns(string.Empty);
 
-                var currencyTitle = string.Format(ViewResources.Viewin, "USD");
+                var currencyTitle = string.Format(ViewResources.Viewin, "EUR");
                 var expectedTitle = $"{ViewResources.BetList} - 11/11/2018 - {currencyTitle}";
 
                 SetUpForExportingExcel(metaModel, controller);

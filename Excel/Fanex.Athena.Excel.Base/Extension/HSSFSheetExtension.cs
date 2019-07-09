@@ -55,32 +55,29 @@ namespace Fanex.Athena.Excel.Base.Extension
             }
 
             // Get the source / new row
-            var sourceRow = sourceSheet.GetRow(sourceRowIndex);
-            if (sourceRow == null)
-            {
-                return null;
-            }
-
             var newRow = sheet.GetRow(destRowIndex);
             if (newRow == null)
             {
                 newRow = sheet.CreateRow(destRowIndex);
             }
 
-            // Loop through source columns to add to new row
-            for (int i = 0; i < sourceRow.LastCellNum; i++)
+            var sourceRow = sourceSheet.GetRow(sourceRowIndex);
+            if (sourceRow != null)
             {
-                // Grab a copy of the old/new cell
-                var oldCell = sourceRow.GetCell(i);
-                var newCell = newRow.CreateCell(i);
+                // Loop through source columns to add to new row
+                for (int i = 0; i < sourceRow.LastCellNum; i++)
+                {
+                    // Grab a copy of the old/new cell
+                    var oldCell = sourceRow.GetCell(i);
+                    var newCell = newRow.CreateCell(i);
 
-                sheet.CopyCell(oldCell, newCell);
+                    sheet.CopyCell(oldCell, newCell);
+                }
             }
 
             return newRow;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", Justification = "Reviewed.")]
         public static ICell CopyCell(this ISheet sheet, ICell sourceCell, ICell destCell)
         {
             if (sourceCell == null)

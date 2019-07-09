@@ -12,29 +12,15 @@
     [TestFixture]
     public partial class SubsidiaryPerformanceReportControllerTest : BaseApiControllerHelperTest
     {
-        [Test]
-        public async Task Detail_InvalidMetaModel_ReturnEmptyList()
-        {
-            // Arrange
-            var metaModel = new SubsidiaryPerformanceMetaModel
-            {
-                ProductCodeList = string.Empty
-            };
-
-            // Action
-            var result = await _controller.Detail(metaModel);
-
-            // Assert
-            Assert.That(result.Data, Is.Empty);
-        }
 
         [Test]
-        public async Task Detail_EmptyAgentList_ThrowException()
+        public async Task Detail_EmptyAgentList_ReturnEmptyData()
         {
             // Arrange
             var metaModel = GetMetaModel();
+            StubSingleWalletProductAccess(new[] { "SB", "BA" });
             _subsidiaryService.GetCurrencyAgentList(Arg.Any<string>(), Arg.Any<bool>()).Returns(new Dictionary<int, IEnumerable<int>>());
-
+           
             // Action
             var result = await _controller.Detail(metaModel);
 

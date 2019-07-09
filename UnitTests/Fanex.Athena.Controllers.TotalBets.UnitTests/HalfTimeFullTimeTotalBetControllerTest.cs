@@ -28,7 +28,6 @@
 
             SepUpForService();
 
-            StubGetValueAppSettings("BaseUsdLicensees", "usd");
         }
 
         [OneTimeTearDown]
@@ -67,25 +66,6 @@
                     _halfTimeFullTimeDataAccess.ReceivedWithAnyArgs().GetHalfTimeFullTimeDataList(Arg.Any<HalfTimeFullTimeMetaModel>());
                     Assert.That(viewModel.MainData.Count, Is.EqualTo(1));
                 });
-            }
-        }
-
-        [Test]
-        public async Task Index_WhenPostWithInvalidCurrency_AccessDenied()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var metaModel = new HalfTimeFullTimeMetaModel
-                {
-                    CurrencyId = -999
-                };
-
-                // Action
-                var viewResult = await controller.Index(metaModel) as RedirectResult;
-
-                // Assert
-                Assert.That(viewResult.Url, Is.EqualTo("~/Utility/AccessDenied"));
             }
         }
 

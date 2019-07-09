@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Net.Http;
     using System.Threading.Tasks;
+    using Fanex.Athena.Service.Core.Utility.Interfaces;
     using Model.BetList.MetaModel;
     using NSubstitute;
     using NUnit.Framework;
@@ -14,20 +15,31 @@
         private const string UspKey = "Lrf_BetList_SelWinLossByBetType";
 
         private const string ApiPath = "/BetList/GetBetListPaging";
-
+        private ICurrencyValidation _currencyValidation;
         [SetUp]
         public void SetUp()
         {
             MockSessionData();
+            _currencyValidation = Substitute.For<ICurrencyValidation>();
+            _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
+            _currencyValidation.IsValidBaseCurrency(Arg.Any<string>(), Arg.Any<bool>()).Returns(true);
 
             AuthorizationService.HasPermissionOnData(SessionLicenseeId, Arg.Any<int>(), Arg.Any<long>()).Returns(true);
         }
 
-        [Test]
-        public async Task Detail_InvalidCurrency_ReturnNull()
+        [TestCase(true,false)]
+        [TestCase(false, false)]
+        [TestCase(false, true)]
+
+        public async Task Detail_InvalidCurrency_ReturnNull(bool validCurrency,
+            bool validBaseCurrency)
         {
+
             using (var controller = CreateController())
             {
+                _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(validCurrency);
+                _currencyValidation.IsValidBaseCurrency(Arg.Any<string>(), Arg.Any<bool>()).Returns(validBaseCurrency);
+
                 // Arrange
                 const int CurrencyId = 1;
 
@@ -96,7 +108,9 @@
                 LangService,
                 AuthorizationService,
                 BetListApiClient,
-                BalanceUpDataAccess);
+                BalanceUpDataAccess,
+                _currencyValidation
+                );
         }
     }
 }

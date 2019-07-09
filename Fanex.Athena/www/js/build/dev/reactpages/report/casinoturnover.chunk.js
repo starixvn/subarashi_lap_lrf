@@ -3995,6 +3995,28 @@ function () {
 
 /***/ }),
 
+/***/ "./www/js/source/reactpages/lib/validationHelper.js":
+/*!**********************************************************!*\
+  !*** ./www/js/source/reactpages/lib/validationHelper.js ***!
+  \**********************************************************/
+/*! exports provided: validateBaseCurrency */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "validateBaseCurrency", function() { return validateBaseCurrency; });
+/* harmony import */ var _AppData__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AppData */ "./www/js/source/reactpages/lib/AppData.js");
+
+var validateBaseCurrency = function validateBaseCurrency() {
+  var baseCurrency = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
+  var allowEmpty = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+  return allowEmpty && !baseCurrency || !!baseCurrency && _AppData__WEBPACK_IMPORTED_MODULE_0__["default"].baseCurrencyList.find(function (x) {
+    return x.value === baseCurrency;
+  });
+};
+
+/***/ }),
+
 /***/ "./www/js/source/reactpages/pages/casinoturnover/actions/index.js":
 /*!************************************************************************!*\
   !*** ./www/js/source/reactpages/pages/casinoturnover/actions/index.js ***!
@@ -4415,6 +4437,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @jsroot/lib/DataService.js */ "./www/js/source/reactpages/lib/DataService.js");
 /* harmony import */ var _lib_service__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../lib/service */ "./www/js/source/reactpages/pages/casinoturnover/lib/service.js");
 /* harmony import */ var _lib_reportExcel__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../lib/reportExcel */ "./www/js/source/reactpages/pages/casinoturnover/lib/reportExcel.js");
+/* harmony import */ var _lib_validationHelper__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../../lib/validationHelper */ "./www/js/source/reactpages/lib/validationHelper.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
@@ -4436,6 +4459,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -4485,10 +4509,7 @@ function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "exportExcel", function () {
-      var _this$props = _this.props,
-          dateRange = _this$props.dateRange,
-          selectedCurrency = _this$props.selectedCurrency,
-          selectedBaseCurrency = _this$props.selectedBaseCurrency;
+      var selectedBaseCurrency = _this.props.selectedBaseCurrency;
       var params = Object.assign({
         IsExportExcel: true
       }, _this._getParams());
@@ -4537,15 +4558,15 @@ function (_Component) {
   _createClass(FormFilter, [{
     key: "_getParams",
     value: function _getParams() {
-      var _this$props2 = this.props,
-          dateRange = _this$props2.dateRange,
-          selectedCurrency = _this$props2.selectedCurrency,
-          selectedBaseCurrency = _this$props2.selectedBaseCurrency,
-          isConvertAll = _this$props2.isConvertAll,
-          selectedProduct = _this$props2.selectedProduct,
-          username = _this$props2.username,
-          selectedStatus = _this$props2.selectedStatus,
-          requestParam = _this$props2.requestParam;
+      var _this$props = this.props,
+          dateRange = _this$props.dateRange,
+          selectedCurrency = _this$props.selectedCurrency,
+          selectedBaseCurrency = _this$props.selectedBaseCurrency,
+          isConvertAll = _this$props.isConvertAll,
+          selectedProduct = _this$props.selectedProduct,
+          username = _this$props.username,
+          selectedStatus = _this$props.selectedStatus,
+          requestParam = _this$props.requestParam;
       return {
         FromDate: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_6__["default"].convertDateToString(dateRange.fromDate),
         ToDate: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_6__["default"].convertDateToString(dateRange.toDate),
@@ -4553,7 +4574,7 @@ function (_Component) {
         CurrencyName: selectedCurrency.label,
         BaseCurrency: selectedBaseCurrency,
         IsConvertAll: isConvertAll,
-        ProductCode: selectedProduct.split(','),
+        ProductCodeList: selectedProduct,
         UserName: username,
         Status: selectedStatus.split(','),
         PageIndex: 1,
@@ -4672,9 +4693,9 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this$props3 = this.props,
-          selectedProduct = _this$props3.selectedProduct,
-          selectedStatus = _this$props3.selectedStatus;
+      var _this$props2 = this.props,
+          selectedProduct = _this$props2.selectedProduct,
+          selectedStatus = _this$props2.selectedStatus;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "page-filter"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -4743,7 +4764,7 @@ function (_Component) {
   }, {
     key: "isValidModel",
     get: function get() {
-      return this.props.selectedProduct && this.props.selectedStatus;
+      return this.props.selectedProduct && this.props.selectedStatus && Object(_lib_validationHelper__WEBPACK_IMPORTED_MODULE_15__["validateBaseCurrency"])(this.props.selectedBaseCurrency, false);
     }
   }]);
 

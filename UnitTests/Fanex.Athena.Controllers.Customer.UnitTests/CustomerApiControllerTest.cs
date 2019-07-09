@@ -255,7 +255,7 @@
 
                 // Action
                 var result = await controller.RemoveFromGroupCom(string.Empty, false) as JsonResult;
-                var resultData = result.Data as object;
+                var resultData = result.Data;
 
                 // Assert
                 Assert.Multiple(() =>

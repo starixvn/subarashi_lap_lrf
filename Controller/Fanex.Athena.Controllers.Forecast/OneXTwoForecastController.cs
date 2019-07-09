@@ -43,15 +43,15 @@ namespace Fanex.Athena.Controllers.Forecast
             var metaModel = new ForecastOneXTwoMetaModel
             {
                 LicenseeId = SessionService.LicenseeSession.LicenseeId,
+                BaseCurrency = SessionService.UserSession.DefaultBaseCurrency
             };
-
-            SetConvetedUSDCurrencyName(metaModel);
 
             return await ProcessAction(metaModel).ConfigureAwait(false);
         }
 
         [HttpPost]
         [CustomValidateAntiForgery]
+        [ValidationWebRequest]
         public async Task<ActionResult> Index(ForecastOneXTwoMetaModel metaModel)
         {
             return await ProcessAction(metaModel).ConfigureAwait(false);

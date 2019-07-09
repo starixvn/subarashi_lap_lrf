@@ -13,6 +13,7 @@ namespace Fanex.Athena.Api.Report
     using System.Web.Hosting;
     using System.Web.Http;
     using Excel.Report;
+    using Fanex.Athena.Api.Base.Attributes;
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Service.Report;
@@ -24,7 +25,7 @@ namespace Fanex.Athena.Api.Report
     public class WeeklyLiveMatchReportController : ApiReportBaseController
     {
         private readonly IWeeklyLiveMatchService _weeklyLiveMatchService;
-        
+
         public WeeklyLiveMatchReportController(
             IWeeklyLiveMatchService service,
             ISessionService sessionService,
@@ -36,28 +37,26 @@ namespace Fanex.Athena.Api.Report
         }
 
         [HttpPost]
+        [ValidationApiRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
         public async Task<dynamic> Index(WeeklyLiveMatchMetaModel metaModel)
         {
-            if (IsValidRequest(metaModel.CurrencyId))
+            var result = await _weeklyLiveMatchService.GetData(metaModel);
+
+            var weekHeaders = _weeklyLiveMatchService.GetWeekHeaders(metaModel.FromDate, metaModel.ToDate, result.NumberOfWeeks);
+            if (metaModel.IsExportExcel)
             {
-                var result = await _weeklyLiveMatchService.GetData(metaModel);
+                return ExportExcel(metaModel, result, weekHeaders);
+            }
 
-                var weekHeaders = _weeklyLiveMatchService.GetWeekHeaders(metaModel.FromDate, metaModel.ToDate, result.NumberOfWeeks);
-                if (metaModel.IsExportExcel)
+            if (result.DataList.Any())
+            {
+                return new
                 {
-                    return ExportExcel(metaModel, result, weekHeaders);
-                }
-
-                if (result.DataList.Any())
-                {
-                    return new
-                    {
-                        WeekHeaders = weekHeaders,
-                        NumberOfWeeks = result.NumberOfWeeks,
-                        Data = result.DataList.Select(MapToGridView).ToArray(),
-                        TotalData = result.TotalData
-                    };
-                }
+                    WeekHeaders = weekHeaders,
+                    result.NumberOfWeeks,
+                    Data = result.DataList.Select(MapToGridView).ToArray(),
+                    result.TotalData
+                };
             }
 
             return new

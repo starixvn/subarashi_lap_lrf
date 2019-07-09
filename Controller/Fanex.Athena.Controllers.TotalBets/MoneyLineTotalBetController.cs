@@ -38,16 +38,16 @@ namespace Fanex.Athena.Controllers.TotalBets
         {
             var param = new MoneyLineMetaModel
             {
-                LicenseeId = SessionService.LicenseeSession.LicenseeId
+                LicenseeId = SessionService.LicenseeSession.LicenseeId,
+                BaseCurrency = SessionService.UserSession.DefaultBaseCurrency
             };
-
-            SetConvetedUSDCurrencyName(param);
 
             return await this.GetView(param).ConfigureAwait(false);
         }
 
         [HttpPost]
         [CustomValidateAntiForgery]
+        [ValidationWebRequest(IsValidCurrency = true)]
         public async Task<ActionResult> Index(MoneyLineMetaModel metaModel)
         {
             metaModel.LicenseeId = SessionService.LicenseeSession.LicenseeId;
@@ -59,22 +59,17 @@ namespace Fanex.Athena.Controllers.TotalBets
             var userSession = SessionService.UserSession;
             var currencies = userSession.CurrencyList;
 
-            if (metaModel.CurrencyId == 0 || currencies.ContainsKey(metaModel.CurrencyId))
+            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
+            var result = await _moneyLineDataAccess.GetMoneyLineDataList(metaModel).ConfigureAwait(false);
+
+            var model = new MoneyLineViewModel
             {
-                metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
-                var result = await _moneyLineDataAccess.GetMoneyLineDataList(metaModel).ConfigureAwait(false);
-
-                var model = new MoneyLineViewModel
-                {
-                    Param = metaModel,
-                    MainData = result.DataList.ToList(),
-                    CurrencyList = currencies,
-                    TotalData = result.TotalData
-                };
-                return View("~/Views/Desktop/TotalBets/MoneyLine/Main.cshtml", model);
-            }
-
-            return Redirect("~/Utility/AccessDenied");
+                Param = metaModel,
+                MainData = result.DataList.ToList(),
+                CurrencyList = currencies,
+                TotalData = result.TotalData
+            };
+            return View("~/Views/Desktop/TotalBets/MoneyLine/Main.cshtml", model);
         }
     }
 }

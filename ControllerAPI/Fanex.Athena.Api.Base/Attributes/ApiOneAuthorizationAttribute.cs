@@ -87,7 +87,8 @@
 
         private static string GetAuthToken(HttpRequestMessage request)
         {
-            if (request.Headers.TryGetValues(KeyName, out IEnumerable<string> headerValues))
+            IEnumerable<string> headerValues;
+            if (request.Headers.TryGetValues(KeyName, out headerValues))
             {
                 return headerValues.FirstOrDefault();
             }

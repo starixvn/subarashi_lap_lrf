@@ -50,27 +50,6 @@
             _controller.ClearReceivedCalls();
         }
 
-        [Test]
-        public void CreareExcel_InvalidModel_ReturnEmptyData()
-        {
-            // Arrange
-            var model = new PromotionPrizeMetaModel
-            {
-                FromDate = DateTime.Today,
-                ToDate = DateTime.Today.AddDays(-1)
-            };
-
-            // Action
-            var result = _controller.ExportExcel(model);
-
-            // Assert
-            _controller.Received().CreareExcel(
-                Arg.Any<string>(),
-                Arg.Any<string>(),
-                FileName,
-                Arg.Is<ReportResultModel<PromotionPrize>>(x => x.TotalRows == 0));
-        }
-
         [TestCase(0)]
         [TestCase(-1)]
         [TestCase(-2)]

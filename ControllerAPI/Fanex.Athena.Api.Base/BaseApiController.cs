@@ -1,4 +1,5 @@
-﻿// --------------------------------------------------------------------------
+﻿using System;
+// --------------------------------------------------------------------------
 // <copyright file="BaseApiController.cs" company="">
 // Copyright (c) . All rights reserved.
 // </copyright>
@@ -12,7 +13,9 @@ namespace Fanex.Athena.Api.Base
     using System.Net;
     using System.Net.Http;
     using System.Net.Http.Headers;
+    using System.Threading.Tasks;
     using System.Web.Http;
+    using Fanex.Athena.Resources;
     using Fanex.Athena.Service.Core.Common.Interfaces;
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using NPOI.SS.UserModel;
@@ -28,9 +31,9 @@ namespace Fanex.Athena.Api.Base
 
         protected internal BaseApiController(ISessionService sessionService, IProductService productService, ILanguageService languageService)
         {
-            _sessionService = sessionService;
-            _productService = productService;
-            _langService = languageService;
+            _sessionService = sessionService ?? throw new ArgumentNullException(nameof(sessionService));
+            _productService = productService ?? throw new ArgumentNullException(nameof(productService));
+            _langService = languageService ?? throw new ArgumentNullException(nameof(languageService));
         }
 
         protected IDictionary<int, string> UserCurrencyList => _sessionService.UserSession.CurrencyList;
@@ -54,8 +57,9 @@ namespace Fanex.Athena.Api.Base
         [System.CLSCompliant(false)]
         protected internal virtual HttpResponseMessage ExcelStream(IWorkbook workbook, string fileName)
         {
-            var result = new HttpResponseMessage(HttpStatusCode.OK);
-            result.Content = new PushStreamContent(
+            var result = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new PushStreamContent(
               (stream, context, transportContext) =>
               {
                   try
@@ -64,12 +68,14 @@ namespace Fanex.Athena.Api.Base
                   }
                   finally
                   {
-                      workbook.Clear();
+                      workbook.Close();
+                      workbook = null;
                       stream.Close();
                       context.Dispose();
                   }
               },
-              new MediaTypeHeaderValue("application/octet-stream"));
+              new MediaTypeHeaderValue("application/octet-stream"))
+            };
             result.Headers.TransferEncodingChunked = true;
             result.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
             {
@@ -85,21 +91,5 @@ namespace Fanex.Athena.Api.Base
             _langService.SetPageCulture(currentLanguage);
         }
 
-        protected string RemoveInvalidProducts(string productCodeList, string functionProductConfigKey)
-        {
-            if (string.IsNullOrWhiteSpace(productCodeList))
-            {
-                return string.Empty;
-            }
-
-            var productAccess = ProductService.GetProductAccess(
-                SessionService.LicenseeSession.LicenseeId,
-                SessionService.UserSession.Language,
-                functionProductConfigKey);
-            var productList = productAccess.ProductList;
-
-            var validProductCodes = productCodeList.Split(',').Where(x => productList.Any(y => y.ProductCode.Equals(x, StringComparison.OrdinalIgnoreCase)));
-            return string.Join(",", validProductCodes.ToArray());
-        }
     }
 }

@@ -44,22 +44,6 @@
         }
 
         [Test]
-        public async Task DoubleChange_InvalidCurrency_ReturnNull()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var metaModel = SetUpForGetBetListResult(2, new Dictionary<int, string>());
-
-                // Action
-                var result = await controller.DoubleChange(metaModel);
-
-                // Assert
-                Assert.That(result, Is.Null);
-            }
-        }
-
-        [Test]
         public async Task BONTeamToScore_InvalidCurrency_ReturnNull()
         {
             using (var controller = CreateController())

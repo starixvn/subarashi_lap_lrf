@@ -114,7 +114,7 @@
             _licenseeDataAccess.GetLicenseeByName(token.SiteName).Returns(licensee);
 
             // Action
-            var result = attribute.ExecuteAuthorizationFilterAsync(actionContext, new CancellationToken(), null);
+            attribute.ExecuteAuthorizationFilterAsync(actionContext, new CancellationToken(), null);
 
             // Assert
             Assert.Multiple(() =>
@@ -138,7 +138,7 @@
             _oneAuthenticationService.When(x => x.GetTokenInfo(TokenValue)).Throw(exception);
 
             // Action
-            var result = attribute.ExecuteAuthorizationFilterAsync(actionContext, new CancellationToken(), null);
+            attribute.ExecuteAuthorizationFilterAsync(actionContext, new CancellationToken(), null);
 
             // Assert
             _logger.Received(1).Error(exception.Message, exception);

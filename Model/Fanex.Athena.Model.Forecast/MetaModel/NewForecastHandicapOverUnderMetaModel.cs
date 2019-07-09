@@ -4,6 +4,8 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
+using Fanex.Athena.Model.Core.MetaModel;
+
 namespace Fanex.Athena.Model.Forecast.MetaModel
 {
     /// <summary>
@@ -37,12 +39,5 @@ namespace Fanex.Athena.Model.Forecast.MetaModel
 
         public bool IsShowFT { get; set; }
 
-        public bool IsValid
-        {
-            get
-            {
-                return LeagueId > 0 && MatchId > 0;
-            }
-        }
     }
 }

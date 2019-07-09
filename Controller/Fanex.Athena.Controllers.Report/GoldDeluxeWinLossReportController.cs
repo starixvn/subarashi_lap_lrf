@@ -55,10 +55,13 @@ namespace Fanex.Athena.Controllers.Report
                 IsExcludedTestData = true,
                 ProductId = product.ProductID,
                 ProductCode = product.ProductCode,
-                ProductName = product.ProductName
-            };
+                ProductName = product.ProductName,
+                BaseCurrency = userSession.DefaultBaseCurrency,
+                CurrencyId = SystemConstants.BaseCurrencyList
+                .FirstOrDefault(x => x.Value.Equals(userSession.DefaultBaseCurrency, StringComparison.OrdinalIgnoreCase))
+                .Key
 
-            SetConvetedUSDCurrencyId(metaModel);
+            };
 
             var model = new ThirdPartyWinLossViewModel
             {

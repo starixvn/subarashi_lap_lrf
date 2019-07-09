@@ -7,6 +7,7 @@
 namespace Fanex.Athena.Controllers.Report
 {
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Constant.DataDomain;
@@ -48,10 +49,12 @@ namespace Fanex.Athena.Controllers.Report
                 FromDate = date,
                 ToDate = date,
                 ReportBy = 1,
-                IsExcludedTestData = true
+                IsExcludedTestData = true,
+                BaseCurrency = userSession.DefaultBaseCurrency,
+                CurrencyId = SystemConstants.BaseCurrencyList
+                .FirstOrDefault(x => x.Value.Equals(userSession.DefaultBaseCurrency, StringComparison.OrdinalIgnoreCase))
+                .Key
             };
-
-            SetConvetedUSDCurrencyId(metaModel);
 
             var model = new ThirdPartyWinLossViewModel
             {

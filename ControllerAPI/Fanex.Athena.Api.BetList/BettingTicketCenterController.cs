@@ -6,7 +6,7 @@
     using System.Web.Http;
     using Base;
     using Base.Attributes;
-    using Helpers;
+    using Fanex.Athena.Model.Core.Helper;
     using Model.BetList.MetaModel;
     using Model.Core.DataDomain;
     using Resources;
@@ -30,15 +30,10 @@
         }
 
         [HttpPost]
+        [ValidationApiRequest]
         public async Task<dynamic> GetBySingleCustomer(SingleCustomersBetListMetaModel metaModel)
         {
-            if (!metaModel.IsValid)
-            {
-                throw new ArgumentException(ViewResources.InvalidRequestMsg);
-            }
-
             var userSession = SessionService.UserSession;
-
             metaModel.HasPlayerCom = SessionService.LicenseeSession.IsAllowedCustomerComm;
             metaModel.UserCurrencyList = userSession.CurrencyList;
             metaModel.AgentListXml = SessionService.GenerateAgentListXml();
@@ -50,12 +45,9 @@
         }
 
         [HttpPost]
+        [ValidationApiRequest]
         public async Task<dynamic> GetByRefno(RefNoBetListMetaModel metaModel)
         {
-            if (!metaModel.IsValid)
-            {
-                throw new ArgumentException(ViewResources.InvalidRequestMsg);
-            }
             var userSession = SessionService.UserSession;
             metaModel.AgentListXml = SessionService.GenerateAgentListXml();
             metaModel.HasPlayerCom = SessionService.LicenseeSession.IsAllowedCustomerComm;
@@ -68,15 +60,11 @@
         }
 
         [HttpPost]
+        [ValidationApiRequest(IsValidCurrencyList = true)]
         public async Task<dynamic> GetByRunning(BaseBettingTicketMetaModel metaModel)
         {
             var userSession = SessionService.UserSession;
-            var userCurrencyList = userSession.CurrencyList;
             var currencyList = metaModel.CurrencyIdList?.Split(',').Select(x => int.Parse(x)).ToArray();
-            if (!metaModel.IsValid || !BetListHelper.IsValidCurrencyId(currencyList, userCurrencyList))
-            {
-                throw new ArgumentException(ViewResources.InvalidRequestMsg);
-            }
 
             metaModel.AgentListXml = SessionService.GenerateAgentListXml(currencyList);
             metaModel.HasPlayerCom = SessionService.LicenseeSession.IsAllowedCustomerComm;

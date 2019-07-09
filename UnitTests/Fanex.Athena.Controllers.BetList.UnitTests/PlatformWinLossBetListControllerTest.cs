@@ -55,37 +55,16 @@
             }
         }
 
-        [Test]
-        public async Task Index_ExportExcel_InvalidCurrency_ReturnEmptyResult()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var metaModel = new BetListExcelMetaModel
-                {
-                    IsExportExcel = true,
-                    CurrencyId = -1000
-                };
-
-                controller.When(x => x.EmptyExcel()).DoNotCallBase();
-
-                // Action
-                await controller.Index(metaModel);
-
-                // Assert
-                controller.Received().EmptyExcel();
-            }
-        }
-
-        [TestCase("USD", "eur", "EUR", false, PlatformType.Asia, nameof(PlatformType.Asia))]
-        [TestCase("USD", "usd", "USD", true, PlatformType.China, nameof(PlatformType.China))]
-        [TestCase("USD", "gbp", "GBP", true, PlatformType.Euro, nameof(PlatformType.Euro))]
-        [TestCase("USD", null, "USD", true, PlatformType.Wap, nameof(PlatformType.Wap))]
-        [TestCase("USD", null, "USD", true, PlatformType.Mobile, nameof(PlatformType.Mobile))]
-        [TestCase("USD", null, "USD", true, PlatformType.Tablet, nameof(PlatformType.Tablet))]
-        [TestCase("USD", null, "USD", true, PlatformType.NewAsia, nameof(PlatformType.NewAsia))]
-        [TestCase("USD", null, "USD", true, PlatformType.All, nameof(PlatformType.All))]
+        [TestCase(1,"USD", "eur", "EUR", false, PlatformType.Asia, nameof(PlatformType.Asia))]
+        [TestCase(1,"USD", "usd", "USD", true, PlatformType.China, nameof(PlatformType.China))]
+        [TestCase(1,"USD", "gbp", "GBP", true, PlatformType.Euro, nameof(PlatformType.Euro))]
+        [TestCase(1,"USD", null, "USD", true, PlatformType.Wap, nameof(PlatformType.Wap))]
+        [TestCase(1,"USD", null, "USD", true, PlatformType.Mobile, nameof(PlatformType.Mobile))]
+        [TestCase(1,"USD", null, "USD", true, PlatformType.Tablet, nameof(PlatformType.Tablet))]
+        [TestCase(0,"", null, "EUR", true, PlatformType.NewAsia, nameof(PlatformType.NewAsia))]
+        [TestCase(0,"", null, "EUR", true, PlatformType.All, nameof(PlatformType.All))]
         public async Task Index_ExportExcel_PassCorrectParam(
+            int currencyId,
             string currency, 
             string baseCurrency, 
             string expectedCurrency, 
@@ -100,7 +79,7 @@
                 var metaModel = new BetListExcelMetaModel
                 {
                     IsExportExcel = true,
-                    CurrencyId = 1,
+                    CurrencyId = currencyId,
                     CurrencyName = currency,
                     BaseCurrency = baseCurrency,
                     FromDate = new DateTime(2018, 1, 1),

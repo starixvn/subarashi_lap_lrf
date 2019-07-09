@@ -67,10 +67,10 @@
             var metaModel = new MatchWinLossMetaModel
             {
                 BalanceUpDay = _balanceUpDataAccess.GetBalanceUp().BalanceUpDay.ToShortDateString(),
-                LicenseeId = licenseeSession.LicenseeId
-            };
+                LicenseeId = licenseeSession.LicenseeId,
+                BaseCurrency = userSession.DefaultBaseCurrency
 
-            SetConvetedUSDCurrencyName(metaModel);
+            };
 
             var productAccess = ProductService.GetSingleWalletProductAccess(
                 licenseeSession.LicenseeId,
@@ -92,12 +92,12 @@
 
         [HttpPost]
         [CustomValidateAntiForgery]
+        [ValidationWebRequest]
         public async Task<ActionResult> Index(MatchWinLossMetaModel metaModel)
         {
-            var licenseeSession = SessionService.LicenseeSession;
             var userSession = SessionService.UserSession;
             var currencies = userSession.CurrencyList;
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
+
             if (metaModel.IsExportExcel)
             {
                 if (metaModel.CurrencyId == BaseCurrencyType.All || currencies.ContainsKey(metaModel.CurrencyId))
@@ -108,20 +108,24 @@
                 return File(ExcelHelper.ExportEmptyFile(), "application/vnd.ms-excel", "Empty.xls");
             }
 
-            var reportData = await _matchWinLossService.GetDataList(metaModel);
-            var reportDataOutrightParlay = new List<MatchWinLoss>();
+            var licenseeSession = SessionService.LicenseeSession;           
+            var productAccess = ProductService.GetSingleWalletProductAccess(
+                licenseeSession.LicenseeId,
+                userSession.Language,
+                FunctionNames.MatchWinLoss);
+
+            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
+            var reportData = await _matchWinLossService.GetDataList(metaModel).ConfigureAwait(false);
+            IList<MatchWinLoss> reportDataOutrightParlay = new List<MatchWinLoss>();
 
             if (metaModel.ProductOptions.Any(i => i.Status && (i.Code == Product.BA || i.Code == Product.SB || i.Code == Product.VS2)))
             {
-                reportDataOutrightParlay = (await _matchWinLossService.GetOutrightParlayList(metaModel)).ToList();
+                reportDataOutrightParlay = await _matchWinLossService.GetOutrightParlayList(metaModel).ConfigureAwait(false);
             }
 
             var total = GetTotal(reportData);
             var grandTotal = GetGrandTotal(reportDataOutrightParlay, total);
-            var productAccess = ProductService.GetSingleWalletProductAccess(
-                licenseeSession.LicenseeId, 
-                userSession.Language, 
-                FunctionNames.MatchWinLoss);
+            
             var model = new MatchWinLossViewModel
             {
                 Param = metaModel,
@@ -142,16 +146,24 @@
         [CustomValidateAntiForgery]
         public async Task<ActionResult> Detail(MatchWinLossMetaModel metaModel)
         {
+            if (!metaModel.IsValidDetailRequest)
+            {
+                return await Task.FromResult(HttpNotFound());
+            }
+
             var licenseeSession = SessionService.LicenseeSession;
+            var productAccess = ProductService.GetSingleWalletProductAccess(
+                    licenseeSession.LicenseeId,
+                    SessionService.UserSession.Language,
+                    FunctionNames.MatchWinLoss);
+
             metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
-            var reportData = await _matchWinLossService.GetDetailDataList(metaModel);
+            var reportData = await _matchWinLossService.GetDetailDataList(metaModel).ConfigureAwait(false);
+
             var model = new MatchWinLossViewModel
             {
                 MainResult = reportData,
-                ProductAccess = ProductService.GetSingleWalletProductAccess(
-                    licenseeSession.LicenseeId, 
-                    SessionService.UserSession.Language, 
-                    FunctionNames.MatchWinLoss),
+                ProductAccess = productAccess,
                 IsAllowedCustomerCommission = licenseeSession.IsAllowedCustomerComm
             };
 
@@ -160,6 +172,7 @@
 
         [HttpPost]
         [CustomValidateAntiForgery]
+        [ValidationWebRequest]
         public async Task<ActionResult> Excel(MatchWinLossMetaModel metaModel)
         {
             const int PageSize = 63000;

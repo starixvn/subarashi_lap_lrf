@@ -25,7 +25,6 @@
 
             SetUpDefaultFakeData();
 
-            StubGetValueAppSettings("BaseUsdLicensees", "usd");
         }
 
         [Test]
@@ -85,30 +84,8 @@
             }
         }
 
-        [Test]
-        public async Task MixParlay_ExportExcel_InvalidCurrency_ReturnEmptyResult()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var metaModel = new BetListExcelMetaModel
-                {
-                    IsExportExcel = true,
-                    CurrencyId = -1000,
-                    MultipleBettype = "29"
-                };
 
-                controller.When(x => x.EmptyExcel()).DoNotCallBase();
-
-                // Action
-                await controller.MixParlay(metaModel);
-
-                // Assert
-                controller.Received().EmptyExcel();
-            }
-        }
-
-        [TestCase("USD", null, "USD")]
+        [TestCase("USD", null, "EUR")]
         [TestCase("USD", "eur", "EUR")]
         public async Task MixParlay_ExportExcel_PassCorrectParam(string currency, string baseCurrency, string expectedCurrency)
         {
@@ -121,7 +98,7 @@
                     CurrencyId = 0,
                     CurrencyName = currency,
                     BaseCurrency = baseCurrency,
-                    MultipleBettype = "29"
+                    MultipleBettype = "29",
                 };
 
                 CacheRefAdapter.GetBettype("29").Returns("MixParlay");
@@ -139,7 +116,7 @@
             }
         }
 
-        [TestCase("USD", null, "USD")]
+        [TestCase("USD", null, "EUR")]
         [TestCase("USD", "eur", "EUR")]
         public async Task DoubleChange_ExportExcel_PassCorrectParam(string currency, string baseCurrency, string expectedCurrency)
         {
@@ -170,7 +147,7 @@
             }
         }
 
-        [TestCase("USD", null, "USD")]
+        [TestCase("USD", null, "EUR")]
         [TestCase("USD", "eur", "EUR")]
         public async Task BONTeamToScore_ExportExcel_PassCorrectParam(string currency, string baseCurrency, string expectedCurrency)
         {

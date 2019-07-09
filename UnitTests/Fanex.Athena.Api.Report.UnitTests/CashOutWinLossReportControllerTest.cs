@@ -9,6 +9,7 @@
     using Excel.Base.Entities;
     using Excel.Report;
     using Extension.Utility;
+    using Fanex.Athena.Service.Core.Utility.Interfaces;
     using Model.Core.ResultModel;
     using Model.Report.DTO;
     using Model.Report.MetaModel;
@@ -23,33 +24,36 @@
     {
         private ICashOutWinLossDataAccess _dataAccess;
         private CashOutWinLossReportController _controller;
+        private ICurrencyValidation _currencyValidation;
 
-        [OneTimeSetUp]
-        public override void FixtureSetUp()
+        [SetUp]
+        public void Setup()
         {
-            base.FixtureSetUp();
 
             MockSessionData();
-
             _dataAccess = Substitute.For<ICashOutWinLossDataAccess>();
-            _controller = Substitute.ForPartsOf<CashOutWinLossReportController>(_dataAccess, SessionService, ProductService, LangService);
+            _currencyValidation = Substitute.For<ICurrencyValidation>();
+            _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
+
+            _controller = Substitute.ForPartsOf<CashOutWinLossReportController>(_dataAccess,
+                SessionService,
+                ProductService, LangService, _currencyValidation);
         }
 
-        [OneTimeTearDown]
-        public override void FixtureTearDown()
+        [TearDown]
+        public void TearDown()
         {
-            base.FixtureTearDown();
-
             _dataAccess = null;
             _controller = null;
+            _currencyValidation = null;
         }
 
         [Test]
-        public async Task Index_InvalidRequest_ReturnEmptyResult()
+        public async Task Index_InvalidCurrency_ReturnEmptyResult()
         {
             // Arrange
-            var metaModel = new ThirdPartyWinLossMetaModel { CurrencyId = -4 };
-
+            var metaModel = new ThirdPartyWinLossMetaModel { CurrencyId = -9 };
+            _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(false);
             // Action
             var result = await _controller.Index(metaModel);
 
@@ -213,10 +217,9 @@
             _controller.Received().ExcelStream(Arg.Any<IWorkbook>(), Arg.Any<string>());
         }
 
-        [TestCase(0, -2)]
-        [TestCase(1, -2)]
-        [TestCase(1, 1)]
-        public async Task Index_IsExportExcelTrueWithDifferentLevelAndCurrency_UpdateMetanData(int level, int currencyId)
+
+        public async Task Index_IsExportExcelTrueWithDifferentLevelAndCurrency_UpdateMetanData(
+            )
         {
             // Arrange
             const int CustId = 1, DrilldownCurrency = 2;
@@ -224,7 +227,7 @@
             var toDate = new DateTime(2017, 4, 18);
             var metaModel = new ThirdPartyWinLossMetaModel
             {
-                CurrencyId = currencyId,
+                CurrencyId = 1,
                 IsExcludedTestData = true,
                 IsExportExcel = true,
                 FromDate = fromDate.AddDays(1),
@@ -248,14 +251,14 @@
                 .Returns(excel);
             _controller.When(x => x.ExcelStream(Arg.Any<IWorkbook>(), Arg.Any<string>())).DoNotCallBase();
 
-            SessionService.UserSession.CurrencyList = new Dictionary<int, string> { { currencyId, "Currency" } };
+            SessionService.UserSession.CurrencyList = new Dictionary<int, string> { { 1, "Currency" } };
 
-            var expectedFromDate = level > 0 && currencyId <= 0 ? fromDate : metaModel.FromDate;
-            var expectedToDate = level > 0 && currencyId <= 0 ? toDate : metaModel.ToDate;
-            var expectedCurrency = level > 0 && currencyId >= 0 ? DrilldownCurrency : metaModel.CurrencyId;
+            var expectedFromDate = fromDate;
+            var expectedToDate = toDate;
+            var expectedCurrency = metaModel.CurrencyId;
 
             // Action
-            await _controller.Index(metaModel, fromDate, toDate, level, DrilldownCurrency, CustId);
+            await _controller.Index(metaModel, fromDate, toDate, 0, DrilldownCurrency, CustId);
 
             // Assert
             Assert.Multiple(() =>

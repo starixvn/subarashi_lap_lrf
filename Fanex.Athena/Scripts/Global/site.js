@@ -6,7 +6,7 @@
 
 var Site = (function ($) {
     var UNBLOCKUI_TIMEOUT = 30000;
-    var BASE_CURRENT_LIST = ["EUR", "USD", "GBP"];
+    var BASE_CURRENCY = { 'eur': '-1', 'usd': '-2', 'gbp': '-3', 'myr': '-4', 'cny': '-5', 'thb': '-6', 'idr': '-7', 'inh': '-8' };
     var REQUEST_VERIFICATION_TOKEN;
     var _historyDate = null;
     var _licenseeId = null;
@@ -163,7 +163,17 @@ var Site = (function ($) {
             return _historyDate;
         },
         isBaseCurrency: function (currencyName) {
-            return $.inArray(currencyName.toUpperCase(), BASE_CURRENT_LIST) > -1;
+            return BASE_CURRENCY[currencyName.toLowerCase()] !== undefined;
+        },
+        getBaseCurrencyName: function (currencyId) {
+            var currency = currencyId.toString();
+            for (var currencyName in BASE_CURRENCY) {
+                if (BASE_CURRENCY[currencyName] === currency) {
+                    return currencyName;
+                }
+            }
+
+            return '';
         },
         addUserGuide: function (options) {
             var defaultOptions = {
@@ -396,9 +406,7 @@ var Site = (function ($) {
                 return $(this).val() < 0;
             }).length > 0;
             if (hasBaseCurrencyInDropdown) {
-                var basedCurrencyMap = { "-1": "eur", "-2": "usd", "-3": "gbp" };
-                var basedCurrency = basedCurrencyMap[currency.toString()];
-                basedCurrency = basedCurrency === undefined ? "" : basedCurrency;
+                var basedCurrency = Site.getBaseCurrencyName(currency);
                 $baseCurrency.val(basedCurrency);
             }
         },

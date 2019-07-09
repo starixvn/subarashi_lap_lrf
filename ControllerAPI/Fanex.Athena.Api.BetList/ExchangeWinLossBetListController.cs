@@ -5,6 +5,7 @@
     using System.Web.Http;
     using Base;
     using Base.Attributes;
+    using Fanex.Athena.Model.Core.Helper;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.BetList.DTO;
     using Model.BetList.MetaModel;
@@ -36,6 +37,7 @@
         }
 
         [HttpPost]
+        [ValidationApiRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
         public async Task<dynamic> Index(ExchangeBetListMetaModel metaModel)
         {
             if (!IsValidRequest(metaModel))
@@ -53,6 +55,7 @@
         }
 
         [HttpPost]
+        [ValidationApiRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
         public async Task<dynamic> Detail(ExchangeBetListDetailMetaModel metaModel)
         {
             if (!IsValidRequest(metaModel))
@@ -68,10 +71,8 @@
 
         private bool IsValidRequest(BaseExchangeBetListMetaModel metaModel)
         {
-            return metaModel.IsValid
-                && (metaModel.CurrencyId == BaseCurrencyType.All || KeanOceanBusinessHelper.VerifyKeanOceanCurrencyRequest(
-                    SessionService.UserSession.CurrencyList, SessionService.LicenseeSession.LicenseeId, metaModel.CurrencyId))
-                && _authorizationService.HasPermissionOnData(SessionService.LicenseeSession.LicenseeId, metaModel.CustId, 0);
+            var licenseId = SessionService.LicenseeSession.LicenseeId;
+            return _authorizationService.HasPermissionOnData(licenseId, metaModel.CustId, 0);
         }
     }
 }

@@ -1,9 +1,9 @@
 ﻿namespace Fanex.Athena.Service.Core.Users
 {
+    using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-    using System.Threading.Tasks;
     using System.Web;
     using System.Web.Hosting;
     using Constant.DataDomain;
@@ -21,8 +21,8 @@
     using Resources;
     using Session.Enum;
     using Session.Model;
-    using Utility.Interfaces;
 
+    [CLSCompliant(false)]
     public class OneAuthenticationService : IOneAuthenticationService
     {
         private readonly ISessionService _sessionService;
@@ -31,6 +31,7 @@
         private readonly IOneBookSecurityWrapper _oneBookSecurityWrapper;
         private readonly ILogger _logger;
         private readonly IOneAuthDataAccess _oneAuthDataAccess;
+        private readonly IAppSettings _appSettings;
 
         public OneAuthenticationService(
             ISessionService sessionService,
@@ -38,6 +39,7 @@
             IFormsAuthenticationService formsAuthenticationService,
             IOneBookSecurityWrapper oneBookSecurityWrapper,
             ILogger logger,
+            IAppSettings appSettings,
             IOneAuthDataAccess oneAuthDataAccess)
         {
             _sessionService = sessionService;
@@ -46,6 +48,7 @@
             _oneBookSecurityWrapper = oneBookSecurityWrapper;
             _logger = logger;
             _oneAuthDataAccess = oneAuthDataAccess;
+            _appSettings = appSettings;
         }
 
         protected internal virtual string GetStringFromFile(string path)
@@ -186,6 +189,8 @@
             userSession.IsManageableSubsidiary = userInfo.IsEnabledSubsidiary && userInfo.UserLevel != UserLevelType.Subsidiary;
             userSession.OperatorId = userInfo.OperatorID;
             userSession.PortalFunctionList = GetPermissionList(tokenInfo);
+            userSession.DefaultBaseCurrency = string.IsNullOrEmpty(userInfo.BaseCurrency) ? _appSettings.DefaultBaseCurrency
+                : userInfo.BaseCurrency;
         }
 
         private OneAuthUserInfo GetUserInfo(OneAuthToken tokenInfo)
@@ -232,7 +237,9 @@
                 DefaultReportUrl = "LicenseeWinLossReport",
                 ApplicationMode = AppMode.Parasitic,
                 VendorID = tokenInfo.VendorID,
-                VendorIdentityID = tokenInfo.UserID
+                VendorIdentityID = tokenInfo.UserID,
+                DefaultBaseCurrency = string.IsNullOrEmpty(userInfo.BaseCurrency) ? _appSettings.DefaultBaseCurrency
+                : userInfo.BaseCurrency
             };
 
             _sessionService.AssignCurrenciesToUserSession(userSession, licenseeInfo.Id, userInfo.CurrencyUserList);

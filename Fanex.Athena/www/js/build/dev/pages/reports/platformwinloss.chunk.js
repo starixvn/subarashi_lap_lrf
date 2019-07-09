@@ -8646,15 +8646,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 Site.getSingleResource('Currency') + ' ' + selectedCurrency;
 
             const viewinKey = Site.getSingleResource('Viewin');
-            const baseCurrency = {
-                'gbp': viewinKey.replace('{0}', 'GBP'),
-                'usd': viewinKey.replace('{0}', 'USD'),
-                'eur': viewinKey.replace('{0}', 'EUR')
-            };
+
             const baseCurrencyKey = $('#BaseCurrency').val();
-            const baseCurrencyText = baseCurrency[baseCurrencyKey] ?
-                baseCurrency[baseCurrencyKey]
-                : viewinKey.replace('{0}', selectedCurrency);
+            const baseCurrencyText = viewinKey.replace('{0}', baseCurrencyKey ? baseCurrencyKey.toUpperCase() : selectedCurrency);
 
             const platformName = _platformNameMap[data.PlatformType];
 
@@ -9364,17 +9358,16 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         },
 
         getCurrencyNameForReportTitle: function (currencyId) {
-            const viewinKey = Site.getSingleResource('Viewin');
-            const currencyTextList = {
-                '-3': viewinKey.replace('{0}', 'GBP'),
-                '-2': viewinKey.replace('{0}', 'USD'),
-                '-1': viewinKey.replace('{0}', 'EUR'),
-                '0': Site.getSingleResource('AllCurrencies')
-            };
+            if (currencyId.toString() === '0') {
+                return Site.getSingleResource('AllCurrencies')
+            }
 
-            return currencyTextList[currencyId] === undefined
-                ? viewinKey.replace('{0}', $('#CurrencyId option[value="' + currencyId + '"]').text())
-                : currencyTextList[currencyId];
+            const viewinKey = Site.getSingleResource('Viewin');
+            const baseCurrencyName = Site.getBaseCurrencyName(currencyId);
+
+            return baseCurrencyName === ''
+                    ? viewinKey.replace('{0}', $('#CurrencyId option[value="' + currencyId + '"]').text())
+                    : viewinKey.replace('{0}', baseCurrencyName.toUpperCase());
         },
 
         renderBreadCrumb: function (level, licenseeId) {

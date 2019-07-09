@@ -6,6 +6,7 @@
     using Base.Attributes;
     using DataAccess.Report;
     using DataAccess.Report.Interfaces;
+    using Fanex.Athena.Resources;
     using Model.Core.DataDomain;
     using Model.Report.DTO;
     using Model.Report.MetaModel;
@@ -28,26 +29,20 @@
         }
 
         [HttpPost]
+        [ValidationApiRequest]
         public async Task<dynamic> Index(LicenseeWinLossByTimeZoneMetaModel metaModel)
         {
-            if (metaModel.IsValid)
-            {
-                var userCurrencyList = SessionService.UserSession.CurrencyList;
-                metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId, metaModel.IsExcludeTestData);
+            var userCurrencyList = SessionService.UserSession.CurrencyList;
+            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId, metaModel.IsExcludeTestData);
 
-                var result = await _licenseeWinLossByTimeZoneDataAccess.GetData(metaModel, userCurrencyList).ConfigureAwait(false);
-
-                return new
-                {
-                    Data = result.DataList,
-                    Total = result.TotalData
-                };
-            }
+            var result = await _licenseeWinLossByTimeZoneDataAccess.GetData(metaModel, userCurrencyList).ConfigureAwait(false);
 
             return new
             {
-                Data = new List<LicenseeWinLossByTimeZone>()
+                Data = result.DataList,
+                Total = result.TotalData
             };
+
         }
     }
 }

@@ -6,10 +6,11 @@
 
 namespace Fanex.Athena.Model.Report.MetaModel
 {
+    using Fanex.Athena.Model.Core.MetaModel;
     using System;
     using DataDomain = Model.Core.DataDomain;
 
-    public class PlatformWinLossMetaModel : BaseReportMetaModel
+    public class PlatformWinLossMetaModel : BaseReportMetaModel, IMetaModelValidation
     {
         public PlatformWinLossMetaModel()
         {

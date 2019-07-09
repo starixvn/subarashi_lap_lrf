@@ -33,30 +33,6 @@
         }
 
         [Test]
-        public async Task Index_MetaModelIsInvalid_ReturnEmptyResult()
-        {
-            // Arrange
-            var metaModel = new LicenseeWinLossByTimeZoneMetaModel
-            {
-                ProductCodeList = string.Empty
-            };
-            dynamic result;
-
-            // Action
-            using (var controller = CreateController())
-            {
-                result = await controller.Index(metaModel);
-            }
-
-            // Assert
-            Assert.Multiple(async () =>
-            {
-                await _dataAccess.DidNotReceiveWithAnyArgs().GetData(Arg.Any<LicenseeWinLossByTimeZoneMetaModel>(), Arg.Any<IDictionary<int, string>>());
-                Assert.That(result.Data, Is.Empty);
-            });
-        }
-
-        [Test]
         public async Task Index_ValidMetaModel_AssignCorrectAgentListXml()
         {
             // Arrange

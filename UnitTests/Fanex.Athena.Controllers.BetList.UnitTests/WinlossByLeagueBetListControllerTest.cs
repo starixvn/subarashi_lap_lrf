@@ -54,36 +54,15 @@
             }
         }
 
-        [Test]
-        public async Task Index_ExportExcel_InvalidCurrency_ReturnEmptyResult()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var metaModel = new WinLossByLeagueBetListMetaModel
-                {
-                    IsExportExcel = true,
-                    CurrencyId = -1000
-                };
-
-                controller.When(x => x.EmptyExcel()).DoNotCallBase();
-
-                // Action
-                await controller.Index(metaModel);
-
-                // Assert
-                controller.Received().EmptyExcel();
-            }
-        }
-
         [TestCase(1, "USD", null, "USD", true)]
         [TestCase(1, "USD", "eur", "EUR", false)]
-        [TestCase(0, "USD", null, null, false)]
         public async Task Index_ExportExcel_PassCorrectParam(int currencyId, string currency, string baseCurrency, string expectedCurrency, bool isFakeLicensee)
         {
             using (var controller = CreateController())
             {
+
                 // Arrange
+
                 const string AgentListXml = "<xml/>";
                 var metaModel = new WinLossByLeagueBetListMetaModel
                 {
@@ -106,9 +85,9 @@
                 SessionService.GenerateAgentListXml(metaModel.CurrencyId, false).Returns(AgentListXml);
 
                 controller.When(async x => await x.ProcessExportExcel(
-                    Arg.Any<BetListExcelMetaModel>(),
-                    Arg.Any<string>(),
-                    Arg.Any<string>())).DoNotCallBase();
+                Arg.Any<BetListExcelMetaModel>(),
+                Arg.Any<string>(), Arg.Any<string>()
+                )).DoNotCallBase();
 
                 // Action
                 await controller.Index(metaModel);
@@ -137,6 +116,7 @@
                 BalanceUpDataAccess,
                 CacheRefAdapter,
                 BetListApiClient);
+
         }
     }
 }

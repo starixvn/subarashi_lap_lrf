@@ -1,6 +1,7 @@
 ﻿namespace Fanex.Athena.Api.BetList
 {
     using System.Linq;
+    using System.Net;
     using System.Net.Http;
     using System.Threading.Tasks;
     using System.Web.Http;
@@ -8,6 +9,7 @@
     using Base.Attributes;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Athena.Resources;
     using Fanex.Athena.Service.Core.Common.Interfaces;
     using Model.BetList.MetaModel;
     using Service.Core.Users.Interfaces;
@@ -68,6 +70,7 @@
         }
 
         [HttpPost]
+        [ValidationApiRequest(ObjectName = "metaModel")]
         public async Task<HttpResponseMessage> Index(LastBetsMonitoringMetaModel metaModel)
         {
             if (string.IsNullOrWhiteSpace(metaModel.Currency))

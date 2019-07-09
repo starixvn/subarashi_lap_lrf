@@ -59,7 +59,11 @@
                 // Arrange
                 var metaModel = new MatchWinLossMetaModel
                 {
-                    CurrencyId = CurrencyId
+                    CurrencyId = 1,
+                    ProductCodeList = "SB,NG",
+                    MatchId = 1,
+                    LeagueId = 1
+                    
                 };
                 var dataList = new List<MatchWinLoss>
                 {
@@ -76,7 +80,6 @@
                 {
                     Assert.That(viewResult.ViewName, Is.EqualTo("~/Views/Desktop/Report/MatchWinLoss/Content.data.Detail.cshtml"));
                     Assert.That(viewModel.MainResult, Is.EqualTo(dataList));
-                    Assert.That(metaModel.AgentListXml, Is.EqualTo(AgentListXml));
                 });
             }
         }

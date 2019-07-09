@@ -62,18 +62,18 @@ namespace Fanex.Athena.Controllers.Report
                 UserId = userSession.UserId,
                 IsViewedHistory = isViewedHistory,
                 CurrencyId = 0,
-                LiveIndicator = 1
-            };
+                LiveIndicator = 1,
+                BaseCurrency = userSession.DefaultBaseCurrency
 
-            SetConvetedUSDCurrencyName(metaModel);
+            };
 
             var productAccess = GetProductAccess(licenseeSession.LicenseeId, userSession.Language);
 
             var model = CreateViewModel(
-                licenseeSession.LicenseeId, 
-                licenseeSession.IsAllowedCustomerComm, 
-                userSession.CurrencyList, 
-                metaModel, 
+                licenseeSession.LicenseeId,
+                licenseeSession.IsAllowedCustomerComm,
+                userSession.CurrencyList,
+                metaModel,
                 productAccess);
 
             return View("~/Views/Desktop/Report/LiveReport/Main.cshtml", model);
@@ -81,6 +81,7 @@ namespace Fanex.Athena.Controllers.Report
 
         [HttpPost]
         [CustomValidateAntiForgery]
+        [ValidationWebRequest]
         public async Task<ActionResult> Index(LiveReportMetaModel metaModel)
         {
             var licenseeSession = SessionService.LicenseeSession;
@@ -92,10 +93,10 @@ namespace Fanex.Athena.Controllers.Report
             metaModel.ProductCodeList = string.Join(",", productAccess.ProductList.Select(x => x.ProductCode));
 
             var model = CreateViewModel(
-                licenseeSession.LicenseeId, 
-                licenseeSession.IsAllowedCustomerComm, 
-                userSession.CurrencyList, 
-                metaModel, 
+                licenseeSession.LicenseeId,
+                licenseeSession.IsAllowedCustomerComm,
+                userSession.CurrencyList,
+                metaModel,
                 productAccess);
             model.MainResult = await _liveReportService.GetLiveReportSummary(metaModel);
             model.ShowEmptyContent = false;
@@ -105,6 +106,7 @@ namespace Fanex.Athena.Controllers.Report
         }
 
         [HttpGet]
+        [ValidationWebRequest]
         public async Task<ActionResult> MatchList(LiveReportMatchListMetalModel metaModel)
         {
             var licenseeSession = SessionService.LicenseeSession;
@@ -128,6 +130,7 @@ namespace Fanex.Athena.Controllers.Report
         [HttpPost]
         [AjaxRequest]
         [CustomValidateAntiForgery]
+        [ValidationWebRequest]
         public async Task<ActionResult> Detail(LiveReportMetaModel metaModel, string productCode)
         {
             var licenseeSession = this.SessionService.LicenseeSession;
@@ -157,7 +160,7 @@ namespace Fanex.Athena.Controllers.Report
             int licenseeId,
             bool isAllowedCustomerComm,
             IDictionary<int, string> currencyList,
-            LiveReportMetaModel metaModel, 
+            LiveReportMetaModel metaModel,
             ProductAccess productAccess)
         {
             return new LiveReportViewModel

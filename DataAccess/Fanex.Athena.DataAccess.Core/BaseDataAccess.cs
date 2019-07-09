@@ -7,9 +7,12 @@
 namespace Fanex.Athena.DataAccess.Core
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Common;
     using Fanex.Data;
+    using Model.Core.DataDomain;
 
     public class BaseDataAccess
     {
@@ -40,6 +43,27 @@ namespace Fanex.Athena.DataAccess.Core
         protected internal virtual IObjectDb GetObjectDb(string spname, int timeout = 120)
         {
             return new ObjectDb(spname, timeout);
+        }
+
+        protected static IDictionary<string, T> InitSummaryTotalList<T>(string defaultBaseCurrency, Func<T> initialData, string baseCurrencySetting = "") where T : class
+        {
+            var baseCurrencies = string.IsNullOrEmpty(baseCurrencySetting)
+                                ? SystemConstants.BaseCurrencyListOfSummaryTotalRow
+                                : baseCurrencySetting.Split(',').Where(x => SystemConstants.BaseCurrencyListOfSummaryTotalRow.Contains(x));
+
+            var summary = new Dictionary<string, T>();
+            foreach (var currency in baseCurrencies)
+            {
+                summary.Add(currency, initialData());
+            }
+
+            if (!string.IsNullOrEmpty(defaultBaseCurrency) &&
+                !baseCurrencies.Any(x => x.Equals(defaultBaseCurrency, StringComparison.OrdinalIgnoreCase)) )
+            {
+                summary.Add(defaultBaseCurrency.ToUpperInvariant(), initialData());
+            }
+
+            return summary;
         }
 
         private static void AssignResult(IObjectDb db, IResultInfo result)

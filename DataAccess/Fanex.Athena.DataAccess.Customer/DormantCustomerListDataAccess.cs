@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Data;
 using System.Threading.Tasks;
 using Fanex.Athena.DataAccess.Core;
 using Fanex.Athena.DataAccess.Customer.Interfaces;
@@ -24,6 +23,7 @@ namespace Fanex.Athena.DataAccess.Customer
                 db.SetParameterValue("PageSize", metaModel.PageSize);
                 db.SetParameterValue("PageIndex", metaModel.PageIndex);
                 db.SetParameterValue("AgentList", metaModel.AgentListXml);
+                db.SetParameterValue("BaseCurrency", metaModel.BaseCurrency);
                 db.SetParameterValue("TotalRows", null);
 
                 var dataList = await ReadDormantCustomerList(db, metaModel).ConfigureAwait(false);
@@ -42,7 +42,6 @@ namespace Fanex.Athena.DataAccess.Customer
             var dataList = new List<DormantCustomer>();
             using (var reader = await objectDb.ExecuteReaderAsync().ConfigureAwait(false))
             {
-                var balanceColumn = "Balance" + metaModel.BaseCurrency;
                 var startIndex = ((metaModel.PageIndex - 1) * metaModel.PageSize) + 1;
                 while (reader.Read())
                 {
@@ -52,7 +51,7 @@ namespace Fanex.Athena.DataAccess.Customer
                         CustId = reader.ToInt("custid"),
                         SystemId = reader.ToString("username"),
                         ExternalId = reader.ToString("nickname"),
-                        Balance = reader.ToDecimal(balanceColumn),
+                        Balance = reader.ToDecimal("Balance"),
                         ArchivedDate = reader.ToDateTime("ArchivedDate")
                     });
                 }

@@ -1,8 +1,9 @@
 ﻿namespace Fanex.Athena.Model.Report.MetaModel
 {
+    using Fanex.Athena.Model.Core.MetaModel;
     using System;
 
-    public class PromotionPrizeMetaModel
+    public class PromotionPrizeMetaModel : IMetaModelValidation, IMetaModelCurrency
     {
         public DateTime FromDate { get; set; }
 
@@ -19,5 +20,9 @@
         public bool IsExcludedTestData { get; set; }
 
         public int AgentId { get; set; }
+
+        public bool IsValid => FromDate <= ToDate;
+
+        public string DefaultBaseCurrency { get; set; }
     }
 }

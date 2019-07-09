@@ -49,30 +49,22 @@ namespace Fanex.Athena.Api.Report
         }
 
         [HttpPost]
+        [ValidationApiRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
         public async Task<dynamic> Index([FromBody] WinLossByLeagueMetaModel metaModel)
         {
-            if (!IsValidRequest(metaModel.CurrencyId))
-            {
-                return BadRequest(ViewResources.InvalidParams);
-            }
-
             var resultModel = await GetData(metaModel).ConfigureAwait(false);
             return new
             {
-                TotalRows = resultModel.TotalRows,
+                resultModel.TotalRows,
                 Data = resultModel.DataList,
                 Total = resultModel.TotalData
             };
         }
 
         [HttpPost]
+        [ValidationApiRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
         public async Task<HttpResponseMessage> Excel(WinLossByLeagueMetaModel metaModel)
         {
-            if (!IsValidRequest(metaModel.CurrencyId))
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.Forbidden, ViewResources.InvalidParams + "1");
-            }
-
             metaModel.PageIndex = 1;
             metaModel.PageSize = int.MaxValue - 1;
 
@@ -124,9 +116,8 @@ namespace Fanex.Athena.Api.Report
 
             if (metaModel.Level == 0)
             {
-                var dataList = metaModel.IsValid
-                       ? await this._winlossByLeagueDataAccess.GetSummary(metaModel).ConfigureAwait(false)
-                       : new List<WinLossByLeague>();
+                var dataList = await _winlossByLeagueDataAccess.GetSummary(metaModel).ConfigureAwait(false);
+
                 resultModel = new ReportResultModel<WinLossByLeague>
                 {
                     DataList = dataList,
@@ -135,13 +126,8 @@ namespace Fanex.Athena.Api.Report
             }
             else
             {
-                resultModel = metaModel.IsValid ?
-                    await _winlossByLeagueDataAccess.GetCustomers(metaModel).ConfigureAwait(false) :
-                    new ReportResultModel<WinLossByLeague>
-                    {
-                        DataList = new List<WinLossByLeague>(),
-                        TotalData = new WinLossByLeague()
-                    };
+                resultModel =
+                    await _winlossByLeagueDataAccess.GetCustomers(metaModel).ConfigureAwait(false);
             }
 
             return resultModel;

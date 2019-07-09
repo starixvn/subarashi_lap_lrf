@@ -93,24 +93,26 @@ namespace Fanex.Athena.DataAccess.Report
             }
         }
 
-        private static void ReadSummary(IDataReader reader, IDictionary<string, IList<WinLossByProduct>> summaryTotalTemp)
+        private static void ReadSummary(IDataReader reader, IDictionary<string, IList<WinLossByProduct>> summaryTotalTemp, string defaultBaseCurrency)
         {
-            foreach (var currency in SystemConstants.BaseCurrencyList)
+            foreach (var summary in summaryTotalTemp)
             {
-                var code = reader.ToString("productcode");
+                var suffixColumn = !string.IsNullOrEmpty(defaultBaseCurrency) && summary.Key.Equals(defaultBaseCurrency, System.StringComparison.OrdinalIgnoreCase)
+                                    ? "Base"
+                                    : summary.Key;
+
                 var summaryItem = new WinLossByProduct
                 {
-                    ProductCode = code,
-                    ProductName = ProductHelper.GetProductName(code),
-                    TurnOver = reader.ToDecimal("turnover" + currency.ToLowerInvariant()),
-                    CustomerWinLoss = reader.ToDecimal("winlost" + currency.ToLowerInvariant()),
-                    CustomerComm = reader.ToDecimal("playercomm" + currency.ToLowerInvariant()),
-                    LicenseeWL = reader.ToDecimal("licenseewl" + currency.ToLowerInvariant()),
+                    ProductCode = reader.ToString("productcode"),
+                    TurnOver = reader.ToDecimal("turnover" + suffixColumn),
+                    CustomerWinLoss = reader.ToDecimal("winlost" + suffixColumn),
+                    CustomerComm = reader.ToDecimal("playercomm" + suffixColumn),
+                    LicenseeWL = reader.ToDecimal("licenseewl" + suffixColumn),
                     TotalTransaction = reader.ToInt("betcount"),
-                    AmountDue = reader.ToDecimal("amtdueto3rd" + currency.ToLowerInvariant()),
-                    LicenseeWLComm = reader.ToDecimal("comm" + currency.ToLowerInvariant()),
+                    AmountDue = reader.ToDecimal("amtdueto3rd" + suffixColumn),
+                    LicenseeWLComm = reader.ToDecimal("comm" + suffixColumn),
                 };
-                summaryTotalTemp[currency].Add(summaryItem);
+                summary.Value.Add(summaryItem);
             }
         }
 
@@ -118,13 +120,13 @@ namespace Fanex.Athena.DataAccess.Report
             IDictionary<string, IList<WinLossByProduct>> summaryTotalTemp)
         {
             var summaryTotal = new Dictionary<string, IEnumerable<WinLossByProduct>>();
-            foreach (var currency in SystemConstants.BaseCurrencyList)
+            foreach (var summary in summaryTotalTemp)
             {
-                summaryTotal[currency] = summaryTotalTemp[currency].GroupBy(i => new { i.ProductCode })
+                summaryTotal[summary.Key] = summary.Value.GroupBy(i => i.ProductCode)
                                     .Select(i => new WinLossByProduct
                                     {
-                                        ProductCode = i.Key.ProductCode,
-                                        ProductName = i.First().ProductName,
+                                        ProductCode = i.Key,
+                                        ProductName = ProductHelper.GetProductName(i.Key),
                                         TurnOver = i.Sum(j => j.TurnOver),
                                         CustomerWinLoss = i.Sum(j => j.CustomerWinLoss),
                                         CustomerComm = i.Sum(j => j.CustomerComm),
@@ -166,6 +168,8 @@ namespace Fanex.Athena.DataAccess.Report
             db.SetParameterValue("drawfilter", metaModel.DrawFilter);
             db.SetParameterValue("movebetsday", _balanceUpDataAccess.GetBalanceUp().MoveBetsDay);
             db.SetParameterValue("productList", string.Join(",", metaModel.ProductOptions.Where(x => x.Status).Select(x => x.Code)));
+            db.SetParameterValue("BaseCurrency", metaModel.BaseCurrency);
+            db.SetParameterValue("DefaultBaseCurrency", metaModel.DefaultBaseCurrency);
         }
 
         private WinLossByProductResultModel GetData(
@@ -175,11 +179,7 @@ namespace Fanex.Athena.DataAccess.Report
             bool drilldown)
         {
             var result = new List<WinLossByProduct>();
-            var summaryTotalTemp = new Dictionary<string, IList<WinLossByProduct>>();
-            foreach (var currency in SystemConstants.BaseCurrencyList)
-            {
-                summaryTotalTemp.Add(currency, new List<WinLossByProduct>());
-            }
+            var summaryTotalTemp = InitSummaryTotalList<IList<WinLossByProduct>>(metaModel.DefaultBaseCurrency, () => new List<WinLossByProduct>());
 
             var hasSystemId = reader.HasColumn("username");
             var hasExternalId = reader.HasColumn("nickname");
@@ -198,20 +198,20 @@ namespace Fanex.Athena.DataAccess.Report
                     ProductName = ProductHelper.GetProductName(productCode),
                     CurrencyId = currencyId,
                     CurrencyName = currencyList?.GetValueOrDefault(currencyId, currencyId.ToString()),
-                    TurnOver = reader.ToDecimal("turnover" + metaModel.BaseCurrency),
-                    CustomerWinLoss = reader.ToDecimal("winlost" + metaModel.BaseCurrency),
-                    CustomerComm = reader.ToDecimal("playercomm" + metaModel.BaseCurrency),
-                    LicenseeWL = reader.ToDecimal("licenseewl" + metaModel.BaseCurrency),
+                    TurnOver = reader.ToDecimal("turnover"),
+                    CustomerWinLoss = reader.ToDecimal("winlost"),
+                    CustomerComm = reader.ToDecimal("playercomm"),
+                    LicenseeWL = reader.ToDecimal("licenseewl"),
                     TotalTransaction = reader.ToInt("betcount"),
-                    AmountDue = reader.ToDecimal("amtdueto3rd" + metaModel.BaseCurrency),
-                    LicenseeWLComm = reader.ToDecimal("comm" + metaModel.BaseCurrency),
+                    AmountDue = reader.ToDecimal("amtdueto3rd"),
+                    LicenseeWLComm = reader.ToDecimal("comm"),
                     Date = drilldown
                     ? metaModel.DrillDownFromDate
                     : ConvertHelper.ToDateTime(reader.ToString("reporttype"), metaModel.ReportBy == ReportByType.Monthly)
                 };
                 result.Add(item);
 
-                ReadSummary(reader, summaryTotalTemp);
+                ReadSummary(reader, summaryTotalTemp, metaModel.DefaultBaseCurrency);
             }
 
             return new WinLossByProductResultModel

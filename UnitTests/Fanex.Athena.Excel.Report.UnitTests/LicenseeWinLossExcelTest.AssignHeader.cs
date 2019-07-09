@@ -19,7 +19,9 @@ namespace Fanex.Athena.Excel.Report.UnitTests
             var productCodes = new[] { Product.SB, Product.NG };
             var row1 = ExcelTestHelper.MockGetRow(FakeSheet, ColumnTemplateCount, ReportBase.RowHeaderTemplate);
             var row2 = ExcelTestHelper.MockGetRow(FakeSheet, ColumnTemplateCount, ReportBase.RowHeaderTemplate + 1);
-            var excel = CreateExcel(productCodes: productCodes);
+
+            var excelModel = CreateExcelModel(productCodes: productCodes);
+            var excel = CreateExcel(excelModel);
 
             // Action
             excel.Public_AssignHeader(FakeSheet);

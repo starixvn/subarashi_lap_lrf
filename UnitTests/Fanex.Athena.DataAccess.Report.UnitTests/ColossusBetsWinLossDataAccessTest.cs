@@ -1,7 +1,6 @@
 ﻿namespace Fanex.Athena.DataAccess.Report.UnitTests
 {
     using System;
-    using System.Data;
     using System.Threading.Tasks;
     using Core.Configuration.Interfaces;
     using Core.UnitTests.TestHelpers;
@@ -12,6 +11,7 @@
     using Model.Report.MetaModel;
     using NSubstitute;
     using NUnit.Framework;
+    using UnitTest.Common.Helpers;
 
     [TestFixture]
     public class ColossusBetsWinLossDataAccessTest : BaseDataAccessHelperTest<ColossusBetsWinLossDataAccess>
@@ -40,7 +40,7 @@
         {
             // Arrange
             DataAccess.GetObjectDb(Arg.Is(GetSummaryWinlossSp)).Returns(ObjectDb);
-            var metaModel = CreateMetaModel();
+            var metaModel = FakeHelper.Create<ColossusBetsWinLossMetaModel>();
 
             // Action
             await DataAccess.GetSummaryWinloss(metaModel, UserCurrencyList);
@@ -54,7 +54,7 @@
         {
             // Arrange
             DataAccess.GetObjectDb(Arg.Is(GetSummaryWinlossSp)).Returns(ObjectDb);
-            var metaModel = CreateMetaModel();
+            var metaModel = FakeHelper.Create<ColossusBetsWinLossMetaModel>(x => x.DrillDownLevel, ReportLevel.Main);
             var expected = new ColossusBetWinLoss
             {
                 SystemId = string.Empty,
@@ -76,8 +76,7 @@
         {
             // Arrange
             DataAccess.GetObjectDb(Arg.Is(GetWinlossDetailSp)).Returns(ObjectDb);
-            var metaModel = CreateMetaModel();
-            metaModel.DrillDownLevel = 1;
+            var metaModel = FakeHelper.Create<ColossusBetsWinLossMetaModel>(x => x.DrillDownLevel, ReportLevel.Customer);
 
             // Action
             await DataAccess.GetWinlossDetail(metaModel, UserCurrencyList);
@@ -91,14 +90,14 @@
         {
             // Arrange
             DataAccess.GetObjectDb(Arg.Is(GetWinlossDetailSp)).Returns(ObjectDb);
-            var metaModel = CreateMetaModel();
+            var metaModel = FakeHelper.Create<ColossusBetsWinLossMetaModel>(x => x.DrillDownLevel, ReportLevel.Customer);
 
             var expected = new ColossusBetWinLoss
             {
                 SystemId = string.Empty,
                 ExternalId = string.Empty,
                 CurrencyId = CurrencyId,
-                Date = new DateTime(2016, 8, 29)
+                Date = metaModel.DrillDownFromDate
             };
             ConfigureReader(expected);
 
@@ -114,7 +113,7 @@
         {
             // Arrange
             DataAccess.GetObjectDb(Arg.Is(GetWinlossDetailSp)).Returns(ObjectDb);
-            var metaModel = CreateMetaModel();
+            var metaModel = FakeHelper.Create<ColossusBetsWinLossMetaModel>();
 
             var expected = new ColossusBetWinLoss
             {
@@ -141,7 +140,7 @@
         {
             // Arrange
             DataAccess.GetObjectDb(Arg.Is(GetWinlossDetailSp)).Returns(ObjectDb);
-            var metaModel = CreateMetaModel();
+            var metaModel = FakeHelper.Create<ColossusBetsWinLossMetaModel>();
 
             var expected = new ColossusBetWinLoss
             {
@@ -168,7 +167,7 @@
         {
             // Arrange
             DataAccess.GetObjectDb(Arg.Is(GetWinlossDetailSp)).Returns(ObjectDb);
-            var metaModel = CreateMetaModel();
+            var metaModel = FakeHelper.Create<ColossusBetsWinLossMetaModel>();
 
             var expected = new ColossusBetWinLoss
             {
@@ -192,20 +191,21 @@
         }
 
         [Test]
-        public async Task ReadData_Level0_ReturnCorrectDateFromDB()
+        public async Task ReadData_Level0_ReportByMonthly_ResultDateIsFirstDayOfMonth()
         {
             // Arrange
             DataAccess.GetObjectDb(Arg.Is(GetWinlossDetailSp)).Returns(ObjectDb);
-            var metaModel = CreateMetaModel();
+            var metaModel = FakeHelper.Create<ColossusBetsWinLossMetaModel>(x => x.DrillDownLevel, ReportLevel.Main);
+            metaModel.ReportBy = ReportByType.Monthly;
 
-            var expected = new ColossusBetWinLoss
+            var data = new ColossusBetWinLoss
             {
                 SystemId = string.Empty,
                 ExternalId = string.Empty,
                 CurrencyId = CurrencyId,
                 Date = new DateTime(2016, 8, 29)
             };
-            ConfigureReader(expected);
+            ConfigureReader(data);
 
             // Action
             var result = (await DataAccess.GetWinlossDetail(metaModel, UserCurrencyList).ConfigureAwait(false)).DataList[0];
@@ -213,7 +213,33 @@
             // Assert
             Assert.That(
                 result.Date,
-                Is.EqualTo(ConvertHelper.ToDateTime(expected.Date.ToString("yyyyMMdd"), metaModel.ReportBy == ReportByType.Monthly)));
+                Is.EqualTo(ConvertHelper.ToDateTime(data.Date.ToString("yyyyMMdd"), true)));
+        }
+
+        [Test]
+        public async Task ReadData_Level0_ReportByMonthly_ReturnCorrectDateFromDB()
+        {
+            // Arrange
+            DataAccess.GetObjectDb(Arg.Is(GetWinlossDetailSp)).Returns(ObjectDb);
+            var metaModel = FakeHelper.Create<ColossusBetsWinLossMetaModel>(x => x.DrillDownLevel, ReportLevel.Main);
+            metaModel.ReportBy = ReportByType.Daily;
+
+            var data = new ColossusBetWinLoss
+            {
+                SystemId = string.Empty,
+                ExternalId = string.Empty,
+                CurrencyId = CurrencyId,
+                Date = new DateTime(2016, 8, 29)
+            };
+            ConfigureReader(data);
+
+            // Action
+            var result = (await DataAccess.GetWinlossDetail(metaModel, UserCurrencyList).ConfigureAwait(false)).DataList[0];
+
+            // Assert
+            Assert.That(
+                result.Date,
+                Is.EqualTo(data.Date));
         }
 
         [Test]
@@ -221,8 +247,9 @@
         {
             // Arrange
             DataAccess.GetObjectDb(Arg.Is(GetWinlossDetailSp)).Returns(ObjectDb);
-            var metaModel = CreateMetaModel();
+            var metaModel = FakeHelper.Create<ColossusBetsWinLossMetaModel>();
             metaModel.DrillDownLevel = 1;
+            metaModel.ReportBy = ReportByType.Monthly;
 
             var expected = new ColossusBetWinLoss
             {
@@ -239,22 +266,7 @@
             // Assert
             Assert.That(
                 result.Date,
-                Is.EqualTo(ConvertHelper.ToDateTime(metaModel.DrillDownFromDate.ToString("yyyyMMdd"), metaModel.ReportBy == ReportByType.Monthly)));
-        }
-
-        private static ColossusBetsWinLossMetaModel CreateMetaModel()
-        {
-            return new ColossusBetsWinLossMetaModel
-            {
-                CurrencyId = 1,
-                DrillDownCustomerId = 2,
-                FromDate = new DateTime(2016, 8, 10),
-                ToDate = new DateTime(2016, 8, 29),
-                DrillDownFromDate = new DateTime(2016, 8, 10),
-                DrillDownToDate = new DateTime(2016, 8, 29),
-                BaseCurrency = "UUS",
-                TicketType = 2
-            };
+                Is.EqualTo(metaModel.DrillDownFromDate));
         }
 
         private static void AssertDataReturned(ColossusBetWinLoss actual, ColossusBetWinLoss expected)
@@ -276,21 +288,27 @@
             Reader["currencyid"].Returns(expected.CurrencyId);
             Reader["totaltrans"].Returns(expected.TotalTransaction);
             Reader["reporttype"].Returns(expected.Date.ToString("yyyyMMdd"));
-            Reader["turnoveruus"].Returns(0);
-            Reader["winningprizeuus"].Returns(1);
-            Reader["cashoutamtuus"].Returns(0);
-            Reader["cashinamtuus"].Returns(0);
-            Reader["grandamtuus"].Returns(0);
-            Reader["commamtuus"].Returns(0);
+            Reader["turnover"].Returns(0);
+            Reader["winningprize"].Returns(1);
+            Reader["cashoutamt"].Returns(2);
+            Reader["cashinamt"].Returns(3);
+            Reader["grandamt"].Returns(4);
+            Reader["commamt"].Returns(5);
+            Reader["turnoverBase"].Returns(6);
+            Reader["winningprizeBase"].Returns(7);
+            Reader["cashoutamtBase"].Returns(8);
+            Reader["cashinamtBase"].Returns(9);
+            Reader["grandamtBase"].Returns(10);
+            Reader["commamtBase"].Returns(11);
 
-            foreach (var suffix in SystemConstants.BaseCurrencyList)
+            foreach (var suffix in SystemConstants.BaseCurrencyListOfSummaryTotalRow)
             {
-                Reader["turnover" + suffix].Returns(0);
-                Reader["winningprize" + suffix].Returns(1);
-                Reader["cashoutamt" + suffix].Returns(0);
-                Reader["cashinamt" + suffix].Returns(0);
-                Reader["grandamt" + suffix].Returns(0);
-                Reader["commamt" + suffix].Returns(0);
+                Reader["turnover" + suffix].Returns(12);
+                Reader["winningprize" + suffix].Returns(13);
+                Reader["cashoutamt" + suffix].Returns(14);
+                Reader["cashinamt" + suffix].Returns(15);
+                Reader["grandamt" + suffix].Returns(16);
+                Reader["commamt" + suffix].Returns(17);
             }
         }
 
@@ -302,6 +320,8 @@
             ObjectDb.Received(1).SetParameterValue("ReportType", metaModel.ReportBy);
             ObjectDb.Received(1).SetParameterValue("AgentList", metaModel.AgentListXml);
             ObjectDb.Received(1).SetParameterValue("TicketType", metaModel.TicketType);
+            ObjectDb.Received(1).SetParameterValue("BaseCurrency", metaModel.BaseCurrency);
+            ObjectDb.Received(1).SetParameterValue("DefaultBaseCurrency", metaModel.DefaultBaseCurrency);
         }
     }
 }

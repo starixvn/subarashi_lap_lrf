@@ -47,6 +47,7 @@ namespace Fanex.Athena.Api.BetList
         }
 
         [HttpPost]
+        [ValidationApiRequest]
         [ApiFunctionAuthorization(PermissionKeys.TotalBetCleanSheet)]
         public async Task<dynamic> CleanSheet(BetListMetaModel metaModel)
         {
@@ -55,6 +56,7 @@ namespace Fanex.Athena.Api.BetList
         }
 
         [HttpPost]
+        [ValidationApiRequest]
         [ApiFunctionAuthorization(PermissionKeys.TotalBetToWinToNil)]
         public async Task<dynamic> ToWinToNil(BetListMetaModel metaModel)
         {
@@ -63,6 +65,7 @@ namespace Fanex.Athena.Api.BetList
         }
 
         [HttpPost]
+        [ValidationApiRequest(IsValidCurrency = true)]
         [ApiFunctionAuthorization(PermissionKeys.TotalBet3WayHandicap)]
         public async Task<dynamic> ThreeWayHandicap(BetListMetaModel metaModel)
         {
@@ -72,11 +75,7 @@ namespace Fanex.Athena.Api.BetList
 
         private async Task<dynamic> ProcessRequest(BetListMetaModel metaModel, string uspKey = "Lrf_BetList_SelRunningByBettype")
         {
-            if (!IsValidCurrencyId(metaModel.CurrencyId))
-            {
-                return null;
-            }
-
+            
             return await GetBetListResult(metaModel, uspKey).ConfigureAwait(false);
         }
     }

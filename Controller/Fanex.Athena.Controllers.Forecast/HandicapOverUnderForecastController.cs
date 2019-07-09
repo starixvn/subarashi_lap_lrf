@@ -42,6 +42,7 @@ namespace Fanex.Athena.Controllers.Forecast
         public async Task<ActionResult> Index()
         {
             var liceseeSession = SessionService.LicenseeSession;
+            var userSession = SessionService.UserSession;
             if (AppSettings.LicenseeOfferNewForecast.Contains(liceseeSession.LicenseeId))
             {
                 return this.RedirectToAction("Index", "NewHandicapOverUnderForecast");
@@ -50,10 +51,9 @@ namespace Fanex.Athena.Controllers.Forecast
             var metaModel = new ForecastHandicapOverUnderMetaModel
             {
                 LicenseeId = liceseeSession.LicenseeId,
-                UserId = SessionService.UserSession.UserId
+                UserId = userSession.UserId,
+                BaseCurrency = userSession.DefaultBaseCurrency
             };
-
-            SetConvetedUSDCurrencyName(metaModel);
 
             var model = await GetViewModel(metaModel).ConfigureAwait(false);
 
@@ -62,6 +62,8 @@ namespace Fanex.Athena.Controllers.Forecast
 
         [HttpPost]
         [CustomValidateAntiForgery]
+        [ValidationWebRequest]
+
         public async Task<ActionResult> Index(ForecastHandicapOverUnderMetaModel metaModel)
         {
             var model = await GetViewModel(metaModel).ConfigureAwait(false);

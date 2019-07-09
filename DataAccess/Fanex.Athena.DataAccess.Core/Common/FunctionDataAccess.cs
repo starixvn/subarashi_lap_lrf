@@ -109,14 +109,14 @@ namespace Fanex.Athena.DataAccess.Core.Common
             return functionList;
         }
 
-        public Task<IResultInfo> AssignUserFunctionAsync(int licenseeId, int custId, int functionId, int userId, string ip, string langKey)
+        public async Task<IResultInfo> AssignUserFunctionAsync(int licenseeId, int custId, int functionId, int userId, string ip, string langKey)
         {
-            return ExecuteNonQueryUserFunction("Lrf_LicenseeUserFunctionsIns", licenseeId, userId, custId, ip, functionId, langKey);
+            return await ExecuteNonQueryUserFunction("Lrf_LicenseeUserFunctionsIns", licenseeId, userId, custId, ip, functionId, langKey).ConfigureAwait(false);
         }
 
-        public Task<IResultInfo> RemoveUserFunctionAsync(int licenseeId, int userId, int custId, string ip, int functionId, string langKey)
+        public async Task<IResultInfo> RemoveUserFunctionAsync(int licenseeId, int userId, int custId, string ip, int functionId, string langKey)
         {
-            return ExecuteNonQueryUserFunction("Lrf_LicenseeUserFunctionsDel", licenseeId, userId, custId, ip, functionId, langKey);
+            return await ExecuteNonQueryUserFunction("Lrf_LicenseeUserFunctionsDel", licenseeId, userId, custId, ip, functionId, langKey).ConfigureAwait(false);
         }
 
         private async Task<IResultInfo> ExecuteNonQueryUserFunction(

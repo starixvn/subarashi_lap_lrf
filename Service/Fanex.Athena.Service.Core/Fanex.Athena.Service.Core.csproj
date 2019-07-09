@@ -61,6 +61,7 @@
     </Reference>
     <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\RestSharp.105.2.3\lib\net46\RestSharp.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="SPSRemoting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\SPSRemoting.1.0.0\lib\net40\SPSRemoting.dll</HintPath>
@@ -134,8 +135,14 @@
     <Compile Include="Users\SessionService.cs" />
     <Compile Include="Users\UserService.cs" />
     <Compile Include="Utility\BetListApiClient.cs" />
+    <Compile Include="Utility\CurrencyValidation.cs" />
+    <Compile Include="Utility\Interfaces\ICurrencyValidation.cs" />
     <Compile Include="Utility\Interfaces\IBetListApiClient.cs" />
+    <Compile Include="Utility\Interfaces\IProductValidation.cs" />
+    <Compile Include="Utility\Interfaces\IValidationService.cs" />
     <Compile Include="Utility\KeanOceanBusinessHelper.cs" />
+    <Compile Include="Utility\ProductValidation.cs" />
+    <Compile Include="Utility\ValidationService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

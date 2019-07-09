@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Web.Mvc;
     using Constant.DataDomain;
     using Extension.Utility;
@@ -33,9 +34,10 @@
         [HttpGet]
         public ActionResult Index()
         {
+            var userSession = SessionService.UserSession;
             var productAccess = ProductService.GetSingleWalletProductAccess(
                 SessionService.LicenseeSession.LicenseeId,
-                SessionService.UserSession.Language,
+                userSession.Language,
                 FunctionNames.CasinoTurnover);
             var setting = _reportSettingService.GetSetting(PermissionKeys.ReportCasinoTurnover);
 
@@ -44,12 +46,14 @@
                 FromDate = DateTime.Today,
                 ToDate = DateTime.Today,
                 CurrencyList = SessionService.UserSession.CurrencyList,
-                BaseCurrencies = SystemConstants.NewBaseCurrencyList,
+                BaseCurrencies = SystemConstants.BaseCurrencyList.Select(i => i.Value),
                 ProductOptions = ToProductOptions(productAccess.ProductList),
                 Status = GetStatusList(),
                 MinDate = setting.MinDate,
-                MaxDate = setting.MaxDate
+                MaxDate = setting.MaxDate,
             };
+
+            ViewBag.DefaultSelectedBaseCurrency = userSession.DefaultBaseCurrency;
 
             return View("~/Views/Desktop/Report/CasinoTurnover/Main.cshtml", viewModel);
         }

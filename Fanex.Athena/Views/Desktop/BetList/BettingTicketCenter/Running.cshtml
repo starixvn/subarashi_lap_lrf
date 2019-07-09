@@ -10,8 +10,11 @@
     var selectedProductCode = string.Join(",", productOptions.Where(x => x.Status).Select(x => x.Code).ToArray());
 
     var selectedCurrency = string.Join(",", Model.CurrencyList.Select(x => x.Key).ToArray());
-    var baseCurrencyList = SystemConstants.NewBaseCurrencyList.Select(c => new { value = c, label = c }).ToList();
-    baseCurrencyList.Add(new { value = "INH", label = "INH" });
+    var baseCurrencyList = SystemConstants.BaseCurrencyList.Select(c => new
+    {
+        value = c.Value,
+        label = c.Value
+    }).ToList();
     var selectedStatus = string.Join(",", Model.StatusList.Where(x => x.Checked).Select(x => x.ID).ToArray());
 }
 @section pagecss {
@@ -24,20 +27,20 @@
 
 @section globaljscode{
     window.initialState = {
-        selectedProduct: '@(selectedProductCode)',
-        username: '',        
-        selectedCurrency: '@(selectedCurrency)',
-        selectedBaseCurrency: '@(baseCurrencyList.Any() ? baseCurrencyList.First().value : string.Empty)',
-        isLoading: false,
-        selectedStatus: '@(selectedStatus)',
-        isConvertAll: true
+    selectedProduct: '@(selectedProductCode)',
+    username: '',
+    selectedCurrency: '@(selectedCurrency)',
+    selectedBaseCurrency: '@(Model.SelectedBaseCurrency)',
+    isLoading: false,
+    selectedStatus: '@(selectedStatus)',
+    isConvertAll: true
     };
     window._AppData = {
-        isAllowedCustomerComm: @Model.IsAllowedCustomerComm.ToJson(),
-        productOptions: @Html.Raw(productOptions.ToJson()),
-        currencyList: @Html.Raw(Model.CurrencyList.Select(x => new { Id = x.Key, Value = x.Value, Status = true }).ToJson()),
-        baseCurrencyList: @Html.Raw(baseCurrencyList.ToJson()),
-        statusList: @Html.Raw(Model.StatusList.Select(x => new { Id = x.ID, Value = x.Name, Status = x.Checked }).ToJson()),
+    isAllowedCustomerComm: @Model.IsAllowedCustomerComm.ToJson(),
+    productOptions: @Html.Raw(productOptions.ToJson()),
+    currencyList: @Html.Raw(Model.CurrencyList.Select(x => new { Id = x.Key, Value = x.Value, Status = true }).ToJson()),
+    baseCurrencyList: @Html.Raw(baseCurrencyList.ToJson()),
+    statusList: @Html.Raw(Model.StatusList.Select(x => new { Id = x.ID, Value = x.Name, Status = x.Checked }).ToJson()),
     };
 }
 <div id="app-container">

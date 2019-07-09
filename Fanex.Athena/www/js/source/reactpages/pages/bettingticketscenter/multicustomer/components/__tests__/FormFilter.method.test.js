@@ -26,7 +26,7 @@ describe('FormFilter ', () => {
                 statusList: ["Win", "Lose", "Draw"],
                 liveStatusList: [{"Id":0,"Value":"Non-Live","Status":true}],
                 productList: [{value: "SB"}, {value:"BA"}],
-                baseCurrencyList: ['EUR'],
+                baseCurrencyList: [{value: 'EUR', label: 'EUR'}, {value: 'USD', label: 'USD'}],
                 dateConstraint: { minDate: '06/01/2012', maxDate: '07/27/2018', limitedMonthRange: 3 }
             });
     });
@@ -126,7 +126,6 @@ describe('FormFilter ', () => {
                 selectedMatch: 5,
                 matchList: 987,
                 selectedCurrency: "1,2",
-                baseCurrencyList: "sdfsdfsdfsdf",
                 selectedBaseCurrency: 'USD',
                 selectedStatus: 'status',
                 selectedLiveStatus: 'Live',
@@ -151,7 +150,8 @@ describe('FormFilter ', () => {
                 MatchId: 0,
                 SortBy: props.requestParam.SortBy,
                 SortOrder: props.requestParam.SortOrder,
-                IsConvertAll: props.isConvertAll
+                IsConvertAll: props.isConvertAll,
+                BaseCurrencyName: props.selectedBaseCurrency
             }
 
             const filter = new FormFilter(props);

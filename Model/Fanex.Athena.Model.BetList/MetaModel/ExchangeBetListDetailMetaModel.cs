@@ -1,6 +1,8 @@
-﻿namespace Fanex.Athena.Model.BetList.MetaModel
+﻿using Fanex.Athena.Model.Core.MetaModel;
+
+namespace Fanex.Athena.Model.BetList.MetaModel
 {
-    public class ExchangeBetListDetailMetaModel : BaseExchangeBetListMetaModel
+    public class ExchangeBetListDetailMetaModel : BaseExchangeBetListMetaModel, IMetaModelValidation
     {
         public long BetId { get; set; }
 

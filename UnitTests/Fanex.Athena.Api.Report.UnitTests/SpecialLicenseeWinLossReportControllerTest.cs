@@ -43,7 +43,7 @@
             MockSessionData();
 
             _reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss)
-               .Returns(new ReportSetting { MinDate = new DateTime(2018, 1, 1), MaxDate = new DateTime(2018, 1, 31), BaseCurrencies = "USD,MYR" });
+               .Returns(new ReportSetting { MinDate = new DateTime(2018, 1, 1), MaxDate = new DateTime(2018, 1, 31), BaseCurrencies = "USD" });
         }
 
         [OneTimeTearDown]
@@ -132,40 +132,6 @@
             });
         }
 
-        [Test]
-        public async Task Index_InvalidCurrency_ReturnEmptyData()
-        {
-            // Arrange
-            ProductService.GetSingleWalletProductAccess(Arg.Any<int>(), Arg.Any<string>(), Arg.Any<string>())
-                .Returns(new ProductAccess(
-                    new List<Product>
-                        {
-                            new Product { ProductCode = "P1" },
-                            new Product { ProductCode = "P2" },
-                            new Product { ProductCode = "P3" }
-                        }));
-
-            StubUserSessionData(new UserSession { CurrencyList = new Dictionary<int, string> { { 1, "1" } } });
-
-            var model = new SpecialLicenseeWinLossMetaModel
-            {
-                ProductCodeList = new[] { "P1", "P2" },
-                CurrencyId = 2,
-                FromDate = new DateTime(2018, 1, 1),
-                ToDate = new DateTime(2018, 1, 31)
-            };
-
-            // Action
-            var result = await _controller.Index(model);
-
-            // Assert
-            Assert.Multiple(() =>
-            {
-                Assert.That(result.Data, Is.Empty);
-                Assert.That(result.Total, Is.Empty);
-                Assert.That(result.SummaryTotal, Is.Empty);
-            });
-        }
 
         [TestCase(LicenseeIdentity.IvoryBet, "ivorysport")]
         [TestCase(LicenseeIdentity.Opal88, "opal88")]
@@ -202,7 +168,7 @@
             Assert.Multiple(() =>
             {
                 _dataAccess.Received().GetData(model, Arg.Any<IDictionary<int, string>>());
-                Assert.That(string.Join(",", model.BaseCurrencies), Is.EqualTo("USD"));
+                Assert.That(string.Join(",", model.BaseCurrencySetting), Is.EqualTo("USD"));
                 Assert.That(model.SiteName, Is.EqualTo(expectedSiteName));
                 Assert.That(model.CurrencyListXml, Is.EqualTo(expectedCurrencyXML));
             });
@@ -224,7 +190,7 @@
             var model = new SpecialLicenseeWinLossMetaModel
             {
                 ProductCodeList = new[] { "P1" },
-                CurrencyId = 0,
+                CurrencyId = 1,
                 FromDate = new DateTime(2018, 1, 1),
                 ToDate = new DateTime(2018, 1, 31)
             };

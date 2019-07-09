@@ -1,15 +1,15 @@
 ﻿/*global _language_en_US*/
-define(['jquery', 'common/querystring', 'common/popup', 'extensions/prototype', 'components/selectlist'],  
+define(['jquery', 'common/querystring', 'common/popup', 'extensions/prototype', 'components/selectlist'],
     function ($, QueryString, Popup) {// jshint ignore:line
         'use strict';
-        const BASE_CURRENT_LIST = ['EUR', 'USD', 'GBP'];
+        const BASE_CURRENCY = { 'eur': '-1', 'usd': '-2', 'gbp': '-3', 'myr': '-4', 'cny': '-5', 'thb': '-6', 'idr': '-7', 'inh': '-8' };
         let REQUEST_VERIFICATION_TOKEN;
         let _historyDate = null;
         let _rootUrl = null;
         let _pageLanguage = null;
         let _isFakeLicensee = null;
 
-        function setProductCodeListParam(url, productCodeList){
+        function setProductCodeListParam(url, productCodeList) {
             return QueryString.setParam(url, 'ProductCodeList', productCodeList);
         }
 
@@ -88,7 +88,17 @@ define(['jquery', 'common/querystring', 'common/popup', 'extensions/prototype', 
             return _historyDate;
         }
         function isBaseCurrency(currencyName) {
-            return $.inArray(currencyName.toUpperCase(), BASE_CURRENT_LIST) > -1;
+            return BASE_CURRENCY[currencyName.toLowerCase()] !== undefined;
+        }
+        function getBaseCurrencyName(currencyId) {
+            const currency = currencyId.toString();
+            for (let currencyName in BASE_CURRENCY) {
+                if (BASE_CURRENCY[currencyName] === currency) {
+                    return currencyName;
+                }
+            }
+
+            return '';
         }
         function addUserGuide(options) {
             const defaultOptions = {
@@ -248,6 +258,7 @@ define(['jquery', 'common/querystring', 'common/popup', 'extensions/prototype', 
 
             // Handle outside based currency list in some reports (customer wl, balance)
             var $baseCurrency = $('#BaseCurrency');
+            let currentBaseCurrencyValue = $baseCurrency.val();
             var noConvertOption = $('option[value=""]', $baseCurrency);
             if (currency === 0 || isBaseCurrency(currencyName)) {
                 noConvertOption.remove();
@@ -268,15 +279,18 @@ define(['jquery', 'common/querystring', 'common/popup', 'extensions/prototype', 
                     $('option[value=""]', $baseCurrency).text(currencyName);
                 }
             }
+            let defaultBaseCurrency = $("#defaultBaseCurrency").val();
 
+            if (userChange && currency == 0 && defaultBaseCurrency &&
+                !isBaseCurrency(currentBaseCurrencyValue)) {
+                $baseCurrency.val(defaultBaseCurrency.toLowerCase());
+            }
             // Handle inside based currency list in some reports(licensee wl, wl by product)
             const hasBaseCurrencyInDropdown = $('#CurrencyId option').filter(function () {
                 return $(this).val() < 0;
             }).length > 0;
             if (hasBaseCurrencyInDropdown) {
-                const basedCurrencyMap = { '-1': 'eur', '-2': 'usd', '-3': 'gbp' };
-                let basedCurrency = basedCurrencyMap[currency.toString()];
-                basedCurrency = basedCurrency === undefined ? '' : basedCurrency;
+                const basedCurrency = getBaseCurrencyName(currency);
                 $baseCurrency.val(basedCurrency);
             }
 
@@ -482,6 +496,7 @@ define(['jquery', 'common/querystring', 'common/popup', 'extensions/prototype', 
             debounce: debounce,
             addFilterCollapseExpand: addFilterCollapseExpand,
             isFakeLicensee: isFakeLicensee,
-            getXsrfToken: getXsrfToken
+            getXsrfToken: getXsrfToken,
+            getBaseCurrencyName: getBaseCurrencyName
         };
     });

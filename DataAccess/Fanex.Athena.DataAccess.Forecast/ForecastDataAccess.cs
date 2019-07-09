@@ -9,7 +9,6 @@ namespace Fanex.Athena.DataAccess.Forecast
     using System.Collections.Generic;
     using System.Data;
     using System.Threading.Tasks;
-    using Extension.Helper;
     using Fanex.Athena.Model.Forecast.DTO.ForecastHdou;
     using Fanex.Common.Extensions;
     using Interfaces;
@@ -34,13 +33,14 @@ namespace Fanex.Athena.DataAccess.Forecast
                 Baseoffsethdp = 0,
                 baseoffsetou = 0,
                 baseoffseththdp = 0,
-                baseoffsethtou = 0
+                baseoffsethtou = 0,
+                BaseCurrency = metaModel.BaseCurrency
             };
             using (var db = this.GetObjectDb(UspName))
             {
                 using (var reader = await db.ExecuteReaderAsync(paramValues).ConfigureAwait(false))
                 {
-                    return GetForecastHandicapOverUnderList(reader, metaModel);
+                    return GetForecastHandicapOverUnderList(reader);
                 }
             }
         }
@@ -73,42 +73,26 @@ namespace Fanex.Athena.DataAccess.Forecast
         /// <param name="reader">Reader value.</param>
         /// <param name="metaModel">Meta model.</param>
         /// <returns>List result.</returns>
-        private IList<ForecastHandicapOverUnder> GetForecastHandicapOverUnderList(IDataReader reader, ForecastHandicapOverUnderMetaModel metaModel)
+        private IList<ForecastHandicapOverUnder> GetForecastHandicapOverUnderList(IDataReader reader)
         {
             var forecasts = new List<ForecastHandicapOverUnder>();
-
-            // Full time column name
-            var winLossHdpMinus1 = DataHelper.GetCurrencyColumnName("WinLost_M1_HDP", metaModel.IsConvert, metaModel.BaseCurrency);
-            var winLossHdp = DataHelper.GetCurrencyColumnName("WinLost_0_HDP", metaModel.IsConvert, metaModel.BaseCurrency);
-            var winLossHdpPlus1 = DataHelper.GetCurrencyColumnName("WinLost_1_HDP", metaModel.IsConvert, metaModel.BaseCurrency);
-            var winLossOuPlus2 = DataHelper.GetCurrencyColumnName("WinLost_2_OU", metaModel.IsConvert, metaModel.BaseCurrency);
-            var winLossOuPlus1 = DataHelper.GetCurrencyColumnName("WinLost_1_OU", metaModel.IsConvert, metaModel.BaseCurrency);
-            var winLossOu = DataHelper.GetCurrencyColumnName("WinLost_0_OU", metaModel.IsConvert, metaModel.BaseCurrency);
-
-            // Half time column name
-            var halfTimeWinLossHdpMinus1 = DataHelper.GetCurrencyColumnName("WinLost_M1_HTHDP", metaModel.IsConvert, metaModel.BaseCurrency);
-            var halfTimeWinLossHdp = DataHelper.GetCurrencyColumnName("WinLost_0_HTHDP", metaModel.IsConvert, metaModel.BaseCurrency);
-            var halfTimeWinLossHdpPlus1 = DataHelper.GetCurrencyColumnName("WinLost_1_HTHDP", metaModel.IsConvert, metaModel.BaseCurrency);
-            var halfTimeWinLossOuPlus2 = DataHelper.GetCurrencyColumnName("WinLost_2_HTOU", metaModel.IsConvert, metaModel.BaseCurrency);
-            var halfTimeWinLossOuPlus1 = DataHelper.GetCurrencyColumnName("WinLost_1_HTOU", metaModel.IsConvert, metaModel.BaseCurrency);
-            var halfTimeWinLossOu = DataHelper.GetCurrencyColumnName("WinLost_0_HTOU", metaModel.IsConvert, metaModel.BaseCurrency);
 
             while (reader.Read())
             {
                 var item = new ForecastHandicapOverUnder
                 {
-                    HandicapMinus1 = reader.ToDecimal(winLossHdpMinus1),
-                    Handicap = reader.ToDecimal(winLossHdp),
-                    HandicapPlus1 = reader.ToDecimal(winLossHdpPlus1),
-                    OverUnderPlus2 = reader.ToDecimal(winLossOuPlus2),
-                    OverUnderPlus1 = reader.ToDecimal(winLossOuPlus1),
-                    OverUnder = reader.ToDecimal(winLossOu),
-                    HtHandicapMinus1 = reader.ToDecimal(halfTimeWinLossHdpMinus1),
-                    HtHandicap = reader.ToDecimal(halfTimeWinLossHdp),
-                    HtHandicapPlus1 = reader.ToDecimal(halfTimeWinLossHdpPlus1),
-                    HtOverUnderPlus2 = reader.ToDecimal(halfTimeWinLossOuPlus2),
-                    HtOverUnderPlus1 = reader.ToDecimal(halfTimeWinLossOuPlus1),
-                    HtOverUnder = reader.ToDecimal(halfTimeWinLossOu)
+                    HandicapMinus1 = reader.ToDecimal("WinLost_M1_HDP"),
+                    Handicap = reader.ToDecimal("WinLost_0_HDP"),
+                    HandicapPlus1 = reader.ToDecimal("WinLost_1_HDP"),
+                    OverUnderPlus2 = reader.ToDecimal("WinLost_2_OU"),
+                    OverUnderPlus1 = reader.ToDecimal("WinLost_1_OU"),
+                    OverUnder = reader.ToDecimal("WinLost_0_OU"),
+                    HtHandicapMinus1 = reader.ToDecimal("WinLost_M1_HTHDP"),
+                    HtHandicap = reader.ToDecimal("WinLost_0_HTHDP"),
+                    HtHandicapPlus1 = reader.ToDecimal("WinLost_1_HTHDP"),
+                    HtOverUnderPlus2 = reader.ToDecimal("WinLost_2_HTOU"),
+                    HtOverUnderPlus1 = reader.ToDecimal("WinLost_1_HTOU"),
+                    HtOverUnder = reader.ToDecimal("WinLost_0_HTOU")
                 };
                 ReadCommonData(reader, item);
                 CalculateOffsetHandicapOverUnder(item);

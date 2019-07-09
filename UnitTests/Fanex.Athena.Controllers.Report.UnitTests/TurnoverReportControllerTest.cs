@@ -73,7 +73,9 @@
         [TestCase(false, "  External ID or System ID ", null)]
         [TestCase(false, "External ID", "External ID")]
         [TestCase(false, "   ", null)]
-        public async Task Excel_WhenCall_AssignCorrectUsername(bool isFakeLicensee, string inputUserName, string expectedUserName)
+        public async Task Excel_WhenCall_AssignCorrectUsername(bool isFakeLicensee,
+            string inputUserName,
+            string expectedUserName)
         {
             using (var controller = CreateController())
             {

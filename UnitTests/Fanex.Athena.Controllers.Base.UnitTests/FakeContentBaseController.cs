@@ -12,14 +12,5 @@
         {
         }
 
-        internal new void SetConvetedUSDCurrencyId(BaseMetaModel metaModel)
-        {
-            base.SetConvetedUSDCurrencyId(metaModel);
-        }
-
-        internal new void SetConvetedUSDCurrencyName(BaseMetaModel metaModel)
-        {
-            base.SetConvetedUSDCurrencyName(metaModel);
-        }
     }
 }

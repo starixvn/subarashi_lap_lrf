@@ -150,9 +150,9 @@ namespace Fanex.Athena.Extension.Utility
             }
         }
 
-        public string[] BasedCurrency
+        public string DefaultBaseCurrency
         {
-            get { return GetValue("BasedCurrency").Split(new[] { ';' }); }
+            get { return GetValue("DefaultBaseCurrency"); }
         }
 
         public IEnumerable<int> LiveReportNoDetailLinkSports

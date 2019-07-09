@@ -4,6 +4,7 @@
     using System.Linq;
     using Base;
     using Fanex.Athena.Excel.Base.Extension;
+    using Helpers;
     using Model.Core.DataDomain;
     using Model.Core.MetaModel.Product;
     using Model.Report.DTO;
@@ -113,7 +114,7 @@
                                         _model.FromDate.ToString(FormatDate),
                                         _model.ToDate.ToString(FormatDate),
                                         currencyText,
-                                        GetBaseCurrencyTitle(),
+                                        ReportExcelHelper.GetTitleCurrencyName(_model.BaseCurrencyId, _model.CurrencyName),
                                         platformText) + ", " + GetProductTitle();
 
             sheet.SetTextRowValue(TemplateSheet, RowTitleTemplate, ColumnNoContent, reportTitle);
@@ -148,33 +149,6 @@
                 .Aggregate(string.Empty, (current, x) => current + (string.IsNullOrEmpty(current) ? x.Code : ", " + x.Code));
 
             return string.Format("{0}: {1}", ViewResources.Product, text);
-        }
-
-        private string GetBaseCurrencyTitle()
-        {
-            string title;
-            var baseCurrencyId = _model.BaseCurrencyId;
-
-            switch (baseCurrencyId)
-            {
-                case BaseCurrencyType.Eur:
-                    title = string.Format(ViewResources.Viewin, FormatKey.Eur);
-                    break;
-
-                case BaseCurrencyType.Usd:
-                    title = string.Format(ViewResources.Viewin, FormatKey.Usd);
-                    break;
-
-                case BaseCurrencyType.Gbp:
-                    title = string.Format(ViewResources.Viewin, FormatKey.Gbp);
-                    break;
-
-                default:
-                    title = string.Format(ViewResources.Viewin, _model.CurrencyName);
-                    break;
-            }
-
-            return title;
         }
     }
 }

@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Web.Script.Serialization;
+using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Model.Core.MetaModel;
 
 namespace Fanex.Athena.Model.BetList.MetaModel
 {
-    public class BetListMetaModel : BaseMetaModel
+    public class BetListMetaModel : BaseMetaModel, IMetaModelValidation, IMetaModelProductCodeList
     {
         public BetListMetaModel()
         {
@@ -117,12 +119,11 @@ namespace Fanex.Athena.Model.BetList.MetaModel
 
         public long RefCode { get; set; }
 
-        public virtual bool IsValid
+        public override bool IsValid
         {
             get
             {
-                return FromDate <= ToDate
-                    && !string.IsNullOrWhiteSpace(ProductCodeList);
+                return base.IsValid && FromDate <= ToDate;
             }
         }
 

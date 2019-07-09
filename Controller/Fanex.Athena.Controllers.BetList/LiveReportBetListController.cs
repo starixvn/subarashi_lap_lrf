@@ -31,6 +31,7 @@
         }
 
         [HttpGet]
+        [ValidationWebRequest(IsValidCurrency = true)]
         public Task<ActionResult> Match(LiveReportBetListMetaModel metaModel)
         {
             return ProcessRequest(
@@ -40,6 +41,7 @@
         }
 
         [HttpGet]
+        [ValidationWebRequest(IsValidCurrency = true)]
         public Task<ActionResult> MixParlay(LiveReportBetListMetaModel metaModel)
         {
             return ProcessRequest(
@@ -49,6 +51,7 @@
         }
 
         [HttpGet]
+        [ValidationWebRequest(IsValidCurrency = true)]
         public Task<ActionResult> Outright(LiveReportBetListMetaModel metaModel)
         {
             return ProcessRequest(
@@ -59,6 +62,7 @@
         }
 
         [HttpGet]
+        [ValidationWebRequest(IsValidCurrency = true)]
         public Task<ActionResult> NumberGame(LiveReportBetListMetaModel metaModel)
         {
             return ProcessRequest(
@@ -69,6 +73,7 @@
         }
 
         [HttpGet]
+        [ValidationWebRequest(IsValidCurrency = true)]
         public async Task<ActionResult> VirtualSports(LiveReportBetListMetaModel metaModel)
         {
             var caption = CacheRefAdapter.GetSportName(metaModel.SportType);
@@ -101,16 +106,9 @@
                 ViewBag.SportName = sportName;
                 return View(viewPath, metaModel);
             }
-
-            var currencyList = SessionService.UserSession.CurrencyList;
-
-            if (metaModel.CurrencyId == BaseCurrencyType.All || currencyList.ContainsKey(metaModel.CurrencyId))
-            {
-                var title = GetExcelTitle(metaModel, caption);
-                return await Excel(metaModel, uspKey, title).ConfigureAwait(false);
-            }
-
-            return EmptyExcel();
+           
+            var title = GetExcelTitle(metaModel, caption);
+            return await Excel(metaModel, uspKey, title).ConfigureAwait(false);
         }
 
         private async Task<ActionResult> Excel(LiveReportBetListMetaModel metaModel, string uspKey, string title)

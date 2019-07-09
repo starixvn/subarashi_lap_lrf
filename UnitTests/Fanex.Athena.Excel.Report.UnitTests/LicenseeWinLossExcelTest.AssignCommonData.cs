@@ -29,7 +29,8 @@ namespace Fanex.Athena.Excel.Report.UnitTests
             };
 
             var row = ExcelTestHelper.MockGetRow(FakeSheet, ColumnTemplateCount, 0);
-            var excel = CreateExcel(productCodes: new[] { Product.SB, Product.BT, Product.BA });
+            var excelModel = CreateExcelModel(productCodes: new[] { Product.SB, Product.BT, Product.BA });
+            var excel = CreateExcel(excelModel);
 
             // Action
             excel.AssignCommonData(row, item);
@@ -52,33 +53,38 @@ namespace Fanex.Athena.Excel.Report.UnitTests
         {
             // Arrange
             var row = ExcelTestHelper.MockGetRow(FakeSheet, ColumnTemplateCount, 0);
-            var excel = CreateExcel();
+
+            var dataItem = FakeHelper.Create<LicenseeWinLoss>();
+            var excelModel = CreateExcelModel();
+            excelModel.DataList = new List<LicenseeWinLoss> { dataItem };
+
+            var excel = CreateExcel(excelModel);
 
             // Action
-            excel.AssignCommonData(row, DataItem);
+            excel.AssignCommonData(row, dataItem);
 
             // Assert
             Assert.Multiple(() =>
             {
-                row.Cells[ColumnTurnoverTotal].Received(1).SetCellValue(DataItem.TurnOver.Sum(a => a.Value));
+                row.Cells[ColumnTurnoverTotal].Received(1).SetCellValue(dataItem.TurnOver.Sum(a => a.Value));
 
-                row.Cells[ColumnTotalTransaction].Received(1).SetCellValue(DataItem.TotalTransaction);
-                row.Cells[ColumnCustomerWl].Received(1).SetCellValue(DataItem.CustomerWinLoss);
-                row.Cells[ColumnCustomerComm].Received(1).SetCellValue(DataItem.CustomerComm);
-                row.Cells[ColumnCustomerTotal].Received(1).SetCellValue(DataItem.CustomerTotal);
+                row.Cells[ColumnTotalTransaction].Received(1).SetCellValue(dataItem.TotalTransaction);
+                row.Cells[ColumnCustomerWl].Received(1).SetCellValue(dataItem.CustomerWinLoss);
+                row.Cells[ColumnCustomerComm].Received(1).SetCellValue(dataItem.CustomerComm);
+                row.Cells[ColumnCustomerTotal].Received(1).SetCellValue(dataItem.CustomerTotal);
 
-                row.Cells[ColumnActualStake].Received(1).SetCellValue(DataItem.ActualStake);
+                row.Cells[ColumnActualStake].Received(1).SetCellValue(dataItem.ActualStake);
 
-                row.Cells[ColumnBuyBackAmountSportsbook].Received(1).SetCellValue(DataItem.BuyBackAmountSB);
-                row.Cells[ColumnBuyBackAmountBA].Received(1).SetCellValue(DataItem.BuyBackAmountBA);
-                row.Cells[ColumnBuyBackAmountTotal].Received(1).SetCellValue(DataItem.TotalBuyBackAmount);
+                row.Cells[ColumnBuyBackAmountSportsbook].Received(1).SetCellValue(dataItem.BuyBackAmountSB);
+                row.Cells[ColumnBuyBackAmountBA].Received(1).SetCellValue(dataItem.BuyBackAmountBA);
+                row.Cells[ColumnBuyBackAmountTotal].Received(1).SetCellValue(dataItem.TotalBuyBackAmount);
 
-                row.Cells[ColumnLicenseeWlTotal].Received(1).SetCellValue(DataItem.LicenseeWL.Sum(a => a.Value));
-                row.Cells[ColumnCashOutCommission].Received(1).SetCellValue(DataItem.CashOutCommission);
-                row.Cells[ColumnBetTradeCommission].Received(1).SetCellValue(DataItem.BetTradeCommission);
-                row.Cells[ColumnBaCommission].Received(1).SetCellValue(DataItem.BACommission);
-                row.Cells[ColumnAmtDueToBetTrade].Received(1).SetCellValue(DataItem.AmtDueToBetTrade);
-                row.Cells[ColumnAmtDueToBa].Received(1).SetCellValue(DataItem.AmtDueToBA);
+                row.Cells[ColumnLicenseeWlTotal].Received(1).SetCellValue(dataItem.LicenseeWL.Sum(a => a.Value));
+                row.Cells[ColumnCashOutCommission].Received(1).SetCellValue(dataItem.CashOutCommission);
+                row.Cells[ColumnBetTradeCommission].Received(1).SetCellValue(dataItem.BetTradeCommission);
+                row.Cells[ColumnBaCommission].Received(1).SetCellValue(dataItem.BACommission);
+                row.Cells[ColumnAmtDueToBetTrade].Received(1).SetCellValue(dataItem.AmtDueToBetTrade);
+                row.Cells[ColumnAmtDueToBa].Received(1).SetCellValue(dataItem.AmtDueToBA);
             });
         }
     }
