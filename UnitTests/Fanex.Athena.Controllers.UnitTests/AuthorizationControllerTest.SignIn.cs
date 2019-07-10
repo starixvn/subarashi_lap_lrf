@@ -1,10 +1,9 @@
 ﻿namespace Fanex.Athena.Controllers.UnitTests
 {
     using System.Web.Mvc;
-
+    using Fanex.Athena.Model.Auth.MetaModel;
     using Model.Core.DTO.Common;
     using Model.Core.DTO.Users;
-    using Model.Core.MetaModel.Authorization;
 
     using NSubstitute;
 

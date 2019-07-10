@@ -14,23 +14,27 @@ namespace Fanex.Athena.Controllers
     using System.IO;
     using System.Text;
     using System.Text.RegularExpressions;
-    using System.Threading.Tasks;
     using System.Web;
     using System.Web.Caching;
     using System.Web.Mvc;
     using System.Web.Security;
     using System.Web.UI;
+
     using Extension.Utility.Interfaces;
+
     using Fanex.Athena.Extension.Utility;
+    using Fanex.Athena.Model.Auth.MetaModel;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Core.DTO.Users;
-    using Fanex.Athena.Model.Core.MetaModel.Authorization;
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
+
     using ONEbook.UM.Filters;
     using ONEbook.UM.Services;
+
     using Resources;
+
     using Service.Core.Common.Interfaces;
 
     public class AuthorizationController : CultureBaseController

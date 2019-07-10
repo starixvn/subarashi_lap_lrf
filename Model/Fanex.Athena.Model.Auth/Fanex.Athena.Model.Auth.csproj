@@ -40,6 +40,7 @@
     <Compile Include="CurrencyUser.cs" />
     <Compile Include="Enum\AppMode.cs" />
     <Compile Include="LicenseeAuthInfo.cs" />
+    <Compile Include="MetaModel\LoginMetalModel.cs" />
     <Compile Include="OneAuthCurrency.cs" />
     <Compile Include="OneAuthPermission.cs" />
     <Compile Include="OneAuthToken.cs" />

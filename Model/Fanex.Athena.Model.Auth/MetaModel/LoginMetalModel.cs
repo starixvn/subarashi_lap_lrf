@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Fanex.Athena.Model.Core.MetaModel.Authorization
+namespace Fanex.Athena.Model.Auth.MetaModel
 {
     /// <summary>
     /// TODO: Update summary.
