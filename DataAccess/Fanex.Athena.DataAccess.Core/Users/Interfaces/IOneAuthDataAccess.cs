@@ -1,5 +1,4 @@
 ﻿using Fanex.Athena.Model.Auth;
-using Fanex.Athena.Model.Core.DTO.OneAuth;
 
 namespace Fanex.Athena.DataAccess.Core.Users.Interfaces
 {

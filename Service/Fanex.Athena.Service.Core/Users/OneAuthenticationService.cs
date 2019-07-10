@@ -6,21 +6,25 @@
     using System.Linq;
     using System.Web;
     using System.Web.Hosting;
-    using Model.Core.DataDomain;
+
     using DataAccess.Core.Users.Interfaces;
+
     using Extension.Utility;
     using Extension.Utility.Interfaces;
+
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Auth.Enum;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Service.Core.Users.Interfaces;
-    using Fanex.Logging;
-    using Model.Core.DTO;
-    using Model.Core.DTO.OneAuth;
-    using Model.Core.DTO.Users;
-    using Newtonsoft.Json;
-    using Resources;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Logging;
+
+    using Model.Core.DataDomain;
+    using Model.Core.DTO;
+
+    using Newtonsoft.Json;
+
+    using Resources;
 
     [CLSCompliant(false)]
     public class OneAuthenticationService : IOneAuthenticationService

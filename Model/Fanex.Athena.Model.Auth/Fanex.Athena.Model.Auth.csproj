@@ -34,11 +34,15 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CurrencyUser.cs" />
     <Compile Include="Enum\AppMode.cs" />
     <Compile Include="LicenseeAuthInfo.cs" />
+    <Compile Include="OneAuthCurrency.cs" />
+    <Compile Include="OneAuthPermission.cs" />
+    <Compile Include="OneAuthToken.cs" />
     <Compile Include="OneAuthUserInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserAuthInfo.cs" />

@@ -1,11 +1,12 @@
-﻿using Fanex.Athena.Api.Base.Attributes;
-using Fanex.Athena.Model.Core.DTO.OneAuth;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Http;
 using System.Web.Http.Cors;
+
+using Fanex.Athena.Api.Base.Attributes;
+using Fanex.Athena.Model.Auth;
 
 namespace Fanex.Athena.Api.Base
 {

@@ -4,11 +4,9 @@
     using System.Configuration;
 
     using DataAccess.Core.Utilities;
-
+    using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Service.StatelessCore.CustomException;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
-
-    using Model.Core.DTO.OneAuth;
 
     using ONEbook.Security;
 

@@ -114,9 +114,6 @@
     <Compile Include="DTO\Common\ResultInfoGeneric.cs" />
     <Compile Include="DTO\Configuration\FakeLicenseeSetting.cs" />
     <Compile Include="DTO\Configuration\ReportSetting.cs" />
-    <Compile Include="DTO\OneAuth\OneAuthCurrency.cs" />
-    <Compile Include="DTO\OneAuth\OneAuthPermission.cs" />
-    <Compile Include="DTO\OneAuth\OneAuthToken.cs" />
     <Compile Include="DTO\Common\Product.cs" />
     <Compile Include="DTO\Common\ProductAccess.cs" />
     <Compile Include="DTO\Common\Request.cs" />

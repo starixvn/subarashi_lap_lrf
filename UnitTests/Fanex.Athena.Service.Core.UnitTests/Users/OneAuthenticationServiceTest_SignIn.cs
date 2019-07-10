@@ -4,23 +4,31 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Web;
+
     using Core.Users.Interfaces;
+
     using DataAccess.Core.Users.Interfaces;
+
     using Extension.Utility.Interfaces;
+
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Auth.Enum;
     using Fanex.Athena.Service.Core.Users;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Logging;
+
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
-    using Model.Core.DTO.OneAuth;
-    using Model.Core.DTO.Users;
+
     using Newtonsoft.Json;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Resources;
+
     using UnitTest.Common.Helpers;
 
     [TestFixture]

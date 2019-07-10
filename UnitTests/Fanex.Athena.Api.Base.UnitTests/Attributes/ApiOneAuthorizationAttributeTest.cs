@@ -4,17 +4,25 @@
     using System.Net;
     using System.Threading;
     using System.Web.Http.Controllers;
+
     using Attributes;
+
     using Autofac;
+
     using DataAccess.Core.Users.Interfaces;
+    using Fanex.Athena.Model.Auth;
     using Fanex.Logging;
+
     using Model.Core.DTO.Common;
-    using Model.Core.DTO.OneAuth;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using ONEbook.UM.Services;
+
     using Service.Core.Users.Interfaces;
-    using Service.Core.Utility.Interfaces;
+
     using UnitTest.Common.Helpers;
 
     public class ApiOneAuthorizationAttributeTest
