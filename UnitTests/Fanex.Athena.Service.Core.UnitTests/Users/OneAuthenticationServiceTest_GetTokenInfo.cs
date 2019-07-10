@@ -5,6 +5,7 @@
     using DataAccess.Core.Users.Interfaces;
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Service.Core.Users;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Logging;
     using Model.Core.DTO.OneAuth;
     using NSubstitute;

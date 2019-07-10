@@ -1,7 +1,7 @@
 ﻿namespace Fanex.Athena.Service.StatelessCore.Utility
 {
     using Fanex.Athena.Extension.Utility;
-    using Fanex.Athena.Service.StatelessCore.Exception;
+    using Fanex.Athena.Service.StatelessCore.CustomException;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Newtonsoft.Json;
     using RestSharp;

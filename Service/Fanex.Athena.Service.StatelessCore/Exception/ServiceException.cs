@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Fanex.Athena.Service.StatelessCore.Exception
+namespace Fanex.Athena.Service.StatelessCore.CustomException
 {
     using System;
     using System.Runtime.Serialization;

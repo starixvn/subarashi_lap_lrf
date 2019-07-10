@@ -1,12 +1,5 @@
 ﻿namespace Fanex.Athena.Api.Base.Attributes
 {
-    using DataAccess.Core.Users.Interfaces;
-    using Extensions;
-    using Fanex.Logging;
-    using Model.Core.DTO.OneAuth;
-    using ONEbook.UM.Services;
-    using Resources;
-    using Service.Core.Users.Interfaces;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -17,6 +10,19 @@
     using System.Threading.Tasks;
     using System.Web.Http.Controllers;
     using System.Web.Http.Filters;
+
+    using DataAccess.Core.Users.Interfaces;
+
+    using Extensions;
+
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Logging;
+
+    using Model.Core.DTO.OneAuth;
+
+    using ONEbook.UM.Services;
+
+    using Resources;
 
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true)]
     public sealed class ApiOneAuthorizationAttribute : FilterAttribute, IAuthorizationFilter
@@ -46,8 +52,8 @@
                     return UnauthorizeAccessHandlerAsync(actionContext, ViewResources.AccessDeniedMsg);
                 }
 
-                var oneAuthenticationService = scope.Resolve<IOneAuthenticationService>();
-                var token = oneAuthenticationService.GetTokenInfo(tokenValue);
+                var service = scope.Resolve<IOneBookSecurityWrapper>();
+                var token = service.Authenticate(tokenValue);
 
                 if (token == null || string.IsNullOrWhiteSpace(token.SiteName) || token.UserSEQ <= 0)
                 {

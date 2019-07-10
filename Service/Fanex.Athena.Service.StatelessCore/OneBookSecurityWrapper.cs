@@ -1,11 +1,15 @@
-﻿namespace Fanex.Athena.Service.Core.Users
+﻿namespace Fanex.Athena.Service.StatelessCore
 {
     using System;
     using System.Configuration;
+
     using DataAccess.Core.Utilities;
-    using Fanex.Athena.Service.Core.Users.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Exception;
+
+    using Fanex.Athena.Service.StatelessCore.CustomException;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Model.Core.DTO.OneAuth;
+
     using ONEbook.Security;
 
     public class OneBookSecurityWrapper : IOneBookSecurityWrapper

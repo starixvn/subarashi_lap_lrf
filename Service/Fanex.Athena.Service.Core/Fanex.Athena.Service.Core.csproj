@@ -107,8 +107,6 @@
     <Compile Include="Users\SubsidiaryService.cs" />
     <Compile Include="Users\AuthService.cs" />
     <Compile Include="Users\Interfaces\IAuthService.cs" />
-    <Compile Include="Users\Interfaces\IOneBookSecurityWrapper.cs" />
-    <Compile Include="Users\OneBookSecurityWrapper.cs" />
     <Compile Include="Users\Interfaces\IOneAuthenticationService.cs" />
     <Compile Include="Common\LanguageService.cs" />
     <Compile Include="Common\MatchService.cs" />

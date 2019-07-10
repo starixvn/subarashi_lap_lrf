@@ -20,6 +20,7 @@
     using Model.Core.DTO.Users;
     using Newtonsoft.Json;
     using Resources;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     [CLSCompliant(false)]
     public class OneAuthenticationService : IOneAuthenticationService

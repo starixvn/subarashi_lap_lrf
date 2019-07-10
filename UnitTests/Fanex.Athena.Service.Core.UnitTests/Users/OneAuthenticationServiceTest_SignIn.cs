@@ -11,6 +11,7 @@
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Auth.Enum;
     using Fanex.Athena.Service.Core.Users;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Logging;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
