@@ -23,6 +23,7 @@ namespace Fanex.Athena.Controllers.BetList
     using Service.Core.Users.Interfaces;
     using Service.Core.Utility.Interfaces;
     using VendorAdapter.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Utility;
 
     #endregion Using
 
@@ -99,7 +100,7 @@ namespace Fanex.Athena.Controllers.BetList
 
             if (metaModel.IsExportExcel)
             {
-                metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
+                metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId);
                 return await Excel(metaModel).ConfigureAwait(false);
             }
 

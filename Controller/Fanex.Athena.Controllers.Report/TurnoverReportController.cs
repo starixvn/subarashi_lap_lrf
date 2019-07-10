@@ -18,6 +18,7 @@ namespace Fanex.Athena.Controllers.Report
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
     using Fanex.Athena.Web.ResultExtension;
     using Resources;
@@ -84,7 +85,8 @@ namespace Fanex.Athena.Controllers.Report
             var placeholderUsername = IsFakeLicensee(licenseeSession.LicenseeId) ? ViewResources.ExternalId : ViewResources.ExternalIdOrSystemId;
             metaModel.Username = string.IsNullOrWhiteSpace(metaModel.Username) ||
                 metaModel.Username.Trim() == placeholderUsername ? null : metaModel.Username;
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId, metaModel.IsExcludeTest);
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList
+                ,metaModel.CurrencyId, metaModel.IsExcludeTest);
 
             var dataList = await _turnoverService.GetDataList(metaModel);
 

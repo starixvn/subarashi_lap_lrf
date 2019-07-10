@@ -80,7 +80,7 @@
                 var viewinCurrency = string.Format(ViewResources.Viewin, expectedCurrency);
                 var expectedTitle = $"{ViewResources.BetList} - BetType - 1/1/2018 → 1/1/2018 - {viewinCurrency}";
 
-                SessionService.GenerateAgentListXml(metaModel.CurrencyId, false).Returns(AgentListXml);
+                AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList)(metaModel.CurrencyId, false).Returns(AgentListXml);
 
                 controller.When(async x => await x.ProcessExportExcel(
                     Arg.Any<BetListExcelMetaModel>(),

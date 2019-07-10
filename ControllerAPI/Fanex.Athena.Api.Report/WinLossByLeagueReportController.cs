@@ -19,6 +19,7 @@ namespace Fanex.Athena.Api.Report
     using Fanex.Athena.Excel.Report;
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using Model.Core.DataDomain;
     using Model.Core.ResultModel;
     using Resources;
@@ -107,8 +108,9 @@ namespace Fanex.Athena.Api.Report
 
         private async Task<ReportResultModel<WinLossByLeague>> GetData(WinLossByLeagueMetaModel metaModel)
         {
+            var userSession = SessionService.UserSession;
             var balanceUp = _balanceUpDataAccess.GetBalanceUp();
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId);
             metaModel.MoveBetsDay = balanceUp.MoveBetsDay;
             metaModel.BalanceUpDay = balanceUp.BalanceUpDay;
 

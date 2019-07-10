@@ -17,6 +17,7 @@ namespace Fanex.Athena.Controllers.Forecast
     using Extension.Utility;
     using Fanex.Athena.Extension.Helpers;
     using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Logging;
     using Model.Core.DataDomain;
     using Model.Forecast.DTO.NewForecastHdpOu;
@@ -115,6 +116,7 @@ namespace Fanex.Athena.Controllers.Forecast
             IList<Match> matchList = new List<Match>();
             IList<League> leagueList = new List<League>();
             var headerInfo = new NewForecastHdpOuMatchInfo();
+            var userSession = SessionService.UserSession;
             var model = new NewForecastHdpOuViewModel
             {
                 Param = metaModel,
@@ -122,11 +124,12 @@ namespace Fanex.Athena.Controllers.Forecast
                 MatchList = matchList,
                 HeaderInfo = headerInfo,
                 MainData = new NewForecastHdpOuData(),
-                CurrencyList = SessionService.UserSession.CurrencyList
+                CurrencyList = userSession.CurrencyList
             };
             try
             {
-                metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
+                metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList,
+                    metaModel.CurrencyId);
 
                 if (!Request.IsAjaxRequest())
                 {

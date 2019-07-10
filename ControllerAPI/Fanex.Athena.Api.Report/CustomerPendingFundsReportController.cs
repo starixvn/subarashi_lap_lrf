@@ -13,6 +13,7 @@
     using Extension.Utility;
     using Fanex.Athena.Api.Base.Attributes;
     using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using Model.Core.ResultModel;
     using Model.Report.DTO;
     using Model.Report.MetaModel;
@@ -58,7 +59,7 @@
         [ValidationApiRequest]
         public async Task<HttpResponseMessage> ExportExcel(CustomerPendingFundsMetaModel metaModel)
         {
-           
+
             const string FileName = "CustomerPendingFunds.xls";
             const string TemplatePath = @"~/App_Data/Template/CustomerReports/CustomerPendingFunds.xls";
 
@@ -94,7 +95,8 @@
 
         private async Task<ReportResultModel<CustPendingFunds>> GetData(CustomerPendingFundsMetaModel metaModel)
         {
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
+            var userSession = SessionService.UserSession;
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId);
             return await _custPendingFundsDataAccess.GetDataList(metaModel).ConfigureAwait(false);
         }
     }

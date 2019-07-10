@@ -4,6 +4,7 @@
     using System.Web.Mvc;
     using DataAccess.Core.Configuration.Interfaces;
     using Extension.Utility;
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
     using Model.BetList.MetaModel;
     using Model.BetList.ViewModel;
@@ -34,7 +35,7 @@
         public async Task<ActionResult> Detail(CashOutBetListDetailMetaModel metaModel)
         {
             var userSession = SessionService.UserSession;
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml();
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList);
             metaModel.HasPlayerComm = SessionService.LicenseeSession.IsAllowedCustomerComm;
             metaModel.UserCurrencyList = userSession.CurrencyList;
 

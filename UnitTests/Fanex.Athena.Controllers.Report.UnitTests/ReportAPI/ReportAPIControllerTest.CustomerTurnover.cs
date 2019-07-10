@@ -84,7 +84,7 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                SessionService.GenerateAgentListXml(CurrencyId).Returns(AgentListXml);
+                AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList)(CurrencyId).Returns(AgentListXml);
                 var metaModel = new CustomerTurnoverMetaModel
                 {
                     CurrencyId = CurrencyId

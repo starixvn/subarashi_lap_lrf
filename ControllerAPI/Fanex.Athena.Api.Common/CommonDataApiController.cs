@@ -6,6 +6,7 @@
     using System.Threading.Tasks;
     using System.Web.Http;
     using DataAccess.Core.Common.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using Model.Core.DataDomain;
     using Model.Core.MetaModel.Common;
     using ONEbook.UM.Filters;
@@ -86,14 +87,15 @@
         [HttpGet]
         public async Task<IEnumerable<object>> GetLeagues(DateTime fromDate, DateTime toDate, int sportId = 0)
         {
+            var userSession = _sessionService.UserSession;
             var metaModel = new LeagueMetaModel
             {
                 FromDate = fromDate,
                 ToDate = toDate,
                 SportId = sportId,
                 LicenseeId = _sessionService.LicenseeSession.LicenseeId,
-                UserId = _sessionService.UserSession.UserId,
-                AgentListXml = _sessionService.GenerateAgentListXml()
+                UserId = userSession.UserId,
+                AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList)
             };
 
             var leagues = await _leagueDataAccess.GetLeaguesBySport(metaModel).ConfigureAwait(false);

@@ -11,6 +11,7 @@
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Resources;
     using Fanex.Athena.Service.Core.Common.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using Model.BetList.MetaModel;
     using Service.Core.Users.Interfaces;
     using Service.Core.Utility.Interfaces;
@@ -73,19 +74,20 @@
         [ValidationApiRequest(ObjectName = "metaModel")]
         public async Task<HttpResponseMessage> Index(LastBetsMonitoringMetaModel metaModel)
         {
+            var userSession = SessionService.UserSession;
             if (string.IsNullOrWhiteSpace(metaModel.Currency))
             {
-                metaModel.AgentListXml = SessionService.GenerateAgentListXml();
+                metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList);
             }
             else
             {
                 var currencyIdList = metaModel.Currency.Split(',').Select(int.Parse);
-                metaModel.AgentListXml = SessionService.GenerateAgentListXml(currencyIdList);
+                metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList,currencyIdList);
             }
 
             metaModel.UserCurrencyList = UserCurrencyList;
             return await _betListApiClient.PostAsync("/LastBetMonitoringBetList/GetData",
-                metaModel, SessionService.UserSession.Language).ConfigureAwait(false);
+                metaModel, userSession.Language).ConfigureAwait(false);
         }
     }
 }

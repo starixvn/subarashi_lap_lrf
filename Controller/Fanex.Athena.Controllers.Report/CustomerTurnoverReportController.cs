@@ -17,6 +17,7 @@ namespace Fanex.Athena.Controllers.Report
     using Fanex.Athena.Excel.Report;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
     using Fanex.Athena.Web.ResultExtension;
     using Model.Core.DataDomain;
@@ -93,7 +94,8 @@ namespace Fanex.Athena.Controllers.Report
 
             var licenseeSession = SessionService.LicenseeSession;
             var userSession = SessionService.UserSession;
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList
+                ,metaModel.CurrencyId);
             const string FileName = "CustomerTurnover";
             metaModel.IsExportExcel = true;
 

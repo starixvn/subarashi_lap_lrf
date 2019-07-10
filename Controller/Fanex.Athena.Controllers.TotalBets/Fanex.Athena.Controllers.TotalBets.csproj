@@ -144,13 +144,13 @@
       <Project>{152EBE71-ED5C-4F5C-8817-C3AA406E16B8}</Project>
       <Name>Fanex.Athena.DataAccess.TotalBet</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Model\Fanex.Athena.Model.Auth\Fanex.Athena.Model.Auth.csproj">
-      <Project>{794C0345-2DDD-4FFD-A605-BB96FBB37DE8}</Project>
-      <Name>Fanex.Athena.Model.Auth</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Infrastructure\Fanex.Athena.Session\Fanex.Athena.Session.csproj">
       <Project>{B41E38EF-54AD-4866-968F-C856DE9DC072}</Project>
       <Name>Fanex.Athena.Session</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Service\Fanex.Athena.Service.StatelessCore\Fanex.Athena.Service.StatelessCore.csproj">
+      <Project>{DA9A50E3-C62D-4F12-96C2-3AC289D423FE}</Project>
+      <Name>Fanex.Athena.Service.StatelessCore</Name>
     </ProjectReference>
     <ProjectReference Include="..\Fanex.Athena.Controllers.Base\Fanex.Athena.Controllers.Base.csproj">
       <Project>{255e120a-83bf-4f72-9e31-6050d5704069}</Project>

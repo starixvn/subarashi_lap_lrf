@@ -32,7 +32,7 @@
         {
             _sessionService.LicenseeSession.Returns(new LicenseeAuthInfo { LicenseeId = FakeHelper.Create<int>() });
             _sessionService.UserSession.Returns(new UserAuthInfo { UserId = FakeHelper.Create<int>(), Language = FakeHelper.Create<string>() });
-            _sessionService.GenerateAgentListXml(Arg.Any<int>()).Returns(FakeHelper.Create<string>());
+            _AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList)(Arg.Any<int>()).Returns(FakeHelper.Create<string>());
         }
 
         [OneTimeTearDown]

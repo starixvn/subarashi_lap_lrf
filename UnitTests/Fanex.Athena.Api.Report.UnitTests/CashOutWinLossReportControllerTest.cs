@@ -82,7 +82,7 @@
                 DrillDownCustomerId = CustId,
                 AgentListXml = "XmlData"
             };
-            SessionService.GenerateAgentListXml(CurrencyId, metaModel.IsExcludedTestData).Returns("XmlData");
+            AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList)(CurrencyId, metaModel.IsExcludedTestData).Returns("XmlData");
             var dataListResult = new SortableList<CashOutWinLoss>
             {
                 new CashOutWinLoss()
@@ -122,7 +122,7 @@
                 DrillDownCustomerId = CustId,
                 AgentListXml = "XmlData"
             };
-            SessionService.GenerateAgentListXml(CurrencyId, metaModel.IsExcludedTestData).Returns("XmlData");
+            AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList)(CurrencyId, metaModel.IsExcludedTestData).Returns("XmlData");
             var dataListResult = new SortableList<CashOutWinLoss>
             {
                 new CashOutWinLoss()
@@ -161,7 +161,7 @@
                 DrillDownCustomerId = CustId,
                 AgentListXml = "XmlData"
             };
-            SessionService.GenerateAgentListXml(CurrencyId, metaModel.IsExcludedTestData).Returns("XmlData");
+            AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList)(CurrencyId, metaModel.IsExcludedTestData).Returns("XmlData");
 
             _dataAccess.GetDetail(Arg.Any<ThirdPartyWinLossMetaModel>(), UserCurrencyList).ReturnsForAnyArgs(new SortableReportResultModel<CashOutWinLoss>());
 

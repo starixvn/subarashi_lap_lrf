@@ -89,7 +89,7 @@
                 {
                     CurrencyId = 111
                 };
-                SessionService.GenerateAgentListXml(metaModel.CurrencyId).Returns(AgentListXml);
+                AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList)(metaModel.CurrencyId).Returns(AgentListXml);
                 var data = new List<League>
                 {
                     new League { LeagueId = 1, LeagueName = "League1" }

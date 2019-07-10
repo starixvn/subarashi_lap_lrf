@@ -1,4 +1,5 @@
-﻿namespace Fanex.Athena.Model.Auth.Enum
+﻿
+namespace Fanex.Athena.Model.Auth.Enum
 {
     public enum AppMode : byte
     {

@@ -19,7 +19,7 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                SessionService.GenerateAgentListXml(CurrencyId, Arg.Any<bool>()).Returns(AgentListXml);
+                AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList)(CurrencyId, Arg.Any<bool>()).Returns(AgentListXml);
                 var metaModel = new TurnoverMetaModel
                 {
                     CurrencyId = CurrencyId

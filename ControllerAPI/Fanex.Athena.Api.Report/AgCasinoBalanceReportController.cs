@@ -20,6 +20,7 @@ namespace Fanex.Athena.Api.Report
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
     using Fanex.Athena.Service.Core.Utility.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using Model.Core.DataDomain;
     using Model.Core.ResultModel;
     using Service.Core.Common.Interfaces;
@@ -137,10 +138,11 @@ namespace Fanex.Athena.Api.Report
 
         private async Task<SortableReportResultModel<AgCasinoBalance>> GetData(ThirdPartyWinLossMetaModel metaModel)
         {
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(
+            var userSession = SessionService.UserSession;
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList,
                 metaModel.DrillDownCurrencyId == 0 ? metaModel.CurrencyId : metaModel.DrillDownCurrencyId,
                 metaModel.IsExcludedTestData);
-            var userCurrencyList = SessionService.UserSession.CurrencyList;
+            var userCurrencyList = userSession.CurrencyList;
             if (metaModel.DrillDownLevel == 0)
             {
                 var result = await _agcasinoBalanceDataAccess.GetSummaryBalance(metaModel, userCurrencyList).ConfigureAwait(false);

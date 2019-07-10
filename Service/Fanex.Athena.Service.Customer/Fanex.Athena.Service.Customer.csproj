@@ -93,7 +93,7 @@
       <Name>Fanex.Athena.DataAccess.Customer</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Model\Fanex.Athena.Model.Auth\Fanex.Athena.Model.Auth.csproj">
-      <Project>{794C0345-2DDD-4FFD-A605-BB96FBB37DE8}</Project>
+      <Project>{794c0345-2ddd-4ffd-a605-bb96fbb37de8}</Project>
       <Name>Fanex.Athena.Model.Auth</Name>
     </ProjectReference>
     <ProjectReference Include="..\Fanex.Athena.Service.StatelessCore\Fanex.Athena.Service.StatelessCore.csproj">

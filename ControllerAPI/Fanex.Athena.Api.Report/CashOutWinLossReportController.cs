@@ -20,6 +20,7 @@ namespace Fanex.Athena.Api.Report
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
     using Fanex.Athena.Service.Core.Utility.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using Model.Core.DataDomain;
     using Model.Core.ResultModel;
     using Resources;
@@ -168,13 +169,15 @@ namespace Fanex.Athena.Api.Report
             int currencyId,
             int custId)
         {
+            var userSession = SessionService.UserSession;
             metaModel.DrillDownCurrencyId = currencyId;
             metaModel.DrillDownLevel = level;
             metaModel.DrillDownCustomerId = custId;
             metaModel.DrillDownFromDate = fdate ?? metaModel.DrillDownFromDate;
             metaModel.DrillDownToDate = tdate ?? metaModel.DrillDownToDate;
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(level > 0 ? currencyId : metaModel.CurrencyId, metaModel.IsExcludedTestData);
-            metaModel.DefaultBaseCurrency = SessionService.UserSession.DefaultBaseCurrency;
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList,
+                level > 0 ? currencyId : metaModel.CurrencyId, metaModel.IsExcludedTestData);
+            metaModel.DefaultBaseCurrency = userSession.DefaultBaseCurrency;
         }
 
         private async Task<SortableReportResultModel<CashOutWinLoss>> GetData(ThirdPartyWinLossMetaModel metaModel)

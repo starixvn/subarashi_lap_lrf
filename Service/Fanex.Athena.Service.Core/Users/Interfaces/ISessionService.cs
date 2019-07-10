@@ -36,12 +36,6 @@ namespace Fanex.Athena.Service.Core.Users.Interfaces
 
         bool UpdateLanguage(string languageCode);
 
-        string GenerateAgentListXml(int currencyId = 0, bool isExcludeTestData = false);
-
-        string GenerateAgentListXml(IEnumerable<int> currencyIdList, bool isExcludeTestData = false);
-
-        string GenerateAgentListXml(IDictionary<int, IEnumerable<int>> currencyAgentList);
-
         void AssignCurrenciesToUserSession(UserAuthInfo userSession, int licenseeId, IEnumerable<CurrencyUser> currencyUserList = null);
     }
 }

@@ -11,6 +11,7 @@ namespace Fanex.Athena.Controllers.TotalBets
     using System.Web.Mvc;
     using DataAccess.TotalBet.Interfaces;
     using Extension.Utility;
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
     using Model.Core.DataDomain;
     using Model.TotalBet.MetaModel;
@@ -56,16 +57,16 @@ namespace Fanex.Athena.Controllers.TotalBets
 
         private async Task<ActionResult> GetView(HalfTimeFullTimeMetaModel metaModel)
         {
-            var currencies = SessionService.UserSession.CurrencyList;
-
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
+            var userSession = SessionService.UserSession;
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList,
+                metaModel.CurrencyId);
             var result = await _halfTimeFullTimeDataAccess.GetHalfTimeFullTimeDataList(metaModel).ConfigureAwait(false);
             var totalData = result.TotalData;
             var model = new HalfTimeFullTimeViewModel
             {
                 Param = metaModel,
                 MainData = result.DataList.ToList(),
-                CurrencyList = currencies,
+                CurrencyList = userSession.CurrencyList,
                 TotalRunningStake = totalData.HomeHome + totalData.HomeDraw + totalData.HomeAway + totalData.DrawHome +
                                     totalData.DrawDraw + totalData.DrawAway + totalData.AwayHome + totalData.AwayAway
             };

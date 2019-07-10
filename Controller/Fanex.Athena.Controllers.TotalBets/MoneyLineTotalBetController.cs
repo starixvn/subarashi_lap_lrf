@@ -11,6 +11,7 @@ namespace Fanex.Athena.Controllers.TotalBets
     using System.Web.Mvc;
     using DataAccess.TotalBet.Interfaces;
     using Extension.Utility;
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
     using Model.Core.DataDomain;
     using Model.TotalBet.MetaModel;
@@ -59,7 +60,8 @@ namespace Fanex.Athena.Controllers.TotalBets
             var userSession = SessionService.UserSession;
             var currencies = userSession.CurrencyList;
 
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList,
+                metaModel.CurrencyId);
             var result = await _moneyLineDataAccess.GetMoneyLineDataList(metaModel).ConfigureAwait(false);
 
             var model = new MoneyLineViewModel

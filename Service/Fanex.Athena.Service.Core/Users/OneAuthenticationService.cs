@@ -15,7 +15,6 @@
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Logging;
-    using Model.Core.DataDomain;
     using Model.Core.DTO;
     using Model.Core.DTO.OneAuth;
     using Model.Core.DTO.Users;

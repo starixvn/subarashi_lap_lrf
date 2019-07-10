@@ -39,7 +39,7 @@
             const string AgentListXml = "<Root><Agent AgentId=\"1\" Currency=\"1\"/></Root>";
             var metaModel = CreateValidMetaModel();
             metaModel.CurrencyId = 999;
-            SessionService.GenerateAgentListXml(metaModel.CurrencyId, metaModel.IsExcludeTestData).Returns(AgentListXml);
+            AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList)(metaModel.CurrencyId, metaModel.IsExcludeTestData).Returns(AgentListXml);
             _dataAccess.GetData(metaModel, UserCurrencyList).ReturnsForAnyArgs(new ReportResultModel<LicenseeWinLossByTimeZone>());
 
             // Action

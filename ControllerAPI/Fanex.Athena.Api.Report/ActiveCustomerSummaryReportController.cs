@@ -23,6 +23,7 @@ namespace Fanex.Athena.Api.Report
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using Model.Core.DataDomain;
     using Model.Report.ResultModel;
     using Service.Core.Common.Interfaces;
@@ -131,8 +132,8 @@ namespace Fanex.Athena.Api.Report
 
         private async Task<dynamic> ProcessRequest(ActiveCustomerMetaModel metaModel)
         {
-
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId, metaModel.IsExcludeTest);
+            var userSession = SessionService.UserSession;
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId, metaModel.IsExcludeTest);
 
             var result =
                 await _activeCustomerSummaryDataAccess.GetActiveCustomers(metaModel);

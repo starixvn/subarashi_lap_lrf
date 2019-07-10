@@ -14,6 +14,7 @@ namespace Fanex.Athena.Api.BetList
     using Base.Attributes;
     using DataAccess.Core.Configuration.Interfaces;
     using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using Model.BetList.MetaModel;
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
@@ -65,8 +66,9 @@ namespace Fanex.Athena.Api.BetList
         public async Task<dynamic> MixParlay([FromUri] LiveReportBetListMetaModel metaModel, int page, int rows)
         {
             const string UspKey = "Lrf_BetList_LiveReport_SelWinlossParlay";
+            var userSession = SessionService.UserSession;
 
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId);
 
             return await GetPagingData(metaModel, UspKey, page, rows).ConfigureAwait(false);
         }
@@ -88,7 +90,7 @@ namespace Fanex.Athena.Api.BetList
         {
             var licenseeSession = SessionService.LicenseeSession;
             var userSession = SessionService.UserSession;
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId);
             metaModel.HasPlayerCom = licenseeSession.IsAllowedCustomerComm;
             metaModel.CurrencyList = userSession.CurrencyList;
             metaModel.UspKey = uspKey;
@@ -102,7 +104,7 @@ namespace Fanex.Athena.Api.BetList
 
             var licenseeSession = SessionService.LicenseeSession;
             var userSession = SessionService.UserSession;
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId);
             metaModel.PageIndex = pageIndex < 1 ? 1 : pageIndex;
             metaModel.PageSize = pageSize < 1 ? DefautlPageSize : pageSize;
             metaModel.LicenseeId = licenseeSession.LicenseeId;

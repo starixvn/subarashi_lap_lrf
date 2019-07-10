@@ -279,7 +279,7 @@
                 ApplicationMode = AppMode.Self,
                 FunctionIdList = new int[0]
             });
-            SessionService.GenerateAgentListXml(Arg.Any<int>(), Arg.Any<bool>()).Returns(string.Empty);
+            AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList)(Arg.Any<int>(), Arg.Any<bool>()).Returns(string.Empty);
 
             return model;
         }

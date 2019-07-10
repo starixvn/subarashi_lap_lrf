@@ -13,6 +13,7 @@ namespace Fanex.Athena.Controllers.BetList
     using System.Web.UI;
     using DataAccess.Core.Configuration.Interfaces;
     using Extension.Utility;
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using Model.BetList.MetaModel;
     using Model.BetList.ViewModel;
     using Model.Core.DataDomain;
@@ -21,7 +22,6 @@ namespace Fanex.Athena.Controllers.BetList
     using Service.Core.Utility.Interfaces;
     using VendorAdapter.Interfaces;
     using Web.ActionFilter;
-
     #endregion Using
 
     [FunctionAuthorization(PermissionKeys.ReportColossusBetsWinLoss)]
@@ -48,7 +48,7 @@ namespace Fanex.Athena.Controllers.BetList
         public async Task<ActionResult> Detail(ColossusBetDetailMetaModel metaModel)
         {
             var userSession = SessionService.UserSession;
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml();
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList);
             metaModel.UserId = userSession.UserId;
 
             var viewModel = await BetListApiClient.PostAsync<ColossusBetDetailViewModel>("/ColossusBetBetList/Detail",

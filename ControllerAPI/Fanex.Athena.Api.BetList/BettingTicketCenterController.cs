@@ -7,6 +7,7 @@
     using Base;
     using Base.Attributes;
     using Fanex.Athena.Model.Core.Helper;
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using Model.BetList.MetaModel;
     using Model.Core.DataDomain;
     using Resources;
@@ -36,7 +37,7 @@
             var userSession = SessionService.UserSession;
             metaModel.HasPlayerCom = SessionService.LicenseeSession.IsAllowedCustomerComm;
             metaModel.UserCurrencyList = userSession.CurrencyList;
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml();
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList);
 
             return await _betListApiClient.PostAsync("/BettingTicketCenter/GetBySingleCustomer",
                 metaModel,
@@ -49,7 +50,7 @@
         public async Task<dynamic> GetByRefno(RefNoBetListMetaModel metaModel)
         {
             var userSession = SessionService.UserSession;
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml();
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList);
             metaModel.HasPlayerCom = SessionService.LicenseeSession.IsAllowedCustomerComm;
             metaModel.UserCurrencyList = userSession.CurrencyList;
 
@@ -66,7 +67,7 @@
             var userSession = SessionService.UserSession;
             var currencyList = metaModel.CurrencyIdList?.Split(',').Select(x => int.Parse(x)).ToArray();
 
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(currencyList);
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, currencyList);
             metaModel.HasPlayerCom = SessionService.LicenseeSession.IsAllowedCustomerComm;
             metaModel.UserCurrencyList = userSession.CurrencyList;
 

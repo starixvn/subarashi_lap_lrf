@@ -56,7 +56,7 @@
             // Arrange
             var metaModel = GetMetaModel();
             StubSingleWalletProductAccess(new[] { "SB", "BA" });
-            SessionService.GenerateAgentListXml(Arg.Any<int>(), Arg.Any<bool>()).Returns("<Root></Root>");
+            AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList)(Arg.Any<int>(), Arg.Any<bool>()).Returns("<Root></Root>");
             SessionService.UserSession.Returns(new UserAuthInfo
             {
                 IsManageableSubsidiary = true,
@@ -86,7 +86,7 @@
             // Arrange
             var metaModel = GetMetaModel();
             StubSingleWalletProductAccess(new[] { "SB", "BA" });
-            SessionService.GenerateAgentListXml(Arg.Any<IDictionary<int, IEnumerable<int>>>()).Returns("<Root></Root>");
+            AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList)(Arg.Any<IDictionary<int, IEnumerable<int>>>()).Returns("<Root></Root>");
             SessionService.UserSession.Returns(new UserAuthInfo
             {
                 IsManageableSubsidiary = true,

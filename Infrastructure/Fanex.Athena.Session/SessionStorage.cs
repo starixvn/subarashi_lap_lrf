@@ -3,7 +3,6 @@
     using System.Web;
     using Fanex.Athena.Model.Auth;
     using Interfaces;
-    using Model;
 
     public class SessionStorage : ISessionStorage
     {

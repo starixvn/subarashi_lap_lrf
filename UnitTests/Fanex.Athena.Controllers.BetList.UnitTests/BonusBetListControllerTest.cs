@@ -55,7 +55,7 @@
                     ToDate = new DateTime(2018, 12, 12)
                 };
 
-                SessionService.GenerateAgentListXml(metaModel.CurrencyId, false).Returns(AgentListXml);
+                AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList)(metaModel.CurrencyId, false).Returns(AgentListXml);
                 controller.When(async x => await x.ProcessExportExcel(
                     Arg.Any<BetListExcelMetaModel>(),
                     Arg.Any<string>(),

@@ -19,6 +19,7 @@ namespace Fanex.Athena.Api.Report
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Service.Core.Utility.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using Model.Core.DataDomain;
     using Model.Core.ResultModel;
     using Resources;
@@ -118,6 +119,7 @@ namespace Fanex.Athena.Api.Report
             int currencyId = 0,
             int custId = 0)
         {
+            var userSession = SessionService.UserSession;
             if (_currencyValidation.IsValidCurrency(currencyId, true))
             {
                 metaModel.DrillDownCurrencyId = currencyId;
@@ -125,8 +127,9 @@ namespace Fanex.Athena.Api.Report
                 metaModel.DrillDownCustomerId = custId;
                 metaModel.DrillDownFromDate = fdate.HasValue ? fdate.Value : metaModel.DrillDownFromDate;
                 metaModel.DrillDownToDate = tdate.HasValue ? tdate.Value : metaModel.DrillDownToDate;
-                metaModel.AgentListXml = SessionService.GenerateAgentListXml(level > 0 ? currencyId : metaModel.CurrencyId, metaModel.IsExcludedTestData);
-                metaModel.DefaultBaseCurrency = SessionService.UserSession.DefaultBaseCurrency;
+                metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList,
+                    level > 0 ? currencyId : metaModel.CurrencyId, metaModel.IsExcludedTestData);
+                metaModel.DefaultBaseCurrency = userSession.DefaultBaseCurrency;
                 var data = await GetData(metaModel);
 
                 if (metaModel.IsExportExcel)

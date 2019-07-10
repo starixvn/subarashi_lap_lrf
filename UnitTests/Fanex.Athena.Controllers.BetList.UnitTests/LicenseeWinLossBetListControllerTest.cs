@@ -87,7 +87,7 @@
                 var expectedTitle = $"{ViewResources.Customer} {ViewResources.BetList} - 11/1/2018 --> 12/2/2018 - "
                     + $"External{(isFakeLic ? "" : "(System)")} - {string.Format(ViewResources.Viewin, expCurrency)}";
 
-                SessionService.GenerateAgentListXml(metaModel.CurrencyId, false).Returns(AgentListXml);
+                AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList)(metaModel.CurrencyId, false).Returns(AgentListXml);
                 controller.When(async x => await x.ProcessExportExcel(
                     Arg.Any<BetListExcelMetaModel>(),
                     Arg.Any<string>(),

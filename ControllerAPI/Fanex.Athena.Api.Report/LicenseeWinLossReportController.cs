@@ -24,6 +24,7 @@ namespace Fanex.Athena.Api.Report
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using Model.Core.DataDomain;
     using Model.Core.MetaModel.Product;
     using Model.Core.ResultModel;
@@ -295,7 +296,8 @@ namespace Fanex.Athena.Api.Report
             int custId = 0,
             string currencyName = null)
         {
-            metaModel.DefaultBaseCurrency = SessionService.UserSession.DefaultBaseCurrency;
+            var userSession = SessionService.UserSession;
+            metaModel.DefaultBaseCurrency = userSession.DefaultBaseCurrency;
             metaModel.DrillDownLevel = level;
             metaModel.DrillDownFromDate = fdate.HasValue ? fdate.Value : metaModel.DrillDownFromDate;
             metaModel.DrillDownToDate = tdate.HasValue ? tdate.Value : metaModel.DrillDownToDate;
@@ -307,7 +309,8 @@ namespace Fanex.Athena.Api.Report
                 metaModel.DrillDownCurrencyName = currencyName;
                 metaModel.DrillDownCustomerId = custId;
 
-                metaModel.AgentListXml = SessionService.GenerateAgentListXml(level == 0 ? metaModel.CurrencyId : currencyId, metaModel.IsExcludedTestData);
+                metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList,
+                    level == 0 ? metaModel.CurrencyId : currencyId, metaModel.IsExcludedTestData);
                 var result = await GetData(metaModel);
 
                 if (metaModel.IsExportExcel)

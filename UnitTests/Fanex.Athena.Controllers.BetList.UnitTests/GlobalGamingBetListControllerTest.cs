@@ -69,7 +69,7 @@
                 };
                 var expectedTitle = $"{ViewResources.ProductFW} - {ViewResources.DetailedBetlist} - {metaModel.Date.ToString("MM/dd/yyyy")}";
 
-                SessionService.GenerateAgentListXml(metaModel.CurrencyId, false).Returns(AgentListXml);
+                AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList)(metaModel.CurrencyId, false).Returns(AgentListXml);
 
                 controller.When(async x => await x.ProcessExportExcel(
                     Arg.Any<BetListExcelMetaModel>(),

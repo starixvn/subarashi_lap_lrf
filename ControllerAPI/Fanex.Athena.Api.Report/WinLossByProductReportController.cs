@@ -24,6 +24,7 @@ namespace Fanex.Athena.Api.Report
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Service.Core.Utility.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using Model.Core.MetaModel.Product;
     using Model.Report.ResultModel;
     using Resources;
@@ -239,10 +240,11 @@ namespace Fanex.Athena.Api.Report
             {
                 return BadRequest(ViewResources.InvalidParams);
             }
-
-            metaModel.DefaultBaseCurrency = SessionService.UserSession.DefaultBaseCurrency;
+            var userSession = SessionService.UserSession;
+            metaModel.DefaultBaseCurrency = userSession.DefaultBaseCurrency;
             metaModel.Username = ValidateUserName(metaModel.Username);
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(level == 0 ? metaModel.CurrencyId : currencyId, metaModel.IsExcludedTestData);
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList,
+                level == 0 ? metaModel.CurrencyId : currencyId, metaModel.IsExcludedTestData);
             metaModel.DrillDownCurrencyId = currencyId;
             metaModel.DrillDownCurrencyName = currencyName;
             metaModel.Level = level;

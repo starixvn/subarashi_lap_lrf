@@ -20,6 +20,7 @@ namespace Fanex.Athena.Controllers.BetList
     using Service.Core.Utility.Interfaces;
     using VendorAdapter.Interfaces;
     using Web.ActionFilter;
+    using Fanex.Athena.Service.StatelessCore.Utility;
 
     /// <summary>
     /// RunningBetList contains bet list:.
@@ -89,7 +90,7 @@ namespace Fanex.Athena.Controllers.BetList
 
             if (metaModel.IsExportExcel)
             {
-                metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
+                metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId);
                 return await Excel(metaModel, uspKey).ConfigureAwait(false);
             }
 

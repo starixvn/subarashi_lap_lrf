@@ -153,10 +153,6 @@
       <Project>{71F95E53-36D0-4091-828D-ED14C9939C35}</Project>
       <Name>Fanex.Athena.Extension</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Model\Fanex.Athena.Model.Auth\Fanex.Athena.Model.Auth.csproj">
-      <Project>{794C0345-2DDD-4FFD-A605-BB96FBB37DE8}</Project>
-      <Name>Fanex.Athena.Model.Auth</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Fanex.Athena.Web\Fanex.Athena.Web.csproj">
       <Project>{dd931adb-a994-49c0-95a3-72bcb6e22679}</Project>
       <Name>Fanex.Athena.Web</Name>
@@ -172,6 +168,10 @@
     <ProjectReference Include="..\..\Service\Fanex.Athena.Service.Core\Fanex.Athena.Service.Core.csproj">
       <Project>{FCFD7434-085B-4C93-848F-E1CBCEDCC5A0}</Project>
       <Name>Fanex.Athena.Service.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Service\Fanex.Athena.Service.StatelessCore\Fanex.Athena.Service.StatelessCore.csproj">
+      <Project>{DA9A50E3-C62D-4F12-96C2-3AC289D423FE}</Project>
+      <Name>Fanex.Athena.Service.StatelessCore</Name>
     </ProjectReference>
     <ProjectReference Include="..\Fanex.Athena.Api.Base\Fanex.Athena.Api.Base.csproj">
       <Project>{16d39d7b-00c0-4cc3-82f5-44bbdee7ae51}</Project>

@@ -20,6 +20,7 @@
     using Service.Core.Utility.Interfaces;
     using VendorAdapter.Interfaces;
     using Fanex.Athena.Model.Core.Helper;
+    using Fanex.Athena.Service.StatelessCore.Utility;
 
     [SessionState(SessionStateBehavior.ReadOnly)]
     [CheckUMFilter]
@@ -138,7 +139,8 @@
             defaultMetaModel.Date = DateTime.SpecifyKind(defaultMetaModel.Date.Date, DateTimeKind.Unspecified);
             defaultMetaModel.IsFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeId);
             defaultMetaModel.CurrencyList = UserCurrencyList;
-            defaultMetaModel.AgentListXml = SessionService.GenerateAgentListXml(defaultMetaModel.CurrencyId);
+            defaultMetaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, 
+                defaultMetaModel.CurrencyId);
 
             var balanceUp = GetBalanceUp();
             defaultMetaModel.BalanceUpDay = DateTime.SpecifyKind(balanceUp.BalanceUpDay.Date, DateTimeKind.Unspecified);

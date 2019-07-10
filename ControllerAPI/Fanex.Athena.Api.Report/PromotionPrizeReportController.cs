@@ -15,6 +15,7 @@
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
     using VendorAdapter.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Utility;
 
     [ApiFunctionAuthorization(PermissionKeys.ReportLicenseeWinLoss, PermissionKeys.ReportCustomerWinLoss)]
     public class PromotionPrizeReportController : ApiReportBaseController
@@ -48,7 +49,7 @@
             var userSession = SessionService.UserSession;
 
             metaModel.DefaultBaseCurrency = userSession.DefaultBaseCurrency;
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId, metaModel.IsExcludedTestData);
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId, metaModel.IsExcludedTestData);
 
             var data = _dataAccess.GetData(metaModel, userSession.CurrencyList);
 

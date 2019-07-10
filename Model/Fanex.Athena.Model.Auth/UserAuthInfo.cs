@@ -3,13 +3,12 @@
 // TODO: Update copyright text.
 // </copyright>
 // -----------------------------------------------------------------------
+using System;
 
 namespace Fanex.Athena.Model.Auth
 {
     using Fanex.Athena.Model.Auth.Enum;
-    using System;
     using System.Collections.Generic;
-
     [Serializable]
     public class UserAuthInfo
     {

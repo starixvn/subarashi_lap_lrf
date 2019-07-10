@@ -6,6 +6,7 @@
     using Base.Attributes;
     using DataAccess.Report.Interfaces;
     using Fanex.Athena.Resources;
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using Model.Core.DataDomain;
     using Model.Report.DTO;
     using Model.Report.MetaModel;
@@ -32,8 +33,8 @@
             IsValidProductCodeList = true, FunctionConfig = FunctionNames.CasinoTurnover, IsSingleWalletProduct = true)]
         public async Task<dynamic> GetData(CasinoTurnoverMetaModel metaModel)
         {
-
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
+            var userSession = SessionService.UserSession;
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList,metaModel.CurrencyId);
             var result = await _casinoTurnoverDataAccess.GetData(metaModel).ConfigureAwait(false);
             return new
             {

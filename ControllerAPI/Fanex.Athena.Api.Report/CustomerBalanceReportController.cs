@@ -10,6 +10,7 @@
     using Excel.Report;
     using Fanex.Athena.Api.Base.Attributes;
     using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using Model.Core.ResultModel;
     using Model.Report.DTO;
     using Model.Report.MetaModel;
@@ -96,7 +97,9 @@
 
         private async Task<ReportResultModel<CustBalance>> GetData(CustomerBalanceMetaModel metaModel)
         {
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId, metaModel.IsExcludeTest);
+            var userSession = SessionService.UserSession;
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList,
+                metaModel.CurrencyId, metaModel.IsExcludeTest);
             return await _custBalanceDataAccess.GetDataList(metaModel).ConfigureAwait(false);
         }
     }

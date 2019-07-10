@@ -48,7 +48,7 @@
             base.FixtureSetUp();
 
             SetUpDefaultFakeData();
-            SessionService.GenerateAgentListXml(CurrencyId).Returns(AgentListXml);
+            AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList)(CurrencyId).Returns(AgentListXml);
         }
 
         [Test]

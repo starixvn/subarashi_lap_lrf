@@ -10,6 +10,7 @@ namespace Fanex.Athena.Controllers.TotalBets
     using System.Web.Mvc;
     using DataAccess.TotalBet.Interfaces;
     using Extension.Utility;
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
     using Model.Core.DataDomain;
     using Model.TotalBet.MetaModel;
@@ -56,15 +57,16 @@ namespace Fanex.Athena.Controllers.TotalBets
 
         private async Task<ActionResult> GetView(OutrightMetaModel metaModel)
         {
-            var currencies = SessionService.UserSession.CurrencyList;
+            var userSession = SessionService.UserSession;
 
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList,
+                metaModel.CurrencyId);
             var dataList = await _outrightDataAccess.GetOutrightDataList(metaModel).ConfigureAwait(false);
             var model = new OutrightViewModel
             {
                 Param = metaModel,
                 MainData = dataList,
-                CurrencyList = currencies
+                CurrencyList = userSession.CurrencyList
             };
 
             return View("~/Views/Desktop/TotalBets/Outright/Main.cshtml", model);

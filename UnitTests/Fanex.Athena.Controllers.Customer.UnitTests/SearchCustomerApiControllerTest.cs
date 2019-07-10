@@ -28,7 +28,7 @@
                 var expectedCustomerNames = new[] { "test1", "test2" };
 
                 SetUpDefaultFakeData();
-                SessionService.GenerateAgentListXml().Returns(AgentListXml);
+                AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList)().Returns(AgentListXml);
                 searchCustomerDataAccess.SearchCustomers(0, string.Empty, string.Empty, false)
                     .ReturnsForAnyArgs(expectedCustomerNames);
 

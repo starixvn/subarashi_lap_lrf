@@ -30,6 +30,7 @@ namespace Fanex.Athena.Controllers.Customer
     using Service.Core.Users.Interfaces;
     using Service.Report.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Utility;
 
     [FunctionAuthorization(PermissionKeys.CustomerInfoCustomerList)]
     public class CustomerController : ContentBaseController
@@ -412,10 +413,10 @@ namespace Fanex.Athena.Controllers.Customer
             if (userSession.IsManageableSubsidiary)
             {
                 var currencyAgentList = _subsidiaryService.GetCurrencyAgentList(subsidiaryList, currencyId: currencyId);
-                return SessionService.GenerateAgentListXml(currencyAgentList);
+                return AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyList, currencyAgentList);
             }
 
-            return SessionService.GenerateAgentListXml(currencyId);
+            return AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, currencyId);
         }
     }
 }

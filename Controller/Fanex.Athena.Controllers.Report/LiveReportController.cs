@@ -21,6 +21,7 @@ namespace Fanex.Athena.Controllers.Report
     using Fanex.Athena.Excel.Report;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel.LiveReports;
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
     using Fanex.Athena.Web.ResultExtension;
 
@@ -91,7 +92,8 @@ namespace Fanex.Athena.Controllers.Report
             var licenseeSession = SessionService.LicenseeSession;
             var userSession = SessionService.UserSession;
             metaModel.LicenseeId = licenseeSession.LicenseeId;
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList
+                ,metaModel.CurrencyId);
 
             var productAccess = GetProductAccess(metaModel.LicenseeId, userSession.Language);
             metaModel.ProductCodeList = string.Join(",", productAccess.ProductList.Select(x => x.ProductCode));
@@ -114,9 +116,11 @@ namespace Fanex.Athena.Controllers.Report
         public async Task<ActionResult> MatchList(LiveReportMatchListMetalModel metaModel)
         {
             var licenseeSession = SessionService.LicenseeSession;
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
+            var userSession = SessionService.UserSession;
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList
+                ,metaModel.CurrencyId);
 
-            var productAccess = GetProductAccess(licenseeSession.LicenseeId, SessionService.UserSession.Language);
+            var productAccess = GetProductAccess(licenseeSession.LicenseeId, userSession.Language);
             var dataList = await _liveReportService.GetLiveReportWinLossByMatch(metaModel).ConfigureAwait(false);
 
             var model = new LiveReportMatchListViewModel
@@ -138,10 +142,13 @@ namespace Fanex.Athena.Controllers.Report
         public async Task<ActionResult> Detail(LiveReportMetaModel metaModel, string productCode)
         {
             var licenseeSession = this.SessionService.LicenseeSession;
+            var userSession = SessionService.UserSession;
             metaModel.LicenseeId = licenseeSession.LicenseeId;
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
 
-            var productAccess = GetProductAccess(licenseeSession.LicenseeId, SessionService.UserSession.Language);
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList
+                ,metaModel.CurrencyId);
+
+            var productAccess = GetProductAccess(licenseeSession.LicenseeId, userSession.Language);
             var balanceUpDay = _balanceUpDataAccess.GetBalanceUp().BalanceUpDay;
 
             var resultModel = await GetDetailResult(metaModel, productAccess, productCode).ConfigureAwait(false);

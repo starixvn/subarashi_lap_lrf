@@ -45,7 +45,7 @@
                 TotalData = new SubsidiaryPerformanceDetail()
             };
             _subsidiaryService.GetCurrencyAgentList(Arg.Any<string>(), Arg.Any<bool>()).Returns(agentList);
-            SessionService.GenerateAgentListXml(agentList).Returns(AgentListXml);
+            AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList)(agentList).Returns(AgentListXml);
             _service.GetDetailData(metaModel, Arg.Any<IDictionary<int, string>>()).Returns(resultData);
 
             // Action

@@ -2,6 +2,7 @@
 {
     using Extension.Utility;
     using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using NSubstitute;
 
     using NUnit.Framework;
@@ -71,7 +72,6 @@
 
             StubLicenseeSessionData(DefaultLicenseeSession);
 
-            SessionService.GenerateAgentListXml(Arg.Any<int>(), Arg.Any<bool>()).Returns(string.Empty);
         }
 
         protected void StubUserSessionData(UserAuthInfo fakeUserSession)

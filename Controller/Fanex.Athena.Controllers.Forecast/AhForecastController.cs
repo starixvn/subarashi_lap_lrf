@@ -21,6 +21,7 @@ namespace Fanex.Athena.Controllers.Forecast
     using Service.Core.Users.Interfaces;
     using Service.Forecast.Interfaces;
     using Web.ActionFilter;
+    using Fanex.Athena.Service.StatelessCore.Utility;
 
     [FunctionAuthorization(PermissionKeys.ForecastHandicapOverUnderLive)]
     public class AhForecastController : ForecastBaseController
@@ -40,7 +41,7 @@ namespace Fanex.Athena.Controllers.Forecast
         [ValidationWebRequest]
         public async Task<ActionResult> Index(ForecastAHMetaModel metaModel)
         {
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(SessionService.UserSession.CurrencyAgentList, metaModel.CurrencyId);
 
             var model = await GetViewModel(metaModel).ConfigureAwait(false);
 
