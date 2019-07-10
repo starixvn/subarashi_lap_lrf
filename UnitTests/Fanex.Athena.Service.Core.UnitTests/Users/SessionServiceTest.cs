@@ -13,6 +13,7 @@
     using Extension.Utility;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Auth.Enum;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;

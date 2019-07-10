@@ -64,10 +64,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthorizationService.cs" />
+    <Compile Include="FunctionService.cs" />
+    <Compile Include="FunctionStorage.cs" />
     <Compile Include="Interfaces\IAuthorizationService.cs" />
     <Compile Include="Interfaces\ILGAPIClient.cs" />
     <Compile Include="Interfaces\IReportAPIClient.cs" />
     <Compile Include="LGAPIClient.cs" />
+    <Compile Include="Interfaces\IFunctionService.cs" />
+    <Compile Include="Interfaces\IFunctionStorage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportAPIClient.cs" />
     <Compile Include="RestSharpExtension\NewtonsoftJsonSerializer.cs" />
@@ -89,6 +93,9 @@
     <ProjectReference Include="..\Fanex.Athena.Service.Core\Fanex.Athena.Service.Core.csproj">
       <Project>{FCFD7434-085B-4C93-848F-E1CBCEDCC5A0}</Project>
       <Name>Fanex.Athena.Service.Core</Name>
+    <ProjectReference Include="..\..\Resources\Fanex.Athena.Resources\Fanex.Athena.Resources.csproj">
+      <Project>{17B0022C-4902-4C61-908A-5DB81568DC3A}</Project>
+      <Name>Fanex.Athena.Resources</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

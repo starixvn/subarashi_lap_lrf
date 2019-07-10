@@ -1,12 +1,13 @@
-﻿namespace Fanex.Athena.Service.Core.UnitTests.Common
+﻿namespace Fanex.Athena.ServiceStatelessCore.UnitTests
 {
     using System.Collections.Generic;
     using System.Linq;
-    using System.Threading.Tasks;
-    using Core.Common;
+
     using DataAccess.Core.Common.Interfaces;
-    using Model.Core.DTO.Common;
+    using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Athena.Service.StatelessCore;
     using NSubstitute;
+
     using NUnit.Framework;
 
     public class FunctionStorageTest

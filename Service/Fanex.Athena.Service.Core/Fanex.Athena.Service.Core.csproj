@@ -101,9 +101,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\BetTypeService.cs" />
-    <Compile Include="Common\FunctionService.cs" />
-    <Compile Include="Common\FunctionStorage.cs" />
-    <Compile Include="Common\Interfaces\IFunctionStorage.cs" />
     <Compile Include="Configuration\Interfaces\IReportSettingService.cs" />
     <Compile Include="Configuration\ReportSettingService.cs" />
     <Compile Include="Configuration\LicenseeSettingService.cs" />
@@ -122,7 +119,6 @@
     <Compile Include="Exception\ServiceException.cs" />
     <Compile Include="Common\Interfaces\IBetTypeService.cs" />
     <Compile Include="Common\Interfaces\IExChangeRateService.cs" />
-    <Compile Include="Common\Interfaces\IFunctionService.cs" />
     <Compile Include="Common\Interfaces\ILanguageService.cs" />
     <Compile Include="Common\Interfaces\IMatchService.cs" />
     <Compile Include="Common\Interfaces\IProductService.cs" />
@@ -174,6 +170,10 @@
     <ProjectReference Include="..\..\Resources\Fanex.Athena.Resources\Fanex.Athena.Resources.csproj">
       <Project>{17b0022c-4902-4c61-908a-5db81568dc3a}</Project>
       <Name>Fanex.Athena.Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.Athena.Service.StatelessCore\Fanex.Athena.Service.StatelessCore.csproj">
+      <Project>{DA9A50E3-C62D-4F12-96C2-3AC289D423FE}</Project>
+      <Name>Fanex.Athena.Service.StatelessCore</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

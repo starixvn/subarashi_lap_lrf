@@ -11,7 +11,7 @@
 
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Service.Core.Users.Interfaces;
-
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DTO.Users;
 
     using NSubstitute;

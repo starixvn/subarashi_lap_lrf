@@ -1,4 +1,4 @@
-﻿namespace Fanex.Athena.Service.Core.Common
+﻿namespace Fanex.Athena.Service.StatelessCore
 {
     using System.Collections.Generic;
     using System.Linq;

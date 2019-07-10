@@ -12,20 +12,19 @@ namespace Fanex.Athena.Service.Core.Users
 {
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
     using System.Web;
     using Model.Core.DataDomain;
     using DataAccess.Core.Common.Interfaces;
     using DataAccess.Core.Users.Interfaces;
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Core.DTO.Users;
-    using Fanex.Athena.Service.Core.Common.Interfaces;
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using Model.Core.DTO.Common;
     using Session.Interfaces;
     using Utility;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Auth.Enum;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     public class SessionService : ISessionService
     {

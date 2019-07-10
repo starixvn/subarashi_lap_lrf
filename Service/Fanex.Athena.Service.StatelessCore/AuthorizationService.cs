@@ -14,7 +14,6 @@ namespace Fanex.Athena.Service.StatelessCore
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Auth.Enum;
     using Fanex.Athena.Model.Core.DataDomain;
-    using Fanex.Athena.Service.Core.Common.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     public class AuthorizationService : IAuthorizationService

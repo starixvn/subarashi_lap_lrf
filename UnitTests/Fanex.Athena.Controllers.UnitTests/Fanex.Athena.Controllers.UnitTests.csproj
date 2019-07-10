@@ -197,6 +197,10 @@
       <Project>{FCFD7434-085B-4C93-848F-E1CBCEDCC5A0}</Project>
       <Name>Fanex.Athena.Service.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Service\Fanex.Athena.Service.StatelessCore\Fanex.Athena.Service.StatelessCore.csproj">
+      <Project>{DA9A50E3-C62D-4F12-96C2-3AC289D423FE}</Project>
+      <Name>Fanex.Athena.Service.StatelessCore</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Fanex.Athena.Controllers.Base.UnitTests\Fanex.Athena.Controllers.Base.UnitTests.csproj">
       <Project>{5A7466E4-F6B3-4042-8971-E6CE5EAB1F09}</Project>
       <Name>Fanex.Athena.Controllers.Base.UnitTests</Name>
