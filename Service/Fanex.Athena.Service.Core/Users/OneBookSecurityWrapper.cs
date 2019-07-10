@@ -2,9 +2,9 @@
 {
     using System;
     using System.Configuration;
-    using Core.Exception;
     using DataAccess.Core.Utilities;
     using Fanex.Athena.Service.Core.Users.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Exception;
     using Model.Core.DTO.OneAuth;
     using ONEbook.Security;
 

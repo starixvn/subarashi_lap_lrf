@@ -13,8 +13,8 @@ namespace Fanex.Athena.Service.Core.Users
     using Fanex.Athena.DataAccess.Core.Users.Interfaces;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Core.DTO.Users;
-    using Fanex.Athena.Service.Core.Exception;
     using Fanex.Athena.Service.Core.Users.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Exception;
     using Fanex.Common;
     using Resources;
 

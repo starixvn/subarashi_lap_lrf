@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthorizationService.cs" />
+    <Compile Include="Exception\ServiceException.cs" />
     <Compile Include="FunctionService.cs" />
     <Compile Include="FunctionStorage.cs" />
     <Compile Include="Interfaces\IAuthorizationService.cs" />

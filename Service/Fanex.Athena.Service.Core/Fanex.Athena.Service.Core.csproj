@@ -116,7 +116,6 @@
     <Compile Include="Common\MatchService.cs" />
     <Compile Include="Common\ProductService.cs" />
     <Compile Include="Configuration\MoveBetService.cs" />
-    <Compile Include="Exception\ServiceException.cs" />
     <Compile Include="Common\Interfaces\IBetTypeService.cs" />
     <Compile Include="Common\Interfaces\IExChangeRateService.cs" />
     <Compile Include="Common\Interfaces\ILanguageService.cs" />
