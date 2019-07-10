@@ -177,8 +177,6 @@
 
         private void SetUpForExportingExcel(BetListMetaModel metaModel, RunningBetListController controller)
         {
-            AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList)(metaModel.CurrencyId, false).Returns(AgentListXml);
-
             controller.When(async x => await x.ProcessExportExcel(
                 Arg.Any<BetListExcelMetaModel>(),
                 Arg.Any<string>(),

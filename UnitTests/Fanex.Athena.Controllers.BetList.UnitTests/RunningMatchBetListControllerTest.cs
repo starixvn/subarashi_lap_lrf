@@ -55,17 +55,16 @@
 
         [TestCase("USD", "eur", "EUR", 1, "Lrf_BetList_SelRunningByBettypeMatch", false)]
         public async Task Index_ExportExcel_PassCorrectParam(
-            string currency, 
-            string baseCurrency, 
-            string expectedCurrency, 
-            int betType, 
-            string uspName, 
+            string currency,
+            string baseCurrency,
+            string expectedCurrency,
+            int betType,
+            string uspName,
             bool hasMainTickets)
         {
             using (var controller = CreateController())
             {
                 // Arrange
-                const string AgentListXml = "<xml/>";
                 var metaModel = new BetListExcelMetaModel
                 {
                     IsExportExcel = true,
@@ -78,8 +77,6 @@
                 CacheRefAdapter.GetLeagueName(Arg.Any<int>()).Returns("League");
                 CacheRefAdapter.GetBettype(betType).Returns("BetType");
                 var expectedTitle = $"(LEAGUENAME) - BetType - {string.Format(ViewResources.Viewin, expectedCurrency)}";
-
-                AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList)(metaModel.CurrencyId, false).Returns(AgentListXml);
 
                 controller.When(async x => await x.ProcessExportExcel(
                     Arg.Any<BetListExcelMetaModel>(),
@@ -97,7 +94,7 @@
                         && string.Join(",", x.HiddenColumns) == "7,8,9"
                         && x.LicenseeId == DefaultLicenseeSession.LicenseeId
                         && !x.IsShowSumStake
-                        && x.AgentListXml == AgentListXml),
+                  ),
                     "RunningBetList",
                     null);
             }

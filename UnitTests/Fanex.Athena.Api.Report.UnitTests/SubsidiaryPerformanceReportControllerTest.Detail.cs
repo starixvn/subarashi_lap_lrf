@@ -32,7 +32,6 @@
         public async Task Detail_WhenCall_ReturnDataFromService()
         {
             // Arrange
-            const string AgentListXml = "<sml>So Much Lie</sml>";
             var metaModel = GetMetaModel();
             var agentList = new Dictionary<int, IEnumerable<int>>
             {
@@ -45,7 +44,6 @@
                 TotalData = new SubsidiaryPerformanceDetail()
             };
             _subsidiaryService.GetCurrencyAgentList(Arg.Any<string>(), Arg.Any<bool>()).Returns(agentList);
-            AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList)(agentList).Returns(AgentListXml);
             _service.GetDetailData(metaModel, Arg.Any<IDictionary<int, string>>()).Returns(resultData);
 
             // Action
@@ -54,7 +52,6 @@
             // Assert
             Assert.Multiple(() =>
             {
-                Assert.That(metaModel.AgentListXml, Is.EqualTo(AgentListXml));
                 Assert.That(result.Data, Is.EqualTo(resultData.DataList));
                 Assert.That(result.Total, Is.EqualTo(resultData.SummaryTotal));
                 Assert.That(result.GrandTotal, Is.EqualTo(resultData.TotalData));

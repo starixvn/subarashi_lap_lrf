@@ -86,8 +86,6 @@
                 // Arrange
                 var metaModel = new LastBetsMonitoringMetaModel { Currency = string.Empty };
 
-                const string AgentListXml = "AgentListXmlWithoutCurrency";
-                AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList)(0, false).Returns(AgentListXml);
 
                 var expect = new HttpResponseMessage();
                 _betListApiClient.PostAsync(ApiPath, metaModel, SessionLanguage).Returns(Task.FromResult(expect));
@@ -99,7 +97,6 @@
                 Assert.Multiple((TestDelegate)(() =>
                 {
                     Assert.That(expect, Is.EqualTo(actual));
-                    Assert.That(metaModel.AgentListXml, Is.EqualTo(AgentListXml));
                     _betListApiClient.Received().PostAsync((string)ApiPath, (object)metaModel, (string)SessionLanguage);
                 }));
             }
@@ -113,9 +110,6 @@
                 // Arrange
                 var metaModel = new LastBetsMonitoringMetaModel { Currency = "1,2" };
 
-                const string AgentListXml = "AgentListXmlWithCurrency";
-                AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList)(Arg.Any<IEnumerable<int>>(), false).Returns(AgentListXml);
-
                 var expect = new HttpResponseMessage();
                 _betListApiClient.PostAsync(ApiPath, metaModel, SessionLanguage).Returns(Task.FromResult(expect));
 
@@ -126,7 +120,6 @@
                 Assert.Multiple((TestDelegate)(() =>
                 {
                     Assert.That(expect, Is.EqualTo(actual));
-                    Assert.That(metaModel.AgentListXml, Is.EqualTo(AgentListXml));
                     _betListApiClient.Received().PostAsync((string)ApiPath, (object)metaModel, (string)SessionLanguage);
                 }));
             }

@@ -67,8 +67,6 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                const string AgentListXml = "<xml/>";
-
                 var metaModel = new BetListExcelMetaModel
                 {
                     IsExportExcel = true,
@@ -80,8 +78,6 @@
                 var currencyTitle = string.Format(ViewResources.Viewin,
                     expectedCurrency);
                 var expectedTitle = $"{ViewResources.CorrectScore} - {currencyTitle}";
-
-                AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList)(metaModel.CurrencyId, false).Returns(AgentListXml);
 
                 controller.When(async x => await x.ProcessExportExcel(
                     Arg.Any<BetListExcelMetaModel>(),
@@ -99,7 +95,7 @@
                         && x.UspKey == "Lrf_TotalBets_Sel430"
                         && x.LicenseeId == DefaultLicenseeSession.LicenseeId
                         && x.IsShowSumStake
-                        && x.AgentListXml == AgentListXml),
+                      ),
                     "CorrectScoreBetList",
                     null);
             }

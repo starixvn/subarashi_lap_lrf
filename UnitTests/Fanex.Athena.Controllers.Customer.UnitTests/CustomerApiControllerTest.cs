@@ -18,7 +18,6 @@
     using NUnit.Framework;
     using Resources;
     using Service.Core.Common.Interfaces;
-    using Service.Core.Utility.Interfaces;
     using Service.Customer.Interfaces;
     using UnitTest.Common.Extensions;
 

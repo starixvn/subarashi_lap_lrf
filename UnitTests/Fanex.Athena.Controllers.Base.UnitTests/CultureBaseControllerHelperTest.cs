@@ -2,7 +2,6 @@
 {
     using Extension.Utility;
     using Fanex.Athena.Model.Auth;
-    using Fanex.Athena.Service.StatelessCore.Utility;
     using NSubstitute;
 
     using NUnit.Framework;

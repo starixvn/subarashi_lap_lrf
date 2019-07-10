@@ -162,6 +162,10 @@
       <Project>{B41E38EF-54AD-4866-968F-C856DE9DC072}</Project>
       <Name>Fanex.Athena.Session</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Model\Fanex.Athena.Model.Auth\Fanex.Athena.Model.Auth.csproj">
+      <Project>{794C0345-2DDD-4FFD-A605-BB96FBB37DE8}</Project>
+      <Name>Fanex.Athena.Model.Auth</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Model\Fanex.Athena.Model.BetSettings\Fanex.Athena.Model.BetSettings.csproj">
       <Project>{ac255686-6654-4a34-8f56-f18c502b5b0a}</Project>
       <Name>Fanex.Athena.Model.BetSettings</Name>

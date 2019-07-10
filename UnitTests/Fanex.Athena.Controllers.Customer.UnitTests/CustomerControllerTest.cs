@@ -148,7 +148,7 @@
 
         [TestCase(false)]
         [TestCase(true)]
-        public void ExportExcel_IsConvertIsFalse_ExportWithCorrectReportTitle(bool isConvert)
+        public async Task ExportExcel_IsConvertIsFalse_ExportWithCorrectReportTitleAsync(bool isConvert)
         {
             using (var controller = CreateContoller())
             {
@@ -188,7 +188,7 @@
                 controller.When(x => x.CreateExcel(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<CustomerListViewModel>())).Do(x => actualReportTitle = (string)x[1]);
 
                 // Action
-                controller.ExportExcel(excelParam);
+                await controller.ExportExcel(excelParam);
 
                 // Assert
                 Assert.Multiple(() =>

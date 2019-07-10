@@ -166,7 +166,6 @@
                 Assert.That(model.DrillDownFromDate, Is.EqualTo(fdate));
                 Assert.That(model.DrillDownToDate, Is.EqualTo(tdate));
                 Assert.That(model.LicenseeId, Is.EqualTo(SessionLicenseeId));
-                SessionService.Received().GenerateAgentListXml(currencyId, Arg.Any<bool>());
                 _dataAccess.ReceivedWithAnyArgs().GetAgentWinlossDetail(model, UserCurrencyList);
             });
         }
@@ -195,7 +194,6 @@
                 Assert.That(model.DrillDownFromDate, Is.EqualTo(fdate));
                 Assert.That(model.DrillDownToDate, Is.EqualTo(tdate));
                 Assert.That(model.LicenseeId, Is.EqualTo(SessionLicenseeId));
-                SessionService.Received().GenerateAgentListXml(currencyId, Arg.Any<bool>());
                 _dataAccess.ReceivedWithAnyArgs().GetCustomerWinlossDetail(model, UserCurrencyList);
             });
         }
@@ -279,7 +277,6 @@
                 ApplicationMode = AppMode.Self,
                 FunctionIdList = new int[0]
             });
-            AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList)(Arg.Any<int>(), Arg.Any<bool>()).Returns(string.Empty);
 
             return model;
         }

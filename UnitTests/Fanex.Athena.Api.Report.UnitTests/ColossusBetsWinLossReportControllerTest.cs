@@ -160,7 +160,6 @@
                 Assert.That(custId, Is.EqualTo(model.DrillDownCustomerId));
                 Assert.That(fdate, Is.EqualTo(model.DrillDownFromDate));
                 Assert.That(tdate, Is.EqualTo(model.DrillDownToDate));
-                SessionService.Received().GenerateAgentListXml(currencyId, Arg.Any<bool>());
                 _service.ReceivedWithAnyArgs().GetWinlossDetail(model, UserCurrencyList);
             });
         }
@@ -276,7 +275,6 @@
                 }
             });
             StubLicenseeSessionData(new LicenseeAuthInfo { LicenseeId = 0 });
-            AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList)(Arg.Any<int>(), Arg.Any<bool>()).Returns(string.Empty);
 
             return model;
         }

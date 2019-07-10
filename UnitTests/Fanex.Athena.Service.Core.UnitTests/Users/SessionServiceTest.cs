@@ -13,6 +13,7 @@
     using Extension.Utility;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Auth.Enum;
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using Model.Core.DTO.Users;
@@ -254,7 +255,7 @@
             Assert.That(result, Is.False);
         }
 
-       
+
         [Test]
         public void GenerateAgentListXml_CurrencyIdIsNumberAndPositive_ReturnCorrectXmlString()
         {
@@ -284,7 +285,7 @@
             var expectedResult = "<ROOT><Agent AgentId=\"1\" Currency=\"1\"/><Agent AgentId=\"2\" Currency=\"1\"/></ROOT>";
 
             // Action
-            var result = _AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList)(0, true);
+            var result = AuthParameterHelper.GenerateAgentListXml(_sessionService.UserSession.CurrencyAgentList, 0, true);
 
             // Assert
             Assert.That(result, Is.EqualTo(expectedResult));
@@ -311,7 +312,7 @@
             var expectedResult = "<ROOT><Agent AgentId=\"1\" Currency=\"1\"/><Agent AgentId=\"2\" Currency=\"1\"/></ROOT>";
 
             // Action
-            var result = _AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList)(-2, true);
+            var result = AuthParameterHelper.GenerateAgentListXml(_sessionService.UserSession.CurrencyAgentList, -2, true);
 
             // Assert
             Assert.That(result, Is.EqualTo(expectedResult));
@@ -346,7 +347,7 @@
             var expectedResult = "<ROOT><Agent AgentId=\"3\" Currency=\"2\"/></ROOT>";
 
             // Action
-            var result = _AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList)(2, false);
+            var result = AuthParameterHelper.GenerateAgentListXml(_sessionService.UserSession.CurrencyAgentList, 2, false);
 
             // Assert
             Assert.That(result, Is.EqualTo(expectedResult));
@@ -381,7 +382,7 @@
             var expectedResult = "<ROOT><Agent AgentId=\"1\" Currency=\"1\"/><Agent AgentId=\"2\" Currency=\"1\"/></ROOT>";
 
             // Action
-            var result = _AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList)(new[] { 1, 20 }, true);
+            var result = AuthParameterHelper.GenerateAgentListXml(_sessionService.UserSession.CurrencyAgentList, new[] { 1, 20 }, true);
 
             // Assert
             Assert.That(result, Is.EqualTo(expectedResult));
@@ -416,7 +417,7 @@
             var expectedResult = "<ROOT><Agent AgentId=\"1\" Currency=\"1\"/><Agent AgentId=\"2\" Currency=\"1\"/><Agent AgentId=\"3\" Currency=\"66\"/></ROOT>";
 
             // Action
-            var result = _AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList)(new[] { 0, 1 }, false);
+            var result = AuthParameterHelper.GenerateAgentListXml(_sessionService.UserSession.CurrencyAgentList, new[] { 0, 1 }, false);
 
             // Assert
             Assert.That(result, Is.EqualTo(expectedResult));
@@ -434,7 +435,7 @@
             var expectedResult = "<ROOT><Agent AgentId=\"1\" Currency=\"1\"/></ROOT>";
 
             // Action
-            var result = _AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList)(currencyAgentList);
+            var result = AuthParameterHelper.GenerateAgentListXml(_sessionService.UserSession.CurrencyList, currencyAgentList);
 
             // Assert
             Assert.That(result, Is.EqualTo(expectedResult));

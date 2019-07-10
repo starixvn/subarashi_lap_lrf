@@ -10,7 +10,6 @@
     using Model.Core.DataDomain;
     using Fanex.Athena.Controllers.Base.UnitTests;
     using Fanex.Athena.Model.Auth;
-    using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Core.MetaModel.Product;
     using Fanex.Athena.Model.Report.ViewModel;

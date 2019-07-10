@@ -19,7 +19,6 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList)(CurrencyId, Arg.Any<bool>()).Returns(AgentListXml);
                 var metaModel = new TurnoverMetaModel
                 {
                     CurrencyId = CurrencyId
@@ -39,7 +38,6 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    Assert.That(metaModel.AgentListXml, Is.EqualTo(AgentListXml));
                     Assert.That(resultData["Data"], Is.EqualTo(data));
                     Assert.That(resultData["TotalData"], Is.EqualTo(total));
                 });

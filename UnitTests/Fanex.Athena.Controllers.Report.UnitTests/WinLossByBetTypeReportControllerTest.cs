@@ -50,7 +50,6 @@
 
             SetUpDefaultFakeData();
 
-            AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList)(CurrencyId).Returns(AgentListXml);
         }
 
         [Test]

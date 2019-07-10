@@ -135,8 +135,8 @@
             }
         }
 
-        [TestCase(1,"USD", null, "USD")]
-        [TestCase(1,"USD", "eur", "EUR")]
+        [TestCase(1, "USD", null, "USD")]
+        [TestCase(1, "USD", "eur", "EUR")]
         [TestCase(0, "", "", "EUR")]
         [TestCase(0, "", "CNY", "CNY")]
         public async Task MixParlay_ExportExcel_PassCorrectParam(
@@ -207,8 +207,6 @@
 
         private void SetUpForExportingExcel(BetListMetaModel metaModel, MatchWinLossBetListController controller)
         {
-            AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList)(metaModel.CurrencyId, false).Returns(AgentListXml);
-
             controller.When(async x => await x.ProcessExportExcel(
                 Arg.Any<BetListExcelMetaModel>(),
                 Arg.Any<string>(),

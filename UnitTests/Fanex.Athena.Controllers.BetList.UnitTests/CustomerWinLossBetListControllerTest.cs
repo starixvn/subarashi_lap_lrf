@@ -65,7 +65,6 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                const string AgentListXml = "<xml/>";
                 var metaModel = new BetListExcelMetaModel
                 {
                     IsExportExcel = true,
@@ -85,7 +84,6 @@
                 var expectedTitle = $"{ViewResources.Customer} {ViewResources.BetList} - 11/11/2018 --> 12/12/2018 - "
                     + $"External{(isFakeLicensee ? "" : "(System)")} - {currencyTitle}";
 
-                AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList)(metaModel.CurrencyId, false).Returns(AgentListXml);
                 controller.When(async x => await x.ProcessExportExcel(
                     Arg.Any<BetListExcelMetaModel>(),
                     Arg.Any<string>(),
@@ -102,7 +100,7 @@
                         && string.Join(",", x.HiddenColumns) == "1,2"
                         && x.LicenseeId == DefaultLicenseeSession.LicenseeId
                         && !x.IsShowSumStake
-                        && x.AgentListXml == AgentListXml),
+                       ),
                     "CustomerWinLossBetList",
                     null);
             }

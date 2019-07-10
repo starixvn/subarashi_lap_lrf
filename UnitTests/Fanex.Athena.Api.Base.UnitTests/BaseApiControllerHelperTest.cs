@@ -78,7 +78,6 @@
 
             StubUserSessionData(userSession);
             StubLicenseeSessionData(licenseeSession);
-            AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList)(Arg.Any<int>(), Arg.Any<bool>()).Returns(AgentListXml);
         }
 
         protected void StubSingleWalletProductAccess(string[] productCode)

@@ -219,7 +219,6 @@
                 FunctionIdList = new int[0]
             });
             StubLicenseeSessionData(new LicenseeAuthInfo { LicenseeId = 0 });
-            AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList)(Arg.Any<int>(), Arg.Any<bool>()).Returns(string.Empty);
 
             return model;
         }

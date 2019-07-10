@@ -84,16 +84,15 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                const string AgentListXml = "<xml>";
                 var metaModel = new LeagueMetaModel
                 {
                     CurrencyId = 111
                 };
-                AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList)(metaModel.CurrencyId).Returns(AgentListXml);
                 var data = new List<League>
                 {
                     new League { LeagueId = 1, LeagueName = "League1" }
                 };
+
                 _leagueDataAccess.GetLeaguesBySport(metaModel).Returns(data);
 
                 // Action
@@ -102,7 +101,6 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    Assert.That(metaModel.AgentListXml, Is.EqualTo(AgentListXml));
                     Assert.That(ObjectHelper.ToJson(result.Data), Is.EqualTo(@"[{""Key"":1,""Value"":""League1""}]"));
                 });
             }

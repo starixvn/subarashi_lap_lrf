@@ -59,7 +59,6 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                const string AgentListXml = "<xml/>";
 
                 var metaModel = new BetListExcelMetaModel
                 {
@@ -68,8 +67,6 @@
                     Date = new DateTime(2019, 2, 1)
                 };
                 var expectedTitle = $"{ViewResources.ProductFW} - {ViewResources.DetailedBetlist} - {metaModel.Date.ToString("MM/dd/yyyy")}";
-
-                AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList)(metaModel.CurrencyId, false).Returns(AgentListXml);
 
                 controller.When(async x => await x.ProcessExportExcel(
                     Arg.Any<BetListExcelMetaModel>(),
@@ -87,7 +84,7 @@
                         && string.Join(",", x.HiddenColumns) == "1,2,8"
                         && x.LicenseeId == DefaultLicenseeSession.LicenseeId
                         && !x.IsShowSumStake
-                        && x.AgentListXml == AgentListXml),
+                        ),
                     "GlobalGamingDetail",
                     null);
             }
