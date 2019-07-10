@@ -1,8 +1,9 @@
 ﻿namespace Fanex.Athena.Controllers.Base.UnitTests
 {
     using Extension.Utility;
+
     using Fanex.Athena.Service.Core.Common.Interfaces;
-    using Model.Core.MetaModel;
+
     using Service.Core.Users.Interfaces;
 
     internal class FakeContentBaseController : ContentBaseController

@@ -14,6 +14,7 @@
     using Service.Core.Users.Interfaces;
     using Service.Report.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     [ApiFunctionAuthorization(PermissionKeys.ReportSubsidiaryPerformance)]
     public class SubsidiaryPerformanceReportController : ApiReportBaseController

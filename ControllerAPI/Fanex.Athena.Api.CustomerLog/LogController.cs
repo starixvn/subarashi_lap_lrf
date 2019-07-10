@@ -19,6 +19,7 @@ namespace Fanex.Athena.Api.CustomerLog
     using Extension.Utility.Interfaces;
     using Fanex.Athena.Model.Customer.DTO.CustomerLog;
     using Fanex.Athena.Model.Customer.ViewModel.CustomerLog;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DataDomain;
     using RazorEngine;
     using RazorEngine.Templating;

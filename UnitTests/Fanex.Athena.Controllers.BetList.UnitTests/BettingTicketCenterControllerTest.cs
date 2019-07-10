@@ -3,15 +3,22 @@
     using System;
     using System.Linq;
     using System.Web.Mvc;
+
     using Base.UnitTests;
+
     using DataAccess.Core.Configuration.Interfaces;
+
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Model.BetList.ViewModel;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using Model.Core.DTO.Configuration;
+
     using NSubstitute;
+
     using NUnit.Framework;
-    using Service.Core.Common.Interfaces;
+
     using UnitTest.Common.Helpers;
 
     public class BettingTicketCenterControllerTest : CultureBaseControllerHelperTest

@@ -6,6 +6,7 @@
     using System.Web.Mvc;
     using Extension.Utility;
     using Fanex.Athena.Model.Report.ViewModel;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DataDomain;
     using Resources;
     using Service.Core.Common.Interfaces;

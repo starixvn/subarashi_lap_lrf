@@ -127,10 +127,6 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Common\LanguageServiceTest.cs" />
-    <Compile Include="Common\ProductServiceTest.GetProductAccess.cs" />
-    <Compile Include="Common\ProductServiceTest.GetProductList.cs" />
-    <Compile Include="Common\MatchServiceTest.cs" />
-    <Compile Include="Common\BetTypeServiceTest.cs" />
     <Compile Include="Configuration\ReportSettingServiceTest.cs" />
     <Compile Include="Configuration\LicenseeSettingServiceTest.cs" />
     <Compile Include="Exception\ServiceExceptionTest.cs" />

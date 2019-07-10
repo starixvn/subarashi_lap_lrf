@@ -13,6 +13,7 @@
     using Service.Core.Configuration.Interfaces;
     using Service.Core.Users.Interfaces;
     using Web.ActionFilter;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     [FunctionAuthorization(PermissionKeys.ReportCasinoTurnover)]
     public class CasinoTurnoverController : ReportBaseController

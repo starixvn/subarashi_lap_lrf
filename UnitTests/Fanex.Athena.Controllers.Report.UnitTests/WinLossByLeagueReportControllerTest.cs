@@ -5,16 +5,23 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+
     using Base.UnitTests;
-    using Model.Core.DataDomain;
+
     using DataAccess.Core.Common.Interfaces;
+
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Model.Core.DTO.Common;
     using Model.Core.MetaModel.Common;
     using Model.Report.ViewModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Report;
-    using Service.Core.Common.Interfaces;
+
     using UnitTest.Common.Helpers;
 
     [TestFixture]

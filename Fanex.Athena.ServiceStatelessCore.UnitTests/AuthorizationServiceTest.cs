@@ -1,7 +1,7 @@
 ﻿using Fanex.Athena.DataAccess.Core.Users.Interfaces;
 using Fanex.Athena.Model.Auth;
 using Fanex.Athena.Model.Auth.Enum;
-using Fanex.Athena.Service.Core.Common.Interfaces;
+using Fanex.Athena.Service.StatelessCore.Interfaces;
 using Fanex.Athena.Service.StatelessCore;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
 using NSubstitute;

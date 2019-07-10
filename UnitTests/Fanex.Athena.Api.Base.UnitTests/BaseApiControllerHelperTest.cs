@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using Extension.Utility;
     using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DTO.Common;
     using NSubstitute;
     using NUnit.Framework;

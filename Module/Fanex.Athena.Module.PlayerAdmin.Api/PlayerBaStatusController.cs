@@ -4,7 +4,7 @@ using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.Services.Interfaces;
 using Fanex.Athena.Module.PlayerAdmin.Api.Utilities;
 using Fanex.Athena.Resources;
-using Fanex.Athena.Service.Core.Common.Interfaces;
+using Fanex.Athena.Service.StatelessCore.Interfaces;
 using System.Web.Http;
 
 namespace Fanex.Athena.Module.PlayerAdmin.Api

@@ -13,6 +13,7 @@ namespace Fanex.Athena.Controllers.Report
     using Extension.Utility;
     using Fanex.Athena.Model.Report.ViewModel.Note;
     using Fanex.Athena.Service.Core.Common.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using ONEbook.UM.Filters;
     using Service.Core.Users.Interfaces;
 

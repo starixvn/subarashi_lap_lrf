@@ -8,6 +8,7 @@
     using DataAccess.Customer.Interfaces;
     using Extension.Utility;
     using Fanex.Athena.Service.Core.Common.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
     using Model.Core.DataDomain;

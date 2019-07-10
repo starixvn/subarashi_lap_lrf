@@ -2,15 +2,21 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
     using Controllers.Base.UnitTests;
+
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Model.BetSettings.DTO;
     using Model.BetSettings.MetaModel;
     using Model.BetSettings.ViewModel;
     using Model.Customer.DTO;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Service.BetSettings.Interfaces;
-    using Service.Core.Common.Interfaces;
 
     public class BetSettingBaseControllerHelperTest : CultureBaseControllerHelperTest
     {

@@ -8,6 +8,7 @@
     using Customer;
     using Excel.Base.Entities;
     using Excel.Customer;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DTO.Common;
     using Model.Customer.MetaModel;
     using NSubstitute;

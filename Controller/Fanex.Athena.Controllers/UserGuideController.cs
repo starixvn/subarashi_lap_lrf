@@ -21,6 +21,7 @@ namespace Fanex.Athena.Controllers
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
     using Web.ActionFilter;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     [SessionState(SessionStateBehavior.ReadOnly)]
     [CheckUMFilter]

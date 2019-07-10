@@ -6,6 +6,7 @@
     using Base.Attributes;
     using DataAccess.Report.Interfaces;
     using Fanex.Athena.Resources;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
     using Model.Core.DataDomain;
     using Model.Report.DTO;

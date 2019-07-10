@@ -7,6 +7,7 @@
     using Base;
     using DataAccess.Core.Common.Interfaces;
     using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DTO.Common;
     using Model.Core.MetaModel.Common;
     using NSubstitute;

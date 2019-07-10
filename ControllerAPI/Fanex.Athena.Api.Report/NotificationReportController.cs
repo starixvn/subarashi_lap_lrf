@@ -8,6 +8,7 @@
     using System.Web.Http;
     using Base.Attributes;
     using Extension.Utility;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DataDomain;
     using Model.Core.ResultModel;
     using Model.Report.DTO;

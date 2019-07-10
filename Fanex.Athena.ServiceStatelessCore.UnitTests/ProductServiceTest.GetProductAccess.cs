@@ -1,4 +1,4 @@
-﻿namespace Fanex.Athena.Service.Core.UnitTests.Common
+﻿namespace Fanex.Athena.ServiceStatelessCore.UnitTests
 {
     using System.Collections.Generic;
     using System.Linq;

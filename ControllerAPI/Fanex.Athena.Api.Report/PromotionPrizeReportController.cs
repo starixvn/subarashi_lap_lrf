@@ -14,6 +14,7 @@
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     [ApiFunctionAuthorization(PermissionKeys.ReportLicenseeWinLoss, PermissionKeys.ReportCustomerWinLoss)]
     public class PromotionPrizeReportController : ApiReportBaseController

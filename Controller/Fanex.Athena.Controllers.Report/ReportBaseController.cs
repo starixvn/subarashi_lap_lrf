@@ -5,6 +5,7 @@
     using System.Web.Mvc;
     using System.Web.SessionState;
     using Extension.Utility;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DTO.Common;
     using Model.Core.MetaModel.Product;
     using ONEbook.UM.Filters;

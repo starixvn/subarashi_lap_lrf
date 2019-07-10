@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Fanex.Athena.Service.Core.Common.Interfaces
+namespace Fanex.Athena.Service.StatelessCore.Interfaces
 {
     using System;
     using System.Collections.Generic;

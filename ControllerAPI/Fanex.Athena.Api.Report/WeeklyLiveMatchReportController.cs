@@ -18,6 +18,7 @@ namespace Fanex.Athena.Api.Report
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Service.Report;
     using Fanex.Athena.Service.Report.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Report.ResultModel;
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;

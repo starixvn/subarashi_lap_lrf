@@ -13,6 +13,7 @@
     using Service.Report.Interfaces;
     using UnitTest.Common.Helpers;
     using VendorAdapter.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     [TestFixture]
     public class MatchWinLossReportControllerTest_AssignMatchName : CultureBaseControllerHelperTest

@@ -1,6 +1,7 @@
 ﻿namespace Fanex.Athena.Api.Base.UnitTests
 {
     using System.IO;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using NPOI.SS.UserModel;
     using NSubstitute;
     using NUnit.Framework;

@@ -8,9 +8,12 @@ namespace Fanex.Athena.Controllers
 {
     using System.Linq;
     using System.Web.Mvc;
+
     using Extension.Utility;
+
     using Fanex.Athena.Service.Core.Common.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
+
     using Service.Core.Users.Interfaces;
 
     [CustomAuthorize]

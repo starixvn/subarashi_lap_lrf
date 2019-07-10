@@ -60,9 +60,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthorizationServiceTest.cs" />
+    <Compile Include="BetTypeServiceTest.cs" />
     <Compile Include="FunctionServiceTest.cs" />
     <Compile Include="FunctionStorageTest.cs" />
+    <Compile Include="MatchServiceTest.cs" />
     <Compile Include="MoveBetServiceTest.cs" />
+    <Compile Include="ProductServiceTest.GetProductAccess.cs" />
+    <Compile Include="ProductServiceTest.GetProductList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utility\KeanOceanBusinessHelperTest.cs" />
   </ItemGroup>

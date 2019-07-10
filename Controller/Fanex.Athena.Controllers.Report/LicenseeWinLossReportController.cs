@@ -16,6 +16,7 @@ namespace Fanex.Athena.Controllers.Report
     using Fanex.Athena.Model.Core.MetaModel.Product;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
     using Model.Core.DTO.Common;
     using Model.Core.DTO.Configuration;

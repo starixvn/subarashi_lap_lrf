@@ -1,12 +1,10 @@
-﻿using Fanex.Athena.Model.Core.MetaModel;
-using Fanex.Athena.Service.Core.Common.Interfaces;
+﻿using System;
+using System.Linq;
+
+using Fanex.Athena.Model.Core.MetaModel;
 using Fanex.Athena.Service.Core.Users.Interfaces;
 using Fanex.Athena.Service.Core.Utility.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Fanex.Athena.Service.StatelessCore.Interfaces;
 
 namespace Fanex.Athena.Service.Core.Utility
 {

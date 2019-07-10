@@ -7,6 +7,7 @@
     using Base.UnitTests;
     using Excel.Base.Entities;
     using Excel.Report;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using Model.Report.DTO;

@@ -6,6 +6,7 @@
     using System.Threading.Tasks;
     using System.Web.Http;
     using DataAccess.Core.Common.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
     using Model.Core.DataDomain;
     using Model.Core.MetaModel.Common;

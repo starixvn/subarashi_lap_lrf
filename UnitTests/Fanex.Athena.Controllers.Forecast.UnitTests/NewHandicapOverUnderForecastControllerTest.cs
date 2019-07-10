@@ -4,6 +4,7 @@
     using DataAccess.Core.Common.Interfaces;
     using DataAccess.Forecast.Interfaces;
     using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Logging;
     using Model.Core.DTO.Common;
     using Model.Forecast.DTO.NewForecastHdpOu;

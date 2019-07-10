@@ -78,6 +78,7 @@
     <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -86,6 +87,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthorizationService.cs" />
+    <Compile Include="BetTypeService.cs" />
     <Compile Include="Exception\ServiceException.cs" />
     <Compile Include="FunctionService.cs" />
     <Compile Include="FunctionStorage.cs" />
@@ -94,12 +96,17 @@
     <Compile Include="Interfaces\ILGAPIClient.cs" />
     <Compile Include="Interfaces\IReportAPIClient.cs" />
     <Compile Include="LGAPIClient.cs" />
+    <Compile Include="Interfaces\IBetTypeService.cs" />
     <Compile Include="Interfaces\IFunctionService.cs" />
     <Compile Include="Interfaces\IFunctionStorage.cs" />
+    <Compile Include="Interfaces\IMatchService.cs" />
     <Compile Include="Interfaces\IMoveBetService.cs" />
     <Compile Include="Interfaces\IOneBookSecurityWrapper.cs" />
+    <Compile Include="Interfaces\IProductService.cs" />
+    <Compile Include="MatchService.cs" />
     <Compile Include="MoveBetService.cs" />
     <Compile Include="OneBookSecurityWrapper.cs" />
+    <Compile Include="ProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportAPIClient.cs" />
     <Compile Include="RestSharpExtension\NewtonsoftJsonSerializer.cs" />

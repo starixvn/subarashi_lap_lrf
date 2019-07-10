@@ -1,21 +1,20 @@
-﻿using AutoFixture;
-using Fanex.Athena.Model.Core.DataDomain;
+﻿using System.Collections.Generic;
+
+using AutoFixture;
+
+using Fanex.Athena.Model.Auth;
 using Fanex.Athena.Model.Core.DTO.Common;
 using Fanex.Athena.Model.Core.MetaModel;
-using Fanex.Athena.Model.Core.MetaModel.Product;
 using Fanex.Athena.Model.Report.MetaModel;
-using Fanex.Athena.Service.Core.Common.Interfaces;
 using Fanex.Athena.Service.Core.Users.Interfaces;
 using Fanex.Athena.Service.Core.Utility;
 using Fanex.Athena.Service.Core.Utility.Interfaces;
-using Fanex.Athena.Model.Auth;
+using Fanex.Athena.Service.StatelessCore.Interfaces;
+
 using NSubstitute;
+
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 namespace Fanex.Athena.Service.Core.UnitTests.Utility
 {
     [TestFixture]

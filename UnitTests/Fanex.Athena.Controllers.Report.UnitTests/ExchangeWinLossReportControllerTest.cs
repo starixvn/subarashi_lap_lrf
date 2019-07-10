@@ -3,6 +3,7 @@
     using System;
     using System.Web.Mvc;
     using Base.UnitTests;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Configuration;
     using Model.Report.ViewModel;

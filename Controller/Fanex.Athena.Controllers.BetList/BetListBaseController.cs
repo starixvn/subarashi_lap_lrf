@@ -10,7 +10,7 @@
     using Excel.Base.Helpers;
     using Extension.Utility;
     using Fanex.Athena.Model.Core.DataDomain;
-    using Fanex.Athena.Service.Core.Common.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.BetList.MetaModel;
     using Model.Core.DTO.Configuration;
     using ONEbook.UM.Filters;
@@ -22,6 +22,7 @@
     using Fanex.Athena.Model.Core.Helper;
     using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Service.Core.Common.Interfaces;
 
     [SessionState(SessionStateBehavior.ReadOnly)]
     [CheckUMFilter]

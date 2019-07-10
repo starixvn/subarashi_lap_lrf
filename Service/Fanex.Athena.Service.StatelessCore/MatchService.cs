@@ -4,15 +4,17 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Fanex.Athena.Service.Core.Common
+namespace Fanex.Athena.Service.StatelessCore
 {
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
     using Extension.Utility.Interfaces;
+
     using Fanex.Athena.DataAccess.Core.Common.Interfaces;
     using Fanex.Athena.Model.Core.DTO.Common;
-    using Fanex.Athena.Service.Core.Common.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     public class MatchService : IMatchService
     {
