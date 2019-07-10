@@ -3,19 +3,24 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
     using Base.UnitTests;
+
     using DataAccess.Report.Interfaces;
-    using Fanex.Athena.Excel.Base.Entities;
+
     using Fanex.Athena.Excel.Report;
-    using Fanex.Athena.Model.Report.ViewModel;
+    using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Service.Core.Utility.Interfaces;
+
     using Model.Core.ResultModel;
     using Model.Report.DTO;
     using Model.Report.MetaModel;
+
     using NPOI.SS.UserModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
-    using Session.Model;
 
     public class AgCasinoWinLossReportControllerTest : BaseApiControllerHelperTest
     {

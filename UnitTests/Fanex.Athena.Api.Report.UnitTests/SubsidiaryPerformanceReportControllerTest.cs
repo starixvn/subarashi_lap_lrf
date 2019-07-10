@@ -6,6 +6,7 @@
     using System.Web.Http.Results;
     using Base.UnitTests;
     using Constant.DataDomain;
+    using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Resources;
     using Fanex.Athena.Service.Report.Interfaces;
     using Model.Report.DTO.SubsidiaryPerformance;
@@ -56,7 +57,7 @@
             var metaModel = GetMetaModel();
             StubSingleWalletProductAccess(new[] { "SB", "BA" });
             SessionService.GenerateAgentListXml(Arg.Any<int>(), Arg.Any<bool>()).Returns("<Root></Root>");
-            SessionService.UserSession.Returns(new Session.Model.UserAuthInfo
+            SessionService.UserSession.Returns(new UserAuthInfo
             {
                 IsManageableSubsidiary = true,
                 UserLevel = UserLevelType.Subsidiary
@@ -86,7 +87,7 @@
             var metaModel = GetMetaModel();
             StubSingleWalletProductAccess(new[] { "SB", "BA" });
             SessionService.GenerateAgentListXml(Arg.Any<IDictionary<int, IEnumerable<int>>>()).Returns("<Root></Root>");
-            SessionService.UserSession.Returns(new Session.Model.UserAuthInfo
+            SessionService.UserSession.Returns(new UserAuthInfo
             {
                 IsManageableSubsidiary = true,
                 UserLevel = UserLevelType.Licensee

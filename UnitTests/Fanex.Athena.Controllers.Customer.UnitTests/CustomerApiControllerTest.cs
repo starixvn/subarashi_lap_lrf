@@ -8,6 +8,7 @@
     using Customer;
     using DataAccess.Core.Users.Interfaces;
     using Fanex.Athena.Extension.Helpers;
+    using Fanex.Athena.Model.Auth;
     using Fanex.Logging;
     using Model.Core.DTO.Common;
     using Model.Core.ViewModel;
@@ -18,7 +19,6 @@
     using Service.Core.Common.Interfaces;
     using Service.Core.Utility.Interfaces;
     using Service.Customer.Interfaces;
-    using Session.Model;
     using UnitTest.Common.Extensions;
 
     [TestFixture]

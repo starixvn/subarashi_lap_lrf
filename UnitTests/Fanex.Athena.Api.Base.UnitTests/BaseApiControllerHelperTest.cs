@@ -2,12 +2,12 @@
 {
     using System.Collections.Generic;
     using Extension.Utility;
+    using Fanex.Athena.Model.Auth;
     using Model.Core.DTO.Common;
     using NSubstitute;
     using NUnit.Framework;
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-    using Session.Model;
 
     public abstract class BaseApiControllerHelperTest
     {

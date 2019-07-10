@@ -2,6 +2,7 @@
 {
     using System.Threading.Tasks;
     using Base.UnitTests;
+    using Fanex.Athena.Model.Auth;
     using NSubstitute;
     using NUnit.Framework;
     using Report.Result.ResultPopup;
@@ -20,7 +21,7 @@
             const string ExpectedResult = "aaaaaaaaaaaa";
             const string Url = "/PPResultPopup/Index";
             const string Language = "vi-VN";
-            StubUserSessionData(new Session.Model.UserAuthInfo
+            StubUserSessionData(new UserAuthInfo
             {
                 Language = Language
             });

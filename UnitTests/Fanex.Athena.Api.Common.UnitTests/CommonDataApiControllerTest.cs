@@ -6,13 +6,13 @@
     using System.Threading.Tasks;
     using Base;
     using DataAccess.Core.Common.Interfaces;
+    using Fanex.Athena.Model.Auth;
     using Model.Core.DTO.Common;
     using Model.Core.MetaModel.Common;
     using NSubstitute;
     using NUnit.Framework;
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-    using Session.Model;
     using UnitTest.Common.Helpers;
 
     public class CommonDataApiControllerTest

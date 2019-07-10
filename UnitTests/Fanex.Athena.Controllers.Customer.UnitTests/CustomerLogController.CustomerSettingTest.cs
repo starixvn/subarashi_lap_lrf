@@ -3,12 +3,12 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Fanex.Athena.Model.Auth;
     using Model.Core.DTO.Common;
     using Model.Core.DTO.Users;
     using Model.Customer.ViewModel.CustomerLog;
     using NSubstitute;
     using NUnit.Framework;
-    using Session.Model;
 
     public partial class CustomerLogControllerTest
     {

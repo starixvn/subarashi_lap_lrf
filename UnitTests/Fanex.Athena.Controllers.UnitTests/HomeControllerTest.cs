@@ -2,10 +2,10 @@
 {
     using System.Web.Mvc;
     using Base.UnitTests;
+    using Fanex.Athena.Model.Auth;
     using NSubstitute;
     using NUnit.Framework;
     using Service.Core.Configuration.Interfaces;
-    using Session.Model;
 
     [TestFixture]
     public partial class HomeControllerTest : CultureBaseControllerHelperTest

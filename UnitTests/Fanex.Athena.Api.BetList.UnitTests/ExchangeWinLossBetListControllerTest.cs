@@ -5,12 +5,12 @@
     using System.Net.Http;
     using System.Threading.Tasks;
     using Base.UnitTests;
+    using Fanex.Athena.Model.Auth;
     using Model.BetList.MetaModel;
     using NSubstitute;
     using NUnit.Framework;
     using Service.Core.Utility.Interfaces;
     using Service.StatelessCore.Interfaces;
-    using Session.Model;
 
     public class ExchangeWinLossBetListControllerTest : BaseApiControllerHelperTest
     {

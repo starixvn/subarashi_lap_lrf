@@ -4,11 +4,11 @@
     using System.Collections.Generic;
     using System.Net.Http;
     using System.Threading.Tasks;
+    using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Service.Core.Utility.Interfaces;
     using Model.BetList.MetaModel;
     using NSubstitute;
     using NUnit.Framework;
-    using Session.Model;
     using UnitTest.Common.Helpers;
     using UnitTests;
 

@@ -11,14 +11,14 @@
     using DataAccess.Core.Common.Interfaces;
     using DataAccess.Core.Users.Interfaces;
     using Extension.Utility;
+    using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Model.Auth.Enum;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using Model.Core.DTO.Users;
     using NSubstitute;
     using NUnit.Framework;
-    using Session.Enum;
     using Session.Interfaces;
-    using Session.Model;
     using UnitTest.Common.Helpers;
 
     [TestFixture]

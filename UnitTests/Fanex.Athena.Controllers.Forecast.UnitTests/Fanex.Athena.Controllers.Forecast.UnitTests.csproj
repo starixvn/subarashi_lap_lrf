@@ -158,6 +158,10 @@
       <Project>{71f95e53-36d0-4091-828d-ed14c9939c35}</Project>
       <Name>Fanex.Athena.Extension</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Fanex.Athena.Model.Auth\Fanex.Athena.Model.Auth.csproj">
+      <Project>{794C0345-2DDD-4FFD-A605-BB96FBB37DE8}</Project>
+      <Name>Fanex.Athena.Model.Auth</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Infrastructure\Fanex.Athena.Constant\Fanex.Athena.Constant.csproj">
       <Project>{6b1431e0-e513-48bb-be86-0756e5f6f405}</Project>
       <Name>Fanex.Athena.Constant</Name>

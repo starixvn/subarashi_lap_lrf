@@ -1,5 +1,6 @@
 ﻿namespace Fanex.Athena.Api.BetList.UnitTests
 {
+    using Fanex.Athena.Model.Auth;
     using Model.BetList.MetaModel;
 
     using NSubstitute;

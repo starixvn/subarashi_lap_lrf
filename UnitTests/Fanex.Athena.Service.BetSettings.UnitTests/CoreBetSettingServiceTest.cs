@@ -4,16 +4,15 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Constant.DataDomain;
-    using Core.Users.Interfaces;
     using Customer.Interfaces;
     using DataAccess.BetSettings.Interfaces;
+    using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Model.Auth.Enum;
     using Model.BetSettings.DTO;
     using Model.Core.DataDomain;
     using Model.Customer.DTO;
     using NSubstitute;
     using NUnit.Framework;
-    using Session.Enum;
-    using Session.Model;
     using StatelessCore.Interfaces;
     using UnitTest.Common.Helpers;
 

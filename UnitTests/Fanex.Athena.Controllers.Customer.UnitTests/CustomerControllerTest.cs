@@ -6,6 +6,7 @@
     using DataAccess.Core.Users.Interfaces;
     using Excel.Customer;
     using Fanex.Athena.Controllers.Base.UnitTests;
+    using Fanex.Athena.Model.Auth;
     using Model.Core.DTO.Common;
     using Model.Core.DTO.Users;
     using Model.Core.ResultModel;
@@ -17,7 +18,6 @@
     using Service.Core.Common.Interfaces;
     using Service.Customer.Interfaces;
     using Service.Report.Interfaces;
-    using Session.Model;
 
     public partial class CustomerControllerTest : CultureBaseControllerHelperTest
     {

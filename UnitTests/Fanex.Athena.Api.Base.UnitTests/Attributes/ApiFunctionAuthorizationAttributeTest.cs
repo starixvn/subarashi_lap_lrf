@@ -13,7 +13,8 @@
     using Autofac;
 
     using Extension.Utility;
-
+    using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Model.Auth.Enum;
     using NSubstitute;
 
     using NUnit.Framework;
@@ -143,7 +144,7 @@
             // Arrange
             var attribute = new ApiFunctionAuthorizationAttribute();
             var actionContext = CreateActionContext();
-            _sessionService.UserSession.Returns(new UserAuthInfo { ApplicationMode = Session.Enum.AppMode.Parasitic });
+            _sessionService.UserSession.Returns(new UserAuthInfo { ApplicationMode = AppMode.Parasitic });
             _authorizationService.HasPermissions(Arg.Any<IEnumerable<string>>(), Arg.Any<string[]>()).Returns(true);
 
             // Action
@@ -159,7 +160,7 @@
             // Arrange
             var attribute = new ApiFunctionAuthorizationAttribute();
             var actionContext = CreateActionContext();
-            _sessionService.UserSession.Returns(new UserAuthInfo { ApplicationMode = Session.Enum.AppMode.Self });
+            _sessionService.UserSession.Returns(new UserAuthInfo { ApplicationMode = AppMode.Self });
             _authorizationService.HasPermissions(Arg.Any<IEnumerable<int>>(), Arg.Any<string[]>()).Returns(true);
 
             // Action

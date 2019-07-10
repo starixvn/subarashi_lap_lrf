@@ -6,8 +6,9 @@
     using Base.UnitTests;
     using Constant.DataDomain;
     using DataAccess.Report.Interfaces;
-    using Excel.Base.Entities;
     using Excel.Report;
+    using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Model.Auth.Enum;
     using Fanex.Athena.Service.Core.Utility.Interfaces;
     using Model.Core.ResultModel;
     using Model.Report.DTO;
@@ -15,8 +16,6 @@
     using NPOI.SS.UserModel;
     using NSubstitute;
     using NUnit.Framework;
-    using Session.Enum;
-    using Session.Model;
 
     public class GoldDeluxeWinLossReportControllerTest : BaseApiControllerHelperTest
     {

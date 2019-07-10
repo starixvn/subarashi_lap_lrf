@@ -3,7 +3,7 @@
     using Attributes;
 
     using Autofac;
-
+    using Fanex.Athena.Model.Auth;
     using NSubstitute;
 
     using NUnit.Framework;

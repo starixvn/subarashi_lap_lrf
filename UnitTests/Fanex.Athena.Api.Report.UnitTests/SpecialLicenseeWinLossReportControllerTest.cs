@@ -6,6 +6,7 @@
     using System.Threading.Tasks;
     using Base.UnitTests;
     using DataAccess.Report.Interfaces;
+    using Fanex.Athena.Model.Auth;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using Model.Core.DTO.Configuration;
@@ -15,7 +16,6 @@
     using NSubstitute;
     using NUnit.Framework;
     using Service.Core.Configuration.Interfaces;
-    using Session.Model;
 
     public class SpecialLicenseeWinLossReportControllerTest : BaseApiControllerHelperTest
     {

@@ -10,6 +10,7 @@
     using Excel.Report.Models;
     using Extension.Helper;
     using Extension.Utility;
+    using Fanex.Athena.Model.Auth;
     using Model.Core.DTO.Common;
     using Model.Core.MetaModel.Product;
     using Model.Core.ResultModel;
@@ -20,7 +21,6 @@
     using NSubstitute;
     using NUnit.Framework;
     using Service.Core.Configuration.Interfaces;
-    using Session.Model;
 
     public class LicenseeWinLossReportControllerTest : BaseApiControllerHelperTest
     {

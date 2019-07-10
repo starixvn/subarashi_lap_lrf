@@ -5,9 +5,9 @@
     using Core.Common;
     using Core.Common.Interfaces;
     using Core.Users.Interfaces;
+    using Fanex.Athena.Model.Auth;
     using NSubstitute;
     using NUnit.Framework;
-    using Session.Model;
     using UnitTest.Common.Helpers;
 
     [TestFixture]

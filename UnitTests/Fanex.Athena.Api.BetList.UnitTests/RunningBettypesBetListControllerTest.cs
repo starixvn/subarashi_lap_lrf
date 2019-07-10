@@ -4,10 +4,10 @@
     using System.Net.Http;
     using System.Threading.Tasks;
     using Constant.DataDomain;
+    using Fanex.Athena.Model.Auth;
     using Model.BetList.MetaModel;
     using NSubstitute;
     using NUnit.Framework;
-    using Session.Model;
 
     public class RunningBettypesBetListControllerTest : ApiBetListBaseControllerHelperTest
     {

@@ -3,13 +3,13 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Threading.Tasks;
     using System.Web;
     using Core.Users.Interfaces;
-    using Core.Utility.Interfaces;
     using DataAccess.Core.Users.Interfaces;
     using Extension.Utility.Interfaces;
     using Fanex.Athena.Extension.Utility;
+    using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Model.Auth.Enum;
     using Fanex.Athena.Service.Core.Users;
     using Fanex.Logging;
     using Model.Core.DataDomain;
@@ -20,8 +20,6 @@
     using NSubstitute;
     using NUnit.Framework;
     using Resources;
-    using Session.Enum;
-    using Session.Model;
     using UnitTest.Common.Helpers;
 
     [TestFixture]

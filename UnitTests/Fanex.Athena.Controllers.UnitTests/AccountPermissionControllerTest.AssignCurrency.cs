@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Fanex.Athena.Model.Auth;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using Model.Core.DTO.Users;
@@ -10,7 +11,6 @@
     using NSubstitute;
     using NUnit.Framework;
     using Resources;
-    using Session.Model;
 
     public partial class AccountPermissionControllerTest
     {

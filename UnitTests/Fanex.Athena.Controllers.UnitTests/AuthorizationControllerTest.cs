@@ -14,7 +14,6 @@
     using NUnit.Framework;
     using ONEbook.UM.Services;
     using Resources;
-    using Session.Model;
 
     [TestFixture]
     public partial class AuthorizationControllerTest : CultureBaseControllerHelperTest

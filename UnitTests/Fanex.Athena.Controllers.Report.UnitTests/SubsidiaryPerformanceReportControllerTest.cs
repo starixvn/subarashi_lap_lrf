@@ -9,6 +9,7 @@
     using System.Web.Script.Serialization;
     using Constant.DataDomain;
     using Fanex.Athena.Controllers.Base.UnitTests;
+    using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Core.MetaModel.Product;
@@ -17,7 +18,6 @@
     using Fanex.Athena.Service.Report.Interfaces;
     using NSubstitute;
     using NUnit.Framework;
-    using Session.Enum;
 
     [TestFixture]
     public class SubsidiaryPerformanceReportControllerTest : CultureBaseControllerHelperTest
@@ -51,7 +51,7 @@
                 var operatorList = new List<string> { "New York", "India", "Irag", "China" };
                 _subsidiaryService.GetSubsidiaryNames().Returns(operatorList);
 
-                SessionService.UserSession.Returns(new Session.Model.UserAuthInfo
+                SessionService.UserSession.Returns(new UserAuthInfo
                 {
                     IsManageableSubsidiary = true,
                     Language = DefaultUserSession.Language
@@ -86,7 +86,7 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                SessionService.UserSession.Returns(new Session.Model.UserAuthInfo
+                SessionService.UserSession.Returns(new UserAuthInfo
                 {
                     IsManageableSubsidiary = false,
                     Language = DefaultUserSession.Language

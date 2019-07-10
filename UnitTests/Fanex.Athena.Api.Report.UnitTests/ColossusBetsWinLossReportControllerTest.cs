@@ -8,6 +8,7 @@
     using Excel.Base.Entities;
     using Excel.Report;
     using Extension.Utility;
+    using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Service.Core.Utility.Interfaces;
     using Fanex.Athena.Service.Report.Interfaces;
     using Model.Core.DTO.Users;
@@ -18,7 +19,6 @@
     using NPOI.SS.UserModel;
     using NSubstitute;
     using NUnit.Framework;
-    using Session.Model;
 
     public class ColossusBetsWinLossReportControllerTest : BaseApiControllerHelperTest
     {

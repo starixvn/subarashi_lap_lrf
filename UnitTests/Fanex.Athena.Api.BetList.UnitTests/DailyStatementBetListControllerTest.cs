@@ -5,14 +5,12 @@
     using System.Net.Http;
     using System.Text;
     using System.Threading.Tasks;
-    using System.Web.Http.Results;
-    using Fanex.Athena.Resources;
+    using Fanex.Athena.Model.Auth;
     using Model.BetList.MetaModel;
     using Model.Core.DTO.Configuration;
     using Newtonsoft.Json;
     using NSubstitute;
     using NUnit.Framework;
-    using Session.Model;
 
     public class DailyStatementBetListControllerTest : ApiBetListBaseControllerHelperTest
     {

@@ -10,6 +10,8 @@
     using Excel.Report;
     using Extension.Helper;
     using Extension.Utility;
+    using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Model.Auth.Enum;
     using Model.Core.DTO.Common;
     using Model.Core.MetaModel.Product;
     using Model.Report.DTO;
@@ -19,8 +21,6 @@
     using NPOI.SS.UserModel;
     using NSubstitute;
     using NUnit.Framework;
-    using Session.Enum;
-    using Session.Model;
 
     public class ActiveCustomerSummaryReportControllerTest : BaseApiControllerHelperTest
     {

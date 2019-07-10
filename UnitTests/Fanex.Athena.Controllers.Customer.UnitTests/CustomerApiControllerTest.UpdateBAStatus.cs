@@ -4,12 +4,12 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Base.UnitTests;
+    using Fanex.Athena.Model.Auth;
     using Fanex.Athena.UnitTest.Common.Extensions;
     using Model.Core.DTO.Common;
     using NSubstitute;
     using NUnit.Framework;
     using Resources;
-    using Session.Model;
 
     [TestFixture]
     public partial class CustomerApiControllerTest : CultureBaseControllerHelperTest
@@ -20,7 +20,7 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                bool isAllowBa = true;
+                var isAllowBa = true;
                 var productAccess = new ProductAccess(new List<Product>());
                 _productService.GetProductAccess(
                     SessionService.LicenseeSession.LicenseeId,
