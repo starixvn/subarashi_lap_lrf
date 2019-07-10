@@ -23,6 +23,7 @@ namespace Fanex.Athena.Controllers.BetList
     using Service.Core.Utility.Interfaces;
     using VendorAdapter.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     #endregion Using
 

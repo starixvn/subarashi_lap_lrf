@@ -2,13 +2,19 @@
 {
     using System.Web.Mvc;
     using System.Web.Script.Serialization;
+
     using Base.UnitTests;
+
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Logging;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Report.Result;
+
     using Service.Core.Common.Interfaces;
-    using Service.Core.Utility.Interfaces;
 
     [TestFixture]
     public class ResultKenoReportControllerTest : CultureBaseControllerHelperTest

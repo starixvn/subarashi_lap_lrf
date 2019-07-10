@@ -3,7 +3,7 @@ using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace Fanex.Athena.Service.Core.Utility.Interfaces
+namespace Fanex.Athena.Service.StatelessCore.Interfaces
 {
     public interface IBetListApiClient
     {

@@ -1,20 +1,23 @@
 ﻿namespace Fanex.Athena.Api.BetList
 {
     using System.Linq;
-    using System.Net;
     using System.Net.Http;
     using System.Threading.Tasks;
     using System.Web.Http;
+
     using Base;
     using Base.Attributes;
+
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
-    using Fanex.Athena.Resources;
     using Fanex.Athena.Service.Core.Common.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
+
     using Model.BetList.MetaModel;
+
     using Service.Core.Users.Interfaces;
-    using Service.Core.Utility.Interfaces;
+
     using VendorAdapter.Interfaces;
 
     [ApiFunctionAuthorization(PermissionKeys.ReportLastBetsMonitoring)]

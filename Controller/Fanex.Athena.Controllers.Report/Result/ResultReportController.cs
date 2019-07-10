@@ -6,16 +6,20 @@ namespace Fanex.Athena.Controllers.Report.Result
     using System.Threading.Tasks;
     using System.Web;
     using System.Web.Mvc;
+
     using DataAccess.Core.Configuration.Interfaces;
+
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
+
     using Model.Report.MetaModel;
     using Model.Report.MetaModel.Result;
     using Model.Report.ViewModel.Result;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-    using Service.Core.Utility.Interfaces;
 
     public class ResultReportController : ReportBaseController
     {

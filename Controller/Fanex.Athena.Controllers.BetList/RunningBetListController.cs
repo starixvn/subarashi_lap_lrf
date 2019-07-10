@@ -20,6 +20,7 @@ namespace Fanex.Athena.Controllers.BetList
     using VendorAdapter.Interfaces;
     using Web.ActionFilter;
     using Fanex.Athena.Service.StatelessCore.Utility;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     /// <summary>
     /// RunningBetList contains bet list:.

@@ -3,6 +3,7 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Extension.Utility;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Logging;
     using Model.Core.DataDomain;
     using Model.Report.DTO.Result;

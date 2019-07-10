@@ -4,13 +4,20 @@
     using System.Linq;
     using System.Net.Http;
     using System.Threading.Tasks;
+
     using Base.UnitTests;
+
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Model.BetList.MetaModel;
     using Model.Core.DTO.Common;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Service.Core.Common.Interfaces;
-    using Service.Core.Utility.Interfaces;
+
     using VendorAdapter.Interfaces;
 
     public class LastBetMonitoringBetListControllerTest : BaseApiControllerHelperTest

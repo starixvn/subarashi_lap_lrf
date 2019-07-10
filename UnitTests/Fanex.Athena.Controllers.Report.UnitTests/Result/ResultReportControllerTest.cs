@@ -4,15 +4,24 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
+
     using Base.UnitTests;
+
     using DataAccess.Core.Configuration.Interfaces;
+
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Model.Core.DTO.Common;
     using Model.Core.DTO.Configuration;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Report.Result;
+
     using Service.Core.Common.Interfaces;
-    using Service.Core.Utility.Interfaces;
+
     using UnitTest.Common.Extensions;
 
     [TestFixture]

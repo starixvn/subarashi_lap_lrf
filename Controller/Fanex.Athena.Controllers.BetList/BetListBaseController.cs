@@ -21,6 +21,7 @@
     using VendorAdapter.Interfaces;
     using Fanex.Athena.Model.Core.Helper;
     using Fanex.Athena.Service.StatelessCore.Utility;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     [SessionState(SessionStateBehavior.ReadOnly)]
     [CheckUMFilter]

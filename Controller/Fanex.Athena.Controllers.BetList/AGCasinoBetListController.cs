@@ -8,14 +8,21 @@ namespace Fanex.Athena.Controllers.BetList
 {
     using System.Threading.Tasks;
     using System.Web.Mvc;
+
     using DataAccess.Core.Configuration.Interfaces;
+
     using Extension.Utility;
+
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
+
     using Model.BetList.MetaModel;
+
     using Resources;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-    using Service.Core.Utility.Interfaces;
+
     using VendorAdapter.Interfaces;
 
     public class AGCasinoBetListController : BetListBaseController
