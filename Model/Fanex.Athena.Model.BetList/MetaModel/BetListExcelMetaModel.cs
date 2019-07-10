@@ -1,5 +1,4 @@
-﻿
-namespace Fanex.Athena.Model.BetList.MetaModel
+﻿namespace Fanex.Athena.Model.BetList.MetaModel
 {
     public class BetListExcelMetaModel : BetListMetaModel
     {

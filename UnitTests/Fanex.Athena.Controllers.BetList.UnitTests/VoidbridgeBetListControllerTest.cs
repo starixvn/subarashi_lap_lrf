@@ -54,23 +54,6 @@
         }
 
         [Test]
-        public async Task Detail_WhenCall_ReturnCorrectViewBag()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var expectedTitle = $"{ViewResources.ProductVB} - {ViewResources.BetList} - {ViewResources.DetailTickets}";
-
-                // Action
-                var result = await controller.Detail(new BetListExcelMetaModel()) as ViewResult;
-
-                // Assert
-                Assert.That(result.ViewBag.BetListTitle, Is.EqualTo(expectedTitle));
-            }
-        }
-
-
-        [Test]
         public async Task Detail_ExportExcel_PassCorrectParam()
         {
             using (var controller = CreateController())
