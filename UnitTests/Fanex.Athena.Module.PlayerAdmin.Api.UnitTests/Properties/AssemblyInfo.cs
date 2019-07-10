@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Fanex.Athena.Module.PlayerAdmin.UnitTests")]
+[assembly: AssemblyTitle("Fanex.Athena.Module.PlayerAdmin.Api.UnitTests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("Fanex.Athena.Module.PlayerAdmin.UnitTests")]
+[assembly: AssemblyProduct("Fanex.Athena.Module.PlayerAdmin.Api.UnitTests")]
 [assembly: AssemblyCopyright("Copyright © Microsoft 2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("e14ed3a1-c722-469d-a7a3-296ef2802fe4")]
+[assembly: Guid("fab9270f-18c7-4b35-bec0-ef0c24fad514")]
 
 // Version information for an assembly consists of the following four values:
 //
