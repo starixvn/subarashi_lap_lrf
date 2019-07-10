@@ -146,7 +146,6 @@
     <Compile Include="Users\SubsidiaryServiceTest.cs" />
     <Compile Include="Users\UserServiceTest.cs" />
     <Compile Include="Utility\ProductValidationTest.cs" />
-    <Compile Include="Utility\KeanOceanBusinessHelperTest.cs" />
     <Compile Include="Utility\CurrencyValidationTest.cs" />
     <Compile Include="Utility\ValidationServiceTest.cs" />
   </ItemGroup>

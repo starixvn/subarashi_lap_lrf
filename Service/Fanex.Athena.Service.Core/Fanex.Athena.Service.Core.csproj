@@ -135,7 +135,6 @@
     <Compile Include="Utility\Interfaces\IBetListApiClient.cs" />
     <Compile Include="Utility\Interfaces\IProductValidation.cs" />
     <Compile Include="Utility\Interfaces\IValidationService.cs" />
-    <Compile Include="Utility\KeanOceanBusinessHelper.cs" />
     <Compile Include="Utility\ProductValidation.cs" />
     <Compile Include="Utility\ValidationService.cs" />
   </ItemGroup>

@@ -25,6 +25,7 @@ namespace Fanex.Athena.Service.Core.Users
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Auth.Enum;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Utility;
 
     public class SessionService : ISessionService
     {

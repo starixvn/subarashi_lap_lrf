@@ -76,6 +76,7 @@
     <Compile Include="ReportAPIClient.cs" />
     <Compile Include="RestSharpExtension\NewtonsoftJsonSerializer.cs" />
     <Compile Include="Utility\AuthParameterHelper.cs" />
+    <Compile Include="Utility\KeanOceanBusinessHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\DataAccess\Fanex.Athena.DataAccess.Core\Fanex.Athena.DataAccess.Core.csproj">

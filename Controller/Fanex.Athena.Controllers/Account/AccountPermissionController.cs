@@ -15,6 +15,7 @@ namespace Fanex.Athena.Controllers.Account
     using DataAccess.Core.Common.Interfaces;
     using Extension.Utility;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using Model.Core.DTO.Users;

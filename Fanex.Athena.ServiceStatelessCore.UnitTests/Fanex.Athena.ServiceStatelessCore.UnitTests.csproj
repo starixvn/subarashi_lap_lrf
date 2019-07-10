@@ -60,6 +60,7 @@
     <Compile Include="FunctionServiceTest.cs" />
     <Compile Include="FunctionStorageTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utility\KeanOceanBusinessHelperTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

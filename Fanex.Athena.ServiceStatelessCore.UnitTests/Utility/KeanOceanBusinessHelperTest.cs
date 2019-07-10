@@ -1,10 +1,10 @@
-﻿namespace Fanex.Athena.Service.Core.UnitTests.Utility
+﻿namespace Fanex.Athena.ServiceStatelessCore.UnitTests.Utility
 {
     using System.Collections.Generic;
     using System.Linq;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Users;
-    using Fanex.Athena.Service.Core.Utility;
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using NUnit.Framework;
 
     [TestFixture]
