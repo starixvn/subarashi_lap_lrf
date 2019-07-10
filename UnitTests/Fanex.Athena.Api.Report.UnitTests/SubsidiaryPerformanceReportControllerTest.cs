@@ -5,7 +5,7 @@
     using System.Threading.Tasks;
     using System.Web.Http.Results;
     using Base.UnitTests;
-    using Constant.DataDomain;
+    using Model.Core.DataDomain;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Resources;
     using Fanex.Athena.Service.Report.Interfaces;

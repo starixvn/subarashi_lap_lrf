@@ -4,7 +4,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Constant.DataDomain;
+    using Model.Core.DataDomain;
     using DataAccess.Core.Configuration.Interfaces;
     using Extension.Utility;
     using Model.BetList.ViewModel;

@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Constant.DataDomain;
+    using Model.Core.DataDomain;
     using DataAccess.Report.Interfaces;
     using Model.Core.DTO.Common;
     using Model.Report.DTO;

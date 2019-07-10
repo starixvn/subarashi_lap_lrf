@@ -3,7 +3,7 @@
     using System.Data;
     using System.Threading.Tasks;
     using Base.UnitTests;
-    using Constant.DataDomain;
+    using Model.Core.DataDomain;
     using Excel.Base.Entities;
     using Model.Core.DataDomain;
     using Model.Report.MetaModel;

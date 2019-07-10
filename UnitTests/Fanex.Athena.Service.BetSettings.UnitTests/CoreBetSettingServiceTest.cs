@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using Constant.DataDomain;
+    using Model.Core.DataDomain;
     using Customer.Interfaces;
     using DataAccess.BetSettings.Interfaces;
     using Fanex.Athena.Model.Auth;

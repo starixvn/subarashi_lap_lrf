@@ -6,7 +6,7 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Base.UnitTests;
-    using Constant.DataDomain;
+    using Model.Core.DataDomain;
     using DataAccess.Core.Common.Interfaces;
     using Model.Core.DTO.Common;
     using Model.Core.MetaModel.Common;

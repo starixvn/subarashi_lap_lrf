@@ -4,8 +4,8 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Xml.Linq;
-    using Constant.DataDomain;
     using Core;
+    using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Common.Extensions;
     using Fanex.Logging;
     using Interfaces;

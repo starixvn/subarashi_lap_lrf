@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Constant.DataDomain;
+    using Model.Core.DataDomain;
     using Core.Users.Interfaces;
     using DataAccess.Report.Interfaces;
     using Fanex.Athena.Model.Auth;

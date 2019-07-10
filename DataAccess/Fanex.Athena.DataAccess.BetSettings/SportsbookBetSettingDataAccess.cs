@@ -9,11 +9,12 @@ namespace Fanex.Athena.DataAccess.BetSettings
     using System.Collections.Generic;
     using System.Data;
     using System.Threading.Tasks;
-    using Constant.DataDomain;
+    using Model.Core.DataDomain;
     using Core;
     using Extension.Utility;
     using Fanex.Athena.DataAccess.BetSettings.Interfaces;
     using Fanex.Athena.Model.BetSettings.DTO;
+    using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Model.BetSettings.ViewModel;
     using Utility;

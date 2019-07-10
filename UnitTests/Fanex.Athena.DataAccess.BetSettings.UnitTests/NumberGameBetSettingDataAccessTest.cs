@@ -2,7 +2,7 @@
 {
     using System.Data;
     using System.Threading.Tasks;
-    using Constant.DataDomain;
+    using Model.Core.DataDomain;
     using Core.UnitTests.TestHelpers;
     using Model.BetSettings.DTO;
     using Model.Core.DTO.Common;

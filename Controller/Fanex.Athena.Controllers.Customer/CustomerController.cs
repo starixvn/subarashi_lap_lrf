@@ -12,7 +12,7 @@ namespace Fanex.Athena.Controllers.Customer
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Constant.DataDomain;
+    using Model.Core.DataDomain;
     using DataAccess.Core.Users.Interfaces;
     using Excel.Base.Helpers;
     using Extension.Utility;

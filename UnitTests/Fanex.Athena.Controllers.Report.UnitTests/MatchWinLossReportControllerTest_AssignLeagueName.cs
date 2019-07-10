@@ -2,7 +2,7 @@
 {
     using System.Data;
     using Base.UnitTests;
-    using Constant.DataDomain;
+    using Model.Core.DataDomain;
     using DataAccess.Core.Configuration.Interfaces;
     using NSubstitute;
     using NUnit.Framework;

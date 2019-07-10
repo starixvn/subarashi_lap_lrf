@@ -10,12 +10,13 @@ namespace Fanex.Athena.Service.BetSettings
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using CitiXchangeLibrary;
-    using Constant.DataDomain;
+    using Model.Core.DataDomain;
     using DataAccess.BetSettings.Interfaces;
     using DataAccess.Core.Common.Constants;
     using DataAccess.Core.Common.Interfaces;
     using Extension.Utility;
     using Fanex.Athena.Extension.Helpers;
+    using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Interfaces;
     using Logging;

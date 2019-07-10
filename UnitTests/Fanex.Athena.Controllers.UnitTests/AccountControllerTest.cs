@@ -3,11 +3,17 @@
     using System.Collections.Generic;
     using System.Collections.Specialized;
     using System.Web.Mvc;
+
     using Account;
+
     using Base.UnitTests;
+
     using Fanex.Athena.Service.Core.Users.Interfaces;
+
     using Model.Core.DTO.Users;
+
     using NSubstitute;
+
     using NUnit.Framework;
 
     [TestFixture]

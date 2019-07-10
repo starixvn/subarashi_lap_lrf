@@ -1,10 +1,15 @@
 ﻿namespace Fanex.Athena.Controllers.UnitTests
 {
     using System.Web.Mvc;
+
     using Controllers.Base.UnitTests;
+
     using DataAccess.Core.Users.Interfaces;
+
     using Model.Core.ViewModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
 
     public class HeaderControllerTest : CultureBaseControllerHelperTest
@@ -151,7 +156,7 @@
                 var result = controller.ChangeLanguage(languagesite);
 
                 // Assert
-                Assert.That(result, Is.EqualTo("0")); 
+                Assert.That(result, Is.EqualTo("0"));
             }
         }
 

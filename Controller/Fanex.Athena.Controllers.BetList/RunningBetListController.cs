@@ -8,7 +8,7 @@ namespace Fanex.Athena.Controllers.BetList
 {
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Constant.DataDomain;
+    using Model.Core.DataDomain;
     using DataAccess.Core.Configuration.Interfaces;
     using Extension.Utility;
     using Fanex.Athena.Model.Core.DataDomain;

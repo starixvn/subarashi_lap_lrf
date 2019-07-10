@@ -7,7 +7,7 @@
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Script.Serialization;
-    using Constant.DataDomain;
+    using Model.Core.DataDomain;
     using Fanex.Athena.Controllers.Base.UnitTests;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Core.DataDomain;

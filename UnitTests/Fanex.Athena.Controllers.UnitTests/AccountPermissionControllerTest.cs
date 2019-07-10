@@ -2,14 +2,22 @@
 {
     using System.Collections.Specialized;
     using System.Web.Mvc;
+
     using Account;
+
     using Base.UnitTests;
+
     using DataAccess.Core.Common.Interfaces;
+
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Service.Core.Users.Interfaces;
+
     using Model.Core.DTO.Users;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Service.Core.Common.Interfaces;
 
     [TestFixture]

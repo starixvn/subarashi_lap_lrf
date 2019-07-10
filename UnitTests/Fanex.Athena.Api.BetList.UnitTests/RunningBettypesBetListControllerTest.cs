@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.Net.Http;
     using System.Threading.Tasks;
-    using Constant.DataDomain;
+    using Model.Core.DataDomain;
     using Fanex.Athena.Model.Auth;
     using Model.BetList.MetaModel;
     using NSubstitute;

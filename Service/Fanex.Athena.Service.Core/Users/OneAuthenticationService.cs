@@ -6,7 +6,7 @@
     using System.Linq;
     using System.Web;
     using System.Web.Hosting;
-    using Constant.DataDomain;
+    using Model.Core.DataDomain;
     using DataAccess.Core.Users.Interfaces;
     using Extension.Utility;
     using Extension.Utility.Interfaces;

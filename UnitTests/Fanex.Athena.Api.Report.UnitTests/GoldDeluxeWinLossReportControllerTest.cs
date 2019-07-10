@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Base.UnitTests;
-    using Constant.DataDomain;
+    using Model.Core.DataDomain;
     using DataAccess.Report.Interfaces;
     using Excel.Report;
     using Fanex.Athena.Model.Auth;

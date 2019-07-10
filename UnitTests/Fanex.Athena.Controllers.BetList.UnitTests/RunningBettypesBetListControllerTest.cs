@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Constant.DataDomain;
+    using Model.Core.DataDomain;
     using Model.BetList.MetaModel;
     using Model.BetList.ViewModel;
     using Model.Core.DTO.Common;

@@ -7,13 +7,16 @@
     using System.Threading.Tasks;
     using System.Web.Hosting;
     using System.Web.Mvc;
-    using Constant.DataDomain;
-    using Constant.Helper;
+
     using DataAccess.Core.Configuration.Interfaces;
+
     using Excel.Base.Helpers;
+
     using Extension.Utility;
+
     using Fanex.Athena.Excel.Base.Entities;
     using Fanex.Athena.Excel.Report;
+    using Fanex.Athena.Model.Core;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Core.Helper;
@@ -23,10 +26,13 @@
     using Fanex.Athena.Web.ActionFilter;
     using Fanex.Athena.Web.ResultExtension;
     using Fanex.Common;
+
     using Resources;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
     using Service.Report.Interfaces;
+
     using VendorAdapter.Interfaces;
 
     [FunctionAuthorization(PermissionKeys.ReportMatchWinLoss)]

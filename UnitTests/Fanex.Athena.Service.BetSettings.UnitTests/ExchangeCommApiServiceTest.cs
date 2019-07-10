@@ -3,7 +3,7 @@
     using System;
     using System.Threading.Tasks;
     using CitiXchangeLibrary;
-    using Constant.DataDomain;
+    using Model.Core.DataDomain;
     using DataAccess.BetSettings.Interfaces;
     using DataAccess.Core.Common.Constants;
     using DataAccess.Core.Common.Interfaces;

@@ -6,7 +6,7 @@
     using System.Threading.Tasks;
     using System.Web.Http;
     using Base.Attributes;
-    using Constant.DataDomain;
+    using Model.Core.DataDomain;
     using Fanex.Athena.Resources;
     using Model.Core.DataDomain;
     using Model.Report.DTO.SubsidiaryPerformance;

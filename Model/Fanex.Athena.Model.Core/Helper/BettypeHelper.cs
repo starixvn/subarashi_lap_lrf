@@ -1,4 +1,4 @@
-﻿namespace Fanex.Athena.Constant.Helper
+﻿namespace Fanex.Athena.Model.Core
 {
     public static class BetTypeHelper
     {

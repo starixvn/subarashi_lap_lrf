@@ -167,8 +167,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.Api.ExternalSe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.VendorAdapter", "Infrastructure\Fanex.Athena.VendorAdapter\Fanex.Athena.VendorAdapter.csproj", "{CE1F7641-A14D-4AF6-9BD3-CAD4873669B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.Constant", "Infrastructure\Fanex.Athena.Constant\Fanex.Athena.Constant.csproj", "{6B1431E0-E513-48BB-BE86-0756E5F6F405}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.Controllers.BetSettings.UnitTests", "UnitTests\Fanex.Athena.Controllers.BetSettings.UnitTests\Fanex.Athena.Controllers.BetSettings.UnitTests.csproj", "{36438283-ECB2-44CA-930F-72E424CD4F77}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.Controllers.Forecast.UnitTests", "UnitTests\Fanex.Athena.Controllers.Forecast.UnitTests\Fanex.Athena.Controllers.Forecast.UnitTests.csproj", "{7A939C52-72B6-404B-98A1-56DA2E6FA2A8}"
@@ -211,6 +209,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.Module.PlayerA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.Module.PlayerAdmin.UnitTests", "UnitTests\Fanex.Athena.Module.PlayerAdmin.UnitTests\Fanex.Athena.Module.PlayerAdmin.UnitTests.csproj", "{E14ED3A1-C722-469D-A7A3-296EF2802FE4}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fanex.Athena.Model.Auth", "Fanex.Athena.Model.Auth\Fanex.Athena.Model.Auth.csproj", "{794C0345-2DDD-4FFD-A605-BB96FBB37DE8}"
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.Module.PlayerAdmin.Api", "Fanex.Athena.Module.PlayerAdmin.Api\Fanex.Athena.Module.PlayerAdmin.Api.csproj", "{831FFA8D-8F5E-4ABD-AC6A-5660B71B1795}"
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.Model.Auth", "Fanex.Athena.Model.Auth\Fanex.Athena.Model.Auth.csproj", "{794C0345-2DDD-4FFD-A605-BB96FBB37DE8}"
 EndProject
@@ -934,18 +933,6 @@ Global
 		{CE1F7641-A14D-4AF6-9BD3-CAD4873669B4}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{CE1F7641-A14D-4AF6-9BD3-CAD4873669B4}.Release|x86.ActiveCfg = Release|Any CPU
 		{CE1F7641-A14D-4AF6-9BD3-CAD4873669B4}.Release|x86.Build.0 = Release|Any CPU
-		{6B1431E0-E513-48BB-BE86-0756E5F6F405}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6B1431E0-E513-48BB-BE86-0756E5F6F405}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6B1431E0-E513-48BB-BE86-0756E5F6F405}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{6B1431E0-E513-48BB-BE86-0756E5F6F405}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{6B1431E0-E513-48BB-BE86-0756E5F6F405}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{6B1431E0-E513-48BB-BE86-0756E5F6F405}.Debug|x86.Build.0 = Debug|Any CPU
-		{6B1431E0-E513-48BB-BE86-0756E5F6F405}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6B1431E0-E513-48BB-BE86-0756E5F6F405}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6B1431E0-E513-48BB-BE86-0756E5F6F405}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{6B1431E0-E513-48BB-BE86-0756E5F6F405}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{6B1431E0-E513-48BB-BE86-0756E5F6F405}.Release|x86.ActiveCfg = Release|Any CPU
-		{6B1431E0-E513-48BB-BE86-0756E5F6F405}.Release|x86.Build.0 = Release|Any CPU
 		{36438283-ECB2-44CA-930F-72E424CD4F77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{36438283-ECB2-44CA-930F-72E424CD4F77}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36438283-ECB2-44CA-930F-72E424CD4F77}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -1255,7 +1242,6 @@ Global
 		{8D35FBB1-C04C-4558-BA16-A9DAE8C6379E} = {62FD2471-9E6A-4BD1-9AB3-8C4C6FF658A1}
 		{1BDD6A95-D4F4-48CF-8491-8333067D3DBA} = {8124F11D-CD42-4473-AE75-80290172BE0A}
 		{CE1F7641-A14D-4AF6-9BD3-CAD4873669B4} = {993B45CC-7A78-4580-A389-3E451AA0D1F8}
-		{6B1431E0-E513-48BB-BE86-0756E5F6F405} = {993B45CC-7A78-4580-A389-3E451AA0D1F8}
 		{36438283-ECB2-44CA-930F-72E424CD4F77} = {62FD2471-9E6A-4BD1-9AB3-8C4C6FF658A1}
 		{7A939C52-72B6-404B-98A1-56DA2E6FA2A8} = {62FD2471-9E6A-4BD1-9AB3-8C4C6FF658A1}
 		{6314A4E3-6D1B-49FC-85A5-E5DD7A85AB3F} = {8124F11D-CD42-4473-AE75-80290172BE0A}
@@ -1280,8 +1266,8 @@ Global
 		{794C0345-2DDD-4FFD-A605-BB96FBB37DE8} = {FF903E7B-A043-4B69-B750-4830F0E5C58A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35;packages\Unity.Interception.2.1.505.0\lib\NET35
-		RESX_ShowErrorsInErrorList = False
 		SolutionGuid = {AF850210-126B-4E21-BADB-F5C02AD2CCEE}
+		RESX_ShowErrorsInErrorList = False
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35;packages\Unity.Interception.2.1.505.0\lib\NET35
 	EndGlobalSection
 EndGlobal

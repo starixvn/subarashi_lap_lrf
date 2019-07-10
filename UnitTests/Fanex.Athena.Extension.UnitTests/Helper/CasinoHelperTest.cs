@@ -1,6 +1,7 @@
 ﻿namespace Fanex.Athena.Extension.UnitTests.Helper
 {
     using Extension.Helper;
+
     using NUnit.Framework;
 
     public class CasinoHelperTest

@@ -3,7 +3,7 @@
     using System.Net.Http;
     using System.Web.Hosting;
     using Base.Attributes;
-    using Constant.DataDomain;
+    using Model.Core.DataDomain;
     using DataAccess.Report.Interfaces;
     using Excel.Report;
     using Excel.Report.Helpers;

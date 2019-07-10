@@ -4,15 +4,23 @@
     using System.Collections.Generic;
     using System.Web;
     using System.Web.Mvc;
+
     using Base.UnitTests;
+
     using Extension.Utility.Interfaces;
+
     using Fanex.Athena.Service.Core.Users.Interfaces;
+
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using Model.Core.DTO.Users;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using ONEbook.UM.Services;
+
     using Resources;
 
     [TestFixture]

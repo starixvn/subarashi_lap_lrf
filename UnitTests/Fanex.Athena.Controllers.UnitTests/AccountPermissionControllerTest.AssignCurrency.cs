@@ -1,15 +1,19 @@
 ﻿namespace Fanex.Athena.Controllers.UnitTests
 {
     using System.Collections.Generic;
-    using System.Threading.Tasks;
     using System.Web.Mvc;
+
     using Fanex.Athena.Model.Auth;
+
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using Model.Core.DTO.Users;
     using Model.Core.MetaModel.Account;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Resources;
 
     public partial class AccountPermissionControllerTest

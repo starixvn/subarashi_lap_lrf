@@ -8,12 +8,12 @@ namespace Fanex.Athena.DataAccess.Report
 {
     using System.Data;
     using System.Threading.Tasks;
-    using Constant.DataDomain;
-    using Constant.Helper;
+    using Model.Core.DataDomain;
     using Core.Configuration.Interfaces;
     using Fanex.Athena.DataAccess.Core;
     using Fanex.Athena.DataAccess.Report.Interfaces;
     using Fanex.Athena.Extension.Utility;
+    using Fanex.Athena.Model.Core;
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Common.Extensions;

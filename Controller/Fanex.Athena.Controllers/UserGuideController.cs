@@ -13,7 +13,7 @@ namespace Fanex.Athena.Controllers
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using System.Web.SessionState;
-    using Constant.DataDomain;
+    using Model.Core.DataDomain;
     using DataAccess.Core.Configuration.Interfaces;
     using Extension.Utility;
     using Extension.Utility.Interfaces;

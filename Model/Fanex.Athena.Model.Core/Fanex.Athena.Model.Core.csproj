@@ -79,10 +79,12 @@
     <Compile Include="Constants\SystemEnvironment.cs" />
     <Compile Include="DataDomain\BaseCurrencyType.cs" />
     <Compile Include="DataDomain\Currency.cs" />
+    <Compile Include="DataDomain\BetType.cs" />
     <Compile Include="DataDomain\CurrencyType.cs" />
     <Compile Include="DataDomain\DrawFilterType.cs" />
     <Compile Include="DataDomain\ErrorType.cs" />
     <Compile Include="DataDomain\FormatKey.cs" />
+    <Compile Include="DataDomain\LiveStatusTypes.cs" />
     <Compile Include="DataDomain\OneAuthorizationErrorCode.cs" />
     <Compile Include="DataDomain\PermissionKeys.cs" />
     <Compile Include="DataDomain\FunctionNames.cs" />
@@ -90,12 +92,16 @@
     <Compile Include="DataDomain\LicenseeIdentity.cs" />
     <Compile Include="DataDomain\OddsType.cs" />
     <Compile Include="DataDomain\PlatformType.cs" />
+    <Compile Include="DataDomain\ProductTypes.cs" />
     <Compile Include="DataDomain\ReportLevel.cs" />
     <Compile Include="DataDomain\ResultVendorProductTypes.cs" />
     <Compile Include="DataDomain\ReportByType.cs" />
     <Compile Include="DataDomain\RNGCasinoSetting.cs" />
+    <Compile Include="DataDomain\SportType.cs" />
+    <Compile Include="DataDomain\StatusTypes.cs" />
     <Compile Include="DataDomain\SystemConstants.cs" />
     <Compile Include="DTO\Common\APIResult.cs" />
+    <Compile Include="DataDomain\UserLevelType.cs" />
     <Compile Include="DTO\Common\CheckedItem.cs" />
     <Compile Include="DTO\Common\ExChangeRate.cs" />
     <Compile Include="DTO\Common\Function.cs" />
@@ -126,6 +132,7 @@
     <Compile Include="DTO\Users\Subsidiary.cs" />
     <Compile Include="DTO\Users\User.cs" />
     <Compile Include="DTO\Users\UserRole.cs" />
+    <Compile Include="Helper\BettypeHelper.cs" />
     <Compile Include="Helper\MetaModelValidationHelper.cs" />
     <Compile Include="Helper\ProductHelper.cs" />
     <Compile Include="MetaModel\CurrencyValidationOption.cs" />
@@ -155,10 +162,6 @@
     <ProjectReference Include="..\..\Fanex.Athena.Extension\Fanex.Athena.Extension.csproj">
       <Project>{71F95E53-36D0-4091-828D-ED14C9939C35}</Project>
       <Name>Fanex.Athena.Extension</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Infrastructure\Fanex.Athena.Constant\Fanex.Athena.Constant.csproj">
-      <Project>{6B1431E0-E513-48BB-BE86-0756E5F6F405}</Project>
-      <Name>Fanex.Athena.Constant</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Resources\Fanex.Athena.Resources\Fanex.Athena.Resources.csproj">
       <Project>{17b0022c-4902-4c61-908a-5db81568dc3a}</Project>

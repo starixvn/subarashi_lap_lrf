@@ -1,7 +1,7 @@
 ﻿namespace Fanex.Athena.DataAccess.BetSettings.UnitTests
 {
     using System.Threading.Tasks;
-    using Constant.DataDomain;
+    using Model.Core.DataDomain;
     using Core.UnitTests.TestHelpers;
     using Fanex.Logging;
     using NSubstitute;

@@ -2,9 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
-    using Constant.DataDomain;
-    using Constant.Helper;
     using DTO.Common;
+    using Fanex.Athena.Model.Core.DataDomain;
     using Resources;
 
     public static class ProductHelper

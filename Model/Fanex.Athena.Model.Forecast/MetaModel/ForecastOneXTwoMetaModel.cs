@@ -1,9 +1,4 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="ForecastOneXTwoMetaModel.cs" company="">
-// Copyright (c) . All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-using Fanex.Athena.Model.Core.MetaModel;
 
 namespace Fanex.Athena.Model.Forecast.MetaModel
 {
@@ -15,7 +10,7 @@ namespace Fanex.Athena.Model.Forecast.MetaModel
         public ForecastOneXTwoMetaModel()
         {
             CurrencyId = 0;
-            BetType = (int)Constant.DataDomain.BetType.Ft1X2;
+            BetType = (int)Core.DataDomain.BetType.Ft1X2;
             BetTypeString = BetType.ToString();
         }
 

@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Constant.DataDomain;
+    using Model.Core.DataDomain;
     using Core.Configuration.Interfaces;
     using Core.UnitTests.TestHelpers;
     using Data;

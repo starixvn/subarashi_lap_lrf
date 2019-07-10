@@ -2,7 +2,7 @@
 {
     using System.Data;
     using System.Threading.Tasks;
-    using Constant.DataDomain;
+    using Model.Core.DataDomain;
     using Core.Common;
     using NSubstitute;
     using NUnit.Framework;

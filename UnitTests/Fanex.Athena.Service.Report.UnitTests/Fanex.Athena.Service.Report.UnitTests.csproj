@@ -155,10 +155,6 @@
       <Project>{4a5bddbc-f707-409a-86ec-d9bc6e9d31c4}</Project>
       <Name>Fanex.Athena.UnitTest.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Infrastructure\Fanex.Athena.Constant\Fanex.Athena.Constant.csproj">
-      <Project>{6B1431E0-E513-48BB-BE86-0756E5F6F405}</Project>
-      <Name>Fanex.Athena.Constant</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Infrastructure\Fanex.Athena.Session\Fanex.Athena.Session.csproj">
       <Project>{b41e38ef-54ad-4866-968f-c856de9dc072}</Project>
       <Name>Fanex.Athena.Session</Name>

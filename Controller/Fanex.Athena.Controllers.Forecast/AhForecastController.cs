@@ -10,7 +10,7 @@ namespace Fanex.Athena.Controllers.Forecast
     using System.Globalization;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Constant.DataDomain;
+    using Model.Core.DataDomain;
     using Extension.Utility;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Forecast.DTO.ForecastAH;
