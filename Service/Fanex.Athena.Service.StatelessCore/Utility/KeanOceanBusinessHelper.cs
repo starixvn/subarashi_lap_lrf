@@ -2,8 +2,9 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+
+    using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Core.DataDomain;
-    using Fanex.Athena.Model.Core.DTO.Users;
 
     /// <summary>
     /// <![CDATA[https://nexdev.net/projects/lrf-licensee-risk-and-forecast/wiki/Add_INH_for_KeenOcean.]]>

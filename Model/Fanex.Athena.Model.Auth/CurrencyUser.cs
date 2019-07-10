@@ -1,12 +1,6 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="CurrencyUser.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
+﻿using System.Collections.Generic;
 
-using System.Collections.Generic;
-
-namespace Fanex.Athena.Model.Core.DTO.Users
+namespace Fanex.Athena.Model.Auth
 {
     public class CurrencyUser
     {

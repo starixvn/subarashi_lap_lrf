@@ -9,6 +9,7 @@ namespace Fanex.Athena.DataAccess.Core.Users
     using System;
     using System.Data;
     using Fanex.Athena.DataAccess.Core;
+    using Fanex.Athena.Model.Auth;
     using Interfaces;
     using Model.Core.DTO.OneAuth;
 

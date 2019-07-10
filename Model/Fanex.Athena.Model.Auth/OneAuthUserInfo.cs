@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using Fanex.Athena.Model.Core.DTO.Users;
 
-namespace Fanex.Athena.Model.Core.DTO.OneAuth
+namespace Fanex.Athena.Model.Auth
 {
     public class OneAuthUserInfo
     {

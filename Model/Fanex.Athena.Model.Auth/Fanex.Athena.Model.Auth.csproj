@@ -36,8 +36,10 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CurrencyUser.cs" />
     <Compile Include="Enum\AppMode.cs" />
     <Compile Include="LicenseeAuthInfo.cs" />
+    <Compile Include="OneAuthUserInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserAuthInfo.cs" />
   </ItemGroup>
