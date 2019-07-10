@@ -12,7 +12,6 @@ namespace Fanex.Athena.Controllers.BetSettings
     using Model.Core.DataDomain;
     using Extension.Utility;
     using Fanex.Athena.Model.BetSettings.MetaModel;
-    using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Web.ActionFilter;
     using Model.BetSettings.DTO;
     using Resources;

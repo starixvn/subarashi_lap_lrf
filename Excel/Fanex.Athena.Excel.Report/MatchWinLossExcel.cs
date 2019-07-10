@@ -6,22 +6,28 @@
 
 namespace Fanex.Athena.Excel.Report
 {
-    using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
+
     using Base;
     using Base.Entities;
     using Base.Helpers;
+
     using Common;
-    using Model.Core.DataDomain;
+
     using Fanex.Athena.Excel.Base.Extension;
-    using Fanex.Athena.Model.Core.DataDomain;
+
     using Helpers;
+
+    using Model.Core.DataDomain;
     using Model.Report.MetaModel;
+
     using NPOI.SS.UserModel;
+
     using Resources;
+
     using VendorAdapter;
     using VendorAdapter.Interfaces;
 

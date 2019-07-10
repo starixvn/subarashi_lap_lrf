@@ -14,7 +14,6 @@ namespace Fanex.Athena.DataAccess.BetSettings
     using Extension.Utility;
     using Fanex.Athena.DataAccess.BetSettings.Interfaces;
     using Fanex.Athena.Model.BetSettings.DTO;
-    using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Model.BetSettings.ViewModel;
     using Utility;

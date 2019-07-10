@@ -11,7 +11,6 @@ namespace Fanex.Athena.DataAccess.Report
     using System.Data;
     using System.Linq;
     using System.Threading.Tasks;
-    using Model.Core.DataDomain;
     using Core.Configuration.Interfaces;
     using Extension.Utility;
     using Fanex.Athena.DataAccess.Core;
