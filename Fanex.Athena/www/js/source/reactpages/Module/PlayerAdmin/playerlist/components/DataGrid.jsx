@@ -89,10 +89,10 @@ export class DataGrid extends PureComponent {
     handleLeaveContextMenu = () => {
         window.setTimeout(() => {
             if (this.state.isOpenContextMenu) {
-                this.setState({ 
+                this.setState({
                     isOpenContextMenu: false,
                     shouldResetScrollPosition: false
-                 });
+                });
             }
         }, 10);
     }
@@ -100,7 +100,7 @@ export class DataGrid extends PureComponent {
     _handlerToggleDropdownLabel(event, stateName) {
         const currentPosition = this.state[stateName];
         if (currentPosition) {
-            this.setState({ 
+            this.setState({
                 [stateName]: null,
                 shouldResetScrollPosition: false
             });
@@ -114,10 +114,10 @@ export class DataGrid extends PureComponent {
                 y: GridHelper.calculateTopPosition(dropdownHeight, rect.top + 20)
             };
 
-            this.setState({ 
+            this.setState({
                 [stateName]: position,
                 shouldResetScrollPosition: false
-             });
+            });
         }
     }
 
@@ -148,7 +148,6 @@ export class DataGrid extends PureComponent {
             isBa: checked
         }
         this.props.updateBaStatus(param).then(response => {
-            console.log(response.data);
             this.handleChangeUpdatePlayerItem(custId, checked, 'BaStatus');
         })
     }
@@ -156,18 +155,38 @@ export class DataGrid extends PureComponent {
     _handleChangeDropdownValue = (event, value, fieldName, onChangeSuccess) => {
         event.preventDefault();
         const { currentActivePlayer } = this.props;
-        if (currentActivePlayer) {
-            this.handleChangeUpdatePlayerItem(currentActivePlayer.custId, value, fieldName);
-            onChangeSuccess();
-        }
+        this.handleChangeUpdatePlayerItem(currentActivePlayer.custId, value, fieldName);
+        onChangeSuccess();
     }
 
     handleChangeOddsGroup = (event, value) => {
-        this._handleChangeDropdownValue(event, value, 'OddsGroup', this.handleToggleOddsGroup);
+        const { currentActivePlayer } = this.props;
+
+        if (currentActivePlayer) {
+            const param = {
+                custId: currentActivePlayer.custId,
+                oddsGroup: value
+            }
+
+            this.props.updateOddsGroup(param).then(response => {
+                this._handleChangeDropdownValue(event, value, 'OddsGroup', this.handleToggleOddsGroup);
+            })
+        }
     }
 
     handleChangeSpecialLevel = (event, value) => {
-        this._handleChangeDropdownValue(event, value, 'SpecialLevel', this.handleToggleSpecialLevel);
+        const { currentActivePlayer } = this.props;
+
+        if (currentActivePlayer) {
+            const param = {
+                custId: currentActivePlayer.custId,
+                specialLevel: value
+            }
+
+            this.props.updateSpecialLevel(param).then(response => {
+                this._handleChangeDropdownValue(event, value, 'SpecialLevel', this.handleToggleSpecialLevel);
+            })
+        }
     }
 
     handleChangeStatus = (event, value) => {
@@ -214,8 +233,15 @@ export class DataGrid extends PureComponent {
 }
 
 function mapDispatchToProps(dispatch) {
-    const { setSelectedPlayerIdList, setPlayerList, setCurrentActivePlayer, updateBaStatus } = ActionCreators;
-    return bindActionCreators({ setSelectedPlayerIdList, setPlayerList, setCurrentActivePlayer, updateBaStatus }, dispatch);
+    const { setSelectedPlayerIdList, setPlayerList, setCurrentActivePlayer, updateBaStatus, updateOddsGroup, updateSpecialLevel } = ActionCreators;
+    return bindActionCreators({
+        setSelectedPlayerIdList,
+        setPlayerList,
+        setCurrentActivePlayer,
+        updateBaStatus,
+        updateOddsGroup,
+        updateSpecialLevel
+    }, dispatch);
 }
 
 function mapStateToProps(state) {
