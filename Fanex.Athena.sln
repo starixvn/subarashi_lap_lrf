@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.705
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29009.5
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service", "Service", "{195AD258-DE51-497C-BA3B-1645AE32CAB6}"
 EndProject
@@ -162,8 +162,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.Api.CustomerLog.UnitTests", "UnitTests\Fanex.Athena.Api.CustomerLog.UnitTests\Fanex.Athena.Api.CustomerLog.UnitTests.csproj", "{24CAA3C4-7A30-44F8-BB72-CD3B549596A6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.Api.Common.UnitTests", "UnitTests\Fanex.Athena.Api.Common.UnitTests\Fanex.Athena.Api.Common.UnitTests.csproj", "{5CB91461-6F22-4970-80BE-9BAD6820E781}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.Session", "Infrastructure\Fanex.Athena.Session\Fanex.Athena.Session.csproj", "{B41E38EF-54AD-4866-968F-C856DE9DC072}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{5BC66D3C-4A38-41BD-B640-90215BDFDB04}"
 EndProject
@@ -981,18 +979,6 @@ Global
 		{5CB91461-6F22-4970-80BE-9BAD6820E781}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{5CB91461-6F22-4970-80BE-9BAD6820E781}.Release|x86.ActiveCfg = Release|Any CPU
 		{5CB91461-6F22-4970-80BE-9BAD6820E781}.Release|x86.Build.0 = Release|Any CPU
-		{B41E38EF-54AD-4866-968F-C856DE9DC072}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B41E38EF-54AD-4866-968F-C856DE9DC072}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B41E38EF-54AD-4866-968F-C856DE9DC072}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{B41E38EF-54AD-4866-968F-C856DE9DC072}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{B41E38EF-54AD-4866-968F-C856DE9DC072}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{B41E38EF-54AD-4866-968F-C856DE9DC072}.Debug|x86.Build.0 = Debug|Any CPU
-		{B41E38EF-54AD-4866-968F-C856DE9DC072}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B41E38EF-54AD-4866-968F-C856DE9DC072}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B41E38EF-54AD-4866-968F-C856DE9DC072}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{B41E38EF-54AD-4866-968F-C856DE9DC072}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{B41E38EF-54AD-4866-968F-C856DE9DC072}.Release|x86.ActiveCfg = Release|Any CPU
-		{B41E38EF-54AD-4866-968F-C856DE9DC072}.Release|x86.Build.0 = Release|Any CPU
 		{8611F4A1-E278-45CD-8D75-F8D8004529B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8611F4A1-E278-45CD-8D75-F8D8004529B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8611F4A1-E278-45CD-8D75-F8D8004529B2}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -1247,7 +1233,6 @@ Global
 		{6314A4E3-6D1B-49FC-85A5-E5DD7A85AB3F} = {8124F11D-CD42-4473-AE75-80290172BE0A}
 		{24CAA3C4-7A30-44F8-BB72-CD3B549596A6} = {8124F11D-CD42-4473-AE75-80290172BE0A}
 		{5CB91461-6F22-4970-80BE-9BAD6820E781} = {8124F11D-CD42-4473-AE75-80290172BE0A}
-		{B41E38EF-54AD-4866-968F-C856DE9DC072} = {993B45CC-7A78-4580-A389-3E451AA0D1F8}
 		{5BC66D3C-4A38-41BD-B640-90215BDFDB04} = {6AD8D3FB-0047-432F-ACAC-D67093176088}
 		{8611F4A1-E278-45CD-8D75-F8D8004529B2} = {5BC66D3C-4A38-41BD-B640-90215BDFDB04}
 		{DA9A50E3-C62D-4F12-96C2-3AC289D423FE} = {195AD258-DE51-497C-BA3B-1645AE32CAB6}
@@ -1267,8 +1252,8 @@ Global
 		{FAB9270F-18C7-4B35-BEC0-EF0C24FAD514} = {1F82F1FE-8794-4B76-AC02-E6BD6741729E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {AF850210-126B-4E21-BADB-F5C02AD2CCEE}
-		RESX_ShowErrorsInErrorList = False
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35;packages\Unity.Interception.2.1.505.0\lib\NET35
+		RESX_ShowErrorsInErrorList = False
+		SolutionGuid = {AF850210-126B-4E21-BADB-F5C02AD2CCEE}
 	EndGlobalSection
 EndGlobal

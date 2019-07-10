@@ -1,12 +1,13 @@
-﻿namespace Fanex.Athena.Web.ActionFilter
-{
-    using System;
-    using System.Web.Mvc;
-    using System.Web.Routing;
-    using Fanex.Athena.Model.Auth.Enum;
-    using Session;
-    using Session.Interfaces;
+﻿using System;
+using System.Web.Mvc;
+using System.Web.Routing;
 
+using Fanex.Athena.Model.Auth.Enum;
+using Fanex.Athena.Service.Core.Users;
+using Fanex.Athena.Service.Core.Users.Interfaces;
+
+namespace Fanex.Athena.Web.ActionFilter
+{
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public sealed class AuthorizeRestrictionAttribute : AuthorizeAttribute
     {

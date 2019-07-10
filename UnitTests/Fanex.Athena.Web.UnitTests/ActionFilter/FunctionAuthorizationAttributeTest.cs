@@ -3,7 +3,7 @@ using System.Web.Mvc;
 using Fanex.Athena.Model.Auth;
 using Fanex.Athena.Model.Auth.Enum;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
-using Fanex.Athena.Session.Interfaces;
+using Fanex.Athena.Service.Core.Users.Interfaces;
 using Fanex.Athena.UnitTest.Common.Helpers;
 using Fanex.Athena.UnitTest.Common.NUnitExtensions;
 using Fanex.Athena.Web.ActionFilter;

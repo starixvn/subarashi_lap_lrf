@@ -10,7 +10,7 @@
 
     using Attributes.Extensions;
     using Fanex.Athena.Model.Auth.Enum;
-    using Session.Interfaces;
+    using Fanex.Athena.Service.Core.Users.Interfaces;
 
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public sealed class XFrameOptionApiAttribute : ActionFilterAttribute

@@ -15,7 +15,7 @@ namespace Fanex.Athena.Service.Core.Configuration
     using Extension.Utility.Interfaces;
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Core.DTO.Configuration;
-    using Fanex.Athena.Session.Interfaces;
+    using Fanex.Athena.Service.Core.Users.Interfaces;
     using Interfaces;
     using Newtonsoft.Json;
 

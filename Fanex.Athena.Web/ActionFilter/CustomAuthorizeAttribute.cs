@@ -8,8 +8,8 @@ namespace Fanex.Athena.Web.ActionFilter
     using System;
     using System.Web.Mvc;
     using System.Web.Routing;
-    using Session;
-    using Session.Interfaces;
+    using Fanex.Athena.Service.Core.Users;
+    using Fanex.Athena.Service.Core.Users.Interfaces;
 
     [AttributeUsage(AttributeTargets.All)]
     public sealed class CustomAuthorizeAttribute : AuthorizeAttribute

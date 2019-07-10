@@ -10,7 +10,7 @@ namespace Fanex.Athena.Api.Base.Attributes
     using System.Net.Http;
     using System.Web.Http;
     using Extensions;
-    using Session.Interfaces;
+    using Fanex.Athena.Service.Core.Users.Interfaces;
 
     [AttributeUsage(AttributeTargets.All)]
     public sealed class CustomApiAuthorizeAttribute : AuthorizeAttribute

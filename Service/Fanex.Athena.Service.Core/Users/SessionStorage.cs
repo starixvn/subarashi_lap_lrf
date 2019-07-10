@@ -1,4 +1,4 @@
-﻿namespace Fanex.Athena.Session
+﻿namespace Fanex.Athena.Service.Core.Users
 {
     using System.Web;
     using Fanex.Athena.Model.Auth;

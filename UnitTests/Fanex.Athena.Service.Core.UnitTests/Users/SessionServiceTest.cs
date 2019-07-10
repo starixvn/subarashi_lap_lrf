@@ -20,7 +20,7 @@
     using Model.Core.DTO.Users;
     using NSubstitute;
     using NUnit.Framework;
-    using Session.Interfaces;
+    using Fanex.Athena.Service.Core.Users.Interfaces;
     using UnitTest.Common.Helpers;
 
     [TestFixture]

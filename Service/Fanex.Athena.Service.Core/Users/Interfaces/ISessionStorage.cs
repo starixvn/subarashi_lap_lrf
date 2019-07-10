@@ -1,6 +1,6 @@
 ﻿using Fanex.Athena.Model.Auth;
 
-namespace Fanex.Athena.Session.Interfaces
+namespace Fanex.Athena.Service.Core.Users.Interfaces
 {
     public interface ISessionStorage
     {

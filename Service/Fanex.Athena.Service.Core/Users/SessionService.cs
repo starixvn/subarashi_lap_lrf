@@ -20,7 +20,7 @@ namespace Fanex.Athena.Service.Core.Users
     using Fanex.Athena.Model.Core.DTO.Users;
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using Model.Core.DTO.Common;
-    using Session.Interfaces;
+    using Fanex.Athena.Service.Core.Users.Interfaces;
     using Utility;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Auth.Enum;

@@ -10,7 +10,7 @@
     using Newtonsoft.Json;
     using NSubstitute;
     using NUnit.Framework;
-    using Session.Interfaces;
+    using Fanex.Athena.Service.Core.Users.Interfaces;
     using UnitTest.Common.Helpers;
 
     [TestFixture]
