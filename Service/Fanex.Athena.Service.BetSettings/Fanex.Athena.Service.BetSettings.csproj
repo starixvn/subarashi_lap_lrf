@@ -104,7 +104,7 @@
       <Project>{68f63a3b-062c-4adc-8718-91134a6ffb85}</Project>
       <Name>Fanex.Athena.DataAccess.BetSettings</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Fanex.Athena.Model.Auth\Fanex.Athena.Model.Auth.csproj">
+    <ProjectReference Include="..\..\Model\Fanex.Athena.Model.Auth\Fanex.Athena.Model.Auth.csproj">
       <Project>{794C0345-2DDD-4FFD-A605-BB96FBB37DE8}</Project>
       <Name>Fanex.Athena.Model.Auth</Name>
     </ProjectReference>

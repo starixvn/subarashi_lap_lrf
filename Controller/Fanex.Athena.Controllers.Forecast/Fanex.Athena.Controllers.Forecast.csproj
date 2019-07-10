@@ -132,7 +132,7 @@
       <Project>{3C68D0D6-442D-4366-AB29-A793BBE92F49}</Project>
       <Name>Fanex.Athena.DataAccess.Forecast</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Fanex.Athena.Model.Auth\Fanex.Athena.Model.Auth.csproj">
+    <ProjectReference Include="..\..\Model\Fanex.Athena.Model.Auth\Fanex.Athena.Model.Auth.csproj">
       <Project>{794C0345-2DDD-4FFD-A605-BB96FBB37DE8}</Project>
       <Name>Fanex.Athena.Model.Auth</Name>
     </ProjectReference>

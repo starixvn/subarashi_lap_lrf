@@ -198,7 +198,7 @@
       <Project>{0fc566e3-c900-4ff7-bc30-922fa73969f7}</Project>
       <Name>Fanex.Athena.Excel.Report</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Fanex.Athena.Model.Auth\Fanex.Athena.Model.Auth.csproj">
+    <ProjectReference Include="..\..\Model\Fanex.Athena.Model.Auth\Fanex.Athena.Model.Auth.csproj">
       <Project>{794C0345-2DDD-4FFD-A605-BB96FBB37DE8}</Project>
       <Name>Fanex.Athena.Model.Auth</Name>
     </ProjectReference>

@@ -101,15 +101,15 @@
     <Compile Include="ViewModel\WidgetByPlatformViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ControllerAPI\Fanex.Athena.Api.Base\Fanex.Athena.Api.Base.csproj">
+    <ProjectReference Include="..\..\ControllerAPI\Fanex.Athena.Api.Base\Fanex.Athena.Api.Base.csproj">
       <Project>{16D39D7B-00C0-4CC3-82F5-44BBDEE7AE51}</Project>
       <Name>Fanex.Athena.Api.Base</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DataAccess\Fanex.Athena.DataAccess.Core\Fanex.Athena.DataAccess.Core.csproj">
+    <ProjectReference Include="..\..\DataAccess\Fanex.Athena.DataAccess.Core\Fanex.Athena.DataAccess.Core.csproj">
       <Project>{A6BE21E8-6895-4863-BA3A-E6B21D3CE78D}</Project>
       <Name>Fanex.Athena.DataAccess.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Model\Fanex.Athena.Model.Core\Fanex.Athena.Model.Core.csproj">
+    <ProjectReference Include="..\..\Model\Fanex.Athena.Model.Core\Fanex.Athena.Model.Core.csproj">
       <Project>{5F410090-94C0-46A5-9FEC-B6C3B745B7A0}</Project>
       <Name>Fanex.Athena.Model.Core</Name>
     </ProjectReference>

@@ -5551,14 +5551,6 @@
       <Project>{71F95E53-36D0-4091-828D-ED14C9939C35}</Project>
       <Name>Fanex.Athena.Extension</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Fanex.Athena.Module.Dashboard\Fanex.Athena.Module.Dashboard.csproj">
-      <Project>{b5c8656b-6c30-4c82-bdb9-85b1c71b00c3}</Project>
-      <Name>Fanex.Athena.Module.Dashboard</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Fanex.Athena.Module.PlayerAdmin\Fanex.Athena.Module.PlayerAdmin.csproj">
-      <Project>{19150cd4-08fc-4bec-800a-57abd7744c41}</Project>
-      <Name>Fanex.Athena.Module.PlayerAdmin</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Model\Fanex.Athena.Model.BetList\Fanex.Athena.Model.BetList.csproj">
       <Project>{4956fbd7-5f68-4e7b-af6c-db5fb1f255f0}</Project>
       <Name>Fanex.Athena.Model.BetList</Name>
@@ -5571,6 +5563,18 @@
       <Project>{3AA658FF-B635-4990-A49C-AE886841A1CA}</Project>
       <Name>Fanex.Athena.Model.Report</Name>
       <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Module\Fanex.Athena.Module.Dashboard\Fanex.Athena.Module.Dashboard.csproj">
+      <Project>{b5c8656b-6c30-4c82-bdb9-85b1c71b00c3}</Project>
+      <Name>Fanex.Athena.Module.Dashboard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Module\Fanex.Athena.Module.PlayerAdmin.Api\Fanex.Athena.Module.PlayerAdmin.Api.csproj">
+      <Project>{831ffa8d-8f5e-4abd-ac6a-5660b71b1795}</Project>
+      <Name>Fanex.Athena.Module.PlayerAdmin.Api</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Module\Fanex.Athena.Module.PlayerAdmin\Fanex.Athena.Module.PlayerAdmin.csproj">
+      <Project>{19150cd4-08fc-4bec-800a-57abd7744c41}</Project>
+      <Name>Fanex.Athena.Module.PlayerAdmin</Name>
     </ProjectReference>
     <ProjectReference Include="..\Resources\Fanex.Athena.Resources\Fanex.Athena.Resources.csproj">
       <Project>{17b0022c-4902-4c61-908a-5db81568dc3a}</Project>
