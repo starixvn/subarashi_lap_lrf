@@ -33,12 +33,6 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api
                 return CreateUpdatingBaResult(false, ViewResources.NotAllowBA);
             }
 
-            return new
-            {
-                param = metaModel,
-                productAccess.IsAllowBA
-            };
-
             var updateResult = _playerBaStatusService.Update(metaModel);
 
             if (updateResult.IsSuccessful)

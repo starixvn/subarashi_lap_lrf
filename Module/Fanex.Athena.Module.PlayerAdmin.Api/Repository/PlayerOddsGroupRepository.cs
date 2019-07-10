@@ -9,15 +9,16 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Repository
     {
         public IResultInfo Update(OddsGroupUpdatingMetaModel metaModel)
         {
-            const string UspName = "Lrf_CustomerUpdOddsGroup";
+            const string UspName = "Lrf_CustomerUpdUgroup";
 
             using (var db = this.GetObjectDb(UspName))
             {
-                db.SetParameterValue("custid", metaModel.CustId);
-                db.SetParameterValue("userid", metaModel.UserId);
-                db.SetParameterValue("oddsgroup", metaModel.OddsGroup);
-                db.SetParameterValue("ip", metaModel.Ip);
-                db.SetParameterValue("langkey", metaModel.Language);
+                db.SetParameterValue("UserId", metaModel.UserId);
+                db.SetParameterValue("CustId", metaModel.CustId);
+                db.SetParameterValue("OddsGroup", metaModel.OddsGroup);
+                db.SetParameterValue("IP", metaModel.Ip);
+                db.SetParameterValue("Langkey", metaModel.Language);
+
                 AddResultParam(db);
                 db.ExecuteNonQuery();
 
