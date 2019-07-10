@@ -1,6 +1,6 @@
 ﻿namespace Fanex.Athena.Module.PlayerAdmin.Api.MetaModel
 {
-    public class SearchPlayerByUserNameMetaModel : PlayerAdminBaseMetaModel
+    public class PlayerSearchingMetaModel : PlayerListBaseMetaModel
     {
         public byte SearchOption { get; set; }
 

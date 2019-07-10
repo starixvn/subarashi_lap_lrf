@@ -3,8 +3,8 @@ using Fanex.Athena.Module.PlayerAdmin.Api.ViewModels;
 
 namespace Fanex.Athena.Module.PlayerAdmin.Api.Services.Interfaces
 {
-    public interface IPlayerListQueryService
+    public interface IPlayerListService
     {
-        PlayerQueryResultViewModel SearchPlayerByUserName(SearchPlayerByUserNameMetaModel searchParam);
+        PlayerListResultViewModel Search(PlayerSearchingMetaModel searchParam);
     }
 }

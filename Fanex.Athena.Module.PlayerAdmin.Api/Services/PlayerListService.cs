@@ -9,19 +9,19 @@ using System.Collections.Generic;
 
 namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
 {
-    public class PlayerListQueryService : IPlayerListQueryService
+    public class PlayerListService : IPlayerListService
     {
         private readonly IDbFactory _dbFactory;
 
-        public PlayerListQueryService(IDbFactory dbFactory)
+        public PlayerListService(IDbFactory dbFactory)
         {
             _dbFactory = dbFactory;
         }
 
-        public PlayerQueryResultViewModel SearchPlayerByUserName(SearchPlayerByUserNameMetaModel searchParam)
+        public PlayerListResultViewModel Search(PlayerSearchingMetaModel searchParam)
         {
             const string SpKey = "Lrf_CustomerSelByUsername";
-            var result = new PlayerQueryResultViewModel();
+            var result = new PlayerListResultViewModel();
 
             using (var objectDb = _dbFactory.GetObjectDb(SpKey))
             {
@@ -34,7 +34,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
             return result;
         }
 
-        private static void AssignParamByUserName(IObjectDb objectDb, SearchPlayerByUserNameMetaModel searchParam)
+        private static void AssignParamByUserName(IObjectDb objectDb, PlayerSearchingMetaModel searchParam)
         {
             objectDb.SetParameterValue("LicenseeId", searchParam.LicenseeId);
             objectDb.SetParameterValue("UserName", searchParam.UserName);

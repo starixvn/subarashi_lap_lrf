@@ -1,6 +1,6 @@
 ﻿namespace Fanex.Athena.Module.PlayerAdmin.Api.MetaModel
 {
-    public class PlayerListCommandBaseDbParam
+    public class PlayerUpdatingBaseMetaModel
     {
         public int LicenseeId { get; set; }
 
@@ -11,7 +11,5 @@
         public string Ip { get; set; }
 
         public string Language { get; set; }
-
-        public string AgentListXml { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Fanex.Athena.Module.PlayerAdmin.Api.MetaModel
 {
-    public class UpdateSpecialLevelMetaModel : PlayerListCommandBaseDbParam
+    public class SpecialLevelUpdatingMetaModel : PlayerUpdatingBaseMetaModel
     {
         public byte SpecialLevel { get; set; }
     }

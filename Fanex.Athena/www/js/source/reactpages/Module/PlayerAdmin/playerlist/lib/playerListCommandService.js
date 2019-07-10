@@ -2,9 +2,9 @@ import FactoryCommonService from '../../../lib/factoryCommonService';
 import { systemType } from '../../../constants/configInfo';
 
 const apiInfo = {
-    updateBaStatus: { action: 'api/PlayerListCommand/UpdateBaStatus', type: systemType.lrf },
-    updateOddsGroup: { action: 'api/PlayerListCommand/UpdateOddsGroup', type: systemType.lrf },
-    updateSpecialLevel: { action: 'api/PlayerListCommand/UpdateSpecialLevel', type: systemType.lrf }
+    updateBaStatus: { action: 'api/PlayerBaStatus/Update', type: systemType.lrf },
+    updateOddsGroup: { action: 'api/PlayerOddsGroup/Update', type: systemType.lrf },
+    updateSpecialLevel: { action: 'api/PlayerSpecialLevel/Update', type: systemType.lrf }
 }
 
 export default class PlayerListCommandService {

@@ -11,12 +11,12 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Api
     [TestFixture]
     public class PlayerListControllerTest
     {
-        private IPlayerListQueryService _playerListService;
+        private IPlayerListService _playerListService;
 
         [OneTimeSetUp]
         public void Setup()
         {
-            _playerListService = Substitute.For<IPlayerListQueryService>();
+            _playerListService = Substitute.For<IPlayerListService>();
         }
 
         [OneTimeTearDown]
@@ -29,14 +29,14 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Api
         public void Search_WhenCall_AssignParamValueCorrectly()
         {
             // Arrange
-            var searchParam = new SearchPlayerByUserNameMetaModel
+            var searchParam = new PlayerSearchingMetaModel
             {
                 UserName = "Test",
                 AgentListXml = "4"
             };
 
-            var expectedReturnedData = new PlayerQueryResultViewModel();
-            _playerListService.SearchPlayerByUserName(searchParam).Returns(expectedReturnedData);
+            var expectedReturnedData = new PlayerListResultViewModel();
+            _playerListService.Search(searchParam).Returns(expectedReturnedData);
 
             using (var controller = CreateController())
             {
@@ -48,11 +48,11 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Api
             }
         }
 
-        private PlayerListQueryController CreateController()
+        private PlayerListController CreateController()
         {
             var actionContext = ExternalApiHelper.CreateMockActionContext();
 
-            return new PlayerListQueryController(_playerListService)
+            return new PlayerListController(_playerListService)
             {
                 ActionContext = actionContext
             };

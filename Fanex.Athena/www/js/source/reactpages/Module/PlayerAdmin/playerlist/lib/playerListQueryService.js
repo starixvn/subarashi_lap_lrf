@@ -3,7 +3,7 @@ import { systemType } from '../../../constants/configInfo';
 import ReportExcel from './reportExcel';
 
 const apiInfo = {
-    lrfPlayerList: { action: 'api/PlayerListQuery/Search', type: systemType.lrf },
+    lrfPlayerList: { action: 'api/PlayerList/Search', type: systemType.lrf },
     lapPlayerList: { action: 'PlayerAdminContainer/Search', type: systemType.newAdmin }
 }
 

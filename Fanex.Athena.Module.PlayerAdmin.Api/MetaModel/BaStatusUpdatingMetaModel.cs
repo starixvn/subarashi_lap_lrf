@@ -1,6 +1,6 @@
 ﻿namespace Fanex.Athena.Module.PlayerAdmin.Api.MetaModel
 {
-    public class UpdateBaStatusMetaModel : PlayerListCommandBaseDbParam
+    public class BaStatusUpdatingMetaModel : PlayerUpdatingBaseMetaModel
     {
         public bool IsBa { get; set; }
     }

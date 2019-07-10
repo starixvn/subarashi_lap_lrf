@@ -7,30 +7,30 @@ using System.Web.Http;
 
 namespace Fanex.Athena.Module.PlayerAdmin.Api
 {
-    public class PlayerListQueryController : ExternalApiBaseController
+    public class PlayerListController : ExternalApiBaseController
     {
-        private readonly IPlayerListQueryService _playerListService;
+        private readonly IPlayerListService _playerListService;
 
-        public PlayerListQueryController(IPlayerListQueryService playerListService)
+        public PlayerListController(IPlayerListService playerListService)
         {
             _playerListService = playerListService;
         }
 
         [HttpPost]
-        public PlayerQueryResultViewModel Search(SearchPlayerByUserNameMetaModel searchParam)
+        public PlayerListResultViewModel Search(PlayerSearchingMetaModel searchParam)
         {
             var isValidCurrency = CurrencyValidator.IsValid(AllowedCurrencyIdList, searchParam.Currency);
             if (!isValidCurrency)
             {
-                return new PlayerQueryResultViewModel();
+                return new PlayerListResultViewModel();
             }
 
-            AssignSearchByUserNameParam(searchParam);
+            AssignParam(searchParam);
 
-            return _playerListService.SearchPlayerByUserName(searchParam);
+            return _playerListService.Search(searchParam);
         }
 
-        private void AssignSearchByUserNameParam(SearchPlayerByUserNameMetaModel searchParam)
+        private void AssignParam(PlayerSearchingMetaModel searchParam)
         {
             searchParam.LicenseeId = LicenseeId;
             searchParam.AgentListXml = BuildAgentListXml(searchParam.Currency?.Trim());

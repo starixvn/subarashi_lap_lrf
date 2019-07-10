@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Fanex.Athena.Module.PlayerAdmin.Api.ViewModels
 {
-    public class PlayerQueryResultViewModel
+    public class PlayerListResultViewModel
     {
         public IEnumerable<Player> DataList { get; set; }
 

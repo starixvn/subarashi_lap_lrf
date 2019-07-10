@@ -1,6 +1,6 @@
 ﻿namespace Fanex.Athena.Module.PlayerAdmin.Api.MetaModel
 {
-    public class UpdateOddsGroupMetaModel : PlayerListCommandBaseDbParam
+    public class OddsGroupUpdatingMetaModel : PlayerUpdatingBaseMetaModel
     {
         public string OddsGroup { get; set; }
     }
