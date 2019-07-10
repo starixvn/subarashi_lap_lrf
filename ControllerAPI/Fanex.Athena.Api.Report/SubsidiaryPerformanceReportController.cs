@@ -8,7 +8,6 @@
     using Base.Attributes;
     using Model.Core.DataDomain;
     using Fanex.Athena.Resources;
-    using Model.Core.DataDomain;
     using Model.Report.DTO.SubsidiaryPerformance;
     using Model.Report.MetaModel;
     using Service.Core.Common.Interfaces;

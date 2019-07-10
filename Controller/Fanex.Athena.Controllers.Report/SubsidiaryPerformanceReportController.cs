@@ -1,11 +1,9 @@
 ﻿namespace Fanex.Athena.Controllers.Report
 {
     using System.Linq;
-    using System.Threading.Tasks;
     using System.Web.Mvc;
     using Model.Core.DataDomain;
     using Extension.Utility;
-    using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using Model.Core.MetaModel.Product;
     using Model.Report.ViewModel;

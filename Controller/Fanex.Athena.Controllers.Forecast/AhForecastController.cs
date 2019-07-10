@@ -12,7 +12,6 @@ namespace Fanex.Athena.Controllers.Forecast
     using System.Web.Mvc;
     using Model.Core.DataDomain;
     using Extension.Utility;
-    using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Forecast.DTO.ForecastAH;
     using Model.Forecast.MetaModel;
     using Model.Forecast.ViewModel;

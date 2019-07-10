@@ -7,14 +7,12 @@
     using DataAccess.Report.Interfaces;
     using Excel.Report;
     using Excel.Report.Helpers;
-    using Model.Core.DataDomain;
     using Model.Core.ResultModel;
     using Model.Report;
     using Model.Report.MetaModel;
     using Resources;
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-    using VendorAdapter.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
 
     [ApiFunctionAuthorization(PermissionKeys.ReportLicenseeWinLoss, PermissionKeys.ReportCustomerWinLoss)]

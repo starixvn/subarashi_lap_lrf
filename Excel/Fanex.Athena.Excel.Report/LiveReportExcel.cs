@@ -12,7 +12,6 @@ namespace Fanex.Athena.Excel.Report
     using Base.Entities;
     using Model.Core.DataDomain;
     using Fanex.Athena.Excel.Base.Extension;
-    using Fanex.Athena.Model.Core.DataDomain;
     using Helpers;
     using Model.Report.DTO.LiveReports;
     using Model.Report.ViewModel.LiveReports;

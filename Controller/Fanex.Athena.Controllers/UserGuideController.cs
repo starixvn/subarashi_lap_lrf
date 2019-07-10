@@ -10,17 +10,14 @@ namespace Fanex.Athena.Controllers
     using System.IO;
     using System.Linq;
     using System.Text.RegularExpressions;
-    using System.Threading.Tasks;
     using System.Web.Mvc;
     using System.Web.SessionState;
     using Model.Core.DataDomain;
     using DataAccess.Core.Configuration.Interfaces;
     using Extension.Utility;
     using Extension.Utility.Interfaces;
-    using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using ONEbook.UM.Filters;
-    using Resources;
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
     using Web.ActionFilter;

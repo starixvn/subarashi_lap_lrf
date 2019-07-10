@@ -16,7 +16,6 @@ namespace Fanex.Athena.Service.BetSettings
     using DataAccess.Core.Common.Interfaces;
     using Extension.Utility;
     using Fanex.Athena.Extension.Helpers;
-    using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Interfaces;
     using Logging;

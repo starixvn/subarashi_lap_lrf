@@ -2,13 +2,11 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using System.Threading.Tasks;
     using System.Web.Mvc;
     using Model.Core.DataDomain;
     using DataAccess.Core.Configuration.Interfaces;
     using Extension.Utility;
     using Model.BetList.ViewModel;
-    using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using Model.Core.MetaModel.Product;
     using Resources;

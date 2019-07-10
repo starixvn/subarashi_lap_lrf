@@ -6,7 +6,6 @@
     using System.Web.Mvc;
     using Model.Core.DataDomain;
     using Extension.Utility;
-    using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using Model.Report.ViewModel;
     using Resources;
