@@ -1,18 +1,17 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="MoveBetService.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
+﻿
+namespace Fanex.Athena.Service.StatelessCore
 
-namespace Fanex.Athena.Service.Core.Configuration
 {
     using System;
     using System.Threading.Tasks;
+
     using DataAccess.Core.Configuration.Interfaces;
+
     using Extension.Utility.Interfaces;
+
     using Fanex.Athena.Extension.Helpers;
     using Fanex.Athena.Model.Core.DTO.Configuration;
-    using Fanex.Athena.Service.Core.Configuration.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Logging;
 
     [CLSCompliant(false)]

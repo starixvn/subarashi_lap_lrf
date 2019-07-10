@@ -111,13 +111,11 @@
     <Compile Include="Common\LanguageService.cs" />
     <Compile Include="Common\MatchService.cs" />
     <Compile Include="Common\ProductService.cs" />
-    <Compile Include="Configuration\MoveBetService.cs" />
     <Compile Include="Common\Interfaces\IBetTypeService.cs" />
     <Compile Include="Common\Interfaces\IExChangeRateService.cs" />
     <Compile Include="Common\Interfaces\ILanguageService.cs" />
     <Compile Include="Common\Interfaces\IMatchService.cs" />
     <Compile Include="Common\Interfaces\IProductService.cs" />
-    <Compile Include="Configuration\Interfaces\IMoveBetService.cs" />
     <Compile Include="Users\OneAuthenticationService.cs" />
     <Compile Include="Users\Interfaces\ISessionService.cs" />
     <Compile Include="Users\Interfaces\IUserService.cs" />

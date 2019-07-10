@@ -7,6 +7,7 @@
     using Base.Attributes;
     using Extension.Utility;
     using Fanex.Athena.Api.Base;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Report.MetaModel;
     using Service.Core.Configuration.Interfaces;
     using Service.Report.Interfaces;

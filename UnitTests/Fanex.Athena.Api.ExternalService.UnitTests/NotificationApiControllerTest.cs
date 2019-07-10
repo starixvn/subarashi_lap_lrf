@@ -6,6 +6,7 @@
     using System.Web.Script.Serialization;
     using Extension.Utility;
     using ExternalService;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DTO.Common;
     using Model.Core.ResultModel;
     using Model.Report.DTO;

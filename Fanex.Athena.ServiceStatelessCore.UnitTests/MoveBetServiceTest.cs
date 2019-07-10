@@ -1,15 +1,20 @@
-﻿namespace Fanex.Athena.Service.Core.UnitTests.Configuration
+﻿namespace Fanex.Athena.ServiceStatelessCore.UnitTests
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Core.Configuration;
-    using Core.Configuration.Interfaces;
-    using Core.Utility.Interfaces;
+
     using DataAccess.Core.Configuration.Interfaces;
+
     using Extension.Utility.Interfaces;
+
+    using Fanex.Athena.Service.StatelessCore;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Logging;
+
     using Model.Core.DTO.Configuration;
+
     using NSubstitute;
+
     using NUnit.Framework;
 
     [TestFixture]
