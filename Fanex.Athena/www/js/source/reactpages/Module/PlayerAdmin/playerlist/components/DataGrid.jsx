@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { ActionCreators } from '../actions/index.js';
 import { bindActionCreators } from 'redux';
 
+import LangHelper from '@jsroot/lib/langHelper';
 import { gridItemDropdownHeight } from '../lib/constants';
 import { Table } from '@9softstudio/react-grid';
 import ContextMenu from './grid/ContextMenu';
@@ -143,12 +144,24 @@ export class DataGrid extends PureComponent {
     }
 
     handleChangeBaStatus = (custId, checked) => {
+        const resourceName = checked ? 'AlertTurnOnBAMsg' : 'AlertTurnOffBAMsg';
+        const confirmMessage = LangHelper.getSingleResource(resourceName);
+        if (!window.confirm(confirmMessage)) {
+            return;
+        }
+
         const param = {
             custId,
             isBa: checked
         }
         this.props.updateBaStatus(param).then(response => {
-            this.handleChangeUpdatePlayerItem(custId, checked, 'BaStatus');
+            const result = response.data;
+            if (result.Success) {
+                this.handleChangeUpdatePlayerItem(custId, checked, 'BaStatus');
+            }
+            else {
+                window.alert(result.Message);
+            }
         })
     }
 
@@ -160,8 +173,12 @@ export class DataGrid extends PureComponent {
     }
 
     handleChangeOddsGroup = (event, value) => {
-        const { currentActivePlayer } = this.props;
+        const confirmMessage = LangHelper.getSingleResource('AlertSetOddsGroupForCustomerMsg').replace('{0}', value);
+        if (!window.confirm(confirmMessage)) {
+            return;
+        }
 
+        const { currentActivePlayer } = this.props;
         if (currentActivePlayer) {
             const param = {
                 custId: currentActivePlayer.custId,
@@ -169,14 +186,25 @@ export class DataGrid extends PureComponent {
             }
 
             this.props.updateOddsGroup(param).then(response => {
-                this._handleChangeDropdownValue(event, value, 'OddsGroup', this.handleToggleOddsGroup);
+                const result = response.data;
+                if (result.Success) {
+                    this._handleChangeDropdownValue(event, value, 'OddsGroup', this.handleToggleOddsGroup);
+                }
+                else {
+                    window.alert(result.ErrorMessage);
+                }
             })
         }
     }
 
     handleChangeSpecialLevel = (event, value) => {
-        const { currentActivePlayer } = this.props;
+        const resourceName = Number(value) === 0 ? 'AlertRemoveSpecialLevelForCustomerMsg' : 'AlertSetSpecialLevelForCustomerMsg';
+        const confirmMessage = LangHelper.getSingleResource(resourceName);
+        if (!window.confirm(confirmMessage)) {
+            return;
+        }
 
+        const { currentActivePlayer } = this.props;
         if (currentActivePlayer) {
             const param = {
                 custId: currentActivePlayer.custId,
@@ -184,7 +212,13 @@ export class DataGrid extends PureComponent {
             }
 
             this.props.updateSpecialLevel(param).then(response => {
-                this._handleChangeDropdownValue(event, value, 'SpecialLevel', this.handleToggleSpecialLevel);
+                const result = response.data;
+                if (result.Success) {
+                    this._handleChangeDropdownValue(event, value, 'SpecialLevel', this.handleToggleSpecialLevel);
+                }
+                else {
+                    window.alert(result.ErrorMessage);
+                }
             })
         }
     }
@@ -233,11 +267,10 @@ export class DataGrid extends PureComponent {
 }
 
 function mapDispatchToProps(dispatch) {
-    const { setSelectedPlayerIdList, setPlayerList, setCurrentActivePlayer, updateBaStatus, updateOddsGroup, updateSpecialLevel } = ActionCreators;
+    const { setSelectedPlayerIdList, setPlayerList, updateBaStatus, updateOddsGroup, updateSpecialLevel } = ActionCreators;
     return bindActionCreators({
         setSelectedPlayerIdList,
         setPlayerList,
-        setCurrentActivePlayer,
         updateBaStatus,
         updateOddsGroup,
         updateSpecialLevel
