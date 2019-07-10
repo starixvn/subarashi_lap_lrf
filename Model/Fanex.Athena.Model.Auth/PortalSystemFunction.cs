@@ -1,4 +1,4 @@
-﻿namespace Fanex.Athena.Model.Core.DTO
+﻿namespace Fanex.Athena.Model.Auth
 {
     using System;
 
