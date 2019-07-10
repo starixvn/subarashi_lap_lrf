@@ -143,13 +143,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extension", "Extension", "{
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.UnitTest.Common", "Fanex.Athena.UnitTest.Common\Fanex.Athena.UnitTest.Common.csproj", "{4A5BDDBC-F707-409A-86EC-D9BC6E9D31C4}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SonarQube", "SonarQube", "{1C243C8A-3D86-4ED9-92E4-4CF355E8A12C}"
-	ProjectSection(SolutionItems) = preProject
-		SonarQube\LAP.BETLISTCSharp.ruleset = SonarQube\LAP.BETLISTCSharp.ruleset
-		SonarQube\LRFCSharp.ruleset = SonarQube\LRFCSharp.ruleset
-		SonarQube\SolutionBinding.sqconfig = SonarQube\SolutionBinding.sqconfig
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.Excel.Customer.UnitTests", "UnitTests\Fanex.Athena.Excel.Customer.UnitTests\Fanex.Athena.Excel.Customer.UnitTests.csproj", "{D79D96E1-EF34-4D3D-A666-0AAE3086F94F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.Excel.Report.UnitTests", "UnitTests\Fanex.Athena.Excel.Report.UnitTests\Fanex.Athena.Excel.Report.UnitTests.csproj", "{F5AB452D-B484-446D-8718-416F75977B72}"
@@ -1274,8 +1267,8 @@ Global
 		{794C0345-2DDD-4FFD-A605-BB96FBB37DE8} = {FF903E7B-A043-4B69-B750-4830F0E5C58A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {AF850210-126B-4E21-BADB-F5C02AD2CCEE}
-		RESX_ShowErrorsInErrorList = False
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35;packages\Unity.Interception.2.1.505.0\lib\NET35
+		RESX_ShowErrorsInErrorList = False
+		SolutionGuid = {AF850210-126B-4E21-BADB-F5C02AD2CCEE}
 	EndGlobalSection
 EndGlobal
