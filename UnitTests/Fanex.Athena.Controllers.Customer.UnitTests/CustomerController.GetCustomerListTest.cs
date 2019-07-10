@@ -169,7 +169,7 @@
                 AppSettings.FakeLicenseeList.Returns(Enumerable.Empty<int>());
                 _productService.GetProductAccess(Arg.Any<int>(), Arg.Any<string>()).Returns(new ProductAccess(new List<Product>()));
                 StubLicenseeSessionData(DefaultLicenseeSession);
-                SessionService.IsAllowedSpecialBA(DefaultUserSession).Returns(true);
+                _authorizationService.IsAllowedSpecialBA(DefaultUserSession).Returns(true);
 
                 // Action
                 var result = (CustomerListViewModel)(await controller.CustomerList() as ViewResult).Model;
@@ -190,7 +190,7 @@
                 AppSettings.FakeLicenseeList.Returns(Enumerable.Empty<int>());
                 _productService.GetProductAccess(Arg.Any<int>(), Arg.Any<string>()).Returns(new ProductAccess(new List<Product>()));
                 StubLicenseeSessionData(DefaultLicenseeSession);
-                SessionService.IsAllowedSpecialBA(DefaultUserSession).Returns(false);
+                _authorizationService.IsAllowedSpecialBA(DefaultUserSession).Returns(false);
                 _licenseeDataAccess.IsAllowUpdateMemberBAStatus(Arg.Any<Request>(), Arg.Any<int>()).Returns(new ResultInfo<bool>
                 {
                     Message = BaMessage
@@ -214,7 +214,7 @@
                 AppSettings.FakeLicenseeList.Returns(Enumerable.Empty<int>());
                 _productService.GetProductAccess(Arg.Any<int>(), Arg.Any<string>()).Returns(new ProductAccess(new List<Product> { new Product { ProductCode = Product.BA } }));
                 StubLicenseeSessionData(DefaultLicenseeSession);
-                SessionService.IsAllowedSpecialBA(DefaultUserSession).Returns(false);
+                _authorizationService.IsAllowedSpecialBA(DefaultUserSession).Returns(false);
                 _licenseeDataAccess.IsAllowUpdateMemberBAStatus(Arg.Any<Request>(), Arg.Any<int>()).Returns(new ResultInfo<bool>
                 {
                     Message = BaMessage

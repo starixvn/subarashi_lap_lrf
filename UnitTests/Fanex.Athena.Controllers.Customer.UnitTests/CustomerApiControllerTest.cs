@@ -9,6 +9,7 @@
     using DataAccess.Core.Users.Interfaces;
     using Fanex.Athena.Extension.Helpers;
     using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Logging;
     using Model.Core.DTO.Common;
     using Model.Core.ViewModel;
@@ -30,6 +31,7 @@
         private IGroupComService _groupComService;
         private ILicenseeDataAccess _licenseeDataAccess;
         private IProductService _productService;
+        private IAuthorizationService _authorizationService;
 
         [SetUp]
         public override void FixtureSetUp()
@@ -42,6 +44,7 @@
             _groupComService = Substitute.For<IGroupComService>();
             _licenseeDataAccess = Substitute.For<ILicenseeDataAccess>();
             _productService = Substitute.For<IProductService>();
+            _authorizationService = Substitute.For<IAuthorizationService>();
         }
 
         [TearDown]
@@ -362,7 +365,9 @@
                _customerListService,
                _groupComService,
                _licenseeDataAccess,
-               _productService);
+               _productService,
+               _authorizationService
+               );
             controller.ControllerContext = ControllerContext;
             return controller;
         }

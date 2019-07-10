@@ -14,6 +14,7 @@
     [TestFixture]
     public partial class CustomerApiControllerTest : CultureBaseControllerHelperTest
     {
+
         [Test]
         public void UpdateBAStatus_FakeLicensee_ReturnErrorResult()
         {
@@ -50,7 +51,7 @@
                 // Arrange
                 const string ResultMessage = "konnichiwa";
                 bool isAllowBa = true;
-                SessionService.IsAllowedSpecialBA(Arg.Any<UserAuthInfo>()).Returns(false);
+                _authorizationService.IsAllowedSpecialBA(Arg.Any<UserAuthInfo>()).Returns(false);
                 var productAccess = new ProductAccess(new List<Product>
                 {
                     new Product { ProductCode = Product.BA }
@@ -89,7 +90,7 @@
                 const string OddsGroup = "Z";
                 const int CustId = 100;
                 bool isAllowBa = true;
-                SessionService.IsAllowedSpecialBA(Arg.Any<UserAuthInfo>()).Returns(true);
+                _authorizationService.IsAllowedSpecialBA(Arg.Any<UserAuthInfo>()).Returns(true);
                 var productAccess = new ProductAccess(new List<Product>
                 {
                     new Product { ProductCode = Product.BA }

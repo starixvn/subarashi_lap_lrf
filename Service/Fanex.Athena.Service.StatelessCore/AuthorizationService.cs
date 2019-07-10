@@ -11,6 +11,9 @@ namespace Fanex.Athena.Service.StatelessCore
     using System.Diagnostics;
     using System.Linq;
     using Fanex.Athena.DataAccess.Core.Users.Interfaces;
+    using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Model.Auth.Enum;
+    using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Service.Core.Common.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
@@ -38,6 +41,19 @@ namespace Fanex.Athena.Service.StatelessCore
             return userFunctionList.Any(x => permissionKeys.Contains(x, StringComparer.InvariantCultureIgnoreCase));
         }
 
+        public bool IsAllowedEditCommission(UserAuthInfo userAuthInfo)
+        {
+            return userAuthInfo.ApplicationMode == AppMode.Parasitic ?
+                    userAuthInfo.PortalFunctionList != null && userAuthInfo.PortalFunctionList.Any(i => i == PermissionKeys.CustomerInfoCommissionGroupList)
+                    : userAuthInfo.FunctionIdList != null && userAuthInfo.FunctionIdList.Contains((int)FunctionType.CommissionGroupList);
+        }
+
+        public bool IsAllowedSpecialBA(UserAuthInfo userAuthInfo)
+        {
+            return userAuthInfo.ApplicationMode == AppMode.Parasitic ?
+                    userAuthInfo.PortalFunctionList != null && userAuthInfo.PortalFunctionList.Any(i => i == PermissionKeys.CustomerInfoSpecialBA)
+                    : userAuthInfo.FunctionIdList != null && userAuthInfo.FunctionIdList.Contains((int)FunctionType.SpecialBA);
+        }
         [DebuggerStepThrough]
         public bool HasPermissionOnData(int licenseeId, int custId, long transId)
         {

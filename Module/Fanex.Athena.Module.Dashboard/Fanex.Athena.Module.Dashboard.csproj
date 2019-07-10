@@ -116,7 +116,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Fanex.Athena.Module.Dashboard.ruleset" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

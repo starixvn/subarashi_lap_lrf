@@ -7,6 +7,7 @@
     using Excel.Customer;
     using Fanex.Athena.Controllers.Base.UnitTests;
     using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DTO.Common;
     using Model.Core.DTO.Users;
     using Model.Core.ResultModel;
@@ -26,6 +27,7 @@
         private ILicenseeDataAccess _licenseeDataAccess;
         private IProductService _productService;
         private ISubsidiaryService _subsidiaryService;
+        private IAuthorizationService _authorizationService;
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
@@ -37,10 +39,10 @@
             _licenseeDataAccess = Substitute.For<ILicenseeDataAccess>();
             _productService = Substitute.For<IProductService>();
             _subsidiaryService = Substitute.For<ISubsidiaryService>();
-
+            _authorizationService = Substitute.For<IAuthorizationService>();
             AppSettings.GetValue(Arg.Any<string>()).Returns(string.Empty);
-            SessionService.IsAllowedEditCommission(Arg.Any<UserAuthInfo>()).Returns(false);
-            SessionService.IsAllowedSpecialBA(Arg.Any<UserAuthInfo>()).Returns(true);
+            _authorizationService.IsAllowedEditCommission(Arg.Any<UserAuthInfo>()).Returns(false);
+            _authorizationService.IsAllowedSpecialBA(Arg.Any<UserAuthInfo>()).Returns(true);
 
             _groupComService.GetAll(Arg.Any<int>()).Returns(new List<GroupCommMetaModel>());
             _groupComService.GetById(Arg.Any<int>(), Arg.Any<int>()).Returns(new GroupCommMetaModel());
@@ -160,8 +162,8 @@
                 controller.Server.MapPath(Arg.Any<string>()).Returns(Path);
                 StubLicenseeSessionData(DefaultLicenseeSession);
                 _productService.GetProductAccess(Arg.Any<int>(), Arg.Any<string>()).Returns(new ProductAccess(new List<Product>()));
-                SessionService.IsAllowedEditCommission(DefaultUserSession).Returns(false);
-                SessionService.IsAllowedSpecialBA(DefaultUserSession).Returns(false);
+                _authorizationService.IsAllowedEditCommission(DefaultUserSession).Returns(false);
+                _authorizationService.IsAllowedSpecialBA(DefaultUserSession).Returns(false);
                 _customerListService.GetActiveCustomers(Arg.Any<CustomerListMetaModel>()).Returns(new ReportResultModel<CustomerDTO>
                 {
                     DataList = new List<CustomerDTO>(),
@@ -207,7 +209,8 @@
                 _groupComService,
                 _licenseeDataAccess,
                 _productService,
-                _subsidiaryService);
+                _subsidiaryService,
+                _authorizationService);
             controller.ControllerContext = ControllerContext;
 
             return controller;

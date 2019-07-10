@@ -40,10 +40,6 @@ namespace Fanex.Athena.Service.Core.Users.Interfaces
 
         string GenerateAgentListXml(IEnumerable<int> currencyIdList, bool isExcludeTestData = false);
 
-        bool IsAllowedEditCommission(UserAuthInfo user);
-
-        bool IsAllowedSpecialBA(UserAuthInfo user);
-
         string GenerateAgentListXml(IDictionary<int, IEnumerable<int>> currencyAgentList);
 
         void AssignCurrenciesToUserSession(UserAuthInfo userSession, int licenseeId, IEnumerable<CurrencyUser> currencyUserList = null);

@@ -9,28 +9,34 @@ namespace Fanex.Athena.Controllers.Customer
     #region Using
 
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Net;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using System.Web.SessionState;
+
     using DataAccess.Core.Users.Interfaces;
+
     using Extension.Utility;
+
     using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Extension.Helpers;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Customer.MetaModel;
     using Fanex.Athena.Service.Core.Common.Interfaces;
     using Fanex.Athena.Service.Customer.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
     using Fanex.Logging;
+
     using Model.Core.DataDomain;
     using Model.Core.ViewModel;
+
     using ONEbook.UM.Filters;
+
     using Resources;
+
     using Service.Core.Users.Interfaces;
-    using Service.Core.Utility.Interfaces;
     using Service.Customer.Helpers;
 
     #endregion Using
@@ -48,7 +54,7 @@ namespace Fanex.Athena.Controllers.Customer
         private readonly IGroupComService _groupComService;
         private readonly ILicenseeDataAccess _licenseeDataAccess;
         private readonly IProductService _productService;
-
+        private readonly IAuthorizationService _authorizationService;
         #region Constructor
 
 #pragma warning disable S107 // Methods should not have too many parameters
@@ -62,7 +68,8 @@ namespace Fanex.Athena.Controllers.Customer
             ICustomerListService customerListService,
             IGroupComService groupComService,
             ILicenseeDataAccess licenseeDataAccess,
-            IProductService productService)
+            IProductService productService,
+            IAuthorizationService authorizationService)
 #pragma warning restore S107 // Methods should not have too many parameters
             : base(languageService, sessionService, appSetting)
         {
@@ -72,6 +79,7 @@ namespace Fanex.Athena.Controllers.Customer
             _customerListService = customerListService;
             _groupComService = groupComService;
             _productService = productService;
+            _authorizationService = authorizationService;
         }
 
         #endregion Constructor
@@ -245,7 +253,7 @@ namespace Fanex.Athena.Controllers.Customer
                 Ip = Request.UserHostAddress
             };
 
-            var specialBaPermission = SessionService.IsAllowedSpecialBA(userSession);
+            var specialBaPermission = _authorizationService.IsAllowedSpecialBA(userSession);
             if (!specialBaPermission)
             {
                 var isAllowUpdateBaResult = _licenseeDataAccess.IsAllowUpdateMemberBAStatus(request, licenseeSession.LicenseeId);

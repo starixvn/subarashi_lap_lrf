@@ -153,20 +153,6 @@ namespace Fanex.Athena.Service.Core.Users
             return false;
         }
 
-        public bool IsAllowedEditCommission(UserAuthInfo user)
-        {
-            return user.ApplicationMode == AppMode.Parasitic ?
-                    user.PortalFunctionList != null && user.PortalFunctionList.Any(i => i == PermissionKeys.CustomerInfoCommissionGroupList)
-                    : user.FunctionIdList != null && user.FunctionIdList.Contains((int)FunctionType.CommissionGroupList);
-        }
-
-        public bool IsAllowedSpecialBA(UserAuthInfo user)
-        {
-            return user.ApplicationMode == AppMode.Parasitic ?
-                    user.PortalFunctionList != null && user.PortalFunctionList.Any(i => i == PermissionKeys.CustomerInfoSpecialBA)
-                    : user.FunctionIdList != null && user.FunctionIdList.Contains((int)FunctionType.SpecialBA);
-        }
-
         public string GenerateAgentListXml(int currencyId = 0, bool isExcludeTestData = false)
         {
             return GenerateAgentListXml(new[] { currencyId < 0 ? 0 : currencyId }, isExcludeTestData);

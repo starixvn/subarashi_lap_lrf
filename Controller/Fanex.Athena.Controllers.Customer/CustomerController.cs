@@ -24,12 +24,12 @@ namespace Fanex.Athena.Controllers.Customer
     using Fanex.Athena.Service.Customer.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
     using Fanex.Athena.Web.ResultExtension;
-    using Model.Core.DataDomain;
     using Model.Customer.DTO;
     using Newtonsoft.Json;
     using Resources;
     using Service.Core.Users.Interfaces;
     using Service.Report.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     [FunctionAuthorization(PermissionKeys.CustomerInfoCustomerList)]
     public class CustomerController : ContentBaseController
@@ -63,6 +63,7 @@ namespace Fanex.Athena.Controllers.Customer
         private readonly ILicenseeDataAccess _licenseeDataAccess;
         private readonly IProductService _productService;
         private readonly ISubsidiaryService _subsidiaryService;
+        private readonly IAuthorizationService _authorizationService;
 
 #pragma warning disable S107 // Methods should not have too many parameters
 
@@ -74,7 +75,9 @@ namespace Fanex.Athena.Controllers.Customer
             IGroupComService groupComService,
             ILicenseeDataAccess licenseeDataAccess,
             IProductService productService,
-            ISubsidiaryService subsidiaryService)
+            ISubsidiaryService subsidiaryService,
+            IAuthorizationService authorizationService
+            )
 #pragma warning restore S107 // Methods should not have too many parameters
             : base(languageService, sessionService, appSetting)
         {
@@ -83,6 +86,7 @@ namespace Fanex.Athena.Controllers.Customer
             _licenseeDataAccess = licenseeDataAccess;
             _productService = productService;
             _subsidiaryService = subsidiaryService;
+            _authorizationService = authorizationService;
         }
 
         #region Action
@@ -303,8 +307,8 @@ namespace Fanex.Athena.Controllers.Customer
                 Param = metaModel,
                 CurrencyList = userSession.CurrencyList,
                 ProductAccess = this._productService.GetProductAccess(licenseeSession.LicenseeId, userSession.Language),
-                IsAllowedUserEditComm = SessionService.IsAllowedEditCommission(userSession),
-                IsAllowedUserChangeBA = SessionService.IsAllowedSpecialBA(userSession),
+                IsAllowedUserEditComm = _authorizationService.IsAllowedEditCommission(userSession),
+                IsAllowedUserChangeBA = _authorizationService.IsAllowedSpecialBA(userSession),
                 IsAllowedCustomerCommission = licenseeSession.IsAllowedCustomerComm,
                 IsFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeId),
                 IsSubsidiary = isSubsidiary,
@@ -346,7 +350,7 @@ namespace Fanex.Athena.Controllers.Customer
         {
             var licenseeSession = SessionService.LicenseeSession;
             var userSession = SessionService.UserSession;
-            var specialBaPermission = SessionService.IsAllowedSpecialBA(userSession);
+            var specialBaPermission = _authorizationService.IsAllowedSpecialBA(userSession);
             var productAccess = _productService.GetProductAccess(licenseeSession.LicenseeId, userSession.Language);
             var request = new Request
             {
