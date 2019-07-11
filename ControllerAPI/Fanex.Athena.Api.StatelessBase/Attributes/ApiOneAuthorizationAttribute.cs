@@ -1,4 +1,13 @@
-﻿using System;
+﻿using Fanex.Athena.Api.StatelessBase.Attributes.Extensions;
+using Fanex.Athena.DataAccess.Core.Users.Interfaces;
+using Fanex.Athena.Model.Auth;
+using Fanex.Athena.Resources;
+using Fanex.Athena.Service.StatelessCore.Interfaces;
+using Fanex.Logging;
+
+using ONEbook.UM.Services;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -8,15 +17,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
-
-using Fanex.Athena.Api.Base.Attributes.Extensions;
-using Fanex.Athena.DataAccess.Core.Users.Interfaces;
-using Fanex.Athena.Model.Auth;
-using Fanex.Athena.Resources;
-using Fanex.Athena.Service.StatelessCore.Interfaces;
-using Fanex.Logging;
-
-using ONEbook.UM.Services;
 
 namespace Fanex.Athena.Api.Base.Attributes
 {

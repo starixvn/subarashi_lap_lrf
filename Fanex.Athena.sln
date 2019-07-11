@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29009.5
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.757
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service", "Service", "{195AD258-DE51-497C-BA3B-1645AE32CAB6}"
 EndProject
@@ -198,6 +198,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.Model.Auth", "Model\Fanex.Athena.Model.Auth\Fanex.Athena.Model.Auth.csproj", "{794C0345-2DDD-4FFD-A605-BB96FBB37DE8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.Module.PlayerAdmin.Api.UnitTests", "UnitTests\Fanex.Athena.Module.PlayerAdmin.Api.UnitTests\Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.csproj", "{FAB9270F-18C7-4B35-BEC0-EF0C24FAD514}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.Api.StatelessBase", "ControllerAPI\Fanex.Athena.Api.StatelessBase\Fanex.Athena.Api.StatelessBase.csproj", "{0054161C-59B0-4CB6-AC5F-4E0F0D0294EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.Api.StatelessBase.UnitTests", "UnitTests\Fanex.Athena.Api.StatelessBase.UnitTests\Fanex.Athena.Api.StatelessBase.UnitTests.csproj", "{B4CC52C8-F566-4DD4-BA89-A9D46439D2DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1159,6 +1163,30 @@ Global
 		{FAB9270F-18C7-4B35-BEC0-EF0C24FAD514}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{FAB9270F-18C7-4B35-BEC0-EF0C24FAD514}.Release|x86.ActiveCfg = Release|Any CPU
 		{FAB9270F-18C7-4B35-BEC0-EF0C24FAD514}.Release|x86.Build.0 = Release|Any CPU
+		{0054161C-59B0-4CB6-AC5F-4E0F0D0294EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0054161C-59B0-4CB6-AC5F-4E0F0D0294EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0054161C-59B0-4CB6-AC5F-4E0F0D0294EC}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{0054161C-59B0-4CB6-AC5F-4E0F0D0294EC}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{0054161C-59B0-4CB6-AC5F-4E0F0D0294EC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0054161C-59B0-4CB6-AC5F-4E0F0D0294EC}.Debug|x86.Build.0 = Debug|Any CPU
+		{0054161C-59B0-4CB6-AC5F-4E0F0D0294EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0054161C-59B0-4CB6-AC5F-4E0F0D0294EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0054161C-59B0-4CB6-AC5F-4E0F0D0294EC}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{0054161C-59B0-4CB6-AC5F-4E0F0D0294EC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{0054161C-59B0-4CB6-AC5F-4E0F0D0294EC}.Release|x86.ActiveCfg = Release|Any CPU
+		{0054161C-59B0-4CB6-AC5F-4E0F0D0294EC}.Release|x86.Build.0 = Release|Any CPU
+		{B4CC52C8-F566-4DD4-BA89-A9D46439D2DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4CC52C8-F566-4DD4-BA89-A9D46439D2DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4CC52C8-F566-4DD4-BA89-A9D46439D2DC}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{B4CC52C8-F566-4DD4-BA89-A9D46439D2DC}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{B4CC52C8-F566-4DD4-BA89-A9D46439D2DC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B4CC52C8-F566-4DD4-BA89-A9D46439D2DC}.Debug|x86.Build.0 = Debug|Any CPU
+		{B4CC52C8-F566-4DD4-BA89-A9D46439D2DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4CC52C8-F566-4DD4-BA89-A9D46439D2DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4CC52C8-F566-4DD4-BA89-A9D46439D2DC}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{B4CC52C8-F566-4DD4-BA89-A9D46439D2DC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{B4CC52C8-F566-4DD4-BA89-A9D46439D2DC}.Release|x86.ActiveCfg = Release|Any CPU
+		{B4CC52C8-F566-4DD4-BA89-A9D46439D2DC}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1250,10 +1278,12 @@ Global
 		{C929C398-8094-44E6-AEB1-63BDBD58F973} = {8A922757-8C4B-44C0-9D3E-9B68E6AE956B}
 		{794C0345-2DDD-4FFD-A605-BB96FBB37DE8} = {FF903E7B-A043-4B69-B750-4830F0E5C58A}
 		{FAB9270F-18C7-4B35-BEC0-EF0C24FAD514} = {1F82F1FE-8794-4B76-AC02-E6BD6741729E}
+		{0054161C-59B0-4CB6-AC5F-4E0F0D0294EC} = {4D6B663E-04A8-4993-B33F-A445428FA349}
+		{B4CC52C8-F566-4DD4-BA89-A9D46439D2DC} = {8124F11D-CD42-4473-AE75-80290172BE0A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35;packages\Unity.Interception.2.1.505.0\lib\NET35
-		RESX_ShowErrorsInErrorList = False
 		SolutionGuid = {AF850210-126B-4E21-BADB-F5C02AD2CCEE}
+		RESX_ShowErrorsInErrorList = False
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35;packages\Unity.Interception.2.1.505.0\lib\NET35
 	EndGlobalSection
 EndGlobal

@@ -1,4 +1,4 @@
-﻿namespace Fanex.Athena.Api.Base.Logger
+﻿namespace Fanex.Athena.Api.StatelessBase.Logger
 {
     using System;
     using System.Web.Http.ExceptionHandling;

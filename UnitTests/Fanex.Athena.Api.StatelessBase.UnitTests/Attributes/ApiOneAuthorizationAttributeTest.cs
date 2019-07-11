@@ -1,29 +1,22 @@
-﻿namespace Fanex.Athena.Api.Base.Attributes.UnitTests
+﻿namespace Fanex.Athena.Api.StatelessBase.UnitTests.Attributes.UnitTests
 {
+    using Autofac;
+    using DataAccess.Core.Users.Interfaces;
+    using Fanex.Athena.Api.Base.Attributes;
+    using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.UnitTest.Common.Helpers;
+    using Fanex.Logging;
+
+    using NSubstitute;
+    using NUnit.Framework;
+    using ONEbook.UM.Services;
+
     using System;
     using System.Net;
     using System.Threading;
     using System.Web.Http.Controllers;
-
-    using Attributes;
-
-    using Autofac;
-
-    using DataAccess.Core.Users.Interfaces;
-    using Fanex.Athena.Model.Auth;
-    using Fanex.Logging;
-
-    using Model.Core.DTO.Common;
-
-    using NSubstitute;
-
-    using NUnit.Framework;
-
-    using ONEbook.UM.Services;
-
-    using Service.Core.Users.Interfaces;
-
-    using UnitTest.Common.Helpers;
 
     public class ApiOneAuthorizationAttributeTest
     {
@@ -33,7 +26,7 @@
 
         private ILogger _logger;
 
-        private IOneAuthenticationService _oneAuthenticationService;
+        private IOneBookSecurityWrapper _oneAuthenticationService;
 
         private ILicenseeDataAccess _licenseeDataAccess;
 
@@ -43,7 +36,7 @@
         public void SetUp()
         {
             _logger = Substitute.For<ILogger>();
-            _oneAuthenticationService = Substitute.For<IOneAuthenticationService>();
+            _oneAuthenticationService = Substitute.For<IOneBookSecurityWrapper>();
             _licenseeDataAccess = Substitute.For<ILicenseeDataAccess>();
             _maintenanceService = Substitute.For<IMaintenanceService>();
         }
@@ -75,7 +68,7 @@
             // Assert
             Assert.Multiple(() =>
             {
-                _oneAuthenticationService.Received(1).GetTokenInfo(TokenValue);
+                _oneAuthenticationService.Received(1).Authenticate(TokenValue);
                 Assert.That(result.Result.StatusCode, Is.EqualTo(HttpStatusCode.Forbidden));
             });
         }
@@ -91,7 +84,7 @@
                 UserSEQ = 1,
                 SiteName = "spondemo"
             };
-            _oneAuthenticationService.GetTokenInfo(TokenValue).Returns(token);
+            _oneAuthenticationService.Authenticate(TokenValue).Returns(token);
 
             // Action
             var result = attribute.ExecuteAuthorizationFilterAsync(actionContext, new CancellationToken(), null);
@@ -117,7 +110,7 @@
                 Currency = new[] { new OneAuthCurrency { CurrencyId = 123 } },
                 UserID = "badman"
             };
-            _oneAuthenticationService.GetTokenInfo(TokenValue).Returns(token);
+            _oneAuthenticationService.Authenticate(TokenValue).Returns(token);
             var licensee = new Licensee { Id = 999 };
             _licenseeDataAccess.GetLicenseeByName(token.SiteName).Returns(licensee);
 
@@ -143,7 +136,7 @@
             var attribute = new ApiOneAuthorizationAttribute();
             var actionContext = CreateActionContext(hasAuthToken: true);
 
-            _oneAuthenticationService.When(x => x.GetTokenInfo(TokenValue)).Throw(exception);
+            _oneAuthenticationService.When(x => x.Authenticate(TokenValue)).Throw(exception);
 
             // Action
             attribute.ExecuteAuthorizationFilterAsync(actionContext, new CancellationToken(), null);

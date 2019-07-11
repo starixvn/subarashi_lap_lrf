@@ -4,8 +4,7 @@ using Autofac.Integration.Mvc;
 using Autofac.Integration.WebApi;
 
 using CitiXchangeLibrary;
-
-using Fanex.Athena.Api.Base.Logger;
+using Fanex.Athena.Api.StatelessBase.Logger;
 using Fanex.Athena.DataAccess.Report;
 using Fanex.Athena.DataAccess.Report.Interfaces;
 using Fanex.Athena.Extension.Utility.Internal;
@@ -13,6 +12,7 @@ using Fanex.Logging;
 
 using ONEbook.UM.Services;
 using ONEbook.UM.Services.Impl;
+
 using System;
 using System.Configuration;
 using System.Linq;

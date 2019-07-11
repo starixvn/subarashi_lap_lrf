@@ -1,4 +1,4 @@
-﻿using Fanex.Athena.Api.Base;
+﻿using Fanex.Athena.Api.StatelessBase;
 using System;
 using System.Collections.Generic;
 using System.Linq;

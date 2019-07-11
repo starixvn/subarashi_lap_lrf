@@ -5,12 +5,13 @@
 // -----------------------------------------------------------------------
 namespace Fanex.Athena.Api.Base.Attributes
 {
+    using Fanex.Athena.Api.StatelessBase.Attributes.Extensions;
+    using Fanex.Athena.Service.Core.Users.Interfaces;
+
     using System;
     using System.Net;
     using System.Net.Http;
     using System.Web.Http;
-    using Extensions;
-    using Fanex.Athena.Service.Core.Users.Interfaces;
 
     [AttributeUsage(AttributeTargets.All)]
     public sealed class CustomApiAuthorizeAttribute : AuthorizeAttribute

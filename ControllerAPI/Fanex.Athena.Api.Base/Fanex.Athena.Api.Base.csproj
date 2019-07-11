@@ -48,9 +48,8 @@
     <CodeAnalysisRuleSet>Fanex.Athena.Api.Base.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Fanex.Logging, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Fanex.Logging.2.0.0\lib\net461\Fanex.Logging.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Fanex.Logging, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Fanex.Logging.2.0.1\lib\net461\Fanex.Logging.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib, Version=1.0.0.999, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <HintPath>..\..\packages\SharpZipLib.1.0.0\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
@@ -155,14 +154,10 @@
   <ItemGroup>
     <Compile Include="Attributes\ApiBetListAuthorizationAttribute.cs" />
     <Compile Include="Attributes\ApiFunctionAuthorizationAttribute.cs" />
-    <Compile Include="Attributes\ApiOneAuthorizationAttribute.cs" />
     <Compile Include="Attributes\CustomApiAuthorizeAttribute.cs" />
-    <Compile Include="Attributes\Extensions\DependencyScopeExtension.cs" />
     <Compile Include="Attributes\ValidationApiRequestAttribute.cs" />
     <Compile Include="Attributes\XFrameOptionApiAttribute .cs" />
     <Compile Include="BaseApiController.cs" />
-    <Compile Include="ExternalApiBaseController.cs" />
-    <Compile Include="Logger\ApiExceptionLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -193,6 +188,10 @@
     <ProjectReference Include="..\..\Service\Fanex.Athena.Service.Core\Fanex.Athena.Service.Core.csproj">
       <Project>{fcfd7434-085b-4c93-848f-e1cbcedcc5a0}</Project>
       <Name>Fanex.Athena.Service.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.Athena.Api.StatelessBase\Fanex.Athena.Api.StatelessBase.csproj">
+      <Project>{0054161C-59B0-4CB6-AC5F-4E0F0D0294EC}</Project>
+      <Name>Fanex.Athena.Api.StatelessBase</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

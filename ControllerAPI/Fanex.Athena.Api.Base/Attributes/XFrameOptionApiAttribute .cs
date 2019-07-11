@@ -1,5 +1,9 @@
 ﻿namespace Fanex.Athena.Api.Base
 {
+    using Fanex.Athena.Api.StatelessBase.Attributes.Extensions;
+    using Fanex.Athena.Model.Auth.Enum;
+    using Fanex.Athena.Service.Core.Users.Interfaces;
+
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -7,10 +11,6 @@
     using System.Threading;
     using System.Threading.Tasks;
     using System.Web.Http.Filters;
-
-    using Attributes.Extensions;
-    using Fanex.Athena.Model.Auth.Enum;
-    using Fanex.Athena.Service.Core.Users.Interfaces;
 
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public sealed class XFrameOptionApiAttribute : ActionFilterAttribute

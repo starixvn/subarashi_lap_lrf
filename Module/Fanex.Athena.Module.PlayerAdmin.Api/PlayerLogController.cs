@@ -1,5 +1,4 @@
-﻿using Fanex.Athena.Api.Base;
-
+﻿using Fanex.Athena.Api.StatelessBase;
 namespace Fanex.Athena.Module.PlayerAdmin.Api
 {
 

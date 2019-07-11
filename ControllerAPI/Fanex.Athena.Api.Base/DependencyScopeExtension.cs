@@ -1,6 +1,6 @@
 ﻿using System.Web.Http.Dependencies;
 
-namespace Fanex.Athena.Api.Base.Attributes.Extensions
+namespace Fanex.Athena.Api.Base
 {
     public static class DependencyScopeExtension
     {

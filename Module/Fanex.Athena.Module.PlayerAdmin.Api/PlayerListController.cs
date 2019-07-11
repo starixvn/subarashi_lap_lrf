@@ -1,4 +1,4 @@
-﻿using Fanex.Athena.Api.Base;
+﻿using Fanex.Athena.Api.StatelessBase;
 using Fanex.Athena.Extension.External;
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.Services.Interfaces;

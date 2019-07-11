@@ -1,9 +1,7 @@
 ﻿namespace Fanex.Athena.Api.Base.Attributes
 {
     using Extension.Utility;
-
-    using Extensions;
-
+    using Fanex.Athena.Api.StatelessBase.Attributes.Extensions;
     using Fanex.Athena.Model.Auth.Enum;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
@@ -70,7 +68,7 @@
                     antiForgeryService.Validate();
                 }
             }
-            catch
+            catch (Exception)
             {
                 return UnauthorizeAccessHandlerAsync(actionContext);
             }

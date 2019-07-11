@@ -1,20 +1,28 @@
 ﻿namespace Fanex.Athena.Api.ExternalService.UnitTests
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Web.Http.Controllers;
-    using System.Web.Script.Serialization;
     using Extension.Utility;
+
     using ExternalService;
+
     using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Model.Core.DTO.Common;
     using Model.Core.ResultModel;
     using Model.Report.DTO;
     using Model.Report.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Service.Core.Configuration.Interfaces;
     using Service.Report.Interfaces;
+
+    using System;
+    using System.Collections.Generic;
+    using System.Web.Http.Controllers;
+    using System.Web.Script.Serialization;
+
     using UnitTest.Common.Helpers;
 
     public class NotificationApiControllerTest

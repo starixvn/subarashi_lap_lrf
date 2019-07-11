@@ -50,9 +50,8 @@
     <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Castle.Core.4.4.0\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Fanex.Logging, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Fanex.Logging.2.0.0\lib\net461\Fanex.Logging.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Fanex.Logging, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Fanex.Logging.2.0.1\lib\net461\Fanex.Logging.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib, Version=1.0.0.999, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <HintPath>..\..\packages\SharpZipLib.1.0.0\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
@@ -144,7 +143,6 @@
   <ItemGroup>
     <Compile Include="Attributes\ApiBetListAuthorizationAttributeTest.cs" />
     <Compile Include="Attributes\XFrameOptionApiAttributeTest.cs" />
-    <Compile Include="Attributes\ApiOneAuthorizationAttributeTest.cs" />
     <Compile Include="Attributes\ApiFunctionAuthorizationAttributeTest.cs" />
     <Compile Include="BaseApiControllerTest.cs" />
     <Compile Include="BaseApiControllerHelperTest.cs" />

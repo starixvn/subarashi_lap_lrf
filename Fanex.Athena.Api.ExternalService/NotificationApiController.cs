@@ -1,16 +1,18 @@
 ﻿namespace Fanex.Athena.Api.ExternalService
 {
+    using Extension.Utility;
+
+    using Fanex.Athena.Api.StatelessBase;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
+    using Model.Report.MetaModel;
+
+    using Service.Core.Configuration.Interfaces;
+    using Service.Report.Interfaces;
+
     using System;
     using System.Threading.Tasks;
     using System.Web.Http;
-    using System.Web.Http.Cors;
-    using Base.Attributes;
-    using Extension.Utility;
-    using Fanex.Athena.Api.Base;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Model.Report.MetaModel;
-    using Service.Core.Configuration.Interfaces;
-    using Service.Report.Interfaces;
 
     public class NotificationApiController : ExternalApiBaseController
     {

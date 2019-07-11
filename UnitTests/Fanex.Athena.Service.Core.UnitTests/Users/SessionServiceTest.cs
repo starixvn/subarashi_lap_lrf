@@ -1,26 +1,30 @@
 ﻿namespace Fanex.Athena.Service.Core.UnitTests.Users
 {
+    using Core.Users;
+    using Core.Users.Interfaces;
+
+    using DataAccess.Core.Common.Interfaces;
+    using DataAccess.Core.Users.Interfaces;
+
+    using Extension.Utility;
+
+    using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Utility;
+
+    using Model.Core.DataDomain;
+    using Model.Core.DTO.Common;
+
+    using NSubstitute;
+
+    using NUnit.Framework;
+
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Web;
     using System.Web.SessionState;
-    using Core.Common.Interfaces;
-    using Core.Users;
-    using Core.Users.Interfaces;
-    using DataAccess.Core.Common.Interfaces;
-    using DataAccess.Core.Users.Interfaces;
-    using Extension.Utility;
-    using Fanex.Athena.Model.Auth;
-    using Fanex.Athena.Model.Auth.Enum;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Utility;
-    using Model.Core.DataDomain;
-    using Model.Core.DTO.Common;
-    using Model.Core.DTO.Users;
-    using NSubstitute;
-    using NUnit.Framework;
-    using Fanex.Athena.Service.Core.Users.Interfaces;
+
     using UnitTest.Common.Helpers;
 
     [TestFixture]

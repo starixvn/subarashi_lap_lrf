@@ -1,22 +1,19 @@
-﻿using Fanex.Athena.Api.Base.Attributes.Extensions;
+﻿using Fanex.Athena.Api.StatelessBase.Attributes.Extensions;
 using Fanex.Athena.Model.Core.MetaModel;
 using Fanex.Athena.Resources;
 using Fanex.Athena.Service.Core.Utility.Interfaces;
+
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 
 namespace Fanex.Athena.Api.Base.Attributes
 {
     [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
-    public class ValidationApiRequestAttribute : ActionFilterAttribute
+    public sealed class ValidationApiRequestAttribute : ActionFilterAttribute
     {
         public string ObjectName { get; set; }
 
