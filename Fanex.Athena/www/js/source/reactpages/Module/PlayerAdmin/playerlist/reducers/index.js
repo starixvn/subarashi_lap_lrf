@@ -6,6 +6,7 @@ import * as gridHandlerReducer from './gridHandlerReducer';
 import * as gridOddsGroupReducer from './gridOddsGroupReducer';
 import * as gridSpecialLevelReducer from './gridSpecialLevelReducer';
 import * as gridStatusReducer from './gridStatusReducer';
+import * as gridUserNameReducer from './gridUserNameReducer';
 
 export default combineReducers(Object.assign({},
     filterHandlerReducer,
@@ -14,5 +15,6 @@ export default combineReducers(Object.assign({},
     gridHandlerReducer,
     gridOddsGroupReducer,
     gridSpecialLevelReducer,
-    gridStatusReducer
+    gridStatusReducer,
+    gridUserNameReducer
 ));

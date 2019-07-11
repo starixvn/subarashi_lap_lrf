@@ -20,11 +20,6 @@ export class DataGrid extends PureComponent {
         super(props);
 
         this.maxWidth = Math.min(document.body.clientWidth, MAX_WIDTH_PAGE);
-
-        this.state = {
-            isOpenContextMenu: false,
-            contextMenuPosition: null
-        }
     }
 
     _buildDisplayedColumn() {
@@ -45,41 +40,12 @@ export class DataGrid extends PureComponent {
                 dataItem,
                 isChecked,
                 displayedColumn,
-                handleChangeBaStatus: this.handleChangeBaStatus,
-                handleEnterContextMenu: this.handleEnterContextMenu,
-                handleLeaveContextMenu: this.handleLeaveContextMenu
+                handleChangeBaStatus: this.handleChangeBaStatus
             }
             dataRows.push(<PlayerRow key={dataItem.CustId} {...rowProps} />);
         }
 
         return dataRows;
-    }
-
-    handleEnterContextMenu = (event) => {
-        const { isOpenContextMenu } = this.state;
-        if (!isOpenContextMenu) {
-            const contextMenuHeight = 140;
-            const rect = event.target.getBoundingClientRect();
-            const position = {
-                x: rect.left,
-                y: GridHelper.calculateTopPosition(contextMenuHeight, rect.top)
-            };
-
-            this.setState({
-                contextMenuPosition: position,
-                isOpenContextMenu: true
-            });
-        }
-    }
-
-    handleLeaveContextMenu = () => {
-        window.setTimeout(() => {
-            if (this.state.isOpenContextMenu) {
-                this.setState({
-                    isOpenContextMenu: false
-                });
-            }
-        }, 10);
     }
 
     handleChangeUpdatePlayerItem = (custId, value, fieldName) => {
@@ -115,7 +81,6 @@ export class DataGrid extends PureComponent {
 
     render() {
         const { playerList, selectedPlayer, isFetchingData } = this.props;
-        const { contextMenuPosition, isOpenContextMenu } = this.state;
         const dataList = selectedPlayer ? [playerList.find(item => item.CustId === selectedPlayer.custId)] : playerList;
         const displayedColumn = this._buildDisplayedColumn();
 
@@ -129,7 +94,7 @@ export class DataGrid extends PureComponent {
                     body={this._renderDataSection(dataList, displayedColumn)}
                     containerPadding={30}
                     shouldResetScrollPosition={isFetchingData} />
-                <ContextMenu isOpenContextMenu={isOpenContextMenu} position={contextMenuPosition} />
+                <ContextMenu />
                 <SpecialLevelDropdown />
                 <OddsGroupDropdown />
                 <StatusDropdown />

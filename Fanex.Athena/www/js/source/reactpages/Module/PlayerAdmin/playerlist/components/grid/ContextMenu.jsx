@@ -8,7 +8,8 @@ import { contextMenuList } from '../../lib/constants';
 
 
 export const ContextMenu = (props) => {
-    const { position, isOpenContextMenu, setSelectedPlayer, currentActivePlayer, setSelectedTabName, getTabList } = props;
+    const { setSelectedPlayer, currentActivePlayer, setSelectedTabName, getTabList, contextMenu } = props;
+    const { position, isOpen: isOpenContextMenu } = contextMenu;
     const [isOpen, setIsOpen] = useState(false);
     const handleMouseEnter = () => {
         setIsOpen(true);
@@ -20,12 +21,12 @@ export const ContextMenu = (props) => {
 
     const handleClickMenu = (tabName) => {
         setSelectedTabName(tabName);
-        setSelectedPlayer({...currentActivePlayer});
+        setSelectedPlayer({ ...currentActivePlayer });
     }
 
     const style = position && {
         top: position.y,
-        left: position.x - 10
+        left: position.x
     }
 
     const tabList = getTabList();
@@ -50,8 +51,8 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-    const { currentActivePlayer } = state;
-    return Object.assign({}, { currentActivePlayer });
+    const { currentActivePlayer, contextMenu } = state;
+    return Object.assign({}, { currentActivePlayer, contextMenu });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(React.memo(ContextMenu));

@@ -2,9 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../../actions';
+import GridHelper from '../../lib/gridHelper';
 
 export const UserNameCell = (props) => {
-    const {dataItem, setSelectedPlayer, handleEnterContextMenu, handleLeaveContextMenu, setCurrentActivePlayer } = props;
+    const { dataItem, setSelectedPlayer, setCurrentActivePlayer, setContextMenu, contextMenu } = props;
 
     const handleSelectPlayer = (event) => {
         event.preventDefault();
@@ -17,15 +18,38 @@ export const UserNameCell = (props) => {
         setSelectedPlayer(player);
     }
 
-    const handleMouseEnter = (event) => {
+    const handleEnterContextMenu = (event) => {
         event.preventDefault();
-        handleEnterContextMenu(event);
-        const currentActivePlayer = {
-            custId: dataItem.CustId,
-            userName: dataItem.UserName,
-            currency: dataItem.Currency
-        };
-        setCurrentActivePlayer(currentActivePlayer);
+        const { isOpen } = contextMenu;
+        if (!isOpen) {
+            const contextMenuHeight = 140;
+            const rect = event.target.getBoundingClientRect();
+            const position = {
+                x: rect.left - 10,
+                y: GridHelper.calculateTopPosition(contextMenuHeight, rect.top)
+            };
+
+            setContextMenu({ position, isOpen: true });
+
+            const currentActivePlayer = {
+                custId: dataItem.CustId,
+                userName: dataItem.UserName,
+                currency: dataItem.Currency
+            };
+            setCurrentActivePlayer(currentActivePlayer);
+        }
+    }
+
+    const handleLeaveContextMenu = (event) => {
+        event.preventDefault();
+        window.setTimeout(() => {
+            if (contextMenu.isOpen) {
+                setContextMenu({
+                    ...contextMenu,
+                    isOpen: false
+                })
+            }
+        }, 10);
     }
 
     return (
@@ -35,7 +59,7 @@ export const UserNameCell = (props) => {
                 {dataItem.UserName}
             </button>
             <button className="btn-default btn-link btn-icon cell-menu"
-                onMouseEnter={handleMouseEnter} onMouseLeave={handleLeaveContextMenu}>
+                onMouseEnter={handleEnterContextMenu} onMouseLeave={handleLeaveContextMenu}>
                 <i className="material-icons">edit</i>
             </button>
         </div>
@@ -43,8 +67,13 @@ export const UserNameCell = (props) => {
 }
 
 function mapDispatchToProps(dispatch) {
-    const { setSelectedPlayer, setCurrentActivePlayer } = ActionCreators;
-    return bindActionCreators({ setSelectedPlayer, setCurrentActivePlayer }, dispatch);
+    const { setSelectedPlayer, setCurrentActivePlayer, setContextMenu } = ActionCreators;
+    return bindActionCreators({ setSelectedPlayer, setCurrentActivePlayer, setContextMenu }, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(React.memo(UserNameCell));
+function mapStateToProps(state) {
+    const { contextMenu } = state;
+    return Object.assign({}, { contextMenu });
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(React.memo(UserNameCell));
