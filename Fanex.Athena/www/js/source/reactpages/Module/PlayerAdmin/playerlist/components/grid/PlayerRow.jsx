@@ -20,7 +20,6 @@ export const PlayerRow = (props) => {
         handleChangeBaStatus,
         handleEnterContextMenu,
         handleLeaveContextMenu,
-        handleToggleSpecialLevel,
         setCurrentActivePlayer,
         handleToggleStatus
     } = props;
@@ -36,11 +35,7 @@ export const PlayerRow = (props) => {
     }
 
     const specialProps = {
-        value: dataItem.SpecialLevel,
-        handleToggleSpecialLevel: (e) => {
-            handleToggleSpecialLevel(e);
-            setCurrentActivePlayer({ custId: dataItem.CustId });
-        }
+        dataItem
     }
 
     const statusProps = {

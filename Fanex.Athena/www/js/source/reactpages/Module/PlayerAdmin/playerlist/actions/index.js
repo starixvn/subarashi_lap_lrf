@@ -5,6 +5,7 @@ import * as commonAction from './commonAction';
 import * as gridHandlerAction from './gridHandlerAction';
 import * as gridCommandHandlerAction from './gridCommandHandlerAction';
 import * as gridOddsGroupAction from './gridOddsGroupAction';
+import * as gridSpecialLevelAction from './gridSpecialLevelAction';
 
 export const ActionCreators = Object.assign({},
     loaderAction,
@@ -13,5 +14,6 @@ export const ActionCreators = Object.assign({},
     playerDetailHandlerAction,
     gridHandlerAction,
     gridCommandHandlerAction,
-    gridOddsGroupAction
+    gridOddsGroupAction,
+    gridSpecialLevelAction
 );

@@ -4,11 +4,13 @@ import * as playerDetailHandlerReducer from './playerDetailHandlerReducer';
 import * as loaderReducer from '../../../../reducers/loaderReducer';
 import * as gridHandlerReducer from './gridHandlerReducer';
 import * as gridOddsGroupReducer from './gridOddsGroupReducer';
+import * as gridSpecialLevelReducer from './gridSpecialLevelReducer';
 
 export default combineReducers(Object.assign({},
     filterHandlerReducer,
     loaderReducer,
     playerDetailHandlerReducer,
     gridHandlerReducer,
-    gridOddsGroupReducer
+    gridOddsGroupReducer,
+    gridSpecialLevelReducer
 ));

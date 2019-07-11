@@ -51,7 +51,6 @@ export class DataGrid extends PureComponent {
                 handleChangeBaStatus: this.handleChangeBaStatus,
                 handleEnterContextMenu: this.handleEnterContextMenu,
                 handleLeaveContextMenu: this.handleLeaveContextMenu,
-                handleToggleSpecialLevel: this.handleToggleSpecialLevel,
                 handleToggleStatus: this.handleToggleStatus
             }
             dataRows.push(<PlayerRow key={dataItem.CustId} {...rowProps} />);
@@ -109,10 +108,6 @@ export class DataGrid extends PureComponent {
         }
     }
 
-    handleToggleSpecialLevel = (event) => {
-        this._handlerToggleDropdownLabel(event, 'specialLevelDropdownPosition');
-    }
-
     handleToggleStatus = (event) => {
         this._handlerToggleDropdownLabel(event, 'statusDropdownPosition');
     }
@@ -155,32 +150,6 @@ export class DataGrid extends PureComponent {
         onChangeSuccess();
     }
 
-    handleChangeSpecialLevel = (event, value) => {
-        const resourceName = Number(value) === 0 ? 'AlertRemoveSpecialLevelForCustomerMsg' : 'AlertSetSpecialLevelForCustomerMsg';
-        const confirmMessage = LangHelper.getSingleResource(resourceName);
-        if (!window.confirm(confirmMessage)) {
-            return;
-        }
-
-        const { currentActivePlayer } = this.props;
-        if (currentActivePlayer) {
-            const param = {
-                custId: currentActivePlayer.custId,
-                specialLevel: value
-            }
-
-            this.props.updateSpecialLevel(param).then(response => {
-                const result = response.data;
-                if (result.Success) {
-                    this._handleChangeDropdownValue(event, value, 'SpecialLevel', this.handleToggleSpecialLevel);
-                }
-                else {
-                    window.alert(result.ErrorMessage);
-                }
-            })
-        }
-    }
-
     handleChangeStatus = (event, value) => {
         this._handleChangeDropdownValue(event, value, 'Status', this.handleToggleStatus);
     }
@@ -207,8 +176,7 @@ export class DataGrid extends PureComponent {
                     containerPadding={30}
                     shouldResetScrollPosition={isFetchingData} />
                 <ContextMenu isOpenContextMenu={isOpenContextMenu} position={contextMenuPosition} />
-                <SpecialLevelDropdown position={specialLevelDropdownPosition}
-                    onClose={this.handleToggleSpecialLevel} onChange={this.handleChangeSpecialLevel} />
+                <SpecialLevelDropdown />
                 <OddsGroupDropdown />
                 <StatusDropdown position={statusDropdownPosition}
                     onClose={this.handleToggleStatus} onChange={this.handleChangeStatus} />
@@ -218,12 +186,11 @@ export class DataGrid extends PureComponent {
 }
 
 function mapDispatchToProps(dispatch) {
-    const { setSelectedPlayerIdList, setPlayerList, updateBaStatus, updateSpecialLevel } = ActionCreators;
+    const { setSelectedPlayerIdList, setPlayerList, updateBaStatus } = ActionCreators;
     return bindActionCreators({
         setSelectedPlayerIdList,
         setPlayerList,
-        updateBaStatus,
-        updateSpecialLevel
+        updateBaStatus
     }, dispatch);
 }
 
