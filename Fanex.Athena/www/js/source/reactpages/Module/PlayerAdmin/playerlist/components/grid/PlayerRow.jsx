@@ -20,31 +20,12 @@ export const PlayerRow = (props) => {
         handleChangeBaStatus,
         handleEnterContextMenu,
         handleLeaveContextMenu,
-        setCurrentActivePlayer,
-        handleToggleStatus
     } = props;
 
     const userNameProps = {
         dataItem: dataItem,
         handleEnterContextMenu,
         handleLeaveContextMenu
-    }
-
-    const oddsGroupProps = {
-        dataItem
-    }
-
-    const specialProps = {
-        dataItem
-    }
-
-    const statusProps = {
-        value: dataItem.Status,
-        isOnline: dataItem.IsOnline,
-        handleToggleStatus: (e) => {
-            handleToggleStatus(e);
-            setCurrentActivePlayer({ custId: dataItem.CustId });
-        }
     }
 
     // handleCheckPlayer = (custId) => {
@@ -62,21 +43,21 @@ export const PlayerRow = (props) => {
             {/* <Cell className="center-align">
                     <input type="checkbox" checked={isChecked} onChange={() => handleCheckPlayer(CustId)} />
                 </Cell> */}
-            {displayedColumn['Status'] && <Cell className="center-align"><StatusCell {...statusProps} /></Cell>}
+            {displayedColumn['Status'] && <Cell className="center-align"><StatusCell dataItem={dataItem} /></Cell>}
             {displayedColumn['Username'] && <Cell className="center-align"><UserNameCell {...userNameProps} /></Cell>}
             {displayedColumn['SystemID'] && <Cell className="center-align">{SystemId}</Cell>}
             {displayedColumn['RealName'] && <Cell className="center-align">{RealName}</Cell>}
             {displayedColumn['Currency'] && <Cell className="center-align">{Currency}</Cell>}
             {displayedColumn['CurrentBalance'] && <Cell className="center-align">{NumberFormat.formatDecimal(CurrentBalance)}</Cell>}
             {displayedColumn['OutstandingBalance'] && <Cell className="center-align">{NumberFormat.formatDecimal(OutstandingBalance)}</Cell>}
-            {displayedColumn['OddsGroup'] && <Cell className="center-align"><OddsGroupCell {...oddsGroupProps} /></Cell>}
+            {displayedColumn['OddsGroup'] && <Cell className="center-align"><OddsGroupCell dataItem={dataItem} /></Cell>}
             {
                 displayedColumn['BAStatus'] &&
                 <Cell className="center-align">
                     <Switcher checked={BaStatus} onChange={(e) => handleChangeBaStatus(CustId, e.target.checked)} />
                 </Cell>
             }
-            {displayedColumn['SpecialLevel'] && <Cell className="center-align"><SpecialLevelCell {...specialProps} /></Cell>}
+            {displayedColumn['SpecialLevel'] && <Cell className="center-align"><SpecialLevelCell dataItem={dataItem} /></Cell>}
             {displayedColumn['LastLoginIp'] && <Cell className="center-align">{LastLoginIp}</Cell>}
             {displayedColumn['LastTransaction'] && <Cell className="center-align">{LastTransaction}</Cell>}
             {displayedColumn['Email'] && <Cell className="center-align">{Email}</Cell>}
@@ -85,8 +66,8 @@ export const PlayerRow = (props) => {
 }
 
 function mapDispatchToProps(dispatch) {
-    const { setSelectedPlayer, setCurrentActivePlayer } = ActionCreators;
-    return bindActionCreators({ setSelectedPlayer, setCurrentActivePlayer }, dispatch);
+    const { setSelectedPlayer } = ActionCreators;
+    return bindActionCreators({ setSelectedPlayer }, dispatch);
 }
 
 export default connect(null, mapDispatchToProps)(React.memo(PlayerRow));

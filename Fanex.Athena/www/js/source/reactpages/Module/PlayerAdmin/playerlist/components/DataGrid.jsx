@@ -4,7 +4,6 @@ import { ActionCreators } from '../actions/index.js';
 import { bindActionCreators } from 'redux';
 
 import LangHelper from '@jsroot/lib/langHelper';
-import { gridItemDropdownHeight } from '../lib/constants';
 import { Table } from '@9softstudio/react-grid';
 import ContextMenu from './grid/ContextMenu';
 import SpecialLevelDropdown from './grid/SpecialLevelDropdown';
@@ -24,9 +23,7 @@ export class DataGrid extends PureComponent {
 
         this.state = {
             isOpenContextMenu: false,
-            contextMenuPosition: null,
-            specialLevelDropdownPosition: null,
-            statusDropdownPosition: null
+            contextMenuPosition: null
         }
     }
 
@@ -50,8 +47,7 @@ export class DataGrid extends PureComponent {
                 displayedColumn,
                 handleChangeBaStatus: this.handleChangeBaStatus,
                 handleEnterContextMenu: this.handleEnterContextMenu,
-                handleLeaveContextMenu: this.handleLeaveContextMenu,
-                handleToggleStatus: this.handleToggleStatus
+                handleLeaveContextMenu: this.handleLeaveContextMenu
             }
             dataRows.push(<PlayerRow key={dataItem.CustId} {...rowProps} />);
         }
@@ -86,32 +82,6 @@ export class DataGrid extends PureComponent {
         }, 10);
     }
 
-    _handlerToggleDropdownLabel(event, stateName) {
-        const currentPosition = this.state[stateName];
-        if (currentPosition) {
-            this.setState({
-                [stateName]: null
-            });
-        }
-        else {
-            const dropdownItemName = stateName.replace('Position', '');
-            const dropdownHeight = gridItemDropdownHeight[dropdownItemName];
-            const rect = event.target.getBoundingClientRect();
-            const position = {
-                x: rect.left,
-                y: GridHelper.calculateTopPosition(dropdownHeight, rect.top + 20)
-            };
-
-            this.setState({
-                [stateName]: position
-            });
-        }
-    }
-
-    handleToggleStatus = (event) => {
-        this._handlerToggleDropdownLabel(event, 'statusDropdownPosition');
-    }
-
     handleChangeUpdatePlayerItem = (custId, value, fieldName) => {
         const { playerList, setPlayerList } = this.props;
         const itemIndex = playerList.findIndex(x => x.CustId === custId);
@@ -143,25 +113,9 @@ export class DataGrid extends PureComponent {
         })
     }
 
-    _handleChangeDropdownValue = (event, value, fieldName, onChangeSuccess) => {
-        event.preventDefault();
-        const { currentActivePlayer } = this.props;
-        this.handleChangeUpdatePlayerItem(currentActivePlayer.custId, value, fieldName);
-        onChangeSuccess();
-    }
-
-    handleChangeStatus = (event, value) => {
-        this._handleChangeDropdownValue(event, value, 'Status', this.handleToggleStatus);
-    }
-
     render() {
         const { playerList, selectedPlayer, isFetchingData } = this.props;
-        const {
-            contextMenuPosition,
-            isOpenContextMenu,
-            specialLevelDropdownPosition,
-            statusDropdownPosition
-        } = this.state;
+        const { contextMenuPosition, isOpenContextMenu } = this.state;
         const dataList = selectedPlayer ? [playerList.find(item => item.CustId === selectedPlayer.custId)] : playerList;
         const displayedColumn = this._buildDisplayedColumn();
 
@@ -178,8 +132,7 @@ export class DataGrid extends PureComponent {
                 <ContextMenu isOpenContextMenu={isOpenContextMenu} position={contextMenuPosition} />
                 <SpecialLevelDropdown />
                 <OddsGroupDropdown />
-                <StatusDropdown position={statusDropdownPosition}
-                    onClose={this.handleToggleStatus} onChange={this.handleChangeStatus} />
+                <StatusDropdown />
             </>
         );
     }
@@ -195,8 +148,8 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-    const { playerList, selectedPlayer, selectedPlayerIdList, displayedColumnList, currentActivePlayer, isFetchingData } = state;
-    return Object.assign({}, { playerList, selectedPlayer, selectedPlayerIdList, displayedColumnList, currentActivePlayer, isFetchingData });
+    const { playerList, selectedPlayer, selectedPlayerIdList, displayedColumnList, isFetchingData } = state;
+    return Object.assign({}, { playerList, selectedPlayer, selectedPlayerIdList, displayedColumnList, isFetchingData });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DataGrid);
