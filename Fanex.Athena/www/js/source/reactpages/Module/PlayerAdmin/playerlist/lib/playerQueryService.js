@@ -7,7 +7,7 @@ const apiInfo = {
     lapPlayerList: { action: 'PlayerAdminContainer/Search', type: systemType.newAdmin }
 }
 
-export default class PlayerListQueryService {
+export default class PlayerQueryService {
     constructor() {
         this.commonService = FactoryCommonService.createInstance();
     }

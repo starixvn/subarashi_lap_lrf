@@ -1,14 +1,17 @@
-import { SET_PARAM, SET_ADVANCED_SEARCH, SET_COLLAPSE_FILTER } from './types'
-import PlayerListQueryService from '../lib/playerListQueryService';
+import { SET_PARAM, SET_ADVANCED_SEARCH, SET_COLLAPSE_FILTER } from './types';
+import { toggleLoader } from '@jsroot/actions/loaderAction';
+import PlayerQueryService from '../lib/playerQueryService';
 import { setSelectedPlayer } from './commonAction';
-import { setPlayerList, setPagingOption } from './gridHandlerAction';
+import { setPlayerList, setPagingOption, setIsFetchingData } from './gridHandlerAction';
 import { defaultPagingOption } from '../lib/constants.js';
 
 export const searchPlayer = (param) => (dispatch) => {
-    const service = new PlayerListQueryService();
+    const service = new PlayerQueryService();
+    dispatch(toggleLoader(true));
     service.getPlayerList(param).then(result => {
         const { playerList, totalItem } = result;
         dispatch(setPlayerList(playerList));
+        dispatch(setIsFetchingData(false));
 
         const pagingOption = {
             ...defaultPagingOption,
@@ -23,6 +26,10 @@ export const searchPlayer = (param) => (dispatch) => {
         } else if (playerList.length === 1) {
             dispatch(setSelectedPlayer(playerList[0]));
         }
+
+        dispatch(toggleLoader(false));
+    }).catch(() => {
+        dispatch(toggleLoader(false));
     })
 }
 

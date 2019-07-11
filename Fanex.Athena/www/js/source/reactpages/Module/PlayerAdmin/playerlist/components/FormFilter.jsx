@@ -18,7 +18,7 @@ export class FormFilter extends PureComponent {
 
         this.state = {
             userName: '',
-            bankAccountNumber: '', 
+            bankAccountNumber: '',
             email: '',
             currency: '',
             oddsGroup: '',
@@ -33,20 +33,19 @@ export class FormFilter extends PureComponent {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        const {pagingOption} = this.props;
-        this.props.setSelectedPlayer(null);
+        const { pagingOption, setSelectedPlayer, searchPlayer, setIsFetchingData } = this.props;
+        setSelectedPlayer(null);
 
-        const {specialLevel, ...allParam} = this.state;
+        const { specialLevel, ...allParam } = this.state;
         const actualSpecialLevel = specialLevel.trim();
-        const param = { 
-            ...allParam, 
+        const param = {
+            ...allParam,
             specialLevel: actualSpecialLevel === '' ? this.allSpecialLevel : actualSpecialLevel,
-            pageSize: pagingOption.PageSize, 
-            pageIndex: pagingOption.PageIndex 
+            pageSize: pagingOption.PageSize,
+            pageIndex: pagingOption.PageIndex
         };
-        this.props.searchPlayer(param);
-
-        console.log(param);
+        setIsFetchingData(true);
+        searchPlayer(param);
     }
 
     handleChange = (event) => {
@@ -59,18 +58,18 @@ export class FormFilter extends PureComponent {
         this.setState({ [name]: value });
     }
 
-    showUserGuide(){
+    showUserGuide() {
 
     }
 
     _renderUserGuide() {
         const userGuideContent = 'Player Admin User Guide';
 
-        return (<UserGuide 
-                title={LangHelper.getSingleResource("UserGuide")} 
-                contentTitle={LangHelper.getSingleResource("")}
-                onClick={this.showUserGuide}
-                content={userGuideContent} />)
+        return (<UserGuide
+            title={LangHelper.getSingleResource("UserGuide")}
+            contentTitle={LangHelper.getSingleResource("")}
+            onClick={this.showUserGuide}
+            content={userGuideContent} />)
     }
 
     render() {
@@ -94,8 +93,8 @@ export class FormFilter extends PureComponent {
                         </div>
                     </div>
 
-                    {type === licenseeType.nonApi && <AthenaSearch onChange={this.handleChange} 
-                                                        bankAccountNumber={bankAccountNumber} email={email} />}
+                    {type === licenseeType.nonApi && <AthenaSearch onChange={this.handleChange}
+                        bankAccountNumber={bankAccountNumber} email={email} />}
                     {isAdvancedSearch && <AdvancedSearch currencyList={currencyList} param={advancedSearchParam} onChange={this.handleAdvancedSearchChange} />}
 
                     <div className="col-12 col-md-2 col-sm-2 col-lg-1 col-xl-1">
@@ -120,8 +119,8 @@ export class FormFilter extends PureComponent {
     }
 }
 function mapDispatchToProps(dispatch) {
-    const { searchPlayer, setSelectedPlayer, setAdvancedSearch, setCollapseFilter } = ActionCreators;
-    return bindActionCreators({ searchPlayer, setSelectedPlayer, setAdvancedSearch, setCollapseFilter }, dispatch);
+    const { searchPlayer, setSelectedPlayer, setAdvancedSearch, setCollapseFilter, setIsFetchingData } = ActionCreators;
+    return bindActionCreators({ searchPlayer, setSelectedPlayer, setAdvancedSearch, setCollapseFilter, setIsFetchingData }, dispatch);
 }
 function mapStateToProps(state) {
     const { type, isAdvancedSearch, isFilterCollapsing, pagingOption, currencyList } = state;

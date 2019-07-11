@@ -3,10 +3,12 @@ import * as filterHandlerReducer from './filterHandlerReducer.js';
 import * as playerDetailHandlerReducer from './playerDetailHandlerReducer';
 import * as loaderReducer from '../../../../reducers/loaderReducer';
 import * as gridHandlerReducer from './gridHandlerReducer';
+import * as gridOddsGroupReducer from './gridOddsGroupReducer';
 
 export default combineReducers(Object.assign({},
     filterHandlerReducer,
     loaderReducer,
     playerDetailHandlerReducer,
-    gridHandlerReducer
+    gridHandlerReducer,
+    gridOddsGroupReducer
 ));

@@ -1,5 +1,5 @@
 import createReducer from '../../../../lib/createReducer.js';
-import { SET_DISPLAYED_COLUMN_LIST, SET_CURRENT_ACTIVE_PLAYER, SET_PAGING } from '../actions/types';
+import { SET_DISPLAYED_COLUMN_LIST, SET_CURRENT_ACTIVE_PLAYER, SET_PAGING, SET_IS_FETCHING_DATA } from '../actions/types';
 import { defaultPagingOption } from '../lib/constants.js';
 
 export const displayedColumnList = createReducer([], {
@@ -17,5 +17,11 @@ export const currentActivePlayer = createReducer(null, {
 export const pagingOption = createReducer(defaultPagingOption, {
     [SET_PAGING](preState, action) {
         return {...action.data };
+    }
+})
+
+export const isFetchingData = createReducer(false, {
+    [SET_IS_FETCHING_DATA](preState, action) {
+        return action.data;
     }
 })

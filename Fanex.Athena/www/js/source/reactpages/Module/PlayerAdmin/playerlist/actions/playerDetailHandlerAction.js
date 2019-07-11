@@ -1,13 +1,13 @@
-import PlayerListQueryService from '../lib/playerListQueryService';
+import PlayerQueryService from '../lib/playerQueryService';
 import { SET_SELECTED_PLAYERID_LIST, SET_SELECTED_TAB_NAME } from './types';
 
 export const getLink = (systemType, action) => () => {
-    const service = new PlayerListQueryService();
+    const service = new PlayerQueryService();
     return service.getLink(systemType, action);
 }
 
 export const getTabList = () => () => {
-    const service = new PlayerListQueryService();
+    const service = new PlayerQueryService();
     return service.getTabList();
 }
 

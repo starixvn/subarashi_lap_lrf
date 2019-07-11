@@ -10,8 +10,8 @@ import ContextMenu from './grid/ContextMenu';
 import SpecialLevelDropdown from './grid/SpecialLevelDropdown';
 import { updateObjectInArray } from '@jsroot/lib/dataReducer';
 import GridHelper from '../lib/gridHelper';
-import OddsGroupDropdown from './grid/OddsGroupDropdown.jsx';
-import PlayerRow from './grid/PlayerRow.jsx';
+import OddsGroupDropdown from './grid/OddsGroupDropdown';
+import PlayerRow from './grid/PlayerRow';
 import StatusDropdown from './grid/StatusDropdown';
 
 const MAX_WIDTH_PAGE = 1920;
@@ -26,15 +26,7 @@ export class DataGrid extends PureComponent {
             isOpenContextMenu: false,
             contextMenuPosition: null,
             specialLevelDropdownPosition: null,
-            oddsGroupDropdownPosition: null,
-            statusDropdownPosition: null,
-            shouldResetScrollPosition: false
-        }
-    }
-
-    componentDidUpdate(prevProp) {
-        if (prevProp.playerList !== this.props.playerList) {
-            this.setState({ shouldResetScrollPosition: true });
+            statusDropdownPosition: null
         }
     }
 
@@ -59,7 +51,6 @@ export class DataGrid extends PureComponent {
                 handleChangeBaStatus: this.handleChangeBaStatus,
                 handleEnterContextMenu: this.handleEnterContextMenu,
                 handleLeaveContextMenu: this.handleLeaveContextMenu,
-                handleToggleOddsGroup: this.handleToggleOddsGroup,
                 handleToggleSpecialLevel: this.handleToggleSpecialLevel,
                 handleToggleStatus: this.handleToggleStatus
             }
@@ -81,8 +72,7 @@ export class DataGrid extends PureComponent {
 
             this.setState({
                 contextMenuPosition: position,
-                isOpenContextMenu: true,
-                shouldResetScrollPosition: false
+                isOpenContextMenu: true
             });
         }
     }
@@ -91,8 +81,7 @@ export class DataGrid extends PureComponent {
         window.setTimeout(() => {
             if (this.state.isOpenContextMenu) {
                 this.setState({
-                    isOpenContextMenu: false,
-                    shouldResetScrollPosition: false
+                    isOpenContextMenu: false
                 });
             }
         }, 10);
@@ -102,8 +91,7 @@ export class DataGrid extends PureComponent {
         const currentPosition = this.state[stateName];
         if (currentPosition) {
             this.setState({
-                [stateName]: null,
-                shouldResetScrollPosition: false
+                [stateName]: null
             });
         }
         else {
@@ -116,18 +104,13 @@ export class DataGrid extends PureComponent {
             };
 
             this.setState({
-                [stateName]: position,
-                shouldResetScrollPosition: false
+                [stateName]: position
             });
         }
     }
 
     handleToggleSpecialLevel = (event) => {
         this._handlerToggleDropdownLabel(event, 'specialLevelDropdownPosition');
-    }
-
-    handleToggleOddsGroup = (event) => {
-        this._handlerToggleDropdownLabel(event, 'oddsGroupDropdownPosition');
     }
 
     handleToggleStatus = (event) => {
@@ -172,31 +155,6 @@ export class DataGrid extends PureComponent {
         onChangeSuccess();
     }
 
-    handleChangeOddsGroup = (event, value) => {
-        const confirmMessage = LangHelper.getSingleResource('AlertSetOddsGroupForCustomerMsg').replace('{0}', value);
-        if (!window.confirm(confirmMessage)) {
-            return;
-        }
-
-        const { currentActivePlayer } = this.props;
-        if (currentActivePlayer) {
-            const param = {
-                custId: currentActivePlayer.custId,
-                oddsGroup: value
-            }
-
-            this.props.updateOddsGroup(param).then(response => {
-                const result = response.data;
-                if (result.Success) {
-                    this._handleChangeDropdownValue(event, value, 'OddsGroup', this.handleToggleOddsGroup);
-                }
-                else {
-                    window.alert(result.ErrorMessage);
-                }
-            })
-        }
-    }
-
     handleChangeSpecialLevel = (event, value) => {
         const resourceName = Number(value) === 0 ? 'AlertRemoveSpecialLevelForCustomerMsg' : 'AlertSetSpecialLevelForCustomerMsg';
         const confirmMessage = LangHelper.getSingleResource(resourceName);
@@ -227,19 +185,13 @@ export class DataGrid extends PureComponent {
         this._handleChangeDropdownValue(event, value, 'Status', this.handleToggleStatus);
     }
 
-    handleGridItem = () => {
-        this.setState({ shouldResetScrollPosition: false });
-    }
-
     render() {
-        const { playerList, selectedPlayer } = this.props;
+        const { playerList, selectedPlayer, isFetchingData } = this.props;
         const {
             contextMenuPosition,
             isOpenContextMenu,
             specialLevelDropdownPosition,
-            oddsGroupDropdownPosition,
-            statusDropdownPosition,
-            shouldResetScrollPosition
+            statusDropdownPosition
         } = this.state;
         const dataList = selectedPlayer ? [playerList.find(item => item.CustId === selectedPlayer.custId)] : playerList;
         const displayedColumn = this._buildDisplayedColumn();
@@ -253,12 +205,11 @@ export class DataGrid extends PureComponent {
                     header={GridHelper.renderHeader(displayedColumn)}
                     body={this._renderDataSection(dataList, displayedColumn)}
                     containerPadding={30}
-                    shouldResetScrollPosition={shouldResetScrollPosition} />
-                <ContextMenu isOpenContextMenu={isOpenContextMenu} position={contextMenuPosition} onToggle={this.handleGridItem} />
+                    shouldResetScrollPosition={isFetchingData} />
+                <ContextMenu isOpenContextMenu={isOpenContextMenu} position={contextMenuPosition} />
                 <SpecialLevelDropdown position={specialLevelDropdownPosition}
                     onClose={this.handleToggleSpecialLevel} onChange={this.handleChangeSpecialLevel} />
-                <OddsGroupDropdown position={oddsGroupDropdownPosition}
-                    onClose={this.handleToggleOddsGroup} onChange={this.handleChangeOddsGroup} />
+                <OddsGroupDropdown />
                 <StatusDropdown position={statusDropdownPosition}
                     onClose={this.handleToggleStatus} onChange={this.handleChangeStatus} />
             </>
@@ -267,19 +218,18 @@ export class DataGrid extends PureComponent {
 }
 
 function mapDispatchToProps(dispatch) {
-    const { setSelectedPlayerIdList, setPlayerList, updateBaStatus, updateOddsGroup, updateSpecialLevel } = ActionCreators;
+    const { setSelectedPlayerIdList, setPlayerList, updateBaStatus, updateSpecialLevel } = ActionCreators;
     return bindActionCreators({
         setSelectedPlayerIdList,
         setPlayerList,
         updateBaStatus,
-        updateOddsGroup,
         updateSpecialLevel
     }, dispatch);
 }
 
 function mapStateToProps(state) {
-    const { playerList, selectedPlayer, selectedPlayerIdList, displayedColumnList, currentActivePlayer } = state;
-    return Object.assign({}, { playerList, selectedPlayer, selectedPlayerIdList, displayedColumnList, currentActivePlayer });
+    const { playerList, selectedPlayer, selectedPlayerIdList, displayedColumnList, currentActivePlayer, isFetchingData } = state;
+    return Object.assign({}, { playerList, selectedPlayer, selectedPlayerIdList, displayedColumnList, currentActivePlayer, isFetchingData });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DataGrid);

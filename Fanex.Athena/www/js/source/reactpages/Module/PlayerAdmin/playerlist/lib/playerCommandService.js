@@ -7,7 +7,7 @@ const apiInfo = {
     updateSpecialLevel: { action: 'api/PlayerSpecialLevel/Update', type: systemType.lrf }
 }
 
-export default class PlayerListCommandService {
+export default class PlayerCommandService {
     constructor() {
         this.commonService = FactoryCommonService.createInstance();
     }

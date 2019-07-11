@@ -5,6 +5,7 @@ import { ActionCreators } from '../../actions';
 
 import { Row, Cell } from '@9softstudio/react-grid';
 import Switcher from '@jsroot/components/Switcher';
+import NumberFormat from '@jsroot/lib/numberFormat';
 
 import UserNameCell from './UserNameCell';
 import OddsGroupCell from './OddsGroupCell';
@@ -12,14 +13,13 @@ import SpecialLevelCell from './SpecialLevelCell';
 import StatusCell from './StatusCell';
 
 export const PlayerRow = (props) => {
-    const { 
-        dataItem, 
-        isChecked, 
-        displayedColumn, 
-        handleChangeBaStatus, 
-        handleEnterContextMenu, 
+    const {
+        dataItem,
+        isChecked,
+        displayedColumn,
+        handleChangeBaStatus,
+        handleEnterContextMenu,
         handleLeaveContextMenu,
-        handleToggleOddsGroup,
         handleToggleSpecialLevel,
         setCurrentActivePlayer,
         handleToggleStatus
@@ -32,18 +32,14 @@ export const PlayerRow = (props) => {
     }
 
     const oddsGroupProps = {
-        value: dataItem.OddsGroup,
-        handleToggleOddsGroup: (e) => {
-            handleToggleOddsGroup(e);
-            setCurrentActivePlayer({custId: dataItem.CustId});
-        }
+        dataItem
     }
 
     const specialProps = {
         value: dataItem.SpecialLevel,
         handleToggleSpecialLevel: (e) => {
             handleToggleSpecialLevel(e);
-            setCurrentActivePlayer({custId: dataItem.CustId});
+            setCurrentActivePlayer({ custId: dataItem.CustId });
         }
     }
 
@@ -52,7 +48,7 @@ export const PlayerRow = (props) => {
         isOnline: dataItem.IsOnline,
         handleToggleStatus: (e) => {
             handleToggleStatus(e);
-            setCurrentActivePlayer({custId: dataItem.CustId});
+            setCurrentActivePlayer({ custId: dataItem.CustId });
         }
     }
 
@@ -64,30 +60,31 @@ export const PlayerRow = (props) => {
     //     this.props.setSelectedPlayerIdList(newIdList);
     // }
 
+    const { CustId, SystemId, RealName, Currency, CurrentBalance, OutstandingBalance, BaStatus, LastLoginIp, LastTransaction, Email } = dataItem;
     return (
-        <Row key={dataItem.CustId}>
+        <Row key={CustId}>
             {/* For Phase 2 */}
             {/* <Cell className="center-align">
-                    <input type="checkbox" checked={isChecked} onChange={() => handleCheckPlayer(dataItem.CustId)} />
+                    <input type="checkbox" checked={isChecked} onChange={() => handleCheckPlayer(CustId)} />
                 </Cell> */}
             {displayedColumn['Status'] && <Cell className="center-align"><StatusCell {...statusProps} /></Cell>}
             {displayedColumn['Username'] && <Cell className="center-align"><UserNameCell {...userNameProps} /></Cell>}
-            {displayedColumn['SystemID'] && <Cell className="center-align">{dataItem.SystemId}</Cell>}
-            {displayedColumn['RealName'] && <Cell className="center-align">{dataItem.RealName}</Cell>}
-            {displayedColumn['Currency'] && <Cell className="center-align">{dataItem.Currency}</Cell>}
-            {displayedColumn['CurrentBalance'] && <Cell className="center-align">{dataItem.CurrentBalance}</Cell>}
-            {displayedColumn['OutstandingBalance'] && <Cell className="center-align">{dataItem.OutstandingBalance}</Cell>}
+            {displayedColumn['SystemID'] && <Cell className="center-align">{SystemId}</Cell>}
+            {displayedColumn['RealName'] && <Cell className="center-align">{RealName}</Cell>}
+            {displayedColumn['Currency'] && <Cell className="center-align">{Currency}</Cell>}
+            {displayedColumn['CurrentBalance'] && <Cell className="center-align">{NumberFormat.formatDecimal(CurrentBalance)}</Cell>}
+            {displayedColumn['OutstandingBalance'] && <Cell className="center-align">{NumberFormat.formatDecimal(OutstandingBalance)}</Cell>}
             {displayedColumn['OddsGroup'] && <Cell className="center-align"><OddsGroupCell {...oddsGroupProps} /></Cell>}
             {
                 displayedColumn['BAStatus'] &&
                 <Cell className="center-align">
-                    <Switcher checked={dataItem.BaStatus} onChange={(e) => handleChangeBaStatus(dataItem.CustId, e.target.checked)} />
+                    <Switcher checked={BaStatus} onChange={(e) => handleChangeBaStatus(CustId, e.target.checked)} />
                 </Cell>
             }
             {displayedColumn['SpecialLevel'] && <Cell className="center-align"><SpecialLevelCell {...specialProps} /></Cell>}
-            {displayedColumn['LastLoginIp'] && <Cell className="center-align">{dataItem.LastLoginIp}</Cell>}
-            {displayedColumn['LastTransaction'] && <Cell className="center-align">{dataItem.LastTransaction}</Cell>}
-            {displayedColumn['Email'] && <Cell className="center-align">{dataItem.Email}</Cell>}
+            {displayedColumn['LastLoginIp'] && <Cell className="center-align">{LastLoginIp}</Cell>}
+            {displayedColumn['LastTransaction'] && <Cell className="center-align">{LastTransaction}</Cell>}
+            {displayedColumn['Email'] && <Cell className="center-align">{Email}</Cell>}
         </Row>
     )
 }
