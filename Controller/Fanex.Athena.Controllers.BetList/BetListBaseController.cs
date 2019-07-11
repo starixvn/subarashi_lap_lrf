@@ -1,7 +1,6 @@
 ﻿namespace Fanex.Athena.Controllers.BetList
 {
     using System;
-    using System.Linq;
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
@@ -16,12 +15,8 @@
     using ONEbook.UM.Filters;
     using Resources;
     using Service.Core.Users.Interfaces;
-    using Service.Core.Utility;
-    using Service.Core.Utility.Interfaces;
     using VendorAdapter.Interfaces;
-    using Fanex.Athena.Model.Core.Helper;
     using Fanex.Athena.Service.StatelessCore.Utility;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.Core.Common.Interfaces;
 
     [SessionState(SessionStateBehavior.ReadOnly)]

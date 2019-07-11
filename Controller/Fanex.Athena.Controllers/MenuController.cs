@@ -14,7 +14,6 @@ namespace Fanex.Athena.Controllers
     using Fanex.Athena.Model.Core.ViewModel;
     using Fanex.Athena.Service.Core.Common.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DataDomain;
 
     using Service.Core.Users.Interfaces;

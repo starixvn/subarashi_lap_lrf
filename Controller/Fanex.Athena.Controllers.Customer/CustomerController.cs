@@ -29,7 +29,6 @@ namespace Fanex.Athena.Controllers.Customer
     using Resources;
     using Service.Core.Users.Interfaces;
     using Service.Report.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Service.Core.Common.Interfaces;
 
