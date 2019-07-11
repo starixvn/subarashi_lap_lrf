@@ -95,10 +95,6 @@
     <Compile Include="ViewModels\PlayerListResultViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ControllerAPI\Fanex.Athena.Api.Base\Fanex.Athena.Api.Base.csproj">
-      <Project>{16D39D7B-00C0-4CC3-82F5-44BBDEE7AE51}</Project>
-      <Name>Fanex.Athena.Api.Base</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\ControllerAPI\Fanex.Athena.Api.StatelessBase\Fanex.Athena.Api.StatelessBase.csproj">
       <Project>{0054161C-59B0-4CB6-AC5F-4E0F0D0294EC}</Project>
       <Name>Fanex.Athena.Api.StatelessBase</Name>
