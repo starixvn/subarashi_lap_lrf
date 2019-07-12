@@ -1,20 +1,20 @@
 export const specialLevelListWithColor = {
     0: '#fcfcfc',
-    1: '#98b516',
-    2: '#007d00',
-    3: '#b87856',
-    4: '#fcc50f',
-    5: '#418a86',
-    6: '#969036',
-    7: '#944937',
-    8: '#3297fc',
-    9: '#c98402',
-    10: '#fc0000'
+    1: '#00ff00',
+    2: '#008000',
+    3: '#8b4513',
+    4: '#daa520',
+    5: '#006699',
+    6: '#666633',
+    7: '#a52a2a',
+    8: '#0099ff',
+    9: '#cc6600',
+    10: '#ff0000'
 }
 
 export const oddsGroupListWithStyle = {
-    A: { backgroundColor: '#007C00', color: '#fff' },
-    B: { backgroundColor: '#3298FD', color: '#fff' },
+    A: { backgroundColor: '#006400', color: '#fff' },
+    B: { backgroundColor: '#0099ff', color: '#fff' },
     C: null,
     D: null,
     E: null,
@@ -45,7 +45,7 @@ export const columnList = (licType) => [
 export const contextMenuList = [
     { key: 'note', name: 'Note', tabName: 'Note' },
     { key: 'password', name: 'Password', tabName: 'Setting' },
-    { key: 'fundtransferLimit', name: 'Fundtransfer Limit', tabName: 'TransferFund' },
+    { key: 'fundtransferLimit', name: 'Fundtransfer Limit', tabName: 'Setting' },
     { key: 'betLimit', name: 'Bet Limit', tabName: 'BetLimit' },
     { key: 'statement', name: 'Statement', tabName: 'Statement' },
     { key: 'personalMessage', name: 'Personal Message', tabName: 'Message' }
