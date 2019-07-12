@@ -674,6 +674,9 @@ table tbody tr.row-group-level1 td {
     width: 18px; }
   .betlist-container .bonus-icon:hover {
     cursor: pointer; }
+  .betlist-container .bettype-description {
+    color: #003399;
+    font-weight: normal; }
 
 .table > thead > tr > th {
   background: #4C6375;
