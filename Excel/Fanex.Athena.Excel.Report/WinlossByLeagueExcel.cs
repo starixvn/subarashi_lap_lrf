@@ -160,10 +160,14 @@ namespace Fanex.Athena.Excel.Report
             {
                 sheet.HideColumn(ColumnExternalId, ColumnSystemId);
             }
+            else
+            {
+                sheet.HideColumn(ColumnMatch);
+            }
 
             if (Level != (int)ReportLevel.Main || !_hasAmountDueToColumn)
             {
-                sheet.HideColumn(ColumnMatch, ColumnAmtDueTo);
+                sheet.HideColumn(ColumnAmtDueTo);
             }
         }
 

@@ -151,16 +151,29 @@ namespace Fanex.Athena.Excel.Report.UnitTests
         }
 
         [Test]
-        public void ProcessUI_Level0_CallHideColumns()
+        public void ProcessUI_Level0WithAmtDueToColumn_CallHideColumns()
         {
             // Arrange
-            var excel = CreateExcel();
+            var excel = CreateExcel(0, true);
 
             // Action
             excel.Public_ProcessUI(FakeSheet);
 
             // Assert
             AssertHideColumns(FakeSheet, ColumnExternalId, ColumnSystemId);
+        }
+
+        [Test]
+        public void ProcessUI_Level0WithoutAmtDueToColumn_CallHideColumns()
+        {
+            // Arrange
+            var excel = CreateExcel(0, false);
+
+            // Action
+            excel.Public_ProcessUI(FakeSheet);
+
+            // Assert
+            AssertHideColumns(FakeSheet, ColumnExternalId, ColumnSystemId, ColumnAmtDueTo);
         }
 
         [Test]
@@ -205,7 +218,7 @@ namespace Fanex.Athena.Excel.Report.UnitTests
             row.Cells[ColumnBaComm].Received(1).SetCellValue(dataItem.BACommission);
         }
 
-        private static WinlossByLeagueExcelTestable CreateExcel(int level = 0)
+        private static WinlossByLeagueExcelTestable CreateExcel(int level = 0, bool hasAmountDueToColumn = false)
         {
             var excel = Substitute.ForPartsOf<WinlossByLeagueExcelTestable>(
                 string.Empty,
@@ -215,7 +228,7 @@ namespace Fanex.Athena.Excel.Report.UnitTests
                     TotalData = TotalData
                 },
                 MetaModel,
-                true);
+                hasAmountDueToColumn);
             excel.Level = level;
             excel.TemplateSheet.Returns(Substitute.For<ISheet>());
             return excel;
