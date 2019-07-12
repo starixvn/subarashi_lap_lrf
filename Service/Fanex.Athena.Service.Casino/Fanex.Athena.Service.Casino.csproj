@@ -39,6 +39,7 @@
   <ItemGroup>
     <Reference Include="CasinoLibrary">
       <HintPath>..\..\DLLs\RNGCasino\CasinoLibrary.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="CasinoUtility">
       <HintPath>..\..\DLLs\RNGCasino\CasinoUtility.dll</HintPath>
