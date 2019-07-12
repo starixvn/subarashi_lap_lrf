@@ -33,9 +33,7 @@ export class FormFilter extends PureComponent {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        const { pagingOption, setSelectedPlayer, searchPlayer, setIsFetchingData } = this.props;
-        setSelectedPlayer(null);
-
+        const { pagingOption, searchPlayer } = this.props;
         const { specialLevel, ...allParam } = this.state;
         const actualSpecialLevel = specialLevel.trim();
         const param = {
@@ -44,7 +42,7 @@ export class FormFilter extends PureComponent {
             pageSize: pagingOption.PageSize,
             pageIndex: pagingOption.PageIndex
         };
-        setIsFetchingData(true);
+
         searchPlayer(param);
     }
 
@@ -119,8 +117,8 @@ export class FormFilter extends PureComponent {
     }
 }
 function mapDispatchToProps(dispatch) {
-    const { searchPlayer, setSelectedPlayer, setAdvancedSearch, setCollapseFilter, setIsFetchingData } = ActionCreators;
-    return bindActionCreators({ searchPlayer, setSelectedPlayer, setAdvancedSearch, setCollapseFilter, setIsFetchingData }, dispatch);
+    const { searchPlayer, setAdvancedSearch, setCollapseFilter } = ActionCreators;
+    return bindActionCreators({ searchPlayer, setAdvancedSearch, setCollapseFilter }, dispatch);
 }
 function mapStateToProps(state) {
     const { type, isAdvancedSearch, isFilterCollapsing, pagingOption, currencyList } = state;

@@ -72,11 +72,10 @@ export default class PlayerQueryService {
         return this.commonService.getLink(systemType, action);
     }
 
-    exportExcel(licType, param) {
-        const postParam = {...param, isExportExcel: true };
-        this.getPlayerList(postParam).then((response) => {
+    exportExcel(licType, param, fileName = 'PlayerList') {
+        this.getPlayerList(param).then((response) => {
             const { playerList } = response;
-            const reportExcel = new ReportExcel(licType, playerList, 'Player List');
+            const reportExcel = new ReportExcel(licType, playerList, fileName);
             reportExcel.export();
         });
     }

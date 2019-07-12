@@ -9,7 +9,7 @@ export const param = createReducer({}, {
 
 export const playerList = createReducer(null, {
     [SET_PLAYER_LIST](preState, action) {
-        return [...action.data];
+        return action.data && [...action.data];
     }
 })
 

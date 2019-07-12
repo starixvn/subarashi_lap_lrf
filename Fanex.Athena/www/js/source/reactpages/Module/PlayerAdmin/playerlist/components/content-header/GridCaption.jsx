@@ -5,7 +5,6 @@ import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../../actions';
 import ReportTitle from '@jsroot/components/ReportTitle';
 import MultipleSelect from '@9softstudio/react-multiselect';
-import BatchUpdateButton from './BatchUpdateButton';
 import LangHelper from '@jsroot/lib/langHelper';
 
 export class GridCaption extends React.PureComponent {
@@ -37,7 +36,7 @@ export class GridCaption extends React.PureComponent {
     }
 
     _buildLeftPart() {
-        const { selectedPlayer, selectedPlayerIdList } = this.props;
+        const { selectedPlayer } = this.props;
         if (selectedPlayer) {
             return (
                 <>
@@ -46,17 +45,6 @@ export class GridCaption extends React.PureComponent {
                 </>
             )
         }
-        // For Phase 2
-        // else if (selectedPlayerIdList.length > 0) {
-        //     return (
-        //         <>
-        //             <BatchUpdateButton />
-        //             <button className="btn-outline btn-outline-light" type="button">
-        //                 {selectedPlayerIdList.length} Player(s) Selected <span className="close">&times;</span>
-        //             </button>
-        //         </>
-        //     )
-        // }
         else {
             const { playerCount } = this.props;
             return (<span key="searchResult">{`Search Result: ${playerCount} Player(s)`}</span>);
@@ -92,9 +80,9 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-    const { playerList, selectedPlayer, selectedPlayerIdList, displayedColumnList, type, param } = state;
-    const playerCount = (playerList && playerList.length) ? playerList.length : 0;
-    return Object.assign({}, { playerCount, selectedPlayer, selectedPlayerIdList, displayedColumnList, type, param });
+    const { pagingOption, selectedPlayer, displayedColumnList, type, param } = state;
+    const playerCount = pagingOption.TotalItem || 0;
+    return Object.assign({}, { playerCount, selectedPlayer, displayedColumnList, type, param });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(GridCaption);

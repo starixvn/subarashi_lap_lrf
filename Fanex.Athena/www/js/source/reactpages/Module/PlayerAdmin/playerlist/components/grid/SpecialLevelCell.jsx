@@ -7,6 +7,7 @@ import DropdownLabel from '@jsroot/components/DropdownLabel';
 
 import { ActionCreators } from '../../actions';
 import GridInteractionService from '../../lib/gridInteractionService';
+import { getSpecialLevelText } from '../../lib/utils';
 
 export const SpecialLevelCell = (props) => {
     const { dataItem, specialLevelDropdownPosition, setCurrentActivePlayer, setSpecialLevelDropdownPosition } = props;
@@ -19,7 +20,7 @@ export const SpecialLevelCell = (props) => {
         setSpecialLevelDropdownPosition(newPosition);
     }
 
-    return <DropdownLabel text={value === '0' ? 'None' : value} labelStyle={style} onClick={handleToggleSpecialLevel} />
+    return <DropdownLabel text={getSpecialLevelText(value)} labelStyle={style} onClick={handleToggleSpecialLevel} />
 }
 
 function mapDispatchToProps(dispatch) {

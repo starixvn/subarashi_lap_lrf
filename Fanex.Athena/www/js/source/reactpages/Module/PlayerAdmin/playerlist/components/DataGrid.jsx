@@ -43,6 +43,10 @@ export class DataGrid extends PureComponent {
 
     render() {
         const { playerList, selectedPlayer, isFetchingData } = this.props;
+        if (!playerList) {
+            return null;
+        }
+
         const dataList = selectedPlayer ? [playerList.find(item => item.CustId === selectedPlayer.custId)] : playerList;
         const displayedColumn = this._buildDisplayedColumn();
 

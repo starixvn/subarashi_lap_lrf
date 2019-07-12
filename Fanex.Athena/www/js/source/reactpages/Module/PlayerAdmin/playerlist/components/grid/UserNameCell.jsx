@@ -3,19 +3,15 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../../actions';
 import GridHelper from '../../lib/gridHelper';
+import { buildSelectedPlayer } from '../../lib/utils';
 
 export const UserNameCell = (props) => {
     const { dataItem, setSelectedPlayer, setCurrentActivePlayer, setContextMenu, contextMenu } = props;
 
     const handleSelectPlayer = (event) => {
         event.preventDefault();
-        const player = {
-            custId: dataItem.CustId,
-            userName: dataItem.UserName,
-            currency: dataItem.Currency
-        };
-
-        setSelectedPlayer(player);
+        const newSelectedPlayer = buildSelectedPlayer(dataItem);
+        setSelectedPlayer(newSelectedPlayer);
     }
 
     const handleEnterContextMenu = (event) => {

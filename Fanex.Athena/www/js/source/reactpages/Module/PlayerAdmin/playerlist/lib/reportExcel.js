@@ -2,6 +2,7 @@ import Excel from '@jsroot/lib/excel';
 import { headerCellStyle, bodyCellStyle } from '@jsroot/constants/excelStyle';
 import { headerText } from '../lib/constants';
 import { setupWebpackPublicPath } from '../../../lib/publicPathUtils';
+import { getSpecialLevelText } from './utils';
 
 const HEADER_ROW_INDEX = 0;
 const DATA_ROW_INDEX = 1;
@@ -85,10 +86,12 @@ export default class ReportExcel {
     _buildDataRow(item, colIndex) {
         const columnConfig = this.columnConfigs[colIndex];
         const value = item[columnConfig.field];
+        const displayedValue = this._shouldSetEmpty(value) ? '' :
+            (columnConfig.field === fields.SpecialLevel ? getSpecialLevelText(value) : value);
 
         return {
-            t: Excel.getCellType(value),
-            v: this._shouldSetEmpty(value) ? '' : value,
+            t: Excel.getCellType(displayedValue),
+            v: displayedValue,
             s: columnConfig[MAIN_SECTION_STYLE]
         }
     }

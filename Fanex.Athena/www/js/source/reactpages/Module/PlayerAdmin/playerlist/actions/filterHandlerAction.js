@@ -4,9 +4,15 @@ import PlayerQueryService from '../lib/playerQueryService';
 import { setSelectedPlayer } from './commonAction';
 import { setPlayerList, setPagingOption, setIsFetchingData } from './gridHandlerAction';
 import { defaultPagingOption } from '../lib/constants.js';
+import { buildSelectedPlayer } from '../lib/utils';
 
 export const searchPlayer = (param) => (dispatch) => {
     const service = new PlayerQueryService();
+
+    dispatch(setPlayerList(null));
+    dispatch(setSelectedPlayer(null));
+    dispatch(setIsFetchingData(true));
+    dispatch(setParam(param));
     dispatch(toggleLoader(true));
     service.getPlayerList(param).then(result => {
         const { playerList, totalItem } = result;
@@ -21,10 +27,9 @@ export const searchPlayer = (param) => (dispatch) => {
         }
         dispatch(setPagingOption(pagingOption));
 
-        if (playerList.length === 0) {
-            dispatch(setSelectedPlayer(null));
-        } else if (playerList.length === 1) {
-            dispatch(setSelectedPlayer(playerList[0]));
+        if (playerList.length === 1) {
+            const selectedPlayer = buildSelectedPlayer(playerList[0]);
+            dispatch(setSelectedPlayer(selectedPlayer));
         }
 
         dispatch(toggleLoader(false));

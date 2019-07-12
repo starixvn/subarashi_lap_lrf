@@ -7,12 +7,9 @@ import { specialLevelListWithColor } from '../../lib/constants';
 import GridInteractionService from '../../lib/gridInteractionService';
 import LangHelper from '@jsroot/lib/langHelper';
 import { ActionCreators } from '../../actions';
+import { getSpecialLevelText } from '../../lib/utils';
 
 const SpecialLevelDropdown = (props) => {
-    const getLabel = (level) => {
-        return level === '0' ? 'None' : level;
-    }
-
     const { specialLevelDropdownPosition, setSpecialLevelDropdownPosition } = props;
     const isOpen = specialLevelDropdownPosition !== null;
     const style = specialLevelDropdownPosition && {
@@ -66,7 +63,7 @@ const SpecialLevelDropdown = (props) => {
                     Object.keys(specialLevelListWithColor).map(item => {
                         const color = specialLevelListWithColor[item];
                         return <DropdownItem key={item} className="special-level-item" 
-                                style={{ backgroundColor: color }} onClick={e => handleChangeOddsGroup(e, item)}>{getLabel(item)}</DropdownItem>
+                                style={{ backgroundColor: color }} onClick={e => handleChangeOddsGroup(e, item)}>{getSpecialLevelText(item)}</DropdownItem>
                     })
                 }
             </DropdownMenu>
