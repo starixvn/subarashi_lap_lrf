@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="DTO\Player.cs" />
     <Compile Include="MetaModel\PlayerListBaseMetaModel.cs" />
+    <Compile Include="MetaModel\PlayerSuggestionMetaModel.cs" />
     <Compile Include="MetaModel\PlayerUpdatingBaseMetaModel.cs" />
     <Compile Include="MetaModel\PlayerListByIdMetaModel.cs" />
     <Compile Include="MetaModel\PlayerSearchingMetaModel.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="PlayerLogController.cs" />
     <Compile Include="PlayerOddsGroupController.cs" />
     <Compile Include="PlayerSpecialLevelController.cs" />
+    <Compile Include="PlayerSuggestionController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\Interfaces\IPlayerBaStatusRepository.cs" />
     <Compile Include="Repository\Interfaces\IPlayerOddsGroupRepository.cs" />
@@ -87,10 +89,12 @@
     <Compile Include="Services\Interfaces\IPlayerListService.cs" />
     <Compile Include="Services\Interfaces\IPlayerOddsGroupService.cs" />
     <Compile Include="Services\Interfaces\IPlayerSpecialLevelService.cs" />
+    <Compile Include="Services\Interfaces\IPlayerSuggestionService.cs" />
     <Compile Include="Services\PlayerBaStatusService.cs" />
     <Compile Include="Services\PlayerListService.cs" />
     <Compile Include="Services\PlayerOddsGroupService.cs" />
     <Compile Include="Services\PlayerSpecialLevelService.cs" />
+    <Compile Include="Services\PlayerSuggestionService.cs" />
     <Compile Include="Utilities\UpdatingUtils.cs" />
     <Compile Include="ViewModels\PlayerListResultViewModel.cs" />
   </ItemGroup>

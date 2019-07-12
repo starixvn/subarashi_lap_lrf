@@ -11,13 +11,13 @@ import CollapsiblePanel from '@jsroot/components/collapsible-panel';
 import UserGuide from '@jsroot/components/UserGuide';
 import LangHelper from '@jsroot/lib/langHelper';
 import { searchOptions, baStatusList, specialLevelListWithColor } from '../lib/constants';
+import UserNameInput from './filter/UserNameInput';
 
 export class FormFilter extends PureComponent {
     constructor(props) {
         super(props);
 
         this.state = {
-            userName: '',
             bankAccountNumber: '',
             email: '',
             currency: '',
@@ -29,6 +29,7 @@ export class FormFilter extends PureComponent {
 
         this.userGuide = this._renderUserGuide();
         this.allSpecialLevel = Object.keys(specialLevelListWithColor).map(item => item).join(',');
+        this.userNameRef = React.createRef();
     }
 
     handleSubmit = (event) => {
@@ -38,6 +39,7 @@ export class FormFilter extends PureComponent {
         const actualSpecialLevel = specialLevel.trim();
         const param = {
             ...allParam,
+            userName: this.userNameRef.current.value,
             specialLevel: actualSpecialLevel === '' ? this.allSpecialLevel : actualSpecialLevel,
             pageSize: pagingOption.PageSize,
             pageIndex: pagingOption.PageIndex
@@ -52,8 +54,12 @@ export class FormFilter extends PureComponent {
         this.setState({ [name]: value });
     }
 
-    handleAdvancedSearchChange = (name, value) => {
+    handleSpecificInputChange = (name, value) => {
         this.setState({ [name]: value });
+    }
+
+    handleUserNameChange = (value) => {
+        this.userNameRef.current.value = value;
     }
 
     showUserGuide() {
@@ -71,8 +77,8 @@ export class FormFilter extends PureComponent {
     }
 
     render() {
-        const { userName, bankAccountNumber, email, searchOption, ...advancedSearchParam } = this.state;
-        const { type, isAdvancedSearch, isFilterCollapsing, currencyList } = this.props;
+        const { bankAccountNumber, email, searchOption, ...advancedSearchParam } = this.state;
+        const { type, isAdvancedSearch, isFilterCollapsing, currencyList, getSuggestionList } = this.props;
         const iconToggle = {
             tag: 'div',
             className: isFilterCollapsing ? 'chevron down' : 'chevron up',
@@ -86,14 +92,14 @@ export class FormFilter extends PureComponent {
                     <div className="col-12 col-md-4 col-sm-4 col-lg-3 col-xl-2">
                         <div className="form-group">
                             <label className="label-text">UserName {(<SearchOption value={searchOption} onChange={this.handleChange} />)}</label>
-                            <input className="input-text" id="userName" name="userName" type="text" value={userName}
-                                autoComplete="off" onChange={this.handleChange} />
+                            <UserNameInput ref={this.userNameRef} onSelectItem={(value) => this.handleUserNameChange(value)} 
+                                minChar={3} getSuggestionList={getSuggestionList} searchOption={searchOption} />
                         </div>
                     </div>
 
                     {type === licenseeType.nonApi && <AthenaSearch onChange={this.handleChange}
                         bankAccountNumber={bankAccountNumber} email={email} />}
-                    {isAdvancedSearch && <AdvancedSearch currencyList={currencyList} param={advancedSearchParam} onChange={this.handleAdvancedSearchChange} />}
+                    {isAdvancedSearch && <AdvancedSearch currencyList={currencyList} param={advancedSearchParam} onChange={this.handleSpecificInputChange} />}
 
                     <div className="col-12 col-md-2 col-sm-2 col-lg-1 col-xl-1">
                         <div className="form-group">
@@ -117,8 +123,8 @@ export class FormFilter extends PureComponent {
     }
 }
 function mapDispatchToProps(dispatch) {
-    const { searchPlayer, setAdvancedSearch, setCollapseFilter } = ActionCreators;
-    return bindActionCreators({ searchPlayer, setAdvancedSearch, setCollapseFilter }, dispatch);
+    const { searchPlayer, setAdvancedSearch, setCollapseFilter, getSuggestionList } = ActionCreators;
+    return bindActionCreators({ searchPlayer, setAdvancedSearch, setCollapseFilter, getSuggestionList }, dispatch);
 }
 function mapStateToProps(state) {
     const { type, isAdvancedSearch, isFilterCollapsing, pagingOption, currencyList } = state;

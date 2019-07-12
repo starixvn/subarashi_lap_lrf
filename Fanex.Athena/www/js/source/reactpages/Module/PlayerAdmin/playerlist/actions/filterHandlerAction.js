@@ -5,6 +5,7 @@ import { setSelectedPlayer } from './commonAction';
 import { setPlayerList, setPagingOption, setIsFetchingData } from './gridHandlerAction';
 import { defaultPagingOption } from '../lib/constants.js';
 import { buildSelectedPlayer } from '../lib/utils';
+import PlayerSuggestionService from '../lib/playerSuggestionService';
 
 export const searchPlayer = (param) => (dispatch) => {
     const service = new PlayerQueryService();
@@ -57,4 +58,10 @@ export const setCollapseFilter = (data) => {
         type: SET_COLLAPSE_FILTER,
         data
     }
+}
+
+export const getSuggestionList = (param) => () => {
+    const suggestionService = new PlayerSuggestionService();
+
+    return suggestionService.getSuggestionList(param);
 }

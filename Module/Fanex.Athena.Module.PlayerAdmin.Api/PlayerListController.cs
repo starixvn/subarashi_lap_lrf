@@ -1,5 +1,4 @@
 ﻿using Fanex.Athena.Api.StatelessBase;
-using Fanex.Athena.Extension.External;
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.Services.Interfaces;
 using Fanex.Athena.Module.PlayerAdmin.Api.ViewModels;
@@ -19,12 +18,6 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api
         [HttpPost]
         public PlayerListResultViewModel Search(PlayerSearchingMetaModel searchParam)
         {
-            var isValidCurrency = CurrencyValidator.IsValid(AllowedCurrencyIdList, searchParam.Currency);
-            if (!isValidCurrency)
-            {
-                return new PlayerListResultViewModel();
-            }
-
             AssignParam(searchParam);
 
             return _playerListService.Search(searchParam);
