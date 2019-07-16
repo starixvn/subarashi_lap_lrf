@@ -163,7 +163,8 @@
     <Compile Include="MatchWinLossBetListController.cs" />
     <Compile Include="PendingFundsBetListController.cs" />
     <Compile Include="PlatformWinLossBetListController.cs" />
-    <Compile Include="PragmaticPlayBetListBetListController.cs" />
+    <Compile Include="CardClubBetListController.cs" />
+    <Compile Include="PragmaticPlayBetListController.cs" />
     <Compile Include="RNGCasinoBetListController.cs" />
     <Compile Include="RunningBetListController.cs" />
     <Compile Include="RunningBettypesOfMatchBetListController.cs" />

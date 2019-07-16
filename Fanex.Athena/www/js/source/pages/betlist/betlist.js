@@ -649,7 +649,7 @@
                 showDetailPopUp(url, { width: 890, height: popH + 50, title: title });
             },
             showPPDetails: function (transId, winlostDate, custId, transType) {
-                let url = Site.resolveClientUrl('RnGCasinoBetList/Detail');
+                let url = Site.resolveClientUrl('PragmaticPlayBetList/Detail');
                 url = QueryString.setParam(url, 'transId', transId);
                 url = QueryString.setParam(url, 'date', winlostDate);
                 url = QueryString.setParam(url, 'custId', custId);
@@ -663,7 +663,7 @@
                 showDetailPopUp(url, { width: 890, height: popH + 50, title: title });
             },
             showVideoPokerGameDetails: function (transId, winlostDate, custId, transType) {
-                let url = Site.resolveClientUrl('RnGCasinoBetList/Detail');
+                let url = Site.resolveClientUrl('CardClubBetList/Detail');
                 url = QueryString.setParam(url, 'transId', transId);
                 url = QueryString.setParam(url, 'winlostDate', winlostDate);
                 url = QueryString.setParam(url, 'custId', custId);

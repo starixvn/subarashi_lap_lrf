@@ -1218,7 +1218,7 @@
                     });
                     spyOn($.fn, "height").and.returnValue(700);
                     var transId = "transId", winlostDate = "06/01/2017", custId = "custId", transType = "transType";
-                    var url = "RnGCasinoBetList/Detail?transId=" + transId +
+                    var url = "PragmaticPlayBetList/Detail?transId=" + transId +
                         "&date=" + winlostDate +
                         "&custId=" + custId +
                         "&transType=" + transType +
@@ -1240,7 +1240,7 @@
                     });
                     spyOn($.fn, "height").and.returnValue(700);
                     var transId = "transId", winlostDate = "06/01/2017", custId = "custId", transType = "transType";
-                    var url = "RnGCasinoBetList/Detail?transId=" + transId +
+                    var url = "CardClubBetList/Detail?transId=" + transId +
                         "&winlostDate=" + winlostDate +
                         "&custId=" + custId +
                         "&transType=" + transType +
