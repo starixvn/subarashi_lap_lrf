@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { ActionCreators } from '../actions';
 
 import { Table } from '@9softstudio/react-grid';
 import ContextMenu from './grid/ContextMenu';
@@ -33,6 +35,13 @@ export class DataGrid extends PureComponent {
         return dataRows;
     }
 
+    handleSort = (sortBy, sortOrder) => {
+        console.log(sortBy, sortOrder);
+        const { playerList, setPlayerList } = this.props;
+        const sortedPlayerList = GridHelper.sortPlayerList(playerList, sortBy, sortOrder);
+        setPlayerList(sortedPlayerList);
+    }
+
     render() {
         const { playerList, selectedPlayer, isFetchingData, displayedColumnList } = this.props;
         if (!playerList) {
@@ -51,7 +60,8 @@ export class DataGrid extends PureComponent {
                     header={GridHelper.renderHeader(displayedColumn)}
                     body={this._renderDataSection(dataList, displayedColumn)}
                     containerPadding={30}
-                    shouldResetScrollPosition={isFetchingData} />
+                    shouldResetScrollPosition={isFetchingData}
+                    onSort={this.handleSort} />
                 <ContextMenu />
                 <SpecialLevelDropdown />
                 <OddsGroupDropdown />
@@ -61,9 +71,14 @@ export class DataGrid extends PureComponent {
     }
 }
 
+function mapDispatchToProps(dispatch) {
+    const { setPlayerList } = ActionCreators;
+    return bindActionCreators({ setPlayerList }, dispatch);
+}
+
 function mapStateToProps(state) {
     const { playerList, selectedPlayer, displayedColumnList, isFetchingData } = state;
     return Object.assign({}, { playerList, selectedPlayer, displayedColumnList, isFetchingData });
 };
 
-export default connect(mapStateToProps)(DataGrid);
+export default connect(mapStateToProps, mapDispatchToProps)(DataGrid);

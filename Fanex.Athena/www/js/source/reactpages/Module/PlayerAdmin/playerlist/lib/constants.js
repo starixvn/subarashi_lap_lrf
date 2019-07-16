@@ -26,20 +26,36 @@ export const licenseeType = {
     nonApi: 1
 }
 
+export const fields = {
+    Status: 'Status',
+    UserName: 'UserName',
+    SystemId: 'SystemId',
+    RealName: 'RealName',
+    Currency: 'Currency',
+    CurrentBalance: 'CurrentBalance',
+    OutstandingBalance: 'OutstandingBalance',
+    OddsGroup: 'OddsGroup',
+    BaStatus: 'BaStatus',
+    SpecialLevel: 'SpecialLevel',
+    LastLoginIp: 'LastLoginIp',
+    LastTransaction: 'LastTransaction',
+    Email: 'Email'
+}
+
 export const columnList = (licType) => [
-    { key: 'Status', value: 'Status', show: true },
-    { key: 'UserName', value: 'Username', show: true },
-    { key: 'SystemId', value: 'SystemId', show: true },
-    licType === licenseeType.nonApi ? { key: 'RealName', value: 'Real Name', show: true } : null,
-    { key: 'Currency', value: 'Currency', show: true },
-    { key: 'CurrentBalance', value: 'Current Balance', show: true },
-    { key: 'OutstandingBalance', value: 'Outstanding Balance', show: true },
-    { key: 'OddsGroup', value: 'Odds Group', show: true },
-    { key: 'BaStatus', value: 'BA Status', show: true },
-    { key: 'SpecialLevel', value: 'Special Level', show: true },
-    licType === licenseeType.nonApi ? { key: 'LastLoginIp', value: 'Last Login IP', show: true } : null,
-    { key: 'LastTransaction', value: 'Last Transaction', show: true },
-    licType === licenseeType.nonApi ? { key: 'Email', value: 'Email', show: true } : null
+    { key: fields.Status, value: 'Status', show: true },
+    { key: fields.UserName, value: 'Username', show: true },
+    { key: fields.SystemId, value: 'SystemId', show: true },
+    licType === licenseeType.nonApi ? { key: fields.RealName, value: 'Real Name', show: true } : null,
+    { key: fields.Currency, value: 'Currency', show: true },
+    { key: fields.CurrentBalance, value: 'Current Balance', show: true },
+    { key: fields.OutstandingBalance, value: 'Outstanding Balance', show: true },
+    { key: fields.OddsGroup, value: 'Odds Group', show: true },
+    { key: fields.BaStatus, value: 'BA Status', show: true },
+    { key: fields.SpecialLevel, value: 'Special Level', show: true },
+    licType === licenseeType.nonApi ? { key: fields.LastLoginIp, value: 'Last Login IP', show: true } : null,
+    { key: fields.LastTransaction, value: 'Last Transaction', show: true },
+    licType === licenseeType.nonApi ? { key: fields.Email, value: 'Email', show: true } : null
 ].filter(x => !!x);
 
 export const contextMenuList = [

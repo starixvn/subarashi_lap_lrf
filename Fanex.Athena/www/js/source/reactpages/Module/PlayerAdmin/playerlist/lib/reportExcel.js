@@ -1,6 +1,6 @@
 import Excel from '@jsroot/lib/excel';
 import { headerCellStyle, bodyCellStyle } from '@jsroot/constants/excelStyle';
-import { headerText } from '../lib/constants';
+import { fields, headerText } from '../lib/constants';
 import { setupWebpackPublicPath } from '../../../lib/publicPathUtils';
 import { getSpecialLevelText, getBaStatusText } from './utils';
 
@@ -9,25 +9,9 @@ const DATA_ROW_INDEX = 1;
 
 const MAIN_SECTION_STYLE = 'mainSectionStyle';
 
-const fields = {
-    Status: 'Status',
-    UserName: 'UserName',
-    SystemId: 'SystemId',
-    RealName: 'RealName',
-    Currency: 'Currency',
-    CurrentBalance: 'CurrentBalance',
-    OutstandingBalance: 'OutstandingBalance',
-    OddsGroup: 'OddsGroup',
-    BaStatus: 'BaStatus',
-    SpecialLevel: 'SpecialLevel',
-    LastLoginIp: 'LastLoginIp',
-    LastTransaction: 'LastTransaction',
-    Email: 'Email'
-}
-
 const displayedTextByField = {
-    'SpecialLevel': (value) => getSpecialLevelText(value),
-    'BaStatus': (value) => getBaStatusText(value)
+    [fields.SpecialLevel]: (value) => getSpecialLevelText(value),
+    [fields.BaStatus]: (value) => getBaStatusText(value)
 }
 
 export default class ReportExcel {
