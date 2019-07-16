@@ -3,6 +3,7 @@
 }
 @using Fanex.Athena.Extension.Helper;
 ﻿@using Fanex.Athena.Service.Core.Users.Interfaces;
+@using Fanex.Athena.Model.Auth.Enum;
 @section css
 {
     @System.Web.Optimization.Styles.Render("~/bundles/jqGridLayoutStyles")
@@ -16,7 +17,7 @@
 @{
     var sessionService = DependencyResolver.Current.GetService<ISessionService>();
     var userSession = sessionService.UserSession;
-    var isAppModeSelf = userSession == null ? true : userSession.ApplicationMode == Fanex.Athena.Session.Enum.AppMode.Self;
+    var isAppModeSelf = userSession == null ? true : userSession.ApplicationMode == AppMode.Self;
 }
 <div class="container_26">
     <div class="grid_26 @(isAppModeSelf ? string.Empty: "hide")">

@@ -1,4 +1,5 @@
 ﻿@using Fanex.Athena.Service.Core.Users.Interfaces;
+@using Fanex.Athena.Model.Auth.Enum;
 @{
     var sessionService = DependencyResolver.Current.GetService<ISessionService>();
     var appSettings = DependencyResolver.Current.GetService<IAppSettings>();
@@ -9,7 +10,7 @@
         userSession.CurrencyList.ToDictionary(x => x.Key.ToString(), x => x.Value);
 
     var hasCustComm = licSession != null && licSession.IsAllowedCustomerComm;
-    var isParasiticMode = userSession != null && userSession.ApplicationMode == Fanex.Athena.Session.Enum.AppMode.Parasitic;
+    var isParasiticMode = userSession != null && userSession.ApplicationMode == AppMode.Parasitic;
     var isFakeLicensee = appSettings.FakeLicenseeList.Contains(licSession.LicenseeId);
     var langCode = System.Globalization.CultureInfo.CurrentUICulture.IetfLanguageTag;
 }
@@ -67,11 +68,11 @@
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-93927620-1"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
+            function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
 
             gtag('config', 'UA-93927620-1');
-            
+
             window.logOpenBetlistEvent = function () {
                 try {
                     window.gtag('event', 'view_bet_list', {
