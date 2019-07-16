@@ -72,11 +72,8 @@ export default class PlayerQueryService {
         return this.commonService.getLink(systemType, action);
     }
 
-    exportExcel(licType, param, fileName = 'PlayerList') {
-        this.getPlayerList(param).then((response) => {
-            const { playerList } = response;
-            const reportExcel = new ReportExcel(licType, playerList, fileName);
-            reportExcel.export();
-        });
+    exportExcel(playerList, param, displayedColumn, fileName = 'PlayerList') {
+        const reportExcel = new ReportExcel(playerList, displayedColumn, fileName);
+        reportExcel.export();
     }
 }

@@ -11,7 +11,7 @@ export const UserNameInput = React.forwardRef((props, userNameRef) => {
 
     const handleChange = () => {
         const element = userNameRef.current;
-        if(!element){
+        if (!element) {
             return;
         }
 
@@ -35,7 +35,7 @@ export const UserNameInput = React.forwardRef((props, userNameRef) => {
                 setIsOpenSuggestion(!!hasData);
             })
         }
-        else{
+        else {
             setIsOpenSuggestion(false);
             setSuggestionList([]);
         }

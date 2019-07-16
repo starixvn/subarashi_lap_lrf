@@ -29,9 +29,9 @@ export const setPagingOption = (data) => {
     }
 }
 
-export const exportExcel = (licType, param) => () => {
+export const exportExcel = (playerList, param, displayedColumn) => () => {
     const service = new PlayerQueryService();
-    service.exportExcel(licType, param);
+    service.exportExcel(playerList, param, displayedColumn);
 }
 
 export const setIsFetchingData = (data) => {

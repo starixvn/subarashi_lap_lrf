@@ -6,6 +6,7 @@ import { ActionCreators } from '../../actions';
 import ReportTitle from '@jsroot/components/ReportTitle';
 import MultipleSelect from '@9softstudio/react-multiselect';
 import LangHelper from '@jsroot/lib/langHelper';
+import { buildDisplayedColumnObject } from '../../lib/utils';
 
 export class GridCaption extends React.PureComponent {
     constructor(props) {
@@ -63,8 +64,13 @@ export class GridCaption extends React.PureComponent {
     }
 
     handleExportExcel = () => {
-        const { type, param, exportExcel } = this.props;
-        exportExcel(type, param);
+        const { playerList, param, displayedColumnList, exportExcel } = this.props;
+        if (displayedColumnList.filter(x => x.show).length === 0) {
+            return;
+        }
+
+        const displayedColumn = buildDisplayedColumnObject(displayedColumnList);
+        exportExcel(playerList, param, displayedColumn);
     }
 
     render() {
@@ -80,9 +86,9 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-    const { pagingOption, selectedPlayer, displayedColumnList, type, param } = state;
+    const { pagingOption, selectedPlayer, displayedColumnList, param, playerList } = state;
     const playerCount = pagingOption.TotalItem || 0;
-    return Object.assign({}, { playerCount, selectedPlayer, displayedColumnList, type, param });
+    return Object.assign({}, { playerList, playerCount, selectedPlayer, displayedColumnList, param });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(GridCaption);

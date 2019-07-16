@@ -28,14 +28,14 @@ export const licenseeType = {
 
 export const columnList = (licType) => [
     { key: 'Status', value: 'Status', show: true },
-    { key: 'Username', value: 'Username', show: true },
-    { key: 'SystemID', value: 'SystemID', show: true },
+    { key: 'UserName', value: 'Username', show: true },
+    { key: 'SystemId', value: 'SystemId', show: true },
     licType === licenseeType.nonApi ? { key: 'RealName', value: 'Real Name', show: true } : null,
     { key: 'Currency', value: 'Currency', show: true },
     { key: 'CurrentBalance', value: 'Current Balance', show: true },
     { key: 'OutstandingBalance', value: 'Outstanding Balance', show: true },
     { key: 'OddsGroup', value: 'Odds Group', show: true },
-    { key: 'BAStatus', value: 'BA Status', show: true },
+    { key: 'BaStatus', value: 'BA Status', show: true },
     { key: 'SpecialLevel', value: 'Special Level', show: true },
     licType === licenseeType.nonApi ? { key: 'LastLoginIp', value: 'Last Login IP', show: true } : null,
     { key: 'LastTransaction', value: 'Last Transaction', show: true },

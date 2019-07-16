@@ -8,6 +8,7 @@ import GridHelper from '../lib/gridHelper';
 import OddsGroupDropdown from './grid/OddsGroupDropdown';
 import PlayerRow from './grid/PlayerRow';
 import StatusDropdown from './grid/StatusDropdown';
+import { buildDisplayedColumnObject } from '../lib/utils';
 
 const MAX_WIDTH_PAGE = 1920;
 
@@ -16,15 +17,6 @@ export class DataGrid extends PureComponent {
         super(props);
 
         this.maxWidth = Math.min(document.body.clientWidth, MAX_WIDTH_PAGE);
-    }
-
-    _buildDisplayedColumn() {
-        const { displayedColumnList } = this.props;
-
-        return displayedColumnList.reduce((accumulator, currentItem) => {
-            accumulator[currentItem.key] = currentItem.show;
-            return accumulator;
-        }, {})
     }
 
     _renderDataSection(dataList, displayedColumn) {
@@ -42,13 +34,13 @@ export class DataGrid extends PureComponent {
     }
 
     render() {
-        const { playerList, selectedPlayer, isFetchingData } = this.props;
+        const { playerList, selectedPlayer, isFetchingData, displayedColumnList } = this.props;
         if (!playerList) {
             return null;
         }
 
         const dataList = selectedPlayer ? [playerList.find(item => item.CustId === selectedPlayer.custId)] : playerList;
-        const displayedColumn = this._buildDisplayedColumn();
+        const displayedColumn = buildDisplayedColumnObject(displayedColumnList);
 
         return (
             <>

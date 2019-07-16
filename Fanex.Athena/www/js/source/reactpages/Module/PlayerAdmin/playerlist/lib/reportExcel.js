@@ -2,12 +2,10 @@ import Excel from '@jsroot/lib/excel';
 import { headerCellStyle, bodyCellStyle } from '@jsroot/constants/excelStyle';
 import { headerText } from '../lib/constants';
 import { setupWebpackPublicPath } from '../../../lib/publicPathUtils';
-import { getSpecialLevelText } from './utils';
+import { getSpecialLevelText, getBaStatusText } from './utils';
 
 const HEADER_ROW_INDEX = 0;
 const DATA_ROW_INDEX = 1;
-
-const TOTAL_COLUMN = 13;
 
 const MAIN_SECTION_STYLE = 'mainSectionStyle';
 
@@ -27,11 +25,16 @@ const fields = {
     Email: 'Email'
 }
 
+const displayedTextByField = {
+    'SpecialLevel': (value) => getSpecialLevelText(value),
+    'BaStatus': (value) => getBaStatusText(value)
+}
+
 export default class ReportExcel {
-    constructor(licType, data, title) {
+    constructor(data, displayedColumn, title) {
         this.data = data;
         this.title = title;
-        this.licType = licType;
+        this.displayedColumn = displayedColumn;
 
         this.worksheet = {};
         this.currentRowIndex = DATA_ROW_INDEX;
@@ -51,9 +54,9 @@ export default class ReportExcel {
     }
 
     _createHeader() {
-        const fieldKeys = Object.keys(fields);
-        for (let i = 0; i < TOTAL_COLUMN; i++) {
-            const field = fieldKeys[i];
+        const totalColumn = this.columnConfigs.length;
+        for (let i = 0; i < totalColumn; i++) {
+            const field = this.columnConfigs[i].field;
             const address = Excel.getCellAddress({
                 c: i,
                 r: HEADER_ROW_INDEX
@@ -67,10 +70,11 @@ export default class ReportExcel {
     }
 
     _createBodyData() {
+        const totalColumn = this.columnConfigs.length;
         for (let i = 0; i < this.data.length; i++) {
             const item = this.data[i];
 
-            for (let j = 0; j < TOTAL_COLUMN; j++) {
+            for (let j = 0; j < totalColumn; j++) {
                 const address = Excel.getCellAddress({
                     c: j,
                     r: this.currentRowIndex
@@ -86,8 +90,9 @@ export default class ReportExcel {
     _buildDataRow(item, colIndex) {
         const columnConfig = this.columnConfigs[colIndex];
         const value = item[columnConfig.field];
-        const displayedValue = this._shouldSetEmpty(value) ? '' :
-            (columnConfig.field === fields.SpecialLevel ? getSpecialLevelText(value) : value);
+        const displayedTextFunc = displayedTextByField[columnConfig.field];
+        const displayedValue = displayedTextFunc ? displayedTextFunc(value) :
+            (this._shouldSetEmpty(value) ? '' : value);
 
         return {
             t: Excel.getCellType(displayedValue),
@@ -107,79 +112,66 @@ export default class ReportExcel {
         });
         const cellEnd = Excel.getCellAddress({
             r: this.currentRowIndex,
-            c: TOTAL_COLUMN
+            c: this.columnConfigs.length
         });
 
         this.worksheet["!ref"] = `${cellStart}:${cellEnd}`;
-        this.worksheet['!cols'] = [{
-            wpx: 60
-        }, {
-            wpx: 200
-        }, {
-            wpx: 200
-        }, {
-            wpx: 150
-        }, {
-            wpx: 80
-        }, {
-            wpx: 130
-        }, {
-            wpx: 130
-        }, {
-            wpx: 70
-        }, {
-            wpx: 70
-        }, {
-            wpx: 70
-        }, {
-            wpx: 100
-        }, {
-            wpx: 150
-        }, {
-            wpx: 200
-        }];
+        this.worksheet['!cols'] = this.columnConfigs.map(x => ({ wpx: x.width }));
     }
 
     _getcolumnConfigs() {
         return [{
             field: fields.Status,
-            [MAIN_SECTION_STYLE]: bodyCellStyle.center
+            [MAIN_SECTION_STYLE]: bodyCellStyle.center,
+            width: 60
         }, {
             field: fields.UserName,
-            [MAIN_SECTION_STYLE]: bodyCellStyle.center
+            [MAIN_SECTION_STYLE]: bodyCellStyle.center,
+            width: 200
         }, {
             field: fields.SystemId,
-            [MAIN_SECTION_STYLE]: bodyCellStyle.center
+            [MAIN_SECTION_STYLE]: bodyCellStyle.center,
+            width: 200
         }, {
             field: fields.RealName,
-            [MAIN_SECTION_STYLE]: bodyCellStyle.center
+            [MAIN_SECTION_STYLE]: bodyCellStyle.center,
+            width: 150
         }, {
             field: fields.Currency,
-            [MAIN_SECTION_STYLE]: bodyCellStyle.center
+            [MAIN_SECTION_STYLE]: bodyCellStyle.center,
+            width: 80
         }, {
             field: fields.CurrentBalance,
-            [MAIN_SECTION_STYLE]: bodyCellStyle.decimal
+            [MAIN_SECTION_STYLE]: bodyCellStyle.decimal,
+            width: 130
         }, {
             field: fields.OutstandingBalance,
-            [MAIN_SECTION_STYLE]: bodyCellStyle.decimal
+            [MAIN_SECTION_STYLE]: bodyCellStyle.decimal,
+            width: 130
         }, {
             field: fields.OddsGroup,
-            [MAIN_SECTION_STYLE]: bodyCellStyle.center
+            [MAIN_SECTION_STYLE]: bodyCellStyle.center,
+            width: 70
         }, {
             field: fields.BaStatus,
-            [MAIN_SECTION_STYLE]: bodyCellStyle.center
+            [MAIN_SECTION_STYLE]: bodyCellStyle.center,
+            width: 70
         }, {
             field: fields.SpecialLevel,
-            [MAIN_SECTION_STYLE]: bodyCellStyle.center
+            [MAIN_SECTION_STYLE]: bodyCellStyle.center,
+            width: 70
         }, {
             field: fields.LastLoginIp,
-            [MAIN_SECTION_STYLE]: bodyCellStyle.center
+            [MAIN_SECTION_STYLE]: bodyCellStyle.center,
+            width: 100
         }, {
             field: fields.LastTransaction,
-            [MAIN_SECTION_STYLE]: bodyCellStyle.center
+            [MAIN_SECTION_STYLE]: bodyCellStyle.center,
+            width: 150
         }, {
             field: fields.Email,
-            [MAIN_SECTION_STYLE]: bodyCellStyle.center
-        }]
+            [MAIN_SECTION_STYLE]: bodyCellStyle.center,
+            width: 200
+        }].filter(x => !!this.displayedColumn[x.field]);
     }
 }
