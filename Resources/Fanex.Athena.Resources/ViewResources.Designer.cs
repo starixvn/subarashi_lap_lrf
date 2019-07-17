@@ -169,6 +169,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Advanced Search.
+        /// </summary>
+        public static string AdvancedSearch {
+            get {
+                return ResourceManager.GetString("AdvancedSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Affiliate Transfer.
         /// </summary>
         public static string AffiliateTransfer {
@@ -583,6 +592,27 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+<<<<<<< HEAD
+=======
+        ///   Looks up a localized string similar to Bank Account Number.
+        /// </summary>
+        public static string BankAccountNumber {
+            get {
+                return ResourceManager.GetString("BankAccountNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BA status can only be changed on Monday from 1PM to 5PM (GMT+8).
+        /// </summary>
+        public static string BANote {
+            get {
+                return ResourceManager.GetString("BANote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+>>>>>>> 112658 - Update text resource
         ///   Looks up a localized string similar to Base Currency.
         /// </summary>
         public static string BaseCurrency {
@@ -1375,6 +1405,27 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+<<<<<<< HEAD
+=======
+        ///   Looks up a localized string similar to Current Balance.
+        /// </summary>
+        public static string CurrentBalance {
+            get {
+                return ResourceManager.GetString("CurrentBalance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current Group.
+        /// </summary>
+        public static string CurrentGroup {
+            get {
+                return ResourceManager.GetString("CurrentGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+>>>>>>> 112658 - Update text resource
         ///   Looks up a localized string similar to Current month.
         /// </summary>
         public static string Currentmonth {
@@ -1996,6 +2047,27 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+<<<<<<< HEAD
+=======
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        public static string Email {
+            get {
+                return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable.
+        /// </summary>
+        public static string Enable {
+            get {
+                return ResourceManager.GetString("Enable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+>>>>>>> 112658 - Update text resource
         ///   Looks up a localized string similar to Enable AG Casino.
         /// </summary>
         public static string EnableAgCasino {
@@ -3004,6 +3076,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Last Login IP.
+        /// </summary>
+        public static string LastLoginIP {
+            get {
+                return ResourceManager.GetString("LastLoginIP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Last month.
         /// </summary>
         public static string Lastmonth {
@@ -3018,6 +3099,15 @@ namespace Fanex.Athena.Resources {
         public static string LastName {
             get {
                 return ResourceManager.GetString("LastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last Transaction.
+        /// </summary>
+        public static string LastTransaction {
+            get {
+                return ResourceManager.GetString("LastTransaction", resourceCulture);
             }
         }
         
@@ -4264,6 +4354,27 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+<<<<<<< HEAD
+=======
+        ///   Looks up a localized string similar to Outright Results.
+        /// </summary>
+        public static string OutrightResults {
+            get {
+                return ResourceManager.GetString("OutrightResults", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Outstanding Balance.
+        /// </summary>
+        public static string OutstandingBalance {
+            get {
+                return ResourceManager.GetString("OutstandingBalance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+>>>>>>> 112658 - Update text resource
         ///   Looks up a localized string similar to Over.
         /// </summary>
         public static string Over {
@@ -4435,6 +4546,27 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+<<<<<<< HEAD
+=======
+        ///   Looks up a localized string similar to Previous.
+        /// </summary>
+        public static string Previous {
+            get {
+                return ResourceManager.GetString("Previous", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Previous search result.
+        /// </summary>
+        public static string PreviousSearchResult {
+            get {
+                return ResourceManager.GetString("PreviousSearchResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+>>>>>>> 112658 - Update text resource
         ///   Looks up a localized string similar to There is problem to display bet setting group&apos;s detail..
         /// </summary>
         public static string ProblemDisplayBetSetting {
@@ -4669,6 +4801,36 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+<<<<<<< HEAD
+=======
+        ///   Looks up a localized string similar to RB Comm.
+        /// </summary>
+        public static string RBComm {
+            get {
+                return ResourceManager.GetString("RBComm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RC Commission.
+        /// </summary>
+        public static string RCCommission {
+            get {
+                return ResourceManager.GetString("RCCommission", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Real Name.
+        /// </summary>
+        public static string RealName {
+            get {
+                return ResourceManager.GetString("RealName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+>>>>>>> 112658 - Update text resource
         ///   Looks up a localized string similar to You please consider using Firefox or Chrome for better experience when page size &gt; 1,000.
         /// </summary>
         public static string RecommendBrowserOnReportPageMsg {

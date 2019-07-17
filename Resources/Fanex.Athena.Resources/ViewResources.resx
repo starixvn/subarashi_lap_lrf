@@ -2353,6 +2353,7 @@
     <value>Promotion Prize</value>
     <comment>109471</comment>
   </data>
+<<<<<<< HEAD
   <data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>
@@ -2361,6 +2362,43 @@
   </data>
   <data name="AGClosingBalance" xml:space="preserve">
     <value>AG Closing Balance</value>
+=======
+  <data name="BankAccountNumber" xml:space="preserve">
+    <value>Bank Account Number</value>
+    <comment>112658</comment>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+    <comment>112658</comment>
+  </data>
+  <data name="PreviousSearchResult" xml:space="preserve">
+    <value>Previous search result</value>
+    <comment>112658</comment>
+  </data>
+  <data name="AdvancedSearch" xml:space="preserve">
+    <value>Advanced Search</value>
+    <comment>112658</comment>
+  </data>
+  <data name="CurrentBalance" xml:space="preserve">
+    <value>Current Balance</value>
+    <comment>112658</comment>
+  </data>
+  <data name="LastLoginIP" xml:space="preserve">
+    <value>Last Login IP</value>
+    <comment>112658</comment>
+  </data>
+  <data name="LastTransaction" xml:space="preserve">
+    <value>Last Transaction</value>
+    <comment>112658</comment>
+  </data>
+  <data name="OutstandingBalance" xml:space="preserve">
+    <value>Outstanding Balance</value>
+    <comment>112658</comment>
+  </data>
+  <data name="RealName" xml:space="preserve">
+    <value>Real Name</value>
+    <comment>112658</comment>
+>>>>>>> 112658 - Update text resource
   </data>
   <data name="Pending" xml:space="preserve">
     <value>Pending</value>

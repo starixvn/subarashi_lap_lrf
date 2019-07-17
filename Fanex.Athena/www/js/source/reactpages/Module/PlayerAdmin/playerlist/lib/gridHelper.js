@@ -1,6 +1,7 @@
 import React from 'react';
 import { HeaderRow, HeaderCell } from '@9softstudio/react-grid';
 import { fields } from './constants';
+import LangHelper from '@jsroot/lib/langHelper';
 
 export default class GridHelper {
     static renderHeader(displayedColumn) {
@@ -11,19 +12,19 @@ export default class GridHelper {
             <HeaderRow style={{ height: 32 }}>
                 {/* For Phase 2 */}
                 {/* <HeaderCell colWidth={30}><input type="checkbox" /></HeaderCell> */}
-                {displayedColumn[Status] && <HeaderCell colWidth={80} sortBy={Status}>Status</HeaderCell>}
-                {displayedColumn[UserName] && <HeaderCell colWidth={80} sortBy={UserName}>Username</HeaderCell>}
-                {displayedColumn[SystemId] && <HeaderCell colWidth={100}>SystemId</HeaderCell>}
-                {displayedColumn[RealName] && <HeaderCell colWidth={80} sortBy={RealName}>Real Name</HeaderCell>}
-                {displayedColumn[Currency] && <HeaderCell colWidth={60} sortBy={Currency}>Currency</HeaderCell>}
-                {displayedColumn[CurrentBalance] && <HeaderCell colWidth={80} sortBy={CurrentBalance}>Current Balance</HeaderCell>}
-                {displayedColumn[OutstandingBalance] && <HeaderCell colWidth={80} sortBy={OutstandingBalance}>Outstanding Balance</HeaderCell>}
-                {displayedColumn[OddsGroup] && <HeaderCell colWidth={50} sortBy={OddsGroup}>Odds Group</HeaderCell>}
-                {displayedColumn[BaStatus] && <HeaderCell colWidth={50} sortBy={BaStatus}>BA Status</HeaderCell>}
-                {displayedColumn[SpecialLevel] && <HeaderCell colWidth={50} sortBy={SpecialLevel}>Special Level</HeaderCell>}
-                {displayedColumn[LastLoginIp] && <HeaderCell colWidth={60}>Last Login IP</HeaderCell>}
-                {displayedColumn[LastTransaction] && <HeaderCell colWidth={100} sortBy={LastTransaction}>Last Transaction</HeaderCell>}
-                {displayedColumn[Email] && <HeaderCell colWidth={100}>Email</HeaderCell>}
+                {displayedColumn[Status] && <HeaderCell colWidth={80} sortBy={Status}>{LangHelper.getSingleResource('Status')}</HeaderCell>}
+                {displayedColumn[UserName] && <HeaderCell colWidth={80} sortBy={UserName}>{LangHelper.getSingleResource('Username')}</HeaderCell>}
+                {displayedColumn[SystemId] && <HeaderCell colWidth={100}>{LangHelper.getSingleResource('SystemId')}</HeaderCell>}
+                {displayedColumn[RealName] && <HeaderCell colWidth={80} sortBy={RealName}>{LangHelper.getSingleResource('RealName')}</HeaderCell>}
+                {displayedColumn[Currency] && <HeaderCell colWidth={60} sortBy={Currency}>{LangHelper.getSingleResource('Currency')}</HeaderCell>}
+                {displayedColumn[CurrentBalance] && <HeaderCell colWidth={80} sortBy={CurrentBalance}>{LangHelper.getSingleResource('CurrentBalance')}</HeaderCell>}
+                {displayedColumn[OutstandingBalance] && <HeaderCell colWidth={80} sortBy={OutstandingBalance}>{LangHelper.getSingleResource('OutstandingBalance')}</HeaderCell>}
+                {displayedColumn[OddsGroup] && <HeaderCell colWidth={50} sortBy={OddsGroup}>{LangHelper.getSingleResource('OddsGroup')}</HeaderCell>}
+                {displayedColumn[BaStatus] && <HeaderCell colWidth={50} sortBy={BaStatus}>{LangHelper.getSingleResource('BAStatus')}</HeaderCell>}
+                {displayedColumn[SpecialLevel] && <HeaderCell colWidth={50} sortBy={SpecialLevel}>{LangHelper.getSingleResource('SpecialLevel')}</HeaderCell>}
+                {displayedColumn[LastLoginIp] && <HeaderCell colWidth={60}>{LangHelper.getSingleResource('LastLoginIP')}</HeaderCell>}
+                {displayedColumn[LastTransaction] && <HeaderCell colWidth={100} sortBy={LastTransaction}>{LangHelper.getSingleResource('LastTransaction')}</HeaderCell>}
+                {displayedColumn[Email] && <HeaderCell colWidth={100}>{LangHelper.getSingleResource('Email')}</HeaderCell>}
             </HeaderRow>
         )
     }
@@ -60,11 +61,8 @@ export default class GridHelper {
         const currentUpperCase = current.toUpperCase();
         const nextUpperCase = next.toUpperCase();
 
-        if (isSortAscending) {
-            return currentUpperCase > nextUpperCase ? 1 : (currentUpperCase < nextUpperCase ? -1 : 0);
-        }
-        else {
-            return currentUpperCase > nextUpperCase ? -1 : (currentUpperCase < nextUpperCase ? 1 : 0);
-        }
+        const sortResult = currentUpperCase > nextUpperCase ? 1 : (currentUpperCase < nextUpperCase ? -1 : 0);
+
+        return isSortAscending ? sortResult : -sortResult;
     }
 }

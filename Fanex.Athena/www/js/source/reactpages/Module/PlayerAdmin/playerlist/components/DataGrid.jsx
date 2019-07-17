@@ -11,6 +11,7 @@ import OddsGroupDropdown from './grid/OddsGroupDropdown';
 import PlayerRow from './grid/PlayerRow';
 import StatusDropdown from './grid/StatusDropdown';
 import { buildDisplayedColumnObject } from '../lib/utils';
+import NoDataTitle from '@jsroot/components/NoDataTitle';
 
 const MAX_WIDTH_PAGE = 1920;
 
@@ -36,7 +37,6 @@ export class DataGrid extends PureComponent {
     }
 
     handleSort = (sortBy, sortOrder) => {
-        console.log(sortBy, sortOrder);
         const { playerList, setPlayerList } = this.props;
         const sortedPlayerList = GridHelper.sortPlayerList(playerList, sortBy, sortOrder);
         setPlayerList(sortedPlayerList);
@@ -46,6 +46,10 @@ export class DataGrid extends PureComponent {
         const { playerList, selectedPlayer, isFetchingData, displayedColumnList } = this.props;
         if (!playerList) {
             return null;
+        }
+
+        if (!playerList.length) {
+            return <NoDataTitle />;
         }
 
         const dataList = selectedPlayer ? [playerList.find(item => item.CustId === selectedPlayer.custId)] : playerList;

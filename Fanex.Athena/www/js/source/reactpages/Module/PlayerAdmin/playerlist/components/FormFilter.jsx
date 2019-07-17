@@ -91,7 +91,10 @@ export class FormFilter extends PureComponent {
                 <div className="row">
                     <div className="col-12 col-md-4 col-sm-4 col-lg-3 col-xl-2">
                         <div className="form-group">
-                            <label className="label-text">UserName {(<SearchOption value={searchOption} onChange={this.handleChange} />)}</label>
+                            <label className="label-text">
+                                {LangHelper.getSingleResource("Username")}
+                                {(<SearchOption value={searchOption} onChange={this.handleChange} />)}
+                            </label>
                             <UserNameInput ref={this.userNameRef} onSelectItem={(value) => this.handleUserNameChange(value)} 
                                 minChar={3} getSuggestionList={getSuggestionList} searchOption={searchOption} />
                         </div>
@@ -104,7 +107,7 @@ export class FormFilter extends PureComponent {
                     <div className="col-12 col-md-2 col-sm-2 col-lg-1 col-xl-1">
                         <div className="form-group">
                             <div className="button-group">
-                                <button type="button" className="btn btn-submit" onClick={this.handleSubmit}>Submit</button>
+                                <button type="button" className="btn btn-submit" onClick={this.handleSubmit}>{LangHelper.getSingleResource("Submit")}</button>
                             </div>
                         </div>
                     </div>
@@ -114,7 +117,7 @@ export class FormFilter extends PureComponent {
                             <CheckBox id="isAdvancedSearch"
                                 checked={isAdvancedSearch}
                                 onChange={checked => this.props.setAdvancedSearch(checked)}
-                                label="Advanced Search" />
+                                label={LangHelper.getSingleResource("AdvancedSearch")} />
                         </div>
                     </div>
                 </div>

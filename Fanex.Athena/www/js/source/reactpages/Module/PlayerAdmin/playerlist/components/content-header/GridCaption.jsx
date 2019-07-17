@@ -41,7 +41,7 @@ export class GridCaption extends React.PureComponent {
         if (selectedPlayer) {
             return (
                 <>
-                    <span className="link" onClick={() => this.props.setSelectedPlayer(null)}>Previous search result</span>
+                    <span className="link" onClick={() => this.props.setSelectedPlayer(null)}>{LangHelper.getSingleResource('PreviousSearchResult')}</span>
                     <span><i className="chevron right icon-separator"></i> Player: {selectedPlayer.userName} ({selectedPlayer.currency})</span>
                 </>
             )
@@ -66,6 +66,7 @@ export class GridCaption extends React.PureComponent {
     handleExportExcel = () => {
         const { playerList, param, displayedColumnList, exportExcel } = this.props;
         if (displayedColumnList.filter(x => x.show).length === 0) {
+            window.alert(LangHelper.getSingleResource("NoInfo"));
             return;
         }
 

@@ -3,6 +3,7 @@ import MultipleSelect from '@9softstudio/react-multiselect';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
 import { baStatusList, specialLevelListWithColor, oddsGroupListWithStyle } from '../../lib/constants';
+import LangHelper from '@jsroot/lib/langHelper';
 
 export class AdvancedSearch extends PureComponent {
     constructor(props) {
@@ -47,7 +48,7 @@ export class AdvancedSearch extends PureComponent {
             <>
                 <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
                     <div className="form-group">
-                        <label className="label-text">Currency</label>
+                        <label className="label-text">{LangHelper.getSingleResource("Currency")}</label>
                         <MultipleSelect id="currency"
                             dataSource={convertedCurrencyList}
                             keyField={"Id"}
@@ -59,7 +60,7 @@ export class AdvancedSearch extends PureComponent {
 
                 <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
                     <div className="form-group">
-                        <label className="label-text">Odds Group</label>
+                        <label className="label-text">{LangHelper.getSingleResource("OddsGroup")}</label>
                         <MultipleSelect id="oddsGroup"
                             dataSource={oddsGroupList}
                             keyField={"Id"}
@@ -71,7 +72,7 @@ export class AdvancedSearch extends PureComponent {
 
                 <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
                     <div className="form-group">
-                        <label className="label-text">Special Level</label>
+                        <label className="label-text">{LangHelper.getSingleResource("SpecialLevel")}</label>
                         <MultipleSelect id="specialLevel"
                             dataSource={specialLevelList}
                             keyField={"Id"}
@@ -83,7 +84,7 @@ export class AdvancedSearch extends PureComponent {
 
                 <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
                     <div className="form-group">
-                        <label className="label-text">BA</label>
+                        <label className="label-text">{LangHelper.getSingleResource("BA")}</label>
                         <Select instanceId='ddlBaStatus'
                             name='form-field-name'
                             value={selectedBaStatus}
