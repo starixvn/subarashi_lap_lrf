@@ -595,11 +595,13 @@
     <Content Include="www\assets\images\ajax-loader.gif" />
     <Content Include="www\assets\images\new-system.svg" />
     <Content Include="www\css\build\dev\pages\betlist\images\lotto_ball.png" />
+    <Content Include="www\css\build\dev\pages\betlist\images\rebateBonus.png" />
     <Content Include="www\css\build\dev\reactpages\betlist\images\bonus.png" />
     <Content Include="www\css\build\dev\reactpages\betlist\images\goal-icon.png" />
     <Content Include="www\css\build\dev\reactpages\betlist\images\lotto_ball.png" />
     <Content Include="www\css\build\dev\reactpages\betlist\images\q_Icon2_1.png" />
     <Content Include="www\css\build\dev\reactpages\betlist\images\q_Icon_2.png" />
+    <Content Include="www\css\build\dev\reactpages\betlist\images\rebateBonus.png" />
     <Content Include="www\css\build\dev\reactpages\betlist\images\tab_topbg.gif" />
     <Content Include="www\css\build\dev\reactpages\betlist\index.chunk.js" />
     <Content Include="www\css\build\dev\reactpages\betlist\index.css" />
@@ -632,11 +634,13 @@
     <Content Include="www\css\build\images\ui-icons_2e83ff_256x240-1.png" />
     <Content Include="www\css\build\images\ui-icons_2e83ff_256x240-2.png" />
     <Content Include="www\css\build\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="www\css\build\pro\pages\betlist\images\rebateBonus.png" />
     <Content Include="www\css\build\pro\reactpages\betlist\images\bonus.png" />
     <Content Include="www\css\build\pro\reactpages\betlist\images\goal-icon.png" />
     <Content Include="www\css\build\pro\reactpages\betlist\images\lotto_ball.png" />
     <Content Include="www\css\build\pro\reactpages\betlist\images\q_Icon2_1.png" />
     <Content Include="www\css\build\pro\reactpages\betlist\images\q_Icon_2.png" />
+    <Content Include="www\css\build\pro\reactpages\betlist\images\rebateBonus.png" />
     <Content Include="www\css\build\pro\reactpages\betlist\images\tab_topbg.gif" />
     <Content Include="www\css\build\pro\reactpages\betlist\index.chunk.js" />
     <Content Include="www\css\build\pro\reactpages\betlist\index.css" />
