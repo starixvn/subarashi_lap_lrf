@@ -1,4 +1,4 @@
-﻿// Generated at: 7/19/2019 9:00:07 AM
+﻿// Generated at: 07/19/2019 2:02:39 PM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -17,8 +17,8 @@ AGCasino:"AG Casino",
 AGCasinoBalance:"AG Casino Balance",
 AGCasinoNotOfferCurrency:"AG Casino is not offered for this currency.",
 AGCasinoWinLoss:"AG Casino Win Loss",
-AGClosingBalance:"AGClosingBalance",
-AGOpeningBalance:"AGOpeningBalance",
+AGClosingBalance:"AG Closing Balance",
+AGOpeningBalance:"AG Opening Balance",
 AH:"AH",
 Alert:"Alert",
 AlertChooseProductMsg:"Please choose at least one of products",
