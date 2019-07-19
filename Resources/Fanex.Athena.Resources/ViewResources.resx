@@ -2353,4 +2353,13 @@
     <value>Promotion Prize</value>
     <comment>109471</comment>
   </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="AGOpeningBalance" xml:space="preserve">
+    <value>AGOpeningBalance</value>
+  </data>
+  <data name="AGClosingBalance" xml:space="preserve">
+    <value>AGClosingBalance</value>
+  </data>
 </root>

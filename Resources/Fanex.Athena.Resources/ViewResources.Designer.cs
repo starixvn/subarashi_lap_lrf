@@ -214,6 +214,24 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to AGClosingBalance.
+        /// </summary>
+        public static string AGClosingBalance {
+            get {
+                return ResourceManager.GetString("AGClosingBalance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AGOpeningBalance.
+        /// </summary>
+        public static string AGOpeningBalance {
+            get {
+                return ResourceManager.GetString("AGOpeningBalance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AH.
         /// </summary>
         public static string AH {
@@ -3720,6 +3738,15 @@ namespace Fanex.Athena.Resources {
         public static string MultiCustomers {
             get {
                 return ResourceManager.GetString("MultiCustomers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
             }
         }
         

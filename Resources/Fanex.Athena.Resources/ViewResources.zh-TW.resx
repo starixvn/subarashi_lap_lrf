@@ -1994,4 +1994,7 @@
     <value>快樂彩</value>
     <comment>113398</comment>
   </data>
+  <data name="Name" xml:space="preserve">
+    <value>姓名</value>
+  </data>
 </root>

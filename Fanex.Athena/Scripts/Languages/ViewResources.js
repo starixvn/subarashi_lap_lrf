@@ -1,4 +1,4 @@
-﻿// Generated at: 7/18/2019 1:21:09 PM
+﻿// Generated at: 7/19/2019 8:56:30 AM
 var _language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -17,6 +17,8 @@ AGCasino:"AG Casino",
 AGCasinoBalance:"AG Casino Balance",
 AGCasinoNotOfferCurrency:"AG Casino is not offered for this currency.",
 AGCasinoWinLoss:"AG Casino Win Loss",
+AGClosingBalance:"AGClosingBalance",
+AGOpeningBalance:"AGOpeningBalance",
 AH:"AH",
 Alert:"Alert",
 AlertChooseProductMsg:"Please choose at least one of products",
@@ -407,6 +409,7 @@ MoreThanOneCustomerFoundMsg:"More than 1 customer found. Please search for 1 cus
 MoveSuccessfullyMsg:"Successfully moved.",
 MoveToGroup:"Move to Group",
 MultiCustomers:"Multi-Customers",
+Name:"Name",
 NetTurnover:"Net Turnover",
 NewAsia:"New Asia",
 NewGroup:"New Group",

@@ -1,4 +1,4 @@
-﻿// Generated at: 7/18/2019 1:21:09 PM
+﻿// Generated at: 7/19/2019 8:56:30 AM
 var _language_zh_TW = {
 AA:"客客",
 AbnormalBet:"非正規註單",
@@ -354,6 +354,7 @@ Monthly:"每月",
 MoveSuccessfullyMsg:"成功移動",
 MoveToGroup:"轉移至組",
 MultiCustomers:"多個會員",
+Name:"姓名",
 NetTurnover:"淨交易額",
 NewAsia:"新亞洲版",
 NewGroup:"新組別",
