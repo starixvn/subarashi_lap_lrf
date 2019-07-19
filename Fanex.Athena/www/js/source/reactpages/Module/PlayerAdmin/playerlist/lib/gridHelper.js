@@ -1,6 +1,6 @@
 import React from 'react';
 import { HeaderRow, HeaderCell } from '@9softstudio/react-grid';
-import { fields } from './constants';
+import { fields, stringTypeFields } from './constants';
 import LangHelper from '@jsroot/lib/langHelper';
 
 export default class GridHelper {
@@ -43,12 +43,12 @@ export default class GridHelper {
 
         const isSortAscending = sortOrder.toLowerCase() === 'asc';
         const newDataList = [...dataList];
-        const isTringType = typeof newDataList[0][sortBy] === 'string';
+        const isTringType = stringTypeFields.includes(sortBy);
         newDataList.sort((currentItem, nextItem) => {
             const currentValue = currentItem[sortBy];
             const nextValue = nextItem[sortBy];
             if (isTringType) {
-                return this.sortStringValue(currentValue, nextValue, isSortAscending);
+                return this.sortStringValue(currentValue || '', nextValue || '', isSortAscending);
             }
 
             return isSortAscending ? currentValue - nextValue : -(currentValue - nextValue)

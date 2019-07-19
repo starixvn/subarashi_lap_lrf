@@ -18,14 +18,15 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
             _dbFactory = dbFactory;
         }
 
-        public PlayerListResultViewModel Search(PlayerSearchingMetaModel searchParam)
+        public PlayerListResultViewModel Search(PlayerSearchingMetaModel metaModel)
         {
             const string SpKey = "Lrf_CustomerSelByUsername";
             var result = new PlayerListResultViewModel();
 
             using (var objectDb = _dbFactory.GetObjectDb(SpKey))
             {
-                AssignParamByUserName(objectDb, searchParam);
+                AssignCommonParam(objectDb, metaModel);
+                AssignParamByUserName(objectDb, metaModel);
 
                 result.DataList = ReadPlayerList(objectDb);
                 result.TotalItem = Convert.ToInt32(objectDb.GetParameterValue("TotalRows"));
@@ -34,17 +35,48 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
             return result;
         }
 
-        private static void AssignParamByUserName(IObjectDb objectDb, PlayerSearchingMetaModel searchParam)
+        public PlayerListResultViewModel GetPlayerListById(PlayerListByIdMetaModel metaModel)
         {
-            objectDb.SetParameterValue("LicenseeId", searchParam.LicenseeId);
-            objectDb.SetParameterValue("UserName", searchParam.UserName);
-            objectDb.SetParameterValue("SearchOption", searchParam.SearchOption);
-            objectDb.SetParameterValue("BaFilter", searchParam.BaFilter);
-            objectDb.SetParameterValue("SpecialLevel", searchParam.SpecialLevel);
-            objectDb.SetParameterValue("OddsGroups", searchParam.OddsGroup);
-            objectDb.SetParameterValue("PageSize", searchParam.PageSize);
-            objectDb.SetParameterValue("PageIndex", searchParam.PageIndex);
-            objectDb.SetParameterValue("AgentList", searchParam.AgentListXml);
+            const string SpKey = "Lrf_CustomerSelByCustid";
+            var result = new PlayerListResultViewModel();
+
+            using (var objectDb = _dbFactory.GetObjectDb(SpKey))
+            {
+                AssignCommonParam(objectDb, metaModel);
+                AssignParamByCustId(objectDb, metaModel);
+
+                result.DataList = ReadPlayerList(objectDb);
+                result.TotalItem = Convert.ToInt32(objectDb.GetParameterValue("TotalRows"));
+            }
+
+            return result;
+        }
+
+        private static void AssignCommonParam(IObjectDb objectDb, PlayerListBaseMetaModel metaModel)
+        {
+            objectDb.SetParameterValue("LicenseeId", metaModel.LicenseeId);
+            objectDb.SetParameterValue("AgentList", metaModel.AgentListXml);
+        }
+
+        private static void AssignParamByUserName(IObjectDb objectDb, PlayerSearchingMetaModel metaModel)
+        {
+            objectDb.SetParameterValue("UserName", metaModel.UserName);
+            objectDb.SetParameterValue("SearchOption", metaModel.SearchOption);
+            objectDb.SetParameterValue("BaFilter", metaModel.BaFilter);
+            objectDb.SetParameterValue("SpecialLevel", metaModel.SpecialLevel);
+            objectDb.SetParameterValue("OddsGroups", metaModel.OddsGroup);
+            objectDb.SetParameterValue("PageSize", metaModel.PageSize);
+            objectDb.SetParameterValue("PageIndex", metaModel.PageIndex);
+
+            objectDb.SetParameterValue("TotalRows", 0);
+        }
+
+        private static void AssignParamByCustId(IObjectDb objectDb, PlayerListByIdMetaModel metaModel)
+        {
+            objectDb.SetParameterValue("CustIds", metaModel.IdList);
+            objectDb.SetParameterValue("SpecialLevel", metaModel.SpecialLevel);
+            objectDb.SetParameterValue("PageSize", metaModel.PageSize);
+            objectDb.SetParameterValue("PageIndex", metaModel.PageIndex);
 
             objectDb.SetParameterValue("TotalRows", 0);
         }

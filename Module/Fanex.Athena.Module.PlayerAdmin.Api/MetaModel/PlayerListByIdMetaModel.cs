@@ -3,5 +3,11 @@
     public class PlayerListByIdMetaModel : PlayerListBaseMetaModel
     {
         public string IdList { get; set; }
+
+        public string SpecialLevel { get; set; }
+
+        public int PageSize { get; set; }
+
+        public int PageIndex { get; set; }
     }
 }

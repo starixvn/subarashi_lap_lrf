@@ -34,12 +34,18 @@ export class FormFilter extends PureComponent {
 
     handleSubmit = (event) => {
         event.preventDefault();
+        const userName = this.userNameRef.current.value;
+        const { bankAccountNumber, email } = this.state;
+        if (!userName && !bankAccountNumber && !email) {
+            return;
+        }
+
         const { pagingOption, searchPlayer } = this.props;
         const { specialLevel, ...allParam } = this.state;
         const actualSpecialLevel = specialLevel.trim();
         const param = {
             ...allParam,
-            userName: this.userNameRef.current.value,
+            userName,
             specialLevel: actualSpecialLevel === '' ? this.allSpecialLevel : actualSpecialLevel,
             pageSize: pagingOption.PageSize,
             pageIndex: pagingOption.PageIndex
@@ -95,7 +101,7 @@ export class FormFilter extends PureComponent {
                                 {LangHelper.getSingleResource("Username")}
                                 {(<SearchOption value={searchOption} onChange={this.handleChange} />)}
                             </label>
-                            <UserNameInput ref={this.userNameRef} onSelectItem={(value) => this.handleUserNameChange(value)} 
+                            <UserNameInput ref={this.userNameRef} onSelectItem={(value) => this.handleUserNameChange(value)}
                                 minChar={3} getSuggestionList={getSuggestionList} searchOption={searchOption} />
                         </div>
                     </div>

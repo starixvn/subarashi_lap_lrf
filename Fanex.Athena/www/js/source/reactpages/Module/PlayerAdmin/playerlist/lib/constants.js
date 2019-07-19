@@ -74,15 +74,15 @@ export const heightSlicing = {
 }
 
 export const searchOptions = {
-    matchWholeWord: '1',
-    matchPrefix: '2',
-    matchCase: '3'
+    matchPrefix: '1',
+    matchCase: '2',
+    matchWholeWord: '3'
 }
 
 export const defaultPagingOption = {
     PageIndex: 1,
     PageSize: 50,
-    PageList: [50, 100, 200, 300, 400, 500, 1000, 2000],
+    PageList: [50],
     TotalItem: null
 }
 
@@ -120,3 +120,5 @@ export const gridItemDropdownHeight = {
     'oddsGroupDropdown': 126,
     'statusDropdown': 112
 }
+
+export const stringTypeFields = [fields.UserName, fields.RealName, fields.Currency, fields.OddsGroup];

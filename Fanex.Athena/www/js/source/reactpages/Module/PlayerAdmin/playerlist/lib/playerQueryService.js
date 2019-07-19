@@ -1,10 +1,16 @@
 import FactoryCommonService from '../../../lib/factoryCommonService';
 import { systemType } from '../../../constants/configInfo';
+import { specialLevelListWithColor } from './constants';
 import ReportExcel from './reportExcel';
+import LapPlayerQueryService from './lapPlayerQueryService';
+import PlayerMultipleQueryService from './playerMultipleQueryService';
+import LrfPlayerQueryService from './lrfPlayerQueryService';
 
 const apiInfo = {
-    lrfPlayerList: { action: 'api/PlayerList/Search', type: systemType.lrf },
-    lapPlayerList: { action: 'PlayerAdminContainer/Search', type: systemType.newAdmin }
+    lrfSearch: { action: 'api/PlayerList/Search', type: systemType.lrf },
+    lrfDataById: { action: 'api/PlayerList/GetPlayerListById', type: systemType.lrf },
+    lapSearch: { action: 'PlayerAdminContainer/Search', type: systemType.newAdmin },
+    lapDataById: { action: 'PlayerAdminContainer/GetPlayerListById', type: systemType.newAdmin }
 }
 
 export default class PlayerQueryService {
@@ -16,56 +22,27 @@ export default class PlayerQueryService {
         return this.commonService.getTabList();
     }
 
-    _mergePlayerList(lrfList, lapList) {
-        const result = [];
-
-        for (let i = 0; i < lrfList.length; i++) {
-            const lrfItem = lrfList[i];
-            const lapItem = lapList.find(x => x.CustId === lrfItem.CustId) || {};
-
-            if (lrfItem && lapItem) {
-                const { CustId, UserName, SystemId, Currency, CurrentBalance, OutstandingBalance, OddsGroup, BaStatus, SpecialLevel } = lrfItem;
-                const { Status, RealName, IP, email, isOnline } = lapItem;
-
-                result.push({
-                    CustId: CustId || lapItem.CustId,
-                    UserName: UserName || lapItem.UserName,
-                    SystemId,
-                    Currency,
-                    CurrentBalance,
-                    OutstandingBalance,
-                    OddsGroup,
-                    BaStatus,
-                    SpecialLevel,
-                    Status,
-                    RealName,
-                    LastLoginIp: IP,
-                    Email: email,
-                    IsOnline: isOnline
-                });
-            }
+    getPlayerList(param) {
+        const { bankAccountNumber, email } = param;
+        if (bankAccountNumber || email) {
+            const lapService = new LapPlayerQueryService(this.commonService, apiInfo);
+            return lapService.fetchData(param);
+        } else if (this._isChangeAdvancedSearch(param)) {
+            const lrfService = new LrfPlayerQueryService(this.commonService, apiInfo);
+            return lrfService.fetchData(param);
         }
 
-        return result;
+        const multipleQueryService = new PlayerMultipleQueryService(this.commonService, apiInfo);
+        return multipleQueryService.fetchData(param);
     }
 
-    getPlayerList(param) {
-        const { lrfPlayerList, lapPlayerList } = apiInfo;
+    _isChangeAdvancedSearch(param) {
+        const { baFilter, currency, oddsGroup, specialLevel } = param;
 
-        const lrfPromise = this.commonService.fetchData(lrfPlayerList.type, lrfPlayerList.action, {...param });
-        const lapPromise = this.commonService.fetchData(lapPlayerList.type, lapPlayerList.action, {...param });
-
-        return this.commonService.fetchMultiple([lrfPromise, lapPromise], (lrfResponse, lapResponse) => {
-            const { DataList: lrfPlayerList, TotalItem: lrfTotalItem } = lrfResponse.data;
-            const lapResponseData = lapResponse.data;
-
-            const playerList = this._mergePlayerList(lrfPlayerList, lapResponseData.PlayerList);
-
-            return {
-                playerList,
-                totalItem: lrfTotalItem
-            };
-        })
+        return Number(baFilter) !== 0 ||
+            currency !== '' ||
+            oddsGroup !== '' ||
+            Object.keys(specialLevelListWithColor).length !== specialLevel.split(',').length;
     }
 
     getLink(systemType, action) {

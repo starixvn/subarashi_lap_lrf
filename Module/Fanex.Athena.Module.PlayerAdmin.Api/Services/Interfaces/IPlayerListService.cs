@@ -5,6 +5,8 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Services.Interfaces
 {
     public interface IPlayerListService
     {
-        PlayerListResultViewModel Search(PlayerSearchingMetaModel searchParam);
+        PlayerListResultViewModel Search(PlayerSearchingMetaModel metaModel);
+
+        PlayerListResultViewModel GetPlayerListById(PlayerListByIdMetaModel metaModel);
     }
 }

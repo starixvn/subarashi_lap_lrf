@@ -23,7 +23,15 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api
             return _playerListService.Search(searchParam);
         }
 
-        private void AssignParam(PlayerSearchingMetaModel searchParam)
+        [HttpPost]
+        public PlayerListResultViewModel GetPlayerListById(PlayerListByIdMetaModel metaModel)
+        {
+            AssignParam(metaModel);
+
+            return _playerListService.GetPlayerListById(metaModel);
+        }
+
+        private void AssignParam(PlayerListBaseMetaModel searchParam)
         {
             searchParam.LicenseeId = LicenseeId;
             searchParam.AgentListXml = BuildAgentListXml(searchParam.Currency?.Trim());
