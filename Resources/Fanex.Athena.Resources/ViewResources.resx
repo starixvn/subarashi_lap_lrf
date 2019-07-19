@@ -2357,9 +2357,9 @@
     <value>Name</value>
   </data>
   <data name="AGOpeningBalance" xml:space="preserve">
-    <value>AGOpeningBalance</value>
+    <value>AG Opening Balance</value>
   </data>
   <data name="AGClosingBalance" xml:space="preserve">
-    <value>AGClosingBalance</value>
+    <value>AG Closing Balance</value>
   </data>
 </root>

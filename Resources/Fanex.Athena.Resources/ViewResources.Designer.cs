@@ -214,7 +214,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AGClosingBalance.
+        ///   Looks up a localized string similar to AG Closing Balance.
         /// </summary>
         public static string AGClosingBalance {
             get {
@@ -223,7 +223,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AGOpeningBalance.
+        ///   Looks up a localized string similar to AG Opening Balance.
         /// </summary>
         public static string AGOpeningBalance {
             get {
