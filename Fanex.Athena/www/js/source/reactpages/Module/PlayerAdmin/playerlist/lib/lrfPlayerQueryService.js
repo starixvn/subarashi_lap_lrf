@@ -11,7 +11,7 @@ export default class LrfPlayerQueryService {
 
         return this.commonService.fetchData(lrfSearch.type, lrfSearch.action, {...param })
             .then(lrfResponse => {
-                const lrfPlayerList = lrfResponse.data.DataList;
+                const { DataList: lrfPlayerList, TotalItem } = lrfResponse.data;
                 if (!lrfPlayerList && !lrfPlayerList.length) {
                     return PlayerListDataHelper.createEmptyResult();
                 }
@@ -24,15 +24,19 @@ export default class LrfPlayerQueryService {
 
                 return this.commonService.fetchData(lapDataById.type, lapDataById.action, lapParam)
                     .then(lapResponse => {
-                        const lapPlayerList = lapResponse.data.PlayerList;
+                        const { PlayerList: lapPlayerList } = lapResponse.data;
 
                         const playerList = PlayerListDataHelper.mergePlayerList(lrfPlayerList, lapPlayerList);
 
                         return {
                             playerList,
-                            totalItem: lrfResponse.data.TotalItem
+                            totalItem: Math.max(TotalItem, lapPlayerList.length)
                         };
-                    });
+                    })
+                    .catch(() => ({
+                        playerList: lrfPlayerList,
+                        totalItem: TotalItem
+                    }));
             })
             .catch(() => PlayerListDataHelper.createEmptyResult());
     }
