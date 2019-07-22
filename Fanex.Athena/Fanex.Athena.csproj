@@ -983,7 +983,6 @@
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\__tests__\PlayerDetail.test.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\lib\constants.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\lib\gridHelper.js" />
-    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\lib\playerlistservice.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\lib\reportExcel.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\reducers\filterHandlerReducer.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\reducers\gridHandlerReducer.js" />

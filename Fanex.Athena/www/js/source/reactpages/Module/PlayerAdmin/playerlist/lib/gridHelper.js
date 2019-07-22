@@ -1,6 +1,6 @@
 import React from 'react';
 import { HeaderRow, HeaderCell } from '@9softstudio/react-grid';
-import { fields, stringTypeFields } from './constants';
+import { fields } from './constants';
 import LangHelper from '@jsroot/lib/langHelper';
 
 export default class GridHelper {
@@ -34,35 +34,5 @@ export default class GridHelper {
         const expectedHeight = dropdownHeight + currentTop + 20;
 
         return expectedHeight > innerHeight ? currentTop - dropdownHeight : currentTop;
-    }
-
-    static sortPlayerList(dataList, sortBy, sortOrder) {
-        if(!dataList || dataList.length === 0){
-            return [];
-        }
-
-        const isSortAscending = sortOrder.toLowerCase() === 'asc';
-        const newDataList = [...dataList];
-        const isTringType = stringTypeFields.includes(sortBy);
-        newDataList.sort((currentItem, nextItem) => {
-            const currentValue = currentItem[sortBy];
-            const nextValue = nextItem[sortBy];
-            if (isTringType) {
-                return this.sortStringValue(currentValue || '', nextValue || '', isSortAscending);
-            }
-
-            return isSortAscending ? currentValue - nextValue : -(currentValue - nextValue)
-        });
-
-        return newDataList;
-    }
-
-    static sortStringValue(current, next, isSortAscending) {
-        const currentUpperCase = current.toUpperCase();
-        const nextUpperCase = next.toUpperCase();
-
-        const sortResult = currentUpperCase > nextUpperCase ? 1 : (currentUpperCase < nextUpperCase ? -1 : 0);
-
-        return isSortAscending ? sortResult : -sortResult;
     }
 }

@@ -18,7 +18,7 @@ export const UserNameInput = React.forwardRef((props, userNameRef) => {
         const { value } = element;
 
         if (value.length >= minChar) {
-            const param = { userName: value, searchOption };
+            const param = { keyword: value, searchType: searchOption };
             getSuggestionList(param).then(response => {
                 const rect = element.getBoundingClientRect();
                 const style = {

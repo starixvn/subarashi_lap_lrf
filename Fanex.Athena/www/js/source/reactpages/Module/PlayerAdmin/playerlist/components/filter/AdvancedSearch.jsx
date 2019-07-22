@@ -4,13 +4,14 @@ import PropTypes from 'prop-types';
 import Select from 'react-select';
 import { baStatusList, specialLevelListWithColor, oddsGroupListWithStyle } from '../../lib/constants';
 import LangHelper from '@jsroot/lib/langHelper';
+import { getSpecialLevelText } from '../../lib/utils';
 
 export class AdvancedSearch extends PureComponent {
     constructor(props) {
         super(props);
 
         this.oddsGroupList = Object.keys(oddsGroupListWithStyle).map(item => ({ Id: item, Value: item, Status: true }));
-        this.specialLevelList = Object.keys(specialLevelListWithColor).map(item => ({ Id: item, Value: item, Status: true }));
+        this.specialLevelList = Object.keys(specialLevelListWithColor).map(item => ({ Id: item, Value: getSpecialLevelText(item), Status: true }));
         this.baStatusList = Object.keys(baStatusList).map(item => ({ value: baStatusList[item], label: item }));
     }
 

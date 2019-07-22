@@ -2,7 +2,7 @@ import FactoryCommonService from '../../../lib/factoryCommonService';
 import { systemType } from '../../../constants/configInfo';
 
 const apiInfo = {
-    searchUserNameSuggestion: { action: 'api/PlayerSuggestion/SearchUserNameList', type: systemType.lrf }
+    userNameSuggestion: { action: 'PlayerAdminContainer/GetSuggestionList', type: systemType.newAdmin }
 }
 
 export default class PlayerSuggestionService {
@@ -11,11 +11,11 @@ export default class PlayerSuggestionService {
     }
 
     getSuggestionList(param) {
-        const { searchUserNameSuggestion } = apiInfo;
+        const { userNameSuggestion } = apiInfo;
         const configOption = {
             method: 'get'
         }
 
-        return this.commonService.fetchData(searchUserNameSuggestion.type, searchUserNameSuggestion.action, {...param }, configOption);
+        return this.commonService.fetchData(userNameSuggestion.type, userNameSuggestion.action, {...param }, configOption);
     }
 }

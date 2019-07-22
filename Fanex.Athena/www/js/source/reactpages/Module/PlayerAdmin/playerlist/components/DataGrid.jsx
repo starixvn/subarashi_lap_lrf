@@ -7,6 +7,7 @@ import { Table } from '@9softstudio/react-grid';
 import ContextMenu from './grid/ContextMenu';
 import SpecialLevelDropdown from './grid/SpecialLevelDropdown';
 import GridHelper from '../lib/gridHelper';
+import GridInteractionService from '../lib/gridInteractionService';
 import OddsGroupDropdown from './grid/OddsGroupDropdown';
 import PlayerRow from './grid/PlayerRow';
 import StatusDropdown from './grid/StatusDropdown';
@@ -38,7 +39,7 @@ export class DataGrid extends PureComponent {
 
     handleSort = (sortBy, sortOrder) => {
         const { playerList, setPlayerList } = this.props;
-        const sortedPlayerList = GridHelper.sortPlayerList(playerList, sortBy, sortOrder);
+        const sortedPlayerList = GridInteractionService.sortPlayerList(playerList, sortBy, sortOrder);
         setPlayerList(sortedPlayerList);
     }
 
