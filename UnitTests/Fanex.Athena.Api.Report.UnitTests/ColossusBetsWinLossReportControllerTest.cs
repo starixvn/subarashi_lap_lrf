@@ -37,6 +37,12 @@
                 SessionService, ProductService, LangService, _currencyValidation);
 
             _controller.When(x => x.ExcelStream(Arg.Any<IWorkbook>(), Arg.Any<string>())).DoNotCallBase();
+            StubUserSessionData(new UserAuthInfo
+            {
+                CurrencyList = new Dictionary<int, string>(),
+                CurrencyAgentList = new Dictionary<int, int[]>()
+            });
+            StubLicenseeSessionData(new LicenseeAuthInfo { LicenseeId = 0 });
         }
 
         [TearDown]
@@ -57,11 +63,7 @@
                 IsExportExcel = false,
                 CurrencyId = 1,
             };
-            StubUserSessionData(new UserAuthInfo
-            {
-                CurrencyList = new Dictionary<int, string>()
-            });
-            StubLicenseeSessionData(new LicenseeAuthInfo { LicenseeId = 0 });
+
 
             // Action
             var result = await _controller.Index(model);
@@ -224,6 +226,7 @@
                     { modelCurrencyId, "Currency" },
                     { drilldownCurrencyId, "Currency" },
                     { currencyId, "Currency" } },
+                CurrencyAgentList = new Dictionary<int, int[]>()
             });
 
             var expectedFileName = $"ColossusBetsWinLoss_{fdate:ddMMMyyy}_Currency.xls";
@@ -271,8 +274,11 @@
                 CurrencyList = new Dictionary<int, string>
                 {
                     { currencyId, nameof(model.CurrencyId) },
-                    { drillDownCurrencyId, nameof(model.DrillDownCurrencyId) }
-                }
+                    { drillDownCurrencyId, nameof(model.DrillDownCurrencyId) },
+
+                },
+                CurrencyAgentList = new Dictionary<int, int[]>()
+
             });
             StubLicenseeSessionData(new LicenseeAuthInfo { LicenseeId = 0 });
 

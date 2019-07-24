@@ -46,6 +46,14 @@
             _controller = Substitute.ForPartsOf<AgCasinoWinLossReportController>(_dataAccess, SessionService,
                 ProductService, LangService, _currencyValidation);
             _controller.When(x => x.ExcelStream(Arg.Any<IWorkbook>(), Arg.Any<string>())).DoNotCallBase();
+            StubUserSessionData(new UserAuthInfo
+            {
+                CurrencyList = new Dictionary<int, string>(),
+                CurrencyAgentList = new Dictionary<int, int[]>()
+
+            });
+            StubLicenseeSessionData(new LicenseeAuthInfo { LicenseeId = 0 });
+
 
         }
         [OneTimeTearDown]
@@ -76,12 +84,7 @@
             {
                 CurrencyId = 1
             };
-            StubUserSessionData(new UserAuthInfo
-            {
-                CurrencyList = new Dictionary<int, string>()
-            });
-            StubLicenseeSessionData(new LicenseeAuthInfo { LicenseeId = 0 });
-
+            
             // Action
             var result = await _controller.Index(model);
 
@@ -224,6 +227,7 @@
             StubUserSessionData(new UserAuthInfo
             {
                 CurrencyList = new Dictionary<int, string> { { 0, "CurrencyName0" }, { 1, "CurrencyName1" } },
+                CurrencyAgentList = new Dictionary<int, int[]>()
             });
 
             var model = new ThirdPartyWinLossMetaModel
@@ -262,6 +266,7 @@
             StubUserSessionData(new UserAuthInfo
             {
                 CurrencyList = new Dictionary<int, string> { { 1, "CurrencyName1" }, { 2, "CurrencyName2" } },
+                CurrencyAgentList = new Dictionary<int, int[]>()
             });
 
             var model = new ThirdPartyWinLossMetaModel

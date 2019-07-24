@@ -27,7 +27,7 @@
     {
         private const int CurrencyId = 999;
 
-        private const string AgentListXml = "melody";
+        private const string AgentListXml = "<ROOT></ROOT>";
 
         private static readonly DateTime BalanceUpDate = new DateTime(2017, 3, 4);
 

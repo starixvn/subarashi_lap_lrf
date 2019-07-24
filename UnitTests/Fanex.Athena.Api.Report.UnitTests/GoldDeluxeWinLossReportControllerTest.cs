@@ -65,7 +65,8 @@
             {
                 CurrencyList = new Dictionary<int, string>(),
                 ApplicationMode = AppMode.Self,
-                FunctionIdList = new int[0]
+                FunctionIdList = new int[0],
+                CurrencyAgentList = new Dictionary<int, int[]>()
             });
 
             // Action
@@ -275,7 +276,8 @@
                     { drillDownCurrencyId, nameof(model.DrillDownCurrencyId) }
                 },
                 ApplicationMode = AppMode.Self,
-                FunctionIdList = new int[0]
+                FunctionIdList = new int[0],
+                CurrencyAgentList = new Dictionary<int, int[]>()
             });
 
             return model;

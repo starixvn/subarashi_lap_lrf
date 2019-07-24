@@ -59,7 +59,9 @@
             SessionService.UserSession.Returns(new UserAuthInfo
             {
                 IsManageableSubsidiary = true,
-                UserLevel = UserLevelType.Subsidiary
+                UserLevel = UserLevelType.Subsidiary,
+                CurrencyAgentList = new Dictionary<int, int[]>()
+
             });
 
             var resultData = new SubsidiaryResultViewModel
@@ -87,7 +89,10 @@
             SessionService.UserSession.Returns(new UserAuthInfo
             {
                 IsManageableSubsidiary = true,
-                UserLevel = UserLevelType.Licensee
+                UserLevel = UserLevelType.Licensee,
+                CurrencyAgentList = new Dictionary<int, int[]> { { 1, new[] { 1, 2, 3 } } },
+                CurrencyList = new Dictionary<int, string> { { 1, "USD" }, { 2, "EUR" }, { 3, "VND" } }
+
             });
 
             var currencyAgentList = new Dictionary<int, IEnumerable<int>> { { 1, new[] { 1, 2, 3 } } };

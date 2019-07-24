@@ -316,7 +316,9 @@
                 {
                     { model.CurrencyId, nameof(model.CurrencyId) }
                 },
-                FunctionIdList = new int[0]
+                FunctionIdList = new int[0],
+                CurrencyAgentList = new Dictionary<int, int[]>()
+
             });
             StubLicenseeSessionData(new LicenseeAuthInfo { LicenseeId = 1 });
 

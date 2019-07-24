@@ -26,13 +26,18 @@
 
         private IMatchDataAccess _matchDataAccess = Substitute.For<IMatchDataAccess>();
 
-        private IBetTypeService _betTypeService = Substitute.For<IBetTypeService>();
+        private readonly IBetTypeService _betTypeService = Substitute.For<IBetTypeService>();
 
         [OneTimeSetUp]
         public void FixtureSetUp()
         {
             _sessionService.LicenseeSession.Returns(new LicenseeAuthInfo { LicenseeId = FakeHelper.Create<int>() });
-            _sessionService.UserSession.Returns(new UserAuthInfo { UserId = FakeHelper.Create<int>(), Language = FakeHelper.Create<string>() });
+            _sessionService.UserSession.Returns(new UserAuthInfo
+            {
+                UserId = FakeHelper.Create<int>(),
+                Language = FakeHelper.Create<string>(),
+                CurrencyAgentList = new Dictionary<int, int[]>()
+            });
         }
 
         [OneTimeTearDown]
@@ -105,7 +110,6 @@
             using (var controller = CreateController())
             {
                 // arrange
-                var productCode = FakeHelper.Create<string>();
                 var league = new League { LeagueId = FakeHelper.Create<int>(), LeagueName = FakeHelper.Create<string>() };
 
                 _leagueDataAccess.GetLeaguesBySport(Arg.Any<LeagueMetaModel>())
@@ -132,7 +136,6 @@
             using (var controller = CreateController())
             {
                 // arrange
-                var productCode = FakeHelper.Create<string>();
                 var match = new Match { MatchId = FakeHelper.Create<int>(), MatchName = FakeHelper.Create<string>() };
                 var fromDate = FakeHelper.Create<DateTime>();
                 var toDate = FakeHelper.Create<DateTime>();

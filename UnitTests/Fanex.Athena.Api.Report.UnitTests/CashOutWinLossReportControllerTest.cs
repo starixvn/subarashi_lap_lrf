@@ -80,7 +80,7 @@
                 DrillDownLevel = 0,
                 DrillDownCurrencyId = CurrencyId,
                 DrillDownCustomerId = CustId,
-                AgentListXml = "XmlData"
+                AgentListXml = "<ROOT></ROOT>"
             };
             var dataListResult = new SortableList<CashOutWinLoss>
             {
@@ -119,7 +119,7 @@
                 DrillDownLevel = Level,
                 DrillDownCurrencyId = CurrencyId,
                 DrillDownCustomerId = CustId,
-                AgentListXml = "XmlData"
+                AgentListXml = "<ROOT></ROOT>"
             };
             var dataListResult = new SortableList<CashOutWinLoss>
             {
@@ -157,7 +157,7 @@
                 DrillDownLevel = Level,
                 DrillDownCurrencyId = CurrencyId,
                 DrillDownCustomerId = CustId,
-                AgentListXml = "XmlData"
+                AgentListXml = "<ROOT></ROOT>"
             };
 
             _dataAccess.GetDetail(Arg.Any<ThirdPartyWinLossMetaModel>(), UserCurrencyList).ReturnsForAnyArgs(new SortableReportResultModel<CashOutWinLoss>());
@@ -270,7 +270,7 @@
         {
             return metaModel.DrillDownCurrencyId == -2 && metaModel.DrillDownLevel == level &&
                 metaModel.DrillDownCustomerId == 1 && metaModel.DrillDownFromDate == new DateTime(2017, 4, 1) &&
-                metaModel.DrillDownToDate == new DateTime(2017, 4, 18) && metaModel.AgentListXml == "XmlData";
+                metaModel.DrillDownToDate == new DateTime(2017, 4, 18) && metaModel.AgentListXml == "<ROOT></ROOT>";
         }
 
         private string CreateResultData(List<CashOutWinLoss> data, List<CashOutWinLoss> total, Dictionary<string, CashOutWinLoss> summaryTotal)

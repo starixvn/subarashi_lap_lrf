@@ -32,7 +32,7 @@
 
         protected ILanguageService LangService { get; private set; }
 
-        protected IDictionary<int, string> UserCurrencyList => 
+        protected IDictionary<int, string> UserCurrencyList =>
             SessionService.UserSession.CurrencyList;
 
         [OneTimeSetUp]
@@ -42,7 +42,8 @@
             SessionService.UserSession.Returns(new UserAuthInfo
             {
                 Language = SessionLanguage,
-                CurrencyList = new Dictionary<int, string>()
+                CurrencyList = new Dictionary<int, string>(),
+                CurrencyAgentList = new Dictionary<int, int[]>()
             });
             ProductService = Substitute.For<IProductService>();
             AppSetting = Substitute.For<IAppSettings>();
@@ -67,7 +68,7 @@
             {
                 UserId = SessionUserId,
                 UserName = SessionUserName,
-                CurrencyList = new Dictionary<int, string> {{ 1, "EUR" }, { 2, "USD" } },
+                CurrencyList = new Dictionary<int, string> { { 1, "EUR" }, { 2, "USD" } },
                 Language = SessionLanguage,
                 CurrencyAgentList = new Dictionary<int, int[]>()
 

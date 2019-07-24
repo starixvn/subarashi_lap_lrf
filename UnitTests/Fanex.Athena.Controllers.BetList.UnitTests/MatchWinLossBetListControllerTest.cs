@@ -10,7 +10,7 @@
 
     public class MatchWinLossBetListControllerTest : BetListBaseControllerHelperTest
     {
-        private const string AgentListXml = "<xml/>";
+        private const string AgentListXml = "<ROOT></ROOT>";
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
