@@ -29,7 +29,8 @@ const AthenaSearch = (props) => {
 const propTypes = {
     bankAccountNumber: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired
+    onChange: PropTypes.func.isRequired,
+    onKeyPress: PropTypes.func.isRequired
 };
 
 AthenaSearch.propTypes = propTypes;

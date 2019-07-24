@@ -2,7 +2,7 @@ import Excel from '@jsroot/lib/excel';
 import { headerCellStyle, bodyCellStyle } from '@jsroot/constants/excelStyle';
 import { fields, headerText } from '../lib/constants';
 import { setupWebpackPublicPath } from '../../../lib/publicPathUtils';
-import { getSpecialLevelText, getBaStatusText } from './utils';
+import { getSpecialLevelText, getBaStatusText, getPlayerStatus } from './utils';
 
 const HEADER_ROW_INDEX = 0;
 const DATA_ROW_INDEX = 1;
@@ -11,7 +11,8 @@ const MAIN_SECTION_STYLE = 'mainSectionStyle';
 
 const displayedTextByField = {
     [fields.SpecialLevel]: (value) => getSpecialLevelText(value),
-    [fields.BaStatus]: (value) => getBaStatusText(value)
+    [fields.BaStatus]: (value) => getBaStatusText(value),
+    [fields.Status]: (value) => getPlayerStatus(value)
 }
 
 export default class ReportExcel {
@@ -75,8 +76,8 @@ export default class ReportExcel {
         const columnConfig = this.columnConfigs[colIndex];
         const value = item[columnConfig.field];
         const displayedTextFunc = displayedTextByField[columnConfig.field];
-        const displayedValue = displayedTextFunc ? displayedTextFunc(value) :
-            (this._shouldSetEmpty(value) ? '' : value);
+        const displayedValue = this._shouldSetEmpty(value) ? '' :
+            (displayedTextFunc ? displayedTextFunc(value) : value);
 
         return {
             t: Excel.getCellType(displayedValue),

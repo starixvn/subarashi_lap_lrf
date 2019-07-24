@@ -1,21 +1,16 @@
 import PlayerListDataHelper from './playerListDataHelper';
 export default class PlayerMultipleQueryService {
-    constructor(commonService, apiInfo) {
-        this.commonService = commonService;
-        this.apiInfo = apiInfo;
+    static fetchData(param, commonService, apiInfo) {
+        const { lrfSearch, lapSearch } = apiInfo;
+
+        const lrfPromise = commonService.fetchData(lrfSearch.type, lrfSearch.action, {...param });
+        const lapPromise = commonService.fetchData(lapSearch.type, lapSearch.action, {...param });
+
+        return this._getResult(param, lrfPromise, lapPromise, commonService, apiInfo);
     }
 
-    fetchData(param) {
-        const { lrfSearch, lapSearch } = this.apiInfo;
-
-        const lrfPromise = this.commonService.fetchData(lrfSearch.type, lrfSearch.action, {...param });
-        const lapPromise = this.commonService.fetchData(lapSearch.type, lapSearch.action, {...param });
-
-        return this._getResult(param, lrfPromise, lapPromise);
-    }
-
-    _getResult(param, lrfPromise, lapPromise) {
-        return this.commonService.fetchMultiple([lrfPromise, lapPromise], (lrfResponse, lapResponse) => {
+    static _getResult(param, lrfPromise, lapPromise, commonService, apiInfo) {
+        return commonService.fetchMultiple([lrfPromise, lapPromise], (lrfResponse, lapResponse) => {
                 const { DataList: lrfPlayerList, TotalItem: lrfTotalItem } = lrfResponse.data;
                 const { PlayerList: lapPlayerList = [] } = lapResponse.data;
 
@@ -53,13 +48,12 @@ export default class PlayerMultipleQueryService {
                     };
                 }
 
-                const { lrfDataById, lapDataById } = this.apiInfo;
                 if (idListNotInLrf.length > 0 && idListNotInLap.length > 0) {
-                    return this._refetchFormAllSide(lrfParam, lapParam, lrfDataObject, lapDataObject).then(getFinalResponse);
+                    return this._refetchFormAllSide(lrfParam, lapParam, lrfDataObject, lapDataObject, commonService, apiInfo).then(getFinalResponse);
                 } else if (idListNotInLrf.length > 0) {
-                    return this._refetchFromLrf(lrfParam, lapDataObject).then(getFinalResponse);
+                    return this._refetchFromLrf(lrfParam, lapDataObject, commonService, apiInfo).then(getFinalResponse);
                 } else {
-                    return this._refetchFromLap(lapParam, lrfDataObject).then(getFinalResponse);
+                    return this._refetchFromLap(lapParam, lrfDataObject, commonService, apiInfo).then(getFinalResponse);
                 }
             })
             .catch((error) => {
@@ -68,12 +62,12 @@ export default class PlayerMultipleQueryService {
             })
     }
 
-    _refetchFormAllSide(lrfParam, lapParam, lrfDataObject, lapDataObject) {
-        const { lrfDataById, lapDataById } = this.apiInfo;
-        const nextlrfPromise = this.commonService.fetchData(lrfDataById.type, lrfDataById.action, {...lrfParam });
-        const nextlapPromise = this.commonService.fetchData(lapDataById.type, lapDataById.action, {...lapParam });
+    static _refetchFormAllSide(lrfParam, lapParam, lrfDataObject, lapDataObject, commonService, apiInfo) {
+        const { lrfDataById, lapDataById } = apiInfo;
+        const nextlrfPromise = commonService.fetchData(lrfDataById.type, lrfDataById.action, {...lrfParam });
+        const nextlapPromise = commonService.fetchData(lapDataById.type, lapDataById.action, {...lapParam });
 
-        return this.commonService.fetchMultiple([nextlrfPromise, nextlapPromise], (nextLrfResponse, nextLapResponse) => {
+        return commonService.fetchMultiple([nextlrfPromise, nextlapPromise], (nextLrfResponse, nextLapResponse) => {
                 const { DataList: nextLrfPlayerList, TotalItem: nextLrfTotalItem } = nextLrfResponse.data;
                 const { PlayerList: nextLapPlayerList = [] } = nextLapResponse.data;
 
@@ -91,9 +85,9 @@ export default class PlayerMultipleQueryService {
             });
     }
 
-    _refetchFromLrf(lrfParam, lapDataObject) {
-        const { lrfDataById } = this.apiInfo;
-        return this.commonService.fetchData(lrfDataById.type, lrfDataById.action, {...lrfParam })
+    static _refetchFromLrf(lrfParam, lapDataObject, commonService, apiInfo) {
+        const { lrfDataById } = apiInfo;
+        return commonService.fetchData(lrfDataById.type, lrfDataById.action, {...lrfParam })
             .then(nextLrfResponse => {
                 const { DataList: nextLrfPlayerList, TotalItem: nextLrfTotalItem } = nextLrfResponse.data;
                 const playerList = PlayerListDataHelper.mergePlayerList(nextLrfPlayerList, lapDataObject.differenceList);
@@ -109,9 +103,9 @@ export default class PlayerMultipleQueryService {
             });
     }
 
-    _refetchFromLap(lapParam, lrfDataObject) {
-        const { lapDataById } = this.apiInfo;
-        return this.commonService.fetchData(lapDataById.type, lapDataById.action, {...lapParam })
+    static _refetchFromLap(lapParam, lrfDataObject, commonService, apiInfo) {
+        const { lapDataById } = apiInfo;
+        return commonService.fetchData(lapDataById.type, lapDataById.action, {...lapParam })
             .then(nextLapResponse => {
                 const { PlayerList: lapPlayerList = [] } = nextLapResponse.data;
                 const playerList = PlayerListDataHelper.mergePlayerList(lrfDataObject.differenceList, lapPlayerList);

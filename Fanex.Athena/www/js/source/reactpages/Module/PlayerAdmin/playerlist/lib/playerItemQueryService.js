@@ -1,14 +1,9 @@
 import { specialLevelListWithColor, defaultPagingOption } from '../lib/constants';
 import PlayerListDataHelper from './playerListDataHelper';
 
-export default class PlayerSingleQueryService {
-    constructor(commonService, apiInfo) {
-        this.commonService = commonService;
-        this.apiInfo = apiInfo;
-    }
-
-    getPlayerById(custId) {
-        const { lrfDataById, lapDataById } = this.apiInfo;
+export default class PlayerItemQueryService {
+    static getPlayerById(custId, commonService, apiInfo) {
+        const { lrfDataById, lapDataById } = apiInfo;
 
         const lrfParam = {
             idList: custId,
@@ -21,14 +16,14 @@ export default class PlayerSingleQueryService {
             idList: [custId]
         }
 
-        const lrfPromise = this.commonService.fetchData(lrfDataById.type, lrfDataById.action, lrfParam);
-        const lapPromise = this.commonService.fetchData(lapDataById.type, lapDataById.action, lapParam);
+        const lrfPromise = commonService.fetchData(lrfDataById.type, lrfDataById.action, lrfParam);
+        const lapPromise = commonService.fetchData(lapDataById.type, lapDataById.action, lapParam);
 
         return this._getResult(lrfPromise, lapPromise);
     }
 
-    _getResult(lrfPromise, lapPromise) {
-        return this.commonService.fetchMultiple([lrfPromise, lapPromise], (lrfResponse, lapResponse) => {
+    static _getResult(lrfPromise, lapPromise, commonService) {
+        return commonService.fetchMultiple([lrfPromise, lapPromise], (lrfResponse, lapResponse) => {
                 const { DataList: lrfPlayerList } = lrfResponse.data;
                 const { PlayerList: lapPlayerList = [] } = lapResponse.data;
 

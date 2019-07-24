@@ -1,3 +1,5 @@
+import { playerStatus } from '../lib/constants';
+
 export const buildSelectedPlayer = (dataItem) => {
     return {
         custId: dataItem.CustId,
@@ -14,11 +16,17 @@ export const buildCurrentActivePlayer = (dataItem) => {
 }
 
 export const getSpecialLevelText = (value) => {
-    return Number(value) === 0 ? 'None' : value;
+    return value === undefined || value === null ? '' : (Number(value) === 0 ? 'None' : value);
 }
 
 export const getBaStatusText = (value) => {
     return value ? 'On' : 'Off';
+}
+
+export const getPlayerStatus = (value) => {
+    const displayedValue = playerStatus[value];
+
+    return displayedValue || '';
 }
 
 export const buildDisplayedColumnObject = (displayedColumnList) => {

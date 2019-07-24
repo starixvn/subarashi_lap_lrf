@@ -1,18 +1,13 @@
 import PlayerListDataHelper from './playerListDataHelper';
 
 export default class LapPlayerQueryService {
-    constructor(commonService, apiInfo) {
-        this.commonService = commonService;
-        this.apiInfo = apiInfo;
-    }
+    static fetchData(param, commonService, apiInfo) {
+        const { lrfDataById, lapSearch } = apiInfo;
 
-    fetchData(param) {
-        const { lrfDataById, lapSearch } = this.apiInfo;
-
-        return this.commonService.fetchData(lapSearch.type, lapSearch.action, {...param })
+        return commonService.fetchData(lapSearch.type, lapSearch.action, {...param })
             .then(lapResponse => {
                 const { PlayerList: lapPlayerList = [] } = lapResponse.data;
-                if (!lapPlayerList && !lapPlayerList.length) {
+                if (!lapPlayerList || !lapPlayerList.length) {
                     return PlayerListDataHelper.createEmptyResult();
                 }
                 const lrfParam = {
@@ -23,7 +18,7 @@ export default class LapPlayerQueryService {
                     pageIndex: param.pageIndex
                 }
 
-                return this.commonService.fetchData(lrfDataById.type, lrfDataById.action, lrfParam)
+                return commonService.fetchData(lrfDataById.type, lrfDataById.action, lrfParam)
                     .then(lrfResponse => {
                         const { DataList: lrfPlayerList, TotalItem } = lrfResponse.data;
                         const playerList = PlayerListDataHelper.mergePlayerList(lrfPlayerList, lapPlayerList);

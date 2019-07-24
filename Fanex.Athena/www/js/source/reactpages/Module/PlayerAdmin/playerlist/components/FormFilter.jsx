@@ -127,12 +127,14 @@ export class FormFilter extends PureComponent {
                     </div>
 
                     {type === licenseeType.nonApi && <AthenaSearch onChange={this.handleChange}
-                        bankAccountNumber={bankAccountNumber} email={email} />}
+                                                                bankAccountNumber={bankAccountNumber} 
+                                                                email={email} 
+                                                                onKeyPress={this.handlePressEnter} />}
                     {isAdvancedSearch && <AdvancedSearch 
                                             currencyList={currencyList} 
                                             param={advancedSearchParam} 
-                                            onChange={this.handleSpecificInputChange}
-                                            onKeyPress={this.handlePressEnter} />}
+                                            onChange={this.handleSpecificInputChange} />
+                    }
 
                     <div className="col-12 col-md-2 col-sm-2 col-lg-1 col-xl-1">
                         <div className="form-group">

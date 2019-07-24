@@ -1,18 +1,13 @@
 import PlayerListDataHelper from './playerListDataHelper';
 
 export default class LrfPlayerQueryService {
-    constructor(commonService, apiInfo) {
-        this.commonService = commonService;
-        this.apiInfo = apiInfo;
-    }
+    static fetchData(param, commonService, apiInfo) {
+        const { lrfSearch, lapDataById } = apiInfo;
 
-    fetchData(param) {
-        const { lrfSearch, lapDataById } = this.apiInfo;
-
-        return this.commonService.fetchData(lrfSearch.type, lrfSearch.action, {...param })
+        return commonService.fetchData(lrfSearch.type, lrfSearch.action, {...param })
             .then(lrfResponse => {
                 const { DataList: lrfPlayerList, TotalItem } = lrfResponse.data;
-                if (!lrfPlayerList && !lrfPlayerList.length) {
+                if (!lrfPlayerList || !lrfPlayerList.length) {
                     return PlayerListDataHelper.createEmptyResult();
                 }
 
@@ -22,7 +17,7 @@ export default class LrfPlayerQueryService {
                     idList: custIdList
                 }
 
-                return this.commonService.fetchData(lapDataById.type, lapDataById.action, lapParam)
+                return commonService.fetchData(lapDataById.type, lapDataById.action, lapParam)
                     .then(lapResponse => {
                         const { PlayerList: lapPlayerList } = lapResponse.data;
 

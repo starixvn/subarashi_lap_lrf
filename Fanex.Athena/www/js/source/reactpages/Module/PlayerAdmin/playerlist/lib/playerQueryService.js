@@ -1,11 +1,9 @@
 import FactoryCommonService from '../../../lib/factoryCommonService';
 import { systemType } from '../../../constants/configInfo';
-import { specialLevelListWithColor } from './constants';
+
 import ReportExcel from './reportExcel';
-import LapPlayerQueryService from './lapPlayerQueryService';
-import PlayerMultipleQueryService from './playerMultipleQueryService';
-import LrfPlayerQueryService from './lrfPlayerQueryService';
-import PlayerSingleQueryService from './playerSingleQueryService';
+import QueryServiceFactory from './queryServiceFactory';
+import PlayerItemQueryService from './playerItemQueryService';
 
 const apiInfo = {
     lrfSearch: { action: 'api/PlayerList/Search', type: systemType.lrf },
@@ -24,32 +22,12 @@ export default class PlayerQueryService {
     }
 
     getPlayerList(param) {
-        const { bankAccountNumber, email } = param;
-        if (bankAccountNumber || email) {
-            const lapService = new LapPlayerQueryService(this.commonService, apiInfo);
-            return lapService.fetchData(param);
-        } else if (this._isChangeAdvancedSearch(param)) {
-            const lrfService = new LrfPlayerQueryService(this.commonService, apiInfo);
-            return lrfService.fetchData(param);
-        }
-
-        const multipleQueryService = new PlayerMultipleQueryService(this.commonService, apiInfo);
-        return multipleQueryService.fetchData(param);
-    }
-
-    _isChangeAdvancedSearch(param) {
-        const { baFilter, currency, oddsGroup, specialLevel } = param;
-
-        return Number(baFilter) !== 0 ||
-            currency !== '' ||
-            oddsGroup !== '' ||
-            Object.keys(specialLevelListWithColor).length !== specialLevel.split(',').length;
+        const playerListService = QueryServiceFactory.getPlayerListService(param, this.commonService);
+        return playerListService.fetchData(param, this.commonService, apiInfo);
     }
 
     getSinglePlayer(custId) {
-        const singlePlayerService = new PlayerSingleQueryService(this.commonService, apiInfo);
-
-        return singlePlayerService.getPlayerById(custId);
+        return PlayerItemQueryService.getPlayerById(custId, this.commonService, apiInfo);
     }
 
     getLink(systemType, action) {
