@@ -7,14 +7,18 @@ import { defaultPagingOption } from '../lib/constants.js';
 import { buildSelectedPlayer } from '../lib/utils';
 import PlayerSuggestionService from '../lib/playerSuggestionService';
 
+const processBeforeGettingData = (dispatch) => {
+    dispatch(setSelectedPlayer(null));
+    dispatch(setIsFetchingData(true));
+    dispatch(toggleLoader(true));
+}
+
 export const searchPlayer = (param) => (dispatch) => {
     const service = new PlayerQueryService();
 
-    dispatch(setPlayerList(null));
-    dispatch(setSelectedPlayer(null));
-    dispatch(setIsFetchingData(true));
+    processBeforeGettingData(dispatch);
     dispatch(setParam(param));
-    dispatch(toggleLoader(true));
+
     service.getPlayerList(param).then(result => {
         const { playerList, totalItem } = result;
         dispatch(setPlayerList(playerList));
@@ -33,6 +37,31 @@ export const searchPlayer = (param) => (dispatch) => {
             dispatch(setSelectedPlayer(selectedPlayer));
         }
 
+        dispatch(toggleLoader(false));
+    }).catch(() => {
+        dispatch(toggleLoader(false));
+    })
+}
+
+export const getSinglePlayer = (custId) => (dispatch) => {
+    const service = new PlayerQueryService();
+
+    processBeforeGettingData(dispatch);
+
+    service.getSinglePlayer(custId).then(result => {
+        if (result) {
+            dispatch(setPlayerList([result]));
+            dispatch(setIsFetchingData(false));
+
+            const pagingOption = {
+                ...defaultPagingOption,
+                TotalItem: 1
+            }
+            dispatch(setPagingOption(pagingOption));
+
+            const selectedPlayer = buildSelectedPlayer(result);
+            dispatch(setSelectedPlayer(selectedPlayer));
+        }
         dispatch(toggleLoader(false));
     }).catch(() => {
         dispatch(toggleLoader(false));

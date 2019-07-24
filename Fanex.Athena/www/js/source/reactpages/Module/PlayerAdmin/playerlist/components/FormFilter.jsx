@@ -1,8 +1,8 @@
-import React, { PureComponent } from 'react'
-import { connect } from 'react-redux'
-import { ActionCreators } from '../actions/index.js'
-import { bindActionCreators } from 'redux'
-import CheckBox from '@jsroot/components/CheckBox'
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+import { ActionCreators } from '../actions/index.js';
+import { bindActionCreators } from 'redux';
+import CheckBox from '@jsroot/components/CheckBox';
 import AdvancedSearch from './filter/AdvancedSearch';
 import SearchOption from './filter/SearchOption';
 import AthenaSearch from './filter/AthenaSearch';
@@ -12,6 +12,7 @@ import UserGuide from '@jsroot/components/UserGuide';
 import LangHelper from '@jsroot/lib/langHelper';
 import { searchOptions, baStatusList, specialLevelListWithColor } from '../lib/constants';
 import UserNameInput from './filter/UserNameInput';
+import QueryString from '@jsroot/lib/QueryString';
 
 export class FormFilter extends PureComponent {
     constructor(props) {
@@ -31,6 +32,16 @@ export class FormFilter extends PureComponent {
         this.allSpecialLevel = Object.keys(specialLevelListWithColor).map(item => item).join(',');
         this.userNameRef = React.createRef();
     }
+
+    componentDidMount() {
+        const custId = QueryString.getParam(window.location.href, 'custId');
+        if(custId){
+            this.props.getSinglePlayer(custId);
+
+            this.userNameRef.current.value = QueryString.getParam(window.location.href, 'userName');
+        }
+    }
+    
 
     handleSubmit = (event) => {
         event.preventDefault();
@@ -132,8 +143,8 @@ export class FormFilter extends PureComponent {
     }
 }
 function mapDispatchToProps(dispatch) {
-    const { searchPlayer, setAdvancedSearch, setCollapseFilter, getSuggestionList } = ActionCreators;
-    return bindActionCreators({ searchPlayer, setAdvancedSearch, setCollapseFilter, getSuggestionList }, dispatch);
+    const { searchPlayer, setAdvancedSearch, setCollapseFilter, getSuggestionList, getSinglePlayer } = ActionCreators;
+    return bindActionCreators({ searchPlayer, setAdvancedSearch, setCollapseFilter, getSuggestionList, getSinglePlayer }, dispatch);
 }
 function mapStateToProps(state) {
     const { type, isAdvancedSearch, isFilterCollapsing, pagingOption, currencyList } = state;

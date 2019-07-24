@@ -11,12 +11,12 @@ const displayedColumnList = columnList(type).map(item => ({ ...item }));
 const defaultState = { ...window.initialState, displayedColumnList };
 const store = Store.createStore(reducer, defaultState);
 
-const App = React.memo(() => {
+const App = () => {
   return (
     <Provider store={store}>
       <AppContainer />
     </Provider>
   );
-})
+}
 
 render(<App />, document.getElementById("app-container"));

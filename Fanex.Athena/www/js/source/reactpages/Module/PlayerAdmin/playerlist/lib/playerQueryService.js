@@ -5,6 +5,7 @@ import ReportExcel from './reportExcel';
 import LapPlayerQueryService from './lapPlayerQueryService';
 import PlayerMultipleQueryService from './playerMultipleQueryService';
 import LrfPlayerQueryService from './lrfPlayerQueryService';
+import PlayerSingleQueryService from './playerSingleQueryService';
 
 const apiInfo = {
     lrfSearch: { action: 'api/PlayerList/Search', type: systemType.lrf },
@@ -43,6 +44,12 @@ export default class PlayerQueryService {
             currency !== '' ||
             oddsGroup !== '' ||
             Object.keys(specialLevelListWithColor).length !== specialLevel.split(',').length;
+    }
+
+    getSinglePlayer(custId) {
+        const singlePlayerService = new PlayerSingleQueryService(this.commonService, apiInfo);
+
+        return singlePlayerService.getPlayerById(custId);
     }
 
     getLink(systemType, action) {
