@@ -6,12 +6,12 @@
 
 namespace Fanex.Athena.Web.ActionFilter
 {
+    using Fanex.Athena.Service.Core.Users.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using System;
     using System.Net;
     using System.Web.Mvc;
     using System.Web.Routing;
-    using Fanex.Athena.Service.Core.Users.Interfaces;
-    using Service.Core.Configuration.Interfaces;
 
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true)]
     public sealed class BetListAuthorizationAttribute : ActionFilterAttribute

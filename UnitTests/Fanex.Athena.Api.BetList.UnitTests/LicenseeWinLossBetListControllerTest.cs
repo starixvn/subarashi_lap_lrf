@@ -1,16 +1,20 @@
 ﻿namespace Fanex.Athena.Api.BetList.UnitTests
 {
+    using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
+    using Model.BetList.MetaModel;
+    using Model.Core.DataDomain;
+    using Model.Core.DTO.Configuration;
+
+    using NSubstitute;
+
+    using NUnit.Framework;
+
     using System;
     using System.Collections.Generic;
     using System.Net.Http;
     using System.Threading.Tasks;
-    using Fanex.Athena.Model.Auth;
-    using Model.BetList.MetaModel;
-    using Model.Core.DataDomain;
-    using Model.Core.DTO.Configuration;
-    using NSubstitute;
-    using NUnit.Framework;
-    using Service.Core.Configuration.Interfaces;
 
     public class LicenseeWinLossBetListControllerTest : ApiBetListBaseControllerHelperTest
     {
@@ -44,9 +48,13 @@
                 // Arrange
                 var metaModel = new BetListMetaModel { FromDate = new DateTime(2018, 1, 1) };
 
-                StubUserSessionData(new UserAuthInfo { CurrencyList = new Dictionary<int, string>() });
+                StubUserSessionData(new UserAuthInfo
+                {
+                    CurrencyList = new Dictionary<int, string>(),
+                    CurrencyAgentList = new Dictionary<int, int[]>()
+                });
 
-                _reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss).Returns(new ReportSetting
+                _reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss, Arg.Any<string>()).Returns(new ReportSetting
                 {
                     MinDate = new DateTime(2018, 2, 2),
                     MaxDate = new DateTime(2018, 3, 3)
@@ -73,7 +81,9 @@
                 StubUserSessionData(new UserAuthInfo
                 {
                     Language = SessionLanguage,
-                    CurrencyList = new Dictionary<int, string> { { currencyId, "Currency" } }
+                    CurrencyList = new Dictionary<int, string> { { currencyId, "Currency" } },
+                    CurrencyAgentList = new Dictionary<int, int[]>()
+
                 });
 
                 var expect = new HttpResponseMessage();

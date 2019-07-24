@@ -72,7 +72,6 @@
     <Compile Include="MetaModel\SpecialLevelUpdatingMetaModel.cs" />
     <Compile Include="PlayerBaStatusController.cs" />
     <Compile Include="PlayerDetailedInfoController.cs" />
-    <Compile Include="PlayerExtController.cs" />
     <Compile Include="PlayerListController.cs" />
     <Compile Include="PlayerLogController.cs" />
     <Compile Include="PlayerOddsGroupController.cs" />

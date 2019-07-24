@@ -4,20 +4,28 @@
     using System.Linq;
     using System.Web.Mvc;
     using Base.UnitTests;
+
     using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using Model.Core.DTO.Configuration;
     using Model.Report.ViewModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Report;
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Configuration.Interfaces;
+
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Web.Mvc;
 
     [TestFixture]
     public class LicenseeWinLossReportControllerTest : CultureBaseControllerHelperTest
     {
+
         [OneTimeSetUp]
         public override void FixtureSetUp()
         {
@@ -31,7 +39,7 @@
         {
             // Arrange
             var reportSettingService = Substitute.For<IReportSettingService>();
-            reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss).Returns(new ReportSetting());
+            reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss, Arg.Any<string>()).Returns(new ReportSetting());
 
             AppSettings.FakeLicenseeList.Returns(Enumerable.Empty<int>());
 
@@ -57,7 +65,8 @@
         {
             // Arrange
             var reportSettingService = Substitute.For<IReportSettingService>();
-            reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss).Returns(new ReportSetting { BaseCurrencies = "USD,KKK", TimeZone = 8 });
+            reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss, Arg.Any<string>())
+                .Returns(new ReportSetting { BaseCurrencies = "USD,KKK", TimeZone = 8 });
 
             AppSettings.FakeLicenseeList.Returns(new[] { DefaultLicenseeSession.LicenseeId });
 
@@ -78,7 +87,7 @@
         }
 
         private LicenseeWinLossReportController CreateController(IReportSettingService reportSettingService)
-        {           
+        {
             var productService = Substitute.For<IProductService>();
             productService.GetSingleWalletProductAccess(
                 SessionService.LicenseeSession.LicenseeId,

@@ -1,19 +1,24 @@
 ﻿namespace Fanex.Athena.Controllers.Report
 {
+    using Extension.Utility;
+
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
+    using Model.Core.DataDomain;
+    using Model.Core.DTO.Common;
+    using Model.Report.ViewModel;
+
+    using Resources;
+
+    using Service.Core.Common.Interfaces;
+    using Service.Core.Users.Interfaces;
+
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
-    using Model.Core.DataDomain;
-    using Extension.Utility;
-    using Model.Core.DTO.Common;
-    using Model.Report.ViewModel;
-    using Resources;
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Configuration.Interfaces;
-    using Service.Core.Users.Interfaces;
+
     using Web.ActionFilter;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     [FunctionAuthorization(PermissionKeys.ReportCasinoTurnover)]
     public class CasinoTurnoverController : ReportBaseController
@@ -39,7 +44,8 @@
                 SessionService.LicenseeSession.LicenseeId,
                 userSession.Language,
                 FunctionNames.CasinoTurnover);
-            var setting = _reportSettingService.GetSetting(PermissionKeys.ReportCasinoTurnover);
+            var setting = _reportSettingService.GetSetting(PermissionKeys.ReportCasinoTurnover, 
+                SessionService.LicenseeSession.LicenseeName);
 
             var viewModel = new CasinoTurnoverViewModel
             {

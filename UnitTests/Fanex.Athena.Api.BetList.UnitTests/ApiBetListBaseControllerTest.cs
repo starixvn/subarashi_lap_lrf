@@ -126,7 +126,7 @@
                         Assert.That(metaModel.HasPlayerCom, Is.EqualTo(SessionService.LicenseeSession.IsAllowedCustomerComm));
                         Assert.That(metaModel.CurrencyList, Is.EqualTo(UserCurrencyList));
                         Assert.That(metaModel.UspKey, Is.EqualTo(uspKey));
-                        BetListApiClient.Received().PostAsync((string)apiPath, (object)metaModel, (string)SessionLanguage);
+                        BetListApiClient.Received().PostAsync(apiPath, (object)metaModel, SessionLanguage);
                     }));
                 }));
             }

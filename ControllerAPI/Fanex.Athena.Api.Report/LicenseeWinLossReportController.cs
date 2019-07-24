@@ -6,16 +6,12 @@
 
 namespace Fanex.Athena.Api.Report
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Net.Http;
-    using System.Threading.Tasks;
-    using System.Web.Hosting;
-    using System.Web.Http;
     using Base.Attributes;
+
     using DataAccess.Report.Interfaces;
+
     using Excel.Report.Models;
+
     using Fanex.Athena.Excel.Base.Entities;
     using Fanex.Athena.Excel.Report;
     using Fanex.Athena.Extension.Helper;
@@ -26,12 +22,21 @@ namespace Fanex.Athena.Api.Report
     using Fanex.Athena.Model.Report.ViewModel;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
+
     using Model.Core.DataDomain;
     using Model.Core.MetaModel.Product;
     using Model.Core.ResultModel;
+
     using Service.Core.Common.Interfaces;
-    using Service.Core.Configuration.Interfaces;
     using Service.Core.Users.Interfaces;
+
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Net.Http;
+    using System.Threading.Tasks;
+    using System.Web.Hosting;
+    using System.Web.Http;
 
     [ApiFunctionAuthorization(PermissionKeys.ReportLicenseeWinLoss)]
     public class LicenseeWinLossReportController : ApiReportBaseController
@@ -338,7 +343,8 @@ namespace Fanex.Athena.Api.Report
 
         protected internal virtual bool IsValidParams(LicenseeWinLossMetaModel metaModel)
         {
-            var setting = _reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss);
+            var setting = _reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss,
+                SessionService.LicenseeSession.LicenseeName);
             if (setting == null)
             {
                 return true;

@@ -34,7 +34,11 @@
                 // Arrange
                 var metaModel = new BetListExcelMetaModel { CurrencyId = 1, FromDate = new DateTime(2018, 1, 3), ToDate = new DateTime(2018, 1, 1) };
 
-                StubUserSessionData(new UserAuthInfo { CurrencyList = new Dictionary<int, string>() });
+                StubUserSessionData(new UserAuthInfo
+                {
+                    CurrencyList = new Dictionary<int, string>(),
+                    CurrencyAgentList = new Dictionary<int, int[]>()
+                });
 
                 // Action
                 var result = await controller.Index(metaModel);
@@ -44,7 +48,7 @@
             }
         }
 
-       
+
         [TestCase(0)]
         [TestCase(1)]
         [TestCase(2)]
@@ -55,7 +59,13 @@
                 // Arrange
                 var metaModel = new BetListExcelMetaModel { CurrencyId = currencyId, ProductCodeList = "Product1,Product2" };
 
-                StubUserSessionData(new UserAuthInfo { Language = SessionLanguage, CurrencyList = new Dictionary<int, string> { { currencyId, "Currency" } } });
+                StubUserSessionData(new UserAuthInfo
+                {
+                    Language = SessionLanguage,
+                    CurrencyList = new Dictionary<int, string> { { currencyId, "Currency" } },
+                    CurrencyAgentList = new Dictionary<int, int[]>()
+
+                });
 
                 var expect = new HttpResponseMessage();
                 StubBetListApiPostAsync(Arg.Any<BetListMetaModel>(), ApiPath, expect);

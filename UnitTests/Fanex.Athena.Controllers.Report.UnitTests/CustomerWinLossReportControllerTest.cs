@@ -1,19 +1,22 @@
 ﻿namespace Fanex.Athena.Controllers.TotalBets.UnitTests
 {
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
     using Base.UnitTests;
+
     using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using Model.Core.DTO.Configuration;
     using Model.Report.ViewModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Report;
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Configuration.Interfaces;
+
+    using System.Collections.Generic;
+    using System.Web.Mvc;
 
     [TestFixture]
     public class CustomerWinLossReportControllerTest : CultureBaseControllerHelperTest
@@ -65,7 +68,7 @@
         private CustomerWinLossReportController CreateController()
         {
             var reportSettingService = Substitute.For<IReportSettingService>();
-            reportSettingService.GetSetting(PermissionKeys.ReportCustomerWinLoss).Returns(new ReportSetting());
+            reportSettingService.GetSetting(PermissionKeys.ReportCustomerWinLoss, Arg.Any<string>()).Returns(new ReportSetting());
 
             var productService = Substitute.For<IProductService>();
             productService.GetSingleWalletProductAccess(

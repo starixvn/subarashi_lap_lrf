@@ -1,21 +1,26 @@
 ﻿namespace Fanex.Athena.Api.Report.UnitTests
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
     using Base.UnitTests;
+
     using DataAccess.Report.Interfaces;
+
     using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using Model.Core.DTO.Configuration;
     using Model.Core.ResultModel;
     using Model.Report.DTO;
     using Model.Report.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
-    using Service.Core.Configuration.Interfaces;
+
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
 
     public class SpecialLicenseeWinLossReportControllerTest : BaseApiControllerHelperTest
     {
@@ -42,7 +47,7 @@
 
             MockSessionData();
 
-            _reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss)
+            _reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss, Arg.Any<string>())
                .Returns(new ReportSetting { MinDate = new DateTime(2018, 1, 1), MaxDate = new DateTime(2018, 1, 31), BaseCurrencies = "USD" });
         }
 

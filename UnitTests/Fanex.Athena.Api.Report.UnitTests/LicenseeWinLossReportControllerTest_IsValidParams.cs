@@ -1,17 +1,23 @@
 ﻿namespace Fanex.Athena.Api.Report.UnitTests
 {
-    using System;
-    using System.Collections.Generic;
     using Base.UnitTests;
+
     using DataAccess.Report.Interfaces;
+
     using Fanex.Athena.Model.Core.MetaModel.Product;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Configuration;
     using Model.Report.MetaModel;
+
     using NPOI.SS.UserModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
-    using Service.Core.Configuration.Interfaces;
+
+    using System;
+    using System.Collections.Generic;
 
     public class LicenseeWinLossReportControllerTest_IsValidParams : BaseApiControllerHelperTest
     {
@@ -43,7 +49,7 @@
         public void IsValidParams_ReportSettingIsNull_ReturnTrue()
         {
             // Arrange
-            _reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss).Returns((ReportSetting)null);
+            _reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss, Arg.Any<string>()).Returns((ReportSetting)null);
 
             // Action
             var result = _controller.IsValidParams(new LicenseeWinLossMetaModel());
@@ -116,7 +122,7 @@
 
         private void SetUpReportSetting()
         {
-            _reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss)
+            _reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss, Arg.Any<string>())
                             .Returns(new ReportSetting
                             {
                                 MinDate = new DateTime(2018, 1, 1),

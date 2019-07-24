@@ -817,7 +817,7 @@
     <Content Include="www\css\build\dev\reactpages\licenseewlbytimezone\index.css.map" />
     <Content Include="www\css\source\reactpages\components\forms\_radio-buttons.scss" />
     <Content Include="www\css\source\reactpages\components\_popup.scss" />
-    <Content Include="Views\Desktop\Report\Notification\Notification.cshtml" />
+    <Content Include="Views\Desktop\Module\Notification\Notification.cshtml" />
     <Content Include="www\css\source\reactpages\pages\notification\index.scss" />
     <Content Include="www\css\source\reactpages\components\_collapsibleRow.scss" />
     <Content Include="www\css\source\reactpages\vendors\notification.scss" />
@@ -5547,10 +5547,6 @@
       <Project>{5653BC29-0843-4D75-9140-5B370DF2F88C}</Project>
       <Name>Fanex.Athena.DataAccess.Report</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Fanex.Athena.Api.ExternalService\Fanex.Athena.Api.ExternalService.csproj">
-      <Project>{33283837-a60b-44aa-815d-f61f70774de2}</Project>
-      <Name>Fanex.Athena.Api.ExternalService</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Fanex.Athena.Extension\Fanex.Athena.Extension.csproj">
       <Project>{71F95E53-36D0-4091-828D-ED14C9939C35}</Project>
       <Name>Fanex.Athena.Extension</Name>
@@ -5571,6 +5567,14 @@
     <ProjectReference Include="..\Module\Fanex.Athena.Module.Dashboard\Fanex.Athena.Module.Dashboard.csproj">
       <Project>{b5c8656b-6c30-4c82-bdb9-85b1c71b00c3}</Project>
       <Name>Fanex.Athena.Module.Dashboard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Module\Fanex.Athena.Module.Notification.Api\Fanex.Athena.Module.Notification.Api.csproj">
+      <Project>{43a8ee11-7aa4-4af2-a77f-fa4ebc32298c}</Project>
+      <Name>Fanex.Athena.Module.Notification.Api</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Module\Fanex.Athena.Module.Notification.Report\Fanex.Athena.Module.Notification.Report.csproj">
+      <Project>{eaa832b4-1501-4a05-b459-aeef528b521f}</Project>
+      <Name>Fanex.Athena.Module.Notification.Report</Name>
     </ProjectReference>
     <ProjectReference Include="..\Module\Fanex.Athena.Module.PlayerAdmin.Api\Fanex.Athena.Module.PlayerAdmin.Api.csproj">
       <Project>{831ffa8d-8f5e-4abd-ac6a-5660b71b1795}</Project>

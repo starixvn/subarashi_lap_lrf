@@ -25,7 +25,9 @@
             UserName = "alex.vn",
             OnUserId = 999,
             FunctionIdList = new int[0],
-            DefaultBaseCurrency = "EUR"
+            DefaultBaseCurrency = "EUR",
+            CurrencyAgentList = new Dictionary<int, int[]>()
+
         };
 
         protected static readonly LicenseeAuthInfo DefaultLicenseeSession = new LicenseeAuthInfo

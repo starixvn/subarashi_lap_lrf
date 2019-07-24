@@ -22,7 +22,7 @@
 
         protected const string SessionLanguage = "en-US";
 
-        protected const string AgentListXml = "XmlData";
+        protected const string AgentListXml = "<ROOT></ROOT>";
 
         protected ISessionService SessionService { get; private set; }
 
@@ -68,7 +68,9 @@
                 UserId = SessionUserId,
                 UserName = SessionUserName,
                 CurrencyList = new Dictionary<int, string> {{ 1, "EUR" }, { 2, "USD" } },
-                Language = SessionLanguage
+                Language = SessionLanguage,
+                CurrencyAgentList = new Dictionary<int, int[]>()
+
             };
 
             var licenseeSession = new LicenseeAuthInfo

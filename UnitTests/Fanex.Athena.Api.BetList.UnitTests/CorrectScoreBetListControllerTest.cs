@@ -34,9 +34,17 @@
                 // Arrange
                 var metaModel = new BetListMetaModel
                 {
-                    CurrencyId = currencyId
+                    CurrencyId = currencyId,
+
                 };
-                StubUserSessionData(new UserAuthInfo { Language = SessionLanguage, CurrencyList = new Dictionary<int, string> { { currencyId, "Test" } } });
+                StubUserSessionData(new UserAuthInfo
+                {
+                    Language = SessionLanguage,
+                    CurrencyList = new Dictionary<int, string> { { currencyId, "Test" } },
+                    CurrencyAgentList = new Dictionary<int, int[]>()
+
+                }
+                );
 
                 var expect = new HttpResponseMessage();
                 StubBetListApiPostAsync(metaModel, ApiPath, expect);

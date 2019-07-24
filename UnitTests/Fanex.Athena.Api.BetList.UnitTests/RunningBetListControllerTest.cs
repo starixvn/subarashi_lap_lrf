@@ -65,7 +65,7 @@
                     NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
                     Assert.That(metaModel.UspKey, Is.EqualTo(UspKey));
                     Assert.That(metaModel.BetType, Is.EqualTo((int)BetType.CleanSheet));
-                    BetListApiClient.Received().PostAsync((string)ApiPath, (object)metaModel, (string)SessionLanguage);
+                    BetListApiClient.Received().PostAsync(ApiPath, (object)metaModel, SessionLanguage);
                 }));
             }
         }
@@ -128,7 +128,13 @@
         {
             var metaModel = new BetListMetaModel { CurrencyId = currencyId };
 
-            StubUserSessionData(new UserAuthInfo { Language = SessionLanguage, CurrencyList = sessionCurrencyList });
+            StubUserSessionData(new UserAuthInfo {
+                Language = SessionLanguage,
+                CurrencyList = sessionCurrencyList,
+                CurrencyAgentList = new Dictionary<int, int[]>()
+
+
+            });
 
             return metaModel;
         }

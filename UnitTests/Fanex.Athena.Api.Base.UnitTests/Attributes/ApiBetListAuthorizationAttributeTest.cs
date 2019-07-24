@@ -3,12 +3,14 @@
     using Attributes;
 
     using Autofac;
+
     using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using NSubstitute;
 
     using NUnit.Framework;
 
-    using Service.Core.Configuration.Interfaces;
     using Service.Core.Users.Interfaces;
 
     using System;

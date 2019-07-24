@@ -46,7 +46,7 @@
                 {
                     NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
                     Assert.That(metaModel.UspKey, Is.EqualTo(UspKey));
-                    BetListApiClient.Received().PostAsync((string)ApiPath, (object)metaModel, (string)SessionLanguage);
+                    BetListApiClient.Received().PostAsync(ApiPath, (object)metaModel, SessionLanguage);
                 }));
             }
         }

@@ -2,10 +2,8 @@
 {
     using Fanex.Athena.Api.StatelessBase.Attributes.Extensions;
     using Fanex.Athena.Service.Core.Users.Interfaces;
-
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Resources;
-
-    using Service.Core.Configuration.Interfaces;
 
     using System;
     using System.Net;

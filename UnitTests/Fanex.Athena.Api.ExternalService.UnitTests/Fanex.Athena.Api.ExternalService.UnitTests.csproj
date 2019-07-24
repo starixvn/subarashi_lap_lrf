@@ -110,7 +110,6 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="NotificationApiControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -125,10 +124,6 @@
     <ProjectReference Include="..\..\ControllerAPI\Fanex.Athena.Api.StatelessBase\Fanex.Athena.Api.StatelessBase.csproj">
       <Project>{0054161C-59B0-4CB6-AC5F-4E0F0D0294EC}</Project>
       <Name>Fanex.Athena.Api.StatelessBase</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Fanex.Athena.Api.ExternalService\Fanex.Athena.Api.ExternalService.csproj">
-      <Project>{33283837-A60B-44AA-815D-F61F70774DE2}</Project>
-      <Name>Fanex.Athena.Api.ExternalService</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Fanex.Athena.Extension\Fanex.Athena.Extension.csproj">
       <Project>{71F95E53-36D0-4091-828D-ED14C9939C35}</Project>

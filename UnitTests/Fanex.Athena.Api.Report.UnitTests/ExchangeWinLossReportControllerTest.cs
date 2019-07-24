@@ -1,17 +1,22 @@
 ﻿namespace Fanex.Athena.Api.Report.UnitTests
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
     using Base.UnitTests;
+
     using DataAccess.Report.Interfaces;
+
     using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Model.Core.DataDomain;
     using Model.Core.DTO.Configuration;
     using Model.Report.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
-    using Service.Core.Configuration.Interfaces;
+
+    using System;
+    using System.Threading.Tasks;
 
     public class ExchangeWinLossReportControllerTest : BaseApiControllerHelperTest
     {
@@ -27,7 +32,7 @@
         {
             base.FixtureSetUp();
             _reportSettingService = Substitute.For<IReportSettingService>();
-            _reportSettingService.GetSetting(PermissionKeys.ReportExchangeWinLoss).Returns(new ReportSetting
+            _reportSettingService.GetSetting(PermissionKeys.ReportExchangeWinLoss, Arg.Any<string>()).Returns(new ReportSetting
             {
                 MinDate = _minDate,
                 MaxDate = _maxDate

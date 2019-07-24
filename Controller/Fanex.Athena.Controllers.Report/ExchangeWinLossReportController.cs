@@ -1,17 +1,22 @@
 ﻿namespace Fanex.Athena.Controllers.Report
 {
+    using Extension.Utility;
+
+    using Fanex.Athena.Model.Report.ViewModel;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
+    using Model.Core.DataDomain;
+
+    using Resources;
+
+    using Service.Core.Common.Interfaces;
+    using Service.Core.Users.Interfaces;
+
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
-    using Extension.Utility;
-    using Fanex.Athena.Model.Report.ViewModel;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Model.Core.DataDomain;
-    using Resources;
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Configuration.Interfaces;
-    using Service.Core.Users.Interfaces;
+
     using Web.ActionFilter;
 
     [FunctionAuthorization(PermissionKeys.ReportExchangeWinLoss)]
@@ -57,7 +62,7 @@
                 currencyList.Add(item.Key, item.Value);
             }
 
-            var reportSetting = _reportSettingService.GetSetting(PermissionKeys.ReportExchangeWinLoss);
+            var reportSetting = _reportSettingService.GetSetting(PermissionKeys.ReportExchangeWinLoss, licensee.LicenseeName);
             return new ExchangeWinLossViewModel
             {
                 MinDate = reportSetting.MinDate,

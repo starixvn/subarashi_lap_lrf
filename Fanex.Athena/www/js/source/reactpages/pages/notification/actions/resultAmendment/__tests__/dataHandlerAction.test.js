@@ -29,7 +29,7 @@ describe('dataHandlerAction', () => {
     })
 
     describe('getGridData', () => {
-        const expectedUrl = 'api/NotificationReport/ResultAmendment';
+        const expectedUrl = 'NotificationReport/ResultAmendment';
         const fakeDataResponse = {
             data: {
                 DataList: [],
@@ -93,7 +93,7 @@ describe('dataHandlerAction', () => {
     })
 
     describe('markItemAsRead', () => {
-        const expectedUrl = 'api/NotificationReport/MarkNotificationAsRead';
+        const expectedUrl = 'NotificationReport/MarkNotificationAsRead';
         const params = {
             Id: 1,
             Type: 2,
@@ -147,7 +147,7 @@ describe('dataHandlerAction', () => {
 
     describe('exportAttachment', () => {
         it('axios.post should be called with correct parameters', () => {
-            const expectedUrl = 'api/NotificationReport/DownLoadFileAttachment';
+            const expectedUrl = 'NotificationReport/DownLoadFileAttachment';
             const params = {
                 api: 'api',
                 fileName: 'fileName'

@@ -1,21 +1,26 @@
 ﻿namespace Fanex.Athena.Api.Report
 {
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Http;
     using Base.Attributes;
+
     using DataAccess.Report.Interfaces;
+
     using Extension.Helper;
+
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
+
     using Model.Core.DataDomain;
     using Model.Core.ResultModel;
     using Model.Report.DTO;
     using Model.Report.MetaModel;
+
     using Service.Core.Common.Interfaces;
-    using Service.Core.Configuration.Interfaces;
     using Service.Core.Users.Interfaces;
+
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Http;
 
     [ApiFunctionAuthorization(PermissionKeys.ReportExchangeWinLoss)]
     public class ExchangeWinLossReportController : ApiReportBaseController
@@ -44,7 +49,7 @@
             var currencyList = userSession.CurrencyList;
             if (IsValidParams(metaModel))
             {
-                metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList,metaModel.CurrencyId, metaModel.ExcludeTestData);
+                metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId, metaModel.ExcludeTestData);
                 metaModel.LicenseeId = SessionService.LicenseeSession.LicenseeId;
                 metaModel.DefaultBaseCurrency = userSession.DefaultBaseCurrency;
                 if (metaModel.Level == (int)ReportLevel.Main)
@@ -67,7 +72,8 @@
 
         private bool IsValidParams(ExchangeWinLossMetaModel metaModel)
         {
-            var setting = _reportSettingService.GetSetting(PermissionKeys.ReportExchangeWinLoss);
+            var setting = _reportSettingService.GetSetting(PermissionKeys.ReportExchangeWinLoss
+                , SessionService.LicenseeSession.LicenseeName);
             if (setting == null)
             {
                 return true;

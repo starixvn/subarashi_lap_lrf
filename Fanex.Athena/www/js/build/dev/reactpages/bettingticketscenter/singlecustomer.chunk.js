@@ -1482,13 +1482,14 @@ var propTypes = {
 };
 var defaultProps = {
   iconContainerStyle: {
-    height: "15px",
-    width: "20px",
+    height: '15px',
+    width: '20px',
     cursor: 'pointer',
     position: 'absolute',
     left: 'calc(50% - 10px)',
     bottom: 0,
-    padding: '1px 5px'
+    background: '#4c6274',
+    textAlign: 'center'
   },
   iconToggle: {
     tag: 'i',

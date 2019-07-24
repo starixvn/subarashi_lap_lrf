@@ -128,7 +128,9 @@
                 StubUserSessionData(new UserAuthInfo
                 {
                     Language = SessionLanguage,
-                    CurrencyList = new Dictionary<int, string> { { currencyId, "Currency" } }
+                    CurrencyList = new Dictionary<int, string> { { currencyId, "Currency" } },
+                    CurrencyAgentList = new Dictionary<int, int[]>()
+
                 });
 
                 _authorizationService.HasPermissionOnData(SessionLicenseeId, metaModel.CustId, 0).Returns(true);
@@ -233,7 +235,9 @@
                 StubUserSessionData(new UserAuthInfo
                 {
                     Language = SessionLanguage,
-                    CurrencyList = new Dictionary<int, string> { { currencyId, "Currency" } }
+                    CurrencyList = new Dictionary<int, string> { { currencyId, "Currency" } },
+                    CurrencyAgentList = new Dictionary<int, int[]>()
+
                 });
 
                 _authorizationService.HasPermissionOnData(SessionLicenseeId, metaModel.CustId, 0).Returns(true);

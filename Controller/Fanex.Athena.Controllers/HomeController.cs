@@ -6,15 +6,16 @@
 
 namespace Fanex.Athena.Controllers
 {
-    using System.Web.Mvc;
-
     using Extension.Utility;
+
     using Fanex.Athena.Model.Auth.Enum;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using ONEbook.UM.Filters;
 
     using Service.Core.Common.Interfaces;
-    using Service.Core.Configuration.Interfaces;
     using Service.Core.Users.Interfaces;
+
+    using System.Web.Mvc;
 
     using Web.ActionFilter;
 

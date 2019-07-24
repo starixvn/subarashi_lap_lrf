@@ -5,8 +5,8 @@ define(['common/site', 'moment', 'common/popup', 'extensions/jquery.extension'],
         const NOTIFICATION_ITEM = '<li class="notification-item" id="notification-item-{0}" title="{1}">' +
                                 '<a href="javascript:void(0)">{2}</a><span class="type">{3}</span><span class="date-time">{4}</span>' +
                                 '</li>';
-        const GET_NOTIFICATION_URL = 'api/NotificationReport/GetNotificationMessages';
-        const MARK_NOTIFICATION = 'api/NotificationReport/MarkNotificationAsRead';
+        const GET_NOTIFICATION_URL = 'NotificationReport/GetNotificationMessages';
+        const MARK_NOTIFICATION = 'NotificationReport/MarkNotificationAsRead';
         const POPUP_ID = 'view-notification';
         const POPUP_CONTENT_MIN_HEIGHT = 300;
 

@@ -1,23 +1,28 @@
 ﻿namespace Fanex.Athena.Api.Report
 {
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Http;
     using Base.Attributes;
+
     using DataAccess.Report.Interfaces;
+
     using Extension.Utility;
+
     using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using Model.Core.DTO.Configuration;
     using Model.Report.DTO;
+
     using Service.Core.Common.Interfaces;
-    using Service.Core.Configuration.Interfaces;
     using Service.Core.Users.Interfaces;
+
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Http;
 
     [ApiFunctionAuthorization(PermissionKeys.ReportLicenseeWinLoss)]
     public class SpecialLicenseeWinLossReportController : ApiReportBaseController
@@ -91,7 +96,8 @@
 
         private async Task<dynamic> ProcessRequest(SpecialLicenseeWinLossMetaModel metaModel)
         {
-            var setting = _reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss);
+            var setting = _reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss
+                , SessionService.LicenseeSession.LicenseeName);
 
             if (IsValidParams(metaModel, setting))
             {
@@ -137,7 +143,7 @@
         {
             return IsValidDateRange(metaModel, setting) &&
                 IsValidProduct(metaModel);
-              
+
         }
 
         private bool IsValidProduct(SpecialLicenseeWinLossMetaModel metaModel)

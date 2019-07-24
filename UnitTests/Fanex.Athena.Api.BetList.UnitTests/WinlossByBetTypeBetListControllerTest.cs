@@ -70,7 +70,11 @@
                 const string SortBy = "Index";
                 const string SortOrder = "asc";
 
-                StubUserSessionData(new UserAuthInfo { Language = SessionLanguage, CurrencyList = new Dictionary<int, string> { { currencyId, "Currency" } } });
+                StubUserSessionData(new UserAuthInfo { Language = SessionLanguage,
+                    CurrencyList = new Dictionary<int, string> { { currencyId, "Currency" } },
+                    CurrencyAgentList = new Dictionary<int, int[]>()
+
+                });
 
                 var expect = new HttpResponseMessage();
                 StubBetListApiPostAsync(Arg.Any<BetListMetaModel>(), ApiPath, expect);

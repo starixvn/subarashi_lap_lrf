@@ -77,7 +77,7 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                StubUserSessionData(new UserAuthInfo { CurrencyList = new Dictionary<int, string>() });
+                StubUserSessionData(new UserAuthInfo { CurrencyAgentList = new Dictionary<int, int[]>(), CurrencyList = new Dictionary<int, string>() });
 
                 // Action
                 var result = await controller.MixParlay(0, 0, 1, string.Empty, 0, DateTime.Today, DateTime.Today, string.Empty);
@@ -111,8 +111,8 @@
                 {
                     NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
                     Assert.That(metaModel.UspKey, Is.EqualTo(MatchBetTypeUspKey));
-                    BetListApiClient.Received().PostAsync((string)PageApiPath,
-(object)Arg.Is<BetListMetaModel>((System.Linq.Expressions.Expression<Predicate<BetListMetaModel>>)(x => (bool)(x.PageIndex == page && x.PageSize == row))), (string)SessionLanguage);
+                    BetListApiClient.Received().PostAsync(PageApiPath,
+(object)Arg.Is<BetListMetaModel>((System.Linq.Expressions.Expression<Predicate<BetListMetaModel>>)(x => x.PageIndex == page && x.PageSize == row)), (string)SessionLanguage);
                 }));
             }
         }
@@ -138,8 +138,8 @@
                 {
                     NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
                     Assert.That(metaModel.UspKey, Is.EqualTo(OutrightUspKey));
-                    BetListApiClient.Received().PostAsync((string)ApiPath,
-(object)Arg.Is<BetListMetaModel>((System.Linq.Expressions.Expression<Predicate<BetListMetaModel>>)(x => (bool)x.IsServerPaging)), (string)SessionLanguage);
+                    BetListApiClient.Received().PostAsync(ApiPath,
+(object)Arg.Is<BetListMetaModel>((System.Linq.Expressions.Expression<Predicate<BetListMetaModel>>)(x => x.IsServerPaging)), SessionLanguage);
                 }));
             }
         }
@@ -161,7 +161,14 @@
                 var sortBy = FakeHelper.Create<string>();
                 var sortOrder = FakeHelper.Create<string>();
 
-                StubUserSessionData(new UserAuthInfo { Language = "en-US", CurrencyList = new Dictionary<int, string> { { currencyId, "Currency" } } });
+                StubUserSessionData(new UserAuthInfo
+                {
+                    Language = "en-US",
+                    CurrencyList = new Dictionary<int, string> { { currencyId, "Currency" } },
+                    CurrencyAgentList = new Dictionary<int, int[]>()
+                }
+
+                );
 
                 var expect = new HttpResponseMessage();
                 StubBetListApiPostAsync(Arg.Any<BetListMetaModel>(), PageApiPath, expect);
@@ -182,11 +189,18 @@
             }
         }
 
-        private BetListMetaModel SetUpForGetBetListResult(int currencyId, Dictionary<int, string> sessionCurrencyList)
+        private BetListMetaModel SetUpForGetBetListResult(int currencyId,
+            Dictionary<int, string> sessionCurrencyList)
         {
             var metaModel = new BetListMetaModel { CurrencyId = currencyId };
 
-            StubUserSessionData(new UserAuthInfo { Language = SessionLanguage, CurrencyList = sessionCurrencyList });
+            StubUserSessionData(new UserAuthInfo
+            {
+                Language = SessionLanguage,
+                CurrencyAgentList =
+                new Dictionary<int, int[]>(),
+                CurrencyList = sessionCurrencyList
+            });
 
             return metaModel;
         }

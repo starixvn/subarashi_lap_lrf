@@ -2782,7 +2782,7 @@ function () {
   _createClass(Excel, null, [{
     key: "process",
     value: function process(callback) {
-      __webpack_require__.e(/*! import() | xlsx-style-sparta */ "xlsx-style-sparta").then(__webpack_require__.t.bind(null, /*! xlsx-style-sparta */ "./node_modules/xlsx-style-sparta/xlsx.js", 7)).then(function (XLSX) {
+      Promise.all(/*! import() | xlsx-style-sparta */[__webpack_require__.e("common"), __webpack_require__.e("xlsx-style-sparta")]).then(__webpack_require__.t.bind(null, /*! xlsx-style-sparta */ "./node_modules/xlsx-style-sparta/xlsx.js", 7)).then(function (XLSX) {
         _XLSX = XLSX;
         callback && callback();
       });
@@ -3036,14 +3036,14 @@ var header = function header() {
 };
 
 var fetchData = function fetchData(params) {
-  var url = _lib_site__WEBPACK_IMPORTED_MODULE_2__["default"].resolveClientUrl('api/NotificationReport/ResultAmendment');
+  var url = _lib_site__WEBPACK_IMPORTED_MODULE_2__["default"].resolveClientUrl('NotificationReport/ResultAmendment');
   return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(url, params.data, {
     headers: header()
   });
 };
 
 var markNotification = function markNotification(params) {
-  var url = _lib_site__WEBPACK_IMPORTED_MODULE_2__["default"].resolveClientUrl('api/NotificationReport/MarkNotificationAsRead');
+  var url = _lib_site__WEBPACK_IMPORTED_MODULE_2__["default"].resolveClientUrl('NotificationReport/MarkNotificationAsRead');
   return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(url, {
     MessageId: params.id,
     MessageType: params.type
@@ -3053,7 +3053,7 @@ var markNotification = function markNotification(params) {
 };
 
 var downloadData = function downloadData(params) {
-  var url = _lib_site__WEBPACK_IMPORTED_MODULE_2__["default"].resolveClientUrl('api/NotificationReport/DownLoadFileAttachment');
+  var url = _lib_site__WEBPACK_IMPORTED_MODULE_2__["default"].resolveClientUrl('NotificationReport/DownLoadFileAttachment');
   return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(url, {
     FileName: params.fileName
   }, {

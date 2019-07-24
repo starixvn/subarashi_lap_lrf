@@ -6,23 +6,26 @@
 
 namespace Fanex.Athena.Controllers.Report
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Web.Mvc;
     using Extension.Helper;
     using Extension.Utility;
+
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.MetaModel.Product;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
+
     using Model.Core.DTO.Common;
     using Model.Core.DTO.Configuration;
+
     using Service.Core.Common.Interfaces;
-    using Service.Core.Configuration.Interfaces;
     using Service.Core.Users.Interfaces;
+
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Web.Mvc;
 
     [FunctionAuthorization(PermissionKeys.ReportLicenseeWinLoss)]
     public class LicenseeWinLossReportController : ReportBaseController
@@ -80,7 +83,8 @@ namespace Fanex.Athena.Controllers.Report
         {
             var licenseeSession = SessionService.LicenseeSession;
             var userSession = SessionService.UserSession;
-            var reportSetting = _reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss);
+            var reportSetting = _reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss,
+                licenseeSession.LicenseeName);
             var selectedDate = GetSelectedDate(reportSetting);
             var productAccess = ProductService.GetSingleWalletProductAccess(
                 licenseeSession.LicenseeId,
@@ -97,7 +101,7 @@ namespace Fanex.Athena.Controllers.Report
                 ReportBy = ReportByType.Daily,
                 ProductOptions = ToProductOptions(productAccess.ProductList),
                 BaseCurrency = userSession.DefaultBaseCurrency,
-                                CurrencyId = SystemConstants.BaseCurrencyList
+                CurrencyId = SystemConstants.BaseCurrencyList
                 .FirstOrDefault(x => x.Value.Equals(userSession.DefaultBaseCurrency, StringComparison.OrdinalIgnoreCase))
                 .Key
 
@@ -117,7 +121,8 @@ namespace Fanex.Athena.Controllers.Report
         private ActionResult MapToFakeView()
         {
             var userSession = SessionService.UserSession;
-            var reportSetting = _reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss);
+            var reportSetting = _reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss,
+                SessionService.LicenseeSession.LicenseeName);
             var selectedDate = GetSelectedDate(reportSetting);
             var productAccess = ProductService.GetSingleWalletProductAccess(
                 SessionService.LicenseeSession.LicenseeId,

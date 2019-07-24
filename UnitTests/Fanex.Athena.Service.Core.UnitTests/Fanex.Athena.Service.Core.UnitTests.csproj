@@ -126,8 +126,6 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Common\LanguageServiceTest.cs" />
-    <Compile Include="Configuration\ReportSettingServiceTest.cs" />
-    <Compile Include="Configuration\LicenseeSettingServiceTest.cs" />
     <Compile Include="Exception\ServiceExceptionTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Users\AuthorizationServiceTest.cs" />

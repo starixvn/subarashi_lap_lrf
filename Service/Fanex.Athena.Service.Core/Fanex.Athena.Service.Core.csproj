@@ -95,10 +95,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\Interfaces\IReportSettingService.cs" />
-    <Compile Include="Configuration\ReportSettingService.cs" />
-    <Compile Include="Configuration\LicenseeSettingService.cs" />
-    <Compile Include="Configuration\Interfaces\ILicenseeSettingService.cs" />
     <Compile Include="Users\Interfaces\ISessionStorage.cs" />
     <Compile Include="Users\Interfaces\ISubsidiaryService.cs" />
     <Compile Include="Users\SessionStorage.cs" />

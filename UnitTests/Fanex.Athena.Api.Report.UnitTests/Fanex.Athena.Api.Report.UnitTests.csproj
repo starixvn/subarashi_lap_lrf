@@ -119,7 +119,6 @@
     <Compile Include="CustomerBalanceReportControllerTest.cs" />
     <Compile Include="CustomerPendingFundsReportControllerTest.cs" />
     <Compile Include="CustomerWinLossReportControllerTest.cs" />
-    <Compile Include="NotificationReportControllerTest.cs" />
     <Compile Include="PlatformWinLossReportControllerTest.cs" />
     <Compile Include="LicenseeWinLossByTimeZoneReportControllerTest.cs" />
     <Compile Include="PromotionPrizeReportControllerTest.cs" />

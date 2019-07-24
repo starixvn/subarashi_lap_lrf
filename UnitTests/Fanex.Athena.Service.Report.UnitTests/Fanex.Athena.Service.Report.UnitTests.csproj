@@ -123,7 +123,6 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="NotificationServiceTest.cs" />
     <Compile Include="ColossusBetsWinLossServiceTest.cs" />
     <Compile Include="LiveReportServiceTest.cs" />
     <Compile Include="SettledMatchCountServiceTest.cs" />

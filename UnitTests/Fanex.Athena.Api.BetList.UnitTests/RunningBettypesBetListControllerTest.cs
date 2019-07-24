@@ -144,7 +144,12 @@
         {
             var metaModel = new BetListMetaModel { CurrencyId = currencyId };
 
-            StubUserSessionData(new UserAuthInfo { Language = SessionLanguage, CurrencyList = sessionCurrencyList });
+            StubUserSessionData(new UserAuthInfo {
+                Language = SessionLanguage,
+                CurrencyList = sessionCurrencyList,
+                CurrencyAgentList = new Dictionary<int, int[]>()
+
+            });
 
             return metaModel;
         }

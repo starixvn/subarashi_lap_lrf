@@ -144,7 +144,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CasinoTurnoverController.cs" />
-    <Compile Include="NotificationReportController.cs" />
     <Compile Include="ColossusBetsWinLossReportController.cs" />
     <Compile Include="CashOutWinLossReportController.cs" />
     <Compile Include="ExchangeWinLossReportController.cs" />

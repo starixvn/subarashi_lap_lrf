@@ -11,21 +11,21 @@ const header = () => {
 }
 
 const fetchData = (params) => {
-    const url = Site.resolveClientUrl('api/NotificationReport/ResultAmendment');
+    const url = Site.resolveClientUrl('NotificationReport/ResultAmendment');
     return axios.post(url, params.data, {
         headers: header()
     });
 }
 
 const markNotification = (params) => {
-    const url = Site.resolveClientUrl('api/NotificationReport/MarkNotificationAsRead');
+    const url = Site.resolveClientUrl('NotificationReport/MarkNotificationAsRead');
     return axios.post(url, { MessageId: params.id, MessageType: params.type }, {
         headers: header()
     });
 }
 
 const downloadData = (params) => {
-    const url = Site.resolveClientUrl('api/NotificationReport/DownLoadFileAttachment');
+    const url = Site.resolveClientUrl('NotificationReport/DownLoadFileAttachment');
     return axios.post(url, { FileName: params.fileName } ,{
         headers: header(),
         responseType: 'blob'

@@ -1,16 +1,14 @@
 ﻿namespace Fanex.Athena.Controllers.UnitTests
 {
-    using System.Web.Mvc;
-
     using Base.UnitTests;
 
     using Fanex.Athena.Model.Auth;
-
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using NSubstitute;
 
     using NUnit.Framework;
 
-    using Service.Core.Configuration.Interfaces;
+    using System.Web.Mvc;
 
     [TestFixture]
     public partial class HomeControllerTest : CultureBaseControllerHelperTest
