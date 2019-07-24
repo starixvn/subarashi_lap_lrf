@@ -1,3 +1,5 @@
+import { systemType } from '../../../constants/configInfo';
+
 export const specialLevelListWithColor = {
     0: '#fcfcfc',
     1: '#00ff00',
@@ -140,3 +142,10 @@ export const gridItemDropdownHeight = {
 }
 
 export const stringTypeFields = [fields.UserName, fields.RealName, fields.Currency, fields.OddsGroup];
+
+export const apiInfo = {
+    lrfSearch: { action: 'api/PlayerList/Search', type: systemType.lrf },
+    lrfDataById: { action: 'api/PlayerList/GetPlayerListById', type: systemType.lrf },
+    lapSearch: { action: 'PlayerAdminContainer/Search', type: systemType.newAdmin },
+    lapDataById: { action: 'PlayerAdminContainer/GetPlayerListById', type: systemType.newAdmin }
+}
