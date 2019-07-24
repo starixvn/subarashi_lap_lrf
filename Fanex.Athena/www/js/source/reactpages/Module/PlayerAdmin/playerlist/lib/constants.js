@@ -93,6 +93,24 @@ export const playerStatus = {
     '3': 'Archived'
 }
 
+export const playerStatusByName = {
+    'Active': 0,
+    'Locked': 1,
+    'Closed': 2,
+    'Archived': 3
+}
+
+export const displayedPlayerStatusList = {
+    [playerStatusByName.Active]: [playerStatusByName.Closed, playerStatusByName.Locked],
+    [playerStatusByName.Locked]: [playerStatusByName.Active, playerStatusByName.Closed]
+}
+
+export const messageUpdateState = {
+    [playerStatusByName.Locked]: 'Are you sure you want to change the status of this player to LOCKED?\nWarning, this player cannot be restored forever!',
+    [playerStatusByName.Closed]: 'Are you sure you want to change the status of this player to CLOSED?\nWarning, Warning, this player cannot login!',
+    [playerStatusByName.Active]: 'Are you sure you want to change the status of this player to ACTIVE?\nWarning, this player will be able to log in and bet.'
+}
+
 export const baStatusList = {
     'All': 0,
     'On': 1,

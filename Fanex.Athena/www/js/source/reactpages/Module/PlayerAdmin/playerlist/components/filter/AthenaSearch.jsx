@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import LangHelper from '@jsroot/lib/langHelper';
 
 const AthenaSearch = (props) => {
-    const { bankAccountNumber, email, onChange } = props;
+    const { bankAccountNumber, email, onChange, onKeyPress } = props;
 
     return (
         <>
@@ -11,7 +11,7 @@ const AthenaSearch = (props) => {
                 <div className="form-group">
                     <label className="label-text">{LangHelper.getSingleResource("BankAccountNumber")}</label>
                     <input className="input-text" id="bankAccountNumber" name="bankAccountNumber" type="text" value={bankAccountNumber}
-                        autoComplete="off" onChange={onChange} />
+                        autoComplete="off" onChange={onChange} onKeyPress={onKeyPress} />
                 </div>
             </div>
 
@@ -19,7 +19,7 @@ const AthenaSearch = (props) => {
                 <div className="form-group">
                     <label className="label-text">{LangHelper.getSingleResource("Email")}</label>
                     <input className="input-text" id="email" name="email" type="text" value={email}
-                        autoComplete="off" onChange={onChange} />
+                        autoComplete="off" onChange={onChange} onKeyPress={onKeyPress} />
                 </div>
             </div>
         </>

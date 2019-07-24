@@ -3,10 +3,10 @@ import * as filterHandlerAction from './filterHandlerAction';
 import * as playerDetailHandlerAction from './playerDetailHandlerAction';
 import * as commonAction from './commonAction';
 import * as gridHandlerAction from './gridHandlerAction';
-import * as gridCommandHandlerAction from './gridCommandHandlerAction';
+import * as gridBaStatusAction from './gridBaStatusAction';
 import * as gridOddsGroupAction from './gridOddsGroupAction';
 import * as gridSpecialLevelAction from './gridSpecialLevelAction';
-import * as gridStatusAction from './gridStatusAction';
+import * as gridPlayerStatusAction from './gridPlayerStatusAction';
 import * as gridUserNameAction from './gridUserNameAction';
 
 export const ActionCreators = Object.assign({},
@@ -15,9 +15,9 @@ export const ActionCreators = Object.assign({},
     filterHandlerAction,
     playerDetailHandlerAction,
     gridHandlerAction,
-    gridCommandHandlerAction,
+    gridBaStatusAction,
     gridOddsGroupAction,
     gridSpecialLevelAction,
-    gridStatusAction,
+    gridPlayerStatusAction,
     gridUserNameAction
 );

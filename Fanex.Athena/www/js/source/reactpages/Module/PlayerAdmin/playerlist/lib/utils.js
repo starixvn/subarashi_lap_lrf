@@ -6,6 +6,13 @@ export const buildSelectedPlayer = (dataItem) => {
     };
 }
 
+export const buildCurrentActivePlayer = (dataItem) => {
+    return {
+        custId: dataItem.CustId,
+        status: dataItem.Status
+    };
+}
+
 export const getSpecialLevelText = (value) => {
     return Number(value) === 0 ? 'None' : value;
 }

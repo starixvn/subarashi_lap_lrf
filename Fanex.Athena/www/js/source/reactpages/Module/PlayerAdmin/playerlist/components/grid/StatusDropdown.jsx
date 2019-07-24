@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { DropdownMenu, DropdownItem } from '@jsroot/components/dropdown';
-import { playerStatus } from '../../lib/constants';
+import { playerStatus, displayedPlayerStatusList, messageUpdateState } from '../../lib/constants';
 import GridInteractionService from '../../lib/gridInteractionService';
 import { ActionCreators } from '../../actions';
 
@@ -19,10 +19,11 @@ const StatusDropdown = (props) => {
         setStatusDropdownPosition(null);
     }
 
-    const { currentActivePlayer, playerList, setPlayerList, toggleLoader } = props;
+    const { currentActivePlayer, playerList, setPlayerList, toggleLoader, updatePlayerStatus } = props;
     const handleChangeOddsGroup = (event, value) => {
         event.preventDefault();
-        if (currentActivePlayer) {
+        const messageConfirm = messageUpdateState[value];
+        if (currentActivePlayer && window.confirm(messageConfirm)) {
             const { custId } = currentActivePlayer;
             const param = {
                 custId,
@@ -30,19 +31,38 @@ const StatusDropdown = (props) => {
             }
 
             toggleLoader(true);
-            const newPlayerList = GridInteractionService.updatePlayerItem(playerList, custId, value, 'Status');
-            setPlayerList(newPlayerList);
-            toggleLoader(false);
+            updatePlayerStatus(param).then(response => {
+                const { IsSuccessful } = response.data;
+                if (IsSuccessful) {
+                    const newPlayerList = GridInteractionService.updatePlayerItem(playerList, custId, value, 'Status');
+                    setPlayerList(newPlayerList);
+                }
+
+                const resultMessage = IsSuccessful ? 'Update successfully!' : 'Please try again!';
+                window.alert(resultMessage);
+
+                toggleLoader(false);
+            }).catch(error => {
+                console.log(error);
+                toggleLoader(false);
+            })
+
         }
 
         handleClose();
+    }
+
+    const displayedStatusList = currentActivePlayer && displayedPlayerStatusList[currentActivePlayer.status];
+
+    if (!displayedStatusList) {
+        return null;
     }
 
     return (
         <div className="dropdown status-menu" style={style}>
             <DropdownMenu isOpen={isOpen} onClose={handleClose}>
                 {
-                    Object.keys(playerStatus).map(item => {
+                    displayedStatusList.map(item => {
                         const statusName = playerStatus[item];
                         const classname = 'status-item ' + statusName;
                         return <DropdownItem key={item} className={classname} onClick={e => handleChangeOddsGroup(e, item)}>{statusName}</DropdownItem>
@@ -54,8 +74,8 @@ const StatusDropdown = (props) => {
 }
 
 function mapDispatchToProps(dispatch) {
-    const { setStatusDropdownPosition, setPlayerList, toggleLoader } = ActionCreators;
-    return bindActionCreators({ setStatusDropdownPosition, setPlayerList, toggleLoader }, dispatch);
+    const { setStatusDropdownPosition, setPlayerList, toggleLoader, updatePlayerStatus } = ActionCreators;
+    return bindActionCreators({ setStatusDropdownPosition, setPlayerList, toggleLoader, updatePlayerStatus }, dispatch);
 }
 
 function mapStateToProps(state) {

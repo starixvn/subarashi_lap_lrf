@@ -3,7 +3,7 @@ import { DropdownMenu, DropdownItem } from '@jsroot/components/dropdown';
 import Timer from '@jsroot/components/utils/timer';
 
 export const UserNameInput = React.forwardRef((props, userNameRef) => {
-    const { onSelectItem, minChar, getSuggestionList, searchOption } = props;
+    const { onSelectItem, minChar, getSuggestionList, searchOption, ...inputAttributes } = props;
 
     const [isOpenSuggestion, setIsOpenSuggestion] = useState(false);
     const [suggestionList, setSuggestionList] = useState([]);
@@ -55,7 +55,7 @@ export const UserNameInput = React.forwardRef((props, userNameRef) => {
     return (
         <div className="pa-username">
             <input className="input-text" id="userName" name="userName" type="text" ref={userNameRef}
-                autoComplete="off" onChange={debounceChange} />
+                autoComplete="off" onChange={debounceChange} {...inputAttributes} />
             <div className="dropdown">
                 <DropdownMenu isOpen={isOpenSuggestion} style={dropdownStyle}>
                     {

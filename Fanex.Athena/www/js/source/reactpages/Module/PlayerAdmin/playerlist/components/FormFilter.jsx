@@ -42,9 +42,7 @@ export class FormFilter extends PureComponent {
         }
     }
     
-
-    handleSubmit = (event) => {
-        event.preventDefault();
+    searchPlayer(){
         const userName = this.userNameRef.current.value;
         const { bankAccountNumber, email } = this.state;
         if (!userName && !bankAccountNumber && !email) {
@@ -63,6 +61,17 @@ export class FormFilter extends PureComponent {
         };
 
         searchPlayer(param);
+    }
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+        this.searchPlayer();
+    }
+
+    handlePressEnter = (event) => {
+        if (event.charCode === 13) {
+            this.searchPlayer();
+        }
     }
 
     handleChange = (event) => {
@@ -113,13 +122,17 @@ export class FormFilter extends PureComponent {
                                 {(<SearchOption value={searchOption} onChange={this.handleChange} />)}
                             </label>
                             <UserNameInput ref={this.userNameRef} onSelectItem={(value) => this.handleUserNameChange(value)}
-                                minChar={3} getSuggestionList={getSuggestionList} searchOption={searchOption} />
+                                minChar={3} getSuggestionList={getSuggestionList} searchOption={searchOption} onKeyPress={this.handlePressEnter} />
                         </div>
                     </div>
 
                     {type === licenseeType.nonApi && <AthenaSearch onChange={this.handleChange}
                         bankAccountNumber={bankAccountNumber} email={email} />}
-                    {isAdvancedSearch && <AdvancedSearch currencyList={currencyList} param={advancedSearchParam} onChange={this.handleSpecificInputChange} />}
+                    {isAdvancedSearch && <AdvancedSearch 
+                                            currencyList={currencyList} 
+                                            param={advancedSearchParam} 
+                                            onChange={this.handleSpecificInputChange}
+                                            onKeyPress={this.handlePressEnter} />}
 
                     <div className="col-12 col-md-2 col-sm-2 col-lg-1 col-xl-1">
                         <div className="form-group">
