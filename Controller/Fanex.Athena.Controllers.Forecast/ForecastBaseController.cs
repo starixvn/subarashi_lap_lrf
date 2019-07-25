@@ -10,10 +10,13 @@ namespace Fanex.Athena.Controllers.Forecast
     using System.Linq;
     using System.Web.Mvc;
     using System.Web.SessionState;
+
     using Extension.Utility;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Model.Core.DTO.Common;
+
     using ONEbook.UM.Filters;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
 
@@ -35,7 +38,6 @@ namespace Fanex.Athena.Controllers.Forecast
        : base(languageService, sessionService)
         {
         }
-
 
         protected static int GetLeagueId(int leagueId, IEnumerable<League> leagueList)
         {

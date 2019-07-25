@@ -9,14 +9,19 @@ namespace Fanex.Athena.Controllers.Forecast
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+
     using DataAccess.Core.Common.Interfaces;
     using DataAccess.Forecast.Interfaces;
+
     using Extension.Utility;
+
     using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
+
     using Model.Core.DataDomain;
     using Model.Forecast.MetaModel;
     using Model.Forecast.ViewModel;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
 
@@ -64,7 +69,6 @@ namespace Fanex.Athena.Controllers.Forecast
         [HttpPost]
         [CustomValidateAntiForgery]
         [ValidationWebRequest]
-
         public async Task<ActionResult> Index(ForecastHandicapOverUnderMetaModel metaModel)
         {
             var model = await GetViewModel(metaModel).ConfigureAwait(false);
@@ -75,7 +79,7 @@ namespace Fanex.Athena.Controllers.Forecast
         private async Task<ForecastHdpOuViewModel> GetViewModel(ForecastHandicapOverUnderMetaModel metaModel)
         {
             var userSession = SessionService.UserSession;
-            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList,metaModel.CurrencyId);
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId);
             var leagueList = await _leagueDataAaccess.GetRunningLeagues(metaModel.AgentListXml, metaModel.BetTypeString);
             var currentLeagueId = metaModel.LeagueId;
             metaModel.LeagueId = GetLeagueId(currentLeagueId, leagueList);

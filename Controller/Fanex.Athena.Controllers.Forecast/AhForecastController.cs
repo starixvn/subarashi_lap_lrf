@@ -10,17 +10,23 @@ namespace Fanex.Athena.Controllers.Forecast
     using System.Globalization;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Model.Core.DataDomain;
+
     using Extension.Utility;
+
     using Fanex.Athena.Model.Forecast.DTO.ForecastAH;
+    using Fanex.Athena.Service.StatelessCore.Utility;
+
+    using Model.Core.DataDomain;
     using Model.Forecast.MetaModel;
     using Model.Forecast.ViewModel;
+
     using Resources;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
     using Service.Forecast.Interfaces;
+
     using Web.ActionFilter;
-    using Fanex.Athena.Service.StatelessCore.Utility;
 
     [FunctionAuthorization(PermissionKeys.ForecastHandicapOverUnderLive)]
     public class AhForecastController : ForecastBaseController
