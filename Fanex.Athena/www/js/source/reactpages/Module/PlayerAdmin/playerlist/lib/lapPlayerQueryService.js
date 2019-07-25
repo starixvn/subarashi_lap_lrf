@@ -1,10 +1,11 @@
 import PlayerListDataHelper from './playerListDataHelper';
+import { buildLapPlayerList } from './utils';
 
 export default class LapPlayerQueryService {
     static fetchData(param, commonService, apiInfo) {
         const { lrfDataById, lapSearch } = apiInfo;
 
-        return commonService.fetchData(lapSearch.type, lapSearch.action, {...param })
+        return commonService.fetchData(lapSearch.type, lapSearch.action, { ...param })
             .then(lapResponse => {
                 const { PlayerList: lapPlayerList = [] } = lapResponse.data;
                 if (!lapPlayerList || !lapPlayerList.length) {
@@ -28,6 +29,13 @@ export default class LapPlayerQueryService {
         return commonService.fetchData(lrfDataById.type, lrfDataById.action, lrfParam)
             .then(lrfResponse => {
                 const { DataList: lrfPlayerList, TotalItem } = lrfResponse.data;
+                if (!lrfPlayerList || !lrfPlayerList.length) {
+                    return {
+                        playerList: buildLapPlayerList(lapPlayerList),
+                        totalItem: lapPlayerList.length
+                    }
+                }
+
                 const playerList = PlayerListDataHelper.mergePlayerList(lrfPlayerList, lapPlayerList);
 
                 return {
@@ -36,7 +44,7 @@ export default class LapPlayerQueryService {
                 };
             })
             .catch(() => ({
-                playerList: PlayerListDataHelper.mergePlayerList([], lapPlayerList),
+                playerList: buildLapPlayerList(lapPlayerList),
                 totalItem: lapPlayerList.length
             }));
     }

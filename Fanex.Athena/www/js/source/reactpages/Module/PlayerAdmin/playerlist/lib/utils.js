@@ -8,6 +8,26 @@ export const buildSelectedPlayer = (dataItem) => {
     };
 }
 
+export const buildLapPlayerList = (playerList) => {
+    if (!playerList) {
+        return [];
+    }
+
+    return playerList.map(item => {
+        const { CustId, UserName, Status, RealName, IP, email, isOnline } = item;
+
+        return {
+            CustId,
+            UserName,
+            Status,
+            RealName,
+            LastLoginIp: IP,
+            Email: email,
+            IsOnline: isOnline
+        };
+    });
+}
+
 export const buildCurrentActivePlayer = (dataItem) => {
     return {
         custId: dataItem.CustId,

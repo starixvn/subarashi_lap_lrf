@@ -13,96 +13,186 @@ describe('LapPlayerQueryService', () => {
         totalItem: 0
     }
 
-    it('fetchData - commonService.fetchData should be called with correct parameter', () => {
-        const param = {...defaultParam };
-        const commonService = {
-            fetchData: jest.fn(() => Promise.resolve({ data: {} }))
-        }
+    describe('fetchData', () => {
+        afterEach(() => {
+            jest.restoreAllMocks();
+        })
 
-        const expectedApiInfo = apiInfo.lapSearch;
+        it('commonService.fetchData should be called with correct parameter', () => {
+            const param = {...defaultParam };
+            const commonService = {
+                fetchData: jest.fn(() => Promise.resolve({ data: {} }))
+            }
 
-        LapPlayerQueryService.fetchData(param, commonService, apiInfo);
+            const expectedApiInfo = apiInfo.lapSearch;
 
-        expect(commonService.fetchData).toHaveBeenCalledWith(expectedApiInfo.type, expectedApiInfo.action, param);
-    })
+            const promise = LapPlayerQueryService.fetchData(param, commonService, apiInfo);
 
-    it('fetchData - return empty list - should return correct result', () => {
-        const param = {...defaultParam };
-        const commonService = {
-            fetchData: jest.fn(() => Promise.resolve({ data: { PlayerList: [] } }))
-        }
+            return Promise.resolve(promise).then(() => {
+                expect(commonService.fetchData).toHaveBeenCalledWith(expectedApiInfo.type, expectedApiInfo.action, param);
+            })
+        })
 
-        Promise.resolve(LapPlayerQueryService.fetchData(param, commonService, apiInfo)).then((result) => {
-            expect(result).toEqual(emptyResult);
+        it('return empty list - should return correct result', () => {
+            const param = {...defaultParam };
+            const commonService = {
+                fetchData: jest.fn(() => Promise.resolve({ data: { PlayerList: [] } }))
+            }
+
+            const promise = LapPlayerQueryService.fetchData(param, commonService, apiInfo);
+
+            return Promise.resolve(promise).then((result) => {
+                expect(result).toEqual(emptyResult);
+            })
+        })
+
+        it('throw exception - should return empty result', () => {
+            const param = {...defaultParam };
+            const commonService = {
+                fetchData: jest.fn(() => new Promise(() => {
+                    throw new Error('Network Error')
+                }))
+            }
+
+            const promise = LapPlayerQueryService.fetchData(param, commonService, apiInfo);
+
+            return Promise.resolve(promise).then((result) => {
+                expect(result).toEqual(emptyResult);
+            })
+        })
+
+        it('has player list response - should call _fetchFromLrf with correct parameter', () => {
+            const param = {...defaultParam };
+            const expectedResponse = [{ CustId: 1, UserName: 'test' }];
+            const commonService = {
+                fetchData: jest.fn(() => Promise.resolve({ data: { PlayerList: expectedResponse } }))
+            }
+
+            const expectedApiInfo = apiInfo.lrfDataById;
+            const _fetchFromLrf = jest.spyOn(LapPlayerQueryService, '_fetchFromLrf');
+
+            const promise = LapPlayerQueryService.fetchData(param, commonService, apiInfo)
+
+            return Promise.resolve(promise).then(() => {
+                expect(_fetchFromLrf).toHaveBeenCalledWith(param, expectedApiInfo, expectedResponse, commonService);
+            })
         })
     })
 
-    it('fetchData - throw exception - should return empty result', () => {
-        const param = {...defaultParam };
-        const commonService = {
-            fetchData: jest.fn(() => new Promise(() => {
-                throw new Error('Network Error')
-            }))
-        }
-
-        Promise.resolve(LapPlayerQueryService.fetchData(param, commonService, apiInfo)).then((result) => {
-            expect(result).toEqual(emptyResult);
+    describe('_fetchFromLrf', () => {
+        let originalMergePlayerList;
+        beforeAll(() => {
+            originalMergePlayerList = PlayerListDataHelper.mergePlayerList;
+        });
+        afterEach(() => {
+            PlayerListDataHelper.mergePlayerList = originalMergePlayerList;
         })
-    })
 
-    it('fetchData - has player list response - should call _fetchFromLrf with correct parameter', () => {
-        const param = {...defaultParam };
-        const expectedResponse = [{ CustId: 1, UserName: 'test' }];
-        const commonService = {
-            fetchData: jest.fn(() => Promise.resolve({ data: { PlayerList: expectedResponse } }))
-        }
+        it('DataList response is empty - return Lap Player List', () => {
+            const lapPlayerList = [
+                { CustId: 1, UserName: 'test1', Status: 0, IP: '1.1.1.1', email: 'abc@gmail.com', isOnline: true, RealName: 'test1real' },
+                { CustId: 2, UserName: 'test2', Status: 1, IP: '2.2.2.2', email: 'xyz@gmail.com', isOnline: false, RealName: 'test2real' }
+            ];
+            const param = {
+                currency: '',
+                specialLevel: '',
+                pageSize: 50,
+                pageIndex: 1
+            }
 
-        const expectedApiInfo = apiInfo.lrfDataById;
-        LapPlayerQueryService._fetchFromLrf = jest.fn();
+            const expectedLrfParam = {
+                currency: param.currency,
+                idList: '1,2',
+                specialLevel: param.specialLevel,
+                pageSize: param.pageSize,
+                pageIndex: param.pageIndex
+            }
+            const { lrfDataById } = apiInfo;
+            const commonService = {
+                fetchData: jest.fn((type, action, lrfParam) => {
+                    const isMatchParam = JSON.stringify(lrfParam) === JSON.stringify(expectedLrfParam);
+                    return type === lrfDataById.type && action === lrfDataById.action && isMatchParam ?
+                        Promise.resolve({ data: { DataList: [], TotalItem: 0 } }) : null;
+                })
+            }
 
-        LapPlayerQueryService.fetchData(param, commonService, apiInfo)
+            const expectedPlayerList = [
+                { CustId: 1, UserName: 'test1', Status: 0, RealName: 'test1real', LastLoginIp: '1.1.1.1', Email: 'abc@gmail.com', IsOnline: true },
+                { CustId: 2, UserName: 'test2', Status: 1, RealName: 'test2real', LastLoginIp: '2.2.2.2', Email: 'xyz@gmail.com', IsOnline: false }
+            ];
+            const expectedResult = {
+                playerList: expectedPlayerList,
+                totalItem: 2
+            }
 
-        Promise.resolve().then(() => {
-            expect(LapPlayerQueryService._fetchFromLrf).toHaveBeenCalledWith(param, expectedApiInfo, expectedResponse, commonService);
+            const promise = LapPlayerQueryService._fetchFromLrf(param, lrfDataById, lapPlayerList, commonService);
+
+            return Promise.resolve(promise)
+                .then((result) => {
+                    expect(result).toEqual(expectedResult);
+                })
         })
-    })
 
-    it('_fetchFromLrf - return correct data result', () => {
-        const lapPlayerList = [{ CustId: 1, UserName: 'test1', Status: 0 }, { CustId: 2, UserName: 'test2', Status: 1 }];
-        const param = {
-            currency: '',
-            specialLevel: '',
-            pageSize: 50,
-            pageIndex: 1
-        }
-        const expectedResonse = [{ CustId: 1, BaStatus: true, OddsGroup: 'A' }, { CustId: 2, BaStatus: false, OddsGroup: 'B' }];
-        const commonService = {
-            fetchData: jest.fn(() => Promise.resolve({ data: { PlayerList: expectedResonse, TotalItem: 2 } }))
-        }
+        it('return correct data result', () => {
+            const lapPlayerList = [{ CustId: 1, UserName: 'test1', Status: 0 }, { CustId: 2, UserName: 'test2', Status: 1 }];
+            const param = {
+                currency: '',
+                specialLevel: '',
+                pageSize: 50,
+                pageIndex: 1
+            }
+            const expectedResponse = [{ CustId: 1, BaStatus: true, OddsGroup: 'A' }, { CustId: 2, BaStatus: false, OddsGroup: 'B' }];
+            const commonService = {
+                fetchData: jest.fn(() => Promise.resolve({ data: { DataList: expectedResponse, TotalItem: 2 } }))
+            }
+            const expectedMergingData = [
+                { CustId: 1, UserName: 'test1', Status: 0, BaStatus: true, OddsGroup: 'A' },
+                { CustId: 2, UserName: 'test2', Status: 1, BaStatus: false, OddsGroup: 'B' }
+            ];
+            PlayerListDataHelper.mergePlayerList = jest.fn(() => expectedMergingData);
 
-        const expectedLrfParam = {
-            currency: param.currency,
-            idList: '1,2',
-            specialLevel: param.specialLevel,
-            pageSize: param.pageSize,
-            pageIndex: param.pageIndex
-        }
-        const lrfDataById = apiInfo.lrfDataById;
-        const expectedMergingData = [
-            { CustId: 1, UserName: 'test1', Status: 0, BaStatus: true, OddsGroup: 'A' },
-            { CustId: 2, UserName: 'test2', Status: 1, BaStatus: false, OddsGroup: 'B' }
-        ];
-        PlayerListDataHelper.mergePlayerList = jest.fn(() => expectedMergingData);
+            const expectedResult = {
+                playerList: expectedMergingData,
+                totalItem: 2
+            }
+            const response = LapPlayerQueryService._fetchFromLrf(param, apiInfo.lrfDataById, lapPlayerList, commonService);
 
-        const expectedResult = {
-            playerList: expectedMergingData,
-            totalItem: 2
-        }
-        const result = LapPlayerQueryService._fetchFromLrf(param, lrfDataById, lapPlayerList, commonService);
+            return Promise.resolve(response).then((result) => {
+                expect(result).toEqual(expectedResult);
+            })
+        })
 
-        expect(commonService.fetchData).toHaveBeenCalledWith(lrfDataById.type, lrfDataById.action, expectedLrfParam);
-        Promise.resolve().then(() => {
-            expect(result).toEqual(expectedResult);
+        it('throw exception - should build data with Lap Player List', () => {
+            const lapPlayerList = [
+                { CustId: 1, UserName: 'test1', Status: 0, IP: '1.1.1.1', email: 'abc@gmail.com', isOnline: true, RealName: 'test1real' },
+                { CustId: 2, UserName: 'test2', Status: 1, IP: '2.2.2.2', email: 'xyz@gmail.com', isOnline: false, RealName: 'test2real' }
+            ];
+            const param = {
+                currency: '',
+                specialLevel: '',
+                pageSize: 50,
+                pageIndex: 1
+            }
+            const commonService = {
+                fetchData: jest.fn(() => new Promise(() => {
+                    throw new Error('Network Error')
+                }))
+            }
+            const { lrfDataById } = apiInfo;
+            const expectedPlayerList = [
+                { CustId: 1, UserName: 'test1', Status: 0, RealName: 'test1real', LastLoginIp: '1.1.1.1', Email: 'abc@gmail.com', IsOnline: true },
+                { CustId: 2, UserName: 'test2', Status: 1, RealName: 'test2real', LastLoginIp: '2.2.2.2', Email: 'xyz@gmail.com', IsOnline: false }
+            ];
+            const expectedResult = {
+                playerList: expectedPlayerList,
+                totalItem: 2
+            }
+            const promise = LapPlayerQueryService._fetchFromLrf(param, lrfDataById, lapPlayerList, commonService);
+
+            return Promise.resolve(promise)
+                .then((result) => {
+                    expect(result).toEqual(expectedResult);
+                })
         })
     })
 })
