@@ -62,11 +62,10 @@
             return Substitute.ForPartsOf<SystemParlayBetListController>(
                 LangService,
                 SessionService,
-                AppSettings,
                 ProductService,
                 BalanceUpDataAccess,
                 CacheRefAdapter,
-                BetListApiClient);
+                BetListApiClient, LicenseeSettingService);
         }
     }
 }

@@ -111,11 +111,10 @@
             return Substitute.ForPartsOf<PendingFundsBetListController>(
                 LangService,
                 SessionService,
-                AppSettings,
                 ProductService,
                 BalanceUpDataAccess,
                 CacheRefAdapter,
-                BetListApiClient);
+                BetListApiClient, LicenseeSettingService);
         }
     }
 }

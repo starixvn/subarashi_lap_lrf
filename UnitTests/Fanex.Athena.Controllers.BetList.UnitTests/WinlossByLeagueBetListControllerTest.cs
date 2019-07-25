@@ -107,11 +107,10 @@
             return Substitute.ForPartsOf<WinlossByLeagueBetListController>(
                 LangService,
                 SessionService,
-                AppSettings,
                 ProductService,
                 BalanceUpDataAccess,
                 CacheRefAdapter,
-                BetListApiClient);
+                BetListApiClient, LicenseeSettingService);
 
         }
     }

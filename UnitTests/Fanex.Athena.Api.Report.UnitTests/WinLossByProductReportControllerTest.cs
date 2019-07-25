@@ -38,10 +38,13 @@
             _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
             _dataAccess = Substitute.For<IWinLossByProductDataAccess>();
             _controller = Substitute.ForPartsOf<WinLossByProductReportController>(
-                SessionService, ProductService,
-                AppSetting, LangService, _dataAccess,
+                SessionService, 
+                ProductService,
+                LangService,
+                _dataAccess,
                 _currencyValidation,
-                _licenseeSettingService
+                _licenseeSettingService,
+                AppSetting
                 );
 
         }

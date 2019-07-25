@@ -235,7 +235,6 @@
             var controller = Substitute.ForPartsOf<BettingTicketCenterController>(
                 LangService,
                 SessionService,
-                AppSettings,
                 _productService,
                 _balanceUpDataAccess);
             return controller;

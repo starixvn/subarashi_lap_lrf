@@ -231,11 +231,10 @@
             var controller = Substitute.ForPartsOf<MatchWinLossBetListController>(
                 LangService,
                 SessionService,
-                AppSettings,
                 ProductService,
                 BalanceUpDataAccess,
                 CacheRefAdapter,
-                BetListApiClient);
+                BetListApiClient, LicenseeSettingService);
             return controller;
         }
     }

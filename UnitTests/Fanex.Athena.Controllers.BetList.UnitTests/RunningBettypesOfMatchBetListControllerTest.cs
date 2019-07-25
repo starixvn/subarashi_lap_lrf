@@ -115,11 +115,10 @@
             return Substitute.ForPartsOf<RunningBettypesOfMatchBetListController>(
                 LangService,
                 SessionService,
-                AppSettings,
                 ProductService,
                 BalanceUpDataAccess,
                 CacheRefAdapter,
-                BetListApiClient);
+                BetListApiClient, LicenseeSettingService);
         }
     }
 }

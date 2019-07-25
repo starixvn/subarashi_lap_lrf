@@ -6,6 +6,31 @@
 
 namespace Fanex.Athena.Api.Report
 {
+    using Base.Attributes;
+
+    using DataAccess.Report.Interfaces;
+
+    using Excel.Report.Models;
+
+    using Extension.Utility;
+
+    using Fanex.Athena.Excel.Report;
+    using Fanex.Athena.Extension.Helper;
+    using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Model.Report.DTO;
+    using Fanex.Athena.Model.Report.MetaModel;
+    using Fanex.Athena.Service.Core.Utility.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Utility;
+
+    using Model.Core.MetaModel.Product;
+    using Model.Report.ResultModel;
+
+    using Resources;
+
+    using Service.Core.Common.Interfaces;
+    using Service.Core.Users.Interfaces;
+
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -13,24 +38,6 @@ namespace Fanex.Athena.Api.Report
     using System.Threading.Tasks;
     using System.Web.Hosting;
     using System.Web.Http;
-    using Base.Attributes;
-    using DataAccess.Report.Interfaces;
-    using Excel.Report.Models;
-    using Extension.Utility;
-    using Fanex.Athena.Excel.Report;
-    using Fanex.Athena.Extension.Helper;
-    using Fanex.Athena.Model.Core.DataDomain;
-    using Fanex.Athena.Model.Core.DTO.Common;
-    using Fanex.Athena.Model.Report.DTO;
-    using Fanex.Athena.Model.Report.MetaModel;
-    using Fanex.Athena.Service.Core.Utility.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Utility;
-    using Model.Core.MetaModel.Product;
-    using Model.Report.ResultModel;
-    using Resources;
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
 
     [ApiFunctionAuthorization(PermissionKeys.ReportWinLossByProduct)]
     public class WinLossByProductReportController : ApiReportBaseController

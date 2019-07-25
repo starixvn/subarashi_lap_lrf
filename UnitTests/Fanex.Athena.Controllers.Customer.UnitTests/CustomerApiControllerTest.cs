@@ -8,6 +8,7 @@
     using Customer;
     using DataAccess.Core.Users.Interfaces;
     using Fanex.Athena.Extension.Helpers;
+    using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Logging;
@@ -34,17 +35,18 @@
 
         private ILicenseeSettingService _licenseeSettingService;
 
-        [SetUp]
-        public void SetUp()
-        {
-            _licenseeSettingService = Substitute.For<ILicenseeSettingService>();
-        }
-
         [OneTimeSetUp]
         public override void FixtureSetUp()
         {
             base.FixtureSetUp();
             SetUpDefaultFakeData();
+
+        }
+        [SetUp]
+        public void SetUp()
+        {
+            _licenseeSettingService = Substitute.For<ILicenseeSettingService>();
+            AppSettings = Substitute.For<IAppSettings>();
             _logger = Substitute.For<ILogger>();
             _customerCommService = Substitute.For<ICustomerCommService>();
             _customerListService = Substitute.For<ICustomerListService>();
@@ -57,10 +59,17 @@
         [TearDown]
         public void TearDown()
         {
-            AppSettings.ClearReceivedCalls();
             _customerListService.ClearReceivedCalls();
             _groupComService.ClearReceivedCalls();
             _licenseeSettingService = null;
+            _logger = null;
+            _customerCommService = null;
+            _customerListService = null;
+            _groupComService = null;
+            _licenseeDataAccess = null;
+            _productService = null;
+            _authorizationService = null;
+            AppSettings = null;
         }
 
         [Test]
@@ -373,7 +382,7 @@
                _groupComService,
                _licenseeDataAccess,
                _productService,
-               _authorizationService
+               _authorizationService, _licenseeSettingService
                );
             controller.ControllerContext = ControllerContext;
             return controller;

@@ -79,11 +79,10 @@
             var controller = Substitute.ForPartsOf<BonusBetListController>(
                 LangService,
                 SessionService,
-                AppSettings,
                 ProductService,
                 BalanceUpDataAccess,
                 CacheRefAdapter,
-                BetListApiClient);
+                BetListApiClient, LicenseeSettingService);
             return controller;
         }
     }

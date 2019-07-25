@@ -68,7 +68,6 @@
             var controller = Substitute.ForPartsOf<NotificationReportController>(
                 LangService,
                 SessionService,
-                AppSettings,
                 _notificationService
                 );
             return controller;

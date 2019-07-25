@@ -95,11 +95,10 @@
             var controller = Substitute.ForPartsOf<GlobalGamingBetListController>(
                 LangService,
                 SessionService,
-                AppSettings,
                 ProductService,
                 BalanceUpDataAccess,
                 CacheRefAdapter,
-                BetListApiClient);
+                BetListApiClient, LicenseeSettingService);
             return controller;
         }
     }

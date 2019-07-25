@@ -58,7 +58,7 @@
                 });
 
                 // Action
-                var result = controller.CustomerList(metaModel);
+                controller.CustomerList(metaModel);
 
                 // Assert
                 Assert.That(metaModel.Username, Is.Empty);
@@ -88,7 +88,7 @@
                 await controller.CustomerList(metaModel).ConfigureAwait(false);
 
                 // Assert
-                Assert.That(metaModel.Username, Is.Empty);
+                Assert.AreEqual(metaModel.Username, userName);
             }
         }
 

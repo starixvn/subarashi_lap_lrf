@@ -94,11 +94,10 @@
             var controller = Substitute.ForPartsOf<RNGCasinoBetListController>(
                 LangService,
                 SessionService,
-                AppSettings,
                 ProductService,
                 BalanceUpDataAccess,
                 CacheRefAdapter,
-                BetListApiClient);
+                BetListApiClient, LicenseeSettingService);
             return controller;
         }
     }

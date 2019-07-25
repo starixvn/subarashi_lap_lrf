@@ -187,7 +187,6 @@
             var controller = Substitute.ForPartsOf<CustomerComGroupController>(
                LangService,
                SessionService,
-               AppSettings,
                _groupComService,
                _productService);
             controller.ControllerContext = ControllerContext;

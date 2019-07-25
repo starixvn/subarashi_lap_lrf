@@ -26,9 +26,12 @@
         {
             base.FixtureSetUp();
             _licenseeSettingService = Substitute.For<ILicenseeSettingService>();
+            _licenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(false);
+
             _dataAccess = Substitute.For<ICustPendingFundsDataAccess>();
 
-            _controller = Substitute.ForPartsOf<CustomerPendingFundsReportController>(_dataAccess, SessionService, ProductService, LangService, _licenseeSettingService);
+            _controller = Substitute.ForPartsOf<CustomerPendingFundsReportController>
+                (_dataAccess, SessionService, ProductService, LangService, _licenseeSettingService);
 
             _controller.When(x => x.ExcelStream(Arg.Any<IWorkbook>(), Arg.Any<string>())).DoNotCallBase();
 
@@ -66,6 +69,7 @@
         {
             // Arrange
             var metaModel = CreateValidMetaModel();
+            SetUpForGettingData(metaModel);
             const int PageSizeExcel = int.MaxValue - 1000;
             _licenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(isFakeLicensee);
 

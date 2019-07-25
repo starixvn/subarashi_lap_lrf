@@ -73,7 +73,6 @@
             var controller = Substitute.ForPartsOf<LastBetsMonitoringBetListController>(
                 LangService,
                 SessionService,
-                AppSettings,
                 _sportTypeDataAccess);
             return controller;
         }

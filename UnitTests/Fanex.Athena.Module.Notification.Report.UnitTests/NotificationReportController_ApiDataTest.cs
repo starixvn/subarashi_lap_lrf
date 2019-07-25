@@ -36,7 +36,6 @@
             _controller = Substitute.ForPartsOf<NotificationReportController>(
                 LangService,
                 SessionService,
-                AppSettings,
                 _service);
         }
 
