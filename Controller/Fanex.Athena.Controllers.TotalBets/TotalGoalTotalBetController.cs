@@ -9,13 +9,16 @@ namespace Fanex.Athena.Controllers.TotalBets
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+
     using DataAccess.TotalBet.Interfaces;
-    using Extension.Utility;
+
     using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
+
     using Model.Core.DataDomain;
     using Model.TotalBet.MetaModel;
     using Model.TotalBet.ViewModel;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
 
@@ -40,7 +43,6 @@ namespace Fanex.Athena.Controllers.TotalBets
             {
                 LicenseeId = SessionService.LicenseeSession.LicenseeId,
                 BaseCurrency = SessionService.UserSession.DefaultBaseCurrency
-
             };
 
             return await this.GetView(param).ConfigureAwait(false);
@@ -72,7 +74,6 @@ namespace Fanex.Athena.Controllers.TotalBets
             };
 
             return View("~/Views/Desktop/TotalBets/TotalGoal/Main.cshtml", model);
-
         }
 
         #endregion Utility

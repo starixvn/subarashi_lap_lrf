@@ -8,13 +8,16 @@ namespace Fanex.Athena.Controllers.TotalBets
 {
     using System.Threading.Tasks;
     using System.Web.Mvc;
+
     using DataAccess.TotalBet.Interfaces;
-    using Extension.Utility;
+
     using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
+
     using Model.Core.DataDomain;
     using Model.TotalBet.MetaModel;
     using Model.TotalBet.ViewModel;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
 
@@ -49,7 +52,6 @@ namespace Fanex.Athena.Controllers.TotalBets
         [ValidationWebRequest(IsValidCurrency = true)]
         public async Task<ActionResult> Index(OutrightMetaModel metaModel)
         {
-
             metaModel.LicenseeId = SessionService.LicenseeSession.LicenseeId;
             return await this.GetView(metaModel).ConfigureAwait(false);
         }
@@ -69,7 +71,6 @@ namespace Fanex.Athena.Controllers.TotalBets
             };
 
             return View("~/Views/Desktop/TotalBets/Outright/Main.cshtml", model);
-
         }
     }
 }

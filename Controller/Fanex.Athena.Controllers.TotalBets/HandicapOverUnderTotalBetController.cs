@@ -9,13 +9,18 @@ namespace Fanex.Athena.Controllers.TotalBets
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+
     using DataAccess.TotalBet.Interfaces;
+
     using Extension.Utility;
+
     using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
+
     using Model.Core.DataDomain;
     using Model.TotalBet.MetaModel;
     using Model.TotalBet.ViewModel;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
 
@@ -78,7 +83,6 @@ namespace Fanex.Athena.Controllers.TotalBets
                 "ContentData.cshtml";
 
             return View("~/Views/Desktop/TotalBets/HandicapOverUnder/Main.cshtml", model);
-
         }
     }
 }
