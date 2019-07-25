@@ -137,7 +137,6 @@
     <Compile Include="Account\AccountController.cs" />
     <Compile Include="AuthorizationController.cs" />
     <Compile Include="HeaderController.cs" />
-    <Compile Include="AdminController.cs" />
     <Compile Include="MenuController.cs" />
     <Compile Include="LicenseeListController.cs" />
     <Compile Include="OneAuthorizationController.cs" />

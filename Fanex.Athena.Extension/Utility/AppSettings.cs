@@ -44,11 +44,11 @@ namespace Fanex.Athena.Extension.Utility
             }
         }
 
-        public IEnumerable<int> LicenseesWithLargeData
+        public IEnumerable<string> LicenseesWithLargeData
         {
             get
             {
-                return GetIntegers("LicenseesWithLargeData");
+                return GetValue("LicenseesWithLargeData").Split(',');
             }
         }
 

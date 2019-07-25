@@ -45,7 +45,7 @@
             var licenseeSession = SessionService.LicenseeSession;
             if (metaModel.IsExport &&
                 _appSettings.IsDisableExportLargeBetList
-                && _appSettings.LicenseesWithLargeData.Contains(licenseeSession.LicenseeId))
+                && _appSettings.LicenseesWithLargeData.Contains(licenseeSession.LicenseeName))
             {
                 return new
                 {
@@ -63,7 +63,7 @@
             metaModel.HasPlayerCom = SessionService.LicenseeSession.IsAllowedCustomerComm;
             metaModel.UserCurrencyList = userCurrencyList;
 
-            var timeout = _appSettings.LicenseesWithLargeData.Contains(licenseeSession.LicenseeId) ?
+            var timeout = _appSettings.LicenseesWithLargeData.Contains(licenseeSession.LicenseeName) ?
                 _appSettings.BetListApiClientTimeOutMinutes :
                 0;
             return await _betListApiClient.PostAsync("/BettingTicketCenterMultiCustomer/GetData",

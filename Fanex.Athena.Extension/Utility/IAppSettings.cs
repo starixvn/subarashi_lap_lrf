@@ -16,7 +16,7 @@
 
         bool IsDisableExportLargeBetList { get; }
 
-        IEnumerable<int> LicenseesWithLargeData { get; }
+        IEnumerable<string> LicenseesWithLargeData { get; }
 
         IEnumerable<int> LicenseeOfferNewForecast { get; }
 
