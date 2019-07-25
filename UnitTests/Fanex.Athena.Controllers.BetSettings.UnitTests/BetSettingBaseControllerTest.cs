@@ -240,7 +240,7 @@
                 LangService,
                 SessionService,
                 CoreBetSettingService,
-                ProductService, null)
+                ProductService, LicenseeSettingService)
             {
                 ControllerContext = ControllerContext
             };

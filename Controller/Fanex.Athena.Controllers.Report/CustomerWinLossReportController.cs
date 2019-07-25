@@ -28,9 +28,9 @@ namespace Fanex.Athena.Controllers.Report
             ILanguageService languageService,
             ISessionService sessionService,
             IProductService productService,
-            IReportSettingService reportSettingService
+            IReportSettingService reportSettingService, ILicenseeSettingService licenseeSettingService
             )
-            : base(languageService, sessionService, productService)
+            : base(languageService, sessionService, productService, licenseeSettingService)
         {
             _reportSettingService = reportSettingService;
         }

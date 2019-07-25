@@ -107,7 +107,6 @@
             var controller = Substitute.ForPartsOf<MatchWinLossReportController>(
                 LangService,
                 SessionService,
-                AppSettings,
                 productService,
                 _balanceUpDataAccess,
                 Substitute.For<ICacheRefAdapter>(),

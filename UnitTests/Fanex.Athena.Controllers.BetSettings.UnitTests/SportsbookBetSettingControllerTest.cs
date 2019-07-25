@@ -195,7 +195,7 @@
                 SessionService,
                 CoreBetSettingService,
                 ProductService,
-                _betSettingService, null)
+                _betSettingService, LicenseeSettingService)
             {
                 ControllerContext = ControllerContext
             };

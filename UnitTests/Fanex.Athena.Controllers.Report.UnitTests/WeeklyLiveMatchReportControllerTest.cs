@@ -37,9 +37,8 @@
 
             var controller = Substitute.ForPartsOf<WeeklyLiveMatchReportController>(
                 LangService,
-                SessionService,
-                AppSettings,
-                productService);
+                SessionService
+                );
             return controller;
         }
     }

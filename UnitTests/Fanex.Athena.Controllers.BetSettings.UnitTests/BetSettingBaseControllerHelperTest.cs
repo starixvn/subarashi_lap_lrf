@@ -23,12 +23,12 @@
         protected ICoreBetSettingService CoreBetSettingService { get; private set; }
 
         protected IProductService ProductService { get; private set; }
-
+        protected ILicenseeSettingService LicenseeSettingService { get; set; }
         [OneTimeSetUp]
         public override void FixtureSetUp()
         {
             base.FixtureSetUp();
-
+            LicenseeSettingService = Substitute.For<ILicenseeSettingService>();
             CoreBetSettingService = Substitute.For<ICoreBetSettingService>();
             ProductService = Substitute.For<IProductService>();
         }
@@ -39,6 +39,7 @@
             base.FixtureTearDown();
             CoreBetSettingService = null;
             ProductService = null;
+            LicenseeSettingService = null;
         }
 
         protected void SetUpDefaultFakeBetSettingData()

@@ -180,7 +180,6 @@
             var controller = Substitute.ForPartsOf<WinLossByBetTypeReportController>(
                 LangService,
                 SessionService,
-                AppSettings,
                 productService,
                 _balanceUpDataAccess,
                 _winLossByBetTypeDataAccess);

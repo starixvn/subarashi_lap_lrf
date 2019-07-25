@@ -78,7 +78,6 @@
             var controller = Substitute.ForPartsOf<LicenseeWinLossByTimeZoneReportController>(
                 LangService,
                 SessionService,
-                AppSettings,
                 _productService);
             return controller;
         }

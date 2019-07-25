@@ -53,9 +53,11 @@ namespace Fanex.Athena.Controllers.Forecast
             ILogger logger,
             ICacheRefAdapter cacheRefAdapter,
             IMatchService matchService,
-            ILeagueDataAccess leagueDataAccess)
+            ILeagueDataAccess leagueDataAccess,
+            IAppSettings appSettings
+            )
 #pragma warning restore S107 // Methods should not have too many parameters
-        : base(languageService, sessionService)
+        : base(languageService, sessionService, appSettings)
         {
             _logger = logger;
             _cacheRefAdapter = cacheRefAdapter;

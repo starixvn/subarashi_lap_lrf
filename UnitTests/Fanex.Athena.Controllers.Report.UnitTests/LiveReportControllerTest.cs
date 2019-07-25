@@ -115,15 +115,15 @@
             }
         }
 
-        [TestCase("BA,AB", true, true)]
-        [TestCase("AB", false, true)]
-        [TestCase("BA,AB", true, false)]
-        [TestCase("AB", false, false)]
+        [TestCase("BA,AB", true)]
+        [TestCase("AB", false)]
+        [TestCase("BA,AB", true)]
+        [TestCase("AB", false)]
         public async Task IndexPost_ExportExcel_PassParamsToCreateExcelCorrectly(
             string productCodeList,
-            bool expectedBaVisible, bool expectedRbVisible)
+            bool expectedBaVisible)
         {
-           
+
             using (var controller = CreateController(productCodeList))
             {
                 // Arrange
@@ -253,10 +253,9 @@
             var controller = Substitute.ForPartsOf<LiveReportController>(
                 LangService,
                 SessionService,
-                AppSettings,
                 productService,
                 _balanceUpDataAccess,
-                _liveReportService);
+                _liveReportService, Substitute.For<ILicenseeSettingService>(), AppSettings);
             controller.When(x => x.CreateExcel(string.Empty, null, null, null, null)).DoNotCallBase();
             return controller;
         }

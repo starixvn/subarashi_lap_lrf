@@ -48,9 +48,10 @@ namespace Fanex.Athena.Controllers.Report
             IProductService productService,
             IBalanceUpDataAccess balanceUpDataAccess,
             ILiveReportService liveReportService,
-             ILicenseeSettingService licenseeSettingService
+             ILicenseeSettingService licenseeSettingService,
+             IAppSettings appSettings
             )
-            : base(languageService, sessionService, productService, licenseeSettingService)
+            : base(languageService, sessionService, appSettings, productService, licenseeSettingService)
         {
             _balanceUpDataAccess = balanceUpDataAccess;
             _liveReportService = liveReportService;

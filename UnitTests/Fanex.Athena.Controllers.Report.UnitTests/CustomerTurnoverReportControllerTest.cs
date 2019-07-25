@@ -160,8 +160,6 @@
             var controller = Substitute.ForPartsOf<CustomerTurnoverReportController>(
                 LangService,
                 SessionService,
-                AppSettings,
-                Substitute.For<IProductService>(),
                 _sportTypeDataAccess,
                 _customerTurnoverService);
             controller.When(x => x.CreateExcel(string.Empty, string.Empty, null, null, string.Empty)).DoNotCallBase();

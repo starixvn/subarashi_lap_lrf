@@ -80,7 +80,7 @@
                 LangService,
                 SessionService,
                 productService,
-                reportSettingService);
+                reportSettingService, Substitute.For<ILicenseeSettingService>());
         }
     }
 }

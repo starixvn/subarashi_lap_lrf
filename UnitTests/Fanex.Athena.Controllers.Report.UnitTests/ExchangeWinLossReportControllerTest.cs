@@ -71,9 +71,8 @@
             var controller = Substitute.ForPartsOf<ExchangeWinLossReportController>(
                 LangService,
                 SessionService,
-                AppSettings,
-                Substitute.For<IProductService>(),
                 reportSettingService);
+
             return controller;
         }
     }

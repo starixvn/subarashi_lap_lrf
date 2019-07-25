@@ -56,7 +56,7 @@
             return new CustomerPendingFundsReportController(
                 LangService,
                 SessionService,
-                productService, null);
+                productService, Substitute.For<ILicenseeSettingService>());
         }
     }
 }

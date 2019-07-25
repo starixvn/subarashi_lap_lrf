@@ -151,7 +151,7 @@
                 CoreBetSettingService,
                 ProductService,
                 _betSettingService,
-                _exchangeCommApiService,null);
+                _exchangeCommApiService, LicenseeSettingService);
 
             return controller;
         }

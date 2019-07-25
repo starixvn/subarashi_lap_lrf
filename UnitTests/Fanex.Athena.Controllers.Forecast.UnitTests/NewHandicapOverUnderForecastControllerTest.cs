@@ -387,7 +387,7 @@
                 Substitute.For<ILogger>(),
                 _cacheRefAdapter,
                 _matchService,
-                _leagueDataAccess)
+                _leagueDataAccess, AppSettings)
             {
                 ControllerContext = ControllerContext
             };

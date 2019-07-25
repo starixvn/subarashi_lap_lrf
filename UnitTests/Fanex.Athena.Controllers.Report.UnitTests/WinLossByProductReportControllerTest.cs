@@ -53,7 +53,7 @@
                 LangService,
                 SessionService,
                 AppSettings,
-                productService, null);
+                productService, Substitute.For<ILicenseeSettingService>());
         }
     }
 }
