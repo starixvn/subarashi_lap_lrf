@@ -23,8 +23,9 @@ namespace Fanex.Athena.Controllers.Customer
     using Fanex.Athena.Extension.Helpers;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Customer.MetaModel;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Service.Core.Common.Interfaces;
     using Fanex.Athena.Service.Customer.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
     using Fanex.Logging;
 
@@ -37,7 +38,6 @@ namespace Fanex.Athena.Controllers.Customer
 
     using Service.Core.Users.Interfaces;
     using Service.Customer.Helpers;
-    using Fanex.Athena.Service.Core.Common.Interfaces;
 
     #endregion Using
 

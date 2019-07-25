@@ -1,5 +1,15 @@
 ﻿namespace Fanex.Athena.Controllers.Customer
 {
+    using System;
+    using System.Data;
+    using System.Globalization;
+    using System.Linq;
+    using System.Net;
+    using System.Threading.Tasks;
+    using System.Web.Hosting;
+    using System.Web.Mvc;
+    using System.Web.SessionState;
+
     using Fanex.Athena.Excel.Base.Entities;
     using Fanex.Athena.Excel.Customer;
     using Fanex.Athena.Model.Core.DTO.Common;
@@ -19,16 +29,6 @@
     using Resources;
 
     using Service.Core.Users.Interfaces;
-
-    using System;
-    using System.Data;
-    using System.Globalization;
-    using System.Linq;
-    using System.Net;
-    using System.Threading.Tasks;
-    using System.Web.Hosting;
-    using System.Web.Mvc;
-    using System.Web.SessionState;
 
     [SessionState(SessionStateBehavior.ReadOnly)]
     [CheckUMFilter]
@@ -282,10 +282,12 @@
                     result.Code = InvalidGroupName;
                     result.Message = ViewResources.ChooseGroupNameMsg;
                     break;
+
                 case InvalidCommvalue:
                     result.Code = InvalidCommvalue;
                     result.Message = ViewResources.MessageInvalidCommValue;
                     break;
+
                 default:
                     result.Code = InvalidParams;
                     result.Message = ViewResources.InvalidParams;

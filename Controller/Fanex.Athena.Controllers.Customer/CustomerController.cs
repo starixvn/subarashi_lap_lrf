@@ -12,25 +12,33 @@ namespace Fanex.Athena.Controllers.Customer
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Model.Core.DataDomain;
+
     using DataAccess.Core.Users.Interfaces;
+
     using Excel.Base.Helpers;
+
     using Extension.Utility;
+
     using Fanex.Athena.Excel.Customer;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Customer.MetaModel;
     using Fanex.Athena.Model.Customer.ViewModel;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Service.Core.Common.Interfaces;
     using Fanex.Athena.Service.Customer.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
     using Fanex.Athena.Web.ResultExtension;
+
+    using Model.Core.DataDomain;
     using Model.Customer.DTO;
+
     using Newtonsoft.Json;
+
     using Resources;
+
     using Service.Core.Users.Interfaces;
     using Service.Report.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Utility;
-    using Fanex.Athena.Service.Core.Common.Interfaces;
 
     [FunctionAuthorization(PermissionKeys.CustomerInfoCustomerList)]
     public class CustomerController : ContentBaseController
