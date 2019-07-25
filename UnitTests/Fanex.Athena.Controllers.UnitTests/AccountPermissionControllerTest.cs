@@ -8,7 +8,7 @@
     using Base.UnitTests;
 
     using DataAccess.Core.Common.Interfaces;
-
+    using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -180,7 +180,7 @@
             SessionService,
             _functionService,
             _userService,
-            _currencyDataAccess)
+            _currencyDataAccess, AppSettings)
             {
                 ControllerContext = ControllerContext
             };

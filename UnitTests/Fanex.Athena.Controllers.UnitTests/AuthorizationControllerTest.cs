@@ -378,7 +378,7 @@
                _maintenanceService,
                _userService,
                _authService,
-               _formAuthenticationService)
+               _formAuthenticationService, AppSettings)
             {
                 ControllerContext = ControllerContext
             };

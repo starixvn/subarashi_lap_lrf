@@ -249,9 +249,7 @@
                 };
 
                 // Action
-                var result = controller.AssignCurrency(model) as JsonResult;
-                var resultInfo = result.Data as ResultInfo;
-
+                controller.AssignCurrency(model);
                 // Assert
                 Assert.That(model.CurrencyList, Is.EqualTo("<currencies></currencies>"));
             }

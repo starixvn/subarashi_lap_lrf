@@ -6,7 +6,7 @@
 
 namespace Fanex.Athena.Controllers.Account
 {
-
+    using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Auth.Enum;
 
     using Model.Core.DataDomain;
@@ -26,6 +26,15 @@ namespace Fanex.Athena.Controllers.Account
     [AuthorizeRestriction(AppMode.Self)]
     public class AccountBaseController : CultureBaseController
     {
+
+        public AccountBaseController(
+       ILanguageService languageService,
+       ISessionService sessionService,
+            IAppSettings appSettings
+       )
+   : base(languageService, sessionService, appSettings, null)
+        {
+        }
         public AccountBaseController(
             ILanguageService languageService,
             ISessionService sessionService

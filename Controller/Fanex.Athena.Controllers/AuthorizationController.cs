@@ -61,9 +61,10 @@ namespace Fanex.Athena.Controllers
             IMaintenanceService maintenanceService,
             IUserService userService,
             IAuthService authService,
-            IFormsAuthenticationService formAuthenticationService
+            IFormsAuthenticationService formAuthenticationService,
+            IAppSettings appSettings
             )
-            : base(languageService, sessionService)
+            : base(languageService, sessionService, appSettings, null)
 #pragma warning restore S107 // Methods should not have too many parameters
         {
             _maintenanceService = maintenanceService;
