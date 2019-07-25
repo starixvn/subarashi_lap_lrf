@@ -24,10 +24,10 @@ namespace Fanex.Athena.Controllers
     {
         public HomeController(
             ILanguageService languageService,
-            ISessionService sessionService, ILicenseeSettingService licenseeSettingService
-
+            ISessionService sessionService,
+            ILicenseeSettingService licenseeSettingService, IAppSettings appSettings
            )
-        : base(languageService, sessionService, licenseeSettingService)
+        : base(languageService, sessionService, appSettings, licenseeSettingService)
         {
         }
 

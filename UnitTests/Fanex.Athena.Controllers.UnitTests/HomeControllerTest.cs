@@ -267,7 +267,7 @@
         {
             return new HomeController(
                 LangService,
-                SessionService, _licenseeSettingService
+                SessionService, _licenseeSettingService, AppSettings
                 )
             {
                 ControllerContext = ControllerContext
