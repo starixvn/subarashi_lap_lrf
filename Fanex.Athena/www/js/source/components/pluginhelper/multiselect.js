@@ -17,7 +17,7 @@ define(['jquery', 'common/site', 'lib/jquery.multiselect'], function ($, Site) {
                 dataUI.push({
                     Id: item['Code'],
                     Value: item['Code'],
-                    Text: Site.getSingleResource(item['Name']),
+                    Text: item['Name'],
                     Checked: isChecked,
                     Enable: true
                 });

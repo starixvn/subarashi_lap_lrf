@@ -483,7 +483,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                 dataUI.push({
                     Id: item['Code'],
                     Value: item['Code'],
-                    Text: Site.getSingleResource(item['Name']),
+                    Text: item['Name'],
                     Checked: isChecked,
                     Enable: true
                 });

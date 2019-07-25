@@ -214,6 +214,9 @@
     width: 18px; }
   .betlist-container .bonus-icon:hover {
     cursor: pointer; }
+  .betlist-container .bettype-description {
+    color: #003399;
+    font-weight: normal; }
 
 .betlist-container .status {
   white-space: normal; }

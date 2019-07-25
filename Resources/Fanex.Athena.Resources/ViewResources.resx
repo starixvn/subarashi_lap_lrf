@@ -150,9 +150,6 @@
   <data name="AllCurrencies" xml:space="preserve">
     <value>All Currencies</value>
   </data>
-  <data name="AllSites" xml:space="preserve">
-    <value>All Sites</value>
-  </data>
   <data name="AmountDueTo" xml:space="preserve">
     <value>Amount Due To</value>
   </data>
@@ -164,9 +161,6 @@
   </data>
   <data name="AreYouSure" xml:space="preserve">
     <value>Are you sure you want to procceed?</value>
-  </data>
-  <data name="AssignPermissionSuccessful" xml:space="preserve">
-    <value>Assign Permission Successful.</value>
   </data>
   <data name="August" xml:space="preserve">
     <value>August</value>
@@ -193,20 +187,11 @@
   <data name="Balance" xml:space="preserve">
     <value>Balance</value>
   </data>
-  <data name="BANote" xml:space="preserve">
-    <value>BA status can only be changed on Monday from 1PM to 5PM (GMT+8)</value>
-  </data>
   <data name="Based" xml:space="preserve">
     <value>Based</value>
   </data>
   <data name="BAStatus" xml:space="preserve">
     <value>BA Status</value>
-  </data>
-  <data name="Bestviewedin" xml:space="preserve">
-    <value>Best viewed in</value>
-  </data>
-  <data name="BestWinLoss" xml:space="preserve">
-    <value>Best Win Loss</value>
   </data>
   <data name="BetCount" xml:space="preserve">
     <value>Bet Count</value>
@@ -283,17 +268,11 @@
   <data name="CommIsUnChange" xml:space="preserve">
     <value>Commission of customers is unchanged.</value>
   </data>
-  <data name="Completed" xml:space="preserve">
-    <value>Completed</value>
-  </data>
   <data name="Confirm" xml:space="preserve">
     <value>Confirm</value>
   </data>
   <data name="ConfirmPassword" xml:space="preserve">
     <value>Confirm Password</value>
-  </data>
-  <data name="ConvertTo" xml:space="preserve">
-    <value>Convert to</value>
   </data>
   <data name="CopyBetSettingFromSoccer" xml:space="preserve">
     <value>Copy All Bet Setting from Soccer</value>
@@ -310,29 +289,14 @@
   <data name="Currency" xml:space="preserve">
     <value>Currency</value>
   </data>
-  <data name="CurrentGroup" xml:space="preserve">
-    <value>Current Group</value>
-  </data>
   <data name="Currentmonth" xml:space="preserve">
     <value>Current month</value>
-  </data>
-  <data name="CurrentReport" xml:space="preserve">
-    <value>Current Report</value>
   </data>
   <data name="Currentweek" xml:space="preserve">
     <value>Current week</value>
   </data>
   <data name="Customer" xml:space="preserve">
     <value>Customer</value>
-  </data>
-  <data name="CustomerBalanceDateRangeNotification" xml:space="preserve">
-    <value>Date range exceeds 2 months. Please try again!</value>
-  </data>
-  <data name="CustomerCommission" xml:space="preserve">
-    <value>Customer Commission</value>
-  </data>
-  <data name="CustomerInfo" xml:space="preserve">
-    <value>Customer Information</value>
   </data>
   <data name="CustomerList" xml:space="preserve">
     <value>Customer List</value>
@@ -367,18 +331,6 @@
   <data name="DateRangeNote" xml:space="preserve">
     <value>Data is available from {0:d MMM yyyy}</value>
   </data>
-  <data name="DateRangeNote18Month" xml:space="preserve">
-    <value>Data is available from previous 18 months</value>
-  </data>
-  <data name="DateRangeNote3Month" xml:space="preserve">
-    <value>Data is available from the beginning of previous 3 months</value>
-  </data>
-  <data name="DateRangeNoteOpeningDate" xml:space="preserve">
-    <value>Data is available from licensee opening date</value>
-  </data>
-  <data name="Day" xml:space="preserve">
-    <value>Day</value>
-  </data>
   <data name="December" xml:space="preserve">
     <value>December</value>
   </data>
@@ -390,9 +342,6 @@
   </data>
   <data name="DoubleChance" xml:space="preserve">
     <value>Double Chance</value>
-  </data>
-  <data name="Download" xml:space="preserve">
-    <value>Download</value>
   </data>
   <data name="Draw" xml:space="preserve">
     <value>Draw</value>
@@ -424,20 +373,11 @@
   <data name="Error" xml:space="preserve">
     <value>Error</value>
   </data>
-  <data name="Even" xml:space="preserve">
-    <value>Even</value>
-  </data>
   <data name="Event" xml:space="preserve">
     <value>Event</value>
   </data>
-  <data name="Events" xml:space="preserve">
-    <value>Events</value>
-  </data>
   <data name="ExcludeTestData" xml:space="preserve">
     <value>Exclude Test Data</value>
-  </data>
-  <data name="ExpiredTimeParamMsg" xml:space="preserve">
-    <value>The Url is expired</value>
   </data>
   <data name="ExportToExcel" xml:space="preserve">
     <value>Export To Excel</value>
@@ -454,17 +394,11 @@
   <data name="FGLG" xml:space="preserve">
     <value>FG/LG</value>
   </data>
-  <data name="FinalScore" xml:space="preserve">
-    <value>Final Score</value>
-  </data>
   <data name="FirstGoal" xml:space="preserve">
     <value>First Goal</value>
   </data>
   <data name="lbl1stHalf" xml:space="preserve">
     <value>1st Half</value>
-  </data>
-  <data name="FirstHalfScore" xml:space="preserve">
-    <value>First Half Score</value>
   </data>
   <data name="lbl1stHandicap" xml:space="preserve">
     <value>1st Handicap</value>
@@ -502,14 +436,8 @@
   <data name="GameType" xml:space="preserve">
     <value>Game Type</value>
   </data>
-  <data name="GameTypeAndTableNumber" xml:space="preserve">
-    <value>Game Type - Table Number</value>
-  </data>
   <data name="GameTypeName" xml:space="preserve">
     <value>Game Type Name</value>
-  </data>
-  <data name="GetAll" xml:space="preserve">
-    <value>Get All</value>
   </data>
   <data name="GrandTotal" xml:space="preserve">
     <value>Grand Total</value>
@@ -550,17 +478,8 @@
   <data name="HomeNoBet" xml:space="preserve">
     <value>Home No Bet</value>
   </data>
-  <data name="Horse" xml:space="preserve">
-    <value>Horse</value>
-  </data>
-  <data name="HorseNo" xml:space="preserve">
-    <value>Horse No</value>
-  </data>
   <data name="HTFT" xml:space="preserve">
     <value>HT/FT</value>
-  </data>
-  <data name="HTScore" xml:space="preserve">
-    <value>HT Score</value>
   </data>
   <data name="HttpError_403" xml:space="preserve">
     <value>Access denied</value>
@@ -570,12 +489,6 @@
   </data>
   <data name="HttpError_Default" xml:space="preserve">
     <value>Oops... you are here because of a system error, please notify the administrators</value>
-  </data>
-  <data name="InactiveSinceLast" xml:space="preserve">
-    <value>Inactive since last</value>
-  </data>
-  <data name="Internal" xml:space="preserve">
-    <value>Internal</value>
   </data>
   <data name="InternalSystem" xml:space="preserve">
     <value>Internal System</value>
@@ -604,9 +517,6 @@
   <data name="KeepCurrentComm" xml:space="preserve">
     <value>Keep current commission</value>
   </data>
-  <data name="KickOffTime" xml:space="preserve">
-    <value>Kick Off. Time</value>
-  </data>
   <data name="LastBetsMonitoring" xml:space="preserve">
     <value>Last Bets Monitoring</value>
   </data>
@@ -628,23 +538,8 @@
   <data name="Lastweek" xml:space="preserve">
     <value>Last week</value>
   </data>
-  <data name="LayoutNoteMsg" xml:space="preserve">
-    <value>It looks like you're using an outdated version of {0}.You need to update to the latest version for better experience</value>
-  </data>
   <data name="lbl1st" xml:space="preserve">
     <value>1st</value>
-  </data>
-  <data name="lbl2nd" xml:space="preserve">
-    <value>2nd</value>
-  </data>
-  <data name="lbl3rd" xml:space="preserve">
-    <value>3rd</value>
-  </data>
-  <data name="lbl4th" xml:space="preserve">
-    <value>4th</value>
-  </data>
-  <data name="lbl5th" xml:space="preserve">
-    <value>5th</value>
   </data>
   <data name="League" xml:space="preserve">
     <value>League</value>
@@ -652,17 +547,8 @@
   <data name="Licensee" xml:space="preserve">
     <value>Licensee</value>
   </data>
-  <data name="LicenseeFee" xml:space="preserve">
-    <value>Licensee Fee</value>
-  </data>
   <data name="LicenseeWinLoss" xml:space="preserve">
     <value>Licensee Win Loss</value>
-  </data>
-  <data name="LicenseeWinLossTip1" xml:space="preserve">
-    <value>Drill down to view data in </value>
-  </data>
-  <data name="LicenseeWinLossTitle" xml:space="preserve">
-    <value>Licensee Win Loss, {0} --&gt; {1} - {2}</value>
   </data>
   <data name="LicenseeWL" xml:space="preserve">
     <value>Licensee WL</value>
@@ -675,18 +561,6 @@
   </data>
   <data name="LiveReport" xml:space="preserve">
     <value>Live Report</value>
-  </data>
-  <data name="LiveReportHistoryNote" xml:space="preserve">
-    <value>. For more historical data, please click to </value>
-  </data>
-  <data name="LiveReportNote1" xml:space="preserve">
-    <value>Data is available from {0},</value>
-  </data>
-  <data name="LiveReportNote2" xml:space="preserve">
-    <value>Figures of Sportsbook {0} {1} displayed in italic and for reference only</value>
-  </data>
-  <data name="LiveReportNote3" xml:space="preserve">
-    <value>Detailed data drilling down from Sports types is only available after {0:d MMM yyyy}</value>
   </data>
   <data name="LiveReportTitle" xml:space="preserve">
     <value>Live Report - {0}, {1} --&gt; {2} - {3}</value>
@@ -715,9 +589,6 @@
   <data name="ManageAccount" xml:space="preserve">
     <value>Manage Account</value>
   </data>
-  <data name="ManageCustomer" xml:space="preserve">
-    <value>Manage Customer</value>
-  </data>
   <data name="March" xml:space="preserve">
     <value>March</value>
   </data>
@@ -745,9 +616,6 @@
   <data name="May" xml:space="preserve">
     <value>May</value>
   </data>
-  <data name="MeettingCurrency" xml:space="preserve">
-    <value>Meeting - Currency</value>
-  </data>
   <data name="MessageCommCannotGreaterThan" xml:space="preserve">
     <value>Commission cannot be greater than 15%</value>
   </data>
@@ -772,17 +640,8 @@
   <data name="MinBet" xml:space="preserve">
     <value>Min Bet</value>
   </data>
-  <data name="MinBetCount" xml:space="preserve">
-    <value>Min bet count</value>
-  </data>
   <data name="MinimumOdds" xml:space="preserve">
     <value>Minimum odds</value>
-  </data>
-  <data name="MinTotalWinLoss" xml:space="preserve">
-    <value>Min total customer WL</value>
-  </data>
-  <data name="MixParlay" xml:space="preserve">
-    <value>Mix Parlay</value>
   </data>
   <data name="Mobile" xml:space="preserve">
     <value>Mobile</value>
@@ -853,12 +712,6 @@
   <data name="NotAllowBA" xml:space="preserve">
     <value>This licensee is not allowed BA</value>
   </data>
-  <data name="NotAuthorizedMsg" xml:space="preserve">
-    <value>You are not authorized on this function</value>
-  </data>
-  <data name="NotIdenticalPasswordMsg" xml:space="preserve">
-    <value>Passwords are not identical</value>
-  </data>
   <data name="Notification" xml:space="preserve">
     <value>Notification</value>
   </data>
@@ -878,9 +731,6 @@
   <data name="October" xml:space="preserve">
     <value>October</value>
   </data>
-  <data name="Odd" xml:space="preserve">
-    <value>Odd</value>
-  </data>
   <data name="OddEven" xml:space="preserve">
     <value>Odd/Even</value>
   </data>
@@ -896,9 +746,6 @@
   <data name="Off" xml:space="preserve">
     <value>Off</value>
   </data>
-  <data name="Official" xml:space="preserve">
-    <value>Official</value>
-  </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
   </data>
@@ -907,9 +754,6 @@
   </data>
   <data name="On" xml:space="preserve">
     <value>On</value>
-  </data>
-  <data name="OneMonth" xml:space="preserve">
-    <value>1 Month</value>
   </data>
   <data name="OneXTwo" xml:space="preserve">
     <value>1 X 2</value>
@@ -920,9 +764,6 @@
   <data name="OpeningBalance" xml:space="preserve">
     <value>Opening Balance</value>
   </data>
-  <data name="OT" xml:space="preserve">
-    <value>OT</value>
-  </data>
   <data name="Others" xml:space="preserve">
     <value>Others</value>
   </data>
@@ -932,20 +773,8 @@
   <data name="Outright" xml:space="preserve">
     <value>Outright</value>
   </data>
-  <data name="OutrightResults" xml:space="preserve">
-    <value>Outright Results</value>
-  </data>
   <data name="OverUnder" xml:space="preserve">
     <value>Over/Under</value>
-  </data>
-  <data name="P1" xml:space="preserve">
-    <value>1P</value>
-  </data>
-  <data name="P2" xml:space="preserve">
-    <value>2P</value>
-  </data>
-  <data name="P3" xml:space="preserve">
-    <value>3P</value>
   </data>
   <data name="Page" xml:space="preserve">
     <value>Page</value>
@@ -962,26 +791,11 @@
   <data name="PasswordNoteMsg" xml:space="preserve">
     <value>Password must have at least 6 characters, including at least 2 letters and at least 2 digits. (e.g:pass22)</value>
   </data>
-  <data name="Pending" xml:space="preserve">
-    <value>Pending</value>
-  </data>
   <data name="PendingFunds" xml:space="preserve">
     <value>Pending Funds</value>
   </data>
   <data name="Permission" xml:space="preserve">
     <value>Permission</value>
-  </data>
-  <data name="PermissionManagement" xml:space="preserve">
-    <value>Permission Management</value>
-  </data>
-  <data name="Permissions" xml:space="preserve">
-    <value>Permissions</value>
-  </data>
-  <data name="Place" xml:space="preserve">
-    <value>Place</value>
-  </data>
-  <data name="Postponed" xml:space="preserve">
-    <value>Postponed</value>
   </data>
   <data name="PreGame" xml:space="preserve">
     <value>Pre Game</value>
@@ -989,41 +803,14 @@
   <data name="Prev" xml:space="preserve">
     <value>Prev</value>
   </data>
-  <data name="Previous" xml:space="preserve">
-    <value>Previous</value>
-  </data>
   <data name="Product" xml:space="preserve">
     <value>Product</value>
-  </data>
-  <data name="Q1" xml:space="preserve">
-    <value>1Q</value>
-  </data>
-  <data name="Q2" xml:space="preserve">
-    <value>2Q</value>
-  </data>
-  <data name="Q3" xml:space="preserve">
-    <value>3Q</value>
-  </data>
-  <data name="Q4" xml:space="preserve">
-    <value>4Q</value>
-  </data>
-  <data name="Race" xml:space="preserve">
-    <value>Race</value>
-  </data>
-  <data name="RCCommission" xml:space="preserve">
-    <value>RC Commission</value>
   </data>
   <data name="RecommendBrowserOnReportPageMsg" xml:space="preserve">
     <value>You please consider using Firefox or Chrome for better experience when page size &gt; 1,000</value>
   </data>
   <data name="Refund" xml:space="preserve">
     <value>Refund</value>
-  </data>
-  <data name="RefundFT" xml:space="preserve">
-    <value>Refund FT</value>
-  </data>
-  <data name="RefundHT" xml:space="preserve">
-    <value>Refund HT</value>
   </data>
   <data name="Remark" xml:space="preserve">
     <value>Remark</value>
@@ -1033,12 +820,6 @@
   </data>
   <data name="ReportBy" xml:space="preserve">
     <value>Report By</value>
-  </data>
-  <data name="ReportByDayFrom" xml:space="preserve">
-    <value>Report By Day From</value>
-  </data>
-  <data name="Reports" xml:space="preserve">
-    <value>Reports</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Reset</value>
@@ -1055,33 +836,12 @@
   <data name="Results" xml:space="preserve">
     <value>Results</value>
   </data>
-  <data name="Revenue" xml:space="preserve">
-    <value>Revenue</value>
-  </data>
-  <data name="RM" xml:space="preserve">
-    <value>RM</value>
-  </data>
   <data name="ProductCS" xml:space="preserve">
     <value>RNG Casino</value>
     <comment>#49196</comment>
   </data>
   <data name="Running" xml:space="preserve">
     <value>Running</value>
-  </data>
-  <data name="S1" xml:space="preserve">
-    <value>1S</value>
-  </data>
-  <data name="S2" xml:space="preserve">
-    <value>2S</value>
-  </data>
-  <data name="S3" xml:space="preserve">
-    <value>3S</value>
-  </data>
-  <data name="S4" xml:space="preserve">
-    <value>4S</value>
-  </data>
-  <data name="S5" xml:space="preserve">
-    <value>5S</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>
@@ -1092,32 +852,14 @@
   <data name="SBComm" xml:space="preserve">
     <value>SB Comm</value>
   </data>
-  <data name="SBCommission" xml:space="preserve">
-    <value>SB Comission</value>
-  </data>
   <data name="Score" xml:space="preserve">
     <value>Score</value>
-  </data>
-  <data name="SCR" xml:space="preserve">
-    <value>SCR</value>
-  </data>
-  <data name="Search" xml:space="preserve">
-    <value>Search</value>
   </data>
   <data name="SearchResult" xml:space="preserve">
     <value>Search Result</value>
   </data>
-  <data name="SelectCurrency" xml:space="preserve">
-    <value>Select Currency</value>
-  </data>
   <data name="SelectLicenseeMsg" xml:space="preserve">
     <value>Please select a Licensee</value>
-  </data>
-  <data name="SelectProduct" xml:space="preserve">
-    <value>Select Product</value>
-  </data>
-  <data name="SelectSite" xml:space="preserve">
-    <value>Select Site</value>
   </data>
   <data name="SelectTop" xml:space="preserve">
     <value>Select Top</value>
@@ -1140,18 +882,6 @@
   <data name="Sincelastmonth" xml:space="preserve">
     <value>Since last month</value>
   </data>
-  <data name="Site" xml:space="preserve">
-    <value>Site</value>
-  </data>
-  <data name="SixMonth" xml:space="preserve">
-    <value>6 months</value>
-  </data>
-  <data name="SortBy" xml:space="preserve">
-    <value>Sort by</value>
-  </data>
-  <data name="Sorting" xml:space="preserve">
-    <value>Sorting</value>
-  </data>
   <data name="SpecialLevel" xml:space="preserve">
     <value>Special Level</value>
   </data>
@@ -1163,9 +893,6 @@
   </data>
   <data name="Stake" xml:space="preserve">
     <value>Stake</value>
-  </data>
-  <data name="StartTime" xml:space="preserve">
-    <value>Start Time</value>
   </data>
   <data name="Statement" xml:space="preserve">
     <value>Statement</value>
@@ -1188,12 +915,6 @@
   <data name="Team" xml:space="preserve">
     <value>Team</value>
   </data>
-  <data name="TF" xml:space="preserve">
-    <value>TF</value>
-  </data>
-  <data name="lbl3Month" xml:space="preserve">
-    <value>3 months </value>
-  </data>
   <data name="lbl3WayHandicap" xml:space="preserve">
     <value>3-Way Handicap</value>
   </data>
@@ -1212,12 +933,6 @@
   <data name="Today" xml:space="preserve">
     <value>Today</value>
   </data>
-  <data name="Top" xml:space="preserve">
-    <value>Top</value>
-  </data>
-  <data name="TopCustomer" xml:space="preserve">
-    <value>Top Customer</value>
-  </data>
   <data name="Total" xml:space="preserve">
     <value>Total</value>
   </data>
@@ -1227,14 +942,8 @@
   <data name="TotalBets" xml:space="preserve">
     <value>Total Bets</value>
   </data>
-  <data name="TotalGames" xml:space="preserve">
-    <value>Total Games</value>
-  </data>
   <data name="TotalGoal" xml:space="preserve">
     <value>Total Goal</value>
-  </data>
-  <data name="TotalGrossProfit" xml:space="preserve">
-    <value>Total Gross Profit</value>
   </data>
   <data name="TotalHome" xml:space="preserve">
     <value>Total Home</value>
@@ -1242,17 +951,8 @@
   <data name="Totalin" xml:space="preserve">
     <value>Total in</value>
   </data>
-  <data name="TotalPoints" xml:space="preserve">
-    <value>Total Points</value>
-  </data>
-  <data name="TotalSet" xml:space="preserve">
-    <value>Total Set</value>
-  </data>
   <data name="TotalTransaction" xml:space="preserve">
     <value>Total Transaction</value>
-  </data>
-  <data name="Tote" xml:space="preserve">
-    <value>Tote</value>
   </data>
   <data name="ToWinToNil" xml:space="preserve">
     <value>To Win To Nil</value>
@@ -1269,14 +969,8 @@
   <data name="TurnoverTitleNoUser" xml:space="preserve">
     <value>Turnover, {0} --&gt; {1}, {2}</value>
   </data>
-  <data name="TwoWeek" xml:space="preserve">
-    <value>2 weeks</value>
-  </data>
   <data name="Type" xml:space="preserve">
     <value>Type</value>
-  </data>
-  <data name="UnAccessLoginMsg" xml:space="preserve">
-    <value>You can not access login</value>
   </data>
   <data name="UnderMaintenance" xml:space="preserve">
     <value>Under Maintenance</value>
@@ -1292,9 +986,6 @@
   </data>
   <data name="UpdateSportsbookBetSettingSuccessMsg" xml:space="preserve">
     <value>The Sportsbook bet setting of {0} was updated successfully</value>
-  </data>
-  <data name="UpdateVirtualSportsBetSettingSuccessMsg" xml:space="preserve">
-    <value>The Virtual Sports bet setting of {0} was updated successfully</value>
   </data>
   <data name="UserInformation" xml:space="preserve">
     <value>User Information</value>
@@ -1315,9 +1006,6 @@
     <value>Virtual Sports</value>
     <comment>#49196</comment>
   </data>
-  <data name="VS" xml:space="preserve">
-    <value>VS</value>
-  </data>
   <data name="Wap" xml:space="preserve">
     <value>WAP</value>
   </data>
@@ -1336,26 +1024,14 @@
   <data name="WinLossByProduct" xml:space="preserve">
     <value>Win Loss By Products</value>
   </data>
-  <data name="WinLossByProductNote1" xml:space="preserve">
-    <value>Figures of Sportsbook {0} (Amount Due) are displayed in Italic and for reference only</value>
-  </data>
   <data name="WinLossByProductTitle" xml:space="preserve">
     <value>Win Loss By Products, {0} --&gt; {1}, {2}</value>
-  </data>
-  <data name="WinPlace" xml:space="preserve">
-    <value>Win Place</value>
   </data>
   <data name="Withdrawal" xml:space="preserve">
     <value>Withdrawal</value>
   </data>
   <data name="Won" xml:space="preserve">
     <value>Won</value>
-  </data>
-  <data name="WorstWinLoss" xml:space="preserve">
-    <value>Worst Win Loss</value>
-  </data>
-  <data name="Year" xml:space="preserve">
-    <value>Year</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Yes</value>
@@ -1384,9 +1060,6 @@
   <data name="ConfirmCommission" xml:space="preserve">
     <value>Confirm Customer's Commission:</value>
   </data>
-  <data name="CreateGroup" xml:space="preserve">
-    <value>Create Group</value>
-  </data>
   <data name="CustomerSetting" xml:space="preserve">
     <value>Customer setting</value>
   </data>
@@ -1402,9 +1075,6 @@
   <data name="GroupCommission" xml:space="preserve">
     <value>Group commission</value>
   </data>
-  <data name="GroupNotExist" xml:space="preserve">
-    <value>This Group does not exist in system!</value>
-  </data>
   <data name="LastUpdatedMsg" xml:space="preserve">
     <value>Last Updated Special Level</value>
   </data>
@@ -1413,9 +1083,6 @@
   </data>
   <data name="PayAttentionMsg" xml:space="preserve">
     <value>Please pay attention: Customer(s) will be removed from group(s) due to different comm values.</value>
-  </data>
-  <data name="RBComm" xml:space="preserve">
-    <value>RB Comm</value>
   </data>
   <data name="RemoveGroupMsg" xml:space="preserve">
     <value>Are you sure you want to remove this(these) customer(s) from group?</value>
@@ -1441,65 +1108,8 @@
   <data name="RngCasinoAndBingoExcludedNote" xml:space="preserve">
     <value>RNG Casino and Bingo are not included in the report</value>
   </data>
-  <data name="SupportForOnlyNote" xml:space="preserve">
-    <value>The report only supports</value>
-  </data>
   <data name="HistoricalReportDateRangeNote" xml:space="preserve">
     <value>Data is available from {0:MM/dd/ yyyy}. For more historic data</value>
-  </data>
-  <data name="Norecodrstoview" xml:space="preserve">
-    <value>No recodrs to view</value>
-  </data>
-  <data name="Here" xml:space="preserve">
-    <value>here</value>
-  </data>
-  <data name="lbl1s" xml:space="preserve">
-    <value>1S</value>
-  </data>
-  <data name="lbl2s" xml:space="preserve">
-    <value>2S</value>
-  </data>
-  <data name="lbl3s" xml:space="preserve">
-    <value>3S</value>
-  </data>
-  <data name="lbl4s" xml:space="preserve">
-    <value>4S</value>
-  </data>
-  <data name="lbl5s" xml:space="preserve">
-    <value>5S</value>
-  </data>
-  <data name="lbl1p" xml:space="preserve">
-    <value>1P</value>
-  </data>
-  <data name="lbl1q" xml:space="preserve">
-    <value>1Q</value>
-  </data>
-  <data name="lbl2p" xml:space="preserve">
-    <value>2P</value>
-  </data>
-  <data name="lbl2q" xml:space="preserve">
-    <value>2Q</value>
-  </data>
-  <data name="lbl3p" xml:space="preserve">
-    <value>3P</value>
-  </data>
-  <data name="lbl3q" xml:space="preserve">
-    <value>3Q</value>
-  </data>
-  <data name="lbl4q" xml:space="preserve">
-    <value>4Q</value>
-  </data>
-  <data name="OEFT" xml:space="preserve">
-    <value>O/E FT</value>
-  </data>
-  <data name="EUR" xml:space="preserve">
-    <value>EUR</value>
-  </data>
-  <data name="GrandTotalIn" xml:space="preserve">
-    <value>Grand Total In</value>
-  </data>
-  <data name="USD" xml:space="preserve">
-    <value>USD</value>
   </data>
   <data name="DateRange" xml:space="preserve">
     <value>Date Range</value>
@@ -1516,20 +1126,11 @@
   <data name="Action" xml:space="preserve">
     <value>Action</value>
   </data>
-  <data name="AlertLoginLogValidDayMsg" xml:space="preserve">
-    <value>From day must be equal or less than to day</value>
-  </data>
-  <data name="CustomerSettinglog" xml:space="preserve">
-    <value>Customer Setting log</value>
-  </data>
   <data name="Details" xml:space="preserve">
     <value>Details</value>
   </data>
   <data name="Editedby" xml:space="preserve">
     <value>Edited by</value>
-  </data>
-  <data name="GroupCommissionlog" xml:space="preserve">
-    <value>Group Commission log</value>
   </data>
   <data name="LogDate" xml:space="preserve">
     <value>Log Date</value>
@@ -1597,9 +1198,6 @@
   <data name="GroupSetAsDefaultMsg" xml:space="preserve">
     <value>Another group is currently set as default. Wanna set this group as default?</value>
   </data>
-  <data name="GroupNameCannotEmpty" xml:space="preserve">
-    <value>Group Name cannot empty.</value>
-  </data>
   <data name="GroupNameNotExceed100CharactersMsg" xml:space="preserve">
     <value>Group Name cannot exceed 100 characters.</value>
   </data>
@@ -1614,9 +1212,6 @@
   </data>
   <data name="GroupNameOnlyContainCharactersAndNumberMsg" xml:space="preserve">
     <value>Group Name must contain characters and number only.</value>
-  </data>
-  <data name="Noothers" xml:space="preserve">
-    <value>th</value>
   </data>
   <data name="AA" xml:space="preserve">
     <value>AA</value>
@@ -1648,44 +1243,11 @@
   <data name="lbl7Over" xml:space="preserve">
     <value>7Over</value>
   </data>
-  <data name="Loading" xml:space="preserve">
-    <value>Loading</value>
-  </data>
   <data name="CustomerBalance" xml:space="preserve">
     <value>Customer Balance</value>
   </data>
   <data name="Last" xml:space="preserve">
     <value>Last</value>
-  </data>
-  <data name="Level1" xml:space="preserve">
-    <value>Level 1</value>
-  </data>
-  <data name="Level10" xml:space="preserve">
-    <value>Level 10</value>
-  </data>
-  <data name="Level2" xml:space="preserve">
-    <value>Level 2 </value>
-  </data>
-  <data name="Level3" xml:space="preserve">
-    <value>Level 3</value>
-  </data>
-  <data name="Level4" xml:space="preserve">
-    <value>Level 4</value>
-  </data>
-  <data name="Level5" xml:space="preserve">
-    <value>Level 5</value>
-  </data>
-  <data name="Level6" xml:space="preserve">
-    <value>Level 6</value>
-  </data>
-  <data name="Level7" xml:space="preserve">
-    <value>Level 7</value>
-  </data>
-  <data name="Level8" xml:space="preserve">
-    <value>Level 8</value>
-  </data>
-  <data name="Level9" xml:space="preserve">
-    <value>Level 9</value>
   </data>
   <data name="AlertTurnOffBAMsg" xml:space="preserve">
     <value>Are you sure you want to turn off BA?</value>
@@ -1840,9 +1402,6 @@
   <data name="UpdateSportsbookBetSettings" xml:space="preserve">
     <value>Are you sure you want to update all Sportsbook bet settings?</value>
   </data>
-  <data name="UpdateVirtualSportsBetSettings" xml:space="preserve">
-    <value>Are you sure you want to update all Virtual Sports bet settings?</value>
-  </data>
   <data name="Function" xml:space="preserve">
     <value>Function</value>
   </data>
@@ -1861,14 +1420,8 @@
   <data name="Parlay" xml:space="preserve">
     <value>Parlay</value>
   </data>
-  <data name="Currencies" xml:space="preserve">
-    <value>Currencies</value>
-  </data>
   <data name="Freeze" xml:space="preserve">
     <value>Freeze</value>
-  </data>
-  <data name="Levels" xml:space="preserve">
-    <value>levels</value>
   </data>
   <data name="LiveStatus" xml:space="preserve">
     <value>Live Status</value>
@@ -1906,125 +1459,14 @@
   <data name="SelectAtLeastOneCurrencyMsg" xml:space="preserve">
     <value>Please select at least one currency!</value>
   </data>
-  <data name="CASINOHANDHISTORY" xml:space="preserve">
-    <value>CASINO HAND HISTORY</value>
-  </data>
-  <data name="GameID" xml:space="preserve">
-    <value>Game ID</value>
-  </data>
-  <data name="Resultswithpictures" xml:space="preserve">
-    <value>Results with pictures</value>
-  </data>
-  <data name="SessionID" xml:space="preserve">
-    <value>Session ID</value>
-  </data>
-  <data name="Bet" xml:space="preserve">
-    <value>Bet</value>
-  </data>
-  <data name="GameGroup" xml:space="preserve">
-    <value>Game Group</value>
-  </data>
-  <data name="StartDate" xml:space="preserve">
-    <value>Start Date</value>
-  </data>
   <data name="RefNo" xml:space="preserve">
     <value>Ref No</value>
-  </data>
-  <data name="AutoPlay" xml:space="preserve">
-    <value>AutoPlay</value>
-  </data>
-  <data name="AutoSpin" xml:space="preserve">
-    <value>Auto Spin</value>
-  </data>
-  <data name="BetPerLine" xml:space="preserve">
-    <value>Bet Per Line</value>
-  </data>
-  <data name="Characters" xml:space="preserve">
-    <value>Characters</value>
-  </data>
-  <data name="CoinSize" xml:space="preserve">
-    <value>Coin Size</value>
-  </data>
-  <data name="Combination" xml:space="preserve">
-    <value>Combination</value>
-  </data>
-  <data name="FinalHand" xml:space="preserve">
-    <value>Final Hand</value>
-  </data>
-  <data name="FreeSpin" xml:space="preserve">
-    <value>Free Spin</value>
-  </data>
-  <data name="Guess" xml:space="preserve">
-    <value>Guess</value>
-  </data>
-  <data name="HandNo" xml:space="preserve">
-    <value>Hand No</value>
-  </data>
-  <data name="Hit" xml:space="preserve">
-    <value>Hit</value>
-  </data>
-  <data name="InitialHand" xml:space="preserve">
-    <value>Initial Hand</value>
-  </data>
-  <data name="LineNo" xml:space="preserve">
-    <value>Line No</value>
-  </data>
-  <data name="Mode" xml:space="preserve">
-    <value>Mode</value>
-  </data>
-  <data name="Money" xml:space="preserve">
-    <value>Money</value>
-  </data>
-  <data name="Multiplier" xml:space="preserve">
-    <value>Multiplier</value>
-  </data>
-  <data name="Name" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="Number" xml:space="preserve">
-    <value>Number</value>
-  </data>
-  <data name="Pick" xml:space="preserve">
-    <value>Pick</value>
-  </data>
-  <data name="RoundType" xml:space="preserve">
-    <value>Round Type</value>
-  </data>
-  <data name="Scatter" xml:space="preserve">
-    <value>Scatter</value>
-  </data>
-  <data name="Symbol" xml:space="preserve">
-    <value>Symbol</value>
-  </data>
-  <data name="Game" xml:space="preserve">
-    <value>Game</value>
-  </data>
-  <data name="TotalLineBet" xml:space="preserve">
-    <value>Total Line Bet</value>
-  </data>
-  <data name="PerLineWin" xml:space="preserve">
-    <value>Per Line Win</value>
   </data>
   <data name="Go" xml:space="preserve">
     <value>Go</value>
   </data>
-  <data name="Player" xml:space="preserve">
-    <value>Player</value>
-  </data>
-  <data name="Kidnapping" xml:space="preserve">
-    <value>Kidnapping</value>
-  </data>
-  <data name="NotSupportYet" xml:space="preserve">
-    <value>This game type has not been supported yet!</value>
-  </data>
   <data name="Half" xml:space="preserve">
     <value>Half</value>
-  </data>
-  <data name="HDP" xml:space="preserve">
-    <value>HDP</value>
-  </data>
-  <data name="Outcome" xml:space="preserve">
-    <value>Outcome</value>
   </data>
   <data name="Over" xml:space="preserve">
     <value>Over</value>
@@ -2046,15 +1488,6 @@
   </data>
   <data name="Show" xml:space="preserve">
     <value>Show</value>
-  </data>
-  <data name="WEB" xml:space="preserve">
-    <value>WEB</value>
-  </data>
-  <data name="Disable" xml:space="preserve">
-    <value>Disable</value>
-  </data>
-  <data name="Enable" xml:space="preserve">
-    <value>Enable</value>
   </data>
   <data name="UpdateSuccess" xml:space="preserve">
     <value>Update successfully!</value>
@@ -2083,10 +1516,6 @@
   <data name="RNGCasinoUpdateSettingUnAvailableMsg" xml:space="preserve">
     <value>RNG Casino Database is not currently available. Please try again later.</value>
   </data>
-  <data name="CheckAll" xml:space="preserve">
-    <value>Check All</value>
-    <comment>6294</comment>
-  </data>
   <data name="NoProductFound" xml:space="preserve">
     <value>No product found</value>
     <comment>6294</comment>
@@ -2105,10 +1534,6 @@
   </data>
   <data name="NoBettypeFound" xml:space="preserve">
     <value>No bet type found.</value>
-    <comment>6294</comment>
-  </data>
-  <data name="CustomerTurnOverNote" xml:space="preserve">
-    <value>You are only allowed to view data in one months per each submited time.</value>
     <comment>6294</comment>
   </data>
   <data name="Alert" xml:space="preserve">
@@ -2156,9 +1581,6 @@
   <data name="UpdateKenoBetSettingSuccessMsg" xml:space="preserve">
     <value>The RNG Keno bet setting of {0} was updated successfully</value>
   </data>
-  <data name="CopyBetSettingFrom" xml:space="preserve">
-    <value>Copy All Bet Setting from {0}</value>
-  </data>
   <data name="InvalidParams" xml:space="preserve">
     <value>Invalid parameters</value>
   </data>
@@ -2177,21 +1599,6 @@
   </data>
   <data name="VirtualSpeedway" xml:space="preserve">
     <value>Virtual Speedway</value>
-  </data>
-  <data name="NetGaming" xml:space="preserve">
-    <value>Net Gaming</value>
-    <comment>15876</comment>
-  </data>
-  <data name="PShare" xml:space="preserve">
-    <value>P.Share</value>
-    <comment>15876</comment>
-  </data>
-  <data name="PWin" xml:space="preserve">
-    <value>P.Win</value>
-    <comment>15876</comment>
-  </data>
-  <data name="BestViewResolution" xml:space="preserve">
-    <value>Resolution 1280x1024</value>
   </data>
   <data name="Odd_Dec" xml:space="preserve">
     <value>Dec</value>
@@ -2219,24 +1626,6 @@
   </data>
   <data name="MixSportsParlay" xml:space="preserve">
     <value>Mix Sports Parlay</value>
-  </data>
-  <data name="HorseRacingSATote" xml:space="preserve">
-    <value>Horse Racing SA Tote</value>
-  </data>
-  <data name="HorseRacingUK_IrishTote" xml:space="preserve">
-    <value>Horse Racing UK/Irish Tote</value>
-  </data>
-  <data name="HorseRacingAustTote" xml:space="preserve">
-    <value>Horse Racing Aust Tote</value>
-  </data>
-  <data name="GreyhoundUK_IrishTote" xml:space="preserve">
-    <value>Greyhound UK/Irish Tote</value>
-  </data>
-  <data name="GreyhoundAustTote" xml:space="preserve">
-    <value>Greyhound Aust Tote</value>
-  </data>
-  <data name="HarnessAustTote" xml:space="preserve">
-    <value>Harness Aust Tote</value>
   </data>
   <data name="ProductAGC" xml:space="preserve">
     <value>AG Casino</value>
@@ -2278,14 +1667,6 @@
     <value>AG Casino Win Loss</value>
     <comment>#20896</comment>
   </data>
-  <data name="TableType" xml:space="preserve">
-    <value>Table Type</value>
-    <comment>#20896</comment>
-  </data>
-  <data name="VIP" xml:space="preserve">
-    <value>VIP</value>
-    <comment>#20896</comment>
-  </data>
   <data name="MaxBetPerDraw" xml:space="preserve">
     <value>Max Bet Per Draw</value>
     <comment>#23194</comment>
@@ -2299,18 +1680,6 @@
   </data>
   <data name="UserNotExist" xml:space="preserve">
     <value>Not found user</value>
-  </data>
-  <data name="UserNoLicensee" xml:space="preserve">
-    <value>This account is not assigned to any licensee.</value>
-    <comment>#27258</comment>
-  </data>
-  <data name="NetworkTimeoutMsg" xml:space="preserve">
-    <value>Network time out. Please try again.</value>
-    <comment>#27258</comment>
-  </data>
-  <data name="UserNotActive" xml:space="preserve">
-    <value>This account is deactived for LRF.</value>
-    <comment>#27258</comment>
   </data>
   <data name="UserTooManyLicensees" xml:space="preserve">
     <value>This account is assigned to more than 1 licensee.</value>
@@ -2340,12 +1709,6 @@
     <value>No customer found.</value>
     <comment>#26970</comment>
   </data>
-  <data name="GBP" xml:space="preserve">
-    <value>GBP</value>
-  </data>
-  <data name="MYR" xml:space="preserve">
-    <value>MYR</value>
-  </data>
   <data name="OddsGroup" xml:space="preserve">
     <value>Odds Group</value>
     <comment>#26561</comment>
@@ -2358,10 +1721,6 @@
     <value>Active Customer Summary</value>
     <comment>#29219</comment>
   </data>
-  <data name="ActiveCustomer" xml:space="preserve">
-    <value>Active Customer</value>
-    <comment>#29219</comment>
-  </data>
   <data name="TotalActiveCustomer" xml:space="preserve">
     <value>Total active customers</value>
     <comment>#29219</comment>
@@ -2369,9 +1728,6 @@
   <data name="DateRangeExceedMsg" xml:space="preserve">
     <value>Date range exceeds {0} months. Please try again!</value>
     <comment>#29219</comment>
-  </data>
-  <data name="GoldDeluxeProblemDisplayBetSetting" xml:space="preserve">
-    <value>There is problem to display bet setting group's detail.</value>
   </data>
   <data name="ProductGD" xml:space="preserve">
     <value>Gold Deluxe</value>
@@ -2396,18 +1752,9 @@
   <data name="GoldDeluxeWinLoss" xml:space="preserve">
     <value>Gold Deluxe Win Loss</value>
   </data>
-  <data name="AGClosingBalance" xml:space="preserve">
-    <value>AG Closing Balance</value>
-  </data>
-  <data name="AGOpeningBalance" xml:space="preserve">
-    <value>AG Opening Balance</value>
-  </data>
   <data name="ProductBT" xml:space="preserve">
     <value>Bet Trade</value>
     <comment>#49196</comment>
-  </data>
-  <data name="Microgaming" xml:space="preserve">
-    <value>Microgaming</value>
   </data>
   <data name="DisableMacau" xml:space="preserve">
     <value>Disable Macau</value>
@@ -2427,9 +1774,6 @@
   <data name="BetTradeNotOfferCurrency" xml:space="preserve">
     <value>BetTrade is not offered for this currency.</value>
   </data>
-  <data name="DisableMicrogaming" xml:space="preserve">
-    <value>Disable Microgaming</value>
-  </data>
   <data name="EnableBetTrade" xml:space="preserve">
     <value>Enable BetTrade</value>
   </data>
@@ -2439,25 +1783,9 @@
   <data name="BetTradeCommission" xml:space="preserve">
     <value>Bet Trade Commission</value>
   </data>
-  <data name="DetailTickets" xml:space="preserve">
-    <value>Detail Tickets</value>
-    <comment>#43078</comment>
-  </data>
-  <data name="RNGGame" xml:space="preserve">
-    <value>RNG Game</value>
-    <comment>#43078</comment>
-  </data>
-  <data name="Settled" xml:space="preserve">
-    <value>Settled</value>
-    <comment>#43078</comment>
-  </data>
   <data name="DetailedBetlist" xml:space="preserve">
     <value>Detailed Bet list</value>
     <comment>#43078</comment>
-  </data>
-  <data name="ReferenceNo" xml:space="preserve">
-    <value>Reference No</value>
-    <comment>#47601</comment>
   </data>
   <data name="GrandPrizeNote" xml:space="preserve">
     <value>Grand Prize: the grand winning amount which is excluded from member balance</value>
@@ -2474,33 +1802,12 @@
   <data name="BA" xml:space="preserve">
     <value>BA</value>
   </data>
-  <data name="NumberGame" xml:space="preserve">
-    <value>Number Game</value>
-  </data>
-  <data name="Racing" xml:space="preserve">
-    <value>Racing</value>
-  </data>
-  <data name="RNGCasino" xml:space="preserve">
-    <value>RNG Casino</value>
-  </data>
   <data name="VirtualSports" xml:space="preserve">
     <value>Virtual Sports</value>
   </data>
   <data name="AGCasino" xml:space="preserve">
     <value>AG Casino</value>
     <comment>#19458</comment>
-  </data>
-  <data name="GoldDeluxe" xml:space="preserve">
-    <value>Gold Deluxe</value>
-    <comment>#49196</comment>
-  </data>
-  <data name="BetTrade" xml:space="preserve">
-    <value>Bet Trade</value>
-    <comment>#49196</comment>
-  </data>
-  <data name="Macau" xml:space="preserve">
-    <value>Macau</value>
-    <comment>#49196</comment>
   </data>
   <data name="ProductSB" xml:space="preserve">
     <value>Sportsbook</value>
@@ -2542,26 +1849,6 @@
   </data>
   <data name="EnableMacauGames" xml:space="preserve">
     <value>Enable Macau Games</value>
-  </data>
-  <data name="AmountDueToMGC" xml:space="preserve">
-    <value>Amount Due To Microgaming</value>
-    <comment>#56248</comment>
-  </data>
-  <data name="LicenseeNetWin" xml:space="preserve">
-    <value>Licensee Net Win</value>
-    <comment>#56248</comment>
-  </data>
-  <data name="ProgressiveContribution" xml:space="preserve">
-    <value>Progressive Contribution</value>
-    <comment>#56248</comment>
-  </data>
-  <data name="ProgressivePayout" xml:space="preserve">
-    <value>Progressive Payout</value>
-    <comment>#56248</comment>
-  </data>
-  <data name="ProgressiveFee" xml:space="preserve">
-    <value>Progressive Fee</value>
-    <comment>#56248</comment>
   </data>
   <data name="WeeklyLiveMatches" xml:space="preserve">
     <value>Weekly Live Matches</value>
@@ -2808,10 +2095,6 @@
     <value>New Asia</value>
     <comment>#85203</comment>
   </data>
-  <data name="AB" xml:space="preserve">
-    <value>AB</value>
-    <comment>82036</comment>
-  </data>
   <data name="IncludeDrawData" xml:space="preserve">
     <value>Include Draw data</value>
     <comment>84932</comment>
@@ -2839,16 +2122,6 @@
   <data name="WinLossByTimeZone" xml:space="preserve">
     <value>Win Loss By Time Zone</value>
     <comment>84932</comment>
-  </data>
-  <data name="MatchDelayDone" xml:space="preserve">
-    <value>Match Delay-Done</value>
-  </data>
-  <data name="MatchDelayNew" xml:space="preserve">
-    <value>Match Delay-New</value>
-  </data>
-  <data name="Notifications" xml:space="preserve">
-    <value>Notifications</value>
-    <comment>84004</comment>
   </data>
   <data name="ViewNotification" xml:space="preserve">
     <value>View Notification</value>
@@ -2941,9 +2214,6 @@
     <value>WL</value>
     <comment>91048</comment>
   </data>
-  <data name="FunctionIsUnderMaintenance" xml:space="preserve">
-    <value>Function is under maintenance.</value>
-  </data>
   <data name="FreePlay" xml:space="preserve">
     <value>Free Play</value>
     <comment>90768</comment>
@@ -2989,10 +2259,6 @@
   </data>
   <data name="BettingTicketCenter_RefnoTabNote1" xml:space="preserve">
     <value>For Sportsbook, the search result includes the related Bonus/Cash tickets.</value>
-    <comment>80941</comment>
-  </data>
-  <data name="MultipleCustomers" xml:space="preserve">
-    <value>Multiple Customers</value>
     <comment>80941</comment>
   </data>
   <data name="SingleCustomer" xml:space="preserve">
@@ -3067,14 +2333,6 @@
     <value>Happy 5</value>
     <comment>103698</comment>
   </data>
-  <data name="Soccer" xml:space="preserve">
-    <value>Soccer</value>
-    <comment>103698</comment>
-  </data>
-  <data name="Tennis" xml:space="preserve">
-    <value>Tennis</value>
-    <comment>103698</comment>
-  </data>
   <data name="BettingTicketCenter_RefnoTabNote2" xml:space="preserve">
     <value>For RNG Keno, Lottery: Please provide username also in order to search ticket later than {0}</value>
     <comment>103555</comment>
@@ -3094,5 +2352,14 @@
   <data name="PromotionPrize" xml:space="preserve">
     <value>Promotion Prize</value>
     <comment>109471</comment>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="AGOpeningBalance" xml:space="preserve">
+    <value>AG Opening Balance</value>
+  </data>
+  <data name="AGClosingBalance" xml:space="preserve">
+    <value>AG Closing Balance</value>
   </data>
 </root>
