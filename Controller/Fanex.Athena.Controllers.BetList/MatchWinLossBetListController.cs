@@ -7,13 +7,12 @@
 namespace Fanex.Athena.Controllers.BetList
 {
     using System.Threading.Tasks;
+
     #region Using
 
     using System.Web.Mvc;
 
     using DataAccess.Core.Configuration.Interfaces;
-
-    using Extension.Utility;
 
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -49,7 +48,6 @@ namespace Fanex.Athena.Controllers.BetList
         }
 
         [HttpGet]
-
         [ValidationWebRequest(IsValidCurrency = true)]
         public Task<ActionResult> MatchBetType(BetListExcelMetaModel metaModel)
         {
@@ -57,7 +55,6 @@ namespace Fanex.Athena.Controllers.BetList
         }
 
         [HttpGet]
-
         [ValidationWebRequest(IsValidCurrency = true)]
         public Task<ActionResult> MixParlay(BetListExcelMetaModel metaModel)
         {
@@ -66,7 +63,6 @@ namespace Fanex.Athena.Controllers.BetList
 
         [HttpGet]
         [ValidationWebRequest(IsValidCurrency = true)]
-
         public Task<ActionResult> Outright(BetListExcelMetaModel metaModel)
         {
             return ProcessRequest(metaModel, "Lrf_BetList_MatchWL_Outright", "~/Views/Desktop/BetList/MatchWl/Outright.cshtml");

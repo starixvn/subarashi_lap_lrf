@@ -11,8 +11,6 @@ namespace Fanex.Athena.Controllers.BetList
 
     using DataAccess.Core.Configuration.Interfaces;
 
-    using Extension.Utility;
-
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
 

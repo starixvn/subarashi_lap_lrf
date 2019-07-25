@@ -1,5 +1,8 @@
 ﻿namespace Fanex.Athena.Controllers.BetList
 {
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
+
     using DataAccess.Core.Configuration.Interfaces;
 
     using Fanex.Athena.Model.Core.DataDomain;
@@ -11,9 +14,6 @@
 
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
 
     using VendorAdapter.Interfaces;
 
@@ -114,7 +114,7 @@
                 ViewBag.SportName = sportName;
                 return View(viewPath, metaModel);
             }
-           
+
             var title = GetExcelTitle(metaModel, caption);
             return await Excel(metaModel, uspKey, title).ConfigureAwait(false);
         }

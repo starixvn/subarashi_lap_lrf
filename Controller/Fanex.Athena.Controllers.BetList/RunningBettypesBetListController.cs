@@ -8,6 +8,10 @@ namespace Fanex.Athena.Controllers.BetList
 {
     #region Using
 
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
+
     using DataAccess.Core.Configuration.Interfaces;
 
     using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -22,10 +26,6 @@ namespace Fanex.Athena.Controllers.BetList
 
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
 
     using VendorAdapter.Interfaces;
 
@@ -60,7 +60,6 @@ namespace Fanex.Athena.Controllers.BetList
         [HttpGet]
         [FunctionAuthorization(PermissionKeys.TotalBetMixParlay)]
         [ValidationWebRequest]
-
         public async Task<ActionResult> MixParlay(BetListExcelMetaModel metaModel)
         {
             metaModel.MultipleBettype = ((int)BetType.CombinationMixParlay).ToString();
@@ -72,7 +71,6 @@ namespace Fanex.Athena.Controllers.BetList
         [HttpGet]
         [FunctionAuthorization(PermissionKeys.TotalBetDoubleChance)]
         [ValidationWebRequest]
-
         public async Task<ActionResult> DoubleChange(BetListExcelMetaModel metaModel)
         {
             metaModel.MultipleBettype = DoubleChangeBettypes;

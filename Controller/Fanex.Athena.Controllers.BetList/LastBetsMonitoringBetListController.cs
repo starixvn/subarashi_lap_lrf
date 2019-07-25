@@ -13,14 +13,19 @@ namespace Fanex.Athena.Controllers.BetList
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using System.Web.SessionState;
+
     using DataAccess.Core.Common.Interfaces;
-    using Extension.Utility;
+
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Web.ActionFilter;
+
     using Model.BetList.MetaModel;
     using Model.BetList.ViewModel;
+
     using ONEbook.UM.Filters;
+
     using Resources;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
 

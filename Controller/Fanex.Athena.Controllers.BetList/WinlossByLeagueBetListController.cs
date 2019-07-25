@@ -6,6 +6,9 @@
 
 namespace Fanex.Athena.Controllers.BetList
 {
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
+
     using DataAccess.Core.Configuration.Interfaces;
 
     using Fanex.Athena.Model.Core.DataDomain;
@@ -17,9 +20,6 @@ namespace Fanex.Athena.Controllers.BetList
 
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
 
     using VendorAdapter.Interfaces;
 

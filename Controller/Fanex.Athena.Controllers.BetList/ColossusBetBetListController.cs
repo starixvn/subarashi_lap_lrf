@@ -14,8 +14,6 @@ namespace Fanex.Athena.Controllers.BetList
 
     using DataAccess.Core.Configuration.Interfaces;
 
-    using Extension.Utility;
-
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
 
@@ -29,6 +27,7 @@ namespace Fanex.Athena.Controllers.BetList
     using VendorAdapter.Interfaces;
 
     using Web.ActionFilter;
+
     #endregion Using
 
     [FunctionAuthorization(PermissionKeys.ReportColossusBetsWinLoss)]

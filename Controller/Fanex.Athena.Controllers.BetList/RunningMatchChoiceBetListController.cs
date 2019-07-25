@@ -7,6 +7,7 @@
 namespace Fanex.Athena.Controllers.BetList
 {
     using System.Threading.Tasks;
+
     #region Using
 
     using System.Web.Mvc;
@@ -46,8 +47,8 @@ namespace Fanex.Athena.Controllers.BetList
             InitBaseCurrencyValue(metaModel);
 
             return await ProcessDefaultRequest(
-                metaModel, 
-                "~/Views/Desktop/BetList/NewForecastBetlist/Main.cshtml", 
+                metaModel,
+                "~/Views/Desktop/BetList/NewForecastBetlist/Main.cshtml",
                 "Lrf_BetList_Forecast_SelByMatch").ConfigureAwait(false);
         }
 

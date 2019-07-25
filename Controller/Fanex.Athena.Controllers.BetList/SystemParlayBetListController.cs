@@ -8,6 +8,10 @@ namespace Fanex.Athena.Controllers.BetList
 {
     #region Using
 
+    using System;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
+
     using DataAccess.Core.Configuration.Interfaces;
 
     using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -19,10 +23,6 @@ namespace Fanex.Athena.Controllers.BetList
 
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-
-    using System;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
 
     using VendorAdapter.Interfaces;
 
@@ -44,8 +44,8 @@ namespace Fanex.Athena.Controllers.BetList
         : base(languageService, sessionService, productService, balanceUpDataAccess,
               cacheRefAdapter, betListApiClient, licenseeSettingService)
         {
-
         }
+
         [HttpGet]
         [ValidationWebRequest]
         public async Task<ActionResult> Detail(SystemParlayDetailMetaModel metaModel)

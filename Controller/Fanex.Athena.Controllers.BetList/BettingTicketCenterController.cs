@@ -1,5 +1,9 @@
 ﻿namespace Fanex.Athena.Controllers.BetList
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Web.Mvc;
+
     using DataAccess.Core.Configuration.Interfaces;
 
     using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -13,10 +17,6 @@
 
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Web.Mvc;
 
     using Web.ActionFilter;
 
@@ -68,7 +68,6 @@
                 ProductOptionList = GetProductOptionList(),
                 IsAllowedCustomerComm = SessionService.LicenseeSession.IsAllowedCustomerComm,
                 SelectedBaseCurrency = SessionService.UserSession.DefaultBaseCurrency
-
             };
             return View("~/Views/Desktop/BetList/BettingTicketCenter/SingleCustomer.cshtml", viewModel);
         }
@@ -91,7 +90,6 @@
                 ProductOptionList = GetProductOptionList(FunctionNames.BettingTicketCenterRunning),
                 IsAllowedCustomerComm = SessionService.LicenseeSession.IsAllowedCustomerComm,
                 SelectedBaseCurrency = SessionService.UserSession.DefaultBaseCurrency
-
             };
 
             return View("~/Views/Desktop/BetList/BettingTicketCenter/Running.cshtml", viewModel);

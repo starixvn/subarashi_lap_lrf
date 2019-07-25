@@ -7,18 +7,22 @@
 namespace Fanex.Athena.Controllers.BetList
 {
     using System.Threading.Tasks;
+
     #region Using
 
     using System.Web.Mvc;
+
     using DataAccess.Core.Configuration.Interfaces;
-    using Extension.Utility;
+
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
     using Fanex.Common;
+
     using Model.BetList.MetaModel;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-    using Service.Core.Utility.Interfaces;
+
     using VendorAdapter.Interfaces;
 
     #endregion Using
@@ -44,8 +48,8 @@ namespace Fanex.Athena.Controllers.BetList
             InitBaseCurrencyValue(metaModel);
 
             return await ProcessDefaultRequest(
-                metaModel, 
-                "~/Views/Desktop/BetList/RunningBettypesOfMatchBetList/Main.cshtml", 
+                metaModel,
+                "~/Views/Desktop/BetList/RunningBettypesOfMatchBetList/Main.cshtml",
                 "Lrf_BetList_SelRunningByMultipleBettypeMatch").ConfigureAwait(false);
         }
 

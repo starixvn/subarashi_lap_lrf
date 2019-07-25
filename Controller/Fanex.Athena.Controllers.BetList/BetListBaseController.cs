@@ -5,19 +5,26 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using System.Web.SessionState;
+
     using DataAccess.Core.Configuration.Interfaces;
+
     using Excel.Base.Helpers;
-    using Extension.Utility;
+
     using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Service.Core.Common.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Utility;
+
     using Model.BetList.MetaModel;
     using Model.Core.DTO.Configuration;
+
     using ONEbook.UM.Filters;
+
     using Resources;
+
     using Service.Core.Users.Interfaces;
+
     using VendorAdapter.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Utility;
-    using Fanex.Athena.Service.Core.Common.Interfaces;
 
     [SessionState(SessionStateBehavior.ReadOnly)]
     [CheckUMFilter]
@@ -40,7 +47,6 @@
         private readonly IProductService _productService;
 
         private readonly IBetListApiClient _betListApiClient;
-
 
 #pragma warning disable S107 // Methods should not have too many parameters
 
