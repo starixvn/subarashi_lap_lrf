@@ -6,8 +6,12 @@
 
 namespace Fanex.Athena.Controllers.Report
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Web.Mvc;
+
     using Extension.Helper;
-    using Extension.Utility;
 
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.MetaModel.Product;
@@ -21,11 +25,6 @@ namespace Fanex.Athena.Controllers.Report
 
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Web.Mvc;
 
     [FunctionAuthorization(PermissionKeys.ReportLicenseeWinLoss)]
     public class LicenseeWinLossReportController : ReportBaseController
@@ -105,7 +104,6 @@ namespace Fanex.Athena.Controllers.Report
                 CurrencyId = SystemConstants.BaseCurrencyList
                 .FirstOrDefault(x => x.Value.Equals(userSession.DefaultBaseCurrency, StringComparison.OrdinalIgnoreCase))
                 .Key
-
             };
 
             var model = new LicenseeWinLossViewModel

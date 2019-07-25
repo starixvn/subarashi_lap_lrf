@@ -11,8 +11,11 @@ namespace Fanex.Athena.Controllers.Report
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+
     using DataAccess.Core.Common.Interfaces;
+
     using Extension.Utility;
+
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Report.MetaModel;
@@ -20,8 +23,11 @@ namespace Fanex.Athena.Controllers.Report
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
+
     using Model.Core.MetaModel.Common;
+
     using Resources;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
 
@@ -67,7 +73,6 @@ namespace Fanex.Athena.Controllers.Report
                 ToDate = date,
                 ProductOptions = ToProductOptions(productList),
                 BaseCurrency = userSession.DefaultBaseCurrency
-
             };
 
             var sports = (await this._sportTypeDataAccess.GetSportsAndProducts(licenseeSession.LicenseeId, userSession.Language, Product.SB).ConfigureAwait(true))

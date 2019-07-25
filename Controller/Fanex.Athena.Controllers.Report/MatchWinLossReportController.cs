@@ -12,8 +12,6 @@
 
     using Excel.Base.Helpers;
 
-    using Extension.Utility;
-
     using Fanex.Athena.Excel.Base.Entities;
     using Fanex.Athena.Excel.Report;
     using Fanex.Athena.Model.Core;
@@ -76,7 +74,6 @@
                 BalanceUpDay = _balanceUpDataAccess.GetBalanceUp().BalanceUpDay.ToShortDateString(),
                 LicenseeId = licenseeSession.LicenseeId,
                 BaseCurrency = userSession.DefaultBaseCurrency
-
             };
 
             var productAccess = ProductService.GetSingleWalletProductAccess(

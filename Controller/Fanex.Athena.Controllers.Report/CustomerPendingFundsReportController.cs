@@ -6,14 +6,15 @@
 
 namespace Fanex.Athena.Controllers.Report
 {
-    using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Extension.Utility;
+
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
+
     using Model.Core.DataDomain;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
 
@@ -40,7 +41,6 @@ namespace Fanex.Athena.Controllers.Report
                 LicenseeId = licenseeSession.LicenseeId,
                 UserId = userSession.UserId,
                 BaseCurrency = userSession.DefaultBaseCurrency
-
             };
             var productAccess = ProductService.GetSingleWalletProductAccess(
                 metaModel.LicenseeId,

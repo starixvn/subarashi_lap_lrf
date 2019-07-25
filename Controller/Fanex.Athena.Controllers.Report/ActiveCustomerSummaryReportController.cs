@@ -6,6 +6,9 @@
 
 namespace Fanex.Athena.Controllers.Report
 {
+    using System;
+    using System.Web.Mvc;
+
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -15,9 +18,6 @@ namespace Fanex.Athena.Controllers.Report
 
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-
-    using System;
-    using System.Web.Mvc;
 
     [FunctionAuthorization(PermissionKeys.ReportActiveCustomerSummary)]
     public class ActiveCustomerSummaryReportController : ReportBaseController

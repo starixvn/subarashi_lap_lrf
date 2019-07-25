@@ -12,9 +12,10 @@ namespace Fanex.Athena.Controllers.Report
     using System.Threading.Tasks;
     using System.Web.Hosting;
     using System.Web.Mvc;
+
     using DataAccess.Core.Configuration.Interfaces;
     using DataAccess.Report.Interfaces;
-    using Extension.Utility;
+
     using Fanex.Athena.Excel.Base.Entities;
     using Fanex.Athena.Excel.Report;
     using Fanex.Athena.Model.Report.DTO;
@@ -24,8 +25,10 @@ namespace Fanex.Athena.Controllers.Report
     using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
     using Fanex.Athena.Web.ResultExtension;
+
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
 

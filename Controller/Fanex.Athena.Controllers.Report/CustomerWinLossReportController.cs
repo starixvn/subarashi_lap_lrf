@@ -5,7 +5,8 @@
 
 namespace Fanex.Athena.Controllers.Report
 {
-    using Extension.Utility;
+    using System;
+    using System.Web.Mvc;
 
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Report.MetaModel;
@@ -15,9 +16,6 @@ namespace Fanex.Athena.Controllers.Report
 
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-
-    using System;
-    using System.Web.Mvc;
 
     [FunctionAuthorization(PermissionKeys.ReportCustomerWinLoss)]
     public class CustomerWinLossReportController : ReportBaseController
@@ -57,7 +55,6 @@ namespace Fanex.Athena.Controllers.Report
                 FromDate = isHistory ? new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1)
                 : DateTime.Today,
                 BaseCurrency = userSession.DefaultBaseCurrency
-
             };
 
             var productAccess = ProductService.GetSingleWalletProductAccess(

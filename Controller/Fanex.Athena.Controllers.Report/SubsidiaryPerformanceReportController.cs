@@ -2,16 +2,19 @@
 {
     using System.Linq;
     using System.Web.Mvc;
+
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Model.Core.DataDomain;
-    using Extension.Utility;
     using Model.Core.DTO.Common;
     using Model.Core.MetaModel.Product;
     using Model.Report.ViewModel;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
     using Service.Report.Interfaces;
+
     using Web.ActionFilter;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     [FunctionAuthorization(PermissionKeys.ReportSubsidiaryPerformance)]
     public class SubsidiaryPerformanceReportController : ReportBaseController

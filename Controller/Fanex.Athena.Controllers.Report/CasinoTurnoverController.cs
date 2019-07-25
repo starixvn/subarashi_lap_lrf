@@ -1,6 +1,9 @@
 ﻿namespace Fanex.Athena.Controllers.Report
 {
-    using Extension.Utility;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Web.Mvc;
 
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
@@ -12,11 +15,6 @@
 
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Web.Mvc;
 
     using Web.ActionFilter;
 
@@ -43,7 +41,7 @@
                 SessionService.LicenseeSession.LicenseeId,
                 userSession.Language,
                 FunctionNames.CasinoTurnover);
-            var setting = _reportSettingService.GetSetting(PermissionKeys.ReportCasinoTurnover, 
+            var setting = _reportSettingService.GetSetting(PermissionKeys.ReportCasinoTurnover,
                 SessionService.LicenseeSession.LicenseeName);
 
             var viewModel = new CasinoTurnoverViewModel

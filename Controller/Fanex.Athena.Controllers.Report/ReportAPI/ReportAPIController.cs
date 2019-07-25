@@ -6,8 +6,8 @@
 
 namespace Fanex.Athena.Controllers.Report
 {
-    using Extension.Utility;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Service.Core.Users.Interfaces;
     using Service.Report.Interfaces;
 
@@ -19,6 +19,7 @@ namespace Fanex.Athena.Controllers.Report
 
         private readonly ITurnoverService _turnoverService;
         private ILicenseeSettingService _licenseeSettingService;
+
         public ReportAPIController(
             ISessionService sessionService,
             IBetTypeService betTypeService,

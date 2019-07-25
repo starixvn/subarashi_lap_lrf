@@ -1,5 +1,12 @@
 namespace Fanex.Athena.Controllers.Report.Result
 {
+    using System;
+    using System.Linq;
+    using System.Net;
+    using System.Threading.Tasks;
+    using System.Web;
+    using System.Web.Mvc;
+
     using DataAccess.Core.Configuration.Interfaces;
 
     using Fanex.Athena.Model.Core.DTO.Common;
@@ -12,13 +19,6 @@ namespace Fanex.Athena.Controllers.Report.Result
 
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-
-    using System;
-    using System.Linq;
-    using System.Net;
-    using System.Threading.Tasks;
-    using System.Web;
-    using System.Web.Mvc;
 
     public class ResultReportController : ReportBaseController
     {

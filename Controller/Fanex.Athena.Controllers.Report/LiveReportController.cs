@@ -72,7 +72,6 @@ namespace Fanex.Athena.Controllers.Report
                 CurrencyId = 0,
                 LiveIndicator = 1,
                 BaseCurrency = userSession.DefaultBaseCurrency
-
             };
 
             var productAccess = GetProductAccess(licenseeSession.LicenseeId, userSession.Language);

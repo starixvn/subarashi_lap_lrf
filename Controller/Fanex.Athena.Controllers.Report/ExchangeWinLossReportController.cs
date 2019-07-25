@@ -1,5 +1,9 @@
 ﻿namespace Fanex.Athena.Controllers.Report
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Web.Mvc;
 
     using Fanex.Athena.Model.Report.ViewModel;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -10,11 +14,6 @@
 
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Web.Mvc;
 
     using Web.ActionFilter;
 
@@ -46,7 +45,6 @@
             var currencyList = new Dictionary<int, string>
             {
                 { BaseCurrencyType.All, ViewResources.All },
-
             };
 
             foreach (var item in SystemConstants.BaseCurrencyList)
