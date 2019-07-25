@@ -15,6 +15,7 @@ namespace Fanex.Athena.Controllers
     using Fanex.Athena.Model.Auth.Enum;
     using Fanex.Athena.Model.Core.ViewModel;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Model.Core.DataDomain;
 
     using Service.Core.Common.Interfaces;

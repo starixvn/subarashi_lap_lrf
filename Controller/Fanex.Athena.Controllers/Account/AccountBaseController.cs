@@ -6,6 +6,8 @@
 
 namespace Fanex.Athena.Controllers.Account
 {
+    using System.Web.Mvc;
+
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Auth.Enum;
 
@@ -17,8 +19,6 @@ namespace Fanex.Athena.Controllers.Account
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
 
-    using System.Web.Mvc;
-
     using Web.ActionFilter;
 
     [CheckUMFilter]
@@ -26,7 +26,6 @@ namespace Fanex.Athena.Controllers.Account
     [AuthorizeRestriction(AppMode.Self)]
     public class AccountBaseController : CultureBaseController
     {
-
         public AccountBaseController(
        ILanguageService languageService,
        ISessionService sessionService,
@@ -35,6 +34,7 @@ namespace Fanex.Athena.Controllers.Account
    : base(languageService, sessionService, appSettings, null)
         {
         }
+
         public AccountBaseController(
             ILanguageService languageService,
             ISessionService sessionService

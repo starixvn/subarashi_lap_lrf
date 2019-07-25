@@ -8,12 +8,17 @@ namespace Fanex.Athena.Controllers.Account
 {
     using System.Linq;
     using System.Web.Mvc;
+
     using Extension.Utility;
+
     using Model.Core.DTO.Common;
     using Model.Core.MetaModel.Account;
+
     using Resources;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
+
     using Web.ActionFilter;
 
     public class AccountController : AccountBaseController

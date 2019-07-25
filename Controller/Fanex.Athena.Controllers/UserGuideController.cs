@@ -6,6 +6,13 @@
 
 namespace Fanex.Athena.Controllers
 {
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Text.RegularExpressions;
+    using System.Web.Mvc;
+    using System.Web.SessionState;
+
     using DataAccess.Core.Configuration.Interfaces;
 
     using Extension.Utility.Interfaces;
@@ -19,13 +26,6 @@ namespace Fanex.Athena.Controllers
 
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Linq;
-    using System.Text.RegularExpressions;
-    using System.Web.Mvc;
-    using System.Web.SessionState;
 
     using Web.ActionFilter;
 

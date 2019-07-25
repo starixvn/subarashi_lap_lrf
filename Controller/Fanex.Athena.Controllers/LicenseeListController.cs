@@ -4,9 +4,8 @@
 
     using DataAccess.Core.Users.Interfaces;
 
-    using Extension.Utility;
     using Fanex.Athena.Model.Auth.Enum;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
 
