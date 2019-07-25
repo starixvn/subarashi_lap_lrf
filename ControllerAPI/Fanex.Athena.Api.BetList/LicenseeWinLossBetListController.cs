@@ -1,5 +1,9 @@
 ﻿namespace Fanex.Athena.Api.BetList
 {
+    using System;
+    using System.Threading.Tasks;
+    using System.Web.Http;
+
     using Base.Attributes;
 
     using DataAccess.Core.Configuration.Interfaces;
@@ -13,10 +17,6 @@
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
     using Service.StatelessCore.Interfaces;
-
-    using System;
-    using System.Threading.Tasks;
-    using System.Web.Http;
 
     [ApiFunctionAuthorization(PermissionKeys.ReportLicenseeWinLoss, PermissionKeys.ReportWinLossByProduct, PermissionKeys.ReportColossusBetsWinLoss)]
     [ApiBetListAuthorization]

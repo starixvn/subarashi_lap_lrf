@@ -85,7 +85,7 @@
             else
             {
                 var currencyIdList = metaModel.Currency.Split(',').Select(int.Parse);
-                metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList,currencyIdList);
+                metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, currencyIdList);
             }
 
             metaModel.UserCurrencyList = UserCurrencyList;

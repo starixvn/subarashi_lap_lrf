@@ -9,15 +9,18 @@ namespace Fanex.Athena.Api.BetList
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Http;
+
     using Base;
     using Base.Attributes;
+
     using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Model.BetList.DTO;
     using Model.BetList.MetaModel;
     using Model.Core.DataDomain;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-    using Service.Core.Utility.Interfaces;
 
     [ApiFunctionAuthorization(PermissionKeys.CustomerInfoCustomerList)]
     public class OutstandingDailyStatementBetListController : BaseApiController

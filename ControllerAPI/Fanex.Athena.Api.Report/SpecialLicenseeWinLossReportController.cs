@@ -1,5 +1,10 @@
 ﻿namespace Fanex.Athena.Api.Report
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Http;
+
     using Base.Attributes;
 
     using DataAccess.Report.Interfaces;
@@ -18,11 +23,6 @@
 
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Http;
 
     [ApiFunctionAuthorization(PermissionKeys.ReportLicenseeWinLoss)]
     public class SpecialLicenseeWinLossReportController : ApiReportBaseController
@@ -143,7 +143,6 @@
         {
             return IsValidDateRange(metaModel, setting) &&
                 IsValidProduct(metaModel);
-
         }
 
         private bool IsValidProduct(SpecialLicenseeWinLossMetaModel metaModel)

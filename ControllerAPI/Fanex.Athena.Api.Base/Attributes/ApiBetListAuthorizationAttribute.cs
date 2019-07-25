@@ -1,10 +1,5 @@
 ﻿namespace Fanex.Athena.Api.Base.Attributes
 {
-    using Fanex.Athena.Api.StatelessBase.Attributes.Extensions;
-    using Fanex.Athena.Service.Core.Users.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Resources;
-
     using System;
     using System.Net;
     using System.Net.Http;
@@ -12,6 +7,12 @@
     using System.Threading.Tasks;
     using System.Web.Http.Controllers;
     using System.Web.Http.Filters;
+
+    using Fanex.Athena.Api.StatelessBase.Attributes.Extensions;
+    using Fanex.Athena.Service.Core.Users.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
+    using Resources;
 
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true)]
     public sealed class ApiBetListAuthorizationAttribute : FilterAttribute, IAuthorizationFilter

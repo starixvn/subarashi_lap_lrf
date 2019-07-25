@@ -2,6 +2,7 @@
 {
     using System;
     using System.Web.Http.ExceptionHandling;
+
     using Fanex.Athena.Extension.Helpers;
     using Fanex.Logging;
 

@@ -7,18 +7,21 @@
 
 namespace Fanex.Athena.Api.BetList
 {
-    using System;
     using System.Net.Http;
     using System.Threading.Tasks;
     using System.Web.Http;
+
     using Base.Attributes;
+
     using DataAccess.Core.Configuration.Interfaces;
+
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Utility;
+
     using Model.BetList.MetaModel;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-    using Service.Core.Utility.Interfaces;
     using Service.StatelessCore.Interfaces;
 
     [ApiFunctionAuthorization(PermissionKeys.ReportLiveReport)]
@@ -80,8 +83,6 @@ namespace Fanex.Athena.Api.BetList
             const string UspName = "Lrf_BetList_LiveReport_SelWinlossVHRacing";
 
             return await GetPagingData(metaModel, UspName, page, rows).ConfigureAwait(false);
-
-
         }
 
         #region Utility

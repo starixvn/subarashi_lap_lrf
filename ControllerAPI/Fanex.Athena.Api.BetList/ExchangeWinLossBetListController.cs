@@ -3,19 +3,20 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Http;
+
     using Base;
     using Base.Attributes;
-    using Fanex.Athena.Model.Core.Helper;
+
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
+
     using Model.BetList.DTO;
     using Model.BetList.MetaModel;
     using Model.BetList.ViewModel;
     using Model.Core.DataDomain;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-    using Service.Core.Utility;
-    using Service.Core.Utility.Interfaces;
 
     [ApiFunctionAuthorization(PermissionKeys.ReportExchangeWinLoss)]
     public class ExchangeWinLossBetListController : BaseApiController
@@ -67,7 +68,7 @@
             }
             var userSession = SessionService.UserSession;
 
-            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList,metaModel.CurrencyId, metaModel.ExcludeTestData);
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId, metaModel.ExcludeTestData);
 
             return await _betListApiClient.PostAsync("/ExchangeWinLossBetList/Detail",
                 metaModel, userSession.Language).ConfigureAwait(false);

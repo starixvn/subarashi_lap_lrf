@@ -1,17 +1,18 @@
 ﻿namespace Fanex.Athena.Api.Report
 {
-    using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Http;
+
     using Base.Attributes;
-    using DataAccess.Report;
+
     using DataAccess.Report.Interfaces;
-    using Fanex.Athena.Resources;
+
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
+
     using Model.Core.DataDomain;
-    using Model.Report.DTO;
     using Model.Report.MetaModel;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
 
@@ -46,7 +47,6 @@
                 Data = result.DataList,
                 Total = result.TotalData
             };
-
         }
     }
 }

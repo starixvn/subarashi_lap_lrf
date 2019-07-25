@@ -6,6 +6,14 @@
 
 namespace Fanex.Athena.Api.Report
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Net.Http;
+    using System.Threading.Tasks;
+    using System.Web.Hosting;
+    using System.Web.Http;
+
     using Base.Attributes;
 
     using DataAccess.Report.Interfaces;
@@ -31,14 +39,6 @@ namespace Fanex.Athena.Api.Report
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
 
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Net.Http;
-    using System.Threading.Tasks;
-    using System.Web.Hosting;
-    using System.Web.Http;
-
     [ApiFunctionAuthorization(PermissionKeys.ReportWinLossByProduct)]
     public class WinLossByProductReportController : ApiReportBaseController
     {
@@ -46,6 +46,7 @@ namespace Fanex.Athena.Api.Report
         private readonly IWinLossByProductDataAccess _winlossByProductDataAccess;
         private readonly ICurrencyValidation _currencyValidation;
         private readonly IAppSettings _appSettings;
+
         public WinLossByProductReportController(
             ISessionService sessionService,
             IProductService productService,

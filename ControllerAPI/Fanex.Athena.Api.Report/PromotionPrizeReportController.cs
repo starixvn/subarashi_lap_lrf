@@ -2,19 +2,26 @@
 {
     using System.Net.Http;
     using System.Web.Hosting;
+
     using Base.Attributes;
-    using Model.Core.DataDomain;
+
     using DataAccess.Report.Interfaces;
+
     using Excel.Report;
     using Excel.Report.Helpers;
+
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Utility;
+
+    using Model.Core.DataDomain;
     using Model.Core.ResultModel;
     using Model.Report;
     using Model.Report.MetaModel;
+
     using Resources;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Utility;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     [ApiFunctionAuthorization(PermissionKeys.ReportLicenseeWinLoss, PermissionKeys.ReportCustomerWinLoss)]
     public class PromotionPrizeReportController : ApiReportBaseController
@@ -60,7 +67,5 @@
 
             return CreareExcel(templatePath, title, FileName, data);
         }
-
-
     }
 }

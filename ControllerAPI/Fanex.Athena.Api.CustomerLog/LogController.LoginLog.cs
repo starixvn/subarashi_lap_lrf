@@ -9,6 +9,7 @@ namespace Fanex.Athena.Api.CustomerLog
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Http;
+
     using Fanex.Athena.Service.StatelessCore.Utility;
 
     public partial class LogController

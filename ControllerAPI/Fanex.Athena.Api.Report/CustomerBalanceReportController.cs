@@ -1,20 +1,24 @@
 ﻿namespace Fanex.Athena.Api.Report
 {
-    using System.Collections.Generic;
     using System.Net.Http;
     using System.Threading.Tasks;
     using System.Web.Hosting;
     using System.Web.Http;
+
     using DataAccess.Report.Interfaces;
+
     using Excel.Base.Entities;
     using Excel.Report;
+
     using Fanex.Athena.Api.Base.Attributes;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
+
     using Model.Core.ResultModel;
     using Model.Report.DTO;
     using Model.Report.MetaModel;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
 

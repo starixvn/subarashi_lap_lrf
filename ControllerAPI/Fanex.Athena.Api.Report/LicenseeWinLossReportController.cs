@@ -6,6 +6,14 @@
 
 namespace Fanex.Athena.Api.Report
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Net.Http;
+    using System.Threading.Tasks;
+    using System.Web.Hosting;
+    using System.Web.Http;
+
     using Base.Attributes;
 
     using DataAccess.Report.Interfaces;
@@ -29,14 +37,6 @@ namespace Fanex.Athena.Api.Report
 
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Net.Http;
-    using System.Threading.Tasks;
-    using System.Web.Hosting;
-    using System.Web.Http;
 
     [ApiFunctionAuthorization(PermissionKeys.ReportLicenseeWinLoss)]
     public class LicenseeWinLossReportController : ApiReportBaseController

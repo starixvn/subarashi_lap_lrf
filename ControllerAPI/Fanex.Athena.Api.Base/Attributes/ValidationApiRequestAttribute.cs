@@ -1,14 +1,14 @@
-﻿using Fanex.Athena.Api.StatelessBase.Attributes.Extensions;
-using Fanex.Athena.Model.Core.MetaModel;
-using Fanex.Athena.Resources;
-using Fanex.Athena.Service.Core.Utility.Interfaces;
-
-using System;
+﻿using System;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
+
+using Fanex.Athena.Api.StatelessBase.Attributes.Extensions;
+using Fanex.Athena.Model.Core.MetaModel;
+using Fanex.Athena.Resources;
+using Fanex.Athena.Service.Core.Utility.Interfaces;
 
 namespace Fanex.Athena.Api.Base.Attributes
 {
@@ -25,17 +25,19 @@ namespace Fanex.Athena.Api.Base.Attributes
         public bool IsValidCurrencyList { get; set; }
 
         public bool IsIncludeKeanOcean { get; set; }
+
         /// <summary>
         /// Required :FunctionKey
         /// </summary>
         public bool IsValidProductCodeList { get; set; }
+
         public string FunctionConfig { get; set; }
         public bool IsSingleWalletProduct { get; set; }
+
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
             base.OnActionExecuting(actionContext);
             ValidateRequest(actionContext);
-
         }
 
         private void ValidateRequest(HttpActionContext actionContext)
@@ -54,13 +56,11 @@ namespace Fanex.Athena.Api.Base.Attributes
                    IsValidCurrency = IsValidCurrency,
                    IsIncludeKeanOcean = IsIncludeKeanOcean,
                    IsValidCurrencyList = IsValidCurrencyList
-
                }, new ProductValidationOption
                {
                    IsValidProductCodeList = IsValidProductCodeList,
                    FunctionConfig = FunctionConfig,
                    IsSingleWallet = IsSingleWalletProduct
-
                }))
             {
                 actionContext.Response = new HttpResponseMessage
@@ -70,6 +70,5 @@ namespace Fanex.Athena.Api.Base.Attributes
                 };
             }
         }
-
     }
 }

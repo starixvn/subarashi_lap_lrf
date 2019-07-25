@@ -1,23 +1,25 @@
 ﻿namespace Fanex.Athena.Api.Report
 {
-    using System.Linq;
     using System.Net.Http;
     using System.Threading.Tasks;
     using System.Web.Hosting;
     using System.Web.Http;
+
     using DataAccess.Report.Interfaces;
+
     using Excel.Base.Entities;
     using Excel.Report;
     using Excel.Report.Models;
-    using Extension.Utility;
+
     using Fanex.Athena.Api.Base.Attributes;
     using Fanex.Athena.Model.Core.DataDomain;
-    using Fanex.Athena.Resources;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
+
     using Model.Core.ResultModel;
     using Model.Report.DTO;
     using Model.Report.MetaModel;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
 
@@ -45,7 +47,6 @@
         [ValidationApiRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
         public async Task<dynamic> Index(CustomerWinLossMetaModel metaModel)
         {
-
             return metaModel.IsExportExcel ?
                 await ExportExcel(metaModel).ConfigureAwait(false) :
                 await ProcessRequest(metaModel).ConfigureAwait(false);
@@ -112,7 +113,6 @@
             var userSession = SessionService.UserSession;
             metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId, metaModel.IsExcludedTestData);
             return await _custWinlossDataAccess.GetDataList(metaModel).ConfigureAwait(false);
-
         }
     }
 }

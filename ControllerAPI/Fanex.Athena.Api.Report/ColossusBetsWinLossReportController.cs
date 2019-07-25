@@ -13,7 +13,9 @@ namespace Fanex.Athena.Api.Report
     using System.Threading.Tasks;
     using System.Web.Hosting;
     using System.Web.Http;
+
     using Base.Attributes;
+
     using Fanex.Athena.Excel.Report;
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
@@ -21,9 +23,12 @@ namespace Fanex.Athena.Api.Report
     using Fanex.Athena.Service.Core.Utility.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
+
     using Model.Core.DataDomain;
     using Model.Core.ResultModel;
+
     using Resources;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
     using Service.Report.Interfaces;
@@ -33,6 +38,7 @@ namespace Fanex.Athena.Api.Report
     {
         private readonly IColossusBetsWinLossService _colossusBetsWinLossService;
         private readonly ICurrencyValidation _currencyValidation;
+
         public ColossusBetsWinLossReportController(
             IColossusBetsWinLossService colossusBetsWinLossService,
             ISessionService sessionService,

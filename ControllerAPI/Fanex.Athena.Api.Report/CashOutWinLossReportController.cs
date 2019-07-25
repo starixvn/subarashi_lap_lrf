@@ -13,8 +13,11 @@ namespace Fanex.Athena.Api.Report
     using System.Threading.Tasks;
     using System.Web.Hosting;
     using System.Web.Http;
+
     using Base.Attributes;
+
     using DataAccess.Report.Interfaces;
+
     using Fanex.Athena.Excel.Report;
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
@@ -22,9 +25,12 @@ namespace Fanex.Athena.Api.Report
     using Fanex.Athena.Service.Core.Utility.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
+
     using Model.Core.DataDomain;
     using Model.Core.ResultModel;
+
     using Resources;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
 
@@ -33,6 +39,7 @@ namespace Fanex.Athena.Api.Report
     {
         private readonly ICashOutWinLossDataAccess _cashOutWinLossDataAccess;
         private readonly ICurrencyValidation _currencyValidation;
+
         public CashOutWinLossReportController(
             ICashOutWinLossDataAccess cashOutWinLossDataAccess,
             ISessionService sessionService,

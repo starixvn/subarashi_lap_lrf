@@ -10,6 +10,7 @@ namespace Fanex.Athena.Api.CustomerLog
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Http;
+
     using Fanex.Athena.Model.Customer.MetaModel.CustomerLog;
     using Fanex.Athena.Service.StatelessCore.Utility;
 
