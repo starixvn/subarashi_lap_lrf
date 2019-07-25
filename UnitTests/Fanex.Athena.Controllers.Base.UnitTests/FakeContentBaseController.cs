@@ -8,8 +8,8 @@
 
     internal class FakeContentBaseController : ContentBaseController
     {
-        internal FakeContentBaseController(ILanguageService languageService, ISessionService sessionService, IAppSettings appSetting)
-            : base(languageService, sessionService, appSetting)
+        internal FakeContentBaseController(ILanguageService languageService, ISessionService sessionService)
+            : base(languageService, sessionService)
         {
         }
 

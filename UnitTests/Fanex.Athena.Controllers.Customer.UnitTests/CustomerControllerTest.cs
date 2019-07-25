@@ -28,6 +28,13 @@
         private IProductService _productService;
         private ISubsidiaryService _subsidiaryService;
         private IAuthorizationService _authorizationService;
+        private ILicenseeSettingService _licenseeSettingService;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _licenseeSettingService = Substitute.For<ILicenseeSettingService>();
+        }
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
@@ -64,6 +71,7 @@
             _groupComService.ClearReceivedCalls();
             _customerListService.ClearReceivedCalls();
             _licenseeDataAccess.ClearReceivedCalls();
+            _licenseeSettingService = null;
         }
 
         [Test]
@@ -210,7 +218,7 @@
                 _licenseeDataAccess,
                 _productService,
                 _subsidiaryService,
-                _authorizationService);
+                _authorizationService, _licenseeSettingService);
             controller.ControllerContext = ControllerContext;
 
             return controller;

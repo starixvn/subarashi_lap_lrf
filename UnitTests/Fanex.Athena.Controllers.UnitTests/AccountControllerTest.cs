@@ -79,7 +79,6 @@
             return new AccountController(
             LangService,
             SessionService,
-            AppSettings,
             _userService)
             {
                 ControllerContext = ControllerContext

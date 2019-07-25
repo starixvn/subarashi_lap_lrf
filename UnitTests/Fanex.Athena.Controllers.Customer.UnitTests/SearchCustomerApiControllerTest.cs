@@ -19,7 +19,6 @@
             using (var controller = new SearchCustomerAPIController(
                LangService,
                SessionService,
-               AppSettings,
                searchCustomerDataAccess))
             {
                 // Arrange

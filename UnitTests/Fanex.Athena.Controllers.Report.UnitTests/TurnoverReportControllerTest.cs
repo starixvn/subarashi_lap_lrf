@@ -25,9 +25,14 @@
     {
         private const int CurrencyId = 999;
 
-        private const string AgentListXml = "<abc>";
-
         private ITurnoverService _turnoverService;
+        private ILicenseeSettingService _licenseeSettingService;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _licenseeSettingService = Substitute.For<ILicenseeSettingService>();
+        }
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
@@ -44,6 +49,7 @@
         public void TearDown()
         {
             _turnoverService.ClearReceivedCalls();
+            _licenseeSettingService = null;
         }
 
         [Test]
@@ -81,8 +87,7 @@
             {
                 // Arrange
                 MockCreatingExcel(controller);
-                var licenseeId = SessionService.LicenseeSession.LicenseeId;
-                AppSettings.FakeLicenseeList.Returns(new[] { isFakeLicensee ? licenseeId : -1 });
+                _licenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(isFakeLicensee);
                 var metaModel = new TurnoverMetaModel
                 {
                     Username = inputUserName
@@ -161,7 +166,9 @@
                 SessionService,
                 AppSettings,
                 productService,
-                _turnoverService);
+                _turnoverService
+                , _licenseeSettingService
+                );
             controller.WhenForAnyArgs(x => x.CreateExcel(string.Empty, null, null, false)).DoNotCallBase();
             return controller;
         }

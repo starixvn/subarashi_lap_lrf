@@ -4,7 +4,7 @@
     using System.Linq;
     using System.Web.Mvc;
     using Base.UnitTests;
-
+    using Fanex.Athena.Service.StatelessCore;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     using Model.Core.DataDomain;
@@ -26,6 +26,18 @@
     public class LicenseeWinLossReportControllerTest : CultureBaseControllerHelperTest
     {
 
+        private ILicenseeSettingService _licenseeSettingService;
+        [SetUp]
+        public void SetUp()
+        {
+            _licenseeSettingService = Substitute.For<ILicenseeSettingService>();
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            _licenseeSettingService = null;
+        }
         [OneTimeSetUp]
         public override void FixtureSetUp()
         {
@@ -41,7 +53,7 @@
             var reportSettingService = Substitute.For<IReportSettingService>();
             reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss, Arg.Any<string>()).Returns(new ReportSetting());
 
-            AppSettings.FakeLicenseeList.Returns(Enumerable.Empty<int>());
+            _licenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(false);
 
             using (var controller = CreateController(reportSettingService))
             {
@@ -68,7 +80,7 @@
             reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss, Arg.Any<string>())
                 .Returns(new ReportSetting { BaseCurrencies = "USD,KKK", TimeZone = 8 });
 
-            AppSettings.FakeLicenseeList.Returns(new[] { DefaultLicenseeSession.LicenseeId });
+            _licenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(true);
 
             using (var controller = CreateController(reportSettingService))
             {
@@ -97,9 +109,8 @@
             return new LicenseeWinLossReportController(
                 LangService,
                 SessionService,
-                AppSettings,
                 productService,
-                reportSettingService);
+                reportSettingService, _licenseeSettingService);
         }
     }
 }

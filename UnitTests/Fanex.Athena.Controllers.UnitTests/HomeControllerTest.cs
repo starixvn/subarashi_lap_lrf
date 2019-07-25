@@ -15,17 +15,22 @@
     {
         private ILicenseeSettingService _licenseeSettingService;
 
+        [TearDown]
+        public void TearDown()
+        {
+            _licenseeSettingService = null;
+        }
         [OneTimeSetUp]
         public override void FixtureSetUp()
         {
             base.FixtureSetUp();
-            _licenseeSettingService = Substitute.For<ILicenseeSettingService>();
         }
 
         [SetUp]
         public void SetUp()
         {
             SetUpDefaultFakeData();
+            _licenseeSettingService = Substitute.For<ILicenseeSettingService>();
         }
 
         [Test]
@@ -262,9 +267,8 @@
         {
             return new HomeController(
                 LangService,
-                SessionService,
-                AppSettings,
-                _licenseeSettingService)
+                SessionService, _licenseeSettingService
+                )
             {
                 ControllerContext = ControllerContext
             };

@@ -237,10 +237,9 @@
             var controller = new AgCasinoBetSettingController(
                 LangService,
                 SessionService,
-                AppSettings,
                 CoreBetSettingService,
                 ProductService,
-                _betSettingService)
+                _betSettingService, null)
             {
                 ControllerContext = ControllerContext
             };

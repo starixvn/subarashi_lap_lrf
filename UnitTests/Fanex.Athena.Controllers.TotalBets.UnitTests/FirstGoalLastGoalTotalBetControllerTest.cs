@@ -84,7 +84,6 @@
             return new FirstGoalLastGoalTotalBetController(
                             LangService,
                             SessionService,
-                            AppSettings,
                             _firstGoalLastGoalDataAccess);
         }
     }

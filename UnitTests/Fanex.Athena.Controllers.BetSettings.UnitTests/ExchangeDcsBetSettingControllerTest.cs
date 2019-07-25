@@ -148,11 +148,10 @@
             var controller = new ExchangeDcsBetSettingController(
                 LangService,
                 SessionService,
-                AppSettings,
                 CoreBetSettingService,
                 ProductService,
                 _betSettingService,
-                _exchangeCommApiService);
+                _exchangeCommApiService,null);
 
             return controller;
         }

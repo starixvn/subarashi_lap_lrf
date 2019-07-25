@@ -178,7 +178,6 @@
             return new AccountPermissionController(
             LangService,
             SessionService,
-            AppSettings,
             _functionService,
             _userService,
             _currencyDataAccess)

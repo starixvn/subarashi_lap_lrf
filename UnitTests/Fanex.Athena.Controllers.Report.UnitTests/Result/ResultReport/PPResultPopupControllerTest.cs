@@ -29,7 +29,7 @@
             var betListApiClient = Substitute.For<IBetListApiClient>();
 
             betListApiClient.PostAsyncString(Url, Arg.Any<object>(), SessionService.UserSession.Language).Returns(ExpectedResult);
-            using (var controller = new PPResultPopupController(LangService, SessionService, AppSettings, betListApiClient))
+            using (var controller = new PPResultPopupController(LangService, SessionService, betListApiClient))
             {
                 // Action
                 var result = await controller.Index(CustId, GamePlayId);

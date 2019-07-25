@@ -32,7 +32,15 @@
         private IProductService _productService;
         private IAuthorizationService _authorizationService;
 
+        private ILicenseeSettingService _licenseeSettingService;
+
         [SetUp]
+        public void SetUp()
+        {
+            _licenseeSettingService = Substitute.For<ILicenseeSettingService>();
+        }
+
+        [OneTimeSetUp]
         public override void FixtureSetUp()
         {
             base.FixtureSetUp();
@@ -52,6 +60,7 @@
             AppSettings.ClearReceivedCalls();
             _customerListService.ClearReceivedCalls();
             _groupComService.ClearReceivedCalls();
+            _licenseeSettingService = null;
         }
 
         [Test]
@@ -151,7 +160,8 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                LicenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(true);
+
+                _licenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(true);
 
                 // Action
                 var result = controller.UpdateSpecialLevel(0, 0) as JsonResult;
@@ -199,8 +209,7 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                var fakeLicenseeList = new[] { SessionService.LicenseeSession.LicenseeId };
-                AppSettings.FakeLicenseeList.Returns(fakeLicenseeList);
+                _licenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(true);
 
                 // Action
                 var result = controller.UpdateOddsGroup(0, string.Empty) as JsonResult;

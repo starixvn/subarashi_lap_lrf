@@ -1,10 +1,5 @@
 ﻿namespace Fanex.Athena.Controllers.TotalBets.UnitTests
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Web.Mvc;
-
     using Base.UnitTests;
 
     using DataAccess.Core.Configuration.Interfaces;
@@ -20,7 +15,10 @@
 
     using Report.Result;
 
-    using Service.Core.Common.Interfaces;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Web.Mvc;
 
     using UnitTest.Common.Extensions;
 
@@ -145,11 +143,12 @@
             var controller = new ResultReportController(
                 LangService,
                 SessionService,
-                AppSettings,
                 productService,
                 _balanceUpDataAccess,
-                _betListApiClient);
-            controller.ControllerContext = ControllerContext;
+                _betListApiClient)
+            {
+                ControllerContext = ControllerContext
+            };
             return controller;
         }
     }

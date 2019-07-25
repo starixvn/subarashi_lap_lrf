@@ -42,9 +42,7 @@
         {
             return new CashOutWinLossReportController(
                 LangService,
-                SessionService,
-                AppSettings,
-                Substitute.For<IProductService>());
+                SessionService);
         }
     }
 }

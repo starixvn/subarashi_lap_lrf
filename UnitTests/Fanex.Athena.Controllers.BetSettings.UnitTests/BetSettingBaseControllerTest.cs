@@ -239,9 +239,8 @@
             var controller = new FakeBetSettingBaseController(
                 LangService,
                 SessionService,
-                AppSettings,
                 CoreBetSettingService,
-                ProductService)
+                ProductService, null)
             {
                 ControllerContext = ControllerContext
             };

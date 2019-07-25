@@ -43,7 +43,6 @@
             return new AgCasinoBalanceReportController(
                 LangService,
                 SessionService,
-                AppSettings,
                 Substitute.For<IProductService>());
         }
     }

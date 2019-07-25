@@ -1,8 +1,5 @@
 ﻿namespace Fanex.Athena.Controllers.TotalBets.UnitTests
 {
-    using System.Web.Mvc;
-    using System.Web.Script.Serialization;
-
     using Base.UnitTests;
 
     using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -14,7 +11,8 @@
 
     using Report.Result;
 
-    using Service.Core.Common.Interfaces;
+    using System.Web.Mvc;
+    using System.Web.Script.Serialization;
 
     [TestFixture]
     public class ResultKenoReportControllerTest : CultureBaseControllerHelperTest
@@ -64,7 +62,6 @@
             var controller = new ResultKenoReportController(
                 LangService,
                 SessionService,
-                AppSettings,
                 Substitute.For<IProductService>(),
                 _logger,
                 _betListApiClient)

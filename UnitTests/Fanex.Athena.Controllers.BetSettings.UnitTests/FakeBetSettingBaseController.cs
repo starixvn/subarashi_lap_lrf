@@ -18,10 +18,9 @@
         internal FakeBetSettingBaseController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             ICoreBetSettingService coreBetSettingService,
-            IProductService productService)
-        : base(languageService, sessionService, appSetting, coreBetSettingService, productService)
+            IProductService productService, ILicenseeSettingService licenseeSettingService)
+        : base(languageService, sessionService, coreBetSettingService, productService, licenseeSettingService)
         {
         }
 

@@ -64,7 +64,6 @@
             return new ColossusBetsWinLossReportController(
                 LangService,
                 SessionService,
-                AppSettings,
                 productService);
         }
     }

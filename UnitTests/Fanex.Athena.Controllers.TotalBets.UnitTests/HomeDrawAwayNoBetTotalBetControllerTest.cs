@@ -70,7 +70,6 @@
             return new HomeDrawAwayNoBetTotalBetController(
                             LangService,
                             SessionService,
-                            AppSettings,
                             _homeDrawAwayNoBetDataAccess);
         }
 

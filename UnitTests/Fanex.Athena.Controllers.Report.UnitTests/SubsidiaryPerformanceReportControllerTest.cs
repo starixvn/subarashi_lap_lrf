@@ -24,9 +24,6 @@
         private const string FakeProductCode = "TestingCode";
         private const string FakeProductName = "Testing Product Name";
 
-        private static readonly ReadOnlyCollection<string> BaseCurrencyList = new ReadOnlyCollection<string>(
-            new List<string> { "EUR", "USD", "GBP", "MYR", "CNY", "THB", "IDR" });
-
         private ISubsidiaryService _subsidiaryService;
         private ISubsidiaryPerformanceService _service;
         private JavaScriptSerializer _serializer;
@@ -133,7 +130,6 @@
             return new SubsidiaryPerformanceReportController(
                 LangService,
                 SessionService,
-                AppSettings,
                 productService,
                 _subsidiaryService);
         }

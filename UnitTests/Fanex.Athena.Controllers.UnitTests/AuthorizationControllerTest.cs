@@ -375,7 +375,6 @@
             return new AuthorizationController(
                LangService,
                SessionService,
-               AppSettings,
                _maintenanceService,
                _userService,
                _authService,

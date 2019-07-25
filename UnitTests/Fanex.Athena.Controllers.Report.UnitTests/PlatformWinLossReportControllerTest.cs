@@ -52,7 +52,6 @@
             return new PlatformWinLossReportController(
                 LangService,
                 SessionService,
-                AppSettings,
                 productService);
         }
     }

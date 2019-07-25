@@ -79,7 +79,6 @@
             return new CustomerWinLossReportController(
                 LangService,
                 SessionService,
-                AppSettings,
                 productService,
                 reportSettingService);
         }

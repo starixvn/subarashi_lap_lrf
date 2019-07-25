@@ -383,7 +383,6 @@
             var controller = new NewHandicapOverUnderForecastController(
                 LangService,
                 SessionService,
-                AppSettings,
                 _forecastDataAccess,
                 Substitute.For<ILogger>(),
                 _cacheRefAdapter,

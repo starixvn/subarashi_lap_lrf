@@ -70,7 +70,6 @@
             return new OutrightTotalBetController(
                             LangService,
                             SessionService,
-                            AppSettings,
                             _outrightDataAccess);
         }
 

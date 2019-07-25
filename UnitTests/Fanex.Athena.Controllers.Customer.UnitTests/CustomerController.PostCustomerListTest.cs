@@ -22,7 +22,7 @@
                     Username = UserName
                 };
 
-                AppSettings.FakeLicenseeList.Returns(Enumerable.Empty<int>());
+                _licenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(false);
                 _customerListService.GetActiveCustomers(metaModel).Returns(new ReportResultModel<CustomerDTO>
                 {
                     DataList = new List<CustomerDTO>(),
@@ -50,7 +50,7 @@
                 };
 
                 StubLicenseeSessionData(DefaultLicenseeSession);
-                AppSettings.FakeLicenseeList.Returns(new[] { DefaultLicenseeSession.LicenseeId });
+                _licenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(true);
                 _customerListService.GetActiveCustomers(metaModel).Returns(new ReportResultModel<CustomerDTO>
                 {
                     DataList = new List<CustomerDTO>(),
@@ -66,7 +66,7 @@
         }
 
         [Test]
-        public void PostCustomerList_IsFakeLicensee_PlaceholderUsernameIsExternalIdOrSystemId()
+        public async System.Threading.Tasks.Task PostCustomerList_IsFakeLicensee_PlaceholderUsernameIsExternalIdOrSystemIdAsync()
         {
             using (var controller = CreateContoller())
             {
@@ -77,7 +77,7 @@
                     Username = userName
                 };
 
-                AppSettings.FakeLicenseeList.Returns(Enumerable.Empty<int>());
+                _licenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(true);
                 _customerListService.GetActiveCustomers(metaModel).Returns(new ReportResultModel<CustomerDTO>
                 {
                     DataList = new List<CustomerDTO>(),
@@ -85,7 +85,7 @@
                 });
 
                 // Action
-                var result = controller.CustomerList(metaModel);
+                await controller.CustomerList(metaModel).ConfigureAwait(false);
 
                 // Assert
                 Assert.That(metaModel.Username, Is.Empty);
@@ -99,8 +99,7 @@
             {
                 // Arrange
                 var metaModel = new CustomerListMetaModel();
-
-                AppSettings.FakeLicenseeList.Returns(Enumerable.Empty<int>());
+                _licenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(false);
                 _customerListService.GetActiveCustomers(metaModel).Returns(new ReportResultModel<CustomerDTO>
                 {
                     DataList = new List<CustomerDTO>(),

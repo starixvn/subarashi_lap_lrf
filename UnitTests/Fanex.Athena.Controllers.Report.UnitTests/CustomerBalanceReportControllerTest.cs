@@ -52,7 +52,6 @@
             return new CustomerBalanceReportController(
                 LangService,
                 SessionService,
-                AppSettings,
                 productService);
         }
     }

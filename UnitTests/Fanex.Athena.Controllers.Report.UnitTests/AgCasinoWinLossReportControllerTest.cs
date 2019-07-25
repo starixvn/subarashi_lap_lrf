@@ -42,9 +42,8 @@
         {
             return new AgCasinoWinLossReportController(
                 LangService,
-                SessionService,
-                AppSettings,
-                Substitute.For<IProductService>());
+                SessionService
+              );
         }
     }
 }

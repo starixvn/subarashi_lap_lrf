@@ -222,10 +222,9 @@
             var controller = new KenoBetSettingController(
                 LangService,
                 SessionService,
-                AppSettings,
                 CoreBetSettingService,
                 ProductService,
-                _betSettingService)
+                _betSettingService,null)
             {
                 ControllerContext = ControllerContext
             };

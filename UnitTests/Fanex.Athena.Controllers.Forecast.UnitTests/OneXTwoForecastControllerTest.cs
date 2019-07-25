@@ -153,7 +153,6 @@
             var controller = new OneXTwoForecastController(
                 LangService,
                 SessionService,
-                AppSettings,
                 _leagueDataAccess,
                 _forecastOneXTwoDataAccess)
             {

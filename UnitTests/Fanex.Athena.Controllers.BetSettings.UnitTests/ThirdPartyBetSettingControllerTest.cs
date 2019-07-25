@@ -38,7 +38,7 @@
             {
                 // Arrange
                 var metaModel = new BetSettingMetaModel { ProductId = ProductTypes.Macau, CustId = 100 };
-                
+
                 _betSettingService.GetViewModelAsync(DefaultLicenseeSession.LicenseeId, metaModel.CustId, metaModel.ProductId)
                     .Returns(Task.FromResult<ThirdPartyBetSettingViewModel>(null));
 
@@ -420,10 +420,9 @@
             var controller = new ThirdPartyBetSettingController(
                 LangService,
                 SessionService,
-                AppSettings,
                 CoreBetSettingService,
                 ProductService,
-                _betSettingService)
+                _betSettingService, null)
             {
                 ControllerContext = ControllerContext
             };

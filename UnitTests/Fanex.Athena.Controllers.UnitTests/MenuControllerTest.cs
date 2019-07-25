@@ -15,12 +15,12 @@
     public partial class MenuControllerTest : CultureBaseControllerHelperTest
     {
         private IFunctionService _functionService;
-
+        ILicenseeSettingService _licenseeSettingService;
         [SetUp]
         public void SetUp()
         {
             _functionService = Substitute.For<IFunctionService>();
-
+            _licenseeSettingService = Substitute.For<ILicenseeSettingService>();
             SetUpDefaultFakeData();
         }
 
@@ -28,6 +28,7 @@
         public void TearDown()
         {
             _functionService = null;
+            _licenseeSettingService = null;
         }
 
         [Test]
@@ -54,8 +55,7 @@
                 // Arrange
                 SessionService.UserSession.FunctionIdList = new int[] { 1, 2, 3 };
                 _functionService.Functions.Returns(new List<Function>());
-                AppSettings.FakeLicenseeList.Returns(new[] { DefaultLicenseeSession.LicenseeId });
-
+                _licenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(true);
                 // Action
                 var result = controller.Index() as ViewResult;
                 var viewModel = result.Model as MenuViewModel;
@@ -74,7 +74,7 @@
 
         private MenuController CreateController()
         {
-            return new MenuController(LangService, SessionService, AppSettings, _functionService);
+            return new MenuController(LangService, SessionService, _functionService, _licenseeSettingService);
         }
     }
 }

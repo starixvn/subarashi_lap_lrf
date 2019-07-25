@@ -69,7 +69,6 @@
             return new NoteController(
                 LangService,
                 SessionService,
-                AppSettings,
                 _productService,
                 _balanceUpDataAccess);
         }

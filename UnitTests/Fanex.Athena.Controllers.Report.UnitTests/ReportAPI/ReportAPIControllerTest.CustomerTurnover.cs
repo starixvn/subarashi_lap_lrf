@@ -20,11 +20,23 @@
     public partial class ReportAPIControllerTest : CultureBaseControllerHelperTest
     {
         private const int CurrencyId = 134;
-        private const string AgentListXml = "Xml";
 
         private IBetTypeService _betTypeService;
         private ICustomerTurnoverService _customerTurnoverService;
         private ITurnoverService _turnoverService;
+        private ILicenseeSettingService _licenseeSettingService;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _licenseeSettingService = Substitute.For<ILicenseeSettingService>();
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            _licenseeSettingService = null;
+        }
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
@@ -118,10 +130,9 @@
         {
             return new ReportAPIController(
                 SessionService,
-                AppSettings,
                 _betTypeService,
                 _customerTurnoverService,
-                _turnoverService);
+                _turnoverService, _licenseeSettingService);
         }
     }
 }

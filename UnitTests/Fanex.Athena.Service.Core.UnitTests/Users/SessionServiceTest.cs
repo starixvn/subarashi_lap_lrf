@@ -465,8 +465,6 @@
         public void AssignCurrenciesToUserSession_IsNotFakeLicensee_DoNotMergeAgentListWithFakeLicenseeData()
         {
             // Arrange
-            _appSettings.FakeLicenseeList.Returns(Enumerable.Empty<int>());
-
             const int LicenseeId = 1;
             var currencyUserList = new List<CurrencyUser>
             {
@@ -504,8 +502,6 @@
         public void AssignCurrenciesToUserSession_KeenOceanLicensee_UpdateCurrencyForKeenOncean()
         {
             // Arrange
-            _appSettings.FakeLicenseeList.Returns(Enumerable.Empty<int>());
-
             const int LicenseeId = LicenseeIdentity.KeenOcean;
             var currencyUserList = new List<CurrencyUser>
             {
@@ -518,7 +514,6 @@
                     AgentIdList = new[] { 1, 2 }
                 }
             };
-            var activeCurrencyUsers = currencyUserList.Where(x => x.IsActive);
 
             var userSession = new UserAuthInfo();
 

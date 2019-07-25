@@ -7,8 +7,8 @@
 
     internal class FakeCultureBaseController : CultureBaseController
     {
-        internal FakeCultureBaseController(ILanguageService languageService, ISessionService sessionService, IAppSettings appSetting)
-            : base(languageService, sessionService, appSetting)
+        internal FakeCultureBaseController(ILanguageService languageService, ISessionService sessionService)
+            : base(languageService, sessionService)
         {
         }
 

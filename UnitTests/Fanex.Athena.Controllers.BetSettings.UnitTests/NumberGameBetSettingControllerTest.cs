@@ -182,10 +182,9 @@
             var controller = new NumberGameBetSettingController(
                 LangService,
                 SessionService,
-                AppSettings,
                 CoreBetSettingService,
                 ProductService,
-                _betSettingService)
+                _betSettingService,null)
             {
                 ControllerContext = ControllerContext
             };

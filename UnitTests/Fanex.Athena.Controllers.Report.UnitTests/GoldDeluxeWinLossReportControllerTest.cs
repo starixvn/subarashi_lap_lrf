@@ -78,7 +78,6 @@
             return new GoldDeluxeWinLossReportController(
                 LangService,
                 SessionService,
-                AppSettings,
                 productService);
         }
     }

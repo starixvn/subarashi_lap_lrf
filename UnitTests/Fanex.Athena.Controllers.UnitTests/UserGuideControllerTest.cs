@@ -368,7 +368,6 @@
             var controller = new UserGuideController(
                 LangService,
                 SessionService,
-                AppSettings,
                 _fileSystem,
                 _productService,
                 _balanceUpDataAccess)

@@ -6,22 +6,28 @@
 
 namespace Fanex.Athena.Controllers
 {
+    using DataAccess.Core.Configuration.Interfaces;
+
+    using Extension.Utility.Interfaces;
+
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
+    using Model.Core.DataDomain;
+    using Model.Core.DTO.Common;
+
+    using ONEbook.UM.Filters;
+
+    using Service.Core.Common.Interfaces;
+    using Service.Core.Users.Interfaces;
+
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Text.RegularExpressions;
     using System.Web.Mvc;
     using System.Web.SessionState;
-    using Model.Core.DataDomain;
-    using DataAccess.Core.Configuration.Interfaces;
-    using Extension.Utility;
-    using Extension.Utility.Interfaces;
-    using Model.Core.DTO.Common;
-    using ONEbook.UM.Filters;
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
+
     using Web.ActionFilter;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     [SessionState(SessionStateBehavior.ReadOnly)]
     [CheckUMFilter]
@@ -47,9 +53,7 @@ namespace Fanex.Athena.Controllers
             ISessionService sessionService,
             IFileSystem fileSystem,
             IProductService productService,
-            IBalanceUpDataAccess balanceUpDataAccess,
-            ILicenseeSettingService licenseeSettingService
-            )
+            IBalanceUpDataAccess balanceUpDataAccess)
         : base(languageService, sessionService)
         {
             _sessionService = sessionService;

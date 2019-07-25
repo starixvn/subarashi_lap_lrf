@@ -31,8 +31,9 @@ namespace Fanex.Athena.Controllers
             ILanguageService languageService,
             ISessionService sessionService,
             IAppSettings appSetting,
-            ILicenseeDataAccess licenseeDataAccess)
-        : base(languageService, sessionService, appSetting, null)
+            ILicenseeDataAccess licenseeDataAccess,
+            ILicenseeSettingService licenseeSettingService)
+        : base(languageService, sessionService, appSetting, licenseeSettingService)
         {
             _licenseeDataAccess = licenseeDataAccess;
         }

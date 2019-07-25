@@ -382,10 +382,9 @@
             var controller = new DcsBetSettingController(
                 LangService,
                 SessionService,
-                AppSettings,
                 CoreBetSettingService,
                 ProductService,
-                _betSettingService)
+                _betSettingService, null)
             {
                 ControllerContext = ControllerContext
             };

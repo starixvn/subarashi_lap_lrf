@@ -321,10 +321,9 @@
             var controller = new RngCasinoBetSettingController(
                 LangService,
                 SessionService,
-                AppSettings,
                 CoreBetSettingService,
                 ProductService,
-                _betSettingService)
+                _betSettingService, null)
             {
                 ControllerContext = ControllerContext
             };

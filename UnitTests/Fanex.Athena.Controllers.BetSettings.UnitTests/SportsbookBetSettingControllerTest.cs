@@ -193,10 +193,9 @@
             var controller = new SportsbookBetSettingController(
                 LangService,
                 SessionService,
-                AppSettings,
                 CoreBetSettingService,
                 ProductService,
-                _betSettingService)
+                _betSettingService, null)
             {
                 ControllerContext = ControllerContext
             };
