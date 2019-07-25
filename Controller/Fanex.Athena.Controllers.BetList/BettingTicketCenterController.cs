@@ -1,19 +1,24 @@
 ﻿namespace Fanex.Athena.Controllers.BetList
 {
+    using DataAccess.Core.Configuration.Interfaces;
+
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
+    using Model.BetList.ViewModel;
+    using Model.Core.DataDomain;
+    using Model.Core.DTO.Common;
+    using Model.Core.MetaModel.Product;
+
+    using Resources;
+
+    using Service.Core.Common.Interfaces;
+    using Service.Core.Users.Interfaces;
+
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
-    using Model.Core.DataDomain;
-    using DataAccess.Core.Configuration.Interfaces;
-    using Extension.Utility;
-    using Model.BetList.ViewModel;
-    using Model.Core.DTO.Common;
-    using Model.Core.MetaModel.Product;
-    using Resources;
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
+
     using Web.ActionFilter;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     [FunctionAuthorization(PermissionKeys.BettingTicketCenter)]
     public class BettingTicketCenterController : ContentBaseController
@@ -25,10 +30,9 @@
         public BettingTicketCenterController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             IProductService productService,
             IBalanceUpDataAccess balanceUpDataAccess)
-        : base(languageService, sessionService, appSetting)
+        : base(languageService, sessionService)
         {
             _productService = productService;
             _balanceUpDataAccess = balanceUpDataAccess;

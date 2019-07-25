@@ -8,22 +8,26 @@ namespace Fanex.Athena.Controllers.BetList
 {
     #region Using
 
+    using DataAccess.Core.Configuration.Interfaces;
+
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Utility;
+    using Fanex.Athena.Web.ActionFilter;
+
+    using Model.BetList.MetaModel;
+    using Model.BetList.ViewModel;
+    using Model.Core.DataDomain;
+
+    using Resources;
+
+    using Service.Core.Common.Interfaces;
+    using Service.Core.Users.Interfaces;
+
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Model.Core.DataDomain;
-    using DataAccess.Core.Configuration.Interfaces;
-    using Extension.Utility;
-    using Fanex.Athena.Web.ActionFilter;
-    using Model.BetList.MetaModel;
-    using Model.BetList.ViewModel;
-    using Resources;
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
-    using Service.Core.Utility.Interfaces;
+
     using VendorAdapter.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Utility;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     #endregion Using
 
@@ -45,14 +49,13 @@ namespace Fanex.Athena.Controllers.BetList
         public RunningBettypesBetListController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             IProductService productService,
             IBalanceUpDataAccess balanceUpDataAccess,
             ICacheRefAdapter cacheRefAdapter,
-            IBetListApiClient betListApiClient)
-        : base(languageService, sessionService, appSetting, productService, balanceUpDataAccess, cacheRefAdapter, betListApiClient)
-        {
-        }
+            IBetListApiClient betListApiClient, ILicenseeSettingService licenseeSettingService)
+        : base(languageService, sessionService, productService, balanceUpDataAccess,
+              cacheRefAdapter, betListApiClient, licenseeSettingService)
+        { }
 
         [HttpGet]
         [FunctionAuthorization(PermissionKeys.TotalBetMixParlay)]

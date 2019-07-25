@@ -31,12 +31,14 @@ namespace Fanex.Athena.Controllers.BetSettings
         public ExchangeDcsBetSettingController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             ICoreBetSettingService coreBetSettingService,
             IProductService productService,
             IDcsBetSettingService betSettingService,
-            IExchangeCommApiService exchangeCommApiService)
-        : base(languageService, sessionService, appSetting, coreBetSettingService, productService)
+            IExchangeCommApiService exchangeCommApiService,
+             ILicenseeSettingService licenseeSettingService
+
+            )
+        : base(languageService, sessionService, coreBetSettingService, productService, licenseeSettingService)
         {
             _betSettingService = betSettingService;
             _exchangeCommApiService = exchangeCommApiService;

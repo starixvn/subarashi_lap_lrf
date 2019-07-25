@@ -33,9 +33,8 @@
         public SearchCustomerAPIController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             ISearchCustomerDataAccess searchCustomerDataAccess)
-            : base(languageService, sessionService, appSetting)
+            : base(languageService, sessionService)
         {
             _searchCustomerDataAccess = searchCustomerDataAccess;
         }

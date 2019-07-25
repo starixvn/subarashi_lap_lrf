@@ -26,19 +26,20 @@
     {
         private const int PageSizeExcel = int.MaxValue - 1000;
 
-        private readonly IAppSettings _appSettings;
+        private readonly ILicenseeSettingService _licenseeSettingService;
 
         private readonly ICustPendingFundsDataAccess _custPendingFundsDataAccess;
 
         public CustomerPendingFundsReportController(
-            IAppSettings appSettings,
             ICustPendingFundsDataAccess custPendingFundsDataAccess,
             ISessionService sessionService,
             IProductService productService,
-            ILanguageService langService)
+            ILanguageService langService,
+            ILicenseeSettingService licenseeSettingService
+            )
             : base(sessionService, productService, langService)
         {
-            _appSettings = appSettings;
+            _licenseeSettingService = licenseeSettingService;
             _custPendingFundsDataAccess = custPendingFundsDataAccess;
         }
 
@@ -81,7 +82,7 @@
                 ConvertingOption = convertingOption,
                 DataList = data.DataList,
                 TotalData = data.TotalData,
-                SystemIdVisible = !_appSettings.FakeLicenseeList.Contains(SessionService.LicenseeSession.LicenseeId)
+                SystemIdVisible = !_licenseeSettingService.IsFakeLicensee(SessionService.LicenseeSession.LicenseeName)
             };
             var custPendingFundsExcel = CreateExcel(templatePath, excelModel);
             custPendingFundsExcel.Export();

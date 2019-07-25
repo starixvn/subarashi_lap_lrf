@@ -29,10 +29,9 @@ namespace Fanex.Athena.Controllers.Forecast
         public OneXTwoForecastController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             ILeagueDataAccess leagueDataAccess,
             IForecastOneXTwoDataAccess forecastOneXTwoDataAccess)
-        : base(languageService, sessionService, appSetting)
+        : base(languageService, sessionService)
         {
             _leagueDataAccess = leagueDataAccess;
             _forecastOneXTwoDataAccess = forecastOneXTwoDataAccess;

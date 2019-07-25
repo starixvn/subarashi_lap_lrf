@@ -14,9 +14,9 @@ namespace Fanex.Athena.Controllers.Report.Result.ResultPopup
         public PPResultPopupController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
-            IBetListApiClient betListApiClient)
-            : base(languageService, sessionService, appSetting)
+            IBetListApiClient betListApiClient
+            )
+            : base(languageService, sessionService)
         {
             _betListApiClient = betListApiClient;
         }

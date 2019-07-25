@@ -28,6 +28,7 @@ namespace Fanex.Athena.Controllers
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Core.DTO.Users;
     using Fanex.Athena.Service.Core.Users.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
 
     using ONEbook.UM.Filters;
@@ -57,12 +58,12 @@ namespace Fanex.Athena.Controllers
         public AuthorizationController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             IMaintenanceService maintenanceService,
             IUserService userService,
             IAuthService authService,
-            IFormsAuthenticationService formAuthenticationService)
-            : base(languageService, sessionService, appSetting)
+            IFormsAuthenticationService formAuthenticationService
+            )
+            : base(languageService, sessionService)
 #pragma warning restore S107 // Methods should not have too many parameters
         {
             _maintenanceService = maintenanceService;

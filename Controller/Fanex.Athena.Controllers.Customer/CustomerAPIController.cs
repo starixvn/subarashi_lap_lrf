@@ -55,6 +55,7 @@ namespace Fanex.Athena.Controllers.Customer
         private readonly ILicenseeDataAccess _licenseeDataAccess;
         private readonly IProductService _productService;
         private readonly IAuthorizationService _authorizationService;
+
         #region Constructor
 
 #pragma warning disable S107 // Methods should not have too many parameters
@@ -69,9 +70,11 @@ namespace Fanex.Athena.Controllers.Customer
             IGroupComService groupComService,
             ILicenseeDataAccess licenseeDataAccess,
             IProductService productService,
-            IAuthorizationService authorizationService)
+            IAuthorizationService authorizationService,
+             ILicenseeSettingService licenseeSettingService
+            )
 #pragma warning restore S107 // Methods should not have too many parameters
-            : base(languageService, sessionService, appSetting)
+            : base(languageService, sessionService, appSetting, licenseeSettingService)
         {
             _logger = logger;
             _customerCommService = customerCommService;
@@ -137,8 +140,8 @@ namespace Fanex.Athena.Controllers.Customer
         [CustomValidateAntiForgery]
         public ActionResult UpdateSpecialLevel(int custId, int level)
         {
-            var licenseeId = SessionService.LicenseeSession.LicenseeId;
-            var isFakeLicensee = IsFakeLicensee(licenseeId);
+            var licensee = SessionService.LicenseeSession;
+            var isFakeLicensee = IsFakeLicensee(licensee.LicenseeName);
 
             if (!isFakeLicensee)
             {
@@ -147,7 +150,7 @@ namespace Fanex.Athena.Controllers.Customer
                 try
                 {
                     var dataResult = _customerListService.UpdateSpecialLevel(
-                        licenseeId,
+                        licensee.LicenseeId,
                         userSession.UserId,
                         custId,
                         level,
@@ -184,8 +187,8 @@ namespace Fanex.Athena.Controllers.Customer
         [CustomValidateAntiForgery]
         public ActionResult UpdateOddsGroup(int custId, string oddsGroup)
         {
-            var licenseeId = SessionService.LicenseeSession.LicenseeId;
-            var isFakeLicensee = IsFakeLicensee(licenseeId);
+            var licensee = SessionService.LicenseeSession;
+            var isFakeLicensee = IsFakeLicensee(licensee.LicenseeName);
 
             if (!isFakeLicensee)
             {
@@ -195,7 +198,7 @@ namespace Fanex.Athena.Controllers.Customer
                 {
                     var metaModel = new CustomerOddsGroupMetaModel
                     {
-                        LicenseeId = licenseeId,
+                        LicenseeId = licensee.LicenseeId,
                         CustId = custId,
                         Ip = Request.UserHostAddress,
                         Language = userSession.Language,

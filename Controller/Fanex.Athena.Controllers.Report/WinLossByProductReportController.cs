@@ -25,8 +25,10 @@ namespace Fanex.Athena.Controllers.Report
             ILanguageService languageService,
             ISessionService sessionService,
             IAppSettings appSetting,
-            IProductService productService)
-            : base(languageService, sessionService, appSetting, productService)
+            IProductService productService,
+             ILicenseeSettingService licenseeSettingService
+            )
+            : base(languageService, sessionService, appSetting, productService, licenseeSettingService)
         {
         }
 
@@ -61,7 +63,7 @@ namespace Fanex.Athena.Controllers.Report
                 CurrencyList = userSession.CurrencyList,
                 IsAllowedCustomerCommission = licenseeSession.IsAllowedCustomerComm,
                 ProductAccess = productAccess,
-                IsFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeId),
+                IsFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeName),
                 HasAmountDueToColumn = AppSettings.HasAmountDueToColumn
             };
 

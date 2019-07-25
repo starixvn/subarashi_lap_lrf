@@ -13,10 +13,9 @@ namespace Fanex.Athena.Module.PlayerAdmin.Controllers
     public class PlayerStatementController : CultureBaseController
     {
         public PlayerStatementController(ILanguageService languageService,
-          ISessionService sessionService,
-           IAppSettings appSetting
+          ISessionService sessionService
           )
-       : base(languageService, sessionService, appSetting)
+       : base(languageService, sessionService)
         {
 
         }

@@ -24,19 +24,20 @@
     [ApiFunctionAuthorization(PermissionKeys.ReportCustomerWinLoss)]
     public class CustomerWinLossReportController : ApiReportBaseController
     {
-        private readonly IAppSettings _appSettings;
+        private readonly ILicenseeSettingService _licenseeSettingService;
 
         private readonly ICustWinlossDataAccess _custWinlossDataAccess;
 
         public CustomerWinLossReportController(
-            IAppSettings appSettings,
             ICustWinlossDataAccess custWinlossDataAccess,
             ISessionService sessionService,
             IProductService productService,
-            ILanguageService langService)
+            ILanguageService langService,
+            ILicenseeSettingService licenseeSettingService
+            )
             : base(sessionService, productService, langService)
         {
-            _appSettings = appSettings;
+            _licenseeSettingService = licenseeSettingService;
             _custWinlossDataAccess = custWinlossDataAccess;
         }
 
@@ -97,7 +98,7 @@
                 TotalData = result.TotalData,
                 BAVisible = productAccess.IsAllowBA,
                 CustomerCommVisible = licenseeSession.IsAllowedCustomerComm,
-                SystemIdVisible = !_appSettings.FakeLicenseeList.Contains(licenseeSession.LicenseeId)
+                SystemIdVisible = !_licenseeSettingService.IsFakeLicensee(licenseeSession.LicenseeName)
             };
 
             var excel = CreateExcel(templatePath, excelModel);

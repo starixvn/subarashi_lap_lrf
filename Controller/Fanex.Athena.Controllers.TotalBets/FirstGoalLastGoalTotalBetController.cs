@@ -27,9 +27,8 @@ namespace Fanex.Athena.Controllers.TotalBets
         public FirstGoalLastGoalTotalBetController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             IFirstGoalLastGoalDataAccess firstGoalLastGoalDataAccess)
-        : base(languageService, sessionService, appSetting)
+        : base(languageService, sessionService)
         {
             _firstGoalLastGoalDataAccess = firstGoalLastGoalDataAccess;
         }
@@ -60,7 +59,7 @@ namespace Fanex.Athena.Controllers.TotalBets
             var userSession = SessionService.UserSession;
 
             metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList
-                ,metaModel.CurrencyId);
+                , metaModel.CurrencyId);
             var result = await _firstGoalLastGoalDataAccess.GetFirstGoalLastGoalDataList(metaModel).ConfigureAwait(false);
 
             var model = new FirstGoalLastGoalViewModel
@@ -72,7 +71,7 @@ namespace Fanex.Athena.Controllers.TotalBets
             };
 
             return View("~/Views/Desktop/TotalBets/FirstGoalLastGoal/Main.cshtml", model);
-            
+
 
         }
     }

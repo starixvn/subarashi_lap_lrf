@@ -11,6 +11,7 @@ namespace Fanex.Athena.Controllers.Forecast
     using System.Web.Mvc;
     using System.Web.SessionState;
     using Extension.Utility;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DTO.Common;
     using ONEbook.UM.Filters;
     using Service.Core.Common.Interfaces;
@@ -24,9 +25,17 @@ namespace Fanex.Athena.Controllers.Forecast
             ILanguageService languageService,
             ISessionService sessionService,
             IAppSettings appSetting)
-        : base(languageService, sessionService, appSetting)
+        : base(languageService, sessionService, appSetting, null)
         {
         }
+
+        protected ForecastBaseController(
+           ILanguageService languageService,
+           ISessionService sessionService)
+       : base(languageService, sessionService)
+        {
+        }
+
 
         protected static int GetLeagueId(int leagueId, IEnumerable<League> leagueList)
         {

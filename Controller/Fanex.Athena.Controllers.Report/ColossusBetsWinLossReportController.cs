@@ -6,17 +6,19 @@
 
 namespace Fanex.Athena.Controllers.Report
 {
+    using Fanex.Athena.Model.Report.MetaModel;
+    using Fanex.Athena.Model.Report.ViewModel;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Web.ActionFilter;
+
+    using Model.Core.DataDomain;
+
+    using Service.Core.Common.Interfaces;
+    using Service.Core.Users.Interfaces;
+
     using System;
     using System.Linq;
     using System.Web.Mvc;
-    using Model.Core.DataDomain;
-    using Extension.Utility;
-    using Fanex.Athena.Model.Report.MetaModel;
-    using Fanex.Athena.Model.Report.ViewModel;
-    using Fanex.Athena.Web.ActionFilter;
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     [FunctionAuthorization(PermissionKeys.ReportColossusBetsWinLoss)]
     public class ColossusBetsWinLossReportController : ReportBaseController
@@ -24,9 +26,8 @@ namespace Fanex.Athena.Controllers.Report
         public ColossusBetsWinLossReportController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             IProductService productService)
-        : base(languageService, sessionService, appSetting, productService)
+        : base(languageService, sessionService, productService)
         {
         }
 

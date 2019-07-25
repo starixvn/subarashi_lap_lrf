@@ -41,11 +41,9 @@ namespace Fanex.Athena.Controllers.Report
         public CustomerTurnoverReportController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
-            IProductService productService,
             ISportTypeDataAccess sportTypeDataAccess,
             ICustomerTurnoverService customerTurnoverService)
-            : base(languageService, sessionService, appSetting, productService)
+            : base(languageService, sessionService)
         {
             _sportTypeDataAccess = sportTypeDataAccess;
             _customerTurnoverService = customerTurnoverService;

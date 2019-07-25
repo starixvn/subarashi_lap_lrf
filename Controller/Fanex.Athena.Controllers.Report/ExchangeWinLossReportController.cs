@@ -1,6 +1,5 @@
 ﻿namespace Fanex.Athena.Controllers.Report
 {
-    using Extension.Utility;
 
     using Fanex.Athena.Model.Report.ViewModel;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -27,10 +26,8 @@
         public ExchangeWinLossReportController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
-            IProductService productService,
             IReportSettingService reportSettingService)
-        : base(languageService, sessionService, appSetting, productService)
+        : base(languageService, sessionService)
         {
             _reportSettingService = reportSettingService;
         }

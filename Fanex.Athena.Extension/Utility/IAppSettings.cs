@@ -38,8 +38,6 @@
             Justification = "Reviewed. Suppression is OK here.")]
         string ResultAmendmentAttachmentApiUrl { get; }
 
-        IEnumerable<int> FakeLicenseeList { get; }
-
         bool IsEnabledMoveBetNotification { get; }
 
         string DefaultBaseCurrency { get; }

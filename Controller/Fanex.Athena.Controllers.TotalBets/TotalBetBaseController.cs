@@ -19,10 +19,17 @@ namespace Fanex.Athena.Controllers.TotalBets
     public class TotalBetBaseController : ContentBaseController
     {
         public TotalBetBaseController(
+           ILanguageService languageService,
+           ISessionService sessionService
+           )
+       : base(languageService, sessionService)
+        {
+        }
+        public TotalBetBaseController(
             ILanguageService languageService,
             ISessionService sessionService,
             IAppSettings appSetting)
-        : base(languageService, sessionService, appSetting)
+        : base(languageService, sessionService, appSetting, null)
         {
         }
     }

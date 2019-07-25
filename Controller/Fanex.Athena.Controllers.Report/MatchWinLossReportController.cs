@@ -54,13 +54,12 @@
         public MatchWinLossReportController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             IProductService productService,
             IBalanceUpDataAccess balanceUpDataAccess,
             ICacheRefAdapter cacheRefAdapter,
             IMatchWinLossService matchWinLossService)
 #pragma warning restore S107 // Methods should not have too many parameters
-            : base(languageService, sessionService, appSetting, productService)
+            : base(languageService, sessionService, productService)
         {
             _balanceUpDataAccess = balanceUpDataAccess;
             _cacheRefAdapter = cacheRefAdapter;

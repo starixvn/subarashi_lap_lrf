@@ -27,9 +27,8 @@ namespace Fanex.Athena.Controllers.TotalBets
         public MoneyLineTotalBetController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             IMoneyLineDataAccess moneyLineDataAccess)
-        : base(languageService, sessionService, appSetting)
+        : base(languageService, sessionService)
         {
             _moneyLineDataAccess = moneyLineDataAccess;
         }

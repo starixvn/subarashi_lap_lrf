@@ -27,9 +27,8 @@ namespace Fanex.Athena.Controllers.TotalBets
         public HalfTimeFullTimeTotalBetController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             IHalfTimeFullTimeDataAccess halfTimeFullTimeDataAccess)
-        : base(languageService, sessionService, appSetting)
+        : base(languageService, sessionService)
         {
             _halfTimeFullTimeDataAccess = halfTimeFullTimeDataAccess;
         }

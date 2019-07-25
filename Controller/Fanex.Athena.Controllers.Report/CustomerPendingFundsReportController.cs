@@ -23,9 +23,10 @@ namespace Fanex.Athena.Controllers.Report
         public CustomerPendingFundsReportController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
-            IProductService productService)
-        : base(languageService, sessionService, appSetting, productService)
+            IProductService productService,
+             ILicenseeSettingService licenseeSettingService
+            )
+        : base(languageService, sessionService, productService, licenseeSettingService)
         {
         }
 
@@ -52,7 +53,7 @@ namespace Fanex.Athena.Controllers.Report
             {
                 CurrencyList = userSession.CurrencyList,
                 Param = metaModel,
-                IsFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeId)
+                IsFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeName)
             };
 
             return View("~/Views/Desktop/Report/CustomerPendingFunds/Main.cshtml", model);

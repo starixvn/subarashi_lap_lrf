@@ -42,11 +42,10 @@ namespace Fanex.Athena.Controllers.Account
         public AccountPermissionController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             IFunctionService functionService,
             IUserService userService,
             ICurrencyDataAccess currencyDataAccess)
-        : base(languageService, sessionService, appSetting)
+        : base(languageService, sessionService)
         {
             _functionService = functionService;
             _userService = userService;

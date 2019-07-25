@@ -27,12 +27,14 @@ namespace Fanex.Athena.Controllers.BetList
         public CustomerWinLossBetListController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             IProductService productService,
             IBalanceUpDataAccess balanceUpDataAccess,
             ICacheRefAdapter cacheRefAdapter,
-            IBetListApiClient betListApiClient)
-        : base(languageService, sessionService, appSetting, productService, balanceUpDataAccess, cacheRefAdapter, betListApiClient)
+            IBetListApiClient betListApiClient,
+            ILicenseeSettingService licenseeSettingService
+            )
+        : base(languageService, sessionService, productService, balanceUpDataAccess, cacheRefAdapter,
+              betListApiClient, licenseeSettingService)
         {
         }
 

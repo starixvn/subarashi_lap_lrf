@@ -77,10 +77,11 @@ namespace Fanex.Athena.Controllers.Customer
             ILicenseeDataAccess licenseeDataAccess,
             IProductService productService,
             ISubsidiaryService subsidiaryService,
-            IAuthorizationService authorizationService
+            IAuthorizationService authorizationService,
+            ILicenseeSettingService licenseeSettingService
             )
 #pragma warning restore S107 // Methods should not have too many parameters
-            : base(languageService, sessionService, appSetting)
+            : base(languageService, sessionService, appSetting, licenseeSettingService)
         {
             _customerListService = customerListService;
             _groupComService = groupComService;
@@ -95,17 +96,17 @@ namespace Fanex.Athena.Controllers.Customer
         [HttpGet]
         public async Task<ActionResult> CustomerList(string userName = "", int groupId = -1)
         {
-            var licenseeId = SessionService.LicenseeSession.LicenseeId;
+            var licensee = SessionService.LicenseeSession;
             var userSession = SessionService.UserSession;
-            var productAccess = this._productService.GetProductAccess(licenseeId, userSession.Language);
+            var productAccess = this._productService.GetProductAccess(licensee.LicenseeId, userSession.Language);
             var allowLicensees = AppSettings.LicenseeOfferStatusFunction;
-            var placeholderUsername = IsFakeLicensee(licenseeId) ? ViewResources.ExternalId : ViewResources.ExternalIdOrSystemId;
+            var placeholderUsername = IsFakeLicensee(licensee.LicenseeName) ? ViewResources.ExternalId : ViewResources.ExternalIdOrSystemId;
             var metaModel = new CustomerListMetaModel
             {
                 Username = userName == placeholderUsername ? string.Empty : userName,
                 GroupCommId = groupId,
-                LicenseeId = licenseeId,
-                IsShowStatusDropdown = allowLicensees.Contains(licenseeId),
+                LicenseeId = licensee.LicenseeId,
+                IsShowStatusDropdown = allowLicensees.Contains(licensee.LicenseeId),
                 GridColumns = InitGridColumns(productAccess.IsAllow(Product.BA), allowLicensees),
                 OddsGroups = GetOddsGroups(),
                 BaseCurrency = userSession.DefaultBaseCurrency
@@ -285,12 +286,12 @@ namespace Fanex.Athena.Controllers.Customer
 
         private void AssignMetaModelData(CustomerListMetaModel metaModel)
         {
-            var licenseeId = SessionService.LicenseeSession.LicenseeId;
-            var placeholderUsername = IsFakeLicensee(licenseeId) ?
+            var licensee = SessionService.LicenseeSession;
+            var placeholderUsername = IsFakeLicensee(licensee.LicenseeName) ?
                             ViewResources.ExternalId :
                             ViewResources.ExternalIdOrSystemId;
 
-            metaModel.LicenseeId = licenseeId;
+            metaModel.LicenseeId = licensee.LicenseeId;
             metaModel.IsShowStatusDropdown = AppSettings.LicenseeOfferStatusFunction.Contains(metaModel.LicenseeId);
             metaModel.Username = metaModel.Username == placeholderUsername ? string.Empty : metaModel.Username;
             metaModel.AgentListXml = GetAgentListXml(metaModel.SubsidiaryList, metaModel.CurrencyId);
@@ -301,7 +302,7 @@ namespace Fanex.Athena.Controllers.Customer
             var licenseeSession = SessionService.LicenseeSession;
             var userSession = SessionService.UserSession;
             var isSubsidiary = userSession.UserLevel == UserLevelType.Subsidiary;
-            IEnumerable<string> subsidiaryNames = userSession.IsManageableSubsidiary ? _subsidiaryService.GetSubsidiaryNames() : new string[] { };
+            var subsidiaryNames = userSession.IsManageableSubsidiary ? _subsidiaryService.GetSubsidiaryNames() : new string[] { };
 
             var model = new CustomerListViewModel
             {
@@ -311,7 +312,7 @@ namespace Fanex.Athena.Controllers.Customer
                 IsAllowedUserEditComm = _authorizationService.IsAllowedEditCommission(userSession),
                 IsAllowedUserChangeBA = _authorizationService.IsAllowedSpecialBA(userSession),
                 IsAllowedCustomerCommission = licenseeSession.IsAllowedCustomerComm,
-                IsFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeId),
+                IsFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeName),
                 IsSubsidiary = isSubsidiary,
                 HasSubsidiaryList = userSession.IsManageableSubsidiary,
                 SubsidiaryList = subsidiaryNames.Select(x => new CheckedItem
@@ -378,7 +379,7 @@ namespace Fanex.Athena.Controllers.Customer
         {
             var licenseeSession = SessionService.LicenseeSession;
             var isSubsidiary = SessionService.UserSession.UserLevel == UserLevelType.Subsidiary;
-            var isFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeId);
+            var isFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeName);
             var gridColumns = isFakeLicensee ? GridColumnsForFakeLincesee : GridColumns;
             var items = new List<CheckedItem>();
             foreach (var name in gridColumns)

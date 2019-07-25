@@ -26,11 +26,13 @@ namespace Fanex.Athena.Controllers.BetSettings
         public NumberGameBetSettingController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             ICoreBetSettingService coreBetSettingService,
             IProductService productService,
-            INumberGameBetSettingService betSettingService)
-        : base(languageService, sessionService, appSetting, coreBetSettingService, productService)
+            INumberGameBetSettingService betSettingService,
+             ILicenseeSettingService licenseeSettingService
+
+            )
+        : base(languageService, sessionService, coreBetSettingService, productService, licenseeSettingService)
         {
             _betSettingService = betSettingService;
         }

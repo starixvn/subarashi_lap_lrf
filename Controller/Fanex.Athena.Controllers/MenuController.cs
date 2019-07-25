@@ -28,9 +28,10 @@ namespace Fanex.Athena.Controllers
         public MenuController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
-            IFunctionService functionService)
-        : base(languageService, sessionService, appSetting)
+            IFunctionService functionService,
+            ILicenseeSettingService licenseeSettingService
+            )
+        : base(languageService, sessionService, licenseeSettingService)
         {
             _functionService = functionService;
         }
@@ -50,7 +51,7 @@ namespace Fanex.Athena.Controllers
                 IsAllowedCustonmerCommission = licenseeSession.IsAllowedCustomerComm,
                 IsInternalLogin = userSession.IsInternal,
                 IsAllowedManagementMember = canManageMember,
-                IsFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeId)
+                IsFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeName)
             };
 
             viewModel.MasterFunctions = _functionService.GetMasterFunctions(viewModel.UserFunctions);

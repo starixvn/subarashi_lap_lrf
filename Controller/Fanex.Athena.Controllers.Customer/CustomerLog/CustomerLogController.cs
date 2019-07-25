@@ -26,9 +26,8 @@ namespace Fanex.Athena.Controllers.Customer.CustomerLog
         public CustomerLogController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             IProductService productService)
-        : base(languageService, sessionService, appSetting)
+        : base(languageService, sessionService)
         {
             _productService = productService;
         }

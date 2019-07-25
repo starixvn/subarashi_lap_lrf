@@ -27,9 +27,8 @@ namespace Fanex.Athena.Controllers.TotalBets
         public TotalGoalTotalBetController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             ITotalGoalDataAccess totalGoalDataAccess)
-        : base(languageService, sessionService, appSetting)
+        : base(languageService, sessionService)
         {
             _totalGoalDataAccess = totalGoalDataAccess;
         }

@@ -6,7 +6,6 @@
 
 namespace Fanex.Athena.Controllers.Account
 {
-    using Extension.Utility;
 
     using Fanex.Athena.Model.Auth.Enum;
 
@@ -29,9 +28,10 @@ namespace Fanex.Athena.Controllers.Account
     {
         public AccountBaseController(
             ILanguageService languageService,
-            ISessionService sessionService,
-            IAppSettings appSetting)
-        : base(languageService, sessionService, appSetting)
+            ISessionService sessionService
+
+            )
+        : base(languageService, sessionService)
         {
         }
 

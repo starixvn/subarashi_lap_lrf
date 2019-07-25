@@ -1,6 +1,7 @@
 ﻿namespace Fanex.Athena.Api.Base.Attributes
 {
     using Extension.Utility;
+
     using Fanex.Athena.Api.StatelessBase.Attributes.Extensions;
     using Fanex.Athena.Model.Auth.Enum;
     using Fanex.Athena.Service.StatelessCore.Interfaces;

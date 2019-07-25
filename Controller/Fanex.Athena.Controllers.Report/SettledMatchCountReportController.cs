@@ -27,7 +27,7 @@ namespace Fanex.Athena.Controllers.Report
             IAppSettings appSetting,
             IProductService productService,
             ISettledMatchCountService settledMatchCountService)
-            : base(languageService, sessionService, appSetting, productService)
+            : base(languageService, sessionService, appSetting, productService, null)
         {
             _settledMatchCountService = settledMatchCountService;
         }

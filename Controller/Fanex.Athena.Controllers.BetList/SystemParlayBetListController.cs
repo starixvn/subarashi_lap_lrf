@@ -8,19 +8,22 @@ namespace Fanex.Athena.Controllers.BetList
 {
     #region Using
 
-    using System;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
     using DataAccess.Core.Configuration.Interfaces;
-    using Extension.Utility;
+
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
+
     using Model.BetList.MetaModel;
     using Model.BetList.ViewModel;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-    using Service.Core.Utility.Interfaces;
+
+    using System;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
+
     using VendorAdapter.Interfaces;
 
     #endregion Using
@@ -32,16 +35,17 @@ namespace Fanex.Athena.Controllers.BetList
         public SystemParlayBetListController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             IProductService productService,
             IBalanceUpDataAccess balanceUpDataAccess,
             ICacheRefAdapter cacheRefAdapter,
-            IBetListApiClient betListApiClient)
+            IBetListApiClient betListApiClient, ILicenseeSettingService licenseeSettingService)
 #pragma warning restore S107 // Methods should not have too many parameters
-        : base(languageService, sessionService, appSetting, productService, balanceUpDataAccess, cacheRefAdapter, betListApiClient)
-        {
-        }
 
+        : base(languageService, sessionService, productService, balanceUpDataAccess,
+              cacheRefAdapter, betListApiClient, licenseeSettingService)
+        {
+
+        }
         [HttpGet]
         [ValidationWebRequest]
         public async Task<ActionResult> Detail(SystemParlayDetailMetaModel metaModel)
@@ -50,7 +54,7 @@ namespace Fanex.Athena.Controllers.BetList
             metaModel.BalanceUpDay = DateTime.SpecifyKind(balanceUp.BalanceUpDay.Date, DateTimeKind.Utc);
             metaModel.MoveBetsDay = DateTime.SpecifyKind(balanceUp.MoveBetsDay.Date, DateTimeKind.Utc);
             var userSession = SessionService.UserSession;
-            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList,metaModel.CurrencyId);
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId);
 
             var data = await BetListApiClient.PostAsyncString("/SystemParlayBetList/Detail", metaModel, userSession.Language).ConfigureAwait(false);
 

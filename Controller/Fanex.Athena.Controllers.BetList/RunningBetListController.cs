@@ -6,21 +6,26 @@
 
 namespace Fanex.Athena.Controllers.BetList
 {
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-    using Model.Core.DataDomain;
     using DataAccess.Core.Configuration.Interfaces;
-    using Extension.Utility;
+
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Utility;
+
     using Model.BetList.MetaModel;
     using Model.BetList.ViewModel;
+    using Model.Core.DataDomain;
+
     using Resources;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-    using Service.Core.Utility.Interfaces;
+
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
+
     using VendorAdapter.Interfaces;
+
     using Web.ActionFilter;
-    using Fanex.Athena.Service.StatelessCore.Utility;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     /// <summary>
     /// RunningBetList contains bet list:.
@@ -37,14 +42,13 @@ namespace Fanex.Athena.Controllers.BetList
         public RunningBetListController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             IProductService productService,
             IBalanceUpDataAccess balanceUpDataAccess,
             ICacheRefAdapter cacheRefAdapter,
-            IBetListApiClient betListApiClient)
-        : base(languageService, sessionService, appSetting, productService, balanceUpDataAccess, cacheRefAdapter, betListApiClient)
-        {
-        }
+            IBetListApiClient betListApiClient, ILicenseeSettingService licenseeSettingService)
+        : base(languageService, sessionService, productService, balanceUpDataAccess,
+              cacheRefAdapter, betListApiClient, licenseeSettingService)
+        { }
 
         [HttpGet]
         [FunctionAuthorization(PermissionKeys.TotalBetCleanSheet)]

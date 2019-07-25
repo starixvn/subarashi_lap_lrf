@@ -22,16 +22,12 @@ namespace Fanex.Athena.Controllers
     [CheckUMFilter]
     public class HomeController : CultureBaseController
     {
-        private readonly ILicenseeSettingService _licenseeSettingService;
-
         public HomeController(
             ILanguageService languageService,
-            ISessionService sessionService,
-            IAppSettings appSetting,
-            ILicenseeSettingService licenseeSettingService)
-        : base(languageService, sessionService, appSetting)
+            ISessionService sessionService
+           )
+        : base(languageService, sessionService)
         {
-            _licenseeSettingService = licenseeSettingService;
         }
 
         [AuthorizeRestriction(AppMode.Self)]
@@ -78,7 +74,7 @@ namespace Fanex.Athena.Controllers
             ViewBag.IsInternal = userSession.IsInternal ? "1" : "0";
             ViewBag.HasRecheckIn = AppSettings.LocalTest ? "0" : "1";
             ViewBag.IsEnabledMoveBetNotification = AppSettings.IsEnabledMoveBetNotification
-                && !_licenseeSettingService.IsFakeLicensee(SessionService.LicenseeSession?.LicenseeName);
+                && !IsFakeLicensee(SessionService.LicenseeSession?.LicenseeName);
         }
     }
 }

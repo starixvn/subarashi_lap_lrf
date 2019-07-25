@@ -27,10 +27,10 @@ namespace Fanex.Athena.Controllers.Report
         public CustomerWinLossReportController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             IProductService productService,
-            IReportSettingService reportSettingService)
-            : base(languageService, sessionService, appSetting, productService)
+            IReportSettingService reportSettingService
+            )
+            : base(languageService, sessionService, productService)
         {
             _reportSettingService = reportSettingService;
         }
@@ -76,7 +76,7 @@ namespace Fanex.Athena.Controllers.Report
                 Param = metaModel,
                 IsHistory = isHistory,
                 ProductAccess = productAccess,
-                IsFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeId),
+                IsFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeName),
                 MinDate = reportSetting.MinDate,
                 MaxDate = reportSetting.MaxDate
             };

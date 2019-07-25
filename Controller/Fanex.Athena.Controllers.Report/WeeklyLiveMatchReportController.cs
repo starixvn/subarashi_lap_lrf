@@ -20,10 +20,8 @@ namespace Fanex.Athena.Controllers.Report
     {
         public WeeklyLiveMatchReportController(
             ILanguageService languageService,
-            ISessionService sessionService,
-            IAppSettings appSetting,
-            IProductService productService)
-        : base(languageService, sessionService, appSetting, productService)
+            ISessionService sessionService)
+        : base(languageService, sessionService)
         {
         }
 

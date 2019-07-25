@@ -35,22 +35,25 @@ namespace Fanex.Athena.Api.Report
     [ApiFunctionAuthorization(PermissionKeys.ReportWinLossByProduct)]
     public class WinLossByProductReportController : ApiReportBaseController
     {
-        private readonly IAppSettings _appSettings;
-
+        private readonly ILicenseeSettingService _licenseeSettingService;
         private readonly IWinLossByProductDataAccess _winlossByProductDataAccess;
         private readonly ICurrencyValidation _currencyValidation;
+        private readonly IAppSettings _appSettings;
         public WinLossByProductReportController(
             ISessionService sessionService,
             IProductService productService,
-            IAppSettings appSettings,
             ILanguageService langService,
             IWinLossByProductDataAccess winlossByProductDataAccess,
-             ICurrencyValidation currencyValidation)
+            ICurrencyValidation currencyValidation,
+            ILicenseeSettingService licenseeSettingService,
+            IAppSettings appSettings
+             )
             : base(sessionService, productService, langService)
         {
-            _appSettings = appSettings;
+            _licenseeSettingService = licenseeSettingService;
             _winlossByProductDataAccess = winlossByProductDataAccess;
             _currencyValidation = currencyValidation;
+            _appSettings = appSettings;
         }
 
         [HttpPost]
@@ -196,7 +199,7 @@ namespace Fanex.Athena.Api.Report
                 TotalData = resultModel.TotalData,
                 CustomerCommVisible = licenseeSession.IsAllowedCustomerComm,
                 BAVisible = productAccess.IsAllowBA,
-                SystemIdVisible = !_appSettings.FakeLicenseeList.Contains(licenseeSession.LicenseeId),
+                SystemIdVisible = !_licenseeSettingService.IsFakeLicensee(licenseeSession.LicenseeName),
                 HasAmountDueToColumn = _appSettings.HasAmountDueToColumn
             };
 
@@ -290,7 +293,7 @@ namespace Fanex.Athena.Api.Report
 
         private string ValidateUserName(string userName)
         {
-            var placeholderUsername = _appSettings.FakeLicenseeList.Contains(SessionService.LicenseeSession.LicenseeId) ?
+            var placeholderUsername = _licenseeSettingService.IsFakeLicensee(SessionService.LicenseeSession.LicenseeName) ?
                             ViewResources.ExternalId :
                             ViewResources.ExternalIdOrSystemId;
             return !string.IsNullOrWhiteSpace(userName)

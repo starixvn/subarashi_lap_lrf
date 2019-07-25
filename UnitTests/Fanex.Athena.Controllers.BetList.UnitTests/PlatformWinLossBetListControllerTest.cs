@@ -12,6 +12,7 @@
 
     public class PlatformWinLossBetListControllerTest : BetListBaseControllerHelperTest
     {
+
         [OneTimeSetUp]
         public override void FixtureSetUp()
         {
@@ -89,8 +90,7 @@
                     PlatformType = platform
                 };
 
-                var fakeLicensees = isFakeLic ? new[] { DefaultLicenseeSession.LicenseeId } : Enumerable.Empty<int>();
-                AppSettings.FakeLicenseeList.Returns(fakeLicensees);
+                LicenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(isFakeLic);
 
                 var expectedTitle = $"{ViewResources.Customer} {ViewResources.BetList} - 1/1/2018 --> 2/2/2018 - External{(isFakeLic ? "" : "(System)")}"
                     + $" - {ViewResources.Platform}: {ViewResources.ResourceManager.GetString(platformName)} - {string.Format(ViewResources.Viewin, expectedCurrency)}";

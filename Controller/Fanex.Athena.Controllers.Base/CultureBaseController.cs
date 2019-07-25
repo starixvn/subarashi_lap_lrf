@@ -8,10 +8,11 @@ namespace Fanex.Athena.Controllers
 {
     using System.Linq;
     using System.Web.Mvc;
-
+    using Autofac.Integration.Mvc;
     using Extension.Utility;
 
     using Fanex.Athena.Service.Core.Common.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
 
     using Service.Core.Users.Interfaces;
@@ -26,16 +27,37 @@ namespace Fanex.Athena.Controllers
 
         private readonly ISessionService _sessionService;
 
-        private readonly IAppSettings _appSettings;
+        private IAppSettings _appSettings;
+
+        private ILicenseeSettingService _licenseeSettingService;
+
+        protected CultureBaseController(
+           ILanguageService languageService,
+           ISessionService sessionService
+           ) : this(languageService, sessionService, null, null)
+        {
+        }
+
+        protected CultureBaseController(
+          ILanguageService languageService,
+          ISessionService sessionService,
+          ILicenseeSettingService licenseeSettingService
+          ) : this(languageService, sessionService, null, licenseeSettingService)
+        {
+
+        }
 
         protected CultureBaseController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSettings)
+            IAppSettings appSettings,
+            ILicenseeSettingService licenseeSettingService
+            )
         {
-            _langService = languageService;
-            _sessionService = sessionService;
+            _langService = languageService ?? AutofacDependencyResolver.Current.GetService<ILanguageService>();
+            _sessionService = sessionService ?? AutofacDependencyResolver.Current.GetService<ISessionService>();
             _appSettings = appSettings;
+            _licenseeSettingService = licenseeSettingService;
         }
 
         public ILanguageService LangService
@@ -50,9 +72,31 @@ namespace Fanex.Athena.Controllers
 
         public IAppSettings AppSettings
         {
-            get { return _appSettings; }
+            get
+            {
+                if (_appSettings == null)
+                {
+                    _appSettings = AutofacDependencyResolver.Current.GetService<IAppSettings>();
+                }
+                return _appSettings;
+            }
         }
 
+        public ILicenseeSettingService LicenseeSettingService
+        {
+            get
+            {
+                if (_licenseeSettingService == null)
+                {
+                    _licenseeSettingService = AutofacDependencyResolver.Current.GetService<ILicenseeSettingService>();
+                }
+                return _licenseeSettingService;
+            }
+        }
+        public bool IsFakeLicensee(string licenseeName)
+        {
+            return LicenseeSettingService.IsFakeLicensee(licenseeName);
+        }
         protected override void Initialize(System.Web.Routing.RequestContext requestContext)
         {
             base.Initialize(requestContext);
@@ -60,9 +104,5 @@ namespace Fanex.Athena.Controllers
             LangService.SetPageCulture(currentLanguage);
         }
 
-        protected bool IsFakeLicensee(int licenseeId)
-        {
-            return AppSettings.FakeLicenseeList.Contains(licenseeId);
-        }
     }
 }

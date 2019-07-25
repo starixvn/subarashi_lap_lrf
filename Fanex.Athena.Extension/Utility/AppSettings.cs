@@ -96,11 +96,6 @@ namespace Fanex.Athena.Extension.Utility
             get { return GetValue(nameof(ResultAmendmentAttachmentApiUrl)); }
         }
 
-        public IEnumerable<int> FakeLicenseeList
-        {
-            get { return GetValue("FakeLicenseeList").Split(',').Select(n => Convert.ToInt32(n)); }
-        }
-
         public bool IsEnabledMoveBetNotification
         {
             get { return int.Parse(GetValue("IsEnabledMoveBetNotification")) != 0; }

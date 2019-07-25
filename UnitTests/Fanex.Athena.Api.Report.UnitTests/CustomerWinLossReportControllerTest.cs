@@ -11,6 +11,7 @@
     using Extension.Utility;
     using Fanex.Athena.DataAccess.Report.Interfaces;
     using Fanex.Athena.Resources;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DTO.Common;
     using Model.Core.MetaModel.Product;
     using Model.Core.ResultModel;
@@ -24,6 +25,7 @@
     {
         private ICustWinlossDataAccess _dataAccess;
         private CustomerWinLossReportController _controller;
+        private ILicenseeSettingService _licenseeSettingService;
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
@@ -32,7 +34,9 @@
 
             _dataAccess = Substitute.For<ICustWinlossDataAccess>();
 
-            _controller = Substitute.ForPartsOf<CustomerWinLossReportController>(AppSetting, _dataAccess, SessionService, ProductService, LangService);
+            _licenseeSettingService = Substitute.For<ILicenseeSettingService>();
+
+            _controller = Substitute.ForPartsOf<CustomerWinLossReportController>(_dataAccess, SessionService, ProductService, LangService, _licenseeSettingService);
 
             _controller.When(x => x.ExcelStream(Arg.Any<IWorkbook>(), Arg.Any<string>())).DoNotCallBase();
 
@@ -46,8 +50,10 @@
 
             _controller = null;
             _dataAccess = null;
+            _licenseeSettingService = null;
+
         }
-     
+
         [TestCase("", "")]
         [TestCase(nameof(CustomerWinLoss.CustId), "asc")]
         public async Task Index_ValidModel_GetDataFromDataAccess(string sortColumn, string sortDirection)
@@ -73,7 +79,7 @@
             var expectedDataList = SetUpForGettingData(metaModel);
 
             StubSingleWalletProductAccess(new[] { Product.BA });
-            AppSetting.FakeLicenseeList.Returns(x => isFakeLicensee ? new int[1] { SessionLicenseeId } : new int[0]);
+            _licenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(isFakeLicensee);
 
             var excel = Substitute.ForPartsOf<CustomerWinLossExcel>(
                 Arg.Any<string>(),

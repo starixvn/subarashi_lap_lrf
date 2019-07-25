@@ -28,10 +28,9 @@
         public CasinoTurnoverController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             IProductService productService,
             IReportSettingService reportSettingService)
-        : base(languageService, sessionService, appSetting, productService)
+        : base(languageService, sessionService, productService)
         {
             _reportSettingService = reportSettingService;
         }

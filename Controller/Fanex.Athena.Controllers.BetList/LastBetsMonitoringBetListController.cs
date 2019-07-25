@@ -36,9 +36,8 @@ namespace Fanex.Athena.Controllers.BetList
         public LastBetsMonitoringBetListController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             ISportTypeDataAccess sportTypeDataAccess)
-        : base(languageService, sessionService, appSetting)
+        : base(languageService, sessionService)
         {
             _sportTypeDataAccess = sportTypeDataAccess;
         }

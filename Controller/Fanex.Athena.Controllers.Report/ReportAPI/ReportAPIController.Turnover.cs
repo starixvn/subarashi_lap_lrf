@@ -23,12 +23,11 @@ namespace Fanex.Athena.Controllers.Report
         [ValidationWebRequest]
         public async Task<ActionResult> Turnover(TurnoverMetaModel metaModel)
         {
-            var placeholderUsername = _appSettings.FakeLicenseeList.Contains(
-                SessionService.LicenseeSession.LicenseeId) ?
+            var placeholderUsername = IsFakeLicensee(SessionService.LicenseeSession.LicenseeName) ?
                 ViewResources.ExternalId :
                 ViewResources.ExternalIdOrSystemId;
             var userSession = SessionService.UserSession;
-            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList,metaModel.CurrencyId, metaModel.IsExcludeTest);
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId, metaModel.IsExcludeTest);
 
             metaModel.Username = string.IsNullOrWhiteSpace(metaModel.Username) ||
                 metaModel.Username.Trim() == placeholderUsername ? null : metaModel.Username;

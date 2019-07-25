@@ -151,8 +151,7 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                var fakeLicenseeList = new[] { SessionService.LicenseeSession.LicenseeId };
-                AppSettings.FakeLicenseeList.Returns(fakeLicenseeList);
+                LicenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(true);
 
                 // Action
                 var result = controller.UpdateSpecialLevel(0, 0) as JsonResult;

@@ -1,8 +1,9 @@
 ﻿using Fanex.Athena.Controllers;
-using Fanex.Athena.Extension.Utility;
 using Fanex.Athena.Service.Core.Common.Interfaces;
 using Fanex.Athena.Service.Core.Users.Interfaces;
+
 using ONEbook.UM.Filters;
+
 using System.Web.Mvc;
 using System.Web.SessionState;
 
@@ -14,10 +15,9 @@ namespace Fanex.Athena.Module.PlayerAdmin.Controllers
     public class PlayerRunningBetlistController: CultureBaseController
     {
         public PlayerRunningBetlistController(ILanguageService languageService,
-         ISessionService sessionService,
-          IAppSettings appSetting
+         ISessionService sessionService
          )
-      : base(languageService, sessionService, appSetting)
+      : base(languageService, sessionService)
         {
 
         }

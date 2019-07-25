@@ -45,11 +45,12 @@ namespace Fanex.Athena.Controllers.Report
         public LiveReportController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             IProductService productService,
             IBalanceUpDataAccess balanceUpDataAccess,
-            ILiveReportService liveReportService)
-            : base(languageService, sessionService, appSetting, productService)
+            ILiveReportService liveReportService,
+             ILicenseeSettingService licenseeSettingService
+            )
+            : base(languageService, sessionService, productService, licenseeSettingService)
         {
             _balanceUpDataAccess = balanceUpDataAccess;
             _liveReportService = liveReportService;
@@ -76,7 +77,7 @@ namespace Fanex.Athena.Controllers.Report
             var productAccess = GetProductAccess(licenseeSession.LicenseeId, userSession.Language);
 
             var model = CreateViewModel(
-                licenseeSession.LicenseeId,
+                licenseeSession.LicenseeName,
                 licenseeSession.IsAllowedCustomerComm,
                 userSession.CurrencyList,
                 metaModel,
@@ -94,13 +95,13 @@ namespace Fanex.Athena.Controllers.Report
             var userSession = SessionService.UserSession;
             metaModel.LicenseeId = licenseeSession.LicenseeId;
             metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList
-                ,metaModel.CurrencyId);
+                , metaModel.CurrencyId);
 
             var productAccess = GetProductAccess(metaModel.LicenseeId, userSession.Language);
             metaModel.ProductCodeList = string.Join(",", productAccess.ProductList.Select(x => x.ProductCode));
 
             var model = CreateViewModel(
-                licenseeSession.LicenseeId,
+                licenseeSession.LicenseeName,
                 licenseeSession.IsAllowedCustomerComm,
                 userSession.CurrencyList,
                 metaModel,
@@ -119,7 +120,7 @@ namespace Fanex.Athena.Controllers.Report
             var licenseeSession = SessionService.LicenseeSession;
             var userSession = SessionService.UserSession;
             metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList
-                ,metaModel.CurrencyId);
+                , metaModel.CurrencyId);
 
             var productAccess = GetProductAccess(licenseeSession.LicenseeId, userSession.Language);
             var dataList = await _liveReportService.GetLiveReportWinLossByMatch(metaModel).ConfigureAwait(false);
@@ -147,7 +148,7 @@ namespace Fanex.Athena.Controllers.Report
             metaModel.LicenseeId = licenseeSession.LicenseeId;
 
             metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList
-                ,metaModel.CurrencyId);
+                , metaModel.CurrencyId);
 
             var productAccess = GetProductAccess(licenseeSession.LicenseeId, userSession.Language);
             var balanceUpDay = _balanceUpDataAccess.GetBalanceUp().BalanceUpDay;
@@ -169,7 +170,7 @@ namespace Fanex.Athena.Controllers.Report
         }
 
         private LiveReportViewModel CreateViewModel(
-            int licenseeId,
+            string licenseeName,
             bool isAllowedCustomerComm,
             IDictionary<int, string> currencyList,
             LiveReportMetaModel metaModel,
@@ -184,7 +185,7 @@ namespace Fanex.Athena.Controllers.Report
                 BalanceUpDate = GetBalanceUpDay(),
                 IsAllowedCustomerCommission = isAllowedCustomerComm,
                 ProductAccess = productAccess,
-                IsFakeLicensee = IsFakeLicensee(licenseeId),
+                IsFakeLicensee = IsFakeLicensee(licenseeName),
                 HasAmountDueToColumn = AppSettings.HasAmountDueToColumn
             };
         }

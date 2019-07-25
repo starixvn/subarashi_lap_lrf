@@ -41,8 +41,9 @@ namespace Fanex.Athena.Controllers.Report
             IProductService productService,
             ISportTypeDataAccess sportTypeDataAccess,
             ILeagueDataAccess leagueDataAccess,
-            IMatchService matchService)
-            : base(languageService, sessionService, appSetting, productService)
+            IMatchService matchService
+            )
+            : base(languageService, sessionService, appSetting, productService, null)
 #pragma warning restore S107 // Methods should not have too many parameters
         {
             _sportTypeDataAccess = sportTypeDataAccess;
@@ -111,7 +112,7 @@ namespace Fanex.Athena.Controllers.Report
             metaModel.UserId = userSession.UserId;
 
             metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList
-                ,metaModel.CurrencyId);
+                , metaModel.CurrencyId);
             var leagues = (await _leagueDataAccess.GetLeaguesBySport(metaModel).ConfigureAwait(false))
                             .Select(x => new { Key = x.LeagueId, Value = x.LeagueName });
             return Json(leagues);

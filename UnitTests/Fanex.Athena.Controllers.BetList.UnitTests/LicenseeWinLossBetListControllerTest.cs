@@ -80,8 +80,8 @@
                     SystemId = "System",
                     ExcelFileName = fileName,
                 };
-                var fakeLicensees = isFakeLic ? new[] { DefaultLicenseeSession.LicenseeId } : Enumerable.Empty<int>();
-                AppSettings.FakeLicenseeList.Returns(fakeLicensees);
+
+                LicenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(isFakeLic);
 
                 var expectedTitle = $"{ViewResources.Customer} {ViewResources.BetList} - 11/1/2018 --> 12/2/2018 - "
                     + $"External{(isFakeLic ? "" : "(System)")} - {string.Format(ViewResources.Viewin, expCurrency)}";

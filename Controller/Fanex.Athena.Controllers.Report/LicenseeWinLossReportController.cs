@@ -35,10 +35,11 @@ namespace Fanex.Athena.Controllers.Report
         public LicenseeWinLossReportController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             IProductService productService,
-            IReportSettingService reportSettingService)
-        : base(languageService, sessionService, appSetting, productService)
+            IReportSettingService reportSettingService,
+            ILicenseeSettingService licenseeSettingService
+            )
+        : base(languageService, sessionService, productService, licenseeSettingService)
         {
             _reportSettingService = reportSettingService;
         }
@@ -46,7 +47,7 @@ namespace Fanex.Athena.Controllers.Report
         [HttpGet]
         public ActionResult Index()
         {
-            if (IsFakeLicensee(SessionService.LicenseeSession.LicenseeId))
+            if (IsFakeLicensee(SessionService.LicenseeSession.LicenseeName))
             {
                 return MapToFakeView();
             }

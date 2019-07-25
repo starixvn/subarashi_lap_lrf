@@ -23,9 +23,8 @@ namespace Fanex.Athena.Controllers.Account
         public AccountController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSettings,
             IUserService userService)
-        : base(languageService, sessionService, appSettings)
+        : base(languageService, sessionService)
         {
             _userService = userService;
         }

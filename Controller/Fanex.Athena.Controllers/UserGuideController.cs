@@ -45,11 +45,12 @@ namespace Fanex.Athena.Controllers
         public UserGuideController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSettings,
             IFileSystem fileSystem,
             IProductService productService,
-            IBalanceUpDataAccess balanceUpDataAccess)
-        : base(languageService, sessionService, appSettings)
+            IBalanceUpDataAccess balanceUpDataAccess,
+            ILicenseeSettingService licenseeSettingService
+            )
+        : base(languageService, sessionService)
         {
             _sessionService = sessionService;
             _productService = productService;

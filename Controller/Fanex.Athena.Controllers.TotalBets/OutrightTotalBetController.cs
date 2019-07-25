@@ -26,9 +26,8 @@ namespace Fanex.Athena.Controllers.TotalBets
         public OutrightTotalBetController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             IOutrightDataAccess outrightDataAccess)
-        : base(languageService, sessionService, appSetting)
+        : base(languageService, sessionService)
         {
             _outrightDataAccess = outrightDataAccess;
         }

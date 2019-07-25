@@ -41,18 +41,20 @@
 
         private readonly IBetListApiClient _betListApiClient;
 
+
 #pragma warning disable S107 // Methods should not have too many parameters
 
         public BetListBaseController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             IProductService productService,
             IBalanceUpDataAccess balanceUpDataAccess,
             ICacheRefAdapter cacheRefAdapter,
-            IBetListApiClient betListApiClient)
+            IBetListApiClient betListApiClient,
+            ILicenseeSettingService licenseeSettingService
+            )
 #pragma warning restore S107 // Methods should not have too many parameters
-        : base(languageService, sessionService, appSetting)
+        : base(languageService, sessionService, licenseeSettingService)
         {
             _productService = productService;
             _balanceUpDataAccess = balanceUpDataAccess;
@@ -134,9 +136,9 @@
             defaultMetaModel.FromDate = DateTime.SpecifyKind(defaultMetaModel.FromDate.Date, DateTimeKind.Unspecified);
             defaultMetaModel.ToDate = DateTime.SpecifyKind(defaultMetaModel.ToDate.Date, DateTimeKind.Unspecified);
             defaultMetaModel.Date = DateTime.SpecifyKind(defaultMetaModel.Date.Date, DateTimeKind.Unspecified);
-            defaultMetaModel.IsFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeId);
+            defaultMetaModel.IsFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeName);
             defaultMetaModel.CurrencyList = UserCurrencyList;
-            defaultMetaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, 
+            defaultMetaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList,
                 defaultMetaModel.CurrencyId);
 
             var balanceUp = GetBalanceUp();

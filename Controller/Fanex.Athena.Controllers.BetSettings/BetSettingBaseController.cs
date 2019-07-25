@@ -9,7 +9,7 @@ namespace Fanex.Athena.Controllers.BetSettings
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using System.Web.SessionState;
-
+    using Autofac.Integration.Mvc;
     using Extension.Utility;
 
     using Fanex.Athena.Model.Auth;
@@ -43,13 +43,14 @@ namespace Fanex.Athena.Controllers.BetSettings
         protected BetSettingBaseController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             ICoreBetSettingService coreBetSettingService,
-            IProductService productService)
-        : base(languageService, sessionService, appSetting)
+            IProductService productService,
+            ILicenseeSettingService licenseeSettingService)
+        : base(languageService, sessionService, licenseeSettingService)
         {
-            _coreBetSettingService = coreBetSettingService;
-            _productService = productService;
+            _coreBetSettingService = coreBetSettingService ?? AutofacDependencyResolver.Current.GetService<ICoreBetSettingService>();
+            _productService = productService ?? AutofacDependencyResolver.Current.GetService<IProductService>();
+
         }
 
         protected ProductAccess GetProductAccess()
@@ -71,12 +72,13 @@ namespace Fanex.Athena.Controllers.BetSettings
 
         protected async Task AssignRequiredProperties(BetSettingBaseViewModel viewModel, BetSettingMetaModel metaModel)
         {
-            var licenseeId = SessionService.LicenseeSession.LicenseeId;
+            var licensee = SessionService.LicenseeSession;
 
-            metaModel.IsFakeLicensee = IsFakeLicensee(licenseeId);
+            metaModel.IsFakeLicensee = IsFakeLicensee(licensee.LicenseeName);
             viewModel.Param = metaModel;
             viewModel.Editable = IsBetSettingEditable(SessionService.UserSession);
-            viewModel.BetSettingProducts = await _coreBetSettingService.GetBetSettingProductsAsync(metaModel.CustId, licenseeId).ConfigureAwait(false);
+            viewModel.BetSettingProducts =
+                await _coreBetSettingService.GetBetSettingProductsAsync(metaModel.CustId, licensee.LicenseeId).ConfigureAwait(false);
         }
 
         protected CommonBetSetting GetBetSettingCommonParam(int userId, int licenseeId, string language)

@@ -21,10 +21,9 @@
         public SubsidiaryPerformanceReportController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             IProductService productService,
             ISubsidiaryService subsidiaryService)
-            : base(languageService, sessionService, appSetting, productService)
+            : base(languageService, sessionService, productService)
         {
             _subsidiaryService = subsidiaryService;
         }

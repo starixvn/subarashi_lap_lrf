@@ -16,9 +16,8 @@ namespace Fanex.Athena.Controllers.Report
         public LicenseeWinLossByTimeZoneReportController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             IProductService productService)
-            : base(languageService, sessionService, appSetting, productService)
+            : base(languageService, sessionService, productService)
         {
         }
 

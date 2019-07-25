@@ -6,6 +6,7 @@
 
     using Extension.Utility;
     using Fanex.Athena.Model.Auth.Enum;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
 
@@ -21,9 +22,8 @@
         public LicenseeListController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSettings,
             ILicenseeDataAccess licenseeDataAccess)
-        : base(languageService, sessionService, appSettings)
+        : base(languageService, sessionService)
         {
             _sessionService = sessionService;
             _licenseeDataAccess = licenseeDataAccess;

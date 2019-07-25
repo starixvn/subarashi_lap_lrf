@@ -6,18 +6,23 @@
 
 namespace Fanex.Athena.Controllers.BetList
 {
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
     using DataAccess.Core.Configuration.Interfaces;
-    using Extension.Utility;
+
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Model.BetList.MetaModel;
+
     using Resources;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-    using Service.Core.Utility.Interfaces;
+
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
+
     using VendorAdapter.Interfaces;
+
     using Web.ActionFilter;
 
     [FunctionAuthorization(PermissionKeys.ReportWinLossByLeague)]
@@ -28,14 +33,14 @@ namespace Fanex.Athena.Controllers.BetList
         public WinlossByLeagueBetListController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             IProductService productService,
             IBalanceUpDataAccess balanceUpDataAccess,
             ICacheRefAdapter cacheRefAdapter,
-            IBetListApiClient betListApiClient)
-        : base(languageService, sessionService, appSetting, productService, balanceUpDataAccess, cacheRefAdapter, betListApiClient)
-        {
-        }
+            IBetListApiClient betListApiClient
+, ILicenseeSettingService licenseeSettingService)
+        : base(languageService, sessionService, productService, balanceUpDataAccess,
+              cacheRefAdapter, betListApiClient, licenseeSettingService)
+        { }
 
         [HttpGet]
         [ValidationWebRequest(IsValidCurrency = true)]

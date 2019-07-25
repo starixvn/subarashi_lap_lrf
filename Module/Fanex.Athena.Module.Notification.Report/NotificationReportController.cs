@@ -33,10 +33,9 @@
         public NotificationReportController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
              INotificationService notificationService
             )
-        : base(languageService, sessionService, appSetting)
+        : base(languageService, sessionService)
         {
             _notificationService = notificationService;
         }

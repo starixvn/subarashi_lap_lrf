@@ -41,8 +41,9 @@ namespace Fanex.Athena.Controllers.Report
             ISessionService sessionService,
             IAppSettings appSetting,
             IProductService productService,
-            ITurnoverService turnoverService)
-            : base(languageService, sessionService, appSetting, productService)
+            ITurnoverService turnoverService,
+             ILicenseeSettingService licenseeSettingService)
+            : base(languageService, sessionService, appSetting, productService, licenseeSettingService)
         {
             _turnoverService = turnoverService;
         }
@@ -72,7 +73,7 @@ namespace Fanex.Athena.Controllers.Report
                 IsAllowedCustomerCommission = licenseeSession.IsAllowedCustomerComm,
                 CurrencyList = GetCurrenciesForTurnoverReport(licenseeSession.LicenseeId),
                 IsAllowedCasinoTransfer = AppSettings.LicenseeAllowCasinoTransfer.Contains(licenseeSession.LicenseeId),
-                IsFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeId)
+                IsFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeName)
             };
 
             return View("~/Views/Desktop/Report/Turnover/Main.cshtml", model);
@@ -86,11 +87,11 @@ namespace Fanex.Athena.Controllers.Report
             var licenseeSession = SessionService.LicenseeSession;
             var userSession = SessionService.UserSession;
 
-            var placeholderUsername = IsFakeLicensee(licenseeSession.LicenseeId) ? ViewResources.ExternalId : ViewResources.ExternalIdOrSystemId;
+            var placeholderUsername = IsFakeLicensee(licenseeSession.LicenseeName) ? ViewResources.ExternalId : ViewResources.ExternalIdOrSystemId;
             metaModel.Username = string.IsNullOrWhiteSpace(metaModel.Username) ||
                 metaModel.Username.Trim() == placeholderUsername ? null : metaModel.Username;
             metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList
-                ,metaModel.CurrencyId, metaModel.IsExcludeTest);
+                , metaModel.CurrencyId, metaModel.IsExcludeTest);
 
             var dataList = await _turnoverService.GetDataList(metaModel);
 

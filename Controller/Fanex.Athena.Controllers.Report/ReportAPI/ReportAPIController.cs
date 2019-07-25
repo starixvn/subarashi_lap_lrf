@@ -15,24 +15,27 @@ namespace Fanex.Athena.Controllers.Report
     {
         private readonly IBetTypeService _betTypeService;
 
-        private readonly IAppSettings _appSettings;
-
         private readonly ICustomerTurnoverService _customerTurnoverService;
 
         private readonly ITurnoverService _turnoverService;
-
+        private ILicenseeSettingService _licenseeSettingService;
         public ReportAPIController(
             ISessionService sessionService,
-            IAppSettings appSettings,
             IBetTypeService betTypeService,
             ICustomerTurnoverService customerTurnoverService,
-            ITurnoverService turnoverService)
+            ITurnoverService turnoverService,
+            ILicenseeSettingService licenseeSettingService)
             : base(sessionService)
         {
             _betTypeService = betTypeService;
-            _appSettings = appSettings;
             _customerTurnoverService = customerTurnoverService;
             _turnoverService = turnoverService;
+            _licenseeSettingService = licenseeSettingService;
+        }
+
+        private bool IsFakeLicensee(string siteName)
+        {
+            return _licenseeSettingService.IsFakeLicensee(siteName);
         }
     }
 }

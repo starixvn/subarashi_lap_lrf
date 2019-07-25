@@ -22,11 +22,10 @@
         public ResultKenoReportController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             IProductService productService,
             ILogger logger,
             IBetListApiClient betListApiClient)
-            : base(languageService, sessionService, appSetting, productService)
+            : base(languageService, sessionService, null, productService, null)
         {
             _logger = logger;
             _betListApiClient = betListApiClient;

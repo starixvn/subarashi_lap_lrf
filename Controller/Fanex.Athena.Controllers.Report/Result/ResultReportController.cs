@@ -1,15 +1,7 @@
 namespace Fanex.Athena.Controllers.Report.Result
 {
-    using System;
-    using System.Linq;
-    using System.Net;
-    using System.Threading.Tasks;
-    using System.Web;
-    using System.Web.Mvc;
-
     using DataAccess.Core.Configuration.Interfaces;
 
-    using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
@@ -20,6 +12,13 @@ namespace Fanex.Athena.Controllers.Report.Result
 
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
+
+    using System;
+    using System.Linq;
+    using System.Net;
+    using System.Threading.Tasks;
+    using System.Web;
+    using System.Web.Mvc;
 
     public class ResultReportController : ReportBaseController
     {
@@ -34,11 +33,10 @@ namespace Fanex.Athena.Controllers.Report.Result
         public ResultReportController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             IProductService productService,
             IBalanceUpDataAccess balanceUpDataAccess,
             IBetListApiClient betListApiClient)
-            : base(languageService, sessionService, appSetting, productService)
+            : base(languageService, sessionService, productService)
         {
             _balanceUpDataAccess = balanceUpDataAccess;
             _betListApiClient = betListApiClient;

@@ -6,6 +6,7 @@ using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.Services.Interfaces;
 using Fanex.Athena.Module.PlayerAdmin.Api.Utilities;
 using Fanex.Athena.Resources;
+using Fanex.Athena.Service.StatelessCore.Interfaces;
 using Fanex.Logging;
 using System;
 using System.Linq;
@@ -17,16 +18,16 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api
     {
         private readonly IPlayerOddsGroupService _playerOddsGroupService;
         private readonly ILogger _logger;
-        private readonly IAppSettings _appSetting;
+        private readonly ILicenseeSettingService _licenseeSettingService;
 
         public PlayerOddsGroupController(
             IPlayerOddsGroupService playerOddsGroupService,
             ILogger logger,
-            IAppSettings appSetting)
+             ILicenseeSettingService licenseeSettingService)
         {
             _playerOddsGroupService = playerOddsGroupService;
             _logger = logger;
-            _appSetting = appSetting;
+            _licenseeSettingService = licenseeSettingService;
         }
 
         [HttpPost]
@@ -34,9 +35,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api
         {
             AssignCommonProperties(metaModel);
 
-            var isFakeLicensee = IsFakeLicensee(metaModel.LicenseeId);
-
-            if (!isFakeLicensee)
+            if (!_licenseeSettingService.IsFakeLicensee(SiteName))
             {
                 try
                 {
@@ -59,14 +58,12 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api
                 }
             }
 
-            var errorMessage = isFakeLicensee ? ViewResources.FunctionDeniedMsg : ViewResources.HttpError_Default;
-
             return new ResultViewModel
             {
                 Success = false,
-                Message = errorMessage,
+                Message = ViewResources.FunctionDeniedMsg,
                 ErrorCode = 1,
-                ErrorMessage = errorMessage
+                ErrorMessage = ViewResources.FunctionDeniedMsg
             };
         }
 
@@ -74,13 +71,9 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api
         {
             param.LicenseeId = LicenseeId;
             param.UserId = UserId;
-            param.Language = UpdatingUtils.GetLanguageCode(Language);
+            param.Language = Util.MapIetfLanguageCodes[Language];
             param.Ip = string.Empty;
         }
 
-        private bool IsFakeLicensee(int licenseeId)
-        {
-            return _appSetting.FakeLicenseeList.Contains(licenseeId);
-        }
     }
 }

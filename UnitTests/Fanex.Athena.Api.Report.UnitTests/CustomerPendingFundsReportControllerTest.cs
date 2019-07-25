@@ -7,6 +7,7 @@
     using Excel.Report;
     using Excel.Report.Models;
     using Fanex.Athena.DataAccess.Report.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.ResultModel;
     using Model.Report.DTO;
     using Model.Report.MetaModel;
@@ -18,15 +19,16 @@
     {
         private ICustPendingFundsDataAccess _dataAccess;
         private CustomerPendingFundsReportController _controller;
+        ILicenseeSettingService _licenseeSettingService;
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
         {
             base.FixtureSetUp();
-
+            _licenseeSettingService = Substitute.For<ILicenseeSettingService>();
             _dataAccess = Substitute.For<ICustPendingFundsDataAccess>();
 
-            _controller = Substitute.ForPartsOf<CustomerPendingFundsReportController>(AppSetting, _dataAccess, SessionService, ProductService, LangService);
+            _controller = Substitute.ForPartsOf<CustomerPendingFundsReportController>(_dataAccess, SessionService, ProductService, LangService, _licenseeSettingService);
 
             _controller.When(x => x.ExcelStream(Arg.Any<IWorkbook>(), Arg.Any<string>())).DoNotCallBase();
 
@@ -40,6 +42,8 @@
 
             _controller = null;
             _dataAccess = null;
+            _licenseeSettingService = null;
+
         }
 
         [Test]
@@ -62,10 +66,8 @@
         {
             // Arrange
             var metaModel = CreateValidMetaModel();
-            var expectedDataList = SetUpForGettingData(metaModel);
             const int PageSizeExcel = int.MaxValue - 1000;
-
-            AppSetting.FakeLicenseeList.Returns(x => isFakeLicensee ? new int[1] { SessionLicenseeId } : new int[0]);
+            _licenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(isFakeLicensee);
 
             var excel = Substitute.ForPartsOf<CustomerPendingFundsExcel>();
             excel.When(x => x.Export()).DoNotCallBase();

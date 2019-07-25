@@ -1,5 +1,4 @@
-﻿using System;
-// --------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------
 // <copyright file="BaseApiController.cs" company="">
 // Copyright (c) . All rights reserved.
 // </copyright>
@@ -7,20 +6,17 @@
 
 namespace Fanex.Athena.Api.Base
 {
+    using Fanex.Athena.Service.Core.Common.Interfaces;
+    using Fanex.Athena.Service.Core.Users.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using NPOI.SS.UserModel;
+    using ONEbook.UM.Filters;
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Net;
     using System.Net.Http;
     using System.Net.Http.Headers;
-    using System.Threading.Tasks;
     using System.Web.Http;
-    using Fanex.Athena.Resources;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Athena.Service.Core.Users.Interfaces;
-    using NPOI.SS.UserModel;
-    using ONEbook.UM.Filters;
-    using Fanex.Athena.Service.Core.Common.Interfaces;
 
     [CheckUMFilter]
     [XFrameOptionApi]

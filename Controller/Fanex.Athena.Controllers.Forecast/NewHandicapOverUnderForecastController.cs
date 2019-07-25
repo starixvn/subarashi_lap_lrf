@@ -49,14 +49,13 @@ namespace Fanex.Athena.Controllers.Forecast
         public NewHandicapOverUnderForecastController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             INewForecastDataAccess forecastDataAccess,
             ILogger logger,
             ICacheRefAdapter cacheRefAdapter,
             IMatchService matchService,
             ILeagueDataAccess leagueDataAccess)
 #pragma warning restore S107 // Methods should not have too many parameters
-        : base(languageService, sessionService, appSetting)
+        : base(languageService, sessionService)
         {
             _logger = logger;
             _cacheRefAdapter = cacheRefAdapter;

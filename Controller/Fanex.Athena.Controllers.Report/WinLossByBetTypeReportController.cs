@@ -39,11 +39,10 @@ namespace Fanex.Athena.Controllers.Report
         public WinLossByBetTypeReportController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             IProductService productService,
             IBalanceUpDataAccess balanceUpDataAccess,
             IWinLossByBetTypeDataAccess winLossByBetTypeDataAccess)
-            : base(languageService, sessionService, appSetting, productService)
+            : base(languageService, sessionService, productService)
         {
             _balanceUpDataAccess = balanceUpDataAccess;
             _winLossByBetTypeDataAccess = winLossByBetTypeDataAccess;
@@ -84,7 +83,7 @@ namespace Fanex.Athena.Controllers.Report
             var licenseeSession = SessionService.LicenseeSession;
             var userSession = SessionService.UserSession;
             metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList
-                ,metaModel.CurrencyId);
+                , metaModel.CurrencyId);
 
             var reportData = await _winLossByBetTypeDataAccess.GetDataList(metaModel);
 

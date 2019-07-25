@@ -28,10 +28,9 @@ namespace Fanex.Athena.Controllers.Report
         public NoteController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             IProductService productService,
             IBalanceUpDataAccess balanceUpDataAccess)
-            : base(languageService, sessionService, appSetting)
+            : base(languageService, sessionService)
         {
             _balanceUpDataAccess = balanceUpDataAccess;
             _productService = productService;
