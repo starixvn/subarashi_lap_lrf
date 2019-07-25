@@ -19,6 +19,7 @@ namespace Fanex.Athena.Controllers
                   ) : base(languageService, sessionService)
         {
         }
+
         protected ContentBaseController(
           ILanguageService languageService,
           ISessionService sessionService,
@@ -37,6 +38,5 @@ namespace Fanex.Athena.Controllers
            : base(languageService, sessionService, appSetting, licenseeSettingService)
         {
         }
-
     }
 }

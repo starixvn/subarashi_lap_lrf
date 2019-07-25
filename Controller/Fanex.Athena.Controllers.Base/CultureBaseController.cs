@@ -6,9 +6,10 @@
 
 namespace Fanex.Athena.Controllers
 {
-    using System.Linq;
     using System.Web.Mvc;
+
     using Autofac.Integration.Mvc;
+
     using Extension.Utility;
 
     using Fanex.Athena.Service.Core.Common.Interfaces;
@@ -44,7 +45,6 @@ namespace Fanex.Athena.Controllers
           ILicenseeSettingService licenseeSettingService
           ) : this(languageService, sessionService, null, licenseeSettingService)
         {
-
         }
 
         protected CultureBaseController(
@@ -93,16 +93,17 @@ namespace Fanex.Athena.Controllers
                 return _licenseeSettingService;
             }
         }
+
         public bool IsFakeLicensee(string licenseeName)
         {
             return LicenseeSettingService.IsFakeLicensee(licenseeName);
         }
+
         protected override void Initialize(System.Web.Routing.RequestContext requestContext)
         {
             base.Initialize(requestContext);
             var currentLanguage = LangService.GetCurrentLanguage();
             LangService.SetPageCulture(currentLanguage);
         }
-
     }
 }
