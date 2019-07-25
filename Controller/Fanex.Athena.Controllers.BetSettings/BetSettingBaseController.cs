@@ -9,13 +9,14 @@ namespace Fanex.Athena.Controllers.BetSettings
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using System.Web.SessionState;
+
     using Autofac.Integration.Mvc;
-    using Extension.Utility;
 
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.BetSettings.DTO;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Model.BetSettings.MetaModel;
     using Model.BetSettings.ViewModel;
     using Model.Core.DTO.Common;
@@ -50,7 +51,6 @@ namespace Fanex.Athena.Controllers.BetSettings
         {
             _coreBetSettingService = coreBetSettingService ?? AutofacDependencyResolver.Current.GetService<ICoreBetSettingService>();
             _productService = productService ?? AutofacDependencyResolver.Current.GetService<IProductService>();
-
         }
 
         protected ProductAccess GetProductAccess()
