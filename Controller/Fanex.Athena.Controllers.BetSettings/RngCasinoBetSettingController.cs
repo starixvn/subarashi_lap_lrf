@@ -40,7 +40,8 @@ namespace Fanex.Athena.Controllers.BetSettings
         public async Task<ActionResult> Index(BetSettingMetaModel metaModel)
         {
             var customer = GetCustomerInfo(metaModel.CustId);
-            var viewModel = _betSettingService.GetViewModel(metaModel.CustId, customer, SessionService.UserSession.Language);
+            var viewModel = await _betSettingService.GetViewModelAsync(metaModel.CustId, customer, SessionService.UserSession.Language).ConfigureAwait(false);
+
             await AssignRequiredProperties(viewModel, metaModel).ConfigureAwait(false);
 
             return View("~/Views/Desktop/Customer/BetSetting/RngCasino.cshtml", viewModel);

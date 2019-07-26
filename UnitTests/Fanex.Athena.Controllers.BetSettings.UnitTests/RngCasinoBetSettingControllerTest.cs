@@ -43,7 +43,7 @@
                 var customer = FakeHelper.Create<CustomerInfo>();
                 CoreBetSettingService.GetCustomerInfo(metaModel.CustId, DefaultLicenseeSession.LicenseeId).Returns(customer);
 
-                _betSettingService.GetViewModel(metaModel.CustId, customer, DefaultUserSession.Language).Returns(new RngCasinoBetSettingViewModel());
+                _betSettingService.GetViewModelAsync(metaModel.CustId, customer, DefaultUserSession.Language).Returns(new RngCasinoBetSettingViewModel());
 
                 // Action
                 var result = await controller.Index(metaModel) as ViewResult;

@@ -61,7 +61,7 @@
             };
 
             // Action
-            var result = _service.GetViewModel(CustId, customer, string.Empty);
+            var result = _service.GetViewModelAsync(CustId, customer, string.Empty);
 
             // Assert
             Assert.Multiple(() =>
@@ -87,7 +87,7 @@
             };
 
             // Action
-            var result = _service.GetViewModel(CustId, customer, Language);
+            var result = _service.GetViewModelAsync(CustId, customer, Language);
 
             // Assert
             Assert.Multiple(() =>
@@ -114,7 +114,7 @@
             };
 
             // Action
-            var result = _service.GetViewModel(CustId, customer, Language);
+            var result = _service.GetViewModelAsync(CustId, customer, Language);
 
             // Assert
             Assert.That(result.IsEnabled, Is.EqualTo(expectedIsEnabled));

@@ -30,26 +30,32 @@ namespace Fanex.Athena.Service.BetSettings
         private readonly ICustomerApiWrapper _customerApiWrapper;
 
         private readonly IAppSettings _appSettings;
-
+        private readonly ILGAPIClient _lgClient;
         public RngCasinoBetSettingService(
             IAuthorizationService authorizationService,
             IAppSettings appSettings,
             ICasinoSettingService casinoSetting,
             ICustomerApiWrapper customerApiWrapper,
-            IRngCasinoBetSettingDataAccess betSettingDataAccess)
+            IRngCasinoBetSettingDataAccess betSettingDataAccess,
+            ILGAPIClient lgClient
+            )
             : base(authorizationService)
         {
             _betSettingDataAccess = betSettingDataAccess;
             _casinoSetting = casinoSetting;
             _appSettings = appSettings;
             _customerApiWrapper = customerApiWrapper;
+            _lgClient = lgClient;
         }
 
-        public RngCasinoBetSettingViewModel GetViewModel(int custId, CustomerInfo customer, string language)
+        public async Task<RngCasinoBetSettingViewModel> GetViewModelAsync(int custId, CustomerInfo customer, string language)
         {
-            IList<GameKind> gameKinds;
-            gameKinds = customer.SyncCasino ?
-            _casinoSetting.GetRngCasinoSettings(custId, customer.CurrencyID, language) : new List<GameKind>();
+            IList<GameKind> gameKinds = new List<GameKind>();
+            if (customer.SyncCasino)
+            {
+                var apiPath = _appSettings.GetValue("LGAPIHostUrl") + "/RngCasinoSettings";
+                gameKinds = await _lgClient.PostAsync<IList<GameKind>>(apiPath, new { custId, customer.CurrencyID, language }, language).ConfigureAwait(false);
+            }
 
             return new RngCasinoBetSettingViewModel
             {
