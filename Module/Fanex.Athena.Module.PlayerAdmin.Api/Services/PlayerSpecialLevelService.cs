@@ -1,4 +1,4 @@
-﻿using Fanex.Athena.Model.Core.DTO.Common;
+﻿using Fanex.Athena.Model.Core.ViewModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.Repository.Interfaces;
 using Fanex.Athena.Module.PlayerAdmin.Api.Services.Interfaces;
@@ -13,20 +13,42 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
 
         private readonly IAuthorizationService _authorizationService;
 
-        public PlayerSpecialLevelService(IPlayerSpecialLevelRepository playerSpecialLevelRepository, IAuthorizationService authorizationService)
+        private readonly ILicenseeSettingService _licenseeSettingService;
+
+        public PlayerSpecialLevelService(
+            IPlayerSpecialLevelRepository playerSpecialLevelRepository,
+            IAuthorizationService authorizationService,
+            ILicenseeSettingService licenseeSettingService)
         {
             _playerSpecialLevelRepository = playerSpecialLevelRepository;
             _authorizationService = authorizationService;
+            _licenseeSettingService = licenseeSettingService;
         }
 
-        public IResultInfo Update(SpecialLevelUpdatingMetaModel metaModel)
+        public ResultViewModel Update(SpecialLevelUpdatingMetaModel metaModel)
         {
+            if (_licenseeSettingService.IsFakeLicensee(metaModel.SiteName))
+            {
+                return new ResultViewModel
+                {
+                    Success = false,
+                    ErrorMessage = ResourceKeyConstants.FunctionDenied
+                };
+            }
+
             if (!_authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, 0))
             {
                 return UpdatingUtils.CreateErrorResult();
             }
 
-            return _playerSpecialLevelRepository.Update(metaModel);
+            var result = _playerSpecialLevelRepository.Update(metaModel);
+
+            return new ResultViewModel
+            {
+                Success = result.IsSuccessful,
+                Message = result.Message,
+                ErrorCode = result.Code
+            };
         }
     }
 }

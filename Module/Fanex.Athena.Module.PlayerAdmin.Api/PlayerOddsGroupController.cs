@@ -5,11 +5,8 @@ using Fanex.Athena.Model.Core.ViewModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.Services.Interfaces;
 using Fanex.Athena.Module.PlayerAdmin.Api.Utilities;
-using Fanex.Athena.Resources;
-using Fanex.Athena.Service.StatelessCore.Interfaces;
 using Fanex.Logging;
 using System;
-using System.Linq;
 using System.Web.Http;
 
 namespace Fanex.Athena.Module.PlayerAdmin.Api
@@ -18,52 +15,32 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api
     {
         private readonly IPlayerOddsGroupService _playerOddsGroupService;
         private readonly ILogger _logger;
-        private readonly ILicenseeSettingService _licenseeSettingService;
 
-        public PlayerOddsGroupController(
-            IPlayerOddsGroupService playerOddsGroupService,
-            ILogger logger,
-             ILicenseeSettingService licenseeSettingService)
+        public PlayerOddsGroupController(IPlayerOddsGroupService playerOddsGroupService, ILogger logger)
         {
             _playerOddsGroupService = playerOddsGroupService;
             _logger = logger;
-            _licenseeSettingService = licenseeSettingService;
         }
 
         [HttpPost]
-        public dynamic Update(OddsGroupUpdatingMetaModel metaModel)
+        public ResultViewModel Update(OddsGroupUpdatingMetaModel metaModel)
         {
             AssignCommonProperties(metaModel);
+            metaModel.SiteName = SiteName;
 
-            if (!_licenseeSettingService.IsFakeLicensee(SiteName))
+            try
             {
-                try
-                {
-                    var dataResult = _playerOddsGroupService.Update(metaModel);
-
-                    var message = !dataResult.IsSuccessful && string.IsNullOrWhiteSpace(dataResult.Message) ?
-                                   ViewResources.HttpError_Default : dataResult.Message;
-
-                    return new ResultViewModel
-                    {
-                        Success = dataResult.IsSuccessful,
-                        Message = message,
-                        ErrorCode = dataResult.Code,
-                        ErrorMessage = message
-                    };
-                }
-                catch (Exception exception)
-                {
-                    _logger.Error(LogMessageHelper.GenerateMessage(exception));
-                }
+                return _playerOddsGroupService.Update(metaModel);
+            }
+            catch (Exception exception)
+            {
+                _logger.Error(LogMessageHelper.GenerateMessage(exception));
             }
 
             return new ResultViewModel
             {
                 Success = false,
-                Message = ViewResources.FunctionDeniedMsg,
-                ErrorCode = 1,
-                ErrorMessage = ViewResources.FunctionDeniedMsg
+                ErrorMessage = ResourceKeyConstants.HttpErrDefault
             };
         }
 
@@ -74,6 +51,5 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api
             param.Language = Util.MapIetfLanguageCodes[Language];
             param.Ip = string.Empty;
         }
-
     }
 }

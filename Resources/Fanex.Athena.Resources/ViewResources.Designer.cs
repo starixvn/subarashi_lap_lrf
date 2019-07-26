@@ -4480,6 +4480,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid parameter. Invalid custId..
+        /// </summary>
+        public static string PlayerAdminInvalidDataErrMsg {
+            get {
+                return ResourceManager.GetString("PlayerAdminInvalidDataErrMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pre Game.
         /// </summary>
         public static string PreGame {

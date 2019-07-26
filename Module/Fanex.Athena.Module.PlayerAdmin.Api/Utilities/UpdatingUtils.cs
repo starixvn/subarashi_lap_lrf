@@ -1,17 +1,19 @@
 ﻿using Fanex.Athena.Extension.Utility;
-using Fanex.Athena.Model.Core.DTO.Common;
-using Fanex.Athena.Resources;
+using Fanex.Athena.Model.Core.ViewModel;
 
 namespace Fanex.Athena.Module.PlayerAdmin.Api.Utilities
 {
     public static class UpdatingUtils
     {
-        public static IResultInfo CreateErrorResult()
+        public const int DefaultErrCode = 999;
+
+        public static ResultViewModel CreateErrorResult()
         {
-            return new ResultInfo
+            return new ResultViewModel
             {
-                Code = 1,
-                Message = ViewResources.UpdateSpecialLevelMsg
+                Success = false,
+                ErrorCode = DefaultErrCode,
+                ErrorMessage = ResourceKeyConstants.InvalidData
             };
         }
 

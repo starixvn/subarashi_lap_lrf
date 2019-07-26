@@ -5,11 +5,8 @@ using Fanex.Athena.Model.Core.ViewModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.Services.Interfaces;
 using Fanex.Athena.Module.PlayerAdmin.Api.Utilities;
-using Fanex.Athena.Resources;
-using Fanex.Athena.Service.StatelessCore.Interfaces;
 using Fanex.Logging;
 using System;
-using System.Linq;
 using System.Web.Http;
 
 namespace Fanex.Athena.Module.PlayerAdmin.Api
@@ -18,49 +15,34 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api
     {
         private readonly IPlayerSpecialLevelService _playerSpecialLevelService;
         private readonly ILogger _logger;
-        private readonly ILicenseeSettingService _licenseeSettingService;
 
         public PlayerSpecialLevelController(
             IPlayerSpecialLevelService playerSpecialLevelService,
-            ILogger logger,
-            ILicenseeSettingService licenseeSettingService)
+            ILogger logger)
         {
             _playerSpecialLevelService = playerSpecialLevelService;
             _logger = logger;
-            _licenseeSettingService = licenseeSettingService;
         }
 
         [HttpPost]
-        public dynamic Update(SpecialLevelUpdatingMetaModel metaModel)
+        public ResultViewModel Update(SpecialLevelUpdatingMetaModel metaModel)
         {
             AssignCommonProperties(metaModel);
+            metaModel.SiteName = SiteName;
 
-            if (!_licenseeSettingService.IsFakeLicensee(SiteName))
+            try
             {
-                try
-                {
-                    var dataResult = _playerSpecialLevelService.Update(metaModel);
-
-                    return new ResultViewModel
-                    {
-                        Success = dataResult.IsSuccessful,
-                        Message = dataResult.Message,
-                        ErrorCode = dataResult.Code,
-                        ErrorMessage = dataResult.Message
-                    };
-                }
-                catch (Exception exception)
-                {
-                    _logger.Error(LogMessageHelper.GenerateMessage(exception));
-                }
+                return _playerSpecialLevelService.Update(metaModel);
+            }
+            catch (Exception exception)
+            {
+                _logger.Error(LogMessageHelper.GenerateMessage(exception));
             }
 
             return new ResultViewModel
             {
                 Success = false,
-                Message = ViewResources.FunctionDeniedMsg,
-                ErrorCode = 1,
-                ErrorMessage = ViewResources.FunctionDeniedMsg
+                ErrorMessage = ResourceKeyConstants.FunctionDenied
             };
         }
 
@@ -71,7 +53,5 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api
             param.Language = Util.MapIetfLanguageCodes[Language];
             param.Ip = string.Empty;
         }
-
-
     }
 }

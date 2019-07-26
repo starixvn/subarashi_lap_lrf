@@ -2353,7 +2353,6 @@
     <value>Promotion Prize</value>
     <comment>109471</comment>
   </data>
-
   <data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>
@@ -2362,7 +2361,7 @@
   </data>
   <data name="AGClosingBalance" xml:space="preserve">
     <value>AG Closing Balance</value>
- </data>
+  </data>
   <data name="BankAccountNumber" xml:space="preserve">
     <value>Bank Account Number</value>
     <comment>112658</comment>

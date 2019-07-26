@@ -1,4 +1,4 @@
-﻿using Fanex.Athena.Model.Core.DTO.Common;
+﻿using Fanex.Athena.Model.Core.ViewModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.Repository.Interfaces;
 using Fanex.Athena.Module.PlayerAdmin.Api.Services.Interfaces;
@@ -13,20 +13,46 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
 
         private readonly IAuthorizationService _authorizationService;
 
-        public PlayerOddsGroupService(IPlayerOddsGroupRepository playerOddsGroupRepository, IAuthorizationService authorizationService)
+        private readonly ILicenseeSettingService _licenseeSettingService;
+
+        public PlayerOddsGroupService(
+            IPlayerOddsGroupRepository playerOddsGroupRepository,
+            IAuthorizationService authorizationService,
+            ILicenseeSettingService licenseeSettingService)
         {
             _playerOddsGroupRepository = playerOddsGroupRepository;
             _authorizationService = authorizationService;
+            _licenseeSettingService = licenseeSettingService;
         }
 
-        public IResultInfo Update(OddsGroupUpdatingMetaModel metaModel)
+        public ResultViewModel Update(OddsGroupUpdatingMetaModel metaModel)
         {
-            if (!_authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, 0))
+            if (_licenseeSettingService.IsFakeLicensee(metaModel.SiteName))
             {
-                return UpdatingUtils.CreateErrorResult();
+                return new ResultViewModel
+                {
+                    Success = false,
+                    ErrorMessage = ResourceKeyConstants.FunctionDenied
+                };
             }
 
-            return _playerOddsGroupRepository.Update(metaModel);
+            if (!_authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, 0))
+            {
+                return new ResultViewModel
+                {
+                    Success = false,
+                    ErrorMessage = ResourceKeyConstants.InvalidData
+                };
+            }
+
+            var result = _playerOddsGroupRepository.Update(metaModel);
+
+            return new ResultViewModel
+            {
+                Success = result.IsSuccessful,
+                Message = result.Message,
+                ErrorCode = result.Code
+            };
         }
     }
 }

@@ -1998,4 +1998,8 @@
     <value>嘻嘻俱乐部</value>
     <comment>115449</comment>
   </data>
+  <data name="PlayerAdminInvalidDataErrMsg" xml:space="preserve">
+    <value>无效的参数.无效的会员识别</value>
+    <comment>112658</comment>
+  </data>
 </root>

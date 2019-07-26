@@ -2007,4 +2007,8 @@
     <value>嘻嘻俱樂部</value>
     <comment>115449</comment>
   </data>
+  <data name="PlayerAdminInvalidDataErrMsg" xml:space="preserve">
+    <value>無效的參數。無效的會員識別</value>
+    <comment>112658</comment>
+  </data>
 </root>

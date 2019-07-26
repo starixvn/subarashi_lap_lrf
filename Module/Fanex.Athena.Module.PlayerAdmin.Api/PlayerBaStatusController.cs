@@ -3,8 +3,6 @@ using Fanex.Athena.Model.Core.ViewModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.Services.Interfaces;
 using Fanex.Athena.Module.PlayerAdmin.Api.Utilities;
-using Fanex.Athena.Resources;
-using Fanex.Athena.Service.StatelessCore.Interfaces;
 
 using System.Web.Http;
 
@@ -13,26 +11,16 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api
     public class PlayerBaStatusController : ExternalApiBaseController
     {
         private readonly IPlayerBaStatusService _playerBaStatusService;
-        private readonly IProductService _productService;
 
-        public PlayerBaStatusController(
-            IPlayerBaStatusService playerBaStatusService,
-            IProductService productService)
+        public PlayerBaStatusController(IPlayerBaStatusService playerBaStatusService)
         {
             _playerBaStatusService = playerBaStatusService;
-            _productService = productService;
         }
 
         [HttpPost]
-        public dynamic Update(BaStatusUpdatingMetaModel metaModel)
+        public ResultViewModel Update(BaStatusUpdatingMetaModel metaModel)
         {
             AssignCommonProperties(metaModel);
-
-            var productAccess = _productService.GetProductAccess(metaModel.LicenseeId, metaModel.Language);
-            if (!productAccess.IsAllowBA)
-            {
-                return CreateUpdatingBaResult(false, ViewResources.NotAllowBA);
-            }
 
             var updateResult = _playerBaStatusService.Update(metaModel);
 
