@@ -6,6 +6,7 @@
 
 namespace Fanex.Athena.Controllers.BetSettings
 {
+    using System.Collections.Generic;
     using System.Data;
     using System.Threading.Tasks;
     using System.Web.Mvc;
@@ -49,7 +50,7 @@ namespace Fanex.Athena.Controllers.BetSettings
 
         [HttpPost]
         [CustomValidateAntiForgery]
-        public JsonResult UpdateBetSetting(int custId, string gameTypeChangedList)
+        public async Task<JsonResult> UpdateBetSetting(int custId, string gameTypeChangedList)
         {
             var userSession = SessionService.UserSession;
             var licenseeSession = SessionService.LicenseeSession;
@@ -74,14 +75,11 @@ namespace Fanex.Athena.Controllers.BetSettings
                     CustId = custId,
                     ModifyById = userSession.UserId,
                     ModifyByUsername = userSession.UserName,
-                    Ip = Request.UserHostAddress
+                    Ip = Request.UserHostAddress,
+                    StackLevelParam = GetStackLevelParam(gameTypeChangedList)
                 };
 
-                var tableParam = GetRngCasinoParam(metaModel, gameTypeChangedList);
-
-                metaModel.TableParam = tableParam;
-
-                var result = _betSettingService.UpdateSetting(metaModel, customer.SyncCasino, customer.DisableCasino);
+                var result = await _betSettingService.UpdateSettingAsync(metaModel, customer.SyncCasino, customer.DisableCasino).ConfigureAwait(false);
 
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
@@ -130,28 +128,20 @@ namespace Fanex.Athena.Controllers.BetSettings
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        private DataTable GetRngCasinoParam(RngCasinoBetSettingMetaModel metaModel, string gameTypeChangedList)
+        private IDictionary<string, string> GetStackLevelParam(string gameTypeChangedList)
         {
-            const int SystemID = 4;
-            var table = new DataTable();
-            table.Columns.Add("IBCCustID", typeof(int));
-            table.Columns.Add("GameTypeID", typeof(int));
-            table.Columns.Add("StakeLevelList", typeof(string));
-            table.Columns.Add("RoleId", typeof(int));
-            table.Columns.Add("FromIP", typeof(string));
-            table.Columns.Add("ModifyBy", typeof(int));
-            table.Columns.Add("ModifyUserName", typeof(string));
-            table.Columns.Add("FromSystem", typeof(int));
-
             var gameTypeList = gameTypeChangedList.Split(',');
-
+            var result = new Dictionary<string, string>();
             foreach (var gameTypeId in gameTypeList)
             {
-                var stakeLevel = this.HttpContext.Request["stake" + gameTypeId];
-                table.Rows.Add(metaModel.CustId, gameTypeId, stakeLevel, 1, metaModel.Ip, metaModel.ModifyById, metaModel.ModifyByUsername, SystemID);
+                if (!result.ContainsKey(gameTypeId))
+                {
+                    var stakeLevel = this.HttpContext.Request["stake" + gameTypeId];
+                    result.Add(gameTypeId, stakeLevel);
+                }
             }
 
-            return table;
+            return result;
         }
     }
 }

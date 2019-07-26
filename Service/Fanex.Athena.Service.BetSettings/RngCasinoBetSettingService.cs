@@ -12,6 +12,7 @@ namespace Fanex.Athena.Service.BetSettings
     using Casino.Wrappers;
     using DataAccess.BetSettings.Interfaces;
     using Extension.Utility;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Interfaces;
     using Model.BetSettings.DTO.RngCasino;
@@ -25,16 +26,14 @@ namespace Fanex.Athena.Service.BetSettings
     {
         private readonly IRngCasinoBetSettingDataAccess _betSettingDataAccess;
 
-        private readonly ICasinoSettingService _casinoSetting;
-
         private readonly ICustomerApiWrapper _customerApiWrapper;
 
         private readonly IAppSettings _appSettings;
+
         private readonly ILGAPIClient _lgClient;
         public RngCasinoBetSettingService(
             IAuthorizationService authorizationService,
             IAppSettings appSettings,
-            ICasinoSettingService casinoSetting,
             ICustomerApiWrapper customerApiWrapper,
             IRngCasinoBetSettingDataAccess betSettingDataAccess,
             ILGAPIClient lgClient
@@ -42,7 +41,6 @@ namespace Fanex.Athena.Service.BetSettings
             : base(authorizationService)
         {
             _betSettingDataAccess = betSettingDataAccess;
-            _casinoSetting = casinoSetting;
             _appSettings = appSettings;
             _customerApiWrapper = customerApiWrapper;
             _lgClient = lgClient;
@@ -54,7 +52,11 @@ namespace Fanex.Athena.Service.BetSettings
             if (customer.SyncCasino)
             {
                 var apiPath = _appSettings.GetValue("LGAPIHostUrl") + "/RngCasinoSettings";
-                gameKinds = await _lgClient.PostAsync<IList<GameKind>>(apiPath, new { custId, customer.CurrencyID, language }, language).ConfigureAwait(false);
+                var temp = await _lgClient.PostAsync<APIResult<IList<GameKind>>>(apiPath, new { custId, customer.CurrencyID, language }, language).ConfigureAwait(false);
+                if (temp != null)
+                {
+                    gameKinds = temp.Data;
+                }
             }
 
             return new RngCasinoBetSettingViewModel
@@ -84,7 +86,7 @@ namespace Fanex.Athena.Service.BetSettings
             return new ResultInfo { Code = 1, Message = ViewResources.RNGCasinoUpdateSettingUnAvailableMsg };
         }
 
-        public IResultInfo UpdateSetting(RngCasinoBetSettingMetaModel metaModel, bool isSyncCasino, bool isDisableCasino)
+        public async Task<IResultInfo> UpdateSettingAsync(RngCasinoBetSettingMetaModel metaModel, bool isSyncCasino, bool isDisableCasino)
         {
             if (isDisableCasino || !HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId))
             {
@@ -97,7 +99,18 @@ namespace Fanex.Athena.Service.BetSettings
             {
                 if (!_appSettings.IsDisableRngCasino)
                 {
-                    result = _casinoSetting.UpdateSetting(metaModel.TableParam);
+                    var apiPath = _appSettings.GetValue("LGAPIHostUrl") + "/RngCasinoSettings";
+
+                    var temp = await _lgClient.PostAsync<APIResult<bool>>(apiPath, new
+                    {
+                        StakeLevelList = metaModel.StackLevelParam,
+                        RequestIP = metaModel.Ip,
+                        metaModel.CustId,
+                        metaModel.ModifyById,
+                        metaModel.ModifyByUsername
+                    }, "en-US").ConfigureAwait(false);
+
+                    result = temp.Data;
 
                     return result ?
                         new ResultInfo { Code = 0, Message = ViewResources.MessageSuccess }

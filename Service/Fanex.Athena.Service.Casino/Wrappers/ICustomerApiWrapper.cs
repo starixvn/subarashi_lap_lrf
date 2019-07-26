@@ -13,10 +13,6 @@
 
         bool UpdateCustClosed(CustomerStatusMetaModel metaModel);
 
-        DataTable UpdateCustGameTypeStakeLevel(DataTable sourceTable);
-
-        DataTable GetCustStakeLevel(int ibcCustId, int gameTypeId);
-
         bool UpdateComm(RNGCasinoUpdateMemberComMetaModel metaModel);
     }
 }

@@ -107,12 +107,8 @@
     <Compile Include="CasinoCustomerService.cs" />
     <Compile Include="Interfaces\ICasinoCustomerService.cs" />
     <Compile Include="Wrappers\ApiMethodOperationHandler.cs" />
-    <Compile Include="Wrappers\BasicInfoApiWrapper.cs" />
-    <Compile Include="CasinoSettingService.cs" />
     <Compile Include="Wrappers\CustomerApiWrapper.cs" />
-    <Compile Include="Wrappers\IBasicInfoApiWrapper.cs" />
     <Compile Include="Wrappers\ICustomerApiWrapper.cs" />
-    <Compile Include="Interfaces\ICasinoSettingService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

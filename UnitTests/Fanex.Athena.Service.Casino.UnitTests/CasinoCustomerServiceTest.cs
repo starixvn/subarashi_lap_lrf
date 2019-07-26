@@ -1,16 +1,21 @@
 ﻿namespace Fanex.Athena.Service.Casino.UnitTests
 {
     using System;
-    using System.Threading.Tasks;
+
     using Casino;
     using Casino.Wrappers;
+
     using Core.Exception;
-    using Core.Utility.Interfaces;
+
     using Fanex.Logging;
+
     using Model.Casino.MetaModel;
     using Model.Customer.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using UnitTest.Common.Helpers;
 
     [TestFixture]

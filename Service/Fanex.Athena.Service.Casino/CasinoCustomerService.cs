@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Text;
-using System.Threading.Tasks;
+
 using Fanex.Athena.Extension.Helpers;
 using Fanex.Athena.Model.Casino.MetaModel;
 using Fanex.Athena.Model.Customer.MetaModel;
 using Fanex.Athena.Service.Casino.Interfaces;
 using Fanex.Athena.Service.Casino.Wrappers;
 using Fanex.Athena.Service.Core.Exception;
-using Fanex.Athena.Service.Core.Utility.Interfaces;
 using Fanex.Logging;
 
 namespace Fanex.Athena.Service.Casino
