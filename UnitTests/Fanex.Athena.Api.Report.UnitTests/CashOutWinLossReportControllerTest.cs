@@ -4,20 +4,30 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using Base.UnitTests;
+
     using DataAccess.Report.Interfaces;
-    using Excel.Base.Entities;
+
     using Excel.Report;
+
     using Extension.Utility;
+
     using Fanex.Athena.Service.Core.Utility.Interfaces;
+
     using Model.Core.ResultModel;
     using Model.Report.DTO;
     using Model.Report.MetaModel;
     using Model.Report.ViewModel;
+
     using NPOI.SS.UserModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Report;
+
     using UnitTest.Common.Helpers;
 
     public class CashOutWinLossReportControllerTest : BaseApiControllerHelperTest
@@ -29,7 +39,6 @@
         [SetUp]
         public void Setup()
         {
-
             MockSessionData();
             _dataAccess = Substitute.For<ICashOutWinLossDataAccess>();
             _currencyValidation = Substitute.For<ICurrencyValidation>();
@@ -213,7 +222,6 @@
             // Assert
             _controller.Received().ExcelStream(Arg.Any<IWorkbook>(), Arg.Any<string>());
         }
-
 
         public async Task Index_IsExportExcelTrueWithDifferentLevelAndCurrency_UpdateMetanData(
             )

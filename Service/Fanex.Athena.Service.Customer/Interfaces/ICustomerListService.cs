@@ -13,6 +13,7 @@ namespace Fanex.Athena.Service.Customer.Interfaces
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Customer.DTO;
     using Fanex.Athena.Model.Customer.MetaModel;
+
     using Model.Core.ResultModel;
 
     #endregion Using

@@ -1,7 +1,14 @@
 ﻿namespace Fanex.Athena.Api.StatelessBase.UnitTests.Attributes.UnitTests
 {
+    using System;
+    using System.Net;
+    using System.Threading;
+    using System.Web.Http.Controllers;
+
     using Autofac;
+
     using DataAccess.Core.Users.Interfaces;
+
     using Fanex.Athena.Api.Base.Attributes;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Core.DTO.Common;
@@ -10,13 +17,10 @@
     using Fanex.Logging;
 
     using NSubstitute;
-    using NUnit.Framework;
-    using ONEbook.UM.Services;
 
-    using System;
-    using System.Net;
-    using System.Threading;
-    using System.Web.Http.Controllers;
+    using NUnit.Framework;
+
+    using ONEbook.UM.Services;
 
     public class ApiOneAuthorizationAttributeTest
     {

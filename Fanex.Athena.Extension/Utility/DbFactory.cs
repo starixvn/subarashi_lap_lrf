@@ -1,6 +1,7 @@
-﻿using Fanex.Athena.Extension.Utility.Interfaces;
+﻿using System;
+
+using Fanex.Athena.Extension.Utility.Interfaces;
 using Fanex.Data;
-using System;
 
 namespace Fanex.Athena.Extension.Utility
 {

@@ -24,6 +24,7 @@ namespace Fanex.Athena.Service.Core.UnitTests.Utility
         private ISessionService _sessionService;
         private IProductService _productService;
         private Fixture _fixture = new Fixture();
+
         [SetUp]
         public void Setup()
         {
@@ -42,6 +43,7 @@ namespace Fanex.Athena.Service.Core.UnitTests.Utility
             _sessionService = null;
             _productService = null;
         }
+
         [OneTimeTearDown]
         public void FixtureTearDown()
         {
@@ -60,8 +62,6 @@ namespace Fanex.Athena.Service.Core.UnitTests.Utility
 
             Assert.IsFalse(result);
         }
-
-
 
         [TestCase(null)]
         [TestCase("")]

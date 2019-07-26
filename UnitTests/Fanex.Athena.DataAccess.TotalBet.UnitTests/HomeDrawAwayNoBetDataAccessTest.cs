@@ -1,10 +1,14 @@
 ﻿namespace Fanex.Athena.DataAccess.TotalBet.UnitTests
 {
     using System.Threading.Tasks;
+
     using Core.UnitTests.TestHelpers;
+
     using Model.TotalBet.DTO;
     using Model.TotalBet.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
 
     public class HomeDrawAwayNoBetDataAccessTest : BaseDataAccessHelperTest<HomeDrawAwayNoBetDataAccess>

@@ -3,11 +3,16 @@
     using System.Collections.Generic;
     using System.Net.Http;
     using System.Threading.Tasks;
-    using Model.Core.DataDomain;
+
     using Fanex.Athena.Model.Auth;
+
     using Model.BetList.MetaModel;
+    using Model.Core.DataDomain;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using UnitTest.Common.Helpers;
 
     public class RunningBetListControllerTest : ApiBetListBaseControllerHelperTest
@@ -26,7 +31,6 @@
             AuthorizationService.HasPermissionOnData(SessionLicenseeId, Arg.Any<int>(), Arg.Any<long>()).Returns(true);
         }
 
-      
         [Test]
         public async Task ThreeWayHandicap_InvalidCurrency_ReturnNull()
         {
@@ -128,12 +132,11 @@
         {
             var metaModel = new BetListMetaModel { CurrencyId = currencyId };
 
-            StubUserSessionData(new UserAuthInfo {
+            StubUserSessionData(new UserAuthInfo
+            {
                 Language = SessionLanguage,
                 CurrencyList = sessionCurrencyList,
                 CurrencyAgentList = new Dictionary<int, int[]>()
-
-
             });
 
             return metaModel;

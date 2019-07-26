@@ -33,6 +33,7 @@
         private IOneBookSecurityWrapper _oneBookSecurityWrapper;
         private IOneAuthDataAccess _oneAuthDataAccess;
         private IAppSettings _appSettings;
+
         [SetUp]
         public void SetUp()
         {

@@ -1,5 +1,10 @@
 ﻿namespace Fanex.Athena.Api.BetList.UnitTests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Net.Http;
+    using System.Threading.Tasks;
+
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
@@ -10,11 +15,6 @@
     using NSubstitute;
 
     using NUnit.Framework;
-
-    using System;
-    using System.Collections.Generic;
-    using System.Net.Http;
-    using System.Threading.Tasks;
 
     public class LicenseeWinLossBetListControllerTest : ApiBetListBaseControllerHelperTest
     {
@@ -83,7 +83,6 @@
                     Language = SessionLanguage,
                     CurrencyList = new Dictionary<int, string> { { currencyId, "Currency" } },
                     CurrencyAgentList = new Dictionary<int, int[]>()
-
                 });
 
                 var expect = new HttpResponseMessage();

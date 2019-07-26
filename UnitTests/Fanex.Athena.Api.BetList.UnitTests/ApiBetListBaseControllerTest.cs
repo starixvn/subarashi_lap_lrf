@@ -3,9 +3,13 @@
     using System;
     using System.Net.Http;
     using System.Threading.Tasks;
+
     using Model.BetList.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using UnitTest.Common.Helpers;
 
     public class ApiBetListBaseControllerTest : ApiBetListBaseControllerHelperTest

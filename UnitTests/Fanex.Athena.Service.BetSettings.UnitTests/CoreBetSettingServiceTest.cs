@@ -3,17 +3,25 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using Model.Core.DataDomain;
+
     using Customer.Interfaces;
+
     using DataAccess.BetSettings.Interfaces;
-    using Model.BetSettings.DTO;
-    using Model.Customer.DTO;
-    using NSubstitute;
-    using NUnit.Framework;
-    using StatelessCore.Interfaces;
-    using UnitTest.Common.Helpers;
+
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Auth.Enum;
+
+    using Model.BetSettings.DTO;
+    using Model.Core.DataDomain;
+    using Model.Customer.DTO;
+
+    using NSubstitute;
+
+    using NUnit.Framework;
+
+    using StatelessCore.Interfaces;
+
+    using UnitTest.Common.Helpers;
 
     [TestFixture]
     public partial class CoreBetSettingServiceTest

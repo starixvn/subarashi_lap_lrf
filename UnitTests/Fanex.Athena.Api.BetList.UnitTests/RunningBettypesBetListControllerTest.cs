@@ -3,10 +3,14 @@
     using System.Collections.Generic;
     using System.Net.Http;
     using System.Threading.Tasks;
-    using Model.Core.DataDomain;
+
     using Fanex.Athena.Model.Auth;
+
     using Model.BetList.MetaModel;
+    using Model.Core.DataDomain;
+
     using NSubstitute;
+
     using NUnit.Framework;
 
     public class RunningBettypesBetListControllerTest : ApiBetListBaseControllerHelperTest
@@ -144,11 +148,11 @@
         {
             var metaModel = new BetListMetaModel { CurrencyId = currencyId };
 
-            StubUserSessionData(new UserAuthInfo {
+            StubUserSessionData(new UserAuthInfo
+            {
                 Language = SessionLanguage,
                 CurrencyList = sessionCurrencyList,
                 CurrencyAgentList = new Dictionary<int, int[]>()
-
             });
 
             return metaModel;

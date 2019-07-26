@@ -20,7 +20,6 @@
     using Fanex.Logging;
 
     using Model.Core.DataDomain;
-    using Model.Core.DTO;
 
     using Newtonsoft.Json;
 

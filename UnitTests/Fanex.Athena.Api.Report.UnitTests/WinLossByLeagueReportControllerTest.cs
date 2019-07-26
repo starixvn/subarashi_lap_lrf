@@ -2,26 +2,32 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using System.Net;
     using System.Net.Http;
     using System.Threading.Tasks;
-    using System.Web.Http.Results;
+
     using Base.UnitTests;
+
     using DataAccess.Core.Configuration.Interfaces;
     using DataAccess.Report.Interfaces;
+
     using Excel.Report;
+
     using Extension.Utility;
+
     using Fanex.Athena.Model.Core.MetaModel.Product;
+
     using Model.Core.DTO.Configuration;
     using Model.Core.ResultModel;
     using Model.Report.DTO;
     using Model.Report.MetaModel;
+
     using NPOI.SS.UserModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Report;
-    using Resources;
-    using Service.Core.Common.Interfaces;
 
     public class WinLossByLeagueReportControllerTest : BaseApiControllerHelperTest
     {

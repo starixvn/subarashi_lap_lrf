@@ -2,10 +2,14 @@
 {
     using System.Data;
     using System.Threading.Tasks;
+
     using Core.UnitTests.TestHelpers;
+
     using Model.Core.DTO.Common;
     using Model.Customer.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
 
     public class GroupComDataAccessTest : BaseDataAccessHelperTest<GroupComDataAccess>

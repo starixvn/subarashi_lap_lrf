@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Net;
     using System.Threading.Tasks;
+
     using Interfaces;
 
     public class WebClientService : IWebClientService
@@ -49,7 +50,7 @@
                         webClient.Headers[header.Key] = header.Value;
                     }
                 }
-              
+
                 return webClient.UploadString(address, parameters);
             }
         }

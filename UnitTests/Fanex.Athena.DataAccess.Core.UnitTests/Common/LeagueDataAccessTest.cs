@@ -1,15 +1,21 @@
 ﻿namespace Fanex.Athena.DataAccess.Core.UnitTests.Common
 {
     using System;
-    using System.Data;
     using System.Linq;
     using System.Threading.Tasks;
+
     using Core.Common;
+
     using Extension.Utility;
+
     using Model.Core.MetaModel.Common;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using TestHelpers;
+
     using VendorAdapter.Interfaces;
 
     public class LeagueDataAccessTest : BaseDataAccessHelperTest<LeagueDataAccess>

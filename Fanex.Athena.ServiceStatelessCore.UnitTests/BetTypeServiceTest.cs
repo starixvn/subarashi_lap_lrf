@@ -6,8 +6,10 @@
     using System.Threading.Tasks;
 
     using DataAccess.Core.Common.Interfaces;
+
     using Fanex.Athena.Service.StatelessCore;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Model.Core.DTO.Common;
 
     using NSubstitute;

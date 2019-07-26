@@ -2,12 +2,18 @@
 {
     using System.Data;
     using System.Threading.Tasks;
+
     using Base.UnitTests;
-    using Model.Core.DataDomain;
+
     using Excel.Base.Entities;
+
+    using Model.Core.DataDomain;
     using Model.Report.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Web.ResultExtension;
 
     [TestFixture]

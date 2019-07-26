@@ -10,6 +10,7 @@ namespace Fanex.Athena.Service.StatelessCore
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
+
     using Fanex.Athena.DataAccess.Core.Users.Interfaces;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Auth.Enum;
@@ -53,6 +54,7 @@ namespace Fanex.Athena.Service.StatelessCore
                     userAuthInfo.PortalFunctionList != null && userAuthInfo.PortalFunctionList.Any(i => i == PermissionKeys.CustomerInfoSpecialBA)
                     : userAuthInfo.FunctionIdList != null && userAuthInfo.FunctionIdList.Contains((int)FunctionType.SpecialBA);
         }
+
         [DebuggerStepThrough]
         public bool HasPermissionOnData(int licenseeId, int custId, long transId)
         {

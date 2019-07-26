@@ -1,19 +1,14 @@
 ﻿using Fanex.Athena.Model.BetList.MetaModel;
 using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Model.Core.MetaModel;
-using Fanex.Athena.Model.Core.MetaModel.Product;
 using Fanex.Athena.Model.Report.MetaModel;
-using Fanex.Athena.Service.Core.Users.Interfaces;
 using Fanex.Athena.Service.Core.Utility;
 using Fanex.Athena.Service.Core.Utility.Interfaces;
-using Fanex.Athena.Model.Auth;
+
 using NSubstitute;
+
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 namespace Fanex.Athena.Service.Core.UnitTests.Utility
 {
     [TestFixture]
@@ -23,6 +18,7 @@ namespace Fanex.Athena.Service.Core.UnitTests.Utility
         private IMetaModelValidation _metaModelValidation;
         private ICurrencyValidation _currencyValidation;
         private IProductValidation _productValidation;
+
         [SetUp]
         public void Setup()
         {
@@ -106,7 +102,6 @@ namespace Fanex.Athena.Service.Core.UnitTests.Utility
             //Assert
             Assert.AreEqual(result, expected);
             _currencyValidation.Received(1).IsValidCurrency(currencyId, true);
-
         }
 
         [Test]
@@ -122,7 +117,6 @@ namespace Fanex.Athena.Service.Core.UnitTests.Utility
             _validationService.IsValid(model, option);
             //Assert
             _currencyValidation.Received(1).IsValidCurrency(currencyIdList);
-
         }
 
         [Test]
@@ -137,7 +131,6 @@ namespace Fanex.Athena.Service.Core.UnitTests.Utility
             _validationService.IsValid(model, null, option);
             //Assert
             _productValidation.Received(1).IsValid(model, option);
-
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
 using Fanex.Athena.DataAccess.BetSettings.Interfaces;
 using Fanex.Athena.Model.Auth;
 using Fanex.Athena.Model.Auth.Enum;

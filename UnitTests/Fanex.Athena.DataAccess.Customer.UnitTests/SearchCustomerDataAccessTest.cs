@@ -1,9 +1,11 @@
 ﻿namespace Fanex.Athena.DataAccess.Customer.UnitTests
 {
-    using System.Data;
     using Core.UnitTests.TestHelpers;
+
     using Customer;
+
     using NSubstitute;
+
     using NUnit.Framework;
 
     public class SearchCustomerDataAccessTest : BaseDataAccessHelperTest<SearchCustomerDataAccess>

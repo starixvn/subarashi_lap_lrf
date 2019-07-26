@@ -1,13 +1,17 @@
 ﻿namespace Fanex.Athena.DataAccess.Report.UnitTests
 {
     using System.Collections.Generic;
-    using System.Data;
     using System.Linq;
+
     using Core.UnitTests.TestHelpers;
+
     using Model.Report.DTO;
     using Model.Report.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Testable;
 
     [TestFixture]
@@ -107,7 +111,7 @@
                 new GoldDeluxeWinLoss { CurrencyName = "1", TipAmount = 3 },
                 new GoldDeluxeWinLoss { CurrencyName = "2", TipAmount = 4 }
             };
-            
+
             // Action
             var result = DataAccess.Public_CalculateTotal(dataList);
 

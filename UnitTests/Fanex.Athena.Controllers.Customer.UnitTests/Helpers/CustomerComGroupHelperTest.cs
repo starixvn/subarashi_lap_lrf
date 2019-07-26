@@ -1,5 +1,6 @@
 ﻿using Fanex.Athena.Controllers.Customer.Helpers;
 using Fanex.Athena.Model.Customer.MetaModel;
+
 using NUnit.Framework;
 
 namespace Fanex.Athena.Controllers.Customer.UnitTests.Helpers

@@ -1,5 +1,12 @@
 ﻿namespace Fanex.Athena.Api.Base.Attributes.UnitTests
 {
+    using System;
+    using System.Net;
+    using System.Net.Http;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using System.Web.Http.Controllers;
+
     using Attributes;
 
     using Autofac;
@@ -12,13 +19,6 @@
     using NUnit.Framework;
 
     using Service.Core.Users.Interfaces;
-
-    using System;
-    using System.Net;
-    using System.Net.Http;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using System.Web.Http.Controllers;
 
     using UnitTest.Common.Helpers;
 

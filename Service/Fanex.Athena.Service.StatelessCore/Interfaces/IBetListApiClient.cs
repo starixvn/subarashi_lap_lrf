@@ -1,5 +1,4 @@
-﻿
-using System.IO;
+﻿using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -14,6 +13,5 @@ namespace Fanex.Athena.Service.StatelessCore.Interfaces
         Task<Stream> PostAsyncStream(string path, object value, string language, int timeout = 0);
 
         Task<string> PostAsyncString(string path, object value, string language, int timeout = 0);
-
     }
 }

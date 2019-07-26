@@ -72,7 +72,6 @@
             }
         }
 
-
         [Test]
         public async Task GetByRunning_ValidMetaModel_CallApiWithCorrectParameters()
         {

@@ -50,12 +50,10 @@
             {
                 CurrencyList = new Dictionary<int, string>(),
                 CurrencyAgentList = new Dictionary<int, int[]>()
-
             });
             StubLicenseeSessionData(new LicenseeAuthInfo { LicenseeId = 0 });
-
-
         }
+
         [OneTimeTearDown]
         public override void FixtureTearDown()
         {
@@ -84,7 +82,7 @@
             {
                 CurrencyId = 1
             };
-            
+
             // Action
             var result = await _controller.Index(model);
 

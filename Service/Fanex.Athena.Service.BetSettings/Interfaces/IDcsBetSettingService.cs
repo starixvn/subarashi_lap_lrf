@@ -2,7 +2,9 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
     using Fanex.Athena.Model.Core.DTO.Common;
+
     using Model.BetSettings.DTO;
 
     public interface IDcsBetSettingService

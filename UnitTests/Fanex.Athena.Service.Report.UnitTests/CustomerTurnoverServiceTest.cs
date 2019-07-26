@@ -4,13 +4,18 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using DataAccess.Report.Interfaces;
+
     using Model.Core.DTO.Common;
     using Model.Core.ResultModel;
     using Model.Report.DTO;
     using Model.Report.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Report;
 
     public class CustomerTurnoverServiceTest

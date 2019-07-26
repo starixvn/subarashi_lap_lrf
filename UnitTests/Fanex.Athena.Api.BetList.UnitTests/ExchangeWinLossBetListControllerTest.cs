@@ -4,12 +4,17 @@
     using System.Collections.Generic;
     using System.Net.Http;
     using System.Threading.Tasks;
+
     using Base.UnitTests;
+
     using Fanex.Athena.Model.Auth;
+
     using Model.BetList.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
-    using Service.Core.Utility.Interfaces;
+
     using Service.StatelessCore.Interfaces;
 
     public class ExchangeWinLossBetListControllerTest : BaseApiControllerHelperTest
@@ -130,7 +135,6 @@
                     Language = SessionLanguage,
                     CurrencyList = new Dictionary<int, string> { { currencyId, "Currency" } },
                     CurrencyAgentList = new Dictionary<int, int[]>()
-
                 });
 
                 _authorizationService.HasPermissionOnData(SessionLicenseeId, metaModel.CustId, 0).Returns(true);
@@ -151,7 +155,6 @@
             }
         }
 
-      
         [Test]
         public async Task Detail_NoPermission_ReturnEmptyData()
         {
@@ -237,7 +240,6 @@
                     Language = SessionLanguage,
                     CurrencyList = new Dictionary<int, string> { { currencyId, "Currency" } },
                     CurrencyAgentList = new Dictionary<int, int[]>()
-
                 });
 
                 _authorizationService.HasPermissionOnData(SessionLicenseeId, metaModel.CustId, 0).Returns(true);

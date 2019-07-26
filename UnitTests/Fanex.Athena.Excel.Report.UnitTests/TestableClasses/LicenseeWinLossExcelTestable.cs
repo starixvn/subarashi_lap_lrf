@@ -1,4 +1,5 @@
 ﻿using Fanex.Athena.Excel.Report.Models;
+
 using NPOI.SS.UserModel;
 
 namespace Fanex.Athena.Excel.Report.UnitTests.TestableClasses

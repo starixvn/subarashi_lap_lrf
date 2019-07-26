@@ -1,13 +1,20 @@
 ﻿namespace Fanex.Athena.Service.BetSettings.UnitTests
 {
     using System.Threading.Tasks;
+
     using BetSettings;
     using BetSettings.Interfaces;
+
     using DataAccess.BetSettings.Interfaces;
+
     using Model.BetSettings.DTO;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Resources;
+
     using StatelessCore.Interfaces;
 
     [TestFixture]

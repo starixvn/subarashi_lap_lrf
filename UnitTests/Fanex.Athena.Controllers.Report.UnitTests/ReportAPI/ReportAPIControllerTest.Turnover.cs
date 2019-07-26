@@ -3,11 +3,16 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+
     using Base.UnitTests;
+
     using Model.Report.DTO;
     using Model.Report.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using UnitTest.Common.Helpers;
 
     [TestFixture]

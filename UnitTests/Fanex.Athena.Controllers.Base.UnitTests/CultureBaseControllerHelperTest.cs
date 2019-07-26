@@ -1,16 +1,18 @@
 ﻿namespace Fanex.Athena.Controllers.Base.UnitTests
 {
+    using System.Collections.Generic;
+    using System.Web.Mvc;
+
     using Extension.Utility;
+
     using Fanex.Athena.Model.Auth;
+
     using NSubstitute;
 
     using NUnit.Framework;
 
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-
-    using System.Collections.Generic;
-    using System.Web.Mvc;
 
     using UnitTest.Common.Helpers;
 
@@ -27,7 +29,6 @@
             FunctionIdList = new int[0],
             DefaultBaseCurrency = "EUR",
             CurrencyAgentList = new Dictionary<int, int[]>()
-
         };
 
         protected static readonly LicenseeAuthInfo DefaultLicenseeSession = new LicenseeAuthInfo
@@ -72,7 +73,6 @@
             StubUserSessionData(DefaultUserSession);
 
             StubLicenseeSessionData(DefaultLicenseeSession);
-
         }
 
         protected void StubUserSessionData(UserAuthInfo fakeUserSession)

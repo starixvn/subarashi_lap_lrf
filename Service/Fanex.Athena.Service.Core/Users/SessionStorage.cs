@@ -1,7 +1,9 @@
 ﻿namespace Fanex.Athena.Service.Core.Users
 {
     using System.Web;
+
     using Fanex.Athena.Model.Auth;
+
     using Interfaces;
 
     public class SessionStorage : ISessionStorage

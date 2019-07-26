@@ -1,5 +1,8 @@
 ﻿namespace Fanex.Athena.Module.Notification.UnitTests
 {
+    using System;
+    using System.Linq;
+
     using Extension.Utility;
     using Extension.Utility.Interfaces;
 
@@ -15,9 +18,6 @@
     using NSubstitute;
 
     using NUnit.Framework;
-
-    using System;
-    using System.Linq;
 
     public class NotificationServiceTest
     {

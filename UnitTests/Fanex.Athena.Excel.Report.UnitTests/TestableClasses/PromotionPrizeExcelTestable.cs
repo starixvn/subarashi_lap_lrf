@@ -2,6 +2,7 @@
 {
     using Model.Core.ResultModel;
     using Model.Report;
+
     using NPOI.SS.UserModel;
 
     public class PromotionPrizeExcelTestable : PromotionPrizeExcel

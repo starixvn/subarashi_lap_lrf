@@ -4,13 +4,19 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using Base.UnitTests;
+
     using DataAccess.Customer.Interfaces;
+
     using Extension.Utility;
     using Extension.Utility.Interfaces;
+
     using Model.Customer.DTO.CustomerLog;
     using Model.Customer.MetaModel.CustomerLog;
+
     using NSubstitute;
+
     using NUnit.Framework;
 
     [TestFixture]

@@ -1,8 +1,11 @@
 ﻿namespace Fanex.Athena.Excel.Base.UnitTests.Extension
 {
     using Base.Extension;
+
     using NPOI.SS.UserModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
 
     [TestFixture]
@@ -56,7 +59,7 @@
             // Arrange
             var workbook = Substitute.For<IWorkbook>();
             workbook.GetSheet(Arg.Any<string>()).Returns(x => null);
-            
+
             // Action
             workbook.RemoveSheet("xxx");
 

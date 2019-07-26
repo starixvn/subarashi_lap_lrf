@@ -2,13 +2,19 @@
 {
     using System;
     using System.Threading.Tasks;
+
     using Core.Configuration.Interfaces;
     using Core.UnitTests.TestHelpers;
+
     using Model.Core.DTO.Configuration;
     using Model.Report.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using UnitTest.Common.NUnitExtensions;
+
     using VendorAdapter.Interfaces;
 
     [TestFixture]

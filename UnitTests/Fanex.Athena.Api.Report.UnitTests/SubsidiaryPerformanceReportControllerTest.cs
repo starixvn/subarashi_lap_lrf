@@ -4,14 +4,19 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Http.Results;
+
     using Base.UnitTests;
-    using Model.Core.DataDomain;
+
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Resources;
     using Fanex.Athena.Service.Report.Interfaces;
+
+    using Model.Core.DataDomain;
     using Model.Report.DTO.SubsidiaryPerformance;
     using Model.Report.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
 
     [TestFixture]
@@ -61,7 +66,6 @@
                 IsManageableSubsidiary = true,
                 UserLevel = UserLevelType.Subsidiary,
                 CurrencyAgentList = new Dictionary<int, int[]>()
-
             });
 
             var resultData = new SubsidiaryResultViewModel
@@ -92,7 +96,6 @@
                 UserLevel = UserLevelType.Licensee,
                 CurrencyAgentList = new Dictionary<int, int[]> { { 1, new[] { 1, 2, 3 } } },
                 CurrencyList = new Dictionary<int, string> { { 1, "USD" }, { 2, "EUR" }, { 3, "VND" } }
-
             });
 
             var currencyAgentList = new Dictionary<int, IEnumerable<int>> { { 1, new[] { 1, 2, 3 } } };

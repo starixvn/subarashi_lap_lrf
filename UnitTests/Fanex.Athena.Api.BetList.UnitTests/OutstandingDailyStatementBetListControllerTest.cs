@@ -2,12 +2,17 @@
 {
     using System.Net.Http;
     using System.Threading.Tasks;
+
     using Base.UnitTests;
+
     using Model.BetList.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
-    using Service.Core.Utility.Interfaces;
+
     using Service.StatelessCore.Interfaces;
+
     using UnitTest.Common.Helpers;
 
     public class OutstandingDailyStatementBetListControllerTest : BaseApiControllerHelperTest

@@ -3,10 +3,15 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+
     using Core.Users.Interfaces;
+
     using DataAccess.Core.Users.Interfaces;
+
     using Extension.Utility.Interfaces;
+
     using Fanex.Athena.Service.Report.Interfaces;
+
     using Model.Core.DataDomain;
     using Model.Core.DTO.Configuration;
     using Model.Report.DTO;

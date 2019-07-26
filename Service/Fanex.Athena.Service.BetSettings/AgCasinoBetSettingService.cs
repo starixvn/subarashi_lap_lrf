@@ -11,19 +11,25 @@ namespace Fanex.Athena.Service.BetSettings
     using System.Linq;
     using System.Threading.Tasks;
     using System.Xml.Linq;
+
     using Common;
-    using Core.Utility.Interfaces;
+
     using DataAccess.BetSettings.Interfaces;
+
     using Extension.Utility;
     using Extension.Utility.Interfaces;
+
     using Fanex.Athena.Extension.Helpers;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Logging;
+
     using Interfaces;
+
     using Model.BetSettings.DTO;
     using Model.BetSettings.DTO.AgCasino;
     using Model.BetSettings.ViewModel;
     using Model.Core.DTO.Common;
+
     using Resources;
 
     public class AgCasinoBetSettingService : BetSettingBaseService, IAgCasinoBetSettingService

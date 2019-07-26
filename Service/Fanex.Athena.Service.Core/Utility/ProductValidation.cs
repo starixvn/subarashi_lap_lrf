@@ -12,11 +12,13 @@ namespace Fanex.Athena.Service.Core.Utility
     {
         private readonly IProductService _productService;
         private readonly ISessionService _sessionService;
+
         public ProductValidation(IProductService productService, ISessionService sessionService)
         {
             _productService = productService;
             _sessionService = sessionService;
         }
+
         public bool IsValid(IMetaModelProductCodeList model, ProductValidationOption option)
         {
             if (string.IsNullOrEmpty(option.FunctionConfig) || model == null
@@ -47,7 +49,6 @@ namespace Fanex.Athena.Service.Core.Utility
             var allowedProductCodes = productAccess.ProductList.Select(x => x.ProductCode).ToArray();
 
             return !productCodes.Except(allowedProductCodes).Any();
-
         }
     }
 }

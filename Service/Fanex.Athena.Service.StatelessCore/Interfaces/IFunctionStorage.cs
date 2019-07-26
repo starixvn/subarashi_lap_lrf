@@ -1,6 +1,7 @@
 ﻿namespace Fanex.Athena.Service.StatelessCore.Interfaces
 {
     using System.Collections.Generic;
+
     using Fanex.Athena.Model.Core.DTO.Common;
 
     public interface IFunctionStorage

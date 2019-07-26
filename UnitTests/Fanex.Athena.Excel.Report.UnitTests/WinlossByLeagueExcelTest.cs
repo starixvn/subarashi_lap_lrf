@@ -1,4 +1,5 @@
 ﻿using System;
+
 using Fanex.Athena.Excel.Base;
 using Fanex.Athena.Excel.Base.Extension;
 using Fanex.Athena.Excel.Report.UnitTests.TestableClasses;
@@ -7,8 +8,11 @@ using Fanex.Athena.Model.Report.DTO;
 using Fanex.Athena.Model.Report.MetaModel;
 using Fanex.Athena.Resources;
 using Fanex.Athena.UnitTest.Common.Helpers;
+
 using NPOI.SS.UserModel;
+
 using NSubstitute;
+
 using NUnit.Framework;
 
 namespace Fanex.Athena.Excel.Report.UnitTests

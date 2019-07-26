@@ -4,8 +4,10 @@
     using System.Linq;
 
     using DataAccess.Core.Common.Interfaces;
+
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Service.StatelessCore;
+
     using NSubstitute;
 
     using NUnit.Framework;

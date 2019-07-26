@@ -3,19 +3,29 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
+
     using BetSettings;
     using BetSettings.Interfaces;
+
     using DataAccess.BetSettings.Interfaces;
+
     using Extension.Utility;
     using Extension.Utility.Interfaces;
+
     using Fanex.Logging;
+
     using Model.BetSettings.DTO;
     using Model.BetSettings.DTO.AgCasino;
     using Model.Core.DTO.Common;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Resources;
+
     using StatelessCore.Interfaces;
+
     using UnitTest.Common.Helpers;
 
     [TestFixture]

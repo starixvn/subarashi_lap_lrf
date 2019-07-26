@@ -3,12 +3,17 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using DataAccess.Core.Common.Interfaces;
+
     using Fanex.Athena.Service.StatelessCore;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.UnitTest.Common.Helpers;
+
     using Model.Core.DTO.Common;
+
     using NSubstitute;
+
     using NUnit.Framework;
 
     [TestFixture]

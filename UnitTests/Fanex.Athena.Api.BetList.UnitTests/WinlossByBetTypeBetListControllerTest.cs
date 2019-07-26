@@ -4,10 +4,14 @@
     using System.Collections.Generic;
     using System.Net.Http;
     using System.Threading.Tasks;
+
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Service.Core.Utility.Interfaces;
+
     using Model.BetList.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
 
     public class WinlossByBetTypeBetListControllerTest : ApiBetListBaseControllerHelperTest
@@ -16,6 +20,7 @@
 
         private const string ApiPath = "/BetList/GetBetListPaging";
         private ICurrencyValidation _currencyValidation;
+
         [SetUp]
         public void SetUp()
         {
@@ -27,14 +32,12 @@
             AuthorizationService.HasPermissionOnData(SessionLicenseeId, Arg.Any<int>(), Arg.Any<long>()).Returns(true);
         }
 
-        [TestCase(true,false)]
+        [TestCase(true, false)]
         [TestCase(false, false)]
         [TestCase(false, true)]
-
         public async Task Detail_InvalidCurrency_ReturnNull(bool validCurrency,
             bool validBaseCurrency)
         {
-
             using (var controller = CreateController())
             {
                 _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(validCurrency);
@@ -70,10 +73,11 @@
                 const string SortBy = "Index";
                 const string SortOrder = "asc";
 
-                StubUserSessionData(new UserAuthInfo { Language = SessionLanguage,
+                StubUserSessionData(new UserAuthInfo
+                {
+                    Language = SessionLanguage,
                     CurrencyList = new Dictionary<int, string> { { currencyId, "Currency" } },
                     CurrencyAgentList = new Dictionary<int, int[]>()
-
                 });
 
                 var expect = new HttpResponseMessage();

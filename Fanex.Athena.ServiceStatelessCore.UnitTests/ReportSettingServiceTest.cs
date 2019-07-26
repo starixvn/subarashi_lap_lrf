@@ -1,5 +1,8 @@
 ﻿namespace Fanex.Athena.ServiceStatelessCore.UnitTests
 {
+    using System;
+    using System.Collections.Generic;
+
     using Extension.Utility;
     using Extension.Utility.Interfaces;
 
@@ -14,9 +17,6 @@
 
     using NUnit.Framework;
 
-    using System;
-    using System.Collections.Generic;
-
     using UnitTest.Common.Helpers;
 
     [TestFixture]
@@ -30,7 +30,8 @@
 
         private ILicenseeSettingService _fakeLicenseeSettingService;
 
-        const string LicenseeName = "12Bet";
+        private const string LicenseeName = "12Bet";
+
         [SetUp]
         public void SetUp()
         {

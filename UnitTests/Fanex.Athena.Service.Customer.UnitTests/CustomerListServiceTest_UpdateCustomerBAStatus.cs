@@ -1,10 +1,13 @@
 ﻿namespace Fanex.Athena.Service.Customer.UnitTests
 {
-    using System.Threading.Tasks;
     using Model.Core.DTO.Common;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Resources;
+
     using UnitTest.Common.Helpers;
 
     [TestFixture]
@@ -23,10 +26,10 @@
 
             // Action
             var result = _customerListService.UpdateCustomerBAStatus(
-                licenseeId, 
-                custId, 
-                FakeHelper.Create<int>(), 
-                FakeHelper.Create<bool>(), 
+                licenseeId,
+                custId,
+                FakeHelper.Create<int>(),
+                FakeHelper.Create<bool>(),
                 FakeHelper.Create<Request>());
 
             // Assert

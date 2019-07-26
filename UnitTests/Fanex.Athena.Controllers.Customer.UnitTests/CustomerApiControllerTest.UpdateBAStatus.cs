@@ -1,20 +1,24 @@
 ﻿namespace Fanex.Athena.Controllers.UnitTests
 {
     using System.Collections.Generic;
-    using System.Threading.Tasks;
     using System.Web.Mvc;
+
     using Base.UnitTests;
+
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.UnitTest.Common.Extensions;
+
     using Model.Core.DTO.Common;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Resources;
 
     [TestFixture]
     public partial class CustomerApiControllerTest : CultureBaseControllerHelperTest
     {
-
         [Test]
         public void UpdateBAStatus_FakeLicensee_ReturnErrorResult()
         {

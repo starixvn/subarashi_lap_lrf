@@ -2,17 +2,19 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
     using Base.UnitTests;
+
     using Model.Core.ResultModel;
     using Model.Report.DTO.SubsidiaryPerformance;
-    using Model.Report.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
 
     [TestFixture]
     public partial class SubsidiaryPerformanceReportControllerTest : BaseApiControllerHelperTest
     {
-
         [Test]
         public async Task Detail_EmptyAgentList_ReturnEmptyData()
         {
@@ -20,7 +22,7 @@
             var metaModel = GetMetaModel();
             StubSingleWalletProductAccess(new[] { "SB", "BA" });
             _subsidiaryService.GetCurrencyAgentList(Arg.Any<string>(), Arg.Any<bool>()).Returns(new Dictionary<int, IEnumerable<int>>());
-           
+
             // Action
             var result = await _controller.Detail(metaModel);
 

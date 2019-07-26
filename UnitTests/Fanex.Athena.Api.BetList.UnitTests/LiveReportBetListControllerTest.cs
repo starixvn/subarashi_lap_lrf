@@ -3,10 +3,15 @@
     using System.Collections.Generic;
     using System.Net.Http;
     using System.Threading.Tasks;
+
     using Fanex.Athena.Model.Auth;
+
     using Model.BetList.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using UnitTest.Common.Helpers;
 
     public class LiveReportBetListControllerTest : ApiBetListBaseControllerHelperTest
@@ -37,7 +42,6 @@
             AuthorizationService.HasPermissionOnData(SessionLicenseeId, Arg.Any<int>(), Arg.Any<long>()).Returns(true);
         }
 
-
         [Test]
         public async Task Outright_InvalidCurrency_ReturnNull()
         {
@@ -53,7 +57,6 @@
                 Assert.That(result, Is.Null);
             }
         }
-
 
         [TestCase(0)]
         [TestCase(1)]
@@ -208,7 +211,9 @@
 
         private LiveReportBetListMetaModel CreateInvalidCurrencyMetaModel()
         {
-            StubUserSessionData(new UserAuthInfo { CurrencyList = new Dictionary<int, string>(),
+            StubUserSessionData(new UserAuthInfo
+            {
+                CurrencyList = new Dictionary<int, string>(),
                 CurrencyAgentList = new Dictionary<int, int[]>()
             });
 

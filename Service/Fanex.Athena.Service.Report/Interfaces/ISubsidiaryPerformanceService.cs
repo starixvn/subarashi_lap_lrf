@@ -2,7 +2,9 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
     using Fanex.Athena.Model.Report.MetaModel;
+
     using Model.Core.ResultModel;
     using Model.Report.DTO.SubsidiaryPerformance;
 

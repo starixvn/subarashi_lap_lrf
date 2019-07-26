@@ -69,6 +69,7 @@
         string TempFilePath { get; }
 
         string GetValue(string key);
+
         int BetListApiClientTimeOutMinutes { get; }
     }
 }

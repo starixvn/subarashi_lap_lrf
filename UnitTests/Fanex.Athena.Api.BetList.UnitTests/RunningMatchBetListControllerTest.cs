@@ -3,9 +3,13 @@
     using System.Collections.Generic;
     using System.Net.Http;
     using System.Threading.Tasks;
+
     using Fanex.Athena.Model.Auth;
+
     using Model.BetList.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
 
     public class RunningMatchBetListControllerTest : ApiBetListBaseControllerHelperTest
@@ -37,7 +41,6 @@
                     Language = SessionLanguage,
                     CurrencyList = new Dictionary<int, string> { { currencyId, "Currency" } },
                     CurrencyAgentList = new Dictionary<int, int[]>()
-
                 });
 
                 var expect = new HttpResponseMessage();

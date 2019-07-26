@@ -1,12 +1,18 @@
 ﻿namespace Fanex.Athena.DataAccess.Forecast.UnitTests
 {
     using System.Threading.Tasks;
+
     using Core.UnitTests.TestHelpers;
+
     using Forecast;
+
     using Model.Forecast.DTO.ForecastAH;
     using Model.Forecast.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using VendorAdapter.Interfaces;
 
     [TestFixture]

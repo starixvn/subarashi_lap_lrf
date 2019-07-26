@@ -13,17 +13,19 @@ namespace Fanex.Athena.Service.Core.Users
     using System.Collections.Generic;
     using System.Linq;
     using System.Web;
-    using Model.Core.DataDomain;
+
     using DataAccess.Core.Common.Interfaces;
     using DataAccess.Core.Users.Interfaces;
+
     using Fanex.Athena.Extension.Utility;
-    using Fanex.Athena.Model.Core.DTO.Users;
-    using Fanex.Athena.Service.Core.Users.Interfaces;
-    using Model.Core.DTO.Common;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Auth.Enum;
+    using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
+
+    using Model.Core.DataDomain;
+    using Model.Core.DTO.Common;
 
     public class SessionService : ISessionService
     {
@@ -39,6 +41,7 @@ namespace Fanex.Athena.Service.Core.Users
 
         private readonly ISessionStorage _sessionStorage;
         private readonly IAppSettings _appSettings;
+
         public SessionService(
             IFunctionService functionService,
             ILicenseeDataAccess licenseeDataAccess,
@@ -149,7 +152,6 @@ namespace Fanex.Athena.Service.Core.Users
             return false;
         }
 
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Sonar Code Smell", "S3995:UriReturnValuesShouldNotBeStrings",
            Justification = "Reviewed. Suppression is OK here.")]
         private static string GetDefaultReportUrl(IEnumerable<int> functionIdList, IEnumerable<Function> functionList)
@@ -165,6 +167,7 @@ namespace Fanex.Athena.Service.Core.Users
 
             return DefaultReportPath;
         }
+
         private static LicenseeAuthInfo GenerateLicenseeInfo(Licensee selectedLicensee)
         {
             return new LicenseeAuthInfo

@@ -7,8 +7,10 @@
     using DataAccess.Core.Common.Interfaces;
 
     using Extension.Utility.Interfaces;
+
     using Fanex.Athena.Service.StatelessCore;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Model.Core.DTO.Common;
 
     using NSubstitute;
@@ -21,6 +23,7 @@
     public class MatchServiceTest
     {
         private const string Language = "en-Us";
+
         private static readonly IList<Match> ExpectedResultDataList = new List<Match>
             {
                 new Match { MatchId = 1 }

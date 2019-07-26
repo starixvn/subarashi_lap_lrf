@@ -1,10 +1,13 @@
 ﻿namespace Fanex.Athena.DataAccess.Core.UnitTests.Users
 {
-    using System.Data;
     using Core.Users;
+
     using Model.Core.DTO.Common;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using TestHelpers;
 
     public class LicenseeDataAccessTest : BaseDataAccessHelperTest<LicenseeDataAccess>

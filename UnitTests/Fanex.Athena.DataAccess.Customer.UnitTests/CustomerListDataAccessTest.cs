@@ -3,12 +3,18 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using Core.UnitTests.TestHelpers;
+
     using Customer;
+
     using Model.Core.DTO.Common;
     using Model.Customer.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Resources;
 
     public class CustomerListDataAccessTest : BaseDataAccessHelperTest<CustomerListDataAccess>

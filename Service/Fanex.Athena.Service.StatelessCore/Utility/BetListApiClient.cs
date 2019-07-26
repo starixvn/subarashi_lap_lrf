@@ -1,15 +1,19 @@
 ﻿namespace Fanex.Athena.Service.StatelessCore.Utility
 {
-    using Fanex.Athena.Extension.Utility;
-    using Fanex.Athena.Service.StatelessCore.CustomException;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Newtonsoft.Json;
-    using RestSharp;
     using System;
     using System.IO;
     using System.Net.Http;
     using System.Net.Http.Headers;
     using System.Threading.Tasks;
+
+    using Fanex.Athena.Extension.Utility;
+    using Fanex.Athena.Service.StatelessCore.CustomException;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
+    using Newtonsoft.Json;
+
+    using RestSharp;
+
 
     public class BetListApiClient : IBetListApiClient
     {
@@ -18,10 +22,12 @@
         private const string LANGUAGEKEY = "Language";
 
         private readonly IAppSettings _appSetting;
+
         public BetListApiClient(IAppSettings appSettings)
         {
             _appSetting = appSettings;
         }
+
         private async Task<T> HandleAsync<T>(string path, object value,
             string language, Func<IRestResponse, Task<T>> codeBlock, int timeout = 0)
         {
@@ -49,7 +55,6 @@
             }
 
             return await codeBlock(result).ConfigureAwait(false);
-
         }
 
         public async Task<HttpResponseMessage> PostAsync(string path, object value, string language, int timeout = 0)
@@ -59,7 +64,6 @@
               var result = new HttpResponseMessage(x.StatusCode)
               {
                   Content = new StreamContent(new MemoryStream(x.RawBytes)),
-
               };
               if (!string.IsNullOrEmpty(x.ContentType))
               {
@@ -72,7 +76,6 @@
 
               return await Task.FromResult(result).ConfigureAwait(false);
           }, timeout).ConfigureAwait(false);
-
         }
 
         public async Task<T> PostAsync<T>(string path, object value, string language, int timeout = 0)
@@ -93,7 +96,6 @@
             {
                 Stream stream = new MemoryStream(x.RawBytes);
                 return await Task.FromResult(stream).ConfigureAwait(false);
-
             }, timeout).ConfigureAwait(false);
         }
 

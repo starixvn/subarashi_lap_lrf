@@ -2,17 +2,26 @@
 {
     using System;
     using System.Threading.Tasks;
+
     using CitiXchangeLibrary;
-    using Model.Core.DataDomain;
+
     using DataAccess.BetSettings.Interfaces;
     using DataAccess.Core.Common.Constants;
     using DataAccess.Core.Common.Interfaces;
+
     using Extension.Utility;
+
     using Logging;
+
+    using Model.Core.DataDomain;
     using Model.Core.MetaModel.Common;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using StatelessCore.Interfaces;
+
     using UnitTest.Common.Helpers;
 
     [TestFixture]
@@ -178,7 +187,6 @@
                 _apiClient.Received(1).updateCommission(_custId, expectedComm, Enviro.PRD);
             });
         }
-
 
         [Test]
         public async Task UpdateCommissionAsync_CallApiSuccess_CallWriteLogRunSP()

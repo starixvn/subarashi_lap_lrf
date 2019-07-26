@@ -1,5 +1,7 @@
 ﻿using NPOI.SS.UserModel;
+
 using NSubstitute;
+
 using NUnit.Framework;
 
 namespace Fanex.Athena.Excel.Report.UnitTests

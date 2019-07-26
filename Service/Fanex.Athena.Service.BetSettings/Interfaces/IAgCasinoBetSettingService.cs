@@ -7,8 +7,10 @@
 namespace Fanex.Athena.Service.BetSettings.Interfaces
 {
     using System.Threading.Tasks;
+
     using Fanex.Athena.Model.BetSettings.ViewModel;
     using Fanex.Athena.Model.Core.DTO.Common;
+
     using Model.BetSettings.DTO;
 
     public interface IAgCasinoBetSettingService

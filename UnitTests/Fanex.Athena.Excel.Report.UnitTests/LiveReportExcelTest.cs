@@ -3,18 +3,26 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+
     using Base;
     using Base.Entities;
     using Base.Extension;
+
     using Model.Report.DTO.LiveReports;
     using Model.Report.MetaModel;
     using Model.Report.ViewModel.LiveReports;
+
     using NPOI.SS.UserModel;
     using NPOI.SS.Util;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Resources;
+
     using TestableClasses;
+
     using UnitTest.Common.Helpers;
 
     public class LiveReportExcelTest : BaseReportExcelTest

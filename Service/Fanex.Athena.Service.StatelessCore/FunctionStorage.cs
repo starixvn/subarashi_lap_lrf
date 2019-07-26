@@ -2,8 +2,10 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+
     using Fanex.Athena.DataAccess.Core.Common.Interfaces;
     using Fanex.Athena.Model.Core.DTO.Common;
+
     using Interfaces;
 
     public class FunctionStorage : IFunctionStorage

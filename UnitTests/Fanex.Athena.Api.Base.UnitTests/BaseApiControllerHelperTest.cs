@@ -1,12 +1,18 @@
 ﻿namespace Fanex.Athena.Api.Base.UnitTests
 {
     using System.Collections.Generic;
+
     using Extension.Utility;
+
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Model.Core.DTO.Common;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
 
@@ -71,7 +77,6 @@
                 CurrencyList = new Dictionary<int, string> { { 1, "EUR" }, { 2, "USD" } },
                 Language = SessionLanguage,
                 CurrencyAgentList = new Dictionary<int, int[]>()
-
             };
 
             var licenseeSession = new LicenseeAuthInfo

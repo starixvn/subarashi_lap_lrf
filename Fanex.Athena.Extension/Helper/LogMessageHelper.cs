@@ -8,6 +8,7 @@
     using System.Linq;
     using System.Text;
     using System.Web;
+
     using Fanex.Data;
 
     public static class LogMessageHelper

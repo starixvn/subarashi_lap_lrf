@@ -9,11 +9,16 @@ namespace Fanex.Athena.Service.BetSettings
     using System.Collections.Generic;
     using System.Text;
     using System.Threading.Tasks;
+
     using DataAccess.BetSettings.Interfaces;
+
     using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Interfaces;
+
     using Model.BetSettings.DTO;
     using Model.Core.DTO.Common;
+
     using Resources;
 
     public class DcsBetSettingService : BetSettingBaseService, IDcsBetSettingService

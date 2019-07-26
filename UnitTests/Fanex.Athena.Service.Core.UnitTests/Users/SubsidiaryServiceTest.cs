@@ -3,13 +3,20 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+
     using Core.Users.Interfaces;
+
     using DataAccess.Core.Users.Interfaces;
+
     using Extension.Utility.Interfaces;
+
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Report.DTO;
+
     using Interfaces;
+
     using NSubstitute;
+
     using NUnit.Framework;
 
     [TestFixture]

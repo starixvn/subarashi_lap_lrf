@@ -1,6 +1,7 @@
 ﻿namespace Fanex.Athena.Service.BetSettings.Interfaces
 {
     using System.Threading.Tasks;
+
     using Fanex.Athena.Model.Core.DTO.Common;
 
     public interface IExchangeCommApiService

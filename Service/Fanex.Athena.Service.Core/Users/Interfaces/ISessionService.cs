@@ -10,9 +10,8 @@
 namespace Fanex.Athena.Service.Core.Users.Interfaces
 {
     using System.Collections.Generic;
-    using System.Threading.Tasks;
+
     using Fanex.Athena.Model.Auth;
-    using Fanex.Athena.Model.Core.DTO.Users;
 
     public interface ISessionService
     {

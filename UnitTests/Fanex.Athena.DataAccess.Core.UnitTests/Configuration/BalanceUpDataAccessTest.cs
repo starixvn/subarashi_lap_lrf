@@ -1,14 +1,21 @@
 ﻿namespace Fanex.Athena.DataAccess.Core.UnitTests.Configuration
 {
     using System;
-    using System.Threading.Tasks;
+
     using Core.Configuration;
+
     using Data;
+
     using Extension.Utility.Interfaces;
+
     using Logging;
+
     using Model.Core.DTO.Configuration;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using TestHelpers;
 
     public class BalanceUpDataAccessTest : BaseDataAccessHelperTest<BalanceUpDataAccess>

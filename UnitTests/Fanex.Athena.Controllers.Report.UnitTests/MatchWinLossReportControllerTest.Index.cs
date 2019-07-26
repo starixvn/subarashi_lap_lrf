@@ -4,12 +4,17 @@
     using System.Data;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+
     using Base.UnitTests;
+
     using Model.Report.DTO;
     using Model.Report.MetaModel;
     using Model.Report.ViewModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Web.ResultExtension;
 
     [TestFixture]

@@ -1,12 +1,17 @@
 ﻿namespace Fanex.Athena.DataAccess.Core.UnitTests.Common
 {
-    using System.Data;
     using System.Threading.Tasks;
+
     using Core.Common;
+
     using Fanex.Athena.DataAccess.Core.UnitTests.TestHelpers;
+
     using Model.Core.MetaModel.Common;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using UnitTest.Common.Helpers;
 
     public class UserLogDataAccessTest : BaseDataAccessHelperTest<UserLogDataAccess>

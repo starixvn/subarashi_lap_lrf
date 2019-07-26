@@ -20,10 +20,10 @@ namespace Fanex.Athena.Extension.Utility
         }
 
         public DictionaryPropertyComparer(
-            object key, 
-            string dicProperty, 
-            ListSortDirection dicDirection, 
-            string propertyName, 
+            object key,
+            string dicProperty,
+            ListSortDirection dicDirection,
+            string propertyName,
             ListSortDirection propDirection)
             : base(dicProperty, dicDirection, propertyName, propDirection)
         {

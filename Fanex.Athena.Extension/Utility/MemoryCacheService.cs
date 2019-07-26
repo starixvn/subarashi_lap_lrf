@@ -1,8 +1,11 @@
 ﻿namespace Fanex.Athena.Extension.Utility
 {
     using System;
+
     using Interfaces;
+
     using Internal;
+
     using Newtonsoft.Json;
 
     public class MemoryCacheService : IMemoryCacheService

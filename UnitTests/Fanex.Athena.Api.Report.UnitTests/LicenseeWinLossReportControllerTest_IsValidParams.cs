@@ -1,11 +1,15 @@
 ﻿namespace Fanex.Athena.Api.Report.UnitTests
 {
+    using System;
+    using System.Collections.Generic;
+
     using Base.UnitTests;
 
     using DataAccess.Report.Interfaces;
 
     using Fanex.Athena.Model.Core.MetaModel.Product;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Model.Core.DataDomain;
     using Model.Core.DTO.Configuration;
     using Model.Report.MetaModel;
@@ -15,9 +19,6 @@
     using NSubstitute;
 
     using NUnit.Framework;
-
-    using System;
-    using System.Collections.Generic;
 
     public class LicenseeWinLossReportControllerTest_IsValidParams : BaseApiControllerHelperTest
     {
@@ -110,7 +111,6 @@
                         Status=true
                     }
                 }
-
             };
 
             // Action

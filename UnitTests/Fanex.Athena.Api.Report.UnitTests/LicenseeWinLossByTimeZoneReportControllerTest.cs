@@ -3,12 +3,17 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
     using Base.UnitTests;
+
     using DataAccess.Report.Interfaces;
+
     using Model.Core.ResultModel;
     using Model.Report.DTO;
     using Model.Report.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
 
     [TestFixture]

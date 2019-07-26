@@ -1,5 +1,10 @@
 ﻿namespace Fanex.Athena.Api.Report.UnitTests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
     using Base.UnitTests;
 
     using DataAccess.Report.Interfaces;
@@ -12,6 +17,7 @@
 
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Model.Core.DTO.Common;
     using Model.Core.MetaModel.Product;
     using Model.Core.ResultModel;
@@ -24,11 +30,6 @@
     using NSubstitute;
 
     using NUnit.Framework;
-
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
 
     public class LicenseeWinLossReportControllerTest : BaseApiControllerHelperTest
     {
@@ -318,7 +319,6 @@
                 },
                 FunctionIdList = new int[0],
                 CurrencyAgentList = new Dictionary<int, int[]>()
-
             });
             StubLicenseeSessionData(new LicenseeAuthInfo { LicenseeId = 1 });
 

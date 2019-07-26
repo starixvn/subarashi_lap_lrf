@@ -32,7 +32,7 @@ namespace Fanex.Athena.Extension.Utility
             UpdateSortingData(dicPropertyName, dicAscending);
 
             var comparer = new DictionaryPropertyComparer<T>(
-                key, 
+                key,
                 _propertyName,
                 dicAscending ? ListSortDirection.Ascending : ListSortDirection.Descending,
                 propName,
@@ -59,7 +59,7 @@ namespace Fanex.Athena.Extension.Utility
             UpdateSortingData(firstPropertyName, firstAscending);
 
             var comparer = new PropertyComparer<T>(
-                firstPropertyName, 
+                firstPropertyName,
                 _ascending ? ListSortDirection.Ascending : ListSortDirection.Descending,
                 secondPropertyName,
                 secondAscending ? ListSortDirection.Ascending : ListSortDirection.Descending);

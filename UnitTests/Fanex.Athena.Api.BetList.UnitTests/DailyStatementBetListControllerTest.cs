@@ -5,11 +5,16 @@
     using System.Net.Http;
     using System.Text;
     using System.Threading.Tasks;
+
     using Fanex.Athena.Model.Auth;
+
     using Model.BetList.MetaModel;
     using Model.Core.DTO.Configuration;
+
     using Newtonsoft.Json;
+
     using NSubstitute;
+
     using NUnit.Framework;
 
     public class DailyStatementBetListControllerTest : ApiBetListBaseControllerHelperTest
@@ -29,7 +34,6 @@
 
             AuthorizationService.HasPermissionOnData(SessionLicenseeId, Arg.Any<int>(), Arg.Any<long>()).Returns(true);
         }
-
 
         [TestCase(0, "01/01/2018", "01/02/2018", UspKeyOld)]
         [TestCase(1, "01/03/2018", "01/02/2018", UspKey)]
@@ -52,8 +56,6 @@
                     Language = SessionLanguage,
                     CurrencyList = new Dictionary<int, string> { { currencyId, "Test" } },
                     CurrencyAgentList = new Dictionary<int, int[]>()
-
-
                 });
 
                 dynamic betListResult = new

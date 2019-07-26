@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+
 using Fanex.Athena.Excel.Base;
 using Fanex.Athena.Excel.Base.Entities;
 using Fanex.Athena.Excel.Base.Extension;
@@ -10,8 +11,11 @@ using Fanex.Athena.Model.Report.DTO;
 using Fanex.Athena.Model.Report.MetaModel;
 using Fanex.Athena.Resources;
 using Fanex.Athena.UnitTest.Common.Helpers;
+
 using NPOI.SS.UserModel;
+
 using NSubstitute;
+
 using NUnit.Framework;
 
 namespace Fanex.Athena.Excel.Report.UnitTests
@@ -89,7 +93,7 @@ namespace Fanex.Athena.Excel.Report.UnitTests
             excel.Public_AssignNoInfoRow(FakeSheet);
 
             // Assert
-            FakeSheet.Received().SetTextRowValue(excel.TemplateSheet, 0,1, 5, ViewResources.NoInfo);
+            FakeSheet.Received().SetTextRowValue(excel.TemplateSheet, 0, 1, 5, ViewResources.NoInfo);
         }
 
         [Test]

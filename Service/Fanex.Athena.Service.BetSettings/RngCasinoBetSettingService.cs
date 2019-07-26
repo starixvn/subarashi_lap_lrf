@@ -9,6 +9,7 @@ namespace Fanex.Athena.Service.BetSettings
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+
     using DataAccess.BetSettings.Interfaces;
 
     using Extension.Utility;

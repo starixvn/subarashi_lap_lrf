@@ -3,14 +3,19 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using Core.Users.Interfaces;
+
     using DataAccess.Report.Interfaces;
+
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Report.DTO.SubsidiaryPerformance;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Service.Report.Interfaces;
+
     using Model.Core.ResultModel;
     using Model.Report.DTO;
+
     using Resources;
 
     public class SubsidiaryPerformanceService : ISubsidiaryPerformanceService

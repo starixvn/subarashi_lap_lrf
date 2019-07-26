@@ -3,10 +3,15 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
+
     using Core.UnitTests.TestHelpers;
+
     using Data;
+
     using Model.Report.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
 
     [TestFixture]

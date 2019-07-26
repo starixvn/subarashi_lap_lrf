@@ -2,12 +2,17 @@
 {
     using System.Threading;
     using System.Web;
+
     using Core.Common;
     using Core.Common.Interfaces;
     using Core.Users.Interfaces;
+
     using Fanex.Athena.Model.Auth;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using UnitTest.Common.Helpers;
 
     [TestFixture]

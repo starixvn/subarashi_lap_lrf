@@ -9,12 +9,16 @@ namespace Fanex.Athena.Service.Report
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using Model.Core.DataDomain;
+
     using DataAccess.Report.Interfaces;
+
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.ViewModel;
     using Fanex.Athena.Service.Report.Interfaces;
+
+    using Model.Core.DataDomain;
+
     using VendorAdapter.Interfaces;
 
     public class SettledMatchCountService : ISettledMatchCountService

@@ -1,6 +1,7 @@
 ﻿namespace Fanex.Athena.Service.Customer.UnitTests.Helpers
 {
     using Customer.Helpers;
+
     using NUnit.Framework;
 
     [TestFixture]

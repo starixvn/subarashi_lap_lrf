@@ -1,11 +1,14 @@
 ﻿namespace Fanex.Athena.Service.Customer.UnitTests
 {
-    using System.Threading.Tasks;
     using Model.Core.DTO.Common;
     using Model.Customer.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Resources;
+
     using UnitTest.Common.Helpers;
 
     [TestFixture]

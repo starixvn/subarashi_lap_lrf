@@ -1,6 +1,6 @@
 ﻿namespace Fanex.Athena.Service.Customer.UnitTests
 {
-    using Core.Common.Interfaces;
+
 
     using DataAccess.Customer.Interfaces;
 

@@ -3,18 +3,26 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
     using Base.UnitTests;
-    using Model.Core.DataDomain;
+
     using DataAccess.Report.Interfaces;
+
     using Excel.Report;
+
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Auth.Enum;
     using Fanex.Athena.Service.Core.Utility.Interfaces;
+
+    using Model.Core.DataDomain;
     using Model.Core.ResultModel;
     using Model.Report.DTO;
     using Model.Report.MetaModel;
+
     using NPOI.SS.UserModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
 
     public class GoldDeluxeWinLossReportControllerTest : BaseApiControllerHelperTest
@@ -22,6 +30,7 @@
         private IGoldDeluxeWinLossDataAccess _dataAccess;
         private GoldDeluxeWinLossReportController _controller;
         private ICurrencyValidation _currencyValidation;
+
         [SetUp]
         public void SetUp()
         {

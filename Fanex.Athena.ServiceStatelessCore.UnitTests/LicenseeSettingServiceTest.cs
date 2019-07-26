@@ -1,6 +1,9 @@
 ﻿namespace Fanex.Athena.ServiceStatelessCore.UnitTests
 {
+    using System.Collections.Generic;
+
     using Extension.Utility.Interfaces;
+
     using Fanex.Athena.Service.StatelessCore;
     using Fanex.Athena.UnitTest.Common.Helpers;
 
@@ -9,8 +12,6 @@
     using NSubstitute;
 
     using NUnit.Framework;
-
-    using System.Collections.Generic;
 
     [TestFixture]
     public class LicenseeSettingServiceTest

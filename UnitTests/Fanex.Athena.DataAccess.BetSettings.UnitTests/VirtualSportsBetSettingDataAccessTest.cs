@@ -2,14 +2,20 @@
 {
     using System.Data;
     using System.Threading.Tasks;
+
     using Core.UnitTests.TestHelpers;
+
     using Fanex.Logging;
+
     using Model.BetSettings.DTO;
     using Model.Core.DTO.Common;
+
     using NSubstitute;
+
     using NUnit.Framework;
-    using Service.Core.Utility.Interfaces;
+
     using UnitTest.Common.Helpers;
+
     using VendorAdapter.Interfaces;
 
     [TestFixture]

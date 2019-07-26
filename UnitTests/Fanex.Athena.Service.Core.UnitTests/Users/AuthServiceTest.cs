@@ -1,15 +1,21 @@
 ﻿namespace Fanex.Athena.Service.Core.UnitTests.Users
 {
-    using System.Threading.Tasks;
     using Core.Users;
     using Core.Users.Interfaces;
+
     using DataAccess.Core.Users.Interfaces;
+
     using Fanex.Common;
+
     using Model.Core.DTO.Common;
     using Model.Core.DTO.Users;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Resources;
+
     using UnitTest.Common.Helpers;
 
     [TestFixture]

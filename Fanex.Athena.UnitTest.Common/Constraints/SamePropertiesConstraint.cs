@@ -1,6 +1,7 @@
 ﻿namespace Fanex.Athena.UnitTest.Common.Constraints
 {
     using NUnit.Framework.Constraints;
+
     using Utility;
 
     public class SamePropertiesConstraint : Constraint

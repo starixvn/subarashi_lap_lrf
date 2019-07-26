@@ -1,4 +1,7 @@
-﻿using Fanex.Athena.Model.Auth;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
+
+using Fanex.Athena.Model.Auth;
 using Fanex.Athena.Service.Core.Users.Interfaces;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
 using Fanex.Athena.UnitTest.Common.Helpers;
@@ -8,9 +11,6 @@ using Fanex.Athena.Web.ActionFilter;
 using NSubstitute;
 
 using NUnit.Framework;
-
-using System.Collections.Generic;
-using System.Web.Mvc;
 
 namespace Fanex.Athena.Web.UnitTests.ActionFilter
 {

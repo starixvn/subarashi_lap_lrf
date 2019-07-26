@@ -181,7 +181,9 @@ namespace Fanex.Athena.Extension.Utility
         {
             return ConfigurationManager.AppSettings[key];
         }
+
         public int BetListApiClientTimeOutMinutes => int.Parse(GetValue("BetListApiClientTimeOutMinutes"));
+
         private IEnumerable<int> GetIntegers(string key)
         {
             var value = GetValue(key);

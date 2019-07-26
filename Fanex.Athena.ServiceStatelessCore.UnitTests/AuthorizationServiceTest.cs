@@ -17,6 +17,7 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
 
         private IAthorizationDataAccess _authorizationDataAccess;
         private IFunctionService _functionService;
+
         [SetUp]
         public void SetUp()
         {
@@ -24,6 +25,7 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
             _functionService = Substitute.For<IFunctionService>();
             _authorizationService = new AuthorizationService(_authorizationDataAccess, _functionService);
         }
+
         [Test]
         public void IsAllowedEditCommission_ApplicationModeIsParasiticAndPortalFunctionListContainCorrectKey_ReturnTrue()
         {
@@ -135,6 +137,5 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
             // Assert
             Assert.That(result, Is.False);
         }
-
     }
 }

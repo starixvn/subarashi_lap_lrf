@@ -1,6 +1,7 @@
 ﻿namespace Fanex.Athena.Service.Customer.Interfaces
 {
     using System.Threading.Tasks;
+
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Customer.MetaModel;
 

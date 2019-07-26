@@ -7,12 +7,17 @@
     using System.Web.Http.Hosting;
     using Base.UnitTests;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Model.Core.DataDomain;
     using Model.Core.MetaModel.Product;
     using Model.Report.MetaModel;
+
     using NPOI.SS.UserModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Report;
 
     public class PlatformWinLossReportControllerTest : BaseApiControllerHelperTest

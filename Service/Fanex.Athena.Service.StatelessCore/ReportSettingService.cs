@@ -6,17 +6,21 @@
 
 namespace Fanex.Athena.Service.StatelessCore
 {
-    using Extension.Helper;
-    using Extension.Utility.Interfaces;
-    using Fanex.Athena.Extension.Utility;
-    using Fanex.Athena.Model.Core.DTO.Configuration;
-    using Interfaces;
-    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Web.Hosting;
+
+    using Extension.Helper;
+    using Extension.Utility.Interfaces;
+
+    using Fanex.Athena.Extension.Utility;
+    using Fanex.Athena.Model.Core.DTO.Configuration;
+
+    using Interfaces;
+
+    using Newtonsoft.Json;
 
     public class ReportSettingService : IReportSettingService
     {

@@ -2,11 +2,16 @@
 {
     using System.Linq;
     using System.Threading.Tasks;
+
     using Core.UnitTests.TestHelpers;
+
     using Model.TotalBet.DTO;
     using Model.TotalBet.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using TotalBet;
 
     public class FirstGoalLastGoalDataAccessTest : BaseDataAccessHelperTest<FirstGoalLastGoalDataAccess>

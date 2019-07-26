@@ -2,14 +2,18 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
     using Fanex.Athena.DataAccess.Core.UnitTests.TestHelpers;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Module.Dashboard.Data.Dashboard;
     using Fanex.Athena.Module.Dashboard.MetaModel;
     using Fanex.Athena.Module.Dashboard.ViewModel;
     using Fanex.Athena.UnitTest.Common.Helpers;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using UnitTest.Common.Extensions;
 
     [TestFixture]

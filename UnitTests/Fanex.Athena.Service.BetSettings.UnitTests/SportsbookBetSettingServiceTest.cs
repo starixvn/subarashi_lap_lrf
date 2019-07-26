@@ -2,16 +2,24 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
     using BetSettings;
     using BetSettings.Interfaces;
+
     using DataAccess.BetSettings.Interfaces;
+
     using Model.BetSettings.DTO;
     using Model.BetSettings.ViewModel;
     using Model.Core.DTO.Common;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Resources;
+
     using StatelessCore.Interfaces;
+
     using UnitTest.Common.Helpers;
 
     [TestFixture]

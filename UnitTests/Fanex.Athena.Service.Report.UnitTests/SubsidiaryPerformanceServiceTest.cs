@@ -3,16 +3,24 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Model.Core.DataDomain;
+
     using Core.Users.Interfaces;
+
     using DataAccess.Report.Interfaces;
+
     using Fanex.Athena.Model.Auth;
+
     using Interfaces;
+
+    using Model.Core.DataDomain;
     using Model.Report.DTO;
     using Model.Report.DTO.SubsidiaryPerformance;
     using Model.Report.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using UnitTest.Common.Helpers;
 
     [TestFixture]

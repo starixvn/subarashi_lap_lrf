@@ -1,7 +1,7 @@
-﻿using Fanex.Athena.Excel.Base.Entities;
-using Fanex.Athena.Model.Core.ResultModel;
+﻿using Fanex.Athena.Model.Core.ResultModel;
 using Fanex.Athena.Model.Report.DTO;
 using Fanex.Athena.Model.Report.MetaModel;
+
 using NPOI.SS.UserModel;
 
 namespace Fanex.Athena.Excel.Report.UnitTests.TestableClasses

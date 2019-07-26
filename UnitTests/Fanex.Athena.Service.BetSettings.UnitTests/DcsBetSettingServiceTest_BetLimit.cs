@@ -3,10 +3,15 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using Model.BetSettings.DTO;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Resources;
+
     using UnitTest.Common.Helpers;
 
     [TestFixture]

@@ -1,18 +1,15 @@
-﻿using Fanex.Athena.Model.Core.DataDomain;
-using Fanex.Athena.Model.Core.MetaModel;
-using Fanex.Athena.Model.Core.MetaModel.Product;
-using Fanex.Athena.Model.Report.MetaModel;
+﻿using System.Collections.Generic;
+
+using Fanex.Athena.Model.Auth;
+using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Service.Core.Users.Interfaces;
 using Fanex.Athena.Service.Core.Utility;
 using Fanex.Athena.Service.Core.Utility.Interfaces;
-using Fanex.Athena.Model.Auth;
+
 using NSubstitute;
+
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 namespace Fanex.Athena.Service.Core.UnitTests.Utility
 {
     [TestFixture]
@@ -40,8 +37,6 @@ namespace Fanex.Athena.Service.Core.UnitTests.Utility
             _currencyValidation = null;
             _sessionService = null;
         }
-
-
 
         [TestCase(1, true)]
         [TestCase(0, true)]

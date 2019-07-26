@@ -20,6 +20,7 @@
         private OneAuthenticationService _oneAuthenticationService;
         private IOneBookSecurityWrapper _oneBookSecurityWrapper;
         private IAppSettings _appSettings;
+
         [SetUp]
         public void SetUp()
         {
@@ -34,7 +35,7 @@
                 Substitute.For<ILogger>(),
                  _appSettings,
                 Substitute.For<IOneAuthDataAccess>()
-               
+
                 );
         }
 

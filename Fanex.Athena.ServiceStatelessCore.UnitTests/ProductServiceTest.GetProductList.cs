@@ -7,8 +7,10 @@
 
     using Extension.Utility;
     using Extension.Utility.Interfaces;
+
     using Fanex.Athena.Service.StatelessCore;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Model.Core.DTO.Common;
 
     using NSubstitute;

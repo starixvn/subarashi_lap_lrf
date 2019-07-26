@@ -1,5 +1,8 @@
 ﻿namespace Fanex.Athena.Api.Report.UnitTests
 {
+    using System;
+    using System.Threading.Tasks;
+
     using Base.UnitTests;
 
     using DataAccess.Report.Interfaces;
@@ -14,9 +17,6 @@
     using NSubstitute;
 
     using NUnit.Framework;
-
-    using System;
-    using System.Threading.Tasks;
 
     public class ExchangeWinLossReportControllerTest : BaseApiControllerHelperTest
     {

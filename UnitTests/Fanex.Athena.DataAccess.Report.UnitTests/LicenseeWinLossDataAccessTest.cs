@@ -4,13 +4,18 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using Core.Configuration.Interfaces;
     using Core.UnitTests.TestHelpers;
+
     using Data;
+
     using Model.Core.DTO.Configuration;
     using Model.Core.MetaModel.Product;
     using Model.Report.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
 
     [TestFixture]
@@ -113,7 +118,7 @@
             // Action
             var result = await DataAccess.GetSummaryWinloss(_metaModel, UserCurrencyList);
             var firstOriginalItem = result.DataList.First();
-            
+
             // Assert
             Assert.Multiple(() =>
             {

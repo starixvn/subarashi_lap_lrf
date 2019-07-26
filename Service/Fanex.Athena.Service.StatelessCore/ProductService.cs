@@ -1,5 +1,4 @@
-﻿
-namespace Fanex.Athena.Service.StatelessCore
+﻿namespace Fanex.Athena.Service.StatelessCore
 {
     #region
 

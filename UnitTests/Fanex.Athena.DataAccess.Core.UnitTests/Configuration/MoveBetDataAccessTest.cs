@@ -1,11 +1,17 @@
 ﻿namespace Fanex.Athena.DataAccess.Core.UnitTests.Configuration
 {
     using System.Threading.Tasks;
+
     using Core.Configuration;
+
     using Data;
+
     using Logging;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using TestHelpers;
 
     public class MoveBetDataAccessTest : BaseDataAccessHelperTest<MoveBetDataAccess>

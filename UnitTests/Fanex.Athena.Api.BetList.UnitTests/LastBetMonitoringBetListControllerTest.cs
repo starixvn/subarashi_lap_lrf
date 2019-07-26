@@ -16,8 +16,6 @@
 
     using NUnit.Framework;
 
-    using Service.Core.Common.Interfaces;
-
     using VendorAdapter.Interfaces;
 
     public class LastBetMonitoringBetListControllerTest : BaseApiControllerHelperTest
@@ -92,7 +90,6 @@
             {
                 // Arrange
                 var metaModel = new LastBetsMonitoringMetaModel { Currency = string.Empty };
-
 
                 var expect = new HttpResponseMessage();
                 _betListApiClient.PostAsync(ApiPath, metaModel, SessionLanguage).Returns(Task.FromResult(expect));

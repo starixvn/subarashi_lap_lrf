@@ -2,13 +2,21 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
     using BetSettings;
+
     using DataAccess.BetSettings.Interfaces;
+
     using Interfaces;
+
     using Model.BetSettings.DTO;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Resources;
+
     using StatelessCore.Interfaces;
 
     [TestFixture]

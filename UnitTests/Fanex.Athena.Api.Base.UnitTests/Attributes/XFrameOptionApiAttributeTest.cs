@@ -7,13 +7,14 @@
     using System.Web.Http.Filters;
 
     using Autofac;
+
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Auth.Enum;
+    using Fanex.Athena.Service.Core.Users.Interfaces;
+
     using NSubstitute;
 
     using NUnit.Framework;
-
-    using Fanex.Athena.Service.Core.Users.Interfaces;
 
     using UnitTest.Common.Helpers;
 
@@ -80,7 +81,7 @@
             {
                 Response = new HttpResponseMessage()
             };
-            
+
             return actionExecutedContext;
         }
     }

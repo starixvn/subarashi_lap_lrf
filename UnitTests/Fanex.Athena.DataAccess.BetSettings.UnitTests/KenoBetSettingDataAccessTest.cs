@@ -2,12 +2,18 @@
 {
     using System.Data;
     using System.Threading.Tasks;
+
     using Core.UnitTests.TestHelpers;
+
     using Model.BetSettings.DTO;
     using Model.Core.DTO.Common;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using UnitTest.Common.Helpers;
+
     using VendorAdapter.Interfaces;
 
     [TestFixture]

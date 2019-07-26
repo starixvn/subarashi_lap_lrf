@@ -4,20 +4,26 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using Base.UnitTests;
-    using Excel.Base.Entities;
+
     using Excel.Report;
+
     using Extension.Utility;
+
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Service.Core.Utility.Interfaces;
     using Fanex.Athena.Service.Report.Interfaces;
-    using Model.Core.DTO.Users;
+
     using Model.Core.ResultModel;
     using Model.Report.DTO;
     using Model.Report.MetaModel;
     using Model.Report.ViewModel;
+
     using NPOI.SS.UserModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
 
     public class ColossusBetsWinLossReportControllerTest : BaseApiControllerHelperTest
@@ -25,10 +31,10 @@
         private IColossusBetsWinLossService _service;
         private ColossusBetsWinLossReportController _controller;
         private ICurrencyValidation _currencyValidation;
+
         [SetUp]
         public void SetUp()
         {
-
             _currencyValidation = Substitute.For<ICurrencyValidation>();
             _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
             _service = Substitute.For<IColossusBetsWinLossService>();
@@ -63,7 +69,6 @@
                 IsExportExcel = false,
                 CurrencyId = 1,
             };
-
 
             // Action
             var result = await _controller.Index(model);
@@ -275,10 +280,8 @@
                 {
                     { currencyId, nameof(model.CurrencyId) },
                     { drillDownCurrencyId, nameof(model.DrillDownCurrencyId) },
-
                 },
                 CurrencyAgentList = new Dictionary<int, int[]>()
-
             });
             StubLicenseeSessionData(new LicenseeAuthInfo { LicenseeId = 0 });
 

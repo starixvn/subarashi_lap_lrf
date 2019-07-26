@@ -2,15 +2,23 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+
     using Base.Extension;
+
     using Model.Core.DataDomain;
     using Model.Core.ResultModel;
     using Model.Report;
+
     using NPOI.SS.UserModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Resources;
+
     using TestableClasses;
+
     using UnitTest.Common.Helpers;
 
     public class PromotionPrizeExcelTest : BaseReportExcelTest

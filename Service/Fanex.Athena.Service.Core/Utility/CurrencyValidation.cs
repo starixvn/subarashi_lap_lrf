@@ -1,12 +1,11 @@
-﻿using Fanex.Athena.Model.Core.DataDomain;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Model.Core.Helper;
 using Fanex.Athena.Service.Core.Users.Interfaces;
 using Fanex.Athena.Service.Core.Utility.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Fanex.Athena.Service.Core.Utility
 {
@@ -18,10 +17,12 @@ namespace Fanex.Athena.Service.Core.Utility
         {
             _sessionService = sessionService;
         }
+
         public bool IsValidBaseCurrency(string baseCurrency, bool isAllowEmpty = true)
         {
             return MetaModelValidationHelper.ValidateBaseCurrency(baseCurrency, isAllowEmpty);
         }
+
         public bool IsValidCurrency(int currencyId, bool isIncludeKeanOcean = false)
         {
             var currencyList = _sessionService.UserSession.CurrencyList;
@@ -40,6 +41,7 @@ namespace Fanex.Athena.Service.Core.Utility
             return (currencyId < 0 && currencyId >= SystemConstants.MinBaseCurrencyType)
                || currencyId == BaseCurrencyType.All || currencyList.ContainsKey(currencyId);
         }
+
         private static bool VerifyKeanOceanCurrency(int currencyId, int licenseeId)
         {
             return licenseeId == LicenseeIdentity.KeenOcean && currencyId == CurrencyType.Cny;
@@ -48,8 +50,8 @@ namespace Fanex.Athena.Service.Core.Utility
         private static bool ValidateCurrencyWithKeanOceanOption(int currencyId, IDictionary<int, string> currencyList, int licenseeId)
         {
             return ValidateCurrency(currencyId, currencyList) || VerifyKeanOceanCurrency(currencyId, licenseeId);
-
         }
+
         public bool IsValidCurrency(string currencyIdList)
         {
             if (string.IsNullOrEmpty(currencyIdList))

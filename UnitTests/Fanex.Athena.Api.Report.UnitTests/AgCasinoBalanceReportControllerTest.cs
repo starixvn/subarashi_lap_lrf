@@ -3,19 +3,28 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
     using Base.UnitTests;
+
     using DataAccess.Report.Interfaces;
-    using Excel.Base.Entities;
+
     using Excel.Report;
+
     using Extension.Utility;
+
     using Fanex.Athena.Service.Core.Utility.Interfaces;
+
     using Model.Core.ResultModel;
     using Model.Report.DTO;
     using Model.Report.MetaModel;
     using Model.Report.ViewModel;
+
     using NPOI.SS.UserModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using UnitTest.Common.Helpers;
 
     public class AgCasinoBalanceReportControllerTest : BaseApiControllerHelperTest
@@ -35,10 +44,10 @@
             _controller = Substitute.ForPartsOf<AgCasinoBalanceReportController>(_dataAccess,
                 SessionService, ProductService, LangService, _currencyValidation);
         }
+
         [TearDown]
         public override void FixtureTearDown()
         {
-
             _currencyValidation = null;
             _dataAccess = null;
             _controller = null;

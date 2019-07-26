@@ -9,19 +9,27 @@ namespace Fanex.Athena.Service.BetSettings
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
     using CitiXchangeLibrary;
-    using Model.Core.DataDomain;
+
     using DataAccess.BetSettings.Interfaces;
     using DataAccess.Core.Common.Constants;
     using DataAccess.Core.Common.Interfaces;
+
     using Extension.Utility;
+
     using Fanex.Athena.Extension.Helpers;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Interfaces;
+
     using Logging;
+
     using Model.Core.Constants;
+    using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using Model.Core.MetaModel.Common;
+
     using Resources;
 
     public class ExchangeCommApiService : BetSettingBaseService, IExchangeCommApiService

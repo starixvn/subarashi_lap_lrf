@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+
 using Fanex.Athena.Excel.Base;
 using Fanex.Athena.Excel.Base.Extension;
 using Fanex.Athena.Excel.Customer.UnitTests.TestableClasses;
@@ -10,8 +11,11 @@ using Fanex.Athena.Model.Customer.MetaModel;
 using Fanex.Athena.Model.Customer.ViewModel;
 using Fanex.Athena.Resources;
 using Fanex.Athena.UnitTest.Common.Helpers;
+
 using NPOI.SS.UserModel;
+
 using NSubstitute;
+
 using NUnit.Framework;
 
 namespace Fanex.Athena.Excel.Customer.UnitTests

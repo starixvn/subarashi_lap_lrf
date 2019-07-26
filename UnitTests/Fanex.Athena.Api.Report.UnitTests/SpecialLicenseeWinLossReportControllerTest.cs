@@ -1,11 +1,17 @@
 ﻿namespace Fanex.Athena.Api.Report.UnitTests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
     using Base.UnitTests;
 
     using DataAccess.Report.Interfaces;
 
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using Model.Core.DTO.Configuration;
@@ -16,11 +22,6 @@
     using NSubstitute;
 
     using NUnit.Framework;
-
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
 
     public class SpecialLicenseeWinLossReportControllerTest : BaseApiControllerHelperTest
     {
@@ -136,7 +137,6 @@
                 Assert.That(result.SummaryTotal, Is.Empty);
             });
         }
-
 
         [TestCase("IvoryBet", "ivorysport")]
         [TestCase("123", "123")]

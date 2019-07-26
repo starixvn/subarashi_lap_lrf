@@ -1,5 +1,10 @@
 ﻿namespace Fanex.Athena.Module.Notification.Api.UnitTests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Web.Http.Controllers;
+    using System.Web.Script.Serialization;
+
     using Extension.Utility;
 
     using Fanex.Athena.Module.Notification.DTO;
@@ -14,11 +19,6 @@
     using NSubstitute;
 
     using NUnit.Framework;
-
-    using System;
-    using System.Collections.Generic;
-    using System.Web.Http.Controllers;
-    using System.Web.Script.Serialization;
 
     public class NotificationApiControllerTest
     {

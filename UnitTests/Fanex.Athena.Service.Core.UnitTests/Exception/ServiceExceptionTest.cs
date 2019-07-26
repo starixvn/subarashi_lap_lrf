@@ -1,6 +1,7 @@
 ﻿namespace Fanex.Athena.Service.Core.UnitTests.Exception
 {
     using Fanex.Athena.Service.StatelessCore.CustomException;
+
     using NUnit.Framework;
 
     [TestFixture]

@@ -1,10 +1,11 @@
 ﻿namespace Fanex.Athena.DataAccess.Core.UnitTests.Users
 {
-    using System.Data;
-    using System.Threading.Tasks;
     using Core.Users;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using TestHelpers;
 
     public class AuthorizationDataAccessTest : BaseDataAccessHelperTest<AuthorizationDataAccess>

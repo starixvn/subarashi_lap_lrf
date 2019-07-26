@@ -8,6 +8,7 @@ namespace Fanex.Athena.Service.Report.Interfaces
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Report.ViewModel;
 

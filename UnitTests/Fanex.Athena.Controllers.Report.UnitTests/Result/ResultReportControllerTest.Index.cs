@@ -1,11 +1,14 @@
 ﻿namespace Fanex.Athena.Controllers.TotalBets.UnitTests
 {
-    using System.Threading.Tasks;
     using System.Web.Mvc;
+
     using Base.UnitTests;
+
     using Model.Report.MetaModel.Result;
     using Model.Report.ViewModel.Result;
+
     using NSubstitute;
+
     using NUnit.Framework;
 
     [TestFixture]

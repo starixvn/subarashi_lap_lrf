@@ -1,9 +1,13 @@
 ﻿namespace Fanex.Athena.Excel.Base.UnitTests.Extension
 {
     using System.Collections.Generic;
+
     using Excel.Base.Extension;
+
     using NPOI.SS.UserModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
 
     [TestFixture]

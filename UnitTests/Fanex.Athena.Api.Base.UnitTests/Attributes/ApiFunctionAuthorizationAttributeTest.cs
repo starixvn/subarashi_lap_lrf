@@ -13,8 +13,10 @@
     using Autofac;
 
     using Extension.Utility;
+
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Auth.Enum;
+
     using NSubstitute;
 
     using NUnit.Framework;

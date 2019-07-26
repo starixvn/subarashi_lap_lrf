@@ -73,7 +73,5 @@ namespace Fanex.Athena.Service.StatelessCore.Utility
 
             return result;
         }
-
-
     }
 }
