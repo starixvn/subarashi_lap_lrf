@@ -782,6 +782,7 @@
     <Content Include="www\js\source\reactpages\actions\__tests__\loaderAction.test.js" />
     <Content Include="www\js\source\reactpages\actions\__tests__\productAction.test.js" />
     <Content Include="www\js\source\reactpages\actions\__tests__\userGuideAction.test.js" />
+    <Content Include="www\js\source\reactpages\components\betlist\BetListDataGrid.jsx" />
     <Content Include="www\js\source\reactpages\components\date-range\Calendar.js" />
     <Content Include="www\js\source\reactpages\components\date-range\constants.js" />
     <Content Include="www\js\source\reactpages\components\date-range\DateRange.js" />
@@ -907,6 +908,8 @@
     <Content Include="www\js\source\reactpages\constants\licensee.js" />
     <Content Include="www\js\source\reactpages\constants\report.js" />
     <Content Include="www\js\source\reactpages\layouts\AppLayout.jsx" />
+    <Content Include="www\js\source\reactpages\layouts\betlist\BetListLayout.jsx" />
+    <Content Include="www\js\source\reactpages\layouts\betlist\lib\BetList.js" />
     <Content Include="www\js\source\reactpages\layouts\__tests__\AppLayout.test.js" />
     <Content Include="www\js\source\reactpages\lib\excel.js" />
     <Content Include="www\js\source\reactpages\constants\excelStyle.js" />
