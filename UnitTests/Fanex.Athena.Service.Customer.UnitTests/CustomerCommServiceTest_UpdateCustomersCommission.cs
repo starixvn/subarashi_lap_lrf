@@ -28,21 +28,17 @@
 
         private CustomerCommService _customerCommService;
         private ILGAPIClient _lgClient;
-        private IAppSettings _appSettings;
 
         [SetUp]
         public void SetUp()
         {
             _lgClient = Substitute.For<ILGAPIClient>();
-            _appSettings = Substitute.For<IAppSettings>();
-            _appSettings.GetValue(Arg.Any<string>()).Returns("fakepath");
             _customerCommDataAccess = Substitute.For<ICustomerCommDataAccess>();
             _groupCommDataAccess = Substitute.For<IGroupComDataAccess>();
 
             _customerCommService = new CustomerCommService(
                 _customerCommDataAccess,
                 _groupCommDataAccess,
-                _appSettings,
                 _lgClient);
         }
 
@@ -52,7 +48,6 @@
             _customerCommDataAccess = null;
             _groupCommDataAccess = null;
             _customerCommService = null;
-            _appSettings = null;
             _lgClient = null;
         }
 

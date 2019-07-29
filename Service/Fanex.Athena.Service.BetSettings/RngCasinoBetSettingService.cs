@@ -50,7 +50,7 @@ namespace Fanex.Athena.Service.BetSettings
             IList<GameKind> gameKinds = new List<GameKind>();
             if (customer.SyncCasino)
             {
-                var apiPath = _appSettings.GetValue("LGAPIHostUrl") + "/RngCasino/Settings";
+                const string apiPath = "/RngCasino/Settings";
                 var temp = await _lgClient.PostAsync<APIResult<IList<GameKind>>>(apiPath, new { custId, customer.CurrencyID, language }, language).ConfigureAwait(false);
                 if (temp != null)
                 {
@@ -74,7 +74,7 @@ namespace Fanex.Athena.Service.BetSettings
 
             if (metaModel.IsSyncCasino && !_appSettings.IsDisableRngCasino)
             {
-                var apiPath = _appSettings.GetValue("LGAPIHostUrl") + "/RngCasino/Status";
+                const string apiPath = "/RngCasino/Status";
                 var updatingCasino = await _lgClient.PostAsync<APIResult<bool>>(apiPath,
                     metaModel, "en-US").ConfigureAwait(false);
 
@@ -98,7 +98,7 @@ namespace Fanex.Athena.Service.BetSettings
             {
                 if (!_appSettings.IsDisableRngCasino)
                 {
-                    var apiPath = _appSettings.GetValue("LGAPIHostUrl") + "/RngCasino/UpdateSetting";
+                    const string apiPath = "/RngCasino/UpdateSetting";
 
                     var temp = await _lgClient.PostAsync<APIResult<bool>>(apiPath, new
                     {

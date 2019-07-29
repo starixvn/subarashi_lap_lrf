@@ -109,7 +109,7 @@ namespace Fanex.Athena.Service.Customer
                         Ip = metaModel.Ip
                     };
 
-                    var apiPath = _appSettings.GetValue("LGAPIHostUrl") + "/RNGCasinoCustomer/Closed";
+                    const string apiPath = "/RNGCasinoCustomer/Closed";
 
                     var temp = await _lgClient.PostAsync<APIResult<bool>>
                         (apiPath, casinoMetaModel, languageCode).ConfigureAwait(false);
@@ -153,7 +153,7 @@ namespace Fanex.Athena.Service.Customer
                     };
 
 
-                    var apiPath = _appSettings.GetValue("LGAPIHostUrl") + "/RNGCasinoCustomer/Suspend";
+                    const string apiPath = "/RNGCasinoCustomer/Suspend";
                     var temp = await _lgClient.PostAsync<APIResult<bool>>
                         (apiPath, casinoMetaModel, languageCode).ConfigureAwait(false);
                     suspendCasinoResult = temp != null && temp.Data;

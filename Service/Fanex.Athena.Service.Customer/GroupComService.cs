@@ -25,14 +25,12 @@ namespace Fanex.Athena.Service.Customer
     {
         private readonly IGroupComDataAccess _groupDataAccess;
         private readonly ILGAPIClient _lgClient;
-        private readonly IAppSettings _appSettings;
 
         public GroupComService(
-            IGroupComDataAccess groupDataAccess, IAppSettings appSettings, ILGAPIClient lgClient)
+            IGroupComDataAccess groupDataAccess, ILGAPIClient lgClient)
         {
             _groupDataAccess = groupDataAccess;
             _lgClient = lgClient;
-            _appSettings = appSettings;
         }
 
         public async Task<IList<GroupCommMetaModel>> GetAll(int licenseeId)
@@ -132,7 +130,7 @@ namespace Fanex.Athena.Service.Customer
 
         private async Task<bool> CallApiToUpdateCommAsync(RNGCasinoUpdateMemberComMetaModel metalModel)
         {
-            var apiPath = _appSettings.GetValue("LGAPIHostUrl") + "/RNGCasinoCustomer/UpdateCommission";
+            const string apiPath = "/RNGCasinoCustomer/UpdateCommission";
             var temp = await _lgClient.PostAsync<APIResult<bool>>(apiPath, metalModel, "en-US").ConfigureAwait(false);
             return temp != null && temp.Data;
         }

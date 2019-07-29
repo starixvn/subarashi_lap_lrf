@@ -24,16 +24,14 @@
 
         private GroupComService _groupComService;
         private ILGAPIClient _lgClient;
-        private IAppSettings _appSettings;
         [SetUp]
         public void SetUp()
         {
-            _appSettings = Substitute.For<IAppSettings>();
 
             _lgClient = Substitute.For<ILGAPIClient>();
 
             _groupDataAccess = Substitute.For<IGroupComDataAccess>();
-            _groupComService = new GroupComService(_groupDataAccess, _appSettings, _lgClient);
+            _groupComService = new GroupComService(_groupDataAccess, _lgClient);
         }
 
         [TearDown]

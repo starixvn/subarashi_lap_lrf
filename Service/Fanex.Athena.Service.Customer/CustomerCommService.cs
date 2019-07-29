@@ -23,16 +23,14 @@ namespace Fanex.Athena.Service.Customer
 
         private readonly IGroupComDataAccess _groupComDataAccess;
         private readonly ILGAPIClient _lgClient;
-        private readonly IAppSettings _appSettings;
 
         public CustomerCommService(
             ICustomerCommDataAccess customerCommDataAccess,
-            IGroupComDataAccess groupComDataAccess, IAppSettings appSettings, ILGAPIClient lgClient)
+            IGroupComDataAccess groupComDataAccess, ILGAPIClient lgClient)
         {
             _customerCommDataAccess = customerCommDataAccess;
             _groupComDataAccess = groupComDataAccess;
             _lgClient = lgClient;
-            _appSettings = appSettings;
         }
 
         public async Task<IResultInfo> UpdateCustomersCommissionAsync(UpdatedCustomerComMetaModel metaModel, bool isSyncCSComm = false)
@@ -116,7 +114,7 @@ namespace Fanex.Athena.Service.Customer
                     ModifyUserName = userName
                 };
 
-                var apiPath = _appSettings.GetValue("LGAPIHostUrl") + "/RNGCasinoCustomer/UpdateCommission";
+                const string apiPath = "/RNGCasinoCustomer/UpdateCommission";
                 var result = await _lgClient.PostAsync<APIResult<bool>>(apiPath, metalModel, "en-US").ConfigureAwait(false);
                 return result != null && result.Data;
             }

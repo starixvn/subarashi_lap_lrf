@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Web;
 using Fanex.Athena.Extension.Utility;
+using Fanex.Athena.Service.Core.Exception;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
 
 using Newtonsoft.Json;
@@ -40,7 +41,7 @@ namespace Fanex.Athena.Service.StatelessCore
             {
                 var errorMessage = $"Http Error ={result.ResponseStatus}\n Error occur when query LGAPI";
 
-                throw new HttpException(errorMessage + result.Content);
+                throw new ServiceException(errorMessage, nameof(LGAPIClient));
             }
 
             return JsonConvert.DeserializeObject<T>(result.Content);
