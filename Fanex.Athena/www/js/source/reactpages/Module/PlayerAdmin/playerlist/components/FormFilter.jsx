@@ -35,14 +35,27 @@ export class FormFilter extends PureComponent {
 
     componentDidMount() {
         const custId = QueryString.getParam(window.location.href, 'custId');
-        if(custId){
+        if (custId) {
             this.props.getSinglePlayer(custId);
 
             this.userNameRef.current.value = QueryString.getParam(window.location.href, 'userName');
         }
     }
-    
-    searchPlayer(){
+
+    componentDidUpdate(prevProps, prevState) {
+        const { isAdvancedSearch } = this.props;
+        if (prevProps.isAdvancedSearch !== isAdvancedSearch && !isAdvancedSearch) {
+            this.setState({
+                currency: '',
+                oddsGroup: '',
+                specialLevel: '',
+                baFilter: baStatusList.All
+            });
+        }
+    }
+
+
+    searchPlayer() {
         const userName = this.userNameRef.current.value;
         const { bankAccountNumber, email } = this.state;
         if (!userName && !bankAccountNumber && !email) {
@@ -127,13 +140,13 @@ export class FormFilter extends PureComponent {
                     </div>
 
                     {type === licenseeType.nonApi && <AthenaSearch onChange={this.handleChange}
-                                                                bankAccountNumber={bankAccountNumber} 
-                                                                email={email} 
-                                                                onKeyPress={this.handlePressEnter} />}
-                    {isAdvancedSearch && <AdvancedSearch 
-                                            currencyList={currencyList} 
-                                            param={advancedSearchParam} 
-                                            onChange={this.handleSpecificInputChange} />
+                        bankAccountNumber={bankAccountNumber}
+                        email={email}
+                        onKeyPress={this.handlePressEnter} />}
+                    {isAdvancedSearch && <AdvancedSearch
+                        currencyList={currencyList}
+                        param={advancedSearchParam}
+                        onChange={this.handleSpecificInputChange} />
                     }
 
                     <div className="col-12 col-md-2 col-sm-2 col-lg-1 col-xl-1">

@@ -4,27 +4,26 @@ export default class LrfPlayerQueryService {
     static fetchData(param, commonService, apiInfo) {
         const { lrfSearch, lapDataById } = apiInfo;
 
-        return commonService.fetchData(lrfSearch.type, lrfSearch.action, { ...param })
+        return commonService.fetchData(lrfSearch.type, lrfSearch.action, {...param })
             .then(lrfResponse => {
                 const { DataList: lrfPlayerList, TotalItem } = lrfResponse.data;
                 if (!lrfPlayerList || !lrfPlayerList.length) {
                     return PlayerListDataHelper.createEmptyResult();
                 }
 
-                return this._fetchFromLap(param.currency, lrfPlayerList, lapDataById, commonService, TotalItem);
+                return this._fetchFromLap(lrfPlayerList, lapDataById, commonService, TotalItem);
             })
             .catch(() => PlayerListDataHelper.createEmptyResult());
     }
 
-    static _fetchFromLap(currency, lrfPlayerList, lapDataById, commonService, lrfTotalItem) {
+    static _fetchFromLap(lrfPlayerList, lapDataById, commonService, lrfTotalItem) {
         const lapParam = {
-            currency,
             idList: lrfPlayerList.map(x => x.CustId)
         }
 
         return commonService.fetchData(lapDataById.type, lapDataById.action, lapParam)
             .then(lapResponse => {
-                const { PlayerList: lapPlayerList } = lapResponse.data;
+                const { PlayerList: lapPlayerList, TotalItem: lapTotalItem } = lapResponse.data;
                 if (!lapPlayerList || !lapPlayerList.length) {
                     return {
                         playerList: lrfPlayerList,
@@ -36,7 +35,7 @@ export default class LrfPlayerQueryService {
 
                 return {
                     playerList,
-                    totalItem: Math.max(lrfTotalItem, lapPlayerList.length)
+                    totalItem: Math.max(lrfTotalItem, lapTotalItem)
                 };
             })
             .catch(() => ({

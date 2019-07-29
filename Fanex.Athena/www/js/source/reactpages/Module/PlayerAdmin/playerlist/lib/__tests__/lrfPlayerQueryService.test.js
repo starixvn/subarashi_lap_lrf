@@ -73,7 +73,7 @@ describe('LrfPlayerQueryService', () => {
             LrfPlayerQueryService.fetchData(param, commonService, apiInfo)
 
             return Promise.resolve().then(() => {
-                expect(_fetchFromLap).toHaveBeenCalledWith(param.currency, expectedResponse, expectedApiInfo, commonService, expectedTotalItem);
+                expect(_fetchFromLap).toHaveBeenCalledWith(expectedResponse, expectedApiInfo, commonService, expectedTotalItem);
             })
         })
     })
@@ -90,7 +90,6 @@ describe('LrfPlayerQueryService', () => {
         it('data response is empty - return lrfPlayerList', () => {
             const lrfPlayerList = [{ CustId: 1, BaStatus: true, OddsGroup: 'A' }, { CustId: 2, BaStatus: false, OddsGroup: 'B' }];
             const expectedLapParam = {
-                currency: defaultParam.currency,
                 idList: [1, 2]
             }
             const { lapDataById } = apiInfo;
@@ -98,7 +97,7 @@ describe('LrfPlayerQueryService', () => {
                 fetchData: jest.fn((type, action, lapParam) => {
                     const isMatchParam = JSON.stringify(lapParam) === JSON.stringify(expectedLapParam);
                     return type === lapDataById.type && action === lapDataById.action && isMatchParam ?
-                        Promise.resolve({ data: { PlayerList: [] } }) : null;
+                        Promise.resolve({ data: { PlayerList: [], TotalItem: 0 } }) : null;
                 })
             }
             const lrfTotalItem = 2;
@@ -108,9 +107,7 @@ describe('LrfPlayerQueryService', () => {
                 totalItem: lrfTotalItem
             }
 
-            const currency = defaultParam.currency;
-
-            const promise = LrfPlayerQueryService._fetchFromLap(currency, lrfPlayerList, lapDataById, commonService, lrfTotalItem);
+            const promise = LrfPlayerQueryService._fetchFromLap(lrfPlayerList, lapDataById, commonService, lrfTotalItem);
 
             return Promise.resolve(promise).then((result) => {
                 expect(result).toEqual(expectedResult);
@@ -120,8 +117,10 @@ describe('LrfPlayerQueryService', () => {
         it('data list response has item - return correct result', () => {
             const lrfPlayerList = [{ CustId: 1, BaStatus: true, OddsGroup: 'A' }, { CustId: 2, BaStatus: false, OddsGroup: 'B' }];
             const lapPlayerList = [{ CustId: 1, UserName: 'test1', Status: 0 }, { CustId: 2, UserName: 'test2', Status: 1 }];
+
+            const expectedLapTotalItem = 2;
             const commonService = {
-                fetchData: jest.fn(() => Promise.resolve({ data: { PlayerList: lapPlayerList } }))
+                fetchData: jest.fn(() => Promise.resolve({ data: { PlayerList: lapPlayerList, TotalItem: expectedLapTotalItem } }))
             };
 
             const expectedMergingData = [
@@ -134,12 +133,10 @@ describe('LrfPlayerQueryService', () => {
 
             const expectedResult = {
                 playerList: expectedMergingData,
-                totalItem: 2
+                totalItem: expectedLapTotalItem
             }
-
-            const currency = defaultParam.currency;
             const lrfTotalItem = 2;
-            const promise = LrfPlayerQueryService._fetchFromLap(currency, lrfPlayerList, apiInfo.lapDataById, commonService, lrfTotalItem);
+            const promise = LrfPlayerQueryService._fetchFromLap(lrfPlayerList, apiInfo.lapDataById, commonService, lrfTotalItem);
 
             return Promise.resolve(promise).then((result) => {
                 expect(result).toEqual(expectedResult);
@@ -160,9 +157,7 @@ describe('LrfPlayerQueryService', () => {
                 totalItem: lrfTotalItem
             }
 
-            const currency = defaultParam.currency;
-
-            const promise = LrfPlayerQueryService._fetchFromLap(currency, lrfPlayerList, apiInfo.lapDataById, commonService, lrfTotalItem);
+            const promise = LrfPlayerQueryService._fetchFromLap(lrfPlayerList, apiInfo.lapDataById, commonService, lrfTotalItem);
 
             return Promise.resolve(promise).then((result) => {
                 expect(result).toEqual(expectedResult);

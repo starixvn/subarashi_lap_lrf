@@ -69,8 +69,8 @@ describe('PlayerMultipleQueryService', () => {
         })
 
         const runTestCallingCorrectFunction = (param, lrfList, lapList, functionName, checkResultFunc) => {
-            const lrfResponse = { data: { DataList: lrfList, TotalItem: 2 } };
-            const lapResponse = { data: { PlayerList: lapList } };
+            const lrfResponse = { data: { DataList: lrfList, TotalItem: lrfList.length } };
+            const lapResponse = { data: { PlayerList: lapList, TotalItem: lapList.length } };
             const lrfPromise = Promise.resolve(lrfResponse);
             const lapPromise = Promise.resolve(lapResponse);
 
@@ -90,7 +90,7 @@ describe('PlayerMultipleQueryService', () => {
         it('both side have no differenceList - return merged common list', () => {
             const param = {};
             const lrfResponse = { data: { DataList: defaultLrfPlayerList, TotalItem: 2 } };
-            const lapResponse = { data: { PlayerList: defaultLapPlayerList } };
+            const lapResponse = { data: { PlayerList: defaultLapPlayerList, TotalItem: 2 } };
             const lrfPromise = Promise.resolve(lrfResponse);
             const lapPromise = Promise.resolve(lapResponse);
 
@@ -127,7 +127,6 @@ describe('PlayerMultipleQueryService', () => {
                 }
 
                 const expectedLapParam = {
-                    currency: param.currency,
                     idList: [3]
                 }
 
@@ -188,7 +187,6 @@ describe('PlayerMultipleQueryService', () => {
             const functionName = '_refetchFromLap';
             const checkResult = () => {
                 const expectedLapParam = {
-                    currency: param.currency,
                     idList: [3]
                 }
 
@@ -217,7 +215,6 @@ describe('PlayerMultipleQueryService', () => {
                 idList: '4'
             }
             const lapParam = {
-                currency: param.currency,
                 idList: [3]
             }
 
@@ -268,7 +265,8 @@ describe('PlayerMultipleQueryService', () => {
                 data: {
                     PlayerList: [
                         { CustId: 3, UserName: 'test3', Status: 2, IP: '3.3.3.3', email: 'def@gmail.com', isOnline: true, RealName: 'test3real' },
-                    ]
+                    ],
+                    TotalItem: 1
                 }
             };
 
@@ -451,7 +449,7 @@ describe('PlayerMultipleQueryService', () => {
 
         it('get empty list response - should return lrf difference list result', () => {
             const commonService = {
-                fetchData: jest.fn(() => Promise.resolve({ data: { PlayerList: [] } }))
+                fetchData: jest.fn(() => Promise.resolve({ data: { PlayerList: [], TotalItem: 0 } }))
             }
 
             return runTestForReturningEmptyResult(commonService);
@@ -471,7 +469,7 @@ describe('PlayerMultipleQueryService', () => {
             let originalMergePlayerList = PlayerListDataHelper.mergePlayerList;
             const expectedResponse = [{ CustId: 1, UserName: 'test' }];
             const commonService = {
-                fetchData: jest.fn(() => Promise.resolve({ data: { PlayerList: expectedResponse } }))
+                fetchData: jest.fn(() => Promise.resolve({ data: { PlayerList: expectedResponse, TotalItem: 1 } }))
             }
             const lapParam = { idList: [1] };
             const lrfDataObject = {

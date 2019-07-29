@@ -36,7 +36,7 @@ describe('LapPlayerQueryService', () => {
         it('return empty list - should return correct result', () => {
             const param = {...defaultParam };
             const commonService = {
-                fetchData: jest.fn(() => Promise.resolve({ data: { PlayerList: [] } }))
+                fetchData: jest.fn(() => Promise.resolve({ data: { PlayerList: [], TotalItem: 0 } }))
             }
 
             const promise = LapPlayerQueryService.fetchData(param, commonService, apiInfo);
@@ -64,8 +64,9 @@ describe('LapPlayerQueryService', () => {
         it('has player list response - should call _fetchFromLrf with correct parameter', () => {
             const param = {...defaultParam };
             const expectedResponse = [{ CustId: 1, UserName: 'test' }];
+            const expectedTotalItem = 1;
             const commonService = {
-                fetchData: jest.fn(() => Promise.resolve({ data: { PlayerList: expectedResponse } }))
+                fetchData: jest.fn(() => Promise.resolve({ data: { PlayerList: expectedResponse, TotalItem: expectedTotalItem } }))
             }
 
             const expectedApiInfo = apiInfo.lrfDataById;
@@ -74,7 +75,7 @@ describe('LapPlayerQueryService', () => {
             const promise = LapPlayerQueryService.fetchData(param, commonService, apiInfo)
 
             return Promise.resolve(promise).then(() => {
-                expect(_fetchFromLrf).toHaveBeenCalledWith(param, expectedApiInfo, expectedResponse, commonService);
+                expect(_fetchFromLrf).toHaveBeenCalledWith(param, expectedApiInfo, expectedResponse, commonService, expectedTotalItem);
             })
         })
     })
@@ -93,6 +94,7 @@ describe('LapPlayerQueryService', () => {
                 { CustId: 1, UserName: 'test1', Status: 0, IP: '1.1.1.1', email: 'abc@gmail.com', isOnline: true, RealName: 'test1real' },
                 { CustId: 2, UserName: 'test2', Status: 1, IP: '2.2.2.2', email: 'xyz@gmail.com', isOnline: false, RealName: 'test2real' }
             ];
+            const lapTotalItem = 2;
             const param = {
                 currency: '',
                 specialLevel: '',
@@ -122,10 +124,10 @@ describe('LapPlayerQueryService', () => {
             ];
             const expectedResult = {
                 playerList: expectedPlayerList,
-                totalItem: 2
+                totalItem: lapTotalItem
             }
 
-            const promise = LapPlayerQueryService._fetchFromLrf(param, lrfDataById, lapPlayerList, commonService);
+            const promise = LapPlayerQueryService._fetchFromLrf(param, lrfDataById, lapPlayerList, commonService, lapTotalItem);
 
             return Promise.resolve(promise)
                 .then((result) => {
@@ -135,6 +137,7 @@ describe('LapPlayerQueryService', () => {
 
         it('return correct data result', () => {
             const lapPlayerList = [{ CustId: 1, UserName: 'test1', Status: 0 }, { CustId: 2, UserName: 'test2', Status: 1 }];
+            const lapTotalItem = 2;
             const param = {
                 currency: '',
                 specialLevel: '',
@@ -153,9 +156,9 @@ describe('LapPlayerQueryService', () => {
 
             const expectedResult = {
                 playerList: expectedMergingData,
-                totalItem: 2
+                totalItem: lapTotalItem
             }
-            const response = LapPlayerQueryService._fetchFromLrf(param, apiInfo.lrfDataById, lapPlayerList, commonService);
+            const response = LapPlayerQueryService._fetchFromLrf(param, apiInfo.lrfDataById, lapPlayerList, commonService, lapTotalItem);
 
             return Promise.resolve(response).then((result) => {
                 expect(result).toEqual(expectedResult);
@@ -167,6 +170,7 @@ describe('LapPlayerQueryService', () => {
                 { CustId: 1, UserName: 'test1', Status: 0, IP: '1.1.1.1', email: 'abc@gmail.com', isOnline: true, RealName: 'test1real' },
                 { CustId: 2, UserName: 'test2', Status: 1, IP: '2.2.2.2', email: 'xyz@gmail.com', isOnline: false, RealName: 'test2real' }
             ];
+            const lapTotalItem = 2;
             const param = {
                 currency: '',
                 specialLevel: '',
@@ -185,9 +189,9 @@ describe('LapPlayerQueryService', () => {
             ];
             const expectedResult = {
                 playerList: expectedPlayerList,
-                totalItem: 2
+                totalItem: lapTotalItem
             }
-            const promise = LapPlayerQueryService._fetchFromLrf(param, lrfDataById, lapPlayerList, commonService);
+            const promise = LapPlayerQueryService._fetchFromLrf(param, lrfDataById, lapPlayerList, commonService, lapTotalItem);
 
             return Promise.resolve(promise)
                 .then((result) => {

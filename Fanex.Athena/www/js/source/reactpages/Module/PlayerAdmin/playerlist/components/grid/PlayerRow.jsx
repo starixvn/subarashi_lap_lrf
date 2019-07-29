@@ -19,7 +19,7 @@ export const PlayerRow = (props) => {
         displayedColumn
     } = props;
 
-    const { CustId, SystemId, RealName, Currency, CurrentBalance, OutstandingBalance, LastLoginIp, LastTransaction, Email } = dataItem;
+    const { CustId, SystemId, RealName, Currency, CurrentBalance, OutstandingBalance, LastLoginIp, LastTransaction, Email, OddsGroup, SpecialLevel } = dataItem;
 
     return (
         <Row key={CustId}>
@@ -30,9 +30,9 @@ export const PlayerRow = (props) => {
             {displayedColumn[fields.Currency] && <Cell className="center-align">{Currency}</Cell>}
             {displayedColumn[fields.CurrentBalance] && <Cell className="center-align">{NumberFormat.formatDecimal(CurrentBalance)}</Cell>}
             {displayedColumn[fields.OutstandingBalance] && <Cell className="center-align">{NumberFormat.formatDecimal(OutstandingBalance)}</Cell>}
-            {displayedColumn[fields.OddsGroup] && <Cell className="center-align"><OddsGroupCell dataItem={dataItem} /></Cell>}
+            {displayedColumn[fields.OddsGroup] && <Cell className="center-align">{OddsGroup !== undefined && <OddsGroupCell dataItem={dataItem} />}</Cell>}
             {displayedColumn[fields.BaStatus] && <BaStatusCell dataItem={dataItem} />}
-            {displayedColumn[fields.SpecialLevel] && <Cell className="center-align"><SpecialLevelCell dataItem={dataItem} /></Cell>}
+            {displayedColumn[fields.SpecialLevel] && <Cell className="center-align">{SpecialLevel !== undefined && <SpecialLevelCell dataItem={dataItem} />}</Cell>}
             {displayedColumn[fields.LastLoginIp] && <Cell className="center-align">{LastLoginIp}</Cell>}
             {displayedColumn[fields.LastTransaction] && <Cell className="center-align">{LastTransaction}</Cell>}
             {displayedColumn[fields.Email] && <Cell className="center-align">{Email}</Cell>}

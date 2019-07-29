@@ -42,7 +42,7 @@ const BaStatusCell = (props) => {
 
     return (
         <Cell className="center-align">
-            <Switcher checked={BaStatus} onChange={handleChangeBaStatus} />
+            { BaStatus !== undefined && <Switcher checked={BaStatus} onChange={handleChangeBaStatus} /> }
         </Cell>
     )
 }
