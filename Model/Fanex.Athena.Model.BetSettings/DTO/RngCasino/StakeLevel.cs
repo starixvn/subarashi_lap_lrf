@@ -4,11 +4,14 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
+using System;
+
 namespace Fanex.Athena.Model.BetSettings.DTO.RngCasino
 {
     /// <summary>
     /// StakeLevel class.
     /// </summary>
+    [Serializable]
     public class StakeLevel
     {
         public int StakeLevelId { get; set; }

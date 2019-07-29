@@ -6,11 +6,13 @@
 
 namespace Fanex.Athena.Model.BetSettings.DTO.RngCasino
 {
+    using System;
     using System.Collections.Generic;
 
     /// <summary>
     /// GameKind class.
     /// </summary>
+    [Serializable]
     public class GameKind
     {
         public int GameKindId { get; set; }
