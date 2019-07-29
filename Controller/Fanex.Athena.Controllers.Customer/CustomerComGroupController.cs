@@ -55,8 +55,7 @@
         {
             var licenseeId = SessionService.LicenseeSession.LicenseeId;
             var productAccess = _productService.GetProductAccess(licenseeId, SessionService.UserSession.Language);
-            var model = await _groupComService.GetAll(licenseeId).ConfigureAwait(false);
-
+            var model = await _groupComService.GetAll(licenseeId);
             ViewBag.IsAllowNG = productAccess.IsAllowNG;
             ViewBag.IsAllowCS = productAccess.IsAllowCS;
 
@@ -72,7 +71,7 @@
         {
             var model = new GroupCommMetaModel();
 
-            await CreateMetaModel(model).ConfigureAwait(false);
+            await CreateMetaModel(model);
 
             return View("~/Views/Desktop/Customer/CustomerComm/CreateNewGroup.cshtml", model);
         }
@@ -99,7 +98,7 @@
                         Language = userSession.Language,
                         Ip = Request.UserHostAddress
                     };
-                    result = await _groupComService.InsertGroup(metaModel, request, userSession.UserId).ConfigureAwait(false);
+                    result = await _groupComService.InsertGroup(metaModel, request, userSession.UserId);
 
                     result.Message = CustomerComGroupHelper.GetCreateGroupErrorMessage(result.Code);
 
@@ -126,7 +125,8 @@
         [HttpGet]
         public string Validate(string groupName)
         {
-            return string.IsNullOrEmpty(groupName) || _groupComService.CheckExistingGroupByName(SessionService.LicenseeSession.LicenseeId, groupName)
+            return string.IsNullOrEmpty(groupName) 
+                || _groupComService.CheckExistingGroupByName(SessionService.LicenseeSession.LicenseeId, groupName)
                 ? "NO" : "OK";
         }
 
@@ -143,7 +143,7 @@
                 return new HttpStatusCodeResult(HttpStatusCode.NotFound);
             }
 
-            await CreateMetaModel(model).ConfigureAwait(false);
+            await CreateMetaModel(model);
 
             CustomerComGroupHelper.SetDropDownListComm(model);
 
@@ -165,7 +165,7 @@
                 }
                 else if (CustomerComGroupHelper.IsValidCommissions(metaModel))
                 {
-                    result = await UpdateGroupComm(metaModel).ConfigureAwait(false);
+                    result = await UpdateGroupComm(metaModel);
                 }
                 else
                 {
@@ -223,7 +223,7 @@
         [HttpGet]
         public async Task<JsonResult> GetDefaultGroup()
         {
-            var groupList = await _groupComService.GetAll(SessionService.LicenseeSession.LicenseeId).ConfigureAwait(false);
+            var groupList = await _groupComService.GetAll(SessionService.LicenseeSession.LicenseeId);
             var defaultGroupId = groupList.FirstOrDefault(x => x.IsDefaultGroup)?.GroupCommId ?? 0;
 
             return Json(new { id = defaultGroupId }, JsonRequestBehavior.AllowGet);
@@ -250,7 +250,7 @@
                 ABVisible = productAccess.IsAllowAB
             };
 
-            var mainTable = await _groupComService.GetDataForExcel(licenseeId).ConfigureAwait(false);
+            var mainTable = await _groupComService.GetDataForExcel(licenseeId);
 
             var excel = CreateExcel(templatePath, mainTable, showingOption);
 
@@ -291,7 +291,7 @@
         {
             var licenseeId = SessionService.LicenseeSession.LicenseeId;
             var productAccess = _productService.GetProductAccess(licenseeId, SessionService.UserSession.Language);
-            var groupList = await _groupComService.GetAll(licenseeId).ConfigureAwait(false);
+            var groupList = await _groupComService.GetAll(licenseeId);
             var defaultGroupId = groupList.FirstOrDefault(x => x.IsDefaultGroup)?.GroupCommId ?? 0;
 
             metaModel.LicenseeId = licenseeId;
@@ -312,7 +312,7 @@
                     Language = userSession.Language,
                     Ip = Request.UserHostAddress
                 };
-                var result = await _groupComService.UpdateGroup(metaModel, request, userSession).ConfigureAwait(false);
+                var result = await _groupComService.UpdateGroup(metaModel, request, userSession);
                 if (string.IsNullOrWhiteSpace(result.Message))
                 {
                     result.Message = CustomerComGroupHelper.GetUpdateGroupErrorMessage(result.Code);

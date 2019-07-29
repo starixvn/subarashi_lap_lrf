@@ -26,7 +26,7 @@ namespace Fanex.Athena.Service.StatelessCore
         {
             var client = new RestClient
             {
-                BaseUrl = new Uri(_appSetting.BetListApiHostUrl)
+                BaseUrl = new Uri(_appSetting.GetValue("LGAPIHostUrl"))
             };
 
             var request = new RestRequest(path);
@@ -45,6 +45,7 @@ namespace Fanex.Athena.Service.StatelessCore
             }
 
             return JsonConvert.DeserializeObject<T>(result.Content);
+
         }
     }
 }

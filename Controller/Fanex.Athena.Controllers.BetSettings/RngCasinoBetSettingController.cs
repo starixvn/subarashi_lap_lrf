@@ -41,7 +41,8 @@ namespace Fanex.Athena.Controllers.BetSettings
         public async Task<ActionResult> Index(BetSettingMetaModel metaModel)
         {
             var customer = GetCustomerInfo(metaModel.CustId);
-            var viewModel = await _betSettingService.GetViewModelAsync(metaModel.CustId, customer, SessionService.UserSession.Language).ConfigureAwait(false);
+            var viewModel = await _betSettingService.GetViewModelAsync(metaModel.CustId, customer,
+                SessionService.UserSession.Language);
 
             await AssignRequiredProperties(viewModel, metaModel).ConfigureAwait(false);
 

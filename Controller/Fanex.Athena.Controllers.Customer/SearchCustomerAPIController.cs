@@ -61,7 +61,9 @@
 
             var userName = query.Trim();
             var userId = SessionService.UserSession.UserId;
-            var customerNames = await _searchCustomerDataAccess.SearchCustomers(userId, userName, SessionService.GenerateAgentListXml(), isIncludeDormant);
+            var customerNames = await 
+                _searchCustomerDataAccess.SearchCustomers(userId, userName, 
+                SessionService.GenerateAgentListXml(), isIncludeDormant);
 
             var searchResult = new
             {
