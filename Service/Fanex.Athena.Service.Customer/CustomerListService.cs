@@ -7,16 +7,19 @@
 namespace Fanex.Athena.Service.Customer
 {
     using System.Threading.Tasks;
+
     using DataAccess.Customer.Interfaces;
+
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Customer.DTO;
     using Fanex.Athena.Model.Customer.MetaModel;
-    using Fanex.Athena.Service.Casino.Interfaces;
     using Fanex.Athena.Service.Core.Common.Interfaces;
     using Fanex.Athena.Service.Customer.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Model.Core.ResultModel;
+
     using Resources;
 
     public class CustomerListService : ICustomerListService
@@ -27,30 +30,28 @@ namespace Fanex.Athena.Service.Customer
 
         private readonly IDormantCustomerListDataAccess _dormantCustomerListDataAccess;
 
-        private readonly ICasinoCustomerService _casinoCustomerService;
-
         private readonly IAuthorizationService _authorizationService;
 
         private readonly IProductService _productService;
 
         private readonly IAppSettings _appSettings;
+        private readonly ILGAPIClient _lgClient;
 
         public CustomerListService(
             ICustomerDataAccess customerDataAccess,
             ICustomerListDataAccess customerListDataAccess,
             IDormantCustomerListDataAccess dormantCustomerListDataAccess,
-            ICasinoCustomerService casinoCustomerService,
             IAuthorizationService authorizationService,
             IProductService productService,
-            IAppSettings appSettings)
+            IAppSettings appSettings, ILGAPIClient lgClient)
         {
             _customerDataAccess = customerDataAccess;
             _customerListDataAccess = customerListDataAccess;
             _dormantCustomerListDataAccess = dormantCustomerListDataAccess;
-            _casinoCustomerService = casinoCustomerService;
             _authorizationService = authorizationService;
             _productService = productService;
             _appSettings = appSettings;
+            _lgClient = lgClient;
         }
 
         public async Task<ReportResultModel<CustomerDTO>> GetActiveCustomers(CustomerListMetaModel metaModel)
@@ -82,7 +83,7 @@ namespace Fanex.Athena.Service.Customer
             return _customerListDataAccess.UpdateOddsGroup(metaModel);
         }
 
-        public IResultInfo UpdateCustClosed(CustomerStatusMetaModel metaModel, string languageCode)
+        public async Task<IResultInfo> UpdateCustClosedAsync(CustomerStatusMetaModel metaModel, string languageCode)
         {
             if (!_authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, 0))
             {
@@ -107,7 +108,12 @@ namespace Fanex.Athena.Service.Customer
                         ModifyByUsername = metaModel.ModifyByUsername,
                         Ip = metaModel.Ip
                     };
-                    closeCasinoResult = _casinoCustomerService.UpdateClosed(casinoMetaModel);
+
+                    var apiPath = _appSettings.GetValue("LGAPIHostUrl") + "/RNGCasinoCustomer/Closed";
+
+                    var temp = await _lgClient.PostAsync<APIResult<bool>>
+                        (apiPath, casinoMetaModel, languageCode).ConfigureAwait(false);
+                    closeCasinoResult = temp != null && temp.Data;
                 }
                 else
                 {
@@ -120,7 +126,7 @@ namespace Fanex.Athena.Service.Customer
                 : new ResultInfo { Code = 1, Message = "Error when update closed status on casino db" };
         }
 
-        public IResultInfo UpdateCustSuspend(CustomerStatusMetaModel metaModel, string languageCode)
+        public async Task<IResultInfo> UpdateCustSuspendAsync(CustomerStatusMetaModel metaModel, string languageCode)
         {
             if (!_authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, 0))
             {
@@ -146,7 +152,11 @@ namespace Fanex.Athena.Service.Customer
                         Ip = metaModel.Ip
                     };
 
-                    suspendCasinoResult = _casinoCustomerService.UpdateSuspend(casinoMetaModel);
+
+                    var apiPath = _appSettings.GetValue("LGAPIHostUrl") + "/RNGCasinoCustomer/Suspend";
+                    var temp = await _lgClient.PostAsync<APIResult<bool>>
+                        (apiPath, casinoMetaModel, languageCode).ConfigureAwait(false);
+                    suspendCasinoResult = temp != null && temp.Data;
                 }
                 else
                 {

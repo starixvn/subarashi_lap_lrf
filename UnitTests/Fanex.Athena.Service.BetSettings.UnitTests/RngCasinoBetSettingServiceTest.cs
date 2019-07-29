@@ -3,19 +3,27 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using BetSettings;
-    using Casino.Interfaces;
-    using Casino.Wrappers;
+
     using DataAccess.BetSettings.Interfaces;
+
     using Extension.Utility;
+
     using Fanex.Athena.Model.Core.DTO.Common;
+
     using Interfaces;
+
     using Model.BetSettings.DTO.RngCasino;
     using Model.BetSettings.MetaModel;
     using Model.Customer.DTO;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Resources;
+
     using StatelessCore.Interfaces;
 
     [TestFixture]
@@ -27,7 +35,6 @@
 
         private IAuthorizationService _authorizationService;
         private IAppSettings _appSettings;
-        private ICustomerApiWrapper _customerApiWrapper;
         private IRngCasinoBetSettingDataAccess _dataAccess;
         private IRngCasinoBetSettingService _service;
         private ILGAPIClient _lgClient;
@@ -37,11 +44,10 @@
         {
             _authorizationService = Substitute.For<IAuthorizationService>();
             _appSettings = Substitute.For<IAppSettings>();
-            _customerApiWrapper = Substitute.For<ICustomerApiWrapper>();
             _dataAccess = Substitute.For<IRngCasinoBetSettingDataAccess>();
             _lgClient = Substitute.For<ILGAPIClient>();
             _service = new RngCasinoBetSettingService(_authorizationService,
-                _appSettings, _customerApiWrapper, _dataAccess, _lgClient);
+                _appSettings, _dataAccess, _lgClient);
         }
 
         [TearDown]
@@ -186,8 +192,9 @@
 
             _appSettings.IsDisableRngCasino.Returns(false);
             _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, Arg.Any<long>()).Returns(true);
-            _customerApiWrapper.UpdateCustEnableCasino(metaModel)
-                .Returns(false);
+
+            _lgClient.PostAsync<APIResult<bool>>(Arg.Any<string>(), Arg.Any<BetSettingCasinoStatusMetaModel>(), Arg.Any<string>())
+                .Returns(new APIResult<bool> { Data = false });
 
             // Action
             var result = await _service.UpdateStatusAsync(metaModel);
@@ -214,8 +221,7 @@
 
             _appSettings.IsDisableRngCasino.Returns(false);
             _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, Arg.Any<long>()).Returns(true);
-            _customerApiWrapper.UpdateCustEnableCasino(metaModel)
-                .Returns(true);
+            _lgClient.PostAsync<bool>(Arg.Any<string>(), Arg.Any<BetSettingCasinoStatusMetaModel>(), Arg.Any<string>()).Returns(true);
 
             // Action
             await _service.UpdateStatusAsync(metaModel);
@@ -327,7 +333,9 @@
 
             _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, Arg.Any<long>()).Returns(true);
             _appSettings.IsDisableRngCasino.Returns(false);
-            _lgClient.PostAsync<dynamic>(Arg.Any<string>(), Arg.Any<object>(), Arg.Any<string>()).Returns(new { Data = false });
+
+            _lgClient.PostAsync<APIResult<bool>>(Arg.Any<string>(), Arg.Any<object>(), Arg.Any<string>())
+                .Returns(new APIResult<bool> { Data = false });
 
             // Action
             var result = await _service.UpdateSettingAsync(metaModel, true, false).ConfigureAwait(false);
@@ -335,7 +343,7 @@
             // Assert
             Assert.Multiple(() =>
             {
-                _lgClient.ReceivedWithAnyArgs().PostAsync<dynamic>(null, null, null);
+                _lgClient.ReceivedWithAnyArgs().PostAsync<APIResult<bool>>(null, null, null);
                 Assert.That(result.IsSuccessful, Is.False);
                 Assert.That(result.Message, Is.EqualTo(ViewResources.Fail));
             });
@@ -353,7 +361,8 @@
 
             _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, Arg.Any<long>()).Returns(true);
             _appSettings.IsDisableRngCasino.Returns(false);
-            _lgClient.PostAsync<dynamic>(Arg.Any<string>(), Arg.Any<object>(), Arg.Any<string>()).Returns(new { Data = false });
+            _lgClient.PostAsync<APIResult<bool>>(Arg.Any<string>(), Arg.Any<object>(), Arg.Any<string>()).Returns(
+                new APIResult<bool> { Data = true });
 
             // Action
             var result = await _service.UpdateSettingAsync(metaModel, true, false).ConfigureAwait(false);
@@ -361,7 +370,7 @@
             // Assert
             Assert.Multiple(() =>
             {
-                _lgClient.ReceivedWithAnyArgs().PostAsync<dynamic>(null, null, null);
+                _lgClient.ReceivedWithAnyArgs().PostAsync<APIResult<bool>>(null, null, null);
                 Assert.That(result.IsSuccessful, Is.True);
                 Assert.That(result.Message, Is.EqualTo(ViewResources.MessageSuccess));
             });

@@ -23,7 +23,10 @@
             var expectedResult = new ResultInfo { ExtendedData = "1,2,3" };
             _customerCommDataAccess.RemoveCustomersFromGroupAsync(metaModel).Returns(Task.FromResult<IResultInfo>(expectedResult));
 
-            _casinoCustomerService.UpdateCommission(Arg.Any<RNGCasinoUpdateMemberComMetaModel>()).Returns(true);
+            // Action
+
+            _lgClient.PostAsync<APIResult<bool>>(Arg.Any<string>(), Arg.Any<RNGCasinoUpdateMemberComMetaModel>(), Arg.Any<string>())
+                .Returns(new APIResult<bool> { Data = true });
 
             // Action
             var result = await _customerCommService.RemoveCustomersFromGroupAsync(metaModel, isAllowedRNGCasino);
@@ -48,7 +51,7 @@
             // Assert
             Assert.Multiple(() =>
             {
-                _casinoCustomerService.DidNotReceive().UpdateCommission(Arg.Any<RNGCasinoUpdateMemberComMetaModel>());
+                _lgClient.DidNotReceive().PostAsync<bool>(Arg.Any<string>(), Arg.Any<RNGCasinoUpdateMemberComMetaModel>(), Arg.Any<string>());
                 Assert.That(result, Is.EqualTo(expectedResult));
             });
         }
@@ -63,7 +66,9 @@
             var resultInfo = new ResultInfo { ExtendedData = "1,2,3" };
             _customerCommDataAccess.RemoveCustomersFromGroupAsync(metaModel).Returns(Task.FromResult<IResultInfo>(resultInfo));
 
-            _casinoCustomerService.UpdateCommission(Arg.Any<RNGCasinoUpdateMemberComMetaModel>()).Returns(false);
+            _lgClient.PostAsync<bool>(Arg.Any<string>(), Arg.Any<RNGCasinoUpdateMemberComMetaModel>(),
+                Arg.Any<string>()).Returns(false);
+
 
             var expectedResult = new ResultInfo
             {

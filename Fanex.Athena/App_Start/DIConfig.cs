@@ -6,17 +6,19 @@ using System.Web.Compilation;
 using System.Web.Http;
 using System.Web.Http.ExceptionHandling;
 using System.Web.Mvc;
+
 using Autofac;
 using Autofac.Integration.Mvc;
 using Autofac.Integration.WebApi;
+
 using CitiXchangeLibrary;
+
 using Fanex.Athena.Api.Base.Logger;
 using Fanex.Athena.DataAccess.Report;
 using Fanex.Athena.DataAccess.Report.Interfaces;
 using Fanex.Athena.Extension.Utility.Internal;
-using Fanex.Athena.Service.Core.Utility;
-using Fanex.Athena.Service.Core.Utility.Interfaces;
 using Fanex.Logging;
+
 using ONEbook.UM.Services;
 using ONEbook.UM.Services.Impl;
 
@@ -75,7 +77,7 @@ namespace Fanex.Athena
             {
                 assemblies = BuildManager.GetReferencedAssemblies().Cast<Assembly>().ToArray();
             }
-            catch
+            catch (Exception)
             {
                 assemblies = AppDomain.CurrentDomain.GetAssemblies().Where(i => !i.IsDynamic).ToArray();
             }
@@ -86,7 +88,7 @@ namespace Fanex.Athena
 
         private static Assembly[] GetServiceAssemblies(Assembly[] assemblies)
         {
-            string[] controllerFileNames = new[]
+            var controllerFileNames = new[]
             {
                 "Fanex.Athena.Controllers",
                 "Fanex.Athena.Api",

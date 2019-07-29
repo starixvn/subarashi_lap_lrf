@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-
+using System.Web;
 using Fanex.Athena.Extension.Utility;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
 
@@ -33,13 +33,14 @@ namespace Fanex.Athena.Service.StatelessCore
             request.AddHeader(LANGUAGEKEY, language);
             request.AddJsonBody(value);
             request.Method = Method.POST;
-            
+
             var result = await client.ExecuteTaskAsync(request).ConfigureAwait(false);
 
             if (result.ResponseStatus != ResponseStatus.Completed)
             {
                 var errorMessage = $"Http Error ={result.ResponseStatus}\n Error occur when query LGAPI";
-                throw new Exception(errorMessage);
+
+                throw new HttpException(errorMessage);
             }
 
             return JsonConvert.DeserializeObject<T>(result.Content);

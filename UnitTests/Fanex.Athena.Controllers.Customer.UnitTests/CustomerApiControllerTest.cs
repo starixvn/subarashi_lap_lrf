@@ -53,7 +53,7 @@
         }
 
         [Test]
-        public void UpdateCustStatus_LicenseeNotAllowStatusFunction_ReturnErrorResult()
+        public async Task UpdateCustStatus_LicenseeNotAllowStatusFunction_ReturnErrorResultAsync()
         {
             using (var controller = CreateController())
             {
@@ -61,7 +61,7 @@
                 AppSettings.GetValue("LicenseeOfferStatusFunction").Returns("0");
 
                 // Action
-                var result = controller.UpdateCustStatus(0, false, false) as JsonResult;
+                var result = await controller.UpdateCustStatusAsync(0, false, false).ConfigureAwait(false) as JsonResult;
                 var resultInfo = result.Data as ResultInfo;
 
                 // Assert
@@ -86,12 +86,12 @@
                 AppSettings.LicenseeOfferStatusFunction.Returns(new[] { licenseeId });
 
                 // Action
-                controller.UpdateCustStatus(CustId, isClosed, isSuspended);
+                controller.UpdateCustStatusAsync(CustId, isClosed, isSuspended);
 
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    _customerListService.Received(1).UpdateCustClosed(
+                    _customerListService.Received(1).UpdateCustClosedAsync(
                         Arg.Is<CustomerStatusMetaModel>(x =>
                         x.LicenseeId == licenseeId &&
                         x.LicenseeName == SessionService.LicenseeSession.LicenseeName &&
@@ -102,7 +102,7 @@
                         x.Ip == controller.Request.UserHostAddress),
                         SessionService.UserSession.Language);
 
-                    _customerListService.Received(1).UpdateCustSuspend(
+                    _customerListService.Received(1).UpdateCustSuspendAsync(
                         Arg.Is<CustomerStatusMetaModel>(x =>
                         x.LicenseeId == licenseeId &&
                         x.LicenseeName == SessionService.LicenseeSession.LicenseeName &&
@@ -117,7 +117,7 @@
         }
 
         [Test]
-        public void UpdateCustStatus_HasException_WriteLogAndReturnError()
+        public async Task UpdateCustStatus_HasException_WriteLogAndReturnErrorAsync()
         {
             using (var controller = CreateController())
             {
@@ -125,10 +125,10 @@
                 var exception = new Exception("Sdf");
                 var licenseeId = SessionService.LicenseeSession.LicenseeId;
                 AppSettings.LicenseeOfferStatusFunction.Returns(new[] { licenseeId });
-                _customerListService.When(x => x.UpdateCustClosed(Arg.Any<CustomerStatusMetaModel>(), Arg.Any<string>()))
+                _customerListService.When(x => x.UpdateCustClosedAsync(Arg.Any<CustomerStatusMetaModel>(), Arg.Any<string>()))
                     .Throw(exception);
                 // Action
-                var result = controller.UpdateCustStatus(0, false, false) as JsonResult;
+                var result = await controller.UpdateCustStatusAsync(0, false, false).ConfigureAwait(false) as JsonResult;
                 var resultInfo = result.Data as ResultInfo;
                 var errorMessage = LogMessageHelper.GenerateMessage(exception);
 

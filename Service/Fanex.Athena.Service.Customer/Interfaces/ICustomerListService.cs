@@ -27,9 +27,9 @@ namespace Fanex.Athena.Service.Customer.Interfaces
 
         IResultInfo UpdateOddsGroup(CustomerOddsGroupMetaModel metaModel);
 
-        IResultInfo UpdateCustClosed(CustomerStatusMetaModel metaModel, string languageCode);
+        Task<IResultInfo> UpdateCustClosedAsync(CustomerStatusMetaModel metaModel, string languageCode);
 
-        IResultInfo UpdateCustSuspend(CustomerStatusMetaModel metaModel, string languageCode);
+        Task<IResultInfo> UpdateCustSuspendAsync(CustomerStatusMetaModel metaModel, string languageCode);
 
         IResultInfo UpdateCustomerBAStatus(int licenseeId, int custId, int modifiedBy, bool allowBA, Request request);
 

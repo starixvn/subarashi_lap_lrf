@@ -35,7 +35,7 @@
 
         public override CacheItem GetCacheItem(string key, string regionName = null)
         {
-            CacheItem temporary = base.GetCacheItem(CreateKeyWithRegion(key, regionName));
+            var temporary = base.GetCacheItem(CreateKeyWithRegion(key, regionName));
             return new CacheItem(key, temporary.Value, regionName);
         }
 
