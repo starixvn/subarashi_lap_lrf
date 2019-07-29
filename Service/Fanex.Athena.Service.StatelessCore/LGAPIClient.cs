@@ -40,7 +40,7 @@ namespace Fanex.Athena.Service.StatelessCore
             {
                 var errorMessage = $"Http Error ={result.ResponseStatus}\n Error occur when query LGAPI";
 
-                throw new HttpException(errorMessage);
+                throw new HttpException(errorMessage + result.Content);
             }
 
             return JsonConvert.DeserializeObject<T>(result.Content);
