@@ -1,4 +1,4 @@
-﻿using Fanex.Athena.Model.Core.DTO.Common;
+﻿using Fanex.Athena.Model.Core.ViewModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.Services.Interfaces;
 using Fanex.Athena.UnitTest.Common.Helpers;
@@ -33,7 +33,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests
                 IsBa = true
             };
 
-            var expectedReturnedData = new ResultInfo();
+            var expectedReturnedData = new ResultViewModel();
             _baStatusService.Update(metaModel).Returns(expectedReturnedData);
 
             using (var controller = CreateController())
@@ -52,9 +52,8 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests
             }
         }
 
-        [TestCase(false, 999, "Update Failed", null)]
-        [TestCase(true, 0, "", "A")]
-        public void Update_Failed_ReturnCorrectResult(bool isSuccess, int errCode, string errMsg, string oddsGroup)
+        [Test]
+        public void Update_WhenCall_ReturnCorrectResult()
         {
             // Arrange
             var metaModel = new BaStatusUpdatingMetaModel
@@ -63,11 +62,10 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests
                 IsBa = true
             };
 
-            var expectedReturnedData = new ResultInfo
+            var expectedReturnedData = new ResultViewModel
             {
-                Code = errCode,
-                Message = errMsg,
-                ExtendedData = oddsGroup
+                Success = true,
+                ExtendedData = "A"
             };
             _baStatusService.Update(metaModel).Returns(expectedReturnedData);
 
@@ -77,12 +75,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests
                 var result = controller.Update(metaModel);
 
                 // Assert
-                Assert.Multiple(() =>
-                {
-                    Assert.That(result.Success, Is.EqualTo(isSuccess));
-                    Assert.That(result.Message, Is.EqualTo(errMsg));
-                    Assert.That(result.ExtendedData, Is.EqualTo(oddsGroup));
-                });
+                Assert.That(result, Is.EqualTo(expectedReturnedData));
             }
         }
 

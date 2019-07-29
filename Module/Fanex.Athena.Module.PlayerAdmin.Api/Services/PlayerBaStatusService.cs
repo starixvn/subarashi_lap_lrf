@@ -1,4 +1,4 @@
-﻿using Fanex.Athena.Model.Core.DTO.Common;
+﻿using Fanex.Athena.Model.Core.ViewModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.Repository.Interfaces;
 using Fanex.Athena.Module.PlayerAdmin.Api.Services.Interfaces;
@@ -25,28 +25,37 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
             _productService = productService;
         }
 
-        public IResultInfo Update(BaStatusUpdatingMetaModel metaModel)
+        public ResultViewModel Update(BaStatusUpdatingMetaModel metaModel)
         {
             var productAccess = _productService.GetProductAccess(metaModel.LicenseeId, metaModel.Language);
             if (!productAccess.IsAllowBA)
             {
-                return new ResultInfo
-                {
-                    Code = UpdatingUtils.DefaultErrCode,
-                    Message = ResourceKeyConstants.NotAllowBA
-                };
+                return CreateErrorResult(ResourceKeyConstants.NotAllowBA);
             }
 
             if (!_authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, 0))
             {
-                return new ResultInfo
-                {
-                    Code = UpdatingUtils.DefaultErrCode,
-                    Message = ResourceKeyConstants.InvalidData
-                };
+                return CreateErrorResult(ResourceKeyConstants.InvalidData);
             }
 
-            return _playerBaStatusRepository.Update(metaModel);
+            var result = _playerBaStatusRepository.Update(metaModel);
+
+            return new ResultViewModel
+            {
+                Success = result.IsSuccessful,
+                Message = result.Message,
+                ErrorCode = result.Code,
+                ExtendedData = result.ExtendedData
+            };
+        }
+
+        private static ResultViewModel CreateErrorResult(string errMsg)
+        {
+            return new ResultViewModel
+            {
+                Success = false,
+                ErrorMessage = errMsg
+            };
         }
     }
 }

@@ -39,13 +39,14 @@ const SpecialLevelDropdown = (props) => {
 
             toggleLoader(true);
             updateSpecialLevel(param).then(response => {
-                const result = response.data;
-                if (result.Success) {
+                const { Success, Message, ErrorMessage } = response.data;
+                if (Success) {
                     const newPlayerList = GridInteractionService.updatePlayerItem(playerList, custId, value, 'SpecialLevel');
                     setPlayerList(newPlayerList);
                 }
                 else {
-                    window.alert(result.ErrorMessage);
+                    const errMsg = Message || LangHelper.getSingleResource(ErrorMessage);
+                    window.alert(errMsg);
                 }
                 toggleLoader(false);
             }).catch(() => {

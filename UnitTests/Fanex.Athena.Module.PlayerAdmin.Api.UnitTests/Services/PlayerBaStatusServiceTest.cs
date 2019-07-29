@@ -1,10 +1,12 @@
 ﻿using Fanex.Athena.Model.Core.DTO.Common;
+using Fanex.Athena.Model.Core.ViewModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.Repository.Interfaces;
 using Fanex.Athena.Module.PlayerAdmin.Api.Services;
 using Fanex.Athena.Module.PlayerAdmin.Api.Utilities;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
 using Fanex.Athena.UnitTest.Common.Helpers;
+using Fanex.Athena.UnitTest.Common.NUnitExtensions;
 using NSubstitute;
 using NUnit.Framework;
 using System.Collections.Generic;
@@ -39,10 +41,10 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
         public void Update_NotAllowBa_ReturnCorrectErroResult()
         {
             // Arrange
-            var expectedResult = new ResultInfo
+            var expectedResult = new ResultViewModel
             {
-                Code = UpdatingUtils.DefaultErrCode,
-                Message = ResourceKeyConstants.NotAllowBA
+                Success = false,
+                ErrorMessage = ResourceKeyConstants.NotAllowBA
             };
 
             var metaModel = CreateMetaModel();
@@ -55,21 +57,17 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
             var result = service.Update(metaModel);
 
             // Assert
-            Assert.Multiple(() =>
-            {
-                Assert.That(result.Code, Is.EqualTo(expectedResult.Code));
-                Assert.That(result.Message, Is.EqualTo(expectedResult.Message));
-            });
+            Assert.That(result, Tobe.SameProperties(expectedResult));
         }
 
         [Test]
         public void Update_HasNoPermission_ReturnCorrectErroResult()
         {
             // Arrange
-            var expectedResult = new ResultInfo
+            var expectedResult = new ResultViewModel
             {
-                Code = UpdatingUtils.DefaultErrCode,
-                Message = ResourceKeyConstants.InvalidData
+                Success = false,
+                ErrorMessage = ResourceKeyConstants.InvalidData
             };
 
             var metaModel = CreateMetaModel();
@@ -83,28 +81,31 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
             var result = service.Update(metaModel);
 
             // Assert
-            Assert.Multiple(() =>
-            {
-                Assert.That(result.Code, Is.EqualTo(expectedResult.Code));
-                Assert.That(result.Message, Is.EqualTo(expectedResult.Message));
-            });
+            Assert.That(result, Tobe.SameProperties(expectedResult));
         }
 
         [Test]
         public void Update_ValidPermission_ReturnCorrectResult()
         {
             // Arrange
-            var expectedResult = new ResultInfo
+            var expectedUpdatingResult = new ResultInfo
             {
                 Code = 0,
                 Message = string.Empty
+            };
+
+            var expectedResult = new ResultViewModel
+            {
+                Success = true,
+                Message = string.Empty,
+                ErrorCode = 0
             };
 
             var metaModel = CreateMetaModel();
             var productAccess = CreateProductAccess(true);
             _productService.GetProductAccess(metaModel.LicenseeId, metaModel.Language).Returns(productAccess);
             _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, 0).Returns(true);
-            _playerBaStatusRepository.Update(metaModel).Returns(expectedResult);
+            _playerBaStatusRepository.Update(metaModel).Returns(expectedUpdatingResult);
 
             var service = new PlayerBaStatusService(_playerBaStatusRepository, _authorizationService, _productService);
 
@@ -112,11 +113,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
             var result = service.Update(metaModel);
 
             // Assert
-            Assert.Multiple(() =>
-            {
-                Assert.That(result.Code, Is.EqualTo(expectedResult.Code));
-                Assert.That(result.Message, Is.EqualTo(expectedResult.Message));
-            });
+            Assert.That(result, Tobe.SameProperties(expectedResult));
         }
 
         private static ProductAccess CreateProductAccess(bool isAllowBA)

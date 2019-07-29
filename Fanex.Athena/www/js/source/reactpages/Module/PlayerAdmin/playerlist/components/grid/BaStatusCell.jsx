@@ -6,10 +6,11 @@ import { ActionCreators } from '../../actions';
 import { Cell } from '@9softstudio/react-grid';
 import Switcher from '@jsroot/components/Switcher';
 import LangHelper from '@jsroot/lib/langHelper';
+import GridInteractionService from '../../lib/gridInteractionService';
 
 const BaStatusCell = (props) => {
     const { dataItem, setPlayerList, toggleLoader, updateBaStatus } = props;
-    const { CustId, BaStatus } = dataItem;
+    const { CustId, BaStatus, OddsGroup } = dataItem;
 
     const handleChangeBaStatus = (event) => {
         const isBa = event.target.checked;
@@ -22,13 +23,15 @@ const BaStatusCell = (props) => {
         const param = { custId: CustId, isBa };
         toggleLoader(true);
         updateBaStatus(param).then(response => {
-            const result = response.data;
-            if (result.Success) {
-                const newPlayerList = GridInteractionService.updatePlayerItem(playerList, CustId, isBa, 'BaStatus');
+            const { Success, Message, ErrorMessage, ExtendedData } = response.data;
+            if (Success) {
+                const oddsGroup = ExtendedData || OddsGroup;
+                const newPlayerList = GridInteractionService.updatePlayerWithBaStatus(playerList, CustId, isBa, oddsGroup);
                 setPlayerList(newPlayerList);
             }
             else {
-                window.alert(result.Message);
+                const errMsg = Message || LangHelper.getSingleResource(ErrorMessage);
+                window.alert(errMsg);
             }
 
             toggleLoader(false);

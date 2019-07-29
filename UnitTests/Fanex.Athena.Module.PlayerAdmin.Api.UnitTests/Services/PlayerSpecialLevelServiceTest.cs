@@ -6,6 +6,7 @@ using Fanex.Athena.Module.PlayerAdmin.Api.Services;
 using Fanex.Athena.Module.PlayerAdmin.Api.Utilities;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
 using Fanex.Athena.UnitTest.Common.Helpers;
+using Fanex.Athena.UnitTest.Common.NUnitExtensions;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -54,11 +55,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
             var result = service.Update(metaModel);
 
             // Assert
-            Assert.Multiple(() =>
-            {
-                Assert.That(result.Success, Is.EqualTo(expectedResult.Success));
-                Assert.That(result.ErrorMessage, Is.EqualTo(expectedResult.ErrorMessage));
-            });
+            Assert.That(result, Tobe.SameProperties(expectedResult));
         }
 
         [Test]
@@ -68,6 +65,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
             var expectedResult = new ResultViewModel
             {
                 Success = false,
+                ErrorCode = UpdatingUtils.DefaultErrCode,
                 ErrorMessage = ResourceKeyConstants.InvalidData
             };
 
@@ -81,11 +79,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
             var result = service.Update(metaModel);
 
             // Assert
-            Assert.Multiple(() =>
-            {
-                Assert.That(result.Success, Is.EqualTo(expectedResult.Success));
-                Assert.That(result.ErrorMessage, Is.EqualTo(expectedResult.ErrorMessage));
-            });
+            Assert.That(result, Tobe.SameProperties(expectedResult));
         }
 
         [Test]
@@ -115,12 +109,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
             var result = service.Update(metaModel);
 
             // Assert
-            Assert.Multiple(() =>
-            {
-                Assert.That(result.Success, Is.EqualTo(expectedResult.Success));
-                Assert.That(result.Message, Is.EqualTo(expectedResult.Message));
-                Assert.That(result.ErrorCode, Is.EqualTo(expectedResult.ErrorCode));
-            });
+            Assert.That(result, Tobe.SameProperties(expectedResult));
         }
 
         private static SpecialLevelUpdatingMetaModel CreateMetaModel()

@@ -22,14 +22,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api
         {
             AssignCommonProperties(metaModel);
 
-            var updateResult = _playerBaStatusService.Update(metaModel);
-
-            if (updateResult.IsSuccessful)
-            {
-                return CreateUpdatingBaResult(true, updateResult.Message, updateResult.ExtendedData);
-            }
-
-            return CreateUpdatingBaResult(false, updateResult.Message);
+            return _playerBaStatusService.Update(metaModel);
         }
 
         private void AssignCommonProperties(PlayerUpdatingBaseMetaModel param)
@@ -38,16 +31,6 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api
             param.UserId = UserId;
             param.Language = UpdatingUtils.GetLanguageCode(Language);
             param.Ip = string.Empty;
-        }
-
-        private static ResultViewModel CreateUpdatingBaResult(bool isSuccessful, string message, string oddsGroup = null)
-        {
-            return new ResultViewModel
-            {
-                Success = isSuccessful,
-                Message = message,
-                ExtendedData = oddsGroup
-            };
         }
     }
 }
