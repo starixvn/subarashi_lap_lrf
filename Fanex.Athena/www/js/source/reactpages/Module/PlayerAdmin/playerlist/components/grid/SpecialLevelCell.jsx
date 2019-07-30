@@ -7,7 +7,7 @@ import DropdownLabel from '@jsroot/components/DropdownLabel';
 
 import { ActionCreators } from '../../actions';
 import GridInteractionService from '../../lib/gridInteractionService';
-import { getSpecialLevelText } from '../../lib/utils';
+import { getSpecialLevelText, buildCurrentActivePlayer } from '../../lib/utils';
 
 export const SpecialLevelCell = (props) => {
     const { dataItem, specialLevelDropdownPosition, setCurrentActivePlayer, setSpecialLevelDropdownPosition } = props;
@@ -15,7 +15,8 @@ export const SpecialLevelCell = (props) => {
     const style = { backgroundColor: specialLevelListWithColor[value] };
 
     const handleToggleSpecialLevel = (event) => {
-        setCurrentActivePlayer({ custId: dataItem.CustId });
+        const currentActivePlayer = buildCurrentActivePlayer(dataItem);
+        setCurrentActivePlayer(currentActivePlayer);
         const newPosition = GridInteractionService.getNextDropdownPosition(event.target, specialLevelDropdownPosition);
         setSpecialLevelDropdownPosition(newPosition);
     }
@@ -33,4 +34,4 @@ function mapStateToProps(state) {
     return Object.assign({}, { specialLevelDropdownPosition });
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(React.memo(SpecialLevelCell));
+export default connect(mapStateToProps, mapDispatchToProps)(SpecialLevelCell);

@@ -69,4 +69,4 @@ export const UserNameInput = React.forwardRef((props, userNameRef) => {
     )
 });
 
-export default React.memo(UserNameInput);
+export default UserNameInput;

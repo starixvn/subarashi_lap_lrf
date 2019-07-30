@@ -43,4 +43,4 @@ function mapStateToProps(state) {
     return Object.assign({}, { statusDropdownPosition });
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(React.memo(StatusCell));
+export default connect(mapStateToProps, mapDispatchToProps)(StatusCell);

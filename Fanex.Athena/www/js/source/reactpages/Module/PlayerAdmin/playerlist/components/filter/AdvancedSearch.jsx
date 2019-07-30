@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import MultipleSelect from '@9softstudio/react-multiselect';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
@@ -6,7 +6,7 @@ import { baStatusList, specialLevelListWithColor, oddsGroupListWithStyle } from 
 import LangHelper from '@jsroot/lib/langHelper';
 import { getSpecialLevelText } from '../../lib/utils';
 
-export class AdvancedSearch extends PureComponent {
+export class AdvancedSearch extends React.Component {
     constructor(props) {
         super(props);
 

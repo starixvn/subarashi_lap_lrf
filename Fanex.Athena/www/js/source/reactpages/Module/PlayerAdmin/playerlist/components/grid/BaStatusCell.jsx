@@ -28,6 +28,7 @@ const BaStatusCell = (props) => {
                 const oddsGroup = ExtendedData || OddsGroup;
                 const newPlayerList = GridInteractionService.updatePlayerWithBaStatus(playerList, CustId, isBa, oddsGroup);
                 setPlayerList(newPlayerList);
+                window.alert(LangHelper.getSingleResource('UpdateSuccess'));
             }
             else {
                 const errMsg = Message || LangHelper.getSingleResource(ErrorMessage);
@@ -57,4 +58,4 @@ function mapStateToProps(state) {
     return Object.assign({}, { playerList });
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(React.memo(BaStatusCell));
+export default connect(mapStateToProps, mapDispatchToProps)(BaStatusCell);

@@ -42,6 +42,7 @@ export const OddsGroupDropdown = (props) => {
                 if (Success) {
                     const newPlayerList = GridInteractionService.updatePlayerItem(playerList, custId, value, 'OddsGroup');
                     setPlayerList(newPlayerList);
+                    window.alert(LangHelper.getSingleResource('UpdateSuccess'));
                 }
                 else {
                     const errMsg = Message || LangHelper.getSingleResource(ErrorMessage);
@@ -82,4 +83,4 @@ function mapStateToProps(state) {
     return Object.assign({}, { oddsGroupDropdownPosition, currentActivePlayer, playerList });
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(React.memo(OddsGroupDropdown));
+export default connect(mapStateToProps, mapDispatchToProps)(OddsGroupDropdown);

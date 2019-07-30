@@ -43,6 +43,7 @@ const SpecialLevelDropdown = (props) => {
                 if (Success) {
                     const newPlayerList = GridInteractionService.updatePlayerItem(playerList, custId, value, 'SpecialLevel');
                     setPlayerList(newPlayerList);
+                    window.alert(LangHelper.getSingleResource('UpdateSuccess'));
                 }
                 else {
                     const errMsg = Message || LangHelper.getSingleResource(ErrorMessage);
@@ -82,4 +83,4 @@ function mapStateToProps(state) {
     return Object.assign({}, { specialLevelDropdownPosition, currentActivePlayer, playerList });
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(React.memo(SpecialLevelDropdown));
+export default connect(mapStateToProps, mapDispatchToProps)(SpecialLevelDropdown);

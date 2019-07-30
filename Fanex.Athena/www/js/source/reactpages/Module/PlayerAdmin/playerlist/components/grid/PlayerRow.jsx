@@ -45,4 +45,4 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators({ setSelectedPlayer }, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(React.memo(PlayerRow));
+export default connect(null, mapDispatchToProps)(PlayerRow);

@@ -43,4 +43,4 @@ function mapStateToProps(state) {
     return Object.assign({}, { pagingOption, param });
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(React.memo(Content));
+export default connect(mapStateToProps, mapDispatchToProps)(Content);

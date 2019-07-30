@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../../actions';
 import GridHelper from '../../lib/gridHelper';
-import { buildSelectedPlayer } from '../../lib/utils';
+import { buildSelectedPlayer, buildCurrentActivePlayer } from '../../lib/utils';
 
 export const UserNameCell = (props) => {
     const { dataItem, setSelectedPlayer, setCurrentActivePlayer, setContextMenu, contextMenu } = props;
@@ -27,11 +27,7 @@ export const UserNameCell = (props) => {
 
             setContextMenu({ position, isOpen: true });
 
-            const currentActivePlayer = {
-                custId: dataItem.CustId,
-                userName: dataItem.UserName,
-                currency: dataItem.Currency
-            };
+            const currentActivePlayer = buildCurrentActivePlayer(dataItem);
             setCurrentActivePlayer(currentActivePlayer);
         }
     }
@@ -72,4 +68,4 @@ function mapStateToProps(state) {
     return Object.assign({}, { contextMenu });
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(React.memo(UserNameCell));
+export default connect(mapStateToProps, mapDispatchToProps)(UserNameCell);

@@ -6,6 +6,7 @@ import { oddsGroupListWithStyle } from '../../lib/constants';
 import DropdownLabel from '@jsroot/components/DropdownLabel';
 import { ActionCreators } from '../../actions';
 import GridInteractionService from '../../lib/gridInteractionService';
+import { buildCurrentActivePlayer } from '../../lib/utils';
 
 export const OddsGroupCell = (props) => {
     const { dataItem, oddsGroupDropdownPosition, setCurrentActivePlayer, setOddsGroupDropdownPosition } = props;
@@ -14,7 +15,8 @@ export const OddsGroupCell = (props) => {
     const style = oddsGroupListWithStyle[value];
 
     const handleToggleOddsGroup = (event) => {
-        setCurrentActivePlayer({ custId: dataItem.CustId });
+        const currentActivePlayer = buildCurrentActivePlayer(dataItem);
+        setCurrentActivePlayer(currentActivePlayer);
         const newPosition = GridInteractionService.getNextDropdownPosition(event.target, oddsGroupDropdownPosition);
         setOddsGroupDropdownPosition(newPosition);
     }
@@ -32,4 +34,4 @@ function mapStateToProps(state) {
     return Object.assign({}, { oddsGroupDropdownPosition });
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(React.memo(OddsGroupCell));
+export default connect(mapStateToProps, mapDispatchToProps)(OddsGroupCell);

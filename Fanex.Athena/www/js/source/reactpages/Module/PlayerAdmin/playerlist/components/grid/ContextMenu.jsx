@@ -21,7 +21,10 @@ export const ContextMenu = (props) => {
 
     const handleClickMenu = (tabName) => {
         setSelectedTabName(tabName);
-        setSelectedPlayer({ ...currentActivePlayer });
+
+        const { custId, userName, currency } = currentActivePlayer;
+        const selectedPlayer = { custId, userName, currency };
+        setSelectedPlayer(selectedPlayer);
     }
 
     const style = position && {
@@ -55,4 +58,4 @@ function mapStateToProps(state) {
     return Object.assign({}, { currentActivePlayer, contextMenu });
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(React.memo(ContextMenu));
+export default connect(mapStateToProps, mapDispatchToProps)(ContextMenu);

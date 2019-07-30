@@ -83,4 +83,4 @@ function mapStateToProps(state) {
     return Object.assign({}, { statusDropdownPosition, currentActivePlayer, playerList });
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(React.memo(StatusDropdown));
+export default connect(mapStateToProps, mapDispatchToProps)(StatusDropdown);

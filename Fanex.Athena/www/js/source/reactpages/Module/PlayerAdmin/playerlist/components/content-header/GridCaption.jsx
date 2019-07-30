@@ -8,7 +8,7 @@ import MultipleSelect from '@9softstudio/react-multiselect';
 import LangHelper from '@jsroot/lib/langHelper';
 import { buildDisplayedColumnObject } from '../../lib/utils';
 
-export class GridCaption extends React.PureComponent {
+export class GridCaption extends React.Component {
     constructor(props) {
         super(props);
     }

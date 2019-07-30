@@ -31,7 +31,11 @@ export const buildLapPlayerList = (playerList) => {
 export const buildCurrentActivePlayer = (dataItem) => {
     return {
         custId: dataItem.CustId,
-        status: dataItem.Status
+        userName: dataItem.UserName,
+        currency: dataItem.Currency,
+        status: dataItem.Status,
+        oddsGroup: dataItem.OddsGroup,
+        specialLevel: dataItem.SpecialLevel
     };
 }
 
