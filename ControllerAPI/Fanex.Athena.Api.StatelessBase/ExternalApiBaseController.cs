@@ -11,7 +11,6 @@ using Fanex.Athena.Model.Auth;
 namespace Fanex.Athena.Api.StatelessBase
 {
     [AllowAnonymous]
-    [ApiOneAuthorization]
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ExternalApiBaseController : ApiController
     {
@@ -21,6 +20,10 @@ namespace Fanex.Athena.Api.StatelessBase
 
         public string Language => (string)ActionContext.ActionArguments["language"];
 
+        /// <summary>
+        /// will be remove soon
+        /// </summary>
+        [Obsolete]
         public int LicenseeId => (int)ActionContext.ActionArguments["licenseeid"];
 
         public int UserId => (int)ActionContext.ActionArguments["userid"];
@@ -28,8 +31,6 @@ namespace Fanex.Athena.Api.StatelessBase
         public string CurrencyIDList => (string)ActionContext.ActionArguments["currencyIDList"];
 
         public OneAuthCurrency[] CurrencyAgentList => ActionContext.ActionArguments["currencyAgentList"] as OneAuthCurrency[];
-
-        public IEnumerable<int> AllowedCurrencyIdList => CurrencyAgentList.Select(x => x.CurrencyId);
 
         protected string BuildAgentListXml(string selectedCurrency)
         {

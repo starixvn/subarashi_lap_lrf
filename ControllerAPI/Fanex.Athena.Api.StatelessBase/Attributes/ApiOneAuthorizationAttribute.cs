@@ -24,7 +24,7 @@ namespace Fanex.Athena.Api.Base.Attributes
     public sealed class ApiOneAuthorizationAttribute : FilterAttribute, IAuthorizationFilter
     {
         private const string KeyName = "X-Auth-Token";
-
+        public string[] AllowFunctionKeys { get; set; }
         public Task<HttpResponseMessage> ExecuteAuthorizationFilterAsync(
             HttpActionContext actionContext,
             CancellationToken cancellationToken,
@@ -44,7 +44,6 @@ namespace Fanex.Athena.Api.Base.Attributes
                 var tokenValue = GetAuthToken(actionContext.Request);
                 if (string.IsNullOrEmpty(tokenValue))
                 {
-                    LogInfo(logger, actionContext.Request, "Auth Token is null");
                     return UnauthorizeAccessHandlerAsync(actionContext, ViewResources.AccessDeniedMsg);
                 }
 
@@ -53,7 +52,7 @@ namespace Fanex.Athena.Api.Base.Attributes
 
                 if (token == null || string.IsNullOrWhiteSpace(token.SiteName) || token.UserSEQ <= 0)
                 {
-                    LogInfo(logger, actionContext.Request, "TokenInfo is null");
+                    LogInfo(logger, actionContext.Request, "TokenInfo is null or invalid");
                     return UnauthorizeAccessHandlerAsync(actionContext, ViewResources.AccessDeniedMsg);
                 }
 
@@ -61,11 +60,27 @@ namespace Fanex.Athena.Api.Base.Attributes
                 var licensee = licenseeDataAccess.GetLicenseeByName(token.SiteName);
                 if (licensee == null)
                 {
-                    LogInfo(logger, actionContext.Request, "Licensee is null");
+                    LogInfo(logger, actionContext.Request, $"not found licensee with name={token.SiteName}");
                     return UnauthorizeAccessHandlerAsync(actionContext, ViewResources.AccessDeniedMsg);
                 }
 
+                if (AllowFunctionKeys != null && AllowFunctionKeys.Any())
+                {
+                    var hasPermission = token.Permissions.Any(i =>
+                    AllowFunctionKeys.Contains(i.FunctionKey)
+                    || i.SubFunctionKeys.Intersect(AllowFunctionKeys).Any());
+
+
+                    if (!hasPermission)
+                    {
+                        LogInfo(logger, actionContext.Request, "Acces Denied");
+                        return UnauthorizeAccessHandlerAsync(actionContext, ViewResources.AccessDeniedMsg);
+                    }
+
+                }
+
                 actionContext.ActionArguments["licenseeid"] = licensee.Id;
+
                 AssignActionArguments(actionContext, token);
 
                 return continuation?.Invoke();

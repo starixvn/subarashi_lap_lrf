@@ -1,5 +1,6 @@
 ﻿namespace Fanex.Athena.Module.Notification.Api
 {
+    using Fanex.Athena.Api.Base.Attributes;
     using Fanex.Athena.Api.StatelessBase;
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Module.Notification.MetaModel;
@@ -13,6 +14,7 @@
     /// <summary>
     /// Used by LAP container
     /// </summary>
+    [ApiOneAuthorization]
     public class NotificationApiController : ExternalApiBaseController
     {
         private const int DefaultPageSize = 10;

@@ -3,10 +3,12 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Http;
+    using Fanex.Athena.Api.Base.Attributes;
     using Fanex.Athena.Module.Dashboard.Data.Interfaces;
     using Fanex.Athena.Module.Dashboard.MetaModel;
     using Fanex.Athena.Module.Dashboard.ViewModel;
 
+    [ApiOneAuthorization(AllowFunctionKeys = new[] { "c_turnover" })]
     public class TurnoverByPlatformController : BaseDashboardApiController
     {
         private readonly ILicenseeDataByPlatformDataAccess _dataAccess;

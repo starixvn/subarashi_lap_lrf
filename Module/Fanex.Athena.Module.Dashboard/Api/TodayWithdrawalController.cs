@@ -3,9 +3,11 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Http;
+    using Fanex.Athena.Api.Base.Attributes;
     using Fanex.Athena.Module.Dashboard.Data.Interfaces;
     using Fanex.Athena.Module.Dashboard.MetaModel;
 
+    [ApiOneAuthorization(AllowFunctionKeys = new[] { "n_withdrawal" })]
     public class TodayWithdrawalController : BaseDashboardApiController
     {
         private readonly ISingleValueDataAccess _dataAccess;
