@@ -1,7 +1,5 @@
-﻿using Fanex.Athena.Api.Base.Attributes;
-using Fanex.Athena.Model.Auth;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Fanex.Athena.Model.Auth;
+using System;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
@@ -28,7 +26,5 @@ namespace Fanex.Athena.Api.StatelessBase
         public string CurrencyIDList => (string)ActionContext.ActionArguments["currencyIDList"];
 
         public OneAuthCurrency[] CurrencyAgentList => ActionContext.ActionArguments["currencyAgentList"] as OneAuthCurrency[];
-
-        }
     }
 }
