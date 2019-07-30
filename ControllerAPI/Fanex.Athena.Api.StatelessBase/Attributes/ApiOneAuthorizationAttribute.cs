@@ -1,4 +1,11 @@
-﻿using System;
+﻿using Fanex.Athena.Api.StatelessBase.Attributes.Extensions;
+using Fanex.Athena.DataAccess.Core.Users.Interfaces;
+using Fanex.Athena.Model.Auth;
+using Fanex.Athena.Resources;
+using Fanex.Athena.Service.StatelessCore.Interfaces;
+using Fanex.Logging;
+using ONEbook.UM.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,22 +16,14 @@ using System.Threading.Tasks;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 
-using Fanex.Athena.Api.StatelessBase.Attributes.Extensions;
-using Fanex.Athena.DataAccess.Core.Users.Interfaces;
-using Fanex.Athena.Model.Auth;
-using Fanex.Athena.Resources;
-using Fanex.Athena.Service.StatelessCore.Interfaces;
-using Fanex.Logging;
-
-using ONEbook.UM.Services;
-
 namespace Fanex.Athena.Api.Base.Attributes
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true)]
     public sealed class ApiOneAuthorizationAttribute : FilterAttribute, IAuthorizationFilter
     {
         private const string KeyName = "X-Auth-Token";
-        public string[] AllowFunctionKeys { get; set; }
+        public string AllowFunctionKeys { get; set; }
+
         public Task<HttpResponseMessage> ExecuteAuthorizationFilterAsync(
             HttpActionContext actionContext,
             CancellationToken cancellationToken,
@@ -64,19 +63,18 @@ namespace Fanex.Athena.Api.Base.Attributes
                     return UnauthorizeAccessHandlerAsync(actionContext, ViewResources.AccessDeniedMsg);
                 }
 
-                if (AllowFunctionKeys != null && AllowFunctionKeys.Any())
+                var allowedFunctionKeyList = GetAllowedFunctionKeyList();
+                if (allowedFunctionKeyList != null && allowedFunctionKeyList.Any())
                 {
                     var hasPermission = token.Permissions.Any(i =>
-                    AllowFunctionKeys.Contains(i.FunctionKey)
-                    || i.SubFunctionKeys.Intersect(AllowFunctionKeys).Any());
-
+                    allowedFunctionKeyList.Contains(i.FunctionKey)
+                    || (i.SubFunctionKeys != null && i.SubFunctionKeys.Intersect(allowedFunctionKeyList).Any()));
 
                     if (!hasPermission)
                     {
                         LogInfo(logger, actionContext.Request, "Acces Denied");
                         return UnauthorizeAccessHandlerAsync(actionContext, ViewResources.AccessDeniedMsg);
                     }
-
                 }
 
                 actionContext.ActionArguments["licenseeid"] = licensee.Id;
@@ -90,6 +88,17 @@ namespace Fanex.Athena.Api.Base.Attributes
                 logger.Error(exception.Message, exception);
                 return UnauthorizeAccessHandlerAsync(actionContext, ViewResources.AccessDeniedMsg);
             }
+        }
+
+        private IEnumerable<string> GetAllowedFunctionKeyList()
+        {
+            var functionKeys = AllowFunctionKeys?.Trim();
+            if (string.IsNullOrEmpty(functionKeys))
+            {
+                return new List<string>();
+            }
+
+            return functionKeys.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim());
         }
 
         private static void AssignActionArguments(HttpActionContext actionContext, OneAuthToken token)

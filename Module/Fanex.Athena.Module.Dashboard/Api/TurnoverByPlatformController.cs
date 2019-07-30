@@ -1,18 +1,18 @@
 ﻿namespace Fanex.Athena.Module.Dashboard.Api
 {
-    using System;
-    using System.Threading.Tasks;
-    using System.Web.Http;
     using Fanex.Athena.Api.Base.Attributes;
     using Fanex.Athena.Module.Dashboard.Data.Interfaces;
     using Fanex.Athena.Module.Dashboard.MetaModel;
     using Fanex.Athena.Module.Dashboard.ViewModel;
+    using System;
+    using System.Threading.Tasks;
+    using System.Web.Http;
 
-    [ApiOneAuthorization(AllowFunctionKeys = new[] { "c_turnover" })]
+    [ApiOneAuthorization(AllowFunctionKeys = "c_turnover")]
     public class TurnoverByPlatformController : BaseDashboardApiController
     {
         private readonly ILicenseeDataByPlatformDataAccess _dataAccess;
-        
+
         public TurnoverByPlatformController(ILicenseeDataByPlatformDataAccess licenseeDataByPlatformService)
         {
             this._dataAccess = licenseeDataByPlatformService;

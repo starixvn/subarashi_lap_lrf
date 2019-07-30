@@ -11,7 +11,7 @@ export const Content = (props) => {
     const { pagingOption } = props;
 
     if (pagingOption.TotalItem === null) {
-        return;
+        return null;
     }
 
     const handlePaging = (pageIndex, pageSize) => {

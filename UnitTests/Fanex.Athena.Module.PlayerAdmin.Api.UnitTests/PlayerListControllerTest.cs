@@ -1,10 +1,8 @@
-﻿using Fanex.Athena.Model.Auth;
-using Fanex.Athena.Module.PlayerAdmin.Api;
+﻿using Fanex.Athena.Module.PlayerAdmin.Api;
 using Fanex.Athena.Module.PlayerAdmin.Api.DTO;
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.Services.Interfaces;
 using Fanex.Athena.Module.PlayerAdmin.Api.ViewModels;
-using Fanex.Athena.Service.StatelessCore.Interfaces;
 using Fanex.Athena.UnitTest.Common.Helpers;
 
 using NSubstitute;
@@ -19,20 +17,16 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Api
     {
         private IPlayerListService _playerListService;
 
-        private IAgentListBuilder _agentListBuilder;
-
         [SetUp]
         public void Setup()
         {
             _playerListService = Substitute.For<IPlayerListService>();
-            _agentListBuilder = Substitute.For<IAgentListBuilder>();
         }
 
         [TearDown]
         public void TearDown()
         {
             _playerListService = null;
-            _agentListBuilder = null;
         }
 
         [Test]
@@ -48,11 +42,10 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Api
             var expectedReturnedData = new PlayerListResultViewModel();
             _playerListService.Search(searchParam).Returns(expectedReturnedData);
 
+            var expectedAgentistXml = ExternalApiHelper.CreateDefaultAgentListXml();
+
             using (var controller = CreateController())
             {
-                var expectedAgentistXml = ExternalApiHelper.CreateDefaultAgentListXml();
-                _agentListBuilder.ToXml(controller.CurrencyAgentList, searchParam.Currency).Returns(expectedAgentistXml);
-
                 // Action
                 controller.Search(searchParam);
 
@@ -74,7 +67,6 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Api
                 UserName = "Test",
                 Currency = "1"
             };
-            _agentListBuilder.ToXml(Arg.Any<IEnumerable<OneAuthCurrency>>(), searchParam.Currency).Returns(string.Empty);
             var expectedReturnedData = new PlayerListResultViewModel
             {
                 DataList = new List<Player> { new Player() },
@@ -100,7 +92,6 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Api
             {
                 IdList = "123,987"
             };
-            _agentListBuilder.ToXml(Arg.Any<IEnumerable<OneAuthCurrency>>(), param.Currency).Returns(string.Empty);
             var expectedReturnedData = new PlayerListResultViewModel
             {
                 DataList = new List<Player> { new Player() },
@@ -122,7 +113,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Api
         {
             var actionContext = ExternalApiHelper.CreateMockActionContext();
 
-            return new PlayerListController(_playerListService, _agentListBuilder)
+            return new PlayerListController(_playerListService)
             {
                 ActionContext = actionContext
             };

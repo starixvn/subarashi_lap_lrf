@@ -1,4 +1,5 @@
-﻿using Fanex.Athena.Api.StatelessBase;
+﻿using Fanex.Athena.Api.Base.Attributes;
+using Fanex.Athena.Api.StatelessBase;
 using Fanex.Athena.Model.Core.ViewModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.Services.Interfaces;
@@ -8,6 +9,7 @@ using System.Web.Http;
 
 namespace Fanex.Athena.Module.PlayerAdmin.Api
 {
+    [ApiOneAuthorization]
     public class PlayerBaStatusController : ExternalApiBaseController
     {
         private readonly IPlayerBaStatusService _playerBaStatusService;

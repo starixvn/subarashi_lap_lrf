@@ -1,13 +1,13 @@
 ﻿namespace Fanex.Athena.Module.Dashboard.Api
 {
-    using System;
-    using System.Threading.Tasks;
-    using System.Web.Http;
     using Fanex.Athena.Api.Base.Attributes;
     using Fanex.Athena.Module.Dashboard.Data.Interfaces;
     using Fanex.Athena.Module.Dashboard.MetaModel;
+    using System;
+    using System.Threading.Tasks;
+    using System.Web.Http;
 
-    [ApiOneAuthorization(AllowFunctionKeys = new[] { "n_withdrawal" })]
+    [ApiOneAuthorization(AllowFunctionKeys = "n_withdrawal")]
     public class TodayWithdrawalController : BaseDashboardApiController
     {
         private readonly ISingleValueDataAccess _dataAccess;

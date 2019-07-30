@@ -1,22 +1,21 @@
-﻿using Fanex.Athena.Api.StatelessBase;
+﻿using Fanex.Athena.Api.Base.Attributes;
+using Fanex.Athena.Api.StatelessBase;
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.Services.Interfaces;
 using Fanex.Athena.Module.PlayerAdmin.Api.ViewModels;
-using Fanex.Athena.Service.StatelessCore.Interfaces;
+using Fanex.Athena.Service.StatelessCore.Utility;
 using System.Web.Http;
 
 namespace Fanex.Athena.Module.PlayerAdmin.Api
 {
+    [ApiOneAuthorization]
     public class PlayerListController : ExternalApiBaseController
     {
         private readonly IPlayerListService _playerListService;
 
-        private readonly IAgentListBuilder _agentListBuilder;
-
-        public PlayerListController(IPlayerListService playerListService, IAgentListBuilder agentListBuilder)
+        public PlayerListController(IPlayerListService playerListService)
         {
             _playerListService = playerListService;
-            _agentListBuilder = agentListBuilder;
         }
 
         [HttpPost]
@@ -38,7 +37,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api
         private void AssignParam(PlayerListBaseMetaModel searchParam)
         {
             searchParam.LicenseeId = LicenseeId;
-            searchParam.AgentListXml = _agentListBuilder.ToXml(CurrencyAgentList, searchParam.Currency?.Trim());
+            searchParam.AgentListXml = AuthParameterHelper.BuildAgentListXml(CurrencyAgentList, searchParam.Currency?.Trim());
         }
     }
 }

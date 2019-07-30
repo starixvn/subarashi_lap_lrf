@@ -1,4 +1,5 @@
-﻿using Fanex.Athena.Api.StatelessBase;
+﻿using Fanex.Athena.Api.Base.Attributes;
+using Fanex.Athena.Api.StatelessBase;
 using Fanex.Athena.Extension.Helpers;
 using Fanex.Athena.Extension.Utility;
 using Fanex.Athena.Model.Core.ViewModel;
@@ -11,6 +12,7 @@ using System.Web.Http;
 
 namespace Fanex.Athena.Module.PlayerAdmin.Api
 {
+    [ApiOneAuthorization]
     public class PlayerOddsGroupController : ExternalApiBaseController
     {
         private readonly IPlayerOddsGroupService _playerOddsGroupService;

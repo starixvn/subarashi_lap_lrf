@@ -1,20 +1,18 @@
 ﻿using Fanex.Athena.Model.Auth;
-using Fanex.Athena.Service.StatelessCore;
+using Fanex.Athena.Service.StatelessCore.Utility;
 using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Fanex.Athena.ServiceStatelessCore.UnitTests
+namespace Fanex.Athena.ServiceStatelessCore.UnitTests.Utility
 {
     [TestFixture]
-    public class AgentListBuilderTest
+    public class AuthParameterHelperTest
     {
         [TestCaseSource(typeof(TestingData), "TestCases")]
         public string ToXml_WhenCall_ReturnCorrectString(IEnumerable<OneAuthCurrency> authCurrencyList, string selectedCurrency)
         {
-            var builder = new AgentListBuilder();
-
-            return builder.ToXml(authCurrencyList, selectedCurrency);
+            return AuthParameterHelper.BuildAgentListXml(authCurrencyList, selectedCurrency);
         }
     }
 
