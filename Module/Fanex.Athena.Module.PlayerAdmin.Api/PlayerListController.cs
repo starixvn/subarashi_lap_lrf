@@ -2,6 +2,7 @@
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.Services.Interfaces;
 using Fanex.Athena.Module.PlayerAdmin.Api.ViewModels;
+using Fanex.Athena.Service.StatelessCore.Interfaces;
 using System.Web.Http;
 
 namespace Fanex.Athena.Module.PlayerAdmin.Api
@@ -10,9 +11,12 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api
     {
         private readonly IPlayerListService _playerListService;
 
-        public PlayerListController(IPlayerListService playerListService)
+        private readonly IAgentListBuilder _agentListBuilder;
+
+        public PlayerListController(IPlayerListService playerListService, IAgentListBuilder agentListBuilder)
         {
             _playerListService = playerListService;
+            _agentListBuilder = agentListBuilder;
         }
 
         [HttpPost]
@@ -34,7 +38,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api
         private void AssignParam(PlayerListBaseMetaModel searchParam)
         {
             searchParam.LicenseeId = LicenseeId;
-            searchParam.AgentListXml = BuildAgentListXml(searchParam.Currency?.Trim());
+            searchParam.AgentListXml = _agentListBuilder.ToXml(CurrencyAgentList, searchParam.Currency?.Trim());
         }
     }
 }

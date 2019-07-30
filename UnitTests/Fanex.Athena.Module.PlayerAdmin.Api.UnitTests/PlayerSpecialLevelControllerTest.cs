@@ -9,19 +9,20 @@ using System;
 
 namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests
 {
+    [TestFixture]
     public class PlayerSpecialLevelControllerTest
     {
         private IPlayerSpecialLevelService _playerSpecialLevelService;
         private ILogger _logger;
 
-        [OneTimeSetUp]
+        [SetUp]
         public void Setup()
         {
             _playerSpecialLevelService = Substitute.For<IPlayerSpecialLevelService>();
             _logger = Substitute.For<ILogger>();
         }
 
-        [OneTimeTearDown]
+        [TearDown]
         public void TearDown()
         {
             _playerSpecialLevelService = null;

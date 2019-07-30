@@ -9,19 +9,20 @@ using System;
 
 namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests
 {
+    [TestFixture]
     public class PlayerOddsGroupControllerTest
     {
         private IPlayerOddsGroupService _playerOddsGroupService;
         private ILogger _logger;
 
-        [OneTimeSetUp]
+        [SetUp]
         public void Setup()
         {
             _playerOddsGroupService = Substitute.For<IPlayerOddsGroupService>();
             _logger = Substitute.For<ILogger>();
         }
 
-        [OneTimeTearDown]
+        [TearDown]
         public void TearDown()
         {
             _playerOddsGroupService = null;

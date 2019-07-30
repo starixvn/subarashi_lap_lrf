@@ -7,17 +7,18 @@ using NUnit.Framework;
 
 namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests
 {
+    [TestFixture]
     public class PlayerBaStatusControllerTest
     {
         private IPlayerBaStatusService _baStatusService;
 
-        [OneTimeSetUp]
+        [SetUp]
         public void Setup()
         {
             _baStatusService = Substitute.For<IPlayerBaStatusService>();
         }
 
-        [OneTimeTearDown]
+        [TearDown]
         public void TearDown()
         {
             _baStatusService = null;

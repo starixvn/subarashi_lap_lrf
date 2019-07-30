@@ -86,8 +86,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AgentListBuilder.cs" />
     <Compile Include="AuthorizationService.cs" />
     <Compile Include="BetTypeService.cs" />
+    <Compile Include="Interfaces\IAgentListBuilder.cs" />
     <Compile Include="Interfaces\ILicenseeSettingService.cs" />
     <Compile Include="Interfaces\IReportSettingService.cs" />
     <Compile Include="LicenseeSettingService.cs" />

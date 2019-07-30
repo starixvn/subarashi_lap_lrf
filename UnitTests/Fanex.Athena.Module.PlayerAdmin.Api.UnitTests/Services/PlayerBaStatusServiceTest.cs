@@ -13,6 +13,7 @@ using System.Collections.Generic;
 
 namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
 {
+    [TestFixture]
     public class PlayerBaStatusServiceTest
     {
         private IPlayerBaStatusRepository _playerBaStatusRepository;
@@ -21,7 +22,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
 
         private IProductService _productService;
 
-        [OneTimeSetUp]
+        [SetUp]
         public void Setup()
         {
             _playerBaStatusRepository = Substitute.For<IPlayerBaStatusRepository>();
@@ -29,7 +30,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
             _productService = Substitute.For<IProductService>();
         }
 
-        [OneTimeTearDown]
+        [TearDown]
         public void TearDown()
         {
             _playerBaStatusRepository = null;

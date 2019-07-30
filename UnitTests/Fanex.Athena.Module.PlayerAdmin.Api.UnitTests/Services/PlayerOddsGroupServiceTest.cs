@@ -12,6 +12,7 @@ using NUnit.Framework;
 
 namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
 {
+    [TestFixture]
     public class PlayerOddsGroupServiceTest
     {
         private IPlayerOddsGroupRepository _playerOddsGroupRepository;
@@ -20,7 +21,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
 
         private ILicenseeSettingService _licenseeSettingService;
 
-        [OneTimeSetUp]
+        [SetUp]
         public void Setup()
         {
             _playerOddsGroupRepository = Substitute.For<IPlayerOddsGroupRepository>();
@@ -28,7 +29,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
             _licenseeSettingService = Substitute.For<ILicenseeSettingService>();
         }
 
-        [OneTimeTearDown]
+        [TearDown]
         public void TearDown()
         {
             _playerOddsGroupRepository = null;

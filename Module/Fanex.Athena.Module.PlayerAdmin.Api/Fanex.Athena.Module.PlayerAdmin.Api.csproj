@@ -63,7 +63,6 @@
   <ItemGroup>
     <Compile Include="DTO\Player.cs" />
     <Compile Include="MetaModel\PlayerListBaseMetaModel.cs" />
-    <Compile Include="MetaModel\PlayerSuggestionMetaModel.cs" />
     <Compile Include="MetaModel\PlayerUpdatingBaseMetaModel.cs" />
     <Compile Include="MetaModel\PlayerListByIdMetaModel.cs" />
     <Compile Include="MetaModel\PlayerSearchingMetaModel.cs" />
@@ -107,6 +106,10 @@
     <ProjectReference Include="..\..\Fanex.Athena.Extension\Fanex.Athena.Extension.csproj">
       <Project>{71F95E53-36D0-4091-828D-ED14C9939C35}</Project>
       <Name>Fanex.Athena.Extension</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Model\Fanex.Athena.Model.Auth\Fanex.Athena.Model.Auth.csproj">
+      <Project>{794C0345-2DDD-4FFD-A605-BB96FBB37DE8}</Project>
+      <Name>Fanex.Athena.Model.Auth</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Model\Fanex.Athena.Model.Core\Fanex.Athena.Model.Core.csproj">
       <Project>{5F410090-94C0-46A5-9FEC-B6C3B745B7A0}</Project>
