@@ -36,7 +36,9 @@ const BaStatusCell = (props) => {
             }
 
             toggleLoader(false);
-        }).catch(() => {
+        }).catch((error) => {
+            console.log(error.message);
+            window.alert(LangHelper.getSingleResource('HttpError_Default'));
             toggleLoader(false);
         })
     }

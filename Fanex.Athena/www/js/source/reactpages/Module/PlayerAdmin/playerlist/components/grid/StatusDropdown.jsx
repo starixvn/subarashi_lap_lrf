@@ -38,12 +38,13 @@ const StatusDropdown = (props) => {
                     setPlayerList(newPlayerList);
                 }
 
-                const resultMessage = IsSuccessful ? 'Update successfully!' : 'Please try again!';
+                const resultMessage = IsSuccessful ? LangHelper.getSingleResource('UpdateSuccess') : 'Please try again!';
                 window.alert(resultMessage);
 
                 toggleLoader(false);
             }).catch(error => {
-                console.log(error);
+                console.log(error.message);
+                window.alert(LangHelper.getSingleResource('HttpError_Default'));
                 toggleLoader(false);
             })
 

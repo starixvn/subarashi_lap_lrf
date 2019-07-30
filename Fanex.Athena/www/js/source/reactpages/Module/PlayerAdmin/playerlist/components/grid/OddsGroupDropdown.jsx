@@ -29,7 +29,7 @@ export const OddsGroupDropdown = (props) => {
             return;
         }
 
-        if (currentActivePlayer) {
+        if (currentActivePlayer && value !== currentActivePlayer.oddsGroup) {
             const { custId } = currentActivePlayer;
             const param = {
                 custId,
@@ -49,7 +49,9 @@ export const OddsGroupDropdown = (props) => {
                     window.alert(errMsg);
                 }
                 toggleLoader(false);
-            }).catch(() => {
+            }).catch((error) => {
+                console.log(error.message);
+                window.alert(LangHelper.getSingleResource('HttpError_Default'));
                 toggleLoader(false);
             })
         }

@@ -3,6 +3,14 @@ import PlayerListDataHelper from '../playerListDataHelper';
 import { apiInfo } from '../constants';
 
 describe('PlayerMultipleQueryService', () => {
+    let originalAlert;
+    beforeAll(() => {
+        originalAlert = window.alert;
+        window.alert = jest.fn();
+    })
+    afterAll(() => {
+        window.alert = originalAlert;
+    })
     const defaultParam = {
         currency: '',
         specialLevel: '',
@@ -19,30 +27,81 @@ describe('PlayerMultipleQueryService', () => {
     afterEach(() => {
         jest.restoreAllMocks();
     })
-    it('fetchData - should call _getResult with correct parameter', () => {
-        const _getResult = jest.spyOn(PlayerMultipleQueryService, '_getResult');
-        const { lrfSearch, lapSearch } = apiInfo;
-        const param = { userName: 'test' };
 
-        const expectedPromise = Promise.resolve({});
-        const commonService = {
-            fetchData: jest.fn((type, action, passedParam) => {
-                const isValidParam = (type === lrfSearch.type || type === lapSearch.type) &&
-                    (action === lrfSearch.action || action === lapSearch.action) &&
-                    passedParam.userName === param.userName;
+    describe('fetchData', () => {
+        afterEach(() => {
+            jest.restoreAllMocks();
+        })
 
-                return isValidParam ? expectedPromise : null;
-            }),
-            fetchMultiple: jest.fn(() => ({
-                catch: () => ({})
-            }))
-        };
+        it('should call _getResult with correct parameter', () => {
+            const _getResult = jest.spyOn(PlayerMultipleQueryService, '_getResult');
+            const { lrfSearch, lapSearch } = apiInfo;
+            const param = { userName: 'test' };
 
-        const promise = PlayerMultipleQueryService.fetchData(param, commonService, apiInfo);
+            const expectedPromise = Promise.resolve({});
+            const commonService = {
+                fetchData: jest.fn((type, action, passedParam) => {
+                    const isValidParam = (type === lrfSearch.type || type === lapSearch.type) &&
+                        (action === lrfSearch.action || action === lapSearch.action) &&
+                        passedParam.userName === param.userName;
 
-        return Promise.resolve(promise).then(() => {
-            expect(_getResult).toHaveBeenCalledWith(param, expectedPromise, expectedPromise, commonService, apiInfo);
-        });
+                    return isValidParam ? expectedPromise : null;
+                }),
+                fetchMultiple: jest.fn(() => ({
+                    catch: () => ({})
+                }))
+            };
+
+            const promise = PlayerMultipleQueryService.fetchData(param, commonService, apiInfo);
+
+            return Promise.resolve(promise).then(() => {
+                expect(_getResult).toHaveBeenCalledWith(param, expectedPromise, expectedPromise, commonService, apiInfo);
+            });
+        })
+
+        const runTestForThrowingException = (lrfPromise, lapPromise, isCheckLrfPromise) => {
+            const { lrfSearch } = apiInfo;
+            const param = { userName: 'test' };
+            const commonService = {
+                fetchData: jest.fn((type, action) => {
+                    return action === lrfSearch.action ? lrfPromise : lapPromise;
+                }),
+                fetchMultiple: jest.fn(() => ({
+                    catch: () => ({})
+                }))
+            };
+
+            let passedPromise = null;
+            const originalGetResult = PlayerMultipleQueryService._getResult;
+            PlayerMultipleQueryService._getResult = jest.fn((param, lrfPromiseParam, lapPromiseParam) => {
+                passedPromise = isCheckLrfPromise ? lrfPromiseParam : lapPromiseParam;
+            });
+            PlayerMultipleQueryService.fetchData(param, commonService, apiInfo);
+
+            const expectedResult = { data: {
+                    [isCheckLrfPromise ? 'DataList' : 'PlayerList']: [], TotalItem: 0 } };
+            return passedPromise.then((result) => {
+                expect(result).toEqual(expectedResult);
+                PlayerMultipleQueryService._getResult = originalGetResult;
+            });
+        }
+        it('lrfPromise throw exception - return empty result', () => {
+            const lrfPromise = new Promise(() => {
+                throw new Error('LRF Internal Error')
+            });
+            const lapPromise = Promise.resolve({});
+
+            return runTestForThrowingException(lrfPromise, lapPromise, true);
+        })
+
+        it('lapPromise throw exception - return empty result', () => {
+            const lrfPromise = Promise.resolve({});
+            const lapPromise = new Promise(() => {
+                throw new Error('LAP Internal Error')
+            });
+
+            return runTestForThrowingException(lrfPromise, lapPromise, false);
+        })
     })
 
     describe('_getResult', () => {

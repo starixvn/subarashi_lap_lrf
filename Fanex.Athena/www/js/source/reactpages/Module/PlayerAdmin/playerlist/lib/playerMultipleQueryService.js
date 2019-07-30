@@ -1,12 +1,25 @@
 import PlayerListDataHelper from './playerListDataHelper';
 import { buildLapPlayerList } from './utils';
+import LangHelper from '@jsroot/lib/langHelper';
 
 export default class PlayerMultipleQueryService {
     static fetchData(param, commonService, apiInfo) {
         const { lrfSearch, lapSearch } = apiInfo;
 
-        const lrfPromise = commonService.fetchData(lrfSearch.type, lrfSearch.action, {...param });
-        const lapPromise = commonService.fetchData(lapSearch.type, lapSearch.action, {...param });
+        const lrfPromise = commonService.fetchData(lrfSearch.type, lrfSearch.action, {...param })
+            .catch(error => {
+                console.log(error.message);
+                window.alert(LangHelper.getSingleResource('HttpError_Default'));
+
+                return { data: { DataList: [], TotalItem: 0 } };
+            });
+        const lapPromise = commonService.fetchData(lapSearch.type, lapSearch.action, {...param })
+            .catch(error => {
+                console.log(error.message);
+                window.alert(LangHelper.getSingleResource('HttpError_Default'));
+
+                return { data: { PlayerList: [], TotalItem: 0 } };
+            });
 
         return this._getResult(param, lrfPromise, lapPromise, commonService, apiInfo);
     }
@@ -82,6 +95,7 @@ export default class PlayerMultipleQueryService {
             })
             .catch((error) => {
                 console.log(error.message);
+                window.alert(LangHelper.getSingleResource('HttpError_Default'));
                 return PlayerListDataHelper.createEmptyResult();
             });
     }
@@ -109,6 +123,7 @@ export default class PlayerMultipleQueryService {
             })
             .catch((error) => {
                 console.log(error.message);
+                window.alert(LangHelper.getSingleResource('HttpError_Default'));
                 return {
                     playerList: buildLapPlayerList(differenceList),
                     totalItem: differenceList.length
@@ -139,6 +154,7 @@ export default class PlayerMultipleQueryService {
             })
             .catch((error) => {
                 console.log(error.message);
+                window.alert(LangHelper.getSingleResource('HttpError_Default'));
                 return {
                     playerList: differenceList,
                     totalItem: differenceList.length

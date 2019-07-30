@@ -30,7 +30,7 @@ const SpecialLevelDropdown = (props) => {
             return;
         }
 
-        if (currentActivePlayer) {
+        if (currentActivePlayer && value !== currentActivePlayer.specialLevel) {
             const { custId } = currentActivePlayer;
             const param = {
                 custId,
@@ -50,7 +50,9 @@ const SpecialLevelDropdown = (props) => {
                     window.alert(errMsg);
                 }
                 toggleLoader(false);
-            }).catch(() => {
+            }).catch((error) => {
+                console.log(error.message);
+                window.alert(LangHelper.getSingleResource('HttpError_Default'));
                 toggleLoader(false);
             })
         }
