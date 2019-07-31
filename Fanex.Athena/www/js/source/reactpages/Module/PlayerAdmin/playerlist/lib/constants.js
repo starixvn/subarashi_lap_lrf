@@ -1,4 +1,5 @@
 import { systemType } from '../../../constants/configInfo';
+import LangHelper from '@jsroot/lib/langHelper';
 
 export const specialLevelListWithColor = {
     0: '#fcfcfc',
@@ -61,12 +62,12 @@ export const columnList = [
 ];
 
 export const contextMenuList = [
-    { key: 'note', name: 'Note', tabName: 'Note' },
-    { key: 'password', name: 'Password', tabName: 'Setting' },
-    { key: 'fundtransferLimit', name: 'Fundtransfer Limit', tabName: 'Setting' },
-    { key: 'betLimit', name: 'Bet Limit', tabName: 'BetLimit' },
-    { key: 'statement', name: 'Statement', tabName: 'Statement' },
-    { key: 'personalMessage', name: 'Personal Message', tabName: 'Message' }
+    { key: 'note', name: LangHelper.getSingleResource('Note'), tabName: 'Note' },
+    { key: 'password', name: LangHelper.getSingleResource('Password'), tabName: 'Setting' },
+    { key: 'fundtransferLimit', name: LangHelper.getSingleResource('FundtransferLimit'), tabName: 'Setting' },
+    { key: 'betLimit', name: LangHelper.getSingleResource('BetLimit'), tabName: 'BetLimit' },
+    { key: 'statement', name: LangHelper.getSingleResource('Statement'), tabName: 'Statement' },
+    { key: 'personalMessage', name: LangHelper.getSingleResource('PersonalMessage'), tabName: 'Message' }
 ]
 
 export const heightSlicing = {
@@ -89,10 +90,10 @@ export const defaultPagingOption = {
 }
 
 export const playerStatus = {
-    '0': 'Active',
-    '1': 'Locked',
-    '2': 'Closed',
-    '3': 'Archived'
+    '0': LangHelper.getSingleResource('Active'),
+    '1': LangHelper.getSingleResource('Locked'),
+    '2': LangHelper.getSingleResource('Closed'),
+    '3': LangHelper.getSingleResource('Archived')
 }
 
 export const playerStatusByName = {
@@ -108,9 +109,9 @@ export const displayedPlayerStatusList = {
 }
 
 export const messageUpdateState = {
-    [playerStatusByName.Locked]: 'Are you sure you want to change the status of this player to LOCKED?\nWarning, this player cannot be restored forever!',
-    [playerStatusByName.Closed]: 'Are you sure you want to change the status of this player to CLOSED?\nWarning, Warning, this player cannot login!',
-    [playerStatusByName.Active]: 'Are you sure you want to change the status of this player to ACTIVE?\nWarning, this player will be able to log in and bet.'
+    [playerStatusByName.Locked]: LangHelper.getSingleResource('UpdateToLockedConfirmMsg'),
+    [playerStatusByName.Closed]: LangHelper.getSingleResource('UpdateToClosedConfirmMsg'),
+    [playerStatusByName.Active]: LangHelper.getSingleResource('UpdateToActiveConfirmMsg')
 }
 
 export const baStatusList = {
@@ -120,19 +121,19 @@ export const baStatusList = {
 }
 
 export const headerText = {
-    Status: 'Status',
-    UserName: 'Username',
-    SystemId: 'SystemId',
-    RealName: 'Real Name',
-    Currency: 'Currency',
-    CurrentBalance: 'Current Balance',
-    OutstandingBalance: 'Outstanding Balance',
-    OddsGroup: 'Odds Group',
-    BaStatus: 'BA Status',
-    SpecialLevel: 'Special Level',
-    LastLoginIp: 'Last Login IP',
-    LastTransaction: 'LastTransaction',
-    Email: 'Email'
+    Status: LangHelper.getSingleResource('Status'),
+    UserName: LangHelper.getSingleResource('Username'),
+    SystemId: LangHelper.getSingleResource('SystemId'),
+    RealName: LangHelper.getSingleResource('RealName'),
+    Currency: LangHelper.getSingleResource('Currency'),
+    CurrentBalance: LangHelper.getSingleResource('CurrentBalance'),
+    OutstandingBalance: LangHelper.getSingleResource('OutstandingBalance'),
+    OddsGroup: LangHelper.getSingleResource('OddsGroup'),
+    BaStatus: LangHelper.getSingleResource('BAStatus'),
+    SpecialLevel: LangHelper.getSingleResource('SpecialLevel'),
+    LastLoginIp: LangHelper.getSingleResource('LastLoginIP'),
+    LastTransaction: LangHelper.getSingleResource('LastTransaction'),
+    Email: LangHelper.getSingleResource('Email')
 }
 
 export const gridItemDropdownHeight = {

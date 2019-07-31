@@ -1,7 +1,6 @@
 import React from 'react';
 import { HeaderRow, HeaderCell } from '@9softstudio/react-grid';
-import { fields } from './constants';
-import LangHelper from '@jsroot/lib/langHelper';
+import { fields, headerText } from './constants';
 
 export default class GridHelper {
     static renderHeader(displayedColumn) {
@@ -12,19 +11,19 @@ export default class GridHelper {
             <HeaderRow style={{ height: 32 }}>
                 {/* For Phase 2 */}
                 {/* <HeaderCell colWidth={30}><input type="checkbox" /></HeaderCell> */}
-                {displayedColumn[Status] && <HeaderCell colWidth={80} sortBy={Status}>{LangHelper.getSingleResource('Status')}</HeaderCell>}
-                {displayedColumn[UserName] && <HeaderCell colWidth={80} sortBy={UserName}>{LangHelper.getSingleResource('Username')}</HeaderCell>}
-                {displayedColumn[SystemId] && <HeaderCell colWidth={100}>{LangHelper.getSingleResource('SystemId')}</HeaderCell>}
-                {displayedColumn[RealName] && <HeaderCell colWidth={80} sortBy={RealName}>{LangHelper.getSingleResource('RealName')}</HeaderCell>}
-                {displayedColumn[Currency] && <HeaderCell colWidth={60} sortBy={Currency}>{LangHelper.getSingleResource('Currency')}</HeaderCell>}
-                {displayedColumn[CurrentBalance] && <HeaderCell colWidth={80} sortBy={CurrentBalance}>{LangHelper.getSingleResource('CurrentBalance')}</HeaderCell>}
-                {displayedColumn[OutstandingBalance] && <HeaderCell colWidth={80} sortBy={OutstandingBalance}>{LangHelper.getSingleResource('OutstandingBalance')}</HeaderCell>}
-                {displayedColumn[OddsGroup] && <HeaderCell colWidth={50} sortBy={OddsGroup}>{LangHelper.getSingleResource('OddsGroup')}</HeaderCell>}
-                {displayedColumn[BaStatus] && <HeaderCell colWidth={50} sortBy={BaStatus}>{LangHelper.getSingleResource('BAStatus')}</HeaderCell>}
-                {displayedColumn[SpecialLevel] && <HeaderCell colWidth={50} sortBy={SpecialLevel}>{LangHelper.getSingleResource('SpecialLevel')}</HeaderCell>}
-                {displayedColumn[LastLoginIp] && <HeaderCell colWidth={60}>{LangHelper.getSingleResource('LastLoginIP')}</HeaderCell>}
-                {displayedColumn[LastTransaction] && <HeaderCell colWidth={100} sortBy={LastTransaction}>{LangHelper.getSingleResource('LastTransaction')}</HeaderCell>}
-                {displayedColumn[Email] && <HeaderCell colWidth={100}>{LangHelper.getSingleResource('Email')}</HeaderCell>}
+                {displayedColumn[Status] && <HeaderCell colWidth={80} sortBy={Status}>{headerText.Status}</HeaderCell>}
+                {displayedColumn[UserName] && <HeaderCell colWidth={80} sortBy={UserName}>{headerText.UserName}</HeaderCell>}
+                {displayedColumn[SystemId] && <HeaderCell colWidth={100}>{headerText.SystemId}</HeaderCell>}
+                {displayedColumn[RealName] && <HeaderCell colWidth={80} sortBy={RealName}>{headerText.RealName}</HeaderCell>}
+                {displayedColumn[Currency] && <HeaderCell colWidth={60} sortBy={Currency}>{headerText.Currency}</HeaderCell>}
+                {displayedColumn[CurrentBalance] && <HeaderCell colWidth={80} sortBy={CurrentBalance}>{headerText.CurrentBalance}</HeaderCell>}
+                {displayedColumn[OutstandingBalance] && <HeaderCell colWidth={80} sortBy={OutstandingBalance}>{headerText.OutstandingBalance}</HeaderCell>}
+                {displayedColumn[OddsGroup] && <HeaderCell colWidth={50} sortBy={OddsGroup}>{headerText.OddsGroup}</HeaderCell>}
+                {displayedColumn[BaStatus] && <HeaderCell colWidth={50} sortBy={BaStatus}>{headerText.BaStatus}</HeaderCell>}
+                {displayedColumn[SpecialLevel] && <HeaderCell colWidth={50} sortBy={SpecialLevel}>{headerText.SpecialLevel}</HeaderCell>}
+                {displayedColumn[LastLoginIp] && <HeaderCell colWidth={60}>{headerText.LastLoginIp}</HeaderCell>}
+                {displayedColumn[LastTransaction] && <HeaderCell colWidth={100} sortBy={LastTransaction}>{headerText.LastTransaction}</HeaderCell>}
+                {displayedColumn[Email] && <HeaderCell colWidth={100}>{headerText.Email}</HeaderCell>}
             </HeaderRow>
         )
     }

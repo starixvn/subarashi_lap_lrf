@@ -6,6 +6,7 @@ import { DropdownMenu, DropdownItem } from '@jsroot/components/dropdown';
 import { playerStatus, displayedPlayerStatusList, messageUpdateState } from '../../lib/constants';
 import GridInteractionService from '../../lib/gridInteractionService';
 import { ActionCreators } from '../../actions';
+import LangHelper from '@jsroot/lib/langHelper';
 
 const StatusDropdown = (props) => {
     const { statusDropdownPosition, setStatusDropdownPosition } = props;
@@ -38,7 +39,7 @@ const StatusDropdown = (props) => {
                     setPlayerList(newPlayerList);
                 }
 
-                const resultMessage = IsSuccessful ? LangHelper.getSingleResource('UpdateSuccess') : 'Please try again!';
+                const resultMessage = IsSuccessful ? LangHelper.getSingleResource('UpdateSuccess') : LangHelper.getSingleResource('PlayerAdminUpdateFailedMsg');
                 window.alert(resultMessage);
 
                 toggleLoader(false);

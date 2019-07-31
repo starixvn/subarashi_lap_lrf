@@ -6,6 +6,7 @@ import { playerStatus, playerStatusByName } from '../../lib/constants';
 import { ActionCreators } from '../../actions';
 import GridInteractionService from '../../lib/gridInteractionService';
 import { buildCurrentActivePlayer } from '../../lib/utils';
+import LangHelper from '@jsroot/lib/langHelper';
 
 export const StatusCell = (props) => {
     const { dataItem, statusDropdownPosition, setCurrentActivePlayer, setStatusDropdownPosition } = props;
@@ -23,11 +24,13 @@ export const StatusCell = (props) => {
     }
 
     const shouldShowOnlineStatus = dataItem.SystemId && Status === playerStatusByName.Active;
+    const onlineText = LangHelper.getSingleResource('Online');
+    const offlineText = LangHelper.getSingleResource('Offline');
 
     return (
         <div className="status-cell">
-            <p className={classname}>{statusName || 'Unknown'}</p>
-            {shouldShowOnlineStatus && <p className="status-text">{IsOnline ? '(Online)' : '(Offline)'}</p>}
+            <p className={classname}>{statusName || LangHelper.getSingleResource('Unknown')}</p>
+            {shouldShowOnlineStatus && <p className="status-text">{IsOnline ? `(${onlineText})` : `(${offlineText})`}</p>}
             {statusName && canUpdate && <button type="button" className="btn-outline btn-status-menu" onClick={handleToggleStatus}><i className="site-caret"></i></button>}
         </div>
     )

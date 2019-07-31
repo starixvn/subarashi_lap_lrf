@@ -40,11 +40,11 @@ export const buildCurrentActivePlayer = (dataItem) => {
 }
 
 export const getSpecialLevelText = (value) => {
-    return value === undefined || value === null ? '' : (Number(value) === 0 ? 'None' : value);
+    return value === undefined || value === null ? '' : (Number(value) === 0 ? LangHelper.getSingleResource('None') : value);
 }
 
 export const getBaStatusText = (value) => {
-    return value ? 'On' : 'Off';
+    return value ? LangHelper.getSingleResource('On') : LangHelper.getSingleResource('Off');
 }
 
 export const getPlayerStatus = (value) => {

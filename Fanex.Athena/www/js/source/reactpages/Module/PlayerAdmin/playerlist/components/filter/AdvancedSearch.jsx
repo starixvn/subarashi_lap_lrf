@@ -12,7 +12,7 @@ export class AdvancedSearch extends React.Component {
 
         this.oddsGroupList = Object.keys(oddsGroupListWithStyle).map(item => ({ Id: item, Value: item, Status: true }));
         this.specialLevelList = Object.keys(specialLevelListWithColor).map(item => ({ Id: item, Value: getSpecialLevelText(item), Status: true }));
-        this.baStatusList = Object.keys(baStatusList).map(item => ({ value: baStatusList[item], label: item }));
+        this.baStatusList = Object.keys(baStatusList).map(item => ({ value: baStatusList[item], label: LangHelper.getSingleResource(item) }));
     }
 
     _createSelectData(originalList, selectedItemString) {

@@ -110,7 +110,7 @@ export class FormFilter extends PureComponent {
 
         return (<UserGuide
             title={LangHelper.getSingleResource("UserGuide")}
-            contentTitle={LangHelper.getSingleResource("")}
+            contentTitle={LangHelper.getSingleResource("PlayerAdmin")}
             onClick={this.showUserGuide}
             content={userGuideContent} />)
     }

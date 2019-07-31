@@ -2414,4 +2414,48 @@
     <value>Deep Link</value>
     <comment>119010</comment>
   </data>
+  <data name="FundtransferLimit" xml:space="preserve">
+    <value>Fundtransfer Limit</value>
+    <comment>112658</comment>
+  </data>
+  <data name="BetLimit" xml:space="preserve">
+    <value>Bet Limit</value>
+    <comment>112658</comment>
+  </data>
+  <data name="PersonalMessage" xml:space="preserve">
+    <value>Personal Message</value>
+    <comment>112658</comment>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>Active</value>
+    <comment>112658</comment>
+  </data>
+  <data name="Locked" xml:space="preserve">
+    <value>Locked</value>
+    <comment>112658</comment>
+  </data>
+  <data name="Archived" xml:space="preserve">
+    <value>Archived</value>
+    <comment>112658</comment>
+  </data>
+  <data name="UpdateToLockedConfirmMsg" xml:space="preserve">
+    <value>Are you sure you want to change the status of this player to LOCKED?\nWarning, this player cannot be restored forever!</value>
+    <comment>112658</comment>
+  </data>
+  <data name="UpdateToClosedConfirmMsg" xml:space="preserve">
+    <value>Are you sure you want to change the status of this player to CLOSED?\nWarning, Warning, this player cannot login!</value>
+    <comment>112658</comment>
+  </data>
+  <data name="UpdateToActiveConfirmMsg" xml:space="preserve">
+    <value>Are you sure you want to change the status of this player to ACTIVE?\nWarning, this player will be able to log in and bet.</value>
+    <comment>112658</comment>
+  </data>
+  <data name="Unknown" xml:space="preserve">
+    <value>Unknown</value>
+    <comment>112658</comment>
+  </data>
+  <data name="PlayerAdminUpdateFailedMsg" xml:space="preserve">
+    <value>Please try again!</value>
+    <comment>112658</comment>
+  </data>
 </root>
