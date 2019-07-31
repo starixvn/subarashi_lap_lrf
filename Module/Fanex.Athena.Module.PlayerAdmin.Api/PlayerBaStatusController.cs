@@ -1,5 +1,6 @@
 ﻿using Fanex.Athena.Api.Base.Attributes;
 using Fanex.Athena.Api.StatelessBase;
+using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Model.Core.ViewModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.Services.Interfaces;
@@ -20,6 +21,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api
         }
 
         [HttpPost]
+        [ApiOneAuthorization(AllowFunctionKeys = PermissionKeys.CustomerInfoSpecialBA)]
         public ResultViewModel Update(BaStatusUpdatingMetaModel metaModel)
         {
             AssignCommonProperties(metaModel);
@@ -32,7 +34,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api
             param.LicenseeId = LicenseeId;
             param.UserId = UserId;
             param.Language = UpdatingUtils.GetLanguageCode(Language);
-            param.Ip = string.Empty;
+            param.Ip = ClientHelper.GetClientIpAddress(Request);
         }
     }
 }

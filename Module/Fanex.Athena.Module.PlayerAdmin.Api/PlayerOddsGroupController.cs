@@ -51,7 +51,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api
             param.LicenseeId = LicenseeId;
             param.UserId = UserId;
             param.Language = Util.MapIetfLanguageCodes[Language];
-            param.Ip = string.Empty;
+            param.Ip = ClientHelper.GetClientIpAddress(Request);
         }
     }
 }

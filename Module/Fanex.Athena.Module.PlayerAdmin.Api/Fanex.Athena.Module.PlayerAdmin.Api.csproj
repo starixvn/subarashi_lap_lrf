@@ -43,6 +43,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Security" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web.Cors, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -90,6 +91,7 @@
     <Compile Include="Services\PlayerListService.cs" />
     <Compile Include="Services\PlayerOddsGroupService.cs" />
     <Compile Include="Services\PlayerSpecialLevelService.cs" />
+    <Compile Include="Utilities\ClientHelper.cs" />
     <Compile Include="Utilities\ResourceKeyConstants.cs" />
     <Compile Include="Utilities\UpdatingUtils.cs" />
     <Compile Include="ViewModels\PlayerListResultViewModel.cs" />
