@@ -1,8 +1,10 @@
 ﻿@using Fanex.Athena.Service.Core.Users.Interfaces;
 @using Fanex.Athena.Model.Auth.Enum;
+@using Fanex.Athena.Service.StatelessCore.Interfaces;
 @{
     var sessionService = DependencyResolver.Current.GetService<ISessionService>();
     var appSettings = DependencyResolver.Current.GetService<IAppSettings>();
+    var licenseeSettingService = DependencyResolver.Current.GetService<ILicenseeSettingService>();
     var userSession = sessionService.UserSession;
     var licSession = sessionService.LicenseeSession;
     var userCurrencies = userSession == null || userSession.CurrencyList == null ?
@@ -11,7 +13,7 @@
 
     var hasCustComm = licSession != null && licSession.IsAllowedCustomerComm;
     var isParasiticMode = userSession != null && userSession.ApplicationMode == AppMode.Parasitic;
-    var isFakeLicensee = appSettings.FakeLicenseeList.Contains(licSession.LicenseeId);
+    var isFakeLicensee = licenseeSettingService.IsFakeLicensee(licSession.LicenseeName);
     var langCode = System.Globalization.CultureInfo.CurrentUICulture.IetfLanguageTag;
 }
 <!DOCTYPE html>
