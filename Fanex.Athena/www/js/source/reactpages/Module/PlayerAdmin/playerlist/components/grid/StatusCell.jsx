@@ -28,7 +28,7 @@ export const StatusCell = (props) => {
         <div className="status-cell">
             <p className={classname}>{statusName || 'Unknown'}</p>
             {shouldShowOnlineStatus && <p className="status-text">{IsOnline ? '(Online)' : '(Offline)'}</p>}
-            {canUpdate && <button type="button" className="btn-outline btn-status-menu" onClick={handleToggleStatus}><i className="site-caret"></i></button>}
+            {statusName && canUpdate && <button type="button" className="btn-outline btn-status-menu" onClick={handleToggleStatus}><i className="site-caret"></i></button>}
         </div>
     )
 }

@@ -44,21 +44,21 @@ export const fields = {
     Email: 'Email'
 }
 
-export const columnList = (licType) => [
+export const columnList = [
     { key: fields.Status, value: 'Status', show: true },
     { key: fields.UserName, value: 'Username', show: true },
     { key: fields.SystemId, value: 'SystemId', show: true },
-    licType === licenseeType.nonApi ? { key: fields.RealName, value: 'Real Name', show: true } : null,
+    { key: fields.RealName, value: 'Real Name', show: true },
     { key: fields.Currency, value: 'Currency', show: true },
     { key: fields.CurrentBalance, value: 'Current Balance', show: true },
     { key: fields.OutstandingBalance, value: 'Outstanding Balance', show: true },
     { key: fields.OddsGroup, value: 'Odds Group', show: true },
     { key: fields.BaStatus, value: 'BA Status', show: true },
     { key: fields.SpecialLevel, value: 'Special Level', show: true },
-    licType === licenseeType.nonApi ? { key: fields.LastLoginIp, value: 'Last Login IP', show: true } : null,
+    { key: fields.LastLoginIp, value: 'Last Login IP', show: true },
     { key: fields.LastTransaction, value: 'Last Transaction', show: true },
-    licType === licenseeType.nonApi ? { key: fields.Email, value: 'Email', show: true } : null
-].filter(x => !!x);
+    { key: fields.Email, value: 'Email', show: true }
+];
 
 export const contextMenuList = [
     { key: 'note', name: 'Note', tabName: 'Note' },

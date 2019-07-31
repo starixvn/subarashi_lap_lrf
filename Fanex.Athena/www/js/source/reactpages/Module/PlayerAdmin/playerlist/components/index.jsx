@@ -4,10 +4,11 @@ import AppContainer from './AppContainer.jsx';
 import { Provider } from 'react-redux';
 import reducer from '../reducers';
 import Store from '@jsroot/lib/store';
-import { columnList } from '../lib/constants';
+import { generateColumnList } from '../lib/config';
 
 const { type } = window.initialState;
-const displayedColumnList = columnList(type).map(item => ({ ...item }));
+const hasBaPermission = window._pConfig.hasBaPermission === 1;
+const displayedColumnList = generateColumnList(type, hasBaPermission);
 const defaultState = { ...window.initialState, displayedColumnList };
 const store = Store.createStore(reducer, defaultState);
 
