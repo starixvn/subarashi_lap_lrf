@@ -81,7 +81,7 @@ namespace Fanex.Athena.Controllers.Customer
         [HttpPost]
         [AjaxRequest]
         [CustomValidateAntiForgery]
-        public ActionResult UpdateCustStatus(int custId, bool isClosed, bool isSuspended)
+        public async Task<ActionResult> UpdateCustStatusAsync(int custId, bool isClosed, bool isSuspended)
         {
             try
             {
@@ -100,11 +100,13 @@ namespace Fanex.Athena.Controllers.Customer
                         Ip = Request.UserHostAddress
                     };
 
-                    var result = _customerListService.UpdateCustClosed(customerStatusMetaModel, userSession.Language);
+                    var result = await
+                        _customerListService.UpdateCustClosedAsync(customerStatusMetaModel, userSession.Language);
+
                     if (result.Code == 0)
                     {
                         customerStatusMetaModel.IsOn = isSuspended;
-                        result = _customerListService.UpdateCustSuspend(customerStatusMetaModel, userSession.Language);
+                        result = await _customerListService.UpdateCustSuspendAsync(customerStatusMetaModel, userSession.Language);
                     }
 
                     return Json(result);
@@ -247,7 +249,7 @@ namespace Fanex.Athena.Controllers.Customer
             if (!specialBaPermission)
             {
                 var isAllowUpdateBaResult = _licenseeDataAccess.IsAllowUpdateMemberBAStatus(request, licenseeSession.LicenseeId);
-                bool isAllowUpdateBa = isAllowUpdateBaResult.ExtendedData;
+                var isAllowUpdateBa = isAllowUpdateBaResult.ExtendedData;
                 if (!isAllowUpdateBa)
                 {
                     return CreateUpdatingBaResult(isAllowBA, false, isAllowUpdateBaResult.Message);
@@ -318,7 +320,7 @@ namespace Fanex.Athena.Controllers.Customer
                     }
                     else
                     {
-                        await this.ProcessUpdatingCustomerCom(metaModel, result).ConfigureAwait(false);
+                        await this.ProcessUpdatingCustomerCom(metaModel, result);
                     }
                 }
             }
@@ -354,7 +356,8 @@ namespace Fanex.Athena.Controllers.Customer
                 Ip = Request.UserHostAddress,
                 Language = userSession.Language
             };
-            var removalResult = await _customerCommService.RemoveCustomersFromGroupAsync(metaModel, productAccess.IsAllowCS).ConfigureAwait(false);
+            var removalResult = await _customerCommService.RemoveCustomersFromGroupAsync(metaModel, productAccess.IsAllowCS);
+            
             var result = new ResultViewModel
             {
                 Success = removalResult.IsSuccessful,
@@ -404,7 +407,7 @@ namespace Fanex.Athena.Controllers.Customer
                 Language = userSession.Language
             };
 
-            var temp = await _customerCommService.MoveCustomersToGroupAsync(metaModel).ConfigureAwait(false);
+            var temp = await _customerCommService.MoveCustomersToGroupAsync(metaModel);
             var result = new ResultViewModel
             {
                 Success = temp.IsSuccessful,

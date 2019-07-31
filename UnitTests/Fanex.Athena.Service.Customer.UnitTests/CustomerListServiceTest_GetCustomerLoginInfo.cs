@@ -1,14 +1,19 @@
 ﻿namespace Fanex.Athena.Service.Customer.UnitTests
 {
-    using System.Threading.Tasks;
-    using Casino.Interfaces;
     using Core.Common.Interfaces;
+
     using DataAccess.Customer.Interfaces;
+
     using Extension.Utility;
+
     using Model.Customer.DTO;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using StatelessCore.Interfaces;
+
     using UnitTest.Common.Helpers;
 
     [TestFixture]
@@ -20,8 +25,6 @@
 
         private IDormantCustomerListDataAccess _dormantCustomerListDataAccess;
 
-        private ICasinoCustomerService _casinoCustomerService;
-
         private IAuthorizationService _authorizationService;
 
         private IProductService _productService;
@@ -29,6 +32,8 @@
         private IAppSettings _appSettings;
 
         private CustomerListService _customerListService;
+        private ILGAPIClient _lgClient;
+
 
         [SetUp]
         public void SetUp()
@@ -36,30 +41,30 @@
             _customerDataAccess = Substitute.For<ICustomerDataAccess>();
             _customerListDataAccess = Substitute.For<ICustomerListDataAccess>();
             _dormantCustomerListDataAccess = Substitute.For<IDormantCustomerListDataAccess>();
-            _casinoCustomerService = Substitute.For<ICasinoCustomerService>();
             _authorizationService = Substitute.For<IAuthorizationService>();
             _productService = Substitute.For<IProductService>();
             _appSettings = Substitute.For<IAppSettings>();
-
+            _appSettings.GetValue(Arg.Any<string>()).Returns("FakePath");
+            _lgClient = Substitute.For<ILGAPIClient>();
             _customerListService = new CustomerListService(
                 _customerDataAccess,
                 _customerListDataAccess,
                 _dormantCustomerListDataAccess,
-                _casinoCustomerService,
                 _authorizationService,
                 _productService,
-                _appSettings);
+                _appSettings,
+                _lgClient);
         }
 
         [TearDown]
         public void TearDown()
         {
             _customerListDataAccess = null;
-            _casinoCustomerService = null;
             _authorizationService = null;
             _productService = null;
             _appSettings = null;
             _customerListService = null;
+            _lgClient = null;
         }
 
         [Test]

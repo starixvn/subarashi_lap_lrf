@@ -6,6 +6,7 @@
 
 namespace Fanex.Athena.Model.BetSettings.MetaModel
 {
+    using System.Collections.Generic;
     using System.Data;
     using Customer.MetaModel;
 
@@ -14,6 +15,6 @@ namespace Fanex.Athena.Model.BetSettings.MetaModel
     /// </summary>
     public class RngCasinoBetSettingMetaModel : CustomerStatusMetaModel
     {
-        public DataTable TableParam { get; set; }
+        public IDictionary<string, string> StackLevelParam { get; set; }
     }
 }

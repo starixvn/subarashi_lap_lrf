@@ -2,48 +2,53 @@
 {
     using System;
     using System.Threading.Tasks;
-    using Casino.Interfaces;
+
     using Customer;
+
     using DataAccess.Customer.Interfaces;
+    using Fanex.Athena.Extension.Utility;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Casino.MetaModel;
     using Model.Core.DTO.Common;
     using Model.Customer.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
-    using Session.Model;
+
     using UnitTest.Common.Helpers;
 
     [TestFixture]
     public partial class CustomerCommServiceTest
     {
-        private ICasinoCustomerService _casinoCustomerService;
 
         private ICustomerCommDataAccess _customerCommDataAccess;
 
         private IGroupComDataAccess _groupCommDataAccess;
 
         private CustomerCommService _customerCommService;
+        private ILGAPIClient _lgClient;
 
         [SetUp]
         public void SetUp()
         {
-            _casinoCustomerService = Substitute.For<ICasinoCustomerService>();
+            _lgClient = Substitute.For<ILGAPIClient>();
             _customerCommDataAccess = Substitute.For<ICustomerCommDataAccess>();
             _groupCommDataAccess = Substitute.For<IGroupComDataAccess>();
 
             _customerCommService = new CustomerCommService(
-                _casinoCustomerService,
                 _customerCommDataAccess,
-                _groupCommDataAccess);
+                _groupCommDataAccess,
+                _lgClient);
         }
 
         [TearDown]
         public void TearDown()
         {
-            _casinoCustomerService = null;
             _customerCommDataAccess = null;
             _groupCommDataAccess = null;
             _customerCommService = null;
+            _lgClient = null;
         }
 
         [Test]
@@ -92,7 +97,8 @@
             var expectedResult = new ResultInfo { ExtendedData = "1,2,3" };
             _customerCommDataAccess.UpdateCustomersCommissionAsync(metaModel).Returns(Task.FromResult<IResultInfo>(expectedResult));
 
-            _casinoCustomerService.UpdateCommission(Arg.Any<RNGCasinoUpdateMemberComMetaModel>()).Returns(true);
+            _lgClient.PostAsync<APIResult<bool>>(Arg.Any<string>(), Arg.Any<RNGCasinoUpdateMemberComMetaModel>(), Arg.Any<string>())
+                .Returns(new APIResult<bool> { Data = true });
 
             // Action
             var result = await _customerCommService.UpdateCustomersCommissionAsync(metaModel, isSyncCSComm);
@@ -110,8 +116,7 @@
 
             var resultInfo = new ResultInfo { ExtendedData = "1" };
             _customerCommDataAccess.UpdateCustomersCommissionAsync(metaModel).Returns(Task.FromResult<IResultInfo>(resultInfo));
-
-            _casinoCustomerService.UpdateCommission(Arg.Any<RNGCasinoUpdateMemberComMetaModel>()).Returns(false);
+            _lgClient.PostAsync<bool>(Arg.Any<string>(), Arg.Any<RNGCasinoUpdateMemberComMetaModel>(), Arg.Any<string>()).Returns(false);
             var expectedResult = new ResultInfo
             {
                 Code = 1,
@@ -143,7 +148,7 @@
             // Assert
             Assert.Multiple(() =>
             {
-                _casinoCustomerService.DidNotReceive().UpdateCommission(Arg.Any<RNGCasinoUpdateMemberComMetaModel>());
+                _lgClient.DidNotReceive().PostAsync<bool>(Arg.Any<string>(), Arg.Any<RNGCasinoUpdateMemberComMetaModel>(), Arg.Any<string>());
                 Assert.That(result, Is.EqualTo(expectedResult));
             });
         }

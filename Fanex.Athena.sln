@@ -52,8 +52,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.Service.Core",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.Service.BetSettings", "Service\Fanex.Athena.Service.BetSettings\Fanex.Athena.Service.BetSettings.csproj", "{E3C3C559-CF7C-45ED-8179-0BB9159E40A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.Service.Casino", "Service\Fanex.Athena.Service.Casino\Fanex.Athena.Service.Casino.csproj", "{EFAB3719-796C-4B55-8873-D4573416F07A}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.DataAccess.Customer", "DataAccess\Fanex.Athena.DataAccess.Customer\Fanex.Athena.DataAccess.Customer.csproj", "{C25DC4BC-2721-401B-8896-D210D70B392B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.Service.Customer", "Service\Fanex.Athena.Service.Customer\Fanex.Athena.Service.Customer.csproj", "{EC87B5F7-32CA-485B-A3FF-52A5D0EDCE42}"
@@ -160,8 +158,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SonarQube", "SonarQube", "{
 		SonarQube\LRFCSharp.ruleset = SonarQube\LRFCSharp.ruleset
 		SonarQube\SolutionBinding.sqconfig = SonarQube\SolutionBinding.sqconfig
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.Service.Casino.UnitTests", "UnitTests\Fanex.Athena.Service.Casino.UnitTests\Fanex.Athena.Service.Casino.UnitTests.csproj", "{BAC1E040-C233-4A53-9CE4-A4FA556EF647}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.Excel.Customer.UnitTests", "UnitTests\Fanex.Athena.Excel.Customer.UnitTests\Fanex.Athena.Excel.Customer.UnitTests.csproj", "{D79D96E1-EF34-4D3D-A666-0AAE3086F94F}"
 EndProject
@@ -427,18 +423,6 @@ Global
 		{E3C3C559-CF7C-45ED-8179-0BB9159E40A8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{E3C3C559-CF7C-45ED-8179-0BB9159E40A8}.Release|x86.ActiveCfg = Release|Any CPU
 		{E3C3C559-CF7C-45ED-8179-0BB9159E40A8}.Release|x86.Build.0 = Release|Any CPU
-		{EFAB3719-796C-4B55-8873-D4573416F07A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EFAB3719-796C-4B55-8873-D4573416F07A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EFAB3719-796C-4B55-8873-D4573416F07A}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{EFAB3719-796C-4B55-8873-D4573416F07A}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{EFAB3719-796C-4B55-8873-D4573416F07A}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{EFAB3719-796C-4B55-8873-D4573416F07A}.Debug|x86.Build.0 = Debug|Any CPU
-		{EFAB3719-796C-4B55-8873-D4573416F07A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EFAB3719-796C-4B55-8873-D4573416F07A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EFAB3719-796C-4B55-8873-D4573416F07A}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{EFAB3719-796C-4B55-8873-D4573416F07A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{EFAB3719-796C-4B55-8873-D4573416F07A}.Release|x86.ActiveCfg = Release|Any CPU
-		{EFAB3719-796C-4B55-8873-D4573416F07A}.Release|x86.Build.0 = Release|Any CPU
 		{C25DC4BC-2721-401B-8896-D210D70B392B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C25DC4BC-2721-401B-8896-D210D70B392B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C25DC4BC-2721-401B-8896-D210D70B392B}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -897,18 +881,6 @@ Global
 		{4A5BDDBC-F707-409A-86EC-D9BC6E9D31C4}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{4A5BDDBC-F707-409A-86EC-D9BC6E9D31C4}.Release|x86.ActiveCfg = Release|Any CPU
 		{4A5BDDBC-F707-409A-86EC-D9BC6E9D31C4}.Release|x86.Build.0 = Release|Any CPU
-		{BAC1E040-C233-4A53-9CE4-A4FA556EF647}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BAC1E040-C233-4A53-9CE4-A4FA556EF647}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BAC1E040-C233-4A53-9CE4-A4FA556EF647}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{BAC1E040-C233-4A53-9CE4-A4FA556EF647}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{BAC1E040-C233-4A53-9CE4-A4FA556EF647}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{BAC1E040-C233-4A53-9CE4-A4FA556EF647}.Debug|x86.Build.0 = Debug|Any CPU
-		{BAC1E040-C233-4A53-9CE4-A4FA556EF647}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BAC1E040-C233-4A53-9CE4-A4FA556EF647}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BAC1E040-C233-4A53-9CE4-A4FA556EF647}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{BAC1E040-C233-4A53-9CE4-A4FA556EF647}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{BAC1E040-C233-4A53-9CE4-A4FA556EF647}.Release|x86.ActiveCfg = Release|Any CPU
-		{BAC1E040-C233-4A53-9CE4-A4FA556EF647}.Release|x86.Build.0 = Release|Any CPU
 		{D79D96E1-EF34-4D3D-A666-0AAE3086F94F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D79D96E1-EF34-4D3D-A666-0AAE3086F94F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D79D96E1-EF34-4D3D-A666-0AAE3086F94F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -1194,7 +1166,6 @@ Global
 		{A6BE21E8-6895-4863-BA3A-E6B21D3CE78D} = {D72107B8-4765-4E3D-A86D-36BD7E0D9109}
 		{FCFD7434-085B-4C93-848F-E1CBCEDCC5A0} = {195AD258-DE51-497C-BA3B-1645AE32CAB6}
 		{E3C3C559-CF7C-45ED-8179-0BB9159E40A8} = {195AD258-DE51-497C-BA3B-1645AE32CAB6}
-		{EFAB3719-796C-4B55-8873-D4573416F07A} = {195AD258-DE51-497C-BA3B-1645AE32CAB6}
 		{C25DC4BC-2721-401B-8896-D210D70B392B} = {D72107B8-4765-4E3D-A86D-36BD7E0D9109}
 		{EC87B5F7-32CA-485B-A3FF-52A5D0EDCE42} = {195AD258-DE51-497C-BA3B-1645AE32CAB6}
 		{5F410090-94C0-46A5-9FEC-B6C3B745B7A0} = {FF903E7B-A043-4B69-B750-4830F0E5C58A}
@@ -1239,7 +1210,6 @@ Global
 		{33283837-A60B-44AA-815D-F61F70774DE2} = {4D6B663E-04A8-4993-B33F-A445428FA349}
 		{39021036-595E-4563-AD8C-5FFC0EE3B26A} = {6AD8D3FB-0047-432F-ACAC-D67093176088}
 		{4A5BDDBC-F707-409A-86EC-D9BC6E9D31C4} = {6AD8D3FB-0047-432F-ACAC-D67093176088}
-		{BAC1E040-C233-4A53-9CE4-A4FA556EF647} = {8A922757-8C4B-44C0-9D3E-9B68E6AE956B}
 		{D79D96E1-EF34-4D3D-A666-0AAE3086F94F} = {88CBF37F-6900-45AF-911A-D297E7604FEF}
 		{F5AB452D-B484-446D-8718-416F75977B72} = {88CBF37F-6900-45AF-911A-D297E7604FEF}
 		{8D35FBB1-C04C-4558-BA16-A9DAE8C6379E} = {62FD2471-9E6A-4BD1-9AB3-8C4C6FF658A1}
@@ -1266,8 +1236,8 @@ Global
 		{5A171DF9-0532-40C2-A325-A69DEE459B26} = {1F82F1FE-8794-4B76-AC02-E6BD6741729E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35;packages\Unity.Interception.2.1.505.0\lib\NET35
-		RESX_ShowErrorsInErrorList = False
 		SolutionGuid = {AF850210-126B-4E21-BADB-F5C02AD2CCEE}
+		RESX_ShowErrorsInErrorList = False
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35;packages\Unity.Interception.2.1.505.0\lib\NET35
 	EndGlobalSection
 EndGlobal

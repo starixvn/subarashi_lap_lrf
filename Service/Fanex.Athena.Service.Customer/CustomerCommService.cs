@@ -7,29 +7,30 @@
 namespace Fanex.Athena.Service.Customer
 {
     using System.Threading.Tasks;
-    using Casino.Interfaces;
+
     using DataAccess.Customer.Interfaces;
+
+    using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Casino.MetaModel;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Customer.MetaModel;
     using Fanex.Athena.Service.Customer.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     public class CustomerCommService : ICustomerCommService
     {
-        private readonly ICasinoCustomerService _casinoCustomerService;
-
         private readonly ICustomerCommDataAccess _customerCommDataAccess;
 
         private readonly IGroupComDataAccess _groupComDataAccess;
+        private readonly ILGAPIClient _lgClient;
 
         public CustomerCommService(
-            ICasinoCustomerService casinoCustomerService,
             ICustomerCommDataAccess customerCommDataAccess,
-            IGroupComDataAccess groupComDataAccess)
+            IGroupComDataAccess groupComDataAccess, ILGAPIClient lgClient)
         {
-            _casinoCustomerService = casinoCustomerService;
             _customerCommDataAccess = customerCommDataAccess;
             _groupComDataAccess = groupComDataAccess;
+            _lgClient = lgClient;
         }
 
         public async Task<IResultInfo> UpdateCustomersCommissionAsync(UpdatedCustomerComMetaModel metaModel, bool isSyncCSComm = false)
@@ -38,7 +39,7 @@ namespace Fanex.Athena.Service.Customer
             var callApiSuccess = true;
             if (result.IsSuccessful && isSyncCSComm && !string.IsNullOrWhiteSpace(result.ExtendedData))
             {
-                callApiSuccess = CallApiToUpdateComm(result.ExtendedData, metaModel.CSComm, metaModel.Ip, metaModel.UserId, metaModel.UserName);
+                callApiSuccess = await CallApiToUpdateCommAsync(result.ExtendedData, metaModel.CSComm, metaModel.Ip, metaModel.UserId, metaModel.UserName);
             }
 
             return callApiSuccess ? result : new ResultInfo
@@ -73,7 +74,7 @@ namespace Fanex.Athena.Service.Customer
             if (result.IsSuccessful && metaModel.IsAllowedRNG && !string.IsNullOrWhiteSpace(result.ExtendedData))
             {
                 callApiSuccess =
-                    CallApiToUpdateComm(result.ExtendedData, groupInfo.CSComm, metaModel.Ip, metaModel.UserId, metaModel.UserName);
+                    await CallApiToUpdateCommAsync(result.ExtendedData, groupInfo.CSComm, metaModel.Ip, metaModel.UserId, metaModel.UserName);
             }
 
             return callApiSuccess ? result : new ResultInfo
@@ -89,7 +90,7 @@ namespace Fanex.Athena.Service.Customer
             var callApiSuccess = true;
             if (result.IsSuccessful && metaModel.IsRemovePlayercomm && isAllowedRNGCasino && !string.IsNullOrWhiteSpace(result.ExtendedData))
             {
-                callApiSuccess = CallApiToUpdateComm(result.ExtendedData, 0, metaModel.Ip, metaModel.UserId, metaModel.UserName);
+                callApiSuccess = await CallApiToUpdateCommAsync(result.ExtendedData, 0, metaModel.Ip, metaModel.UserId, metaModel.UserName);
             }
 
             return callApiSuccess ? result : new ResultInfo
@@ -99,19 +100,23 @@ namespace Fanex.Athena.Service.Customer
             };
         }
 
-        private bool CallApiToUpdateComm(string customerIdList, decimal commission, string ip, int userId, string userName)
+        private async Task<bool> CallApiToUpdateCommAsync(string customerIdList, decimal commission, string ip, int userId, string userName)
         {
             var customerIds = customerIdList.Split(',');
             if (customerIds.Length > 0)
             {
-                return _casinoCustomerService.UpdateCommission(new RNGCasinoUpdateMemberComMetaModel
+                var metalModel = new RNGCasinoUpdateMemberComMetaModel
                 {
                     Comm = commission,
                     CustomerId = customerIds,
                     FromIp = ip,
                     ModifyBy = userId,
                     ModifyUserName = userName
-                });
+                };
+
+                const string apiPath = "/RNGCasinoCustomer/UpdateCommission";
+                var result = await _lgClient.PostAsync<APIResult<bool>>(apiPath, metalModel, "en-US").ConfigureAwait(false);
+                return result != null && result.Data;
             }
 
             return true;

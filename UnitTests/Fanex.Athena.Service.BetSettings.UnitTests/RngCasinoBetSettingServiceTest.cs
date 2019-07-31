@@ -3,18 +3,27 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using BetSettings;
-    using Casino.Interfaces;
-    using Casino.Wrappers;
+
     using DataAccess.BetSettings.Interfaces;
+
     using Extension.Utility;
+
+    using Fanex.Athena.Model.Core.DTO.Common;
+
     using Interfaces;
+
     using Model.BetSettings.DTO.RngCasino;
     using Model.BetSettings.MetaModel;
     using Model.Customer.DTO;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Resources;
+
     using StatelessCore.Interfaces;
 
     [TestFixture]
@@ -26,33 +35,32 @@
 
         private IAuthorizationService _authorizationService;
         private IAppSettings _appSettings;
-        private ICasinoSettingService _casinoSetting;
-        private ICustomerApiWrapper _customerApiWrapper;
         private IRngCasinoBetSettingDataAccess _dataAccess;
         private IRngCasinoBetSettingService _service;
+        private ILGAPIClient _lgClient;
 
         [SetUp]
         public void SetUp()
         {
             _authorizationService = Substitute.For<IAuthorizationService>();
             _appSettings = Substitute.For<IAppSettings>();
-            _casinoSetting = Substitute.For<ICasinoSettingService>();
-            _customerApiWrapper = Substitute.For<ICustomerApiWrapper>();
             _dataAccess = Substitute.For<IRngCasinoBetSettingDataAccess>();
-            _service = new RngCasinoBetSettingService(_authorizationService, _appSettings, _casinoSetting, _customerApiWrapper, _dataAccess);
+            _lgClient = Substitute.For<ILGAPIClient>();
+            _service = new RngCasinoBetSettingService(_authorizationService,
+                _appSettings, _dataAccess, _lgClient);
         }
 
         [TearDown]
         public void TearDown()
         {
             _appSettings = null;
-            _casinoSetting = null;
+            _lgClient = null;
             _dataAccess = null;
             _service = null;
         }
 
         [Test]
-        public void GetViewModel_CustomerNotSyncCasino_NotCallCasinoSetting()
+        public async Task GetViewModel_CustomerNotSyncCasino_NotCallCasinoSettingAsync()
         {
             // Arrange
             var customer = new CustomerInfo
@@ -61,25 +69,27 @@
             };
 
             // Action
-            var result = _service.GetViewModel(CustId, customer, string.Empty);
+            var result = await _service.GetViewModelAsync(CustId, customer, string.Empty).ConfigureAwait(false);
 
             // Assert
             Assert.Multiple(() =>
             {
-                _casinoSetting.DidNotReceiveWithAnyArgs().GetRngCasinoSettings(CustId, CurrencyId, string.Empty);
+                _lgClient.DidNotReceiveWithAnyArgs().PostAsync<dynamic>(null, null, null);
                 Assert.That(result.GameKinds.Any(), Is.False);
             });
         }
 
         [Test]
-        public void GetViewModel_CustomerIsSyncCasino_GetDataFromCasinoSetting()
+        public async Task GetViewModel_CustomerIsSyncCasino_GetDataFromCasinoSettingAsync()
         {
             // Arrange
             var resultGameKindList = new List<GameKind>
             {
                 new GameKind()
             };
-            _casinoSetting.GetRngCasinoSettings(CustId, CurrencyId, Language).Returns(resultGameKindList);
+            _lgClient.PostAsync<APIResult<IList<GameKind>>>(Arg.Any<string>(), Arg.Any<object>(), Arg.Any<string>()).Returns(
+                new APIResult<IList<GameKind>> { Data = resultGameKindList }
+                );
             var customer = new CustomerInfo
             {
                 SyncCasino = true,
@@ -87,12 +97,12 @@
             };
 
             // Action
-            var result = _service.GetViewModel(CustId, customer, Language);
+            var result = await _service.GetViewModelAsync(CustId, customer, Language).ConfigureAwait(false);
 
             // Assert
             Assert.Multiple(() =>
             {
-                _casinoSetting.Received().GetRngCasinoSettings(CustId, CurrencyId, Language);
+                _lgClient.ReceivedWithAnyArgs().PostAsync<APIResult<IList<GameKind>>>(null, null, null);
                 Assert.That(result.GameKinds.Count(), Is.EqualTo(resultGameKindList.Count));
             });
         }
@@ -101,7 +111,7 @@
         [TestCase(false, false, null)]
         [TestCase(true, false, null)]
         [TestCase(true, true, false)]
-        public void GetViewModel_CustomerIsSyncCasino_ReturnCorrectIsEnabled(
+        public async Task GetViewModel_CustomerIsSyncCasino_ReturnCorrectIsEnabledAsync(
             bool isDiabledCasino,
             bool isSyncCasino,
             bool? expectedIsEnabled)
@@ -114,7 +124,7 @@
             };
 
             // Action
-            var result = _service.GetViewModel(CustId, customer, Language);
+            var result = await _service.GetViewModelAsync(CustId, customer, Language).ConfigureAwait(false);
 
             // Assert
             Assert.That(result.IsEnabled, Is.EqualTo(expectedIsEnabled));
@@ -182,8 +192,9 @@
 
             _appSettings.IsDisableRngCasino.Returns(false);
             _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, Arg.Any<long>()).Returns(true);
-            _customerApiWrapper.UpdateCustEnableCasino(metaModel)
-                .Returns(false);
+
+            _lgClient.PostAsync<APIResult<bool>>(Arg.Any<string>(), Arg.Any<BetSettingCasinoStatusMetaModel>(), Arg.Any<string>())
+                .Returns(new APIResult<bool> { Data = false });
 
             // Action
             var result = await _service.UpdateStatusAsync(metaModel);
@@ -210,8 +221,7 @@
 
             _appSettings.IsDisableRngCasino.Returns(false);
             _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, Arg.Any<long>()).Returns(true);
-            _customerApiWrapper.UpdateCustEnableCasino(metaModel)
-                .Returns(true);
+            _lgClient.PostAsync<bool>(Arg.Any<string>(), Arg.Any<BetSettingCasinoStatusMetaModel>(), Arg.Any<string>()).Returns(true);
 
             // Action
             await _service.UpdateStatusAsync(metaModel);
@@ -221,25 +231,25 @@
         }
 
         [Test]
-        public void UpdateSetting_IsDisableCasino_ReturnErrorResult()
+        public async Task UpdateSetting_IsDisableCasino_ReturnErrorResultAsync()
         {
             // Arrange
             var metaModel = new RngCasinoBetSettingMetaModel();
 
             // Action
-            var result = _service.UpdateSetting(metaModel, false, true);
+            var result = await _service.UpdateSettingAsync(metaModel, false, true).ConfigureAwait(false);
 
             // Assert
             Assert.Multiple(() =>
             {
-                _casinoSetting.DidNotReceive().UpdateSetting(metaModel.TableParam);
+                _lgClient.DidNotReceiveWithAnyArgs().PostAsync<dynamic>(null, null, null);
                 Assert.That(result.IsSuccessful, Is.False);
                 Assert.That(result.Message, Is.EqualTo(ViewResources.AccessDeniedMsg));
             });
         }
 
         [Test]
-        public void UpdateSetting_NoPermission_ReturnErrorResult()
+        public async Task UpdateSetting_NoPermission_ReturnErrorResultAsync()
         {
             // Arrange
             var metaModel = new RngCasinoBetSettingMetaModel
@@ -251,19 +261,19 @@
             _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, Arg.Any<long>()).Returns(false);
 
             // Action
-            var result = _service.UpdateSetting(metaModel, false, false);
+            var result = await _service.UpdateSettingAsync(metaModel, false, false).ConfigureAwait(false);
 
             // Assert
             Assert.Multiple(() =>
             {
-                _casinoSetting.DidNotReceive().UpdateSetting(metaModel.TableParam);
+                _lgClient.DidNotReceiveWithAnyArgs().PostAsync<dynamic>(null, null, null);
                 Assert.That(result.IsSuccessful, Is.False);
                 Assert.That(result.Message, Is.EqualTo(ViewResources.AccessDeniedMsg));
             });
         }
 
         [Test]
-        public void UpdateSetting_IsNotSyncCasino_ReturnErrorResult()
+        public async Task UpdateSetting_IsNotSyncCasino_ReturnErrorResultAsync()
         {
             // Arrange
             var metaModel = new RngCasinoBetSettingMetaModel
@@ -275,19 +285,19 @@
             _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, Arg.Any<long>()).Returns(true);
 
             // Action
-            var result = _service.UpdateSetting(metaModel, false, false);
+            var result = await _service.UpdateSettingAsync(metaModel, false, false).ConfigureAwait(false);
 
             // Assert
             Assert.Multiple(() =>
             {
-                _casinoSetting.DidNotReceive().UpdateSetting(metaModel.TableParam);
+                _lgClient.DidNotReceiveWithAnyArgs().PostAsync<dynamic>(null, null, null);
                 Assert.That(result.IsSuccessful, Is.False);
                 Assert.That(result.Message, Is.EqualTo(ViewResources.RNGCasinoUpdateSettingUnAvailableMsg));
             });
         }
 
         [Test]
-        public void UpdateSetting_IsDisableRngCasino_ReturnErrorResult()
+        public async Task UpdateSetting_IsDisableRngCasino_ReturnErrorResultAsync()
         {
             // Arrange
             var metaModel = new RngCasinoBetSettingMetaModel
@@ -300,19 +310,19 @@
             _appSettings.IsDisableRngCasino.Returns(true);
 
             // Action
-            var result = _service.UpdateSetting(metaModel, true, false);
+            var result = await _service.UpdateSettingAsync(metaModel, true, false).ConfigureAwait(false);
 
             // Assert
             Assert.Multiple(() =>
             {
-                _casinoSetting.DidNotReceive().UpdateSetting(metaModel.TableParam);
+                _lgClient.DidNotReceiveWithAnyArgs().PostAsync<dynamic>(null, null, null);
                 Assert.That(result.IsSuccessful, Is.False);
                 Assert.That(result.Message, Is.EqualTo(ViewResources.RNGCasinoUpdateSettingUnAvailableMsg));
             });
         }
 
         [Test]
-        public void UpdateSetting_ValidData_CallDataAccessMethodFail_ReturnErrorResult()
+        public async Task UpdateSetting_ValidData_CallDataAccessMethodFail_ReturnErrorResultAsync()
         {
             // Arrange
             var metaModel = new RngCasinoBetSettingMetaModel
@@ -323,22 +333,24 @@
 
             _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, Arg.Any<long>()).Returns(true);
             _appSettings.IsDisableRngCasino.Returns(false);
-            _casinoSetting.UpdateSetting(metaModel.TableParam).Returns(false);
+
+            _lgClient.PostAsync<APIResult<bool>>(Arg.Any<string>(), Arg.Any<object>(), Arg.Any<string>())
+                .Returns(new APIResult<bool> { Data = false });
 
             // Action
-            var result = _service.UpdateSetting(metaModel, true, false);
+            var result = await _service.UpdateSettingAsync(metaModel, true, false).ConfigureAwait(false);
 
             // Assert
             Assert.Multiple(() =>
             {
-                _casinoSetting.Received().UpdateSetting(metaModel.TableParam);
+                _lgClient.ReceivedWithAnyArgs().PostAsync<APIResult<bool>>(null, null, null);
                 Assert.That(result.IsSuccessful, Is.False);
                 Assert.That(result.Message, Is.EqualTo(ViewResources.Fail));
             });
         }
 
         [Test]
-        public void UpdateSetting_ValidData_CallDataAccessMethodSuccessfully_ReturnSuccessfulResult()
+        public async Task UpdateSetting_ValidData_CallDataAccessMethodSuccessfully_ReturnSuccessfulResultAsync()
         {
             // Arrange
             var metaModel = new RngCasinoBetSettingMetaModel
@@ -349,15 +361,16 @@
 
             _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, Arg.Any<long>()).Returns(true);
             _appSettings.IsDisableRngCasino.Returns(false);
-            _casinoSetting.UpdateSetting(metaModel.TableParam).Returns(true);
+            _lgClient.PostAsync<APIResult<bool>>(Arg.Any<string>(), Arg.Any<object>(), Arg.Any<string>()).Returns(
+                new APIResult<bool> { Data = true });
 
             // Action
-            var result = _service.UpdateSetting(metaModel, true, false);
+            var result = await _service.UpdateSettingAsync(metaModel, true, false).ConfigureAwait(false);
 
             // Assert
             Assert.Multiple(() =>
             {
-                _casinoSetting.Received().UpdateSetting(metaModel.TableParam);
+                _lgClient.ReceivedWithAnyArgs().PostAsync<APIResult<bool>>(null, null, null);
                 Assert.That(result.IsSuccessful, Is.True);
                 Assert.That(result.Message, Is.EqualTo(ViewResources.MessageSuccess));
             });

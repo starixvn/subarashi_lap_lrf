@@ -10,26 +10,27 @@ namespace Fanex.Athena.Service.Customer
     using System.Collections.Generic;
     using System.Data;
     using System.Threading.Tasks;
-    using Casino.Interfaces;
+
     using Fanex.Athena.DataAccess.Customer.Interfaces;
+    using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Casino.MetaModel;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Customer.MetaModel;
     using Fanex.Athena.Service.Customer.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Session.Model;
 
     public class GroupComService : IGroupComService
     {
-        private readonly ICasinoCustomerService _casinoCustomerService;
-
         private readonly IGroupComDataAccess _groupDataAccess;
+        private readonly ILGAPIClient _lgClient;
 
         public GroupComService(
-            ICasinoCustomerService casinoCustomerService,
-            IGroupComDataAccess groupDataAccess)
+            IGroupComDataAccess groupDataAccess, ILGAPIClient lgClient)
         {
-            _casinoCustomerService = casinoCustomerService;
             _groupDataAccess = groupDataAccess;
+            _lgClient = lgClient;
         }
 
         public async Task<IList<GroupCommMetaModel>> GetAll(int licenseeId)
@@ -69,7 +70,8 @@ namespace Fanex.Athena.Service.Customer
                         ModifyBy = user.UserId,
                         ModifyUserName = user.UserName
                     };
-                    callApiSuccess = _casinoCustomerService.UpdateCommission(apiCasinoMetalModel);
+
+                    callApiSuccess = await CallApiToUpdateCommAsync(apiCasinoMetalModel).ConfigureAwait(false);
                 }
             }
 
@@ -99,14 +101,16 @@ namespace Fanex.Athena.Service.Customer
                 var custtomerList = resultInfo.ExtendedData.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
                 if (custtomerList.Length > 0)
                 {
-                    callApiSuccess = _casinoCustomerService.UpdateCommission(new RNGCasinoUpdateMemberComMetaModel
+                    var apiCasinoMetalModel = new RNGCasinoUpdateMemberComMetaModel
                     {
                         Comm = 0,
                         CustomerId = custtomerList,
                         FromIp = model.Ip,
                         ModifyBy = model.UserId,
                         ModifyUserName = model.UserName
-                    });
+                    };
+
+                    callApiSuccess = await CallApiToUpdateCommAsync(apiCasinoMetalModel).ConfigureAwait(false);
                 }
             }
 
@@ -122,6 +126,13 @@ namespace Fanex.Athena.Service.Customer
         public bool CheckExistingGroupByName(int licenseeId, string groupName)
         {
             return _groupDataAccess.CheckByName(licenseeId, groupName);
+        }
+
+        private async Task<bool> CallApiToUpdateCommAsync(RNGCasinoUpdateMemberComMetaModel metalModel)
+        {
+            const string apiPath = "/RNGCasinoCustomer/UpdateCommission";
+            var temp = await _lgClient.PostAsync<APIResult<bool>>(apiPath, metalModel, "en-US").ConfigureAwait(false);
+            return temp != null && temp.Data;
         }
     }
 }

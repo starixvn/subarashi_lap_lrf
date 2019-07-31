@@ -1,31 +1,37 @@
 ﻿namespace Fanex.Athena.Service.Customer.UnitTests
 {
     using System.Threading.Tasks;
-    using Casino.Interfaces;
+
     using DataAccess.Customer.Interfaces;
+    using Fanex.Athena.Extension.Utility;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Casino.MetaModel;
     using Model.Core.DTO.Common;
     using Model.Customer.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Session.Model;
+
     using UnitTest.Common.Helpers;
 
     [TestFixture]
     public class GroupComServiceTest
     {
-        private ICasinoCustomerService _casinoCustomerService;
-
         private IGroupComDataAccess _groupDataAccess;
 
         private GroupComService _groupComService;
-
+        private ILGAPIClient _lgClient;
         [SetUp]
         public void SetUp()
         {
-            _casinoCustomerService = Substitute.For<ICasinoCustomerService>();
+
+            _lgClient = Substitute.For<ILGAPIClient>();
+
             _groupDataAccess = Substitute.For<IGroupComDataAccess>();
-            _groupComService = new GroupComService(_casinoCustomerService, _groupDataAccess);
+            _groupComService = new GroupComService(_groupDataAccess, _lgClient);
         }
 
         [TearDown]
@@ -108,7 +114,7 @@
             // Assert
             Assert.Multiple(() =>
             {
-                _casinoCustomerService.DidNotReceive().UpdateCommission(Arg.Any<RNGCasinoUpdateMemberComMetaModel>());
+                _lgClient.DidNotReceive().PostAsync<bool>(Arg.Any<string>(), Arg.Any<RNGCasinoUpdateMemberComMetaModel>(), Arg.Any<string>());
                 Assert.That(result, Is.EqualTo(expectedResult));
             });
         }
@@ -131,7 +137,7 @@
             // Assert
             Assert.Multiple(() =>
             {
-                _casinoCustomerService.DidNotReceive().UpdateCommission(Arg.Any<RNGCasinoUpdateMemberComMetaModel>());
+                _lgClient.DidNotReceive().PostAsync<bool>(Arg.Any<string>(), Arg.Any<RNGCasinoUpdateMemberComMetaModel>(), Arg.Any<string>());
                 Assert.That(result, Is.EqualTo(expectedResult));
             });
         }
@@ -148,7 +154,8 @@
             _groupDataAccess.UpdateGroup(newItem, request, userSession.UserId)
                 .Returns(expectedResult);
 
-            _casinoCustomerService.UpdateCommission(Arg.Any<RNGCasinoUpdateMemberComMetaModel>()).Returns(true);
+            _lgClient.PostAsync<APIResult<bool>>(Arg.Any<string>(), Arg.Any<RNGCasinoUpdateMemberComMetaModel>(),
+                Arg.Any<string>()).Returns(new APIResult<bool> { Data = true });
 
             // Action
             var result = await _groupComService.UpdateGroup(newItem, request, userSession);
@@ -156,12 +163,12 @@
             // Assert
             Assert.Multiple(() =>
             {
-                _casinoCustomerService.Received().UpdateCommission(Arg.Is<RNGCasinoUpdateMemberComMetaModel>(
+                _lgClient.Received().PostAsync<APIResult<bool>>(Arg.Any<string>(), Arg.Is<RNGCasinoUpdateMemberComMetaModel>(
                     x => x.Comm == newItem.CSComm
                         && x.FromIp == request.Ip
                         && string.Join(",", x.CustomerId) == expectedResult.ExtendedData
                         && x.ModifyBy == userSession.UserId
-                        && x.ModifyUserName == userSession.UserName));
+                        && x.ModifyUserName == userSession.UserName), Arg.Any<string>());
                 Assert.That(result, Is.EqualTo(expectedResult));
             });
         }
@@ -176,9 +183,8 @@
 
             _groupDataAccess.UpdateGroup(newItem, request, userSession.UserId)
                 .Returns(new ResultInfo { ExtendedData = "1,2,3" });
-
-            _casinoCustomerService.UpdateCommission(Arg.Any<RNGCasinoUpdateMemberComMetaModel>()).Returns(false);
-
+            _lgClient.PostAsync<bool>(Arg.Any<string>(), Arg.Any<RNGCasinoUpdateMemberComMetaModel>(),
+    Arg.Any<string>()).Returns(false);
             var expectedResult = new ResultInfo
             {
                 Code = 1,
@@ -220,8 +226,8 @@
             // Assert
             Assert.Multiple(() =>
             {
-                _casinoCustomerService.DidNotReceive().UpdateCommission(Arg.Any<RNGCasinoUpdateMemberComMetaModel>());
-                Assert.That(result, Is.EqualTo(expectedResult));
+                _lgClient.DidNotReceive().PostAsync<bool>(Arg.Any<string>(),
+                    Arg.Any<RNGCasinoUpdateMemberComMetaModel>(), Arg.Any<string>()); Assert.That(result, Is.EqualTo(expectedResult));
             });
         }
 
@@ -249,7 +255,8 @@
             // Assert
             Assert.Multiple(() =>
             {
-                _casinoCustomerService.DidNotReceive().UpdateCommission(Arg.Any<RNGCasinoUpdateMemberComMetaModel>());
+                _lgClient.DidNotReceive().PostAsync<bool>(Arg.Any<string>(),
+                    Arg.Any<RNGCasinoUpdateMemberComMetaModel>(), Arg.Any<string>());
                 Assert.That(result, Is.EqualTo(expectedResult));
             });
         }
@@ -279,7 +286,8 @@
             // Assert
             Assert.Multiple(() =>
             {
-                _casinoCustomerService.DidNotReceive().UpdateCommission(Arg.Any<RNGCasinoUpdateMemberComMetaModel>());
+                _lgClient.DidNotReceive().PostAsync<bool>(Arg.Any<string>(),
+                    Arg.Any<RNGCasinoUpdateMemberComMetaModel>(), Arg.Any<string>());
                 Assert.That(result, Is.EqualTo(expectedResult));
             });
         }
@@ -303,20 +311,21 @@
                 metaModel.IsResetDefault)
             .Returns(expectedResult);
 
-            _casinoCustomerService.UpdateCommission(Arg.Any<RNGCasinoUpdateMemberComMetaModel>()).Returns(true);
-
+            _lgClient.PostAsync<APIResult<bool>>(Arg.Any<string>(), Arg.Any<RNGCasinoUpdateMemberComMetaModel>(),
+                Arg.Any<string>()).Returns(new APIResult<bool> { Data = true });
             // Action
             var result = await _groupComService.DeleteGroup(metaModel);
 
             // Assert
             Assert.Multiple(() =>
             {
-                _casinoCustomerService.Received().UpdateCommission(Arg.Is<RNGCasinoUpdateMemberComMetaModel>(
+
+                _lgClient.Received().PostAsync<APIResult<bool>>(Arg.Any<string>(), Arg.Is<RNGCasinoUpdateMemberComMetaModel>(
                     x => x.Comm == 0
                         && string.Join(",", x.CustomerId) == expectedResult.ExtendedData
                         && x.FromIp == metaModel.Ip
                         && x.ModifyBy == metaModel.UserId
-                        && x.ModifyUserName == metaModel.UserName));
+                        && x.ModifyUserName == metaModel.UserName), Arg.Any<string>());
                 Assert.That(result, Is.EqualTo(expectedResult));
             });
         }
@@ -339,7 +348,9 @@
                 metaModel.IsResetDefault)
             .Returns(new ResultInfo { ExtendedData = "1,2,3" });
 
-            _casinoCustomerService.UpdateCommission(Arg.Any<RNGCasinoUpdateMemberComMetaModel>()).Returns(false);
+            _lgClient.PostAsync<APIResult<bool>>(Arg.Any<string>(), Arg.Any<RNGCasinoUpdateMemberComMetaModel>(),
+                      Arg.Any<string>()).Returns(
+new APIResult<bool> { Data = false });
 
             var expectedResult = new ResultInfo { Code = 1, Message = "Having errors when calling CasinoAPI to update customer commission." };
 

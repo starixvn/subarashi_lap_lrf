@@ -43,7 +43,7 @@
                 var customer = FakeHelper.Create<CustomerInfo>();
                 CoreBetSettingService.GetCustomerInfo(metaModel.CustId, DefaultLicenseeSession.LicenseeId).Returns(customer);
 
-                _betSettingService.GetViewModel(metaModel.CustId, customer, DefaultUserSession.Language).Returns(new RngCasinoBetSettingViewModel());
+                _betSettingService.GetViewModelAsync(metaModel.CustId, customer, DefaultUserSession.Language).Returns(new RngCasinoBetSettingViewModel());
 
                 // Action
                 var result = await controller.Index(metaModel) as ViewResult;
@@ -60,7 +60,7 @@
         }
 
         [Test]
-        public void UpdateBetSetting_IsNotAllowCS_ReturnAccessDeniedResult()
+        public async Task UpdateBetSetting_IsNotAllowCS_ReturnAccessDeniedResultAsync()
         {
             using (var controller = CreateController())
             {
@@ -69,7 +69,7 @@
                     .Returns(new ProductAccess(new List<Product>()));
 
                 // Action
-                var result = controller.UpdateBetSetting(0, string.Empty) as JsonResult;
+                var result = await controller.UpdateBetSetting(0, string.Empty);
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -82,7 +82,7 @@
         }
 
         [Test]
-        public void UpdateBetSetting_IsNotSyncCasino_ReturnAccessDeniedResult()
+        public async Task UpdateBetSetting_IsNotSyncCasino_ReturnAccessDeniedResultAsync()
         {
             using (var controller = CreateController())
             {
@@ -93,7 +93,7 @@
                 CoreBetSettingService.GetCustomerInfo(0, DefaultLicenseeSession.LicenseeId).Returns(new CustomerInfo { SyncCasino = false });
 
                 // Action
-                var result = controller.UpdateBetSetting(0, string.Empty) as JsonResult;
+                var result = await controller.UpdateBetSetting(0, string.Empty).ConfigureAwait(false);
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -106,7 +106,7 @@
         }
 
         [Test]
-        public void UpdateBetSetting_WhenCallService_ReturnCorrectResultInfo()
+        public async Task UpdateBetSetting_WhenCallService_ReturnCorrectResultInfoAsync()
         {
             using (var controller = CreateController())
             {
@@ -121,13 +121,13 @@
                 controller.HttpContext.Request[Arg.Any<string>()].Returns("1");
 
                 var expectedResultInfo = new ResultInfo { Code = 0, Message = "Error" };
-                _betSettingService.UpdateSetting(
+                _betSettingService.UpdateSettingAsync(
                    Arg.Any<RngCasinoBetSettingMetaModel>(),
                    Arg.Any<bool>(),
                    Arg.Any<bool>()).Returns(expectedResultInfo);
 
                 // Action
-                var result = controller.UpdateBetSetting(0, "1") as JsonResult;
+                var result  = await controller.UpdateBetSetting(0, "1").ConfigureAwait(false);
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -140,7 +140,7 @@
         }
 
         [Test]
-        public void UpdateBetSetting_WhenThrowException_ReturnFailedResultInfo()
+        public async Task UpdateBetSetting_WhenThrowException_ReturnFailedResultInfoAsync()
         {
             using (var controller = CreateController())
             {
@@ -155,13 +155,13 @@
                 controller.HttpContext.Request[Arg.Any<string>()].Returns("1");
 
                 const string ErrorMessage = "Failed";
-                _betSettingService.When(x => x.UpdateSetting(
+                _betSettingService.When(x => x.UpdateSettingAsync(
                    Arg.Any<RngCasinoBetSettingMetaModel>(),
                    Arg.Any<bool>(),
                    Arg.Any<bool>())).Do(x => { throw new System.Exception(ErrorMessage); });
 
                 // Action
-                var result = controller.UpdateBetSetting(0, "1") as JsonResult;
+                var result = await controller.UpdateBetSetting(0, "1").ConfigureAwait(false);
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -174,7 +174,7 @@
         }
 
         [Test]
-        public void UpdateBetSetting_WhenCall_PassCorrectParam()
+        public async Task UpdateBetSetting_WhenCall_PassCorrectParamAsync()
         {
             using (var controller = CreateController())
             {
@@ -195,24 +195,21 @@
                 controller.HttpContext.Request["stake2"].Returns(Stake2);
 
                 RngCasinoBetSettingMetaModel param = null;
-                _betSettingService.UpdateSetting(
+                _betSettingService.UpdateSettingAsync(
                    Arg.Do<RngCasinoBetSettingMetaModel>(x => param = x),
                    Arg.Any<bool>(),
                    Arg.Any<bool>()).Returns(new ResultInfo { Code = 1, Message = "Error" });
 
                 // Action
-                controller.UpdateBetSetting(CustId, string.Join(",", gameTypes));
-                var game1 = param.TableParam.Rows[0];
-                var game2 = param.TableParam.Rows[1];
+                 await controller.UpdateBetSetting(CustId, string.Join(",", gameTypes)).ConfigureAwait(false);
 
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    Assert.That(game1["GameTypeId"], Is.EqualTo(gameTypes[0]));
-                    Assert.That(game2["GameTypeId"], Is.EqualTo(gameTypes[1]));
-
-                    Assert.That(game1["StakeLevelList"], Is.EqualTo(Stake1));
-                    Assert.That(game2["StakeLevelList"], Is.EqualTo(Stake2));
+                    Assert.True(param.StackLevelParam.ContainsKey(gameTypes[0].ToString()));
+                    Assert.True(param.StackLevelParam.ContainsKey(gameTypes[1].ToString()));
+                    Assert.True(param.StackLevelParam[gameTypes[0].ToString()] == Stake1);
+                    Assert.True(param.StackLevelParam[gameTypes[1].ToString()] == Stake2);
                 });
             }
         }

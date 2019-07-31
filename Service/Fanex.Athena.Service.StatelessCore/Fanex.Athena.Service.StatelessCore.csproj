@@ -32,8 +32,15 @@
     <CodeAnalysisRuleSet>Fanex.Athena.Service.StatelessCore.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\RestSharp.105.2.3\lib\net46\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,6 +50,8 @@
   <ItemGroup>
     <Compile Include="AuthorizationService.cs" />
     <Compile Include="Interfaces\IAuthorizationService.cs" />
+    <Compile Include="Interfaces\ILGAPIClient.cs" />
+    <Compile Include="LGAPIClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -59,7 +68,7 @@
       <Name>Fanex.Athena.Model.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Fanex.Athena.Service.Core\Fanex.Athena.Service.Core.csproj">
-      <Project>{fcfd7434-085b-4c93-848f-e1cbcedcc5a0}</Project>
+      <Project>{FCFD7434-085B-4C93-848F-E1CBCEDCC5A0}</Project>
       <Name>Fanex.Athena.Service.Core</Name>
     </ProjectReference>
   </ItemGroup>

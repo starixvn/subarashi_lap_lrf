@@ -125,7 +125,7 @@ namespace Fanex.Athena.Controllers.Customer
         {
             AssignMetaModelData(metaModel);
 
-            var result = await _customerListService.GetActiveCustomers(metaModel).ConfigureAwait(false);
+            var result = await _customerListService.GetActiveCustomers(metaModel);
             return new JsonResult
             {
                 Data = new
@@ -145,7 +145,7 @@ namespace Fanex.Athena.Controllers.Customer
         {
             AssignMetaModelData(metaModel);
 
-            var result = await _customerListService.GetDormantCustomers(metaModel).ConfigureAwait(false);
+            var result = await _customerListService.GetDormantCustomers(metaModel);
             return new JsonResult
             {
                 Data = new
@@ -178,7 +178,7 @@ namespace Fanex.Athena.Controllers.Customer
                 {
                     var templatePath = Server.MapPath(@"~/App_Data/Template/Customers/CustomerList.xls");
 
-                    var model = await GetCustomers(metaModel).ConfigureAwait(false);
+                    var model = await GetCustomers(metaModel);
                     var fileName = "CustomerList_" + DateTime.Now.ToString("MM-dd-yyyy");
                     var reportTitle = ViewResources.CustomerList + " - "
                         + string.Format(ViewResources.Viewin, metaModel.IsConvert ? metaModel.BaseCurrency.ToUpper(CultureInfo.CurrentCulture) : metaModel.CurrencyName);
@@ -211,7 +211,7 @@ namespace Fanex.Athena.Controllers.Customer
 
                 var templatePath = Server.MapPath(@"~/App_Data/Template/Customers/DormantCustomerList.xls");
 
-                var resultModel = await _customerListService.GetDormantCustomers(metaModel).ConfigureAwait(false);
+                var resultModel = await _customerListService.GetDormantCustomers(metaModel);
                 if (resultModel.DataList.Any())
                 {
                     var fileName = "DormantCustomerList_" + DateTime.Now.ToString("MM-dd-yyyy");
@@ -317,7 +317,7 @@ namespace Fanex.Athena.Controllers.Customer
             };
             if (!isSubsidiary && licenseeSession.IsAllowedCustomerComm)
             {
-                model.GroupCommDataList = await _groupComService.GetAll(licenseeSession.LicenseeId).ConfigureAwait(false);
+                model.GroupCommDataList = await _groupComService.GetAll(licenseeSession.LicenseeId);
                 model.CurrentGroupComm = _groupComService.GetById(metaModel.GroupCommId, licenseeSession.LicenseeId);
             }
 

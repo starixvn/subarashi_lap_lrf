@@ -94,6 +94,7 @@
     <Compile Include="DataDomain\ReportByType.cs" />
     <Compile Include="DataDomain\RNGCasinoSetting.cs" />
     <Compile Include="DataDomain\SystemConstants.cs" />
+    <Compile Include="DTO\Common\APIResult.cs" />
     <Compile Include="DTO\Common\CheckedItem.cs" />
     <Compile Include="DTO\Common\ExChangeRate.cs" />
     <Compile Include="DTO\Common\Function.cs" />

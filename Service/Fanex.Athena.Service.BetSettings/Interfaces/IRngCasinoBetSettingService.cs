@@ -14,10 +14,10 @@ namespace Fanex.Athena.Service.BetSettings.Interfaces
 
     public interface IRngCasinoBetSettingService
     {
-        RngCasinoBetSettingViewModel GetViewModel(int custId, CustomerInfo customer, string language);
+        Task<RngCasinoBetSettingViewModel> GetViewModelAsync(int custId, CustomerInfo customer, string language);
 
         Task<IResultInfo> UpdateStatusAsync(BetSettingCasinoStatusMetaModel metaModel);
 
-        IResultInfo UpdateSetting(RngCasinoBetSettingMetaModel metaModel, bool isSyncCasino, bool isDisableCasino);
+        Task<IResultInfo> UpdateSettingAsync(RngCasinoBetSettingMetaModel metaModel, bool isSyncCasino, bool isDisableCasino);
     }
 }
