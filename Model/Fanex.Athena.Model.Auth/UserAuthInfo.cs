@@ -25,7 +25,7 @@ namespace Fanex.Athena.Model.Auth
         public bool IsManageableSubsidiary { get; set; }
 
         public string OperatorId { get; set; }
-
+        public bool IsSuperAdmin { get; set; }
         /// <summary>
         /// Gets or sets Language Code.
         /// Default: en-US.
@@ -43,9 +43,9 @@ namespace Fanex.Athena.Model.Auth
 
         public bool IsInternal { get; set; }
 
-        public int[] FunctionIdList { get; set; }
+        public List<Function> FunctionList { get; set; }
 
-        public string[] PortalFunctionList { get; set; }
+        public OneAuthPermission[] PortalFunctionList { get; set; }
 
         public IDictionary<int, string> CurrencyList { get; set; }
 

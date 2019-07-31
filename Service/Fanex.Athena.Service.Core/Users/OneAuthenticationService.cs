@@ -191,7 +191,7 @@
             userSession.UserLevel = userInfo.UserLevel;
             userSession.IsManageableSubsidiary = userInfo.IsEnabledSubsidiary && userInfo.UserLevel != UserLevelType.Subsidiary;
             userSession.OperatorId = userInfo.OperatorID;
-            userSession.PortalFunctionList = GetPermissionList(tokenInfo);
+            userSession.PortalFunctionList = tokenInfo.Permissions;
             userSession.DefaultBaseCurrency = string.IsNullOrEmpty(userInfo.BaseCurrency) ? _appSettings.DefaultBaseCurrency
                 : userInfo.BaseCurrency;
         }
@@ -234,13 +234,14 @@
                 IsManageableSubsidiary = userInfo.IsEnabledSubsidiary && userInfo.UserLevel != UserLevelType.Subsidiary,
                 OperatorId = userInfo.OperatorID,
                 IsInternal = true,
-                FunctionIdList = new int[0],
-                PortalFunctionList = GetPermissionList(tokenInfo),
+                FunctionList = new List<Function>(),
+                PortalFunctionList = tokenInfo.Permissions,
                 Language = languageCode,
                 DefaultReportUrl = "LicenseeWinLossReport",
                 ApplicationMode = AppMode.Parasitic,
                 VendorID = tokenInfo.VendorID,
                 VendorIdentityID = tokenInfo.UserID,
+                IsSuperAdmin = tokenInfo.IsAdminstrator,
                 DefaultBaseCurrency = string.IsNullOrEmpty(userInfo.BaseCurrency) ? _appSettings.DefaultBaseCurrency
                 : userInfo.BaseCurrency
             };
@@ -250,27 +251,5 @@
             _sessionService.AssignSessions(userSession, licSession);
         }
 
-        private string[] GetPermissionList(OneAuthToken tokenInfo)
-        {
-            return tokenInfo.IsAdminstrator ? GetFunctionList() : tokenInfo.Permissions.Select(x => x.FunctionKey).ToArray();
-        }
-
-        /// <summary>
-        /// This function will be removed when integrating permission part with LAP.
-        /// </summary>
-        /// <returns>Return the list portal function.</returns>
-        private string[] GetFunctionList()
-        {
-            const string FunctionFilePath = "~/App_Data/PortalSystemFunction.json";
-            IList<PortalSystemFunction> result = null;
-            var temp = GetStringFromFile(FunctionFilePath);
-
-            if (!string.IsNullOrEmpty(temp))
-            {
-                result = JsonConvert.DeserializeObject<IList<PortalSystemFunction>>(temp);
-            }
-
-            return (result ?? new List<PortalSystemFunction>()).Select(x => x.FunctionKey).ToArray();
-        }
     }
 }

@@ -12,9 +12,8 @@ namespace Fanex.Athena.Service.StatelessCore.Interfaces
 
     public interface IAuthorizationService
     {
-        bool HasPermissions(IEnumerable<int> userFunctionList, params string[] permissionKeys);
-
-        bool HasPermissions(IEnumerable<string> userFunctionList, params string[] permissionKeys);
+        bool HasPermissions(IEnumerable<Function> userFunctionList, params string[] permissionKeys);
+        bool HasPermissions(OneAuthPermission[] userPortalFunctionList, params string[] permissionKeys);
 
         bool HasPermissionOnData(int licenseeId, int custId, long transId);
 

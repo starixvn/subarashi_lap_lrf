@@ -55,7 +55,7 @@ namespace Fanex.Athena.Controllers.Account
         public ActionResult EditAccount()
         {
             var userSession = SessionService.UserSession;
-            int userId = GetUserId();
+            var userId = GetUserId();
 
             if (userId > 0 && userId != userSession.UserId)
             {

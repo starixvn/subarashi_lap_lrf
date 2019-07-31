@@ -25,6 +25,7 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -35,6 +36,7 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
     <CodeAnalysisRuleSet>Fanex.Athena.Model.Core.ruleset</CodeAnalysisRuleSet>
+    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="IBCFile, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -88,7 +90,6 @@
     <Compile Include="DataDomain\OneAuthorizationErrorCode.cs" />
     <Compile Include="DataDomain\PermissionKeys.cs" />
     <Compile Include="DataDomain\FunctionNames.cs" />
-    <Compile Include="DataDomain\FunctionType.cs" />
     <Compile Include="DataDomain\LicenseeIdentity.cs" />
     <Compile Include="DataDomain\OddsType.cs" />
     <Compile Include="DataDomain\PlatformType.cs" />
@@ -104,7 +105,6 @@
     <Compile Include="DataDomain\UserLevelType.cs" />
     <Compile Include="DTO\Common\CheckedItem.cs" />
     <Compile Include="DTO\Common\ExChangeRate.cs" />
-    <Compile Include="DTO\Common\Function.cs" />
     <Compile Include="DTO\Common\IRequest.cs" />
     <Compile Include="DTO\Common\IResultInfoGeneric.cs" />
     <Compile Include="DTO\Common\IResultInfo.cs" />
@@ -159,6 +159,10 @@
     <ProjectReference Include="..\..\Resources\Fanex.Athena.Resources\Fanex.Athena.Resources.csproj">
       <Project>{17b0022c-4902-4c61-908a-5db81568dc3a}</Project>
       <Name>Fanex.Athena.Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.Athena.Model.Auth\Fanex.Athena.Model.Auth.csproj">
+      <Project>{794C0345-2DDD-4FFD-A605-BB96FBB37DE8}</Project>
+      <Name>Fanex.Athena.Model.Auth</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

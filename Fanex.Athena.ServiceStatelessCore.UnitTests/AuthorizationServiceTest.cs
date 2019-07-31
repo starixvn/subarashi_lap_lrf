@@ -1,5 +1,8 @@
-﻿using Fanex.Athena.DataAccess.Core.Users.Interfaces;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Fanex.Athena.DataAccess.Core.Users.Interfaces;
 using Fanex.Athena.Model.Auth;
+using Fanex.Athena.Model.Auth.DataDomain;
 using Fanex.Athena.Model.Auth.Enum;
 using Fanex.Athena.Service.StatelessCore;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -16,21 +19,25 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
         private IAuthorizationService _authorizationService;
 
         private IAthorizationDataAccess _authorizationDataAccess;
-        private IFunctionService _functionService;
 
         [SetUp]
         public void SetUp()
         {
             _authorizationDataAccess = Substitute.For<IAthorizationDataAccess>();
-            _functionService = Substitute.For<IFunctionService>();
-            _authorizationService = new AuthorizationService(_authorizationDataAccess, _functionService);
+            _authorizationService = new AuthorizationService(_authorizationDataAccess);
         }
 
+        [TearDown]
+        public void TearDown()
+        {
+            _authorizationDataAccess = null;
+        }
         [Test]
         public void IsAllowedEditCommission_ApplicationModeIsParasiticAndPortalFunctionListContainCorrectKey_ReturnTrue()
         {
             // Arrange
-            var functionList = new string[] { "CommissionGroupList55" };
+            var functionList = new OneAuthPermission[] {
+                new OneAuthPermission {FunctionKey="CommissionGroupList55" } };
             var userSession = new UserAuthInfo { PortalFunctionList = functionList, ApplicationMode = AppMode.Parasitic };
 
             // Action
@@ -44,7 +51,8 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
         public void IsAllowedEditCommission_ApplicationModeIsParasiticAndPortalFunctionListNotContainCorrectKey_ReturnFalse()
         {
             // Arrange
-            var functionList = new string[] { "CommissionGroupList56" };
+            var functionList = new OneAuthPermission[] {
+                new OneAuthPermission {FunctionKey=PermissionKeys.BettingTicketCenter } };
             var userSession = new UserAuthInfo { PortalFunctionList = functionList, ApplicationMode = AppMode.Parasitic };
 
             // Action
@@ -58,8 +66,13 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
         public void IsAllowedEditCommission_ApplicationModeIsNotParasiticAndFunctionIdListContainCorrectKey_ReturnTrue()
         {
             // Arrange
-            var functionIdList = new int[] { 55 };
-            var userSession = new UserAuthInfo { FunctionIdList = functionIdList, ApplicationMode = AppMode.Self };
+            var functionList = new List<Function> {
+
+                new Function {
+                    FunctionKey = PermissionKeys.CustomerInfoCommissionGroupList
+                }
+            };
+            var userSession = new UserAuthInfo { FunctionList = functionList, ApplicationMode = AppMode.Self };
 
             // Action
             var result = _authorizationService.IsAllowedEditCommission(userSession);
@@ -69,11 +82,15 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
         }
 
         [Test]
-        public void IsAllowedEditCommission_ApplicationModeIsNotParasiticAndFunctionIdListNotContainCorrectKey_ReturnFalse()
+        public void IsAllowedEditCommission_ApplicationModeIsNotParasiticAndFunctionListNotContainCorrectKey_ReturnFalse()
         {
             // Arrange
-            var functionIdList = new int[] { 56 };
-            var userSession = new UserAuthInfo { FunctionIdList = functionIdList, ApplicationMode = AppMode.Self };
+            var functionList = new List<Function> {
+
+                new Function {
+                    FunctionKey = PermissionKeys.BettingTicketCenter
+                }
+            }; var userSession = new UserAuthInfo { FunctionList = functionList, ApplicationMode = AppMode.Self };
 
             // Action
             var result = _authorizationService.IsAllowedEditCommission(userSession);
@@ -86,7 +103,8 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
         public void IsAllowedSpecialBA_ApplicationModeIsParasiticAndPortalFunctionListContainCorrectKey_ReturnTrue()
         {
             // Arrange
-            var functionList = new string[] { "SpecialBA54" };
+            var functionList = new OneAuthPermission[] {
+                new OneAuthPermission {FunctionKey= PermissionKeys.CustomerInfoSpecialBA } };
             var userSession = new UserAuthInfo { PortalFunctionList = functionList, ApplicationMode = AppMode.Parasitic };
 
             // Action
@@ -100,7 +118,9 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
         public void IsAllowedSpecialBA_ApplicationModeIsParasiticAndPortalFunctionListNotContainCorrectKey_ReturnFalse()
         {
             // Arrange
-            var functionList = new string[] { "SpecialBA55" };
+            var functionList = new OneAuthPermission[] {
+                new OneAuthPermission {FunctionKey= PermissionKeys.BettingTicketCenter } };
+
             var userSession = new UserAuthInfo { PortalFunctionList = functionList, ApplicationMode = AppMode.Parasitic };
 
             // Action
@@ -111,11 +131,16 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
         }
 
         [Test]
-        public void IsAllowedSpecialBA_ApplicationModeIsNotParasiticAndFunctionIdListContainCorrectKey_ReturnTrue()
+        public void IsAllowedSpecialBA_ApplicationModeIsNotParasiticAndFunctionListContainCorrectKey_ReturnTrue()
         {
             // Arrange
-            var functionIdList = new int[] { 54 };
-            var userSession = new UserAuthInfo { FunctionIdList = functionIdList, ApplicationMode = AppMode.Self };
+            var functionList = new List<Function> {
+
+                new Function {
+                    FunctionKey = PermissionKeys.CustomerInfoSpecialBA
+                }
+            };
+            var userSession = new UserAuthInfo { FunctionList = functionList, ApplicationMode = AppMode.Self };
 
             // Action
             var result = _authorizationService.IsAllowedSpecialBA(userSession);
@@ -128,14 +153,91 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
         public void IsAllowedSpecialBA_ApplicationModeIsNotParasiticAndFunctionIdListNotContainCorrectKey_ReturnFalse()
         {
             // Arrange
-            var functionIdList = new int[] { 55 };
-            var userSession = new UserAuthInfo { FunctionIdList = functionIdList, ApplicationMode = AppMode.Self };
+            var functionList = new List<Function> {
+
+                new Function {
+                    FunctionKey = PermissionKeys.CustomerInfoCommissionGroupList
+                }
+            };
+            var userSession = new UserAuthInfo { FunctionList = functionList, ApplicationMode = AppMode.Self };
 
             // Action
             var result = _authorizationService.IsAllowedSpecialBA(userSession);
 
             // Assert
             Assert.That(result, Is.False);
+        }
+
+        [TestCase(-1, 0, 0, false)]
+        [TestCase(0, 0, 0, false)]
+        [TestCase(1, 0, 0, true)]
+        [TestCase(1, 0, 0, true)]
+        [TestCase(1, 1, 1, true)]
+
+        public void HasPermissionOnData_WhenCall_ReturnCorrectResult(int licenseeId, int custId, long transId, bool expectedResult)
+        {
+            //Arrange 
+            _authorizationDataAccess.IsCustomerBelonging(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<long>()).Returns(true);
+
+            //Action
+
+            var result = _authorizationService.HasPermissionOnData(licenseeId, custId, transId);
+
+            //Assert
+
+            Assert.AreEqual(expectedResult, result);
+
+        }
+
+        [TestCase("alex", "alex2", "any,any2", false)]
+        [TestCase("alex", "any2", "alex,any2", true)]
+        [TestCase("alex", "any2", "alex", true)]
+        public void HasPermissions_WhenCallWithPortalFunctionKey_ReturnCorrectResult(string permissionKey1, string permissinKey2, string userPermissionKey, bool expectedResult)
+        {
+            //Arrange
+            var userFunctionList = userPermissionKey.Split(',').Select(x => new OneAuthPermission { FunctionKey = x }).ToArray();
+
+            //Action
+
+            var result = _authorizationService.HasPermissions(userPortalFunctionList: userFunctionList, permissionKey1, permissinKey2);
+
+            //Assert
+
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestCase("alex", "alex2", "any,any2", false)]
+        [TestCase("alex", "any2", "alex,any2", true)]
+        [TestCase("alex", "any2", "alex", true)]
+        public void HasPermissions_WhenCallWithPortalSubFunctionKey_ReturnCorrectResult(string permissionKey1, string permissinKey2, string userPermissionKey, bool expectedResult)
+        {
+            //Arrange
+            var userFunctionList = new OneAuthPermission[] { new OneAuthPermission { SubFunctionKeys = userPermissionKey.Split(',') } };
+
+            //Action
+
+            var result = _authorizationService.HasPermissions(userPortalFunctionList: userFunctionList, permissionKey1, permissinKey2);
+
+            //Assert
+
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestCase("alex", "alex2", "any,any2", false)]
+        [TestCase("alex", "any2", "alex,any2", true)]
+        [TestCase("alex", "any2", "alex", true)]
+        public void HasPermissions_WhenCallWithFunctionKey_ReturnCorrectResult(string permissionKey1, string permissinKey2, string userPermissionKey, bool expectedResult)
+        {
+            //Arrange
+            var userFunctionList = userPermissionKey.Split(',').Select(x => new Function { FunctionKey = x }).ToArray();
+
+            //Action
+
+            var result = _authorizationService.HasPermissions(userFunctionList, permissionKey1, permissinKey2);
+
+            //Assert
+
+            Assert.AreEqual(expectedResult, result);
         }
     }
 }

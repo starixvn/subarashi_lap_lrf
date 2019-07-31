@@ -4,7 +4,7 @@
     using System.Linq;
     using System.Text;
     using System.Xml.Linq;
-
+    using Fanex.Athena.Model.Auth;
     using Model.Core.DTO.Common;
     using Model.Core.DTO.Configuration;
 
@@ -369,7 +369,8 @@
 
         private void SetUpGetAllowedProductsFromCache(string xmlContent)
         {
-            _cache.Get<IEnumerable<XElement>>(FunctionAllowedProductsKey).Returns(XDocument.Parse(xmlContent).Descendants(nameof(Function)));
+            _cache.Get<IEnumerable<XElement>>(FunctionAllowedProductsKey).Returns(XDocument.Parse(xmlContent)
+                .Descendants(nameof(Function)));
             _cache.When(x => x.Set(Arg.Any<string>(), Arg.Any<IEnumerable<XElement>>())).DoNotCallBase();
         }
 

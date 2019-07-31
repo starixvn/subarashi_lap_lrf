@@ -26,7 +26,7 @@
             Language = "lan",
             UserName = "alex.vn",
             OnUserId = 999,
-            FunctionIdList = new int[0],
+            FunctionList = new List<Function>(),
             DefaultBaseCurrency = "EUR",
             CurrencyAgentList = new Dictionary<int, int[]>()
         };

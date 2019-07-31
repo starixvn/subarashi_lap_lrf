@@ -5,7 +5,7 @@
 
     using DataAccess.Core.Common.Interfaces;
 
-    using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Service.StatelessCore;
 
     using NSubstitute;

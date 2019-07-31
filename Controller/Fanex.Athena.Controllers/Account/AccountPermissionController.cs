@@ -80,7 +80,7 @@ namespace Fanex.Athena.Controllers.Account
         [HttpGet]
         public ActionResult EditPermission()
         {
-            int userId = GetUserId();
+            var userId = GetUserId();
             if (userId > 0 && ValidatePermissionRestriction(userId))
             {
                 var licenseeSession = SessionService.LicenseeSession;

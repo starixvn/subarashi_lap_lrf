@@ -5,7 +5,8 @@
     using System.Linq;
 
     using DataAccess.Core.Users.Interfaces;
-
+    using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Model.Core.DTO.Common;
 
     using NSubstitute;
@@ -29,7 +30,7 @@
         {
             _authorizationDataAccess = Substitute.For<IAthorizationDataAccess>();
             _functionService = Substitute.For<IFunctionService>();
-            _authorizationService = new AuthorizationService(_authorizationDataAccess, _functionService);
+            _authorizationService = new AuthorizationService(_authorizationDataAccess);
         }
 
         [OneTimeTearDown]
@@ -45,7 +46,7 @@
         {
             // Arrange
             var allFunctions = new List<Function>();
-            var userFunctions = FakeHelper.CreateMany<int>(10);
+            var userFunctions = FakeHelper.CreateMany<Function>(10);
             var permissionKey = FakeHelper.Create<string>();
 
             _functionService.Functions.Returns(allFunctions);
@@ -62,7 +63,7 @@
         {
             // Arrange
             var allFunctions = new List<Function> { new Function { FunctionKey = "RealKey" } };
-            var userFunctions = FakeHelper.CreateMany<int>(10);
+            var userFunctions = FakeHelper.CreateMany<Function>(10);
             var permissionKey = "FakeKey";
 
             _functionService.Functions.Returns(allFunctions);
@@ -74,32 +75,20 @@
             Assert.That(result, Is.False);
         }
 
+
         [Test]
-        public void HasPermissions_WhenCallWithFunctionIds_UserFunctionIsNotInAllFunctions_ReturnFalse()
+        public void HasPermissions_WhenCallWithFunction_ValidFunction_ReturnTrue()
         {
             // Arrange
             var permissionKey = "Key";
-            var userFunctions = new[] { 1, 2, 3 };
-            var allFunctions = new List<Function> { new Function { FunctionKey = permissionKey, FunctionId = 4 } };
-
+            var allFunctions = new List<Function> {
+                new Function {
+                    FunctionKey = permissionKey, FunctionId = 4
+                },
+                new Function { FunctionKey = "Any", FunctionId = 5 }
+            };
             _functionService.Functions.Returns(allFunctions);
-
-            // Action
-            var result = _authorizationService.HasPermissions(userFunctions, permissionKey);
-
-            // Assert
-            Assert.That(result, Is.False);
-        }
-
-        [Test]
-        public void HasPermissions_WhenCallWithFunctionIds_ValidFunction_ReturnTrue()
-        {
-            // Arrange
-            var permissionKey = "Key";
-            var userFunctions = FakeHelper.CreateMany<int>(10);
-            var allFunctions = new List<Function> { new Function { FunctionKey = permissionKey, FunctionId = userFunctions.ElementAt(0) } };
-
-            _functionService.Functions.Returns(allFunctions);
+            var userFunctions = allFunctions.Where(x => x.FunctionKey == permissionKey);
 
             // Action
             var result = _authorizationService.HasPermissions(userFunctions, permissionKey);
@@ -112,7 +101,12 @@
         public void HasPermissions_WhenCallWithFunctionKey_UserFunctionsDoNotHavePermision_ReturnFalse()
         {
             // Arrange
-            var userFunctions = new List<string> { "FakeFunction1", "FakeFunction2" };
+            var userFunctions = new List<Function> {
+                new Function {
+                    FunctionKey = "1Any", FunctionId = 4
+                },
+                new Function { FunctionKey = "Any", FunctionId = 5 }
+            };
             var permissionKeys = new[] { "RealFunction" };
 
             // Action
@@ -126,8 +120,14 @@
         public void HasPermissions_WhenCallWithFunctionKey_UserFunctionsHavePermision_ReturnTrue()
         {
             // Arrange
-            var userFunctions = new List<string> { "Function1", "Function2" };
-            var permissionKeys = new[] { "RealFunction", userFunctions[0] };
+            var userFunctions = new List<Function> {
+                new Function {
+                    FunctionKey = "1Any", FunctionId = 4
+                },
+                new Function { FunctionKey = "Any", FunctionId = 5 }
+            };
+
+            var permissionKeys = new[] { "RealFunction", userFunctions[0].FunctionKey };
 
             // Action
             var result = _authorizationService.HasPermissions(userFunctions, permissionKeys);

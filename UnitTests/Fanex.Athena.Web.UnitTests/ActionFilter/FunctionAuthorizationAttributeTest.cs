@@ -45,8 +45,8 @@ namespace Fanex.Athena.Web.UnitTests.ActionFilter
             // Arrange
             _sessionStorage.LicenseeAuthInfo.Returns(new LicenseeAuthInfo());
             _sessionStorage.UserAuthInfo.Returns(new UserAuthInfo { ApplicationMode = appMode });
-            _authorizationService.HasPermissions(Arg.Any<IEnumerable<int>>(), Arg.Any<string[]>()).Returns(true);
-            _authorizationService.HasPermissions(Arg.Any<IEnumerable<string>>(), Arg.Any<string[]>()).Returns(true);
+            _authorizationService.HasPermissions(Arg.Any<IEnumerable<Function>>(), Arg.Any<string[]>()).Returns(true);
+            _authorizationService.HasPermissions(Arg.Any<OneAuthPermission[]>(), Arg.Any<string[]>()).Returns(true);
 
             // Action
             _attribute.OnActionExecuting(_filterContext);

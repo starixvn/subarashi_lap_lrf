@@ -63,18 +63,11 @@ namespace Fanex.Athena.Api.Base.Attributes
                     return UnauthorizeAccessHandlerAsync(actionContext, ViewResources.AccessDeniedMsg);
                 }
 
-                var allowedFunctionKeyList = GetAllowedFunctionKeyList();
-                if (allowedFunctionKeyList != null && allowedFunctionKeyList.Any())
-                {
-                    var hasPermission = token.Permissions.Any(i =>
-                    allowedFunctionKeyList.Contains(i.FunctionKey)
-                    || (i.SubFunctionKeys != null && i.SubFunctionKeys.Intersect(allowedFunctionKeyList).Any()));
 
-                    if (!hasPermission)
-                    {
-                        LogInfo(logger, actionContext.Request, "Acces Denied");
-                        return UnauthorizeAccessHandlerAsync(actionContext, ViewResources.AccessDeniedMsg);
-                    }
+                if (!HasPermission(token))
+                {
+                    LogInfo(logger, actionContext.Request, "Acces Denied");
+                    return UnauthorizeAccessHandlerAsync(actionContext, ViewResources.AccessDeniedMsg);
                 }
 
                 actionContext.ActionArguments["licenseeid"] = licensee.Id;
@@ -90,6 +83,20 @@ namespace Fanex.Athena.Api.Base.Attributes
             }
         }
 
+        private bool HasPermission(OneAuthToken token)
+        {
+            var allowedFunctionKeyList = GetAllowedFunctionKeyList();
+            if (allowedFunctionKeyList != null && allowedFunctionKeyList.Any())
+            {
+                var hasPermission = token.Permissions.Any(i =>
+                allowedFunctionKeyList.Contains(i.FunctionKey)
+                || (i.SubFunctionKeys != null && i.SubFunctionKeys.Intersect(allowedFunctionKeyList).Any()));
+
+                return hasPermission;
+            }
+            return true;
+
+        }
         private IEnumerable<string> GetAllowedFunctionKeyList()
         {
             var functionKeys = AllowFunctionKeys?.Trim();
@@ -113,8 +120,7 @@ namespace Fanex.Athena.Api.Base.Attributes
 
         private static string GetAuthToken(HttpRequestMessage request)
         {
-            IEnumerable<string> headerValues;
-            if (request.Headers.TryGetValues(KeyName, out headerValues))
+            if (request.Headers.TryGetValues(KeyName, out IEnumerable<string> headerValues))
             {
                 return headerValues.FirstOrDefault();
             }

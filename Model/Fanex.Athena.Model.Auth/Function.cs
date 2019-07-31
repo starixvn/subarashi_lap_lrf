@@ -4,10 +4,11 @@
 // </copyright>
 // --------------------------------------------------------------------------
 
-namespace Fanex.Athena.Model.Core.DTO.Common
+namespace Fanex.Athena.Model.Auth
 {
     using System;
-    using Resources;
+    using System.Resources;
+    using Fanex.Athena.Resources;
 
     /// <summary>
     /// Function class.

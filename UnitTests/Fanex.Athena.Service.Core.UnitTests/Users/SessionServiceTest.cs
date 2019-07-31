@@ -87,6 +87,7 @@
                 new Licensee { Id = 2, Name = "12bet" },
             };
             _licenseeDataAccess.GetByUser(DefaultUserId).Returns(licensees);
+            _functionService.GetUserFunctionList(Arg.Any<int>(), Arg.Any<int>()).Returns(new List<Function>());
             const int OldLicenseeId = 1;
             const int NewLicenseeId = 2;
             CreateDefaultNewSession(OldLicenseeId);
@@ -136,7 +137,8 @@
                 new Licensee { Id = 1, Name = "spondemo" },
                 new Licensee { Id = 2, Name = "12bet" },
             };
-            var functions = new List<Function> { new Function { FunctionId = 42 } };
+            var functions = new List<Function> { new Function { FunctionId = 42,
+                FunctionKey = PermissionKeys.ReportLicenseeWinLoss } };
             _licenseeDataAccess.GetByUser(DefaultUserId).Returns(licensees);
             const int OldLicenseeId = 1;
             const int NewLicenseeId = 2;
@@ -159,7 +161,12 @@
                 new Licensee { Id = 1, Name = "spondemo" },
                 new Licensee { Id = 2, Name = "12bet" },
             };
-            var functions = new List<Function> { new Function { FunctionId = 1, ParentId = 1, IsActive = true, Url = "TestUrl" } };
+            var functions = new List<Function> { new Function {
+                FunctionId = 1, ParentId = 1,
+                IsActive = true,
+                Url = "TestUrl",
+            FunctionKey= PermissionKeys.BettingTicketCenter} };
+
             _licenseeDataAccess.GetByUser(DefaultUserId).Returns(licensees);
             const int OldLicenseeId = 1;
             const int NewLicenseeId = 2;
@@ -182,7 +189,9 @@
                 new Licensee { Id = 1, Name = "spondemo" },
                 new Licensee { Id = 2, Name = "12bet" },
             };
-            var functions = new List<Function> { new Function { FunctionId = 1, ParentId = 1, IsActive = false, Url = "TestUrl" } };
+            var functions = new List<Function> { new Function { FunctionId = 1,
+                ParentId = 1, IsActive = false, Url = "TestUrl",
+                FunctionKey =PermissionKeys.ReportLicenseeWinLoss } };
             _licenseeDataAccess.GetByUser(DefaultUserId).Returns(licensees);
             const int OldLicenseeId = 1;
             const int NewLicenseeId = 2;
@@ -205,7 +214,10 @@
                 new Licensee { Id = 1, Name = "spondemo" },
                 new Licensee { Id = 2, Name = "12bet" },
             };
-            var functions = new List<Function> { new Function { FunctionId = 1, ParentId = 0, IsActive = true, Url = "TestUrl" } };
+            var functions = new List<Function> { new Function {
+                FunctionId = 1, ParentId = 0, IsActive = true, Url = "TestUrl",
+                FunctionKey=PermissionKeys.BettingTicketCenter
+            } };
             _licenseeDataAccess.GetByUser(DefaultUserId).Returns(licensees);
             const int OldLicenseeId = 1;
             const int NewLicenseeId = 2;

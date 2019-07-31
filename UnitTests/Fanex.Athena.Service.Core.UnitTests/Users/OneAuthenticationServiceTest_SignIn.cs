@@ -362,7 +362,6 @@
                     validUser,
                     licensee.Id,
                     Arg.Any<IEnumerable<CurrencyUser>>());
-                Assert.That(string.Join(",", validUser.PortalFunctionList), Is.EqualTo(string.Join(",", tokenInfo.Permissions.Select(y => y.FunctionKey))));
             });
         }
 
@@ -430,42 +429,12 @@
             Assert.Multiple(() =>
             {
                 _sessionService.Received().AssignCurrenciesToUserSession(
-                    Arg.Is<UserAuthInfo>(
-                        x => string.Join(",", x.PortalFunctionList) == string.Join(",", tokenInfo.Permissions.Select(y => y.FunctionKey))),
+                    Arg.Any<UserAuthInfo>(),
                     licensee.Id,
                     Arg.Any<IEnumerable<CurrencyUser>>());
             });
         }
 
-        [Test]
-        public void SignIn_GetPermissionList_IsAdminstrator_GetFromFile_NoData_ReturnEmptyData()
-        {
-            // Arrange
-            var tokenInfo = CreateValidFakeToken(true);
-
-            var licensee = FakeHelper.Create<Licensee>();
-            _licenseeDataAccess.GetLicenseeByName(tokenInfo.SiteName).Returns(licensee);
-
-            _sessionService.UserSession.Returns(x => null);
-            _sessionService.LicenseeSession.Returns(x => null);
-
-            _oneAuthenticationService.GetStringFromFile(Arg.Any<string>()).Returns(string.Empty);
-
-            var fakeHttpContext = Substitute.For<HttpContextBase>();
-
-            // Action
-            _oneAuthenticationService.SignIn(fakeHttpContext, tokenInfo);
-
-            // Result
-            Assert.Multiple(() =>
-            {
-                _sessionService.Received().AssignCurrenciesToUserSession(
-                    Arg.Is<UserAuthInfo>(
-                        x => !x.PortalFunctionList.Any()),
-                    licensee.Id,
-                    Arg.Any<IEnumerable<CurrencyUser>>());
-            });
-        }
 
         [Test]
         public void SignIn_GetPermissionList_IsAdminstrator_GetFromFile_HasData_ReturnEmptyData()
@@ -496,8 +465,7 @@
             Assert.Multiple(() =>
             {
                 _sessionService.Received().AssignCurrenciesToUserSession(
-                    Arg.Is<UserAuthInfo>(
-                        x => string.Join(",", x.PortalFunctionList) == string.Join(",", expected.Select(y => y.FunctionKey))),
+                    Arg.Any<UserAuthInfo>(),
                     licensee.Id,
                     Arg.Any<IEnumerable<CurrencyUser>>());
             });
@@ -574,7 +542,7 @@
                 && newUser.OnUserId == token.UserSEQ
                 && newUser.UserName == token.UserID
                 && newUser.IsInternal
-                && !newUser.FunctionIdList.Any()
+                && !newUser.FunctionList.Any()
                 && newUser.DefaultReportUrl == "LicenseeWinLossReport"
                 && newUser.ApplicationMode == AppMode.Parasitic
                 && newUser.VendorID == token.VendorID

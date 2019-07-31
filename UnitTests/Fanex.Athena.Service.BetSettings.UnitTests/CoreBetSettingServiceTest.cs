@@ -69,7 +69,11 @@
             {
                 ApplicationMode = AppMode.Parasitic,
                 UserId = 234234,
-                PortalFunctionList = new[] { "sdf", "cxv", "sdfsdf" }
+                PortalFunctionList = new OneAuthPermission[] {
+                    new OneAuthPermission {FunctionKey="sdf" } ,
+                                        new OneAuthPermission {FunctionKey="cxv" } ,
+                                        new OneAuthPermission {FunctionKey="sdfsdf" }
+ }
             };
 
             // Action
@@ -87,14 +91,14 @@
             {
                 ApplicationMode = AppMode.Self,
                 UserId = 324234,
-                FunctionIdList = new[] { 23, 45, 67 }
+                FunctionList = new List<Function> { new Function { FunctionKey = PermissionKeys.CustomerInfoEditBetSetting } }
             };
 
             // Action
             _coreBetSettingService.IsBetSettingEditable(userSession);
 
             // Assert
-            _authorizationService.Received(1).HasPermissions(userSession.FunctionIdList, PermissionKeys.CustomerInfoEditBetSetting);
+            _authorizationService.Received(1).HasPermissions(userSession.FunctionList, PermissionKeys.CustomerInfoEditBetSetting);
         }
 
         [Test]

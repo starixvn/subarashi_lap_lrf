@@ -29,8 +29,6 @@ namespace Fanex.Athena.Service.Core.Users
 
     public class SessionService : ISessionService
     {
-        private const int ReportLicenseeWinLossId = 27;
-
         private const string DefaultReportPath = "LicenseeWinLossReport";
 
         private const string UserSessionKey = "UserSessionKey";
@@ -94,8 +92,7 @@ namespace Fanex.Athena.Service.Core.Users
             string language = "en-US")
         {
             var licenseeList = _licenseeDataAccess.GetByUser(userId);
-            var functionList = _functionService.GetUserFunctionList(licenseeId, userId);
-            var functionIdList = functionList.Select(f => f.FunctionId).ToArray();
+            var functionList = _functionService.GetUserFunctionList(licenseeId, userId).ToList();
             var userSession = new UserAuthInfo
             {
                 UserLevel = UserLevelType.Licensee,
@@ -104,9 +101,9 @@ namespace Fanex.Athena.Service.Core.Users
                 OnUserId = onuserId,
                 UserName = userName,
                 IsInternal = isInternal,
-                FunctionIdList = functionIdList,
+                FunctionList = functionList,
                 Language = language,
-                DefaultReportUrl = GetDefaultReportUrl(functionIdList, functionList),
+                DefaultReportUrl = GetDefaultReportUrl(functionList),
                 ApplicationMode = AppMode.Self,
                 DefaultBaseCurrency = _appSettings.DefaultBaseCurrency
             };
@@ -126,11 +123,10 @@ namespace Fanex.Athena.Service.Core.Users
             if (licenseeId > 0)
             {
                 var selectedLicensee = licenseeList.SingleOrDefault(i => i.Id == licenseeId);
-                var functionList = _functionService.GetUserFunctionList(licenseeId, userSession.UserId);
-                var functionIdList = functionList.Select(f => f.FunctionId).ToArray();
+                var functionList = _functionService.GetUserFunctionList(licenseeId, userSession.UserId).ToList();
 
-                userSession.FunctionIdList = functionIdList;
-                userSession.DefaultReportUrl = GetDefaultReportUrl(functionIdList, functionList);
+                userSession.FunctionList = functionList;
+                userSession.DefaultReportUrl = GetDefaultReportUrl(functionList);
 
                 AssignCurrenciesToUserSession(userSession, licenseeId);
 
@@ -154,9 +150,9 @@ namespace Fanex.Athena.Service.Core.Users
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Sonar Code Smell", "S3995:UriReturnValuesShouldNotBeStrings",
            Justification = "Reviewed. Suppression is OK here.")]
-        private static string GetDefaultReportUrl(IEnumerable<int> functionIdList, IEnumerable<Function> functionList)
+        private static string GetDefaultReportUrl(IEnumerable<Function> functionList)
         {
-            if (!functionIdList.Contains(ReportLicenseeWinLossId))
+            if (!functionList.Any(x => x.FunctionKey.Equals(PermissionKeys.ReportLicenseeWinLoss)))
             {
                 var firstFunction = functionList.FirstOrDefault(x => x.ParentId > 0 && x.IsActive);
                 if (firstFunction != null)

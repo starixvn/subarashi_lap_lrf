@@ -5,7 +5,7 @@
     using System.Threading.Tasks;
 
     using DataAccess.Core.Common.Interfaces;
-
+    using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Service.StatelessCore;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.UnitTest.Common.Helpers;

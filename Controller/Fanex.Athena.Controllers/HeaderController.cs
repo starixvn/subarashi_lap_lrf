@@ -54,9 +54,9 @@ namespace Fanex.Athena.Controllers
                 SupportedLanguageList = Util.SupportedLanguages,
                 UserName = userSession.UserName,
                 CurrentLicenseeId = licensee.LicenseeId,
-                IsAllowedManagementMember = userSession.FunctionIdList.Contains((int)FunctionType.CustomerList),
+                IsAllowedManagementMember = userSession.FunctionList.Any(x => x.FunctionKey == PermissionKeys.CustomerInfoCustomerList),
                 IsFakeLicensee = IsFakeLicensee(licensee.LicenseeName),
-                IsAllowedNotification = userSession.FunctionIdList.Contains((int)FunctionType.ResultAmendment_Recalculation)
+                IsAllowedNotification = userSession.FunctionList.Any(x => x.FunctionKey == PermissionKeys.ResultAmendmentNotificationReport)
             };
             return View("~/Views/Desktop/Header/Index.cshtml", viewModel);
         }
