@@ -140,22 +140,6 @@
         }
 
         [Test]
-        public async Task GetViewModelAsync_HaveNoPermission_ReturnNull()
-        {
-            // Arrange
-            var licenseeName = FakeHelper.Create<string>();
-            var custId = FakeHelper.Create<int>();
-
-            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), custId, 0).Returns(false);
-
-            // Action
-            var result = await _service.GetViewModelAsync(custId, licenseeName);
-
-            // Assert
-            Assert.That(result, Is.EqualTo(null));
-        }
-
-        [Test]
         public async Task UpdateAgCasinoBetSettingAsync_WhenCall_ReturnDataFromDataAccess()
         {
             // Arrange

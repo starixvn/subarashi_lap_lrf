@@ -10,8 +10,7 @@
 
     public class AuthorizationDataAccessTest : BaseDataAccessHelperTest<AuthorizationDataAccess>
     {
-        private const string UspName = "Lrf_CustomerSelCheckBelonging";
-        private const int LicenseeId = 1;
+        private const string UspName = "Lrf_CheckBelonging_GetAgentInfo";
         private const int CustId = 2;
         private const long TransId = 3;
 
@@ -36,18 +35,5 @@
             });
         }
 
-        [TestCase(true)]
-        [TestCase(false)]
-        public void IsCustomerBelonging_WhenCall_ValueReturnedCorrectly(bool expected)
-        {
-            // Arrange
-            ObjectDb.GetParameterValue("status").Returns(expected);
-
-            // Action
-            var result = DataAccess.IsCustomerBelonging(CustId, TransId);
-
-            // Assert
-            Assert.That(result, Is.EqualTo(expected));
-        }
     }
 }
