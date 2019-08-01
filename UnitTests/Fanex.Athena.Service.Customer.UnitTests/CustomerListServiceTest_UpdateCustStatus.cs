@@ -169,25 +169,6 @@
         }
 
         [Test]
-        public async Task UpdateCustSuspend_HaveNoPermission_ReturnCorrectResultInfoAsync()
-        {
-            // Arrange
-            var metaModel = FakeHelper.Create<CustomerStatusMetaModel>();
-
-            var expectedResult = new ResultInfo { Code = 1, Message = ViewResources.UpdateSpecialLevelMsg };
-
-            // Action
-            var result = await _customerListService.UpdateCustSuspendAsync(metaModel, string.Empty).ConfigureAwait(false);
-
-            // Assert
-            Assert.Multiple(() =>
-            {
-                Assert.That(result.Code, Is.EqualTo(expectedResult.Code));
-                Assert.That(result.Message, Is.EqualTo(expectedResult.Message));
-            });
-        }
-
-        [Test]
         public async Task UpdateCustSuspend_NotSyncCasinoInCustomerInfo_NoUpdateCasinoCustomerAsync()
         {
             // Arrange
