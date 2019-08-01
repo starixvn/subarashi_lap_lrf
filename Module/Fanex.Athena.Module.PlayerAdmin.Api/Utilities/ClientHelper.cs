@@ -18,15 +18,6 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Utilities
                 }
             }
 
-            if (request.Properties.ContainsKey(RemoteEndpointMessage))
-            {
-                dynamic remoteEndpoint = request.Properties[RemoteEndpointMessage];
-                if (remoteEndpoint != null)
-                {
-                    return remoteEndpoint.Address;
-                }
-            }
-
             return string.Empty;
         }
     }

@@ -48,7 +48,7 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests.Utility
             };
         }
 
-        public static string CreateDefaultAgentListXml()
+        private static string CreateDefaultAgentListXml()
         {
             var xml1 = "<Agent AgentId=\"1\" Currency=\"1\"/><Agent AgentId=\"2\" Currency=\"1\"/>";
             var xml2 = "<Agent AgentId=\"8\" Currency=\"2\"/><Agent AgentId=\"9\" Currency=\"2\"/>";

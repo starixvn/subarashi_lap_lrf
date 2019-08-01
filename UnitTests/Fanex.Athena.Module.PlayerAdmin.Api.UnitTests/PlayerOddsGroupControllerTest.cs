@@ -6,6 +6,7 @@ using Fanex.Logging;
 using NSubstitute;
 using NUnit.Framework;
 using System;
+using System.Net.Http;
 
 namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests
 {
@@ -50,7 +51,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests
                     Assert.That(metaModel.LicenseeId, Is.EqualTo(ExternalApiHelper.DefaultLicenseeId));
                     Assert.That(metaModel.UserId, Is.EqualTo(ExternalApiHelper.DefaultUserId));
                     Assert.That(metaModel.Language, Is.EqualTo("en-US"));
-                    Assert.That(metaModel.Ip, Is.EqualTo(string.Empty));
+                    Assert.That(metaModel.Ip, Is.EqualTo(ExternalApiHelper.DefaultClientIp));
                 });
             }
         }
@@ -102,10 +103,15 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests
         private PlayerOddsGroupController CreateController()
         {
             var actionContext = ExternalApiHelper.CreateMockActionContext();
+            var httpContext = ExternalApiHelper.CreateHttpContext();
+
+            var request = new HttpRequestMessage();
+            request.Properties["MS_HttpContext"] = httpContext;
 
             return new PlayerOddsGroupController(_playerOddsGroupService, _logger)
             {
-                ActionContext = actionContext
+                ActionContext = actionContext,
+                Request = request
             };
         }
 

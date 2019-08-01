@@ -1,4 +1,6 @@
 ﻿using Fanex.Athena.Model.Auth;
+using NSubstitute;
+using System.Web;
 using System.Web.Http.Controllers;
 
 namespace Fanex.Athena.UnitTest.Common.Helpers
@@ -11,6 +13,8 @@ namespace Fanex.Athena.UnitTest.Common.Helpers
         public const string DefaultSiteName = "sitenametest";
         public const string DefaultLanguage = "en";
         public const string DefaultCurrencyIdList = "1";
+
+        public const string DefaultClientIp = "127.0.0.1";
 
         public static HttpActionContext CreateMockActionContext(OneAuthCurrency[] authCurrencyList = null)
         {
@@ -28,6 +32,17 @@ namespace Fanex.Athena.UnitTest.Common.Helpers
                     { "currencyAgentList", authCurrencyList ?? CreateAuthCurrencyList() }
                 }
             };
+        }
+
+        public static HttpContextBase CreateHttpContext()
+        {
+            var httpRequest = Substitute.For<HttpRequestBase>();
+            httpRequest.UserHostAddress.Returns(DefaultClientIp);
+
+            var httpContext = Substitute.For<HttpContextBase>();
+            httpContext.Request.Returns(httpRequest);
+
+            return httpContext;
         }
 
         public static OneAuthCurrency[] CreateAuthCurrencyList()
