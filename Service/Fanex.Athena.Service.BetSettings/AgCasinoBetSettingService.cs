@@ -82,7 +82,12 @@ namespace Fanex.Athena.Service.BetSettings
                 return ErrorResult("Invalid parameter. AG Casino is null");
             }
 
-             await _betSettingDataAccess.GetBetSettingAsync(setting.CustId).ConfigureAwait(false);
+            var agCasinoSetting = await _betSettingDataAccess.GetBetSettingAsync(setting.CustId).ConfigureAwait(false);
+
+            if (!agCasinoSetting.IsEnabled)
+            {
+                return ErrorResult(ViewResources.AccessDeniedMsg);
+            }
 
             return await _betSettingDataAccess.UpdateBetSettingAsync(setting, group);
         }

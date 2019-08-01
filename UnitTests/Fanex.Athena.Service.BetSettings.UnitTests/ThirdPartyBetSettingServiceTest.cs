@@ -28,14 +28,14 @@
         private IThirdPartyBetSettingDataAccess _dataAccess;
         private IThirdPartyBetSettingService _service;
 
-        [OneTimeSetUp]
+        [SetUp]
         public void SetUp()
         {
             _dataAccess = Substitute.For<IThirdPartyBetSettingDataAccess>();
             _service = new ThirdPartyBetSettingService( _dataAccess);
         }
 
-        [OneTimeTearDown]
+        [TearDown]
         public void TearDown()
         {
             _dataAccess = null;
@@ -82,20 +82,6 @@
 
             // Assert
             await _dataAccess.Received(1).UpdateStatusAsync(ProductId, UserId, CustId, Language, "ip", true);
-        }
-
-        [Test]
-        public async Task UpdateStatusAsync_HaveNoPermission_ReturnCorrectErrorResult()
-        {
-            // Arrange
-            const int ProductId = 100;
-
-            // Action
-            var result = await _service.UpdateStatusAsync(ProductId, UserId, CustId, Language, "ip", true);
-
-            // Assert
-            Assert.That(result.Code, Is.EqualTo(1));
-            Assert.That(result.Message, Is.EqualTo(ViewResources.AccessDeniedMsg));
         }
 
         [Test]

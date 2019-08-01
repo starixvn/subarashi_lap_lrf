@@ -203,34 +203,6 @@
         }
 
         [Test]
-        public async Task UpdateAgCasinoBetSettingAsync_HaveNoPermission_ReturnCorrectErrorResult()
-        {
-            // Arrange
-            var expectedResult = new ResultInfo
-            {
-                Code = 1,
-                Message = ViewResources.AccessDeniedMsg
-            };
-            var group = FakeHelper.Create<string>();
-            var setting = new CommonBetSetting { LicenseeId = FakeHelper.Create<int>(), CustId = FakeHelper.Create<int>() };
-
-            _dataAccess.GetBetSettingAsync(setting.CustId).Returns(Task.FromResult(new AgCasinoBetSetting
-            {
-                IsEnabled = true
-            }));
-
-            // Action
-            var result = await _service.UpdateAgCasinoBetSettingAsync(setting, group);
-
-            // Assert
-            Assert.Multiple(() =>
-            {
-                Assert.That(result.Code, Is.EqualTo(expectedResult.Code));
-                Assert.That(result.Message, Is.EqualTo(expectedResult.Message));
-            });
-        }
-
-        [Test]
         public async Task UpdateStatusAsync_WhenCall_ReturnDataFromDataAccess()
         {
             // Arrange
@@ -250,29 +222,5 @@
             Assert.That(result.Code, Is.EqualTo(expectedResult.Code));
         }
 
-        [Test]
-        public async Task UpdateStatusAsync_HaveNoPermission_ReturnCorrectErrorResult()
-        {
-            // Arrange
-            var expectedResult = new ResultInfo
-            {
-                Code = 1,
-                Message = ViewResources.AccessDeniedMsg
-            };
-            var userId = FakeHelper.Create<int>();
-            var custId = FakeHelper.Create<int>();
-            var language = FakeHelper.Create<string>();
-            var ip = FakeHelper.Create<string>();
-
-            // Action
-            var result = await _service.UpdateStatusAsync(userId, custId, language, ip, true);
-
-            // Assert
-            Assert.Multiple(() =>
-            {
-                Assert.That(result.Code, Is.EqualTo(expectedResult.Code));
-                Assert.That(result.Message, Is.EqualTo(expectedResult.Message));
-            });
-        }
     }
 }

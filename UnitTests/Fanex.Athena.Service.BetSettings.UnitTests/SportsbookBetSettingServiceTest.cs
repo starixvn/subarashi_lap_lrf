@@ -150,17 +150,5 @@
             Assert.That(result.Message, Is.EqualTo("Invalid parameters. bet setting is null"));
         }
 
-        [Test]
-        public async Task UpdateBetSettingAsync_HaveNoPermission_ReturnCorrectErrorResult()
-        {
-            // Arrange
-            // Action
-            var result = await _service.UpdateBetSettingAsync(new CommonBetSetting(), new Dictionary<string, object>(),
-                new DcsBetSetting());
-
-            // Assert
-            Assert.That(result.Code, Is.EqualTo(1));
-            Assert.That(result.Message, Is.EqualTo(ViewResources.AccessDeniedMsg));
-        }
     }
 }
