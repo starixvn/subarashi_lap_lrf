@@ -1,5 +1,6 @@
 ﻿namespace Fanex.Athena.Service.Customer.UnitTests
 {
+    using System.Collections.Generic;
     using Model.Core.DTO.Common;
 
     using NSubstitute;
@@ -20,7 +21,7 @@
             var licenseeId = FakeHelper.Create<int>();
             var custId = FakeHelper.Create<int>();
 
-            _authorizationService.HasPermissionOnData(licenseeId, custId, 0).Returns(false);
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), custId, 0).Returns(false);
 
             var expectedResult = new ResultInfo { Code = 1, Message = ViewResources.UpdateSpecialLevelMsg };
 
@@ -30,7 +31,7 @@
                 custId,
                 FakeHelper.Create<int>(),
                 FakeHelper.Create<bool>(),
-                FakeHelper.Create<Request>());
+                FakeHelper.Create<Request>(), _currencyAgents);
 
             // Assert
             Assert.That(result.Code, Is.EqualTo(expectedResult.Code));
@@ -47,13 +48,19 @@
             var allowBA = FakeHelper.Create<bool>();
             var request = FakeHelper.Create<Request>();
 
-            _authorizationService.HasPermissionOnData(licenseeId, custId, 0).Returns(true);
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), custId, 0).Returns(true);
 
             var expectedResult = FakeHelper.Create<ResultInfo>();
             _customerListDataAccess.UpdateCustomerBAStatus(licenseeId, custId, modifiedBy, allowBA, request).Returns(expectedResult);
 
             // Action
-            var result = _customerListService.UpdateCustomerBAStatus(licenseeId, custId, modifiedBy, allowBA, request);
+            var result = _customerListService.UpdateCustomerBAStatus(licenseeId,
+                custId,
+                modifiedBy,
+                allowBA,
+                request,
+                _currencyAgents
+                );
 
             // Assert
             Assert.That(result, Is.EqualTo(expectedResult));

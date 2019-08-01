@@ -120,7 +120,7 @@
                         x.ModifyById == SessionService.UserSession.UserId &&
                         x.ModifyByUsername == SessionService.UserSession.UserName &&
                         x.Ip == controller.Request.UserHostAddress),
-                        SessionService.UserSession.Language);
+                        SessionService.UserSession.Language, Arg.Any<IDictionary<int, int[]>>());
 
                     _customerListService.Received(1).UpdateCustSuspendAsync(
                         Arg.Is<CustomerStatusMetaModel>(x =>
@@ -131,7 +131,7 @@
                         x.ModifyById == SessionService.UserSession.UserId &&
                         x.ModifyByUsername == SessionService.UserSession.UserName &&
                         x.Ip == controller.Request.UserHostAddress),
-                        SessionService.UserSession.Language);
+                        SessionService.UserSession.Language, Arg.Any<IDictionary<int, int[]>>());
                 });
             }
         }
@@ -179,7 +179,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    _customerListService.DidNotReceiveWithAnyArgs().UpdateSpecialLevel(0, 0, 0, 0, string.Empty, string.Empty);
+                    _customerListService.DidNotReceiveWithAnyArgs().UpdateSpecialLevel(Arg.Any<IDictionary<int, int[]>>(), 0, 0, 0, string.Empty, string.Empty);
                     Assert.That(resultInfo.Success, Is.False);
                     Assert.That(resultInfo.Message, Is.EqualTo(ViewResources.FunctionDeniedMsg));
                 });
@@ -202,7 +202,7 @@
                 Assert.Multiple(() =>
                 {
                     _customerListService.Received(1).UpdateSpecialLevel(
-                        SessionService.LicenseeSession.LicenseeId,
+                        Arg.Any<IDictionary<int, int[]>>(),
                         SessionService.UserSession.UserId,
                         CustId,
                         Level,
@@ -251,7 +251,7 @@
                 {
                     _customerListService.Received(1).UpdateOddsGroup(
                         Arg.Is<CustomerOddsGroupMetaModel>(x =>
-                        x.LicenseeId == SessionService.LicenseeSession.LicenseeId &&
+                        x.currencyAgents == SessionService.UserSession.CurrencyAgentList &&
                         x.CustId == CustId &&
                         x.Ip == controller.Request.UserHostAddress &&
                         x.Language == SessionService.UserSession.Language &&

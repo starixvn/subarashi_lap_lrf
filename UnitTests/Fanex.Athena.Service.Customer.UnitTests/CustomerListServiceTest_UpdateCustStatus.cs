@@ -22,7 +22,7 @@
         {
             // Arrange
             var metaModel = FakeHelper.Create<CustomerStatusMetaModel>();
-            _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, 0).Returns(false);
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), metaModel.CustId, 0).Returns(false);
 
             var expectedResult = new ResultInfo { Code = 1, Message = ViewResources.UpdateSpecialLevelMsg };
 
@@ -42,7 +42,7 @@
         {
             // Arrange
             var metaModel = FakeHelper.Create<CustomerStatusMetaModel>();
-            _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, 0).Returns(true);
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), metaModel.CustId, 0).Returns(true);
 
             var customerResult = new CustomerInfo { SyncCasino = false };
             _customerDataAccess.GetCustomerInfo(metaModel.CustId).Returns(customerResult);
@@ -68,7 +68,7 @@
         {
             // Arrange
             var metaModel = FakeHelper.Create<CustomerStatusMetaModel>();
-            _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, 0).Returns(true);
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), metaModel.CustId, 0).Returns(true);
 
             var customerResult = new CustomerInfo { SyncCasino = true };
             _customerDataAccess.GetCustomerInfo(metaModel.CustId).Returns(customerResult);
@@ -94,7 +94,7 @@
         {
             // Arrange
             var metaModel = FakeHelper.Create<CustomerStatusMetaModel>();
-            _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, 0).Returns(true);
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), metaModel.CustId, 0).Returns(true);
 
             var customerResult = new CustomerInfo { SyncCasino = true };
             _customerDataAccess.GetCustomerInfo(metaModel.CustId).Returns(customerResult);
@@ -121,7 +121,7 @@
         {
             // Arrange
             var metaModel = FakeHelper.Create<CustomerStatusMetaModel>();
-            _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, 0).Returns(true);
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), metaModel.CustId, 0).Returns(true);
 
             var customerResult = new CustomerInfo { SyncCasino = true };
             _customerDataAccess.GetCustomerInfo(metaModel.CustId).Returns(customerResult);
@@ -159,7 +159,7 @@
         {
             // Arrange
             var metaModel = FakeHelper.Create<CustomerStatusMetaModel>();
-            _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, 0).Returns(true);
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), metaModel.CustId, 0).Returns(true);
 
             var customerResult = new CustomerInfo { SyncCasino = true };
             _customerDataAccess.GetCustomerInfo(metaModel.CustId).Returns(customerResult);
@@ -198,7 +198,7 @@
         {
             // Arrange
             var metaModel = FakeHelper.Create<CustomerStatusMetaModel>();
-            _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, 0).Returns(false);
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), metaModel.CustId, 0).Returns(false);
 
             var expectedResult = new ResultInfo { Code = 1, Message = ViewResources.UpdateSpecialLevelMsg };
 
@@ -218,7 +218,7 @@
         {
             // Arrange
             var metaModel = FakeHelper.Create<CustomerStatusMetaModel>();
-            _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, 0).Returns(true);
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), metaModel.CustId, 0).Returns(true);
 
             var customerResult = new CustomerInfo { SyncCasino = false };
             _customerDataAccess.GetCustomerInfo(metaModel.CustId).Returns(customerResult);
@@ -243,7 +243,7 @@
         {
             // Arrange
             var metaModel = FakeHelper.Create<CustomerStatusMetaModel>();
-            _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, 0).Returns(true);
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), metaModel.CustId, 0).Returns(true);
 
             var customerResult = new CustomerInfo { SyncCasino = true };
             _customerDataAccess.GetCustomerInfo(metaModel.CustId).Returns(customerResult);
@@ -268,7 +268,7 @@
         {
             // Arrange
             var metaModel = FakeHelper.Create<CustomerStatusMetaModel>();
-            _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, 0).Returns(true);
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), metaModel.CustId, 0).Returns(true);
 
             var customerResult = new CustomerInfo { SyncCasino = true };
             _customerDataAccess.GetCustomerInfo(metaModel.CustId).Returns(customerResult);
@@ -294,7 +294,7 @@
         {
             // Arrange
             var metaModel = FakeHelper.Create<CustomerStatusMetaModel>();
-            _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, 0).Returns(true);
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), metaModel.CustId, 0).Returns(true);
 
             var customerResult = new CustomerInfo { SyncCasino = true };
             _customerDataAccess.GetCustomerInfo(metaModel.CustId).Returns(customerResult);
@@ -331,7 +331,7 @@
         {
             // Arrange
             var metaModel = FakeHelper.Create<CustomerStatusMetaModel>();
-            _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, 0).Returns(true);
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), metaModel.CustId, 0).Returns(true);
 
             var customerResult = new CustomerInfo { SyncCasino = true };
             _customerDataAccess.GetCustomerInfo(metaModel.CustId).Returns(customerResult);

@@ -1,5 +1,6 @@
 ﻿namespace Fanex.Athena.Service.Customer.UnitTests
 {
+    using System.Collections.Generic;
     using Model.Core.DTO.Common;
 
     using NSubstitute;
@@ -24,11 +25,11 @@
             var ip = FakeHelper.Create<string>();
             var language = FakeHelper.Create<string>();
 
-            _authorizationService.HasPermissionOnData(licenseeId, custId, 0).Returns(false);
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), custId, 0).Returns(false);
             var expectedResult = new ResultInfo { Code = 1, Message = ViewResources.UpdateSpecialLevelMsg };
 
             // Action
-            var result = _customerListService.UpdateSpecialLevel(licenseeId, userId, custId, level, ip, language);
+            var result = _customerListService.UpdateSpecialLevel(_currencyAgents, userId, custId, level, ip, language);
 
             // Assert
             Assert.Multiple(() =>
@@ -49,13 +50,13 @@
             var ip = FakeHelper.Create<string>();
             var language = FakeHelper.Create<string>();
 
-            _authorizationService.HasPermissionOnData(licenseeId, custId, 0).Returns(true);
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), custId, 0).Returns(true);
 
             var expectedResult = FakeHelper.Create<ResultInfo>();
             _customerListDataAccess.UpdateSpecialLevel(userId, custId, level, ip, language).Returns(expectedResult);
 
             // Action
-            var result = _customerListService.UpdateSpecialLevel(licenseeId, userId, custId, level, ip, language);
+            var result = _customerListService.UpdateSpecialLevel(_currencyAgents, userId, custId, level, ip, language);
 
             // Assert
             Assert.That(result, Is.EqualTo(expectedResult));

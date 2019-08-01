@@ -30,6 +30,7 @@
         private IAuthorizationService _authorizationService;
         private INumberGameBetSettingDataAccess _dataAccess;
         private INumberGameBetSettingService _service;
+        private readonly IDictionary<int, int[]> _currencyAgents = new Dictionary<int, int[]> { { 1, new int[] { 100, 200 } } };
 
         [OneTimeSetUp]
         public void SetUp()
@@ -51,7 +52,7 @@
         public async Task GetViewModelAsync_WhenCall_ReturnDataFromDataAcccess()
         {
             // Arrange
-            _authorizationService.HasPermissionOnData(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<long>()).Returns(true);
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), Arg.Any<int>(), Arg.Any<long>()).Returns(true);
             var betSettings = new List<BetSetting>
             {
                 new BetSetting()
@@ -59,7 +60,7 @@
             _dataAccess.GetBetSettingAsync(CustId).Returns(Task.FromResult<IList<BetSetting>>(betSettings));
 
             // Action
-            var result = await _service.GetViewModelAsync(LicenseeId, CustId);
+            var result = await _service.GetViewModelAsync(_currencyAgents, CustId);
 
             // Assert
             Assert.That(result.MainData.Count, Is.EqualTo(betSettings.Count));
@@ -69,7 +70,7 @@
         public async Task UpdateBetSettingAsync_WhenCall_CallDataAccessWithCorrectParameters()
         {
             // Arrange
-            _authorizationService.HasPermissionOnData(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<long>()).Returns(true);
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), Arg.Any<int>(), Arg.Any<long>()).Returns(true);
             var data = new Hashtable
             {
                 { "minbet161", 111m },
@@ -86,7 +87,7 @@
             };
 
             // Action
-            await _service.UpdateBetSettingAsync(setting, data);
+            await _service.UpdateBetSettingAsync(setting, data, _currencyAgents);
 
             // Assert
             await _dataAccess.Received(1).UpdateBetSettingAsync(Arg.Is<NumberGameBetSetting>(
@@ -105,12 +106,12 @@
         public async Task UpdateBetSettingAsync_HaveNoPermission_ReturnCorrectErrorResult()
         {
             // Arrange
-            _authorizationService.HasPermissionOnData(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<long>()).Returns(false);
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), Arg.Any<int>(), Arg.Any<long>()).Returns(false);
             var data = new Hashtable();
             var setting = new CommonBetSetting();
 
             // Action
-            var result = await _service.UpdateBetSettingAsync(setting, data);
+            var result = await _service.UpdateBetSettingAsync(setting, data, _currencyAgents);
 
             // Assert
             Assert.That(result.Code, Is.EqualTo(1));

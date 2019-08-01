@@ -48,7 +48,6 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests
                 Assert.Multiple(() =>
                 {
                     Assert.That(metaModel.SiteName, Is.EqualTo(ExternalApiHelper.DefaultSiteName));
-                    Assert.That(metaModel.LicenseeId, Is.EqualTo(ExternalApiHelper.DefaultLicenseeId));
                     Assert.That(metaModel.UserId, Is.EqualTo(ExternalApiHelper.DefaultUserId));
                     Assert.That(metaModel.Language, Is.EqualTo("en-US"));
                     Assert.That(metaModel.Ip, Is.EqualTo(ExternalApiHelper.DefaultClientIp));

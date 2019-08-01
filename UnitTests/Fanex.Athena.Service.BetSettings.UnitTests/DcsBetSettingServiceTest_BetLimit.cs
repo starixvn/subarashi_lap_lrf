@@ -25,10 +25,10 @@
 
             _betSettingDataAccess.GetBetSettingAsync(_custId, _productId).Returns(Task.FromResult<IList<BetSetting>>(betSettings));
 
-            _authorizationService.HasPermissionOnData(_licenseeId, _custId, 0).Returns(true);
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), _custId, 0).Returns(true);
 
             // Action
-            var result = await _dcsBettingService.GetBetSettingsAsync(_licenseeId, _custId, _productId);
+            var result = await _dcsBettingService.GetBetSettingsAsync(_currencyAgents, _custId, _productId);
 
             // Assert
             Assert.That(result.Count, Is.EqualTo(betSettings.Count));
@@ -49,10 +49,10 @@
                 setting.MaxBet,
                 setting.MaxPerMatch);
 
-            _authorizationService.HasPermissionOnData(_licenseeId, _custId, 0).Returns(true);
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), _custId, 0).Returns(true);
 
             // Action
-            await _dcsBettingService.UpdateBetSettingAsync(_licenseeId, _custId, _userId, "ip", betSettings);
+            await _dcsBettingService.UpdateBetSettingAsync(_currencyAgents, _custId, _userId, "ip", betSettings);
 
             // Assert
             await _betSettingDataAccess.Received(1).UpdateBetSettingAsync(_custId, _userId, "ip", expectedXmlParam);
@@ -66,10 +66,10 @@
             {
                 FakeHelper.Create<DcsBetSetting>()
             };
-            _authorizationService.HasPermissionOnData(_licenseeId, _custId, 0).Returns(false);
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), _custId, 0).Returns(false);
 
             // Action
-            var result = await _dcsBettingService.UpdateBetSettingAsync(_licenseeId, _custId, _userId, "ip", betSettings);
+            var result = await _dcsBettingService.UpdateBetSettingAsync(_currencyAgents, _custId, _userId, "ip", betSettings);
 
             // Assert
             Assert.Multiple(() =>

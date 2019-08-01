@@ -81,7 +81,7 @@
                     CustId = 1
                 };
 
-                _authorizationService.HasPermissionOnData(SessionLicenseeId, metaModel.CurrencyId, 0).Returns(false);
+                _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), metaModel.CurrencyId, 0).Returns(false);
 
                 // Action
                 var result = await controller.Index(metaModel);
@@ -137,7 +137,7 @@
                     CurrencyAgentList = new Dictionary<int, int[]>()
                 });
 
-                _authorizationService.HasPermissionOnData(SessionLicenseeId, metaModel.CustId, 0).Returns(true);
+                _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), metaModel.CustId, 0).Returns(true);
 
                 var expect = new HttpResponseMessage();
                 _betListApiClient.PostAsync(MainApiPath, metaModel, SessionLanguage).Returns(Task.FromResult(expect));
@@ -168,7 +168,7 @@
                     BetId = 1,
                 };
 
-                _authorizationService.HasPermissionOnData(SessionLicenseeId, metaModel.CurrencyId, 0).Returns(false);
+                _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), metaModel.CurrencyId, 0).Returns(false);
 
                 // Action
                 var result = await controller.Detail(metaModel);
@@ -242,7 +242,7 @@
                     CurrencyAgentList = new Dictionary<int, int[]>()
                 });
 
-                _authorizationService.HasPermissionOnData(SessionLicenseeId, metaModel.CustId, 0).Returns(true);
+                _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), metaModel.CustId, 0).Returns(true);
 
                 var expect = new HttpResponseMessage();
                 _betListApiClient.PostAsync(DetailApiPath, metaModel, SessionLanguage).Returns(Task.FromResult(expect));

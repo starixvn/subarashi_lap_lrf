@@ -32,7 +32,7 @@
         private ISportsbookBetSettingDataAccess _dataAccess;
         private ISportsbookBetSettingService _service;
         private IDcsBetSettingService _dcsBetSettingService;
-
+        private readonly IDictionary<int, int[]> _currencyAgents = new Dictionary<int, int[]> { { 1, new int[] { 100, 200 } } };
         [SetUp]
         public void SetUp()
         {
@@ -46,10 +46,10 @@
         public async Task GetViewModelAsync_HaveNoPermission_ReturnEmptyData()
         {
             // Arrange
-            _authorizationService.HasPermissionOnData(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<long>()).Returns(false);
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), Arg.Any<int>(), Arg.Any<long>()).Returns(false);
 
             // Action
-            var result = await _service.GetViewModelAsync(LicenseeId, CustId);
+            var result = await _service.GetViewModelAsync(_currencyAgents, CustId);
 
             // Assert
             Assert.That(result.MainData, Is.Empty);
@@ -59,7 +59,7 @@
         public async Task GetViewModelAsync_WhenCall_ReturnDataFromDataAcccess()
         {
             // Arrange
-            _authorizationService.HasPermissionOnData(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<long>()).Returns(true);
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), Arg.Any<int>(), Arg.Any<long>()).Returns(true);
 
             var viewModel = new BetSettingViewModel
             {
@@ -71,14 +71,14 @@
                 }
             };
             _dataAccess.GetBetSettingAsync(CustId).Returns(Task.FromResult(viewModel));
-            _dcsBetSettingService.GetBetSettingsAsync(LicenseeId, CustId, Arg.Any<int>())
+            _dcsBetSettingService.GetBetSettingsAsync(Arg.Any<IDictionary<int, int[]>>(), CustId, Arg.Any<int>())
                 .Returns(Task.FromResult<IList<BetSetting>>(new List<BetSetting>
                 {
                     new BetSetting()
                 }));
 
             // Action
-            var result = await _service.GetViewModelAsync(LicenseeId, CustId);
+            var result = await _service.GetViewModelAsync(_currencyAgents, CustId);
 
             // Assert
             Assert.Multiple(() =>
@@ -91,16 +91,16 @@
         public void GetViewModelAsync_NoEsportData_ThrowException()
         {
             // Arrange
-            _authorizationService.HasPermissionOnData(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<long>()).Returns(true);
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), Arg.Any<int>(), Arg.Any<long>()).Returns(true);
             var viewModel = new BetSettingViewModel
             {
                 MainData = new List<BetSetting>()
             };
             _dataAccess.GetBetSettingAsync(CustId).Returns(Task.FromResult(viewModel));
-            _dcsBetSettingService.GetBetSettingsAsync(LicenseeId, CustId, Arg.Any<int>()).Returns(Task.FromResult<IList<BetSetting>>(new List<BetSetting>()));
+            _dcsBetSettingService.GetBetSettingsAsync(Arg.Any<IDictionary<int, int[]>>(), CustId, Arg.Any<int>()).Returns(Task.FromResult<IList<BetSetting>>(new List<BetSetting>()));
 
             // Action
-            AsyncTestDelegate testDelegate = () => _service.GetViewModelAsync(LicenseeId, CustId);
+            AsyncTestDelegate testDelegate = () => _service.GetViewModelAsync(_currencyAgents, CustId);
 
             // Assert
             Assert.ThrowsAsync<System.InvalidOperationException>(testDelegate, "sdfsdf");
@@ -110,19 +110,20 @@
         public async Task UpdateBetSettingAsync_WhenCall_CallUpdateBetSettingMethods()
         {
             // Arrange
-            _authorizationService.HasPermissionOnData(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<long>()).Returns(true);
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), Arg.Any<int>(), Arg.Any<long>()).Returns(true);
             _dataAccess.UpdateBetSettingAsync(Arg.Any<CommonBetSetting>(), Arg.Any<Dictionary<string, object>>()).Returns(Task.FromResult<IResultInfo>(new ResultInfo()));
             var commonBetSetting = FakeHelper.Create<CommonBetSetting>();
 
             // Action
-            var result = await _service.UpdateBetSettingAsync(commonBetSetting, new Dictionary<string, object>(), new DcsBetSetting());
+            var result = await _service.UpdateBetSettingAsync(commonBetSetting,
+                new Dictionary<string, object>(), new DcsBetSetting(), _currencyAgents);
 
             // Assert
             Assert.Multiple(() =>
             {
                 _dataAccess.Received(1).UpdateBetSettingAsync(commonBetSetting, Arg.Any<Dictionary<string, object>>());
                 _dcsBetSettingService.Received(1).UpdateBetSettingAsync(
-                    commonBetSetting.LicenseeId,
+                    _currencyAgents,
                     commonBetSetting.CustId,
                     commonBetSetting.UserId,
                     commonBetSetting.Ip,
@@ -134,7 +135,7 @@
         public async Task UpdateBetSettingAsync_UpdateSportsbookFail_DoNotCallUpdateEsport()
         {
             // Arrange
-            _authorizationService.HasPermissionOnData(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<long>()).Returns(true);
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), Arg.Any<int>(), Arg.Any<long>()).Returns(true);
             _dataAccess.UpdateBetSettingAsync(Arg.Any<CommonBetSetting>(), Arg.Any<Dictionary<string, object>>())
                 .Returns(Task.FromResult<IResultInfo>(new ResultInfo
                 {
@@ -143,14 +144,15 @@
                 }));
 
             // Action
-            var result = await _service.UpdateBetSettingAsync(new CommonBetSetting(), new Dictionary<string, object>(), new DcsBetSetting());
+            await _service.UpdateBetSettingAsync(new CommonBetSetting(),
+                new Dictionary<string, object>(), new DcsBetSetting(), _currencyAgents);
 
             // Assert
             Assert.Multiple(() =>
             {
                 _dataAccess.Received(1).UpdateBetSettingAsync(Arg.Any<CommonBetSetting>(), Arg.Any<Dictionary<string, object>>());
                 _dcsBetSettingService.DidNotReceive().UpdateBetSettingAsync(
-                    Arg.Any<int>(),
+                    Arg.Any<IDictionary<int, int[]>>(),
                     Arg.Any<int>(),
                     Arg.Any<int>(),
                     Arg.Any<string>(),
@@ -162,10 +164,10 @@
         public async Task UpdateBetSettingAsync_SettingParamIsNull_ReturnCorrectErrorResult()
         {
             // Arrange
-            _authorizationService.HasPermissionOnData(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<long>()).Returns(true);
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), Arg.Any<int>(), Arg.Any<long>()).Returns(true);
 
             // Action
-            var result = await _service.UpdateBetSettingAsync(null, new Dictionary<string, object>(), new DcsBetSetting());
+            var result = await _service.UpdateBetSettingAsync(null, new Dictionary<string, object>(), new DcsBetSetting(), _currencyAgents);
 
             // Assert
             Assert.That(result.Code, Is.EqualTo(1));
@@ -176,10 +178,11 @@
         public async Task UpdateBetSettingAsync_HaveNoPermission_ReturnCorrectErrorResult()
         {
             // Arrange
-            _authorizationService.HasPermissionOnData(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<long>()).Returns(false);
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), Arg.Any<int>(), Arg.Any<long>()).Returns(false);
 
             // Action
-            var result = await _service.UpdateBetSettingAsync(new CommonBetSetting(), new Dictionary<string, object>(), new DcsBetSetting());
+            var result = await _service.UpdateBetSettingAsync(new CommonBetSetting(), new Dictionary<string, object>(),
+                new DcsBetSetting(), _currencyAgents);
 
             // Assert
             Assert.That(result.Code, Is.EqualTo(1));

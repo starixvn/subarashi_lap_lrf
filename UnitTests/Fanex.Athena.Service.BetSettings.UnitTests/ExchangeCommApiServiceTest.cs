@@ -1,6 +1,7 @@
 ﻿namespace Fanex.Athena.Service.BetSettings.UnitTests
 {
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using CitiXchangeLibrary;
@@ -38,7 +39,7 @@
         private IAppSettings _appSetting;
         private ICitiXchangeClient _apiClient;
         private ExchangeCommApiService _service;
-
+        private readonly IDictionary<int, int[]> _currencyAgents = new Dictionary<int, int[]> { { 1, new int[] { 100, 200 } } };
         [SetUp]
         public void Setup()
         {
@@ -67,10 +68,10 @@
         public void GetCommission_NotHavePerrmissonOnData_ReturnFailedResult()
         {
             // Arrange
-            _authorizationService.HasPermissionOnData(_licenseeId, _custId, 0).ReturnsForAnyArgs(false);
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), _custId, 0).ReturnsForAnyArgs(false);
 
             // Action
-            var result = _service.GetCommission(_licenseeId, _custId);
+            var result = _service.GetCommission(_currencyAgents, _custId);
 
             // Assert
             Assert.Multiple(() =>
@@ -87,7 +88,7 @@
         {
             // Arrange
             var expectedComm = FakeHelper.Create<double>();
-            _authorizationService.HasPermissionOnData(_licenseeId, _custId, 0).Returns(true);
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), _custId, 0).Returns(true);
             _apiClient.getProfile(_custId, Enviro.PRD).Returns(new GetProfile
             {
                 status = (CitiStatus)returnStatus,
@@ -95,7 +96,7 @@
             });
 
             // Action
-            var result = _service.GetCommission(_licenseeId, _custId);
+            var result = _service.GetCommission(_currencyAgents, _custId);
 
             // Assert
             Assert.Multiple(() =>
@@ -111,11 +112,11 @@
         {
             // Arrange
             var errorMsg = FakeHelper.Create<string>();
-            _authorizationService.HasPermissionOnData(_licenseeId, _custId, 0).ReturnsForAnyArgs(true);
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), _custId, 0).ReturnsForAnyArgs(true);
             _apiClient.getProfile(0, Enviro.PRD).ReturnsForAnyArgs(x => { throw new Exception(errorMsg); });
 
             // Action
-            var result = _service.GetCommission(_licenseeId, _custId);
+            var result = _service.GetCommission(_currencyAgents, _custId);
 
             // Assert
             Assert.Multiple(() =>
@@ -129,10 +130,10 @@
         public async Task UpdateCommissionAsync_NotHavePerrmissonOnData_ReturnFailedResult()
         {
             // Arrange
-            _authorizationService.HasPermissionOnData(_licenseeId, _custId, 0).ReturnsForAnyArgs(false);
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), _custId, 0).ReturnsForAnyArgs(false);
 
             // Action
-            var result = await _service.UpdateCommissionAsync(_licenseeId, _userId, _custId, 0, 0);
+            var result = await _service.UpdateCommissionAsync(_currencyAgents, _userId, _custId, 0, 0);
 
             // Assert
             Assert.Multiple(() =>
@@ -147,11 +148,11 @@
         public async Task UpdateCommissionAsync_StatusIsNotEnable_ReturnFailedResult(bool? isEnable)
         {
             // Arrange
-            _authorizationService.HasPermissionOnData(_licenseeId, _custId, 0).ReturnsForAnyArgs(true);
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), _custId, 0).ReturnsForAnyArgs(true);
             _betSettingDataAccess.GetStatusAsync(0, 0).ReturnsForAnyArgs(Task.FromResult(isEnable));
 
             // Action
-            var result = await _service.UpdateCommissionAsync(_licenseeId, _userId, _custId, 0, 0);
+            var result = await _service.UpdateCommissionAsync(_currencyAgents, _userId, _custId, 0, 0);
 
             // Assert
             Assert.Multiple(() =>
@@ -168,7 +169,7 @@
         {
             // Arrange
             var expectedComm = FakeHelper.Create<double>();
-            _authorizationService.HasPermissionOnData(_licenseeId, _custId, 0).Returns(true);
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), _custId, 0).Returns(true);
             _betSettingDataAccess.GetStatusAsync(_custId, ProductTypes.Exchange).Returns(Task.FromResult((bool?)true));
             _apiClient.updateCommission(_custId, expectedComm, Enviro.PRD).Returns(new CommissionInfo
             {
@@ -177,7 +178,7 @@
             });
 
             // Action
-            var result = await _service.UpdateCommissionAsync(_licenseeId, _userId, _custId, 0, expectedComm);
+            var result = await _service.UpdateCommissionAsync(_currencyAgents, _userId, _custId, 0, expectedComm);
 
             // Assert
             Assert.Multiple(() =>
@@ -194,11 +195,11 @@
             // Arrange
             var oldComm = FakeHelper.Create<double>();
             var newComm = FakeHelper.Create<double>();
-            _authorizationService.HasPermissionOnData(_licenseeId, _custId, 0).ReturnsForAnyArgs(true);
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), _custId, 0).ReturnsForAnyArgs(true);
             _betSettingDataAccess.GetStatusAsync(_custId, ProductTypes.Exchange).ReturnsForAnyArgs(Task.FromResult((bool?)true));
 
             // Action
-            var result = await _service.UpdateCommissionAsync(_licenseeId, _userId, _custId, oldComm, newComm);
+            var result = await _service.UpdateCommissionAsync(_currencyAgents, _userId, _custId, oldComm, newComm);
 
             // Assert
             Assert.Multiple(() =>

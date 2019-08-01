@@ -29,7 +29,7 @@
             _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
             _currencyValidation.IsValidBaseCurrency(Arg.Any<string>(), Arg.Any<bool>()).Returns(true);
 
-            AuthorizationService.HasPermissionOnData(SessionLicenseeId, Arg.Any<int>(), Arg.Any<long>()).Returns(true);
+            AuthorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), Arg.Any<int>(), Arg.Any<long>()).Returns(true);
         }
 
         [TestCase(true, false)]

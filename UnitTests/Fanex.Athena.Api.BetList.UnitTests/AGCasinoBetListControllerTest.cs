@@ -1,5 +1,6 @@
 ﻿namespace Fanex.Athena.Api.BetList.UnitTests
 {
+    using System.Collections.Generic;
     using System.Net.Http;
     using System.Threading.Tasks;
 
@@ -21,7 +22,7 @@
         {
             MockSessionData();
 
-            AuthorizationService.HasPermissionOnData(SessionLicenseeId, Arg.Any<int>(), Arg.Any<long>()).Returns(true);
+            AuthorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), Arg.Any<int>(), Arg.Any<long>()).Returns(true);
         }
 
         [Test]

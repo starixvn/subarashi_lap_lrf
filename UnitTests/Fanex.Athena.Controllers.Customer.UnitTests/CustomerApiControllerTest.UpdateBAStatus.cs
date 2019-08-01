@@ -38,7 +38,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    _customerListService.DidNotReceiveWithAnyArgs().UpdateCustomerBAStatus(0, 0, 0, false, null);
+                    _customerListService.DidNotReceiveWithAnyArgs().UpdateCustomerBAStatus(0, 0, 0, false, null, Arg.Any<IDictionary<int, int[]>>());
                     Assert.That(resultData.GetValue("IsSuccessful"), Is.False);
                     Assert.That(resultData.GetValue("Message"), Is.EqualTo(ViewResources.NotAllowBA));
                     Assert.That(resultData.GetValue("IsBA"), Is.EqualTo(isAllowBa));
@@ -76,7 +76,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    _customerListService.DidNotReceiveWithAnyArgs().UpdateCustomerBAStatus(0, 0, 0, false, null);
+                    _customerListService.DidNotReceiveWithAnyArgs().UpdateCustomerBAStatus(0, 0, 0, false, null, Arg.Any<IDictionary<int, int[]>>());
                     Assert.That(resultData.GetValue("IsSuccessful"), Is.False);
                     Assert.That(resultData.GetValue("Message"), Is.EqualTo(ResultMessage));
                     Assert.That(resultData.GetValue("IsBA"), Is.EqualTo(isAllowBa));
@@ -102,7 +102,7 @@
                 _productService.GetProductAccess(
                     SessionService.LicenseeSession.LicenseeId,
                     SessionService.UserSession.Language).Returns(productAccess);
-                _customerListService.UpdateCustomerBAStatus(0, 0, 0, false, null)
+                _customerListService.UpdateCustomerBAStatus(0, 0, 0, false, null, Arg.Any<IDictionary<int, int[]>>())
                     .ReturnsForAnyArgs(new ResultInfo
                     {
                         ExtendedData = OddsGroup
@@ -120,7 +120,7 @@
                         CustId,
                         SessionService.UserSession.UserId,
                         isAllowBa,
-                        Arg.Any<Request>());
+                        Arg.Any<Request>(), Arg.Any<IDictionary<int, int[]>>());
                     Assert.That(resultData.GetValue("IsSuccessful"), Is.True);
                     Assert.That(resultData.GetValue("OddsGroup"), Is.EqualTo(OddsGroup));
                 });

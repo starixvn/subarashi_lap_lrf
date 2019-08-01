@@ -22,13 +22,12 @@
     [TestFixture]
     public class KenoBetSettingServiceTest
     {
-        private const int LicenseeId = 1;
         private const int CustId = 2;
 
         private IAuthorizationService _authorizationService;
         private IKenoBetSettingDataAccess _dataAccess;
         private IKenoBetSettingService _service;
-
+        private readonly IDictionary<int, int[]> _currencyAgents = new Dictionary<int, int[]> { { 1, new int[] { 100, 200 } } };
         [OneTimeSetUp]
         public void SetUp()
         {
@@ -49,7 +48,7 @@
         public async Task GetViewModelAsync_WhenCall_BetSettingListReturnedFromDataAccess()
         {
             // Arrange
-            _authorizationService.HasPermissionOnData(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<long>()).Returns(true);
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), Arg.Any<int>(), Arg.Any<long>()).Returns(true);
             var betSetting = new List<BetSetting>
             {
                 new BetSetting()
@@ -57,7 +56,7 @@
             _dataAccess.GetBetSettingsAsync(CustId).Returns(Task.FromResult<IList<BetSetting>>(betSetting));
 
             // Action
-            var result = await _service.GetViewModelAsync(LicenseeId, CustId);
+            var result = await _service.GetViewModelAsync(_currencyAgents, CustId);
 
             // Assert
             Assert.That(result.MainData.Count, Is.EqualTo(betSetting.Count));
@@ -67,10 +66,10 @@
         public async Task GetViewModelAsync_HaveNoPermission_ReturnEmptyDataList()
         {
             // Arrange
-            _authorizationService.HasPermissionOnData(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<long>()).Returns(false);
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), Arg.Any<int>(), Arg.Any<long>()).Returns(false);
 
             // Action
-            var result = await _service.GetViewModelAsync(LicenseeId, CustId);
+            var result = await _service.GetViewModelAsync(_currencyAgents, CustId);
 
             // Assert
             Assert.That(result.MainData.Count, Is.EqualTo(0));
@@ -80,8 +79,7 @@
         public async Task UpdateBetSettingAsync_WhenCall_DataAccessExecuteWithCorrectParams()
         {
             // Arrange
-            _authorizationService.HasPermissionOnData(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<long>()).Returns(true);
-            var licenseeId = 1;
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), Arg.Any<int>(), Arg.Any<long>()).Returns(true);
             var userId = 2;
             var custId = 3;
             var language = "en-US";
@@ -96,7 +94,7 @@
             var xmlParam = "<settings><setting GameTypeID=\"1\" minbet=\"2\" maxbet=\"3\" maxpermatch=\"4\" ></setting></settings>";
 
             // Action
-            var result = await _service.UpdateBetSettingAsync(licenseeId, custId, userId, language, ip, setting);
+            await _service.UpdateBetSettingAsync(_currencyAgents, custId, userId, language, ip, setting);
 
             // Assert
             await _dataAccess.Received(1).UpdateBetSettingAsync(custId, userId, language, ip, xmlParam);
@@ -106,8 +104,7 @@
         public async Task UpdateBetSettingAsync_HaveNoPermission_ReturnCorrectErrorResult()
         {
             // Arrange
-            _authorizationService.HasPermissionOnData(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<long>()).Returns(false);
-            var licenseeId = 1;
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), Arg.Any<int>(), Arg.Any<long>()).Returns(false);
             var userId = 2;
             var custId = 3;
             var language = "en-US";
@@ -121,7 +118,7 @@
             };
 
             // Action
-            var result = await _service.UpdateBetSettingAsync(licenseeId, custId, userId, language, ip, setting);
+            var result = await _service.UpdateBetSettingAsync(_currencyAgents, custId, userId, language, ip, setting);
 
             // Assert
             Assert.That(result.Code, Is.EqualTo(1));

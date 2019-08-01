@@ -1,6 +1,7 @@
 ﻿namespace Fanex.Athena.Api.BetList.UnitTests
 {
     using System;
+    using System.Collections.Generic;
     using System.Net.Http;
     using System.Threading.Tasks;
 
@@ -23,7 +24,7 @@
         {
             MockSessionData();
 
-            AuthorizationService.HasPermissionOnData(SessionLicenseeId, Arg.Any<int>(), Arg.Any<long>()).Returns(true);
+            AuthorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), Arg.Any<int>(), Arg.Any<long>()).Returns(true);
         }
 
         [Test]
@@ -35,7 +36,7 @@
                 var custId = FakeHelper.Create<int>();
                 var transId = FakeHelper.Create<long>();
 
-                AuthorizationService.HasPermissionOnData(SessionLicenseeId, Arg.Any<int>(), Arg.Any<long>()).Returns(false);
+                AuthorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), Arg.Any<int>(), Arg.Any<long>()).Returns(false);
 
                 // Assert
                 Assert.Throws<UnauthorizedAccessException>(() => controller.CheckDataPermission(custId, transId));
@@ -55,7 +56,7 @@
                 controller.CheckDataPermission(custId, transId);
 
                 // Assert
-                AuthorizationService.Received(1).HasPermissionOnData(SessionLicenseeId, custId, transId);
+                AuthorizationService.Received(1).HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), custId, transId);
             }
         }
 

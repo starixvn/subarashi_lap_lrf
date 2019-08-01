@@ -1,5 +1,6 @@
 ﻿namespace Fanex.Athena.Service.Customer.UnitTests
 {
+    using System.Collections.Generic;
     using DataAccess.Customer.Interfaces;
 
     using Model.Customer.DTO;
@@ -20,6 +21,7 @@
         private IAuthorizationService _authorizationService;
 
         private CustomerService _customerService;
+        private readonly IDictionary<int, int[]> _currencyAgents = new Dictionary<int, int[]> { { 1, new int[] { 100, 200 } } };
 
         [SetUp]
         public void SetUp()
@@ -41,15 +43,14 @@
         public void GetCustomerInfo_WhenCallWithCorrectPermission_ReturnCorrectData()
         {
             // Arrange
-            var licenseeId = FakeHelper.Create<int>();
             var custId = FakeHelper.Create<int>();
-            _authorizationService.HasPermissionOnData(licenseeId, custId, 0).Returns(true);
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), custId, 0).Returns(true);
 
             var expectedResult = FakeHelper.Create<CustomerInfo>();
             _customerDataAccess.GetCustomerInfo(custId).Returns(expectedResult);
 
             // Action
-            var result = _customerService.GetCustomerInfo(licenseeId, custId);
+            var result = _customerService.GetCustomerInfo(_currencyAgents, custId);
 
             // Assert
             Assert.That(result, Is.EqualTo(expectedResult));
@@ -59,12 +60,11 @@
         public void GetCustomerInfo_HaveNoPermission_DataAccessIsNotCalled()
         {
             // Arrange
-            var licenseeId = FakeHelper.Create<int>();
             var custId = FakeHelper.Create<int>();
-            _authorizationService.HasPermissionOnData(licenseeId, custId, 0).Returns(false);
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), custId, 0).Returns(false);
 
             // Action
-            var result = _customerService.GetCustomerInfo(licenseeId, custId);
+            var result = _customerService.GetCustomerInfo(_currencyAgents, custId);
 
             // Assert
             Assert.Multiple(() =>

@@ -1,5 +1,6 @@
 ﻿namespace Fanex.Athena.Controllers.BetSettings.UnitTests
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Model.BetSettings.MetaModel;
@@ -41,11 +42,11 @@
                 // Arrange
                 var metaModel = new BetSettingMetaModel { CustId = 100 };
 
-                _betSettingService.GetStatusAsync(DefaultLicenseeSession.LicenseeId, metaModel.CustId, metaModel.ProductId)
+                _betSettingService.GetStatusAsync(Arg.Any<IDictionary<int, int[]>>(), metaModel.CustId, metaModel.ProductId)
                     .Returns(Task.FromResult(isEnabled));
 
                 const double ExtendedData = 10d;
-                _exchangeCommApiService.GetCommission(DefaultLicenseeSession.LicenseeId, metaModel.CustId)
+                _exchangeCommApiService.GetCommission(Arg.Any<IDictionary<int, int[]>>(), metaModel.CustId)
                     .Returns(new ResultInfo<double> { ExtendedData = ExtendedData });
 
                 // Action
@@ -72,10 +73,10 @@
                 // Arrange
                 var metaModel = new BetSettingMetaModel { CustId = 100 };
 
-                _betSettingService.GetStatusAsync(DefaultLicenseeSession.LicenseeId, metaModel.CustId, metaModel.ProductId)
+                _betSettingService.GetStatusAsync(Arg.Any<IDictionary<int, int[]>>(), metaModel.CustId, metaModel.ProductId)
                     .Returns(Task.FromResult(isEnabled));
 
-                _exchangeCommApiService.GetCommission(DefaultLicenseeSession.LicenseeId, metaModel.CustId)
+                _exchangeCommApiService.GetCommission(Arg.Any<IDictionary<int, int[]>>(), metaModel.CustId)
                     .Returns(new ResultInfo<double> { Code = 1, Message = "Error" });
 
                 // Action
@@ -101,7 +102,6 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                var metaModel = new BetSettingMetaModel { CustId = 100 };
 
                 // Action
                 var result = await controller.UpdateComm(0, 0, newComm) as JsonResult;
@@ -124,10 +124,11 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                var metaModel = new BetSettingMetaModel { CustId = 100 };
                 var expectedResultInfo = new ResultInfo<double> { Code = 1, Message = "Test" };
 
-                _exchangeCommApiService.UpdateCommissionAsync(DefaultLicenseeSession.LicenseeId, DefaultUserSession.UserId, 0, 0, newComm)
+                _exchangeCommApiService.UpdateCommissionAsync(
+                    Arg.Any<IDictionary<int, int[]>>(),
+                    DefaultUserSession.UserId, 0, 0, newComm)
                     .Returns(Task.FromResult<IResultInfo<double>>(expectedResultInfo));
 
                 // Action

@@ -41,7 +41,8 @@
                 // Arrange
                 var metaModel = new BetSettingMetaModel { CustId = 100 };
 
-                _betSettingService.GetViewModelAsync(SessionService.LicenseeSession.LicenseeId, metaModel.CustId).Returns(Task.FromResult(new BetSettingViewModel()));
+                _betSettingService.GetViewModelAsync(Arg.Any<IDictionary<int, int[]>>(),
+                    metaModel.CustId).Returns(Task.FromResult(new BetSettingViewModel()));
 
                 // Action
                 var result = await controller.Index(metaModel) as ViewResult;
@@ -121,7 +122,7 @@
                 controller.HttpContext.Request[Arg.Any<string>()].Returns("1");
 
                 _betSettingService.UpdateBetSettingAsync(
-                   Arg.Any<int>(),
+                 Arg.Any<IDictionary<int, int[]>>(),
                    Arg.Any<int>(),
                    Arg.Any<int>(),
                    Arg.Any<string>(),
@@ -166,7 +167,7 @@
 
                 KenoBetSetting param = null;
                 _betSettingService.UpdateBetSettingAsync(
-                   Arg.Any<int>(),
+                   Arg.Any<IDictionary<int, int[]>>(),
                    Arg.Any<int>(),
                    Arg.Any<int>(),
                    Arg.Any<string>(),
@@ -201,7 +202,7 @@
                 controller.HttpContext.Request[Arg.Any<string>()].Returns("1");
 
                 _betSettingService.UpdateBetSettingAsync(
-                   Arg.Any<int>(),
+                   Arg.Any<IDictionary<int, int[]>>(),
                    Arg.Any<int>(),
                    Arg.Any<int>(),
                    Arg.Any<string>(),

@@ -31,6 +31,7 @@
         private ICoreBetSettingDataAccess _coreBetSettingDataAccess;
         private IAuthorizationService _authorizationService;
         private ICustomerService _customerService;
+        private readonly IDictionary<int, int[]> _currencyAgents = new Dictionary<int, int[]> { { 1, new int[] { 100, 200 } } };
 
         private CoreBetSettingService _coreBetSettingService;
 
@@ -52,10 +53,10 @@
             // Arrange
             const int CustId = 3423423;
             var expectedCustomer = FakeHelper.Create<CustomerInfo>();
-            _customerService.GetCustomerInfo(LicenseeId, CustId).Returns(expectedCustomer);
+            _customerService.GetCustomerInfo(Arg.Any<IDictionary<int, int[]>>(), CustId).Returns(expectedCustomer);
 
             // Action
-            var result = _coreBetSettingService.GetCustomerInfo(CustId, LicenseeId);
+            var result = _coreBetSettingService.GetCustomerInfo(CustId, _currencyAgents);
 
             // Assert
             Assert.That(result, Is.EqualTo(expectedCustomer));
@@ -106,12 +107,12 @@
         {
             // Arrange
             const int CustId = 3434;
-            _customerService.GetCustomerInfo(LicenseeId, CustId).Returns(new CustomerInfo { SyncCasino = true });
+            _customerService.GetCustomerInfo(Arg.Any<IDictionary<int, int[]>>(), CustId).Returns(new CustomerInfo { SyncCasino = true });
 
             _coreBetSettingDataAccess.GetBetSettingProductsAsync(LicenseeId).Returns(Task.FromResult(GetSampleBetSettingProducts()));
 
             // Action
-            var result = await _coreBetSettingService.GetBetSettingProductsAsync(CustId, LicenseeId);
+            var result = await _coreBetSettingService.GetBetSettingProductsAsync(CustId, LicenseeId, _currencyAgents);
 
             // Assert
             Assert.That(
@@ -124,12 +125,12 @@
         {
             // Arrange
             const int CustId = 3434;
-            _customerService.GetCustomerInfo(LicenseeId, CustId).Returns(new CustomerInfo { SyncCasino = false });
+            _customerService.GetCustomerInfo(Arg.Any<IDictionary<int, int[]>>(), CustId).Returns(new CustomerInfo { SyncCasino = false });
 
             _coreBetSettingDataAccess.GetBetSettingProductsAsync(LicenseeId).Returns(Task.FromResult(GetSampleBetSettingProducts()));
 
             // Action
-            var result = await _coreBetSettingService.GetBetSettingProductsAsync(CustId, LicenseeId).ConfigureAwait(false);
+            var result = await _coreBetSettingService.GetBetSettingProductsAsync(CustId, LicenseeId, _currencyAgents).ConfigureAwait(false);
 
             // Assert
             Assert.That(

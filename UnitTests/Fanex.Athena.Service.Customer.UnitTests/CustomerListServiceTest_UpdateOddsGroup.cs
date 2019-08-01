@@ -1,5 +1,6 @@
 ﻿namespace Fanex.Athena.Service.Customer.UnitTests
 {
+    using System.Collections.Generic;
     using Model.Core.DTO.Common;
     using Model.Customer.MetaModel;
 
@@ -19,7 +20,7 @@
         {
             // Arrange
             var metaModel = FakeHelper.Create<CustomerOddsGroupMetaModel>();
-            _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, 0).Returns(true);
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), metaModel.CustId, 0).Returns(true);
 
             var expectedResult = FakeHelper.Create<ResultInfo>();
             _customerListDataAccess.UpdateOddsGroup(metaModel).Returns(expectedResult);
@@ -36,7 +37,7 @@
         {
             // Arrange
             var metaModel = FakeHelper.Create<CustomerOddsGroupMetaModel>();
-            _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, 0).Returns(false);
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), metaModel.CustId, 0).Returns(false);
 
             var expectedResult = new ResultInfo { Code = 1, Message = ViewResources.UpdateSpecialLevelMsg };
 

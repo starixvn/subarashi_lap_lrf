@@ -16,7 +16,6 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Repository
             DataAccess.GetObjectDb(Arg.Is("Lrf_CustomerUpdMemberBAStatus")).Returns(ObjectDb);
             var metaModel = new BaStatusUpdatingMetaModel
             {
-                LicenseeId = 1,
                 UserId = 1,
                 CustId = 2,
                 Ip = "127.0.0.1",
@@ -34,7 +33,6 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Repository
             {
                 ObjectDb.Received(1).SetParameterValue("ModifyBy", metaModel.UserId);
                 ObjectDb.Received(1).SetParameterValue("CustID", metaModel.CustId);
-                ObjectDb.Received(1).SetParameterValue("LicenseeID", metaModel.LicenseeId);
                 ObjectDb.Received(1).SetParameterValue("IsBA", metaModel.IsBa);
                 ObjectDb.Received(1).SetParameterValue("IP", metaModel.Ip);
                 ObjectDb.Received(1).SetParameterValue("langkey", metaModel.Language);

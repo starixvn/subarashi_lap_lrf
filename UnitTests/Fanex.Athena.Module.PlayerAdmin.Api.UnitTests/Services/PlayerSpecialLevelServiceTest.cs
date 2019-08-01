@@ -1,4 +1,5 @@
-﻿using Fanex.Athena.Model.Core.DTO.Common;
+﻿using Fanex.Athena.Model.Auth;
+using Fanex.Athena.Model.Core.DTO.Common;
 using Fanex.Athena.Model.Core.ViewModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.Repository.Interfaces;
@@ -72,7 +73,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
 
             var metaModel = CreateMetaModel();
             _licenseeSettingService.IsFakeLicensee(metaModel.SiteName).Returns(false);
-            _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, 0).Returns(false);
+            _authorizationService.HasPermissionOnData(Arg.Any<OneAuthCurrency[]>(), metaModel.CustId, 0).Returns(false);
 
             var service = new PlayerSpecialLevelService(_playerSpecialLevelRepository, _authorizationService, _licenseeSettingService);
 
@@ -101,7 +102,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
 
             var metaModel = CreateMetaModel();
             _licenseeSettingService.IsFakeLicensee(metaModel.SiteName).Returns(false);
-            _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, 0).Returns(true);
+            _authorizationService.HasPermissionOnData(Arg.Any<OneAuthCurrency[]>(), metaModel.CustId, 0).Returns(true);
             _playerSpecialLevelRepository.Update(metaModel).Returns(resultInfo);
 
             var service = new PlayerSpecialLevelService(_playerSpecialLevelRepository, _authorizationService, _licenseeSettingService);
@@ -117,7 +118,6 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
         {
             return new SpecialLevelUpdatingMetaModel
             {
-                LicenseeId = ExternalApiHelper.DefaultLicenseeId,
                 Language = ExternalApiHelper.DefaultLanguage,
                 CustId = 5,
                 SiteName = ExternalApiHelper.DefaultSiteName

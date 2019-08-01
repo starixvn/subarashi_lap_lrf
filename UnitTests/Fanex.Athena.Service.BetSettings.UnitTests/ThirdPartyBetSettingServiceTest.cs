@@ -1,5 +1,6 @@
 ﻿namespace Fanex.Athena.Service.BetSettings.UnitTests
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using BetSettings;
@@ -28,6 +29,7 @@
         private IAuthorizationService _authorizationService;
         private IThirdPartyBetSettingDataAccess _dataAccess;
         private IThirdPartyBetSettingService _service;
+        private readonly IDictionary<int, int[]> _currencyAgents = new Dictionary<int, int[]> { { 1, new int[] { 100, 200 } } };
 
         [OneTimeSetUp]
         public void SetUp()
@@ -49,7 +51,7 @@
         public async Task GetViewModelAsync_WhenCall_ReturnDataFromDataAcccess()
         {
             // Arrange
-            _authorizationService.HasPermissionOnData(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<long>()).Returns(true);
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), Arg.Any<int>(), Arg.Any<long>()).Returns(true);
             const int ProductId = 100;
 
             var betSetting = new ThirdPartyBetSetting
@@ -61,7 +63,7 @@
             _dataAccess.GetBetSettingAsync(CustId, ProductId).Returns(Task.FromResult(betSetting));
 
             // Action
-            var result = await _service.GetViewModelAsync(LicenseeId, CustId, ProductId);
+            var result = await _service.GetViewModelAsync(_currencyAgents, CustId, ProductId);
 
             // Assert
             Assert.That(result.IsEnabled, Is.EqualTo(betSetting.IsEnabled));
@@ -72,11 +74,11 @@
         public async Task GetViewModelAsync_HaveNoPermission_ReturnNull()
         {
             // Arrange
-            _authorizationService.HasPermissionOnData(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<long>()).Returns(false);
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), Arg.Any<int>(), Arg.Any<long>()).Returns(false);
             const int ProductId = 100;
 
             // Action
-            var result = await _service.GetViewModelAsync(LicenseeId, CustId, ProductId);
+            var result = await _service.GetViewModelAsync(_currencyAgents, CustId, ProductId);
 
             // Assert
             Assert.That(result, Is.Null);
@@ -86,7 +88,7 @@
         public async Task UpdateStatusAsync_WhenCall_CallDataAccessWithCorrectParameters()
         {
             // Arrange
-            _authorizationService.HasPermissionOnData(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<long>()).Returns(true);
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), Arg.Any<int>(), Arg.Any<long>()).Returns(true);
             const int ProductId = 100;
 
             var betSetting = new ThirdPartyBetSetting
@@ -96,7 +98,7 @@
             _dataAccess.GetBetSettingAsync(CustId, ProductId).Returns(Task.FromResult(betSetting));
 
             // Action
-            var result = await _service.UpdateStatusAsync(LicenseeId, ProductId, UserId, CustId, Language, "ip", true);
+            var result = await _service.UpdateStatusAsync(_currencyAgents, ProductId, UserId, CustId, Language, "ip", true);
 
             // Assert
             await _dataAccess.Received(1).UpdateStatusAsync(ProductId, UserId, CustId, Language, "ip", true);
@@ -106,11 +108,11 @@
         public async Task UpdateStatusAsync_HaveNoPermission_ReturnCorrectErrorResult()
         {
             // Arrange
-            _authorizationService.HasPermissionOnData(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<long>()).Returns(false);
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), Arg.Any<int>(), Arg.Any<long>()).Returns(false);
             const int ProductId = 100;
 
             // Action
-            var result = await _service.UpdateStatusAsync(LicenseeId, ProductId, UserId, CustId, Language, "ip", true);
+            var result = await _service.UpdateStatusAsync(_currencyAgents, ProductId, UserId, CustId, Language, "ip", true);
 
             // Assert
             Assert.That(result.Code, Is.EqualTo(1));
@@ -121,7 +123,7 @@
         public async Task UpdateStatusAsync_IsLineEnabledInSettingIsNull_ReturnCorrectErrorResult()
         {
             // Arrange
-            _authorizationService.HasPermissionOnData(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<long>()).Returns(true);
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), Arg.Any<int>(), Arg.Any<long>()).Returns(true);
             const int ProductId = 100;
             var betSetting = new ThirdPartyBetSetting
             {
@@ -130,7 +132,7 @@
             _dataAccess.GetBetSettingAsync(CustId, ProductId).Returns(Task.FromResult(betSetting));
 
             // Action
-            var result = await _service.UpdateStatusAsync(LicenseeId, ProductId, UserId, CustId, Language, "ip", true);
+            var result = await _service.UpdateStatusAsync(_currencyAgents, ProductId, UserId, CustId, Language, "ip", true);
 
             // Assert
             Assert.That(result.Code, Is.EqualTo(1));

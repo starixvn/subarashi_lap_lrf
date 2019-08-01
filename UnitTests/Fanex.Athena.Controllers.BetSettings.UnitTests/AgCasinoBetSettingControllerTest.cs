@@ -12,10 +12,12 @@
     using NUnit.Framework;
     using Resources;
     using Service.BetSettings.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     public class AgCasinoBetSettingControllerTest : BetSettingBaseControllerHelperTest
     {
         private IAgCasinoBetSettingService _betSettingService;
+        private IAuthorizationService _authorizationService;
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
@@ -38,9 +40,7 @@
             {
                 // Arrange
                 var metaModel = new BetSettingMetaModel { CustId = 100 };
-
-                _betSettingService.GetViewModelAsync(DefaultLicenseeSession.LicenseeId, metaModel.CustId, DefaultLicenseeSession.LicenseeName)
-                    .Returns(Task.FromResult<AgCasinoBetSettingViewModel>(null));
+                _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), metaModel.CustId, 0).Returns(false);
 
                 // Action
                 var result = await controller.Index(metaModel) as RedirectResult;
@@ -58,7 +58,9 @@
                 // Arrange
                 var metaModel = new BetSettingMetaModel { CustId = 100 };
 
-                _betSettingService.GetViewModelAsync(DefaultLicenseeSession.LicenseeId, metaModel.CustId, DefaultLicenseeSession.LicenseeName)
+                _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), metaModel.CustId, 0).Returns(true);
+
+                _betSettingService.GetViewModelAsync(metaModel.CustId, DefaultLicenseeSession.LicenseeName)
                     .Returns(new AgCasinoBetSettingViewModel());
 
                 // Action
@@ -107,7 +109,7 @@
                 CoreBetSettingService.IsBetSettingEditable(DefaultUserSession).Returns(true);
 
                 _betSettingService.UpdateStatusAsync(
-                   DefaultLicenseeSession.LicenseeId,
+                   DefaultUserSession.CurrencyAgentList,
                    DefaultUserSession.UserId,
                    Arg.Any<int>(),
                    DefaultUserSession.Language,
@@ -139,7 +141,7 @@
                 CoreBetSettingService.IsBetSettingEditable(DefaultUserSession).Returns(true);
 
                 _betSettingService.UpdateStatusAsync(
-                   DefaultLicenseeSession.LicenseeId,
+                   Arg.Any<IDictionary<int, int[]>>(),
                    DefaultUserSession.UserId,
                    Arg.Any<int>(),
                    DefaultUserSession.Language,
@@ -190,7 +192,7 @@
 
                 _betSettingService.UpdateAgCasinoBetSettingAsync(
                    Arg.Any<CommonBetSetting>(),
-                   Arg.Any<string>()).Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 0 }));
+                   Arg.Any<string>(), Arg.Any<IDictionary<int, int[]>>()).Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 0 }));
 
                 // Action
                 var result = await controller.UpdateBetSetting(string.Empty, string.Empty) as JsonResult;
@@ -218,7 +220,7 @@
 
                 _betSettingService.UpdateAgCasinoBetSettingAsync(
                    Arg.Any<CommonBetSetting>(),
-                   Arg.Any<string>())
+                   Arg.Any<string>(), Arg.Any<IDictionary<int, int[]>>())
                    .Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 1, Message = "Error" }));
 
                 // Action
@@ -233,13 +235,13 @@
         private AgCasinoBetSettingController CreateController()
         {
             _betSettingService = Substitute.For<IAgCasinoBetSettingService>();
-
+            _authorizationService = Substitute.For<IAuthorizationService>();
             var controller = new AgCasinoBetSettingController(
                 LangService,
                 SessionService,
                 CoreBetSettingService,
                 ProductService,
-                _betSettingService, LicenseeSettingService)
+                _betSettingService, LicenseeSettingService, _authorizationService)
             {
                 ControllerContext = ControllerContext
             };

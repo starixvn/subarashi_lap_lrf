@@ -76,11 +76,11 @@
             var custId = FakeHelper.Create<int>();
             var expectedResult = FakeHelper.Create<LogInfo>();
 
-            _authorizationService.HasPermissionOnData(licenseeId, custId, 0).Returns(true);
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), custId, 0).Returns(true);
             _customerListDataAccess.GetCustomerLoginInfo(custId, licenseeId, LicenseeName).Returns(expectedResult);
 
             // Action
-            var result = _customerListService.GetCustomerLoginInfo(custId, licenseeId, LicenseeName);
+            var result = _customerListService.GetCustomerLoginInfo(custId, licenseeId, LicenseeName, _currencyAgents);
 
             // Assert
             Assert.That(result, Is.EqualTo(expectedResult));
@@ -94,10 +94,10 @@
             var licenseeId = FakeHelper.Create<int>();
             var custId = FakeHelper.Create<int>();
 
-            _authorizationService.HasPermissionOnData(licenseeId, custId, 0).Returns(false);
+            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), custId, 0).Returns(false);
 
             // Action
-            var result = _customerListService.GetCustomerLoginInfo(custId, licenseeId, LicenseeName);
+            var result = _customerListService.GetCustomerLoginInfo(custId, licenseeId, LicenseeName, _currencyAgents);
 
             // Assert
             Assert.Multiple(() =>

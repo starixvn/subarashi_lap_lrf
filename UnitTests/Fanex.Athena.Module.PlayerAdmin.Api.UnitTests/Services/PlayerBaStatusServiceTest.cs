@@ -1,4 +1,5 @@
-﻿using Fanex.Athena.Model.Core.DTO.Common;
+﻿using Fanex.Athena.Model.Auth;
+using Fanex.Athena.Model.Core.DTO.Common;
 using Fanex.Athena.Model.Core.ViewModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.Repository.Interfaces;
@@ -50,9 +51,8 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
 
             var metaModel = CreateMetaModel();
             var productAccess = CreateProductAccess(false);
-            _productService.GetProductAccess(metaModel.LicenseeId, metaModel.Language).Returns(productAccess);
 
-            var service = new PlayerBaStatusService(_playerBaStatusRepository, _authorizationService, _productService);
+            var service = new PlayerBaStatusService(_playerBaStatusRepository, _authorizationService);
 
             // Action
             var result = service.Update(metaModel);
@@ -72,11 +72,9 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
             };
 
             var metaModel = CreateMetaModel();
-            var productAccess = CreateProductAccess(true);
-            _productService.GetProductAccess(metaModel.LicenseeId, metaModel.Language).Returns(productAccess);
-            _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, 0).Returns(false);
+            _authorizationService.HasPermissionOnData(Arg.Any<OneAuthCurrency[]>(), metaModel.CustId, 0).Returns(false);
 
-            var service = new PlayerBaStatusService(_playerBaStatusRepository, _authorizationService, _productService);
+            var service = new PlayerBaStatusService(_playerBaStatusRepository, _authorizationService);
 
             // Action
             var result = service.Update(metaModel);
@@ -103,12 +101,10 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
             };
 
             var metaModel = CreateMetaModel();
-            var productAccess = CreateProductAccess(true);
-            _productService.GetProductAccess(metaModel.LicenseeId, metaModel.Language).Returns(productAccess);
-            _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, 0).Returns(true);
+            _authorizationService.HasPermissionOnData(Arg.Any<OneAuthCurrency[]>(), metaModel.CustId, 0).Returns(true);
             _playerBaStatusRepository.Update(metaModel).Returns(expectedUpdatingResult);
 
-            var service = new PlayerBaStatusService(_playerBaStatusRepository, _authorizationService, _productService);
+            var service = new PlayerBaStatusService(_playerBaStatusRepository, _authorizationService);
 
             // Action
             var result = service.Update(metaModel);
@@ -131,7 +127,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
         {
             return new BaStatusUpdatingMetaModel
             {
-                LicenseeId = ExternalApiHelper.DefaultLicenseeId,
+                CurrencyPermission = ExternalApiHelper.CreateAuthCurrencyList(),
                 Language = ExternalApiHelper.DefaultLanguage,
                 CustId = 5
             };

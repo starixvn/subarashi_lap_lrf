@@ -45,8 +45,8 @@
         protected void SetUpDefaultFakeBetSettingData()
         {
             StubGetValueAppSettings("FakeLicenseeList", DefaultLicenseeSession.LicenseeId.ToString());
-            CoreBetSettingService.GetCustomerInfo(Arg.Any<int>(), DefaultLicenseeSession.LicenseeId).Returns(new CustomerInfo { SyncCasino = true });
-            CoreBetSettingService.GetBetSettingProductsAsync(Arg.Any<int>(), DefaultLicenseeSession.LicenseeId)
+            CoreBetSettingService.GetCustomerInfo(Arg.Any<int>(), Arg.Any<IDictionary<int, int[]>>()).Returns(new CustomerInfo { SyncCasino = true });
+            CoreBetSettingService.GetBetSettingProductsAsync(Arg.Any<int>(), DefaultLicenseeSession.LicenseeId, Arg.Any<IDictionary<int, int[]>>())
                 .Returns(Task.FromResult<IEnumerable<BetSettingProduct>>(new List<BetSettingProduct>()));
         }
 

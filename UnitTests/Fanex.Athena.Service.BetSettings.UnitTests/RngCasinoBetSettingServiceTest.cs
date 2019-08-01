@@ -33,7 +33,7 @@
         private const int CustId = 1;
         private const int CurrencyId = 1;
         private const string Language = "en-US";
-
+        private readonly IDictionary<int, int[]> _currencyAgents = new Dictionary<int, int[]> { { 1, new int[] { 100, 200 } } };
         private IAuthorizationService _authorizationService;
         private IAppSettings _appSettings;
         private IRngCasinoBetSettingDataAccess _dataAccess;
@@ -137,11 +137,11 @@
             // Arrange
             var metaModel = new BetSettingCasinoStatusMetaModel
             {
-                LicenseeId = 1,
+                currencyAgents = _currencyAgents,
                 CustId = 2
             };
 
-            _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, Arg.Any<long>()).Returns(false);
+            _authorizationService.HasPermissionOnData(metaModel.currencyAgents, metaModel.CustId, Arg.Any<long>()).Returns(false);
 
             // Action
             var result = await _service.UpdateStatusAsync(metaModel);
@@ -161,12 +161,12 @@
             // Arrange
             var metaModel = new BetSettingCasinoStatusMetaModel
             {
-                LicenseeId = 1,
+                currencyAgents = _currencyAgents,
                 CustId = 2,
                 IsSyncCasino = false
             };
 
-            _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, Arg.Any<long>()).Returns(true);
+            _authorizationService.HasPermissionOnData(metaModel.currencyAgents, metaModel.CustId, Arg.Any<long>()).Returns(true);
 
             // Action
             var result = await _service.UpdateStatusAsync(metaModel);
@@ -186,13 +186,13 @@
             // Arrange
             var metaModel = new BetSettingCasinoStatusMetaModel
             {
-                LicenseeId = 1,
+                currencyAgents = _currencyAgents,
                 CustId = 2,
                 IsSyncCasino = true
             };
 
             _appSettings.IsDisableRngCasino.Returns(false);
-            _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, Arg.Any<long>()).Returns(true);
+            _authorizationService.HasPermissionOnData(metaModel.currencyAgents, metaModel.CustId, Arg.Any<long>()).Returns(true);
 
             _lgClient.PostAsync<APIResult<bool>>(Arg.Any<string>(), Arg.Any<BetSettingCasinoStatusMetaModel>(), Arg.Any<string>())
                 .Returns(new APIResult<bool> { Data = false });
@@ -215,13 +215,13 @@
             // Arrange
             var metaModel = new BetSettingCasinoStatusMetaModel
             {
-                LicenseeId = 1,
+                currencyAgents = _currencyAgents,
                 CustId = 2,
                 IsSyncCasino = true
             };
 
             _appSettings.IsDisableRngCasino.Returns(false);
-            _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, Arg.Any<long>()).Returns(true);
+            _authorizationService.HasPermissionOnData(metaModel.currencyAgents, metaModel.CustId, Arg.Any<long>()).Returns(true);
             _lgClient.PostAsync<bool>(Arg.Any<string>(), Arg.Any<BetSettingCasinoStatusMetaModel>(), Arg.Any<string>()).Returns(true);
 
             // Action
@@ -259,7 +259,7 @@
                 CustId = 4
             };
 
-            _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, Arg.Any<long>()).Returns(false);
+            _authorizationService.HasPermissionOnData(_currencyAgents, metaModel.CustId, Arg.Any<long>()).Returns(false);
 
             // Action
             var result = await _service.UpdateSettingAsync(metaModel, false, false).ConfigureAwait(false);
@@ -283,7 +283,7 @@
                 CustId = 4
             };
 
-            _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, Arg.Any<long>()).Returns(true);
+            _authorizationService.HasPermissionOnData(_currencyAgents, metaModel.CustId, Arg.Any<long>()).Returns(true);
 
             // Action
             var result = await _service.UpdateSettingAsync(metaModel, false, false).ConfigureAwait(false);
@@ -307,7 +307,7 @@
                 CustId = 4
             };
 
-            _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, Arg.Any<long>()).Returns(true);
+            _authorizationService.HasPermissionOnData(_currencyAgents, metaModel.CustId, Arg.Any<long>()).Returns(true);
             _appSettings.IsDisableRngCasino.Returns(true);
 
             // Action
@@ -332,7 +332,7 @@
                 CustId = 4
             };
 
-            _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, Arg.Any<long>()).Returns(true);
+            _authorizationService.HasPermissionOnData(_currencyAgents, metaModel.CustId, Arg.Any<long>()).Returns(true);
             _appSettings.IsDisableRngCasino.Returns(false);
 
             _lgClient.PostAsync<APIResult<bool>>(Arg.Any<string>(), Arg.Any<object>(), Arg.Any<string>())
@@ -360,7 +360,7 @@
                 CustId = 4
             };
 
-            _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, Arg.Any<long>()).Returns(true);
+            _authorizationService.HasPermissionOnData(_currencyAgents, metaModel.CustId, Arg.Any<long>()).Returns(true);
             _appSettings.IsDisableRngCasino.Returns(false);
             _lgClient.PostAsync<APIResult<bool>>(Arg.Any<string>(), Arg.Any<object>(), Arg.Any<string>()).Returns(
                 new APIResult<bool> { Data = true });
