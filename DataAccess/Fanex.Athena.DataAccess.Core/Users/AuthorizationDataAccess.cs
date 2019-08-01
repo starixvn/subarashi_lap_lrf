@@ -6,6 +6,8 @@
 
 namespace Fanex.Athena.DataAccess.Core.Users
 {
+    using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using Fanex.Athena.DataAccess.Core;
     using Fanex.Athena.DataAccess.Core.Users.Interfaces;
@@ -13,16 +15,17 @@ namespace Fanex.Athena.DataAccess.Core.Users
 
     public class AuthorizationDataAccess : BaseDataAccess, IAthorizationDataAccess
     {
-        public bool IsCustomerBelonging(int licenseeId, int custId, long transid)
+        public Tuple<int, int> IsCustomerBelonging(int custId, long transid)
         {
-            using (var db = this.GetObjectDb("Lrf_CustomerSelCheckBelonging"))
+
+            using (var db = this.GetObjectDb("Lrf_CheckBelonging_GetAgentInfo"))
             {
-                db.SetParameterValue("licenseeid", licenseeId);
                 db.SetParameterValue("transid", transid);
                 db.SetParameterValue("custid", custId);
-                db.SetParameterValue("status", null);
-                db.ExecuteNonQuery();
-                return Converter.ToBool(db.GetParameterValue("status"));
+                using (var reader = db.ExecuteReader())
+                {
+                    return new Tuple<int, int>(Convert.ToInt32(reader["CurrencyId"]), Convert.ToInt32(reader["CustId"]));
+                }
             }
         }
     }

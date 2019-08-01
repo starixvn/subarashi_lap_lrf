@@ -137,19 +137,6 @@
         }
 
         [Test]
-        public void HasPermissionOnData_LicenseeIdIsZero_ThrowException()
-        {
-            // Arrange
-            const int LicenseeId = 0;
-
-            // Action
-            TestDelegate testDelegate = () => _authorizationService.HasPermissionOnData(LicenseeId, 1, 1);
-
-            // Assert
-            Assert.That(testDelegate, Throws.TypeOf<ArgumentException>());
-        }
-
-        [Test]
         public void HasPermissionOnData_CustIdAndTransIdAreZero_ReturnTrue()
         {
             // Arrange

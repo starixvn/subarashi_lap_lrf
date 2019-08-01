@@ -32,9 +32,9 @@ namespace Fanex.Athena.Service.BetSettings
             _customerService = customerService;
         }
 
-        public CustomerInfo GetCustomerInfo(int custId, int licenseeId)
+        public CustomerInfo GetCustomerInfo(int custId, IDictionary<int, int[]> currencyAgents)
         {
-            return _customerService.GetCustomerInfo(licenseeId, custId);
+            return _customerService.GetCustomerInfo(currencyAgents, custId);
         }
 
         public bool IsBetSettingEditable(UserAuthInfo userSession)
@@ -44,9 +44,9 @@ namespace Fanex.Athena.Service.BetSettings
                       _authorizationService.HasPermissions(userSession.FunctionList, PermissionKeys.CustomerInfoEditBetSetting);
         }
 
-        public async Task<IEnumerable<BetSettingProduct>> GetBetSettingProductsAsync(int custId, int licenseeId)
+        public async Task<IEnumerable<BetSettingProduct>> GetBetSettingProductsAsync(int custId, int licenseeId, IDictionary<int, int[]> currencyAgents)
         {
-            var customerInfo = _customerService.GetCustomerInfo(licenseeId, custId);
+            var customerInfo = _customerService.GetCustomerInfo(currencyAgents, custId);
 
             var betSettingProducts = await _coreBetSettingDataAccess.GetBetSettingProductsAsync(licenseeId).ConfigureAwait(false);
 

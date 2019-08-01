@@ -6,6 +6,7 @@
 
 namespace Fanex.Athena.Service.BetSettings.Interfaces
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using Fanex.Athena.Model.BetSettings.DTO;
@@ -14,8 +15,8 @@ namespace Fanex.Athena.Service.BetSettings.Interfaces
 
     public interface IKenoBetSettingService
     {
-        Task<BetSettingViewModel> GetViewModelAsync(int licenseeId, int custId);
+        Task<BetSettingViewModel> GetViewModelAsync(IDictionary<int, int[]> currencyAgents, int custId);
 
-        Task<IResultInfo> UpdateBetSettingAsync(int licenseeId, int custId, int userId, string language, string ip, KenoBetSetting setting);
+        Task<IResultInfo> UpdateBetSettingAsync(IDictionary<int, int[]> currencyAgents, int custId, int userId, string language, string ip, KenoBetSetting setting);
     }
 }

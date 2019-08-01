@@ -36,7 +36,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
                 };
             }
 
-            if (!_authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, 0))
+            if (!_authorizationService.HasPermissionOnData(metaModel.CurrencyPermission, metaModel.CustId, 0))
             {
                 return new ResultViewModel
                 {

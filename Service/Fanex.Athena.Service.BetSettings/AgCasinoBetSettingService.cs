@@ -56,13 +56,8 @@ namespace Fanex.Athena.Service.BetSettings
             _webClientService = webClientService;
         }
 
-        public async Task<AgCasinoBetSettingViewModel> GetViewModelAsync(int licenseeId, int custId, string licenseeName)
+        public async Task<AgCasinoBetSettingViewModel> GetViewModelAsync(int custId, string licenseeName)
         {
-            if (!HasPermissionOnData(licenseeId, custId))
-            {
-                return null;
-            }
-
             var betSetting = await _betSettingDataAccess.GetBetSettingAsync(custId);
 
             if (!betSetting.CheckedGroups.Contains(betSetting.AgGroup))
@@ -81,7 +76,7 @@ namespace Fanex.Athena.Service.BetSettings
             };
         }
 
-        public async Task<IResultInfo> UpdateAgCasinoBetSettingAsync(CommonBetSetting setting, string group)
+        public async Task<IResultInfo> UpdateAgCasinoBetSettingAsync(CommonBetSetting setting, string group, IDictionary<int, int[]> currencyAgents)
         {
             if (setting == null)
             {
@@ -90,7 +85,7 @@ namespace Fanex.Athena.Service.BetSettings
 
             var agcasinoSetting = await _betSettingDataAccess.GetBetSettingAsync(setting.CustId).ConfigureAwait(false);
 
-            if (!agcasinoSetting.IsEnabled || !HasPermissionOnData(setting.LicenseeId, setting.CustId))
+            if (!agcasinoSetting.IsEnabled || !HasPermissionOnData(currencyAgents, setting.CustId))
             {
                 return ErrorResult(ViewResources.AccessDeniedMsg);
             }
@@ -98,9 +93,10 @@ namespace Fanex.Athena.Service.BetSettings
             return await _betSettingDataAccess.UpdateBetSettingAsync(setting, group);
         }
 
-        public async Task<IResultInfo> UpdateStatusAsync(int licenseeId, int userId, int custId, string language, string ip, bool isEnabled)
+        public async Task<IResultInfo> UpdateStatusAsync(IDictionary<int, int[]> currencyAgents, 
+            int userId, int custId, string language, string ip, bool isEnabled)
         {
-            if (!HasPermissionOnData(licenseeId, custId))
+            if (!HasPermissionOnData(currencyAgents, custId))
             {
                 return ErrorResult(ViewResources.AccessDeniedMsg);
             }

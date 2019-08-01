@@ -39,10 +39,10 @@ namespace Fanex.Athena.Service.BetSettings
             _dcsBetSettingService = dcsBetSettingService;
         }
 
-        public async Task<BetSettingViewModel> GetViewModelAsync(int licenseeId, int custId)
+        public async Task<BetSettingViewModel> GetViewModelAsync(IDictionary<int, int[]> currencyAgents, int custId)
         {
             const int EsportIndex = 2;
-            if (!HasPermissionOnData(licenseeId, custId))
+            if (!HasPermissionOnData(currencyAgents, custId))
             {
                 return new BetSettingViewModel
                 {
@@ -53,7 +53,7 @@ namespace Fanex.Athena.Service.BetSettings
             var viewModel = await _betSettingDataAccess.GetBetSettingAsync(custId).ConfigureAwait(false);
 
             // Esport must be inserted in this "Feng Shui" position.
-            var betSetting = await GetESportsSettingAsync(licenseeId, custId).ConfigureAwait(false);
+            var betSetting = await GetESportsSettingAsync(currencyAgents, custId).ConfigureAwait(false);
             viewModel.MainData.Insert(EsportIndex, betSetting);
             return viewModel;
         }
@@ -61,14 +61,14 @@ namespace Fanex.Athena.Service.BetSettings
         public async Task<IResultInfo> UpdateBetSettingAsync(
             CommonBetSetting setting,
             IDictionary<string, object> hashParam,
-            DcsBetSetting esportSetting)
+            DcsBetSetting esportSetting, IDictionary<int, int[]> currencyAgents)
         {
             if (setting == null || esportSetting == null)
             {
                 return ErrorResult("Invalid parameters. bet setting is null");
             }
 
-            if (!HasPermissionOnData(setting.LicenseeId, setting.CustId))
+            if (!HasPermissionOnData(currencyAgents, setting.CustId))
             {
                 return ErrorResult(ViewResources.AccessDeniedMsg);
             }
@@ -80,12 +80,12 @@ namespace Fanex.Athena.Service.BetSettings
                 return result;
             }
 
-            return await _dcsBetSettingService.UpdateBetSettingAsync(setting.LicenseeId, setting.CustId, setting.UserId, setting.Ip, new[] { esportSetting });
+            return await _dcsBetSettingService.UpdateBetSettingAsync(currencyAgents, setting.CustId, setting.UserId, setting.Ip, new[] { esportSetting });
         }
 
-        private async Task<BetSetting> GetESportsSettingAsync(int licenseeId, int custId)
+        private async Task<BetSetting> GetESportsSettingAsync(IDictionary<int, int[]> currencyAgents, int custId)
         {
-            var dataList = await _dcsBetSettingService.GetBetSettingsAsync(licenseeId, custId, ProductTypes.Sportsbooks2).ConfigureAwait(false);
+            var dataList = await _dcsBetSettingService.GetBetSettingsAsync(currencyAgents, custId, ProductTypes.Sportsbooks2).ConfigureAwait(false);
             if (!dataList.Any())
             {
                 throw new InvalidOperationException("There is no E-sport setting data.");

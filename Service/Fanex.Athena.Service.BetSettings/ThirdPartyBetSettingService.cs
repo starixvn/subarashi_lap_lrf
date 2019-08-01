@@ -6,6 +6,7 @@
 
 namespace Fanex.Athena.Service.BetSettings
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using BetSettings.Interfaces;
@@ -31,9 +32,9 @@ namespace Fanex.Athena.Service.BetSettings
             _betSettingDataAccess = betSettingDataAccess;
         }
 
-        public async Task<ThirdPartyBetSettingViewModel> GetViewModelAsync(int licenseeId, int custId, int productid)
+        public async Task<ThirdPartyBetSettingViewModel> GetViewModelAsync(IDictionary<int, int[]> currencyAgents, int custId, int productid)
         {
-            if (!HasPermissionOnData(licenseeId, custId))
+            if (!HasPermissionOnData(currencyAgents, custId))
             {
                 return null;
             }
@@ -47,9 +48,9 @@ namespace Fanex.Athena.Service.BetSettings
             };
         }
 
-        public async Task<IResultInfo> UpdateStatusAsync(int licenseeId, int productId, int userId, int custId, string language, string ip, bool isEnabled)
+        public async Task<IResultInfo> UpdateStatusAsync(IDictionary<int, int[]> currencyAgents, int productId, int userId, int custId, string language, string ip, bool isEnabled)
         {
-            if (!HasPermissionOnData(licenseeId, custId))
+            if (!HasPermissionOnData(currencyAgents, custId))
             {
                 return ErrorResult(ViewResources.AccessDeniedMsg);
             }

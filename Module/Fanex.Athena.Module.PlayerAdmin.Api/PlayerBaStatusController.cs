@@ -31,7 +31,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api
 
         private void AssignCommonProperties(PlayerUpdatingBaseMetaModel param)
         {
-            param.LicenseeId = LicenseeId;
+            param.CurrencyPermission = this.CurrencyAgentList;
             param.UserId = UserId;
             param.Language = UpdatingUtils.GetLanguageCode(Language);
             param.Ip = ClientHelper.GetClientIpAddress(Request);

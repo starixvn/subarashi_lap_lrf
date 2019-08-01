@@ -1,5 +1,6 @@
 ﻿namespace Fanex.Athena.Service.Customer
 {
+    using System.Collections.Generic;
     using Fanex.Athena.DataAccess.Customer.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
@@ -19,9 +20,9 @@
             _authorizationService = authorizationService;
         }
 
-        public CustomerInfo GetCustomerInfo(int licenseeId, int custId)
+        public CustomerInfo GetCustomerInfo(IDictionary<int, int[]> currencyAgents, int custId)
         {
-            return _authorizationService.HasPermissionOnData(licenseeId, custId, 0)
+            return _authorizationService.HasPermissionOnData(currencyAgents, custId, 0)
                 ? _customerDataAccess.GetCustomerInfo(custId)
                 : new CustomerInfo();
         }

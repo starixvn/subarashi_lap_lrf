@@ -84,7 +84,7 @@ namespace Fanex.Athena.Controllers.BetSettings
                 throw new ArgumentException("Invalid product id: " + metaModel.ProductId);
             }
 
-            var licenseeId = SessionService.LicenseeSession.LicenseeId;
+            var currencyAgents = SessionService.UserSession.CurrencyAgentList;
             var viewModel = new BetSettingViewModel();
             await AssignRequiredProperties(viewModel, metaModel).ConfigureAwait(false);
 
@@ -93,12 +93,12 @@ namespace Fanex.Athena.Controllers.BetSettings
 
             if (ProductsHasStatus.Contains(metaModel.ProductId))
             {
-                viewModel.IsEnabled = await _betSettingService.GetStatusAsync(licenseeId, metaModel.CustId, metaModel.ProductId).ConfigureAwait(false);
+                viewModel.IsEnabled = await _betSettingService.GetStatusAsync(currencyAgents, metaModel.CustId, metaModel.ProductId).ConfigureAwait(false);
             }
 
             if (ProductsHasBetLimit.Contains(metaModel.ProductId))
             {
-                viewModel.MainData = await _betSettingService.GetBetSettingsAsync(licenseeId, metaModel.CustId, metaModel.ProductId).ConfigureAwait(false);
+                viewModel.MainData = await _betSettingService.GetBetSettingsAsync(currencyAgents, metaModel.CustId, metaModel.ProductId).ConfigureAwait(false);
             }
 
             return View(viewPath, viewModel);
@@ -109,7 +109,6 @@ namespace Fanex.Athena.Controllers.BetSettings
         public async Task<JsonResult> UpdateStatus(int custId, string nickName, int status, int productId)
         {
             var userSession = SessionService.UserSession;
-            var licenseeId = SessionService.LicenseeSession.LicenseeId;
 
             if (!CheckPermission(userSession, productId))
             {
@@ -117,12 +116,12 @@ namespace Fanex.Athena.Controllers.BetSettings
             }
 
             var result = await _betSettingService.UpdateStatusAsync(
-                licenseeId,
+                userSession.CurrencyAgentList,
                 userSession.UserId,
                 custId,
                 Request.UserHostAddress,
                 status == 1,
-                productId).ConfigureAwait(false);
+                productId);
 
             if (result.Code == 0)
             {
@@ -153,11 +152,11 @@ namespace Fanex.Athena.Controllers.BetSettings
             }
 
             var result = await _betSettingService.UpdateBetSettingAsync(
-                commonParam.LicenseeId,
+                userSession.CurrencyAgentList,
                 commonParam.CustId,
                 commonParam.UserId,
                 commonParam.Ip,
-                parameters).ConfigureAwait(false);
+                parameters);
 
             if (result.Code == 0)
             {

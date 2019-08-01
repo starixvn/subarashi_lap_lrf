@@ -1,8 +1,10 @@
-﻿namespace Fanex.Athena.Model.BetSettings.MetaModel
+﻿using System.Collections.Generic;
+
+namespace Fanex.Athena.Model.BetSettings.MetaModel
 {
     public class BetSettingCasinoStatusMetaModel : CoreCasinoStatusMetaModel
     {
-        public int LicenseeId { get; set; }
+        public IDictionary<int, int[]> currencyAgents { get; set; }
 
         public string UserName { get; set; }
 

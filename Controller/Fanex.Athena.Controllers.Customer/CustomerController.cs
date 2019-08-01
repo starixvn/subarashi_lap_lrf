@@ -247,13 +247,15 @@ namespace Fanex.Athena.Controllers.Customer
         public ActionResult LogInfo(int custId)
         {
             var licenseeSession = SessionService.LicenseeSession;
-
-            var logInfo = _customerListService.GetCustomerLoginInfo(custId, licenseeSession.LicenseeId, licenseeSession.LicenseeName);
+            var userSession = SessionService.UserSession;
+            var logInfo = _customerListService.GetCustomerLoginInfo(custId,
+                licenseeSession.LicenseeId, licenseeSession.LicenseeName, userSession.CurrencyAgentList);
 
             var model = new LogInfoViewModel
             {
                 LogInfo = logInfo,
-                ProductAccess = this._productService.GetProductAccess(licenseeSession.LicenseeId, SessionService.UserSession.Language)
+                ProductAccess = this._productService.GetProductAccess(licenseeSession.LicenseeId,
+                userSession.Language)
             };
 
             return View("~/Views/Desktop/Customer/CustomerDialog/LogInfo.cshtml", model);

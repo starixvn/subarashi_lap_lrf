@@ -26,15 +26,13 @@
         public void IsCustomerBelonging_WhenCall_ParametersPassedCorrectly()
         {
             // Action
-            DataAccess.IsCustomerBelonging(LicenseeId, CustId, TransId);
+            DataAccess.IsCustomerBelonging(CustId, TransId);
 
             // Assert
             Assert.Multiple(() =>
             {
-                ObjectDb.Received(1).SetParameterValue("licenseeid", LicenseeId);
                 ObjectDb.Received(1).SetParameterValue("transid", TransId);
                 ObjectDb.Received(1).SetParameterValue("custid", CustId);
-                ObjectDb.Received(1).SetParameterValue("status", null);
             });
         }
 
@@ -46,7 +44,7 @@
             ObjectDb.GetParameterValue("status").Returns(expected);
 
             // Action
-            var result = DataAccess.IsCustomerBelonging(LicenseeId, CustId, TransId);
+            var result = DataAccess.IsCustomerBelonging(CustId, TransId);
 
             // Assert
             Assert.That(result, Is.EqualTo(expected));

@@ -6,6 +6,7 @@
 
 namespace Fanex.Athena.Service.Customer
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using DataAccess.Customer.Interfaces;
@@ -64,9 +65,9 @@ namespace Fanex.Athena.Service.Customer
             return await _dormantCustomerListDataAccess.GetDormantCustomers(metaModel).ConfigureAwait(false);
         }
 
-        public LogInfo GetCustomerLoginInfo(int custId, int licenseeId, string siteName)
+        public LogInfo GetCustomerLoginInfo(int custId, int licenseeId, string siteName, IDictionary<int, int[]> currencyAgents)
         {
-            return _authorizationService.HasPermissionOnData(licenseeId, custId, 0)
+            return _authorizationService.HasPermissionOnData(currencyAgents, custId, 0)
                 ? _customerListDataAccess.GetCustomerLoginInfo(custId, licenseeId, siteName)
                 : new LogInfo();
         }
@@ -75,7 +76,7 @@ namespace Fanex.Athena.Service.Customer
 
         public IResultInfo UpdateOddsGroup(CustomerOddsGroupMetaModel metaModel)
         {
-            if (!_authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, 0))
+            if (!_authorizationService.HasPermissionOnData(metaModel.currencyAgents, metaModel.CustId, 0))
             {
                 return CreateErrorResult();
             }
@@ -85,7 +86,7 @@ namespace Fanex.Athena.Service.Customer
 
         public async Task<IResultInfo> UpdateCustClosedAsync(CustomerStatusMetaModel metaModel, string languageCode)
         {
-            if (!_authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, 0))
+            if (!_authorizationService.HasPermissionOnData(currencyAgents, metaModel.CustId, 0))
             {
                 return CreateErrorResult();
             }
@@ -128,7 +129,7 @@ namespace Fanex.Athena.Service.Customer
 
         public async Task<IResultInfo> UpdateCustSuspendAsync(CustomerStatusMetaModel metaModel, string languageCode)
         {
-            if (!_authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, 0))
+            if (!_authorizationService.HasPermissionOnData(currencyAgents, metaModel.CustId, 0))
             {
                 return CreateErrorResult();
             }
@@ -174,9 +175,9 @@ namespace Fanex.Athena.Service.Customer
             int custId,
             int modifiedBy,
             bool allowBA,
-            Request request)
+            Request request, IDictionary<int, int[]> currencyAgents)
         {
-            if (!_authorizationService.HasPermissionOnData(licenseeId, custId, 0))
+            if (!_authorizationService.HasPermissionOnData(currencyAgents, custId, 0))
             {
                 return CreateErrorResult();
             }
@@ -189,9 +190,9 @@ namespace Fanex.Athena.Service.Customer
                    request);
         }
 
-        public IResultInfo UpdateSpecialLevel(int licenseeId, int userId, int custId, int level, string ip, string language)
+        public IResultInfo UpdateSpecialLevel(IDictionary<int, int[]> currencyAgents, int userId, int custId, int level, string ip, string language)
         {
-            if (!_authorizationService.HasPermissionOnData(licenseeId, custId, 0))
+            if (!_authorizationService.HasPermissionOnData(currencyAgents, custId, 0))
             {
                 return CreateErrorResult();
             }

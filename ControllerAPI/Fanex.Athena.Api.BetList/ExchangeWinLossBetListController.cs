@@ -76,8 +76,7 @@
 
         private bool IsValidRequest(BaseExchangeBetListMetaModel metaModel)
         {
-            var licenseId = SessionService.LicenseeSession.LicenseeId;
-            return _authorizationService.HasPermissionOnData(licenseId, metaModel.CustId, 0);
+            return _authorizationService.HasPermissionOnData(SessionService.UserSession.CurrencyAgentList, metaModel.CustId, 0);
         }
     }
 }

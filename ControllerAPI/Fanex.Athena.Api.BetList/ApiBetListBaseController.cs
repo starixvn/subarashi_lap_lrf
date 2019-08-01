@@ -52,7 +52,7 @@ namespace Fanex.Athena.Api.BetList
         protected void CheckDataPermission(int custId, long transId)
         {
             if (!_authorizationService.HasPermissionOnData(
-                SessionService.LicenseeSession.LicenseeId,
+                SessionService.UserSession.CurrencyAgentList,
                 custId,
                 transId))
             {

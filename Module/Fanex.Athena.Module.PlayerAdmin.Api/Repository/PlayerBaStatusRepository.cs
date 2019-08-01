@@ -15,7 +15,6 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Repository
 
             using (var db = this.GetObjectDb(UspName))
             {
-                db.SetParameterValue("LicenseeID", metaModel.LicenseeId);
                 db.SetParameterValue("CustID", metaModel.CustId);
                 db.SetParameterValue("ModifyBy", metaModel.UserId);
                 db.SetParameterValue("IsBA", metaModel.IsBa);

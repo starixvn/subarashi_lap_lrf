@@ -34,9 +34,9 @@ namespace Fanex.Athena.Service.BetSettings
             _betSettingDataAccess = betSettingDataAccess;
         }
 
-        public async Task<BetSettingViewModel> GetViewModelAsync(int licenseeId, int custId)
+        public async Task<BetSettingViewModel> GetViewModelAsync(IDictionary<int, int[]> currencyAgents, int custId)
         {
-            if (!HasPermissionOnData(licenseeId, custId))
+            if (!HasPermissionOnData(currencyAgents, custId))
             {
                 return new BetSettingViewModel
                 {
@@ -52,15 +52,9 @@ namespace Fanex.Athena.Service.BetSettings
             };
         }
 
-        /// <summary>
-        /// Update NumberGame bet setting.
-        /// </summary>
-        /// <param name="setting">The metal model.</param>
-        /// <param name="data">The parameter.</param>
-        /// <returns>The information of result.</returns>
-        public async Task<IResultInfo> UpdateBetSettingAsync(CommonBetSetting setting, Hashtable data)
+        public async Task<IResultInfo> UpdateBetSettingAsync(CommonBetSetting setting, Hashtable data, IDictionary<int, int[]> currencyAgents)
         {
-            if (!HasPermissionOnData(setting.LicenseeId, setting.CustId))
+            if (!HasPermissionOnData(currencyAgents, setting.CustId))
             {
                 return ErrorResult(ViewResources.AccessDeniedMsg);
             }

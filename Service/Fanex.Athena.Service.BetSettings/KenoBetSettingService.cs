@@ -34,9 +34,9 @@ namespace Fanex.Athena.Service.BetSettings
             _betSettingDataAccess = betSettingDataAccess;
         }
 
-        public async Task<BetSettingViewModel> GetViewModelAsync(int licenseeId, int custId)
+        public async Task<BetSettingViewModel> GetViewModelAsync(IDictionary<int, int[]> currencyAgents, int custId)
         {
-            if (!HasPermissionOnData(licenseeId, custId))
+            if (!HasPermissionOnData(currencyAgents, custId))
             {
                 return new BetSettingViewModel
                 {
@@ -52,11 +52,11 @@ namespace Fanex.Athena.Service.BetSettings
             };
         }
 
-        public async Task<IResultInfo> UpdateBetSettingAsync(int licenseeId, int custId, int userId, string language, string ip, KenoBetSetting setting)
+        public async Task<IResultInfo> UpdateBetSettingAsync(IDictionary<int, int[]> currencyAgents, int custId, int userId, string language, string ip, KenoBetSetting setting)
         {
             const string XMLPattern = "<settings>{0}</settings>";
             const string XMLElement = "<setting GameTypeID=\"{0}\" minbet=\"{1}\" maxbet=\"{2}\" maxpermatch=\"{3}\" ></setting>";
-            if (!HasPermissionOnData(licenseeId, custId))
+            if (!HasPermissionOnData(currencyAgents, custId))
             {
                 return ErrorResult(ViewResources.AccessDeniedMsg);
             }

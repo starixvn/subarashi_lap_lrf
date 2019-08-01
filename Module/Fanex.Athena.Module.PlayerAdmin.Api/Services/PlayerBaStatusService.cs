@@ -13,27 +13,18 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
 
         private readonly IAuthorizationService _authorizationService;
 
-        private readonly IProductService _productService;
-
         public PlayerBaStatusService(
             IPlayerBaStatusRepository playerBaStatusRepository,
-            IAuthorizationService authorizationService,
-            IProductService productService)
+            IAuthorizationService authorizationService
+           )
         {
             _playerBaStatusRepository = playerBaStatusRepository;
             _authorizationService = authorizationService;
-            _productService = productService;
         }
 
         public ResultViewModel Update(BaStatusUpdatingMetaModel metaModel)
         {
-            var productAccess = _productService.GetProductAccess(metaModel.LicenseeId, metaModel.Language);
-            if (!productAccess.IsAllowBA)
-            {
-                return CreateErrorResult(ResourceKeyConstants.NotAllowBA);
-            }
-
-            if (!_authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, 0))
+            if (!_authorizationService.HasPermissionOnData(metaModel.CurrencyPermission, metaModel.CustId, 0))
             {
                 return CreateErrorResult(ResourceKeyConstants.InvalidData);
             }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Fanex.Athena.DataAccess.Core.Users.Interfaces;
 using Fanex.Athena.Model.Auth;
@@ -168,24 +169,66 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
             Assert.That(result, Is.False);
         }
 
-        [TestCase(-1, 0, 0, false)]
-        [TestCase(0, 0, 0, false)]
-        [TestCase(1, 0, 0, true)]
-        [TestCase(1, 0, 0, true)]
-        [TestCase(1, 1, 1, true)]
-
-        public void HasPermissionOnData_WhenCall_ReturnCorrectResult(int licenseeId, int custId, long transId, bool expectedResult)
+        [Test]
+        public void HasPermissionOnData_CustIdAndTransIdIsZero_ReturnTrue()
         {
             //Arrange 
-            _authorizationDataAccess.IsCustomerBelonging(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<long>()).Returns(true);
+            var currencyAgent = new Dictionary<int, int[]>
+            {
+                { 1, new[] { 100, 200 } }
+            };
 
             //Action
 
-            var result = _authorizationService.HasPermissionOnData(licenseeId, custId, transId);
+            var result = _authorizationService.HasPermissionOnData(currencyAgent, 0, 0);
 
             //Assert
 
-            Assert.AreEqual(expectedResult, result);
+            Assert.That(result, Is.True);
+
+        }
+
+        [Test]
+        public void HasPermissionOnData_CustBelongToUser_ReturnTrue()
+        {
+            //Arrange 
+            var currencyAgent = new Dictionary<int, int[]>
+            {
+                { 1, new[] { 100, 200 } }
+            };
+
+            _authorizationDataAccess.IsCustomerBelonging(Arg.Any<int>(), Arg.Any<long>()).Returns(new Tuple<int, int>(1, 100));
+
+
+            //Action
+
+            var result = _authorizationService.HasPermissionOnData(currencyAgent, 0, 0);
+
+            //Assert
+
+            Assert.That(result, Is.True);
+
+        }
+
+
+        [Test]
+        public void HasPermissionOnData_CustNotBelongToUser_ReturnFalse()
+        {
+            //Arrange 
+            const int custId = 1;
+            var currencyAgent = new Dictionary<int, int[]>
+            {
+                { 1, new[] { 100, 200 } }
+            };
+            _authorizationDataAccess.IsCustomerBelonging(custId, Arg.Any<long>()).Returns(new Tuple<int, int>(1, 1));
+
+            //Action
+
+            var result = _authorizationService.HasPermissionOnData(currencyAgent, custId, 0);
+
+            //Assert
+
+            Assert.That(result, Is.False);
 
         }
 

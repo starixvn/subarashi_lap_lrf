@@ -53,22 +53,28 @@ namespace Fanex.Athena.Service.StatelessCore
                    : userAuthInfo.FunctionList != null && userAuthInfo.FunctionList.Any(x => x.FunctionKey == PermissionKeys.CustomerInfoSpecialBA);
         }
 
-        [DebuggerStepThrough]
-        public bool HasPermissionOnData(int licenseeId, int custId, long transId)
+        public bool HasPermissionOnData(IDictionary<int, int[]> currencyAgents, int custId, long transId)
         {
-            if (licenseeId <= 0)
-            {
-                return false;
-            }
-
             if (custId == 0 && transId == 0)
             {
                 return true;
             }
 
-            return _authorizationDataAccess.IsCustomerBelonging(licenseeId, custId, transId);
-        }
+            var item = _authorizationDataAccess.IsCustomerBelonging(custId, transId);
 
+            return currencyAgents.Any(i => i.Key == item.Item1 && i.Value.Contains(item.Item2));
+        }
+        public bool HasPermissionOnData(OneAuthCurrency[] currencyAgents, int custId, long transId)
+        {
+            if (custId == 0 && transId == 0)
+            {
+                return true;
+            }
+
+            var item = _authorizationDataAccess.IsCustomerBelonging(custId, transId);
+
+            return currencyAgents.Any(i => i.CurrencyId == item.Item1 && i.AgentId.Contains(item.Item2));
+        }
 
     }
 }

@@ -6,6 +6,7 @@
 
 namespace Fanex.Athena.Service.BetSettings.Interfaces
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using Fanex.Athena.Model.BetSettings.ViewModel;
@@ -15,10 +16,10 @@ namespace Fanex.Athena.Service.BetSettings.Interfaces
 
     public interface IAgCasinoBetSettingService
     {
-        Task<AgCasinoBetSettingViewModel> GetViewModelAsync(int licenseeId, int custId, string licenseeName);
+        Task<AgCasinoBetSettingViewModel> GetViewModelAsync(int custId, string licenseeName);
 
-        Task<IResultInfo> UpdateAgCasinoBetSettingAsync(CommonBetSetting setting, string group);
+        Task<IResultInfo> UpdateAgCasinoBetSettingAsync(CommonBetSetting setting, string group, IDictionary<int, int[]> currencyAgents);
 
-        Task<IResultInfo> UpdateStatusAsync(int licenseeId, int userId, int custId, string language, string ip, bool isEnabled);
+        Task<IResultInfo> UpdateStatusAsync(IDictionary<int, int[]> currencyAgents, int userId, int custId, string language, string ip, bool isEnabled);
     }
 }

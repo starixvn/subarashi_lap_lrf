@@ -6,6 +6,7 @@
 
 namespace Fanex.Athena.Service.Customer.Interfaces
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     #region Using
@@ -24,7 +25,7 @@ namespace Fanex.Athena.Service.Customer.Interfaces
 
         Task<ReportResultModel<DormantCustomer>> GetDormantCustomers(CustomerListMetaModel metaModel);
 
-        LogInfo GetCustomerLoginInfo(int custId, int licenseeId, string siteName);
+        LogInfo GetCustomerLoginInfo(int custId, int licenseeId, string siteName, IDictionary<int, int[]> currencyAgents);
 
         IResultInfo UpdateOddsGroup(CustomerOddsGroupMetaModel metaModel);
 
@@ -32,8 +33,8 @@ namespace Fanex.Athena.Service.Customer.Interfaces
 
         Task<IResultInfo> UpdateCustSuspendAsync(CustomerStatusMetaModel metaModel, string languageCode);
 
-        IResultInfo UpdateCustomerBAStatus(int licenseeId, int custId, int modifiedBy, bool allowBA, Request request);
+        IResultInfo UpdateCustomerBAStatus(int licenseeId, int custId, int modifiedBy, bool allowBA, Request request, IDictionary<int, int[]> currencyAgents);
 
-        IResultInfo UpdateSpecialLevel(int licenseeId, int userId, int custId, int level, string ip, string language);
+        IResultInfo UpdateSpecialLevel(IDictionary<int, int[]> currencyAgents, int userId, int custId, int level, string ip, string language);
     }
 }

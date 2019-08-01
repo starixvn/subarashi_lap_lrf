@@ -72,9 +72,9 @@ namespace Fanex.Athena.Service.BetSettings
             _apiClient = apiClient;
         }
 
-        public IResultInfo<double> GetCommission(int licenseeId, int custId)
+        public IResultInfo<double> GetCommission(IDictionary<int, int[]> currencyAgents, int custId)
         {
-            if (!HasPermissionOnData(licenseeId, custId))
+            if (!HasPermissionOnData(currencyAgents, custId))
             {
                 return CreateAccessDeniedResult();
             }
@@ -91,9 +91,10 @@ namespace Fanex.Athena.Service.BetSettings
             }
         }
 
-        public async Task<IResultInfo<double>> UpdateCommissionAsync(int licenseeId, int userId, int custId, double oldCommission, double newCommission)
+        public async Task<IResultInfo<double>> UpdateCommissionAsync(IDictionary<int, int[]> currencyAgents,
+            int userId, int custId, double oldCommission, double newCommission)
         {
-            if (!HasPermissionOnData(licenseeId, custId))
+            if (!HasPermissionOnData(currencyAgents, custId))
             {
                 return CreateAccessDeniedResult();
             }

@@ -46,8 +46,9 @@ namespace Fanex.Athena.Controllers.BetSettings
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public async Task<ActionResult> Index(BetSettingMetaModel metaModel)
         {
-            var viewModel = await _betSettingService.GetViewModelAsync(SessionService.LicenseeSession.LicenseeId, metaModel.CustId);
-            await AssignRequiredProperties(viewModel, metaModel).ConfigureAwait(false);
+            var viewModel = await _betSettingService.GetViewModelAsync(SessionService.UserSession.CurrencyAgentList,
+                metaModel.CustId);
+            await AssignRequiredProperties(viewModel, metaModel);
             return View("~/Views/Desktop/Customer/BetSetting/Keno.cshtml", viewModel);
         }
 
@@ -74,12 +75,12 @@ namespace Fanex.Athena.Controllers.BetSettings
             var betSetting = GetBetSetting(id);
 
             var result = await _betSettingService.UpdateBetSettingAsync(
-                commonParam.LicenseeId,
+                userSession.CurrencyAgentList,
                 commonParam.CustId,
                 commonParam.UserId,
                 commonParam.Language,
                 commonParam.Ip,
-                betSetting).ConfigureAwait(false);
+                betSetting);
 
             if (result.Code == 0)
             {

@@ -51,16 +51,17 @@ namespace Fanex.Athena.Controllers.BetSettings
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public async Task<ActionResult> Index(BetSettingMetaModel metaModel)
         {
-            var licenseeId = SessionService.LicenseeSession.LicenseeId;
+            var currencyAgents = SessionService.UserSession.CurrencyAgentList;
             var viewModel = new ExchangeBetSettingViewModel
             {
                 CommissionList = ValidComms
             };
-            await AssignRequiredProperties(viewModel, metaModel).ConfigureAwait(false);
+            await AssignRequiredProperties(viewModel, metaModel);
 
-            viewModel.IsEnabled = await _betSettingService.GetStatusAsync(licenseeId, metaModel.CustId, metaModel.ProductId).ConfigureAwait(false);
+            viewModel.IsEnabled = await
+                _betSettingService.GetStatusAsync(currencyAgents, metaModel.CustId, metaModel.ProductId);
 
-            var apiResult = _exchangeCommApiService.GetCommission(licenseeId, metaModel.CustId);
+            var apiResult = _exchangeCommApiService.GetCommission(currencyAgents, metaModel.CustId);
             if (apiResult.IsSuccessful)
             {
                 viewModel.Commission = apiResult.ExtendedData;
@@ -84,13 +85,13 @@ namespace Fanex.Athena.Controllers.BetSettings
                 const int InvalidChargeCommissionError = 100;
                 return Json(new ResultInfo { Code = InvalidChargeCommissionError, Message = ViewResources.InvalidChargeCommission });
             }
-
+            var userSession = SessionService.UserSession;
             var result = await _exchangeCommApiService.UpdateCommissionAsync(
-                SessionService.LicenseeSession.LicenseeId,
-                SessionService.UserSession.UserId,
+                userSession.CurrencyAgentList,
+                userSession.UserId,
                 custId,
                 oldCommission,
-                newCommission).ConfigureAwait(false);
+                newCommission);
 
             return Json(result);
         }

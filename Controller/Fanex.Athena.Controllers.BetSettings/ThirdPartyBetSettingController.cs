@@ -59,7 +59,7 @@ namespace Fanex.Athena.Controllers.BetSettings
             }
 
             var viewModel = await _betSettingService.GetViewModelAsync(
-                SessionService.LicenseeSession.LicenseeId,
+                SessionService.UserSession.CurrencyAgentList,
                 metaModel.CustId,
                 metaModel.ProductId);
             if (viewModel == null)
@@ -67,7 +67,7 @@ namespace Fanex.Athena.Controllers.BetSettings
                 return this.Redirect("~/Utility/AccessDenied");
             }
 
-            await AssignRequiredProperties(viewModel, metaModel).ConfigureAwait(false);
+            await AssignRequiredProperties(viewModel, metaModel);
             var viewPath = $"~/Views/Desktop/Customer/BetSetting/{ProductViewFileMap[metaModel.ProductId]}.cshtml";
             return View(viewPath, viewModel);
         }
@@ -110,8 +110,6 @@ namespace Fanex.Athena.Controllers.BetSettings
         private async Task<JsonResult> UpdateThirdPartyProductStatus(int productId, int custId, string nickName, int status)
         {
             var userSession = SessionService.UserSession;
-            var licenseeId = SessionService.LicenseeSession.LicenseeId;
-
             if (!CheckPermission(userSession, productId))
             {
                 return AccessDenied();
@@ -119,13 +117,13 @@ namespace Fanex.Athena.Controllers.BetSettings
 
             var isEnabled = status == 1;
             var result = await _betSettingService.UpdateStatusAsync(
-               licenseeId,
+               userSession.CurrencyAgentList,
                 productId,
                 userSession.UserId,
                 custId,
                 userSession.Language,
                 Request.UserHostAddress,
-                isEnabled).ConfigureAwait(false);
+                isEnabled);
 
             if (result.Code == 0 && string.IsNullOrWhiteSpace(result.Message))
             {

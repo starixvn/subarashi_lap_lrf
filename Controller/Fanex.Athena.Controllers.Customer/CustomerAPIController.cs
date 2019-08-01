@@ -150,7 +150,7 @@ namespace Fanex.Athena.Controllers.Customer
                 try
                 {
                     var dataResult = _customerListService.UpdateSpecialLevel(
-                        licensee.LicenseeId,
+                        userSession.CurrencyAgentList,
                         userSession.UserId,
                         custId,
                         level,
@@ -198,7 +198,7 @@ namespace Fanex.Athena.Controllers.Customer
                 {
                     var metaModel = new CustomerOddsGroupMetaModel
                     {
-                        LicenseeId = licensee.LicenseeId,
+                        currencyAgents = userSession.CurrencyAgentList,
                         CustId = custId,
                         Ip = Request.UserHostAddress,
                         Language = userSession.Language,
@@ -272,7 +272,7 @@ namespace Fanex.Athena.Controllers.Customer
                 custId,
                 userSession.UserId,
                 isAllowBA,
-                request);
+                request, userSession.CurrencyAgentList);
             if (updateResult.IsSuccessful)
             {
                 return CreateUpdatingBaResult(isAllowBA, true, updateResult.Message, updateResult.ExtendedData);

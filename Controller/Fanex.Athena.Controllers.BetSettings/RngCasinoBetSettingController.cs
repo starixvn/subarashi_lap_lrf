@@ -100,8 +100,6 @@ namespace Fanex.Athena.Controllers.BetSettings
         public async Task<JsonResult> UpdateStatus(int custId, string nickName, int status)
         {
             var userSession = SessionService.UserSession;
-            var licenseeId = SessionService.LicenseeSession.LicenseeId;
-
             if (!CheckPermission(userSession, ProductTypes.RngCasino))
             {
                 return AccessDenied();
@@ -115,7 +113,7 @@ namespace Fanex.Athena.Controllers.BetSettings
 
             var metaModel = new BetSettingCasinoStatusMetaModel
             {
-                LicenseeId = licenseeId,
+                currencyAgents = userSession.CurrencyAgentList,
                 UserId = userSession.UserId,
                 CustId = custId,
                 Status = status,

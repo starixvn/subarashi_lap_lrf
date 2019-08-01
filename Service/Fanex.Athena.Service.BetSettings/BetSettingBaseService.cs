@@ -6,6 +6,7 @@
 
 namespace Fanex.Athena.Service.BetSettings
 {
+    using System.Collections.Generic;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     using Model.Core.DTO.Common;
@@ -28,9 +29,9 @@ namespace Fanex.Athena.Service.BetSettings
             };
         }
 
-        protected bool HasPermissionOnData(int licenseeId, int custId)
+        protected bool HasPermissionOnData(IDictionary<int, int[]> currencyAgents, int custId)
         {
-            return _authorizationService.HasPermissionOnData(licenseeId, custId, 0);
+            return _authorizationService.HasPermissionOnData(currencyAgents, custId, 0);
         }
     }
 }
