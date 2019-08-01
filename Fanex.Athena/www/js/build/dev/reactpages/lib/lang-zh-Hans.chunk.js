@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 08/01/2019 2:43:11 PM
+// Generated at: 08/01/2019 3:40:20 PM
 window._language_zh_Hans = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -133,7 +133,7 @@ window._language_zh_Hans = {
   Apr: "四月",
   April: "四月",
   AreYouSure: "您确定要继续吗?",
-  Asia: "亚洲",
+  Asia: "亚洲版",
   Aug: "八月",
   August: "八月",
   AvailableFunds: "可用资金",
@@ -191,7 +191,7 @@ window._language_zh_Hans = {
   ChangeStatus: "更改 {0}&apos;s 状态",
   ChangeStatusOfThisCustomerMsg: "您确定您要更换此会员的状态吗?",
   Checkavailability: "检查可用性",
-  China: "中国",
+  China: "中国版",
   Choice: "选择",
   ChooseGroupMsg: "请选择一个组",
   ChooseGroupNameMsg: "请选择其他组名",
@@ -285,7 +285,7 @@ window._language_zh_Hans = {
   Entered: "成绩已输入场数",
   Error: "误差",
   ErrorProcessingMsg: "对不起, 处理您的请求时有错误发生。",
-  Euro: "欧洲",
+  Euro: "欧洲版",
   Event: "项目",
   EventDate: "赛事日期",
   ExcludeTestData: "排除测试数据",
