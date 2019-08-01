@@ -63,3 +63,4 @@ stats.json
 /Fanex.Athena/webpack-stats-*
 
 
+/Fanex.Athena/package-lock.json
