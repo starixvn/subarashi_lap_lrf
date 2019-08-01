@@ -80,6 +80,7 @@
     <Compile Include="MetaModel\GroupCommMetaModel.cs" />
     <Compile Include="MetaModel\MoveToGroupComMetaModel.cs" />
     <Compile Include="MetaModel\RemoveFromGroupComMetaModel.cs" />
+    <Compile Include="MetaModel\RNGCasinoUpdateMemberComMetaModel.cs" />
     <Compile Include="MetaModel\UpdatedCustomerComMetaModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\CustomerListViewModel.cs" />
