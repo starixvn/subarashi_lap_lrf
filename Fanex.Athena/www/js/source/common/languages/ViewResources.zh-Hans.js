@@ -1,4 +1,4 @@
-﻿// Generated at: 7/19/2019 9:00:07 AM
+﻿// Generated at: 08/01/2019 2:43:11 PM
 window._language_zh_Hans = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -342,7 +342,7 @@ MinimumOdds:"最低赔率",
 MixLiveAndNoneLive:"混合滚球&amp;非滚球",
 MixSportsParlay:"混合过关",
 Mo:"Mo",
-Mobile:"移动",
+Mobile:"手机版",
 Monday:"星期一",
 MoneyLine:"胜负盘",
 MoneyPlay:"普通投注",
