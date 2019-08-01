@@ -2,9 +2,8 @@
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web;
 using Fanex.Athena.Extension.Utility;
-using Fanex.Athena.Service.Core.Exception;
+using Fanex.Athena.Service.StatelessCore.CustomException;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
 
 using Newtonsoft.Json;
