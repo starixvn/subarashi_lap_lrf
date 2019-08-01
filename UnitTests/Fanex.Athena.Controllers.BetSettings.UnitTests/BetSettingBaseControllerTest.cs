@@ -76,7 +76,7 @@
 
         [TestCase(true)]
         [TestCase(false)]
-        public async Task AssignRequiredProperties_WhenCall_AssignCorrectBetSettingProducts(bool isEnableRngCasino)
+        public async Task AssignRequiredProperties_WhenCall_AssignCorrectBetSettingProductsAsync(bool isEnableRngCasino)
         {
             using (var controller = CreateController())
             {

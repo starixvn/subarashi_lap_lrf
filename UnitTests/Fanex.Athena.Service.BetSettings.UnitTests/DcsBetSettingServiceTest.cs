@@ -22,7 +22,6 @@
     [TestFixture]
     public partial class DcsBetSettingServiceTest
     {
-        private readonly int _licenseeId = FakeHelper.Create<int>();
         private readonly int _custId = FakeHelper.Create<int>();
         private readonly int _productId = FakeHelper.Create<int>();
         private readonly int _userId = FakeHelper.Create<int>();

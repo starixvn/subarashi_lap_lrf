@@ -42,17 +42,17 @@ namespace Fanex.Athena.Controllers.BetSettings
 
         [HttpGet]
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
-        public async Task<ActionResult> Index(BetSettingMetaModel metaModel)
+        public async Task<ActionResult> IndexAsync(BetSettingMetaModel metaModel)
         {
             var viewModel = await _betSettingService.GetViewModelAsync(metaModel.CustId);
-            await AssignRequiredProperties(viewModel, metaModel);
+            await AssignRequiredPropertiesAsync(viewModel, metaModel);
 
             return View("~/Views/Desktop/Customer/BetSetting/NumberGame.cshtml", viewModel);
         }
 
         [HttpPost]
         [CustomValidateAntiForgery]
-        public async Task<JsonResult> UpdateBetSetting(string nickName)
+        public async Task<JsonResult> UpdateBetSettingAsync(string nickName)
         {
             var userSession = SessionService.UserSession;
             var licenseeId = SessionService.LicenseeSession.LicenseeId;

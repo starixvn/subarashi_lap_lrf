@@ -77,16 +77,15 @@ namespace Fanex.Athena.Controllers.BetSettings
 
         [HttpGet]
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
-        public async Task<ActionResult> Index(BetSettingMetaModel metaModel)
+        public async Task<ActionResult> IndexAsync(BetSettingMetaModel metaModel)
         {
             if (!ProductViewNameMap.ContainsKey(metaModel.ProductId))
             {
                 throw new ArgumentException("Invalid product id: " + metaModel.ProductId);
             }
 
-            var currencyAgents = SessionService.UserSession.CurrencyAgentList;
             var viewModel = new BetSettingViewModel();
-            await AssignRequiredProperties(viewModel, metaModel).ConfigureAwait(false);
+            await AssignRequiredPropertiesAsync(viewModel, metaModel).ConfigureAwait(false);
 
             var viewName = ProductViewNameMap[metaModel.ProductId];
             var viewPath = $"~/Views/Desktop/Customer/BetSetting/{viewName}.cshtml";
@@ -106,7 +105,7 @@ namespace Fanex.Athena.Controllers.BetSettings
 
         [HttpPost]
         [CustomValidateAntiForgery]
-        public async Task<JsonResult> UpdateStatus(int custId, string nickName, int status, int productId)
+        public async Task<JsonResult> UpdateStatusAsync(int custId, string nickName, int status, int productId)
         {
             var userSession = SessionService.UserSession;
 
@@ -132,7 +131,7 @@ namespace Fanex.Athena.Controllers.BetSettings
 
         [HttpPost]
         [CustomValidateAntiForgery]
-        public async Task<JsonResult> UpdateBetSetting(int productId, string nickName)
+        public async Task<JsonResult> UpdateBetSettingAsync(int productId, string nickName)
         {
             var userSession = SessionService.UserSession;
             var licenseeId = SessionService.LicenseeSession.LicenseeId;

@@ -35,7 +35,7 @@
 
         [TestCase(true)]
         [TestCase(false)]
-        public async Task Index_CallApiSuccessfully_ReturnCorrectViewResult(bool? isEnabled)
+        public async Task Index_CallApiSuccessfully_ReturnCorrectViewResultAsync(bool? isEnabled)
         {
             using (var controller = CreateController())
             {
@@ -50,7 +50,7 @@
                     .Returns(new ResultInfo<double> { ExtendedData = ExtendedData });
 
                 // Action
-                var result = await controller.Index(metaModel) as ViewResult;
+                var result = await controller.IndexAsync(metaModel) as ViewResult;
                 var viewModel = (ExchangeBetSettingViewModel)result.Model;
 
                 // Assert
@@ -66,7 +66,7 @@
 
         [TestCase(true)]
         [TestCase(false)]
-        public async Task Index_CallApiFailed_ReturnCorrectViewResult(bool? isEnabled)
+        public async Task Index_CallApiFailed_ReturnCorrectViewResultAsync(bool? isEnabled)
         {
             using (var controller = CreateController())
             {
@@ -80,7 +80,7 @@
                     .Returns(new ResultInfo<double> { Code = 1, Message = "Error" });
 
                 // Action
-                var result = await controller.Index(metaModel) as ViewResult;
+                var result = await controller.IndexAsync(metaModel) as ViewResult;
                 var viewModel = (ExchangeBetSettingViewModel)result.Model;
 
                 // Assert
@@ -97,14 +97,14 @@
         [TestCase(1)]
         [TestCase(1.5)]
         [TestCase(7.5)]
-        public async Task UpdateComm_InvalidNewCommissionValue_ReturnFailedResult(double newComm)
+        public async Task UpdateComm_InvalidNewCommissionValue_ReturnFailedResultAsync(double newComm)
         {
             using (var controller = CreateController())
             {
                 // Arrange
 
                 // Action
-                var result = await controller.UpdateComm(0, 0, newComm) as JsonResult;
+                var result = await controller.UpdateCommAsync(0, 0, newComm) as JsonResult;
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -119,7 +119,7 @@
         [TestCase(2)]
         [TestCase(3.5)]
         [TestCase(5.5)]
-        public async Task UpdateComm_ValidNewCommissionValue_ReturnCorrectResult(double newComm)
+        public async Task UpdateComm_ValidNewCommissionValue_ReturnCorrectResultAsync(double newComm)
         {
             using (var controller = CreateController())
             {
@@ -131,7 +131,7 @@
                     .Returns(Task.FromResult<IResultInfo<double>>(expectedResultInfo));
 
                 // Action
-                var result = await controller.UpdateComm(0, 0, newComm) as JsonResult;
+                var result = await controller.UpdateCommAsync(0, 0, newComm) as JsonResult;
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert

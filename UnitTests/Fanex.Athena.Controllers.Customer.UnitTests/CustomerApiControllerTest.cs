@@ -94,7 +94,7 @@
         }
 
         [Test]
-        public void UpdateCustStatus_LicenseeAllowStatusFunction_ReturnErrorResult()
+        public async Task UpdateCustStatus_LicenseeAllowStatusFunction_ReturnErrorResultAsync()
         {
             using (var controller = CreateController())
             {
@@ -271,7 +271,7 @@
                 });
 
                 // Action
-                var result = await controller.RemoveFromGroupCom(string.Empty, false) as JsonResult;
+                var result = await controller.RemoveFromGroupComAsync(string.Empty, false) as JsonResult;
                 var resultData = result.Data;
 
                 // Assert
@@ -298,7 +298,7 @@
                 });
 
                 // Action
-                var result = await controller.RemoveFromGroupCom(CustmerIds, isRemovePlayerComm) as JsonResult;
+                var result = await controller.RemoveFromGroupComAsync(CustmerIds, isRemovePlayerComm) as JsonResult;
                 var resultData = result.Data as ResultViewModel;
 
                 // Assert

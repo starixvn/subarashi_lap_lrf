@@ -21,7 +21,6 @@
     [TestFixture]
     public class ThirdPartyBetSettingServiceTest
     {
-        private const int LicenseeId = 1;
         private const int UserId = 2;
         private const int CustId = 3;
         private const string Language = "en-US";
@@ -79,7 +78,7 @@
             _dataAccess.GetBetSettingAsync(CustId, ProductId).Returns(Task.FromResult(betSetting));
 
             // Action
-            var result = await _service.UpdateStatusAsync( ProductId, UserId, CustId, Language, "ip", true);
+            await _service.UpdateStatusAsync( ProductId, UserId, CustId, Language, "ip", true);
 
             // Assert
             await _dataAccess.Received(1).UpdateStatusAsync(ProductId, UserId, CustId, Language, "ip", true);

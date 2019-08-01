@@ -33,14 +33,14 @@ namespace Fanex.Athena.Service.Customer
             _lgClient = lgClient;
         }
 
-        public async Task<IList<GroupCommMetaModel>> GetAll(int licenseeId)
+        public async Task<IList<GroupCommMetaModel>> GetAllAsync(int licenseeId)
         {
-            return await _groupDataAccess.GetAll(licenseeId).ConfigureAwait(false);
+            return await _groupDataAccess.GetAllAsync(licenseeId).ConfigureAwait(false);
         }
 
-        public async Task<DataTable> GetDataForExcel(int licenseeId)
+        public async Task<DataTable> GetDataForExcelAsync(int licenseeId)
         {
-            return await _groupDataAccess.GetDataForExcel(licenseeId).ConfigureAwait(false);
+            return await _groupDataAccess.GetDataForExcelAsync(licenseeId).ConfigureAwait(false);
         }
 
         public GroupCommMetaModel GetById(int groupCommId, int licenseeId)
@@ -48,14 +48,14 @@ namespace Fanex.Athena.Service.Customer
             return _groupDataAccess.GetById(groupCommId, licenseeId);
         }
 
-        public async Task<IResultInfo> InsertGroup(GroupCommMetaModel item, IRequest request, int userId)
+        public async Task<IResultInfo> InsertGroupAsync(GroupCommMetaModel item, IRequest request, int userId)
         {
-            return await _groupDataAccess.InsertGroup(item, request, userId).ConfigureAwait(false);
+            return await _groupDataAccess.InsertGroupAsync(item, request, userId).ConfigureAwait(false);
         }
 
-        public async Task<IResultInfo> UpdateGroup(GroupCommMetaModel newItem, IRequest request, UserAuthInfo user)
+        public async Task<IResultInfo> UpdateGroupAsync(GroupCommMetaModel newItem, IRequest request, UserAuthInfo user)
         {
-            var resultInfo = await _groupDataAccess.UpdateGroup(newItem, request, user.UserId).ConfigureAwait(false);
+            var resultInfo = await _groupDataAccess.UpdateGroupAsync(newItem, request, user.UserId).ConfigureAwait(false);
             var callApiSuccess = true;
             if (newItem.IsUpdateCS && !string.IsNullOrEmpty(resultInfo.ExtendedData))
             {
@@ -84,9 +84,9 @@ namespace Fanex.Athena.Service.Customer
             return resultInfo;
         }
 
-        public async Task<IResultInfo> DeleteGroup(DeleteGroupMetaModel model)
+        public async Task<IResultInfo> DeleteGroupAsync(DeleteGroupMetaModel model)
         {
-            var resultInfo = await _groupDataAccess.DeleteGroup(
+            var resultInfo = await _groupDataAccess.DeleteGroupAsync(
                 model.GroupId,
                 model.LicenseeId,
                 model.UserId,

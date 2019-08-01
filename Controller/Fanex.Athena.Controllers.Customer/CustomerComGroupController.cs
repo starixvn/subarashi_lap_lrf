@@ -61,7 +61,7 @@
         {
             var licenseeId = SessionService.LicenseeSession.LicenseeId;
             var productAccess = _productService.GetProductAccess(licenseeId, SessionService.UserSession.Language);
-            var model = await _groupComService.GetAll(licenseeId);
+            var model = await _groupComService.GetAllAsync(licenseeId);
             ViewBag.IsAllowNG = productAccess.IsAllowNG;
             ViewBag.IsAllowCS = productAccess.IsAllowCS;
 
@@ -104,7 +104,7 @@
                         Language = userSession.Language,
                         Ip = Request.UserHostAddress
                     };
-                    result = await _groupComService.InsertGroup(metaModel, request, userSession.UserId);
+                    result = await _groupComService.InsertGroupAsync(metaModel, request, userSession.UserId);
 
                     result.Message = CustomerComGroupHelper.GetCreateGroupErrorMessage(result.Code);
 
@@ -200,7 +200,7 @@
             var userSession = SessionService.UserSession;
             var productAccess = _productService.GetProductAccess(licenseeId, userSession.Language);
 
-            var result = await _groupComService.DeleteGroup(
+            var result = await _groupComService.DeleteGroupAsync(
                 new DeleteGroupMetaModel
                 {
                     GroupId = groupId,
@@ -229,7 +229,7 @@
         [HttpGet]
         public async Task<JsonResult> GetDefaultGroup()
         {
-            var groupList = await _groupComService.GetAll(SessionService.LicenseeSession.LicenseeId);
+            var groupList = await _groupComService.GetAllAsync(SessionService.LicenseeSession.LicenseeId);
             var defaultGroupId = groupList.FirstOrDefault(x => x.IsDefaultGroup)?.GroupCommId ?? 0;
 
             return Json(new { id = defaultGroupId }, JsonRequestBehavior.AllowGet);
@@ -256,7 +256,7 @@
                 ABVisible = productAccess.IsAllowAB
             };
 
-            var mainTable = await _groupComService.GetDataForExcel(licenseeId);
+            var mainTable = await _groupComService.GetDataForExcelAsync(licenseeId);
 
             var excel = CreateExcel(templatePath, mainTable, showingOption);
 
@@ -299,7 +299,7 @@
         {
             var licenseeId = SessionService.LicenseeSession.LicenseeId;
             var productAccess = _productService.GetProductAccess(licenseeId, SessionService.UserSession.Language);
-            var groupList = await _groupComService.GetAll(licenseeId);
+            var groupList = await _groupComService.GetAllAsync(licenseeId);
             var defaultGroupId = groupList.FirstOrDefault(x => x.IsDefaultGroup)?.GroupCommId ?? 0;
 
             metaModel.LicenseeId = licenseeId;
@@ -320,7 +320,7 @@
                     Language = userSession.Language,
                     Ip = Request.UserHostAddress
                 };
-                var result = await _groupComService.UpdateGroup(metaModel, request, userSession);
+                var result = await _groupComService.UpdateGroupAsync(metaModel, request, userSession);
                 if (string.IsNullOrWhiteSpace(result.Message))
                 {
                     result.Message = CustomerComGroupHelper.GetUpdateGroupErrorMessage(result.Code);

@@ -102,7 +102,7 @@ namespace Fanex.Athena.Controllers.Customer
         #region Action
 
         [HttpGet]
-        public async Task<ActionResult> CustomerList(string userName = "", int groupId = -1)
+        public async Task<ActionResult> CustomerListAsync(string userName = "", int groupId = -1)
         {
             var licensee = SessionService.LicenseeSession;
             var userSession = SessionService.UserSession;
@@ -120,7 +120,7 @@ namespace Fanex.Athena.Controllers.Customer
                 BaseCurrency = userSession.DefaultBaseCurrency
             };
 
-            var model = await CreateCustomerViewModel(metaModel);
+            var model = await CreateCustomerViewModelAsync(metaModel);
 
             if (!model.IsSubsidiary)
             {
@@ -135,17 +135,17 @@ namespace Fanex.Athena.Controllers.Customer
         [AjaxRequest]
         [CustomValidateAntiForgery]
         [ValidationWebRequest]
-        public async Task<dynamic> CustomerList(CustomerListMetaModel metaModel)
+        public async Task<dynamic> CustomerListAsync(CustomerListMetaModel metaModel)
         {
             AssignMetaModelData(metaModel);
 
-            var result = await _customerListService.GetActiveCustomers(metaModel);
+            var result = await _customerListService.GetActiveCustomersAsync(metaModel);
             return new JsonResult
             {
                 Data = new
                 {
                     Data = result.DataList,
-                    TotalRows = result.TotalRows
+                    result.TotalRows
                 },
                 MaxJsonLength = int.MaxValue
             };
@@ -155,17 +155,17 @@ namespace Fanex.Athena.Controllers.Customer
         [AjaxRequest]
         [CustomValidateAntiForgery]
         [ValidationWebRequest]
-        public async Task<dynamic> DormantCustomerList(CustomerListMetaModel metaModel)
+        public async Task<dynamic> DormantCustomerListAsync(CustomerListMetaModel metaModel)
         {
             AssignMetaModelData(metaModel);
 
-            var result = await _customerListService.GetDormantCustomers(metaModel);
+            var result = await _customerListService.GetDormantCustomersAsync(metaModel);
             return new JsonResult
             {
                 Data = new
                 {
                     Data = result.DataList,
-                    TotalRows = result.TotalRows
+                    result.TotalRows
                 },
                 MaxJsonLength = int.MaxValue
             };
@@ -173,7 +173,7 @@ namespace Fanex.Athena.Controllers.Customer
 
         [HttpPost]
         [CustomValidateAntiForgery]
-        public async Task<ActionResult> ExportExcel(string excelParam)
+        public async Task<ActionResult> ExportExcelAsync(string excelParam)
         {
             if (string.IsNullOrEmpty(excelParam))
             {
@@ -192,7 +192,7 @@ namespace Fanex.Athena.Controllers.Customer
                 {
                     var templatePath = Server.MapPath(@"~/App_Data/Template/Customers/CustomerList.xls");
 
-                    var model = await GetCustomers(metaModel);
+                    var model = await GetCustomersAsync(metaModel);
                     var fileName = "CustomerList_" + DateTime.Now.ToString("MM-dd-yyyy");
                     var reportTitle = ViewResources.CustomerList + " - "
                         + string.Format(ViewResources.Viewin, metaModel.IsConvert ? metaModel.BaseCurrency.ToUpper(CultureInfo.CurrentCulture) : metaModel.CurrencyName);
@@ -210,7 +210,7 @@ namespace Fanex.Athena.Controllers.Customer
 
         [HttpPost]
         [CustomValidateAntiForgery]
-        public async Task<ActionResult> ExportExcelDormantCustomer(string excelParam)
+        public async Task<ActionResult> ExportExcelDormantCustomerAsync(string excelParam)
         {
             if (string.IsNullOrEmpty(excelParam))
             {
@@ -225,7 +225,7 @@ namespace Fanex.Athena.Controllers.Customer
 
                 var templatePath = Server.MapPath(@"~/App_Data/Template/Customers/DormantCustomerList.xls");
 
-                var resultModel = await _customerListService.GetDormantCustomers(metaModel);
+                var resultModel = await _customerListService.GetDormantCustomersAsync(metaModel);
                 if (resultModel.DataList.Any())
                 {
                     var fileName = "DormantCustomerList_" + DateTime.Now.ToString("MM-dd-yyyy");
@@ -307,7 +307,7 @@ namespace Fanex.Athena.Controllers.Customer
             metaModel.AgentListXml = GetAgentListXml(metaModel.SubsidiaryList, metaModel.CurrencyId);
         }
 
-        private async Task<CustomerListViewModel> CreateCustomerViewModel(CustomerListMetaModel metaModel)
+        private async Task<CustomerListViewModel> CreateCustomerViewModelAsync(CustomerListMetaModel metaModel)
         {
             var licenseeSession = SessionService.LicenseeSession;
             var userSession = SessionService.UserSession;
@@ -333,18 +333,18 @@ namespace Fanex.Athena.Controllers.Customer
             };
             if (!isSubsidiary && licenseeSession.IsAllowedCustomerComm)
             {
-                model.GroupCommDataList = await _groupComService.GetAll(licenseeSession.LicenseeId);
+                model.GroupCommDataList = await _groupComService.GetAllAsync(licenseeSession.LicenseeId);
                 model.CurrentGroupComm = _groupComService.GetById(metaModel.GroupCommId, licenseeSession.LicenseeId);
             }
 
             return model;
         }
 
-        private async Task<CustomerListViewModel> GetCustomers(CustomerListMetaModel metaModel)
+        private async Task<CustomerListViewModel> GetCustomersAsync(CustomerListMetaModel metaModel)
         {
-            var model = await CreateCustomerViewModel(metaModel).ConfigureAwait(false);
+            var model = await CreateCustomerViewModelAsync(metaModel).ConfigureAwait(false);
 
-            var result = await _customerListService.GetActiveCustomers(model.Param).ConfigureAwait(false);
+            var result = await _customerListService.GetActiveCustomersAsync(model.Param).ConfigureAwait(false);
             model.DataList = result.DataList;
             model.TotalRows = result.TotalRows;
 

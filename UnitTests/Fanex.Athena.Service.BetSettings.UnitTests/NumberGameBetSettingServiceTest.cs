@@ -22,7 +22,6 @@
     [TestFixture]
     public class NumberGameBetSettingServiceTest
     {
-        private const int LicenseeId = 1;
         private const int UserId = 2;
         private const int CustId = 3;
         private const string Language = "en-US";

@@ -109,7 +109,7 @@
                     GroupName = "Belle"
                 };
                 _groupComService.GetById(metaModel.GroupCommId, Arg.Any<int>()).Returns(new GroupCommMetaModel());
-                _groupComService.UpdateGroup(metaModel, Arg.Any<Request>(), SessionService.UserSession)
+                _groupComService.UpdateGroupAsync(metaModel, Arg.Any<Request>(), SessionService.UserSession)
                     .Returns(new ResultInfo());
 
                 // Action
@@ -119,7 +119,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    _groupComService.Received(1).UpdateGroup(metaModel, Arg.Any<Request>(), SessionService.UserSession);
+                    _groupComService.Received(1).UpdateGroupAsync(metaModel, Arg.Any<Request>(), SessionService.UserSession);
                     Assert.That(resultInfo.Code, Is.Zero);
                     Assert.That(resultInfo.Message, Is.EqualTo(ViewResources.MessageSuccess));
                 });
@@ -146,7 +146,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    _groupComService.DidNotReceive().UpdateGroup(metaModel, Arg.Any<Request>(), SessionService.UserSession);
+                    _groupComService.DidNotReceive().UpdateGroupAsync(metaModel, Arg.Any<Request>(), SessionService.UserSession);
                     Assert.That(resultInfo.Code, Is.Zero);
                     Assert.That(resultInfo.Message, Is.EqualTo(ViewResources.MessageSuccess));
                 });

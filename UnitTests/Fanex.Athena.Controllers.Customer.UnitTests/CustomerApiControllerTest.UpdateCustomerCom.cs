@@ -34,7 +34,7 @@
                 });
 
                 // Action
-                var result = await controller.UpdateCustomerCom(null) as JsonResult;
+                var result = await controller.UpdateCustomerComAsync(null) as JsonResult;
                 var resultData = result.Data as object;
 
                 // Assert
@@ -58,7 +58,7 @@
                 });
 
                 // Action
-                var result = await controller.UpdateCustomerCom(new UpdatedCustomerComMetaModel()) as JsonResult;
+                var result = await controller.UpdateCustomerComAsync(new UpdatedCustomerComMetaModel()) as JsonResult;
                 var resultData = result.Data as ResultViewModel;
 
                 // Assert
@@ -87,7 +87,7 @@
                 };
 
                 // Action
-                var result = await controller.UpdateCustomerCom(metaModel) as JsonResult;
+                var result = await controller.UpdateCustomerComAsync(metaModel) as JsonResult;
                 var resultData = result.Data as ResultViewModel;
 
                 // Assert
@@ -118,7 +118,7 @@
                 };
 
                 // Action
-                var result = await controller.UpdateCustomerCom(metaModel) as JsonResult;
+                var result = await controller.UpdateCustomerComAsync(metaModel) as JsonResult;
                 var resultData = result.Data as ResultViewModel;
 
                 // Assert
@@ -153,7 +153,7 @@
                 });
 
                 // Action
-                var result = await controller.UpdateCustomerCom(metaModel) as JsonResult;
+                var result = await controller.UpdateCustomerComAsync(metaModel) as JsonResult;
                 var resultData = result.Data as ResultViewModel;
 
                 // Assert

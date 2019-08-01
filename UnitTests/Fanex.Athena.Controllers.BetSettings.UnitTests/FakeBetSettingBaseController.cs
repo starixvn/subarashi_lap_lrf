@@ -36,7 +36,7 @@
 
         internal new async Task AssignRequiredProperties(BetSettingBaseViewModel viewModel, BetSettingMetaModel metaModel)
         {
-            await base.AssignRequiredProperties(viewModel, metaModel);
+            await base.AssignRequiredPropertiesAsync(viewModel, metaModel);
         }
 
         internal new CommonBetSetting GetBetSettingCommonParam(int userId, int licenseeId, string language)

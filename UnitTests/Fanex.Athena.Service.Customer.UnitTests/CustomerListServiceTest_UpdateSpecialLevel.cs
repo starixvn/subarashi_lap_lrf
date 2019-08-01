@@ -18,7 +18,6 @@
         public void UpdateSpecialLevel_WhenCall_ReturnCorrectResultInfo()
         {
             // Arrange
-            var licenseeId = FakeHelper.Create<int>();
             var custId = FakeHelper.Create<int>();
             var userId = FakeHelper.Create<int>();
             var level = FakeHelper.Create<int>();

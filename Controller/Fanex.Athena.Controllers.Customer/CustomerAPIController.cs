@@ -287,7 +287,7 @@ namespace Fanex.Athena.Controllers.Customer
         [AjaxRequest]
         [CustomValidateAntiForgery]
         [FunctionAuthorization(PermissionKeys.CustomerInfoCommissionGroupList)]
-        public async Task<ActionResult> UpdateCustomerCom(UpdatedCustomerComMetaModel metaModel)
+        public async Task<ActionResult> UpdateCustomerComAsync(UpdatedCustomerComMetaModel metaModel)
         {
             var licenseeSession = SessionService.LicenseeSession;
             if (!licenseeSession.IsAllowedCustomerComm)
@@ -329,7 +329,7 @@ namespace Fanex.Athena.Controllers.Customer
                     }
                     else
                     {
-                        await this.ProcessUpdatingCustomerCom(metaModel, result);
+                        await this.ProcessUpdatingCustomerComAsync(metaModel, result);
                     }
                 }
             }
@@ -341,7 +341,7 @@ namespace Fanex.Athena.Controllers.Customer
         [AjaxRequest]
         [CustomValidateAntiForgery]
         [FunctionAuthorization(PermissionKeys.CustomerInfoCommissionGroupList)]
-        public async Task<ActionResult> RemoveFromGroupCom(string customerIds, bool isRemovePlayercomm)
+        public async Task<ActionResult> RemoveFromGroupComAsync(string customerIds, bool isRemovePlayercomm)
         {
             var licenseeSession = SessionService.LicenseeSession;
             if (!licenseeSession.IsAllowedCustomerComm)
@@ -391,7 +391,7 @@ namespace Fanex.Athena.Controllers.Customer
         [AjaxRequest]
         [CustomValidateAntiForgery]
         [FunctionAuthorization(PermissionKeys.CustomerInfoCommissionGroupList)]
-        public async Task<ActionResult> MoveToGroupCom(string customerIds, int groupComId)
+        public async Task<ActionResult> MoveToGroupComAsync(string customerIds, int groupComId)
         {
             var licenseeSession = SessionService.LicenseeSession;
             if (!licenseeSession.IsAllowedCustomerComm)
@@ -468,7 +468,7 @@ namespace Fanex.Athena.Controllers.Customer
                                oldGroup.CSComm == metaModel.CSComm;
         }
 
-        private async Task ProcessUpdatingCustomerCom(UpdatedCustomerComMetaModel metaModel, ResultViewModel result)
+        private async Task ProcessUpdatingCustomerComAsync(UpdatedCustomerComMetaModel metaModel, ResultViewModel result)
         {
             metaModel.Language = SessionService.UserSession.Language;
             var temp = await _customerCommService.UpdateCustomersCommissionAsync(metaModel, metaModel.IsAllowedCS);

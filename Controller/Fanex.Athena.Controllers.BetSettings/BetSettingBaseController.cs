@@ -70,7 +70,7 @@ namespace Fanex.Athena.Controllers.BetSettings
             return _coreBetSettingService.GetCustomerInfo(custId);
         }
 
-        protected async Task AssignRequiredProperties(BetSettingBaseViewModel viewModel, BetSettingMetaModel metaModel)
+        protected async Task AssignRequiredPropertiesAsync(BetSettingBaseViewModel viewModel, BetSettingMetaModel metaModel)
         {
             var licensee = SessionService.LicenseeSession;
             var userSession = SessionService.UserSession;
@@ -108,8 +108,7 @@ namespace Fanex.Athena.Controllers.BetSettings
                 return defaultValue;
             }
 
-            decimal value;
-            return !decimal.TryParse(HttpContext.Request[name], out value)
+            return !decimal.TryParse(HttpContext.Request[name], out decimal value)
                        ? defaultValue
                        : value;
         }
@@ -121,8 +120,7 @@ namespace Fanex.Athena.Controllers.BetSettings
                 return defaultValue;
             }
 
-            int value;
-            return !int.TryParse(HttpContext.Request[name], out value)
+            return !int.TryParse(HttpContext.Request[name], out int value)
                        ? defaultValue
                        : value;
         }

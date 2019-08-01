@@ -44,7 +44,7 @@
                     .Returns(Task.FromResult(new BetSettingViewModel()));
 
                 // Action
-                var result = await controller.Index(metaModel) as ViewResult;
+                var result = await controller.IndexAsync(metaModel) as ViewResult;
                 var viewModel = (BetSettingViewModel)result.Model;
 
                 // Assert
@@ -66,7 +66,7 @@
                     .Returns(new ProductAccess(new List<Product>()));
 
                 // Action
-                var result = await controller.UpdateBetSetting(string.Empty) as JsonResult;
+                var result = await controller.UpdateBetSettingAsync(string.Empty) as JsonResult;
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -96,7 +96,7 @@
                    Arg.Any<Hashtable>()).Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 0 }));
 
                 // Action
-                var result = await controller.UpdateBetSetting(string.Empty) as JsonResult;
+                var result = await controller.UpdateBetSettingAsync(string.Empty) as JsonResult;
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -127,7 +127,7 @@
                    .Returns(new ResultInfo { Code = 1, Message = "Error" });
 
                 // Action
-                var result = await controller.UpdateBetSetting(string.Empty) as JsonResult;
+                var result = await controller.UpdateBetSettingAsync(string.Empty) as JsonResult;
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -163,7 +163,7 @@
                    .Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 0 }));
 
                 // Action
-                await controller.UpdateBetSetting(string.Empty);
+                await controller.UpdateBetSettingAsync(string.Empty);
 
                 // Assert
                 Assert.Multiple(() =>

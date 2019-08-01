@@ -21,9 +21,9 @@ namespace Fanex.Athena.Service.Customer.Interfaces
 
     public interface ICustomerListService
     {
-        Task<ReportResultModel<CustomerDTO>> GetActiveCustomers(CustomerListMetaModel metaModel);
+        Task<ReportResultModel<CustomerDTO>> GetActiveCustomersAsync(CustomerListMetaModel metaModel);
 
-        Task<ReportResultModel<DormantCustomer>> GetDormantCustomers(CustomerListMetaModel metaModel);
+        Task<ReportResultModel<DormantCustomer>> GetDormantCustomersAsync(CustomerListMetaModel metaModel);
 
         LogInfo GetCustomerLoginInfo(int custId, int licenseeId, string siteName);
 

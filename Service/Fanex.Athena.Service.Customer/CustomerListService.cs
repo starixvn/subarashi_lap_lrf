@@ -51,12 +51,12 @@ namespace Fanex.Athena.Service.Customer
             _lgClient = lgClient;
         }
 
-        public async Task<ReportResultModel<CustomerDTO>> GetActiveCustomers(CustomerListMetaModel metaModel)
+        public async Task<ReportResultModel<CustomerDTO>> GetActiveCustomersAsync(CustomerListMetaModel metaModel)
         {
             return await _customerListDataAccess.GetActiveCustomers(metaModel).ConfigureAwait(false);
         }
 
-        public async Task<ReportResultModel<DormantCustomer>> GetDormantCustomers(CustomerListMetaModel metaModel)
+        public async Task<ReportResultModel<DormantCustomer>> GetDormantCustomersAsync(CustomerListMetaModel metaModel)
         {
             return await _dormantCustomerListDataAccess.GetDormantCustomers(metaModel).ConfigureAwait(false);
         }
@@ -167,15 +167,6 @@ namespace Fanex.Athena.Service.Customer
         public IResultInfo UpdateSpecialLevel(int userId, int custId, int level, string ip, string language)
         {
             return _customerListDataAccess.UpdateSpecialLevel(userId, custId, level, ip, language);
-        }
-
-        private static IResultInfo CreateErrorResult()
-        {
-            return new ResultInfo
-            {
-                Code = 1,
-                Message = ViewResources.UpdateSpecialLevelMsg
-            };
         }
 
         #endregion Update

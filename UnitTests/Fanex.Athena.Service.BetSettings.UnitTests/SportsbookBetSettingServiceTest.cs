@@ -81,7 +81,7 @@
             _dcsBetSettingService.GetBetSettingsAsync(CustId, Arg.Any<int>()).Returns(Task.FromResult<IList<BetSetting>>(new List<BetSetting>()));
 
             // Action
-            AsyncTestDelegate testDelegate = () => _service.GetViewModelAsync(CustId);
+            Task testDelegate() => _service.GetViewModelAsync(CustId);
 
             // Assert
             Assert.ThrowsAsync<System.InvalidOperationException>(testDelegate, "sdfsdf");

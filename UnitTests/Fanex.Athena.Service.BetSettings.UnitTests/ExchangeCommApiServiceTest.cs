@@ -28,7 +28,6 @@
     [TestFixture]
     public partial class ExchangeCommApiServiceTest
     {
-        private readonly int _licenseeId = FakeHelper.Create<int>();
         private readonly int _custId = FakeHelper.Create<int>();
         private readonly int _userId = FakeHelper.Create<int>();
 
@@ -107,7 +106,7 @@
 
         [TestCase(false)]
         [TestCase(null)]
-        public async Task UpdateCommissionAsync_StatusIsNotEnable_ReturnFailedResult(bool? isEnable)
+        public async Task UpdateCommissionAsync_StatusIsNotEnable_ReturnFailedResultAsync(bool? isEnable)
         {
             // Arrange
             _betSettingDataAccess.GetStatusAsync(0, 0).ReturnsForAnyArgs(Task.FromResult(isEnable));
@@ -126,7 +125,7 @@
         [TestCase(1, true)]
         [TestCase(0, false)]
         [TestCase(2, false)]
-        public async Task UpdateCommissionAsync_WhenCall_ReturnCorrectResult(int returnStatus, bool isSuccess)
+        public async Task UpdateCommissionAsync_WhenCall_ReturnCorrectResultAsync(int returnStatus, bool isSuccess)
         {
             // Arrange
             var expectedComm = FakeHelper.Create<double>();

@@ -23,14 +23,14 @@
                 };
 
                 _licenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(false);
-                _customerListService.GetActiveCustomers(metaModel).Returns(new ReportResultModel<CustomerDTO>
+                _customerListService.GetActiveCustomersAsync(metaModel).Returns(new ReportResultModel<CustomerDTO>
                 {
                     DataList = new List<CustomerDTO>(),
                     TotalRows = 0
                 });
 
                 // Action
-                var result = controller.CustomerList(metaModel);
+                var result = controller.CustomerListAsync(metaModel);
 
                 // Assert
                 Assert.That(metaModel.Username, Is.EqualTo(UserName));
@@ -51,14 +51,14 @@
 
                 StubLicenseeSessionData(DefaultLicenseeSession);
                 _licenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(true);
-                _customerListService.GetActiveCustomers(metaModel).Returns(new ReportResultModel<CustomerDTO>
+                _customerListService.GetActiveCustomersAsync(metaModel).Returns(new ReportResultModel<CustomerDTO>
                 {
                     DataList = new List<CustomerDTO>(),
                     TotalRows = 0
                 });
 
                 // Action
-                controller.CustomerList(metaModel);
+                controller.CustomerListAsync(metaModel);
 
                 // Assert
                 Assert.That(metaModel.Username, Is.Empty);
@@ -78,14 +78,14 @@
                 };
 
                 _licenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(true);
-                _customerListService.GetActiveCustomers(metaModel).Returns(new ReportResultModel<CustomerDTO>
+                _customerListService.GetActiveCustomersAsync(metaModel).Returns(new ReportResultModel<CustomerDTO>
                 {
                     DataList = new List<CustomerDTO>(),
                     TotalRows = 0
                 });
 
                 // Action
-                await controller.CustomerList(metaModel).ConfigureAwait(false);
+                await controller.CustomerListAsync(metaModel).ConfigureAwait(false);
 
                 // Assert
                 Assert.AreEqual(metaModel.Username, userName);
@@ -100,17 +100,17 @@
                 // Arrange
                 var metaModel = new CustomerListMetaModel();
                 _licenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(false);
-                _customerListService.GetActiveCustomers(metaModel).Returns(new ReportResultModel<CustomerDTO>
+                _customerListService.GetActiveCustomersAsync(metaModel).Returns(new ReportResultModel<CustomerDTO>
                 {
                     DataList = new List<CustomerDTO>(),
                     TotalRows = 0
                 });
 
                 // Action
-                var result = controller.CustomerList(metaModel);
+                var result = controller.CustomerListAsync(metaModel);
 
                 // Assert
-                _customerListService.Received().GetActiveCustomers(metaModel);
+                _customerListService.Received().GetActiveCustomersAsync(metaModel);
             }
         }
     }

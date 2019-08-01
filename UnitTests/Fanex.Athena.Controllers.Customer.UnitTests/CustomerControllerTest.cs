@@ -51,7 +51,7 @@
             _authorizationService.IsAllowedEditCommission(Arg.Any<UserAuthInfo>()).Returns(false);
             _authorizationService.IsAllowedSpecialBA(Arg.Any<UserAuthInfo>()).Returns(true);
 
-            _groupComService.GetAll(Arg.Any<int>()).Returns(new List<GroupCommMetaModel>());
+            _groupComService.GetAllAsync(Arg.Any<int>()).Returns(new List<GroupCommMetaModel>());
             _groupComService.GetById(Arg.Any<int>(), Arg.Any<int>()).Returns(new GroupCommMetaModel());
         }
 
@@ -133,7 +133,7 @@
             using (var controller = CreateContoller())
             {
                 // Action
-                var result = await controller.ExportExcel(null);
+                var result = await controller.ExportExcelAsync(null);
 
                 // Assert
                 Assert.That(result, Is.Null);
@@ -150,7 +150,7 @@
                 const string ExcelParam = "{'GridColumns': []}";
 
                 // Action
-                var result = await controller.ExportExcel(ExcelParam) as FileContentResult;
+                var result = await controller.ExportExcelAsync(ExcelParam) as FileContentResult;
 
                 // Assert
                 Assert.That(result.FileDownloadName, Is.EqualTo(ExcelFileName));
@@ -175,7 +175,7 @@
                 _productService.GetProductAccess(Arg.Any<int>(), Arg.Any<string>()).Returns(new ProductAccess(new List<Product>()));
                 _authorizationService.IsAllowedEditCommission(DefaultUserSession).Returns(false);
                 _authorizationService.IsAllowedSpecialBA(DefaultUserSession).Returns(false);
-                _customerListService.GetActiveCustomers(Arg.Any<CustomerListMetaModel>()).Returns(new ReportResultModel<CustomerDTO>
+                _customerListService.GetActiveCustomersAsync(Arg.Any<CustomerListMetaModel>()).Returns(new ReportResultModel<CustomerDTO>
                 {
                     DataList = new List<CustomerDTO>(),
                     TotalRows = 0
@@ -199,7 +199,7 @@
                 controller.When(x => x.CreateExcel(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<CustomerListViewModel>())).Do(x => actualReportTitle = (string)x[1]);
 
                 // Action
-                await controller.ExportExcel(excelParam);
+                await controller.ExportExcelAsync(excelParam);
 
                 // Assert
                 Assert.Multiple(() =>

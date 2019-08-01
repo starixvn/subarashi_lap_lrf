@@ -25,8 +25,9 @@
         private const string FakeProductName = "Testing Product Name";
 
         private ISubsidiaryService _subsidiaryService;
-        private ISubsidiaryPerformanceService _service;
         private JavaScriptSerializer _serializer;
+
+        public ISubsidiaryPerformanceService Service { get; set; }
 
         [SetUp]
         public void SetUp()
@@ -34,7 +35,7 @@
             SetUpDefaultFakeData();
 
             _subsidiaryService = Substitute.For<ISubsidiaryService>();
-            _service = Substitute.For<ISubsidiaryPerformanceService>();
+            Service = Substitute.For<ISubsidiaryPerformanceService>();
             _serializer = new JavaScriptSerializer();
         }
 

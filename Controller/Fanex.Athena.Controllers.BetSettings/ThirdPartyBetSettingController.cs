@@ -51,7 +51,7 @@ namespace Fanex.Athena.Controllers.BetSettings
 
         [HttpGet]
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
-        public async Task<ActionResult> Index(BetSettingMetaModel metaModel)
+        public async Task<ActionResult> IndexAsync(BetSettingMetaModel metaModel)
         {
             if (!ProductViewFileMap.ContainsKey(metaModel.ProductId))
             {
@@ -66,47 +66,47 @@ namespace Fanex.Athena.Controllers.BetSettings
                 return this.Redirect("~/Utility/AccessDenied");
             }
 
-            await AssignRequiredProperties(viewModel, metaModel);
+            await AssignRequiredPropertiesAsync(viewModel, metaModel);
             var viewPath = $"~/Views/Desktop/Customer/BetSetting/{ProductViewFileMap[metaModel.ProductId]}.cshtml";
             return View(viewPath, viewModel);
         }
 
         [HttpPost]
         [CustomValidateAntiForgery]
-        public Task<JsonResult> UpdateMacauStatus(int custId, string nickName, int status)
+        public Task<JsonResult> UpdateMacauStatusAsync(int custId, string nickName, int status)
         {
-            return UpdateThirdPartyProductStatus(ProductTypes.Macau, custId, nickName, status);
+            return UpdateThirdPartyProductStatusAsync(ProductTypes.Macau, custId, nickName, status);
         }
 
         [HttpPost]
         [CustomValidateAntiForgery]
-        public Task<JsonResult> UpdateBetTradeStatus(int custId, string nickName, int status)
+        public Task<JsonResult> UpdateBetTradeStatusAsync(int custId, string nickName, int status)
         {
-            return UpdateThirdPartyProductStatus(ProductTypes.BetTrade, custId, nickName, status);
+            return UpdateThirdPartyProductStatusAsync(ProductTypes.BetTrade, custId, nickName, status);
         }
 
         [HttpPost]
         [CustomValidateAntiForgery]
-        public Task<JsonResult> UpdateColossusBetsStatus(int custId, string nickName, int status)
+        public Task<JsonResult> UpdateColossusBetsStatusAsync(int custId, string nickName, int status)
         {
-            return UpdateThirdPartyProductStatus(ProductTypes.ColossusBets, custId, nickName, status);
+            return UpdateThirdPartyProductStatusAsync(ProductTypes.ColossusBets, custId, nickName, status);
         }
 
         [HttpPost]
         [CustomValidateAntiForgery]
-        public Task<JsonResult> UpdateCashOutStatus(int custId, string nickName, int status)
+        public Task<JsonResult> UpdateCashOutStatusAsync(int custId, string nickName, int status)
         {
-            return UpdateThirdPartyProductStatus(ProductTypes.CashOut, custId, nickName, status);
+            return UpdateThirdPartyProductStatusAsync(ProductTypes.CashOut, custId, nickName, status);
         }
 
         [HttpPost]
         [CustomValidateAntiForgery]
-        public Task<JsonResult> UpdateGoldDeluxeStatus(int custId, string nickName, int status)
+        public Task<JsonResult> UpdateGoldDeluxeStatusAsync(int custId, string nickName, int status)
         {
-            return UpdateThirdPartyProductStatus(ProductTypes.GoldDeluxe, custId, nickName, status);
+            return UpdateThirdPartyProductStatusAsync(ProductTypes.GoldDeluxe, custId, nickName, status);
         }
 
-        private async Task<JsonResult> UpdateThirdPartyProductStatus(int productId, int custId, string nickName, int status)
+        private async Task<JsonResult> UpdateThirdPartyProductStatusAsync(int productId, int custId, string nickName, int status)
         {
             var userSession = SessionService.UserSession;
             if (!CheckPermission(userSession, productId))

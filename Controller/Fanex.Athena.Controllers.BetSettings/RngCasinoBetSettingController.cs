@@ -43,20 +43,20 @@ namespace Fanex.Athena.Controllers.BetSettings
 
         [HttpGet]
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
-        public async Task<ActionResult> Index(BetSettingMetaModel metaModel)
+        public async Task<ActionResult> IndexAsync(BetSettingMetaModel metaModel)
         {
             var customer = GetCustomerInfo(metaModel.CustId);
             var viewModel = await _betSettingService.GetViewModelAsync(metaModel.CustId, customer,
                 SessionService.UserSession.Language);
 
-            await AssignRequiredProperties(viewModel, metaModel).ConfigureAwait(false);
+            await AssignRequiredPropertiesAsync(viewModel, metaModel).ConfigureAwait(false);
 
             return View("~/Views/Desktop/Customer/BetSetting/RngCasino.cshtml", viewModel);
         }
 
         [HttpPost]
         [CustomValidateAntiForgery]
-        public async Task<JsonResult> UpdateBetSetting(int custId, string gameTypeChangedList)
+        public async Task<JsonResult> UpdateBetSettingAsync(int custId, string gameTypeChangedList)
         {
             var userSession = SessionService.UserSession;
             var licenseeSession = SessionService.LicenseeSession;
@@ -97,7 +97,7 @@ namespace Fanex.Athena.Controllers.BetSettings
 
         [HttpPost]
         [CustomValidateAntiForgery]
-        public async Task<JsonResult> UpdateStatus(int custId, string nickName, int status)
+        public async Task<JsonResult> UpdateStatusAsync(int custId, string nickName, int status)
         {
             var userSession = SessionService.UserSession;
             if (!CheckPermission(userSession, ProductTypes.RngCasino))

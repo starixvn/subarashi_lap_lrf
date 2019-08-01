@@ -45,7 +45,7 @@
                     metaModel.CustId).Returns(Task.FromResult(new BetSettingViewModel()));
 
                 // Action
-                var result = await controller.Index(metaModel) as ViewResult;
+                var result = await controller.IndexAsync(metaModel) as ViewResult;
                 var viewModel = (BetSettingViewModel)result.Model;
 
                 // Assert
@@ -67,7 +67,7 @@
                     .Returns(new ProductAccess(new List<Product>()));
 
                 // Action
-                var result = await controller.UpdateBetSetting(string.Empty) as JsonResult;
+                var result = await controller.UpdateBetSettingAsync(string.Empty) as JsonResult;
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -82,7 +82,7 @@
         [TestCase("0", "2")]
         [TestCase("1", "0")]
         [TestCase("0", "0")]
-        public async Task UpdateBetSetting_InvalidParam_ReturnInvalidParamsResult(string id, string custid)
+        public async Task UpdateBetSetting_InvalidParam_ReturnInvalidParamsResultAsync(string id, string custid)
         {
             using (var controller = CreateController())
             {
@@ -96,7 +96,7 @@
                 controller.HttpContext.Request["custid"].Returns(custid);
 
                 // Action
-                var result = await controller.UpdateBetSetting(string.Empty) as JsonResult;
+                var result = await controller.UpdateBetSettingAsync(string.Empty) as JsonResult;
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -129,7 +129,7 @@
                    Arg.Any<KenoBetSetting>()).Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 0 }));
 
                 // Action
-                var result = await controller.UpdateBetSetting(string.Empty) as JsonResult;
+                var result = await controller.UpdateBetSettingAsync(string.Empty) as JsonResult;
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -173,7 +173,7 @@
                    Arg.Do<KenoBetSetting>(x => param = x)).Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 0 }));
 
                 // Action
-                await controller.UpdateBetSetting(string.Empty);
+                await controller.UpdateBetSettingAsync(string.Empty);
 
                 // Assert
                 Assert.Multiple(() =>
@@ -207,7 +207,7 @@
                    Arg.Any<KenoBetSetting>()).Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 1, Message = "Error" }));
 
                 // Action
-                var result = await controller.UpdateBetSetting(string.Empty) as JsonResult;
+                var result = await controller.UpdateBetSettingAsync(string.Empty) as JsonResult;
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
