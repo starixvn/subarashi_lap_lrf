@@ -2,12 +2,10 @@
 {
     using System;
     using System.Threading.Tasks;
-    using Model.Casino.MetaModel;
     using Model.Core.DTO.Common;
     using Model.Customer.MetaModel;
     using NSubstitute;
     using NUnit.Framework;
-    using Session.Model;
     using UnitTest.Common.Helpers;
 
     [TestFixture]

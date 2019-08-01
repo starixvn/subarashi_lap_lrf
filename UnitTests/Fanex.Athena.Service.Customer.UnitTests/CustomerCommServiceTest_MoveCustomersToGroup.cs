@@ -2,7 +2,6 @@
 {
     using System;
     using System.Threading.Tasks;
-    using Model.Casino.MetaModel;
     using Model.Core.DTO.Common;
     using Model.Customer.MetaModel;
     using NSubstitute;

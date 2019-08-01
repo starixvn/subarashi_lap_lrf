@@ -12,8 +12,6 @@ namespace Fanex.Athena.Service.Customer
     using System.Threading.Tasks;
 
     using Fanex.Athena.DataAccess.Customer.Interfaces;
-    using Fanex.Athena.Extension.Utility;
-    using Fanex.Athena.Model.Casino.MetaModel;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Customer.MetaModel;
     using Fanex.Athena.Service.Customer.Interfaces;

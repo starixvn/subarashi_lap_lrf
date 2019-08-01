@@ -16,5 +16,14 @@
     "BaseCurrencies": "USD",
     "LimitRecentMonths": 3,
     "TimeZone": 8
+  },
+  {
+    "SiteName": "Nova88",
+    "DisableBetList": true,
+    "MinDate": "08/01/2019",
+    "MaxDate": "today",
+    "BaseCurrencies": "USD",
+    "LimitRecentMonths": 3,
+    "TimeZone": 8
   }
 ]

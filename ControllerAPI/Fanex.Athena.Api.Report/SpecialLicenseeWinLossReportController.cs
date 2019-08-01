@@ -92,8 +92,9 @@
             if (IsValidParams(metaModel, setting))
             {
                 var userSession = SessionService.UserSession;
+                var licenseeSession = SessionService.LicenseeSession;
                 metaModel.BaseCurrencySetting = setting.BaseCurrencies;
-                metaModel.SiteName = _siteNameList[SessionService.LicenseeSession.LicenseeId];
+                metaModel.SiteName = _siteNameList.GetValueOrDefault(licenseeSession.LicenseeId, licenseeSession.LicenseeName);
                 metaModel.CurrencyListXml = GenerateCurrencyListXml(metaModel);
                 metaModel.DefaultBaseCurrency = userSession.DefaultBaseCurrency;
 

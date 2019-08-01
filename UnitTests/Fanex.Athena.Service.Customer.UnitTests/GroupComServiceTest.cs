@@ -3,9 +3,7 @@
     using System.Threading.Tasks;
 
     using DataAccess.Customer.Interfaces;
-    using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Model.Casino.MetaModel;
     using Model.Core.DTO.Common;
     using Model.Customer.MetaModel;
 
