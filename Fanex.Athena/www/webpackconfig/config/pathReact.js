@@ -14,7 +14,8 @@ var cssPaths = {
     betlist: "./www/css/source/reactpages/pages/betlist/index.scss",
     casinoturnover: "./www/css/source/reactpages/pages/casinoturnover/index.scss",
     playeradmin: "./www/css/source/reactpages/pages/playeradmin/index.scss",
-    accountInfo: "./www/css/source/reactpages/pages/playeradmin/account-info.scss"
+    accountInfo: "./www/css/source/reactpages/pages/playeradmin/account-info.scss",
+    playerrunningbetlist: "./www/css/source/reactpages/pages/playeradmin/running-betlist.scss"
 };
 
 var scriptPaths = {
@@ -40,6 +41,7 @@ var scriptPaths = {
 
     playerlist: "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/components/index.jsx",
     playeraccountinfo: "./www/js/source/reactpages/Module/PlayerAdmin/player-account-info/components/index.jsx",
+    playerrunningbetlist: "./www/js/source/reactpages/Module/PlayerAdmin/running-betlist/components/index.jsx"
 };
 module.exports = {
     projectRoot: projectRoot,
