@@ -15,7 +15,7 @@
     public partial class CustomerListServiceTest
     {
         [Test]
-        public void UpdateSpecialLevel_HaveNoPermission_ReturnCorrectResultInfo()
+        public void UpdateSpecialLevel_WhenCall_ReturnCorrectResultInfo()
         {
             // Arrange
             var licenseeId = FakeHelper.Create<int>();
@@ -24,39 +24,12 @@
             var level = FakeHelper.Create<int>();
             var ip = FakeHelper.Create<string>();
             var language = FakeHelper.Create<string>();
-
-            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), custId, 0).Returns(false);
-            var expectedResult = new ResultInfo { Code = 1, Message = ViewResources.UpdateSpecialLevelMsg };
-
-            // Action
-            var result = _customerListService.UpdateSpecialLevel(_currencyAgents, userId, custId, level, ip, language);
-
-            // Assert
-            Assert.Multiple(() =>
-            {
-                Assert.That(result.Code, Is.EqualTo(expectedResult.Code));
-                Assert.That(result.Message, Is.EqualTo(expectedResult.Message));
-            });
-        }
-
-        [Test]
-        public void UpdateSpecialLevel_WhenCallWithCorrectPermission_ReturnCorrectResultInfo()
-        {
-            // Arrange
-            var licenseeId = FakeHelper.Create<int>();
-            var custId = FakeHelper.Create<int>();
-            var userId = FakeHelper.Create<int>();
-            var level = FakeHelper.Create<int>();
-            var ip = FakeHelper.Create<string>();
-            var language = FakeHelper.Create<string>();
-
-            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), custId, 0).Returns(true);
 
             var expectedResult = FakeHelper.Create<ResultInfo>();
             _customerListDataAccess.UpdateSpecialLevel(userId, custId, level, ip, language).Returns(expectedResult);
 
             // Action
-            var result = _customerListService.UpdateSpecialLevel(_currencyAgents, userId, custId, level, ip, language);
+            var result = _customerListService.UpdateSpecialLevel(userId, custId, level, ip, language);
 
             // Assert
             Assert.That(result, Is.EqualTo(expectedResult));

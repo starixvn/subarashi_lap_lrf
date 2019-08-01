@@ -13,12 +13,6 @@ namespace Fanex.Athena.Service.BetSettings
 
     public class BetSettingBaseService
     {
-        private readonly IAuthorizationService _authorizationService;
-
-        public BetSettingBaseService(IAuthorizationService authorizationService)
-        {
-            _authorizationService = authorizationService;
-        }
 
         protected static IResultInfo ErrorResult(string message)
         {
@@ -29,9 +23,5 @@ namespace Fanex.Athena.Service.BetSettings
             };
         }
 
-        protected bool HasPermissionOnData(IDictionary<int, int[]> currencyAgents, int custId)
-        {
-            return _authorizationService.HasPermissionOnData(currencyAgents, custId, 0);
-        }
     }
 }

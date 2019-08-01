@@ -57,13 +57,11 @@ namespace Fanex.Athena.Service.BetSettings
         private readonly IDcsBetSettingDataAccess _betSettingDataAccess;
 
         public ExchangeCommApiService(
-            IAuthorizationService authorizationService,
             ILogger logger,
             IUserLogDataAccess userLogDataAccess,
             IDcsBetSettingDataAccess betSettingDataAccess,
             IAppSettings appSetting,
             ICitiXchangeClient apiClient)
-            : base(authorizationService)
         {
             _logger = logger;
             _userLogDataAccess = userLogDataAccess;
@@ -72,13 +70,8 @@ namespace Fanex.Athena.Service.BetSettings
             _apiClient = apiClient;
         }
 
-        public IResultInfo<double> GetCommission(IDictionary<int, int[]> currencyAgents, int custId)
+        public IResultInfo<double> GetCommission(int custId)
         {
-            if (!HasPermissionOnData(currencyAgents, custId))
-            {
-                return CreateAccessDeniedResult();
-            }
-
             try
             {
                 var result = _apiClient.getProfile(custId, EnvironmentMap[_appSetting.Environment]);
@@ -91,14 +84,9 @@ namespace Fanex.Athena.Service.BetSettings
             }
         }
 
-        public async Task<IResultInfo<double>> UpdateCommissionAsync(IDictionary<int, int[]> currencyAgents,
+        public async Task<IResultInfo<double>> UpdateCommissionAsync(
             int userId, int custId, double oldCommission, double newCommission)
         {
-            if (!HasPermissionOnData(currencyAgents, custId))
-            {
-                return CreateAccessDeniedResult();
-            }
-
             var isEnable = await _betSettingDataAccess.GetStatusAsync(custId, ProductTypes.Exchange).ConfigureAwait(false);
 
             if (isEnable != true)

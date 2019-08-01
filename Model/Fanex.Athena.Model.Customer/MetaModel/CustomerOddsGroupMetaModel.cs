@@ -13,8 +13,6 @@ namespace Fanex.Athena.Model.Customer.MetaModel
     /// </summary>
     public class CustomerOddsGroupMetaModel
     {
-        public IDictionary<int, int[]> currencyAgents { get; set; }
-
         public int CustId { get; set; }
 
         public int UserId { get; set; }

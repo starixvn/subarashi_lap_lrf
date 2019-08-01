@@ -27,23 +27,13 @@ namespace Fanex.Athena.Service.BetSettings
         private readonly INumberGameBetSettingDataAccess _betSettingDataAccess;
 
         public NumberGameBetSettingService(
-            IAuthorizationService authorizationService,
             INumberGameBetSettingDataAccess betSettingDataAccess)
-            : base(authorizationService)
         {
             _betSettingDataAccess = betSettingDataAccess;
         }
 
-        public async Task<BetSettingViewModel> GetViewModelAsync(IDictionary<int, int[]> currencyAgents, int custId)
+        public async Task<BetSettingViewModel> GetViewModelAsync(int custId)
         {
-            if (!HasPermissionOnData(currencyAgents, custId))
-            {
-                return new BetSettingViewModel
-                {
-                    MainData = new List<BetSetting>()
-                };
-            }
-
             var betSettings = await _betSettingDataAccess.GetBetSettingAsync(custId).ConfigureAwait(false);
 
             return new BetSettingViewModel
@@ -52,13 +42,9 @@ namespace Fanex.Athena.Service.BetSettings
             };
         }
 
-        public async Task<IResultInfo> UpdateBetSettingAsync(CommonBetSetting setting, Hashtable data, IDictionary<int, int[]> currencyAgents)
+        public async Task<IResultInfo> UpdateBetSettingAsync(CommonBetSetting setting, Hashtable data
+            )
         {
-            if (!HasPermissionOnData(currencyAgents, setting.CustId))
-            {
-                return ErrorResult(ViewResources.AccessDeniedMsg);
-            }
-
             var numberGameBetSetting = new NumberGameBetSetting
             {
                 CustId = setting.CustId,

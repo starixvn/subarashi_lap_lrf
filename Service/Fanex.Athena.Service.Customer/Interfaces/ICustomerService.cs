@@ -5,6 +5,6 @@
 
     public interface ICustomerService
     {
-        CustomerInfo GetCustomerInfo(IDictionary<int, int[]> currencyAgents, int custId);
+        CustomerInfo GetCustomerInfo(int custId);
     }
 }

@@ -31,8 +31,6 @@ namespace Fanex.Athena.Service.Customer
 
         private readonly IDormantCustomerListDataAccess _dormantCustomerListDataAccess;
 
-        private readonly IAuthorizationService _authorizationService;
-
         private readonly IProductService _productService;
 
         private readonly IAppSettings _appSettings;
@@ -42,14 +40,12 @@ namespace Fanex.Athena.Service.Customer
             ICustomerDataAccess customerDataAccess,
             ICustomerListDataAccess customerListDataAccess,
             IDormantCustomerListDataAccess dormantCustomerListDataAccess,
-            IAuthorizationService authorizationService,
             IProductService productService,
             IAppSettings appSettings, ILGAPIClient lgClient)
         {
             _customerDataAccess = customerDataAccess;
             _customerListDataAccess = customerListDataAccess;
             _dormantCustomerListDataAccess = dormantCustomerListDataAccess;
-            _authorizationService = authorizationService;
             _productService = productService;
             _appSettings = appSettings;
             _lgClient = lgClient;
@@ -65,32 +61,20 @@ namespace Fanex.Athena.Service.Customer
             return await _dormantCustomerListDataAccess.GetDormantCustomers(metaModel).ConfigureAwait(false);
         }
 
-        public LogInfo GetCustomerLoginInfo(int custId, int licenseeId, string siteName, IDictionary<int, int[]> currencyAgents)
+        public LogInfo GetCustomerLoginInfo(int custId, int licenseeId, string siteName)
         {
-            return _authorizationService.HasPermissionOnData(currencyAgents, custId, 0)
-                ? _customerListDataAccess.GetCustomerLoginInfo(custId, licenseeId, siteName)
-                : new LogInfo();
+            return _customerListDataAccess.GetCustomerLoginInfo(custId, licenseeId, siteName);
         }
 
         #region Update
 
         public IResultInfo UpdateOddsGroup(CustomerOddsGroupMetaModel metaModel)
         {
-            if (!_authorizationService.HasPermissionOnData(metaModel.currencyAgents, metaModel.CustId, 0))
-            {
-                return CreateErrorResult();
-            }
-
             return _customerListDataAccess.UpdateOddsGroup(metaModel);
         }
 
         public async Task<IResultInfo> UpdateCustClosedAsync(CustomerStatusMetaModel metaModel, string languageCode)
         {
-            if (!_authorizationService.HasPermissionOnData(currencyAgents, metaModel.CustId, 0))
-            {
-                return CreateErrorResult();
-            }
-
             var customerInfo = _customerDataAccess.GetCustomerInfo(metaModel.CustId);
             var closeCasinoResult = true;
             var productAccess = this._productService.GetProductAccess(metaModel.LicenseeId, languageCode);
@@ -129,11 +113,6 @@ namespace Fanex.Athena.Service.Customer
 
         public async Task<IResultInfo> UpdateCustSuspendAsync(CustomerStatusMetaModel metaModel, string languageCode)
         {
-            if (!_authorizationService.HasPermissionOnData(currencyAgents, metaModel.CustId, 0))
-            {
-                return CreateErrorResult();
-            }
-
             var customerInfo = _customerDataAccess.GetCustomerInfo(metaModel.CustId);
             var suspendCasinoResult = true;
             var productAccess = this._productService.GetProductAccess(metaModel.LicenseeId, languageCode);
@@ -175,13 +154,8 @@ namespace Fanex.Athena.Service.Customer
             int custId,
             int modifiedBy,
             bool allowBA,
-            Request request, IDictionary<int, int[]> currencyAgents)
+            Request request)
         {
-            if (!_authorizationService.HasPermissionOnData(currencyAgents, custId, 0))
-            {
-                return CreateErrorResult();
-            }
-
             return this._customerListDataAccess.UpdateCustomerBAStatus(
                 licenseeId,
                    custId,
@@ -190,13 +164,8 @@ namespace Fanex.Athena.Service.Customer
                    request);
         }
 
-        public IResultInfo UpdateSpecialLevel(IDictionary<int, int[]> currencyAgents, int userId, int custId, int level, string ip, string language)
+        public IResultInfo UpdateSpecialLevel(int userId, int custId, int level, string ip, string language)
         {
-            if (!_authorizationService.HasPermissionOnData(currencyAgents, custId, 0))
-            {
-                return CreateErrorResult();
-            }
-
             return _customerListDataAccess.UpdateSpecialLevel(userId, custId, level, ip, language);
         }
 

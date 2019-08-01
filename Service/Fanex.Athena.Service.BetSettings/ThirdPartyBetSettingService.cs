@@ -25,19 +25,13 @@ namespace Fanex.Athena.Service.BetSettings
         private readonly IThirdPartyBetSettingDataAccess _betSettingDataAccess;
 
         public ThirdPartyBetSettingService(
-            IAuthorizationService authorizationService,
             IThirdPartyBetSettingDataAccess betSettingDataAccess)
-            : base(authorizationService)
         {
             _betSettingDataAccess = betSettingDataAccess;
         }
 
-        public async Task<ThirdPartyBetSettingViewModel> GetViewModelAsync(IDictionary<int, int[]> currencyAgents, int custId, int productid)
+        public async Task<ThirdPartyBetSettingViewModel> GetViewModelAsync(int custId, int productid)
         {
-            if (!HasPermissionOnData(currencyAgents, custId))
-            {
-                return null;
-            }
 
             var setting = await _betSettingDataAccess.GetBetSettingAsync(custId, productid).ConfigureAwait(false);
 
@@ -48,13 +42,8 @@ namespace Fanex.Athena.Service.BetSettings
             };
         }
 
-        public async Task<IResultInfo> UpdateStatusAsync(IDictionary<int, int[]> currencyAgents, int productId, int userId, int custId, string language, string ip, bool isEnabled)
+        public async Task<IResultInfo> UpdateStatusAsync(int productId, int userId, int custId, string language, string ip, bool isEnabled)
         {
-            if (!HasPermissionOnData(currencyAgents, custId))
-            {
-                return ErrorResult(ViewResources.AccessDeniedMsg);
-            }
-
             var setting = await _betSettingDataAccess.GetBetSettingAsync(custId, productId).ConfigureAwait(false);
             if (!setting.IsLineEnabled)
             {

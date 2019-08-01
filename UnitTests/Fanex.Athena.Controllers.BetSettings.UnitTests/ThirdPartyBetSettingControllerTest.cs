@@ -39,7 +39,7 @@
                 // Arrange
                 var metaModel = new BetSettingMetaModel { ProductId = ProductTypes.Macau, CustId = 100 };
 
-                _betSettingService.GetViewModelAsync(Arg.Any<IDictionary<int, int[]>>(), metaModel.CustId, metaModel.ProductId)
+                _betSettingService.GetViewModelAsync( metaModel.CustId, metaModel.ProductId)
                     .Returns(Task.FromResult<ThirdPartyBetSettingViewModel>(null));
 
                 // Action
@@ -62,7 +62,7 @@
                 // Arrange
                 var metaModel = new BetSettingMetaModel { ProductId = productId };
 
-                _betSettingService.GetViewModelAsync(Arg.Any<IDictionary<int, int[]>>(), metaModel.CustId, metaModel.ProductId)
+                _betSettingService.GetViewModelAsync( metaModel.CustId, metaModel.ProductId)
                     .Returns(Task.FromResult(new ThirdPartyBetSettingViewModel()));
 
                 // Action
@@ -88,7 +88,7 @@
                 // Arrange
                 var metaModel = new BetSettingMetaModel { ProductId = productId };
 
-                _betSettingService.GetViewModelAsync(Arg.Any<IDictionary<int, int[]>>(), metaModel.CustId, metaModel.ProductId)
+                _betSettingService.GetViewModelAsync( metaModel.CustId, metaModel.ProductId)
                     .Returns(Task.FromResult(new ThirdPartyBetSettingViewModel()));
 
                 // Action
@@ -133,7 +133,7 @@
                 CoreBetSettingService.IsBetSettingEditable(DefaultUserSession).Returns(true);
 
                 _betSettingService.UpdateStatusAsync(
-                   Arg.Any<IDictionary<int, int[]>>(),
+                   
                    Arg.Any<int>(),
                    DefaultUserSession.UserId,
                    Arg.Any<int>(),
@@ -166,7 +166,7 @@
                 CoreBetSettingService.IsBetSettingEditable(DefaultUserSession).Returns(true);
 
                 _betSettingService.UpdateStatusAsync(
-                  Arg.Any<IDictionary<int, int[]>>(),
+                  
                    Arg.Any<int>(),
                    DefaultUserSession.UserId,
                    Arg.Any<int>(),
@@ -195,7 +195,7 @@
                 CoreBetSettingService.IsBetSettingEditable(DefaultUserSession).Returns(true);
 
                 _betSettingService.UpdateStatusAsync(
-                   Arg.Any<IDictionary<int, int[]>>(),
+                   
                    Arg.Any<int>(),
                    DefaultUserSession.UserId,
                    Arg.Any<int>(),
@@ -228,7 +228,7 @@
                 CoreBetSettingService.IsBetSettingEditable(DefaultUserSession).Returns(true);
 
                 _betSettingService.UpdateStatusAsync(
-                   Arg.Any<IDictionary<int, int[]>>(),
+                   
                    Arg.Any<int>(),
                    DefaultUserSession.UserId,
                    Arg.Any<int>(),
@@ -279,7 +279,7 @@
                 CoreBetSettingService.IsBetSettingEditable(DefaultUserSession).Returns(true);
 
                 _betSettingService.UpdateStatusAsync(
-                   Arg.Any<IDictionary<int, int[]>>(),
+                   
                    Arg.Any<int>(),
                    DefaultUserSession.UserId,
                    Arg.Any<int>(),
@@ -312,7 +312,7 @@
                 CoreBetSettingService.IsBetSettingEditable(DefaultUserSession).Returns(true);
 
                 _betSettingService.UpdateStatusAsync(
-                   Arg.Any<IDictionary<int, int[]>>(),
+                   
                    Arg.Any<int>(),
                    DefaultUserSession.UserId,
                    Arg.Any<int>(),
@@ -363,7 +363,7 @@
                 CoreBetSettingService.IsBetSettingEditable(DefaultUserSession).Returns(true);
 
                 _betSettingService.UpdateStatusAsync(
-                   Arg.Any<IDictionary<int, int[]>>(),
+                   
                    Arg.Any<int>(),
                    DefaultUserSession.UserId,
                    Arg.Any<int>(),
@@ -396,7 +396,7 @@
                 CoreBetSettingService.IsBetSettingEditable(DefaultUserSession).Returns(true);
 
                 _betSettingService.UpdateStatusAsync(
-                  Arg.Any<IDictionary<int, int[]>>(),
+                  
                    Arg.Any<int>(),
                    DefaultUserSession.UserId,
                    Arg.Any<int>(),

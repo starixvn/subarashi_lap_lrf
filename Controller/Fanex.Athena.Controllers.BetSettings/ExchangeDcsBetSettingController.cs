@@ -51,7 +51,6 @@ namespace Fanex.Athena.Controllers.BetSettings
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public async Task<ActionResult> Index(BetSettingMetaModel metaModel)
         {
-            var currencyAgents = SessionService.UserSession.CurrencyAgentList;
             var viewModel = new ExchangeBetSettingViewModel
             {
                 CommissionList = ValidComms
@@ -59,9 +58,9 @@ namespace Fanex.Athena.Controllers.BetSettings
             await AssignRequiredProperties(viewModel, metaModel);
 
             viewModel.IsEnabled = await
-                _betSettingService.GetStatusAsync(currencyAgents, metaModel.CustId, metaModel.ProductId);
+                _betSettingService.GetStatusAsync( metaModel.CustId, metaModel.ProductId);
 
-            var apiResult = _exchangeCommApiService.GetCommission(currencyAgents, metaModel.CustId);
+            var apiResult = _exchangeCommApiService.GetCommission(metaModel.CustId);
             if (apiResult.IsSuccessful)
             {
                 viewModel.Commission = apiResult.ExtendedData;
@@ -87,7 +86,6 @@ namespace Fanex.Athena.Controllers.BetSettings
             }
             var userSession = SessionService.UserSession;
             var result = await _exchangeCommApiService.UpdateCommissionAsync(
-                userSession.CurrencyAgentList,
                 userSession.UserId,
                 custId,
                 oldCommission,

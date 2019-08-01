@@ -93,12 +93,12 @@ namespace Fanex.Athena.Controllers.BetSettings
 
             if (ProductsHasStatus.Contains(metaModel.ProductId))
             {
-                viewModel.IsEnabled = await _betSettingService.GetStatusAsync(currencyAgents, metaModel.CustId, metaModel.ProductId).ConfigureAwait(false);
+                viewModel.IsEnabled = await _betSettingService.GetStatusAsync(metaModel.CustId, metaModel.ProductId).ConfigureAwait(false);
             }
 
             if (ProductsHasBetLimit.Contains(metaModel.ProductId))
             {
-                viewModel.MainData = await _betSettingService.GetBetSettingsAsync(currencyAgents, metaModel.CustId, metaModel.ProductId).ConfigureAwait(false);
+                viewModel.MainData = await _betSettingService.GetBetSettingsAsync(metaModel.CustId, metaModel.ProductId).ConfigureAwait(false);
             }
 
             return View(viewPath, viewModel);
@@ -116,7 +116,6 @@ namespace Fanex.Athena.Controllers.BetSettings
             }
 
             var result = await _betSettingService.UpdateStatusAsync(
-                userSession.CurrencyAgentList,
                 userSession.UserId,
                 custId,
                 Request.UserHostAddress,
@@ -152,7 +151,6 @@ namespace Fanex.Athena.Controllers.BetSettings
             }
 
             var result = await _betSettingService.UpdateBetSettingAsync(
-                userSession.CurrencyAgentList,
                 commonParam.CustId,
                 commonParam.UserId,
                 commonParam.Ip,

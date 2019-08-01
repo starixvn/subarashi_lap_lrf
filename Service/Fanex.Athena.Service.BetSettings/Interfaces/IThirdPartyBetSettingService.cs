@@ -8,9 +8,9 @@
 
     public interface IThirdPartyBetSettingService
     {
-        Task<ThirdPartyBetSettingViewModel> GetViewModelAsync(IDictionary<int, int[]> currencyAgents, int custId, int productid);
+        Task<ThirdPartyBetSettingViewModel> GetViewModelAsync(int custId, int productid);
 
-        Task<IResultInfo> UpdateStatusAsync(IDictionary<int, int[]> currencyAgents,
+        Task<IResultInfo> UpdateStatusAsync(
             int productId, int userId, int custId, string language, string ip, bool isEnabled);
     }
 }

@@ -7,8 +7,8 @@
 
     public interface IExchangeCommApiService
     {
-        IResultInfo<double> GetCommission(IDictionary<int, int[]> currencyAgents, int custId);
+        IResultInfo<double> GetCommission(int custId);
 
-        Task<IResultInfo<double>> UpdateCommissionAsync(IDictionary<int, int[]> currencyAgents, int userId, int custId, double oldCommission, double newCommission);
+        Task<IResultInfo<double>> UpdateCommissionAsync(int userId, int custId, double oldCommission, double newCommission);
     }
 }

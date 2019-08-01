@@ -9,12 +9,12 @@
 
     public interface IDcsBetSettingService
     {
-        Task<bool?> GetStatusAsync(IDictionary<int, int[]> currencyAgents, int custId, int productId);
+        Task<bool?> GetStatusAsync(int custId, int productId);
 
-        Task<IResultInfo> UpdateStatusAsync(IDictionary<int, int[]> currencyAgents, int userId, int custId, string ip, bool status, int productId);
+        Task<IResultInfo> UpdateStatusAsync(int userId, int custId, string ip, bool status, int productId);
 
-        Task<IList<BetSetting>> GetBetSettingsAsync(IDictionary<int, int[]> currencyAgents, int custId, int productId);
+        Task<IList<BetSetting>> GetBetSettingsAsync(int custId, int productId);
 
-        Task<IResultInfo> UpdateBetSettingAsync(IDictionary<int, int[]> currencyAgents, int custId, int userId, string ip, IEnumerable<DcsBetSetting> betSettings);
+        Task<IResultInfo> UpdateBetSettingAsync(int custId, int userId, string ip, IEnumerable<DcsBetSetting> betSettings);
     }
 }

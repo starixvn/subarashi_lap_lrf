@@ -109,7 +109,6 @@
                 CoreBetSettingService.IsBetSettingEditable(DefaultUserSession).Returns(true);
 
                 _betSettingService.UpdateStatusAsync(
-                   DefaultUserSession.CurrencyAgentList,
                    DefaultUserSession.UserId,
                    Arg.Any<int>(),
                    DefaultUserSession.Language,
@@ -141,7 +140,6 @@
                 CoreBetSettingService.IsBetSettingEditable(DefaultUserSession).Returns(true);
 
                 _betSettingService.UpdateStatusAsync(
-                   Arg.Any<IDictionary<int, int[]>>(),
                    DefaultUserSession.UserId,
                    Arg.Any<int>(),
                    DefaultUserSession.Language,
@@ -192,7 +190,7 @@
 
                 _betSettingService.UpdateAgCasinoBetSettingAsync(
                    Arg.Any<CommonBetSetting>(),
-                   Arg.Any<string>(), Arg.Any<IDictionary<int, int[]>>()).Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 0 }));
+                   Arg.Any<string>()).Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 0 }));
 
                 // Action
                 var result = await controller.UpdateBetSetting(string.Empty, string.Empty) as JsonResult;
@@ -220,7 +218,7 @@
 
                 _betSettingService.UpdateAgCasinoBetSettingAsync(
                    Arg.Any<CommonBetSetting>(),
-                   Arg.Any<string>(), Arg.Any<IDictionary<int, int[]>>())
+                   Arg.Any<string>())
                    .Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 1, Message = "Error" }));
 
                 // Action

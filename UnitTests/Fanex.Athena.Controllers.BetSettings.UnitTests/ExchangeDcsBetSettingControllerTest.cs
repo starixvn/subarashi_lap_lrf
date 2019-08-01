@@ -42,11 +42,11 @@
                 // Arrange
                 var metaModel = new BetSettingMetaModel { CustId = 100 };
 
-                _betSettingService.GetStatusAsync(Arg.Any<IDictionary<int, int[]>>(), metaModel.CustId, metaModel.ProductId)
+                _betSettingService.GetStatusAsync(metaModel.CustId, metaModel.ProductId)
                     .Returns(Task.FromResult(isEnabled));
 
                 const double ExtendedData = 10d;
-                _exchangeCommApiService.GetCommission(Arg.Any<IDictionary<int, int[]>>(), metaModel.CustId)
+                _exchangeCommApiService.GetCommission(metaModel.CustId)
                     .Returns(new ResultInfo<double> { ExtendedData = ExtendedData });
 
                 // Action
@@ -73,10 +73,10 @@
                 // Arrange
                 var metaModel = new BetSettingMetaModel { CustId = 100 };
 
-                _betSettingService.GetStatusAsync(Arg.Any<IDictionary<int, int[]>>(), metaModel.CustId, metaModel.ProductId)
+                _betSettingService.GetStatusAsync(metaModel.CustId, metaModel.ProductId)
                     .Returns(Task.FromResult(isEnabled));
 
-                _exchangeCommApiService.GetCommission(Arg.Any<IDictionary<int, int[]>>(), metaModel.CustId)
+                _exchangeCommApiService.GetCommission( metaModel.CustId)
                     .Returns(new ResultInfo<double> { Code = 1, Message = "Error" });
 
                 // Action
@@ -127,7 +127,6 @@
                 var expectedResultInfo = new ResultInfo<double> { Code = 1, Message = "Test" };
 
                 _exchangeCommApiService.UpdateCommissionAsync(
-                    Arg.Any<IDictionary<int, int[]>>(),
                     DefaultUserSession.UserId, 0, 0, newComm)
                     .Returns(Task.FromResult<IResultInfo<double>>(expectedResultInfo));
 

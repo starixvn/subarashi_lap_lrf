@@ -31,7 +31,8 @@ namespace Fanex.Athena.Service.Customer
             _lgClient = lgClient;
         }
 
-        public async Task<IResultInfo> UpdateCustomersCommissionAsync(UpdatedCustomerComMetaModel metaModel, bool isSyncCSComm = false)
+        public async Task<IResultInfo> UpdateCustomersCommissionAsync(UpdatedCustomerComMetaModel metaModel,
+            bool isSyncCSComm = false)
         {
             var result = await _customerCommDataAccess.UpdateCustomersCommissionAsync(metaModel);
             var callApiSuccess = true;
@@ -56,7 +57,6 @@ namespace Fanex.Athena.Service.Customer
         /// <returns>The result information.</returns>
         public async Task<IResultInfo> MoveCustomersToGroupAsync(MoveToGroupComMetaModel metaModel)
         {
-            IResultInfo result = null;
             var groupInfo = _groupComDataAccess.GetById(metaModel.GroupComId, metaModel.LicenseeId);
             if (groupInfo == null)
             {
@@ -68,7 +68,7 @@ namespace Fanex.Athena.Service.Customer
             }
 
             var callApiSuccess = true;
-            result = await _customerCommDataAccess.MoveCustomersToGroupAsync(metaModel);
+            IResultInfo result = await _customerCommDataAccess.MoveCustomersToGroupAsync(metaModel);
             if (result.IsSuccessful && metaModel.IsAllowedRNG && !string.IsNullOrWhiteSpace(result.ExtendedData))
             {
                 callApiSuccess =

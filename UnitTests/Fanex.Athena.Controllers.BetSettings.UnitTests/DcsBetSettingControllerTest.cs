@@ -73,14 +73,14 @@
                 if (hasStatus)
                 {
                     expectedStatus = true;
-                    _betSettingService.GetStatusAsync(DefaultUserSession.CurrencyAgentList, metaModel.CustId, metaModel.ProductId)
+                    _betSettingService.GetStatusAsync( metaModel.CustId, metaModel.ProductId)
                         .Returns(Task.FromResult(expectedStatus));
                 }
 
                 if (hasBetLimit)
                 {
                     expectedNumberOfMainData = 1;
-                    _betSettingService.GetBetSettingsAsync(DefaultUserSession.CurrencyAgentList, metaModel.CustId, metaModel.ProductId)
+                    _betSettingService.GetBetSettingsAsync( metaModel.CustId, metaModel.ProductId)
                         .Returns(Task.FromResult<IList<BetSetting>>(new List<BetSetting> { new BetSetting() }));
                 }
 
@@ -147,7 +147,6 @@
                 CoreBetSettingService.IsBetSettingEditable(DefaultUserSession).Returns(true);
 
                 _betSettingService.UpdateStatusAsync(
-                    DefaultUserSession.CurrencyAgentList,
                    DefaultUserSession.UserId,
                    Arg.Any<int>(),
                    Arg.Any<string>(),
@@ -186,7 +185,6 @@
                 CoreBetSettingService.IsBetSettingEditable(DefaultUserSession).Returns(true);
 
                 _betSettingService.UpdateStatusAsync(
-                    DefaultUserSession.CurrencyAgentList,
                    DefaultUserSession.UserId,
                    Arg.Any<int>(),
                    Arg.Any<string>(),
@@ -246,7 +244,6 @@
 
                 IEnumerable<DcsBetSetting> param = null;
                 _betSettingService.UpdateBetSettingAsync(
-                   Arg.Any<IDictionary<int, int[]>>(),
                    Arg.Any<int>(),
                    Arg.Any<int>(),
                    Arg.Any<string>(),
@@ -329,7 +326,6 @@
                 controller.HttpContext.Request[Arg.Any<string>()].Returns("1");
 
                 _betSettingService.UpdateBetSettingAsync(
-                   Arg.Any<IDictionary<int, int[]>>(),
                    Arg.Any<int>(),
                    Arg.Any<int>(),
                    Arg.Any<string>(),
@@ -362,7 +358,6 @@
                 controller.HttpContext.Request[Arg.Any<string>()].Returns("1");
 
                 _betSettingService.UpdateBetSettingAsync(
-                   Arg.Any<IDictionary<int, int[]>>(),
                    Arg.Any<int>(),
                    Arg.Any<int>(),
                    Arg.Any<string>(),

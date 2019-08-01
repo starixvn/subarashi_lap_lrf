@@ -16,11 +16,10 @@
     public partial class CustomerListServiceTest
     {
         [Test]
-        public void UpdateOddsGroup_WhenCallWithCorrectPermission_ReturnCorrectData()
+        public void UpdateOddsGroup_WhenCall_ReturnCorrectData()
         {
             // Arrange
             var metaModel = FakeHelper.Create<CustomerOddsGroupMetaModel>();
-            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), metaModel.CustId, 0).Returns(true);
 
             var expectedResult = FakeHelper.Create<ResultInfo>();
             _customerListDataAccess.UpdateOddsGroup(metaModel).Returns(expectedResult);
@@ -32,24 +31,5 @@
             Assert.That(result, Is.EqualTo(expectedResult));
         }
 
-        [Test]
-        public void UpdateOddsGroup_HaveNoPermission_ReturnCorrectData()
-        {
-            // Arrange
-            var metaModel = FakeHelper.Create<CustomerOddsGroupMetaModel>();
-            _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), metaModel.CustId, 0).Returns(false);
-
-            var expectedResult = new ResultInfo { Code = 1, Message = ViewResources.UpdateSpecialLevelMsg };
-
-            // Action
-            var result = _customerListService.UpdateOddsGroup(metaModel);
-
-            // Assert
-            Assert.Multiple(() =>
-            {
-                Assert.That(result.Code, Is.EqualTo(expectedResult.Code));
-                Assert.That(result.Message, Is.EqualTo(expectedResult.Message));
-            });
-        }
     }
 }

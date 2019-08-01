@@ -40,7 +40,7 @@
                 // Arrange
                 var metaModel = new BetSettingMetaModel { CustId = 100 };
 
-                _betSettingService.GetViewModelAsync(Arg.Any<IDictionary<int, int[]>>(), metaModel.CustId)
+                _betSettingService.GetViewModelAsync(metaModel.CustId)
                     .Returns(Task.FromResult(new BetSettingViewModel()));
 
                 // Action
@@ -93,7 +93,7 @@
 
                 _betSettingService.UpdateBetSettingAsync(
                    Arg.Any<CommonBetSetting>(),
-                   Arg.Any<Hashtable>(), Arg.Any<IDictionary<int, int[]>>()).Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 0 }));
+                   Arg.Any<Hashtable>()).Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 0 }));
 
                 // Action
                 var result = await controller.UpdateBetSetting(string.Empty) as JsonResult;
@@ -123,7 +123,7 @@
 
                 _betSettingService.UpdateBetSettingAsync(
                    Arg.Any<CommonBetSetting>(),
-                   Arg.Any<Hashtable>(), Arg.Any<IDictionary<int, int[]>>())
+                   Arg.Any<Hashtable>())
                    .Returns(new ResultInfo { Code = 1, Message = "Error" });
 
                 // Action
@@ -159,7 +159,7 @@
                 Hashtable param = null;
                 _betSettingService.UpdateBetSettingAsync(
                    Arg.Any<CommonBetSetting>(),
-                   Arg.Do<Hashtable>(x => param = x), Arg.Any<IDictionary<int, int[]>>())
+                   Arg.Do<Hashtable>(x => param = x))
                    .Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 0 }));
 
                 // Action

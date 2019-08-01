@@ -34,12 +34,10 @@ namespace Fanex.Athena.Service.BetSettings
 
         private readonly ILGAPIClient _lgClient;
         public RngCasinoBetSettingService(
-            IAuthorizationService authorizationService,
             IAppSettings appSettings,
             IRngCasinoBetSettingDataAccess betSettingDataAccess,
             ILGAPIClient lgClient
             )
-            : base(authorizationService)
         {
             _betSettingDataAccess = betSettingDataAccess;
             _appSettings = appSettings;
@@ -68,11 +66,6 @@ namespace Fanex.Athena.Service.BetSettings
 
         public async Task<IResultInfo> UpdateStatusAsync(BetSettingCasinoStatusMetaModel metaModel)
         {
-            if (!HasPermissionOnData(metaModel.currencyAgents, metaModel.CustId))
-            {
-                return ErrorResult(ViewResources.AccessDeniedMsg);
-            }
-
             if (metaModel.IsSyncCasino && !_appSettings.IsDisableRngCasino)
             {
                 const string apiPath = "/RngCasino/Status";
@@ -88,12 +81,10 @@ namespace Fanex.Athena.Service.BetSettings
 
         public async Task<IResultInfo> UpdateSettingAsync(RngCasinoBetSettingMetaModel metaModel, bool isSyncCasino, bool isDisableCasino)
         {
-            if (isDisableCasino || !HasPermissionOnData(currencyAgents, metaModel.CustId))
+            if (isDisableCasino)
             {
                 return ErrorResult(ViewResources.AccessDeniedMsg);
             }
-
-            var result = false;
 
             if (isSyncCasino)
             {
@@ -110,8 +101,7 @@ namespace Fanex.Athena.Service.BetSettings
                         metaModel.ModifyByUsername
                     }, "en-US").ConfigureAwait(false);
 
-                    result = temp != null && temp.Data;
-
+                    bool result = temp != null && temp.Data;
                     return result ?
                         new ResultInfo { Code = 0, Message = ViewResources.MessageSuccess }
                         : new ResultInfo { Code = 1, Message = ViewResources.Fail };

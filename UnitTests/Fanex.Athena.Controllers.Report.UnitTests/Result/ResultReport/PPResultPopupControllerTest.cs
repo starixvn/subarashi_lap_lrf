@@ -1,13 +1,18 @@
 ﻿namespace Fanex.Athena.Controllers.TotalBets.UnitTests
 {
     using System.Threading.Tasks;
+
     using Base.UnitTests;
+
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Report.Result.ResultPopup;
-    using Service.Core.Utility.Interfaces;
+
     using UnitTest.Common.Extensions;
 
     [TestFixture]

@@ -67,7 +67,6 @@ namespace Fanex.Athena.Controllers.BetSettings
             }
 
             var result = await _betSettingService.UpdateStatusAsync(
-                userSession.CurrencyAgentList,
                 userSession.UserId,
                 custId,
                 userSession.Language,
@@ -95,7 +94,7 @@ namespace Fanex.Athena.Controllers.BetSettings
             }
 
             var setting = GetBetSettingCommonParam(userSession.UserId, licenseeId, userSession.Language);
-            var result = await _betSettingService.UpdateAgCasinoBetSettingAsync(setting, group, userSession.CurrencyAgentList);
+            var result = await _betSettingService.UpdateAgCasinoBetSettingAsync(setting, group);
 
 
             if (result.Code == 0)

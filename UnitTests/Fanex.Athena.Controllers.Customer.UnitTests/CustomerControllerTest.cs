@@ -84,15 +84,14 @@
 
                 StubLicenseeSessionData(DefaultLicenseeSession);
                 _customerListService.GetCustomerLoginInfo(CustId, DefaultLicenseeSession.LicenseeId,
-                    DefaultLicenseeSession.LicenseeName, Arg.Any<IDictionary<int, int[]>>()).Returns(new LogInfo());
+                    DefaultLicenseeSession.LicenseeName).Returns(new LogInfo());
 
                 // Action
                 var result = controller.LogInfo(CustId);
 
                 // Assert
                 _customerListService.Received().GetCustomerLoginInfo(CustId,
-                    DefaultLicenseeSession.LicenseeId, DefaultLicenseeSession.LicenseeName,
-DefaultUserSession.CurrencyAgentList);
+                    DefaultLicenseeSession.LicenseeId, DefaultLicenseeSession.LicenseeName);
             }
         }
 
@@ -112,8 +111,7 @@ DefaultUserSession.CurrencyAgentList);
 
                 var logInfo = new LogInfo { CustId = CustId };
                 _customerListService.GetCustomerLoginInfo(CustId,
-                    DefaultLicenseeSession.LicenseeId, DefaultLicenseeSession.LicenseeName,
-DefaultUserSession.CurrencyAgentList).Returns(logInfo);
+                    DefaultLicenseeSession.LicenseeId, DefaultLicenseeSession.LicenseeName).Returns(logInfo);
 
                 // Action
                 var result = controller.LogInfo(CustId) as ViewResult;

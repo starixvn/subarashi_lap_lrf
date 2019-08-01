@@ -18,8 +18,8 @@ namespace Fanex.Athena.Service.BetSettings.Interfaces
     {
         Task<AgCasinoBetSettingViewModel> GetViewModelAsync(int custId, string licenseeName);
 
-        Task<IResultInfo> UpdateAgCasinoBetSettingAsync(CommonBetSetting setting, string group, IDictionary<int, int[]> currencyAgents);
+        Task<IResultInfo> UpdateAgCasinoBetSettingAsync(CommonBetSetting setting, string group);
 
-        Task<IResultInfo> UpdateStatusAsync(IDictionary<int, int[]> currencyAgents, int userId, int custId, string language, string ip, bool isEnabled);
+        Task<IResultInfo> UpdateStatusAsync(int userId, int custId, string language, string ip, bool isEnabled);
     }
 }

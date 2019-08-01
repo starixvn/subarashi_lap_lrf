@@ -59,7 +59,6 @@ namespace Fanex.Athena.Controllers.BetSettings
             }
 
             var viewModel = await _betSettingService.GetViewModelAsync(
-                SessionService.UserSession.CurrencyAgentList,
                 metaModel.CustId,
                 metaModel.ProductId);
             if (viewModel == null)
@@ -117,7 +116,6 @@ namespace Fanex.Athena.Controllers.BetSettings
 
             var isEnabled = status == 1;
             var result = await _betSettingService.UpdateStatusAsync(
-               userSession.CurrencyAgentList,
                 productId,
                 userSession.UserId,
                 custId,

@@ -15,10 +15,10 @@ namespace Fanex.Athena.Service.BetSettings.Interfaces
 
     public interface ISportsbookBetSettingService
     {
-        Task<BetSettingViewModel> GetViewModelAsync(IDictionary<int, int[]> currencyAgents, int custId);
+        Task<BetSettingViewModel> GetViewModelAsync(int custId);
 
         Task<IResultInfo> UpdateBetSettingAsync(CommonBetSetting setting,
-            IDictionary<string, object> hashParam, DcsBetSetting esportSetting,
-            IDictionary<int, int[]> currencyAgents);
+            IDictionary<string, object> hashParam, DcsBetSetting esportSetting
+            );
     }
 }

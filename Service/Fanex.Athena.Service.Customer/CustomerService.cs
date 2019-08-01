@@ -12,19 +12,14 @@
     {
         private readonly ICustomerDataAccess _customerDataAccess;
 
-        private readonly IAuthorizationService _authorizationService;
-
-        public CustomerService(ICustomerDataAccess customerDataAccess, IAuthorizationService authorizationService)
+        public CustomerService(ICustomerDataAccess customerDataAccess)
         {
             _customerDataAccess = customerDataAccess;
-            _authorizationService = authorizationService;
         }
 
-        public CustomerInfo GetCustomerInfo(IDictionary<int, int[]> currencyAgents, int custId)
+        public CustomerInfo GetCustomerInfo(int custId)
         {
-            return _authorizationService.HasPermissionOnData(currencyAgents, custId, 0)
-                ? _customerDataAccess.GetCustomerInfo(custId)
-                : new CustomerInfo();
+            return _customerDataAccess.GetCustomerInfo(custId);
         }
     }
 }

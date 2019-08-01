@@ -16,10 +16,10 @@ namespace Fanex.Athena.Service.BetSettings.Interfaces
 
     public interface ICoreBetSettingService
     {
-        CustomerInfo GetCustomerInfo(int custId, IDictionary<int, int[]> currencyAgents);
+        CustomerInfo GetCustomerInfo(int custId);
 
         bool IsBetSettingEditable(UserAuthInfo userSession);
 
-        Task<IEnumerable<BetSettingProduct>> GetBetSettingProductsAsync(int custId, int licenseeId, IDictionary<int, int[]> currencyAgents);
+        Task<IEnumerable<BetSettingProduct>> GetBetSettingProductsAsync(int custId, int licenseeId);
     }
 }

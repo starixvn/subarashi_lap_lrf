@@ -67,7 +67,7 @@ namespace Fanex.Athena.Controllers.BetSettings
 
         protected CustomerInfo GetCustomerInfo(int custId)
         {
-            return _coreBetSettingService.GetCustomerInfo(custId, SessionService.UserSession.CurrencyAgentList);
+            return _coreBetSettingService.GetCustomerInfo(custId);
         }
 
         protected async Task AssignRequiredProperties(BetSettingBaseViewModel viewModel, BetSettingMetaModel metaModel)
@@ -79,7 +79,7 @@ namespace Fanex.Athena.Controllers.BetSettings
             viewModel.Editable = IsBetSettingEditable(userSession);
             viewModel.BetSettingProducts =
                 await _coreBetSettingService.GetBetSettingProductsAsync(metaModel.CustId,
-                licensee.LicenseeId, userSession.CurrencyAgentList);
+                licensee.LicenseeId);
         }
 
         protected CommonBetSetting GetBetSettingCommonParam(int userId, int licenseeId, string language)

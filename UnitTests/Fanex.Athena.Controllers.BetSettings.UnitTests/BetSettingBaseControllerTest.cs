@@ -52,7 +52,7 @@
                 controller.GetCustomerInfo(CustId);
 
                 // Assert
-                CoreBetSettingService.Received(1).GetCustomerInfo(CustId, Arg.Any<IDictionary<int, int[]>>());
+                CoreBetSettingService.Received(1).GetCustomerInfo(CustId);
             }
         }
 
@@ -88,7 +88,8 @@
                 {
                     new BetSettingProduct { ProductId = ProductTypes.RngCasino, IsEnable = isEnableRngCasino }
                 };
-                CoreBetSettingService.GetBetSettingProductsAsync(metaModel.CustId, DefaultLicenseeSession.LicenseeId, Arg.Any<IDictionary<int, int[]>>())
+                CoreBetSettingService.GetBetSettingProductsAsync(metaModel.CustId,
+                    DefaultLicenseeSession.LicenseeId)
                     .Returns(Task.FromResult<IEnumerable<BetSettingProduct>>(betSettingProducts));
 
                 // Action
