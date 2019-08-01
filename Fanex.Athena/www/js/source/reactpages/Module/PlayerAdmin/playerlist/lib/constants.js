@@ -61,13 +61,22 @@ export const columnList = [
     { key: fields.Email, value: 'Email', show: true }
 ];
 
+export const contextMenuKeys = {
+    note: 'note',
+    password: 'password',
+    fundtransferLimit: 'fundtransferLimit',
+    betLimit: 'betLimit',
+    statement: 'statement',
+    personalMessage: 'personalMessage'
+}
+
 export const contextMenuList = [
-    { key: 'note', name: LangHelper.getSingleResource('Note'), tabName: 'Note' },
-    { key: 'password', name: LangHelper.getSingleResource('Password'), tabName: 'Setting' },
-    { key: 'fundtransferLimit', name: LangHelper.getSingleResource('FundtransferLimit'), tabName: 'Setting' },
-    { key: 'betLimit', name: LangHelper.getSingleResource('BetLimit'), tabName: 'BetLimit' },
-    { key: 'statement', name: LangHelper.getSingleResource('Statement'), tabName: 'Statement' },
-    { key: 'personalMessage', name: LangHelper.getSingleResource('PersonalMessage'), tabName: 'Message' }
+    { key: contextMenuKeys.note, name: LangHelper.getSingleResource('Note'), tabName: 'lblPlayerAdminNote' },
+    { key: contextMenuKeys.password, name: LangHelper.getSingleResource('Password'), tabName: 'lblPlayerAdminSetting' },
+    { key: contextMenuKeys.fundtransferLimit, name: LangHelper.getSingleResource('FundtransferLimit'), tabName: 'lblPlayerAdminSetting' },
+    { key: contextMenuKeys.betLimit, name: LangHelper.getSingleResource('BetLimit'), tabName: 'lblBetLimit' },
+    { key: contextMenuKeys.statement, name: LangHelper.getSingleResource('Statement'), tabName: 'lblPlayerStatement' },
+    { key: contextMenuKeys.personalMessage, name: LangHelper.getSingleResource('PersonalMessage'), tabName: 'lblPlayerAdminMessage' }
 ]
 
 export const heightSlicing = {
@@ -150,3 +159,9 @@ export const apiInfo = {
     lapSearch: { action: 'PlayerAdminContainer/Search', type: systemType.newAdmin },
     lapDataById: { action: 'PlayerAdminContainer/GetPlayerListById', type: systemType.newAdmin }
 }
+
+export const excludedContextMenuWithNonDeposit = [contextMenuKeys.betLimit, contextMenuKeys.statement];
+
+export const excludedContextMenuWithClosed = [contextMenuKeys.password];
+
+export const excludedContextMenuWithArchived = [contextMenuKeys.password, contextMenuKeys.betLimit, contextMenuKeys.statement];

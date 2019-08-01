@@ -5,6 +5,7 @@ import { ActionCreators } from '../../actions';
 
 import { DropdownMenu, DropdownItem } from '@jsroot/components/dropdown';
 import { contextMenuList } from '../../lib/constants';
+import { isShowContextMenuItem } from '../../lib/contextMenuHelper';
 
 
 export const ContextMenu = (props) => {
@@ -22,8 +23,8 @@ export const ContextMenu = (props) => {
     const handleClickMenu = (tabName) => {
         setSelectedTabName(tabName);
 
-        const { custId, userName, currency } = currentActivePlayer;
-        const selectedPlayer = { custId, userName, currency };
+        const { custId, userName, currency, isDeposit, isArchived } = currentActivePlayer;
+        const selectedPlayer = { custId, userName, currency, isDeposit, isArchived };
         setSelectedPlayer(selectedPlayer);
     }
 
@@ -33,7 +34,7 @@ export const ContextMenu = (props) => {
     }
 
     const tabList = getTabList();
-    const activeMenuList = contextMenuList.filter(item => !!tabList.find(t => item.tabName === t.Name));
+    const activeMenuList = contextMenuList.filter(item => !!tabList.find(t => item.tabName === t.Name && isShowContextMenuItem(item)));
 
     return (
         <div className="dropdown context-menu" style={style}>

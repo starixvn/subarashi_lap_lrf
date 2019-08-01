@@ -5,7 +5,9 @@ export const buildSelectedPlayer = (dataItem) => {
     return {
         custId: dataItem.CustId,
         userName: dataItem.UserName,
-        currency: dataItem.Currency
+        currency: dataItem.Currency,
+        isDeposit: dataItem.IsDeposit,
+        isArchived: dataItem.IsArchived
     };
 }
 
@@ -15,7 +17,7 @@ export const buildLapPlayerList = (playerList) => {
     }
 
     return playerList.map(item => {
-        const { CustId, UserName, Status, RealName, IP, email, isOnline } = item;
+        const { CustId, UserName, Status, RealName, IP, email, isOnline, ActStatus, IBCCustId, isArchived } = item;
 
         return {
             CustId,
@@ -24,19 +26,25 @@ export const buildLapPlayerList = (playerList) => {
             RealName,
             LastLoginIp: IP,
             Email: email,
-            IsOnline: isOnline
+            IsOnline: isOnline,
+            IsDeposit: ActStatus === 2 && IBCCustId > 0,
+            IsArchived: isArchived
         };
     });
 }
 
 export const buildCurrentActivePlayer = (dataItem) => {
+    const { CustId, UserName, Currency, Status, OddsGroup, SpecialLevel, IsDeposit, IsArchived } = dataItem;
+
     return {
-        custId: dataItem.CustId,
-        userName: dataItem.UserName,
-        currency: dataItem.Currency,
-        status: dataItem.Status,
-        oddsGroup: dataItem.OddsGroup,
-        specialLevel: dataItem.SpecialLevel
+        custId: CustId,
+        userName: UserName,
+        currency: Currency,
+        status: Status,
+        oddsGroup: OddsGroup,
+        specialLevel: SpecialLevel,
+        isDeposit: IsDeposit,
+        isArchived: IsArchived
     };
 }
 

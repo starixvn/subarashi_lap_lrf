@@ -10,9 +10,9 @@ import LangHelper from '@jsroot/lib/langHelper';
 
 export const StatusCell = (props) => {
     const { dataItem, statusDropdownPosition, setCurrentActivePlayer, setStatusDropdownPosition } = props;
-    const { Status, IsOnline } = dataItem;
+    const { Status, IsOnline, IsDeposit } = dataItem;
 
-    const statusName = playerStatus[Status];
+    const statusName = IsDeposit ? playerStatus[Status] : playerStatus[playerStatusByName.Active];
     const classname = 'status-text ' + statusName;
     const canUpdate = Status !== playerStatusByName.Archived && Status !== playerStatusByName.Closed;
 
@@ -23,7 +23,7 @@ export const StatusCell = (props) => {
         setStatusDropdownPosition(newPosition);
     }
 
-    const shouldShowOnlineStatus = dataItem.SystemId && Status === playerStatusByName.Active;
+    const shouldShowOnlineStatus = IsDeposit && Status === playerStatusByName.Active;
     const onlineText = LangHelper.getSingleResource('Online');
     const offlineText = LangHelper.getSingleResource('Offline');
 

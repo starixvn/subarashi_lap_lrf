@@ -34,14 +34,9 @@ export const UserNameCell = (props) => {
 
     const handleLeaveContextMenu = (event) => {
         event.preventDefault();
-        window.setTimeout(() => {
-            if (contextMenu.isOpen) {
-                setContextMenu({
-                    ...contextMenu,
-                    isOpen: false
-                })
-            }
-        }, 10);
+        if (contextMenu.isOpen) {
+            setContextMenu({ ...contextMenu, isOpen: false })
+        }
     }
 
     return (
