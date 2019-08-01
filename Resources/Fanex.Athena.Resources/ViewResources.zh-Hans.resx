@@ -1718,13 +1718,13 @@
     <value>平板</value>
   </data>
   <data name="Asia" xml:space="preserve">
-    <value>亚洲</value>
+    <value>亚洲版</value>
   </data>
   <data name="China" xml:space="preserve">
-    <value>中国</value>
+    <value>中国版</value>
   </data>
   <data name="Euro" xml:space="preserve">
-    <value>欧洲</value>
+    <value>欧洲版</value>
   </data>
   <data name="ProductVS2" xml:space="preserve">
     <value>虚拟运动2</value>
