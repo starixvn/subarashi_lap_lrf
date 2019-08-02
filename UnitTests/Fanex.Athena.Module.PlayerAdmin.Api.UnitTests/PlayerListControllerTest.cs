@@ -52,7 +52,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Api
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    Assert.That(searchParam.LicenseeId, Is.EqualTo(ExternalApiHelper.DefaultLicenseeId));
+                    Assert.That(searchParam.SiteName, Is.EqualTo(ExternalApiHelper.DefaultSiteName));
                     Assert.That(searchParam.AgentListXml, Is.EqualTo(expectedAgentistXml));
                 });
             }

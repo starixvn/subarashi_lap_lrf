@@ -3,5 +3,7 @@
     public class BaStatusUpdatingMetaModel : PlayerUpdatingBaseMetaModel
     {
         public bool IsBa { get; set; }
+
+        public string SiteName { get; set; }
     }
 }

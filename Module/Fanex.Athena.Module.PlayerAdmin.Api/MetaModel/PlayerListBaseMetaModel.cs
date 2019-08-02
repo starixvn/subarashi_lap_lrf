@@ -2,7 +2,7 @@
 {
     public class PlayerListBaseMetaModel
     {
-        public int LicenseeId { get; set; }
+        public string SiteName { get; set; }
 
         public string Currency { get; set; }
 

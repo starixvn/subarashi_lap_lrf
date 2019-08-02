@@ -36,7 +36,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
 
             var metaModel = new PlayerSearchingMetaModel
             {
-                LicenseeId = 1,
+                SiteName = "sitename",
                 AgentListXml = "",
                 UserName = "test",
                 SearchOption = 1,
@@ -58,7 +58,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
             // Assert
             Assert.Multiple(() =>
             {
-                objectDb.Received(1).SetParameterValue("LicenseeId", metaModel.LicenseeId);
+                objectDb.Received(1).SetParameterValue("LicenseeName", metaModel.SiteName);
                 objectDb.Received(1).SetParameterValue("AgentList", metaModel.AgentListXml);
                 objectDb.Received(1).SetParameterValue("UserName", metaModel.UserName);
                 objectDb.Received(1).SetParameterValue("SearchOption", metaModel.SearchOption);
@@ -130,7 +130,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
 
             var metaModel = new PlayerListByIdMetaModel
             {
-                LicenseeId = 1,
+                SiteName = "sitename",
                 AgentListXml = "",
                 IdList = "1,2,3",
                 SpecialLevel = "1,2,3,4,5",
@@ -149,7 +149,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
             // Assert
             Assert.Multiple(() =>
             {
-                objectDb.Received(1).SetParameterValue("LicenseeId", metaModel.LicenseeId);
+                objectDb.Received(1).SetParameterValue("LicenseeName", metaModel.SiteName);
                 objectDb.Received(1).SetParameterValue("AgentList", metaModel.AgentListXml);
                 objectDb.Received(1).SetParameterValue("CustIds", metaModel.IdList);
                 objectDb.Received(1).SetParameterValue("SpecialLevel", metaModel.SpecialLevel);

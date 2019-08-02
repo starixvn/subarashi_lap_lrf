@@ -8,6 +8,9 @@
   <SpNameConfig Environment="BACKUPMNL" SpName="Lrf_CheckIn" EnvironmentText="_mnl"></SpNameConfig>
   <!--Do not delete this-->
 
-  <SpNameConfig Environment="DEV" SpName="Lrf_PlayerAdmin_GetPlayerInfo" EnvironmentText="_UAT3"></SpNameConfig>
+  <SpNameConfig Environment="DEV,LOCAL,SIT,UAT" SpName="Lrf_PlayerAdmin_GetPlayerInfo" EnvironmentText="_UAT3"></SpNameConfig>
 
+  <SpNameConfig Environment="DEV,LOCAL,SIT,UAT" SpName="Lrf_CustomerUpdMemberBAStatus" EnvironmentText="_xtest"></SpNameConfig>
+  <SpNameConfig Environment="DEV,LOCAL,SIT,UAT" SpName="Lrf_CustomerSelByUsername" EnvironmentText="_xtest"></SpNameConfig>
+  <SpNameConfig Environment="DEV,LOCAL,SIT,UAT" SpName="Lrf_CustomerSelByCustid" EnvironmentText="_xtest"></SpNameConfig>
 </Root>

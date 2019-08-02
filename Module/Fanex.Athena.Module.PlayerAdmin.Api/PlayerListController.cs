@@ -36,7 +36,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api
 
         private void AssignParam(PlayerListBaseMetaModel searchParam)
         {
-            searchParam.LicenseeId = LicenseeId;
+            searchParam.SiteName = SiteName;
             searchParam.AgentListXml = AuthParameterHelper.BuildAgentListXml(CurrencyAgentList, searchParam.Currency?.Trim());
         }
     }

@@ -54,7 +54,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
 
         private static void AssignCommonParam(IObjectDb objectDb, PlayerListBaseMetaModel metaModel)
         {
-            objectDb.SetParameterValue("LicenseeId", metaModel.LicenseeId);
+            objectDb.SetParameterValue("LicenseeName", metaModel.SiteName);
             objectDb.SetParameterValue("AgentList", metaModel.AgentListXml);
         }
 

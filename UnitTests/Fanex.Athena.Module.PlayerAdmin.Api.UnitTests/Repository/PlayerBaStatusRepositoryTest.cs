@@ -20,7 +20,8 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Repository
                 CustId = 2,
                 Ip = "127.0.0.1",
                 Language = "en-US",
-                IsBa = true
+                IsBa = true,
+                SiteName = "testsite"
             };
             const string ExpectedOddsGroup = "C";
             ObjectDb.GetParameterValue("OddsGroup").Returns(ExpectedOddsGroup);
@@ -31,6 +32,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Repository
             // Assert
             Assert.Multiple(() =>
             {
+                ObjectDb.Received(1).SetParameterValue("LicenseeName", metaModel.SiteName);
                 ObjectDb.Received(1).SetParameterValue("ModifyBy", metaModel.UserId);
                 ObjectDb.Received(1).SetParameterValue("CustID", metaModel.CustId);
                 ObjectDb.Received(1).SetParameterValue("IsBA", metaModel.IsBa);
