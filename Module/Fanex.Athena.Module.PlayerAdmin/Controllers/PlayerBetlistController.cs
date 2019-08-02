@@ -16,9 +16,9 @@
     using Fanex.Athena.Web.ActionFilter;
     using ONEbook.UM.Filters;
 
-    //[AuthorizeRestriction(AppMode.Parasitic)]
     [SessionState(SessionStateBehavior.ReadOnly)]
     [CheckUMFilter]
+    //[AuthorizeRestriction(AppMode.Parasitic)]
     //[FunctionAuthorization("")]
     public class PlayerBetlistController : CultureBaseController
     {
@@ -38,6 +38,7 @@
         }
 
         [HttpGet]
+        [ValidatePermissionOnData]
         public async Task<ViewResult> Running(int custid)
         {
             var currencyList = SessionService.UserSession.CurrencyList;
@@ -55,6 +56,7 @@
         [HttpPost]
         [AjaxRequest]
         [CustomValidateAntiForgery]
+        [ValidatePermissionOnData(isObject: true)]
         public async Task<dynamic> GetRunningBetList(PlayerRunningBetListMetalModel metaModel)
         {
             var userSession = SessionService.UserSession;
@@ -70,6 +72,7 @@
         [HttpPost]
         [AjaxRequest]
         [CustomValidateAntiForgery]
+        [ValidatePermissionOnData(isObject: true)]
         public async Task<FileStreamResult> ExportRunningBetList(PlayerRunningBetListMetalModel metaModel)
         {
             var userSession = SessionService.UserSession;

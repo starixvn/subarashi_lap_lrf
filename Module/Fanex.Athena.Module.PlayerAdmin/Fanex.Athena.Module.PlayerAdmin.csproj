@@ -117,6 +117,10 @@
       <Project>{794C0345-2DDD-4FFD-A605-BB96FBB37DE8}</Project>
       <Name>Fanex.Athena.Model.Auth</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Model\Fanex.Athena.Model.Core\Fanex.Athena.Model.Core.csproj">
+      <Project>{5F410090-94C0-46A5-9FEC-B6C3B745B7A0}</Project>
+      <Name>Fanex.Athena.Model.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Service\Fanex.Athena.Service.Core\Fanex.Athena.Service.Core.csproj">
       <Project>{FCFD7434-085B-4C93-848F-E1CBCEDCC5A0}</Project>
       <Name>Fanex.Athena.Service.Core</Name>

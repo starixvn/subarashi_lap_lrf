@@ -1,8 +1,9 @@
 ﻿namespace Fanex.Athena.Module.PlayerAdmin.MetaModel
 {
     using System.Collections.Generic;
+    using Fanex.Athena.Model.Core.MetaModel;
 
-    public class PlayerRunningBetListMetalModel
+    public class PlayerRunningBetListMetalModel : IMetalModelCustomerIdentity
     {
         private string _sortBy;
 
