@@ -19,7 +19,15 @@ export class AppContainer extends Component {
     }
 
     getResource = (key) => {
-        LangHelper.getSingleResource(key);
+        return LangHelper.getSingleResource(key);
+    }
+
+    formatDateString = (dateString) => {
+        const date = new Date(dateString);
+        const month = date.getMonth() + 1;
+        const day = date.getDate();
+
+        return `${month < 10 ? '0' + month : month}/${day < 10 ? '0' + day : day}/${date.getFullYear()}`;
     }
 
     beforeShowParlay = () => {
@@ -36,7 +44,8 @@ export class AppContainer extends Component {
                 pageName='PlayerAdmin'
                 rootUrl={Site.getRootUrl()}
                 getResourceFunc={this.getResource}
-                baseCurrency={this.props.requestParam.Currency}
+                formatDateStringFunc={this.formatDateString}
+                baseCurrency=''
                 beforeShowParlayFunc={this.beforeShowParlay}
                 afterShowParlayFunc={this.afterShowParlay}
             >
@@ -52,7 +61,8 @@ export class AppContainer extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({}, dispatch);
+    const { toggleLoader } = ActionCreators;
+    return bindActionCreators({ toggleLoader }, dispatch);
 }
 
 function mapStateToProps(state) {

@@ -45,8 +45,8 @@ class BetListLayout extends Component {
         };
 
         // show detail popup (in choice column)
-        window.showCombMPDetail = (transId, refNo, betId, custId, betTeam) => {
-            const { rootUrl, baseCurrency } = this.props;
+        window.showCombMPDetail = (transId, refNo, betId, custId, betTeam, baseCurrency) => {
+            const { rootUrl } = this.props;
 
             const url = BetList.getParlayDetailUrl(rootUrl, transId, refNo, betId, custId, betTeam, baseCurrency);
             this._openPopup(url, betTeam);
@@ -68,6 +68,75 @@ class BetListLayout extends Component {
             const title = this._getResource('TransactionDetail');
             this._openPopup(url, title);
         }
+
+        window.showAGCasinoDetails = (transId, winlostDate, custId, transType) => {
+            const { rootUrl, baseCurrency } = this.props;
+
+            const url = BetList.getAGCasinoDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
+            const title = this._getResource('AGCasino') + ' - ' +
+                this._getResource('DetailedBetlist') + ' - ' + this._formatDateString(winlostDate);
+
+            this._openPopup(url, title);
+        }
+
+        window.showRnGCasinoDetails = (transId, winlostDate, custId, transType) => {
+            const { rootUrl, baseCurrency } = this.props;
+
+            const url = BetList.getRnGCasinoDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
+            const title = this._getResource('ProductCS') + ' - ' +
+                this._getResource('DetailedBetlist') + ' - ' + this._formatDateString(winlostDate);
+
+            this._openPopup(url, title);
+        }
+
+        window.showVoidBridgeDetails = (transId, winlostDate, custId, transType) => {
+            const { rootUrl, baseCurrency } = this.props;
+
+            const url = BetList.getVoidBridgeDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
+            const title = this._getResource('ProductVB') + ' - ' +
+                this._getResource('DetailedBetlist') + ' - ' + this._formatDateString(winlostDate);
+
+            this._openPopup(url, title);
+        }
+
+        window.showTodayRunningBetsDetails = (transId, winlostDate, custId, transType) => {
+            const { rootUrl, baseCurrency } = this.props;
+
+            const url = BetList.getAllBetDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
+            const title = this._getResource('ProductAB') + ' - ' +
+                this._getResource('DetailedBetlist') + ' - ' + this._formatDateString(winlostDate);
+
+            this._openPopup(url, title);
+        }
+
+        window.showColossusBetsDetails = (refNo, winlostDate, transId, custId, betCheck) => {
+            const { rootUrl, baseCurrency } = this.props;
+
+            const url = BetList.getColossusBetsDetailUrl(rootUrl, baseCurrency, refNo, winlostDate, transId, custId, betCheck);
+            const title = this._getResource('TicketDetailOf').replace('{0}', refNo);
+
+            this._openPopup(url, title);
+        }
+
+        window.showGlobalGaming = (transId, winlostDate, custId, transType) => {
+            const { rootUrl, baseCurrency } = this.props;
+
+            const url = BetList.getGlobalGamingDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
+            const title = this._getResource('ProductFW') + ' - ' +
+                this._getResource('DetailedBetlist') + ' - ' + this._formatDateString(winlostDate);
+
+            this._openPopup(url, title);
+        }
+
+        window.showPPDetails = (transId, winlostDate, custId, transType) => {
+            const { rootUrl, baseCurrency } = this.props;
+
+            const url = BetList.getPPDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
+            const title = this._getResource('ProductPP') + ' - ' +
+                this._getResource('DetailedBetlist') + ' - ' + this._formatDateString(winlostDate);
+
+            this._openPopup(url, title);
+        }
     }
 
     componentWillUnmount() {
@@ -78,10 +147,21 @@ class BetListLayout extends Component {
         window.showCombMPDetail = undefined;
         window.ViewCashOutHistory = undefined;
         window.ShowBonusDetails = undefined;
+        window.showAGCasinoDetails = undefined;
+        window.showRnGCasinoDetails = undefined;
+        window.showVoidBridgeDetails = undefined;
+        window.showTodayRunningBetsDetails = undefined;
+        window.showColossusBetsDetails = undefined;
+        window.showGlobalGaming = undefined;
+        window.showPPDetails = undefined;
     }
 
     _getResource(key) {
         return this.props.getResourceFunc ? this.props.getResourceFunc(key) : key;
+    }
+
+    _formatDateString(dateString) {
+        return this.props.formatDateStringFunc ? this.props.formatDateStringFunc(dateString) : dateString;
     }
 
     _beforeShowParlay() {
@@ -154,7 +234,7 @@ class BetListLayout extends Component {
         }
     }
 
-    _openPopup (url, title) {
+    _openPopup(url, title) {
         this.setState({ isShowPopup: true, popupUrl: url, popupTitle: title});
     }
 
@@ -185,7 +265,8 @@ BetListLayout.propTypes = {
     getResourceFunc: PropTypes.func,
     baseCurrency: PropTypes.string,
     beforeShowParlayFunc: PropTypes.func,
-    afterShowParlayFunc: PropTypes.func
+    afterShowParlayFunc: PropTypes.func,
+    formatDateStringFunc: PropTypes.func
 }
 
 BetListLayout.defaultProps = {

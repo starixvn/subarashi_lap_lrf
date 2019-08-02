@@ -691,6 +691,7 @@
     <Content Include="www\css\build\dev\reactpages\playeradmin\index.css.map" />
     <Content Include="www\css\build\dev\reactpages\playeradmin\account-info.chunk.js.map" />
     <Content Include="www\css\build\dev\reactpages\playeradmin\account-info.css.map" />
+    <Content Include="Views\Desktop\Module\PlayerAdmin\PlayerBetList\running.cshtml" />
     <None Include="www\css\source\reactpages\components\custom3rd\react-toastify.scss" />
     <None Include="www\css\source\pages\betlist\result\result.happy5.scss" />
     <Content Include="www\css\source\reactpages\pages\betlist\images\bonus.png" />

@@ -56,11 +56,11 @@ export default class Service {
                 var result = response.data;
 
                 var data = result.Data;
-                if (data && data.length > 1) {
+                if (data && data.length > 0) {
                     processDataFunc(data, result.Total);
                 }
                 else {
-                    processDataFunc([], []);
+                    processDataFunc([], {});
                 }
 
                 successCallBack();
