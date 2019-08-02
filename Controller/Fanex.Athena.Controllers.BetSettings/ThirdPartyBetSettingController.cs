@@ -51,6 +51,7 @@ namespace Fanex.Athena.Controllers.BetSettings
 
         [HttpGet]
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
+        [ValidatePermissionOnData(isObject: true)]
         public async Task<ActionResult> IndexAsync(BetSettingMetaModel metaModel)
         {
             if (!ProductViewFileMap.ContainsKey(metaModel.ProductId))
@@ -73,6 +74,7 @@ namespace Fanex.Athena.Controllers.BetSettings
 
         [HttpPost]
         [CustomValidateAntiForgery]
+        [ValidatePermissionOnData]
         public Task<JsonResult> UpdateMacauStatusAsync(int custId, string nickName, int status)
         {
             return UpdateThirdPartyProductStatusAsync(ProductTypes.Macau, custId, nickName, status);
@@ -80,6 +82,7 @@ namespace Fanex.Athena.Controllers.BetSettings
 
         [HttpPost]
         [CustomValidateAntiForgery]
+        [ValidatePermissionOnData]
         public Task<JsonResult> UpdateBetTradeStatusAsync(int custId, string nickName, int status)
         {
             return UpdateThirdPartyProductStatusAsync(ProductTypes.BetTrade, custId, nickName, status);
@@ -87,6 +90,7 @@ namespace Fanex.Athena.Controllers.BetSettings
 
         [HttpPost]
         [CustomValidateAntiForgery]
+        [ValidatePermissionOnData]
         public Task<JsonResult> UpdateColossusBetsStatusAsync(int custId, string nickName, int status)
         {
             return UpdateThirdPartyProductStatusAsync(ProductTypes.ColossusBets, custId, nickName, status);

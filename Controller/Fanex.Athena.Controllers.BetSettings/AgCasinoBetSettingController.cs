@@ -42,13 +42,9 @@ namespace Fanex.Athena.Controllers.BetSettings
 
         [HttpGet]
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
+        [ValidatePermissionOnData(isObject: true)]
         public async Task<ActionResult> IndexAsync(BetSettingMetaModel metaModel)
         {
-            if (!_authorizationService.HasPermissionOnData(SessionService.UserSession.CurrencyAgentList, metaModel.CustId, 0))
-            {
-                return Redirect("~/Utility/AccessDenied");
-            }
-
             var viewModel = await _betSettingService.GetViewModelAsync(metaModel.CustId, SessionService.LicenseeSession.LicenseeName);
 
             await AssignRequiredPropertiesAsync(viewModel, metaModel).ConfigureAwait(false);
@@ -57,6 +53,7 @@ namespace Fanex.Athena.Controllers.BetSettings
 
         [HttpPost]
         [CustomValidateAntiForgery]
+        [ValidatePermissionOnData]
         public async Task<JsonResult> UpdateStatusAsync(int custId, string nickName, int status)
         {
             var userSession = SessionService.UserSession;
@@ -83,6 +80,7 @@ namespace Fanex.Athena.Controllers.BetSettings
 
         [HttpPost]
         [CustomValidateAntiForgery]
+        [ValidatePermissionOnData]
         public async Task<JsonResult> UpdateBetSettingAsync(string nickName, string group)
         {
             var userSession = SessionService.UserSession;

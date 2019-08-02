@@ -92,7 +92,8 @@ namespace Fanex.Athena.Controllers.Customer
         [HttpPost]
         [AjaxRequest]
         [CustomValidateAntiForgery]
-        public async Task<ActionResult> UpdateCustStatus(int custId, bool isClosed, bool isSuspended)
+        [ValidatePermissionOnData]
+        public async Task<ActionResult> UpdateCustStatusAsync(int custId, bool isClosed, bool isSuspended)
         {
             try
             {
@@ -138,6 +139,7 @@ namespace Fanex.Athena.Controllers.Customer
         [HttpPost]
         [AjaxRequest]
         [CustomValidateAntiForgery]
+        [ValidatePermissionOnData]
         public ActionResult UpdateSpecialLevel(int custId, int level)
         {
             var licensee = SessionService.LicenseeSession;
@@ -184,6 +186,7 @@ namespace Fanex.Athena.Controllers.Customer
         [HttpPost]
         [AjaxRequest]
         [CustomValidateAntiForgery]
+        [ValidatePermissionOnData]
         public ActionResult UpdateOddsGroup(int custId, string oddsGroup)
         {
             var licensee = SessionService.LicenseeSession;
@@ -238,6 +241,7 @@ namespace Fanex.Athena.Controllers.Customer
         [HttpPost]
         [AjaxRequest]
         [CustomValidateAntiForgery]
+        [ValidatePermissionOnData]
         public ActionResult UpdateBAStatus(int custId, bool isAllowBA)
         {
             var licenseeSession = SessionService.LicenseeSession;

@@ -244,6 +244,7 @@ namespace Fanex.Athena.Controllers.Customer
         }
 
         [CustomValidateAntiForgery]
+        [ValidatePermissionOnData]
         public ActionResult LogInfo(int custId)
         {
             var licenseeSession = SessionService.LicenseeSession;

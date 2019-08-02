@@ -6,13 +6,14 @@
 
 namespace Fanex.Athena.Model.BetSettings.MetaModel
 {
+    using Fanex.Athena.Model.Core.MetaModel;
     using Model.Core.DataDomain;
     using Resources;
 
     /// <summary>
     /// BetSettingMetaModel class.
     /// </summary>
-    public class BetSettingMetaModel
+    public class BetSettingMetaModel : IMetalModelCustomerIdentity
     {
         public BetSettingMetaModel()
         {

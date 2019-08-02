@@ -49,6 +49,7 @@ namespace Fanex.Athena.Controllers.BetSettings
 
         [HttpGet]
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
+        [ValidatePermissionOnData(isObject: true)]
         public async Task<ActionResult> IndexAsync(BetSettingMetaModel metaModel)
         {
             var viewModel = new ExchangeBetSettingViewModel
@@ -58,7 +59,7 @@ namespace Fanex.Athena.Controllers.BetSettings
             await AssignRequiredPropertiesAsync(viewModel, metaModel);
 
             viewModel.IsEnabled = await
-                _betSettingService.GetStatusAsync( metaModel.CustId, metaModel.ProductId);
+                _betSettingService.GetStatusAsync(metaModel.CustId, metaModel.ProductId);
 
             var apiResult = _exchangeCommApiService.GetCommission(metaModel.CustId);
             if (apiResult.IsSuccessful)
