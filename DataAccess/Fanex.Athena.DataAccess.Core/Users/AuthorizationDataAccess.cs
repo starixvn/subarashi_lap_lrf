@@ -7,11 +7,8 @@
 namespace Fanex.Athena.DataAccess.Core.Users
 {
     using System;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
     using Fanex.Athena.DataAccess.Core;
     using Fanex.Athena.DataAccess.Core.Users.Interfaces;
-    using Fanex.Common;
 
     public class AuthorizationDataAccess : BaseDataAccess, IAthorizationDataAccess
     {
@@ -24,9 +21,14 @@ namespace Fanex.Athena.DataAccess.Core.Users
                 db.SetParameterValue("custid", custId);
                 using (var reader = db.ExecuteReader())
                 {
-                    return new Tuple<int, int>(Convert.ToInt32(reader["CurrencyId"]), Convert.ToInt32(reader["CustId"]));
+                    if (reader.Read())
+                    {
+                        return new Tuple<int, int>(Convert.ToInt32(reader["CurrencyId"]), Convert.ToInt32(reader["CustId"]));
+                    }
                 }
             }
+
+            return new Tuple<int, int>(0, 0);
         }
     }
 }
