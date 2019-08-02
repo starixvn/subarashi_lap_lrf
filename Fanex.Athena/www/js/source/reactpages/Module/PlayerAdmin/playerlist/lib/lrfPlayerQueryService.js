@@ -26,7 +26,7 @@ export default class LrfPlayerQueryService {
                 const { PlayerList: lapPlayerList, TotalItem: lapTotalItem } = lapResponse.data;
                 if (!lapPlayerList || !lapPlayerList.length) {
                     return {
-                        playerList: lrfPlayerList,
+                        playerList: buildLrfPlayerList(lrfPlayerList),
                         totalItem: lrfTotalItem
                     };
                 }
@@ -39,7 +39,7 @@ export default class LrfPlayerQueryService {
                 };
             })
             .catch(() => ({
-                playerList: lrfPlayerList,
+                playerList: buildLrfPlayerList(lrfPlayerList),
                 totalItem: lrfTotalItem
             }));
     }

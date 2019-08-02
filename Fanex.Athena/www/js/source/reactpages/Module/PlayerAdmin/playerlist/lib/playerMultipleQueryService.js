@@ -1,5 +1,5 @@
 import PlayerListDataHelper from './playerListDataHelper';
-import { buildLapPlayerList, getCustIdListFromLapData } from './utils';
+import { buildLapPlayerList, getCustIdListFromLapData, buildLrfPlayerList } from './utils';
 import LangHelper from '@jsroot/lib/langHelper';
 
 export default class PlayerMultipleQueryService {
@@ -90,7 +90,7 @@ export default class PlayerMultipleQueryService {
 
                 return {
                     playerList: [...playerListInLap, ...playerListInLrf],
-                    totalItem: Math.max(nextLrfTotalItem, nextLapTotalItem)
+                    totalItem: nextLrfTotalItem + nextLapTotalItem
                 }
             })
             .catch((error) => {
@@ -140,7 +140,7 @@ export default class PlayerMultipleQueryService {
                 const { PlayerList: lapPlayerList, TotalItem: nextLapTotalItem } = nextLapResponse.data;
                 if (!lapPlayerList || !lapPlayerList.length) {
                     return {
-                        playerList: differenceList,
+                        playerList: buildLrfPlayerList(differenceList),
                         totalItem: differenceList.length
                     };
                 }
@@ -156,7 +156,7 @@ export default class PlayerMultipleQueryService {
                 console.log(error.message);
                 window.alert(LangHelper.getSingleResource('HttpError_Default'));
                 return {
-                    playerList: differenceList,
+                    playerList: buildLrfPlayerList(differenceList),
                     totalItem: differenceList.length
                 };
             });
