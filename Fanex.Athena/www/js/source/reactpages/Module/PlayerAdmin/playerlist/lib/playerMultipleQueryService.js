@@ -34,12 +34,12 @@ export default class PlayerMultipleQueryService {
 
                 const playerList = PlayerListDataHelper.mergePlayerList(lrfDataObject.commonList, lapDataObject.commonList);
                 const totalItem = Math.max(lrfTotalItem, lapTotalItem);
-                if (lrfDataObject.differenceList.length === 0 && lapDataObject.differenceList.length === 0) {
+                const idListNotInLrf = getCustIdListFromLapData(lapDataObject.differenceList);
+                if (lrfDataObject.differenceList.length === 0 && idListNotInLrf.length === 0) {
                     return { playerList, totalItem };
                 }
 
                 const idListNotInLap = lrfDataObject.differenceList.map(x => x.CustId);
-                const idListNotInLrf = getCustIdListFromLapData(lapDataObject.differenceList);
 
                 const lrfParam = {
                     currency: param.currency,

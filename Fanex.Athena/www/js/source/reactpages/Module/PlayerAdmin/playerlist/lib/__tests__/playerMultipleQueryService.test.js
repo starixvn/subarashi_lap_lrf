@@ -1,6 +1,7 @@
 import PlayerMultipleQueryService from '../playerMultipleQueryService';
 import PlayerListDataHelper from '../playerListDataHelper';
-import { apiInfo } from '../constants';
+import { apiInfo, playerTypes } from '../constants';
+import * as utils from '../utils';
 
 describe('PlayerMultipleQueryService', () => {
     let originalAlert;
@@ -18,10 +19,10 @@ describe('PlayerMultipleQueryService', () => {
         pageIndex: 1
     };
     const defaultLapPlayerList = [
-        { CustId: 1, UserName: 'test1', Status: 0, IP: '1.1.1.1', email: 'abc@gmail.com', isOnline: true, RealName: 'test1real' },
-        { CustId: 2, UserName: 'test2', Status: 1, IP: '2.2.2.2', email: 'xyz@gmail.com', isOnline: false, RealName: 'test2real' }
+        { IBCCustId: 1, UserName: 'test1', Status: 0, IP: '1.1.1.1', email: 'abc@gmail.com', isOnline: true, RealName: 'test1real', ActStatus: 2, isArchived: false },
+        { IBCCustId: 2, UserName: 'test2', Status: 1, IP: '2.2.2.2', email: 'xyz@gmail.com', isOnline: false, RealName: 'test2real', ActStatus: 2, isArchived: false }
     ];
-    const defaultLapDifferenceList = [{ CustId: 4, UserName: 'test4', Status: 0, IP: '4.4.4.4', email: 'ijk@gmail.com', isOnline: true, RealName: 'test4real' }];
+    const defaultLapDifferenceList = [{ IBCCustId: 4, UserName: 'test4', Status: 0, IP: '4.4.4.4', email: 'ijk@gmail.com', isOnline: true, RealName: 'test4real', ActStatus: 2, isArchived: false }];
     const defaultLrfPlayerList = [{ CustId: 1, BaStatus: true, OddsGroup: 'A' }, { CustId: 2, BaStatus: false, OddsGroup: 'B' }];
     const defaultLrfDifferenceList = [{ CustId: 3, BaStatus: true, OddsGroup: 'D' }];
     afterEach(() => {
@@ -78,8 +79,12 @@ describe('PlayerMultipleQueryService', () => {
             });
             PlayerMultipleQueryService.fetchData(param, commonService, apiInfo);
 
-            const expectedResult = { data: {
-                    [isCheckLrfPromise ? 'DataList' : 'PlayerList']: [], TotalItem: 0 } };
+            const expectedResult = {
+                data: {
+                    [isCheckLrfPromise ? 'DataList' : 'PlayerList']: [],
+                    TotalItem: 0
+                }
+            };
             return passedPromise.then((result) => {
                 expect(result).toEqual(expectedResult);
                 PlayerMultipleQueryService._getResult = originalGetResult;
@@ -106,8 +111,10 @@ describe('PlayerMultipleQueryService', () => {
 
     describe('_getResult', () => {
         let originalMergePlayerList;
+        let originalGetCustIdListFromLapData;
         beforeAll(() => {
             originalMergePlayerList = PlayerListDataHelper.mergePlayerList;
+            originalGetCustIdListFromLapData = utils.getCustIdListFromLapData;
         });
 
         let handler = null;
@@ -125,6 +132,7 @@ describe('PlayerMultipleQueryService', () => {
             handler = null;
             defaultCommonService = null;
             PlayerListDataHelper.mergePlayerList = originalMergePlayerList;
+            utils.getCustIdListFromLapData = originalGetCustIdListFromLapData;
         })
 
         const runTestCallingCorrectFunction = (param, lrfList, lapList, functionName, checkResultFunc) => {
@@ -136,8 +144,7 @@ describe('PlayerMultipleQueryService', () => {
             const commonService = {...defaultCommonService }
 
             const originalRefetchFunction = PlayerMultipleQueryService[functionName];
-            const refetchPromise = Promise.resolve({ playerList: [], totalItem: 0 });
-            PlayerMultipleQueryService[functionName] = jest.fn(() => refetchPromise);
+            PlayerMultipleQueryService[functionName] = jest.fn(() => ({ then: () => {} }));
             PlayerMultipleQueryService._getResult(param, lrfPromise, lapPromise, commonService, apiInfo);
             handler(lrfResponse, lapResponse);
 
@@ -198,6 +205,14 @@ describe('PlayerMultipleQueryService', () => {
                     commonList: [...defaultLapPlayerList],
                     differenceList: [...defaultLapDifferenceList]
                 }
+
+                utils.getCustIdListFromLapData = jest.fn((dataList) => {
+                    if (dataList === expectedLapDataObject.differenceList) {
+                        return defaultLapDifferenceList.map(x => x.IBCCustId);
+                    }
+
+                    return [];
+                })
                 expect(PlayerMultipleQueryService[functionName]).toHaveBeenCalledWith(
                     expectedLrfParam,
                     expectedLapParam,
@@ -229,6 +244,15 @@ describe('PlayerMultipleQueryService', () => {
                     commonList: [...defaultLapPlayerList],
                     differenceList: [...defaultLapDifferenceList]
                 }
+
+                utils.getCustIdListFromLapData = jest.fn((dataList) => {
+                    if (dataList === expectedLapDataObject.differenceList) {
+                        return defaultLapDifferenceList.map(x => x.IBCCustId);
+                    }
+
+                    return [];
+                })
+
                 expect(PlayerMultipleQueryService[functionName]).toHaveBeenCalledWith(
                     expectedLrfParam,
                     expectedLapDataObject,
@@ -323,7 +347,7 @@ describe('PlayerMultipleQueryService', () => {
             const nextLapResponse = {
                 data: {
                     PlayerList: [
-                        { CustId: 3, UserName: 'test3', Status: 2, IP: '3.3.3.3', email: 'def@gmail.com', isOnline: true, RealName: 'test3real' },
+                        { IBCCustId: 3, UserName: 'test3', Status: 2, IP: '3.3.3.3', email: 'def@gmail.com', isOnline: true, RealName: 'test3real', ActStatus: 2, isArchived: false },
                     ],
                     TotalItem: 1
                 }
@@ -352,7 +376,9 @@ describe('PlayerMultipleQueryService', () => {
                     Currency: undefined,
                     CurrentBalance: undefined,
                     OutstandingBalance: undefined,
-                    SpecialLevel: undefined
+                    SpecialLevel: undefined,
+                    IsDeposit: true,
+                    IsArchived: false
                 },
                 {
                     CustId: 4,
@@ -368,7 +394,9 @@ describe('PlayerMultipleQueryService', () => {
                     Currency: undefined,
                     CurrentBalance: undefined,
                     OutstandingBalance: undefined,
-                    SpecialLevel: undefined
+                    SpecialLevel: undefined,
+                    IsDeposit: true,
+                    IsArchived: false
                 }
             ]
             const expectedResult = {
@@ -420,16 +448,18 @@ describe('PlayerMultipleQueryService', () => {
             }
 
             const expectedPlayerList = lapDataObject.differenceList.map(item => {
-                const { CustId, UserName, Status, RealName, IP, email, isOnline } = item;
+                const { UserName, Status, RealName, IP, email, isOnline, ActStatus, IBCCustId, isArchived } = item;
 
                 return {
-                    CustId,
+                    CustId: IBCCustId,
                     UserName,
                     Status,
                     RealName,
                     LastLoginIp: IP,
                     Email: email,
-                    IsOnline: isOnline
+                    IsOnline: isOnline,
+                    IsDeposit: ActStatus === playerTypes.deposit && IBCCustId > 0,
+                    IsArchived: isArchived
                 };
             })
             const expectedResult = {

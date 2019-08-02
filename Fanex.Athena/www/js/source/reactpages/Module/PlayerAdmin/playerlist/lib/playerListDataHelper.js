@@ -7,13 +7,13 @@ export default class PlayerListDataHelper {
 
         return lrfList.length > lapList.length ?
             lrfList.map(lrfItem => {
-                const lapItem = lapList.find(x => x.CustId === lrfItem.CustId) || {};
+                const lapItem = lapList.find(x => x.IBCCustId === lrfItem.CustId) || {};
                 const playerItem = this.mergePlayerItem(lrfItem, lapItem);
 
                 return playerItem;
             }) :
             lapList.map(lapItem => {
-                const lrfItem = lrfList.find(x => x.CustId === lapItem.CustId) || {};
+                const lrfItem = lrfList.find(x => x.CustId === lapItem.IBCCustId) || {};
                 const playerItem = this.mergePlayerItem(lrfItem, lapItem);
 
                 return playerItem;
@@ -46,7 +46,7 @@ export default class PlayerListDataHelper {
 
     static getDataObject(targetList, listToMatch) {
         return targetList.reduce((accumulator, currentItem) => {
-            const isExist = listToMatch.findIndex(p => p.CustId === currentItem.CustId) !== -1;
+            const isExist = listToMatch.findIndex(p => this._isMatchCustId(currentItem, p)) !== -1;
             if (isExist) {
                 accumulator.commonList.push(currentItem);
             } else {
@@ -55,6 +55,11 @@ export default class PlayerListDataHelper {
 
             return accumulator;
         }, { commonList: [], differenceList: [] })
+    }
+
+    static _isMatchCustId(source, destination) {
+        return ((!!destination.CustId || !!source.IBCCustId) && destination.CustId === source.IBCCustId) ||
+            ((!!destination.IBCCustId || !!source.CustId) && destination.IBCCustId === source.CustId);
     }
 
     static createEmptyResult() {

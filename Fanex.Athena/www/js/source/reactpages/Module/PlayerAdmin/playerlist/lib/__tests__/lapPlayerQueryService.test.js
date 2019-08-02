@@ -1,6 +1,7 @@
 import LapPlayerQueryService from '../lapPlayerQueryService';
 import PlayerListDataHelper from '../playerListDataHelper';
 import { apiInfo } from '../constants';
+import * as utils from '../utils';
 
 describe('LapPlayerQueryService', () => {
     const defaultParam = {
@@ -11,6 +12,58 @@ describe('LapPlayerQueryService', () => {
     const emptyResult = {
         playerList: [],
         totalItem: 0
+    }
+
+    const createDefaultLapPlayerList = () => {
+        return [{
+                IBCCustId: 1,
+                UserName: 'test1',
+                Status: 0,
+                IP: '1.1.1.1',
+                email: 'abc@gmail.com',
+                isOnline: true,
+                RealName: 'test1real',
+                ActStatus: 2,
+                isArchived: false
+            },
+            {
+                IBCCustId: 2,
+                UserName: 'test2',
+                Status: 1,
+                IP: '2.2.2.2',
+                email: 'xyz@gmail.com',
+                isOnline: false,
+                RealName: 'test2real',
+                ActStatus: 2,
+                isArchived: false
+            }
+        ]
+    }
+
+    const createDefaultMergedPlayerList = () => {
+        return [{
+                CustId: 1,
+                UserName: 'test1',
+                Status: 0,
+                RealName: 'test1real',
+                LastLoginIp: '1.1.1.1',
+                Email: 'abc@gmail.com',
+                IsOnline: true,
+                IsArchived: false,
+                IsDeposit: true
+            },
+            {
+                CustId: 2,
+                UserName: 'test2',
+                Status: 1,
+                RealName: 'test2real',
+                LastLoginIp: '2.2.2.2',
+                Email: 'xyz@gmail.com',
+                IsOnline: false,
+                IsArchived: false,
+                IsDeposit: true
+            }
+        ]
     }
 
     describe('fetchData', () => {
@@ -90,10 +143,7 @@ describe('LapPlayerQueryService', () => {
         })
 
         it('DataList response is empty - return Lap Player List', () => {
-            const lapPlayerList = [
-                { CustId: 1, UserName: 'test1', Status: 0, IP: '1.1.1.1', email: 'abc@gmail.com', isOnline: true, RealName: 'test1real' },
-                { CustId: 2, UserName: 'test2', Status: 1, IP: '2.2.2.2', email: 'xyz@gmail.com', isOnline: false, RealName: 'test2real' }
-            ];
+            const lapPlayerList = createDefaultLapPlayerList();;
             const lapTotalItem = 2;
             const param = {
                 currency: '',
@@ -118,10 +168,7 @@ describe('LapPlayerQueryService', () => {
                 })
             }
 
-            const expectedPlayerList = [
-                { CustId: 1, UserName: 'test1', Status: 0, RealName: 'test1real', LastLoginIp: '1.1.1.1', Email: 'abc@gmail.com', IsOnline: true },
-                { CustId: 2, UserName: 'test2', Status: 1, RealName: 'test2real', LastLoginIp: '2.2.2.2', Email: 'xyz@gmail.com', IsOnline: false }
-            ];
+            const expectedPlayerList = createDefaultMergedPlayerList();;
             const expectedResult = {
                 playerList: expectedPlayerList,
                 totalItem: lapTotalItem
@@ -136,7 +183,14 @@ describe('LapPlayerQueryService', () => {
         })
 
         it('return correct data result', () => {
-            const lapPlayerList = [{ CustId: 1, UserName: 'test1', Status: 0 }, { CustId: 2, UserName: 'test2', Status: 1 }];
+            const lapPlayerList = createDefaultLapPlayerList();;
+            utils.getCustIdListFromLapData = jest.fn((playerList) => {
+                if (playerList === lapPlayerList) {
+                    return lapPlayerList.map(x => x.IBCCustId);
+                }
+
+                return [];
+            })
             const lapTotalItem = 2;
             const param = {
                 currency: '',
@@ -148,10 +202,7 @@ describe('LapPlayerQueryService', () => {
             const commonService = {
                 fetchData: jest.fn(() => Promise.resolve({ data: { DataList: expectedResponse, TotalItem: 2 } }))
             }
-            const expectedMergingData = [
-                { CustId: 1, UserName: 'test1', Status: 0, BaStatus: true, OddsGroup: 'A' },
-                { CustId: 2, UserName: 'test2', Status: 1, BaStatus: false, OddsGroup: 'B' }
-            ];
+            const expectedMergingData = createDefaultMergedPlayerList();
             PlayerListDataHelper.mergePlayerList = jest.fn(() => expectedMergingData);
 
             const expectedResult = {
@@ -166,10 +217,7 @@ describe('LapPlayerQueryService', () => {
         })
 
         it('throw exception - should build data with Lap Player List', () => {
-            const lapPlayerList = [
-                { CustId: 1, UserName: 'test1', Status: 0, IP: '1.1.1.1', email: 'abc@gmail.com', isOnline: true, RealName: 'test1real' },
-                { CustId: 2, UserName: 'test2', Status: 1, IP: '2.2.2.2', email: 'xyz@gmail.com', isOnline: false, RealName: 'test2real' }
-            ];
+            const lapPlayerList = createDefaultLapPlayerList();;
             const lapTotalItem = 2;
             const param = {
                 currency: '',
@@ -183,10 +231,7 @@ describe('LapPlayerQueryService', () => {
                 }))
             }
             const { lrfDataById } = apiInfo;
-            const expectedPlayerList = [
-                { CustId: 1, UserName: 'test1', Status: 0, RealName: 'test1real', LastLoginIp: '1.1.1.1', Email: 'abc@gmail.com', IsOnline: true },
-                { CustId: 2, UserName: 'test2', Status: 1, RealName: 'test2real', LastLoginIp: '2.2.2.2', Email: 'xyz@gmail.com', IsOnline: false }
-            ];
+            const expectedPlayerList = createDefaultMergedPlayerList();
             const expectedResult = {
                 playerList: expectedPlayerList,
                 totalItem: lapTotalItem
