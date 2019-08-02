@@ -1,4 +1,5 @@
 import PlayerListDataHelper from './playerListDataHelper';
+import { buildLrfPlayerList } from './utils';
 
 export default class LrfPlayerQueryService {
     static fetchData(param, commonService, apiInfo) {
