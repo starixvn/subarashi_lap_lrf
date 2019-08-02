@@ -3961,6 +3961,11 @@ function () {
 
       reader.readAsText(blob);
     }
+  }, {
+    key: "getRootUrl",
+    value: function getRootUrl() {
+      return _rootUrl;
+    }
   }]);
 
   return Site;

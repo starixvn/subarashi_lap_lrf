@@ -2148,6 +2148,11 @@ function () {
 
       reader.readAsText(blob);
     }
+  }, {
+    key: "getRootUrl",
+    value: function getRootUrl() {
+      return _rootUrl;
+    }
   }]);
 
   return Site;
@@ -3207,7 +3212,7 @@ function (_BaseDataGrid) {
         colSpan: colSpan
       }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource("Totalin") + " " + baseCurrency), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
         className: "right-align"
-      }, item.SumStake), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+      }, item.Stake), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
         className: "right-align",
         colSpan: 5
       }))];

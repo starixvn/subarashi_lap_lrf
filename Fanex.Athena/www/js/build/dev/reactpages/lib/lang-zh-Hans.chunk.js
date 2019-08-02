@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 08/30/2019 3:28:35 PM
+// Generated at: 8/2/2019 3:28:40 PM
 window._language_zh_Hans = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -510,15 +510,14 @@ window._language_zh_Hans = {
   PasswordConfirmErrorMsg: "密码无法确认",
   PasswordNoteMsg: "密码必须至少为6个字符, 包含至少2个英文字母及至少2个数字 (例如: pass22)。",
   PayAttentionMsg: "请注意: 由于不同的佣金值, 会员将从组别中删除。",
-  Pending: "待定",
   PendingFunds: "待定资金",
   Permission: "权限",
   PermissionForUser: "用户权限",
   Platform: "平台",
+  PlayerAdminInvalidDataErrMsg: "无效的参数.无效的会员识别",
   PreGame: "游戏开始前",
   Prev: "上个月",
   Product: "产品",
-  ProductCC: "嘻嘻俱乐部",
   ProductCO: "即时兑现",
   ProductCS: "娱乐城",
   ProductKN: "快乐彩",
@@ -531,7 +530,7 @@ window._language_zh_Hans = {
   RecommendBrowserOnReportPageMsg: "若页面大小 &gt; 1,000, 请您考虑使用火狐或Chrome以获得更好的体验",
   RefNo: "注单号码",
   Refund: "退款",
-  Reject: "已取消",
+  Reject: "取消",
   Remark: "备注",
   RemoveFromGroup: "从组中删除",
   RemoveGroupMsg: "您确定要从组中移除此(这些)会员?",

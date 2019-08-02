@@ -714,11 +714,15 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::after {
   float: right; }
 
 .status-cell {
-  position: relative; }
+  position: relative;
+  min-height: 14px; }
   .status-cell .btn-status-menu {
     position: absolute;
-    right: 0;
-    top: 4px; }
+    right: 5px;
+    top: calc(50% - 5px);
+    padding: 0;
+    width: 15px;
+    height: 15px; }
   .status-cell .status-text {
     margin: 0; }
 

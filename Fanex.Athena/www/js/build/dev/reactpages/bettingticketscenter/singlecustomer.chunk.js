@@ -4109,6 +4109,11 @@ function () {
 
       reader.readAsText(blob);
     }
+  }, {
+    key: "getRootUrl",
+    value: function getRootUrl() {
+      return _rootUrl;
+    }
   }]);
 
   return Site;
@@ -5162,7 +5167,7 @@ function (_BaseDataGrid) {
     key: "_buildFooter",
     value: function _buildFooter() {
       var item = this.props.gridData.Total;
-      var isNegativeWL = item.SumLicenseeWL.substring(0, 1) === '-';
+      var isNegativeWL = item.LicenseeWL.substring(0, 1) === '-';
       return [react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Row"], {
         className: "fixed-table-grant-total",
         key: 1
@@ -5171,14 +5176,14 @@ function (_BaseDataGrid) {
         colSpan: 8
       }, _lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource("Total")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
         className: "right-align"
-      }, item.SumStake), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+      }, item.Stake), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
         className: "right-align",
         dangerouslySetInnerHTML: {
-          __html: item.SumWinLoss
+          __html: item.WinLoss
         }
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
         className: "right-align ".concat(isNegativeWL ? "negative" : "")
-      }, item.SumLicenseeWL), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+      }, item.LicenseeWL), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
         className: "right-align",
         colSpan: 3
       }))];
