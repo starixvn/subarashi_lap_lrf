@@ -20,7 +20,7 @@ export const PlayerRow = (props) => {
     } = props;
 
     const { CustId, SystemId, RealName, Currency, CurrentBalance, OutstandingBalance, LastLoginIp, LastTransaction, Email, OddsGroup, SpecialLevel, IsDeposit, IsArchived } = dataItem;
-    const canShowMainColumn = (IsDeposit || !!CustId) && !IsArchived;
+    const canShowMainColumn = IsDeposit && !IsArchived;
 
     return (
         <Row key={CustId}>

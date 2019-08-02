@@ -1,5 +1,5 @@
 import PlayerListDataHelper from './playerListDataHelper';
-import { buildLapPlayerList } from './utils';
+import { buildLapPlayerList, getCustIdListFromLapData } from './utils';
 
 export default class LapPlayerQueryService {
     static fetchData(param, commonService, apiInfo) {
@@ -18,9 +18,10 @@ export default class LapPlayerQueryService {
     }
 
     static _fetchFromLrf(param, lrfDataById, lapPlayerList, commonService, lapTotalItem) {
+        const idList = getCustIdListFromLapData(lapPlayerList);
         const lrfParam = {
             currency: param.currency,
-            idList: lapPlayerList.map(x => x.CustId).join(','),
+            idList: idList.join(','),
             specialLevel: param.specialLevel,
             pageSize: param.pageSize,
             pageIndex: param.pageIndex

@@ -1,13 +1,16 @@
 import { playerStatus } from '../lib/constants';
 import LangHelper from '@jsroot/lib/langHelper';
+import { playerTypes } from './constants';
 
 export const buildSelectedPlayer = (dataItem) => {
+    const { CustId, UserName, Currency, IsDeposit, IsArchived } = dataItem;
+
     return {
-        custId: dataItem.CustId,
-        userName: dataItem.UserName,
-        currency: dataItem.Currency,
-        isDeposit: dataItem.IsDeposit,
-        isArchived: dataItem.IsArchived
+        custId: CustId,
+        userName: UserName,
+        currency: Currency,
+        isDeposit: IsDeposit,
+        isArchived: IsArchived
     };
 }
 
@@ -17,17 +20,17 @@ export const buildLapPlayerList = (playerList) => {
     }
 
     return playerList.map(item => {
-        const { CustId, UserName, Status, RealName, IP, email, isOnline, ActStatus, IBCCustId, isArchived } = item;
+        const { UserName, Status, RealName, IP, email, isOnline, ActStatus, IBCCustId, isArchived } = item;
 
         return {
-            CustId,
+            CustId: IBCCustId,
             UserName,
             Status,
             RealName,
             LastLoginIp: IP,
             Email: email,
             IsOnline: isOnline,
-            IsDeposit: ActStatus === 2 && IBCCustId > 0,
+            IsDeposit: ActStatus === playerTypes.deposit && IBCCustId > 0,
             IsArchived: isArchived
         };
     });
@@ -67,4 +70,18 @@ export const buildDisplayedColumnObject = (displayedColumnList) => {
         accumulator[currentItem.key] = currentItem.show;
         return accumulator;
     }, {});
+}
+
+export const isDeposit = (ibcCustId, actStatus) => {
+    return actStatus === playerTypes.deposit || ibcCustId > 0;
+}
+
+export const getCustIdListFromLapData = (lapPlayerList) => {
+    return lapPlayerList.reduce((result, item) => {
+        if (isDeposit(item.IBCCustId, item.ActStatus)) {
+            result.push(item.IBCCustId);
+        }
+
+        return result;
+    }, []);
 }

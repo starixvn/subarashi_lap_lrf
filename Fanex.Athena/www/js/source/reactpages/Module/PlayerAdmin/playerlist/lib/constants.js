@@ -165,3 +165,8 @@ export const excludedContextMenuWithNonDeposit = [contextMenuKeys.betLimit, cont
 export const excludedContextMenuWithClosed = [contextMenuKeys.password];
 
 export const excludedContextMenuWithArchived = [contextMenuKeys.password, contextMenuKeys.betLimit, contextMenuKeys.statement];
+
+export const playerTypes = {
+    nonDeposit: 1,
+    deposit: 2
+}

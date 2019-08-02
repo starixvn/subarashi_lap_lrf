@@ -1,5 +1,5 @@
 import PlayerListDataHelper from './playerListDataHelper';
-import { buildLapPlayerList } from './utils';
+import { buildLapPlayerList, getCustIdListFromLapData } from './utils';
 import LangHelper from '@jsroot/lib/langHelper';
 
 export default class PlayerMultipleQueryService {
@@ -39,7 +39,7 @@ export default class PlayerMultipleQueryService {
                 }
 
                 const idListNotInLap = lrfDataObject.differenceList.map(x => x.CustId);
-                const idListNotInLrf = lapDataObject.differenceList.map(x => x.CustId);
+                const idListNotInLrf = getCustIdListFromLapData(lapDataObject.differenceList);
 
                 const lrfParam = {
                     currency: param.currency,

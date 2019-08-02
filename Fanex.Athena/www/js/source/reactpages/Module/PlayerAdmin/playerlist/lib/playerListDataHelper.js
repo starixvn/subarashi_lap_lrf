@@ -1,3 +1,4 @@
+import { playerTypes } from './constants';
 export default class PlayerListDataHelper {
     static mergePlayerList(lrfList, lapList) {
         if (!lrfList || !lapList) {
@@ -38,7 +39,7 @@ export default class PlayerListDataHelper {
             LastLoginIp: IP,
             Email: email,
             IsOnline: isOnline,
-            IsDeposit: (ActStatus === 2 && IBCCustId > 0) || (!!CustId),
+            IsDeposit: (ActStatus === playerTypes.deposit && IBCCustId > 0) || CustId > 0,
             IsArchived: !!isArchived
         };
     }
