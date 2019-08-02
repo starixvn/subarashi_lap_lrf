@@ -34,24 +34,7 @@
         }
 
         [Test]
-        public async Task Index_NoPermission_RedirectToAccessDeniedPage()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var metaModel = new BetSettingMetaModel { CustId = 100 };
-                _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), metaModel.CustId, 0).Returns(false);
-
-                // Action
-                var result = await controller.IndexAsync(metaModel) as RedirectResult;
-
-                // Assert
-                Assert.That(result.Url, Is.EqualTo("~/Utility/AccessDenied"));
-            }
-        }
-
-        [Test]
-        public async Task Index_HasPermission_ReturnCorrectViewResult()
+        public async Task Index_ReturnCorrectViewResult()
         {
             using (var controller = CreateController())
             {
