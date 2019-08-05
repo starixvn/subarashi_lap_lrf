@@ -102,7 +102,7 @@ namespace Fanex.Athena.Controllers.Customer
         #region Action
 
         [HttpGet]
-        [Route("~/Customer/CustomerList")]
+        [ActionName("CustomerList")]
         public async Task<ActionResult> CustomerListAsync(string userName = "", int groupId = -1)
         {
             var licensee = SessionService.LicenseeSession;
@@ -136,6 +136,7 @@ namespace Fanex.Athena.Controllers.Customer
         [AjaxRequest]
         [CustomValidateAntiForgery]
         [ValidationWebRequest]
+        [ActionName("CustomerList")]
         public async Task<dynamic> CustomerListAsync(CustomerListMetaModel metaModel)
         {
             AssignMetaModelData(metaModel);
@@ -156,6 +157,7 @@ namespace Fanex.Athena.Controllers.Customer
         [AjaxRequest]
         [CustomValidateAntiForgery]
         [ValidationWebRequest]
+        [ActionName("DormantCustomerList")]
         public async Task<dynamic> DormantCustomerListAsync(CustomerListMetaModel metaModel)
         {
             AssignMetaModelData(metaModel);
@@ -174,6 +176,7 @@ namespace Fanex.Athena.Controllers.Customer
 
         [HttpPost]
         [CustomValidateAntiForgery]
+        [ActionName("ExportExcelList")]
         public async Task<ActionResult> ExportExcelAsync(string excelParam)
         {
             if (string.IsNullOrEmpty(excelParam))
@@ -211,6 +214,7 @@ namespace Fanex.Athena.Controllers.Customer
 
         [HttpPost]
         [CustomValidateAntiForgery]
+        [ActionName("ExportExcelDormantCustomer")]
         public async Task<ActionResult> ExportExcelDormantCustomerAsync(string excelParam)
         {
             if (string.IsNullOrEmpty(excelParam))
