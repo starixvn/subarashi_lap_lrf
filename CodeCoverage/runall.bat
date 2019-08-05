@@ -36,5 +36,6 @@ Fanex.Athena.Module.Notification.Api.UnitTests ^
 Fanex.Athena.Module.Notification.Report.UnitTests ^
 Fanex.Athena.Module.Notification.UnitTests ^
 Fanex.Athena.Module.Dashboard.UnitTests ^
+Fanex.Athena.Module.PlayerAdmin.UnitTests ^
 Fanex.Athena.Module.PlayerAdmin.Api.UnitTests ^
 Fanex.Athena.Web.UnitTests

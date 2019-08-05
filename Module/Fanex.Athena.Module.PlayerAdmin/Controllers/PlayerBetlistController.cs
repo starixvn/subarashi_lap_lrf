@@ -81,9 +81,9 @@
 
             var stream = await _betListApiClient.PostAsyncStream("/PlayerAdminBetList/Export",
                 metaModel,
-                SessionService.UserSession.Language).ConfigureAwait(false);
+                userSession.Language).ConfigureAwait(false);
 
-            return File(stream, "application/vnd.ms-excel", "PlayerAdministratorBetList.xls");
+            return File(stream, "application/vnd.ms-excel");
         }
     }
 }
