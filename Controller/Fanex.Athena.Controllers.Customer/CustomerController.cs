@@ -102,6 +102,7 @@ namespace Fanex.Athena.Controllers.Customer
         #region Action
 
         [HttpGet]
+        [Route("~/Customer/CustomerList")]
         public async Task<ActionResult> CustomerListAsync(string userName = "", int groupId = -1)
         {
             var licensee = SessionService.LicenseeSession;
