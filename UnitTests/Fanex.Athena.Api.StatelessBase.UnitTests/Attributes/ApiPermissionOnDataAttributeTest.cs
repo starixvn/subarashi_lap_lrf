@@ -36,7 +36,7 @@ namespace Fanex.Athena.Api.StatelessBase.UnitTests.Attributes
         {
             // Arrange
             const int CustId = 1;
-            var attribute = new ApiPermissionOnDataAttribute();
+            var attribute = new ApiPermissionOnDataAttribute(isObject: isObject);
             var actionContext = CreateActionContext();
             var metaModel = new MetalModelCustomerIdentityTest { CustId = CustId };
             actionContext.ActionArguments.Add("metaModel", metaModel);

@@ -41,7 +41,7 @@ namespace Fanex.Athena.Api.StatelessBase.Attributes
             }
             else
             {
-                int.TryParse(actionContext.ActionArguments[_custIDFieldName] as string, out custId);
+                int.TryParse(actionContext.ActionArguments[_custIDFieldName]?.ToString(), out custId);
             }
 
             var authCurrencyList = actionContext.ActionArguments["currencyAgentList"] as OneAuthCurrency[];
