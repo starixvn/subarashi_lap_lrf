@@ -19,7 +19,21 @@ export const PlayerRow = (props) => {
         displayedColumn
     } = props;
 
-    const { CustId, SystemId, RealName, Currency, CurrentBalance, OutstandingBalance, LastLoginIp, LastTransaction, Email, OddsGroup, SpecialLevel, IsDeposit, IsArchived } = dataItem;
+    const { 
+        CustId, 
+        SystemId, 
+        RealName, 
+        Currency, 
+        CurrentBalance, 
+        OutstandingBalance, 
+        LastLoginIp, 
+        LastTransaction,
+        Email, 
+        OddsGroup, 
+        SpecialLevel, 
+        IsDeposit, 
+        IsArchived 
+    } = dataItem;
     const canShowMainColumn = IsDeposit && !IsArchived;
 
     return (

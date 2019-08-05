@@ -1,7 +1,6 @@
 import Excel from '@jsroot/lib/excel';
 import { headerCellStyle, bodyCellStyle } from '@jsroot/constants/excelStyle';
 import { fields, headerText } from '../lib/constants';
-import { setupWebpackPublicPath } from '../../../lib/publicPathUtils';
 import { getSpecialLevelText, getBaStatusText, getPlayerStatus } from './utils';
 
 const HEADER_ROW_INDEX = 0;
@@ -27,7 +26,6 @@ export default class ReportExcel {
     }
 
     export (onFinished) {
-        setupWebpackPublicPath();
         Excel.process(() => {
             this._createHeader();
             this._createBodyData();
