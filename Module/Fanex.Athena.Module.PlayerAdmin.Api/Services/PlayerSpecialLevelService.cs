@@ -1,54 +1,45 @@
-﻿using Fanex.Athena.Model.Core.ViewModel;
+﻿using Fanex.Athena.Extension.Utility.Interfaces;
+using Fanex.Athena.Model.Core.ViewModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
-using Fanex.Athena.Module.PlayerAdmin.Api.Repository.Interfaces;
 using Fanex.Athena.Module.PlayerAdmin.Api.Services.Interfaces;
-using Fanex.Athena.Module.PlayerAdmin.Api.Utilities;
-using Fanex.Athena.Service.StatelessCore.Interfaces;
+using System;
 
 namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
 {
     public class PlayerSpecialLevelService : IPlayerSpecialLevelService
     {
-        private readonly IPlayerSpecialLevelRepository _playerSpecialLevelRepository;
+        private readonly IDbFactory _dbFactory;
 
-        private readonly IAuthorizationService _authorizationService;
-
-        private readonly ILicenseeSettingService _licenseeSettingService;
-
-        public PlayerSpecialLevelService(
-            IPlayerSpecialLevelRepository playerSpecialLevelRepository,
-            IAuthorizationService authorizationService,
-            ILicenseeSettingService licenseeSettingService)
+        public PlayerSpecialLevelService(IDbFactory dbFactory)
         {
-            _playerSpecialLevelRepository = playerSpecialLevelRepository;
-            _authorizationService = authorizationService;
-            _licenseeSettingService = licenseeSettingService;
+            _dbFactory = dbFactory;
         }
 
         public ResultViewModel Update(SpecialLevelUpdatingMetaModel metaModel)
         {
-            if (_licenseeSettingService.IsFakeLicensee(metaModel.SiteName))
+            const string UspName = "Lrf_CustomerUpdSpecialLevel";
+
+            using (var db = _dbFactory.GetObjectDb(UspName))
             {
+                db.SetParameterValue("custid", metaModel.CustId);
+                db.SetParameterValue("userid", metaModel.UserId);
+                db.SetParameterValue("speciallevel", metaModel.SpecialLevel);
+                db.SetParameterValue("ip", metaModel.Ip);
+                db.SetParameterValue("langkey", metaModel.Language);
+                db.SetParameterValue("ErrCode", null);
+                db.SetParameterValue("ErrMsg", null);
+                db.ExecuteNonQuery();
+
+                var code = Convert.ToInt32(db.GetParameterValue("ErrCode"));
+                var message = Convert.ToString(db.GetParameterValue("ErrMsg"));
+
                 return new ResultViewModel
                 {
-                    Success = false,
-                    ErrorMessage = ResourceKeyConstants.FunctionDenied
+                    Success = code == 0,
+                    Message = message,
+                    ErrorCode = code
                 };
             }
-
-            if (!_authorizationService.HasPermissionOnData(metaModel.CurrencyPermission, metaModel.CustId, 0))
-            {
-                return UpdatingUtils.CreateErrorResult();
-            }
-
-            var result = _playerSpecialLevelRepository.Update(metaModel);
-
-            return new ResultViewModel
-            {
-                Success = result.IsSuccessful,
-                Message = result.Message,
-                ErrorCode = result.Code
-            };
         }
     }
 }

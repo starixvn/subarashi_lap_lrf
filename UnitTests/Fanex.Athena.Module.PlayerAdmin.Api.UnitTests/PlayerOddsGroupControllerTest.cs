@@ -1,7 +1,10 @@
 ﻿using Fanex.Athena.Model.Core.ViewModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.Services.Interfaces;
+using Fanex.Athena.Module.PlayerAdmin.Api.Utilities;
+using Fanex.Athena.Service.StatelessCore.Interfaces;
 using Fanex.Athena.UnitTest.Common.Helpers;
+using Fanex.Athena.UnitTest.Common.NUnitExtensions;
 using Fanex.Logging;
 using NSubstitute;
 using NUnit.Framework;
@@ -14,12 +17,14 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests
     public class PlayerOddsGroupControllerTest
     {
         private IPlayerOddsGroupService _playerOddsGroupService;
+        private ILicenseeSettingService _licenseeSettingService;
         private ILogger _logger;
 
         [SetUp]
         public void Setup()
         {
             _playerOddsGroupService = Substitute.For<IPlayerOddsGroupService>();
+            _licenseeSettingService = Substitute.For<ILicenseeSettingService>();
             _logger = Substitute.For<ILogger>();
         }
 
@@ -27,7 +32,32 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests
         public void TearDown()
         {
             _playerOddsGroupService = null;
+            _licenseeSettingService = null;
             _logger = null;
+        }
+
+        [Test]
+        public void Update_FakeLicensee_ReturnCorrectErroResult()
+        {
+            // Arrange
+            var expectedResult = new ResultViewModel
+            {
+                Success = false,
+                ErrorMessage = ResourceKeyConstants.FunctionDenied
+            };
+
+            var metaModel = CreateMetaModel();
+
+            using (var controller = CreateController())
+            {
+                _licenseeSettingService.IsFakeLicensee(controller.SiteName).Returns(true);
+
+                // Action
+                var result = controller.Update(metaModel);
+
+                // Assert
+                Assert.That(result, Tobe.SameProperties(expectedResult));
+            }
         }
 
         [Test]
@@ -41,13 +71,14 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests
 
             using (var controller = CreateController())
             {
+                _licenseeSettingService.IsFakeLicensee(controller.SiteName).Returns(false);
+
                 // Action
                 controller.Update(metaModel);
 
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    Assert.That(metaModel.SiteName, Is.EqualTo(ExternalApiHelper.DefaultSiteName));
                     Assert.That(metaModel.UserId, Is.EqualTo(ExternalApiHelper.DefaultUserId));
                     Assert.That(metaModel.Language, Is.EqualTo("en-US"));
                     Assert.That(metaModel.Ip, Is.EqualTo(ExternalApiHelper.DefaultClientIp));
@@ -69,6 +100,8 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests
 
             using (var controller = CreateController())
             {
+                _licenseeSettingService.IsFakeLicensee(controller.SiteName).Returns(false);
+
                 // Action
                 var result = controller.Update(metaModel);
 
@@ -107,7 +140,10 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests
             var request = new HttpRequestMessage();
             request.Properties["MS_HttpContext"] = httpContext;
 
-            return new PlayerOddsGroupController(_playerOddsGroupService, _logger)
+            return new PlayerOddsGroupController(
+                _playerOddsGroupService,
+                _licenseeSettingService,
+                _logger)
             {
                 ActionContext = actionContext,
                 Request = request

@@ -81,12 +81,6 @@
     <Compile Include="PlayerOddsGroupController.cs" />
     <Compile Include="PlayerSpecialLevelController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\Interfaces\IPlayerBaStatusRepository.cs" />
-    <Compile Include="Repository\Interfaces\IPlayerOddsGroupRepository.cs" />
-    <Compile Include="Repository\Interfaces\IPlayerSpecialLevelRepository.cs" />
-    <Compile Include="Repository\PlayerBaStatusRepository.cs" />
-    <Compile Include="Repository\PlayerOddsGroupRepository.cs" />
-    <Compile Include="Repository\PlayerSpecialLevelRepository.cs" />
     <Compile Include="Services\Interfaces\IPlayerBaStatusService.cs" />
     <Compile Include="Services\Interfaces\IPlayerListService.cs" />
     <Compile Include="Services\Interfaces\IPlayerOddsGroupService.cs" />
@@ -130,6 +124,8 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Repository\Interfaces\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

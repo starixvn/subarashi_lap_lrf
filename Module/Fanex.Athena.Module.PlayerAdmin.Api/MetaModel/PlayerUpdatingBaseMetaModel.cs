@@ -1,8 +1,9 @@
 ﻿using Fanex.Athena.Model.Auth;
+using Fanex.Athena.Model.Core.MetaModel;
 
 namespace Fanex.Athena.Module.PlayerAdmin.Api.MetaModel
 {
-    public class PlayerUpdatingBaseMetaModel
+    public class PlayerUpdatingBaseMetaModel : IMetalModelCustomerIdentity
     {
         public OneAuthCurrency[] CurrencyPermission { get; set; }
 

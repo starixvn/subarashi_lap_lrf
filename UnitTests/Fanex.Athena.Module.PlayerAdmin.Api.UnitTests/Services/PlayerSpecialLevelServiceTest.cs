@@ -1,127 +1,63 @@
-﻿using Fanex.Athena.Model.Auth;
-using Fanex.Athena.Model.Core.DTO.Common;
-using Fanex.Athena.Model.Core.ViewModel;
+﻿using Fanex.Athena.Extension.Utility.Interfaces;
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
-using Fanex.Athena.Module.PlayerAdmin.Api.Repository.Interfaces;
 using Fanex.Athena.Module.PlayerAdmin.Api.Services;
-using Fanex.Athena.Module.PlayerAdmin.Api.Utilities;
-using Fanex.Athena.Service.StatelessCore.Interfaces;
-using Fanex.Athena.UnitTest.Common.Helpers;
-using Fanex.Athena.UnitTest.Common.NUnitExtensions;
+using Fanex.Data;
 using NSubstitute;
 using NUnit.Framework;
 
-namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
+namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Repository
 {
     [TestFixture]
     public class PlayerSpecialLevelServiceTest
     {
-        private IPlayerSpecialLevelRepository _playerSpecialLevelRepository;
-
-        private IAuthorizationService _authorizationService;
-
-        private ILicenseeSettingService _licenseeSettingService;
+        private IDbFactory _dbFactory;
 
         [SetUp]
-        public void Setup()
+        public void SetUp()
         {
-            _playerSpecialLevelRepository = Substitute.For<IPlayerSpecialLevelRepository>();
-            _authorizationService = Substitute.For<IAuthorizationService>();
-            _licenseeSettingService = Substitute.For<ILicenseeSettingService>();
+            _dbFactory = Substitute.For<IDbFactory>();
         }
 
         [TearDown]
         public void TearDown()
         {
-            _playerSpecialLevelRepository = null;
-            _authorizationService = null;
-            _licenseeSettingService = null;
+            _dbFactory = null;
         }
 
         [Test]
-        public void Update_FakeLicensee_ReturnCorrectErroResult()
+        public void Update_WhenCall_AssignCorrectParam()
         {
             // Arrange
-            var expectedResult = new ResultViewModel
+            var objectDb = Substitute.For<IObjectDb>();
+            _dbFactory.GetObjectDb("Lrf_CustomerUpdSpecialLevel").Returns(objectDb);
+            var metaModel = new SpecialLevelUpdatingMetaModel
             {
-                Success = false,
-                ErrorMessage = ResourceKeyConstants.FunctionDenied
+                UserId = 1,
+                CustId = 2,
+                Ip = "127.0.0.1",
+                Language = "en-US",
+                SpecialLevel = 3
             };
-
-            var metaModel = CreateMetaModel();
-            _licenseeSettingService.IsFakeLicensee(metaModel.SiteName).Returns(true);
-
-            var service = new PlayerSpecialLevelService(_playerSpecialLevelRepository, _authorizationService, _licenseeSettingService);
+            var service = new PlayerSpecialLevelService(_dbFactory);
 
             // Action
             var result = service.Update(metaModel);
 
             // Assert
-            Assert.That(result, Tobe.SameProperties(expectedResult));
-        }
-
-        [Test]
-        public void Update_HasNoPermission_ReturnCorrectErroResult()
-        {
-            // Arrange
-            var expectedResult = new ResultViewModel
+            Assert.Multiple(() =>
             {
-                Success = false,
-                ErrorCode = UpdatingUtils.DefaultErrCode,
-                ErrorMessage = ResourceKeyConstants.InvalidData
-            };
+                objectDb.Received(1).SetParameterValue("userid", metaModel.UserId);
+                objectDb.Received(1).SetParameterValue("custid", metaModel.CustId);
+                objectDb.Received(1).SetParameterValue("speciallevel", metaModel.SpecialLevel);
+                objectDb.Received(1).SetParameterValue("ip", metaModel.Ip);
+                objectDb.Received(1).SetParameterValue("langkey", metaModel.Language);
+                objectDb.Received(1).SetParameterValue("ErrCode", null);
+                objectDb.Received(1).SetParameterValue("ErrMsg", null);
 
-            var metaModel = CreateMetaModel();
-            _licenseeSettingService.IsFakeLicensee(metaModel.SiteName).Returns(false);
-            _authorizationService.HasPermissionOnData(Arg.Any<OneAuthCurrency[]>(), metaModel.CustId, 0).Returns(false);
+                objectDb.Received(1).ExecuteNonQuery();
 
-            var service = new PlayerSpecialLevelService(_playerSpecialLevelRepository, _authorizationService, _licenseeSettingService);
-
-            // Action
-            var result = service.Update(metaModel);
-
-            // Assert
-            Assert.That(result, Tobe.SameProperties(expectedResult));
-        }
-
-        [Test]
-        public void Update_ValidDataAndPermission_ReturnCorrectResult()
-        {
-            // Arrange
-            var expectedResult = new ResultViewModel
-            {
-                Success = true,
-                Message = string.Empty,
-                ErrorCode = 0
-            };
-            var resultInfo = new ResultInfo
-            {
-                Code = 0,
-                Message = string.Empty
-            };
-
-            var metaModel = CreateMetaModel();
-            _licenseeSettingService.IsFakeLicensee(metaModel.SiteName).Returns(false);
-            _authorizationService.HasPermissionOnData(Arg.Any<OneAuthCurrency[]>(), metaModel.CustId, 0).Returns(true);
-            _playerSpecialLevelRepository.Update(metaModel).Returns(resultInfo);
-
-            var service = new PlayerSpecialLevelService(_playerSpecialLevelRepository, _authorizationService, _licenseeSettingService);
-
-            // Action
-            var result = service.Update(metaModel);
-
-            // Assert
-            Assert.That(result, Tobe.SameProperties(expectedResult));
-        }
-
-        private static SpecialLevelUpdatingMetaModel CreateMetaModel()
-        {
-            return new SpecialLevelUpdatingMetaModel
-            {
-                Language = ExternalApiHelper.DefaultLanguage,
-                CustId = 5,
-                SiteName = ExternalApiHelper.DefaultSiteName
-            };
+                Assert.That(result, Is.Not.Null);
+            });
         }
     }
 }

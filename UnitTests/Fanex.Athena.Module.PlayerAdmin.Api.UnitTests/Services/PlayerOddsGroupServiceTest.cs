@@ -1,13 +1,7 @@
-﻿using Fanex.Athena.Model.Auth;
-using Fanex.Athena.Model.Core.DTO.Common;
-using Fanex.Athena.Model.Core.ViewModel;
+﻿using Fanex.Athena.Extension.Utility.Interfaces;
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
-using Fanex.Athena.Module.PlayerAdmin.Api.Repository.Interfaces;
 using Fanex.Athena.Module.PlayerAdmin.Api.Services;
-using Fanex.Athena.Module.PlayerAdmin.Api.Utilities;
-using Fanex.Athena.Service.StatelessCore.Interfaces;
-using Fanex.Athena.UnitTest.Common.Helpers;
-using Fanex.Athena.UnitTest.Common.NUnitExtensions;
+using Fanex.Data;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -16,112 +10,54 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
     [TestFixture]
     public class PlayerOddsGroupServiceTest
     {
-        private IPlayerOddsGroupRepository _playerOddsGroupRepository;
-
-        private IAuthorizationService _authorizationService;
-
-        private ILicenseeSettingService _licenseeSettingService;
+        private IDbFactory _dbFactory;
 
         [SetUp]
-        public void Setup()
+        public void SetUp()
         {
-            _playerOddsGroupRepository = Substitute.For<IPlayerOddsGroupRepository>();
-            _authorizationService = Substitute.For<IAuthorizationService>();
-            _licenseeSettingService = Substitute.For<ILicenseeSettingService>();
+            _dbFactory = Substitute.For<IDbFactory>();
         }
 
         [TearDown]
         public void TearDown()
         {
-            _playerOddsGroupRepository = null;
-            _authorizationService = null;
-            _licenseeSettingService = null;
+            _dbFactory = null;
         }
 
         [Test]
-        public void Update_FakeLicensee_ReturnCorrectErroResult()
+        public void Update_WhenCall_AssignCorrectParam()
         {
             // Arrange
-            var expectedResult = new ResultViewModel
+            var objectDb = Substitute.For<IObjectDb>();
+            _dbFactory.GetObjectDb("Lrf_CustomerUpdUgroup").Returns(objectDb);
+            var metaModel = new OddsGroupUpdatingMetaModel
             {
-                Success = false,
-                ErrorMessage = ResourceKeyConstants.FunctionDenied
+                UserId = 1,
+                CustId = 2,
+                Ip = "127.0.0.1",
+                Language = "en-US",
+                OddsGroup = "C"
             };
-
-            var metaModel = CreateMetaModel();
-            _licenseeSettingService.IsFakeLicensee(metaModel.SiteName).Returns(true);
-
-            var service = new PlayerOddsGroupService(_playerOddsGroupRepository, _authorizationService, _licenseeSettingService);
+            var service = new PlayerOddsGroupService(_dbFactory);
 
             // Action
             var result = service.Update(metaModel);
 
             // Assert
-            Assert.That(result, Tobe.SameProperties(expectedResult));
-        }
-
-        [Test]
-        public void Update_HasNoPermission_ReturnCorrectErroResult()
-        {
-            // Arrange
-            var expectedResult = new ResultViewModel
+            Assert.Multiple(() =>
             {
-                Success = false,
-                ErrorMessage = ResourceKeyConstants.InvalidData
-            };
+                objectDb.Received(1).SetParameterValue("UserId", metaModel.UserId);
+                objectDb.Received(1).SetParameterValue("CustId", metaModel.CustId);
+                objectDb.Received(1).SetParameterValue("OddsGroup", metaModel.OddsGroup);
+                objectDb.Received(1).SetParameterValue("IP", metaModel.Ip);
+                objectDb.Received(1).SetParameterValue("Langkey", metaModel.Language);
+                objectDb.Received(1).SetParameterValue("ErrCode", null);
+                objectDb.Received(1).SetParameterValue("ErrMsg", null);
 
-            var metaModel = CreateMetaModel();
-            _licenseeSettingService.IsFakeLicensee(metaModel.SiteName).Returns(false);
-            _authorizationService.HasPermissionOnData(Arg.Any<OneAuthCurrency[]>(), metaModel.CustId, 0).Returns(false);
+                objectDb.Received(1).ExecuteNonQuery();
 
-            var service = new PlayerOddsGroupService(_playerOddsGroupRepository, _authorizationService, _licenseeSettingService);
-
-            // Action
-            var result = service.Update(metaModel);
-
-            // Assert
-            Assert.That(result, Tobe.SameProperties(expectedResult));
-        }
-
-        [Test]
-        public void Update_ValidDataAndPermission_ReturnCorrectResult()
-        {
-            // Arrange
-            var expectedResult = new ResultViewModel
-            {
-                Success = true,
-                Message = string.Empty,
-                ErrorCode = 0
-            };
-            var resultInfo = new ResultInfo
-            {
-                Code = 0,
-                Message = string.Empty
-            };
-
-            var metaModel = CreateMetaModel();
-            _licenseeSettingService.IsFakeLicensee(metaModel.SiteName).Returns(false);
-            _authorizationService.HasPermissionOnData(Arg.Any<OneAuthCurrency[]>(), metaModel.CustId, 0).Returns(true);
-            _playerOddsGroupRepository.Update(metaModel).Returns(resultInfo);
-
-            var service = new PlayerOddsGroupService(_playerOddsGroupRepository, _authorizationService, _licenseeSettingService);
-
-            // Action
-            var result = service.Update(metaModel);
-
-            // Assert
-            Assert.That(result, Tobe.SameProperties(expectedResult));
-        }
-
-        private static OddsGroupUpdatingMetaModel CreateMetaModel()
-        {
-            return new OddsGroupUpdatingMetaModel
-            {
-                CurrencyPermission = ExternalApiHelper.CreateAuthCurrencyList(),
-                Language = ExternalApiHelper.DefaultLanguage,
-                CustId = 5,
-                SiteName = ExternalApiHelper.DefaultSiteName
-            };
+                Assert.That(result, Is.Not.Null);
+            });
         }
     }
 }

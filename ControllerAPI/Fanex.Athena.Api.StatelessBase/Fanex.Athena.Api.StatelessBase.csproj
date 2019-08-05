@@ -82,6 +82,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\ApiOneAuthorizationAttribute.cs" />
+    <Compile Include="Attributes\ApiPermissionOnDataAttribute.cs" />
     <Compile Include="Attributes\Extensions\DependencyScopeExtension.cs" />
     <Compile Include="ExternalApiBaseController.cs" />
     <Compile Include="Logger\ApiExceptionLogger.cs" />

@@ -5,9 +5,5 @@
         public const string HttpErrDefault = "HttpError_Default";
 
         public const string FunctionDenied = "FunctionDeniedMsg";
-
-        public const string InvalidData = "PlayerAdminInvalidDataErrMsg";
-
-        public const string NotAllowBA = "NotAllowBA";
     }
 }
