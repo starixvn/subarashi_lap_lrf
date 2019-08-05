@@ -100,6 +100,7 @@
             {
                 new CheckedItem { ID = StatusTypes.Waiting, Name = ViewResources.Running, Checked = true },
                 new CheckedItem { ID = StatusTypes.ResultPending, Name = ViewResources.ResultPending, Checked = true },
+                new CheckedItem { ID = StatusTypes.Pending, Name = ViewResources.Pending, Checked = true },
                 new CheckedItem { ID = StatusTypes.UnderSettlement, Name = ViewResources.UnderSettlement, Checked = true }
             };
         }
