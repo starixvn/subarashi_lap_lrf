@@ -2244,7 +2244,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                 let url = Site.resolveClientUrl('MatchWinlossBetList/MatchBetType');
                 url = Site.setLicenseeOptionOriginalParam(url);
                 url = QueryString.setParam(url, 'fromdate', date);
-                url = QueryString.setParam(url, 'date', date);
+                url = QueryString.setParam(url, 'todate', date);
                 url = QueryString.setParam(url, 'matchid', matchData.MatchId);
                 url = QueryString.setParam(url, 'leagueid', matchData.LeagueId);
                 url = QueryString.setParam(url, 'raceno', matchData.RaceNo);
