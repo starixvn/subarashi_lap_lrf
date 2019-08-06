@@ -40,6 +40,8 @@ namespace Fanex.Athena.Controllers.BetList
         public async Task<ActionResult> Index(BetListExcelMetaModel metaModel)
         {
             CreateDefaultMetaModel(metaModel);
+            InitBaseCurrencyValue(metaModel);
+
             return await ProcessDefaultRequest(
                 metaModel,
                 "~/Views/Desktop/BetList/RunningBetListOfMatch/Main.cshtml",

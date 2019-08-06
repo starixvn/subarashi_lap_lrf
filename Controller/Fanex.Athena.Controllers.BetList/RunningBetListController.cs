@@ -82,8 +82,10 @@ namespace Fanex.Athena.Controllers.BetList
         private async Task<ActionResult> ProcessRequest(BetListExcelMetaModel metaModel, string uspKey = "Lrf_BetList_SelRunningByBettype")
         {
             var userSession = SessionService.UserSession;
-            CreateDefaultMetaModel(metaModel);
             var currencies = userSession.CurrencyList;
+
+            CreateDefaultMetaModel(metaModel);
+            InitBaseCurrencyValue(metaModel);
 
             if (metaModel.IsExportExcel)
             {
