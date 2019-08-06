@@ -141,7 +141,7 @@ define(['jquery', 'common/site', 'common/querystring', 'components/pluginhelper/
                 let url = Site.resolveClientUrl('MatchWinlossBetList/MatchBetType');
                 url = Site.setLicenseeOptionOriginalParam(url);
                 url = QueryString.setParam(url, 'fromdate', date);
-                url = QueryString.setParam(url, 'date', date);
+                url = QueryString.setParam(url, 'todate', date);
                 url = QueryString.setParam(url, 'matchid', matchData.MatchId);
                 url = QueryString.setParam(url, 'leagueid', matchData.LeagueId);
                 url = QueryString.setParam(url, 'raceno', matchData.RaceNo);
