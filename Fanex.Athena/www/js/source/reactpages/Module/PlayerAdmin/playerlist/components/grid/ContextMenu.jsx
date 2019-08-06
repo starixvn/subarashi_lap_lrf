@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../../actions';
 
 import { DropdownMenu, DropdownItem } from '@jsroot/components/dropdown';
-import { contextMenuList } from '../../lib/constants';
+import { contextMenuList, playerStatusByName } from '../../lib/constants';
 import { isShowContextMenuItem } from '../../lib/contextMenuHelper';
 
 
@@ -22,9 +22,8 @@ export const ContextMenu = (props) => {
 
     const handleClickMenu = (tabName) => {
         setSelectedTabName(tabName);
-
-        const { custId, userName, currency, isDeposit, isArchived } = currentActivePlayer;
-        const selectedPlayer = { custId, userName, currency, isDeposit, isArchived };
+        const { custId, userName, currency, isDeposit, isArchived, licenseeCustId } = currentActivePlayer;
+        const selectedPlayer = { custId, userName, currency, isDeposit, isArchived, licenseeCustId };
         setSelectedPlayer(selectedPlayer);
     }
 
@@ -33,8 +32,17 @@ export const ContextMenu = (props) => {
         left: position.x
     }
 
-    const tabList = getTabList();
-    const activeMenuList = contextMenuList.filter(item => !!tabList.find(t => item.tabName === t.Name && isShowContextMenuItem(item)));
+    let activeMenuList = [];
+
+    if (currentActivePlayer) {
+        const { isDeposit, isArchived, status } = currentActivePlayer;
+
+        const tabList = getTabList();
+        activeMenuList = contextMenuList.filter(item => {
+            const isClosedPlayer = status === playerStatusByName.Closed;
+            return !!tabList.find(t => item.tabName === t.Name) && isShowContextMenuItem(item, isDeposit, isArchived, isClosedPlayer)
+        });
+    }
 
     return (
         <div className="dropdown context-menu" style={style}>

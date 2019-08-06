@@ -12,7 +12,7 @@ export default class GridHelper {
                 {/* For Phase 2 */}
                 {/* <HeaderCell colWidth={30}><input type="checkbox" /></HeaderCell> */}
                 {displayedColumn[Status] && <HeaderCell colWidth={80} sortBy={Status}>{headerText.Status}</HeaderCell>}
-                {displayedColumn[UserName] && <HeaderCell colWidth={80} sortBy={UserName}>{headerText.UserName}</HeaderCell>}
+                {displayedColumn[UserName] && <HeaderCell colWidth={160} sortBy={UserName}>{headerText.UserName}</HeaderCell>}
                 {displayedColumn[SystemId] && <HeaderCell colWidth={100}>{headerText.SystemId}</HeaderCell>}
                 {displayedColumn[RealName] && <HeaderCell colWidth={80} sortBy={RealName}>{headerText.RealName}</HeaderCell>}
                 {displayedColumn[Currency] && <HeaderCell colWidth={60} sortBy={Currency}>{headerText.Currency}</HeaderCell>}
@@ -22,7 +22,7 @@ export default class GridHelper {
                 {displayedColumn[BaStatus] && <HeaderCell colWidth={50} sortBy={BaStatus}>{headerText.BaStatus}</HeaderCell>}
                 {displayedColumn[SpecialLevel] && <HeaderCell colWidth={50} sortBy={SpecialLevel}>{headerText.SpecialLevel}</HeaderCell>}
                 {displayedColumn[LastLoginIp] && <HeaderCell colWidth={60}>{headerText.LastLoginIp}</HeaderCell>}
-                {displayedColumn[LastTransaction] && <HeaderCell colWidth={100} sortBy={LastTransaction}>{headerText.LastTransaction}</HeaderCell>}
+                {displayedColumn[LastTransaction] && <HeaderCell colWidth={60} sortBy={LastTransaction}>{headerText.LastTransaction}</HeaderCell>}
                 {displayedColumn[Email] && <HeaderCell colWidth={100}>{headerText.Email}</HeaderCell>}
             </HeaderRow>
         )

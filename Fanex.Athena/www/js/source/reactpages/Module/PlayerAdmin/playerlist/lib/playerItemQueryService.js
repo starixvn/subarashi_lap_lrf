@@ -19,7 +19,7 @@ export default class PlayerItemQueryService {
         const lrfPromise = commonService.fetchData(lrfDataById.type, lrfDataById.action, lrfParam);
         const lapPromise = commonService.fetchData(lapDataById.type, lapDataById.action, lapParam);
 
-        return this._getResult(lrfPromise, lapPromise);
+        return this._getResult(lrfPromise, lapPromise, commonService);
     }
 
     static _getResult(lrfPromise, lapPromise, commonService) {

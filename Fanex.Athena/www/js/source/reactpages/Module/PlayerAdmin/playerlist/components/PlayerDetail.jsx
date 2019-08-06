@@ -2,7 +2,8 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../actions';
-import { heightSlicing } from '../lib/constants';
+import { heightSlicing, excludedTabNameWithNonDepositAndArchived } from '../lib/constants';
+import { systemType as systemTypeConfig } from '../../../constants/configInfo';
 
 export class PlayerDetail extends PureComponent {
     constructor(props) {
@@ -21,17 +22,23 @@ export class PlayerDetail extends PureComponent {
 
     _buildActionUrl(systemType, action) {
         const { selectedPlayer } = this.props;
-        const queryString = (action.indexOf('?') !== -1 ? '&custId=' : '?custId=') + selectedPlayer.custId;
+        const { custId, licenseeCustId } = selectedPlayer;
+        const nameValuePairString = systemType === systemTypeConfig.lrf ? `custId=${custId}` : `custId=${custId}&licenseeCustId=${licenseeCustId}`;
+        const queryString = (action.indexOf('?') !== -1 ? '&' : '?') + nameValuePairString;
         const urlByPlayer = action + queryString;
 
         return this.props.getLink(systemType, urlByPlayer);
     }
 
     _renderTabList(tabList) {
+        const { selectedPlayer } = this.props;
         const selectedTabName = this.props.selectedTabName || this._getDefaultSelectedTab();
+        const {isDeposit, isArchived} = selectedPlayer;
+        const renderedTabList = !isDeposit || isArchived ? 
+            tabList.filter(item => !excludedTabNameWithNonDepositAndArchived.includes(item.Name)) : tabList;
 
         return (
-            tabList.map((item) => {
+            renderedTabList.map((item) => {
                 const actionUrl = this._buildActionUrl(item.SystemType, item.Action);
 
                 return (

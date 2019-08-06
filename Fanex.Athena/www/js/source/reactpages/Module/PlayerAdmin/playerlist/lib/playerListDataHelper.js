@@ -22,16 +22,16 @@ export default class PlayerListDataHelper {
 
     static mergePlayerItem(lrfItem, lapItem) {
         const { CustId, UserName, SystemId, Currency, CurrentBalance, OutstandingBalance, OddsGroup, BaStatus, SpecialLevel } = lrfItem;
-        const { Status, RealName, IP, email, isOnline, ActStatus, IBCCustId, isArchived, LastTransaction } = lapItem;
+        const { Status, RealName, IP, email, isOnline, ActStatus, IBCCustId, isArchived, LastTransaction, CurrencyCode, OutBalance } = lapItem;
 
         return {
             CustId: CustId || IBCCustId,
             LicenseeCustId: lapItem.CustId,
             UserName: UserName || lapItem.UserName,
             SystemId,
-            Currency,
-            CurrentBalance,
-            OutstandingBalance,
+            Currency: Currency || CurrencyCode,
+            CurrentBalance: CurrentBalance || lapItem.CurrentBalance,
+            OutstandingBalance: OutstandingBalance || OutBalance,
             OddsGroup,
             BaStatus,
             SpecialLevel,

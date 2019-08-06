@@ -3,10 +3,11 @@ import LangHelper from '@jsroot/lib/langHelper';
 import { playerTypes } from './constants';
 
 export const buildSelectedPlayer = (dataItem) => {
-    const { CustId, UserName, Currency, IsDeposit, IsArchived } = dataItem;
+    const { CustId, UserName, Currency, IsDeposit, IsArchived, LicenseeCustId } = dataItem;
 
     return {
         custId: CustId,
+        licenseeCustId: LicenseeCustId,
         userName: UserName,
         currency: Currency,
         isDeposit: IsDeposit,
@@ -24,6 +25,7 @@ export const buildLrfPlayerList = (playerList) => {
 
         return {
             CustId,
+            LicenseeCustId: 0,
             UserName,
             SystemId,
             Currency,
@@ -44,10 +46,11 @@ export const buildLapPlayerList = (playerList) => {
     }
 
     return playerList.map(item => {
-        const { UserName, Status, RealName, IP, email, isOnline, ActStatus, IBCCustId, isArchived } = item;
+        const { UserName, Status, RealName, IP, email, isOnline, ActStatus, IBCCustId, isArchived, CustId, CurrencyCode, CurrentBalance, OutBalance } = item;
 
         return {
             CustId: IBCCustId,
+            LicenseeCustId: CustId,
             UserName,
             Status,
             RealName,
@@ -55,16 +58,20 @@ export const buildLapPlayerList = (playerList) => {
             Email: email,
             IsOnline: isOnline,
             IsDeposit: ActStatus === playerTypes.deposit && IBCCustId > 0,
-            IsArchived: isArchived
+            IsArchived: isArchived,
+            Currency: CurrencyCode,
+            CurrentBalance,
+            OutstandingBalance: OutBalance,
         };
     });
 }
 
 export const buildCurrentActivePlayer = (dataItem) => {
-    const { CustId, UserName, Currency, Status, OddsGroup, SpecialLevel, IsDeposit, IsArchived } = dataItem;
+    const { CustId, UserName, Currency, Status, OddsGroup, SpecialLevel, IsDeposit, IsArchived, LicenseeCustId } = dataItem;
 
     return {
         custId: CustId,
+        licenseeCustId: LicenseeCustId,
         userName: UserName,
         currency: Currency,
         status: Status,

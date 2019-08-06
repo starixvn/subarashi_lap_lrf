@@ -70,10 +70,18 @@ export const contextMenuKeys = {
     personalMessage: 'personalMessage'
 }
 
+export const tabNames = {
+    statement: 'lblPlayerStatement',
+    betlist: 'lblBetList',
+    betLimit: 'lblBetLimit'
+}
+
+export const excludedTabNameWithNonDepositAndArchived = [tabNames.statement, tabNames.betlist, tabNames.betLimit];
+
 export const contextMenuList = [
     { key: contextMenuKeys.note, name: LangHelper.getSingleResource('Note'), tabName: 'lblPlayerAdminNote' },
     { key: contextMenuKeys.password, name: LangHelper.getSingleResource('Password'), tabName: 'lblPlayerAdminSetting' },
-    { key: contextMenuKeys.fundtransferLimit, name: LangHelper.getSingleResource('FundtransferLimit'), tabName: 'lblPlayerAdminSetting' },
+    { key: contextMenuKeys.fundtransferLimit, name: LangHelper.getSingleResource('FundtransferLimit'), tabName: 'lblFundTransfer' },
     { key: contextMenuKeys.betLimit, name: LangHelper.getSingleResource('BetLimit'), tabName: 'lblBetLimit' },
     { key: contextMenuKeys.statement, name: LangHelper.getSingleResource('Statement'), tabName: 'lblPlayerStatement' },
     { key: contextMenuKeys.personalMessage, name: LangHelper.getSingleResource('PersonalMessage'), tabName: 'lblPlayerAdminMessage' }
