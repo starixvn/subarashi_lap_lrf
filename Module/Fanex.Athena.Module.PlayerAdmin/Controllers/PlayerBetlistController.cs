@@ -1,7 +1,12 @@
 ﻿namespace Fanex.Athena.Module.PlayerAdmin.Controllers
 {
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
+    using System.Web.SessionState;
     using Fanex.Athena.Controllers;
     using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Auth.Enum;
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
     using Fanex.Athena.Module.PlayerAdmin.ViewModels;
     using Fanex.Athena.Service.Core.Common.Interfaces;
@@ -10,14 +15,10 @@
     using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
     using ONEbook.UM.Filters;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-    using System.Web.SessionState;
 
     [SessionState(SessionStateBehavior.ReadOnly)]
     [CheckUMFilter]
-    //[AuthorizeRestriction(AppMode.Parasitic)]
+    [AuthorizeRestriction(AppMode.Parasitic)]
     [FunctionAuthorization(PermissionKeys.PlayerAdminBetList)]
     public class PlayerBetlistController : CultureBaseController
     {
