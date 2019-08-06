@@ -123,7 +123,6 @@
   <Function Name="PlayerAdmin">
     <Setting Key="Lrf_CustomerSelByUsername" SpName="Lrf_CustomerSelByUsername_xtest" DbName="DBEXT.bodb02.bodbLicenseeNet" />
     <Setting Key="Lrf_CustomerSelByCustid" SpName="Lrf_CustomerSelByCustid_xtest" DbName="DBEXT.bodb02.bodbLicenseeNet" />
-    <Setting Key="Lrf_PlayerAdmin_GetPlayerInfo" SpName="Lrf_PlayerAdmin_GetPlayerInfo_UAT3" DbName="DBEXT.bodb02.bodbLicenseeNet" />
   </Function>
 
   <Function Name="GroupComm">

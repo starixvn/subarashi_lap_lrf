@@ -68,7 +68,6 @@
   <ItemGroup>
     <Compile Include="Controllers\PlayerBetlistControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\PlayerInfoRepositoryTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -111,6 +110,9 @@
       <Project>{08A991CD-D102-444F-9DAD-8992327306AC}</Project>
       <Name>Fanex.Athena.DataAccess.Core.UnitTests</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Repository\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

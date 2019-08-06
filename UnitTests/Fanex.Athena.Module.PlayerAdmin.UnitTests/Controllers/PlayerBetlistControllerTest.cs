@@ -7,9 +7,7 @@
     using Fanex.Athena.Controllers.Base.UnitTests;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Module.PlayerAdmin.Controllers;
-    using Fanex.Athena.Module.PlayerAdmin.DTO;
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
-    using Fanex.Athena.Module.PlayerAdmin.Repository.Interfaces;
     using Fanex.Athena.Module.PlayerAdmin.ViewModels;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.UnitTest.Common.Helpers;
@@ -18,8 +16,6 @@
 
     public class PlayerBetlistControllerTest : CultureBaseControllerHelperTest
     {
-        private IPlayerInfoRepository _playerInfoRepository;
-
         private IBetListApiClient _betListApiClient;
 
         [OneTimeSetUp]
@@ -27,7 +23,6 @@
         {
             base.FixtureSetUp();
 
-            _playerInfoRepository = Substitute.For<IPlayerInfoRepository>();
             _betListApiClient = Substitute.For<IBetListApiClient>();
         }
 
@@ -36,12 +31,11 @@
         {
             base.FixtureTearDown();
 
-            _playerInfoRepository = null;
             _betListApiClient = null;
         }
 
         [Test]
-        public async Task Running_WhenCall_ReturnCorrectView()
+        public void Running_WhenCall_ReturnCorrectView()
         {
             using (var controller = CreateController())
             {
@@ -53,11 +47,8 @@
                     CurrencyList = currencyList
                 });
 
-                _playerInfoRepository.GetPlayerInfoAsync(custId)
-                    .Returns(Task.FromResult(new PlayerInfo { CustId = custId, CurrencyId = currencyList.ElementAt(0).Key }));
-
                 // Action
-                var viewResult = await controller.Running(custId);
+                var viewResult = controller.Running(custId, currencyList.ElementAt(0).Key);
                 var viewModel = (PlayerRunningBetListViewModel)viewResult.Model;
 
                 // Assert
@@ -146,7 +137,6 @@
             return new PlayerBetlistController(
                 LangService,
                 SessionService,
-                _playerInfoRepository,
                 _betListApiClient);
         }
     }

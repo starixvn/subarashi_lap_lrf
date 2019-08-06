@@ -7,7 +7,6 @@
     using Fanex.Athena.Controllers;
     using Fanex.Athena.Model.Auth.Enum;
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
-    using Fanex.Athena.Module.PlayerAdmin.Repository.Interfaces;
     using Fanex.Athena.Module.PlayerAdmin.ViewModels;
     using Fanex.Athena.Service.Core.Common.Interfaces;
     using Fanex.Athena.Service.Core.Users.Interfaces;
@@ -22,32 +21,27 @@
     //[FunctionAuthorization("")]
     public class PlayerBetlistController : CultureBaseController
     {
-        private readonly IPlayerInfoRepository _playerInfoRepository;
-
         private readonly IBetListApiClient _betListApiClient;
 
         public PlayerBetlistController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IPlayerInfoRepository playerInfoRepository,
             IBetListApiClient betListApiClient)
             : base(languageService, sessionService)
         {
-            _playerInfoRepository = playerInfoRepository;
             _betListApiClient = betListApiClient;
         }
 
         [HttpGet]
         [ValidatePermissionOnData]
-        public async Task<ViewResult> Running(int custid)
+        public ViewResult Running(int custid, int currencyId)
         {
             var currencyList = SessionService.UserSession.CurrencyList;
-            var playerInfo = await _playerInfoRepository.GetPlayerInfoAsync(custid).ConfigureAwait(false);
 
             var viewModel = new PlayerRunningBetListViewModel
             {
-                CustId = playerInfo.CustId,
-                Currency = currencyList.FirstOrDefault(x => x.Key == playerInfo.CurrencyId).Value
+                CustId = custid,
+                Currency = currencyList.FirstOrDefault(x => x.Key == currencyId).Value
             };
 
             return View("~/Views/Desktop/Module/PlayerAdmin/PlayerBetList/Running.cshtml", viewModel);
