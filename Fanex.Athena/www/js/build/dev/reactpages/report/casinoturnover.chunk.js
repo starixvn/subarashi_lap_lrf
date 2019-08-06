@@ -3637,10 +3637,15 @@ function () {
   _createClass(Excel, null, [{
     key: "process",
     value: function process(callback) {
-      Promise.all(/*! import() | xlsx-style-sparta */[__webpack_require__.e("common"), __webpack_require__.e("xlsx-style-sparta")]).then(__webpack_require__.t.bind(null, /*! xlsx-style-sparta */ "./node_modules/xlsx-style-sparta/xlsx.js", 7)).then(function (XLSX) {
-        _XLSX = XLSX;
+      if (window.XLSX) {
+        _XLSX = window.XLSX;
         callback && callback();
-      });
+      } else {
+        Promise.all(/*! import() | xlsx-style-sparta */[__webpack_require__.e("common"), __webpack_require__.e("xlsx-style-sparta")]).then(__webpack_require__.t.bind(null, /*! xlsx-style-sparta */ "./node_modules/xlsx-style-sparta/xlsx.js", 7)).then(function (XLSX) {
+          _XLSX = XLSX;
+          callback && callback();
+        });
+      }
     }
   }, {
     key: "export",

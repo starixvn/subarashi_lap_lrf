@@ -296,7 +296,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _commonAction__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./commonAction */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/actions/commonAction.js");
 /* harmony import */ var _gridHandlerAction__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./gridHandlerAction */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/actions/gridHandlerAction.js");
 /* harmony import */ var _lib_constants_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../lib/constants.js */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
-/* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../lib/utils */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/utils.js");
+/* harmony import */ var _lib_playerDataBuilder__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../lib/playerDataBuilder */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerDataBuilder.js");
 /* harmony import */ var _lib_playerSuggestionService__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../lib/playerSuggestionService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerSuggestionService.js");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
@@ -337,7 +337,7 @@ var searchPlayer = function searchPlayer(param) {
       dispatch(Object(_gridHandlerAction__WEBPACK_IMPORTED_MODULE_4__["setPagingOption"])(pagingOption));
 
       if (playerList.length === 1) {
-        var selectedPlayer = Object(_lib_utils__WEBPACK_IMPORTED_MODULE_6__["buildSelectedPlayer"])(playerList[0]);
+        var selectedPlayer = Object(_lib_playerDataBuilder__WEBPACK_IMPORTED_MODULE_6__["buildSelectedPlayer"])(playerList[0]);
         dispatch(Object(_commonAction__WEBPACK_IMPORTED_MODULE_3__["setSelectedPlayer"])(selectedPlayer));
       }
 
@@ -361,7 +361,7 @@ var getSinglePlayer = function getSinglePlayer(custId) {
         });
 
         dispatch(Object(_gridHandlerAction__WEBPACK_IMPORTED_MODULE_4__["setPagingOption"])(pagingOption));
-        var selectedPlayer = Object(_lib_utils__WEBPACK_IMPORTED_MODULE_6__["buildSelectedPlayer"])(result);
+        var selectedPlayer = Object(_lib_playerDataBuilder__WEBPACK_IMPORTED_MODULE_6__["buildSelectedPlayer"])(result);
         dispatch(Object(_commonAction__WEBPACK_IMPORTED_MODULE_3__["setSelectedPlayer"])(selectedPlayer));
       }
 
@@ -1328,6 +1328,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/actions/index.js");
 /* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
+/* harmony import */ var _constants_configInfo__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../constants/configInfo */ "./www/js/source/reactpages/Module/constants/configInfo.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1347,6 +1348,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -1384,7 +1386,12 @@ function (_PureComponent) {
     key: "_buildActionUrl",
     value: function _buildActionUrl(systemType, action) {
       var selectedPlayer = this.props.selectedPlayer;
-      var queryString = (action.indexOf('?') !== -1 ? '&custId=' : '?custId=') + selectedPlayer.custId;
+      var custId = selectedPlayer.custId,
+          licenseeCustId = selectedPlayer.licenseeCustId,
+          currencyId = selectedPlayer.currencyId;
+      var custIdQueryString = systemType === _constants_configInfo__WEBPACK_IMPORTED_MODULE_5__["systemType"].lrf ? "custId=".concat(custId) : "custId=".concat(custId, "&licenseeCustId=").concat(licenseeCustId);
+      var nameValuePairString = custIdQueryString + "&currencyId=".concat(currencyId);
+      var queryString = (action.indexOf('?') !== -1 ? '&' : '?') + nameValuePairString;
       var urlByPlayer = action + queryString;
       return this.props.getLink(systemType, urlByPlayer);
     }
@@ -1393,9 +1400,16 @@ function (_PureComponent) {
     value: function _renderTabList(tabList) {
       var _this2 = this;
 
+      var selectedPlayer = this.props.selectedPlayer;
+
       var selectedTabName = this.props.selectedTabName || this._getDefaultSelectedTab();
 
-      return tabList.map(function (item) {
+      var isDeposit = selectedPlayer.isDeposit,
+          isArchived = selectedPlayer.isArchived;
+      var renderedTabList = !isDeposit || isArchived ? tabList.filter(function (item) {
+        return !_lib_constants__WEBPACK_IMPORTED_MODULE_4__["excludedTabNameWithNonDepositAndArchived"].includes(item.Name);
+      }) : tabList;
+      return renderedTabList.map(function (item) {
         var actionUrl = _this2._buildActionUrl(item.SystemType, item.Action);
 
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
@@ -2360,13 +2374,17 @@ var ContextMenu = function ContextMenu(props) {
         userName = currentActivePlayer.userName,
         currency = currentActivePlayer.currency,
         isDeposit = currentActivePlayer.isDeposit,
-        isArchived = currentActivePlayer.isArchived;
+        isArchived = currentActivePlayer.isArchived,
+        licenseeCustId = currentActivePlayer.licenseeCustId,
+        currencyId = currentActivePlayer.currencyId;
     var selectedPlayer = {
       custId: custId,
       userName: userName,
       currency: currency,
       isDeposit: isDeposit,
-      isArchived: isArchived
+      isArchived: isArchived,
+      licenseeCustId: licenseeCustId,
+      currencyId: currencyId
     };
     setSelectedPlayer(selectedPlayer);
   };
@@ -2375,12 +2393,21 @@ var ContextMenu = function ContextMenu(props) {
     top: position.y,
     left: position.x
   };
-  var tabList = getTabList();
-  var activeMenuList = _lib_constants__WEBPACK_IMPORTED_MODULE_5__["contextMenuList"].filter(function (item) {
-    return !!tabList.find(function (t) {
-      return item.tabName === t.Name && Object(_lib_contextMenuHelper__WEBPACK_IMPORTED_MODULE_6__["isShowContextMenuItem"])(item);
+  var activeMenuList = [];
+
+  if (currentActivePlayer) {
+    var isDeposit = currentActivePlayer.isDeposit,
+        isArchived = currentActivePlayer.isArchived,
+        status = currentActivePlayer.status;
+    var tabList = getTabList();
+    activeMenuList = _lib_constants__WEBPACK_IMPORTED_MODULE_5__["contextMenuList"].filter(function (item) {
+      var isClosedPlayer = status === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["playerStatusByName"].Closed;
+      return !!tabList.find(function (t) {
+        return item.tabName === t.Name;
+      }) && Object(_lib_contextMenuHelper__WEBPACK_IMPORTED_MODULE_6__["isShowContextMenuItem"])(item, isDeposit, isArchived, isClosedPlayer);
     });
-  });
+  }
+
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "dropdown context-menu",
     style: style
@@ -2441,7 +2468,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_components_DropdownLabel__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/components/DropdownLabel */ "./www/js/source/reactpages/components/DropdownLabel.jsx");
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/actions/index.js");
 /* harmony import */ var _lib_gridInteractionService__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../lib/gridInteractionService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/gridInteractionService.js");
-/* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../lib/utils */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/utils.js");
+/* harmony import */ var _lib_playerDataBuilder__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../lib/playerDataBuilder */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerDataBuilder.js");
 
 
 
@@ -2459,7 +2486,7 @@ var OddsGroupCell = function OddsGroupCell(props) {
   var style = _lib_constants__WEBPACK_IMPORTED_MODULE_3__["oddsGroupListWithStyle"][value];
 
   var handleToggleOddsGroup = function handleToggleOddsGroup(event) {
-    var currentActivePlayer = Object(_lib_utils__WEBPACK_IMPORTED_MODULE_7__["buildCurrentActivePlayer"])(dataItem);
+    var currentActivePlayer = Object(_lib_playerDataBuilder__WEBPACK_IMPORTED_MODULE_7__["buildCurrentActivePlayer"])(dataItem);
     setCurrentActivePlayer(currentActivePlayer);
     var newPosition = _lib_gridInteractionService__WEBPACK_IMPORTED_MODULE_6__["default"].getNextDropdownPosition(event.target, oddsGroupDropdownPosition);
     setOddsGroupDropdownPosition(newPosition);
@@ -2699,9 +2726,9 @@ var PlayerRow = function PlayerRow(props) {
     className: "center-align"
   }, Currency), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].CurrentBalance] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
     className: "center-align"
-  }, canShowMainColumn && _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_6__["default"].formatDecimal(CurrentBalance)), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].OutstandingBalance] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
+  }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_6__["default"].formatDecimal(CurrentBalance)), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].OutstandingBalance] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
     className: "center-align"
-  }, canShowMainColumn && _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_6__["default"].formatDecimal(OutstandingBalance)), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].OddsGroup] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
+  }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_6__["default"].formatDecimal(OutstandingBalance)), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].OddsGroup] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
     className: "center-align"
   }, canShowMainColumn && OddsGroup !== undefined && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_OddsGroupCell__WEBPACK_IMPORTED_MODULE_8__["default"], {
     dataItem: dataItem
@@ -2750,6 +2777,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/actions/index.js");
 /* harmony import */ var _lib_gridInteractionService__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../lib/gridInteractionService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/gridInteractionService.js");
 /* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../lib/utils */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/utils.js");
+/* harmony import */ var _lib_playerDataBuilder__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../lib/playerDataBuilder */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerDataBuilder.js");
+
 
 
 
@@ -2769,7 +2798,7 @@ var SpecialLevelCell = function SpecialLevelCell(props) {
   };
 
   var handleToggleSpecialLevel = function handleToggleSpecialLevel(event) {
-    var currentActivePlayer = Object(_lib_utils__WEBPACK_IMPORTED_MODULE_7__["buildCurrentActivePlayer"])(dataItem);
+    var currentActivePlayer = Object(_lib_playerDataBuilder__WEBPACK_IMPORTED_MODULE_8__["buildCurrentActivePlayer"])(dataItem);
     setCurrentActivePlayer(currentActivePlayer);
     var newPosition = _lib_gridInteractionService__WEBPACK_IMPORTED_MODULE_6__["default"].getNextDropdownPosition(event.target, specialLevelDropdownPosition);
     setSpecialLevelDropdownPosition(newPosition);
@@ -2960,7 +2989,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/actions/index.js");
 /* harmony import */ var _lib_gridInteractionService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../lib/gridInteractionService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/gridInteractionService.js");
-/* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../lib/utils */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/utils.js");
+/* harmony import */ var _lib_playerDataBuilder__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../lib/playerDataBuilder */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerDataBuilder.js");
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 
 
@@ -2983,7 +3012,7 @@ var StatusCell = function StatusCell(props) {
   var canUpdate = Status !== _lib_constants__WEBPACK_IMPORTED_MODULE_3__["playerStatusByName"].Archived && Status !== _lib_constants__WEBPACK_IMPORTED_MODULE_3__["playerStatusByName"].Closed;
 
   var handleToggleStatus = function handleToggleStatus(event) {
-    var currentActivePlayer = Object(_lib_utils__WEBPACK_IMPORTED_MODULE_6__["buildCurrentActivePlayer"])(dataItem);
+    var currentActivePlayer = Object(_lib_playerDataBuilder__WEBPACK_IMPORTED_MODULE_6__["buildCurrentActivePlayer"])(dataItem);
     setCurrentActivePlayer(currentActivePlayer);
     var newPosition = _lib_gridInteractionService__WEBPACK_IMPORTED_MODULE_5__["default"].getNextDropdownPosition(event.target, statusDropdownPosition);
     setStatusDropdownPosition(newPosition);
@@ -3176,7 +3205,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/actions/index.js");
 /* harmony import */ var _lib_gridHelper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../lib/gridHelper */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/gridHelper.js");
-/* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../lib/utils */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/utils.js");
+/* harmony import */ var _lib_playerDataBuilder__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../lib/playerDataBuilder */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerDataBuilder.js");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -3196,7 +3225,7 @@ var UserNameCell = function UserNameCell(props) {
 
   var handleSelectPlayer = function handleSelectPlayer(event) {
     event.preventDefault();
-    var newSelectedPlayer = Object(_lib_utils__WEBPACK_IMPORTED_MODULE_5__["buildSelectedPlayer"])(dataItem);
+    var newSelectedPlayer = Object(_lib_playerDataBuilder__WEBPACK_IMPORTED_MODULE_5__["buildSelectedPlayer"])(dataItem);
     setSelectedPlayer(newSelectedPlayer);
   };
 
@@ -3215,7 +3244,7 @@ var UserNameCell = function UserNameCell(props) {
         position: position,
         isOpen: true
       });
-      var currentActivePlayer = Object(_lib_utils__WEBPACK_IMPORTED_MODULE_5__["buildCurrentActivePlayer"])(dataItem);
+      var currentActivePlayer = Object(_lib_playerDataBuilder__WEBPACK_IMPORTED_MODULE_5__["buildCurrentActivePlayer"])(dataItem);
       setCurrentActivePlayer(currentActivePlayer);
     }
   };
@@ -3354,7 +3383,7 @@ var generateColumnList = function generateColumnList(licType, hasBaPermission) {
 /*!*********************************************************************************!*\
   !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js ***!
   \*********************************************************************************/
-/*! exports provided: specialLevelListWithColor, oddsGroupListWithStyle, licenseeType, fields, columnList, contextMenuKeys, contextMenuList, heightSlicing, searchOptions, defaultPagingOption, playerStatus, playerStatusByName, displayedPlayerStatusList, messageUpdateState, baStatusList, headerText, gridItemDropdownHeight, stringTypeFields, apiInfo, excludedContextMenuWithNonDeposit, excludedContextMenuWithClosed, excludedContextMenuWithArchived, playerTypes */
+/*! exports provided: specialLevelListWithColor, oddsGroupListWithStyle, licenseeType, fields, columnList, contextMenuKeys, tabNames, excludedTabNameWithNonDepositAndArchived, contextMenuList, heightSlicing, searchOptions, defaultPagingOption, playerStatus, playerStatusByName, displayedPlayerStatusList, messageUpdateState, baStatusList, headerText, gridItemDropdownHeight, stringTypeFields, apiInfo, excludedContextMenuWithNonDeposit, excludedContextMenuWithClosed, excludedContextMenuWithArchived, playerTypes */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3365,6 +3394,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fields", function() { return fields; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "columnList", function() { return columnList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "contextMenuKeys", function() { return contextMenuKeys; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tabNames", function() { return tabNames; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "excludedTabNameWithNonDepositAndArchived", function() { return excludedTabNameWithNonDepositAndArchived; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "contextMenuList", function() { return contextMenuList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "heightSlicing", function() { return heightSlicing; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "searchOptions", function() { return searchOptions; });
@@ -3497,6 +3528,12 @@ var contextMenuKeys = {
   statement: 'statement',
   personalMessage: 'personalMessage'
 };
+var tabNames = {
+  statement: 'lblPlayerStatement',
+  betlist: 'lblBetList',
+  betLimit: 'lblBetLimit'
+};
+var excludedTabNameWithNonDepositAndArchived = [tabNames.statement, tabNames.betlist, tabNames.betLimit];
 var contextMenuList = [{
   key: contextMenuKeys.note,
   name: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Note'),
@@ -3508,7 +3545,7 @@ var contextMenuList = [{
 }, {
   key: contextMenuKeys.fundtransferLimit,
   name: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('FundtransferLimit'),
-  tabName: 'lblPlayerAdminSetting'
+  tabName: 'lblFundTransfer'
 }, {
   key: contextMenuKeys.betLimit,
   name: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('BetLimit'),
@@ -3692,7 +3729,7 @@ function () {
         colWidth: 80,
         sortBy: Status
       }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].Status), displayedColumn[UserName] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
-        colWidth: 80,
+        colWidth: 160,
         sortBy: UserName
       }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].UserName), displayedColumn[SystemId] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
         colWidth: 100
@@ -3720,7 +3757,7 @@ function () {
       }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].SpecialLevel), displayedColumn[LastLoginIp] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
         colWidth: 60
       }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].LastLoginIp), displayedColumn[LastTransaction] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
-        colWidth: 100,
+        colWidth: 60,
         sortBy: LastTransaction
       }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].LastTransaction), displayedColumn[Email] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
         colWidth: 100
@@ -3878,6 +3915,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return LapPlayerQueryService; });
 /* harmony import */ var _playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./playerListDataHelper */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerListDataHelper.js");
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/utils.js");
+/* harmony import */ var _playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./playerDataBuilder */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerDataBuilder.js");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -3887,6 +3925,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 
 
 
@@ -3939,7 +3978,7 @@ function () {
 
         if (!lrfPlayerList || !lrfPlayerList.length) {
           return {
-            playerList: Object(_utils__WEBPACK_IMPORTED_MODULE_1__["buildLapPlayerList"])(lapPlayerList),
+            playerList: Object(_playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__["buildLapPlayerList"])(lapPlayerList),
             totalItem: lapTotalItem
           };
         }
@@ -3951,7 +3990,7 @@ function () {
         };
       }).catch(function () {
         return {
-          playerList: Object(_utils__WEBPACK_IMPORTED_MODULE_1__["buildLapPlayerList"])(lapPlayerList),
+          playerList: Object(_playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__["buildLapPlayerList"])(lapPlayerList),
           totalItem: lapTotalItem
         };
       });
@@ -3976,7 +4015,7 @@ function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return LrfPlayerQueryService; });
 /* harmony import */ var _playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./playerListDataHelper */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerListDataHelper.js");
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/utils.js");
+/* harmony import */ var _playerDataBuilder__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./playerDataBuilder */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerDataBuilder.js");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -4033,7 +4072,7 @@ function () {
 
         if (!lapPlayerList || !lapPlayerList.length) {
           return {
-            playerList: Object(_utils__WEBPACK_IMPORTED_MODULE_1__["buildLrfPlayerList"])(lrfPlayerList),
+            playerList: Object(_playerDataBuilder__WEBPACK_IMPORTED_MODULE_1__["buildLrfPlayerList"])(lrfPlayerList),
             totalItem: lrfTotalItem
           };
         }
@@ -4045,7 +4084,7 @@ function () {
         };
       }).catch(function () {
         return {
-          playerList: Object(_utils__WEBPACK_IMPORTED_MODULE_1__["buildLrfPlayerList"])(lrfPlayerList),
+          playerList: Object(_playerDataBuilder__WEBPACK_IMPORTED_MODULE_1__["buildLrfPlayerList"])(lrfPlayerList),
           totalItem: lrfTotalItem
         };
       });
@@ -4144,6 +4183,137 @@ function () {
 
 /***/ }),
 
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerDataBuilder.js":
+/*!*****************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerDataBuilder.js ***!
+  \*****************************************************************************************/
+/*! exports provided: buildSelectedPlayer, buildLrfPlayerList, buildLapPlayerList, buildCurrentActivePlayer */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "buildSelectedPlayer", function() { return buildSelectedPlayer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "buildLrfPlayerList", function() { return buildLrfPlayerList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "buildLapPlayerList", function() { return buildLapPlayerList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "buildCurrentActivePlayer", function() { return buildCurrentActivePlayer; });
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./constants */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
+
+var buildSelectedPlayer = function buildSelectedPlayer(dataItem) {
+  var CustId = dataItem.CustId,
+      UserName = dataItem.UserName,
+      Currency = dataItem.Currency,
+      IsDeposit = dataItem.IsDeposit,
+      IsArchived = dataItem.IsArchived,
+      LicenseeCustId = dataItem.LicenseeCustId,
+      CurrencyId = dataItem.CurrencyId;
+  return {
+    custId: CustId,
+    licenseeCustId: LicenseeCustId,
+    userName: UserName,
+    currency: Currency,
+    isDeposit: IsDeposit,
+    isArchived: IsArchived,
+    currencyId: CurrencyId
+  };
+};
+var buildLrfPlayerList = function buildLrfPlayerList(playerList) {
+  if (!playerList) {
+    return [];
+  }
+
+  return playerList.map(function (item) {
+    var CustId = item.CustId,
+        UserName = item.UserName,
+        SystemId = item.SystemId,
+        Currency = item.Currency,
+        CurrentBalance = item.CurrentBalance,
+        OutstandingBalance = item.OutstandingBalance,
+        OddsGroup = item.OddsGroup,
+        BaStatus = item.BaStatus,
+        SpecialLevel = item.SpecialLevel,
+        CurrencyId = item.CurrencyId;
+    return {
+      CustId: CustId,
+      LicenseeCustId: 0,
+      UserName: UserName,
+      SystemId: SystemId,
+      Currency: Currency,
+      CurrentBalance: CurrentBalance,
+      OutstandingBalance: OutstandingBalance,
+      OddsGroup: OddsGroup,
+      BaStatus: BaStatus,
+      SpecialLevel: SpecialLevel,
+      IsDeposit: true,
+      IsArchived: false,
+      CurrencyId: CurrencyId || 0
+    };
+  });
+};
+var buildLapPlayerList = function buildLapPlayerList(playerList) {
+  if (!playerList) {
+    return [];
+  }
+
+  return playerList.map(function (item) {
+    var UserName = item.UserName,
+        Status = item.Status,
+        RealName = item.RealName,
+        IP = item.IP,
+        email = item.email,
+        isOnline = item.isOnline,
+        ActStatus = item.ActStatus,
+        IBCCustId = item.IBCCustId,
+        isArchived = item.isArchived,
+        CustId = item.CustId,
+        CurrencyCode = item.CurrencyCode,
+        CurrentBalance = item.CurrentBalance,
+        OutBalance = item.OutBalance,
+        Currency = item.Currency;
+    return {
+      CustId: IBCCustId,
+      LicenseeCustId: CustId,
+      UserName: UserName,
+      Status: Status,
+      RealName: RealName,
+      LastLoginIp: IP,
+      Email: email,
+      IsOnline: isOnline,
+      IsDeposit: ActStatus === _constants__WEBPACK_IMPORTED_MODULE_0__["playerTypes"].deposit && IBCCustId > 0,
+      IsArchived: isArchived,
+      Currency: CurrencyCode,
+      CurrentBalance: CurrentBalance,
+      OutstandingBalance: OutBalance,
+      CurrencyId: Currency || 0
+    };
+  });
+};
+var buildCurrentActivePlayer = function buildCurrentActivePlayer(dataItem) {
+  var CustId = dataItem.CustId,
+      UserName = dataItem.UserName,
+      Currency = dataItem.Currency,
+      Status = dataItem.Status,
+      OddsGroup = dataItem.OddsGroup,
+      SpecialLevel = dataItem.SpecialLevel,
+      IsDeposit = dataItem.IsDeposit,
+      IsArchived = dataItem.IsArchived,
+      LicenseeCustId = dataItem.LicenseeCustId,
+      CurrencyId = dataItem.CurrencyId;
+  return {
+    custId: CustId,
+    licenseeCustId: LicenseeCustId,
+    userName: UserName,
+    currency: Currency,
+    status: Status,
+    oddsGroup: OddsGroup,
+    specialLevel: SpecialLevel,
+    isDeposit: IsDeposit,
+    isArchived: IsArchived,
+    currencyId: CurrencyId
+  };
+};
+
+/***/ }),
+
 /***/ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerItemQueryService.js":
 /*!**********************************************************************************************!*\
   !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerItemQueryService.js ***!
@@ -4190,7 +4360,7 @@ function () {
       };
       var lrfPromise = commonService.fetchData(lrfDataById.type, lrfDataById.action, lrfParam);
       var lapPromise = commonService.fetchData(lapDataById.type, lapDataById.action, lapParam);
-      return this._getResult(lrfPromise, lapPromise);
+      return this._getResult(lrfPromise, lapPromise, commonService);
     }
   }, {
     key: "_getResult",
@@ -4279,7 +4449,8 @@ function () {
           OutstandingBalance = lrfItem.OutstandingBalance,
           OddsGroup = lrfItem.OddsGroup,
           BaStatus = lrfItem.BaStatus,
-          SpecialLevel = lrfItem.SpecialLevel;
+          SpecialLevel = lrfItem.SpecialLevel,
+          CurrencyId = lrfItem.CurrencyId;
       var Status = lapItem.Status,
           RealName = lapItem.RealName,
           IP = lapItem.IP,
@@ -4287,24 +4458,30 @@ function () {
           isOnline = lapItem.isOnline,
           ActStatus = lapItem.ActStatus,
           IBCCustId = lapItem.IBCCustId,
-          isArchived = lapItem.isArchived;
+          isArchived = lapItem.isArchived,
+          LastTransaction = lapItem.LastTransaction,
+          CurrencyCode = lapItem.CurrencyCode,
+          OutBalance = lapItem.OutBalance;
       return {
         CustId: CustId || IBCCustId,
+        LicenseeCustId: lapItem.CustId,
         UserName: UserName || lapItem.UserName,
         SystemId: SystemId,
-        Currency: Currency,
-        CurrentBalance: CurrentBalance,
-        OutstandingBalance: OutstandingBalance,
+        Currency: Currency || CurrencyCode,
+        CurrentBalance: CurrentBalance || lapItem.CurrentBalance,
+        OutstandingBalance: OutstandingBalance || OutBalance,
         OddsGroup: OddsGroup,
         BaStatus: BaStatus,
         SpecialLevel: SpecialLevel,
         Status: Status,
         RealName: RealName,
+        LastTransaction: LastTransaction,
         LastLoginIp: IP,
         Email: email,
         IsOnline: isOnline,
         IsDeposit: ActStatus === _constants__WEBPACK_IMPORTED_MODULE_0__["playerTypes"].deposit && IBCCustId > 0 || CustId > 0,
-        IsArchived: !!isArchived
+        IsArchived: !!isArchived,
+        CurrencyId: CurrencyId || lapItem.Currency || 0
       };
     }
   }, {
@@ -4363,7 +4540,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return PlayerMultipleQueryService; });
 /* harmony import */ var _playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./playerListDataHelper */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerListDataHelper.js");
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/utils.js");
-/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./playerDataBuilder */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerDataBuilder.js");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
@@ -4386,6 +4564,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
+
 var PlayerMultipleQueryService =
 /*#__PURE__*/
 function () {
@@ -4400,7 +4579,7 @@ function () {
           lapSearch = apiInfo.lapSearch;
       var lrfPromise = commonService.fetchData(lrfSearch.type, lrfSearch.action, _objectSpread({}, param)).catch(function (error) {
         console.log(error.message);
-        window.alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('HttpError_Default'));
+        window.alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('HttpError_Default'));
         return {
           data: {
             DataList: [],
@@ -4410,7 +4589,7 @@ function () {
       });
       var lapPromise = commonService.fetchData(lapSearch.type, lapSearch.action, _objectSpread({}, param)).catch(function (error) {
         console.log(error.message);
-        window.alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('HttpError_Default'));
+        window.alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('HttpError_Default'));
         return {
           data: {
             PlayerList: [],
@@ -4502,7 +4681,7 @@ function () {
         };
       }).catch(function (error) {
         console.log(error.message);
-        window.alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('HttpError_Default'));
+        window.alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('HttpError_Default'));
         return _playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].createEmptyResult();
       });
     }
@@ -4518,7 +4697,7 @@ function () {
 
         if (!nextLrfPlayerList || !nextLrfPlayerList.length) {
           return {
-            playerList: Object(_utils__WEBPACK_IMPORTED_MODULE_1__["buildLapPlayerList"])(differenceList),
+            playerList: Object(_playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__["buildLapPlayerList"])(differenceList),
             totalItem: differenceList.length
           };
         }
@@ -4530,9 +4709,9 @@ function () {
         };
       }).catch(function (error) {
         console.log(error.message);
-        window.alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('HttpError_Default'));
+        window.alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('HttpError_Default'));
         return {
-          playerList: Object(_utils__WEBPACK_IMPORTED_MODULE_1__["buildLapPlayerList"])(differenceList),
+          playerList: Object(_playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__["buildLapPlayerList"])(differenceList),
           totalItem: differenceList.length
         };
       });
@@ -4549,7 +4728,7 @@ function () {
 
         if (!lapPlayerList || !lapPlayerList.length) {
           return {
-            playerList: Object(_utils__WEBPACK_IMPORTED_MODULE_1__["buildLrfPlayerList"])(differenceList),
+            playerList: Object(_playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__["buildLrfPlayerList"])(differenceList),
             totalItem: differenceList.length
           };
         }
@@ -4561,9 +4740,9 @@ function () {
         };
       }).catch(function (error) {
         console.log(error.message);
-        window.alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('HttpError_Default'));
+        window.alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('HttpError_Default'));
         return {
-          playerList: Object(_utils__WEBPACK_IMPORTED_MODULE_1__["buildLrfPlayerList"])(differenceList),
+          playerList: Object(_playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__["buildLrfPlayerList"])(differenceList),
           totalItem: differenceList.length
         };
       });
@@ -4785,8 +4964,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_lib_excel__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/excel */ "./www/js/source/reactpages/lib/excel.js");
 /* harmony import */ var _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/constants/excelStyle */ "./www/js/source/reactpages/constants/excelStyle.js");
 /* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
-/* harmony import */ var _lib_publicPathUtils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../lib/publicPathUtils */ "./www/js/source/reactpages/Module/lib/publicPathUtils.js");
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./utils */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/utils.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./utils */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/utils.js");
 var _displayedTextByField;
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -4801,16 +4979,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-
 var HEADER_ROW_INDEX = 0;
 var DATA_ROW_INDEX = 1;
 var MAIN_SECTION_STYLE = 'mainSectionStyle';
 var displayedTextByField = (_displayedTextByField = {}, _defineProperty(_displayedTextByField, _lib_constants__WEBPACK_IMPORTED_MODULE_2__["fields"].SpecialLevel, function (value) {
-  return Object(_utils__WEBPACK_IMPORTED_MODULE_4__["getSpecialLevelText"])(value);
+  return Object(_utils__WEBPACK_IMPORTED_MODULE_3__["getSpecialLevelText"])(value);
 }), _defineProperty(_displayedTextByField, _lib_constants__WEBPACK_IMPORTED_MODULE_2__["fields"].BaStatus, function (value) {
-  return Object(_utils__WEBPACK_IMPORTED_MODULE_4__["getBaStatusText"])(value);
+  return Object(_utils__WEBPACK_IMPORTED_MODULE_3__["getBaStatusText"])(value);
 }), _defineProperty(_displayedTextByField, _lib_constants__WEBPACK_IMPORTED_MODULE_2__["fields"].Status, function (value) {
-  return Object(_utils__WEBPACK_IMPORTED_MODULE_4__["getPlayerStatus"])(value);
+  return Object(_utils__WEBPACK_IMPORTED_MODULE_3__["getPlayerStatus"])(value);
 }), _displayedTextByField);
 
 var ReportExcel =
@@ -4832,7 +5009,6 @@ function () {
     value: function _export(onFinished) {
       var _this = this;
 
-      Object(_lib_publicPathUtils__WEBPACK_IMPORTED_MODULE_3__["setupWebpackPublicPath"])();
       _jsroot_lib_excel__WEBPACK_IMPORTED_MODULE_0__["default"].process(function () {
         _this._createHeader();
 
@@ -4978,15 +5154,11 @@ function () {
 /*!*****************************************************************************!*\
   !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/utils.js ***!
   \*****************************************************************************/
-/*! exports provided: buildSelectedPlayer, buildLrfPlayerList, buildLapPlayerList, buildCurrentActivePlayer, getSpecialLevelText, getBaStatusText, getPlayerStatus, buildDisplayedColumnObject, isDeposit, getCustIdListFromLapData */
+/*! exports provided: getSpecialLevelText, getBaStatusText, getPlayerStatus, buildDisplayedColumnObject, isDeposit, getCustIdListFromLapData */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "buildSelectedPlayer", function() { return buildSelectedPlayer; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "buildLrfPlayerList", function() { return buildLrfPlayerList; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "buildLapPlayerList", function() { return buildLapPlayerList; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "buildCurrentActivePlayer", function() { return buildCurrentActivePlayer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSpecialLevelText", function() { return getSpecialLevelText; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBaStatusText", function() { return getBaStatusText; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPlayerStatus", function() { return getPlayerStatus; });
@@ -4998,98 +5170,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var buildSelectedPlayer = function buildSelectedPlayer(dataItem) {
-  var CustId = dataItem.CustId,
-      UserName = dataItem.UserName,
-      Currency = dataItem.Currency,
-      IsDeposit = dataItem.IsDeposit,
-      IsArchived = dataItem.IsArchived;
-  return {
-    custId: CustId,
-    userName: UserName,
-    currency: Currency,
-    isDeposit: IsDeposit,
-    isArchived: IsArchived
-  };
-};
-var buildLrfPlayerList = function buildLrfPlayerList(playerList) {
-  if (!playerList) {
-    return [];
-  }
-
-  return playerList.map(function (item) {
-    var CustId = item.CustId,
-        UserName = item.UserName,
-        SystemId = item.SystemId,
-        Currency = item.Currency,
-        CurrentBalance = item.CurrentBalance,
-        OutstandingBalance = item.OutstandingBalance,
-        OddsGroup = item.OddsGroup,
-        BaStatus = item.BaStatus,
-        SpecialLevel = item.SpecialLevel;
-    return {
-      CustId: CustId,
-      UserName: UserName,
-      SystemId: SystemId,
-      Currency: Currency,
-      CurrentBalance: CurrentBalance,
-      OutstandingBalance: OutstandingBalance,
-      OddsGroup: OddsGroup,
-      BaStatus: BaStatus,
-      SpecialLevel: SpecialLevel,
-      IsDeposit: true,
-      IsArchived: false
-    };
-  });
-};
-var buildLapPlayerList = function buildLapPlayerList(playerList) {
-  if (!playerList) {
-    return [];
-  }
-
-  return playerList.map(function (item) {
-    var UserName = item.UserName,
-        Status = item.Status,
-        RealName = item.RealName,
-        IP = item.IP,
-        email = item.email,
-        isOnline = item.isOnline,
-        ActStatus = item.ActStatus,
-        IBCCustId = item.IBCCustId,
-        isArchived = item.isArchived;
-    return {
-      CustId: IBCCustId,
-      UserName: UserName,
-      Status: Status,
-      RealName: RealName,
-      LastLoginIp: IP,
-      Email: email,
-      IsOnline: isOnline,
-      IsDeposit: ActStatus === _lib_constants__WEBPACK_IMPORTED_MODULE_0__["playerTypes"].deposit && IBCCustId > 0,
-      IsArchived: isArchived
-    };
-  });
-};
-var buildCurrentActivePlayer = function buildCurrentActivePlayer(dataItem) {
-  var CustId = dataItem.CustId,
-      UserName = dataItem.UserName,
-      Currency = dataItem.Currency,
-      Status = dataItem.Status,
-      OddsGroup = dataItem.OddsGroup,
-      SpecialLevel = dataItem.SpecialLevel,
-      IsDeposit = dataItem.IsDeposit,
-      IsArchived = dataItem.IsArchived;
-  return {
-    custId: CustId,
-    userName: UserName,
-    currency: Currency,
-    status: Status,
-    oddsGroup: OddsGroup,
-    specialLevel: SpecialLevel,
-    isDeposit: IsDeposit,
-    isArchived: IsArchived
-  };
-};
 var getSpecialLevelText = function getSpecialLevelText(value) {
   return value === undefined || value === null ? '' : Number(value) === 0 ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('None') : value;
 };
@@ -5709,26 +5789,6 @@ function (_BaseCommonService) {
 }(_baseCommonService__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (LapCommonService);
-
-/***/ }),
-
-/***/ "./www/js/source/reactpages/Module/lib/publicPathUtils.js":
-/*!****************************************************************!*\
-  !*** ./www/js/source/reactpages/Module/lib/publicPathUtils.js ***!
-  \****************************************************************/
-/*! exports provided: setupWebpackPublicPath */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setupWebpackPublicPath", function() { return setupWebpackPublicPath; });
-var setupWebpackPublicPath = function setupWebpackPublicPath() {
-  var srcFallback = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : window.location.origin;
-  var currentScript = document.getElementById('publicScript');
-  var src = currentScript ? currentScript.src : srcFallback;
-  var url = new URL(src);
-  __webpack_require__.p = url.origin + '/' + __webpack_require__.p;
-};
 
 /***/ }),
 
@@ -7565,10 +7625,15 @@ function () {
   _createClass(Excel, null, [{
     key: "process",
     value: function process(callback) {
-      Promise.all(/*! import() | xlsx-style-sparta */[__webpack_require__.e("common"), __webpack_require__.e("xlsx-style-sparta")]).then(__webpack_require__.t.bind(null, /*! xlsx-style-sparta */ "./node_modules/xlsx-style-sparta/xlsx.js", 7)).then(function (XLSX) {
-        _XLSX = XLSX;
+      if (window.XLSX) {
+        _XLSX = window.XLSX;
         callback && callback();
-      });
+      } else {
+        Promise.all(/*! import() | xlsx-style-sparta */[__webpack_require__.e("common"), __webpack_require__.e("xlsx-style-sparta")]).then(__webpack_require__.t.bind(null, /*! xlsx-style-sparta */ "./node_modules/xlsx-style-sparta/xlsx.js", 7)).then(function (XLSX) {
+          _XLSX = XLSX;
+          callback && callback();
+        });
+      }
     }
   }, {
     key: "export",
