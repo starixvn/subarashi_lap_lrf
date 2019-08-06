@@ -6,7 +6,7 @@ import { oddsGroupListWithStyle } from '../../lib/constants';
 import DropdownLabel from '@jsroot/components/DropdownLabel';
 import { ActionCreators } from '../../actions';
 import GridInteractionService from '../../lib/gridInteractionService';
-import { buildCurrentActivePlayer } from '../../lib/utils';
+import { buildCurrentActivePlayer } from '../../lib/playerDataBuilder';
 
 export const OddsGroupCell = (props) => {
     const { dataItem, oddsGroupDropdownPosition, setCurrentActivePlayer, setOddsGroupDropdownPosition } = props;

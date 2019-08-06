@@ -1,5 +1,6 @@
 import PlayerListDataHelper from './playerListDataHelper';
-import { buildLapPlayerList, getCustIdListFromLapData, buildLrfPlayerList } from './utils';
+import { getCustIdListFromLapData } from './utils';
+import { buildLapPlayerList, buildLrfPlayerList } from './playerDataBuilder';
 import LangHelper from '@jsroot/lib/langHelper';
 
 export default class PlayerMultipleQueryService {

@@ -7,7 +7,8 @@ import DropdownLabel from '@jsroot/components/DropdownLabel';
 
 import { ActionCreators } from '../../actions';
 import GridInteractionService from '../../lib/gridInteractionService';
-import { getSpecialLevelText, buildCurrentActivePlayer } from '../../lib/utils';
+import { getSpecialLevelText } from '../../lib/utils';
+import { buildCurrentActivePlayer } from '../../lib/playerDataBuilder';
 
 export const SpecialLevelCell = (props) => {
     const { dataItem, specialLevelDropdownPosition, setCurrentActivePlayer, setSpecialLevelDropdownPosition } = props;

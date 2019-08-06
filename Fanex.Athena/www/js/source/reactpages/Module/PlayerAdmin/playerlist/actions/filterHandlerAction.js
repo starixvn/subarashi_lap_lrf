@@ -4,7 +4,7 @@ import PlayerQueryService from '../lib/playerQueryService';
 import { setSelectedPlayer } from './commonAction';
 import { setPlayerList, setPagingOption, setIsFetchingData } from './gridHandlerAction';
 import { defaultPagingOption } from '../lib/constants.js';
-import { buildSelectedPlayer } from '../lib/utils';
+import { buildSelectedPlayer } from '../lib/playerDataBuilder';
 import PlayerSuggestionService from '../lib/playerSuggestionService';
 
 const processBeforeGettingData = (dispatch) => {

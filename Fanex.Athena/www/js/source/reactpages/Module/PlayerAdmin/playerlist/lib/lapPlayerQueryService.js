@@ -1,5 +1,6 @@
 import PlayerListDataHelper from './playerListDataHelper';
-import { buildLapPlayerList, getCustIdListFromLapData } from './utils';
+import { getCustIdListFromLapData } from './utils';
+import { buildLapPlayerList } from './playerDataBuilder';
 
 export default class LapPlayerQueryService {
     static fetchData(param, commonService, apiInfo) {
