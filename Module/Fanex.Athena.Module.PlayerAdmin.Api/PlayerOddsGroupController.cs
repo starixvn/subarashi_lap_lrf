@@ -3,6 +3,7 @@ using Fanex.Athena.Api.StatelessBase;
 using Fanex.Athena.Api.StatelessBase.Attributes;
 using Fanex.Athena.Extension.Helpers;
 using Fanex.Athena.Extension.Utility;
+using Fanex.Athena.Model.Auth.DataDomain;
 using Fanex.Athena.Model.Core.ViewModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.Services.Interfaces;
@@ -14,7 +15,7 @@ using System.Web.Http;
 
 namespace Fanex.Athena.Module.PlayerAdmin.Api
 {
-    [ApiOneAuthorization]
+    [ApiOneAuthorization(AllowFunctionKeys = PermissionKeys.PlayerAdminUpdateOddsGroup)]
     public class PlayerOddsGroupController : ExternalApiBaseController
     {
         private readonly IPlayerOddsGroupService _playerOddsGroupService;

@@ -1,12 +1,13 @@
 ﻿namespace Fanex.Athena.Module.Dashboard.Api
 {
     using Fanex.Athena.Api.Base.Attributes;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Module.Dashboard.Data.Interfaces;
     using Fanex.Athena.Module.Dashboard.MetaModel;
     using System.Threading.Tasks;
     using System.Web.Http;
 
-    [ApiOneAuthorization(AllowFunctionKeys = "n_pending_funds")]
+    [ApiOneAuthorization(AllowFunctionKeys = PermissionKeys.DashboardPendingFund)]
     public class PendingFundController : BaseDashboardApiController
     {
         private readonly ISingleValueDataAccess _dataAccess;

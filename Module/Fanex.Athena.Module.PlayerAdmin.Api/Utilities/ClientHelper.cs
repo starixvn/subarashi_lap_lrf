@@ -5,7 +5,6 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Utilities
     public static class ClientHelper
     {
         private const string HttpContext = "MS_HttpContext";
-        private const string RemoteEndpointMessage = "System.ServiceModel.Channels.RemoteEndpointMessageProperty";
 
         public static string GetClientIpAddress(HttpRequestMessage request)
         {

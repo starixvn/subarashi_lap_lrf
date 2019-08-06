@@ -1,6 +1,7 @@
 ﻿namespace Fanex.Athena.Module.Dashboard.Api
 {
     using Fanex.Athena.Api.Base.Attributes;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Module.Dashboard.Data.Interfaces;
     using Fanex.Athena.Module.Dashboard.MetaModel;
     using Fanex.Athena.Module.Dashboard.ViewModel;
@@ -8,7 +9,7 @@
     using System.Threading.Tasks;
     using System.Web.Http;
 
-    [ApiOneAuthorization(AllowFunctionKeys = "c_licWL")]
+    [ApiOneAuthorization(AllowFunctionKeys = PermissionKeys.DashboardLicenseeWinLossByPlatform)]
     public class LicenseeWinLossByPlatformController : BaseDashboardApiController
     {
         private readonly ILicenseeDataByPlatformDataAccess _dataAccess;

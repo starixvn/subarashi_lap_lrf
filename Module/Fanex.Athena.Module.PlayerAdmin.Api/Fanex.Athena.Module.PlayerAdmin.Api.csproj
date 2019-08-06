@@ -91,7 +91,6 @@
     <Compile Include="Services\PlayerSpecialLevelService.cs" />
     <Compile Include="Utilities\ClientHelper.cs" />
     <Compile Include="Utilities\ResourceKeyConstants.cs" />
-    <Compile Include="Utilities\UpdatingUtils.cs" />
     <Compile Include="ViewModels\PlayerListResultViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
