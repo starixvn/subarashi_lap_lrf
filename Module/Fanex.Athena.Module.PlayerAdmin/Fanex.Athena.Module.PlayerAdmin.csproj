@@ -81,7 +81,6 @@
   <ItemGroup>
     <Compile Include="Controllers\PlayerBetlistController.cs" />
     <Compile Include="Controllers\PlayerStatementController.cs" />
-    <Compile Include="Controllers\BetLimitController.cs" />
     <Compile Include="DTO\PlayerInfo.cs" />
     <Compile Include="MetaModel\PlayerRunningBetListMetalModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
