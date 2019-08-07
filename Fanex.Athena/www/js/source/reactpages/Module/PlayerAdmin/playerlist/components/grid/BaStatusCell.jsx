@@ -7,6 +7,7 @@ import { Cell } from '@9softstudio/react-grid';
 import Switcher from '@jsroot/components/Switcher';
 import LangHelper from '@jsroot/lib/langHelper';
 import GridInteractionService from '../../lib/gridInteractionService';
+import { getErrorMessageForUpdating } from '../../lib/utils';
 
 const BaStatusCell = (props) => {
     const { dataItem, setPlayerList, toggleLoader, updateBaStatus } = props;
@@ -38,14 +39,15 @@ const BaStatusCell = (props) => {
             toggleLoader(false);
         }).catch((error) => {
             console.log(error.message);
-            window.alert(LangHelper.getSingleResource('HttpError_Default'));
+            const message = getErrorMessageForUpdating(error);
+            window.alert(message);
             toggleLoader(false);
         })
     }
 
     return (
         <Cell className="center-align">
-            { BaStatus !== undefined && <Switcher checked={BaStatus} onChange={handleChangeBaStatus} /> }
+            {BaStatus !== undefined && <Switcher checked={BaStatus} onChange={handleChangeBaStatus} />}
         </Cell>
     )
 }

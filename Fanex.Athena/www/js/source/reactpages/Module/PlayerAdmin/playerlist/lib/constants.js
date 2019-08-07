@@ -168,6 +168,13 @@ export const apiInfo = {
     lapDataById: { action: 'PlayerAdminContainer/GetPlayerListById', type: systemType.newAdmin }
 }
 
+export const apiUpdateInfo = {
+    updateBaStatus: { action: 'api/PlayerBaStatus/Update', type: systemType.lrf },
+    updateOddsGroup: { action: 'api/PlayerOddsGroup/Update', type: systemType.lrf },
+    updateSpecialLevel: { action: 'api/PlayerSpecialLevel/Update', type: systemType.lrf },
+    updatePlayerStatus: { action: 'PlayerAdminContainer/UpdatePlayerStatus', type: systemType.newAdmin }
+}
+
 export const excludedContextMenuWithNonDeposit = [contextMenuKeys.betLimit, contextMenuKeys.statement];
 
 export const excludedContextMenuWithClosed = [contextMenuKeys.password];

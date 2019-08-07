@@ -7,7 +7,7 @@ import { specialLevelListWithColor } from '../../lib/constants';
 import GridInteractionService from '../../lib/gridInteractionService';
 import LangHelper from '@jsroot/lib/langHelper';
 import { ActionCreators } from '../../actions';
-import { getSpecialLevelText } from '../../lib/utils';
+import { getSpecialLevelText, getErrorMessageForUpdating } from '../../lib/utils';
 
 const SpecialLevelDropdown = (props) => {
     const { specialLevelDropdownPosition, setSpecialLevelDropdownPosition } = props;
@@ -52,7 +52,8 @@ const SpecialLevelDropdown = (props) => {
                 toggleLoader(false);
             }).catch((error) => {
                 console.log(error.message);
-                window.alert(LangHelper.getSingleResource('HttpError_Default'));
+                const message = getErrorMessageForUpdating(error);
+                window.alert(message);
                 toggleLoader(false);
             })
         }
@@ -66,8 +67,8 @@ const SpecialLevelDropdown = (props) => {
                 {
                     Object.keys(specialLevelListWithColor).map(item => {
                         const color = specialLevelListWithColor[item];
-                        return <DropdownItem key={item} className="special-level-item" 
-                                style={{ backgroundColor: color }} onClick={e => handleChangeOddsGroup(e, item)}>{getSpecialLevelText(item)}</DropdownItem>
+                        return <DropdownItem key={item} className="special-level-item"
+                            style={{ backgroundColor: color }} onClick={e => handleChangeOddsGroup(e, item)}>{getSpecialLevelText(item)}</DropdownItem>
                     })
                 }
             </DropdownMenu>

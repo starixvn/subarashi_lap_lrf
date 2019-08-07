@@ -1,6 +1,7 @@
 import { playerStatus } from '../lib/constants';
 import LangHelper from '@jsroot/lib/langHelper';
 import { playerTypes } from './constants';
+import { error } from 'util';
 
 export const getSpecialLevelText = (value) => {
     return value === undefined || value === null ? '' : (Number(value) === 0 ? LangHelper.getSingleResource('None') : value);
@@ -35,4 +36,25 @@ export const getCustIdListFromLapData = (lapPlayerList) => {
 
         return result;
     }, []);
+}
+
+export const getErrorMessageForUpdating = (errorInfo) => {
+    const defaultKey = 'HttpError_Default';
+    if (!errorInfo) {
+        return LangHelper.getSingleResource(defaultKey);
+    }
+
+    const resourceKey = isUnauthorizedResponse(errorInfo) ? 'FunctionDeniedMsg' : defaultKey;
+
+    return LangHelper.getSingleResource(resourceKey).replace(/&apos;/g, "'");
+}
+
+const isUnauthorizedResponse = (errorInfo) => {
+    if (!errorInfo.response) {
+        return false;
+    }
+
+    const { status } = errorInfo.response;
+
+    return status === 403 || status === 401;
 }

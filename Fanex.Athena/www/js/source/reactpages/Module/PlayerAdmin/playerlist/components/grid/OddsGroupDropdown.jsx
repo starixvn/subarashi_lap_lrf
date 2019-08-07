@@ -7,6 +7,7 @@ import { oddsGroupListWithStyle } from '../../lib/constants';
 import GridInteractionService from '../../lib/gridInteractionService';
 import LangHelper from '@jsroot/lib/langHelper';
 import { ActionCreators } from '../../actions';
+import { getErrorMessageForUpdating } from '../../lib/utils';
 
 export const OddsGroupDropdown = (props) => {
     const { oddsGroupDropdownPosition, setOddsGroupDropdownPosition } = props;
@@ -51,7 +52,8 @@ export const OddsGroupDropdown = (props) => {
                 toggleLoader(false);
             }).catch((error) => {
                 console.log(error.message);
-                window.alert(LangHelper.getSingleResource('HttpError_Default'));
+                const message = getErrorMessageForUpdating(error);
+                window.alert(message);
                 toggleLoader(false);
             })
         }
