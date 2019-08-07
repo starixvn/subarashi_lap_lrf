@@ -101,6 +101,8 @@
             string sportName = null)
         {
             CreateDefaultMetaModel(metaModel);
+            InitBaseCurrencyValue(metaModel);
+
             if (!metaModel.IsExportExcel)
             {
                 ViewBag.SportName = sportName;

@@ -36,6 +36,8 @@
         public async Task<ActionResult> Index(BetListExcelMetaModel metaModel)
         {
             CreateDefaultMetaModel(metaModel);
+            InitBaseCurrencyValue(metaModel);
+
             return await ProcessDefaultRequest(metaModel, "~/Views/Desktop/BetList/WinlossByBetType/Main.cshtml", "Lrf_BetList_SelWinLossByBetType").ConfigureAwait(false);
         }
 

@@ -43,6 +43,7 @@ namespace Fanex.Athena.Controllers.BetList
         public ActionResult Index()
         {
             var metaModel = CreateDefaultMetaModel();
+            InitBaseCurrencyValue(metaModel);
 
             var licenseeSession = SessionService.LicenseeSession;
             var userSession = SessionService.UserSession;
@@ -68,6 +69,7 @@ namespace Fanex.Athena.Controllers.BetList
             const string UspKey = "Lrf_TotalBets_Sel430";
 
             CreateDefaultMetaModel(metaModel);
+            InitBaseCurrencyValue(metaModel);
             metaModel.IsShowSumStake = true;
             metaModel.UspKey = UspKey;
 

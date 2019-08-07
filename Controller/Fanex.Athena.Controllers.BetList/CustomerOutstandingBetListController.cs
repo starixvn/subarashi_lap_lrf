@@ -48,6 +48,7 @@ namespace Fanex.Athena.Controllers.BetList
         {
             var isRunningBetlist = !string.IsNullOrEmpty(metaModel.BetListName) && metaModel.BetListName.Equals("betlistrunning", StringComparison.OrdinalIgnoreCase);
             var viewParam = CreateDefaultMetaModel(metaModel);
+            InitBaseCurrencyValue(viewParam);
 
             viewParam.FromDate = isRunningBetlist ? new DateTime(DateTime.Now.Year - 1, 1, 1) : viewParam.MoveBetsDay.AddDays(1);
 

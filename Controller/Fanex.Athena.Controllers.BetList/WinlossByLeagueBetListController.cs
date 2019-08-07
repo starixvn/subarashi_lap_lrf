@@ -41,6 +41,8 @@ namespace Fanex.Athena.Controllers.BetList
         public async Task<ActionResult> Index(WinLossByLeagueBetListMetaModel metaModel)
         {
             CreateDefaultMetaModel(metaModel);
+            InitBaseCurrencyValue(metaModel);
+
             return await ProcessDefaultRequest(metaModel, "~/Views/Desktop/BetList/WinlossByLeague/Main.cshtml", "Lrf_BetList_WinlostByLeague_Mem").ConfigureAwait(false);
         }
 
