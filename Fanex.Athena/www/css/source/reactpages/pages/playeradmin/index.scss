@@ -121,6 +121,12 @@ $borderContainer: #d6d6d6;
         }
     }
 }
+
+iframe {
+    border-width: 0px 1px 1px;
+    border-style: solid;
+    border-color: $borderContainer;
+}
 /*End Tab*/
 
 /*Grid*/
