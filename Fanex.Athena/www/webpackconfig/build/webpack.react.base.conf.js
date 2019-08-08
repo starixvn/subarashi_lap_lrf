@@ -32,6 +32,7 @@ function generateConfig(environment) {
             [`${jsPath}/report/casinoturnover`]: pathConfig.scriptPaths.casinoturnover,
             [`${jsPath}/playeradmin/playerlist`]: pathConfig.scriptPaths.playerlist,
             [`${jsPath}/playeradmin/runningbetlist`]: pathConfig.scriptPaths.playerrunningbetlist,
+            [`${jsPath}/playeradmin/betlimit`]: pathConfig.scriptPaths.playerbetlimit,
 
             /*css*/
             [`${cssPath}/vendor`]: pathConfig.cssPaths.layout,
@@ -45,7 +46,8 @@ function generateConfig(environment) {
             [`${cssPath}/casinoturnover/index`]: pathConfig.cssPaths.casinoturnover,
             [`${cssPath}/playeradmin/index`]: pathConfig.cssPaths.playeradmin,
             [`${cssPath}/playeradmin/account-info`]: pathConfig.cssPaths.accountInfo,
-            [`${cssPath}/playeradmin/running-betlist`]: pathConfig.cssPaths.playerrunningbetlist
+            [`${cssPath}/playeradmin/running-betlist`]: pathConfig.cssPaths.playerrunningbetlist,
+            [`${cssPath}/playeradmin/betlimit`]: pathConfig.cssPaths.playerbetlimit
         },
         output: {
             path: pathConfig.projectRoot,
