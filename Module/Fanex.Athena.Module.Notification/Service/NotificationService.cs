@@ -35,7 +35,6 @@
 
         private readonly IWebClientService _webClientService;
 
-        [CLSCompliant(false)]
         public NotificationService(
             ILogger logger,
             IAppSettings appSetting,

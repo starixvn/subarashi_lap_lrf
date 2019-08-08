@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using System.Web.SessionState;
+    using System.Web.UI;
     using Fanex.Athena.Controllers;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Auth.Enum;
@@ -35,13 +36,14 @@
 
         [HttpGet]
         [ValidatePermissionOnData]
-        public ViewResult Running(int custid, int currencyId)
+        [OutputCache(VaryByParam = "custId", Location = OutputCacheLocation.Server, Duration = 0)]
+        public ViewResult Running(int custId, int currencyId)
         {
             var currencyList = SessionService.UserSession.CurrencyList;
 
             var viewModel = new PlayerRunningBetListViewModel
             {
-                CustId = custid,
+                CustId = custId,
                 Currency = currencyList.FirstOrDefault(x => x.Key == currencyId).Value
             };
 
@@ -52,6 +54,7 @@
         [AjaxRequest]
         [CustomValidateAntiForgery]
         [ValidatePermissionOnData(isObject: true)]
+        [OutputCache(NoStore = true, Duration = 0, Location = OutputCacheLocation.None, VaryByParam = "*")]
         public async Task<dynamic> GetRunningBetList(PlayerRunningBetListMetalModel metaModel)
         {
             var userSession = SessionService.UserSession;
@@ -68,6 +71,7 @@
         [AjaxRequest]
         [CustomValidateAntiForgery]
         [ValidatePermissionOnData(isObject: true)]
+        [OutputCache(NoStore = true, Duration = 0, Location = OutputCacheLocation.None, VaryByParam = "*")]
         public async Task<FileStreamResult> ExportRunningBetList(PlayerRunningBetListMetalModel metaModel)
         {
             var userSession = SessionService.UserSession;
