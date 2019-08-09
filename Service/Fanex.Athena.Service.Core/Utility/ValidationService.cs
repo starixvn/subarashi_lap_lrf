@@ -34,7 +34,7 @@ namespace Fanex.Athena.Service.Core.Utility
             }
             if (currencyValidationOption != null && currencyValidationOption.IsValidCurrencyList)
             {
-                result &= IsValidCurrency(model as IMetaModelCurrencyList);
+                result &= IsValidCurrency(model as IMetaModelCurrencyIdList);
             }
             if (productValidationOption != null && productValidationOption.IsValidProductCodeList)
             {
@@ -54,7 +54,7 @@ namespace Fanex.Athena.Service.Core.Utility
             return model != null && _currencyValidation.IsValidCurrency(model.CurrencyId, isIncludeKeanOcean);
         }
 
-        private bool IsValidCurrency(IMetaModelCurrencyList model)
+        private bool IsValidCurrency(IMetaModelCurrencyIdList model)
         {
             return model != null &&
                 _currencyValidation.IsValidCurrency(model.CurrencyIdList);

@@ -3,7 +3,7 @@ using Fanex.Athena.Model.Core.MetaModel;
 
 namespace Fanex.Athena.Module.PlayerAdmin.Api.MetaModel
 {
-    public class PlayerUpdatingBaseMetaModel : IMetalModelCustomerIdentity
+    public class PlayerUpdatingBaseMetaModel : IMetalModelCustomerIdentity, IMetaModelIp, IMetaModelUserId, IMetaModelLanguage
     {
         public OneAuthCurrency[] CurrencyPermission { get; set; }
 

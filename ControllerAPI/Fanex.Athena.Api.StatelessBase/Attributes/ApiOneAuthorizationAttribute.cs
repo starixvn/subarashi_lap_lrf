@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 
-namespace Fanex.Athena.Api.Base.Attributes
+namespace Fanex.Athena.Api.StatelessBase.Attributes
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true)]
     public sealed class ApiOneAuthorizationAttribute : FilterAttribute, IAuthorizationFilter

@@ -1,6 +1,6 @@
 ﻿using System.Net.Http;
 
-namespace Fanex.Athena.Module.PlayerAdmin.Api.Utilities
+namespace Fanex.Athena.Extension.Helper
 {
     public static class ClientHelper
     {

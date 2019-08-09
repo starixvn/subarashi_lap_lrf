@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using Fanex.Athena.Model.Core.MetaModel;
 
-    public class PlayerRunningBetListMetalModel : IMetalModelCustomerIdentity
+    public class PlayerRunningBetListMetalModel : IMetalModelCustomerIdentity, IMetaModelAgent, IMetaModelCurrencyList
     {
         private string _sortBy;
 

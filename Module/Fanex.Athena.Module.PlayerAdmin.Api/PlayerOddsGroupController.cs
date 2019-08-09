@@ -1,5 +1,4 @@
-﻿using Fanex.Athena.Api.Base.Attributes;
-using Fanex.Athena.Api.StatelessBase;
+﻿using Fanex.Athena.Api.StatelessBase;
 using Fanex.Athena.Api.StatelessBase.Attributes;
 using Fanex.Athena.Extension.Helpers;
 using Fanex.Athena.Extension.Utility;
@@ -34,6 +33,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api
 
         [HttpPost]
         [ApiPermissionOnData]
+        [StatelessApiAutoBindMetaModel(BindUserId = true, BindIp = true, BindLanguage = true)]
         public ResultViewModel Update(OddsGroupUpdatingMetaModel metaModel)
         {
             if (_licenseeSettingService.IsFakeLicensee(SiteName))
@@ -44,9 +44,6 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api
                     ErrorMessage = ResourceKeyConstants.FunctionDenied
                 };
             }
-
-            AssignCommonProperties(metaModel);
-
             try
             {
                 return _playerOddsGroupService.Update(metaModel);
@@ -63,12 +60,5 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api
             };
         }
 
-        private void AssignCommonProperties(PlayerUpdatingBaseMetaModel param)
-        {
-            param.CurrencyPermission = CurrencyAgentList;
-            param.UserId = UserId;
-            param.Language = Util.MapIetfLanguageCodes[Language];
-            param.Ip = ClientHelper.GetClientIpAddress(Request);
-        }
     }
 }

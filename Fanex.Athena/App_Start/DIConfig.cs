@@ -26,8 +26,6 @@ namespace Fanex.Athena
 {
     public static class DIConfig
     {
-        private static readonly Func<Assembly, bool> FilterDashboardApi = (a) => a.FullName.Contains("Fanex.Athena.Module.Dashboard");
-
         public static void Register()
         {
             var builder = new ContainerBuilder();
@@ -109,7 +107,7 @@ namespace Fanex.Athena
 
         private static Assembly[] GetApiControllerAssemblies(Assembly[] assemblies)
         {
-            return assemblies.Where(ass => ass.FullName.Contains("Fanex.Athena.Api") || FilterDashboardApi(ass)).ToArray();
+            return assemblies.Where(ass => ass.FullName.Contains("Fanex.Athena.Api")).ToArray();
         }
 
         private static Assembly[] GetModuleAssemblies(Assembly[] assemblies)

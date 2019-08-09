@@ -132,6 +132,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helper\CasinoHelper.cs" />
+    <Compile Include="Helper\ClientHelper.cs" />
     <Compile Include="Helper\DataHelper.cs" />
     <Compile Include="HashtableExtensions.cs" />
     <Compile Include="Helper\ConvertHelper.cs" />

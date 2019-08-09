@@ -1,7 +1,7 @@
 ﻿namespace Fanex.Athena.Module.Notification.Api
 {
-    using Fanex.Athena.Api.Base.Attributes;
     using Fanex.Athena.Api.StatelessBase;
+    using Fanex.Athena.Api.StatelessBase.Attributes;
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Module.Notification.MetaModel;
     using Fanex.Athena.Module.Notification.Service.Interfaces;

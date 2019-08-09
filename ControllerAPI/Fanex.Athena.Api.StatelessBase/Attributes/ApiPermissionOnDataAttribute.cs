@@ -12,7 +12,7 @@ using System.Web.Http.Filters;
 namespace Fanex.Athena.Api.StatelessBase.Attributes
 {
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
-    public class ApiPermissionOnDataAttribute : ActionFilterAttribute
+    public sealed class ApiPermissionOnDataAttribute : ActionFilterAttribute
     {
         private readonly string _custIDFieldName;
 
@@ -43,10 +43,13 @@ namespace Fanex.Athena.Api.StatelessBase.Attributes
             {
                 int.TryParse(actionContext.ActionArguments[_custIDFieldName]?.ToString(), out custId);
             }
+            var isAuthorized = false;
+            if (actionContext.ActionArguments.ContainsKey("currencyAgentList")
+                && actionContext.ActionArguments["currencyAgentList"] is OneAuthCurrency[] authCurrencyList)
+            {
 
-            var authCurrencyList = actionContext.ActionArguments["currencyAgentList"] as OneAuthCurrency[];
-
-            var isAuthorized = authorizationService.HasPermissionOnData(authCurrencyList, custId, 0);
+                isAuthorized = authorizationService.HasPermissionOnData(authCurrencyList, custId, 0);
+            }
 
             if (!isAuthorized)
             {

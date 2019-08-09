@@ -36,7 +36,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Api
             var searchParam = new PlayerSearchingMetaModel
             {
                 UserName = "Test",
-                Currency = "1"
+                CurrencyIdList = "1"
             };
 
             var expectedReturnedData = new PlayerListResultViewModel();
@@ -65,7 +65,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Api
             var searchParam = new PlayerSearchingMetaModel
             {
                 UserName = "Test",
-                Currency = "1"
+                CurrencyIdList = "1"
             };
             var expectedReturnedData = new PlayerListResultViewModel
             {

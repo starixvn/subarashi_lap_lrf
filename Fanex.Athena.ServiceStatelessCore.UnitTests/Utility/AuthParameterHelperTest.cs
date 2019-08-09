@@ -12,7 +12,7 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests.Utility
         [TestCaseSource(typeof(TestingData), "TestCases")]
         public string ToXml_WhenCall_ReturnCorrectString(IEnumerable<OneAuthCurrency> authCurrencyList, string selectedCurrency)
         {
-            return AuthParameterHelper.BuildAgentListXml(authCurrencyList, selectedCurrency);
+            return AuthParameterHelper.GenerateAgentListXml(authCurrencyList, selectedCurrency);
         }
     }
 

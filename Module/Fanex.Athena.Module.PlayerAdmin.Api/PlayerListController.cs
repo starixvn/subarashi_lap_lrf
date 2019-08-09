@@ -1,5 +1,4 @@
-﻿using Fanex.Athena.Api.Base.Attributes;
-using Fanex.Athena.Api.StatelessBase;
+﻿using Fanex.Athena.Api.StatelessBase;
 using Fanex.Athena.Api.StatelessBase.Attributes;
 using Fanex.Athena.Model.Auth.DataDomain;
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
@@ -22,26 +21,18 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api
 
         [HttpPost]
         [ApiPermissionOnData]
+        [StatelessApiAutoBindMetaModel(BindSiteName = true, BindAgent = true)]
         public PlayerListResultViewModel Search(PlayerSearchingMetaModel searchParam)
         {
-            AssignParam(searchParam);
-
             return _playerListService.Search(searchParam);
         }
 
         [HttpPost]
         [ApiPermissionOnData]
+        [StatelessApiAutoBindMetaModel(BindSiteName = true, BindAgent = true)]
         public PlayerListResultViewModel GetPlayerListById(PlayerListByIdMetaModel metaModel)
         {
-            AssignParam(metaModel);
-
             return _playerListService.GetPlayerListById(metaModel);
-        }
-
-        private void AssignParam(PlayerListBaseMetaModel searchParam)
-        {
-            searchParam.SiteName = SiteName;
-            searchParam.AgentListXml = AuthParameterHelper.BuildAgentListXml(CurrencyAgentList, searchParam.Currency?.Trim());
         }
     }
 }

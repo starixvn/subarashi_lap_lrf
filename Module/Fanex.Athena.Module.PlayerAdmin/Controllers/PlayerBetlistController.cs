@@ -19,8 +19,8 @@
 
     [SessionState(SessionStateBehavior.ReadOnly)]
     [CheckUMFilter]
-    [AuthorizeRestriction(AppMode.Parasitic)]
-    [FunctionAuthorization(PermissionKeys.PlayerAdminBetList)]
+   // [AuthorizeRestriction(AppMode.Parasitic)]
+    //[FunctionAuthorization(PermissionKeys.PlayerAdminBetList)]
     public class PlayerBetlistController : CultureBaseController
     {
         private readonly IBetListApiClient _betListApiClient;
@@ -54,13 +54,11 @@
         [AjaxRequest]
         [CustomValidateAntiForgery]
         [ValidatePermissionOnData(isObject: true)]
+        [AutoBindMetaModel(BindAgent = true, BindCurrencyList = true)]
         [OutputCache(NoStore = true, Duration = 0, Location = OutputCacheLocation.None, VaryByParam = "*")]
         public async Task<dynamic> GetRunningBetList(PlayerRunningBetListMetalModel metaModel)
         {
             var userSession = SessionService.UserSession;
-            metaModel.CurrencyList = userSession.CurrencyList;
-            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList);
-
             return await _betListApiClient.PostAsync<dynamic>(
                 "/PlayerAdminBetList/GetBetList",
                 metaModel,
@@ -71,12 +69,11 @@
         [AjaxRequest]
         [CustomValidateAntiForgery]
         [ValidatePermissionOnData(isObject: true)]
+        [AutoBindMetaModel(BindAgent = true, BindCurrencyList = true)]
         [OutputCache(NoStore = true, Duration = 0, Location = OutputCacheLocation.None, VaryByParam = "*")]
         public async Task<FileStreamResult> ExportRunningBetList(PlayerRunningBetListMetalModel metaModel)
         {
             var userSession = SessionService.UserSession;
-            metaModel.CurrencyList = userSession.CurrencyList;
-            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList);
 
             var stream = await _betListApiClient.PostAsyncStream("/PlayerAdminBetList/Export",
                 metaModel,

@@ -1,5 +1,4 @@
-﻿using Fanex.Athena.Api.Base.Attributes;
-using Fanex.Athena.Api.StatelessBase;
+﻿using Fanex.Athena.Api.StatelessBase;
 using Fanex.Athena.Api.StatelessBase.Attributes;
 using Fanex.Athena.Extension.Utility;
 using Fanex.Athena.Model.Auth.DataDomain;
@@ -23,19 +22,11 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api
 
         [HttpPost]
         [ApiPermissionOnData]
+        [StatelessApiAutoBindMetaModel(BindSiteName = true, BindUserId = true, BindLanguage = true, BindIp = true)]
         public ResultViewModel Update(BaStatusUpdatingMetaModel metaModel)
         {
-            AssignCommonProperties(metaModel);
-            metaModel.SiteName = SiteName;
-
             return _playerBaStatusService.Update(metaModel);
         }
 
-        private void AssignCommonProperties(PlayerUpdatingBaseMetaModel param)
-        {
-            param.UserId = UserId;
-            param.Language = Util.MapIetfLanguageCodes[Language];
-            param.Ip = ClientHelper.GetClientIpAddress(Request);
-        }
     }
 }

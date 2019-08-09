@@ -8,8 +8,7 @@
     using Autofac;
 
     using DataAccess.Core.Users.Interfaces;
-
-    using Fanex.Athena.Api.Base.Attributes;
+    using Fanex.Athena.Api.StatelessBase.Attributes;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
