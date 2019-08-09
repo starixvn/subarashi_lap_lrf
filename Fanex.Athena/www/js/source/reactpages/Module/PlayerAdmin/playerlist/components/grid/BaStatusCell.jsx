@@ -48,19 +48,33 @@ const BaStatusCell = (props) => {
         const confirmMessage = LangHelper.getSingleResource(resourceName);
         const confirmOption = generateConfirmOption(confirmMessage);
 
+        const handleCloseAlert = () => {
+            setSweetAlertOption(null);
+        }
+
         const submitButton = confirmOption.buttons[0];
         confirmOption.buttons[0] = {
             ...submitButton,
             onClick: () => {
-                setSweetAlertOption({ ...alertOption });
+                const alertOpt = {
+                    ...alertOption,
+                    onClose: handleCloseAlert
+                }
+                alertOpt.buttons[0].onClick = handleCloseAlert;
+                setSweetAlertOption(alertOpt);
             }
         }
 
-        confirmOption.buttons[1].onClick = () => {
-            setSweetAlertOption(null);
+        const cancelButton = confirmOption.buttons[1];
+        confirmOption.buttons[1] = {
+            ...cancelButton,
+            onClick: handleCloseAlert
         }
 
-        confirmOption.onClose = () => setSweetAlertOption(null);
+        confirmOption.onClose = () => {
+            setSweetAlertOption(null);
+            console.log('close');
+        }
 
         setSweetAlertOption(confirmOption);
 

@@ -21,7 +21,7 @@ export class FormFilter extends PureComponent {
         this.state = {
             bankAccountNumber: '',
             email: '',
-            currency: '',
+            currencyIdList: '',
             oddsGroup: '',
             specialLevel: '',
             baFilter: baStatusList.All,
@@ -46,7 +46,7 @@ export class FormFilter extends PureComponent {
         const { isAdvancedSearch } = this.props;
         if (prevProps.isAdvancedSearch !== isAdvancedSearch && !isAdvancedSearch) {
             this.setState({
-                currency: '',
+                currencyIdList: '',
                 oddsGroup: '',
                 specialLevel: '',
                 baFilter: baStatusList.All

@@ -39,8 +39,8 @@ export class AdvancedSearch extends React.Component {
 
     render() {
         const { currencyList, param } = this.props;
-        const { currency, oddsGroup, specialLevel, baFilter } = param;
-        const convertedCurrencyList = this._createSelectData(currencyList, currency);
+        const { currencyIdList, oddsGroup, specialLevel, baFilter } = param;
+        const convertedCurrencyList = this._createSelectData(currencyList, currencyIdList);
         const oddsGroupList = this._createSelectData(this.oddsGroupList, oddsGroup);
         const specialLevelList = this._createSelectData(this.specialLevelList, specialLevel);
         const selectedBaStatus = this.baStatusList.find(x => x.value === baFilter);
@@ -55,7 +55,7 @@ export class AdvancedSearch extends React.Component {
                             keyField={"Id"}
                             valueField={"Value"}
                             statusField={"Status"}
-                            onChange={(currentItem, selectedItemsKey) => this.handleChange('currency', selectedItemsKey)} />
+                            onChange={(currentItem, selectedItemsKey) => this.handleChange('currencyIdList', selectedItemsKey)} />
                     </div>
                 </div>
 
@@ -100,7 +100,7 @@ export class AdvancedSearch extends React.Component {
 
 const propTypes = {
     param: PropTypes.shape({
-        currency: PropTypes.string.isRequired,
+        currencyIdList: PropTypes.string.isRequired,
         oddsGroup: PropTypes.string.isRequired,
         specialLevel: PropTypes.string.isRequired,
         baFilter: PropTypes.number.isRequired
