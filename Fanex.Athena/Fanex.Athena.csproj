@@ -697,9 +697,15 @@
     <Content Include="Views\Desktop\Module\PlayerAdmin\PlayerBetList\Running.cshtml" />
     <Content Include="www\css\build\dev\reactpages\playeradmin\running-betlist.chunk.js.map" />
     <Content Include="www\css\build\dev\reactpages\playeradmin\running-betlist.css.map" />
+    <Content Include="www\css\source\reactpages\components\alert\index.scss" />
+    <Content Include="www\css\source\reactpages\components\alert\icons.scss" />
     <Content Include="Views\Desktop\Module\PlayerAdmin\PlayerBetLimit\Index.cshtml" />
     <None Include="www\css\source\reactpages\components\custom3rd\react-toastify.scss" />
     <None Include="www\css\source\pages\betlist\result\result.happy5.scss" />
+    <None Include="www\css\source\reactpages\components\alert\icons\error.scss" />
+    <None Include="www\css\source\reactpages\components\alert\icons\info.scss" />
+    <None Include="www\css\source\reactpages\components\alert\icons\success.scss" />
+    <None Include="www\css\source\reactpages\components\alert\icons\warning.scss" />
     <Content Include="www\css\source\reactpages\pages\betlist\images\bonus.png" />
     <Content Include="www\css\source\reactpages\pages\betlist\images\goal-icon.png" />
     <Content Include="www\css\source\reactpages\pages\betlist\images\q_Icon2_1.png" />

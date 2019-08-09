@@ -243,6 +243,3062 @@ module.exports = jszip;
 
 /***/ }),
 
+/***/ "./node_modules/@9softstudio/react-multiselect/dist/index.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/@9softstudio/react-multiselect/dist/index.js ***!
+  \*******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+!function(e,t){ true?module.exports=t():undefined}(window,function(){return function(e){var t={};function n(r){if(t[r])return t[r].exports;var o=t[r]={i:r,l:!1,exports:{}};return e[r].call(o.exports,o,o.exports,n),o.l=!0,o.exports}return n.m=e,n.c=t,n.d=function(e,t,r){n.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:r})},n.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},n.t=function(e,t){if(1&t&&(e=n(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var r=Object.create(null);if(n.r(r),Object.defineProperty(r,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var o in e)n.d(r,o,function(t){return e[t]}.bind(null,o));return r},n.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return n.d(t,"a",t),t},n.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},n.p="",n(n.s=4)}([function(e,t,n){"use strict";e.exports=n(6)},function(e,t,n){e.exports=n(11)()},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.default={"en-US":{All:"All",SelectedItemCount:"# selected",SelectOptions:"Select options"},"zh-TW":{All:"全部",SelectedItemCount:"已選  # 個項目",SelectOptions:"選擇一個選項"},"zh-CN":{All:"全部",SelectedItemCount:"已选  # 个项目",SelectOptions:"选择一个选项"},"zh-Hans":{All:"全部",SelectedItemCount:"已选  # 个项目",SelectOptions:"选择一个选项"}}},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var r=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),o=n(0),a=i(o),u=i(n(1));function i(e){return e&&e.__esModule?e:{default:e}}var l=function(e){function t(e){!function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,t);var n=function(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}(this,(t.__proto__||Object.getPrototypeOf(t)).call(this,e));return n.onChange=function(e){e.stopPropagation();var t=n.props,r=t.itemData,o=t.onChange,a={key:r.key,value:r.value,checked:!r.checked};o&&o(a)},n}return function(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}(t,o.Component),r(t,[{key:"render",value:function(){var e=this.props,t=e.itemData,n=e.id;return a.default.createElement("li",{className:"multiple-select-item"},a.default.createElement("input",{id:n,type:"checkbox",className:"option-checkbox",checked:t.checked,onChange:this.onChange}),a.default.createElement("label",{className:"option-label",htmlFor:n},t.value))}}]),t}();l.propTypes={itemData:u.default.object.isRequired,id:u.default.oneOfType([u.default.number,u.default.string]).isRequired,onChange:u.default.func},t.default=l},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var r=function(e){return e&&e.__esModule?e:{default:e}}(n(5));t.default=r.default},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var r=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),o=n(0),a=f(o),u=f(n(1)),i=f(n(13)),l=f(n(14)),c=f(n(15));function f(e){return e&&e.__esModule?e:{default:e}}function s(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var p="value",d=1,h=function(e){function t(e){!function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,t);var n=function(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}(this,(t.__proto__||Object.getPrototypeOf(t)).call(this,e));return n.onChangeHandler=function(e){var t,r=n.props,o=r.keyField,a=r.valueField,u=r.statusField,i=(s(t={},o,e.key),s(t,a,e.value),s(t,u,e.checked),t),l=n.state.dataSource.slice(0);l.find(function(t){return t.key===e.key}).checked=e.checked,n._callBackToParent(i),n.setState({dataSource:l})},n.onToggle=function(){n.setState(function(e){return{showOptionList:!e.showOptionList}},function(){n.searchInputBox&&n.state.showOptionList&&n.searchInputBox.focus()})},n.checkAllHandler=function(e){n.originalDataSource.forEach(function(t){t.checked=e});var t=n.state.searchText,r=n.originalDataSource.filter(function(e){return e[p].startsWith(t)});n.setState({dataSource:r}),n._callBackToParent(null)},n.onChangeSearchText=function(e){n.setState(function(t){var r=n.originalDataSource.filter(function(t){return t[p].startsWith(e)});return{searchText:e,dataSource:r}})},n.onClearSearch=function(){n.setState({searchText:""},function(){return n.onChangeSearchText("")})},n._close=function(){n.setState({showOptionList:!1})},n._handleDocumentClick=function(e){n.wrapper&&!n.wrapper.contains(e.target)&&n.state.showOptionList&&n._close()},n.searchInputBox=null,n.id="multiple-select-"+(e.id||d++),n.originalDataSource=n._convertDataSourceToState(e),n.state={searchText:"",showOptionList:!1,dataSource:n.originalDataSource},n}return function(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}(t,o.Component),r(t,[{key:"componentDidMount",value:function(){document.addEventListener("click",this._handleDocumentClick)}},{key:"componentWillUnmount",value:function(){document.removeEventListener("click",this._handleDocumentClick)}},{key:"_callBackToParent",value:function(e){var t=this._getSelectedItemKey(this.originalDataSource);this.props.onChange&&this.props.onChange(e,t)}},{key:"_convertDataSourceToState",value:function(e){var t=e.keyField,n=e.valueField,r=e.statusField;return e.dataSource.map(function(e){var o;return s(o={},"key",e[t]),s(o,p,e[n]),s(o,"checked",e[r]),o})}},{key:"_getSelectedItemKey",value:function(e){for(var t=[],n=0;n<e.length;n++){var r=e[n];r.checked&&t.push(r.key)}return t.join(",")}},{key:"_renderOptionAll",value:function(){if(this.props.hasAllOption){var e=this.originalDataSource.filter(function(e){return e.checked}).length===this.originalDataSource.length;return a.default.createElement(c.default,{id:this.id,checked:e,language:this.props.language,onChange:this.checkAllHandler})}return null}},{key:"_renderSearchBox",value:function(){var e=this;if(!this.props.hasSearchBox)return null;return a.default.createElement("div",{style:{width:"100%"}},a.default.createElement("input",{autoFocus:!0,onChange:function(t){return e.onChangeSearchText(t.target.value)},ref:function(t){return e.searchInputBox=t},value:this.state.searchText,type:"text",placeholder:"Search data",style:{width:"100%",border:"1px solid #ccc",padding:"5px 10px",boxSizing:"border-box"}}),a.default.createElement("button",{onClick:this.onClearSearch,style:{position:"absolute",right:"5px",width:"20px",height:"20px",border:0,margin:"5px",backgroundColor:"transparent",cursor:"pointer"}},"X"))}},{key:"render",value:function(){var e=this,t=this.props.maxDisplayItemCount;return a.default.createElement("div",{className:"multiple-select-container",id:this.id,ref:function(t){return e.wrapper=t}},a.default.createElement(i.default,{language:this.props.language,selectedItems:this.selectedItems,onToggle:this.onToggle,maxDisplayItemCount:t}),a.default.createElement("div",{className:"multiple-select-default multiple-select-options-container",style:{display:this.state.showOptionList?"block":"none"}},this._renderSearchBox(),this._renderOptionAll(),a.default.createElement(l.default,{id:this.id,dataSource:this.state.dataSource,onChange:this.onChangeHandler})))}},{key:"selectedItems",get:function(){return this.originalDataSource.filter(function(e){return e.checked})}}]),t}();h.propTypes={language:u.default.string,dataSource:u.default.arrayOf(u.default.object).isRequired,keyField:u.default.string,valueField:u.default.string,statusField:u.default.string,maxDisplayItemCount:u.default.number,onChange:u.default.func,hasAllOption:u.default.bool,hasSearchBox:u.default.bool},h.defaultProps={language:"en-US",keyField:"key",valueField:p,statusField:"checked",hasAllOption:!0,hasSearchBox:!1},t.default=h},function(e,t,n){"use strict";
+/** @license React v16.4.1
+ * react.production.min.js
+ *
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */var r=n(7),o=n(8),a=n(9),u=n(10),i="function"==typeof Symbol&&Symbol.for,l=i?Symbol.for("react.element"):60103,c=i?Symbol.for("react.portal"):60106,f=i?Symbol.for("react.fragment"):60107,s=i?Symbol.for("react.strict_mode"):60108,p=i?Symbol.for("react.profiler"):60114,d=i?Symbol.for("react.provider"):60109,h=i?Symbol.for("react.context"):60110,y=i?Symbol.for("react.async_mode"):60111,m=i?Symbol.for("react.forward_ref"):60112;i&&Symbol.for("react.timeout");var b="function"==typeof Symbol&&Symbol.iterator;function v(e){for(var t=arguments.length-1,n="https://reactjs.org/docs/error-decoder.html?invariant="+e,r=0;r<t;r++)n+="&args[]="+encodeURIComponent(arguments[r+1]);o(!1,"Minified React error #"+e+"; visit %s for the full message or use the non-minified dev environment for full errors and additional helpful warnings. ",n)}var g={isMounted:function(){return!1},enqueueForceUpdate:function(){},enqueueReplaceState:function(){},enqueueSetState:function(){}};function _(e,t,n){this.props=e,this.context=t,this.refs=a,this.updater=n||g}function O(){}function S(e,t,n){this.props=e,this.context=t,this.refs=a,this.updater=n||g}_.prototype.isReactComponent={},_.prototype.setState=function(e,t){"object"!=typeof e&&"function"!=typeof e&&null!=e&&v("85"),this.updater.enqueueSetState(this,e,t,"setState")},_.prototype.forceUpdate=function(e){this.updater.enqueueForceUpdate(this,e,"forceUpdate")},O.prototype=_.prototype;var k=S.prototype=new O;k.constructor=S,r(k,_.prototype),k.isPureReactComponent=!0;var w={current:null},j=Object.prototype.hasOwnProperty,x={key:!0,ref:!0,__self:!0,__source:!0};function C(e,t,n){var r=void 0,o={},a=null,u=null;if(null!=t)for(r in void 0!==t.ref&&(u=t.ref),void 0!==t.key&&(a=""+t.key),t)j.call(t,r)&&!x.hasOwnProperty(r)&&(o[r]=t[r]);var i=arguments.length-2;if(1===i)o.children=n;else if(1<i){for(var c=Array(i),f=0;f<i;f++)c[f]=arguments[f+2];o.children=c}if(e&&e.defaultProps)for(r in i=e.defaultProps)void 0===o[r]&&(o[r]=i[r]);return{$$typeof:l,type:e,key:a,ref:u,props:o,_owner:w.current}}function P(e){return"object"==typeof e&&null!==e&&e.$$typeof===l}var E=/\/+/g,T=[];function R(e,t,n,r){if(T.length){var o=T.pop();return o.result=e,o.keyPrefix=t,o.func=n,o.context=r,o.count=0,o}return{result:e,keyPrefix:t,func:n,context:r,count:0}}function I(e){e.result=null,e.keyPrefix=null,e.func=null,e.context=null,e.count=0,10>T.length&&T.push(e)}function D(e,t,n,r){var o=typeof e;"undefined"!==o&&"boolean"!==o||(e=null);var a=!1;if(null===e)a=!0;else switch(o){case"string":case"number":a=!0;break;case"object":switch(e.$$typeof){case l:case c:a=!0}}if(a)return n(r,e,""===t?"."+A(e,0):t),1;if(a=0,t=""===t?".":t+":",Array.isArray(e))for(var u=0;u<e.length;u++){var i=t+A(o=e[u],u);a+=D(o,i,n,r)}else if(null===e||void 0===e?i=null:i="function"==typeof(i=b&&e[b]||e["@@iterator"])?i:null,"function"==typeof i)for(e=i.call(e),u=0;!(o=e.next()).done;)a+=D(o=o.value,i=t+A(o,u++),n,r);else"object"===o&&v("31","[object Object]"===(n=""+e)?"object with keys {"+Object.keys(e).join(", ")+"}":n,"");return a}function A(e,t){return"object"==typeof e&&null!==e&&null!=e.key?function(e){var t={"=":"=0",":":"=2"};return"$"+(""+e).replace(/[=:]/g,function(e){return t[e]})}(e.key):t.toString(36)}function M(e,t){e.func.call(e.context,t,e.count++)}function F(e,t,n){var r=e.result,o=e.keyPrefix;e=e.func.call(e.context,t,e.count++),Array.isArray(e)?N(e,r,n,u.thatReturnsArgument):null!=e&&(P(e)&&(t=o+(!e.key||t&&t.key===e.key?"":(""+e.key).replace(E,"$&/")+"/")+n,e={$$typeof:l,type:e.type,key:t,ref:e.ref,props:e.props,_owner:e._owner}),r.push(e))}function N(e,t,n,r,o){var a="";null!=n&&(a=(""+n).replace(E,"$&/")+"/"),t=R(t,a,r,o),null==e||D(e,"",F,t),I(t)}var $={Children:{map:function(e,t,n){if(null==e)return e;var r=[];return N(e,r,null,t,n),r},forEach:function(e,t,n){if(null==e)return e;t=R(null,null,t,n),null==e||D(e,"",M,t),I(t)},count:function(e){return null==e?0:D(e,"",u.thatReturnsNull,null)},toArray:function(e){var t=[];return N(e,t,null,u.thatReturnsArgument),t},only:function(e){return P(e)||v("143"),e}},createRef:function(){return{current:null}},Component:_,PureComponent:S,createContext:function(e,t){return void 0===t&&(t=null),(e={$$typeof:h,_calculateChangedBits:t,_defaultValue:e,_currentValue:e,_currentValue2:e,_changedBits:0,_changedBits2:0,Provider:null,Consumer:null}).Provider={$$typeof:d,_context:e},e.Consumer=e},forwardRef:function(e){return{$$typeof:m,render:e}},Fragment:f,StrictMode:s,unstable_AsyncMode:y,unstable_Profiler:p,createElement:C,cloneElement:function(e,t,n){(null===e||void 0===e)&&v("267",e);var o=void 0,a=r({},e.props),u=e.key,i=e.ref,c=e._owner;if(null!=t){void 0!==t.ref&&(i=t.ref,c=w.current),void 0!==t.key&&(u=""+t.key);var f=void 0;for(o in e.type&&e.type.defaultProps&&(f=e.type.defaultProps),t)j.call(t,o)&&!x.hasOwnProperty(o)&&(a[o]=void 0===t[o]&&void 0!==f?f[o]:t[o])}if(1===(o=arguments.length-2))a.children=n;else if(1<o){f=Array(o);for(var s=0;s<o;s++)f[s]=arguments[s+2];a.children=f}return{$$typeof:l,type:e.type,key:u,ref:i,props:a,_owner:c}},createFactory:function(e){var t=C.bind(null,e);return t.type=e,t},isValidElement:P,version:"16.4.1",__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED:{ReactCurrentOwner:w,assign:r}},B={default:$},L=B&&$||B;e.exports=L.default?L.default:L},function(e,t,n){"use strict";
+/*
+object-assign
+(c) Sindre Sorhus
+@license MIT
+*/var r=Object.getOwnPropertySymbols,o=Object.prototype.hasOwnProperty,a=Object.prototype.propertyIsEnumerable;e.exports=function(){try{if(!Object.assign)return!1;var e=new String("abc");if(e[5]="de","5"===Object.getOwnPropertyNames(e)[0])return!1;for(var t={},n=0;n<10;n++)t["_"+String.fromCharCode(n)]=n;if("0123456789"!==Object.getOwnPropertyNames(t).map(function(e){return t[e]}).join(""))return!1;var r={};return"abcdefghijklmnopqrst".split("").forEach(function(e){r[e]=e}),"abcdefghijklmnopqrst"===Object.keys(Object.assign({},r)).join("")}catch(e){return!1}}()?Object.assign:function(e,t){for(var n,u,i=function(e){if(null===e||void 0===e)throw new TypeError("Object.assign cannot be called with null or undefined");return Object(e)}(e),l=1;l<arguments.length;l++){for(var c in n=Object(arguments[l]))o.call(n,c)&&(i[c]=n[c]);if(r){u=r(n);for(var f=0;f<u.length;f++)a.call(n,u[f])&&(i[u[f]]=n[u[f]])}}return i}},function(e,t,n){"use strict";var r=function(e){};e.exports=function(e,t,n,o,a,u,i,l){if(r(t),!e){var c;if(void 0===t)c=new Error("Minified exception occurred; use the non-minified dev environment for the full error message and additional helpful warnings.");else{var f=[n,o,a,u,i,l],s=0;(c=new Error(t.replace(/%s/g,function(){return f[s++]}))).name="Invariant Violation"}throw c.framesToPop=1,c}}},function(e,t,n){"use strict";e.exports={}},function(e,t,n){"use strict";function r(e){return function(){return e}}var o=function(){};o.thatReturns=r,o.thatReturnsFalse=r(!1),o.thatReturnsTrue=r(!0),o.thatReturnsNull=r(null),o.thatReturnsThis=function(){return this},o.thatReturnsArgument=function(e){return e},e.exports=o},function(e,t,n){"use strict";var r=n(12);function o(){}e.exports=function(){function e(e,t,n,o,a,u){if(u!==r){var i=new Error("Calling PropTypes validators directly is not supported by the `prop-types` package. Use PropTypes.checkPropTypes() to call them. Read more at http://fb.me/use-check-prop-types");throw i.name="Invariant Violation",i}}function t(){return e}e.isRequired=e;var n={array:e,bool:e,func:e,number:e,object:e,string:e,symbol:e,any:e,arrayOf:t,element:e,instanceOf:t,node:e,objectOf:t,oneOf:t,oneOfType:t,shape:t,exact:t};return n.checkPropTypes=o,n.PropTypes=n,n}},function(e,t,n){"use strict";e.exports="SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED"},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var r=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),o=n(0),a=l(o),u=l(n(1)),i=l(n(2));function l(e){return e&&e.__esModule?e:{default:e}}var c=function(e){function t(e){return function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,t),function(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}(this,(t.__proto__||Object.getPrototypeOf(t)).call(this,e))}return function(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}(t,o.Component),r(t,[{key:"render",value:function(){return a.default.createElement("button",{type:"button",className:"multiple-select-default multiple-select-label",onClick:this.props.onToggle},a.default.createElement("span",{className:"text-display",title:this.selectedItemsString},this.selectedItemsString),a.default.createElement("b",{className:"caret"}))}},{key:"selectedItemsString",get:function(){var e=this.props,t=e.selectedItems,n=e.maxDisplayItemCount,r=t.map(function(e){return e.value}),o=i.default[this.props.language],a=o.SelectOptions,u=r.length;return u>=n?a=o.SelectedItemCount.replace("#",u):u>=1&&(a=r.join(", ")),a}}]),t}();c.propTypes={language:u.default.string,selectedItems:u.default.arrayOf(u.default.object).isRequired,maxDisplayItemCount:u.default.number},c.defaultProps={language:"en-US",maxDisplayItemCount:3},t.default=c},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var r=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),o=n(0),a=l(o),u=l(n(1)),i=l(n(3));function l(e){return e&&e.__esModule?e:{default:e}}var c=function(e){function t(e){return function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,t),function(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}(this,(t.__proto__||Object.getPrototypeOf(t)).call(this,e))}return function(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}(t,o.Component),r(t,[{key:"_renderOptionList",value:function(){var e=this.props,t=e.dataSource,n=e.onChange,r=e.id;return t&&t.length?t.map(function(e,t){return a.default.createElement(i.default,{id:r+"-optionItem-"+t,key:r+"optionItem"+t,itemData:e,onChange:n})}):a.default.createElement("span",null,"No information")}},{key:"render",value:function(){return a.default.createElement("ul",{className:"multiple-select-options"},this._renderOptionList())}}]),t}();c.propTypes={dataSource:u.default.arrayOf(u.default.object).isRequired,id:u.default.oneOfType([u.default.number,u.default.string]).isRequired,onChange:u.default.func},t.default=c},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var r=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),o=n(0),a=c(o),u=c(n(1)),i=c(n(3)),l=c(n(2));function c(e){return e&&e.__esModule?e:{default:e}}var f=function(e){function t(e){!function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,t);var n=function(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}(this,(t.__proto__||Object.getPrototypeOf(t)).call(this,e));return n.changeHandler=function(e){var t=e.checked;n.props.onChange&&n.props.onChange(t)},n.itemData={key:"All",value:l.default[n.props.language].All},n}return function(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}(t,o.Component),r(t,[{key:"render",value:function(){var e=this.props,t=e.id,n=e.checked;return this.itemData.checked=n,a.default.createElement("ul",{className:"multiple-select-options multiple-select-option-all"},a.default.createElement(i.default,{id:t+"-optionItemAll",itemData:this.itemData,onChange:this.changeHandler}))}}]),t}();f.propTypes={language:u.default.string,onChange:u.default.func,id:u.default.oneOfType([u.default.number,u.default.string]).isRequired,checked:u.default.bool},f.defaultProps={language:"en-US",checked:!1},t.default=f}])});
+
+/***/ }),
+
+/***/ "./node_modules/classnames/index.js":
+/*!******************************************!*\
+  !*** ./node_modules/classnames/index.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+  Copyright (c) 2016 Jed Watson.
+  Licensed under the MIT License (MIT), see
+  http://jedwatson.github.io/classnames
+*/
+/* global define */
+
+(function () {
+	'use strict';
+
+	var hasOwn = {}.hasOwnProperty;
+
+	function classNames () {
+		var classes = [];
+
+		for (var i = 0; i < arguments.length; i++) {
+			var arg = arguments[i];
+			if (!arg) continue;
+
+			var argType = typeof arg;
+
+			if (argType === 'string' || argType === 'number') {
+				classes.push(arg);
+			} else if (Array.isArray(arg)) {
+				classes.push(classNames.apply(null, arg));
+			} else if (argType === 'object') {
+				for (var key in arg) {
+					if (hasOwn.call(arg, key) && arg[key]) {
+						classes.push(key);
+					}
+				}
+			}
+		}
+
+		return classes.join(' ');
+	}
+
+	if (typeof module !== 'undefined' && module.exports) {
+		module.exports = classNames;
+	} else if (true) {
+		// register as 'classnames', consistent with npm package name
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function () {
+			return classNames;
+		}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	} else {}
+}());
+
+
+/***/ }),
+
+/***/ "./node_modules/react-input-autosize/lib/AutosizeInput.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/react-input-autosize/lib/AutosizeInput.js ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var sizerStyle = {
+	position: 'absolute',
+	top: 0,
+	left: 0,
+	visibility: 'hidden',
+	height: 0,
+	overflow: 'scroll',
+	whiteSpace: 'pre'
+};
+
+var INPUT_PROPS_BLACKLIST = ['extraWidth', 'injectStyles', 'inputClassName', 'inputRef', 'inputStyle', 'minWidth', 'onAutosize', 'placeholderIsMinWidth'];
+
+var cleanInputProps = function cleanInputProps(inputProps) {
+	INPUT_PROPS_BLACKLIST.forEach(function (field) {
+		return delete inputProps[field];
+	});
+	return inputProps;
+};
+
+var copyStyles = function copyStyles(styles, node) {
+	node.style.fontSize = styles.fontSize;
+	node.style.fontFamily = styles.fontFamily;
+	node.style.fontWeight = styles.fontWeight;
+	node.style.fontStyle = styles.fontStyle;
+	node.style.letterSpacing = styles.letterSpacing;
+	node.style.textTransform = styles.textTransform;
+};
+
+var isIE = typeof window !== 'undefined' && window.navigator ? /MSIE |Trident\/|Edge\//.test(window.navigator.userAgent) : false;
+
+var generateId = function generateId() {
+	// we only need an auto-generated ID for stylesheet injection, which is only
+	// used for IE. so if the browser is not IE, this should return undefined.
+	return isIE ? '_' + Math.random().toString(36).substr(2, 12) : undefined;
+};
+
+var AutosizeInput = function (_Component) {
+	_inherits(AutosizeInput, _Component);
+
+	function AutosizeInput(props) {
+		_classCallCheck(this, AutosizeInput);
+
+		var _this = _possibleConstructorReturn(this, (AutosizeInput.__proto__ || Object.getPrototypeOf(AutosizeInput)).call(this, props));
+
+		_this.inputRef = function (el) {
+			_this.input = el;
+			if (typeof _this.props.inputRef === 'function') {
+				_this.props.inputRef(el);
+			}
+		};
+
+		_this.placeHolderSizerRef = function (el) {
+			_this.placeHolderSizer = el;
+		};
+
+		_this.sizerRef = function (el) {
+			_this.sizer = el;
+		};
+
+		_this.state = {
+			inputWidth: props.minWidth,
+			inputId: props.id || generateId()
+		};
+		return _this;
+	}
+
+	_createClass(AutosizeInput, [{
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			this.mounted = true;
+			this.copyInputStyles();
+			this.updateInputWidth();
+		}
+	}, {
+		key: 'componentWillReceiveProps',
+		value: function componentWillReceiveProps(nextProps) {
+			var id = nextProps.id;
+
+			if (id !== this.props.id) {
+				this.setState({ inputId: id || generateId() });
+			}
+		}
+	}, {
+		key: 'componentDidUpdate',
+		value: function componentDidUpdate(prevProps, prevState) {
+			if (prevState.inputWidth !== this.state.inputWidth) {
+				if (typeof this.props.onAutosize === 'function') {
+					this.props.onAutosize(this.state.inputWidth);
+				}
+			}
+			this.updateInputWidth();
+		}
+	}, {
+		key: 'componentWillUnmount',
+		value: function componentWillUnmount() {
+			this.mounted = false;
+		}
+	}, {
+		key: 'copyInputStyles',
+		value: function copyInputStyles() {
+			if (!this.mounted || !window.getComputedStyle) {
+				return;
+			}
+			var inputStyles = this.input && window.getComputedStyle(this.input);
+			if (!inputStyles) {
+				return;
+			}
+			copyStyles(inputStyles, this.sizer);
+			if (this.placeHolderSizer) {
+				copyStyles(inputStyles, this.placeHolderSizer);
+			}
+		}
+	}, {
+		key: 'updateInputWidth',
+		value: function updateInputWidth() {
+			if (!this.mounted || !this.sizer || typeof this.sizer.scrollWidth === 'undefined') {
+				return;
+			}
+			var newInputWidth = void 0;
+			if (this.props.placeholder && (!this.props.value || this.props.value && this.props.placeholderIsMinWidth)) {
+				newInputWidth = Math.max(this.sizer.scrollWidth, this.placeHolderSizer.scrollWidth) + 2;
+			} else {
+				newInputWidth = this.sizer.scrollWidth + 2;
+			}
+			// add extraWidth to the detected width. for number types, this defaults to 16 to allow for the stepper UI
+			var extraWidth = this.props.type === 'number' && this.props.extraWidth === undefined ? 16 : parseInt(this.props.extraWidth) || 0;
+			newInputWidth += extraWidth;
+			if (newInputWidth < this.props.minWidth) {
+				newInputWidth = this.props.minWidth;
+			}
+			if (newInputWidth !== this.state.inputWidth) {
+				this.setState({
+					inputWidth: newInputWidth
+				});
+			}
+		}
+	}, {
+		key: 'getInput',
+		value: function getInput() {
+			return this.input;
+		}
+	}, {
+		key: 'focus',
+		value: function focus() {
+			this.input.focus();
+		}
+	}, {
+		key: 'blur',
+		value: function blur() {
+			this.input.blur();
+		}
+	}, {
+		key: 'select',
+		value: function select() {
+			this.input.select();
+		}
+	}, {
+		key: 'renderStyles',
+		value: function renderStyles() {
+			// this method injects styles to hide IE's clear indicator, which messes
+			// with input size detection. the stylesheet is only injected when the
+			// browser is IE, and can also be disabled by the `injectStyles` prop.
+			var injectStyles = this.props.injectStyles;
+
+			return isIE && injectStyles ? _react2.default.createElement('style', { dangerouslySetInnerHTML: {
+					__html: 'input#' + this.state.inputId + '::-ms-clear {display: none;}'
+				} }) : null;
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			var sizerValue = [this.props.defaultValue, this.props.value, ''].reduce(function (previousValue, currentValue) {
+				if (previousValue !== null && previousValue !== undefined) {
+					return previousValue;
+				}
+				return currentValue;
+			});
+
+			var wrapperStyle = _extends({}, this.props.style);
+			if (!wrapperStyle.display) wrapperStyle.display = 'inline-block';
+
+			var inputStyle = _extends({
+				boxSizing: 'content-box',
+				width: this.state.inputWidth + 'px'
+			}, this.props.inputStyle);
+
+			var inputProps = _objectWithoutProperties(this.props, []);
+
+			cleanInputProps(inputProps);
+			inputProps.className = this.props.inputClassName;
+			inputProps.id = this.state.inputId;
+			inputProps.style = inputStyle;
+
+			return _react2.default.createElement(
+				'div',
+				{ className: this.props.className, style: wrapperStyle },
+				this.renderStyles(),
+				_react2.default.createElement('input', _extends({}, inputProps, { ref: this.inputRef })),
+				_react2.default.createElement(
+					'div',
+					{ ref: this.sizerRef, style: sizerStyle },
+					sizerValue
+				),
+				this.props.placeholder ? _react2.default.createElement(
+					'div',
+					{ ref: this.placeHolderSizerRef, style: sizerStyle },
+					this.props.placeholder
+				) : null
+			);
+		}
+	}]);
+
+	return AutosizeInput;
+}(_react.Component);
+
+AutosizeInput.propTypes = {
+	className: _propTypes2.default.string, // className for the outer element
+	defaultValue: _propTypes2.default.any, // default field value
+	extraWidth: _propTypes2.default.oneOfType([// additional width for input element
+	_propTypes2.default.number, _propTypes2.default.string]),
+	id: _propTypes2.default.string, // id to use for the input, can be set for consistent snapshots
+	injectStyles: _propTypes2.default.bool, // inject the custom stylesheet to hide clear UI, defaults to true
+	inputClassName: _propTypes2.default.string, // className for the input element
+	inputRef: _propTypes2.default.func, // ref callback for the input element
+	inputStyle: _propTypes2.default.object, // css styles for the input element
+	minWidth: _propTypes2.default.oneOfType([// minimum width for input element
+	_propTypes2.default.number, _propTypes2.default.string]),
+	onAutosize: _propTypes2.default.func, // onAutosize handler: function(newWidth) {}
+	onChange: _propTypes2.default.func, // onChange handler: function(event) {}
+	placeholder: _propTypes2.default.string, // placeholder text
+	placeholderIsMinWidth: _propTypes2.default.bool, // don't collapse size to less than the placeholder
+	style: _propTypes2.default.object, // css styles for the outer element
+	value: _propTypes2.default.any // field value
+};
+AutosizeInput.defaultProps = {
+	minWidth: 1,
+	injectStyles: true
+};
+
+exports.default = AutosizeInput;
+
+/***/ }),
+
+/***/ "./node_modules/react-select/dist/react-select.es.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/react-select/dist/react-select.es.js ***!
+  \***********************************************************/
+/*! exports provided: Async, AsyncCreatable, Creatable, Value, Option, defaultMenuRenderer, defaultArrowRenderer, defaultClearRenderer, defaultFilterOptions, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Async", function() { return Async; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AsyncCreatable", function() { return AsyncCreatableSelect; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Creatable", function() { return CreatableSelect; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Value", function() { return Value; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Option", function() { return Option; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "defaultMenuRenderer", function() { return menuRenderer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "defaultArrowRenderer", function() { return arrowRenderer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "defaultClearRenderer", function() { return clearRenderer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "defaultFilterOptions", function() { return filterOptions; });
+/* harmony import */ var react_input_autosize__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-input-autosize */ "./node_modules/react-input-autosize/lib/AutosizeInput.js");
+/* harmony import */ var react_input_autosize__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_input_autosize__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_4__);
+
+
+
+
+
+
+var arrowRenderer = function arrowRenderer(_ref) {
+	var onMouseDown = _ref.onMouseDown;
+
+	return react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement('span', {
+		className: 'Select-arrow',
+		onMouseDown: onMouseDown
+	});
+};
+
+arrowRenderer.propTypes = {
+	onMouseDown: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func
+};
+
+var clearRenderer = function clearRenderer() {
+	return react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement('span', {
+		className: 'Select-clear',
+		dangerouslySetInnerHTML: { __html: '&times;' }
+	});
+};
+
+var map = [{ 'base': 'A', 'letters': /[\u0041\u24B6\uFF21\u00C0\u00C1\u00C2\u1EA6\u1EA4\u1EAA\u1EA8\u00C3\u0100\u0102\u1EB0\u1EAE\u1EB4\u1EB2\u0226\u01E0\u00C4\u01DE\u1EA2\u00C5\u01FA\u01CD\u0200\u0202\u1EA0\u1EAC\u1EB6\u1E00\u0104\u023A\u2C6F]/g }, { 'base': 'AA', 'letters': /[\uA732]/g }, { 'base': 'AE', 'letters': /[\u00C6\u01FC\u01E2]/g }, { 'base': 'AO', 'letters': /[\uA734]/g }, { 'base': 'AU', 'letters': /[\uA736]/g }, { 'base': 'AV', 'letters': /[\uA738\uA73A]/g }, { 'base': 'AY', 'letters': /[\uA73C]/g }, { 'base': 'B', 'letters': /[\u0042\u24B7\uFF22\u1E02\u1E04\u1E06\u0243\u0182\u0181]/g }, { 'base': 'C', 'letters': /[\u0043\u24B8\uFF23\u0106\u0108\u010A\u010C\u00C7\u1E08\u0187\u023B\uA73E]/g }, { 'base': 'D', 'letters': /[\u0044\u24B9\uFF24\u1E0A\u010E\u1E0C\u1E10\u1E12\u1E0E\u0110\u018B\u018A\u0189\uA779]/g }, { 'base': 'DZ', 'letters': /[\u01F1\u01C4]/g }, { 'base': 'Dz', 'letters': /[\u01F2\u01C5]/g }, { 'base': 'E', 'letters': /[\u0045\u24BA\uFF25\u00C8\u00C9\u00CA\u1EC0\u1EBE\u1EC4\u1EC2\u1EBC\u0112\u1E14\u1E16\u0114\u0116\u00CB\u1EBA\u011A\u0204\u0206\u1EB8\u1EC6\u0228\u1E1C\u0118\u1E18\u1E1A\u0190\u018E]/g }, { 'base': 'F', 'letters': /[\u0046\u24BB\uFF26\u1E1E\u0191\uA77B]/g }, { 'base': 'G', 'letters': /[\u0047\u24BC\uFF27\u01F4\u011C\u1E20\u011E\u0120\u01E6\u0122\u01E4\u0193\uA7A0\uA77D\uA77E]/g }, { 'base': 'H', 'letters': /[\u0048\u24BD\uFF28\u0124\u1E22\u1E26\u021E\u1E24\u1E28\u1E2A\u0126\u2C67\u2C75\uA78D]/g }, { 'base': 'I', 'letters': /[\u0049\u24BE\uFF29\u00CC\u00CD\u00CE\u0128\u012A\u012C\u0130\u00CF\u1E2E\u1EC8\u01CF\u0208\u020A\u1ECA\u012E\u1E2C\u0197]/g }, { 'base': 'J', 'letters': /[\u004A\u24BF\uFF2A\u0134\u0248]/g }, { 'base': 'K', 'letters': /[\u004B\u24C0\uFF2B\u1E30\u01E8\u1E32\u0136\u1E34\u0198\u2C69\uA740\uA742\uA744\uA7A2]/g }, { 'base': 'L', 'letters': /[\u004C\u24C1\uFF2C\u013F\u0139\u013D\u1E36\u1E38\u013B\u1E3C\u1E3A\u0141\u023D\u2C62\u2C60\uA748\uA746\uA780]/g }, { 'base': 'LJ', 'letters': /[\u01C7]/g }, { 'base': 'Lj', 'letters': /[\u01C8]/g }, { 'base': 'M', 'letters': /[\u004D\u24C2\uFF2D\u1E3E\u1E40\u1E42\u2C6E\u019C]/g }, { 'base': 'N', 'letters': /[\u004E\u24C3\uFF2E\u01F8\u0143\u00D1\u1E44\u0147\u1E46\u0145\u1E4A\u1E48\u0220\u019D\uA790\uA7A4]/g }, { 'base': 'NJ', 'letters': /[\u01CA]/g }, { 'base': 'Nj', 'letters': /[\u01CB]/g }, { 'base': 'O', 'letters': /[\u004F\u24C4\uFF2F\u00D2\u00D3\u00D4\u1ED2\u1ED0\u1ED6\u1ED4\u00D5\u1E4C\u022C\u1E4E\u014C\u1E50\u1E52\u014E\u022E\u0230\u00D6\u022A\u1ECE\u0150\u01D1\u020C\u020E\u01A0\u1EDC\u1EDA\u1EE0\u1EDE\u1EE2\u1ECC\u1ED8\u01EA\u01EC\u00D8\u01FE\u0186\u019F\uA74A\uA74C]/g }, { 'base': 'OI', 'letters': /[\u01A2]/g }, { 'base': 'OO', 'letters': /[\uA74E]/g }, { 'base': 'OU', 'letters': /[\u0222]/g }, { 'base': 'P', 'letters': /[\u0050\u24C5\uFF30\u1E54\u1E56\u01A4\u2C63\uA750\uA752\uA754]/g }, { 'base': 'Q', 'letters': /[\u0051\u24C6\uFF31\uA756\uA758\u024A]/g }, { 'base': 'R', 'letters': /[\u0052\u24C7\uFF32\u0154\u1E58\u0158\u0210\u0212\u1E5A\u1E5C\u0156\u1E5E\u024C\u2C64\uA75A\uA7A6\uA782]/g }, { 'base': 'S', 'letters': /[\u0053\u24C8\uFF33\u1E9E\u015A\u1E64\u015C\u1E60\u0160\u1E66\u1E62\u1E68\u0218\u015E\u2C7E\uA7A8\uA784]/g }, { 'base': 'T', 'letters': /[\u0054\u24C9\uFF34\u1E6A\u0164\u1E6C\u021A\u0162\u1E70\u1E6E\u0166\u01AC\u01AE\u023E\uA786]/g }, { 'base': 'TZ', 'letters': /[\uA728]/g }, { 'base': 'U', 'letters': /[\u0055\u24CA\uFF35\u00D9\u00DA\u00DB\u0168\u1E78\u016A\u1E7A\u016C\u00DC\u01DB\u01D7\u01D5\u01D9\u1EE6\u016E\u0170\u01D3\u0214\u0216\u01AF\u1EEA\u1EE8\u1EEE\u1EEC\u1EF0\u1EE4\u1E72\u0172\u1E76\u1E74\u0244]/g }, { 'base': 'V', 'letters': /[\u0056\u24CB\uFF36\u1E7C\u1E7E\u01B2\uA75E\u0245]/g }, { 'base': 'VY', 'letters': /[\uA760]/g }, { 'base': 'W', 'letters': /[\u0057\u24CC\uFF37\u1E80\u1E82\u0174\u1E86\u1E84\u1E88\u2C72]/g }, { 'base': 'X', 'letters': /[\u0058\u24CD\uFF38\u1E8A\u1E8C]/g }, { 'base': 'Y', 'letters': /[\u0059\u24CE\uFF39\u1EF2\u00DD\u0176\u1EF8\u0232\u1E8E\u0178\u1EF6\u1EF4\u01B3\u024E\u1EFE]/g }, { 'base': 'Z', 'letters': /[\u005A\u24CF\uFF3A\u0179\u1E90\u017B\u017D\u1E92\u1E94\u01B5\u0224\u2C7F\u2C6B\uA762]/g }, { 'base': 'a', 'letters': /[\u0061\u24D0\uFF41\u1E9A\u00E0\u00E1\u00E2\u1EA7\u1EA5\u1EAB\u1EA9\u00E3\u0101\u0103\u1EB1\u1EAF\u1EB5\u1EB3\u0227\u01E1\u00E4\u01DF\u1EA3\u00E5\u01FB\u01CE\u0201\u0203\u1EA1\u1EAD\u1EB7\u1E01\u0105\u2C65\u0250]/g }, { 'base': 'aa', 'letters': /[\uA733]/g }, { 'base': 'ae', 'letters': /[\u00E6\u01FD\u01E3]/g }, { 'base': 'ao', 'letters': /[\uA735]/g }, { 'base': 'au', 'letters': /[\uA737]/g }, { 'base': 'av', 'letters': /[\uA739\uA73B]/g }, { 'base': 'ay', 'letters': /[\uA73D]/g }, { 'base': 'b', 'letters': /[\u0062\u24D1\uFF42\u1E03\u1E05\u1E07\u0180\u0183\u0253]/g }, { 'base': 'c', 'letters': /[\u0063\u24D2\uFF43\u0107\u0109\u010B\u010D\u00E7\u1E09\u0188\u023C\uA73F\u2184]/g }, { 'base': 'd', 'letters': /[\u0064\u24D3\uFF44\u1E0B\u010F\u1E0D\u1E11\u1E13\u1E0F\u0111\u018C\u0256\u0257\uA77A]/g }, { 'base': 'dz', 'letters': /[\u01F3\u01C6]/g }, { 'base': 'e', 'letters': /[\u0065\u24D4\uFF45\u00E8\u00E9\u00EA\u1EC1\u1EBF\u1EC5\u1EC3\u1EBD\u0113\u1E15\u1E17\u0115\u0117\u00EB\u1EBB\u011B\u0205\u0207\u1EB9\u1EC7\u0229\u1E1D\u0119\u1E19\u1E1B\u0247\u025B\u01DD]/g }, { 'base': 'f', 'letters': /[\u0066\u24D5\uFF46\u1E1F\u0192\uA77C]/g }, { 'base': 'g', 'letters': /[\u0067\u24D6\uFF47\u01F5\u011D\u1E21\u011F\u0121\u01E7\u0123\u01E5\u0260\uA7A1\u1D79\uA77F]/g }, { 'base': 'h', 'letters': /[\u0068\u24D7\uFF48\u0125\u1E23\u1E27\u021F\u1E25\u1E29\u1E2B\u1E96\u0127\u2C68\u2C76\u0265]/g }, { 'base': 'hv', 'letters': /[\u0195]/g }, { 'base': 'i', 'letters': /[\u0069\u24D8\uFF49\u00EC\u00ED\u00EE\u0129\u012B\u012D\u00EF\u1E2F\u1EC9\u01D0\u0209\u020B\u1ECB\u012F\u1E2D\u0268\u0131]/g }, { 'base': 'j', 'letters': /[\u006A\u24D9\uFF4A\u0135\u01F0\u0249]/g }, { 'base': 'k', 'letters': /[\u006B\u24DA\uFF4B\u1E31\u01E9\u1E33\u0137\u1E35\u0199\u2C6A\uA741\uA743\uA745\uA7A3]/g }, { 'base': 'l', 'letters': /[\u006C\u24DB\uFF4C\u0140\u013A\u013E\u1E37\u1E39\u013C\u1E3D\u1E3B\u017F\u0142\u019A\u026B\u2C61\uA749\uA781\uA747]/g }, { 'base': 'lj', 'letters': /[\u01C9]/g }, { 'base': 'm', 'letters': /[\u006D\u24DC\uFF4D\u1E3F\u1E41\u1E43\u0271\u026F]/g }, { 'base': 'n', 'letters': /[\u006E\u24DD\uFF4E\u01F9\u0144\u00F1\u1E45\u0148\u1E47\u0146\u1E4B\u1E49\u019E\u0272\u0149\uA791\uA7A5]/g }, { 'base': 'nj', 'letters': /[\u01CC]/g }, { 'base': 'o', 'letters': /[\u006F\u24DE\uFF4F\u00F2\u00F3\u00F4\u1ED3\u1ED1\u1ED7\u1ED5\u00F5\u1E4D\u022D\u1E4F\u014D\u1E51\u1E53\u014F\u022F\u0231\u00F6\u022B\u1ECF\u0151\u01D2\u020D\u020F\u01A1\u1EDD\u1EDB\u1EE1\u1EDF\u1EE3\u1ECD\u1ED9\u01EB\u01ED\u00F8\u01FF\u0254\uA74B\uA74D\u0275]/g }, { 'base': 'oi', 'letters': /[\u01A3]/g }, { 'base': 'ou', 'letters': /[\u0223]/g }, { 'base': 'oo', 'letters': /[\uA74F]/g }, { 'base': 'p', 'letters': /[\u0070\u24DF\uFF50\u1E55\u1E57\u01A5\u1D7D\uA751\uA753\uA755]/g }, { 'base': 'q', 'letters': /[\u0071\u24E0\uFF51\u024B\uA757\uA759]/g }, { 'base': 'r', 'letters': /[\u0072\u24E1\uFF52\u0155\u1E59\u0159\u0211\u0213\u1E5B\u1E5D\u0157\u1E5F\u024D\u027D\uA75B\uA7A7\uA783]/g }, { 'base': 's', 'letters': /[\u0073\u24E2\uFF53\u00DF\u015B\u1E65\u015D\u1E61\u0161\u1E67\u1E63\u1E69\u0219\u015F\u023F\uA7A9\uA785\u1E9B]/g }, { 'base': 't', 'letters': /[\u0074\u24E3\uFF54\u1E6B\u1E97\u0165\u1E6D\u021B\u0163\u1E71\u1E6F\u0167\u01AD\u0288\u2C66\uA787]/g }, { 'base': 'tz', 'letters': /[\uA729]/g }, { 'base': 'u', 'letters': /[\u0075\u24E4\uFF55\u00F9\u00FA\u00FB\u0169\u1E79\u016B\u1E7B\u016D\u00FC\u01DC\u01D8\u01D6\u01DA\u1EE7\u016F\u0171\u01D4\u0215\u0217\u01B0\u1EEB\u1EE9\u1EEF\u1EED\u1EF1\u1EE5\u1E73\u0173\u1E77\u1E75\u0289]/g }, { 'base': 'v', 'letters': /[\u0076\u24E5\uFF56\u1E7D\u1E7F\u028B\uA75F\u028C]/g }, { 'base': 'vy', 'letters': /[\uA761]/g }, { 'base': 'w', 'letters': /[\u0077\u24E6\uFF57\u1E81\u1E83\u0175\u1E87\u1E85\u1E98\u1E89\u2C73]/g }, { 'base': 'x', 'letters': /[\u0078\u24E7\uFF58\u1E8B\u1E8D]/g }, { 'base': 'y', 'letters': /[\u0079\u24E8\uFF59\u1EF3\u00FD\u0177\u1EF9\u0233\u1E8F\u00FF\u1EF7\u1E99\u1EF5\u01B4\u024F\u1EFF]/g }, { 'base': 'z', 'letters': /[\u007A\u24E9\uFF5A\u017A\u1E91\u017C\u017E\u1E93\u1E95\u01B6\u0225\u0240\u2C6C\uA763]/g }];
+
+var stripDiacritics = function stripDiacritics(str) {
+	for (var i = 0; i < map.length; i++) {
+		str = str.replace(map[i].letters, map[i].base);
+	}
+	return str;
+};
+
+var trim = function trim(str) {
+  return str.replace(/^\s+|\s+$/g, '');
+};
+
+var isValid = function isValid(value) {
+	return typeof value !== 'undefined' && value !== null && value !== '';
+};
+
+var filterOptions = function filterOptions(options, filterValue, excludeOptions, props) {
+	if (props.ignoreAccents) {
+		filterValue = stripDiacritics(filterValue);
+	}
+
+	if (props.ignoreCase) {
+		filterValue = filterValue.toLowerCase();
+	}
+
+	if (props.trimFilter) {
+		filterValue = trim(filterValue);
+	}
+
+	if (excludeOptions) excludeOptions = excludeOptions.map(function (i) {
+		return i[props.valueKey];
+	});
+
+	return options.filter(function (option) {
+		if (excludeOptions && excludeOptions.indexOf(option[props.valueKey]) > -1) return false;
+		if (props.filterOption) return props.filterOption.call(undefined, option, filterValue);
+		if (!filterValue) return true;
+
+		var value = option[props.valueKey];
+		var label = option[props.labelKey];
+		var hasValue = isValid(value);
+		var hasLabel = isValid(label);
+
+		if (!hasValue && !hasLabel) {
+			return false;
+		}
+
+		var valueTest = hasValue ? String(value) : null;
+		var labelTest = hasLabel ? String(label) : null;
+
+		if (props.ignoreAccents) {
+			if (valueTest && props.matchProp !== 'label') valueTest = stripDiacritics(valueTest);
+			if (labelTest && props.matchProp !== 'value') labelTest = stripDiacritics(labelTest);
+		}
+
+		if (props.ignoreCase) {
+			if (valueTest && props.matchProp !== 'label') valueTest = valueTest.toLowerCase();
+			if (labelTest && props.matchProp !== 'value') labelTest = labelTest.toLowerCase();
+		}
+
+		return props.matchPos === 'start' ? valueTest && props.matchProp !== 'label' && valueTest.substr(0, filterValue.length) === filterValue || labelTest && props.matchProp !== 'value' && labelTest.substr(0, filterValue.length) === filterValue : valueTest && props.matchProp !== 'label' && valueTest.indexOf(filterValue) >= 0 || labelTest && props.matchProp !== 'value' && labelTest.indexOf(filterValue) >= 0;
+	});
+};
+
+var menuRenderer = function menuRenderer(_ref) {
+	var focusedOption = _ref.focusedOption,
+	    focusOption = _ref.focusOption,
+	    inputValue = _ref.inputValue,
+	    instancePrefix = _ref.instancePrefix,
+	    onFocus = _ref.onFocus,
+	    onOptionRef = _ref.onOptionRef,
+	    onSelect = _ref.onSelect,
+	    optionClassName = _ref.optionClassName,
+	    optionComponent = _ref.optionComponent,
+	    optionRenderer = _ref.optionRenderer,
+	    options = _ref.options,
+	    removeValue = _ref.removeValue,
+	    selectValue = _ref.selectValue,
+	    valueArray = _ref.valueArray,
+	    valueKey = _ref.valueKey;
+
+	var Option = optionComponent;
+
+	return options.map(function (option, i) {
+		var isSelected = valueArray && valueArray.some(function (x) {
+			return x[valueKey] === option[valueKey];
+		});
+		var isFocused = option === focusedOption;
+		var optionClass = classnames__WEBPACK_IMPORTED_MODULE_1___default()(optionClassName, {
+			'Select-option': true,
+			'is-selected': isSelected,
+			'is-focused': isFocused,
+			'is-disabled': option.disabled
+		});
+
+		return react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(
+			Option,
+			{
+				className: optionClass,
+				focusOption: focusOption,
+				inputValue: inputValue,
+				instancePrefix: instancePrefix,
+				isDisabled: option.disabled,
+				isFocused: isFocused,
+				isSelected: isSelected,
+				key: 'option-' + i + '-' + option[valueKey],
+				onFocus: onFocus,
+				onSelect: onSelect,
+				option: option,
+				optionIndex: i,
+				ref: function ref(_ref2) {
+					onOptionRef(_ref2, isFocused);
+				},
+				removeValue: removeValue,
+				selectValue: selectValue
+			},
+			optionRenderer(option, i, inputValue)
+		);
+	});
+};
+
+menuRenderer.propTypes = {
+	focusOption: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
+	focusedOption: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.object,
+	inputValue: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
+	instancePrefix: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
+	onFocus: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
+	onOptionRef: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
+	onSelect: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
+	optionClassName: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
+	optionComponent: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
+	optionRenderer: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
+	options: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.array,
+	removeValue: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
+	selectValue: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
+	valueArray: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.array,
+	valueKey: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string
+};
+
+var blockEvent = (function (event) {
+	event.preventDefault();
+	event.stopPropagation();
+	if (event.target.tagName !== 'A' || !('href' in event.target)) {
+		return;
+	}
+	if (event.target.target) {
+		window.open(event.target.href, event.target.target);
+	} else {
+		window.location.href = event.target.href;
+	}
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+  return typeof obj;
+} : function (obj) {
+  return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+};
+
+
+
+
+
+var asyncGenerator = function () {
+  function AwaitValue(value) {
+    this.value = value;
+  }
+
+  function AsyncGenerator(gen) {
+    var front, back;
+
+    function send(key, arg) {
+      return new Promise(function (resolve, reject) {
+        var request = {
+          key: key,
+          arg: arg,
+          resolve: resolve,
+          reject: reject,
+          next: null
+        };
+
+        if (back) {
+          back = back.next = request;
+        } else {
+          front = back = request;
+          resume(key, arg);
+        }
+      });
+    }
+
+    function resume(key, arg) {
+      try {
+        var result = gen[key](arg);
+        var value = result.value;
+
+        if (value instanceof AwaitValue) {
+          Promise.resolve(value.value).then(function (arg) {
+            resume("next", arg);
+          }, function (arg) {
+            resume("throw", arg);
+          });
+        } else {
+          settle(result.done ? "return" : "normal", result.value);
+        }
+      } catch (err) {
+        settle("throw", err);
+      }
+    }
+
+    function settle(type, value) {
+      switch (type) {
+        case "return":
+          front.resolve({
+            value: value,
+            done: true
+          });
+          break;
+
+        case "throw":
+          front.reject(value);
+          break;
+
+        default:
+          front.resolve({
+            value: value,
+            done: false
+          });
+          break;
+      }
+
+      front = front.next;
+
+      if (front) {
+        resume(front.key, front.arg);
+      } else {
+        back = null;
+      }
+    }
+
+    this._invoke = send;
+
+    if (typeof gen.return !== "function") {
+      this.return = undefined;
+    }
+  }
+
+  if (typeof Symbol === "function" && Symbol.asyncIterator) {
+    AsyncGenerator.prototype[Symbol.asyncIterator] = function () {
+      return this;
+    };
+  }
+
+  AsyncGenerator.prototype.next = function (arg) {
+    return this._invoke("next", arg);
+  };
+
+  AsyncGenerator.prototype.throw = function (arg) {
+    return this._invoke("throw", arg);
+  };
+
+  AsyncGenerator.prototype.return = function (arg) {
+    return this._invoke("return", arg);
+  };
+
+  return {
+    wrap: function (fn) {
+      return function () {
+        return new AsyncGenerator(fn.apply(this, arguments));
+      };
+    },
+    await: function (value) {
+      return new AwaitValue(value);
+    }
+  };
+}();
+
+
+
+
+
+var classCallCheck = function (instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+};
+
+var createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+
+  return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) defineProperties(Constructor, staticProps);
+    return Constructor;
+  };
+}();
+
+
+
+
+
+var defineProperty = function (obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+};
+
+var _extends = Object.assign || function (target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i];
+
+    for (var key in source) {
+      if (Object.prototype.hasOwnProperty.call(source, key)) {
+        target[key] = source[key];
+      }
+    }
+  }
+
+  return target;
+};
+
+
+
+var inherits = function (subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+  }
+
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      enumerable: false,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+};
+
+
+
+
+
+
+
+
+
+var objectWithoutProperties = function (obj, keys) {
+  var target = {};
+
+  for (var i in obj) {
+    if (keys.indexOf(i) >= 0) continue;
+    if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;
+    target[i] = obj[i];
+  }
+
+  return target;
+};
+
+var possibleConstructorReturn = function (self, call) {
+  if (!self) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return call && (typeof call === "object" || typeof call === "function") ? call : self;
+};
+
+var Option = function (_React$Component) {
+	inherits(Option, _React$Component);
+
+	function Option(props) {
+		classCallCheck(this, Option);
+
+		var _this = possibleConstructorReturn(this, (Option.__proto__ || Object.getPrototypeOf(Option)).call(this, props));
+
+		_this.handleMouseDown = _this.handleMouseDown.bind(_this);
+		_this.handleMouseEnter = _this.handleMouseEnter.bind(_this);
+		_this.handleMouseMove = _this.handleMouseMove.bind(_this);
+		_this.handleTouchStart = _this.handleTouchStart.bind(_this);
+		_this.handleTouchEnd = _this.handleTouchEnd.bind(_this);
+		_this.handleTouchMove = _this.handleTouchMove.bind(_this);
+		_this.onFocus = _this.onFocus.bind(_this);
+		return _this;
+	}
+
+	createClass(Option, [{
+		key: 'handleMouseDown',
+		value: function handleMouseDown(event) {
+			event.preventDefault();
+			event.stopPropagation();
+			this.props.onSelect(this.props.option, event);
+		}
+	}, {
+		key: 'handleMouseEnter',
+		value: function handleMouseEnter(event) {
+			this.onFocus(event);
+		}
+	}, {
+		key: 'handleMouseMove',
+		value: function handleMouseMove(event) {
+			this.onFocus(event);
+		}
+	}, {
+		key: 'handleTouchEnd',
+		value: function handleTouchEnd(event) {
+			// Check if the view is being dragged, In this case
+			// we don't want to fire the click event (because the user only wants to scroll)
+			if (this.dragging) return;
+
+			this.handleMouseDown(event);
+		}
+	}, {
+		key: 'handleTouchMove',
+		value: function handleTouchMove() {
+			// Set a flag that the view is being dragged
+			this.dragging = true;
+		}
+	}, {
+		key: 'handleTouchStart',
+		value: function handleTouchStart() {
+			// Set a flag that the view is not being dragged
+			this.dragging = false;
+		}
+	}, {
+		key: 'onFocus',
+		value: function onFocus(event) {
+			if (!this.props.isFocused) {
+				this.props.onFocus(this.props.option, event);
+			}
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			var _props = this.props,
+			    option = _props.option,
+			    instancePrefix = _props.instancePrefix,
+			    optionIndex = _props.optionIndex;
+
+			var className = classnames__WEBPACK_IMPORTED_MODULE_1___default()(this.props.className, option.className);
+
+			return option.disabled ? react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(
+				'div',
+				{ className: className,
+					onMouseDown: blockEvent,
+					onClick: blockEvent },
+				this.props.children
+			) : react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(
+				'div',
+				{ className: className,
+					style: option.style,
+					role: 'option',
+					'aria-label': option.label,
+					onMouseDown: this.handleMouseDown,
+					onMouseEnter: this.handleMouseEnter,
+					onMouseMove: this.handleMouseMove,
+					onTouchStart: this.handleTouchStart,
+					onTouchMove: this.handleTouchMove,
+					onTouchEnd: this.handleTouchEnd,
+					id: instancePrefix + '-option-' + optionIndex,
+					title: option.title },
+				this.props.children
+			);
+		}
+	}]);
+	return Option;
+}(react__WEBPACK_IMPORTED_MODULE_3___default.a.Component);
+
+Option.propTypes = {
+	children: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.node,
+	className: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string, // className (based on mouse position)
+	instancePrefix: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string.isRequired, // unique prefix for the ids (used for aria)
+	isDisabled: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool, // the option is disabled
+	isFocused: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool, // the option is focused
+	isSelected: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool, // the option is selected
+	onFocus: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func, // method to handle mouseEnter on option element
+	onSelect: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func, // method to handle click on option element
+	onUnfocus: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func, // method to handle mouseLeave on option element
+	option: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.object.isRequired, // object that is base for that option
+	optionIndex: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number // index of the option, used to generate unique ids for aria
+};
+
+var Value = function (_React$Component) {
+	inherits(Value, _React$Component);
+
+	function Value(props) {
+		classCallCheck(this, Value);
+
+		var _this = possibleConstructorReturn(this, (Value.__proto__ || Object.getPrototypeOf(Value)).call(this, props));
+
+		_this.handleMouseDown = _this.handleMouseDown.bind(_this);
+		_this.onRemove = _this.onRemove.bind(_this);
+		_this.handleTouchEndRemove = _this.handleTouchEndRemove.bind(_this);
+		_this.handleTouchMove = _this.handleTouchMove.bind(_this);
+		_this.handleTouchStart = _this.handleTouchStart.bind(_this);
+		return _this;
+	}
+
+	createClass(Value, [{
+		key: 'handleMouseDown',
+		value: function handleMouseDown(event) {
+			if (event.type === 'mousedown' && event.button !== 0) {
+				return;
+			}
+			if (this.props.onClick) {
+				event.stopPropagation();
+				this.props.onClick(this.props.value, event);
+				return;
+			}
+			if (this.props.value.href) {
+				event.stopPropagation();
+			}
+		}
+	}, {
+		key: 'onRemove',
+		value: function onRemove(event) {
+			event.preventDefault();
+			event.stopPropagation();
+			this.props.onRemove(this.props.value);
+		}
+	}, {
+		key: 'handleTouchEndRemove',
+		value: function handleTouchEndRemove(event) {
+			// Check if the view is being dragged, In this case
+			// we don't want to fire the click event (because the user only wants to scroll)
+			if (this.dragging) return;
+
+			// Fire the mouse events
+			this.onRemove(event);
+		}
+	}, {
+		key: 'handleTouchMove',
+		value: function handleTouchMove() {
+			// Set a flag that the view is being dragged
+			this.dragging = true;
+		}
+	}, {
+		key: 'handleTouchStart',
+		value: function handleTouchStart() {
+			// Set a flag that the view is not being dragged
+			this.dragging = false;
+		}
+	}, {
+		key: 'renderRemoveIcon',
+		value: function renderRemoveIcon() {
+			if (this.props.disabled || !this.props.onRemove) return;
+			return react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(
+				'span',
+				{ className: 'Select-value-icon',
+					'aria-hidden': 'true',
+					onMouseDown: this.onRemove,
+					onTouchEnd: this.handleTouchEndRemove,
+					onTouchStart: this.handleTouchStart,
+					onTouchMove: this.handleTouchMove },
+				'\xD7'
+			);
+		}
+	}, {
+		key: 'renderLabel',
+		value: function renderLabel() {
+			var className = 'Select-value-label';
+			return this.props.onClick || this.props.value.href ? react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(
+				'a',
+				{ className: className, href: this.props.value.href, target: this.props.value.target, onMouseDown: this.handleMouseDown, onTouchEnd: this.handleMouseDown },
+				this.props.children
+			) : react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(
+				'span',
+				{ className: className, role: 'option', 'aria-selected': 'true', id: this.props.id },
+				this.props.children
+			);
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			return react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(
+				'div',
+				{ className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('Select-value', this.props.value.className),
+					style: this.props.value.style,
+					title: this.props.value.title
+				},
+				this.renderRemoveIcon(),
+				this.renderLabel()
+			);
+		}
+	}]);
+	return Value;
+}(react__WEBPACK_IMPORTED_MODULE_3___default.a.Component);
+
+Value.propTypes = {
+	children: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.node,
+	disabled: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool, // disabled prop passed to ReactSelect
+	id: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string, // Unique id for the value - used for aria
+	onClick: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func, // method to handle click on value label
+	onRemove: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func, // method to handle removal of the value
+	value: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.object.isRequired // the option object for this value
+};
+
+/*!
+  Copyright (c) 2018 Jed Watson.
+  Licensed under the MIT License (MIT), see
+  http://jedwatson.github.io/react-select
+*/
+var stringifyValue = function stringifyValue(value) {
+	return typeof value === 'string' ? value : value !== null && JSON.stringify(value) || '';
+};
+
+var stringOrNode = prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.node]);
+var stringOrNumber = prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number]);
+
+var instanceId = 1;
+
+var shouldShowValue = function shouldShowValue(state, props) {
+	var inputValue = state.inputValue,
+	    isPseudoFocused = state.isPseudoFocused,
+	    isFocused = state.isFocused;
+	var onSelectResetsInput = props.onSelectResetsInput;
+
+
+	if (!inputValue) return true;
+
+	if (!onSelectResetsInput) {
+		return !(!isFocused && isPseudoFocused || isFocused && !isPseudoFocused);
+	}
+
+	return false;
+};
+
+var shouldShowPlaceholder = function shouldShowPlaceholder(state, props, isOpen) {
+	var inputValue = state.inputValue,
+	    isPseudoFocused = state.isPseudoFocused,
+	    isFocused = state.isFocused;
+	var onSelectResetsInput = props.onSelectResetsInput;
+
+
+	return !inputValue || !onSelectResetsInput && !isOpen && !isPseudoFocused && !isFocused;
+};
+
+/**
+ * Retrieve a value from the given options and valueKey
+ * @param {String|Number|Array} value	- the selected value(s)
+ * @param {Object}		 props	- the Select component's props (or nextProps)
+ */
+var expandValue = function expandValue(value, props) {
+	var valueType = typeof value === 'undefined' ? 'undefined' : _typeof(value);
+	if (valueType !== 'string' && valueType !== 'number' && valueType !== 'boolean') return value;
+	var options = props.options,
+	    valueKey = props.valueKey;
+
+	if (!options) return;
+	for (var i = 0; i < options.length; i++) {
+		if (String(options[i][valueKey]) === String(value)) return options[i];
+	}
+};
+
+var handleRequired = function handleRequired(value, multi) {
+	if (!value) return true;
+	return multi ? value.length === 0 : Object.keys(value).length === 0;
+};
+
+var Select$1 = function (_React$Component) {
+	inherits(Select, _React$Component);
+
+	function Select(props) {
+		classCallCheck(this, Select);
+
+		var _this = possibleConstructorReturn(this, (Select.__proto__ || Object.getPrototypeOf(Select)).call(this, props));
+
+		['clearValue', 'focusOption', 'getOptionLabel', 'handleInputBlur', 'handleInputChange', 'handleInputFocus', 'handleInputValueChange', 'handleKeyDown', 'handleMenuScroll', 'handleMouseDown', 'handleMouseDownOnArrow', 'handleMouseDownOnMenu', 'handleTouchEnd', 'handleTouchEndClearValue', 'handleTouchMove', 'handleTouchOutside', 'handleTouchStart', 'handleValueClick', 'onOptionRef', 'removeValue', 'selectValue'].forEach(function (fn) {
+			return _this[fn] = _this[fn].bind(_this);
+		});
+
+		_this.state = {
+			inputValue: '',
+			isFocused: false,
+			isOpen: false,
+			isPseudoFocused: false,
+			required: false
+		};
+		return _this;
+	}
+
+	createClass(Select, [{
+		key: 'componentWillMount',
+		value: function componentWillMount() {
+			this._instancePrefix = 'react-select-' + (this.props.instanceId || ++instanceId) + '-';
+			var valueArray = this.getValueArray(this.props.value);
+
+			if (this.props.required) {
+				this.setState({
+					required: handleRequired(valueArray[0], this.props.multi)
+				});
+			}
+		}
+	}, {
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			if (typeof this.props.autofocus !== 'undefined' && typeof console !== 'undefined') {
+				console.warn('Warning: The autofocus prop has changed to autoFocus, support will be removed after react-select@1.0');
+			}
+			if (this.props.autoFocus || this.props.autofocus) {
+				this.focus();
+			}
+		}
+	}, {
+		key: 'componentWillReceiveProps',
+		value: function componentWillReceiveProps(nextProps) {
+			var valueArray = this.getValueArray(nextProps.value, nextProps);
+
+			if (nextProps.required) {
+				this.setState({
+					required: handleRequired(valueArray[0], nextProps.multi)
+				});
+			} else if (this.props.required) {
+				// Used to be required but it's not any more
+				this.setState({ required: false });
+			}
+
+			if (this.state.inputValue && this.props.value !== nextProps.value && nextProps.onSelectResetsInput) {
+				this.setState({ inputValue: this.handleInputValueChange('') });
+			}
+		}
+	}, {
+		key: 'componentDidUpdate',
+		value: function componentDidUpdate(prevProps, prevState) {
+			// focus to the selected option
+			if (this.menu && this.focused && this.state.isOpen && !this.hasScrolledToOption) {
+				var focusedOptionNode = Object(react_dom__WEBPACK_IMPORTED_MODULE_4__["findDOMNode"])(this.focused);
+				var menuNode = Object(react_dom__WEBPACK_IMPORTED_MODULE_4__["findDOMNode"])(this.menu);
+
+				var scrollTop = menuNode.scrollTop;
+				var scrollBottom = scrollTop + menuNode.offsetHeight;
+				var optionTop = focusedOptionNode.offsetTop;
+				var optionBottom = optionTop + focusedOptionNode.offsetHeight;
+
+				if (scrollTop > optionTop || scrollBottom < optionBottom) {
+					menuNode.scrollTop = focusedOptionNode.offsetTop;
+				}
+
+				// We still set hasScrolledToOption to true even if we didn't
+				// actually need to scroll, as we've still confirmed that the
+				// option is in view.
+				this.hasScrolledToOption = true;
+			} else if (!this.state.isOpen) {
+				this.hasScrolledToOption = false;
+			}
+
+			if (this._scrollToFocusedOptionOnUpdate && this.focused && this.menu) {
+				this._scrollToFocusedOptionOnUpdate = false;
+				var focusedDOM = Object(react_dom__WEBPACK_IMPORTED_MODULE_4__["findDOMNode"])(this.focused);
+				var menuDOM = Object(react_dom__WEBPACK_IMPORTED_MODULE_4__["findDOMNode"])(this.menu);
+				var focusedRect = focusedDOM.getBoundingClientRect();
+				var menuRect = menuDOM.getBoundingClientRect();
+				if (focusedRect.bottom > menuRect.bottom) {
+					menuDOM.scrollTop = focusedDOM.offsetTop + focusedDOM.clientHeight - menuDOM.offsetHeight;
+				} else if (focusedRect.top < menuRect.top) {
+					menuDOM.scrollTop = focusedDOM.offsetTop;
+				}
+			}
+			if (this.props.scrollMenuIntoView && this.menuContainer) {
+				var menuContainerRect = this.menuContainer.getBoundingClientRect();
+				if (window.innerHeight < menuContainerRect.bottom + this.props.menuBuffer) {
+					window.scrollBy(0, menuContainerRect.bottom + this.props.menuBuffer - window.innerHeight);
+				}
+			}
+			if (prevProps.disabled !== this.props.disabled) {
+				this.setState({ isFocused: false }); // eslint-disable-line react/no-did-update-set-state
+				this.closeMenu();
+			}
+			if (prevState.isOpen !== this.state.isOpen) {
+				this.toggleTouchOutsideEvent(this.state.isOpen);
+				var handler = this.state.isOpen ? this.props.onOpen : this.props.onClose;
+				handler && handler();
+			}
+		}
+	}, {
+		key: 'componentWillUnmount',
+		value: function componentWillUnmount() {
+			this.toggleTouchOutsideEvent(false);
+		}
+	}, {
+		key: 'toggleTouchOutsideEvent',
+		value: function toggleTouchOutsideEvent(enabled) {
+			if (enabled) {
+				if (!document.addEventListener && document.attachEvent) {
+					document.attachEvent('ontouchstart', this.handleTouchOutside);
+				} else {
+					document.addEventListener('touchstart', this.handleTouchOutside);
+				}
+			} else {
+				if (!document.removeEventListener && document.detachEvent) {
+					document.detachEvent('ontouchstart', this.handleTouchOutside);
+				} else {
+					document.removeEventListener('touchstart', this.handleTouchOutside);
+				}
+			}
+		}
+	}, {
+		key: 'handleTouchOutside',
+		value: function handleTouchOutside(event) {
+			// handle touch outside on ios to dismiss menu
+			if (this.wrapper && !this.wrapper.contains(event.target)) {
+				this.closeMenu();
+			}
+		}
+	}, {
+		key: 'focus',
+		value: function focus() {
+			if (!this.input) return;
+			this.input.focus();
+		}
+	}, {
+		key: 'blurInput',
+		value: function blurInput() {
+			if (!this.input) return;
+			this.input.blur();
+		}
+	}, {
+		key: 'handleTouchMove',
+		value: function handleTouchMove() {
+			// Set a flag that the view is being dragged
+			this.dragging = true;
+		}
+	}, {
+		key: 'handleTouchStart',
+		value: function handleTouchStart() {
+			// Set a flag that the view is not being dragged
+			this.dragging = false;
+		}
+	}, {
+		key: 'handleTouchEnd',
+		value: function handleTouchEnd(event) {
+			// Check if the view is being dragged, In this case
+			// we don't want to fire the click event (because the user only wants to scroll)
+			if (this.dragging) return;
+
+			// Fire the mouse events
+			this.handleMouseDown(event);
+		}
+	}, {
+		key: 'handleTouchEndClearValue',
+		value: function handleTouchEndClearValue(event) {
+			// Check if the view is being dragged, In this case
+			// we don't want to fire the click event (because the user only wants to scroll)
+			if (this.dragging) return;
+
+			// Clear the value
+			this.clearValue(event);
+		}
+	}, {
+		key: 'handleMouseDown',
+		value: function handleMouseDown(event) {
+			// if the event was triggered by a mousedown and not the primary
+			// button, or if the component is disabled, ignore it.
+			if (this.props.disabled || event.type === 'mousedown' && event.button !== 0) {
+				return;
+			}
+
+			if (event.target.tagName === 'INPUT') {
+				if (!this.state.isFocused) {
+					this._openAfterFocus = this.props.openOnClick;
+					this.focus();
+				} else if (!this.state.isOpen) {
+					this.setState({
+						isOpen: true,
+						isPseudoFocused: false
+					});
+				}
+
+				return;
+			}
+
+			// prevent default event handlers
+			event.preventDefault();
+
+			// for the non-searchable select, toggle the menu
+			if (!this.props.searchable) {
+				// This code means that if a select is searchable, onClick the options menu will not appear, only on subsequent click will it open.
+				this.focus();
+				return this.setState({
+					isOpen: !this.state.isOpen
+				});
+			}
+
+			if (this.state.isFocused) {
+				// On iOS, we can get into a state where we think the input is focused but it isn't really,
+				// since iOS ignores programmatic calls to input.focus() that weren't triggered by a click event.
+				// Call focus() again here to be safe.
+				this.focus();
+
+				var input = this.input;
+				var toOpen = true;
+
+				if (typeof input.getInput === 'function') {
+					// Get the actual DOM input if the ref is an <AutosizeInput /> component
+					input = input.getInput();
+				}
+
+				// clears the value so that the cursor will be at the end of input when the component re-renders
+				input.value = '';
+
+				if (this._focusAfterClear) {
+					toOpen = false;
+					this._focusAfterClear = false;
+				}
+
+				// if the input is focused, ensure the menu is open
+				this.setState({
+					isOpen: toOpen,
+					isPseudoFocused: false,
+					focusedOption: null
+				});
+			} else {
+				// otherwise, focus the input and open the menu
+				this._openAfterFocus = this.props.openOnClick;
+				this.focus();
+				this.setState({ focusedOption: null });
+			}
+		}
+	}, {
+		key: 'handleMouseDownOnArrow',
+		value: function handleMouseDownOnArrow(event) {
+			// if the event was triggered by a mousedown and not the primary
+			// button, or if the component is disabled, ignore it.
+			if (this.props.disabled || event.type === 'mousedown' && event.button !== 0) {
+				return;
+			}
+
+			if (this.state.isOpen) {
+				// prevent default event handlers
+				event.stopPropagation();
+				event.preventDefault();
+				// close the menu
+				this.closeMenu();
+			} else {
+				// If the menu isn't open, let the event bubble to the main handleMouseDown
+				this.setState({
+					isOpen: true
+				});
+			}
+		}
+	}, {
+		key: 'handleMouseDownOnMenu',
+		value: function handleMouseDownOnMenu(event) {
+			// if the event was triggered by a mousedown and not the primary
+			// button, or if the component is disabled, ignore it.
+			if (this.props.disabled || event.type === 'mousedown' && event.button !== 0) {
+				return;
+			}
+
+			event.stopPropagation();
+			event.preventDefault();
+
+			this._openAfterFocus = true;
+			this.focus();
+		}
+	}, {
+		key: 'closeMenu',
+		value: function closeMenu() {
+			if (this.props.onCloseResetsInput) {
+				this.setState({
+					inputValue: this.handleInputValueChange(''),
+					isOpen: false,
+					isPseudoFocused: this.state.isFocused && !this.props.multi
+				});
+			} else {
+				this.setState({
+					isOpen: false,
+					isPseudoFocused: this.state.isFocused && !this.props.multi
+				});
+			}
+			this.hasScrolledToOption = false;
+		}
+	}, {
+		key: 'handleInputFocus',
+		value: function handleInputFocus(event) {
+			if (this.props.disabled) return;
+
+			var toOpen = this.state.isOpen || this._openAfterFocus || this.props.openOnFocus;
+			toOpen = this._focusAfterClear ? false : toOpen; //if focus happens after clear values, don't open dropdown yet.
+
+			if (this.props.onFocus) {
+				this.props.onFocus(event);
+			}
+
+			this.setState({
+				isFocused: true,
+				isOpen: !!toOpen
+			});
+
+			this._focusAfterClear = false;
+			this._openAfterFocus = false;
+		}
+	}, {
+		key: 'handleInputBlur',
+		value: function handleInputBlur(event) {
+			// The check for menu.contains(activeElement) is necessary to prevent IE11's scrollbar from closing the menu in certain contexts.
+			if (this.menu && (this.menu === document.activeElement || this.menu.contains(document.activeElement))) {
+				this.focus();
+				return;
+			}
+
+			if (this.props.onBlur) {
+				this.props.onBlur(event);
+			}
+			var onBlurredState = {
+				isFocused: false,
+				isOpen: false,
+				isPseudoFocused: false
+			};
+			if (this.props.onBlurResetsInput) {
+				onBlurredState.inputValue = this.handleInputValueChange('');
+			}
+			this.setState(onBlurredState);
+		}
+	}, {
+		key: 'handleInputChange',
+		value: function handleInputChange(event) {
+			var newInputValue = event.target.value;
+
+			if (this.state.inputValue !== event.target.value) {
+				newInputValue = this.handleInputValueChange(newInputValue);
+			}
+
+			this.setState({
+				inputValue: newInputValue,
+				isOpen: true,
+				isPseudoFocused: false
+			});
+		}
+	}, {
+		key: 'setInputValue',
+		value: function setInputValue(newValue) {
+			if (this.props.onInputChange) {
+				var nextState = this.props.onInputChange(newValue);
+				if (nextState != null && (typeof nextState === 'undefined' ? 'undefined' : _typeof(nextState)) !== 'object') {
+					newValue = '' + nextState;
+				}
+			}
+			this.setState({
+				inputValue: newValue
+			});
+		}
+	}, {
+		key: 'handleInputValueChange',
+		value: function handleInputValueChange(newValue) {
+			if (this.props.onInputChange) {
+				var nextState = this.props.onInputChange(newValue);
+				// Note: != used deliberately here to catch undefined and null
+				if (nextState != null && (typeof nextState === 'undefined' ? 'undefined' : _typeof(nextState)) !== 'object') {
+					newValue = '' + nextState;
+				}
+			}
+			return newValue;
+		}
+	}, {
+		key: 'handleKeyDown',
+		value: function handleKeyDown(event) {
+			if (this.props.disabled) return;
+
+			if (typeof this.props.onInputKeyDown === 'function') {
+				this.props.onInputKeyDown(event);
+				if (event.defaultPrevented) {
+					return;
+				}
+			}
+
+			switch (event.keyCode) {
+				case 8:
+					// backspace
+					if (!this.state.inputValue && this.props.backspaceRemoves) {
+						event.preventDefault();
+						this.popValue();
+					}
+					break;
+				case 9:
+					// tab
+					if (event.shiftKey || !this.state.isOpen || !this.props.tabSelectsValue) {
+						break;
+					}
+					event.preventDefault();
+					this.selectFocusedOption();
+					break;
+				case 13:
+					// enter
+					event.preventDefault();
+					event.stopPropagation();
+					if (this.state.isOpen) {
+						this.selectFocusedOption();
+					} else {
+						this.focusNextOption();
+					}
+					break;
+				case 27:
+					// escape
+					event.preventDefault();
+					if (this.state.isOpen) {
+						this.closeMenu();
+						event.stopPropagation();
+					} else if (this.props.clearable && this.props.escapeClearsValue) {
+						this.clearValue(event);
+						event.stopPropagation();
+					}
+					break;
+				case 32:
+					// space
+					if (this.props.searchable) {
+						break;
+					}
+					event.preventDefault();
+					if (!this.state.isOpen) {
+						this.focusNextOption();
+						break;
+					}
+					event.stopPropagation();
+					this.selectFocusedOption();
+					break;
+				case 38:
+					// up
+					event.preventDefault();
+					this.focusPreviousOption();
+					break;
+				case 40:
+					// down
+					event.preventDefault();
+					this.focusNextOption();
+					break;
+				case 33:
+					// page up
+					event.preventDefault();
+					this.focusPageUpOption();
+					break;
+				case 34:
+					// page down
+					event.preventDefault();
+					this.focusPageDownOption();
+					break;
+				case 35:
+					// end key
+					if (event.shiftKey) {
+						break;
+					}
+					event.preventDefault();
+					this.focusEndOption();
+					break;
+				case 36:
+					// home key
+					if (event.shiftKey) {
+						break;
+					}
+					event.preventDefault();
+					this.focusStartOption();
+					break;
+				case 46:
+					// delete
+					if (!this.state.inputValue && this.props.deleteRemoves) {
+						event.preventDefault();
+						this.popValue();
+					}
+					break;
+			}
+		}
+	}, {
+		key: 'handleValueClick',
+		value: function handleValueClick(option, event) {
+			if (!this.props.onValueClick) return;
+			this.props.onValueClick(option, event);
+		}
+	}, {
+		key: 'handleMenuScroll',
+		value: function handleMenuScroll(event) {
+			if (!this.props.onMenuScrollToBottom) return;
+			var target = event.target;
+
+			if (target.scrollHeight > target.offsetHeight && target.scrollHeight - target.offsetHeight - target.scrollTop <= 0) {
+				this.props.onMenuScrollToBottom();
+			}
+		}
+	}, {
+		key: 'getOptionLabel',
+		value: function getOptionLabel(op) {
+			return op[this.props.labelKey];
+		}
+
+		/**
+   * Turns a value into an array from the given options
+   * @param {String|Number|Array} value		- the value of the select input
+   * @param {Object}		nextProps	- optionally specify the nextProps so the returned array uses the latest configuration
+   * @returns	{Array}	the value of the select represented in an array
+   */
+
+	}, {
+		key: 'getValueArray',
+		value: function getValueArray(value) {
+			var nextProps = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : undefined;
+
+			/** support optionally passing in the `nextProps` so `componentWillReceiveProps` updates will function as expected */
+			var props = (typeof nextProps === 'undefined' ? 'undefined' : _typeof(nextProps)) === 'object' ? nextProps : this.props;
+			if (props.multi) {
+				if (typeof value === 'string') {
+					value = value.split(props.delimiter);
+				}
+				if (!Array.isArray(value)) {
+					if (value === null || value === undefined) return [];
+					value = [value];
+				}
+				return value.map(function (value) {
+					return expandValue(value, props);
+				}).filter(function (i) {
+					return i;
+				});
+			}
+			var expandedValue = expandValue(value, props);
+			return expandedValue ? [expandedValue] : [];
+		}
+	}, {
+		key: 'setValue',
+		value: function setValue(value) {
+			var _this2 = this;
+
+			if (this.props.autoBlur) {
+				this.blurInput();
+			}
+			if (this.props.required) {
+				var required = handleRequired(value, this.props.multi);
+				this.setState({ required: required });
+			}
+			if (this.props.simpleValue && value) {
+				value = this.props.multi ? value.map(function (i) {
+					return i[_this2.props.valueKey];
+				}).join(this.props.delimiter) : value[this.props.valueKey];
+			}
+			if (this.props.onChange) {
+				this.props.onChange(value);
+			}
+		}
+	}, {
+		key: 'selectValue',
+		value: function selectValue(value) {
+			var _this3 = this;
+
+			// NOTE: we actually add/set the value in a callback to make sure the
+			// input value is empty to avoid styling issues in Chrome
+			if (this.props.closeOnSelect) {
+				this.hasScrolledToOption = false;
+			}
+			var updatedValue = this.props.onSelectResetsInput ? '' : this.state.inputValue;
+			if (this.props.multi) {
+				this.setState({
+					focusedIndex: null,
+					inputValue: this.handleInputValueChange(updatedValue),
+					isOpen: !this.props.closeOnSelect
+				}, function () {
+					var valueArray = _this3.getValueArray(_this3.props.value);
+					if (valueArray.some(function (i) {
+						return i[_this3.props.valueKey] === value[_this3.props.valueKey];
+					})) {
+						_this3.removeValue(value);
+					} else {
+						_this3.addValue(value);
+					}
+				});
+			} else {
+				this.setState({
+					inputValue: this.handleInputValueChange(updatedValue),
+					isOpen: !this.props.closeOnSelect,
+					isPseudoFocused: this.state.isFocused
+				}, function () {
+					_this3.setValue(value);
+				});
+			}
+		}
+	}, {
+		key: 'addValue',
+		value: function addValue(value) {
+			var valueArray = this.getValueArray(this.props.value);
+			var visibleOptions = this._visibleOptions.filter(function (val) {
+				return !val.disabled;
+			});
+			var lastValueIndex = visibleOptions.indexOf(value);
+			this.setValue(valueArray.concat(value));
+			if (visibleOptions.length - 1 === lastValueIndex) {
+				// the last option was selected; focus the second-last one
+				this.focusOption(visibleOptions[lastValueIndex - 1]);
+			} else if (visibleOptions.length > lastValueIndex) {
+				// focus the option below the selected one
+				this.focusOption(visibleOptions[lastValueIndex + 1]);
+			}
+		}
+	}, {
+		key: 'popValue',
+		value: function popValue() {
+			var valueArray = this.getValueArray(this.props.value);
+			if (!valueArray.length) return;
+			if (valueArray[valueArray.length - 1].clearableValue === false) return;
+			this.setValue(this.props.multi ? valueArray.slice(0, valueArray.length - 1) : null);
+		}
+	}, {
+		key: 'removeValue',
+		value: function removeValue(value) {
+			var _this4 = this;
+
+			var valueArray = this.getValueArray(this.props.value);
+			this.setValue(valueArray.filter(function (i) {
+				return i[_this4.props.valueKey] !== value[_this4.props.valueKey];
+			}));
+			this.focus();
+		}
+	}, {
+		key: 'clearValue',
+		value: function clearValue(event) {
+			// if the event was triggered by a mousedown and not the primary
+			// button, ignore it.
+			if (event && event.type === 'mousedown' && event.button !== 0) {
+				return;
+			}
+
+			event.preventDefault();
+
+			this.setValue(this.getResetValue());
+			this.setState({
+				inputValue: this.handleInputValueChange(''),
+				isOpen: false
+			}, this.focus);
+
+			this._focusAfterClear = true;
+		}
+	}, {
+		key: 'getResetValue',
+		value: function getResetValue() {
+			if (this.props.resetValue !== undefined) {
+				return this.props.resetValue;
+			} else if (this.props.multi) {
+				return [];
+			} else {
+				return null;
+			}
+		}
+	}, {
+		key: 'focusOption',
+		value: function focusOption(option) {
+			this.setState({
+				focusedOption: option
+			});
+		}
+	}, {
+		key: 'focusNextOption',
+		value: function focusNextOption() {
+			this.focusAdjacentOption('next');
+		}
+	}, {
+		key: 'focusPreviousOption',
+		value: function focusPreviousOption() {
+			this.focusAdjacentOption('previous');
+		}
+	}, {
+		key: 'focusPageUpOption',
+		value: function focusPageUpOption() {
+			this.focusAdjacentOption('page_up');
+		}
+	}, {
+		key: 'focusPageDownOption',
+		value: function focusPageDownOption() {
+			this.focusAdjacentOption('page_down');
+		}
+	}, {
+		key: 'focusStartOption',
+		value: function focusStartOption() {
+			this.focusAdjacentOption('start');
+		}
+	}, {
+		key: 'focusEndOption',
+		value: function focusEndOption() {
+			this.focusAdjacentOption('end');
+		}
+	}, {
+		key: 'focusAdjacentOption',
+		value: function focusAdjacentOption(dir) {
+			var options = this._visibleOptions.map(function (option, index) {
+				return { option: option, index: index };
+			}).filter(function (option) {
+				return !option.option.disabled;
+			});
+			this._scrollToFocusedOptionOnUpdate = true;
+			if (!this.state.isOpen) {
+				var newState = {
+					focusedOption: this._focusedOption || (options.length ? options[dir === 'next' ? 0 : options.length - 1].option : null),
+					isOpen: true
+				};
+				if (this.props.onSelectResetsInput) {
+					newState.inputValue = '';
+				}
+				this.setState(newState);
+				return;
+			}
+			if (!options.length) return;
+			var focusedIndex = -1;
+			for (var i = 0; i < options.length; i++) {
+				if (this._focusedOption === options[i].option) {
+					focusedIndex = i;
+					break;
+				}
+			}
+			if (dir === 'next' && focusedIndex !== -1) {
+				focusedIndex = (focusedIndex + 1) % options.length;
+			} else if (dir === 'previous') {
+				if (focusedIndex > 0) {
+					focusedIndex = focusedIndex - 1;
+				} else {
+					focusedIndex = options.length - 1;
+				}
+			} else if (dir === 'start') {
+				focusedIndex = 0;
+			} else if (dir === 'end') {
+				focusedIndex = options.length - 1;
+			} else if (dir === 'page_up') {
+				var potentialIndex = focusedIndex - this.props.pageSize;
+				if (potentialIndex < 0) {
+					focusedIndex = 0;
+				} else {
+					focusedIndex = potentialIndex;
+				}
+			} else if (dir === 'page_down') {
+				var _potentialIndex = focusedIndex + this.props.pageSize;
+				if (_potentialIndex > options.length - 1) {
+					focusedIndex = options.length - 1;
+				} else {
+					focusedIndex = _potentialIndex;
+				}
+			}
+
+			if (focusedIndex === -1) {
+				focusedIndex = 0;
+			}
+
+			this.setState({
+				focusedIndex: options[focusedIndex].index,
+				focusedOption: options[focusedIndex].option
+			});
+		}
+	}, {
+		key: 'getFocusedOption',
+		value: function getFocusedOption() {
+			return this._focusedOption;
+		}
+	}, {
+		key: 'selectFocusedOption',
+		value: function selectFocusedOption() {
+			if (this._focusedOption) {
+				return this.selectValue(this._focusedOption);
+			}
+		}
+	}, {
+		key: 'renderLoading',
+		value: function renderLoading() {
+			if (!this.props.isLoading) return;
+			return react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(
+				'span',
+				{ className: 'Select-loading-zone', 'aria-hidden': 'true' },
+				react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement('span', { className: 'Select-loading' })
+			);
+		}
+	}, {
+		key: 'renderValue',
+		value: function renderValue(valueArray, isOpen) {
+			var _this5 = this;
+
+			var renderLabel = this.props.valueRenderer || this.getOptionLabel;
+			var ValueComponent = this.props.valueComponent;
+			if (!valueArray.length) {
+				var showPlaceholder = shouldShowPlaceholder(this.state, this.props, isOpen);
+				return showPlaceholder ? react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(
+					'div',
+					{ className: 'Select-placeholder' },
+					this.props.placeholder
+				) : null;
+			}
+			var onClick = this.props.onValueClick ? this.handleValueClick : null;
+			if (this.props.multi) {
+				return valueArray.map(function (value, i) {
+					return react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(
+						ValueComponent,
+						{
+							disabled: _this5.props.disabled || value.clearableValue === false,
+							id: _this5._instancePrefix + '-value-' + i,
+							instancePrefix: _this5._instancePrefix,
+							key: 'value-' + i + '-' + value[_this5.props.valueKey],
+							onClick: onClick,
+							onRemove: _this5.removeValue,
+							placeholder: _this5.props.placeholder,
+							value: value
+						},
+						renderLabel(value, i),
+						react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(
+							'span',
+							{ className: 'Select-aria-only' },
+							'\xA0'
+						)
+					);
+				});
+			} else if (shouldShowValue(this.state, this.props)) {
+				if (isOpen) onClick = null;
+				return react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(
+					ValueComponent,
+					{
+						disabled: this.props.disabled,
+						id: this._instancePrefix + '-value-item',
+						instancePrefix: this._instancePrefix,
+						onClick: onClick,
+						placeholder: this.props.placeholder,
+						value: valueArray[0]
+					},
+					renderLabel(valueArray[0])
+				);
+			}
+		}
+	}, {
+		key: 'renderInput',
+		value: function renderInput(valueArray, focusedOptionIndex) {
+			var _classNames,
+			    _this6 = this;
+
+			var className = classnames__WEBPACK_IMPORTED_MODULE_1___default()('Select-input', this.props.inputProps.className);
+			var isOpen = this.state.isOpen;
+
+			var ariaOwns = classnames__WEBPACK_IMPORTED_MODULE_1___default()((_classNames = {}, defineProperty(_classNames, this._instancePrefix + '-list', isOpen), defineProperty(_classNames, this._instancePrefix + '-backspace-remove-message', this.props.multi && !this.props.disabled && this.state.isFocused && !this.state.inputValue), _classNames));
+
+			var value = this.state.inputValue;
+			if (value && !this.props.onSelectResetsInput && !this.state.isFocused) {
+				// it hides input value when it is not focused and was not reset on select
+				value = '';
+			}
+
+			var inputProps = _extends({}, this.props.inputProps, {
+				'aria-activedescendant': isOpen ? this._instancePrefix + '-option-' + focusedOptionIndex : this._instancePrefix + '-value',
+				'aria-describedby': this.props['aria-describedby'],
+				'aria-expanded': '' + isOpen,
+				'aria-haspopup': '' + isOpen,
+				'aria-label': this.props['aria-label'],
+				'aria-labelledby': this.props['aria-labelledby'],
+				'aria-owns': ariaOwns,
+				className: className,
+				onBlur: this.handleInputBlur,
+				onChange: this.handleInputChange,
+				onFocus: this.handleInputFocus,
+				ref: function ref(_ref) {
+					return _this6.input = _ref;
+				},
+				role: 'combobox',
+				required: this.state.required,
+				tabIndex: this.props.tabIndex,
+				value: value
+			});
+
+			if (this.props.inputRenderer) {
+				return this.props.inputRenderer(inputProps);
+			}
+
+			if (this.props.disabled || !this.props.searchable) {
+				var divProps = objectWithoutProperties(this.props.inputProps, []);
+
+
+				var _ariaOwns = classnames__WEBPACK_IMPORTED_MODULE_1___default()(defineProperty({}, this._instancePrefix + '-list', isOpen));
+				return react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement('div', _extends({}, divProps, {
+					'aria-expanded': isOpen,
+					'aria-owns': _ariaOwns,
+					'aria-activedescendant': isOpen ? this._instancePrefix + '-option-' + focusedOptionIndex : this._instancePrefix + '-value',
+					'aria-disabled': '' + this.props.disabled,
+					'aria-label': this.props['aria-label'],
+					'aria-labelledby': this.props['aria-labelledby'],
+					className: className,
+					onBlur: this.handleInputBlur,
+					onFocus: this.handleInputFocus,
+					ref: function ref(_ref2) {
+						return _this6.input = _ref2;
+					},
+					role: 'combobox',
+					style: { border: 0, width: 1, display: 'inline-block' },
+					tabIndex: this.props.tabIndex || 0
+				}));
+			}
+
+			if (this.props.autosize) {
+				return react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(react_input_autosize__WEBPACK_IMPORTED_MODULE_0___default.a, _extends({ id: this.props.id }, inputProps, { minWidth: '5' }));
+			}
+			return react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(
+				'div',
+				{ className: className, key: 'input-wrap', style: { display: 'inline-block' } },
+				react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement('input', _extends({ id: this.props.id }, inputProps))
+			);
+		}
+	}, {
+		key: 'renderClear',
+		value: function renderClear() {
+			var valueArray = this.getValueArray(this.props.value);
+			if (!this.props.clearable || !valueArray.length || this.props.disabled || this.props.isLoading) return;
+			var ariaLabel = this.props.multi ? this.props.clearAllText : this.props.clearValueText;
+			var clear = this.props.clearRenderer();
+
+			return react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(
+				'span',
+				{
+					'aria-label': ariaLabel,
+					className: 'Select-clear-zone',
+					onMouseDown: this.clearValue,
+					onTouchEnd: this.handleTouchEndClearValue,
+					onTouchMove: this.handleTouchMove,
+					onTouchStart: this.handleTouchStart,
+					title: ariaLabel
+				},
+				clear
+			);
+		}
+	}, {
+		key: 'renderArrow',
+		value: function renderArrow() {
+			if (!this.props.arrowRenderer) return;
+
+			var onMouseDown = this.handleMouseDownOnArrow;
+			var isOpen = this.state.isOpen;
+			var arrow = this.props.arrowRenderer({ onMouseDown: onMouseDown, isOpen: isOpen });
+
+			if (!arrow) {
+				return null;
+			}
+
+			return react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(
+				'span',
+				{
+					className: 'Select-arrow-zone',
+					onMouseDown: onMouseDown
+				},
+				arrow
+			);
+		}
+	}, {
+		key: 'filterOptions',
+		value: function filterOptions$$1(excludeOptions) {
+			var filterValue = this.state.inputValue;
+			var options = this.props.options || [];
+			if (this.props.filterOptions) {
+				// Maintain backwards compatibility with boolean attribute
+				var filterOptions$$1 = typeof this.props.filterOptions === 'function' ? this.props.filterOptions : filterOptions;
+
+				return filterOptions$$1(options, filterValue, excludeOptions, {
+					filterOption: this.props.filterOption,
+					ignoreAccents: this.props.ignoreAccents,
+					ignoreCase: this.props.ignoreCase,
+					labelKey: this.props.labelKey,
+					matchPos: this.props.matchPos,
+					matchProp: this.props.matchProp,
+					trimFilter: this.props.trimFilter,
+					valueKey: this.props.valueKey
+				});
+			} else {
+				return options;
+			}
+		}
+	}, {
+		key: 'onOptionRef',
+		value: function onOptionRef(ref, isFocused) {
+			if (isFocused) {
+				this.focused = ref;
+			}
+		}
+	}, {
+		key: 'renderMenu',
+		value: function renderMenu(options, valueArray, focusedOption) {
+			if (options && options.length) {
+				return this.props.menuRenderer({
+					focusedOption: focusedOption,
+					focusOption: this.focusOption,
+					inputValue: this.state.inputValue,
+					instancePrefix: this._instancePrefix,
+					labelKey: this.props.labelKey,
+					onFocus: this.focusOption,
+					onOptionRef: this.onOptionRef,
+					onSelect: this.selectValue,
+					optionClassName: this.props.optionClassName,
+					optionComponent: this.props.optionComponent,
+					optionRenderer: this.props.optionRenderer || this.getOptionLabel,
+					options: options,
+					removeValue: this.removeValue,
+					selectValue: this.selectValue,
+					valueArray: valueArray,
+					valueKey: this.props.valueKey
+				});
+			} else if (this.props.noResultsText) {
+				return react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(
+					'div',
+					{ className: 'Select-noresults' },
+					this.props.noResultsText
+				);
+			} else {
+				return null;
+			}
+		}
+	}, {
+		key: 'renderHiddenField',
+		value: function renderHiddenField(valueArray) {
+			var _this7 = this;
+
+			if (!this.props.name) return;
+			if (this.props.joinValues) {
+				var value = valueArray.map(function (i) {
+					return stringifyValue(i[_this7.props.valueKey]);
+				}).join(this.props.delimiter);
+				return react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement('input', {
+					disabled: this.props.disabled,
+					name: this.props.name,
+					ref: function ref(_ref3) {
+						return _this7.value = _ref3;
+					},
+					type: 'hidden',
+					value: value
+				});
+			}
+			return valueArray.map(function (item, index) {
+				return react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement('input', {
+					disabled: _this7.props.disabled,
+					key: 'hidden.' + index,
+					name: _this7.props.name,
+					ref: 'value' + index,
+					type: 'hidden',
+					value: stringifyValue(item[_this7.props.valueKey])
+				});
+			});
+		}
+	}, {
+		key: 'getFocusableOptionIndex',
+		value: function getFocusableOptionIndex(selectedOption) {
+			var options = this._visibleOptions;
+			if (!options.length) return null;
+
+			var valueKey = this.props.valueKey;
+			var focusedOption = this.state.focusedOption || selectedOption;
+			if (focusedOption && !focusedOption.disabled) {
+				var focusedOptionIndex = -1;
+				options.some(function (option, index) {
+					var isOptionEqual = option[valueKey] === focusedOption[valueKey];
+					if (isOptionEqual) {
+						focusedOptionIndex = index;
+					}
+					return isOptionEqual;
+				});
+				if (focusedOptionIndex !== -1) {
+					return focusedOptionIndex;
+				}
+			}
+
+			for (var i = 0; i < options.length; i++) {
+				if (!options[i].disabled) return i;
+			}
+			return null;
+		}
+	}, {
+		key: 'renderOuter',
+		value: function renderOuter(options, valueArray, focusedOption) {
+			var _this8 = this;
+
+			var menu = this.renderMenu(options, valueArray, focusedOption);
+			if (!menu) {
+				return null;
+			}
+
+			return react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(
+				'div',
+				{ ref: function ref(_ref5) {
+						return _this8.menuContainer = _ref5;
+					}, className: 'Select-menu-outer', style: this.props.menuContainerStyle },
+				react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(
+					'div',
+					{
+						className: 'Select-menu',
+						id: this._instancePrefix + '-list',
+						onMouseDown: this.handleMouseDownOnMenu,
+						onScroll: this.handleMenuScroll,
+						ref: function ref(_ref4) {
+							return _this8.menu = _ref4;
+						},
+						role: 'listbox',
+						style: this.props.menuStyle,
+						tabIndex: -1
+					},
+					menu
+				)
+			);
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			var _this9 = this;
+
+			var valueArray = this.getValueArray(this.props.value);
+			var options = this._visibleOptions = this.filterOptions(this.props.multi && this.props.removeSelected ? valueArray : null);
+			var isOpen = this.state.isOpen;
+			if (this.props.multi && !options.length && valueArray.length && !this.state.inputValue) isOpen = false;
+			var focusedOptionIndex = this.getFocusableOptionIndex(valueArray[0]);
+
+			var focusedOption = null;
+			if (focusedOptionIndex !== null) {
+				focusedOption = this._focusedOption = options[focusedOptionIndex];
+			} else {
+				focusedOption = this._focusedOption = null;
+			}
+			var className = classnames__WEBPACK_IMPORTED_MODULE_1___default()('Select', this.props.className, {
+				'has-value': valueArray.length,
+				'is-clearable': this.props.clearable,
+				'is-disabled': this.props.disabled,
+				'is-focused': this.state.isFocused,
+				'is-loading': this.props.isLoading,
+				'is-open': isOpen,
+				'is-pseudo-focused': this.state.isPseudoFocused,
+				'is-searchable': this.props.searchable,
+				'Select--multi': this.props.multi,
+				'Select--rtl': this.props.rtl,
+				'Select--single': !this.props.multi
+			});
+
+			var removeMessage = null;
+			if (this.props.multi && !this.props.disabled && valueArray.length && !this.state.inputValue && this.state.isFocused && this.props.backspaceRemoves) {
+				removeMessage = react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(
+					'span',
+					{ id: this._instancePrefix + '-backspace-remove-message', className: 'Select-aria-only', 'aria-live': 'assertive' },
+					this.props.backspaceToRemoveMessage.replace('{label}', valueArray[valueArray.length - 1][this.props.labelKey])
+				);
+			}
+
+			return react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(
+				'div',
+				{ ref: function ref(_ref7) {
+						return _this9.wrapper = _ref7;
+					},
+					className: className,
+					style: this.props.wrapperStyle },
+				this.renderHiddenField(valueArray),
+				react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(
+					'div',
+					{ ref: function ref(_ref6) {
+							return _this9.control = _ref6;
+						},
+						className: 'Select-control',
+						onKeyDown: this.handleKeyDown,
+						onMouseDown: this.handleMouseDown,
+						onTouchEnd: this.handleTouchEnd,
+						onTouchMove: this.handleTouchMove,
+						onTouchStart: this.handleTouchStart,
+						style: this.props.style
+					},
+					react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(
+						'span',
+						{ className: 'Select-multi-value-wrapper', id: this._instancePrefix + '-value' },
+						this.renderValue(valueArray, isOpen),
+						this.renderInput(valueArray, focusedOptionIndex)
+					),
+					removeMessage,
+					this.renderLoading(),
+					this.renderClear(),
+					this.renderArrow()
+				),
+				isOpen ? this.renderOuter(options, valueArray, focusedOption) : null
+			);
+		}
+	}]);
+	return Select;
+}(react__WEBPACK_IMPORTED_MODULE_3___default.a.Component);
+
+Select$1.propTypes = {
+	'aria-describedby': prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string, // html id(s) of element(s) that should be used to describe this input (for assistive tech)
+	'aria-label': prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string, // aria label (for assistive tech)
+	'aria-labelledby': prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string, // html id of an element that should be used as the label (for assistive tech)
+	arrowRenderer: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func, // create the drop-down caret element
+	autoBlur: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool, // automatically blur the component when an option is selected
+	autoFocus: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool, // autofocus the component on mount
+	autofocus: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool, // deprecated; use autoFocus instead
+	autosize: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool, // whether to enable autosizing or not
+	backspaceRemoves: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool, // whether backspace removes an item if there is no text input
+	backspaceToRemoveMessage: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string, // message to use for screenreaders to press backspace to remove the current item - {label} is replaced with the item label
+	className: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string, // className for the outer element
+	clearAllText: stringOrNode, // title for the "clear" control when multi: true
+	clearRenderer: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func, // create clearable x element
+	clearValueText: stringOrNode, // title for the "clear" control
+	clearable: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool, // should it be possible to reset value
+	closeOnSelect: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool, // whether to close the menu when a value is selected
+	deleteRemoves: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool, // whether delete removes an item if there is no text input
+	delimiter: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string, // delimiter to use to join multiple values for the hidden field value
+	disabled: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool, // whether the Select is disabled or not
+	escapeClearsValue: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool, // whether escape clears the value when the menu is closed
+	filterOption: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func, // method to filter a single option (option, filterString)
+	filterOptions: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.any, // boolean to enable default filtering or function to filter the options array ([options], filterString, [values])
+	id: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string, // html id to set on the input element for accessibility or tests
+	ignoreAccents: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool, // whether to strip diacritics when filtering
+	ignoreCase: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool, // whether to perform case-insensitive filtering
+	inputProps: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.object, // custom attributes for the Input
+	inputRenderer: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func, // returns a custom input component
+	instanceId: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string, // set the components instanceId
+	isLoading: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool, // whether the Select is loading externally or not (such as options being loaded)
+	joinValues: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool, // joins multiple values into a single form field with the delimiter (legacy mode)
+	labelKey: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string, // path of the label value in option objects
+	matchPos: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string, // (any|start) match the start or entire string when filtering
+	matchProp: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string, // (any|label|value) which option property to filter on
+	menuBuffer: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number, // optional buffer (in px) between the bottom of the viewport and the bottom of the menu
+	menuContainerStyle: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.object, // optional style to apply to the menu container
+	menuRenderer: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func, // renders a custom menu with options
+	menuStyle: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.object, // optional style to apply to the menu
+	multi: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool, // multi-value input
+	name: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string, // generates a hidden <input /> tag with this field name for html forms
+	noResultsText: stringOrNode, // placeholder displayed when there are no matching search results
+	onBlur: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func, // onBlur handler: function (event) {}
+	onBlurResetsInput: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool, // whether input is cleared on blur
+	onChange: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func, // onChange handler: function (newValue) {}
+	onClose: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func, // fires when the menu is closed
+	onCloseResetsInput: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool, // whether input is cleared when menu is closed through the arrow
+	onFocus: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func, // onFocus handler: function (event) {}
+	onInputChange: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func, // onInputChange handler: function (inputValue) {}
+	onInputKeyDown: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func, // input keyDown handler: function (event) {}
+	onMenuScrollToBottom: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func, // fires when the menu is scrolled to the bottom; can be used to paginate options
+	onOpen: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func, // fires when the menu is opened
+	onSelectResetsInput: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool, // whether input is cleared on select (works only for multiselect)
+	onValueClick: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func, // onClick handler for value labels: function (value, event) {}
+	openOnClick: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool, // boolean to control opening the menu when the control is clicked
+	openOnFocus: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool, // always open options menu on focus
+	optionClassName: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string, // additional class(es) to apply to the <Option /> elements
+	optionComponent: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func, // option component to render in dropdown
+	optionRenderer: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func, // optionRenderer: function (option) {}
+	options: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.array, // array of options
+	pageSize: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number, // number of entries to page when using page up/down keys
+	placeholder: stringOrNode, // field placeholder, displayed when there's no value
+	removeSelected: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool, // whether the selected option is removed from the dropdown on multi selects
+	required: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool, // applies HTML5 required attribute when needed
+	resetValue: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.any, // value to use when you clear the control
+	rtl: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool, // set to true in order to use react-select in right-to-left direction
+	scrollMenuIntoView: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool, // boolean to enable the viewport to shift so that the full menu fully visible when engaged
+	searchable: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool, // whether to enable searching feature or not
+	simpleValue: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool, // pass the value to onChange as a simple value (legacy pre 1.0 mode), defaults to false
+	style: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.object, // optional style to apply to the control
+	tabIndex: stringOrNumber, // optional tab index of the control
+	tabSelectsValue: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool, // whether to treat tabbing out while focused to be value selection
+	trimFilter: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool, // whether to trim whitespace around filter value
+	value: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.any, // initial field value
+	valueComponent: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func, // value component to render
+	valueKey: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string, // path of the label value in option objects
+	valueRenderer: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func, // valueRenderer: function (option) {}
+	wrapperStyle: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.object // optional style to apply to the component wrapper
+};
+
+Select$1.defaultProps = {
+	arrowRenderer: arrowRenderer,
+	autosize: true,
+	backspaceRemoves: true,
+	backspaceToRemoveMessage: 'Press backspace to remove {label}',
+	clearable: true,
+	clearAllText: 'Clear all',
+	clearRenderer: clearRenderer,
+	clearValueText: 'Clear value',
+	closeOnSelect: true,
+	deleteRemoves: true,
+	delimiter: ',',
+	disabled: false,
+	escapeClearsValue: true,
+	filterOptions: filterOptions,
+	ignoreAccents: true,
+	ignoreCase: true,
+	inputProps: {},
+	isLoading: false,
+	joinValues: false,
+	labelKey: 'label',
+	matchPos: 'any',
+	matchProp: 'any',
+	menuBuffer: 0,
+	menuRenderer: menuRenderer,
+	multi: false,
+	noResultsText: 'No results found',
+	onBlurResetsInput: true,
+	onCloseResetsInput: true,
+	onSelectResetsInput: true,
+	openOnClick: true,
+	optionComponent: Option,
+	pageSize: 5,
+	placeholder: 'Select...',
+	removeSelected: true,
+	required: false,
+	rtl: false,
+	scrollMenuIntoView: true,
+	searchable: true,
+	simpleValue: false,
+	tabSelectsValue: true,
+	trimFilter: true,
+	valueComponent: Value,
+	valueKey: 'value'
+};
+
+var propTypes = {
+	autoload: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool.isRequired, // automatically call the `loadOptions` prop on-mount; defaults to true
+	cache: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.any, // object to use to cache results; set to null/false to disable caching
+	children: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func.isRequired, // Child function responsible for creating the inner Select component; (props: Object): PropTypes.element
+	ignoreAccents: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool, // strip diacritics when filtering; defaults to true
+	ignoreCase: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool, // perform case-insensitive filtering; defaults to true
+	loadOptions: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func.isRequired, // callback to load options asynchronously; (inputValue: string, callback: Function): ?Promise
+	loadingPlaceholder: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.oneOfType([// replaces the placeholder while options are loading
+	prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.node]),
+	multi: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool, // multi-value input
+	noResultsText: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.oneOfType([// field noResultsText, displayed when no options come back from the server
+	prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.node]),
+	onChange: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func, // onChange handler: function (newValue) {}
+	onInputChange: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func, // optional for keeping track of what is being typed
+	options: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.array.isRequired, // array of options
+	placeholder: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.oneOfType([// field placeholder, displayed when there's no value (shared with Select)
+	prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.node]),
+	searchPromptText: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.oneOfType([// label to prompt for search input
+	prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.node]),
+	value: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.any // initial field value
+};
+
+var defaultCache = {};
+
+var defaultChildren = function defaultChildren(props) {
+	return react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(Select$1, props);
+};
+
+var defaultProps = {
+	autoload: true,
+	cache: defaultCache,
+	children: defaultChildren,
+	ignoreAccents: true,
+	ignoreCase: true,
+	loadingPlaceholder: 'Loading...',
+	options: [],
+	searchPromptText: 'Type to search'
+};
+
+var Async = function (_Component) {
+	inherits(Async, _Component);
+
+	function Async(props, context) {
+		classCallCheck(this, Async);
+
+		var _this = possibleConstructorReturn(this, (Async.__proto__ || Object.getPrototypeOf(Async)).call(this, props, context));
+
+		_this._cache = props.cache === defaultCache ? {} : props.cache;
+
+		_this.state = {
+			inputValue: '',
+			isLoading: false,
+			options: props.options
+		};
+
+		_this.onInputChange = _this.onInputChange.bind(_this);
+		return _this;
+	}
+
+	createClass(Async, [{
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			var autoload = this.props.autoload;
+
+
+			if (autoload) {
+				this.loadOptions('');
+			}
+		}
+	}, {
+		key: 'componentWillReceiveProps',
+		value: function componentWillReceiveProps(nextProps) {
+			if (nextProps.options !== this.props.options) {
+				this.setState({
+					options: nextProps.options
+				});
+			}
+		}
+	}, {
+		key: 'componentWillUnmount',
+		value: function componentWillUnmount() {
+			this._callback = null;
+		}
+	}, {
+		key: 'loadOptions',
+		value: function loadOptions(inputValue) {
+			var _this2 = this;
+
+			var loadOptions = this.props.loadOptions;
+
+			var cache = this._cache;
+
+			if (cache && Object.prototype.hasOwnProperty.call(cache, inputValue)) {
+				this._callback = null;
+
+				this.setState({
+					isLoading: false,
+					options: cache[inputValue]
+				});
+
+				return;
+			}
+
+			var callback = function callback(error, data) {
+				var options = data && data.options || [];
+
+				if (cache) {
+					cache[inputValue] = options;
+				}
+
+				if (callback === _this2._callback) {
+					_this2._callback = null;
+
+					_this2.setState({
+						isLoading: false,
+						options: options
+					});
+				}
+			};
+
+			// Ignore all but the most recent request
+			this._callback = callback;
+
+			var promise = loadOptions(inputValue, callback);
+			if (promise) {
+				promise.then(function (data) {
+					return callback(null, data);
+				}, function (error) {
+					return callback(error);
+				});
+			}
+
+			if (this._callback && !this.state.isLoading) {
+				this.setState({
+					isLoading: true
+				});
+			}
+		}
+	}, {
+		key: 'onInputChange',
+		value: function onInputChange(inputValue) {
+			var _props = this.props,
+			    ignoreAccents = _props.ignoreAccents,
+			    ignoreCase = _props.ignoreCase,
+			    onInputChange = _props.onInputChange;
+
+			var newInputValue = inputValue;
+
+			if (onInputChange) {
+				var value = onInputChange(newInputValue);
+				// Note: != used deliberately here to catch undefined and null
+				if (value != null && (typeof value === 'undefined' ? 'undefined' : _typeof(value)) !== 'object') {
+					newInputValue = '' + value;
+				}
+			}
+
+			var transformedInputValue = newInputValue;
+
+			if (ignoreAccents) {
+				transformedInputValue = stripDiacritics(transformedInputValue);
+			}
+
+			if (ignoreCase) {
+				transformedInputValue = transformedInputValue.toLowerCase();
+			}
+
+			this.setState({ inputValue: newInputValue });
+			this.loadOptions(transformedInputValue);
+
+			// Return new input value, but without applying toLowerCase() to avoid modifying the user's view case of the input while typing.
+			return newInputValue;
+		}
+	}, {
+		key: 'noResultsText',
+		value: function noResultsText() {
+			var _props2 = this.props,
+			    loadingPlaceholder = _props2.loadingPlaceholder,
+			    noResultsText = _props2.noResultsText,
+			    searchPromptText = _props2.searchPromptText;
+			var _state = this.state,
+			    inputValue = _state.inputValue,
+			    isLoading = _state.isLoading;
+
+
+			if (isLoading) {
+				return loadingPlaceholder;
+			}
+			if (inputValue && noResultsText) {
+				return noResultsText;
+			}
+			return searchPromptText;
+		}
+	}, {
+		key: 'focus',
+		value: function focus() {
+			this.select.focus();
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			var _this3 = this;
+
+			var _props3 = this.props,
+			    children = _props3.children,
+			    loadingPlaceholder = _props3.loadingPlaceholder,
+			    placeholder = _props3.placeholder;
+			var _state2 = this.state,
+			    isLoading = _state2.isLoading,
+			    options = _state2.options;
+
+
+			var props = {
+				noResultsText: this.noResultsText(),
+				placeholder: isLoading ? loadingPlaceholder : placeholder,
+				options: isLoading && loadingPlaceholder ? [] : options,
+				ref: function ref(_ref) {
+					return _this3.select = _ref;
+				}
+			};
+
+			return children(_extends({}, this.props, props, {
+				isLoading: isLoading,
+				onInputChange: this.onInputChange
+			}));
+		}
+	}]);
+	return Async;
+}(react__WEBPACK_IMPORTED_MODULE_3__["Component"]);
+
+Async.propTypes = propTypes;
+Async.defaultProps = defaultProps;
+
+var CreatableSelect = function (_React$Component) {
+	inherits(CreatableSelect, _React$Component);
+
+	function CreatableSelect(props, context) {
+		classCallCheck(this, CreatableSelect);
+
+		var _this = possibleConstructorReturn(this, (CreatableSelect.__proto__ || Object.getPrototypeOf(CreatableSelect)).call(this, props, context));
+
+		_this.filterOptions = _this.filterOptions.bind(_this);
+		_this.menuRenderer = _this.menuRenderer.bind(_this);
+		_this.onInputKeyDown = _this.onInputKeyDown.bind(_this);
+		_this.onInputChange = _this.onInputChange.bind(_this);
+		_this.onOptionSelect = _this.onOptionSelect.bind(_this);
+		return _this;
+	}
+
+	createClass(CreatableSelect, [{
+		key: 'createNewOption',
+		value: function createNewOption() {
+			var _props = this.props,
+			    isValidNewOption = _props.isValidNewOption,
+			    newOptionCreator = _props.newOptionCreator,
+			    onNewOptionClick = _props.onNewOptionClick,
+			    _props$options = _props.options,
+			    options = _props$options === undefined ? [] : _props$options;
+
+
+			if (isValidNewOption({ label: this.inputValue })) {
+				var option = newOptionCreator({ label: this.inputValue, labelKey: this.labelKey, valueKey: this.valueKey });
+				var _isOptionUnique = this.isOptionUnique({ option: option, options: options });
+
+				// Don't add the same option twice.
+				if (_isOptionUnique) {
+					if (onNewOptionClick) {
+						onNewOptionClick(option);
+					} else {
+						options.unshift(option);
+
+						this.select.selectValue(option);
+					}
+				}
+			}
+		}
+	}, {
+		key: 'filterOptions',
+		value: function filterOptions$$1() {
+			var _props2 = this.props,
+			    filterOptions$$1 = _props2.filterOptions,
+			    isValidNewOption = _props2.isValidNewOption,
+			    promptTextCreator = _props2.promptTextCreator;
+
+			// TRICKY Check currently selected options as well.
+			// Don't display a create-prompt for a value that's selected.
+			// This covers async edge-cases where a newly-created Option isn't yet in the async-loaded array.
+
+			var excludeOptions = (arguments.length <= 2 ? undefined : arguments[2]) || [];
+
+			var filteredOptions = filterOptions$$1.apply(undefined, arguments) || [];
+
+			if (isValidNewOption({ label: this.inputValue })) {
+				var _newOptionCreator = this.props.newOptionCreator;
+
+
+				var option = _newOptionCreator({
+					label: this.inputValue,
+					labelKey: this.labelKey,
+					valueKey: this.valueKey
+				});
+
+				// TRICKY Compare to all options (not just filtered options) in case option has already been selected).
+				// For multi-selects, this would remove it from the filtered list.
+				var _isOptionUnique2 = this.isOptionUnique({
+					option: option,
+					options: excludeOptions.concat(filteredOptions)
+				});
+
+				if (_isOptionUnique2) {
+					var prompt = promptTextCreator(this.inputValue);
+
+					this._createPlaceholderOption = _newOptionCreator({
+						label: prompt,
+						labelKey: this.labelKey,
+						valueKey: this.valueKey
+					});
+
+					filteredOptions.unshift(this._createPlaceholderOption);
+				}
+			}
+
+			return filteredOptions;
+		}
+	}, {
+		key: 'isOptionUnique',
+		value: function isOptionUnique(_ref) {
+			var option = _ref.option,
+			    options = _ref.options;
+			var isOptionUnique = this.props.isOptionUnique;
+
+
+			options = options || this.props.options;
+
+			return isOptionUnique({
+				labelKey: this.labelKey,
+				option: option,
+				options: options,
+				valueKey: this.valueKey
+			});
+		}
+	}, {
+		key: 'menuRenderer',
+		value: function menuRenderer$$1(params) {
+			var menuRenderer$$1 = this.props.menuRenderer;
+
+
+			return menuRenderer$$1(_extends({}, params, {
+				onSelect: this.onOptionSelect,
+				selectValue: this.onOptionSelect
+			}));
+		}
+	}, {
+		key: 'onInputChange',
+		value: function onInputChange(input) {
+			var onInputChange = this.props.onInputChange;
+
+			// This value may be needed in between Select mounts (when this.select is null)
+
+			this.inputValue = input;
+
+			if (onInputChange) {
+				this.inputValue = onInputChange(input);
+			}
+
+			return this.inputValue;
+		}
+	}, {
+		key: 'onInputKeyDown',
+		value: function onInputKeyDown(event) {
+			var _props3 = this.props,
+			    shouldKeyDownEventCreateNewOption = _props3.shouldKeyDownEventCreateNewOption,
+			    onInputKeyDown = _props3.onInputKeyDown;
+
+			var focusedOption = this.select.getFocusedOption();
+
+			if (focusedOption && focusedOption === this._createPlaceholderOption && shouldKeyDownEventCreateNewOption({ keyCode: event.keyCode })) {
+				this.createNewOption();
+
+				// Prevent decorated Select from doing anything additional with this keyDown event
+				event.preventDefault();
+			} else if (onInputKeyDown) {
+				onInputKeyDown(event);
+			}
+		}
+	}, {
+		key: 'onOptionSelect',
+		value: function onOptionSelect(option) {
+			if (option === this._createPlaceholderOption) {
+				this.createNewOption();
+			} else {
+				this.select.selectValue(option);
+			}
+		}
+	}, {
+		key: 'focus',
+		value: function focus() {
+			this.select.focus();
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			var _this2 = this;
+
+			var _props4 = this.props,
+			    refProp = _props4.ref,
+			    restProps = objectWithoutProperties(_props4, ['ref']);
+			var children = this.props.children;
+
+			// We can't use destructuring default values to set the children,
+			// because it won't apply work if `children` is null. A falsy check is
+			// more reliable in real world use-cases.
+
+			if (!children) {
+				children = defaultChildren$2;
+			}
+
+			var props = _extends({}, restProps, {
+				allowCreate: true,
+				filterOptions: this.filterOptions,
+				menuRenderer: this.menuRenderer,
+				onInputChange: this.onInputChange,
+				onInputKeyDown: this.onInputKeyDown,
+				ref: function ref(_ref2) {
+					_this2.select = _ref2;
+
+					// These values may be needed in between Select mounts (when this.select is null)
+					if (_ref2) {
+						_this2.labelKey = _ref2.props.labelKey;
+						_this2.valueKey = _ref2.props.valueKey;
+					}
+					if (refProp) {
+						refProp(_ref2);
+					}
+				}
+			});
+
+			return children(props);
+		}
+	}]);
+	return CreatableSelect;
+}(react__WEBPACK_IMPORTED_MODULE_3___default.a.Component);
+
+var defaultChildren$2 = function defaultChildren(props) {
+	return react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(Select$1, props);
+};
+
+var isOptionUnique = function isOptionUnique(_ref3) {
+	var option = _ref3.option,
+	    options = _ref3.options,
+	    labelKey = _ref3.labelKey,
+	    valueKey = _ref3.valueKey;
+
+	if (!options || !options.length) {
+		return true;
+	}
+
+	return options.filter(function (existingOption) {
+		return existingOption[labelKey] === option[labelKey] || existingOption[valueKey] === option[valueKey];
+	}).length === 0;
+};
+
+var isValidNewOption = function isValidNewOption(_ref4) {
+	var label = _ref4.label;
+	return !!label;
+};
+
+var newOptionCreator = function newOptionCreator(_ref5) {
+	var label = _ref5.label,
+	    labelKey = _ref5.labelKey,
+	    valueKey = _ref5.valueKey;
+
+	var option = {};
+	option[valueKey] = label;
+	option[labelKey] = label;
+	option.className = 'Select-create-option-placeholder';
+
+	return option;
+};
+
+var promptTextCreator = function promptTextCreator(label) {
+	return 'Create option "' + label + '"';
+};
+
+var shouldKeyDownEventCreateNewOption = function shouldKeyDownEventCreateNewOption(_ref6) {
+	var keyCode = _ref6.keyCode;
+
+	switch (keyCode) {
+		case 9: // TAB
+		case 13: // ENTER
+		case 188:
+			// COMMA
+			return true;
+		default:
+			return false;
+	}
+};
+
+// Default prop methods
+CreatableSelect.isOptionUnique = isOptionUnique;
+CreatableSelect.isValidNewOption = isValidNewOption;
+CreatableSelect.newOptionCreator = newOptionCreator;
+CreatableSelect.promptTextCreator = promptTextCreator;
+CreatableSelect.shouldKeyDownEventCreateNewOption = shouldKeyDownEventCreateNewOption;
+
+CreatableSelect.defaultProps = {
+	filterOptions: filterOptions,
+	isOptionUnique: isOptionUnique,
+	isValidNewOption: isValidNewOption,
+	menuRenderer: menuRenderer,
+	newOptionCreator: newOptionCreator,
+	promptTextCreator: promptTextCreator,
+	shouldKeyDownEventCreateNewOption: shouldKeyDownEventCreateNewOption
+};
+
+CreatableSelect.propTypes = {
+	// Child function responsible for creating the inner Select component
+	// This component can be used to compose HOCs (eg Creatable and Async)
+	// (props: Object): PropTypes.element
+	children: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
+
+	// See Select.propTypes.filterOptions
+	filterOptions: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.any,
+
+	// Searches for any matching option within the set of options.
+	// This function prevents duplicate options from being created.
+	// ({ option: Object, options: Array, labelKey: string, valueKey: string }): boolean
+	isOptionUnique: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
+
+	// Determines if the current input text represents a valid option.
+	// ({ label: string }): boolean
+	isValidNewOption: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
+
+	// See Select.propTypes.menuRenderer
+	menuRenderer: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.any,
+
+	// Factory to create new option.
+	// ({ label: string, labelKey: string, valueKey: string }): Object
+	newOptionCreator: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
+
+	// input change handler: function (inputValue) {}
+	onInputChange: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
+
+	// input keyDown handler: function (event) {}
+	onInputKeyDown: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
+
+	// new option click handler: function (option) {}
+	onNewOptionClick: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
+
+	// See Select.propTypes.options
+	options: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.array,
+
+	// Creates prompt/placeholder option text.
+	// (filterText: string): string
+	promptTextCreator: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
+
+	ref: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
+
+	// Decides if a keyDown event (eg its `keyCode`) should result in the creation of a new option.
+	shouldKeyDownEventCreateNewOption: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func
+};
+
+var AsyncCreatableSelect = function (_React$Component) {
+	inherits(AsyncCreatableSelect, _React$Component);
+
+	function AsyncCreatableSelect() {
+		classCallCheck(this, AsyncCreatableSelect);
+		return possibleConstructorReturn(this, (AsyncCreatableSelect.__proto__ || Object.getPrototypeOf(AsyncCreatableSelect)).apply(this, arguments));
+	}
+
+	createClass(AsyncCreatableSelect, [{
+		key: 'focus',
+		value: function focus() {
+			this.select.focus();
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			var _this2 = this;
+
+			return react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(
+				Async,
+				this.props,
+				function (_ref) {
+					var ref = _ref.ref,
+					    asyncProps = objectWithoutProperties(_ref, ['ref']);
+
+					var asyncRef = ref;
+					return react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(
+						CreatableSelect,
+						asyncProps,
+						function (_ref2) {
+							var ref = _ref2.ref,
+							    creatableProps = objectWithoutProperties(_ref2, ['ref']);
+
+							var creatableRef = ref;
+							return _this2.props.children(_extends({}, creatableProps, {
+								ref: function ref(select) {
+									creatableRef(select);
+									asyncRef(select);
+									_this2.select = select;
+								}
+							}));
+						}
+					);
+				}
+			);
+		}
+	}]);
+	return AsyncCreatableSelect;
+}(react__WEBPACK_IMPORTED_MODULE_3___default.a.Component);
+
+var defaultChildren$1 = function defaultChildren(props) {
+	return react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(Select$1, props);
+};
+
+AsyncCreatableSelect.propTypes = {
+	children: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func.isRequired // Child function responsible for creating the inner Select component; (props: Object): PropTypes.element
+};
+
+AsyncCreatableSelect.defaultProps = {
+	children: defaultChildren$1
+};
+
+Select$1.Async = Async;
+Select$1.AsyncCreatable = AsyncCreatableSelect;
+Select$1.Creatable = CreatableSelect;
+Select$1.Value = Value;
+Select$1.Option = Option;
+
+
+/* harmony default export */ __webpack_exports__["default"] = (Select$1);
+
+
+/***/ }),
+
 /***/ "./node_modules/util/node_modules/inherits/inherits_browser.js":
 /*!*********************************************************************!*\
   !*** ./node_modules/util/node_modules/inherits/inherits_browser.js ***!
@@ -1071,7 +4127,7 @@ var updateBaStatus = function updateBaStatus(param) {
 /*!*********************************************************************************************!*\
   !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/actions/gridHandlerAction.js ***!
   \*********************************************************************************************/
-/*! exports provided: setDisplayedColumnList, setPlayerList, setCurrentActivePlayer, setPagingOption, exportExcel, setIsFetchingData */
+/*! exports provided: setDisplayedColumnList, setPlayerList, setCurrentActivePlayer, setPagingOption, exportExcel, setIsFetchingData, setSweetAlertOption */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1082,6 +4138,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setPagingOption", function() { return setPagingOption; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "exportExcel", function() { return exportExcel; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setIsFetchingData", function() { return setIsFetchingData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSweetAlertOption", function() { return setSweetAlertOption; });
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/actions/types.js");
 /* harmony import */ var _lib_playerQueryService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/playerQueryService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerQueryService.js");
 
@@ -1119,6 +4176,12 @@ var exportExcel = function exportExcel(playerList, param, displayedColumn) {
 var setIsFetchingData = function setIsFetchingData(data) {
   return {
     type: _types__WEBPACK_IMPORTED_MODULE_0__["SET_IS_FETCHING_DATA"],
+    data: data
+  };
+};
+var setSweetAlertOption = function setSweetAlertOption(data) {
+  return {
+    type: _types__WEBPACK_IMPORTED_MODULE_0__["SET_SWEET_ALERT_OPTION"],
     data: data
   };
 };
@@ -1318,7 +4381,7 @@ var setSelectedTabName = function setSelectedTabName(data) {
 /*!*********************************************************************************!*\
   !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/actions/types.js ***!
   \*********************************************************************************/
-/*! exports provided: SET_PARAM, SET_PLAYER_LIST, SET_SELECTED_PLAYER, SET_SELECTED_PLAYERID_LIST, SET_ADVANCED_SEARCH, SET_COLLAPSE_FILTER, SET_DISPLAYED_COLUMN_LIST, SET_CURRENT_ACTIVE_PLAYER, SET_PAGING, SET_SELECTED_TAB_NAME, SET_IS_FETCHING_DATA, SET_ODDSGROUP_POSITION, SET_SPECIAL_LEVEL_POSITION, SET_STATUS_POSITION, SET_CONTEXT_MENU */
+/*! exports provided: SET_PARAM, SET_PLAYER_LIST, SET_SELECTED_PLAYER, SET_SELECTED_PLAYERID_LIST, SET_ADVANCED_SEARCH, SET_COLLAPSE_FILTER, SET_DISPLAYED_COLUMN_LIST, SET_CURRENT_ACTIVE_PLAYER, SET_PAGING, SET_SELECTED_TAB_NAME, SET_IS_FETCHING_DATA, SET_ODDSGROUP_POSITION, SET_SPECIAL_LEVEL_POSITION, SET_STATUS_POSITION, SET_CONTEXT_MENU, SET_SWEET_ALERT_OPTION */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1338,6 +4401,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SPECIAL_LEVEL_POSITION", function() { return SET_SPECIAL_LEVEL_POSITION; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_STATUS_POSITION", function() { return SET_STATUS_POSITION; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_CONTEXT_MENU", function() { return SET_CONTEXT_MENU; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SWEET_ALERT_OPTION", function() { return SET_SWEET_ALERT_OPTION; });
 var SET_PARAM = 'PLAYER_ADMIN/SET_PARAM';
 var SET_PLAYER_LIST = 'PLAYER_ADMIN/SET_PLAYER_LIST';
 var SET_SELECTED_PLAYER = 'PLAYER_ADMIN/SET_SELECTED_PLAYER';
@@ -1353,6 +4417,7 @@ var SET_ODDSGROUP_POSITION = 'PLAYER_ADMIN/SET_ODDSGROUP_POSITION';
 var SET_SPECIAL_LEVEL_POSITION = 'PLAYER_ADMIN/SET_SPECIAL_LEVEL_POSITION';
 var SET_STATUS_POSITION = 'PLAYER_ADMIN/SET_STATUS_POSITION';
 var SET_CONTEXT_MENU = 'PLAYER_ADMIN/SET_CONTEXT_MENU';
+var SET_SWEET_ALERT_OPTION = 'PLAYER_ADMIN/SET_SWEET_ALERT_OPTION';
 
 /***/ }),
 
@@ -1502,6 +4567,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _grid_StatusDropdown__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./grid/StatusDropdown */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/components/grid/StatusDropdown.jsx");
 /* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../lib/utils */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/utils.js");
 /* harmony import */ var _jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @jsroot/components/NoDataTitle */ "./www/js/source/reactpages/components/NoDataTitle.jsx");
+/* harmony import */ var _components_sweet_alert__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../../../components/sweet-alert */ "./www/js/source/reactpages/components/sweet-alert/index.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
@@ -1523,6 +4589,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -1588,7 +4655,8 @@ function (_PureComponent) {
           playerList = _this$props2.playerList,
           selectedPlayer = _this$props2.selectedPlayer,
           isFetchingData = _this$props2.isFetchingData,
-          displayedColumnList = _this$props2.displayedColumnList;
+          displayedColumnList = _this$props2.displayedColumnList,
+          sweetAlertOption = _this$props2.sweetAlertOption;
 
       if (!playerList) {
         return null;
@@ -1612,7 +4680,7 @@ function (_PureComponent) {
         containerPadding: 30,
         shouldResetScrollPosition: isFetchingData,
         onSort: this.handleSort
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_grid_ContextMenu__WEBPACK_IMPORTED_MODULE_5__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_grid_SpecialLevelDropdown__WEBPACK_IMPORTED_MODULE_6__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_grid_OddsGroupDropdown__WEBPACK_IMPORTED_MODULE_9__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_grid_StatusDropdown__WEBPACK_IMPORTED_MODULE_11__["default"], null));
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_grid_ContextMenu__WEBPACK_IMPORTED_MODULE_5__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_grid_SpecialLevelDropdown__WEBPACK_IMPORTED_MODULE_6__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_grid_OddsGroupDropdown__WEBPACK_IMPORTED_MODULE_9__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_grid_StatusDropdown__WEBPACK_IMPORTED_MODULE_11__["default"], null), sweetAlertOption && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_sweet_alert__WEBPACK_IMPORTED_MODULE_14__["default"], sweetAlertOption));
     }
   }]);
 
@@ -1630,12 +4698,14 @@ function mapStateToProps(state) {
   var playerList = state.playerList,
       selectedPlayer = state.selectedPlayer,
       displayedColumnList = state.displayedColumnList,
-      isFetchingData = state.isFetchingData;
+      isFetchingData = state.isFetchingData,
+      sweetAlertOption = state.sweetAlertOption;
   return Object.assign({}, {
     playerList: playerList,
     selectedPlayer: selectedPlayer,
     displayedColumnList: displayedColumnList,
-    isFetchingData: isFetchingData
+    isFetchingData: isFetchingData,
+    sweetAlertOption: sweetAlertOption
   });
 }
 
@@ -2874,6 +5944,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var _lib_gridInteractionService__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../lib/gridInteractionService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/gridInteractionService.js");
 /* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../lib/utils */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/utils.js");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
@@ -2883,12 +5956,43 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+var generateConfirmOption = function generateConfirmOption(content) {
+  return {
+    buttons: [{
+      text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource('Submit'),
+      className: 'btn btn-apply'
+    }, {
+      text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource('Cancel'),
+      className: 'btn'
+    }],
+    icon: 'warning',
+    isShow: true,
+    children: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      className: "center-align"
+    }, content)
+  };
+};
+
+var alertOption = {
+  buttons: [{
+    text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource('OK'),
+    className: 'btn btn-apply'
+  }],
+  icon: 'success',
+  isShow: true,
+  children: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "center-align"
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource('UpdateSuccess'))
+};
 
 var BaStatusCell = function BaStatusCell(props) {
   var dataItem = props.dataItem,
       setPlayerList = props.setPlayerList,
       toggleLoader = props.toggleLoader,
-      updateBaStatus = props.updateBaStatus;
+      updateBaStatus = props.updateBaStatus,
+      setSweetAlertOption = props.setSweetAlertOption;
   var CustId = dataItem.CustId,
       BaStatus = dataItem.BaStatus,
       OddsGroup = dataItem.OddsGroup;
@@ -2897,6 +6001,24 @@ var BaStatusCell = function BaStatusCell(props) {
     var isBa = event.target.checked;
     var resourceName = isBa ? 'AlertTurnOnBAMsg' : 'AlertTurnOffBAMsg';
     var confirmMessage = _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource(resourceName);
+    var confirmOption = generateConfirmOption(confirmMessage);
+    var submitButton = confirmOption.buttons[0];
+    confirmOption.buttons[0] = _objectSpread({}, submitButton, {
+      onClick: function onClick() {
+        setSweetAlertOption(_objectSpread({}, alertOption));
+      }
+    });
+
+    confirmOption.buttons[1].onClick = function () {
+      setSweetAlertOption(null);
+    };
+
+    confirmOption.onClose = function () {
+      return setSweetAlertOption(null);
+    };
+
+    setSweetAlertOption(confirmOption);
+    return;
 
     if (!window.confirm(confirmMessage)) {
       return;
@@ -2944,11 +6066,13 @@ var BaStatusCell = function BaStatusCell(props) {
 function mapDispatchToProps(dispatch) {
   var setPlayerList = _actions__WEBPACK_IMPORTED_MODULE_3__["ActionCreators"].setPlayerList,
       toggleLoader = _actions__WEBPACK_IMPORTED_MODULE_3__["ActionCreators"].toggleLoader,
-      updateBaStatus = _actions__WEBPACK_IMPORTED_MODULE_3__["ActionCreators"].updateBaStatus;
+      updateBaStatus = _actions__WEBPACK_IMPORTED_MODULE_3__["ActionCreators"].updateBaStatus,
+      setSweetAlertOption = _actions__WEBPACK_IMPORTED_MODULE_3__["ActionCreators"].setSweetAlertOption;
   return Object(redux__WEBPACK_IMPORTED_MODULE_2__["bindActionCreators"])({
     setPlayerList: setPlayerList,
     toggleLoader: toggleLoader,
-    updateBaStatus: updateBaStatus
+    updateBaStatus: updateBaStatus,
+    setSweetAlertOption: setSweetAlertOption
   }, dispatch);
 }
 
@@ -5932,7 +9056,7 @@ var isFilterCollapsing = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0
 /*!***********************************************************************************************!*\
   !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/reducers/gridHandlerReducer.js ***!
   \***********************************************************************************************/
-/*! exports provided: displayedColumnList, currentActivePlayer, pagingOption, isFetchingData */
+/*! exports provided: displayedColumnList, currentActivePlayer, pagingOption, isFetchingData, sweetAlertOption */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5941,6 +9065,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "currentActivePlayer", function() { return currentActivePlayer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pagingOption", function() { return pagingOption; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isFetchingData", function() { return isFetchingData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sweetAlertOption", function() { return sweetAlertOption; });
 /* harmony import */ var _lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
 /* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/types */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/actions/types.js");
 /* harmony import */ var _lib_constants_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../lib/constants.js */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
@@ -5970,6 +9095,9 @@ var pagingOption = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["de
 }));
 var isFetchingData = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(false, _defineProperty({}, _actions_types__WEBPACK_IMPORTED_MODULE_1__["SET_IS_FETCHING_DATA"], function (preState, action) {
   return action.data;
+}));
+var sweetAlertOption = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(null, _defineProperty({}, _actions_types__WEBPACK_IMPORTED_MODULE_1__["SET_SWEET_ALERT_OPTION"], function (preState, action) {
+  return action.data && _objectSpread({}, action.data);
 }));
 
 /***/ }),
@@ -7762,6 +10890,182 @@ var DEFAULT_HEIGHT = '55%';
 
 /***/ }),
 
+/***/ "./www/js/source/reactpages/components/popup/index.jsx":
+/*!*************************************************************!*\
+  !*** ./www/js/source/reactpages/components/popup/index.jsx ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Popup__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Popup */ "./www/js/source/reactpages/components/popup/Popup.jsx");
+
+/* harmony default export */ __webpack_exports__["default"] = (_Popup__WEBPACK_IMPORTED_MODULE_0__["default"]);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/components/sweet-alert/icon.js":
+/*!*****************************************************************!*\
+  !*** ./www/js/source/reactpages/components/sweet-alert/icon.js ***!
+  \*****************************************************************/
+/*! exports provided: ICON, errorIconMarkup, warningIconMarkup, successIconMarkup */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ICON", function() { return ICON; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "errorIconMarkup", function() { return errorIconMarkup; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "warningIconMarkup", function() { return warningIconMarkup; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "successIconMarkup", function() { return successIconMarkup; });
+var ICON = 'swal-icon';
+var errorIconMarkup = function errorIconMarkup() {
+  var icon = "".concat(ICON, "--error");
+  var line = "".concat(icon, "__line");
+  var markup = "\n    <div class=\"".concat(icon, "__x-mark\">\n      <span class=\"").concat(line, " ").concat(line, "--left\"></span>\n      <span class=\"").concat(line, " ").concat(line, "--right\"></span>\n    </div>\n  ");
+  return markup;
+};
+var warningIconMarkup = function warningIconMarkup() {
+  var icon = "".concat(ICON, "--warning");
+  return "\n    <span class=\"".concat(icon, "__body\">\n      <span class=\"").concat(icon, "__dot\"></span>\n    </span>\n  ");
+};
+var successIconMarkup = function successIconMarkup() {
+  var icon = "".concat(ICON, "--success");
+  return "\n    <span class=\"".concat(icon, "__line ").concat(icon, "__line--long\"></span>\n    <span class=\"").concat(icon, "__line ").concat(icon, "__line--tip\"></span>\n\n    <div class=\"").concat(icon, "__ring\"></div>\n    <div class=\"").concat(icon, "__hide-corners\"></div>\n  ");
+};
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/components/sweet-alert/index.jsx":
+/*!*******************************************************************!*\
+  !*** ./www/js/source/reactpages/components/sweet-alert/index.jsx ***!
+  \*******************************************************************/
+/*! exports provided: SweetAlert, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SweetAlert", function() { return SweetAlert; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _popup__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../popup */ "./www/js/source/reactpages/components/popup/index.jsx");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _icon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./icon */ "./www/js/source/reactpages/components/sweet-alert/icon.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+var PREDEFINED_ICONS = ["error", "warning", "success", "info"];
+var ICON_CONTENTS = {
+  error: Object(_icon__WEBPACK_IMPORTED_MODULE_3__["errorIconMarkup"])(),
+  warning: Object(_icon__WEBPACK_IMPORTED_MODULE_3__["warningIconMarkup"])(),
+  success: Object(_icon__WEBPACK_IMPORTED_MODULE_3__["successIconMarkup"])()
+};
+var SweetAlert =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(SweetAlert, _React$Component);
+
+  function SweetAlert(props) {
+    _classCallCheck(this, SweetAlert);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(SweetAlert).call(this, props));
+  }
+
+  _createClass(SweetAlert, [{
+    key: "_buildButtonGroup",
+    value: function _buildButtonGroup(buttons) {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "al-button-container"
+      }, buttons.map(function (btnItem, index) {
+        var text = btnItem.text,
+            attrs = _objectWithoutProperties(btnItem, ["text"]);
+
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", _extends({
+          key: index,
+          type: "button"
+        }, attrs), text);
+      }));
+    }
+  }, {
+    key: "_buildIcon",
+    value: function _buildIcon() {
+      var icon = this.props.icon;
+      var className = "".concat(_icon__WEBPACK_IMPORTED_MODULE_3__["ICON"], " ").concat(_icon__WEBPACK_IMPORTED_MODULE_3__["ICON"], "--").concat(icon);
+
+      if (PREDEFINED_ICONS.includes(icon)) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: className,
+          dangerouslySetInnerHTML: {
+            __html: ICON_CONTENTS[icon]
+          }
+        });
+      }
+
+      return null;
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          buttons = _this$props.buttons,
+          children = _this$props.children,
+          props = _objectWithoutProperties(_this$props, ["buttons", "children"]);
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "sweet-alert"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_popup__WEBPACK_IMPORTED_MODULE_1__["default"], props, this._buildIcon(), children, this._buildButtonGroup(buttons)));
+    }
+  }]);
+
+  return SweetAlert;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+SweetAlert.propTypes = {
+  width: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number, prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string]),
+  height: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number, prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string]),
+  title: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
+  isShow: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool,
+  onClose: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
+  isHtml: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool,
+  buttons: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.object)
+};
+SweetAlert.defaultProps = {
+  width: 550,
+  height: 200,
+  isShow: false,
+  isHtml: false,
+  title: '',
+  buttons: []
+};
+/* harmony default export */ __webpack_exports__["default"] = (SweetAlert);
+
+/***/ }),
+
 /***/ "./www/js/source/reactpages/components/utils/timer.js":
 /*!************************************************************!*\
   !*** ./www/js/source/reactpages/components/utils/timer.js ***!
@@ -8308,7 +11612,7 @@ function () {
         _XLSX = window.XLSX;
         callback && callback();
       } else {
-        Promise.all(/*! import() | xlsx-style-sparta */[__webpack_require__.e("common"), __webpack_require__.e("xlsx-style-sparta")]).then(__webpack_require__.t.bind(null, /*! xlsx-style-sparta */ "./node_modules/xlsx-style-sparta/xlsx.js", 7)).then(function (XLSX) {
+        __webpack_require__.e(/*! import() | xlsx-style-sparta */ "xlsx-style-sparta").then(__webpack_require__.t.bind(null, /*! xlsx-style-sparta */ "./node_modules/xlsx-style-sparta/xlsx.js", 7)).then(function (XLSX) {
           _XLSX = XLSX;
           callback && callback();
         });

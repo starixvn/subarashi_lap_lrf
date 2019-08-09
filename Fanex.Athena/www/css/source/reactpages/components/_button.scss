@@ -68,6 +68,19 @@ $btnOutlineHorverLightColor: #e6c95a;
     background-color: $btnCancelBackground;
 }
 
+.btn-apply {
+    background-color: #4e68b6;
+    color: $white;
+
+    &:hover {
+        background: lighten(#4e68b6, 10%);
+    }
+
+    &:focus {
+        background: #4e68b6;
+    }
+}
+
 button {
     &:focus {
         outline: none;

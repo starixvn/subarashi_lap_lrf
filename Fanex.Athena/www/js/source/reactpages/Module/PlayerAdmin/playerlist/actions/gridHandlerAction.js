@@ -1,4 +1,4 @@
-import { SET_DISPLAYED_COLUMN_LIST, SET_PLAYER_LIST, SET_CURRENT_ACTIVE_PLAYER, SET_PAGING, SET_IS_FETCHING_DATA } from './types';
+import { SET_DISPLAYED_COLUMN_LIST, SET_PLAYER_LIST, SET_CURRENT_ACTIVE_PLAYER, SET_PAGING, SET_IS_FETCHING_DATA, SET_SWEET_ALERT_OPTION } from './types';
 import PlayerQueryService from '../lib/playerQueryService';
 
 export const setDisplayedColumnList = (data) => {
@@ -37,6 +37,13 @@ export const exportExcel = (playerList, param, displayedColumn) => () => {
 export const setIsFetchingData = (data) => {
     return {
         type: SET_IS_FETCHING_DATA,
+        data
+    }
+}
+
+export const setSweetAlertOption = (data) => {
+    return {
+        type: SET_SWEET_ALERT_OPTION,
         data
     }
 }

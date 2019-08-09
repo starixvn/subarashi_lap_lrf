@@ -13,6 +13,7 @@ import PlayerRow from './grid/PlayerRow';
 import StatusDropdown from './grid/StatusDropdown';
 import { buildDisplayedColumnObject } from '../lib/utils';
 import NoDataTitle from '@jsroot/components/NoDataTitle';
+import SweetAlert from '../../../../components/sweet-alert';
 
 const MAX_WIDTH_PAGE = 1920;
 
@@ -44,7 +45,7 @@ export class DataGrid extends PureComponent {
     }
 
     render() {
-        const { playerList, selectedPlayer, isFetchingData, displayedColumnList } = this.props;
+        const { playerList, selectedPlayer, isFetchingData, displayedColumnList, sweetAlertOption } = this.props;
         if (!playerList) {
             return null;
         }
@@ -71,6 +72,7 @@ export class DataGrid extends PureComponent {
                 <SpecialLevelDropdown />
                 <OddsGroupDropdown />
                 <StatusDropdown />
+                { sweetAlertOption && <SweetAlert {...sweetAlertOption} />}
             </>
         );
     }
@@ -82,8 +84,8 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-    const { playerList, selectedPlayer, displayedColumnList, isFetchingData } = state;
-    return Object.assign({}, { playerList, selectedPlayer, displayedColumnList, isFetchingData });
+    const { playerList, selectedPlayer, displayedColumnList, isFetchingData, sweetAlertOption } = state;
+    return Object.assign({}, { playerList, selectedPlayer, displayedColumnList, isFetchingData, sweetAlertOption });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DataGrid);

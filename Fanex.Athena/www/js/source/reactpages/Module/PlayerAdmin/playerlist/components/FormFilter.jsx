@@ -54,7 +54,6 @@ export class FormFilter extends PureComponent {
         }
     }
 
-
     searchPlayer() {
         const userName = this.userNameRef.current.value;
         const { bankAccountNumber, email } = this.state;

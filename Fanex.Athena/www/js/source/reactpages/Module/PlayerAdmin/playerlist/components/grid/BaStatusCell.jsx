@@ -9,14 +9,62 @@ import LangHelper from '@jsroot/lib/langHelper';
 import GridInteractionService from '../../lib/gridInteractionService';
 import { getErrorMessageForUpdating } from '../../lib/utils';
 
+const generateConfirmOption = (content) => {
+    return {
+        buttons: [
+            {
+                text: LangHelper.getSingleResource('Submit'),
+                className: 'btn btn-apply'
+            },
+            {
+                text: LangHelper.getSingleResource('Cancel'),
+                className: 'btn'
+            }
+        ],
+        icon: 'warning',
+        isShow: true,
+        children: (<p className="center-align">{content}</p>)
+    }
+}
+
+const alertOption = {
+    buttons: [
+        {
+            text: LangHelper.getSingleResource('OK'),
+            className: 'btn btn-apply'
+        }
+    ],
+    icon: 'success',
+    isShow: true,
+    children: (<p className="center-align">{LangHelper.getSingleResource('UpdateSuccess')}</p>)
+}
 const BaStatusCell = (props) => {
-    const { dataItem, setPlayerList, toggleLoader, updateBaStatus } = props;
+    const { dataItem, setPlayerList, toggleLoader, updateBaStatus, setSweetAlertOption } = props;
     const { CustId, BaStatus, OddsGroup } = dataItem;
 
     const handleChangeBaStatus = (event) => {
         const isBa = event.target.checked;
         const resourceName = isBa ? 'AlertTurnOnBAMsg' : 'AlertTurnOffBAMsg';
         const confirmMessage = LangHelper.getSingleResource(resourceName);
+        const confirmOption = generateConfirmOption(confirmMessage);
+
+        const submitButton = confirmOption.buttons[0];
+        confirmOption.buttons[0] = {
+            ...submitButton,
+            onClick: () => {
+                setSweetAlertOption({ ...alertOption });
+            }
+        }
+
+        confirmOption.buttons[1].onClick = () => {
+            setSweetAlertOption(null);
+        }
+
+        confirmOption.onClose = () => setSweetAlertOption(null);
+
+        setSweetAlertOption(confirmOption);
+
+        return;
         if (!window.confirm(confirmMessage)) {
             return;
         }
@@ -53,8 +101,8 @@ const BaStatusCell = (props) => {
 }
 
 function mapDispatchToProps(dispatch) {
-    const { setPlayerList, toggleLoader, updateBaStatus } = ActionCreators;
-    return bindActionCreators({ setPlayerList, toggleLoader, updateBaStatus }, dispatch);
+    const { setPlayerList, toggleLoader, updateBaStatus, setSweetAlertOption } = ActionCreators;
+    return bindActionCreators({ setPlayerList, toggleLoader, updateBaStatus, setSweetAlertOption }, dispatch);
 }
 
 function mapStateToProps(state) {
