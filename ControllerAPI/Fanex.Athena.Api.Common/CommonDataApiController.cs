@@ -100,7 +100,6 @@
                 FromDate = fromDate,
                 ToDate = toDate,
                 SportId = sportId,
-                LicenseeId = _sessionService.LicenseeSession.LicenseeId,
                 UserId = userSession.UserId,
                 AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList)
             };

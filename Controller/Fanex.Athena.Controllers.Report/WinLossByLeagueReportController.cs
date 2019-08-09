@@ -80,7 +80,6 @@ namespace Fanex.Athena.Controllers.Report
             var leagues = await this._leagueDataAccess.GetLeaguesBySport(
                             new LeagueMetaModel
                             {
-                                LicenseeId = licenseeSession.LicenseeId,
                                 UserId = userSession.UserId,
                                 FromDate = metaModel.FromDate,
                                 ToDate = metaModel.ToDate,
@@ -109,15 +108,9 @@ namespace Fanex.Athena.Controllers.Report
         [HttpPost]
         [AjaxRequest]
         [CustomValidateAntiForgery]
+        [AutoBindMetaModel(BindAgent = true, BindUserId = true)]
         public async Task<ActionResult> GetLeaguesBySport(LeagueMetaModel metaModel)
         {
-            var userSession = SessionService.UserSession;
-
-            metaModel.LicenseeId = SessionService.LicenseeSession.LicenseeId;
-            metaModel.UserId = userSession.UserId;
-
-            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList
-                , metaModel.CurrencyId);
             var leagues = (await _leagueDataAccess.GetLeaguesBySport(metaModel).ConfigureAwait(false))
                             .Select(x => new { Key = x.LeagueId, Value = x.LeagueName });
             return Json(leagues);
