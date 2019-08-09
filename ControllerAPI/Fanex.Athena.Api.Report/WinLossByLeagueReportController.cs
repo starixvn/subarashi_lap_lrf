@@ -56,6 +56,7 @@ namespace Fanex.Athena.Api.Report
 
         [HttpPost]
         [ValidationApiRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
+        [ApiAutoBindMetaModel(BindAgent = true, BindBalanceUpAndMoveBet = true)]
         public async Task<dynamic> Index([FromBody] WinLossByLeagueMetaModel metaModel)
         {
             var resultModel = await GetData(metaModel).ConfigureAwait(false);
@@ -69,6 +70,7 @@ namespace Fanex.Athena.Api.Report
 
         [HttpPost]
         [ValidationApiRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
+        [ApiAutoBindMetaModel(BindAgent = true, BindBalanceUpAndMoveBet = true)]
         public async Task<HttpResponseMessage> Excel(WinLossByLeagueMetaModel metaModel)
         {
             metaModel.PageIndex = 1;
@@ -113,12 +115,6 @@ namespace Fanex.Athena.Api.Report
 
         private async Task<ReportResultModel<WinLossByLeague>> GetData(WinLossByLeagueMetaModel metaModel)
         {
-            var userSession = SessionService.UserSession;
-            var balanceUp = _balanceUpDataAccess.GetBalanceUp();
-            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId);
-            metaModel.MoveBetsDay = balanceUp.MoveBetsDay;
-            metaModel.BalanceUpDay = balanceUp.BalanceUpDay;
-
             ReportResultModel<WinLossByLeague> resultModel;
 
             if (metaModel.Level == 0)

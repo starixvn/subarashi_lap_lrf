@@ -11,7 +11,7 @@ using Fanex.Athena.Service.StatelessCore.Utility;
 
 namespace Fanex.Athena.Web.ActionFilter
 {
-    [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
 
     public sealed class AutoBindMetaModelAttribute : ActionFilterAttribute
     {

@@ -132,6 +132,7 @@
     <Compile Include="MetaModel\CurrencyValidationOption.cs" />
     <Compile Include="MetaModel\IMetalModelCustomerIdentity.cs" />
     <Compile Include="MetaModel\IMetaModelAgent.cs" />
+    <Compile Include="MetaModel\IMetaModelBalanceUpAndMoveBet.cs" />
     <Compile Include="MetaModel\IMetaModelCurrency.cs" />
     <Compile Include="MetaModel\Account\AssignCurrencyMetaModel.cs" />
     <Compile Include="MetaModel\Account\EditAccountMetaModel.cs" />

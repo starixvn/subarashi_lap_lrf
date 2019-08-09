@@ -155,6 +155,7 @@
   <ItemGroup>
     <Compile Include="Attributes\ApiBetListAuthorizationAttribute.cs" />
     <Compile Include="Attributes\ApiFunctionAuthorizationAttribute.cs" />
+    <Compile Include="Attributes\ApiAutoBindMetaModelAttribute.cs" />
     <Compile Include="Attributes\CustomApiAuthorizeAttribute.cs" />
     <Compile Include="Attributes\ValidationApiRequestAttribute.cs" />
     <Compile Include="Attributes\XFrameOptionApiAttribute .cs" />
