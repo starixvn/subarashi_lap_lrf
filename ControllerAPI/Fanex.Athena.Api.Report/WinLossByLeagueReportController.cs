@@ -36,20 +36,16 @@ namespace Fanex.Athena.Api.Report
     {
         private readonly IWinLossByLeagueDataAccess _winlossByLeagueDataAccess;
 
-        private readonly IBalanceUpDataAccess _balanceUpDataAccess;
-
         private readonly IAppSettings _appSettings;
 
         public WinLossByLeagueReportController(
             ISessionService sessionService,
             IProductService productService,
             ILanguageService langService,
-            IBalanceUpDataAccess balanceUpDataAccess,
             IWinLossByLeagueDataAccess winlossByLeagueService,
             IAppSettings appSetting)
             : base(sessionService, productService, langService)
         {
-            _balanceUpDataAccess = balanceUpDataAccess;
             _winlossByLeagueDataAccess = winlossByLeagueService;
             _appSettings = appSetting;
         }

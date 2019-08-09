@@ -39,7 +39,6 @@
         {
             base.FixtureSetUp();
 
-            var balanceUpDataAccess = Substitute.For<IBalanceUpDataAccess>();
             var appSettings = Substitute.For<IAppSettings>();
             _dataAccess = Substitute.For<IWinLossByLeagueDataAccess>();
 
@@ -47,12 +46,10 @@
                 SessionService,
                 ProductService,
                 LangService,
-                balanceUpDataAccess,
                 _dataAccess,
                 appSettings);
             _controller.Request = new HttpRequestMessage();
 
-            balanceUpDataAccess.GetBalanceUp().Returns(new BalanceUp());
             MockSessionData();
         }
 
