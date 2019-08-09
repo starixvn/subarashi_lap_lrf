@@ -10,9 +10,12 @@ namespace Fanex.Athena.Service.Customer
     using System.Collections.Generic;
     using System.Data;
     using System.Threading.Tasks;
+    using Fanex.Athena.DataAccess.Customer.Interfaces;
+    using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Customer.MetaModel;
     using Fanex.Athena.Service.Customer.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     public class GroupComService : IGroupComService
     {

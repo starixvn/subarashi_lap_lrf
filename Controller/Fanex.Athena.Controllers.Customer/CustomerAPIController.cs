@@ -93,7 +93,7 @@ namespace Fanex.Athena.Controllers.Customer
         [AjaxRequest]
         [CustomValidateAntiForgery]
         [ValidatePermissionOnData]
-        public async Task<ActionResult> UpdateCustStatusAsync(int custId, bool isClosed, bool isSuspended)
+        public async Task<ActionResult> UpdateCustStatus(int custId, bool isClosed, bool isSuspended)
         {
             try
             {
@@ -291,7 +291,7 @@ namespace Fanex.Athena.Controllers.Customer
         [AjaxRequest]
         [CustomValidateAntiForgery]
         [FunctionAuthorization(PermissionKeys.CustomerInfoCommissionGroupList)]
-        public async Task<ActionResult> UpdateCustomerComAsync(UpdatedCustomerComMetaModel metaModel)
+        public async Task<ActionResult> UpdateCustomerCom(UpdatedCustomerComMetaModel metaModel)
         {
             var licenseeSession = SessionService.LicenseeSession;
             if (!licenseeSession.IsAllowedCustomerComm)
@@ -345,7 +345,7 @@ namespace Fanex.Athena.Controllers.Customer
         [AjaxRequest]
         [CustomValidateAntiForgery]
         [FunctionAuthorization(PermissionKeys.CustomerInfoCommissionGroupList)]
-        public async Task<ActionResult> RemoveFromGroupComAsync(string customerIds, bool isRemovePlayercomm)
+        public async Task<ActionResult> RemoveFromGroupCom(string customerIds, bool isRemovePlayercomm)
         {
             var licenseeSession = SessionService.LicenseeSession;
             if (!licenseeSession.IsAllowedCustomerComm)
@@ -370,7 +370,7 @@ namespace Fanex.Athena.Controllers.Customer
                 Language = userSession.Language
             };
             var removalResult = await _customerCommService.RemoveCustomersFromGroupAsync(metaModel, productAccess.IsAllowCS);
-            
+
             var result = new ResultViewModel
             {
                 Success = removalResult.IsSuccessful,
@@ -395,7 +395,7 @@ namespace Fanex.Athena.Controllers.Customer
         [AjaxRequest]
         [CustomValidateAntiForgery]
         [FunctionAuthorization(PermissionKeys.CustomerInfoCommissionGroupList)]
-        public async Task<ActionResult> MoveToGroupComAsync(string customerIds, int groupComId)
+        public async Task<ActionResult> MoveToGroupCom(string customerIds, int groupComId)
         {
             var licenseeSession = SessionService.LicenseeSession;
             if (!licenseeSession.IsAllowedCustomerComm)
