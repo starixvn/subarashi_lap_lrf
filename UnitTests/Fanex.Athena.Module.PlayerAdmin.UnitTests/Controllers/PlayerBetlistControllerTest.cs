@@ -93,7 +93,7 @@
                 {
                     _betListApiClient.Received(1).PostAsync<dynamic>(
                         Arg.Is<string>(x => x == "/PlayerAdminBetList/GetBetList"),
-                        Arg.Is<PlayerRunningBetListMetalModel>(x => x.CurrencyList == currencyList && x.SortBy == expectedSortBy && x.SortOrder == expectedSortOrder),
+                        Arg.Is<PlayerRunningBetListMetalModel>(x => x.SortBy == expectedSortBy && x.SortOrder == expectedSortOrder),
                         Arg.Is<string>(x => x == language));
                 });
             }
@@ -126,7 +126,7 @@
                 {
                     _betListApiClient.Received(1).PostAsyncStream(
                         Arg.Is<string>(x => x == "/PlayerAdminBetList/Export"),
-                        Arg.Is<PlayerRunningBetListMetalModel>(x => x.CurrencyList == currencyList),
+                        Arg.Is<PlayerRunningBetListMetalModel>(metaModel),
                         Arg.Is<string>(x => x == language));
                 });
             }

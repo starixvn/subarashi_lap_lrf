@@ -1,4 +1,6 @@
-﻿using Fanex.Athena.Model.Core.ViewModel;
+﻿using System;
+using System.Net.Http;
+using Fanex.Athena.Model.Core.ViewModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.Services.Interfaces;
 using Fanex.Athena.Module.PlayerAdmin.Api.Utilities;
@@ -8,8 +10,6 @@ using Fanex.Athena.UnitTest.Common.NUnitExtensions;
 using Fanex.Logging;
 using NSubstitute;
 using NUnit.Framework;
-using System;
-using System.Net.Http;
 
 namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests
 {
@@ -57,32 +57,6 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests
 
                 // Assert
                 Assert.That(result, Tobe.SameProperties(expectedResult));
-            }
-        }
-
-        [Test]
-        public void Update_WhenCall_AssignParamValueCorrectly()
-        {
-            // Arrange
-            var metaModel = CreateMetaModel();
-
-            var expectedReturnedData = new ResultViewModel();
-            _playerSpecialLevelService.Update(metaModel).Returns(expectedReturnedData);
-
-            using (var controller = CreateController())
-            {
-                _licenseeSettingService.IsFakeLicensee(controller.SiteName).Returns(false);
-
-                // Action
-                controller.Update(metaModel);
-
-                // Assert
-                Assert.Multiple(() =>
-                {
-                    Assert.That(metaModel.UserId, Is.EqualTo(ExternalApiHelper.DefaultUserId));
-                    Assert.That(metaModel.Language, Is.EqualTo("en-US"));
-                    Assert.That(metaModel.Ip, Is.EqualTo(ExternalApiHelper.DefaultClientIp));
-                });
             }
         }
 

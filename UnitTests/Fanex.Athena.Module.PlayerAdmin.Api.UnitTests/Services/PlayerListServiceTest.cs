@@ -1,12 +1,12 @@
-﻿using Fanex.Athena.Extension.Utility.Interfaces;
+﻿using System.Data;
+using System.Linq;
+using Fanex.Athena.Extension.Utility.Interfaces;
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.Services;
 using Fanex.Athena.UnitTest.Common.Helpers;
 using Fanex.Data;
 using NSubstitute;
 using NUnit.Framework;
-using System.Data;
-using System.Linq;
 
 namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
 {
@@ -93,7 +93,8 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
                 SpecialLevel = 1,
                 OddsGroup = "A",
                 TotalBalance = 1000m,
-                Outstanding = 2000m
+                Outstanding = 2000m,
+                ExchangeId = 2
             };
             DataAccessTestHelper.MapReaderData(reader, expectedData);
             objectDb.GetParameterValue("TotalRows").Returns(1);
@@ -116,6 +117,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
                 Assert.That(player.OddsGroup, Is.EqualTo(expectedData.OddsGroup));
                 Assert.That(player.CurrentBalance, Is.EqualTo(expectedData.TotalBalance));
                 Assert.That(player.OutstandingBalance, Is.EqualTo(expectedData.Outstanding));
+                Assert.That(player.CurrencyId, Is.EqualTo(expectedData.ExchangeId));
 
                 Assert.That(result.TotalItem, Is.EqualTo(1));
             });

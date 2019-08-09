@@ -100,7 +100,6 @@
     <Compile Include="Services\PlayerSpecialLevelServiceTest.cs" />
     <Compile Include="Services\PlayerBaStatusServiceTest.cs" />
     <Compile Include="Services\PlayerListServiceTest.cs" />
-    <Compile Include="Utilities\ClientHelperTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\ControllerAPI\Fanex.Athena.Api.Base\Fanex.Athena.Api.Base.csproj">

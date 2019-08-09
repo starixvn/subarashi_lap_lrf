@@ -1,10 +1,10 @@
-﻿using Fanex.Athena.Module.PlayerAdmin.Api.Utilities;
+﻿using System.Collections;
+using System.Net.Http;
+using Fanex.Athena.Extension.Helper;
 using Fanex.Athena.UnitTest.Common.Helpers;
 using NUnit.Framework;
-using System.Collections;
-using System.Net.Http;
 
-namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Utilities
+namespace Fanex.Athena.Extension.UnitTests.Helper
 {
     public class ClientHelperTest
     {

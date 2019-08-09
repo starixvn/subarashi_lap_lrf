@@ -1,14 +1,12 @@
-﻿using Fanex.Athena.Module.PlayerAdmin.Api;
+﻿using System.Collections.Generic;
+using Fanex.Athena.Module.PlayerAdmin.Api;
 using Fanex.Athena.Module.PlayerAdmin.Api.DTO;
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.Services.Interfaces;
 using Fanex.Athena.Module.PlayerAdmin.Api.ViewModels;
 using Fanex.Athena.UnitTest.Common.Helpers;
-
 using NSubstitute;
-
 using NUnit.Framework;
-using System.Collections.Generic;
 
 namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Api
 {
@@ -27,35 +25,6 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Api
         public void TearDown()
         {
             _playerListService = null;
-        }
-
-        [Test]
-        public void Search_WhenCall_AssignParamValueCorrectly()
-        {
-            // Arrange
-            var searchParam = new PlayerSearchingMetaModel
-            {
-                UserName = "Test",
-                CurrencyIdList = "1"
-            };
-
-            var expectedReturnedData = new PlayerListResultViewModel();
-            _playerListService.Search(searchParam).Returns(expectedReturnedData);
-
-            var expectedAgentistXml = ExternalApiHelper.CreateDefaultAgentListXml();
-
-            using (var controller = CreateController())
-            {
-                // Action
-                controller.Search(searchParam);
-
-                // Assert
-                Assert.Multiple(() =>
-                {
-                    Assert.That(searchParam.SiteName, Is.EqualTo(ExternalApiHelper.DefaultSiteName));
-                    Assert.That(searchParam.AgentListXml, Is.EqualTo(expectedAgentistXml));
-                });
-            }
         }
 
         [Test]
