@@ -8,6 +8,7 @@ import GridInteractionService from '../../lib/gridInteractionService';
 import LangHelper from '@jsroot/lib/langHelper';
 import { ActionCreators } from '../../actions';
 import { getSpecialLevelText, getErrorMessageForUpdating } from '../../lib/utils';
+import { generateDefaultConfirmOption, generateDefaultAlertOption, predefinedIcons } from '../../../../../lib/sweetAlert';
 
 const SpecialLevelDropdown = (props) => {
     const { specialLevelDropdownPosition, setSpecialLevelDropdownPosition } = props;
@@ -21,44 +22,59 @@ const SpecialLevelDropdown = (props) => {
         setSpecialLevelDropdownPosition(null);
     }
 
-    const { currentActivePlayer, updateSpecialLevel, playerList, setPlayerList, toggleLoader } = props;
+    const { currentActivePlayer, updateSpecialLevel, playerList, setPlayerList, toggleLoader, setSweetAlertOption } = props;
+    const handleCloseAlert = () => {
+        setSweetAlertOption(null);
+    }
+
+    const cancelProps = {
+        onClick: handleCloseAlert
+    }
+
     const handleChangeOddsGroup = (event, value) => {
         event.preventDefault();
         const resourceName = Number(value) === 0 ? 'AlertRemoveSpecialLevelForCustomerMsg' : 'AlertSetSpecialLevelForCustomerMsg';
         const confirmMessage = LangHelper.getSingleResource(resourceName);
-        if (!window.confirm(confirmMessage)) {
-            return;
-        }
 
-        if (currentActivePlayer && value !== currentActivePlayer.specialLevel) {
-            const { custId } = currentActivePlayer;
-            const param = {
-                custId,
-                specialLevel: value
+        const confirmProps = {
+            onClick: () => {
+                if (currentActivePlayer && value !== currentActivePlayer.specialLevel) {
+                    const { custId } = currentActivePlayer;
+                    const param = {
+                        custId,
+                        specialLevel: value
+                    }
+
+                    toggleLoader(true);
+                    updateSpecialLevel(param).then(response => {
+                        const { Success, Message, ErrorMessage } = response.data;
+                        if (Success) {
+                            const newPlayerList = GridInteractionService.updatePlayerItem(playerList, custId, value, 'SpecialLevel');
+                            setPlayerList(newPlayerList);
+                            const alertOpt = generateDefaultAlertOption(LangHelper.getSingleResource('UpdateSuccess'), handleCloseAlert);
+                            setSweetAlertOption(alertOpt);
+                        }
+                        else {
+                            const errMsg = Message || LangHelper.getSingleResource(ErrorMessage);
+                            const alertOpt = generateDefaultAlertOption(errMsg, handleCloseAlert, null, predefinedIcons.error);
+                            setSweetAlertOption(alertOpt);
+                        }
+                        toggleLoader(false);
+                    }).catch((error) => {
+                        console.log(error.message);
+                        const message = getErrorMessageForUpdating(error);
+                        const alertOpt = generateDefaultAlertOption(message, handleCloseAlert, null, predefinedIcons.error);
+                        setSweetAlertOption(alertOpt);
+                        toggleLoader(false);
+                    })
+                }
+
+                handleClose();
             }
-
-            toggleLoader(true);
-            updateSpecialLevel(param).then(response => {
-                const { Success, Message, ErrorMessage } = response.data;
-                if (Success) {
-                    const newPlayerList = GridInteractionService.updatePlayerItem(playerList, custId, value, 'SpecialLevel');
-                    setPlayerList(newPlayerList);
-                    window.alert(LangHelper.getSingleResource('UpdateSuccess'));
-                }
-                else {
-                    const errMsg = Message || LangHelper.getSingleResource(ErrorMessage);
-                    window.alert(errMsg);
-                }
-                toggleLoader(false);
-            }).catch((error) => {
-                console.log(error.message);
-                const message = getErrorMessageForUpdating(error);
-                window.alert(message);
-                toggleLoader(false);
-            })
         }
 
-        handleClose();
+        const confirmOption = generateDefaultConfirmOption(confirmMessage, handleCloseAlert, confirmProps, cancelProps);
+        setSweetAlertOption(confirmOption);
     }
 
     return (
@@ -77,8 +93,8 @@ const SpecialLevelDropdown = (props) => {
 }
 
 function mapDispatchToProps(dispatch) {
-    const { setSpecialLevelDropdownPosition, updateSpecialLevel, setPlayerList, toggleLoader } = ActionCreators;
-    return bindActionCreators({ setSpecialLevelDropdownPosition, updateSpecialLevel, setPlayerList, toggleLoader }, dispatch);
+    const { setSpecialLevelDropdownPosition, updateSpecialLevel, setPlayerList, toggleLoader, setSweetAlertOption } = ActionCreators;
+    return bindActionCreators({ setSpecialLevelDropdownPosition, updateSpecialLevel, setPlayerList, toggleLoader, setSweetAlertOption }, dispatch);
 }
 
 function mapStateToProps(state) {

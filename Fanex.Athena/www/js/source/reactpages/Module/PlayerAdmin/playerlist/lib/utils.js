@@ -1,7 +1,6 @@
 import { playerStatus } from '../lib/constants';
 import LangHelper from '@jsroot/lib/langHelper';
 import { playerTypes } from './constants';
-import { error } from 'util';
 
 export const getSpecialLevelText = (value) => {
     return value === undefined || value === null ? '' : (Number(value) === 0 ? LangHelper.getSingleResource('None') : value);

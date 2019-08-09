@@ -8,36 +8,8 @@ import Switcher from '@jsroot/components/Switcher';
 import LangHelper from '@jsroot/lib/langHelper';
 import GridInteractionService from '../../lib/gridInteractionService';
 import { getErrorMessageForUpdating } from '../../lib/utils';
+import { generateDefaultConfirmOption, generateDefaultAlertOption, predefinedIcons } from '../../../../../lib/sweetAlert';
 
-const generateConfirmOption = (content) => {
-    return {
-        buttons: [
-            {
-                text: LangHelper.getSingleResource('Submit'),
-                className: 'btn btn-apply'
-            },
-            {
-                text: LangHelper.getSingleResource('Cancel'),
-                className: 'btn'
-            }
-        ],
-        icon: 'warning',
-        isShow: true,
-        children: (<p className="center-align">{content}</p>)
-    }
-}
-
-const alertOption = {
-    buttons: [
-        {
-            text: LangHelper.getSingleResource('OK'),
-            className: 'btn btn-apply'
-        }
-    ],
-    icon: 'success',
-    isShow: true,
-    children: (<p className="center-align">{LangHelper.getSingleResource('UpdateSuccess')}</p>)
-}
 const BaStatusCell = (props) => {
     const { dataItem, setPlayerList, toggleLoader, updateBaStatus, setSweetAlertOption } = props;
     const { CustId, BaStatus, OddsGroup } = dataItem;
@@ -46,65 +18,48 @@ const BaStatusCell = (props) => {
         const isBa = event.target.checked;
         const resourceName = isBa ? 'AlertTurnOnBAMsg' : 'AlertTurnOffBAMsg';
         const confirmMessage = LangHelper.getSingleResource(resourceName);
-        const confirmOption = generateConfirmOption(confirmMessage);
 
         const handleCloseAlert = () => {
             setSweetAlertOption(null);
         }
 
-        const submitButton = confirmOption.buttons[0];
-        confirmOption.buttons[0] = {
-            ...submitButton,
-            onClick: () => {
-                const alertOpt = {
-                    ...alertOption,
-                    onClose: handleCloseAlert
-                }
-                alertOpt.buttons[0].onClick = handleCloseAlert;
-                setSweetAlertOption(alertOpt);
-            }
-        }
-
-        const cancelButton = confirmOption.buttons[1];
-        confirmOption.buttons[1] = {
-            ...cancelButton,
+        const cancelProps = {
             onClick: handleCloseAlert
         }
 
-        confirmOption.onClose = () => {
-            setSweetAlertOption(null);
-            console.log('close');
+        const confirmProps = {
+            onClick: () => {
+                const param = { custId: CustId, isBa };
+                toggleLoader(true);
+                updateBaStatus(param).then(response => {
+                    const { Success, Message, ErrorMessage, ExtendedData } = response.data;
+                    if (Success) {
+                        const oddsGroup = ExtendedData || OddsGroup;
+                        const newPlayerList = GridInteractionService.updatePlayerWithBaStatus(playerList, CustId, isBa, oddsGroup);
+                        setPlayerList(newPlayerList);
+                        const alertOpt = generateDefaultAlertOption(LangHelper.getSingleResource('UpdateSuccess'), handleCloseAlert);
+                        setSweetAlertOption(alertOpt);
+                    }
+                    else {
+                        const errMsg = Message || LangHelper.getSingleResource(ErrorMessage);
+                        const alertOpt = generateDefaultAlertOption(errMsg, handleCloseAlert, null, predefinedIcons.error);
+                        setSweetAlertOption(alertOpt);
+                    }
+
+                    toggleLoader(false);
+                }).catch((error) => {
+                    console.log(error.message);
+                    const message = getErrorMessageForUpdating(error);
+                    const alertOpt = generateDefaultAlertOption(message, handleCloseAlert, null, predefinedIcons.error);
+                    setSweetAlertOption(alertOpt);
+                    toggleLoader(false);
+                })
+            }
         }
+
+        const confirmOption = generateDefaultConfirmOption(confirmMessage, handleCloseAlert, confirmProps, cancelProps);
 
         setSweetAlertOption(confirmOption);
-
-        return;
-        if (!window.confirm(confirmMessage)) {
-            return;
-        }
-
-        const param = { custId: CustId, isBa };
-        toggleLoader(true);
-        updateBaStatus(param).then(response => {
-            const { Success, Message, ErrorMessage, ExtendedData } = response.data;
-            if (Success) {
-                const oddsGroup = ExtendedData || OddsGroup;
-                const newPlayerList = GridInteractionService.updatePlayerWithBaStatus(playerList, CustId, isBa, oddsGroup);
-                setPlayerList(newPlayerList);
-                window.alert(LangHelper.getSingleResource('UpdateSuccess'));
-            }
-            else {
-                const errMsg = Message || LangHelper.getSingleResource(ErrorMessage);
-                window.alert(errMsg);
-            }
-
-            toggleLoader(false);
-        }).catch((error) => {
-            console.log(error.message);
-            const message = getErrorMessageForUpdating(error);
-            window.alert(message);
-            toggleLoader(false);
-        })
     }
 
     return (

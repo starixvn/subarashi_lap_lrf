@@ -8,6 +8,7 @@ import GridInteractionService from '../../lib/gridInteractionService';
 import LangHelper from '@jsroot/lib/langHelper';
 import { ActionCreators } from '../../actions';
 import { getErrorMessageForUpdating } from '../../lib/utils';
+import { generateDefaultConfirmOption, generateDefaultAlertOption, predefinedIcons } from '../../../../../lib/sweetAlert';
 
 export const OddsGroupDropdown = (props) => {
     const { oddsGroupDropdownPosition, setOddsGroupDropdownPosition } = props;
@@ -22,43 +23,58 @@ export const OddsGroupDropdown = (props) => {
         setOddsGroupDropdownPosition(null);
     }
 
-    const { currentActivePlayer, updateOddsGroup, playerList, setPlayerList, toggleLoader } = props;
+    const { currentActivePlayer, updateOddsGroup, playerList, setPlayerList, toggleLoader, setSweetAlertOption } = props;
+    const handleCloseAlert = () => {
+        setSweetAlertOption(null);
+    }
+
+    const cancelProps = {
+        onClick: handleCloseAlert
+    }
+
     const handleChangeOddsGroup = (event, value) => {
         event.preventDefault();
         const confirmMessage = LangHelper.getSingleResource('AlertSetOddsGroupForCustomerMsg').replace('{0}', value);
-        if (!window.confirm(confirmMessage)) {
-            return;
-        }
 
-        if (currentActivePlayer && value !== currentActivePlayer.oddsGroup) {
-            const { custId } = currentActivePlayer;
-            const param = {
-                custId,
-                oddsGroup: value
+        const confirmProps = {
+            onClick: () => {
+                if (currentActivePlayer && value !== currentActivePlayer.oddsGroup) {
+                    const { custId } = currentActivePlayer;
+                    const param = {
+                        custId,
+                        oddsGroup: value
+                    }
+
+                    toggleLoader(true);
+                    updateOddsGroup(param).then(response => {
+                        const { Success, Message, ErrorMessage } = response.data;
+                        if (Success) {
+                            const newPlayerList = GridInteractionService.updatePlayerItem(playerList, custId, value, 'OddsGroup');
+                            setPlayerList(newPlayerList);
+                            const alertOpt = generateDefaultAlertOption(LangHelper.getSingleResource('UpdateSuccess'), handleCloseAlert);
+                            setSweetAlertOption(alertOpt);
+                        }
+                        else {
+                            const errMsg = Message || LangHelper.getSingleResource(ErrorMessage);
+                            const alertOpt = generateDefaultAlertOption(errMsg, handleCloseAlert, null, predefinedIcons.error);
+                            setSweetAlertOption(alertOpt);
+                        }
+                        toggleLoader(false);
+                    }).catch((error) => {
+                        console.log(error.message);
+                        const message = getErrorMessageForUpdating(error);
+                        const alertOpt = generateDefaultAlertOption(message, handleCloseAlert, null, predefinedIcons.error);
+                        setSweetAlertOption(alertOpt);
+                        toggleLoader(false);
+                    })
+                }
+
+                handleClose();
             }
-
-            toggleLoader(true);
-            updateOddsGroup(param).then(response => {
-                const { Success, Message, ErrorMessage } = response.data;
-                if (Success) {
-                    const newPlayerList = GridInteractionService.updatePlayerItem(playerList, custId, value, 'OddsGroup');
-                    setPlayerList(newPlayerList);
-                    window.alert(LangHelper.getSingleResource('UpdateSuccess'));
-                }
-                else {
-                    const errMsg = Message || LangHelper.getSingleResource(ErrorMessage);
-                    window.alert(errMsg);
-                }
-                toggleLoader(false);
-            }).catch((error) => {
-                console.log(error.message);
-                const message = getErrorMessageForUpdating(error);
-                window.alert(message);
-                toggleLoader(false);
-            })
         }
 
-        handleClose();
+        const confirmOption = generateDefaultConfirmOption(confirmMessage, handleCloseAlert, confirmProps, cancelProps);
+        setSweetAlertOption(confirmOption);
     }
 
     return (
@@ -78,8 +94,8 @@ export const OddsGroupDropdown = (props) => {
 }
 
 function mapDispatchToProps(dispatch) {
-    const { setOddsGroupDropdownPosition, updateOddsGroup, setPlayerList, toggleLoader } = ActionCreators;
-    return bindActionCreators({ setOddsGroupDropdownPosition, updateOddsGroup, setPlayerList, toggleLoader }, dispatch);
+    const { setOddsGroupDropdownPosition, updateOddsGroup, setPlayerList, toggleLoader, setSweetAlertOption } = ActionCreators;
+    return bindActionCreators({ setOddsGroupDropdownPosition, updateOddsGroup, setPlayerList, toggleLoader, setSweetAlertOption }, dispatch);
 }
 
 function mapStateToProps(state) {
