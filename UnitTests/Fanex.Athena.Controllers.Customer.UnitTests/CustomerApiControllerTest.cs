@@ -18,7 +18,6 @@
     using NSubstitute;
     using NUnit.Framework;
     using Resources;
-    using Service.Core.Common.Interfaces;
     using Service.Customer.Interfaces;
     using UnitTest.Common.Extensions;
 
@@ -40,8 +39,8 @@
         {
             base.FixtureSetUp();
             SetUpDefaultFakeData();
-
         }
+
         [SetUp]
         public void SetUp()
         {
@@ -106,7 +105,7 @@
                 AppSettings.LicenseeOfferStatusFunction.Returns(new[] { licenseeId });
 
                 // Action
-                controller.UpdateCustStatus(CustId, isClosed, isSuspended);
+                await controller.UpdateCustStatus(CustId, isClosed, isSuspended);
 
                 // Assert
                 Assert.Multiple(() =>
@@ -155,7 +154,6 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-
                     _logger.Received(1).Error(errorMessage, exception);
                     Assert.That(resultInfo.Code, Is.EqualTo(1));
                     Assert.That(resultInfo.Message, Is.EqualTo(ViewResources.HttpError_Default));
@@ -271,7 +269,7 @@
                 });
 
                 // Action
-                var result = await controller.RemoveFromGroupComAsync(string.Empty, false) as JsonResult;
+                var result = await controller.RemoveFromGroupCom(string.Empty, false) as JsonResult;
                 var resultData = result.Data;
 
                 // Assert
@@ -298,7 +296,7 @@
                 });
 
                 // Action
-                var result = await controller.RemoveFromGroupComAsync(CustmerIds, isRemovePlayerComm) as JsonResult;
+                var result = await controller.RemoveFromGroupCom(CustmerIds, isRemovePlayerComm) as JsonResult;
                 var resultData = result.Data as ResultViewModel;
 
                 // Assert

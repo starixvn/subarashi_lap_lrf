@@ -32,7 +32,7 @@
                 });
 
                 // Action
-                var result = await controller.MoveToGroupComAsync(string.Empty, 0) as JsonResult;
+                var result = await controller.MoveToGroupCom(string.Empty, 0) as JsonResult;
                 var resultData = result.Data as object;
 
                 // Assert
@@ -59,7 +59,7 @@
                 });
 
                 // Action
-                await controller.MoveToGroupComAsync(CustmerIds, GroupId);
+                await controller.MoveToGroupCom(CustmerIds, GroupId);
 
                 // Assert
                 await _customerCommService.Received(1).MoveCustomersToGroupAsync(
@@ -99,7 +99,7 @@
                 });
 
                 // Action
-                var result = await controller.MoveToGroupComAsync(CustomerIds, GroupId) as JsonResult;
+                var result = await controller.MoveToGroupCom(CustomerIds, GroupId) as JsonResult;
                 var resultData = result.Data as ResultViewModel;
                 var extendedData = resultData.ExtendedData;
 
