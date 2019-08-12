@@ -30,7 +30,7 @@
                 });
 
                 // Action
-                var result = controller.CustomerListAsync(metaModel);
+                var result = controller.CustomerList(metaModel);
 
                 // Assert
                 Assert.That(metaModel.Username, Is.EqualTo(UserName));
@@ -58,7 +58,7 @@
                 });
 
                 // Action
-                controller.CustomerListAsync(metaModel);
+                controller.CustomerList(metaModel);
 
                 // Assert
                 Assert.That(metaModel.Username, Is.Empty);
@@ -85,7 +85,7 @@
                 });
 
                 // Action
-                await controller.CustomerListAsync(metaModel).ConfigureAwait(false);
+                await controller.CustomerList(metaModel).ConfigureAwait(false);
 
                 // Assert
                 Assert.AreEqual(metaModel.Username, userName);
@@ -107,7 +107,7 @@
                 });
 
                 // Action
-                var result = controller.CustomerListAsync(metaModel);
+                var result = controller.CustomerList(metaModel);
 
                 // Assert
                 _customerListService.Received().GetActiveCustomersAsync(metaModel);

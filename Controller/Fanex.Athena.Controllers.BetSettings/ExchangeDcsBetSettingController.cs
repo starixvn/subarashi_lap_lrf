@@ -50,7 +50,7 @@ namespace Fanex.Athena.Controllers.BetSettings
         [HttpGet]
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         [ValidatePermissionOnData(isObject: true)]
-        public async Task<ActionResult> IndexAsync(BetSettingMetaModel metaModel)
+        public async Task<ActionResult> Index(BetSettingMetaModel metaModel)
         {
             var viewModel = new ExchangeBetSettingViewModel
             {
@@ -78,7 +78,7 @@ namespace Fanex.Athena.Controllers.BetSettings
         [HttpPost]
         [AjaxRequest]
         [CustomValidateAntiForgery]
-        public async Task<ActionResult> UpdateCommAsync(int custId, double oldCommission, double newCommission)
+        public async Task<ActionResult> UpdateComm(int custId, double oldCommission, double newCommission)
         {
             if (!ValidComms.Contains(newCommission))
             {

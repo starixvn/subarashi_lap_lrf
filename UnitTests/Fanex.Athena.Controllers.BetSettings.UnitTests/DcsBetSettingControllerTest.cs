@@ -45,7 +45,7 @@
                 var metaModel = new BetSettingMetaModel { ProductId = productId };
 
                 // Action
-                Task testDelegate() => controller.IndexAsync(metaModel);
+                Task testDelegate() => controller.Index(metaModel);
 
                 // Assert
                 Assert.ThrowsAsync<ArgumentException>(testDelegate, "Invalid product id: " + productId);
@@ -85,7 +85,7 @@
                 }
 
                 // Action
-                var result = await controller.IndexAsync(metaModel) as ViewResult;
+                var result = await controller.Index(metaModel) as ViewResult;
                 var viewModel = (BetSettingViewModel)result.Model;
 
                 // Assert
@@ -116,7 +116,7 @@
                     .Returns(new ProductAccess(new List<Product>()));
 
                 // Action
-                var result = await controller.UpdateStatusAsync(0, string.Empty, 0, productId) as JsonResult;
+                var result = await controller.UpdateStatus(0, string.Empty, 0, productId) as JsonResult;
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -154,7 +154,7 @@
                    productId).Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 0 }));
 
                 // Action
-                var result = await controller.UpdateStatusAsync(0, string.Empty, 0, productId) as JsonResult;
+                var result = await controller.UpdateStatus(0, string.Empty, 0, productId) as JsonResult;
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -192,7 +192,7 @@
                    productId).Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 1, Message = "Error" }));
 
                 // Action
-                var result = await controller.UpdateStatusAsync(0, string.Empty, 0, productId) as JsonResult;
+                var result = await controller.UpdateStatus(0, string.Empty, 0, productId) as JsonResult;
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -217,7 +217,7 @@
                     .Returns(new ProductAccess(new List<Product>()));
 
                 // Action
-                var result = await controller.UpdateBetSettingAsync(productId, string.Empty) as JsonResult;
+                var result = await controller.UpdateBetSetting(productId, string.Empty) as JsonResult;
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -252,7 +252,7 @@
                 controller.HttpContext.Request[Arg.Any<string>()].Returns("1");
 
                 // Action
-                await controller.UpdateBetSettingAsync(productId, string.Empty);
+                await controller.UpdateBetSetting(productId, string.Empty);
 
                 // Assert
                 Assert.That(string.Join(",", param.Select(x => x.SportId)), Is.EqualTo(expectedBetLimits));
@@ -274,7 +274,7 @@
                 CoreBetSettingService.IsBetSettingEditable(DefaultUserSession).Returns(true);
 
                 // Action
-                var result = await controller.UpdateBetSettingAsync(productId, string.Empty) as JsonResult;
+                var result = await controller.UpdateBetSetting(productId, string.Empty) as JsonResult;
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -300,7 +300,7 @@
                 controller.HttpContext.Request[Arg.Any<string>()].Returns("0");
 
                 // Action
-                var result = await controller.UpdateBetSettingAsync(ProductTypes.VirtualSports, string.Empty) as JsonResult;
+                var result = await controller.UpdateBetSetting(ProductTypes.VirtualSports, string.Empty) as JsonResult;
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -332,7 +332,7 @@
                    Arg.Any<IEnumerable<DcsBetSetting>>()).Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 0 }));
 
                 // Action
-                var result = await controller.UpdateBetSettingAsync(ProductTypes.Lottery, string.Empty) as JsonResult;
+                var result = await controller.UpdateBetSetting(ProductTypes.Lottery, string.Empty) as JsonResult;
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -364,7 +364,7 @@
                    Arg.Any<IEnumerable<DcsBetSetting>>()).Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 1, Message = "Error" }));
 
                 // Action
-                var result = await controller.UpdateBetSettingAsync(ProductTypes.Lottery, string.Empty) as JsonResult;
+                var result = await controller.UpdateBetSetting(ProductTypes.Lottery, string.Empty) as JsonResult;
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert

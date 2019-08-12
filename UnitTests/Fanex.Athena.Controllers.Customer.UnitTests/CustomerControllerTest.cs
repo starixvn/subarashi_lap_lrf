@@ -133,7 +133,7 @@
             using (var controller = CreateContoller())
             {
                 // Action
-                var result = await controller.ExportExcelAsync(null);
+                var result = await controller.ExportExcel(null);
 
                 // Assert
                 Assert.That(result, Is.Null);
@@ -150,7 +150,7 @@
                 const string ExcelParam = "{'GridColumns': []}";
 
                 // Action
-                var result = await controller.ExportExcelAsync(ExcelParam) as FileContentResult;
+                var result = await controller.ExportExcel(ExcelParam) as FileContentResult;
 
                 // Assert
                 Assert.That(result.FileDownloadName, Is.EqualTo(ExcelFileName));
@@ -199,7 +199,7 @@
                 controller.When(x => x.CreateExcel(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<CustomerListViewModel>())).Do(x => actualReportTitle = (string)x[1]);
 
                 // Action
-                await controller.ExportExcelAsync(excelParam);
+                await controller.ExportExcel(excelParam);
 
                 // Assert
                 Assert.Multiple(() =>

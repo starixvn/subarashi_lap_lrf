@@ -43,7 +43,7 @@
                     .Returns(Task.FromResult<ThirdPartyBetSettingViewModel>(null));
 
                 // Action
-                var result = await controller.IndexAsync(metaModel) as RedirectResult;
+                var result = await controller.Index(metaModel) as RedirectResult;
 
                 // Assert
                 Assert.That(result.Url, Is.EqualTo("~/Utility/AccessDenied"));
@@ -66,7 +66,7 @@
                     .Returns(Task.FromResult(new ThirdPartyBetSettingViewModel()));
 
                 // Action
-                var result = await controller.IndexAsync(metaModel) as ViewResult;
+                var result = await controller.Index(metaModel) as ViewResult;
 
                 // Assert
                 Assert.Multiple(() =>
@@ -92,7 +92,7 @@
                     .Returns(Task.FromResult(new ThirdPartyBetSettingViewModel()));
 
                 // Action
-                Task testDelegate() => controller.IndexAsync(metaModel);
+                Task testDelegate() => controller.Index(metaModel);
 
                 // Assert
                 Assert.ThrowsAsync<ArgumentException>(testDelegate, "Not a thirdparty product.");
@@ -109,7 +109,7 @@
                     .Returns(new ProductAccess(new List<Product>()));
 
                 // Action
-                var result = await controller.UpdateMacauStatusAsync(0, string.Empty, 0) as JsonResult;
+                var result = await controller.UpdateMacauStatus(0, string.Empty, 0) as JsonResult;
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -142,7 +142,7 @@
                    Arg.Any<bool>()).Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 0 }));
 
                 // Action
-                var result = await controller.UpdateMacauStatusAsync(0, string.Empty, 0) as JsonResult;
+                var result = await controller.UpdateMacauStatus(0, string.Empty, 0) as JsonResult;
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -175,7 +175,7 @@
                    Arg.Any<bool>()).Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 1, Message = "Error" }));
 
                 // Action
-                var result = await controller.UpdateMacauStatusAsync(0, string.Empty, 0) as JsonResult;
+                var result = await controller.UpdateMacauStatus(0, string.Empty, 0) as JsonResult;
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -204,7 +204,7 @@
                    Arg.Any<bool>()).Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 0 }));
 
                 // Action
-                var result = await controller.UpdateBetTradeStatusAsync(0, string.Empty, 0) as JsonResult;
+                var result = await controller.UpdateBetTradeStatus(0, string.Empty, 0) as JsonResult;
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -237,7 +237,7 @@
                    Arg.Any<bool>()).Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 1, Message = "Error" }));
 
                 // Action
-                var result = await controller.UpdateBetTradeStatusAsync(0, string.Empty, 0) as JsonResult;
+                var result = await controller.UpdateBetTradeStatus(0, string.Empty, 0) as JsonResult;
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -255,7 +255,7 @@
                     .Returns(new ProductAccess(new List<Product>()));
 
                 // Action
-                var result = await controller.UpdateColossusBetsStatusAsync(0, string.Empty, 0) as JsonResult;
+                var result = await controller.UpdateColossusBetsStatus(0, string.Empty, 0) as JsonResult;
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -288,7 +288,7 @@
                    Arg.Any<bool>()).Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 0 }));
 
                 // Action
-                var result = await controller.UpdateColossusBetsStatusAsync(0, string.Empty, 0) as JsonResult;
+                var result = await controller.UpdateColossusBetsStatus(0, string.Empty, 0) as JsonResult;
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -321,7 +321,7 @@
                    Arg.Any<bool>()).Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 1, Message = "Error" }));
 
                 // Action
-                var result = await controller.UpdateColossusBetsStatusAsync(0, string.Empty, 0) as JsonResult;
+                var result = await controller.UpdateColossusBetsStatus(0, string.Empty, 0) as JsonResult;
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -339,7 +339,7 @@
                     .Returns(new ProductAccess(new List<Product>()));
 
                 // Action
-                var result = await controller.UpdateCashOutStatusAsync(0, string.Empty, 0) as JsonResult;
+                var result = await controller.UpdateCashOutStatus(0, string.Empty, 0) as JsonResult;
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -372,7 +372,7 @@
                    Arg.Any<bool>()).Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 0 }));
 
                 // Action
-                var result = await controller.UpdateCashOutStatusAsync(0, string.Empty, 0) as JsonResult;
+                var result = await controller.UpdateCashOutStatus(0, string.Empty, 0) as JsonResult;
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -405,7 +405,7 @@
                    Arg.Any<bool>()).Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 1, Message = "Error" }));
 
                 // Action
-                var result = await controller.UpdateCashOutStatusAsync(0, string.Empty, 0) as JsonResult;
+                var result = await controller.UpdateCashOutStatus(0, string.Empty, 0) as JsonResult;
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert

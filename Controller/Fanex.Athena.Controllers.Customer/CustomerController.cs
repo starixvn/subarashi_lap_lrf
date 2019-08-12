@@ -102,8 +102,7 @@ namespace Fanex.Athena.Controllers.Customer
         #region Action
 
         [HttpGet]
-        [ActionName("CustomerList")]
-        public async Task<ActionResult> CustomerListAsync(string userName = "", int groupId = -1)
+        public async Task<ActionResult> CustomerList(string userName = "", int groupId = -1)
         {
             var licensee = SessionService.LicenseeSession;
             var userSession = SessionService.UserSession;
@@ -137,7 +136,7 @@ namespace Fanex.Athena.Controllers.Customer
         [CustomValidateAntiForgery]
         [ValidationWebRequest]
         [ActionName("CustomerList")]
-        public async Task<dynamic> CustomerListAsync(CustomerListMetaModel metaModel)
+        public async Task<dynamic> CustomerList(CustomerListMetaModel metaModel)
         {
             AssignMetaModelData(metaModel);
 
@@ -158,7 +157,7 @@ namespace Fanex.Athena.Controllers.Customer
         [CustomValidateAntiForgery]
         [ValidationWebRequest]
         [ActionName("DormantCustomerList")]
-        public async Task<dynamic> DormantCustomerListAsync(CustomerListMetaModel metaModel)
+        public async Task<dynamic> DormantCustomerList(CustomerListMetaModel metaModel)
         {
             AssignMetaModelData(metaModel);
 
@@ -177,7 +176,7 @@ namespace Fanex.Athena.Controllers.Customer
         [HttpPost]
         [CustomValidateAntiForgery]
         [ActionName("ExportExcelList")]
-        public async Task<ActionResult> ExportExcelAsync(string excelParam)
+        public async Task<ActionResult> ExportExcel(string excelParam)
         {
             if (string.IsNullOrEmpty(excelParam))
             {
@@ -215,7 +214,7 @@ namespace Fanex.Athena.Controllers.Customer
         [HttpPost]
         [CustomValidateAntiForgery]
         [ActionName("ExportExcelDormantCustomer")]
-        public async Task<ActionResult> ExportExcelDormantCustomerAsync(string excelParam)
+        public async Task<ActionResult> ExportExcelDormantCustomer(string excelParam)
         {
             if (string.IsNullOrEmpty(excelParam))
             {

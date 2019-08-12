@@ -47,7 +47,7 @@
                     .Returns(new AgCasinoBetSettingViewModel());
 
                 // Action
-                var result = await controller.IndexAsync(metaModel) as ViewResult;
+                var result = await controller.Index(metaModel) as ViewResult;
 
                 // Assert
                 Assert.Multiple(() =>
@@ -68,7 +68,7 @@
                     .Returns(new ProductAccess(new List<Product>()));
 
                 // Action
-                var result = await controller.UpdateStatusAsync(0, string.Empty, 0) as JsonResult;
+                var result = await controller.UpdateStatus(0, string.Empty, 0) as JsonResult;
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -99,7 +99,7 @@
                    Arg.Any<bool>()).Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 0 }));
 
                 // Action
-                var result = await controller.UpdateStatusAsync(0, string.Empty, 0) as JsonResult;
+                var result = await controller.UpdateStatus(0, string.Empty, 0) as JsonResult;
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -130,7 +130,7 @@
                    Arg.Any<bool>()).Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 1, Message = "Error" }));
 
                 // Action
-                var result = await controller.UpdateStatusAsync(0, string.Empty, 0) as JsonResult;
+                var result = await controller.UpdateStatus(0, string.Empty, 0) as JsonResult;
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -148,7 +148,7 @@
                     .Returns(new ProductAccess(new List<Product>()));
 
                 // Action
-                var result = await controller.UpdateBetSettingAsync(string.Empty, string.Empty) as JsonResult;
+                var result = await controller.UpdateBetSetting(string.Empty, string.Empty) as JsonResult;
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -176,7 +176,7 @@
                    Arg.Any<string>()).Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 0 }));
 
                 // Action
-                var result = await controller.UpdateBetSettingAsync(string.Empty, string.Empty) as JsonResult;
+                var result = await controller.UpdateBetSetting(string.Empty, string.Empty) as JsonResult;
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -205,7 +205,7 @@
                    .Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 1, Message = "Error" }));
 
                 // Action
-                var result = await controller.UpdateBetSettingAsync(string.Empty, string.Empty) as JsonResult;
+                var result = await controller.UpdateBetSetting(string.Empty, string.Empty) as JsonResult;
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert

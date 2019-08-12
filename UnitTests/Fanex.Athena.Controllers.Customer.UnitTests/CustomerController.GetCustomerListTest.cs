@@ -25,7 +25,7 @@
                 _productService.GetProductAccess(Arg.Any<int>(), Arg.Any<string>()).Returns(new ProductAccess(new List<Product>()));
 
                 // Action
-                var result = (CustomerListViewModel)(await controller.CustomerListAsync(UserName) as ViewResult).Model;
+                var result = (CustomerListViewModel)(await controller.CustomerList(UserName) as ViewResult).Model;
 
                 // Assert
                 Assert.That(result.Param.Username, Is.EqualTo(UserName));
@@ -45,7 +45,7 @@
                 _productService.GetProductAccess(Arg.Any<int>(), Arg.Any<string>()).Returns(new ProductAccess(new List<Product>()));
 
                 // Action
-                var result = (CustomerListViewModel)(await controller.CustomerListAsync(username) as ViewResult).Model;
+                var result = (CustomerListViewModel)(await controller.CustomerList(username) as ViewResult).Model;
 
                 // Assert
                 Assert.That(result.Param.Username, Is.Empty);
@@ -64,7 +64,7 @@
                 _productService.GetProductAccess(Arg.Any<int>(), Arg.Any<string>()).Returns(new ProductAccess(new List<Product>()));
 
                 // Action
-                var result = (CustomerListViewModel)(await controller.CustomerListAsync(username) as ViewResult).Model;
+                var result = (CustomerListViewModel)(await controller.CustomerList(username) as ViewResult).Model;
 
                 // Assert
                 Assert.That(result.Param.Username, Is.Empty);
@@ -84,7 +84,7 @@
                 _productService.GetProductAccess(Arg.Any<int>(), Arg.Any<string>()).Returns(new ProductAccess(new List<Product> { new Product { ProductCode = Product.BA } }));
 
                 // Action
-                var result = (CustomerListViewModel)(await controller.CustomerListAsync() as ViewResult).Model;
+                var result = (CustomerListViewModel)(await controller.CustomerList() as ViewResult).Model;
 
                 // Assert
                 Assert.That(result.Param.GridColumns.Any(x => x.Name == BaStatus && x.Checked));
@@ -105,7 +105,7 @@
                 AppSettings.LicenseeOfferStatusFunction.Returns(new[] { DefaultLicenseeSession.LicenseeId });
 
                 // Action
-                var result = (CustomerListViewModel)(await controller.CustomerListAsync() as ViewResult).Model;
+                var result = (CustomerListViewModel)(await controller.CustomerList() as ViewResult).Model;
 
                 // Assert
                 Assert.That(result.Param.GridColumns.Any(x => x.Name == Status && x.Checked));
@@ -126,7 +126,7 @@
                 StubLicenseeSessionData(new LicenseeAuthInfo { IsAllowedCustomerComm = true });
 
                 // Action
-                var result = (CustomerListViewModel)(await controller.CustomerListAsync() as ViewResult).Model;
+                var result = (CustomerListViewModel)(await controller.CustomerList() as ViewResult).Model;
 
                 // Assert
                 Assert.Multiple(() =>
@@ -151,7 +151,7 @@
                 StubLicenseeSessionData(new LicenseeAuthInfo { IsAllowedCustomerComm = true, LicenseeId = 2 });
 
                 // Action
-                var result = (CustomerListViewModel)(await controller.CustomerListAsync(groupId: GroupCommId) as ViewResult).Model;
+                var result = (CustomerListViewModel)(await controller.CustomerList(groupId: GroupCommId) as ViewResult).Model;
 
                 // Assert
                 Assert.Multiple(() =>
@@ -174,7 +174,7 @@
                 _authorizationService.IsAllowedSpecialBA(DefaultUserSession).Returns(true);
 
                 // Action
-                var result = (CustomerListViewModel)(await controller.CustomerListAsync() as ViewResult).Model;
+                var result = (CustomerListViewModel)(await controller.CustomerList() as ViewResult).Model;
 
                 // Assert
                 Assert.That(result.CanUpdateBAMessage, Is.Empty);
@@ -199,7 +199,7 @@
                 });
 
                 // Action
-                var result = (CustomerListViewModel)(await controller.CustomerListAsync() as ViewResult).Model;
+                var result = (CustomerListViewModel)(await controller.CustomerList() as ViewResult).Model;
 
                 // Assert
                 Assert.That(result.CanUpdateBAMessage, Is.EqualTo(BaMessage));
@@ -223,7 +223,7 @@
                 });
 
                 // Action
-                var result = (CustomerListViewModel)(await controller.CustomerListAsync() as ViewResult).Model;
+                var result = (CustomerListViewModel)(await controller.CustomerList() as ViewResult).Model;
 
                 // Assert
                 Assert.That(result.BATimeCheck, Is.EqualTo(BaMessage));

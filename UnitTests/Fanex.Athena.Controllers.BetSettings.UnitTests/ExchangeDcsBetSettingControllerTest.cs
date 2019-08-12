@@ -50,7 +50,7 @@
                     .Returns(new ResultInfo<double> { ExtendedData = ExtendedData });
 
                 // Action
-                var result = await controller.IndexAsync(metaModel) as ViewResult;
+                var result = await controller.Index(metaModel) as ViewResult;
                 var viewModel = (ExchangeBetSettingViewModel)result.Model;
 
                 // Assert
@@ -80,7 +80,7 @@
                     .Returns(new ResultInfo<double> { Code = 1, Message = "Error" });
 
                 // Action
-                var result = await controller.IndexAsync(metaModel) as ViewResult;
+                var result = await controller.Index(metaModel) as ViewResult;
                 var viewModel = (ExchangeBetSettingViewModel)result.Model;
 
                 // Assert
@@ -104,7 +104,7 @@
                 // Arrange
 
                 // Action
-                var result = await controller.UpdateCommAsync(0, 0, newComm) as JsonResult;
+                var result = await controller.UpdateComm(0, 0, newComm) as JsonResult;
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -131,7 +131,7 @@
                     .Returns(Task.FromResult<IResultInfo<double>>(expectedResultInfo));
 
                 // Action
-                var result = await controller.UpdateCommAsync(0, 0, newComm) as JsonResult;
+                var result = await controller.UpdateComm(0, 0, newComm) as JsonResult;
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert

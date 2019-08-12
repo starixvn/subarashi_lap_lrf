@@ -46,7 +46,7 @@
                 _betSettingService.GetViewModelAsync(metaModel.CustId, customer, DefaultUserSession.Language).Returns(new RngCasinoBetSettingViewModel());
 
                 // Action
-                var result = await controller.IndexAsync(metaModel) as ViewResult;
+                var result = await controller.Index(metaModel) as ViewResult;
                 var viewModel = (BetSettingViewModel)result.Model;
 
                 // Assert
@@ -69,7 +69,7 @@
                     .Returns(new ProductAccess(new List<Product>()));
 
                 // Action
-                var result = await controller.UpdateBetSettingAsync(0, string.Empty);
+                var result = await controller.UpdateBetSetting(0, string.Empty);
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -94,7 +94,7 @@
                  ).Returns(new CustomerInfo { SyncCasino = false });
 
                 // Action
-                var result = await controller.UpdateBetSettingAsync(0, string.Empty).ConfigureAwait(false);
+                var result = await controller.UpdateBetSetting(0, string.Empty).ConfigureAwait(false);
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -128,7 +128,7 @@
                    Arg.Any<bool>()).Returns(expectedResultInfo);
 
                 // Action
-                var result  = await controller.UpdateBetSettingAsync(0, "1").ConfigureAwait(false);
+                var result  = await controller.UpdateBetSetting(0, "1").ConfigureAwait(false);
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -162,7 +162,7 @@
                    Arg.Any<bool>())).Do(x => { throw new System.Exception(ErrorMessage); });
 
                 // Action
-                var result = await controller.UpdateBetSettingAsync(0, "1").ConfigureAwait(false);
+                var result = await controller.UpdateBetSetting(0, "1").ConfigureAwait(false);
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -202,7 +202,7 @@
                    Arg.Any<bool>()).Returns(new ResultInfo { Code = 1, Message = "Error" });
 
                 // Action
-                 await controller.UpdateBetSettingAsync(CustId, string.Join(",", gameTypes)).ConfigureAwait(false);
+                 await controller.UpdateBetSetting(CustId, string.Join(",", gameTypes)).ConfigureAwait(false);
 
                 // Assert
                 Assert.Multiple(() =>
@@ -225,7 +225,7 @@
                     .Returns(new ProductAccess(new List<Product>()));
 
                 // Action
-                var result = await controller.UpdateStatusAsync(0, string.Empty, 0) as JsonResult;
+                var result = await controller.UpdateStatus(0, string.Empty, 0) as JsonResult;
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -249,7 +249,7 @@
                 CoreBetSettingService.GetCustomerInfo(0).Returns(new CustomerInfo { SyncCasino = false });
 
                 // Action
-                var result = await controller.UpdateStatusAsync(0, string.Empty, 0) as JsonResult;
+                var result = await controller.UpdateStatus(0, string.Empty, 0) as JsonResult;
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -278,7 +278,7 @@
                     .Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 0 }));
 
                 // Action
-                var result = await controller.UpdateStatusAsync(0, string.Empty, 0) as JsonResult;
+                var result = await controller.UpdateStatus(0, string.Empty, 0) as JsonResult;
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert
@@ -307,7 +307,7 @@
                     .Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 1, Message = "Error" }));
 
                 // Action
-                var result = await controller.UpdateStatusAsync(0, string.Empty, 0) as JsonResult;
+                var result = await controller.UpdateStatus(0, string.Empty, 0) as JsonResult;
                 var resultInfo = (ResultInfo)result.Data;
 
                 // Assert

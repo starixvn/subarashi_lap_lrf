@@ -52,7 +52,7 @@ namespace Fanex.Athena.Controllers.BetSettings
         [HttpGet]
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         [ValidatePermissionOnData(isObject: true)]
-        public async Task<ActionResult> IndexAsync(BetSettingMetaModel metaModel)
+        public async Task<ActionResult> Index(BetSettingMetaModel metaModel)
         {
             if (!ProductViewFileMap.ContainsKey(metaModel.ProductId))
             {
@@ -75,7 +75,7 @@ namespace Fanex.Athena.Controllers.BetSettings
         [HttpPost]
         [CustomValidateAntiForgery]
         [ValidatePermissionOnData]
-        public Task<JsonResult> UpdateMacauStatusAsync(int custId, string nickName, int status)
+        public Task<JsonResult> UpdateMacauStatus(int custId, string nickName, int status)
         {
             return UpdateThirdPartyProductStatusAsync(ProductTypes.Macau, custId, nickName, status);
         }
@@ -83,7 +83,7 @@ namespace Fanex.Athena.Controllers.BetSettings
         [HttpPost]
         [CustomValidateAntiForgery]
         [ValidatePermissionOnData]
-        public Task<JsonResult> UpdateBetTradeStatusAsync(int custId, string nickName, int status)
+        public Task<JsonResult> UpdateBetTradeStatus(int custId, string nickName, int status)
         {
             return UpdateThirdPartyProductStatusAsync(ProductTypes.BetTrade, custId, nickName, status);
         }
@@ -91,21 +91,21 @@ namespace Fanex.Athena.Controllers.BetSettings
         [HttpPost]
         [CustomValidateAntiForgery]
         [ValidatePermissionOnData]
-        public Task<JsonResult> UpdateColossusBetsStatusAsync(int custId, string nickName, int status)
+        public Task<JsonResult> UpdateColossusBetsStatus(int custId, string nickName, int status)
         {
             return UpdateThirdPartyProductStatusAsync(ProductTypes.ColossusBets, custId, nickName, status);
         }
 
         [HttpPost]
         [CustomValidateAntiForgery]
-        public Task<JsonResult> UpdateCashOutStatusAsync(int custId, string nickName, int status)
+        public Task<JsonResult> UpdateCashOutStatus(int custId, string nickName, int status)
         {
             return UpdateThirdPartyProductStatusAsync(ProductTypes.CashOut, custId, nickName, status);
         }
 
         [HttpPost]
         [CustomValidateAntiForgery]
-        public Task<JsonResult> UpdateGoldDeluxeStatusAsync(int custId, string nickName, int status)
+        public Task<JsonResult> UpdateGoldDeluxeStatus(int custId, string nickName, int status)
         {
             return UpdateThirdPartyProductStatusAsync(ProductTypes.GoldDeluxe, custId, nickName, status);
         }

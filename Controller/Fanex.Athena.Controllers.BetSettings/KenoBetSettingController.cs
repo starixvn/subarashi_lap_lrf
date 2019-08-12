@@ -46,7 +46,7 @@ namespace Fanex.Athena.Controllers.BetSettings
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         [ValidatePermissionOnData(isObject: true)]
 
-        public async Task<ActionResult> IndexAsync(BetSettingMetaModel metaModel)
+        public async Task<ActionResult> Index(BetSettingMetaModel metaModel)
         {
             var viewModel = await _betSettingService.GetViewModelAsync(
                 metaModel.CustId);
@@ -57,7 +57,7 @@ namespace Fanex.Athena.Controllers.BetSettings
         [HttpPost]
         [CustomValidateAntiForgery]
         [ValidatePermissionOnData]
-        public async Task<JsonResult> UpdateBetSettingAsync(string nickName)
+        public async Task<JsonResult> UpdateBetSetting(string nickName)
         {
             var userSession = SessionService.UserSession;
             var licenseeId = SessionService.LicenseeSession.LicenseeId;
