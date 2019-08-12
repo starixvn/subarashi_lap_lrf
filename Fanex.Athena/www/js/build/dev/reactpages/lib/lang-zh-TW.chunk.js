@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 8/2/2019 3:28:40 PM
+// Generated at: 8/12/2019 5:55:06 PM
 window._language_zh_TW = {
   AA: "客客",
   AbnormalBet: "非正規註單",
@@ -517,7 +517,6 @@ window._language_zh_TW = {
   Permission: "權限",
   PermissionForUser: "用戶權限",
   Platform: "平台",
-  PlayerAdminInvalidDataErrMsg: "無效的參數。無效的會員識別",
   PreGame: "遊戲開始前",
   Prev: "上個",
   Product: "產品",

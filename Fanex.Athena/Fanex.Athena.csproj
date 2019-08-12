@@ -622,6 +622,7 @@
     <Content Include="www\css\build\dev\reactpages\notification\index.css.map" />
     <Content Include="www\css\build\dev\reactpages\playeradmin\account-info.chunk.js" />
     <Content Include="www\css\build\dev\reactpages\playeradmin\account-info.css" />
+    <Content Include="www\css\build\dev\reactpages\playeradmin\betlimit.css" />
     <Content Include="www\css\build\dev\reactpages\playeradmin\index.chunk.js" />
     <Content Include="www\css\build\dev\reactpages\playeradmin\index.css" />
     <Content Include="www\css\build\dev\reactpages\playeradmin\running-betlist.chunk.js" />
@@ -662,6 +663,7 @@
     <Content Include="www\css\build\pro\reactpages\notification\index.chunk.js" />
     <Content Include="www\css\build\pro\reactpages\notification\index.css" />
     <Content Include="www\css\build\pro\reactpages\playeradmin\account-info.css" />
+    <Content Include="www\css\build\pro\reactpages\playeradmin\betlimit.css" />
     <Content Include="www\css\build\pro\reactpages\playeradmin\index.css" />
     <Content Include="www\css\build\pro\reactpages\playeradmin\running-betlist.css" />
     <Content Include="www\css\build\pro\reactpages\speciallicenseewl\index.chunk.js" />
@@ -700,6 +702,7 @@
     <Content Include="www\css\source\reactpages\components\alert\index.scss" />
     <Content Include="www\css\source\reactpages\components\alert\icons.scss" />
     <Content Include="Views\Desktop\Module\PlayerAdmin\PlayerBetLimit\Index.cshtml" />
+    <Content Include="www\css\build\dev\reactpages\playeradmin\betlimit.css.map" />
     <None Include="www\css\source\reactpages\components\custom3rd\react-toastify.scss" />
     <None Include="www\css\source\pages\betlist\result\result.happy5.scss" />
     <None Include="www\css\source\reactpages\components\alert\icons\error.scss" />
@@ -727,6 +730,7 @@
     <Content Include="www\js\build\dev\reactpages\lib\lang-zh-Hans.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\lib\lang-zh-TW.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\lib\xlsx-style-sparta.chunk.js" />
+    <Content Include="www\js\build\dev\reactpages\playeradmin\betlimit.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\playeradmin\playeraccountinfo.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\playeradmin\playerlist.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\playeradmin\runningbetlist.chunk.js" />
@@ -753,6 +757,7 @@
     <Content Include="www\js\build\pro\reactpages\lib\lang-zh-TW.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\lib\langHelper.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\lib\xlsx-style-sparta.chunk.js" />
+    <Content Include="www\js\build\pro\reactpages\playeradmin\betlimit.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\playeradmin\playeraccountinfo.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\playeradmin\playerlist.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\playeradmin\runningbetlist.chunk.js" />
@@ -2617,6 +2622,7 @@
     <Content Include="www\css\source\reactpages\pages\playeradmin\running-betlist.scss" />
     <Content Include="www\js\build\dev\reactpages\playeradmin\runningbetlist.chunk.js.map" />
     <Content Include="www\css\source\reactpages\pages\playeradmin\betlimit.scss" />
+    <Content Include="www\js\build\dev\reactpages\playeradmin\betlimit.chunk.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="SiteConfig\WebConfigTransforms\SIT.config">

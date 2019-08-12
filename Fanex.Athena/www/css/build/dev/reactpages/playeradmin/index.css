@@ -631,6 +631,269 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::after {
       height: 1px;
       margin: 0 10px; }
 
+:root {
+  --swal-red: #F27474; }
+
+.swal-icon--error {
+  border-color: var(--swal-red);
+  animation: animateErrorIcon 0.5s; }
+  .swal-icon--error__x-mark {
+    position: relative;
+    display: block;
+    animation: animateXMark 0.5s; }
+  .swal-icon--error__line {
+    position: absolute;
+    height: 35px;
+    width: 3px;
+    background-color: var(--swal-red);
+    display: block;
+    top: 8px;
+    border-radius: 2px; }
+    .swal-icon--error__line--left {
+      transform: rotate(45deg);
+      left: 24px; }
+    .swal-icon--error__line--right {
+      transform: rotate(-45deg);
+      right: 23px; }
+
+@keyframes animateErrorIcon {
+  from {
+    transform: rotateX(100deg);
+    opacity: 0; }
+  to {
+    transform: rotateX(0deg);
+    opacity: 1; } }
+
+@keyframes animateXMark {
+  0% {
+    transform: scale(0.4);
+    margin-top: 26px;
+    opacity: 0; }
+  50% {
+    transform: scale(0.4);
+    margin-top: 26px;
+    opacity: 0; }
+  80% {
+    transform: scale(1.15);
+    margin-top: -6px; }
+  100% {
+    transform: scale(1);
+    margin-top: 0;
+    opacity: 1; } }
+
+:root {
+  --swal-orange: #F8BB86; }
+
+.swal-icon--warning {
+  border-color: var(--swal-orange);
+  animation: pulseWarning 0.75s infinite alternate;
+  /* Exclamation mark */ }
+  .swal-icon--warning__body {
+    position: absolute;
+    width: 4px;
+    height: 30px;
+    left: 50%;
+    top: 5px;
+    border-radius: 2px;
+    margin-left: -2px;
+    background-color: var(--swal-orange); }
+  .swal-icon--warning__dot {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    margin-left: -3px;
+    left: 50%;
+    bottom: -8px;
+    background-color: var(--swal-orange); }
+
+@keyframes pulseWarning {
+  from {
+    border-color: #F8D486; }
+  to {
+    border-color: var(--swal-orange); } }
+
+:root {
+  --swal-green: #A5DC86;
+  --swal-green-light: rgba(165, 220, 134, 0.2); }
+
+.swal-icon--success {
+  border-color: var(--swal-green);
+  /* Moving circular line */
+  /* Ring */
+  /* Hide corners left from animation */ }
+  .swal-icon--success::before, .swal-icon--success::after {
+    content: '';
+    border-radius: 50%;
+    position: absolute;
+    width: 40px;
+    height: 60px;
+    background: white;
+    transform: rotate(45deg); }
+  .swal-icon--success::before {
+    border-radius: 120px 0 0 120px;
+    top: -35px;
+    left: 0;
+    transform: rotate(-45deg);
+    transform-origin: 60px 60px; }
+  .swal-icon--success::after {
+    border-radius: 0 120px 120px 0;
+    top: -5px;
+    left: 38px;
+    transform: rotate(-45deg);
+    transform-origin: 0px 60px;
+    animation: rotatePlaceholder 4.25s ease-in; }
+  .swal-icon--success__ring {
+    width: 50px;
+    height: 50px;
+    border: 4px solid var(--swal-green-light);
+    border-radius: 50%;
+    box-sizing: content-box;
+    position: absolute;
+    left: -4px;
+    top: -4px;
+    z-index: 2; }
+  .swal-icon--success__hide-corners {
+    width: 5px;
+    height: 60px;
+    background-color: white;
+    padding: 1px;
+    position: absolute;
+    left: 17px;
+    top: 5px;
+    z-index: 1;
+    transform: rotate(-45deg); }
+  .swal-icon--success__line {
+    height: 4px;
+    background-color: var(--swal-green);
+    display: block;
+    border-radius: 2px;
+    position: absolute;
+    z-index: 2; }
+    .swal-icon--success__line--tip {
+      width: 18px;
+      left: 7px;
+      top: 30px;
+      transform: rotate(45deg);
+      animation: animateSuccessTip 0.75s; }
+    .swal-icon--success__line--long {
+      width: 30px;
+      right: 3px;
+      top: 25px;
+      transform: rotate(-45deg);
+      animation: animateSuccessLong 0.75s; }
+
+@keyframes rotatePlaceholder {
+  0% {
+    transform: rotate(-45deg); }
+  5% {
+    transform: rotate(-45deg); }
+  12% {
+    transform: rotate(-405deg); }
+  100% {
+    transform: rotate(-405deg); } }
+
+@keyframes animateSuccessTip {
+  0% {
+    width: 0;
+    left: 1px;
+    top: 10px; }
+  54% {
+    width: 0;
+    left: 1px;
+    top: 10px; }
+  70% {
+    width: 34px;
+    left: -6px;
+    top: 23px; }
+  84% {
+    width: 12px;
+    left: 12px;
+    top: 30px; }
+  100% {
+    width: 18px;
+    left: 7px;
+    top: 30px; } }
+
+@keyframes animateSuccessLong {
+  0% {
+    width: 0;
+    right: 2px;
+    top: 30px; }
+  65% {
+    width: 0;
+    right: 2px;
+    top: 30px; }
+  84% {
+    width: 45px;
+    right: 0px;
+    top: 20px; }
+  100% {
+    width: 30px;
+    right: 3px;
+    top: 25px; } }
+
+:root {
+  --swal-blue: #C9DAE1; }
+
+.swal-icon--info {
+  border-color: var(--swal-blue);
+  /* "i"-letter body */
+  /* "i"-letter dot */ }
+  .swal-icon--info::before {
+    content: "";
+    position: absolute;
+    width: 5px;
+    height: 29px;
+    left: 50%;
+    bottom: 17px;
+    border-radius: 2px;
+    margin-left: -2px;
+    background-color: var(--swal-blue); }
+  .swal-icon--info::after {
+    content: "";
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    margin-left: -3px;
+    top: 19px;
+    background-color: var(--swal-blue);
+    left: 50%; }
+
+.swal-icon {
+  width: 50px;
+  height: 50px;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 50%;
+  padding: 0;
+  position: relative;
+  box-sizing: content-box;
+  margin: 10px auto 15px auto; }
+  .swal-icon--custom {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    border: none;
+    border-radius: 0; }
+  .swal-iconimg {
+    max-width: 100%;
+    max-height: 100%; }
+
+.sweet-alert .popup-content {
+  width: 100%;
+  padding: 0 10px; }
+
+.sweet-alert .al-button-container {
+  text-align: center;
+  margin-top: 15px; }
+  .sweet-alert .al-button-container button, .sweet-alert .al-button-container a {
+    margin-right: 10px; }
+
+.sweet-alert .warning {
+  color: #ee0606; }
+
 #app-container {
   max-width: 1920px; }
 
@@ -700,6 +963,11 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::after {
     font-size: 12px; }
     .header-tab .tabs .tab a.active {
       color: #f05b1f; }
+
+iframe {
+  border-width: 0px 1px 1px;
+  border-style: solid;
+  border-color: #d6d6d6; }
 
 /*End Tab*/
 /*Grid*/

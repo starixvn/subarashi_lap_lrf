@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 8/2/2019 3:28:40 PM
+// Generated at: 8/12/2019 5:55:06 PM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -590,7 +590,6 @@ window._language_en_US = {
   Platform: "Platform",
   PlatformWinLoss: "Platform Win Loss",
   PlatformWinLossTitle: "Platform Win Loss - {0} --&gt; {1} - {2} - {3} - {4}",
-  PlayerAdminInvalidDataErrMsg: "Invalid parameter. Invalid custId.",
   PlayerAdminUpdateFailedMsg: "Please try again!",
   PreGame: "Pre Game",
   Prev: "Prev",
@@ -761,9 +760,9 @@ window._language_en_US = {
   UpdateSportsbookBetSettings: "Are you sure you want to update all Sportsbook bet settings?",
   UpdateSportsbookBetSettingSuccessMsg: "The Sportsbook bet setting of {0} was updated successfully",
   UpdateSuccess: "Update successfully!",
-  UpdateToActiveConfirmMsg: "Are you sure you want to change the status of this player to ACTIVE?\nWarning, this player will be able to log in and bet.",
-  UpdateToClosedConfirmMsg: "Are you sure you want to change the status of this player to CLOSED?\nWarning, Warning, this player cannot login!",
-  UpdateToLockedConfirmMsg: "Are you sure you want to change the status of this player to LOCKED?\nWarning, this player cannot be restored forever!",
+  UpdateToActiveConfirmMsg: "Are you sure you want to change the status of this player to ACTIVE?",
+  UpdateToClosedConfirmMsg: "Are you sure you want to change the status of this player to CLOSED?",
+  UpdateToLockedConfirmMsg: "Are you sure you want to change the status of this player to LOCKED?",
   UpdateUnSuccess: "Update unsucessfully!",
   UserGuide: "User Guide",
   UserInformation: "User Information",
@@ -792,6 +791,9 @@ window._language_en_US = {
   VirtualTennis: "Virtual Tennis",
   Void: "Void",
   Wap: "WAP",
+  WarningToActiveMsg: "Warning, this player will be able to log in and bet.",
+  WarningToClosedMsg: "Warning, this player cannot login!",
+  WarningToLockedMsg: "Warning, this player cannot be restored forever!",
   We: "We",
   Wednesday: "Wednesday",
   WeeklyLiveMatches: "Weekly Live Matches",

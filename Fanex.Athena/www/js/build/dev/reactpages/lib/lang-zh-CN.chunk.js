@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 8/2/2019 3:28:40 PM
+// Generated at: 8/12/2019 5:55:06 PM
 window._language_zh_CN = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -520,7 +520,6 @@ window._language_zh_CN = {
   Permission: "权限",
   PermissionForUser: "用户权限",
   Platform: "平台",
-  PlayerAdminInvalidDataErrMsg: "无效的参数.无效的会员识别",
   PreGame: "游戏开始前",
   Prev: "上个月",
   Product: "产品",

@@ -1251,6 +1251,14 @@ ul {
   color: #fff;
   background-color: #757985; }
 
+.btn-apply {
+  background-color: #4e68b6;
+  color: #fff; }
+  .btn-apply:hover {
+    background: #7287c5; }
+  .btn-apply:focus {
+    background: #4e68b6; }
+
 button:focus {
   outline: none; }
 
