@@ -7,6 +7,8 @@ import { playerStatus, displayedPlayerStatusList, messageUpdateState } from '../
 import GridInteractionService from '../../lib/gridInteractionService';
 import { ActionCreators } from '../../actions';
 import LangHelper from '@jsroot/lib/langHelper';
+import { getErrorMessageForUpdating } from '../../lib/utils';
+import { generateDefaultConfirmOption, generateDefaultAlertOption, predefinedIcons } from '../../../../../lib/sweetAlert';
 
 const StatusDropdown = (props) => {
     const { statusDropdownPosition, setStatusDropdownPosition } = props;
@@ -20,38 +22,58 @@ const StatusDropdown = (props) => {
         setStatusDropdownPosition(null);
     }
 
-    const { currentActivePlayer, playerList, setPlayerList, toggleLoader, updatePlayerStatus } = props;
+    const { currentActivePlayer, playerList, setPlayerList, toggleLoader, updatePlayerStatus, setSweetAlertOption } = props;
+    const handleCloseAlert = () => {
+        setSweetAlertOption(null);
+    }
+
+    const cancelProps = {
+        onClick: handleCloseAlert
+    }
+
     const handleChangeOddsGroup = (event, value) => {
         event.preventDefault();
-        const messageConfirm = messageUpdateState[value];
-        if (currentActivePlayer && window.confirm(messageConfirm)) {
-            const { custId } = currentActivePlayer;
-            const param = {
-                custId,
-                status: value
-            }
+        const messageList = messageUpdateState[value] || [];
+        const confirmMessage = messageList.length ? (<p>{messageList[0]}<br/><span className="warning">{messageList[1]}</span></p>) : null;
 
-            toggleLoader(true);
-            updatePlayerStatus(param).then(response => {
-                const { IsSuccessful } = response.data;
-                if (IsSuccessful) {
-                    const newPlayerList = GridInteractionService.updatePlayerItem(playerList, custId, value, 'Status');
-                    setPlayerList(newPlayerList);
+        const confirmProps = {
+            onClick: () => {
+                if (currentActivePlayer) {
+                    const { custId } = currentActivePlayer;
+                    const param = {
+                        custId,
+                        status: value
+                    }
+
+                    toggleLoader(true);
+                    updatePlayerStatus(param).then(response => {
+                        const { IsSuccessful } = response.data;
+                        if (IsSuccessful) {
+                            const newPlayerList = GridInteractionService.updatePlayerItem(playerList, custId, value, 'Status');
+                            setPlayerList(newPlayerList);
+                        }
+
+                        const resultMessage = IsSuccessful ? LangHelper.getSingleResource('UpdateSuccess') : LangHelper.getSingleResource('PlayerAdminUpdateFailedMsg');
+                        const displayIcon = IsSuccessful ? predefinedIcons.success : predefinedIcons.error;
+                        const alertOpt = generateDefaultAlertOption(resultMessage, handleCloseAlert, null, displayIcon);
+                        setSweetAlertOption(alertOpt);
+
+                        toggleLoader(false);
+                    }).catch(error => {
+                        console.log(error.message);
+                        const message = getErrorMessageForUpdating(error);;
+                        const alertOpt = generateDefaultAlertOption(message, handleCloseAlert, null, predefinedIcons.error);
+                        setSweetAlertOption(alertOpt);
+                        toggleLoader(false);
+                    })
                 }
 
-                const resultMessage = IsSuccessful ? LangHelper.getSingleResource('UpdateSuccess') : LangHelper.getSingleResource('PlayerAdminUpdateFailedMsg');
-                window.alert(resultMessage);
-
-                toggleLoader(false);
-            }).catch(error => {
-                console.log(error.message);
-                window.alert(LangHelper.getSingleResource('HttpError_Default'));
-                toggleLoader(false);
-            })
-
+                handleClose();
+            }
         }
 
-        handleClose();
+        const confirmOption = generateDefaultConfirmOption(confirmMessage, handleCloseAlert, confirmProps, cancelProps);
+        setSweetAlertOption(confirmOption);
     }
 
     const displayedStatusList = currentActivePlayer && displayedPlayerStatusList[currentActivePlayer.status];
@@ -76,8 +98,8 @@ const StatusDropdown = (props) => {
 }
 
 function mapDispatchToProps(dispatch) {
-    const { setStatusDropdownPosition, setPlayerList, toggleLoader, updatePlayerStatus } = ActionCreators;
-    return bindActionCreators({ setStatusDropdownPosition, setPlayerList, toggleLoader, updatePlayerStatus }, dispatch);
+    const { setStatusDropdownPosition, setPlayerList, toggleLoader, updatePlayerStatus, setSweetAlertOption } = ActionCreators;
+    return bindActionCreators({ setStatusDropdownPosition, setPlayerList, toggleLoader, updatePlayerStatus, setSweetAlertOption }, dispatch);
 }
 
 function mapStateToProps(state) {

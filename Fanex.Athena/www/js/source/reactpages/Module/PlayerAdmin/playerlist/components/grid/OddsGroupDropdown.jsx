@@ -51,14 +51,13 @@ export const OddsGroupDropdown = (props) => {
                         if (Success) {
                             const newPlayerList = GridInteractionService.updatePlayerItem(playerList, custId, value, 'OddsGroup');
                             setPlayerList(newPlayerList);
-                            const alertOpt = generateDefaultAlertOption(LangHelper.getSingleResource('UpdateSuccess'), handleCloseAlert);
-                            setSweetAlertOption(alertOpt);
                         }
-                        else {
-                            const errMsg = Message || LangHelper.getSingleResource(ErrorMessage);
-                            const alertOpt = generateDefaultAlertOption(errMsg, handleCloseAlert, null, predefinedIcons.error);
-                            setSweetAlertOption(alertOpt);
-                        }
+
+                        const resultMessage = Success ? LangHelper.getSingleResource('UpdateSuccess') : (Message || LangHelper.getSingleResource(ErrorMessage));
+                        const displayIcon = Success ? predefinedIcons.success : predefinedIcons.error;
+                        const alertOpt = generateDefaultAlertOption(resultMessage, handleCloseAlert, null, displayIcon);
+                        setSweetAlertOption(alertOpt);
+
                         toggleLoader(false);
                     }).catch((error) => {
                         console.log(error.message);
@@ -67,6 +66,9 @@ export const OddsGroupDropdown = (props) => {
                         setSweetAlertOption(alertOpt);
                         toggleLoader(false);
                     })
+                }
+                else {
+                    handleCloseAlert();
                 }
 
                 handleClose();

@@ -6082,7 +6082,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to change the status of this player to ACTIVE?\nWarning, this player will be able to log in and bet..
+        ///   Looks up a localized string similar to Are you sure you want to change the status of this player to ACTIVE?.
         /// </summary>
         public static string UpdateToActiveConfirmMsg {
             get {
@@ -6091,7 +6091,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to change the status of this player to CLOSED?\nWarning, Warning, this player cannot login!.
+        ///   Looks up a localized string similar to Are you sure you want to change the status of this player to CLOSED?.
         /// </summary>
         public static string UpdateToClosedConfirmMsg {
             get {
@@ -6100,7 +6100,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to change the status of this player to LOCKED?\nWarning, this player cannot be restored forever!.
+        ///   Looks up a localized string similar to Are you sure you want to change the status of this player to LOCKED?.
         /// </summary>
         public static string UpdateToLockedConfirmMsg {
             get {
@@ -6357,6 +6357,33 @@ namespace Fanex.Athena.Resources {
         public static string Wap {
             get {
                 return ResourceManager.GetString("Wap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Warning, this player will be able to log in and bet..
+        /// </summary>
+        public static string WarningToActiveMsg {
+            get {
+                return ResourceManager.GetString("WarningToActiveMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Warning, this player cannot login!.
+        /// </summary>
+        public static string WarningToClosedMsg {
+            get {
+                return ResourceManager.GetString("WarningToClosedMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Warning, this player cannot be restored forever!.
+        /// </summary>
+        public static string WarningToLockedMsg {
+            get {
+                return ResourceManager.GetString("WarningToLockedMsg", resourceCulture);
             }
         }
         

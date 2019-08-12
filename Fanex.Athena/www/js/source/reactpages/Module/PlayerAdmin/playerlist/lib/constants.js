@@ -126,9 +126,9 @@ export const displayedPlayerStatusList = {
 }
 
 export const messageUpdateState = {
-    [playerStatusByName.Locked]: LangHelper.getSingleResource('UpdateToLockedConfirmMsg'),
-    [playerStatusByName.Closed]: LangHelper.getSingleResource('UpdateToClosedConfirmMsg'),
-    [playerStatusByName.Active]: LangHelper.getSingleResource('UpdateToActiveConfirmMsg')
+    [playerStatusByName.Locked]: [LangHelper.getSingleResource('UpdateToLockedConfirmMsg'), LangHelper.getSingleResource('WarningToLockedMsg')],
+    [playerStatusByName.Closed]: [LangHelper.getSingleResource('UpdateToClosedConfirmMsg'), LangHelper.getSingleResource('WarningToClosedMsg')],
+    [playerStatusByName.Active]: [LangHelper.getSingleResource('UpdateToActiveConfirmMsg'), LangHelper.getSingleResource('WarningToActiveMsg')]
 }
 
 export const baStatusList = {

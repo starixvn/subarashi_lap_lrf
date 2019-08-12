@@ -1,6 +1,11 @@
 ﻿@import "icons";
 
 .sweet-alert {
+    .popup-content {
+        width: 100%;
+        padding: 0 10px;
+    }
+
     .al-button-container {
         text-align: center;
         margin-top: 15px;
@@ -8,5 +13,9 @@
         button, a {
             margin-right: 10px;
         }
+    }
+
+    .warning {
+        color: #ee0606;
     }
 }

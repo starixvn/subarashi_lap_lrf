@@ -37,14 +37,12 @@ const BaStatusCell = (props) => {
                         const oddsGroup = ExtendedData || OddsGroup;
                         const newPlayerList = GridInteractionService.updatePlayerWithBaStatus(playerList, CustId, isBa, oddsGroup);
                         setPlayerList(newPlayerList);
-                        const alertOpt = generateDefaultAlertOption(LangHelper.getSingleResource('UpdateSuccess'), handleCloseAlert);
-                        setSweetAlertOption(alertOpt);
                     }
-                    else {
-                        const errMsg = Message || LangHelper.getSingleResource(ErrorMessage);
-                        const alertOpt = generateDefaultAlertOption(errMsg, handleCloseAlert, null, predefinedIcons.error);
-                        setSweetAlertOption(alertOpt);
-                    }
+
+                    const resultMessage = Success ? LangHelper.getSingleResource('UpdateSuccess') : (Message || LangHelper.getSingleResource(ErrorMessage));
+                    const displayIcon = Success ? predefinedIcons.success : predefinedIcons.error;
+                    const alertOpt = generateDefaultAlertOption(resultMessage, handleCloseAlert, null, displayIcon);
+                    setSweetAlertOption(alertOpt);
 
                     toggleLoader(false);
                 }).catch((error) => {

@@ -2439,15 +2439,15 @@
     <comment>112658</comment>
   </data>
   <data name="UpdateToLockedConfirmMsg" xml:space="preserve">
-    <value>Are you sure you want to change the status of this player to LOCKED?\nWarning, this player cannot be restored forever!</value>
+    <value>Are you sure you want to change the status of this player to LOCKED?</value>
     <comment>112658</comment>
   </data>
   <data name="UpdateToClosedConfirmMsg" xml:space="preserve">
-    <value>Are you sure you want to change the status of this player to CLOSED?\nWarning, Warning, this player cannot login!</value>
+    <value>Are you sure you want to change the status of this player to CLOSED?</value>
     <comment>112658</comment>
   </data>
   <data name="UpdateToActiveConfirmMsg" xml:space="preserve">
-    <value>Are you sure you want to change the status of this player to ACTIVE?\nWarning, this player will be able to log in and bet.</value>
+    <value>Are you sure you want to change the status of this player to ACTIVE?</value>
     <comment>112658</comment>
   </data>
   <data name="Unknown" xml:space="preserve">
@@ -2456,6 +2456,18 @@
   </data>
   <data name="PlayerAdminUpdateFailedMsg" xml:space="preserve">
     <value>Please try again!</value>
+    <comment>112658</comment>
+  </data>
+  <data name="WarningToLockedMsg" xml:space="preserve">
+    <value>Warning, this player cannot be restored forever!</value>
+    <comment>112658</comment>
+  </data>
+  <data name="WarningToClosedMsg" xml:space="preserve">
+    <value>Warning, this player cannot login!</value>
+    <comment>112658</comment>
+  </data>
+  <data name="WarningToActiveMsg" xml:space="preserve">
+    <value>Warning, this player will be able to log in and bet.</value>
     <comment>112658</comment>
   </data>
 </root>
