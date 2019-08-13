@@ -3,21 +3,19 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Model.Core.DataDomain;
     using Model.BetSettings.DTO;
     using Model.BetSettings.MetaModel;
     using Model.BetSettings.ViewModel;
+    using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using NSubstitute;
     using NUnit.Framework;
     using Resources;
     using Service.BetSettings.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     public class AgCasinoBetSettingControllerTest : BetSettingBaseControllerHelperTest
     {
         private IAgCasinoBetSettingService _betSettingService;
-        private IAuthorizationService _authorizationService;
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
@@ -40,8 +38,6 @@
             {
                 // Arrange
                 var metaModel = new BetSettingMetaModel { CustId = 100 };
-
-                _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), metaModel.CustId, 0).Returns(true);
 
                 _betSettingService.GetViewModelAsync(metaModel.CustId, DefaultLicenseeSession.LicenseeName)
                     .Returns(new AgCasinoBetSettingViewModel());
@@ -216,13 +212,12 @@
         private AgCasinoBetSettingController CreateController()
         {
             _betSettingService = Substitute.For<IAgCasinoBetSettingService>();
-            _authorizationService = Substitute.For<IAuthorizationService>();
             var controller = new AgCasinoBetSettingController(
                 LangService,
                 SessionService,
                 CoreBetSettingService,
                 ProductService,
-                _betSettingService, LicenseeSettingService, _authorizationService)
+                _betSettingService, LicenseeSettingService)
             {
                 ControllerContext = ControllerContext
             };

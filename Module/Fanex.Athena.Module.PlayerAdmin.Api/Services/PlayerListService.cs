@@ -1,11 +1,11 @@
-﻿using Fanex.Athena.Extension.Utility.Interfaces;
+﻿using System;
+using System.Collections.Generic;
+using Fanex.Athena.Extension.Utility.Interfaces;
 using Fanex.Athena.Module.PlayerAdmin.Api.DTO;
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.Services.Interfaces;
 using Fanex.Athena.Module.PlayerAdmin.Api.ViewModels;
 using Fanex.Data;
-using System;
-using System.Collections.Generic;
 
 namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
 {
@@ -29,7 +29,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
                 AssignParamByUserName(objectDb, metaModel);
 
                 result.DataList = ReadPlayerList(objectDb);
-                result.TotalItem = Convert.ToInt32(objectDb.GetParameterValue("TotalRows"));
+                result.TotalItem = GetTotalItem(objectDb);
             }
 
             return result;
@@ -46,7 +46,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
                 AssignParamByCustId(objectDb, metaModel);
 
                 result.DataList = ReadPlayerList(objectDb);
-                result.TotalItem = Convert.ToInt32(objectDb.GetParameterValue("TotalRows"));
+                result.TotalItem = GetTotalItem(objectDb);
             }
 
             return result;
@@ -106,6 +106,11 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
             }
 
             return playerList;
+        }
+
+        private static int GetTotalItem(IObjectDb objectDb)
+        {
+            return Convert.ToInt32(objectDb.GetParameterValue("TotalRows"));
         }
     }
 }

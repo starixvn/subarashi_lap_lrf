@@ -24,20 +24,18 @@ namespace Fanex.Athena.Controllers.BetSettings
     public class AgCasinoBetSettingController : BetSettingBaseController
     {
         private readonly IAgCasinoBetSettingService _betSettingService;
-        private readonly IAuthorizationService _authorizationService;
+
         public AgCasinoBetSettingController(
             ILanguageService languageService,
             ISessionService sessionService,
             ICoreBetSettingService coreBetSettingService,
             IProductService productService,
             IAgCasinoBetSettingService betSettingService,
-             ILicenseeSettingService licenseeSettingService,
-            IAuthorizationService authorizationService
+             ILicenseeSettingService licenseeSettingService
             )
         : base(languageService, sessionService, coreBetSettingService, productService, licenseeSettingService)
         {
             _betSettingService = betSettingService;
-            _authorizationService = authorizationService;
         }
 
         [HttpGet]
@@ -93,7 +91,6 @@ namespace Fanex.Athena.Controllers.BetSettings
 
             var setting = GetBetSettingCommonParam(userSession.UserId, licenseeId, userSession.Language);
             var result = await _betSettingService.UpdateAgCasinoBetSettingAsync(setting, group);
-
 
             if (result.Code == 0)
             {

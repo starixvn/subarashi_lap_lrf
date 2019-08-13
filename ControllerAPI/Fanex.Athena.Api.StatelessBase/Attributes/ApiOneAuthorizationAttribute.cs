@@ -1,11 +1,4 @@
-﻿using Fanex.Athena.Api.StatelessBase.Attributes.Extensions;
-using Fanex.Athena.DataAccess.Core.Users.Interfaces;
-using Fanex.Athena.Model.Auth;
-using Fanex.Athena.Resources;
-using Fanex.Athena.Service.StatelessCore.Interfaces;
-using Fanex.Logging;
-using ONEbook.UM.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -15,6 +8,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
+using Fanex.Athena.Api.StatelessBase.Attributes.Extensions;
+using Fanex.Athena.DataAccess.Core.Users.Interfaces;
+using Fanex.Athena.Model.Auth;
+using Fanex.Athena.Resources;
+using Fanex.Athena.Service.StatelessCore.Interfaces;
+using Fanex.Logging;
+using ONEbook.UM.Services;
 
 namespace Fanex.Athena.Api.StatelessBase.Attributes
 {
@@ -63,7 +63,6 @@ namespace Fanex.Athena.Api.StatelessBase.Attributes
                     return UnauthorizeAccessHandlerAsync(actionContext, ViewResources.AccessDeniedMsg);
                 }
 
-
                 if (!HasPermission(token))
                 {
                     LogInfo(logger, actionContext.Request, "Acces Denied");
@@ -95,8 +94,8 @@ namespace Fanex.Athena.Api.StatelessBase.Attributes
                 return hasPermission;
             }
             return true;
-
         }
+
         private IEnumerable<string> GetAllowedFunctionKeyList()
         {
             var functionKeys = AllowFunctionKeys?.Trim();
@@ -105,7 +104,7 @@ namespace Fanex.Athena.Api.StatelessBase.Attributes
                 return new List<string>();
             }
 
-            return functionKeys.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim());
+            return functionKeys.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim());
         }
 
         private static void AssignActionArguments(HttpActionContext actionContext, OneAuthToken token)

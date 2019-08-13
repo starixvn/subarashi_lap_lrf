@@ -6,14 +6,10 @@
 
 namespace Fanex.Athena.Service.BetSettings
 {
-    using System.Collections.Generic;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
-
     using Model.Core.DTO.Common;
 
-    public class BetSettingBaseService
+    public abstract class BetSettingBaseService
     {
-
         protected static IResultInfo ErrorResult(string message)
         {
             return new ResultInfo
@@ -22,6 +18,5 @@ namespace Fanex.Athena.Service.BetSettings
                 Message = message
             };
         }
-
     }
 }
