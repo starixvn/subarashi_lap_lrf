@@ -1264,7 +1264,7 @@ function (_PureComponent) {
         param: advancedSearchParam,
         onChange: this.handleSpecificInputChange
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-12 col-md-2 col-sm-2 col-lg-1 col-xl-1"
+        className: "col-12 col-md-2 col-sm-2 col-lg-2 col-xl-1"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1720,7 +1720,7 @@ function mapStateToProps(state) {
       displayedColumnList = state.displayedColumnList,
       param = state.param,
       playerList = state.playerList;
-  var playerCount = pagingOption.TotalItem || 0;
+  var playerCount = pagingOption.TotalItem || playerList && playerList.length || 0;
   return Object.assign({}, {
     playerList: playerList,
     playerCount: playerCount,
@@ -2260,7 +2260,8 @@ var BaStatusCell = function BaStatusCell(props) {
       setSweetAlertOption = props.setSweetAlertOption;
   var CustId = dataItem.CustId,
       BaStatus = dataItem.BaStatus,
-      OddsGroup = dataItem.OddsGroup;
+      OddsGroup = dataItem.OddsGroup,
+      IsArchived = dataItem.IsArchived;
 
   var handleChangeBaStatus = function handleChangeBaStatus(event) {
     var isBa = event.target.checked;
@@ -2314,7 +2315,7 @@ var BaStatusCell = function BaStatusCell(props) {
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
     className: "center-align"
-  }, BaStatus !== undefined && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Switcher__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, !IsArchived && BaStatus !== undefined && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Switcher__WEBPACK_IMPORTED_MODULE_5__["default"], {
     checked: BaStatus,
     onChange: handleChangeBaStatus
   }));
@@ -2778,9 +2779,9 @@ var PlayerRow = function PlayerRow(props) {
     className: "center-align"
   }, Currency), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].CurrentBalance] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
     className: "center-align"
-  }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_6__["default"].formatDecimal(CurrentBalance)), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].OutstandingBalance] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
+  }, canShowMainColumn && _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_6__["default"].formatDecimal(CurrentBalance)), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].OutstandingBalance] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
     className: "center-align"
-  }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_6__["default"].formatDecimal(OutstandingBalance)), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].OddsGroup] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
+  }, canShowMainColumn && _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_6__["default"].formatDecimal(OutstandingBalance)), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].OddsGroup] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
     className: "center-align"
   }, canShowMainColumn && OddsGroup !== undefined && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_OddsGroupCell__WEBPACK_IMPORTED_MODULE_8__["default"], {
     dataItem: dataItem
@@ -4082,7 +4083,7 @@ function () {
     value: function _fetchFromLrf(param, lrfDataById, lapPlayerList, commonService, lapTotalItem) {
       var idList = Object(_utils__WEBPACK_IMPORTED_MODULE_1__["getCustIdListFromLapData"])(lapPlayerList);
       var lrfParam = {
-        currency: param.currency,
+        currencyIdList: param.currencyIdList,
         idList: idList.join(','),
         specialLevel: param.specialLevel,
         pageSize: param.pageSize,
@@ -4727,7 +4728,7 @@ function () {
           return x.CustId;
         });
         var lrfParam = {
-          currency: param.currency,
+          currencyIdList: param.currencyIdList,
           idList: idListNotInLrf.join(','),
           specialLevel: param.specialLevel,
           pageSize: param.pageSize,
@@ -5036,10 +5037,10 @@ function () {
     key: "_isChangeAdvancedSearch",
     value: function _isChangeAdvancedSearch(param) {
       var baFilter = param.baFilter,
-          currency = param.currency,
+          currencyIdList = param.currencyIdList,
           oddsGroup = param.oddsGroup,
           specialLevel = param.specialLevel;
-      return Number(baFilter) !== 0 || currency !== '' || oddsGroup !== '' || Object.keys(_constants__WEBPACK_IMPORTED_MODULE_0__["specialLevelListWithColor"]).length !== specialLevel.split(',').length;
+      return Number(baFilter) !== 0 || currencyIdList !== '' || oddsGroup !== '' || Object.keys(_constants__WEBPACK_IMPORTED_MODULE_0__["specialLevelListWithColor"]).length !== specialLevel.split(',').length;
     }
   }]);
 
