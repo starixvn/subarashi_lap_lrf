@@ -17,10 +17,10 @@ export default class QueryServiceFactory {
     }
 
     static _isChangeAdvancedSearch(param) {
-        const { baFilter, currency, oddsGroup, specialLevel } = param;
+        const { baFilter, currencyIdList, oddsGroup, specialLevel } = param;
 
         return Number(baFilter) !== 0 ||
-            currency !== '' ||
+            currencyIdList !== '' ||
             oddsGroup !== '' ||
             Object.keys(specialLevelListWithColor).length !== specialLevel.split(',').length;
     }

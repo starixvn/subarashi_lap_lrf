@@ -10,7 +10,7 @@ var jsPath = `${pathConfig.scriptPaths.build}/${environment}/reactpages`;
 var cssPath = `${pathConfig.cssPaths.build}/${environment}/reactpages`;
 const entry = {
     [`${jsPath}/lib/langHelper`]: pathConfig.scriptPaths.languageResource,
-    [`${jsPath}/lib/language-zh-CN`]: pathConfig.scriptPaths.langCN,
+    [`${jsPath}/lib/lang-zh-CN`]: pathConfig.scriptPaths.langCN,
     [`${cssPath}/vendor`]: pathConfig.cssPaths.layout,
     [`${jsPath}/playeradmin/playerlist`]: pathConfig.scriptPaths.playerlist,
     [`${cssPath}/playeradmin/index`]: pathConfig.cssPaths.playeradmin,

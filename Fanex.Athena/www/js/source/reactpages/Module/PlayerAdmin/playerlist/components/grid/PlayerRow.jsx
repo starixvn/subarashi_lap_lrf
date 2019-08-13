@@ -43,8 +43,8 @@ export const PlayerRow = (props) => {
             {displayedColumn[fields.SystemId] && <Cell className="center-align">{canShowMainColumn && SystemId}</Cell>}
             {displayedColumn[fields.RealName] && <Cell className="center-align">{RealName}</Cell>}
             {displayedColumn[fields.Currency] && <Cell className="center-align">{Currency}</Cell>}
-            {displayedColumn[fields.CurrentBalance] && <Cell className="center-align">{NumberFormat.formatDecimal(CurrentBalance)}</Cell>}
-            {displayedColumn[fields.OutstandingBalance] && <Cell className="center-align">{NumberFormat.formatDecimal(OutstandingBalance)}</Cell>}
+            {displayedColumn[fields.CurrentBalance] && <Cell className="center-align">{canShowMainColumn && NumberFormat.formatDecimal(CurrentBalance)}</Cell>}
+            {displayedColumn[fields.OutstandingBalance] && <Cell className="center-align">{canShowMainColumn && NumberFormat.formatDecimal(OutstandingBalance)}</Cell>}
             {displayedColumn[fields.OddsGroup] && <Cell className="center-align">{canShowMainColumn && OddsGroup !== undefined && <OddsGroupCell dataItem={dataItem} />}</Cell>}
             {displayedColumn[fields.BaStatus] && <BaStatusCell dataItem={dataItem} />}
             {displayedColumn[fields.SpecialLevel] && <Cell className="center-align">{canShowMainColumn && SpecialLevel !== undefined && <SpecialLevelCell dataItem={dataItem} />}</Cell>}

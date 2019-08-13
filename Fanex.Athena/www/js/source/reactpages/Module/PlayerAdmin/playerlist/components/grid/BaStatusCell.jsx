@@ -12,7 +12,7 @@ import { generateDefaultConfirmOption, generateDefaultAlertOption, predefinedIco
 
 const BaStatusCell = (props) => {
     const { dataItem, setPlayerList, toggleLoader, updateBaStatus, setSweetAlertOption } = props;
-    const { CustId, BaStatus, OddsGroup } = dataItem;
+    const { CustId, BaStatus, OddsGroup, IsArchived } = dataItem;
 
     const handleChangeBaStatus = (event) => {
         const isBa = event.target.checked;
@@ -62,7 +62,7 @@ const BaStatusCell = (props) => {
 
     return (
         <Cell className="center-align">
-            {BaStatus !== undefined && <Switcher checked={BaStatus} onChange={handleChangeBaStatus} />}
+            {!IsArchived && BaStatus !== undefined && <Switcher checked={BaStatus} onChange={handleChangeBaStatus} />}
         </Cell>
     )
 }

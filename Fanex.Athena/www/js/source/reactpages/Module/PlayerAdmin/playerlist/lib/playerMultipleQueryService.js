@@ -43,7 +43,7 @@ export default class PlayerMultipleQueryService {
                 const idListNotInLap = lrfDataObject.differenceList.map(x => x.CustId);
 
                 const lrfParam = {
-                    currency: param.currency,
+                    currencyIdList: param.currencyIdList,
                     idList: idListNotInLrf.join(','),
                     specialLevel: param.specialLevel,
                     pageSize: param.pageSize,

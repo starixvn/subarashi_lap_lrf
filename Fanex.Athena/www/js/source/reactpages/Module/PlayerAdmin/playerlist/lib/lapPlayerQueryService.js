@@ -21,7 +21,7 @@ export default class LapPlayerQueryService {
     static _fetchFromLrf(param, lrfDataById, lapPlayerList, commonService, lapTotalItem) {
         const idList = getCustIdListFromLapData(lapPlayerList);
         const lrfParam = {
-            currency: param.currency,
+            currencyIdList: param.currencyIdList,
             idList: idList.join(','),
             specialLevel: param.specialLevel,
             pageSize: param.pageSize,

@@ -148,7 +148,7 @@ export class FormFilter extends PureComponent {
                         onChange={this.handleSpecificInputChange} />
                     }
 
-                    <div className="col-12 col-md-2 col-sm-2 col-lg-1 col-xl-1">
+                    <div className="col-12 col-md-2 col-sm-2 col-lg-2 col-xl-1">
                         <div className="form-group">
                             <div className="button-group">
                                 <button type="button" className="btn btn-submit" onClick={this.handleSubmit}>{LangHelper.getSingleResource("Submit")}</button>

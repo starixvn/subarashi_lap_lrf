@@ -88,7 +88,7 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
     const { pagingOption, selectedPlayer, displayedColumnList, param, playerList } = state;
-    const playerCount = pagingOption.TotalItem || 0;
+    const playerCount = pagingOption.TotalItem || (playerList && playerList.length) || 0;
     return Object.assign({}, { playerList, playerCount, selectedPlayer, displayedColumnList, param });
 };
 
