@@ -2,8 +2,9 @@ import { specialLevelListWithColor, defaultPagingOption } from '../lib/constants
 import PlayerListDataHelper from './playerListDataHelper';
 
 export default class PlayerItemQueryService {
-    static getPlayerById(custId, commonService, apiInfo) {
+    static getPlayerById(param, commonService, apiInfo) {
         const { lrfDataById, lapDataById } = apiInfo;
+        const { custId, ibcUserName } = param;
 
         const lrfParam = {
             idList: custId,
@@ -13,10 +14,11 @@ export default class PlayerItemQueryService {
         }
 
         const lapParam = {
-            idList: [custId]
+            idList: [custId],
+            ibcUserNameList: [ibcUserName]
         }
 
-        const lrfPromise = commonService.fetchData(lrfDataById.type, lrfDataById.action, lrfParam);
+        const lrfPromise = custId > 0 ? commonService.fetchData(lrfDataById.type, lrfDataById.action, lrfParam) : null;
         const lapPromise = commonService.fetchData(lapDataById.type, lapDataById.action, lapParam);
 
         return this._getResult(lrfPromise, lapPromise, commonService);
@@ -24,7 +26,7 @@ export default class PlayerItemQueryService {
 
     static _getResult(lrfPromise, lapPromise, commonService) {
         return commonService.fetchMultiple([lrfPromise, lapPromise], (lrfResponse, lapResponse) => {
-                const { DataList: lrfPlayerList } = lrfResponse.data;
+                const { DataList: lrfPlayerList = [] } = (lrfResponse && lrfResponse.data) || {};
                 const { PlayerList: lapPlayerList = [] } = lapResponse.data;
 
                 const playerList = PlayerListDataHelper.mergePlayerList(lrfPlayerList, lapPlayerList);

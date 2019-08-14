@@ -43,12 +43,12 @@ export const searchPlayer = (param) => (dispatch) => {
     })
 }
 
-export const getSinglePlayer = (custId) => (dispatch) => {
+export const getSinglePlayer = (param) => (dispatch) => {
     const service = new PlayerQueryService();
 
     processBeforeGettingData(dispatch);
 
-    service.getSinglePlayer(custId).then(result => {
+    service.getSinglePlayer(param).then(result => {
         if (result) {
             dispatch(setPlayerList([result]));
             dispatch(setIsFetchingData(false));

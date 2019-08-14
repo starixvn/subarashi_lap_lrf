@@ -34,9 +34,11 @@ export class FormFilter extends PureComponent {
     }
 
     componentDidMount() {
-        const custId = QueryString.getParam(window.location.href, 'custId');
-        if (custId) {
-            this.props.getSinglePlayer(custId);
+        const custId = Number(QueryString.getParam(window.location.href, 'custId'));
+        const ibcUserName = QueryString.getParam(window.location.href, 'ibcUserName');
+        if (custId || ibcUserName) {
+            const param = { custId, ibcUserName };
+            this.props.getSinglePlayer(param);
 
             this.userNameRef.current.value = QueryString.getParam(window.location.href, 'userName');
         }

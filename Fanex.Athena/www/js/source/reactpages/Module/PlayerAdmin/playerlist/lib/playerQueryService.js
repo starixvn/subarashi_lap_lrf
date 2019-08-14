@@ -19,8 +19,8 @@ export default class PlayerQueryService {
         return playerListService.fetchData(param, this.commonService, apiInfo);
     }
 
-    getSinglePlayer(custId) {
-        return PlayerItemQueryService.getPlayerById(custId, this.commonService, apiInfo);
+    getSinglePlayer(param) {
+        return PlayerItemQueryService.getPlayerById(param, this.commonService, apiInfo);
     }
 
     getLink(systemType, action) {
