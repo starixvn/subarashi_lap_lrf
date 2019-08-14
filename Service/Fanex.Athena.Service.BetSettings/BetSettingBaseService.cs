@@ -8,8 +8,12 @@ namespace Fanex.Athena.Service.BetSettings
 {
     using Model.Core.DTO.Common;
 
-    public abstract class BetSettingBaseService
+    public class BetSettingBaseService
     {
+        protected BetSettingBaseService()
+        {
+        }
+
         protected static IResultInfo ErrorResult(string message)
         {
             return new ResultInfo

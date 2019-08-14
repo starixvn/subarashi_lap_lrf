@@ -1,5 +1,6 @@
 ﻿namespace Fanex.Athena.Module.PlayerAdmin.MetaModel
 {
+    using System;
     using System.Collections.Generic;
     using Fanex.Athena.Model.Core.MetaModel;
 
@@ -27,16 +28,10 @@
             get { return _sortOrder; }
             set
             {
-                if (!string.IsNullOrWhiteSpace(value)
-                    && (value.Equals("asc", System.StringComparison.InvariantCultureIgnoreCase)
-                    || value.Equals("desc", System.StringComparison.InvariantCultureIgnoreCase)))
-                {
-                    _sortOrder = value;
-                }
-                else
-                {
-                    _sortOrder = null;
-                }
+                var normalizedValue = value?.Trim();
+                _sortOrder = string.Equals(normalizedValue, "asc", StringComparison.InvariantCultureIgnoreCase) ||
+                    string.Equals(normalizedValue, "desc", StringComparison.InvariantCultureIgnoreCase) ?
+                    normalizedValue : null;
             }
         }
 
