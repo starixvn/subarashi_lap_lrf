@@ -347,11 +347,11 @@ var searchPlayer = function searchPlayer(param) {
     });
   };
 };
-var getSinglePlayer = function getSinglePlayer(custId) {
+var getSinglePlayer = function getSinglePlayer(param) {
   return function (dispatch) {
     var service = new _lib_playerQueryService__WEBPACK_IMPORTED_MODULE_2__["default"]();
     processBeforeGettingData(dispatch);
-    service.getSinglePlayer(custId).then(function (result) {
+    service.getSinglePlayer(param).then(function (result) {
       if (result) {
         dispatch(Object(_gridHandlerAction__WEBPACK_IMPORTED_MODULE_4__["setPlayerList"])([result]));
         dispatch(Object(_gridHandlerAction__WEBPACK_IMPORTED_MODULE_4__["setIsFetchingData"])(false));
@@ -1136,10 +1136,15 @@ function (_PureComponent) {
   _createClass(FormFilter, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var custId = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_13__["default"].getParam(window.location.href, 'custId');
+      var custId = Number(_jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_13__["default"].getParam(window.location.href, 'custId'));
+      var ibcUserName = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_13__["default"].getParam(window.location.href, 'ibcUserName');
 
-      if (custId) {
-        this.props.getSinglePlayer(custId);
+      if (custId || ibcUserName) {
+        var param = {
+          custId: custId,
+          ibcUserName: ibcUserName
+        };
+        this.props.getSinglePlayer(param);
         this.userNameRef.current.value = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_13__["default"].getParam(window.location.href, 'userName');
       }
     }
@@ -4444,9 +4449,11 @@ function () {
 
   _createClass(PlayerItemQueryService, null, [{
     key: "getPlayerById",
-    value: function getPlayerById(custId, commonService, apiInfo) {
+    value: function getPlayerById(param, commonService, apiInfo) {
       var lrfDataById = apiInfo.lrfDataById,
           lapDataById = apiInfo.lapDataById;
+      var custId = param.custId,
+          ibcUserName = param.ibcUserName;
       var lrfParam = {
         idList: custId,
         specialLevel: Object.keys(_lib_constants__WEBPACK_IMPORTED_MODULE_0__["specialLevelListWithColor"]).map(function (item) {
@@ -4456,9 +4463,10 @@ function () {
         pageIndex: 1
       };
       var lapParam = {
-        idList: [custId]
+        idList: [custId],
+        ibcUserNameList: [ibcUserName]
       };
-      var lrfPromise = commonService.fetchData(lrfDataById.type, lrfDataById.action, lrfParam);
+      var lrfPromise = custId > 0 ? commonService.fetchData(lrfDataById.type, lrfDataById.action, lrfParam) : null;
       var lapPromise = commonService.fetchData(lapDataById.type, lapDataById.action, lapParam);
       return this._getResult(lrfPromise, lapPromise, commonService);
     }
@@ -4466,7 +4474,10 @@ function () {
     key: "_getResult",
     value: function _getResult(lrfPromise, lapPromise, commonService) {
       return commonService.fetchMultiple([lrfPromise, lapPromise], function (lrfResponse, lapResponse) {
-        var lrfPlayerList = lrfResponse.data.DataList;
+        var _ref = lrfResponse && lrfResponse.data || {},
+            _ref$DataList = _ref.DataList,
+            lrfPlayerList = _ref$DataList === void 0 ? [] : _ref$DataList;
+
         var _lapResponse$data$Pla = lapResponse.data.PlayerList,
             lapPlayerList = _lapResponse$data$Pla === void 0 ? [] : _lapResponse$data$Pla;
         var playerList = _playerListDataHelper__WEBPACK_IMPORTED_MODULE_1__["default"].mergePlayerList(lrfPlayerList, lapPlayerList);
@@ -4905,8 +4916,8 @@ function () {
     }
   }, {
     key: "getSinglePlayer",
-    value: function getSinglePlayer(custId) {
-      return _playerItemQueryService__WEBPACK_IMPORTED_MODULE_4__["default"].getPlayerById(custId, this.commonService, _constants__WEBPACK_IMPORTED_MODULE_1__["apiInfo"]);
+    value: function getSinglePlayer(param) {
+      return _playerItemQueryService__WEBPACK_IMPORTED_MODULE_4__["default"].getPlayerById(param, this.commonService, _constants__WEBPACK_IMPORTED_MODULE_1__["apiInfo"]);
     }
   }, {
     key: "getLink",
