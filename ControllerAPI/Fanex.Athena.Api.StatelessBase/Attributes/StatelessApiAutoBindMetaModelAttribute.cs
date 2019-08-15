@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 using Fanex.Athena.Extension.Helper;
@@ -21,6 +18,7 @@ namespace Fanex.Athena.Api.StatelessBase.Attributes
         public bool BindLanguage { get; set; }
         public bool BindUserId { get; set; }
         public bool BindIp { get; set; }
+
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
             if (BindAgent)
@@ -44,12 +42,10 @@ namespace Fanex.Athena.Api.StatelessBase.Attributes
                 MapIp(actionContext);
             }
             base.OnActionExecuting(actionContext);
-
         }
 
         private static void MapIp(HttpActionContext actionContext)
         {
-
             var item = actionContext.ActionArguments.Where(x => x.Value is IMetaModelIp)
                     .Select(x => x).FirstOrDefault();
 
@@ -58,7 +54,6 @@ namespace Fanex.Athena.Api.StatelessBase.Attributes
                 model.Ip = ClientHelper.GetClientIpAddress(actionContext.Request);
                 actionContext.ActionArguments[item.Key] = model;
             }
-
         }
 
         private static void MapUserId(HttpActionContext actionContext)
@@ -66,7 +61,6 @@ namespace Fanex.Athena.Api.StatelessBase.Attributes
             if (actionContext.ActionArguments.ContainsKey("userid")
                          && actionContext.ActionArguments["userid"] is int userId)
             {
-
                 var item = actionContext.ActionArguments.Where(x => x.Value is IMetaModelUserId)
                         .Select(x => x).FirstOrDefault();
 
@@ -83,7 +77,6 @@ namespace Fanex.Athena.Api.StatelessBase.Attributes
             if (actionContext.ActionArguments.ContainsKey("language")
                           && actionContext.ActionArguments["language"] is string lang)
             {
-
                 var item = actionContext.ActionArguments.Where(x => x.Value is IMetaModelLanguage)
                         .Select(x => x).FirstOrDefault();
 
@@ -100,7 +93,6 @@ namespace Fanex.Athena.Api.StatelessBase.Attributes
             if (actionContext.ActionArguments.ContainsKey("sitename")
                 && actionContext.ActionArguments["sitename"] is string siteName)
             {
-
                 var item = actionContext.ActionArguments.Where(x => x.Value is IMetaModelSiteName)
                         .Select(x => x).FirstOrDefault();
 
@@ -117,7 +109,6 @@ namespace Fanex.Athena.Api.StatelessBase.Attributes
             if (actionContext.ActionArguments.ContainsKey("currencyAgentList")
                 && actionContext.ActionArguments["currencyAgentList"] is OneAuthCurrency[] currencyWithAgent)
             {
-
                 var item = actionContext.ActionArguments.Where(x => x.Value is IMetaModelAgent)
                         .Select(x => x).FirstOrDefault();
 
