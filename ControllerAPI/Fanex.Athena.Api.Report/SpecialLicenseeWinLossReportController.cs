@@ -25,10 +25,9 @@
 
         private readonly ISpecialLicenseeWinLossDataAccess _licenseeWinLossDataAccess;
 
-        private readonly IDictionary<int, string> _siteNameList = new Dictionary<int, string>
+        private readonly IDictionary<string, string> _siteNameList = new Dictionary<string, string>
         {
-            { LicenseeIdentity.IvoryBet, "ivorysport" },
-            { LicenseeIdentity.Opal88, "opal88" }
+            { "IvoryBet", "ivorysport" }
         };
 
         public SpecialLicenseeWinLossReportController(
@@ -70,12 +69,16 @@
         {
             licenseeWinLoss.LicenseeWLSB = licenseeWLProducts.GetValueOrDefault(Product.SB, 0);
             licenseeWinLoss.LicenseeWLNG = licenseeWLProducts.GetValueOrDefault(Product.NG, 0);
+            licenseeWinLoss.LicenseeWLCS = licenseeWLProducts.GetValueOrDefault(Product.CS, 0);
+            licenseeWinLoss.LicenseeWLLC = licenseeWLProducts.GetValueOrDefault(Product.LC, 0);
         }
 
         private static void SetTurnOverProductData(SpecialLicenseeWinLossGridViewModel licenseeWinLoss, IDictionary<string, decimal> turnOverProducts)
         {
             licenseeWinLoss.TurnOverSB = turnOverProducts.GetValueOrDefault(Product.SB, 0);
             licenseeWinLoss.TurnOverNG = turnOverProducts.GetValueOrDefault(Product.NG, 0);
+            licenseeWinLoss.TurnOverCS = turnOverProducts.GetValueOrDefault(Product.CS, 0);
+            licenseeWinLoss.TurnOverLC = turnOverProducts.GetValueOrDefault(Product.LC, 0);
         }
 
         private static bool IsValidDateRange(SpecialLicenseeWinLossMetaModel metaModel, ReportSetting setting)
@@ -92,9 +95,9 @@
             if (IsValidParams(metaModel, setting))
             {
                 var userSession = SessionService.UserSession;
-                var licenseeSession = SessionService.LicenseeSession;
+                var licenseeName= SessionService.LicenseeSession.LicenseeName;
                 metaModel.BaseCurrencySetting = setting.BaseCurrencies;
-                metaModel.SiteName = _siteNameList.GetValueOrDefault(licenseeSession.LicenseeId, licenseeSession.LicenseeName);
+                metaModel.SiteName = _siteNameList.GetValueOrDefault(licenseeName, defaultValue: licenseeName);
                 metaModel.CurrencyListXml = GenerateCurrencyListXml(metaModel);
                 metaModel.DefaultBaseCurrency = userSession.DefaultBaseCurrency;
 
@@ -146,7 +149,7 @@
             var productAccess = this.ProductService.GetSingleWalletProductAccess(
                SessionService.LicenseeSession.LicenseeId,
                SessionService.UserSession.Language,
-               FunctionNames.LicenseeWinLoss);
+               FunctionNames.SpecialLicenseeWinLoss);
             var productList = productAccess.ProductList.Select(x => x.ProductCode);
 
             return productList.Intersect(metaModel.ProductCodeList).Count() == metaModel.ProductCodeList.Count();

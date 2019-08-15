@@ -12,7 +12,9 @@ export const HeaderText = {
     licenseeWL: LangHelper.getSingleResource('LicenseeW_L'),
     total: LangHelper.getSingleResource('Total'),
     SB: LangHelper.getSingleResource('ProductSB'),
-    NG: LangHelper.getSingleResource('ProductNG')
+    NG: LangHelper.getSingleResource('ProductNG'),
+    CS: LangHelper.getSingleResource('ProductCS'),
+    LC: LangHelper.getSingleResource('ProductLC')
 };
 
 export const TotalText = {

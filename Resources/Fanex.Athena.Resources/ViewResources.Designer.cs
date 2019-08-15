@@ -4543,6 +4543,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Live Casino.
+        /// </summary>
+        public static string ProductLC {
+            get {
+                return ResourceManager.GetString("ProductLC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Lottery.
         /// </summary>
         public static string ProductLT {

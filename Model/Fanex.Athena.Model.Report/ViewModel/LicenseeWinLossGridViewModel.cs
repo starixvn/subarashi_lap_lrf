@@ -102,7 +102,7 @@ namespace Fanex.Athena.Model.Report.ViewModel
 
         public decimal LicenseeWLPP { get; set; }
 
-        public decimal TotalLicenseeWL
+        public virtual decimal TotalLicenseeWL
         {
             get
             {
@@ -149,7 +149,7 @@ namespace Fanex.Athena.Model.Report.ViewModel
 
         public decimal TurnOverPP { get; set; }
 
-        public decimal TotalTurnOver
+        public virtual decimal TotalTurnOver
         {
             get
             {

@@ -133,9 +133,9 @@
         }
 
 
-        [TestCase(LicenseeIdentity.IvoryBet, "ivorysport")]
-        [TestCase(LicenseeIdentity.Opal88, "opal88")]
-        public async Task Index_ValidRequest_CallServiceWithCorrectParameters(int licenseeId, string expectedSiteName)
+        [TestCase("IvoryBet", "ivorysport")]
+        [TestCase("123", "123")]
+        public async Task Index_ValidRequest_CallServiceWithCorrectParameters(string licenseeName, string expectedSiteName)
         {
             // Arrange
             ProductService.GetSingleWalletProductAccess(Arg.Any<int>(), Arg.Any<string>(), Arg.Any<string>())
@@ -145,7 +145,7 @@
                             new Product { ProductCode = "P1" }
                         }));
 
-            SessionService.LicenseeSession.Returns(new LicenseeSession { LicenseeId = licenseeId });
+            SessionService.LicenseeSession.Returns(new LicenseeSession { LicenseeName = licenseeName });
             StubUserSessionData(new UserSession { CurrencyList = new Dictionary<int, string> { { 1, "C1" }, { 2, "C2" } } });
 
             var model = new SpecialLicenseeWinLossMetaModel
@@ -213,16 +213,16 @@
                 {
                     new LicenseeWinLoss
                     {
-                        TurnOver = new Dictionary<string, decimal> { { Product.SB, 1 }, { Product.NG, 2 } },
-                        LicenseeWL = new Dictionary<string, decimal> { { Product.SB, 3 }, { Product.NG, 4 } }
+                        TurnOver = new Dictionary<string, decimal> { { Product.SB, 1 }, { Product.NG, 2 }, { Product.CS, 1.5m }, { Product.LC, 2.5m } },
+                        LicenseeWL = new Dictionary<string, decimal> { { Product.SB, 3 }, { Product.NG, 4 }, { Product.CS, 3.5m }, { Product.LC, 4.5m } }
                     }
                 },
                 TotalDataList = new List<LicenseeWinLoss>
                 {
                     new LicenseeWinLoss
                     {
-                        TurnOver = new Dictionary<string, decimal> { { Product.SB, 5 }, { Product.NG, 6 } },
-                        LicenseeWL = new Dictionary<string, decimal> { { Product.SB, 7 }, { Product.NG, 8 } }
+                        TurnOver = new Dictionary<string, decimal> { { Product.SB, 5 }, { Product.NG, 6 }, { Product.CS, 5.5m }, { Product.LC, 6.5m } },
+                        LicenseeWL = new Dictionary<string, decimal> { { Product.SB, 7 }, { Product.NG, 8 }, { Product.CS, 7.5m }, { Product.LC, 8.5m } }
                     }
                 },
                 SummaryTotal = new Dictionary<string, LicenseeWinLoss>
@@ -231,8 +231,8 @@
                         "C1",
                         new LicenseeWinLoss
                         {
-                            TurnOver = new Dictionary<string, decimal> { { Product.SB, 9 }, { Product.NG, 10 } },
-                            LicenseeWL = new Dictionary<string, decimal> { { Product.SB, 11 }, { Product.NG, 12 } }
+                            TurnOver = new Dictionary<string, decimal> { { Product.SB, 9 }, { Product.NG, 10 }, { Product.CS, 9.5m }, { Product.LC, 10.5m } },
+                            LicenseeWL = new Dictionary<string, decimal> { { Product.SB, 11 }, { Product.NG, 12 }, { Product.CS, 11.5m }, { Product.LC, 12.5m } }
                         }
                     }
                 }
@@ -254,18 +254,30 @@
             {
                 Assert.That(firstActual.TurnOverSB, Is.EqualTo(firstData.TurnOver[Product.SB]));
                 Assert.That(firstActual.TurnOverNG, Is.EqualTo(firstData.TurnOver[Product.NG]));
+                Assert.That(firstActual.TurnOverCS, Is.EqualTo(firstData.TurnOver[Product.CS]));
+                Assert.That(firstActual.TurnOverLC, Is.EqualTo(firstData.TurnOver[Product.LC]));
                 Assert.That(firstActual.LicenseeWLSB, Is.EqualTo(firstData.LicenseeWL[Product.SB]));
                 Assert.That(firstActual.LicenseeWLNG, Is.EqualTo(firstData.LicenseeWL[Product.NG]));
+                Assert.That(firstActual.LicenseeWLCS, Is.EqualTo(firstData.LicenseeWL[Product.CS]));
+                Assert.That(firstActual.LicenseeWLLC, Is.EqualTo(firstData.LicenseeWL[Product.LC]));
 
                 Assert.That(firstTotalActual.TurnOverSB, Is.EqualTo(firstTotalData.TurnOver[Product.SB]));
                 Assert.That(firstTotalActual.TurnOverNG, Is.EqualTo(firstTotalData.TurnOver[Product.NG]));
+                Assert.That(firstTotalActual.TurnOverCS, Is.EqualTo(firstTotalData.TurnOver[Product.CS]));
+                Assert.That(firstTotalActual.TurnOverLC, Is.EqualTo(firstTotalData.TurnOver[Product.LC]));
                 Assert.That(firstTotalActual.LicenseeWLSB, Is.EqualTo(firstTotalData.LicenseeWL[Product.SB]));
                 Assert.That(firstTotalActual.LicenseeWLNG, Is.EqualTo(firstTotalData.LicenseeWL[Product.NG]));
+                Assert.That(firstTotalActual.LicenseeWLCS, Is.EqualTo(firstTotalData.LicenseeWL[Product.CS]));
+                Assert.That(firstTotalActual.LicenseeWLLC, Is.EqualTo(firstTotalData.LicenseeWL[Product.LC]));
 
                 Assert.That(firstSumActual.TurnOverSB, Is.EqualTo(firstSumData.Value.TurnOver[Product.SB]));
                 Assert.That(firstSumActual.TurnOverNG, Is.EqualTo(firstSumData.Value.TurnOver[Product.NG]));
+                Assert.That(firstSumActual.TurnOverCS, Is.EqualTo(firstSumData.Value.TurnOver[Product.CS]));
+                Assert.That(firstSumActual.TurnOverLC, Is.EqualTo(firstSumData.Value.TurnOver[Product.LC]));
                 Assert.That(firstSumActual.LicenseeWLSB, Is.EqualTo(firstSumData.Value.LicenseeWL[Product.SB]));
                 Assert.That(firstSumActual.LicenseeWLNG, Is.EqualTo(firstSumData.Value.LicenseeWL[Product.NG]));
+                Assert.That(firstSumActual.LicenseeWLCS, Is.EqualTo(firstSumData.Value.LicenseeWL[Product.CS]));
+                Assert.That(firstSumActual.LicenseeWLLC, Is.EqualTo(firstSumData.Value.LicenseeWL[Product.LC]));
             });
         }
     }

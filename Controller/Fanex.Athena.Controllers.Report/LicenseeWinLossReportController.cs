@@ -74,21 +74,16 @@ namespace Fanex.Athena.Controllers.Report
                 reportSetting.TimeZone.HasValue ? DateTime.UtcNow.AddHours(reportSetting.TimeZone.Value) : DateTime.Now);
         }
 
-        private ProductAccess GetProducts(int licenseeId, string lang)
-        {
-            return ProductService.GetSingleWalletProductAccess(
-                licenseeId,
-                lang,
-                FunctionNames.LicenseeWinLoss);
-        }
-
         private ActionResult MapToView()
         {
             var licenseeSession = SessionService.LicenseeSession;
             var userSession = SessionService.UserSession;
             var reportSetting = _reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss);
             var selectedDate = GetSelectedDate(reportSetting);
-            var productAccess = GetProducts(licenseeSession.LicenseeId, userSession.Language);
+            var productAccess = ProductService.GetSingleWalletProductAccess(
+                licenseeSession.LicenseeId,
+                userSession.Language,
+                FunctionNames.LicenseeWinLoss);
 
             var param = new LicenseeWinLossMetaModel
             {
@@ -122,7 +117,10 @@ namespace Fanex.Athena.Controllers.Report
             var userSession = SessionService.UserSession;
             var reportSetting = _reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss);
             var selectedDate = GetSelectedDate(reportSetting);
-            var productAccess = GetProducts(SessionService.LicenseeSession.LicenseeId, userSession.Language);
+            var productAccess = ProductService.GetSingleWalletProductAccess(
+                SessionService.LicenseeSession.LicenseeId,
+                userSession.Language,
+                FunctionNames.SpecialLicenseeWinLoss);
             var baseCurrencyList = GetFakeBaseCurrencies(reportSetting.BaseCurrencies, userSession.DefaultBaseCurrency);
             var defaultBaseCurrency = baseCurrencyList.FirstOrDefault(x => x.Value.Equals(userSession.DefaultBaseCurrency, StringComparison.OrdinalIgnoreCase));
 
