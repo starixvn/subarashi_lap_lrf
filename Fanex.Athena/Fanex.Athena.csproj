@@ -435,6 +435,9 @@
     <Content Include="SpNameConfig\FanexSpName.SIT.xml">
       <DependentUpon>FanexSpName.xml.tt</DependentUpon>
     </Content>
+    <Content Include="SpNameConfig\FanexSpName.Staging.xml">
+      <DependentUpon>FanexSpName.xml.tt</DependentUpon>
+    </Content>
     <Content Include="SpNameConfig\FanexSpName.UAT.xml">
       <DependentUpon>FanexSpName.xml.tt</DependentUpon>
     </Content>
