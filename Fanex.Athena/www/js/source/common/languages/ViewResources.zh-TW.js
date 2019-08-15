@@ -1,4 +1,4 @@
-﻿// Generated at: 08/01/2019 3:40:20 PM
+﻿// Generated at: 08/15/2019 11:36:26 AM
 window._language_zh_TW = {
 AA:"客客",
 AbnormalBet:"非正規註單",
@@ -418,6 +418,7 @@ PasswordChangedMsg:"密碼更改！",
 PasswordConfirmErrorMsg:"密碼無法確認",
 PasswordNoteMsg:"密碼必須至少為6個字符，包含至少2個英文字母及至少2個數字 (例如：pass22)。",
 PayAttentionMsg:"請注意：由於不同的佣金值，會員將從組別中刪除。",
+Pending:"待定",
 PendingFunds:"待定資金",
 Permission:"權限",
 PermissionForUser:"用戶權限",
