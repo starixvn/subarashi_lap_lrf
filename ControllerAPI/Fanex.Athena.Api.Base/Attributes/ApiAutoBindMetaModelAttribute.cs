@@ -18,6 +18,7 @@ namespace Fanex.Athena.Api.Base.Attributes
         public bool BindAgent { get; set; }
         public bool BindUserId { get; set; }
         public bool BindBalanceUpAndMoveBet { get; set; }
+
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
             var scope = actionContext.Request.GetDependencyScope();
@@ -40,7 +41,6 @@ namespace Fanex.Athena.Api.Base.Attributes
             }
 
             base.OnActionExecuting(actionContext);
-
         }
 
         private static void MapBalanceUpAndMoveBet(HttpActionContext actionContext)
@@ -49,10 +49,14 @@ namespace Fanex.Athena.Api.Base.Attributes
             var item = actionContext.ActionArguments.Where(x => x.Value is IMetaModelBalanceUpAndMoveBet)
              .Select(x => x).FirstOrDefault();
             var value = item.Value as IMetaModelBalanceUpAndMoveBet;
-            var temp = balanceUpDataAccess.GetBalanceUp();
-            value.BalanceUpDay = temp.BalanceUpDay;
-            value.MoveBetsDay = temp.MoveBetsDay;
-            actionContext.ActionArguments[item.Key] = value;
+
+            if (value != null)
+            {
+                var temp = balanceUpDataAccess.GetBalanceUp();
+                value.BalanceUpDay = temp.BalanceUpDay;
+                value.MoveBetsDay = temp.MoveBetsDay;
+                actionContext.ActionArguments[item.Key] = value;
+            }
         }
 
         private static void MapUserId(HttpActionContext actionContext, UserAuthInfo userSession)
@@ -60,10 +64,13 @@ namespace Fanex.Athena.Api.Base.Attributes
             var item = actionContext.ActionArguments.Where(x => x.Value is IMetaModelUserId)
              .Select(x => x).FirstOrDefault();
             var value = item.Value as IMetaModelUserId;
-            value.UserId = userSession.UserId;
-            actionContext.ActionArguments[item.Key] = value;
-        }
 
+            if (value != null)
+            {
+                value.UserId = userSession.UserId;
+                actionContext.ActionArguments[item.Key] = value;
+            }
+        }
 
         private static void MapAgentXml(HttpActionContext actionContext, Model.Auth.UserAuthInfo userSession)
         {

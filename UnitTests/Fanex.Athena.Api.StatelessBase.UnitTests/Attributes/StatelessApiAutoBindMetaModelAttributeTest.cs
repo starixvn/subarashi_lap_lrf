@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Web.Http.Controllers;
+﻿using System.Web.Http.Controllers;
 using Fanex.Athena.Api.StatelessBase.Attributes;
 using Fanex.Athena.Model.Core.MetaModel;
 using Fanex.Athena.UnitTest.Common.Helpers;
@@ -98,7 +97,7 @@ namespace Fanex.Athena.Api.StatelessBase.UnitTests.Attributes
             });
         }
 
-        private HttpActionContext CreateActionContext(object metaModel)
+        private static HttpActionContext CreateActionContext(object metaModel)
         {
             var actionContext = ExternalApiHelper.CreateMockActionContext();
             var httpContext = ExternalApiHelper.CreateHttpContext();
@@ -112,7 +111,7 @@ namespace Fanex.Athena.Api.StatelessBase.UnitTests.Attributes
             return actionContext;
         }
 
-        private StatelessApiAutoBindMetaModelAttribute CreateAttributeWithBindingAllProperties()
+        private static StatelessApiAutoBindMetaModelAttribute CreateAttributeWithBindingAllProperties()
         {
             return new StatelessApiAutoBindMetaModelAttribute
             {
@@ -151,16 +150,5 @@ namespace Fanex.Athena.Api.StatelessBase.UnitTests.Attributes
         public string SiteName { get; set; }
 
         public string AgentListXml { get; set; }
-    }
-
-    internal class MapAgentXmlTestingData
-    {
-        public static IEnumerable TestCases
-        {
-            get
-            {
-                yield return new TestCaseData(null, string.Empty).Returns(string.Empty);
-            }
-        }
     }
 }

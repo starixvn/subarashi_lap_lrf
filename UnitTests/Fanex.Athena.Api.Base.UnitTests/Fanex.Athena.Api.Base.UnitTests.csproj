@@ -142,6 +142,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Attributes\ApiAutoBindMetaModelAttributeTest.cs" />
     <Compile Include="Attributes\ApiBetListAuthorizationAttributeTest.cs" />
     <Compile Include="Attributes\XFrameOptionApiAttributeTest.cs" />
     <Compile Include="Attributes\ApiFunctionAuthorizationAttributeTest.cs" />
