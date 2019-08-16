@@ -61,7 +61,7 @@
                 AppSettings.GetValue("LicenseeOfferStatusFunction").Returns("0");
 
                 // Action
-                var result = await controller.UpdateCustStatusAsync(0, false, false).ConfigureAwait(false) as JsonResult;
+                var result = await controller.UpdateCustStatus(0, false, false).ConfigureAwait(false) as JsonResult;
                 var resultInfo = result.Data as ResultInfo;
 
                 // Assert
@@ -86,7 +86,7 @@
                 AppSettings.LicenseeOfferStatusFunction.Returns(new[] { licenseeId });
 
                 // Action
-                controller.UpdateCustStatusAsync(CustId, isClosed, isSuspended);
+                controller.UpdateCustStatus(CustId, isClosed, isSuspended);
 
                 // Assert
                 Assert.Multiple(() =>
@@ -128,7 +128,7 @@
                 _customerListService.When(x => x.UpdateCustClosedAsync(Arg.Any<CustomerStatusMetaModel>(), Arg.Any<string>()))
                     .Throw(exception);
                 // Action
-                var result = await controller.UpdateCustStatusAsync(0, false, false).ConfigureAwait(false) as JsonResult;
+                var result = await controller.UpdateCustStatus(0, false, false).ConfigureAwait(false) as JsonResult;
                 var resultInfo = result.Data as ResultInfo;
                 var errorMessage = LogMessageHelper.GenerateMessage(exception);
 

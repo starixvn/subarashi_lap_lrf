@@ -81,7 +81,7 @@ namespace Fanex.Athena.Controllers.Customer
         [HttpPost]
         [AjaxRequest]
         [CustomValidateAntiForgery]
-        public async Task<ActionResult> UpdateCustStatusAsync(int custId, bool isClosed, bool isSuspended)
+        public async Task<ActionResult> UpdateCustStatus(int custId, bool isClosed, bool isSuspended)
         {
             try
             {
