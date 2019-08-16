@@ -71,7 +71,7 @@ export class FormFilter extends PureComponent {
             userName,
             specialLevel: actualSpecialLevel === '' ? this.allSpecialLevel : actualSpecialLevel,
             pageSize: pagingOption.PageSize,
-            pageIndex: pagingOption.PageIndex
+            pageIndex: 1
         };
 
         searchPlayer(param);

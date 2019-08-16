@@ -55,11 +55,12 @@ export default class PlayerMultipleQueryService {
                 }
 
                 const getFinalResponse = (response) => {
-                    const { playerList: nextPlayerList, totalItem: nextTotalItem } = response;
+                    const { playerList: nextPlayerList } = response;
+                    const additionTotalItem = lrfTotalItem > lapTotalItem ? idListNotInLrf.length : idListNotInLap.length;
 
                     return {
                         playerList: playerList.concat(nextPlayerList),
-                        totalItem: totalItem + nextTotalItem
+                        totalItem: totalItem + additionTotalItem
                     };
                 }
 
@@ -83,15 +84,14 @@ export default class PlayerMultipleQueryService {
         const nextlapPromise = commonService.fetchData(lapDataById.type, lapDataById.action, {...lapParam });
 
         return commonService.fetchMultiple([nextlrfPromise, nextlapPromise], (nextLrfResponse, nextLapResponse) => {
-                const { DataList: nextLrfPlayerList, TotalItem: nextLrfTotalItem } = nextLrfResponse.data;
-                const { PlayerList: nextLapPlayerList, TotalItem: nextLapTotalItem } = nextLapResponse.data;
+                const { DataList: nextLrfPlayerList } = nextLrfResponse.data;
+                const { PlayerList: nextLapPlayerList } = nextLapResponse.data;
 
                 const playerListInLap = PlayerListDataHelper.mergePlayerList(lrfDataObject.differenceList, nextLapPlayerList);
                 const playerListInLrf = PlayerListDataHelper.mergePlayerList(nextLrfPlayerList, lapDataObject.differenceList);
 
                 return {
-                    playerList: [...playerListInLap, ...playerListInLrf],
-                    totalItem: nextLrfTotalItem + nextLapTotalItem
+                    playerList: [...playerListInLap, ...playerListInLrf]
                 }
             })
             .catch((error) => {
@@ -107,27 +107,22 @@ export default class PlayerMultipleQueryService {
 
         return commonService.fetchData(lrfDataById.type, lrfDataById.action, {...lrfParam })
             .then(nextLrfResponse => {
-                const { DataList: nextLrfPlayerList, TotalItem: nextLrfTotalItem } = nextLrfResponse.data;
+                const { DataList: nextLrfPlayerList } = nextLrfResponse.data;
                 if (!nextLrfPlayerList || !nextLrfPlayerList.length) {
                     return {
-                        playerList: buildLapPlayerList(differenceList),
-                        totalItem: differenceList.length
+                        playerList: buildLapPlayerList(differenceList)
                     };
                 }
 
                 const playerList = PlayerListDataHelper.mergePlayerList(nextLrfPlayerList, differenceList);
 
-                return {
-                    playerList,
-                    totalItem: nextLrfTotalItem
-                };
+                return { playerList };
             })
             .catch((error) => {
                 console.log(error.message);
                 window.alert(LangHelper.getSingleResource('HttpError_Default'));
                 return {
-                    playerList: buildLapPlayerList(differenceList),
-                    totalItem: differenceList.length
+                    playerList: buildLapPlayerList(differenceList)
                 };
             });
     }
@@ -138,27 +133,22 @@ export default class PlayerMultipleQueryService {
 
         return commonService.fetchData(lapDataById.type, lapDataById.action, {...lapParam })
             .then(nextLapResponse => {
-                const { PlayerList: lapPlayerList, TotalItem: nextLapTotalItem } = nextLapResponse.data;
+                const { PlayerList: lapPlayerList } = nextLapResponse.data;
                 if (!lapPlayerList || !lapPlayerList.length) {
                     return {
-                        playerList: buildLrfPlayerList(differenceList),
-                        totalItem: differenceList.length
+                        playerList: buildLrfPlayerList(differenceList)
                     };
                 }
 
                 const playerList = PlayerListDataHelper.mergePlayerList(differenceList, lapPlayerList);
 
-                return {
-                    playerList,
-                    totalItem: nextLapTotalItem
-                };
+                return { playerList };
             })
             .catch((error) => {
                 console.log(error.message);
                 window.alert(LangHelper.getSingleResource('HttpError_Default'));
                 return {
-                    playerList: buildLrfPlayerList(differenceList),
-                    totalItem: differenceList.length
+                    playerList: buildLrfPlayerList(differenceList)
                 };
             });
     }

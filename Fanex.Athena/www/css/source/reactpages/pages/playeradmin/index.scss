@@ -39,6 +39,13 @@ $borderContainer: #d6d6d6;
             color: #f31111;
         }
     }
+
+    .pa-username {
+        .dropdown-menu {
+            overflow: auto;
+            max-height: 280px;
+        }
+    }
 }
 /*End Filter*/
 

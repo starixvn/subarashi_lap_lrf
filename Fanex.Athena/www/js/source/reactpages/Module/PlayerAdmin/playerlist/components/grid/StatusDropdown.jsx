@@ -34,7 +34,7 @@ const StatusDropdown = (props) => {
     const handleChangeOddsGroup = (event, value) => {
         event.preventDefault();
         const messageList = messageUpdateState[value] || [];
-        const confirmMessage = messageList.length ? (<p>{messageList[0]}<br/><span className="warning">{messageList[1]}</span></p>) : null;
+        const confirmMessage = messageList.length ? (<p>{messageList[0]}<br /><span className="warning">{messageList[1]}</span></p>) : null;
 
         const confirmProps = {
             onClick: () => {
@@ -72,7 +72,8 @@ const StatusDropdown = (props) => {
             }
         }
 
-        const confirmOption = generateDefaultConfirmOption(confirmMessage, handleCloseAlert, confirmProps, cancelProps);
+        const customAlertOption = { width: 480, height: 220 };
+        const confirmOption = generateDefaultConfirmOption(confirmMessage, handleCloseAlert, confirmProps, cancelProps, predefinedIcons.warning, customAlertOption);
         setSweetAlertOption(confirmOption);
     }
 

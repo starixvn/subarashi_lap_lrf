@@ -22,7 +22,7 @@ export const defaultOkButton = {
     className: 'btn btn-apply'
 }
 
-export const generateDefaultConfirmOption = (content, onClose, submitProps, cancelProps, icon = predefinedIcons.warning) => {
+export const generateDefaultConfirmOption = (content, onClose, submitProps, cancelProps, icon = predefinedIcons.warning, customOption = {}) => {
     return {
         buttons: [
             { ...defaultSubmitButton, ...submitProps },
@@ -31,7 +31,8 @@ export const generateDefaultConfirmOption = (content, onClose, submitProps, canc
         icon,
         isShow: true,
         children: (<p className="center-align">{content}</p>),
-        onClose
+        onClose,
+        ...customOption
     }
 }
 

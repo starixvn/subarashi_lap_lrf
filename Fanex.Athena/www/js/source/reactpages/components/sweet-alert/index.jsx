@@ -71,8 +71,8 @@ SweetAlert.propTypes = {
 }
 
 SweetAlert.defaultProps = {
-    width: 480,
-    height: 220,
+    width: 400,
+    height: 200,
     isShow: false,
     isHtml: false,
     title: '',

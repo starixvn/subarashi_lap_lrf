@@ -6,29 +6,31 @@ export default class PlayerListDataHelper {
         }
 
         return lrfList.length > lapList.length ?
-            lrfList.map(lrfItem => {
+            lrfList.reduce((result, lrfItem) => {
                 const lapItem = lapList.find(x => x.IBCCustId === lrfItem.CustId) || {};
                 const playerItem = this.mergePlayerItem(lrfItem, lapItem);
+                result.push(playerItem);
 
-                return playerItem;
-            }) :
-            lapList.map(lapItem => {
+                return result;
+            }, []) :
+            lapList.reduce((result, lapItem) => {
                 const lrfItem = lrfList.find(x => x.CustId === lapItem.IBCCustId) || {};
                 const playerItem = this.mergePlayerItem(lrfItem, lapItem);
+                result.push(playerItem);
 
-                return playerItem;
-            });
+                return result;
+            }, []);
     }
 
     static mergePlayerItem(lrfItem, lapItem) {
         const { CustId, UserName, SystemId, Currency, CurrentBalance, OutstandingBalance, OddsGroup, BaStatus, SpecialLevel, CurrencyId } = lrfItem;
-        const { Status, RealName, IP, email, isOnline, ActStatus, IBCCustId, isArchived, LastTransaction, CurrencyCode, OutBalance } = lapItem;
+        const { Status, RealName, IP, email, isOnline, ActStatus, IBCCustId, isArchived, LastTransaction, CurrencyCode, OutBalance, IBCUserName } = lapItem;
 
         return {
             CustId: CustId || IBCCustId,
             LicenseeCustId: lapItem.CustId,
             UserName: UserName || lapItem.UserName,
-            SystemId,
+            SystemId: SystemId || IBCUserName,
             Currency: Currency || CurrencyCode,
             CurrentBalance: CurrentBalance || lapItem.CurrentBalance,
             OutstandingBalance: OutstandingBalance || OutBalance,
