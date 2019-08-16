@@ -470,7 +470,8 @@ function (_Component) {
         total: total,
         totalText: this.totalText,
         afterLoad: this.afterLoad,
-        onSort: this.onSort //getResourceFunc={this.getResource}
+        onSort: this.onSort,
+        adjustedHeight: -45 //getResourceFunc={this.getResource}
 
       });
     }
@@ -583,15 +584,15 @@ function (_Component) {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "page-filter"
+        className: "pa-running-betlist-filter"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "button",
         className: "btn btn-submit",
         onClick: this.submit
       }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Refresh')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "caret-block"
+        className: "pa-running-betlist-export"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "icon-excel right",
+        className: "icon-excel",
         onClick: this.exportExcel,
         title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('ExportToExcel')
       })));
@@ -1229,7 +1230,8 @@ function (_Component) {
 
       var _this$props4 = this.props,
           isPaging = _this$props4.isPaging,
-          pageOption = _this$props4.pageOption;
+          pageOption = _this$props4.pageOption,
+          adjustedHeight = _this$props4.adjustedHeight;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "betlist-container result-content"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Table"], {
@@ -1242,7 +1244,8 @@ function (_Component) {
         footer: this._buildFooter(),
         isPaging: isPaging,
         pageOption: pageOption,
-        onPaging: this.onPaging
+        onPaging: this.onPaging,
+        adjustedHeight: adjustedHeight
       }));
     }
   }]);
@@ -1271,7 +1274,8 @@ BetListDataGrid.propTypes = {
   totalText: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string,
   onSort: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func,
   onPaging: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func,
-  afterLoad: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func
+  afterLoad: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func,
+  adjustedHeight: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.number
 };
 BetListDataGrid.defaultProps = {
   isPaging: false,
@@ -1288,7 +1292,8 @@ BetListDataGrid.defaultProps = {
   columnAlignments: ['center-align', '', '', 'center-align', 'center-align', 'right-align', 'right-align', 'right-align', 'right-align', 'right-align', 'right-align', 'center-align', 'center-align', 'center-align'],
   data: null,
   total: null,
-  totalText: 'Total'
+  totalText: 'Total',
+  adjustedHeight: 0
 };
 /* harmony default export */ __webpack_exports__["default"] = (BetListDataGrid);
 
