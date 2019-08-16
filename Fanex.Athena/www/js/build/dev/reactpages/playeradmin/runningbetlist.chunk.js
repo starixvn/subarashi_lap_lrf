@@ -324,6 +324,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_components_betlist_BetListDataGrid__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/components/betlist/BetListDataGrid */ "./www/js/source/reactpages/components/betlist/BetListDataGrid.jsx");
 /* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
 /* harmony import */ var _lib_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../lib/service */ "./www/js/source/reactpages/Module/PlayerAdmin/running-betlist/lib/service.js");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
@@ -353,6 +354,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 var DataGrid =
 /*#__PURE__*/
 function (_Component) {
@@ -367,6 +369,10 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "getHeaderName", function (column) {
       return _this.headerText[column];
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "getResource", function (key) {
+      return _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource(key);
     });
 
     _defineProperty(_assertThisInitialized(_this), "afterLoad", function () {
@@ -384,11 +390,23 @@ function (_Component) {
       _this.props.setRequestParam(param);
     });
 
+    _defineProperty(_assertThisInitialized(_this), "onPaging", function (index, size) {
+      var param = _objectSpread({}, _this.props.requestParam);
+
+      param.PageIndex = index;
+      param.PageSize = size;
+
+      _this._getData(param);
+
+      _this.props.setRequestParam(param);
+    });
+
     _this.headerText = _lib_service__WEBPACK_IMPORTED_MODULE_6__["default"].getHeaderText();
     _this.totalText = _lib_service__WEBPACK_IMPORTED_MODULE_6__["default"].getTotalText();
     _this.state = {
       data: null,
-      total: null
+      total: null,
+      totalRows: 0
     };
 
     _this._getData(_this.props.requestParam);
@@ -398,21 +416,18 @@ function (_Component) {
 
   _createClass(DataGrid, [{
     key: "componentDidUpdate",
-    value: function componentDidUpdate(prevProps, prevState) {
+    value: function componentDidUpdate(prevProps) {
       if (prevProps.requestParam.TimeStamp !== this.props.requestParam.TimeStamp) {
         this._getData(this.props.requestParam);
-      }
-
-      if (prevState.data !== this.state.data) {
-        this.props.toggleLoader(false);
       }
     }
   }, {
     key: "_updateState",
-    value: function _updateState(data, total) {
+    value: function _updateState(data, total, totalRows) {
       this.setState({
         data: data,
-        total: total
+        total: total,
+        totalRows: totalRows
       });
     }
   }, {
@@ -424,21 +439,27 @@ function (_Component) {
   }, {
     key: "_getData",
     value: function _getData(param) {
-      var _this2 = this;
-
       this.props.toggleLoader(true);
-      _lib_service__WEBPACK_IMPORTED_MODULE_6__["default"].getData(param, this._updateState.bind(this), function () {
-        _this2.props.toggleLoader(false);
-      }, this._handleError.bind(this));
+      _lib_service__WEBPACK_IMPORTED_MODULE_6__["default"].getData(param, this._updateState.bind(this), null, this._handleError.bind(this));
     }
   }, {
     key: "render",
     value: function render() {
       var _this$state = this.state,
           data = _this$state.data,
-          total = _this$state.total;
+          total = _this$state.total,
+          totalRows = _this$state.totalRows;
+      var requestParam = this.props.requestParam;
+      var pageOption = {
+        PageIndex: requestParam.PageIndex,
+        PageSize: requestParam.PageSize,
+        TotalItem: totalRows,
+        PageList: [50, 100, 200, 300, 400, 500]
+      };
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_betlist_BetListDataGrid__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        isPaging: false,
+        isPaging: true,
+        pageOption: pageOption,
+        onPaging: this.onPaging,
         getHeaderNameFunc: this.getHeaderName,
         columns: ['Index', 'RefNo', 'TransTime', 'Choice', 'Odds', 'OddsType', 'Stake', 'Status', 'Platform', 'Live'],
         columnWidths: [40, 110, 150, 400, 70, 70, 100, 80, 80, 80],
@@ -449,7 +470,8 @@ function (_Component) {
         total: total,
         totalText: this.totalText,
         afterLoad: this.afterLoad,
-        onSort: this.onSort
+        onSort: this.onSort //getResourceFunc={this.getResource}
+
       });
     }
   }]);
@@ -703,7 +725,7 @@ function () {
   }, {
     key: "export",
     value: function _export(param, callback) {
-      var url = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl("PlayerBetlist/ExportRunningBetList");
+      var url = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl("PlayerBetList/ExportRunningBetList");
       _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_2__["default"].getFile(url, param).then(function (response) {
         var NoContentStatusCode = 204;
 
@@ -719,20 +741,20 @@ function () {
   }, {
     key: "getData",
     value: function getData(param, processDataFunc, successCallBack, errorHandle) {
-      var url = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl("PlayerBetlist/GetRunningBetList");
+      var url = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl("PlayerBetList/GetRunningBetList");
       _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_2__["default"].postData(url, param).then(function (response) {
         var result = response.data;
         var data = result.Data;
 
         if (data && data.length > 0) {
-          processDataFunc(data, result.Total);
+          processDataFunc && processDataFunc(data, result.Total, result.TotalRows);
         } else {
-          processDataFunc([], {});
+          processDataFunc && processDataFunc([], {}, 0);
         }
 
-        successCallBack();
+        successCallBack && successCallBack();
       }).catch(function (error) {
-        errorHandle();
+        errorHandle && errorHandle();
       });
     }
   }]);
