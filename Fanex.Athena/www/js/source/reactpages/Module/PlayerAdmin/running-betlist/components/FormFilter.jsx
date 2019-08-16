@@ -20,7 +20,7 @@ export class FormFilter extends Component {
     exportExcel = (event) => {
         event.preventDefault();
 
-        const { requestParam } = this.props;
+        const requestParam = this.props.requestParam;
 
         this.props.toggleLoader(true);
         Service.export(requestParam, () => { this.props.toggleLoader(false) });

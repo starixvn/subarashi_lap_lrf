@@ -35,7 +35,7 @@ export default class Service {
     }
 
     static export(param, callback) {
-        const url = Site.resolveClientUrl("PlayerBetlist/ExportRunningBetList");
+        const url = Site.resolveClientUrl("PlayerBetList/ExportRunningBetList");
         DataService.getFile(url, param).then((response) => {
             const NoContentStatusCode = 204;
 
@@ -50,23 +50,23 @@ export default class Service {
     }
 
     static getData(param, processDataFunc, successCallBack, errorHandle) {
-        const url = Site.resolveClientUrl("PlayerBetlist/GetRunningBetList");
+        const url = Site.resolveClientUrl("PlayerBetList/GetRunningBetList");
         DataService.postData(url, param)
             .then(response => {
                 var result = response.data;
 
                 var data = result.Data;
                 if (data && data.length > 0) {
-                    processDataFunc(data, result.Total);
+                    processDataFunc && processDataFunc(data, result.Total, result.TotalRows);
                 }
                 else {
-                    processDataFunc([], {});
+                    processDataFunc && processDataFunc([], {}, 0);
                 }
 
-                successCallBack();
+                successCallBack && successCallBack();
             })
             .catch(error => {
-                errorHandle();
+                errorHandle && errorHandle();
             });
     }
 }

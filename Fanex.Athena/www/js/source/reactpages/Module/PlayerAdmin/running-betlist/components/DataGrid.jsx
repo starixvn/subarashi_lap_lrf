@@ -5,6 +5,7 @@ import { ActionCreators } from '../actions';
 import BetListDataGrid from '@jsroot/components/betlist/BetListDataGrid';
 import AppData from '@jsroot/lib/AppData';
 import Service from '../lib/service';
+import LangHelper from '@jsroot/lib/langHelper';
 
 export class DataGrid extends Component {
     constructor(props) {
@@ -15,24 +16,25 @@ export class DataGrid extends Component {
 
         this.state = {
             data: null,
-            total: null
+            total: null,
+            totalRows: 0
         };
 
         this._getData(this.props.requestParam);
     }
 
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(prevProps) {
         if (prevProps.requestParam.TimeStamp !== this.props.requestParam.TimeStamp) {
             this._getData(this.props.requestParam);
-        }
-
-        if (prevState.data !== this.state.data) {
-            this.props.toggleLoader(false);
         }
     }
 
     getHeaderName = (column) => {
         return this.headerText[column];
+    }
+
+    getResource = (key) => {
+        return LangHelper.getSingleResource(key);
     }
 
     afterLoad = () => {
@@ -49,10 +51,21 @@ export class DataGrid extends Component {
         this.props.setRequestParam(param);
     }
 
-    _updateState(data, total) {
+    onPaging = (index, size) => {
+        let param = { ...this.props.requestParam };
+
+        param.PageIndex = index;
+        param.PageSize = size;
+
+        this._getData(param);
+        this.props.setRequestParam(param);
+    }
+
+    _updateState(data, total, totalRows) {
         this.setState({
             data: data,
-            total: total
+            total: total,
+            totalRows: totalRows
         });
     }
 
@@ -64,14 +77,24 @@ export class DataGrid extends Component {
     _getData(param) {
         this.props.toggleLoader(true);
 
-        Service.getData(param, this._updateState.bind(this), () => { this.props.toggleLoader(false) }, this._handleError.bind(this));
+        Service.getData(param, this._updateState.bind(this), null, this._handleError.bind(this));
     }
 
     render() {
-        const { data, total } = this.state;
+        const { data, total, totalRows } = this.state;
+        const requestParam = this.props.requestParam
+
+        const pageOption = {
+            PageIndex: requestParam.PageIndex,
+            PageSize: requestParam.PageSize,
+            TotalItem: totalRows,
+            PageList: [50, 100, 200, 300, 400, 500]
+        };
 
         return <BetListDataGrid
-            isPaging={false}
+            isPaging={true}
+            pageOption={pageOption}
+            onPaging={this.onPaging}
             getHeaderNameFunc={this.getHeaderName}
             columns={['Index', 'RefNo', 'TransTime', 'Choice', 'Odds', 'OddsType', 'Stake', 'Status', 'Platform', 'Live']}
             columnWidths={[40, 110, 150, 400, 70, 70, 100, 80, 80, 80]}
@@ -80,13 +103,14 @@ export class DataGrid extends Component {
             columnAlignments={[
                 'center-align', 'center-align', 'center-align',
                 'right-align', 'right-align', 'right-align', 'right-align',
-                'center-align', 'center-align','center-align'
+                'center-align', 'center-align', 'center-align'
             ]}
             data={data}
             total={total}
             totalText={this.totalText}
             afterLoad={this.afterLoad}
             onSort={this.onSort}
+            //getResourceFunc={this.getResource}
         />
     }
 }

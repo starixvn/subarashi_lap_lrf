@@ -6,6 +6,10 @@
 
     public class PlayerRunningBetListMetalModel : IMetalModelCustomerIdentity, IMetaModelAgent, IMetaModelCurrencyList
     {
+        private const int PageSizeMaximum = 500;
+
+        private int _pageSize;
+
         private string _sortBy;
 
         private string _sortOrder;
@@ -17,7 +21,7 @@
             get { return _sortBy; }
             set
             {
-                _sortBy = !string.IsNullOrWhiteSpace(value) && value.Equals("stake", System.StringComparison.InvariantCultureIgnoreCase)
+                _sortBy = !string.IsNullOrWhiteSpace(value) && value.Equals("stake", StringComparison.InvariantCultureIgnoreCase)
                     ? value
                     : null;
             }
@@ -35,9 +39,20 @@
             }
         }
 
+        public int PageSize
+        {
+            get { return _pageSize; }
+            set
+            {
+                _pageSize = value > PageSizeMaximum ? PageSizeMaximum : value;
+            }
+        }
+
         public string Currency { get; set; }
 
         public string AgentListXml { get; set; }
+
+        public int PageIndex { get; set; }
 
         public IDictionary<int, string> CurrencyList { get; set; }
     }

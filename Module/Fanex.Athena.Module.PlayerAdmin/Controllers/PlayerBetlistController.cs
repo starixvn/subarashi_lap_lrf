@@ -13,19 +13,18 @@
     using Fanex.Athena.Service.Core.Common.Interfaces;
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
     using ONEbook.UM.Filters;
 
     [SessionState(SessionStateBehavior.ReadOnly)]
     [CheckUMFilter]
-   // [AuthorizeRestriction(AppMode.Parasitic)]
-    //[FunctionAuthorization(PermissionKeys.PlayerAdminBetList)]
-    public class PlayerBetlistController : CultureBaseController
+    [AuthorizeRestriction(AppMode.Parasitic)]
+    [FunctionAuthorization(PermissionKeys.PlayerAdminBetList)]
+    public class PlayerBetListController : CultureBaseController
     {
         private readonly IBetListApiClient _betListApiClient;
 
-        public PlayerBetlistController(
+        public PlayerBetListController(
             ILanguageService languageService,
             ISessionService sessionService,
             IBetListApiClient betListApiClient)
@@ -58,11 +57,10 @@
         [OutputCache(NoStore = true, Duration = 0, Location = OutputCacheLocation.None, VaryByParam = "*")]
         public async Task<dynamic> GetRunningBetList(PlayerRunningBetListMetalModel metaModel)
         {
-            var userSession = SessionService.UserSession;
             return await _betListApiClient.PostAsync<dynamic>(
                 "/PlayerAdminBetList/GetBetList",
                 metaModel,
-                userSession.Language).ConfigureAwait(false);
+                SessionService.UserSession.Language).ConfigureAwait(false);
         }
 
         [HttpPost]
@@ -73,11 +71,9 @@
         [OutputCache(NoStore = true, Duration = 0, Location = OutputCacheLocation.None, VaryByParam = "*")]
         public async Task<FileStreamResult> ExportRunningBetList(PlayerRunningBetListMetalModel metaModel)
         {
-            var userSession = SessionService.UserSession;
-
             var stream = await _betListApiClient.PostAsyncStream("/PlayerAdminBetList/Export",
                 metaModel,
-                userSession.Language).ConfigureAwait(false);
+                SessionService.UserSession.Language).ConfigureAwait(false);
 
             return File(stream, "application/vnd.ms-excel");
         }

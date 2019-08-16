@@ -82,7 +82,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\PlayerBetlistController.cs" />
+    <Compile Include="Controllers\PlayerBetListController.cs" />
     <Compile Include="Controllers\PlayerStatementController.cs" />
     <Compile Include="Controllers\PlayerBetLimitController.cs" />
     <Compile Include="DTO\PlayerBetLimitProduct.cs" />
