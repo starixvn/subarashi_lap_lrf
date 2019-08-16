@@ -130,7 +130,7 @@ class BetListDataGrid extends Component {
             return this._renderNodata();
         }
 
-        const { isPaging, pageOption } = this.props;
+        const { isPaging, pageOption, adjustedHeight } = this.props;
 
         return (
             <div className="betlist-container result-content">
@@ -145,6 +145,7 @@ class BetListDataGrid extends Component {
                     isPaging={isPaging}
                     pageOption={pageOption}
                     onPaging={this.onPaging}
+                    adjustedHeight={adjustedHeight}
                 />
             </div>
         );
@@ -172,7 +173,8 @@ BetListDataGrid.propTypes = {
     totalText: PropTypes.string,
     onSort: PropTypes.func,
     onPaging: PropTypes.func,
-    afterLoad: PropTypes.func
+    afterLoad: PropTypes.func,
+    adjustedHeight: PropTypes.number
 }
 
 BetListDataGrid.defaultProps = {
@@ -195,7 +197,8 @@ BetListDataGrid.defaultProps = {
     ],
     data: null,
     total: null,
-    totalText: 'Total'
+    totalText: 'Total',
+    adjustedHeight: 0
 }
 
 export default BetListDataGrid;

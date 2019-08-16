@@ -28,10 +28,10 @@ export class FormFilter extends Component {
 
     render() {
         return (
-            <div className='page-filter'>
+            <div className='pa-running-betlist-filter'>
                 <button type='button' className='btn btn-submit' onClick={this.submit}>{LangHelper.getSingleResource('Refresh')}</button>
-                <div className='caret-block'>
-                    <i className='icon-excel right' onClick={this.exportExcel} title={LangHelper.getSingleResource('ExportToExcel')}></i>
+                <div className='pa-running-betlist-export'>
+                    <i className='icon-excel' onClick={this.exportExcel} title={LangHelper.getSingleResource('ExportToExcel')}></i>
                 </div>
             </div>
         )
