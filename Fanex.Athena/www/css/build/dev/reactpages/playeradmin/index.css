@@ -910,6 +910,9 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::after {
     width: 200px; }
   .page-filter .search-option .keyword {
     color: #f31111; }
+  .page-filter .pa-username .dropdown-menu {
+    overflow: auto;
+    max-height: 280px; }
 
 /*End Filter*/
 /*Search Option*/

@@ -709,7 +709,7 @@ ul {
   .form-group .checkbox-group {
     margin-top: 20px; }
   .form-group .button-group {
-    margin-top: 18px; }
+    margin-top: 12px; }
 
 .input-text {
   background-color: transparent;
@@ -1209,8 +1209,8 @@ ul {
   border: none;
   border-radius: 2px;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-  height: 25px;
-  line-height: 25px;
+  height: 32px;
+  line-height: 32px;
   transition: none;
   text-decoration: none;
   text-align: center;

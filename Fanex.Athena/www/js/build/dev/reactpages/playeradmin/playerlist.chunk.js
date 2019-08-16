@@ -1188,7 +1188,7 @@ function (_PureComponent) {
         userName: userName,
         specialLevel: actualSpecialLevel === '' ? this.allSpecialLevel : actualSpecialLevel,
         pageSize: pagingOption.PageSize,
-        pageIndex: pagingOption.PageIndex
+        pageIndex: 1
       });
 
       searchPlayer(param);
@@ -3233,7 +3233,11 @@ var StatusDropdown = function StatusDropdown(props) {
         handleClose();
       }
     };
-    var confirmOption = Object(_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_9__["generateDefaultConfirmOption"])(confirmMessage, handleCloseAlert, confirmProps, cancelProps);
+    var customAlertOption = {
+      width: 480,
+      height: 220
+    };
+    var confirmOption = Object(_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_9__["generateDefaultConfirmOption"])(confirmMessage, handleCloseAlert, confirmProps, cancelProps, _lib_sweetAlert__WEBPACK_IMPORTED_MODULE_9__["predefinedIcons"].warning, customAlertOption);
     setSweetAlertOption(confirmOption);
   };
 
@@ -4531,23 +4535,25 @@ function () {
         return [];
       }
 
-      return lrfList.length > lapList.length ? lrfList.map(function (lrfItem) {
+      return lrfList.length > lapList.length ? lrfList.reduce(function (result, lrfItem) {
         var lapItem = lapList.find(function (x) {
           return x.IBCCustId === lrfItem.CustId;
         }) || {};
 
         var playerItem = _this.mergePlayerItem(lrfItem, lapItem);
 
-        return playerItem;
-      }) : lapList.map(function (lapItem) {
+        result.push(playerItem);
+        return result;
+      }, []) : lapList.reduce(function (result, lapItem) {
         var lrfItem = lrfList.find(function (x) {
           return x.CustId === lapItem.IBCCustId;
         }) || {};
 
         var playerItem = _this.mergePlayerItem(lrfItem, lapItem);
 
-        return playerItem;
-      });
+        result.push(playerItem);
+        return result;
+      }, []);
     }
   }, {
     key: "mergePlayerItem",
@@ -4572,12 +4578,13 @@ function () {
           isArchived = lapItem.isArchived,
           LastTransaction = lapItem.LastTransaction,
           CurrencyCode = lapItem.CurrencyCode,
-          OutBalance = lapItem.OutBalance;
+          OutBalance = lapItem.OutBalance,
+          IBCUserName = lapItem.IBCUserName;
       return {
         CustId: CustId || IBCCustId,
         LicenseeCustId: lapItem.CustId,
         UserName: UserName || lapItem.UserName,
-        SystemId: SystemId,
+        SystemId: SystemId || IBCUserName,
         Currency: Currency || CurrencyCode,
         CurrentBalance: CurrentBalance || lapItem.CurrentBalance,
         OutstandingBalance: OutstandingBalance || OutBalance,
@@ -4750,11 +4757,11 @@ function () {
         };
 
         var getFinalResponse = function getFinalResponse(response) {
-          var nextPlayerList = response.playerList,
-              nextTotalItem = response.totalItem;
+          var nextPlayerList = response.playerList;
+          var additionTotalItem = lrfTotalItem > lapTotalItem ? idListNotInLrf.length : idListNotInLap.length;
           return {
             playerList: playerList.concat(nextPlayerList),
-            totalItem: totalItem + nextTotalItem
+            totalItem: totalItem + additionTotalItem
           };
         };
 
@@ -4778,17 +4785,12 @@ function () {
       var nextlrfPromise = commonService.fetchData(lrfDataById.type, lrfDataById.action, _objectSpread({}, lrfParam));
       var nextlapPromise = commonService.fetchData(lapDataById.type, lapDataById.action, _objectSpread({}, lapParam));
       return commonService.fetchMultiple([nextlrfPromise, nextlapPromise], function (nextLrfResponse, nextLapResponse) {
-        var _nextLrfResponse$data = nextLrfResponse.data,
-            nextLrfPlayerList = _nextLrfResponse$data.DataList,
-            nextLrfTotalItem = _nextLrfResponse$data.TotalItem;
-        var _nextLapResponse$data = nextLapResponse.data,
-            nextLapPlayerList = _nextLapResponse$data.PlayerList,
-            nextLapTotalItem = _nextLapResponse$data.TotalItem;
+        var nextLrfPlayerList = nextLrfResponse.data.DataList;
+        var nextLapPlayerList = nextLapResponse.data.PlayerList;
         var playerListInLap = _playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].mergePlayerList(lrfDataObject.differenceList, nextLapPlayerList);
         var playerListInLrf = _playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].mergePlayerList(nextLrfPlayerList, lapDataObject.differenceList);
         return {
-          playerList: [].concat(_toConsumableArray(playerListInLap), _toConsumableArray(playerListInLrf)),
-          totalItem: nextLrfTotalItem + nextLapTotalItem
+          playerList: [].concat(_toConsumableArray(playerListInLap), _toConsumableArray(playerListInLrf))
         };
       }).catch(function (error) {
         console.log(error.message);
@@ -4802,28 +4804,23 @@ function () {
       var lrfDataById = apiInfo.lrfDataById;
       var differenceList = lapDataObject.differenceList;
       return commonService.fetchData(lrfDataById.type, lrfDataById.action, _objectSpread({}, lrfParam)).then(function (nextLrfResponse) {
-        var _nextLrfResponse$data2 = nextLrfResponse.data,
-            nextLrfPlayerList = _nextLrfResponse$data2.DataList,
-            nextLrfTotalItem = _nextLrfResponse$data2.TotalItem;
+        var nextLrfPlayerList = nextLrfResponse.data.DataList;
 
         if (!nextLrfPlayerList || !nextLrfPlayerList.length) {
           return {
-            playerList: Object(_playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__["buildLapPlayerList"])(differenceList),
-            totalItem: differenceList.length
+            playerList: Object(_playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__["buildLapPlayerList"])(differenceList)
           };
         }
 
         var playerList = _playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].mergePlayerList(nextLrfPlayerList, differenceList);
         return {
-          playerList: playerList,
-          totalItem: nextLrfTotalItem
+          playerList: playerList
         };
       }).catch(function (error) {
         console.log(error.message);
         window.alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('HttpError_Default'));
         return {
-          playerList: Object(_playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__["buildLapPlayerList"])(differenceList),
-          totalItem: differenceList.length
+          playerList: Object(_playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__["buildLapPlayerList"])(differenceList)
         };
       });
     }
@@ -4833,28 +4830,23 @@ function () {
       var lapDataById = apiInfo.lapDataById;
       var differenceList = lrfDataObject.differenceList;
       return commonService.fetchData(lapDataById.type, lapDataById.action, _objectSpread({}, lapParam)).then(function (nextLapResponse) {
-        var _nextLapResponse$data2 = nextLapResponse.data,
-            lapPlayerList = _nextLapResponse$data2.PlayerList,
-            nextLapTotalItem = _nextLapResponse$data2.TotalItem;
+        var lapPlayerList = nextLapResponse.data.PlayerList;
 
         if (!lapPlayerList || !lapPlayerList.length) {
           return {
-            playerList: Object(_playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__["buildLrfPlayerList"])(differenceList),
-            totalItem: differenceList.length
+            playerList: Object(_playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__["buildLrfPlayerList"])(differenceList)
           };
         }
 
         var playerList = _playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].mergePlayerList(differenceList, lapPlayerList);
         return {
-          playerList: playerList,
-          totalItem: nextLapTotalItem
+          playerList: playerList
         };
       }).catch(function (error) {
         console.log(error.message);
         window.alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('HttpError_Default'));
         return {
-          playerList: Object(_playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__["buildLrfPlayerList"])(differenceList),
-          totalItem: differenceList.length
+          playerList: Object(_playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__["buildLrfPlayerList"])(differenceList)
         };
       });
     }
@@ -7383,8 +7375,8 @@ SweetAlert.propTypes = {
   buttons: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.object)
 };
 SweetAlert.defaultProps = {
-  width: 480,
-  height: 220,
+  width: 400,
+  height: 200,
   isShow: false,
   isHtml: false,
   title: '',
@@ -8273,7 +8265,8 @@ var defaultOkButton = {
 };
 var generateDefaultConfirmOption = function generateDefaultConfirmOption(content, onClose, submitProps, cancelProps) {
   var icon = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : predefinedIcons.warning;
-  return {
+  var customOption = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : {};
+  return _objectSpread({
     buttons: [_objectSpread({}, defaultSubmitButton, submitProps), _objectSpread({}, defaultCancelButton, cancelProps)],
     icon: icon,
     isShow: true,
@@ -8281,7 +8274,7 @@ var generateDefaultConfirmOption = function generateDefaultConfirmOption(content
       className: "center-align"
     }, content),
     onClose: onClose
-  };
+  }, customOption);
 };
 var generateDefaultAlertOption = function generateDefaultAlertOption(content, onClose, onClick) {
   var icon = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : predefinedIcons.success;
