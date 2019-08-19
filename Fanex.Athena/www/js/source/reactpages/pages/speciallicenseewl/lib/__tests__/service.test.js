@@ -67,7 +67,9 @@ describe('Service ', () => {
                 licenseeWL: 'LicenseeW_L',
                 total: 'Total',
                 SB: 'ProductSB',
-                NG: 'ProductNG'
+                NG: 'ProductNG',
+                LC: 'ProductLC',
+                CS: 'RNG'
             };
 
             expect(HeaderText).toEqual(expectedResult);

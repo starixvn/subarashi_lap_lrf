@@ -13,7 +13,7 @@ export const HeaderText = {
     total: LangHelper.getSingleResource('Total'),
     SB: LangHelper.getSingleResource('ProductSB'),
     NG: LangHelper.getSingleResource('ProductNG'),
-    CS: LangHelper.getSingleResource('ProductCS'),
+    CS: 'RNG',
     LC: LangHelper.getSingleResource('ProductLC')
 };
 

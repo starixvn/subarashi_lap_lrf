@@ -13,6 +13,7 @@ namespace Fanex.Athena.Controllers.Report
     using Extension.Helper;
     using Extension.Utility;
     using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Model.Core.MetaModel.Product;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
     using Fanex.Athena.Web.ActionFilter;
@@ -129,7 +130,7 @@ namespace Fanex.Athena.Controllers.Report
                 FromDate = new DateTime(selectedDate.Year, selectedDate.Month, 1),
                 ToDate = selectedDate,
                 ReportBy = ReportByType.Daily,
-                ProductOptions = ToProductOptions(productAccess.ProductList),
+                ProductOptions = GetFakeProductOptions(productAccess.ProductList),
                 CurrencyId = defaultBaseCurrency.Key
             };
 
@@ -142,6 +143,16 @@ namespace Fanex.Athena.Controllers.Report
             };
 
             return View("~/Views/Desktop/Report/SpecialLicenseeWinLoss/Main.cshtml", model);
+        }
+
+        private static IList<ProductOption> GetFakeProductOptions(IEnumerable<Product> productList)
+        {
+            return productList.Select(i => new ProductOption
+            {
+                Code = i.ProductCode,
+                Name = i.ProductCode.Equals(Product.CS, StringComparison.InvariantCultureIgnoreCase) ? "RNG" : i.ProductName,
+                Status = true
+            }).ToList();
         }
     }
 }
