@@ -47,7 +47,7 @@ export default class PlayerMultipleQueryService {
                     idList: idListNotInLrf.join(','),
                     specialLevel: param.specialLevel,
                     pageSize: param.pageSize,
-                    pageIndex: param.pageIndex
+                    pageIndex: 1
                 }
 
                 const lapParam = {

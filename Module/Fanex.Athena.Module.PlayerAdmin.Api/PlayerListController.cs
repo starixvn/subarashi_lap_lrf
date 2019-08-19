@@ -1,11 +1,10 @@
-﻿using Fanex.Athena.Api.StatelessBase;
+﻿using System.Web.Http;
+using Fanex.Athena.Api.StatelessBase;
 using Fanex.Athena.Api.StatelessBase.Attributes;
 using Fanex.Athena.Model.Auth.DataDomain;
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.Services.Interfaces;
 using Fanex.Athena.Module.PlayerAdmin.Api.ViewModels;
-using Fanex.Athena.Service.StatelessCore.Utility;
-using System.Web.Http;
 
 namespace Fanex.Athena.Module.PlayerAdmin.Api
 {
@@ -32,6 +31,8 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api
         [StatelessApiAutoBindMetaModel(BindSiteName = true, BindAgent = true)]
         public PlayerListResultViewModel GetPlayerListById(PlayerListByIdMetaModel metaModel)
         {
+            metaModel.PageIndex = 1;
+
             return _playerListService.GetPlayerListById(metaModel);
         }
     }

@@ -4126,7 +4126,7 @@ function () {
         idList: idList.join(','),
         specialLevel: param.specialLevel,
         pageSize: param.pageSize,
-        pageIndex: param.pageIndex
+        pageIndex: 1
       };
       return commonService.fetchData(lrfDataById.type, lrfDataById.action, lrfParam).then(function (lrfResponse) {
         var _lrfResponse$data = lrfResponse.data,
@@ -4779,7 +4779,7 @@ function () {
           idList: idListNotInLrf.join(','),
           specialLevel: param.specialLevel,
           pageSize: param.pageSize,
-          pageIndex: param.pageIndex
+          pageIndex: 1
         };
         var lapParam = {
           idList: idListNotInLap

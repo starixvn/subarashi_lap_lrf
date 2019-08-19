@@ -25,7 +25,7 @@ export default class LapPlayerQueryService {
             idList: idList.join(','),
             specialLevel: param.specialLevel,
             pageSize: param.pageSize,
-            pageIndex: param.pageIndex
+            pageIndex: 1
         }
 
         return commonService.fetchData(lrfDataById.type, lrfDataById.action, lrfParam)
