@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 8/12/2019 5:55:06 PM
+// Generated at: 8/19/2019 5:32:22 PM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -413,6 +413,7 @@ window._language_en_US = {
   InvalidCaptchaMsg: "You inputed an invalid code.",
   InvalidChargeCommission: "Invalid Charge Commission",
   InvalidCurrencyPermission: "Invalid currency permissions.",
+  InvalidEmail: "Invalid email address",
   InvalidParams: "Invalid parameters",
   InvalidRequestMsg: "Request is not valid",
   InvalidRequestOrNotAuthorizedMsg: "Invalid request or you are not authorized to access the requested resource!",
@@ -583,6 +584,7 @@ window._language_en_US = {
   PasswordConfirmErrorMsg: "The password was not correctly confirmed.",
   PasswordNoteMsg: "Password must have at least 6 characters, including at least 2 letters and at least 2 digits. (e.g:pass22)",
   PayAttentionMsg: "Please pay attention: Customer(s) will be removed from group(s) due to different comm values.",
+  Pending: "Pending",
   PendingFunds: "Pending Funds",
   Permission: "Permission",
   PermissionForUser: "Permission for User",

@@ -1137,12 +1137,12 @@ function (_PureComponent) {
     key: "componentDidMount",
     value: function componentDidMount() {
       var custId = Number(_jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_13__["default"].getParam(window.location.href, 'custId'));
-      var ibcUserName = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_13__["default"].getParam(window.location.href, 'ibcUserName');
+      var licenseeCustId = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_13__["default"].getParam(window.location.href, 'licenseeCustId');
 
-      if (custId || ibcUserName) {
+      if (custId || licenseeCustId) {
         var param = {
           custId: custId,
-          ibcUserName: ibcUserName
+          licenseeCustId: licenseeCustId
         };
         this.props.getSinglePlayer(param);
         this.userNameRef.current.value = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_13__["default"].getParam(window.location.href, 'userName');
@@ -1171,6 +1171,13 @@ function (_PureComponent) {
           email = _this$state.email;
 
       if (!userName && !bankAccountNumber && !email) {
+        return;
+      }
+
+      var emailRegex = new RegExp(_lib_constants__WEBPACK_IMPORTED_MODULE_8__["emailPattern"]);
+
+      if (email && !emailRegex.test(email)) {
+        window.alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource('InvalidEmail'));
         return;
       }
 
@@ -2153,6 +2160,8 @@ var UserNameInput = react__WEBPACK_IMPORTED_MODULE_0___default.a.forwardRef(func
       dropdownStyle = _useState6[0],
       setDropdownStyle = _useState6[1];
 
+  var cachedDataRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])({});
+
   var handleChange = function handleChange() {
     var element = userNameRef.current;
 
@@ -2160,26 +2169,41 @@ var UserNameInput = react__WEBPACK_IMPORTED_MODULE_0___default.a.forwardRef(func
       return;
     }
 
+    var rect = element.getBoundingClientRect();
+    var style = {
+      left: rect.left,
+      top: rect.top + rect.height,
+      width: rect.width,
+      position: 'fixed'
+    };
+
+    var handleSuggestionResult = function handleSuggestionResult(resultData) {
+      setDropdownStyle(style);
+      setSuggestionList(resultData);
+      var hasData = resultData && resultData.length;
+      setIsOpenSuggestion(!!hasData);
+    };
+
     var value = element.value;
 
     if (value.length >= minChar) {
-      var param = {
-        keyword: value,
-        searchType: searchOption
-      };
-      getSuggestionList(param).then(function (response) {
-        var rect = element.getBoundingClientRect();
-        var style = {
-          left: rect.left,
-          top: rect.top + rect.height,
-          width: rect.width,
-          position: 'fixed'
+      var cachedData = cachedDataRef.current;
+      var cacheKey = value + '_' + searchOption;
+
+      if (cachedData[cacheKey]) {
+        var result = cachedData[cacheKey];
+        handleSuggestionResult(result);
+      } else {
+        var param = {
+          keyword: value,
+          searchType: searchOption
         };
-        setDropdownStyle(style);
-        setSuggestionList(response.data || []);
-        var hasData = response.data && response.data.length;
-        setIsOpenSuggestion(!!hasData);
-      });
+        getSuggestionList(param).then(function (response) {
+          var result = response.data || [];
+          handleSuggestionResult(result);
+          cachedData[cacheKey] = result;
+        });
+      }
     } else {
       setIsOpenSuggestion(false);
       setSuggestionList([]);
@@ -3491,7 +3515,7 @@ var generateColumnList = function generateColumnList(licType, hasBaPermission) {
 /*!*********************************************************************************!*\
   !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js ***!
   \*********************************************************************************/
-/*! exports provided: specialLevelListWithColor, oddsGroupListWithStyle, licenseeType, fields, columnList, contextMenuKeys, tabNames, excludedTabNameWithNonDepositAndArchived, contextMenuList, heightSlicing, searchOptions, defaultPagingOption, playerStatus, playerStatusByName, displayedPlayerStatusList, messageUpdateState, baStatusList, headerText, gridItemDropdownHeight, stringTypeFields, apiInfo, apiUpdateInfo, excludedContextMenuWithNonDeposit, excludedContextMenuWithClosed, excludedContextMenuWithArchived, playerTypes */
+/*! exports provided: specialLevelListWithColor, oddsGroupListWithStyle, licenseeType, fields, columnList, contextMenuKeys, tabNames, excludedTabNameWithNonDepositAndArchived, contextMenuList, heightSlicing, searchOptions, defaultPagingOption, playerStatus, playerStatusByName, displayedPlayerStatusList, messageUpdateState, baStatusList, headerText, gridItemDropdownHeight, stringTypeFields, apiInfo, apiUpdateInfo, excludedContextMenuWithNonDeposit, excludedContextMenuWithClosed, excludedContextMenuWithArchived, playerTypes, emailPattern */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3522,6 +3546,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "excludedContextMenuWithClosed", function() { return excludedContextMenuWithClosed; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "excludedContextMenuWithArchived", function() { return excludedContextMenuWithArchived; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "playerTypes", function() { return playerTypes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "emailPattern", function() { return emailPattern; });
 /* harmony import */ var _constants_configInfo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../constants/configInfo */ "./www/js/source/reactpages/Module/constants/configInfo.js");
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 var _displayedPlayerStatu, _messageUpdateState;
@@ -3740,6 +3765,10 @@ var apiInfo = {
   lapDataById: {
     action: 'PlayerAdminContainer/GetPlayerListById',
     type: _constants_configInfo__WEBPACK_IMPORTED_MODULE_0__["systemType"].newAdmin
+  },
+  lapGetPlayerByLicenseeId: {
+    action: 'PlayerAdminContainer/GetPlayerById',
+    type: _constants_configInfo__WEBPACK_IMPORTED_MODULE_0__["systemType"].newAdmin
   }
 };
 var apiUpdateInfo = {
@@ -3767,6 +3796,7 @@ var playerTypes = {
   nonDeposit: 1,
   deposit: 2
 };
+var emailPattern = '^([a-zA-Z0-9_\\.\\-])+\\@(([a-zA-Z0-9\\-])+\\.)+([a-zA-Z0-9]{2,4})+$';
 
 /***/ }),
 
@@ -4455,9 +4485,9 @@ function () {
     key: "getPlayerById",
     value: function getPlayerById(param, commonService, apiInfo) {
       var lrfDataById = apiInfo.lrfDataById,
-          lapDataById = apiInfo.lapDataById;
+          lapGetPlayerByLicenseeId = apiInfo.lapGetPlayerByLicenseeId;
       var custId = param.custId,
-          ibcUserName = param.ibcUserName;
+          licenseeCustId = param.licenseeCustId;
       var lrfParam = {
         idList: custId,
         specialLevel: Object.keys(_lib_constants__WEBPACK_IMPORTED_MODULE_0__["specialLevelListWithColor"]).map(function (item) {
@@ -4467,11 +4497,10 @@ function () {
         pageIndex: 1
       };
       var lapParam = {
-        idList: [custId],
-        ibcUserNameList: [ibcUserName]
+        custId: licenseeCustId
       };
       var lrfPromise = custId > 0 ? commonService.fetchData(lrfDataById.type, lrfDataById.action, lrfParam) : null;
-      var lapPromise = commonService.fetchData(lapDataById.type, lapDataById.action, lapParam);
+      var lapPromise = commonService.fetchData(lapGetPlayerByLicenseeId.type, lapGetPlayerByLicenseeId.action, lapParam);
       return this._getResult(lrfPromise, lapPromise, commonService);
     }
   }, {
@@ -4482,8 +4511,8 @@ function () {
             _ref$DataList = _ref.DataList,
             lrfPlayerList = _ref$DataList === void 0 ? [] : _ref$DataList;
 
-        var _lapResponse$data$Pla = lapResponse.data.PlayerList,
-            lapPlayerList = _lapResponse$data$Pla === void 0 ? [] : _lapResponse$data$Pla;
+        var Player = lapResponse.data.Player;
+        var lapPlayerList = Player ? [Player] : [];
         var playerList = _playerListDataHelper__WEBPACK_IMPORTED_MODULE_1__["default"].mergePlayerList(lrfPlayerList, lapPlayerList);
         return playerList.length ? playerList[0] : null;
       }).catch(function (error) {
@@ -4582,7 +4611,7 @@ function () {
           IBCUserName = lapItem.IBCUserName;
       return {
         CustId: CustId || IBCCustId,
-        LicenseeCustId: lapItem.CustId,
+        LicenseeCustId: lapItem.CustId || 0,
         UserName: UserName || lapItem.UserName,
         SystemId: SystemId || IBCUserName,
         Currency: Currency || CurrencyCode,
