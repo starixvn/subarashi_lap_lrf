@@ -471,7 +471,7 @@ function (_Component) {
         totalText: this.totalText,
         afterLoad: this.afterLoad,
         onSort: this.onSort,
-        adjustedHeight: -45 //getResourceFunc={this.getResource}
+        adjustedHeight: -20 //getResourceFunc={this.getResource}
 
       });
     }
