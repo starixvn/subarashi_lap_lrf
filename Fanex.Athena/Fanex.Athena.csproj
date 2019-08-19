@@ -435,6 +435,9 @@
     <Content Include="SpNameConfig\FanexSpName.SIT.xml">
       <DependentUpon>FanexSpName.xml.tt</DependentUpon>
     </Content>
+    <Content Include="SpNameConfig\FanexSpName.Staging.xml">
+      <DependentUpon>FanexSpName.xml.tt</DependentUpon>
+    </Content>
     <Content Include="SpNameConfig\FanexSpName.UAT.xml">
       <DependentUpon>FanexSpName.xml.tt</DependentUpon>
     </Content>
@@ -659,6 +662,14 @@
     <Content Include="SiteConfig\Web.UATTW.config" />
     <Content Include="App_Data\UserGuide\CustomerList\pdf\zh-Hans\Odds Group Feature_Licensee.pdf" />
     <Content Include="App_Data\UserGuide\CustomerList\pdf\zh-Hans\Odds Group Feature_Licensee_BA.pdf" />
+    <Content Include="SiteConfig\WebConfigTransforms\Staging.config" />
+    <Content Include="SiteConfig\Web.AppSettings.Staging.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="SiteConfig\Web.ConnectionStrings.Staging.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="SiteConfig\Web.Staging.config" />
     <None Include="www\css\source\reactpages\components\custom3rd\react-toastify.scss" />
     <None Include="www\css\source\pages\betlist\result\result.happy5.scss" />
     <Content Include="www\css\source\reactpages\pages\betlist\images\bonus.png" />
