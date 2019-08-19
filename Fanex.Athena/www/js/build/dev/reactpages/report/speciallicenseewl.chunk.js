@@ -3734,7 +3734,7 @@ var HeaderText = {
   total: _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Total'),
   SB: _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('ProductSB'),
   NG: _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('ProductNG'),
-  CS: _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('ProductCS'),
+  CS: 'RNG',
   LC: _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('ProductLC')
 };
 var TotalText = {
