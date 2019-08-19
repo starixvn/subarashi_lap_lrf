@@ -10,7 +10,7 @@ import { licenseeType } from '../lib/constants';
 import CollapsiblePanel from '@jsroot/components/collapsible-panel';
 import UserGuide from '@jsroot/components/UserGuide';
 import LangHelper from '@jsroot/lib/langHelper';
-import { searchOptions, baStatusList, specialLevelListWithColor } from '../lib/constants';
+import { searchOptions, baStatusList, specialLevelListWithColor, emailPattern } from '../lib/constants';
 import UserNameInput from './filter/UserNameInput';
 import QueryString from '@jsroot/lib/QueryString';
 
@@ -35,9 +35,9 @@ export class FormFilter extends PureComponent {
 
     componentDidMount() {
         const custId = Number(QueryString.getParam(window.location.href, 'custId'));
-        const ibcUserName = QueryString.getParam(window.location.href, 'ibcUserName');
-        if (custId || ibcUserName) {
-            const param = { custId, ibcUserName };
+        const licenseeCustId = QueryString.getParam(window.location.href, 'licenseeCustId');
+        if (custId || licenseeCustId) {
+            const param = { custId, licenseeCustId };
             this.props.getSinglePlayer(param);
 
             this.userNameRef.current.value = QueryString.getParam(window.location.href, 'userName');
@@ -60,6 +60,12 @@ export class FormFilter extends PureComponent {
         const userName = this.userNameRef.current.value;
         const { bankAccountNumber, email } = this.state;
         if (!userName && !bankAccountNumber && !email) {
+            return;
+        }
+
+        const emailRegex = new RegExp(emailPattern);
+        if (email && !emailRegex.test(email)) {
+            window.alert(LangHelper.getSingleResource('InvalidEmail'));
             return;
         }
 

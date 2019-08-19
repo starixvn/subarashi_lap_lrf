@@ -2470,4 +2470,8 @@
     <value>Warning, this player will be able to log in and bet.</value>
     <comment>112658</comment>
   </data>
+  <data name="InvalidEmail" xml:space="preserve">
+    <value>Invalid email address</value>
+    <comment>112658</comment>
+  </data>
 </root>

@@ -3,8 +3,8 @@ import PlayerListDataHelper from './playerListDataHelper';
 
 export default class PlayerItemQueryService {
     static getPlayerById(param, commonService, apiInfo) {
-        const { lrfDataById, lapDataById } = apiInfo;
-        const { custId, ibcUserName } = param;
+        const { lrfDataById, lapGetPlayerByLicenseeId } = apiInfo;
+        const { custId, licenseeCustId } = param;
 
         const lrfParam = {
             idList: custId,
@@ -14,12 +14,11 @@ export default class PlayerItemQueryService {
         }
 
         const lapParam = {
-            idList: [custId],
-            ibcUserNameList: [ibcUserName]
+            custId: licenseeCustId
         }
 
         const lrfPromise = custId > 0 ? commonService.fetchData(lrfDataById.type, lrfDataById.action, lrfParam) : null;
-        const lapPromise = commonService.fetchData(lapDataById.type, lapDataById.action, lapParam);
+        const lapPromise = commonService.fetchData(lapGetPlayerByLicenseeId.type, lapGetPlayerByLicenseeId.action, lapParam);
 
         return this._getResult(lrfPromise, lapPromise, commonService);
     }
@@ -27,8 +26,9 @@ export default class PlayerItemQueryService {
     static _getResult(lrfPromise, lapPromise, commonService) {
         return commonService.fetchMultiple([lrfPromise, lapPromise], (lrfResponse, lapResponse) => {
                 const { DataList: lrfPlayerList = [] } = (lrfResponse && lrfResponse.data) || {};
-                const { PlayerList: lapPlayerList = [] } = lapResponse.data;
+                const { Player } = lapResponse.data;
 
+                const lapPlayerList = Player ? [Player] : [];
                 const playerList = PlayerListDataHelper.mergePlayerList(lrfPlayerList, lapPlayerList);
 
                 return playerList.length ? playerList[0] : null;

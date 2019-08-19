@@ -28,7 +28,7 @@ export default class PlayerListDataHelper {
 
         return {
             CustId: CustId || IBCCustId,
-            LicenseeCustId: lapItem.CustId,
+            LicenseeCustId: lapItem.CustId || 0,
             UserName: UserName || lapItem.UserName,
             SystemId: SystemId || IBCUserName,
             Currency: Currency || CurrencyCode,

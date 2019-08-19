@@ -165,7 +165,8 @@ export const apiInfo = {
     lrfSearch: { action: 'api/PlayerList/Search', type: systemType.lrf },
     lrfDataById: { action: 'api/PlayerList/GetPlayerListById', type: systemType.lrf },
     lapSearch: { action: 'PlayerAdminContainer/Search', type: systemType.newAdmin },
-    lapDataById: { action: 'PlayerAdminContainer/GetPlayerListById', type: systemType.newAdmin }
+    lapDataById: { action: 'PlayerAdminContainer/GetPlayerListById', type: systemType.newAdmin },
+    lapGetPlayerByLicenseeId: { action: 'PlayerAdminContainer/GetPlayerById', type: systemType.newAdmin }
 }
 
 export const apiUpdateInfo = {
@@ -185,3 +186,5 @@ export const playerTypes = {
     nonDeposit: 1,
     deposit: 2
 }
+
+export const emailPattern = '^([a-zA-Z0-9_\\.\\-])+\\@(([a-zA-Z0-9\\-])+\\.)+([a-zA-Z0-9]{2,4})+$';
