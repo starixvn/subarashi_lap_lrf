@@ -30,7 +30,7 @@ export default class LapPlayerQueryService {
 
         return commonService.fetchData(lrfDataById.type, lrfDataById.action, lrfParam)
             .then(lrfResponse => {
-                const { DataList: lrfPlayerList, TotalItem } = lrfResponse.data;
+                const { DataList: lrfPlayerList } = lrfResponse.data;
                 if (!lrfPlayerList || !lrfPlayerList.length) {
                     return {
                         playerList: buildLapPlayerList(lapPlayerList),
@@ -39,10 +39,11 @@ export default class LapPlayerQueryService {
                 }
 
                 const playerList = PlayerListDataHelper.mergePlayerList(lrfPlayerList, lapPlayerList);
+                const excludedIdCount = lrfPlayerList.filter(p => !idList.includes(p.CustId)).length;
 
                 return {
                     playerList,
-                    totalItem: Math.max(TotalItem, lapTotalItem)
+                    totalItem: lapTotalItem - excludedIdCount
                 };
             })
             .catch(() => ({

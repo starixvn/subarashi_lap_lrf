@@ -1,6 +1,6 @@
 import LapPlayerQueryService from '../lapPlayerQueryService';
 import PlayerListDataHelper from '../playerListDataHelper';
-import { apiInfo } from '../constants';
+import { apiInfo, playerTypes } from '../constants';
 import * as utils from '../utils';
 
 describe('LapPlayerQueryService', () => {
@@ -142,18 +142,56 @@ describe('LapPlayerQueryService', () => {
             PlayerListDataHelper.mergePlayerList = originalMergePlayerList;
         })
 
+        const buildLapPlayerList = (playerList) => {
+            return playerList.map(item => {
+                const {
+                    UserName,
+                    Status,
+                    RealName,
+                    IP,
+                    email,
+                    isOnline,
+                    ActStatus,
+                    IBCCustId,
+                    isArchived,
+                    CustId,
+                    CurrencyCode,
+                    CurrentBalance,
+                    OutBalance,
+                    Currency
+                } = item;
+
+                return {
+                    CustId: IBCCustId,
+                    LicenseeCustId: CustId,
+                    UserName,
+                    Status,
+                    RealName,
+                    LastLoginIp: IP,
+                    Email: email,
+                    IsOnline: isOnline,
+                    IsDeposit: ActStatus === playerTypes.deposit && IBCCustId > 0,
+                    IsArchived: isArchived,
+                    Currency: CurrencyCode,
+                    CurrentBalance,
+                    OutstandingBalance: OutBalance,
+                    CurrencyId: Currency || 0
+                };
+            });
+        }
+
         it('DataList response is empty - return Lap Player List', () => {
             const lapPlayerList = createDefaultLapPlayerList();;
             const lapTotalItem = 2;
             const param = {
-                currency: '',
+                currencyIdList: '',
                 specialLevel: '',
                 pageSize: 50,
                 pageIndex: 1
             }
 
             const expectedLrfParam = {
-                currency: param.currency,
+                currencyIdList: param.currencyIdList,
                 idList: '1,2',
                 specialLevel: param.specialLevel,
                 pageSize: param.pageSize,
@@ -168,9 +206,8 @@ describe('LapPlayerQueryService', () => {
                 })
             }
 
-            const expectedPlayerList = createDefaultMergedPlayerList();;
             const expectedResult = {
-                playerList: expectedPlayerList,
+                playerList: buildLapPlayerList(lapPlayerList),
                 totalItem: lapTotalItem
             }
 
@@ -220,7 +257,7 @@ describe('LapPlayerQueryService', () => {
             const lapPlayerList = createDefaultLapPlayerList();;
             const lapTotalItem = 2;
             const param = {
-                currency: '',
+                currencyIdList: '',
                 specialLevel: '',
                 pageSize: 50,
                 pageIndex: 1
@@ -231,9 +268,8 @@ describe('LapPlayerQueryService', () => {
                 }))
             }
             const { lrfDataById } = apiInfo;
-            const expectedPlayerList = createDefaultMergedPlayerList();
             const expectedResult = {
-                playerList: expectedPlayerList,
+                playerList: buildLapPlayerList(lapPlayerList),
                 totalItem: lapTotalItem
             }
             const promise = LapPlayerQueryService._fetchFromLrf(param, lrfDataById, lapPlayerList, commonService, lapTotalItem);

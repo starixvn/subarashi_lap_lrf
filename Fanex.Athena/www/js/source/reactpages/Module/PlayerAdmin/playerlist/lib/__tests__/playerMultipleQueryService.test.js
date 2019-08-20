@@ -24,7 +24,6 @@ describe('PlayerMultipleQueryService', () => {
     ];
     const defaultLapDifferenceList = [{ IBCCustId: 4, UserName: 'test4', Status: 0, IP: '4.4.4.4', email: 'ijk@gmail.com', isOnline: true, RealName: 'test4real', ActStatus: 2, isArchived: false }];
     const defaultLrfPlayerList = [{ CustId: 1, BaStatus: true, OddsGroup: 'A' }, { CustId: 2, BaStatus: false, OddsGroup: 'B' }];
-    const defaultLrfDifferenceList = [{ CustId: 3, BaStatus: true, OddsGroup: 'D' }];
     afterEach(() => {
         jest.restoreAllMocks();
     })

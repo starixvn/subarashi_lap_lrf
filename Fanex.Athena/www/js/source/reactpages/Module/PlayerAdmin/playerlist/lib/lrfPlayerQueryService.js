@@ -24,7 +24,7 @@ export default class LrfPlayerQueryService {
 
         return commonService.fetchData(lapDataById.type, lapDataById.action, lapParam)
             .then(lapResponse => {
-                const { PlayerList: lapPlayerList, TotalItem: lapTotalItem } = lapResponse.data;
+                const { PlayerList: lapPlayerList } = lapResponse.data;
                 if (!lapPlayerList || !lapPlayerList.length) {
                     return {
                         playerList: buildLrfPlayerList(lrfPlayerList),
@@ -36,7 +36,7 @@ export default class LrfPlayerQueryService {
 
                 return {
                     playerList,
-                    totalItem: Math.max(lrfTotalItem, lapTotalItem)
+                    totalItem: lrfTotalItem
                 };
             })
             .catch(() => ({

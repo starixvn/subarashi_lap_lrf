@@ -1,6 +1,7 @@
 import LrfPlayerQueryService from '../lrfPlayerQueryService';
 import PlayerListDataHelper from '../playerListDataHelper';
 import { apiInfo } from '../constants';
+import { buildLrfPlayerList } from '../playerDataBuilder';
 
 describe('LrfPlayerQueryService', () => {
     const defaultParam = {
@@ -87,6 +88,39 @@ describe('LrfPlayerQueryService', () => {
             PlayerListDataHelper.mergePlayerList = originalMergePlayerList;
         })
 
+        const buidLrfPlayerList = (playerList) => {
+            return playerList.map(item => {
+                const {
+                    CustId,
+                    UserName,
+                    SystemId,
+                    Currency,
+                    CurrentBalance,
+                    OutstandingBalance,
+                    OddsGroup,
+                    BaStatus,
+                    SpecialLevel,
+                    CurrencyId
+                } = item;
+
+                return {
+                    CustId,
+                    LicenseeCustId: 0,
+                    UserName,
+                    SystemId,
+                    Currency,
+                    CurrentBalance,
+                    OutstandingBalance,
+                    OddsGroup,
+                    BaStatus,
+                    SpecialLevel,
+                    IsDeposit: true,
+                    IsArchived: false,
+                    CurrencyId: CurrencyId || 0
+                };
+            });
+        }
+
         it('data response is empty - return lrfPlayerList', () => {
             const lrfPlayerList = [{ CustId: 1, BaStatus: true, OddsGroup: 'A' }, { CustId: 2, BaStatus: false, OddsGroup: 'B' }];
             const expectedLapParam = {
@@ -103,7 +137,7 @@ describe('LrfPlayerQueryService', () => {
             const lrfTotalItem = 2;
 
             const expectedResult = {
-                playerList: lrfPlayerList,
+                playerList: buidLrfPlayerList(lrfPlayerList),
                 totalItem: lrfTotalItem
             }
 
@@ -153,7 +187,7 @@ describe('LrfPlayerQueryService', () => {
             const lrfTotalItem = 2;
 
             const expectedResult = {
-                playerList: lrfPlayerList,
+                playerList: buildLrfPlayerList(lrfPlayerList),
                 totalItem: lrfTotalItem
             }
 
