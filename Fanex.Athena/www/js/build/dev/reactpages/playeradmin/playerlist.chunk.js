@@ -4564,16 +4564,7 @@ function () {
         return [];
       }
 
-      return lrfList.length > lapList.length ? lrfList.reduce(function (result, lrfItem) {
-        var lapItem = lapList.find(function (x) {
-          return x.IBCCustId === lrfItem.CustId;
-        }) || {};
-
-        var playerItem = _this.mergePlayerItem(lrfItem, lapItem);
-
-        result.push(playerItem);
-        return result;
-      }, []) : lapList.reduce(function (result, lapItem) {
+      return lapList.reduce(function (result, lapItem) {
         var lrfItem = lrfList.find(function (x) {
           return x.CustId === lapItem.IBCCustId;
         }) || {};
@@ -4689,14 +4680,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/utils.js");
 /* harmony import */ var _playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./playerDataBuilder */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerDataBuilder.js");
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
-
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
-
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -4752,28 +4735,22 @@ function () {
       var _this = this;
 
       return commonService.fetchMultiple([lrfPromise, lapPromise], function (lrfResponse, lapResponse) {
-        var _lrfResponse$data = lrfResponse.data,
-            lrfPlayerList = _lrfResponse$data.DataList,
-            lrfTotalItem = _lrfResponse$data.TotalItem;
+        var lrfPlayerList = lrfResponse.data.DataList;
         var _lapResponse$data = lapResponse.data,
             lapPlayerList = _lapResponse$data.PlayerList,
             lapTotalItem = _lapResponse$data.TotalItem;
         var lrfDataObject = _playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getDataObject(lrfPlayerList, lapPlayerList);
         var lapDataObject = _playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getDataObject(lapPlayerList, lrfPlayerList);
         var playerList = _playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].mergePlayerList(lrfDataObject.commonList, lapDataObject.commonList);
-        var totalItem = Math.max(lrfTotalItem, lapTotalItem);
         var idListNotInLrf = Object(_utils__WEBPACK_IMPORTED_MODULE_1__["getCustIdListFromLapData"])(lapDataObject.differenceList);
 
-        if (lrfDataObject.differenceList.length === 0 && idListNotInLrf.length === 0) {
+        if (idListNotInLrf.length === 0) {
           return {
             playerList: playerList,
-            totalItem: totalItem
+            totalItem: lapTotalItem
           };
         }
 
-        var idListNotInLap = lrfDataObject.differenceList.map(function (x) {
-          return x.CustId;
-        });
         var lrfParam = {
           currencyIdList: param.currencyIdList,
           idList: idListNotInLrf.join(','),
@@ -4781,49 +4758,18 @@ function () {
           pageSize: param.pageSize,
           pageIndex: 1
         };
-        var lapParam = {
-          idList: idListNotInLap
-        };
-
-        var getFinalResponse = function getFinalResponse(response) {
+        return _this._refetchFromLrf(lrfParam, lapDataObject, commonService, apiInfo).then(function (response) {
           var nextPlayerList = response.playerList;
-          var additionTotalItem = lrfTotalItem > lapTotalItem ? idListNotInLrf.length : idListNotInLap.length;
+          var excludedIdCount = nextPlayerList.filter(function (p) {
+            return !idListNotInLrf.includes(p.CustId);
+          }).length;
           return {
             playerList: playerList.concat(nextPlayerList),
-            totalItem: totalItem + additionTotalItem
+            totalItem: lapTotalItem - excludedIdCount
           };
-        };
-
-        if (idListNotInLrf.length > 0 && idListNotInLap.length > 0) {
-          return _this._refetchFormAllSide(lrfParam, lapParam, lrfDataObject, lapDataObject, commonService, apiInfo).then(getFinalResponse);
-        } else if (idListNotInLrf.length > 0) {
-          return _this._refetchFromLrf(lrfParam, lapDataObject, commonService, apiInfo).then(getFinalResponse);
-        } else {
-          return _this._refetchFromLap(lapParam, lrfDataObject, commonService, apiInfo).then(getFinalResponse);
-        }
+        });
       }).catch(function (error) {
         console.log(error.message);
-        return _playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].createEmptyResult();
-      });
-    }
-  }, {
-    key: "_refetchFormAllSide",
-    value: function _refetchFormAllSide(lrfParam, lapParam, lrfDataObject, lapDataObject, commonService, apiInfo) {
-      var lrfDataById = apiInfo.lrfDataById,
-          lapDataById = apiInfo.lapDataById;
-      var nextlrfPromise = commonService.fetchData(lrfDataById.type, lrfDataById.action, _objectSpread({}, lrfParam));
-      var nextlapPromise = commonService.fetchData(lapDataById.type, lapDataById.action, _objectSpread({}, lapParam));
-      return commonService.fetchMultiple([nextlrfPromise, nextlapPromise], function (nextLrfResponse, nextLapResponse) {
-        var nextLrfPlayerList = nextLrfResponse.data.DataList;
-        var nextLapPlayerList = nextLapResponse.data.PlayerList;
-        var playerListInLap = _playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].mergePlayerList(lrfDataObject.differenceList, nextLapPlayerList);
-        var playerListInLrf = _playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].mergePlayerList(nextLrfPlayerList, lapDataObject.differenceList);
-        return {
-          playerList: [].concat(_toConsumableArray(playerListInLap), _toConsumableArray(playerListInLrf))
-        };
-      }).catch(function (error) {
-        console.log(error.message);
-        window.alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('HttpError_Default'));
         return _playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].createEmptyResult();
       });
     }
@@ -4850,32 +4796,6 @@ function () {
         window.alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('HttpError_Default'));
         return {
           playerList: Object(_playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__["buildLapPlayerList"])(differenceList)
-        };
-      });
-    }
-  }, {
-    key: "_refetchFromLap",
-    value: function _refetchFromLap(lapParam, lrfDataObject, commonService, apiInfo) {
-      var lapDataById = apiInfo.lapDataById;
-      var differenceList = lrfDataObject.differenceList;
-      return commonService.fetchData(lapDataById.type, lapDataById.action, _objectSpread({}, lapParam)).then(function (nextLapResponse) {
-        var lapPlayerList = nextLapResponse.data.PlayerList;
-
-        if (!lapPlayerList || !lapPlayerList.length) {
-          return {
-            playerList: Object(_playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__["buildLrfPlayerList"])(differenceList)
-          };
-        }
-
-        var playerList = _playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].mergePlayerList(differenceList, lapPlayerList);
-        return {
-          playerList: playerList
-        };
-      }).catch(function (error) {
-        console.log(error.message);
-        window.alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('HttpError_Default'));
-        return {
-          playerList: Object(_playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__["buildLrfPlayerList"])(differenceList)
         };
       });
     }
