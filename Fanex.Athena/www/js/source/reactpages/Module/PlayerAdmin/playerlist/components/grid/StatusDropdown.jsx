@@ -39,9 +39,9 @@ const StatusDropdown = (props) => {
         const confirmProps = {
             onClick: () => {
                 if (currentActivePlayer) {
-                    const { custId } = currentActivePlayer;
+                    const { licenseeCustId } = currentActivePlayer;
                     const param = {
-                        custId,
+                        custId: licenseeCustId,
                         status: value
                     }
 
@@ -49,7 +49,9 @@ const StatusDropdown = (props) => {
                     updatePlayerStatus(param).then(response => {
                         const { IsSuccessful } = response.data;
                         if (IsSuccessful) {
-                            const newPlayerList = GridInteractionService.updatePlayerItem(playerList, custId, value, 'Status');
+                            const { custId } = currentActivePlayer;
+                            const playerId = custId === 0 ? licenseeCustId : custId;
+                            const newPlayerList = GridInteractionService.updatePlayerItem(playerList, playerId, value, 'Status');
                             setPlayerList(newPlayerList);
                         }
 

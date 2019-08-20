@@ -15,9 +15,17 @@ export default class GridInteractionService {
         };
     }
     static updatePlayerItem(playerList, custId, value, fieldName) {
-        const itemIndex = playerList.findIndex(x => x.CustId === custId);
-        const newPlayerItem = {...playerList[itemIndex], [fieldName]: value };
-        return updateObjectInArray(playerList, itemIndex, newPlayerItem);
+        let itemIndex = playerList.findIndex(x => x.CustId === custId);
+        if (itemIndex === -1) {
+            itemIndex = playerList.findIndex(x => x.LicenseeCustId === custId);
+        }
+
+        if (itemIndex !== -1) {
+            const newPlayerItem = {...playerList[itemIndex], [fieldName]: value };
+            return updateObjectInArray(playerList, itemIndex, newPlayerItem);
+        }
+
+        return [...playerList];
     }
 
     static updatePlayerWithBaStatus(playerList, custId, isBa, oddsGroup) {

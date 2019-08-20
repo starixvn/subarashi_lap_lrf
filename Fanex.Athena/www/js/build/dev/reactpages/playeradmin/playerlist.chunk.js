@@ -3225,9 +3225,9 @@ var StatusDropdown = function StatusDropdown(props) {
     var confirmProps = {
       onClick: function onClick() {
         if (currentActivePlayer) {
-          var custId = currentActivePlayer.custId;
+          var licenseeCustId = currentActivePlayer.licenseeCustId;
           var param = {
-            custId: custId,
+            custId: licenseeCustId,
             status: value
           };
           toggleLoader(true);
@@ -3235,7 +3235,9 @@ var StatusDropdown = function StatusDropdown(props) {
             var IsSuccessful = response.data.IsSuccessful;
 
             if (IsSuccessful) {
-              var newPlayerList = _lib_gridInteractionService__WEBPACK_IMPORTED_MODULE_5__["default"].updatePlayerItem(playerList, custId, value, 'Status');
+              var custId = currentActivePlayer.custId;
+              var playerId = custId === 0 ? licenseeCustId : custId;
+              var newPlayerList = _lib_gridInteractionService__WEBPACK_IMPORTED_MODULE_5__["default"].updatePlayerItem(playerList, playerId, value, 'Status');
               setPlayerList(newPlayerList);
             }
 
@@ -3999,9 +4001,19 @@ function () {
         return x.CustId === custId;
       });
 
-      var newPlayerItem = _objectSpread({}, playerList[itemIndex], _defineProperty({}, fieldName, value));
+      if (itemIndex === -1) {
+        itemIndex = playerList.findIndex(function (x) {
+          return x.LicenseeCustId === custId;
+        });
+      }
 
-      return Object(_jsroot_lib_dataReducer__WEBPACK_IMPORTED_MODULE_2__["updateObjectInArray"])(playerList, itemIndex, newPlayerItem);
+      if (itemIndex !== -1) {
+        var newPlayerItem = _objectSpread({}, playerList[itemIndex], _defineProperty({}, fieldName, value));
+
+        return Object(_jsroot_lib_dataReducer__WEBPACK_IMPORTED_MODULE_2__["updateObjectInArray"])(playerList, itemIndex, newPlayerItem);
+      }
+
+      return _toConsumableArray(playerList);
     }
   }, {
     key: "updatePlayerWithBaStatus",
