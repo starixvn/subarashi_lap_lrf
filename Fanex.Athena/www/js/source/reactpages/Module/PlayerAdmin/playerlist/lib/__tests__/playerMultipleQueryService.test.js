@@ -153,7 +153,7 @@ describe('PlayerMultipleQueryService', () => {
             PlayerMultipleQueryService[functionName] = originalRefetchFunction;
         }
 
-        it('both side have no differenceList - return merged common list', () => {
+        it('LAP side have no differenceList - return merged common list', () => {
             const param = {};
             const lrfResponse = { data: { DataList: defaultLrfPlayerList, TotalItem: 2 } };
             const lapResponse = { data: { PlayerList: defaultLapPlayerList, TotalItem: 2 } };
@@ -178,53 +178,6 @@ describe('PlayerMultipleQueryService', () => {
             expect(result).toEqual(expectedResult);
         })
 
-        it('data response has different items - should call _refetchFormAllSide with correct parameter', () => {
-            const param = {...defaultParam };
-            const lrfPlayerList = [...defaultLrfPlayerList, ...defaultLrfDifferenceList];
-            const lapPlayerList = [...defaultLapPlayerList, ...defaultLapDifferenceList];
-            const functionName = '_refetchFormAllSide';
-            const checkResult = () => {
-                const expectedLrfParam = {
-                    currency: param.currency,
-                    idList: '4',
-                    specialLevel: param.specialLevel,
-                    pageSize: param.pageSize,
-                    pageIndex: param.pageIndex
-                }
-
-                const expectedLapParam = {
-                    idList: [3]
-                }
-
-                const expectedLrfDataObject = {
-                    commonList: [...defaultLrfPlayerList],
-                    differenceList: [...defaultLrfDifferenceList]
-                }
-
-                const expectedLapDataObject = {
-                    commonList: [...defaultLapPlayerList],
-                    differenceList: [...defaultLapDifferenceList]
-                }
-
-                utils.getCustIdListFromLapData = jest.fn((dataList) => {
-                    if (dataList === expectedLapDataObject.differenceList) {
-                        return defaultLapDifferenceList.map(x => x.IBCCustId);
-                    }
-
-                    return [];
-                })
-                expect(PlayerMultipleQueryService[functionName]).toHaveBeenCalledWith(
-                    expectedLrfParam,
-                    expectedLapParam,
-                    expectedLrfDataObject,
-                    expectedLapDataObject,
-                    defaultCommonService,
-                    apiInfo);
-            }
-
-            runTestCallingCorrectFunction(param, lrfPlayerList, lapPlayerList, functionName, checkResult);
-        })
-
         it('data response from Lap has different items - should call _refetchFromLrf with correct parameter', () => {
             const param = {...defaultParam };
             const lrfPlayerList = [...defaultLrfPlayerList];
@@ -233,7 +186,7 @@ describe('PlayerMultipleQueryService', () => {
             const functionName = '_refetchFromLrf';
             const checkResult = () => {
                 const expectedLrfParam = {
-                    currency: param.currency,
+                    currencyIdList: param.currencyIdList,
                     idList: '4',
                     specialLevel: param.specialLevel,
                     pageSize: param.pageSize,
@@ -261,181 +214,6 @@ describe('PlayerMultipleQueryService', () => {
             }
 
             runTestCallingCorrectFunction(param, lrfPlayerList, lapPlayerList, functionName, checkResult);
-        })
-
-        it('data response from Lrf has different items - should call _refetchFromLap', () => {
-            const param = {...defaultParam };
-            const lrfPlayerList = [...defaultLrfPlayerList, ...defaultLrfDifferenceList];
-            const lapPlayerList = [...defaultLapPlayerList];
-            const functionName = '_refetchFromLap';
-            const checkResult = () => {
-                const expectedLapParam = {
-                    idList: [3]
-                }
-
-                const expectedLrfDataObject = {
-                    commonList: [...defaultLrfPlayerList],
-                    differenceList: [...defaultLrfDifferenceList]
-                }
-
-                expect(PlayerMultipleQueryService[functionName]).toHaveBeenCalledWith(
-                    expectedLapParam,
-                    expectedLrfDataObject,
-                    defaultCommonService,
-                    apiInfo);
-            }
-
-            runTestCallingCorrectFunction(param, lrfPlayerList, lapPlayerList, functionName, checkResult);
-        })
-    })
-
-    describe('_refetchFormAllSide', () => {
-        it('should call fetchMultiple with correct parameter', () => {
-            const { lrfDataById, lapDataById } = apiInfo;
-            const param = {...defaultParam };
-            const lrfParam = {
-                currency: param.currency,
-                idList: '4'
-            }
-            const lapParam = {
-                idList: [3]
-            }
-
-            const lrfPromise = Promise.resolve({ data: 'lrf' });
-            const lapPromise = Promise.resolve({ data: 'lap' });
-            const commonService = {
-                fetchData: jest.fn((type, action, passedParam) => {
-                    const isLrf = type === lrfDataById.type &&
-                        action === lrfDataById.action &&
-                        JSON.stringify(passedParam) === JSON.stringify(lrfParam);
-
-                    const isLap = type === lapDataById.type &&
-                        action === lapDataById.action &&
-                        JSON.stringify(passedParam) === JSON.stringify(lapParam);
-
-                    return isLrf ? lrfPromise : (isLap ? lapPromise : null);
-                }),
-                fetchMultiple: jest.fn(() => ({
-                    catch: () => ({})
-                }))
-            };
-
-            const expectedParam = [lrfPromise, lapPromise];
-            PlayerMultipleQueryService._refetchFormAllSide(lrfParam, lapParam, {}, {}, commonService, apiInfo);
-
-            expect(commonService.fetchMultiple.mock.calls[0][0]).toEqual(expectedParam);
-        })
-
-        it('continue to fetchMultiple with both side - return correct data', () => {
-            let handler = null;
-            const commonService = {
-                fetchData: jest.fn(() => Promise.resolve({})),
-                fetchMultiple: jest.fn((promiseList, callback) => {
-                    handler = callback;
-
-                    return { catch: jest.fn() }
-                })
-            }
-            const nextLrfResponse = {
-                data: {
-                    DataList: [
-                        { CustId: 4, BaStatus: true, OddsGroup: 'C', UserName: 'test4' }
-                    ],
-                    TotalItem: 1
-                }
-            };
-            const nextLapResponse = {
-                data: {
-                    PlayerList: [
-                        { IBCCustId: 3, UserName: 'test3', Status: 2, IP: '3.3.3.3', email: 'def@gmail.com', isOnline: true, RealName: 'test3real', ActStatus: 2, isArchived: false },
-                    ],
-                    TotalItem: 1
-                }
-            };
-
-            const lrfDataObject = {
-                commonList: [],
-                differenceList: [...defaultLrfDifferenceList]
-            }
-            const lapDataObject = {
-                commonList: [],
-                differenceList: [...defaultLapDifferenceList]
-            }
-
-            const expectedPlayerList = [{
-                    CustId: 3,
-                    UserName: 'test3',
-                    Status: 2,
-                    LastLoginIp: '3.3.3.3',
-                    Email: 'def@gmail.com',
-                    IsOnline: true,
-                    RealName: 'test3real',
-                    BaStatus: true,
-                    OddsGroup: 'D',
-                    SystemId: undefined,
-                    Currency: undefined,
-                    CurrentBalance: undefined,
-                    OutstandingBalance: undefined,
-                    SpecialLevel: undefined,
-                    IsDeposit: true,
-                    IsArchived: false
-                },
-                {
-                    CustId: 4,
-                    UserName: 'test4',
-                    Status: 0,
-                    LastLoginIp: '4.4.4.4',
-                    Email: 'ijk@gmail.com',
-                    IsOnline: true,
-                    RealName: 'test4real',
-                    BaStatus: true,
-                    OddsGroup: 'C',
-                    SystemId: undefined,
-                    Currency: undefined,
-                    CurrentBalance: undefined,
-                    OutstandingBalance: undefined,
-                    SpecialLevel: undefined,
-                    IsDeposit: true,
-                    IsArchived: false
-                }
-            ]
-            const expectedResult = {
-                playerList: expectedPlayerList,
-                totalItem: 1
-            }
-
-            PlayerMultipleQueryService._refetchFormAllSide({}, {}, lrfDataObject, lapDataObject, commonService, apiInfo);
-            const result = handler(nextLrfResponse, nextLapResponse);
-
-            expect(result).toEqual(expectedResult);
-        })
-
-        it('throw exception - return empty result', () => {
-            const commonService = {
-                fetchData: jest.fn(() => Promise.resolve({})),
-                fetchMultiple: jest.fn(() => new Promise(() => {
-                    throw new Error('Network Error')
-                }))
-            }
-
-            const lrfDataObject = {
-                commonList: [],
-                differenceList: []
-            }
-            const lapDataObject = {
-                commonList: [],
-                differenceList: []
-            }
-
-            const expectedResult = {
-                playerList: [],
-                totalItem: 0
-            }
-            const promise = PlayerMultipleQueryService._refetchFormAllSide({}, {}, lrfDataObject, lapDataObject, commonService, apiInfo);
-
-            return Promise.resolve(promise).then((result) => {
-                expect(result).toEqual(expectedResult);
-            })
         })
     })
 
@@ -448,10 +226,26 @@ describe('PlayerMultipleQueryService', () => {
             }
 
             const expectedPlayerList = lapDataObject.differenceList.map(item => {
-                const { UserName, Status, RealName, IP, email, isOnline, ActStatus, IBCCustId, isArchived } = item;
+                const {
+                    UserName,
+                    Status,
+                    RealName,
+                    IP,
+                    email,
+                    isOnline,
+                    ActStatus,
+                    IBCCustId,
+                    isArchived,
+                    CustId,
+                    CurrencyCode,
+                    CurrentBalance,
+                    OutBalance,
+                    Currency
+                } = item;
 
                 return {
                     CustId: IBCCustId,
+                    LicenseeCustId: CustId,
                     UserName,
                     Status,
                     RealName,
@@ -459,12 +253,15 @@ describe('PlayerMultipleQueryService', () => {
                     Email: email,
                     IsOnline: isOnline,
                     IsDeposit: ActStatus === playerTypes.deposit && IBCCustId > 0,
-                    IsArchived: isArchived
+                    IsArchived: isArchived,
+                    Currency: CurrencyCode,
+                    CurrentBalance,
+                    OutstandingBalance: OutBalance,
+                    CurrencyId: Currency || 0
                 };
             })
             const expectedResult = {
-                playerList: expectedPlayerList,
-                totalItem: 1
+                playerList: expectedPlayerList
             }
 
             const promise = PlayerMultipleQueryService._refetchFromLrf(param, lapDataObject, commonService, apiInfo);
@@ -513,69 +310,6 @@ describe('PlayerMultipleQueryService', () => {
 
             return Promise.resolve(promise).then((result) => {
                 expect(result.playerList).toBe(expectedPlayerList);
-                expect(result.totalItem).toBe(1);
-
-                PlayerListDataHelper.mergePlayerList = originalMergePlayerList;
-            })
-        })
-    })
-
-    describe('_refetchFromLap', () => {
-        const runTestForReturningEmptyResult = (commonService) => {
-            const lapParam = { idList: [1] };
-            const lrfDataObject = {
-                commonList: [],
-                differenceList: [...defaultLrfDifferenceList]
-            }
-
-            const promise = PlayerMultipleQueryService._refetchFromLap(lapParam, lrfDataObject, commonService, apiInfo);
-
-            return Promise.resolve(promise).then((result) => {
-                expect(result.playerList).toBe(lrfDataObject.differenceList);
-                expect(result.totalItem).toBe(1);
-            })
-        }
-
-        it('get empty list response - should return lrf difference list result', () => {
-            const commonService = {
-                fetchData: jest.fn(() => Promise.resolve({ data: { PlayerList: [], TotalItem: 0 } }))
-            }
-
-            return runTestForReturningEmptyResult(commonService);
-        })
-
-        it('throw exception - should return lrf difference list result', () => {
-            const commonService = {
-                fetchData: jest.fn(() => new Promise(() => {
-                    throw new Error('Network Error')
-                }))
-            }
-
-            return runTestForReturningEmptyResult(commonService);
-        })
-
-        it('has player list response - should call _fetchFromLrf with correct parameter', () => {
-            let originalMergePlayerList = PlayerListDataHelper.mergePlayerList;
-            const expectedResponse = [{ CustId: 1, UserName: 'test' }];
-            const commonService = {
-                fetchData: jest.fn(() => Promise.resolve({ data: { PlayerList: expectedResponse, TotalItem: 1 } }))
-            }
-            const lapParam = { idList: [1] };
-            const lrfDataObject = {
-                commonList: [],
-                differenceList: [...defaultLrfDifferenceList]
-            }
-
-            const expectedPlayerList = [{ UserId: 1 }];
-            PlayerListDataHelper.mergePlayerList = jest.fn((differenceList, lapPlayerList) => {
-                return lapPlayerList === expectedResponse && differenceList === lrfDataObject.differenceList ? expectedPlayerList : null;
-            });
-
-            const promise = PlayerMultipleQueryService._refetchFromLap(lapParam, lrfDataObject, commonService, apiInfo);
-
-            return Promise.resolve(promise).then((result) => {
-                expect(result.playerList).toBe(expectedPlayerList);
-                expect(result.totalItem).toBe(1);
 
                 PlayerListDataHelper.mergePlayerList = originalMergePlayerList;
             })

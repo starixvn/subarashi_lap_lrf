@@ -5,21 +5,13 @@ export default class PlayerListDataHelper {
             return [];
         }
 
-        return lrfList.length > lapList.length ?
-            lrfList.reduce((result, lrfItem) => {
-                const lapItem = lapList.find(x => x.IBCCustId === lrfItem.CustId) || {};
-                const playerItem = this.mergePlayerItem(lrfItem, lapItem);
-                result.push(playerItem);
+        return lapList.reduce((result, lapItem) => {
+            const lrfItem = lrfList.find(x => x.CustId === lapItem.IBCCustId) || {};
+            const playerItem = this.mergePlayerItem(lrfItem, lapItem);
+            result.push(playerItem);
 
-                return result;
-            }, []) :
-            lapList.reduce((result, lapItem) => {
-                const lrfItem = lrfList.find(x => x.CustId === lapItem.IBCCustId) || {};
-                const playerItem = this.mergePlayerItem(lrfItem, lapItem);
-                result.push(playerItem);
-
-                return result;
-            }, []);
+            return result;
+        }, []);
     }
 
     static mergePlayerItem(lrfItem, lapItem) {
