@@ -4141,9 +4141,7 @@ function () {
         pageIndex: 1
       };
       return commonService.fetchData(lrfDataById.type, lrfDataById.action, lrfParam).then(function (lrfResponse) {
-        var _lrfResponse$data = lrfResponse.data,
-            lrfPlayerList = _lrfResponse$data.DataList,
-            TotalItem = _lrfResponse$data.TotalItem;
+        var lrfPlayerList = lrfResponse.data.DataList;
 
         if (!lrfPlayerList || !lrfPlayerList.length) {
           return {
@@ -4153,9 +4151,12 @@ function () {
         }
 
         var playerList = _playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].mergePlayerList(lrfPlayerList, lapPlayerList);
+        var excludedIdCount = lrfPlayerList.filter(function (p) {
+          return !idList.includes(p.CustId);
+        }).length;
         return {
           playerList: playerList,
-          totalItem: Math.max(TotalItem, lapTotalItem)
+          totalItem: lapTotalItem - excludedIdCount
         };
       }).catch(function () {
         return {
@@ -4235,9 +4236,7 @@ function () {
         })
       };
       return commonService.fetchData(lapDataById.type, lapDataById.action, lapParam).then(function (lapResponse) {
-        var _lapResponse$data = lapResponse.data,
-            lapPlayerList = _lapResponse$data.PlayerList,
-            lapTotalItem = _lapResponse$data.TotalItem;
+        var lapPlayerList = lapResponse.data.PlayerList;
 
         if (!lapPlayerList || !lapPlayerList.length) {
           return {
@@ -4249,7 +4248,7 @@ function () {
         var playerList = _playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].mergePlayerList(lrfPlayerList, lapPlayerList);
         return {
           playerList: playerList,
-          totalItem: Math.max(lrfTotalItem, lapTotalItem)
+          totalItem: lrfTotalItem
         };
       }).catch(function () {
         return {
