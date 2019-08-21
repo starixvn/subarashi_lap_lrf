@@ -14,6 +14,10 @@ class BetListDataGrid extends Component {
             this.props.afterLoad && this.props.afterLoad();
         }
     }
+
+    _getResource(key) {
+        return this.props.getResourceFunc ? this.props.getResourceFunc(key) : key;
+    }
     
     _getTotalCellClassName(column, value) {
         if (this.props.getTotalCellClassNameFunc) {
@@ -106,7 +110,7 @@ class BetListDataGrid extends Component {
     _renderNodata() {
         return (
             <div className="result-content">
-                <NoDataTitle />
+                <p className="no-info-row center-align">{this._getResource('NoInfo')}</p>
             </div>
         )
     }
@@ -174,7 +178,8 @@ BetListDataGrid.propTypes = {
     onSort: PropTypes.func,
     onPaging: PropTypes.func,
     afterLoad: PropTypes.func,
-    adjustedHeight: PropTypes.number
+    adjustedHeight: PropTypes.number,
+    getResourceFunc: PropTypes.func
 }
 
 BetListDataGrid.defaultProps = {

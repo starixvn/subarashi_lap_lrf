@@ -111,7 +111,7 @@ export class DataGrid extends Component {
             afterLoad={this.afterLoad}
             onSort={this.onSort}
             adjustedHeight={-20}
-            //getResourceFunc={this.getResource}
+            getResourceFunc={this.getResource}
         />
     }
 }
