@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import AppLayout from '@jsroot/layouts/AppLayout'
 import FormFilter from './FormFilter';
-import DataGrid from './DataGrid';
+import DataContent from './DataContent';
 import Loader from '@jsroot/components/Loader';
 
 export class AppContainer extends Component {
@@ -15,15 +15,15 @@ export class AppContainer extends Component {
             <AppLayout>
                 <Loader isLoading={this.props.isLoading} />
                 <FormFilter />
-                <DataGrid />
+                <DataContent productId={this.props.requestParam.ProductId} />
             </AppLayout>
         );
     }
 }
 
 function mapStateToProps(state) {
-    const { isLoading } = state;
-    return Object.assign({}, { isLoading });
+    const { isLoading, requestParam } = state;
+    return Object.assign({}, { isLoading, requestParam });
 }
 
 export default connect(mapStateToProps)(AppContainer);

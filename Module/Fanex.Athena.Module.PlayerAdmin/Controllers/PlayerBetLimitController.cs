@@ -6,8 +6,10 @@
     using System.Web.Mvc;
     using System.Web.SessionState;
     using Fanex.Athena.Controllers;
+    using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Auth.Enum;
     using Fanex.Athena.Model.Core.Helper;
-    using Fanex.Athena.Module.PlayerAdmin.Services.Interfaces;
+    using Fanex.Athena.Module.PlayerAdmin.Repository.Interfaces;
     using Fanex.Athena.Module.PlayerAdmin.ViewModels;
     using Fanex.Athena.Service.Core.Common.Interfaces;
     using Fanex.Athena.Service.Core.Users.Interfaces;
@@ -17,18 +19,18 @@
     [SessionState(SessionStateBehavior.ReadOnly)]
     [CheckUMFilter]
     //[AuthorizeRestriction(AppMode.Parasitic)]
-    //[FunctionAuthorization(PermissionKeys.PlayerAdminBetList)]
+    //[FunctionAuthorization(PermissionKeys.PlayerAdmin)]
     public class PlayerBetLimitController : CultureBaseController
     {
-        private readonly IPlayerBetLimitService _playerBetLimitService;
+        private readonly IPlayerBetLimitRepository _playerBetLimitRepository;
 
         public PlayerBetLimitController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IPlayerBetLimitService playerBetLimitService)
+            IPlayerBetLimitRepository playerBetLimitRepository)
             : base(languageService, sessionService)
         {
-            _playerBetLimitService = playerBetLimitService;
+            _playerBetLimitRepository = playerBetLimitRepository;
         }
 
         [HttpGet]
@@ -48,7 +50,7 @@
 
         private async Task<IDictionary<int, string>> GetProducts(string siteName)
         {
-            var products = await _playerBetLimitService.GetEnableBetLimitProducts(siteName).ConfigureAwait(false);
+            var products = await _playerBetLimitRepository.GetEnableBetLimitProducts(siteName).ConfigureAwait(false);
 
             return products.ToDictionary(x => x.ProductId, x => ProductHelper.GetProductName(x.ProductCode));
         }

@@ -703,6 +703,7 @@
     <Content Include="www\css\source\reactpages\components\alert\icons.scss" />
     <Content Include="Views\Desktop\Module\PlayerAdmin\PlayerBetLimit\Index.cshtml" />
     <Content Include="www\css\build\dev\reactpages\playeradmin\betlimit.css.map" />
+    <Content Include="www\css\source\components\balloon\balloon.scss" />
     <None Include="www\css\source\reactpages\components\custom3rd\react-toastify.scss" />
     <None Include="www\css\source\pages\betlist\result\result.happy5.scss" />
     <None Include="www\css\source\reactpages\components\alert\icons\error.scss" />
@@ -910,6 +911,7 @@
     <Content Include="www\js\source\reactpages\components\date-range\__tests__\DayCell.test.js" />
     <Content Include="www\js\source\reactpages\components\date-range\__tests__\defaultOptions.test.js" />
     <Content Include="www\js\source\reactpages\components\date-range\__tests__\PredefinedRanges.test.js" />
+    <Content Include="www\js\source\reactpages\components\Balloon.jsx" />
     <Content Include="www\js\source\reactpages\components\popup\constants.js" />
     <Content Include="www\js\source\reactpages\components\radio\__tests__\RadioGroup.test.js" />
     <Content Include="www\js\source\reactpages\components\radio\__tests__\Radio.test.js" />
@@ -953,9 +955,12 @@
     <Content Include="www\js\source\reactpages\lib\__tests__\site.test.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\actions\index.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\AppContainer.jsx" />
-    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\DataGrid.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\FormFilter.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\DataContent.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\grid\SB\SBSettingGrid.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\grid\SB\SBSettingGridRow.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\index.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\lib\constants.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\lib\service.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\reducers\index.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\player-account-info\actions\index.js" />

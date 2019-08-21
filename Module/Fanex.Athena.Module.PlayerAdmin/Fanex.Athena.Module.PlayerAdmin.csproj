@@ -85,14 +85,19 @@
     <Compile Include="Controllers\PlayerBetListController.cs" />
     <Compile Include="Controllers\PlayerStatementController.cs" />
     <Compile Include="Controllers\PlayerBetLimitController.cs" />
+    <Compile Include="Controllers\SportBookBetSettingController.cs" />
     <Compile Include="DTO\PlayerBetLimitProduct.cs" />
+    <Compile Include="DTO\PlayerBetSetting.cs" />
     <Compile Include="MetaModel\PlayerRunningBetListMetalModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\DcsBetSettingRepository.cs" />
+    <Compile Include="Repository\Interfaces\IDcsBetSettingRepository.cs" />
     <Compile Include="Repository\Interfaces\IPlayerBetLimitRepository.cs" />
+    <Compile Include="Repository\Interfaces\ISportBookBetSettingRepository.cs" />
     <Compile Include="Repository\PlayerBetLimitRepository.cs" />
-    <Compile Include="Services\Interfaces\IPlayerBetLimitService.cs" />
-    <Compile Include="Services\PlayerBetLimitService.cs" />
+    <Compile Include="Repository\SportBookBetSettingRepository.cs" />
     <Compile Include="ViewModels\PlayerBetLimitViewModel.cs" />
+    <Compile Include="ViewModels\PlayerBetSettingViewModel.cs" />
     <Compile Include="ViewModels\PlayerRunningBetListViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -132,6 +137,8 @@
       <Name>Fanex.Athena.Service.StatelessCore</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Services\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
