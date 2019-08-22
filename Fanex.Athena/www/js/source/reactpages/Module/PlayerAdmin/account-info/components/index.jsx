@@ -8,12 +8,12 @@ import Store from '../../../../lib/store'
 const defaultState = {...window.initialState};
 const store = Store.createStore(reducer, defaultState);
 
-const App = React.memo(() => {
+const App = () => {
     return (
         <Provider store={store}>
           <AppContainer />
         </Provider>
       );
-})
+}
 
 ReactDOM.render(<App />, document.getElementById("app-container"));

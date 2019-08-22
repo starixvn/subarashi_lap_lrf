@@ -14,12 +14,12 @@ const entry = {
     [`${cssPath}/vendor`]: pathConfig.cssPaths.layout,
     [`${jsPath}/playeradmin/playerlist`]: pathConfig.scriptPaths.playerlist,
     [`${cssPath}/playeradmin/index`]: pathConfig.cssPaths.playeradmin,
-    [`${cssPath}/playeradmin/account-info`]: pathConfig.cssPaths.accountInfo,
-    [`${jsPath}/playeradmin/playeraccountinfo`]: pathConfig.scriptPaths.playeraccountinfo,
     [`${jsPath}/playeradmin/runningbetlist`]: pathConfig.scriptPaths.playerrunningbetlist,
     [`${cssPath}/playeradmin/running-betlist`]: pathConfig.cssPaths.playerrunningbetlist,
-    [`${jsPath}/playeradmin/betlimit`]: pathConfig.scriptPaths.playerbetlimit,
-    [`${cssPath}/playeradmin/betlimit`]: pathConfig.cssPaths.playerbetlimit
+    //[`${jsPath}/playeradmin/betlimit`]: pathConfig.scriptPaths.playerbetlimit,
+    [`${cssPath}/playeradmin/betlimit`]: pathConfig.cssPaths.playerbetlimit,
+    [`${jsPath}/playeradmin/accountinfo`]: pathConfig.scriptPaths.accountinfo,
+    [`${cssPath}/playeradmin/account-info`]: pathConfig.cssPaths.accountInfo,
 }
 
 const devByPageConfig = {

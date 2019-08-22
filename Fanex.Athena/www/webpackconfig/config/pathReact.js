@@ -41,7 +41,7 @@ var scriptPaths = {
     casinoturnover: "./www/js/source/reactpages/pages/casinoturnover/components/index.jsx",
 
     playerlist: "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/components/index.jsx",
-    playeraccountinfo: "./www/js/source/reactpages/Module/PlayerAdmin/player-account-info/components/index.jsx",
+    accountinfo: "./www/js/source/reactpages/Module/PlayerAdmin/account-info/components/index.jsx",
     playerrunningbetlist: "./www/js/source/reactpages/Module/PlayerAdmin/running-betlist/components/index.jsx",
     playerbetlimit: "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/index.jsx"
 };

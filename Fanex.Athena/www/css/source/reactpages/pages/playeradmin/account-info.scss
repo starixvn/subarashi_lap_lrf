@@ -5,14 +5,37 @@
 
 $borderContainer: #d6d6d6;
 
-.header-tab {
-    margin-top: 0;
+.left-side {
+    border: 1px solid $borderContainer;
+    height: 100%;
 
-    .tabs .tab a {
-        font-size: 12px;
+    &-content {
+        padding: 0 10px 10px 10px;
+    }
 
-        &.active {
-            color: #f05b1f;
+    .table {
+        width: 100%;
+
+        tr {
+            height: 28px;
+
+            .first-cell {
+                width: 25%;
+            }
+        }
+    }
+}
+
+.subtab {
+    .header-tab {
+        margin-top: 0;
+
+        .tabs .tab a {
+            font-size: 12px;
+
+            &.active {
+                color: #f05b1f;
+            }
         }
     }
 }
@@ -44,18 +67,19 @@ body {
         margin-left: 5px;
     }
 
-    .account-profile-container,
     .cust-betting-container,
     .fast-cross-link-container {
         border: 1px solid $borderContainer;
     }
 
     .cust-betting-container {
-        min-height: 70%;
+        min-height: 250px;
+        height: 70%;
     }
 
     .fast-cross-link-container {
-        min-height: calc(30% - 10px);
+        min-height: 100px;
+        height: calc(30% - 10px);
         margin-top: 10px;
 
         .divider {
@@ -64,24 +88,6 @@ body {
 
         .link {
             text-decoration: underline;
-        }
-    }
-
-    .account-profile-container {
-        padding: 0 10px 10px 10px;
-
-        .tab-panel {
-            .table {
-                width: 100%;
-
-                tr {
-                    height: 28px;
-
-                    .first-cell {
-                        width: 25%;
-                    }
-                }
-            }
         }
     }
 
