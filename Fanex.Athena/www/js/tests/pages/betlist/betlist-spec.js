@@ -1241,7 +1241,7 @@
                     spyOn($.fn, "height").and.returnValue(700);
                     var transId = "transId", winlostDate = "06/01/2017", custId = "custId", transType = "transType";
                     var url = "CardClubBetList/Detail?transId=" + transId +
-                        "&winlostDate=" + winlostDate +
+                        "&date=" + winlostDate +
                         "&custId=" + custId +
                         "&transType=" + transType +
                         "&BaseCurrency=usd";

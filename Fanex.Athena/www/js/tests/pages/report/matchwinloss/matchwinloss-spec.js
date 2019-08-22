@@ -360,7 +360,7 @@
                 });
 
                 it("data-bettype is 1, IsLive param has empty value - Site.redirect(url) should be called with correct parameter", function () {
-                    var param = "MatchWinlossBetList/MatchBetType?fromdate=05/01/2017&date=05/01/2017" +
+                    var param = "MatchWinlossBetList/MatchBetType?fromdate=05/01/2017&todate=05/01/2017" +
                         "&matchid=2&leagueid=1&raceno=&bettype=1&LiveIndicator=&homeid=10&awayid=11" +
                         "&productcodelist=SB";
                     var expectedParam = transformQueryParamNameToLowerCase(param);
@@ -372,7 +372,7 @@
                 });
 
                 it("data-bettype is 86, IsLive param has value - Site.redirect(url) should be called with correct parameter", function () {
-                    var param = "MatchWinlossBetList/MatchBetType?fromdate=05/01/2017&date=05/01/2017" +
+                    var param = "MatchWinlossBetList/MatchBetType?fromdate=05/01/2017&todate=05/01/2017" +
                         "&matchid=2&leagueid=1&raceno=&bettype=86&LiveIndicator=true&homeid=10&awayid=11" +
                         "&productcodelist=SB";
                     var expectedParam = transformQueryParamNameToLowerCase(param);
@@ -384,7 +384,7 @@
                 });
 
                 it("data-bettype is undefined, bettype will be 0 and IsLive param has empty value - Site.redirect(url) should be called with correct parameter", function () {
-                    var param = "MatchWinlossBetList/MatchBetType?fromdate=05/01/2017&date=05/01/2017" +
+                    var param = "MatchWinlossBetList/MatchBetType?fromdate=05/01/2017&todate=05/01/2017" +
                         "&matchid=2&leagueid=1&raceno=&bettype=0&LiveIndicator=&homeid=10&awayid=11" +
                         "&productcodelist=SB";
                     var expectedParam = transformQueryParamNameToLowerCase(param);
