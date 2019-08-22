@@ -7,6 +7,7 @@ import LangHelper from '@jsroot/lib/langHelper';
 import NoDataTitle from '@jsroot/components/NoDataTitle';
 import SBSettingGrid from './grid/SB/SBSettingGrid';
 import Balloon from '@jsroot/components/Balloon';
+import Alert from '@jsroot/components/sweet-alert';
 
 const Controller = 'SportBookBetSetting';
 
@@ -18,8 +19,10 @@ export class DataContent extends Component {
             data: null,
             editable: false,
             showError: false,
-            errorPosition: { top: 0, left: 0 },
-            errorMsg: ''
+            showAlert: false,
+            errorBalloon: { msg: '', targetTop: 0, targetLeft: 0 },
+            alertOption: {},
+            disableButton: false
         };
 
         this._getData(this.props.requestParam);
@@ -40,12 +43,75 @@ export class DataContent extends Component {
 
     onSubmit = (e) => {
         if (this.grid.current.validate()) {
-            
+            this._showConfirmation();
         }
     }
 
     onCloseError = () => {
         this.setState({ showError: false });
+    }
+
+    onCloseAlert = () => {
+        this.setState({ showAlert: false, disableButton: false });
+    }
+
+    refresh = () => {
+        this.onCloseAlert();
+        this._getData(this.props.requestParam);
+    }
+
+    submit = () => {
+        this.props.toggleLoader(true);
+
+        let param = { ...this.props.requestParam };
+        param.Setting = this.grid.current.value;
+
+        Service.updateData(param, this._showSubmitResult.bind(this), () => this.props.toggleLoader(false), this._handleError.bind(this));
+    }
+
+    showErrorMsg = (invalidInput, msg) => {
+        const pos = invalidInput.getBoundingClientRect();
+
+        this.setState({
+            showError: true,
+            errorBalloon: { msg: msg, targetTop: pos.top, targetLeft: pos.left + pos.width / 2 }
+        }, () => invalidInput.focus());
+    }
+
+    _handleError() {
+        Service.showErrorMsg();
+        this.props.toggleLoader(false);
+    }
+
+    _showConfirmation() {
+        const buttons = [
+            {
+                text: LangHelper.getSingleResource('OK'),
+                onClick: this.submit,
+                className: 'btn btn-apply'
+            }, {
+                text: LangHelper.getSingleResource('Cancel'),
+                onClick: this.onCloseAlert,
+                className: 'btn btn-cancel'
+            }];
+
+        const msg = (<p className="center-align">{Service.getConfirmationMsg(this.props.requestParam.ProductId)}</p>);
+
+        this.setState({
+            showAlert: true,
+            disableButton: true,
+            alertOption: { title: LangHelper.getSingleResource('Confirmation'), children: msg, buttons: buttons, onClose: this.onCloseAlert, height: 130 }
+        });
+    }
+
+    _showSubmitResult(title, msg, isSuccess) {
+        const content = (<p className="center-align">{msg}</p>);
+
+        this.setState({
+            showAlert: true,
+            disableButton: true,
+            alertOption: { title: title, children: content, onClose: this.refresh, icon: isSuccess ? 'success' : 'error', height: 180 }
+        });
     }
 
     _updateState(data, editable) {
@@ -55,26 +121,10 @@ export class DataContent extends Component {
         });
     }
 
-    _handleError() {
-        Service.showErrorMsg();
-        this.props.toggleLoader(false);
-    }
-
-    showErrorMsg = (invalidInput, msg) => {
-        const pos = invalidInput.getBoundingClientRect();
-
-        this.setState({
-            showError: true,
-            errorMsg: msg,
-            errorPosition: { top: pos.top, left: pos.left + pos.width / 2 }
-        }, () => invalidInput.focus());
-    }
-
     _getData(param) {
         this.props.toggleLoader(true);
 
-        const url = Controller + '/GetSetting';
-        Service.getData(url, param, this._updateState.bind(this), null, this._handleError.bind(this));
+        Service.getData(param, this._updateState.bind(this), null, this._handleError.bind(this));
     }
 
     render() {
@@ -84,33 +134,44 @@ export class DataContent extends Component {
             return <NoDataTitle />;
         }
 
-        const { editable, showError, errorPosition, errorMsg } = this.state;
+        const { editable, disableButton, showError, errorBalloon, showAlert, alertOption } = this.state;
         const { productId } = this.props;
 
         return (
             <div className="pa-betlimit">
                 <div className="pa-betlimit-grid">
-                    <SBSettingGrid data={data} ref={this.grid} enableCopy={true} copyId='1' showErrorMsg={this.showErrorMsg} editable={editable}/>
+                    <SBSettingGrid
+                        data={data}
+                        ref={this.grid}
+                        enableCopy={true}
+                        copySportId='1'
+                        showErrorMsg={this.showErrorMsg}
+                        editable={editable} />
                 </div>
                 {
                     editable &&
                     <div className="pa-betlimit-button">
-                        <button type='button' className='btn btn-cancel' onClick={this.onReset}>
+                        <button type='button' className='btn btn-cancel' disabled={disableButton} onClick={this.onReset}>
                             {LangHelper.getSingleResource('Reset')}
                         </button>
-                        <button type='button' className='btn btn-submit' onClick={this.onSubmit} ref={this.submitButton}>
+                        <button type='button' className='btn btn-apply' disabled={disableButton} onClick={this.onSubmit} ref={this.submitButton}>
                             {LangHelper.getSingleResource('Submit')}
                         </button>
                     </div>
                 }
                 <Balloon
-                    msg={errorMsg}
                     width={140}
                     isOpen={showError}
                     onClose={this.onCloseError}
-                    targetTop={errorPosition.top}
-                    targetLeft={errorPosition.left}
-                    excludeOutSideComponents={[this.submitButton.current]} />
+                    excludeOutSideComponents={[this.submitButton.current]}
+                    {...errorBalloon}
+                />
+                <Alert
+                    width={450}
+                    isShow={showAlert}
+                    isHtml={false}
+                    {...alertOption}
+                />
             </div>
         );
     }

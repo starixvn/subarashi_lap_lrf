@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using Fanex.Athena.Module.PlayerAdmin.DTO;
 
-    public class PlayerBetSettingViewModel<T> where T : PlayerBetSetting
+    public class PlayerBetSettingViewModel<T> where T : PlayerBetLimit
     {
         public bool Editable { get; set; }
 

@@ -2,6 +2,8 @@
 @import "../../components/react-grid";
 @import "../../../components/balloon/balloon.scss";
 @import "../../components/forms/checkbox";
+@import "../../components/popup";
+@import "../../components/alert/index";
 
 body {
     background: $white;
@@ -49,4 +51,6 @@ body {
     }
 }
 
-
+.popup-content {
+    padding-top: 10px !important;
+}

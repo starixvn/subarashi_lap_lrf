@@ -16,6 +16,12 @@ export default class SBSettingGrid extends PureComponent {
         };
     }
 
+    componentDidUpdate(prevProps) {
+        if (prevProps.data !== this.props.data) {
+            this.reset();
+        }
+    }
+
     reset() {
         if (this.state.isCopy) {
             this.setState({ isCopy: false });
@@ -43,6 +49,18 @@ export default class SBSettingGrid extends PureComponent {
         }
 
         return true;
+    }
+
+    get value() {
+        let params = [];
+
+        const keys = Object.keys(this.row);
+        for (let i = 0; i < keys.length; i++) {
+            const item = this.row[keys[i]];
+            params.push(item.value);
+        }
+
+        return params;
     }
 
     _showError(invalidInput, msg) {
@@ -75,7 +93,7 @@ export default class SBSettingGrid extends PureComponent {
             const item = data[i];
 
             rows.push(
-                <SBSettingGridRow key={item.Id} data={item} ref={(e) => this.setRef(item.Id, e)} editable={editable} />
+                <SBSettingGridRow key={item.SportId} data={item} ref={(e) => this.setRef(item.SportId, e)} editable={editable} />
             )
         }
 
@@ -83,8 +101,8 @@ export default class SBSettingGrid extends PureComponent {
     }
 
     _copyData() {
-        const copyId = this.props.copyId;
-        const copyRow = this.row[copyId];
+        const copySportId = this.props.copySportId;
+        const copyRow = this.row[copySportId];
 
         if (copyRow) {
             const result = copyRow.validate();
@@ -99,7 +117,7 @@ export default class SBSettingGrid extends PureComponent {
 
             for (let i = 0; i < keys.length; i++) {
                 const id = keys[i];
-                if (id !== copyId) {
+                if (id !== copySportId) {
                     const item = this.row[id];
                     item.updateData(data);
                     item.disable(true);

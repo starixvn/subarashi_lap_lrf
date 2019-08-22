@@ -1,8 +1,12 @@
 ﻿namespace Fanex.Athena.Module.PlayerAdmin.DTO
 {
-    public class PlayerBetSetting
+    public class PlayerBetLimit
     {
-        public string Id { get; set; }
+        public string SportId { get; set; }
+
+        public int BetType { get; set; }
+
+        public string BetSettingType { get; set; }
 
         public decimal MinBet { get; set; }
 

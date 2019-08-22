@@ -1,7 +1,6 @@
 import React, { PureComponent  } from 'react';
 import Service from '../../../lib/service';
 import LangHelper from '@jsroot/lib/langHelper';
-import SettingInput from '../SettingInput';
 import { BetLimitType } from '../../../lib/constants';
 import NumberFormat from '@jsroot/lib/numberFormat';
 
@@ -19,6 +18,8 @@ export default class SBSettingGridRow extends PureComponent {
 
     get value() {
         return {
+            SportId: this.props.data.SportId,
+            BetType: this.props.data.BetType,
             MinBet: this._getValueAsNumber(this.minBet.current.value),
             MaxBet: this._getValueAsNumber(this.maxBet.current.value),
             MaxPerMatch: this._getValueAsNumber(this.maxPerMatch.current.value)
@@ -172,7 +173,7 @@ export default class SBSettingGridRow extends PureComponent {
 
         return (
             <tr>
-                <td>{data.Type}</td>
+                <td>{data.BetSettingType}</td>
                 <td className='pa-betlimit-cell'>
                     {this._buildInput(data.MinBet, this.minBet, 'minBet', editable)}
                     <span>{` >= ${this._formatValue(data.BetValueMin)}`}</span>
