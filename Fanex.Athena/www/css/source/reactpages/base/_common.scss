@@ -12,7 +12,7 @@ body {
     color: $black;
 }
 
-a {
+a, .link {
     color: $colorHyperlink;
 
     &, &:hover {
@@ -22,6 +22,10 @@ a {
     &:hover {
         color: inherit;
     }
+}
+
+.link {
+    cursor: pointer;
 }
 
 ul {

@@ -18,7 +18,7 @@ export const TabContent = (props) => {
         return tabList.map((item, index) => {
             return (
                 <li className="tab" key={item.name}>
-                    <a href="javascript:;" className={item.name === selectedTab ? 'active' : ''} onClick={() => setSelectedTab(item.name)}>
+                    <a className={item.name === selectedTab ? 'link active' : 'link'} onClick={() => setSelectedTab(item.name)}>
                         {item.text}
                     </a>
                 </li>

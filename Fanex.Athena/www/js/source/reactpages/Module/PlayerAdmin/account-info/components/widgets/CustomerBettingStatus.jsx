@@ -1,10 +1,75 @@
-import React, { useState, useEffect } from 'react'
-import { connect } from 'react-redux'
-import { ActionCreators } from '../../actions/index.js'
-import { bindActionCreators } from 'redux'
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { ActionCreators } from '../../actions/index.js';
+import { bindActionCreators } from 'redux';
+
+import { Doughnut } from 'react-chartjs-2';
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+const defaultChartData = {
+    labels: ['Won', 'Lose', 'Draw', 'Cancelled'],
+    datasets: [{
+        data: [getRandomInt(50, 200), getRandomInt(100, 150), getRandomInt(150, 250), getRandomInt(150, 250)],
+        backgroundColor: ['#36A2EB', '#F15D21', '#97A9B3', '#E8AE1B']
+    }]
+}
+
+const legendOpts = {
+    display: true,
+    position: 'bottom',
+    labels: {
+        text: 'aa'
+    }
+};
+
+const option = {
+    onProgress: function () {
+        const chart = this.chart;
+        const ctx = chart.ctx;
+    },
+    animation: {
+        onComplete: function () {
+            const self = this;
+            const chart = this.chart;
+            const ctx = chart.ctx;
+
+            const chartSize = Math.min(chart.width, chart.height);
+            if (chartSize < 100) {
+                return;
+            }
+
+            ctx.textAlign = "center";
+            ctx.fillStyle = "#fff";
+            ctx.font = "1rem sans-serif";
+            ctx.save();
+            ctx.shadowColor = "black";
+            ctx.shadowBlur = 3;
+            const summary = self.data.datasets[0].data.reduce((sum, current) => {
+                return sum += current;
+            }, 0)
+            self.data.datasets.forEach((dataset, datasetIndex) => {
+                const meta = self.getDatasetMeta(datasetIndex);
+
+                meta.data.forEach((element, index) => {
+                    const segmentPercent = dataset.data[index] / summary * 100;
+                    const position = element.tooltipPosition();
+                    if (element._model.circumference > 0) {
+                        const label = segmentPercent < 1 ? "<1" : segmentPercent.toFixed(2);
+                        ctx.fillText(label + '%', position.x, position.y);
+                    }
+                });
+            });
+
+            ctx.restore();
+        }
+    }
+}
 
 export const CustomerBettingStatus = (props) => {
     const [data, setData] = useState(null);
+    const [chartData, setChartData] = useState({ ...defaultChartData });
 
     useEffect(() => {
         const fetchData = () => {
@@ -25,11 +90,34 @@ export const CustomerBettingStatus = (props) => {
         <div className="panel">
             <div className="panel-header">
                 Player Betting Status
+            </div>
+            <div className="row panel-body">
+                <div className="col-12 col-md-7 col-sm-7 col-lg-7 col-xl-7 chart-group">
+                    <Doughnut data={chartData} legend={legendOpts} options={option} />
                 </div>
-            <div className="panel-body">
-                <p>Win: {data.Win}</p>
-                <p>Loss: {data.Loss}</p>
-                <p>Void/Reject/Cancel: {data.VoidRejectCancel}</p>
+                <div className="col-12 col-md-5 col-sm-5 col-lg-5 col-xl-5 statistics-group">
+                    <p>Based on Sportsbook data</p>
+                    <div className="row">
+                        <div className="col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4">Margin:</div>
+                        <div className="col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4">36.84%</div>
+                    </div>
+                    <div className="row">
+                        <div className="col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4">Average bet size:</div>
+                        <div className="col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4">158.33</div>
+                    </div>
+                    <div className="row">
+                        <div className="col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4">Winnings:</div>
+                        <div className="col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4">650.00</div>
+                    </div>
+                    <div className="row">
+                        <div className="col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4">Loss:</div>
+                        <div className="col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4">-300.00</div>
+                    </div>
+                    <div className="row">
+                        <div className="col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4">Net Win Loss:</div>
+                        <div className="col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4">350.00</div>
+                    </div>
+                </div>
             </div>
         </div>
     );
