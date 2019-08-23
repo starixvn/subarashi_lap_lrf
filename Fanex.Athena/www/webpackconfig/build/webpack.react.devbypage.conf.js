@@ -16,7 +16,7 @@ const entry = {
     [`${cssPath}/playeradmin/index`]: pathConfig.cssPaths.playeradmin,
     [`${jsPath}/playeradmin/runningbetlist`]: pathConfig.scriptPaths.playerrunningbetlist,
     [`${cssPath}/playeradmin/running-betlist`]: pathConfig.cssPaths.playerrunningbetlist,
-    //[`${jsPath}/playeradmin/betlimit`]: pathConfig.scriptPaths.playerbetlimit,
+    [`${jsPath}/playeradmin/betlimit`]: pathConfig.scriptPaths.playerbetlimit,
     [`${cssPath}/playeradmin/betlimit`]: pathConfig.cssPaths.playerbetlimit,
     [`${jsPath}/playeradmin/accountinfo`]: pathConfig.scriptPaths.accountinfo,
     [`${cssPath}/playeradmin/account-info`]: pathConfig.cssPaths.accountInfo,

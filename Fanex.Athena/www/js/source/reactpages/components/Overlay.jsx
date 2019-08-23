@@ -36,7 +36,7 @@ export default class Overlay extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (this.props.isOpening !== prevProps.isOpening) {
+        if (this.props.isOpening !== prevProps.isOpening && this.state.isOpening !== this.props.isOpening) {
             const { onOpen } = this.props;
             this.props.isOpening && onOpen && onOpen();
             this.setState({ isOpening: this.props.isOpening });

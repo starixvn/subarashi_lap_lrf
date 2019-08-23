@@ -1,6 +1,7 @@
 ﻿import LangHelper from '@jsroot/lib/langHelper';
 import Site from '@jsroot/lib/site';
 import DataService from '@jsroot/lib/DataService';
+import NumberFormat from '@jsroot/lib/numberFormat';
 import { BetLimitProduct } from './constants';
 
 const Url = {
@@ -16,18 +17,29 @@ export default class Service {
         return LangHelper.getSingleResource('UpdateSportsbookBetSettings');
     }
 
+    static formatValue(value) {
+        const data = NumberFormat.format(value, 2, false);
+
+        return data ? data : "0";
+    }
+
+    static getValueAsNumber(text) {
+        const number = parseFloat(text.replace(/,/g, ''));
+
+        return !isNaN(number) && isFinite(number) ? number : 0;
+    }
+
     static getData(param, processDataFunc, successCallBack, errorHandle) {
-        const url = Url[param.ProductId] + '/GetSetting';
+        const url = Site.resolveClientUrl(Url[param.ProductId] + '/GetSetting');
         DataService.postData(url, param)
             .then(response => {
-                var result = response.data;
+                const { Data, ...setting } = response.data;
 
-                var data = result.Data;
-                if (data && data.length > 0) {
-                    processDataFunc && processDataFunc(data, result.Editable);
+                if (Data && Data.length > 0) {
+                    processDataFunc && processDataFunc(Data, setting);
                 }
                 else {
-                    processDataFunc && processDataFunc([], false);
+                    processDataFunc && processDataFunc([], {});
                 }
 
                 successCallBack && successCallBack();
@@ -38,7 +50,7 @@ export default class Service {
     }
 
     static updateData(param, processDataFunc, successCallBack, errorHandle) {
-        const url = Url[param.ProductId] + '/UpdateSetting';
+        const url = Site.resolveClientUrl(Url[param.ProductId] + '/UpdateSetting');
         DataService.postData(url, param)
             .then(response => {
                 const result = response.data;

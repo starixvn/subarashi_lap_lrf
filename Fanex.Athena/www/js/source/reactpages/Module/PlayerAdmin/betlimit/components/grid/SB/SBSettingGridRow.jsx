@@ -1,8 +1,6 @@
 import React, { PureComponent  } from 'react';
 import Service from '../../../lib/service';
 import LangHelper from '@jsroot/lib/langHelper';
-import { BetLimitType } from '../../../lib/constants';
-import NumberFormat from '@jsroot/lib/numberFormat';
 
 const ClassName = 'input-text right-align';
 const OnChangedClassName = 'input-text right-align input-changed';
@@ -17,13 +15,19 @@ export default class SBSettingGridRow extends PureComponent {
     }
 
     get value() {
-        return {
+        const { MinBet, MaxBet, MaxPerMatch } = this.props.data;
+
+        let value = {
             SportId: this.props.data.SportId,
             BetType: this.props.data.BetType,
-            MinBet: this._getValueAsNumber(this.minBet.current.value),
-            MaxBet: this._getValueAsNumber(this.maxBet.current.value),
-            MaxPerMatch: this._getValueAsNumber(this.maxPerMatch.current.value)
+            MinBet: Service.getValueAsNumber(this.minBet.current.value),
+            MaxBet: Service.getValueAsNumber(this.maxBet.current.value),
+            MaxPerMatch: Service.getValueAsNumber(this.maxPerMatch.current.value),
         };
+
+        value.IsUpdated = value.MinBet !== MinBet && value.MaxBet !== MaxBet && value.MaxPerMatch !== MaxPerMatch;
+
+        return value;
     }
 
     validate() {
@@ -95,16 +99,9 @@ export default class SBSettingGridRow extends PureComponent {
         return null;
     }
 
-    _resetInput(e) {
-        if (e.current.value != e.current.defaultValue) {
-            e.current.value = e.current.defaultValue;
-            e.current.setAttribute('class', ClassName);
-        }
-    }
-
     onBlur = (e) => {
         const element = e.target;
-        this._handleInputChanged(element, this._formatValue(this._getValueAsNumber(element.value)));
+        this._handleInputChanged(element, Service.formatValue(Service.getValueAsNumber(element.value)));
     }
 
     reset() {
@@ -122,9 +119,9 @@ export default class SBSettingGridRow extends PureComponent {
     }
 
     updateData(data) {
-        this._handleInputChanged(this.minBet.current, this._formatValue(data.MinBet));
-        this._handleInputChanged(this.maxBet.current, this._formatValue(data.MaxBet));
-        this._handleInputChanged(this.maxPerMatch.current, this._formatValue(data.MaxPerMatch));
+        this._handleInputChanged(this.minBet.current, Service.formatValue(data.MinBet));
+        this._handleInputChanged(this.maxBet.current, Service.formatValue(data.MaxBet));
+        this._handleInputChanged(this.maxPerMatch.current, Service.formatValue(data.MaxPerMatch));
     }
 
     _handleInputChanged(element, value) {
@@ -141,7 +138,7 @@ export default class SBSettingGridRow extends PureComponent {
     }
 
     _buildInput(value, ref, type, editable) {
-        const formatValue = this._formatValue(value);
+        const formatValue = Service.formatValue(value);
 
         return (
             <input className={ClassName}
@@ -156,18 +153,6 @@ export default class SBSettingGridRow extends PureComponent {
         );
     }
 
-    _formatValue(value) {
-        const data = NumberFormat.format(value, 2, false);
-
-        return data ? data : "0";
-    }
-
-    _getValueAsNumber(text) {
-        const number = parseFloat(text.replace(/,/g, ''));
-
-        return !isNaN(number) && isFinite(number) ? number : 0;
-    }
-
     render() {
         const { data, editable } = this.props;
 
@@ -176,15 +161,15 @@ export default class SBSettingGridRow extends PureComponent {
                 <td>{data.BetSettingType}</td>
                 <td className='pa-betlimit-cell'>
                     {this._buildInput(data.MinBet, this.minBet, 'minBet', editable)}
-                    <span>{` >= ${this._formatValue(data.BetValueMin)}`}</span>
+                    <span>{` >= ${Service.formatValue(data.BetValueMin)}`}</span>
                 </td>
                 <td className='pa-betlimit-cell'>
                     {this._buildInput(data.MaxBet, this.maxBet, 'maxBet', editable)}
-                    <span>{` <= ${this._formatValue(data.BetValueMax)}`}</span>
+                    <span>{` <= ${Service.formatValue(data.BetValueMax)}`}</span>
                 </td>
                 <td className='pa-betlimit-cell'>
                     {this._buildInput(data.MaxPerMatch, this.maxPerMatch, 'maxPerMatch', editable)}
-                    <span>{` <= ${this._formatValue(data.MaxPerMatchMax)}`}</span>
+                    <span>{` <= ${Service.formatValue(data.MaxPerMatchMax)}`}</span>
                 </td>
             </tr>
         );

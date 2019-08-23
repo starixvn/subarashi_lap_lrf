@@ -1,8 +1,6 @@
 import React, { PureComponent  } from 'react';
-import Service from '../../../lib/service';
 import LangHelper from '@jsroot/lib/langHelper';
 import SBSettingGridRow from './SBSettingGridRow';
-import { BetLimitType } from '../../../lib/constants';
 import CheckBox from '@jsroot/components/CheckBox';
 
 export default class SBSettingGrid extends PureComponent {
@@ -130,6 +128,15 @@ export default class SBSettingGrid extends PureComponent {
         return false;
     }
 
+    _removeCopyData() {
+        const keys = Object.keys(this.row);
+
+        for (let i = 0; i < keys.length; i++) {
+            const item = this.row[keys[i]];
+            item.disable(false);
+        }
+    }
+
     onCheck = (checked) => {
         let isCopy = checked;
 
@@ -139,7 +146,7 @@ export default class SBSettingGrid extends PureComponent {
             }
         }
         else {
-            this.reset();
+            this._removeCopyData();
         }
 
         this.setState({ isCopy: isCopy });

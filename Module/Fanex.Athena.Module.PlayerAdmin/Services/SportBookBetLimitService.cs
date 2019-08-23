@@ -46,12 +46,12 @@
 
         public async Task<IResultInfo> UpdateSettingAsync(PlayerBetLimitMetaModel metaModel)
         {
-            if (metaModel.Setting.Any(x => x.SportId == ((int)SportType.Esports).ToString()))
+            if (metaModel.Setting is null || metaModel.Setting.Any(x => x.SportId == ((int)SportType.Esports).ToString()))
             {
                 return new ResultInfo
                 {
                     Code = 1,
-                    Message = "Invalid parameters. E-sport setting is null."
+                    Message = "Invalid parameters. Setting is null."
                 };
             }
 

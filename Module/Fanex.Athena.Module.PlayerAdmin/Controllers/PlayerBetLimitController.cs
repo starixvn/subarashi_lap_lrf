@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using System.Web.SessionState;
+    using System.Web.UI;
     using Fanex.Athena.Controllers;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Auth.Enum;
@@ -35,6 +36,7 @@
 
         [HttpGet]
         [ValidatePermissionOnData]
+        [OutputCache(VaryByParam = "custId", Location = OutputCacheLocation.Server, Duration = 0)]
         public async Task<ViewResult> Index(int custId)
         {
             var productList = await GetProducts(SessionService.LicenseeSession.LicenseeName).ConfigureAwait(false);

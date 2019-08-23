@@ -1,29 +1,23 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import AppLayout from '@jsroot/layouts/AppLayout'
 import FormFilter from './FormFilter';
 import DataContent from './DataContent';
 import Loader from '@jsroot/components/Loader';
 
-export class AppContainer extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        return (
-            <AppLayout>
-                <Loader isLoading={this.props.isLoading} />
-                <FormFilter />
-                <DataContent productId={this.props.requestParam.ProductId} />
-            </AppLayout>
-        );
-    }
+export const AppContainer = (props) => {
+    return (
+        <AppLayout>
+            <Loader isLoading={props.isLoading} />
+            <FormFilter />
+            <DataContent />
+        </AppLayout>
+    );
 }
 
 function mapStateToProps(state) {
-    const { isLoading, requestParam } = state;
-    return Object.assign({}, { isLoading, requestParam });
+    const { isLoading } = state;
+    return Object.assign({}, { isLoading });
 }
 
-export default connect(mapStateToProps)(AppContainer);
+export default connect(mapStateToProps)(React.memo(AppContainer));

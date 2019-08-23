@@ -1,13 +1,16 @@
 ﻿namespace Fanex.Athena.Module.PlayerAdmin.Controllers
 {
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using System.Web.SessionState;
+    using System.Web.UI;
     using Fanex.Athena.Controllers;
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Module.PlayerAdmin.DTO;
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
     using Fanex.Athena.Module.PlayerAdmin.Services.Interfaces;
@@ -26,6 +29,7 @@
     //[FunctionAuthorization(PermissionKeys.PlayerAdmin)]
     //check product belongs to
     [CustomValidateAntiForgery]
+    [OutputCache(NoStore = true, Duration = 0, Location = OutputCacheLocation.None, VaryByParam = "*")]
     public class SportBookBetLimitController : CultureBaseController
     {
         private const string MixedSportId = "99MP";
@@ -55,13 +59,18 @@
         [ValidatePermissionOnData]
         public async Task<JsonResult> GetSetting(int custId)
         {
+            var data = await GetData(custId, AppSettings.IsShowMixedSport).ConfigureAwait(false);
+            var copySportId = ((int)SportType.Soccer).ToString();
+
             var viewModel = new PlayerBetSettingViewModel<PlayerBetLimit>
             {
-                Data = await GetData(custId, AppSettings.IsShowMixedSport).ConfigureAwait(false),
+                Data = data,
                 //Editable = _authService.HasPermissions(
                 //    SessionService.UserSession.PortalFunctionList,
                 //    PermissionKeys.PlayerAdminBetLimit)
-                Editable = true
+                Editable = true,
+                CopySportId = copySportId,
+                EnableCopy = data.Any(x => x.SportId == copySportId)
             };
 
             return Json(viewModel);
@@ -80,7 +89,7 @@
 
             if (result.Code == 0)
             {
-                result.Message = string.Format(ViewResources.UpdateSportsbookBetSettingSuccessMsg, metaModel.UserName);
+                result.Message = string.Format(ViewResources.UpdateSuccess);
             }
 
             return Json(result);

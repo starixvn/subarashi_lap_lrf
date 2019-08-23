@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../actions';
@@ -9,23 +9,21 @@ import SBSettingGrid from './grid/SB/SBSettingGrid';
 import Balloon from '@jsroot/components/Balloon';
 import Alert from '@jsroot/components/sweet-alert';
 
-const Controller = 'SportBookBetSetting';
-
-export class DataContent extends Component {
+export class DataContent extends PureComponent {
     constructor(props) {
         super(props);
 
         this.state = {
             data: null,
-            editable: false,
+            setting: { Editable: false, EnableCopy: false, CopySportId: 0 },
             showError: false,
             showAlert: false,
             errorBalloon: { msg: '', targetTop: 0, targetLeft: 0 },
-            alertOption: {},
+            alertOption: { children: ''},
             disableButton: false
         };
 
-        this._getData(this.props.requestParam);
+        this._getData(this.props.requestParam.CustId);
 
         this.grid = React.createRef();
         this.submitButton = React.createRef();
@@ -114,17 +112,17 @@ export class DataContent extends Component {
         });
     }
 
-    _updateState(data, editable) {
-        this.setState({
+    _updateState(data, setting) {
+        this.setState((state) => ({
             data: data,
-            editable: editable
-        });
+            setting: Object.assign({}, state.setting, setting)
+        }));
     }
 
-    _getData(param) {
+    _getData(custId) {
         this.props.toggleLoader(true);
 
-        Service.getData(param, this._updateState.bind(this), null, this._handleError.bind(this));
+        Service.getData(custId, this._updateState.bind(this), null, this._handleError.bind(this));
     }
 
     render() {
@@ -134,8 +132,7 @@ export class DataContent extends Component {
             return <NoDataTitle />;
         }
 
-        const { editable, disableButton, showError, errorBalloon, showAlert, alertOption } = this.state;
-        const { productId } = this.props;
+        const { setting, disableButton, showError, errorBalloon, showAlert, alertOption } = this.state;
 
         return (
             <div className="pa-betlimit">
@@ -143,13 +140,13 @@ export class DataContent extends Component {
                     <SBSettingGrid
                         data={data}
                         ref={this.grid}
-                        enableCopy={true}
-                        copySportId='1'
+                        enableCopy={setting.EnableCopy}
+                        copySportId={setting.CopySportId}
                         showErrorMsg={this.showErrorMsg}
-                        editable={editable} />
+                        editable={setting.Editable} />
                 </div>
                 {
-                    editable &&
+                    setting.Editable &&
                     <div className="pa-betlimit-button">
                         <button type='button' className='btn btn-cancel' disabled={disableButton} onClick={this.onReset}>
                             {LangHelper.getSingleResource('Reset')}

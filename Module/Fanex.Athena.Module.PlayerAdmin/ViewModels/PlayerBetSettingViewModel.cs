@@ -7,6 +7,10 @@
     {
         public bool Editable { get; set; }
 
+        public bool EnableCopy { get; set; }
+
+        public string CopySportId { get; set; }
+
         public IEnumerable<T> Data { get; set; }
     }
 }

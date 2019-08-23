@@ -1,8 +1,8 @@
-import React, { Component, createRef } from 'react';
+import React, { PureComponent, createRef } from 'react';
 import Overlay from './Overlay';
 import PropTypes from 'prop-types';
 
-export default class Balloon extends Component {
+export default class Balloon extends PureComponent {
     constructor(props) {
         super(props);
 
@@ -11,8 +11,7 @@ export default class Balloon extends Component {
         this.state = {
             top: 0,
             left: 0,
-            updatedPosition: true,
-            isOpening: false
+            updatedPosition: true
         }
     }
 

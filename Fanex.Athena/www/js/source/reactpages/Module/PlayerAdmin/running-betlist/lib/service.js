@@ -53,9 +53,9 @@ export default class Service {
         const url = Site.resolveClientUrl("PlayerBetList/GetRunningBetList");
         DataService.postData(url, param)
             .then(response => {
-                var result = response.data;
+                const result = response.data;
 
-                var data = result.Data;
+                const data = result.Data;
                 if (data && data.length > 0) {
                     processDataFunc && processDataFunc(data, result.Total, result.TotalRows);
                 }
