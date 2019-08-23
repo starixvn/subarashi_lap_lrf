@@ -176,7 +176,6 @@ exports[`PageLayout  show popup 1`] = `
         </div>
         <a
           className="popup-close"
-          href="javascript:;"
           onClick={[Function]}
         >
           <i

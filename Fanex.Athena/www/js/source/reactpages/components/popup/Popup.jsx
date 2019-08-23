@@ -21,7 +21,7 @@ const Popup = (props) => {
                 <div className='flat-popup' style={{ height: height, width: width }}>
                     <div className='popup-title'>
                         <div className="txt-title">{title}</div>
-                        <a className="popup-close" href="javascript:;" onClick={() => {props.onClose && props.onClose()}}><i className="icon-close"></i></a>
+                        <a className="popup-close" onClick={() => {props.onClose && props.onClose()}}><i className="icon-close"></i></a>
                     </div>
                 { content }
                 </div>
