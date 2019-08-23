@@ -953,6 +953,20 @@
     <Content Include="www\js\source\reactpages\lib\__tests__\QueryString.test.js" />
     <Content Include="www\js\source\reactpages\lib\__tests__\report.test.js" />
     <Content Include="www\js\source\reactpages\lib\__tests__\site.test.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\account-info\actions\index.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\account-info\actions\types.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\account-info\components\AppContainer.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\account-info\components\index.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\account-info\components\subtab\AccountProfile.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\account-info\components\subtab\ActivityRecord.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\account-info\components\subtab\BankInformation.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\account-info\components\TabContent.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\account-info\components\WidgetContent.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\account-info\components\widgets\CustomerBettingStatus.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\account-info\components\widgets\FastCrossLink.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\account-info\lib\constants.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\account-info\lib\playerAccountService.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\account-info\reducers\index.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\actions\index.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\AppContainer.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\FormFilter.jsx" />
@@ -963,15 +977,6 @@
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\lib\constants.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\lib\service.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\reducers\index.js" />
-    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\player-account-info\actions\index.js" />
-    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\player-account-info\actions\types.js" />
-    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\player-account-info\components\AccountProfile.jsx" />
-    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\player-account-info\components\AppContainer.jsx" />
-    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\player-account-info\components\CustomerBettingStatus.jsx" />
-    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\player-account-info\components\FastCrossLink.jsx" />
-    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\player-account-info\components\index.jsx" />
-    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\player-account-info\lib\playerAccountService.js" />
-    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\player-account-info\reducers\index.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\actions\commonAction.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\actions\filterHandlerAction.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\actions\gridHandlerAction.js" />
@@ -5656,7 +5661,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Logs\" />
-    <Folder Include="www\js\source\reactpages\Module\PlayerAdmin\pages\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="www\js\source\reactpages\pages\subsidiaryperformance\components\index.jsx" />
