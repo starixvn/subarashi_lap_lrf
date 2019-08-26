@@ -102,7 +102,7 @@ export default class AutoComplete extends Component {
         axios.get(apiUrl, {
             headers: { 'X-Requested-With': 'XMLHttpRequest' }
         }).then((response) => {
-            var data = responseDataField ? response.data[responseDataField] : response.data;
+            const data = responseDataField ? response.data[responseDataField] : response.data;
             this._setStateWithCaching(value, data);
         });
     }
