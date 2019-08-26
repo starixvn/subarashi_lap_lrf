@@ -2,7 +2,7 @@
 {
     public class Player
     {
-        public int CustId { get; set; }
+        public int IbcCustId { get; set; }
 
         public string UserName { get; set; }
 

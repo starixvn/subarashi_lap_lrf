@@ -21,7 +21,7 @@ export const buildLrfPlayerList = (playerList) => {
 
     return playerList.map(item => {
         const {
-            CustId,
+            IbcCustId,
             UserName,
             SystemId,
             Currency,
@@ -34,7 +34,7 @@ export const buildLrfPlayerList = (playerList) => {
         } = item;
 
         return {
-            CustId,
+            CustId: IbcCustId,
             LicenseeCustId: 0,
             UserName,
             SystemId,

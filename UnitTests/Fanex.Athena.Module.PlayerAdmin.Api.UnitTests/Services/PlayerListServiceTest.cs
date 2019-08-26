@@ -108,7 +108,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
             // Assert
             Assert.Multiple(() =>
             {
-                Assert.That(player.CustId, Is.EqualTo(expectedData.CustId));
+                Assert.That(player.IbcCustId, Is.EqualTo(expectedData.CustId));
                 Assert.That(player.Currency, Is.EqualTo(expectedData.Currency));
                 Assert.That(player.SystemId, Is.EqualTo(expectedData.UserName));
                 Assert.That(player.UserName, Is.EqualTo(expectedData.NickName));

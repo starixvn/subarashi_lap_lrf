@@ -24,7 +24,7 @@ export const buildDisplayedColumnObject = (displayedColumnList) => {
 }
 
 export const isDeposit = (ibcCustId, actStatus) => {
-    return actStatus === playerTypes.deposit || ibcCustId > 0;
+    return actStatus === playerTypes.deposit && ibcCustId > 0;
 }
 
 export const getCustIdListFromLapData = (lapPlayerList) => {

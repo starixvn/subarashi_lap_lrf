@@ -91,7 +91,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
                 {
                     playerList.Add(new Player
                     {
-                        CustId = Convert.ToInt32(reader["CustId"]),
+                        IbcCustId = Convert.ToInt32(reader["CustId"]),
                         CurrencyId = Convert.ToByte(reader["ExchangeId"]),
                         Currency = reader["Currency"].ToString(),
                         SystemId = reader["UserName"].ToString(),

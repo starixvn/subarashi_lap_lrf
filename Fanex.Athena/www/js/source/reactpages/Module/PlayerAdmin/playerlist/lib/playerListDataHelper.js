@@ -6,7 +6,7 @@ export default class PlayerListDataHelper {
         }
 
         return lapList.reduce((result, lapItem) => {
-            const lrfItem = lrfList.find(x => x.CustId === lapItem.IBCCustId) || {};
+            const lrfItem = lrfList.find(x => x.IbcCustId === lapItem.IBCCustId) || {};
             const playerItem = this.mergePlayerItem(lrfItem, lapItem);
             result.push(playerItem);
 
@@ -15,17 +15,17 @@ export default class PlayerListDataHelper {
     }
 
     static mergePlayerItem(lrfItem, lapItem) {
-        const { CustId, UserName, SystemId, Currency, CurrentBalance, OutstandingBalance, OddsGroup, BaStatus, SpecialLevel, CurrencyId } = lrfItem;
+        const { OddsGroup, BaStatus, SpecialLevel } = lrfItem;
         const { Status, RealName, IP, email, isOnline, ActStatus, IBCCustId, isArchived, LastTransaction, CurrencyCode, OutBalance, IBCUserName } = lapItem;
 
         return {
-            CustId: CustId || IBCCustId,
-            LicenseeCustId: lapItem.CustId || 0,
-            UserName: UserName || lapItem.UserName,
-            SystemId: SystemId || IBCUserName,
-            Currency: Currency || CurrencyCode,
-            CurrentBalance: CurrentBalance || lapItem.CurrentBalance,
-            OutstandingBalance: OutstandingBalance || OutBalance,
+            CustId: IBCCustId,
+            LicenseeCustId: lapItem.CustId,
+            UserName: lapItem.UserName,
+            SystemId: IBCUserName,
+            Currency: CurrencyCode,
+            CurrentBalance: lapItem.CurrentBalance,
+            OutstandingBalance: OutBalance,
             OddsGroup,
             BaStatus,
             SpecialLevel,
@@ -35,15 +35,15 @@ export default class PlayerListDataHelper {
             LastLoginIp: IP,
             Email: email,
             IsOnline: isOnline,
-            IsDeposit: (ActStatus === playerTypes.deposit && IBCCustId > 0) || CustId > 0,
+            IsDeposit: ActStatus === playerTypes.deposit && IBCCustId > 0,
             IsArchived: !!isArchived,
-            CurrencyId: CurrencyId || lapItem.Currency || 0
+            CurrencyId: lapItem.Currency
         };
     }
 
     static getDataObject(targetList, listToMatch) {
         return targetList.reduce((accumulator, currentItem) => {
-            const isExist = listToMatch.findIndex(p => this._isMatchCustId(currentItem, p)) !== -1;
+            const isExist = listToMatch.findIndex(p => this._isMatchIbcCustId(currentItem, p)) !== -1;
             if (isExist) {
                 accumulator.commonList.push(currentItem);
             } else {
@@ -54,9 +54,9 @@ export default class PlayerListDataHelper {
         }, { commonList: [], differenceList: [] })
     }
 
-    static _isMatchCustId(source, destination) {
-        return ((!!destination.CustId || !!source.IBCCustId) && destination.CustId === source.IBCCustId) ||
-            ((!!destination.IBCCustId || !!source.CustId) && destination.IBCCustId === source.CustId);
+    static _isMatchIbcCustId(source, destination) {
+        return ((!!destination.IbcCustId || !!source.IBCCustId) && destination.IbcCustId === source.IBCCustId) ||
+            ((!!destination.IBCCustId || !!source.IbcCustId) && destination.IBCCustId === source.IbcCustId);
     }
 
     static createEmptyResult() {
