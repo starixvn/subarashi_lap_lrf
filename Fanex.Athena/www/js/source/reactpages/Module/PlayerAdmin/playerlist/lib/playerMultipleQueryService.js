@@ -36,7 +36,8 @@ export default class PlayerMultipleQueryService {
                 const playerList = PlayerListDataHelper.mergePlayerList(lrfDataObject.commonList, lapDataObject.commonList);
                 const idListNotInLrf = getCustIdListFromLapData(lapDataObject.differenceList);
                 if (idListNotInLrf.length === 0) {
-                    const finalPlayerList = playerList.length > 0 ? playerList : buildLapPlayerList(lapDataObject.differenceList)
+                    const nonDepositPlayerList = buildLapPlayerList(lapDataObject.differenceList);
+                    const finalPlayerList = playerList.length > 0 ? playerList.concat(nonDepositPlayerList) : nonDepositPlayerList;
                     return {
                         playerList: finalPlayerList,
                         totalItem: lapTotalItem
