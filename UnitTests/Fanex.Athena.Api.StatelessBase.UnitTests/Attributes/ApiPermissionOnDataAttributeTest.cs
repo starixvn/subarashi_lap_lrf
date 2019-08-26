@@ -1,4 +1,7 @@
-﻿using Autofac;
+﻿using System.Net;
+using System.Net.Http;
+using System.Web.Http.Controllers;
+using Autofac;
 using Fanex.Athena.Api.StatelessBase.Attributes;
 using Fanex.Athena.Model.Auth;
 using Fanex.Athena.Model.Core.MetaModel;
@@ -6,9 +9,6 @@ using Fanex.Athena.Service.StatelessCore.Interfaces;
 using Fanex.Athena.UnitTest.Common.Helpers;
 using NSubstitute;
 using NUnit.Framework;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http.Controllers;
 
 namespace Fanex.Athena.Api.StatelessBase.UnitTests.Attributes
 {
@@ -38,7 +38,8 @@ namespace Fanex.Athena.Api.StatelessBase.UnitTests.Attributes
             const int CustId = 1;
             var attribute = new ApiPermissionOnDataAttribute(isObject: isObject);
             var actionContext = CreateActionContext();
-            var metaModel = new MetalModelCustomerIdentityTest { CustId = CustId };
+            var metaModel = Substitute.For<IMetalModelCustomerIdentity>();
+            metaModel.CustId.Returns(CustId);
             actionContext.ActionArguments.Add("metaModel", metaModel);
             actionContext.ActionArguments.Add("custId", CustId);
             var authCurrencyList = actionContext.ActionArguments["currencyAgentList"] as OneAuthCurrency[];
@@ -63,10 +64,5 @@ namespace Fanex.Athena.Api.StatelessBase.UnitTests.Attributes
 
             return actionContext;
         }
-    }
-
-    public class MetalModelCustomerIdentityTest : IMetalModelCustomerIdentity
-    {
-        public int CustId { get; set; }
     }
 }
