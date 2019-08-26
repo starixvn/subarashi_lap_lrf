@@ -15,7 +15,7 @@
 
 @section globaljscode{
     window.initialState = {
-    requestParam: { CustId: @Model.CustId, ProductId: '@Model.ProductId' }
+    requestParam: { CustId: @Model.CustId, ProductId: @Model.ProductId }
     };
     window._AppData = {
     productList: @Html.Raw(productList.ToJson())

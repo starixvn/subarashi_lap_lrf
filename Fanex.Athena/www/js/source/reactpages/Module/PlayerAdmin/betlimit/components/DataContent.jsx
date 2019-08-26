@@ -5,9 +5,18 @@ import { ActionCreators } from '../actions';
 import Service from '../lib/service';
 import LangHelper from '@jsroot/lib/langHelper';
 import NoDataTitle from '@jsroot/components/NoDataTitle';
+import SettingGrid from './grid/Base/SettingGrid';
 import SBSettingGrid from './grid/SB/SBSettingGrid';
 import Balloon from '@jsroot/components/Balloon';
 import Alert from '@jsroot/components/sweet-alert';
+import { BetLimitProduct } from '../lib/constants';
+
+const DataGrid = {
+    [BetLimitProduct.SB]: SBSettingGrid,
+    [BetLimitProduct.VS]: SettingGrid,
+    [BetLimitProduct.VS2]: SettingGrid,
+    [BetLimitProduct.LT]: SettingGrid
+};
 
 export class DataContent extends PureComponent {
     constructor(props) {
@@ -23,7 +32,7 @@ export class DataContent extends PureComponent {
             disableButton: false
         };
 
-        this._getData(this.props.requestParam.CustId);
+        this._getData(this.props.requestParam);
 
         this.grid = React.createRef();
         this.submitButton = React.createRef();
@@ -32,6 +41,10 @@ export class DataContent extends PureComponent {
     componentDidUpdate(prevProps, prevState) {
         if (prevState.data !== this.state.data) {
             this.props.toggleLoader(false);
+        }
+
+        if (prevProps.requestParam !== this.props.requestParam) {
+            this._getData(this.props.requestParam);
         }
     }
 
@@ -119,10 +132,10 @@ export class DataContent extends PureComponent {
         }));
     }
 
-    _getData(custId) {
+    _getData(param) {
         this.props.toggleLoader(true);
 
-        Service.getData(custId, this._updateState.bind(this), null, this._handleError.bind(this));
+        Service.getData(param, this._updateState.bind(this), null, this._handleError.bind(this));
     }
 
     render() {
@@ -133,17 +146,17 @@ export class DataContent extends PureComponent {
         }
 
         const { setting, disableButton, showError, errorBalloon, showAlert, alertOption } = this.state;
+        const { ProductId } = this.props.requestParam;
+        const Grid = DataGrid[ProductId];
 
         return (
             <div className="pa-betlimit">
                 <div className="pa-betlimit-grid">
-                    <SBSettingGrid
+                    <Grid
                         data={data}
                         ref={this.grid}
-                        enableCopy={setting.EnableCopy}
-                        copySportId={setting.CopySportId}
-                        showErrorMsg={this.showErrorMsg}
-                        editable={setting.Editable} />
+                        setting={setting}
+                        showErrorMsg={this.showErrorMsg} />
                 </div>
                 {
                     setting.Editable &&

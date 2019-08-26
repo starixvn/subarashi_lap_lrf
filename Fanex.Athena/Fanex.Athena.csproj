@@ -971,6 +971,8 @@
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\AppContainer.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\FormFilter.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\DataContent.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\grid\Base\SettingGrid.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\grid\Base\SettingGridRow.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\grid\SB\SBSettingGrid.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\grid\SB\SBSettingGridRow.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\index.jsx" />

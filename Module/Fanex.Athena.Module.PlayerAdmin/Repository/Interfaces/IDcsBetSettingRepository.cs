@@ -10,6 +10,8 @@
     {
         Task<IEnumerable<PlayerBetLimit>> GetSettingAsync(int custId, int productId);
 
-        Task<IResultInfo> UpdateSettingAsync(PlayerBetLimitMetaModel metaModel);
+        Task<IResultInfo> UpdateSettingAsync(PlayerBetLimitUpdateMetaModel metaModel);
+
+        Task<bool> GetStatusAsync(int custId, int productId);
     }
 }

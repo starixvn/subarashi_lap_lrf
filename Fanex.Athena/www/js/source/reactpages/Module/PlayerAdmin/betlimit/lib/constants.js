@@ -1,5 +1,8 @@
 export const BetLimitProduct = {
-    SB: 0
+    SB: 0,
+    VS: 5,
+    VS2: 27,
+    LT: 28
 }
 
 export const BetLimitType = {

@@ -2,10 +2,12 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
     using System.Xml.Linq;
     using Fanex.Athena.Extension.Utility.Interfaces;
+    using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Module.PlayerAdmin.DTO;
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
@@ -20,6 +22,18 @@
         private readonly IDbFactory _db;
 
         private readonly ILogger _logger;
+
+        private const int MemberRoleId = 1;
+
+        private const int ProductStatusSettingType = 4;
+
+        private static readonly IDictionary<int, string[]> ProductSportList = new Dictionary<int, string[]>
+        {
+            [ProductTypes.VirtualSports] = new[] { "180", "181", "182", "183", "184", "185", "186" },
+            [ProductTypes.VirtualSports2] = new[] { "190", "191", "192", "193", "199" },
+            [ProductTypes.Lottery] = new[] { "220" },
+            [ProductTypes.Sportsbooks2] = new[] { "43" }
+        };
 
         public DcsBetSettingRepository(IDbFactory dbFactory, ILogger logger)
         {
@@ -60,7 +74,7 @@
             return dataList;
         }
 
-        public async Task<IResultInfo> UpdateSettingAsync(PlayerBetLimitMetaModel metaModel)
+        public async Task<IResultInfo> UpdateSettingAsync(PlayerBetLimitUpdateMetaModel metaModel)
         {
             const string UspName = "Acc_Dep_CustSetting_BetLimitUpd";
 
@@ -81,26 +95,53 @@
             }
         }
 
-        private static void AddUpdateParameter(IObjectDb db, PlayerBetLimitMetaModel metaModel)
+        public async Task<bool> GetStatusAsync(int custId, int productId)
+        {
+            const string UspName = "Acc_Dep_CustSetting_StatusSettingSelect";
+
+            using (var db = _db.GetObjectDb(UspName))
+            {
+                db.SetParameterValue("CustID", custId);
+                db.SetParameterValue("ProductId", productId);
+                db.SetParameterValue("SettingType", ProductStatusSettingType);
+                db.SetParameterValue("RoleID", MemberRoleId);
+
+                using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))
+                {
+                    if (reader.Read())
+                    {
+                        return reader.ToInt("IsDisabled") == 0;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        private static void AddUpdateParameter(IObjectDb db, PlayerBetLimitUpdateMetaModel metaModel)
         {
             db.SetParameterValue("custid", metaModel.CustId);
             db.SetParameterValue("userid", metaModel.UserId);
             db.SetParameterValue("ip", metaModel.Ip);
-            db.SetParameterValue("betlimit", BuildBetLimitParameter(metaModel.Setting));
+            db.SetParameterValue("betlimit", BuildBetLimitParameter(metaModel.ProductId, metaModel.Setting));
             db.SetParameterValue("errcode", null);
             db.SetParameterValue("errmsg", null);
         }
 
-        private static string BuildBetLimitParameter(IEnumerable<PlayerBetLimitItemMetaModel> setting)
+        private static string BuildBetLimitParameter(int productId, IEnumerable<PlayerBetLimitItemMetaModel> setting)
         {
             const string XMLPattern = "<ROOT>{0}</ROOT>";
             const string XMLElement = "<BetLimit SportType=\"{0}\" BetType=\"{1}\" MinBet=\"{2}\" MaxBet=\"{3}\" MaxPerMatch=\"{4}\" ></BetLimit>";
 
             var xmlElementBuilder = new StringBuilder();
+            var sports = ProductSportList[productId];
 
             foreach (var item in setting)
             {
-                xmlElementBuilder.Append(string.Format(XMLElement, item.SportId, item.BetType, item.MinBet, item.MaxBet, item.MaxPerMatch));
+                if (sports.Contains(item.SportId))
+                {
+                    xmlElementBuilder.Append(string.Format(XMLElement, item.SportId, item.BetType, item.MinBet, item.MaxBet, item.MaxPerMatch));
+                }
             }
 
             return string.Format(XMLPattern, xmlElementBuilder);

@@ -10,6 +10,6 @@
     {
         Task<IEnumerable<PlayerBetLimit>> GetSettingAsync(int custId, bool isShowMixedSport);
 
-        Task<IResultInfo> UpdateSettingAsync(PlayerBetLimitMetaModel metaModel);
+        Task<IResultInfo> UpdateSettingAsync(PlayerBetLimitUpdateMetaModel metaModel);
     }
 }

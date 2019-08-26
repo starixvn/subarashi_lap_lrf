@@ -56,10 +56,10 @@
 
         [HttpPost]
         [AjaxRequest]
-        [ValidatePermissionOnData]
-        public async Task<JsonResult> GetSetting(int custId)
+        [ValidatePermissionOnData(isObject:true)]
+        public async Task<JsonResult> GetSetting(PlayerBetLimitSelectMetaModel metaModel)
         {
-            var data = await GetData(custId, AppSettings.IsShowMixedSport).ConfigureAwait(false);
+            var data = await GetDataAsync(metaModel.CustId, AppSettings.IsShowMixedSport).ConfigureAwait(false);
             var copySportId = ((int)SportType.Soccer).ToString();
 
             var viewModel = new PlayerBetSettingViewModel<PlayerBetLimit>
@@ -80,7 +80,7 @@
         [AjaxRequest]
         [ValidatePermissionOnData(isObject:true)]
         //[FunctionAuthorization(Model.Auth.DataDomain.PermissionKeys.PlayerAdminBetLimit)]
-        public async Task<JsonResult> UpdateSetting(PlayerBetLimitMetaModel metaModel)
+        public async Task<JsonResult> UpdateSetting(PlayerBetLimitUpdateMetaModel metaModel)
         {
             var user = SessionService.UserSession;
             AddUpdateInfo(metaModel, user.UserId, user.Language, SessionService.LicenseeSession.LicenseeName, Request.UserHostAddress);
@@ -95,7 +95,7 @@
             return Json(result);
         }
 
-        private static void AddUpdateInfo(PlayerBetLimitMetaModel metaModel, int userId, string language, string siteName, string ip)
+        private static void AddUpdateInfo(PlayerBetLimitUpdateMetaModel metaModel, int userId, string language, string siteName, string ip)
         {
             metaModel.UserId = userId;
             metaModel.Language = language;
@@ -103,7 +103,7 @@
             metaModel.Ip = ip;
         }
 
-        private async Task<IEnumerable<PlayerBetLimit>> GetData(int custId, bool isShowMixedSport)
+        private async Task<IEnumerable<PlayerBetLimit>> GetDataAsync(int custId, bool isShowMixedSport)
         {
             var data = await _service.GetSettingAsync(custId, isShowMixedSport).ConfigureAwait(false);
 

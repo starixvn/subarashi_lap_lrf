@@ -5,7 +5,10 @@ import NumberFormat from '@jsroot/lib/numberFormat';
 import { BetLimitProduct } from './constants';
 
 const Url = {
-    [BetLimitProduct.SB]: 'SportBookBetLimit'
+    [BetLimitProduct.SB]: 'SportBookBetLimit',
+    [BetLimitProduct.VS]: 'DcsBetLimit',
+    [BetLimitProduct.VS2]: 'DcsBetLimit',
+    [BetLimitProduct.LT]: 'DcsBetLimit'
 };
 
 export default class Service {
@@ -45,6 +48,7 @@ export default class Service {
                 successCallBack && successCallBack();
             })
             .catch(error => {
+                processDataFunc && processDataFunc([], {});
                 errorHandle && errorHandle();
             });
     }

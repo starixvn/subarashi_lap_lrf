@@ -85,10 +85,12 @@
     <Compile Include="Controllers\PlayerBetListController.cs" />
     <Compile Include="Controllers\PlayerStatementController.cs" />
     <Compile Include="Controllers\PlayerBetLimitController.cs" />
+    <Compile Include="Controllers\DcsBetLimitController.cs" />
     <Compile Include="Controllers\SportBookBetLimitController.cs" />
     <Compile Include="DTO\PlayerBetLimitProduct.cs" />
     <Compile Include="DTO\PlayerBetLimit.cs" />
-    <Compile Include="MetaModel\PlayerBetLimitMetaModel.cs" />
+    <Compile Include="MetaModel\PlayerBetLimitSelectMetaModel.cs" />
+    <Compile Include="MetaModel\PlayerBetLimitUpdateMetaModel.cs" />
     <Compile Include="MetaModel\PlayerBetLimitItemMetaModel.cs" />
     <Compile Include="MetaModel\PlayerRunningBetListMetalModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

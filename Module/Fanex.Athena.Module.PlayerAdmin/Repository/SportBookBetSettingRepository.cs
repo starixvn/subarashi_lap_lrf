@@ -18,7 +18,7 @@
     {
         private const string MixedSportId = "99MP";
 
-        private static readonly string[] _sportTypes =
+        private static readonly string[] SportTypes =
         {
             ((int)SportType.Soccer).ToString(),
             ((int)SportType.BasketBall).ToString(),
@@ -60,7 +60,7 @@
         {
             var sportList = new List<PlayerBetLimit>();
 
-            foreach(var type in _sportTypes)
+            foreach(var type in SportTypes)
             {
                 sportList.Add(ReadForSport(reader, type));
             }
@@ -92,7 +92,7 @@
             return sport;
         }
 
-        public async Task<IResultInfo> UpdateSettingAsync(PlayerBetLimitMetaModel metaModel)
+        public async Task<IResultInfo> UpdateSettingAsync(PlayerBetLimitUpdateMetaModel metaModel)
         {
             const string UspName = "Lrf_CustomerUpdMember_All";
 
@@ -113,7 +113,7 @@
             }
         }
 
-        private static void AddUpdateParameter(IObjectDb db, PlayerBetLimitMetaModel metaModel)
+        private static void AddUpdateParameter(IObjectDb db, PlayerBetLimitUpdateMetaModel metaModel)
         {
             db.SetParameterValue("licenseeName", metaModel.SiteName);
             db.SetParameterValue("ip", metaModel.Ip);
@@ -128,7 +128,7 @@
 
         private static void AddUpdateSettingParameter(IObjectDb db, IEnumerable<PlayerBetLimitItemMetaModel> setting)
         {
-            foreach (var type in _sportTypes)
+            foreach (var type in SportTypes)
             {
                 var item = setting.FirstOrDefault(x => x.SportId == type);
                 var sportSuffix = GetSportSuffix(type);
