@@ -45,6 +45,21 @@
         }
 
         [Test]
+        public void ExecuteAuthorizationFilterAsync_UnderMaintenance_UnauthorizeAccess()
+        {
+            // Arrange
+            var attribute = new ApiOneAuthorizationAttribute();
+            _maintenanceService.IsUnderMaintenance().Returns(true);
+            var actionContext = CreateActionContext();
+
+            // Action
+            var result = attribute.ExecuteAuthorizationFilterAsync(actionContext, new CancellationToken(), null);
+
+            // Assert
+            Assert.That(result.Result.StatusCode, Is.EqualTo(HttpStatusCode.Forbidden));
+        }
+
+        [Test]
         public void ExecuteAuthorizationFilterAsync_TokenValueIsNull_UnauthorizeAccess()
         {
             // Arrange
@@ -101,7 +116,35 @@
         }
 
         [Test]
-        public void ExecuteAuthorizationFilterAsync_LicenseeNotNull_UnauthorizeAccess()
+        public void ExecuteAuthorizationFilterAsync_TokenDoesNotHasPermission_UnauthorizeAccess()
+        {
+            // Arrange
+            var attribute = new ApiOneAuthorizationAttribute { AllowFunctionKeys = "func2" };
+            var actionContext = CreateActionContext(hasAuthToken: true);
+            var token = new OneAuthToken
+            {
+                UserSEQ = 1,
+                SiteName = "spondemo",
+                Permissions = new OneAuthPermission[] { new OneAuthPermission { SubFunctionKeys = new[] { "func1" } } }
+            };
+            _oneAuthenticationService.Authenticate(TokenValue).Returns(token);
+
+            var licensee = new Licensee { Id = 999 };
+            _licenseeDataAccess.GetLicenseeByName(token.SiteName).Returns(licensee);
+
+            // Action
+            var result = attribute.ExecuteAuthorizationFilterAsync(actionContext, new CancellationToken(), null);
+
+            // Assert
+            Assert.Multiple(() =>
+            {
+                _logger.Received(1).Info(Arg.Any<string>());
+                Assert.That(result.Result.StatusCode, Is.EqualTo(HttpStatusCode.Forbidden));
+            });
+        }
+
+        [Test]
+        public void ExecuteAuthorizationFilterAsync_LicenseeNotNull_AssignCorrectActionArguments()
         {
             // Arrange
             var attribute = new ApiOneAuthorizationAttribute();
