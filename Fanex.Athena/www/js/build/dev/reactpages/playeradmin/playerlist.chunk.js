@@ -4749,7 +4749,8 @@ function () {
         var idListNotInLrf = Object(_utils__WEBPACK_IMPORTED_MODULE_1__["getCustIdListFromLapData"])(lapDataObject.differenceList);
 
         if (idListNotInLrf.length === 0) {
-          var finalPlayerList = playerList.length > 0 ? playerList : Object(_playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__["buildLapPlayerList"])(lapDataObject.differenceList);
+          var nonDepositPlayerList = Object(_playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__["buildLapPlayerList"])(lapDataObject.differenceList);
+          var finalPlayerList = playerList.length > 0 ? playerList.concat(nonDepositPlayerList) : nonDepositPlayerList;
           return {
             playerList: finalPlayerList,
             totalItem: lapTotalItem
