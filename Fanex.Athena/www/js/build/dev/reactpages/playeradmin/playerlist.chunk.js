@@ -4372,7 +4372,7 @@ var buildLrfPlayerList = function buildLrfPlayerList(playerList) {
   }
 
   return playerList.map(function (item) {
-    var CustId = item.CustId,
+    var IbcCustId = item.IbcCustId,
         UserName = item.UserName,
         SystemId = item.SystemId,
         Currency = item.Currency,
@@ -4383,7 +4383,7 @@ var buildLrfPlayerList = function buildLrfPlayerList(playerList) {
         SpecialLevel = item.SpecialLevel,
         CurrencyId = item.CurrencyId;
     return {
-      CustId: CustId,
+      CustId: IbcCustId,
       LicenseeCustId: 0,
       UserName: UserName,
       SystemId: SystemId,
@@ -4577,7 +4577,7 @@ function () {
 
       return lapList.reduce(function (result, lapItem) {
         var lrfItem = lrfList.find(function (x) {
-          return x.CustId === lapItem.IBCCustId;
+          return x.IbcCustId === lapItem.IBCCustId;
         }) || {};
 
         var playerItem = _this.mergePlayerItem(lrfItem, lapItem);
@@ -4589,16 +4589,9 @@ function () {
   }, {
     key: "mergePlayerItem",
     value: function mergePlayerItem(lrfItem, lapItem) {
-      var CustId = lrfItem.CustId,
-          UserName = lrfItem.UserName,
-          SystemId = lrfItem.SystemId,
-          Currency = lrfItem.Currency,
-          CurrentBalance = lrfItem.CurrentBalance,
-          OutstandingBalance = lrfItem.OutstandingBalance,
-          OddsGroup = lrfItem.OddsGroup,
+      var OddsGroup = lrfItem.OddsGroup,
           BaStatus = lrfItem.BaStatus,
-          SpecialLevel = lrfItem.SpecialLevel,
-          CurrencyId = lrfItem.CurrencyId;
+          SpecialLevel = lrfItem.SpecialLevel;
       var Status = lapItem.Status,
           RealName = lapItem.RealName,
           IP = lapItem.IP,
@@ -4612,13 +4605,13 @@ function () {
           OutBalance = lapItem.OutBalance,
           IBCUserName = lapItem.IBCUserName;
       return {
-        CustId: CustId || IBCCustId,
-        LicenseeCustId: lapItem.CustId || 0,
-        UserName: UserName || lapItem.UserName,
-        SystemId: SystemId || IBCUserName,
-        Currency: Currency || CurrencyCode,
-        CurrentBalance: CurrentBalance || lapItem.CurrentBalance,
-        OutstandingBalance: OutstandingBalance || OutBalance,
+        CustId: IBCCustId,
+        LicenseeCustId: lapItem.CustId,
+        UserName: lapItem.UserName,
+        SystemId: IBCUserName,
+        Currency: CurrencyCode,
+        CurrentBalance: lapItem.CurrentBalance,
+        OutstandingBalance: OutBalance,
         OddsGroup: OddsGroup,
         BaStatus: BaStatus,
         SpecialLevel: SpecialLevel,
@@ -4628,9 +4621,9 @@ function () {
         LastLoginIp: IP,
         Email: email,
         IsOnline: isOnline,
-        IsDeposit: ActStatus === _constants__WEBPACK_IMPORTED_MODULE_0__["playerTypes"].deposit && IBCCustId > 0 || CustId > 0,
+        IsDeposit: ActStatus === _constants__WEBPACK_IMPORTED_MODULE_0__["playerTypes"].deposit && IBCCustId > 0,
         IsArchived: !!isArchived,
-        CurrencyId: CurrencyId || lapItem.Currency || 0
+        CurrencyId: lapItem.Currency
       };
     }
   }, {
@@ -4640,7 +4633,7 @@ function () {
 
       return targetList.reduce(function (accumulator, currentItem) {
         var isExist = listToMatch.findIndex(function (p) {
-          return _this2._isMatchCustId(currentItem, p);
+          return _this2._isMatchIbcCustId(currentItem, p);
         }) !== -1;
 
         if (isExist) {
@@ -4656,9 +4649,9 @@ function () {
       });
     }
   }, {
-    key: "_isMatchCustId",
-    value: function _isMatchCustId(source, destination) {
-      return (!!destination.CustId || !!source.IBCCustId) && destination.CustId === source.IBCCustId || (!!destination.IBCCustId || !!source.CustId) && destination.IBCCustId === source.CustId;
+    key: "_isMatchIbcCustId",
+    value: function _isMatchIbcCustId(source, destination) {
+      return (!!destination.IbcCustId || !!source.IBCCustId) && destination.IbcCustId === source.IBCCustId || (!!destination.IBCCustId || !!source.IbcCustId) && destination.IBCCustId === source.IbcCustId;
     }
   }, {
     key: "createEmptyResult",
@@ -4756,8 +4749,9 @@ function () {
         var idListNotInLrf = Object(_utils__WEBPACK_IMPORTED_MODULE_1__["getCustIdListFromLapData"])(lapDataObject.differenceList);
 
         if (idListNotInLrf.length === 0) {
+          var finalPlayerList = playerList.length > 0 ? playerList : Object(_playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__["buildLapPlayerList"])(lapDataObject.differenceList);
           return {
-            playerList: playerList,
+            playerList: finalPlayerList,
             totalItem: lapTotalItem
           };
         }
@@ -5251,7 +5245,7 @@ var buildDisplayedColumnObject = function buildDisplayedColumnObject(displayedCo
   }, {});
 };
 var isDeposit = function isDeposit(ibcCustId, actStatus) {
-  return actStatus === _lib_constants__WEBPACK_IMPORTED_MODULE_0__["playerTypes"].deposit || ibcCustId > 0;
+  return actStatus === _lib_constants__WEBPACK_IMPORTED_MODULE_0__["playerTypes"].deposit && ibcCustId > 0;
 };
 var getCustIdListFromLapData = function getCustIdListFromLapData(lapPlayerList) {
   return lapPlayerList.reduce(function (result, item) {
@@ -6206,7 +6200,7 @@ function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "_handleClickOutSide", function (event) {
-      var clickOutside = _this.containerElement && !_this.containerElement.contains(event.target);
+      var clickOutside = !(_this.containerElement && _this.containerElement.contains(event.target) || _this.props.excludeOutSideComponents && _this.props.excludeOutSideComponents.indexOf(event.target) >= 0);
 
       if (clickOutside && _this.state.isOpening) {
         _this._close();
@@ -6230,7 +6224,7 @@ function (_Component) {
     value: function componentDidUpdate(prevProps, prevState) {
       var _this2 = this;
 
-      if (this.props.isOpening !== prevProps.isOpening) {
+      if (this.props.isOpening !== prevProps.isOpening && this.state.isOpening !== this.props.isOpening) {
         var onOpen = this.props.onOpen;
         this.props.isOpening && onOpen && onOpen();
         this.setState({
@@ -6294,7 +6288,8 @@ _defineProperty(Overlay, "propTypes", {
   closeOnOutsideClick: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
   isOpening: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
   onOpen: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
-  onClose: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func
+  onClose: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  excludeOutSideComponents: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object)
 });
 
 _defineProperty(Overlay, "defaultProps", {
@@ -7125,7 +7120,6 @@ var Popup = function Popup(props) {
     className: "txt-title"
   }, title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     className: "popup-close",
-    href: "javascript:;",
     onClick: function onClick() {
       props.onClose && props.onClose();
     }
@@ -8110,13 +8104,19 @@ function () {
     key: "format",
     value: function format(value) {
       var digits = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+      var alwaysShowDecimal = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
 
       if (typeof value !== "number" || isNaN(value)) {
         return "";
       }
 
       var roundedValue = this.round(value, digits);
-      return roundedValue.toFixed(digits).replace(/(\d)(?=(\d{3})+(\.|$))/g, "$1,");
+
+      if (alwaysShowDecimal) {
+        return roundedValue.toFixed(digits).replace(/(\d)(?=(\d{3})+(\.|$))/g, "$1,");
+      }
+
+      return roundedValue.toString().replace(/(\d)(?=(\d{3})+(\.|$))/g, "$1,");
     }
   }, {
     key: "round",

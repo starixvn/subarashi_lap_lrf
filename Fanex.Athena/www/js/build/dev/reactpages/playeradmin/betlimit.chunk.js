@@ -187,54 +187,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _jsroot_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/layouts/AppLayout */ "./www/js/source/reactpages/layouts/AppLayout.jsx");
 /* harmony import */ var _FormFilter__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./FormFilter */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/FormFilter.jsx");
-/* harmony import */ var _DataGrid__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./DataGrid */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/DataGrid.jsx");
+/* harmony import */ var _DataContent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./DataContent */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/DataContent.jsx");
 /* harmony import */ var _jsroot_components_Loader__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/components/Loader */ "./www/js/source/reactpages/components/Loader.jsx");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
 
 
 
 
-
-var AppContainer =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(AppContainer, _Component);
-
-  function AppContainer(props) {
-    _classCallCheck(this, AppContainer);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(AppContainer).call(this, props));
-  }
-
-  _createClass(AppContainer, [{
-    key: "render",
-    value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_2__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Loader__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        isLoading: this.props.isLoading
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormFilter__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DataGrid__WEBPACK_IMPORTED_MODULE_4__["default"], null));
-    }
-  }]);
-
-  return AppContainer;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+var AppContainer = function AppContainer(props) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_2__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Loader__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    isLoading: props.isLoading
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormFilter__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DataContent__WEBPACK_IMPORTED_MODULE_4__["default"], null));
+};
 
 function mapStateToProps(state) {
   var isLoading = state.isLoading;
@@ -243,110 +208,38 @@ function mapStateToProps(state) {
   });
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(AppContainer));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(AppContainer)));
 
 /***/ }),
 
-/***/ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/DataGrid.jsx":
-/*!**************************************************************************************!*\
-  !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/DataGrid.jsx ***!
-  \**************************************************************************************/
-/*! exports provided: DataGrid, default */
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/DataContent.jsx":
+/*!*****************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/DataContent.jsx ***!
+  \*****************************************************************************************/
+/*! exports provided: DataContent, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DataGrid", function() { return DataGrid; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DataContent", function() { return DataContent; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/actions/index.js");
 /* harmony import */ var _lib_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../lib/service */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/service.js");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/components/NoDataTitle */ "./www/js/source/reactpages/components/NoDataTitle.jsx");
+/* harmony import */ var _grid_Base_SettingGrid__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./grid/Base/SettingGrid */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/Base/SettingGrid.jsx");
+/* harmony import */ var _grid_SB_SBSettingGrid__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./grid/SB/SBSettingGrid */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/SB/SBSettingGrid.jsx");
+/* harmony import */ var _jsroot_components_Balloon__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @jsroot/components/Balloon */ "./www/js/source/reactpages/components/Balloon.jsx");
+/* harmony import */ var _jsroot_components_sweet_alert__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @jsroot/components/sweet-alert */ "./www/js/source/reactpages/components/sweet-alert/index.jsx");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/constants.js");
+var _DataGrid;
+
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
-
-
-
-var DataGrid =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(DataGrid, _Component);
-
-  function DataGrid(props) {
-    _classCallCheck(this, DataGrid);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(DataGrid).call(this, props));
-  }
-
-  _createClass(DataGrid, [{
-    key: "render",
-    value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
-    }
-  }]);
-
-  return DataGrid;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
-
-function mapDispatchToProps(dispatch) {
-  var toggleLoader = _actions__WEBPACK_IMPORTED_MODULE_3__["ActionCreators"].toggleLoader,
-      setRequestParam = _actions__WEBPACK_IMPORTED_MODULE_3__["ActionCreators"].setRequestParam;
-  return Object(redux__WEBPACK_IMPORTED_MODULE_2__["bindActionCreators"])({
-    toggleLoader: toggleLoader,
-    setRequestParam: setRequestParam
-  }, dispatch);
-}
-
-function mapStateToProps(state) {
-  var requestParam = state.requestParam;
-  return Object.assign({}, {
-    requestParam: requestParam
-  });
-}
-
-;
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(DataGrid));
-
-/***/ }),
-
-/***/ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/FormFilter.jsx":
-/*!****************************************************************************************!*\
-  !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/FormFilter.jsx ***!
-  \****************************************************************************************/
-/*! exports provided: FormFilter, default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FormFilter", function() { return FormFilter; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/index.js */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/actions/index.js");
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
-/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
-/* harmony import */ var react_select__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-select */ "./node_modules/react-select/dist/react-select.es.js");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
@@ -375,60 +268,330 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var FormFilter =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(FormFilter, _Component);
 
-  function FormFilter(props) {
+
+
+
+
+var DataGrid = (_DataGrid = {}, _defineProperty(_DataGrid, _lib_constants__WEBPACK_IMPORTED_MODULE_11__["BetLimitProduct"].SB, _grid_SB_SBSettingGrid__WEBPACK_IMPORTED_MODULE_8__["default"]), _defineProperty(_DataGrid, _lib_constants__WEBPACK_IMPORTED_MODULE_11__["BetLimitProduct"].VS, _grid_Base_SettingGrid__WEBPACK_IMPORTED_MODULE_7__["default"]), _defineProperty(_DataGrid, _lib_constants__WEBPACK_IMPORTED_MODULE_11__["BetLimitProduct"].VS2, _grid_Base_SettingGrid__WEBPACK_IMPORTED_MODULE_7__["default"]), _defineProperty(_DataGrid, _lib_constants__WEBPACK_IMPORTED_MODULE_11__["BetLimitProduct"].LT, _grid_Base_SettingGrid__WEBPACK_IMPORTED_MODULE_7__["default"]), _DataGrid);
+var DataContent =
+/*#__PURE__*/
+function (_PureComponent) {
+  _inherits(DataContent, _PureComponent);
+
+  function DataContent(props) {
     var _this;
 
-    _classCallCheck(this, FormFilter);
+    _classCallCheck(this, DataContent);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(FormFilter).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(DataContent).call(this, props));
 
-    _defineProperty(_assertThisInitialized(_this), "onProductChange", function (item) {
-      var param = _objectSpread({}, _this.props.requestParam);
-
-      param.ProductId = item.value;
-
-      _this.props.setRequestParam(param);
+    _defineProperty(_assertThisInitialized(_this), "onReset", function (e) {
+      _this.grid.current.reset();
     });
 
+    _defineProperty(_assertThisInitialized(_this), "onSubmit", function (e) {
+      if (_this.grid.current.validate()) {
+        _this._showConfirmation();
+      }
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "onCloseError", function () {
+      _this.setState({
+        showError: false
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "onCloseAlert", function () {
+      _this.setState({
+        showAlert: false,
+        disableButton: false
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "refresh", function () {
+      _this.onCloseAlert();
+
+      _this._getData(_this.props.requestParam);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "submit", function () {
+      _this.props.toggleLoader(true);
+
+      var param = _objectSpread({}, _this.props.requestParam);
+
+      param.Setting = _this.grid.current.value;
+      _lib_service__WEBPACK_IMPORTED_MODULE_4__["default"].updateData(param, _this._showSubmitResult.bind(_assertThisInitialized(_this)), function () {
+        return _this.props.toggleLoader(false);
+      }, _this._handleError.bind(_assertThisInitialized(_this)));
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "showErrorMsg", function (invalidInput, msg) {
+      var pos = invalidInput.getBoundingClientRect();
+
+      _this.setState({
+        showError: true,
+        errorBalloon: {
+          msg: msg,
+          targetTop: pos.top,
+          targetLeft: pos.left + pos.width / 2
+        }
+      }, function () {
+        return invalidInput.focus();
+      });
+    });
+
+    _this.state = {
+      data: null,
+      setting: {
+        Editable: false,
+        EnableCopy: false,
+        CopySportId: 0
+      },
+      showError: false,
+      showAlert: false,
+      errorBalloon: {
+        msg: '',
+        targetTop: 0,
+        targetLeft: 0
+      },
+      alertOption: {
+        children: ''
+      },
+      disableButton: false
+    };
+
+    _this._getData(_this.props.requestParam);
+
+    _this.grid = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
+    _this.submitButton = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
     return _this;
   }
 
-  _createClass(FormFilter, [{
-    key: "_renderProductSelectList",
-    value: function _renderProductSelectList() {
-      var selectedProduct = this.props.requestParam.ProductId;
-      var productList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_5__["default"].productList;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_6__["default"], {
-        instanceId: "ddlProduct",
-        value: selectedProduct,
-        options: productList,
-        onChange: this.props.onProductChange
+  _createClass(DataContent, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps, prevState) {
+      if (prevState.data !== this.state.data) {
+        this.props.toggleLoader(false);
+      }
+
+      if (prevProps.requestParam !== this.props.requestParam) {
+        this._getData(this.props.requestParam);
+      }
+    }
+  }, {
+    key: "_handleError",
+    value: function _handleError() {
+      _lib_service__WEBPACK_IMPORTED_MODULE_4__["default"].showErrorMsg();
+      this.props.toggleLoader(false);
+    }
+  }, {
+    key: "_showConfirmation",
+    value: function _showConfirmation() {
+      var buttons = [{
+        text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource('OK'),
+        onClick: this.submit,
+        className: 'btn btn-apply'
+      }, {
+        text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource('Cancel'),
+        onClick: this.onCloseAlert,
+        className: 'btn btn-cancel'
+      }];
+      var msg = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "center-align"
+      }, _lib_service__WEBPACK_IMPORTED_MODULE_4__["default"].getConfirmationMsg(this.props.requestParam.ProductId));
+      this.setState({
+        showAlert: true,
+        disableButton: true,
+        alertOption: {
+          title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource('Confirmation'),
+          children: msg,
+          buttons: buttons,
+          onClose: this.onCloseAlert,
+          height: 130
+        }
       });
+    }
+  }, {
+    key: "_showSubmitResult",
+    value: function _showSubmitResult(title, msg, isSuccess) {
+      var content = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "center-align"
+      }, msg);
+      this.setState({
+        showAlert: true,
+        disableButton: true,
+        alertOption: {
+          title: title,
+          children: content,
+          onClose: this.refresh,
+          icon: isSuccess ? 'success' : 'error',
+          height: 180
+        }
+      });
+    }
+  }, {
+    key: "_updateState",
+    value: function _updateState(data, setting) {
+      this.setState(function (state) {
+        return {
+          data: data,
+          setting: Object.assign({}, state.setting, setting)
+        };
+      });
+    }
+  }, {
+    key: "_getData",
+    value: function _getData(param) {
+      this.props.toggleLoader(true);
+      _lib_service__WEBPACK_IMPORTED_MODULE_4__["default"].getData(param, this._updateState.bind(this), null, this._handleError.bind(this));
     }
   }, {
     key: "render",
     value: function render() {
+      var data = this.state.data;
+
+      if (!data || !data.length) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_6__["default"], null);
+      }
+
+      var _this$state = this.state,
+          setting = _this$state.setting,
+          disableButton = _this$state.disableButton,
+          showError = _this$state.showError,
+          errorBalloon = _this$state.errorBalloon,
+          showAlert = _this$state.showAlert,
+          alertOption = _this$state.alertOption;
+      var ProductId = this.props.requestParam.ProductId;
+      var Grid = DataGrid[ProductId];
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "page-filter"
+        className: "pa-betlimit"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-12 col-md-4 col-sm-12 col-lg-3 col-xl-2"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: "label-text"
-      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource("Product")), this._renderProductSelectList()))));
+        className: "pa-betlimit-grid"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Grid, {
+        data: data,
+        ref: this.grid,
+        setting: setting,
+        showErrorMsg: this.showErrorMsg
+      })), setting.Editable && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "pa-betlimit-button"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "button",
+        className: "btn btn-cancel",
+        disabled: disableButton,
+        onClick: this.onReset
+      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource('Reset')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "button",
+        className: "btn btn-apply",
+        disabled: disableButton,
+        onClick: this.onSubmit,
+        ref: this.submitButton
+      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource('Submit'))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Balloon__WEBPACK_IMPORTED_MODULE_9__["default"], _extends({
+        width: 140,
+        isOpen: showError,
+        onClose: this.onCloseError,
+        excludeOutSideComponents: [this.submitButton.current]
+      }, errorBalloon)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_sweet_alert__WEBPACK_IMPORTED_MODULE_10__["default"], _extends({
+        width: 450,
+        isShow: showAlert,
+        isHtml: false
+      }, alertOption)));
     }
   }]);
 
-  return FormFilter;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+  return DataContent;
+}(react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"]);
+
+function mapDispatchToProps(dispatch) {
+  var toggleLoader = _actions__WEBPACK_IMPORTED_MODULE_3__["ActionCreators"].toggleLoader,
+      setRequestParam = _actions__WEBPACK_IMPORTED_MODULE_3__["ActionCreators"].setRequestParam;
+  return Object(redux__WEBPACK_IMPORTED_MODULE_2__["bindActionCreators"])({
+    toggleLoader: toggleLoader,
+    setRequestParam: setRequestParam
+  }, dispatch);
+}
+
+function mapStateToProps(state) {
+  var requestParam = state.requestParam;
+  return Object.assign({}, {
+    requestParam: requestParam
+  });
+}
+
+;
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(DataContent));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/FormFilter.jsx":
+/*!****************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/FormFilter.jsx ***!
+  \****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/index.js */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/actions/index.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+/* harmony import */ var react_select__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-select */ "./node_modules/react-select/dist/react-select.es.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+
+var FormFilter = function FormFilter(props) {
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(props.requestParam.ProductId),
+      _useState2 = _slicedToArray(_useState, 2),
+      productId = _useState2[0],
+      setProductId = _useState2[1];
+
+  var productList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_5__["default"].productList;
+
+  var onProductChange = function onProductChange(item) {
+    setProductId(item.value);
+
+    if (item.value !== props.requestParam.ProductId) {
+      var param = Object.assign({}, props.requestParam, {
+        ProductId: item.value
+      });
+      props.setRequestParam(param);
+    }
+  };
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "page-filter"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-md-4 col-sm-12 col-lg-3 col-xl-2"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "label-text"
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource("Product")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    instanceId: "ddlProduct",
+    value: productId,
+    options: productList,
+    onChange: onProductChange
+  })))));
+};
 
 function mapDispatchToProps(dispatch) {
   var setRequestParam = _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"].setRequestParam;
@@ -445,7 +608,521 @@ function mapStateToProps(state) {
 }
 
 ;
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(FormFilter));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(FormFilter)));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/Base/SettingGrid.jsx":
+/*!***************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/Base/SettingGrid.jsx ***!
+  \***************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return SettingGrid; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _SettingGridRow__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SettingGridRow */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/Base/SettingGridRow.jsx");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+var SettingGrid =
+/*#__PURE__*/
+function (_PureComponent) {
+  _inherits(SettingGrid, _PureComponent);
+
+  function SettingGrid(props) {
+    var _this;
+
+    _classCallCheck(this, SettingGrid);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(SettingGrid).call(this, props));
+    _this.row = {};
+    _this.state = {
+      data: props.data
+    };
+    return _this;
+  }
+
+  _createClass(SettingGrid, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps, prevState) {
+      if (prevProps.data !== this.props.data) {
+        this.row = {};
+        this.setState({
+          data: this.props.data
+        });
+      }
+
+      if (prevState.data !== this.state.data) {
+        this.reset();
+      }
+    }
+  }, {
+    key: "reset",
+    value: function reset() {
+      var keys = Object.keys(this.row);
+
+      for (var i = 0; i < keys.length; i++) {
+        var item = this.row[keys[i]];
+        item.reset();
+      }
+    }
+  }, {
+    key: "validate",
+    value: function validate() {
+      var keys = Object.keys(this.row);
+
+      for (var i = 0; i < keys.length; i++) {
+        var item = this.row[keys[i]];
+        var result = item.validate();
+
+        if (result !== null) {
+          this._showError(result.input, result.msg);
+
+          return false;
+        }
+      }
+
+      return true;
+    }
+  }, {
+    key: "copyData",
+    value: function copyData() {
+      var copySportId = setting.CopySportId;
+      var copyRow = this.row[copySportId];
+
+      if (copyRow) {
+        var result = copyRow.validate();
+
+        if (result !== null) {
+          showErrorMsg(result.input, result.msg);
+          return false;
+        }
+
+        var keys = Object.keys(this.row);
+        var data = copyRow.value;
+
+        for (var i = 0; i < keys.length; i++) {
+          var id = keys[i];
+
+          if (id !== copySportId) {
+            var item = this.row[id];
+            item.updateData(data);
+            item.disable(true);
+          }
+        }
+
+        return true;
+      }
+
+      return false;
+    }
+  }, {
+    key: "removeCopyData",
+    value: function removeCopyData() {
+      var keys = Object.keys(this.row);
+
+      for (var i = 0; i < keys.length; i++) {
+        var item = this.row[keys[i]];
+        item.disable(false);
+      }
+    }
+  }, {
+    key: "_showError",
+    value: function _showError(invalidInput, msg) {
+      var showErrorMsg = this.props.showErrorMsg;
+      showErrorMsg && showErrorMsg(invalidInput, msg);
+    }
+  }, {
+    key: "setRef",
+    value: function setRef(id, element) {
+      if (element !== null) {
+        this.row[id] = element;
+      }
+    }
+  }, {
+    key: "_buildHeader",
+    value: function _buildHeader() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Sport')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('MinBet')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('MaxBet')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('MaxPerMatch'))));
+    }
+  }, {
+    key: "_buildBody",
+    value: function _buildBody(data, editable) {
+      var _this2 = this;
+
+      var rows = [];
+
+      var _loop = function _loop(i) {
+        var item = data[i];
+        rows.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SettingGridRow__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          key: item.SportId,
+          data: item,
+          ref: function ref(e) {
+            return _this2.setRef(item.SportId, e);
+          },
+          editable: editable
+        }));
+      };
+
+      for (var i = 0; i < data.length; i++) {
+        _loop(i);
+      }
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, rows);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var editable = this.props.setting.editable;
+      var data = this.state.data;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+        className: "table"
+      }, this._buildHeader(), this._buildBody(data, editable)));
+    }
+  }, {
+    key: "value",
+    get: function get() {
+      var params = [];
+      var keys = Object.keys(this.row);
+
+      for (var i = 0; i < keys.length; i++) {
+        var item = this.row[keys[i]];
+        params.push(item.value);
+      }
+
+      return params;
+    }
+  }]);
+
+  return SettingGrid;
+}(react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"]);
+
+
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/Base/SettingGridRow.jsx":
+/*!******************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/Base/SettingGridRow.jsx ***!
+  \******************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return SettingGridRow; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _lib_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../lib/service */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/service.js");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+var ClassName = 'input-text right-align';
+var OnChangedClassName = 'input-text right-align input-changed';
+
+var SettingGridRow =
+/*#__PURE__*/
+function (_PureComponent) {
+  _inherits(SettingGridRow, _PureComponent);
+
+  function SettingGridRow(props) {
+    var _this;
+
+    _classCallCheck(this, SettingGridRow);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(SettingGridRow).call(this, props));
+
+    _defineProperty(_assertThisInitialized(_this), "onBlur", function (e) {
+      var element = e.target;
+
+      _this._handleInputChanged(element, _lib_service__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(_lib_service__WEBPACK_IMPORTED_MODULE_1__["default"].getValueAsNumber(element.value)));
+    });
+
+    _this.minBet = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
+    _this.maxBet = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
+    _this.maxPerMatch = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
+    return _this;
+  }
+
+  _createClass(SettingGridRow, [{
+    key: "validate",
+    value: function validate() {
+      var _this$value = this.value,
+          MinBet = _this$value.MinBet,
+          MaxBet = _this$value.MaxBet,
+          MaxPerMatch = _this$value.MaxPerMatch;
+
+      if (isNaN(MinBet)) {
+        return {
+          input: this.minBet.current,
+          msg: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('IncorrectMinBet')
+        };
+      }
+
+      if (isNaN(MaxBet)) {
+        return {
+          input: this.maxBet.current,
+          msg: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('IncorrectMaxBet')
+        };
+      }
+
+      if (isNaN(MaxPerMatch)) {
+        return {
+          input: this.maxPerMatcth.current,
+          msg: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('IncorrectMaxPerMatch')
+        };
+      }
+
+      var data = this.props.data;
+
+      if (MinBet < data.BetValueMin) {
+        return {
+          input: this.minBet.current,
+          msg: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('MinBetGreaterThanOrEqual') + ' ' + data.BetValueMin
+        };
+      }
+
+      if (MaxBet > data.BetValueMax) {
+        return {
+          input: this.maxBet.current,
+          msg: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('MaxBetLessThanOrEqual') + ' ' + data.BetValueMax
+        };
+      }
+
+      if (MaxPerMatch > data.MaxPerMatchMax) {
+        return {
+          input: this.maxPerMatch.current,
+          msg: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('MaxBetMatchMoreThanOrEqual') + ' ' + data.MaxPerMatchMax
+        };
+      }
+
+      if (MaxPerMatch < data.MaxPerMatchMin) {
+        return {
+          input: this.maxPerMatch.current,
+          msg: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('MaxBetMatchLessThanOrEqual') + ' ' + data.MaxPerMatchMin
+        };
+      }
+
+      if (MinBet > MaxBet) {
+        return {
+          input: this.minBet.current,
+          msg: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('MinBetCanNotGreaterThanMaxBet') + ' ' + MaxBet
+        };
+      }
+
+      if (MaxBet > MaxPerMatch) {
+        return {
+          input: this.maxBet.current,
+          msg: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('MaxBetCanNotGreaterThanMaxPerMatch') + ' ' + MaxPerMatch
+        };
+      }
+
+      return null;
+    }
+  }, {
+    key: "reset",
+    value: function reset() {
+      this._handleInputChanged(this.minBet.current, this.minBet.current.defaultValue);
+
+      this._handleInputChanged(this.maxBet.current, this.maxBet.current.defaultValue);
+
+      this._handleInputChanged(this.maxPerMatch.current, this.maxPerMatch.current.defaultValue);
+
+      this.disable(false);
+    }
+  }, {
+    key: "disable",
+    value: function disable(isDisabled) {
+      this.minBet.current.disabled = isDisabled;
+      this.maxBet.current.disabled = isDisabled;
+      this.maxPerMatch.current.disabled = isDisabled;
+    }
+  }, {
+    key: "updateData",
+    value: function updateData(data) {
+      this._handleInputChanged(this.minBet.current, _lib_service__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(data.MinBet));
+
+      this._handleInputChanged(this.maxBet.current, _lib_service__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(data.MaxBet));
+
+      this._handleInputChanged(this.maxPerMatch.current, _lib_service__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(data.MaxPerMatch));
+    }
+  }, {
+    key: "_handleInputChanged",
+    value: function _handleInputChanged(element, value) {
+      if (element.value !== value) {
+        element.value = value;
+      }
+
+      if (value !== element.defaultValue) {
+        element.setAttribute('class', OnChangedClassName);
+      } else {
+        element.setAttribute('class', ClassName);
+      }
+    }
+  }, {
+    key: "_buildInput",
+    value: function _buildInput(value, ref, type, editable) {
+      var formatValue = _lib_service__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(value);
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: ClassName,
+        type: "text",
+        ref: ref,
+        autoComplete: "off",
+        maxLength: "14",
+        defaultValue: formatValue,
+        onBlur: this.onBlur,
+        disabled: !editable
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          data = _this$props.data,
+          editable = _this$props.editable;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, data.BetSettingType), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        className: "pa-betlimit-cell"
+      }, this._buildInput(data.MinBet, this.minBet, 'minBet', editable), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " >= ".concat(_lib_service__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(data.BetValueMin)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        className: "pa-betlimit-cell"
+      }, this._buildInput(data.MaxBet, this.maxBet, 'maxBet', editable), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " <= ".concat(_lib_service__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(data.BetValueMax)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        className: "pa-betlimit-cell"
+      }, this._buildInput(data.MaxPerMatch, this.maxPerMatch, 'maxPerMatch', editable), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " <= ".concat(_lib_service__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(data.MaxPerMatchMax)))));
+    }
+  }, {
+    key: "value",
+    get: function get() {
+      var _this$props$data = this.props.data,
+          MinBet = _this$props$data.MinBet,
+          MaxBet = _this$props$data.MaxBet,
+          MaxPerMatch = _this$props$data.MaxPerMatch;
+      var value = {
+        SportId: this.props.data.SportId,
+        BetType: this.props.data.BetType,
+        MinBet: _lib_service__WEBPACK_IMPORTED_MODULE_1__["default"].getValueAsNumber(this.minBet.current.value),
+        MaxBet: _lib_service__WEBPACK_IMPORTED_MODULE_1__["default"].getValueAsNumber(this.maxBet.current.value),
+        MaxPerMatch: _lib_service__WEBPACK_IMPORTED_MODULE_1__["default"].getValueAsNumber(this.maxPerMatch.current.value)
+      };
+      value.IsUpdated = value.MinBet !== MinBet && value.MaxBet !== MaxBet && value.MaxPerMatch !== MaxPerMatch;
+      return value;
+    }
+  }]);
+
+  return SettingGridRow;
+}(react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"]);
+
+
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/SB/SBSettingGrid.jsx":
+/*!***************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/SB/SBSettingGrid.jsx ***!
+  \***************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _Base_SettingGrid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Base/SettingGrid */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/Base/SettingGrid.jsx");
+/* harmony import */ var _jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/components/CheckBox */ "./www/js/source/reactpages/components/CheckBox.jsx");
+var _this = undefined;
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+var SBSettingGrid = Object(react__WEBPACK_IMPORTED_MODULE_0__["forwardRef"])(function (props, grid) {
+  var _this$props = _this.props,
+      data = _this$props.data,
+      setting = _this$props.setting,
+      showErrorMsg = _this$props.showErrorMsg;
+
+  var _useState$false = _slicedToArray(react__WEBPACK_IMPORTED_MODULE_0__["useState"][false], 2),
+      isCopy = _useState$false[0],
+      setIsCopy = _useState$false[1];
+
+  var onCheck = function onCheck(checked) {
+    var isCopy = checked;
+
+    if (checked) {
+      if (!grid.copyData()) {
+        isCopy = false;
+      }
+    } else {
+      grid.removeCopyData();
+    }
+
+    setIsCopy(isCopy);
+  };
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, setting.EnableCopy && setting.Editable && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    id: "IsCopy",
+    checked: isCopy,
+    onChange: onCheck,
+    label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("CopyBetSettingFromSoccer")
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Base_SettingGrid__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    data: data,
+    ref: grid,
+    showErrorMsg: showErrorMsg,
+    setting: setting
+  }));
+});
+/* harmony default export */ __webpack_exports__["default"] = (SBSettingGrid);
 
 /***/ }),
 
@@ -485,6 +1162,31 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_
 
 /***/ }),
 
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/constants.js":
+/*!*******************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/constants.js ***!
+  \*******************************************************************************/
+/*! exports provided: BetLimitProduct, BetLimitType */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BetLimitProduct", function() { return BetLimitProduct; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BetLimitType", function() { return BetLimitType; });
+var BetLimitProduct = {
+  SB: 0,
+  VS: 5,
+  VS2: 27,
+  LT: 28
+};
+var BetLimitType = {
+  MinBet: 'minBet',
+  MaxBet: 'maxBet',
+  MaxPerMatch: 'maxPerMatch'
+};
+
+/***/ }),
+
 /***/ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/service.js":
 /*!*****************************************************************************!*\
   !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/service.js ***!
@@ -495,11 +1197,100 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Service; });
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
+/* harmony import */ var _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/DataService */ "./www/js/source/reactpages/lib/DataService.js");
+/* harmony import */ var _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/numberFormat */ "./www/js/source/reactpages/lib/numberFormat.js");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./constants */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/constants.js");
+var _Url;
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Service = function Service() {
-  _classCallCheck(this, Service);
-};
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+var Url = (_Url = {}, _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_4__["BetLimitProduct"].SB, 'SportBookBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_4__["BetLimitProduct"].VS, 'DcsBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_4__["BetLimitProduct"].VS2, 'DcsBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_4__["BetLimitProduct"].LT, 'DcsBetLimit'), _Url);
+
+var Service =
+/*#__PURE__*/
+function () {
+  function Service() {
+    _classCallCheck(this, Service);
+  }
+
+  _createClass(Service, null, [{
+    key: "showErrorMsg",
+    value: function showErrorMsg() {
+      alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('ErrorProcessingMsg'));
+    }
+  }, {
+    key: "getConfirmationMsg",
+    value: function getConfirmationMsg(productId) {
+      return _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('UpdateSportsbookBetSettings');
+    }
+  }, {
+    key: "formatValue",
+    value: function formatValue(value) {
+      var data = _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_3__["default"].format(value, 2, false);
+      return data ? data : "0";
+    }
+  }, {
+    key: "getValueAsNumber",
+    value: function getValueAsNumber(text) {
+      var number = parseFloat(text.replace(/,/g, ''));
+      return !isNaN(number) && isFinite(number) ? number : 0;
+    }
+  }, {
+    key: "getData",
+    value: function getData(param, processDataFunc, successCallBack, errorHandle) {
+      var url = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl(Url[param.ProductId] + '/GetSetting');
+      _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_2__["default"].postData(url, param).then(function (response) {
+        var _response$data = response.data,
+            Data = _response$data.Data,
+            setting = _objectWithoutProperties(_response$data, ["Data"]);
+
+        if (Data && Data.length > 0) {
+          processDataFunc && processDataFunc(Data, setting);
+        } else {
+          processDataFunc && processDataFunc([], {});
+        }
+
+        successCallBack && successCallBack();
+      }).catch(function (error) {
+        processDataFunc && processDataFunc([], {});
+        errorHandle && errorHandle();
+      });
+    }
+  }, {
+    key: "updateData",
+    value: function updateData(param, processDataFunc, successCallBack, errorHandle) {
+      var url = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl(Url[param.ProductId] + '/UpdateSetting');
+      _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_2__["default"].postData(url, param).then(function (response) {
+        var result = response.data;
+        var isSuccess = Number(result.Code) === 0;
+        var title = isSuccess ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('MessageSuccess') : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Fail');
+        processDataFunc && processDataFunc(title, result.Message, isSuccess);
+        successCallBack && successCallBack();
+      }).catch(function (error) {
+        errorHandle && errorHandle();
+      });
+    }
+  }]);
+
+  return Service;
+}();
 
 
 
@@ -636,6 +1427,205 @@ var SET_REPORT_TITLE = "SET_REPORT_TITLE";
 
 /***/ }),
 
+/***/ "./www/js/source/reactpages/components/Balloon.jsx":
+/*!*********************************************************!*\
+  !*** ./www/js/source/reactpages/components/Balloon.jsx ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Balloon; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Overlay__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Overlay */ "./www/js/source/reactpages/components/Overlay.jsx");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+var Balloon =
+/*#__PURE__*/
+function (_PureComponent) {
+  _inherits(Balloon, _PureComponent);
+
+  function Balloon(props) {
+    var _this;
+
+    _classCallCheck(this, Balloon);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Balloon).call(this, props));
+    _this.box = Object(react__WEBPACK_IMPORTED_MODULE_0__["createRef"])();
+    _this.state = {
+      top: 0,
+      left: 0,
+      updatedPosition: true
+    };
+    return _this;
+  }
+
+  _createClass(Balloon, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      if (!this.state.updatedPosition) {
+        var _this$props = this.props,
+            targetTop = _this$props.targetTop,
+            targetLeft = _this$props.targetLeft,
+            width = _this$props.width;
+        this.setState({
+          left: targetLeft - width / 2,
+          top: targetTop - (this.box.current ? this.box.current.clientHeight : 0) - 20,
+          updatedPosition: true
+        });
+      }
+
+      if (!prevProps.isOpen && this.props.isOpen && (prevProps.targetTop !== this.props.targetTop || prevProps.targetLeft !== this.props.targetLeft || prevProps.msg !== this.props.msg)) {
+        this.setState({
+          updatedPosition: false
+        });
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props2 = this.props,
+          msg = _this$props2.msg,
+          targetTop = _this$props2.targetTop,
+          targetLeft = _this$props2.targetLeft,
+          width = _this$props2.width,
+          isOpen = _this$props2.isOpen,
+          onClose = _this$props2.onClose,
+          excludeOutSideComponents = _this$props2.excludeOutSideComponents;
+      var _this$state = this.state,
+          top = _this$state.top,
+          left = _this$state.left;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Overlay__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        isOpening: isOpen,
+        onClose: onClose,
+        excludeOutSideComponents: excludeOutSideComponents
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "balloon",
+        style: {
+          top: top,
+          left: left
+        },
+        ref: this.box
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "balloon-msg",
+        style: {
+          width: width
+        }
+      }, msg), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "balloon-arrow-border",
+        style: {
+          left: (width - 10) / 2
+        }
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "balloon-arrow",
+        style: {
+          left: (width - 10) / 2
+        }
+      })));
+    }
+  }]);
+
+  return Balloon;
+}(react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"]);
+
+_defineProperty(Balloon, "propTypes", {
+  isOpen: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool,
+  onClose: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
+  msg: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
+  targetTop: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number,
+  targetLeft: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number,
+  width: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number,
+  excludeOutSideComponents: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.object)
+});
+
+_defineProperty(Balloon, "defaultProps", {
+  isOpen: false,
+  msg: '',
+  targetTop: 0,
+  targetLeft: 0,
+  width: 0
+});
+
+
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/components/CheckBox.jsx":
+/*!**********************************************************!*\
+  !*** ./www/js/source/reactpages/components/CheckBox.jsx ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+var CheckBox = function CheckBox(props) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "checkbox-group"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "checkbox",
+    className: "checkbox",
+    id: props.id,
+    checked: props.checked,
+    disabled: props.disabled,
+    onChange: function onChange() {
+      return props.onChange(!props.checked);
+    }
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    htmlFor: props.id
+  }, props.label));
+};
+
+CheckBox.propTypes = {
+  id: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string.isRequired,
+  label: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
+  checked: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  disabled: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  onChange: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func
+};
+CheckBox.defaultProps = {
+  label: '',
+  checked: true,
+  disabled: false,
+  onChange: function onChange() {}
+};
+/* harmony default export */ __webpack_exports__["default"] = (CheckBox);
+
+/***/ }),
+
 /***/ "./www/js/source/reactpages/components/Loader.jsx":
 /*!********************************************************!*\
   !*** ./www/js/source/reactpages/components/Loader.jsx ***!
@@ -664,6 +1654,479 @@ var Loader = function Loader(_ref) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Loader);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/components/NoDataTitle.jsx":
+/*!*************************************************************!*\
+  !*** ./www/js/source/reactpages/components/NoDataTitle.jsx ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+
+
+
+var NoDataTitle = function NoDataTitle() {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "no-info-row center-align"
+  }, _lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("NoInfo"));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (NoDataTitle);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/components/Overlay.jsx":
+/*!*********************************************************!*\
+  !*** ./www/js/source/reactpages/components/Overlay.jsx ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Overlay; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+var wrapperClasses = {
+  OVERLAY: "overlay",
+  OVERLAY_OPEN: "overlay-open"
+};
+
+var Overlay =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(Overlay, _Component);
+
+  function Overlay(props) {
+    var _this;
+
+    _classCallCheck(this, Overlay);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Overlay).call(this, props));
+
+    _defineProperty(_assertThisInitialized(_this), "_unRegisterEvents", function () {
+      var closeOnOutsideClick = _this.props.closeOnOutsideClick;
+
+      if (closeOnOutsideClick) {
+        document.removeEventListener('click', _this._handleClickOutSide);
+      }
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "_handleClickOutSide", function (event) {
+      var clickOutside = !(_this.containerElement && _this.containerElement.contains(event.target) || _this.props.excludeOutSideComponents && _this.props.excludeOutSideComponents.indexOf(event.target) >= 0);
+
+      if (clickOutside && _this.state.isOpening) {
+        _this._close();
+      }
+    });
+
+    _this.containerElement = null;
+    _this.refHandlers = {
+      container: function container(ref) {
+        _this.containerElement = ref;
+      }
+    };
+    _this.state = {
+      isOpening: _this.props.isOpening
+    };
+    return _this;
+  }
+
+  _createClass(Overlay, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps, prevState) {
+      var _this2 = this;
+
+      if (this.props.isOpening !== prevProps.isOpening && this.state.isOpening !== this.props.isOpening) {
+        var onOpen = this.props.onOpen;
+        this.props.isOpening && onOpen && onOpen();
+        this.setState({
+          isOpening: this.props.isOpening
+        });
+        window.setTimeout(function () {
+          if (_this2.props.isOpening) {
+            _this2._registerEvents();
+          } else {
+            _this2._unRegisterEvents();
+          }
+        }, 0);
+      }
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      this._unRegisterEvents();
+    }
+  }, {
+    key: "_registerEvents",
+    value: function _registerEvents() {
+      var closeOnOutsideClick = this.props.closeOnOutsideClick;
+
+      if (closeOnOutsideClick) {
+        document.addEventListener('click', this._handleClickOutSide);
+      }
+    }
+  }, {
+    key: "_close",
+    value: function _close() {
+      var onClose = this.props.onClose;
+      this.setState({
+        isOpening: false
+      }, function () {
+        return onClose && onClose();
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          className = _this$props.className,
+          children = _this$props.children;
+      var mergedClassName = classnames__WEBPACK_IMPORTED_MODULE_2___default()(wrapperClasses.OVERLAY, _defineProperty({}, wrapperClasses.OVERLAY_OPEN, this.state.isOpening), className);
+      var style = {
+        display: this.state.isOpening ? "block" : "none"
+      };
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: mergedClassName,
+        style: style,
+        ref: this.refHandlers.container
+      }, children);
+    }
+  }]);
+
+  return Overlay;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+_defineProperty(Overlay, "propTypes", {
+  closeOnOutsideClick: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  isOpening: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  onOpen: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  onClose: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  excludeOutSideComponents: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object)
+});
+
+_defineProperty(Overlay, "defaultProps", {
+  closeOnOutsideClick: true,
+  isOpening: false
+});
+
+
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/components/popup/Popup.jsx":
+/*!*************************************************************!*\
+  !*** ./www/js/source/reactpages/components/popup/Popup.jsx ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./constants */ "./www/js/source/reactpages/components/popup/constants.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+
+var Popup = function Popup(props) {
+  var title = props.title,
+      isShow = props.isShow,
+      width = props.width,
+      height = props.height,
+      isHtml = props.isHtml,
+      children = props.children,
+      iframeUrl = props.iframeUrl;
+  var content;
+
+  if (iframeUrl) {
+    content = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("iframe", {
+      frameBorder: "0",
+      src: iframeUrl,
+      width: "100%",
+      height: "100%"
+    });
+  } else {
+    content = isHtml ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "popup-content",
+      dangerouslySetInnerHTML: {
+        __html: children
+      }
+    }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "popup-content"
+    }, children);
+  }
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "popup-container ".concat(isShow ? 'show' : 'hide')
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "popup-block-body"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "flat-popup",
+    style: {
+      height: height,
+      width: width
+    }
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "popup-title"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "txt-title"
+  }, title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    className: "popup-close",
+    onClick: function onClick() {
+      props.onClose && props.onClose();
+    }
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "icon-close"
+  }))), content));
+};
+
+Popup.propTypes = {
+  width: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number, prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string]),
+  height: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number, prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string]),
+  title: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
+  isShow: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool,
+  onClose: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
+  isHtml: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool,
+  iframeUrl: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string
+};
+Popup.defaultProps = {
+  width: _constants__WEBPACK_IMPORTED_MODULE_1__["DEFAULT_WIDTH"],
+  height: _constants__WEBPACK_IMPORTED_MODULE_1__["DEFAULT_HEIGHT"],
+  isShow: false,
+  isHtml: false,
+  iframeUrl: null
+};
+/* harmony default export */ __webpack_exports__["default"] = (Popup);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/components/popup/constants.js":
+/*!****************************************************************!*\
+  !*** ./www/js/source/reactpages/components/popup/constants.js ***!
+  \****************************************************************/
+/*! exports provided: DEFAULT_WIDTH, DEFAULT_HEIGHT */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DEFAULT_WIDTH", function() { return DEFAULT_WIDTH; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DEFAULT_HEIGHT", function() { return DEFAULT_HEIGHT; });
+var DEFAULT_WIDTH = '55%';
+var DEFAULT_HEIGHT = '55%';
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/components/popup/index.jsx":
+/*!*************************************************************!*\
+  !*** ./www/js/source/reactpages/components/popup/index.jsx ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Popup__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Popup */ "./www/js/source/reactpages/components/popup/Popup.jsx");
+
+/* harmony default export */ __webpack_exports__["default"] = (_Popup__WEBPACK_IMPORTED_MODULE_0__["default"]);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/components/sweet-alert/icon.js":
+/*!*****************************************************************!*\
+  !*** ./www/js/source/reactpages/components/sweet-alert/icon.js ***!
+  \*****************************************************************/
+/*! exports provided: ICON, errorIconMarkup, warningIconMarkup, successIconMarkup */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ICON", function() { return ICON; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "errorIconMarkup", function() { return errorIconMarkup; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "warningIconMarkup", function() { return warningIconMarkup; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "successIconMarkup", function() { return successIconMarkup; });
+var ICON = 'swal-icon';
+var errorIconMarkup = function errorIconMarkup() {
+  var icon = "".concat(ICON, "--error");
+  var line = "".concat(icon, "__line");
+  var markup = "\n    <div class=\"".concat(icon, "__x-mark\">\n      <span class=\"").concat(line, " ").concat(line, "--left\"></span>\n      <span class=\"").concat(line, " ").concat(line, "--right\"></span>\n    </div>\n  ");
+  return markup;
+};
+var warningIconMarkup = function warningIconMarkup() {
+  var icon = "".concat(ICON, "--warning");
+  return "\n    <span class=\"".concat(icon, "__body\">\n      <span class=\"").concat(icon, "__dot\"></span>\n    </span>\n  ");
+};
+var successIconMarkup = function successIconMarkup() {
+  var icon = "".concat(ICON, "--success");
+  return "\n    <span class=\"".concat(icon, "__line ").concat(icon, "__line--long\"></span>\n    <span class=\"").concat(icon, "__line ").concat(icon, "__line--tip\"></span>\n\n    <div class=\"").concat(icon, "__ring\"></div>\n    <div class=\"").concat(icon, "__hide-corners\"></div>\n  ");
+};
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/components/sweet-alert/index.jsx":
+/*!*******************************************************************!*\
+  !*** ./www/js/source/reactpages/components/sweet-alert/index.jsx ***!
+  \*******************************************************************/
+/*! exports provided: SweetAlert, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SweetAlert", function() { return SweetAlert; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _popup__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../popup */ "./www/js/source/reactpages/components/popup/index.jsx");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _icon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./icon */ "./www/js/source/reactpages/components/sweet-alert/icon.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+var PREDEFINED_ICONS = ["error", "warning", "success", "info"];
+var ICON_CONTENTS = {
+  error: Object(_icon__WEBPACK_IMPORTED_MODULE_3__["errorIconMarkup"])(),
+  warning: Object(_icon__WEBPACK_IMPORTED_MODULE_3__["warningIconMarkup"])(),
+  success: Object(_icon__WEBPACK_IMPORTED_MODULE_3__["successIconMarkup"])()
+};
+var SweetAlert =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(SweetAlert, _React$Component);
+
+  function SweetAlert(props) {
+    _classCallCheck(this, SweetAlert);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(SweetAlert).call(this, props));
+  }
+
+  _createClass(SweetAlert, [{
+    key: "_buildButtonGroup",
+    value: function _buildButtonGroup(buttons) {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "al-button-container"
+      }, buttons.map(function (btnItem, index) {
+        var text = btnItem.text,
+            attrs = _objectWithoutProperties(btnItem, ["text"]);
+
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", _extends({
+          key: index,
+          type: "button"
+        }, attrs), text);
+      }));
+    }
+  }, {
+    key: "_buildIcon",
+    value: function _buildIcon() {
+      var icon = this.props.icon;
+      var className = "".concat(_icon__WEBPACK_IMPORTED_MODULE_3__["ICON"], " ").concat(_icon__WEBPACK_IMPORTED_MODULE_3__["ICON"], "--").concat(icon);
+
+      if (PREDEFINED_ICONS.includes(icon)) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: className,
+          dangerouslySetInnerHTML: {
+            __html: ICON_CONTENTS[icon]
+          }
+        });
+      }
+
+      return null;
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          buttons = _this$props.buttons,
+          children = _this$props.children,
+          props = _objectWithoutProperties(_this$props, ["buttons", "children"]);
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "sweet-alert"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_popup__WEBPACK_IMPORTED_MODULE_1__["default"], props, this._buildIcon(), children, this._buildButtonGroup(buttons)));
+    }
+  }]);
+
+  return SweetAlert;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+SweetAlert.propTypes = {
+  width: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number, prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string]),
+  height: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number, prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string]),
+  title: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
+  isShow: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool,
+  onClose: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
+  isHtml: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool,
+  buttons: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.object)
+};
+SweetAlert.defaultProps = {
+  width: 400,
+  height: 200,
+  isShow: false,
+  isHtml: false,
+  title: '',
+  buttons: []
+};
+/* harmony default export */ __webpack_exports__["default"] = (SweetAlert);
 
 /***/ }),
 
@@ -757,6 +2220,72 @@ function (_Component) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = (window._AppData || {});
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/lib/DataService.js":
+/*!*****************************************************!*\
+  !*** ./www/js/source/reactpages/lib/DataService.js ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return DataService; });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+
+var DataService =
+/*#__PURE__*/
+function () {
+  function DataService() {
+    _classCallCheck(this, DataService);
+  }
+
+  _createClass(DataService, null, [{
+    key: "getData",
+    value: function getData(url, params) {
+      return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(url, {
+        params: params
+      });
+    }
+  }, {
+    key: "postData",
+    value: function postData(url, params) {
+      return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(url, params, {
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest',
+          '__RequestVerificationToken': _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].getXsrfToken()
+        }
+      });
+    }
+  }, {
+    key: "getFile",
+    value: function getFile(url, params) {
+      return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(url, params, {
+        responseType: 'blob',
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest',
+          '__RequestVerificationToken': _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].getXsrfToken()
+        }
+      });
+    }
+  }]);
+
+  return DataService;
+}();
+
+
 
 /***/ }),
 
@@ -885,6 +2414,165 @@ function () {
   }]);
 
   return Logger;
+}();
+
+
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/lib/numberFormat.js":
+/*!******************************************************!*\
+  !*** ./www/js/source/reactpages/lib/numberFormat.js ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return NumberFormat; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var NumberFormat =
+/*#__PURE__*/
+function () {
+  function NumberFormat() {
+    _classCallCheck(this, NumberFormat);
+  }
+
+  _createClass(NumberFormat, null, [{
+    key: "formatDecimal",
+    value: function formatDecimal(value) {
+      return this.format(value, 2);
+    }
+  }, {
+    key: "format",
+    value: function format(value) {
+      var digits = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+      var alwaysShowDecimal = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+
+      if (typeof value !== "number" || isNaN(value)) {
+        return "";
+      }
+
+      var roundedValue = this.round(value, digits);
+
+      if (alwaysShowDecimal) {
+        return roundedValue.toFixed(digits).replace(/(\d)(?=(\d{3})+(\.|$))/g, "$1,");
+      }
+
+      return roundedValue.toString().replace(/(\d)(?=(\d{3})+(\.|$))/g, "$1,");
+    }
+  }, {
+    key: "round",
+    value: function round(value, digits) {
+      var sign = value < 0 ? -1 : 1;
+      var absoluteValue = Math.abs(value);
+      var rounded = Number(Math.round(absoluteValue + 'e' + digits) + 'e-' + digits);
+      return sign * rounded;
+    }
+  }]);
+
+  return NumberFormat;
+}();
+
+
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/lib/site.js":
+/*!**********************************************!*\
+  !*** ./www/js/source/reactpages/lib/site.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Site; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var _rootUrl = window.rootUrl || "/";
+
+var _xsrfToken = null;
+
+var Site =
+/*#__PURE__*/
+function () {
+  function Site() {
+    _classCallCheck(this, Site);
+  }
+
+  _createClass(Site, null, [{
+    key: "getXsrfToken",
+    value: function getXsrfToken() {
+      if (!_xsrfToken) {
+        _xsrfToken = document.querySelector("input[name=__RequestVerificationToken]").value;
+      }
+
+      return _xsrfToken;
+    }
+  }, {
+    key: "resolveClientUrl",
+    value: function resolveClientUrl(relativeUrl) {
+      return _rootUrl + relativeUrl;
+    }
+  }, {
+    key: "convertDateToString",
+    value: function convertDateToString(date) {
+      return typeof date === "string" ? date : date.format("MM/DD/YYYY");
+    }
+  }, {
+    key: "asNull",
+    value: function asNull(text) {
+      if (text != null) {
+        text = text.trim();
+
+        if (text === '') {
+          return null;
+        }
+      }
+
+      return text;
+    }
+  }, {
+    key: "downloadFile",
+    value: function downloadFile(data, fileName) {
+      var url = window.URL.createObjectURL(new Blob([data]));
+      var link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', fileName);
+      document.body.appendChild(link);
+      link.click();
+      link.parentNode.removeChild(link);
+      window.URL.revokeObjectURL(url);
+    }
+  }, {
+    key: "readAsJson",
+    value: function readAsJson(blob, callback) {
+      var reader = new FileReader();
+
+      reader.onload = function () {
+        callback && callback(JSON.parse(reader.result));
+      };
+
+      reader.readAsText(blob);
+    }
+  }, {
+    key: "getRootUrl",
+    value: function getRootUrl() {
+      return _rootUrl;
+    }
+  }]);
+
+  return Site;
 }();
 
 

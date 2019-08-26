@@ -277,11 +277,23 @@
   .panel-body {
     padding: 10px; }
 
-.header-tab {
+.left-side {
+  border: 1px solid #d6d6d6;
+  height: 100%; }
+  .left-side-content {
+    padding: 0 10px 10px 10px; }
+  .left-side .table {
+    width: 100%; }
+    .left-side .table tr {
+      height: 28px; }
+      .left-side .table tr .first-cell {
+        width: 25%; }
+
+.subtab .header-tab {
   margin-top: 0; }
-  .header-tab .tabs .tab a {
+  .subtab .header-tab .tabs .tab a {
     font-size: 12px; }
-    .header-tab .tabs .tab a.active {
+    .subtab .header-tab .tabs .tab a.active {
       color: #f05b1f; }
 
 body {
@@ -304,27 +316,20 @@ body {
     flex-direction: column;
     flex: 1;
     margin-left: 5px; }
-  .account-info-container .account-profile-container,
   .account-info-container .cust-betting-container,
   .account-info-container .fast-cross-link-container {
     border: 1px solid #d6d6d6; }
   .account-info-container .cust-betting-container {
-    min-height: 70%; }
+    min-height: 250px;
+    height: 70%; }
   .account-info-container .fast-cross-link-container {
-    min-height: calc(30% - 10px);
+    min-height: 100px;
+    height: calc(30% - 10px);
     margin-top: 10px; }
     .account-info-container .fast-cross-link-container .divider {
       margin: 0 5px; }
     .account-info-container .fast-cross-link-container .link {
       text-decoration: underline; }
-  .account-info-container .account-profile-container {
-    padding: 0 10px 10px 10px; }
-    .account-info-container .account-profile-container .tab-panel .table {
-      width: 100%; }
-      .account-info-container .account-profile-container .tab-panel .table tr {
-        height: 28px; }
-        .account-info-container .account-profile-container .tab-panel .table tr .first-cell {
-          width: 25%; }
   .account-info-container .panel {
     height: 100%; }
 

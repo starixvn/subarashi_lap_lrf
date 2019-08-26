@@ -753,7 +753,7 @@ function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "_handleClickOutSide", function (event) {
-      var clickOutside = _this.containerElement && !_this.containerElement.contains(event.target);
+      var clickOutside = !(_this.containerElement && _this.containerElement.contains(event.target) || _this.props.excludeOutSideComponents && _this.props.excludeOutSideComponents.indexOf(event.target) >= 0);
 
       if (clickOutside && _this.state.isOpening) {
         _this._close();
@@ -777,7 +777,7 @@ function (_Component) {
     value: function componentDidUpdate(prevProps, prevState) {
       var _this2 = this;
 
-      if (this.props.isOpening !== prevProps.isOpening) {
+      if (this.props.isOpening !== prevProps.isOpening && this.state.isOpening !== this.props.isOpening) {
         var onOpen = this.props.onOpen;
         this.props.isOpening && onOpen && onOpen();
         this.setState({
@@ -841,7 +841,8 @@ _defineProperty(Overlay, "propTypes", {
   closeOnOutsideClick: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
   isOpening: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
   onOpen: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
-  onClose: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func
+  onClose: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  excludeOutSideComponents: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object)
 });
 
 _defineProperty(Overlay, "defaultProps", {
@@ -3859,13 +3860,19 @@ function () {
     key: "format",
     value: function format(value) {
       var digits = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+      var alwaysShowDecimal = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
 
       if (typeof value !== "number" || isNaN(value)) {
         return "";
       }
 
       var roundedValue = this.round(value, digits);
-      return roundedValue.toFixed(digits).replace(/(\d)(?=(\d{3})+(\.|$))/g, "$1,");
+
+      if (alwaysShowDecimal) {
+        return roundedValue.toFixed(digits).replace(/(\d)(?=(\d{3})+(\.|$))/g, "$1,");
+      }
+
+      return roundedValue.toString().replace(/(\d)(?=(\d{3})+(\.|$))/g, "$1,");
     }
   }, {
     key: "round",

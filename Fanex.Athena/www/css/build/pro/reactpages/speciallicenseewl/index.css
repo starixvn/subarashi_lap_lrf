@@ -409,12 +409,15 @@ body {
   font-size: 1.2rem;
   color: #2c2c2c; }
 
-a {
+a, .link {
   color: #147ccc; }
-  a, a:hover {
+  a, a:hover, .link, .link:hover {
     text-decoration: none; }
-  a:hover {
+  a:hover, .link:hover {
     color: inherit; }
+
+.link {
+  cursor: pointer; }
 
 ul {
   padding: 0; }

@@ -265,7 +265,8 @@
       color: #BFBDBF;
       float: right; }
       .popup-container .flat-popup .popup-title .popup-close .icon-close {
-        font-size: 18px; }
+        font-size: 18px;
+        cursor: pointer; }
       .popup-container .flat-popup .popup-title .popup-close:hover {
         color: #fff; }
   .popup-container .flat-popup .popup-content {

@@ -471,8 +471,8 @@ function (_Component) {
         totalText: this.totalText,
         afterLoad: this.afterLoad,
         onSort: this.onSort,
-        adjustedHeight: -20 //getResourceFunc={this.getResource}
-
+        adjustedHeight: -20,
+        getResourceFunc: this.getResource
       });
     }
   }]);
@@ -1076,6 +1076,11 @@ function (_Component) {
       }
     }
   }, {
+    key: "_getResource",
+    value: function _getResource(key) {
+      return this.props.getResourceFunc ? this.props.getResourceFunc(key) : key;
+    }
+  }, {
     key: "_getTotalCellClassName",
     value: function _getTotalCellClassName(column, value) {
       if (this.props.getTotalCellClassNameFunc) {
@@ -1213,7 +1218,9 @@ function (_Component) {
     value: function _renderNodata() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "result-content"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_3__["default"], null));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "no-info-row center-align"
+      }, this._getResource('NoInfo')));
     }
   }, {
     key: "render",
@@ -1275,7 +1282,8 @@ BetListDataGrid.propTypes = {
   onSort: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func,
   onPaging: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func,
   afterLoad: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func,
-  adjustedHeight: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.number
+  adjustedHeight: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.number,
+  getResourceFunc: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func
 };
 BetListDataGrid.defaultProps = {
   isPaging: false,
@@ -1361,7 +1369,6 @@ var Popup = function Popup(props) {
     className: "txt-title"
   }, title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     className: "popup-close",
-    href: "javascript:;",
     onClick: function onClick() {
       props.onClose && props.onClose();
     }
