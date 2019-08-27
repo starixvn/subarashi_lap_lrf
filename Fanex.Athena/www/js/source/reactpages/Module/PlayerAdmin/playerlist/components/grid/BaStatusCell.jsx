@@ -12,7 +12,7 @@ import { generateDefaultConfirmOption, generateDefaultAlertOption, predefinedIco
 
 const BaStatusCell = (props) => {
     const { dataItem, setPlayerList, toggleLoader, updateBaStatus, setSweetAlertOption } = props;
-    const { CustId, BaStatus, OddsGroup, IsArchived } = dataItem;
+    const { IbcCustId, BaStatus, OddsGroup, IsArchived } = dataItem;
 
     const handleChangeBaStatus = (event) => {
         const isBa = event.target.checked;
@@ -29,13 +29,13 @@ const BaStatusCell = (props) => {
 
         const confirmProps = {
             onClick: () => {
-                const param = { custId: CustId, isBa };
+                const param = { custId: IbcCustId, isBa };
                 toggleLoader(true);
                 updateBaStatus(param).then(response => {
                     const { Success, Message, ErrorMessage, ExtendedData } = response.data;
                     if (Success) {
                         const oddsGroup = ExtendedData || OddsGroup;
-                        const newPlayerList = GridInteractionService.updatePlayerWithBaStatus(playerList, CustId, isBa, oddsGroup);
+                        const newPlayerList = GridInteractionService.updatePlayerWithBaStatus(playerList, IbcCustId, isBa, oddsGroup);
                         setPlayerList(newPlayerList);
                     }
 

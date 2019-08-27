@@ -1,10 +1,8 @@
-import { playerTypes } from './constants';
-
 export const buildSelectedPlayer = (dataItem) => {
-    const { CustId, UserName, Currency, IsDeposit, IsArchived, LicenseeCustId, CurrencyId } = dataItem;
+    const { IbcCustId, UserName, Currency, IsDeposit, IsArchived, LicenseeCustId, CurrencyId } = dataItem;
 
     return {
-        custId: CustId,
+        ibcCustId: IbcCustId,
         licenseeCustId: LicenseeCustId,
         userName: UserName,
         currency: Currency,
@@ -34,7 +32,7 @@ export const buildLrfPlayerList = (playerList) => {
         } = item;
 
         return {
-            CustId: IbcCustId,
+            IbcCustId,
             LicenseeCustId: 0,
             UserName,
             SystemId,
@@ -64,7 +62,6 @@ export const buildLapPlayerList = (playerList) => {
             IP,
             email,
             isOnline,
-            ActStatus,
             IBCCustId,
             isArchived,
             CustId,
@@ -75,7 +72,7 @@ export const buildLapPlayerList = (playerList) => {
         } = item;
 
         return {
-            CustId: IBCCustId,
+            IbcCustId: IBCCustId,
             LicenseeCustId: CustId,
             UserName,
             Status,
@@ -83,7 +80,7 @@ export const buildLapPlayerList = (playerList) => {
             LastLoginIp: IP,
             Email: email,
             IsOnline: isOnline,
-            IsDeposit: ActStatus === playerTypes.deposit && IBCCustId > 0,
+            IsDeposit: IBCCustId > 0,
             IsArchived: isArchived,
             Currency: CurrencyCode,
             CurrentBalance,
@@ -94,10 +91,10 @@ export const buildLapPlayerList = (playerList) => {
 }
 
 export const buildCurrentActivePlayer = (dataItem) => {
-    const { CustId, UserName, Currency, Status, OddsGroup, SpecialLevel, IsDeposit, IsArchived, LicenseeCustId, CurrencyId } = dataItem;
+    const { IbcCustId, UserName, Currency, Status, OddsGroup, SpecialLevel, IsDeposit, IsArchived, LicenseeCustId, CurrencyId } = dataItem;
 
     return {
-        custId: CustId,
+        ibcCustId: IbcCustId,
         licenseeCustId: LicenseeCustId,
         userName: UserName,
         currency: Currency,

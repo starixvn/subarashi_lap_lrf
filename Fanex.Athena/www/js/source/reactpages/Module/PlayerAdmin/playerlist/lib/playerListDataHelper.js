@@ -1,4 +1,3 @@
-import { playerTypes } from './constants';
 export default class PlayerListDataHelper {
     static mergePlayerList(lrfList, lapList) {
         if (!lrfList || !lapList) {
@@ -16,10 +15,10 @@ export default class PlayerListDataHelper {
 
     static mergePlayerItem(lrfItem, lapItem) {
         const { OddsGroup, BaStatus, SpecialLevel } = lrfItem;
-        const { Status, RealName, IP, email, isOnline, ActStatus, IBCCustId, isArchived, LastTransaction, CurrencyCode, OutBalance, IBCUserName } = lapItem;
+        const { Status, RealName, IP, email, isOnline, IBCCustId, isArchived, LastTransaction, CurrencyCode, OutBalance, IBCUserName } = lapItem;
 
         return {
-            CustId: IBCCustId,
+            IbcCustId: IBCCustId,
             LicenseeCustId: lapItem.CustId,
             UserName: lapItem.UserName,
             SystemId: IBCUserName,
@@ -35,7 +34,7 @@ export default class PlayerListDataHelper {
             LastLoginIp: IP,
             Email: email,
             IsOnline: isOnline,
-            IsDeposit: ActStatus === playerTypes.deposit && IBCCustId > 0,
+            IsDeposit: IBCCustId > 0,
             IsArchived: !!isArchived,
             CurrencyId: lapItem.Currency
         };

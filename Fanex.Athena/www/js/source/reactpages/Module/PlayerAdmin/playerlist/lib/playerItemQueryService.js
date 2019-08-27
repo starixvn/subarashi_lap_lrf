@@ -4,10 +4,10 @@ import PlayerListDataHelper from './playerListDataHelper';
 export default class PlayerItemQueryService {
     static getPlayerById(param, commonService, apiInfo) {
         const { lrfDataById, lapGetPlayerByLicenseeId } = apiInfo;
-        const { custId, licenseeCustId } = param;
+        const { ibcCustId, licenseeCustId } = param;
 
         const lrfParam = {
-            idList: custId,
+            idList: ibcCustId,
             specialLevel: Object.keys(specialLevelListWithColor).map(item => item).join(','),
             pageSize: defaultPagingOption.PageSize,
             pageIndex: 1
@@ -17,7 +17,7 @@ export default class PlayerItemQueryService {
             custId: licenseeCustId
         }
 
-        const lrfPromise = custId > 0 ? commonService.fetchData(lrfDataById.type, lrfDataById.action, lrfParam) : null;
+        const lrfPromise = ibcCustId > 0 ? commonService.fetchData(lrfDataById.type, lrfDataById.action, lrfParam) : null;
         const lapPromise = commonService.fetchData(lapGetPlayerByLicenseeId.type, lapGetPlayerByLicenseeId.action, lapParam);
 
         return this._getResult(lrfPromise, lapPromise, commonService);

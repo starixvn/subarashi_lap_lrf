@@ -19,7 +19,7 @@ export default class LrfPlayerQueryService {
 
     static _fetchFromLap(lrfPlayerList, lapDataById, commonService, lrfTotalItem) {
         const lapParam = {
-            idList: lrfPlayerList.map(x => x.CustId)
+            idList: lrfPlayerList.map(x => x.IbcCustId)
         }
 
         return commonService.fetchData(lapDataById.type, lapDataById.action, lapParam)

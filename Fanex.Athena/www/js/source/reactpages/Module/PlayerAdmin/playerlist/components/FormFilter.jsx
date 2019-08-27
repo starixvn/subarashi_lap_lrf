@@ -37,7 +37,7 @@ export class FormFilter extends PureComponent {
         const custId = Number(QueryString.getParam(window.location.href, 'custId'));
         const licenseeCustId = QueryString.getParam(window.location.href, 'licenseeCustId');
         if (custId || licenseeCustId) {
-            const param = { custId, licenseeCustId };
+            const param = { ibcCustId: custId, licenseeCustId };
             this.props.getSinglePlayer(param);
 
             this.userNameRef.current.value = QueryString.getParam(window.location.href, 'userName');

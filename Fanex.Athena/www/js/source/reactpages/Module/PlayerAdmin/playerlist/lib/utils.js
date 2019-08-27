@@ -1,6 +1,5 @@
 import { playerStatus } from '../lib/constants';
 import LangHelper from '@jsroot/lib/langHelper';
-import { playerTypes } from './constants';
 
 export const getSpecialLevelText = (value) => {
     return value === undefined || value === null ? '' : (Number(value) === 0 ? LangHelper.getSingleResource('None') : value);
@@ -23,13 +22,13 @@ export const buildDisplayedColumnObject = (displayedColumnList) => {
     }, {});
 }
 
-export const isDeposit = (ibcCustId, actStatus) => {
-    return actStatus === playerTypes.deposit && ibcCustId > 0;
+export const isDeposit = (ibcCustId) => {
+    return ibcCustId > 0;
 }
 
 export const getCustIdListFromLapData = (lapPlayerList) => {
     return lapPlayerList.reduce((result, item) => {
-        if (isDeposit(item.IBCCustId, item.ActStatus)) {
+        if (isDeposit(item.IBCCustId)) {
             result.push(item.IBCCustId);
         }
 

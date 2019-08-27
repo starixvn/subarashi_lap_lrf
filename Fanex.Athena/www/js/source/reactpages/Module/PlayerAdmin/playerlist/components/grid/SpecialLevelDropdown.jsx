@@ -39,9 +39,9 @@ const SpecialLevelDropdown = (props) => {
         const confirmProps = {
             onClick: () => {
                 if (currentActivePlayer && value !== currentActivePlayer.specialLevel) {
-                    const { custId } = currentActivePlayer;
+                    const { ibcCustId } = currentActivePlayer;
                     const param = {
-                        custId,
+                        custId: ibcCustId,
                         specialLevel: value
                     }
 
@@ -49,7 +49,7 @@ const SpecialLevelDropdown = (props) => {
                     updateSpecialLevel(param).then(response => {
                         const { Success, Message, ErrorMessage } = response.data;
                         if (Success) {
-                            const newPlayerList = GridInteractionService.updatePlayerItem(playerList, custId, value, 'SpecialLevel');
+                            const newPlayerList = GridInteractionService.updatePlayerItem(playerList, ibcCustId, value, 'SpecialLevel');
                             setPlayerList(newPlayerList);
                         }
 

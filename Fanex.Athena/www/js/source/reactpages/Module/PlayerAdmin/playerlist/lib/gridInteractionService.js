@@ -15,7 +15,7 @@ export default class GridInteractionService {
         };
     }
     static updatePlayerItem(playerList, custId, value, fieldName) {
-        let itemIndex = playerList.findIndex(x => x.CustId === custId);
+        let itemIndex = playerList.findIndex(x => x.IbcCustId === custId);
         if (itemIndex === -1) {
             itemIndex = playerList.findIndex(x => x.LicenseeCustId === custId);
         }
@@ -28,8 +28,8 @@ export default class GridInteractionService {
         return [...playerList];
     }
 
-    static updatePlayerWithBaStatus(playerList, custId, isBa, oddsGroup) {
-        const itemIndex = playerList.findIndex(x => x.CustId === custId);
+    static updatePlayerWithBaStatus(playerList, ibcCustId, isBa, oddsGroup) {
+        const itemIndex = playerList.findIndex(x => x.IbcCustId === ibcCustId);
         const newPlayerItem = {...playerList[itemIndex], BaStatus: isBa, OddsGroup: oddsGroup };
         return updateObjectInArray(playerList, itemIndex, newPlayerItem);
     }

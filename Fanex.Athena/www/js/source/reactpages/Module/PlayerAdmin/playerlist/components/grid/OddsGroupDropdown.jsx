@@ -39,9 +39,9 @@ export const OddsGroupDropdown = (props) => {
         const confirmProps = {
             onClick: () => {
                 if (currentActivePlayer && value !== currentActivePlayer.oddsGroup) {
-                    const { custId } = currentActivePlayer;
+                    const { ibcCustId } = currentActivePlayer;
                     const param = {
-                        custId,
+                        custId: ibcCustId,
                         oddsGroup: value
                     }
 
@@ -49,7 +49,7 @@ export const OddsGroupDropdown = (props) => {
                     updateOddsGroup(param).then(response => {
                         const { Success, Message, ErrorMessage } = response.data;
                         if (Success) {
-                            const newPlayerList = GridInteractionService.updatePlayerItem(playerList, custId, value, 'OddsGroup');
+                            const newPlayerList = GridInteractionService.updatePlayerItem(playerList, ibcCustId, value, 'OddsGroup');
                             setPlayerList(newPlayerList);
                         }
 

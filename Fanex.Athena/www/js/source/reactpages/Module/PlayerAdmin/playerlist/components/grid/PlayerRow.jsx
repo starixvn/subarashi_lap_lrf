@@ -20,7 +20,7 @@ export const PlayerRow = (props) => {
     } = props;
 
     const { 
-        CustId, 
+        LicenseeCustId, 
         SystemId, 
         RealName, 
         Currency, 
@@ -37,7 +37,7 @@ export const PlayerRow = (props) => {
     const canShowMainColumn = IsDeposit && !IsArchived;
 
     return (
-        <Row key={CustId}>
+        <Row key={LicenseeCustId}>
             {displayedColumn[fields.Status] && <Cell className="center-align"><StatusCell dataItem={dataItem} /></Cell>}
             {displayedColumn[fields.UserName] && <Cell className="center-align"><UserNameCell dataItem={dataItem} /></Cell>}
             {displayedColumn[fields.SystemId] && <Cell className="center-align">{canShowMainColumn && SystemId}</Cell>}

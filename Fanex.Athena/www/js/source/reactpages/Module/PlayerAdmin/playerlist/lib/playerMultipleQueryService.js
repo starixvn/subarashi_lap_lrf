@@ -55,7 +55,7 @@ export default class PlayerMultipleQueryService {
                 return this._refetchFromLrf(lrfParam, lapDataObject, commonService, apiInfo)
                     .then(response => {
                         const { playerList: nextPlayerList } = response;
-                        const excludedIdCount = nextPlayerList.filter(p => !idListNotInLrf.includes(p.CustId)).length;
+                        const excludedIdCount = nextPlayerList.filter(p => !idListNotInLrf.includes(p.IbcCustId)).length;
 
                         return {
                             playerList: playerList.concat(nextPlayerList),
