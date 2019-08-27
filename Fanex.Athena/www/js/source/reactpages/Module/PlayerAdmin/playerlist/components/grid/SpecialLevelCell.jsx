@@ -6,9 +6,9 @@ import { specialLevelListWithColor } from '../../lib/constants';
 import DropdownLabel from '@jsroot/components/DropdownLabel';
 
 import { ActionCreators } from '../../actions';
-import GridInteractionService from '../../lib/gridInteractionService';
-import { getSpecialLevelText } from '../../lib/utils';
-import { buildCurrentActivePlayer } from '../../lib/playerDataBuilder';
+import GridInteractionService from '../../lib/services/gridInteractionService';
+import { getSpecialLevelText } from '../../lib/helpers/utils';
+import { buildCurrentActivePlayer } from '../../lib/helpers/playerDataBuilder';
 
 export const SpecialLevelCell = (props) => {
     const { dataItem, specialLevelDropdownPosition, setCurrentActivePlayer, setSpecialLevelDropdownPosition } = props;

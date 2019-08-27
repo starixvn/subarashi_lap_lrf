@@ -5,7 +5,7 @@ import { ActionCreators } from '../../actions';
 
 import { DropdownMenu, DropdownItem } from '@jsroot/components/dropdown';
 import { contextMenuList, playerStatusByName } from '../../lib/constants';
-import { isShowContextMenuItem } from '../../lib/contextMenuHelper';
+import { isShowContextMenuItem } from '../../lib/helpers/contextMenuHelper';
 
 
 export const ContextMenu = (props) => {

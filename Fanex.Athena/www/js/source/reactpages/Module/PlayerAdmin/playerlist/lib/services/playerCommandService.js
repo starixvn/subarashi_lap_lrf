@@ -1,5 +1,5 @@
-import FactoryCommonService from '../../../lib/factoryCommonService';
-import { apiUpdateInfo } from './constants';
+import FactoryCommonService from '../../../../lib/factoryCommonService';
+import { apiUpdateInfo } from '../constants';
 
 export default class PlayerCommandService {
     constructor() {

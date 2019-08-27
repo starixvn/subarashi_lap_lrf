@@ -1,5 +1,5 @@
-import GridHelper from './gridHelper';
-import { gridItemDropdownHeight, stringTypeFields } from './constants';
+import GridHelper from '../helpers/gridHelper';
+import { gridItemDropdownHeight, stringTypeFields } from '../constants';
 import { updateObjectInArray } from '@jsroot/lib/dataReducer';
 
 export default class GridInteractionService {

@@ -1,5 +1,5 @@
 import { SET_ODDSGROUP_POSITION } from './types';
-import PlayerCommandService from '../lib/playerCommandService';
+import PlayerCommandService from '../lib/services/playerCommandService';
 
 export const setOddsGroupDropdownPosition = (data) => {
     return {

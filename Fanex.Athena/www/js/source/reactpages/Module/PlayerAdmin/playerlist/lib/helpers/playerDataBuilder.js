@@ -12,43 +12,6 @@ export const buildSelectedPlayer = (dataItem) => {
     };
 }
 
-export const buildLrfPlayerList = (playerList) => {
-    if (!playerList) {
-        return [];
-    }
-
-    return playerList.map(item => {
-        const {
-            IbcCustId,
-            UserName,
-            SystemId,
-            Currency,
-            CurrentBalance,
-            OutstandingBalance,
-            OddsGroup,
-            BaStatus,
-            SpecialLevel,
-            CurrencyId
-        } = item;
-
-        return {
-            IbcCustId,
-            LicenseeCustId: 0,
-            UserName,
-            SystemId,
-            Currency,
-            CurrentBalance,
-            OutstandingBalance,
-            OddsGroup,
-            BaStatus,
-            SpecialLevel,
-            IsDeposit: true,
-            IsArchived: false,
-            CurrencyId: CurrencyId || 0
-        };
-    });
-}
-
 export const buildLapPlayerList = (playerList) => {
     if (!playerList) {
         return [];

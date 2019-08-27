@@ -5,8 +5,8 @@ import { bindActionCreators } from 'redux';
 import { oddsGroupListWithStyle } from '../../lib/constants';
 import DropdownLabel from '@jsroot/components/DropdownLabel';
 import { ActionCreators } from '../../actions';
-import GridInteractionService from '../../lib/gridInteractionService';
-import { buildCurrentActivePlayer } from '../../lib/playerDataBuilder';
+import GridInteractionService from '../../lib/services/gridInteractionService';
+import { buildCurrentActivePlayer } from '../../lib/helpers/playerDataBuilder';
 
 export const OddsGroupCell = (props) => {
     const { dataItem, oddsGroupDropdownPosition, setCurrentActivePlayer, setOddsGroupDropdownPosition } = props;

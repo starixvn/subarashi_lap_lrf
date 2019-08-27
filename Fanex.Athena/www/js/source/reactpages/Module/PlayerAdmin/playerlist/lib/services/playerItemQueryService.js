@@ -1,5 +1,5 @@
-import { specialLevelListWithColor, defaultPagingOption } from '../lib/constants';
-import PlayerListDataHelper from './playerListDataHelper';
+import { specialLevelListWithColor, defaultPagingOption } from '../constants';
+import PlayerListDataHelper from '../helpers/playerListDataHelper';
 
 export default class PlayerItemQueryService {
     static getPlayerById(param, commonService, apiInfo) {

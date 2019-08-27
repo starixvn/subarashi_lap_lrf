@@ -1,5 +1,5 @@
 import { SET_SPECIAL_LEVEL_POSITION } from './types';
-import PlayerCommandService from '../lib/playerCommandService';
+import PlayerCommandService from '../lib/services/playerCommandService';
 
 export const setSpecialLevelDropdownPosition = (data) => {
     return {

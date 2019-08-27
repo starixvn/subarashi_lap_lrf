@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Select from 'react-select';
 import { baStatusList, specialLevelListWithColor, oddsGroupListWithStyle } from '../../lib/constants';
 import LangHelper from '@jsroot/lib/langHelper';
-import { getSpecialLevelText } from '../../lib/utils';
+import { getSpecialLevelText } from '../../lib/helpers/utils';
 
 export class AdvancedSearch extends React.Component {
     constructor(props) {

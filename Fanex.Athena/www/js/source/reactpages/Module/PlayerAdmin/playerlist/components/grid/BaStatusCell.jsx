@@ -6,8 +6,8 @@ import { ActionCreators } from '../../actions';
 import { Cell } from '@9softstudio/react-grid';
 import Switcher from '@jsroot/components/Switcher';
 import LangHelper from '@jsroot/lib/langHelper';
-import GridInteractionService from '../../lib/gridInteractionService';
-import { getErrorMessageForUpdating } from '../../lib/utils';
+import GridInteractionService from '../../lib/services/gridInteractionService';
+import { getErrorMessageForUpdating } from '../../lib/helpers/utils';
 import { generateDefaultConfirmOption, generateDefaultAlertOption, predefinedIcons } from '../../../../../lib/sweetAlert';
 
 const BaStatusCell = (props) => {

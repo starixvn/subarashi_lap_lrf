@@ -1,4 +1,4 @@
-import PlayerQueryService from '../lib/playerQueryService';
+import PlayerQueryService from '../lib/services/playerQueryService';
 import { SET_SELECTED_PLAYERID_LIST, SET_SELECTED_TAB_NAME } from './types';
 
 export const getLink = (systemType, action) => () => {

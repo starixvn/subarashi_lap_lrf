@@ -1,5 +1,5 @@
-import FactoryCommonService from '../../../lib/factoryCommonService';
-import { systemType } from '../../../constants/configInfo';
+import FactoryCommonService from '../../../../lib/factoryCommonService';
+import { systemType } from '../../../../constants/configInfo';
 
 const apiInfo = {
     userNameSuggestion: { action: 'PlayerAdminContainer/GetSuggestionList', type: systemType.newAdmin }

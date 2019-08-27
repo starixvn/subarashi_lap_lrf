@@ -1,4 +1,4 @@
-import { playerStatus } from '../lib/constants';
+import { playerStatus } from '../constants';
 import LangHelper from '@jsroot/lib/langHelper';
 
 export const getSpecialLevelText = (value) => {

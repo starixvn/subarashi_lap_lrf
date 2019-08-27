@@ -6,12 +6,12 @@ import { ActionCreators } from '../actions';
 import { Table } from '@9softstudio/react-grid';
 import ContextMenu from './grid/ContextMenu';
 import SpecialLevelDropdown from './grid/SpecialLevelDropdown';
-import GridHelper from '../lib/gridHelper';
-import GridInteractionService from '../lib/gridInteractionService';
+import GridHelper from '../lib/helpers/gridHelper';
+import GridInteractionService from '../lib/services/gridInteractionService';
 import OddsGroupDropdown from './grid/OddsGroupDropdown';
 import PlayerRow from './grid/PlayerRow';
 import StatusDropdown from './grid/StatusDropdown';
-import { buildDisplayedColumnObject } from '../lib/utils';
+import { buildDisplayedColumnObject } from '../lib/helpers/utils';
 import NoDataTitle from '@jsroot/components/NoDataTitle';
 import SweetAlert from '../../../../components/sweet-alert';
 

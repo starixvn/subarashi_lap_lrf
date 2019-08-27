@@ -1,7 +1,7 @@
-import FactoryCommonService from '../../../lib/factoryCommonService';
-import { apiInfo } from './constants';
+import FactoryCommonService from '../../../../lib/factoryCommonService';
+import { apiInfo } from '../constants';
 
-import ReportExcel from './reportExcel';
+import ReportExcel from '../reportExcel';
 import QueryServiceFactory from './queryServiceFactory';
 import PlayerItemQueryService from './playerItemQueryService';
 

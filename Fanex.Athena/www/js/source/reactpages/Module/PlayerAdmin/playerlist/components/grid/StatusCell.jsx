@@ -4,8 +4,8 @@ import { bindActionCreators } from 'redux';
 
 import { playerStatus, playerStatusByName } from '../../lib/constants';
 import { ActionCreators } from '../../actions';
-import GridInteractionService from '../../lib/gridInteractionService';
-import { buildCurrentActivePlayer } from '../../lib/playerDataBuilder';
+import GridInteractionService from '../../lib/services/gridInteractionService';
+import { buildCurrentActivePlayer } from '../../lib/helpers/playerDataBuilder';
 import LangHelper from '@jsroot/lib/langHelper';
 
 export const StatusCell = (props) => {

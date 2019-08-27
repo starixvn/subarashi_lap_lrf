@@ -1,11 +1,11 @@
 import { SET_PARAM, SET_ADVANCED_SEARCH, SET_COLLAPSE_FILTER } from './types';
 import { toggleLoader } from '@jsroot/actions/loaderAction';
-import PlayerQueryService from '../lib/playerQueryService';
+import PlayerQueryService from '../lib/services/playerQueryService';
 import { setSelectedPlayer } from './commonAction';
 import { setPlayerList, setPagingOption, setIsFetchingData } from './gridHandlerAction';
 import { defaultPagingOption } from '../lib/constants.js';
-import { buildSelectedPlayer } from '../lib/playerDataBuilder';
-import PlayerSuggestionService from '../lib/playerSuggestionService';
+import { buildSelectedPlayer } from '../lib/helpers/playerDataBuilder';
+import PlayerSuggestionService from '../lib/services/playerSuggestionService';
 
 const processBeforeGettingData = (dispatch) => {
     dispatch(setSelectedPlayer(null));

@@ -6,7 +6,7 @@ import { ActionCreators } from '../../actions';
 import ReportTitle from '@jsroot/components/ReportTitle';
 import MultipleSelect from '@9softstudio/react-multiselect';
 import LangHelper from '@jsroot/lib/langHelper';
-import { buildDisplayedColumnObject } from '../../lib/utils';
+import { buildDisplayedColumnObject } from '../../lib/helpers/utils';
 
 export class GridCaption extends React.Component {
     constructor(props) {

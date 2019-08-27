@@ -1,6 +1,6 @@
 import React from 'react';
 import { HeaderRow, HeaderCell } from '@9softstudio/react-grid';
-import { fields, headerText } from './constants';
+import { fields, headerText } from '../constants';
 
 export default class GridHelper {
     static renderHeader(displayedColumn) {

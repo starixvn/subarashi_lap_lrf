@@ -1,5 +1,5 @@
 import { SET_STATUS_POSITION } from './types';
-import PlayerCommandService from '../lib/playerCommandService';
+import PlayerCommandService from '../lib/services/playerCommandService';
 
 export const setStatusDropdownPosition = (data) => {
     return {

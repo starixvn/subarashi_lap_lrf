@@ -4,10 +4,10 @@ import { bindActionCreators } from 'redux';
 
 import { DropdownMenu, DropdownItem } from '@jsroot/components/dropdown';
 import { playerStatus, displayedPlayerStatusList, messageUpdateState } from '../../lib/constants';
-import GridInteractionService from '../../lib/gridInteractionService';
+import GridInteractionService from '../../lib/services/gridInteractionService';
 import { ActionCreators } from '../../actions';
 import LangHelper from '@jsroot/lib/langHelper';
-import { getErrorMessageForUpdating } from '../../lib/utils';
+import { getErrorMessageForUpdating } from '../../lib/helpers/utils';
 import { generateDefaultConfirmOption, generateDefaultAlertOption, predefinedIcons } from '../../../../../lib/sweetAlert';
 
 const StatusDropdown = (props) => {

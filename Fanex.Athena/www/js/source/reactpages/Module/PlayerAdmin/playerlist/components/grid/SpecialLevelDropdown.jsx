@@ -4,10 +4,10 @@ import { bindActionCreators } from 'redux';
 
 import { DropdownMenu, DropdownItem } from '@jsroot/components/dropdown';
 import { specialLevelListWithColor } from '../../lib/constants';
-import GridInteractionService from '../../lib/gridInteractionService';
+import GridInteractionService from '../../lib/services/gridInteractionService';
 import LangHelper from '@jsroot/lib/langHelper';
 import { ActionCreators } from '../../actions';
-import { getSpecialLevelText, getErrorMessageForUpdating } from '../../lib/utils';
+import { getSpecialLevelText, getErrorMessageForUpdating } from '../../lib/helpers/utils';
 import { generateDefaultConfirmOption, generateDefaultAlertOption, predefinedIcons } from '../../../../../lib/sweetAlert';
 
 const SpecialLevelDropdown = (props) => {

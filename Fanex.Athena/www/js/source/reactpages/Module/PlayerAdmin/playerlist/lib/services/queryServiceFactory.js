@@ -1,4 +1,4 @@
-import { specialLevelListWithColor } from './constants';
+import { specialLevelListWithColor } from '../constants';
 
 import LapPlayerQueryService from './lapPlayerQueryService';
 import PlayerMultipleQueryService from './playerMultipleQueryService';

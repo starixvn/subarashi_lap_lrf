@@ -1,4 +1,4 @@
-import { excludedContextMenuWithNonDeposit, excludedContextMenuWithClosed, excludedContextMenuWithArchived } from './constants';
+import { excludedContextMenuWithNonDeposit, excludedContextMenuWithClosed, excludedContextMenuWithArchived } from '../constants';
 
 export const isShowContextMenuItem = (item, isDeposit, isArchived, isClosed) => {
     if (!isDeposit) {

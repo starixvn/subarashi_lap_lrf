@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../../actions';
-import GridHelper from '../../lib/gridHelper';
-import { buildSelectedPlayer, buildCurrentActivePlayer } from '../../lib/playerDataBuilder';
+import GridHelper from '../../lib/helpers/gridHelper';
+import { buildSelectedPlayer, buildCurrentActivePlayer } from '../../lib/helpers/playerDataBuilder';
 
 export const UserNameCell = (props) => {
     const { dataItem, setSelectedPlayer, setCurrentActivePlayer, setContextMenu, contextMenu } = props;
