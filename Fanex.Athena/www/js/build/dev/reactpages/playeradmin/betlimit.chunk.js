@@ -230,11 +230,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../lib/service */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/service.js");
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var _jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/components/NoDataTitle */ "./www/js/source/reactpages/components/NoDataTitle.jsx");
-/* harmony import */ var _grid_Base_SettingGrid__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./grid/Base/SettingGrid */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/Base/SettingGrid.jsx");
-/* harmony import */ var _grid_SB_SBSettingGrid__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./grid/SB/SBSettingGrid */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/SB/SBSettingGrid.jsx");
-/* harmony import */ var _jsroot_components_Balloon__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @jsroot/components/Balloon */ "./www/js/source/reactpages/components/Balloon.jsx");
-/* harmony import */ var _jsroot_components_sweet_alert__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @jsroot/components/sweet-alert */ "./www/js/source/reactpages/components/sweet-alert/index.jsx");
-/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/constants.js");
+/* harmony import */ var _grid_DCS_DCSSetting__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./grid/DCS/DCSSetting */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/DCS/DCSSetting.jsx");
+/* harmony import */ var _grid_SB_SBSetting__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./grid/SB/SBSetting */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/SB/SBSetting.jsx");
+/* harmony import */ var _grid_NG_NGSetting__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./grid/NG/NGSetting */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/NG/NGSetting.jsx");
+/* harmony import */ var _grid_KN_KNSetting__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./grid/KN/KNSetting */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/KN/KNSetting.jsx");
+/* harmony import */ var _jsroot_components_Balloon__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @jsroot/components/Balloon */ "./www/js/source/reactpages/components/Balloon.jsx");
+/* harmony import */ var _jsroot_components_sweet_alert__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @jsroot/components/sweet-alert */ "./www/js/source/reactpages/components/sweet-alert/index.jsx");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/constants.js");
 var _DataGrid;
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -273,7 +275,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var DataGrid = (_DataGrid = {}, _defineProperty(_DataGrid, _lib_constants__WEBPACK_IMPORTED_MODULE_11__["BetLimitProduct"].SB, _grid_SB_SBSettingGrid__WEBPACK_IMPORTED_MODULE_8__["default"]), _defineProperty(_DataGrid, _lib_constants__WEBPACK_IMPORTED_MODULE_11__["BetLimitProduct"].VS, _grid_Base_SettingGrid__WEBPACK_IMPORTED_MODULE_7__["default"]), _defineProperty(_DataGrid, _lib_constants__WEBPACK_IMPORTED_MODULE_11__["BetLimitProduct"].VS2, _grid_Base_SettingGrid__WEBPACK_IMPORTED_MODULE_7__["default"]), _defineProperty(_DataGrid, _lib_constants__WEBPACK_IMPORTED_MODULE_11__["BetLimitProduct"].LT, _grid_Base_SettingGrid__WEBPACK_IMPORTED_MODULE_7__["default"]), _DataGrid);
+
+
+var DataGrid = (_DataGrid = {}, _defineProperty(_DataGrid, _lib_constants__WEBPACK_IMPORTED_MODULE_13__["BetLimitProduct"].SB, _grid_SB_SBSetting__WEBPACK_IMPORTED_MODULE_8__["default"]), _defineProperty(_DataGrid, _lib_constants__WEBPACK_IMPORTED_MODULE_13__["BetLimitProduct"].VS, _grid_DCS_DCSSetting__WEBPACK_IMPORTED_MODULE_7__["default"]), _defineProperty(_DataGrid, _lib_constants__WEBPACK_IMPORTED_MODULE_13__["BetLimitProduct"].VS2, _grid_DCS_DCSSetting__WEBPACK_IMPORTED_MODULE_7__["default"]), _defineProperty(_DataGrid, _lib_constants__WEBPACK_IMPORTED_MODULE_13__["BetLimitProduct"].LT, _grid_DCS_DCSSetting__WEBPACK_IMPORTED_MODULE_7__["default"]), _defineProperty(_DataGrid, _lib_constants__WEBPACK_IMPORTED_MODULE_13__["BetLimitProduct"].NG, _grid_NG_NGSetting__WEBPACK_IMPORTED_MODULE_9__["default"]), _defineProperty(_DataGrid, _lib_constants__WEBPACK_IMPORTED_MODULE_13__["BetLimitProduct"].KN, _grid_KN_KNSetting__WEBPACK_IMPORTED_MODULE_10__["default"]), _DataGrid);
 var DataContent =
 /*#__PURE__*/
 function (_PureComponent) {
@@ -486,12 +490,12 @@ function (_PureComponent) {
         disabled: disableButton,
         onClick: this.onSubmit,
         ref: this.submitButton
-      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource('Submit'))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Balloon__WEBPACK_IMPORTED_MODULE_9__["default"], _extends({
+      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource('Submit'))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Balloon__WEBPACK_IMPORTED_MODULE_11__["default"], _extends({
         width: 140,
         isOpen: showError,
         onClose: this.onCloseError,
         excludeOutSideComponents: [this.submitButton.current]
-      }, errorBalloon)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_sweet_alert__WEBPACK_IMPORTED_MODULE_10__["default"], _extends({
+      }, errorBalloon)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_sweet_alert__WEBPACK_IMPORTED_MODULE_12__["default"], _extends({
         width: 450,
         isShow: showAlert,
         isHtml: false
@@ -621,224 +625,138 @@ function mapStateToProps(state) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return SettingGrid; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
-/* harmony import */ var _SettingGridRow__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SettingGridRow */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/Base/SettingGridRow.jsx");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+/* harmony import */ var _Base_SettingRow__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Base/SettingRow */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/Base/SettingRow.jsx");
+/* harmony import */ var _Base_SettingInput__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Base/SettingInput */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/Base/SettingInput.jsx");
+/* harmony import */ var _lib_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../lib/service */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/service.js");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/constants.js");
 
 
 
 
 
-var SettingGrid =
-/*#__PURE__*/
-function (_PureComponent) {
-  _inherits(SettingGrid, _PureComponent);
 
-  function SettingGrid(props) {
-    var _this;
 
-    _classCallCheck(this, SettingGrid);
+var SettingGrid = function SettingGrid(props) {
+  var editable = props.editable,
+      data = props.data,
+      setRef = props.setRef;
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(SettingGrid).call(this, props));
-    _this.row = {};
-    _this.state = {
-      data: props.data
+  var buildBody = function buildBody() {
+    var rows = [];
+
+    var _loop = function _loop(i) {
+      var item = data[i];
+      rows.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Base_SettingRow__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        key: item.SportId,
+        id: item.SportId,
+        data: item,
+        ref: function ref(e) {
+          return setRef(item.SportId, e);
+        },
+        editable: editable,
+        validate: _lib_service__WEBPACK_IMPORTED_MODULE_4__["default"].validate
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, item.BetSettingType), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Base_SettingInput__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        type: _lib_constants__WEBPACK_IMPORTED_MODULE_5__["BetLimitType"].MinBet,
+        value: item.MinBet,
+        editable: editable
+      }, item.BetValueMin > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " >= ".concat(_lib_service__WEBPACK_IMPORTED_MODULE_4__["default"].formatValue(item.BetValueMin)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Base_SettingInput__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        type: _lib_constants__WEBPACK_IMPORTED_MODULE_5__["BetLimitType"].MaxBet,
+        value: item.MaxBet,
+        editable: editable
+      }, item.BetValueMax > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " <= ".concat(_lib_service__WEBPACK_IMPORTED_MODULE_4__["default"].formatValue(item.BetValueMax)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Base_SettingInput__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        type: _lib_constants__WEBPACK_IMPORTED_MODULE_5__["BetLimitType"].MaxPerMatch,
+        value: item.MaxPerMatch,
+        editable: editable
+      }, item.MaxPerMatchMax > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " <= ".concat(_lib_service__WEBPACK_IMPORTED_MODULE_4__["default"].formatValue(item.MaxPerMatchMax))))));
     };
-    return _this;
-  }
 
-  _createClass(SettingGrid, [{
-    key: "componentDidUpdate",
-    value: function componentDidUpdate(prevProps, prevState) {
-      if (prevProps.data !== this.props.data) {
-        this.row = {};
-        this.setState({
-          data: this.props.data
-        });
-      }
-
-      if (prevState.data !== this.state.data) {
-        this.reset();
-      }
+    for (var i = 0; i < data.length; i++) {
+      _loop(i);
     }
-  }, {
-    key: "reset",
-    value: function reset() {
-      var keys = Object.keys(this.row);
 
-      for (var i = 0; i < keys.length; i++) {
-        var item = this.row[keys[i]];
-        item.reset();
-      }
-    }
-  }, {
-    key: "validate",
-    value: function validate() {
-      var keys = Object.keys(this.row);
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, rows);
+  };
 
-      for (var i = 0; i < keys.length; i++) {
-        var item = this.row[keys[i]];
-        var result = item.validate();
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+    className: "table"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Sport')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('MinBet')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('MaxBet')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('MaxPerMatch')))), buildBody());
+};
 
-        if (result !== null) {
-          this._showError(result.input, result.msg);
-
-          return false;
-        }
-      }
-
-      return true;
-    }
-  }, {
-    key: "copyData",
-    value: function copyData() {
-      var copySportId = setting.CopySportId;
-      var copyRow = this.row[copySportId];
-
-      if (copyRow) {
-        var result = copyRow.validate();
-
-        if (result !== null) {
-          showErrorMsg(result.input, result.msg);
-          return false;
-        }
-
-        var keys = Object.keys(this.row);
-        var data = copyRow.value;
-
-        for (var i = 0; i < keys.length; i++) {
-          var id = keys[i];
-
-          if (id !== copySportId) {
-            var item = this.row[id];
-            item.updateData(data);
-            item.disable(true);
-          }
-        }
-
-        return true;
-      }
-
-      return false;
-    }
-  }, {
-    key: "removeCopyData",
-    value: function removeCopyData() {
-      var keys = Object.keys(this.row);
-
-      for (var i = 0; i < keys.length; i++) {
-        var item = this.row[keys[i]];
-        item.disable(false);
-      }
-    }
-  }, {
-    key: "_showError",
-    value: function _showError(invalidInput, msg) {
-      var showErrorMsg = this.props.showErrorMsg;
-      showErrorMsg && showErrorMsg(invalidInput, msg);
-    }
-  }, {
-    key: "setRef",
-    value: function setRef(id, element) {
-      if (element !== null) {
-        this.row[id] = element;
-      }
-    }
-  }, {
-    key: "_buildHeader",
-    value: function _buildHeader() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Sport')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('MinBet')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('MaxBet')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('MaxPerMatch'))));
-    }
-  }, {
-    key: "_buildBody",
-    value: function _buildBody(data, editable) {
-      var _this2 = this;
-
-      var rows = [];
-
-      var _loop = function _loop(i) {
-        var item = data[i];
-        rows.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SettingGridRow__WEBPACK_IMPORTED_MODULE_2__["default"], {
-          key: item.SportId,
-          data: item,
-          ref: function ref(e) {
-            return _this2.setRef(item.SportId, e);
-          },
-          editable: editable
-        }));
-      };
-
-      for (var i = 0; i < data.length; i++) {
-        _loop(i);
-      }
-
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, rows);
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var editable = this.props.setting.editable;
-      var data = this.state.data;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
-        className: "table"
-      }, this._buildHeader(), this._buildBody(data, editable)));
-    }
-  }, {
-    key: "value",
-    get: function get() {
-      var params = [];
-      var keys = Object.keys(this.row);
-
-      for (var i = 0; i < keys.length; i++) {
-        var item = this.row[keys[i]];
-        params.push(item.value);
-      }
-
-      return params;
-    }
-  }]);
-
-  return SettingGrid;
-}(react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"]);
-
-
+/* harmony default export */ __webpack_exports__["default"] = (SettingGrid);
 
 /***/ }),
 
-/***/ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/Base/SettingGridRow.jsx":
-/*!******************************************************************************************************!*\
-  !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/Base/SettingGridRow.jsx ***!
-  \******************************************************************************************************/
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/Base/SettingInput.jsx":
+/*!****************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/Base/SettingInput.jsx ***!
+  \****************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return SettingGridRow; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _lib_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../lib/service */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/service.js");
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+
+
+
+
+var SettingInput = function SettingInput(props) {
+  var value = props.value,
+      editable = props.editable,
+      className = props.className,
+      onBlur = props.onBlur,
+      type = props.type,
+      setInputRef = props.setInputRef,
+      children = props.children;
+  var formatValue = _lib_service__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(value);
+
+  var inputRef = function inputRef(e) {
+    return setInputRef(type, e);
+  };
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    className: "pa-betlimit-cell"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    className: className,
+    type: "text",
+    ref: inputRef,
+    autoComplete: "off",
+    maxLength: "14",
+    defaultValue: formatValue,
+    onBlur: onBlur,
+    disabled: !editable
+  }), children);
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (SettingInput);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/Base/SettingRow.jsx":
+/*!**************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/Base/SettingRow.jsx ***!
+  \**************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return SettingRow; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _lib_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../lib/service */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/service.js");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _SettingInput__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SettingInput */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/Base/SettingInput.jsx");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/constants.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -861,20 +779,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var ClassName = 'input-text right-align';
-var OnChangedClassName = 'input-text right-align input-changed';
 
-var SettingGridRow =
+
+
+var SettingRow =
 /*#__PURE__*/
 function (_PureComponent) {
-  _inherits(SettingGridRow, _PureComponent);
+  _inherits(SettingRow, _PureComponent);
 
-  function SettingGridRow(props) {
+  function SettingRow(props) {
     var _this;
 
-    _classCallCheck(this, SettingGridRow);
+    _classCallCheck(this, SettingRow);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(SettingGridRow).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(SettingRow).call(this, props));
+
+    _defineProperty(_assertThisInitialized(_this), "setCell", function (type, element) {
+      _this.cell[type] = element;
+    });
 
     _defineProperty(_assertThisInitialized(_this), "onBlur", function (e) {
       var element = e.target;
@@ -882,82 +804,22 @@ function (_PureComponent) {
       _this._handleInputChanged(element, _lib_service__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(_lib_service__WEBPACK_IMPORTED_MODULE_1__["default"].getValueAsNumber(element.value)));
     });
 
-    _this.minBet = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
-    _this.maxBet = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
-    _this.maxPerMatch = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
+    _this.cell = {};
     return _this;
   }
 
-  _createClass(SettingGridRow, [{
+  _createClass(SettingRow, [{
     key: "validate",
     value: function validate() {
-      var _this$value = this.value,
-          MinBet = _this$value.MinBet,
-          MaxBet = _this$value.MaxBet,
-          MaxPerMatch = _this$value.MaxPerMatch;
+      var _this$props = this.props,
+          validate = _this$props.validate,
+          data = _this$props.data;
+      var result = validate(this.value, data);
 
-      if (isNaN(MinBet)) {
+      if (result) {
         return {
-          input: this.minBet.current,
-          msg: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('IncorrectMinBet')
-        };
-      }
-
-      if (isNaN(MaxBet)) {
-        return {
-          input: this.maxBet.current,
-          msg: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('IncorrectMaxBet')
-        };
-      }
-
-      if (isNaN(MaxPerMatch)) {
-        return {
-          input: this.maxPerMatcth.current,
-          msg: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('IncorrectMaxPerMatch')
-        };
-      }
-
-      var data = this.props.data;
-
-      if (MinBet < data.BetValueMin) {
-        return {
-          input: this.minBet.current,
-          msg: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('MinBetGreaterThanOrEqual') + ' ' + data.BetValueMin
-        };
-      }
-
-      if (MaxBet > data.BetValueMax) {
-        return {
-          input: this.maxBet.current,
-          msg: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('MaxBetLessThanOrEqual') + ' ' + data.BetValueMax
-        };
-      }
-
-      if (MaxPerMatch > data.MaxPerMatchMax) {
-        return {
-          input: this.maxPerMatch.current,
-          msg: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('MaxBetMatchMoreThanOrEqual') + ' ' + data.MaxPerMatchMax
-        };
-      }
-
-      if (MaxPerMatch < data.MaxPerMatchMin) {
-        return {
-          input: this.maxPerMatch.current,
-          msg: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('MaxBetMatchLessThanOrEqual') + ' ' + data.MaxPerMatchMin
-        };
-      }
-
-      if (MinBet > MaxBet) {
-        return {
-          input: this.minBet.current,
-          msg: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('MinBetCanNotGreaterThanMaxBet') + ' ' + MaxBet
-        };
-      }
-
-      if (MaxBet > MaxPerMatch) {
-        return {
-          input: this.maxBet.current,
-          msg: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('MaxBetCanNotGreaterThanMaxPerMatch') + ' ' + MaxPerMatch
+          input: this.cell[result.type],
+          msg: result.msg
         };
       }
 
@@ -966,29 +828,33 @@ function (_PureComponent) {
   }, {
     key: "reset",
     value: function reset() {
-      this._handleInputChanged(this.minBet.current, this.minBet.current.defaultValue);
+      var keys = Object.keys(this.cell);
 
-      this._handleInputChanged(this.maxBet.current, this.maxBet.current.defaultValue);
+      for (var i = 0; i < keys.length; i++) {
+        var item = this.cell[keys[i]];
 
-      this._handleInputChanged(this.maxPerMatch.current, this.maxPerMatch.current.defaultValue);
+        this._handleInputChanged(item, item.current.defaultValue);
 
-      this.disable(false);
+        item.disabled = false;
+      }
     }
   }, {
     key: "disable",
     value: function disable(isDisabled) {
-      this.minBet.current.disabled = isDisabled;
-      this.maxBet.current.disabled = isDisabled;
-      this.maxPerMatch.current.disabled = isDisabled;
+      for (var i = 0; i < keys.length; i++) {
+        var item = this.cell[keys[i]];
+        item.current.disabled = isDisabled;
+      }
     }
   }, {
     key: "updateData",
     value: function updateData(data) {
-      this._handleInputChanged(this.minBet.current, _lib_service__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(data.MinBet));
+      for (var i = 0; i < keys.length; i++) {
+        var type = keys[i];
+        var item = this.cell[type];
 
-      this._handleInputChanged(this.maxBet.current, _lib_service__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(data.MaxBet));
-
-      this._handleInputChanged(this.maxPerMatch.current, _lib_service__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(data.MaxPerMatch));
+        this._handleInputChanged(item, _lib_service__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(data[type]));
+      }
     }
   }, {
     key: "_handleInputChanged",
@@ -998,69 +864,321 @@ function (_PureComponent) {
       }
 
       if (value !== element.defaultValue) {
-        element.setAttribute('class', OnChangedClassName);
+        element.setAttribute('class', _lib_constants__WEBPACK_IMPORTED_MODULE_4__["InputClassName"].OnChangedClassName);
       } else {
-        element.setAttribute('class', ClassName);
+        element.setAttribute('class', _lib_constants__WEBPACK_IMPORTED_MODULE_4__["InputClassName"].ClassName);
       }
     }
   }, {
-    key: "_buildInput",
-    value: function _buildInput(value, ref, type, editable) {
-      var formatValue = _lib_service__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(value);
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        className: ClassName,
-        type: "text",
-        ref: ref,
-        autoComplete: "off",
-        maxLength: "14",
-        defaultValue: formatValue,
-        onBlur: this.onBlur,
-        disabled: !editable
+    key: "_buildCell",
+    value: function _buildCell() {
+      var _this2 = this;
+
+      var _this$props2 = this.props,
+          children = _this$props2.children,
+          id = _this$props2.id;
+      return children.map(function (e, index) {
+        var type = e.props.type;
+        return e.type === _SettingInput__WEBPACK_IMPORTED_MODULE_3__["default"] ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SettingInput__WEBPACK_IMPORTED_MODULE_3__["default"], _extends({
+          key: "".concat(type, "-").concat(id),
+          className: _lib_constants__WEBPACK_IMPORTED_MODULE_4__["InputClassName"].ClassName,
+          setInputRef: _this2.setCell,
+          onBlur: _this2.onBlur
+        }, e.props)) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+          key: "".concat(index, "-").concat(id)
+        }, e.props.children);
       });
     }
   }, {
     key: "render",
     value: function render() {
-      var _this$props = this.props,
-          data = _this$props.data,
-          editable = _this$props.editable;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, data.BetSettingType), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-        className: "pa-betlimit-cell"
-      }, this._buildInput(data.MinBet, this.minBet, 'minBet', editable), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " >= ".concat(_lib_service__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(data.BetValueMin)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-        className: "pa-betlimit-cell"
-      }, this._buildInput(data.MaxBet, this.maxBet, 'maxBet', editable), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " <= ".concat(_lib_service__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(data.BetValueMax)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-        className: "pa-betlimit-cell"
-      }, this._buildInput(data.MaxPerMatch, this.maxPerMatch, 'maxPerMatch', editable), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " <= ".concat(_lib_service__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(data.MaxPerMatchMax)))));
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, this._buildCell());
     }
   }, {
     key: "value",
     get: function get() {
-      var _this$props$data = this.props.data,
-          MinBet = _this$props$data.MinBet,
-          MaxBet = _this$props$data.MaxBet,
-          MaxPerMatch = _this$props$data.MaxPerMatch;
-      var value = {
-        SportId: this.props.data.SportId,
-        BetType: this.props.data.BetType,
-        MinBet: _lib_service__WEBPACK_IMPORTED_MODULE_1__["default"].getValueAsNumber(this.minBet.current.value),
-        MaxBet: _lib_service__WEBPACK_IMPORTED_MODULE_1__["default"].getValueAsNumber(this.maxBet.current.value),
-        MaxPerMatch: _lib_service__WEBPACK_IMPORTED_MODULE_1__["default"].getValueAsNumber(this.maxPerMatch.current.value)
+      var data = this.props.data;
+      var result = {
+        SportId: data.SportId,
+        BetType: data.BetType,
+        IsUpdated: false
       };
-      value.IsUpdated = value.MinBet !== MinBet && value.MaxBet !== MaxBet && value.MaxPerMatch !== MaxPerMatch;
-      return value;
+      var keys = Object.keys(this.cell);
+
+      for (var i = 0; i < keys.length; i++) {
+        var type = keys[i];
+        var value = _lib_service__WEBPACK_IMPORTED_MODULE_1__["default"].getValueAsNumber(this.cell[type].value);
+        result[type] = value;
+        result.IsUpdated = result.IsUpdated || value != data[type];
+      }
+
+      return result;
     }
   }]);
 
-  return SettingGridRow;
+  return SettingRow;
 }(react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"]);
 
 
 
 /***/ }),
 
-/***/ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/SB/SBSettingGrid.jsx":
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/Base/createSettingGrid.jsx":
+/*!*********************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/Base/createSettingGrid.jsx ***!
+  \*********************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+var createSettingGrid = function createSettingGrid(Grid) {
+  var _temp;
+
+  return _temp =
+  /*#__PURE__*/
+  function (_PureComponent) {
+    _inherits(_temp, _PureComponent);
+
+    function _temp(props) {
+      var _this;
+
+      _classCallCheck(this, _temp);
+
+      _this = _possibleConstructorReturn(this, _getPrototypeOf(_temp).call(this, props));
+
+      _defineProperty(_assertThisInitialized(_this), "setRow", function (id, element) {
+        if (element !== null) {
+          _this.row[id] = element;
+        }
+      });
+
+      _this.row = {};
+      _this.state = {
+        data: props.data
+      };
+      return _this;
+    }
+
+    _createClass(_temp, [{
+      key: "componentDidUpdate",
+      value: function componentDidUpdate(prevProps, prevState) {
+        if (prevProps.data !== this.props.data) {
+          this.row = {};
+          this.setState({
+            data: this.props.data
+          });
+        }
+
+        if (prevState.data !== this.state.data) {
+          this.reset();
+        }
+      }
+    }, {
+      key: "reset",
+      value: function reset() {
+        var keys = Object.keys(this.row);
+
+        for (var i = 0; i < keys.length; i++) {
+          var item = this.row[keys[i]];
+          item.reset();
+        }
+      }
+    }, {
+      key: "validate",
+      value: function validate() {
+        var keys = Object.keys(this.row);
+
+        for (var i = 0; i < keys.length; i++) {
+          var item = this.row[keys[i]];
+          var result = item.validate();
+
+          if (result !== null) {
+            this._showError(result.input, result.msg);
+
+            return false;
+          }
+        }
+
+        return true;
+      }
+    }, {
+      key: "copyData",
+      value: function copyData() {
+        var copySportId = setting.CopySportId;
+        var copyRow = this.row[copySportId];
+
+        if (copyRow) {
+          var result = copyRow.validate();
+
+          if (result !== null) {
+            showErrorMsg(result.input, result.msg);
+            return false;
+          }
+
+          var keys = Object.keys(this.row);
+          var data = copyRow.value;
+
+          for (var i = 0; i < keys.length; i++) {
+            var id = keys[i];
+
+            if (id !== copySportId) {
+              var item = this.row[id];
+              item.updateData(data);
+              item.disable(true);
+            }
+          }
+
+          return true;
+        }
+
+        return false;
+      }
+    }, {
+      key: "removeCopyData",
+      value: function removeCopyData() {
+        var keys = Object.keys(this.row);
+
+        for (var i = 0; i < keys.length; i++) {
+          var item = this.row[keys[i]];
+          item.disable(false);
+        }
+      }
+    }, {
+      key: "_showError",
+      value: function _showError(invalidInput, msg) {
+        var showErrorMsg = this.props.showErrorMsg;
+        showErrorMsg && showErrorMsg(invalidInput, msg);
+      }
+    }, {
+      key: "render",
+      value: function render() {
+        var Editable = this.props.setting.Editable;
+        var data = this.state.data;
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Grid, {
+          data: data,
+          editable: Editable,
+          setRef: this.setRow
+        });
+      }
+    }, {
+      key: "value",
+      get: function get() {
+        var params = [];
+        var keys = Object.keys(this.row);
+
+        for (var i = 0; i < keys.length; i++) {
+          var item = this.row[keys[i]];
+          params.push(item.value);
+        }
+
+        return params;
+      }
+    }]);
+
+    return _temp;
+  }(react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"]), _temp;
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (createSettingGrid);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/DCS/DCSSetting.jsx":
+/*!*************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/DCS/DCSSetting.jsx ***!
+  \*************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _Base_createSettingGrid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Base/createSettingGrid */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/Base/createSettingGrid.jsx");
+/* harmony import */ var _Base_SettingGrid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Base/SettingGrid */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/Base/SettingGrid.jsx");
+
+
+
+
+var DCSSetting = react__WEBPACK_IMPORTED_MODULE_0___default.a.forwardRef(function (props, grid) {
+  var data = props.data,
+      setting = props.setting,
+      showErrorMsg = props.showErrorMsg;
+  var Grid = Object(_Base_createSettingGrid__WEBPACK_IMPORTED_MODULE_2__["default"])(_Base_SettingGrid__WEBPACK_IMPORTED_MODULE_3__["default"]);
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Grid, {
+    data: data,
+    ref: grid,
+    showErrorMsg: showErrorMsg,
+    setting: setting
+  });
+});
+/* harmony default export */ __webpack_exports__["default"] = (react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(DCSSetting));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/KN/KNSetting.jsx":
+/*!***********************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/KN/KNSetting.jsx ***!
+  \***********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _Base_createSettingGrid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Base/createSettingGrid */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/Base/createSettingGrid.jsx");
+/* harmony import */ var _KNSettingGrid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./KNSettingGrid */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/KN/KNSettingGrid.jsx");
+
+
+
+
+var KNSetting = react__WEBPACK_IMPORTED_MODULE_0___default.a.forwardRef(function (props, grid) {
+  var data = props.data,
+      setting = props.setting,
+      showErrorMsg = props.showErrorMsg;
+  var Grid = Object(_Base_createSettingGrid__WEBPACK_IMPORTED_MODULE_2__["default"])(_KNSettingGrid__WEBPACK_IMPORTED_MODULE_3__["default"]);
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Grid, {
+    data: data,
+    ref: grid,
+    showErrorMsg: showErrorMsg,
+    setting: setting
+  });
+});
+/* harmony default export */ __webpack_exports__["default"] = (react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(KNSetting));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/KN/KNSettingGrid.jsx":
 /*!***************************************************************************************************!*\
-  !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/SB/SBSettingGrid.jsx ***!
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/KN/KNSettingGrid.jsx ***!
   \***************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -1070,10 +1188,193 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
-/* harmony import */ var _Base_SettingGrid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Base/SettingGrid */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/Base/SettingGrid.jsx");
-/* harmony import */ var _jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/components/CheckBox */ "./www/js/source/reactpages/components/CheckBox.jsx");
-var _this = undefined;
+/* harmony import */ var _Base_SettingRow__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Base/SettingRow */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/Base/SettingRow.jsx");
+/* harmony import */ var _Base_SettingInput__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Base/SettingInput */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/Base/SettingInput.jsx");
+/* harmony import */ var _lib_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../lib/service */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/service.js");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/constants.js");
 
+
+
+
+
+
+
+var KNSettingGrid = function KNSettingGrid(props) {
+  var editable = props.editable,
+      data = props.data,
+      setRef = props.setRef;
+
+  var buildBody = function buildBody() {
+    var rows = [];
+
+    var _loop = function _loop(i) {
+      var item = data[i];
+      rows.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Base_SettingRow__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        key: item.SportId,
+        id: item.SportId,
+        data: item,
+        ref: function ref(e) {
+          return setRef(item.SportId, e);
+        },
+        editable: editable,
+        validate: _lib_service__WEBPACK_IMPORTED_MODULE_4__["default"].validate
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, item.BetSettingType), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Base_SettingInput__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        type: _lib_constants__WEBPACK_IMPORTED_MODULE_5__["BetLimitType"].MinBet,
+        value: item.MinBet,
+        editable: editable
+      }, item.BetValueMin > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " >= ".concat(_lib_service__WEBPACK_IMPORTED_MODULE_4__["default"].formatValue(item.BetValueMin)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Base_SettingInput__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        type: _lib_constants__WEBPACK_IMPORTED_MODULE_5__["BetLimitType"].MaxBet,
+        value: item.MaxBet,
+        editable: editable
+      }, item.BetValueMax > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " <= ".concat(_lib_service__WEBPACK_IMPORTED_MODULE_4__["default"].formatValue(item.BetValueMax)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Base_SettingInput__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        type: _lib_constants__WEBPACK_IMPORTED_MODULE_5__["BetLimitType"].MaxPerMatch,
+        value: item.MaxPerMatch,
+        editable: editable
+      }, item.BetValueMax > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " <= ".concat(_lib_service__WEBPACK_IMPORTED_MODULE_4__["default"].formatValue(item.MaxPerMatchMax))))));
+    };
+
+    for (var i = 0; i < data.length; i++) {
+      _loop(i);
+    }
+
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, rows);
+  };
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+    className: "table"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Sport')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('MinBet')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('MaxBet')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('MaxPerDraw')))), buildBody());
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (KNSettingGrid);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/NG/NGSetting.jsx":
+/*!***********************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/NG/NGSetting.jsx ***!
+  \***********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _Base_createSettingGrid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Base/createSettingGrid */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/Base/createSettingGrid.jsx");
+/* harmony import */ var _NGSettingGrid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./NGSettingGrid */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/NG/NGSettingGrid.jsx");
+
+
+
+
+var NGSetting = react__WEBPACK_IMPORTED_MODULE_0___default.a.forwardRef(function (props, grid) {
+  var data = props.data,
+      setting = props.setting,
+      showErrorMsg = props.showErrorMsg;
+  var Grid = Object(_Base_createSettingGrid__WEBPACK_IMPORTED_MODULE_2__["default"])(_NGSettingGrid__WEBPACK_IMPORTED_MODULE_3__["default"]);
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Grid, {
+    data: data,
+    ref: grid,
+    showErrorMsg: showErrorMsg,
+    setting: setting
+  });
+});
+/* harmony default export */ __webpack_exports__["default"] = (react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(NGSetting));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/NG/NGSettingGrid.jsx":
+/*!***************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/NG/NGSettingGrid.jsx ***!
+  \***************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _Base_SettingRow__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Base/SettingRow */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/Base/SettingRow.jsx");
+/* harmony import */ var _Base_SettingInput__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Base/SettingInput */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/Base/SettingInput.jsx");
+/* harmony import */ var _lib_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../lib/service */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/service.js");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/constants.js");
+
+
+
+
+
+
+
+var NGSettingGrid = function NGSettingGrid(props) {
+  var editable = props.editable,
+      data = props.data,
+      setRef = props.setRef;
+
+  var buildBody = function buildBody() {
+    var rows = [];
+
+    var _loop = function _loop(i) {
+      var item = data[i];
+      rows.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Base_SettingRow__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        key: item.SportId,
+        id: item.SportId,
+        data: item,
+        ref: function ref(e) {
+          return setRef(item.SportId, e);
+        },
+        editable: editable,
+        validate: _lib_service__WEBPACK_IMPORTED_MODULE_4__["default"].validateNumberGame
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, item.BetSettingType), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Base_SettingInput__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        type: _lib_constants__WEBPACK_IMPORTED_MODULE_5__["BetLimitType"].MinBet,
+        value: item.MinBet,
+        editable: editable
+      }, item.BetValueMin > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " >= ".concat(_lib_service__WEBPACK_IMPORTED_MODULE_4__["default"].formatValue(item.BetValueMin)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Base_SettingInput__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        type: _lib_constants__WEBPACK_IMPORTED_MODULE_5__["BetLimitType"].MaxBet,
+        value: item.MaxBet,
+        editable: editable
+      }, item.BetValueMax > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " <= ".concat(_lib_service__WEBPACK_IMPORTED_MODULE_4__["default"].formatValue(item.BetValueMax)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Base_SettingInput__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        type: _lib_constants__WEBPACK_IMPORTED_MODULE_5__["BetLimitType"].MaxPerMatch,
+        value: item.MaxPerMatch,
+        editable: editable
+      }, item.MaxPerMatchMax > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " <= ".concat(_lib_service__WEBPACK_IMPORTED_MODULE_4__["default"].formatValue(item.MaxPerMatchMax)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Base_SettingInput__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        type: _lib_constants__WEBPACK_IMPORTED_MODULE_5__["BetLimitType"].MaxPerBall,
+        value: item.MaxPerBall,
+        editable: editable
+      }, item.MaxPerBallMax > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " <= ".concat(_lib_service__WEBPACK_IMPORTED_MODULE_4__["default"].formatValue(item.MaxPerBallMax))))));
+    };
+
+    for (var i = 0; i < data.length; i++) {
+      _loop(i);
+    }
+
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, rows);
+  };
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+    className: "table"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Sport')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('MinBet')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('MaxBet')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('MaxPerMatch')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('MaxPerBall')))), buildBody());
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (NGSettingGrid);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/SB/SBSetting.jsx":
+/*!***********************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/SB/SBSetting.jsx ***!
+  \***********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _Base_createSettingGrid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Base/createSettingGrid */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/Base/createSettingGrid.jsx");
+/* harmony import */ var _Base_SettingGrid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Base/SettingGrid */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/Base/SettingGrid.jsx");
+/* harmony import */ var _jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/components/CheckBox */ "./www/js/source/reactpages/components/CheckBox.jsx");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -1086,15 +1387,16 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var SBSettingGrid = Object(react__WEBPACK_IMPORTED_MODULE_0__["forwardRef"])(function (props, grid) {
-  var _this$props = _this.props,
-      data = _this$props.data,
-      setting = _this$props.setting,
-      showErrorMsg = _this$props.showErrorMsg;
 
-  var _useState$false = _slicedToArray(react__WEBPACK_IMPORTED_MODULE_0__["useState"][false], 2),
-      isCopy = _useState$false[0],
-      setIsCopy = _useState$false[1];
+var SBSetting = react__WEBPACK_IMPORTED_MODULE_0___default.a.forwardRef(function (props, grid) {
+  var data = props.data,
+      setting = props.setting,
+      showErrorMsg = props.showErrorMsg;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      isCopy = _useState2[0],
+      setIsCopy = _useState2[1];
 
   var onCheck = function onCheck(checked) {
     var isCopy = checked;
@@ -1110,19 +1412,20 @@ var SBSettingGrid = Object(react__WEBPACK_IMPORTED_MODULE_0__["forwardRef"])(fun
     setIsCopy(isCopy);
   };
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, setting.EnableCopy && setting.Editable && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  var Grid = Object(_Base_createSettingGrid__WEBPACK_IMPORTED_MODULE_2__["default"])(_Base_SettingGrid__WEBPACK_IMPORTED_MODULE_3__["default"]);
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, setting.EnableCopy && setting.Editable && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_4__["default"], {
     id: "IsCopy",
     checked: isCopy,
     onChange: onCheck,
     label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("CopyBetSettingFromSoccer")
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Base_SettingGrid__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Grid, {
     data: data,
     ref: grid,
     showErrorMsg: showErrorMsg,
     setting: setting
   }));
 });
-/* harmony default export */ __webpack_exports__["default"] = (SBSettingGrid);
+/* harmony default export */ __webpack_exports__["default"] = (react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(SBSetting));
 
 /***/ }),
 
@@ -1166,23 +1469,31 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_
 /*!*******************************************************************************!*\
   !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/constants.js ***!
   \*******************************************************************************/
-/*! exports provided: BetLimitProduct, BetLimitType */
+/*! exports provided: BetLimitProduct, BetLimitType, InputClassName */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BetLimitProduct", function() { return BetLimitProduct; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BetLimitType", function() { return BetLimitType; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "InputClassName", function() { return InputClassName; });
 var BetLimitProduct = {
   SB: 0,
   VS: 5,
   VS2: 27,
-  LT: 28
+  LT: 28,
+  NG: 2,
+  KN: 8
 };
 var BetLimitType = {
-  MinBet: 'minBet',
-  MaxBet: 'maxBet',
-  MaxPerMatch: 'maxPerMatch'
+  MinBet: 'MinBet',
+  MaxBet: 'MaxBet',
+  MaxPerMatch: 'MaxPerMatch',
+  MaxPerBall: 'MaxPerBall'
+};
+var InputClassName = {
+  ClassName: 'input-text right-align',
+  OnChangedClassName: 'input-text right-align input-changed'
 };
 
 /***/ }),
@@ -1221,7 +1532,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var Url = (_Url = {}, _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_4__["BetLimitProduct"].SB, 'SportBookBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_4__["BetLimitProduct"].VS, 'DcsBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_4__["BetLimitProduct"].VS2, 'DcsBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_4__["BetLimitProduct"].LT, 'DcsBetLimit'), _Url);
+var Url = (_Url = {}, _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_4__["BetLimitProduct"].SB, 'SportBookBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_4__["BetLimitProduct"].VS, 'DcsBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_4__["BetLimitProduct"].VS2, 'DcsBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_4__["BetLimitProduct"].LT, 'DcsBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_4__["BetLimitProduct"].NG, 'NumberGameBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_4__["BetLimitProduct"].KN, 'RngKenoBetLimit'), _Url);
 
 var Service =
 /*#__PURE__*/
@@ -1243,14 +1554,13 @@ function () {
   }, {
     key: "formatValue",
     value: function formatValue(value) {
-      var data = _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_3__["default"].format(value, 2, false);
-      return data ? data : "0";
+      return _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_3__["default"].format(value, 2, false);
     }
   }, {
     key: "getValueAsNumber",
     value: function getValueAsNumber(text) {
       var number = parseFloat(text.replace(/,/g, ''));
-      return !isNaN(number) && isFinite(number) ? number : 0;
+      return !isNaN(number) && isFinite(number) ? number : NaN;
     }
   }, {
     key: "getData",
@@ -1286,6 +1596,101 @@ function () {
       }).catch(function (error) {
         errorHandle && errorHandle();
       });
+    }
+  }, {
+    key: "validate",
+    value: function validate(current, original) {
+      var MinBet = current.MinBet,
+          MaxBet = current.MaxBet,
+          MaxPerMatch = current.MaxPerMatch;
+
+      if (isNaN(MinBet)) {
+        return {
+          type: _constants__WEBPACK_IMPORTED_MODULE_4__["BetLimitType"].MinBet,
+          msg: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('IncorrectMinBet')
+        };
+      }
+
+      if (isNaN(MaxBet)) {
+        return {
+          type: _constants__WEBPACK_IMPORTED_MODULE_4__["BetLimitType"].MaxBet,
+          msg: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('IncorrectMaxBet')
+        };
+      }
+
+      if (isNaN(MaxPerMatch)) {
+        return {
+          type: _constants__WEBPACK_IMPORTED_MODULE_4__["BetLimitType"].MaxPerMatch,
+          msg: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('IncorrectMaxPerMatch')
+        };
+      }
+
+      if (original.BetValueMin > 0 && MinBet < original.BetValueMin) {
+        return {
+          type: _constants__WEBPACK_IMPORTED_MODULE_4__["BetLimitType"].MinBet,
+          msg: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('MinBetGreaterThanOrEqual') + ' ' + original.BetValueMin
+        };
+      }
+
+      if (original.BetValueMax > 0 && MaxBet > original.BetValueMax) {
+        return {
+          type: _constants__WEBPACK_IMPORTED_MODULE_4__["BetLimitType"].MaxBet,
+          msg: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('MaxBetLessThanOrEqual') + ' ' + original.BetValueMax
+        };
+      }
+
+      if (original.MaxPerMatchMax > 0 && MaxPerMatch > original.MaxPerMatchMax) {
+        return {
+          type: _constants__WEBPACK_IMPORTED_MODULE_4__["BetLimitType"].MaxPerMatch,
+          msg: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('MaxBetMatchMoreThanOrEqual') + ' ' + original.MaxPerMatchMax
+        };
+      }
+
+      if (original.MaxPerMatchMin > 0 && MaxPerMatch < original.MaxPerMatchMin) {
+        return {
+          type: _constants__WEBPACK_IMPORTED_MODULE_4__["BetLimitType"].MaxPerMatch,
+          msg: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('MaxBetMatchLessThanOrEqual') + ' ' + original.MaxPerMatchMin
+        };
+      }
+
+      if (MinBet > MaxBet) {
+        return {
+          type: _constants__WEBPACK_IMPORTED_MODULE_4__["BetLimitType"].MinBet,
+          msg: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('MinBetCanNotGreaterThanMaxBet') + ' ' + MaxBet
+        };
+      }
+
+      if (MaxBet > MaxPerMatch) {
+        return {
+          type: _constants__WEBPACK_IMPORTED_MODULE_4__["BetLimitType"].MaxBet,
+          msg: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('MaxBetCanNotGreaterThanMaxPerMatch') + ' ' + MaxPerMatch
+        };
+      }
+    }
+  }, {
+    key: "validateNumberGame",
+    value: function validateNumberGame(current, original) {
+      var result = Service.validate(current, original);
+
+      if (result) {
+        return result;
+      }
+
+      var MaxPerBall = current.MaxPerBall;
+
+      if (isNaN(MaxPerBall)) {
+        return {
+          type: _constants__WEBPACK_IMPORTED_MODULE_4__["BetLimitType"].MaxPerBall,
+          msg: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('IncorrectMaxPerBall')
+        };
+      }
+
+      if (original.MaxPerBallMax > 0 && MaxPerBall > original.MaxPerBallMax) {
+        return {
+          type: _constants__WEBPACK_IMPORTED_MODULE_4__["BetLimitType"].MaxPerBall,
+          msg: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('MaxPerBallLessThanOrEqual') + ' ' + original.MaxPerBallMax
+        };
+      }
     }
   }]);
 

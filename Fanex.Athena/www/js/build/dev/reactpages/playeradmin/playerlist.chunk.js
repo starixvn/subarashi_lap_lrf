@@ -292,12 +292,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSuggestionList", function() { return getSuggestionList; });
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/actions/types.js");
 /* harmony import */ var _jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/actions/loaderAction */ "./www/js/source/reactpages/actions/loaderAction.js");
-/* harmony import */ var _lib_playerQueryService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../lib/playerQueryService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerQueryService.js");
+/* harmony import */ var _lib_services_playerQueryService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../lib/services/playerQueryService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/services/playerQueryService.js");
 /* harmony import */ var _commonAction__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./commonAction */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/actions/commonAction.js");
 /* harmony import */ var _gridHandlerAction__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./gridHandlerAction */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/actions/gridHandlerAction.js");
 /* harmony import */ var _lib_constants_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../lib/constants.js */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
-/* harmony import */ var _lib_playerDataBuilder__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../lib/playerDataBuilder */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerDataBuilder.js");
-/* harmony import */ var _lib_playerSuggestionService__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../lib/playerSuggestionService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerSuggestionService.js");
+/* harmony import */ var _lib_helpers_playerDataBuilder__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../lib/helpers/playerDataBuilder */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/playerDataBuilder.js");
+/* harmony import */ var _lib_services_playerSuggestionService__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../lib/services/playerSuggestionService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/services/playerSuggestionService.js");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -319,7 +319,7 @@ var processBeforeGettingData = function processBeforeGettingData(dispatch) {
 
 var searchPlayer = function searchPlayer(param) {
   return function (dispatch) {
-    var service = new _lib_playerQueryService__WEBPACK_IMPORTED_MODULE_2__["default"]();
+    var service = new _lib_services_playerQueryService__WEBPACK_IMPORTED_MODULE_2__["default"]();
     processBeforeGettingData(dispatch);
     dispatch(setParam(param));
     service.getPlayerList(param).then(function (result) {
@@ -337,7 +337,7 @@ var searchPlayer = function searchPlayer(param) {
       dispatch(Object(_gridHandlerAction__WEBPACK_IMPORTED_MODULE_4__["setPagingOption"])(pagingOption));
 
       if (playerList.length === 1) {
-        var selectedPlayer = Object(_lib_playerDataBuilder__WEBPACK_IMPORTED_MODULE_6__["buildSelectedPlayer"])(playerList[0]);
+        var selectedPlayer = Object(_lib_helpers_playerDataBuilder__WEBPACK_IMPORTED_MODULE_6__["buildSelectedPlayer"])(playerList[0]);
         dispatch(Object(_commonAction__WEBPACK_IMPORTED_MODULE_3__["setSelectedPlayer"])(selectedPlayer));
       }
 
@@ -349,7 +349,7 @@ var searchPlayer = function searchPlayer(param) {
 };
 var getSinglePlayer = function getSinglePlayer(param) {
   return function (dispatch) {
-    var service = new _lib_playerQueryService__WEBPACK_IMPORTED_MODULE_2__["default"]();
+    var service = new _lib_services_playerQueryService__WEBPACK_IMPORTED_MODULE_2__["default"]();
     processBeforeGettingData(dispatch);
     service.getSinglePlayer(param).then(function (result) {
       if (result) {
@@ -361,7 +361,7 @@ var getSinglePlayer = function getSinglePlayer(param) {
         });
 
         dispatch(Object(_gridHandlerAction__WEBPACK_IMPORTED_MODULE_4__["setPagingOption"])(pagingOption));
-        var selectedPlayer = Object(_lib_playerDataBuilder__WEBPACK_IMPORTED_MODULE_6__["buildSelectedPlayer"])(result);
+        var selectedPlayer = Object(_lib_helpers_playerDataBuilder__WEBPACK_IMPORTED_MODULE_6__["buildSelectedPlayer"])(result);
         dispatch(Object(_commonAction__WEBPACK_IMPORTED_MODULE_3__["setSelectedPlayer"])(selectedPlayer));
       }
 
@@ -391,7 +391,7 @@ var setCollapseFilter = function setCollapseFilter(data) {
 };
 var getSuggestionList = function getSuggestionList(param) {
   return function () {
-    var suggestionService = new _lib_playerSuggestionService__WEBPACK_IMPORTED_MODULE_7__["default"]();
+    var suggestionService = new _lib_services_playerSuggestionService__WEBPACK_IMPORTED_MODULE_7__["default"]();
     return suggestionService.getSuggestionList(param);
   };
 };
@@ -408,11 +408,11 @@ var getSuggestionList = function getSuggestionList(param) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateBaStatus", function() { return updateBaStatus; });
-/* harmony import */ var _lib_playerCommandService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../lib/playerCommandService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerCommandService.js");
+/* harmony import */ var _lib_services_playerCommandService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../lib/services/playerCommandService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/services/playerCommandService.js");
 
 var updateBaStatus = function updateBaStatus(param) {
   return function () {
-    var commandService = new _lib_playerCommandService__WEBPACK_IMPORTED_MODULE_0__["default"]();
+    var commandService = new _lib_services_playerCommandService__WEBPACK_IMPORTED_MODULE_0__["default"]();
     return commandService.updateBaStatus(param);
   };
 };
@@ -436,7 +436,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setIsFetchingData", function() { return setIsFetchingData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSweetAlertOption", function() { return setSweetAlertOption; });
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/actions/types.js");
-/* harmony import */ var _lib_playerQueryService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/playerQueryService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerQueryService.js");
+/* harmony import */ var _lib_services_playerQueryService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/services/playerQueryService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/services/playerQueryService.js");
 
 
 var setDisplayedColumnList = function setDisplayedColumnList(data) {
@@ -465,7 +465,7 @@ var setPagingOption = function setPagingOption(data) {
 };
 var exportExcel = function exportExcel(playerList, param, displayedColumn) {
   return function () {
-    var service = new _lib_playerQueryService__WEBPACK_IMPORTED_MODULE_1__["default"]();
+    var service = new _lib_services_playerQueryService__WEBPACK_IMPORTED_MODULE_1__["default"]();
     service.exportExcel(playerList, param, displayedColumn);
   };
 };
@@ -496,7 +496,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setOddsGroupDropdownPosition", function() { return setOddsGroupDropdownPosition; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateOddsGroup", function() { return updateOddsGroup; });
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/actions/types.js");
-/* harmony import */ var _lib_playerCommandService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/playerCommandService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerCommandService.js");
+/* harmony import */ var _lib_services_playerCommandService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/services/playerCommandService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/services/playerCommandService.js");
 
 
 var setOddsGroupDropdownPosition = function setOddsGroupDropdownPosition(data) {
@@ -507,7 +507,7 @@ var setOddsGroupDropdownPosition = function setOddsGroupDropdownPosition(data) {
 };
 var updateOddsGroup = function updateOddsGroup(param) {
   return function () {
-    var commandService = new _lib_playerCommandService__WEBPACK_IMPORTED_MODULE_1__["default"]();
+    var commandService = new _lib_services_playerCommandService__WEBPACK_IMPORTED_MODULE_1__["default"]();
     return commandService.updateOddsGroup(param);
   };
 };
@@ -526,7 +526,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setStatusDropdownPosition", function() { return setStatusDropdownPosition; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updatePlayerStatus", function() { return updatePlayerStatus; });
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/actions/types.js");
-/* harmony import */ var _lib_playerCommandService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/playerCommandService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerCommandService.js");
+/* harmony import */ var _lib_services_playerCommandService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/services/playerCommandService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/services/playerCommandService.js");
 
 
 var setStatusDropdownPosition = function setStatusDropdownPosition(data) {
@@ -537,7 +537,7 @@ var setStatusDropdownPosition = function setStatusDropdownPosition(data) {
 };
 var updatePlayerStatus = function updatePlayerStatus(param) {
   return function () {
-    var commandService = new _lib_playerCommandService__WEBPACK_IMPORTED_MODULE_1__["default"]();
+    var commandService = new _lib_services_playerCommandService__WEBPACK_IMPORTED_MODULE_1__["default"]();
     return commandService.updatePlayerStatus(param);
   };
 };
@@ -556,7 +556,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSpecialLevelDropdownPosition", function() { return setSpecialLevelDropdownPosition; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateSpecialLevel", function() { return updateSpecialLevel; });
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/actions/types.js");
-/* harmony import */ var _lib_playerCommandService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/playerCommandService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerCommandService.js");
+/* harmony import */ var _lib_services_playerCommandService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/services/playerCommandService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/services/playerCommandService.js");
 
 
 var setSpecialLevelDropdownPosition = function setSpecialLevelDropdownPosition(data) {
@@ -567,7 +567,7 @@ var setSpecialLevelDropdownPosition = function setSpecialLevelDropdownPosition(d
 };
 var updateSpecialLevel = function updateSpecialLevel(param) {
   return function () {
-    var commandService = new _lib_playerCommandService__WEBPACK_IMPORTED_MODULE_1__["default"]();
+    var commandService = new _lib_services_playerCommandService__WEBPACK_IMPORTED_MODULE_1__["default"]();
     return commandService.updateSpecialLevel(param);
   };
 };
@@ -642,19 +642,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTabList", function() { return getTabList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSelectedPlayerIdList", function() { return setSelectedPlayerIdList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSelectedTabName", function() { return setSelectedTabName; });
-/* harmony import */ var _lib_playerQueryService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../lib/playerQueryService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerQueryService.js");
+/* harmony import */ var _lib_services_playerQueryService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../lib/services/playerQueryService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/services/playerQueryService.js");
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./types */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/actions/types.js");
 
 
 var getLink = function getLink(systemType, action) {
   return function () {
-    var service = new _lib_playerQueryService__WEBPACK_IMPORTED_MODULE_0__["default"]();
+    var service = new _lib_services_playerQueryService__WEBPACK_IMPORTED_MODULE_0__["default"]();
     return service.getLink(systemType, action);
   };
 };
 var getTabList = function getTabList() {
   return function () {
-    var service = new _lib_playerQueryService__WEBPACK_IMPORTED_MODULE_0__["default"]();
+    var service = new _lib_services_playerQueryService__WEBPACK_IMPORTED_MODULE_0__["default"]();
     return service.getTabList();
   };
 };
@@ -856,12 +856,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _grid_ContextMenu__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./grid/ContextMenu */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/components/grid/ContextMenu.jsx");
 /* harmony import */ var _grid_SpecialLevelDropdown__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./grid/SpecialLevelDropdown */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/components/grid/SpecialLevelDropdown.jsx");
-/* harmony import */ var _lib_gridHelper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../lib/gridHelper */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/gridHelper.js");
-/* harmony import */ var _lib_gridInteractionService__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../lib/gridInteractionService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/gridInteractionService.js");
+/* harmony import */ var _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../lib/helpers/gridHelper */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/gridHelper.js");
+/* harmony import */ var _lib_services_gridInteractionService__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../lib/services/gridInteractionService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/services/gridInteractionService.js");
 /* harmony import */ var _grid_OddsGroupDropdown__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./grid/OddsGroupDropdown */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/components/grid/OddsGroupDropdown.jsx");
 /* harmony import */ var _grid_PlayerRow__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./grid/PlayerRow */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/components/grid/PlayerRow.jsx");
 /* harmony import */ var _grid_StatusDropdown__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./grid/StatusDropdown */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/components/grid/StatusDropdown.jsx");
-/* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../lib/utils */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/utils.js");
+/* harmony import */ var _lib_helpers_utils__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../lib/helpers/utils */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/utils.js");
 /* harmony import */ var _jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @jsroot/components/NoDataTitle */ "./www/js/source/reactpages/components/NoDataTitle.jsx");
 /* harmony import */ var _components_sweet_alert__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../../../components/sweet-alert */ "./www/js/source/reactpages/components/sweet-alert/index.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -918,7 +918,7 @@ function (_PureComponent) {
       var _this$props = _this.props,
           playerList = _this$props.playerList,
           setPlayerList = _this$props.setPlayerList;
-      var sortedPlayerList = _lib_gridInteractionService__WEBPACK_IMPORTED_MODULE_8__["default"].sortPlayerList(playerList, sortBy, sortOrder);
+      var sortedPlayerList = _lib_services_gridInteractionService__WEBPACK_IMPORTED_MODULE_8__["default"].sortPlayerList(playerList, sortBy, sortOrder);
       setPlayerList(sortedPlayerList);
     });
 
@@ -938,7 +938,7 @@ function (_PureComponent) {
           displayedColumn: displayedColumn
         };
         dataRows.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_grid_PlayerRow__WEBPACK_IMPORTED_MODULE_10__["default"], _extends({
-          key: dataItem.CustId
+          key: dataItem.LicenseeCustId
         }, rowProps)));
       }
 
@@ -963,15 +963,15 @@ function (_PureComponent) {
       }
 
       var dataList = selectedPlayer ? [playerList.find(function (item) {
-        return item.CustId === selectedPlayer.custId;
+        return item.LicenseeCustId === selectedPlayer.licenseeCustId;
       })] : playerList;
-      var displayedColumn = Object(_lib_utils__WEBPACK_IMPORTED_MODULE_12__["buildDisplayedColumnObject"])(displayedColumnList);
+      var displayedColumn = Object(_lib_helpers_utils__WEBPACK_IMPORTED_MODULE_12__["buildDisplayedColumnObject"])(displayedColumnList);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Table"], {
         minWidth: 650,
         autoWidth: true,
         maxWidth: this.maxWidth,
         autoHeight: true,
-        header: _lib_gridHelper__WEBPACK_IMPORTED_MODULE_7__["default"].renderHeader(displayedColumn),
+        header: _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_7__["default"].renderHeader(displayedColumn),
         body: this._renderDataSection(dataList, displayedColumn),
         containerPadding: 30,
         shouldResetScrollPosition: isFetchingData,
@@ -1141,7 +1141,7 @@ function (_PureComponent) {
 
       if (custId || licenseeCustId) {
         var param = {
-          custId: custId,
+          ibcCustId: custId,
           licenseeCustId: licenseeCustId
         };
         this.props.getSinglePlayer(param);
@@ -1412,10 +1412,10 @@ function (_PureComponent) {
     key: "_buildActionUrl",
     value: function _buildActionUrl(systemType, action) {
       var selectedPlayer = this.props.selectedPlayer;
-      var custId = selectedPlayer.custId,
+      var ibcCustId = selectedPlayer.ibcCustId,
           licenseeCustId = selectedPlayer.licenseeCustId,
           currencyId = selectedPlayer.currencyId;
-      var custIdQueryString = systemType === _constants_configInfo__WEBPACK_IMPORTED_MODULE_5__["systemType"].lrf ? "custId=".concat(custId) : "custId=".concat(custId, "&licenseeCustId=").concat(licenseeCustId);
+      var custIdQueryString = systemType === _constants_configInfo__WEBPACK_IMPORTED_MODULE_5__["systemType"].lrf ? "custId=".concat(ibcCustId) : "custId=".concat(ibcCustId, "&licenseeCustId=").concat(licenseeCustId);
       var nameValuePairString = custIdQueryString + "&currencyId=".concat(currencyId);
       var queryString = (action.indexOf('?') !== -1 ? '&' : '?') + nameValuePairString;
       var urlByPlayer = action + queryString;
@@ -1574,7 +1574,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @9softstudio/react-multiselect */ "./node_modules/@9softstudio/react-multiselect/dist/index.js");
 /* harmony import */ var _9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
-/* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../lib/utils */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/utils.js");
+/* harmony import */ var _lib_helpers_utils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../lib/helpers/utils */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/utils.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
@@ -1645,7 +1645,7 @@ function (_React$Component) {
         return;
       }
 
-      var displayedColumn = Object(_lib_utils__WEBPACK_IMPORTED_MODULE_7__["buildDisplayedColumnObject"])(displayedColumnList);
+      var displayedColumn = Object(_lib_helpers_utils__WEBPACK_IMPORTED_MODULE_7__["buildDisplayedColumnObject"])(displayedColumnList);
       exportExcel(playerList, param, displayedColumn);
     });
 
@@ -1766,7 +1766,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_select__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-select */ "./node_modules/react-select/dist/react-select.es.js");
 /* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
-/* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../lib/utils */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/utils.js");
+/* harmony import */ var _lib_helpers_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../lib/helpers/utils */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/utils.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1824,7 +1824,7 @@ function (_React$Component) {
     _this.specialLevelList = Object.keys(_lib_constants__WEBPACK_IMPORTED_MODULE_4__["specialLevelListWithColor"]).map(function (item) {
       return {
         Id: item,
-        Value: Object(_lib_utils__WEBPACK_IMPORTED_MODULE_6__["getSpecialLevelText"])(item),
+        Value: Object(_lib_helpers_utils__WEBPACK_IMPORTED_MODULE_6__["getSpecialLevelText"])(item),
         Status: true
       };
     });
@@ -2267,8 +2267,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _jsroot_components_Switcher__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/components/Switcher */ "./www/js/source/reactpages/components/Switcher.jsx");
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
-/* harmony import */ var _lib_gridInteractionService__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../lib/gridInteractionService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/gridInteractionService.js");
-/* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../lib/utils */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/utils.js");
+/* harmony import */ var _lib_services_gridInteractionService__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../lib/services/gridInteractionService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/services/gridInteractionService.js");
+/* harmony import */ var _lib_helpers_utils__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../lib/helpers/utils */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/utils.js");
 /* harmony import */ var _lib_sweetAlert__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../../../lib/sweetAlert */ "./www/js/source/reactpages/lib/sweetAlert.js");
 
 
@@ -2287,7 +2287,7 @@ var BaStatusCell = function BaStatusCell(props) {
       toggleLoader = props.toggleLoader,
       updateBaStatus = props.updateBaStatus,
       setSweetAlertOption = props.setSweetAlertOption;
-  var CustId = dataItem.CustId,
+  var IbcCustId = dataItem.IbcCustId,
       BaStatus = dataItem.BaStatus,
       OddsGroup = dataItem.OddsGroup,
       IsArchived = dataItem.IsArchived;
@@ -2307,7 +2307,7 @@ var BaStatusCell = function BaStatusCell(props) {
     var confirmProps = {
       onClick: function onClick() {
         var param = {
-          custId: CustId,
+          custId: IbcCustId,
           isBa: isBa
         };
         toggleLoader(true);
@@ -2320,7 +2320,7 @@ var BaStatusCell = function BaStatusCell(props) {
 
           if (Success) {
             var oddsGroup = ExtendedData || OddsGroup;
-            var newPlayerList = _lib_gridInteractionService__WEBPACK_IMPORTED_MODULE_7__["default"].updatePlayerWithBaStatus(playerList, CustId, isBa, oddsGroup);
+            var newPlayerList = _lib_services_gridInteractionService__WEBPACK_IMPORTED_MODULE_7__["default"].updatePlayerWithBaStatus(playerList, IbcCustId, isBa, oddsGroup);
             setPlayerList(newPlayerList);
           }
 
@@ -2331,7 +2331,7 @@ var BaStatusCell = function BaStatusCell(props) {
           toggleLoader(false);
         }).catch(function (error) {
           console.log(error.message);
-          var message = Object(_lib_utils__WEBPACK_IMPORTED_MODULE_8__["getErrorMessageForUpdating"])(error);
+          var message = Object(_lib_helpers_utils__WEBPACK_IMPORTED_MODULE_8__["getErrorMessageForUpdating"])(error);
           var alertOpt = Object(_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_9__["generateDefaultAlertOption"])(message, handleCloseAlert, null, _lib_sweetAlert__WEBPACK_IMPORTED_MODULE_9__["predefinedIcons"].error);
           setSweetAlertOption(alertOpt);
           toggleLoader(false);
@@ -2392,7 +2392,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/actions/index.js");
 /* harmony import */ var _jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/components/dropdown */ "./www/js/source/reactpages/components/dropdown/index.js");
 /* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
-/* harmony import */ var _lib_contextMenuHelper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../lib/contextMenuHelper */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/contextMenuHelper.js");
+/* harmony import */ var _lib_helpers_contextMenuHelper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../lib/helpers/contextMenuHelper */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/contextMenuHelper.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -2432,7 +2432,7 @@ var ContextMenu = function ContextMenu(props) {
 
   var handleClickMenu = function handleClickMenu(tabName) {
     setSelectedTabName(tabName);
-    var custId = currentActivePlayer.custId,
+    var ibcCustId = currentActivePlayer.ibcCustId,
         userName = currentActivePlayer.userName,
         currency = currentActivePlayer.currency,
         isDeposit = currentActivePlayer.isDeposit,
@@ -2440,7 +2440,7 @@ var ContextMenu = function ContextMenu(props) {
         licenseeCustId = currentActivePlayer.licenseeCustId,
         currencyId = currentActivePlayer.currencyId;
     var selectedPlayer = {
-      custId: custId,
+      ibcCustId: ibcCustId,
       userName: userName,
       currency: currency,
       isDeposit: isDeposit,
@@ -2466,7 +2466,7 @@ var ContextMenu = function ContextMenu(props) {
       var isClosedPlayer = status === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["playerStatusByName"].Closed;
       return !!tabList.find(function (t) {
         return item.tabName === t.Name;
-      }) && Object(_lib_contextMenuHelper__WEBPACK_IMPORTED_MODULE_6__["isShowContextMenuItem"])(item, isDeposit, isArchived, isClosedPlayer);
+      }) && Object(_lib_helpers_contextMenuHelper__WEBPACK_IMPORTED_MODULE_6__["isShowContextMenuItem"])(item, isDeposit, isArchived, isClosedPlayer);
     });
   }
 
@@ -2529,8 +2529,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
 /* harmony import */ var _jsroot_components_DropdownLabel__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/components/DropdownLabel */ "./www/js/source/reactpages/components/DropdownLabel.jsx");
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/actions/index.js");
-/* harmony import */ var _lib_gridInteractionService__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../lib/gridInteractionService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/gridInteractionService.js");
-/* harmony import */ var _lib_playerDataBuilder__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../lib/playerDataBuilder */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerDataBuilder.js");
+/* harmony import */ var _lib_services_gridInteractionService__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../lib/services/gridInteractionService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/services/gridInteractionService.js");
+/* harmony import */ var _lib_helpers_playerDataBuilder__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../lib/helpers/playerDataBuilder */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/playerDataBuilder.js");
 
 
 
@@ -2548,9 +2548,9 @@ var OddsGroupCell = function OddsGroupCell(props) {
   var style = _lib_constants__WEBPACK_IMPORTED_MODULE_3__["oddsGroupListWithStyle"][value];
 
   var handleToggleOddsGroup = function handleToggleOddsGroup(event) {
-    var currentActivePlayer = Object(_lib_playerDataBuilder__WEBPACK_IMPORTED_MODULE_7__["buildCurrentActivePlayer"])(dataItem);
+    var currentActivePlayer = Object(_lib_helpers_playerDataBuilder__WEBPACK_IMPORTED_MODULE_7__["buildCurrentActivePlayer"])(dataItem);
     setCurrentActivePlayer(currentActivePlayer);
-    var newPosition = _lib_gridInteractionService__WEBPACK_IMPORTED_MODULE_6__["default"].getNextDropdownPosition(event.target, oddsGroupDropdownPosition);
+    var newPosition = _lib_services_gridInteractionService__WEBPACK_IMPORTED_MODULE_6__["default"].getNextDropdownPosition(event.target, oddsGroupDropdownPosition);
     setOddsGroupDropdownPosition(newPosition);
   };
 
@@ -2598,10 +2598,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/components/dropdown */ "./www/js/source/reactpages/components/dropdown/index.js");
 /* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
-/* harmony import */ var _lib_gridInteractionService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../lib/gridInteractionService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/gridInteractionService.js");
+/* harmony import */ var _lib_services_gridInteractionService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../lib/services/gridInteractionService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/services/gridInteractionService.js");
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../actions */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/actions/index.js");
-/* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../lib/utils */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/utils.js");
+/* harmony import */ var _lib_helpers_utils__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../lib/helpers/utils */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/utils.js");
 /* harmony import */ var _lib_sweetAlert__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../../../lib/sweetAlert */ "./www/js/source/reactpages/lib/sweetAlert.js");
 
 
@@ -2647,9 +2647,9 @@ var OddsGroupDropdown = function OddsGroupDropdown(props) {
     var confirmProps = {
       onClick: function onClick() {
         if (currentActivePlayer && value !== currentActivePlayer.oddsGroup) {
-          var custId = currentActivePlayer.custId;
+          var ibcCustId = currentActivePlayer.ibcCustId;
           var param = {
-            custId: custId,
+            custId: ibcCustId,
             oddsGroup: value
           };
           toggleLoader(true);
@@ -2660,7 +2660,7 @@ var OddsGroupDropdown = function OddsGroupDropdown(props) {
                 ErrorMessage = _response$data.ErrorMessage;
 
             if (Success) {
-              var newPlayerList = _lib_gridInteractionService__WEBPACK_IMPORTED_MODULE_5__["default"].updatePlayerItem(playerList, custId, value, 'OddsGroup');
+              var newPlayerList = _lib_services_gridInteractionService__WEBPACK_IMPORTED_MODULE_5__["default"].updatePlayerItem(playerList, ibcCustId, value, 'OddsGroup');
               setPlayerList(newPlayerList);
             }
 
@@ -2671,7 +2671,7 @@ var OddsGroupDropdown = function OddsGroupDropdown(props) {
             toggleLoader(false);
           }).catch(function (error) {
             console.log(error.message);
-            var message = Object(_lib_utils__WEBPACK_IMPORTED_MODULE_8__["getErrorMessageForUpdating"])(error);
+            var message = Object(_lib_helpers_utils__WEBPACK_IMPORTED_MODULE_8__["getErrorMessageForUpdating"])(error);
             var alertOpt = Object(_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_9__["generateDefaultAlertOption"])(message, handleCloseAlert, null, _lib_sweetAlert__WEBPACK_IMPORTED_MODULE_9__["predefinedIcons"].error);
             setSweetAlertOption(alertOpt);
             toggleLoader(false);
@@ -2776,7 +2776,7 @@ __webpack_require__.r(__webpack_exports__);
 var PlayerRow = function PlayerRow(props) {
   var dataItem = props.dataItem,
       displayedColumn = props.displayedColumn;
-  var CustId = dataItem.CustId,
+  var LicenseeCustId = dataItem.LicenseeCustId,
       SystemId = dataItem.SystemId,
       RealName = dataItem.RealName,
       Currency = dataItem.Currency,
@@ -2791,7 +2791,7 @@ var PlayerRow = function PlayerRow(props) {
       IsArchived = dataItem.IsArchived;
   var canShowMainColumn = IsDeposit && !IsArchived;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Row"], {
-    key: CustId
+    key: LicenseeCustId
   }, displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].Status] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
     className: "center-align"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_StatusCell__WEBPACK_IMPORTED_MODULE_10__["default"], {
@@ -2857,9 +2857,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
 /* harmony import */ var _jsroot_components_DropdownLabel__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/components/DropdownLabel */ "./www/js/source/reactpages/components/DropdownLabel.jsx");
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/actions/index.js");
-/* harmony import */ var _lib_gridInteractionService__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../lib/gridInteractionService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/gridInteractionService.js");
-/* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../lib/utils */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/utils.js");
-/* harmony import */ var _lib_playerDataBuilder__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../lib/playerDataBuilder */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerDataBuilder.js");
+/* harmony import */ var _lib_services_gridInteractionService__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../lib/services/gridInteractionService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/services/gridInteractionService.js");
+/* harmony import */ var _lib_helpers_utils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../lib/helpers/utils */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/utils.js");
+/* harmony import */ var _lib_helpers_playerDataBuilder__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../lib/helpers/playerDataBuilder */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/playerDataBuilder.js");
 
 
 
@@ -2880,14 +2880,14 @@ var SpecialLevelCell = function SpecialLevelCell(props) {
   };
 
   var handleToggleSpecialLevel = function handleToggleSpecialLevel(event) {
-    var currentActivePlayer = Object(_lib_playerDataBuilder__WEBPACK_IMPORTED_MODULE_8__["buildCurrentActivePlayer"])(dataItem);
+    var currentActivePlayer = Object(_lib_helpers_playerDataBuilder__WEBPACK_IMPORTED_MODULE_8__["buildCurrentActivePlayer"])(dataItem);
     setCurrentActivePlayer(currentActivePlayer);
-    var newPosition = _lib_gridInteractionService__WEBPACK_IMPORTED_MODULE_6__["default"].getNextDropdownPosition(event.target, specialLevelDropdownPosition);
+    var newPosition = _lib_services_gridInteractionService__WEBPACK_IMPORTED_MODULE_6__["default"].getNextDropdownPosition(event.target, specialLevelDropdownPosition);
     setSpecialLevelDropdownPosition(newPosition);
   };
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_DropdownLabel__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    text: Object(_lib_utils__WEBPACK_IMPORTED_MODULE_7__["getSpecialLevelText"])(value),
+    text: Object(_lib_helpers_utils__WEBPACK_IMPORTED_MODULE_7__["getSpecialLevelText"])(value),
     labelStyle: style,
     onClick: handleToggleSpecialLevel
   });
@@ -2929,10 +2929,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/components/dropdown */ "./www/js/source/reactpages/components/dropdown/index.js");
 /* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
-/* harmony import */ var _lib_gridInteractionService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../lib/gridInteractionService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/gridInteractionService.js");
+/* harmony import */ var _lib_services_gridInteractionService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../lib/services/gridInteractionService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/services/gridInteractionService.js");
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../actions */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/actions/index.js");
-/* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../lib/utils */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/utils.js");
+/* harmony import */ var _lib_helpers_utils__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../lib/helpers/utils */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/utils.js");
 /* harmony import */ var _lib_sweetAlert__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../../../lib/sweetAlert */ "./www/js/source/reactpages/lib/sweetAlert.js");
 
 
@@ -2980,9 +2980,9 @@ var SpecialLevelDropdown = function SpecialLevelDropdown(props) {
     var confirmProps = {
       onClick: function onClick() {
         if (currentActivePlayer && value !== currentActivePlayer.specialLevel) {
-          var custId = currentActivePlayer.custId;
+          var ibcCustId = currentActivePlayer.ibcCustId;
           var param = {
-            custId: custId,
+            custId: ibcCustId,
             specialLevel: value
           };
           toggleLoader(true);
@@ -2993,7 +2993,7 @@ var SpecialLevelDropdown = function SpecialLevelDropdown(props) {
                 ErrorMessage = _response$data.ErrorMessage;
 
             if (Success) {
-              var newPlayerList = _lib_gridInteractionService__WEBPACK_IMPORTED_MODULE_5__["default"].updatePlayerItem(playerList, custId, value, 'SpecialLevel');
+              var newPlayerList = _lib_services_gridInteractionService__WEBPACK_IMPORTED_MODULE_5__["default"].updatePlayerItem(playerList, ibcCustId, value, 'SpecialLevel');
               setPlayerList(newPlayerList);
             }
 
@@ -3004,7 +3004,7 @@ var SpecialLevelDropdown = function SpecialLevelDropdown(props) {
             toggleLoader(false);
           }).catch(function (error) {
             console.log(error.message);
-            var message = Object(_lib_utils__WEBPACK_IMPORTED_MODULE_8__["getErrorMessageForUpdating"])(error);
+            var message = Object(_lib_helpers_utils__WEBPACK_IMPORTED_MODULE_8__["getErrorMessageForUpdating"])(error);
             var alertOpt = Object(_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_9__["generateDefaultAlertOption"])(message, handleCloseAlert, null, _lib_sweetAlert__WEBPACK_IMPORTED_MODULE_9__["predefinedIcons"].error);
             setSweetAlertOption(alertOpt);
             toggleLoader(false);
@@ -3037,7 +3037,7 @@ var SpecialLevelDropdown = function SpecialLevelDropdown(props) {
       onClick: function onClick(e) {
         return handleChangeOddsGroup(e, item);
       }
-    }, Object(_lib_utils__WEBPACK_IMPORTED_MODULE_8__["getSpecialLevelText"])(item));
+    }, Object(_lib_helpers_utils__WEBPACK_IMPORTED_MODULE_8__["getSpecialLevelText"])(item));
   })));
 };
 
@@ -3088,8 +3088,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/actions/index.js");
-/* harmony import */ var _lib_gridInteractionService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../lib/gridInteractionService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/gridInteractionService.js");
-/* harmony import */ var _lib_playerDataBuilder__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../lib/playerDataBuilder */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerDataBuilder.js");
+/* harmony import */ var _lib_services_gridInteractionService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../lib/services/gridInteractionService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/services/gridInteractionService.js");
+/* harmony import */ var _lib_helpers_playerDataBuilder__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../lib/helpers/playerDataBuilder */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/playerDataBuilder.js");
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 
 
@@ -3112,9 +3112,9 @@ var StatusCell = function StatusCell(props) {
   var canUpdate = Status !== _lib_constants__WEBPACK_IMPORTED_MODULE_3__["playerStatusByName"].Archived && Status !== _lib_constants__WEBPACK_IMPORTED_MODULE_3__["playerStatusByName"].Closed;
 
   var handleToggleStatus = function handleToggleStatus(event) {
-    var currentActivePlayer = Object(_lib_playerDataBuilder__WEBPACK_IMPORTED_MODULE_6__["buildCurrentActivePlayer"])(dataItem);
+    var currentActivePlayer = Object(_lib_helpers_playerDataBuilder__WEBPACK_IMPORTED_MODULE_6__["buildCurrentActivePlayer"])(dataItem);
     setCurrentActivePlayer(currentActivePlayer);
-    var newPosition = _lib_gridInteractionService__WEBPACK_IMPORTED_MODULE_5__["default"].getNextDropdownPosition(event.target, statusDropdownPosition);
+    var newPosition = _lib_services_gridInteractionService__WEBPACK_IMPORTED_MODULE_5__["default"].getNextDropdownPosition(event.target, statusDropdownPosition);
     setStatusDropdownPosition(newPosition);
   };
 
@@ -3172,10 +3172,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/components/dropdown */ "./www/js/source/reactpages/components/dropdown/index.js");
 /* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
-/* harmony import */ var _lib_gridInteractionService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../lib/gridInteractionService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/gridInteractionService.js");
+/* harmony import */ var _lib_services_gridInteractionService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../lib/services/gridInteractionService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/services/gridInteractionService.js");
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../actions */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/actions/index.js");
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
-/* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../lib/utils */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/utils.js");
+/* harmony import */ var _lib_helpers_utils__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../lib/helpers/utils */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/utils.js");
 /* harmony import */ var _lib_sweetAlert__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../../../lib/sweetAlert */ "./www/js/source/reactpages/lib/sweetAlert.js");
 
 
@@ -3235,9 +3235,9 @@ var StatusDropdown = function StatusDropdown(props) {
             var IsSuccessful = response.data.IsSuccessful;
 
             if (IsSuccessful) {
-              var custId = currentActivePlayer.custId;
-              var playerId = custId === 0 ? licenseeCustId : custId;
-              var newPlayerList = _lib_gridInteractionService__WEBPACK_IMPORTED_MODULE_5__["default"].updatePlayerItem(playerList, playerId, value, 'Status');
+              var ibcCustId = currentActivePlayer.ibcCustId;
+              var playerId = ibcCustId || licenseeCustId;
+              var newPlayerList = _lib_services_gridInteractionService__WEBPACK_IMPORTED_MODULE_5__["default"].updatePlayerItem(playerList, playerId, value, 'Status');
               setPlayerList(newPlayerList);
             }
 
@@ -3248,7 +3248,7 @@ var StatusDropdown = function StatusDropdown(props) {
             toggleLoader(false);
           }).catch(function (error) {
             console.log(error.message);
-            var message = Object(_lib_utils__WEBPACK_IMPORTED_MODULE_8__["getErrorMessageForUpdating"])(error);
+            var message = Object(_lib_helpers_utils__WEBPACK_IMPORTED_MODULE_8__["getErrorMessageForUpdating"])(error);
             ;
             var alertOpt = Object(_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_9__["generateDefaultAlertOption"])(message, handleCloseAlert, null, _lib_sweetAlert__WEBPACK_IMPORTED_MODULE_9__["predefinedIcons"].error);
             setSweetAlertOption(alertOpt);
@@ -3338,8 +3338,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/actions/index.js");
-/* harmony import */ var _lib_gridHelper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../lib/gridHelper */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/gridHelper.js");
-/* harmony import */ var _lib_playerDataBuilder__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../lib/playerDataBuilder */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerDataBuilder.js");
+/* harmony import */ var _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../lib/helpers/gridHelper */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/gridHelper.js");
+/* harmony import */ var _lib_helpers_playerDataBuilder__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../lib/helpers/playerDataBuilder */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/playerDataBuilder.js");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -3359,7 +3359,7 @@ var UserNameCell = function UserNameCell(props) {
 
   var handleSelectPlayer = function handleSelectPlayer(event) {
     event.preventDefault();
-    var newSelectedPlayer = Object(_lib_playerDataBuilder__WEBPACK_IMPORTED_MODULE_5__["buildSelectedPlayer"])(dataItem);
+    var newSelectedPlayer = Object(_lib_helpers_playerDataBuilder__WEBPACK_IMPORTED_MODULE_5__["buildSelectedPlayer"])(dataItem);
     setSelectedPlayer(newSelectedPlayer);
   };
 
@@ -3372,13 +3372,13 @@ var UserNameCell = function UserNameCell(props) {
       var rect = event.target.getBoundingClientRect();
       var position = {
         x: rect.left - 10,
-        y: _lib_gridHelper__WEBPACK_IMPORTED_MODULE_4__["default"].calculateTopPosition(contextMenuHeight, rect.top)
+        y: _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_4__["default"].calculateTopPosition(contextMenuHeight, rect.top)
       };
       setContextMenu({
         position: position,
         isOpen: true
       });
-      var currentActivePlayer = Object(_lib_playerDataBuilder__WEBPACK_IMPORTED_MODULE_5__["buildCurrentActivePlayer"])(dataItem);
+      var currentActivePlayer = Object(_lib_helpers_playerDataBuilder__WEBPACK_IMPORTED_MODULE_5__["buildCurrentActivePlayer"])(dataItem);
       setCurrentActivePlayer(currentActivePlayer);
     }
   };
@@ -3802,17 +3802,17 @@ var emailPattern = '^([a-zA-Z0-9_\\.\\-])+\\@(([a-zA-Z0-9\\-])+\\.)+([a-zA-Z0-9]
 
 /***/ }),
 
-/***/ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/contextMenuHelper.js":
-/*!*****************************************************************************************!*\
-  !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/contextMenuHelper.js ***!
-  \*****************************************************************************************/
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/contextMenuHelper.js":
+/*!*************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/contextMenuHelper.js ***!
+  \*************************************************************************************************/
 /*! exports provided: isShowContextMenuItem */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isShowContextMenuItem", function() { return isShowContextMenuItem; });
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./constants */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
 
 var isShowContextMenuItem = function isShowContextMenuItem(item, isDeposit, isArchived, isClosed) {
   if (!isDeposit) {
@@ -3832,10 +3832,10 @@ var isShowContextMenuItem = function isShowContextMenuItem(item, isDeposit, isAr
 
 /***/ }),
 
-/***/ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/gridHelper.js":
-/*!**********************************************************************************!*\
-  !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/gridHelper.js ***!
-  \**********************************************************************************/
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/gridHelper.js":
+/*!******************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/gridHelper.js ***!
+  \******************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -3846,7 +3846,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @9softstudio/react-grid */ "./node_modules/@9softstudio/react-grid/dist/index.js");
 /* harmony import */ var _9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./constants */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../constants */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -3938,418 +3938,20 @@ function () {
 
 /***/ }),
 
-/***/ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/gridInteractionService.js":
-/*!**********************************************************************************************!*\
-  !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/gridInteractionService.js ***!
-  \**********************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return GridInteractionService; });
-/* harmony import */ var _gridHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./gridHelper */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/gridHelper.js");
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./constants */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
-/* harmony import */ var _jsroot_lib_dataReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/dataReducer */ "./www/js/source/reactpages/lib/dataReducer.js");
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
-
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-
-
-
-
-var GridInteractionService =
-/*#__PURE__*/
-function () {
-  function GridInteractionService() {
-    _classCallCheck(this, GridInteractionService);
-  }
-
-  _createClass(GridInteractionService, null, [{
-    key: "getNextDropdownPosition",
-    value: function getNextDropdownPosition(element, currentPosition, dropdownItemName) {
-      if (!element || currentPosition) {
-        return null;
-      }
-
-      var dropdownHeight = _constants__WEBPACK_IMPORTED_MODULE_1__["gridItemDropdownHeight"][dropdownItemName];
-      var rect = element.getBoundingClientRect();
-      return {
-        x: rect.left,
-        y: _gridHelper__WEBPACK_IMPORTED_MODULE_0__["default"].calculateTopPosition(dropdownHeight, rect.top + 20)
-      };
-    }
-  }, {
-    key: "updatePlayerItem",
-    value: function updatePlayerItem(playerList, custId, value, fieldName) {
-      var itemIndex = playerList.findIndex(function (x) {
-        return x.CustId === custId;
-      });
-
-      if (itemIndex === -1) {
-        itemIndex = playerList.findIndex(function (x) {
-          return x.LicenseeCustId === custId;
-        });
-      }
-
-      if (itemIndex !== -1) {
-        var newPlayerItem = _objectSpread({}, playerList[itemIndex], _defineProperty({}, fieldName, value));
-
-        return Object(_jsroot_lib_dataReducer__WEBPACK_IMPORTED_MODULE_2__["updateObjectInArray"])(playerList, itemIndex, newPlayerItem);
-      }
-
-      return _toConsumableArray(playerList);
-    }
-  }, {
-    key: "updatePlayerWithBaStatus",
-    value: function updatePlayerWithBaStatus(playerList, custId, isBa, oddsGroup) {
-      var itemIndex = playerList.findIndex(function (x) {
-        return x.CustId === custId;
-      });
-
-      var newPlayerItem = _objectSpread({}, playerList[itemIndex], {
-        BaStatus: isBa,
-        OddsGroup: oddsGroup
-      });
-
-      return Object(_jsroot_lib_dataReducer__WEBPACK_IMPORTED_MODULE_2__["updateObjectInArray"])(playerList, itemIndex, newPlayerItem);
-    }
-  }, {
-    key: "sortPlayerList",
-    value: function sortPlayerList(dataList, sortBy, sortOrder) {
-      var _this = this;
-
-      if (!dataList || dataList.length === 0) {
-        return [];
-      }
-
-      var isSortAscending = sortOrder.toLowerCase() === 'asc';
-
-      var newDataList = _toConsumableArray(dataList);
-
-      var isTringType = _constants__WEBPACK_IMPORTED_MODULE_1__["stringTypeFields"].includes(sortBy);
-      newDataList.sort(function (currentItem, nextItem) {
-        var currentValue = currentItem[sortBy];
-        var nextValue = nextItem[sortBy];
-
-        if (isTringType) {
-          return _this.sortStringValue(currentValue || '', nextValue || '', isSortAscending);
-        }
-
-        return isSortAscending ? currentValue - nextValue : -(currentValue - nextValue);
-      });
-      return newDataList;
-    }
-  }, {
-    key: "sortStringValue",
-    value: function sortStringValue(current, next, isSortAscending) {
-      var currentUpperCase = current.toUpperCase();
-      var nextUpperCase = next.toUpperCase();
-      var sortResult = currentUpperCase > nextUpperCase ? 1 : currentUpperCase < nextUpperCase ? -1 : 0;
-      return isSortAscending ? sortResult : -sortResult;
-    }
-  }]);
-
-  return GridInteractionService;
-}();
-
-
-
-/***/ }),
-
-/***/ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/lapPlayerQueryService.js":
-/*!*********************************************************************************************!*\
-  !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/lapPlayerQueryService.js ***!
-  \*********************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return LapPlayerQueryService; });
-/* harmony import */ var _playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./playerListDataHelper */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerListDataHelper.js");
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/utils.js");
-/* harmony import */ var _playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./playerDataBuilder */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerDataBuilder.js");
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-
-
-
-
-var LapPlayerQueryService =
-/*#__PURE__*/
-function () {
-  function LapPlayerQueryService() {
-    _classCallCheck(this, LapPlayerQueryService);
-  }
-
-  _createClass(LapPlayerQueryService, null, [{
-    key: "fetchData",
-    value: function fetchData(param, commonService, apiInfo) {
-      var _this = this;
-
-      var lrfDataById = apiInfo.lrfDataById,
-          lapSearch = apiInfo.lapSearch;
-      return commonService.fetchData(lapSearch.type, lapSearch.action, _objectSpread({}, param)).then(function (lapResponse) {
-        var _lapResponse$data = lapResponse.data,
-            _lapResponse$data$Pla = _lapResponse$data.PlayerList,
-            lapPlayerList = _lapResponse$data$Pla === void 0 ? [] : _lapResponse$data$Pla,
-            _lapResponse$data$Tot = _lapResponse$data.TotalItem,
-            lapTotalItem = _lapResponse$data$Tot === void 0 ? 0 : _lapResponse$data$Tot;
-
-        if (!lapPlayerList || !lapPlayerList.length) {
-          return _playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].createEmptyResult();
-        }
-
-        return _this._fetchFromLrf(param, lrfDataById, lapPlayerList, commonService, lapTotalItem);
-      }).catch(function () {
-        return _playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].createEmptyResult();
-      });
-    }
-  }, {
-    key: "_fetchFromLrf",
-    value: function _fetchFromLrf(param, lrfDataById, lapPlayerList, commonService, lapTotalItem) {
-      var idList = Object(_utils__WEBPACK_IMPORTED_MODULE_1__["getCustIdListFromLapData"])(lapPlayerList);
-      var lrfParam = {
-        currencyIdList: param.currencyIdList,
-        idList: idList.join(','),
-        specialLevel: param.specialLevel,
-        pageSize: param.pageSize,
-        pageIndex: 1
-      };
-      return commonService.fetchData(lrfDataById.type, lrfDataById.action, lrfParam).then(function (lrfResponse) {
-        var lrfPlayerList = lrfResponse.data.DataList;
-
-        if (!lrfPlayerList || !lrfPlayerList.length) {
-          return {
-            playerList: Object(_playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__["buildLapPlayerList"])(lapPlayerList),
-            totalItem: lapTotalItem
-          };
-        }
-
-        var playerList = _playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].mergePlayerList(lrfPlayerList, lapPlayerList);
-        var excludedIdCount = lrfPlayerList.filter(function (p) {
-          return !idList.includes(p.CustId);
-        }).length;
-        return {
-          playerList: playerList,
-          totalItem: lapTotalItem - excludedIdCount
-        };
-      }).catch(function () {
-        return {
-          playerList: Object(_playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__["buildLapPlayerList"])(lapPlayerList),
-          totalItem: lapTotalItem
-        };
-      });
-    }
-  }]);
-
-  return LapPlayerQueryService;
-}();
-
-
-
-/***/ }),
-
-/***/ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/lrfPlayerQueryService.js":
-/*!*********************************************************************************************!*\
-  !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/lrfPlayerQueryService.js ***!
-  \*********************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return LrfPlayerQueryService; });
-/* harmony import */ var _playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./playerListDataHelper */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerListDataHelper.js");
-/* harmony import */ var _playerDataBuilder__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./playerDataBuilder */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerDataBuilder.js");
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-
-
-
-var LrfPlayerQueryService =
-/*#__PURE__*/
-function () {
-  function LrfPlayerQueryService() {
-    _classCallCheck(this, LrfPlayerQueryService);
-  }
-
-  _createClass(LrfPlayerQueryService, null, [{
-    key: "fetchData",
-    value: function fetchData(param, commonService, apiInfo) {
-      var _this = this;
-
-      var lrfSearch = apiInfo.lrfSearch,
-          lapDataById = apiInfo.lapDataById;
-      return commonService.fetchData(lrfSearch.type, lrfSearch.action, _objectSpread({}, param)).then(function (lrfResponse) {
-        var _lrfResponse$data = lrfResponse.data,
-            lrfPlayerList = _lrfResponse$data.DataList,
-            TotalItem = _lrfResponse$data.TotalItem;
-
-        if (!lrfPlayerList || !lrfPlayerList.length) {
-          return _playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].createEmptyResult();
-        }
-
-        return _this._fetchFromLap(lrfPlayerList, lapDataById, commonService, TotalItem);
-      }).catch(function () {
-        return _playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].createEmptyResult();
-      });
-    }
-  }, {
-    key: "_fetchFromLap",
-    value: function _fetchFromLap(lrfPlayerList, lapDataById, commonService, lrfTotalItem) {
-      var lapParam = {
-        idList: lrfPlayerList.map(function (x) {
-          return x.CustId;
-        })
-      };
-      return commonService.fetchData(lapDataById.type, lapDataById.action, lapParam).then(function (lapResponse) {
-        var lapPlayerList = lapResponse.data.PlayerList;
-
-        if (!lapPlayerList || !lapPlayerList.length) {
-          return {
-            playerList: Object(_playerDataBuilder__WEBPACK_IMPORTED_MODULE_1__["buildLrfPlayerList"])(lrfPlayerList),
-            totalItem: lrfTotalItem
-          };
-        }
-
-        var playerList = _playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].mergePlayerList(lrfPlayerList, lapPlayerList);
-        return {
-          playerList: playerList,
-          totalItem: lrfTotalItem
-        };
-      }).catch(function () {
-        return {
-          playerList: Object(_playerDataBuilder__WEBPACK_IMPORTED_MODULE_1__["buildLrfPlayerList"])(lrfPlayerList),
-          totalItem: lrfTotalItem
-        };
-      });
-    }
-  }]);
-
-  return LrfPlayerQueryService;
-}();
-
-
-
-/***/ }),
-
-/***/ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerCommandService.js":
-/*!********************************************************************************************!*\
-  !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerCommandService.js ***!
-  \********************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return PlayerCommandService; });
-/* harmony import */ var _lib_factoryCommonService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../lib/factoryCommonService */ "./www/js/source/reactpages/Module/lib/factoryCommonService.js");
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./constants */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-
-
-
-var PlayerCommandService =
-/*#__PURE__*/
-function () {
-  function PlayerCommandService() {
-    _classCallCheck(this, PlayerCommandService);
-
-    this.commonService = _lib_factoryCommonService__WEBPACK_IMPORTED_MODULE_0__["default"].createInstance();
-  }
-
-  _createClass(PlayerCommandService, [{
-    key: "updateBaStatus",
-    value: function updateBaStatus(param) {
-      var updateBaStatus = _constants__WEBPACK_IMPORTED_MODULE_1__["apiUpdateInfo"].updateBaStatus;
-      return this.commonService.fetchData(updateBaStatus.type, updateBaStatus.action, _objectSpread({}, param));
-    }
-  }, {
-    key: "updateOddsGroup",
-    value: function updateOddsGroup(param) {
-      var updateOddsGroup = _constants__WEBPACK_IMPORTED_MODULE_1__["apiUpdateInfo"].updateOddsGroup;
-      return this.commonService.fetchData(updateOddsGroup.type, updateOddsGroup.action, _objectSpread({}, param));
-    }
-  }, {
-    key: "updateSpecialLevel",
-    value: function updateSpecialLevel(param) {
-      var updateSpecialLevel = _constants__WEBPACK_IMPORTED_MODULE_1__["apiUpdateInfo"].updateSpecialLevel;
-      return this.commonService.fetchData(updateSpecialLevel.type, updateSpecialLevel.action, _objectSpread({}, param));
-    }
-  }, {
-    key: "updatePlayerStatus",
-    value: function updatePlayerStatus(param) {
-      var updatePlayerStatus = _constants__WEBPACK_IMPORTED_MODULE_1__["apiUpdateInfo"].updatePlayerStatus;
-      return this.commonService.fetchData(updatePlayerStatus.type, updatePlayerStatus.action, _objectSpread({}, param));
-    }
-  }]);
-
-  return PlayerCommandService;
-}();
-
-
-
-/***/ }),
-
-/***/ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerDataBuilder.js":
-/*!*****************************************************************************************!*\
-  !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerDataBuilder.js ***!
-  \*****************************************************************************************/
-/*! exports provided: buildSelectedPlayer, buildLrfPlayerList, buildLapPlayerList, buildCurrentActivePlayer */
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/playerDataBuilder.js":
+/*!*************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/playerDataBuilder.js ***!
+  \*************************************************************************************************/
+/*! exports provided: buildSelectedPlayer, buildLapPlayerList, buildCurrentActivePlayer */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "buildSelectedPlayer", function() { return buildSelectedPlayer; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "buildLrfPlayerList", function() { return buildLrfPlayerList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "buildLapPlayerList", function() { return buildLapPlayerList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "buildCurrentActivePlayer", function() { return buildCurrentActivePlayer; });
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./constants */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
-
 var buildSelectedPlayer = function buildSelectedPlayer(dataItem) {
-  var CustId = dataItem.CustId,
+  var IbcCustId = dataItem.IbcCustId,
       UserName = dataItem.UserName,
       Currency = dataItem.Currency,
       IsDeposit = dataItem.IsDeposit,
@@ -4357,7 +3959,7 @@ var buildSelectedPlayer = function buildSelectedPlayer(dataItem) {
       LicenseeCustId = dataItem.LicenseeCustId,
       CurrencyId = dataItem.CurrencyId;
   return {
-    custId: CustId,
+    ibcCustId: IbcCustId,
     licenseeCustId: LicenseeCustId,
     userName: UserName,
     currency: Currency,
@@ -4365,39 +3967,6 @@ var buildSelectedPlayer = function buildSelectedPlayer(dataItem) {
     isArchived: IsArchived,
     currencyId: CurrencyId
   };
-};
-var buildLrfPlayerList = function buildLrfPlayerList(playerList) {
-  if (!playerList) {
-    return [];
-  }
-
-  return playerList.map(function (item) {
-    var IbcCustId = item.IbcCustId,
-        UserName = item.UserName,
-        SystemId = item.SystemId,
-        Currency = item.Currency,
-        CurrentBalance = item.CurrentBalance,
-        OutstandingBalance = item.OutstandingBalance,
-        OddsGroup = item.OddsGroup,
-        BaStatus = item.BaStatus,
-        SpecialLevel = item.SpecialLevel,
-        CurrencyId = item.CurrencyId;
-    return {
-      CustId: IbcCustId,
-      LicenseeCustId: 0,
-      UserName: UserName,
-      SystemId: SystemId,
-      Currency: Currency,
-      CurrentBalance: CurrentBalance,
-      OutstandingBalance: OutstandingBalance,
-      OddsGroup: OddsGroup,
-      BaStatus: BaStatus,
-      SpecialLevel: SpecialLevel,
-      IsDeposit: true,
-      IsArchived: false,
-      CurrencyId: CurrencyId || 0
-    };
-  });
 };
 var buildLapPlayerList = function buildLapPlayerList(playerList) {
   if (!playerList) {
@@ -4411,7 +3980,6 @@ var buildLapPlayerList = function buildLapPlayerList(playerList) {
         IP = item.IP,
         email = item.email,
         isOnline = item.isOnline,
-        ActStatus = item.ActStatus,
         IBCCustId = item.IBCCustId,
         isArchived = item.isArchived,
         CustId = item.CustId,
@@ -4420,7 +3988,7 @@ var buildLapPlayerList = function buildLapPlayerList(playerList) {
         OutBalance = item.OutBalance,
         Currency = item.Currency;
     return {
-      CustId: IBCCustId,
+      IbcCustId: IBCCustId,
       LicenseeCustId: CustId,
       UserName: UserName,
       Status: Status,
@@ -4428,7 +3996,7 @@ var buildLapPlayerList = function buildLapPlayerList(playerList) {
       LastLoginIp: IP,
       Email: email,
       IsOnline: isOnline,
-      IsDeposit: ActStatus === _constants__WEBPACK_IMPORTED_MODULE_0__["playerTypes"].deposit && IBCCustId > 0,
+      IsDeposit: IBCCustId > 0,
       IsArchived: isArchived,
       Currency: CurrencyCode,
       CurrentBalance: CurrentBalance,
@@ -4438,7 +4006,7 @@ var buildLapPlayerList = function buildLapPlayerList(playerList) {
   });
 };
 var buildCurrentActivePlayer = function buildCurrentActivePlayer(dataItem) {
-  var CustId = dataItem.CustId,
+  var IbcCustId = dataItem.IbcCustId,
       UserName = dataItem.UserName,
       Currency = dataItem.Currency,
       Status = dataItem.Status,
@@ -4449,7 +4017,7 @@ var buildCurrentActivePlayer = function buildCurrentActivePlayer(dataItem) {
       LicenseeCustId = dataItem.LicenseeCustId,
       CurrencyId = dataItem.CurrencyId;
   return {
-    custId: CustId,
+    ibcCustId: IbcCustId,
     licenseeCustId: LicenseeCustId,
     userName: UserName,
     currency: Currency,
@@ -4464,100 +4032,21 @@ var buildCurrentActivePlayer = function buildCurrentActivePlayer(dataItem) {
 
 /***/ }),
 
-/***/ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerItemQueryService.js":
-/*!**********************************************************************************************!*\
-  !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerItemQueryService.js ***!
-  \**********************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return PlayerItemQueryService; });
-/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
-/* harmony import */ var _playerListDataHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./playerListDataHelper */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerListDataHelper.js");
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-
-
-
-var PlayerItemQueryService =
-/*#__PURE__*/
-function () {
-  function PlayerItemQueryService() {
-    _classCallCheck(this, PlayerItemQueryService);
-  }
-
-  _createClass(PlayerItemQueryService, null, [{
-    key: "getPlayerById",
-    value: function getPlayerById(param, commonService, apiInfo) {
-      var lrfDataById = apiInfo.lrfDataById,
-          lapGetPlayerByLicenseeId = apiInfo.lapGetPlayerByLicenseeId;
-      var custId = param.custId,
-          licenseeCustId = param.licenseeCustId;
-      var lrfParam = {
-        idList: custId,
-        specialLevel: Object.keys(_lib_constants__WEBPACK_IMPORTED_MODULE_0__["specialLevelListWithColor"]).map(function (item) {
-          return item;
-        }).join(','),
-        pageSize: _lib_constants__WEBPACK_IMPORTED_MODULE_0__["defaultPagingOption"].PageSize,
-        pageIndex: 1
-      };
-      var lapParam = {
-        custId: licenseeCustId
-      };
-      var lrfPromise = custId > 0 ? commonService.fetchData(lrfDataById.type, lrfDataById.action, lrfParam) : null;
-      var lapPromise = commonService.fetchData(lapGetPlayerByLicenseeId.type, lapGetPlayerByLicenseeId.action, lapParam);
-      return this._getResult(lrfPromise, lapPromise, commonService);
-    }
-  }, {
-    key: "_getResult",
-    value: function _getResult(lrfPromise, lapPromise, commonService) {
-      return commonService.fetchMultiple([lrfPromise, lapPromise], function (lrfResponse, lapResponse) {
-        var _ref = lrfResponse && lrfResponse.data || {},
-            _ref$DataList = _ref.DataList,
-            lrfPlayerList = _ref$DataList === void 0 ? [] : _ref$DataList;
-
-        var Player = lapResponse.data.Player;
-        var lapPlayerList = Player ? [Player] : [];
-        var playerList = _playerListDataHelper__WEBPACK_IMPORTED_MODULE_1__["default"].mergePlayerList(lrfPlayerList, lapPlayerList);
-        return playerList.length ? playerList[0] : null;
-      }).catch(function (error) {
-        console.log(error.message);
-        return null;
-      });
-    }
-  }]);
-
-  return PlayerItemQueryService;
-}();
-
-
-
-/***/ }),
-
-/***/ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerListDataHelper.js":
-/*!********************************************************************************************!*\
-  !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerListDataHelper.js ***!
-  \********************************************************************************************/
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/playerListDataHelper.js":
+/*!****************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/playerListDataHelper.js ***!
+  \****************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return PlayerListDataHelper; });
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./constants */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-
 
 var PlayerListDataHelper =
 /*#__PURE__*/
@@ -4597,7 +4086,6 @@ function () {
           IP = lapItem.IP,
           email = lapItem.email,
           isOnline = lapItem.isOnline,
-          ActStatus = lapItem.ActStatus,
           IBCCustId = lapItem.IBCCustId,
           isArchived = lapItem.isArchived,
           LastTransaction = lapItem.LastTransaction,
@@ -4605,7 +4093,7 @@ function () {
           OutBalance = lapItem.OutBalance,
           IBCUserName = lapItem.IBCUserName;
       return {
-        CustId: IBCCustId,
+        IbcCustId: IBCCustId,
         LicenseeCustId: lapItem.CustId,
         UserName: lapItem.UserName,
         SystemId: IBCUserName,
@@ -4621,7 +4109,7 @@ function () {
         LastLoginIp: IP,
         Email: email,
         IsOnline: isOnline,
-        IsDeposit: ActStatus === _constants__WEBPACK_IMPORTED_MODULE_0__["playerTypes"].deposit && IBCCustId > 0,
+        IsDeposit: IBCCustId > 0,
         IsArchived: !!isArchived,
         CurrencyId: lapItem.Currency
       };
@@ -4670,342 +4158,73 @@ function () {
 
 /***/ }),
 
-/***/ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerMultipleQueryService.js":
-/*!**************************************************************************************************!*\
-  !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerMultipleQueryService.js ***!
-  \**************************************************************************************************/
-/*! exports provided: default */
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/utils.js":
+/*!*************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/utils.js ***!
+  \*************************************************************************************/
+/*! exports provided: getSpecialLevelText, getBaStatusText, getPlayerStatus, buildDisplayedColumnObject, isDeposit, getCustIdListFromLapData, getErrorMessageForUpdating */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return PlayerMultipleQueryService; });
-/* harmony import */ var _playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./playerListDataHelper */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerListDataHelper.js");
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/utils.js");
-/* harmony import */ var _playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./playerDataBuilder */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerDataBuilder.js");
-/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSpecialLevelText", function() { return getSpecialLevelText; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBaStatusText", function() { return getBaStatusText; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPlayerStatus", function() { return getPlayerStatus; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "buildDisplayedColumnObject", function() { return buildDisplayedColumnObject; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isDeposit", function() { return isDeposit; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCustIdListFromLapData", function() { return getCustIdListFromLapData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getErrorMessageForUpdating", function() { return getErrorMessageForUpdating; });
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 
 
+var getSpecialLevelText = function getSpecialLevelText(value) {
+  return value === undefined || value === null ? '' : Number(value) === 0 ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('None') : value;
+};
+var getBaStatusText = function getBaStatusText(value) {
+  return value ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('On') : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Off');
+};
+var getPlayerStatus = function getPlayerStatus(value) {
+  var displayedValue = _constants__WEBPACK_IMPORTED_MODULE_0__["playerStatus"][value];
+  return displayedValue || '';
+};
+var buildDisplayedColumnObject = function buildDisplayedColumnObject(displayedColumnList) {
+  return displayedColumnList.reduce(function (accumulator, currentItem) {
+    accumulator[currentItem.key] = currentItem.show;
+    return accumulator;
+  }, {});
+};
+var isDeposit = function isDeposit(ibcCustId) {
+  return ibcCustId > 0;
+};
+var getCustIdListFromLapData = function getCustIdListFromLapData(lapPlayerList) {
+  return lapPlayerList.reduce(function (result, item) {
+    if (isDeposit(item.IBCCustId)) {
+      result.push(item.IBCCustId);
+    }
 
+    return result;
+  }, []);
+};
+var getErrorMessageForUpdating = function getErrorMessageForUpdating(errorInfo) {
+  var defaultKey = 'HttpError_Default';
 
-
-
-var PlayerMultipleQueryService =
-/*#__PURE__*/
-function () {
-  function PlayerMultipleQueryService() {
-    _classCallCheck(this, PlayerMultipleQueryService);
+  if (!errorInfo) {
+    return _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource(defaultKey);
   }
 
-  _createClass(PlayerMultipleQueryService, null, [{
-    key: "fetchData",
-    value: function fetchData(param, commonService, apiInfo) {
-      var lrfSearch = apiInfo.lrfSearch,
-          lapSearch = apiInfo.lapSearch;
-      var lrfPromise = commonService.fetchData(lrfSearch.type, lrfSearch.action, _objectSpread({}, param)).catch(function (error) {
-        console.log(error.message);
-        window.alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('HttpError_Default'));
-        return {
-          data: {
-            DataList: [],
-            TotalItem: 0
-          }
-        };
-      });
-      var lapPromise = commonService.fetchData(lapSearch.type, lapSearch.action, _objectSpread({}, param)).catch(function (error) {
-        console.log(error.message);
-        window.alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('HttpError_Default'));
-        return {
-          data: {
-            PlayerList: [],
-            TotalItem: 0
-          }
-        };
-      });
-      return this._getResult(param, lrfPromise, lapPromise, commonService, apiInfo);
-    }
-  }, {
-    key: "_getResult",
-    value: function _getResult(param, lrfPromise, lapPromise, commonService, apiInfo) {
-      var _this = this;
-
-      return commonService.fetchMultiple([lrfPromise, lapPromise], function (lrfResponse, lapResponse) {
-        var lrfPlayerList = lrfResponse.data.DataList;
-        var _lapResponse$data = lapResponse.data,
-            lapPlayerList = _lapResponse$data.PlayerList,
-            lapTotalItem = _lapResponse$data.TotalItem;
-        var lrfDataObject = _playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getDataObject(lrfPlayerList, lapPlayerList);
-        var lapDataObject = _playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getDataObject(lapPlayerList, lrfPlayerList);
-        var playerList = _playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].mergePlayerList(lrfDataObject.commonList, lapDataObject.commonList);
-        var idListNotInLrf = Object(_utils__WEBPACK_IMPORTED_MODULE_1__["getCustIdListFromLapData"])(lapDataObject.differenceList);
-
-        if (idListNotInLrf.length === 0) {
-          var nonDepositPlayerList = Object(_playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__["buildLapPlayerList"])(lapDataObject.differenceList);
-          var finalPlayerList = playerList.length > 0 ? playerList.concat(nonDepositPlayerList) : nonDepositPlayerList;
-          return {
-            playerList: finalPlayerList,
-            totalItem: lapTotalItem
-          };
-        }
-
-        var lrfParam = {
-          currencyIdList: param.currencyIdList,
-          idList: idListNotInLrf.join(','),
-          specialLevel: param.specialLevel,
-          pageSize: param.pageSize,
-          pageIndex: 1
-        };
-        return _this._refetchFromLrf(lrfParam, lapDataObject, commonService, apiInfo).then(function (response) {
-          var nextPlayerList = response.playerList;
-          var excludedIdCount = nextPlayerList.filter(function (p) {
-            return !idListNotInLrf.includes(p.CustId);
-          }).length;
-          return {
-            playerList: playerList.concat(nextPlayerList),
-            totalItem: lapTotalItem - excludedIdCount
-          };
-        });
-      }).catch(function (error) {
-        console.log(error.message);
-        return _playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].createEmptyResult();
-      });
-    }
-  }, {
-    key: "_refetchFromLrf",
-    value: function _refetchFromLrf(lrfParam, lapDataObject, commonService, apiInfo) {
-      var lrfDataById = apiInfo.lrfDataById;
-      var differenceList = lapDataObject.differenceList;
-      return commonService.fetchData(lrfDataById.type, lrfDataById.action, _objectSpread({}, lrfParam)).then(function (nextLrfResponse) {
-        var nextLrfPlayerList = nextLrfResponse.data.DataList;
-
-        if (!nextLrfPlayerList || !nextLrfPlayerList.length) {
-          return {
-            playerList: Object(_playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__["buildLapPlayerList"])(differenceList)
-          };
-        }
-
-        var playerList = _playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].mergePlayerList(nextLrfPlayerList, differenceList);
-        return {
-          playerList: playerList
-        };
-      }).catch(function (error) {
-        console.log(error.message);
-        window.alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('HttpError_Default'));
-        return {
-          playerList: Object(_playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__["buildLapPlayerList"])(differenceList)
-        };
-      });
-    }
-  }]);
-
-  return PlayerMultipleQueryService;
-}();
-
-
-
-/***/ }),
-
-/***/ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerQueryService.js":
-/*!******************************************************************************************!*\
-  !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerQueryService.js ***!
-  \******************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return PlayerQueryService; });
-/* harmony import */ var _lib_factoryCommonService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../lib/factoryCommonService */ "./www/js/source/reactpages/Module/lib/factoryCommonService.js");
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./constants */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
-/* harmony import */ var _reportExcel__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./reportExcel */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/reportExcel.js");
-/* harmony import */ var _queryServiceFactory__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./queryServiceFactory */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/queryServiceFactory.js");
-/* harmony import */ var _playerItemQueryService__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./playerItemQueryService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerItemQueryService.js");
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-
-
-
-
-
-
-var PlayerQueryService =
-/*#__PURE__*/
-function () {
-  function PlayerQueryService() {
-    _classCallCheck(this, PlayerQueryService);
-
-    this.commonService = _lib_factoryCommonService__WEBPACK_IMPORTED_MODULE_0__["default"].createInstance();
-  }
-
-  _createClass(PlayerQueryService, [{
-    key: "getTabList",
-    value: function getTabList() {
-      return this.commonService.getTabList();
-    }
-  }, {
-    key: "getPlayerList",
-    value: function getPlayerList(param) {
-      var playerListService = _queryServiceFactory__WEBPACK_IMPORTED_MODULE_3__["default"].getPlayerListService(param, this.commonService);
-      return playerListService.fetchData(param, this.commonService, _constants__WEBPACK_IMPORTED_MODULE_1__["apiInfo"]);
-    }
-  }, {
-    key: "getSinglePlayer",
-    value: function getSinglePlayer(param) {
-      return _playerItemQueryService__WEBPACK_IMPORTED_MODULE_4__["default"].getPlayerById(param, this.commonService, _constants__WEBPACK_IMPORTED_MODULE_1__["apiInfo"]);
-    }
-  }, {
-    key: "getLink",
-    value: function getLink(systemType, action) {
-      return this.commonService.getLink(systemType, action);
-    }
-  }, {
-    key: "exportExcel",
-    value: function exportExcel(playerList, param, displayedColumn) {
-      var fileName = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'PlayerList';
-      var reportExcel = new _reportExcel__WEBPACK_IMPORTED_MODULE_2__["default"](playerList, displayedColumn, fileName);
-      reportExcel.export();
-    }
-  }]);
-
-  return PlayerQueryService;
-}();
-
-
-
-/***/ }),
-
-/***/ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerSuggestionService.js":
-/*!***********************************************************************************************!*\
-  !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerSuggestionService.js ***!
-  \***********************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return PlayerSuggestionService; });
-/* harmony import */ var _lib_factoryCommonService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../lib/factoryCommonService */ "./www/js/source/reactpages/Module/lib/factoryCommonService.js");
-/* harmony import */ var _constants_configInfo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../constants/configInfo */ "./www/js/source/reactpages/Module/constants/configInfo.js");
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-
-
-var apiInfo = {
-  userNameSuggestion: {
-    action: 'PlayerAdminContainer/GetSuggestionList',
-    type: _constants_configInfo__WEBPACK_IMPORTED_MODULE_1__["systemType"].newAdmin
-  }
+  var resourceKey = isUnauthorizedResponse(errorInfo) ? 'FunctionDeniedMsg' : defaultKey;
+  return _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource(resourceKey).replace(/&apos;/g, "'");
 };
 
-var PlayerSuggestionService =
-/*#__PURE__*/
-function () {
-  function PlayerSuggestionService() {
-    _classCallCheck(this, PlayerSuggestionService);
-
-    this.commonService = _lib_factoryCommonService__WEBPACK_IMPORTED_MODULE_0__["default"].createInstance();
+var isUnauthorizedResponse = function isUnauthorizedResponse(errorInfo) {
+  if (!errorInfo.response) {
+    return false;
   }
 
-  _createClass(PlayerSuggestionService, [{
-    key: "getSuggestionList",
-    value: function getSuggestionList(param) {
-      var userNameSuggestion = apiInfo.userNameSuggestion;
-      var configOption = {
-        method: 'get'
-      };
-      return this.commonService.fetchData(userNameSuggestion.type, userNameSuggestion.action, _objectSpread({}, param), configOption);
-    }
-  }]);
-
-  return PlayerSuggestionService;
-}();
-
-
-
-/***/ }),
-
-/***/ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/queryServiceFactory.js":
-/*!*******************************************************************************************!*\
-  !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/queryServiceFactory.js ***!
-  \*******************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return QueryServiceFactory; });
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./constants */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
-/* harmony import */ var _lapPlayerQueryService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lapPlayerQueryService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/lapPlayerQueryService.js");
-/* harmony import */ var _playerMultipleQueryService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./playerMultipleQueryService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/playerMultipleQueryService.js");
-/* harmony import */ var _lrfPlayerQueryService__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./lrfPlayerQueryService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/lrfPlayerQueryService.js");
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-
-
-
-
-
-var QueryServiceFactory =
-/*#__PURE__*/
-function () {
-  function QueryServiceFactory() {
-    _classCallCheck(this, QueryServiceFactory);
-  }
-
-  _createClass(QueryServiceFactory, null, [{
-    key: "getPlayerListService",
-    value: function getPlayerListService(param) {
-      var bankAccountNumber = param.bankAccountNumber,
-          email = param.email;
-
-      if (bankAccountNumber || email) {
-        return _lapPlayerQueryService__WEBPACK_IMPORTED_MODULE_1__["default"];
-      } else if (this._isChangeAdvancedSearch(param)) {
-        return _lrfPlayerQueryService__WEBPACK_IMPORTED_MODULE_3__["default"];
-      } else {
-        return _playerMultipleQueryService__WEBPACK_IMPORTED_MODULE_2__["default"];
-      }
-    }
-  }, {
-    key: "_isChangeAdvancedSearch",
-    value: function _isChangeAdvancedSearch(param) {
-      var baFilter = param.baFilter,
-          currencyIdList = param.currencyIdList,
-          oddsGroup = param.oddsGroup,
-          specialLevel = param.specialLevel;
-      return Number(baFilter) !== 0 || currencyIdList !== '' || oddsGroup !== '' || Object.keys(_constants__WEBPACK_IMPORTED_MODULE_0__["specialLevelListWithColor"]).length !== specialLevel.split(',').length;
-    }
-  }]);
-
-  return QueryServiceFactory;
-}();
-
-
+  var status = errorInfo.response.status;
+  return status === 403 || status === 401;
+};
 
 /***/ }),
 
@@ -5021,8 +4240,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ReportExcel; });
 /* harmony import */ var _jsroot_lib_excel__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/excel */ "./www/js/source/reactpages/lib/excel.js");
 /* harmony import */ var _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/constants/excelStyle */ "./www/js/source/reactpages/constants/excelStyle.js");
-/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./utils */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/utils.js");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./constants */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
+/* harmony import */ var _helpers_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./helpers/utils */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/utils.js");
 var _displayedTextByField;
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -5040,12 +4259,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var HEADER_ROW_INDEX = 0;
 var DATA_ROW_INDEX = 1;
 var MAIN_SECTION_STYLE = 'mainSectionStyle';
-var displayedTextByField = (_displayedTextByField = {}, _defineProperty(_displayedTextByField, _lib_constants__WEBPACK_IMPORTED_MODULE_2__["fields"].SpecialLevel, function (value) {
-  return Object(_utils__WEBPACK_IMPORTED_MODULE_3__["getSpecialLevelText"])(value);
-}), _defineProperty(_displayedTextByField, _lib_constants__WEBPACK_IMPORTED_MODULE_2__["fields"].BaStatus, function (value) {
-  return Object(_utils__WEBPACK_IMPORTED_MODULE_3__["getBaStatusText"])(value);
-}), _defineProperty(_displayedTextByField, _lib_constants__WEBPACK_IMPORTED_MODULE_2__["fields"].Status, function (value) {
-  return Object(_utils__WEBPACK_IMPORTED_MODULE_3__["getPlayerStatus"])(value);
+var displayedTextByField = (_displayedTextByField = {}, _defineProperty(_displayedTextByField, _constants__WEBPACK_IMPORTED_MODULE_2__["fields"].SpecialLevel, function (value) {
+  return Object(_helpers_utils__WEBPACK_IMPORTED_MODULE_3__["getSpecialLevelText"])(value);
+}), _defineProperty(_displayedTextByField, _constants__WEBPACK_IMPORTED_MODULE_2__["fields"].BaStatus, function (value) {
+  return Object(_helpers_utils__WEBPACK_IMPORTED_MODULE_3__["getBaStatusText"])(value);
+}), _defineProperty(_displayedTextByField, _constants__WEBPACK_IMPORTED_MODULE_2__["fields"].Status, function (value) {
+  return Object(_helpers_utils__WEBPACK_IMPORTED_MODULE_3__["getPlayerStatus"])(value);
 }), _displayedTextByField);
 
 var ReportExcel =
@@ -5091,7 +4310,7 @@ function () {
         });
         this.worksheet[address] = {
           t: "s",
-          v: _lib_constants__WEBPACK_IMPORTED_MODULE_2__["headerText"][field] || '',
+          v: _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"][field] || '',
           s: _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["headerCellStyle"]
         };
       }
@@ -5170,31 +4389,31 @@ function () {
           _this2 = this;
 
       return [(_ref = {
-        field: _lib_constants__WEBPACK_IMPORTED_MODULE_2__["fields"].Status
+        field: _constants__WEBPACK_IMPORTED_MODULE_2__["fields"].Status
       }, _defineProperty(_ref, MAIN_SECTION_STYLE, _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["bodyCellStyle"].center), _defineProperty(_ref, "width", 60), _ref), (_ref2 = {
-        field: _lib_constants__WEBPACK_IMPORTED_MODULE_2__["fields"].UserName
+        field: _constants__WEBPACK_IMPORTED_MODULE_2__["fields"].UserName
       }, _defineProperty(_ref2, MAIN_SECTION_STYLE, _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["bodyCellStyle"].center), _defineProperty(_ref2, "width", 200), _ref2), (_ref3 = {
-        field: _lib_constants__WEBPACK_IMPORTED_MODULE_2__["fields"].SystemId
+        field: _constants__WEBPACK_IMPORTED_MODULE_2__["fields"].SystemId
       }, _defineProperty(_ref3, MAIN_SECTION_STYLE, _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["bodyCellStyle"].center), _defineProperty(_ref3, "width", 200), _ref3), (_ref4 = {
-        field: _lib_constants__WEBPACK_IMPORTED_MODULE_2__["fields"].RealName
+        field: _constants__WEBPACK_IMPORTED_MODULE_2__["fields"].RealName
       }, _defineProperty(_ref4, MAIN_SECTION_STYLE, _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["bodyCellStyle"].center), _defineProperty(_ref4, "width", 150), _ref4), (_ref5 = {
-        field: _lib_constants__WEBPACK_IMPORTED_MODULE_2__["fields"].Currency
+        field: _constants__WEBPACK_IMPORTED_MODULE_2__["fields"].Currency
       }, _defineProperty(_ref5, MAIN_SECTION_STYLE, _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["bodyCellStyle"].center), _defineProperty(_ref5, "width", 80), _ref5), (_ref6 = {
-        field: _lib_constants__WEBPACK_IMPORTED_MODULE_2__["fields"].CurrentBalance
+        field: _constants__WEBPACK_IMPORTED_MODULE_2__["fields"].CurrentBalance
       }, _defineProperty(_ref6, MAIN_SECTION_STYLE, _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["bodyCellStyle"].decimal), _defineProperty(_ref6, "width", 130), _ref6), (_ref7 = {
-        field: _lib_constants__WEBPACK_IMPORTED_MODULE_2__["fields"].OutstandingBalance
+        field: _constants__WEBPACK_IMPORTED_MODULE_2__["fields"].OutstandingBalance
       }, _defineProperty(_ref7, MAIN_SECTION_STYLE, _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["bodyCellStyle"].decimal), _defineProperty(_ref7, "width", 130), _ref7), (_ref8 = {
-        field: _lib_constants__WEBPACK_IMPORTED_MODULE_2__["fields"].OddsGroup
+        field: _constants__WEBPACK_IMPORTED_MODULE_2__["fields"].OddsGroup
       }, _defineProperty(_ref8, MAIN_SECTION_STYLE, _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["bodyCellStyle"].center), _defineProperty(_ref8, "width", 70), _ref8), (_ref9 = {
-        field: _lib_constants__WEBPACK_IMPORTED_MODULE_2__["fields"].BaStatus
+        field: _constants__WEBPACK_IMPORTED_MODULE_2__["fields"].BaStatus
       }, _defineProperty(_ref9, MAIN_SECTION_STYLE, _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["bodyCellStyle"].center), _defineProperty(_ref9, "width", 70), _ref9), (_ref10 = {
-        field: _lib_constants__WEBPACK_IMPORTED_MODULE_2__["fields"].SpecialLevel
+        field: _constants__WEBPACK_IMPORTED_MODULE_2__["fields"].SpecialLevel
       }, _defineProperty(_ref10, MAIN_SECTION_STYLE, _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["bodyCellStyle"].center), _defineProperty(_ref10, "width", 70), _ref10), (_ref11 = {
-        field: _lib_constants__WEBPACK_IMPORTED_MODULE_2__["fields"].LastLoginIp
+        field: _constants__WEBPACK_IMPORTED_MODULE_2__["fields"].LastLoginIp
       }, _defineProperty(_ref11, MAIN_SECTION_STYLE, _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["bodyCellStyle"].center), _defineProperty(_ref11, "width", 100), _ref11), (_ref12 = {
-        field: _lib_constants__WEBPACK_IMPORTED_MODULE_2__["fields"].LastTransaction
+        field: _constants__WEBPACK_IMPORTED_MODULE_2__["fields"].LastTransaction
       }, _defineProperty(_ref12, MAIN_SECTION_STYLE, _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["bodyCellStyle"].center), _defineProperty(_ref12, "width", 150), _ref12), (_ref13 = {
-        field: _lib_constants__WEBPACK_IMPORTED_MODULE_2__["fields"].Email
+        field: _constants__WEBPACK_IMPORTED_MODULE_2__["fields"].Email
       }, _defineProperty(_ref13, MAIN_SECTION_STYLE, _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["bodyCellStyle"].center), _defineProperty(_ref13, "width", 200), _ref13)].filter(function (x) {
         return !!_this2.displayedColumn[x.field];
       });
@@ -5208,74 +4427,805 @@ function () {
 
 /***/ }),
 
-/***/ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/utils.js":
-/*!*****************************************************************************!*\
-  !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/utils.js ***!
-  \*****************************************************************************/
-/*! exports provided: getSpecialLevelText, getBaStatusText, getPlayerStatus, buildDisplayedColumnObject, isDeposit, getCustIdListFromLapData, getErrorMessageForUpdating */
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/services/gridInteractionService.js":
+/*!*******************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/services/gridInteractionService.js ***!
+  \*******************************************************************************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSpecialLevelText", function() { return getSpecialLevelText; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBaStatusText", function() { return getBaStatusText; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPlayerStatus", function() { return getPlayerStatus; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "buildDisplayedColumnObject", function() { return buildDisplayedColumnObject; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isDeposit", function() { return isDeposit; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCustIdListFromLapData", function() { return getCustIdListFromLapData; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getErrorMessageForUpdating", function() { return getErrorMessageForUpdating; });
-/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
-/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return GridInteractionService; });
+/* harmony import */ var _helpers_gridHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../helpers/gridHelper */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/gridHelper.js");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../constants */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
+/* harmony import */ var _jsroot_lib_dataReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/dataReducer */ "./www/js/source/reactpages/lib/dataReducer.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
 
-var getSpecialLevelText = function getSpecialLevelText(value) {
-  return value === undefined || value === null ? '' : Number(value) === 0 ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('None') : value;
-};
-var getBaStatusText = function getBaStatusText(value) {
-  return value ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('On') : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Off');
-};
-var getPlayerStatus = function getPlayerStatus(value) {
-  var displayedValue = _lib_constants__WEBPACK_IMPORTED_MODULE_0__["playerStatus"][value];
-  return displayedValue || '';
-};
-var buildDisplayedColumnObject = function buildDisplayedColumnObject(displayedColumnList) {
-  return displayedColumnList.reduce(function (accumulator, currentItem) {
-    accumulator[currentItem.key] = currentItem.show;
-    return accumulator;
-  }, {});
-};
-var isDeposit = function isDeposit(ibcCustId, actStatus) {
-  return actStatus === _lib_constants__WEBPACK_IMPORTED_MODULE_0__["playerTypes"].deposit && ibcCustId > 0;
-};
-var getCustIdListFromLapData = function getCustIdListFromLapData(lapPlayerList) {
-  return lapPlayerList.reduce(function (result, item) {
-    if (isDeposit(item.IBCCustId, item.ActStatus)) {
-      result.push(item.IBCCustId);
+
+
+var GridInteractionService =
+/*#__PURE__*/
+function () {
+  function GridInteractionService() {
+    _classCallCheck(this, GridInteractionService);
+  }
+
+  _createClass(GridInteractionService, null, [{
+    key: "getNextDropdownPosition",
+    value: function getNextDropdownPosition(element, currentPosition, dropdownItemName) {
+      if (!element || currentPosition) {
+        return null;
+      }
+
+      var dropdownHeight = _constants__WEBPACK_IMPORTED_MODULE_1__["gridItemDropdownHeight"][dropdownItemName];
+      var rect = element.getBoundingClientRect();
+      return {
+        x: rect.left,
+        y: _helpers_gridHelper__WEBPACK_IMPORTED_MODULE_0__["default"].calculateTopPosition(dropdownHeight, rect.top + 20)
+      };
     }
+  }, {
+    key: "updatePlayerItem",
+    value: function updatePlayerItem(playerList, custId, value, fieldName) {
+      var itemIndex = playerList.findIndex(function (x) {
+        return x.IbcCustId === custId;
+      });
 
-    return result;
-  }, []);
-};
-var getErrorMessageForUpdating = function getErrorMessageForUpdating(errorInfo) {
-  var defaultKey = 'HttpError_Default';
+      if (itemIndex === -1) {
+        itemIndex = playerList.findIndex(function (x) {
+          return x.LicenseeCustId === custId;
+        });
+      }
 
-  if (!errorInfo) {
-    return _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource(defaultKey);
+      if (itemIndex !== -1) {
+        var newPlayerItem = _objectSpread({}, playerList[itemIndex], _defineProperty({}, fieldName, value));
+
+        return Object(_jsroot_lib_dataReducer__WEBPACK_IMPORTED_MODULE_2__["updateObjectInArray"])(playerList, itemIndex, newPlayerItem);
+      }
+
+      return _toConsumableArray(playerList);
+    }
+  }, {
+    key: "updatePlayerWithBaStatus",
+    value: function updatePlayerWithBaStatus(playerList, ibcCustId, isBa, oddsGroup) {
+      var itemIndex = playerList.findIndex(function (x) {
+        return x.IbcCustId === ibcCustId;
+      });
+
+      var newPlayerItem = _objectSpread({}, playerList[itemIndex], {
+        BaStatus: isBa,
+        OddsGroup: oddsGroup
+      });
+
+      return Object(_jsroot_lib_dataReducer__WEBPACK_IMPORTED_MODULE_2__["updateObjectInArray"])(playerList, itemIndex, newPlayerItem);
+    }
+  }, {
+    key: "sortPlayerList",
+    value: function sortPlayerList(dataList, sortBy, sortOrder) {
+      var _this = this;
+
+      if (!dataList || dataList.length === 0) {
+        return [];
+      }
+
+      var isSortAscending = sortOrder.toLowerCase() === 'asc';
+
+      var newDataList = _toConsumableArray(dataList);
+
+      var isTringType = _constants__WEBPACK_IMPORTED_MODULE_1__["stringTypeFields"].includes(sortBy);
+      newDataList.sort(function (currentItem, nextItem) {
+        var currentValue = currentItem[sortBy];
+        var nextValue = nextItem[sortBy];
+
+        if (isTringType) {
+          return _this.sortStringValue(currentValue || '', nextValue || '', isSortAscending);
+        }
+
+        return isSortAscending ? currentValue - nextValue : -(currentValue - nextValue);
+      });
+      return newDataList;
+    }
+  }, {
+    key: "sortStringValue",
+    value: function sortStringValue(current, next, isSortAscending) {
+      var currentUpperCase = current.toUpperCase();
+      var nextUpperCase = next.toUpperCase();
+      var sortResult = currentUpperCase > nextUpperCase ? 1 : currentUpperCase < nextUpperCase ? -1 : 0;
+      return isSortAscending ? sortResult : -sortResult;
+    }
+  }]);
+
+  return GridInteractionService;
+}();
+
+
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/services/lapPlayerQueryService.js":
+/*!******************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/services/lapPlayerQueryService.js ***!
+  \******************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return LapPlayerQueryService; });
+/* harmony import */ var _helpers_playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../helpers/playerListDataHelper */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/playerListDataHelper.js");
+/* harmony import */ var _helpers_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../helpers/utils */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/utils.js");
+/* harmony import */ var _helpers_playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../helpers/playerDataBuilder */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/playerDataBuilder.js");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+
+
+var LapPlayerQueryService =
+/*#__PURE__*/
+function () {
+  function LapPlayerQueryService() {
+    _classCallCheck(this, LapPlayerQueryService);
   }
 
-  var resourceKey = isUnauthorizedResponse(errorInfo) ? 'FunctionDeniedMsg' : defaultKey;
-  return _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource(resourceKey).replace(/&apos;/g, "'");
-};
+  _createClass(LapPlayerQueryService, null, [{
+    key: "fetchData",
+    value: function fetchData(param, commonService, apiInfo) {
+      var _this = this;
 
-var isUnauthorizedResponse = function isUnauthorizedResponse(errorInfo) {
-  if (!errorInfo.response) {
-    return false;
+      var lrfDataById = apiInfo.lrfDataById,
+          lapSearch = apiInfo.lapSearch;
+      return commonService.fetchData(lapSearch.type, lapSearch.action, _objectSpread({}, param)).then(function (lapResponse) {
+        var _lapResponse$data = lapResponse.data,
+            _lapResponse$data$Pla = _lapResponse$data.PlayerList,
+            lapPlayerList = _lapResponse$data$Pla === void 0 ? [] : _lapResponse$data$Pla,
+            _lapResponse$data$Tot = _lapResponse$data.TotalItem,
+            lapTotalItem = _lapResponse$data$Tot === void 0 ? 0 : _lapResponse$data$Tot;
+
+        if (!lapPlayerList || !lapPlayerList.length) {
+          return _helpers_playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].createEmptyResult();
+        }
+
+        return _this._fetchFromLrf(param, lrfDataById, lapPlayerList, commonService, lapTotalItem);
+      }).catch(function () {
+        return _helpers_playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].createEmptyResult();
+      });
+    }
+  }, {
+    key: "_fetchFromLrf",
+    value: function _fetchFromLrf(param, lrfDataById, lapPlayerList, commonService, lapTotalItem) {
+      var idList = Object(_helpers_utils__WEBPACK_IMPORTED_MODULE_1__["getCustIdListFromLapData"])(lapPlayerList);
+      var lrfParam = {
+        currencyIdList: param.currencyIdList,
+        idList: idList.join(','),
+        specialLevel: param.specialLevel,
+        pageSize: param.pageSize,
+        pageIndex: 1
+      };
+      return commonService.fetchData(lrfDataById.type, lrfDataById.action, lrfParam).then(function (lrfResponse) {
+        var lrfPlayerList = lrfResponse.data.DataList;
+
+        if (!lrfPlayerList || !lrfPlayerList.length) {
+          return {
+            playerList: Object(_helpers_playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__["buildLapPlayerList"])(lapPlayerList),
+            totalItem: lapTotalItem
+          };
+        }
+
+        var playerList = _helpers_playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].mergePlayerList(lrfPlayerList, lapPlayerList);
+        var excludedIdCount = lrfPlayerList.filter(function (p) {
+          return !idList.includes(p.IbcCustId);
+        }).length;
+        return {
+          playerList: playerList,
+          totalItem: lapTotalItem - excludedIdCount
+        };
+      }).catch(function () {
+        return {
+          playerList: Object(_helpers_playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__["buildLapPlayerList"])(lapPlayerList),
+          totalItem: lapTotalItem
+        };
+      });
+    }
+  }]);
+
+  return LapPlayerQueryService;
+}();
+
+
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/services/lrfPlayerQueryService.js":
+/*!******************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/services/lrfPlayerQueryService.js ***!
+  \******************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return LrfPlayerQueryService; });
+/* harmony import */ var _helpers_playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../helpers/playerListDataHelper */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/playerListDataHelper.js");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+var LrfPlayerQueryService =
+/*#__PURE__*/
+function () {
+  function LrfPlayerQueryService() {
+    _classCallCheck(this, LrfPlayerQueryService);
   }
 
-  var status = errorInfo.response.status;
-  return status === 403 || status === 401;
+  _createClass(LrfPlayerQueryService, null, [{
+    key: "fetchData",
+    value: function fetchData(param, commonService, apiInfo) {
+      var _this = this;
+
+      var lrfSearch = apiInfo.lrfSearch,
+          lapDataById = apiInfo.lapDataById;
+      return commonService.fetchData(lrfSearch.type, lrfSearch.action, _objectSpread({}, param)).then(function (lrfResponse) {
+        var _lrfResponse$data = lrfResponse.data,
+            lrfPlayerList = _lrfResponse$data.DataList,
+            TotalItem = _lrfResponse$data.TotalItem;
+
+        if (!lrfPlayerList || !lrfPlayerList.length) {
+          return _helpers_playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].createEmptyResult();
+        }
+
+        return _this._fetchFromLap(lrfPlayerList, lapDataById, commonService, TotalItem);
+      }).catch(function () {
+        return _helpers_playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].createEmptyResult();
+      });
+    }
+  }, {
+    key: "_fetchFromLap",
+    value: function _fetchFromLap(lrfPlayerList, lapDataById, commonService, lrfTotalItem) {
+      var lapParam = {
+        idList: lrfPlayerList.map(function (x) {
+          return x.IbcCustId;
+        })
+      };
+      return commonService.fetchData(lapDataById.type, lapDataById.action, lapParam).then(function (lapResponse) {
+        var lapPlayerList = lapResponse.data.PlayerList;
+
+        if (!lapPlayerList || !lapPlayerList.length) {
+          return _helpers_playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].createEmptyResult();
+        }
+
+        var playerList = _helpers_playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].mergePlayerList(lrfPlayerList, lapPlayerList);
+        return {
+          playerList: playerList,
+          totalItem: lrfTotalItem
+        };
+      }).catch(function () {
+        return _helpers_playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].createEmptyResult();
+      });
+    }
+  }]);
+
+  return LrfPlayerQueryService;
+}();
+
+
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/services/playerCommandService.js":
+/*!*****************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/services/playerCommandService.js ***!
+  \*****************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return PlayerCommandService; });
+/* harmony import */ var _lib_factoryCommonService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../lib/factoryCommonService */ "./www/js/source/reactpages/Module/lib/factoryCommonService.js");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../constants */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+
+var PlayerCommandService =
+/*#__PURE__*/
+function () {
+  function PlayerCommandService() {
+    _classCallCheck(this, PlayerCommandService);
+
+    this.commonService = _lib_factoryCommonService__WEBPACK_IMPORTED_MODULE_0__["default"].createInstance();
+  }
+
+  _createClass(PlayerCommandService, [{
+    key: "updateBaStatus",
+    value: function updateBaStatus(param) {
+      var updateBaStatus = _constants__WEBPACK_IMPORTED_MODULE_1__["apiUpdateInfo"].updateBaStatus;
+      return this.commonService.fetchData(updateBaStatus.type, updateBaStatus.action, _objectSpread({}, param));
+    }
+  }, {
+    key: "updateOddsGroup",
+    value: function updateOddsGroup(param) {
+      var updateOddsGroup = _constants__WEBPACK_IMPORTED_MODULE_1__["apiUpdateInfo"].updateOddsGroup;
+      return this.commonService.fetchData(updateOddsGroup.type, updateOddsGroup.action, _objectSpread({}, param));
+    }
+  }, {
+    key: "updateSpecialLevel",
+    value: function updateSpecialLevel(param) {
+      var updateSpecialLevel = _constants__WEBPACK_IMPORTED_MODULE_1__["apiUpdateInfo"].updateSpecialLevel;
+      return this.commonService.fetchData(updateSpecialLevel.type, updateSpecialLevel.action, _objectSpread({}, param));
+    }
+  }, {
+    key: "updatePlayerStatus",
+    value: function updatePlayerStatus(param) {
+      var updatePlayerStatus = _constants__WEBPACK_IMPORTED_MODULE_1__["apiUpdateInfo"].updatePlayerStatus;
+      return this.commonService.fetchData(updatePlayerStatus.type, updatePlayerStatus.action, _objectSpread({}, param));
+    }
+  }]);
+
+  return PlayerCommandService;
+}();
+
+
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/services/playerItemQueryService.js":
+/*!*******************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/services/playerItemQueryService.js ***!
+  \*******************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return PlayerItemQueryService; });
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
+/* harmony import */ var _helpers_playerListDataHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../helpers/playerListDataHelper */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/playerListDataHelper.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+
+var PlayerItemQueryService =
+/*#__PURE__*/
+function () {
+  function PlayerItemQueryService() {
+    _classCallCheck(this, PlayerItemQueryService);
+  }
+
+  _createClass(PlayerItemQueryService, null, [{
+    key: "getPlayerById",
+    value: function getPlayerById(param, commonService, apiInfo) {
+      var lrfDataById = apiInfo.lrfDataById,
+          lapGetPlayerByLicenseeId = apiInfo.lapGetPlayerByLicenseeId;
+      var ibcCustId = param.ibcCustId,
+          licenseeCustId = param.licenseeCustId;
+      var lrfParam = {
+        idList: ibcCustId,
+        specialLevel: Object.keys(_constants__WEBPACK_IMPORTED_MODULE_0__["specialLevelListWithColor"]).map(function (item) {
+          return item;
+        }).join(','),
+        pageSize: _constants__WEBPACK_IMPORTED_MODULE_0__["defaultPagingOption"].PageSize,
+        pageIndex: 1
+      };
+      var lapParam = {
+        custId: licenseeCustId
+      };
+      var lrfPromise = ibcCustId > 0 ? commonService.fetchData(lrfDataById.type, lrfDataById.action, lrfParam) : null;
+      var lapPromise = commonService.fetchData(lapGetPlayerByLicenseeId.type, lapGetPlayerByLicenseeId.action, lapParam);
+      return this._getResult(lrfPromise, lapPromise, commonService);
+    }
+  }, {
+    key: "_getResult",
+    value: function _getResult(lrfPromise, lapPromise, commonService) {
+      return commonService.fetchMultiple([lrfPromise, lapPromise], function (lrfResponse, lapResponse) {
+        var _ref = lrfResponse && lrfResponse.data || {},
+            _ref$DataList = _ref.DataList,
+            lrfPlayerList = _ref$DataList === void 0 ? [] : _ref$DataList;
+
+        var Player = lapResponse.data.Player;
+        var lapPlayerList = Player ? [Player] : [];
+        var playerList = _helpers_playerListDataHelper__WEBPACK_IMPORTED_MODULE_1__["default"].mergePlayerList(lrfPlayerList, lapPlayerList);
+        return playerList.length ? playerList[0] : null;
+      }).catch(function (error) {
+        console.log(error.message);
+        return null;
+      });
+    }
+  }]);
+
+  return PlayerItemQueryService;
+}();
+
+
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/services/playerMultipleQueryService.js":
+/*!***********************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/services/playerMultipleQueryService.js ***!
+  \***********************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return PlayerMultipleQueryService; });
+/* harmony import */ var _helpers_playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../helpers/playerListDataHelper */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/playerListDataHelper.js");
+/* harmony import */ var _helpers_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../helpers/utils */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/utils.js");
+/* harmony import */ var _helpers_playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../helpers/playerDataBuilder */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/playerDataBuilder.js");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+
+
+
+var PlayerMultipleQueryService =
+/*#__PURE__*/
+function () {
+  function PlayerMultipleQueryService() {
+    _classCallCheck(this, PlayerMultipleQueryService);
+  }
+
+  _createClass(PlayerMultipleQueryService, null, [{
+    key: "fetchData",
+    value: function fetchData(param, commonService, apiInfo) {
+      var lrfSearch = apiInfo.lrfSearch,
+          lapSearch = apiInfo.lapSearch;
+      var lrfPromise = commonService.fetchData(lrfSearch.type, lrfSearch.action, _objectSpread({}, param)).catch(function (error) {
+        console.log(error.message);
+        window.alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('HttpError_Default'));
+        return {
+          data: {
+            DataList: [],
+            TotalItem: 0
+          }
+        };
+      });
+      var lapPromise = commonService.fetchData(lapSearch.type, lapSearch.action, _objectSpread({}, param)).catch(function (error) {
+        console.log(error.message);
+        window.alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('HttpError_Default'));
+        return {
+          data: {
+            PlayerList: [],
+            TotalItem: 0
+          }
+        };
+      });
+      return this._getResult(param, lrfPromise, lapPromise, commonService, apiInfo);
+    }
+  }, {
+    key: "_getResult",
+    value: function _getResult(param, lrfPromise, lapPromise, commonService, apiInfo) {
+      var _this = this;
+
+      return commonService.fetchMultiple([lrfPromise, lapPromise], function (lrfResponse, lapResponse) {
+        var lrfPlayerList = lrfResponse.data.DataList;
+        var _lapResponse$data = lapResponse.data,
+            lapPlayerList = _lapResponse$data.PlayerList,
+            lapTotalItem = _lapResponse$data.TotalItem;
+        var lrfDataObject = _helpers_playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getDataObject(lrfPlayerList, lapPlayerList);
+        var lapDataObject = _helpers_playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getDataObject(lapPlayerList, lrfPlayerList);
+        var playerList = _helpers_playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].mergePlayerList(lrfDataObject.commonList, lapDataObject.commonList);
+        var idListNotInLrf = Object(_helpers_utils__WEBPACK_IMPORTED_MODULE_1__["getCustIdListFromLapData"])(lapDataObject.differenceList);
+
+        if (idListNotInLrf.length === 0) {
+          var nonDepositPlayerList = Object(_helpers_playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__["buildLapPlayerList"])(lapDataObject.differenceList);
+          var finalPlayerList = playerList.length > 0 ? playerList.concat(nonDepositPlayerList) : nonDepositPlayerList;
+          return {
+            playerList: finalPlayerList,
+            totalItem: lapTotalItem
+          };
+        }
+
+        var lrfParam = {
+          currencyIdList: param.currencyIdList,
+          idList: idListNotInLrf.join(','),
+          specialLevel: param.specialLevel,
+          pageSize: param.pageSize,
+          pageIndex: 1
+        };
+        return _this._refetchFromLrf(lrfParam, lapDataObject, commonService, apiInfo).then(function (response) {
+          var nextPlayerList = response.playerList;
+          var excludedIdCount = nextPlayerList.filter(function (p) {
+            return !idListNotInLrf.includes(p.IbcCustId);
+          }).length;
+          return {
+            playerList: playerList.concat(nextPlayerList),
+            totalItem: lapTotalItem - excludedIdCount
+          };
+        });
+      }).catch(function (error) {
+        console.log(error.message);
+        return _helpers_playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].createEmptyResult();
+      });
+    }
+  }, {
+    key: "_refetchFromLrf",
+    value: function _refetchFromLrf(lrfParam, lapDataObject, commonService, apiInfo) {
+      var lrfDataById = apiInfo.lrfDataById;
+      var differenceList = lapDataObject.differenceList;
+      return commonService.fetchData(lrfDataById.type, lrfDataById.action, _objectSpread({}, lrfParam)).then(function (nextLrfResponse) {
+        var nextLrfPlayerList = nextLrfResponse.data.DataList;
+
+        if (!nextLrfPlayerList || !nextLrfPlayerList.length) {
+          return {
+            playerList: Object(_helpers_playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__["buildLapPlayerList"])(differenceList)
+          };
+        }
+
+        var playerList = _helpers_playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].mergePlayerList(nextLrfPlayerList, differenceList);
+        return {
+          playerList: playerList
+        };
+      }).catch(function (error) {
+        console.log(error.message);
+        window.alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('HttpError_Default'));
+        return {
+          playerList: Object(_helpers_playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__["buildLapPlayerList"])(differenceList)
+        };
+      });
+    }
+  }]);
+
+  return PlayerMultipleQueryService;
+}();
+
+
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/services/playerQueryService.js":
+/*!***************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/services/playerQueryService.js ***!
+  \***************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return PlayerQueryService; });
+/* harmony import */ var _lib_factoryCommonService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../lib/factoryCommonService */ "./www/js/source/reactpages/Module/lib/factoryCommonService.js");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../constants */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
+/* harmony import */ var _reportExcel__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../reportExcel */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/reportExcel.js");
+/* harmony import */ var _queryServiceFactory__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./queryServiceFactory */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/services/queryServiceFactory.js");
+/* harmony import */ var _playerItemQueryService__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./playerItemQueryService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/services/playerItemQueryService.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+
+
+
+
+var PlayerQueryService =
+/*#__PURE__*/
+function () {
+  function PlayerQueryService() {
+    _classCallCheck(this, PlayerQueryService);
+
+    this.commonService = _lib_factoryCommonService__WEBPACK_IMPORTED_MODULE_0__["default"].createInstance();
+  }
+
+  _createClass(PlayerQueryService, [{
+    key: "getTabList",
+    value: function getTabList() {
+      return this.commonService.getTabList();
+    }
+  }, {
+    key: "getPlayerList",
+    value: function getPlayerList(param) {
+      var playerListService = _queryServiceFactory__WEBPACK_IMPORTED_MODULE_3__["default"].getPlayerListService(param, this.commonService);
+      return playerListService.fetchData(param, this.commonService, _constants__WEBPACK_IMPORTED_MODULE_1__["apiInfo"]);
+    }
+  }, {
+    key: "getSinglePlayer",
+    value: function getSinglePlayer(param) {
+      return _playerItemQueryService__WEBPACK_IMPORTED_MODULE_4__["default"].getPlayerById(param, this.commonService, _constants__WEBPACK_IMPORTED_MODULE_1__["apiInfo"]);
+    }
+  }, {
+    key: "getLink",
+    value: function getLink(systemType, action) {
+      return this.commonService.getLink(systemType, action);
+    }
+  }, {
+    key: "exportExcel",
+    value: function exportExcel(playerList, param, displayedColumn) {
+      var fileName = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'PlayerList';
+      var reportExcel = new _reportExcel__WEBPACK_IMPORTED_MODULE_2__["default"](playerList, displayedColumn, fileName);
+      reportExcel.export();
+    }
+  }]);
+
+  return PlayerQueryService;
+}();
+
+
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/services/playerSuggestionService.js":
+/*!********************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/services/playerSuggestionService.js ***!
+  \********************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return PlayerSuggestionService; });
+/* harmony import */ var _lib_factoryCommonService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../lib/factoryCommonService */ "./www/js/source/reactpages/Module/lib/factoryCommonService.js");
+/* harmony import */ var _constants_configInfo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../constants/configInfo */ "./www/js/source/reactpages/Module/constants/configInfo.js");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+var apiInfo = {
+  userNameSuggestion: {
+    action: 'PlayerAdminContainer/GetSuggestionList',
+    type: _constants_configInfo__WEBPACK_IMPORTED_MODULE_1__["systemType"].newAdmin
+  }
 };
+
+var PlayerSuggestionService =
+/*#__PURE__*/
+function () {
+  function PlayerSuggestionService() {
+    _classCallCheck(this, PlayerSuggestionService);
+
+    this.commonService = _lib_factoryCommonService__WEBPACK_IMPORTED_MODULE_0__["default"].createInstance();
+  }
+
+  _createClass(PlayerSuggestionService, [{
+    key: "getSuggestionList",
+    value: function getSuggestionList(param) {
+      var userNameSuggestion = apiInfo.userNameSuggestion;
+      var configOption = {
+        method: 'get'
+      };
+      return this.commonService.fetchData(userNameSuggestion.type, userNameSuggestion.action, _objectSpread({}, param), configOption);
+    }
+  }]);
+
+  return PlayerSuggestionService;
+}();
+
+
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/services/queryServiceFactory.js":
+/*!****************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/services/queryServiceFactory.js ***!
+  \****************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return QueryServiceFactory; });
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
+/* harmony import */ var _lapPlayerQueryService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lapPlayerQueryService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/services/lapPlayerQueryService.js");
+/* harmony import */ var _playerMultipleQueryService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./playerMultipleQueryService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/services/playerMultipleQueryService.js");
+/* harmony import */ var _lrfPlayerQueryService__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./lrfPlayerQueryService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/services/lrfPlayerQueryService.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+
+
+
+var QueryServiceFactory =
+/*#__PURE__*/
+function () {
+  function QueryServiceFactory() {
+    _classCallCheck(this, QueryServiceFactory);
+  }
+
+  _createClass(QueryServiceFactory, null, [{
+    key: "getPlayerListService",
+    value: function getPlayerListService(param) {
+      var bankAccountNumber = param.bankAccountNumber,
+          email = param.email;
+
+      if (bankAccountNumber || email) {
+        return _lapPlayerQueryService__WEBPACK_IMPORTED_MODULE_1__["default"];
+      } else if (this._isChangeAdvancedSearch(param)) {
+        return _lrfPlayerQueryService__WEBPACK_IMPORTED_MODULE_3__["default"];
+      } else {
+        return _playerMultipleQueryService__WEBPACK_IMPORTED_MODULE_2__["default"];
+      }
+    }
+  }, {
+    key: "_isChangeAdvancedSearch",
+    value: function _isChangeAdvancedSearch(param) {
+      var baFilter = param.baFilter,
+          currencyIdList = param.currencyIdList,
+          oddsGroup = param.oddsGroup,
+          specialLevel = param.specialLevel;
+      return Number(baFilter) !== 0 || currencyIdList !== '' || oddsGroup !== '' || Object.keys(_constants__WEBPACK_IMPORTED_MODULE_0__["specialLevelListWithColor"]).length !== specialLevel.split(',').length;
+    }
+  }]);
+
+  return QueryServiceFactory;
+}();
+
+
 
 /***/ }),
 
