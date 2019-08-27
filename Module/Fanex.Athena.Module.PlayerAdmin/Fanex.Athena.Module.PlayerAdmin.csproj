@@ -82,6 +82,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\RngKenoBetLimitController.cs" />
     <Compile Include="Controllers\PlayerBetLimitBaseControler.cs" />
     <Compile Include="Controllers\PlayerBetListController.cs" />
     <Compile Include="Controllers\PlayerStatementController.cs" />
@@ -93,14 +94,16 @@
     <Compile Include="DTO\PlayerBetLimitProduct.cs" />
     <Compile Include="MetaModel\PlayerBetLimitSelectMetaModel.cs" />
     <Compile Include="MetaModel\PlayerBetLimitUpdateMetaModel.cs" />
-    <Compile Include="MetaModel\PlayerBetLimitItemMetaModel.cs" />
+    <Compile Include="MetaModel\PlayerBetLimitMetaModel.cs" />
     <Compile Include="MetaModel\PlayerRunningBetListMetalModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\DcsBetLimitRepository.cs" />
     <Compile Include="Repository\Interfaces\IDcsBetLinitRepository.cs" />
+    <Compile Include="Repository\Interfaces\IRngKenoBetLimitRepository.cs" />
     <Compile Include="Repository\Interfaces\IPlayerBetLimitRepository.cs" />
     <Compile Include="Repository\Interfaces\INumberGameBetLimitRepository.cs" />
     <Compile Include="Repository\Interfaces\ISportBookBetLimitRepository.cs" />
+    <Compile Include="Repository\RngKenoBetLimitRepository.cs" />
     <Compile Include="Repository\PlayerBetLimitRepository.cs" />
     <Compile Include="Repository\NumberGameBetLimitRepository.cs" />
     <Compile Include="Repository\SportBookBetLimitRepository.cs" />

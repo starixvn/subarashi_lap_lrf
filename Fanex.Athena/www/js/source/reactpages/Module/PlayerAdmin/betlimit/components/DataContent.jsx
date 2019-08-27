@@ -8,6 +8,7 @@ import NoDataTitle from '@jsroot/components/NoDataTitle';
 import DCSSetting from './grid/DCS/DCSSetting';
 import SBSetting from './grid/SB/SBSetting';
 import NGSetting from './grid/NG/NGSetting';
+import KNSetting from './grid/KN/KNSetting';
 import Balloon from '@jsroot/components/Balloon';
 import Alert from '@jsroot/components/sweet-alert';
 import { BetLimitProduct } from '../lib/constants';
@@ -17,7 +18,8 @@ const DataGrid = {
     [BetLimitProduct.VS]: DCSSetting,
     [BetLimitProduct.VS2]: DCSSetting,
     [BetLimitProduct.LT]: DCSSetting,
-    [BetLimitProduct.NG]: NGSetting
+    [BetLimitProduct.NG]: NGSetting,
+    [BetLimitProduct.KN]: KNSetting
 };
 
 export class DataContent extends PureComponent {

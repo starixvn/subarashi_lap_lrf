@@ -1,8 +1,6 @@
 ﻿namespace Fanex.Athena.Module.PlayerAdmin.MetaModel
 {
-    using Fanex.Athena.Model.Core.MetaModel;
-
-    public class PlayerBetLimitItemMetaModel
+    public class PlayerBetLimitMetaModel
     {
         public string SportId { get; set; }
 

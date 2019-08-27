@@ -25,16 +25,16 @@ const NGSettingGrid = (props) => {
                 >
                     <td>{item.BetSettingType}</td>
                     <SettingInput type={BetLimitType.MinBet} value={item.MinBet} editable={editable}>
-                        <span>{` >= ${Service.formatValue(item.BetValueMin)}`}</span>
+                        {item.BetValueMin > 0 && <span>{` >= ${Service.formatValue(item.BetValueMin)}`}</span>}
                     </SettingInput>
                     <SettingInput type={BetLimitType.MaxBet} value={item.MaxBet} editable={editable}>
-                        <span>{` <= ${Service.formatValue(item.BetValueMax)}`}</span>
+                        {item.BetValueMax > 0 && <span>{` <= ${Service.formatValue(item.BetValueMax)}`}</span>}
                     </SettingInput>
                     <SettingInput type={BetLimitType.MaxPerMatch} value={item.MaxPerMatch} editable={editable}>
-                        <span>{` <= ${Service.formatValue(item.MaxPerMatchMax)}`}</span>
+                        {item.MaxPerMatchMax > 0 && <span>{` <= ${Service.formatValue(item.MaxPerMatchMax)}`}</span>}
                     </SettingInput>
                     <SettingInput type={BetLimitType.MaxPerBall} value={item.MaxPerBall} editable={editable}>
-                        <span>{` <= ${Service.formatValue(item.MaxPerBallMax)}`}</span>
+                        {item.MaxPerBallMax > 0 && <span>{` <= ${Service.formatValue(item.MaxPerBallMax)}`}</span>}
                     </SettingInput>
                 </SettingRow>
             )

@@ -17,6 +17,6 @@
 
         public int ProductId { get; set; }
 
-        public IEnumerable<PlayerBetLimitItemMetaModel> Setting { get; set; }
+        public IEnumerable<PlayerBetLimitMetaModel> Setting { get; set; }
     }
 }

@@ -128,7 +128,7 @@
             db.SetParameterValue("errmsg", null);
         }
 
-        private static string BuildBetLimitParameter(int productId, IEnumerable<PlayerBetLimitItemMetaModel> setting)
+        private static string BuildBetLimitParameter(int productId, IEnumerable<PlayerBetLimitMetaModel> setting)
         {
             const string XMLPattern = "<ROOT>{0}</ROOT>";
             const string XMLElement = "<BetLimit SportType=\"{0}\" BetType=\"{1}\" MinBet=\"{2}\" MaxBet=\"{3}\" MaxPerMatch=\"{4}\" ></BetLimit>";

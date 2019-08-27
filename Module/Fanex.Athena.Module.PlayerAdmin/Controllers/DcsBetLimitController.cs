@@ -54,7 +54,7 @@
 
             await Task.WhenAll(data, status).ConfigureAwait(false);
 
-            var viewModel = new PlayerBetSettingViewModel<PlayerBetLimit>
+            var viewModel = new PlayerBetSettingViewModel
             {
                 Data = AddSettingTypeName(await data),
                 //Editable = isEditable && await status

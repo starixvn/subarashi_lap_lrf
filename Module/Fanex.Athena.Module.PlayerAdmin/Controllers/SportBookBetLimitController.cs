@@ -5,7 +5,6 @@
     using System.Web.Mvc;
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Core.DataDomain;
-    using Fanex.Athena.Module.PlayerAdmin.DTO;
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
     using Fanex.Athena.Module.PlayerAdmin.Services.Interfaces;
     using Fanex.Athena.Module.PlayerAdmin.ViewModels;
@@ -42,7 +41,7 @@
             var data = await _service.GetSettingAsync(metaModel.CustId, AppSettings.IsShowMixedSport).ConfigureAwait(false);
             var copySportId = ((int)SportType.Soccer).ToString();
 
-            var viewModel = new PlayerBetSettingViewModel<PlayerBetLimit>
+            var viewModel = new PlayerBetSettingViewModel
             {
                 Data = AddSettingTypeName(data),
                 //Editable = isEditable,

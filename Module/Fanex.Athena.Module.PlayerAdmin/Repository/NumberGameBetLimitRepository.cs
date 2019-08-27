@@ -113,7 +113,7 @@
             db.SetParameterValue("ErrMsg", null);
         }
 
-        private static void AddUpdateSettingParameter(IObjectDb db, IEnumerable<PlayerBetLimitItemMetaModel> setting)
+        private static void AddUpdateSettingParameter(IObjectDb db, IEnumerable<PlayerBetLimitMetaModel> setting)
         {
             foreach (var type in SportTypes)
             {

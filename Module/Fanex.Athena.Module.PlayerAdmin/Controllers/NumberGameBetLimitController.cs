@@ -4,7 +4,6 @@
     using System.Web.Mvc;
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Core.DataDomain;
-    using Fanex.Athena.Module.PlayerAdmin.DTO;
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
     using Fanex.Athena.Module.PlayerAdmin.Repository.Interfaces;
     using Fanex.Athena.Module.PlayerAdmin.ViewModels;
@@ -19,10 +18,6 @@
     public class NumberGameBetLimitController : PlayerBetLimitBaseControler
     {
         private readonly INumberGameBetLimitRepository _repository;
-
-        private readonly IAuthorizationService _authService;
-
-        private readonly ICacheRefAdapter _cacheRefAdapter;
 
         public NumberGameBetLimitController(
             ILanguageService languageService,
@@ -42,10 +37,10 @@
         public async Task<JsonResult> GetSetting(PlayerBetLimitSelectMetaModel metaModel)
         {
             //var isEditable = HasEditPermission();
-            var data = await _repository.GetSettingAsync(metaModel.CustId).ConfigureAwait(false); ;
+            var data = await _repository.GetSettingAsync(metaModel.CustId).ConfigureAwait(false);
             var copySportId = ((int)SportType.Soccer).ToString();
 
-            var viewModel = new PlayerBetSettingViewModel<PlayerBetLimit>
+            var viewModel = new PlayerBetSettingViewModel
             {
                 Data = AddSettingTypeName(data),
                 //Editable = isEditable,

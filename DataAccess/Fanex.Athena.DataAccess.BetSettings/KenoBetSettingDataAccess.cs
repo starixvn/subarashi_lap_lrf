@@ -74,7 +74,6 @@ namespace Fanex.Athena.DataAccess.BetSettings
                     MaxPerMatch = Converter.ToDecimal(reader["MaxPerMatch"]),
                     BetValueMax = Converter.ToDecimal(reader["MaxBet_Min"]),
                     BetValueMin = Converter.ToDecimal(reader["MinBet_Max"]),
-                    BetSettingType = _cacheRefAdapter.GetBettype(Converter.ToString2(reader["IBCBetTypeID"])),
                     SportId = gameTypeId
                 };
 

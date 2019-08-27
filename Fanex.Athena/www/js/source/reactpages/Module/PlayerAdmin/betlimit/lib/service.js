@@ -9,7 +9,8 @@ const Url = {
     [BetLimitProduct.VS]: 'DcsBetLimit',
     [BetLimitProduct.VS2]: 'DcsBetLimit',
     [BetLimitProduct.LT]: 'DcsBetLimit',
-    [BetLimitProduct.NG]: 'NumberGameBetLimit'
+    [BetLimitProduct.NG]: 'NumberGameBetLimit',
+    [BetLimitProduct.KN]: 'RngKenoBetLimit'
 };
 
 export default class Service {
