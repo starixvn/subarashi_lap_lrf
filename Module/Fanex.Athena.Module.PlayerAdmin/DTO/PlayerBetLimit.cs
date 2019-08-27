@@ -21,5 +21,9 @@
         public decimal BetValueMax { get; set; }
 
         public decimal BetValueMin { get; set; }
+
+        public decimal MaxPerBall { get; set; }
+
+        public decimal MaxPerBallMax { get; set; }
     }
 }

@@ -17,7 +17,7 @@
     using Fanex.Data;
     using Fanex.Logging;
 
-    public class DcsBetSettingRepository : IDcsBetSettingRepository
+    public class DcsBetLimitRepository : IDcsBetLinitRepository
     {
         private readonly IDbFactory _db;
 
@@ -35,7 +35,7 @@
             [ProductTypes.Sportsbooks2] = new[] { "43" }
         };
 
-        public DcsBetSettingRepository(IDbFactory dbFactory, ILogger logger)
+        public DcsBetLimitRepository(IDbFactory dbFactory, ILogger logger)
         {
             _db = dbFactory;
             _logger = logger;

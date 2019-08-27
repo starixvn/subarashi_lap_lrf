@@ -1,11 +1,12 @@
-import React, { forwardRef, useState  } from 'react';
+import React, { useState  } from 'react';
 import LangHelper from '@jsroot/lib/langHelper';
+import createSettingGrid from '../Base/createSettingGrid';
 import SettingGrid from '../Base/SettingGrid';
 import CheckBox from '@jsroot/components/CheckBox';
 
-const SBSettingGrid = forwardRef((props, grid) => {
-    const { data, setting, showErrorMsg } = this.props;
-    const [isCopy, setIsCopy] = useState[false];
+const SBSetting = React.forwardRef((props, grid) => {
+    const { data, setting, showErrorMsg } = props;
+    const [isCopy, setIsCopy] = useState(false);
 
     const onCheck = (checked) => {
         let isCopy = checked;
@@ -22,6 +23,8 @@ const SBSettingGrid = forwardRef((props, grid) => {
         setIsCopy(isCopy);
     }
 
+    const Grid = createSettingGrid(SettingGrid);
+
     return (
         <div>
             {
@@ -31,7 +34,7 @@ const SBSettingGrid = forwardRef((props, grid) => {
                     onChange={onCheck}
                     label={LangHelper.getSingleResource("CopyBetSettingFromSoccer")} />
             }
-            <SettingGrid
+            <Grid
                 data={data}
                 ref={grid}
                 showErrorMsg={showErrorMsg}
@@ -40,4 +43,4 @@ const SBSettingGrid = forwardRef((props, grid) => {
     );
 });
 
-export default SBSettingGrid;
+export default React.memo(SBSetting);

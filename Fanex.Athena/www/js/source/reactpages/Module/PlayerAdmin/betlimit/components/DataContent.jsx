@@ -5,17 +5,19 @@ import { ActionCreators } from '../actions';
 import Service from '../lib/service';
 import LangHelper from '@jsroot/lib/langHelper';
 import NoDataTitle from '@jsroot/components/NoDataTitle';
-import SettingGrid from './grid/Base/SettingGrid';
-import SBSettingGrid from './grid/SB/SBSettingGrid';
+import DCSSetting from './grid/DCS/DCSSetting';
+import SBSetting from './grid/SB/SBSetting';
+import NGSetting from './grid/NG/NGSetting';
 import Balloon from '@jsroot/components/Balloon';
 import Alert from '@jsroot/components/sweet-alert';
 import { BetLimitProduct } from '../lib/constants';
 
 const DataGrid = {
-    [BetLimitProduct.SB]: SBSettingGrid,
-    [BetLimitProduct.VS]: SettingGrid,
-    [BetLimitProduct.VS2]: SettingGrid,
-    [BetLimitProduct.LT]: SettingGrid
+    [BetLimitProduct.SB]: SBSetting,
+    [BetLimitProduct.VS]: DCSSetting,
+    [BetLimitProduct.VS2]: DCSSetting,
+    [BetLimitProduct.LT]: DCSSetting,
+    [BetLimitProduct.NG]: NGSetting
 };
 
 export class DataContent extends PureComponent {

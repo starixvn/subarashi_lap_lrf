@@ -2,11 +2,18 @@ export const BetLimitProduct = {
     SB: 0,
     VS: 5,
     VS2: 27,
-    LT: 28
+    LT: 28,
+    NG: 2
 }
 
 export const BetLimitType = {
-    MinBet: 'minBet',
-    MaxBet: 'maxBet',
-    MaxPerMatch: 'maxPerMatch'
+    MinBet: 'MinBet',
+    MaxBet: 'MaxBet',
+    MaxPerMatch: 'MaxPerMatch',
+    MaxPerBall: 'MaxPerBall'
+}
+
+export const InputClassName = {
+    ClassName: 'input-text right-align',
+    OnChangedClassName: 'input-text right-align input-changed'
 }

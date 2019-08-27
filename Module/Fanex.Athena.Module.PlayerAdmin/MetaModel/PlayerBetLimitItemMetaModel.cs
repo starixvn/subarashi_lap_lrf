@@ -14,6 +14,8 @@
 
         public decimal MaxPerMatch { get; set; }
 
+        public decimal MaxPerBall { get; set; }
+
         public bool IsUpdated { get; set; }
     }
 }

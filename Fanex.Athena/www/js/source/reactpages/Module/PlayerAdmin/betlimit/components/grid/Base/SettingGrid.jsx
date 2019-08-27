@@ -1,119 +1,47 @@
-import React, { PureComponent  } from 'react';
+import React from 'react';
 import LangHelper from '@jsroot/lib/langHelper';
-import SettingGridRow from './SettingGridRow';
+import SettingRow from '../Base/SettingRow';
+import SettingInput from '../Base/SettingInput';
+import Service from '../../../lib/service';
+import { BetLimitType } from '../../../lib/constants';
 
-export default class SettingGrid extends PureComponent {
-    constructor(props) {
-        super(props);
+const SettingGrid = (props) => {
+    const { editable, data, setRef } = props;
 
-        this.row = {};
+    const buildBody = () => {
+        let rows = [];
 
-        this.state = {
-            data: props.data
-        };
-    }
+        for (let i = 0; i < data.length; i++) {
+            const item = data[i];
 
-    componentDidUpdate(prevProps, prevState) {
-        if (prevProps.data !== this.props.data) {
-            this.row = {};
-            this.setState({ data: this.props.data });
+            rows.push(
+                <SettingRow
+                    key={item.SportId}
+                    id={item.SportId}
+                    data={item}
+                    ref={(e) => setRef(item.SportId, e)}
+                    editable={editable}
+                    validate={Service.validate}
+                >
+                    <td>{item.BetSettingType}</td>
+                    <SettingInput type={BetLimitType.MinBet} value={item.MinBet} editable={editable}>
+                        <span>{` >= ${Service.formatValue(item.BetValueMin)}`}</span>
+                    </SettingInput>
+                    <SettingInput type={BetLimitType.MaxBet} value={item.MaxBet} editable={editable}>
+                        <span>{` <= ${Service.formatValue(item.BetValueMax)}`}</span>
+                    </SettingInput>
+                    <SettingInput type={BetLimitType.MaxPerMatch} value={item.MaxPerMatch} editable={editable}>
+                        <span>{` <= ${Service.formatValue(item.MaxPerMatchMax)}`}</span>
+                    </SettingInput>
+                </SettingRow>
+            )
         }
 
-        if (prevState.data !== this.state.data) {
-            this.reset();
-        }
+        return <tbody>{rows}</tbody>;
     }
 
-    get value() {
-        let params = [];
-
-        const keys = Object.keys(this.row);
-        for (let i = 0; i < keys.length; i++) {
-            const item = this.row[keys[i]];
-            params.push(item.value);
-        }
-
-        return params;
-    }
-
-    reset() {
-        const keys = Object.keys(this.row);
-
-        for (let i = 0; i < keys.length; i++) {
-            const item = this.row[keys[i]];
-            item.reset();
-        }
-    }
-
-    validate() {
-        const keys = Object.keys(this.row);
-
-        for (let i = 0; i < keys.length; i++) {
-            const item = this.row[keys[i]];
-
-            const result = item.validate();
-            if (result !== null) {
-                this._showError(result.input, result.msg);
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    copyData() {
-        const copySportId = setting.CopySportId;
-        const copyRow = this.row[copySportId];
-
-        if (copyRow) {
-            const result = copyRow.validate();
-
-            if (result !== null) {
-                showErrorMsg(result.input, result.msg);
-                return false;
-            }
-
-            const keys = Object.keys(this.row);
-            const data = copyRow.value;
-
-            for (let i = 0; i < keys.length; i++) {
-                const id = keys[i];
-                if (id !== copySportId) {
-                    const item = this.row[id];
-                    item.updateData(data);
-                    item.disable(true);
-                }
-            }
-
-            return true;
-        }
-
-        return false;
-    }
-
-    removeCopyData() {
-        const keys = Object.keys(this.row);
-
-        for (let i = 0; i < keys.length; i++) {
-            const item = this.row[keys[i]];
-            item.disable(false);
-        }
-    }
-
-    _showError(invalidInput, msg) {
-        const showErrorMsg = this.props.showErrorMsg;
-
-        showErrorMsg && showErrorMsg(invalidInput, msg);
-    }
-
-    setRef(id, element) {
-        if (element !== null) {
-            this.row[id] = element;
-        }
-    }
-
-    _buildHeader() {
-        return (
+    return (
+        <table className='table'>
             <thead>
                 <tr>
                     <th>{LangHelper.getSingleResource('Sport')}</th>
@@ -122,34 +50,9 @@ export default class SettingGrid extends PureComponent {
                     <th>{LangHelper.getSingleResource('MaxPerMatch')}</th>
                 </tr>
             </thead>
-        );
-    }
+            {buildBody()}
+        </table>
+    );
+};
 
-    _buildBody(data, editable) {
-        let rows = [];
-
-        for (let i = 0; i < data.length; i++) {
-            const item = data[i];
-
-            rows.push(
-                <SettingGridRow key={item.SportId} data={item} ref={(e) => this.setRef(item.SportId, e)} editable={editable} />
-            )
-        }
-
-        return <tbody>{rows}</tbody>;
-    }
-
-    render() {
-        const { editable } = this.props.setting;
-        const { data } = this.state;
-
-        return (
-            <div>
-                <table className="table">
-                    {this._buildHeader()}
-                    {this._buildBody(data, editable)}
-                </table>
-            </div>
-        );
-    }
-}
+export default SettingGrid;

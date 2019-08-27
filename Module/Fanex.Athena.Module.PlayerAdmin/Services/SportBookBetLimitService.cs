@@ -15,13 +15,13 @@
     {
         private const int EsportIndex = 2;
 
-        private readonly ISportBookBetSettingRepository _betSetting;
+        private readonly ISportBookBetLimitRepository _betSetting;
 
-        private readonly IDcsBetSettingRepository _dcsBetSetting;
+        private readonly IDcsBetLinitRepository _dcsBetSetting;
 
         public SportBookBetLimitService(
-            ISportBookBetSettingRepository betSettingRepository,
-            IDcsBetSettingRepository dcsBetSettingRepository)
+            ISportBookBetLimitRepository betSettingRepository,
+            IDcsBetLinitRepository dcsBetSettingRepository)
         {
             _betSetting = betSettingRepository;
             _dcsBetSetting = dcsBetSettingRepository;

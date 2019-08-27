@@ -82,24 +82,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\PlayerBetLimitBaseControler.cs" />
     <Compile Include="Controllers\PlayerBetListController.cs" />
     <Compile Include="Controllers\PlayerStatementController.cs" />
     <Compile Include="Controllers\PlayerBetLimitController.cs" />
     <Compile Include="Controllers\DcsBetLimitController.cs" />
+    <Compile Include="Controllers\NumberGameBetLimitController.cs" />
     <Compile Include="Controllers\SportBookBetLimitController.cs" />
-    <Compile Include="DTO\PlayerBetLimitProduct.cs" />
     <Compile Include="DTO\PlayerBetLimit.cs" />
+    <Compile Include="DTO\PlayerBetLimitProduct.cs" />
     <Compile Include="MetaModel\PlayerBetLimitSelectMetaModel.cs" />
     <Compile Include="MetaModel\PlayerBetLimitUpdateMetaModel.cs" />
     <Compile Include="MetaModel\PlayerBetLimitItemMetaModel.cs" />
     <Compile Include="MetaModel\PlayerRunningBetListMetalModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\DcsBetSettingRepository.cs" />
-    <Compile Include="Repository\Interfaces\IDcsBetSettingRepository.cs" />
+    <Compile Include="Repository\DcsBetLimitRepository.cs" />
+    <Compile Include="Repository\Interfaces\IDcsBetLinitRepository.cs" />
     <Compile Include="Repository\Interfaces\IPlayerBetLimitRepository.cs" />
-    <Compile Include="Repository\Interfaces\ISportBookBetSettingRepository.cs" />
+    <Compile Include="Repository\Interfaces\INumberGameBetLimitRepository.cs" />
+    <Compile Include="Repository\Interfaces\ISportBookBetLimitRepository.cs" />
     <Compile Include="Repository\PlayerBetLimitRepository.cs" />
-    <Compile Include="Repository\SportBookBetSettingRepository.cs" />
+    <Compile Include="Repository\NumberGameBetLimitRepository.cs" />
+    <Compile Include="Repository\SportBookBetLimitRepository.cs" />
     <Compile Include="Services\Interfaces\ISportBookBetLimitService.cs" />
     <Compile Include="Services\SportBookBetLimitService.cs" />
     <Compile Include="ViewModels\PlayerBetLimitViewModel.cs" />

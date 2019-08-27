@@ -6,9 +6,9 @@
     using Fanex.Athena.Module.PlayerAdmin.DTO;
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
 
-    public interface ISportBookBetSettingRepository
+    public interface INumberGameBetLimitRepository
     {
-        Task<IEnumerable<PlayerBetLimit>> GetSettingAsync(int custId, bool isShowMixedSport);
+        Task<IEnumerable<PlayerBetLimit>> GetSettingAsync(int custId);
 
         Task<IResultInfo> UpdateSettingAsync(PlayerBetLimitUpdateMetaModel metaModel);
     }

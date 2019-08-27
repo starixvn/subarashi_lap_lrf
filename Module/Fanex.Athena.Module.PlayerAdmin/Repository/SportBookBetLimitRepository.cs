@@ -14,7 +14,7 @@
     using Fanex.Common.Extensions;
     using Fanex.Data;
 
-    public class SportBookBetSettingRepository : ISportBookBetSettingRepository
+    public class SportBookBetLimitRepository : ISportBookBetLimitRepository
     {
         private const string MixedSportId = "99MP";
 
@@ -32,7 +32,7 @@
 
         private readonly IDbFactory _db;
 
-        public SportBookBetSettingRepository(IDbFactory dbFactory)
+        public SportBookBetLimitRepository(IDbFactory dbFactory)
         {
             _db = dbFactory;
         }

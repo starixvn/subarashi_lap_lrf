@@ -971,10 +971,14 @@
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\AppContainer.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\FormFilter.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\DataContent.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\grid\Base\createSettingGrid.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\grid\Base\SettingInput.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\grid\Base\SettingGrid.jsx" />
-    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\grid\Base\SettingGridRow.jsx" />
-    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\grid\SB\SBSettingGrid.jsx" />
-    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\grid\SB\SBSettingGridRow.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\grid\Base\SettingRow.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\grid\DCS\DCSSetting.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\grid\NG\NGSetting.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\grid\NG\NGSettingGrid.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\grid\SB\SBSetting.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\index.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\lib\constants.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\lib\service.js" />
