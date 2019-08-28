@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 08/15/2019 11:36:26 AM
+// Generated at: 08/28/2019 9:24:10 AM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -588,6 +588,7 @@ window._language_en_US = {
   ProductBT: "Bet Trade",
   ProductBX: "Exchange",
   ProductCB: "Colossus Bets",
+  ProductCC: "Card Club",
   ProductCO: "Cash Out",
   ProductCS: "RNG Casino",
   ProductFW: "Fishing World",

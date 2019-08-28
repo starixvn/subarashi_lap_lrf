@@ -1,4 +1,4 @@
-﻿// Generated at: 08/15/2019 11:36:26 AM
+﻿// Generated at: 08/28/2019 9:24:10 AM
 window._language_zh_Hans = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -423,6 +423,7 @@ Platform:"平台",
 PreGame:"游戏开始前",
 Prev:"上个月",
 Product:"产品",
+ProductCC:"嘻嘻俱乐部",
 ProductCO:"即时兑现",
 ProductCS:"娱乐城",
 ProductKN:"快乐彩",
