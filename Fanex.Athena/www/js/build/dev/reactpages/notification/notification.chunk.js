@@ -3731,8 +3731,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux-logger */ "./node_modules/redux-logger/dist/redux-logger.js");
 /* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(redux_logger__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! redux-thunk */ "./node_modules/redux-thunk/lib/index.js");
-/* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(redux_thunk__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! redux-thunk */ "./node_modules/redux-thunk/es/index.js");
 /* harmony import */ var _reducers_resultAmendment__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../reducers/resultAmendment */ "./www/js/source/reactpages/pages/notification/reducers/resultAmendment/index.js");
 /* harmony import */ var _constants_config__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../../constants/config */ "./www/js/source/reactpages/constants/config.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -3773,7 +3772,7 @@ var loggerMiddleware = Object(redux_logger__WEBPACK_IMPORTED_MODULE_4__["createL
 var defaultState = Object.assign({}, window.initialState);
 
 function configureStore(initialState) {
-  var enhancer = Object(redux__WEBPACK_IMPORTED_MODULE_5__["compose"])(Object(redux__WEBPACK_IMPORTED_MODULE_5__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_6___default.a, // lets us dispatch() functions
+  var enhancer = Object(redux__WEBPACK_IMPORTED_MODULE_5__["compose"])(Object(redux__WEBPACK_IMPORTED_MODULE_5__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_6__["default"], // lets us dispatch() functions
   loggerMiddleware));
   return Object(redux__WEBPACK_IMPORTED_MODULE_5__["createStore"])(_reducers_resultAmendment__WEBPACK_IMPORTED_MODULE_7__["default"], initialState, enhancer);
 }

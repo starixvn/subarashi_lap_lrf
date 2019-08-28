@@ -168,43 +168,7 @@
             await _service.DidNotReceiveWithAnyArgs().GetData(Arg.Any<SubsidiaryPerformanceMetaModel>(), Arg.Any<IDictionary<int, string>>());
         }
 
-        [Test]
-        public async Task Index_InvalidProduct_ReturnBadRequest()
-        {
-            // Arrange
-            var metaModel = new SubsidiaryPerformanceMetaModel
-            {
-                ProductCodeList = "SX"
-            };
-            StubSingleWalletProductAccess(new[] { "SB" });
-            // Action
-            var result = await _controller.Index(metaModel) as BadRequestErrorMessageResult;
-
-            // Assert
-            Assert.AreEqual(result.Message, ViewResources.InvalidRequestMsg);
-        }
-
-        [Test]
-        public async Task Index_InvalidSubsidiaryList_ReturnBadRequest()
-        {
-            // Arrange
-            var metaModel = new SubsidiaryPerformanceMetaModel
-            {
-                FromDate = new DateTime(2017, 8, 30),
-                ToDate = new DateTime(2017, 8, 30),
-                ProductCodeList = "SB",
-                SubsidiaryList = string.Empty,
-                BaseCurrency = "USD"
-            };
-            StubSingleWalletProductAccess(new[] { "SB" });
-            // Action
-            var result = await _controller.Index(metaModel) as BadRequestErrorMessageResult;
-
-            // Assert
-            Assert.AreEqual(result.Message, ViewResources.InvalidRequestMsg);
-        }
-
-        private SubsidiaryPerformanceMetaModel GetMetaModel()
+        private static SubsidiaryPerformanceMetaModel GetMetaModel()
         {
             return new SubsidiaryPerformanceMetaModel
             {

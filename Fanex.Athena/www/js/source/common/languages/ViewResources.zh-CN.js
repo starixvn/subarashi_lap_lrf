@@ -1,4 +1,4 @@
-﻿// Generated at: 08/01/2019 3:40:20 PM
+﻿// Generated at: 08/15/2019 11:36:26 AM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -421,6 +421,7 @@ PasswordChangedMsg:"密码更改！",
 PasswordConfirmErrorMsg:"密码无法确认",
 PasswordNoteMsg:"密码必须至少为6个字符, 包含至少2个英文字母及至少2个数字 (例如: pass22)。",
 PayAttentionMsg:"请注意: 由于不同的佣金值, 会员将从组别中删除。",
+Pending:"待定",
 PendingFunds:"待定资金",
 Permission:"权限",
 PermissionForUser:"用户权限",

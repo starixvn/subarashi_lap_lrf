@@ -2366,4 +2366,8 @@
     <value>Pending</value>
     <comment>117729</comment>
   </data>
+  <data name="ProductLC" xml:space="preserve">
+    <value>Live Casino</value>
+    <comment>117900</comment>
+  </data>
 </root>

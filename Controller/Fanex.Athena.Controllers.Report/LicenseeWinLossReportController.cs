@@ -13,6 +13,7 @@ namespace Fanex.Athena.Controllers.Report
     using Extension.Helper;
     using Extension.Utility;
     using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Model.Core.MetaModel.Product;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
     using Fanex.Athena.Web.ActionFilter;
@@ -74,21 +75,16 @@ namespace Fanex.Athena.Controllers.Report
                 reportSetting.TimeZone.HasValue ? DateTime.UtcNow.AddHours(reportSetting.TimeZone.Value) : DateTime.Now);
         }
 
-        private ProductAccess GetProducts(int licenseeId, string lang)
-        {
-            return ProductService.GetSingleWalletProductAccess(
-                licenseeId,
-                lang,
-                FunctionNames.LicenseeWinLoss);
-        }
-
         private ActionResult MapToView()
         {
             var licenseeSession = SessionService.LicenseeSession;
             var userSession = SessionService.UserSession;
             var reportSetting = _reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss);
             var selectedDate = GetSelectedDate(reportSetting);
-            var productAccess = GetProducts(licenseeSession.LicenseeId, userSession.Language);
+            var productAccess = ProductService.GetSingleWalletProductAccess(
+                licenseeSession.LicenseeId,
+                userSession.Language,
+                FunctionNames.LicenseeWinLoss);
 
             var param = new LicenseeWinLossMetaModel
             {
@@ -122,7 +118,10 @@ namespace Fanex.Athena.Controllers.Report
             var userSession = SessionService.UserSession;
             var reportSetting = _reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss);
             var selectedDate = GetSelectedDate(reportSetting);
-            var productAccess = GetProducts(SessionService.LicenseeSession.LicenseeId, userSession.Language);
+            var productAccess = ProductService.GetSingleWalletProductAccess(
+                SessionService.LicenseeSession.LicenseeId,
+                userSession.Language,
+                FunctionNames.SpecialLicenseeWinLoss);
             var baseCurrencyList = GetFakeBaseCurrencies(reportSetting.BaseCurrencies, userSession.DefaultBaseCurrency);
             var defaultBaseCurrency = baseCurrencyList.FirstOrDefault(x => x.Value.Equals(userSession.DefaultBaseCurrency, StringComparison.OrdinalIgnoreCase));
 
@@ -131,7 +130,7 @@ namespace Fanex.Athena.Controllers.Report
                 FromDate = new DateTime(selectedDate.Year, selectedDate.Month, 1),
                 ToDate = selectedDate,
                 ReportBy = ReportByType.Daily,
-                ProductOptions = ToProductOptions(productAccess.ProductList),
+                ProductOptions = GetFakeProductOptions(productAccess.ProductList),
                 CurrencyId = defaultBaseCurrency.Key
             };
 
@@ -144,6 +143,16 @@ namespace Fanex.Athena.Controllers.Report
             };
 
             return View("~/Views/Desktop/Report/SpecialLicenseeWinLoss/Main.cshtml", model);
+        }
+
+        private static IList<ProductOption> GetFakeProductOptions(IEnumerable<Product> productList)
+        {
+            return productList.Select(i => new ProductOption
+            {
+                Code = i.ProductCode,
+                Name = i.ProductCode.Equals(Product.CS, StringComparison.InvariantCultureIgnoreCase) ? "RNG" : i.ProductName,
+                Status = true
+            }).ToList();
         }
     }
 }

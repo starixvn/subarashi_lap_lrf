@@ -41,14 +41,9 @@
         {
             var userSession = SessionService.UserSession;
             var isSubsidiary = userSession.UserLevel == UserLevelType.Subsidiary;
-            var isValidSubsidiaryList = isSubsidiary || (userSession.IsManageableSubsidiary && !string.IsNullOrWhiteSpace(metaModel.SubsidiaryList));
-            if (!isValidSubsidiaryList)
-            {
-                return BadRequest(ViewResources.InvalidRequestMsg);
-            }
 
-            var licenseeName = SessionService.LicenseeSession.LicenseeName;
-            metaModel.LicenseeName = licenseeName;
+            metaModel.LicenseeName = SessionService.LicenseeSession.LicenseeName;
+
             string agentListXml = null;
             if (isSubsidiary)
             {

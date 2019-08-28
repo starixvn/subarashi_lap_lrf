@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using System.Threading.Tasks;
     using System.Web.Mvc;
     using Base.UnitTests;
     using Model.Core.DataDomain;
@@ -83,7 +82,8 @@
             productService.GetSingleWalletProductAccess(
                 SessionService.LicenseeSession.LicenseeId,
                 SessionService.UserSession.Language,
-                FunctionNames.LicenseeWinLoss).Returns(new ProductAccess(new List<Product>()));
+                Arg.Is<string>(x => x == FunctionNames.LicenseeWinLoss || x == FunctionNames.SpecialLicenseeWinLoss))
+                .Returns(new ProductAccess(new List<Product>()));
             return new LicenseeWinLossReportController(
                 LangService,
                 SessionService,
