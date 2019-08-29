@@ -670,6 +670,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="SiteConfig\Web.Staging.config" />
+    <Content Include="Views\Desktop\BetList\CardClubDetail\Main.cshtml" />
     <None Include="www\css\source\reactpages\components\custom3rd\react-toastify.scss" />
     <None Include="www\css\source\pages\betlist\result\result.happy5.scss" />
     <Content Include="www\css\source\reactpages\pages\betlist\images\bonus.png" />

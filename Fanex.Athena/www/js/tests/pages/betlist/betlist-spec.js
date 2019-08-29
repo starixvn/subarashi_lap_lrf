@@ -698,6 +698,15 @@
                     expect(BetList.viewPPResult).toHaveBeenCalled();
                 });
 
+                it("BetList.viewCardClubResult() should be called if sporttype is SPORT_PP", function () {
+                    spyOn(BetList, 'viewCardClubResult');
+                    var SPORT_CARDCLUB = 165;
+
+                    BetList.viewResult(null, null, null, SPORT_CARDCLUB);
+
+                    expect(BetList.viewCardClubResult).toHaveBeenCalled();
+                });
+
                 it("BetList.viewAllBetResult() should be called if sporttype is SPORT_ALLBET", function () {
                     spyOn(BetList, 'viewAllBetResult');
                     var SPORT_ALLBET = 211;
@@ -1052,6 +1061,34 @@
                 });
             });
 
+            describe("viewCardClubResult(custId, gameTypeId, transId3rd, title)", function () {
+                it("shows showResultPopUp with correct params if result is not empty", function () {
+                    var result = "viewCardClubResult";
+                    spyOn($, "get").and.callFake(function (url, success) {
+                        success(result);
+                    });
+                    var title = "Card Club Result";
+                    spyOn(Popup, "openPopupWithIframe");
+
+                    BetList.viewCardClubResult(0, 0, 0, title);
+
+                    expect(Popup.openPopupWithIframe).toHaveBeenCalledWith(result, { width: 800, height: 380, title: title, id: 'betlist-popup-result' });
+                });
+
+                it("does not show showResultPopUp with correct params if result is empty", function () {
+                    var result = "";
+                    spyOn($, "get").and.callFake(function (url, success) {
+                        success(result);
+                    });
+                    var title = "Card Club Result";
+                    spyOn(Popup, "openPopupWithIframe");
+
+                    BetList.viewCardClubResult(0, 0, 0, title);
+
+                    expect(Popup.openPopupWithIframe).not.toHaveBeenCalled();
+                });
+            });
+
             describe("viewGlobalGamingResult(custId, gameId, title)", function () {
                 it("shows showResultPopUp with correct params if result is not empty", function () {
                     var result = "viewGlobalGamingResult";
@@ -1190,6 +1227,28 @@
                     var title = "ProductPP - DetailedBetlist - 06/01/2017";
 
                     BetList.showPPDetails(transId, winlostDate, custId, transType);
+
+                    expect(Popup.openPopupWithIframe).toHaveBeenCalledWith(expectedUrl, { width: 890, height: 600, title: title, id: "betlist-popup-detail" });
+                });
+            });
+
+            describe("showVideoPokerGameDetails(transId, winlostDate, custId, transType)", function () {
+                it("shows showResultPopUp with correct params", function () {
+                    spyOn(Popup, "openPopupWithIframe");
+                    spyOn($, "parseJSON").and.returnValue({
+                        BaseCurrency: "usd"
+                    });
+                    spyOn($.fn, "height").and.returnValue(700);
+                    var transId = "transId", winlostDate = "06/01/2017", custId = "custId", transType = "transType";
+                    var url = "CardClubBetList/Detail?transId=" + transId +
+                        "&date=" + winlostDate +
+                        "&custId=" + custId +
+                        "&transType=" + transType +
+                        "&BaseCurrency=usd";
+                    var expectedUrl = transformQueryParamNameToLowerCase(url);
+                    var title = "ProductCC - DetailedBetlist - 06/01/2017";
+
+                    BetList.showVideoPokerGameDetails(transId, winlostDate, custId, transType);
 
                     expect(Popup.openPopupWithIframe).toHaveBeenCalledWith(expectedUrl, { width: 890, height: 600, title: title, id: "betlist-popup-detail" });
                 });

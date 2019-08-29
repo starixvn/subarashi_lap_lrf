@@ -4498,6 +4498,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Card Club.
+        /// </summary>
+        public static string ProductCC {
+            get {
+                return ResourceManager.GetString("ProductCC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cash Out.
         /// </summary>
         public static string ProductCO {

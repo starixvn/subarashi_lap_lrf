@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 08/15/2019 11:36:26 AM
+// Generated at: 08/28/2019 9:24:10 AM
 window._language_zh_TW = {
   AA: "客客",
   AbnormalBet: "非正規註單",
@@ -521,6 +521,7 @@ window._language_zh_TW = {
   PreGame: "遊戲開始前",
   Prev: "上個",
   Product: "產品",
+  ProductCC: "嘻嘻俱樂部",
   ProductCO: "即時兌現",
   ProductCS: "娛樂城",
   ProductKN: "快樂彩",

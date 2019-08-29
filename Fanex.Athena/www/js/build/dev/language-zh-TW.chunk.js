@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 08/01/2019 3:40:20 PM
+﻿// Generated at: 08/28/2019 9:24:10 AM
 window._language_zh_TW = {
 AA:"客客",
 AbnormalBet:"非正規註單",
@@ -513,6 +513,7 @@ PasswordChangedMsg:"密碼更改！",
 PasswordConfirmErrorMsg:"密碼無法確認",
 PasswordNoteMsg:"密碼必須至少為6個字符，包含至少2個英文字母及至少2個數字 (例如：pass22)。",
 PayAttentionMsg:"請注意：由於不同的佣金值，會員將從組別中刪除。",
+Pending:"待定",
 PendingFunds:"待定資金",
 Permission:"權限",
 PermissionForUser:"用戶權限",
@@ -520,6 +521,7 @@ Platform:"平台",
 PreGame:"遊戲開始前",
 Prev:"上個",
 Product:"產品",
+ProductCC:"嘻嘻俱樂部",
 ProductCO:"即時兌現",
 ProductCS:"娛樂城",
 ProductKN:"快樂彩",

@@ -4573,6 +4573,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         const SPORT_VOIDBRIDGE = 212;
         const SPORT_PP = 248;
         const SPORT_GLOBALGAMING = 219;
+        const SPORT_CARDCLUB = 165;
         const BETLIST_META_MODEL = '#BetListMetaModel';
 
         let _sortColumnName, _sortOrder;
@@ -4950,6 +4951,17 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 });
             },
 
+            viewCardClubResult: function (custId, gameTypeId, transId3rd, title) {
+                const url = Site.resolveClientUrl('CardClubResultPopup/Index');
+                Site.blockUI();
+                $.get(url + '?custid=' + custId + '&gameTypeId=' + gameTypeId + '&transId3rd=' + transId3rd, function (result) {
+                    if (result !== '') {
+                        showResultPopUp(result, { width: 800, height: 380, title: title });
+                        Site.unBlockUI();
+                    }
+                });
+            },
+
             viewAllBetResult: function (trasdesc, betcheck, bettype, title) {
                 const url = Site.resolveClientUrl('ResultReport/AllBetResult?transdesc=' +
                     encodeURIComponent(trasdesc) + '&betcheck=' + betcheck + '&bettype=' + bettype);
@@ -4985,6 +4997,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 }
                 else if (sporttype === SPORT_PP) {
                     _me.viewPPResult(custid, extension2, title);
+                }
+                else if (sporttype === SPORT_CARDCLUB) {
+                    _me.viewCardClubResult(custid, bettype, extension2, title);
                 }
                 else if (sporttype === SPORT_ALLBET) {
                     _me.viewAllBetResult(transdecs, extension2, bettype, title);
@@ -5206,6 +5221,20 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
                 showDetailPopUp(url, { width: 890, height: popH + 50, title: title });
             },
+            showVideoPokerGameDetails: function (transId, winlostDate, custId, transType) {
+                let url = Site.resolveClientUrl('CardClubBetList/Detail');
+                url = QueryString.setParam(url, 'transId', transId);
+                url = QueryString.setParam(url, 'date', winlostDate);
+                url = QueryString.setParam(url, 'custId', custId);
+                url = QueryString.setParam(url, 'transType', transType);
+                url = QueryString.setParam(url, 'BaseCurrency', getBaseCurrency());
+
+                const popH = Math.min($(window).height() - 100, 550);
+                const title = Site.getSingleResource('ProductCC') + ' - ' +
+                    Site.getSingleResource('DetailedBetlist') + ' - ' + moment(new Date(winlostDate)).format('MM/DD/YYYY');
+
+                showDetailPopUp(url, { width: 890, height: popH + 50, title: title });
+            },
             ValidProducts: function () {
                 let temp = true;
                 if ($('#ProductList').find('input:checked').length === 0) {
@@ -5281,13 +5310,13 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 window.showRnGCasinoDetails = _me.showRnGCasinoDetails;
                 window.showVoidBridgeDetails = _me.showVoidBridgeDetails;
                 window.showVoidbridgeResult = _me.viewVoidbridgeResult;
-                window.showPPResult = _me.viewPPResult;
                 window.showTodayRunningBetsDetails = _me.showAllBetDetails;
                 window.showColossusBetsDetails = _me.showColossusBetsDetails;
                 window.showGlobalGaming = _me.showGlobalGamingDetails;
                 window.ViewCashOutHistory = _me.viewCashOutHistory;
                 window.ShowBonusDetails = _me.showBonusDetails;
                 window.showPPDetails = _me.showPPDetails;
+                window.showVideoPokerGameDetails = _me.showVideoPokerGameDetails;
 
                 const betList = {
                     ViewCasinoHandHistory: _me.ViewCasinoHandHistory

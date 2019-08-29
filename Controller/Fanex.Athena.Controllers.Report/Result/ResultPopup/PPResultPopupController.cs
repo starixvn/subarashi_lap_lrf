@@ -1,6 +1,5 @@
 namespace Fanex.Athena.Controllers.Report.Result.ResultPopup
 {
-    using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Extension.Utility;
