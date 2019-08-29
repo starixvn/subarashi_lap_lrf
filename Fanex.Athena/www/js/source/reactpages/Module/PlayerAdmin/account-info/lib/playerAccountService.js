@@ -1,10 +1,10 @@
 import FactoryCommonService from '../../../lib/factoryCommonService';
 import { systemType } from '../../../constants/configInfo';
+import { lapAccountProfile, lapBankInfo } from './apiInfo';
 
 const apiInfo = {
     lrfAccountProfile: { action: 'api/PlayerDetailedInfo/GetAccountProfile', type: systemType.lrf },
-    custBettingStatus: { action: 'api/PlayerDetailedInfo/GetCustomerBettingStatus', type: systemType.lrf },
-    lapAccountProfile: { action: 'PlayerAccountInfo/GetAccountProfile', type: systemType.newAdmin }
+    custBettingStatus: { action: 'api/PlayerDetailedInfo/GetCustomerBettingStatus', type: systemType.lrf }
 }
 
 export default class PlayerAccountService {
@@ -12,21 +12,30 @@ export default class PlayerAccountService {
         this.commonService = FactoryCommonService.createInstance();
     }
 
-    getAccountInfo(param) {
-        const { lrfAccountProfile, lapAccountProfile } = apiInfo;
-        const params = {...param };
+    getAccountProfile(param) {
+        return this.commonService.fetchData(lapAccountProfile.type, lapAccountProfile.action, param)
+            .then(response => {
+                const { data } = response;
 
-        const lrfPromise = this.commonService.fetchData(lrfAccountProfile.type, lrfAccountProfile.action, params);
+                return data;
+            })
+            .catch(error => {
+                console.log(error.message);
+                return null;
+            });
+    }
 
-        const ajaxConfig = { method: 'get' };
-        const lapPromise = this.commonService.fetchData(lapAccountProfile.type, lapAccountProfile.action, params, ajaxConfig);
+    getBankInfo(param) {
+        return this.commonService.fetchData(lapBankInfo.type, lapBankInfo.action, param)
+            .then(response => {
+                const { data } = response;
 
-        return this.commonService.fetchMultiple([lrfPromise, lapPromise], (lrfResponse, lapResponse) => {
-            const lrfAccountInfo = lrfResponse.data;
-            const lapAccountInfo = lapResponse.data;
-
-            return {...lrfAccountInfo, ...lapAccountInfo };
-        });
+                return data;
+            })
+            .catch(error => {
+                console.log(error.message);
+                return null;
+            });
     }
 
     getCustomerBettingStatus(param) {

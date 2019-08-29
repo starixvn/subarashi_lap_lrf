@@ -8,3 +8,8 @@ export const tabList = [
     { name: tabKeys.bankInformation, text: 'Bank Information' },
     { name: tabKeys.activityRecord, text: 'Activity Record' }
 ]
+
+export const licenseeType = {
+    api: 0,
+    nonApi: 1
+}

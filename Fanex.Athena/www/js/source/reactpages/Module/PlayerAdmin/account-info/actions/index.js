@@ -1,10 +1,5 @@
 import PlayerAccountService from "../lib/playerAccountService";
-
-const getAccountInfo = (param) => () => {
-    const service = new PlayerAccountService();
-
-    return service.getAccountInfo(param);
-}
+import * as subtabAction from './subtabAction';
 
 const getCustomerBettingStatus = (param) => () => {
     const service = new PlayerAccountService();
@@ -13,6 +8,6 @@ const getCustomerBettingStatus = (param) => () => {
 }
 
 export const ActionCreators = {
-    getAccountInfo,
+    ...subtabAction,
     getCustomerBettingStatus
 }

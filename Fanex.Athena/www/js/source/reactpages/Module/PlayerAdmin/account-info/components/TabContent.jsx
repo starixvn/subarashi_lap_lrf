@@ -15,7 +15,7 @@ export const TabContent = (props) => {
     const [selectedTab, setSelectedTab] = useState(tabKeys.accountProfile);
 
     const renderSubTab = () => {
-        return tabList.map((item, index) => {
+        return tabList.map((item) => {
             return (
                 <li className="tab" key={item.name}>
                     <a className={item.name === selectedTab ? 'link active' : 'link'} onClick={() => setSelectedTab(item.name)}>
