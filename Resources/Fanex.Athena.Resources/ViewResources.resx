@@ -2374,4 +2374,8 @@
     <value>Card Club</value>
     <comment>115449</comment>
   </data>
+  <data name="DeepLink" xml:space="preserve">
+    <value>Deep Link</value>
+    <comment>119010</comment>
+  </data>
 </root>

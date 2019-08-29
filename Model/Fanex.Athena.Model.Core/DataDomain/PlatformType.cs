@@ -25,6 +25,8 @@
 
         public const int MobileLiteVersion = 9;
 
+        public const int DeepLink = 10;
+
         private static readonly IDictionary<int, string> MapPlatformKeys = new Dictionary<int, string>
         {
             { All, nameof(All) },
@@ -36,7 +38,8 @@
             { Tablet, nameof(Tablet) },
             { NewAsia, nameof(NewAsia) },
             { MobileApp, nameof(MobileApp) },
-            { MobileLiteVersion, nameof(MobileLiteVersion) }
+            { MobileLiteVersion, nameof(MobileLiteVersion) },
+            { DeepLink, nameof(DeepLink) }
         };
 
         public static string GetPlatformKey(int type)

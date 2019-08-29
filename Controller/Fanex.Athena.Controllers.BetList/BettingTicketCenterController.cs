@@ -132,7 +132,8 @@
                 { PlatformType.Tablet, ViewResources.Tablet },
                 { PlatformType.NewAsia, ViewResources.NewAsia },
                 { PlatformType.MobileApp, ViewResources.MobileApp },
-                { PlatformType.MobileLiteVersion, ViewResources.MobileLiteVersion }
+                { PlatformType.MobileLiteVersion, ViewResources.MobileLiteVersion },
+                { PlatformType.DeepLink, ViewResources.DeepLink }
             };
         }
 

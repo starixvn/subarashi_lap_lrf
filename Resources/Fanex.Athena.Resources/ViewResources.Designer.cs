@@ -1699,6 +1699,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Deep Link.
+        /// </summary>
+        public static string DeepLink {
+            get {
+                return ResourceManager.GetString("DeepLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Default Group.
         /// </summary>
         public static string DefaultGroup {
