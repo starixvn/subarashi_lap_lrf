@@ -10,7 +10,7 @@ export const BankInformation = (props) => {
     }
 
     const { licenseeCustId } = props;
-    const [data, setData] = useState({});
+    const [data, setData] = useState(null);
     const [isShowPlainText, setIsShowPlainText] = useState(false);
 
     useEffect(() => {
@@ -26,8 +26,15 @@ export const BankInformation = (props) => {
             <table className="table">
                 <tbody>
                     <tr>
-                        <td className="first-cell">Bank Information</td>
-                        <td><button onClick={() => setIsShowPlainText(true)} onmouseleave={() => setIsShowPlainText(false)}>Show</button></td>
+                        <td className="first-cell">
+                        Bank Information
+                        <button className="btn-default btn-link btn-icon"
+                                onClick={() => setIsShowPlainText(true)} 
+                                onMouseLeave={() => setIsShowPlainText(false)}>
+                            <i class="material-icons">remove_red_eye</i>
+                            </button>
+                        </td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td>Bank Name</td>

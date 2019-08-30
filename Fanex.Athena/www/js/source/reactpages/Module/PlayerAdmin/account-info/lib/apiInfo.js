@@ -7,3 +7,5 @@ export const custBettingStatus = { action: 'api/PlayerDetailedInfo/GetCustomerBe
 export const lapAccountProfile = { action: 'PlayerAccountInfo/GetAccountProfile', type: systemType.newAdmin };
 
 export const lapBankInfo = { action: 'PlayerAccountInfo/GetBankInfo', type: systemType.newAdmin };
+
+export const lrfActivityRecord = { action: 'api/PlayerActivityRecord/Index', type: systemType.lrf };

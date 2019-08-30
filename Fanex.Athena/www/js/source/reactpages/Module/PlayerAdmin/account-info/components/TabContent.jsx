@@ -1,52 +1,38 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 
-import { tabKeys, tabList } from '../lib/constants';
+import { tabKeys, tabList, licenseeType } from '../lib/constants';
 import AccountProfile from './subtab/AccountProfile';
 import BankInformation from './subtab/BankInformation';
 import ActivityRecord from './subtab/ActivityRecord';
-
-const componentByTab = {
-    [tabKeys.accountProfile]: AccountProfile,
-    [tabKeys.bankInformation]: BankInformation,
-    [tabKeys.activityRecord]: ActivityRecord
-}
+import SubTab from './SubTab';
 
 export const TabContent = (props) => {
     const [selectedTab, setSelectedTab] = useState(tabKeys.accountProfile);
+    const tabListByLicenseeType = props.licenseeType === licenseeType.api ? tabList.filter(x => x.name !== tabKeys.bankInformation) : [...tabList];
 
-    const renderSubTab = () => {
-        return tabList.map((item) => {
-            return (
-                <li className="tab" key={item.name}>
-                    <a className={item.name === selectedTab ? 'link active' : 'link'} onClick={() => setSelectedTab(item.name)}>
-                        {item.text}
-                    </a>
-                </li>
-            )
-        })
-    }
-
-    const CurrentTab = componentByTab[selectedTab];
+    const getStyle = (tabKey) => ({ display: selectedTab === tabKey ? 'block' : 'none' })
 
     return (
         <div className="outer-col-1">
             <div className="left-side">
                 <div className="subtab">
-                    <div className="header-tab">
-                        <div className="content-tab">
-                            <ul className="tabs">
-                                {renderSubTab()}
-                            </ul>
-                        </div>
-                    </div>
+                    <SubTab dataList={tabListByLicenseeType} selectedTab={selectedTab} onChangeTab={setSelectedTab} />
                 </div>
 
                 <div className="tab-panel">
-                    <CurrentTab />
+                    <div style={getStyle(tabKeys.accountProfile)}><AccountProfile /></div>
+                    <div style={getStyle(tabKeys.bankInformation)}><BankInformation /></div>
+                    <div style={getStyle(tabKeys.activityRecord)}><ActivityRecord /></div>
                 </div>
             </div>
         </div>
     )
 }
 
-export default TabContent;
+function mapStateToProps(state) {
+    const { licenseeType } = state;
+    return Object.assign({}, { licenseeType });
+};
+
+export default connect(mapStateToProps, null)(TabContent);

@@ -1,9 +1,8 @@
 import FactoryCommonService from '../../../lib/factoryCommonService';
 import { systemType } from '../../../constants/configInfo';
-import { lapAccountProfile, lapBankInfo } from './apiInfo';
+import { lapAccountProfile, lapBankInfo, lrfActivityRecord } from './apiInfo';
 
 const apiInfo = {
-    lrfAccountProfile: { action: 'api/PlayerDetailedInfo/GetAccountProfile', type: systemType.lrf },
     custBettingStatus: { action: 'api/PlayerDetailedInfo/GetCustomerBettingStatus', type: systemType.lrf }
 }
 
@@ -13,20 +12,19 @@ export default class PlayerAccountService {
     }
 
     getAccountProfile(param) {
-        return this.commonService.fetchData(lapAccountProfile.type, lapAccountProfile.action, param)
-            .then(response => {
-                const { data } = response;
-
-                return data;
-            })
-            .catch(error => {
-                console.log(error.message);
-                return null;
-            });
+        return this._getData(lapAccountProfile.type, lapAccountProfile.action, param);
     }
 
     getBankInfo(param) {
-        return this.commonService.fetchData(lapBankInfo.type, lapBankInfo.action, param)
+        return this._getData(lapBankInfo.type, lapBankInfo.action, param);
+    }
+
+    getActivityRecord(param) {
+        return this._getData(lrfActivityRecord.type, lrfActivityRecord.action, param);
+    }
+
+    _getData(licType, action, param) {
+        return this.commonService.fetchData(licType, action, param)
             .then(response => {
                 const { data } = response;
 

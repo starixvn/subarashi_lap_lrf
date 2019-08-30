@@ -8,7 +8,7 @@ import { licenseeType } from '../../lib/constants';
 
 export const AccountProfile = (props) => {
     const { licenseeCustId } = props;
-    const [data, setData] = useState({});
+    const [data, setData] = useState(null);
 
     useEffect(() => {
         const param = { licenseeCustId };
@@ -18,7 +18,7 @@ export const AccountProfile = (props) => {
     return (
         <div className="left-side-content account-profile-container">
             <table className="table">
-                {props.licenseeType === licenseeType.api ? <AthenaProfile data={data} /> : <ApiProfile data={data} />}
+                {props.licenseeType === licenseeType.api ? <ApiProfile data={data} /> : <AthenaProfile data={data} />}
             </table>
         </div>
     );
