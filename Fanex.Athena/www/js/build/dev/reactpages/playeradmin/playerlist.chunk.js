@@ -3665,9 +3665,9 @@ var contextMenuKeys = {
   personalMessage: 'personalMessage'
 };
 var tabNames = {
-  statement: 'lblPlayerStatement',
-  betlist: 'lblBetList',
-  betLimit: 'lblBetLimit'
+  statement: 'lblPlayerAdminPlayerStatement',
+  betlist: 'lblPlayerAdminBetList',
+  betLimit: 'lblPlayerAdminBetLimit'
 };
 var excludedTabNameWithNonDepositAndArchived = [tabNames.statement, tabNames.betlist, tabNames.betLimit];
 var contextMenuList = [{
@@ -3681,15 +3681,15 @@ var contextMenuList = [{
 }, {
   key: contextMenuKeys.fundtransferLimit,
   name: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('FundtransferLimit'),
-  tabName: 'lblFundTransfer'
+  tabName: 'lblPlayerAdminFundTransfer'
 }, {
   key: contextMenuKeys.betLimit,
   name: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('BetLimit'),
-  tabName: 'lblBetLimit'
+  tabName: tabNames.betLimit
 }, {
   key: contextMenuKeys.statement,
   name: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Statement'),
-  tabName: 'lblPlayerStatement'
+  tabName: tabNames.statement
 }, {
   key: contextMenuKeys.personalMessage,
   name: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('PersonalMessage'),

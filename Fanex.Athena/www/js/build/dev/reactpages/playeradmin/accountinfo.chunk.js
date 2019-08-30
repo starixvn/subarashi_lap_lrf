@@ -17473,10 +17473,13 @@ var reIsUint = /^(?:0|[1-9]\d*)$/;
  * @returns {boolean} Returns `true` if `value` is a valid index, else `false`.
  */
 function isIndex(value, length) {
+  var type = typeof value;
   length = length == null ? MAX_SAFE_INTEGER : length;
+
   return !!length &&
-    (typeof value == 'number' || reIsUint.test(value)) &&
-    (value > -1 && value % 1 == 0 && value < length);
+    (type == 'number' ||
+      (type != 'symbol' && reIsUint.test(value))) &&
+        (value > -1 && value % 1 == 0 && value < length);
 }
 
 module.exports = isIndex;
@@ -18103,6 +18106,14 @@ var freeProcess = moduleExports && freeGlobal.process;
 /** Used to access faster Node.js helpers. */
 var nodeUtil = (function() {
   try {
+    // Use `util.types` for Node.js 10+.
+    var types = freeModule && freeModule.require && freeModule.require('util').types;
+
+    if (types) {
+      return types;
+    }
+
+    // Legacy `process.binding('util')` for Node.js < 10.
     return freeProcess && freeProcess.binding && freeProcess.binding('util');
   } catch (e) {}
 }());
@@ -18436,8 +18447,7 @@ module.exports = stackSet;
 var memoizeCapped = __webpack_require__(/*! ./_memoizeCapped */ "./node_modules/lodash/_memoizeCapped.js");
 
 /** Used to match property names within property paths. */
-var reLeadingDot = /^\./,
-    rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|$))/g;
+var rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|$))/g;
 
 /** Used to match backslashes in property paths. */
 var reEscapeChar = /\\(\\)?/g;
@@ -18451,11 +18461,11 @@ var reEscapeChar = /\\(\\)?/g;
  */
 var stringToPath = memoizeCapped(function(string) {
   var result = [];
-  if (reLeadingDot.test(string)) {
+  if (string.charCodeAt(0) === 46 /* . */) {
     result.push('');
   }
-  string.replace(rePropName, function(match, number, quote, string) {
-    result.push(quote ? string.replace(reEscapeChar, '$1') : (number || match));
+  string.replace(rePropName, function(match, number, quote, subString) {
+    result.push(quote ? subString.replace(reEscapeChar, '$1') : (number || match));
   });
   return result;
 });
@@ -20086,14 +20096,13 @@ var defaults = chart_js__WEBPACK_IMPORTED_MODULE_2___default.a.defaults;
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ActionCreators", function() { return ActionCreators; });
 /* harmony import */ var _lib_playerAccountService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../lib/playerAccountService */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/lib/playerAccountService.js");
+/* harmony import */ var _subtabAction__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./subtabAction */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/actions/subtabAction.js");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
-var getAccountInfo = function getAccountInfo(param) {
-  return function () {
-    var service = new _lib_playerAccountService__WEBPACK_IMPORTED_MODULE_0__["default"]();
-    return service.getAccountInfo(param);
-  };
-};
+
 
 var getCustomerBettingStatus = function getCustomerBettingStatus(param) {
   return function () {
@@ -20102,10 +20111,79 @@ var getCustomerBettingStatus = function getCustomerBettingStatus(param) {
   };
 };
 
-var ActionCreators = {
-  getAccountInfo: getAccountInfo,
+var ActionCreators = _objectSpread({}, _subtabAction__WEBPACK_IMPORTED_MODULE_1__, {
   getCustomerBettingStatus: getCustomerBettingStatus
+});
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/actions/subtabAction.js":
+/*!******************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/account-info/actions/subtabAction.js ***!
+  \******************************************************************************************/
+/*! exports provided: setActivityRecord, getAccountProfile, getBankInfo */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setActivityRecord", function() { return setActivityRecord; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAccountProfile", function() { return getAccountProfile; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBankInfo", function() { return getBankInfo; });
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/actions/types.js");
+/* harmony import */ var _lib_playerAccountService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/playerAccountService */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/lib/playerAccountService.js");
+
+
+
+var setAccountProfile = function setAccountProfile(data) {
+  return {
+    type: _types__WEBPACK_IMPORTED_MODULE_0__["SET_ACCOUNT_PROFILE"],
+    data: data
+  };
 };
+
+var setAccountBankInfo = function setAccountBankInfo(data) {
+  return {
+    type: _types__WEBPACK_IMPORTED_MODULE_0__["SET_BANK_INFO"],
+    data: data
+  };
+};
+
+var setActivityRecord = function setActivityRecord(data) {
+  return {
+    type: _types__WEBPACK_IMPORTED_MODULE_0__["SET_ACTIVITY_RECORD"],
+    data: data
+  };
+};
+var getAccountProfile = function getAccountProfile(param) {
+  return function (dispatch) {
+    var service = new _lib_playerAccountService__WEBPACK_IMPORTED_MODULE_1__["default"]();
+    return service.getAccountProfile(param);
+  };
+};
+var getBankInfo = function getBankInfo(param) {
+  return function (dispatch) {
+    var service = new _lib_playerAccountService__WEBPACK_IMPORTED_MODULE_1__["default"]();
+    return service.getBankInfo(param);
+  };
+};
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/actions/types.js":
+/*!***********************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/account-info/actions/types.js ***!
+  \***********************************************************************************/
+/*! exports provided: SET_ACCOUNT_PROFILE, SET_BANK_INFO, SET_ACTIVITY_RECORD */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_ACCOUNT_PROFILE", function() { return SET_ACCOUNT_PROFILE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_BANK_INFO", function() { return SET_BANK_INFO; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_ACTIVITY_RECORD", function() { return SET_ACTIVITY_RECORD; });
+var SET_ACCOUNT_PROFILE = 'ACCOUNT_INFO/SET_ACCOUNT_PROFILE';
+var SET_BANK_INFO = 'ACCOUNT_INFO/SET_BANK_INFO';
+var SET_ACTIVITY_RECORD = 'ACCOUNT_INFO/SET_ACTIVITY_RECORD';
 
 /***/ }),
 
@@ -20193,7 +20271,7 @@ var TabContent = function TabContent(props) {
       setSelectedTab = _useState2[1];
 
   var renderSubTab = function renderSubTab() {
-    return _lib_constants__WEBPACK_IMPORTED_MODULE_1__["tabList"].map(function (item, index) {
+    return _lib_constants__WEBPACK_IMPORTED_MODULE_1__["tabList"].map(function (item) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "tab",
         key: item.name
@@ -20314,31 +20392,65 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/index.js */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/actions/index.js");
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var _AthenaProfile__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./AthenaProfile */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/components/subtab/AthenaProfile.jsx");
+/* harmony import */ var _ApiProfile__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ApiProfile */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/components/subtab/ApiProfile.jsx");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/lib/constants.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
 
 
 
 
 var AccountProfile = function AccountProfile(props) {
+  var licenseeCustId = props.licenseeCustId;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({}),
+      _useState2 = _slicedToArray(_useState, 2),
+      data = _useState2[0],
+      setData = _useState2[1];
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    var param = {
+      licenseeCustId: licenseeCustId
+    };
+    props.getAccountProfile(param).then(function (result) {
+      return setData(result);
+    });
+  }, [licenseeCustId]);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "left-side-content account-profile-container"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
     className: "table"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-    className: "first-cell"
-  }, "AG UserID"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "qatest01")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Gold Deluxe UserID"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "qatest01")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "VoidBridge UserID"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "qatest01")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-    colSpan: "2"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "First name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "qatest01")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Last name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "101")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Gender"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Male")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Date of birth"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "34335")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Mobile"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "111")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Country"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Togo")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Address"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "12")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "City/ Town"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "22")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "State"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "33")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Zip Code"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "44")))));
+  }, props.licenseeType === _lib_constants__WEBPACK_IMPORTED_MODULE_6__["licenseeType"].api ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AthenaProfile__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    data: data
+  }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ApiProfile__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    data: data
+  })));
 };
 
 function mapDispatchToProps(dispatch) {
-  var getAccountInfo = _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"].getAccountInfo;
+  var getAccountProfile = _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"].getAccountProfile;
   return Object(redux__WEBPACK_IMPORTED_MODULE_3__["bindActionCreators"])({
-    getAccountInfo: getAccountInfo
+    getAccountProfile: getAccountProfile
   }, dispatch);
 }
 
 function mapStateToProps(state) {
-  return Object.assign({}, {});
+  var licenseeCustId = state.licenseeCustId,
+      licenseeType = state.licenseeType;
+  return Object.assign({}, {
+    licenseeCustId: licenseeCustId,
+    licenseeType: licenseeType
+  });
 }
 
 ;
@@ -20376,6 +20488,102 @@ var ActivityRecord = function ActivityRecord() {
 
 /***/ }),
 
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/components/subtab/ApiProfile.jsx":
+/*!***************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/account-info/components/subtab/ApiProfile.jsx ***!
+  \***************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var ApiProfile = function ApiProfile(_ref) {
+  var data = _ref.data;
+
+  var _ref2 = data || {},
+      MemberId = _ref2.MemberId,
+      FirstName = _ref2.FirstName,
+      LastName = _ref2.LastName,
+      OperatorId = _ref2.OperatorId,
+      SiteCode = _ref2.SiteCode,
+      ProductCode = _ref2.ProductCode,
+      CustomInfo1 = _ref2.CustomInfo1,
+      CustomInfo2 = _ref2.CustomInfo2,
+      CustomInfo3 = _ref2.CustomInfo3,
+      CustomInfo4 = _ref2.CustomInfo4,
+      CustomInfo5 = _ref2.CustomInfo5;
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    className: "first-cell"
+  }, "Member ID"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, MemberId)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "First name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, FirstName)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Last name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, LastName)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Operator ID"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, OperatorId)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    colSpan: "2"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Site code"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, SiteCode)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Product code"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, ProductCode)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    colSpan: "2"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "CustomInfo 1"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, CustomInfo1)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "CustomInfo 2"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, CustomInfo2)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "CustomInfo 3"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, CustomInfo3)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "CustomInfo 4"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, CustomInfo4)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "CustomInfo 5"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, CustomInfo5)));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (ApiProfile);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/components/subtab/AthenaProfile.jsx":
+/*!******************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/account-info/components/subtab/AthenaProfile.jsx ***!
+  \******************************************************************************************************/
+/*! exports provided: AthenaProfile, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AthenaProfile", function() { return AthenaProfile; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+var AthenaProfile = function AthenaProfile(_ref) {
+  var data = _ref.data;
+
+  var _ref2 = data || {},
+      AGUserId = _ref2.AGUserId,
+      GoldDeluxeUserId = _ref2.GoldDeluxeUserId,
+      VoidbridgeUserId = _ref2.VoidbridgeUserId,
+      ExchangeUserId = _ref2.ExchangeUserId,
+      FirstName = _ref2.FirstName,
+      LastName = _ref2.LastName,
+      Gender = _ref2.Gender,
+      Birthday = _ref2.Birthday,
+      Phone = _ref2.Phone,
+      Country = _ref2.Country,
+      Address = _ref2.Address,
+      City = _ref2.City,
+      Town = _ref2.Town,
+      State = _ref2.State,
+      ZipCode = _ref2.ZipCode,
+      SecurityQuestion = _ref2.SecurityQuestion,
+      SecurityCode = _ref2.SecurityCode,
+      HowToKnow = _ref2.HowToKnow,
+      PreferredUserName = _ref2.PreferredUserName,
+      PreferredCurrency = _ref2.PreferredCurrency,
+      PreferredOdds = _ref2.PreferredOdds,
+      PreferredLanguage = _ref2.PreferredLanguage;
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    className: "first-cell"
+  }, "AG UserId"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, AGUserId)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Gold Deluxe UserID"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, GoldDeluxeUserId)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "VoidBridge UserID"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, VoidbridgeUserId)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Exchange UserID"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, ExchangeUserId)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    colSpan: "2"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "First name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, FirstName)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Last name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, LastName)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Gender"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, Gender)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Date of birth"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, Birthday)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Mobile"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, Phone)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Country"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, Country)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Address"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, Address)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "City/ Town"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, City, City && Town && '/', Town)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "State"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, State)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Zip Code"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, ZipCode)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    colSpan: "2"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Security question"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, SecurityQuestion)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Security code"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, SecurityCode)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Where did you hear about us"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, HowToKnow)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    colSpan: "2"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "My preferred username"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, PreferredUserName)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "My preferred currency"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, PreferredCurrency)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "My preferred odds"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, PreferredOdds)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "My preferred language"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, PreferredLanguage)));
+};
+/* harmony default export */ __webpack_exports__["default"] = (AthenaProfile);
+
+/***/ }),
+
 /***/ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/components/subtab/BankInformation.jsx":
 /*!********************************************************************************************************!*\
   !*** ./www/js/source/reactpages/Module/PlayerAdmin/account-info/components/subtab/BankInformation.jsx ***!
@@ -20388,17 +20596,92 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BankInformation", function() { return BankInformation; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/index.js */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/actions/index.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/lib/constants.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
-var BankInformation = function BankInformation() {
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+var BankInformation = function BankInformation(props) {
+  if (props.licenseeType === _lib_constants__WEBPACK_IMPORTED_MODULE_4__["licenseeType"].api) {
+    return null;
+  }
+
+  var licenseeCustId = props.licenseeCustId;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({}),
+      _useState2 = _slicedToArray(_useState, 2),
+      data = _useState2[0],
+      setData = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      isShowPlainText = _useState4[0],
+      setIsShowPlainText = _useState4[1];
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    var param = {
+      licenseeCustId: licenseeCustId
+    };
+    props.getBankInfo(param).then(function (result) {
+      return setData(result);
+    });
+  }, [licenseeCustId]);
+
+  var displayInfo = function displayInfo(value) {
+    return isShowPlainText ? value : value && '*'.repeat(value.length);
+  };
+
+  var _ref = data || {},
+      BankName = _ref.BankName,
+      AccountName = _ref.AccountName,
+      AccountNumber = _ref.AccountNumber;
+
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "left-side-content bank-infor-container"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
     className: "table"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     className: "first-cell"
-  }, "Bank Information"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Bank Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "********")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Bank Account Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "********")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Bank Account Number"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "********")))));
+  }, "Bank Information"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    onClick: function onClick() {
+      return setIsShowPlainText(true);
+    },
+    onmouseleave: function onmouseleave() {
+      return setIsShowPlainText(false);
+    }
+  }, "Show"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Bank Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, displayInfo(BankName))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Bank Account Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, displayInfo(AccountName))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Bank Account Number"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, displayInfo(AccountNumber))))));
 };
-/* harmony default export */ __webpack_exports__["default"] = (BankInformation);
+
+function mapDispatchToProps(dispatch) {
+  var getBankInfo = _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"].getBankInfo;
+  return Object(redux__WEBPACK_IMPORTED_MODULE_3__["bindActionCreators"])({
+    getBankInfo: getBankInfo
+  }, dispatch);
+}
+
+function mapStateToProps(state) {
+  var licenseeCustId = state.licenseeCustId,
+      licenseeType = state.licenseeType;
+  return Object.assign({}, {
+    licenseeCustId: licenseeCustId,
+    licenseeType: licenseeType
+  });
+}
+
+;
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(BankInformation));
 
 /***/ }),
 
@@ -20634,17 +20917,52 @@ function mapStateToProps(state) {
 
 /***/ }),
 
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/lib/apiInfo.js":
+/*!*********************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/account-info/lib/apiInfo.js ***!
+  \*********************************************************************************/
+/*! exports provided: lrfAccountProfile, custBettingStatus, lapAccountProfile, lapBankInfo */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "lrfAccountProfile", function() { return lrfAccountProfile; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "custBettingStatus", function() { return custBettingStatus; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "lapAccountProfile", function() { return lapAccountProfile; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "lapBankInfo", function() { return lapBankInfo; });
+/* harmony import */ var _constants_configInfo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../constants/configInfo */ "./www/js/source/reactpages/Module/constants/configInfo.js");
+
+var lrfAccountProfile = {
+  action: 'api/PlayerDetailedInfo/GetAccountProfile',
+  type: _constants_configInfo__WEBPACK_IMPORTED_MODULE_0__["systemType"].lrf
+};
+var custBettingStatus = {
+  action: 'api/PlayerDetailedInfo/GetCustomerBettingStatus',
+  type: _constants_configInfo__WEBPACK_IMPORTED_MODULE_0__["systemType"].lrf
+};
+var lapAccountProfile = {
+  action: 'PlayerAccountInfo/GetAccountProfile',
+  type: _constants_configInfo__WEBPACK_IMPORTED_MODULE_0__["systemType"].newAdmin
+};
+var lapBankInfo = {
+  action: 'PlayerAccountInfo/GetBankInfo',
+  type: _constants_configInfo__WEBPACK_IMPORTED_MODULE_0__["systemType"].newAdmin
+};
+
+/***/ }),
+
 /***/ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/lib/constants.js":
 /*!***********************************************************************************!*\
   !*** ./www/js/source/reactpages/Module/PlayerAdmin/account-info/lib/constants.js ***!
   \***********************************************************************************/
-/*! exports provided: tabKeys, tabList */
+/*! exports provided: tabKeys, tabList, licenseeType */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tabKeys", function() { return tabKeys; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tabList", function() { return tabList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "licenseeType", function() { return licenseeType; });
 var tabKeys = {
   accountProfile: 'accountProfile',
   bankInformation: 'bankInformation',
@@ -20660,6 +20978,10 @@ var tabList = [{
   name: tabKeys.activityRecord,
   text: 'Activity Record'
 }];
+var licenseeType = {
+  api: 0,
+  nonApi: 1
+};
 
 /***/ }),
 
@@ -20675,6 +20997,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return PlayerAccountService; });
 /* harmony import */ var _lib_factoryCommonService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../lib/factoryCommonService */ "./www/js/source/reactpages/Module/lib/factoryCommonService.js");
 /* harmony import */ var _constants_configInfo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../constants/configInfo */ "./www/js/source/reactpages/Module/constants/configInfo.js");
+/* harmony import */ var _apiInfo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./apiInfo */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/lib/apiInfo.js");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -20687,6 +21010,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
+
 var apiInfo = {
   lrfAccountProfile: {
     action: 'api/PlayerDetailedInfo/GetAccountProfile',
@@ -20695,10 +21019,6 @@ var apiInfo = {
   custBettingStatus: {
     action: 'api/PlayerDetailedInfo/GetCustomerBettingStatus',
     type: _constants_configInfo__WEBPACK_IMPORTED_MODULE_1__["systemType"].lrf
-  },
-  lapAccountProfile: {
-    action: 'PlayerAccountInfo/GetAccountProfile',
-    type: _constants_configInfo__WEBPACK_IMPORTED_MODULE_1__["systemType"].newAdmin
   }
 };
 
@@ -20712,22 +21032,25 @@ function () {
   }
 
   _createClass(PlayerAccountService, [{
-    key: "getAccountInfo",
-    value: function getAccountInfo(param) {
-      var lrfAccountProfile = apiInfo.lrfAccountProfile,
-          lapAccountProfile = apiInfo.lapAccountProfile;
-
-      var params = _objectSpread({}, param);
-
-      var lrfPromise = this.commonService.fetchData(lrfAccountProfile.type, lrfAccountProfile.action, params);
-      var ajaxConfig = {
-        method: 'get'
-      };
-      var lapPromise = this.commonService.fetchData(lapAccountProfile.type, lapAccountProfile.action, params, ajaxConfig);
-      return this.commonService.fetchMultiple([lrfPromise, lapPromise], function (lrfResponse, lapResponse) {
-        var lrfAccountInfo = lrfResponse.data;
-        var lapAccountInfo = lapResponse.data;
-        return _objectSpread({}, lrfAccountInfo, lapAccountInfo);
+    key: "getAccountProfile",
+    value: function getAccountProfile(param) {
+      return this.commonService.fetchData(_apiInfo__WEBPACK_IMPORTED_MODULE_2__["lapAccountProfile"].type, _apiInfo__WEBPACK_IMPORTED_MODULE_2__["lapAccountProfile"].action, param).then(function (response) {
+        var data = response.data;
+        return data;
+      }).catch(function (error) {
+        console.log(error.message);
+        return null;
+      });
+    }
+  }, {
+    key: "getBankInfo",
+    value: function getBankInfo(param) {
+      return this.commonService.fetchData(_apiInfo__WEBPACK_IMPORTED_MODULE_2__["lapBankInfo"].type, _apiInfo__WEBPACK_IMPORTED_MODULE_2__["lapBankInfo"].action, param).then(function (response) {
+        var data = response.data;
+        return data;
+      }).catch(function (error) {
+        console.log(error.message);
+        return null;
       });
     }
   }, {
@@ -20748,6 +21071,24 @@ function () {
 
 /***/ }),
 
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/reducers/commonReducer.js":
+/*!********************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/account-info/reducers/commonReducer.js ***!
+  \********************************************************************************************/
+/*! exports provided: licenseeCustId, licenseeType */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "licenseeCustId", function() { return licenseeCustId; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "licenseeType", function() { return licenseeType; });
+/* harmony import */ var _lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
+
+var licenseeCustId = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(null, {});
+var licenseeType = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(null, {});
+
+/***/ }),
+
 /***/ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/reducers/index.js":
 /*!************************************************************************************!*\
   !*** ./www/js/source/reactpages/Module/PlayerAdmin/account-info/reducers/index.js ***!
@@ -20758,8 +21099,62 @@ function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var _subtabReducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./subtabReducer */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/reducers/subtabReducer.js");
+/* harmony import */ var _widgetsReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./widgetsReducer */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/reducers/widgetsReducer.js");
+/* harmony import */ var _widgetsReducer__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_widgetsReducer__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _commonReducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./commonReducer */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/reducers/commonReducer.js");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({}));
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(_objectSpread({}, _subtabReducer__WEBPACK_IMPORTED_MODULE_1__, _commonReducer__WEBPACK_IMPORTED_MODULE_3__)));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/reducers/subtabReducer.js":
+/*!********************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/account-info/reducers/subtabReducer.js ***!
+  \********************************************************************************************/
+/*! exports provided: accountProfile, bankInfo, activityRecord */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "accountProfile", function() { return accountProfile; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "bankInfo", function() { return bankInfo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "activityRecord", function() { return activityRecord; });
+/* harmony import */ var _lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
+/* harmony import */ var _actions_types_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/types.js */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/actions/types.js");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+var accountProfile = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(null, _defineProperty({}, _actions_types_js__WEBPACK_IMPORTED_MODULE_1__["SET_ACCOUNT_PROFILE"], function (prevState, action) {
+  return action.data && _objectSpread({}, action.data);
+}));
+var bankInfo = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(null, _defineProperty({}, _actions_types_js__WEBPACK_IMPORTED_MODULE_1__["SET_BANK_INFO"], function (prevState, action) {
+  return action.data && _objectSpread({}, action.data);
+}));
+var activityRecord = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(null, _defineProperty({}, _actions_types_js__WEBPACK_IMPORTED_MODULE_1__["SET_ACTIVITY_RECORD"], function (prevState, action) {
+  return action.data && _objectSpread({}, action.data);
+}));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/reducers/widgetsReducer.js":
+/*!*********************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/account-info/reducers/widgetsReducer.js ***!
+  \*********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
 
 /***/ }),
 
@@ -21170,6 +21565,31 @@ function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/lib/createReducer.js":
+/*!*******************************************************!*\
+  !*** ./www/js/source/reactpages/lib/createReducer.js ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return createReducer; });
+function createReducer(initialState, handlers) {
+  return function reducer() {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+    var action = arguments.length > 1 ? arguments[1] : undefined;
+
+    if (handlers.hasOwnProperty(action.type)) {
+      return handlers[action.type](state, action);
+    } else {
+      return state;
+    }
+  };
+}
 
 /***/ }),
 

@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 8/19/2019 5:32:22 PM
+// Generated at: 8/30/2019 9:36:47 AM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -592,6 +592,7 @@ window._language_en_US = {
   Platform: "Platform",
   PlatformWinLoss: "Platform Win Loss",
   PlatformWinLossTitle: "Platform Win Loss - {0} --&gt; {1} - {2} - {3} - {4}",
+  PlayerAdminInvalidDataErrMsg: "Invalid parameter. Invalid custId.",
   PlayerAdminUpdateFailedMsg: "Please try again!",
   PreGame: "Pre Game",
   Prev: "Prev",
@@ -604,11 +605,13 @@ window._language_en_US = {
   ProductBT: "Bet Trade",
   ProductBX: "Exchange",
   ProductCB: "Colossus Bets",
+  ProductCC: "Card Club",
   ProductCO: "Cash Out",
   ProductCS: "RNG Casino",
   ProductFW: "Fishing World",
   ProductGD: "Gold Deluxe",
   ProductKN: "RNG Keno",
+  ProductLC: "Live Casino",
   ProductLT: "Lottery",
   ProductNG: "Number Game",
   ProductPP: "PP",
