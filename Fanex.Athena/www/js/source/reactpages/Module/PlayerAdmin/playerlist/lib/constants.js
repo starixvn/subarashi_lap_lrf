@@ -71,9 +71,9 @@ export const contextMenuKeys = {
 }
 
 export const tabNames = {
-    statement: 'lblPlayerStatement',
-    betlist: 'lblBetList',
-    betLimit: 'lblBetLimit'
+    statement: 'lblPlayerAdminPlayerStatement',
+    betlist: 'lblPlayerAdminBetList',
+    betLimit: 'lblPlayerAdminBetLimit'
 }
 
 export const excludedTabNameWithNonDepositAndArchived = [tabNames.statement, tabNames.betlist, tabNames.betLimit];
@@ -81,9 +81,9 @@ export const excludedTabNameWithNonDepositAndArchived = [tabNames.statement, tab
 export const contextMenuList = [
     { key: contextMenuKeys.note, name: LangHelper.getSingleResource('Note'), tabName: 'lblPlayerAdminNote' },
     { key: contextMenuKeys.password, name: LangHelper.getSingleResource('Password'), tabName: 'lblPlayerAdminSetting' },
-    { key: contextMenuKeys.fundtransferLimit, name: LangHelper.getSingleResource('FundtransferLimit'), tabName: 'lblFundTransfer' },
-    { key: contextMenuKeys.betLimit, name: LangHelper.getSingleResource('BetLimit'), tabName: 'lblBetLimit' },
-    { key: contextMenuKeys.statement, name: LangHelper.getSingleResource('Statement'), tabName: 'lblPlayerStatement' },
+    { key: contextMenuKeys.fundtransferLimit, name: LangHelper.getSingleResource('FundtransferLimit'), tabName: 'lblPlayerAdminFundTransfer' },
+    { key: contextMenuKeys.betLimit, name: LangHelper.getSingleResource('BetLimit'), tabName: tabNames.betLimit },
+    { key: contextMenuKeys.statement, name: LangHelper.getSingleResource('Statement'), tabName: tabNames.statement },
     { key: contextMenuKeys.personalMessage, name: LangHelper.getSingleResource('PersonalMessage'), tabName: 'lblPlayerAdminMessage' }
 ]
 
