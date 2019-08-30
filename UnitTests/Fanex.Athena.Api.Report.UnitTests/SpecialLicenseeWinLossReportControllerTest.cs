@@ -150,8 +150,8 @@
                             new Product { ProductCode = "P1" }
                         }));
 
-            SessionService.LicenseeSession.Returns(new LicenseeSession { LicenseeName = licenseeName });
-            StubUserSessionData(new UserSession { CurrencyList = new Dictionary<int, string> { { 1, "C1" }, { 2, "C2" } } });
+            SessionService.LicenseeSession.Returns(new LicenseeAuthInfo { LicenseeName = licenseeName });
+            StubUserSessionData(new UserAuthInfo { CurrencyList = new Dictionary<int, string> { { 1, "C1" }, { 2, "C2" } } });
 
             var model = new SpecialLicenseeWinLossMetaModel
             {

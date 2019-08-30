@@ -1,10 +1,8 @@
 ﻿namespace Fanex.Athena.Controllers.TotalBets.UnitTests
 {
     using System.Collections.Generic;
-    using System.Linq;
     using System.Web.Mvc;
     using Base.UnitTests;
-    using Fanex.Athena.Service.StatelessCore;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     using Model.Core.DataDomain;
@@ -18,15 +16,11 @@
 
     using Report;
 
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Web.Mvc;
-
     [TestFixture]
     public class LicenseeWinLossReportControllerTest : CultureBaseControllerHelperTest
     {
-
         private ILicenseeSettingService _licenseeSettingService;
+
         [SetUp]
         public void SetUp()
         {
@@ -38,6 +32,7 @@
         {
             _licenseeSettingService = null;
         }
+
         [OneTimeSetUp]
         public override void FixtureSetUp()
         {

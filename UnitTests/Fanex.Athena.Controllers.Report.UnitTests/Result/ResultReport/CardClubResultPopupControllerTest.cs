@@ -2,10 +2,10 @@
 {
     using System.Threading.Tasks;
     using Base.UnitTests;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using NSubstitute;
     using NUnit.Framework;
     using Report.Result.ResultPopup;
-    using Service.Core.Utility.Interfaces;
     using UnitTest.Common.Extensions;
 
     [TestFixture]
@@ -21,14 +21,14 @@
             const string ExpectedResult = "aaaaaaaaaaaa";
             const string Url = "/CardClubResultPopup/Index";
             const string Language = "vi-VN";
-            StubUserSessionData(new Session.Model.UserSession
+            StubUserSessionData(new Model.Auth.UserAuthInfo
             {
                 Language = Language
             });
             var betListApiClient = Substitute.For<IBetListApiClient>();
 
             betListApiClient.PostAsyncString(Url, Arg.Any<object>(), SessionService.UserSession.Language).Returns(ExpectedResult);
-            using (var controller = new CardClubResultPopupController(LangService, SessionService, AppSettings, betListApiClient))
+            using (var controller = new CardClubResultPopupController(LangService, SessionService, betListApiClient))
             {
                 // Action
                 var result = await controller.Index(CustId, GameTypeId, TransId3rd);

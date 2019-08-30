@@ -43,8 +43,7 @@
                 { Product.AB, nameof(ViewResources.ProductAB) },
                 { Product.PP, nameof(ViewResources.ProductPP) },
                 { Product.FW, nameof(ViewResources.ProductFW) },
-                { Product.CC, nameof(ViewResources.ProductCC) }
-                { Product.FW, nameof(ViewResources.ProductFW) },
+                { Product.CC, nameof(ViewResources.ProductCC) },
                 { Product.AGC, nameof(ViewResources.ProductAGC) }
             };
 

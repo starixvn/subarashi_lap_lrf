@@ -2,7 +2,6 @@
 {
     using System.Threading.Tasks;
 
-
     using DataAccess.Customer.Interfaces;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -13,8 +12,6 @@
 
     using NUnit.Framework;
 
-  using Fanex.Athena.Model.Auth;
-
     using UnitTest.Common.Helpers;
 
     [TestFixture]
@@ -24,10 +21,10 @@
 
         private GroupComService _groupComService;
         private ILGAPIClient _lgClient;
+
         [SetUp]
         public void SetUp()
         {
-
             _lgClient = Substitute.For<ILGAPIClient>();
 
             _groupDataAccess = Substitute.For<IGroupComDataAccess>();
@@ -48,7 +45,7 @@
             var licenseeId = FakeHelper.Create<int>();
 
             // Action
-             _groupComService.GetAllAsync(licenseeId);
+            _groupComService.GetAllAsync(licenseeId);
 
             // Assert
             _groupDataAccess.Received().GetAllAsync(licenseeId);
@@ -75,7 +72,7 @@
             var licenseeId = FakeHelper.Create<int>();
 
             // Action
-             _groupComService.GetById(groupCommId, licenseeId);
+            _groupComService.GetById(groupCommId, licenseeId);
 
             // Assert
             _groupDataAccess.Received().GetById(groupCommId, licenseeId);
@@ -319,7 +316,6 @@
             // Assert
             Assert.Multiple(() =>
             {
-
                 _lgClient.Received().PostAsync<APIResult<bool>>(Arg.Any<string>(), Arg.Is<RNGCasinoUpdateMemberComMetaModel>(
                     x => x.Comm == 0
                         && string.Join(",", x.CustomerId) == expectedResult.ExtendedData
@@ -373,7 +369,7 @@ new APIResult<bool> { Data = false });
             var groupName = FakeHelper.Create<string>();
 
             // Action
-             _groupComService.CheckExistingGroupByName(licenseeId, groupName);
+            _groupComService.CheckExistingGroupByName(licenseeId, groupName);
 
             // Assert
             _groupDataAccess.Received().CheckByName(licenseeId, groupName);

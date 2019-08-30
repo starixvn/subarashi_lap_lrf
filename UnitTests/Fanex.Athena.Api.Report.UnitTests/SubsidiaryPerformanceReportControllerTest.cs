@@ -3,12 +3,10 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using System.Web.Http.Results;
 
     using Base.UnitTests;
 
     using Fanex.Athena.Model.Auth;
-    using Fanex.Athena.Resources;
     using Fanex.Athena.Service.Report.Interfaces;
 
     using Model.Core.DataDomain;
