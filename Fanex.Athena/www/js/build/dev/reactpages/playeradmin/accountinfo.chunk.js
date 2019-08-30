@@ -20121,69 +20121,34 @@ var ActionCreators = _objectSpread({}, _subtabAction__WEBPACK_IMPORTED_MODULE_1_
 /*!******************************************************************************************!*\
   !*** ./www/js/source/reactpages/Module/PlayerAdmin/account-info/actions/subtabAction.js ***!
   \******************************************************************************************/
-/*! exports provided: setActivityRecord, getAccountProfile, getBankInfo */
+/*! exports provided: getAccountProfile, getBankInfo, getActivityRecord */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setActivityRecord", function() { return setActivityRecord; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAccountProfile", function() { return getAccountProfile; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBankInfo", function() { return getBankInfo; });
-/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/actions/types.js");
-/* harmony import */ var _lib_playerAccountService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/playerAccountService */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/lib/playerAccountService.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getActivityRecord", function() { return getActivityRecord; });
+/* harmony import */ var _lib_playerAccountService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../lib/playerAccountService */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/lib/playerAccountService.js");
 
-
-
-var setAccountProfile = function setAccountProfile(data) {
-  return {
-    type: _types__WEBPACK_IMPORTED_MODULE_0__["SET_ACCOUNT_PROFILE"],
-    data: data
-  };
-};
-
-var setAccountBankInfo = function setAccountBankInfo(data) {
-  return {
-    type: _types__WEBPACK_IMPORTED_MODULE_0__["SET_BANK_INFO"],
-    data: data
-  };
-};
-
-var setActivityRecord = function setActivityRecord(data) {
-  return {
-    type: _types__WEBPACK_IMPORTED_MODULE_0__["SET_ACTIVITY_RECORD"],
-    data: data
-  };
-};
 var getAccountProfile = function getAccountProfile(param) {
-  return function (dispatch) {
-    var service = new _lib_playerAccountService__WEBPACK_IMPORTED_MODULE_1__["default"]();
+  return function () {
+    var service = new _lib_playerAccountService__WEBPACK_IMPORTED_MODULE_0__["default"]();
     return service.getAccountProfile(param);
   };
 };
 var getBankInfo = function getBankInfo(param) {
-  return function (dispatch) {
-    var service = new _lib_playerAccountService__WEBPACK_IMPORTED_MODULE_1__["default"]();
+  return function () {
+    var service = new _lib_playerAccountService__WEBPACK_IMPORTED_MODULE_0__["default"]();
     return service.getBankInfo(param);
   };
 };
-
-/***/ }),
-
-/***/ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/actions/types.js":
-/*!***********************************************************************************!*\
-  !*** ./www/js/source/reactpages/Module/PlayerAdmin/account-info/actions/types.js ***!
-  \***********************************************************************************/
-/*! exports provided: SET_ACCOUNT_PROFILE, SET_BANK_INFO, SET_ACTIVITY_RECORD */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_ACCOUNT_PROFILE", function() { return SET_ACCOUNT_PROFILE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_BANK_INFO", function() { return SET_BANK_INFO; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_ACTIVITY_RECORD", function() { return SET_ACTIVITY_RECORD; });
-var SET_ACCOUNT_PROFILE = 'ACCOUNT_INFO/SET_ACCOUNT_PROFILE';
-var SET_BANK_INFO = 'ACCOUNT_INFO/SET_BANK_INFO';
-var SET_ACTIVITY_RECORD = 'ACCOUNT_INFO/SET_ACTIVITY_RECORD';
+var getActivityRecord = function getActivityRecord(param) {
+  return function () {
+    var service = new _lib_playerAccountService__WEBPACK_IMPORTED_MODULE_0__["default"]();
+    return service.getActivityRecord(param);
+  };
+};
 
 /***/ }),
 
@@ -20198,35 +20163,73 @@ var SET_ACTIVITY_RECORD = 'ACCOUNT_INFO/SET_ACTIVITY_RECORD';
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var _actions_index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/index */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/actions/index.js");
-/* harmony import */ var _layouts_AppLayout__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../layouts/AppLayout */ "./www/js/source/reactpages/layouts/AppLayout.jsx");
-/* harmony import */ var _TabContent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./TabContent */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/components/TabContent.jsx");
-/* harmony import */ var _WidgetContent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./WidgetContent */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/components/WidgetContent.jsx");
-
-
-
+/* harmony import */ var _layouts_AppLayout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../layouts/AppLayout */ "./www/js/source/reactpages/layouts/AppLayout.jsx");
+/* harmony import */ var _TabContent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TabContent */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/components/TabContent.jsx");
+/* harmony import */ var _WidgetContent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./WidgetContent */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/components/WidgetContent.jsx");
 
 
 
 
 
 var AppContainer = function AppContainer(props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_4__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_1__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "account-info-container"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_TabContent__WEBPACK_IMPORTED_MODULE_5__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_WidgetContent__WEBPACK_IMPORTED_MODULE_6__["default"], null)));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_TabContent__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_WidgetContent__WEBPACK_IMPORTED_MODULE_3__["default"], null)));
 };
 
-function mapDispatchToProps(dispatch) {
-  return Object(redux__WEBPACK_IMPORTED_MODULE_2__["bindActionCreators"])({}, dispatch);
-}
+/* harmony default export */ __webpack_exports__["default"] = (AppContainer);
 
-function mapStateToProps(state) {
-  return Object.assign({}, {});
-}
+/***/ }),
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(AppContainer)));
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/components/SubTab.jsx":
+/*!****************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/account-info/components/SubTab.jsx ***!
+  \****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+var SubTab = function SubTab(props) {
+  var dataList = props.dataList,
+      selectedTab = props.selectedTab,
+      onChangeTab = props.onChangeTab;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "header-tab"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "content-tab"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+    className: "tabs"
+  }, dataList.map(function (item) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      className: "tab",
+      key: item.name
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      className: item.name === selectedTab ? 'link active' : 'link',
+      onClick: function onClick() {
+        return onChangeTab(item.name);
+      }
+    }, item.text));
+  }))));
+};
+
+SubTab.propTypes = {
+  dataList: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.shape({
+    name: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
+    text: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string
+  })).isRequired,
+  selectedTab: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string.isRequired,
+  onChangeTab: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
+};
+SubTab.defaultProps = {};
+/* harmony default export */ __webpack_exports__["default"] = (SubTab);
 
 /***/ }),
 
@@ -20242,11 +20245,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TabContent", function() { return TabContent; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/lib/constants.js");
-/* harmony import */ var _subtab_AccountProfile__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./subtab/AccountProfile */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/components/subtab/AccountProfile.jsx");
-/* harmony import */ var _subtab_BankInformation__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./subtab/BankInformation */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/components/subtab/BankInformation.jsx");
-/* harmony import */ var _subtab_ActivityRecord__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./subtab/ActivityRecord */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/components/subtab/ActivityRecord.jsx");
-var _componentByTab;
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/lib/constants.js");
+/* harmony import */ var _subtab_AccountProfile__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./subtab/AccountProfile */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/components/subtab/AccountProfile.jsx");
+/* harmony import */ var _subtab_BankInformation__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./subtab/BankInformation */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/components/subtab/BankInformation.jsx");
+/* harmony import */ var _subtab_ActivityRecord__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./subtab/ActivityRecord */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/components/subtab/ActivityRecord.jsx");
+/* harmony import */ var _SubTab__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./SubTab */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/components/SubTab.jsx");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
@@ -20256,52 +20267,59 @@ function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = 
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
 
 
 
-var componentByTab = (_componentByTab = {}, _defineProperty(_componentByTab, _lib_constants__WEBPACK_IMPORTED_MODULE_1__["tabKeys"].accountProfile, _subtab_AccountProfile__WEBPACK_IMPORTED_MODULE_2__["default"]), _defineProperty(_componentByTab, _lib_constants__WEBPACK_IMPORTED_MODULE_1__["tabKeys"].bankInformation, _subtab_BankInformation__WEBPACK_IMPORTED_MODULE_3__["default"]), _defineProperty(_componentByTab, _lib_constants__WEBPACK_IMPORTED_MODULE_1__["tabKeys"].activityRecord, _subtab_ActivityRecord__WEBPACK_IMPORTED_MODULE_4__["default"]), _componentByTab);
+
 var TabContent = function TabContent(props) {
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(_lib_constants__WEBPACK_IMPORTED_MODULE_1__["tabKeys"].accountProfile),
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(_lib_constants__WEBPACK_IMPORTED_MODULE_2__["tabKeys"].accountProfile),
       _useState2 = _slicedToArray(_useState, 2),
       selectedTab = _useState2[0],
       setSelectedTab = _useState2[1];
 
-  var renderSubTab = function renderSubTab() {
-    return _lib_constants__WEBPACK_IMPORTED_MODULE_1__["tabList"].map(function (item) {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "tab",
-        key: item.name
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        className: item.name === selectedTab ? 'link active' : 'link',
-        onClick: function onClick() {
-          return setSelectedTab(item.name);
-        }
-      }, item.text));
-    });
+  var tabListByLicenseeType = props.licenseeType === _lib_constants__WEBPACK_IMPORTED_MODULE_2__["licenseeType"].api ? _lib_constants__WEBPACK_IMPORTED_MODULE_2__["tabList"].filter(function (x) {
+    return x.name !== _lib_constants__WEBPACK_IMPORTED_MODULE_2__["tabKeys"].bankInformation;
+  }) : _toConsumableArray(_lib_constants__WEBPACK_IMPORTED_MODULE_2__["tabList"]);
+
+  var getStyle = function getStyle(tabKey) {
+    return {
+      display: selectedTab === tabKey ? 'block' : 'none'
+    };
   };
 
-  var CurrentTab = componentByTab[selectedTab];
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "outer-col-1"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "left-side"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "subtab"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "header-tab"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "content-tab"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-    className: "tabs"
-  }, renderSubTab())))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SubTab__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    dataList: tabListByLicenseeType,
+    selectedTab: selectedTab,
+    onChangeTab: setSelectedTab
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "tab-panel"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(CurrentTab, null))));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: getStyle(_lib_constants__WEBPACK_IMPORTED_MODULE_2__["tabKeys"].accountProfile)
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_subtab_AccountProfile__WEBPACK_IMPORTED_MODULE_3__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: getStyle(_lib_constants__WEBPACK_IMPORTED_MODULE_2__["tabKeys"].bankInformation)
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_subtab_BankInformation__WEBPACK_IMPORTED_MODULE_4__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: getStyle(_lib_constants__WEBPACK_IMPORTED_MODULE_2__["tabKeys"].activityRecord)
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_subtab_ActivityRecord__WEBPACK_IMPORTED_MODULE_5__["default"], null)))));
 };
-/* harmony default export */ __webpack_exports__["default"] = (TabContent);
+
+function mapStateToProps(state) {
+  var licenseeType = state.licenseeType;
+  return Object.assign({}, {
+    licenseeType: licenseeType
+  });
+}
+
+;
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, null)(TabContent));
 
 /***/ }),
 
@@ -20413,7 +20431,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var AccountProfile = function AccountProfile(props) {
   var licenseeCustId = props.licenseeCustId;
 
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({}),
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null),
       _useState2 = _slicedToArray(_useState, 2),
       data = _useState2[0],
       setData = _useState2[1];
@@ -20430,9 +20448,9 @@ var AccountProfile = function AccountProfile(props) {
     className: "left-side-content account-profile-container"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
     className: "table"
-  }, props.licenseeType === _lib_constants__WEBPACK_IMPORTED_MODULE_6__["licenseeType"].api ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AthenaProfile__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, props.licenseeType === _lib_constants__WEBPACK_IMPORTED_MODULE_6__["licenseeType"].api ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ApiProfile__WEBPACK_IMPORTED_MODULE_5__["default"], {
     data: data
-  }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ApiProfile__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AthenaProfile__WEBPACK_IMPORTED_MODULE_4__["default"], {
     data: data
   })));
 };
@@ -20470,21 +20488,80 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ActivityRecord", function() { return ActivityRecord; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/index.js */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/actions/index.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
-var ActivityRecord = function ActivityRecord() {
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+var ActivityRecord = function ActivityRecord(_ref) {
+  var ibcCustId = _ref.ibcCustId,
+      getActivityRecord = _ref.getActivityRecord;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null),
+      _useState2 = _slicedToArray(_useState, 2),
+      data = _useState2[0],
+      setData = _useState2[1];
+
+  console.log(data);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    if (data === null) {
+      var param = {
+        ibcCustId: ibcCustId
+      };
+      getActivityRecord(param).then(function (result) {
+        return setData(result);
+      });
+    }
+  }, [ibcCustId]);
+
+  var _ref2 = data || {},
+      CreatedDateString = _ref2.CreatedDateString,
+      LastLoginString = _ref2.LastLoginString,
+      LastTxn = _ref2.LastTxn,
+      LastUpdateBAString = _ref2.LastUpdateBAString,
+      BAUpdatedBy = _ref2.BAUpdatedBy,
+      LastUpdateSpecialLevelString = _ref2.LastUpdateSpecialLevelString,
+      SpecialLevelUpdateBy = _ref2.SpecialLevelUpdateBy;
+
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "left-side-content activity-record-container"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
     className: "table"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     className: "first-cell"
-  }, "Created Date"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Last Login"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Last Txn"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Date of Registration"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+  }, "Created Date"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, CreatedDateString)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Last Login"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, LastLoginString)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Last Txn"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, LastTxn)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     colSpan: "2"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "BA Updated By"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Last Updated BA"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "BA Updated By"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, BAUpdatedBy)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Last Updated BA"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, LastUpdateBAString)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     colSpan: "2"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Special Level"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Last Updated Special Level"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null)))));
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Special Level"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, SpecialLevelUpdateBy)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Last Updated Special Level"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, LastUpdateSpecialLevelString)))));
 };
-/* harmony default export */ __webpack_exports__["default"] = (ActivityRecord);
+
+function mapDispatchToProps(dispatch) {
+  var getActivityRecord = _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"].getActivityRecord;
+  return Object(redux__WEBPACK_IMPORTED_MODULE_3__["bindActionCreators"])({
+    getActivityRecord: getActivityRecord
+  }, dispatch);
+}
+
+function mapStateToProps(state) {
+  var ibcCustId = state.ibcCustId;
+  return Object.assign({}, {
+    ibcCustId: ibcCustId
+  });
+}
+
+;
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(ActivityRecord));
 
 /***/ }),
 
@@ -20620,7 +20697,7 @@ var BankInformation = function BankInformation(props) {
 
   var licenseeCustId = props.licenseeCustId;
 
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({}),
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null),
       _useState2 = _slicedToArray(_useState, 2),
       data = _useState2[0],
       setData = _useState2[1];
@@ -20654,14 +20731,17 @@ var BankInformation = function BankInformation(props) {
     className: "table"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     className: "first-cell"
-  }, "Bank Information"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  }, "Bank Information", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "btn-default btn-link btn-icon",
     onClick: function onClick() {
       return setIsShowPlainText(true);
     },
-    onmouseleave: function onmouseleave() {
+    onMouseLeave: function onMouseLeave() {
       return setIsShowPlainText(false);
     }
-  }, "Show"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Bank Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, displayInfo(BankName))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Bank Account Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, displayInfo(AccountName))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Bank Account Number"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, displayInfo(AccountNumber))))));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    class: "material-icons"
+  }, "remove_red_eye"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Bank Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, displayInfo(BankName))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Bank Account Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, displayInfo(AccountName))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Bank Account Number"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, displayInfo(AccountNumber))))));
 };
 
 function mapDispatchToProps(dispatch) {
@@ -20921,7 +21001,7 @@ function mapStateToProps(state) {
 /*!*********************************************************************************!*\
   !*** ./www/js/source/reactpages/Module/PlayerAdmin/account-info/lib/apiInfo.js ***!
   \*********************************************************************************/
-/*! exports provided: lrfAccountProfile, custBettingStatus, lapAccountProfile, lapBankInfo */
+/*! exports provided: lrfAccountProfile, custBettingStatus, lapAccountProfile, lapBankInfo, lrfActivityRecord */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -20930,6 +21010,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "custBettingStatus", function() { return custBettingStatus; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "lapAccountProfile", function() { return lapAccountProfile; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "lapBankInfo", function() { return lapBankInfo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "lrfActivityRecord", function() { return lrfActivityRecord; });
 /* harmony import */ var _constants_configInfo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../constants/configInfo */ "./www/js/source/reactpages/Module/constants/configInfo.js");
 
 var lrfAccountProfile = {
@@ -20947,6 +21028,10 @@ var lapAccountProfile = {
 var lapBankInfo = {
   action: 'PlayerAccountInfo/GetBankInfo',
   type: _constants_configInfo__WEBPACK_IMPORTED_MODULE_0__["systemType"].newAdmin
+};
+var lrfActivityRecord = {
+  action: 'api/PlayerActivityRecord/Index',
+  type: _constants_configInfo__WEBPACK_IMPORTED_MODULE_0__["systemType"].lrf
 };
 
 /***/ }),
@@ -21012,10 +21097,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 var apiInfo = {
-  lrfAccountProfile: {
-    action: 'api/PlayerDetailedInfo/GetAccountProfile',
-    type: _constants_configInfo__WEBPACK_IMPORTED_MODULE_1__["systemType"].lrf
-  },
   custBettingStatus: {
     action: 'api/PlayerDetailedInfo/GetCustomerBettingStatus',
     type: _constants_configInfo__WEBPACK_IMPORTED_MODULE_1__["systemType"].lrf
@@ -21034,18 +21115,22 @@ function () {
   _createClass(PlayerAccountService, [{
     key: "getAccountProfile",
     value: function getAccountProfile(param) {
-      return this.commonService.fetchData(_apiInfo__WEBPACK_IMPORTED_MODULE_2__["lapAccountProfile"].type, _apiInfo__WEBPACK_IMPORTED_MODULE_2__["lapAccountProfile"].action, param).then(function (response) {
-        var data = response.data;
-        return data;
-      }).catch(function (error) {
-        console.log(error.message);
-        return null;
-      });
+      return this._getData(_apiInfo__WEBPACK_IMPORTED_MODULE_2__["lapAccountProfile"].type, _apiInfo__WEBPACK_IMPORTED_MODULE_2__["lapAccountProfile"].action, param);
     }
   }, {
     key: "getBankInfo",
     value: function getBankInfo(param) {
-      return this.commonService.fetchData(_apiInfo__WEBPACK_IMPORTED_MODULE_2__["lapBankInfo"].type, _apiInfo__WEBPACK_IMPORTED_MODULE_2__["lapBankInfo"].action, param).then(function (response) {
+      return this._getData(_apiInfo__WEBPACK_IMPORTED_MODULE_2__["lapBankInfo"].type, _apiInfo__WEBPACK_IMPORTED_MODULE_2__["lapBankInfo"].action, param);
+    }
+  }, {
+    key: "getActivityRecord",
+    value: function getActivityRecord(param) {
+      return this._getData(_apiInfo__WEBPACK_IMPORTED_MODULE_2__["lrfActivityRecord"].type, _apiInfo__WEBPACK_IMPORTED_MODULE_2__["lrfActivityRecord"].action, param);
+    }
+  }, {
+    key: "_getData",
+    value: function _getData(licType, action, param) {
+      return this.commonService.fetchData(licType, action, param).then(function (response) {
         var data = response.data;
         return data;
       }).catch(function (error) {
@@ -21075,16 +21160,18 @@ function () {
 /*!********************************************************************************************!*\
   !*** ./www/js/source/reactpages/Module/PlayerAdmin/account-info/reducers/commonReducer.js ***!
   \********************************************************************************************/
-/*! exports provided: licenseeCustId, licenseeType */
+/*! exports provided: licenseeCustId, ibcCustId, licenseeType */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "licenseeCustId", function() { return licenseeCustId; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ibcCustId", function() { return ibcCustId; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "licenseeType", function() { return licenseeType; });
 /* harmony import */ var _lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
 
 var licenseeCustId = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(null, {});
+var ibcCustId = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(null, {});
 var licenseeType = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(null, {});
 
 /***/ }),
@@ -21099,10 +21186,9 @@ var licenseeType = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["de
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var _subtabReducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./subtabReducer */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/reducers/subtabReducer.js");
-/* harmony import */ var _widgetsReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./widgetsReducer */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/reducers/widgetsReducer.js");
-/* harmony import */ var _widgetsReducer__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_widgetsReducer__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _commonReducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./commonReducer */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/reducers/commonReducer.js");
+/* harmony import */ var _widgetsReducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./widgetsReducer */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/reducers/widgetsReducer.js");
+/* harmony import */ var _widgetsReducer__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_widgetsReducer__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _commonReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./commonReducer */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/reducers/commonReducer.js");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -21110,40 +21196,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(_objectSpread({}, _subtabReducer__WEBPACK_IMPORTED_MODULE_1__, _commonReducer__WEBPACK_IMPORTED_MODULE_3__)));
-
-/***/ }),
-
-/***/ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/reducers/subtabReducer.js":
-/*!********************************************************************************************!*\
-  !*** ./www/js/source/reactpages/Module/PlayerAdmin/account-info/reducers/subtabReducer.js ***!
-  \********************************************************************************************/
-/*! exports provided: accountProfile, bankInfo, activityRecord */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "accountProfile", function() { return accountProfile; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "bankInfo", function() { return bankInfo; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "activityRecord", function() { return activityRecord; });
-/* harmony import */ var _lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
-/* harmony import */ var _actions_types_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/types.js */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/actions/types.js");
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
-
-var accountProfile = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(null, _defineProperty({}, _actions_types_js__WEBPACK_IMPORTED_MODULE_1__["SET_ACCOUNT_PROFILE"], function (prevState, action) {
-  return action.data && _objectSpread({}, action.data);
-}));
-var bankInfo = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(null, _defineProperty({}, _actions_types_js__WEBPACK_IMPORTED_MODULE_1__["SET_BANK_INFO"], function (prevState, action) {
-  return action.data && _objectSpread({}, action.data);
-}));
-var activityRecord = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(null, _defineProperty({}, _actions_types_js__WEBPACK_IMPORTED_MODULE_1__["SET_ACTIVITY_RECORD"], function (prevState, action) {
-  return action.data && _objectSpread({}, action.data);
-}));
+/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(_objectSpread({}, _commonReducer__WEBPACK_IMPORTED_MODULE_2__)));
 
 /***/ }),
 
