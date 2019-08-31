@@ -16,12 +16,14 @@ namespace Fanex.Athena.Api.Report
     using Base.Attributes;
     using DataAccess.Report.Interfaces;
     using Extension.Utility;
+    using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
     using Fanex.Athena.Excel.Base.Entities;
     using Fanex.Athena.Excel.Report;
     using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using Model.Core.MetaModel.Product;
@@ -35,14 +37,23 @@ namespace Fanex.Athena.Api.Report
     {
         private readonly IPlatformWinLossDataAccess _platformWinLossDataAccess;
 
+        private readonly IBalanceUpDataAccess _balanceUpDataAccess;
+
+        private readonly IReportAPIClient _reportAPIClient;
+
         public PlatformWinLossReportController(
             ISessionService sessionService,
             IProductService productService,
             ILanguageService langService,
-            IPlatformWinLossDataAccess platformWinLossDataAccess)
+            IPlatformWinLossDataAccess platformWinLossDataAccess,
+            IReportAPIClient reportAPIClient,
+            IBalanceUpDataAccess balanceUpDataAccess
+            )
             : base(sessionService, productService, langService)
         {
             _platformWinLossDataAccess = platformWinLossDataAccess;
+            _reportAPIClient = reportAPIClient;
+            _balanceUpDataAccess = balanceUpDataAccess;
         }
 
         [HttpPost]
@@ -149,19 +160,12 @@ namespace Fanex.Athena.Api.Report
         private async Task<dynamic> ProcessRequest(PlatformWinLossMetaModel metaModel)
         {
             metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId, metaModel.IsExcludedTestData);
+            metaModel.MoveBetsDay = _balanceUpDataAccess.GetBalanceUp().MoveBetsDay;
+            metaModel.Products = metaModel.ProductOptions.Where(x => x.Status).Select(x => x.Code).ToArray();
 
             if (metaModel.Level == 0)
             {
-                var result = await _platformWinLossDataAccess.GetSummaryData(metaModel);
-                   
-                return metaModel.IsExportExcel ?
-                    ExportExcelSummary(metaModel, result.DataList, result.TotalData) :
-                   (dynamic)new
-                   {
-                       Data = result.DataList,
-                       Total = result.TotalData,
-                       ProductOptions = metaModel.ProductOptions.ToJson()
-                   };
+                return await _reportAPIClient.PostAsync("api/PlatformWinLoss/GetSummaryData", metaModel, SessionService.UserSession.Language);
             }
             else
             {
