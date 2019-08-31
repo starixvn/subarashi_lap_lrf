@@ -37,9 +37,9 @@ namespace Fanex.Athena.Service.StatelessCore
 
             var result = await client.ExecuteTaskAsync(request).ConfigureAwait(false);
 
-            if (result.ResponseStatus != ResponseStatus.Completed)
+            if (result.StatusCode >= System.Net.HttpStatusCode.BadRequest)
             {
-                var errorMessage = $"Http Error ={result.ResponseStatus}\n Error occur when query LGAPI";
+                var errorMessage = $"Http Error = {result.StatusDescription}\n Error occur when query LGAPI";
 
                 throw new ServiceException(errorMessage, nameof(LGAPIClient));
             }
