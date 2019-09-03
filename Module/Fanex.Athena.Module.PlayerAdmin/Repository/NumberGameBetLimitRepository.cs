@@ -74,7 +74,7 @@
                 BetValueMin = reader.ToDecimal("MinBet" + sportSuffix + "_Max"),
                 MaxPerBall = reader.ToDecimal("maxperball" + sportSuffix),
                 MaxPerBallMax = reader.ToDecimal("maxperball" + sportSuffix + "_Max"),
-                SportId = sportId
+                Id = sportId
             };
 
             return sport;
@@ -117,12 +117,12 @@
         {
             foreach (var type in SportTypes)
             {
-                var item = setting.FirstOrDefault(x => x.SportId == type);
+                var item = setting.FirstOrDefault(x => x.Id == type);
 
-                db.SetParameterValue("minbetv" + item.SportId, item?.MinBet);
-                db.SetParameterValue("maxbetv" + item.SportId, item?.MaxBet);
-                db.SetParameterValue("maxpermatchv" + item.SportId, item?.MaxPerMatch);
-                db.SetParameterValue("maxperballv" + item.SportId, item?.MaxPerBall);
+                db.SetParameterValue("minbetv" + item.Id, item?.MinBet);
+                db.SetParameterValue("maxbetv" + item.Id, item?.MaxBet);
+                db.SetParameterValue("maxpermatchv" + item.Id, item?.MaxPerMatch);
+                db.SetParameterValue("maxperballv" + item.Id, item?.MaxPerBall);
             }
         }
     }

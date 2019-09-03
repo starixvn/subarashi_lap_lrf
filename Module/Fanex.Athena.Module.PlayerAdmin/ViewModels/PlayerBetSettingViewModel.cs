@@ -9,7 +9,7 @@
 
         public bool EnableCopy { get; set; }
 
-        public string CopySportId { get; set; }
+        public string CopyId { get; set; }
 
         public IEnumerable<PlayerBetLimit> Data { get; set; }
     }

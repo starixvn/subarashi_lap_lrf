@@ -42,7 +42,7 @@
                             BetValueMax = reader.ToDecimal("MaxBet_Min"),
                             BetValueMin = reader.ToDecimal("MinBet_Max"),
                             BetSettingType = reader.ToString("IBCBetTypeID"),
-                            SportId = reader.ToString("GameTypeID")
+                            Id = reader.ToString("GameTypeID")
                         });
                     }
                 }
@@ -93,7 +93,7 @@
 
             foreach (var item in setting)
             {
-                xmlElementBuilder.Append(string.Format(XMLElement, item.SportId, item.MinBet, item.MaxBet, item.MaxPerMatch));
+                xmlElementBuilder.Append(string.Format(XMLElement, item.Id, item.MinBet, item.MaxBet, item.MaxPerMatch));
             }
 
             return string.Format(XMLPattern, xmlElementBuilder);

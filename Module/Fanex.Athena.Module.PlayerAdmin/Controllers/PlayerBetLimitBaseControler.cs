@@ -56,7 +56,7 @@
         {
             foreach (var item in data)
             {
-                item.BetSettingType = GetSportName(item.SportId);
+                item.BetSettingType = GetSportName(item.Id);
             }
 
             return data;

@@ -56,6 +56,27 @@
             return Enumerable.Empty<PlayerBetLimit>();
         }
 
+        public async Task<IResultInfo> UpdateSettingAsync(PlayerBetLimitUpdateMetaModel metaModel)
+        {
+            const string UspName = "Lrf_CustomerUpdMember_All";
+
+            using (var db = _db.GetObjectDb(UspName))
+            {
+                AddUpdateParameter(db, metaModel);
+
+                await db.ExecuteNonQueryAsync().ConfigureAwait(false);
+
+                var errorCode = db.GetParameterValue("ErrCode");
+                var errorMessage = db.GetParameterValue("ErrMsg");
+
+                return new ResultInfo
+                {
+                    Code = Converter.ToInt(errorCode),
+                    Message = Converter.ToString2(errorMessage)
+                };
+            }
+        }
+
         private static List<PlayerBetLimit> ReadSetting(IDataReader reader, bool isShowMixedSport)
         {
             var sportList = new List<PlayerBetLimit>();
@@ -86,31 +107,10 @@
                 MaxPerMatchMin = reader.ToDecimal("MaxPerMatch" + sportSuffix + "_Min"),
                 BetValueMax = reader.ToDecimal("MaxBet" + sportSuffix + "_Min"),
                 BetValueMin = reader.ToDecimal("MinBet" + sportSuffix + "_Max"),
-                SportId = sportId
+                Id = sportId
             };
 
             return sport;
-        }
-
-        public async Task<IResultInfo> UpdateSettingAsync(PlayerBetLimitUpdateMetaModel metaModel)
-        {
-            const string UspName = "Lrf_CustomerUpdMember_All";
-
-            using (var db = _db.GetObjectDb(UspName))
-            {
-                AddUpdateParameter(db, metaModel);
-
-                await db.ExecuteNonQueryAsync().ConfigureAwait(false);
-
-                var errorCode = db.GetParameterValue("ErrCode");
-                var errorMessage = db.GetParameterValue("ErrMsg");
-
-                return new ResultInfo
-                {
-                    Code = Converter.ToInt(errorCode),
-                    Message = Converter.ToString2(errorMessage)
-                };
-            }
         }
 
         private static void AddUpdateParameter(IObjectDb db, PlayerBetLimitUpdateMetaModel metaModel)
@@ -130,7 +130,7 @@
         {
             foreach (var type in SportTypes)
             {
-                var item = setting.FirstOrDefault(x => x.SportId == type);
+                var item = setting.FirstOrDefault(x => x.Id == type);
                 var sportSuffix = GetSportSuffix(type);
 
                 db.SetParameterValue("minbet" + sportSuffix, item?.MinBet);

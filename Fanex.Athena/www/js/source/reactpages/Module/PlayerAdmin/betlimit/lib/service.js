@@ -2,7 +2,9 @@
 import Site from '@jsroot/lib/site';
 import DataService from '@jsroot/lib/DataService';
 import NumberFormat from '@jsroot/lib/numberFormat';
+import Validatation from './validatation';
 import { BetLimitProduct, BetLimitType } from './constants';
+import Utility from './utility';
 
 const Url = {
     [BetLimitProduct.SB]: 'SportBookBetLimit',
@@ -14,22 +16,76 @@ const Url = {
 };
 
 export default class Service {
-    static showErrorMsg() {
-        alert(LangHelper.getSingleResource('ErrorProcessingMsg'));
+    static getViewData(rawData) {
+        return rawData.map((rawRow) => {
+            let data = {
+                Id: rawRow.Id,
+                BetType: rawRow.BetType,
+                BetSettingType: rawRow.BetSettingType,
+                MinBet: Utility.formatValue(rawRow.MinBet),
+                MaxBet: Utility.formatValue(rawRow.MaxBet),
+                MaxPerMatch: Utility.formatValue(rawRow.MaxPerMatch),
+                MaxPerBall: Utility.formatValue(rawRow.MaxPerBall),
+                BetValueMin: rawRow.BetValueMin,
+                BetValueMax: rawRow.BetValueMax,
+                MaxPerMatchMin: rawRow.MaxPerMatchMin,
+                MaxPerMatchMax: rawRow.MaxPerMatchMax,
+                MaxPerBallMax: rawRow.MaxPerBallMax
+            };
+
+            data.OriginalMinBet = data.MinBet;
+            data.OriginalMaxBet = data.MaxBet;
+            data.OriginalMaxPerMatch = data.MaxPerMatch;
+            data.OriginalMaxPerBall = data.MaxPerBall;
+
+            return data;
+        });
     }
 
-    static getConfirmationMsg(productId) {
-        return LangHelper.getSingleResource('UpdateSportsbookBetSettings');
+    static getSubmitRowData(row) {
+        return {
+            Id: row.Id,
+            BetType: row.BetType,
+            BetSettingType: row.BetSettingType,
+            MinBet: Utility.getValueAsNumber(row.MinBet),
+            MaxBet: Utility.getValueAsNumber(row.MaxBet),
+            MaxPerMatch: Utility.getValueAsNumber(row.MaxPerMatch),
+            MaxPerBall: Utility.getValueAsNumber(row.MaxPerBall),
+            IsUpdated: row.MinBet !== row.OriginalMinBet
+                || row.MaxBet !== row.OriginalMaxBet
+                || row.MaxPerMatch !== row.OriginalMaxPerMatch
+                || row.MaxPerBall !== row.OriginalMaxPerBall
+        };
     }
 
-    static formatValue(value) {
-        return NumberFormat.format(value, 2, false);
+    static getSubmitData(data) {
+        const submitData = [];
+
+        for (let i = 0; i < data.length; i++) {
+            const row = data[i];
+            const currentValue = Service.getSubmitRowData(row);
+            const invalidData = Validatation.validate(currentValue, row);
+
+            if (invalidData !== null) {
+                return {
+                    IsValid: false,
+                    Data: invalidData
+                };
+            }
+
+            submitData.push(currentValue);
+        }
+
+        return {
+            IsValid: true,
+            Data: submitData
+        };
     }
 
-    static getValueAsNumber(text) {
-        const number = parseFloat(text.replace(/,/g, ''));
+    static validate(row) {
+        const currentValue = Service.getSubmitRowData(row);
 
-        return !isNaN(number) && isFinite(number) ? number : NaN;
+        return Validatation.validate(currentValue, row);
     }
 
     static getData(param, processDataFunc, successCallBack, errorHandle) {
@@ -39,7 +95,7 @@ export default class Service {
                 const { Data, ...setting } = response.data;
 
                 if (Data && Data.length > 0) {
-                    processDataFunc && processDataFunc(Data, setting);
+                    processDataFunc && processDataFunc(Service.getViewData(Data), setting);
                 }
                 else {
                     processDataFunc && processDataFunc([], {});
@@ -69,94 +125,5 @@ export default class Service {
             .catch(error => {
                 errorHandle && errorHandle();
             });
-    }
-
-    static validate(current, original) {
-        const { MinBet, MaxBet, MaxPerMatch } = current;
-
-        if (isNaN(MinBet)) {
-            return {
-                type: BetLimitType.MinBet,
-                msg: LangHelper.getSingleResource('IncorrectMinBet')
-            };
-        }
-        if (isNaN(MaxBet)) {
-            return {
-                type: BetLimitType.MaxBet,
-                msg: LangHelper.getSingleResource('IncorrectMaxBet')
-            };
-        }
-        if (isNaN(MaxPerMatch)) {
-            return {
-                type: BetLimitType.MaxPerMatch,
-                msg: LangHelper.getSingleResource('IncorrectMaxPerMatch')
-            };
-        }
-
-        if (original.BetValueMin > 0 && MinBet < original.BetValueMin) {
-            return {
-                type: BetLimitType.MinBet,
-                msg: LangHelper.getSingleResource('MinBetGreaterThanOrEqual') + ' ' + original.BetValueMin
-            };
-        }
-
-        if (original.BetValueMax > 0 && MaxBet > original.BetValueMax) {
-            return {
-                type: BetLimitType.MaxBet,
-                msg: LangHelper.getSingleResource('MaxBetLessThanOrEqual') + ' ' + original.BetValueMax
-            };
-        }
-
-        if (original.MaxPerMatchMax > 0 && MaxPerMatch > original.MaxPerMatchMax) {
-            return {
-                type: BetLimitType.MaxPerMatch,
-                msg: LangHelper.getSingleResource('MaxBetMatchMoreThanOrEqual') + ' ' + original.MaxPerMatchMax
-            };
-        }
-
-        if (original.MaxPerMatchMin > 0 && MaxPerMatch < original.MaxPerMatchMin) {
-            return {
-                type: BetLimitType.MaxPerMatch,
-                msg: LangHelper.getSingleResource('MaxBetMatchLessThanOrEqual') + ' ' + original.MaxPerMatchMin
-            };
-        }
-
-        if (MinBet > MaxBet) {
-            return {
-                type: BetLimitType.MinBet,
-                msg: LangHelper.getSingleResource('MinBetCanNotGreaterThanMaxBet') + ' ' + MaxBet
-            };
-        }
-
-        if (MaxBet > MaxPerMatch) {
-            return {
-                type: BetLimitType.MaxBet,
-                msg: LangHelper.getSingleResource('MaxBetCanNotGreaterThanMaxPerMatch') + ' ' + MaxPerMatch
-            };
-        }
-    }
-
-    static validateNumberGame(current, original) {
-        const result = Service.validate(current, original);
-
-        if (result) {
-            return result;
-        }
-
-        const { MaxPerBall } = current;
-
-        if (isNaN(MaxPerBall)) {
-            return {
-                type: BetLimitType.MaxPerBall,
-                msg: LangHelper.getSingleResource('IncorrectMaxPerBall')
-            };
-        }
-
-        if (original.MaxPerBallMax > 0 && MaxPerBall > original.MaxPerBallMax) {
-            return {
-                type: BetLimitType.MaxPerBall,
-                msg: LangHelper.getSingleResource('MaxPerBallLessThanOrEqual') + ' ' + original.MaxPerBallMax
-            };
-        }
     }
 }

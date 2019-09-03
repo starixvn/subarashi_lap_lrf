@@ -64,7 +64,7 @@
                             BetValueMax = reader.ToDecimal("maxbetmax"),
                             MaxPerMatch = reader.ToDecimal("maxpermatch"),
                             MaxPerMatchMax = reader.ToDecimal("maxpermatchmax"),
-                            SportId = reader.ToString("sporttype"),
+                            Id = reader.ToString("sporttype"),
                             BetType = reader.ToInt("bettype")
                         });
                     }
@@ -138,9 +138,9 @@
 
             foreach (var item in setting)
             {
-                if (sports.Contains(item.SportId))
+                if (sports.Contains(item.Id))
                 {
-                    xmlElementBuilder.Append(string.Format(XMLElement, item.SportId, item.BetType, item.MinBet, item.MaxBet, item.MaxPerMatch));
+                    xmlElementBuilder.Append(string.Format(XMLElement, item.Id, item.BetType, item.MinBet, item.MaxBet, item.MaxPerMatch));
                 }
             }
 

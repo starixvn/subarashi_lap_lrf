@@ -2,7 +2,7 @@
 {
     public class PlayerBetLimit
     {
-        public string SportId { get; set; }
+        public string Id { get; set; }
 
         public int BetType { get; set; }
 

@@ -46,8 +46,8 @@
                 Data = AddSettingTypeName(data),
                 //Editable = isEditable,
                 Editable = true,
-                CopySportId = copySportId,
-                EnableCopy = data.Any(x => x.SportId == copySportId)
+                CopyId = copySportId,
+                EnableCopy = data.Any(x => x.Id == copySportId)
             };
 
             return Json(viewModel);

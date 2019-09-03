@@ -3,18 +3,14 @@ export default class NumberFormat {
         return this.format(value, 2)
     }
 
-    static format(value, digits = 0, alwaysShowDecimal = true) {
+    static format(value, digits = 0) {
         if (typeof value !== "number" || isNaN(value)) {
             return "";
         }
 
         const roundedValue = this.round(value, digits);
 
-        if (alwaysShowDecimal) {
-            return roundedValue.toFixed(digits).replace(/(\d)(?=(\d{3})+(\.|$))/g, "$1,");
-        }
-
-        return roundedValue.toString().replace(/(\d)(?=(\d{3})+(\.|$))/g, "$1,");
+        return roundedValue.toFixed(digits).replace(/(\d)(?=(\d{3})+(\.|$))/g, "$1,");
     }
 
     static round(value, digits) {
@@ -23,5 +19,9 @@ export default class NumberFormat {
         const rounded = Number(Math.round(absoluteValue + 'e' + digits) + 'e-' + digits);
 
         return sign * rounded;
+    }
+
+    static parseToString(number) {
+        return number.toString().replace(/(\d)(?=(\d{3})+(\.|$))/g, "$1,");
     }
 }

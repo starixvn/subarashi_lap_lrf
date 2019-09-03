@@ -26,8 +26,7 @@ export default class Overlay extends Component {
         closeOnOutsideClick: PropTypes.bool,
         isOpening: PropTypes.bool,
         onOpen: PropTypes.func,
-        onClose: PropTypes.func,
-        excludeOutSideComponents: PropTypes.arrayOf(PropTypes.object)
+        onClose: PropTypes.func
     }
 
     static defaultProps = {
@@ -36,7 +35,7 @@ export default class Overlay extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (this.props.isOpening !== prevProps.isOpening && this.state.isOpening !== this.props.isOpening) {
+        if (this.props.isOpening !== prevProps.isOpening) {
             const { onOpen } = this.props;
             this.props.isOpening && onOpen && onOpen();
             this.setState({ isOpening: this.props.isOpening });
@@ -73,8 +72,7 @@ export default class Overlay extends Component {
     }
 
     _handleClickOutSide = (event) => {
-        const clickOutside = !((this.containerElement && this.containerElement.contains(event.target))
-            || (this.props.excludeOutSideComponents && this.props.excludeOutSideComponents.indexOf(event.target) >= 0));
+        const clickOutside = this.containerElement && !this.containerElement.contains(event.target);
 
         if (clickOutside && this.state.isOpening) {
             this._close();
