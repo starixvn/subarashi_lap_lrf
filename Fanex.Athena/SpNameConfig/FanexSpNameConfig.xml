@@ -17,4 +17,5 @@
   <SpNameConfig Environment="DEV,LOCAL,SIT,UAT" SpName="Lrf_LicenseeProductByBetLimitSel" EnvironmentText="_xtest"></SpNameConfig>
 
   <SpNameConfig Environment="DEV,LOCAL,SIT,UAT" SpName="Lrf_CustomerLoginInfo" EnvironmentText="_xtest"></SpNameConfig>
+  <SpNameConfig Environment="DEV,LOCAL,SIT,UAT" SpName="Lrf_PlayerBettingStatistics" EnvironmentText="_UAT3"></SpNameConfig>
 </Root>

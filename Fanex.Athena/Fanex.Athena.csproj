@@ -975,7 +975,6 @@
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\FormFilter.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\grid\Base\SettingContent.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\grid\SportSetting\SettingGrid.jsx" />
-    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\grid\GameSetting\SettingGrid.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\index.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\lib\constants.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\lib\validatation.js" />
@@ -5666,6 +5665,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Logs\" />
+    <Folder Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\grid\GameSetting\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="www\js\source\reactpages\pages\subsidiaryperformance\components\index.jsx" />

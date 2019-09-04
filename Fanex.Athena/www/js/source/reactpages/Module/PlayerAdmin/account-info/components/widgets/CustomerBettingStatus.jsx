@@ -3,32 +3,26 @@ import { connect } from 'react-redux';
 import { ActionCreators } from '../../actions/index.js';
 import { bindActionCreators } from 'redux';
 
+import NumberFormat from '@jsroot/lib/numberFormat';
+
 import { Doughnut } from 'react-chartjs-2';
 
-function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+const backgroundColorList = ['#36A2EB', '#F15D21', '#97A9B3', '#E8AE1B']
+const defaultDataSetItem = {
+    data: [],
+    backgroundColor: backgroundColorList
 }
 const defaultChartData = {
     labels: ['Won', 'Lose', 'Draw', 'Cancelled'],
-    datasets: [{
-        data: [getRandomInt(50, 200), getRandomInt(100, 150), getRandomInt(150, 250), getRandomInt(150, 250)],
-        backgroundColor: ['#36A2EB', '#F15D21', '#97A9B3', '#E8AE1B']
-    }]
+    datasets: []
 }
 
 const legendOpts = {
     display: true,
-    position: 'bottom',
-    labels: {
-        text: 'aa'
-    }
+    position: 'bottom'
 };
 
 const option = {
-    onProgress: function () {
-        const chart = this.chart;
-        const ctx = chart.ctx;
-    },
     animation: {
         onComplete: function () {
             const self = this;
@@ -69,11 +63,11 @@ const option = {
 
 export const CustomerBettingStatus = (props) => {
     const [data, setData] = useState(null);
-    const [chartData, setChartData] = useState({ ...defaultChartData });
 
     useEffect(() => {
         const fetchData = () => {
-            const params = {};
+            const { ibcCustId } = props;
+            const params = { ibcCustId };
             props.getCustomerBettingStatus(params)
                 .then(response => {
                     setData(response.data);
@@ -86,7 +80,24 @@ export const CustomerBettingStatus = (props) => {
         fetchData();
     }, []);
 
-    return data && (
+    if (!data) {
+        return null;
+    }
+
+    const { WonTicketCount, LoseTicketCount, DrawTicketCount, CancelledTicketCount } = data;
+    const dataSetItem = {
+        ...defaultDataSetItem,
+        data: [WonTicketCount, LoseTicketCount, DrawTicketCount, CancelledTicketCount]
+    }
+    const chartData = {
+        ...defaultChartData,
+        datasets: [dataSetItem]
+    }
+
+    const { Margin, AverageBetSize, Winnings, Loss, NetWinLoss } = data;
+    const marginPercent = NumberFormat.round(Margin, 2) * 100;
+
+    return (
         <div className="panel">
             <div className="panel-header">
                 Player Betting Status
@@ -99,23 +110,23 @@ export const CustomerBettingStatus = (props) => {
                     <p>Based on Sportsbook data</p>
                     <div className="row">
                         <div className="col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4">Margin:</div>
-                        <div className="col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4">36.84%</div>
+                        <div className="col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4">{NumberFormat.formatDecimal(marginPercent)}%</div>
                     </div>
                     <div className="row">
                         <div className="col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4">Average bet size:</div>
-                        <div className="col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4">158.33</div>
+                        <div className="col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4">{NumberFormat.formatDecimal(AverageBetSize)}</div>
                     </div>
                     <div className="row">
                         <div className="col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4">Winnings:</div>
-                        <div className="col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4">650.00</div>
+                        <div className="col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4">{NumberFormat.formatDecimal(Winnings)}</div>
                     </div>
                     <div className="row">
                         <div className="col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4">Loss:</div>
-                        <div className="col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4">-300.00</div>
+                        <div className="col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4">{NumberFormat.formatDecimal(Loss)}</div>
                     </div>
                     <div className="row">
                         <div className="col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4">Net Win Loss:</div>
-                        <div className="col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4">350.00</div>
+                        <div className="col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4">{NumberFormat.formatDecimal(NetWinLoss)}</div>
                     </div>
                 </div>
             </div>
@@ -129,7 +140,8 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-    return Object.assign({}, {});
+    const { ibcCustId } = state;
+    return Object.assign({}, { ibcCustId });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CustomerBettingStatus);

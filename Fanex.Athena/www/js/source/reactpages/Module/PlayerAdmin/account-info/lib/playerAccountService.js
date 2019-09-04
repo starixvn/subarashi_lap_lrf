@@ -1,10 +1,6 @@
 import FactoryCommonService from '../../../lib/factoryCommonService';
 import { systemType } from '../../../constants/configInfo';
-import { lapAccountProfile, lapBankInfo, lrfActivityRecord } from './apiInfo';
-
-const apiInfo = {
-    custBettingStatus: { action: 'api/PlayerDetailedInfo/GetCustomerBettingStatus', type: systemType.lrf }
-}
+import { lapAccountProfile, lapBankInfo, lrfActivityRecord, custBettingStatus } from './apiInfo';
 
 export default class PlayerAccountService {
     constructor() {
@@ -37,7 +33,6 @@ export default class PlayerAccountService {
     }
 
     getCustomerBettingStatus(param) {
-        const { custBettingStatus } = apiInfo;
         const params = {...param };
 
         return this.commonService.fetchData(custBettingStatus.type, custBettingStatus.action, params);

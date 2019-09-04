@@ -68,7 +68,9 @@
   <ItemGroup>
     <Compile Include="DTO\PlayerActivityRecord.cs" />
     <Compile Include="DTO\Player.cs" />
+    <Compile Include="DTO\PlayerBettingStatistics.cs" />
     <Compile Include="MetaModel\PlayerActivityRecordMetaModel.cs" />
+    <Compile Include="MetaModel\PlayerBettingStatisticsMetaModel.cs" />
     <Compile Include="MetaModel\PlayerListBaseMetaModel.cs" />
     <Compile Include="MetaModel\PlayerUpdatingBaseMetaModel.cs" />
     <Compile Include="MetaModel\PlayerListByIdMetaModel.cs" />
@@ -78,6 +80,7 @@
     <Compile Include="MetaModel\SpecialLevelUpdatingMetaModel.cs" />
     <Compile Include="PlayerActivityRecordController.cs" />
     <Compile Include="PlayerBaStatusController.cs" />
+    <Compile Include="PlayerBettingStatisticsController.cs" />
     <Compile Include="PlayerDetailedInfoController.cs" />
     <Compile Include="PlayerListController.cs" />
     <Compile Include="PlayerLogController.cs" />
@@ -86,11 +89,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Interfaces\IPlayerActivityRecordService.cs" />
     <Compile Include="Services\Interfaces\IPlayerBaStatusService.cs" />
+    <Compile Include="Services\Interfaces\IPlayerBettingStatisticsService.cs" />
     <Compile Include="Services\Interfaces\IPlayerListService.cs" />
     <Compile Include="Services\Interfaces\IPlayerOddsGroupService.cs" />
     <Compile Include="Services\Interfaces\IPlayerSpecialLevelService.cs" />
     <Compile Include="Services\PlayerActivityRecordService.cs" />
     <Compile Include="Services\PlayerBaStatusService.cs" />
+    <Compile Include="Services\PlayerBettingStatisticsService.cs" />
     <Compile Include="Services\PlayerListService.cs" />
     <Compile Include="Services\PlayerOddsGroupService.cs" />
     <Compile Include="Services\PlayerSpecialLevelService.cs" />

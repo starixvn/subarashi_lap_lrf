@@ -1,8 +1,6 @@
 import { systemType } from '../../../constants/configInfo';
 
-export const lrfAccountProfile = { action: 'api/PlayerDetailedInfo/GetAccountProfile', type: systemType.lrf };
-
-export const custBettingStatus = { action: 'api/PlayerDetailedInfo/GetCustomerBettingStatus', type: systemType.lrf };
+export const custBettingStatus = { action: 'api/PlayerBettingStatistics/GetData', type: systemType.lrf };
 
 export const lapAccountProfile = { action: 'PlayerAccountInfo/GetAccountProfile', type: systemType.newAdmin };
 
