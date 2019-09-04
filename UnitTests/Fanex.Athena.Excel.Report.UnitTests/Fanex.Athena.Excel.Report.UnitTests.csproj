@@ -123,8 +123,6 @@
     <Compile Include="TestableClasses\WeeklyLiveMatchExcelTestable.cs" />
     <Compile Include="TestableClasses\TurnoverExcelTestable.cs" />
     <Compile Include="ThirdPartyWinLossExcelTest.cs" />
-    <Compile Include="PlatformWinLossSummaryExcelTest.cs" />
-    <Compile Include="PlatformWinLossMemberExcelTest.cs" />
     <Compile Include="CustomerWinLossExcelTest.cs" />
     <Compile Include="CustomerTurnoverExcelTest.cs" />
     <Compile Include="CustomerPendingFundsExcelTest.cs" />
@@ -133,8 +131,6 @@
     <Compile Include="CashOutWinLossExcelTest.cs" />
     <Compile Include="LiveReportExcelTest.cs" />
     <Compile Include="TestableClasses\ThirdPartyWinLossExcelTestable.cs" />
-    <Compile Include="TestableClasses\PlatformWinLossSummaryExcelTestable.cs" />
-    <Compile Include="TestableClasses\PlatformWinLossMemberExcelTestable.cs" />
     <Compile Include="TestableClasses\LiveReportExcelTestable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestableClasses\AgCasinoBalanceExcelTestable.cs" />

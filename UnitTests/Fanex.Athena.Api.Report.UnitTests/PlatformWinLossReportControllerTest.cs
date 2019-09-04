@@ -5,27 +5,21 @@
     using System.Threading.Tasks;
     using System.Web.Http;
     using System.Web.Http.Hosting;
-    using System.Web.Http.Results;
     using Base.UnitTests;
-    using DataAccess.Report.Interfaces;
-    using Extension.Utility;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DataDomain;
     using Model.Core.MetaModel.Product;
-    using Model.Core.ResultModel;
-    using Model.Report.DTO;
     using Model.Report.MetaModel;
     using NPOI.SS.UserModel;
     using NSubstitute;
     using NUnit.Framework;
     using Report;
-    using Resources;
 
-    public partial class PlatformWinLossReportControllerTest : BaseApiControllerHelperTest
+    public class PlatformWinLossReportControllerTest : BaseApiControllerHelperTest
     {
-        private const int ExpectedCustomerComm = 999;
-
         private PlatformWinLossReportController _controller;
-        private IPlatformWinLossDataAccess _dataAccess;
+
+        private IReportAPIClient _reportAPIClient;
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
@@ -34,8 +28,8 @@
 
             MockSessionData();
 
-            _dataAccess = Substitute.For<IPlatformWinLossDataAccess>();
-            _controller = Substitute.ForPartsOf<PlatformWinLossReportController>(SessionService, ProductService, LangService, _dataAccess);
+            _reportAPIClient = Substitute.For<IReportAPIClient>();
+            _controller = Substitute.ForPartsOf<PlatformWinLossReportController>(SessionService, ProductService, LangService, _reportAPIClient);
             _controller.Request = new HttpRequestMessage();
             _controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
             _controller.When(x => x.ExcelStream(Arg.Any<IWorkbook>(), Arg.Any<string>())).DoNotCallBase();
@@ -46,43 +40,73 @@
         {
             base.FixtureTearDown();
 
-            _dataAccess = null;
+            _reportAPIClient = null;
             _controller = null;
         }
 
-        [TestCase(2)]
-        public async Task Index_WhenCallWithLevel0_ReturnCorrectData(int numberOfRow)
+        [Test]
+        public async Task Index_WhenCallWithLevel0_CallCorrectApi()
         {
             // Arrange
-            SetUpDataAccessGetSummaryData();
+            var metaModel = CreateMetaModel(0);
 
             // Action
-            var result = await _controller.Index(CreateMetaModel(0));
+            var result = await _controller.Index(metaModel);
 
             // Assert
             Assert.Multiple(async () =>
             {
-                await _dataAccess.ReceivedWithAnyArgs().GetSummaryData(Arg.Any<PlatformWinLossMetaModel>());
-                Assert.That(result.Data.Count, Is.EqualTo(numberOfRow));
-                Assert.That(result.Total.CustomerComm, Is.EqualTo(ExpectedCustomerComm));
+                await _reportAPIClient.Received().PostAsync<dynamic>("api/PlatformWinLoss/GetSummaryData", metaModel, SessionLanguage);
             });
         }
 
         [Test]
-        public async Task Index_WhenCallWithLevel1_ReturnCorrectData()
+        public async Task Index_WhenCallWithLevel1_CallCorrectApi()
         {
             // Arrange
-            StubDataAccessGetMemberData();
+            var metaModel = CreateMetaModel(1);
 
             // Action
-            var result = await _controller.Index(CreateMetaModel(1));
+            var result = await _controller.Index(metaModel);
 
             // Assert
             Assert.Multiple(async () =>
             {
-                await _dataAccess.ReceivedWithAnyArgs().GetMemberData(Arg.Any<PlatformWinLossMetaModel>(), Arg.Any<IDictionary<int, string>>());
-                Assert.That(result.Data.Count, Is.EqualTo(3));
-                Assert.That(result.Total.CustomerComm, Is.EqualTo(ExpectedCustomerComm));
+                await _reportAPIClient.Received().PostAsync<dynamic>("api/PlatformWinLoss/GetMemberData", metaModel, SessionLanguage);
+            });
+        }
+
+        [Test]
+        public async Task Index_WhenExportWithLevel0_CallCorrectApi()
+        {
+            // Arrange
+            const string FileName = "PlatformWinLossSummary.xls";
+            var metaModel = CreateMetaModel(0, true);
+
+            // Action
+            var result = await _controller.Index(metaModel);
+
+            // Assert
+            Assert.Multiple(async () =>
+            {
+                await _reportAPIClient.Received().PostFileAsync("api/PlatformWinLoss/ExportSummaryData", metaModel, FileName, SessionLanguage);
+            });
+        }
+
+        [Test]
+        public async Task Index_WhenExportWithLevel1_CallCorrectApi()
+        {
+            // Arrange
+            const string FileName = "PlatformWinLossMember.xls";
+            var metaModel = CreateMetaModel(1, true);
+
+            // Action
+            var result = await _controller.Index(metaModel);
+
+            // Assert
+            Assert.Multiple(async () =>
+            {
+                await _reportAPIClient.Received().PostFileAsync("api/PlatformWinLoss/ExportMemberData", metaModel, FileName, SessionLanguage);
             });
         }
 
@@ -107,57 +131,6 @@
                     }
                 }
             };
-        }
-
-        private SortableList<PlatformWinLossMember> StubDataAccessGetMemberData()
-        {
-            var data1 = new PlatformWinLossMember { Index = 5, AmtDueToBA = 5 };
-            var data2 = new PlatformWinLossMember { Index = 2, AmtDueToBA = 2 };
-            var data3 = new PlatformWinLossMember { Index = 3, AmtDueToBA = 3 };
-
-            var memberData = new SortableList<PlatformWinLossMember>
-            {
-                data1,
-                data2,
-                data3
-            };
-
-            var result = new SortableReportResultModel<PlatformWinLossMember>
-            {
-                TotalData = new PlatformWinLossMember
-                {
-                    CustomerComm = ExpectedCustomerComm
-                },
-                DataList = memberData
-            };
-
-            _dataAccess.GetMemberData(Arg.Any<PlatformWinLossMetaModel>(), UserCurrencyList).ReturnsForAnyArgs(result);
-
-            return new SortableList<PlatformWinLossMember>
-            {
-                data1,
-                data2,
-                data3
-            };
-        }
-
-        private void SetUpDataAccessGetSummaryData()
-        {
-            var summaryData = new List<PlatformWinLossSummary>
-            {
-                new PlatformWinLossSummary(),
-                new PlatformWinLossSummary()
-            };
-
-            _dataAccess.GetSummaryData(Arg.Any<PlatformWinLossMetaModel>()).ReturnsForAnyArgs(
-                new ReportResultModel<PlatformWinLossSummary>
-                {
-                    TotalData = new PlatformWinLossSummary
-                    {
-                        CustomerComm = ExpectedCustomerComm
-                    },
-                    DataList = summaryData
-                });
         }
     }
 }
