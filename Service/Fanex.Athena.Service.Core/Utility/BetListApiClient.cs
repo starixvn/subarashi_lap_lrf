@@ -42,10 +42,10 @@
             }
             var result = await client.ExecuteTaskAsync(request).ConfigureAwait(false);
 
-            if(result.StatusCode >= System.Net.HttpStatusCode.BadRequest)
+            if (result.ResponseStatus != ResponseStatus.Completed)
             {
-                var errorMessage = $"Http Error = {result.StatusDescription}\n Error occur when query betlist data";
-                throw new ServiceException(errorMessage, "BetListApiClient");
+                var errorMessage = $"Http Error ={result.ErrorMessage}\n Error occur when query betlist data";
+                throw new InvalidOperationException(errorMessage, result.ErrorException);
             }
 
             return await codeBlock(result).ConfigureAwait(false);

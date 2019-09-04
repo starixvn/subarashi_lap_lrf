@@ -5,9 +5,8 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Fanex.Athena.Extension.Utility;
-using Fanex.Athena.Service.Core.Exception;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
-
+using Newtonsoft.Json;
 using RestSharp;
 
 namespace Fanex.Athena.Service.StatelessCore
@@ -16,7 +15,7 @@ namespace Fanex.Athena.Service.StatelessCore
     {
         private const string KEYNAME = "AUTH_TOKEN";
 
-        private const string LANGUAGEKEY = "Language";
+        private const string LANGUAGEKEY = "Accept-Language";
 
         private readonly IAppSettings _appSetting;
 
@@ -24,7 +23,8 @@ namespace Fanex.Athena.Service.StatelessCore
         {
             _appSetting = appSettings;
         }
-        public async Task<HttpResponseMessage> PostAsync(string path, object value, string language)
+
+        private async Task<T> HandleAsync<T>(string path, object value, string language, Func<IRestResponse, Task<T>> codeBlock)
         {
             var client = new RestClient
             {
@@ -39,29 +39,44 @@ namespace Fanex.Athena.Service.StatelessCore
 
             var result = await client.ExecuteTaskAsync(request).ConfigureAwait(false);
 
-            if (result.StatusCode >= HttpStatusCode.BadRequest)
+            if (result.ResponseStatus != ResponseStatus.Completed)
             {
-                var errorMessage = $"Http Error = {result.StatusDescription}\n Error occur when query Report API";
-
-                throw new ServiceException(errorMessage, nameof(ReportAPIClient));
+                var errorMessage = $"Http Error ={result.ErrorMessage}\n Error occur when query report data";
+                throw new InvalidOperationException(errorMessage, result.ErrorException);
             }
 
-            var respone = new HttpResponseMessage(result.StatusCode)
-            {
-                Content = new StreamContent(new MemoryStream(result.RawBytes)),
+            return await codeBlock(result).ConfigureAwait(false);
+        }
 
-            };
-
-            if (!string.IsNullOrEmpty(result.ContentType))
-            {
-                var contentType = result.ContentType.Split(';')[0];
-                if (!string.IsNullOrEmpty(contentType))
+        public async Task<T> PostAsync<T>(string path, object value, string language)
+        {
+            return await HandleAsync<T>(
+                path,
+                value,
+                language,
+                async (x) =>
                 {
-                    respone.Content.Headers.ContentType = new MediaTypeHeaderValue(contentType);
-                }
-            }
+                    return await Task.FromResult(JsonConvert.DeserializeObject<T>(x.Content)).ConfigureAwait(false);
+                }).ConfigureAwait(false);
+        }
 
-            return respone;
+        public async Task<HttpResponseMessage> PostFileAsync(string path, object value, string fileName, string language)
+        {
+            return await HandleAsync<HttpResponseMessage>(path, value, language, async (x) =>
+            {
+                var result = new HttpResponseMessage(HttpStatusCode.OK)
+                {
+                    Content = new ByteArrayContent(x.RawBytes),
+
+                };
+                result.Headers.TransferEncodingChunked = true;
+                result.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+                {
+                    FileName = fileName
+                };
+
+                return await Task.FromResult(result).ConfigureAwait(false);
+            }).ConfigureAwait(false);
         }
     }
 }

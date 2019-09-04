@@ -5,6 +5,8 @@
 
     public interface IReportAPIClient
     {
-        Task<HttpResponseMessage> PostAsync(string path, object value, string language);
+        Task<T> PostAsync<T>(string path, object value, string language);
+
+        Task<HttpResponseMessage> PostFileAsync(string path, object value, string fileName, string language);
     }
 }
