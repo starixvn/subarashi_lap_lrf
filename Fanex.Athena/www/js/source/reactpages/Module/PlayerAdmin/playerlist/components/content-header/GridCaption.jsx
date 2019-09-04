@@ -39,10 +39,11 @@ export class GridCaption extends React.Component {
     _buildLeftPart() {
         const { selectedPlayer } = this.props;
         if (selectedPlayer) {
+            const {userName, currency} = selectedPlayer;
             return (
                 <>
                     <span className="link" onClick={() => this.props.setSelectedPlayer(null)}>{LangHelper.getSingleResource('PreviousSearchResult')}</span>
-                    <span><i className="chevron right icon-separator"></i> Player: {selectedPlayer.userName} ({selectedPlayer.currency})</span>
+                    <span><i className="chevron right icon-separator"></i> Player: {userName} {currency && `(${currency})`}</span>
                 </>
             )
         }

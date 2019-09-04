@@ -49,7 +49,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
                     result.DrawTicketCount = Convert.ToInt32(reader["Draw"]);
                     result.CancelledTicketCount = Convert.ToInt32(reader["Cancelled"]);
 
-                    if (reader.NextResult())
+                    if (reader.NextResult() && reader.Read())
                     {
                         result.Margin = Convert.ToDecimal(reader["Margin"]);
                         result.AverageBetSize = Convert.ToDecimal(reader["AverageBetSize"]);

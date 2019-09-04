@@ -19,7 +19,8 @@ const defaultChartData = {
 
 const legendOpts = {
     display: true,
-    position: 'bottom'
+    position: 'bottom',
+    labels:{}
 };
 
 const option = {
@@ -80,29 +81,21 @@ export const CustomerBettingStatus = (props) => {
         fetchData();
     }, []);
 
-    if (!data) {
-        return null;
-    }
+    const renderContent = () => {
+        const { WonTicketCount, LoseTicketCount, DrawTicketCount, CancelledTicketCount } = data;
+        const dataSetItem = {
+            ...defaultDataSetItem,
+            data: [WonTicketCount, LoseTicketCount, DrawTicketCount, CancelledTicketCount]
+        }
+        const chartData = {
+            ...defaultChartData,
+            datasets: [dataSetItem]
+        }
+        const { Margin, AverageBetSize, Winnings, Loss, NetWinLoss } = data;
+        const marginPercent = NumberFormat.round(Margin, 2) * 100;
 
-    const { WonTicketCount, LoseTicketCount, DrawTicketCount, CancelledTicketCount } = data;
-    const dataSetItem = {
-        ...defaultDataSetItem,
-        data: [WonTicketCount, LoseTicketCount, DrawTicketCount, CancelledTicketCount]
-    }
-    const chartData = {
-        ...defaultChartData,
-        datasets: [dataSetItem]
-    }
-
-    const { Margin, AverageBetSize, Winnings, Loss, NetWinLoss } = data;
-    const marginPercent = NumberFormat.round(Margin, 2) * 100;
-
-    return (
-        <div className="panel">
-            <div className="panel-header">
-                Player Betting Status
-            </div>
-            <div className="row panel-body">
+        return (
+            <div className="row">
                 <div className="col-12 col-md-7 col-sm-7 col-lg-7 col-xl-7 chart-group">
                     <Doughnut data={chartData} legend={legendOpts} options={option} />
                 </div>
@@ -129,6 +122,17 @@ export const CustomerBettingStatus = (props) => {
                         <div className="col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4">{NumberFormat.formatDecimal(NetWinLoss)}</div>
                     </div>
                 </div>
+            </div>
+        )
+    }
+
+    return (
+        <div className="panel">
+            <div className="panel-header">
+                Player Betting Status
+            </div>
+            <div className="panel-body">
+                {data && data.HasData ? renderContent() : (<p className="center-align">There is no Sportsbook data.</p>)}
             </div>
         </div>
     );

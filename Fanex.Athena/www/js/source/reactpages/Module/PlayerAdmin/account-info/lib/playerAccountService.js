@@ -23,6 +23,7 @@ export default class PlayerAccountService {
         return this.commonService.fetchData(licType, action, param)
             .then(response => {
                 const { data } = response;
+                console.log(action, data);
 
                 return data;
             })
