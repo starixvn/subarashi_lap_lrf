@@ -8512,6 +8512,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
             gridControl.level = 0;
             const data = getSubmitData();
+            const productOption = getProductOptions(data);
 
             getData(data, Site.resolveClientUrl(PlatformWinLossOption.urlData), function (response) {
                 const submitData = {
@@ -8519,7 +8520,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                     ToDay: data.ToDay,
                     Month: data.Month,
                     Year: data.Year,
-                    ProductOptions: $.parseJSON(response.ProductOptions),
+                    ProductOptions: productOption,
                     DrawFilter: data.DrawFilter,
                     PlatformType: data.PlatformType,
                     CurrencyId: data.CurrencyId,
@@ -8555,7 +8556,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         function bindData(level, response, productOptions) {
             jqGridAdditional.clearGrid('ReportGrid');
 
-            const numOfRow = response.Data.length;
+            const numOfRow = response.dataList.length;
             if (numOfRow === 0) {
                 jqGridAdditional.setNoInfo();
                 return;
@@ -8563,7 +8564,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
             const reportGrid = $('#ReportGrid');
             let onPaging = false;
-            const data = level === 1 ? sortData(response.Data) : response.Data;
+            const data = level === 1 ? sortData(response.dataList) : response.dataList;
 
             const gridOption = PlatformWinLossOption.getGridOption(level, productOptions);
             gridOption.datastr = data;
@@ -8592,7 +8593,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                     $('.ui-jqgrid-ftable').html($('#footer').html());
                 }
                 else {
-                    _me.bindTotal(level, response.Total, response.SummaryTotal);
+                    _me.bindTotal(level, response.totalData);
                     $('#footer').html($('.ui-jqgrid-ftable').html());
                 }
 
@@ -8610,7 +8611,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
             /*group header*/
             if (PlatformWinLossOption.hasCustomerComm) {
-                jqGridAdditional.setGroupCustomerWLColumns(reportGrid);
+                PlatformWinLossOption.setCustomerWLGroupHeaderColumns(reportGrid);
             }
 
             if (level === 1 && gridControl.sortColumnName) {
@@ -8618,7 +8619,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             }
         }
 
-        function bindTotal(level, totalData, summaryTotal) {
+        function bindTotal(level, totalData) {
             const columnModel = PlatformWinLossOption.getColModel(level, _filterData[level].ProductOptions);
 
             if (level === 0) {
@@ -8631,7 +8632,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 const summaryColspan = colspan + 1;
                 jqGridAdditional.assignTotal(totalData, columnModel);
 
-                const summaryRowCount = Report.bindSummaryTotal(columnModel, summaryTotal);
+                const summaryRowCount = Report.bindSummaryTotal(columnModel);
                 jqGridAdditional.setGroupFooters(colspan, summaryColspan, summaryRowCount);
             }
         }
@@ -8797,6 +8798,35 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             return Site.getSingleResource('Product') + ': ' + productName;
         }
 
+        function getProductOptions(serializeParam) {
+            const codeKey = /ProductOptions\[\d+\].Code/;
+            let products = [];
+
+            const keys = Object.keys(serializeParam);
+
+            for (let i = 1; i < keys.length; i++) {
+                const key = keys[i];
+                if (codeKey.test(key) && serializeParam[key]) {
+                    const statusKey = key.replace(".Code", '.Status');
+
+                    if (serializeParam[statusKey]) {
+                        products.push({
+                            Code: serializeParam[key],
+                            Status: true
+                        });
+                    }
+                    else {
+                        products.push({
+                            Code: serializeParam[key],
+                            Status: false
+                        });
+                    }
+                }
+            }
+
+            return products;
+        }
+
         function resizeGrid() {
             const reportGrid = $('#ReportGrid');
             jqGridAdditional.updateGridHeight();
@@ -8842,33 +8872,33 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
         const betlistLink = function (cellvalue, options, rowObject) {
             const param =
             {
-                DrillDownCurrencyId: rowObject.CurrencyId,
-                DrillDownCurrencyName: rowObject.CurrencyName,
-                CustomerId: rowObject.CustomerId,
-                ExternalId: rowObject.ExternalId,
-                SystemId: rowObject.SystemId
+                DrillDownCurrencyId: rowObject.currencyId,
+                DrillDownCurrencyName: rowObject.currencyName,
+                CustomerId: rowObject.customerId,
+                ExternalId: rowObject.externalId,
+                SystemId: rowObject.systemId
             };
             return '<a class="bet-list-link" href="javascript:;" data-drill-down=\'' + JSON.stringify(param) + '\'>' + cellvalue + '</a>';
         };
         const drilldownLink = function (cellvalue, options, rowObject) {
-            const parentClassName = rowObject.IsLeaf ? '' : ' text-bold';
+            const parentClassName = rowObject.isLeaf ? '' : ' text-bold';
             const param =
             {
-                PlatformType: rowObject.PlatformType > 0 ? rowObject.PlatformType : Number(rowObject.Parent),
-                ProductCode: rowObject.PlatformType < 0 ? rowObject.ProductCode : undefined
+                PlatformType: rowObject.isLeaf ? Number(rowObject.parent) : rowObject.platformType,
+                ProductCode: rowObject.isLeaf ? rowObject.productCode : undefined
             };
 
             return '<a class="drilldown' + parentClassName + '" href="javascript:;" data-drill-down=\'' + JSON.stringify(param) + '\'>' + cellvalue + '</a>';
         };
         const idColumn = {
-            name: 'PlatformType',
+            name: 'platformType',
             index: 'PlatformType',
             key: true,
             hidden: true,
             align: 'center'
         };
         const platformNameColumn = {
-            name: 'Name',
+            name: 'name',
             index: 'Name',
             width: 120,
             align: 'left',
@@ -8878,7 +8908,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
             formatter: drilldownLink
         };
         const indexColumn = {
-            name: 'Index',
+            name: 'index',
             index: 'Index',
             width: 60,
             align: 'center',
@@ -8888,7 +8918,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
             cellattr: jqGridAdditional.rowSpanSetting
         };
         const externalIdColumn = {
-            name: 'ExternalId',
+            name: 'externalId',
             index: 'ExternalId',
             width: 85,
             align: 'left',
@@ -8897,7 +8927,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
             formatter: betlistLink
         };
         const systemIdColumn = {
-            name: 'SystemId',
+            name: 'systemId',
             index: 'SystemId',
             width: 120,
             align: 'left',
@@ -8906,7 +8936,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
             formatter: betlistLink
         };
         const currencyColumn = {
-            name: 'CurrencyName',
+            name: 'currencyName',
             index: 'CurrencyName',
             width: 60,
             align: 'center',
@@ -8914,7 +8944,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
             resizable: false
         };
         const turnoverColumn = {
-            name: 'Turnover',
+            name: 'turnover',
             index: 'Turnover',
             resizable: false,
             width: 85,
@@ -8924,7 +8954,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
             formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
         };
         const turnoverPercentColumn = {
-            name: 'TurnoverPercent',
+            name: 'turnoverPercent',
             index: 'TurnoverPercent',
             resizable: false,
             width: 85,
@@ -8934,7 +8964,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
             formatoptions: { decimalPlaces: 2, suffix: '%' }
         };
         const totalTransColumn = {
-            name: 'TotalTransactions',
+            name: 'totalTransactions',
             index: 'TotalTransactions',
             width: 95,
             align: 'right',
@@ -8948,7 +8978,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
             }
         };
         const customerWlColumn = {
-            name: 'CustomerWinLoss',
+            name: 'customerWinLoss',
             index: 'CustomerWinLoss',
             width: 90,
             align: 'right',
@@ -8958,7 +8988,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
             formatter: jqGridAdditional.formatDecimal
         };
         const playerCommColumn = {
-            name: 'CustomerComm',
+            name: 'customerComm',
             index: 'CustomerComm',
             width: 50,
             align: 'right',
@@ -8968,7 +8998,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
             formatter: jqGridAdditional.formatDecimal
         };
         const customerWlTotalColumn = {
-            name: 'CustomerTotal',
+            name: 'customerTotal',
             index: 'CustomerTotal',
             width: 90,
             align: 'right',
@@ -8978,7 +9008,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
             formatter: jqGridAdditional.formatDecimal
         };
         const licenseeWlColumn = {
-            name: 'LicenseeWL',
+            name: 'licenseeWL',
             index: 'LicenseeWL',
             width: 85,
             align: 'right',
@@ -8989,7 +9019,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
             formatter: jqGridAdditional.formatLicenseeWl
         };
         const baCommissionColumn = {
-            name: 'BACommission',
+            name: 'baCommission',
             index: 'BACommission',
             width: 70,
             align: 'right',
@@ -8999,7 +9029,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
             formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
         };
         const amtDueToBaColumn = {
-            name: 'AmtDueToBA',
+            name: 'amtDueToBA',
             index: 'AmtDueToBA',
             width: 60,
             align: 'right',
@@ -9009,7 +9039,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
             formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
         };
         const currencyIdColumn = {
-            name: 'CurrencyId',
+            name: 'currencyId',
             index: 'CurrencyId',
             width: 0,
             align: 'center',
@@ -9018,7 +9048,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
             hidden: true
         };
         const customerIdColumn = {
-            name: 'CustomerId',
+            name: 'customerId',
             index: 'CustomerId',
             width: 0,
             align: 'center',
@@ -9151,11 +9181,11 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
                 treeGrid: true,
                 treeGridModel: 'adjacency',
                 treedatatype: 'local',
-                ExpandColumn: 'Name',
+                ExpandColumn: 'name',
                 treeReader: {
-                    level_field: 'Level',       // jshint ignore:line
-                    parent_id_field: 'Parent',  // jshint ignore:line
-                    leaf_field: 'IsLeaf'        // jshint ignore:line
+                    level_field: 'level',       // jshint ignore:line
+                    parent_id_field: 'parent',  // jshint ignore:line
+                    leaf_field: 'isLeaf'        // jshint ignore:line
                 },
                 treeIcons: { plus: 'ui-icon-circlesmall-plus icon-arrow', minus: 'ui-icon-circlesmall-minus icon-arrow', leaf: '' },
                 pager: '#ppdata',
@@ -9202,6 +9232,18 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
                 _me.gridOption.colModel = _me.getColModel(level, productOptions);
 
                 return _me.gridOption;
+            },
+
+            setCustomerWLGroupHeaderColumns: function (grid) {
+                grid.jqGrid('setGroupHeaders',
+                    {
+                        useColSpanStyle: true,
+                        groupHeaders: [{
+                            startColumnName: 'customerWinLoss',
+                            numberOfColumns: 3,
+                            titleText: Site.getSingleResource('CustomerW_L')
+                        }]
+                    });
             }
         };
 
