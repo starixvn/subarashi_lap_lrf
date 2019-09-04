@@ -36,15 +36,17 @@ namespace Fanex.Athena.Api.Report
     public class PlatformWinLossReportController : ApiReportBaseController
     {
         private readonly IPlatformWinLossDataAccess _platformWinLossDataAccess;
-
+        private readonly IReportAPIClient _reportAPIClient;
         public PlatformWinLossReportController(
             ISessionService sessionService,
             IProductService productService,
             ILanguageService langService,
+            IReportAPIClient reportAPIClient,
             IPlatformWinLossDataAccess platformWinLossDataAccess)
             : base(sessionService, productService, langService)
         {
             _platformWinLossDataAccess = platformWinLossDataAccess;
+            _reportAPIClient = reportAPIClient;
         }
 
         [HttpPost]
@@ -95,20 +97,6 @@ namespace Fanex.Athena.Api.Report
             }
         }
 
-        private HttpResponseMessage ExportExcelSummary(
-            PlatformWinLossMetaModel metaModel,
-            IEnumerable<PlatformWinLossSummary> dataList,
-            PlatformWinLossSummary total)
-        {
-            const string FileName = "PlatformWinLossSummary.xls";
-            var templatePath = HostingEnvironment.MapPath(@"~/App_Data/Template/Reports/PlatformWinLossSummary.xls");
-
-            var excel = CreateExcelSummary(templatePath, metaModel, dataList, total);
-            excel.Export();
-
-            return ExcelStream(excel.Workbook, FileName);
-        }
-
         private HttpResponseMessage ExportExcelMember(
             PlatformWinLossMetaModel metaModel,
             SortableList<PlatformWinLossMember> dataList,
@@ -151,33 +139,58 @@ namespace Fanex.Athena.Api.Report
         private async Task<dynamic> ProcessRequest(PlatformWinLossMetaModel metaModel)
         {
             metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId, metaModel.IsExcludedTestData);
+            var language = SessionService.UserSession.Language;
 
             if (metaModel.Level == 0)
             {
-                var result = await _platformWinLossDataAccess.GetSummaryData(metaModel);
+                const string FileName = "PlatformWinLossSummary.xls";
 
-                return metaModel.IsExportExcel ?
-                    ExportExcelSummary(metaModel, result.DataList, result.TotalData) :
-                   (dynamic)new
-                   {
-                       Data = result.DataList,
-                       Total = result.TotalData,
-                       ProductOptions = metaModel.ProductOptions.ToJson()
-                   };
+                if (metaModel.IsExportExcel)
+                {
+                    return await _reportAPIClient.PostFileAsync("/api/PlatformWinLoss/ExportSummaryData", metaModel, FileName, language)
+                        .ConfigureAwait(false);
+
+                }
+                var result =
+                    await _reportAPIClient.PostAsync<ReportResultModel<PlatformWinLossSummary>>("/api/PlatformWinLoss/GetSummaryData", metaModel, language)
+                    .ConfigureAwait(false);
+                return (dynamic)new
+                {
+                    Data = result.DataList,
+                    Total = result.TotalData,
+                    ProductOptions = metaModel.ProductOptions.ToJson()
+                };
             }
             else
             {
-                var result = await _platformWinLossDataAccess.GetMemberData(metaModel, SessionService.UserSession.CurrencyList);
-                   
+                metaModel.CurrencyList = SessionService.UserSession.CurrencyList
+                    .Select(x => new Currency { ID = x.Key, Name = x.Value }).ToList();
 
-                return metaModel.IsExportExcel
-                    ? ExportExcelMember(metaModel, result.DataList, result.TotalData)
-                    : (dynamic)new
-                    {
-                        Data = result.DataList,
-                        Total = result.TotalData,
-                        ProductOptions = metaModel.ProductOptions.ToJson()
-                    };
+                if (metaModel.IsExportExcel)
+                {
+
+                }
+
+                var result = await _reportAPIClient.PostAsync<SortableReportResultModel<PlatformWinLossMember>>("/api/PlatformWinLoss/GetMemberData", metaModel, language)
+                    .ConfigureAwait(false);
+                return (dynamic)new
+                {
+                    Data = result.DataList,
+                    Total = result.TotalData,
+                    ProductOptions = metaModel.ProductOptions.ToJson()
+                };
+
+                // await _platformWinLossDataAccess.GetMemberData(metaModel, SessionService.UserSession.CurrencyList);
+
+
+                //return metaModel.IsExportExcel
+                //    ? ExportExcelMember(metaModel, result.DataList, result.TotalData)
+                //    : (dynamic)new
+                //    {
+                //        Data = result.DataList,
+                //        Total = result.TotalData,
+                //        ProductOptions = metaModel.ProductOptions.ToJson()
+                //    };
             }
         }
     }

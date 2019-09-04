@@ -6,8 +6,10 @@
 
 namespace Fanex.Athena.Model.Report.MetaModel
 {
+    using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.MetaModel;
     using System;
+    using System.Collections.Generic;
     using DataDomain = Model.Core.DataDomain;
 
     public class PlatformWinLossMetaModel : BaseReportMetaModel, IMetaModelValidation
@@ -55,6 +57,8 @@ namespace Fanex.Athena.Model.Report.MetaModel
         public string SortBy { get; set; }
 
         public string SortOrder { get; set; }
+
+        public IList<Currency> CurrencyList { get; set; }
 
         public override bool IsValid
         {

@@ -78,6 +78,7 @@
   <ItemGroup>
     <Compile Include="Constants\SystemEnvironment.cs" />
     <Compile Include="DataDomain\BaseCurrencyType.cs" />
+    <Compile Include="DataDomain\Currency.cs" />
     <Compile Include="DataDomain\CurrencyType.cs" />
     <Compile Include="DataDomain\DrawFilterType.cs" />
     <Compile Include="DataDomain\ErrorType.cs" />
