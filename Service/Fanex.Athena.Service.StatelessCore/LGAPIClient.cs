@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using Fanex.Athena.Extension.Utility;
@@ -37,7 +38,7 @@ namespace Fanex.Athena.Service.StatelessCore
 
             var result = await client.ExecuteTaskAsync(request).ConfigureAwait(false);
 
-            if (result.ResponseStatus != ResponseStatus.Completed)
+            if (result.ResponseStatus != ResponseStatus.Completed || result.StatusCode != HttpStatusCode.OK)
             {
                 var errorMessage = $"Http Error ={result.ErrorMessage}\n Error occur when query LGAPI";
                 throw new InvalidOperationException(errorMessage, result.ErrorException);

@@ -41,7 +41,7 @@ namespace Fanex.Athena.Service.StatelessCore
 
             var result = await client.ExecuteTaskAsync(request).ConfigureAwait(false);
 
-            if (result.ResponseStatus != ResponseStatus.Completed)
+            if (result.ResponseStatus != ResponseStatus.Completed || result.StatusCode != HttpStatusCode.OK)
             {
                 var errorMessage = $"Http Error ={result.ErrorMessage}\n Error occur when query report data";
                 throw new InvalidOperationException(errorMessage, result.ErrorException);
