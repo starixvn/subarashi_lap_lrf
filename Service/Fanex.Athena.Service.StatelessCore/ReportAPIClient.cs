@@ -2,6 +2,7 @@
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 
 using Fanex.Athena.Extension.Utility;
@@ -43,8 +44,9 @@ namespace Fanex.Athena.Service.StatelessCore
 
             if (result.ResponseStatus != ResponseStatus.Completed || result.StatusCode != HttpStatusCode.OK)
             {
-                var errorMessage = $"Http Error ={result.ErrorMessage}\n Error occur when query report data";
-                throw new InvalidOperationException(errorMessage, result.ErrorException);
+                var errorMessage = new StringBuilder($"Http Error ={result.ErrorMessage}\n Error occur when query report data");
+                errorMessage.AppendLine($"HTTP status code ={ result.StatusCode }");
+                throw new InvalidOperationException(errorMessage.ToString(), result.ErrorException);
             }
 
             return await codeBlock(result).ConfigureAwait(false);
