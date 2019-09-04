@@ -1,12 +1,14 @@
 ﻿using System;
-using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+
 using Fanex.Athena.Extension.Utility;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
+
 using Newtonsoft.Json;
+
 using RestSharp;
 
 namespace Fanex.Athena.Service.StatelessCore
@@ -39,7 +41,7 @@ namespace Fanex.Athena.Service.StatelessCore
 
             var result = await client.ExecuteTaskAsync(request).ConfigureAwait(false);
 
-            if (result.ResponseStatus != ResponseStatus.Completed || result.StatusCode != HttpStatusCode.OK)
+            if (result.ResponseStatus != ResponseStatus.Completed)
             {
                 var errorMessage = $"Http Error ={result.ErrorMessage}\n Error occur when query report data";
                 throw new InvalidOperationException(errorMessage, result.ErrorException);
