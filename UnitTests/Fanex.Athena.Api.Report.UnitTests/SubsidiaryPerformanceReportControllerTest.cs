@@ -112,62 +112,6 @@
             });
         }
 
-        [Test]
-        public async Task Index_FromDateIsGreaterThanToDate_DoNotCallService()
-        {
-            // Arrange
-            var metaModel = new SubsidiaryPerformanceMetaModel
-            {
-                FromDate = new DateTime(2017, 8, 30),
-                ToDate = new DateTime(2017, 8, 1),
-                ProductCodeList = "SB,BA",
-                BaseCurrency = "EUR"
-            };
-
-            // Action
-            await _controller.Index(metaModel);
-
-            // Assert
-            await _service.DidNotReceiveWithAnyArgs().GetData(Arg.Any<SubsidiaryPerformanceMetaModel>(), Arg.Any<IDictionary<int, string>>());
-        }
-
-        [Test]
-        public async Task Index_ProductCodeListIsEmpty_DoNotCallService()
-        {
-            // Arrange
-            var metaModel = new SubsidiaryPerformanceMetaModel
-            {
-                FromDate = new DateTime(2017, 8, 30),
-                ToDate = new DateTime(2017, 8, 30),
-                ProductCodeList = string.Empty,
-                BaseCurrency = "EUR"
-            };
-
-            // Action
-            await _controller.Index(metaModel);
-
-            // Assert
-            await _service.DidNotReceiveWithAnyArgs().GetData(Arg.Any<SubsidiaryPerformanceMetaModel>(), Arg.Any<IDictionary<int, string>>());
-        }
-
-        [Test]
-        public async Task Index_BaseCurrencyIsEmpty_DoNotCallService()
-        {
-            // Arrange
-            var metaModel = new SubsidiaryPerformanceMetaModel
-            {
-                FromDate = new DateTime(2017, 8, 30),
-                ToDate = new DateTime(2017, 8, 30),
-                BaseCurrency = string.Empty
-            };
-
-            // Action
-            await _controller.Index(metaModel);
-
-            // Assert
-            await _service.DidNotReceiveWithAnyArgs().GetData(Arg.Any<SubsidiaryPerformanceMetaModel>(), Arg.Any<IDictionary<int, string>>());
-        }
-
         private static SubsidiaryPerformanceMetaModel GetMetaModel()
         {
             return new SubsidiaryPerformanceMetaModel

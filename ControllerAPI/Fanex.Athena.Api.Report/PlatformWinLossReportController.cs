@@ -37,23 +37,14 @@ namespace Fanex.Athena.Api.Report
     {
         private readonly IPlatformWinLossDataAccess _platformWinLossDataAccess;
 
-        private readonly IBalanceUpDataAccess _balanceUpDataAccess;
-
-        private readonly IReportAPIClient _reportAPIClient;
-
         public PlatformWinLossReportController(
             ISessionService sessionService,
             IProductService productService,
             ILanguageService langService,
-            IPlatformWinLossDataAccess platformWinLossDataAccess,
-            IReportAPIClient reportAPIClient,
-            IBalanceUpDataAccess balanceUpDataAccess
-            )
+            IPlatformWinLossDataAccess platformWinLossDataAccess)
             : base(sessionService, productService, langService)
         {
             _platformWinLossDataAccess = platformWinLossDataAccess;
-            _reportAPIClient = reportAPIClient;
-            _balanceUpDataAccess = balanceUpDataAccess;
         }
 
         [HttpPost]
@@ -160,12 +151,19 @@ namespace Fanex.Athena.Api.Report
         private async Task<dynamic> ProcessRequest(PlatformWinLossMetaModel metaModel)
         {
             metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId, metaModel.IsExcludedTestData);
-            metaModel.MoveBetsDay = _balanceUpDataAccess.GetBalanceUp().MoveBetsDay;
-            metaModel.Products = metaModel.ProductOptions.Where(x => x.Status).Select(x => x.Code).ToArray();
 
             if (metaModel.Level == 0)
             {
-                return await _reportAPIClient.PostAsync("api/PlatformWinLoss/GetSummaryData", metaModel, SessionService.UserSession.Language);
+                var result = await _platformWinLossDataAccess.GetSummaryData(metaModel);
+
+                return metaModel.IsExportExcel ?
+                    ExportExcelSummary(metaModel, result.DataList, result.TotalData) :
+                   (dynamic)new
+                   {
+                       Data = result.DataList,
+                       Total = result.TotalData,
+                       ProductOptions = metaModel.ProductOptions.ToJson()
+                   };
             }
             else
             {

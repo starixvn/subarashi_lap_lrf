@@ -56,8 +56,6 @@ namespace Fanex.Athena.Model.Report.MetaModel
 
         public string SortOrder { get; set; }
 
-        public DateTime MoveBetsDay { get; set; }
-
         public override bool IsValid
         {
             get
@@ -65,7 +63,5 @@ namespace Fanex.Athena.Model.Report.MetaModel
                 return base.IsValid && DataDomain.PlatformType.IsValidPlatform(PlatformType);
             }
         }
-
-        public string[] Products { get; set; }
     }
 }

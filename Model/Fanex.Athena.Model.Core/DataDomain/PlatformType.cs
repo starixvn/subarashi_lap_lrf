@@ -49,19 +49,7 @@
 
         public static string GetPlatformName(int type)
         {
-            switch (type)
-            {
-                case Asia: return ViewResources.Asia;
-                case China: return ViewResources.China;
-                case Euro: return ViewResources.Euro;
-                case Wap: return ViewResources.Wap;
-                case Mobile: return ViewResources.Mobile;
-                case Tablet: return ViewResources.Tablet;
-                case NewAsia: return ViewResources.NewAsia;
-                case MobileApp: return ViewResources.MobileApp;
-                case MobileLiteVersion: return ViewResources.MobileLiteVersion;
-                default: return ViewResources.All;
-            }
+            return MapPlatformKeys.ContainsKey(type) ? ViewResources.ResourceManager.GetString(MapPlatformKeys[type]) : ViewResources.All;
         }
 
 #pragma warning disable S1541 // Methods and properties should not be too complex
@@ -85,13 +73,14 @@
                 case "x": return ViewResources.NewAsia;
                 case "o": return ViewResources.MobileApp;
                 case "c": return ViewResources.MobileLiteVersion;
+                case "t": return ViewResources.DeepLink;
                 default: return ViewResources.Others;
             }
         }
 
         public static bool IsValidPlatform(int type)
         {
-            return type >= All && type <= MobileLiteVersion;
+            return type >= All && type <= DeepLink;
         }
     }
 }
