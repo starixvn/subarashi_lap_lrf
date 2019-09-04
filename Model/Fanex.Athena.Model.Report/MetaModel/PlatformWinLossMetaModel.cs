@@ -67,5 +67,7 @@ namespace Fanex.Athena.Model.Report.MetaModel
                 return base.IsValid && DataDomain.PlatformType.IsValidPlatform(PlatformType);
             }
         }
+
+        public bool HasComm { get; set; }
     }
 }

@@ -143,55 +143,57 @@ namespace Fanex.Athena.Api.Report
 
             if (metaModel.Level == 0)
             {
-                const string FileName = "PlatformWinLossSummary.xls";
-
-                if (metaModel.IsExportExcel)
-                {
-                    return await _reportAPIClient.PostFileAsync("/api/PlatformWinLoss/ExportSummaryData", metaModel, FileName, language)
-                        .ConfigureAwait(false);
-
-                }
-                var result =
-                    await _reportAPIClient.PostAsync<ReportResultModel<PlatformWinLossSummary>>("/api/PlatformWinLoss/GetSummaryData", metaModel, language)
-                    .ConfigureAwait(false);
-                return (dynamic)new
-                {
-                    Data = result.DataList,
-                    Total = result.TotalData,
-                    ProductOptions = metaModel.ProductOptions.ToJson()
-                };
+                return await ProcessSummaryLevel(metaModel, language);
             }
             else
             {
-                metaModel.CurrencyList = SessionService.UserSession.CurrencyList
-                    .Select(x => new Currency { ID = x.Key, Name = x.Value }).ToList();
+                return await ProcessMemberLevel(metaModel, language);
 
-                if (metaModel.IsExportExcel)
-                {
-
-                }
-
-                var result = await _reportAPIClient.PostAsync<SortableReportResultModel<PlatformWinLossMember>>("/api/PlatformWinLoss/GetMemberData", metaModel, language)
-                    .ConfigureAwait(false);
-                return (dynamic)new
-                {
-                    Data = result.DataList,
-                    Total = result.TotalData,
-                    ProductOptions = metaModel.ProductOptions.ToJson()
-                };
-
-                // await _platformWinLossDataAccess.GetMemberData(metaModel, SessionService.UserSession.CurrencyList);
-
-
-                //return metaModel.IsExportExcel
-                //    ? ExportExcelMember(metaModel, result.DataList, result.TotalData)
-                //    : (dynamic)new
-                //    {
-                //        Data = result.DataList,
-                //        Total = result.TotalData,
-                //        ProductOptions = metaModel.ProductOptions.ToJson()
-                //    };
             }
+        }
+
+        private async Task<dynamic> ProcessMemberLevel(PlatformWinLossMetaModel metaModel, string language)
+        {
+            const string FileName = "PlatformWinLossMember.xls";
+
+            metaModel.CurrencyList = SessionService.UserSession.CurrencyList
+                .Select(x => new Currency { ID = x.Key, Name = x.Value }).ToList();
+            metaModel.HasComm = SessionService.LicenseeSession.IsAllowedCustomerComm;
+            if (metaModel.IsExportExcel)
+            {
+                return await _reportAPIClient.PostFileAsync("/api/PlatformWinLoss/ExportMemberData", metaModel, FileName, language)
+                   .ConfigureAwait(false);
+            }
+
+            var result = await _reportAPIClient.PostAsync<SortableReportResultModel<PlatformWinLossMember>>("/api/PlatformWinLoss/GetMemberData", metaModel, language)
+                .ConfigureAwait(false);
+            return (dynamic)new
+            {
+                Data = result.DataList,
+                Total = result.TotalData,
+                ProductOptions = metaModel.ProductOptions.ToJson()
+            };
+        }
+
+        private async Task<dynamic> ProcessSummaryLevel(PlatformWinLossMetaModel metaModel, string language)
+        {
+            const string FileName = "PlatformWinLossSummary.xls";
+
+            if (metaModel.IsExportExcel)
+            {
+                return await _reportAPIClient.PostFileAsync("/api/PlatformWinLoss/ExportSummaryData", metaModel, FileName, language)
+                    .ConfigureAwait(false);
+
+            }
+            var result =
+                await _reportAPIClient.PostAsync<ReportResultModel<PlatformWinLossSummary>>("/api/PlatformWinLoss/GetSummaryData", metaModel, language)
+                .ConfigureAwait(false);
+            return (dynamic)new
+            {
+                Data = result.DataList,
+                Total = result.TotalData,
+                ProductOptions = metaModel.ProductOptions.ToJson()
+            };
         }
     }
 }
