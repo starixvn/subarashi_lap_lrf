@@ -2,8 +2,10 @@
 {
     using System;
     using System.IO;
+    using System.Net;
     using System.Net.Http;
     using System.Net.Http.Headers;
+    using System.Text;
     using System.Threading.Tasks;
 
     using Fanex.Athena.Extension.Utility;
@@ -48,10 +50,12 @@
             }
             var result = await client.ExecuteTaskAsync(request).ConfigureAwait(false);
 
-            if (result.ResponseStatus != ResponseStatus.Completed)
+            if (result.ResponseStatus != ResponseStatus.Completed || result.StatusCode != HttpStatusCode.OK)
             {
-                var errorMessage = $"Http Error ={result.ErrorMessage}\n Error occur when query betlist data";
-                throw new InvalidOperationException(errorMessage, result.ErrorException);
+                var errorMessage = new StringBuilder(
+                    $"Http Error ={result.ErrorMessage}\n Error occur when query betlist data");
+                errorMessage.AppendLine($"HTTP status code ={ result.StatusCode }");
+                throw new ServiceException(errorMessage.ToString(), "BetListApiClient");
             }
 
             return await codeBlock(result).ConfigureAwait(false);
