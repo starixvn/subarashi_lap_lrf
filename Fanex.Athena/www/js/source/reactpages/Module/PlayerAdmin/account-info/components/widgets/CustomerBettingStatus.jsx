@@ -14,13 +14,19 @@ const defaultDataSetItem = {
 }
 const defaultChartData = {
     labels: ['Won', 'Lose', 'Draw', 'Cancelled'],
-    datasets: []
+    datasets: [],
+    borderWidth: 2,
+    hoverBorderWidth: 10,
 }
 
 const legendOpts = {
     display: true,
     position: 'bottom',
-    labels:{}
+    labels: {
+        boxWidth: 15,
+        usePointStyle: true
+    },
+    onClick: () => {}
 };
 
 const option = {
