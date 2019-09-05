@@ -690,7 +690,6 @@
     <Content Include="SiteConfig\Web.Staging.config" />
     <Content Include="Views\Desktop\BetList\CardClubDetail\Main.cshtml" />
     <Content Include="Views\Desktop\Module\PlayerAdmin\Main.cshtml" />
-    <Content Include="Views\Desktop\Module\PlayerAdmin\PlayerAccountInfo\Index.cshtml" />
     <Content Include="Views\Desktop\Module\PlayerAdmin\PlayerStatement\Index.cshtml" />
     <Content Include="www\css\build\dev\reactpages\playeradmin\index.chunk.js.map" />
     <Content Include="www\css\build\dev\reactpages\playeradmin\index.css.map" />
@@ -704,6 +703,7 @@
     <Content Include="Views\Desktop\Module\PlayerAdmin\PlayerBetLimit\Index.cshtml" />
     <Content Include="www\css\build\dev\reactpages\playeradmin\betlimit.css.map" />
     <Content Include="www\css\source\components\balloon\balloon.scss" />
+    <Content Include="Views\Desktop\Module\PlayerAdmin\SingleCustomer\Index.cshtml" />
     <None Include="www\css\source\reactpages\components\custom3rd\react-toastify.scss" />
     <None Include="www\css\source\pages\betlist\result\result.happy5.scss" />
     <None Include="www\css\source\reactpages\components\alert\icons\error.scss" />
@@ -1037,6 +1037,8 @@
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\running-betlist\components\index.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\running-betlist\lib\service.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\running-betlist\reducers\index.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\single-customer\components\DataGrid.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\single-customer\components\index.jsx" />
     <Content Include="www\js\source\reactpages\pages\bettingticketscenter\common\components\action.js" />
     <Content Include="www\js\source\reactpages\pages\bettingticketscenter\common\components\__tests__\PageLayout.redux.test.js" />
     <Content Include="www\js\source\reactpages\pages\bettingticketscenter\common\constants\apiUrl.js" />
@@ -5666,6 +5668,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Logs\" />
+    <Folder Include="www\js\source\reactpages\Module\PlayerAdmin\single-customer\lib\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="www\js\source\reactpages\pages\subsidiaryperformance\components\index.jsx" />
