@@ -387,7 +387,7 @@
                 return arrayData;
             }
 
-            const sortThenBy = arrayData[0].Id ? 'Id' : 'Index';
+            const sortThenBy = 'index';
 
             const data = DataHelper.sort(
                 arrayData,
@@ -396,17 +396,9 @@
                 function (x) { return x[sortThenBy]; },
                 'asc');
 
-            if (sortThenBy === 'Id') {
                 for (let i = 0; i < totalData; i++) {
-                    data[i].Index = i + 1;
+                    data[i].index = i + 1;
                 }
-            }
-            else {
-                for (let j = 0; j < totalData; j++) {
-                    arrayData[j].Id = j + 1;
-                    data[j].Index = j + 1;
-                }
-            }
 
             return data;
         }
