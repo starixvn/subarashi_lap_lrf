@@ -8761,7 +8761,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 return arrayData;
             }
 
-            const sortThenBy = arrayData[0].Id ? 'Id' : 'Index';
+            const sortThenBy = 'index';
 
             const data = DataHelper.sort(
                 arrayData,
@@ -8770,17 +8770,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 function (x) { return x[sortThenBy]; },
                 'asc');
 
-            if (sortThenBy === 'Id') {
                 for (let i = 0; i < totalData; i++) {
-                    data[i].Index = i + 1;
+                    data[i].index = i + 1;
                 }
-            }
-            else {
-                for (let j = 0; j < totalData; j++) {
-                    arrayData[j].Id = j + 1;
-                    data[j].Index = j + 1;
-                }
-            }
 
             return data;
         }
@@ -8890,16 +8882,17 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
 
             return '<a class="drilldown' + parentClassName + '" href="javascript:;" data-drill-down=\'' + JSON.stringify(param) + '\'>' + cellvalue + '</a>';
         };
+
         const idColumn = {
             name: 'platformType',
-            index: 'PlatformType',
+            index: 'platformType',
             key: true,
             hidden: true,
             align: 'center'
         };
         const platformNameColumn = {
             name: 'name',
-            index: 'Name',
+            index: 'name',
             width: 120,
             align: 'left',
             valign: 'middle',
@@ -8909,17 +8902,16 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
         };
         const indexColumn = {
             name: 'index',
-            index: 'Index',
+            index: 'index',
             width: 60,
             align: 'center',
             valign: 'middle',
             sortable: false,
-            resizable: false,
-            cellattr: jqGridAdditional.rowSpanSetting
+            resizable: false
         };
         const externalIdColumn = {
             name: 'externalId',
-            index: 'ExternalId',
+            index: 'externalId',
             width: 85,
             align: 'left',
             sortable: true,
@@ -8928,7 +8920,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
         };
         const systemIdColumn = {
             name: 'systemId',
-            index: 'SystemId',
+            index: 'systemId',
             width: 120,
             align: 'left',
             sortable: true,
@@ -8937,7 +8929,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
         };
         const currencyColumn = {
             name: 'currencyName',
-            index: 'CurrencyName',
+            index: 'currencyName',
             width: 60,
             align: 'center',
             sortable: true,
@@ -8945,7 +8937,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
         };
         const turnoverColumn = {
             name: 'turnover',
-            index: 'Turnover',
+            index: 'turnover',
             resizable: false,
             width: 85,
             align: 'right',
@@ -8955,7 +8947,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
         };
         const turnoverPercentColumn = {
             name: 'turnoverPercent',
-            index: 'TurnoverPercent',
+            index: 'turnoverPercent',
             resizable: false,
             width: 85,
             align: 'right',
@@ -8965,7 +8957,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
         };
         const totalTransColumn = {
             name: 'totalTransactions',
-            index: 'TotalTransactions',
+            index: 'totalTransactions',
             width: 95,
             align: 'right',
             sortable: true,
@@ -8979,7 +8971,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
         };
         const customerWlColumn = {
             name: 'customerWinLoss',
-            index: 'CustomerWinLoss',
+            index: 'customerWinLoss',
             width: 90,
             align: 'right',
             sortable: true,
@@ -8989,7 +8981,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
         };
         const playerCommColumn = {
             name: 'customerComm',
-            index: 'CustomerComm',
+            index: 'customerComm',
             width: 50,
             align: 'right',
             sortable: true,
@@ -8999,7 +8991,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
         };
         const customerWlTotalColumn = {
             name: 'customerTotal',
-            index: 'CustomerTotal',
+            index: 'customerTotal',
             width: 90,
             align: 'right',
             sortable: true,
@@ -9009,7 +9001,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
         };
         const licenseeWlColumn = {
             name: 'licenseeWL',
-            index: 'LicenseeWL',
+            index: 'licenseeWL',
             width: 85,
             align: 'right',
             sortable: true,
@@ -9020,7 +9012,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
         };
         const baCommissionColumn = {
             name: 'baCommission',
-            index: 'BACommission',
+            index: 'baCommission',
             width: 70,
             align: 'right',
             sortable: true,
@@ -9030,7 +9022,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
         };
         const amtDueToBaColumn = {
             name: 'amtDueToBA',
-            index: 'AmtDueToBA',
+            index: 'amtDueToBA',
             width: 60,
             align: 'right',
             sortable: true,
@@ -9040,7 +9032,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
         };
         const currencyIdColumn = {
             name: 'currencyId',
-            index: 'CurrencyId',
+            index: 'currencyId',
             width: 0,
             align: 'center',
             sortable: false,
@@ -9049,7 +9041,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
         };
         const customerIdColumn = {
             name: 'customerId',
-            index: 'CustomerId',
+            index: 'customerId',
             width: 0,
             align: 'center',
             sortable: false,
