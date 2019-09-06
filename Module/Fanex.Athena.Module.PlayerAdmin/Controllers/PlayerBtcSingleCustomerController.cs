@@ -6,6 +6,7 @@ using System.Web.SessionState;
 using Fanex.Athena.Controllers;
 using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Module.PlayerAdmin.MetaModel;
+using Fanex.Athena.Module.PlayerAdmin.ViewModels;
 using Fanex.Athena.Service.Core.Common.Interfaces;
 using Fanex.Athena.Service.Core.Users.Interfaces;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -44,22 +45,48 @@ namespace Fanex.Athena.Module.PlayerAdmin.Controllers
         }
 
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(string userName, string currencyName)
         {
-            return View("~/Views/Desktop/Module/PlayerAdmin/SingleCustomer/Index.cshtml");
+            var viewModel = new PlayerBtcSingleCustomerViewModel
+            {
+                UserName = userName?.Trim(),
+                CurrencyName = currencyName?.Trim(),
+                IsAllowedCustomerComm = SessionService.LicenseeSession.IsAllowedCustomerComm,
+                ProductCodeListString = GetProductCode()
+            };
+
+            return View("~/Views/Desktop/Module/PlayerAdmin/SingleCustomer/Index.cshtml", viewModel);
         }
 
         [HttpPost]
         [AjaxRequest]
         [CustomValidateAntiForgery]
-        [ValidatePermissionOnData(isObject: true)]
         [AutoBindMetaModel(BindAgent = true, BindCurrencyList = true)]
         public async Task<dynamic> Index(PlayerBtcSingleCustomerMetaModel metaModel)
         {
+            if (!ModelState.IsValid)
+            {
+                return Json(new
+                {
+                    Data = DBNull.Value,
+                    Total = DBNull.Value,
+                    TotalRows = DBNull.Value
+                });
+            }
+
             var userSession = SessionService.UserSession;
             metaModel.HasPlayerCom = SessionService.LicenseeSession.IsAllowedCustomerComm;
 
             AssignMetaModelValue(metaModel);
+
+            if (metaModel.IsExport)
+            {
+                var stream = await _betListApiClient.PostAsyncStream("/BettingTicketCenter/GetBySingleCustomer",
+                metaModel,
+                userSession.Language).ConfigureAwait(false);
+
+                return File(stream, "application/vnd.ms-excel");
+            }
 
             return await _betListApiClient.PostAsync<dynamic>("/BettingTicketCenter/GetBySingleCustomer",
                 metaModel,
@@ -75,7 +102,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Controllers
             metaModel.Platform = AllPlatform;
             metaModel.ProductCodeList = GetProductCode();
             metaModel.LiveStatus = GetLiveStatus();
-            metaModel.BaseCurrency = string.Empty;
+            metaModel.BaseCurrency = null;
             metaModel.FromDate = new DateTime(now.Year, now.Month, 1);
             metaModel.ToDate = now;
         }

@@ -20,6 +20,7 @@ const entry = {
     [`${cssPath}/playeradmin/betlimit`]: pathConfig.cssPaths.playerbetlimit,
     [`${jsPath}/playeradmin/accountinfo`]: pathConfig.scriptPaths.accountinfo,
     [`${cssPath}/playeradmin/account-info`]: pathConfig.cssPaths.accountInfo,
+    [`${jsPath}/playeradmin/single-customer`]: pathConfig.scriptPaths.singleCustomer,
 }
 
 const devByPageConfig = {

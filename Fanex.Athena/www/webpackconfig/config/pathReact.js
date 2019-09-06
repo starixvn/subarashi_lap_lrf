@@ -43,7 +43,8 @@ var scriptPaths = {
     playerlist: "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/components/index.jsx",
     accountinfo: "./www/js/source/reactpages/Module/PlayerAdmin/account-info/components/index.jsx",
     playerrunningbetlist: "./www/js/source/reactpages/Module/PlayerAdmin/running-betlist/components/index.jsx",
-    playerbetlimit: "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/index.jsx"
+    playerbetlimit: "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/index.jsx",
+    singleCustomer: "./www/js/source/reactpages/Module/PlayerAdmin/single-customer/components/index.jsx"
 };
 module.exports = {
     projectRoot: projectRoot,

@@ -1,5 +1,4 @@
 import FactoryCommonService from '../../../lib/factoryCommonService';
-import { systemType } from '../../../constants/configInfo';
 import { lapAccountProfile, lapBankInfo, lrfActivityRecord, custBettingStatus } from './apiInfo';
 
 export default class PlayerAccountService {

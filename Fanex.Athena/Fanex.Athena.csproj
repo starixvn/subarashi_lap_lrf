@@ -929,6 +929,7 @@
     <Content Include="www\js\source\reactpages\constants\currency.js" />
     <Content Include="www\js\source\reactpages\constants\licensee.js" />
     <Content Include="www\js\source\reactpages\constants\report.js" />
+    <Content Include="www\js\source\reactpages\customHooks\pagingHooks.js" />
     <Content Include="www\js\source\reactpages\layouts\AppLayout.jsx" />
     <Content Include="www\js\source\reactpages\layouts\betlist\BetListLayout.jsx" />
     <Content Include="www\js\source\reactpages\layouts\betlist\lib\BetList.js" />
@@ -1037,8 +1038,14 @@
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\running-betlist\components\index.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\running-betlist\lib\service.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\running-betlist\reducers\index.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\single-customer\actions\index.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\single-customer\components\AppContainer.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\single-customer\components\Content.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\single-customer\components\DataGrid.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\single-customer\components\index.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\single-customer\components\Title.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\single-customer\lib\constants.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\single-customer\reducers\index.js" />
     <Content Include="www\js\source\reactpages\pages\bettingticketscenter\common\components\action.js" />
     <Content Include="www\js\source\reactpages\pages\bettingticketscenter\common\components\__tests__\PageLayout.redux.test.js" />
     <Content Include="www\js\source\reactpages\pages\bettingticketscenter\common\constants\apiUrl.js" />
@@ -5668,7 +5675,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Logs\" />
-    <Folder Include="www\js\source\reactpages\Module\PlayerAdmin\single-customer\lib\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="www\js\source\reactpages\pages\subsidiaryperformance\components\index.jsx" />

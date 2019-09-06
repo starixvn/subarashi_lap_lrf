@@ -40,7 +40,7 @@ export const PlayerRow = (props) => {
         <Row key={LicenseeCustId}>
             {displayedColumn[fields.Status] && <Cell className="center-align"><StatusCell dataItem={dataItem} /></Cell>}
             {displayedColumn[fields.UserName] && <Cell className="center-align"><UserNameCell dataItem={dataItem} /></Cell>}
-            {displayedColumn[fields.SystemId] && <Cell className="center-align">{canShowMainColumn && SystemId}</Cell>}
+            {displayedColumn[fields.SystemId] && <Cell className="center-align">{SystemId}</Cell>}
             {displayedColumn[fields.RealName] && <Cell className="center-align">{RealName}</Cell>}
             {displayedColumn[fields.Currency] && <Cell className="center-align">{Currency}</Cell>}
             {displayedColumn[fields.CurrentBalance] && <Cell className="center-align">{canShowMainColumn && NumberFormat.formatDecimal(CurrentBalance)}</Cell>}

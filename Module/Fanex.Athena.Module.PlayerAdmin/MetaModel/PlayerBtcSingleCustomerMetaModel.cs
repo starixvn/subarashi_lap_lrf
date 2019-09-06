@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Fanex.Athena.Model.Core.Helper;
 using Fanex.Athena.Model.Core.MetaModel;
 
@@ -27,6 +28,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.MetaModel
 
         public string AgentListXml { get; set; }
 
+        [Required]
         public string UserName
         {
             get
@@ -68,6 +70,10 @@ namespace Fanex.Athena.Module.PlayerAdmin.MetaModel
                     : value.ToLowerInvariant();
             }
         }
+
+        public string SortBy { get; set; }
+
+        public string SortOrder { get; set; }
 
         public IDictionary<int, string> CurrencyList { get; set; }
 

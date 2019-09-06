@@ -22,9 +22,9 @@ export class PlayerDetail extends PureComponent {
 
     _buildActionUrl(systemType, action) {
         const { selectedPlayer } = this.props;
-        const { ibcCustId, licenseeCustId, currencyId } = selectedPlayer;
+        const { ibcCustId, licenseeCustId, currencyId, currency, userName } = selectedPlayer;
         const custIdQueryString = systemType === systemTypeConfig.lrf ? `custId=${ibcCustId}` : `custId=${ibcCustId}&licenseeCustId=${licenseeCustId}`;
-        const nameValuePairString = custIdQueryString + `&currencyId=${currencyId}`;
+        const nameValuePairString = custIdQueryString + `&currencyId=${currencyId}&currencyName=${currency}&userName=${userName}`;
         const queryString = (action.indexOf('?') !== -1 ? '&' : '?') + nameValuePairString;
         const urlByPlayer = action + queryString;
 

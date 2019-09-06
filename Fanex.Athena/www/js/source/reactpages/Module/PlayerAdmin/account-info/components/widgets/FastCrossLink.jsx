@@ -1,9 +1,14 @@
-import React, { PureComponent } from 'react'
-import { connect } from 'react-redux'
-import { ActionCreators } from '../../actions/index.js'
-import { bindActionCreators } from 'redux'
+import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { ActionCreators } from '../../actions';
+import { systemType } from '../../../../constants/configInfo';
 
-export const FastCrossLink = () => {
+export const FastCrossLink = (props) => {
+    const { userName, getLink } = props;
+    const singleCustomerActionLink = `PlayerBtcSingleCustomer/Index?userName=${userName}`;
+    const singleCustomerUrl = getLink(systemType.lrf, singleCustomerActionLink);
+
     return (
         <div className="panel">
             <div className="panel-header">Fast Cross-Link</div>
@@ -11,7 +16,7 @@ export const FastCrossLink = () => {
                 <div>
                     <span><a className="link" href="#">Betting Ticket Center</a></span>
                     <strong className="divider">></strong>
-                    <span><a className="link" href="#">Single Customer</a></span>
+                    <span><a className="link" href={singleCustomerUrl} target="_blank">Single Customer</a></span>
                 </div>
                 <div><span><a className="link" href="#">Customer Win Loss</a></span></div>
             </div>
@@ -20,11 +25,13 @@ export const FastCrossLink = () => {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({}, dispatch);
+    const { getLink } = ActionCreators;
+    return bindActionCreators({ getLink }, dispatch);
 }
 
 function mapStateToProps(state) {
-    return Object.assign({}, {});
+    const { userName } = state;
+    return Object.assign({}, { userName });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FastCrossLink);
