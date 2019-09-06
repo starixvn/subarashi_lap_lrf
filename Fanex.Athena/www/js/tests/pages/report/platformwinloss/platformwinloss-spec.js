@@ -83,8 +83,8 @@
             });
 
             describe("PlatformWinLossOption.gridOption.onSortCol(index)", function () {
-                var _sortColumn = "PlatformType";
-                var data = [{ Index: 1, PlatformType: 3 }, { Index: 1, PlatformType: 2 }, { Index: 1, PlatformType: 4 }];
+                var _sortColumn = "platformType";
+                var data = [{ index: 1, platformType: 3 }, { index: 1, platformType: 2 }, { index: 1, platformType: 4 }];
                 var gridOption = {};
 
                 beforeAll(function () {
@@ -148,9 +148,9 @@
 
                 it("data should be sorted ascending", function () {
                     var expectedData = [
-                            { Index: 1, PlatformType: 2, Id: 2 },
-                            { Index: 2, PlatformType: 3, Id: 1 },
-                            { Index: 3, PlatformType: 4, Id: 3 }];
+                            { index: 1, platformType: 2 },
+                            { index: 2, platformType: 3 },
+                            { index: 3, platformType: 4 }];
                     var expectedResponse = {
                         dataList: data
                     };
@@ -166,9 +166,9 @@
 
                 it("data should be sorted descending", function () {
                     var expectedData = [
-                            { Index: 1, PlatformType: 4, Id: 3 },
-                            { Index: 2, PlatformType: 3, Id: 1 },
-                            { Index: 3, PlatformType: 2, Id: 2 }];
+                            { index: 1, platformType: 4 },
+                            { index: 2, platformType: 3 },
+                            { index: 3, platformType: 2 }];
                     var expectedResponse = {
                         dataList: data
                     };
