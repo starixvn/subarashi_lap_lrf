@@ -6,9 +6,11 @@ import { ActionCreators } from '../actions';
 import Site from '@jsroot/lib/site';
 import DataService from '@jsroot/lib/DataService';
 import LangHelper from '@jsroot/lib/langHelper';
+import { formatDateString } from '@jsroot/lib/dateUtils';
 
 import AppData from '@jsroot/lib/AppData';
 import DataGrid from './DataGrid';
+import BetListLayout from '@jsroot/layouts/betlist/BetListLayout';
 import { usePagingOption } from '@jsroot/customHooks/pagingHooks';
 import { HeaderText } from '../lib/constants';
 
@@ -65,7 +67,16 @@ export const Content = (props) => {
     }
 
     return (
-        <DataGrid {...dataGridProps} />
+        <BetListLayout
+            pageName='PlayerAdmin'
+            rootUrl={Site.getRootUrl()}
+            getResourceFunc={dataGridProps.getResource}
+            formatDateStringFunc={formatDateString}
+            baseCurrency=''
+            beforeShowParlayFunc={() => props.toggleLoader(true)}
+            afterShowParlayFunc={() => props.toggleLoader(true)}>
+            <DataGrid {...dataGridProps} />
+        </BetListLayout >
     )
 }
 

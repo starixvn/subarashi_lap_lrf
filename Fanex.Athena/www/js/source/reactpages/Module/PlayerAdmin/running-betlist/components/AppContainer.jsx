@@ -9,6 +9,7 @@ import LangHelper from '@jsroot/lib/langHelper';
 import Site from '@jsroot/lib/site';
 import Service from '../lib/service';
 import Loader from '@jsroot/components/Loader';
+import AppLayout from '@jsroot/layouts/AppLayout';
 import ReportTitle from '@jsroot/components/ReportTitle';
 
 export class AppContainer extends Component {
@@ -40,22 +41,23 @@ export class AppContainer extends Component {
 
     render() {
         return (
-            <BetListLayout
-                pageName='PlayerAdmin'
-                rootUrl={Site.getRootUrl()}
-                getResourceFunc={this.getResource}
-                formatDateStringFunc={this.formatDateString}
-                baseCurrency=''
-                beforeShowParlayFunc={this.beforeShowParlay}
-                afterShowParlayFunc={this.afterShowParlay}
-            >
-                <Loader isLoading={this.props.isLoading} />
-                <FormFilter />
-                <div className="betlist-container result-content">
-                    { this.title && <ReportTitle content={this.title} /> }
-                    <DataGrid />
-                </div>
-            </BetListLayout>
+            <AppLayout>
+                <BetListLayout
+                    pageName='PlayerAdmin'
+                    rootUrl={Site.getRootUrl()}
+                    getResourceFunc={this.getResource}
+                    formatDateStringFunc={this.formatDateString}
+                    baseCurrency=''
+                    beforeShowParlayFunc={this.beforeShowParlay}
+                    afterShowParlayFunc={this.afterShowParlay}>
+                    <Loader isLoading={this.props.isLoading} />
+                    <FormFilter />
+                    <div className="betlist-container result-content">
+                        { this.title && <ReportTitle content={this.title} /> }
+                        <DataGrid />
+                    </div>
+                </BetListLayout>
+            </AppLayout>
         );
     }
 }

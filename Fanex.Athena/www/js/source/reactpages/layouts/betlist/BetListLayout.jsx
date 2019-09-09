@@ -1,6 +1,5 @@
 ﻿import React, { Component } from 'react';
 import DataService from '@jsroot/lib/DataService';
-import AppLayout from '@jsroot/layouts/AppLayout';
 import BetList from './lib/BetList';
 import Popup from '@jsroot/components/popup';
 import PropTypes from 'prop-types';
@@ -244,7 +243,7 @@ class BetListLayout extends Component {
 
     render() {
         return (
-            <AppLayout>
+            <div className="betlist-layout">
                  {this.props.children}
                  {this.state.isShowPopup &&
                        <Popup isShow={true} 
@@ -254,7 +253,7 @@ class BetListLayout extends Component {
                             onClose={() => this._closePopup()}
                         >
                     </Popup>}
-            </AppLayout>
+            </div>
         );
     }
 }
