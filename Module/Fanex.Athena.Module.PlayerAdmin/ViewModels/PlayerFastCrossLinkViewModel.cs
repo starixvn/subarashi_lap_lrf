@@ -1,0 +1,11 @@
+﻿namespace Fanex.Athena.Module.PlayerAdmin.ViewModels
+{
+    public class PlayerFastCrossLinkViewModel
+    {
+        public string UserName { get; set; }
+
+        public string CurrencyName { get; set; }
+
+        public string ProductCodeListString { get; set; }
+    }
+}

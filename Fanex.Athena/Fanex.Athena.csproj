@@ -704,6 +704,7 @@
     <Content Include="www\css\build\dev\reactpages\playeradmin\betlimit.css.map" />
     <Content Include="www\css\source\components\balloon\balloon.scss" />
     <Content Include="Views\Desktop\Module\PlayerAdmin\SingleCustomer\Index.cshtml" />
+    <Content Include="Views\Desktop\Module\PlayerAdmin\PlayerWinLoss\Index.cshtml" />
     <None Include="www\css\source\reactpages\components\custom3rd\react-toastify.scss" />
     <None Include="www\css\source\pages\betlist\result\result.happy5.scss" />
     <None Include="www\css\source\reactpages\components\alert\icons\error.scss" />

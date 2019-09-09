@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Fanex.Athena.Model.Core.Helper;
 using Fanex.Athena.Model.Core.MetaModel;
 
 namespace Fanex.Athena.Module.PlayerAdmin.MetaModel
@@ -76,10 +75,5 @@ namespace Fanex.Athena.Module.PlayerAdmin.MetaModel
         public string SortOrder { get; set; }
 
         public IDictionary<int, string> CurrencyList { get; set; }
-
-        public virtual bool IsValid => FromDate <= ToDate
-            && !string.IsNullOrWhiteSpace(ProductCodeList)
-            && MetaModelValidationHelper.ValidateBaseCurrency(BaseCurrency)
-            && !string.IsNullOrWhiteSpace(UserName);
     }
 }

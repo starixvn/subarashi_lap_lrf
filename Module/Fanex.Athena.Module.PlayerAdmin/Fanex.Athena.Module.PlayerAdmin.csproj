@@ -84,6 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\PlayerBtcSingleCustomerController.cs" />
+    <Compile Include="Controllers\PlayerWinLossController.cs" />
     <Compile Include="Controllers\RngKenoBetLimitController.cs" />
     <Compile Include="Controllers\PlayerBetLimitBaseControler.cs" />
     <Compile Include="Controllers\PlayerBetListController.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="Controllers\DcsBetLimitController.cs" />
     <Compile Include="Controllers\NumberGameBetLimitController.cs" />
     <Compile Include="Controllers\SportBookBetLimitController.cs" />
+    <Compile Include="DTO\PlayerWinLoss.cs" />
     <Compile Include="DTO\PlayerBetLimit.cs" />
     <Compile Include="DTO\PlayerBetLimitProduct.cs" />
     <Compile Include="MetaModel\PlayerBetLimitSelectMetaModel.cs" />
@@ -99,6 +101,7 @@
     <Compile Include="MetaModel\PlayerBetLimitMetaModel.cs" />
     <Compile Include="MetaModel\PlayerBtcSingleCustomerMetaModel.cs" />
     <Compile Include="MetaModel\PlayerRunningBetListMetalModel.cs" />
+    <Compile Include="MetaModel\PlayerWinLossMetaModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\DcsBetLimitRepository.cs" />
     <Compile Include="Repository\Interfaces\IDcsBetLinitRepository.cs" />
@@ -110,11 +113,14 @@
     <Compile Include="Repository\PlayerBetLimitRepository.cs" />
     <Compile Include="Repository\NumberGameBetLimitRepository.cs" />
     <Compile Include="Repository\SportBookBetLimitRepository.cs" />
+    <Compile Include="Services\Interfaces\IPlayerWinLossService.cs" />
     <Compile Include="Services\Interfaces\ISportBookBetLimitService.cs" />
+    <Compile Include="Services\PlayerWinLossService.cs" />
     <Compile Include="Services\SportBookBetLimitService.cs" />
     <Compile Include="ViewModels\PlayerBetLimitViewModel.cs" />
     <Compile Include="ViewModels\PlayerBetSettingViewModel.cs" />
     <Compile Include="ViewModels\PlayerBtcSingleCustomerViewModel.cs" />
+    <Compile Include="ViewModels\PlayerFastCrossLinkViewModel.cs" />
     <Compile Include="ViewModels\PlayerRunningBetListViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -128,6 +134,10 @@
     <ProjectReference Include="..\..\Controller\Fanex.Athena.Controllers.Base\Fanex.Athena.Controllers.Base.csproj">
       <Project>{255E120A-83BF-4F72-9E31-6050D5704069}</Project>
       <Name>Fanex.Athena.Controllers.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DataAccess\Fanex.Athena.DataAccess.Core\Fanex.Athena.DataAccess.Core.csproj">
+      <Project>{A6BE21E8-6895-4863-BA3A-E6B21D3CE78D}</Project>
+      <Name>Fanex.Athena.DataAccess.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Fanex.Athena.Extension\Fanex.Athena.Extension.csproj">
       <Project>{71F95E53-36D0-4091-828D-ED14C9939C35}</Project>
