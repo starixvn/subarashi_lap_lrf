@@ -2,6 +2,7 @@
 @import "../../components/react-grid";
 @import "../../components/tab";
 @import "../../components/panel";
+@import "../../components/popup";
 
 $borderContainer: #d6d6d6;
 
@@ -92,5 +93,16 @@ body {
 
     .panel {
         height: 100%;
+    }
+
+    .popup-container {
+        .flat-popup {
+            max-height: 100%;
+            max-width: 100%;
+
+            iframe {
+                height: calc(100% - 38px);
+            }
+        }
     }
 }
