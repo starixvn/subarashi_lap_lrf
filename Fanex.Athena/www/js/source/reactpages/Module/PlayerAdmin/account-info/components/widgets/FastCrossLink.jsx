@@ -7,16 +7,23 @@ import Popup from '@jsroot/components/popup';
 
 export const FastCrossLink = (props) => {
     const { userName, currencyName, getLink } = props;
-    const singleCustomerActionLink = `PlayerBtcSingleCustomer/Index?userName=${userName}&currencyName=${currencyName}`;
+
+    const singleCustomerActionLink = `PlayerBtcSingleCustomer?userName=${userName}&currencyName=${currencyName}`;
     const singleCustomerUrl = getLink(systemType.lrf, singleCustomerActionLink);
+
+    const customerWinLossActionLink = `PlayerWinLoss?userName=${userName}&currencyName=${currencyName}`;
+    const customerWinLossUrl = getLink(systemType.lrf, customerWinLossActionLink);
 
     const [popupInfo, setPopupInfo] = useState({url: null, title: null});
     const isShowPopup = !!popupInfo.url;
 
-    const handleClickSingleCustomer = (event) => {
+    const handleClickLink = (event, popup) => {
         event.preventDefault();
-        setPopupInfo({url: singleCustomerUrl, title: 'Betting Ticket Center - Single Customer'});
+        setPopupInfo(popup);
     }
+
+    const popupSingleCustomer = {url: singleCustomerUrl, title: 'Betting Ticket Center - Single Customer'};
+    const popupCustomerWinLoss = {url: customerWinLossUrl, title: 'Customer Win Loss'};
 
     const popupWidth = window.innerWidth - 10;
     const popupHeight = window.innerHeight - 10;
@@ -28,9 +35,9 @@ export const FastCrossLink = (props) => {
                 <div>
                     <span><a className="link" href="#">Betting Ticket Center</a></span>
                     <strong className="divider">></strong>
-                    <span><a className="link" onClick={handleClickSingleCustomer}>Single Customer</a></span>
+                    <span><a className="link" onClick={(e) => handleClickLink(e, popupSingleCustomer)}>Single Customer</a></span>
                 </div>
-                <div><span><a className="link" href="#">Customer Win Loss</a></span></div>
+                <div><span><a className="link" onClick={(e) => handleClickLink(e, popupCustomerWinLoss)}>Customer Win Loss</a></span></div>
             </div>
 
             <Popup isShow={isShowPopup} 

@@ -35,6 +35,7 @@ function generateConfig(environment) {
             [`${jsPath}/playeradmin/runningbetlist`]: pathConfig.scriptPaths.playerrunningbetlist,
             [`${jsPath}/playeradmin/betlimit`]: pathConfig.scriptPaths.playerbetlimit,
             [`${jsPath}/playeradmin/single-customer`]: pathConfig.scriptPaths.singleCustomer,
+            [`${jsPath}/playeradmin/playerwinloss`]: pathConfig.scriptPaths.playerwinloss,
 
             /*css*/
             [`${cssPath}/vendor`]: pathConfig.cssPaths.layout,
@@ -49,7 +50,8 @@ function generateConfig(environment) {
             [`${cssPath}/playeradmin/index`]: pathConfig.cssPaths.playeradmin,
             [`${cssPath}/playeradmin/account-info`]: pathConfig.cssPaths.accountInfo,
             [`${cssPath}/playeradmin/running-betlist`]: pathConfig.cssPaths.playerrunningbetlist,
-            [`${cssPath}/playeradmin/betlimit`]: pathConfig.cssPaths.playerbetlimit
+            [`${cssPath}/playeradmin/betlimit`]: pathConfig.cssPaths.playerbetlimit,
+            [`${cssPath}/playeradmin/playerwinloss`]: pathConfig.cssPaths.playerwinloss
         },
         output: {
             path: pathConfig.projectRoot,

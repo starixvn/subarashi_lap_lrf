@@ -1033,6 +1033,16 @@
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\reducers\playerDetailHandlerReducer.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\reducers\__tests__\filterHandlerReducer.test.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\reducers\__tests__\playerDetailHandlerReducer.test.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerwinloss\actions\index.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerwinloss\actions\types.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerwinloss\components\AppContainer.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerwinloss\components\DataGrid.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerwinloss\components\GridRow.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerwinloss\components\index.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerwinloss\components\Title.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerwinloss\lib\gridHelper.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerwinloss\lib\reportExcel.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerwinloss\reducers\index.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\running-betlist\actions\index.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\running-betlist\components\AppContainer.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\running-betlist\components\DataGrid.jsx" />
@@ -2649,6 +2659,7 @@
     <Content Include="www\css\source\reactpages\pages\playeradmin\betlimit.scss" />
     <Content Include="www\js\build\dev\reactpages\playeradmin\betlimit.chunk.js.map" />
     <Content Include="www\js\build\dev\reactpages\playeradmin\accountinfo.chunk.js.map" />
+    <Content Include="www\css\source\reactpages\pages\playeradmin\playerwinloss.scss" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="SiteConfig\WebConfigTransforms\SIT.config">

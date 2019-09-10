@@ -16,7 +16,8 @@ var cssPaths = {
     playeradmin: "./www/css/source/reactpages/pages/playeradmin/index.scss",
     accountInfo: "./www/css/source/reactpages/pages/playeradmin/account-info.scss",
     playerrunningbetlist: "./www/css/source/reactpages/pages/playeradmin/running-betlist.scss",
-    playerbetlimit: "./www/css/source/reactpages/pages/playeradmin/betlimit.scss"
+    playerbetlimit: "./www/css/source/reactpages/pages/playeradmin/betlimit.scss",
+    playerwinloss: "./www/css/source/reactpages/pages/playeradmin/playerwinloss.scss"
 };
 
 var scriptPaths = {
@@ -44,7 +45,8 @@ var scriptPaths = {
     accountinfo: "./www/js/source/reactpages/Module/PlayerAdmin/account-info/components/index.jsx",
     playerrunningbetlist: "./www/js/source/reactpages/Module/PlayerAdmin/running-betlist/components/index.jsx",
     playerbetlimit: "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/index.jsx",
-    singleCustomer: "./www/js/source/reactpages/Module/PlayerAdmin/single-customer/components/index.jsx"
+    singleCustomer: "./www/js/source/reactpages/Module/PlayerAdmin/single-customer/components/index.jsx",
+    playerwinloss: "./www/js/source/reactpages/Module/PlayerAdmin/playerwinloss/components/index.jsx"
 };
 module.exports = {
     projectRoot: projectRoot,

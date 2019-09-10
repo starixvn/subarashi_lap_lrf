@@ -23,6 +23,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Services
         public PlayerWinLossService(IDbFactory dbFactory, IBalanceUpDataAccess balanceUpDataAccess)
         {
             _dbFactory = dbFactory;
+            _balanceUpDataAccess = balanceUpDataAccess;
         }
 
         public IEnumerable<PlayerWinLoss> GetData(PlayerWinLossMetaModel metaModel)

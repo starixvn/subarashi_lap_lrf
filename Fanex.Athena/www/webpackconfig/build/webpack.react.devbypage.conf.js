@@ -21,6 +21,8 @@ const entry = {
     [`${jsPath}/playeradmin/accountinfo`]: pathConfig.scriptPaths.accountinfo,
     [`${cssPath}/playeradmin/account-info`]: pathConfig.cssPaths.accountInfo,
     [`${jsPath}/playeradmin/single-customer`]: pathConfig.scriptPaths.singleCustomer,
+    [`${jsPath}/playeradmin/playerwinloss`]: pathConfig.scriptPaths.playerwinloss,
+    [`${cssPath}/playeradmin/playerwinloss`]: pathConfig.cssPaths.playerwinloss
 }
 
 const devByPageConfig = {
