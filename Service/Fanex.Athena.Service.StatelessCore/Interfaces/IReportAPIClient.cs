@@ -1,0 +1,12 @@
+﻿namespace Fanex.Athena.Service.StatelessCore.Interfaces
+{
+    using System.Net.Http;
+    using System.Threading.Tasks;
+
+    public interface IReportAPIClient
+    {
+        Task<T> PostAsync<T>(string path, object value, string language);
+
+        Task<HttpResponseMessage> PostFileAsync(string path, object value, string fileName, string language);
+    }
+}

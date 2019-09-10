@@ -62,6 +62,7 @@
         [TestCase(1,"USD", null, "USD", true, PlatformType.Mobile, nameof(PlatformType.Mobile))]
         [TestCase(1,"USD", null, "USD", true, PlatformType.Tablet, nameof(PlatformType.Tablet))]
         [TestCase(0,"", null, "EUR", true, PlatformType.NewAsia, nameof(PlatformType.NewAsia))]
+        [TestCase(0, "", null, "EUR", true, PlatformType.DeepLink, nameof(PlatformType.DeepLink))]
         [TestCase(0,"", null, "EUR", true, PlatformType.All, nameof(PlatformType.All))]
         public async Task Index_ExportExcel_PassCorrectParam(
             int currencyId,

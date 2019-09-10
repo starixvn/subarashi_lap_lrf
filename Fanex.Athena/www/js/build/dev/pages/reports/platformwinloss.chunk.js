@@ -8421,7 +8421,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 '6': Site.getSingleResource('Tablet'),
                 '7': Site.getSingleResource('NewAsia'),
                 '8': Site.getSingleResource('MobileApp'),
-                '9': Site.getSingleResource('MobileLiteVersion')
+                '9': Site.getSingleResource('MobileLiteVersion'),
+                '10': Site.getSingleResource('DeepLink')
             };
 
             _me.initEvent();
@@ -8511,6 +8512,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
             gridControl.level = 0;
             const data = getSubmitData();
+            const productOption = getProductOptions(data);
 
             getData(data, Site.resolveClientUrl(PlatformWinLossOption.urlData), function (response) {
                 const submitData = {
@@ -8518,7 +8520,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                     ToDay: data.ToDay,
                     Month: data.Month,
                     Year: data.Year,
-                    ProductOptions: $.parseJSON(response.ProductOptions),
+                    ProductOptions: productOption,
                     DrawFilter: data.DrawFilter,
                     PlatformType: data.PlatformType,
                     CurrencyId: data.CurrencyId,
@@ -8554,7 +8556,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         function bindData(level, response, productOptions) {
             jqGridAdditional.clearGrid('ReportGrid');
 
-            const numOfRow = response.Data.length;
+            const numOfRow = response.dataList.length;
             if (numOfRow === 0) {
                 jqGridAdditional.setNoInfo();
                 return;
@@ -8562,7 +8564,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
             const reportGrid = $('#ReportGrid');
             let onPaging = false;
-            const data = level === 1 ? sortData(response.Data) : response.Data;
+            const data = level === 1 ? sortData(response.dataList) : response.dataList;
 
             const gridOption = PlatformWinLossOption.getGridOption(level, productOptions);
             gridOption.datastr = data;
@@ -8591,7 +8593,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                     $('.ui-jqgrid-ftable').html($('#footer').html());
                 }
                 else {
-                    _me.bindTotal(level, response.Total, response.SummaryTotal);
+                    _me.bindTotal(level, response.totalData);
                     $('#footer').html($('.ui-jqgrid-ftable').html());
                 }
 
@@ -8609,7 +8611,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
             /*group header*/
             if (PlatformWinLossOption.hasCustomerComm) {
-                jqGridAdditional.setGroupCustomerWLColumns(reportGrid);
+                PlatformWinLossOption.setCustomerWLGroupHeaderColumns(reportGrid);
             }
 
             if (level === 1 && gridControl.sortColumnName) {
@@ -8617,7 +8619,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             }
         }
 
-        function bindTotal(level, totalData, summaryTotal) {
+        function bindTotal(level, totalData) {
             const columnModel = PlatformWinLossOption.getColModel(level, _filterData[level].ProductOptions);
 
             if (level === 0) {
@@ -8630,7 +8632,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 const summaryColspan = colspan + 1;
                 jqGridAdditional.assignTotal(totalData, columnModel);
 
-                const summaryRowCount = Report.bindSummaryTotal(columnModel, summaryTotal);
+                const summaryRowCount = Report.bindSummaryTotal(columnModel);
                 jqGridAdditional.setGroupFooters(colspan, summaryColspan, summaryRowCount);
             }
         }
@@ -8759,7 +8761,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 return arrayData;
             }
 
-            const sortThenBy = arrayData[0].Id ? 'Id' : 'Index';
+            const sortThenBy = 'index';
 
             const data = DataHelper.sort(
                 arrayData,
@@ -8768,17 +8770,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 function (x) { return x[sortThenBy]; },
                 'asc');
 
-            if (sortThenBy === 'Id') {
                 for (let i = 0; i < totalData; i++) {
-                    data[i].Index = i + 1;
+                    data[i].index = i + 1;
                 }
-            }
-            else {
-                for (let j = 0; j < totalData; j++) {
-                    arrayData[j].Id = j + 1;
-                    data[j].Index = j + 1;
-                }
-            }
 
             return data;
         }
@@ -8794,6 +8788,35 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 : productSeleted.join(', ');
 
             return Site.getSingleResource('Product') + ': ' + productName;
+        }
+
+        function getProductOptions(serializeParam) {
+            const codeKey = /ProductOptions\[\d+\].Code/;
+            let products = [];
+
+            const keys = Object.keys(serializeParam);
+
+            for (let i = 1; i < keys.length; i++) {
+                const key = keys[i];
+                if (codeKey.test(key) && serializeParam[key]) {
+                    const statusKey = key.replace(".Code", '.Status');
+
+                    if (serializeParam[statusKey]) {
+                        products.push({
+                            Code: serializeParam[key],
+                            Status: true
+                        });
+                    }
+                    else {
+                        products.push({
+                            Code: serializeParam[key],
+                            Status: false
+                        });
+                    }
+                }
+            }
+
+            return products;
         }
 
         function resizeGrid() {
@@ -8841,34 +8864,35 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
         const betlistLink = function (cellvalue, options, rowObject) {
             const param =
             {
-                DrillDownCurrencyId: rowObject.CurrencyId,
-                DrillDownCurrencyName: rowObject.CurrencyName,
-                CustomerId: rowObject.CustomerId,
-                ExternalId: rowObject.ExternalId,
-                SystemId: rowObject.SystemId
+                DrillDownCurrencyId: rowObject.currencyId,
+                DrillDownCurrencyName: rowObject.currencyName,
+                CustomerId: rowObject.customerId,
+                ExternalId: rowObject.externalId,
+                SystemId: rowObject.systemId
             };
             return '<a class="bet-list-link" href="javascript:;" data-drill-down=\'' + JSON.stringify(param) + '\'>' + cellvalue + '</a>';
         };
         const drilldownLink = function (cellvalue, options, rowObject) {
-            const parentClassName = rowObject.IsLeaf ? '' : ' text-bold';
+            const parentClassName = rowObject.isLeaf ? '' : ' text-bold';
             const param =
             {
-                PlatformType: rowObject.PlatformType > 0 ? rowObject.PlatformType : Number(rowObject.Parent),
-                ProductCode: rowObject.PlatformType < 0 ? rowObject.ProductCode : undefined
+                PlatformType: rowObject.isLeaf ? Number(rowObject.parent) : rowObject.platformType,
+                ProductCode: rowObject.isLeaf ? rowObject.productCode : undefined
             };
 
             return '<a class="drilldown' + parentClassName + '" href="javascript:;" data-drill-down=\'' + JSON.stringify(param) + '\'>' + cellvalue + '</a>';
         };
+
         const idColumn = {
-            name: 'PlatformType',
-            index: 'PlatformType',
+            name: 'platformType',
+            index: 'platformType',
             key: true,
             hidden: true,
             align: 'center'
         };
         const platformNameColumn = {
-            name: 'Name',
-            index: 'Name',
+            name: 'name',
+            index: 'name',
             width: 120,
             align: 'left',
             valign: 'middle',
@@ -8877,18 +8901,17 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
             formatter: drilldownLink
         };
         const indexColumn = {
-            name: 'Index',
-            index: 'Index',
+            name: 'index',
+            index: 'index',
             width: 60,
             align: 'center',
             valign: 'middle',
             sortable: false,
-            resizable: false,
-            cellattr: jqGridAdditional.rowSpanSetting
+            resizable: false
         };
         const externalIdColumn = {
-            name: 'ExternalId',
-            index: 'ExternalId',
+            name: 'externalId',
+            index: 'externalId',
             width: 85,
             align: 'left',
             sortable: true,
@@ -8896,8 +8919,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
             formatter: betlistLink
         };
         const systemIdColumn = {
-            name: 'SystemId',
-            index: 'SystemId',
+            name: 'systemId',
+            index: 'systemId',
             width: 120,
             align: 'left',
             sortable: true,
@@ -8905,16 +8928,16 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
             formatter: betlistLink
         };
         const currencyColumn = {
-            name: 'CurrencyName',
-            index: 'CurrencyName',
+            name: 'currencyName',
+            index: 'currencyName',
             width: 60,
             align: 'center',
             sortable: true,
             resizable: false
         };
         const turnoverColumn = {
-            name: 'Turnover',
-            index: 'Turnover',
+            name: 'turnover',
+            index: 'turnover',
             resizable: false,
             width: 85,
             align: 'right',
@@ -8923,8 +8946,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
             formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
         };
         const turnoverPercentColumn = {
-            name: 'TurnoverPercent',
-            index: 'TurnoverPercent',
+            name: 'turnoverPercent',
+            index: 'turnoverPercent',
             resizable: false,
             width: 85,
             align: 'right',
@@ -8933,8 +8956,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
             formatoptions: { decimalPlaces: 2, suffix: '%' }
         };
         const totalTransColumn = {
-            name: 'TotalTransactions',
-            index: 'TotalTransactions',
+            name: 'totalTransactions',
+            index: 'totalTransactions',
             width: 95,
             align: 'right',
             sortable: true,
@@ -8947,8 +8970,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
             }
         };
         const customerWlColumn = {
-            name: 'CustomerWinLoss',
-            index: 'CustomerWinLoss',
+            name: 'customerWinLoss',
+            index: 'customerWinLoss',
             width: 90,
             align: 'right',
             sortable: true,
@@ -8957,8 +8980,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
             formatter: jqGridAdditional.formatDecimal
         };
         const playerCommColumn = {
-            name: 'CustomerComm',
-            index: 'CustomerComm',
+            name: 'customerComm',
+            index: 'customerComm',
             width: 50,
             align: 'right',
             sortable: true,
@@ -8967,8 +8990,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
             formatter: jqGridAdditional.formatDecimal
         };
         const customerWlTotalColumn = {
-            name: 'CustomerTotal',
-            index: 'CustomerTotal',
+            name: 'customerTotal',
+            index: 'customerTotal',
             width: 90,
             align: 'right',
             sortable: true,
@@ -8977,8 +9000,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
             formatter: jqGridAdditional.formatDecimal
         };
         const licenseeWlColumn = {
-            name: 'LicenseeWL',
-            index: 'LicenseeWL',
+            name: 'licenseeWL',
+            index: 'licenseeWL',
             width: 85,
             align: 'right',
             sortable: true,
@@ -8988,8 +9011,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
             formatter: jqGridAdditional.formatLicenseeWl
         };
         const baCommissionColumn = {
-            name: 'BACommission',
-            index: 'BACommission',
+            name: 'baCommission',
+            index: 'baCommission',
             width: 70,
             align: 'right',
             sortable: true,
@@ -8998,8 +9021,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
             formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
         };
         const amtDueToBaColumn = {
-            name: 'AmtDueToBA',
-            index: 'AmtDueToBA',
+            name: 'amtDueToBA',
+            index: 'amtDueToBA',
             width: 60,
             align: 'right',
             sortable: true,
@@ -9008,8 +9031,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
             formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
         };
         const currencyIdColumn = {
-            name: 'CurrencyId',
-            index: 'CurrencyId',
+            name: 'currencyId',
+            index: 'currencyId',
             width: 0,
             align: 'center',
             sortable: false,
@@ -9017,8 +9040,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
             hidden: true
         };
         const customerIdColumn = {
-            name: 'CustomerId',
-            index: 'CustomerId',
+            name: 'customerId',
+            index: 'customerId',
             width: 0,
             align: 'center',
             sortable: false,
@@ -9150,11 +9173,11 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
                 treeGrid: true,
                 treeGridModel: 'adjacency',
                 treedatatype: 'local',
-                ExpandColumn: 'Name',
+                ExpandColumn: 'name',
                 treeReader: {
-                    level_field: 'Level',       // jshint ignore:line
-                    parent_id_field: 'Parent',  // jshint ignore:line
-                    leaf_field: 'IsLeaf'        // jshint ignore:line
+                    level_field: 'level',       // jshint ignore:line
+                    parent_id_field: 'parent',  // jshint ignore:line
+                    leaf_field: 'isLeaf'        // jshint ignore:line
                 },
                 treeIcons: { plus: 'ui-icon-circlesmall-plus icon-arrow', minus: 'ui-icon-circlesmall-minus icon-arrow', leaf: '' },
                 pager: '#ppdata',
@@ -9201,6 +9224,18 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
                 _me.gridOption.colModel = _me.getColModel(level, productOptions);
 
                 return _me.gridOption;
+            },
+
+            setCustomerWLGroupHeaderColumns: function (grid) {
+                grid.jqGrid('setGroupHeaders',
+                    {
+                        useColSpanStyle: true,
+                        groupHeaders: [{
+                            startColumnName: 'customerWinLoss',
+                            numberOfColumns: 3,
+                            titleText: Site.getSingleResource('CustomerW_L')
+                        }]
+                    });
             }
         };
 

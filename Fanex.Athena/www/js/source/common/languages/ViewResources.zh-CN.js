@@ -1,4 +1,4 @@
-﻿// Generated at: 08/28/2019 9:24:10 AM
+﻿// Generated at: 08/30/2019 3:28:35 PM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -442,7 +442,7 @@ RB:"赛马",
 RecommendBrowserOnReportPageMsg:"若页面大小 &gt; 1,000, 请您考虑使用火狐或Chrome以获得更好的体验",
 RefNo:"注单号码",
 Refund:"退款",
-Reject:"取消",
+Reject:"已取消",
 Remark:"备注",
 RemoveFromGroup:"从组中删除",
 RemoveGroupMsg:"您确定要从组中移除此(这些)会员?",

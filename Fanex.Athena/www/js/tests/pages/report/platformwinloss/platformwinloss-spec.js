@@ -83,8 +83,8 @@
             });
 
             describe("PlatformWinLossOption.gridOption.onSortCol(index)", function () {
-                var _sortColumn = "PlatformType";
-                var data = [{ Index: 1, PlatformType: 3 }, { Index: 1, PlatformType: 2 }, { Index: 1, PlatformType: 4 }];
+                var _sortColumn = "platformType";
+                var data = [{ index: 1, platformType: 3 }, { index: 1, platformType: 2 }, { index: 1, platformType: 4 }];
                 var gridOption = {};
 
                 beforeAll(function () {
@@ -92,7 +92,9 @@
 
                     spyOn($.fn, "serializeObject").and.returnValue({
                         FromDate: "5/1/2017",
-                        ToDate: "5/7/2017"
+                        ToDate: "5/7/2017",
+                        "ProductOptions[0].Code": "SB",
+                        "ProductOptions[0].Status": true
                     });
 
                     var grid = $("#ReportGrid");
@@ -101,7 +103,7 @@
                     spyOn(Site, "blockUI");
                     spyOn(PlatformWinLossOption, "getGridOption").and.returnValue(gridOption);
                     spyOn($.fn, "jqGrid");
-                    spyOn(jqGridAdditional, "setGroupCustomerWLColumns");
+                    spyOn(PlatformWinLossOption, "setCustomerWLGroupHeaderColumns");
                     spyOn(jqGridAdditional, "addSortableHeader");
                     spyOn(Report, "renderBreadCrumb");
                     spyOn(Site, "unBlockUI");
@@ -110,8 +112,7 @@
                             .stubRequest("api/PlatformWinLossReport/Index")
                             .andReturn({
                                 responseText: JSON.stringify({
-                                    Data: data,
-                                    ProductOptions: '[{"Code":"SB","Status":true}]'
+                                    dataList: data
                                 })
                             });
 
@@ -147,12 +148,11 @@
 
                 it("data should be sorted ascending", function () {
                     var expectedData = [
-                            { Index: 1, PlatformType: 2, Id: 2 },
-                            { Index: 2, PlatformType: 3, Id: 1 },
-                            { Index: 3, PlatformType: 4, Id: 3 }];
+                            { index: 1, platformType: 2 },
+                            { index: 2, platformType: 3 },
+                            { index: 3, platformType: 4 }];
                     var expectedResponse = {
-                        Data: data,
-                        ProductOptions: '[{"Code":"SB","Status":true}]'
+                        dataList: data
                     };
                     var expectedProductOpts = [{ Code: "SB", Status: true }];
                     var level = 1;
@@ -166,12 +166,11 @@
 
                 it("data should be sorted descending", function () {
                     var expectedData = [
-                            { Index: 1, PlatformType: 4, Id: 3 },
-                            { Index: 2, PlatformType: 3, Id: 1 },
-                            { Index: 3, PlatformType: 2, Id: 2 }];
+                            { index: 1, platformType: 4 },
+                            { index: 2, platformType: 3 },
+                            { index: 3, platformType: 2 }];
                     var expectedResponse = {
-                        Data: data,
-                        ProductOptions: '[{"Code":"SB","Status":true}]'
+                        dataList: data
                     };
                     var expectedProductOpts = [{ Code: "SB", Status: true }];
                     var level = 1;
@@ -228,7 +227,13 @@
 
                     spyOn($.fn, "serializeObject").and.returnValue({
                         FromDate: "5/1/2017",
-                        ToDate: "5/7/2017"
+                        ToDate: "5/7/2017",
+                        "ProductOptions[0].Code": "SB",
+                        "ProductOptions[0].Status": true,
+                        "ProductOptions[1].Code": "RB",
+                        "ProductOptions[1].Status": false,
+                        "ProductOptions[2].Code": "AB",
+                        "ProductOptions[2].Status": false
                     });
                     spyOn(Report, "ValidProducts").and.returnValue(true);
 
@@ -236,8 +241,7 @@
                             .stubRequest("api/PlatformWinLossReport/Index")
                             .andReturn({
                                 responseText: JSON.stringify({
-                                    Data: [{ index: 1 }, { index: 2 }, { index: 4 }],
-                                    ProductOptions: '[{"Code":"SB","Status":true}, {"Code":"RB","Status":false}, {"Code":"AB","Status":false}]'
+                                    dataList: [{ index: 1 }, { index: 2 }, { index: 4 }]
                                 })
                             });
 
@@ -314,15 +318,20 @@
                         ToDate: "5/7/2017",
                         CurrencyName: "ALL",
                         Excludetest: "True",
-                        BaseCurrency: "eur"
+                        BaseCurrency: "eur",
+                        "ProductOptions[0].Code": "SB",
+                        "ProductOptions[0].Status": true,
+                        "ProductOptions[1].Code": "RB",
+                        "ProductOptions[1].Status": false,
+                        "ProductOptions[2].Code": "AB",
+                        "ProductOptions[2].Status": false
                     };
 
                     jasmine.Ajax
                             .stubRequest("api/PlatformWinLossReport/Index")
                             .andReturn({
                                 responseText: JSON.stringify({
-                                    Data: [{ index: 1 }, { index: 2 }, { index: 4 }],
-                                    ProductOptions: '[{"Code":"SB","Status":true}, {"Code":"RB","Status":false}, {"Code":"AB","Status":false}]'
+                                    dataList: [{ index: 1 }, { index: 2 }, { index: 4 }]
                                 })
                             });
 
@@ -424,12 +433,12 @@
                     spyOn(PlatformWinLossOption, "getGridOption").and.returnValue(gridOption);
                     spyOn(jqGridAdditional, "updateGridHeight");
                     spyOn(jqGridAdditional, "updateGridWidth");
-                    spyOn(jqGridAdditional, "setGroupCustomerWLColumns");
+                    spyOn(PlatformWinLossOption, "setCustomerWLGroupHeaderColumns");
                     spyOn(jqGridAdditional, "addSortableHeader");
                 });
 
                 it("jqGridAdditional.setNoInfo should be called when empty data", function () {
-                    PlatformWinLoss.bindData(0, { Data: [] }, {});
+                    PlatformWinLoss.bindData(0, { dataList: [] }, {});
 
                     expect(jqGridAdditional.setNoInfo).toHaveBeenCalled();
                 });
@@ -439,46 +448,46 @@
                     var reportGrid = $("#ReportGrid");
                     spyOn(reportGrid, "jqGrid");
 
-                    PlatformWinLoss.bindData(0, { Data: [{ index: 1 }] }, {});
+                    PlatformWinLoss.bindData(0, { dataList: [{ index: 1 }] }, {});
 
                     expect(reportGrid.jqGrid).not.toHaveBeenCalled();
                     expect(jqGridAdditional.setNoInfo).not.toHaveBeenCalled();
                 });
 
                 it("treeGrid should be set if level is 0", function () {
-                    PlatformWinLoss.bindData(0, { Data: [{ index: 1 }] }, {});
+                    PlatformWinLoss.bindData(0, { dataList: [{ index: 1 }] }, {});
 
                     expect(gridOption.treeGrid).toBe(true);
                     expect(gridOption.rowNum).toBe(1);
                 });
 
                 it("treeGrid should not be set if level is 1", function () {
-                    PlatformWinLoss.bindData(1, { Data: [{ index: 1 }] }, {});
+                    PlatformWinLoss.bindData(1, { dataList: [{ index: 1 }] }, {});
 
                     expect(gridOption.treeGrid).toBe(false);
                     expect(gridOption.rowNum).not.toBe(-1);
                 });
 
-                it("jqGridAdditional.setGroupCustomerWLColumns should be called if hasCustomerComm is true", function () {
+                it("PlatformWinLossOption.setCustomerWLGroupHeaderColumns should be called if hasCustomerComm is true", function () {
                     var $input = setFixtures('<input id="IsAllowedCustomerCommission" value="true">');
                     PlatformWinLoss.initialize();
 
-                    PlatformWinLoss.bindData(1, { Data: [{ index: 1 }] }, {});
+                    PlatformWinLoss.bindData(1, { dataList: [{ index: 1 }] }, {});
 
-                    expect(jqGridAdditional.setGroupCustomerWLColumns).toHaveBeenCalled();
+                    expect(PlatformWinLossOption.setCustomerWLGroupHeaderColumns).toHaveBeenCalled();
                 });
 
-                it("jqGridAdditional.setGroupCustomerWLColumns should not be called if hasCustomerComm is false", function () {
+                it("PlatformWinLossOption.setCustomerWLGroupHeaderColumns should not be called if hasCustomerComm is false", function () {
                     var $input = setFixtures('<input id="IsAllowedCustomerCommission" value="false">');
                     PlatformWinLoss.initialize();
 
-                    PlatformWinLoss.bindData(1, { Data: [{ index: 1 }] }, {});
+                    PlatformWinLoss.bindData(1, { dataList: [{ index: 1 }] }, {});
 
-                    expect(jqGridAdditional.setGroupCustomerWLColumns).not.toHaveBeenCalled();
+                    expect(PlatformWinLossOption.setCustomerWLGroupHeaderColumns).not.toHaveBeenCalled();
                 });
 
                 it("jqGridAdditional.addSortableHeader should not be called if level is 0", function () {
-                    PlatformWinLoss.bindData(0, { Data: [{ index: 1 }] }, {});
+                    PlatformWinLoss.bindData(0, { dataList: [{ index: 1 }] }, {});
 
                     expect(jqGridAdditional.addSortableHeader).not.toHaveBeenCalled();
                 });
@@ -491,7 +500,9 @@
                     var data = [{ Index: 1, PlatformType: 3 }, { Index: 1, PlatformType: 2 }, { Index: 1, PlatformType: 4 }];
                     spyOn($.fn, "serializeObject").and.returnValue({
                         FromDate: "5/1/2017",
-                        ToDate: "5/7/2017"
+                        ToDate: "5/7/2017",
+                        "ProductOptions[0].Code": "SB",
+                        "ProductOptions[0].Status": true
                     });
 
                     var grid = $("#ReportGrid");
@@ -506,8 +517,7 @@
                             .stubRequest("api/PlatformWinLossReport/Index")
                             .andReturn({
                                 responseText: JSON.stringify({
-                                    Data: data,
-                                    ProductOptions: '[{"Code":"SB","Status":true}]'
+                                    dataList: data
                                 })
                             });
 
@@ -538,7 +548,7 @@
                 it("return top if numOfRow less than PlatformWinLossOption.pageSize", function () {
                     var data = [{ Index: 1, PlatformType: 3 }, { Index: 1, PlatformType: 2 }, { Index: 1, PlatformType: 4 }];
 
-                    PlatformWinLoss.bindData(0, { Data: data }, {});
+                    PlatformWinLoss.bindData(0, { dataList: data }, {});
                     var returnData = PlatformWinLossOption.gridOption.onPaging("pager");
 
                     expect(returnData).toBe("stop");
@@ -552,7 +562,7 @@
                         data.push({ Index: i, PlatformType: i })
                     }
 
-                    PlatformWinLoss.bindData(0, { Data: data }, {});
+                    PlatformWinLoss.bindData(0, { dataList: data }, {});
                     PlatformWinLossOption.gridOption.onPaging("pager");
 
                     expect(Site.blockUI).toHaveBeenCalled();
@@ -566,7 +576,7 @@
                         data.push({ Index: i, PlatformType: i })
                     }
 
-                    PlatformWinLoss.bindData(0, { Data: data }, {});
+                    PlatformWinLoss.bindData(0, { dataList: data }, {});
                     PlatformWinLossOption.gridOption.onPaging("pager");
 
                     expect(Site.blockUI).not.toHaveBeenCalled();
@@ -589,7 +599,7 @@
                     setFixtures('<div id="pg_ppdata"></div>');
                     var data = [{ Index: 1, PlatformType: 3 }, { Index: 1, PlatformType: 2 }, { Index: 1, PlatformType: 4 }];
 
-                    PlatformWinLoss.bindData(0, { Data: data }, {});
+                    PlatformWinLoss.bindData(0, { dataList: data }, {});
                     PlatformWinLossOption.gridOption.gridComplete();
 
                     expect($("#pg_ppdata").is(":hidden")).toBe(true);
@@ -602,7 +612,7 @@
                         data.push({ Index: i, PlatformType: i })
                     }
 
-                    PlatformWinLoss.bindData(1, { Data: data }, {});
+                    PlatformWinLoss.bindData(1, { dataList: data }, {});
                     PlatformWinLossOption.gridOption.gridComplete();
 
                     expect($("#pg_ppdata").is(":hidden")).toBe(false);
@@ -615,7 +625,7 @@
                         data.push({ Index: i, PlatformType: i })
                     }
 
-                    PlatformWinLoss.bindData(1, { Data: data }, {});
+                    PlatformWinLoss.bindData(1, { dataList: data }, {});
                     PlatformWinLossOption.gridOption.onPaging("pager");
                     PlatformWinLossOption.gridOption.gridComplete();
 
@@ -625,7 +635,7 @@
                 it("columnheader should be removed ui-jqgrid-sortable if level is 0", function () {
                     setFixtures('<th role="columnheader"><div class="ui-jqgrid-sortable"></div></th>');
 
-                    PlatformWinLoss.bindData(0, { Data: [{ Index: 1 }] }, {});
+                    PlatformWinLoss.bindData(0, { dataList: [{ Index: 1 }] }, {});
                     PlatformWinLossOption.gridOption.gridComplete();
 
                     expect($("th[role='columnheader']").find("div").hasClass("ui-jqgrid-sortable")).toBe(false);
@@ -634,7 +644,7 @@
                 it("columnheader should not be removed ui-jqgrid-sortable if level is 1", function () {
                     setFixtures('<th role="columnheader"><div class="ui-jqgrid-sortable"></div></th>');
 
-                    PlatformWinLoss.bindData(1, { Data: [{ Index: 1 }] }, {});
+                    PlatformWinLoss.bindData(1, { dataList: [{ Index: 1 }] }, {});
                     PlatformWinLossOption.gridOption.gridComplete();
 
                     expect($("th[role='columnheader']").find("div").hasClass("ui-jqgrid-sortable")).toBe(true);
@@ -648,7 +658,13 @@
 
                     spyOn($.fn, "serializeObject").and.returnValue({
                         FromDate: "5/1/2017",
-                        ToDate: "5/7/2017"
+                        ToDate: "5/7/2017",
+                        "ProductOptions[0].Code": "SB",
+                        "ProductOptions[0].Status": true,
+                        "ProductOptions[1].Code": "RB",
+                        "ProductOptions[1].Status": false,
+                        "ProductOptions[2].Code": "AB",
+                        "ProductOptions[2].Status": false
                     });
                     spyOn(Report, "ValidProducts").and.returnValue(true);
 
@@ -656,8 +672,7 @@
                             .stubRequest("api/PlatformWinLossReport/Index")
                             .andReturn({
                                 responseText: JSON.stringify({
-                                    Data: [{ index: 1 }, { index: 2 }, { index: 4 }],
-                                    ProductOptions: '[{"Code":"SB","Status":true}, {"Code":"RB","Status":false}, {"Code":"AB","Status":false}]'
+                                    dataList: [{ index: 1 }, { index: 2 }, { index: 4 }]
                                 })
                             });
 
@@ -692,11 +707,10 @@
 
                 it("bindSummaryTotal should be called with correct parameter if level is 1", function () {
                     spyOn(Report, "bindSummaryTotal");
-                    var summaryTotal = [{ index: 1 }];
 
-                    PlatformWinLoss.bindTotal(1, {}, summaryTotal);
+                    PlatformWinLoss.bindTotal(1, {});
 
-                    expect(Report.bindSummaryTotal).toHaveBeenCalledWith(columnModel, summaryTotal);
+                    expect(Report.bindSummaryTotal).toHaveBeenCalledWith(columnModel);
                 });
             });
 
@@ -810,15 +824,22 @@
 
                     var data = [{ index: 1 }, { index: 2 }, { index: 4 }];
                     spyOn(Report, "ValidProducts").and.returnValue(true);
+                    spyOn($.fn, "serializeObject").and.returnValue({
+                        FromDate: "5/1/2017",
+                        ToDate: "5/7/2017",
+                        "ProductOptions[0].Code": "SB",
+                        "ProductOptions[0].Status": true,
+                        "ProductOptions[1].Code": "RB",
+                        "ProductOptions[1].Status": false
+                    });
 
                     jasmine.Ajax
                             .stubRequest("api/PlatformWinLossReport/Index")
                             .andReturn({
                                 responseText: JSON.stringify({
-                                    Data: data,
-                                    ProductOptions: '[{"Code":"SB","Status":true}, {"Code":"RB","Status":false}]',
-                                    FromDate: "05/01/2017",
-                                    ToDate: "05/07/2017"
+                                    dataList: data,
+                                    //FromDate: "05/01/2017",
+                                    //ToDate: "05/07/2017"
                                 })
                             });
 
@@ -869,7 +890,17 @@
                         ToDate: "5/7/2017",
                         IsExcludedTestData: false,
                         DrawFilter: 0,
-                        BaseCurrency: "usd"
+                        BaseCurrency: "usd",
+                        "ProductOptions[0].Code": "SB",
+                        "ProductOptions[0].Status": true,
+                        "ProductOptions[1].Code": "RB",
+                        "ProductOptions[1].Status": false,
+                        "ProductOptions[2].Code": "AB",
+                        "ProductOptions[2].Status": true,
+                        "ProductOptions[3].Code": "PP",
+                        "ProductOptions[3].Status": true,
+                        "ProductOptions[4].Code": "CC",
+                        "ProductOptions[4].Status": true
                     });
                     spyOn(Report, "ValidProducts").and.returnValue(true);
 
@@ -877,8 +908,7 @@
                             .stubRequest("api/PlatformWinLossReport/Index")
                             .andReturn({
                                 responseText: JSON.stringify({
-                                    Data: [{ index: 1 }, { index: 2 }, { index: 4 }],
-                                    ProductOptions: '[{"Code":"SB","Status":true}, {"Code":"RB","Status":false}, {"Code":"AB","Status":true}, {"Code":"PP","Status":true}, {"Code":"CC","Status":true}]'
+                                    dataList: [{ index: 1 }, { index: 2 }, { index: 4 }]
                                 })
                             });
 

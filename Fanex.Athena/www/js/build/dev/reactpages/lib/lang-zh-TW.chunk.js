@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 08/28/2019 9:24:10 AM
+// Generated at: 08/30/2019 3:28:35 PM
 window._language_zh_TW = {
   AA: "客客",
   AbnormalBet: "非正規註單",
@@ -534,7 +534,7 @@ window._language_zh_TW = {
   RecommendBrowserOnReportPageMsg: "若頁面大小&gt; 1,000，請您考慮使用火狐或Chrome瀏覽器以獲得更好的體驗",
   RefNo: "注單號碼",
   Refund: "退款",
-  Reject: "取消",
+  Reject: "已取消",
   Remark: "備註",
   RemoveFromGroup: "從組中刪除",
   RemoveGroupMsg: "您確定要從組中移除此（這些）會員?",

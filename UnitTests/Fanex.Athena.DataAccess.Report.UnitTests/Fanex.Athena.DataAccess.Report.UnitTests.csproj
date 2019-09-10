@@ -128,7 +128,6 @@
     <Compile Include="TurnoverDataAccessTest.cs" />
     <Compile Include="ThirdPartyWinLossDataAccessTest.cs" />
     <Compile Include="SettledMatchCountDataAccessTest.cs" />
-    <Compile Include="PlatformWinLossDataAccessTest.cs" />
     <Compile Include="MatchWinLossDataAccessTest.cs" />
     <Compile Include="LiveReportDataAccessTest.cs" />
     <Compile Include="LicenseeWinLossDataAccessTest.cs" />

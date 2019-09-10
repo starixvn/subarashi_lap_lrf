@@ -3,7 +3,6 @@
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Service.Core.Exception;
     using Fanex.Athena.Service.Core.Utility.Interfaces;
-    using Fanex.Logging;
     using Newtonsoft.Json;
     using RestSharp;
     using System;
@@ -11,6 +10,7 @@
     using System.Net.Http;
     using System.Net.Http.Headers;
     using System.Threading.Tasks;
+
     public class BetListApiClient : IBetListApiClient
     {
         private const string KEYNAME = "BETLIST_TOKEN_KEY";
@@ -44,8 +44,8 @@
 
             if (result.ResponseStatus != ResponseStatus.Completed)
             {
-                var errorMessage = $"Http Error ={result.ResponseStatus}\n Error occur when query betlist data";
-                throw new ServiceException(errorMessage, "BetListApiClient");
+                var errorMessage = $"Http Error ={result.ErrorMessage}\n Error occur when query betlist data";
+                throw new InvalidOperationException(errorMessage, result.ErrorException);
             }
 
             return await codeBlock(result).ConfigureAwait(false);

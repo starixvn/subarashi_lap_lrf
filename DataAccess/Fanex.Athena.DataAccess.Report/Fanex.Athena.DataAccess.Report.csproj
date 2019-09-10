@@ -153,10 +153,8 @@
     <Compile Include="Interfaces\ITurnoverDataAccess.cs" />
     <Compile Include="Interfaces\ILicenseeWinLossDataAccess.cs" />
     <Compile Include="LicenseeWinLossDataAccess.cs" />
-    <Compile Include="PlatformWinLossDataAccess.cs" />
     <Compile Include="Interfaces\ILiveReportDataAccess.cs" />
     <Compile Include="Interfaces\IMatchWinLossDataAccess.cs" />
-    <Compile Include="Interfaces\IPlatformWinLossDataAccess.cs" />
     <Compile Include="Interfaces\IWinLossByBetTypeDataAccess.cs" />
     <Compile Include="Interfaces\IWinLossByProductDataAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

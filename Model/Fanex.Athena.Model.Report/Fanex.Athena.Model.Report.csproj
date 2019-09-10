@@ -138,7 +138,6 @@
     <Compile Include="DTO\Notification.cs" />
     <Compile Include="DTO\NotificationMessage.cs" />
     <Compile Include="DTO\ResultAmendment.cs" />
-    <Compile Include="DTO\PlatformWinLossSummary.cs" />
     <Compile Include="DTO\ColossusBetWinLoss.cs" />
     <Compile Include="DTO\LicenseeWinLossByTimeZone.cs" />
     <Compile Include="DTO\Result\KenoExtendedToken.cs" />
@@ -163,7 +162,6 @@
     <Compile Include="DTO\LiveReports\LiveReportByBetType.cs" />
     <Compile Include="DTO\LiveReports\LiveReportWinLossByMatch.cs" />
     <Compile Include="DTO\MatchWinLoss.cs" />
-    <Compile Include="DTO\PlatformWinLossMember.cs" />
     <Compile Include="DTO\SettledMatchCount.cs" />
     <Compile Include="DTO\WinLossByBetType.cs" />
     <Compile Include="DTO\TurnoverDTO.cs" />

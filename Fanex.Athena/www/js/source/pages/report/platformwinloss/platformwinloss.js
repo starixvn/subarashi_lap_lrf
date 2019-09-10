@@ -47,7 +47,8 @@
                 '6': Site.getSingleResource('Tablet'),
                 '7': Site.getSingleResource('NewAsia'),
                 '8': Site.getSingleResource('MobileApp'),
-                '9': Site.getSingleResource('MobileLiteVersion')
+                '9': Site.getSingleResource('MobileLiteVersion'),
+                '10': Site.getSingleResource('DeepLink')
             };
 
             _me.initEvent();
@@ -137,6 +138,7 @@
 
             gridControl.level = 0;
             const data = getSubmitData();
+            const productOption = getProductOptions(data);
 
             getData(data, Site.resolveClientUrl(PlatformWinLossOption.urlData), function (response) {
                 const submitData = {
@@ -144,7 +146,7 @@
                     ToDay: data.ToDay,
                     Month: data.Month,
                     Year: data.Year,
-                    ProductOptions: $.parseJSON(response.ProductOptions),
+                    ProductOptions: productOption,
                     DrawFilter: data.DrawFilter,
                     PlatformType: data.PlatformType,
                     CurrencyId: data.CurrencyId,
@@ -180,7 +182,7 @@
         function bindData(level, response, productOptions) {
             jqGridAdditional.clearGrid('ReportGrid');
 
-            const numOfRow = response.Data.length;
+            const numOfRow = response.dataList.length;
             if (numOfRow === 0) {
                 jqGridAdditional.setNoInfo();
                 return;
@@ -188,7 +190,7 @@
 
             const reportGrid = $('#ReportGrid');
             let onPaging = false;
-            const data = level === 1 ? sortData(response.Data) : response.Data;
+            const data = level === 1 ? sortData(response.dataList) : response.dataList;
 
             const gridOption = PlatformWinLossOption.getGridOption(level, productOptions);
             gridOption.datastr = data;
@@ -217,7 +219,7 @@
                     $('.ui-jqgrid-ftable').html($('#footer').html());
                 }
                 else {
-                    _me.bindTotal(level, response.Total, response.SummaryTotal);
+                    _me.bindTotal(level, response.totalData);
                     $('#footer').html($('.ui-jqgrid-ftable').html());
                 }
 
@@ -235,7 +237,7 @@
 
             /*group header*/
             if (PlatformWinLossOption.hasCustomerComm) {
-                jqGridAdditional.setGroupCustomerWLColumns(reportGrid);
+                PlatformWinLossOption.setCustomerWLGroupHeaderColumns(reportGrid);
             }
 
             if (level === 1 && gridControl.sortColumnName) {
@@ -243,7 +245,7 @@
             }
         }
 
-        function bindTotal(level, totalData, summaryTotal) {
+        function bindTotal(level, totalData) {
             const columnModel = PlatformWinLossOption.getColModel(level, _filterData[level].ProductOptions);
 
             if (level === 0) {
@@ -256,7 +258,7 @@
                 const summaryColspan = colspan + 1;
                 jqGridAdditional.assignTotal(totalData, columnModel);
 
-                const summaryRowCount = Report.bindSummaryTotal(columnModel, summaryTotal);
+                const summaryRowCount = Report.bindSummaryTotal(columnModel);
                 jqGridAdditional.setGroupFooters(colspan, summaryColspan, summaryRowCount);
             }
         }
@@ -385,7 +387,7 @@
                 return arrayData;
             }
 
-            const sortThenBy = arrayData[0].Id ? 'Id' : 'Index';
+            const sortThenBy = 'index';
 
             const data = DataHelper.sort(
                 arrayData,
@@ -394,17 +396,9 @@
                 function (x) { return x[sortThenBy]; },
                 'asc');
 
-            if (sortThenBy === 'Id') {
                 for (let i = 0; i < totalData; i++) {
-                    data[i].Index = i + 1;
+                    data[i].index = i + 1;
                 }
-            }
-            else {
-                for (let j = 0; j < totalData; j++) {
-                    arrayData[j].Id = j + 1;
-                    data[j].Index = j + 1;
-                }
-            }
 
             return data;
         }
@@ -420,6 +414,35 @@
                 : productSeleted.join(', ');
 
             return Site.getSingleResource('Product') + ': ' + productName;
+        }
+
+        function getProductOptions(serializeParam) {
+            const codeKey = /ProductOptions\[\d+\].Code/;
+            let products = [];
+
+            const keys = Object.keys(serializeParam);
+
+            for (let i = 1; i < keys.length; i++) {
+                const key = keys[i];
+                if (codeKey.test(key) && serializeParam[key]) {
+                    const statusKey = key.replace(".Code", '.Status');
+
+                    if (serializeParam[statusKey]) {
+                        products.push({
+                            Code: serializeParam[key],
+                            Status: true
+                        });
+                    }
+                    else {
+                        products.push({
+                            Code: serializeParam[key],
+                            Status: false
+                        });
+                    }
+                }
+            }
+
+            return products;
         }
 
         function resizeGrid() {

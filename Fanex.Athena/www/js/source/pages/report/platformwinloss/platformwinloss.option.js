@@ -12,34 +12,35 @@ define(['jquery', 'common/site', 'lib/jqgrid/jquery.jqgrid.additional'],
         const betlistLink = function (cellvalue, options, rowObject) {
             const param =
             {
-                DrillDownCurrencyId: rowObject.CurrencyId,
-                DrillDownCurrencyName: rowObject.CurrencyName,
-                CustomerId: rowObject.CustomerId,
-                ExternalId: rowObject.ExternalId,
-                SystemId: rowObject.SystemId
+                DrillDownCurrencyId: rowObject.currencyId,
+                DrillDownCurrencyName: rowObject.currencyName,
+                CustomerId: rowObject.customerId,
+                ExternalId: rowObject.externalId,
+                SystemId: rowObject.systemId
             };
             return '<a class="bet-list-link" href="javascript:;" data-drill-down=\'' + JSON.stringify(param) + '\'>' + cellvalue + '</a>';
         };
         const drilldownLink = function (cellvalue, options, rowObject) {
-            const parentClassName = rowObject.IsLeaf ? '' : ' text-bold';
+            const parentClassName = rowObject.isLeaf ? '' : ' text-bold';
             const param =
             {
-                PlatformType: rowObject.PlatformType > 0 ? rowObject.PlatformType : Number(rowObject.Parent),
-                ProductCode: rowObject.PlatformType < 0 ? rowObject.ProductCode : undefined
+                PlatformType: rowObject.isLeaf ? Number(rowObject.parent) : rowObject.platformType,
+                ProductCode: rowObject.isLeaf ? rowObject.productCode : undefined
             };
 
             return '<a class="drilldown' + parentClassName + '" href="javascript:;" data-drill-down=\'' + JSON.stringify(param) + '\'>' + cellvalue + '</a>';
         };
+
         const idColumn = {
-            name: 'PlatformType',
-            index: 'PlatformType',
+            name: 'platformType',
+            index: 'platformType',
             key: true,
             hidden: true,
             align: 'center'
         };
         const platformNameColumn = {
-            name: 'Name',
-            index: 'Name',
+            name: 'name',
+            index: 'name',
             width: 120,
             align: 'left',
             valign: 'middle',
@@ -48,18 +49,17 @@ define(['jquery', 'common/site', 'lib/jqgrid/jquery.jqgrid.additional'],
             formatter: drilldownLink
         };
         const indexColumn = {
-            name: 'Index',
-            index: 'Index',
+            name: 'index',
+            index: 'index',
             width: 60,
             align: 'center',
             valign: 'middle',
             sortable: false,
-            resizable: false,
-            cellattr: jqGridAdditional.rowSpanSetting
+            resizable: false
         };
         const externalIdColumn = {
-            name: 'ExternalId',
-            index: 'ExternalId',
+            name: 'externalId',
+            index: 'externalId',
             width: 85,
             align: 'left',
             sortable: true,
@@ -67,8 +67,8 @@ define(['jquery', 'common/site', 'lib/jqgrid/jquery.jqgrid.additional'],
             formatter: betlistLink
         };
         const systemIdColumn = {
-            name: 'SystemId',
-            index: 'SystemId',
+            name: 'systemId',
+            index: 'systemId',
             width: 120,
             align: 'left',
             sortable: true,
@@ -76,16 +76,16 @@ define(['jquery', 'common/site', 'lib/jqgrid/jquery.jqgrid.additional'],
             formatter: betlistLink
         };
         const currencyColumn = {
-            name: 'CurrencyName',
-            index: 'CurrencyName',
+            name: 'currencyName',
+            index: 'currencyName',
             width: 60,
             align: 'center',
             sortable: true,
             resizable: false
         };
         const turnoverColumn = {
-            name: 'Turnover',
-            index: 'Turnover',
+            name: 'turnover',
+            index: 'turnover',
             resizable: false,
             width: 85,
             align: 'right',
@@ -94,8 +94,8 @@ define(['jquery', 'common/site', 'lib/jqgrid/jquery.jqgrid.additional'],
             formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
         };
         const turnoverPercentColumn = {
-            name: 'TurnoverPercent',
-            index: 'TurnoverPercent',
+            name: 'turnoverPercent',
+            index: 'turnoverPercent',
             resizable: false,
             width: 85,
             align: 'right',
@@ -104,8 +104,8 @@ define(['jquery', 'common/site', 'lib/jqgrid/jquery.jqgrid.additional'],
             formatoptions: { decimalPlaces: 2, suffix: '%' }
         };
         const totalTransColumn = {
-            name: 'TotalTransactions',
-            index: 'TotalTransactions',
+            name: 'totalTransactions',
+            index: 'totalTransactions',
             width: 95,
             align: 'right',
             sortable: true,
@@ -118,8 +118,8 @@ define(['jquery', 'common/site', 'lib/jqgrid/jquery.jqgrid.additional'],
             }
         };
         const customerWlColumn = {
-            name: 'CustomerWinLoss',
-            index: 'CustomerWinLoss',
+            name: 'customerWinLoss',
+            index: 'customerWinLoss',
             width: 90,
             align: 'right',
             sortable: true,
@@ -128,8 +128,8 @@ define(['jquery', 'common/site', 'lib/jqgrid/jquery.jqgrid.additional'],
             formatter: jqGridAdditional.formatDecimal
         };
         const playerCommColumn = {
-            name: 'CustomerComm',
-            index: 'CustomerComm',
+            name: 'customerComm',
+            index: 'customerComm',
             width: 50,
             align: 'right',
             sortable: true,
@@ -138,8 +138,8 @@ define(['jquery', 'common/site', 'lib/jqgrid/jquery.jqgrid.additional'],
             formatter: jqGridAdditional.formatDecimal
         };
         const customerWlTotalColumn = {
-            name: 'CustomerTotal',
-            index: 'CustomerTotal',
+            name: 'customerTotal',
+            index: 'customerTotal',
             width: 90,
             align: 'right',
             sortable: true,
@@ -148,8 +148,8 @@ define(['jquery', 'common/site', 'lib/jqgrid/jquery.jqgrid.additional'],
             formatter: jqGridAdditional.formatDecimal
         };
         const licenseeWlColumn = {
-            name: 'LicenseeWL',
-            index: 'LicenseeWL',
+            name: 'licenseeWL',
+            index: 'licenseeWL',
             width: 85,
             align: 'right',
             sortable: true,
@@ -159,8 +159,8 @@ define(['jquery', 'common/site', 'lib/jqgrid/jquery.jqgrid.additional'],
             formatter: jqGridAdditional.formatLicenseeWl
         };
         const baCommissionColumn = {
-            name: 'BACommission',
-            index: 'BACommission',
+            name: 'baCommission',
+            index: 'baCommission',
             width: 70,
             align: 'right',
             sortable: true,
@@ -169,8 +169,8 @@ define(['jquery', 'common/site', 'lib/jqgrid/jquery.jqgrid.additional'],
             formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
         };
         const amtDueToBaColumn = {
-            name: 'AmtDueToBA',
-            index: 'AmtDueToBA',
+            name: 'amtDueToBA',
+            index: 'amtDueToBA',
             width: 60,
             align: 'right',
             sortable: true,
@@ -179,8 +179,8 @@ define(['jquery', 'common/site', 'lib/jqgrid/jquery.jqgrid.additional'],
             formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
         };
         const currencyIdColumn = {
-            name: 'CurrencyId',
-            index: 'CurrencyId',
+            name: 'currencyId',
+            index: 'currencyId',
             width: 0,
             align: 'center',
             sortable: false,
@@ -188,8 +188,8 @@ define(['jquery', 'common/site', 'lib/jqgrid/jquery.jqgrid.additional'],
             hidden: true
         };
         const customerIdColumn = {
-            name: 'CustomerId',
-            index: 'CustomerId',
+            name: 'customerId',
+            index: 'customerId',
             width: 0,
             align: 'center',
             sortable: false,
@@ -321,11 +321,11 @@ define(['jquery', 'common/site', 'lib/jqgrid/jquery.jqgrid.additional'],
                 treeGrid: true,
                 treeGridModel: 'adjacency',
                 treedatatype: 'local',
-                ExpandColumn: 'Name',
+                ExpandColumn: 'name',
                 treeReader: {
-                    level_field: 'Level',       // jshint ignore:line
-                    parent_id_field: 'Parent',  // jshint ignore:line
-                    leaf_field: 'IsLeaf'        // jshint ignore:line
+                    level_field: 'level',       // jshint ignore:line
+                    parent_id_field: 'parent',  // jshint ignore:line
+                    leaf_field: 'isLeaf'        // jshint ignore:line
                 },
                 treeIcons: { plus: 'ui-icon-circlesmall-plus icon-arrow', minus: 'ui-icon-circlesmall-minus icon-arrow', leaf: '' },
                 pager: '#ppdata',
@@ -372,6 +372,18 @@ define(['jquery', 'common/site', 'lib/jqgrid/jquery.jqgrid.additional'],
                 _me.gridOption.colModel = _me.getColModel(level, productOptions);
 
                 return _me.gridOption;
+            },
+
+            setCustomerWLGroupHeaderColumns: function (grid) {
+                grid.jqGrid('setGroupHeaders',
+                    {
+                        useColSpanStyle: true,
+                        groupHeaders: [{
+                            startColumnName: 'customerWinLoss',
+                            numberOfColumns: 3,
+                            titleText: Site.getSingleResource('CustomerW_L')
+                        }]
+                    });
             }
         };
 
