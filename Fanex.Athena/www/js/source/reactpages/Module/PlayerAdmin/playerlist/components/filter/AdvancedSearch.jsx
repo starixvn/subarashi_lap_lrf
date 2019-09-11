@@ -38,12 +38,12 @@ export class AdvancedSearch extends React.Component {
     }
 
     render() {
-        const { currencyList, param } = this.props;
+        const { currencyList, param, hasBaPermission } = this.props;
         const { currencyIdList, oddsGroup, specialLevel, baFilter } = param;
         const convertedCurrencyList = this._createSelectData(currencyList, currencyIdList);
         const oddsGroupList = this._createSelectData(this.oddsGroupList, oddsGroup);
         const specialLevelList = this._createSelectData(this.specialLevelList, specialLevel);
-        const selectedBaStatus = this.baStatusList.find(x => x.value === baFilter);
+        const selectedBaStatus = hasBaPermission ? this.baStatusList.find(x => x.value === baFilter) : null;
 
         return (
             <>
@@ -83,16 +83,21 @@ export class AdvancedSearch extends React.Component {
                     </div>
                 </div>
 
-                <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
-                    <div className="form-group">
-                        <label className="label-text">{LangHelper.getSingleResource("BA")}</label>
-                        <Select instanceId='ddlBaStatus'
-                            name='form-field-name'
-                            value={selectedBaStatus}
-                            options={this.baStatusList}
-                            onChange={(item) => this.handleChangeSingleDropdown('baFilter', item)} />
-                    </div>
-                </div>
+                {
+                    selectedBaStatus !== null &&
+                    (
+                        <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
+                            <div className="form-group">
+                                <label className="label-text">{LangHelper.getSingleResource("BA")}</label>
+                                <Select instanceId='ddlBaStatus'
+                                    name='form-field-name'
+                                    value={selectedBaStatus}
+                                    options={this.baStatusList}
+                                    onChange={(item) => this.handleChangeSingleDropdown('baFilter', item)} />
+                            </div>
+                        </div>
+                    )
+                }
             </>
         );
     }

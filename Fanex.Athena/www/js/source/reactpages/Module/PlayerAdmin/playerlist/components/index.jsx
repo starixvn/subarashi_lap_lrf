@@ -9,7 +9,7 @@ import { generateColumnList } from '../lib/config';
 const { type } = window.initialState;
 const hasBaPermission = window._pConfig.hasBaPermission === 1;
 const displayedColumnList = generateColumnList(type, hasBaPermission);
-const defaultState = { ...window.initialState, displayedColumnList };
+const defaultState = { ...window.initialState, displayedColumnList, hasBaPermission };
 const store = Store.createStore(reducer, defaultState);
 
 const App = () => {

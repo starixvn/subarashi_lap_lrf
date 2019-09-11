@@ -13,6 +13,7 @@ import LangHelper from '@jsroot/lib/langHelper';
 import { searchOptions, baStatusList, specialLevelListWithColor, emailPattern } from '../lib/constants';
 import UserNameInput from './filter/UserNameInput';
 import QueryString from '@jsroot/lib/QueryString';
+import { encode } from '@jsroot/lib/htmlHelper';
 
 export class FormFilter extends PureComponent {
     constructor(props) {
@@ -34,10 +35,10 @@ export class FormFilter extends PureComponent {
     }
 
     componentDidMount() {
-        const custId = Number(QueryString.getParam(window.location.href, 'custId'));
+        const ibcCustId = Number(QueryString.getParam(window.location.href, 'custId'));
         const licenseeCustId = QueryString.getParam(window.location.href, 'licenseeCustId');
-        if (custId || licenseeCustId) {
-            const param = { ibcCustId: custId, licenseeCustId };
+        if (ibcCustId || licenseeCustId) {
+            const param = { ibcCustId, licenseeCustId };
             this.props.getSinglePlayer(param);
 
             this.userNameRef.current.value = QueryString.getParam(window.location.href, 'userName');
@@ -74,7 +75,7 @@ export class FormFilter extends PureComponent {
         const actualSpecialLevel = specialLevel.trim();
         const param = {
             ...allParam,
-            userName,
+            userName: encode(userName),
             specialLevel: actualSpecialLevel === '' ? this.allSpecialLevel : actualSpecialLevel,
             pageSize: pagingOption.PageSize,
             pageIndex: 1
@@ -124,7 +125,7 @@ export class FormFilter extends PureComponent {
 
     render() {
         const { bankAccountNumber, email, searchOption, ...advancedSearchParam } = this.state;
-        const { type, isAdvancedSearch, isFilterCollapsing, currencyList, getSuggestionList } = this.props;
+        const { type, isAdvancedSearch, isFilterCollapsing, currencyList, getSuggestionList, hasBaPermission } = this.props;
         const iconToggle = {
             tag: 'div',
             className: isFilterCollapsing ? 'chevron down' : 'chevron up',
@@ -153,6 +154,7 @@ export class FormFilter extends PureComponent {
                     {isAdvancedSearch && <AdvancedSearch
                         currencyList={currencyList}
                         param={advancedSearchParam}
+                        hasBaPermission={hasBaPermission}
                         onChange={this.handleSpecificInputChange} />
                     }
 
@@ -182,8 +184,8 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators({ searchPlayer, setAdvancedSearch, setCollapseFilter, getSuggestionList, getSinglePlayer }, dispatch);
 }
 function mapStateToProps(state) {
-    const { type, isAdvancedSearch, isFilterCollapsing, pagingOption, currencyList } = state;
-    return Object.assign({}, { type, isAdvancedSearch, isFilterCollapsing, pagingOption, currencyList });
+    const { type, isAdvancedSearch, isFilterCollapsing, pagingOption, currencyList, hasBaPermission } = state;
+    return Object.assign({}, { type, isAdvancedSearch, isFilterCollapsing, pagingOption, currencyList, hasBaPermission });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FormFilter);

@@ -14,6 +14,8 @@ const displayedTextByField = {
     [fields.Status]: (value) => getPlayerStatus(value)
 }
 
+const fieldListWithEmptyValueByStatus = [fields.CurrentBalance, fields.OutstandingBalance, fields.OddsGroup, fields.BaStatus, fields.SpecialLevel];
+
 export default class ReportExcel {
     constructor(data, displayedColumn, title) {
         this.data = data;
@@ -72,6 +74,15 @@ export default class ReportExcel {
 
     _buildDataRow(item, colIndex) {
         const columnConfig = this.columnConfigs[colIndex];
+        const shouldHideValue = !item.IsDeposit || item.IsArchived;
+        if (shouldHideValue && fieldListWithEmptyValueByStatus.indexOf(columnConfig.field) !== -1) {
+            return {
+                t: 's',
+                v: '',
+                s: columnConfig[MAIN_SECTION_STYLE]
+            };
+        }
+
         const value = item[columnConfig.field];
         const displayedTextFunc = displayedTextByField[columnConfig.field];
         const displayedValue = this._shouldSetEmpty(value) ? '' :
