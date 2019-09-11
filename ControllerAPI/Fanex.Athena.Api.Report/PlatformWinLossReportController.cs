@@ -13,9 +13,7 @@ namespace Fanex.Athena.Api.Report
     using Base.Attributes;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
-
     using Model.Core.DataDomain;
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
@@ -44,14 +42,14 @@ namespace Fanex.Athena.Api.Report
 
         private async Task<dynamic> ProcessRequest(PlatformWinLossMetaModel metaModel)
         {
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId, metaModel.IsExcludedTestData);
+            var userSession = SessionService.UserSession;
+
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId, metaModel.IsExcludedTestData);
             metaModel.HasComm = SessionService.LicenseeSession.IsAllowedCustomerComm;
 
-            var language = SessionService.UserSession.Language;
-
-            return metaModel.Level == (int)ReportLevel.Main 
-                ? await ProcessSummaryLevel(metaModel, language)
-                : await ProcessMemberLevel(metaModel, language);
+            return metaModel.Level == (int)ReportLevel.Main
+                ? await ProcessSummaryLevel(metaModel, userSession.Language)
+                : await ProcessMemberLevel(metaModel, userSession.Language);
         }
 
         private async Task<dynamic> ProcessMemberLevel(PlatformWinLossMetaModel metaModel, string language)
