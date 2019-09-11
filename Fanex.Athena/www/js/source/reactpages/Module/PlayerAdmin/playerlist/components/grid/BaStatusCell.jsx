@@ -11,7 +11,7 @@ import { getErrorMessageForUpdating } from '../../lib/helpers/utils';
 import { generateDefaultConfirmOption, generateDefaultAlertOption, predefinedIcons } from '../../../../../lib/sweetAlert';
 
 const BaStatusCell = (props) => {
-    const { dataItem, setPlayerList, toggleLoader, updateBaStatus, setSweetAlertOption } = props;
+    const { dataItem, setPlayerList, toggleLoader, updateBaStatus, setSweetAlertOption, playerList } = props;
     const { IbcCustId, BaStatus, OddsGroup, IsArchived } = dataItem;
 
     const handleChangeBaStatus = (event) => {

@@ -19,7 +19,10 @@ export const buildLapPlayerList = (playerList) => {
 
     return playerList.map(item => {
         const {
+            CustId,
             UserName,
+            CurrentBalance,
+            Currency,
             Status,
             RealName,
             IP,
@@ -27,28 +30,29 @@ export const buildLapPlayerList = (playerList) => {
             isOnline,
             IBCCustId,
             isArchived,
-            CustId,
+            LastTransaction,
             CurrencyCode,
-            CurrentBalance,
             OutBalance,
-            Currency
+            IBCUserName
         } = item;
 
         return {
             IbcCustId: IBCCustId,
             LicenseeCustId: CustId,
             UserName,
+            SystemId: IBCUserName,
+            Currency: CurrencyCode,
+            CurrentBalance,
+            OutstandingBalance: OutBalance,
             Status,
             RealName,
+            LastTransaction,
             LastLoginIp: IP,
             Email: email,
             IsOnline: isOnline,
             IsDeposit: IBCCustId > 0,
-            IsArchived: isArchived,
-            Currency: CurrencyCode,
-            CurrentBalance,
-            OutstandingBalance: OutBalance,
-            CurrencyId: Currency || 0
+            IsArchived: !!isArchived,
+            CurrencyId: Currency
         };
     });
 }
