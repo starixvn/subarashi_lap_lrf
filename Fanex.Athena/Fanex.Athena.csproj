@@ -625,6 +625,7 @@
     <Content Include="www\css\build\dev\reactpages\playeradmin\betlimit.css" />
     <Content Include="www\css\build\dev\reactpages\playeradmin\index.chunk.js" />
     <Content Include="www\css\build\dev\reactpages\playeradmin\index.css" />
+    <Content Include="www\css\build\dev\reactpages\playeradmin\playerwinloss.css" />
     <Content Include="www\css\build\dev\reactpages\playeradmin\running-betlist.chunk.js" />
     <Content Include="www\css\build\dev\reactpages\playeradmin\running-betlist.css" />
     <Content Include="www\css\build\dev\reactpages\speciallicenseewl\index.chunk.js" />
@@ -665,6 +666,7 @@
     <Content Include="www\css\build\pro\reactpages\playeradmin\account-info.css" />
     <Content Include="www\css\build\pro\reactpages\playeradmin\betlimit.css" />
     <Content Include="www\css\build\pro\reactpages\playeradmin\index.css" />
+    <Content Include="www\css\build\pro\reactpages\playeradmin\playerwinloss.css" />
     <Content Include="www\css\build\pro\reactpages\playeradmin\running-betlist.css" />
     <Content Include="www\css\build\pro\reactpages\speciallicenseewl\index.chunk.js" />
     <Content Include="www\css\build\pro\reactpages\speciallicenseewl\index.css" />
@@ -705,6 +707,7 @@
     <Content Include="www\css\source\components\balloon\balloon.scss" />
     <Content Include="Views\Desktop\Module\PlayerAdmin\SingleCustomer\Index.cshtml" />
     <Content Include="Views\Desktop\Module\PlayerAdmin\PlayerWinLoss\Index.cshtml" />
+    <Content Include="www\css\build\dev\reactpages\playeradmin\playerwinloss.css.map" />
     <None Include="www\css\source\reactpages\components\custom3rd\react-toastify.scss" />
     <None Include="www\css\source\pages\betlist\result\result.happy5.scss" />
     <None Include="www\css\source\reactpages\components\alert\icons\error.scss" />
@@ -733,9 +736,15 @@
     <Content Include="www\js\build\dev\reactpages\lib\lang-zh-TW.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\lib\xlsx-style-sparta.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\playeradmin\accountinfo.chunk.js" />
+    <Content Include="www\js\build\dev\reactpages\playeradmin\accountinfo.chunk.js.map" />
     <Content Include="www\js\build\dev\reactpages\playeradmin\betlimit.chunk.js" />
+    <Content Include="www\js\build\dev\reactpages\playeradmin\betlimit.chunk.js.map" />
     <Content Include="www\js\build\dev\reactpages\playeradmin\playerlist.chunk.js" />
+    <Content Include="www\js\build\dev\reactpages\playeradmin\playerlist.chunk.js.map" />
+    <Content Include="www\js\build\dev\reactpages\playeradmin\playerwinloss.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\playeradmin\runningbetlist.chunk.js" />
+    <Content Include="www\js\build\dev\reactpages\playeradmin\runningbetlist.chunk.js.map" />
+    <Content Include="www\js\build\dev\reactpages\playeradmin\single-customer.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\report\casinoturnover.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\report\licenseewlbytimezone.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\notification\notification.chunk.js" />
@@ -762,7 +771,9 @@
     <Content Include="www\js\build\pro\reactpages\playeradmin\accountinfo.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\playeradmin\betlimit.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\playeradmin\playerlist.chunk.js" />
+    <Content Include="www\js\build\pro\reactpages\playeradmin\playerwinloss.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\playeradmin\runningbetlist.chunk.js" />
+    <Content Include="www\js\build\pro\reactpages\playeradmin\single-customer.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\report\casinoturnover.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\report\licenseewlbytimezone.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\notification\notification.chunk.js" />
@@ -2647,7 +2658,6 @@
     <Content Include="www\js\source\reactpages\pages\casinoturnover\components\index.jsx" />
     <Content Include="www\js\source\reactpages\pages\casinoturnover\components\DataGrid.jsx" />
     <Content Include="www\css\source\reactpages\pages\playeradmin\index.scss" />
-    <Content Include="www\js\build\dev\reactpages\playeradmin\playerlist.chunk.js.map" />
     <Content Include="www\css\source\reactpages\pages\playeradmin\account-info.scss" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\__tests__\content-header\__snapshots__\BatchUpdateButton.test.js.snap" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\__tests__\content-header\__snapshots__\GridCaption.test.js.snap" />
@@ -2655,11 +2665,10 @@
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\__tests__\filter\__snapshots__\SearchOption.test.js.snap" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\__tests__\grid\__snapshots__\ContextMenu.test.js.snap" />
     <Content Include="www\css\source\reactpages\pages\playeradmin\running-betlist.scss" />
-    <Content Include="www\js\build\dev\reactpages\playeradmin\runningbetlist.chunk.js.map" />
     <Content Include="www\css\source\reactpages\pages\playeradmin\betlimit.scss" />
-    <Content Include="www\js\build\dev\reactpages\playeradmin\betlimit.chunk.js.map" />
-    <Content Include="www\js\build\dev\reactpages\playeradmin\accountinfo.chunk.js.map" />
     <Content Include="www\css\source\reactpages\pages\playeradmin\playerwinloss.scss" />
+    <Content Include="www\js\build\dev\reactpages\playeradmin\playerwinloss.chunk.js.map" />
+    <Content Include="www\js\build\dev\reactpages\playeradmin\single-customer.chunk.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="SiteConfig\WebConfigTransforms\SIT.config">

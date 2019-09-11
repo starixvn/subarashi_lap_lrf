@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 8/30/2019 9:36:47 AM
+// Generated at: 9/11/2019 12:52:00 PM
 window._language_zh_TW = {
   AA: "客客",
   AbnormalBet: "非正規註單",
@@ -518,7 +518,6 @@ window._language_zh_TW = {
   Permission: "權限",
   PermissionForUser: "用戶權限",
   Platform: "平台",
-  PlayerAdminInvalidDataErrMsg: "無效的參數。無效的會員識別",
   PreGame: "遊戲開始前",
   Prev: "上個",
   Product: "產品",
@@ -535,7 +534,7 @@ window._language_zh_TW = {
   RecommendBrowserOnReportPageMsg: "若頁面大小&gt; 1,000，請您考慮使用火狐或Chrome瀏覽器以獲得更好的體驗",
   RefNo: "注單號碼",
   Refund: "退款",
-  Reject: "取消",
+  Reject: "已取消",
   Remark: "備註",
   RemoveFromGroup: "從組中刪除",
   RemoveGroupMsg: "您確定要從組中移除此（這些）會員?",

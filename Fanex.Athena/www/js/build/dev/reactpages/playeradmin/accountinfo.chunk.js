@@ -20095,8 +20095,9 @@ var defaults = chart_js__WEBPACK_IMPORTED_MODULE_2___default.a.defaults;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ActionCreators", function() { return ActionCreators; });
-/* harmony import */ var _lib_playerAccountService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../lib/playerAccountService */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/lib/playerAccountService.js");
-/* harmony import */ var _subtabAction__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./subtabAction */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/actions/subtabAction.js");
+/* harmony import */ var _lib_factoryCommonService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../lib/factoryCommonService */ "./www/js/source/reactpages/Module/lib/factoryCommonService.js");
+/* harmony import */ var _lib_playerAccountService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/playerAccountService */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/lib/playerAccountService.js");
+/* harmony import */ var _subtabAction__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./subtabAction */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/actions/subtabAction.js");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -20104,15 +20105,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 var getCustomerBettingStatus = function getCustomerBettingStatus(param) {
   return function () {
-    var service = new _lib_playerAccountService__WEBPACK_IMPORTED_MODULE_0__["default"]();
+    var service = new _lib_playerAccountService__WEBPACK_IMPORTED_MODULE_1__["default"]();
     return service.getCustomerBettingStatus(param);
   };
 };
 
-var ActionCreators = _objectSpread({}, _subtabAction__WEBPACK_IMPORTED_MODULE_1__, {
-  getCustomerBettingStatus: getCustomerBettingStatus
+var getLink = function getLink(sysType, action) {
+  return function () {
+    var commonService = _lib_factoryCommonService__WEBPACK_IMPORTED_MODULE_0__["default"].createInstance();
+    return commonService.getLink(sysType, action);
+  };
+};
+
+var ActionCreators = _objectSpread({}, _subtabAction__WEBPACK_IMPORTED_MODULE_2__, {
+  getCustomerBettingStatus: getCustomerBettingStatus,
+  getLink: getLink
 });
 
 /***/ }),
@@ -20512,7 +20522,6 @@ var ActivityRecord = function ActivityRecord(_ref) {
       data = _useState2[0],
       setData = _useState2[1];
 
-  console.log(data);
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     if (data === null) {
       var param = {
@@ -20780,7 +20789,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/index.js */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/actions/index.js");
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var react_chartjs_2__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-chartjs-2 */ "./node_modules/react-chartjs-2/es/index.js");
+/* harmony import */ var _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/numberFormat */ "./www/js/source/reactpages/lib/numberFormat.js");
+/* harmony import */ var react_chartjs_2__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-chartjs-2 */ "./node_modules/react-chartjs-2/es/index.js");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -20799,29 +20809,27 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
+var backgroundColorList = ['#36A2EB', '#F15D21', '#97A9B3', '#E8AE1B'];
+var defaultDataSetItem = {
+  data: [],
+  backgroundColor: backgroundColorList
+};
 var defaultChartData = {
   labels: ['Won', 'Lose', 'Draw', 'Cancelled'],
-  datasets: [{
-    data: [getRandomInt(50, 200), getRandomInt(100, 150), getRandomInt(150, 250), getRandomInt(150, 250)],
-    backgroundColor: ['#36A2EB', '#F15D21', '#97A9B3', '#E8AE1B']
-  }]
+  datasets: [],
+  borderWidth: 2,
+  hoverBorderWidth: 10
 };
 var legendOpts = {
   display: true,
   position: 'bottom',
   labels: {
-    text: 'aa'
-  }
+    boxWidth: 15,
+    usePointStyle: true
+  },
+  onClick: function onClick() {}
 };
 var option = {
-  onProgress: function onProgress() {
-    var chart = this.chart;
-    var ctx = chart.ctx;
-  },
   animation: {
     onComplete: function onComplete() {
       var self = this;
@@ -20864,68 +20872,94 @@ var CustomerBettingStatus = function CustomerBettingStatus(props) {
       data = _useState2[0],
       setData = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(_objectSpread({}, defaultChartData)),
-      _useState4 = _slicedToArray(_useState3, 2),
-      chartData = _useState4[0],
-      setChartData = _useState4[1];
-
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     var fetchData = function fetchData() {
-      var params = {};
+      var ibcCustId = props.ibcCustId;
+      var params = {
+        ibcCustId: ibcCustId
+      };
       props.getCustomerBettingStatus(params).then(function (response) {
         setData(response.data);
       }).catch(function (err) {
-        console.log(err);
+        console.log(err.message);
       });
     };
 
     fetchData();
   }, []);
-  return data && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+
+  var renderContent = function renderContent() {
+    var WonTicketCount = data.WonTicketCount,
+        LoseTicketCount = data.LoseTicketCount,
+        DrawTicketCount = data.DrawTicketCount,
+        CancelledTicketCount = data.CancelledTicketCount;
+
+    var dataSetItem = _objectSpread({}, defaultDataSetItem, {
+      data: [WonTicketCount, LoseTicketCount, DrawTicketCount, CancelledTicketCount]
+    });
+
+    var chartData = _objectSpread({}, defaultChartData, {
+      datasets: [dataSetItem]
+    });
+
+    var Margin = data.Margin,
+        AverageBetSize = data.AverageBetSize,
+        Winnings = data.Winnings,
+        Loss = data.Loss,
+        NetWinLoss = data.NetWinLoss;
+    var marginPercent = _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_4__["default"].round(Margin, 2) * 100;
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "row"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-12 col-md-7 col-sm-7 col-lg-7 col-xl-7 chart-group"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_chartjs_2__WEBPACK_IMPORTED_MODULE_5__["Doughnut"], {
+      data: chartData,
+      legend: legendOpts,
+      options: option
+    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-12 col-md-5 col-sm-5 col-lg-5 col-xl-5 statistics-group"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Based on Sportsbook data"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "row"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4"
+    }, "Margin:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4"
+    }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_4__["default"].formatDecimal(marginPercent), "%")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "row"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4"
+    }, "Average bet size:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4"
+    }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_4__["default"].formatDecimal(AverageBetSize))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "row"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4"
+    }, "Winnings:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4"
+    }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_4__["default"].formatDecimal(Winnings))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "row"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4"
+    }, "Loss:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4"
+    }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_4__["default"].formatDecimal(Loss))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "row"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4"
+    }, "Net Win Loss:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4"
+    }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_4__["default"].formatDecimal(NetWinLoss)))));
+  };
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "panel"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "panel-header"
   }, "Player Betting Status"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "row panel-body"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-12 col-md-7 col-sm-7 col-lg-7 col-xl-7 chart-group"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_chartjs_2__WEBPACK_IMPORTED_MODULE_4__["Doughnut"], {
-    data: chartData,
-    legend: legendOpts,
-    options: option
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-12 col-md-5 col-sm-5 col-lg-5 col-xl-5 statistics-group"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Based on Sportsbook data"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "row"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4"
-  }, "Margin:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4"
-  }, "36.84%")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "row"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4"
-  }, "Average bet size:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4"
-  }, "158.33")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "row"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4"
-  }, "Winnings:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4"
-  }, "650.00")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "row"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4"
-  }, "Loss:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4"
-  }, "-300.00")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "row"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4"
-  }, "Net Win Loss:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4"
-  }, "350.00")))));
+    className: "panel-body"
+  }, data && data.HasData ? renderContent() : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "center-align"
+  }, "There is no Sportsbook data.")));
 };
 
 function mapDispatchToProps(dispatch) {
@@ -20936,7 +20970,10 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-  return Object.assign({}, {});
+  var ibcCustId = state.ibcCustId;
+  return Object.assign({}, {
+    ibcCustId: ibcCustId
+  });
 }
 
 ;
@@ -20957,13 +20994,63 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/index.js */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/actions/index.js");
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/actions/index.js");
+/* harmony import */ var _constants_configInfo__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../constants/configInfo */ "./www/js/source/reactpages/Module/constants/configInfo.js");
+/* harmony import */ var _jsroot_components_popup__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/components/popup */ "./www/js/source/reactpages/components/popup/index.jsx");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
 
-var FastCrossLink = function FastCrossLink() {
+
+
+
+var defaultPopupInfo = {
+  url: null,
+  title: null,
+  width: 0,
+  height: 0
+};
+var FastCrossLink = function FastCrossLink(props) {
+  var userName = props.userName,
+      currencyName = props.currencyName,
+      getLink = props.getLink;
+  var singleCustomerActionLink = "PlayerBtcSingleCustomer?userName=".concat(userName, "&currencyName=").concat(currencyName);
+  var singleCustomerUrl = getLink(_constants_configInfo__WEBPACK_IMPORTED_MODULE_4__["systemType"].lrf, singleCustomerActionLink);
+  var customerWinLossActionLink = "PlayerWinLoss?userName=".concat(userName, "&currencyName=").concat(currencyName);
+  var customerWinLossUrl = getLink(_constants_configInfo__WEBPACK_IMPORTED_MODULE_4__["systemType"].lrf, customerWinLossActionLink);
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(defaultPopupInfo),
+      _useState2 = _slicedToArray(_useState, 2),
+      popupInfo = _useState2[0],
+      setPopupInfo = _useState2[1];
+
+  var isShowPopup = !!popupInfo.url;
+
+  var handleClickLink = function handleClickLink(event, popup) {
+    event.preventDefault();
+    setPopupInfo(popup);
+  };
+
+  var popupSingleCustomer = {
+    url: singleCustomerUrl,
+    title: 'Betting Ticket Center - Single Customer',
+    width: window.innerWidth - 10,
+    height: window.innerHeight - 10
+  };
+  var popupCustomerWinLoss = {
+    url: customerWinLossUrl,
+    title: 'Customer Win Loss',
+    width: window.innerWidth - 10,
+    height: 300
+  };
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "panel"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -20977,19 +21064,40 @@ var FastCrossLink = function FastCrossLink() {
     className: "divider"
   }, ">"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     className: "link",
-    href: "#"
+    onClick: function onClick(e) {
+      return handleClickLink(e, popupSingleCustomer);
+    }
   }, "Single Customer"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     className: "link",
-    href: "#"
-  }, "Customer Win Loss")))));
+    onClick: function onClick(e) {
+      return handleClickLink(e, popupCustomerWinLoss);
+    }
+  }, "Customer Win Loss")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_popup__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    isShow: isShowPopup,
+    iframeUrl: popupInfo.url,
+    title: popupInfo.title,
+    width: popupInfo.width,
+    height: popupInfo.height,
+    onClose: function onClose() {
+      return setPopupInfo(defaultPopupInfo);
+    }
+  }));
 };
 
 function mapDispatchToProps(dispatch) {
-  return Object(redux__WEBPACK_IMPORTED_MODULE_3__["bindActionCreators"])({}, dispatch);
+  var getLink = _actions__WEBPACK_IMPORTED_MODULE_3__["ActionCreators"].getLink;
+  return Object(redux__WEBPACK_IMPORTED_MODULE_2__["bindActionCreators"])({
+    getLink: getLink
+  }, dispatch);
 }
 
 function mapStateToProps(state) {
-  return Object.assign({}, {});
+  var userName = state.userName,
+      currencyName = state.currencyName;
+  return Object.assign({}, {
+    userName: userName,
+    currencyName: currencyName
+  });
 }
 
 ;
@@ -21001,24 +21109,19 @@ function mapStateToProps(state) {
 /*!*********************************************************************************!*\
   !*** ./www/js/source/reactpages/Module/PlayerAdmin/account-info/lib/apiInfo.js ***!
   \*********************************************************************************/
-/*! exports provided: lrfAccountProfile, custBettingStatus, lapAccountProfile, lapBankInfo, lrfActivityRecord */
+/*! exports provided: custBettingStatus, lapAccountProfile, lapBankInfo, lrfActivityRecord */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "lrfAccountProfile", function() { return lrfAccountProfile; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "custBettingStatus", function() { return custBettingStatus; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "lapAccountProfile", function() { return lapAccountProfile; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "lapBankInfo", function() { return lapBankInfo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "lrfActivityRecord", function() { return lrfActivityRecord; });
 /* harmony import */ var _constants_configInfo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../constants/configInfo */ "./www/js/source/reactpages/Module/constants/configInfo.js");
 
-var lrfAccountProfile = {
-  action: 'api/PlayerDetailedInfo/GetAccountProfile',
-  type: _constants_configInfo__WEBPACK_IMPORTED_MODULE_0__["systemType"].lrf
-};
 var custBettingStatus = {
-  action: 'api/PlayerDetailedInfo/GetCustomerBettingStatus',
+  action: 'api/PlayerBettingStatistics/GetData',
   type: _constants_configInfo__WEBPACK_IMPORTED_MODULE_0__["systemType"].lrf
 };
 var lapAccountProfile = {
@@ -21081,8 +21184,7 @@ var licenseeType = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return PlayerAccountService; });
 /* harmony import */ var _lib_factoryCommonService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../lib/factoryCommonService */ "./www/js/source/reactpages/Module/lib/factoryCommonService.js");
-/* harmony import */ var _constants_configInfo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../constants/configInfo */ "./www/js/source/reactpages/Module/constants/configInfo.js");
-/* harmony import */ var _apiInfo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./apiInfo */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/lib/apiInfo.js");
+/* harmony import */ var _apiInfo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./apiInfo */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/lib/apiInfo.js");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -21096,13 +21198,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
-var apiInfo = {
-  custBettingStatus: {
-    action: 'api/PlayerDetailedInfo/GetCustomerBettingStatus',
-    type: _constants_configInfo__WEBPACK_IMPORTED_MODULE_1__["systemType"].lrf
-  }
-};
-
 var PlayerAccountService =
 /*#__PURE__*/
 function () {
@@ -21115,17 +21210,17 @@ function () {
   _createClass(PlayerAccountService, [{
     key: "getAccountProfile",
     value: function getAccountProfile(param) {
-      return this._getData(_apiInfo__WEBPACK_IMPORTED_MODULE_2__["lapAccountProfile"].type, _apiInfo__WEBPACK_IMPORTED_MODULE_2__["lapAccountProfile"].action, param);
+      return this._getData(_apiInfo__WEBPACK_IMPORTED_MODULE_1__["lapAccountProfile"].type, _apiInfo__WEBPACK_IMPORTED_MODULE_1__["lapAccountProfile"].action, param);
     }
   }, {
     key: "getBankInfo",
     value: function getBankInfo(param) {
-      return this._getData(_apiInfo__WEBPACK_IMPORTED_MODULE_2__["lapBankInfo"].type, _apiInfo__WEBPACK_IMPORTED_MODULE_2__["lapBankInfo"].action, param);
+      return this._getData(_apiInfo__WEBPACK_IMPORTED_MODULE_1__["lapBankInfo"].type, _apiInfo__WEBPACK_IMPORTED_MODULE_1__["lapBankInfo"].action, param);
     }
   }, {
     key: "getActivityRecord",
     value: function getActivityRecord(param) {
-      return this._getData(_apiInfo__WEBPACK_IMPORTED_MODULE_2__["lrfActivityRecord"].type, _apiInfo__WEBPACK_IMPORTED_MODULE_2__["lrfActivityRecord"].action, param);
+      return this._getData(_apiInfo__WEBPACK_IMPORTED_MODULE_1__["lrfActivityRecord"].type, _apiInfo__WEBPACK_IMPORTED_MODULE_1__["lrfActivityRecord"].action, param);
     }
   }, {
     key: "_getData",
@@ -21141,11 +21236,9 @@ function () {
   }, {
     key: "getCustomerBettingStatus",
     value: function getCustomerBettingStatus(param) {
-      var custBettingStatus = apiInfo.custBettingStatus;
-
       var params = _objectSpread({}, param);
 
-      return this.commonService.fetchData(custBettingStatus.type, custBettingStatus.action, params);
+      return this.commonService.fetchData(_apiInfo__WEBPACK_IMPORTED_MODULE_1__["custBettingStatus"].type, _apiInfo__WEBPACK_IMPORTED_MODULE_1__["custBettingStatus"].action, params);
     }
   }]);
 
@@ -21160,7 +21253,7 @@ function () {
 /*!********************************************************************************************!*\
   !*** ./www/js/source/reactpages/Module/PlayerAdmin/account-info/reducers/commonReducer.js ***!
   \********************************************************************************************/
-/*! exports provided: licenseeCustId, ibcCustId, licenseeType */
+/*! exports provided: licenseeCustId, ibcCustId, licenseeType, userName, currencyName */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -21168,11 +21261,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "licenseeCustId", function() { return licenseeCustId; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ibcCustId", function() { return ibcCustId; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "licenseeType", function() { return licenseeType; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "userName", function() { return userName; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "currencyName", function() { return currencyName; });
 /* harmony import */ var _lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
 
 var licenseeCustId = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(null, {});
 var ibcCustId = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(null, {});
 var licenseeType = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(null, {});
+var userName = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])('', {});
+var currencyName = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])('', {});
 
 /***/ }),
 
@@ -21186,28 +21283,14 @@ var licenseeType = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["de
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var _widgetsReducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./widgetsReducer */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/reducers/widgetsReducer.js");
-/* harmony import */ var _widgetsReducer__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_widgetsReducer__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _commonReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./commonReducer */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/reducers/commonReducer.js");
+/* harmony import */ var _commonReducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./commonReducer */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/reducers/commonReducer.js");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(_objectSpread({}, _commonReducer__WEBPACK_IMPORTED_MODULE_2__)));
-
-/***/ }),
-
-/***/ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/reducers/widgetsReducer.js":
-/*!*********************************************************************************************!*\
-  !*** ./www/js/source/reactpages/Module/PlayerAdmin/account-info/reducers/widgetsReducer.js ***!
-  \*********************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-
+/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(_objectSpread({}, _commonReducer__WEBPACK_IMPORTED_MODULE_1__)));
 
 /***/ }),
 
@@ -21541,6 +21624,127 @@ function (_BaseCommonService) {
 
 /***/ }),
 
+/***/ "./www/js/source/reactpages/components/popup/Popup.jsx":
+/*!*************************************************************!*\
+  !*** ./www/js/source/reactpages/components/popup/Popup.jsx ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./constants */ "./www/js/source/reactpages/components/popup/constants.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+
+var Popup = function Popup(props) {
+  var title = props.title,
+      isShow = props.isShow,
+      width = props.width,
+      height = props.height,
+      isHtml = props.isHtml,
+      children = props.children,
+      iframeUrl = props.iframeUrl;
+  var content;
+
+  if (iframeUrl) {
+    content = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("iframe", {
+      frameBorder: "0",
+      src: iframeUrl,
+      width: "100%",
+      height: "100%"
+    });
+  } else {
+    content = isHtml ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "popup-content",
+      dangerouslySetInnerHTML: {
+        __html: children
+      }
+    }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "popup-content"
+    }, children);
+  }
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "popup-container ".concat(isShow ? 'show' : 'hide')
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "popup-block-body"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "flat-popup",
+    style: {
+      height: height,
+      width: width
+    }
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "popup-title"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "txt-title"
+  }, title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    className: "popup-close",
+    onClick: function onClick() {
+      props.onClose && props.onClose();
+    }
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "icon-close"
+  }))), content));
+};
+
+Popup.propTypes = {
+  width: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number, prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string]),
+  height: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number, prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string]),
+  title: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
+  isShow: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool,
+  onClose: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
+  isHtml: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool,
+  iframeUrl: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string
+};
+Popup.defaultProps = {
+  width: _constants__WEBPACK_IMPORTED_MODULE_1__["DEFAULT_WIDTH"],
+  height: _constants__WEBPACK_IMPORTED_MODULE_1__["DEFAULT_HEIGHT"],
+  isShow: false,
+  isHtml: false,
+  iframeUrl: null
+};
+/* harmony default export */ __webpack_exports__["default"] = (Popup);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/components/popup/constants.js":
+/*!****************************************************************!*\
+  !*** ./www/js/source/reactpages/components/popup/constants.js ***!
+  \****************************************************************/
+/*! exports provided: DEFAULT_WIDTH, DEFAULT_HEIGHT */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DEFAULT_WIDTH", function() { return DEFAULT_WIDTH; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DEFAULT_HEIGHT", function() { return DEFAULT_HEIGHT; });
+var DEFAULT_WIDTH = '55%';
+var DEFAULT_HEIGHT = '55%';
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/components/popup/index.jsx":
+/*!*************************************************************!*\
+  !*** ./www/js/source/reactpages/components/popup/index.jsx ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Popup__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Popup */ "./www/js/source/reactpages/components/popup/Popup.jsx");
+
+/* harmony default export */ __webpack_exports__["default"] = (_Popup__WEBPACK_IMPORTED_MODULE_0__["default"]);
+
+/***/ }),
+
 /***/ "./www/js/source/reactpages/constants/config.js":
 /*!******************************************************!*\
   !*** ./www/js/source/reactpages/constants/config.js ***!
@@ -21570,8 +21774,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AppLayout; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21589,7 +21791,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 
 
 
@@ -21691,6 +21892,68 @@ function () {
   }]);
 
   return Logger;
+}();
+
+
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/lib/numberFormat.js":
+/*!******************************************************!*\
+  !*** ./www/js/source/reactpages/lib/numberFormat.js ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return NumberFormat; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var NumberFormat =
+/*#__PURE__*/
+function () {
+  function NumberFormat() {
+    _classCallCheck(this, NumberFormat);
+  }
+
+  _createClass(NumberFormat, null, [{
+    key: "formatDecimal",
+    value: function formatDecimal(value) {
+      return this.format(value, 2);
+    }
+  }, {
+    key: "format",
+    value: function format(value) {
+      var digits = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+
+      if (typeof value !== "number" || isNaN(value)) {
+        return "";
+      }
+
+      var roundedValue = this.round(value, digits);
+      return roundedValue.toFixed(digits).replace(/(\d)(?=(\d{3})+(\.|$))/g, "$1,");
+    }
+  }, {
+    key: "round",
+    value: function round(value, digits) {
+      var sign = value < 0 ? -1 : 1;
+      var absoluteValue = Math.abs(value);
+      var rounded = Number(Math.round(absoluteValue + 'e' + digits) + 'e-' + digits);
+      return sign * rounded;
+    }
+  }, {
+    key: "parseToString",
+    value: function parseToString(number) {
+      return number.toString().replace(/(\d)(?=(\d{3})+(\.|$))/g, "$1,");
+    }
+  }]);
+
+  return NumberFormat;
 }();
 
 

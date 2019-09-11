@@ -1,4 +1,4 @@
-﻿// Generated at: 8/30/2019 9:36:47 AM
+﻿// Generated at: 9/11/2019 12:52:00 PM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -498,7 +498,7 @@ PersonalMessage:"Personal Message",
 Platform:"Platform",
 PlatformWinLoss:"Platform Win Loss",
 PlatformWinLossTitle:"Platform Win Loss - {0} --&gt; {1} - {2} - {3} - {4}",
-PlayerAdminInvalidDataErrMsg:"Invalid parameter. Invalid custId.",
+Player:"Player",
 PlayerAdminUpdateFailedMsg:"Please try again!",
 PreGame:"Pre Game",
 Prev:"Prev",

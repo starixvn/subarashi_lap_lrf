@@ -1,4 +1,4 @@
-﻿// Generated at: 8/30/2019 9:36:47 AM
+﻿// Generated at: 9/11/2019 12:52:00 PM
 window._language_zh_Hans = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -420,7 +420,6 @@ PendingFunds:"待定资金",
 Permission:"权限",
 PermissionForUser:"用户权限",
 Platform:"平台",
-PlayerAdminInvalidDataErrMsg:"无效的参数.无效的会员识别",
 PreGame:"游戏开始前",
 Prev:"上个月",
 Product:"产品",

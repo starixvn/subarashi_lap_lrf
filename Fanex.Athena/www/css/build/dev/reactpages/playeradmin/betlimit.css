@@ -664,7 +664,7 @@ body {
       color: rgba(0, 0, 0, 0.26);
       border-bottom: 1px dotted rgba(0, 0, 0, 0.26); }
 
-.pa-betlimit-grid .checkbox-group {
+.checkbox-group {
   margin-bottom: 10px; }
 
 .pa-betlimit-button {

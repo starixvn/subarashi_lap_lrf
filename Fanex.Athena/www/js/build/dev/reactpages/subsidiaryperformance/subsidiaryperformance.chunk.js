@@ -536,7 +536,7 @@ function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "_handleClickOutSide", function (event) {
-      var clickOutside = !(_this.containerElement && _this.containerElement.contains(event.target) || _this.props.excludeOutSideComponents && _this.props.excludeOutSideComponents.indexOf(event.target) >= 0);
+      var clickOutside = _this.containerElement && !_this.containerElement.contains(event.target);
 
       if (clickOutside && _this.state.isOpening) {
         _this._close();
@@ -560,7 +560,7 @@ function (_Component) {
     value: function componentDidUpdate(prevProps, prevState) {
       var _this2 = this;
 
-      if (this.props.isOpening !== prevProps.isOpening && this.state.isOpening !== this.props.isOpening) {
+      if (this.props.isOpening !== prevProps.isOpening) {
         var onOpen = this.props.onOpen;
         this.props.isOpening && onOpen && onOpen();
         this.setState({
@@ -624,8 +624,7 @@ _defineProperty(Overlay, "propTypes", {
   closeOnOutsideClick: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
   isOpening: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
   onOpen: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
-  onClose: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
-  excludeOutSideComponents: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object)
+  onClose: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func
 });
 
 _defineProperty(Overlay, "defaultProps", {
@@ -2844,8 +2843,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AppLayout; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2863,7 +2860,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 
 
 
@@ -3192,19 +3188,13 @@ function () {
     key: "format",
     value: function format(value) {
       var digits = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-      var alwaysShowDecimal = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
 
       if (typeof value !== "number" || isNaN(value)) {
         return "";
       }
 
       var roundedValue = this.round(value, digits);
-
-      if (alwaysShowDecimal) {
-        return roundedValue.toFixed(digits).replace(/(\d)(?=(\d{3})+(\.|$))/g, "$1,");
-      }
-
-      return roundedValue.toString().replace(/(\d)(?=(\d{3})+(\.|$))/g, "$1,");
+      return roundedValue.toFixed(digits).replace(/(\d)(?=(\d{3})+(\.|$))/g, "$1,");
     }
   }, {
     key: "round",
@@ -3213,6 +3203,11 @@ function () {
       var absoluteValue = Math.abs(value);
       var rounded = Number(Math.round(absoluteValue + 'e' + digits) + 'e-' + digits);
       return sign * rounded;
+    }
+  }, {
+    key: "parseToString",
+    value: function parseToString(number) {
+      return number.toString().replace(/(\d)(?=(\d{3})+(\.|$))/g, "$1,");
     }
   }]);
 

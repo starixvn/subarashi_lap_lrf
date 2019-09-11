@@ -1,4 +1,4 @@
-﻿// Generated at: 8/30/2019 9:36:47 AM
+﻿// Generated at: 9/11/2019 12:52:00 PM
 window._language_zh_TW = {
 AA:"客客",
 AbnormalBet:"非正規註單",
@@ -423,7 +423,6 @@ PendingFunds:"待定資金",
 Permission:"權限",
 PermissionForUser:"用戶權限",
 Platform:"平台",
-PlayerAdminInvalidDataErrMsg:"無效的參數。無效的會員識別",
 PreGame:"遊戲開始前",
 Prev:"上個",
 Product:"產品",

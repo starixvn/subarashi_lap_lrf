@@ -1035,6 +1035,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var _filter_UserNameInput__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./filter/UserNameInput */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/components/filter/UserNameInput.jsx");
 /* harmony import */ var _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @jsroot/lib/QueryString */ "./www/js/source/reactpages/lib/QueryString.js");
+/* harmony import */ var _jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @jsroot/lib/htmlHelper */ "./www/js/source/reactpages/lib/htmlHelper.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
@@ -1060,6 +1061,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -1136,12 +1138,12 @@ function (_PureComponent) {
   _createClass(FormFilter, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var custId = Number(_jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_13__["default"].getParam(window.location.href, 'custId'));
+      var ibcCustId = Number(_jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_13__["default"].getParam(window.location.href, 'custId'));
       var licenseeCustId = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_13__["default"].getParam(window.location.href, 'licenseeCustId');
 
-      if (custId || licenseeCustId) {
+      if (ibcCustId || licenseeCustId) {
         var param = {
-          ibcCustId: custId,
+          ibcCustId: ibcCustId,
           licenseeCustId: licenseeCustId
         };
         this.props.getSinglePlayer(param);
@@ -1192,7 +1194,7 @@ function (_PureComponent) {
       var actualSpecialLevel = specialLevel.trim();
 
       var param = _objectSpread({}, allParam, {
-        userName: userName,
+        userName: Object(_jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_14__["encode"])(userName),
         specialLevel: actualSpecialLevel === '' ? this.allSpecialLevel : actualSpecialLevel,
         pageSize: pagingOption.PageSize,
         pageIndex: 1
@@ -1230,7 +1232,8 @@ function (_PureComponent) {
           isAdvancedSearch = _this$props2.isAdvancedSearch,
           isFilterCollapsing = _this$props2.isFilterCollapsing,
           currencyList = _this$props2.currencyList,
-          getSuggestionList = _this$props2.getSuggestionList;
+          getSuggestionList = _this$props2.getSuggestionList,
+          hasBaPermission = _this$props2.hasBaPermission;
       var iconToggle = {
         tag: 'div',
         className: isFilterCollapsing ? 'chevron down' : 'chevron up',
@@ -1274,6 +1277,7 @@ function (_PureComponent) {
       }), isAdvancedSearch && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filter_AdvancedSearch__WEBPACK_IMPORTED_MODULE_5__["default"], {
         currencyList: currencyList,
         param: advancedSearchParam,
+        hasBaPermission: hasBaPermission,
         onChange: this.handleSpecificInputChange
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-12 col-md-2 col-sm-2 col-lg-2 col-xl-1"
@@ -1323,13 +1327,15 @@ function mapStateToProps(state) {
       isAdvancedSearch = state.isAdvancedSearch,
       isFilterCollapsing = state.isFilterCollapsing,
       pagingOption = state.pagingOption,
-      currencyList = state.currencyList;
+      currencyList = state.currencyList,
+      hasBaPermission = state.hasBaPermission;
   return Object.assign({}, {
     type: type,
     isAdvancedSearch: isAdvancedSearch,
     isFilterCollapsing: isFilterCollapsing,
     pagingOption: pagingOption,
-    currencyList: currencyList
+    currencyList: currencyList,
+    hasBaPermission: hasBaPermission
   });
 }
 
@@ -1414,9 +1420,11 @@ function (_PureComponent) {
       var selectedPlayer = this.props.selectedPlayer;
       var ibcCustId = selectedPlayer.ibcCustId,
           licenseeCustId = selectedPlayer.licenseeCustId,
-          currencyId = selectedPlayer.currencyId;
+          currencyId = selectedPlayer.currencyId,
+          currency = selectedPlayer.currency,
+          userName = selectedPlayer.userName;
       var custIdQueryString = systemType === _constants_configInfo__WEBPACK_IMPORTED_MODULE_5__["systemType"].lrf ? "custId=".concat(ibcCustId) : "custId=".concat(ibcCustId, "&licenseeCustId=").concat(licenseeCustId);
-      var nameValuePairString = custIdQueryString + "&currencyId=".concat(currencyId);
+      var nameValuePairString = custIdQueryString + "&currencyId=".concat(currencyId, "&currencyName=").concat(currency, "&userName=").concat(userName);
       var queryString = (action.indexOf('?') !== -1 ? '&' : '?') + nameValuePairString;
       var urlByPlayer = action + queryString;
       return this.props.getLink(systemType, urlByPlayer);
@@ -1673,6 +1681,8 @@ function (_React$Component) {
       var selectedPlayer = this.props.selectedPlayer;
 
       if (selectedPlayer) {
+        var userName = selectedPlayer.userName,
+            currency = selectedPlayer.currency;
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "link",
           onClick: function onClick() {
@@ -1680,7 +1690,7 @@ function (_React$Component) {
           }
         }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource('PreviousSearchResult')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
           className: "chevron right icon-separator"
-        }), " Player: ", selectedPlayer.userName, " (", selectedPlayer.currency, ")"));
+        }), " Player: ", userName, " ", currency && "(".concat(currency, ")")));
       } else {
         var playerCount = this.props.playerCount;
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
@@ -1860,7 +1870,8 @@ function (_React$Component) {
 
       var _this$props = this.props,
           currencyList = _this$props.currencyList,
-          param = _this$props.param;
+          param = _this$props.param,
+          hasBaPermission = _this$props.hasBaPermission;
       var currencyIdList = param.currencyIdList,
           oddsGroup = param.oddsGroup,
           specialLevel = param.specialLevel,
@@ -1872,9 +1883,9 @@ function (_React$Component) {
 
       var specialLevelList = this._createSelectData(this.specialLevelList, specialLevel);
 
-      var selectedBaStatus = this.baStatusList.find(function (x) {
+      var selectedBaStatus = hasBaPermission ? this.baStatusList.find(function (x) {
         return x.value === baFilter;
-      });
+      }) : null;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1920,7 +1931,7 @@ function (_React$Component) {
         onChange: function onChange(currentItem, selectedItemsKey) {
           return _this2.handleChange('specialLevel', selectedItemsKey);
         }
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }))), selectedBaStatus !== null && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
@@ -2802,7 +2813,7 @@ var PlayerRow = function PlayerRow(props) {
     dataItem: dataItem
   })), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].SystemId] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
     className: "center-align"
-  }, canShowMainColumn && SystemId), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].RealName] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
+  }, SystemId), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].RealName] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
     className: "center-align"
   }, RealName), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].Currency] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
     className: "center-align"
@@ -3107,7 +3118,7 @@ var StatusCell = function StatusCell(props) {
   var Status = dataItem.Status,
       IsOnline = dataItem.IsOnline,
       IsDeposit = dataItem.IsDeposit;
-  var statusName = IsDeposit ? _lib_constants__WEBPACK_IMPORTED_MODULE_3__["playerStatus"][Status] : _lib_constants__WEBPACK_IMPORTED_MODULE_3__["playerStatus"][_lib_constants__WEBPACK_IMPORTED_MODULE_3__["playerStatusByName"].Active];
+  var statusName = _lib_constants__WEBPACK_IMPORTED_MODULE_3__["playerStatus"][Status];
   var classname = 'status-text ' + statusName;
   var canUpdate = Status !== _lib_constants__WEBPACK_IMPORTED_MODULE_3__["playerStatusByName"].Archived && Status !== _lib_constants__WEBPACK_IMPORTED_MODULE_3__["playerStatusByName"].Closed;
 
@@ -3464,7 +3475,8 @@ var hasBaPermission = window._pConfig.hasBaPermission === 1;
 var displayedColumnList = Object(_lib_config__WEBPACK_IMPORTED_MODULE_6__["generateColumnList"])(type, hasBaPermission);
 
 var defaultState = _objectSpread({}, window.initialState, {
-  displayedColumnList: displayedColumnList
+  displayedColumnList: displayedColumnList,
+  hasBaPermission: hasBaPermission
 });
 
 var store = _jsroot_lib_store__WEBPACK_IMPORTED_MODULE_5__["default"].createStore(_reducers__WEBPACK_IMPORTED_MODULE_4__["default"], defaultState);
@@ -4266,6 +4278,7 @@ var displayedTextByField = (_displayedTextByField = {}, _defineProperty(_display
 }), _defineProperty(_displayedTextByField, _constants__WEBPACK_IMPORTED_MODULE_2__["fields"].Status, function (value) {
   return Object(_helpers_utils__WEBPACK_IMPORTED_MODULE_3__["getPlayerStatus"])(value);
 }), _displayedTextByField);
+var fieldListWithEmptyValueByStatus = [_constants__WEBPACK_IMPORTED_MODULE_2__["fields"].CurrentBalance, _constants__WEBPACK_IMPORTED_MODULE_2__["fields"].OutstandingBalance, _constants__WEBPACK_IMPORTED_MODULE_2__["fields"].OddsGroup, _constants__WEBPACK_IMPORTED_MODULE_2__["fields"].BaStatus, _constants__WEBPACK_IMPORTED_MODULE_2__["fields"].SpecialLevel];
 
 var ReportExcel =
 /*#__PURE__*/
@@ -4338,6 +4351,16 @@ function () {
     key: "_buildDataRow",
     value: function _buildDataRow(item, colIndex) {
       var columnConfig = this.columnConfigs[colIndex];
+      var shouldHideValue = !item.IsDeposit || item.IsArchived;
+
+      if (shouldHideValue && fieldListWithEmptyValueByStatus.indexOf(columnConfig.field) !== -1) {
+        return {
+          t: 's',
+          v: '',
+          s: columnConfig[MAIN_SECTION_STYLE]
+        };
+      }
+
       var value = item[columnConfig.field];
       var displayedTextFunc = displayedTextByField[columnConfig.field];
       var displayedValue = this._shouldSetEmpty(value) ? '' : displayedTextFunc ? displayedTextFunc(value) : value;
@@ -5233,7 +5256,7 @@ function () {
 /*!*************************************************************************************************!*\
   !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/reducers/filterHandlerReducer.js ***!
   \*************************************************************************************************/
-/*! exports provided: param, playerList, type, currencyList, isAdvancedSearch, isFilterCollapsing */
+/*! exports provided: param, playerList, type, currencyList, hasBaPermission, isAdvancedSearch, isFilterCollapsing */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5242,6 +5265,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "playerList", function() { return playerList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "type", function() { return type; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "currencyList", function() { return currencyList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hasBaPermission", function() { return hasBaPermission; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isAdvancedSearch", function() { return isAdvancedSearch; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isFilterCollapsing", function() { return isFilterCollapsing; });
 /* harmony import */ var _lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
@@ -5268,6 +5292,7 @@ var playerList = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["defa
 }));
 var type = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(null, {});
 var currencyList = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])([], {});
+var hasBaPermission = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(false, {});
 var isAdvancedSearch = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(false, _defineProperty({}, _actions_types_js__WEBPACK_IMPORTED_MODULE_1__["SET_ADVANCED_SEARCH"], function (preState, action) {
   return action.data;
 }));
@@ -5930,10 +5955,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 
 
-
-var CheckBox = function CheckBox(props) {
+var CheckBox = react__WEBPACK_IMPORTED_MODULE_0___default.a.forwardRef(function (props, ref) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "checkbox-group"
+    className: "checkbox-group",
+    ref: ref
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     type: "checkbox",
     className: "checkbox",
@@ -5946,8 +5971,7 @@ var CheckBox = function CheckBox(props) {
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
     htmlFor: props.id
   }, props.label));
-};
-
+});
 CheckBox.propTypes = {
   id: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string.isRequired,
   label: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
@@ -6151,7 +6175,7 @@ function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "_handleClickOutSide", function (event) {
-      var clickOutside = !(_this.containerElement && _this.containerElement.contains(event.target) || _this.props.excludeOutSideComponents && _this.props.excludeOutSideComponents.indexOf(event.target) >= 0);
+      var clickOutside = _this.containerElement && !_this.containerElement.contains(event.target);
 
       if (clickOutside && _this.state.isOpening) {
         _this._close();
@@ -6175,7 +6199,7 @@ function (_Component) {
     value: function componentDidUpdate(prevProps, prevState) {
       var _this2 = this;
 
-      if (this.props.isOpening !== prevProps.isOpening && this.state.isOpening !== this.props.isOpening) {
+      if (this.props.isOpening !== prevProps.isOpening) {
         var onOpen = this.props.onOpen;
         this.props.isOpening && onOpen && onOpen();
         this.setState({
@@ -6239,8 +6263,7 @@ _defineProperty(Overlay, "propTypes", {
   closeOnOutsideClick: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
   isOpening: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
   onOpen: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
-  onClose: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
-  excludeOutSideComponents: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object)
+  onClose: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func
 });
 
 _defineProperty(Overlay, "defaultProps", {
@@ -7562,8 +7585,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AppLayout; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -7581,7 +7602,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 
 
 
@@ -7917,6 +7937,24 @@ function () {
 
 /***/ }),
 
+/***/ "./www/js/source/reactpages/lib/htmlHelper.js":
+/*!****************************************************!*\
+  !*** ./www/js/source/reactpages/lib/htmlHelper.js ***!
+  \****************************************************/
+/*! exports provided: encode */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "encode", function() { return encode; });
+var encode = function encode(text) {
+  var p = document.createElement("p");
+  p.textContent = text;
+  return p.innerHTML;
+};
+
+/***/ }),
+
 /***/ "./www/js/source/reactpages/lib/langHelper.js":
 /*!****************************************************!*\
   !*** ./www/js/source/reactpages/lib/langHelper.js ***!
@@ -8055,19 +8093,13 @@ function () {
     key: "format",
     value: function format(value) {
       var digits = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-      var alwaysShowDecimal = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
 
       if (typeof value !== "number" || isNaN(value)) {
         return "";
       }
 
       var roundedValue = this.round(value, digits);
-
-      if (alwaysShowDecimal) {
-        return roundedValue.toFixed(digits).replace(/(\d)(?=(\d{3})+(\.|$))/g, "$1,");
-      }
-
-      return roundedValue.toString().replace(/(\d)(?=(\d{3})+(\.|$))/g, "$1,");
+      return roundedValue.toFixed(digits).replace(/(\d)(?=(\d{3})+(\.|$))/g, "$1,");
     }
   }, {
     key: "round",
@@ -8076,6 +8108,11 @@ function () {
       var absoluteValue = Math.abs(value);
       var rounded = Number(Math.round(absoluteValue + 'e' + digits) + 'e-' + digits);
       return sign * rounded;
+    }
+  }, {
+    key: "parseToString",
+    value: function parseToString(number) {
+      return number.toString().replace(/(\d)(?=(\d{3})+(\.|$))/g, "$1,");
     }
   }]);
 
