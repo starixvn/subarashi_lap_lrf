@@ -6,7 +6,7 @@ import ReportExcel from '../lib/reportExcel';
 
 const getData = (param) => (dispatch) => {
     const url = Site.resolveClientUrl('PlayerWinLoss/Index');
-    toggleLoader(true);
+    dispatch(toggleLoader(true));
     DataService.postData(url, param)
         .then(response => {
             dispatch(setGridData(response.data.Data));

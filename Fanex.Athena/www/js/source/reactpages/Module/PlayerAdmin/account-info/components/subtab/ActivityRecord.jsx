@@ -5,7 +5,6 @@ import { bindActionCreators } from 'redux';
 
 export const ActivityRecord = ({ ibcCustId, getActivityRecord }) => {
     const [data, setData] = useState(null);
-    console.log(data);
 
     useEffect(() => {
         if (data === null) {

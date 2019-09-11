@@ -5,6 +5,8 @@ import { ActionCreators } from '../../actions';
 import { systemType } from '../../../../constants/configInfo';
 import Popup from '@jsroot/components/popup';
 
+const defaultPopupInfo = {url: null, title: null, width: 0, height: 0};
+
 export const FastCrossLink = (props) => {
     const { userName, currencyName, getLink } = props;
 
@@ -13,8 +15,7 @@ export const FastCrossLink = (props) => {
 
     const customerWinLossActionLink = `PlayerWinLoss?userName=${userName}&currencyName=${currencyName}`;
     const customerWinLossUrl = getLink(systemType.lrf, customerWinLossActionLink);
-
-    const [popupInfo, setPopupInfo] = useState({url: null, title: null});
+    const [popupInfo, setPopupInfo] = useState(defaultPopupInfo);
     const isShowPopup = !!popupInfo.url;
 
     const handleClickLink = (event, popup) => {
@@ -22,11 +23,18 @@ export const FastCrossLink = (props) => {
         setPopupInfo(popup);
     }
 
-    const popupSingleCustomer = {url: singleCustomerUrl, title: 'Betting Ticket Center - Single Customer'};
-    const popupCustomerWinLoss = {url: customerWinLossUrl, title: 'Customer Win Loss'};
-
-    const popupWidth = window.innerWidth - 10;
-    const popupHeight = window.innerHeight - 10;
+    const popupSingleCustomer = {
+        url: singleCustomerUrl, 
+        title: 'Betting Ticket Center - Single Customer',
+        width: window.innerWidth - 10,
+        height: window.innerHeight - 10
+    };
+    const popupCustomerWinLoss = {
+        url: customerWinLossUrl, 
+        title: 'Customer Win Loss',
+        width: window.innerWidth - 10,
+        height: 300
+    };
 
     return (
         <div className="panel">
@@ -43,8 +51,8 @@ export const FastCrossLink = (props) => {
             <Popup isShow={isShowPopup} 
                             iframeUrl={popupInfo.url}
                             title={popupInfo.title}
-                            width={popupWidth} height={popupHeight}
-                            onClose={() => setPopupInfo({url: null, title: null})} />
+                            width={popupInfo.width} height={popupInfo.height}
+                            onClose={() => setPopupInfo(defaultPopupInfo)} />
         </div>
     );
 }

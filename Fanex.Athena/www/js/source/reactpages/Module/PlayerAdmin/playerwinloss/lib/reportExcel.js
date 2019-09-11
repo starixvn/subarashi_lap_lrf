@@ -1,7 +1,9 @@
 ﻿import Excel from '@jsroot/lib/excel';
-import { headerCellStyle, bodyCellStyle } from '@jsroot/constants/excelStyle';
+import { headerCellStyle, bodyCellStyle, titleCellStyle } from '@jsroot/constants/excelStyle';
+import { generateHeaderText } from '../lib/utils';
 
-const HEADER_ROW_INDEX = 0;
+const TITLE_ROW_INDEX = 0;
+const HEADER_ROW_INDEX = 1;
 
 const MAIN_SECTION_STYLE = 'mainSectionStyle';
 
@@ -30,13 +32,15 @@ export default class ReportExcel {
         this.title = title;
 
         this.worksheet = {};
-        this.currentRowIndex = hasCustomerComm ? 2 : 1;
+        this.currentRowIndex = hasCustomerComm ? 3 : 2;
         this.mergeConfig = [];
         this.columnConfigs = this._getcolumnConfigs(hasCustomerComm, isAllowedBA);
+        this.headerText = generateHeaderText(hasCustomerComm);
     }
 
     export() {
         Excel.process(() => {
+            this._createTitle();
             this._createHeader();
             this._createBodyData();
             this._createExcelConfig();
@@ -45,9 +49,32 @@ export default class ReportExcel {
         })
     }
 
+    _createTitle() {
+        const address = Excel.getCellAddress({
+            c: 0,
+            r: TITLE_ROW_INDEX
+        });
+        this.worksheet[address] = {
+            t: "s",
+            v: this.title,
+            s: titleCellStyle
+        }
+
+        this.mergeConfig.push({
+            s: {
+                r: TITLE_ROW_INDEX,
+                c: 0
+            },
+            e: {
+                r: TITLE_ROW_INDEX,
+                c: this.columnConfigs.length - 1
+            }
+        });
+    }
+
     _createHeader() {
-        const length = this.hasCustomerComm ? this.columnConfigs.length - MERGING_CUSTWL_COLUMN_COUNT : this.columnConfigs.length;
-        for (let i = 0; i <= length; i++) {
+        const length = this.hasCustomerComm ? this.columnConfigs.length - MERGING_CUSTWL_COLUMN_COUNT + 1 : this.columnConfigs.length;
+        for (let i = 0; i < length; i++) {
             if (this.hasCustomerComm) {
                 this._buildHeaderWithGroupingColumn(i);
             }
@@ -59,7 +86,7 @@ export default class ReportExcel {
                 });
                 this.worksheet[address] = {
                     t: "s",
-                    v: i === 0 ? '#' : fieldName,
+                    v: this.headerText[fieldName],
                     s: headerCellStyle
                 }
             }
@@ -69,8 +96,9 @@ export default class ReportExcel {
     _buildHeaderWithGroupingColumn(colIndex) {
         const dataColIndex = colIndex > INDEX_CUSTWL_COLUMN ? colIndex + MERGING_CUSTWL_COLUMN_COUNT - 1 : colIndex;
         const fieldName = this.columnConfigs[dataColIndex].field;
+        const text = this.headerText[fieldName];
         if (fieldName === fields.WinLoss) {
-            this._buildColSpanColumn(HEADER_ROW_INDEX, dataColIndex, MERGING_CUSTWL_COLUMN_COUNT, fieldName);
+            this._buildColSpanColumn(HEADER_ROW_INDEX, dataColIndex, MERGING_CUSTWL_COLUMN_COUNT, this.headerText.CustomerWinLoss);
         }
         else {
             const address = Excel.getCellAddress({
@@ -79,7 +107,7 @@ export default class ReportExcel {
             });
             this.worksheet[address] = {
                 t: "s",
-                v: fieldName,
+                v: text,
                 s: headerCellStyle
             }
 
@@ -128,7 +156,7 @@ export default class ReportExcel {
             const fieldName = this.columnConfigs[i].field;
             this.worksheet[address] = {
                 t: "s",
-                v: fieldName || '',
+                v: this.headerText[fieldName] || '',
                 s: headerCellStyle
             }
         }

@@ -6,7 +6,6 @@ import { render } from 'react-dom';
 import AppContainer from './AppContainer';
 
 const defaultState = { ...window.initialState };
-console.log(defaultState);
 const store = Store.createStore(reducer, defaultState);
 
 const App = () => {

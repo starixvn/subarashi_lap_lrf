@@ -11,6 +11,7 @@
         userSession.CurrencyList.ToDictionary(x => x.Key.ToString(), x => x.Value);
     var isParasiticMode = userSession != null && userSession.ApplicationMode == AppMode.Parasitic;
     var langCode = System.Globalization.CultureInfo.CurrentUICulture.IetfLanguageTag;
+    var rootUrl = Url.Content("~");
 }
 <!DOCTYPE html>
 
@@ -20,6 +21,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <title>@ViewBag.Title</title>
     <meta name="description" content="The Risk & Forecast System" />
+    <base href="@rootUrl" />
     <link href="@Url.ContentLinkByEnv("/www/css/build/reactpages/vendor.css")" rel="stylesheet" type="text/css" />
 
     @RenderSection("pagecss", required: false)
@@ -33,7 +35,7 @@
 
     <script type="text/javascript">
         var PageLanguage = "@langCode";
-        window.rootUrl = '@Url.Content("~/")';
+        window.rootUrl = '@rootUrl';
 
         @RenderSection("globaljscode", required: false)
     </script>
