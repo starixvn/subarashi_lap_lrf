@@ -2297,7 +2297,8 @@ var BaStatusCell = function BaStatusCell(props) {
       setPlayerList = props.setPlayerList,
       toggleLoader = props.toggleLoader,
       updateBaStatus = props.updateBaStatus,
-      setSweetAlertOption = props.setSweetAlertOption;
+      setSweetAlertOption = props.setSweetAlertOption,
+      playerList = props.playerList;
   var IbcCustId = dataItem.IbcCustId,
       BaStatus = dataItem.BaStatus,
       OddsGroup = dataItem.OddsGroup,
@@ -3986,7 +3987,10 @@ var buildLapPlayerList = function buildLapPlayerList(playerList) {
   }
 
   return playerList.map(function (item) {
-    var UserName = item.UserName,
+    var CustId = item.CustId,
+        UserName = item.UserName,
+        CurrentBalance = item.CurrentBalance,
+        Currency = item.Currency,
         Status = item.Status,
         RealName = item.RealName,
         IP = item.IP,
@@ -3994,26 +3998,27 @@ var buildLapPlayerList = function buildLapPlayerList(playerList) {
         isOnline = item.isOnline,
         IBCCustId = item.IBCCustId,
         isArchived = item.isArchived,
-        CustId = item.CustId,
+        LastTransaction = item.LastTransaction,
         CurrencyCode = item.CurrencyCode,
-        CurrentBalance = item.CurrentBalance,
         OutBalance = item.OutBalance,
-        Currency = item.Currency;
+        IBCUserName = item.IBCUserName;
     return {
       IbcCustId: IBCCustId,
       LicenseeCustId: CustId,
       UserName: UserName,
+      SystemId: IBCUserName,
+      Currency: CurrencyCode,
+      CurrentBalance: CurrentBalance,
+      OutstandingBalance: OutBalance,
       Status: Status,
       RealName: RealName,
+      LastTransaction: LastTransaction,
       LastLoginIp: IP,
       Email: email,
       IsOnline: isOnline,
       IsDeposit: IBCCustId > 0,
-      IsArchived: isArchived,
-      Currency: CurrencyCode,
-      CurrentBalance: CurrentBalance,
-      OutstandingBalance: OutBalance,
-      CurrencyId: Currency || 0
+      IsArchived: !!isArchived,
+      CurrencyId: Currency
     };
   });
 };
