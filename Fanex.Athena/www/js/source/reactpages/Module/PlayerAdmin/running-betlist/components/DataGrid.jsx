@@ -19,14 +19,16 @@ export class DataGrid extends Component {
             total: null,
             totalRows: 0
         };
-
-        this._getData(this.props.requestParam);
     }
 
     componentDidUpdate(prevProps) {
         if (prevProps.requestParam.TimeStamp !== this.props.requestParam.TimeStamp) {
             this._getData(this.props.requestParam);
         }
+    }
+
+    componentDidMount() {
+        this._getData(this.props.requestParam);
     }
 
     getHeaderName = (column) => {
@@ -88,7 +90,7 @@ export class DataGrid extends Component {
             PageIndex: requestParam.PageIndex,
             PageSize: requestParam.PageSize,
             TotalItem: totalRows,
-            PageList: [50, 100, 200, 300, 400, 500]
+            PageList: [50, 100, 200, 300, 400, 500, 1000, 200]
         };
 
         return <BetListDataGrid
