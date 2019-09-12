@@ -7,6 +7,7 @@
     using Fanex.Athena.Controllers;
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Auth.Enum;
     using Fanex.Athena.Module.PlayerAdmin.DTO;
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
     using Fanex.Athena.Resources;
