@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Fanex.Athena.Model.Core.MetaModel;
+using Fanex.Athena.Model.Core.MetaModel.Product;
 
 namespace Fanex.Athena.Module.PlayerAdmin.MetaModel
 {
@@ -9,7 +11,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.MetaModel
         private string _userName;
 
         [Required]
-        public string UserName
+        public string Username
         {
             get
             {
@@ -22,14 +24,26 @@ namespace Fanex.Athena.Module.PlayerAdmin.MetaModel
             }
         }
 
+        public int PageSize { get; set; } = 50;
+
+        public int PageIndex { get; set; } = 1;
+
         public DateTime FromDate { get; set; }
 
         public DateTime ToDate { get; set; }
 
-        public string ProductCodeList { get; set; }
+        public IEnumerable<ProductOption> ProductOptions { get; set; }
 
         public string AgentListXml { get; set; }
 
-        public DateTime MoveBetsDay { get; set; }
+        public bool IsExportExcel { get; set; }
+
+        public bool IsAllowBA { get; set; }
+
+        public bool IsAllowedCustomerComm { get; set; }
+
+        public bool SystemIdVisible { get; set; }
+
+        public string ExcelTitle { get; set; }
     }
 }

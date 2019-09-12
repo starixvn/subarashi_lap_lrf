@@ -113,10 +113,9 @@
     <Compile Include="Repository\PlayerBetLimitRepository.cs" />
     <Compile Include="Repository\NumberGameBetLimitRepository.cs" />
     <Compile Include="Repository\SportBookBetLimitRepository.cs" />
-    <Compile Include="Services\Interfaces\IPlayerWinLossService.cs" />
     <Compile Include="Services\Interfaces\ISportBookBetLimitService.cs" />
-    <Compile Include="Services\PlayerWinLossService.cs" />
     <Compile Include="Services\SportBookBetLimitService.cs" />
+    <Compile Include="ViewModels\Api\CustomerWinLossApiViewModel.cs" />
     <Compile Include="ViewModels\PlayerBetLimitViewModel.cs" />
     <Compile Include="ViewModels\PlayerBetSettingViewModel.cs" />
     <Compile Include="ViewModels\PlayerBtcSingleCustomerViewModel.cs" />

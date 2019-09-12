@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -69,12 +70,11 @@ namespace Fanex.Athena.Service.StatelessCore
 
         public async Task<HttpResponseMessage> PostFileAsync(string path, object value, string fileName, string language)
         {
-            return await HandleAsync<HttpResponseMessage>(path, value, language, async (x) =>
+            return await HandleAsync(path, value, language, async (x) =>
             {
                 var result = new HttpResponseMessage(HttpStatusCode.OK)
                 {
                     Content = new ByteArrayContent(x.RawBytes),
-
                 };
                 result.Headers.TransferEncodingChunked = true;
                 result.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
@@ -83,6 +83,15 @@ namespace Fanex.Athena.Service.StatelessCore
                 };
 
                 return await Task.FromResult(result).ConfigureAwait(false);
+            }).ConfigureAwait(false);
+        }
+
+        public async Task<Stream> PostAsyncStream(string path, object value, string language)
+        {
+            return await HandleAsync(path, value, language, async (x) =>
+            {
+                var stream = new MemoryStream(x.RawBytes);
+                return await Task.FromResult(stream).ConfigureAwait(false);
             }).ConfigureAwait(false);
         }
     }

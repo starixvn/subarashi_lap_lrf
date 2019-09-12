@@ -6,11 +6,11 @@
 
         public int TotalTransaction { get; set; }
 
-        public decimal WinLoss { get; set; }
+        public decimal CustomerWL { get; set; }
 
         public decimal Comm { get; set; }
 
-        public decimal Total { get; set; }
+        public decimal CustomerTotalWL { get; set; }
 
         public decimal BetEffective { get; set; }
 

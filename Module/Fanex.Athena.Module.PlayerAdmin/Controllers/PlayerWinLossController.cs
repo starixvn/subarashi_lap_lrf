@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.SessionState;
 using Fanex.Athena.Controllers;
 using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Model.Core.DTO.Common;
+using Fanex.Athena.Model.Core.MetaModel.Product;
 using Fanex.Athena.Module.PlayerAdmin.MetaModel;
-using Fanex.Athena.Module.PlayerAdmin.Services.Interfaces;
 using Fanex.Athena.Module.PlayerAdmin.ViewModels;
+using Fanex.Athena.Module.PlayerAdmin.ViewModels.Api;
 using Fanex.Athena.Service.Core.Common.Interfaces;
 using Fanex.Athena.Service.Core.Users.Interfaces;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -23,16 +25,20 @@ namespace Fanex.Athena.Module.PlayerAdmin.Controllers
     {
         private readonly IProductService _productService;
 
-        private readonly IPlayerWinLossService _playerWinLossService;
+        private readonly IReportAPIClient _reportAPIClient;
+
+        private readonly ILicenseeSettingService _licenseeSettingService;
 
         public PlayerWinLossController(
             ILanguageService languageService,
             ISessionService sessionService,
             IProductService productService,
-            IPlayerWinLossService playerWinLossService) : base(languageService, sessionService)
+            IReportAPIClient reportAPIClient,
+            ILicenseeSettingService licenseeSettingService) : base(languageService, sessionService)
         {
             _productService = productService;
-            _playerWinLossService = playerWinLossService;
+            _reportAPIClient = reportAPIClient;
+            _licenseeSettingService = licenseeSettingService;
         }
 
         [HttpGet]
@@ -56,7 +62,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Controllers
         [AjaxRequest]
         [CustomValidateAntiForgery]
         [AutoBindMetaModel(BindAgent = true)]
-        public ActionResult Index(PlayerWinLossMetaModel metaModel)
+        public async Task<ActionResult> Index(PlayerWinLossMetaModel metaModel)
         {
             if (!ModelState.IsValid)
             {
@@ -65,13 +71,21 @@ namespace Fanex.Athena.Module.PlayerAdmin.Controllers
                     Data = DBNull.Value
                 });
             }
-
+            var userSession = SessionService.UserSession;
             AssignMetaModelValue(metaModel);
 
-            return Json(new
+            if (metaModel.IsExportExcel)
             {
-                Data = _playerWinLossService.GetData(metaModel)
-            });
+                AssignMetaModelForExcel(metaModel);
+                const string FileName = "CustomerWinLoss.xls";
+                var stream = await _reportAPIClient.PostAsyncStream("api/CustomerWinLoss/ExportExcel",
+                    metaModel, userSession.Language).ConfigureAwait(false);
+
+                return File(stream, "application/octet-stream", FileName);
+            }
+
+            return Json(await _reportAPIClient.PostAsync<CustomerWinLossApiViewModel>("api/CustomerWinLoss/Index",
+                    metaModel, userSession.Language).ConfigureAwait(false));
         }
 
         private ProductAccess GetProductAccess()
@@ -85,10 +99,20 @@ namespace Fanex.Athena.Module.PlayerAdmin.Controllers
         private void AssignMetaModelValue(PlayerWinLossMetaModel metaModel)
         {
             var now = DateTime.Now;
+            var productList = GetProductAccess().ProductList;
 
-            metaModel.ProductCodeList = string.Join(",", GetProductAccess().ProductList.Select(i => i.ProductCode));
+            metaModel.ProductOptions = productList.Select(p => new ProductOption { Code = p.ProductCode, Name = p.ProductName, Status = true });
             metaModel.FromDate = new DateTime(now.Year, now.Month, 1);
             metaModel.ToDate = now;
+        }
+
+        private void AssignMetaModelForExcel(PlayerWinLossMetaModel metaModel)
+        {
+            var licenseeSession = SessionService.LicenseeSession;
+
+            metaModel.IsAllowedCustomerComm = licenseeSession.IsAllowedCustomerComm;
+            metaModel.IsAllowBA = GetProductAccess().IsAllowBA;
+            metaModel.SystemIdVisible = !_licenseeSettingService.IsFakeLicensee(licenseeSession.LicenseeName);
         }
     }
 }
