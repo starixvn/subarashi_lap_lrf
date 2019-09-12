@@ -1,4 +1,4 @@
-﻿namespace Fanex.Athena.Module.PlayerAdmin.Repository
+﻿namespace Fanex.Athena.Module.PlayerAdmin.Repositories
 {
     using System.Collections.Generic;
     using System.Text;
@@ -7,7 +7,7 @@
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Module.PlayerAdmin.DTO;
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
-    using Fanex.Athena.Module.PlayerAdmin.Repository.Interfaces;
+    using Fanex.Athena.Module.PlayerAdmin.Repositories.Interfaces;
     using Fanex.Common;
     using Fanex.Common.Extensions;
     using Fanex.Data;
@@ -51,7 +51,7 @@
             return sportList;
         }
 
-        public async Task<IResultInfo> UpdateSettingAsync(PlayerBetLimitUpdateMetaModel metaModel)
+        public async Task<IResultInfo> UpdateSettingAsync(PlayerBetLimitUpdateMetaModel<PlayerBetLimitMetaModel> metaModel)
         {
             const string UspName = "Lrf_CustomerUpdMember_MinMaxBetKN";
 
@@ -72,7 +72,7 @@
             }
         }
 
-        private static void AddUpdateParameter(IObjectDb db, PlayerBetLimitUpdateMetaModel metaModel)
+        private static void AddUpdateParameter(IObjectDb db, PlayerBetLimitUpdateMetaModel<PlayerBetLimitMetaModel> metaModel)
         {
             db.SetParameterValue("ip", metaModel.Ip);
             db.SetParameterValue("language", metaModel.Language);

@@ -37,15 +37,14 @@
         [ValidatePermissionOnData(isObject:true)]
         public async Task<JsonResult> GetSetting(PlayerBetLimitSelectMetaModel metaModel)
         {
-            //var isEditable = HasEditPermission();
+            var isEditable = HasEditPermission();
             var data = await _service.GetSettingAsync(metaModel.CustId, AppSettings.IsShowMixedSport).ConfigureAwait(false);
             var copySportId = ((int)SportType.Soccer).ToString();
 
-            var viewModel = new PlayerBetSettingViewModel
+            var viewModel = new PlayerBetLimitViewModel
             {
                 Data = AddSettingTypeName(data),
-                //Editable = isEditable,
-                Editable = true,
+                Editable = isEditable,
                 CopyId = copySportId,
                 EnableCopy = data.Any(x => x.Id == copySportId)
             };
@@ -56,8 +55,8 @@
         [HttpPost]
         [AjaxRequest]
         [ValidatePermissionOnData(isObject:true)]
-        //[FunctionAuthorization(Model.Auth.DataDomain.PermissionKeys.PlayerAdminBetLimit)]
-        public async Task<JsonResult> UpdateSetting(PlayerBetLimitUpdateMetaModel metaModel)
+        [FunctionAuthorization(Model.Auth.DataDomain.PermissionKeys.PlayerAdminBetLimit)]
+        public async Task<JsonResult> UpdateSetting(PlayerBetLimitUpdateMetaModel<PlayerBetLimitMetaModel> metaModel)
         {
             var user = SessionService.UserSession;
             AddUpdateInfo(metaModel, user.UserId, user.Language, SessionService.LicenseeSession.LicenseeName, Request.UserHostAddress);

@@ -37,7 +37,7 @@ body {
     }
 }
 
-.checkbox-group {
+.checkbox-group, .pa-betlimit-group {
     margin-bottom: 10px;
 }
 
@@ -53,4 +53,8 @@ body {
 
 .popup-content {
     padding-top: 10px !important;
+}
+
+.disabled-text {
+    color: $colorDisabled !important;
 }

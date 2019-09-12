@@ -3,11 +3,9 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Fanex.Athena.Extension.Utility;
-    using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Module.PlayerAdmin.DTO;
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
-    using Fanex.Athena.Module.PlayerAdmin.Repository.Interfaces;
+    using Fanex.Athena.Module.PlayerAdmin.Repositories.Interfaces;
     using Fanex.Athena.Module.PlayerAdmin.ViewModels;
     using Fanex.Athena.Resources;
     using Fanex.Athena.Service.Core.Common.Interfaces;
@@ -24,11 +22,10 @@
         public RngKenoBetLimitController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSettings,
             ICacheRefAdapter cacheRefAdapter,
             IAuthorizationService authorizationService,
             IRngKenoBetLimitRepository rngKenoBetLimitRepository)
-            : base(languageService, sessionService, appSettings, cacheRefAdapter, authorizationService)
+            : base(languageService, sessionService, cacheRefAdapter, authorizationService)
         {
             _repository = rngKenoBetLimitRepository;
         }
@@ -38,15 +35,13 @@
         [ValidatePermissionOnData(isObject:true)]
         public async Task<JsonResult> GetSetting(PlayerBetLimitSelectMetaModel metaModel)
         {
-            //var isEditable = HasEditPermission();
+            var isEditable = HasEditPermission();
             var data = await _repository.GetSettingAsync(metaModel.CustId).ConfigureAwait(false);
-            var copySportId = ((int)SportType.Soccer).ToString();
 
-            var viewModel = new PlayerBetSettingViewModel
+            var viewModel = new PlayerBetLimitViewModel
             {
                 Data = AddProductName(data),
-                //Editable = isEditable,
-                Editable = true
+                Editable = isEditable
             };
 
             return Json(viewModel);
@@ -55,8 +50,8 @@
         [HttpPost]
         [AjaxRequest]
         [ValidatePermissionOnData(isObject:true)]
-        //[FunctionAuthorization(Model.Auth.DataDomain.PermissionKeys.PlayerAdminBetLimit)]
-        public async Task<JsonResult> UpdateSetting(PlayerBetLimitUpdateMetaModel metaModel)
+        [FunctionAuthorization(Model.Auth.DataDomain.PermissionKeys.PlayerAdminBetLimit)]
+        public async Task<JsonResult> UpdateSetting(PlayerBetLimitUpdateMetaModel<PlayerBetLimitMetaModel> metaModel)
         {
             var user = SessionService.UserSession;
             AddUpdateInfo(metaModel, user.UserId, user.Language, SessionService.LicenseeSession.LicenseeName, Request.UserHostAddress);

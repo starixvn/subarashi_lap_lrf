@@ -8,7 +8,7 @@
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Module.PlayerAdmin.DTO;
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
-    using Fanex.Athena.Module.PlayerAdmin.Repository.Interfaces;
+    using Fanex.Athena.Module.PlayerAdmin.Repositories.Interfaces;
     using Fanex.Athena.Module.PlayerAdmin.Services.Interfaces;
 
     public class SportBookBetLimitService : ISportBookBetLimitService
@@ -44,7 +44,7 @@
             return result;
         }
 
-        public async Task<IResultInfo> UpdateSettingAsync(PlayerBetLimitUpdateMetaModel metaModel)
+        public async Task<IResultInfo> UpdateSettingAsync(PlayerBetLimitUpdateMetaModel<PlayerBetLimitMetaModel> metaModel)
         {
             if (metaModel.Setting is null || metaModel.Setting.Any(x => x.Id == ((int)SportType.Esports).ToString()))
             {
@@ -61,14 +61,14 @@
                 return result;
             }
 
-            var dcsMetaModel = new PlayerBetLimitUpdateMetaModel
+            var dcsMetaModel = new PlayerBetLimitUpdateMetaModel<PlayerBetLimitMetaModel>
             {
                 CustId = metaModel.CustId,
                 UserId = metaModel.UserId,
                 Ip = metaModel.Ip,
                 Setting = metaModel.Setting.Where(x => x.Id == ((int)SportType.Esports).ToString())
             };
-            return await _dcsBetSetting.UpdateSettingAsync(metaModel).ConfigureAwait(false);
+            return await _dcsBetSetting.UpdateSettingAsync(dcsMetaModel).ConfigureAwait(false);
         }
     }
 }

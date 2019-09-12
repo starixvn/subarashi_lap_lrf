@@ -4,12 +4,13 @@ import { bindActionCreators, compose } from 'redux';
 import { ActionCreators } from '../../../actions/index';
 import LangHelper from '@jsroot/lib/langHelper';
 import NoDataTitle from '@jsroot/components/NoDataTitle';
+import DataTransfer from '../../../lib/dataTransfer';
 
 import Utility from '../../../lib/utility';
 import CheckBox from '@jsroot/components/CheckBox';
 import Balloon from '@jsroot/components/Balloon';
 
-const SettingContent = (Grid, Service) => {
+const SettingContent = (Grid, DataHandling) => {
     return class extends PureComponent {
         constructor(props) {
             super(props);
@@ -23,8 +24,6 @@ const SettingContent = (Grid, Service) => {
                 errorBalloon: { msg: '', targetTop: 0, targetLeft: 0 }
             };
 
-            this._getData(props.requestParam);
-
             this.ref = {};
             this.checkBoxRef = React.createRef();
             this.errorRef = React.createRef();
@@ -34,10 +33,6 @@ const SettingContent = (Grid, Service) => {
         componentDidUpdate(prevProps, prevState) {
             if (prevState.data !== this.state.data) {
                 this.props.toggleLoader(false);
-            }
-
-            if (prevProps.requestParam !== this.props.requestParam) {
-                this._getData(this.props.requestParam);
             }
 
             if (prevState.showError !== this.state.showError) {
@@ -54,6 +49,10 @@ const SettingContent = (Grid, Service) => {
 
         componentWillUnmount() {
             this._unRegisterEvents();
+        }
+
+        componentDidMount() {
+            this._getData(this.props.requestParam);
         }
 
         _registerEvents() {
@@ -87,7 +86,7 @@ const SettingContent = (Grid, Service) => {
         onReset = (e) => {
             e.preventDefault();
 
-            if (e.button === 0 || e.which === 1) {
+            if (!this.state.disabledButton || (e.button === 0 || e.which === 1)) {
                 this.setState({ isCopy: false }, () => this._getData(this.props.requestParam));
             }
         }
@@ -98,12 +97,11 @@ const SettingContent = (Grid, Service) => {
 
         onSubmit = (e) => {
             e.preventDefault();
-            e.nativeEvent.stopImmediatePropagation();
 
-            if (e.button === 0 || e.which === 1) {
+            if (!this.state.disabledButton && (e.button === 0 || e.which === 1)) {
                 if (!this.state.showError) {
                     const data = this.state.data;
-                    const submitData = Service.getSubmitData(data);
+                    const submitData = DataHandling.getSubmitData(data);
 
                     if (!submitData.IsValid) {
                         this._showError(submitData.Data);
@@ -125,7 +123,7 @@ const SettingContent = (Grid, Service) => {
 
                 const { data } = this.state;
                 const copyRow = data.find(e => e.Id === setting.CopyId);
-                const invalidData = Service.validate(copyRow);
+                const invalidData = DataHandling.validate(copyRow);
 
                 if (invalidData !== null) {
                     this._showError(invalidData);
@@ -148,14 +146,12 @@ const SettingContent = (Grid, Service) => {
         }
 
         onCloseAlert = () => {
-            this.setState({ disableButton: false }, () => this.props.setAlertOption({ isShow: false }));
+            this.setState({ disabledButton: false }, () => this.props.setAlertOption({ isShow: false }));
         }
 
         onRefresh = () => {
-            this.setState({ disableButton: false, isCopy: false }, () => {
-                this.props.setAlertOption({ isShow: false });
-                this._getData(this.props.requestParam);
-            });
+            this.props.setAlertOption({ isShow: false });
+            this._getData(this.props.requestParam);
         }
 
         _submit(data) {
@@ -164,7 +160,7 @@ const SettingContent = (Grid, Service) => {
             const requestParam = this.props.requestParam;
             const param = Object.assign({}, { ...this.props.requestParam }, { Setting: data });
 
-            Service.updateData(param, this._showSubmitResult.bind(this), () => this.props.toggleLoader(false), this._handleError.bind(this));
+            DataTransfer.updateData(param, this._showSubmitResult.bind(this), () => this.props.toggleLoader(false), this._handleError.bind(this));
         }
 
         _handleError() {
@@ -186,7 +182,7 @@ const SettingContent = (Grid, Service) => {
 
             const msg = (<p className="center-align">{Utility.getConfirmationMsg(this.props.requestParam.ProductId)}</p>);
 
-            this.setState({ disableButton: true }, () => this.props.setAlertOption({
+            this.setState({ disabledButton: true }, () => this.props.setAlertOption({
                 isShow: true,
                 title: LangHelper.getSingleResource('Confirmation'),
                 children: msg,
@@ -200,7 +196,7 @@ const SettingContent = (Grid, Service) => {
         _showSubmitResult(title, msg, isSuccess) {
             const content = (<p className="center-align">{msg}</p>);
 
-            this.setState({ disableButton: true }, () => this.props.setAlertOption({
+            this.setState({ disabledButton: true }, () => this.props.setAlertOption({
                 isShow: true,
                 title: title,
                 children: content,
@@ -226,15 +222,18 @@ const SettingContent = (Grid, Service) => {
 
         _updateState(data, setting) {
             this.setState((state) => ({
-                data: data,
-                setting: Object.assign({}, state.setting, setting)
+                data: DataHandling.getViewData(data),
+                setting: Object.assign({}, state.setting, setting),
+                disableButton: false,
+                isCopy: false,
+                showError: false
             }));
         }
 
         _getData(param) {
             this.props.toggleLoader(true);
 
-            Service.getData(param, this._updateState.bind(this), null, this._handleError.bind(this));
+            DataTransfer.getData(param, this._updateState.bind(this), null, this._handleError.bind(this));
         }
 
         render() {
@@ -244,7 +243,7 @@ const SettingContent = (Grid, Service) => {
                 return <NoDataTitle />;
             }
 
-            const { setting, disableButton, showError, errorBalloon, isCopy } = this.state;
+            const { setting, disabledButton, showError, errorBalloon, isCopy } = this.state;
 
             return (
                 <div className="pa-betlimit">
@@ -265,10 +264,10 @@ const SettingContent = (Grid, Service) => {
                     {
                         setting.Editable &&
                         <div className="pa-betlimit-button">
-                            <button type='button' className='btn btn-cancel' disabled={disableButton} onMouseDown={this.onReset}>
+                            <button type='button' className='btn btn-cancel' disabled={disabledButton} onMouseDown={this.onReset}>
                                 {LangHelper.getSingleResource('Reset')}
                             </button>
-                            <button type='button' className='btn btn-apply' disabled={disableButton} onMouseDown={this.onSubmit} ref={this.submitButtonRef}>
+                            <button type='button' className='btn btn-apply' disabled={disabledButton} onMouseDown={this.onSubmit} ref={this.submitButtonRef}>
                                 {LangHelper.getSingleResource('Submit')}
                             </button>
                         </div>

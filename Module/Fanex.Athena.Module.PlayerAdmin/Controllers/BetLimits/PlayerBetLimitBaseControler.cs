@@ -7,7 +7,6 @@
     using Fanex.Athena.Controllers;
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Auth.DataDomain;
-    using Fanex.Athena.Model.Auth.Enum;
     using Fanex.Athena.Module.PlayerAdmin.DTO;
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
     using Fanex.Athena.Resources;
@@ -20,8 +19,8 @@
 
     [SessionState(SessionStateBehavior.ReadOnly)]
     [CheckUMFilter]
-    //[AuthorizeRestriction(AppMode.Parasitic)]
-    //[FunctionAuthorization(PermissionKeys.PlayerAdmin)]
+    [AuthorizeRestriction(AppMode.Parasitic)]
+    [FunctionAuthorization(PermissionKeys.PlayerAdmin)]
     [CustomValidateAntiForgery]
     [OutputCache(NoStore = true, Duration = 0, Location = OutputCacheLocation.None, VaryByParam = "*")]
     public class PlayerBetLimitBaseControler : CultureBaseController
@@ -44,7 +43,18 @@
             _cacheRefAdapter = cacheRefAdapter;
         }
 
-        protected static void AddUpdateInfo(PlayerBetLimitUpdateMetaModel metaModel, int userId, string language, string siteName, string ip)
+        public PlayerBetLimitBaseControler(
+            ILanguageService languageService,
+            ISessionService sessionService,
+            ICacheRefAdapter cacheRefAdapter,
+            IAuthorizationService authorizationService)
+            : base(languageService, sessionService, null, null)
+        {
+            _authService = authorizationService;
+            _cacheRefAdapter = cacheRefAdapter;
+        }
+
+        protected static void AddUpdateInfo<T>(PlayerBetLimitUpdateMetaModel<T> metaModel, int userId, string language, string siteName, string ip)
         {
             metaModel.UserId = userId;
             metaModel.Language = language;

@@ -1,4 +1,4 @@
-﻿namespace Fanex.Athena.Module.PlayerAdmin.Repository.Interfaces
+﻿namespace Fanex.Athena.Module.PlayerAdmin.Repositories.Interfaces
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -10,7 +10,7 @@
     {
         Task<IEnumerable<PlayerBetLimit>> GetSettingAsync(int custId, int productId);
 
-        Task<IResultInfo> UpdateSettingAsync(PlayerBetLimitUpdateMetaModel metaModel);
+        Task<IResultInfo> UpdateSettingAsync(PlayerBetLimitUpdateMetaModel<PlayerBetLimitMetaModel> metaModel);
 
         Task<bool> GetStatusAsync(int custId, int productId);
     }

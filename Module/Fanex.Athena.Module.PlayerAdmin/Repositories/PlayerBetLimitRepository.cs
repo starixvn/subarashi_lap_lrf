@@ -1,10 +1,10 @@
-﻿namespace Fanex.Athena.Module.PlayerAdmin.Repository
+﻿namespace Fanex.Athena.Module.PlayerAdmin.Repositories
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Fanex.Athena.Extension.Utility.Interfaces;
     using Fanex.Athena.Module.PlayerAdmin.DTO;
-    using Fanex.Athena.Module.PlayerAdmin.Repository.Interfaces;
+    using Fanex.Athena.Module.PlayerAdmin.Repositories.Interfaces;
     using Fanex.Common.Extensions;
 
     public class PlayerBetLimitRepository : IPlayerBetLimitRepository

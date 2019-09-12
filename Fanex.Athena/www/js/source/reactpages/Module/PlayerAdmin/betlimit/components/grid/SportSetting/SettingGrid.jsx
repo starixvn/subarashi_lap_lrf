@@ -56,12 +56,12 @@ const SettingGrid = (props) => {
             disabled={disabled} />
     }
 
-    const buildBody = (editable, isCopy, data, copyId) => {
+    const buildBody = (editable, data) => {
         let rows = [];
 
         for (let i = 0; i < data.length; i++) {
             const item = data[i];
-            const disabled = !editable || (isCopy && item.Id !== copyId);
+            const disabled = !editable;
 
             rows.push(
                 <tr key={item.Id}>
@@ -86,21 +86,18 @@ const SettingGrid = (props) => {
     }
 
     return (
-        <div>
-            <div className="pa-betlimit-grid">
-                <table className='table'>
-                    <thead>
-                        <tr>
-                            <th>{LangHelper.getSingleResource('Sport')}</th>
-                            <th>{LangHelper.getSingleResource('MinBet')}</th>
-                            <th>{LangHelper.getSingleResource('MaxBet')}</th>
-                            <th>{LangHelper.getSingleResource('MaxPerMatch')}</th>
-                        </tr>
-                    </thead>
-                    {buildBody(setting.Editable, isCopy, data, setting.CopyId)}
-                </table>
-            </div>
-
+        <div className="pa-betlimit-grid">
+            <table className='table'>
+                <thead>
+                    <tr>
+                        <th>{LangHelper.getSingleResource('Sport')}</th>
+                        <th>{LangHelper.getSingleResource('MinBet')}</th>
+                        <th>{LangHelper.getSingleResource('MaxBet')}</th>
+                        <th>{LangHelper.getSingleResource('MaxPerMatch')}</th>
+                    </tr>
+                </thead>
+                {buildBody(setting.Editable, data)}
+            </table>
         </div>
     );
 }

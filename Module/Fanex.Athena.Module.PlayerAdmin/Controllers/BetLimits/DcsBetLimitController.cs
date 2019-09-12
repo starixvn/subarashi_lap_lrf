@@ -4,11 +4,9 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Core.DataDomain;
-    using Fanex.Athena.Module.PlayerAdmin.DTO;
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
-    using Fanex.Athena.Module.PlayerAdmin.Repository.Interfaces;
+    using Fanex.Athena.Module.PlayerAdmin.Repositories.Interfaces;
     using Fanex.Athena.Module.PlayerAdmin.ViewModels;
     using Fanex.Athena.Resources;
     using Fanex.Athena.Service.Core.Common.Interfaces;
@@ -29,11 +27,10 @@
         public DcsBetLimitController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSettings,          
             ICacheRefAdapter cacheRefAdapter,
             IAuthorizationService authorizationService,
             IDcsBetLinitRepository dcsBetSettingRepository)
-            : base(languageService, sessionService, appSettings, cacheRefAdapter, authorizationService)
+            : base(languageService, sessionService, cacheRefAdapter, authorizationService)
         {
             _repository = dcsBetSettingRepository;
         }
@@ -43,22 +40,16 @@
         [ValidatePermissionOnData(isObject:true)]
         public async Task<JsonResult> GetSetting(PlayerBetLimitSelectMetaModel metaModel)
         {
-            //if (!Product.Contains(metaModel.ProductId))
-            //{
-            //    throw new ArgumentException("Invalid product.");
-            //}
-
-            //var isEditable = _HasEditPermission();
+            var isEditable = HasEditPermission();
             var data = _repository.GetSettingAsync(metaModel.CustId, metaModel.ProductId);
             var status = GetStatusAsync(metaModel);
 
             await Task.WhenAll(data, status).ConfigureAwait(false);
 
-            var viewModel = new PlayerBetSettingViewModel
+            var viewModel = new PlayerBetLimitViewModel
             {
                 Data = AddSettingTypeName(await data),
-                //Editable = isEditable && await status
-                Editable = true
+                Editable = isEditable && await status
             };
 
             return Json(viewModel);
@@ -67,12 +58,12 @@
         [HttpPost]
         [AjaxRequest]
         [ValidatePermissionOnData(isObject: true)]
-        //[FunctionAuthorization(Model.Auth.DataDomain.PermissionKeys.PlayerAdminBetLimit)]
-        public async Task<JsonResult> UpdateSetting(PlayerBetLimitUpdateMetaModel metaModel)
+        [FunctionAuthorization(Model.Auth.DataDomain.PermissionKeys.PlayerAdminBetLimit)]
+        public async Task<JsonResult> UpdateSetting(PlayerBetLimitUpdateMetaModel<PlayerBetLimitMetaModel> metaModel)
         {
             if (!metaModel.Setting.Any())
             {
-                throw new ArgumentException(ViewResources.InvalidParams);
+                return Json(new { Code = 1, Message = ViewResources.InvalidParams });
             }
 
             var user = SessionService.UserSession;

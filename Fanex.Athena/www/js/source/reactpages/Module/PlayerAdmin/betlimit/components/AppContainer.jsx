@@ -4,7 +4,6 @@ import AppLayout from '@jsroot/layouts/AppLayout'
 import FormFilter from './FormFilter';
 import DataContent from './DataContent';
 import Loader from '@jsroot/components/Loader';
-import Service from '../lib/service';
 import Alert from '@jsroot/components/sweet-alert';
 
 export const AppContainer = (props) => {

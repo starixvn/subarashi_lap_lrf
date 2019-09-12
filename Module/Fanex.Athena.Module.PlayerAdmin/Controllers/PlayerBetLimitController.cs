@@ -10,7 +10,7 @@
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Auth.Enum;
     using Fanex.Athena.Model.Core.Helper;
-    using Fanex.Athena.Module.PlayerAdmin.Repository.Interfaces;
+    using Fanex.Athena.Module.PlayerAdmin.Repositories.Interfaces;
     using Fanex.Athena.Module.PlayerAdmin.ViewModels;
     using Fanex.Athena.Service.Core.Common.Interfaces;
     using Fanex.Athena.Service.Core.Users.Interfaces;
@@ -36,14 +36,15 @@
 
         [HttpGet]
         [ValidatePermissionOnData]
-        [OutputCache(VaryByParam = "custId", Location = OutputCacheLocation.Server, Duration = 0)]
-        public async Task<ViewResult> Index(int custId)
+        [OutputCache(VaryByParam = "*", Location = OutputCacheLocation.ServerAndClient, Duration = 10)]
+        public async Task<ViewResult> Index(int custId, int currencyId)
         {
             var productList = await GetProducts(SessionService.LicenseeSession.LicenseeName).ConfigureAwait(false);
-            var viewModel = new PlayerBetLimitViewModel
+            var viewModel = new PlayerBetLimitProductViewModel
             {
                 CustId = custId,
                 ProductList = productList,
+                CurrencyId = currencyId,
                 ProductId = productList.FirstOrDefault().Key
             };
 

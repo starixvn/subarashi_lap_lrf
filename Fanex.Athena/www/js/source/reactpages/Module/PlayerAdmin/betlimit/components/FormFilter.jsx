@@ -25,7 +25,7 @@ const FormFilter = (props) => {
             <div className="row">
                 <div className="col-12 col-md-4 col-sm-12 col-lg-3 col-xl-2">
                     <div className="form-group">
-                        <label className="label-text">{LangHelper.getSingleResource("Product")}</label>
+                        <label className="label-text">{LangHelper.getSingleResource('Product')}</label>
                         <Select instanceId="ddlProduct"
                             value={productId}
                             options={productList}

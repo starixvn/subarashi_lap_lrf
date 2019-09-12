@@ -7,5 +7,7 @@
         public int CustId { get; set; }
 
         public int ProductId { get; set; }
+
+        public int CurrencyId { get; set; }
     }
 }

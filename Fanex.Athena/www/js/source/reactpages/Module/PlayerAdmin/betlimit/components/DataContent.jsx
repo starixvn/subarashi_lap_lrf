@@ -2,27 +2,37 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators  } from 'redux';
 import { ActionCreators } from '../actions';
-import Service from '../lib/service';
+import DataHandling from '../lib/dataHandling';
+import NGDataHandling from '../lib/ngDataHandling';
 import { BetLimitProduct } from '../lib/constants';
 import createSetting from './grid/Base/SettingContent';
 import SportSettingGrid from './grid/SportSetting/SettingGrid';
 import GameSettingGrid from './grid/GameSetting/SettingGrid';
+import NGSettingGrid from './grid/SportSetting/NGSettingGrid';
+import AGCSettingContent from './grid/SportSetting/AGCSettingContent';
 
-const DataGrid = {
-    [BetLimitProduct.SB]: SportSettingGrid,
-    [BetLimitProduct.VS]: SportSettingGrid,
-    [BetLimitProduct.VS2]: SportSettingGrid,
-    [BetLimitProduct.LT]: GameSettingGrid,
-    [BetLimitProduct.NG]: SportSettingGrid,
-    [BetLimitProduct.KN]: GameSettingGrid
+const Setting = {
+    [BetLimitProduct.SB]: { Grid: SportSettingGrid, Handling: DataHandling },
+    [BetLimitProduct.VS]: { Grid: SportSettingGrid, Handling: DataHandling },
+    [BetLimitProduct.VS2]: { Grid: SportSettingGrid, Handling: DataHandling },
+    [BetLimitProduct.LT]: { Grid: GameSettingGrid, Handling: DataHandling },
+    [BetLimitProduct.NG]: { Grid: NGSettingGrid, Handling: NGDataHandling },
+    [BetLimitProduct.KN]: { Grid: GameSettingGrid, Handling: DataHandling }
 };
 
 const DataContent = (props) => {
     const { ProductId } = props.requestParam;
+    let Content = '';
 
-    const Setting = createSetting(DataGrid[props.requestParam.ProductId], Service);
+    if (ProductId === BetLimitProduct.AGC) {
+        Content = AGCSettingContent;
+    }
+    else {
+        const { Grid, Handling } = Setting[ProductId];
+        Content = createSetting(Grid, Handling);
+    }
 
-    return <Setting />
+    return <Content />
 }
 
 function mapStateToProps(state) {

@@ -83,13 +83,13 @@ export default class Validatation {
     }
 
     static validateNumberGame(current, limitData) {
-        const result = Service.validate(current, limitData);
+        const result = Validatation.validate(current, limitData);
 
         if (result) {
             return result;
         }
 
-        const { MaxPerBall } = current;
+        const { MaxPerBall, Id } = current;
 
         if (isNaN(MaxPerBall)) {
             return {

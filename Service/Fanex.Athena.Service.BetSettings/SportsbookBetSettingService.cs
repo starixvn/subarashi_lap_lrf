@@ -1,27 +1,16 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="SportsbookBetSettingService.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Service.BetSettings
+﻿namespace Fanex.Athena.Service.BetSettings
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-
     using DataAccess.BetSettings.Interfaces;
-
     using Fanex.Athena.Model.BetSettings.DTO;
     using Fanex.Athena.Model.BetSettings.ViewModel;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Service.BetSettings.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
-
     using Model.Core.DataDomain;
 
-    using Resources;
 
     public class SportsbookBetSettingService : BetSettingBaseService, ISportsbookBetSettingService
     {

@@ -1,4 +1,4 @@
-﻿namespace Fanex.Athena.Module.PlayerAdmin.Repository
+﻿namespace Fanex.Athena.Module.PlayerAdmin.Repositories
 {
     using System.Collections.Generic;
     using System.Data;
@@ -9,37 +9,28 @@
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Module.PlayerAdmin.DTO;
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
-    using Fanex.Athena.Module.PlayerAdmin.Repository.Interfaces;
+    using Fanex.Athena.Module.PlayerAdmin.Repositories.Interfaces;
     using Fanex.Common;
     using Fanex.Common.Extensions;
     using Fanex.Data;
 
-    public class SportBookBetLimitRepository : ISportBookBetLimitRepository
+    public class NumberGameBetLimitRepository : INumberGameBetLimitRepository
     {
-        private const string MixedSportId = "99MP";
-
         private static readonly string[] SportTypes =
         {
-            ((int)SportType.Soccer).ToString(),
-            ((int)SportType.BasketBall).ToString(),
-            ((int)SportType.FootBall).ToString(),
-            ((int)SportType.Tennis).ToString(),
-            ((int)SportType.BaseBall).ToString(),
-            ((int)SportType.Golf).ToString(),
-            ((int)SportType.Motorsports).ToString(),
-            ((int)SportType.OtherSports).ToString()
+            ((int)SportType.NumberGame).ToString()
         };
 
         private readonly IDbFactory _db;
 
-        public SportBookBetLimitRepository(IDbFactory dbFactory)
+        public NumberGameBetLimitRepository(IDbFactory dbFactory)
         {
             _db = dbFactory;
         }
 
-        public async Task<IEnumerable<PlayerBetLimit>> GetSettingAsync(int custId, bool isShowMixedSport)
+        public async Task<IEnumerable<PlayerBetLimit>> GetSettingAsync(int custId)
         {
-            const string UspName = "Lrf_CustomerSelEditCustomer";
+            const string UspName = "Lrf_CustomerSelEditNG";
 
             using (var db = _db.GetObjectDb(UspName))
             {
@@ -48,7 +39,7 @@
                 {
                     if (reader.Read())
                     {
-                        return ReadSetting(reader, isShowMixedSport);
+                        return ReadSetting(reader);
                     }
                 }
             }
@@ -56,9 +47,42 @@
             return Enumerable.Empty<PlayerBetLimit>();
         }
 
-        public async Task<IResultInfo> UpdateSettingAsync(PlayerBetLimitUpdateMetaModel metaModel)
+        private static List<PlayerBetLimit> ReadSetting(IDataReader reader)
         {
-            const string UspName = "Lrf_CustomerUpdMember_All";
+            var sportList = new List<PlayerBetLimit>();
+
+            foreach(var type in SportTypes)
+            {
+                sportList.Add(ReadForSport(reader, type));
+            }
+
+            return sportList;
+        }
+
+        private static PlayerBetLimit ReadForSport(IDataReader reader, string sportId)
+        {
+            var sportSuffix = "v" + sportId;
+
+            var sport = new PlayerBetLimit
+            {
+                MaxBet = reader.ToDecimal("maxbet" + sportSuffix),
+                MinBet = reader.ToDecimal("minbet" + sportSuffix),
+                MaxPerMatch = reader.ToDecimal("MaxPerMatch" + sportSuffix),
+                MaxPerMatchMax = reader.ToDecimal("MaxPerMatch" + sportSuffix + "_Max"),
+                MaxPerMatchMin = reader.ToDecimal("MaxPerMatch" + sportSuffix + "_Min"),
+                BetValueMax = reader.ToDecimal("MaxBet" + sportSuffix + "_Min"),
+                BetValueMin = reader.ToDecimal("MinBet" + sportSuffix + "_Max"),
+                MaxPerBall = reader.ToDecimal("maxperball" + sportSuffix),
+                MaxPerBallMax = reader.ToDecimal("maxperball" + sportSuffix + "_Max"),
+                Id = sportId
+            };
+
+            return sport;
+        }
+
+        public async Task<IResultInfo> UpdateSettingAsync(PlayerBetLimitUpdateMetaModel<PlayerBetLimitMetaModel> metaModel)
+        {
+            const string UspName = "Lrf_CustomerUpdMember_MinMaxBet161";
 
             using (var db = _db.GetObjectDb(UspName))
             {
@@ -77,45 +101,8 @@
             }
         }
 
-        private static List<PlayerBetLimit> ReadSetting(IDataReader reader, bool isShowMixedSport)
+        private static void AddUpdateParameter(IObjectDb db, PlayerBetLimitUpdateMetaModel<PlayerBetLimitMetaModel> metaModel)
         {
-            var sportList = new List<PlayerBetLimit>();
-
-            foreach(var type in SportTypes)
-            {
-                sportList.Add(ReadForSport(reader, type));
-            }
-
-            if (isShowMixedSport)
-            {
-                sportList.Add(ReadForSport(reader, MixedSportId));
-            }
-
-            return sportList;
-        }
-
-        private static PlayerBetLimit ReadForSport(IDataReader reader, string sportId)
-        {
-            var sportSuffix = GetSportSuffix(sportId);
-
-            var sport = new PlayerBetLimit
-            {
-                MaxBet = reader.ToDecimal("maxbet" + sportSuffix),
-                MinBet = reader.ToDecimal("minbet" + sportSuffix),
-                MaxPerMatch = reader.ToDecimal("MaxPerMatch" + sportSuffix),
-                MaxPerMatchMax = reader.ToDecimal("MaxPerMatch" + sportSuffix + "_Max"),
-                MaxPerMatchMin = reader.ToDecimal("MaxPerMatch" + sportSuffix + "_Min"),
-                BetValueMax = reader.ToDecimal("MaxBet" + sportSuffix + "_Min"),
-                BetValueMin = reader.ToDecimal("MinBet" + sportSuffix + "_Max"),
-                Id = sportId
-            };
-
-            return sport;
-        }
-
-        private static void AddUpdateParameter(IObjectDb db, PlayerBetLimitUpdateMetaModel metaModel)
-        {
-            db.SetParameterValue("licenseeName", metaModel.SiteName);
             db.SetParameterValue("ip", metaModel.Ip);
             db.SetParameterValue("language", metaModel.Language);
             db.SetParameterValue("userid", metaModel.UserId);
@@ -131,15 +118,12 @@
             foreach (var type in SportTypes)
             {
                 var item = setting.FirstOrDefault(x => x.Id == type);
-                var sportSuffix = GetSportSuffix(type);
 
-                db.SetParameterValue("minbet" + sportSuffix, item?.MinBet);
-                db.SetParameterValue("maxbet" + sportSuffix, item?.MaxBet);
-                db.SetParameterValue("maxpermatch" + sportSuffix, item?.MaxPerMatch);
-                db.SetParameterValue("updateminmaxbet" + sportSuffix, item?.IsUpdated);
+                db.SetParameterValue("minbetv" + item.Id, item?.MinBet);
+                db.SetParameterValue("maxbetv" + item.Id, item?.MaxBet);
+                db.SetParameterValue("maxpermatchv" + item.Id, item?.MaxPerMatch);
+                db.SetParameterValue("maxperballv" + item.Id, item?.MaxPerBall);
             }
         }
-
-        private static string GetSportSuffix(string sportId) => sportId != ((int) SportType.Soccer).ToString() ? "v" + sportId : string.Empty;
     }
 }

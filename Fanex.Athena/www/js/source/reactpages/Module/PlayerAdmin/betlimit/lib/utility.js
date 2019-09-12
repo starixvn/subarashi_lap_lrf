@@ -2,13 +2,24 @@
 import NumberFormat from '@jsroot/lib/numberFormat';
 import { BetLimitProduct } from './constants';
 
+const ConfirmationMsg = {
+    [BetLimitProduct.SB]: 'UpdateSportsbookBetSettings',
+    [BetLimitProduct.VS]: 'UpdateProductBetSettings',
+    [BetLimitProduct.VS2]: 'UpdateProductBetSettings',
+    [BetLimitProduct.LT]: 'UpdateProductBetSettings',
+    [BetLimitProduct.NG]: 'UpdateNumberGameBetSettings',
+    [BetLimitProduct.KN]: 'UpdateProductBetSettings',
+    [BetLimitProduct.AGC]: 'UpdateAgCasinoBetSettings'
+}
+
 export default class Utility {
     static showErrorMsg() {
         alert(LangHelper.getSingleResource('ErrorProcessingMsg'));
     }
 
     static getConfirmationMsg(productId) {
-        return LangHelper.getSingleResource('UpdateSportsbookBetSettings');
+
+        return LangHelper.getSingleResource(ConfirmationMsg[productId]);
     }
 
     static formatValue(number) {

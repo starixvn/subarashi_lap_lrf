@@ -2,7 +2,7 @@
     ViewBag.Title = "LAP - Player Aministrator Bet Limit";
     Layout = "~/Views/Desktop/Shared/_ReactPageLayout.cshtml";
 }
-@model Fanex.Athena.Module.PlayerAdmin.ViewModels.PlayerBetLimitViewModel
+@model Fanex.Athena.Module.PlayerAdmin.ViewModels.PlayerBetLimitProductViewModel
 @{
     var productList = Model.ProductList.Select(c => new { value = c.Key, label = c.Value }).ToList();
 }
@@ -15,7 +15,7 @@
 
 @section globaljscode{
     window.initialState = {
-    requestParam: { CustId: @Model.CustId, ProductId: @Model.ProductId }
+    requestParam: { CustId: @Model.CustId, ProductId: @Model.ProductId, CurrencyId: @Model.CurrencyId }
     };
     window._AppData = {
     productList: @Html.Raw(productList.ToJson())

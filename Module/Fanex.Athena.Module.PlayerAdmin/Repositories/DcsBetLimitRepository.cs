@@ -1,4 +1,4 @@
-﻿namespace Fanex.Athena.Module.PlayerAdmin.Repository
+﻿namespace Fanex.Athena.Module.PlayerAdmin.Repositories
 {
     using System;
     using System.Collections.Generic;
@@ -11,7 +11,7 @@
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Module.PlayerAdmin.DTO;
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
-    using Fanex.Athena.Module.PlayerAdmin.Repository.Interfaces;
+    using Fanex.Athena.Module.PlayerAdmin.Repositories.Interfaces;
     using Fanex.Common;
     using Fanex.Common.Extensions;
     using Fanex.Data;
@@ -74,7 +74,7 @@
             return dataList;
         }
 
-        public async Task<IResultInfo> UpdateSettingAsync(PlayerBetLimitUpdateMetaModel metaModel)
+        public async Task<IResultInfo> UpdateSettingAsync(PlayerBetLimitUpdateMetaModel<PlayerBetLimitMetaModel> metaModel)
         {
             const string UspName = "Acc_Dep_CustSetting_BetLimitUpd";
 
@@ -118,7 +118,7 @@
             return false;
         }
 
-        private static void AddUpdateParameter(IObjectDb db, PlayerBetLimitUpdateMetaModel metaModel)
+        private static void AddUpdateParameter(IObjectDb db, PlayerBetLimitUpdateMetaModel<PlayerBetLimitMetaModel> metaModel)
         {
             db.SetParameterValue("custid", metaModel.CustId);
             db.SetParameterValue("userid", metaModel.UserId);

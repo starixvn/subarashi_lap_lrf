@@ -4,7 +4,8 @@ export const BetLimitProduct = {
     VS2: 27,
     LT: 28,
     NG: 2,
-    KN: 8
+    KN: 8,
+    AGC: 10
 }
 
 export const BetLimitType = {
