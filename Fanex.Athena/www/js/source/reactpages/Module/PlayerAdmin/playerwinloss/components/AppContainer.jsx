@@ -3,13 +3,14 @@ import { connect } from 'react-redux';
 import AppLayout from '@jsroot/layouts/AppLayout';
 import Loader from '@jsroot/components/Loader';
 import DataGrid from './DataGrid';
-import Title from './Title';
+import ReportTitle from '@jsroot/components/ReportTitle';
+import AppData from '@jsroot/lib/AppData';
 
 export const AppContainer = (props) => {
     return (
         <AppLayout>
             <Loader isLoading={props.isLoading} />
-            <Title />
+            <ReportTitle content={AppData.reportTitle} />
             <DataGrid />
         </AppLayout>
     )

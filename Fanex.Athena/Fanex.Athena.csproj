@@ -1050,9 +1050,7 @@
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerwinloss\components\DataGrid.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerwinloss\components\GridRow.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerwinloss\components\index.jsx" />
-    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerwinloss\components\Title.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerwinloss\lib\gridHelper.js" />
-    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerwinloss\lib\reportExcel.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerwinloss\reducers\index.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\running-betlist\actions\index.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\running-betlist\components\AppContainer.jsx" />

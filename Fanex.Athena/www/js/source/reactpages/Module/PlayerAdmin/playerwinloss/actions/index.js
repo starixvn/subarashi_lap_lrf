@@ -2,7 +2,6 @@ import { SET_GRID_DATA } from './types';
 import { toggleLoader } from '@jsroot/actions/loaderAction';
 import DataService from '@jsroot/lib/DataService';
 import Site from '@jsroot/lib/site';
-import ReportExcel from '../lib/reportExcel';
 
 const getData = (param) => (dispatch) => {
     const url = Site.resolveClientUrl('PlayerWinLoss/Index');
@@ -26,9 +25,4 @@ const setGridData = (data) => {
     }
 }
 
-const exportExcel = (data, hasCustomerComm, isAllowedBA, title) => () => {
-    const reportExcel = new ReportExcel(data, hasCustomerComm, isAllowedBA, title);
-    reportExcel.export();
-}
-
-export const ActionCreators = Object.assign({}, { getData, exportExcel });
+export const ActionCreators = Object.assign({}, { getData });
