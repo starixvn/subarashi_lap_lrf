@@ -17,6 +17,8 @@ const HeaderText = {
     Live: LangHelper.getSingleResource("Live")
 }
 
+const DataApi = "PlayerBetList/GetRunningBetList";
+
 export default class Service {
     static getHeaderText() {
         return HeaderText;
@@ -35,8 +37,9 @@ export default class Service {
     }
 
     static export(param, callback) {
-        const url = Site.resolveClientUrl("PlayerBetList/ExportRunningBetList");
-        DataService.getFile(url, param).then((response) => {
+        const url = Site.resolveClientUrl(DataApi);
+        const exportParam = Object.assign({}, param, { IsExport: true });
+        DataService.getFile(url, exportParam).then((response) => {
             const NoContentStatusCode = 204;
 
             if (response.status === NoContentStatusCode) {
@@ -50,7 +53,7 @@ export default class Service {
     }
 
     static getData(param, processDataFunc, successCallBack, errorHandle) {
-        const url = Site.resolveClientUrl("PlayerBetList/GetRunningBetList");
+        const url = Site.resolveClientUrl(DataApi);
         DataService.postData(url, param)
             .then(response => {
                 const result = response.data;

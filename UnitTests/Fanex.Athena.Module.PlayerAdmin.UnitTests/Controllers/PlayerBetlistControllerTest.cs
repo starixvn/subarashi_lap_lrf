@@ -127,14 +127,14 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                var metaModel = FakeHelper.Create<PlayerRunningBetListMetalModel>();
+                var metaModel = FakeHelper.Create<PlayerRunningBetListMetalModel>(x => x.IsExport, true);
                 var language = FakeHelper.Create<string>();
                 StubUserSessionData(new UserAuthInfo { Language = language });
 
                 _betListApiClient.PostAsyncStream("/PlayerAdminBetList/Export", metaModel, language).Returns(Task.FromResult<Stream>(new MemoryStream(0)));
 
                 // Action
-                var result = await controller.ExportRunningBetList(metaModel);
+                var result = await controller.GetRunningBetList(metaModel);
 
                 // Assert
                 Assert.Multiple(() =>

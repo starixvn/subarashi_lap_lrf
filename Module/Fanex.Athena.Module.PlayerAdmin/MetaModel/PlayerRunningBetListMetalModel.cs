@@ -55,5 +55,7 @@
         public int PageIndex { get; set; }
 
         public IDictionary<int, string> CurrencyList { get; set; }
+
+        public bool IsExport { get; set; }
     }
 }

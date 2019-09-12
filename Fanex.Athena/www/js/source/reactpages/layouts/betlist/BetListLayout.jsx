@@ -246,7 +246,7 @@ class BetListLayout extends Component {
             <div className="betlist-layout">
                  {this.props.children}
                  {this.state.isShowPopup &&
-                       <Popup isShow={true} 
+                    <Popup isShow={true} 
                             iframeUrl={this.state.popupUrl}
                             title={this.state.popupTitle}
                             width={900} height={600}

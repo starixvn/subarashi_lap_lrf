@@ -35,7 +35,7 @@
 
         [HttpGet]
         [ValidatePermissionOnData]
-        [OutputCache(VaryByParam = "custId", Location = OutputCacheLocation.Server, Duration = 0)]
+        [OutputCache(VaryByParam = "*", Location = OutputCacheLocation.ServerAndClient, Duration = 10)]
         public ViewResult Running(int custId, int currencyId)
         {
             var currencyList = SessionService.UserSession.CurrencyList;
@@ -57,19 +57,20 @@
         [OutputCache(NoStore = true, Duration = 0, Location = OutputCacheLocation.None, VaryByParam = "*")]
         public async Task<dynamic> GetRunningBetList(PlayerRunningBetListMetalModel metaModel)
         {
-            return await _betListApiClient.PostAsync<dynamic>(
-                "/PlayerAdminBetList/GetBetList",
-                metaModel,
-                SessionService.UserSession.Language).ConfigureAwait(false);
+            return metaModel.IsExport
+                ? await ExportRunningBetListDataAsync(metaModel).ConfigureAwait(false)
+                : await GetRunningBetListDataAsync(metaModel).ConfigureAwait(false);
         }
 
-        [HttpPost]
-        [AjaxRequest]
-        [CustomValidateAntiForgery]
-        [ValidatePermissionOnData(isObject: true)]
-        [AutoBindMetaModel(BindAgent = true, BindCurrencyList = true)]
-        [OutputCache(NoStore = true, Duration = 0, Location = OutputCacheLocation.None, VaryByParam = "*")]
-        public async Task<FileStreamResult> ExportRunningBetList(PlayerRunningBetListMetalModel metaModel)
+        public async Task<dynamic> GetRunningBetListDataAsync(PlayerRunningBetListMetalModel metaModel)
+        {
+            return await _betListApiClient.PostAsync<dynamic>(
+                    "/PlayerAdminBetList/GetBetList",
+                    metaModel,
+                    SessionService.UserSession.Language).ConfigureAwait(false);
+        }
+
+        public async Task<FileStreamResult> ExportRunningBetListDataAsync(PlayerRunningBetListMetalModel metaModel)
         {
             var stream = await _betListApiClient.PostAsyncStream("/PlayerAdminBetList/Export",
                 metaModel,
