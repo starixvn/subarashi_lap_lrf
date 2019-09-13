@@ -19,4 +19,6 @@
   <SpNameConfig Environment="DEV,LOCAL,SIT,UAT" SpName="Lrf_CustomerLoginInfo" EnvironmentText="_xtest"></SpNameConfig>
   <SpNameConfig Environment="DEV,LOCAL,SIT,UAT" SpName="Lrf_PlayerBettingStatistics" EnvironmentText="_UAT3"></SpNameConfig>
   <SpNameConfig Environment="DEV,LOCAL,SIT,UAT" SpName="Lrf_CheckBelonging_ValidateProduct" EnvironmentText="_UAT3"></SpNameConfig>
+
+  <SpNameConfig Environment="DEV,LOCAL,UAT" SpName="Lrf_CustomerUpdMember_All" EnvironmentText="_xtest"></SpNameConfig>
 </Root>

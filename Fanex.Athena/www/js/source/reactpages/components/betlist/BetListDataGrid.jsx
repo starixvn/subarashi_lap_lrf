@@ -24,7 +24,7 @@ class BetListDataGrid extends Component {
             return this.props.getTotalCellClassNameFunc(column, value);
         }
 
-        return column === 'LicenseeWL' && value.substring(0, 1) === '-' ? negative : '';
+        return column === 'LicenseeWL' && value.substring(0, 1) === '-' ? 'negative' : '';
     }
 
     _getHeaderName(column) {

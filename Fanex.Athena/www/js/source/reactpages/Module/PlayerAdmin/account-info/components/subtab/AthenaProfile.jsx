@@ -1,4 +1,5 @@
 import React from 'react';
+import ClientResourceManager from '@jsroot/lib/clientResourceManager';
 
 export const AthenaProfile = ({ data }) => {
     const { AGUserId, GoldDeluxeUserId, VoidbridgeUserId, ExchangeUserId,
@@ -8,19 +9,19 @@ export const AthenaProfile = ({ data }) => {
     return (
         <tbody>
             <tr>
-                <td className="first-cell">AG UserId</td>
+                <td className="first-cell">{ClientResourceManager.getText('AgUserId')}</td>
                 <td>{AGUserId}</td>
             </tr>
             <tr>
-                <td>Gold Deluxe UserID</td>
+                <td>{ClientResourceManager.getText('GoldDeluxeUserId')}</td>
                 <td>{GoldDeluxeUserId}</td>
             </tr>
             <tr>
-                <td>VoidBridge UserID</td>
+                <td>{ClientResourceManager.getText('VoidBridgeUserId')}</td>
                 <td>{VoidbridgeUserId}</td>
             </tr>
             <tr>
-                <td>Exchange UserID</td>
+                <td>{ClientResourceManager.getText('ExchangeUserId')}</td>
                 <td>{ExchangeUserId}</td>
             </tr>
             <tr>
@@ -35,7 +36,7 @@ export const AthenaProfile = ({ data }) => {
                 <td>{LastName}</td>
             </tr>
             <tr>
-                <td>Gender</td>
+                <td>{ClientResourceManager.getText('Gender')}</td>
                 <td>{Gender}</td>
             </tr>
             <tr>
@@ -47,11 +48,11 @@ export const AthenaProfile = ({ data }) => {
                 <td>{Phone}</td>
             </tr>
             <tr>
-                <td>Country</td>
+                <td>{ClientResourceManager.getText('Country')}</td>
                 <td>{Country}</td>
             </tr>
             <tr>
-                <td>Address</td>
+                <td>{ClientResourceManager.getText('Address')}</td>
                 <td>{Address}</td>
             </tr>
             <tr>
