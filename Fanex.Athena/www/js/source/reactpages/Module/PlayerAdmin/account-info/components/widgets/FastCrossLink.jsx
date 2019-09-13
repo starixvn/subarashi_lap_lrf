@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../../actions';
 import { systemType } from '../../../../constants/configInfo';
 import Popup from '@jsroot/components/popup';
+import ClientResourceManager from '@jsroot/lib/clientResourceManager';
 
 const defaultPopupInfo = {url: null, title: null, width: 0, height: 0};
 
@@ -25,27 +26,27 @@ export const FastCrossLink = (props) => {
 
     const popupSingleCustomer = {
         url: singleCustomerUrl, 
-        title: 'Betting Ticket Center - Single Customer',
+        title: ClientResourceManager.getText('BettingTicketCenter') + ' - ' + ClientResourceManager.getText('SingleCustomer'),
         width: window.innerWidth - 10,
         height: window.innerHeight - 10
     };
     const popupCustomerWinLoss = {
         url: customerWinLossUrl, 
-        title: 'Customer Win Loss',
+        title: ClientResourceManager.getText('CustomerWinLoss'),
         width: window.innerWidth - 10,
         height: 300
     };
 
     return (
         <div className="panel">
-            <div className="panel-header">Fast Cross-Link</div>
+            <div className="panel-header">{ClientResourceManager.getText('FastCrossLink')}</div>
             <div className="panel-body">
                 <div>
-                    <span><a className="link" href="#">Betting Ticket Center</a></span>
+                    <span><a className="link">{ClientResourceManager.getText('BettingTicketCenter')}</a></span>
                     <strong className="divider">></strong>
-                    <span><a className="link" onClick={(e) => handleClickLink(e, popupSingleCustomer)}>Single Customer</a></span>
+                    <span><a className="link" onClick={(e) => handleClickLink(e, popupSingleCustomer)}>{ClientResourceManager.getText('SingleCustomer')}</a></span>
                 </div>
-                <div><span><a className="link" onClick={(e) => handleClickLink(e, popupCustomerWinLoss)}>Customer Win Loss</a></span></div>
+                <div><span><a className="link" onClick={(e) => handleClickLink(e, popupCustomerWinLoss)}>{ClientResourceManager.getText('CustomerWinLoss')}</a></span></div>
             </div>
 
             <Popup isShow={isShowPopup} 

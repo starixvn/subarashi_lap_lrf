@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { ActionCreators } from '../../actions/index.js';
 import { bindActionCreators } from 'redux';
+import ClientResourceManager from '@jsroot/lib/clientResourceManager';
 
 export const ActivityRecord = ({ ibcCustId, getActivityRecord }) => {
     const [data, setData] = useState(null);
@@ -21,37 +22,37 @@ export const ActivityRecord = ({ ibcCustId, getActivityRecord }) => {
             <table className="table">
                 <tbody>
                     <tr>
-                        <td className="first-cell">Created Date</td>
+                        <td className="first-cell">{ClientResourceManager.getText('CreatedDate')}</td>
                         <td>{CreatedDateString}</td>
                     </tr>
                     <tr>
-                        <td>Last Login</td>
+                        <td>{ClientResourceManager.getText('LastLogin')}</td>
                         <td>{LastLoginString}</td>
                     </tr>
                     <tr>
-                        <td>Last Txn</td>
+                        <td>{ClientResourceManager.getText('LastTxn')}</td>
                         <td>{LastTxn}</td>
                     </tr>
                     <tr>
                         <td colSpan="2"></td>
                     </tr>
                     <tr>
-                        <td>BA Updated By</td>
+                        <td>{ClientResourceManager.getText('BAUpdatedBy')}</td>
                         <td>{BAUpdatedBy}</td>
                     </tr>
                     <tr>
-                        <td>Last Updated BA</td>
+                        <td>{ClientResourceManager.getText('LastUpdatedBy')}</td>
                         <td>{LastUpdateBAString}</td>
                     </tr>
                     <tr>
                         <td colSpan="2"></td>
                     </tr>
                     <tr>
-                        <td>Special Level</td>
+                        <td>{ClientResourceManager.getText('SpecialLevel')}</td>
                         <td>{SpecialLevelUpdateBy}</td>
                     </tr>
                     <tr>
-                        <td>Last Updated Special Level</td>
+                        <td>{ClientResourceManager.getText('LastUpdatedSpecialLevel')}</td>
                         <td>{LastUpdateSpecialLevelString}</td>
                     </tr>
                 </tbody>

@@ -123,6 +123,12 @@ export class FormFilter extends PureComponent {
             content={userGuideContent} />)
     }
 
+    _getUserNameLabel(){
+        return this.props.type === licenseeType.nonApi ? 
+        LangHelper.getSingleResource("Username") : 
+        `${LangHelper.getSingleResource("Username")}/${LangHelper.getSingleResource("VendorMemberID")}`
+    }
+
     render() {
         const { bankAccountNumber, email, searchOption, ...advancedSearchParam } = this.state;
         const { type, isAdvancedSearch, isFilterCollapsing, currencyList, getSuggestionList, hasBaPermission } = this.props;
@@ -139,7 +145,7 @@ export class FormFilter extends PureComponent {
                     <div className="col-12 col-md-4 col-sm-4 col-lg-3 col-xl-2">
                         <div className="form-group">
                             <label className="label-text">
-                                {LangHelper.getSingleResource("Username")}
+                                {this._getUserNameLabel()}
                                 {(<SearchOption value={searchOption} onChange={this.handleChange} />)}
                             </label>
                             <UserNameInput ref={this.userNameRef} onSelectItem={(value) => this.handleUserNameChange(value)}

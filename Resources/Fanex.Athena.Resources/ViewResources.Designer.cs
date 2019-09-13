@@ -6199,6 +6199,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Vendor Member ID.
+        /// </summary>
+        public static string VendorMemberID {
+            get {
+                return ResourceManager.GetString("VendorMemberID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to View.
         /// </summary>
         public static string View {

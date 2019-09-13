@@ -9,7 +9,7 @@
     var fromDate = new DateTime(now.Year, now.Month, 1).ToString("MM/dd/yyyy");
     var toDate = now.ToString("MM/dd/yyyy");
 
-    const string TitlePattern = "{0}:{1}, {2}→{3}, {4}:{5}, {6}:{7}";
+    const string TitlePattern = "{0}: {1}, {2}→{3}, {4}: {5}, {6}: {7}";
     var reportTitle = string.Format(TitlePattern,
         ViewResources.Player, Model.UserName,
         fromDate, toDate,

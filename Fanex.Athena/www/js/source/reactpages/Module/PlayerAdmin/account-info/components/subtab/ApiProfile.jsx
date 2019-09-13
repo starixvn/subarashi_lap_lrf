@@ -1,4 +1,5 @@
 import React from 'react';
+import ClientResourceManager from '@jsroot/lib/clientResourceManager';
 
 const ApiProfile = ({ data }) => {
     const { MemberId, FirstName, LastName, OperatorId, SiteCode, ProductCode,
@@ -7,53 +8,53 @@ const ApiProfile = ({ data }) => {
     return (
         <tbody>
             <tr>
-                <td className="first-cell">Member ID</td>
+                <td className="first-cell">{ClientResourceManager.getText('MemberId')}</td>
                 <td>{MemberId}</td>
             </tr>
             <tr>
-                <td>First name</td>
+                <td>{ClientResourceManager.getText('FirstName')}</td>
                 <td>{FirstName}</td>
             </tr>
             <tr>
-                <td>Last name</td>
+                <td>{ClientResourceManager.getText('LastName')}</td>
                 <td>{LastName}</td>
             </tr>
             <tr>
-                <td>Operator ID</td>
+                <td>{ClientResourceManager.getText('OperatorId')}</td>
                 <td>{OperatorId}</td>
             </tr>
             <tr>
                 <td colSpan="2"></td>
             </tr>
             <tr>
-                <td>Site code</td>
+                <td>{ClientResourceManager.getText('SiteCode')}</td>
                 <td>{SiteCode}</td>
             </tr>
             <tr>
-                <td>Product code</td>
+                <td>{ClientResourceManager.getText('ProductCode')}</td>
                 <td>{ProductCode}</td>
             </tr>
             <tr>
                 <td colSpan="2"></td>
             </tr>
             <tr>
-                <td>CustomInfo 1</td>
+                <td>{ClientResourceManager.getText('CustomInfo1')}</td>
                 <td>{CustomInfo1}</td>
             </tr>
             <tr>
-                <td>CustomInfo 2</td>
+                <td>{ClientResourceManager.getText('CustomInfo2')}</td>
                 <td>{CustomInfo2}</td>
             </tr>
             <tr>
-                <td>CustomInfo 3</td>
+                <td>{ClientResourceManager.getText('CustomInfo3')}</td>
                 <td>{CustomInfo3}</td>
             </tr>
             <tr>
-                <td>CustomInfo 4</td>
+                <td>{ClientResourceManager.getText('CustomInfo4')}</td>
                 <td>{CustomInfo4}</td>
             </tr>
             <tr>
-                <td>CustomInfo 5</td>
+                <td>{ClientResourceManager.getText('CustomInfo5')}</td>
                 <td>{CustomInfo5}</td>
             </tr>
         </tbody>

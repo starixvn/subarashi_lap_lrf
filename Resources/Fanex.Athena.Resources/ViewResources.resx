@@ -2478,4 +2478,8 @@
     <value>Player</value>
     <comment>112658</comment>
   </data>
+  <data name="VendorMemberID" xml:space="preserve">
+    <value>Vendor Member ID</value>
+    <comment>112658</comment>
+  </data>
 </root>

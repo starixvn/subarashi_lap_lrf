@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import NumberFormat from '@jsroot/lib/numberFormat';
 
 import { Doughnut } from 'react-chartjs-2';
+import ClientResourceManager from '@jsroot/lib/clientResourceManager';
 
 const backgroundColorList = ['#36A2EB', '#F15D21', '#97A9B3', '#E8AE1B']
 const defaultDataSetItem = {
@@ -106,25 +107,25 @@ export const CustomerBettingStatus = (props) => {
                     <Doughnut data={chartData} legend={legendOpts} options={option} />
                 </div>
                 <div className="col-12 col-md-5 col-sm-5 col-lg-5 col-xl-5 statistics-group">
-                    <p>Based on Sportsbook data</p>
+                    <p>{ClientResourceManager.getText('BasedOnSportsbook')}</p>
                     <div className="row">
-                        <div className="col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4">Margin:</div>
+                        <div className="col-5 col-md-5 col-sm-5 col-lg-5 col-xl-5">{ClientResourceManager.getText('Margin')}:</div>
                         <div className="col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4">{NumberFormat.formatDecimal(marginPercent)}%</div>
                     </div>
                     <div className="row">
-                        <div className="col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4">Average bet size:</div>
+                        <div className="col-5 col-md-5 col-sm-5 col-lg-5 col-xl-5">{ClientResourceManager.getText('AverageBetSize')}:</div>
                         <div className="col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4">{NumberFormat.formatDecimal(AverageBetSize)}</div>
                     </div>
                     <div className="row">
-                        <div className="col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4">Winnings:</div>
+                        <div className="col-5 col-md-5 col-sm-5 col-lg-5 col-xl-5">{ClientResourceManager.getText('Winnings')}:</div>
                         <div className="col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4">{NumberFormat.formatDecimal(Winnings)}</div>
                     </div>
                     <div className="row">
-                        <div className="col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4">Loss:</div>
+                        <div className="col-5 col-md-5 col-sm-5 col-lg-5 col-xl-5">{ClientResourceManager.getText('Loss')}:</div>
                         <div className="col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4">{NumberFormat.formatDecimal(Loss)}</div>
                     </div>
                     <div className="row">
-                        <div className="col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4">Net Win Loss:</div>
+                        <div className="col-5 col-md-5 col-sm-5 col-lg-5 col-xl-5">{ClientResourceManager.getText('NetWinLoss')}:</div>
                         <div className="col-4 col-md-4 col-sm-4 col-lg-4 col-xl-4">{NumberFormat.formatDecimal(NetWinLoss)}</div>
                     </div>
                 </div>
@@ -138,7 +139,7 @@ export const CustomerBettingStatus = (props) => {
                 Player Betting Status
             </div>
             <div className="panel-body">
-                {data && data.HasData ? renderContent() : (<p className="center-align">There is no Sportsbook data.</p>)}
+                {data && data.HasData ? renderContent() : (<p className="center-align">{ClientResourceManager.getText('NoSportsbookData')}</p>)}
             </div>
         </div>
     );

@@ -28,11 +28,11 @@ export const AthenaProfile = ({ data }) => {
                 <td colSpan="2"></td>
             </tr>
             <tr>
-                <td>First name</td>
+                <td>{ClientResourceManager.getText('FirstName')}</td>
                 <td>{FirstName}</td>
             </tr>
             <tr>
-                <td>Last name</td>
+                <td>{ClientResourceManager.getText('LastName')}</td>
                 <td>{LastName}</td>
             </tr>
             <tr>
@@ -40,11 +40,11 @@ export const AthenaProfile = ({ data }) => {
                 <td>{Gender}</td>
             </tr>
             <tr>
-                <td>Date of birth</td>
+                <td>{ClientResourceManager.getText('DateOfBirth')}</td>
                 <td>{Birthday}</td>
             </tr>
             <tr>
-                <td>Mobile</td>
+                <td>{ClientResourceManager.getText('Mobile')}</td>
                 <td>{Phone}</td>
             </tr>
             <tr>
@@ -56,49 +56,49 @@ export const AthenaProfile = ({ data }) => {
                 <td>{Address}</td>
             </tr>
             <tr>
-                <td>City/ Town</td>
+                <td>{ClientResourceManager.getText('City')}/ {ClientResourceManager.getText('Town')}</td>
                 <td>{City}{City && Town && '/'}{Town}</td>
             </tr>
             <tr>
-                <td>State</td>
+                <td>{ClientResourceManager.getText('State')}</td>
                 <td>{State}</td>
             </tr>
             <tr>
-                <td>Zip Code</td>
+                <td>{ClientResourceManager.getText('ZipCode')}</td>
                 <td>{ZipCode}</td>
             </tr>
             <tr>
                 <td colSpan="2"></td>
             </tr>
             <tr>
-                <td>Security question</td>
+                <td>{ClientResourceManager.getText('SecurityQuestion')}</td>
                 <td>{SecurityQuestion}</td>
             </tr>
             <tr>
-                <td>Security code</td>
+                <td>{ClientResourceManager.getText('SecurityCode')}</td>
                 <td>{SecurityCode}</td>
             </tr>
             <tr>
-                <td>Where did you hear about us</td>
+                <td>{ClientResourceManager.getText('WhereHear')}</td>
                 <td>{HowToKnow}</td>
             </tr>
             <tr>
                 <td colSpan="2"></td>
             </tr>
             <tr>
-                <td>My preferred username</td>
+                <td>{ClientResourceManager.getText('PreferredUserName')}</td>
                 <td>{PreferredUserName}</td>
             </tr>
             <tr>
-                <td>My preferred currency</td>
+                <td>{ClientResourceManager.getText('PreferredCurrency')}</td>
                 <td>{PreferredCurrency}</td>
             </tr>
             <tr>
-                <td>My preferred odds</td>
+                <td>{ClientResourceManager.getText('PreferredOdds')}</td>
                 <td>{PreferredOdds}</td>
             </tr>
             <tr>
-                <td>My preferred language</td>
+                <td>{ClientResourceManager.getText('PreferredLanguage')}</td>
                 <td>{PreferredLanguage}</td>
             </tr>
         </tbody>
