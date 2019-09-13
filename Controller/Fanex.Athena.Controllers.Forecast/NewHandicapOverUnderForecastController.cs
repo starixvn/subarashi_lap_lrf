@@ -19,12 +19,12 @@ namespace Fanex.Athena.Controllers.Forecast
     using Extension.Utility;
 
     using Fanex.Athena.Extension.Helpers;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Logging;
 
-    using Model.Core.DataDomain;
     using Model.Forecast.DTO.NewForecastHdpOu;
     using Model.Forecast.MetaModel;
     using Model.Forecast.ViewModel;

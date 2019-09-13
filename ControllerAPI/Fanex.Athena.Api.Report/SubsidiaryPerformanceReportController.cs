@@ -6,8 +6,7 @@
     using System.Web.Http;
 
     using Base.Attributes;
-
-    using Fanex.Athena.Resources;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
 

@@ -19,6 +19,7 @@ namespace Fanex.Athena.Controllers.Report
 
     using Fanex.Athena.Excel.Base.Entities;
     using Fanex.Athena.Excel.Report;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel.LiveReports;
     using Fanex.Athena.Service.StatelessCore.Interfaces;

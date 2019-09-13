@@ -8,7 +8,7 @@ namespace Fanex.Athena.Controllers.Report.Result
     using System.Web.Mvc;
 
     using DataAccess.Core.Configuration.Interfaces;
-
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
@@ -42,7 +42,7 @@ namespace Fanex.Athena.Controllers.Report.Result
             _betListApiClient = betListApiClient;
         }
 
-        [FunctionAuthorization(Model.Core.DataDomain.PermissionKeys.ReportResults)]
+        [FunctionAuthorization(PermissionKeys.ReportResults)]
         [HttpGet]
         public ActionResult Index()
         {
@@ -65,7 +65,7 @@ namespace Fanex.Athena.Controllers.Report.Result
             return View("~/Views/Desktop/Report/Result/Main.cshtml", model);
         }
 
-        [FunctionAuthorization(Model.Core.DataDomain.PermissionKeys.ReportResults)]
+        [FunctionAuthorization(PermissionKeys.ReportResults)]
         [HttpPost]
         [AjaxRequest]
         [CustomValidateAntiForgery]
@@ -85,7 +85,7 @@ namespace Fanex.Athena.Controllers.Report.Result
             return this.Content(string.Empty, "text/html");
         }
 
-        [FunctionAuthorization(Model.Core.DataDomain.PermissionKeys.ReportResults)]
+        [FunctionAuthorization(PermissionKeys.ReportResults)]
         [HttpGet]
         public async Task<ActionResult> ResultExcel(ResultMetaModel metaModel)
         {
@@ -104,7 +104,7 @@ namespace Fanex.Athena.Controllers.Report.Result
             return File(stream, "application/vnd.ms-excel", FileName);
         }
 
-        [FunctionAuthorization(Model.Core.DataDomain.PermissionKeys.ReportResults)]
+        [FunctionAuthorization(PermissionKeys.ReportResults)]
         [HttpPost]
         [CustomValidateAntiForgery]
         public async Task<ActionResult> GetSports(GetSportResultMetaModel metaModel)

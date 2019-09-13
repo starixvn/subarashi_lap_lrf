@@ -15,13 +15,13 @@ namespace Fanex.Athena.Controllers.Report
 
     using Fanex.Athena.Excel.Base.Entities;
     using Fanex.Athena.Excel.Report;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
     using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
     using Fanex.Athena.Web.ResultExtension;
 
-    using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using Model.Core.ResultModel;
     using Model.Report.DTO;

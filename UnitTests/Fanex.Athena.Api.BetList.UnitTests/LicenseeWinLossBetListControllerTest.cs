@@ -6,10 +6,10 @@
     using System.Threading.Tasks;
 
     using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     using Model.BetList.MetaModel;
-    using Model.Core.DataDomain;
     using Model.Core.DTO.Configuration;
 
     using NSubstitute;

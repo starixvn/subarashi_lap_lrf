@@ -12,11 +12,10 @@ namespace Fanex.Athena.Controllers
     using DataAccess.Core.Users.Interfaces;
 
     using Fanex.Athena.Extension.Utility;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Auth.Enum;
     using Fanex.Athena.Model.Core.ViewModel;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
-
-    using Model.Core.DataDomain;
 
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;

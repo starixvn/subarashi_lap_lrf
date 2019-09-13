@@ -11,11 +11,10 @@ namespace Fanex.Athena.Controllers.Forecast
 
     using DataAccess.Core.Common.Interfaces;
     using DataAccess.Forecast.Interfaces;
-
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
 
-    using Model.Core.DataDomain;
     using Model.Forecast.MetaModel;
     using Model.Forecast.ViewModel;
 

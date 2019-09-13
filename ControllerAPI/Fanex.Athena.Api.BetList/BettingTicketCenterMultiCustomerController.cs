@@ -8,12 +8,11 @@
     using Base.Attributes;
 
     using Extension.Utility;
-
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
 
     using Model.BetList.MetaModel;
-    using Model.Core.DataDomain;
 
     using Resources;
 

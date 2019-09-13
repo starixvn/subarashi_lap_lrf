@@ -2,7 +2,7 @@
 {
     using System.Linq;
     using System.Web.Mvc;
-
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     using Model.Core.DataDomain;

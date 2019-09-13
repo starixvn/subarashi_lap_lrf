@@ -20,6 +20,7 @@ namespace Fanex.Athena.Controllers.Customer
     using Extension.Utility;
 
     using Fanex.Athena.Excel.Customer;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Customer.MetaModel;
     using Fanex.Athena.Model.Customer.ViewModel;

@@ -6,11 +6,10 @@
     using Base.UnitTests;
 
     using DataAccess.Report.Interfaces;
-
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.MetaModel.Product;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
-    using Model.Core.DataDomain;
     using Model.Core.DTO.Configuration;
     using Model.Report.MetaModel;
 

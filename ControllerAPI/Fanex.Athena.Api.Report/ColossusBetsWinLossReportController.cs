@@ -17,6 +17,7 @@ namespace Fanex.Athena.Api.Report
     using Base.Attributes;
 
     using Fanex.Athena.Excel.Report;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
@@ -24,7 +25,6 @@ namespace Fanex.Athena.Api.Report
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
 
-    using Model.Core.DataDomain;
     using Model.Core.ResultModel;
 
     using Resources;

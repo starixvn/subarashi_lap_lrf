@@ -10,9 +10,9 @@
     using DataAccess.Report.Interfaces;
 
     using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
-    using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using Model.Core.DTO.Configuration;
     using Model.Core.ResultModel;

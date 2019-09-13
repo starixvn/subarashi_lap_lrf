@@ -23,6 +23,7 @@ namespace Fanex.Athena.Api.BetList
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
     using Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Model.Auth.DataDomain;
 
     #endregion Using
 

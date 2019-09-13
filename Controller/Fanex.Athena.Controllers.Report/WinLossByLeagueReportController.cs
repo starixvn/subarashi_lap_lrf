@@ -15,8 +15,7 @@ namespace Fanex.Athena.Controllers.Report
     using DataAccess.Core.Common.Interfaces;
 
     using Extension.Utility;
-
-    using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;

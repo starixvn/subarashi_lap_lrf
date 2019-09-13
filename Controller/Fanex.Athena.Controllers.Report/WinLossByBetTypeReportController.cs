@@ -18,6 +18,7 @@ namespace Fanex.Athena.Controllers.Report
 
     using Fanex.Athena.Excel.Base.Entities;
     using Fanex.Athena.Excel.Report;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
@@ -26,7 +27,6 @@ namespace Fanex.Athena.Controllers.Report
     using Fanex.Athena.Web.ActionFilter;
     using Fanex.Athena.Web.ResultExtension;
 
-    using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
 
     using Service.Core.Common.Interfaces;

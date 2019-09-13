@@ -12,12 +12,11 @@ namespace Fanex.Athena.Api.BetList
 
     using Base;
     using Base.Attributes;
-
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     using Model.BetList.DTO;
     using Model.BetList.MetaModel;
-    using Model.Core.DataDomain;
 
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;

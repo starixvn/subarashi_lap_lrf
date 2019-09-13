@@ -12,13 +12,12 @@ namespace Fanex.Athena.Controllers.BetList
     using System.Web.Mvc;
 
     using DataAccess.Core.Configuration.Interfaces;
-
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.MetaModel.Product;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     using Model.BetList.MetaModel;
     using Model.BetList.ViewModel;
-    using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
 
     using Resources;

@@ -12,6 +12,7 @@
 
     using Fanex.Athena.Excel.Base.Entities;
     using Fanex.Athena.Excel.Customer;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Customer.MetaModel;
     using Fanex.Athena.Service.Core.Common.Interfaces;
@@ -21,8 +22,6 @@
     using Fanex.Athena.Web.ResultExtension;
 
     using Helpers;
-
-    using Model.Core.DataDomain;
 
     using ONEbook.UM.Filters;
 

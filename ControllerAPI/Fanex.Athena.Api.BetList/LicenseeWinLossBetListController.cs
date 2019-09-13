@@ -9,8 +9,7 @@
     using DataAccess.Core.Configuration.Interfaces;
 
     using Extension.Helper;
-
-    using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Model.Auth.DataDomain;
 
     using Model.BetList.MetaModel;
 

@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
-
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Report.ViewModel;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 

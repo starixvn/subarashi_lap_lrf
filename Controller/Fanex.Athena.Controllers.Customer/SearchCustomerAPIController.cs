@@ -8,12 +8,10 @@
     using System.Web.SessionState;
 
     using DataAccess.Customer.Interfaces;
-
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.Core.Common.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
-
-    using Model.Core.DataDomain;
 
     using ONEbook.UM.Filters;
 

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 
 using Fanex.Athena.DataAccess.BetSettings.Interfaces;
 using Fanex.Athena.Model.Auth;
+using Fanex.Athena.Model.Auth.DataDomain;
 using Fanex.Athena.Model.Auth.Enum;
 using Fanex.Athena.Model.BetSettings.DTO;
 using Fanex.Athena.Model.Core.DataDomain;

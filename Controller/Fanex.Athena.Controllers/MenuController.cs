@@ -8,13 +8,11 @@ namespace Fanex.Athena.Controllers
 {
     using System.Linq;
     using System.Web.Mvc;
-
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Auth.Enum;
     using Fanex.Athena.Model.Core.ViewModel;
     using Fanex.Athena.Service.Core.Common.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
-
-    using Model.Core.DataDomain;
 
     using Service.Core.Users.Interfaces;
 

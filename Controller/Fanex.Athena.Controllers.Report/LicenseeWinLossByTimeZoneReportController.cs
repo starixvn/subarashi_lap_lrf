@@ -1,5 +1,5 @@
 ﻿using System.Web.Mvc;
-
+using Fanex.Athena.Model.Auth.DataDomain;
 using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Model.Report.ViewModel;
 using Fanex.Athena.Service.Core.Common.Interfaces;

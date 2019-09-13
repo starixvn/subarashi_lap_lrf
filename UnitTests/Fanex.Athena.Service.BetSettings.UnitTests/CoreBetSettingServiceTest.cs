@@ -9,6 +9,7 @@
     using DataAccess.BetSettings.Interfaces;
 
     using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Auth.Enum;
 
     using Model.BetSettings.DTO;

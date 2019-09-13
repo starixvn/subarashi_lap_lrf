@@ -15,8 +15,7 @@ namespace Fanex.Athena.Controllers.BetList
     using System.Web.SessionState;
 
     using DataAccess.Core.Common.Interfaces;
-
-    using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Web.ActionFilter;
 
     using Model.BetList.MetaModel;

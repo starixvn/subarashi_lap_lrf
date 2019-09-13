@@ -13,11 +13,10 @@ namespace Fanex.Athena.Controllers.TotalBets
     using DataAccess.TotalBet.Interfaces;
 
     using Extension.Utility;
-
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
 
-    using Model.Core.DataDomain;
     using Model.TotalBet.MetaModel;
     using Model.TotalBet.ViewModel;
 

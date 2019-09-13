@@ -16,7 +16,7 @@ namespace Fanex.Athena.Controllers
     using DataAccess.Core.Configuration.Interfaces;
 
     using Extension.Utility.Interfaces;
-
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     using Model.Core.DataDomain;

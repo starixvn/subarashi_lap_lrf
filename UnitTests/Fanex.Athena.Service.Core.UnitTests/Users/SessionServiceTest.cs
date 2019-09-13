@@ -9,6 +9,7 @@
     using Extension.Utility;
 
     using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
 
@@ -191,7 +192,7 @@
             };
             var functions = new List<Function> { new Function { FunctionId = 1,
                 ParentId = 1, IsActive = false, Url = "TestUrl",
-                FunctionKey =PermissionKeys.ReportLicenseeWinLoss } };
+                FunctionKey = PermissionKeys.ReportLicenseeWinLoss } };
             _licenseeDataAccess.GetByUser(DefaultUserId).Returns(licensees);
             const int OldLicenseeId = 1;
             const int NewLicenseeId = 2;
@@ -216,7 +217,7 @@
             };
             var functions = new List<Function> { new Function {
                 FunctionId = 1, ParentId = 0, IsActive = true, Url = "TestUrl",
-                FunctionKey=PermissionKeys.BettingTicketCenter
+                FunctionKey = PermissionKeys.BettingTicketCenter
             } };
             _licenseeDataAccess.GetByUser(DefaultUserId).Returns(licensees);
             const int OldLicenseeId = 1;

@@ -13,8 +13,8 @@ namespace Fanex.Athena.Controllers.BetSettings
     using Autofac.Integration.Mvc;
 
     using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.BetSettings.DTO;
-    using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     using Model.BetSettings.MetaModel;

@@ -12,7 +12,7 @@ namespace Fanex.Athena.Controllers.Report
     using System.Web.Mvc;
 
     using Extension.Helper;
-
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.MetaModel.Product;
     using Fanex.Athena.Model.Report.MetaModel;

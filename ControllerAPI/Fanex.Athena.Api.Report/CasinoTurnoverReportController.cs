@@ -6,7 +6,7 @@
     using Base.Attributes;
 
     using DataAccess.Report.Interfaces;
-
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
 

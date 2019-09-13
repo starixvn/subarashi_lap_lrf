@@ -1,10 +1,9 @@
 ﻿namespace Fanex.Athena.Controllers.Report.UnitTests
 {
     using Base.UnitTests;
-
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
-    using Model.Core.DataDomain;
     using Model.Core.DTO.Configuration;
     using Model.Report.ViewModel;
 

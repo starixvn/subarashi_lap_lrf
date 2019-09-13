@@ -9,11 +9,10 @@
 
     using Excel.Report;
     using Excel.Report.Helpers;
-
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
 
-    using Model.Core.DataDomain;
     using Model.Core.ResultModel;
     using Model.Report;
     using Model.Report.MetaModel;

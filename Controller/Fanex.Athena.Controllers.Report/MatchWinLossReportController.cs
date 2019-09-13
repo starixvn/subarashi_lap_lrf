@@ -14,6 +14,7 @@
 
     using Fanex.Athena.Excel.Base.Entities;
     using Fanex.Athena.Excel.Report;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;

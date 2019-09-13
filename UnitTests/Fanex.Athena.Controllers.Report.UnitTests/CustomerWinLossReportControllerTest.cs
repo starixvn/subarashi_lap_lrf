@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Base.UnitTests;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel.Api;
     using Fanex.Athena.Service.StatelessCore.Interfaces;

@@ -21,6 +21,7 @@ namespace Fanex.Athena.Controllers.Customer
 
     using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Extension.Helpers;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Customer.MetaModel;
     using Fanex.Athena.Service.Core.Common.Interfaces;
@@ -29,7 +30,6 @@ namespace Fanex.Athena.Controllers.Customer
     using Fanex.Athena.Web.ActionFilter;
     using Fanex.Logging;
 
-    using Model.Core.DataDomain;
     using Model.Core.ViewModel;
 
     using ONEbook.UM.Filters;

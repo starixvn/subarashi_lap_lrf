@@ -11,6 +11,7 @@
     using Excel.Report;
 
     using Fanex.Athena.Api.Base.Attributes;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;

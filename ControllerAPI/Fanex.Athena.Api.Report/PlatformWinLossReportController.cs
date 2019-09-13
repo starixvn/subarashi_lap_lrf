@@ -11,6 +11,7 @@ namespace Fanex.Athena.Api.Report
     using System.Web.Http;
 
     using Base.Attributes;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;

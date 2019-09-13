@@ -6,14 +6,13 @@
 
     using Base;
     using Base.Attributes;
-
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
 
     using Model.BetList.DTO;
     using Model.BetList.MetaModel;
     using Model.BetList.ViewModel;
-    using Model.Core.DataDomain;
 
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;

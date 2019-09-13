@@ -3,7 +3,7 @@
     using Fanex.Athena.Controllers;
     using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Extension.Utility;
-    using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.ResultModel;
     using Fanex.Athena.Module.Notification.DTO;
     using Fanex.Athena.Module.Notification.MetaModel;

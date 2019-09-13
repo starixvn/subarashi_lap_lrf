@@ -22,6 +22,7 @@ namespace Fanex.Athena.Api.Report
     using Fanex.Athena.Excel.Report;
     using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Extension.Utility;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
@@ -29,7 +30,6 @@ namespace Fanex.Athena.Api.Report
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
 
-    using Model.Core.DataDomain;
     using Model.Report.ResultModel;
 
     using Service.Core.Common.Interfaces;

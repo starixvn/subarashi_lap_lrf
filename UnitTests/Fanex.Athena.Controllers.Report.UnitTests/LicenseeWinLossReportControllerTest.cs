@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Web.Mvc;
     using Base.UnitTests;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     using Model.Core.DataDomain;

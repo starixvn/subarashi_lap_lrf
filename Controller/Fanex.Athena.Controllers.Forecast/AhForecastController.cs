@@ -12,7 +12,7 @@ namespace Fanex.Athena.Controllers.Forecast
     using System.Web.Mvc;
 
     using Extension.Utility;
-
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Forecast.DTO.ForecastAH;
     using Fanex.Athena.Service.StatelessCore.Utility;
 
