@@ -20380,9 +20380,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _reducers_index_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../reducers/index.js */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/reducers/index.js");
 /* harmony import */ var _lib_store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../lib/store */ "./www/js/source/reactpages/lib/store.js");
+/* harmony import */ var _resources__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../resources */ "./www/js/source/reactpages/Module/PlayerAdmin/resources/index.js");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -20628,6 +20630,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AthenaProfile", function() { return AthenaProfile; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/clientResourceManager */ "./www/js/source/reactpages/lib/clientResourceManager.js");
+
 
 var AthenaProfile = function AthenaProfile(_ref) {
   var data = _ref.data;
@@ -20658,9 +20662,9 @@ var AthenaProfile = function AthenaProfile(_ref) {
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     className: "first-cell"
-  }, "AG UserId"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, AGUserId)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Gold Deluxe UserID"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, GoldDeluxeUserId)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "VoidBridge UserID"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, VoidbridgeUserId)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Exchange UserID"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, ExchangeUserId)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+  }, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('AgUserId')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, AGUserId)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('GoldDeluxeUserId')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, GoldDeluxeUserId)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('VoidBridgeUserId')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, VoidbridgeUserId)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('ExchangeUserId')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, ExchangeUserId)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     colSpan: "2"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "First name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, FirstName)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Last name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, LastName)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Gender"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, Gender)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Date of birth"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, Birthday)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Mobile"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, Phone)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Country"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, Country)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Address"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, Address)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "City/ Town"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, City, City && Town && '/', Town)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "State"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, State)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Zip Code"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, ZipCode)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "First name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, FirstName)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Last name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, LastName)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('Gender')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, Gender)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Date of birth"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, Birthday)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Mobile"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, Phone)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('Country')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, Country)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_1__["default"].getText('Address')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, Address)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "City/ Town"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, City, City && Town && '/', Town)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "State"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, State)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Zip Code"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, ZipCode)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     colSpan: "2"
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Security question"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, SecurityQuestion)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Security code"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, SecurityCode)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Where did you hear about us"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, HowToKnow)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     colSpan: "2"
@@ -20686,6 +20690,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/index.js */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/actions/index.js");
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/account-info/lib/constants.js");
+/* harmony import */ var _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/lib/clientResourceManager */ "./www/js/source/reactpages/lib/clientResourceManager.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -20693,6 +20698,7 @@ function _nonIterableRest() { throw new TypeError("Invalid attempt to destructur
 function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -20740,7 +20746,7 @@ var BankInformation = function BankInformation(props) {
     className: "table"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     className: "first-cell"
-  }, "Bank Information", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  }, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_5__["default"].getText('BankInformation'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     className: "btn-default btn-link btn-icon",
     onClick: function onClick() {
       return setIsShowPlainText(true);
@@ -20749,8 +20755,8 @@ var BankInformation = function BankInformation(props) {
       return setIsShowPlainText(false);
     }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    class: "material-icons"
-  }, "remove_red_eye"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Bank Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, displayInfo(BankName))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Bank Account Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, displayInfo(AccountName))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Bank Account Number"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, displayInfo(AccountNumber))))));
+    className: "material-icons"
+  }, "remove_red_eye"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_5__["default"].getText('BankName')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, displayInfo(BankName))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_5__["default"].getText('BankAccountName')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, displayInfo(AccountName))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_5__["default"].getText('BankAccountNumber')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, displayInfo(AccountNumber))))));
 };
 
 function mapDispatchToProps(dispatch) {
@@ -21294,6 +21300,70 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /***/ }),
 
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/resources/index.js":
+/*!************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/resources/index.js ***!
+  \************************************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/clientResourceManager */ "./www/js/source/reactpages/lib/clientResourceManager.js");
+/* harmony import */ var _resource_en__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./resource.en */ "./www/js/source/reactpages/Module/PlayerAdmin/resources/resource.en.js");
+/* harmony import */ var _resource_cs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./resource.cs */ "./www/js/source/reactpages/Module/PlayerAdmin/resources/resource.cs.js");
+
+
+
+_jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_0__["default"].register('en', _resource_en__WEBPACK_IMPORTED_MODULE_1__["resource_en"]);
+_jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_0__["default"].register('cs', _resource_cs__WEBPACK_IMPORTED_MODULE_2__["resource_cs"]);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/resources/resource.cs.js":
+/*!******************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/resources/resource.cs.js ***!
+  \******************************************************************************/
+/*! exports provided: resource_cs */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resource_cs", function() { return resource_cs; });
+var resource_cs = {
+  BankInformation: '银行资讯',
+  BankName: '银行名称',
+  BankAccountName: '账户名称',
+  BankAccountNumber: '银行账户号码',
+  Country: '地区'
+};
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/resources/resource.en.js":
+/*!******************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/resources/resource.en.js ***!
+  \******************************************************************************/
+/*! exports provided: resource_en */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resource_en", function() { return resource_en; });
+var resource_en = {
+  BankInformation: 'Bank Information',
+  BankName: 'Bank Name',
+  BankAccountName: 'Bank Account Name',
+  BankAccountNumber: 'Bank Account Number',
+  Country: 'Country',
+  AgUserId: 'AG UserId',
+  GoldDeluxeUserId: 'Gold Deluxe UserID',
+  VoidBridgeUserId: 'VoidBridge UserID',
+  ExchangeUserId: 'Exchange UserID'
+};
+
+/***/ }),
+
 /***/ "./www/js/source/reactpages/Module/constants/configInfo.js":
 /*!*****************************************************************!*\
   !*** ./www/js/source/reactpages/Module/constants/configInfo.js ***!
@@ -21817,6 +21887,60 @@ function (_Component) {
 
   return AppLayout;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/lib/clientResourceManager.js":
+/*!***************************************************************!*\
+  !*** ./www/js/source/reactpages/lib/clientResourceManager.js ***!
+  \***************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ClientResourceManager; });
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var DEFAULT_RESOURCE_KEY = 'en';
+var resources = {
+  'en': {},
+  'cs': {}
+};
+var currentLangKey = window._langKey || DEFAULT_RESOURCE_KEY;
+
+var ClientResourceManager =
+/*#__PURE__*/
+function () {
+  function ClientResourceManager() {
+    _classCallCheck(this, ClientResourceManager);
+  }
+
+  _createClass(ClientResourceManager, null, [{
+    key: "register",
+    value: function register(langKey, resourceValue) {
+      resources[langKey] = _objectSpread({}, resources[langKey], resourceValue);
+    }
+  }, {
+    key: "getText",
+    value: function getText(key) {
+      var currentResource = resources[currentLangKey];
+      return currentResource && (currentResource[key] || resources[DEFAULT_RESOURCE_KEY][key] || key);
+    }
+  }]);
+
+  return ClientResourceManager;
+}();
 
 
 
