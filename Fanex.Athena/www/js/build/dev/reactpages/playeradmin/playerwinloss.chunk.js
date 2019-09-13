@@ -61,11 +61,6 @@
 /******/
 /******/ 	var deferredModules = [];
 /******/
-/******/ 	// script path function
-/******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "www/js/build/dev/reactpages/lib/" + ({"xlsx-style-sparta":"xlsx-style-sparta"}[chunkId]||chunkId) + ".chunk.js"
-/******/ 	}
-/******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/
@@ -90,65 +85,6 @@
 /******/ 		return module.exports;
 /******/ 	}
 /******/
-/******/ 	// This file contains only the entry chunk.
-/******/ 	// The chunk loading function for additional chunks
-/******/ 	__webpack_require__.e = function requireEnsure(chunkId) {
-/******/ 		var promises = [];
-/******/
-/******/
-/******/ 		// JSONP chunk loading for javascript
-/******/
-/******/ 		var installedChunkData = installedChunks[chunkId];
-/******/ 		if(installedChunkData !== 0) { // 0 means "already installed".
-/******/
-/******/ 			// a Promise means "currently loading".
-/******/ 			if(installedChunkData) {
-/******/ 				promises.push(installedChunkData[2]);
-/******/ 			} else {
-/******/ 				// setup Promise in chunk cache
-/******/ 				var promise = new Promise(function(resolve, reject) {
-/******/ 					installedChunkData = installedChunks[chunkId] = [resolve, reject];
-/******/ 				});
-/******/ 				promises.push(installedChunkData[2] = promise);
-/******/
-/******/ 				// start chunk loading
-/******/ 				var head = document.getElementsByTagName('head')[0];
-/******/ 				var script = document.createElement('script');
-/******/ 				var onScriptComplete;
-/******/
-/******/ 				script.charset = 'utf-8';
-/******/ 				script.timeout = 120;
-/******/ 				if (__webpack_require__.nc) {
-/******/ 					script.setAttribute("nonce", __webpack_require__.nc);
-/******/ 				}
-/******/ 				script.src = jsonpScriptSrc(chunkId);
-/******/
-/******/ 				onScriptComplete = function (event) {
-/******/ 					// avoid mem leaks in IE.
-/******/ 					script.onerror = script.onload = null;
-/******/ 					clearTimeout(timeout);
-/******/ 					var chunk = installedChunks[chunkId];
-/******/ 					if(chunk !== 0) {
-/******/ 						if(chunk) {
-/******/ 							var errorType = event && (event.type === 'load' ? 'missing' : event.type);
-/******/ 							var realSrc = event && event.target && event.target.src;
-/******/ 							var error = new Error('Loading chunk ' + chunkId + ' failed.\n(' + errorType + ': ' + realSrc + ')');
-/******/ 							error.type = errorType;
-/******/ 							error.request = realSrc;
-/******/ 							chunk[1](error);
-/******/ 						}
-/******/ 						installedChunks[chunkId] = undefined;
-/******/ 					}
-/******/ 				};
-/******/ 				var timeout = setTimeout(function(){
-/******/ 					onScriptComplete({ type: 'timeout', target: script });
-/******/ 				}, 120000);
-/******/ 				script.onerror = script.onload = onScriptComplete;
-/******/ 				head.appendChild(script);
-/******/ 			}
-/******/ 		}
-/******/ 		return Promise.all(promises);
-/******/ 	};
 /******/
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
@@ -202,9 +138,6 @@
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
 /******/
-/******/ 	// on error function for async loading
-/******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
-/******/
 /******/ 	var jsonpArray = window["webpackJsonp"] = window["webpackJsonp"] || [];
 /******/ 	var oldJsonpFunction = jsonpArray.push.bind(jsonpArray);
 /******/ 	jsonpArray.push = webpackJsonpCallback;
@@ -221,39 +154,6 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./cptable":
-/*!**************************!*\
-  !*** external "cptable" ***!
-  \**************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = cptable;
-
-/***/ }),
-
-/***/ "./jszip":
-/*!************************!*\
-  !*** external "jszip" ***!
-  \************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = jszip;
-
-/***/ }),
-
-/***/ "./ods":
-/*!**********************!*\
-  !*** external "ods" ***!
-  \**********************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = ods;
-
-/***/ }),
-
 /***/ "./www/js/source/reactpages/Module/PlayerAdmin/playerwinloss/actions/index.js":
 /*!************************************************************************************!*\
   !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerwinloss/actions/index.js ***!
@@ -268,8 +168,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/actions/loaderAction */ "./www/js/source/reactpages/actions/loaderAction.js");
 /* harmony import */ var _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/DataService */ "./www/js/source/reactpages/lib/DataService.js");
 /* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
-/* harmony import */ var _lib_reportExcel__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../lib/reportExcel */ "./www/js/source/reactpages/Module/PlayerAdmin/playerwinloss/lib/reportExcel.js");
-
 
 
 
@@ -280,7 +178,7 @@ var getData = function getData(param) {
     var url = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_3__["default"].resolveClientUrl('PlayerWinLoss/Index');
     dispatch(Object(_jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_1__["toggleLoader"])(true));
     _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_2__["default"].postData(url, param).then(function (response) {
-      dispatch(setGridData(response.data.Data));
+      dispatch(setGridData(response.data.DataList));
       dispatch(Object(_jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_1__["toggleLoader"])(false));
     }).catch(function (error) {
       console.log(error.message);
@@ -297,16 +195,8 @@ var setGridData = function setGridData(data) {
   };
 };
 
-var exportExcel = function exportExcel(data, hasCustomerComm, isAllowedBA, title) {
-  return function () {
-    var reportExcel = new _lib_reportExcel__WEBPACK_IMPORTED_MODULE_4__["default"](data, hasCustomerComm, isAllowedBA, title);
-    reportExcel.export();
-  };
-};
-
 var ActionCreators = Object.assign({}, {
-  getData: getData,
-  exportExcel: exportExcel
+  getData: getData
 });
 
 /***/ }),
@@ -341,7 +231,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/layouts/AppLayout */ "./www/js/source/reactpages/layouts/AppLayout.jsx");
 /* harmony import */ var _jsroot_components_Loader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/components/Loader */ "./www/js/source/reactpages/components/Loader.jsx");
 /* harmony import */ var _DataGrid__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./DataGrid */ "./www/js/source/reactpages/Module/PlayerAdmin/playerwinloss/components/DataGrid.jsx");
-/* harmony import */ var _Title__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Title */ "./www/js/source/reactpages/Module/PlayerAdmin/playerwinloss/components/Title.jsx");
+/* harmony import */ var _jsroot_components_ReportTitle__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/components/ReportTitle */ "./www/js/source/reactpages/components/ReportTitle.jsx");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+
 
 
 
@@ -351,7 +243,9 @@ __webpack_require__.r(__webpack_exports__);
 var AppContainer = function AppContainer(props) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_2__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Loader__WEBPACK_IMPORTED_MODULE_3__["default"], {
     isLoading: props.isLoading
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Title__WEBPACK_IMPORTED_MODULE_5__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DataGrid__WEBPACK_IMPORTED_MODULE_4__["default"], null));
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_ReportTitle__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    content: _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_6__["default"].reportTitle
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DataGrid__WEBPACK_IMPORTED_MODULE_4__["default"], null));
 };
 
 function mapStateToProps(state) {
@@ -493,9 +387,9 @@ var GridRow = function GridRow(props) {
   var _ref = dataRow || {},
       Turnover = _ref.Turnover,
       TotalTransaction = _ref.TotalTransaction,
-      WinLoss = _ref.WinLoss,
+      CustomerWL = _ref.CustomerWL,
       Comm = _ref.Comm,
-      Total = _ref.Total,
+      CustomerTotalWL = _ref.CustomerTotalWL,
       BetEffective = _ref.BetEffective,
       LicenseeWL = _ref.LicenseeWL,
       BAComm = _ref.BAComm,
@@ -509,11 +403,11 @@ var GridRow = function GridRow(props) {
     className: "right-align"
   }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_2__["default"].format(TotalTransaction)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
     className: "right-align"
-  }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_2__["default"].formatDecimal(WinLoss)), hasCustomerComm && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
+  }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_2__["default"].formatDecimal(CustomerWL)), hasCustomerComm && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
     className: "right-align"
   }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_2__["default"].formatDecimal(Comm)), hasCustomerComm && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
     className: "right-align"
-  }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_2__["default"].formatDecimal(Total)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
+  }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_2__["default"].formatDecimal(CustomerTotalWL)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
     className: "right-align"
   }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_2__["default"].formatDecimal(BetEffective)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
     className: "right-align"
@@ -524,79 +418,6 @@ var GridRow = function GridRow(props) {
   }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_2__["default"].formatDecimal(AmtDueToBA)));
 };
 /* harmony default export */ __webpack_exports__["default"] = (GridRow);
-
-/***/ }),
-
-/***/ "./www/js/source/reactpages/Module/PlayerAdmin/playerwinloss/components/Title.jsx":
-/*!****************************************************************************************!*\
-  !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerwinloss/components/Title.jsx ***!
-  \****************************************************************************************/
-/*! exports provided: Title, default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Title", function() { return Title; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions */ "./www/js/source/reactpages/Module/PlayerAdmin/playerwinloss/actions/index.js");
-/* harmony import */ var _jsroot_components_ReportTitle__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/components/ReportTitle */ "./www/js/source/reactpages/components/ReportTitle.jsx");
-/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
-/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
-
-
-
-
-
-
-
-var Title = function Title(props) {
-  var handleExportExcel = function handleExportExcel() {
-    var gridData = props.gridData,
-        hasCustomerComm = props.hasCustomerComm,
-        isAllowedBA = props.isAllowedBA,
-        exportExcel = props.exportExcel;
-    exportExcel(gridData, hasCustomerComm, isAllowedBA, _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_5__["default"].reportTitle);
-  };
-
-  var content = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "caret-block"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "icon-excel-wrapper",
-    onClick: handleExportExcel
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "icon-excel",
-    title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource('ExportToExcel')
-  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_5__["default"].reportTitle));
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_ReportTitle__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    tag: "div",
-    content: content
-  });
-};
-
-function mapStateToProps(state) {
-  var gridData = state.gridData,
-      hasCustomerComm = state.hasCustomerComm,
-      isAllowedBA = state.isAllowedBA;
-  return Object.assign({}, {
-    gridData: gridData,
-    hasCustomerComm: hasCustomerComm,
-    isAllowedBA: isAllowedBA
-  });
-}
-
-;
-
-function mapDispatchToProps(dispatch) {
-  var exportExcel = _actions__WEBPACK_IMPORTED_MODULE_3__["ActionCreators"].exportExcel;
-  return Object(redux__WEBPACK_IMPORTED_MODULE_2__["bindActionCreators"])({
-    exportExcel: exportExcel
-  }, dispatch);
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(Title));
 
 /***/ }),
 
@@ -741,295 +562,6 @@ var buildHeader = function buildHeader(hasCustomerComm, isAllowedBA) {
 
   return gridHeader;
 };
-
-/***/ }),
-
-/***/ "./www/js/source/reactpages/Module/PlayerAdmin/playerwinloss/lib/reportExcel.js":
-/*!**************************************************************************************!*\
-  !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerwinloss/lib/reportExcel.js ***!
-  \**************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ReportExcel; });
-/* harmony import */ var _jsroot_lib_excel__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/excel */ "./www/js/source/reactpages/lib/excel.js");
-/* harmony import */ var _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/constants/excelStyle */ "./www/js/source/reactpages/constants/excelStyle.js");
-/* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../lib/utils */ "./www/js/source/reactpages/Module/PlayerAdmin/playerwinloss/lib/utils.js");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-
-
-
-var TITLE_ROW_INDEX = 0;
-var HEADER_ROW_INDEX = 1;
-var MAIN_SECTION_STYLE = 'mainSectionStyle';
-var MERGING_CUSTWL_COLUMN_COUNT = 3;
-var INDEX_CUSTWL_COLUMN = 3;
-var fields = {
-  Index: 'Index',
-  Turnover: 'Turnover',
-  TotalTransaction: 'TotalTransaction',
-  WinLoss: 'WinLoss',
-  Comm: 'Comm',
-  Total: 'Total',
-  BetEffective: 'BetEffective',
-  LicenseeWL: 'LicenseeWL',
-  BAComm: 'BAComm',
-  AmtDueToBA: 'AmtDueToBA'
-};
-
-var ReportExcel =
-/*#__PURE__*/
-function () {
-  function ReportExcel(data, hasCustomerComm, isAllowedBA, title) {
-    _classCallCheck(this, ReportExcel);
-
-    this.data = data;
-    this.hasCustomerComm = hasCustomerComm;
-    this.isAllowedBA = isAllowedBA;
-    this.title = title;
-    this.worksheet = {};
-    this.currentRowIndex = hasCustomerComm ? 3 : 2;
-    this.mergeConfig = [];
-    this.columnConfigs = this._getcolumnConfigs(hasCustomerComm, isAllowedBA);
-    this.headerText = Object(_lib_utils__WEBPACK_IMPORTED_MODULE_2__["generateHeaderText"])(hasCustomerComm);
-  }
-
-  _createClass(ReportExcel, [{
-    key: "export",
-    value: function _export() {
-      var _this = this;
-
-      _jsroot_lib_excel__WEBPACK_IMPORTED_MODULE_0__["default"].process(function () {
-        _this._createTitle();
-
-        _this._createHeader();
-
-        _this._createBodyData();
-
-        _this._createExcelConfig();
-
-        _jsroot_lib_excel__WEBPACK_IMPORTED_MODULE_0__["default"].export(_this.worksheet, "CustomerWinLoss");
-      });
-    }
-  }, {
-    key: "_createTitle",
-    value: function _createTitle() {
-      var address = _jsroot_lib_excel__WEBPACK_IMPORTED_MODULE_0__["default"].getCellAddress({
-        c: 0,
-        r: TITLE_ROW_INDEX
-      });
-      this.worksheet[address] = {
-        t: "s",
-        v: this.title,
-        s: _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["titleCellStyle"]
-      };
-      this.mergeConfig.push({
-        s: {
-          r: TITLE_ROW_INDEX,
-          c: 0
-        },
-        e: {
-          r: TITLE_ROW_INDEX,
-          c: this.columnConfigs.length - 1
-        }
-      });
-    }
-  }, {
-    key: "_createHeader",
-    value: function _createHeader() {
-      var length = this.hasCustomerComm ? this.columnConfigs.length - MERGING_CUSTWL_COLUMN_COUNT + 1 : this.columnConfigs.length;
-
-      for (var i = 0; i < length; i++) {
-        if (this.hasCustomerComm) {
-          this._buildHeaderWithGroupingColumn(i);
-        } else {
-          var fieldName = this.columnConfigs[i].field;
-          var address = _jsroot_lib_excel__WEBPACK_IMPORTED_MODULE_0__["default"].getCellAddress({
-            c: i,
-            r: HEADER_ROW_INDEX
-          });
-          this.worksheet[address] = {
-            t: "s",
-            v: this.headerText[fieldName],
-            s: _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["headerCellStyle"]
-          };
-        }
-      }
-    }
-  }, {
-    key: "_buildHeaderWithGroupingColumn",
-    value: function _buildHeaderWithGroupingColumn(colIndex) {
-      var dataColIndex = colIndex > INDEX_CUSTWL_COLUMN ? colIndex + MERGING_CUSTWL_COLUMN_COUNT - 1 : colIndex;
-      var fieldName = this.columnConfigs[dataColIndex].field;
-      var text = this.headerText[fieldName];
-
-      if (fieldName === fields.WinLoss) {
-        this._buildColSpanColumn(HEADER_ROW_INDEX, dataColIndex, MERGING_CUSTWL_COLUMN_COUNT, this.headerText.CustomerWinLoss);
-      } else {
-        var address = _jsroot_lib_excel__WEBPACK_IMPORTED_MODULE_0__["default"].getCellAddress({
-          c: dataColIndex,
-          r: HEADER_ROW_INDEX
-        });
-        this.worksheet[address] = {
-          t: "s",
-          v: text,
-          s: _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["headerCellStyle"]
-        };
-        this.mergeConfig.push({
-          s: {
-            r: HEADER_ROW_INDEX,
-            c: dataColIndex
-          },
-          e: {
-            r: HEADER_ROW_INDEX + 1,
-            c: dataColIndex
-          }
-        });
-      }
-    }
-  }, {
-    key: "_buildColSpanColumn",
-    value: function _buildColSpanColumn(rowIndex, colIndex, colSpan, colSpanheaderText) {
-      var colSpanCellAddress = _jsroot_lib_excel__WEBPACK_IMPORTED_MODULE_0__["default"].getCellAddress({
-        c: colIndex,
-        r: rowIndex
-      });
-      this.worksheet[colSpanCellAddress] = {
-        t: "s",
-        v: colSpanheaderText,
-        s: _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["headerCellStyle"]
-      };
-      var totalColumn = colIndex + colSpan;
-      this.mergeConfig.push({
-        s: {
-          r: rowIndex,
-          c: colIndex
-        },
-        e: {
-          r: rowIndex,
-          c: totalColumn - 1
-        }
-      });
-
-      for (var i = colIndex; i < totalColumn; i++) {
-        var address = _jsroot_lib_excel__WEBPACK_IMPORTED_MODULE_0__["default"].getCellAddress({
-          c: i,
-          r: rowIndex + 1
-        });
-        var fieldName = this.columnConfigs[i].field;
-        this.worksheet[address] = {
-          t: "s",
-          v: this.headerText[fieldName] || '',
-          s: _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["headerCellStyle"]
-        };
-      }
-    }
-  }, {
-    key: "_createBodyData",
-    value: function _createBodyData() {
-      for (var i = 0; i < this.data.length; i++) {
-        var item = this.data[i];
-
-        for (var j = 0; j < this.columnConfigs.length; j++) {
-          var address = _jsroot_lib_excel__WEBPACK_IMPORTED_MODULE_0__["default"].getCellAddress({
-            c: j,
-            r: this.currentRowIndex
-          });
-          this.worksheet[address] = this._buildDataRow(item, MAIN_SECTION_STYLE, i, j);
-        }
-
-        this.currentRowIndex++;
-      }
-    }
-  }, {
-    key: "_buildDataRow",
-    value: function _buildDataRow(item, sectionStyleName, rowIndex, colIndex) {
-      var columnConfig = this.columnConfigs[colIndex];
-      var fieldName = columnConfig.field;
-      var value = colIndex === 0 ? rowIndex + 1 : item[fieldName];
-      return {
-        t: _jsroot_lib_excel__WEBPACK_IMPORTED_MODULE_0__["default"].getCellType(value),
-        v: value,
-        s: columnConfig[sectionStyleName]
-      };
-    }
-  }, {
-    key: "_createExcelConfig",
-    value: function _createExcelConfig() {
-      var cellStart = _jsroot_lib_excel__WEBPACK_IMPORTED_MODULE_0__["default"].getCellAddress({
-        r: 0,
-        c: 0
-      });
-      var cellEnd = _jsroot_lib_excel__WEBPACK_IMPORTED_MODULE_0__["default"].getCellAddress({
-        r: this.currentRowIndex,
-        c: this.columnConfigs.length
-      });
-      this.worksheet["!ref"] = "".concat(cellStart, ":").concat(cellEnd);
-      this.worksheet['!cols'] = this.columnConfigs.map(function (x) {
-        return {
-          wpx: x.width
-        };
-      });
-      this.worksheet["!merges"] = this.mergeConfig;
-    }
-  }, {
-    key: "_getcolumnConfigs",
-    value: function _getcolumnConfigs(hasCustomerComm, isAllowedBA) {
-      var _ref, _ref2, _ref3, _ref4, _columnConfig$push3, _columnConfig$push4;
-
-      var columnConfig = [(_ref = {
-        field: fields.Index
-      }, _defineProperty(_ref, MAIN_SECTION_STYLE, _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["bodyCellStyle"].center), _defineProperty(_ref, "width", 50), _ref), (_ref2 = {
-        field: fields.Turnover
-      }, _defineProperty(_ref2, MAIN_SECTION_STYLE, _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["bodyCellStyle"].decimal), _defineProperty(_ref2, "width", 150), _ref2), (_ref3 = {
-        field: fields.TotalTransaction
-      }, _defineProperty(_ref3, MAIN_SECTION_STYLE, _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["bodyCellStyle"].decimal), _defineProperty(_ref3, "width", 150), _ref3), (_ref4 = {
-        field: fields.WinLoss
-      }, _defineProperty(_ref4, MAIN_SECTION_STYLE, _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["bodyCellStyle"].decimal), _defineProperty(_ref4, "width", 150), _ref4)];
-
-      if (hasCustomerComm) {
-        var _columnConfig$push, _columnConfig$push2;
-
-        columnConfig.push((_columnConfig$push = {
-          field: fields.Comm
-        }, _defineProperty(_columnConfig$push, MAIN_SECTION_STYLE, _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["bodyCellStyle"].decimal), _defineProperty(_columnConfig$push, "width", 120), _columnConfig$push), (_columnConfig$push2 = {
-          field: fields.Total
-        }, _defineProperty(_columnConfig$push2, MAIN_SECTION_STYLE, _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["bodyCellStyle"].decimal), _defineProperty(_columnConfig$push2, "width", 150), _columnConfig$push2));
-      }
-
-      columnConfig.push((_columnConfig$push3 = {
-        field: fields.BetEffective
-      }, _defineProperty(_columnConfig$push3, MAIN_SECTION_STYLE, _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["bodyCellStyle"].decimal), _defineProperty(_columnConfig$push3, "width", 150), _columnConfig$push3), (_columnConfig$push4 = {
-        field: fields.LicenseeWL
-      }, _defineProperty(_columnConfig$push4, MAIN_SECTION_STYLE, _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["bodyCellStyle"].decimal), _defineProperty(_columnConfig$push4, "width", 150), _columnConfig$push4));
-
-      if (isAllowedBA) {
-        var _columnConfig$push5, _columnConfig$push6;
-
-        columnConfig.push((_columnConfig$push5 = {
-          field: fields.BAComm
-        }, _defineProperty(_columnConfig$push5, MAIN_SECTION_STYLE, _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["bodyCellStyle"].decimal), _defineProperty(_columnConfig$push5, "width", 120), _columnConfig$push5), (_columnConfig$push6 = {
-          field: fields.AmtDueToBA
-        }, _defineProperty(_columnConfig$push6, MAIN_SECTION_STYLE, _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["bodyCellStyle"].decimal), _defineProperty(_columnConfig$push6, "width", 120), _columnConfig$push6));
-      }
-
-      return columnConfig;
-    }
-  }]);
-
-  return ReportExcel;
-}();
-
-
 
 /***/ }),
 
@@ -1287,198 +819,6 @@ var debuggingConfig = {
 
 /***/ }),
 
-/***/ "./www/js/source/reactpages/constants/excelStyle.js":
-/*!**********************************************************!*\
-  !*** ./www/js/source/reactpages/constants/excelStyle.js ***!
-  \**********************************************************/
-/*! exports provided: titleCellStyle, headerCellStyle, bodyCellStyle, totalCellStyle, grandTotalCellStyle */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "titleCellStyle", function() { return titleCellStyle; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "headerCellStyle", function() { return headerCellStyle; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "bodyCellStyle", function() { return bodyCellStyle; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "totalCellStyle", function() { return totalCellStyle; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "grandTotalCellStyle", function() { return grandTotalCellStyle; });
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-var titleCellStyle = {
-  font: {
-    color: {
-      rgb: "FFFFFF"
-    }
-  },
-  fill: {
-    patternType: "solid",
-    fgColor: {
-      rgb: "4C6375"
-    }
-  }
-};
-var headerCellStyle = {
-  font: {
-    bold: true,
-    color: {
-      rgb: "2C2C2C"
-    },
-    sz: "12"
-  },
-  alignment: {
-    horizontal: "center",
-    vertical: "center"
-  },
-  fill: {
-    patternType: "solid",
-    fgColor: {
-      rgb: "9EB4C3"
-    }
-  },
-  border: {
-    left: {
-      style: "thin",
-      color: {
-        rgb: "D6D6D6"
-      }
-    },
-    bottom: {
-      style: "thin",
-      color: {
-        rgb: "D6D6D6"
-      }
-    }
-  }
-};
-var bodyTextStyle = {
-  alignment: {
-    vertical: "center"
-  }
-};
-var bodyDecimalStyle = {
-  numFmt: "#,##0.00"
-};
-var bodyCellStyle = {
-  rowspan: bodyTextStyle,
-  center: {
-    alignment: _objectSpread({}, bodyTextStyle.alignment, {
-      horizontal: "center"
-    })
-  },
-  left: {
-    alignment: _objectSpread({}, bodyTextStyle.alignment, {
-      horizontal: "left"
-    })
-  },
-  number: {
-    numFmt: "#,##0"
-  },
-  decimal: bodyDecimalStyle,
-  negativeDecimal: _objectSpread({}, bodyDecimalStyle, {
-    font: {
-      color: {
-        rgb: "FF0000"
-      }
-    }
-  }),
-  percent: {
-    numFmt: '#,##0.00%'
-  }
-};
-var totalTextStyle = {
-  font: {
-    bold: true
-  }
-};
-
-var totalDecimalStyle = _objectSpread({}, totalTextStyle, {
-  numFmt: "#,##0.00"
-});
-
-var totalCellStyle = {
-  default: totalTextStyle,
-  rowspan: _objectSpread({}, totalTextStyle, {
-    alignment: {
-      horizontal: "center",
-      vertical: "center"
-    }
-  }),
-  center: _objectSpread({}, totalTextStyle, {
-    alignment: {
-      vertical: "center",
-      horizontal: "center"
-    }
-  }),
-  number: _objectSpread({}, totalTextStyle, {
-    numFmt: "#,##0"
-  }),
-  decimal: totalDecimalStyle,
-  negativeDecimal: _objectSpread({}, totalDecimalStyle, {
-    font: {
-      bold: true,
-      color: {
-        rgb: "FF0000"
-      }
-    }
-  })
-};
-var grandTotalTextStyle = {
-  font: {
-    bold: true
-  },
-  fill: {
-    patternType: "solid",
-    fgColor: {
-      rgb: "B8C3C9"
-    }
-  },
-  border: {
-    left: {
-      style: "thin",
-      color: {
-        rgb: "D6D6D6"
-      }
-    }
-  }
-};
-
-var decimalGrandTotalStyle = _objectSpread({}, grandTotalTextStyle, {
-  numFmt: "#,##0.00"
-});
-
-var grandTotalCellStyle = {
-  default: grandTotalTextStyle,
-  rowspan: _objectSpread({}, grandTotalTextStyle, {
-    alignment: {
-      horizontal: "center",
-      vertical: "center"
-    }
-  }),
-  center: _objectSpread({}, grandTotalTextStyle, {
-    alignment: {
-      horizontal: "center"
-    }
-  }),
-  number: _objectSpread({}, grandTotalTextStyle, {
-    numFmt: "#,##0"
-  }),
-  decimal: decimalGrandTotalStyle,
-  negativeDecimal: _objectSpread({}, decimalGrandTotalStyle, {
-    font: {
-      bold: true,
-      color: {
-        rgb: "FF0000"
-      }
-    }
-  }),
-  percent: _objectSpread({}, grandTotalTextStyle, {
-    numFmt: "#,##0.00%"
-  })
-};
-
-/***/ }),
-
 /***/ "./www/js/source/reactpages/layouts/AppLayout.jsx":
 /*!********************************************************!*\
   !*** ./www/js/source/reactpages/layouts/AppLayout.jsx ***!
@@ -1640,127 +980,6 @@ function createReducer(initialState, handlers) {
     }
   };
 }
-
-/***/ }),
-
-/***/ "./www/js/source/reactpages/lib/excel.js":
-/*!***********************************************!*\
-  !*** ./www/js/source/reactpages/lib/excel.js ***!
-  \***********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Excel; });
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var EXCEL_TYPE = "xlsx";
-var MapExcelType = {
-  "number": "n",
-  "string": "s",
-  "boolean": "b",
-  "object": "d"
-};
-var _XLSX = null;
-
-var Excel =
-/*#__PURE__*/
-function () {
-  function Excel() {
-    _classCallCheck(this, Excel);
-  }
-
-  _createClass(Excel, null, [{
-    key: "process",
-    value: function process(callback) {
-      if (window.XLSX) {
-        _XLSX = window.XLSX;
-        callback && callback();
-      } else {
-        Promise.all(/*! import() | xlsx-style-sparta */[__webpack_require__.e("common"), __webpack_require__.e("xlsx-style-sparta")]).then(__webpack_require__.t.bind(null, /*! xlsx-style-sparta */ "./node_modules/xlsx-style-sparta/xlsx.js", 7)).then(function (XLSX) {
-          _XLSX = XLSX;
-          callback && callback();
-        });
-      }
-    }
-  }, {
-    key: "export",
-    value: function _export(worksheet, fileName) {
-      var option = {
-        bookType: EXCEL_TYPE,
-        bookSST: false,
-        type: 'binary'
-      };
-      var workbook = {
-        SheetNames: [fileName],
-        Sheets: {},
-        Props: {}
-      };
-      workbook.Sheets[fileName] = worksheet;
-
-      var workbookOutput = _XLSX.write(workbook, option);
-
-      this.download(workbookOutput, fileName);
-    }
-  }, {
-    key: "getCellType",
-    value: function getCellType(value) {
-      return MapExcelType[_typeof(value)];
-    }
-  }, {
-    key: "getCellAddress",
-    value: function getCellAddress(cellObject) {
-      return _XLSX.utils.encode_cell(cellObject);
-    }
-  }, {
-    key: "download",
-    value: function download(workbookOut, fileName) {
-      var blob = new Blob([this.sheetToArrayBuffer(workbookOut)], {
-        type: "application/octet-stream"
-      });
-      this.downloadFromBolb(blob, fileName);
-    }
-  }, {
-    key: "downloadFromBolb",
-    value: function downloadFromBolb(blob, fileName) {
-      var fileNameDownload = "".concat(fileName, ".").concat(EXCEL_TYPE); // IE 10+
-
-      if (typeof navigator !== "undefined" && navigator.msSaveOrOpenBlob) {
-        navigator.msSaveOrOpenBlob(blob, fileNameDownload);
-      } else {
-        var element = window.document.createElement('a');
-        element.href = window.URL.createObjectURL(blob);
-        element.download = fileNameDownload;
-        document.body.appendChild(element);
-        element.click();
-        document.body.removeChild(element);
-      }
-    }
-  }, {
-    key: "sheetToArrayBuffer",
-    value: function sheetToArrayBuffer(s) {
-      var buffer = new ArrayBuffer(s.length);
-      var view = new Uint8Array(buffer);
-
-      for (var i = 0; i != s.length; ++i) {
-        view[i] = s.charCodeAt(i) & 0xFF;
-      }
-
-      return buffer;
-    }
-  }]);
-
-  return Excel;
-}();
-
-
 
 /***/ }),
 

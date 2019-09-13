@@ -664,7 +664,7 @@ body {
       color: rgba(0, 0, 0, 0.26);
       border-bottom: 1px dotted rgba(0, 0, 0, 0.26); }
 
-.checkbox-group {
+.checkbox-group, .pa-betlimit-group {
   margin-bottom: 10px; }
 
 .pa-betlimit-button {
@@ -676,4 +676,7 @@ body {
 
 .popup-content {
   padding-top: 10px !important; }
+
+.disabled-text {
+  color: rgba(0, 0, 0, 0.26) !important; }
 

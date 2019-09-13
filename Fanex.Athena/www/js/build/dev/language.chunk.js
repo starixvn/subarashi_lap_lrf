@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 8/30/2019 9:36:47 AM
+﻿// Generated at: 9/11/2019 12:52:00 PM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -283,6 +283,7 @@ DD:"DD",
 Dec:"Dec",
 December:"December",
 DecimalOdds:"decimal odds",
+DeepLink:"Deep Link",
 DefaultGroup:"Default Group",
 DefaultGroupMsg:"This is the default group. Do you want to proceed?",
 Delete:"Delete",
@@ -592,7 +593,7 @@ PersonalMessage:"Personal Message",
 Platform:"Platform",
 PlatformWinLoss:"Platform Win Loss",
 PlatformWinLossTitle:"Platform Win Loss - {0} --&gt; {1} - {2} - {3} - {4}",
-PlayerAdminInvalidDataErrMsg:"Invalid parameter. Invalid custId.",
+Player:"Player",
 PlayerAdminUpdateFailedMsg:"Please try again!",
 PreGame:"Pre Game",
 Prev:"Prev",

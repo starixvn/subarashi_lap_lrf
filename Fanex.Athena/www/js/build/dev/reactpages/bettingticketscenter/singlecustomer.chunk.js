@@ -642,10 +642,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var NoDataTitle = function NoDataTitle() {
+var NoDataTitle = function NoDataTitle(_ref) {
+  var title = _ref.title;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    className: "no-info-row center-align"
-  }, _lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("NoInfo"));
+    className: "no-info-row center-align",
+    dangerouslySetInnerHTML: {
+      __html: title ? title : _lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("NoInfo")
+    }
+  });
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (NoDataTitle);

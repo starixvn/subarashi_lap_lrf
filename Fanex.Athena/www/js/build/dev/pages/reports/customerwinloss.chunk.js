@@ -6464,8 +6464,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             }
 
             const gridOption = CustomerWinLossOption.getGridOption(response.TotalRows);
-            gridOption.rowNum = response.Data.length;
-            gridOption.data = response.Data;
+            gridOption.rowNum = response.DataList.length;
+            gridOption.data = response.DataList;
             gridOption.onSortCol = function (index) {
                 sort(index);
                 return 'stop';
@@ -6529,7 +6529,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 _submitData.FromDate,
                 _submitData.ToDate,
                 Site.getSingleResource('Viewin').replace('{0}',
-                _submitData.BaseCurrency === '' ? _submitData.CurrencyName : _submitData.BaseCurrency.toUpperCase()),
+                    _submitData.BaseCurrency === '' ? _submitData.CurrencyName : _submitData.BaseCurrency.toUpperCase()),
                 licenseeWLNote === '' ? '' : ', ' + licenseeWLNote,
                 tempUserName);
 
@@ -6640,7 +6640,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             param.PageSize = _pagingOption.pagesize;
             param.OrderItem = _orderItem;
             param.IsAscSort = _sortOrder === 'asc';
-            
+
             if (param.Username === undefined) {
                 param.Username = '';
             }
@@ -6687,15 +6687,15 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         'use strict';
 
         const indexColumn =
-    {
-        name: 'Index',
-        index: 'Index',
-        resizable: false,
-        width: 40,
-        align: 'center',
-        valign: 'middle',
-        sortable: false
-    };
+        {
+            name: 'Index',
+            index: 'Index',
+            resizable: false,
+            width: 40,
+            align: 'center',
+            valign: 'middle',
+            sortable: false
+        };
 
         const externalIdColumn =
         {
@@ -6759,15 +6759,15 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         };
 
         const customerWlColumn =
-       {
-           name: 'CustomerWL',
-           index: 'CustomerWL',
-           width: 90,
-           align: 'right',
-           sortable: true,
-           resizable: false,
-           formatter: jqGridAdditional.formatDecimal
-       };
+        {
+            name: 'CustomerWL',
+            index: 'CustomerWL',
+            width: 90,
+            align: 'right',
+            sortable: true,
+            resizable: false,
+            formatter: jqGridAdditional.formatDecimal
+        };
 
         const playerCommColumn =
         {
@@ -6869,8 +6869,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
         const _me =
         {
-            urlData: 'api/CustomerWinLossReport/Index',
-            urlExcelData: 'api/CustomerWinLossReport/Index',
+            urlData: 'CustomerWinLossReport/Index',
+            urlExcelData: 'CustomerWinLossReport/Index',
             urlPromotionPrizeExcelData: 'api/PromotionPrizeReport/ExportExcel',
             hasCustomerComm: true,
             isAllowBA: true,
@@ -6907,17 +6907,17 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
             setGroupHeaderColumns: function (grid) {
                 const groupCustomerWinloss = _me.hasCustomerComm ?
-                {
-                    startColumnName: 'CustomerWL',
-                    numberOfColumns: 3,
-                    titleText: Site.getSingleResource('CustomerW_L')
-                } : {};
+                    {
+                        startColumnName: 'CustomerWL',
+                        numberOfColumns: 3,
+                        titleText: Site.getSingleResource('CustomerW_L')
+                    } : {};
 
                 grid.jqGrid('setGroupHeaders',
-                {
-                    useColSpanStyle: true,
-                    groupHeaders: [groupCustomerWinloss]
-                });
+                    {
+                        useColSpanStyle: true,
+                        groupHeaders: [groupCustomerWinloss]
+                    });
             },
 
             getColName: function () {

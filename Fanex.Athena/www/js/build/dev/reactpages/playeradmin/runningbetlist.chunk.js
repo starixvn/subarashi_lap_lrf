@@ -410,9 +410,6 @@ function (_Component) {
       total: null,
       totalRows: 0
     };
-
-    _this._getData(_this.props.requestParam);
-
     return _this;
   }
 
@@ -422,6 +419,11 @@ function (_Component) {
       if (prevProps.requestParam.TimeStamp !== this.props.requestParam.TimeStamp) {
         this._getData(this.props.requestParam);
       }
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this._getData(this.props.requestParam);
     }
   }, {
     key: "_updateState",
@@ -456,7 +458,7 @@ function (_Component) {
         PageIndex: requestParam.PageIndex,
         PageSize: requestParam.PageSize,
         TotalItem: totalRows,
-        PageList: [50, 100, 200, 300, 400, 500]
+        PageList: [50, 100, 200, 300, 400, 500, 1000, 200]
       };
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_betlist_BetListDataGrid__WEBPACK_IMPORTED_MODULE_4__["default"], {
         isPaging: true,
@@ -697,6 +699,7 @@ var HeaderText = {
   Status: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("Status"),
   Live: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("Live")
 };
+var DataApi = "PlayerBetList/GetRunningBetList";
 
 var Service =
 /*#__PURE__*/
@@ -728,8 +731,11 @@ function () {
   }, {
     key: "export",
     value: function _export(param, callback) {
-      var url = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl("PlayerBetList/ExportRunningBetList");
-      _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_2__["default"].getFile(url, param).then(function (response) {
+      var url = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl(DataApi);
+      var exportParam = Object.assign({}, param, {
+        IsExport: true
+      });
+      _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_2__["default"].getFile(url, exportParam).then(function (response) {
         var NoContentStatusCode = 204;
 
         if (response.status === NoContentStatusCode) {
@@ -744,7 +750,7 @@ function () {
   }, {
     key: "getData",
     value: function getData(param, processDataFunc, successCallBack, errorHandle) {
-      var url = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl("PlayerBetList/GetRunningBetList");
+      var url = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl(DataApi);
       _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_2__["default"].postData(url, param).then(function (response) {
         var result = response.data;
         var data = result.Data;
@@ -946,10 +952,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var NoDataTitle = function NoDataTitle() {
+var NoDataTitle = function NoDataTitle(_ref) {
+  var title = _ref.title;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    className: "no-info-row center-align"
-  }, _lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("NoInfo"));
+    className: "no-info-row center-align",
+    dangerouslySetInnerHTML: {
+      __html: title ? title : _lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("NoInfo")
+    }
+  });
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (NoDataTitle);

@@ -226,10 +226,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _FormFilter__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./FormFilter */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/FormFilter.jsx");
 /* harmony import */ var _DataContent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./DataContent */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/DataContent.jsx");
 /* harmony import */ var _jsroot_components_Loader__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/components/Loader */ "./www/js/source/reactpages/components/Loader.jsx");
-/* harmony import */ var _lib_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../lib/service */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/service.js");
-/* harmony import */ var _jsroot_components_sweet_alert__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/components/sweet-alert */ "./www/js/source/reactpages/components/sweet-alert/index.jsx");
+/* harmony import */ var _jsroot_components_sweet_alert__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/components/sweet-alert */ "./www/js/source/reactpages/components/sweet-alert/index.jsx");
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
 
 
 
@@ -241,7 +239,7 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 var AppContainer = function AppContainer(props) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_2__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Loader__WEBPACK_IMPORTED_MODULE_5__["default"], {
     isLoading: props.isLoading
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormFilter__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DataContent__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_sweet_alert__WEBPACK_IMPORTED_MODULE_7__["default"], _extends({
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormFilter__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DataContent__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_sweet_alert__WEBPACK_IMPORTED_MODULE_6__["default"], _extends({
     width: 450,
     isHtml: false
   }, props.alertOption)));
@@ -274,12 +272,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/actions/index.js");
-/* harmony import */ var _lib_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../lib/service */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/service.js");
-/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/constants.js");
-/* harmony import */ var _grid_Base_SettingContent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./grid/Base/SettingContent */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/Base/SettingContent.jsx");
-/* harmony import */ var _grid_SportSetting_SettingGrid__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./grid/SportSetting/SettingGrid */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/SportSetting/SettingGrid.jsx");
-/* harmony import */ var _grid_GameSetting_SettingGrid__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./grid/GameSetting/SettingGrid */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/GameSetting/SettingGrid.jsx");
-var _DataGrid;
+/* harmony import */ var _lib_dataHandling__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../lib/dataHandling */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/dataHandling.js");
+/* harmony import */ var _lib_ngDataHandling__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../lib/ngDataHandling */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/ngDataHandling.js");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/constants.js");
+/* harmony import */ var _grid_Base_SettingContent__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./grid/Base/SettingContent */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/Base/SettingContent.jsx");
+/* harmony import */ var _grid_SportSetting_SettingGrid__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./grid/SportSetting/SettingGrid */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/SportSetting/SettingGrid.jsx");
+/* harmony import */ var _grid_GameSetting_SettingGrid__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./grid/GameSetting/SettingGrid */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/GameSetting/SettingGrid.jsx");
+/* harmony import */ var _grid_SportSetting_NGSettingGrid__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./grid/SportSetting/NGSettingGrid */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/SportSetting/NGSettingGrid.jsx");
+/* harmony import */ var _grid_SportSetting_AGCSettingContent__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./grid/SportSetting/AGCSettingContent */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/SportSetting/AGCSettingContent.jsx");
+var _Setting;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -292,12 +293,43 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var DataGrid = (_DataGrid = {}, _defineProperty(_DataGrid, _lib_constants__WEBPACK_IMPORTED_MODULE_5__["BetLimitProduct"].SB, _grid_SportSetting_SettingGrid__WEBPACK_IMPORTED_MODULE_7__["default"]), _defineProperty(_DataGrid, _lib_constants__WEBPACK_IMPORTED_MODULE_5__["BetLimitProduct"].VS, _grid_SportSetting_SettingGrid__WEBPACK_IMPORTED_MODULE_7__["default"]), _defineProperty(_DataGrid, _lib_constants__WEBPACK_IMPORTED_MODULE_5__["BetLimitProduct"].VS2, _grid_SportSetting_SettingGrid__WEBPACK_IMPORTED_MODULE_7__["default"]), _defineProperty(_DataGrid, _lib_constants__WEBPACK_IMPORTED_MODULE_5__["BetLimitProduct"].LT, _grid_GameSetting_SettingGrid__WEBPACK_IMPORTED_MODULE_8__["default"]), _defineProperty(_DataGrid, _lib_constants__WEBPACK_IMPORTED_MODULE_5__["BetLimitProduct"].NG, _grid_SportSetting_SettingGrid__WEBPACK_IMPORTED_MODULE_7__["default"]), _defineProperty(_DataGrid, _lib_constants__WEBPACK_IMPORTED_MODULE_5__["BetLimitProduct"].KN, _grid_GameSetting_SettingGrid__WEBPACK_IMPORTED_MODULE_8__["default"]), _DataGrid);
+
+
+
+var Setting = (_Setting = {}, _defineProperty(_Setting, _lib_constants__WEBPACK_IMPORTED_MODULE_6__["BetLimitProduct"].SB, {
+  Grid: _grid_SportSetting_SettingGrid__WEBPACK_IMPORTED_MODULE_8__["default"],
+  Handling: _lib_dataHandling__WEBPACK_IMPORTED_MODULE_4__["default"]
+}), _defineProperty(_Setting, _lib_constants__WEBPACK_IMPORTED_MODULE_6__["BetLimitProduct"].VS, {
+  Grid: _grid_SportSetting_SettingGrid__WEBPACK_IMPORTED_MODULE_8__["default"],
+  Handling: _lib_dataHandling__WEBPACK_IMPORTED_MODULE_4__["default"]
+}), _defineProperty(_Setting, _lib_constants__WEBPACK_IMPORTED_MODULE_6__["BetLimitProduct"].VS2, {
+  Grid: _grid_SportSetting_SettingGrid__WEBPACK_IMPORTED_MODULE_8__["default"],
+  Handling: _lib_dataHandling__WEBPACK_IMPORTED_MODULE_4__["default"]
+}), _defineProperty(_Setting, _lib_constants__WEBPACK_IMPORTED_MODULE_6__["BetLimitProduct"].LT, {
+  Grid: _grid_GameSetting_SettingGrid__WEBPACK_IMPORTED_MODULE_9__["default"],
+  Handling: _lib_dataHandling__WEBPACK_IMPORTED_MODULE_4__["default"]
+}), _defineProperty(_Setting, _lib_constants__WEBPACK_IMPORTED_MODULE_6__["BetLimitProduct"].NG, {
+  Grid: _grid_SportSetting_NGSettingGrid__WEBPACK_IMPORTED_MODULE_10__["default"],
+  Handling: _lib_ngDataHandling__WEBPACK_IMPORTED_MODULE_5__["default"]
+}), _defineProperty(_Setting, _lib_constants__WEBPACK_IMPORTED_MODULE_6__["BetLimitProduct"].KN, {
+  Grid: _grid_GameSetting_SettingGrid__WEBPACK_IMPORTED_MODULE_9__["default"],
+  Handling: _lib_dataHandling__WEBPACK_IMPORTED_MODULE_4__["default"]
+}), _Setting);
 
 var DataContent = function DataContent(props) {
   var ProductId = props.requestParam.ProductId;
-  var Setting = Object(_grid_Base_SettingContent__WEBPACK_IMPORTED_MODULE_6__["default"])(DataGrid[props.requestParam.ProductId], _lib_service__WEBPACK_IMPORTED_MODULE_4__["default"]);
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Setting, null);
+  var Content = '';
+
+  if (ProductId === _lib_constants__WEBPACK_IMPORTED_MODULE_6__["BetLimitProduct"].AGC) {
+    Content = _grid_SportSetting_AGCSettingContent__WEBPACK_IMPORTED_MODULE_11__["default"];
+  } else {
+    var _Setting$ProductId = Setting[ProductId],
+        Grid = _Setting$ProductId.Grid,
+        Handling = _Setting$ProductId.Handling;
+    Content = Object(_grid_Base_SettingContent__WEBPACK_IMPORTED_MODULE_7__["default"])(Grid, Handling);
+  }
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Content, null);
 };
 
 function mapStateToProps(state) {
@@ -374,7 +406,7 @@ var FormFilter = function FormFilter(props) {
     className: "form-group"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
     className: "label-text"
-  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource("Product")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Product')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_6__["default"], {
     instanceId: "ddlProduct",
     value: productId,
     options: productList,
@@ -417,9 +449,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../actions/index */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/actions/index.js");
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var _jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/components/NoDataTitle */ "./www/js/source/reactpages/components/NoDataTitle.jsx");
-/* harmony import */ var _lib_utility__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../lib/utility */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/utility.js");
-/* harmony import */ var _jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/components/CheckBox */ "./www/js/source/reactpages/components/CheckBox.jsx");
-/* harmony import */ var _jsroot_components_Balloon__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @jsroot/components/Balloon */ "./www/js/source/reactpages/components/Balloon.jsx");
+/* harmony import */ var _lib_dataTransfer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../lib/dataTransfer */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/dataTransfer.js");
+/* harmony import */ var _lib_utility__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../lib/utility */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/utility.js");
+/* harmony import */ var _jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @jsroot/components/CheckBox */ "./www/js/source/reactpages/components/CheckBox.jsx");
+/* harmony import */ var _jsroot_components_Balloon__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @jsroot/components/Balloon */ "./www/js/source/reactpages/components/Balloon.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
@@ -454,7 +487,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var SettingContent = function SettingContent(Grid, Service) {
+
+var SettingContent = function SettingContent(Grid, DataHandling) {
   var _temp;
 
   return _temp =
@@ -495,7 +529,7 @@ var SettingContent = function SettingContent(Grid, Service) {
       _defineProperty(_assertThisInitialized(_this), "onReset", function (e) {
         e.preventDefault();
 
-        if (e.button === 0 || e.which === 1) {
+        if (!_this.state.disabledButton || e.button === 0 || e.which === 1) {
           _this.setState({
             isCopy: false
           }, function () {
@@ -512,12 +546,11 @@ var SettingContent = function SettingContent(Grid, Service) {
 
       _defineProperty(_assertThisInitialized(_this), "onSubmit", function (e) {
         e.preventDefault();
-        e.nativeEvent.stopImmediatePropagation();
 
-        if (e.button === 0 || e.which === 1) {
+        if (!_this.state.disabledButton && (e.button === 0 || e.which === 1)) {
           if (!_this.state.showError) {
             var data = _this.state.data;
-            var submitData = Service.getSubmitData(data);
+            var submitData = DataHandling.getSubmitData(data);
 
             if (!submitData.IsValid) {
               _this._showError(submitData.Data);
@@ -545,7 +578,7 @@ var SettingContent = function SettingContent(Grid, Service) {
           var copyRow = data.find(function (e) {
             return e.Id === setting.CopyId;
           });
-          var invalidData = Service.validate(copyRow);
+          var invalidData = DataHandling.validate(copyRow);
 
           if (invalidData !== null) {
             _this._showError(invalidData);
@@ -576,7 +609,7 @@ var SettingContent = function SettingContent(Grid, Service) {
 
       _defineProperty(_assertThisInitialized(_this), "onCloseAlert", function () {
         _this.setState({
-          disableButton: false
+          disabledButton: false
         }, function () {
           return _this.props.setAlertOption({
             isShow: false
@@ -585,16 +618,11 @@ var SettingContent = function SettingContent(Grid, Service) {
       });
 
       _defineProperty(_assertThisInitialized(_this), "onRefresh", function () {
-        _this.setState({
-          disableButton: false,
-          isCopy: false
-        }, function () {
-          _this.props.setAlertOption({
-            isShow: false
-          });
-
-          _this._getData(_this.props.requestParam);
+        _this.props.setAlertOption({
+          isShow: false
         });
+
+        _this._getData(_this.props.requestParam);
       });
 
       _this.state = {
@@ -613,9 +641,6 @@ var SettingContent = function SettingContent(Grid, Service) {
           targetLeft: 0
         }
       };
-
-      _this._getData(props.requestParam);
-
       _this.ref = {};
       _this.checkBoxRef = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
       _this.errorRef = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
@@ -632,10 +657,6 @@ var SettingContent = function SettingContent(Grid, Service) {
           this.props.toggleLoader(false);
         }
 
-        if (prevProps.requestParam !== this.props.requestParam) {
-          this._getData(this.props.requestParam);
-        }
-
         if (prevState.showError !== this.state.showError) {
           window.setTimeout(function () {
             if (_this2.state.showError) {
@@ -650,6 +671,11 @@ var SettingContent = function SettingContent(Grid, Service) {
       key: "componentWillUnmount",
       value: function componentWillUnmount() {
         this._unRegisterEvents();
+      }
+    }, {
+      key: "componentDidMount",
+      value: function componentDidMount() {
+        this._getData(this.props.requestParam);
       }
     }, {
       key: "_registerEvents",
@@ -673,14 +699,14 @@ var SettingContent = function SettingContent(Grid, Service) {
         var param = Object.assign({}, _objectSpread({}, this.props.requestParam), {
           Setting: data
         });
-        Service.updateData(param, this._showSubmitResult.bind(this), function () {
+        _lib_dataTransfer__WEBPACK_IMPORTED_MODULE_6__["default"].updateData(param, this._showSubmitResult.bind(this), function () {
           return _this3.props.toggleLoader(false);
         }, this._handleError.bind(this));
       }
     }, {
       key: "_handleError",
       value: function _handleError() {
-        _lib_utility__WEBPACK_IMPORTED_MODULE_6__["default"].showErrorMsg();
+        _lib_utility__WEBPACK_IMPORTED_MODULE_7__["default"].showErrorMsg();
         this.props.toggleLoader(false);
       }
     }, {
@@ -699,9 +725,9 @@ var SettingContent = function SettingContent(Grid, Service) {
         }];
         var msg = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
           className: "center-align"
-        }, _lib_utility__WEBPACK_IMPORTED_MODULE_6__["default"].getConfirmationMsg(this.props.requestParam.ProductId));
+        }, _lib_utility__WEBPACK_IMPORTED_MODULE_7__["default"].getConfirmationMsg(this.props.requestParam.ProductId));
         this.setState({
-          disableButton: true
+          disabledButton: true
         }, function () {
           return _this4.props.setAlertOption({
             isShow: true,
@@ -723,7 +749,7 @@ var SettingContent = function SettingContent(Grid, Service) {
           className: "center-align"
         }, msg);
         this.setState({
-          disableButton: true
+          disabledButton: true
         }, function () {
           return _this5.props.setAlertOption({
             isShow: true,
@@ -760,8 +786,11 @@ var SettingContent = function SettingContent(Grid, Service) {
       value: function _updateState(data, setting) {
         this.setState(function (state) {
           return {
-            data: data,
-            setting: Object.assign({}, state.setting, setting)
+            data: DataHandling.getViewData(data),
+            setting: Object.assign({}, state.setting, setting),
+            disableButton: false,
+            isCopy: false,
+            showError: false
           };
         });
       }
@@ -769,7 +798,7 @@ var SettingContent = function SettingContent(Grid, Service) {
       key: "_getData",
       value: function _getData(param) {
         this.props.toggleLoader(true);
-        Service.getData(param, this._updateState.bind(this), null, this._handleError.bind(this));
+        _lib_dataTransfer__WEBPACK_IMPORTED_MODULE_6__["default"].getData(param, this._updateState.bind(this), null, this._handleError.bind(this));
       }
     }, {
       key: "render",
@@ -782,13 +811,13 @@ var SettingContent = function SettingContent(Grid, Service) {
 
         var _this$state2 = this.state,
             setting = _this$state2.setting,
-            disableButton = _this$state2.disableButton,
+            disabledButton = _this$state2.disabledButton,
             showError = _this$state2.showError,
             errorBalloon = _this$state2.errorBalloon,
             isCopy = _this$state2.isCopy;
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "pa-betlimit"
-        }, setting.EnableCopy && setting.Editable && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        }, setting.EnableCopy && setting.Editable && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_8__["default"], {
           id: "IsCopy",
           checked: isCopy,
           onChange: this.onCheck,
@@ -805,15 +834,15 @@ var SettingContent = function SettingContent(Grid, Service) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           type: "button",
           className: "btn btn-cancel",
-          disabled: disableButton,
+          disabled: disabledButton,
           onMouseDown: this.onReset
         }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Reset')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           type: "button",
           className: "btn btn-apply",
-          disabled: disableButton,
+          disabled: disabledButton,
           onMouseDown: this.onSubmit,
           ref: this.submitButtonRef
-        }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Submit'))), setting.Editable && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Balloon__WEBPACK_IMPORTED_MODULE_8__["default"], _extends({
+        }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Submit'))), setting.Editable && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Balloon__WEBPACK_IMPORTED_MODULE_9__["default"], _extends({
           width: 140,
           isOpen: showError,
           ref: this.errorRef
@@ -851,23 +880,6 @@ var createSetting = Object(redux__WEBPACK_IMPORTED_MODULE_2__["compose"])(Object
 /*!**********************************************************************************************************!*\
   !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/GameSetting/SettingGrid.jsx ***!
   \**********************************************************************************************************/
-/*! exports provided: GameSettingGrid, default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GameSettingGrid", function() { return GameSettingGrid; });
-var GameSettingGrid = function GameSettingGrid(props) {
-  return React.createElement("div", null, "GameSettingGrid");
-};
-/* harmony default export */ __webpack_exports__["default"] = (GameSettingGrid);
-
-/***/ }),
-
-/***/ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/SportSetting/SettingGrid.jsx":
-/*!***********************************************************************************************************!*\
-  !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/SportSetting/SettingGrid.jsx ***!
-  \***********************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -968,11 +980,641 @@ var SettingGrid = function SettingGrid(props) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, rows);
   };
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "pa-betlimit-grid"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
     className: "table"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('Sport')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('MinBet')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('MaxBet')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('MaxPerMatch')))), buildBody(setting.Editable, isCopy, data, setting.CopyId))));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('GameType')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('MinBet')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('MaxBet')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('MaxBetPerDraw')))), buildBody(setting.Editable, isCopy, data, setting.CopyId)));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(SettingGrid));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/SportSetting/AGCSettingContent.jsx":
+/*!*****************************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/SportSetting/AGCSettingContent.jsx ***!
+  \*****************************************************************************************************************/
+/*! exports provided: AGCSettingContent, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AGCSettingContent", function() { return AGCSettingContent; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../actions/index.js */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/actions/index.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _lib_utility__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../lib/utility */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/utility.js");
+/* harmony import */ var _lib_dataTransfer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../lib/dataTransfer */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/dataTransfer.js");
+/* harmony import */ var react_select__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-select */ "./node_modules/react-select/dist/react-select.es.js");
+/* harmony import */ var _AGCSettingGrid__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./AGCSettingGrid */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/SportSetting/AGCSettingGrid.jsx");
+/* harmony import */ var _jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @jsroot/components/NoDataTitle */ "./www/js/source/reactpages/components/NoDataTitle.jsx");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+
+
+
+
+
+var AGCSettingContent =
+/*#__PURE__*/
+function (_PureComponent) {
+  _inherits(AGCSettingContent, _PureComponent);
+
+  function AGCSettingContent(props) {
+    var _this;
+
+    _classCallCheck(this, AGCSettingContent);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(AGCSettingContent).call(this, props));
+
+    _defineProperty(_assertThisInitialized(_this), "onGroupChange", function (item) {
+      if (_this.state.selectedGroup !== item.value) {
+        var _this$state = _this.state,
+            selectedGroup = _this$state.selectedGroup,
+            data = _this$state.data;
+
+        var disabledButton = _this._isDisabledButton(data, item.value);
+
+        _this.setState({
+          selectedGroup: item.value,
+          disabledButton: disabledButton
+        });
+      }
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "onReset", function () {
+      _this._getData(_this.props.requestParam);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "onSubmit", function () {
+      var _this$state2 = _this.state,
+          selectedGroup = _this$state2.selectedGroup,
+          data = _this$state2.data;
+
+      var invalid = _this._isDisabledButton(data, selectedGroup);
+
+      if (invalid) {
+        _this.setState({
+          disabledButton: true
+        });
+      } else {
+        _this._showConfirmation(function () {
+          return _this._submit(selectedGroup);
+        });
+      }
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "onCloseAlert", function () {
+      _this.setState({
+        disabledButton: false
+      }, function () {
+        return _this.props.setAlertOption({
+          isShow: false
+        });
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "onRefresh", function () {
+      _this.props.setAlertOption({
+        isShow: false
+      });
+
+      _this._getData(_this.props.requestParam);
+    });
+
+    _this.state = {
+      data: null,
+      setting: {},
+      groups: [],
+      selectedGroup: '',
+      disabledButton: false
+    };
+    return _this;
+  }
+
+  _createClass(AGCSettingContent, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps, prevState) {
+      if (prevState.data !== this.state.data) {
+        this.props.toggleLoader(false);
+      }
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this._getData(this.props.requestParam);
+    }
+  }, {
+    key: "_isDisabledButton",
+    value: function _isDisabledButton(data, selectedGroup) {
+      if (!selectedGroup) {
+        return true;
+      }
+
+      var gamesHaveGroup = data.filter(function (x) {
+        return x.Groups.find(function (g) {
+          return g.GroupType === selectedGroup;
+        });
+      });
+      return !gamesHaveGroup || gamesHaveGroup.length !== data.length;
+    }
+  }, {
+    key: "_handleError",
+    value: function _handleError() {
+      _lib_utility__WEBPACK_IMPORTED_MODULE_5__["default"].showErrorMsg();
+      this.props.toggleLoader(false);
+    }
+  }, {
+    key: "_updateState",
+    value: function _updateState(data, setting) {
+      if (setting.BetSetting) {
+        var groups = setting.BetSetting ? setting.BetSetting.CheckedGroups.map(function (x) {
+          return {
+            value: x,
+            label: x
+          };
+        }) : [];
+
+        var disabledButton = this._isDisabledButton(data, setting.BetSetting.AgGroup);
+
+        this.setState({
+          data: data,
+          setting: setting,
+          groups: groups,
+          selectedGroup: setting.BetSetting.AgGroup,
+          disabledButton: disabledButton
+        });
+      }
+    }
+  }, {
+    key: "_getData",
+    value: function _getData(param) {
+      this.props.toggleLoader(true);
+      _lib_dataTransfer__WEBPACK_IMPORTED_MODULE_6__["default"].getData(param, this._updateState.bind(this), null, this._handleError.bind(this));
+    }
+  }, {
+    key: "_submit",
+    value: function _submit(group) {
+      var _this2 = this;
+
+      this.props.toggleLoader(true);
+      var requestParam = this.props.requestParam;
+      var param = Object.assign({}, _objectSpread({}, this.props.requestParam), {
+        Setting: [group]
+      });
+      _lib_dataTransfer__WEBPACK_IMPORTED_MODULE_6__["default"].updateData(param, this._showSubmitResult.bind(this), function () {
+        return _this2.props.toggleLoader(false);
+      }, this._handleError.bind(this));
+    }
+  }, {
+    key: "_showConfirmation",
+    value: function _showConfirmation(onOK) {
+      var _this3 = this;
+
+      var onClose = function onClose() {
+        return _this3.onCloseAlert(false);
+      };
+
+      var buttons = [{
+        text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('OK'),
+        onClick: onOK,
+        className: 'btn btn-apply'
+      }, {
+        text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Cancel'),
+        onClick: onClose,
+        className: 'btn btn-cancel'
+      }];
+      var msg = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "center-align"
+      }, _lib_utility__WEBPACK_IMPORTED_MODULE_5__["default"].getConfirmationMsg(this.props.requestParam.ProductId));
+      this.setState({
+        disabledButton: true
+      }, function () {
+        return _this3.props.setAlertOption({
+          isShow: true,
+          title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Confirmation'),
+          children: msg,
+          buttons: buttons,
+          icon: '',
+          onClose: onClose,
+          height: 130
+        });
+      });
+    }
+  }, {
+    key: "_showSubmitResult",
+    value: function _showSubmitResult(title, msg, isSuccess) {
+      var _this4 = this;
+
+      var content = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "center-align"
+      }, msg);
+      this.setState({
+        disabledButton: true
+      }, function () {
+        return _this4.props.setAlertOption({
+          isShow: true,
+          title: title,
+          children: content,
+          onClose: _this4.onRefresh,
+          icon: isSuccess ? 'success' : 'error',
+          height: 180,
+          buttons: []
+        });
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$state3 = this.state,
+          data = _this$state3.data,
+          setting = _this$state3.setting;
+
+      if (setting.BetSetting && !setting.BetSetting.IsLineEnabled) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_9__["default"], {
+          title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('AGCasinoNotOfferCurrency')
+        });
+      }
+
+      if (data === null) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_9__["default"], null);
+      }
+
+      var _this$state4 = this.state,
+          groups = _this$state4.groups,
+          selectedGroup = _this$state4.selectedGroup,
+          disabledButton = _this$state4.disabledButton;
+      var hasData = data.length > 0;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "pa-betlimit"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "pa-betlimit-group row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-12 col-md-4 col-sm-12 col-lg-3 col-xl-2"
+      }, setting.BetSetting.IsEnabled && hasData ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "label-text"
+      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('BetSettingGroups')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        instanceId: "ddlGroup",
+        value: selectedGroup,
+        options: groups,
+        onChange: this.onGroupChange
+      })) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "".concat(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('BetSettingGroups'), " :"), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "disabled-text"
+      }, setting.BetSetting.AgGroup)))), hasData ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AGCSettingGrid__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        data: data,
+        isEnabled: setting.BetSetting.IsEnabled,
+        group: selectedGroup
+      }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('ProblemDisplayBetSetting')
+      }), setting.Editable && hasData && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "pa-betlimit-button"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "button",
+        className: "btn btn-cancel",
+        disabled: disabledButton,
+        onClick: this.onReset
+      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Reset')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "button",
+        className: "btn btn-apply",
+        disabled: disabledButton,
+        onClick: this.onSubmit
+      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Submit'))));
+    }
+  }]);
+
+  return AGCSettingContent;
+}(react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"]);
+
+function mapDispatchToProps(dispatch) {
+  var toggleLoader = _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"].toggleLoader,
+      setAlertOption = _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"].setAlertOption;
+  return Object(redux__WEBPACK_IMPORTED_MODULE_3__["bindActionCreators"])({
+    toggleLoader: toggleLoader,
+    setAlertOption: setAlertOption
+  }, dispatch);
+}
+
+function mapStateToProps(state) {
+  var requestParam = state.requestParam;
+  return Object.assign({}, {
+    requestParam: requestParam
+  });
+}
+
+;
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(AGCSettingContent));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/SportSetting/AGCSettingGrid.jsx":
+/*!**************************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/SportSetting/AGCSettingGrid.jsx ***!
+  \**************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _lib_utility__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../lib/utility */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/utility.js");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+
+
+
+
+var AGCSettingGrid = function AGCSettingGrid(props) {
+  var data = props.data,
+      isEnabled = props.isEnabled,
+      group = props.group;
+
+  var buildBody = function buildBody() {
+    var rows = [];
+
+    for (var i = 0; i < data.length; i++) {
+      var game = data[i];
+      var gameGroup = game.Groups.find(function (x) {
+        return x.GroupType === group;
+      });
+      rows.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+        key: game.GameType
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, game.Name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        className: isEnabled ? '' : 'disabled-text'
+      }, gameGroup ? _lib_utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(gameGroup.Min) : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        className: isEnabled ? '' : 'disabled-text'
+      }, gameGroup ? _lib_utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(gameGroup.Max) : '')));
+    }
+
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, rows);
+  };
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "pa-betlimit-grid"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+    className: "table"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('GameType')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('MinBet')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('MaxBet')))), buildBody()));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(AGCSettingGrid));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/SportSetting/NGSettingGrid.jsx":
+/*!*************************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/SportSetting/NGSettingGrid.jsx ***!
+  \*************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _lib_utility__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../lib/utility */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/utility.js");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/constants.js");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+var NGSettingGrid = function NGSettingGrid(props) {
+  var setting = props.setting,
+      data = props.data,
+      onChange = props.onChange;
+  var setInputRef = props.setInputRef;
+
+  var onInputChange = function onInputChange(type, id, value) {
+    var newData = data.map(function (e) {
+      if (e.Id === id) {
+        var newItem = _objectSpread({}, e);
+
+        newItem[type] = value;
+        return newItem;
+      }
+
+      return e;
+    });
+    onChange(newData);
+  };
+
+  var onInputBlur = function onInputBlur(event, type, id) {
+    var value = event.target.value;
+    var newValue = _lib_utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(_lib_utility__WEBPACK_IMPORTED_MODULE_1__["default"].getValueAsNumber(value));
+
+    if (newValue !== value) {
+      var newData = data.map(function (e) {
+        if (e.Id === id) {
+          var newItem = _objectSpread({}, e);
+
+          newItem[type] = newValue;
+          return newItem;
+        }
+
+        return e;
+      });
+      onChange(newData);
+    }
+  };
+
+  var buildCell = function buildCell(type, value, disabled) {
+    var isChanged = value[type] !== value['Original' + type];
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      className: isChanged ? _lib_constants__WEBPACK_IMPORTED_MODULE_3__["InputClassName"].OnChangedClassName : _lib_constants__WEBPACK_IMPORTED_MODULE_3__["InputClassName"].ClassName,
+      type: "text",
+      ref: function ref(e) {
+        return setInputRef(type, value.Id, e);
+      },
+      autoComplete: "off",
+      maxLength: "14",
+      value: value[type],
+      onChange: function onChange(e) {
+        return onInputChange(type, value.Id, e.target.value);
+      },
+      onBlur: function onBlur(e) {
+        return onInputBlur(e, type, value.Id);
+      },
+      disabled: disabled
+    });
+  };
+
+  var buildBody = function buildBody(editable, data) {
+    var rows = [];
+
+    for (var i = 0; i < data.length; i++) {
+      var item = data[i];
+      var disabled = !editable;
+      rows.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+        key: item.Id
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, item.BetSettingType), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        className: "pa-betlimit-cell"
+      }, buildCell(_lib_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitType"].MinBet, item, disabled), item.BetValueMin > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " >= ".concat(_lib_utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(item.BetValueMin)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        className: "pa-betlimit-cell"
+      }, buildCell(_lib_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitType"].MaxBet, item, disabled), item.BetValueMax > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " <= ".concat(_lib_utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(item.BetValueMax)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        className: "pa-betlimit-cell"
+      }, buildCell(_lib_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitType"].MaxPerMatch, item, disabled), item.MaxPerMatchMax > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " <= ".concat(_lib_utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(item.MaxPerMatchMax)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        className: "pa-betlimit-cell"
+      }, buildCell(_lib_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitType"].MaxPerBall, item, disabled), item.MaxPerBallMax > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " <= ".concat(_lib_utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(item.MaxPerBallMax))))));
+    }
+
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, rows);
+  };
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "pa-betlimit-grid"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+    className: "table"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('Sport')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('MinBet')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('MaxBet')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('MaxPerMatch')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('MaxPerBall')))), buildBody(setting.Editable, data)));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(NGSettingGrid));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/SportSetting/SettingGrid.jsx":
+/*!***********************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/SportSetting/SettingGrid.jsx ***!
+  \***********************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _lib_utility__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../lib/utility */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/utility.js");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/constants.js");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+var SettingGrid = function SettingGrid(props) {
+  var setting = props.setting,
+      data = props.data,
+      isCopy = props.isCopy,
+      onChange = props.onChange;
+  var setInputRef = props.setInputRef;
+
+  var onInputChange = function onInputChange(type, id, value) {
+    var newData = data.map(function (e) {
+      if (e.Id === id) {
+        var newItem = _objectSpread({}, e);
+
+        newItem[type] = value;
+        return newItem;
+      }
+
+      return e;
+    });
+    onChange(newData);
+  };
+
+  var onInputBlur = function onInputBlur(event, type, id) {
+    var value = event.target.value;
+    var newValue = _lib_utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(_lib_utility__WEBPACK_IMPORTED_MODULE_1__["default"].getValueAsNumber(value));
+
+    if (newValue !== value) {
+      var newData = data.map(function (e) {
+        if (e.Id === id) {
+          var newItem = _objectSpread({}, e);
+
+          newItem[type] = newValue;
+          return newItem;
+        }
+
+        return e;
+      });
+      onChange(newData);
+    }
+  };
+
+  var buildCell = function buildCell(type, value, disabled) {
+    var isChanged = value[type] !== value['Original' + type];
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      className: isChanged ? _lib_constants__WEBPACK_IMPORTED_MODULE_3__["InputClassName"].OnChangedClassName : _lib_constants__WEBPACK_IMPORTED_MODULE_3__["InputClassName"].ClassName,
+      type: "text",
+      ref: function ref(e) {
+        return setInputRef(type, value.Id, e);
+      },
+      autoComplete: "off",
+      maxLength: "14",
+      value: value[type],
+      onChange: function onChange(e) {
+        return onInputChange(type, value.Id, e.target.value);
+      },
+      onBlur: function onBlur(e) {
+        return onInputBlur(e, type, value.Id);
+      },
+      disabled: disabled
+    });
+  };
+
+  var buildBody = function buildBody(editable, data) {
+    var rows = [];
+
+    for (var i = 0; i < data.length; i++) {
+      var item = data[i];
+      var disabled = !editable;
+      rows.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+        key: item.Id
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, item.BetSettingType), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        className: "pa-betlimit-cell"
+      }, buildCell(_lib_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitType"].MinBet, item, disabled), item.BetValueMin > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " >= ".concat(_lib_utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(item.BetValueMin)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        className: "pa-betlimit-cell"
+      }, buildCell(_lib_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitType"].MaxBet, item, disabled), item.BetValueMax > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " <= ".concat(_lib_utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(item.BetValueMax)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        className: "pa-betlimit-cell"
+      }, buildCell(_lib_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitType"].MaxPerMatch, item, disabled), item.MaxPerMatchMax > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " <= ".concat(_lib_utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(item.MaxPerMatchMax))))));
+    }
+
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, rows);
+  };
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "pa-betlimit-grid"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+    className: "table"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('Sport')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('MinBet')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('MaxBet')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('MaxPerMatch')))), buildBody(setting.Editable, data)));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(SettingGrid));
@@ -1033,7 +1675,8 @@ var BetLimitProduct = {
   VS2: 27,
   LT: 28,
   NG: 2,
-  KN: 8
+  KN: 8,
+  AGC: 10
 };
 var BetLimitType = {
   MinBet: 'MinBet',
@@ -1048,77 +1691,60 @@ var InputClassName = {
 
 /***/ }),
 
-/***/ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/service.js":
-/*!*****************************************************************************!*\
-  !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/service.js ***!
-  \*****************************************************************************/
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/dataHandling.js":
+/*!**********************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/dataHandling.js ***!
+  \**********************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Service; });
-/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
-/* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
-/* harmony import */ var _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/DataService */ "./www/js/source/reactpages/lib/DataService.js");
-/* harmony import */ var _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/numberFormat */ "./www/js/source/reactpages/lib/numberFormat.js");
-/* harmony import */ var _validatation__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./validatation */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/validatation.js");
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./constants */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/constants.js");
-/* harmony import */ var _utility__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./utility */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/utility.js");
-var _Url;
-
-function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
-
-function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return DataHandling; });
+/* harmony import */ var _validatation__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./validatation */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/validatation.js");
+/* harmony import */ var _utility__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utility */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/utility.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
-
-
-
-
-
-var Url = (_Url = {}, _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_5__["BetLimitProduct"].SB, 'SportBookBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_5__["BetLimitProduct"].VS, 'DcsBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_5__["BetLimitProduct"].VS2, 'DcsBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_5__["BetLimitProduct"].LT, 'DcsBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_5__["BetLimitProduct"].NG, 'NumberGameBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_5__["BetLimitProduct"].KN, 'RngKenoBetLimit'), _Url);
-
-var Service =
+var DataHandling =
 /*#__PURE__*/
 function () {
-  function Service() {
-    _classCallCheck(this, Service);
+  function DataHandling() {
+    _classCallCheck(this, DataHandling);
   }
 
-  _createClass(Service, null, [{
+  _createClass(DataHandling, null, [{
     key: "getViewData",
     value: function getViewData(rawData) {
       return rawData.map(function (rawRow) {
-        var data = {
-          Id: rawRow.Id,
-          BetType: rawRow.BetType,
-          BetSettingType: rawRow.BetSettingType,
-          MinBet: _utility__WEBPACK_IMPORTED_MODULE_6__["default"].formatValue(rawRow.MinBet),
-          MaxBet: _utility__WEBPACK_IMPORTED_MODULE_6__["default"].formatValue(rawRow.MaxBet),
-          MaxPerMatch: _utility__WEBPACK_IMPORTED_MODULE_6__["default"].formatValue(rawRow.MaxPerMatch),
-          MaxPerBall: _utility__WEBPACK_IMPORTED_MODULE_6__["default"].formatValue(rawRow.MaxPerBall),
-          BetValueMin: rawRow.BetValueMin,
-          BetValueMax: rawRow.BetValueMax,
-          MaxPerMatchMin: rawRow.MaxPerMatchMin,
-          MaxPerMatchMax: rawRow.MaxPerMatchMax,
-          MaxPerBallMax: rawRow.MaxPerBallMax
-        };
-        data.OriginalMinBet = data.MinBet;
-        data.OriginalMaxBet = data.MaxBet;
-        data.OriginalMaxPerMatch = data.MaxPerMatch;
-        data.OriginalMaxPerBall = data.MaxPerBall;
-        return data;
+        return DataHandling.getViewRowData(rawRow);
       });
+    }
+  }, {
+    key: "getViewRowData",
+    value: function getViewRowData(rawData) {
+      var row = {
+        Id: rawData.Id,
+        BetType: rawData.BetType,
+        BetSettingType: rawData.BetSettingType,
+        MinBet: _utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(rawData.MinBet),
+        MaxBet: _utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(rawData.MaxBet),
+        MaxPerMatch: _utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(rawData.MaxPerMatch),
+        BetValueMin: rawData.BetValueMin,
+        BetValueMax: rawData.BetValueMax,
+        MaxPerMatchMin: rawData.MaxPerMatchMin,
+        MaxPerMatchMax: rawData.MaxPerMatchMax
+      };
+      row.OriginalMinBet = row.MinBet;
+      row.OriginalMaxBet = row.MaxBet;
+      row.OriginalMaxPerMatch = row.MaxPerMatch;
+      return row;
     }
   }, {
     key: "getSubmitRowData",
@@ -1127,22 +1753,21 @@ function () {
         Id: row.Id,
         BetType: row.BetType,
         BetSettingType: row.BetSettingType,
-        MinBet: _utility__WEBPACK_IMPORTED_MODULE_6__["default"].getValueAsNumber(row.MinBet),
-        MaxBet: _utility__WEBPACK_IMPORTED_MODULE_6__["default"].getValueAsNumber(row.MaxBet),
-        MaxPerMatch: _utility__WEBPACK_IMPORTED_MODULE_6__["default"].getValueAsNumber(row.MaxPerMatch),
-        MaxPerBall: _utility__WEBPACK_IMPORTED_MODULE_6__["default"].getValueAsNumber(row.MaxPerBall),
-        IsUpdated: row.MinBet !== row.OriginalMinBet || row.MaxBet !== row.OriginalMaxBet || row.MaxPerMatch !== row.OriginalMaxPerMatch || row.MaxPerBall !== row.OriginalMaxPerBall
+        MinBet: _utility__WEBPACK_IMPORTED_MODULE_1__["default"].getValueAsNumber(row.MinBet),
+        MaxBet: _utility__WEBPACK_IMPORTED_MODULE_1__["default"].getValueAsNumber(row.MaxBet),
+        MaxPerMatch: _utility__WEBPACK_IMPORTED_MODULE_1__["default"].getValueAsNumber(row.MaxPerMatch),
+        IsUpdated: row.MinBet !== row.OriginalMinBet || row.MaxBet !== row.OriginalMaxBet || row.MaxPerMatch !== row.OriginalMaxPerMatch
       };
     }
   }, {
     key: "getSubmitData",
-    value: function getSubmitData(data) {
+    value: function getSubmitData(rows) {
       var submitData = [];
 
-      for (var i = 0; i < data.length; i++) {
-        var row = data[i];
-        var currentValue = Service.getSubmitRowData(row);
-        var invalidData = _validatation__WEBPACK_IMPORTED_MODULE_4__["default"].validate(currentValue, row);
+      for (var i = 0; i < rows.length; i++) {
+        var row = rows[i];
+        var currentValue = DataHandling.getSubmitRowData(row);
+        var invalidData = _validatation__WEBPACK_IMPORTED_MODULE_0__["default"].validate(currentValue, row);
 
         if (invalidData !== null) {
           return {
@@ -1162,24 +1787,71 @@ function () {
   }, {
     key: "validate",
     value: function validate(row) {
-      var currentValue = Service.getSubmitRowData(row);
-      return _validatation__WEBPACK_IMPORTED_MODULE_4__["default"].validate(currentValue, row);
+      var currentValue = DataHandling.getSubmitRowData(row);
+      return _validatation__WEBPACK_IMPORTED_MODULE_0__["default"].validate(currentValue, row);
     }
-  }, {
+  }]);
+
+  return DataHandling;
+}();
+
+
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/dataTransfer.js":
+/*!**********************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/dataTransfer.js ***!
+  \**********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return DataTransfer; });
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/DataService */ "./www/js/source/reactpages/lib/DataService.js");
+/* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./constants */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/constants.js");
+var _Url;
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+var Url = (_Url = {}, _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].SB, 'SportBookBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].VS, 'DcsBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].VS2, 'DcsBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].LT, 'DcsBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].NG, 'NumberGameBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].KN, 'RngKenoBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].AGC, 'AGCasinoBetLimit'), _Url);
+
+var DataTransfer =
+/*#__PURE__*/
+function () {
+  function DataTransfer() {
+    _classCallCheck(this, DataTransfer);
+  }
+
+  _createClass(DataTransfer, null, [{
     key: "getData",
     value: function getData(param, processDataFunc, successCallBack, errorHandle) {
-      var url = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl(Url[param.ProductId] + '/GetSetting');
-      _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_2__["default"].postData(url, param).then(function (response) {
+      var url = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_2__["default"].resolveClientUrl(Url[param.ProductId] + '/GetSetting');
+      _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_1__["default"].postData(url, param).then(function (response) {
+        console.log(response.data);
+
         var _response$data = response.data,
             Data = _response$data.Data,
             setting = _objectWithoutProperties(_response$data, ["Data"]);
 
-        if (Data && Data.length > 0) {
-          processDataFunc && processDataFunc(Service.getViewData(Data), setting);
-        } else {
-          processDataFunc && processDataFunc([], {});
-        }
-
+        processDataFunc && processDataFunc(Data, setting);
         successCallBack && successCallBack();
       }).catch(function (error) {
         processDataFunc && processDataFunc([], {});
@@ -1189,8 +1861,8 @@ function () {
   }, {
     key: "updateData",
     value: function updateData(param, processDataFunc, successCallBack, errorHandle) {
-      var url = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl(Url[param.ProductId] + '/UpdateSetting');
-      _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_2__["default"].postData(url, param).then(function (response) {
+      var url = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_2__["default"].resolveClientUrl(Url[param.ProductId] + '/UpdateSetting');
+      _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_1__["default"].postData(url, param).then(function (response) {
         var result = response.data;
         var isSuccess = Number(result.Code) === 0;
         var title = isSuccess ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('MessageSuccess') : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Fail');
@@ -1202,7 +1874,101 @@ function () {
     }
   }]);
 
-  return Service;
+  return DataTransfer;
+}();
+
+
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/ngDataHandling.js":
+/*!************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/ngDataHandling.js ***!
+  \************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return NGDataHandling; });
+/* harmony import */ var _validatation__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./validatation */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/validatation.js");
+/* harmony import */ var _utility__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utility */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/utility.js");
+/* harmony import */ var _dataHandling__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./dataHandling */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/dataHandling.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+
+
+var NGDataHandling =
+/*#__PURE__*/
+function () {
+  function NGDataHandling() {
+    _classCallCheck(this, NGDataHandling);
+  }
+
+  _createClass(NGDataHandling, null, [{
+    key: "getViewData",
+    value: function getViewData(rawData) {
+      return rawData.map(function (rawRow) {
+        return NGDataHandling.getViewRowData(rawRow);
+      });
+    }
+  }, {
+    key: "getViewRowData",
+    value: function getViewRowData(rawData) {
+      var row = _dataHandling__WEBPACK_IMPORTED_MODULE_2__["default"].getViewRowData(rawData);
+      row.MaxPerBall = _utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(rawData.MaxPerBall);
+      row.MaxPerBallMax = rawData.MaxPerBallMax;
+      row.OriginalMaxPerBall = row.MaxPerBall;
+      return row;
+    }
+  }, {
+    key: "getSubmitRowData",
+    value: function getSubmitRowData(row) {
+      var data = _dataHandling__WEBPACK_IMPORTED_MODULE_2__["default"].getViewRowData(row);
+      data.MaxPerBall = _utility__WEBPACK_IMPORTED_MODULE_1__["default"].getValueAsNumber(row.MaxPerBall);
+      data.IsUpdated = data.IsUpdated || row.MaxPerBall !== row.OriginalMaxPerBall;
+      return data;
+    }
+  }, {
+    key: "getSubmitData",
+    value: function getSubmitData(rows) {
+      var submitData = [];
+
+      for (var i = 0; i < rows.length; i++) {
+        var row = rows[i];
+        var currentValue = NGDataHandling.getSubmitRowData(row);
+        var invalidData = _validatation__WEBPACK_IMPORTED_MODULE_0__["default"].validateNumberGame(currentValue, row);
+
+        if (invalidData !== null) {
+          return {
+            IsValid: false,
+            Data: invalidData
+          };
+        }
+
+        submitData.push(currentValue);
+      }
+
+      return {
+        IsValid: true,
+        Data: submitData
+      };
+    }
+  }, {
+    key: "validate",
+    value: function validate(row) {
+      var currentValue = NGDataHandling.getSubmitRowData(row);
+      return _validatation__WEBPACK_IMPORTED_MODULE_0__["default"].validateNumberGame(currentValue, row);
+    }
+  }]);
+
+  return NGDataHandling;
 }();
 
 
@@ -1222,15 +1988,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/numberFormat */ "./www/js/source/reactpages/lib/numberFormat.js");
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./constants */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/constants.js");
+var _ConfirmationMsg;
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
+
+var ConfirmationMsg = (_ConfirmationMsg = {}, _defineProperty(_ConfirmationMsg, _constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].SB, 'UpdateSportsbookBetSettings'), _defineProperty(_ConfirmationMsg, _constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].VS, 'UpdateProductBetSettings'), _defineProperty(_ConfirmationMsg, _constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].VS2, 'UpdateProductBetSettings'), _defineProperty(_ConfirmationMsg, _constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].LT, 'UpdateProductBetSettings'), _defineProperty(_ConfirmationMsg, _constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].NG, 'UpdateNumberGameBetSettings'), _defineProperty(_ConfirmationMsg, _constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].KN, 'UpdateProductBetSettings'), _defineProperty(_ConfirmationMsg, _constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].AGC, 'UpdateAgCasinoBetSettings'), _ConfirmationMsg);
 
 var Utility =
 /*#__PURE__*/
@@ -1247,7 +2018,7 @@ function () {
   }, {
     key: "getConfirmationMsg",
     value: function getConfirmationMsg(productId) {
-      return _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('UpdateSportsbookBetSettings');
+      return _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource(ConfirmationMsg[productId]);
     }
   }, {
     key: "formatValue",
@@ -1386,13 +2157,14 @@ function () {
   }, {
     key: "validateNumberGame",
     value: function validateNumberGame(current, limitData) {
-      var result = Service.validate(current, limitData);
+      var result = Validatation.validate(current, limitData);
 
       if (result) {
         return result;
       }
 
-      var MaxPerBall = current.MaxPerBall;
+      var MaxPerBall = current.MaxPerBall,
+          Id = current.Id;
 
       if (isNaN(MaxPerBall)) {
         return {
@@ -1812,10 +2584,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var NoDataTitle = function NoDataTitle() {
+var NoDataTitle = function NoDataTitle(_ref) {
+  var title = _ref.title;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    className: "no-info-row center-align"
-  }, _lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("NoInfo"));
+    className: "no-info-row center-align",
+    dangerouslySetInnerHTML: {
+      __html: title ? title : _lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("NoInfo")
+    }
+  });
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (NoDataTitle);
