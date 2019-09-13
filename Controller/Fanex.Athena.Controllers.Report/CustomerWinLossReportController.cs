@@ -6,14 +6,16 @@
 namespace Fanex.Athena.Controllers.Report
 {
     using System;
+    using System.Threading.Tasks;
     using System.Web.Mvc;
 
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
+    using Fanex.Athena.Model.Report.ViewModel.Api;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
-
+    using Newtonsoft.Json;
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
 
@@ -22,15 +24,20 @@ namespace Fanex.Athena.Controllers.Report
     {
         private readonly IReportSettingService _reportSettingService;
 
+        private readonly IReportAPIClient _reportAPIClient;
+
         public CustomerWinLossReportController(
             ILanguageService languageService,
             ISessionService sessionService,
             IProductService productService,
-            IReportSettingService reportSettingService, ILicenseeSettingService licenseeSettingService
+            IReportSettingService reportSettingService,
+            ILicenseeSettingService licenseeSettingService,
+            IReportAPIClient reportAPIClient
             )
             : base(languageService, sessionService, productService, licenseeSettingService)
         {
             _reportSettingService = reportSettingService;
+            _reportAPIClient = reportAPIClient;
         }
 
         [HttpGet]
@@ -43,6 +50,27 @@ namespace Fanex.Athena.Controllers.Report
         public ActionResult History()
         {
             return GetView(true);
+        }
+
+        [HttpPost]
+        [AutoBindMetaModel(BindAgent = true)]
+        public async Task<ActionResult> Index(CustomerWinLossMetaModel metaModel)
+        {
+            var userSession = SessionService.UserSession;
+            if (metaModel.IsExportExcel)
+            {
+                AssignMetaModelForExcel(metaModel);
+                const string FileName = "CustomerWinLoss.xls";
+                var stream = await _reportAPIClient.PostAsyncStream("api/CustomerWinLoss/ExportExcel",
+                    metaModel, userSession.Language).ConfigureAwait(false);
+
+                return File(stream, "application/octet-stream", FileName);
+            }
+
+            var apiData = await _reportAPIClient.PostAsync<CustomerWinLossApiViewModel>("api/CustomerWinLoss/Index",
+                    metaModel, userSession.Language).ConfigureAwait(false);
+
+            return Content(JsonConvert.SerializeObject(apiData), "application/json");
         }
 
         private ActionResult GetView(bool isHistory)
@@ -79,6 +107,19 @@ namespace Fanex.Athena.Controllers.Report
             };
 
             return View("~/Views/Desktop/Report/CustomerWinLoss/Main.cshtml", model);
+        }
+
+        private void AssignMetaModelForExcel(CustomerWinLossMetaModel metaModel)
+        {
+            var licenseeSession = SessionService.LicenseeSession;
+            var productAccess = ProductService.GetSingleWalletProductAccess(
+                licenseeSession.LicenseeId,
+                SessionService.UserSession.Language,
+                FunctionNames.CustomerWinLoss);
+
+            metaModel.IsAllowedCustomerComm = licenseeSession.IsAllowedCustomerComm;
+            metaModel.IsAllowBA = productAccess.IsAllowBA;
+            metaModel.SystemIdVisible = !IsFakeLicensee(licenseeSession.LicenseeName);
         }
     }
 }

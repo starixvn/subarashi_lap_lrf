@@ -249,8 +249,8 @@
             }
 
             const gridOption = CustomerWinLossOption.getGridOption(response.TotalRows);
-            gridOption.rowNum = response.Data.length;
-            gridOption.data = response.Data;
+            gridOption.rowNum = response.DataList.length;
+            gridOption.data = response.DataList;
             gridOption.onSortCol = function (index) {
                 sort(index);
                 return 'stop';
@@ -314,7 +314,7 @@
                 _submitData.FromDate,
                 _submitData.ToDate,
                 Site.getSingleResource('Viewin').replace('{0}',
-                _submitData.BaseCurrency === '' ? _submitData.CurrencyName : _submitData.BaseCurrency.toUpperCase()),
+                    _submitData.BaseCurrency === '' ? _submitData.CurrencyName : _submitData.BaseCurrency.toUpperCase()),
                 licenseeWLNote === '' ? '' : ', ' + licenseeWLNote,
                 tempUserName);
 
@@ -425,7 +425,7 @@
             param.PageSize = _pagingOption.pagesize;
             param.OrderItem = _orderItem;
             param.IsAscSort = _sortOrder === 'asc';
-            
+
             if (param.Username === undefined) {
                 param.Username = '';
             }

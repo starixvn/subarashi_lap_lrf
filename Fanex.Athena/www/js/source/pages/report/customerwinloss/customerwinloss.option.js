@@ -6,15 +6,15 @@
         'use strict';
 
         const indexColumn =
-    {
-        name: 'Index',
-        index: 'Index',
-        resizable: false,
-        width: 40,
-        align: 'center',
-        valign: 'middle',
-        sortable: false
-    };
+        {
+            name: 'Index',
+            index: 'Index',
+            resizable: false,
+            width: 40,
+            align: 'center',
+            valign: 'middle',
+            sortable: false
+        };
 
         const externalIdColumn =
         {
@@ -78,15 +78,15 @@
         };
 
         const customerWlColumn =
-       {
-           name: 'CustomerWL',
-           index: 'CustomerWL',
-           width: 90,
-           align: 'right',
-           sortable: true,
-           resizable: false,
-           formatter: jqGridAdditional.formatDecimal
-       };
+        {
+            name: 'CustomerWL',
+            index: 'CustomerWL',
+            width: 90,
+            align: 'right',
+            sortable: true,
+            resizable: false,
+            formatter: jqGridAdditional.formatDecimal
+        };
 
         const playerCommColumn =
         {
@@ -188,8 +188,8 @@
 
         const _me =
         {
-            urlData: 'api/CustomerWinLossReport/Index',
-            urlExcelData: 'api/CustomerWinLossReport/Index',
+            urlData: 'CustomerWinLossReport/Index',
+            urlExcelData: 'CustomerWinLossReport/Index',
             urlPromotionPrizeExcelData: 'api/PromotionPrizeReport/ExportExcel',
             hasCustomerComm: true,
             isAllowBA: true,
@@ -226,17 +226,17 @@
 
             setGroupHeaderColumns: function (grid) {
                 const groupCustomerWinloss = _me.hasCustomerComm ?
-                {
-                    startColumnName: 'CustomerWL',
-                    numberOfColumns: 3,
-                    titleText: Site.getSingleResource('CustomerW_L')
-                } : {};
+                    {
+                        startColumnName: 'CustomerWL',
+                        numberOfColumns: 3,
+                        titleText: Site.getSingleResource('CustomerW_L')
+                    } : {};
 
                 grid.jqGrid('setGroupHeaders',
-                {
-                    useColSpanStyle: true,
-                    groupHeaders: [groupCustomerWinloss]
-                });
+                    {
+                        useColSpanStyle: true,
+                        groupHeaders: [groupCustomerWinloss]
+                    });
             },
 
             getColName: function () {

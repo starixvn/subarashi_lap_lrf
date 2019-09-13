@@ -6,7 +6,6 @@
 
 namespace Fanex.Athena.Model.Report.MetaModel
 {
-    using Fanex.Athena.Model.Core.MetaModel;
     using System;
 
     public class CustomerWinLossMetaModel : BaseReportMetaModel
@@ -30,5 +29,11 @@ namespace Fanex.Athena.Model.Report.MetaModel
         public bool IsAscSort { get; set; }
 
         public string Username { get; set; }
+
+        public bool IsAllowBA { get; set; }
+
+        public bool IsAllowedCustomerComm { get; set; }
+
+        public bool SystemIdVisible { get; set; }
     }
 }
