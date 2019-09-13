@@ -14,18 +14,9 @@ namespace Fanex.Athena.DataAccess.BetSettings
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Common;
     using Interfaces;
-    using VendorAdapter.Interfaces;
 
     public class KenoBetSettingDataAccess : BaseDataAccess, IKenoBetSettingDataAccess
     {
-        private readonly ICacheRefAdapter _cacheRefAdapter;
-
-        public KenoBetSettingDataAccess(
-            ICacheRefAdapter cacheRefAdapter)
-        {
-            _cacheRefAdapter = cacheRefAdapter;
-        }
-
         public async Task<IList<BetSetting>> GetBetSettingsAsync(int custId)
         {
             const string UspName = "Lrf_CustomerSelEditKN";

@@ -20,9 +20,9 @@
 
     [SessionState(SessionStateBehavior.ReadOnly)]
     [CheckUMFilter]
+    [CustomValidateAntiForgery]
     [AuthorizeRestriction(AppMode.Parasitic)]
     [FunctionAuthorization(PermissionKeys.PlayerAdmin)]
-    [CustomValidateAntiForgery]
     [OutputCache(NoStore = true, Duration = 0, Location = OutputCacheLocation.None, VaryByParam = "*")]
     public class PlayerBetLimitBaseControler : CultureBaseController
     {

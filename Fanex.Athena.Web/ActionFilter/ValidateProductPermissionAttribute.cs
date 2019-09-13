@@ -93,7 +93,7 @@
             var identityModel = filterContext.ActionParameters.Where(x => x.Value is IMetaModelProduct)
                     .Select(x => x.Value as IMetaModelProduct).FirstOrDefault();
 
-            if (identityModel is null)
+            if (identityModel != null)
             {
                 return identityModel.ProductId;
             }

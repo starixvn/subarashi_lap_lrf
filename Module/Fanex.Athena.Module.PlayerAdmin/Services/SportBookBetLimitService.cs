@@ -46,7 +46,7 @@
 
         public async Task<IResultInfo> UpdateSettingAsync(PlayerBetLimitUpdateMetaModel<PlayerBetLimitMetaModel> metaModel)
         {
-            if (metaModel.Setting is null || metaModel.Setting.Any(x => x.Id == ((int)SportType.Esports).ToString()))
+            if (metaModel.Setting is null || !metaModel.Setting.Any(x => x.Id == ((int)SportType.Esports).ToString()))
             {
                 return new ResultInfo
                 {
@@ -66,7 +66,8 @@
                 CustId = metaModel.CustId,
                 UserId = metaModel.UserId,
                 Ip = metaModel.Ip,
-                Setting = metaModel.Setting.Where(x => x.Id == ((int)SportType.Esports).ToString())
+                Setting = metaModel.Setting.Where(x => x.Id == ((int)SportType.Esports).ToString()),
+                ProductId = ProductTypes.Sportsbooks2
             };
             return await _dcsBetSetting.UpdateSettingAsync(dcsMetaModel).ConfigureAwait(false);
         }

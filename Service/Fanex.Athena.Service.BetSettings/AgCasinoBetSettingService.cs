@@ -20,7 +20,6 @@ namespace Fanex.Athena.Service.BetSettings
     using Extension.Utility.Interfaces;
 
     using Fanex.Athena.Extension.Helpers;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Logging;
 
     using Interfaces;
@@ -29,8 +28,6 @@ namespace Fanex.Athena.Service.BetSettings
     using Model.BetSettings.DTO.AgCasino;
     using Model.BetSettings.ViewModel;
     using Model.Core.DTO.Common;
-
-    using Resources;
 
     public class AgCasinoBetSettingService : BetSettingBaseService, IAgCasinoBetSettingService
     {
@@ -74,8 +71,7 @@ namespace Fanex.Athena.Service.BetSettings
             };
         }
 
-        public async Task<IResultInfo> UpdateAgCasinoBetSettingAsync(CommonBetSetting setting, string group
-            )
+        public async Task<IResultInfo> UpdateAgCasinoBetSettingAsync(CommonBetSetting setting, string group)
         {
             if (setting == null)
             {

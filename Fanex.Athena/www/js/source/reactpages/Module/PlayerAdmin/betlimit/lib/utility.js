@@ -3,13 +3,13 @@ import NumberFormat from '@jsroot/lib/numberFormat';
 import { BetLimitProduct } from './constants';
 
 const ConfirmationMsg = {
-    [BetLimitProduct.SB]: 'UpdateSportsbookBetSettings',
-    [BetLimitProduct.VS]: 'UpdateProductBetSettings',
-    [BetLimitProduct.VS2]: 'UpdateProductBetSettings',
-    [BetLimitProduct.LT]: 'UpdateProductBetSettings',
-    [BetLimitProduct.NG]: 'UpdateNumberGameBetSettings',
-    [BetLimitProduct.KN]: 'UpdateProductBetSettings',
-    [BetLimitProduct.AGC]: 'UpdateAgCasinoBetSettings'
+    [BetLimitProduct.SB]: { Msg: 'UpdateSportsbookBetSettings' },
+    [BetLimitProduct.VS]: { Msg: 'UpdateProductBetSettings', Product: 'ProductVS' },
+    [BetLimitProduct.VS2]: { Msg: 'UpdateProductBetSettings', Product: 'ProductVS2' },
+    [BetLimitProduct.LT]: { Msg: 'UpdateProductBetSettings', Product: 'ProductLT' },
+    [BetLimitProduct.NG]: { Msg: 'UpdateNumberGameBetSettings' },
+    [BetLimitProduct.KN]: { Msg: 'UpdateProductBetSettings', Product: 'ProductKN' },
+    [BetLimitProduct.AGC]: { Msg: 'UpdateAgCasinoBetSettings' }
 }
 
 export default class Utility {
@@ -18,8 +18,13 @@ export default class Utility {
     }
 
     static getConfirmationMsg(productId) {
+        const message = LangHelper.getSingleResource(ConfirmationMsg[productId].Msg);
 
-        return LangHelper.getSingleResource(ConfirmationMsg[productId]);
+        if (!ConfirmationMsg[productId].Product) {
+            return message;
+        }
+
+        return message.replace('{0}', LangHelper.getSingleResource(ConfirmationMsg[productId].Product));
     }
 
     static formatValue(number) {

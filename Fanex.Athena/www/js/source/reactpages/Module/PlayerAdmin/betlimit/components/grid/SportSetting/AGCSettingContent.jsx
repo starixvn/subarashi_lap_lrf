@@ -19,6 +19,7 @@ export class AGCSettingContent extends PureComponent {
     componentDidUpdate(prevProps, prevState) {
         if (prevState.data !== this.state.data) {
             this.props.toggleLoader(false);
+            this.props.setAlertOption({ isShow: false });
         }
     }
 
@@ -56,7 +57,6 @@ export class AGCSettingContent extends PureComponent {
     }
 
     onRefresh = () => {
-        this.props.setAlertOption({ isShow: false });
         this._getData(this.props.requestParam);
     }
 

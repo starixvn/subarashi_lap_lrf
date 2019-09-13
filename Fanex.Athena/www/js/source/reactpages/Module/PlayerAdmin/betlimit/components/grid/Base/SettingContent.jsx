@@ -18,7 +18,7 @@ const SettingContent = (Grid, DataHandling) => {
             this.state = {
                 data: null,
                 setting: { Editable: false, EnableCopy: false, CopyId: 0 },
-                disableButton: false,
+                disabledButton: false,
                 isCopy: false,
                 showError: false,
                 errorBalloon: { msg: '', targetTop: 0, targetLeft: 0 }
@@ -33,6 +33,7 @@ const SettingContent = (Grid, DataHandling) => {
         componentDidUpdate(prevProps, prevState) {
             if (prevState.data !== this.state.data) {
                 this.props.toggleLoader(false);
+                this.props.setAlertOption({ isShow: false });
             }
 
             if (prevState.showError !== this.state.showError) {
@@ -150,7 +151,6 @@ const SettingContent = (Grid, DataHandling) => {
         }
 
         onRefresh = () => {
-            this.props.setAlertOption({ isShow: false });
             this._getData(this.props.requestParam);
         }
 
@@ -224,7 +224,7 @@ const SettingContent = (Grid, DataHandling) => {
             this.setState((state) => ({
                 data: DataHandling.getViewData(data),
                 setting: Object.assign({}, state.setting, setting),
-                disableButton: false,
+                disabledButton: false,
                 isCopy: false,
                 showError: false
             }));
