@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 9/11/2019 12:52:00 PM
+// Generated at: 9/13/2019 3:25:14 PM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -777,6 +777,7 @@ window._language_en_US = {
   UserNotHaveCurrency: "You do not have any currency permissions to view this report, please contact your administrator account.",
   UserTooManyLicensees: "This account is assigned to more than 1 licensee.",
   ValidBetAmount: "Valid Bet Amount",
+  VendorMemberID: "Vendor Member ID",
   View: "View",
   ViewBy: "View by",
   ViewDataInMonth: "View data in month",

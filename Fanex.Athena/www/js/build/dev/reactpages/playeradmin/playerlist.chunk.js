@@ -1217,6 +1217,11 @@ function (_PureComponent) {
       });
     }
   }, {
+    key: "_getUserNameLabel",
+    value: function _getUserNameLabel() {
+      return this.props.type === _lib_constants__WEBPACK_IMPORTED_MODULE_8__["licenseeType"].nonApi ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("Username") : "".concat(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("Username"), "/").concat(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("VendorMemberID"));
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this2 = this;
@@ -1257,7 +1262,7 @@ function (_PureComponent) {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "label-text"
-      }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("Username"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filter_SearchOption__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      }, this._getUserNameLabel(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filter_SearchOption__WEBPACK_IMPORTED_MODULE_6__["default"], {
         value: searchOption,
         onChange: this.handleChange
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filter_UserNameInput__WEBPACK_IMPORTED_MODULE_12__["default"], {
