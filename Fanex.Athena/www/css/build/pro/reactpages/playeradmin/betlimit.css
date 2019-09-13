@@ -672,7 +672,8 @@ body {
   .pa-betlimit-button button {
     margin-left: 15px;
     margin-bottom: 10px;
-    float: right; }
+    float: right;
+    text-transform: uppercase; }
 
 .popup-content {
   padding-top: 10px !important; }

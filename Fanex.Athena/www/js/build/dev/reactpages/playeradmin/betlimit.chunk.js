@@ -618,10 +618,6 @@ var SettingContent = function SettingContent(Grid, DataHandling) {
       });
 
       _defineProperty(_assertThisInitialized(_this), "onRefresh", function () {
-        _this.props.setAlertOption({
-          isShow: false
-        });
-
         _this._getData(_this.props.requestParam);
       });
 
@@ -632,7 +628,7 @@ var SettingContent = function SettingContent(Grid, DataHandling) {
           EnableCopy: false,
           CopyId: 0
         },
-        disableButton: false,
+        disabledButton: false,
         isCopy: false,
         showError: false,
         errorBalloon: {
@@ -655,6 +651,9 @@ var SettingContent = function SettingContent(Grid, DataHandling) {
 
         if (prevState.data !== this.state.data) {
           this.props.toggleLoader(false);
+          this.props.setAlertOption({
+            isShow: false
+          });
         }
 
         if (prevState.showError !== this.state.showError) {
@@ -788,7 +787,7 @@ var SettingContent = function SettingContent(Grid, DataHandling) {
           return {
             data: DataHandling.getViewData(data),
             setting: Object.assign({}, state.setting, setting),
-            disableButton: false,
+            disabledButton: false,
             isCopy: false,
             showError: false
           };
@@ -1104,10 +1103,6 @@ function (_PureComponent) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "onRefresh", function () {
-      _this.props.setAlertOption({
-        isShow: false
-      });
-
       _this._getData(_this.props.requestParam);
     });
 
@@ -1126,6 +1121,9 @@ function (_PureComponent) {
     value: function componentDidUpdate(prevProps, prevState) {
       if (prevState.data !== this.state.data) {
         this.props.toggleLoader(false);
+        this.props.setAlertOption({
+          isShow: false
+        });
       }
     }
   }, {
@@ -2001,7 +1999,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var ConfirmationMsg = (_ConfirmationMsg = {}, _defineProperty(_ConfirmationMsg, _constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].SB, 'UpdateSportsbookBetSettings'), _defineProperty(_ConfirmationMsg, _constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].VS, 'UpdateProductBetSettings'), _defineProperty(_ConfirmationMsg, _constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].VS2, 'UpdateProductBetSettings'), _defineProperty(_ConfirmationMsg, _constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].LT, 'UpdateProductBetSettings'), _defineProperty(_ConfirmationMsg, _constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].NG, 'UpdateNumberGameBetSettings'), _defineProperty(_ConfirmationMsg, _constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].KN, 'UpdateProductBetSettings'), _defineProperty(_ConfirmationMsg, _constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].AGC, 'UpdateAgCasinoBetSettings'), _ConfirmationMsg);
+var ConfirmationMsg = (_ConfirmationMsg = {}, _defineProperty(_ConfirmationMsg, _constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].SB, {
+  Msg: 'UpdateSportsbookBetSettings'
+}), _defineProperty(_ConfirmationMsg, _constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].VS, {
+  Msg: 'UpdateProductBetSettings',
+  Product: 'ProductVS'
+}), _defineProperty(_ConfirmationMsg, _constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].VS2, {
+  Msg: 'UpdateProductBetSettings',
+  Product: 'ProductVS2'
+}), _defineProperty(_ConfirmationMsg, _constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].LT, {
+  Msg: 'UpdateProductBetSettings',
+  Product: 'ProductLT'
+}), _defineProperty(_ConfirmationMsg, _constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].NG, {
+  Msg: 'UpdateNumberGameBetSettings'
+}), _defineProperty(_ConfirmationMsg, _constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].KN, {
+  Msg: 'UpdateProductBetSettings',
+  Product: 'ProductKN'
+}), _defineProperty(_ConfirmationMsg, _constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].AGC, {
+  Msg: 'UpdateAgCasinoBetSettings'
+}), _ConfirmationMsg);
 
 var Utility =
 /*#__PURE__*/
@@ -2018,7 +2034,13 @@ function () {
   }, {
     key: "getConfirmationMsg",
     value: function getConfirmationMsg(productId) {
-      return _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource(ConfirmationMsg[productId]);
+      var message = _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource(ConfirmationMsg[productId].Msg);
+
+      if (!ConfirmationMsg[productId].Product) {
+        return message;
+      }
+
+      return message.replace('{0}', _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource(ConfirmationMsg[productId].Product));
     }
   }, {
     key: "formatValue",
