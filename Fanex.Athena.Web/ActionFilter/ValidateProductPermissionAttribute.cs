@@ -12,13 +12,13 @@
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
     public sealed class ValidateProductPermissionAttribute : ActionFilterAttribute
     {
-        private bool _isCheckDirectly { get; }
+        private readonly bool _isCheckDirectly;
 
-        private int _productId { get; }
+        private readonly int _productId;
 
-        private int[] _limitedProductIds { get; }
+        private readonly int[] _limitedProductIds;
 
-        private string _productIdFieldName { get; }
+        private readonly string _productIdFieldName;
 
         public ValidateProductPermissionAttribute(string productIdFieldName = "productId", params int[] limitedProductIds)
         {
