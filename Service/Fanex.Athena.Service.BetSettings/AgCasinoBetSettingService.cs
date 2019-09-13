@@ -20,6 +20,7 @@ namespace Fanex.Athena.Service.BetSettings
     using Extension.Utility.Interfaces;
 
     using Fanex.Athena.Extension.Helpers;
+    using Fanex.Athena.Resources;
     using Fanex.Logging;
 
     using Interfaces;
