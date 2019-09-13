@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Module.PlayerAdmin.DTO;
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
     using Fanex.Athena.Module.PlayerAdmin.Repositories.Interfaces;
@@ -14,7 +15,7 @@
     using Fanex.Athena.VendorAdapter.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
 
-    //check product belongs to
+    [ValidateProductPermission(ProductTypes.Keno)]
     public class RngKenoBetLimitController : PlayerBetLimitBaseControler
     {
         private readonly IRngKenoBetLimitRepository _repository;

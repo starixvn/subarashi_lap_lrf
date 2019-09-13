@@ -8,7 +8,6 @@ namespace Fanex.Athena.Service.StatelessCore
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Linq;
 
     using Fanex.Athena.DataAccess.Core.Users.Interfaces;
@@ -21,11 +20,11 @@ namespace Fanex.Athena.Service.StatelessCore
     {
         private readonly IAthorizationDataAccess _authorizationDataAccess;
 
-        public AuthorizationService(IAthorizationDataAccess authorizationDataAccess
-           )
+        public AuthorizationService(IAthorizationDataAccess authorizationDataAccess)
         {
             _authorizationDataAccess = authorizationDataAccess;
         }
+
         public bool HasPermissions(OneAuthPermission[] userPortalFunctionList, params string[] permissionKeys)
         {
             return userPortalFunctionList.Any(i => permissionKeys.Contains(i.FunctionKey,
@@ -64,6 +63,14 @@ namespace Fanex.Athena.Service.StatelessCore
 
             return currencyAgents.Any(i => i.Key == item.Item1 && i.Value.Contains(item.Item2));
         }
+
+        public bool CheckCustomerBelongsTo(IDictionary<int, int[]> currencyAgents, int custId, int currencyId = 0)
+        {
+            var item = _authorizationDataAccess.IsCustomerBelonging(custId, 0);
+
+            return currencyAgents.Any(i => i.Key == item.Item1 && i.Value.Contains(item.Item2) && (currencyId == 0 || item.Item1 == currencyId));
+        }
+
         public bool HasPermissionOnData(OneAuthCurrency[] currencyAgents, int custId, long transId)
         {
             if (custId == 0 && transId == 0)
@@ -76,5 +83,16 @@ namespace Fanex.Athena.Service.StatelessCore
             return currencyAgents.Any(i => i.CurrencyId == item.Item1 && i.AgentId.Contains(item.Item2));
         }
 
+        public bool CheckProductBelongsTo(int productId, int[] limitedProductIds, string licenseeName)
+        {
+            var isValidProduct = _authorizationDataAccess.IsProductBelonging(productId, licenseeName);
+
+            if (!isValidProduct || limitedProductIds is null)
+            {
+                return isValidProduct;
+            }
+
+            return limitedProductIds.Contains(productId);
+        }
     }
 }

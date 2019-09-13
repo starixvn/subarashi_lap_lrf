@@ -30,5 +30,18 @@ namespace Fanex.Athena.DataAccess.Core.Users
 
             return new Tuple<int, int>(0, 0);
         }
+
+        public bool IsProductBelonging(int productId, string licenseeName)
+        {
+            using (var db = this.GetObjectDb("Lrf_CheckBelonging_ValidateProduct"))
+            {
+                db.SetParameterValue("productId", productId);
+                db.SetParameterValue("licenseeName", licenseeName); 
+                using (var reader = db.ExecuteReader())
+                {
+                    return Convert.ToBoolean(db.ExecuteScalar());
+                }
+            }
+        }
     }
 }

@@ -5,8 +5,6 @@
 // -----------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Fanex.Athena.DataAccess.Core.Users.Interfaces
 {
@@ -19,5 +17,7 @@ namespace Fanex.Athena.DataAccess.Core.Users.Interfaces
         /// <param name="transid"></param>
         /// <returns></returns>
         Tuple<int, int> IsCustomerBelonging(int custId, long transid);
+
+        bool IsProductBelonging(int productId, string licenseeName);
     }
 }

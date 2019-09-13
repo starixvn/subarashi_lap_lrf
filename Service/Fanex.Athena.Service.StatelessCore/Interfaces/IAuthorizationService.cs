@@ -22,5 +22,9 @@ namespace Fanex.Athena.Service.StatelessCore.Interfaces
         bool IsAllowedEditCommission(UserAuthInfo userAuthInfo);
 
         bool IsAllowedSpecialBA(UserAuthInfo userAuthInfo);
+
+        bool CheckCustomerBelongsTo(IDictionary<int, int[]> currencyAgents, int custId, int currencyId = 0);
+
+        bool CheckProductBelongsTo(int productId, int[] limitedProductIds, string licenseeName);
     }
 }

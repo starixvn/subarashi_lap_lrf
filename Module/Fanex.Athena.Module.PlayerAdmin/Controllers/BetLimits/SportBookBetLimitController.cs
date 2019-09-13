@@ -15,7 +15,6 @@
     using Fanex.Athena.VendorAdapter.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
 
-    //check product belongs to
     public class SportBookBetLimitController : PlayerBetLimitBaseControler
     {
         private readonly ISportBookBetLimitService _service;

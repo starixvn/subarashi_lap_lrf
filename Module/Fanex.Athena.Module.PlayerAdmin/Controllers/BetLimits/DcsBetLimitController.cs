@@ -15,11 +15,9 @@
     using Fanex.Athena.VendorAdapter.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
 
-    //check product belongs to
+    [ValidateProductPermission(limitedProductIds: new[] { ProductTypes.VirtualSports, ProductTypes.VirtualSports2, ProductTypes.Lottery })]
     public class DcsBetLimitController : PlayerBetLimitBaseControler
     {
-        private static readonly int[] Product = new[] { ProductTypes.VirtualSports, ProductTypes.VirtualSports2, ProductTypes.Lottery };
-
         private static readonly int[] ProductsHasStatus = new[] { ProductTypes.Lottery };
 
         private readonly IDcsBetLinitRepository _repository;

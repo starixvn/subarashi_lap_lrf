@@ -3,13 +3,15 @@
     using System.Collections.Generic;
     using Fanex.Athena.Model.Core.MetaModel;
 
-    public class PlayerBetLimitUpdateMetaModel<T> : IMetalModelCustomerIdentity
+    public class PlayerBetLimitUpdateMetaModel<T> : IMetalModelCustomerIdentity, IMetaModelProduct
     {
         public int CustId { get; set; }
 
         public string SiteName { get; set; }
 
         public int UserId { get; set; }
+
+        public int CurrencyId { get; set; }
 
         public string Ip { get; set; }
 

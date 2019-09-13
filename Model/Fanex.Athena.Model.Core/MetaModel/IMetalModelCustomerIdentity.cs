@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Fanex.Athena.Model.Core.MetaModel
+﻿namespace Fanex.Athena.Model.Core.MetaModel
 {
     public interface IMetalModelCustomerIdentity
     {
         int CustId { get; set; }
 
+        int CurrencyId { get; set; }
     }
 }

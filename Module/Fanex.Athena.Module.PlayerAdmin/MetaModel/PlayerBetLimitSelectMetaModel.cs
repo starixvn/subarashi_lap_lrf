@@ -2,7 +2,7 @@
 {
     using Fanex.Athena.Model.Core.MetaModel;
 
-    public class PlayerBetLimitSelectMetaModel : IMetalModelCustomerIdentity
+    public class PlayerBetLimitSelectMetaModel : IMetalModelCustomerIdentity, IMetaModelProduct
     {
         public int CustId { get; set; }
 

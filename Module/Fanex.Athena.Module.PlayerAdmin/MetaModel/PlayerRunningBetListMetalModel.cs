@@ -50,6 +50,8 @@
 
         public string Currency { get; set; }
 
+        public int CurrencyId { get; set; }
+
         public string AgentListXml { get; set; }
 
         public int PageIndex { get; set; }

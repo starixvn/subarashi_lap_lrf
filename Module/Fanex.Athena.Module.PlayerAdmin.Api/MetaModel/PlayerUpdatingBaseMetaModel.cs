@@ -14,5 +14,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.MetaModel
         public string Ip { get; set; }
 
         public string Language { get; set; }
+
+        public int CurrencyId { get; set; }
     }
 }

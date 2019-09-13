@@ -125,6 +125,7 @@
     <Setting Key="Lrf_CustomerSelByCustid" SpName="Lrf_CustomerSelByCustid_xtest" DbName="DBEXT.bodb02.bodbLicenseeNet" />
     <Setting Key="Lrf_LicenseeProductByBetLimitSel" SpName="Lrf_LicenseeProductByBetLimitSel_xtest" DbName="DBLIC.bodb_Licensee.bodbLicenseeNet" />
     <Setting Key="Lrf_PlayerBettingStatistics" SpName="Lrf_PlayerBettingStatistics_UAT3" DbName="DBEXT.bodb02.bodbLicenseeNet" />
+    <Setting Key="Lrf_CheckBelonging_ValidateProduct" SpName="Lrf_CheckBelonging_ValidateProduct_UAT3" DbName="DBLIC.bodb_Licensee.bodbLicenseeNet" />
   </Function>
 
   <Function Name="GroupComm">

@@ -144,6 +144,7 @@
   <ItemGroup>
     <Compile Include="ActionFilter\AuthorizeRestrictionAttribute.cs" />
     <Compile Include="ActionFilter\AutoBindMetaModelAttribute.cs" />
+    <Compile Include="ActionFilter\ValidateProductPermissionAttribute.cs" />
     <Compile Include="ActionFilter\ValidatePermissionOnDataAttribute.cs" />
     <Compile Include="ActionFilter\CustomValidateAntiForgeryAttribute.cs" />
     <Compile Include="ActionFilter\BetListAuthorizationAttribute.cs" />

@@ -3,6 +3,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
     using Fanex.Athena.Module.PlayerAdmin.Repositories.Interfaces;
     using Fanex.Athena.Module.PlayerAdmin.Services.Interfaces;
@@ -13,7 +14,7 @@
     using Fanex.Athena.VendorAdapter.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
 
-    //check product belongs to
+    [ValidateProductPermission(ProductTypes.AgCasino)]
     public class AGCasinoBetLimitController : PlayerBetLimitBaseControler
     {
         private readonly IAGCasinoBetLimitService _service;
