@@ -131,7 +131,6 @@
     <Compile Include="MatchWinLossDataAccessTest.cs" />
     <Compile Include="LiveReportDataAccessTest.cs" />
     <Compile Include="LicenseeWinLossDataAccessTest.cs" />
-    <Compile Include="CustomerWinlossDataAccessTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

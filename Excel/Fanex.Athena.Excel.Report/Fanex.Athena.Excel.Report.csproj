@@ -138,7 +138,6 @@
     <Compile Include="PromotionPrizeExcel.cs" />
     <Compile Include="AgCasinoBalanceExcel.cs" />
     <Compile Include="Models\CustomerPendingFundsExcelModel.cs" />
-    <Compile Include="Models\CustomerWinLossExcelModel.cs" />
     <Compile Include="Models\LicenseeWinLossExcelModel.cs" />
     <Compile Include="Models\WinLossByProductExcelModel.cs" />
     <Compile Include="ColossusBetsWinLossExcel.cs" />
@@ -149,7 +148,6 @@
     <Compile Include="CustomerBalanceExcel.cs" />
     <Compile Include="CustomerPendingFundsExcel.cs" />
     <Compile Include="CustomerTurnoverExcel.cs" />
-    <Compile Include="CustomerWinLossExcel.cs" />
     <Compile Include="LicenseeWinLossExcel.cs" />
     <Compile Include="MatchWinLossExcel.cs" />
     <Compile Include="LiveReportExcel.cs" />

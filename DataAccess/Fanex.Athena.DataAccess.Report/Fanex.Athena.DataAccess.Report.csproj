@@ -136,7 +136,6 @@
     <Compile Include="CustomerBalanceDataAccess.cs" />
     <Compile Include="CustomerPendingFundsDataAccess.cs" />
     <Compile Include="CustomerTurnoverDataAccess.cs" />
-    <Compile Include="CustomerWinlossDataAccess.cs" />
     <Compile Include="WinLossByProductDataAccess.cs">
       <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
     </Compile>
@@ -150,7 +149,6 @@
     <Compile Include="Interfaces\ICustBalanceDataAccess.cs" />
     <Compile Include="Interfaces\ICustPendingFundsDataAccess.cs" />
     <Compile Include="Interfaces\ICustomerTurnoverDataAccess.cs" />
-    <Compile Include="Interfaces\ICustWinlossDataAccess.cs" />
     <Compile Include="Interfaces\ISettledMatchCountDataAccess.cs" />
     <Compile Include="Interfaces\ITurnoverDataAccess.cs" />
     <Compile Include="Interfaces\ILicenseeWinLossDataAccess.cs" />
