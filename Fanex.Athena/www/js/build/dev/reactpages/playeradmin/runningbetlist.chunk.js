@@ -458,7 +458,7 @@ function (_Component) {
         PageIndex: requestParam.PageIndex,
         PageSize: requestParam.PageSize,
         TotalItem: totalRows,
-        PageList: [50, 100, 200, 300, 400, 500, 1000, 200]
+        PageList: [50, 100, 200, 300, 400, 500, 1000, 2000]
       };
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_betlist_BetListDataGrid__WEBPACK_IMPORTED_MODULE_4__["default"], {
         isPaging: true,
