@@ -4655,6 +4655,14 @@ function () {
     key: "_fetchFromLrf",
     value: function _fetchFromLrf(param, lrfDataById, lapPlayerList, commonService, lapTotalItem) {
       var idList = Object(_helpers_utils__WEBPACK_IMPORTED_MODULE_1__["getCustIdListFromLapData"])(lapPlayerList);
+
+      if (idList.length === 0) {
+        return {
+          playerList: Object(_helpers_playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__["buildLapPlayerList"])(lapPlayerList),
+          totalItem: lapTotalItem
+        };
+      }
+
       var lrfParam = {
         currencyIdList: param.currencyIdList,
         idList: idList.join(','),
@@ -4666,21 +4674,28 @@ function () {
       };
       return commonService.fetchData(lrfDataById.type, lrfDataById.action, lrfParam).then(function (lrfResponse) {
         var lrfPlayerList = lrfResponse.data.DataList;
+        var filteredLapPlayerList = lapPlayerList.filter(function (x) {
+          return x.IBCCustId === 0 || lrfPlayerList.findIndex(function (p) {
+            return p.IbcCustId === x.IBCCustId;
+          }) !== -1;
+        });
+        var filteredItemCount = lapPlayerList.length - filteredLapPlayerList.length;
+        var totalItem = lapTotalItem - filteredItemCount;
 
         if (!lrfPlayerList || !lrfPlayerList.length) {
           return {
-            playerList: Object(_helpers_playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__["buildLapPlayerList"])(lapPlayerList),
-            totalItem: lapTotalItem
+            playerList: Object(_helpers_playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__["buildLapPlayerList"])(filteredLapPlayerList),
+            totalItem: totalItem
           };
         }
 
-        var playerList = _helpers_playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].mergePlayerList(lrfPlayerList, lapPlayerList);
+        var playerList = _helpers_playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].mergePlayerList(lrfPlayerList, filteredLapPlayerList);
         var excludedIdCount = lrfPlayerList.filter(function (p) {
           return !idList.includes(p.IbcCustId);
         }).length;
         return {
           playerList: playerList,
-          totalItem: lapTotalItem - excludedIdCount
+          totalItem: totalItem - excludedIdCount
         };
       }).catch(function () {
         return {
@@ -5023,12 +5038,14 @@ function () {
         };
         return _this._refetchFromLrf(lrfParam, lapDataObject, commonService, apiInfo).then(function (response) {
           var nextPlayerList = response.playerList;
+          var filteredItemCount = lapDataObject.differenceList.length - nextPlayerList.length;
+          var totalItem = lapTotalItem - filteredItemCount;
           var excludedIdCount = nextPlayerList.filter(function (p) {
             return !idListNotInLrf.includes(p.IbcCustId);
           }).length;
           return {
             playerList: playerList.concat(nextPlayerList),
-            totalItem: lapTotalItem - excludedIdCount
+            totalItem: totalItem - excludedIdCount
           };
         });
       }).catch(function (error) {
@@ -5043,14 +5060,19 @@ function () {
       var differenceList = lapDataObject.differenceList;
       return commonService.fetchData(lrfDataById.type, lrfDataById.action, _objectSpread({}, lrfParam)).then(function (nextLrfResponse) {
         var nextLrfPlayerList = nextLrfResponse.data.DataList;
+        var filteredLapPlayerList = differenceList.filter(function (x) {
+          return x.IBCCustId === 0 || nextLrfPlayerList.findIndex(function (p) {
+            return p.IbcCustId === x.IBCCustId;
+          }) !== -1;
+        });
 
         if (!nextLrfPlayerList || !nextLrfPlayerList.length) {
           return {
-            playerList: Object(_helpers_playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__["buildLapPlayerList"])(differenceList)
+            playerList: Object(_helpers_playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__["buildLapPlayerList"])(filteredLapPlayerList)
           };
         }
 
-        var playerList = _helpers_playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].mergePlayerList(nextLrfPlayerList, differenceList);
+        var playerList = _helpers_playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].mergePlayerList(nextLrfPlayerList, filteredLapPlayerList);
         return {
           playerList: playerList
         };

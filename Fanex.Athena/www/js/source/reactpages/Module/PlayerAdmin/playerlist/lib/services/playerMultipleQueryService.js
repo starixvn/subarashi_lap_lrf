@@ -57,11 +57,13 @@ export default class PlayerMultipleQueryService {
                 return this._refetchFromLrf(lrfParam, lapDataObject, commonService, apiInfo)
                     .then(response => {
                         const { playerList: nextPlayerList } = response;
+                        const filteredItemCount = lapDataObject.differenceList.length - nextPlayerList.length;
+                        const totalItem = lapTotalItem - filteredItemCount;
                         const excludedIdCount = nextPlayerList.filter(p => !idListNotInLrf.includes(p.IbcCustId)).length;
 
                         return {
                             playerList: playerList.concat(nextPlayerList),
-                            totalItem: lapTotalItem - excludedIdCount
+                            totalItem: totalItem - excludedIdCount
                         };
                     });
             })
@@ -78,13 +80,16 @@ export default class PlayerMultipleQueryService {
         return commonService.fetchData(lrfDataById.type, lrfDataById.action, {...lrfParam })
             .then(nextLrfResponse => {
                 const { DataList: nextLrfPlayerList } = nextLrfResponse.data;
+                const filteredLapPlayerList = differenceList.filter(x => x.IBCCustId === 0 ||
+                    nextLrfPlayerList.findIndex(p => p.IbcCustId === x.IBCCustId) !== -1);
+
                 if (!nextLrfPlayerList || !nextLrfPlayerList.length) {
                     return {
-                        playerList: buildLapPlayerList(differenceList)
+                        playerList: buildLapPlayerList(filteredLapPlayerList)
                     };
                 }
 
-                const playerList = PlayerListDataHelper.mergePlayerList(nextLrfPlayerList, differenceList);
+                const playerList = PlayerListDataHelper.mergePlayerList(nextLrfPlayerList, filteredLapPlayerList);
 
                 return { playerList };
             })

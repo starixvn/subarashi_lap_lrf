@@ -20,6 +20,14 @@ export default class LapPlayerQueryService {
 
     static _fetchFromLrf(param, lrfDataById, lapPlayerList, commonService, lapTotalItem) {
         const idList = getCustIdListFromLapData(lapPlayerList);
+
+        if (idList.length === 0) {
+            return {
+                playerList: buildLapPlayerList(lapPlayerList),
+                totalItem: lapTotalItem
+            }
+        }
+
         const lrfParam = {
             currencyIdList: param.currencyIdList,
             idList: idList.join(','),
@@ -33,19 +41,24 @@ export default class LapPlayerQueryService {
         return commonService.fetchData(lrfDataById.type, lrfDataById.action, lrfParam)
             .then(lrfResponse => {
                 const { DataList: lrfPlayerList } = lrfResponse.data;
+                const filteredLapPlayerList = lapPlayerList.filter(x => x.IBCCustId === 0 ||
+                    lrfPlayerList.findIndex(p => p.IbcCustId === x.IBCCustId) !== -1);
+                const filteredItemCount = lapPlayerList.length - filteredLapPlayerList.length;
+                const totalItem = lapTotalItem - filteredItemCount;
+
                 if (!lrfPlayerList || !lrfPlayerList.length) {
                     return {
-                        playerList: buildLapPlayerList(lapPlayerList),
-                        totalItem: lapTotalItem
+                        playerList: buildLapPlayerList(filteredLapPlayerList),
+                        totalItem
                     }
                 }
 
-                const playerList = PlayerListDataHelper.mergePlayerList(lrfPlayerList, lapPlayerList);
+                const playerList = PlayerListDataHelper.mergePlayerList(lrfPlayerList, filteredLapPlayerList);
                 const excludedIdCount = lrfPlayerList.filter(p => !idList.includes(p.IbcCustId)).length;
 
                 return {
                     playerList,
-                    totalItem: lapTotalItem - excludedIdCount
+                    totalItem: totalItem - excludedIdCount
                 };
             })
             .catch(() => ({
