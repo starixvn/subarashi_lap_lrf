@@ -35,7 +35,6 @@
 
         [HttpGet]
         [ValidatePermissionOnData]
-        [OutputCache(VaryByParam = "*", Location = OutputCacheLocation.ServerAndClient, Duration = 10)]
         public ViewResult Running(int custId, int currencyId)
         {
             var currencyList = SessionService.UserSession.CurrencyList;

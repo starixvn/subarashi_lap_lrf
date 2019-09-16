@@ -36,7 +36,6 @@
 
         [HttpGet]
         [ValidatePermissionOnData]
-        [OutputCache(VaryByParam = "*", Location = OutputCacheLocation.ServerAndClient, Duration = 10)]
         public async Task<ViewResult> Index(int custId, int currencyId)
         {
             var productList = await GetProducts(SessionService.LicenseeSession.LicenseeName).ConfigureAwait(false);
