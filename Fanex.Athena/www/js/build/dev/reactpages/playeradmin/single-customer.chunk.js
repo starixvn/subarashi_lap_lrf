@@ -1586,6 +1586,17 @@ function (_Component) {
 
         _this2._openPopup(url, title);
       };
+
+      window.showVideoPokerGameDetails = function (transId, winlostDate, custId, transType) {
+        var _this2$props10 = _this2.props,
+            rootUrl = _this2$props10.rootUrl,
+            baseCurrency = _this2$props10.baseCurrency;
+        var url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getVideoPokerGameDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
+
+        var title = _this2._getResource('ProductCC') + ' - ' + _this2._getResource('DetailedBetlist') + ' - ' + _this2._formatDateString(winlostDate);
+
+        _this2._openPopup(url, title);
+      };
     }
   }, {
     key: "componentWillUnmount",
@@ -1974,6 +1985,17 @@ function () {
     key: "getPPDetailUrl",
     value: function getPPDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
       var url = rootUrl + 'PragmaticPlayBetList/Detail';
+      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId', transId);
+      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'date', winlostDate);
+      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custId', custId);
+      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transType', transType);
+      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
+      return url;
+    }
+  }, {
+    key: "getVideoPokerGameDetailUrl",
+    value: function getVideoPokerGameDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
+      var url = rootUrl + 'CardClubBetList/Detail';
       url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId', transId);
       url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'date', winlostDate);
       url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custId', custId);
