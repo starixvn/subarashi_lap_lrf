@@ -62,7 +62,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Controllers
         [AjaxRequest]
         [CustomValidateAntiForgery]
         [AutoBindMetaModel(BindAgent = true, BindCurrencyList = true)]
-        public async Task<dynamic> Index(PlayerBtcSingleCustomerMetaModel metaModel)
+        public async Task<dynamic> Index([Bind(Include = "Username,PageSize,PageIndex")]PlayerBtcSingleCustomerMetaModel metaModel)
         {
             if (!ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Controllers
                 metaModel,
                 userSession.Language).ConfigureAwait(false);
 
-                return File(stream, "application/vnd.ms-excel");
+                return File(stream, "application/octet-stream");
             }
 
             return await _betListApiClient.PostAsync<dynamic>("/BettingTicketCenter/GetBySingleCustomer",

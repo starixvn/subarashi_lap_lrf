@@ -76,7 +76,7 @@
                 metaModel,
                 SessionService.UserSession.Language).ConfigureAwait(false);
 
-            return File(stream, "application/vnd.ms-excel");
+            return File(stream, "application/octet-stream");
         }
     }
 }

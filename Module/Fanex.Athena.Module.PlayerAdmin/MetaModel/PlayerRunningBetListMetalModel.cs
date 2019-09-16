@@ -6,7 +6,7 @@
 
     public class PlayerRunningBetListMetalModel : IMetalModelCustomerIdentity, IMetaModelAgent, IMetaModelCurrencyList
     {
-        private const int PageSizeMaximum = 500;
+        private const int PageSizeMaximum = 2000;
 
         private int _pageSize;
 

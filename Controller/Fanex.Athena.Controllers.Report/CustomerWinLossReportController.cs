@@ -54,6 +54,7 @@ namespace Fanex.Athena.Controllers.Report
 
         [HttpPost]
         [AutoBindMetaModel(BindAgent = true)]
+        [ValidationWebRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
         public async Task<ActionResult> Index(CustomerWinLossMetaModel metaModel)
         {
             var userSession = SessionService.UserSession;

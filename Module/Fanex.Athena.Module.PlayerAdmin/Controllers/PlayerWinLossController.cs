@@ -62,7 +62,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Controllers
         [AjaxRequest]
         [CustomValidateAntiForgery]
         [AutoBindMetaModel(BindAgent = true)]
-        public async Task<ActionResult> Index(PlayerWinLossMetaModel metaModel)
+        public async Task<ActionResult> Index([Bind(Include = "Username")]PlayerWinLossMetaModel metaModel)
         {
             if (!ModelState.IsValid)
             {

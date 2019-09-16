@@ -19,8 +19,8 @@
 
     [SessionState(SessionStateBehavior.ReadOnly)]
     [CheckUMFilter]
-    //[AuthorizeRestriction(AppMode.Parasitic)]
-    //[FunctionAuthorization(PermissionKeys.PlayerAdmin)]
+    [AuthorizeRestriction(AppMode.Parasitic)]
+    [FunctionAuthorization(PermissionKeys.PlayerAdmin)]
     public class PlayerBetLimitController : CultureBaseController
     {
         private readonly IPlayerBetLimitRepository _playerBetLimitRepository;
