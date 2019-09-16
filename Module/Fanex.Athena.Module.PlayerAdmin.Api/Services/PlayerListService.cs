@@ -74,7 +74,9 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
         private static void AssignParamByCustId(IObjectDb objectDb, PlayerListByIdMetaModel metaModel)
         {
             objectDb.SetParameterValue("CustIds", metaModel.IdList);
+            objectDb.SetParameterValue("BaFilter", metaModel.BaFilter);
             objectDb.SetParameterValue("SpecialLevel", metaModel.SpecialLevel);
+            objectDb.SetParameterValue("OddsGroups", metaModel.OddsGroup);
             objectDb.SetParameterValue("PageSize", metaModel.PageSize);
             objectDb.SetParameterValue("PageIndex", metaModel.PageIndex);
 

@@ -48,6 +48,8 @@ export default class PlayerMultipleQueryService {
                     currencyIdList: param.currencyIdList,
                     idList: idListNotInLrf.join(','),
                     specialLevel: param.specialLevel,
+                    oddsGroup: param.oddsGroup,
+                    baFilter: param.baFilter,
                     pageSize: param.pageSize,
                     pageIndex: 1
                 }

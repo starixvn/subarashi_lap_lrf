@@ -4659,6 +4659,8 @@ function () {
         currencyIdList: param.currencyIdList,
         idList: idList.join(','),
         specialLevel: param.specialLevel,
+        oddsGroup: param.oddsGroup,
+        baFilter: param.baFilter,
         pageSize: param.pageSize,
         pageIndex: 1
       };
@@ -5014,6 +5016,8 @@ function () {
           currencyIdList: param.currencyIdList,
           idList: idListNotInLrf.join(','),
           specialLevel: param.specialLevel,
+          oddsGroup: param.oddsGroup,
+          baFilter: param.baFilter,
           pageSize: param.pageSize,
           pageIndex: 1
         };
