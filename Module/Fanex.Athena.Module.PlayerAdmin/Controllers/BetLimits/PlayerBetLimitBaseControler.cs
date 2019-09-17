@@ -73,7 +73,7 @@
             return data;
         }
 
-        protected bool HasEditPermission() => _authService.HasPermissions(SessionService.UserSession.PortalFunctionList, PermissionKeys.PlayerAdminBetLimit);
+        protected bool HasEditPermission() => _authService.HasPermissions(SessionService.UserSession.PortalFunctionList, PermissionKeys.PlayerAdminBetLimit_Write);
 
         protected string GetSportName(string sportId) => sportId == MixedSportId ? ViewResources.MixSportsParlay : _cacheRefAdapter.GetSportName(sportId);
     }

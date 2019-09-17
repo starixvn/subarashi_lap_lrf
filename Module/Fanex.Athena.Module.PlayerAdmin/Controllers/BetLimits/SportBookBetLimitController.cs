@@ -55,7 +55,7 @@
         [HttpPost]
         [AjaxRequest]
         [ValidatePermissionOnData(isObject:true)]
-        [FunctionAuthorization(PermissionKeys.PlayerAdminBetLimit)]
+        [FunctionAuthorization(PermissionKeys.PlayerAdminBetLimit_Write)]
         public async Task<JsonResult> UpdateSetting(PlayerBetLimitUpdateMetaModel<PlayerBetLimitMetaModel> metaModel)
         {
             var user = SessionService.UserSession;

@@ -97,6 +97,7 @@
         public const string PlayerAdminStatement = "pa_statement";
         public const string PlayerAdminBetList = "pa_r_bl";
         public const string PlayerAdminBetLimit = "pa_bet_lm";
+        public const string PlayerAdminBetLimit_Write = "pa_bet_lm_r";
         public const string PlayerAdminLog = "pa_log";
 
         public const string AccountInfo = "pa_acc_Info";
