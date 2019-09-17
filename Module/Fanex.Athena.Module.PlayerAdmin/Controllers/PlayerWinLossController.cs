@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.SessionState;
 using Fanex.Athena.Controllers;
+using Fanex.Athena.Model.Auth.DataDomain;
 using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Model.Core.DTO.Common;
 using Fanex.Athena.Model.Core.MetaModel.Product;
@@ -20,7 +21,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Controllers
 {
     [SessionState(SessionStateBehavior.ReadOnly)]
     [CheckUMFilter]
-    [FunctionAuthorization(Model.Auth.DataDomain.PermissionKeys.AccountInfo)]
+    [FunctionAuthorization(PermissionKeys.AccountInfo)]
     public class PlayerWinLossController : CultureBaseController
     {
         private readonly IProductService _productService;

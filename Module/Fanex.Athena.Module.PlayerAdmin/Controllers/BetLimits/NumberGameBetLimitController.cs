@@ -2,6 +2,7 @@
 {
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
     using Fanex.Athena.Module.PlayerAdmin.Repositories.Interfaces;
@@ -49,7 +50,7 @@
         [HttpPost]
         [AjaxRequest]
         [ValidatePermissionOnData(isObject:true)]
-        [FunctionAuthorization(Model.Auth.DataDomain.PermissionKeys.PlayerAdminBetLimit)]
+        [FunctionAuthorization(PermissionKeys.PlayerAdminBetLimit)]
         public async Task<JsonResult> UpdateSetting(PlayerBetLimitUpdateMetaModel<PlayerBetLimitMetaModel> metaModel)
         {
             var user = SessionService.UserSession;

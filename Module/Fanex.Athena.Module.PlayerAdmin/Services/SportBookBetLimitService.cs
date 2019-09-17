@@ -44,7 +44,7 @@
             return result;
         }
 
-        public async Task<IResultInfo> UpdateSettingAsync(PlayerBetLimitUpdateMetaModel<PlayerBetLimitMetaModel> metaModel)
+        public async Task<IResultInfo> UpdateSettingAsync(PlayerBetLimitUpdateMetaModel<PlayerBetLimitMetaModel> metaModel, bool isShowMixedSport)
         {
             if (metaModel.Setting is null || !metaModel.Setting.Any(x => x.Id == ((int)SportType.Esports).ToString()))
             {
@@ -55,7 +55,7 @@
                 };
             }
 
-            var result = await _betSetting.UpdateSettingAsync(metaModel).ConfigureAwait(false);
+            var result = await _betSetting.UpdateSettingAsync(metaModel, isShowMixedSport).ConfigureAwait(false);
             if (!result.IsSuccessful)
             {
                 return result;

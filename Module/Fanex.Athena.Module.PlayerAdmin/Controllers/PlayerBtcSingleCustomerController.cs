@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.SessionState;
 using Fanex.Athena.Controllers;
+using Fanex.Athena.Model.Auth.DataDomain;
 using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Module.PlayerAdmin.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.ViewModels;
@@ -17,7 +18,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Controllers
 {
     [SessionState(SessionStateBehavior.ReadOnly)]
     [CheckUMFilter]
-    [FunctionAuthorization(Model.Auth.DataDomain.PermissionKeys.AccountInfo)]
+    [FunctionAuthorization(PermissionKeys.AccountInfo)]
     public class PlayerBtcSingleCustomerController : CultureBaseController
     {
         private const byte AllPlatform = 0;

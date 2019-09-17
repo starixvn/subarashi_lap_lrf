@@ -56,13 +56,13 @@
             return Enumerable.Empty<PlayerBetLimit>();
         }
 
-        public async Task<IResultInfo> UpdateSettingAsync(PlayerBetLimitUpdateMetaModel<PlayerBetLimitMetaModel> metaModel)
+        public async Task<IResultInfo> UpdateSettingAsync(PlayerBetLimitUpdateMetaModel<PlayerBetLimitMetaModel> metaModel, bool isShowMixedSport)
         {
             const string UspName = "Lrf_CustomerUpdMember_All";
 
             using (var db = _db.GetObjectDb(UspName))
             {
-                AddUpdateParameter(db, metaModel);
+                AddUpdateParameter(db, metaModel, isShowMixedSport);
 
                 await db.ExecuteNonQueryAsync().ConfigureAwait(false);
 
@@ -113,31 +113,40 @@
             return sport;
         }
 
-        private static void AddUpdateParameter(IObjectDb db, PlayerBetLimitUpdateMetaModel<PlayerBetLimitMetaModel> metaModel)
+        private static void AddUpdateParameter(IObjectDb db, PlayerBetLimitUpdateMetaModel<PlayerBetLimitMetaModel> metaModel, bool isShowMixedSport)
         {
             db.SetParameterValue("licenseeName", metaModel.SiteName);
             db.SetParameterValue("ip", metaModel.Ip);
             db.SetParameterValue("language", metaModel.Language);
             db.SetParameterValue("userid", metaModel.UserId);
             db.SetParameterValue("custid", metaModel.CustId);
-            AddUpdateSettingParameter(db, metaModel.Setting);
+            AddUpdateSettingParameter(db, metaModel.Setting, isShowMixedSport);
 
             db.SetParameterValue("ErrCode", null);
             db.SetParameterValue("ErrMsg", null);
         }
 
-        private static void AddUpdateSettingParameter(IObjectDb db, IEnumerable<PlayerBetLimitMetaModel> setting)
+        private static void AddUpdateSettingParameter(IObjectDb db, IEnumerable<PlayerBetLimitMetaModel> setting, bool isShowMixedSport)
         {
             foreach (var type in SportTypes)
             {
                 var item = setting.FirstOrDefault(x => x.Id == type);
                 var sportSuffix = GetSportSuffix(type);
 
-                db.SetParameterValue("minbet" + sportSuffix, item?.MinBet);
-                db.SetParameterValue("maxbet" + sportSuffix, item?.MaxBet);
-                db.SetParameterValue("maxpermatch" + sportSuffix, item?.MaxPerMatch);
-                db.SetParameterValue("updateminmaxbet" + sportSuffix, item?.IsUpdated);
+                AddSportSettingParameter(db, item, sportSuffix);
             }
+
+            var mixSport = isShowMixedSport ? setting.FirstOrDefault(x => x.Id == MixedSportId) : null;
+
+            AddSportSettingParameter(db, mixSport, GetSportSuffix(MixedSportId));
+        }
+
+        private static void AddSportSettingParameter(IObjectDb db, PlayerBetLimitMetaModel setting, string sportSuffix)
+        {
+            db.SetParameterValue("minbet" + sportSuffix, setting?.MinBet);
+            db.SetParameterValue("maxbet" + sportSuffix, setting?.MaxBet);
+            db.SetParameterValue("maxpermatch" + sportSuffix, setting?.MaxPerMatch);
+            db.SetParameterValue("updateminmaxbet" + sportSuffix, setting?.IsUpdated);
         }
 
         private static string GetSportSuffix(string sportId) => sportId != ((int) SportType.Soccer).ToString() ? "v" + sportId : string.Empty;
