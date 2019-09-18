@@ -19,19 +19,22 @@ export class FormFilter extends PureComponent {
     constructor(props) {
         super(props);
 
+        this.allOddsGroupString = Object.keys(oddsGroupListWithStyle).join(',');
+        this.allCurrencyString = props.currencyList.map(c => c.Id).join(',');
+        this.allSpecialLevel = Object.keys(specialLevelListWithColor).map(item => item).join(',');
+
+        this.userGuide = this._renderUserGuide();
+        this.userNameRef = React.createRef();
+
         this.state = {
             bankAccountNumber: '',
             email: '',
-            currencyIdList: '',
-            oddsGroup: '',
-            specialLevel: '',
+            currencyIdList: this.allCurrencyString,
+            oddsGroup: this.allOddsGroupString,
+            specialLevel: this.allSpecialLevel,
             baFilter: baStatusList.All,
             searchOption: searchOptions.matchCase
         }
-
-        this.userGuide = this._renderUserGuide();
-        this.allSpecialLevel = Object.keys(specialLevelListWithColor).map(item => item).join(',');
-        this.userNameRef = React.createRef();
     }
 
     componentDidMount() {
@@ -49,9 +52,9 @@ export class FormFilter extends PureComponent {
         const { isAdvancedSearch } = this.props;
         if (prevProps.isAdvancedSearch !== isAdvancedSearch && !isAdvancedSearch) {
             this.setState({
-                currencyIdList: '',
-                oddsGroup: '',
-                specialLevel: '',
+                currencyIdList: this.allCurrencyString,
+                oddsGroup: this.allOddsGroupString,
+                specialLevel: this.allSpecialLevel,
                 baFilter: baStatusList.All
             });
         }
@@ -71,13 +74,13 @@ export class FormFilter extends PureComponent {
         }
 
         const { pagingOption, searchPlayer, currencyList } = this.props;
-        const { specialLevel, currencyIdList, oddsGroup, ...allParam } = this.state;
+        const { specialLevel, currencyIdList, oddsGroup, ...restParam } = this.state;
         const actualSpecialLevel = specialLevel.trim();
         const isSelectAllCurrency = currencyIdList.trim().split(',').length === currencyList.length;
         const isSelectAllOddsGroup = oddsGroup.trim().split(',').length === Object.keys(oddsGroupListWithStyle).length;
 
         const param = {
-            ...allParam,
+            ...restParam,
             userName: encode(userName),
             currencyIdList: isSelectAllCurrency ? '' : currencyIdList,
             oddsGroup: isSelectAllOddsGroup ? '' : oddsGroup,
@@ -137,6 +140,8 @@ export class FormFilter extends PureComponent {
     render() {
         const { bankAccountNumber, email, searchOption, ...advancedSearchParam } = this.state;
         const { type, isAdvancedSearch, isFilterCollapsing, currencyList, getSuggestionList, hasBaPermission } = this.props;
+        const { currencyIdList, oddsGroup, specialLevel } = advancedSearchParam;
+        const isValidParam = !!currencyIdList && !!oddsGroup && !!specialLevel;
         const iconToggle = {
             tag: 'div',
             className: isFilterCollapsing ? 'chevron down' : 'chevron up',
@@ -172,7 +177,8 @@ export class FormFilter extends PureComponent {
                     <div className="col-12 col-md-2 col-sm-2 col-lg-2 col-xl-1">
                         <div className="form-group">
                             <div className="button-group">
-                                <button type="button" className="btn btn-submit" onClick={this.handleSubmit}>{LangHelper.getSingleResource("Submit")}</button>
+                                <button type="button" className="btn btn-submit" disabled={!isValidParam}
+                                 onClick={this.handleSubmit}>{LangHelper.getSingleResource("Submit")}</button>
                             </div>
                         </div>
                     </div>
