@@ -1118,20 +1118,24 @@ function (_PureComponent) {
       _this.userNameRef.current.value = value;
     });
 
-    _this.state = {
-      bankAccountNumber: '',
-      email: '',
-      currencyIdList: '',
-      oddsGroup: '',
-      specialLevel: '',
-      baFilter: _lib_constants__WEBPACK_IMPORTED_MODULE_8__["baStatusList"].All,
-      searchOption: _lib_constants__WEBPACK_IMPORTED_MODULE_8__["searchOptions"].matchCase
-    };
-    _this.userGuide = _this._renderUserGuide();
+    _this.allOddsGroupString = Object.keys(_lib_constants__WEBPACK_IMPORTED_MODULE_8__["oddsGroupListWithStyle"]).join(',');
+    _this.allCurrencyString = props.currencyList.map(function (c) {
+      return c.Id;
+    }).join(',');
     _this.allSpecialLevel = Object.keys(_lib_constants__WEBPACK_IMPORTED_MODULE_8__["specialLevelListWithColor"]).map(function (item) {
       return item;
     }).join(',');
+    _this.userGuide = _this._renderUserGuide();
     _this.userNameRef = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
+    _this.state = {
+      bankAccountNumber: '',
+      email: '',
+      currencyIdList: _this.allCurrencyString,
+      oddsGroup: _this.allOddsGroupString,
+      specialLevel: _this.allSpecialLevel,
+      baFilter: _lib_constants__WEBPACK_IMPORTED_MODULE_8__["baStatusList"].All,
+      searchOption: _lib_constants__WEBPACK_IMPORTED_MODULE_8__["searchOptions"].matchCase
+    };
     return _this;
   }
 
@@ -1157,9 +1161,9 @@ function (_PureComponent) {
 
       if (prevProps.isAdvancedSearch !== isAdvancedSearch && !isAdvancedSearch) {
         this.setState({
-          currencyIdList: '',
-          oddsGroup: '',
-          specialLevel: '',
+          currencyIdList: this.allCurrencyString,
+          oddsGroup: this.allOddsGroupString,
+          specialLevel: this.allSpecialLevel,
           baFilter: _lib_constants__WEBPACK_IMPORTED_MODULE_8__["baStatusList"].All
         });
       }
@@ -1192,13 +1196,13 @@ function (_PureComponent) {
           specialLevel = _this$state2.specialLevel,
           currencyIdList = _this$state2.currencyIdList,
           oddsGroup = _this$state2.oddsGroup,
-          allParam = _objectWithoutProperties(_this$state2, ["specialLevel", "currencyIdList", "oddsGroup"]);
+          restParam = _objectWithoutProperties(_this$state2, ["specialLevel", "currencyIdList", "oddsGroup"]);
 
       var actualSpecialLevel = specialLevel.trim();
       var isSelectAllCurrency = currencyIdList.trim().split(',').length === currencyList.length;
       var isSelectAllOddsGroup = oddsGroup.trim().split(',').length === Object.keys(_lib_constants__WEBPACK_IMPORTED_MODULE_8__["oddsGroupListWithStyle"]).length;
 
-      var param = _objectSpread({}, allParam, {
+      var param = _objectSpread({}, restParam, {
         userName: Object(_jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_14__["encode"])(userName),
         currencyIdList: isSelectAllCurrency ? '' : currencyIdList,
         oddsGroup: isSelectAllOddsGroup ? '' : oddsGroup,
@@ -1246,6 +1250,10 @@ function (_PureComponent) {
           currencyList = _this$props2.currencyList,
           getSuggestionList = _this$props2.getSuggestionList,
           hasBaPermission = _this$props2.hasBaPermission;
+      var currencyIdList = advancedSearchParam.currencyIdList,
+          oddsGroup = advancedSearchParam.oddsGroup,
+          specialLevel = advancedSearchParam.specialLevel;
+      var isValidParam = !!currencyIdList && !!oddsGroup && !!specialLevel;
       var iconToggle = {
         tag: 'div',
         className: isFilterCollapsing ? 'chevron down' : 'chevron up',
@@ -1300,6 +1308,7 @@ function (_PureComponent) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "button",
         className: "btn btn-submit",
+        disabled: !isValidParam,
         onClick: this.handleSubmit
       }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("Submit"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2"
@@ -4572,12 +4581,18 @@ function () {
       var newDataList = _toConsumableArray(dataList);
 
       var isTringType = _constants__WEBPACK_IMPORTED_MODULE_1__["stringTypeFields"].includes(sortBy);
+      var isDateTimeField = sortBy === _constants__WEBPACK_IMPORTED_MODULE_1__["fields"].LastTransaction;
       newDataList.sort(function (currentItem, nextItem) {
         var currentValue = currentItem[sortBy];
         var nextValue = nextItem[sortBy];
 
         if (isTringType) {
           return _this.sortStringValue(currentValue || '', nextValue || '', isSortAscending);
+        } else if (isDateTimeField) {
+          var currentItemDate = currentValue ? new Date(currentValue) : 0;
+          var nextItemDate = nextValue ? new Date(nextValue) : 0;
+          var comparingResult = (_this.isValidDate(currentItemDate) ? currentItemDate : 0) - (_this.isValidDate(nextItemDate) ? nextItemDate : 0);
+          return isSortAscending ? comparingResult : -comparingResult;
         }
 
         return isSortAscending ? currentValue - nextValue : -(currentValue - nextValue);
@@ -4591,6 +4606,11 @@ function () {
       var nextUpperCase = next.toUpperCase();
       var sortResult = currentUpperCase > nextUpperCase ? 1 : currentUpperCase < nextUpperCase ? -1 : 0;
       return isSortAscending ? sortResult : -sortResult;
+    }
+  }, {
+    key: "isValidDate",
+    value: function isValidDate(d) {
+      return d instanceof Date && !isNaN(d);
     }
   }]);
 
