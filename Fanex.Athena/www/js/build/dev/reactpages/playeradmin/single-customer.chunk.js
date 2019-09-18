@@ -343,7 +343,7 @@ var Content = function Content(props) {
       return props.toggleLoader(true);
     },
     afterShowParlayFunc: function afterShowParlayFunc() {
-      return props.toggleLoader(true);
+      return props.toggleLoader(false);
     }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DataGrid__WEBPACK_IMPORTED_MODULE_9__["default"], dataGridProps));
 };

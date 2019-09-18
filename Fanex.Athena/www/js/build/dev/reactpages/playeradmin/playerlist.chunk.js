@@ -1185,16 +1185,23 @@ function (_PureComponent) {
 
       var _this$props = this.props,
           pagingOption = _this$props.pagingOption,
-          searchPlayer = _this$props.searchPlayer;
+          searchPlayer = _this$props.searchPlayer,
+          currencyList = _this$props.currencyList;
 
       var _this$state2 = this.state,
           specialLevel = _this$state2.specialLevel,
-          allParam = _objectWithoutProperties(_this$state2, ["specialLevel"]);
+          currencyIdList = _this$state2.currencyIdList,
+          oddsGroup = _this$state2.oddsGroup,
+          allParam = _objectWithoutProperties(_this$state2, ["specialLevel", "currencyIdList", "oddsGroup"]);
 
       var actualSpecialLevel = specialLevel.trim();
+      var isSelectAllCurrency = currencyIdList.trim().split(',').length === currencyList.length;
+      var isSelectAllOddsGroup = oddsGroup.trim().split(',').length === Object.keys(_lib_constants__WEBPACK_IMPORTED_MODULE_8__["oddsGroupListWithStyle"]).length;
 
       var param = _objectSpread({}, allParam, {
         userName: Object(_jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_14__["encode"])(userName),
+        currencyIdList: isSelectAllCurrency ? '' : currencyIdList,
+        oddsGroup: isSelectAllOddsGroup ? '' : oddsGroup,
         specialLevel: actualSpecialLevel === '' ? this.allSpecialLevel : actualSpecialLevel,
         pageSize: pagingOption.PageSize,
         pageIndex: 1
@@ -4690,12 +4697,9 @@ function () {
         }
 
         var playerList = _helpers_playerListDataHelper__WEBPACK_IMPORTED_MODULE_0__["default"].mergePlayerList(lrfPlayerList, filteredLapPlayerList);
-        var excludedIdCount = lrfPlayerList.filter(function (p) {
-          return !idList.includes(p.IbcCustId);
-        }).length;
         return {
           playerList: playerList,
-          totalItem: totalItem - excludedIdCount
+          totalItem: totalItem
         };
       }).catch(function () {
         return {
@@ -5040,12 +5044,9 @@ function () {
           var nextPlayerList = response.playerList;
           var filteredItemCount = lapDataObject.differenceList.length - nextPlayerList.length;
           var totalItem = lapTotalItem - filteredItemCount;
-          var excludedIdCount = nextPlayerList.filter(function (p) {
-            return !idListNotInLrf.includes(p.IbcCustId);
-          }).length;
           return {
             playerList: playerList.concat(nextPlayerList),
-            totalItem: totalItem - excludedIdCount
+            totalItem: totalItem
           };
         });
       }).catch(function (error) {
