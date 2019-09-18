@@ -10,7 +10,7 @@ import { licenseeType } from '../lib/constants';
 import CollapsiblePanel from '@jsroot/components/collapsible-panel';
 import UserGuide from '@jsroot/components/UserGuide';
 import LangHelper from '@jsroot/lib/langHelper';
-import { searchOptions, baStatusList, specialLevelListWithColor, emailPattern } from '../lib/constants';
+import { searchOptions, baStatusList, specialLevelListWithColor, emailPattern, oddsGroupListWithStyle } from '../lib/constants';
 import UserNameInput from './filter/UserNameInput';
 import QueryString from '@jsroot/lib/QueryString';
 import { encode } from '@jsroot/lib/htmlHelper';
@@ -70,12 +70,17 @@ export class FormFilter extends PureComponent {
             return;
         }
 
-        const { pagingOption, searchPlayer } = this.props;
-        const { specialLevel, ...allParam } = this.state;
+        const { pagingOption, searchPlayer, currencyList } = this.props;
+        const { specialLevel, currencyIdList, oddsGroup, ...allParam } = this.state;
         const actualSpecialLevel = specialLevel.trim();
+        const isSelectAllCurrency = currencyIdList.trim().split(',').length === currencyList.length;
+        const isSelectAllOddsGroup = oddsGroup.trim().split(',').length === Object.keys(oddsGroupListWithStyle).length;
+
         const param = {
             ...allParam,
             userName: encode(userName),
+            currencyIdList: isSelectAllCurrency ? '' : currencyIdList,
+            oddsGroup: isSelectAllOddsGroup ? '' : oddsGroup,
             specialLevel: actualSpecialLevel === '' ? this.allSpecialLevel : actualSpecialLevel,
             pageSize: pagingOption.PageSize,
             pageIndex: 1

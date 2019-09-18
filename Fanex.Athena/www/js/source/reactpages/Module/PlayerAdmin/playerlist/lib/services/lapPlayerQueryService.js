@@ -54,11 +54,10 @@ export default class LapPlayerQueryService {
                 }
 
                 const playerList = PlayerListDataHelper.mergePlayerList(lrfPlayerList, filteredLapPlayerList);
-                const excludedIdCount = lrfPlayerList.filter(p => !idList.includes(p.IbcCustId)).length;
 
                 return {
                     playerList,
-                    totalItem: totalItem - excludedIdCount
+                    totalItem
                 };
             })
             .catch(() => ({

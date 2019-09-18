@@ -42,7 +42,7 @@ export const FastCrossLink = (props) => {
             <div className="panel-header">{ClientResourceManager.getText('FastCrossLink')}</div>
             <div className="panel-body">
                 <div>
-                    <span><a className="link">{ClientResourceManager.getText('BettingTicketCenter')}</a></span>
+                    <span>{ClientResourceManager.getText('BettingTicketCenter')}</span>
                     <strong className="divider">></strong>
                     <span><a className="link" onClick={(e) => handleClickLink(e, popupSingleCustomer)}>{ClientResourceManager.getText('SingleCustomer')}</a></span>
                 </div>

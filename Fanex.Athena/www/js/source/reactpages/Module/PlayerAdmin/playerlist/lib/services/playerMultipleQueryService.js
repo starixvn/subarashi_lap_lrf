@@ -59,11 +59,10 @@ export default class PlayerMultipleQueryService {
                         const { playerList: nextPlayerList } = response;
                         const filteredItemCount = lapDataObject.differenceList.length - nextPlayerList.length;
                         const totalItem = lapTotalItem - filteredItemCount;
-                        const excludedIdCount = nextPlayerList.filter(p => !idListNotInLrf.includes(p.IbcCustId)).length;
 
                         return {
                             playerList: playerList.concat(nextPlayerList),
-                            totalItem: totalItem - excludedIdCount
+                            totalItem
                         };
                     });
             })
