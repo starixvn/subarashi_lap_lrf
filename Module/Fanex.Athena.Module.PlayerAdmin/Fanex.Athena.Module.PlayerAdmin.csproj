@@ -58,6 +58,9 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http, Version=4.1.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Net.Http.4.3.4\lib\net46\System.Net.Http.dll</HintPath>
+    </Reference>
     <Reference Include="System.Security" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
@@ -105,6 +108,7 @@
     <Compile Include="MetaModel\PlayerBetLimitMetaModel.cs" />
     <Compile Include="MetaModel\PlayerBtcSingleCustomerMetaModel.cs" />
     <Compile Include="MetaModel\PlayerRunningBetListMetalModel.cs" />
+    <Compile Include="MetaModel\PlayerStatementMetaModel.cs" />
     <Compile Include="MetaModel\PlayerWinLossMetaModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AGCasinoBetLimitRepository.cs" />
@@ -121,13 +125,16 @@
     <Compile Include="Services\AGCasinoBetLimitService.cs" />
     <Compile Include="Repositories\PlayerBetLimitRepository.cs" />
     <Compile Include="Services\Interfaces\IAGCasinoBetLimitService.cs" />
+    <Compile Include="Services\Interfaces\IPlayerStatementService.cs" />
     <Compile Include="Services\Interfaces\ISportBookBetLimitService.cs" />
+    <Compile Include="Services\PlayerStatementService.cs" />
     <Compile Include="Services\SportBookBetLimitService.cs" />
     <Compile Include="ViewModels\Api\CustomerWinLossApiViewModel.cs" />
     <Compile Include="ViewModels\PlayerBetLimitProductViewModel.cs" />
     <Compile Include="ViewModels\PlayerBetLimitViewModel.cs" />
     <Compile Include="ViewModels\PlayerBtcSingleCustomerViewModel.cs" />
     <Compile Include="ViewModels\PlayerFastCrossLinkViewModel.cs" />
+    <Compile Include="ViewModels\PlayerStatementViewModel.cs" />
     <Compile Include="ViewModels\PlayerRunningBetListViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

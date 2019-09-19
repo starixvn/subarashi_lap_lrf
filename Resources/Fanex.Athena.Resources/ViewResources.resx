@@ -2498,4 +2498,8 @@
     <value>Max Bet Per Draw must be more than or equal to</value>
     <comment>112658</comment>
   </data>
+  <data name="BettingStatement" xml:space="preserve">
+    <value>Betting Statement</value>
+    <comment>112658</comment>
+  </data>
 </root>

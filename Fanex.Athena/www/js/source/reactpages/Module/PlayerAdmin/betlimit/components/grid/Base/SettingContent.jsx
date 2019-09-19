@@ -96,17 +96,15 @@ const SettingContent = (Grid, DataHandling) => {
         }
 
         onSubmit = (e) => {
-            if (e.button === 0 || e.which === 1) {
-                if (!this.state.showError) {
-                    const data = this.state.data;
-                    const submitData = DataHandling.getSubmitData(data);
+            if (!this.state.showError) {
+                const data = this.state.data;
+                const submitData = DataHandling.getSubmitData(data);
 
-                    if (!submitData.IsValid) {
-                        this._showError(submitData.Data);
-                    }
-                    else {
-                        this._showConfirmation(() => this._submit(submitData.Data));
-                    }
+                if (!submitData.IsValid) {
+                    this._showError(submitData.Data);
+                }
+                else {
+                    this._showConfirmation(() => this._submit(submitData.Data));
                 }
             }
         }

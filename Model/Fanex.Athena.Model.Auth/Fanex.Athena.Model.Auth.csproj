@@ -34,6 +34,10 @@
     <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Module\Fanex.Athena.Module.PlayerAdmin.Api\bin\Debug\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Runtime.Serialization" />
@@ -41,6 +45,7 @@
   <ItemGroup>
     <Compile Include="CurrencyUser.cs" />
     <Compile Include="Enum\AppMode.cs" />
+    <Compile Include="ExternalServiceToken.cs" />
     <Compile Include="Function.cs" />
     <Compile Include="LicenseeAuthInfo.cs" />
     <Compile Include="MetaModel\LoginMetalModel.cs" />

@@ -1,24 +1,80 @@
-﻿using Fanex.Athena.Controllers;
-using Fanex.Athena.Model.Auth.DataDomain;
-using Fanex.Athena.Service.Core.Common.Interfaces;
-using Fanex.Athena.Service.Core.Users.Interfaces;
-using Fanex.Athena.Web.ActionFilter;
-using ONEbook.UM.Filters;
-using System.Web.Mvc;
-using System.Web.SessionState;
-
-namespace Fanex.Athena.Module.PlayerAdmin.Controllers
+﻿namespace Fanex.Athena.Module.PlayerAdmin.Controllers
 {
+    using System;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
+    using System.Web.SessionState;
+    using System.Web.UI;
+    using Fanex.Athena.Controllers;
+    using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Auth.Enum;
+    using Fanex.Athena.Module.PlayerAdmin.MetaModel;
+    using Fanex.Athena.Module.PlayerAdmin.Services.Interfaces;
+    using Fanex.Athena.Module.PlayerAdmin.ViewModels;
+    using Fanex.Athena.Resources;
+    using Fanex.Athena.Service.Core.Common.Interfaces;
+    using Fanex.Athena.Service.Core.Users.Interfaces;
+    using Fanex.Athena.Web.ActionFilter;
+    using ONEbook.UM.Filters;
+
     [SessionState(SessionStateBehavior.ReadOnly)]
     [CheckUMFilter]
+    [AuthorizeRestriction(AppMode.Parasitic)]
     [FunctionAuthorization(PermissionKeys.PlayerAdminStatement)]
     public class PlayerStatementController : CultureBaseController
     {
-        public PlayerStatementController(ILanguageService languageService,
-          ISessionService sessionService
-          )
-       : base(languageService, sessionService)
+        private const int MaximumYear = 2;
+
+        private readonly IPlayerStatementService _playerStatementService;
+
+        public PlayerStatementController(
+            ILanguageService languageService,
+            ISessionService sessionService,
+            IPlayerStatementService playerStatementService)
+        : base(languageService, sessionService)
         {
+            _playerStatementService = playerStatementService;
+        }
+
+        [HttpGet]
+        [ValidatePermissionOnData]
+        public ViewResult Statement(int custId, int currencyId)
+        {
+            var today = DateTime.Today;
+            var viewModel = new PlayerStatementViewModel
+            {
+                CustId = custId,
+                CurrencyId = currencyId,
+                FromDate = new DateTime(today.Year, today.Month, 1),
+                ToDate = today,
+                MinDate = new DateTime(today.Year - MaximumYear, 1, 1)
+            };
+
+            return View("~/Views/Desktop/Module/PlayerAdmin/PlayerStatement/Statement.cshtml", viewModel);
+        }
+
+        [HttpPost]
+        [AjaxRequest]
+        [CustomValidateAntiForgery]
+        [ValidatePermissionOnData(isObject: true)]
+        [OutputCache(NoStore = true, Duration = 0, Location = OutputCacheLocation.None, VaryByParam = "*")]
+        public async Task<string> GetStatementUrl(PlayerStatementMetaModel metaModel)
+        {
+            if (!ValidateRequestParameter(metaModel))
+            {
+                throw new InvalidOperationException(ViewResources.InvalidParams);
+            }
+
+            metaModel.SiteName = SessionService.LicenseeSession.LicenseeName;
+            metaModel.Language = SessionService.UserSession.Language;
+            return await _playerStatementService.GetUrl(metaModel).ConfigureAwait(false);
+        }
+
+        private static bool ValidateRequestParameter(PlayerStatementMetaModel metaModel)
+        {
+            return metaModel.ToDate >= metaModel.FromDate
+                && metaModel.FromDate.Month == metaModel.ToDate.Month
+                && metaModel.FromDate.Year >= (DateTime.Today.Year - MaximumYear);
         }
     }
 }
