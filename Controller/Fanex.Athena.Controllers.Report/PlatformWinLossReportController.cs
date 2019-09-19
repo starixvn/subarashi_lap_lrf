@@ -6,9 +6,7 @@
 
 namespace Fanex.Athena.Controllers.Report
 {
-    using System;
     using System.Linq;
-    using System.Net.Http;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Fanex.Athena.Model.Auth.DataDomain;
@@ -64,6 +62,7 @@ namespace Fanex.Athena.Controllers.Report
 
             return View("~/Views/Desktop/Report/PlatformWinLoss/Main.cshtml", model);
         }
+
         [HttpPost]
         [ValidationWebRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
         [AutoBindMetaModel(BindAgent = true)]
@@ -101,36 +100,16 @@ namespace Fanex.Athena.Controllers.Report
 
         private async Task<ActionResult> ProcessSummaryLevel(PlatformWinLossMetaModel metaModel, string language)
         {
-            const string FileName = "PlatformWinLossSummary.xls";
-            var apiMetalModel = new PlatformWinLossApiMetaModel
-            {
-                SortBy = metaModel.SortBy,
-                SortOrder = metaModel.SortOrder,
-                AgentListXml = metaModel.AgentListXml,
-                BaseCurrency = metaModel.BaseCurrency,
-                CurrencyId = metaModel.CurrencyId,
-                CurrencyList = metaModel.CurrencyList,
-                CurrencyName = metaModel.CurrencyName,
-                DrawFilter = metaModel.DrawFilter,
-                FromDay = metaModel.FromDay,
-                HasComm = metaModel.HasComm,
-                Month = metaModel.Month,
-                PlatformType = metaModel.PlatformType,
-                ProductOptions = metaModel.ProductOptions,
-                ToDay = metaModel.ToDay,
-                Year = metaModel.Year
-
-            };
             if (metaModel.IsExportExcel)
             {
+                const string FileName = "PlatformWinLossSummary.xls";
                 var data = await _reportAPIClient.PostByteContentAsync("api/PlatformWinLoss/ExportSummaryData", metaModel, language, MediaType.MsgPack).ConfigureAwait(false);
                 return File(data, "application/octet-stream", FileName);
             }
             else
             {
-                return JsonString(await _reportAPIClient.PostAsyncString("api/PlatformWinLoss/GetSummaryData", apiMetalModel, language).ConfigureAwait(false));
+                return JsonString(await _reportAPIClient.PostAsyncString("api/PlatformWinLoss/GetSummaryData", metaModel, language).ConfigureAwait(false));
             }
         }
-
     }
 }

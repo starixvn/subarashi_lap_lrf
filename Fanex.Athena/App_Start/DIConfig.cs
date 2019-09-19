@@ -1,19 +1,4 @@
-﻿
-using Autofac;
-using Autofac.Integration.Mvc;
-using Autofac.Integration.WebApi;
-
-using CitiXchangeLibrary;
-using Fanex.Athena.Api.StatelessBase.Logger;
-using Fanex.Athena.DataAccess.Report;
-using Fanex.Athena.DataAccess.Report.Interfaces;
-using Fanex.Athena.Extension.Utility.Internal;
-using Fanex.Logging;
-
-using ONEbook.UM.Services;
-using ONEbook.UM.Services.Impl;
-
-using System;
+﻿using System;
 using System.Configuration;
 using System.Linq;
 using System.Reflection;
@@ -21,6 +6,18 @@ using System.Web.Compilation;
 using System.Web.Http;
 using System.Web.Http.ExceptionHandling;
 using System.Web.Mvc;
+using Autofac;
+using Autofac.Integration.Mvc;
+using Autofac.Integration.WebApi;
+using CitiXchangeLibrary;
+using Fanex.Athena.Api.StatelessBase.Logger;
+using Fanex.Athena.DataAccess.Report;
+using Fanex.Athena.DataAccess.Report.Interfaces;
+using Fanex.Athena.Extension.Utility.Internal;
+using Fanex.Athena.Service.StatelessCore.Interfaces;
+using Fanex.Logging;
+using ONEbook.UM.Services;
+using ONEbook.UM.Services.Impl;
 
 namespace Fanex.Athena
 {
@@ -45,8 +42,9 @@ namespace Fanex.Athena
 
             builder.RegisterFilterProvider();
             builder.RegisterWebApiFilterProvider(config);
-            
+
             RegisterThirdpartyServices(builder);
+            RegisterSingleton(builder);
 
             // generic types
             builder.RegisterGeneric(typeof(ThirdPartyWinLossDataAccess<>))
@@ -113,6 +111,11 @@ namespace Fanex.Athena
         private static Assembly[] GetModuleAssemblies(Assembly[] assemblies)
         {
             return assemblies.Where(ass => ass.FullName.Contains("Fanex.Athena.Module")).ToArray();
+        }
+
+        private static void RegisterSingleton(ContainerBuilder builder)
+        {
+            builder.RegisterType<Service.StatelessCore.HttpClientFactory>().As<IHttpClientFactory>().SingleInstance();
         }
     }
 }

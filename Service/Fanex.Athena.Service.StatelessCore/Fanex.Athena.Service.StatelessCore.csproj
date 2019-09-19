@@ -91,6 +91,8 @@
   <ItemGroup>
     <Compile Include="AuthorizationService.cs" />
     <Compile Include="BetTypeService.cs" />
+    <Compile Include="HttpClientFactory.cs" />
+    <Compile Include="Interfaces\IHttpClientFactory.cs" />
     <Compile Include="Interfaces\ILicenseeSettingService.cs" />
     <Compile Include="Interfaces\IReportSettingService.cs" />
     <Compile Include="LicenseeSettingService.cs" />

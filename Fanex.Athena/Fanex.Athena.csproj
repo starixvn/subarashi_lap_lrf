@@ -5719,6 +5719,10 @@
       <Project>{DD931ADB-A994-49C0-95A3-72BCB6E22679}</Project>
       <Name>Fanex.Athena.Web</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Service\Fanex.Athena.Service.StatelessCore\Fanex.Athena.Service.StatelessCore.csproj">
+      <Project>{DA9A50E3-C62D-4F12-96C2-3AC289D423FE}</Project>
+      <Name>Fanex.Athena.Service.StatelessCore</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

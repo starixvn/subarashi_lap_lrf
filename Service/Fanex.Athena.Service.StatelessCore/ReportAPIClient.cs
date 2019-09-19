@@ -1,11 +1,9 @@
 ﻿using System;
-using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web.Mvc;
 using Fanex.Athena.Extension.Utility;
 using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -24,57 +22,55 @@ namespace Fanex.Athena.Service.StatelessCore
         private const string JsonContentType = "application/json";
 
         private readonly IAppSettings _appSetting;
+        private readonly IHttpClientFactory _httpClientFactory;
 
-        public ReportAPIClient(IAppSettings appSettings)
+        public ReportAPIClient(IAppSettings appSettings, IHttpClientFactory httpClientFactory)
         {
             _appSetting = appSettings;
+            _httpClientFactory = httpClientFactory;
         }
 
         private async Task<T> HandleAsync<T>(string path, object value, string language, MediaType mediaType, Func<HttpResponseMessage, Task<T>> codeBlock)
         {
-            using (var client = new HttpClient())
+            var client = _httpClientFactory.GetForHost(new Uri(_appSetting.GetValue("ReportAPIHostUrl")));
+            client.DefaultRequestHeaders.Add(KEYNAME, _appSetting.GetValue("ReportAPITokenValue"));
+            client.DefaultRequestHeaders.Add(LANGUAGEKEY, language);
+            HttpResponseMessage response = null;
+            if (mediaType == MediaType.MsgPack)
             {
-                client.BaseAddress = new Uri(_appSetting.GetValue("ReportAPIHostUrl"));
-                client.DefaultRequestHeaders.Add(KEYNAME, _appSetting.GetValue("ReportAPITokenValue"));
-                client.DefaultRequestHeaders.Add(LANGUAGEKEY, language);
-                HttpResponseMessage response = null;
-                if (mediaType == MediaType.MsgPack)
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(MsgPackContentType));
+                using (var content = new ByteArrayContent(MessagePackSerializer.Serialize(value,
+                    ContractlessStandardResolver.Instance)))
                 {
-                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(MsgPackContentType));
-                    using (var content = new ByteArrayContent(MessagePackSerializer.Serialize(value,
-                        ContractlessStandardResolver.Instance)))
-                    {
-                        content.Headers.ContentType = new MediaTypeHeaderValue(MsgPackContentType);
-
-                        response = await client.PostAsync(path, content).ConfigureAwait(false);
-                    }
-                }
-
-                if (mediaType == MediaType.Json)
-                {
-                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(JsonContentType));
-                    var content = new StringContent(JsonConvert.SerializeObject(value),
-                    Encoding.UTF8, "application/json");
+                    content.Headers.ContentType = new MediaTypeHeaderValue(MsgPackContentType);
 
                     response = await client.PostAsync(path, content).ConfigureAwait(false);
                 }
-
-                if (response is null || response.StatusCode != HttpStatusCode.OK)
-                {
-                    var errorMessage = new StringBuilder($"Http Error ={await response?.Content.ReadAsStringAsync()}\n Error occur when query report data");
-                    errorMessage.AppendLine($"HTTP status code ={ response?.StatusCode }");
-                    throw new InvalidOperationException(errorMessage.ToString());
-                }
-
-                return await codeBlock(response).ConfigureAwait(false);
             }
+
+            if (mediaType == MediaType.Json)
+            {
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(JsonContentType));
+                var content = new StringContent(JsonConvert.SerializeObject(value), Encoding.UTF8, "application/json");
+
+                response = await client.PostAsync(path, content).ConfigureAwait(false);
+            }
+
+            if (response is null || response.StatusCode != HttpStatusCode.OK)
+            {
+                var errorMessage = new StringBuilder($"Http Error ={await response?.Content.ReadAsStringAsync()}\n Error occur when query report data");
+                errorMessage.AppendLine($"HTTP status code ={ response?.StatusCode }");
+                throw new InvalidOperationException(errorMessage.ToString());
+            }
+
+            return await codeBlock(response).ConfigureAwait(false);
         }
+
         public async Task<string> PostAsyncString(string path, object value, string language)
         {
             return await HandleAsync(path, value, language, MediaType.Json, async (x) => { return await x.Content.ReadAsStringAsync(); });
-
-
         }
+
         public async Task<T> PostAsync<T>(string path, object value, string language, MediaType mediaType = MediaType.Json) => await HandleAsync<T>(
                 path,
                 value,
@@ -90,7 +86,6 @@ namespace Fanex.Athena.Service.StatelessCore
                     else
                     {
                         return JsonConvert.DeserializeObject<T>(await x.Content.ReadAsStringAsync());
-
                     }
                 }).ConfigureAwait(false);
 
