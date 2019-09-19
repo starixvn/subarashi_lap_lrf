@@ -89,7 +89,7 @@
 
             using (var controller = CreateController(productAccess, licenseeSettingService))
             {
-                _reportApiClient.PostAsyncStream(Arg.Any<string>(),
+                _reportApiClient.PostByteContentAsync(Arg.Any<string>(),
                 Arg.Any<CustomerWinLossMetaModel>(), Arg.Any<string>())
                 .Returns(Task.FromResult<Stream>(new MemoryStream(0)));
 
@@ -99,7 +99,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    _reportApiClient.Received(1).PostAsyncStream(
+                    _reportApiClient.Received(1).PostByteContentAsync(
                     Arg.Is<string>(x => x == "api/CustomerWinLoss/ExportExcel"),
                         Arg.Is<CustomerWinLossMetaModel>(x =>
                         x.IsAllowedCustomerComm && x.IsAllowBA && !x.SystemIdVisible),

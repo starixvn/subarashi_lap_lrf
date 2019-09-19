@@ -5,13 +5,13 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Web.Mvc;
 using Fanex.Athena.Extension.Utility;
+using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
-using Fanex.Athena.Service.StatelessCore.RestSharpExtension;
+using MessagePack;
+using MessagePack.Resolvers;
 using Newtonsoft.Json;
-
-using RestSharp;
 
 namespace Fanex.Athena.Service.StatelessCore
 {
@@ -20,6 +20,8 @@ namespace Fanex.Athena.Service.StatelessCore
         private const string KEYNAME = "AUTH_TOKEN";
 
         private const string LANGUAGEKEY = "Accept-Language";
+        private const string MsgPackContentType = "application/x-msgpack";
+        private const string JsonContentType = "application/json";
 
         private readonly IAppSettings _appSetting;
 
@@ -28,71 +30,76 @@ namespace Fanex.Athena.Service.StatelessCore
             _appSetting = appSettings;
         }
 
-        private async Task<T> HandleAsync<T>(string path, object value, string language, Func<IRestResponse, Task<T>> codeBlock)
+        private async Task<T> HandleAsync<T>(string path, object value, string language, MediaType mediaType, Func<HttpResponseMessage, Task<T>> codeBlock)
         {
-            var client = new RestClient
+            using (var client = new HttpClient())
             {
-                BaseUrl = new Uri(_appSetting.GetValue("ReportAPIHostUrl"))
-            };
+                client.BaseAddress = new Uri(_appSetting.GetValue("ReportAPIHostUrl"));
+                client.DefaultRequestHeaders.Add(KEYNAME, _appSetting.GetValue("ReportAPITokenValue"));
+                client.DefaultRequestHeaders.Add(LANGUAGEKEY, language);
+                HttpResponseMessage response = null;
+                if (mediaType == MediaType.MsgPack)
+                {
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(MsgPackContentType));
+                    using (var content = new ByteArrayContent(MessagePackSerializer.Serialize(value,
+                        ContractlessStandardResolver.Instance)))
+                    {
+                        content.Headers.ContentType = new MediaTypeHeaderValue(MsgPackContentType);
 
-            var request = new RestRequest(path)
-            {
-                JsonSerializer = NewtonsoftJsonSerializer.Default
-            };
-            request.AddHeader(KEYNAME, _appSetting.GetValue("ReportAPITokenValue"));
-            request.AddHeader(LANGUAGEKEY, language);
-            request.AddJsonBody(value);
-            request.Method = Method.POST;
+                        response = await client.PostAsync(path, content).ConfigureAwait(false);
+                    }
+                }
 
-            var result = await client.ExecuteTaskAsync(request).ConfigureAwait(false);
+                if (mediaType == MediaType.Json)
+                {
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(JsonContentType));
+                    var content = new StringContent(JsonConvert.SerializeObject(value),
+                    Encoding.UTF8, "application/json");
 
-            if (result.ResponseStatus != ResponseStatus.Completed || result.StatusCode != HttpStatusCode.OK)
-            {
-                var errorMessage = new StringBuilder($"Http Error ={result.ErrorMessage}\n Error occur when query report data");
-                errorMessage.AppendLine($"HTTP status code ={ result.StatusCode }");
-                throw new InvalidOperationException(errorMessage.ToString(), result.ErrorException);
+                    response = await client.PostAsync(path, content).ConfigureAwait(false);
+                }
+
+                if (response is null || response.StatusCode != HttpStatusCode.OK)
+                {
+                    var errorMessage = new StringBuilder($"Http Error ={await response?.Content.ReadAsStringAsync()}\n Error occur when query report data");
+                    errorMessage.AppendLine($"HTTP status code ={ response?.StatusCode }");
+                    throw new InvalidOperationException(errorMessage.ToString());
+                }
+
+                return await codeBlock(response).ConfigureAwait(false);
             }
-
-            return await codeBlock(result).ConfigureAwait(false);
         }
-
-        public async Task<T> PostAsync<T>(string path, object value, string language)
+        public async Task<string> PostAsyncString(string path, object value, string language)
         {
-            return await HandleAsync<T>(
+            return await HandleAsync(path, value, language, MediaType.Json, async (x) => { return await x.Content.ReadAsStringAsync(); });
+
+
+        }
+        public async Task<T> PostAsync<T>(string path, object value, string language, MediaType mediaType = MediaType.Json) => await HandleAsync<T>(
                 path,
                 value,
                 language,
+                mediaType,
                 async (x) =>
                 {
-                    return await Task.FromResult(JsonConvert.DeserializeObject<T>(x.Content)).ConfigureAwait(false);
+                    if (mediaType == MediaType.MsgPack)
+                    {
+                        var result = MessagePackSerializer.Deserialize<T>(await x.Content.ReadAsByteArrayAsync(), ContractlessStandardResolver.Instance);
+                        return await Task.FromResult(result).ConfigureAwait(false);
+                    }
+                    else
+                    {
+                        return JsonConvert.DeserializeObject<T>(await x.Content.ReadAsStringAsync());
+
+                    }
                 }).ConfigureAwait(false);
-        }
 
-        public async Task<HttpResponseMessage> PostFileAsync(string path, object value, string fileName, string language)
+        public async Task<byte[]> PostByteContentAsync(string path, object value, string language, MediaType mediaType = MediaType.Json)
         {
-            return await HandleAsync(path, value, language, async (x) =>
-            {
-                var result = new HttpResponseMessage(HttpStatusCode.OK)
-                {
-                    Content = new ByteArrayContent(x.RawBytes),
-                };
-                result.Headers.TransferEncodingChunked = true;
-                result.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
-                {
-                    FileName = fileName
-                };
-
-                return await Task.FromResult(result).ConfigureAwait(false);
-            }).ConfigureAwait(false);
-        }
-
-        public async Task<Stream> PostAsyncStream(string path, object value, string language)
-        {
-            return await HandleAsync(path, value, language, async (x) =>
-            {
-                var stream = new MemoryStream(x.RawBytes);
-                return await Task.FromResult(stream).ConfigureAwait(false);
-            }).ConfigureAwait(false);
+            return await HandleAsync(path, value, language, mediaType, async (x) =>
+             {
+                 return await x.Content.ReadAsByteArrayAsync();
+             }).ConfigureAwait(false);
         }
     }
 }

@@ -62,7 +62,7 @@ namespace Fanex.Athena.Controllers.Report
             {
                 AssignMetaModelForExcel(metaModel);
                 const string FileName = "CustomerWinLoss.xls";
-                var stream = await _reportAPIClient.PostAsyncStream("api/CustomerWinLoss/ExportExcel",
+                var stream = await _reportAPIClient.PostByteContentAsync("api/CustomerWinLoss/ExportExcel",
                     metaModel, userSession.Language).ConfigureAwait(false);
 
                 return File(stream, "application/octet-stream", FileName);

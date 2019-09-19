@@ -1,0 +1,77 @@
+﻿using System;
+using System.IO;
+using System.Web.Mvc;
+
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+
+namespace Fanex.Athena.Controllers.Base
+{
+    public class JsonNetResult : JsonResult
+    {
+        private static JsonSerializerSettings _setting = new JsonSerializerSettings
+        {
+            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+            ContractResolver = new CamelCasePropertyNamesContractResolver()
+
+        };
+        private string _jsonString;
+        public JsonNetResult(string jsonString)
+        {
+            _jsonString = jsonString;
+        }
+        public JsonNetResult()
+        {
+
+        }
+        public JsonSerializerSettings Settings => _setting;
+
+        public override void ExecuteResult(ControllerContext context)
+        {
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
+
+            if (this.JsonRequestBehavior == JsonRequestBehavior.DenyGet
+                && "GET".Equals(
+                        context.HttpContext.Request.HttpMethod,
+                        StringComparison.OrdinalIgnoreCase))
+            {
+                throw new InvalidOperationException("JSON GET is not allowed");
+            }
+
+
+            var response = context.HttpContext.Response;
+            response.ContentType =
+                string.IsNullOrEmpty(this.ContentType) ? "application/json" : this.ContentType;
+
+            if (this.ContentEncoding != null)
+            {
+                response.ContentEncoding = this.ContentEncoding;
+            }
+            if (this.Data == null && string.IsNullOrEmpty(_jsonString))
+            {
+                return;
+            }
+
+            if (!string.IsNullOrEmpty(_jsonString))
+            {
+                response.Write(_jsonString.ToString());
+            }
+            else
+            {
+                var scriptSerializer = JsonSerializer.Create(this.Settings);
+
+                using (var sw = new StringWriter())
+                {
+                    scriptSerializer.Serialize(sw, this.Data);
+                    response.Write(sw.ToString());
+                }
+            }
+
+
+        }
+    }
+}
+

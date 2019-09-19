@@ -8,12 +8,13 @@
     using Autofac.Integration.Mvc;
 
     using Extension.Utility;
-
+    using Fanex.Athena.Controllers.Base;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     using Model.Core.DTO.Common;
     using Model.Core.MetaModel.Product;
-
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Serialization;
     using ONEbook.UM.Filters;
 
     using Service.Core.Common.Interfaces;
@@ -86,6 +87,17 @@
                 Name = i.ProductName,
                 Status = true
             }).ToList();
+        }
+        protected JsonResult JsonNet(object data)
+        {
+            return new JsonNetResult
+            {
+                Data = data,
+            };
+        }
+        protected JsonNetResult JsonString(string jsonData)
+        {
+            return new JsonNetResult(jsonData);
         }
     }
 }

@@ -3,13 +3,13 @@
     using System.IO;
     using System.Net.Http;
     using System.Threading.Tasks;
+    using Fanex.Athena.Model.Core.DataDomain;
 
     public interface IReportAPIClient
     {
-        Task<T> PostAsync<T>(string path, object value, string language);
+        Task<string> PostAsyncString(string path, object value, string language);
 
-        Task<HttpResponseMessage> PostFileAsync(string path, object value, string fileName, string language);
-
-        Task<Stream> PostAsyncStream(string path, object value, string language);
+        Task<T> PostAsync<T>(string path, object value, string language, MediaType mediaType = MediaType.Json);
+        Task<byte[]> PostByteContentAsync(string path, object value, string language, MediaType mediaType = MediaType.Json);
     }
 }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Fanex.Athena.Extension.Utility;
 using Fanex.Athena.Service.StatelessCore.CustomException;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
-
+using Fanex.Athena.Service.StatelessCore.RestSharpExtension;
 using Newtonsoft.Json;
 
 using RestSharp;
@@ -30,7 +30,10 @@ namespace Fanex.Athena.Service.StatelessCore
                 BaseUrl = new Uri(_appSetting.GetValue("LGAPIHostUrl"))
             };
 
-            var request = new RestRequest(path);
+            var request = new RestRequest(path)
+            {
+                JsonSerializer = NewtonsoftJsonSerializer.Default
+            };
             request.AddHeader(KEYNAME, _appSetting.GetValue("LGAPITokenValue"));
             request.AddHeader(LANGUAGEKEY, language);
             request.AddJsonBody(value);

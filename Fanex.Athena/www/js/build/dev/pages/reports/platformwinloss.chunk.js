@@ -9152,8 +9152,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
             hasCustomerComm: true,
             pageSize: 50,
             totalColspan: [0, 4],
-            urlData: 'api/PlatformWinLossReport/Index',
-            urlExcelData: 'api/PlatformWinLossReport/Index',
+            urlData: 'PlatformWinLossReport/Index',
+            urlExcelData: 'PlatformWinLossReport/Index',
             gridOption: {
                 datatype: 'jsonstring',
                 colNames: [],

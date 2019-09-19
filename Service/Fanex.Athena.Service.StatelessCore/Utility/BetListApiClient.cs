@@ -11,7 +11,7 @@
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Service.StatelessCore.CustomException;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
-
+    using Fanex.Athena.Service.StatelessCore.RestSharpExtension;
     using Newtonsoft.Json;
 
     using RestSharp;
@@ -39,7 +39,10 @@
                 BaseUrl = new Uri(_appSetting.BetListApiHostUrl)
             };
 
-            var request = new RestRequest(path);
+            var request = new RestRequest(path)
+            {
+                JsonSerializer = NewtonsoftJsonSerializer.Default
+            };
             request.AddHeader(KEYNAME, _appSetting.GetValue("BetListApiTokenValue"));
             request.AddHeader(LANGUAGEKEY, language);
             request.AddJsonBody(value);
