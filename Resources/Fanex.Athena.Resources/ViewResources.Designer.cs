@@ -2869,6 +2869,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Incorrect Max Bet Per Draw.
+        /// </summary>
+        public static string IncorrectMaxBetPerDraw {
+            get {
+                return ResourceManager.GetString("IncorrectMaxBetPerDraw", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Incorrect Max Per Ball.
         /// </summary>
         public static string IncorrectMaxPerBall {
@@ -3535,6 +3544,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Max Bet can not be greater than Max Bet Per Draw.
+        /// </summary>
+        public static string MaxBetCanNotGreaterThanMaxBetPerDraw {
+            get {
+                return ResourceManager.GetString("MaxBetCanNotGreaterThanMaxBetPerDraw", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Max Bet can not be greater than Max Per Match.
         /// </summary>
         public static string MaxBetCanNotGreaterThanMaxPerMatch {
@@ -3576,6 +3594,24 @@ namespace Fanex.Athena.Resources {
         public static string MaxBetPerDraw {
             get {
                 return ResourceManager.GetString("MaxBetPerDraw", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Max Bet Per Draw must be less than or equal to.
+        /// </summary>
+        public static string MaxBetPerDrawLessThanOrEqual {
+            get {
+                return ResourceManager.GetString("MaxBetPerDrawLessThanOrEqual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Max Bet Per Draw must be more than or equal to.
+        /// </summary>
+        public static string MaxBetPerDrawMoreThanOrEqual {
+            get {
+                return ResourceManager.GetString("MaxBetPerDrawMoreThanOrEqual", resourceCulture);
             }
         }
         

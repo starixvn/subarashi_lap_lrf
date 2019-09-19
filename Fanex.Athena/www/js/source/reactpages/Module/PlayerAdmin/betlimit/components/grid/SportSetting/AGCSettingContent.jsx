@@ -99,8 +99,7 @@ export class AGCSettingContent extends PureComponent {
     _submit(group) {
         this.props.toggleLoader(true);
 
-        const requestParam = this.props.requestParam;
-        const param = Object.assign({}, { ...this.props.requestParam }, { Setting: [group] });
+        const param = Object.assign({}, this.props.requestParam, { Setting: [group] });
 
         DataTransfer.updateData(param, this._showSubmitResult.bind(this), () => this.props.toggleLoader(false), this._handleError.bind(this));
     }

@@ -28,10 +28,11 @@ const SettingContent = (Grid, DataHandling) => {
             this.checkBoxRef = React.createRef();
             this.errorRef = React.createRef();
             this.submitButtonRef = React.createRef();
+            this.getHeaderName = DataHandling.getHeaderName;
         }
 
         componentDidUpdate(prevProps, prevState) {
-            if (prevState.data !== this.state.data) {
+            if (prevState.timeStamp !== this.state.timeStamp) {
                 this.props.toggleLoader(false);
                 this.props.setAlertOption({ isShow: false });
             }
@@ -85,8 +86,6 @@ const SettingContent = (Grid, DataHandling) => {
         }
 
         onReset = (e) => {
-            e.preventDefault();
-
             if (!this.state.disabledButton || (e.button === 0 || e.which === 1)) {
                 this.setState({ isCopy: false }, () => this._getData(this.props.requestParam));
             }
@@ -97,9 +96,7 @@ const SettingContent = (Grid, DataHandling) => {
         }
 
         onSubmit = (e) => {
-            e.preventDefault();
-
-            if (!this.state.disabledButton && (e.button === 0 || e.which === 1)) {
+            if (e.button === 0 || e.which === 1) {
                 if (!this.state.showError) {
                     const data = this.state.data;
                     const submitData = DataHandling.getSubmitData(data);
@@ -124,7 +121,8 @@ const SettingContent = (Grid, DataHandling) => {
 
                 const { data } = this.state;
                 const copyRow = data.find(e => e.Id === setting.CopyId);
-                const invalidData = DataHandling.validate(copyRow);
+                const copyValue = DataHandling.getSubmitData(copyRow);
+                const invalidData = DataHandling.validate(copyValue, copyRow);
 
                 if (invalidData !== null) {
                     this._showError(invalidData);
@@ -158,9 +156,9 @@ const SettingContent = (Grid, DataHandling) => {
             this.props.toggleLoader(true);
 
             const requestParam = this.props.requestParam;
-            const param = Object.assign({}, { ...this.props.requestParam }, { Setting: data });
+            const param = Object.assign({}, this.props.requestParam, { Setting: data });
 
-            DataTransfer.updateData(param, this._showSubmitResult.bind(this), () => this.props.toggleLoader(false), this._handleError.bind(this));
+            DataTransfer.updateData(param, this._showSubmitResult.bind(this), null, this._handleError.bind(this));
         }
 
         _handleError() {
@@ -220,20 +218,21 @@ const SettingContent = (Grid, DataHandling) => {
             }
         }
 
-        _updateState(data, setting) {
+        _refreshState(data, setting) {
             this.setState((state) => ({
                 data: DataHandling.getViewData(data),
                 setting: Object.assign({}, state.setting, setting),
                 disabledButton: false,
                 isCopy: false,
-                showError: false
+                showError: false,
+                timeStamp: new Date().getTime()
             }));
         }
 
         _getData(param) {
             this.props.toggleLoader(true);
 
-            DataTransfer.getData(param, this._updateState.bind(this), null, this._handleError.bind(this));
+            DataTransfer.getData(param, this._refreshState.bind(this), null, this._handleError.bind(this));
         }
 
         render() {
@@ -260,14 +259,15 @@ const SettingContent = (Grid, DataHandling) => {
                         setting={setting}
                         setInputRef={this.setInputRef}
                         onChange={this.onChange}
-                        isCopy={isCopy} />
+                        isCopy={isCopy}
+                        getHeaderName={this.getHeaderName} />
                     {
                         setting.Editable &&
                         <div className="pa-betlimit-button">
-                            <button type='button' className='btn btn-cancel' disabled={disabledButton} onMouseDown={this.onReset}>
+                            <button type='button' className='btn btn-cancel' disabled={disabledButton} onClick={this.onReset}>
                                 {LangHelper.getSingleResource('Reset')}
                             </button>
-                            <button type='button' className='btn btn-apply' disabled={disabledButton} onMouseDown={this.onSubmit} ref={this.submitButtonRef}>
+                            <button type='button' className='btn btn-apply' disabled={disabledButton} onClick={this.onSubmit} ref={this.submitButtonRef}>
                                 {LangHelper.getSingleResource('Submit')}
                             </button>
                         </div>

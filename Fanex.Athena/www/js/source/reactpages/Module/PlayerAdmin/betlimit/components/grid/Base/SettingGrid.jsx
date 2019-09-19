@@ -1,10 +1,10 @@
-﻿import React  from 'react';
+import React from 'react';
 import Utility from '../../../lib/utility';
 import LangHelper from '@jsroot/lib/langHelper';
 import { BetLimitType, InputClassName } from '../../../lib/constants';
 
 const SettingGrid = (props) => {
-    const { setting, data, isCopy, onChange } = props;
+    const { setting, data, isCopy, onChange, getHeaderName } = props;
     const setInputRef = props.setInputRef;
 
     const onInputChange = (type, id, value) => {
@@ -15,14 +15,14 @@ const SettingGrid = (props) => {
 
                 return newItem;
             }
+
             return e;
         });
 
         onChange(newData);
     }
 
-    const onInputBlur = (event, type, id) => {
-        const value = event.target.value;
+    const onInputBlur = (type, id, value) => {
         const newValue = Utility.formatValue(Utility.getValueAsNumber(value));
 
         if (newValue !== value) {
@@ -32,15 +32,13 @@ const SettingGrid = (props) => {
                     newItem[type] = newValue;
 
                     return newItem;
-
                 }
 
                 return e;
             });
+
             onChange(newData);
-
         }
-
     }
 
     const buildCell = (type, value, disabled) => {
@@ -53,16 +51,16 @@ const SettingGrid = (props) => {
             maxLength='14'
             value={value[type]}
             onChange={(e) => onInputChange(type, value.Id, e.target.value)}
-            onBlur={(e) => onInputBlur(e, type, value.Id)}
+            onBlur={(e) => onInputBlur(type, value.Id, e.target.value)}
             disabled={disabled} />
     }
 
-    const buildBody = (editable, isCopy, data, copyId) => {
+    const buildBody = (editable, data) => {
         let rows = [];
 
         for (let i = 0; i < data.length; i++) {
             const item = data[i];
-            const disabled = !editable || (isCopy && item.Id !== copyId);
+            const disabled = !editable;
 
             rows.push(
                 <tr key={item.Id}>
@@ -91,13 +89,13 @@ const SettingGrid = (props) => {
             <table className='table'>
                 <thead>
                     <tr>
-                        <th>{LangHelper.getSingleResource('GameType')}</th>
-                        <th>{LangHelper.getSingleResource('MinBet')}</th>
-                        <th>{LangHelper.getSingleResource('MaxBet')}</th>
-                        <th>{LangHelper.getSingleResource('MaxBetPerDraw')}</th>
+                        <th>{getHeaderName('Sport')}</th>
+                        <th>{getHeaderName('MinBet')}</th>
+                        <th>{getHeaderName('MaxBet')}</th>
+                        <th>{getHeaderName('MaxPerMatch')}</th>
                     </tr>
                 </thead>
-                {buildBody(setting.Editable, isCopy, data, setting.CopyId)}
+                {buildBody(setting.Editable, data)}
             </table>
         </div>
     );

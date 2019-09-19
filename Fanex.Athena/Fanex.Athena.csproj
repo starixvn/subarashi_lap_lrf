@@ -720,7 +720,6 @@
     <Content Include="SiteConfig\Web.Staging.config" />
     <Content Include="Views\Desktop\BetList\CardClubDetail\Main.cshtml" />
     <Content Include="Views\Desktop\Module\PlayerAdmin\Main.cshtml" />
-    <Content Include="Views\Desktop\Module\PlayerAdmin\PlayerStatement\Index.cshtml" />
     <Content Include="www\css\build\dev\reactpages\playeradmin\index.chunk.js.map" />
     <Content Include="www\css\build\dev\reactpages\playeradmin\index.css.map" />
     <Content Include="www\css\build\dev\reactpages\playeradmin\account-info.chunk.js.map" />
@@ -1019,14 +1018,14 @@
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\DataContent.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\FormFilter.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\grid\Base\SettingContent.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\grid\Base\SettingGrid.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\grid\SportSetting\AGCSettingGrid.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\grid\SportSetting\AGCSettingContent.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\grid\SportSetting\NGSettingGrid.jsx" />
-    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\grid\GameSetting\SettingGrid.jsx" />
-    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\grid\SportSetting\SettingGrid.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\index.jsx" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\lib\constants.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\lib\dataTransfer.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\lib\gameSettingDataHandling.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\lib\ngDataHandling.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\lib\validatation.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\lib\dataHandling.js" />
@@ -5731,6 +5730,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Logs\" />
+    <Folder Include="Views\Desktop\Module\PlayerAdmin\PlayerStatement\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="www\js\source\reactpages\pages\subsidiaryperformance\components\index.jsx" />

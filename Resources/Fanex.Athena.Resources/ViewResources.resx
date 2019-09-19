@@ -2482,4 +2482,20 @@
     <value>Vendor Member ID</value>
     <comment>112658</comment>
   </data>
+  <data name="IncorrectMaxBetPerDraw" xml:space="preserve">
+    <value>Incorrect Max Bet Per Draw</value>
+    <comment>112658</comment>
+  </data>
+  <data name="MaxBetCanNotGreaterThanMaxBetPerDraw" xml:space="preserve">
+    <value>Max Bet can not be greater than Max Bet Per Draw</value>
+    <comment>112658</comment>
+  </data>
+  <data name="MaxBetPerDrawLessThanOrEqual" xml:space="preserve">
+    <value>Max Bet Per Draw must be less than or equal to</value>
+    <comment>112658</comment>
+  </data>
+  <data name="MaxBetPerDrawMoreThanOrEqual" xml:space="preserve">
+    <value>Max Bet Per Draw must be more than or equal to</value>
+    <comment>112658</comment>
+  </data>
 </root>

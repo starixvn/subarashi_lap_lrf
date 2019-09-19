@@ -1,14 +1,15 @@
 ﻿import Validatation from './validatation';
 import Utility from './utility';
+import LangHelper from '@jsroot/lib/langHelper';
 
 export default class DataHandling {
-    static getViewData(rawData) {
+    getViewData(rawData) {
         return rawData.map((rawRow) => {
-            return DataHandling.getViewRowData(rawRow);
+            return this.getViewRowData(rawRow);
         });
     }
 
-    static getViewRowData(rawData) {
+    getViewRowData(rawData) {
         let row = {
             Id: rawData.Id,
             BetType: rawData.BetType,
@@ -29,7 +30,7 @@ export default class DataHandling {
         return row;
     }
 
-    static getSubmitRowData(row) {
+    getSubmitRowData(row) {
         return {
             Id: row.Id,
             BetType: row.BetType,
@@ -43,13 +44,13 @@ export default class DataHandling {
         };
     }
 
-    static getSubmitData(rows) {
+    getSubmitData(rows) {
         const submitData = [];
 
         for (let i = 0; i < rows.length; i++) {
             const row = rows[i];
-            const currentValue = DataHandling.getSubmitRowData(row);
-            const invalidData = Validatation.validate(currentValue, row);
+            const currentValue = this.getSubmitRowData(row);
+            const invalidData = this.validate(currentValue, row);
 
             if (invalidData !== null) {
                 return {
@@ -67,9 +68,21 @@ export default class DataHandling {
         };
     }
 
-    static validate(row) {
-        const currentValue = DataHandling.getSubmitRowData(row);
+    validate(currentValue, row) {
+        if (!currentValue.IsUpdated) {
+            return null;
+        }
 
-        return Validatation.validate(currentValue, row);
+        const validateMinMaxBet = Validatation.validateMinMaxBet(currentValue, row);
+
+        if (validateMinMaxBet !== null) {
+            return validateMinMaxBet;
+        }
+
+        return Validatation.validateMaxPerMatch(currentValue, row);
+    }
+
+    getHeaderName(header) {
+        return LangHelper.getSingleResource(header);
     }
 }

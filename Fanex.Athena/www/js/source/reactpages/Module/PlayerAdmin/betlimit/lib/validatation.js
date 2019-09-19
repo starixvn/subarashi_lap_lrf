@@ -2,11 +2,7 @@
 import { BetLimitType } from './constants';
 
 export default class Validatation {
-    static validate(current, limitData) {
-        if (!current.IsUpdated) {
-            return null;
-        }
-
+    static validateMinMaxBet(current, limitData) {
         const { MinBet, MaxBet, MaxPerMatch, Id } = current;
 
         if (isNaN(MinBet)) {
@@ -21,13 +17,6 @@ export default class Validatation {
                 Id: Id,
                 Type: BetLimitType.MaxBet,
                 Message: LangHelper.getSingleResource('IncorrectMaxBet')
-            };
-        }
-        if (isNaN(MaxPerMatch)) {
-            return {
-                Id: Id,
-                Type: BetLimitType.MaxPerMatch,
-                Message: LangHelper.getSingleResource('IncorrectMaxPerMatch')
             };
         }
 
@@ -47,6 +36,28 @@ export default class Validatation {
             };
         }
 
+        if (MinBet > MaxBet) {
+            return {
+                Id: Id,
+                Type: BetLimitType.MinBet,
+                Message: LangHelper.getSingleResource('MinBetCanNotGreaterThanMaxBet') + ' ' + MaxBet
+            };
+        }
+
+        return null;
+    }
+
+    static validateMaxPerMatch(current, limitData) {
+        const { MaxBet, MaxPerMatch, Id } = current;
+
+        if (isNaN(MaxPerMatch)) {
+            return {
+                Id: Id,
+                Type: BetLimitType.MaxPerMatch,
+                Message: LangHelper.getSingleResource('IncorrectMaxPerMatch')
+            };
+        }
+
         if (limitData.MaxPerMatchMax > 0 && MaxPerMatch > limitData.MaxPerMatchMax) {
             return {
                 Id: Id,
@@ -63,14 +74,6 @@ export default class Validatation {
             };
         }
 
-        if (MinBet > MaxBet) {
-            return {
-                Id: Id,
-                Type: BetLimitType.MinBet,
-                Message: LangHelper.getSingleResource('MinBetCanNotGreaterThanMaxBet') + ' ' + MaxBet
-            };
-        }
-
         if (MaxBet > MaxPerMatch) {
             return {
                 Id: Id,
@@ -82,13 +85,45 @@ export default class Validatation {
         return null;
     }
 
-    static validateNumberGame(current, limitData) {
-        const result = Validatation.validate(current, limitData);
+    static validateMaxBetPerDraw(current, limitData) {
+        const { MaxBet, MaxPerMatch, Id } = current;
 
-        if (result) {
-            return result;
+        if (isNaN(MaxPerMatch)) {
+            return {
+                Id: Id,
+                Type: BetLimitType.MaxPerMatch,
+                Message: LangHelper.getSingleResource('IncorrectMaxBetPerDraw')
+            };
         }
 
+        if (limitData.MaxPerMatchMax > 0 && MaxPerMatch > limitData.MaxPerMatchMax) {
+            return {
+                Id: Id,
+                Type: BetLimitType.MaxPerMatch,
+                Message: LangHelper.getSingleResource('MaxBetPerDrawMoreThanOrEqual') + ' ' + limitData.MaxPerMatchMax
+            };
+        }
+
+        if (limitData.MaxPerMatchMin > 0 && MaxPerMatch < limitData.MaxPerMatchMin) {
+            return {
+                Id: Id,
+                Type: BetLimitType.MaxPerMatch,
+                Message: LangHelper.getSingleResource('MaxBetPerDrawLessThanOrEqual') + ' ' + limitData.MaxPerMatchMin
+            };
+        }
+
+        if (MaxBet > MaxPerMatch) {
+            return {
+                Id: Id,
+                Type: BetLimitType.MaxBet,
+                Message: LangHelper.getSingleResource('MaxBetCanNotGreaterThanMaxBetPerDraw') + ' ' + MaxPerMatch
+            };
+        }
+
+        return null;
+    }
+
+    static validateMaxPerBall(current, limitData) {
         const { MaxPerBall, Id } = current;
 
         if (isNaN(MaxPerBall)) {

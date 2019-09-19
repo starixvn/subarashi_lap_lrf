@@ -2,15 +2,9 @@
 import Utility from './utility';
 import DataHandling from './dataHandling';
 
-export default class NGDataHandling {
-    static getViewData(rawData) {
-        return rawData.map((rawRow) => {
-            return NGDataHandling.getViewRowData(rawRow);
-        });
-    }
-
-    static getViewRowData(rawData) {
-        let row = DataHandling.getViewRowData(rawData);
+export default class NGDataHandling extends DataHandling {
+    getViewRowData(rawData) {
+        let row = super.getViewRowData(rawData);
         row.MaxPerBall = Utility.formatValue(rawData.MaxPerBall);
         row.MaxPerBallMax = rawData.MaxPerBallMax;
         row.OriginalMaxPerBall = row.MaxPerBall;
@@ -18,21 +12,21 @@ export default class NGDataHandling {
         return row;
     }
 
-    static getSubmitRowData(row) {
-        let data = DataHandling.getViewRowData(row);
+    getSubmitRowData(row) {
+        let data = super.getSubmitRowData(row);
         data.MaxPerBall = Utility.getValueAsNumber(row.MaxPerBall);
         data.IsUpdated = data.IsUpdated || row.MaxPerBall !== row.OriginalMaxPerBall;
 
         return data;
     }
 
-    static getSubmitData(rows) {
+    getSubmitData(rows) {
         const submitData = [];
 
         for (let i = 0; i < rows.length; i++) {
             const row = rows[i];
-            const currentValue = NGDataHandling.getSubmitRowData(row);
-            const invalidData = Validatation.validateNumberGame(currentValue, row);
+            const currentValue = this.getSubmitRowData(row);
+            const invalidData = this.validate(currentValue, row);
 
             if (invalidData !== null) {
                 return {
@@ -50,9 +44,13 @@ export default class NGDataHandling {
         };
     }
 
-    static validate(row) {
-        const currentValue = NGDataHandling.getSubmitRowData(row);
+    validate(currentValue, row) {
+        const validatationResult = super.validate(currentValue, row);
 
-        return Validatation.validateNumberGame(currentValue, row);
+        if (validatationResult !== null) {
+            return validatationResult;
+        }
+
+        return Validatation.validateMaxPerBall(currentValue, row);
     }
 }

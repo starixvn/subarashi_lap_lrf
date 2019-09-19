@@ -3,21 +3,21 @@ import { connect } from 'react-redux';
 import { bindActionCreators  } from 'redux';
 import { ActionCreators } from '../actions';
 import DataHandling from '../lib/dataHandling';
+import GameSettingDataHandling from '../lib/gameSettingDataHandling';
 import NGDataHandling from '../lib/ngDataHandling';
 import { BetLimitProduct } from '../lib/constants';
 import createSetting from './grid/Base/SettingContent';
-import SportSettingGrid from './grid/SportSetting/SettingGrid';
-import GameSettingGrid from './grid/GameSetting/SettingGrid';
+import SettingGrid from './grid/Base/SettingGrid';
 import NGSettingGrid from './grid/SportSetting/NGSettingGrid';
 import AGCSettingContent from './grid/SportSetting/AGCSettingContent';
 
 const Setting = {
-    [BetLimitProduct.SB]: { Grid: SportSettingGrid, Handling: DataHandling },
-    [BetLimitProduct.VS]: { Grid: SportSettingGrid, Handling: DataHandling },
-    [BetLimitProduct.VS2]: { Grid: SportSettingGrid, Handling: DataHandling },
-    [BetLimitProduct.LT]: { Grid: GameSettingGrid, Handling: DataHandling },
+    [BetLimitProduct.SB]: { Grid: SettingGrid, Handling: DataHandling },
+    [BetLimitProduct.VS]: { Grid: SettingGrid, Handling: DataHandling },
+    [BetLimitProduct.VS2]: { Grid: SettingGrid, Handling: DataHandling },
+    [BetLimitProduct.LT]: { Grid: SettingGrid, Handling: GameSettingDataHandling },
     [BetLimitProduct.NG]: { Grid: NGSettingGrid, Handling: NGDataHandling },
-    [BetLimitProduct.KN]: { Grid: GameSettingGrid, Handling: DataHandling }
+    [BetLimitProduct.KN]: { Grid: SettingGrid, Handling: GameSettingDataHandling }
 };
 
 const DataContent = (props) => {
@@ -29,7 +29,7 @@ const DataContent = (props) => {
     }
     else {
         const { Grid, Handling } = Setting[ProductId];
-        Content = createSetting(Grid, Handling);
+        Content = createSetting(Grid, new Handling());
     }
 
     return <Content />
