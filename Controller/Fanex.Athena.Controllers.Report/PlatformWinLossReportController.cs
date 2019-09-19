@@ -94,7 +94,7 @@ namespace Fanex.Athena.Controllers.Report
             }
             else
             {
-                return JsonNet(await _reportAPIClient.PostAsync<dynamic>("api/PlatformWinLoss/GetMemberData", metaModel, language, MediaType.MsgPack).ConfigureAwait(false));
+                return JsonString(await _reportAPIClient.PostAsyncString("api/PlatformWinLoss/GetMemberData", metaModel, language).ConfigureAwait(false));
             }
         }
 

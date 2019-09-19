@@ -120,7 +120,6 @@
     <Compile Include="ColossusBetsWinLossReportControllerTest.cs" />
     <Compile Include="CustomerBalanceReportControllerTest.cs" />
     <Compile Include="CustomerPendingFundsReportControllerTest.cs" />
-    <Compile Include="PlatformWinLossReportControllerTest.cs" />
     <Compile Include="LicenseeWinLossByTimeZoneReportControllerTest.cs" />
     <Compile Include="PromotionPrizeReportControllerTest.cs" />
     <Compile Include="SpecialLicenseeWinLossReportControllerTest.cs" />

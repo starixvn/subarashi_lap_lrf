@@ -1,7 +1,6 @@
 ﻿namespace Fanex.Athena.Controllers.TotalBets.UnitTests
 {
     using System.Collections.Generic;
-    using System.IO;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Base.UnitTests;
@@ -91,7 +90,7 @@
             {
                 _reportApiClient.PostByteContentAsync(Arg.Any<string>(),
                 Arg.Any<CustomerWinLossMetaModel>(), Arg.Any<string>())
-                .Returns(Task.FromResult<Stream>(new MemoryStream(0)));
+                .Returns(Task.FromResult<byte[]>(new byte[] { 1 }));
 
                 // Action
                 await controller.Index(new CustomerWinLossMetaModel { IsExportExcel = true });

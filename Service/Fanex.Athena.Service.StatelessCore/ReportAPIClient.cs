@@ -33,6 +33,7 @@ namespace Fanex.Athena.Service.StatelessCore
         private async Task<T> HandleAsync<T>(string path, object value, string language, MediaType mediaType, Func<HttpResponseMessage, Task<T>> codeBlock)
         {
             var client = _httpClientFactory.GetForHost(new Uri(_appSetting.GetValue("ReportAPIHostUrl")));
+            client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Add(KEYNAME, _appSetting.GetValue("ReportAPITokenValue"));
             client.DefaultRequestHeaders.Add(LANGUAGEKEY, language);
             HttpResponseMessage response = null;
