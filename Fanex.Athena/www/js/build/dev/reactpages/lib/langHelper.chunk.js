@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 9/13/2019 3:25:14 PM
+// Generated at: 09/19/2019 10:52:43 AM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -407,6 +407,7 @@ window._language_en_US = {
   HttpError_Default: "Oops... you are here because of a system error, please notify the administrators",
   IncludeDrawData: "Include Draw data",
   IncorrectMaxBet: "Incorrect Max Bet",
+  IncorrectMaxBetPerDraw: "Incorrect Max Bet Per Draw",
   IncorrectMaxPerBall: "Incorrect Max Per Ball",
   IncorrectMaxPerMatch: "Incorrect Max Per Match",
   IncorrectMinBet: "Incorrect Min Bet",
@@ -481,11 +482,14 @@ window._language_en_US = {
   MatchWinLoss: "Match Win Loss",
   MatchWinLossTitle: "Match Win Loss, {0} - {1}",
   MaxBet: "Max Bet",
+  MaxBetCanNotGreaterThanMaxBetPerDraw: "Max Bet can not be greater than Max Bet Per Draw",
   MaxBetCanNotGreaterThanMaxPerMatch: "Max Bet can not be greater than Max Per Match",
   MaxBetLessThanOrEqual: "Max Bet must be less than or equal to",
   MaxBetMatchLessThanOrEqual: "Max Per Match must be less than or equal to",
   MaxBetMatchMoreThanOrEqual: "Max Per Match must be more than or equal to",
   MaxBetPerDraw: "Max Bet Per Draw",
+  MaxBetPerDrawLessThanOrEqual: "Max Bet Per Draw must be less than or equal to",
+  MaxBetPerDrawMoreThanOrEqual: "Max Bet Per Draw must be more than or equal to",
   MaxPerBall: "Max Per Ball",
   MaxPerBallLessThanOrEqual: "Max Per Ball must be less than or equal to",
   MaxPerMatch: "Max Per Match",
