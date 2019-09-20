@@ -79,25 +79,6 @@ namespace Fanex.Athena.Service.StatelessCore
         {
             return await HandleAsync(path, value, language, MediaType.Json, async (x) => { return await x.Content.ReadAsStringAsync(); });
         }
-
-        public async Task<T> PostAsync<T>(string path, object value, string language, MediaType mediaType = MediaType.Json) => await HandleAsync<T>(
-                path,
-                value,
-                language,
-                mediaType,
-                async (x) =>
-                {
-                    if (mediaType == MediaType.MsgPack)
-                    {
-                        var result = MessagePackSerializer.Deserialize<T>(await x.Content.ReadAsByteArrayAsync(), ContractlessStandardResolver.Instance);
-                        return await Task.FromResult(result).ConfigureAwait(false);
-                    }
-                    else
-                    {
-                        return JsonConvert.DeserializeObject<T>(await x.Content.ReadAsStringAsync(), _jsonSerializerSettings);
-                    }
-                }).ConfigureAwait(false);
-
         public async Task<byte[]> PostByteContentAsync(string path, object value, string language, MediaType mediaType = MediaType.Json)
         {
             return await HandleAsync(path, value, language, mediaType, async (x) =>
