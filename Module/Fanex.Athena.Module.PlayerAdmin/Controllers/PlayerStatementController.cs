@@ -38,7 +38,7 @@
 
         [HttpGet]
         [ValidatePermissionOnData]
-        public ViewResult Statement(int custId, int currencyId)
+        public ViewResult Index(int custId, int currencyId)
         {
             var today = DateTime.Today;
             var viewModel = new PlayerStatementViewModel
