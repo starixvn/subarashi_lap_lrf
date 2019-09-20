@@ -20957,7 +20957,7 @@ var CustomerBettingStatus = function CustomerBettingStatus(props) {
     className: "panel"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "panel-header"
-  }, "Player Betting Status"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_6__["default"].getText('PlayerBettingStatisticsTitle')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "panel-body"
   }, data && data.HasData ? renderContent() : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "center-align"
@@ -21152,20 +21152,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tabKeys", function() { return tabKeys; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tabList", function() { return tabList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "licenseeType", function() { return licenseeType; });
+/* harmony import */ var _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/clientResourceManager */ "./www/js/source/reactpages/lib/clientResourceManager.js");
+
 var tabKeys = {
-  accountProfile: 'accountProfile',
+  playerProfile: 'playerProfile',
   bankInformation: 'bankInformation',
   activityRecord: 'activityRecord'
 };
 var tabList = [{
-  name: tabKeys.accountProfile,
-  text: 'Account Profile'
+  name: tabKeys.playerProfile,
+  text: _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_0__["default"].getText('PlayerProfile')
 }, {
   name: tabKeys.bankInformation,
-  text: 'Bank Information'
+  text: _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_0__["default"].getText('BankInformation')
 }, {
   name: tabKeys.activityRecord,
-  text: 'Activity Record'
+  text: _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_0__["default"].getText('ActivityRecord')
 }];
 var licenseeType = {
   api: 0,
@@ -21408,7 +21410,12 @@ var resource_en = {
   FastCrossLink: 'Fast Cross-Link',
   SingleCustomer: 'Single Customer',
   BettingTicketCenter: 'Betting Ticket Center',
-  CustomerWinLoss: 'Customer Win Loss'
+  CustomerWinLoss: 'Customer Win Loss',
+  PlayerBettingStatisticsTitle: 'Player Betting Statistics (month to date)',
+  PlayerProfile: 'Player Profile',
+  ActivityRecord: 'Activity Record',
+  PlaceholderBankAccount: 'Search by Exactly Bank Account Number',
+  PlaceholderEmail: 'Search by Exactly Email'
 };
 
 /***/ }),

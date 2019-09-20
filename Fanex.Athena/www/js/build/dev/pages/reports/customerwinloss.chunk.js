@@ -6240,19 +6240,19 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         const EXCEL_FILENAME = 'CustomerWinLoss.xls';
         const EXCEL_PP_FILENAME = 'PP_PromotionPrize.xls';
         const SORTING_CODE = {
-            'ExternalId': 2,
-            'SystemId': 1,
-            'Turnover': 3,
-            'TotalTransaction': 13,
-            'CustomerWL': 4,
-            'BetEffective': 5,
-            'PlayerComm': 10,
-            'CustomerTotalWL': 14,
-            'LicenseeWL': 6,
-            'BAComm': 8,
-            'RacingRevenue': 15,
-            'AmtDueToBA': 11,
-            'AmtDueToRacing': 12
+            'externalId': 2,
+            'systemId': 1,
+            'turnover': 3,
+            'totalTransaction': 13,
+            'customerWL': 4,
+            'betEffective': 5,
+            'playerComm': 10,
+            'customerTotalWL': 14,
+            'licenseeWL': 6,
+            'baComm': 8,
+            'racingRevenue': 15,
+            'amtDueToBA': 11,
+            'amtDueToRacing': 12
         };
 
         let _ajaxRequest = null;
@@ -6368,7 +6368,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
             $('.main-content').on('click', _selector.BetListLink, function () {
                 const data = $(this).data('drill-down');
-                _me.viewWinlossBetList(data.CustId, data.SystemId, data.ExternalId);
+                _me.viewWinlossBetList(data.custId, data.systemId, data.externalId);
             });
 
             $(window).on('resize', function () {
@@ -6454,18 +6454,18 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             jqGridAdditional.clearGrid(_selector.GridId);
             _isFirstLoad = true;
 
-            createPaging(response.TotalRows);
+            createPaging(response.totalRows);
 
-            if (response.TotalRows === 0) {
+            if (response.totalRows === 0) {
                 jqGridAdditional.setNoInfo();
                 Site.unBlockUI();
                 showPromotionPrizeLink(false);
                 return;
             }
 
-            const gridOption = CustomerWinLossOption.getGridOption(response.TotalRows);
-            gridOption.rowNum = response.DataList.length;
-            gridOption.data = response.DataList;
+            const gridOption = CustomerWinLossOption.getGridOption(response.totalRows);
+            gridOption.rowNum = response.dataList.length;
+            gridOption.data = response.dataList;
             gridOption.onSortCol = function (index) {
                 sort(index);
                 return 'stop';
@@ -6479,7 +6479,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             reportGrid.jqGrid(gridOption);
 
             CustomerWinLossOption.setGroupHeaderColumns(reportGrid);
-            const pprizeCount = response.PromotionPrize;
+            const pprizeCount = response.promotionPrize;
             showPromotionPrizeLink(Site.isNumber(pprizeCount) && parseInt(pprizeCount, 10) > 0);
         }
 
@@ -6584,7 +6584,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                     jqGridAdditional.removeCursorOnNonSortableHeader(reportGrid);
                 }
 
-                jqGridAdditional.assignTotal(response.Total, gridOption.colModel);
+                jqGridAdditional.assignTotal(response.total, gridOption.colModel);
                 jqGridAdditional.setGroupFooters(Site.isFakeLicensee() ?
                     CustomerWinLossOption.totalColspanFakeLicensee :
                     CustomerWinLossOption.totalColspan);
@@ -6627,7 +6627,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         }
 
         function resetParam() {
-            _sortColumnName = 'ExternalId';
+            _sortColumnName = 'externalId';
             _sortOrder = 'asc';
             _orderItem = SORTING_CODE[_sortColumnName];
             _pagingOption.pageindex = 1;
@@ -6688,8 +6688,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
         const indexColumn =
         {
-            name: 'Index',
-            index: 'Index',
+            name: 'index',
+            index: 'index',
             resizable: false,
             width: 40,
             align: 'center',
@@ -6699,8 +6699,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
         const externalIdColumn =
         {
-            name: 'ExternalId',
-            index: 'ExternalId',
+            name: 'externalId',
+            index: 'externalId',
             resizable: false,
             width: 120,
             align: 'left',
@@ -6712,9 +6712,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             formatter: function (cellvalue, options, rowObject) {
                 const param =
                 {
-                    CustId: rowObject.CustId,
-                    ExternalId: rowObject.ExternalId,
-                    SystemId: rowObject.SystemId
+                    custId: rowObject.custId,
+                    externalId: rowObject.externalId,
+                    systemId: rowObject.systemId
                 };
                 return '<a class="bet-list-link" href="javascript:;" data-drill-down=\'' + JSON.stringify(param) + '\'>' + cellvalue + '</a>';
             }
@@ -6722,8 +6722,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
         const systemIdColumn =
         {
-            name: 'SystemId',
-            index: 'SystemId',
+            name: 'systemId',
+            index: 'systemId',
             resizable: false,
             width: 120,
             align: 'left',
@@ -6733,8 +6733,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
         const turnoverColumn =
         {
-            name: 'Turnover',
-            index: 'Turnover',
+            name: 'turnover',
+            index: 'turnover',
             width: 110,
             align: 'right',
             sortable: true,
@@ -6745,8 +6745,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
         const totalTransactionColumn =
         {
-            name: 'TotalTransaction',
-            index: 'TotalTransaction',
+            name: 'totalTransaction',
+            index: 'totalTransaction',
             width: 90,
             align: 'right',
             sortable: true,
@@ -6760,8 +6760,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
         const customerWlColumn =
         {
-            name: 'CustomerWL',
-            index: 'CustomerWL',
+            name: 'customerWL',
+            index: 'customerWL',
             width: 90,
             align: 'right',
             sortable: true,
@@ -6771,8 +6771,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
         const playerCommColumn =
         {
-            name: 'PlayerComm',
-            index: 'PlayerComm',
+            name: 'playerComm',
+            index: 'playerComm',
             width: 50,
             align: 'right',
             sortable: true,
@@ -6782,8 +6782,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
         const customerWlTotalColumn =
         {
-            name: 'CustomerTotalWL',
-            index: 'CustomerTotalWL',
+            name: 'customerTotalWL',
+            index: 'customerTotalWL',
             width: 90,
             align: 'right',
             sortable: true,
@@ -6793,8 +6793,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
         const betEffectiveColumn =
         {
-            name: 'BetEffective',
-            index: 'BetEffective',
+            name: 'betEffective',
+            index: 'betEffective',
             width: 100,
             align: 'right',
             sortable: true,
@@ -6805,8 +6805,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
         const licenseeWLColumn =
         {
-            name: 'LicenseeWL',
-            index: 'LicenseeWL',
+            name: 'licenseeWL',
+            index: 'licenseeWL',
             width: 100,
             align: 'right',
             sortable: true,
@@ -6816,8 +6816,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
         const bacommColumn =
         {
-            name: 'BAComm',
-            index: 'BAComm',
+            name: 'bAComm',
+            index: 'bAComm',
             width: 100,
             align: 'right',
             sortable: true,
@@ -6827,8 +6827,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         };
         const amtDueToBAColumn =
         {
-            name: 'AmtDueToBA',
-            index: 'AmtDueToBA',
+            name: 'amtDueToBA',
+            index: 'amtDueToBA',
             width: 100,
             align: 'right',
             sortable: true,
@@ -6908,7 +6908,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             setGroupHeaderColumns: function (grid) {
                 const groupCustomerWinloss = _me.hasCustomerComm ?
                     {
-                        startColumnName: 'CustomerWL',
+                        startColumnName: 'customerWL',
                         numberOfColumns: 3,
                         titleText: Site.getSingleResource('CustomerW_L')
                     } : {};

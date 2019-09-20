@@ -1230,20 +1230,20 @@ function (_Component) {
       var startDate = month.year === this.min.year && month.month === this.min.month ? this.min.date : 1;
       var endDate = month.year === this.max.year && month.month === this.max.month ? this.max.date : daysInMonth;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "month-picker"
+        className: "month-picker ".concat(this.props.showDate ? '' : 'month-only')
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Month__WEBPACK_IMPORTED_MODULE_1__["default"], _extends({
         min: this.min,
         max: this.max,
         value: month
       }, this.props.monthOption, {
         onChange: this._onMonthChange
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Day__WEBPACK_IMPORTED_MODULE_2__["default"], _extends({
+      })), this.props.showDate && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Day__WEBPACK_IMPORTED_MODULE_2__["default"], _extends({
         min: startDate,
         max: endDate > to ? to : endDate,
         value: from
       }, this.props.fromDateOption, {
         onChange: this._onFromDateChange
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Day__WEBPACK_IMPORTED_MODULE_2__["default"], _extends({
+      })), this.props.showDate && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Day__WEBPACK_IMPORTED_MODULE_2__["default"], _extends({
         min: startDate < from ? from : startDate,
         max: endDate,
         value: to
@@ -1258,18 +1258,24 @@ function (_Component) {
 
 _defineProperty(MonthPicker, "propTypes", {
   monthOption: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.object.isRequired,
-  fromDateOption: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.object.isRequired,
-  toDateOption: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.object.isRequired,
   onChange: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func,
   minDate: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string.isRequired,
   maxDate: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string.isRequired,
   fromDate: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string.isRequired,
-  toDate: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string.isRequired
+  toDate: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string.isRequired,
+  showDate: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool
 });
 
 _defineProperty(MonthPicker, "defaultProps", {
   label: 'View data in month',
-  onChange: function onChange() {}
+  onChange: function onChange() {},
+  fromDateOption: {
+    label: 'From'
+  },
+  toDateOption: {
+    label: 'To'
+  },
+  showDate: true
 });
 
 /* harmony default export */ __webpack_exports__["default"] = (MonthPicker);

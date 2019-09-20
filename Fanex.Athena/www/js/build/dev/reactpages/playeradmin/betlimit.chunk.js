@@ -541,18 +541,16 @@ var SettingContent = function SettingContent(Grid, DataHandling) {
       });
 
       _defineProperty(_assertThisInitialized(_this), "onSubmit", function (e) {
-        if (e.button === 0 || e.which === 1) {
-          if (!_this.state.showError) {
-            var data = _this.state.data;
-            var submitData = DataHandling.getSubmitData(data);
+        if (!_this.state.showError) {
+          var data = _this.state.data;
+          var submitData = DataHandling.getSubmitData(data);
 
-            if (!submitData.IsValid) {
-              _this._showError(submitData.Data);
-            } else {
-              _this._showConfirmation(function () {
-                return _this._submit(submitData.Data);
-              });
-            }
+          if (!submitData.IsValid) {
+            _this._showError(submitData.Data);
+          } else {
+            _this._showConfirmation(function () {
+              return _this._submit(submitData.Data);
+            });
           }
         }
       });

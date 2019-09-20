@@ -2000,6 +2000,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/clientResourceManager */ "./www/js/source/reactpages/lib/clientResourceManager.js");
+
 
 
 
@@ -2023,7 +2025,8 @@ var AthenaSearch = function AthenaSearch(props) {
     value: bankAccountNumber,
     autoComplete: "off",
     onChange: onChange,
-    onKeyPress: onKeyPress
+    onKeyPress: onKeyPress,
+    placeholder: _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_3__["default"].getText('PlaceholderBankAccount')
   }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12 col-md-4 col-sm-4 col-lg-3 col-xl-2"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2038,7 +2041,8 @@ var AthenaSearch = function AthenaSearch(props) {
     value: email,
     autoComplete: "off",
     onChange: onChange,
-    onKeyPress: onKeyPress
+    onKeyPress: onKeyPress,
+    placeholder: _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_3__["default"].getText('PlaceholderEmail')
   }))));
 };
 
@@ -3481,9 +3485,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _reducers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../reducers */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/reducers/index.js");
 /* harmony import */ var _jsroot_lib_store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/lib/store */ "./www/js/source/reactpages/lib/store.js");
 /* harmony import */ var _lib_config__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../lib/config */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/config.js");
+/* harmony import */ var _resources__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../resources */ "./www/js/source/reactpages/Module/PlayerAdmin/resources/index.js");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -5573,6 +5579,129 @@ var selectedPlayerIdList = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE
 var selectedTabName = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])('', _defineProperty({}, _actions_types_js__WEBPACK_IMPORTED_MODULE_1__["SET_SELECTED_TAB_NAME"], function (preState, action) {
   return action.data;
 }));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/resources/index.js":
+/*!************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/resources/index.js ***!
+  \************************************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/clientResourceManager */ "./www/js/source/reactpages/lib/clientResourceManager.js");
+/* harmony import */ var _resource_en__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./resource.en */ "./www/js/source/reactpages/Module/PlayerAdmin/resources/resource.en.js");
+/* harmony import */ var _resource_cs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./resource.cs */ "./www/js/source/reactpages/Module/PlayerAdmin/resources/resource.cs.js");
+
+
+
+_jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_0__["default"].register('en', _resource_en__WEBPACK_IMPORTED_MODULE_1__["resource_en"]);
+_jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_0__["default"].register('cs', _resource_cs__WEBPACK_IMPORTED_MODULE_2__["resource_cs"]);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/resources/resource.cs.js":
+/*!******************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/resources/resource.cs.js ***!
+  \******************************************************************************/
+/*! exports provided: resource_cs */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resource_cs", function() { return resource_cs; });
+var resource_cs = {
+  BankInformation: '银行资讯',
+  BankName: '银行名称',
+  BankAccountName: '账户名称',
+  BankAccountNumber: '银行账户号码',
+  Country: '地区',
+  Mobile: '手机版',
+  CreatedDate: '创建日期',
+  LastLogin: '最后登入',
+  LastTxn: '最后交易',
+  BAUpdatedBy: '投注总计跟新由',
+  LastUpdatedBy: 'Last Updated By',
+  SpecialLevel: '特殊层级',
+  LastUpdatedSpecialLevel: '最近更新的特殊级别',
+  Margin: '利润',
+  SingleCustomer: '单一会员',
+  BettingTicketCenter: '注单中心',
+  CustomerWinLoss: '会员輸贏'
+};
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/resources/resource.en.js":
+/*!******************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/resources/resource.en.js ***!
+  \******************************************************************************/
+/*! exports provided: resource_en */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resource_en", function() { return resource_en; });
+var resource_en = {
+  BankInformation: 'Bank Information',
+  BankName: 'Bank Name',
+  BankAccountName: 'Bank Account Name',
+  BankAccountNumber: 'Bank Account Number',
+  Country: 'Country',
+  AgUserId: 'AG UserId',
+  GoldDeluxeUserId: 'Gold Deluxe UserID',
+  VoidBridgeUserId: 'VoidBridge UserID',
+  ExchangeUserId: 'Exchange UserID',
+  FirstName: 'First name',
+  LastName: 'Last name',
+  DateOfBirth: 'Date of birth',
+  Mobile: 'Mobile',
+  City: 'City',
+  Town: 'Town',
+  State: 'State',
+  ZipCode: 'Zip Code',
+  SecurityQuestion: 'Security question',
+  SecurityCode: 'Security code',
+  WhereHear: 'Where did you hear about us',
+  PreferredUserName: 'My preferred username',
+  PreferredCurrency: 'My preferred currency',
+  PreferredOdds: 'My preferred odds',
+  PreferredLanguage: 'My preferred language',
+  MemberId: 'Member ID',
+  OperatorId: 'Operator ID',
+  SiteCode: 'Site code',
+  ProductCode: 'Product code',
+  CustomInfo1: 'CustomInfo 1',
+  CustomInfo2: 'CustomInfo 2',
+  CustomInfo3: 'CustomInfo 3',
+  CustomInfo4: 'CustomInfo 4',
+  CustomInfo5: 'CustomInfo 5',
+  CreatedDate: 'Created Date',
+  LastLogin: 'Last Login',
+  LastTxn: 'Last Txn',
+  BAUpdatedBy: 'BA Updated By',
+  LastUpdatedBy: 'Last Updated By',
+  SpecialLevel: 'Special Level',
+  LastUpdatedSpecialLevel: 'Last Updated Special Level',
+  Margin: 'Margin',
+  AverageBetSize: 'Average bet size',
+  Winnings: 'Winnings',
+  Loss: 'Loss',
+  NetWinLoss: 'Net Win Loss',
+  BasedOnSportsbook: 'Based on Sportsbook data',
+  NoSportsbookData: 'There is no Sportsbook data.',
+  FastCrossLink: 'Fast Cross-Link',
+  SingleCustomer: 'Single Customer',
+  BettingTicketCenter: 'Betting Ticket Center',
+  CustomerWinLoss: 'Customer Win Loss',
+  PlayerBettingStatisticsTitle: 'Player Betting Statistics (month to date)',
+  PlayerProfile: 'Player Profile',
+  ActivityRecord: 'Activity Record',
+  PlaceholderBankAccount: 'Search by Exactly Bank Account Number',
+  PlaceholderEmail: 'Search by Exactly Email'
+};
 
 /***/ }),
 
@@ -7820,6 +7949,60 @@ function () {
   }]);
 
   return QueryString;
+}();
+
+
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/lib/clientResourceManager.js":
+/*!***************************************************************!*\
+  !*** ./www/js/source/reactpages/lib/clientResourceManager.js ***!
+  \***************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ClientResourceManager; });
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var DEFAULT_RESOURCE_KEY = 'en';
+var resources = {
+  'en': {},
+  'cs': {}
+};
+var currentLangKey = window._langKey || DEFAULT_RESOURCE_KEY;
+
+var ClientResourceManager =
+/*#__PURE__*/
+function () {
+  function ClientResourceManager() {
+    _classCallCheck(this, ClientResourceManager);
+  }
+
+  _createClass(ClientResourceManager, null, [{
+    key: "register",
+    value: function register(langKey, resourceValue) {
+      resources[langKey] = _objectSpread({}, resources[langKey], resourceValue);
+    }
+  }, {
+    key: "getText",
+    value: function getText(key) {
+      var currentResource = resources[currentLangKey];
+      return currentResource && (currentResource[key] || resources[DEFAULT_RESOURCE_KEY][key] || key);
+    }
+  }]);
+
+  return ClientResourceManager;
 }();
 
 
