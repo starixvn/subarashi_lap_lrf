@@ -116,19 +116,19 @@ export default class ReportExcel {
     _getcolumnConfigs() {
         return [{
             field: fields.Status,
-            [MAIN_SECTION_STYLE]: bodyCellStyle.center,
+            [MAIN_SECTION_STYLE]: bodyCellStyle.left,
             width: 60
         }, {
             field: fields.UserName,
-            [MAIN_SECTION_STYLE]: bodyCellStyle.center,
+            [MAIN_SECTION_STYLE]: bodyCellStyle.left,
             width: 200
         }, {
             field: fields.SystemId,
-            [MAIN_SECTION_STYLE]: bodyCellStyle.center,
+            [MAIN_SECTION_STYLE]: bodyCellStyle.left,
             width: 200
         }, {
             field: fields.RealName,
-            [MAIN_SECTION_STYLE]: bodyCellStyle.center,
+            [MAIN_SECTION_STYLE]: bodyCellStyle.left,
             width: 150
         }, {
             field: fields.Currency,
@@ -156,15 +156,15 @@ export default class ReportExcel {
             width: 70
         }, {
             field: fields.LastLoginIp,
-            [MAIN_SECTION_STYLE]: bodyCellStyle.center,
+            [MAIN_SECTION_STYLE]: bodyCellStyle.left,
             width: 100
         }, {
             field: fields.LastTransaction,
-            [MAIN_SECTION_STYLE]: bodyCellStyle.center,
+            [MAIN_SECTION_STYLE]: bodyCellStyle.left,
             width: 150
         }, {
             field: fields.Email,
-            [MAIN_SECTION_STYLE]: bodyCellStyle.center,
+            [MAIN_SECTION_STYLE]: bodyCellStyle.left,
             width: 200
         }].filter(x => !!this.displayedColumn[x.field]);
     }

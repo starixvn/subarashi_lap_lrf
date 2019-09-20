@@ -38,19 +38,19 @@ export const PlayerRow = (props) => {
 
     return (
         <Row key={LicenseeCustId}>
-            {displayedColumn[fields.Status] && <Cell className="center-align"><StatusCell dataItem={dataItem} /></Cell>}
-            {displayedColumn[fields.UserName] && <Cell className="center-align"><UserNameCell dataItem={dataItem} /></Cell>}
-            {displayedColumn[fields.SystemId] && <Cell className="center-align">{SystemId}</Cell>}
-            {displayedColumn[fields.RealName] && <Cell className="center-align">{RealName}</Cell>}
+            {displayedColumn[fields.Status] && <Cell><StatusCell dataItem={dataItem} /></Cell>}
+            {displayedColumn[fields.UserName] && <Cell><UserNameCell dataItem={dataItem} /></Cell>}
+            {displayedColumn[fields.SystemId] && <Cell>{SystemId}</Cell>}
+            {displayedColumn[fields.RealName] && <Cell>{RealName}</Cell>}
             {displayedColumn[fields.Currency] && <Cell className="center-align">{Currency}</Cell>}
-            {displayedColumn[fields.CurrentBalance] && <Cell className="center-align">{canShowMainColumn && NumberFormat.formatDecimal(CurrentBalance)}</Cell>}
-            {displayedColumn[fields.OutstandingBalance] && <Cell className="center-align">{canShowMainColumn && NumberFormat.formatDecimal(OutstandingBalance)}</Cell>}
+            {displayedColumn[fields.CurrentBalance] && <Cell className="right-align">{canShowMainColumn && NumberFormat.formatDecimal(CurrentBalance)}</Cell>}
+            {displayedColumn[fields.OutstandingBalance] && <Cell className="right-align">{canShowMainColumn && NumberFormat.formatDecimal(OutstandingBalance)}</Cell>}
             {displayedColumn[fields.OddsGroup] && <Cell className="center-align">{canShowMainColumn && OddsGroup !== undefined && <OddsGroupCell dataItem={dataItem} />}</Cell>}
             {displayedColumn[fields.BaStatus] && <BaStatusCell dataItem={dataItem} />}
             {displayedColumn[fields.SpecialLevel] && <Cell className="center-align">{canShowMainColumn && SpecialLevel !== undefined && <SpecialLevelCell dataItem={dataItem} />}</Cell>}
-            {displayedColumn[fields.LastLoginIp] && <Cell className="center-align">{LastLoginIp}</Cell>}
-            {displayedColumn[fields.LastTransaction] && <Cell className="center-align">{LastTransaction}</Cell>}
-            {displayedColumn[fields.Email] && <Cell className="center-align">{Email}</Cell>}
+            {displayedColumn[fields.LastLoginIp] && <Cell>{LastLoginIp}</Cell>}
+            {displayedColumn[fields.LastTransaction] && <Cell>{LastTransaction}</Cell>}
+            {displayedColumn[fields.Email] && <Cell>{Email}</Cell>}
         </Row>
     )
 }
