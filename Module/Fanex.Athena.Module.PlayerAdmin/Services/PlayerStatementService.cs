@@ -9,6 +9,7 @@
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
     using Fanex.Athena.Module.PlayerAdmin.Services.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.CustomException;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Newtonsoft.Json;
 
@@ -58,22 +59,27 @@
             const string GetTokenPath = "api/auth";
 
             var client = _httpClientFactory.GetForHost(new Uri(_appSetting.GetValue(TokenApiHost)));
+            var requestContent = new StringContent(GetAuthenticationObjectAsString(siteName), Encoding.UTF8, "application/json");
 
-            var content = new StringContent(GetAuthenticationObjectAsString(siteName), Encoding.UTF8, "application/json");
-
-            var response = await client.PostAsync(GetTokenPath, content).ConfigureAwait(false);
-
-            if (response.StatusCode != HttpStatusCode.OK)
+            using (var response = await client.PostAsync(GetTokenPath, requestContent).ConfigureAwait(false))
             {
-                var errorMessage = new StringBuilder("External Service error");
-                errorMessage.AppendLine($"HTTP Error: {response.Content.ReadAsStringAsync()}");
-                errorMessage.AppendLine($"HTTP status code: {response.StatusCode}");
-                throw new InvalidOperationException(errorMessage.ToString());
+                try
+                {
+                    response.EnsureSuccessStatusCode();
+
+                    var result = JsonConvert.DeserializeObject<ExternalServiceToken>(await response.Content.ReadAsStringAsync());
+
+                    response.Content.Dispose();
+
+                    return result.AccessToken;
+                }
+                catch (HttpRequestException e)
+                {
+                    var errorMessage = new StringBuilder($"HTTP Error: {e.Message}");
+                    errorMessage.AppendLine($"HTTP status code: {response.StatusCode}");
+                    throw new ServiceException(errorMessage.ToString(), "External Service");
+                }
             }
-
-            var result = JsonConvert.DeserializeObject<ExternalServiceToken>(await response.Content.ReadAsStringAsync());
-
-            return result.AccessToken;
         }
 
         private string GetAuthenticationObjectAsString(string siteName)
