@@ -1,4 +1,4 @@
-﻿// Generated at: 09/19/2019 10:52:43 AM
+﻿// Generated at: 09/20/2019 10:50:47 AM
 window._language_zh_TW = {
 AA:"客客",
 AbnormalBet:"非正規註單",
@@ -63,6 +63,7 @@ BetSettingGroups:"Bet Setting Groups",
 BetSettings:"投注設定",
 BetTaken:"匹配時間",
 BettingLimit:"投注限額",
+BettingStatement:"投注詳情",
 BettingTicketCenter:"注單中心",
 BettingTicketCenter_MultiCustomersTabNote1:"所有投注類別，聯賽和比賽過濾器僅支援1個選定日期",
 BettingTicketCenter_MultiCustomersTabNote2:"顯示從{0}開始的資料",

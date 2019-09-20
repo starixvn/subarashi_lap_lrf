@@ -1,4 +1,4 @@
-﻿// Generated at: 09/19/2019 10:52:43 AM
+﻿// Generated at: 09/20/2019 10:50:47 AM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -78,6 +78,7 @@ BetSettingGroups:"Bet Setting Groups",
 BetSettings:"Bet Settings",
 BetTaken:"Bet Taken",
 BettingLimit:"Betting Limit",
+BettingStatement:"Betting Statement",
 BettingTicketCenter:"Betting Ticket Center",
 BettingTicketCenter_MultiCustomersTabNote1:"All bettypes, League, and Match filter available only when 1 day is selected",
 BettingTicketCenter_MultiCustomersTabNote2:"Data is available from {0}",

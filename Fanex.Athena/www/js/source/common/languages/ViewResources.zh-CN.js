@@ -1,4 +1,4 @@
-﻿// Generated at: 09/19/2019 10:52:43 AM
+﻿// Generated at: 09/20/2019 10:50:47 AM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -63,6 +63,7 @@ BetSettingGroups:"Bet Setting Groups",
 BetSettings:"投注设定",
 BetTaken:"匹配时间",
 BettingLimit:"投注限额",
+BettingStatement:"投注详情",
 BettingTicketCenter:"注单中心",
 BettingTicketCenter_MultiCustomersTabNote1:"所有投注类别，联赛和比赛过滤器仅支援1个选定日期",
 BettingTicketCenter_MultiCustomersTabNote2:"显示从{0}开始的资料",
