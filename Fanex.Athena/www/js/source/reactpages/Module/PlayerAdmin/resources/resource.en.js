@@ -49,5 +49,10 @@ export const resource_en = {
     FastCrossLink: 'Fast Cross-Link',
     SingleCustomer: 'Single Customer',
     BettingTicketCenter: 'Betting Ticket Center',
-    CustomerWinLoss: 'Customer Win Loss'
+    CustomerWinLoss: 'Customer Win Loss',
+    PlayerBettingStatisticsTitle: 'Player Betting Statistics (month to date)',
+    PlayerProfile: 'Player Profile',
+    ActivityRecord: 'Activity Record',
+    PlaceholderBankAccount: 'Search by Exactly Bank Account Number',
+    PlaceholderEmail: 'Search by Exactly Email'
 }

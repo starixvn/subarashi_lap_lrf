@@ -136,7 +136,7 @@ export const CustomerBettingStatus = (props) => {
     return (
         <div className="panel">
             <div className="panel-header">
-                Player Betting Status
+                {ClientResourceManager.getText('PlayerBettingStatisticsTitle')}
             </div>
             <div className="panel-body">
                 {data && data.HasData ? renderContent() : (<p className="center-align">{ClientResourceManager.getText('NoSportsbookData')}</p>)}

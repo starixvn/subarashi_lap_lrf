@@ -5,6 +5,7 @@ import NumberFormat from '@jsroot/lib/numberFormat';
 export const GridRow = (props) => {
     const { dataRow, index, hasCustomerComm, isAllowedBA } = props;
     const { Turnover, TotalTransaction, CustomerWL, Comm, CustomerTotalWL, BetEffective, LicenseeWL, BAComm, AmtDueToBA } = dataRow || {};
+    const classNameForLicWl = LicenseeWL < 0 ? 'negative' : '';
 
     return (
         <Row>
@@ -15,7 +16,7 @@ export const GridRow = (props) => {
             {hasCustomerComm && <Cell className="right-align">{NumberFormat.formatDecimal(Comm)}</Cell>}
             {hasCustomerComm && <Cell className="right-align">{NumberFormat.formatDecimal(CustomerTotalWL)}</Cell>}
             <Cell className="right-align">{NumberFormat.formatDecimal(BetEffective)}</Cell>
-            <Cell className="right-align">{NumberFormat.formatDecimal(LicenseeWL)}</Cell>
+            <Cell className={'right-align ' + classNameForLicWl}>{NumberFormat.formatDecimal(LicenseeWL)}</Cell>
             {isAllowedBA && <Cell className="right-align">{NumberFormat.formatDecimal(BAComm)}</Cell>}
             {isAllowedBA && <Cell className="right-align">{NumberFormat.formatDecimal(AmtDueToBA)}</Cell>}
         </Row>

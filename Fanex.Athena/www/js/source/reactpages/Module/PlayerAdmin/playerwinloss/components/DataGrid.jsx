@@ -5,6 +5,7 @@ import { ActionCreators } from '../actions';
 import { Table } from '@9softstudio/react-grid';
 import { buildHeader } from '../lib/gridHelper';
 import GridRow from './GridRow';
+import NoDataTitle from '@jsroot/components/NoDataTitle';
 
 export const DataGrid = (props) => {
     const { requestParam, gridData, getData, hasCustomerComm, isAllowedBA } = props;
@@ -16,6 +17,10 @@ export const DataGrid = (props) => {
 
     if (!gridData) {
         return null;
+    }
+
+    if(gridData.length === 0){
+        return (<NoDataTitle />);
     }
 
     const renderBodyData = () => {

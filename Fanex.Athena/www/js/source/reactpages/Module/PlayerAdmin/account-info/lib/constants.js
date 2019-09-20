@@ -1,12 +1,14 @@
+import ClientResourceManager from '@jsroot/lib/clientResourceManager';
+
 export const tabKeys = {
-    accountProfile: 'accountProfile',
+    playerProfile: 'playerProfile',
     bankInformation: 'bankInformation',
     activityRecord: 'activityRecord'
 }
 export const tabList = [
-    { name: tabKeys.accountProfile, text: 'Account Profile' },
-    { name: tabKeys.bankInformation, text: 'Bank Information' },
-    { name: tabKeys.activityRecord, text: 'Activity Record' }
+    { name: tabKeys.playerProfile, text: ClientResourceManager.getText('PlayerProfile') },
+    { name: tabKeys.bankInformation, text: ClientResourceManager.getText('BankInformation') },
+    { name: tabKeys.activityRecord, text: ClientResourceManager.getText('ActivityRecord') }
 ]
 
 export const licenseeType = {
