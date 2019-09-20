@@ -20285,7 +20285,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var TabContent = function TabContent(props) {
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(_lib_constants__WEBPACK_IMPORTED_MODULE_2__["tabKeys"].accountProfile),
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(_lib_constants__WEBPACK_IMPORTED_MODULE_2__["tabKeys"].playerProfile),
       _useState2 = _slicedToArray(_useState, 2),
       selectedTab = _useState2[0],
       setSelectedTab = _useState2[1];
@@ -20313,7 +20313,7 @@ var TabContent = function TabContent(props) {
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "tab-panel"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    style: getStyle(_lib_constants__WEBPACK_IMPORTED_MODULE_2__["tabKeys"].accountProfile)
+    style: getStyle(_lib_constants__WEBPACK_IMPORTED_MODULE_2__["tabKeys"].playerProfile)
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_subtab_AccountProfile__WEBPACK_IMPORTED_MODULE_3__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: getStyle(_lib_constants__WEBPACK_IMPORTED_MODULE_2__["tabKeys"].bankInformation)
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_subtab_BankInformation__WEBPACK_IMPORTED_MODULE_4__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -21164,6 +21164,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "licenseeType", function() { return licenseeType; });
 /* harmony import */ var _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/clientResourceManager */ "./www/js/source/reactpages/lib/clientResourceManager.js");
 
+
+var getText = function getText(resourceKey) {
+  return _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_0__["default"].getText(resourceKey);
+};
+
 var tabKeys = {
   playerProfile: 'playerProfile',
   bankInformation: 'bankInformation',
@@ -21171,13 +21176,13 @@ var tabKeys = {
 };
 var tabList = [{
   name: tabKeys.playerProfile,
-  text: _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_0__["default"].getText('PlayerProfile')
+  text: getText('PlayerProfile')
 }, {
   name: tabKeys.bankInformation,
-  text: _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_0__["default"].getText('BankInformation')
+  text: getText('BankInformation')
 }, {
   name: tabKeys.activityRecord,
-  text: _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_0__["default"].getText('ActivityRecord')
+  text: getText('ActivityRecord')
 }];
 var licenseeType = {
   api: 0,
