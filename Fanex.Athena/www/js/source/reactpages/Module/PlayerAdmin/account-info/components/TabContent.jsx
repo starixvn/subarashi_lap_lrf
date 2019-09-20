@@ -8,7 +8,7 @@ import ActivityRecord from './subtab/ActivityRecord';
 import SubTab from './SubTab';
 
 export const TabContent = (props) => {
-    const [selectedTab, setSelectedTab] = useState(tabKeys.accountProfile);
+    const [selectedTab, setSelectedTab] = useState(tabKeys.playerProfile);
     const tabListByLicenseeType = props.licenseeType === licenseeType.api ? tabList.filter(x => x.name !== tabKeys.bankInformation) : [...tabList];
 
     const getStyle = (tabKey) => ({ display: selectedTab === tabKey ? 'block' : 'none' })
@@ -21,7 +21,7 @@ export const TabContent = (props) => {
                 </div>
 
                 <div className="tab-panel">
-                    <div style={getStyle(tabKeys.accountProfile)}><AccountProfile /></div>
+                    <div style={getStyle(tabKeys.playerProfile)}><AccountProfile /></div>
                     <div style={getStyle(tabKeys.bankInformation)}><BankInformation /></div>
                     <div style={getStyle(tabKeys.activityRecord)}><ActivityRecord /></div>
                 </div>
