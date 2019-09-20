@@ -36,17 +36,6 @@ const SettingContent = (Grid, DataHandling) => {
                 this.props.toggleLoader(false);
                 this.props.setAlertOption({ isShow: false });
             }
-
-            if (prevState.showError !== this.state.showError) {
-                window.setTimeout(() => {
-                    if (this.state.showError) {
-                        this._registerEvents();
-                    }
-                    else {
-                        this._unRegisterEvents();
-                    }
-                }, 0);
-            }
         }
 
         componentWillUnmount() {
@@ -55,6 +44,7 @@ const SettingContent = (Grid, DataHandling) => {
 
         componentDidMount() {
             this._getData(this.props.requestParam);
+            this._registerEvents();
         }
 
         _registerEvents() {
@@ -66,13 +56,15 @@ const SettingContent = (Grid, DataHandling) => {
         }
 
         _handleClickOutSide = (event) => {
-            const isError = this.errorRef.current && this.errorRef.current.contains(event.target);
-            const isCheckBox = this.checkBoxRef.current && this.checkBoxRef.current.contains(event.target);
-            const isButton = this.submitButtonRef.current && this.submitButtonRef.current.contains(event.target);
-            const clickOutside = !isError && !isCheckBox && !isButton;
+            if (this.state.showError) {
+                const isError = this.errorRef.current && this.errorRef.current.contains(event.target);
+                const isCheckBox = this.checkBoxRef.current && this.checkBoxRef.current.contains(event.target);
+                const isButton = this.submitButtonRef.current && this.submitButtonRef.current.contains(event.target);
+                const clickOutside = !isError && !isCheckBox && !isButton;
 
-            if (clickOutside && this.state.showError) {
-                this._closeError();
+                if (clickOutside) {
+                    this._closeError();
+                }
             }
         }
 
@@ -156,7 +148,7 @@ const SettingContent = (Grid, DataHandling) => {
             const requestParam = this.props.requestParam;
             const param = Object.assign({}, this.props.requestParam, { Setting: data });
 
-            DataTransfer.updateData(param, this._showSubmitResult.bind(this), null, this._handleError.bind(this));
+            DataTransfer.updateData(param, this._showSubmitResult.bind(this), () => this.props.toggleLoader(false), this._handleError.bind(this));
         }
 
         _handleError() {

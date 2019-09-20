@@ -21,8 +21,7 @@ const NGSettingGrid = (props) => {
         onChange(newData);
     }
 
-    const onInputBlur = (event, type, id) => {
-        const value = event.target.value;
+    const onInputBlur = (type, id, value) => {
         const newValue = Utility.formatValue(Utility.getValueAsNumber(value));
 
         if (newValue !== value) {
@@ -36,8 +35,8 @@ const NGSettingGrid = (props) => {
 
                 return e;
             });
-            onChange(newData);
 
+            onChange(newData);
         }
 
     }
@@ -52,7 +51,7 @@ const NGSettingGrid = (props) => {
             maxLength='14'
             value={value[type]}
             onChange={(e) => onInputChange(type, value.Id, e.target.value)}
-            onBlur={(e) => onInputBlur(e, type, value.Id)}
+            onBlur={(e) => onInputBlur(type, value.Id, e.target.value)}
             disabled={disabled} />
     }
 
