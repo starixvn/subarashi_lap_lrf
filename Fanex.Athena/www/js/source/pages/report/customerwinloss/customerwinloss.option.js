@@ -7,8 +7,8 @@
 
         const indexColumn =
         {
-            name: 'Index',
-            index: 'Index',
+            name: 'index',
+            index: 'index',
             resizable: false,
             width: 40,
             align: 'center',
@@ -18,8 +18,8 @@
 
         const externalIdColumn =
         {
-            name: 'ExternalId',
-            index: 'ExternalId',
+            name: 'externalId',
+            index: 'externalId',
             resizable: false,
             width: 120,
             align: 'left',
@@ -31,9 +31,9 @@
             formatter: function (cellvalue, options, rowObject) {
                 const param =
                 {
-                    CustId: rowObject.CustId,
-                    ExternalId: rowObject.ExternalId,
-                    SystemId: rowObject.SystemId
+                    custId: rowObject.custId,
+                    externalId: rowObject.externalId,
+                    systemId: rowObject.systemId
                 };
                 return '<a class="bet-list-link" href="javascript:;" data-drill-down=\'' + JSON.stringify(param) + '\'>' + cellvalue + '</a>';
             }
@@ -41,8 +41,8 @@
 
         const systemIdColumn =
         {
-            name: 'SystemId',
-            index: 'SystemId',
+            name: 'systemId',
+            index: 'systemId',
             resizable: false,
             width: 120,
             align: 'left',
@@ -52,8 +52,8 @@
 
         const turnoverColumn =
         {
-            name: 'Turnover',
-            index: 'Turnover',
+            name: 'turnover',
+            index: 'turnover',
             width: 110,
             align: 'right',
             sortable: true,
@@ -64,8 +64,8 @@
 
         const totalTransactionColumn =
         {
-            name: 'TotalTransaction',
-            index: 'TotalTransaction',
+            name: 'totalTransaction',
+            index: 'totalTransaction',
             width: 90,
             align: 'right',
             sortable: true,
@@ -79,8 +79,8 @@
 
         const customerWlColumn =
         {
-            name: 'CustomerWL',
-            index: 'CustomerWL',
+            name: 'customerWL',
+            index: 'customerWL',
             width: 90,
             align: 'right',
             sortable: true,
@@ -90,8 +90,8 @@
 
         const playerCommColumn =
         {
-            name: 'PlayerComm',
-            index: 'PlayerComm',
+            name: 'playerComm',
+            index: 'playerComm',
             width: 50,
             align: 'right',
             sortable: true,
@@ -101,8 +101,8 @@
 
         const customerWlTotalColumn =
         {
-            name: 'CustomerTotalWL',
-            index: 'CustomerTotalWL',
+            name: 'customerTotalWL',
+            index: 'customerTotalWL',
             width: 90,
             align: 'right',
             sortable: true,
@@ -112,8 +112,8 @@
 
         const betEffectiveColumn =
         {
-            name: 'BetEffective',
-            index: 'BetEffective',
+            name: 'betEffective',
+            index: 'betEffective',
             width: 100,
             align: 'right',
             sortable: true,
@@ -124,8 +124,8 @@
 
         const licenseeWLColumn =
         {
-            name: 'LicenseeWL',
-            index: 'LicenseeWL',
+            name: 'licenseeWL',
+            index: 'licenseeWL',
             width: 100,
             align: 'right',
             sortable: true,
@@ -135,8 +135,8 @@
 
         const bacommColumn =
         {
-            name: 'BAComm',
-            index: 'BAComm',
+            name: 'bAComm',
+            index: 'bAComm',
             width: 100,
             align: 'right',
             sortable: true,
@@ -146,8 +146,8 @@
         };
         const amtDueToBAColumn =
         {
-            name: 'AmtDueToBA',
-            index: 'AmtDueToBA',
+            name: 'amtDueToBA',
+            index: 'amtDueToBA',
             width: 100,
             align: 'right',
             sortable: true,
@@ -227,7 +227,7 @@
             setGroupHeaderColumns: function (grid) {
                 const groupCustomerWinloss = _me.hasCustomerComm ?
                     {
-                        startColumnName: 'CustomerWL',
+                        startColumnName: 'customerWL',
                         numberOfColumns: 3,
                         titleText: Site.getSingleResource('CustomerW_L')
                     } : {};

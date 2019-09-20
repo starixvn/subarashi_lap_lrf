@@ -97,11 +97,11 @@
 
                 it("returns correct formatter for externalId cell", function () {
                     spyOn(Site, "isFakeLicensee").and.returnValue(false);
-                    var expectedFormat = '<a class="bet-list-link" href="javascript:;" data-drill-down=\'{"CustId":1,"ExternalId":2,"SystemId":3}\'>0</a>';
+                    var expectedFormat = '<a class="bet-list-link" href="javascript:;" data-drill-down=\'{"custId":1,"externalId":2,"systemId":3}\'>0</a>';
 
                     var models = CustomerWinLossOption.getColModel(2);
                     var externalIdColumn = models[externalIdIndex];
-                    var result = externalIdColumn.formatter(0, {}, { CustId: 1, ExternalId: 2, SystemId: 3 });
+                    var result = externalIdColumn.formatter(0, {}, { custId: 1, externalId: 2, systemId: 3 });
 
                     expect(result).toEqual(expectedFormat);
                 });
@@ -118,7 +118,7 @@
                     expect($.fn.jqGrid).toHaveBeenCalledWith("setGroupHeaders", {
                         useColSpanStyle: true,
                         groupHeaders: [{
-                            startColumnName: "CustomerWL",
+                            startColumnName: "customerWL",
                             numberOfColumns: 3,
                             titleText: "CustomerW_L"
                         }]

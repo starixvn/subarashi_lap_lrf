@@ -12,10 +12,8 @@ namespace Fanex.Athena.Controllers.Report
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
-    using Fanex.Athena.Model.Report.ViewModel.Api;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
-    using Newtonsoft.Json;
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
 
@@ -68,10 +66,7 @@ namespace Fanex.Athena.Controllers.Report
                 return File(stream, "application/octet-stream", FileName);
             }
 
-            var apiData = await _reportAPIClient.PostAsync<CustomerWinLossApiViewModel>("api/CustomerWinLoss/Index",
-                    metaModel, userSession.Language).ConfigureAwait(false);
-
-            return Content(JsonConvert.SerializeObject(apiData), "application/json");
+            return JsonString(await _reportAPIClient.PostAsyncString("api/CustomerWinLoss/Index", metaModel, userSession.Language).ConfigureAwait(false));
         }
 
         private ActionResult GetView(bool isHistory)

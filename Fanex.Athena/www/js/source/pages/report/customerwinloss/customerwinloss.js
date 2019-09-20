@@ -25,19 +25,19 @@
         const EXCEL_FILENAME = 'CustomerWinLoss.xls';
         const EXCEL_PP_FILENAME = 'PP_PromotionPrize.xls';
         const SORTING_CODE = {
-            'ExternalId': 2,
-            'SystemId': 1,
-            'Turnover': 3,
-            'TotalTransaction': 13,
-            'CustomerWL': 4,
-            'BetEffective': 5,
-            'PlayerComm': 10,
-            'CustomerTotalWL': 14,
-            'LicenseeWL': 6,
-            'BAComm': 8,
-            'RacingRevenue': 15,
-            'AmtDueToBA': 11,
-            'AmtDueToRacing': 12
+            'externalId': 2,
+            'systemId': 1,
+            'turnover': 3,
+            'totalTransaction': 13,
+            'customerWL': 4,
+            'betEffective': 5,
+            'playerComm': 10,
+            'customerTotalWL': 14,
+            'licenseeWL': 6,
+            'baComm': 8,
+            'racingRevenue': 15,
+            'amtDueToBA': 11,
+            'amtDueToRacing': 12
         };
 
         let _ajaxRequest = null;
@@ -153,7 +153,7 @@
 
             $('.main-content').on('click', _selector.BetListLink, function () {
                 const data = $(this).data('drill-down');
-                _me.viewWinlossBetList(data.CustId, data.SystemId, data.ExternalId);
+                _me.viewWinlossBetList(data.custId, data.systemId, data.externalId);
             });
 
             $(window).on('resize', function () {
@@ -239,18 +239,18 @@
             jqGridAdditional.clearGrid(_selector.GridId);
             _isFirstLoad = true;
 
-            createPaging(response.TotalRows);
+            createPaging(response.totalRows);
 
-            if (response.TotalRows === 0) {
+            if (response.totalRows === 0) {
                 jqGridAdditional.setNoInfo();
                 Site.unBlockUI();
                 showPromotionPrizeLink(false);
                 return;
             }
 
-            const gridOption = CustomerWinLossOption.getGridOption(response.TotalRows);
-            gridOption.rowNum = response.DataList.length;
-            gridOption.data = response.DataList;
+            const gridOption = CustomerWinLossOption.getGridOption(response.totalRows);
+            gridOption.rowNum = response.dataList.length;
+            gridOption.data = response.dataList;
             gridOption.onSortCol = function (index) {
                 sort(index);
                 return 'stop';
@@ -264,7 +264,7 @@
             reportGrid.jqGrid(gridOption);
 
             CustomerWinLossOption.setGroupHeaderColumns(reportGrid);
-            const pprizeCount = response.PromotionPrize;
+            const pprizeCount = response.promotionPrize;
             showPromotionPrizeLink(Site.isNumber(pprizeCount) && parseInt(pprizeCount, 10) > 0);
         }
 
@@ -369,7 +369,7 @@
                     jqGridAdditional.removeCursorOnNonSortableHeader(reportGrid);
                 }
 
-                jqGridAdditional.assignTotal(response.Total, gridOption.colModel);
+                jqGridAdditional.assignTotal(response.total, gridOption.colModel);
                 jqGridAdditional.setGroupFooters(Site.isFakeLicensee() ?
                     CustomerWinLossOption.totalColspanFakeLicensee :
                     CustomerWinLossOption.totalColspan);
@@ -412,7 +412,7 @@
         }
 
         function resetParam() {
-            _sortColumnName = 'ExternalId';
+            _sortColumnName = 'externalId';
             _sortOrder = 'asc';
             _orderItem = SORTING_CODE[_sortColumnName];
             _pagingOption.pageindex = 1;

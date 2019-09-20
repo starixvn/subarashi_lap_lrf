@@ -4,15 +4,14 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Base.UnitTests;
+    using Fanex.Athena.Controllers.Base;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Report.MetaModel;
-    using Fanex.Athena.Model.Report.ViewModel.Api;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using Model.Core.DTO.Configuration;
     using Model.Report.ViewModel;
-    using Newtonsoft.Json;
     using NSubstitute;
     using NUnit.Framework;
     using Report;
@@ -116,16 +115,15 @@
 
             using (var controller = CreateController())
             {
-                var expectedResult = new CustomerWinLossApiViewModel();
-                _reportApiClient.PostAsync<CustomerWinLossApiViewModel>("api/CustomerWinLoss/Index",
-                    Arg.Any<CustomerWinLossMetaModel>(), userSession.Language).Returns(expectedResult);
+                const string ExpectedResult = "json result";
+                _reportApiClient.PostAsyncString("api/CustomerWinLoss/Index",
+                    Arg.Any<CustomerWinLossMetaModel>(), userSession.Language).Returns(ExpectedResult);
 
                 // Action
-                var result = await controller.Index(new CustomerWinLossMetaModel()) as ContentResult;
+                var result = await controller.Index(new CustomerWinLossMetaModel()) as JsonNetResult;
 
                 // Assert
-                Assert.That(result.Content, Is.EqualTo(JsonConvert.SerializeObject(expectedResult)));
-                Assert.That(result.ContentType, Is.EqualTo("application/json"));
+                Assert.That(result, Is.Not.Null);
             }
         }
 

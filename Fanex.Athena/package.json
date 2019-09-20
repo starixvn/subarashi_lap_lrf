@@ -68,6 +68,7 @@
     "stats": "webpack --config www/webpackconfig/build/webpack.dev.conf.js --json > stats.json",
     "test": "karma start --reporters kjhtml,junit,dots,coverage",
     "test-new": "karma start karma-new.conf.js --reporters kjhtml,junit,dots,coverage",
+    "test-new-bypage": "karma start karma-new-bypage.conf.js",
     "build-dev": "webpack --config www/webpackconfig/build/webpack.dev.conf.js",
     "build-pro": "webpack --config www/webpackconfig/build/webpack.pro.conf.js",
     "build-react-dev": "node node_modules/webpack/bin/webpack.js --config www/webpackconfig/build/webpack.react.dev.conf.js",
