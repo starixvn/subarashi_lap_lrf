@@ -11,19 +11,16 @@
     using Fanex.Athena.Module.PlayerAdmin.Services.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Newtonsoft.Json;
-    using RestSharp;
 
     public class PlayerStatementService : IPlayerStatementService
     {
-        private const string ApiHost = "ExternalAPIHostUrl";
+        private const string ApiHost = "ExtAPIHostUrl";
 
-        private const string User = "ExternalAPIUser";
+        private const string TokenApiHost = "ExtAPITokenHostUrl";
 
-        private const string Password = "ExternalAPIPassword";
+        private const string User = "ExtAPIUser";
 
-        private const string GetTokenPath = "api/auth";
-
-        private const string GetStatementPath = @"{0}Statement/Summary?cid={1}&fd={2}&td={3}&lang={4}&ps={5}&access_token={6}";
+        private const string Password = "ExtAPIPassword";
 
         private const string FormatDate = "MM-dd-yyyy";
 
@@ -41,12 +38,13 @@
 
         public async Task<string> GetUrl(PlayerStatementMetaModel metaModel)
         {
-            var baseUrl = _appSetting.GetValue(ApiHost);
-            var token = await GetToken(metaModel.SiteName, baseUrl).ConfigureAwait(false);
+            const string GetStatementPath = @"{0}Statement/Summary?cid={1}&fd={2}&td={3}&lang={4}&ps={5}&access_token={6}";
+    
+            var token = await GetToken(metaModel.SiteName).ConfigureAwait(false);
 
             return string.Format(
                 GetStatementPath,
-                baseUrl,
+                _appSetting.GetValue(ApiHost),
                 metaModel.CustId,
                 metaModel.FromDate.ToString(FormatDate),
                 metaModel.ToDate.ToString(FormatDate),
@@ -55,9 +53,11 @@
                 token);
         }
 
-        private async Task<string> GetToken(string siteName, string baseUrl)
+        private async Task<string> GetToken(string siteName)
         {
-            var client = _httpClientFactory.GetForHost(new Uri(baseUrl));
+            const string GetTokenPath = "api/auth";
+
+            var client = _httpClientFactory.GetForHost(new Uri(_appSetting.GetValue(TokenApiHost)));
 
             var content = new StringContent(GetAuthenticationObjectAsString(siteName), Encoding.UTF8, "application/json");
 
