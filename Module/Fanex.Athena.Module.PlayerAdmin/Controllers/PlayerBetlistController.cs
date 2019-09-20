@@ -63,10 +63,10 @@
 
         public async Task<dynamic> GetRunningBetListDataAsync(PlayerRunningBetListMetalModel metaModel)
         {
-            return await _betListApiClient.PostAsync<dynamic>(
+            return JsonString(await _betListApiClient.PostAsyncString(
                     "/PlayerAdminBetList/GetBetList",
                     metaModel,
-                    SessionService.UserSession.Language).ConfigureAwait(false);
+                    SessionService.UserSession.Language).ConfigureAwait(false));
         }
 
         public async Task<FileStreamResult> ExportRunningBetListDataAsync(PlayerRunningBetListMetalModel metaModel)

@@ -88,16 +88,5 @@
                 Status = true
             }).ToList();
         }
-        protected JsonResult JsonNet(object data)
-        {
-            return new JsonNetResult
-            {
-                Data = data,
-            };
-        }
-        protected JsonNetResult JsonString(string jsonData)
-        {
-            return new JsonNetResult(jsonData);
-        }
     }
 }

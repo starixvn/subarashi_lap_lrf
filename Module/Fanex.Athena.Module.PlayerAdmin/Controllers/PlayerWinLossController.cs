@@ -80,12 +80,12 @@ namespace Fanex.Athena.Module.PlayerAdmin.Controllers
                 AssignMetaModelForExcel(metaModel);
                 const string FileName = "CustomerWinLoss.xls";
                 var stream = await _reportAPIClient.PostByteContentAsync("api/CustomerWinLoss/ExportExcel",
-                    metaModel, userSession.Language).ConfigureAwait(false);
+                    metaModel, userSession.Language, MediaType.MsgPack).ConfigureAwait(false);
 
                 return File(stream, "application/octet-stream", FileName);
             }
 
-            return Json(await _reportAPIClient.PostAsync<CustomerWinLossApiViewModel>("api/CustomerWinLoss/Index",
+            return JsonString(await _reportAPIClient.PostAsyncString("api/CustomerWinLoss/Index",
                     metaModel, userSession.Language).ConfigureAwait(false));
         }
 

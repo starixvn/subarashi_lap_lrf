@@ -11,7 +11,7 @@ namespace Fanex.Athena.Controllers
     using Autofac.Integration.Mvc;
 
     using Extension.Utility;
-
+    using Fanex.Athena.Controllers.Base;
     using Fanex.Athena.Service.Core.Common.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
@@ -104,6 +104,18 @@ namespace Fanex.Athena.Controllers
             base.Initialize(requestContext);
             var currentLanguage = LangService.GetCurrentLanguage();
             LangService.SetPageCulture(currentLanguage);
+        }
+
+        protected JsonResult JsonNet(object data)
+        {
+            return new JsonNetResult
+            {
+                Data = data,
+            };
+        }
+        protected JsonNetResult JsonString(string jsonData)
+        {
+            return new JsonNetResult(jsonData);
         }
     }
 }

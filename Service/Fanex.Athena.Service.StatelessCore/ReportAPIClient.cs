@@ -4,11 +4,14 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+
 using Fanex.Athena.Extension.Utility;
 using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
+
 using MessagePack;
 using MessagePack.Resolvers;
+
 using Newtonsoft.Json;
 
 namespace Fanex.Athena.Service.StatelessCore
@@ -23,6 +26,11 @@ namespace Fanex.Athena.Service.StatelessCore
 
         private readonly IAppSettings _appSetting;
         private readonly IHttpClientFactory _httpClientFactory;
+        private static JsonSerializerSettings _jsonSerializerSettings = new JsonSerializerSettings
+        {
+            DateTimeZoneHandling = DateTimeZoneHandling.Unspecified,
+            NullValueHandling = NullValueHandling.Ignore,
+        };
 
         public ReportAPIClient(IAppSettings appSettings, IHttpClientFactory httpClientFactory)
         {
@@ -40,8 +48,7 @@ namespace Fanex.Athena.Service.StatelessCore
             if (mediaType == MediaType.MsgPack)
             {
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(MsgPackContentType));
-                using (var content = new ByteArrayContent(MessagePackSerializer.Serialize(value,
-                    ContractlessStandardResolver.Instance)))
+                using (var content = new ByteArrayContent(MessagePackSerializer.Serialize(value)))
                 {
                     content.Headers.ContentType = new MediaTypeHeaderValue(MsgPackContentType);
 
@@ -52,7 +59,8 @@ namespace Fanex.Athena.Service.StatelessCore
             if (mediaType == MediaType.Json)
             {
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(JsonContentType));
-                var content = new StringContent(JsonConvert.SerializeObject(value), Encoding.UTF8, "application/json");
+                var content = new StringContent(JsonConvert.SerializeObject(value, _jsonSerializerSettings), 
+                    Encoding.UTF8, "application/json");
 
                 response = await client.PostAsync(path, content).ConfigureAwait(false);
             }
@@ -86,7 +94,7 @@ namespace Fanex.Athena.Service.StatelessCore
                     }
                     else
                     {
-                        return JsonConvert.DeserializeObject<T>(await x.Content.ReadAsStringAsync());
+                        return JsonConvert.DeserializeObject<T>(await x.Content.ReadAsStringAsync(), _jsonSerializerSettings);
                     }
                 }).ConfigureAwait(false);
 
