@@ -100,7 +100,6 @@
     <Compile Include="DTO\BetLimits\AgCasinoBetSetting.cs" />
     <Compile Include="DTO\BetLimits\AgCasinoGame.cs" />
     <Compile Include="DTO\BetLimits\AgCasinoGroup.cs" />
-    <Compile Include="DTO\PlayerWinLoss.cs" />
     <Compile Include="DTO\PlayerBetLimit.cs" />
     <Compile Include="DTO\PlayerBetLimitProduct.cs" />
     <Compile Include="MetaModel\PlayerBetLimitSelectMetaModel.cs" />
@@ -129,7 +128,6 @@
     <Compile Include="Services\Interfaces\ISportBookBetLimitService.cs" />
     <Compile Include="Services\PlayerStatementService.cs" />
     <Compile Include="Services\SportBookBetLimitService.cs" />
-    <Compile Include="ViewModels\Api\CustomerWinLossApiViewModel.cs" />
     <Compile Include="ViewModels\PlayerBetLimitProductViewModel.cs" />
     <Compile Include="ViewModels\PlayerBetLimitViewModel.cs" />
     <Compile Include="ViewModels\PlayerBtcSingleCustomerViewModel.cs" />

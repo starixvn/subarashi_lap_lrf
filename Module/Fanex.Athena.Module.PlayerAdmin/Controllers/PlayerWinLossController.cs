@@ -10,7 +10,6 @@ using Fanex.Athena.Model.Core.DTO.Common;
 using Fanex.Athena.Model.Core.MetaModel.Product;
 using Fanex.Athena.Module.PlayerAdmin.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.ViewModels;
-using Fanex.Athena.Module.PlayerAdmin.ViewModels.Api;
 using Fanex.Athena.Service.Core.Common.Interfaces;
 using Fanex.Athena.Service.Core.Users.Interfaces;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
