@@ -16,11 +16,11 @@ export class DataContent extends PureComponent {
 
         this.state = {
             src: '',
-            height: document.body.clientHeight,
-            level: Level.level1,
-            isDrilldown: false
+            height: 0,
+            level: Level.level1
         }
 
+        this.isDrilldown = false;
         this.resize = Timer.debounce(this._handleResize, 15).bind(this);
     }
 
@@ -28,14 +28,11 @@ export class DataContent extends PureComponent {
         if (prevProps.requestParam !== this.props.requestParam) {
             this._getUrl(this.props.requestParam);
         }
-
-        if (prevState.src !== this.state.src) {
-            this.props.toggleLoader(false);
-        }
     }
 
     componentDidMount() {
         this._getUrl(this.props.requestParam);
+        this._handleResize();
         window.addEventListener('resize', this.resize);
     }
 
@@ -54,7 +51,8 @@ export class DataContent extends PureComponent {
     }
 
     _updateSrc(src) {
-        this.setState({ src: src, level: Level.level1, isDrilldown: false });
+        this.isDrilldown = false;
+        this.setState({ src: src, level: Level.level1 });
     }
 
     _handleError() {
@@ -65,7 +63,7 @@ export class DataContent extends PureComponent {
     _getUrl(param) {
         this.props.toggleLoader(true);
 
-        Service.getData(param, this._updateSrc.bind(this), this._handleError.bind(this));
+        Service.getData(param, this._updateSrc.bind(this), () => this.props.toggleLoader(false), this._handleError.bind(this));
     }
 
     _renderBreadcrumb() {
@@ -95,26 +93,24 @@ export class DataContent extends PureComponent {
             step = -2;
         }
 
-        this.setState({ level: newLevel, isDrilldown: false }, () => window.history.go(step));
+        this.isDrilldown = false;
+        this.setState({ level: newLevel }, () => window.history.go(step));
     }
 
     onLoad = (e) => {
-        if (!this.state.isDrilldown) {
-            this.setState({ isDrilldown: true }, () => this._handleResize());
+        if (!this.isDrilldown) {
+            this.isDrilldown = true;
             return;
         }
 
         const level = this.state.level; 
-        let newLevel = level;
 
         if (level === Level.level1) {
-            newLevel = Level.level2;
+            this.setState({ level: Level.level2 }, () => this._handleResize());
         }
         else if (level === Level.level2) {
-            newLevel = Level.level3;
-        }
-
-        this.setState({ level: newLevel }, () => this._handleResize());
+            this.setState({ level: Level.level3 });
+        }   
     }
 
     render() {
@@ -123,11 +119,13 @@ export class DataContent extends PureComponent {
         return (
             <div>
                 {this._renderBreadcrumb()}
+                <div style={{ height: height }} ref={this.contentRef}>
                 {
                     src
-                    ? <iframe frameBorder="0" src={src} width="100%" height={height} onLoad={this.onLoad} ref={this.contentRef} />
+                    ? <iframe frameBorder="0" src={src} width="100%" height="100%" onLoad={this.onLoad} />
                     : <NoDataTitle />
                 }
+                </div>
             </div>
         );      
     }

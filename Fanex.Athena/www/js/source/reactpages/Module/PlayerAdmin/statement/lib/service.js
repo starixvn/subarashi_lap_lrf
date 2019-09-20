@@ -14,6 +14,8 @@ export default class Service {
         DataService.postData(url, param)
             .then(response => {
                 processDataFunc && processDataFunc(response.data);
+
+                successCallBack && successCallBack();
             })
             .catch(error => {
                 processDataFunc && processDataFunc(null);
