@@ -1,36 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators  } from 'redux';
-import { ActionCreators } from '../actions';
-import DataHandling from '../lib/dataHandling';
-import GameSettingDataHandling from '../lib/gameSettingDataHandling';
-import NGDataHandling from '../lib/ngDataHandling';
 import { BetLimitProduct } from '../lib/constants';
-import createSetting from './grid/Base/SettingContent';
-import SettingGrid from './grid/Base/SettingGrid';
-import NGSettingGrid from './grid/SportSetting/NGSettingGrid';
-import AGCSettingContent from './grid/SportSetting/AGCSettingContent';
+import SportDataContent from './grid/data-contents/SportDataContent';
+import GameDataContent from './grid/data-contents/GameDataContent';
+import NGDataContent from './grid/data-contents/NGDataContent';
+import ACGDataContent from './grid/data-contents/AGCDataContent';
 
 const Setting = {
-    [BetLimitProduct.SB]: { Grid: SettingGrid, Handling: DataHandling },
-    [BetLimitProduct.VS]: { Grid: SettingGrid, Handling: DataHandling },
-    [BetLimitProduct.VS2]: { Grid: SettingGrid, Handling: DataHandling },
-    [BetLimitProduct.LT]: { Grid: SettingGrid, Handling: GameSettingDataHandling },
-    [BetLimitProduct.NG]: { Grid: NGSettingGrid, Handling: NGDataHandling },
-    [BetLimitProduct.KN]: { Grid: SettingGrid, Handling: GameSettingDataHandling }
+    [BetLimitProduct.SB]: SportDataContent,
+    [BetLimitProduct.VS]: SportDataContent,
+    [BetLimitProduct.VS2]: SportDataContent,
+    [BetLimitProduct.LT]: GameDataContent,
+    [BetLimitProduct.NG]: NGDataContent,
+    [BetLimitProduct.KN]: GameDataContent,
+    [BetLimitProduct.AGC]: ACGDataContent
 };
 
 const DataContent = (props) => {
     const { ProductId } = props.requestParam;
-    let Content = '';
-
-    if (ProductId === BetLimitProduct.AGC) {
-        Content = AGCSettingContent;
-    }
-    else {
-        const { Grid, Handling } = Setting[ProductId];
-        Content = createSetting(Grid, new Handling());
-    }
+    const Content = Setting[ProductId];
 
     return <Content />
 }

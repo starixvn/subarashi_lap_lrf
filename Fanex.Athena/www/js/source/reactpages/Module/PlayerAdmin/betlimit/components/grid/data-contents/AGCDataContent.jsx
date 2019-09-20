@@ -6,10 +6,10 @@ import LangHelper from '@jsroot/lib/langHelper';
 import Utility from '../../../lib/utility';
 import DataTransfer from '../../../lib/dataTransfer';
 import Select from 'react-select';
-import AGCSettingGrid from './AGCSettingGrid';
+import AGCSettingGrid from '../sport-settings/AGCSettingGrid';
 import NoDataTitle from '@jsroot/components/NoDataTitle';
 
-export class AGCSettingContent extends PureComponent {
+export class AGCDataContent extends PureComponent {
     constructor(props) {
         super(props);
 
@@ -203,4 +203,4 @@ function mapStateToProps(state) {
     return Object.assign({}, { requestParam });
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AGCSettingContent);
+export default connect(mapStateToProps, mapDispatchToProps)(AGCDataContent);
