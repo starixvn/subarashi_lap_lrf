@@ -67,17 +67,19 @@
                 {
                     response.EnsureSuccessStatusCode();
 
-                    var result = JsonConvert.DeserializeObject<ExternalServiceToken>(await response.Content.ReadAsStringAsync());
+                    var content = await response.Content.ReadAsStringAsync();
 
-                    response.Content.Dispose();
+                    var result = JsonConvert.DeserializeObject<ExternalServiceToken>(content);
+
+                    //response.Content.Dispose();
 
                     return result.AccessToken;
                 }
-                catch (HttpRequestException e)
+                catch (Exception e)
                 {
                     var errorMessage = new StringBuilder($"HTTP Error: {e.Message}");
                     errorMessage.AppendLine($"HTTP status code: {response.StatusCode}");
-                    throw new ServiceException(errorMessage.ToString(), "External Service");
+                    throw new ServiceException(await response.Content.ReadAsStringAsync(), "External Service");
                 }
             }
         }
