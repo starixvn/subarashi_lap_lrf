@@ -20,10 +20,11 @@ export default class LapPlayerQueryService {
 
     static _fetchFromLrf(param, lrfDataById, lapPlayerList, commonService, lapTotalItem) {
         const idList = getCustIdListFromLapData(lapPlayerList);
+        const nonDepositPlayerList = lapPlayerList.filter(x => x.IBCCustId === 0);
 
         if (idList.length === 0) {
             return {
-                playerList: buildLapPlayerList(lapPlayerList),
+                playerList: buildLapPlayerList(nonDepositPlayerList),
                 totalItem: lapTotalItem
             }
         }
@@ -60,9 +61,11 @@ export default class LapPlayerQueryService {
                     totalItem
                 };
             })
-            .catch(() => ({
-                playerList: buildLapPlayerList(lapPlayerList),
-                totalItem: lapTotalItem
-            }));
+            .catch(() => {
+                return {
+                    playerList: buildLapPlayerList(nonDepositPlayerList),
+                    totalItem: nonDepositPlayerList.length
+                }
+            });
     }
 }

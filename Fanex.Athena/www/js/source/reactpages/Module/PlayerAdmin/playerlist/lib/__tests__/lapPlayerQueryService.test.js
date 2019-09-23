@@ -1,7 +1,7 @@
-import LapPlayerQueryService from '../lapPlayerQueryService';
-import PlayerListDataHelper from '../playerListDataHelper';
+import LapPlayerQueryService from '../services/lapPlayerQueryService';
+import PlayerListDataHelper from '../helpers/playerListDataHelper';
 import { apiInfo, playerTypes } from '../constants';
-import * as utils from '../utils';
+import { buildLapPlayerList } from '../helpers/playerDataBuilder';
 
 describe('LapPlayerQueryService', () => {
     const defaultParam = {
@@ -140,60 +140,54 @@ describe('LapPlayerQueryService', () => {
         });
         afterEach(() => {
             PlayerListDataHelper.mergePlayerList = originalMergePlayerList;
-        })
-
-        const buildLapPlayerList = (playerList) => {
-            return playerList.map(item => {
-                const {
-                    UserName,
-                    Status,
-                    RealName,
-                    IP,
-                    email,
-                    isOnline,
-                    ActStatus,
-                    IBCCustId,
-                    isArchived,
-                    CustId,
-                    CurrencyCode,
-                    CurrentBalance,
-                    OutBalance,
-                    Currency
-                } = item;
-
-                return {
-                    CustId: IBCCustId,
-                    LicenseeCustId: CustId,
-                    UserName,
-                    Status,
-                    RealName,
-                    LastLoginIp: IP,
-                    Email: email,
-                    IsOnline: isOnline,
-                    IsDeposit: ActStatus === playerTypes.deposit && IBCCustId > 0,
-                    IsArchived: isArchived,
-                    Currency: CurrencyCode,
-                    CurrentBalance,
-                    OutstandingBalance: OutBalance,
-                    CurrencyId: Currency || 0
-                };
-            });
+        });
+        const defaultLrfParam = {
+            currencyIdList: '',
+            specialLevel: '',
+            pageSize: 50,
+            pageIndex: 1,
+            oddsGroup: 'A,B',
+            baFilter: 2
         }
 
-        it('DataList response is empty - return Lap Player List', () => {
-            const lapPlayerList = createDefaultLapPlayerList();;
-            const lapTotalItem = 2;
-            const param = {
-                currencyIdList: '',
-                specialLevel: '',
-                pageSize: 50,
-                pageIndex: 1
+        it('lapPlayerList do not includes deposit player - return correct non-deposit player list', () => {
+            const lapPlayerList = [{
+                IBCCustId: 0,
+                UserName: 'test1',
+                Status: 0,
+                IP: '1.1.1.1',
+                email: 'abc@gmail.com',
+                isOnline: true,
+                RealName: 'test1real',
+                ActStatus: 2,
+                isArchived: false
+            }];
+            const lapTotalItem = 1;
+            const param = {...defaultLrfParam };
+            const { lrfDataById } = apiInfo;
+            const commonService = {};
+
+            const expectedResult = {
+                playerList: buildLapPlayerList(lapPlayerList),
+                totalItem: lapTotalItem
             }
+
+            const result = LapPlayerQueryService._fetchFromLrf(param, lrfDataById, lapPlayerList, commonService, lapTotalItem);
+
+            expect(result).toEqual(expectedResult);
+        })
+
+        it('DataList response is empty - return Lap Player List', () => {
+            const lapPlayerList = createDefaultLapPlayerList();
+            const lapTotalItem = 2;
+            const param = {...defaultLrfParam };
 
             const expectedLrfParam = {
                 currencyIdList: param.currencyIdList,
                 idList: '1,2',
                 specialLevel: param.specialLevel,
+                oddsGroup: param.oddsGroup,
+                baFilter: param.baFilter,
                 pageSize: param.pageSize,
                 pageIndex: param.pageIndex
             }
@@ -207,8 +201,8 @@ describe('LapPlayerQueryService', () => {
             }
 
             const expectedResult = {
-                playerList: buildLapPlayerList(lapPlayerList),
-                totalItem: lapTotalItem
+                playerList: [],
+                totalItem: 0
             }
 
             const promise = LapPlayerQueryService._fetchFromLrf(param, lrfDataById, lapPlayerList, commonService, lapTotalItem);
@@ -221,21 +215,10 @@ describe('LapPlayerQueryService', () => {
 
         it('return correct data result', () => {
             const lapPlayerList = createDefaultLapPlayerList();;
-            utils.getCustIdListFromLapData = jest.fn((playerList) => {
-                if (playerList === lapPlayerList) {
-                    return lapPlayerList.map(x => x.IBCCustId);
-                }
-
-                return [];
-            })
             const lapTotalItem = 2;
-            const param = {
-                currency: '',
-                specialLevel: '',
-                pageSize: 50,
-                pageIndex: 1
-            }
-            const expectedResponse = [{ CustId: 1, BaStatus: true, OddsGroup: 'A' }, { CustId: 2, BaStatus: false, OddsGroup: 'B' }];
+            const param = {...defaultLrfParam };
+
+            const expectedResponse = [{ IbcCustId: 1, BaStatus: true, OddsGroup: 'A' }, { IbcCustId: 2, BaStatus: false, OddsGroup: 'B' }];
             const commonService = {
                 fetchData: jest.fn(() => Promise.resolve({ data: { DataList: expectedResponse, TotalItem: 2 } }))
             }
@@ -254,13 +237,15 @@ describe('LapPlayerQueryService', () => {
         })
 
         it('throw exception - should build data with Lap Player List', () => {
-            const lapPlayerList = createDefaultLapPlayerList();;
+            const lapPlayerList = createDefaultLapPlayerList();
             const lapTotalItem = 2;
             const param = {
                 currencyIdList: '',
                 specialLevel: '',
                 pageSize: 50,
-                pageIndex: 1
+                pageIndex: 1,
+                oddsGroup: 'A,B',
+                baFilter: 2
             }
             const commonService = {
                 fetchData: jest.fn(() => new Promise(() => {
@@ -269,8 +254,8 @@ describe('LapPlayerQueryService', () => {
             }
             const { lrfDataById } = apiInfo;
             const expectedResult = {
-                playerList: buildLapPlayerList(lapPlayerList),
-                totalItem: lapTotalItem
+                playerList: [],
+                totalItem: 0
             }
             const promise = LapPlayerQueryService._fetchFromLrf(param, lrfDataById, lapPlayerList, commonService, lapTotalItem);
 

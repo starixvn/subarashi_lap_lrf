@@ -96,7 +96,7 @@ export default class PlayerMultipleQueryService {
                 console.log(error.message);
                 window.alert(LangHelper.getSingleResource('HttpError_Default'));
                 return {
-                    playerList: buildLapPlayerList(differenceList)
+                    playerList: []
                 };
             });
     }

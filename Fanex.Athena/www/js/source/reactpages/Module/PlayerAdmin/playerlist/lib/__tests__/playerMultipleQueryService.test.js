@@ -1,7 +1,7 @@
-import PlayerMultipleQueryService from '../playerMultipleQueryService';
-import PlayerListDataHelper from '../playerListDataHelper';
+import PlayerMultipleQueryService from '../services/playerMultipleQueryService';
+import PlayerListDataHelper from '../helpers/playerListDataHelper';
 import { apiInfo, playerTypes } from '../constants';
-import * as utils from '../utils';
+import * as utils from '../helpers/utils';
 
 describe('PlayerMultipleQueryService', () => {
     let originalAlert;
@@ -23,7 +23,7 @@ describe('PlayerMultipleQueryService', () => {
         { IBCCustId: 2, UserName: 'test2', Status: 1, IP: '2.2.2.2', email: 'xyz@gmail.com', isOnline: false, RealName: 'test2real', ActStatus: 2, isArchived: false }
     ];
     const defaultLapDifferenceList = [{ IBCCustId: 4, UserName: 'test4', Status: 0, IP: '4.4.4.4', email: 'ijk@gmail.com', isOnline: true, RealName: 'test4real', ActStatus: 2, isArchived: false }];
-    const defaultLrfPlayerList = [{ CustId: 1, BaStatus: true, OddsGroup: 'A' }, { CustId: 2, BaStatus: false, OddsGroup: 'B' }];
+    const defaultLrfPlayerList = [{ IbcCustId: 1, BaStatus: true, OddsGroup: 'A' }, { IbcCustId: 2, BaStatus: false, OddsGroup: 'B' }];
     afterEach(() => {
         jest.restoreAllMocks();
     })
@@ -162,8 +162,8 @@ describe('PlayerMultipleQueryService', () => {
             const commonService = {...defaultCommonService };
 
             const expectedMergedPlayerList = [
-                { CustId: 1, BaStatus: true, OddsGroup: 'A', Status: 0 },
-                { CustId: 2, BaStatus: false, OddsGroup: 'B', Status: 1 }
+                { IbcCustId: 1, BaStatus: true, OddsGroup: 'A', Status: 0 },
+                { IbcCustId: 2, BaStatus: false, OddsGroup: 'B', Status: 1 }
             ];
             PlayerListDataHelper.mergePlayerList = jest.fn(() => expectedMergedPlayerList);
             const expectedResult = {
@@ -224,43 +224,8 @@ describe('PlayerMultipleQueryService', () => {
                 differenceList: [...defaultLapDifferenceList]
             }
 
-            const expectedPlayerList = lapDataObject.differenceList.map(item => {
-                const {
-                    UserName,
-                    Status,
-                    RealName,
-                    IP,
-                    email,
-                    isOnline,
-                    ActStatus,
-                    IBCCustId,
-                    isArchived,
-                    CustId,
-                    CurrencyCode,
-                    CurrentBalance,
-                    OutBalance,
-                    Currency
-                } = item;
-
-                return {
-                    CustId: IBCCustId,
-                    LicenseeCustId: CustId,
-                    UserName,
-                    Status,
-                    RealName,
-                    LastLoginIp: IP,
-                    Email: email,
-                    IsOnline: isOnline,
-                    IsDeposit: ActStatus === playerTypes.deposit && IBCCustId > 0,
-                    IsArchived: isArchived,
-                    Currency: CurrencyCode,
-                    CurrentBalance,
-                    OutstandingBalance: OutBalance,
-                    CurrencyId: Currency || 0
-                };
-            })
             const expectedResult = {
-                playerList: expectedPlayerList
+                playerList: []
             }
 
             const promise = PlayerMultipleQueryService._refetchFromLrf(param, lapDataObject, commonService, apiInfo);
@@ -295,14 +260,14 @@ describe('PlayerMultipleQueryService', () => {
                 commonList: [],
                 differenceList: [...defaultLapDifferenceList]
             }
-            const expectedResponse = [{ CustId: 1, UserName: 'test' }];
+            const expectedDataList = [{ IbcCustId: 4, UserName: 'test4' }];
             const commonService = {
-                fetchData: jest.fn(() => Promise.resolve({ data: { DataList: expectedResponse, TotalItem: 1 } }))
+                fetchData: jest.fn(() => Promise.resolve({ data: { DataList: expectedDataList } }))
             }
 
             const expectedPlayerList = [{ UserId: 1 }];
             PlayerListDataHelper.mergePlayerList = jest.fn((lrfPlayerList, differenceList) => {
-                return lrfPlayerList === expectedResponse && differenceList === lapDataObject.differenceList ? expectedPlayerList : null;
+                return lrfPlayerList === expectedDataList ? expectedPlayerList : null;
             });
 
             const promise = PlayerMultipleQueryService._refetchFromLrf(param, lapDataObject, commonService, apiInfo);

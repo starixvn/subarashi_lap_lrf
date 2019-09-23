@@ -1,7 +1,6 @@
-import LrfPlayerQueryService from '../lrfPlayerQueryService';
-import PlayerListDataHelper from '../playerListDataHelper';
+import LrfPlayerQueryService from '../services/lrfPlayerQueryService';
+import PlayerListDataHelper from '../helpers/playerListDataHelper';
 import { apiInfo } from '../constants';
-import { buildLrfPlayerList } from '../playerDataBuilder';
 
 describe('LrfPlayerQueryService', () => {
     const defaultParam = {
@@ -88,41 +87,8 @@ describe('LrfPlayerQueryService', () => {
             PlayerListDataHelper.mergePlayerList = originalMergePlayerList;
         })
 
-        const buidLrfPlayerList = (playerList) => {
-            return playerList.map(item => {
-                const {
-                    CustId,
-                    UserName,
-                    SystemId,
-                    Currency,
-                    CurrentBalance,
-                    OutstandingBalance,
-                    OddsGroup,
-                    BaStatus,
-                    SpecialLevel,
-                    CurrencyId
-                } = item;
-
-                return {
-                    CustId,
-                    LicenseeCustId: 0,
-                    UserName,
-                    SystemId,
-                    Currency,
-                    CurrentBalance,
-                    OutstandingBalance,
-                    OddsGroup,
-                    BaStatus,
-                    SpecialLevel,
-                    IsDeposit: true,
-                    IsArchived: false,
-                    CurrencyId: CurrencyId || 0
-                };
-            });
-        }
-
         it('data response is empty - return lrfPlayerList', () => {
-            const lrfPlayerList = [{ CustId: 1, BaStatus: true, OddsGroup: 'A' }, { CustId: 2, BaStatus: false, OddsGroup: 'B' }];
+            const lrfPlayerList = [{ IbcCustId: 1, BaStatus: true, OddsGroup: 'A' }, { IbcCustId: 2, BaStatus: false, OddsGroup: 'B' }];
             const expectedLapParam = {
                 idList: [1, 2]
             }
@@ -137,8 +103,8 @@ describe('LrfPlayerQueryService', () => {
             const lrfTotalItem = 2;
 
             const expectedResult = {
-                playerList: buidLrfPlayerList(lrfPlayerList),
-                totalItem: lrfTotalItem
+                playerList: [],
+                totalItem: 0
             }
 
             const promise = LrfPlayerQueryService._fetchFromLap(lrfPlayerList, lapDataById, commonService, lrfTotalItem);
@@ -149,7 +115,7 @@ describe('LrfPlayerQueryService', () => {
         })
 
         it('data list response has item - return correct result', () => {
-            const lrfPlayerList = [{ CustId: 1, BaStatus: true, OddsGroup: 'A' }, { CustId: 2, BaStatus: false, OddsGroup: 'B' }];
+            const lrfPlayerList = [{ IbcCustId: 1, BaStatus: true, OddsGroup: 'A' }, { IbcCustId: 2, BaStatus: false, OddsGroup: 'B' }];
             const lapPlayerList = [{ CustId: 1, UserName: 'test1', Status: 0 }, { CustId: 2, UserName: 'test2', Status: 1 }];
 
             const expectedLapTotalItem = 2;
@@ -183,12 +149,12 @@ describe('LrfPlayerQueryService', () => {
                     throw new Error('Network Error')
                 }))
             }
-            const lrfPlayerList = [{ CustId: 1, BaStatus: true, OddsGroup: 'A' }, { CustId: 2, BaStatus: false, OddsGroup: 'B' }];
+            const lrfPlayerList = [{ IbcCustId: 1, BaStatus: true, OddsGroup: 'A' }, { IbcCustId: 2, BaStatus: false, OddsGroup: 'B' }];
             const lrfTotalItem = 2;
 
             const expectedResult = {
-                playerList: buildLrfPlayerList(lrfPlayerList),
-                totalItem: lrfTotalItem
+                playerList: [],
+                totalItem: 0
             }
 
             const promise = LrfPlayerQueryService._fetchFromLap(lrfPlayerList, apiInfo.lapDataById, commonService, lrfTotalItem);
