@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Linq;
+using System.Net.Http;
 using System.Reflection;
 using System.Web.Compilation;
 using System.Web.Http;
@@ -13,7 +14,12 @@ using CitiXchangeLibrary;
 using Fanex.Athena.Api.StatelessBase.Logger;
 using Fanex.Athena.DataAccess.Report;
 using Fanex.Athena.DataAccess.Report.Interfaces;
+using Fanex.Athena.Extension;
+using Fanex.Athena.Extension.Utility;
 using Fanex.Athena.Extension.Utility.Internal;
+using Fanex.Athena.Module.PlayerAdmin.Services;
+using Fanex.Athena.Module.PlayerAdmin.Services.Interfaces;
+using Fanex.Athena.Service.StatelessCore;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
 using Fanex.Logging;
 using ONEbook.UM.Services;
@@ -51,10 +57,19 @@ namespace Fanex.Athena
                 .As(typeof(IThirdPartyWinLossDataAccess<>));
 
             // static services
-            builder.RegisterInstance(new CustomMemoryCache()).As<ICustomMemoryCache>();
+            builder.RegisterType<CustomMemoryCache>().As<ICustomMemoryCache>().SingleInstance()
+                .OnRelease(x => x.Dispose());
 
             builder.RegisterType<ApiExceptionLogger>().As<IExceptionLogger>();
 
+            builder.WithHttpClient("ReportAPIClient", ConfigurationManager.AppSettings["ReportAPIHostUrl"]);
+            builder.WithHttpClient("EXTServiceTokenClient", ConfigurationManager.AppSettings["ExtAPITokenHostUrl"]);
+
+            builder.Register<PlayerStatementService>(x => new PlayerStatementService(
+                  x.Resolve<IAppSettings>(),
+                  x.ResolveNamed<HttpClient>("EXTServiceTokenClient")
+                )).As<IPlayerStatementService>()
+                .InstancePerRequest();
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
@@ -115,7 +130,10 @@ namespace Fanex.Athena
 
         private static void RegisterSingleton(ContainerBuilder builder)
         {
-            builder.RegisterType<Service.StatelessCore.HttpClientFactory>().As<IHttpClientFactory>().SingleInstance();
+            builder.Register<ReportAPIClient>(x => new ReportAPIClient(
+                 x.Resolve<IAppSettings>(),
+                 x.ResolveNamed<HttpClient>("ReportAPIClient")
+                )).As<IReportAPIClient>().SingleInstance();
         }
     }
 }

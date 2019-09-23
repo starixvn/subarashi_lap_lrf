@@ -4,6 +4,7 @@
     using System.Net.Http;
     using System.Text;
     using System.Threading.Tasks;
+    using Autofac.Features.AttributeFilters;
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
@@ -28,18 +29,18 @@
 
         private readonly IAppSettings _appSetting;
 
-        private readonly IHttpClientFactory _httpClientFactory;
+        private readonly HttpClient _client;
 
-        public PlayerStatementService(IAppSettings appSettings, IHttpClientFactory httpClientFactory)
+        public PlayerStatementService(IAppSettings appSettings, HttpClient client)
         {
             _appSetting = appSettings;
-            _httpClientFactory = httpClientFactory;
+            _client = client;
         }
 
         public async Task<string> GetUrl(PlayerStatementMetaModel metaModel)
         {
             const string GetStatementPath = @"{0}Statement/Summary?cid={1}&fd={2}&td={3}&lang={4}&ps={5}&access_token={6}";
-    
+
             var token = await GetToken(metaModel.SiteName).ConfigureAwait(false);
 
             return string.Format(
@@ -57,10 +58,9 @@
         {
             const string GetTokenPath = "api/auth";
 
-            var client = _httpClientFactory.GetForHost(new Uri(_appSetting.GetValue(TokenApiHost)));
             var requestContent = new StringContent(GetAuthenticationObjectAsString(siteName), Encoding.UTF8, "application/json");
 
-            using (var response = await client.PostAsync(GetTokenPath, requestContent).ConfigureAwait(false))
+            using (var response = await _client.PostAsync(GetTokenPath, requestContent).ConfigureAwait(false))
             {
                 try
                 {

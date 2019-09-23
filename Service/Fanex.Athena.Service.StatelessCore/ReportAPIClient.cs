@@ -4,6 +4,9 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
+using Autofac.Features.AttributeFilters;
+using Autofac.Integration.Mvc;
 using Fanex.Athena.Extension.Utility;
 using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -19,46 +22,45 @@ namespace Fanex.Athena.Service.StatelessCore
         private const string LANGUAGEKEY = "Accept-Language";
         private const string MsgPackContentType = "application/x-msgpack";
         private const string JsonContentType = "application/json";
-
+        private readonly HttpClient _client;
         private readonly IAppSettings _appSetting;
-        private readonly IHttpClientFactory _httpClientFactory;
         private static JsonSerializerSettings _jsonSerializerSettings = new JsonSerializerSettings
         {
             DateTimeZoneHandling = DateTimeZoneHandling.Unspecified,
             NullValueHandling = NullValueHandling.Ignore,
         };
 
-        public ReportAPIClient(IAppSettings appSettings, IHttpClientFactory httpClientFactory)
+        public ReportAPIClient(IAppSettings appSettings, HttpClient client)
         {
             _appSetting = appSettings;
-            _httpClientFactory = httpClientFactory;
+            _client = client;
+               
         }
 
         private async Task<T> HandleAsync<T>(string path, object value, string language, MediaType mediaType, Func<HttpResponseMessage, Task<T>> codeBlock)
         {
-            var client = _httpClientFactory.GetForHost(new Uri(_appSetting.GetValue("ReportAPIHostUrl")));
-            client.DefaultRequestHeaders.Clear();
-            client.DefaultRequestHeaders.Add(KEYNAME, _appSetting.GetValue("ReportAPITokenValue"));
-            client.DefaultRequestHeaders.Add(LANGUAGEKEY, language);
+            _client.DefaultRequestHeaders.Clear();
+            _client.DefaultRequestHeaders.Add(KEYNAME, _appSetting.GetValue("ReportAPITokenValue"));
+            _client.DefaultRequestHeaders.Add(LANGUAGEKEY, language);
             HttpResponseMessage response = null;
             if (mediaType == MediaType.MsgPack)
             {
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(MsgPackContentType));
+                _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(MsgPackContentType));
                 using (var content = new ByteArrayContent(MessagePackSerializer.Serialize(value)))
                 {
                     content.Headers.ContentType = new MediaTypeHeaderValue(MsgPackContentType);
 
-                    response = await client.PostAsync(path, content).ConfigureAwait(false);
+                    response = await _client.PostAsync(path, content).ConfigureAwait(false);
                 }
             }
 
             if (mediaType == MediaType.Json)
             {
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(JsonContentType));
+                _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(JsonContentType));
                 var content = new StringContent(JsonConvert.SerializeObject(value, _jsonSerializerSettings), 
                     Encoding.UTF8, "application/json");
 
-                response = await client.PostAsync(path, content).ConfigureAwait(false);
+                response = await _client.PostAsync(path, content).ConfigureAwait(false);
             }
 
             if (response is null || response.StatusCode != HttpStatusCode.OK)
