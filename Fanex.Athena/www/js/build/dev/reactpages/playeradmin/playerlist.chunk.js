@@ -4192,7 +4192,7 @@ function () {
 /*!*************************************************************************************!*\
   !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/utils.js ***!
   \*************************************************************************************/
-/*! exports provided: getSpecialLevelText, getBaStatusText, getPlayerStatus, buildDisplayedColumnObject, isDeposit, getCustIdListFromLapData, getErrorMessageForUpdating */
+/*! exports provided: getSpecialLevelText, getBaStatusText, getPlayerStatus, buildDisplayedColumnObject, isNonDepositOrArchived, getCustIdListFromLapData, getErrorMessageForUpdating */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4201,7 +4201,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBaStatusText", function() { return getBaStatusText; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPlayerStatus", function() { return getPlayerStatus; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "buildDisplayedColumnObject", function() { return buildDisplayedColumnObject; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isDeposit", function() { return isDeposit; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isNonDepositOrArchived", function() { return isNonDepositOrArchived; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCustIdListFromLapData", function() { return getCustIdListFromLapData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getErrorMessageForUpdating", function() { return getErrorMessageForUpdating; });
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
@@ -4224,12 +4224,12 @@ var buildDisplayedColumnObject = function buildDisplayedColumnObject(displayedCo
     return accumulator;
   }, {});
 };
-var isDeposit = function isDeposit(ibcCustId) {
-  return ibcCustId > 0;
+var isNonDepositOrArchived = function isNonDepositOrArchived(lapItem) {
+  return lapItem.IBCCustId === 0 || lapItem.isArchived;
 };
 var getCustIdListFromLapData = function getCustIdListFromLapData(lapPlayerList) {
   return lapPlayerList.reduce(function (result, item) {
-    if (isDeposit(item.IBCCustId)) {
+    if (!isNonDepositOrArchived(item)) {
       result.push(item.IBCCustId);
     }
 
@@ -4674,10 +4674,13 @@ function () {
     key: "_fetchFromLrf",
     value: function _fetchFromLrf(param, lrfDataById, lapPlayerList, commonService, lapTotalItem) {
       var idList = Object(_helpers_utils__WEBPACK_IMPORTED_MODULE_1__["getCustIdListFromLapData"])(lapPlayerList);
+      var nonDepositOrArchivedList = lapPlayerList.filter(function (x) {
+        return Object(_helpers_utils__WEBPACK_IMPORTED_MODULE_1__["isNonDepositOrArchived"])(x);
+      });
 
       if (idList.length === 0) {
         return {
-          playerList: Object(_helpers_playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__["buildLapPlayerList"])(lapPlayerList),
+          playerList: Object(_helpers_playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__["buildLapPlayerList"])(nonDepositOrArchivedList),
           totalItem: lapTotalItem
         };
       }
@@ -4715,8 +4718,8 @@ function () {
         };
       }).catch(function () {
         return {
-          playerList: Object(_helpers_playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__["buildLapPlayerList"])(lapPlayerList),
-          totalItem: lapTotalItem
+          playerList: Object(_helpers_playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__["buildLapPlayerList"])(nonDepositOrArchivedList),
+          totalItem: nonDepositOrArchivedList.length
         };
       });
     }
@@ -5074,7 +5077,7 @@ function () {
       return commonService.fetchData(lrfDataById.type, lrfDataById.action, _objectSpread({}, lrfParam)).then(function (nextLrfResponse) {
         var nextLrfPlayerList = nextLrfResponse.data.DataList;
         var filteredLapPlayerList = differenceList.filter(function (x) {
-          return x.IBCCustId === 0 || nextLrfPlayerList.findIndex(function (p) {
+          return Object(_helpers_utils__WEBPACK_IMPORTED_MODULE_1__["isNonDepositOrArchived"])(x) || nextLrfPlayerList.findIndex(function (p) {
             return p.IbcCustId === x.IBCCustId;
           }) !== -1;
         });
@@ -5093,7 +5096,7 @@ function () {
         console.log(error.message);
         window.alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('HttpError_Default'));
         return {
-          playerList: Object(_helpers_playerDataBuilder__WEBPACK_IMPORTED_MODULE_2__["buildLapPlayerList"])(differenceList)
+          playerList: []
         };
       });
     }

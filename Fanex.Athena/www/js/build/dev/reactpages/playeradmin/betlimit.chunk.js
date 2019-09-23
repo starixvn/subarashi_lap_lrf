@@ -270,16 +270,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/actions/index.js");
-/* harmony import */ var _lib_dataHandling__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../lib/dataHandling */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/dataHandling.js");
-/* harmony import */ var _lib_gameSettingDataHandling__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../lib/gameSettingDataHandling */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/gameSettingDataHandling.js");
-/* harmony import */ var _lib_ngDataHandling__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../lib/ngDataHandling */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/ngDataHandling.js");
-/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/constants.js");
-/* harmony import */ var _grid_Base_SettingContent__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./grid/Base/SettingContent */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/Base/SettingContent.jsx");
-/* harmony import */ var _grid_Base_SettingGrid__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./grid/Base/SettingGrid */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/Base/SettingGrid.jsx");
-/* harmony import */ var _grid_SportSetting_NGSettingGrid__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./grid/SportSetting/NGSettingGrid */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/SportSetting/NGSettingGrid.jsx");
-/* harmony import */ var _grid_SportSetting_AGCSettingContent__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./grid/SportSetting/AGCSettingContent */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/SportSetting/AGCSettingContent.jsx");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/constants.js");
+/* harmony import */ var _grid_data_contents_SportDataContent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./grid/data-contents/SportDataContent */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/data-contents/SportDataContent.jsx");
+/* harmony import */ var _grid_data_contents_GameDataContent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./grid/data-contents/GameDataContent */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/data-contents/GameDataContent.jsx");
+/* harmony import */ var _grid_data_contents_NGDataContent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./grid/data-contents/NGDataContent */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/data-contents/NGDataContent.jsx");
+/* harmony import */ var _grid_data_contents_AGCDataContent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./grid/data-contents/AGCDataContent */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/data-contents/AGCDataContent.jsx");
 var _Setting;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -291,44 +286,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-
-
-
-
-
-var Setting = (_Setting = {}, _defineProperty(_Setting, _lib_constants__WEBPACK_IMPORTED_MODULE_7__["BetLimitProduct"].SB, {
-  Grid: _grid_Base_SettingGrid__WEBPACK_IMPORTED_MODULE_9__["default"],
-  Handling: _lib_dataHandling__WEBPACK_IMPORTED_MODULE_4__["default"]
-}), _defineProperty(_Setting, _lib_constants__WEBPACK_IMPORTED_MODULE_7__["BetLimitProduct"].VS, {
-  Grid: _grid_Base_SettingGrid__WEBPACK_IMPORTED_MODULE_9__["default"],
-  Handling: _lib_dataHandling__WEBPACK_IMPORTED_MODULE_4__["default"]
-}), _defineProperty(_Setting, _lib_constants__WEBPACK_IMPORTED_MODULE_7__["BetLimitProduct"].VS2, {
-  Grid: _grid_Base_SettingGrid__WEBPACK_IMPORTED_MODULE_9__["default"],
-  Handling: _lib_dataHandling__WEBPACK_IMPORTED_MODULE_4__["default"]
-}), _defineProperty(_Setting, _lib_constants__WEBPACK_IMPORTED_MODULE_7__["BetLimitProduct"].LT, {
-  Grid: _grid_Base_SettingGrid__WEBPACK_IMPORTED_MODULE_9__["default"],
-  Handling: _lib_gameSettingDataHandling__WEBPACK_IMPORTED_MODULE_5__["default"]
-}), _defineProperty(_Setting, _lib_constants__WEBPACK_IMPORTED_MODULE_7__["BetLimitProduct"].NG, {
-  Grid: _grid_SportSetting_NGSettingGrid__WEBPACK_IMPORTED_MODULE_10__["default"],
-  Handling: _lib_ngDataHandling__WEBPACK_IMPORTED_MODULE_6__["default"]
-}), _defineProperty(_Setting, _lib_constants__WEBPACK_IMPORTED_MODULE_7__["BetLimitProduct"].KN, {
-  Grid: _grid_Base_SettingGrid__WEBPACK_IMPORTED_MODULE_9__["default"],
-  Handling: _lib_gameSettingDataHandling__WEBPACK_IMPORTED_MODULE_5__["default"]
-}), _Setting);
+var Setting = (_Setting = {}, _defineProperty(_Setting, _lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].SB, _grid_data_contents_SportDataContent__WEBPACK_IMPORTED_MODULE_3__["default"]), _defineProperty(_Setting, _lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].VS, _grid_data_contents_SportDataContent__WEBPACK_IMPORTED_MODULE_3__["default"]), _defineProperty(_Setting, _lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].VS2, _grid_data_contents_SportDataContent__WEBPACK_IMPORTED_MODULE_3__["default"]), _defineProperty(_Setting, _lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].LT, _grid_data_contents_GameDataContent__WEBPACK_IMPORTED_MODULE_4__["default"]), _defineProperty(_Setting, _lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].NG, _grid_data_contents_NGDataContent__WEBPACK_IMPORTED_MODULE_5__["default"]), _defineProperty(_Setting, _lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].KN, _grid_data_contents_GameDataContent__WEBPACK_IMPORTED_MODULE_4__["default"]), _defineProperty(_Setting, _lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitProduct"].AGC, _grid_data_contents_AGCDataContent__WEBPACK_IMPORTED_MODULE_6__["default"]), _Setting);
 
 var DataContent = function DataContent(props) {
   var ProductId = props.requestParam.ProductId;
-  var Content = '';
-
-  if (ProductId === _lib_constants__WEBPACK_IMPORTED_MODULE_7__["BetLimitProduct"].AGC) {
-    Content = _grid_SportSetting_AGCSettingContent__WEBPACK_IMPORTED_MODULE_11__["default"];
-  } else {
-    var _Setting$ProductId = Setting[ProductId],
-        Grid = _Setting$ProductId.Grid,
-        Handling = _Setting$ProductId.Handling;
-    Content = Object(_grid_Base_SettingContent__WEBPACK_IMPORTED_MODULE_8__["default"])(Grid, new Handling());
-  }
-
+  var Content = Setting[ProductId];
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Content, null);
 };
 
@@ -433,9 +395,9 @@ function mapStateToProps(state) {
 
 /***/ }),
 
-/***/ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/Base/SettingContent.jsx":
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/base/SettingContent.jsx":
 /*!******************************************************************************************************!*\
-  !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/Base/SettingContent.jsx ***!
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/base/SettingContent.jsx ***!
   \******************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -506,16 +468,18 @@ var SettingContent = function SettingContent(Grid, DataHandling) {
       });
 
       _defineProperty(_assertThisInitialized(_this), "_handleClickOutSide", function (event) {
-        var isError = _this.errorRef.current && _this.errorRef.current.contains(event.target);
+        if (_this.state.showError) {
+          var isError = _this.errorRef.current && _this.errorRef.current.contains(event.target);
 
-        var isCheckBox = _this.checkBoxRef.current && _this.checkBoxRef.current.contains(event.target);
+          var isCheckBox = _this.checkBoxRef.current && _this.checkBoxRef.current.contains(event.target);
 
-        var isButton = _this.submitButtonRef.current && _this.submitButtonRef.current.contains(event.target);
+          var isButton = _this.submitButtonRef.current && _this.submitButtonRef.current.contains(event.target);
 
-        var clickOutside = !isError && !isCheckBox && !isButton;
+          var clickOutside = !isError && !isCheckBox && !isButton;
 
-        if (clickOutside && _this.state.showError) {
-          _this._closeError();
+          if (clickOutside) {
+            _this._closeError();
+          }
         }
       });
 
@@ -641,23 +605,11 @@ var SettingContent = function SettingContent(Grid, DataHandling) {
     _createClass(_temp, [{
       key: "componentDidUpdate",
       value: function componentDidUpdate(prevProps, prevState) {
-        var _this2 = this;
-
         if (prevState.timeStamp !== this.state.timeStamp) {
           this.props.toggleLoader(false);
           this.props.setAlertOption({
             isShow: false
           });
-        }
-
-        if (prevState.showError !== this.state.showError) {
-          window.setTimeout(function () {
-            if (_this2.state.showError) {
-              _this2._registerEvents();
-            } else {
-              _this2._unRegisterEvents();
-            }
-          }, 0);
         }
       }
     }, {
@@ -669,6 +621,8 @@ var SettingContent = function SettingContent(Grid, DataHandling) {
       key: "componentDidMount",
       value: function componentDidMount() {
         this._getData(this.props.requestParam);
+
+        this._registerEvents();
       }
     }, {
       key: "_registerEvents",
@@ -685,12 +639,16 @@ var SettingContent = function SettingContent(Grid, DataHandling) {
     }, {
       key: "_submit",
       value: function _submit(data) {
+        var _this2 = this;
+
         this.props.toggleLoader(true);
         var requestParam = this.props.requestParam;
         var param = Object.assign({}, this.props.requestParam, {
           Setting: data
         });
-        _lib_dataTransfer__WEBPACK_IMPORTED_MODULE_6__["default"].updateData(param, this._showSubmitResult.bind(this), null, this._handleError.bind(this));
+        _lib_dataTransfer__WEBPACK_IMPORTED_MODULE_6__["default"].updateData(param, this._showSubmitResult.bind(this), function () {
+          return _this2.props.toggleLoader(false);
+        }, this._handleError.bind(this));
       }
     }, {
       key: "_handleError",
@@ -867,9 +825,9 @@ var createSetting = Object(redux__WEBPACK_IMPORTED_MODULE_2__["compose"])(Object
 
 /***/ }),
 
-/***/ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/Base/SettingGrid.jsx":
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/base/SettingGrid.jsx":
 /*!***************************************************************************************************!*\
-  !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/Base/SettingGrid.jsx ***!
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/base/SettingGrid.jsx ***!
   \***************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -982,16 +940,16 @@ var SettingGrid = function SettingGrid(props) {
 
 /***/ }),
 
-/***/ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/SportSetting/AGCSettingContent.jsx":
-/*!*****************************************************************************************************************!*\
-  !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/SportSetting/AGCSettingContent.jsx ***!
-  \*****************************************************************************************************************/
-/*! exports provided: AGCSettingContent, default */
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/data-contents/AGCDataContent.jsx":
+/*!***************************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/data-contents/AGCDataContent.jsx ***!
+  \***************************************************************************************************************/
+/*! exports provided: AGCDataContent, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AGCSettingContent", function() { return AGCSettingContent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AGCDataContent", function() { return AGCDataContent; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
@@ -1001,7 +959,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_utility__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../lib/utility */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/utility.js");
 /* harmony import */ var _lib_dataTransfer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../lib/dataTransfer */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/dataTransfer.js");
 /* harmony import */ var react_select__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-select */ "./node_modules/react-select/dist/react-select.es.js");
-/* harmony import */ var _AGCSettingGrid__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./AGCSettingGrid */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/SportSetting/AGCSettingGrid.jsx");
+/* harmony import */ var _sport_settings_AGCSettingGrid__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../sport-settings/AGCSettingGrid */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/sport-settings/AGCSettingGrid.jsx");
 /* harmony import */ var _jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @jsroot/components/NoDataTitle */ "./www/js/source/reactpages/components/NoDataTitle.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -1033,17 +991,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var AGCSettingContent =
+var AGCDataContent =
 /*#__PURE__*/
 function (_PureComponent) {
-  _inherits(AGCSettingContent, _PureComponent);
+  _inherits(AGCDataContent, _PureComponent);
 
-  function AGCSettingContent(props) {
+  function AGCDataContent(props) {
     var _this;
 
-    _classCallCheck(this, AGCSettingContent);
+    _classCallCheck(this, AGCDataContent);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(AGCSettingContent).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(AGCDataContent).call(this, props));
 
     _defineProperty(_assertThisInitialized(_this), "onGroupChange", function (item) {
       if (_this.state.selectedGroup !== item.value) {
@@ -1106,7 +1064,7 @@ function (_PureComponent) {
     return _this;
   }
 
-  _createClass(AGCSettingContent, [{
+  _createClass(AGCDataContent, [{
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps, prevState) {
       if (prevState.data !== this.state.data) {
@@ -1278,7 +1236,7 @@ function (_PureComponent) {
         onChange: this.onGroupChange
       })) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "".concat(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('BetSettingGroups'), " :"), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "disabled-text"
-      }, setting.BetSetting.AgGroup)))), hasData ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AGCSettingGrid__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      }, setting.BetSetting.AgGroup)))), hasData ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_sport_settings_AGCSettingGrid__WEBPACK_IMPORTED_MODULE_8__["default"], {
         data: data,
         isEnabled: setting.BetSetting.IsEnabled,
         group: selectedGroup
@@ -1300,7 +1258,7 @@ function (_PureComponent) {
     }
   }]);
 
-  return AGCSettingContent;
+  return AGCDataContent;
 }(react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"]);
 
 function mapDispatchToProps(dispatch) {
@@ -1320,14 +1278,98 @@ function mapStateToProps(state) {
 }
 
 ;
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(AGCSettingContent));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(AGCDataContent));
 
 /***/ }),
 
-/***/ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/SportSetting/AGCSettingGrid.jsx":
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/data-contents/GameDataContent.jsx":
+/*!****************************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/data-contents/GameDataContent.jsx ***!
+  \****************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _lib_gameSettingDataHandling__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../lib/gameSettingDataHandling */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/gameSettingDataHandling.js");
+/* harmony import */ var _base_SettingContent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../base/SettingContent */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/base/SettingContent.jsx");
+/* harmony import */ var _base_SettingGrid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../base/SettingGrid */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/base/SettingGrid.jsx");
+
+
+
+
+var Content = Object(_base_SettingContent__WEBPACK_IMPORTED_MODULE_2__["default"])(_base_SettingGrid__WEBPACK_IMPORTED_MODULE_3__["default"], new _lib_gameSettingDataHandling__WEBPACK_IMPORTED_MODULE_1__["default"]());
+
+var GameDataContent = function GameDataContent() {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Content, null);
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (GameDataContent);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/data-contents/NGDataContent.jsx":
 /*!**************************************************************************************************************!*\
-  !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/SportSetting/AGCSettingGrid.jsx ***!
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/data-contents/NGDataContent.jsx ***!
   \**************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _lib_ngDataHandling__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../lib/ngDataHandling */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/ngDataHandling.js");
+/* harmony import */ var _base_SettingContent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../base/SettingContent */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/base/SettingContent.jsx");
+/* harmony import */ var _sport_settings_NGSettingGrid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../sport-settings/NGSettingGrid */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/sport-settings/NGSettingGrid.jsx");
+
+
+
+
+var Content = Object(_base_SettingContent__WEBPACK_IMPORTED_MODULE_2__["default"])(_sport_settings_NGSettingGrid__WEBPACK_IMPORTED_MODULE_3__["default"], new _lib_ngDataHandling__WEBPACK_IMPORTED_MODULE_1__["default"]());
+
+var NGDataContent = function NGDataContent() {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Content, null);
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (NGDataContent);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/data-contents/SportDataContent.jsx":
+/*!*****************************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/data-contents/SportDataContent.jsx ***!
+  \*****************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _lib_dataHandling__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../lib/dataHandling */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/dataHandling.js");
+/* harmony import */ var _base_SettingContent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../base/SettingContent */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/base/SettingContent.jsx");
+/* harmony import */ var _base_SettingGrid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../base/SettingGrid */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/base/SettingGrid.jsx");
+
+
+
+
+var Content = Object(_base_SettingContent__WEBPACK_IMPORTED_MODULE_2__["default"])(_base_SettingGrid__WEBPACK_IMPORTED_MODULE_3__["default"], new _lib_dataHandling__WEBPACK_IMPORTED_MODULE_1__["default"]());
+
+var SportDataContent = function SportDataContent() {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Content, null);
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (SportDataContent);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/sport-settings/AGCSettingGrid.jsx":
+/*!****************************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/sport-settings/AGCSettingGrid.jsx ***!
+  \****************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1377,10 +1419,10 @@ var AGCSettingGrid = function AGCSettingGrid(props) {
 
 /***/ }),
 
-/***/ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/SportSetting/NGSettingGrid.jsx":
-/*!*************************************************************************************************************!*\
-  !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/SportSetting/NGSettingGrid.jsx ***!
-  \*************************************************************************************************************/
+/***/ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/sport-settings/NGSettingGrid.jsx":
+/*!***************************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/grid/sport-settings/NGSettingGrid.jsx ***!
+  \***************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1420,8 +1462,7 @@ var NGSettingGrid = function NGSettingGrid(props) {
     onChange(newData);
   };
 
-  var onInputBlur = function onInputBlur(event, type, id) {
-    var value = event.target.value;
+  var onInputBlur = function onInputBlur(type, id, value) {
     var newValue = _lib_utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(_lib_utility__WEBPACK_IMPORTED_MODULE_1__["default"].getValueAsNumber(value));
 
     if (newValue !== value) {
@@ -1454,7 +1495,7 @@ var NGSettingGrid = function NGSettingGrid(props) {
         return onInputChange(type, value.Id, e.target.value);
       },
       onBlur: function onBlur(e) {
-        return onInputBlur(e, type, value.Id);
+        return onInputBlur(type, value.Id, e.target.value);
       },
       disabled: disabled
     });
