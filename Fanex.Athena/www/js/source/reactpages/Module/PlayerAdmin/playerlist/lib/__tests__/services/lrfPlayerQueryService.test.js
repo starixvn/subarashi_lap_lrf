@@ -1,6 +1,6 @@
-import LrfPlayerQueryService from '../services/lrfPlayerQueryService';
-import PlayerListDataHelper from '../helpers/playerListDataHelper';
-import { apiInfo } from '../constants';
+import LrfPlayerQueryService from '../../services/lrfPlayerQueryService';
+import PlayerListDataHelper from '../../helpers/playerListDataHelper';
+import { apiInfo } from '../../constants';
 
 describe('LrfPlayerQueryService', () => {
     const defaultParam = {

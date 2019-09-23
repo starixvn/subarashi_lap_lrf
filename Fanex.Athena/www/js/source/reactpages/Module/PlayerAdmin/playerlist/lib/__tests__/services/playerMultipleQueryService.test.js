@@ -1,7 +1,7 @@
-import PlayerMultipleQueryService from '../services/playerMultipleQueryService';
-import PlayerListDataHelper from '../helpers/playerListDataHelper';
-import { apiInfo, playerTypes } from '../constants';
-import * as utils from '../helpers/utils';
+import PlayerMultipleQueryService from '../../services/playerMultipleQueryService';
+import PlayerListDataHelper from '../../helpers/playerListDataHelper';
+import { apiInfo } from '../../constants';
+import * as utils from '../../helpers/utils';
 
 describe('PlayerMultipleQueryService', () => {
     let originalAlert;

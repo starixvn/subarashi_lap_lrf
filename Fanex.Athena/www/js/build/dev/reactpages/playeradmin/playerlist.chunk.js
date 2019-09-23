@@ -3378,12 +3378,14 @@ var UserNameCell = function UserNameCell(props) {
       setSelectedPlayer = props.setSelectedPlayer,
       setCurrentActivePlayer = props.setCurrentActivePlayer,
       setContextMenu = props.setContextMenu,
-      contextMenu = props.contextMenu;
+      contextMenu = props.contextMenu,
+      setSelectedTabName = props.setSelectedTabName;
 
   var handleSelectPlayer = function handleSelectPlayer(event) {
     event.preventDefault();
     var newSelectedPlayer = Object(_lib_helpers_playerDataBuilder__WEBPACK_IMPORTED_MODULE_5__["buildSelectedPlayer"])(dataItem);
     setSelectedPlayer(newSelectedPlayer);
+    setSelectedTabName(null);
   };
 
   var handleEnterContextMenu = function handleEnterContextMenu(event) {
@@ -3433,11 +3435,13 @@ var UserNameCell = function UserNameCell(props) {
 function mapDispatchToProps(dispatch) {
   var setSelectedPlayer = _actions__WEBPACK_IMPORTED_MODULE_3__["ActionCreators"].setSelectedPlayer,
       setCurrentActivePlayer = _actions__WEBPACK_IMPORTED_MODULE_3__["ActionCreators"].setCurrentActivePlayer,
-      setContextMenu = _actions__WEBPACK_IMPORTED_MODULE_3__["ActionCreators"].setContextMenu;
+      setContextMenu = _actions__WEBPACK_IMPORTED_MODULE_3__["ActionCreators"].setContextMenu,
+      setSelectedTabName = _actions__WEBPACK_IMPORTED_MODULE_3__["ActionCreators"].setSelectedTabName;
   return Object(redux__WEBPACK_IMPORTED_MODULE_2__["bindActionCreators"])({
     setSelectedPlayer: setSelectedPlayer,
     setCurrentActivePlayer: setCurrentActivePlayer,
-    setContextMenu: setContextMenu
+    setContextMenu: setContextMenu,
+    setSelectedTabName: setSelectedTabName
   }, dispatch);
 }
 

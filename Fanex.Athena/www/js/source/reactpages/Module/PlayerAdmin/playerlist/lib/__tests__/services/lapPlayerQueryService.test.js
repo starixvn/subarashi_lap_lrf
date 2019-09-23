@@ -1,7 +1,7 @@
-import LapPlayerQueryService from '../services/lapPlayerQueryService';
-import PlayerListDataHelper from '../helpers/playerListDataHelper';
-import { apiInfo, playerTypes } from '../constants';
-import { buildLapPlayerList } from '../helpers/playerDataBuilder';
+import LapPlayerQueryService from '../../services/lapPlayerQueryService';
+import PlayerListDataHelper from '../../helpers/playerListDataHelper';
+import { apiInfo } from '../../constants';
+import { buildLapPlayerList } from '../../helpers/playerDataBuilder';
 
 describe('LapPlayerQueryService', () => {
     const defaultParam = {

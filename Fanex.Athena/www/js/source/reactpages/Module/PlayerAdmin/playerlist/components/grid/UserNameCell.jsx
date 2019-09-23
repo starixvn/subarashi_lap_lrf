@@ -6,12 +6,13 @@ import GridHelper from '../../lib/helpers/gridHelper';
 import { buildSelectedPlayer, buildCurrentActivePlayer } from '../../lib/helpers/playerDataBuilder';
 
 export const UserNameCell = (props) => {
-    const { dataItem, setSelectedPlayer, setCurrentActivePlayer, setContextMenu, contextMenu } = props;
+    const { dataItem, setSelectedPlayer, setCurrentActivePlayer, setContextMenu, contextMenu, setSelectedTabName } = props;
 
     const handleSelectPlayer = (event) => {
         event.preventDefault();
         const newSelectedPlayer = buildSelectedPlayer(dataItem);
         setSelectedPlayer(newSelectedPlayer);
+        setSelectedTabName(null);
     }
 
     const handleEnterContextMenu = (event) => {
@@ -54,8 +55,8 @@ export const UserNameCell = (props) => {
 }
 
 function mapDispatchToProps(dispatch) {
-    const { setSelectedPlayer, setCurrentActivePlayer, setContextMenu } = ActionCreators;
-    return bindActionCreators({ setSelectedPlayer, setCurrentActivePlayer, setContextMenu }, dispatch);
+    const { setSelectedPlayer, setCurrentActivePlayer, setContextMenu, setSelectedTabName } = ActionCreators;
+    return bindActionCreators({ setSelectedPlayer, setCurrentActivePlayer, setContextMenu, setSelectedTabName }, dispatch);
 }
 
 function mapStateToProps(state) {
