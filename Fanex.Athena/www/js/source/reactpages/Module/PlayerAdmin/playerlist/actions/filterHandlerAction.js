@@ -6,11 +6,13 @@ import { setPlayerList, setPagingOption, setIsFetchingData } from './gridHandler
 import { defaultPagingOption } from '../lib/constants.js';
 import { buildSelectedPlayer } from '../lib/helpers/playerDataBuilder';
 import PlayerSuggestionService from '../lib/services/playerSuggestionService';
+import { setSelectedTabName } from './playerDetailHandlerAction';
 
 const processBeforeGettingData = (dispatch) => {
     dispatch(setSelectedPlayer(null));
     dispatch(setIsFetchingData(true));
     dispatch(toggleLoader(true));
+    dispatch(setSelectedTabName(null));
 }
 
 export const searchPlayer = (param) => (dispatch) => {
