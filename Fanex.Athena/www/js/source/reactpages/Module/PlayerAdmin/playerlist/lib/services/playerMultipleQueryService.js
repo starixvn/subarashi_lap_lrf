@@ -1,5 +1,5 @@
 import PlayerListDataHelper from '../helpers/playerListDataHelper';
-import { getCustIdListFromLapData } from '../helpers/utils';
+import { getCustIdListFromLapData, isNonDepositOrArchived } from '../helpers/utils';
 import { buildLapPlayerList } from '../helpers/playerDataBuilder';
 import LangHelper from '@jsroot/lib/langHelper';
 
@@ -79,7 +79,7 @@ export default class PlayerMultipleQueryService {
         return commonService.fetchData(lrfDataById.type, lrfDataById.action, {...lrfParam })
             .then(nextLrfResponse => {
                 const { DataList: nextLrfPlayerList } = nextLrfResponse.data;
-                const filteredLapPlayerList = differenceList.filter(x => x.IBCCustId === 0 ||
+                const filteredLapPlayerList = differenceList.filter(x => isNonDepositOrArchived(x) ||
                     nextLrfPlayerList.findIndex(p => p.IbcCustId === x.IBCCustId) !== -1);
 
                 if (!nextLrfPlayerList || !nextLrfPlayerList.length) {

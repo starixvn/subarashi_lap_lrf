@@ -22,13 +22,11 @@ export const buildDisplayedColumnObject = (displayedColumnList) => {
     }, {});
 }
 
-export const isDeposit = (ibcCustId) => {
-    return ibcCustId > 0;
-}
+export const isNonDepositOrArchived = (lapItem) => lapItem.IBCCustId === 0 || lapItem.isArchived;
 
 export const getCustIdListFromLapData = (lapPlayerList) => {
     return lapPlayerList.reduce((result, item) => {
-        if (isDeposit(item.IBCCustId)) {
+        if (!isNonDepositOrArchived(item)) {
             result.push(item.IBCCustId);
         }
 

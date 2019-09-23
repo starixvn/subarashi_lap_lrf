@@ -1,5 +1,5 @@
 import PlayerListDataHelper from '../helpers/playerListDataHelper';
-import { getCustIdListFromLapData } from '../helpers/utils';
+import { getCustIdListFromLapData, isNonDepositOrArchived } from '../helpers/utils';
 import { buildLapPlayerList } from '../helpers/playerDataBuilder';
 
 export default class LapPlayerQueryService {
@@ -20,11 +20,11 @@ export default class LapPlayerQueryService {
 
     static _fetchFromLrf(param, lrfDataById, lapPlayerList, commonService, lapTotalItem) {
         const idList = getCustIdListFromLapData(lapPlayerList);
-        const nonDepositPlayerList = lapPlayerList.filter(x => x.IBCCustId === 0);
+        const nonDepositOrArchivedList = lapPlayerList.filter(x => isNonDepositOrArchived(x));
 
         if (idList.length === 0) {
             return {
-                playerList: buildLapPlayerList(nonDepositPlayerList),
+                playerList: buildLapPlayerList(nonDepositOrArchivedList),
                 totalItem: lapTotalItem
             }
         }
@@ -63,8 +63,8 @@ export default class LapPlayerQueryService {
             })
             .catch(() => {
                 return {
-                    playerList: buildLapPlayerList(nonDepositPlayerList),
-                    totalItem: nonDepositPlayerList.length
+                    playerList: buildLapPlayerList(nonDepositOrArchivedList),
+                    totalItem: nonDepositOrArchivedList.length
                 }
             });
     }
