@@ -1,16 +1,15 @@
 ﻿namespace Fanex.Athena.Module.PlayerAdmin.Services
 {
-    using System;
     using System.Net.Http;
     using System.Text;
     using System.Threading.Tasks;
-    using Autofac.Features.AttributeFilters;
+
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
     using Fanex.Athena.Module.PlayerAdmin.Services.Interfaces;
     using Fanex.Athena.Service.StatelessCore.CustomException;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Newtonsoft.Json;
 
     public class PlayerStatementService : IPlayerStatementService

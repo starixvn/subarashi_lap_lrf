@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Net.Http;
@@ -61,9 +62,7 @@ namespace Fanex.Athena
                 .OnRelease(x => x.Dispose());
 
             builder.RegisterType<ApiExceptionLogger>().As<IExceptionLogger>();
-
-            builder.WithHttpClient("ReportAPIClient", ConfigurationManager.AppSettings["ReportAPIHostUrl"]);
-            builder.WithHttpClient("EXTServiceTokenClient", ConfigurationManager.AppSettings["ExtAPITokenHostUrl"]);
+            RegisterHttpClient(builder);
 
             builder.Register<PlayerStatementService>(x => new PlayerStatementService(
                   x.Resolve<IAppSettings>(),
@@ -73,6 +72,15 @@ namespace Fanex.Athena
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
+        }
+
+        private static void RegisterHttpClient(ContainerBuilder builder)
+        {
+            var reportAPIheader = new Dictionary<string, string>
+            { { "AUTH_TOKEN", ConfigurationManager.AppSettings["ReportAPITokenValue"] } };
+
+            builder.WithHttpClient("ReportAPIClient", ConfigurationManager.AppSettings["ReportAPIHostUrl"], reportAPIheader);
+            builder.WithHttpClient("EXTServiceTokenClient", ConfigurationManager.AppSettings["ExtAPITokenHostUrl"]);
         }
 
         private static void RegisterThirdpartyServices(ContainerBuilder builder)

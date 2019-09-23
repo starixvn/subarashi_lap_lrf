@@ -16,19 +16,14 @@ namespace Fanex.Athena
     using System.Web.Mvc;
     using System.Web.Optimization;
     using System.Web.Routing;
-
     using Api.Base.Attributes;
-
     using Data;
-
     using Fanex.Athena.Extension.Helpers;
     using Fanex.Athena.Web;
     using Fanex.Athena.Web.ActionFilter;
     using Fanex.Athena.Web.RouterConfig;
-
     using Logging;
     using Logging.RabbitMQ;
-
     using RemotingRef;
 
     public class MvcApplication : HttpApplication
