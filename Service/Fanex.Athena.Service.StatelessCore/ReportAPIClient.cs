@@ -4,14 +4,10 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-
 using Fanex.Athena.Extension.Utility;
 using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
-
 using MessagePack;
-using MessagePack.Resolvers;
-
 using Newtonsoft.Json;
 
 namespace Fanex.Athena.Service.StatelessCore
