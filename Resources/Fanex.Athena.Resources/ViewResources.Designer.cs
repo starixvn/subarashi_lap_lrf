@@ -4606,6 +4606,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Support data up to 18 months.
+        /// </summary>
+        public static string PlayerStatementSupportMonths {
+            get {
+                return ResourceManager.GetString("PlayerStatementSupportMonths", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pre Game.
         /// </summary>
         public static string PreGame {

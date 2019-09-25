@@ -2502,4 +2502,8 @@
     <value>Betting Statement</value>
     <comment>112658</comment>
   </data>
+  <data name="PlayerStatementSupportMonths" xml:space="preserve">
+    <value>Support data up to 18 months</value>
+    <comment>112658</comment>
+  </data>
 </root>
