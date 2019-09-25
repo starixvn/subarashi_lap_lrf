@@ -4,7 +4,6 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using Fanex.Athena.Extension.Utility;
 using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
 using MessagePack;
@@ -19,18 +18,16 @@ namespace Fanex.Athena.Service.StatelessCore
         private const string MsgPackContentType = "application/x-msgpack";
         private const string JsonContentType = "application/json";
         private readonly HttpClient _client;
-        private readonly IAppSettings _appSetting;
+
         private static JsonSerializerSettings _jsonSerializerSettings = new JsonSerializerSettings
         {
             DateTimeZoneHandling = DateTimeZoneHandling.Unspecified,
             NullValueHandling = NullValueHandling.Ignore,
         };
 
-        public ReportAPIClient(IAppSettings appSettings, HttpClient client)
+        public ReportAPIClient(HttpClient client)
         {
-            _appSetting = appSettings;
             _client = client;
-
         }
 
         private async Task<T> HandleAsync<T>(string path, object value, string language, MediaType mediaType, Func<HttpResponseMessage, Task<T>> codeBlock)

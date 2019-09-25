@@ -3,7 +3,6 @@
     using System.Net.Http;
     using System.Text;
     using System.Threading.Tasks;
-
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
@@ -15,8 +14,6 @@
     public class PlayerStatementService : IPlayerStatementService
     {
         private const string ApiHost = "ExtAPIHostUrl";
-
-        private const string TokenApiHost = "ExtAPITokenHostUrl";
 
         private const string User = "ExtAPIUser";
 

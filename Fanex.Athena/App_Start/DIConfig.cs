@@ -139,7 +139,6 @@ namespace Fanex.Athena
         private static void RegisterSingleton(ContainerBuilder builder)
         {
             builder.Register<ReportAPIClient>(x => new ReportAPIClient(
-                 x.Resolve<IAppSettings>(),
                  x.ResolveNamed<HttpClient>("ReportAPIClient")
                 )).As<IReportAPIClient>().SingleInstance();
         }
