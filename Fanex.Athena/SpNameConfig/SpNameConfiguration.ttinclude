@@ -32,6 +32,10 @@
 		new SiteInfo
         {
             SiteEnvironment = SiteEnvironment.Staging
+        },
+		new SiteInfo
+        {
+            SiteEnvironment = SiteEnvironment.BACKUPMNL
         }
     };
 #>
@@ -44,7 +48,8 @@
 		UATTW,
 		SIT,
         PRO,
-		Staging
+		Staging,
+		BACKUPMNL
     }
 
 	class SiteInfo
