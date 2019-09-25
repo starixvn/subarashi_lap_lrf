@@ -77,8 +77,8 @@ const SettingContent = (Grid, DataHandling) => {
             this.setState({ showError: false });
         }
 
-        onReset = (e) => {
-            if (!this.state.disabledButton || (e.button === 0 || e.which === 1)) {
+        onReset = () => {
+            if (!this.state.disabledButton) {
                 this.setState({ isCopy: false }, () => this._getData(this.props.requestParam));
             }
         }
@@ -87,7 +87,7 @@ const SettingContent = (Grid, DataHandling) => {
             this.setState({ data: data });
         }
 
-        onSubmit = (e) => {
+        onSubmit = () => {
             if (!this.state.showError) {
                 const data = this.state.data;
                 const submitData = DataHandling.getSubmitData(data);
@@ -184,14 +184,21 @@ const SettingContent = (Grid, DataHandling) => {
         _showSubmitResult(title, msg, isSuccess) {
             const content = (<p className="center-align">{msg}</p>);
 
+            const buttons = [
+                {
+                    text: LangHelper.getSingleResource('OK'),
+                    onClick: this.onRefresh,
+                    className: 'btn btn-apply btn-alone'
+                }];
+
             this.setState({ disabledButton: true }, () => this.props.setAlertOption({
                 isShow: true,
                 title: title,
                 children: content,
                 onClose: this.onRefresh,
                 icon: isSuccess ? 'success' : 'error',
-                height: 180,
-                buttons: []
+                height: 225,
+                buttons: buttons
             }));
         }
 

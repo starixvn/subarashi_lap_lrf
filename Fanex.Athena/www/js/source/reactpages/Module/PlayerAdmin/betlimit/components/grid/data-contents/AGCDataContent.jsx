@@ -134,6 +134,13 @@ export class AGCDataContent extends PureComponent {
     _showSubmitResult(title, msg, isSuccess) {
         const content = (<p className="center-align">{msg}</p>);
 
+        const buttons = [
+            {
+                text: LangHelper.getSingleResource('OK'),
+                onClick: this.onRefresh,
+                className: 'btn btn-apply btn-alone'
+            }];
+
         this.setState({ disabledButton: true }, () => this.props.setAlertOption({
             isShow: true,
             title: title,
@@ -141,7 +148,7 @@ export class AGCDataContent extends PureComponent {
             onClose: this.onRefresh,
             icon: isSuccess ? 'success' : 'error',
             height: 180,
-            buttons: []
+            buttons: buttons
         }));
     }
 
