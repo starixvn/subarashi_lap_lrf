@@ -1,4 +1,4 @@
-﻿// Generated at: 09/20/2019 10:50:47 AM
+﻿// Generated at: 09/25/2019 8:44:31 AM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -505,6 +505,7 @@ PlatformWinLoss:"Platform Win Loss",
 PlatformWinLossTitle:"Platform Win Loss - {0} --&gt; {1} - {2} - {3} - {4}",
 Player:"Player",
 PlayerAdminUpdateFailedMsg:"Please try again!",
+PlayerStatementSupportMonths:"Support data up to 18 months",
 PreGame:"Pre Game",
 Prev:"Prev",
 PreviousSearchResult:"Previous search result",

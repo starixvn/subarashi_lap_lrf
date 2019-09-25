@@ -677,6 +677,8 @@ body {
 
 .popup-content {
   padding-top: 10px !important; }
+  .popup-content .btn-alone {
+    margin-right: 0 !important; }
 
 .disabled-text {
   color: rgba(0, 0, 0, 0.26) !important; }

@@ -488,8 +488,8 @@ var SettingContent = function SettingContent(Grid, DataHandling) {
         _this.ref[type][id] = element;
       });
 
-      _defineProperty(_assertThisInitialized(_this), "onReset", function (e) {
-        if (!_this.state.disabledButton || e.button === 0 || e.which === 1) {
+      _defineProperty(_assertThisInitialized(_this), "onReset", function () {
+        if (!_this.state.disabledButton) {
           _this.setState({
             isCopy: false
           }, function () {
@@ -504,7 +504,7 @@ var SettingContent = function SettingContent(Grid, DataHandling) {
         });
       });
 
-      _defineProperty(_assertThisInitialized(_this), "onSubmit", function (e) {
+      _defineProperty(_assertThisInitialized(_this), "onSubmit", function () {
         if (!_this.state.showError) {
           var data = _this.state.data;
           var submitData = DataHandling.getSubmitData(data);
@@ -695,6 +695,11 @@ var SettingContent = function SettingContent(Grid, DataHandling) {
         var content = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
           className: "center-align"
         }, msg);
+        var buttons = [{
+          text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('OK'),
+          onClick: this.onRefresh,
+          className: 'btn btn-apply btn-alone'
+        }];
         this.setState({
           disabledButton: true
         }, function () {
@@ -704,8 +709,8 @@ var SettingContent = function SettingContent(Grid, DataHandling) {
             children: content,
             onClose: _this4.onRefresh,
             icon: isSuccess ? 'success' : 'error',
-            height: 180,
-            buttons: []
+            height: 225,
+            buttons: buttons
           });
         });
       }
@@ -1183,6 +1188,11 @@ function (_PureComponent) {
       var content = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "center-align"
       }, msg);
+      var buttons = [{
+        text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('OK'),
+        onClick: this.onRefresh,
+        className: 'btn btn-apply btn-alone'
+      }];
       this.setState({
         disabledButton: true
       }, function () {
@@ -1193,7 +1203,7 @@ function (_PureComponent) {
           onClose: _this4.onRefresh,
           icon: isSuccess ? 'success' : 'error',
           height: 180,
-          buttons: []
+          buttons: buttons
         });
       });
     }
