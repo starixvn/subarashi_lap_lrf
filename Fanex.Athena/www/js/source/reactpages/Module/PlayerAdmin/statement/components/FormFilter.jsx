@@ -51,8 +51,8 @@ const FormFilter = (props) => {
                     </div>
                 </div>
                 <div className="col-12">
-                    <div><span class="circle"></span> {LangHelper.getSingleResource("PlayerStatementSupportMonths")}</div>
-                    <div><span class="circle"></span> {LangHelper.getSingleResource("GrandPrizeNote")}</div>
+                    <div><span className="circle"></span> {LangHelper.getSingleResource("PlayerStatementSupportMonths")}</div>
+                    <div><span className="circle"></span> {LangHelper.getSingleResource("GrandPrizeNote")}</div>
                 </div>
             </div>
         </div>
