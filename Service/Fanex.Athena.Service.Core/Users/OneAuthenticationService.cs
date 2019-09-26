@@ -21,15 +21,13 @@
 
     using Model.Core.DataDomain;
 
-    using Newtonsoft.Json;
-
     using Resources;
 
     [CLSCompliant(false)]
     public class OneAuthenticationService : IOneAuthenticationService
     {
         private readonly ISessionService _sessionService;
-        private readonly ILicenseeDataAccess _licenseeDataAccess;
+        private readonly ILicenseeSettingService _licenseeSettingService;
         private readonly IFormsAuthenticationService _formsAuthenticationService;
         private readonly IOneBookSecurityWrapper _oneBookSecurityWrapper;
         private readonly ILogger _logger;
@@ -38,7 +36,7 @@
 
         public OneAuthenticationService(
             ISessionService sessionService,
-            ILicenseeDataAccess licenseeDataAccess,
+            ILicenseeSettingService licenseeSettingService,
             IFormsAuthenticationService formsAuthenticationService,
             IOneBookSecurityWrapper oneBookSecurityWrapper,
             ILogger logger,
@@ -46,7 +44,7 @@
             IOneAuthDataAccess oneAuthDataAccess)
         {
             _sessionService = sessionService;
-            _licenseeDataAccess = licenseeDataAccess;
+            _licenseeSettingService = licenseeSettingService;
             _formsAuthenticationService = formsAuthenticationService;
             _oneBookSecurityWrapper = oneBookSecurityWrapper;
             _logger = logger;
@@ -64,7 +62,7 @@
 
         public IResultInfo SignIn(HttpContextBase currentContext, OneAuthToken tokenInfo)
         {
-            var licensee = _licenseeDataAccess.GetLicenseeByName(tokenInfo.SiteName);
+            var licensee = _licenseeSettingService.GetLicenseeInfo(tokenInfo.SiteName);
             if (licensee == null)
             {
                 return new ResultInfo
@@ -250,6 +248,5 @@
 
             _sessionService.AssignSessions(userSession, licSession);
         }
-
     }
 }

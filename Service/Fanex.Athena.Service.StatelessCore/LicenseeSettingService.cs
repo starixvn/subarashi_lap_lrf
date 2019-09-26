@@ -13,7 +13,8 @@ namespace Fanex.Athena.Service.StatelessCore
     using System.Web.Hosting;
 
     using Extension.Utility.Interfaces;
-
+    using Fanex.Athena.DataAccess.Core.Users.Interfaces;
+    using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Core.DTO.Configuration;
 
     using Interfaces;
@@ -23,12 +24,16 @@ namespace Fanex.Athena.Service.StatelessCore
     public class LicenseeSettingService : ILicenseeSettingService
     {
         private const string FakeLicenseeSettingsCacheKey = "LRF_FakeLicenseeSettings";
+        private const int OneDayInSecond = 86400;
 
         private readonly IMemoryCacheService _cache;
 
-        public LicenseeSettingService(IMemoryCacheService cache)
+        private readonly ILicenseeDataAccess _licenseeDataAccess;
+
+        public LicenseeSettingService(IMemoryCacheService cache, ILicenseeDataAccess licenseeDataAccess)
         {
             _cache = cache;
+            _licenseeDataAccess = licenseeDataAccess;
         }
 
         public bool IsFakeLicensee(string licenseeName)
@@ -54,6 +59,22 @@ namespace Fanex.Athena.Service.StatelessCore
         public FakeLicenseeSetting GetFakeLicenseeSetting(string licenseeName)
         {
             return GetAndCacheFakeLicenseeSettingList()?.FirstOrDefault(x => x.SiteName.Equals(licenseeName, StringComparison.OrdinalIgnoreCase));
+        }
+
+        public Licensee GetLicenseeInfo(string licenseeName)
+        {
+            var cacheKey = "Lrf_LicenseeSelBySiteName_" + licenseeName;
+            var licenseeInfo = _cache.Get<Licensee>(cacheKey);
+            if (licenseeInfo == null)
+            {
+                licenseeInfo = _licenseeDataAccess.GetLicenseeByName(licenseeName);
+                if (licenseeInfo != null)
+                {
+                    _cache.Set(cacheKey, licenseeInfo, OneDayInSecond);
+                }
+            }
+
+            return licenseeInfo;
         }
 
         private IEnumerable<FakeLicenseeSetting> GetAndCacheFakeLicenseeSettingList()

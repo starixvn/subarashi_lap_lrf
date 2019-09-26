@@ -13,6 +13,7 @@ namespace Fanex.Athena.Service.StatelessCore.Interfaces
     public interface IAuthorizationService
     {
         bool HasPermissions(IEnumerable<Function> userFunctionList, params string[] permissionKeys);
+
         bool HasPermissions(OneAuthPermission[] userPortalFunctionList, params string[] permissionKeys);
 
         bool HasPermissionOnData(IDictionary<int, int[]> currencyAgents, int custId, long transId);
@@ -25,6 +26,6 @@ namespace Fanex.Athena.Service.StatelessCore.Interfaces
 
         bool CheckCustomerBelongsTo(IDictionary<int, int[]> currencyAgents, int custId, int currencyId = 0);
 
-        bool CheckProductBelongsTo(int productId, int[] limitedProductIds, string licenseeName);
+        bool CheckProductBelongsTo(string licenseeName, int productId, int[] limitedProductIds = null);
     }
 }

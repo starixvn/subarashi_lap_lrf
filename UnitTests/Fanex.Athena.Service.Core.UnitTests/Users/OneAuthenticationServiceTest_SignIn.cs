@@ -36,7 +36,7 @@
     {
         private OneAuthenticationService _oneAuthenticationService;
         private ISessionService _sessionService;
-        private ILicenseeDataAccess _licenseeDataAccess;
+        private ILicenseeSettingService _licenseeSettingService;
         private IFormsAuthenticationService _formAuthenticationService;
         private IOneBookSecurityWrapper _oneBookSecurityWrapper;
         private ILogger _logger;
@@ -47,7 +47,7 @@
         public void SetUp()
         {
             _sessionService = Substitute.For<ISessionService>();
-            _licenseeDataAccess = Substitute.For<ILicenseeDataAccess>();
+            _licenseeSettingService = Substitute.For<ILicenseeSettingService>();
             _formAuthenticationService = Substitute.For<IFormsAuthenticationService>();
             _oneBookSecurityWrapper = Substitute.For<IOneBookSecurityWrapper>();
             _logger = Substitute.For<ILogger>();
@@ -57,7 +57,7 @@
             _appSettings.DefaultBaseCurrency.Returns("EUR");
             _oneAuthenticationService = Substitute.ForPartsOf<OneAuthenticationService>(
                 _sessionService,
-                _licenseeDataAccess,
+                _licenseeSettingService,
                 _formAuthenticationService,
                 _oneBookSecurityWrapper,
                 _logger,
@@ -70,17 +70,17 @@
         {
             _oneAuthenticationService = null;
             _sessionService = null;
-            _licenseeDataAccess = null;
+            _licenseeSettingService = null;
             _formAuthenticationService = null;
             _appSettings = null;
         }
 
         [Test]
-        public void SignIn_GetLicenseeByNameReturnNull_ReturnCorrectErrorResultInfo()
+        public void SignIn_GetLicenseeInfoReturnNull_ReturnCorrectErrorResultInfo()
         {
             // Arrange
             var tokenInfo = FakeHelper.Create<OneAuthToken>();
-            _licenseeDataAccess.GetLicenseeByName(tokenInfo.SiteName).Returns(x => { return null; });
+            _licenseeSettingService.GetLicenseeInfo(tokenInfo.SiteName).Returns(x => { return null; });
 
             var expectedResult = new ResultInfo
             {
@@ -110,7 +110,7 @@
             };
 
             var licensee = FakeHelper.Create<Licensee>();
-            _licenseeDataAccess.GetLicenseeByName(tokenInfo.SiteName).Returns(licensee);
+            _licenseeSettingService.GetLicenseeInfo(tokenInfo.SiteName).Returns(licensee);
 
             var expectedResult = new ResultInfo
             {
@@ -139,7 +139,7 @@
             var tokenInfo = CreateValidFakeToken(false);
 
             var licensee = FakeHelper.Create<Licensee>();
-            _licenseeDataAccess.GetLicenseeByName(tokenInfo.SiteName).Returns(licensee);
+            _licenseeSettingService.GetLicenseeInfo(tokenInfo.SiteName).Returns(licensee);
 
             _sessionService.UserSession.Returns(x => null);
             _sessionService.LicenseeSession.Returns(x => null);
@@ -169,7 +169,7 @@
             var tokenInfo = CreateValidFakeToken(false);
 
             var licensee = FakeHelper.Create<Licensee>();
-            _licenseeDataAccess.GetLicenseeByName(tokenInfo.SiteName).Returns(licensee);
+            _licenseeSettingService.GetLicenseeInfo(tokenInfo.SiteName).Returns(licensee);
 
             _sessionService.UserSession.Returns(new UserAuthInfo());
             _sessionService.LicenseeSession.Returns(new LicenseeAuthInfo());
@@ -200,7 +200,7 @@
             var tokenInfo = CreateValidFakeToken(false);
 
             var licensee = FakeHelper.Create<Licensee>();
-            _licenseeDataAccess.GetLicenseeByName(tokenInfo.SiteName).Returns(licensee);
+            _licenseeSettingService.GetLicenseeInfo(tokenInfo.SiteName).Returns(licensee);
 
             var inValidUser = new UserAuthInfo
             {
@@ -243,7 +243,7 @@
             var tokenInfo = CreateValidFakeToken(false);
 
             var licensee = FakeHelper.Create<Licensee>();
-            _licenseeDataAccess.GetLicenseeByName(tokenInfo.SiteName).Returns(licensee);
+            _licenseeSettingService.GetLicenseeInfo(tokenInfo.SiteName).Returns(licensee);
 
             var validUser = new UserAuthInfo
             {
@@ -286,7 +286,7 @@
             var tokenInfo = CreateValidFakeToken(false);
 
             var licensee = new Licensee { Id = Math.Abs(FakeHelper.Create<int>()) + 1 };
-            _licenseeDataAccess.GetLicenseeByName(tokenInfo.SiteName).Returns(licensee);
+            _licenseeSettingService.GetLicenseeInfo(tokenInfo.SiteName).Returns(licensee);
 
             var validAnotherUser = new UserAuthInfo
             {
@@ -330,7 +330,7 @@
             var tokenInfo = CreateValidFakeToken(false, "en");
 
             var licensee = new Licensee { Id = Math.Abs(FakeHelper.Create<int>()) + 1 };
-            _licenseeDataAccess.GetLicenseeByName(tokenInfo.SiteName).Returns(licensee);
+            _licenseeSettingService.GetLicenseeInfo(tokenInfo.SiteName).Returns(licensee);
 
             var validUser = new UserAuthInfo
             {
@@ -379,7 +379,7 @@
             var tokenInfo = CreateValidFakeToken(false, tokenLanguage);
 
             var licensee = new Licensee { Id = Math.Abs(FakeHelper.Create<int>()) + 1 };
-            _licenseeDataAccess.GetLicenseeByName(tokenInfo.SiteName).Returns(licensee);
+            _licenseeSettingService.GetLicenseeInfo(tokenInfo.SiteName).Returns(licensee);
 
             var validUser = new UserAuthInfo
             {
@@ -415,7 +415,7 @@
             var tokenInfo = CreateValidFakeToken(false);
 
             var licensee = FakeHelper.Create<Licensee>();
-            _licenseeDataAccess.GetLicenseeByName(tokenInfo.SiteName).Returns(licensee);
+            _licenseeSettingService.GetLicenseeInfo(tokenInfo.SiteName).Returns(licensee);
 
             _sessionService.UserSession.Returns(x => null);
             _sessionService.LicenseeSession.Returns(x => null);
@@ -435,7 +435,6 @@
             });
         }
 
-
         [Test]
         public void SignIn_GetPermissionList_IsAdminstrator_GetFromFile_HasData_ReturnEmptyData()
         {
@@ -443,7 +442,7 @@
             var tokenInfo = CreateValidFakeToken(true);
 
             var licensee = FakeHelper.Create<Licensee>();
-            _licenseeDataAccess.GetLicenseeByName(tokenInfo.SiteName).Returns(licensee);
+            _licenseeSettingService.GetLicenseeInfo(tokenInfo.SiteName).Returns(licensee);
 
             _sessionService.UserSession.Returns(x => null);
             _sessionService.LicenseeSession.Returns(x => null);

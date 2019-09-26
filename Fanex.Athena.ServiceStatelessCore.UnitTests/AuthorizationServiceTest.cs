@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Fanex.Athena.DataAccess.Core.Users.Interfaces;
+using Fanex.Athena.Extension.Utility.Interfaces;
 using Fanex.Athena.Model.Auth;
 using Fanex.Athena.Model.Auth.DataDomain;
 using Fanex.Athena.Model.Auth.Enum;
@@ -21,11 +22,14 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
 
         private IAthorizationDataAccess _authorizationDataAccess;
 
+        private IMemoryCacheService _cache;
+
         [SetUp]
         public void SetUp()
         {
             _authorizationDataAccess = Substitute.For<IAthorizationDataAccess>();
-            _authorizationService = new AuthorizationService(_authorizationDataAccess);
+            _cache = Substitute.For<IMemoryCacheService>();
+            _authorizationService = new AuthorizationService(_authorizationDataAccess, _cache);
         }
 
         [TearDown]
@@ -33,6 +37,7 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
         {
             _authorizationDataAccess = null;
         }
+
         [Test]
         public void IsAllowedEditCommission_ApplicationModeIsParasiticAndPortalFunctionListContainCorrectKey_ReturnTrue()
         {
@@ -68,7 +73,6 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
         {
             // Arrange
             var functionList = new List<Function> {
-
                 new Function {
                     FunctionKey = PermissionKeys.CustomerInfoCommissionGroupList
                 }
@@ -87,7 +91,6 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
         {
             // Arrange
             var functionList = new List<Function> {
-
                 new Function {
                     FunctionKey = PermissionKeys.BettingTicketCenter
                 }
@@ -136,7 +139,6 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
         {
             // Arrange
             var functionList = new List<Function> {
-
                 new Function {
                     FunctionKey = PermissionKeys.CustomerInfoSpecialBA
                 }
@@ -155,7 +157,6 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
         {
             // Arrange
             var functionList = new List<Function> {
-
                 new Function {
                     FunctionKey = PermissionKeys.CustomerInfoCommissionGroupList
                 }
@@ -172,7 +173,7 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
         [Test]
         public void HasPermissionOnData_CustIdAndTransIdIsZero_ReturnTrue()
         {
-            //Arrange 
+            //Arrange
             var currencyAgent = new Dictionary<int, int[]>
             {
                 { 1, new[] { 100, 200 } }
@@ -185,13 +186,12 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
             //Assert
 
             Assert.That(result, Is.True);
-
         }
 
         [Test]
         public void HasPermissionOnData_CustBelongToUser_ReturnTrue()
         {
-            //Arrange 
+            //Arrange
             var currencyAgent = new Dictionary<int, int[]>
             {
                 { 1, new[] { 100, 200 } }
@@ -199,7 +199,6 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
 
             _authorizationDataAccess.IsCustomerBelonging(Arg.Any<int>(), Arg.Any<long>()).Returns(new Tuple<int, int>(1, 100));
 
-
             //Action
 
             var result = _authorizationService.HasPermissionOnData(currencyAgent, 0, 0);
@@ -207,14 +206,12 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
             //Assert
 
             Assert.That(result, Is.True);
-
         }
-
 
         [Test]
         public void HasPermissionOnData_CustNotBelongToUser_ReturnFalse()
         {
-            //Arrange 
+            //Arrange
             const int custId = 1;
             var currencyAgent = new Dictionary<int, int[]>
             {
@@ -229,7 +226,6 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
             //Assert
 
             Assert.That(result, Is.False);
-
         }
 
         [TestCase("alex", "alex2", "any,any2", false)]

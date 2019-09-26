@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 using Fanex.Athena.Api.StatelessBase.Attributes.Extensions;
-using Fanex.Athena.DataAccess.Core.Users.Interfaces;
 using Fanex.Athena.Model.Auth;
 using Fanex.Athena.Resources;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -55,8 +54,8 @@ namespace Fanex.Athena.Api.StatelessBase.Attributes
                     return UnauthorizeAccessHandlerAsync(actionContext, ViewResources.AccessDeniedMsg);
                 }
 
-                var licenseeDataAccess = scope.Resolve<ILicenseeDataAccess>();
-                var licensee = licenseeDataAccess.GetLicenseeByName(token.SiteName);
+                var licenseeSettingService = scope.Resolve<ILicenseeSettingService>();
+                var licensee = licenseeSettingService.GetLicenseeInfo(token.SiteName);
                 if (licensee == null)
                 {
                     LogInfo(logger, actionContext.Request, $"not found licensee with name={token.SiteName}");

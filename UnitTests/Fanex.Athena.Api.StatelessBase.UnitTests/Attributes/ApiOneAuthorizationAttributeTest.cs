@@ -6,8 +6,6 @@
     using System.Web.Http.Controllers;
 
     using Autofac;
-
-    using DataAccess.Core.Users.Interfaces;
     using Fanex.Athena.Api.StatelessBase.Attributes;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Core.DTO.Common;
@@ -21,6 +19,7 @@
 
     using ONEbook.UM.Services;
 
+    [TestFixture]
     public class ApiOneAuthorizationAttributeTest
     {
         private const string TokenKey = "X-Auth-Token";
@@ -31,7 +30,7 @@
 
         private IOneBookSecurityWrapper _oneAuthenticationService;
 
-        private ILicenseeDataAccess _licenseeDataAccess;
+        private ILicenseeSettingService _licenseeSettingService;
 
         private IMaintenanceService _maintenanceService;
 
@@ -40,7 +39,7 @@
         {
             _logger = Substitute.For<ILogger>();
             _oneAuthenticationService = Substitute.For<IOneBookSecurityWrapper>();
-            _licenseeDataAccess = Substitute.For<ILicenseeDataAccess>();
+            _licenseeSettingService = Substitute.For<ILicenseeSettingService>();
             _maintenanceService = Substitute.For<IMaintenanceService>();
         }
 
@@ -110,7 +109,7 @@
             // Assert
             Assert.Multiple(() =>
             {
-                _licenseeDataAccess.Received(1).GetLicenseeByName(token.SiteName);
+                _licenseeSettingService.Received(1).GetLicenseeInfo(token.SiteName);
                 Assert.That(result.Result.StatusCode, Is.EqualTo(HttpStatusCode.Forbidden));
             });
         }
@@ -130,7 +129,7 @@
             _oneAuthenticationService.Authenticate(TokenValue).Returns(token);
 
             var licensee = new Licensee { Id = 999 };
-            _licenseeDataAccess.GetLicenseeByName(token.SiteName).Returns(licensee);
+            _licenseeSettingService.GetLicenseeInfo(token.SiteName).Returns(licensee);
 
             // Action
             var result = attribute.ExecuteAuthorizationFilterAsync(actionContext, new CancellationToken(), null);
@@ -158,7 +157,7 @@
             };
             _oneAuthenticationService.Authenticate(TokenValue).Returns(token);
             var licensee = new Licensee { Id = 999 };
-            _licenseeDataAccess.GetLicenseeByName(token.SiteName).Returns(licensee);
+            _licenseeSettingService.GetLicenseeInfo(token.SiteName).Returns(licensee);
 
             // Action
             attribute.ExecuteAuthorizationFilterAsync(actionContext, new CancellationToken(), null);
@@ -204,7 +203,7 @@
             var builder = new ContainerBuilder();
             builder.RegisterInstance(_logger);
             builder.RegisterInstance(_oneAuthenticationService);
-            builder.RegisterInstance(_licenseeDataAccess);
+            builder.RegisterInstance(_licenseeSettingService);
             builder.RegisterInstance(_maintenanceService);
             WebApiHelper.SetupResolver(builder, actionContext);
             return actionContext;

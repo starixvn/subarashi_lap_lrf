@@ -79,8 +79,7 @@
 
             var productId = GetProductId(filterContext);
 
-            return AuthorizationService.CheckProductBelongsTo(productId, _limitedProductIds, licenseeSession.LicenseeName);
-
+            return AuthorizationService.CheckProductBelongsTo(licenseeSession.LicenseeName, productId, _limitedProductIds);
         }
 
         private int GetProductId(ActionExecutingContext filterContext)

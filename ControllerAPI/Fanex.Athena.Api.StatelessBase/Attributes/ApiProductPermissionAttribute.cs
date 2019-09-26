@@ -1,12 +1,12 @@
-﻿using Fanex.Athena.Api.StatelessBase.Attributes.Extensions;
-using Fanex.Athena.Model.Core.MetaModel;
-using Fanex.Athena.Service.StatelessCore.Interfaces;
-using System;
+﻿using System;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
+using Fanex.Athena.Api.StatelessBase.Attributes.Extensions;
+using Fanex.Athena.Model.Core.MetaModel;
+using Fanex.Athena.Service.StatelessCore.Interfaces;
 
 namespace Fanex.Athena.Api.StatelessBase.Attributes
 {
@@ -63,8 +63,7 @@ namespace Fanex.Athena.Api.StatelessBase.Attributes
 
             var productId = GetProductId(actionContext);
 
-            return authorizationService.CheckProductBelongsTo(productId, _limitedProductIds, licenseeName);
-
+            return authorizationService.CheckProductBelongsTo(licenseeName, productId, _limitedProductIds);
         }
 
         private int GetProductId(HttpActionContext actionContext)

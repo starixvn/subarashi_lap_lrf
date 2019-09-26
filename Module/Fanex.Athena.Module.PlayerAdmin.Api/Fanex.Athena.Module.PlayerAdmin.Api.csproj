@@ -98,8 +98,10 @@
     <Compile Include="Services\PlayerListService.cs" />
     <Compile Include="Services\PlayerOddsGroupService.cs" />
     <Compile Include="Services\PlayerSpecialLevelService.cs" />
+    <Compile Include="SiteSettingController.cs" />
     <Compile Include="Utilities\ResourceKeyConstants.cs" />
     <Compile Include="ViewModels\PlayerListResultViewModel.cs" />
+    <Compile Include="ViewModels\SiteSettingViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\ControllerAPI\Fanex.Athena.Api.StatelessBase\Fanex.Athena.Api.StatelessBase.csproj">

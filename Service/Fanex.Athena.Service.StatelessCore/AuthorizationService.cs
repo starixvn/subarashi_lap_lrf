@@ -11,6 +11,7 @@ namespace Fanex.Athena.Service.StatelessCore
     using System.Linq;
 
     using Fanex.Athena.DataAccess.Core.Users.Interfaces;
+    using Fanex.Athena.Extension.Utility.Interfaces;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Auth.Enum;
@@ -18,11 +19,16 @@ namespace Fanex.Athena.Service.StatelessCore
 
     public class AuthorizationService : IAuthorizationService
     {
+        private const int OneHourInSecond = 3600;
+
         private readonly IAthorizationDataAccess _authorizationDataAccess;
 
-        public AuthorizationService(IAthorizationDataAccess authorizationDataAccess)
+        private readonly IMemoryCacheService _cache;
+
+        public AuthorizationService(IAthorizationDataAccess authorizationDataAccess, IMemoryCacheService cache)
         {
             _authorizationDataAccess = authorizationDataAccess;
+            _cache = cache;
         }
 
         public bool HasPermissions(OneAuthPermission[] userPortalFunctionList, params string[] permissionKeys)
@@ -83,13 +89,20 @@ namespace Fanex.Athena.Service.StatelessCore
             return currencyAgents.Any(i => i.CurrencyId == item.Item1 && i.AgentId.Contains(item.Item2));
         }
 
-        public bool CheckProductBelongsTo(int productId, int[] limitedProductIds, string licenseeName)
+        public bool CheckProductBelongsTo(string licenseeName, int productId, int[] limitedProductIds = null)
         {
-            var isValidProduct = _authorizationDataAccess.IsProductBelonging(productId, licenseeName);
+            var cacheKey = $"Lrf_CheckBelonging_ValidateProduct_{licenseeName}_{productId}_{string.Join(string.Empty, limitedProductIds)}";
+            var isValidProduct = _cache.Get<bool?>(cacheKey);
 
-            if (!isValidProduct || limitedProductIds is null)
+            if (!isValidProduct.HasValue)
             {
-                return isValidProduct;
+                isValidProduct = _authorizationDataAccess.IsProductBelonging(productId, licenseeName);
+                _cache.Set(cacheKey, isValidProduct, OneHourInSecond);
+            }
+
+            if (!isValidProduct.Value || limitedProductIds is null)
+            {
+                return isValidProduct.Value;
             }
 
             return limitedProductIds.Contains(productId);
