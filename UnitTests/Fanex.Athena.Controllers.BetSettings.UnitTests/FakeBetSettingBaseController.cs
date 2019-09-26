@@ -33,7 +33,7 @@
             return base.GetCustomerInfo(custId);
         }
 
-        internal new async Task AssignRequiredProperties(BetSettingBaseViewModel viewModel, BetSettingMetaModel metaModel)
+        internal async Task AssignRequiredProperties(BetSettingBaseViewModel viewModel, BetSettingMetaModel metaModel)
         {
             await base.AssignRequiredPropertiesAsync(viewModel, metaModel);
         }
