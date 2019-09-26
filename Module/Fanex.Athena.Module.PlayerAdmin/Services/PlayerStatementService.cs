@@ -1,6 +1,7 @@
 ﻿namespace Fanex.Athena.Module.PlayerAdmin.Services
 {
     using System;
+    using System.Net;
     using System.Net.Http;
     using System.Text;
     using System.Threading.Tasks;
@@ -22,8 +23,6 @@
 
         private const string FormatDate = "MM-dd-yyyy";
 
-        private const int MaximumPageSize = int.MaxValue - 1;
-
         private readonly IAppSettings _appSetting;
 
         private readonly HttpClient _client;
@@ -36,7 +35,7 @@
 
         public async Task<string> GetUrl(PlayerStatementMetaModel metaModel)
         {
-            const string GetStatementPath = @"{0}Statement/Summary?cid={1}&fd={2}&td={3}&lang={4}&ps={5}&access_token={6}";
+            const string GetStatementPath = @"{0}Statement/Summary?cid={1}&fd={2}&td={3}&lang={4}&access_token={5}";
 
             var token = await GetToken(metaModel.SiteName).ConfigureAwait(false);
 
@@ -47,7 +46,6 @@
                 metaModel.FromDate.ToString(FormatDate),
                 metaModel.ToDate.ToString(FormatDate),
                 metaModel.Language,
-                MaximumPageSize,
                 token);
         }
 
@@ -59,23 +57,43 @@
 
             using (var response = await _client.PostAsync(GetTokenPath, requestContent).ConfigureAwait(false))
             {
+                if (response.Content is null)
+                {
+                    throw CreateErrorException(response.StatusCode, "Content is null", "null");
+                }
+
+                var content = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    response.Content.Dispose();
+                    throw CreateErrorException(response.StatusCode, content, content);
+                }
+
                 try
                 {
-                    response.EnsureSuccessStatusCode();
-
-                    var result = JsonConvert.DeserializeObject<ExternalServiceToken>(await response.Content.ReadAsStringAsync());
-
-                    //response.Content.Dispose();
+                    var result = JsonConvert.DeserializeObject<ExternalServiceToken>(content);
 
                     return result.AccessToken;
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
-                    var errorMessage = new StringBuilder($"HTTP Error: {e.Message}");
-                    errorMessage.AppendLine($"HTTP status code: {response.StatusCode}");
-                    throw new ServiceException(await response.Content.ReadAsStringAsync(), "External Service");
+                    throw CreateErrorException(response.StatusCode, ex.Message, content);
+                }
+                finally
+                {
+                    response.Content.Dispose();
                 }
             }
+        }
+
+        private ServiceException CreateErrorException(HttpStatusCode statusCode, string error, string content)
+        {
+            var errorMessage = new StringBuilder($"HTTP Error: {error}");
+            errorMessage.AppendLine($"HTTP status code: {statusCode}");
+            errorMessage.AppendLine($"Response Content: {content}");
+
+            return new ServiceException(errorMessage.ToString(), "External Service");
         }
 
         private string GetAuthenticationObjectAsString(string siteName)

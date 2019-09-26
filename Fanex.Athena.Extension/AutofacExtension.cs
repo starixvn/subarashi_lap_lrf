@@ -12,7 +12,7 @@ namespace Fanex.Athena.Extension
             string baseAdress, IDictionary<string, string> headerValues = null)
         {
             var endPoint = new Uri(baseAdress);
-            var httpClient = new HttpClient()
+            var httpClient = new HttpClient
             {
                 BaseAddress = endPoint
             };
