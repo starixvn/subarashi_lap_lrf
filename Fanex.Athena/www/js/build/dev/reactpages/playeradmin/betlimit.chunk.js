@@ -1786,8 +1786,6 @@ function () {
     value: function getData(param, processDataFunc, successCallBack, errorHandle) {
       var url = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_2__["default"].resolveClientUrl(Url[param.ProductId] + '/GetSetting');
       _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_1__["default"].postData(url, param).then(function (response) {
-        console.log(response.data);
-
         var _response$data = response.data,
             Data = _response$data.Data,
             setting = _objectWithoutProperties(_response$data, ["Data"]);
