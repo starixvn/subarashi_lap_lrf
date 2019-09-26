@@ -1,5 +1,6 @@
 ﻿namespace Fanex.Athena.Module.PlayerAdmin.Services
 {
+    using System;
     using System.Net.Http;
     using System.Text;
     using System.Threading.Tasks;
@@ -64,15 +65,15 @@
 
                     var result = JsonConvert.DeserializeObject<ExternalServiceToken>(await response.Content.ReadAsStringAsync());
 
-                    response.Content.Dispose();
+                    //response.Content.Dispose();
 
                     return result.AccessToken;
                 }
-                catch (HttpRequestException e)
+                catch (Exception e)
                 {
                     var errorMessage = new StringBuilder($"HTTP Error: {e.Message}");
                     errorMessage.AppendLine($"HTTP status code: {response.StatusCode}");
-                    throw new ServiceException(errorMessage.ToString(), "External Service");
+                    throw new ServiceException(await response.Content.ReadAsStringAsync(), "External Service");
                 }
             }
         }
