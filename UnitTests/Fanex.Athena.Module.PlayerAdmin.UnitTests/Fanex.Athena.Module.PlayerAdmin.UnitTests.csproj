@@ -56,6 +56,7 @@
       <HintPath>..\..\packages\System.Threading.Tasks.Extensions.4.3.0\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Mvc, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.2.6\lib\net45\System.Web.Mvc.dll</HintPath>
     </Reference>
@@ -66,6 +67,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\NumberGameBetLimitControllerTest.cs" />
     <Compile Include="Controllers\PlayerBetlistControllerTest.cs" />
     <Compile Include="Controllers\PlayerBetLimitControllerTest.cs" />
     <Compile Include="Controllers\PlayerStatementControllerTest.cs" />
@@ -89,6 +91,10 @@
       <Project>{4A5BDDBC-F707-409A-86EC-D9BC6E9D31C4}</Project>
       <Name>Fanex.Athena.UnitTest.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Infrastructure\Fanex.Athena.VendorAdapter\Fanex.Athena.VendorAdapter.csproj">
+      <Project>{CE1F7641-A14D-4AF6-9BD3-CAD4873669B4}</Project>
+      <Name>Fanex.Athena.VendorAdapter</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Model\Fanex.Athena.Model.Auth\Fanex.Athena.Model.Auth.csproj">
       <Project>{794C0345-2DDD-4FFD-A605-BB96FBB37DE8}</Project>
       <Name>Fanex.Athena.Model.Auth</Name>
@@ -100,6 +106,10 @@
     <ProjectReference Include="..\..\Module\Fanex.Athena.Module.PlayerAdmin\Fanex.Athena.Module.PlayerAdmin.csproj">
       <Project>{19150CD4-08FC-4BEC-800A-57ABD7744C41}</Project>
       <Name>Fanex.Athena.Module.PlayerAdmin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Resources\Fanex.Athena.Resources\Fanex.Athena.Resources.csproj">
+      <Project>{17B0022C-4902-4C61-908A-5DB81568DC3A}</Project>
+      <Name>Fanex.Athena.Resources</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Service\Fanex.Athena.Service.Core\Fanex.Athena.Service.Core.csproj">
       <Project>{FCFD7434-085B-4C93-848F-E1CBCEDCC5A0}</Project>
