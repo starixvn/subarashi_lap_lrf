@@ -19,6 +19,8 @@ export const currencyList = createReducer([], {});
 
 export const hasBaPermission = createReducer(false, {});
 
+export const isSubsidiary = createReducer(false, {});
+
 export const isAdvancedSearch = createReducer(false, {
     [SET_ADVANCED_SEARCH](preState, action) {
         return action.data;

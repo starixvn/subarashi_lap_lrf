@@ -1,5 +1,6 @@
 import { playerStatus } from '../constants';
 import LangHelper from '@jsroot/lib/langHelper';
+import { decode } from '@jsroot/lib/htmlHelper';
 
 export const getSpecialLevelText = (value) => {
     return value === undefined || value === null ? '' : (Number(value) === 0 ? LangHelper.getSingleResource('None') : value);
@@ -42,7 +43,7 @@ export const getErrorMessageForUpdating = (errorInfo) => {
 
     const resourceKey = isUnauthorizedResponse(errorInfo) ? 'FunctionDeniedMsg' : defaultKey;
 
-    return LangHelper.getSingleResource(resourceKey).replace(/&apos;/g, "'");
+    return decode(LangHelper.getSingleResource(resourceKey));
 }
 
 const isUnauthorizedResponse = (errorInfo) => {

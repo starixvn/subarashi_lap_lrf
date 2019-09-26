@@ -1,9 +1,5 @@
 import FactoryCommonService from '../../../../lib/factoryCommonService';
-import { systemType } from '../../../../constants/configInfo';
-
-const apiInfo = {
-    userNameSuggestion: { action: 'PlayerAdminContainer/GetSuggestionList', type: systemType.newAdmin }
-}
+import { apiSuggestion } from '../constants';
 
 export default class PlayerSuggestionService {
     constructor() {
@@ -11,11 +7,10 @@ export default class PlayerSuggestionService {
     }
 
     getSuggestionList(param) {
-        const { userNameSuggestion } = apiInfo;
         const configOption = {
             method: 'get'
         }
 
-        return this.commonService.fetchData(userNameSuggestion.type, userNameSuggestion.action, {...param }, configOption);
+        return this.commonService.fetchData(apiSuggestion.type, apiSuggestion.action, {...param }, configOption);
     }
 }

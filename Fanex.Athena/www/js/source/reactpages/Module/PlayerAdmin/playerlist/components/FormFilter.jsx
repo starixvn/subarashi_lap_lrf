@@ -27,6 +27,7 @@ export class FormFilter extends PureComponent {
         this.userNameRef = React.createRef();
 
         this.state = {
+            isValidUserName: false,
             bankAccountNumber: '',
             email: '',
             currencyIdList: this.allCurrencyString,
@@ -44,8 +45,13 @@ export class FormFilter extends PureComponent {
             const param = { ibcCustId, licenseeCustId };
             this.props.getSinglePlayer(param);
 
-            this.userNameRef.current.value = QueryString.getParam(window.location.href, 'userName');
+            const userName = QueryString.getParam(window.location.href, 'userName');
+            this.userNameRef.current.value = userName;
+            this.setState({ isValidUserName: !!userName });
         }
+
+        const { type, isSubsidiary } = this.props;
+        this.props.getSiteSetting(type, isSubsidiary);
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -74,7 +80,7 @@ export class FormFilter extends PureComponent {
         }
 
         const { pagingOption, searchPlayer, currencyList } = this.props;
-        const { specialLevel, currencyIdList, oddsGroup, ...restParam } = this.state;
+        const { specialLevel, currencyIdList, oddsGroup, isValidUserName, ...restParam } = this.state;
         const actualSpecialLevel = specialLevel.trim();
         const isSelectAllCurrency = currencyIdList.trim().split(',').length === currencyList.length;
         const isSelectAllOddsGroup = oddsGroup.trim().split(',').length === Object.keys(oddsGroupListWithStyle).length;
@@ -115,6 +121,7 @@ export class FormFilter extends PureComponent {
 
     handleUserNameChange = (value) => {
         this.userNameRef.current.value = value;
+        this.setState({ isValidUserName: !!value });
     }
 
     showUserGuide() {
@@ -131,17 +138,19 @@ export class FormFilter extends PureComponent {
             content={userGuideContent} />)
     }
 
-    _getUserNameLabel(){
-        return this.props.type === licenseeType.nonApi ? 
-        LangHelper.getSingleResource("Username") : 
-        `${LangHelper.getSingleResource("Username")}/${LangHelper.getSingleResource("VendorMemberID")}`
+    _getUserNameLabel() {
+        return this.props.type === licenseeType.nonApi ?
+            LangHelper.getSingleResource("Username") :
+            `${LangHelper.getSingleResource("Username")}/${LangHelper.getSingleResource("VendorMemberID")}`
     }
 
     render() {
-        const { bankAccountNumber, email, searchOption, ...advancedSearchParam } = this.state;
-        const { type, isAdvancedSearch, isFilterCollapsing, currencyList, getSuggestionList, hasBaPermission } = this.props;
+        const { bankAccountNumber, email, searchOption, isValidUserName, ...advancedSearchParam } = this.state;
+        const { type, isAdvancedSearch, isFilterCollapsing, currencyList, getSuggestionList, siteSetting } = this.props;
         const { currencyIdList, oddsGroup, specialLevel } = advancedSearchParam;
-        const isValidParam = !!currencyIdList && !!oddsGroup && !!specialLevel;
+
+        const isValidParam = (isValidUserName || !!bankAccountNumber || !!email) &&
+            !!currencyIdList && !!oddsGroup && !!specialLevel;
         const iconToggle = {
             tag: 'div',
             className: isFilterCollapsing ? 'chevron down' : 'chevron up',
@@ -159,7 +168,8 @@ export class FormFilter extends PureComponent {
                                 {(<SearchOption value={searchOption} onChange={this.handleChange} />)}
                             </label>
                             <UserNameInput ref={this.userNameRef} onSelectItem={(value) => this.handleUserNameChange(value)}
-                                minChar={3} getSuggestionList={getSuggestionList} searchOption={searchOption} onKeyPress={this.handlePressEnter} />
+                                minChar={3} getSuggestionList={getSuggestionList} searchOption={searchOption}
+                                onKeyPress={this.handlePressEnter} onChange={(value) => this.handleUserNameChange(value)} />
                         </div>
                     </div>
 
@@ -170,7 +180,7 @@ export class FormFilter extends PureComponent {
                     {isAdvancedSearch && <AdvancedSearch
                         currencyList={currencyList}
                         param={advancedSearchParam}
-                        hasBaPermission={hasBaPermission}
+                        isAllowedBA={siteSetting.isAllowedBA}
                         onChange={this.handleSpecificInputChange} />
                     }
 
@@ -178,7 +188,7 @@ export class FormFilter extends PureComponent {
                         <div className="form-group">
                             <div className="button-group">
                                 <button type="button" className="btn btn-submit" disabled={!isValidParam}
-                                 onClick={this.handleSubmit}>{LangHelper.getSingleResource("Submit")}</button>
+                                    onClick={this.handleSubmit}>{LangHelper.getSingleResource("Submit")}</button>
                             </div>
                         </div>
                     </div>
@@ -197,12 +207,12 @@ export class FormFilter extends PureComponent {
     }
 }
 function mapDispatchToProps(dispatch) {
-    const { searchPlayer, setAdvancedSearch, setCollapseFilter, getSuggestionList, getSinglePlayer } = ActionCreators;
-    return bindActionCreators({ searchPlayer, setAdvancedSearch, setCollapseFilter, getSuggestionList, getSinglePlayer }, dispatch);
+    const { searchPlayer, setAdvancedSearch, setCollapseFilter, getSuggestionList, getSinglePlayer, getSiteSetting } = ActionCreators;
+    return bindActionCreators({ searchPlayer, setAdvancedSearch, setCollapseFilter, getSuggestionList, getSinglePlayer, getSiteSetting }, dispatch);
 }
 function mapStateToProps(state) {
-    const { type, isAdvancedSearch, isFilterCollapsing, pagingOption, currencyList, hasBaPermission } = state;
-    return Object.assign({}, { type, isAdvancedSearch, isFilterCollapsing, pagingOption, currencyList, hasBaPermission });
+    const { type, isAdvancedSearch, isFilterCollapsing, pagingOption, currencyList, siteSetting, isSubsidiary } = state;
+    return Object.assign({}, { type, isAdvancedSearch, isFilterCollapsing, pagingOption, currencyList, siteSetting, isSubsidiary });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FormFilter);

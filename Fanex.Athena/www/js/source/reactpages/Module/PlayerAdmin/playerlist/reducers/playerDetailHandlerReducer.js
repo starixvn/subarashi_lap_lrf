@@ -1,5 +1,5 @@
-import createReducer from '../../../../lib/createReducer.js'
-import { SET_SELECTED_PLAYER, SET_SELECTED_PLAYERID_LIST, SET_SELECTED_TAB_NAME } from '../actions/types.js'
+import createReducer from '../../../../lib/createReducer.js';
+import { SET_SELECTED_PLAYER, SET_SELECTED_PLAYERID_LIST, SET_SELECTED_TAB_NAME } from '../actions/types.js';
 
 export const selectedPlayer = createReducer(null, {
     [SET_SELECTED_PLAYER](preState, action) {

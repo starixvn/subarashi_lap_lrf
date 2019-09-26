@@ -176,6 +176,10 @@ export const apiUpdateInfo = {
     updatePlayerStatus: { action: 'PlayerAdminContainer/UpdatePlayerStatus', type: systemType.newAdmin }
 }
 
+export const apiSiteSetting = { action: 'api/SiteSetting/GetSetting', type: systemType.lrf };
+
+export const apiSuggestion = { action: 'PlayerAdminContainer/GetSuggestionList', type: systemType.newAdmin };
+
 export const excludedContextMenuWithNonDeposit = [contextMenuKeys.betLimit, contextMenuKeys.statement];
 
 export const excludedContextMenuWithClosed = [contextMenuKeys.password];

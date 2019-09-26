@@ -38,12 +38,12 @@ export class AdvancedSearch extends React.Component {
     }
 
     render() {
-        const { currencyList, param, hasBaPermission } = this.props;
+        const { currencyList, param, isAllowedBA } = this.props;
         const { currencyIdList, oddsGroup, specialLevel, baFilter } = param;
         const convertedCurrencyList = this._createSelectData(currencyList, currencyIdList);
         const oddsGroupList = this._createSelectData(this.oddsGroupList, oddsGroup);
         const specialLevelList = this._createSelectData(this.specialLevelList, specialLevel);
-        const selectedBaStatus = hasBaPermission ? this.baStatusList.find(x => x.value === baFilter) : null;
+        const selectedBaStatus = isAllowedBA ? this.baStatusList.find(x => x.value === baFilter) : null;
 
         return (
             <>

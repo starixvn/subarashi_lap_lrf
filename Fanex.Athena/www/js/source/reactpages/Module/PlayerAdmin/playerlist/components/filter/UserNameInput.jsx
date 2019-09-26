@@ -3,7 +3,7 @@ import { DropdownMenu, DropdownItem } from '@jsroot/components/dropdown';
 import Timer from '@jsroot/components/utils/timer';
 
 export const UserNameInput = React.forwardRef((props, userNameRef) => {
-    const { onSelectItem, minChar, getSuggestionList, searchOption, ...inputAttributes } = props;
+    const { onSelectItem, minChar, getSuggestionList, searchOption, onChange, ...inputAttributes } = props;
 
     const [isOpenSuggestion, setIsOpenSuggestion] = useState(false);
     const [suggestionList, setSuggestionList] = useState([]);
@@ -56,6 +56,8 @@ export const UserNameInput = React.forwardRef((props, userNameRef) => {
             setIsOpenSuggestion(false);
             setSuggestionList([]);
         }
+
+        onChange && onChange(value);
     }
 
     const debounceChange = Timer.debounce(handleChange, 300);

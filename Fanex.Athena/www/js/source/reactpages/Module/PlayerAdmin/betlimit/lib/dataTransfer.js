@@ -18,8 +18,6 @@ export default class DataTransfer {
         const url = Site.resolveClientUrl(Url[param.ProductId] + '/GetSetting');
         DataService.postData(url, param)
             .then(response => {
-                console.log(response.data);
-
                 const { Data, ...setting } = response.data;
 
                 processDataFunc && processDataFunc(Data, setting);
@@ -38,9 +36,9 @@ export default class DataTransfer {
             .then(response => {
                 const result = response.data;
                 const isSuccess = Number(result.Code) === 0;
-                const title = isSuccess
-                    ? LangHelper.getSingleResource('MessageSuccess')
-                    : LangHelper.getSingleResource('Fail');
+                const title = isSuccess ?
+                    LangHelper.getSingleResource('MessageSuccess') :
+                    LangHelper.getSingleResource('Fail');
 
                 processDataFunc && processDataFunc(title, result.Message, isSuccess);
                 successCallBack && successCallBack();

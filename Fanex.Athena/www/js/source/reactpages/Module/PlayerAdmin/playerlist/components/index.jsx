@@ -5,12 +5,17 @@ import AppContainer from './AppContainer.jsx';
 import { Provider } from 'react-redux';
 import reducer from '../reducers';
 import Store from '@jsroot/lib/store';
-import { generateColumnList } from '../lib/config';
+import { buildDefaultColumnList } from '../lib/helpers/gridColumnBuilder';
 
 const { type } = window.initialState;
 const hasBaPermission = window._pConfig.hasBaPermission === 1;
-const displayedColumnList = generateColumnList(type, hasBaPermission);
-const defaultState = { ...window.initialState, displayedColumnList, hasBaPermission };
+const displayedColumnList = buildDefaultColumnList(type);
+const siteSetting = {
+  isAllowedCustomerComm: false,
+  isAllowedBA: false
+}
+
+const defaultState = { ...window.initialState, displayedColumnList, hasBaPermission, siteSetting };
 const store = Store.createStore(reducer, defaultState);
 
 const App = () => {

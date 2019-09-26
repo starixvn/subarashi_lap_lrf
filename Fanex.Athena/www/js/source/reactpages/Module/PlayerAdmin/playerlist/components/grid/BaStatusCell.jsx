@@ -9,19 +9,31 @@ import LangHelper from '@jsroot/lib/langHelper';
 import GridInteractionService from '../../lib/services/gridInteractionService';
 import { getErrorMessageForUpdating } from '../../lib/helpers/utils';
 import { generateDefaultConfirmOption, generateDefaultAlertOption, predefinedIcons } from '../../../../../lib/sweetAlert';
+import { decode } from '@jsroot/lib/htmlHelper';
+
+const deniedMsgKey = 'FunctionDeniedMsg';
 
 const BaStatusCell = (props) => {
-    const { dataItem, setPlayerList, toggleLoader, updateBaStatus, setSweetAlertOption, playerList } = props;
+    const { dataItem, setPlayerList, toggleLoader, updateBaStatus, setSweetAlertOption, playerList, hasBaPermission } = props;
     const { IbcCustId, BaStatus, OddsGroup, IsArchived } = dataItem;
 
     const handleChangeBaStatus = (event) => {
-        const isBa = event.target.checked;
-        const resourceName = isBa ? 'AlertTurnOnBAMsg' : 'AlertTurnOffBAMsg';
-        const confirmMessage = LangHelper.getSingleResource(resourceName);
-
+        event.preventDefault();
         const handleCloseAlert = () => {
             setSweetAlertOption(null);
         }
+
+        if(!hasBaPermission){
+            const message = decode(LangHelper.getSingleResource(deniedMsgKey));
+            const alertOpt = generateDefaultAlertOption(message, handleCloseAlert, null, predefinedIcons.error);
+            setSweetAlertOption(alertOpt);
+
+            return;
+        }
+
+        const isBa = event.target.checked;
+        const resourceName = isBa ? 'AlertTurnOnBAMsg' : 'AlertTurnOffBAMsg';
+        const confirmMessage = LangHelper.getSingleResource(resourceName);
 
         const cancelProps = {
             onClick: handleCloseAlert
@@ -73,8 +85,8 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-    const { playerList } = state;
-    return Object.assign({}, { playerList });
+    const { playerList, hasBaPermission } = state;
+    return Object.assign({}, { playerList, hasBaPermission });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(BaStatusCell);
