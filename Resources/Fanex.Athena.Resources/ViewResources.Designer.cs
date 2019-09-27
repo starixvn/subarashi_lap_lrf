@@ -3139,6 +3139,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Last Transfer.
+        /// </summary>
+        public static string LastTransfer {
+            get {
+                return ResourceManager.GetString("LastTransfer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Last Txn.
         /// </summary>
         public static string LastTxn {
@@ -4899,6 +4908,15 @@ namespace Fanex.Athena.Resources {
         public static string RefNo {
             get {
                 return ResourceManager.GetString("RefNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Refresh.
+        /// </summary>
+        public static string Refresh {
+            get {
+                return ResourceManager.GetString("Refresh", resourceCulture);
             }
         }
         

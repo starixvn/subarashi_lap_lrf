@@ -60,4 +60,5 @@ export const resource_cs = {
     Lose: '输',
     Draw: '和局',
     Cancelled: '已取消的',
+    LastTransaction: '最后交易'
 }

@@ -34,7 +34,6 @@ export const resource_en = {
     CustomInfo5: 'CustomInfo 5',
     CreatedDate: 'Created Date',
     LastLogin: 'Last Login',
-    LastTxn: 'Last Txn',
     BAUpdatedBy: 'BA Updated By',
     LastUpdatedBA: 'Last Updated BA',
     SpecialLevel: 'Special Level',
@@ -61,4 +60,5 @@ export const resource_en = {
     Lose: 'Lose',
     Draw: 'Draw',
     Cancelled: 'Cancelled',
+    LastTransaction: 'Last Transaction'
 }

@@ -30,7 +30,7 @@ export const ActivityRecord = ({ ibcCustId, getActivityRecord }) => {
                         <td>{LastLoginString}</td>
                     </tr>
                     <tr>
-                        <td>{ClientResourceManager.getText('LastTxn')}</td>
+                        <td>{ClientResourceManager.getText('LastTransaction')}</td>
                         <td>{LastTxn}</td>
                     </tr>
                     <tr>

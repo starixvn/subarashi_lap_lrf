@@ -149,7 +149,7 @@ export const headerText = {
     BaStatus: LangHelper.getSingleResource('BAStatus'),
     SpecialLevel: LangHelper.getSingleResource('SpecialLevel'),
     LastLoginIp: LangHelper.getSingleResource('LastLoginIP'),
-    LastTransaction: LangHelper.getSingleResource('LastTransaction'),
+    LastTransaction: LangHelper.getSingleResource('LastTransfer'),
     Email: LangHelper.getSingleResource('Email')
 }
 

@@ -2173,4 +2173,10 @@
     <value>封存</value>
     <comment>112658</comment>
   </data>
+  <data name="LastTransfer" xml:space="preserve">
+    <value>最后转帐</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>刷新</value>
+  </data>
 </root>

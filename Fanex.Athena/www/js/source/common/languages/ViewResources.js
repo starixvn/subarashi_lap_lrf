@@ -1,4 +1,4 @@
-﻿// Generated at: 09/25/2019 8:44:31 AM
+﻿// Generated at: 9/27/2019 5:38:40 PM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -342,6 +342,7 @@ LastLoginIP:"Last Login IP",
 Lastmonth:"Last month",
 LastName:"Last Name",
 LastTransaction:"Last Transaction",
+LastTransfer:"Last Transfer",
 LastTxn:"Last Txn",
 LastUpdatedBA:"Last Updated BA",
 LastUpdatedMsg:"Last Updated Special Level",
@@ -538,6 +539,7 @@ RB:"RB",
 RealName:"Real Name",
 RecommendBrowserOnReportPageMsg:"You please consider using Firefox or Chrome for better experience when page size &gt; 1,000",
 RefNo:"Ref No",
+Refresh:"Refresh",
 Refund:"Refund",
 Reject:"Reject",
 Remark:"Remark",

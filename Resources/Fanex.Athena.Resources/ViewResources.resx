@@ -2506,4 +2506,12 @@
     <value>Support data up to 18 months</value>
     <comment>112658</comment>
   </data>
+  <data name="LastTransfer" xml:space="preserve">
+    <value>Last Transfer</value>
+    <comment>112658</comment>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Refresh</value>
+    <comment>112658</comment>
+  </data>
 </root>

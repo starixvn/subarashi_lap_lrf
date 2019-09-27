@@ -1,4 +1,4 @@
-﻿// Generated at: 09/27/2019 1:00:48 PM
+﻿// Generated at: 9/27/2019 5:38:40 PM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -297,6 +297,7 @@ LastLoginIP:"最后登入IP位置",
 Lastmonth:"上个月",
 LastName:"姓",
 LastTransaction:"最后交易",
+LastTransfer:"最后转帐",
 LastTxn:"最后交易",
 LastUpdatedBA:"投注总计最后更新",
 LastUpdatedMsg:"最近更新的特殊级别",
@@ -469,6 +470,7 @@ RB:"赛马",
 RealName:"真实姓名",
 RecommendBrowserOnReportPageMsg:"若页面大小 &gt; 1,000, 请您考虑使用火狐或Chrome以获得更好的体验",
 RefNo:"注单号码",
+Refresh:"刷新",
 Refund:"退款",
 Reject:"已取消",
 Remark:"备注",
