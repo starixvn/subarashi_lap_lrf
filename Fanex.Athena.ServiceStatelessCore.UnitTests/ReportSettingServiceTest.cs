@@ -46,6 +46,15 @@
             _reportSettingService.When(x => x.GetSettingFileContent()).DoNotCallBase();
         }
 
+        [TearDown]
+        public void TearDown()
+        {
+            _cache = null;
+            _appSettings = null;
+            _fakeLicenseeSettingService = null;
+            _reportSettingService = null;
+        }
+
         [Test]
         public void GetSetting_FileContentEmpty_ReturnNull()
         {
