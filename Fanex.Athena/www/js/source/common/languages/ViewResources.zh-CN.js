@@ -1,4 +1,4 @@
-﻿// Generated at: 09/27/2019 9:44:01 AM
+﻿// Generated at: 09/27/2019 1:00:48 PM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -40,6 +40,7 @@ AmtGreaterThan30kGBP:"金额≥ 30,000英镑",
 AmtLessThan30kGBP:"金额&lt; 30,000英镑",
 Apr:"四月",
 April:"四月",
+Archived:"封存",
 AreYouSure:"您确定要继续吗?",
 Asia:"亚洲版",
 Aug:"八月",
@@ -194,7 +195,7 @@ Editedby:"编辑者",
 EditGroup:"编辑组别",
 EffectiveBettingValue:"有效投注额",
 EffectiveBettingValueNote:"有效投注额支援09/01/2014之后数据",
-Email:"封存",
+Email:"信箱",
 EnableAgCasino:"Enable AG Casino",
 EnableCashOut:"开启即时兑现",
 EnableRNGCasino:"Enable RNG Casino",

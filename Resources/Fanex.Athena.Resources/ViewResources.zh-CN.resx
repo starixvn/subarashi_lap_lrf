@@ -2054,7 +2054,7 @@
     <comment>112658</comment>
   </data>
   <data name="Email" xml:space="preserve">
-    <value>封存</value>
+    <value>信箱</value>
     <comment>112658</comment>
   </data>
   <data name="FundtransferLimit" xml:space="preserve">
@@ -2167,6 +2167,10 @@
   </data>
   <data name="WarningToLockedMsg" xml:space="preserve">
     <value>警告，此玩家将无法再复原!</value>
+    <comment>112658</comment>
+  </data>
+  <data name="Archived" xml:space="preserve">
+    <value>封存</value>
     <comment>112658</comment>
   </data>
 </root>
