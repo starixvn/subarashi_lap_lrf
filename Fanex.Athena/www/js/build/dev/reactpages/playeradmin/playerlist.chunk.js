@@ -3846,7 +3846,7 @@ var headerText = {
   BaStatus: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('BAStatus'),
   SpecialLevel: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('SpecialLevel'),
   LastLoginIp: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('LastLoginIP'),
-  LastTransaction: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('LastTransaction'),
+  LastTransaction: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('LastTransfer'),
   Email: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Email')
 };
 var gridItemDropdownHeight = {
@@ -5862,7 +5862,8 @@ var resource_cs = {
   Won: '赢',
   Lose: '输',
   Draw: '和局',
-  Cancelled: '已取消的'
+  Cancelled: '已取消的',
+  LastTransaction: '最后交易'
 };
 
 /***/ }),
@@ -5913,7 +5914,6 @@ var resource_en = {
   CustomInfo5: 'CustomInfo 5',
   CreatedDate: 'Created Date',
   LastLogin: 'Last Login',
-  LastTxn: 'Last Txn',
   BAUpdatedBy: 'BA Updated By',
   LastUpdatedBA: 'Last Updated BA',
   SpecialLevel: 'Special Level',
@@ -5939,7 +5939,8 @@ var resource_en = {
   Won: 'Won',
   Lose: 'Lose',
   Draw: 'Draw',
-  Cancelled: 'Cancelled'
+  Cancelled: 'Cancelled',
+  LastTransaction: 'Last Transaction'
 };
 
 /***/ }),
