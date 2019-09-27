@@ -87,12 +87,11 @@ namespace Fanex.Athena.Api.StatelessBase.Attributes
             var allowedFunctionKeyList = GetAllowedFunctionKeyList();
             if (allowedFunctionKeyList != null && allowedFunctionKeyList.Any())
             {
-                var hasPermission = token.Permissions.Any(i =>
+                return token.IsAdminstrator || token.Permissions.Any(i =>
                 allowedFunctionKeyList.Contains(i.FunctionKey)
                 || (i.SubFunctionKeys != null && i.SubFunctionKeys.Intersect(allowedFunctionKeyList).Any()));
-
-                return hasPermission;
             }
+
             return true;
         }
 

@@ -43,7 +43,7 @@ namespace Fanex.Athena.Web.ActionFilter
             if (authorized)
             {
                 authorized = userSession.ApplicationMode == AppMode.Parasitic ?
-                              AuthorizationServiceInstance.HasPermissions(userSession.PortalFunctionList, _permissionKeys) :
+                             userSession.IsSuperAdmin || AuthorizationServiceInstance.HasPermissions(userSession.PortalFunctionList, _permissionKeys) :
                               AuthorizationServiceInstance.HasPermissions(userSession.FunctionList, _permissionKeys);
             }
 
