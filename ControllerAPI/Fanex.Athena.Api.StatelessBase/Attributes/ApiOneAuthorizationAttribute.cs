@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 using Fanex.Athena.Api.StatelessBase.Attributes.Extensions;
+using Fanex.Athena.Extension.Helpers;
 using Fanex.Athena.Model.Auth;
 using Fanex.Athena.Resources;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -76,7 +77,7 @@ namespace Fanex.Athena.Api.StatelessBase.Attributes
             }
             catch (Exception exception)
             {
-                logger.Error(exception.Message, exception);
+                logger.Error(LogMessageHelper.GenerateMessage(exception));
                 return UnauthorizeAccessHandlerAsync(actionContext, ViewResources.AccessDeniedMsg);
             }
         }
