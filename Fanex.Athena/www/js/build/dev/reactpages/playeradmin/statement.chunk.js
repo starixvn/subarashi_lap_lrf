@@ -262,6 +262,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+var MinimumContentHeight = 200;
 var DataContent =
 /*#__PURE__*/
 function (_PureComponent) {
@@ -353,7 +354,7 @@ function (_PureComponent) {
       if (this.contentRef.current) {
         var height = window.innerHeight - this.contentRef.current.getBoundingClientRect().top - 20;
         this.setState({
-          height: height
+          height: height > MinimumContentHeight ? height : MinimumContentHeight
         });
       }
     }
