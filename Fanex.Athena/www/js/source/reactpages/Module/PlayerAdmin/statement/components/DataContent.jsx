@@ -8,6 +8,8 @@ import NoDataTitle from '@jsroot/components/NoDataTitle';
 import Timer from '@jsroot/components/utils/timer';
 import { Breadcrumb } from '@9softstudio/react-breadcrumb';
 
+const MinimumContentHeight = 200;
+
 export class DataContent extends PureComponent {
     constructor(props) {
         super(props);
@@ -46,7 +48,7 @@ export class DataContent extends PureComponent {
         if (this.contentRef.current) {
             const height = window.innerHeight - this.contentRef.current.getBoundingClientRect().top - 20;
 
-            this.setState({ height: height });
+            this.setState({ height: height > MinimumContentHeight ? height : MinimumContentHeight });
         }
     }
 
