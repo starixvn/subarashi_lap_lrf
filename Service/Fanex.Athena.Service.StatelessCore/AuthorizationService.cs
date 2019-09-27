@@ -91,13 +91,12 @@ namespace Fanex.Athena.Service.StatelessCore
 
         public bool CheckProductBelongsTo(string licenseeName, int productId, int[] limitedProductIds = null)
         {
-            if (limitedProductIds != null)
+            if (limitedProductIds != null && !limitedProductIds.Contains(productId))
             {
-                return limitedProductIds.Contains(productId);
+                return false;
             }
 
-            var allowedProductIdString = limitedProductIds == null ? string.Empty : string.Join(string.Empty, limitedProductIds);
-            var cacheKey = $"Lrf_CheckBelonging_ValidateProduct_{licenseeName}_{productId}_{allowedProductIdString}";
+            var cacheKey = $"Lrf_CheckBelonging_ValidateProduct_{licenseeName}_{productId}";
 
             if (_cache.Contains(cacheKey))
             {
