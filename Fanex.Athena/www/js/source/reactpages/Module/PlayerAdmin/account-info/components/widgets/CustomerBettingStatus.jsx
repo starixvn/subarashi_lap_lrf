@@ -14,7 +14,12 @@ const defaultDataSetItem = {
     backgroundColor: backgroundColorList
 }
 const defaultChartData = {
-    labels: ['Won', 'Lose', 'Draw', 'Cancelled'],
+    labels: [
+        ClientResourceManager.getText('Won'), 
+        ClientResourceManager.getText('Lose'), 
+        ClientResourceManager.getText('Draw'), 
+        ClientResourceManager.getText('Cancelled')
+    ],
     datasets: [],
     borderWidth: 2,
     hoverBorderWidth: 10,

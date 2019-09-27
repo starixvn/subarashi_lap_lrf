@@ -36,7 +36,7 @@ export const resource_en = {
     LastLogin: 'Last Login',
     LastTxn: 'Last Txn',
     BAUpdatedBy: 'BA Updated By',
-    LastUpdatedBy: 'Last Updated By',
+    LastUpdatedBA: 'Last Updated BA',
     SpecialLevel: 'Special Level',
     LastUpdatedSpecialLevel: 'Last Updated Special Level',
     Margin: 'Margin',
@@ -54,5 +54,11 @@ export const resource_en = {
     PlayerProfile: 'Player Profile',
     ActivityRecord: 'Activity Record',
     PlaceholderBankAccount: 'Search by Exactly Bank Account Number',
-    PlaceholderEmail: 'Search by Exactly Email'
+    PlaceholderEmail: 'Search by Exactly Email',
+    Gender: 'Gender',
+    Address: 'Address',
+    Won: 'Won',
+    Lose: 'Lose',
+    Draw: 'Draw',
+    Cancelled: 'Cancelled',
 }
