@@ -46,19 +46,19 @@ export const fields = {
 }
 
 export const columnList = [
-    { key: fields.Status, value: 'Status', show: true },
-    { key: fields.UserName, value: 'Username', show: true },
-    { key: fields.SystemId, value: 'SystemId', show: true },
-    { key: fields.RealName, value: 'Real Name', show: true },
-    { key: fields.Currency, value: 'Currency', show: true },
-    { key: fields.CurrentBalance, value: 'Current Balance', show: true },
-    { key: fields.OutstandingBalance, value: 'Outstanding Balance', show: true },
-    { key: fields.OddsGroup, value: 'Odds Group', show: true },
-    { key: fields.BaStatus, value: 'BA Status', show: true },
-    { key: fields.SpecialLevel, value: 'Special Level', show: true },
-    { key: fields.LastLoginIp, value: 'Last Login IP', show: true },
-    { key: fields.LastTransaction, value: 'Last Transaction', show: true },
-    { key: fields.Email, value: 'Email', show: true }
+    { key: fields.Status, value: LangHelper.getSingleResource('Status'), show: true },
+    { key: fields.UserName, value: LangHelper.getSingleResource('Username'), show: true },
+    { key: fields.SystemId, value: LangHelper.getSingleResource('SystemId'), show: true },
+    { key: fields.RealName, value: LangHelper.getSingleResource('RealName'), show: true },
+    { key: fields.Currency, value: LangHelper.getSingleResource('Currency'), show: true },
+    { key: fields.CurrentBalance, value: LangHelper.getSingleResource('CurrentBalance'), show: true },
+    { key: fields.OutstandingBalance, value: LangHelper.getSingleResource('OutstandingBalance'), show: true },
+    { key: fields.OddsGroup, value: LangHelper.getSingleResource('OddsGroup'), show: true },
+    { key: fields.BaStatus, value: LangHelper.getSingleResource('BAStatus'), show: true },
+    { key: fields.SpecialLevel, value: LangHelper.getSingleResource('SpecialLevel'), show: true },
+    { key: fields.LastLoginIp, value: LangHelper.getSingleResource('LastLoginIP'), show: true },
+    { key: fields.LastTransaction, value: LangHelper.getSingleResource('LastTransaction'), show: true },
+    { key: fields.Email, value: LangHelper.getSingleResource('Email'), show: true }
 ];
 
 export const contextMenuKeys = {

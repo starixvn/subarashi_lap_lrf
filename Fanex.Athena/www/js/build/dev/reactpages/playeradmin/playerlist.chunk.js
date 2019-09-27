@@ -3709,55 +3709,55 @@ var fields = {
 };
 var columnList = [{
   key: fields.Status,
-  value: 'Status',
+  value: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Status'),
   show: true
 }, {
   key: fields.UserName,
-  value: 'Username',
+  value: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Username'),
   show: true
 }, {
   key: fields.SystemId,
-  value: 'SystemId',
+  value: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('SystemId'),
   show: true
 }, {
   key: fields.RealName,
-  value: 'Real Name',
+  value: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('RealName'),
   show: true
 }, {
   key: fields.Currency,
-  value: 'Currency',
+  value: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Currency'),
   show: true
 }, {
   key: fields.CurrentBalance,
-  value: 'Current Balance',
+  value: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('CurrentBalance'),
   show: true
 }, {
   key: fields.OutstandingBalance,
-  value: 'Outstanding Balance',
+  value: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('OutstandingBalance'),
   show: true
 }, {
   key: fields.OddsGroup,
-  value: 'Odds Group',
+  value: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('OddsGroup'),
   show: true
 }, {
   key: fields.BaStatus,
-  value: 'BA Status',
+  value: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('BAStatus'),
   show: true
 }, {
   key: fields.SpecialLevel,
-  value: 'Special Level',
+  value: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('SpecialLevel'),
   show: true
 }, {
   key: fields.LastLoginIp,
-  value: 'Last Login IP',
+  value: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('LastLoginIP'),
   show: true
 }, {
   key: fields.LastTransaction,
-  value: 'Last Transaction',
+  value: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('LastTransaction'),
   show: true
 }, {
   key: fields.Email,
-  value: 'Email',
+  value: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Email'),
   show: true
 }];
 var contextMenuKeys = {
@@ -5818,7 +5818,51 @@ var resource_cs = {
   Margin: '利润',
   SingleCustomer: '单一会员',
   BettingTicketCenter: '注单中心',
-  CustomerWinLoss: '会员輸贏'
+  CustomerWinLoss: '会员輸贏',
+  NoSportsbookData: '没有体育平台资料',
+  PlayerBettingStatisticsTitle: '玩家投注统计(月到日)',
+  FastCrossLink: '快速连结',
+  BasedOnSportsbook: '基于体育平台资料',
+  AverageBetSize: '平均投注量',
+  Winnings: '赢',
+  Loss: '输',
+  NetWinLoss: '净输赢',
+  PlayerProfile: '玩家个人资料',
+  ActivityRecord: '活动纪录',
+  MemberId: '会员序号',
+  FirstName: '名字',
+  LastName: '姓名',
+  OperatorId: '厂商ID',
+  SiteCode: '网站代码',
+  ProductCode: '商品代码',
+  CustomInfo1: '玩家信息1',
+  CustomInfo2: '玩家信息2',
+  CustomInfo3: '玩家信息3',
+  CustomInfo4: '玩家信息4',
+  CustomInfo5: '玩家信息5',
+  AgUserId: 'AG使用者ID',
+  GoldDeluxeUserId: 'GD真人娱乐场平台使用者ID',
+  VoidBridgeUserId: 'VB使用者ID',
+  ExchangeUserId: 'Exchange使用者ID',
+  Gender: '性别',
+  DateOfBirth: '生日',
+  Address: '地址',
+  City: '城市',
+  Town: '城镇',
+  State: '州',
+  ZipCode: '邮政编码',
+  SecurityQuestion: '安全问题',
+  SecurityCode: '完全代码',
+  WhereHear: '您是如何知道我们的',
+  PreferredUserName: '使用者名称偏好',
+  PreferredCurrency: '币别偏好',
+  PreferredOdds: '赔率偏好',
+  PreferredLanguage: '语言偏好',
+  LastUpdatedBA: '最后更新BA',
+  Won: '赢',
+  Lose: '输',
+  Draw: '和局',
+  Cancelled: '已取消的'
 };
 
 /***/ }),
@@ -5871,7 +5915,7 @@ var resource_en = {
   LastLogin: 'Last Login',
   LastTxn: 'Last Txn',
   BAUpdatedBy: 'BA Updated By',
-  LastUpdatedBy: 'Last Updated By',
+  LastUpdatedBA: 'Last Updated BA',
   SpecialLevel: 'Special Level',
   LastUpdatedSpecialLevel: 'Last Updated Special Level',
   Margin: 'Margin',
@@ -5889,7 +5933,13 @@ var resource_en = {
   PlayerProfile: 'Player Profile',
   ActivityRecord: 'Activity Record',
   PlaceholderBankAccount: 'Search by Exactly Bank Account Number',
-  PlaceholderEmail: 'Search by Exactly Email'
+  PlaceholderEmail: 'Search by Exactly Email',
+  Gender: 'Gender',
+  Address: 'Address',
+  Won: 'Won',
+  Lose: 'Lose',
+  Draw: 'Draw',
+  Cancelled: 'Cancelled'
 };
 
 /***/ }),
