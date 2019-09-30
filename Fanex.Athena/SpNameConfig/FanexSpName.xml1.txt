@@ -2,6 +2,7 @@
 
 // Generated helper templates
 // Generated items
+// Fanex.Athena\SpNameConfig\FanexSpName.BACKUPMNL.xml
 // Fanex.Athena\SpNameConfig\FanexSpName.Staging.xml
 // Fanex.Athena\SpNameConfig\FanexSpName.PRO.xml
 // Fanex.Athena\SpNameConfig\FanexSpName.SIT.xml
