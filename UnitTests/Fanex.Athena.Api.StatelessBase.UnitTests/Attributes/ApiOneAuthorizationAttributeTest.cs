@@ -187,7 +187,7 @@
             attribute.ExecuteAuthorizationFilterAsync(actionContext, new CancellationToken(), null);
 
             // Assert
-            _logger.Received(1).Error(exception.Message, exception);
+            _logger.Received(1).Error(Arg.Is<string>(x => !string.IsNullOrEmpty(x)));
         }
 
         private HttpActionContext CreateActionContext(bool hasAuthToken = false)
