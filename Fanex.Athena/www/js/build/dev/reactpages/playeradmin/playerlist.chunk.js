@@ -2688,7 +2688,8 @@ var OddsGroupCell = function OddsGroupCell(props) {
   var handleToggleOddsGroup = function handleToggleOddsGroup(event) {
     var currentActivePlayer = Object(_lib_helpers_playerDataBuilder__WEBPACK_IMPORTED_MODULE_7__["buildCurrentActivePlayer"])(dataItem);
     setCurrentActivePlayer(currentActivePlayer);
-    var newPosition = _lib_services_gridInteractionService__WEBPACK_IMPORTED_MODULE_6__["default"].getNextDropdownPosition(event.target, oddsGroupDropdownPosition);
+    var dropdownName = 'oddsGroupDropdown';
+    var newPosition = _lib_services_gridInteractionService__WEBPACK_IMPORTED_MODULE_6__["default"].getNextDropdownPosition(event.target, oddsGroupDropdownPosition, dropdownName);
     setOddsGroupDropdownPosition(newPosition);
   };
 
@@ -3006,7 +3007,8 @@ var SpecialLevelCell = function SpecialLevelCell(props) {
   var handleToggleSpecialLevel = function handleToggleSpecialLevel(event) {
     var currentActivePlayer = Object(_lib_helpers_playerDataBuilder__WEBPACK_IMPORTED_MODULE_8__["buildCurrentActivePlayer"])(dataItem);
     setCurrentActivePlayer(currentActivePlayer);
-    var newPosition = _lib_services_gridInteractionService__WEBPACK_IMPORTED_MODULE_6__["default"].getNextDropdownPosition(event.target, specialLevelDropdownPosition);
+    var dropdownName = 'specialLevelDropdown';
+    var newPosition = _lib_services_gridInteractionService__WEBPACK_IMPORTED_MODULE_6__["default"].getNextDropdownPosition(event.target, specialLevelDropdownPosition, dropdownName);
     setSpecialLevelDropdownPosition(newPosition);
   };
 
@@ -3238,7 +3240,8 @@ var StatusCell = function StatusCell(props) {
   var handleToggleStatus = function handleToggleStatus(event) {
     var currentActivePlayer = Object(_lib_helpers_playerDataBuilder__WEBPACK_IMPORTED_MODULE_6__["buildCurrentActivePlayer"])(dataItem);
     setCurrentActivePlayer(currentActivePlayer);
-    var newPosition = _lib_services_gridInteractionService__WEBPACK_IMPORTED_MODULE_5__["default"].getNextDropdownPosition(event.target, statusDropdownPosition);
+    var dropdownName = 'statusDropdown';
+    var newPosition = _lib_services_gridInteractionService__WEBPACK_IMPORTED_MODULE_5__["default"].getNextDropdownPosition(event.target, statusDropdownPosition, dropdownName);
     setStatusDropdownPosition(newPosition);
   };
 
