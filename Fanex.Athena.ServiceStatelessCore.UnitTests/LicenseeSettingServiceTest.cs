@@ -3,7 +3,7 @@
     using System.Collections.Generic;
 
     using Extension.Utility.Interfaces;
-
+    using Fanex.Athena.DataAccess.Core.Users.Interfaces;
     using Fanex.Athena.Service.StatelessCore;
     using Fanex.Athena.UnitTest.Common.Helpers;
 
@@ -21,13 +21,15 @@
 
         private LicenseeSettingService _licenseeSettingService;
         private IMemoryCacheService _cache;
+        private ILicenseeDataAccess _licenseeDataAccess;
 
         [SetUp]
         public void SetUp()
         {
             _cache = Substitute.For<IMemoryCacheService>();
+            _licenseeDataAccess = Substitute.For<ILicenseeDataAccess>();
 
-            _licenseeSettingService = Substitute.ForPartsOf<LicenseeSettingService>(_cache);
+            _licenseeSettingService = Substitute.ForPartsOf<LicenseeSettingService>(_cache, _licenseeDataAccess);
             _licenseeSettingService.When(x => x.GetFakeLicenseeSettingContent()).DoNotCallBase();
         }
 
