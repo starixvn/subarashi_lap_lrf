@@ -72,7 +72,8 @@
                 var metaModel = new PlayerRunningBetListMetalModel
                 {
                     SortBy = sortBy,
-                    SortOrder = sortOrder
+                    SortOrder = sortOrder,
+                    IsExport = false
                 };
 
                 var language = FakeHelper.Create<string>();
@@ -84,7 +85,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    _betListApiClient.Received(1).PostAsync<dynamic>(
+                    _betListApiClient.Received(1).PostAsyncString(
                         Arg.Is<string>(x => x == "/PlayerAdminBetList/GetBetList"),
                         Arg.Is<PlayerRunningBetListMetalModel>(x => x.SortBy == expectedSortBy && x.SortOrder == expectedSortOrder),
                         Arg.Is<string>(x => x == language));
@@ -93,7 +94,7 @@
         }
 
         [TestCase(1, 1)]
-        [TestCase(1000, 500)]
+        [TestCase(5000, 2000)]
         public async Task GetRunningBetList_WhenCall_CallApiWithCorrectPageSizeParameter(int pageSize, int expectedPageSize)
         {
             using (var controller = CreateController())
@@ -101,7 +102,8 @@
                 // Arrange
                 var metaModel = new PlayerRunningBetListMetalModel
                 {
-                    PageSize = pageSize
+                    PageSize = pageSize,
+                    IsExport = false
                 };
 
                 var language = FakeHelper.Create<string>();
@@ -113,7 +115,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    _betListApiClient.Received(1).PostAsync<dynamic>(
+                    _betListApiClient.Received(1).PostAsyncString(
                         Arg.Is<string>(x => x == "/PlayerAdminBetList/GetBetList"),
                         Arg.Is<PlayerRunningBetListMetalModel>(x => x.PageSize == expectedPageSize),
                         Arg.Is<string>(x => x == language));
@@ -134,7 +136,7 @@
                 _betListApiClient.PostAsyncStream("/PlayerAdminBetList/Export", metaModel, language).Returns(Task.FromResult<Stream>(new MemoryStream(0)));
 
                 // Action
-                var result = await controller.GetRunningBetList(metaModel);
+                await controller.GetRunningBetList(metaModel);
 
                 // Assert
                 Assert.Multiple(() =>
