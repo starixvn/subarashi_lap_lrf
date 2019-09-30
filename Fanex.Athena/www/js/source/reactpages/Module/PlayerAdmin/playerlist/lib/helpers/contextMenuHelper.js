@@ -1,4 +1,10 @@
-import { excludedContextMenuWithNonDeposit, excludedContextMenuWithClosed, excludedContextMenuWithArchived } from '../constants';
+import {
+    excludedContextMenuWithNonDeposit,
+    excludedContextMenuWithClosed,
+    excludedContextMenuWithArchived,
+    contextMenuList,
+    playerStatusByName
+} from '../constants';
 
 export const isShowContextMenuItem = (item, isDeposit, isArchived, isClosed) => {
     if (!isDeposit) {
@@ -14,4 +20,13 @@ export const isShowContextMenuItem = (item, isDeposit, isArchived, isClosed) => 
     }
 
     return true;
+}
+
+export const getActiveTabList = (player, tabList) => {
+    const { isDeposit, isArchived, status } = player;
+    return contextMenuList.filter(item => {
+        const isClosedPlayer = status === playerStatusByName.Closed;
+        return !!tabList.find(t => item.tabName === t.Name) &&
+            isShowContextMenuItem(item, isDeposit, isArchived, isClosedPlayer);
+    });
 }

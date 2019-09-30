@@ -28,7 +28,7 @@ export default class GridHelper {
         )
     }
 
-    static calculateTopPosition(dropdownHeight, currentTop) {
+    static calculateTopPosition(dropdownHeight = 0, currentTop) {
         const innerHeight = window.innerHeight;
         const expectedHeight = dropdownHeight + currentTop + 20;
 

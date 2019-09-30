@@ -4,9 +4,7 @@ import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../../actions';
 
 import { DropdownMenu, DropdownItem } from '@jsroot/components/dropdown';
-import { contextMenuList, playerStatusByName } from '../../lib/constants';
-import { isShowContextMenuItem } from '../../lib/helpers/contextMenuHelper';
-
+import { getActiveTabList } from '../../lib/helpers/contextMenuHelper';
 
 export const ContextMenu = (props) => {
     const { setSelectedPlayer, currentActivePlayer, setSelectedTabName, getTabList, contextMenu } = props;
@@ -35,13 +33,8 @@ export const ContextMenu = (props) => {
     let activeMenuList = [];
 
     if (currentActivePlayer) {
-        const { isDeposit, isArchived, status } = currentActivePlayer;
-
         const tabList = getTabList();
-        activeMenuList = contextMenuList.filter(item => {
-            const isClosedPlayer = status === playerStatusByName.Closed;
-            return !!tabList.find(t => item.tabName === t.Name) && isShowContextMenuItem(item, isDeposit, isArchived, isClosedPlayer)
-        });
+        activeMenuList = getActiveTabList(currentActivePlayer, tabList);
     }
 
     return (

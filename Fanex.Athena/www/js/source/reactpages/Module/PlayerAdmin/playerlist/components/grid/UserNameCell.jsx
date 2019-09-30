@@ -4,9 +4,12 @@ import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../../actions';
 import GridHelper from '../../lib/helpers/gridHelper';
 import { buildSelectedPlayer, buildCurrentActivePlayer } from '../../lib/helpers/playerDataBuilder';
+import { getActiveTabList } from '../../lib/helpers/contextMenuHelper';
+
+const itemContextMenuHeight = 28;
 
 export const UserNameCell = (props) => {
-    const { dataItem, setSelectedPlayer, setCurrentActivePlayer, setContextMenu, contextMenu, setSelectedTabName } = props;
+    const { dataItem, setSelectedPlayer, setCurrentActivePlayer, setContextMenu, contextMenu, setSelectedTabName, getTabList } = props;
 
     const handleSelectPlayer = (event) => {
         event.preventDefault();
@@ -19,7 +22,11 @@ export const UserNameCell = (props) => {
         event.preventDefault();
         const { isOpen } = contextMenu;
         if (!isOpen) {
-            const contextMenuHeight = 140;
+            const currentActivePlayer = buildCurrentActivePlayer(dataItem);
+            const tabList = getTabList();
+            const activeMenuList = getActiveTabList(currentActivePlayer, tabList);
+
+            const contextMenuHeight = itemContextMenuHeight * activeMenuList.length;
             const rect = event.target.getBoundingClientRect();
             const position = {
                 x: rect.left - 10,
@@ -27,8 +34,6 @@ export const UserNameCell = (props) => {
             };
 
             setContextMenu({ position, isOpen: true });
-
-            const currentActivePlayer = buildCurrentActivePlayer(dataItem);
             setCurrentActivePlayer(currentActivePlayer);
         }
     }
@@ -55,8 +60,8 @@ export const UserNameCell = (props) => {
 }
 
 function mapDispatchToProps(dispatch) {
-    const { setSelectedPlayer, setCurrentActivePlayer, setContextMenu, setSelectedTabName } = ActionCreators;
-    return bindActionCreators({ setSelectedPlayer, setCurrentActivePlayer, setContextMenu, setSelectedTabName }, dispatch);
+    const { setSelectedPlayer, setCurrentActivePlayer, setContextMenu, setSelectedTabName, getTabList } = ActionCreators;
+    return bindActionCreators({ setSelectedPlayer, setCurrentActivePlayer, setContextMenu, setSelectedTabName, getTabList }, dispatch);
 }
 
 function mapStateToProps(state) {
