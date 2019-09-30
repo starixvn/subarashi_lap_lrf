@@ -80,7 +80,7 @@ export const CustomerBettingStatus = (props) => {
     useEffect(() => {
         const fetchData = () => {
             const { ibcCustId } = props;
-            const params = { ibcCustId };
+            const params = {  custId };
             props.getCustomerBettingStatus(params)
                 .then(response => {
                     setData(response.data);

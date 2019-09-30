@@ -34,9 +34,9 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
             _dbFactory.GetObjectDb("Lrf_PlayerBettingStatistics").Returns(objectDb);
             var metaModel = new PlayerBettingStatisticsMetaModel
             {
-                IbcCustId = 1,
-                AgentListXml = "xmlData",
-                MoveBetsDay = new DateTime(2019, 8, 15),
+                CustId = 1,
+                BalanceUpDay = new DateTime(2019, 9, 1),
+                MoveBetsDay = new DateTime(2019, 9, 2),
                 FromDate = new DateTime(2019, 9, 1),
                 ToDate = new DateTime(2019, 9, 5),
             };
@@ -53,11 +53,11 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
             // Assert
             Assert.Multiple(() =>
             {
-                objectDb.Received(1).SetParameterValue("CustID", metaModel.IbcCustId);
-                objectDb.Received(1).SetParameterValue("AgentList", metaModel.AgentListXml);
+                objectDb.Received(1).SetParameterValue("CustID", metaModel.CustId);
                 objectDb.Received(1).SetParameterValue("FromDate", metaModel.FromDate);
                 objectDb.Received(1).SetParameterValue("ToDate", metaModel.ToDate);
                 objectDb.Received(1).SetParameterValue("MoveBetsDay", metaModel.MoveBetsDay);
+                objectDb.Received(1).SetParameterValue("BalanceUpDay", metaModel.BalanceUpDay);
             });
         }
 

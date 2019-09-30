@@ -30,11 +30,11 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
 
         private static void AssignParam(IObjectDb objectDb, PlayerBettingStatisticsMetaModel metaModel)
         {
-            objectDb.SetParameterValue("CustID", metaModel.IbcCustId);
+            objectDb.SetParameterValue("CustID", metaModel.CustId);
             objectDb.SetParameterValue("FromDate", metaModel.FromDate);
             objectDb.SetParameterValue("ToDate", metaModel.ToDate);
             objectDb.SetParameterValue("MoveBetsDay", metaModel.MoveBetsDay);
-            objectDb.SetParameterValue("AgentList", metaModel.AgentListXml);
+            objectDb.SetParameterValue("BalanceUpDay", metaModel.BalanceUpDay);
         }
 
         private static PlayerBettingStatistics ReadData(IObjectDb objectDb)
