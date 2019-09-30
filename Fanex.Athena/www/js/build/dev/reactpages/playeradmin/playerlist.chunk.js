@@ -2529,8 +2529,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/actions/index.js");
 /* harmony import */ var _jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/components/dropdown */ "./www/js/source/reactpages/components/dropdown/index.js");
-/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
-/* harmony import */ var _lib_helpers_contextMenuHelper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../lib/helpers/contextMenuHelper */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/contextMenuHelper.js");
+/* harmony import */ var _lib_helpers_contextMenuHelper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../lib/helpers/contextMenuHelper */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/contextMenuHelper.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -2538,7 +2537,6 @@ function _nonIterableRest() { throw new TypeError("Invalid attempt to destructur
 function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 
 
 
@@ -2596,16 +2594,8 @@ var ContextMenu = function ContextMenu(props) {
   var activeMenuList = [];
 
   if (currentActivePlayer) {
-    var isDeposit = currentActivePlayer.isDeposit,
-        isArchived = currentActivePlayer.isArchived,
-        status = currentActivePlayer.status;
     var tabList = getTabList();
-    activeMenuList = _lib_constants__WEBPACK_IMPORTED_MODULE_5__["contextMenuList"].filter(function (item) {
-      var isClosedPlayer = status === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["playerStatusByName"].Closed;
-      return !!tabList.find(function (t) {
-        return item.tabName === t.Name;
-      }) && Object(_lib_helpers_contextMenuHelper__WEBPACK_IMPORTED_MODULE_6__["isShowContextMenuItem"])(item, isDeposit, isArchived, isClosedPlayer);
-    });
+    activeMenuList = Object(_lib_helpers_contextMenuHelper__WEBPACK_IMPORTED_MODULE_5__["getActiveTabList"])(currentActivePlayer, tabList);
   }
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -3467,6 +3457,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/actions/index.js");
 /* harmony import */ var _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../lib/helpers/gridHelper */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/gridHelper.js");
 /* harmony import */ var _lib_helpers_playerDataBuilder__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../lib/helpers/playerDataBuilder */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/playerDataBuilder.js");
+/* harmony import */ var _lib_helpers_contextMenuHelper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../lib/helpers/contextMenuHelper */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/contextMenuHelper.js");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -3477,13 +3468,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
+var itemContextMenuHeight = 28;
 var UserNameCell = function UserNameCell(props) {
   var dataItem = props.dataItem,
       setSelectedPlayer = props.setSelectedPlayer,
       setCurrentActivePlayer = props.setCurrentActivePlayer,
       setContextMenu = props.setContextMenu,
       contextMenu = props.contextMenu,
-      setSelectedTabName = props.setSelectedTabName;
+      setSelectedTabName = props.setSelectedTabName,
+      getTabList = props.getTabList;
 
   var handleSelectPlayer = function handleSelectPlayer(event) {
     event.preventDefault();
@@ -3497,7 +3491,10 @@ var UserNameCell = function UserNameCell(props) {
     var isOpen = contextMenu.isOpen;
 
     if (!isOpen) {
-      var contextMenuHeight = 140;
+      var currentActivePlayer = Object(_lib_helpers_playerDataBuilder__WEBPACK_IMPORTED_MODULE_5__["buildCurrentActivePlayer"])(dataItem);
+      var tabList = getTabList();
+      var activeMenuList = Object(_lib_helpers_contextMenuHelper__WEBPACK_IMPORTED_MODULE_6__["getActiveTabList"])(currentActivePlayer, tabList);
+      var contextMenuHeight = itemContextMenuHeight * activeMenuList.length;
       var rect = event.target.getBoundingClientRect();
       var position = {
         x: rect.left - 10,
@@ -3507,7 +3504,6 @@ var UserNameCell = function UserNameCell(props) {
         position: position,
         isOpen: true
       });
-      var currentActivePlayer = Object(_lib_helpers_playerDataBuilder__WEBPACK_IMPORTED_MODULE_5__["buildCurrentActivePlayer"])(dataItem);
       setCurrentActivePlayer(currentActivePlayer);
     }
   };
@@ -3540,12 +3536,14 @@ function mapDispatchToProps(dispatch) {
   var setSelectedPlayer = _actions__WEBPACK_IMPORTED_MODULE_3__["ActionCreators"].setSelectedPlayer,
       setCurrentActivePlayer = _actions__WEBPACK_IMPORTED_MODULE_3__["ActionCreators"].setCurrentActivePlayer,
       setContextMenu = _actions__WEBPACK_IMPORTED_MODULE_3__["ActionCreators"].setContextMenu,
-      setSelectedTabName = _actions__WEBPACK_IMPORTED_MODULE_3__["ActionCreators"].setSelectedTabName;
+      setSelectedTabName = _actions__WEBPACK_IMPORTED_MODULE_3__["ActionCreators"].setSelectedTabName,
+      getTabList = _actions__WEBPACK_IMPORTED_MODULE_3__["ActionCreators"].getTabList;
   return Object(redux__WEBPACK_IMPORTED_MODULE_2__["bindActionCreators"])({
     setSelectedPlayer: setSelectedPlayer,
     setCurrentActivePlayer: setCurrentActivePlayer,
     setContextMenu: setContextMenu,
-    setSelectedTabName: setSelectedTabName
+    setSelectedTabName: setSelectedTabName,
+    getTabList: getTabList
   }, dispatch);
 }
 
@@ -3855,7 +3853,7 @@ var headerText = {
 var gridItemDropdownHeight = {
   'specialLevelDropdown': 231,
   'oddsGroupDropdown': 126,
-  'statusDropdown': 112
+  'statusDropdown': 56
 };
 var stringTypeFields = [fields.UserName, fields.RealName, fields.Currency, fields.OddsGroup];
 var apiInfo = {
@@ -3921,12 +3919,13 @@ var emailPattern = '^([a-zA-Z0-9_\\.\\-])+\\@(([a-zA-Z0-9\\-])+\\.)+([a-zA-Z0-9]
 /*!*************************************************************************************************!*\
   !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/contextMenuHelper.js ***!
   \*************************************************************************************************/
-/*! exports provided: isShowContextMenuItem */
+/*! exports provided: isShowContextMenuItem, getActiveTabList */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isShowContextMenuItem", function() { return isShowContextMenuItem; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getActiveTabList", function() { return getActiveTabList; });
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
 
 var isShowContextMenuItem = function isShowContextMenuItem(item, isDeposit, isArchived, isClosed) {
@@ -3943,6 +3942,17 @@ var isShowContextMenuItem = function isShowContextMenuItem(item, isDeposit, isAr
   }
 
   return true;
+};
+var getActiveTabList = function getActiveTabList(player, tabList) {
+  var isDeposit = player.isDeposit,
+      isArchived = player.isArchived,
+      status = player.status;
+  return _constants__WEBPACK_IMPORTED_MODULE_0__["contextMenuList"].filter(function (item) {
+    var isClosedPlayer = status === _constants__WEBPACK_IMPORTED_MODULE_0__["playerStatusByName"].Closed;
+    return !!tabList.find(function (t) {
+      return item.tabName === t.Name;
+    }) && isShowContextMenuItem(item, isDeposit, isArchived, isClosedPlayer);
+  });
 };
 
 /***/ }),
@@ -4082,7 +4092,9 @@ function () {
     }
   }, {
     key: "calculateTopPosition",
-    value: function calculateTopPosition(dropdownHeight, currentTop) {
+    value: function calculateTopPosition() {
+      var dropdownHeight = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+      var currentTop = arguments.length > 1 ? arguments[1] : undefined;
       var innerHeight = window.innerHeight;
       var expectedHeight = dropdownHeight + currentTop + 20;
       return expectedHeight > innerHeight ? currentTop - dropdownHeight : currentTop;
