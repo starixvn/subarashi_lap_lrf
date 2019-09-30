@@ -18,7 +18,8 @@ export const SpecialLevelCell = (props) => {
     const handleToggleSpecialLevel = (event) => {
         const currentActivePlayer = buildCurrentActivePlayer(dataItem);
         setCurrentActivePlayer(currentActivePlayer);
-        const newPosition = GridInteractionService.getNextDropdownPosition(event.target, specialLevelDropdownPosition);
+        const dropdownName = 'specialLevelDropdown';
+        const newPosition = GridInteractionService.getNextDropdownPosition(event.target, specialLevelDropdownPosition, dropdownName);
         setSpecialLevelDropdownPosition(newPosition);
     }
 

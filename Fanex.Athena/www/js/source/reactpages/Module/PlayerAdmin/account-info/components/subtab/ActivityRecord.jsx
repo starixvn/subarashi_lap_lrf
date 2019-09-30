@@ -41,7 +41,7 @@ export const ActivityRecord = ({ ibcCustId, getActivityRecord }) => {
                         <td>{BAUpdatedBy}</td>
                     </tr>
                     <tr>
-                        <td>{ClientResourceManager.getText('LastUpdatedBy')}</td>
+                        <td>{ClientResourceManager.getText('LastUpdatedBA')}</td>
                         <td>{LastUpdateBAString}</td>
                     </tr>
                     <tr>

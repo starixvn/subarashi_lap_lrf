@@ -17,7 +17,8 @@ export const OddsGroupCell = (props) => {
     const handleToggleOddsGroup = (event) => {
         const currentActivePlayer = buildCurrentActivePlayer(dataItem);
         setCurrentActivePlayer(currentActivePlayer);
-        const newPosition = GridInteractionService.getNextDropdownPosition(event.target, oddsGroupDropdownPosition);
+        const dropdownName = 'oddsGroupDropdown';
+        const newPosition = GridInteractionService.getNextDropdownPosition(event.target, oddsGroupDropdownPosition, dropdownName);
         setOddsGroupDropdownPosition(newPosition);
     }
 

@@ -19,7 +19,8 @@ export const StatusCell = (props) => {
     const handleToggleStatus = (event) => {
         const currentActivePlayer = buildCurrentActivePlayer(dataItem);
         setCurrentActivePlayer(currentActivePlayer);
-        const newPosition = GridInteractionService.getNextDropdownPosition(event.target, statusDropdownPosition);
+        const dropdownName = 'statusDropdown';
+        const newPosition = GridInteractionService.getNextDropdownPosition(event.target, statusDropdownPosition, dropdownName);
         setStatusDropdownPosition(newPosition);
     }
 
