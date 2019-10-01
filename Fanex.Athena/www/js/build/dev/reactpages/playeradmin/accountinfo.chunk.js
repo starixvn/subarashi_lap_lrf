@@ -20878,7 +20878,7 @@ var CustomerBettingStatus = function CustomerBettingStatus(props) {
     var fetchData = function fetchData() {
       var ibcCustId = props.ibcCustId;
       var params = {
-        custId: custId
+        custId: ibcCustId
       };
       props.getCustomerBettingStatus(params).then(function (response) {
         setData(response.data);
