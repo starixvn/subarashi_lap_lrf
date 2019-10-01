@@ -189,7 +189,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.Module.PlayerA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.Module.PlayerAdmin.Api", "Module\Fanex.Athena.Module.PlayerAdmin.Api\Fanex.Athena.Module.PlayerAdmin.Api.csproj", "{831FFA8D-8F5E-4ABD-AC6A-5660B71B1795}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.ServiceStatelessCore.UnitTests", "Fanex.Athena.ServiceStatelessCore.UnitTests\Fanex.Athena.ServiceStatelessCore.UnitTests.csproj", "{C929C398-8094-44E6-AEB1-63BDBD58F973}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.ServiceStatelessCore.UnitTests", "UnitTests\Fanex.Athena.ServiceStatelessCore.UnitTests\Fanex.Athena.ServiceStatelessCore.UnitTests.csproj", "{C929C398-8094-44E6-AEB1-63BDBD58F973}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.Model.Auth", "Model\Fanex.Athena.Model.Auth\Fanex.Athena.Model.Auth.csproj", "{794C0345-2DDD-4FFD-A605-BB96FBB37DE8}"
 EndProject
@@ -213,7 +213,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.Module.Notific
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.Module.Notification.Report.UnitTests", "UnitTests\Fanex.Athena.Module.Notification.Report.UnitTests\Fanex.Athena.Module.Notification.Report.UnitTests.csproj", "{DD3D17B1-FA6B-4D4D-8BFB-B4FB0A2E47A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.Module.Notification.Api.UnitTests", "Fanex.Athena.Module.Notification.Api.UnitTests\Fanex.Athena.Module.Notification.Api.UnitTests.csproj", "{2B0DADD9-DEC1-4352-9246-1FEA2123D852}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.Module.Notification.Api.UnitTests", "UnitTests\Fanex.Athena.Module.Notification.Api.UnitTests\Fanex.Athena.Module.Notification.Api.UnitTests.csproj", "{2B0DADD9-DEC1-4352-9246-1FEA2123D852}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.Module.PlayerAdmin.UnitTests", "UnitTests\Fanex.Athena.Module.PlayerAdmin.UnitTests\Fanex.Athena.Module.PlayerAdmin.UnitTests.csproj", "{AFEA4703-4D47-40F5-B3D6-66CABC57CC62}"
 EndProject
