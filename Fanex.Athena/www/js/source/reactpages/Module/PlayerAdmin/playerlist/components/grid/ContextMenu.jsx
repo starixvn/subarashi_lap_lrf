@@ -7,7 +7,7 @@ import { DropdownMenu, DropdownItem } from '@jsroot/components/dropdown';
 import { getActiveTabList } from '../../lib/helpers/contextMenuHelper';
 
 export const ContextMenu = (props) => {
-    const { setSelectedPlayer, currentActivePlayer, setSelectedTabName, getTabList, contextMenu } = props;
+    const { setSelectedPlayer, currentActivePlayer, setSelectedTabName, getTabList, contextMenu, type } = props;
     const { position, isOpen: isOpenContextMenu } = contextMenu;
     const [isOpen, setIsOpen] = useState(false);
     const handleMouseEnter = () => {
@@ -34,7 +34,7 @@ export const ContextMenu = (props) => {
 
     if (currentActivePlayer) {
         const tabList = getTabList();
-        activeMenuList = getActiveTabList(currentActivePlayer, tabList);
+        activeMenuList = getActiveTabList(currentActivePlayer, tabList, type);
     }
 
     return (
@@ -42,7 +42,10 @@ export const ContextMenu = (props) => {
             <DropdownMenu onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} isOpen={isOpenContextMenu || isOpen}>
                 {
                     activeMenuList.map(item => {
-                        return <DropdownItem key={item.key} onClick={() => handleClickMenu(item.tabName)}>{item.name}</DropdownItem>
+                        const subTabName = item.subTabName;
+                        const selectedTabName = subTabName || item.tabName;
+
+                        return <DropdownItem key={item.key} onClick={() => handleClickMenu(selectedTabName)}>{item.name}</DropdownItem>
                     })
                 }
             </DropdownMenu>
@@ -56,8 +59,8 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-    const { currentActivePlayer, contextMenu } = state;
-    return Object.assign({}, { currentActivePlayer, contextMenu });
+    const { currentActivePlayer, contextMenu, type } = state;
+    return Object.assign({}, { currentActivePlayer, contextMenu, type });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContextMenu);

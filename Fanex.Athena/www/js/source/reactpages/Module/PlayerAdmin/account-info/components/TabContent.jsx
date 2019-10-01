@@ -8,7 +8,8 @@ import ActivityRecord from './subtab/ActivityRecord';
 import SubTab from './SubTab';
 
 export const TabContent = (props) => {
-    const [selectedTab, setSelectedTab] = useState(tabKeys.playerProfile);
+    const initialSubtab = props.subTabKey || tabKeys.playerProfile;
+    const [selectedTab, setSelectedTab] = useState(initialSubtab);
     const tabListByLicenseeType = props.licenseeType === licenseeType.api ? tabList.filter(x => x.name !== tabKeys.bankInformation) : [...tabList];
 
     const getStyle = (tabKey) => ({ display: selectedTab === tabKey ? 'block' : 'none' })
@@ -31,8 +32,8 @@ export const TabContent = (props) => {
 }
 
 function mapStateToProps(state) {
-    const { licenseeType } = state;
-    return Object.assign({}, { licenseeType });
+    const { licenseeType, subTabKey } = state;
+    return Object.assign({}, { licenseeType, subTabKey });
 };
 
 export default connect(mapStateToProps, null)(TabContent);

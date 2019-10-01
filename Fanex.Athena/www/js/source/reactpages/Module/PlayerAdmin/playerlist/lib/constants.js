@@ -57,11 +57,12 @@ export const columnList = [
     { key: fields.BaStatus, value: LangHelper.getSingleResource('BAStatus'), show: true },
     { key: fields.SpecialLevel, value: LangHelper.getSingleResource('SpecialLevel'), show: true },
     { key: fields.LastLoginIp, value: LangHelper.getSingleResource('LastLoginIP'), show: true },
-    { key: fields.LastTransaction, value: LangHelper.getSingleResource('LastTransaction'), show: true },
+    { key: fields.LastTransaction, value: LangHelper.getSingleResource('LastTransfer'), show: true },
     { key: fields.Email, value: LangHelper.getSingleResource('Email'), show: true }
 ];
 
 export const contextMenuKeys = {
+    bankInformation: 'bankInformation',
     note: 'note',
     password: 'password',
     fundtransferLimit: 'fundtransferLimit',
@@ -79,6 +80,7 @@ export const tabNames = {
 export const excludedTabNameWithNonDepositAndArchived = [tabNames.statement, tabNames.betlist, tabNames.betLimit];
 
 export const contextMenuList = [
+    { key: contextMenuKeys.bankInformation, name: LangHelper.getSingleResource('BankInformation'), tabName: 'lblPlayerAdminPlayerInfo', subTabName: contextMenuKeys.bankInformation },
     { key: contextMenuKeys.note, name: LangHelper.getSingleResource('Note'), tabName: 'lblPlayerAdminNote' },
     { key: contextMenuKeys.password, name: LangHelper.getSingleResource('Password'), tabName: 'lblPlayerAdminSetting' },
     { key: contextMenuKeys.fundtransferLimit, name: LangHelper.getSingleResource('FundtransferLimit'), tabName: 'lblPlayerAdminFundTransfer' },
@@ -185,6 +187,8 @@ export const excludedContextMenuWithNonDeposit = [contextMenuKeys.betLimit, cont
 export const excludedContextMenuWithClosed = [contextMenuKeys.password];
 
 export const excludedContextMenuWithArchived = [contextMenuKeys.password, contextMenuKeys.betLimit, contextMenuKeys.statement];
+
+export const excludedContextMenuWithApiLicensee = [contextMenuKeys.password, contextMenuKeys.bankInformation, contextMenuKeys.personalMessage];
 
 export const playerTypes = {
     nonDeposit: 1,

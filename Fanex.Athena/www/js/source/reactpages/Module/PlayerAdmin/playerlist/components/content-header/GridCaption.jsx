@@ -65,14 +65,16 @@ export class GridCaption extends React.Component {
     }
 
     handleExportExcel = () => {
-        const { playerList, param, displayedColumnList, exportExcel } = this.props;
+        const { playerList, param, displayedColumnList, exportExcel, selectedPlayer } = this.props;
         if (displayedColumnList.filter(x => x.show).length === 0) {
             window.alert(LangHelper.getSingleResource("NoInfo"));
             return;
         }
 
         const displayedColumn = buildDisplayedColumnObject(displayedColumnList);
-        exportExcel(playerList, param, displayedColumn);
+        const dataList = selectedPlayer ? [playerList.find(item => item.LicenseeCustId === selectedPlayer.licenseeCustId)] : playerList;
+
+        exportExcel(dataList, param, displayedColumn);
     }
 
     render() {

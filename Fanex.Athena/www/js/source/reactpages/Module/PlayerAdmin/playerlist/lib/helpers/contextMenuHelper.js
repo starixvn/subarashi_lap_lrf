@@ -3,7 +3,10 @@ import {
     excludedContextMenuWithClosed,
     excludedContextMenuWithArchived,
     contextMenuList,
-    playerStatusByName
+    playerStatusByName,
+    licenseeType,
+    contextMenuKeys,
+    excludedContextMenuWithApiLicensee
 } from '../constants';
 
 export const isShowContextMenuItem = (item, isDeposit, isArchived, isClosed) => {
@@ -22,10 +25,16 @@ export const isShowContextMenuItem = (item, isDeposit, isArchived, isClosed) => 
     return true;
 }
 
-export const getActiveTabList = (player, tabList) => {
+export const getActiveTabList = (player, tabList, licType) => {
     const { isDeposit, isArchived, status } = player;
+
     return contextMenuList.filter(item => {
+        if (licType === licenseeType.api && excludedContextMenuWithApiLicensee.includes(item.key)) {
+            return false;
+        }
+
         const isClosedPlayer = status === playerStatusByName.Closed;
+
         return !!tabList.find(t => item.tabName === t.Name) &&
             isShowContextMenuItem(item, isDeposit, isArchived, isClosedPlayer);
     });

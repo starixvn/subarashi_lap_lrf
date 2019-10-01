@@ -9,7 +9,16 @@ import { getActiveTabList } from '../../lib/helpers/contextMenuHelper';
 const itemContextMenuHeight = 28;
 
 export const UserNameCell = (props) => {
-    const { dataItem, setSelectedPlayer, setCurrentActivePlayer, setContextMenu, contextMenu, setSelectedTabName, getTabList } = props;
+    const { 
+        dataItem, 
+        setSelectedPlayer, 
+        setCurrentActivePlayer, 
+        setContextMenu, 
+        contextMenu, 
+        setSelectedTabName, 
+        getTabList, 
+        type 
+    } = props;
 
     const handleSelectPlayer = (event) => {
         event.preventDefault();
@@ -24,7 +33,7 @@ export const UserNameCell = (props) => {
         if (!isOpen) {
             const currentActivePlayer = buildCurrentActivePlayer(dataItem);
             const tabList = getTabList();
-            const activeMenuList = getActiveTabList(currentActivePlayer, tabList);
+            const activeMenuList = getActiveTabList(currentActivePlayer, tabList, type);
 
             const contextMenuHeight = itemContextMenuHeight * activeMenuList.length;
             const rect = event.target.getBoundingClientRect();
@@ -65,8 +74,8 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-    const { contextMenu } = state;
-    return Object.assign({}, { contextMenu });
+    const { contextMenu, type } = state;
+    return Object.assign({}, { contextMenu, type });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserNameCell);

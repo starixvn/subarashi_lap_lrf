@@ -13,7 +13,8 @@ export const StatusCell = (props) => {
     const { Status, IsOnline, IsDeposit } = dataItem;
 
     const statusName = playerStatus[Status];
-    const classname = 'status-text ' + statusName;
+    const statusKey = Object.keys(playerStatusByName).find(x => playerStatusByName[x] === Status);
+    const classname = 'status-text ' + statusKey;
     const canUpdate = Status !== playerStatusByName.Archived && Status !== playerStatusByName.Closed;
 
     const handleToggleStatus = (event) => {
