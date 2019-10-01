@@ -21,7 +21,6 @@ Fanex.Athena.Service.Core.UnitTests ^
 Fanex.Athena.Service.Customer.UnitTests ^
 Fanex.Athena.Service.Forecast.UnitTests ^
 Fanex.Athena.Service.Report.UnitTests ^
-Fanex.Athena.Service.Casino.UnitTests ^
 Fanex.Athena.ServiceStatelessCore.UnitTests ^
 Fanex.Athena.Excel.Base.UnitTests ^
 Fanex.Athena.Excel.Customer.UnitTests ^
