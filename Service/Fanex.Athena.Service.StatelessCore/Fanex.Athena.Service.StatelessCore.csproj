@@ -142,7 +142,7 @@
     <Compile Include="ReportAPIClient.cs" />
     <Compile Include="RestSharpExtension\NewtonsoftJsonSerializer.cs" />
     <Compile Include="Utility\AuthParameterHelper.cs" />
-    <Compile Include="Utility\BetListApiClient.cs" />
+    <Compile Include="BetListApiClient.cs" />
     <Compile Include="Utility\KeanOceanBusinessHelper.cs" />
   </ItemGroup>
   <ItemGroup>

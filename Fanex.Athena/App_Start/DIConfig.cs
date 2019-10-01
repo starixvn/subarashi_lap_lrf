@@ -68,8 +68,9 @@ namespace Fanex.Athena
                   x.Resolve<IAppSettings>(),
                   x.ResolveNamed<HttpClient>("EXTServiceTokenClient")
                 )).As<IPlayerStatementService>()
-                .InstancePerRequest();
+                .InstancePerDependency();
             var container = builder.Build();
+
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
         }
@@ -88,6 +89,7 @@ namespace Fanex.Athena
             builder.RegisterType<MaintenanceService>().As<IMaintenanceService>();
 
             builder.RegisterInstance(Logger.Log).As<Logging.ILogger>();
+            builder.RegisterType<RestSharp.RestClient>().As<RestSharp.IRestClient>().InstancePerDependency();
 
             builder.Register(x => (ICitiXchangeClient)Activator.GetObject(typeof(ICitiXchangeClient), ConfigurationManager.AppSettings["ExchangeProductApiHost"]))
                 .As<ICitiXchangeClient>()

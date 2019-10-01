@@ -1,4 +1,4 @@
-﻿namespace Fanex.Athena.Service.StatelessCore.Utility
+﻿namespace Fanex.Athena.Service.StatelessCore
 {
     using System;
     using System.IO;
@@ -24,20 +24,18 @@
         private const string LANGUAGEKEY = "Language";
 
         private readonly IAppSettings _appSetting;
-
-        public BetListApiClient(IAppSettings appSettings)
+        private readonly IRestClient _restClient;
+        public BetListApiClient(IAppSettings appSettings, IRestClient restClient)
         {
             _appSetting = appSettings;
+            _restClient = restClient;
         }
 
         private async Task<T> HandleAsync<T>(string path, object value,
             string language, Func<IRestResponse, Task<T>> codeBlock, int timeout = 0)
         {
             const int oneMinInMillisecond = 60000;
-            var client = new RestClient
-            {
-                BaseUrl = new Uri(_appSetting.BetListApiHostUrl)
-            };
+            _restClient.BaseUrl = new Uri(_appSetting.BetListApiHostUrl);
 
             var request = new RestRequest(path)
             {
@@ -49,9 +47,9 @@
             request.Method = Method.POST;
             if (timeout > 0)
             {
-                client.Timeout = oneMinInMillisecond * timeout;
+                _restClient.Timeout = oneMinInMillisecond * timeout;
             }
-            var result = await client.ExecuteTaskAsync(request).ConfigureAwait(false);
+            var result = await _restClient.ExecuteTaskAsync(request).ConfigureAwait(false);
 
             if (result.ResponseStatus != ResponseStatus.Completed || result.StatusCode != HttpStatusCode.OK)
             {
