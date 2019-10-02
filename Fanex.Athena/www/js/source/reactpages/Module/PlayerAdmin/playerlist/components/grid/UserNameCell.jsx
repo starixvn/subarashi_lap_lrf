@@ -5,19 +5,20 @@ import { ActionCreators } from '../../actions';
 import GridHelper from '../../lib/helpers/gridHelper';
 import { buildSelectedPlayer, buildCurrentActivePlayer } from '../../lib/helpers/playerDataBuilder';
 import { getActiveTabList } from '../../lib/helpers/contextMenuHelper';
+import { playerStatusByName } from '../../lib/constants';
 
 const itemContextMenuHeight = 28;
 
 export const UserNameCell = (props) => {
-    const { 
-        dataItem, 
-        setSelectedPlayer, 
-        setCurrentActivePlayer, 
-        setContextMenu, 
-        contextMenu, 
-        setSelectedTabName, 
-        getTabList, 
-        type 
+    const {
+        dataItem,
+        setSelectedPlayer,
+        setCurrentActivePlayer,
+        setContextMenu,
+        contextMenu,
+        setSelectedTabName,
+        getTabList,
+        type
     } = props;
 
     const handleSelectPlayer = (event) => {
@@ -54,16 +55,23 @@ export const UserNameCell = (props) => {
         }
     }
 
+    const { Status } = dataItem;
+    const isClosedOrArchived = Status === playerStatusByName.Closed || Status === playerStatusByName.Archived;
+
     return (
         <div className="username-cell">
             <button className="btn-default btn-link username-link"
                 onClick={handleSelectPlayer}>
                 {dataItem.UserName}
             </button>
-            <button className="btn-default btn-link btn-icon cell-menu"
-                onMouseEnter={handleEnterContextMenu} onMouseLeave={handleLeaveContextMenu}>
-                <i className="material-icons">edit</i>
-            </button>
+            {
+                !isClosedOrArchived && (
+                    <button className="btn-default btn-link btn-icon cell-menu"
+                        onMouseEnter={handleEnterContextMenu} onMouseLeave={handleLeaveContextMenu}>
+                        <i className="material-icons">edit</i>
+                    </button>
+                )
+            }
         </div>
     )
 }
