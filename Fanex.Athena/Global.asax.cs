@@ -24,6 +24,7 @@ namespace Fanex.Athena
     using Fanex.Athena.Web.RouterConfig;
     using Logging;
     using Logging.RabbitMQ;
+    using MessagePack.Resolvers;
     using RemotingRef;
 
     public class MvcApplication : HttpApplication
@@ -94,6 +95,11 @@ namespace Fanex.Athena
                 .FromApplication("Fanex.LAP");
 
                 DIConfig.Register();
+                CompositeResolver.RegisterAndSetAsDefault(
+                       // resolver custom types first
+                       NativeDateTimeResolver.Instance,
+                       // finally use standard resolver
+                       ContractlessStandardResolver.Instance);
             }
         }
 

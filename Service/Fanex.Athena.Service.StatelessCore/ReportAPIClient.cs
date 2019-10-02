@@ -4,10 +4,13 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+
 using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
+
 using MessagePack;
 using MessagePack.Resolvers;
+
 using Newtonsoft.Json;
 
 namespace Fanex.Athena.Service.StatelessCore
@@ -38,9 +41,8 @@ namespace Fanex.Athena.Service.StatelessCore
                 HttpResponseMessage response = null;
                 if (mediaType == MediaType.MsgPack)
                 {
-                    httpRequest.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(MsgPackContentType));
-                    using (var content = new ByteArrayContent(MessagePackSerializer.Serialize(value,
-                        ContractlessStandardResolver.Instance)))
+                    httpRequest.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(MsgPackContentType));                    
+                    using (var content = new ByteArrayContent(MessagePackSerializer.Serialize(value)))
                     {
                         content.Headers.ContentType = new MediaTypeHeaderValue(MsgPackContentType);
                         httpRequest.Content = content;
