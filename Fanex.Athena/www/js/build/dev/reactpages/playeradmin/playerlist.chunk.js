@@ -2401,7 +2401,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_services_gridInteractionService__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../lib/services/gridInteractionService */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/services/gridInteractionService.js");
 /* harmony import */ var _lib_helpers_utils__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../lib/helpers/utils */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/utils.js");
 /* harmony import */ var _lib_sweetAlert__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../../../lib/sweetAlert */ "./www/js/source/reactpages/lib/sweetAlert.js");
-/* harmony import */ var _jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @jsroot/lib/htmlHelper */ "./www/js/source/reactpages/lib/htmlHelper.js");
 
 
 
@@ -2412,8 +2411,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-var deniedMsgKey = 'FunctionDeniedMsg';
 
 var BaStatusCell = function BaStatusCell(props) {
   var dataItem = props.dataItem,
@@ -2431,16 +2428,13 @@ var BaStatusCell = function BaStatusCell(props) {
   var handleChangeBaStatus = function handleChangeBaStatus(event) {
     event.preventDefault();
 
+    if (!hasBaPermission) {
+      return;
+    }
+
     var handleCloseAlert = function handleCloseAlert() {
       setSweetAlertOption(null);
     };
-
-    if (!hasBaPermission) {
-      var message = Object(_jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_10__["decode"])(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource(deniedMsgKey));
-      var alertOpt = Object(_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_9__["generateDefaultAlertOption"])(message, handleCloseAlert, null, _lib_sweetAlert__WEBPACK_IMPORTED_MODULE_9__["predefinedIcons"].error);
-      setSweetAlertOption(alertOpt);
-      return;
-    }
 
     var isBa = event.target.checked;
     var resourceName = isBa ? 'AlertTurnOnBAMsg' : 'AlertTurnOffBAMsg';
@@ -2487,8 +2481,9 @@ var BaStatusCell = function BaStatusCell(props) {
   };
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
-    className: "center-align"
+    className: "center-align" + "".concat(!hasBaPermission ? ' ba-disabled' : '')
   }, !IsArchived && BaStatus !== undefined && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Switcher__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    disabled: !hasBaPermission,
     checked: BaStatus,
     onChange: handleChangeBaStatus
   }));
@@ -3803,11 +3798,6 @@ var tabNames = {
 var tabNameByContextMenu = _defineProperty({}, contextMenuKeys.bankInformation, tabNames.playerInfo);
 var excludedTabNameWithNonDepositAndArchived = [tabNames.statement, tabNames.betlist, tabNames.betLimit];
 var contextMenuList = [{
-  key: contextMenuKeys.bankInformation,
-  name: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('BankInformation'),
-  tabName: 'lblPlayerAdminPlayerInfo',
-  subTabName: contextMenuKeys.bankInformation
-}, {
   key: contextMenuKeys.note,
   name: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Note'),
   tabName: 'lblPlayerAdminNote'
@@ -3815,6 +3805,11 @@ var contextMenuList = [{
   key: contextMenuKeys.password,
   name: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Password'),
   tabName: 'lblPlayerAdminSetting'
+}, {
+  key: contextMenuKeys.bankInformation,
+  name: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('BankInformation'),
+  tabName: 'lblPlayerAdminPlayerInfo',
+  subTabName: contextMenuKeys.bankInformation
 }, {
   key: contextMenuKeys.fundtransferLimit,
   name: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('FundtransferLimit'),

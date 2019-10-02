@@ -465,10 +465,11 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::after {
 .switch label {
   cursor: pointer; }
   .switch label .lever {
-    background-color: #DFDFDF;
+    background-color: #fff;
     width: 40px;
     height: 18px;
-    margin: 0; }
+    margin: 0;
+    border: 1px solid #a7a0a0; }
     .switch label .lever:before {
       content: "";
       position: absolute;
@@ -481,8 +482,8 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::after {
       background-color: #919191;
       width: 15px;
       height: 15px;
-      top: 1px;
-      left: 0.5px; }
+      top: 0;
+      left: 0; }
   .switch label input[type=checkbox]:checked + .lever {
     background-color: #CA3232; }
     .switch label input[type=checkbox]:checked + .lever:before {
@@ -491,6 +492,10 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::after {
       color: #fff; }
     .switch label input[type=checkbox]:checked + .lever:after {
       background-color: #fff; }
+  .switch label input[type=checkbox][disabled] + .lever {
+    background-color: #e9ecef; }
+  .switch label input[type=checkbox][disabled]:checked + .lever {
+    background-color: #f16d6d; }
 
 /* The container <div> - needed to position the dropdown content */
 .dropdown {
