@@ -23,7 +23,13 @@ export class FormFilter extends Component {
         const requestParam = this.props.requestParam;
 
         this.props.toggleLoader(true);
-        Service.export(requestParam, () => { this.props.toggleLoader(false) });
+        Service.export(
+            requestParam,
+            () => { this.props.toggleLoader(false) },
+            () => {
+                Service.showErrorMsg();
+                this.props.toggleLoader(false);
+            });
     }
 
     render() {

@@ -1,6 +1,7 @@
 ﻿namespace Fanex.Athena.Module.PlayerAdmin.Controllers
 {
     using System.Linq;
+    using System.Net;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using System.Web.SessionState;
@@ -69,11 +70,16 @@
                     SessionService.UserSession.Language).ConfigureAwait(false));
         }
 
-        public async Task<FileStreamResult> ExportRunningBetListDataAsync(PlayerRunningBetListMetalModel metaModel)
+        public async Task<ActionResult> ExportRunningBetListDataAsync(PlayerRunningBetListMetalModel metaModel)
         {
             var stream = await _betListApiClient.PostAsyncStream("/PlayerAdminBetList/Export",
                 metaModel,
                 SessionService.UserSession.Language).ConfigureAwait(false);
+
+            if (stream is null || stream.Length == 0)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.NoContent);
+            }
 
             return File(stream, "application/octet-stream");
         }

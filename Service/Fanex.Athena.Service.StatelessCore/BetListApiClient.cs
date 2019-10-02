@@ -51,7 +51,7 @@
             }
             var result = await _restClient.ExecuteTaskAsync(request).ConfigureAwait(false);
 
-            if (result.ResponseStatus != ResponseStatus.Completed || result.StatusCode != HttpStatusCode.OK)
+            if (result.ResponseStatus != ResponseStatus.Completed || (result.StatusCode != HttpStatusCode.OK && result.StatusCode != HttpStatusCode.NoContent))
             {
                 var errorMessage = new StringBuilder(
                     $"Http Error ={result.ErrorMessage}\n Error occur when query betlist data");

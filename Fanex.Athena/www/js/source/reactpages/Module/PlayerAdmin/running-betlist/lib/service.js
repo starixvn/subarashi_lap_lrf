@@ -36,7 +36,7 @@ export default class Service {
         return LangHelper.getSingleResource('Total');
     }
 
-    static export(param, callback) {
+    static export(param, callback, errorHandle) {
         const url = Site.resolveClientUrl(DataApi);
         const exportParam = Object.assign({}, param, { IsExport: true });
         DataService.getFile(url, exportParam).then((response) => {
@@ -49,6 +49,9 @@ export default class Service {
             }
 
             callback();
+        })
+        .catch(error => {
+            errorHandle && errorHandle();
         });
     }
 
