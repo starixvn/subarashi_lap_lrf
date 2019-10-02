@@ -55,7 +55,7 @@
             {
                 var errorMessage = new StringBuilder(
                     $"Http Error ={result.ErrorMessage}\n Error occur when query betlist data");
-                errorMessage.AppendLine($"HTTP status code ={ result.StatusCode }");
+                errorMessage.AppendLine($"\n HTTP status code ={ result.StatusCode }");
                 throw new ServiceException(errorMessage.ToString(), "BetListApiClient");
             }
 
@@ -64,7 +64,7 @@
 
         public async Task<HttpResponseMessage> PostAsync(string path, object value, string language, int timeout = 0)
         {
-            return await HandleAsync<HttpResponseMessage>(path, value, language, async (x) =>
+            return await HandleAsync(path, value, language, async (x) =>
           {
               var result = new HttpResponseMessage(x.StatusCode)
               {

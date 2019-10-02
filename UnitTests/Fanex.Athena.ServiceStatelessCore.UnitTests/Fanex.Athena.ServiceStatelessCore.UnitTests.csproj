@@ -51,6 +51,9 @@
     <Reference Include="nunit.framework, Version=3.10.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\..\packages\NUnit.3.10.1\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\RestSharp.105.2.3\lib\net46\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -83,6 +86,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthorizationServiceTest.cs" />
+    <Compile Include="BetListApiClientTest.cs" />
     <Compile Include="BetTypeServiceTest.cs" />
     <Compile Include="FunctionServiceTest.cs" />
     <Compile Include="FunctionStorageTest.cs" />
