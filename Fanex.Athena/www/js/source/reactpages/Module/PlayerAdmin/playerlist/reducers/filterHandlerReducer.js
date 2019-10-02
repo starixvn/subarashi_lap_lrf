@@ -18,6 +18,8 @@ export const type = createReducer(null, {});
 export const currencyList = createReducer([], {});
 
 export const hasBaPermission = createReducer(false, {});
+export const hasOddsGroupPermission = createReducer(false, {});
+export const hasSpecialLevelPermission = createReducer(false, {});
 
 export const isSubsidiary = createReducer(false, {});
 

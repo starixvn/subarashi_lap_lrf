@@ -11,11 +11,15 @@ import { getSpecialLevelText } from '../../lib/helpers/utils';
 import { buildCurrentActivePlayer } from '../../lib/helpers/playerDataBuilder';
 
 export const SpecialLevelCell = (props) => {
-    const { dataItem, specialLevelDropdownPosition, setCurrentActivePlayer, setSpecialLevelDropdownPosition } = props;
+    const { dataItem, specialLevelDropdownPosition, setCurrentActivePlayer, setSpecialLevelDropdownPosition, hasSpecialLevelPermission } = props;
     const value = dataItem.SpecialLevel;
     const style = { backgroundColor: specialLevelListWithColor[value] };
 
     const handleToggleSpecialLevel = (event) => {
+        if(!hasSpecialLevelPermission){
+            return;
+        }
+
         const currentActivePlayer = buildCurrentActivePlayer(dataItem);
         setCurrentActivePlayer(currentActivePlayer);
         const dropdownName = 'specialLevelDropdown';
@@ -23,7 +27,7 @@ export const SpecialLevelCell = (props) => {
         setSpecialLevelDropdownPosition(newPosition);
     }
 
-    return <DropdownLabel text={getSpecialLevelText(value)} labelStyle={style} onClick={handleToggleSpecialLevel} />
+    return <DropdownLabel className={hasSpecialLevelPermission ? '' : 'disabled'} text={getSpecialLevelText(value)} labelStyle={style} onClick={handleToggleSpecialLevel} />
 }
 
 function mapDispatchToProps(dispatch) {
@@ -32,8 +36,8 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-    const { specialLevelDropdownPosition } = state;
-    return Object.assign({}, { specialLevelDropdownPosition });
+    const { specialLevelDropdownPosition, hasSpecialLevelPermission } = state;
+    return Object.assign({}, { specialLevelDropdownPosition, hasSpecialLevelPermission });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SpecialLevelCell);

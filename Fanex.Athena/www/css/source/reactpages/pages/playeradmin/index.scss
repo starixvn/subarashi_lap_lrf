@@ -221,5 +221,10 @@ iframe {
             border-top: 1px solid #ddd;
         }
     }
+
+    .disabled {
+        cursor: none;
+        pointer-events: none;
+    }
 }
 /*End Grid*/
