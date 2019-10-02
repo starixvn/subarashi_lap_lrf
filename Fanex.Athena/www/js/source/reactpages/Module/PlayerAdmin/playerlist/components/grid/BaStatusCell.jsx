@@ -9,9 +9,6 @@ import LangHelper from '@jsroot/lib/langHelper';
 import GridInteractionService from '../../lib/services/gridInteractionService';
 import { getErrorMessageForUpdating } from '../../lib/helpers/utils';
 import { generateDefaultConfirmOption, generateDefaultAlertOption, predefinedIcons } from '../../../../../lib/sweetAlert';
-import { decode } from '@jsroot/lib/htmlHelper';
-
-const deniedMsgKey = 'FunctionDeniedMsg';
 
 const BaStatusCell = (props) => {
     const { dataItem, setPlayerList, toggleLoader, updateBaStatus, setSweetAlertOption, playerList, hasBaPermission } = props;
@@ -19,16 +16,12 @@ const BaStatusCell = (props) => {
 
     const handleChangeBaStatus = (event) => {
         event.preventDefault();
-        const handleCloseAlert = () => {
-            setSweetAlertOption(null);
+        if(!hasBaPermission){
+            return;
         }
 
-        if(!hasBaPermission){
-            const message = decode(LangHelper.getSingleResource(deniedMsgKey));
-            const alertOpt = generateDefaultAlertOption(message, handleCloseAlert, null, predefinedIcons.error);
-            setSweetAlertOption(alertOpt);
-
-            return;
+        const handleCloseAlert = () => {
+            setSweetAlertOption(null);
         }
 
         const isBa = event.target.checked;
@@ -73,8 +66,8 @@ const BaStatusCell = (props) => {
     }
 
     return (
-        <Cell className="center-align">
-            {!IsArchived && BaStatus !== undefined && <Switcher checked={BaStatus} onChange={handleChangeBaStatus} />}
+        <Cell className={"center-align" + `${!hasBaPermission ? ' ba-disabled' : ''}`}>
+            {!IsArchived && BaStatus !== undefined && <Switcher disabled={!hasBaPermission} checked={BaStatus} onChange={handleChangeBaStatus} />}
         </Cell>
     )
 }

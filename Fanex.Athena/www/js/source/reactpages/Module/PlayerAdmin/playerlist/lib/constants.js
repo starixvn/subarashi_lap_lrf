@@ -85,9 +85,9 @@ export const tabNameByContextMenu = {
 export const excludedTabNameWithNonDepositAndArchived = [tabNames.statement, tabNames.betlist, tabNames.betLimit];
 
 export const contextMenuList = [
-    { key: contextMenuKeys.bankInformation, name: LangHelper.getSingleResource('BankInformation'), tabName: 'lblPlayerAdminPlayerInfo', subTabName: contextMenuKeys.bankInformation },
     { key: contextMenuKeys.note, name: LangHelper.getSingleResource('Note'), tabName: 'lblPlayerAdminNote' },
     { key: contextMenuKeys.password, name: LangHelper.getSingleResource('Password'), tabName: 'lblPlayerAdminSetting' },
+    { key: contextMenuKeys.bankInformation, name: LangHelper.getSingleResource('BankInformation'), tabName: 'lblPlayerAdminPlayerInfo', subTabName: contextMenuKeys.bankInformation },
     { key: contextMenuKeys.fundtransferLimit, name: LangHelper.getSingleResource('FundtransferLimit'), tabName: 'lblPlayerAdminFundTransfer' },
     { key: contextMenuKeys.betLimit, name: LangHelper.getSingleResource('BetLimit'), tabName: tabNames.betLimit },
     { key: contextMenuKeys.statement, name: LangHelper.getSingleResource('Statement'), tabName: tabNames.statement },

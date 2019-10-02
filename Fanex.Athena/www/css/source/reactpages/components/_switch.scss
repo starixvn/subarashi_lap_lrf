@@ -1,17 +1,22 @@
 ﻿@import "vendors/switches";
 $bgOn: #CA3232;
-$bgOff: #DFDFDF;
+$bgOff: #fff;
 $bgButtonOn: #fff;
 $bgButtonOff: #919191;
+$borderColor: #a7a0a0;
+$bgOffDisabled: #e9ecef;
+$bgOnDisabled: #f16d6d;
 
 .switch {
     label {
         cursor: pointer;
+
         .lever {
             background-color: $bgOff;
             width: 40px;
             height: 18px;
             margin: 0;
+            border: 1px solid $borderColor;
 
             &:before {
                 content: "";
@@ -27,8 +32,8 @@ $bgButtonOff: #919191;
                 background-color: $bgButtonOff;
                 width: 15px;
                 height: 15px;
-                top: 1px;
-                left: 0.5px;
+                top: 0;
+                left: 0;
             }
         }
 
@@ -45,6 +50,18 @@ $bgButtonOff: #919191;
 
                     &:after {
                         background-color: $bgButtonOn;
+                    }
+                }
+            }
+
+            &[disabled] {
+                & + .lever {
+                    background-color: $bgOffDisabled;
+                }
+
+                &:checked {
+                    & + .lever {
+                        background-color: $bgOnDisabled;
                     }
                 }
             }
