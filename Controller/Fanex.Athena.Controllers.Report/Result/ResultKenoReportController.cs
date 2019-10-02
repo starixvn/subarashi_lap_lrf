@@ -78,7 +78,10 @@
 
             if (result.ErrorCode > 0)
             {
-                _logger.Error("Keno Session: " + result.ErrorMsg);
+                _logger.Info($"Keno Session: {result.ErrorMsg}"
+                    + $"\nError Code: {result.ErrorCode}"
+                    + $"\nUser Name: {userSession.UserName}"
+                    + $"\nProduct Id: {vendorProductId}");
                 return Url.Action("AccessDenied", "Utility", null, Request.Url.Scheme);
             }
 
