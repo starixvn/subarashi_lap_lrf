@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Linq;
+using System.Net.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
+using Fanex.Athena.Api.StatelessBase.Attributes.Extensions;
+using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
 using Fanex.Athena.Extension.Helper;
 using Fanex.Athena.Extension.Utility;
 using Fanex.Athena.Model.Auth;
@@ -14,10 +17,16 @@ namespace Fanex.Athena.Api.StatelessBase.Attributes
     public sealed class StatelessApiAutoBindMetaModelAttribute : ActionFilterAttribute
     {
         public bool BindAgent { get; set; }
+
         public bool BindSiteName { get; set; }
+
         public bool BindLanguage { get; set; }
+
         public bool BindUserId { get; set; }
+
         public bool BindIp { get; set; }
+
+        public bool BindBalanceUpAndMoveBetDay { get; set; }
 
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
@@ -41,6 +50,12 @@ namespace Fanex.Athena.Api.StatelessBase.Attributes
             {
                 MapIp(actionContext);
             }
+
+            if (BindBalanceUpAndMoveBetDay)
+            {
+                MapBalanceUpAndMoveBet(actionContext);
+            }
+
             base.OnActionExecuting(actionContext);
         }
 
@@ -123,6 +138,22 @@ namespace Fanex.Athena.Api.StatelessBase.Attributes
                     itemWithAgent.AgentListXml = AuthParameterHelper.GenerateAgentListXml(currencyWithAgent, currencyIdList);
                     actionContext.ActionArguments[item.Key] = itemWithAgent;
                 }
+            }
+        }
+
+        private static void MapBalanceUpAndMoveBet(HttpActionContext actionContext)
+        {
+            var balanceUpDataAccess = actionContext.Request.GetDependencyScope().Resolve<IBalanceUpDataAccess>();
+            var item = actionContext.ActionArguments.Where(x => x.Value is IMetaModelBalanceUpAndMoveBet)
+             .Select(x => x).FirstOrDefault();
+            var value = item.Value as IMetaModelBalanceUpAndMoveBet;
+
+            if (value != null)
+            {
+                var temp = balanceUpDataAccess.GetBalanceUp();
+                value.BalanceUpDay = temp.BalanceUpDay;
+                value.MoveBetsDay = temp.MoveBetsDay;
+                actionContext.ActionArguments[item.Key] = value;
             }
         }
     }

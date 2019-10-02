@@ -1,5 +1,9 @@
-﻿using System.Web.Http.Controllers;
+﻿using System;
+using System.Web.Http.Controllers;
+using Autofac;
 using Fanex.Athena.Api.StatelessBase.Attributes;
+using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
+using Fanex.Athena.Model.Core.DTO.Configuration;
 using Fanex.Athena.Model.Core.MetaModel;
 using Fanex.Athena.UnitTest.Common.Helpers;
 using NSubstitute;
@@ -10,6 +14,12 @@ namespace Fanex.Athena.Api.StatelessBase.UnitTests.Attributes
     [TestFixture]
     public class StatelessApiAutoBindMetaModelAttributeTest
     {
+        private static readonly BalanceUp balanceUp = new BalanceUp
+        {
+            BalanceUpDay = new DateTime(2019, 8, 15),
+            MoveBetsDay = new DateTime(2019, 8, 10)
+        };
+
         [Test]
         public void OnActionExecuting_IsBindAgent_AgentListXmlIsAssignedCorrectly()
         {
@@ -235,6 +245,39 @@ namespace Fanex.Athena.Api.StatelessBase.UnitTests.Attributes
             });
         }
 
+        [Test]
+        public void OnActionExecuting_IsBindBalanceUpAndMoveBet_BindBalanceUpAndMoveBetAreAssignedCorrectly()
+        {
+            // Arrange
+            var metaModel = Substitute.For<IMetaModelBalanceUpAndMoveBet>();
+            var actionContext = CreateActionContext(metaModel);
+            var attribute = new StatelessApiAutoBindMetaModelAttribute { BindBalanceUpAndMoveBetDay = true };
+
+            // Action
+            attribute.OnActionExecuting(actionContext);
+
+            // Assert
+            Assert.That(metaModel.MoveBetsDay, Is.EqualTo(balanceUp.MoveBetsDay));
+            Assert.That(metaModel.BalanceUpDay, Is.EqualTo(balanceUp.BalanceUpDay));
+        }
+
+        [Test]
+        public void OnActionExecuting_BindBalanceUpAndMoveBetButMetaModelIsNotImplemented_BalanceUpAndMoveBetHaveMinValue()
+        {
+            // Arrange
+            DateTime DefaultDateTime = default;
+            var metaModel = new { MoveBetsDay = DefaultDateTime, BalanceUpDay = DefaultDateTime };
+            var actionContext = CreateActionContext(metaModel);
+            var attribute = new StatelessApiAutoBindMetaModelAttribute { BindBalanceUpAndMoveBetDay = true };
+
+            // Action
+            attribute.OnActionExecuting(actionContext);
+
+            // Assert
+            Assert.That(metaModel.MoveBetsDay, Is.EqualTo(DateTime.MinValue));
+            Assert.That(metaModel.BalanceUpDay, Is.EqualTo(DateTime.MinValue));
+        }
+
         private static HttpActionContext CreateActionContext(object metaModel)
         {
             var actionContext = ExternalApiHelper.CreateMockActionContext();
@@ -245,6 +288,13 @@ namespace Fanex.Athena.Api.StatelessBase.UnitTests.Attributes
             actionContext.ControllerContext = controllerContext;
 
             actionContext.ActionArguments.Add("metaModel", metaModel);
+
+            var balanceUpDataAccess = Substitute.For<IBalanceUpDataAccess>();
+            balanceUpDataAccess.GetBalanceUp().Returns(balanceUp);
+
+            var builder = new ContainerBuilder();
+            builder.RegisterInstance(balanceUpDataAccess);
+            WebApiHelper.SetupResolver(builder, actionContext);
 
             return actionContext;
         }

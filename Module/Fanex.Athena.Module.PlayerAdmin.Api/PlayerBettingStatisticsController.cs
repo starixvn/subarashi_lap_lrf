@@ -21,7 +21,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api
 
         [HttpPost]
         [ApiPermissionOnData(isObject: true)]
-        [StatelessApiAutoBindDaySetting(BindBalanceUpAndMoveBetDay = true)]
+        [StatelessApiAutoBindMetaModel(BindBalanceUpAndMoveBetDay = true)]
         public PlayerBettingStatistics GetData(PlayerBettingStatisticsMetaModel metaModel)
         {
             var now = DateTime.Now;
