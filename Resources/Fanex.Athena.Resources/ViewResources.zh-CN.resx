@@ -2179,4 +2179,25 @@
   <data name="Refresh" xml:space="preserve">
     <value>刷新</value>
   </data>
+  <data name="BankInformation" xml:space="preserve">
+    <value>银行资讯</value>
+  </data>
+  <data name="Online" xml:space="preserve">
+    <value>在线</value>
+  </data>
+  <data name="Offline" xml:space="preserve">
+    <value>离线</value>
+  </data>
+  <data name="PlaceholderBankAccount" xml:space="preserve">
+    <value>精确查询银行帐户号码</value>
+  </data>
+  <data name="PlaceholderEmail" xml:space="preserve">
+    <value>精确查询电子邮件</value>
+  </data>
+  <data name="MatchPrefix" xml:space="preserve">
+    <value>前缀查询 范例</value>
+  </data>
+  <data name="MatchCase" xml:space="preserve">
+    <value>模糊查询 范例</value>
+  </data>
 </root>

@@ -1,4 +1,4 @@
-﻿// Generated at: 9/27/2019 5:38:40 PM
+﻿// Generated at: 10/2/2019 11:42:25 AM
 window._language_zh_Hans = {
 AA:"客客",
 AbnormalBet:"非正规注单",

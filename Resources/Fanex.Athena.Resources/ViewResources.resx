@@ -2514,4 +2514,32 @@
     <value>Refresh</value>
     <comment>112658</comment>
   </data>
+  <data name="BankInformation" xml:space="preserve">
+    <value>Bank Information</value>
+    <comment>112658</comment>
+  </data>
+  <data name="Online" xml:space="preserve">
+    <value>Online</value>
+    <comment>112658</comment>
+  </data>
+  <data name="Offline" xml:space="preserve">
+    <value>Offline</value>
+    <comment>112658</comment>
+  </data>
+  <data name="PlaceholderBankAccount" xml:space="preserve">
+    <value>Search by Exactly Bank Account Number</value>
+    <comment>112658</comment>
+  </data>
+  <data name="PlaceholderEmail" xml:space="preserve">
+    <value>Search by Exactly Email</value>
+    <comment>112658</comment>
+  </data>
+  <data name="MatchPrefix" xml:space="preserve">
+    <value>Match prefix e.g</value>
+    <comment>112658</comment>
+  </data>
+  <data name="MatchCase" xml:space="preserve">
+    <value>Match case e.g</value>
+    <comment>112658</comment>
+  </data>
 </root>

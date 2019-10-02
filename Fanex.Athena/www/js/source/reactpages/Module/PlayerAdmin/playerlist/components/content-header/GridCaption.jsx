@@ -43,13 +43,13 @@ export class GridCaption extends React.Component {
             return (
                 <>
                     <span className="link" onClick={() => this.props.setSelectedPlayer(null)}>{LangHelper.getSingleResource('PreviousSearchResult')}</span>
-                    <span><i className="chevron right icon-separator"></i> Player: {userName} {currency && `(${currency})`}</span>
+                    <span><i className="chevron right icon-separator"></i> {LangHelper.getSingleResource('Player')}: {userName} {currency && `(${currency})`}</span>
                 </>
             )
         }
         else {
             const { playerCount } = this.props;
-            return (<span key="searchResult">{`Search Result: ${playerCount} Player(s)`}</span>);
+            return (<span key="searchResult">{`${LangHelper.getSingleResource('SearchResult')}: ${playerCount} ${LangHelper.getSingleResource('Player')}(s)`}</span>);
         }
     }
 

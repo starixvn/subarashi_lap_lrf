@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { DropdownButton, DropdownItem } from '@jsroot/components/dropdown';
 import { searchOptions } from '../../lib/constants';
+import LangHelper from '@jsroot/lib/langHelper';
 
 const SearchOption = (props) => {
     const { value, onChange } = props;
@@ -28,14 +29,14 @@ const SearchOption = (props) => {
                 <label className="selection-item">
                     <input type="radio" name="searchOption" value={searchOptions.matchPrefix}
                         checked={selectedValue === searchOptions.matchPrefix} onChange={onChange} />
-                    Match prefix e.g. "<span className="keyword">test</span>"ABCD
+                    {LangHelper.getSingleResource('MatchPrefix')} "<span className="keyword">test</span>"ABCD
                 </label>
             </DropdownItem>
             <DropdownItem tag="div">
                 <label className="selection-item">
                     <input type="radio" name="searchOption" value={searchOptions.matchCase}
                         checked={selectedValue === searchOptions.matchCase} onChange={onChange} />
-                    Match case e.g. AB"<span className="keyword">test</span>"CD
+                    {LangHelper.getSingleResource('MatchCase')} AB"<span className="keyword">test</span>"CD
                 </label>
             </DropdownItem>
         </DropdownButton>

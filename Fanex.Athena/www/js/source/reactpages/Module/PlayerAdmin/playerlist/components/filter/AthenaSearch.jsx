@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import LangHelper from '@jsroot/lib/langHelper';
-import ClientResourceManager from '@jsroot/lib/clientResourceManager';
 
 const AthenaSearch = (props) => {
     const { bankAccountNumber, email, onChange, onKeyPress } = props;
@@ -13,7 +12,7 @@ const AthenaSearch = (props) => {
                     <label className="label-text">{LangHelper.getSingleResource("BankAccountNumber")}</label>
                     <input className="input-text" id="bankAccountNumber" name="bankAccountNumber" type="text" value={bankAccountNumber}
                         autoComplete="off" onChange={onChange} onKeyPress={onKeyPress} 
-                        placeholder={ClientResourceManager.getText('PlaceholderBankAccount')} />
+                        placeholder={LangHelper.getSingleResource('PlaceholderBankAccount')} />
                 </div>
             </div>
 
@@ -22,7 +21,7 @@ const AthenaSearch = (props) => {
                     <label className="label-text">{LangHelper.getSingleResource("Email")}</label>
                     <input className="input-text" id="email" name="email" type="text" value={email}
                         autoComplete="off" onChange={onChange} onKeyPress={onKeyPress}
-                        placeholder={ClientResourceManager.getText('PlaceholderEmail')} />
+                        placeholder={LangHelper.getSingleResource('PlaceholderEmail')} />
                 </div>
             </div>
         </>

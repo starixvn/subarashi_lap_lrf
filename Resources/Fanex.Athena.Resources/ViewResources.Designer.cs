@@ -619,6 +619,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bank Information.
+        /// </summary>
+        public static string BankInformation {
+            get {
+                return ResourceManager.GetString("BankInformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Base Currency.
         /// </summary>
         public static string BaseCurrency {
@@ -3535,6 +3544,24 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Match case e.g.
+        /// </summary>
+        public static string MatchCase {
+            get {
+                return ResourceManager.GetString("MatchCase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Match prefix e.g.
+        /// </summary>
+        public static string MatchPrefix {
+            get {
+                return ResourceManager.GetString("MatchPrefix", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Match Win Loss.
         /// </summary>
         public static string MatchWinLoss {
@@ -4318,6 +4345,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Offline.
+        /// </summary>
+        public static string Offline {
+            get {
+                return ResourceManager.GetString("Offline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to OK.
         /// </summary>
         public static string OK {
@@ -4368,6 +4404,15 @@ namespace Fanex.Athena.Resources {
         public static string OneXTwo {
             get {
                 return ResourceManager.GetString("OneXTwo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Online.
+        /// </summary>
+        public static string Online {
+            get {
+                return ResourceManager.GetString("Online", resourceCulture);
             }
         }
         
@@ -4566,6 +4611,24 @@ namespace Fanex.Athena.Resources {
         public static string PersonalMessage {
             get {
                 return ResourceManager.GetString("PersonalMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search by Exactly Bank Account Number.
+        /// </summary>
+        public static string PlaceholderBankAccount {
+            get {
+                return ResourceManager.GetString("PlaceholderBankAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search by Exactly Email.
+        /// </summary>
+        public static string PlaceholderEmail {
+            get {
+                return ResourceManager.GetString("PlaceholderEmail", resourceCulture);
             }
         }
         

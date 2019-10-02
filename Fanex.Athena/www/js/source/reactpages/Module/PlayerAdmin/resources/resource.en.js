@@ -60,5 +60,5 @@ export const resource_en = {
     Lose: 'Lose',
     Draw: 'Draw',
     Cancelled: 'Cancelled',
-    LastTransaction: 'Last Transaction'
+    LastTransaction: 'Last Transaction',
 }
