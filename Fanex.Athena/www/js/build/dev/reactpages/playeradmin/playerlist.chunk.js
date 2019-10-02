@@ -2679,11 +2679,17 @@ var OddsGroupCell = function OddsGroupCell(props) {
   var dataItem = props.dataItem,
       oddsGroupDropdownPosition = props.oddsGroupDropdownPosition,
       setCurrentActivePlayer = props.setCurrentActivePlayer,
-      setOddsGroupDropdownPosition = props.setOddsGroupDropdownPosition;
+      setOddsGroupDropdownPosition = props.setOddsGroupDropdownPosition,
+      hasOddsGroupPermission = props.hasOddsGroupPermission;
   var value = dataItem.OddsGroup;
   var style = _lib_constants__WEBPACK_IMPORTED_MODULE_3__["oddsGroupListWithStyle"][value];
+  var canUpdate = hasOddsGroupPermission && !dataItem.BaStatus;
 
   var handleToggleOddsGroup = function handleToggleOddsGroup(event) {
+    if (!canUpdate) {
+      return;
+    }
+
     var currentActivePlayer = Object(_lib_helpers_playerDataBuilder__WEBPACK_IMPORTED_MODULE_7__["buildCurrentActivePlayer"])(dataItem);
     setCurrentActivePlayer(currentActivePlayer);
     var dropdownName = 'oddsGroupDropdown';
@@ -2692,6 +2698,7 @@ var OddsGroupCell = function OddsGroupCell(props) {
   };
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_DropdownLabel__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    className: canUpdate ? '' : 'disabled',
     text: value,
     labelStyle: style,
     onClick: handleToggleOddsGroup
@@ -2708,9 +2715,11 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-  var oddsGroupDropdownPosition = state.oddsGroupDropdownPosition;
+  var oddsGroupDropdownPosition = state.oddsGroupDropdownPosition,
+      hasOddsGroupPermission = state.hasOddsGroupPermission;
   return Object.assign({}, {
-    oddsGroupDropdownPosition: oddsGroupDropdownPosition
+    oddsGroupDropdownPosition: oddsGroupDropdownPosition,
+    hasOddsGroupPermission: hasOddsGroupPermission
   });
 }
 
@@ -2996,13 +3005,18 @@ var SpecialLevelCell = function SpecialLevelCell(props) {
   var dataItem = props.dataItem,
       specialLevelDropdownPosition = props.specialLevelDropdownPosition,
       setCurrentActivePlayer = props.setCurrentActivePlayer,
-      setSpecialLevelDropdownPosition = props.setSpecialLevelDropdownPosition;
+      setSpecialLevelDropdownPosition = props.setSpecialLevelDropdownPosition,
+      hasSpecialLevelPermission = props.hasSpecialLevelPermission;
   var value = dataItem.SpecialLevel;
   var style = {
     backgroundColor: _lib_constants__WEBPACK_IMPORTED_MODULE_3__["specialLevelListWithColor"][value]
   };
 
   var handleToggleSpecialLevel = function handleToggleSpecialLevel(event) {
+    if (!hasSpecialLevelPermission) {
+      return;
+    }
+
     var currentActivePlayer = Object(_lib_helpers_playerDataBuilder__WEBPACK_IMPORTED_MODULE_8__["buildCurrentActivePlayer"])(dataItem);
     setCurrentActivePlayer(currentActivePlayer);
     var dropdownName = 'specialLevelDropdown';
@@ -3011,6 +3025,7 @@ var SpecialLevelCell = function SpecialLevelCell(props) {
   };
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_DropdownLabel__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    className: hasSpecialLevelPermission ? '' : 'disabled',
     text: Object(_lib_helpers_utils__WEBPACK_IMPORTED_MODULE_7__["getSpecialLevelText"])(value),
     labelStyle: style,
     onClick: handleToggleSpecialLevel
@@ -3027,9 +3042,11 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-  var specialLevelDropdownPosition = state.specialLevelDropdownPosition;
+  var specialLevelDropdownPosition = state.specialLevelDropdownPosition,
+      hasSpecialLevelPermission = state.hasSpecialLevelPermission;
   return Object.assign({}, {
-    specialLevelDropdownPosition: specialLevelDropdownPosition
+    specialLevelDropdownPosition: specialLevelDropdownPosition,
+    hasSpecialLevelPermission: hasSpecialLevelPermission
   });
 }
 
@@ -3609,6 +3626,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var type = window.initialState.type;
 var hasBaPermission = window._pConfig.hasBaPermission === 1;
+var hasOddsGroupPermission = window._pConfig.hasOddsGroupPermission === 1;
+var hasSpecialLevelPermission = window._pConfig.hasSpecialLevelPermission === 1;
 var displayedColumnList = Object(_lib_helpers_gridColumnBuilder__WEBPACK_IMPORTED_MODULE_6__["buildDefaultColumnList"])(type);
 var siteSetting = {
   isAllowedCustomerComm: false,
@@ -3618,7 +3637,9 @@ var siteSetting = {
 var defaultState = _objectSpread({}, window.initialState, {
   displayedColumnList: displayedColumnList,
   hasBaPermission: hasBaPermission,
-  siteSetting: siteSetting
+  siteSetting: siteSetting,
+  hasOddsGroupPermission: hasOddsGroupPermission,
+  hasSpecialLevelPermission: hasSpecialLevelPermission
 });
 
 var store = _jsroot_lib_store__WEBPACK_IMPORTED_MODULE_5__["default"].createStore(_reducers__WEBPACK_IMPORTED_MODULE_4__["default"], defaultState);
@@ -5523,7 +5544,7 @@ function () {
 /*!*************************************************************************************************!*\
   !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/reducers/filterHandlerReducer.js ***!
   \*************************************************************************************************/
-/*! exports provided: param, playerList, type, currencyList, hasBaPermission, isSubsidiary, isAdvancedSearch, isFilterCollapsing */
+/*! exports provided: param, playerList, type, currencyList, hasBaPermission, hasOddsGroupPermission, hasSpecialLevelPermission, isSubsidiary, isAdvancedSearch, isFilterCollapsing */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5533,6 +5554,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "type", function() { return type; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "currencyList", function() { return currencyList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hasBaPermission", function() { return hasBaPermission; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hasOddsGroupPermission", function() { return hasOddsGroupPermission; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hasSpecialLevelPermission", function() { return hasSpecialLevelPermission; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isSubsidiary", function() { return isSubsidiary; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isAdvancedSearch", function() { return isAdvancedSearch; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isFilterCollapsing", function() { return isFilterCollapsing; });
@@ -5561,6 +5584,8 @@ var playerList = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["defa
 var type = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(null, {});
 var currencyList = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])([], {});
 var hasBaPermission = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(false, {});
+var hasOddsGroupPermission = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(false, {});
+var hasSpecialLevelPermission = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(false, {});
 var isSubsidiary = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(false, {});
 var isAdvancedSearch = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(false, _defineProperty({}, _actions_types_js__WEBPACK_IMPORTED_MODULE_1__["SET_ADVANCED_SEARCH"], function (preState, action) {
   return action.data;

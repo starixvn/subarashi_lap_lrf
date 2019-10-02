@@ -578,6 +578,10 @@ function (_Component) {
 
       _lib_service__WEBPACK_IMPORTED_MODULE_5__["default"].export(requestParam, function () {
         _this.props.toggleLoader(false);
+      }, function () {
+        _lib_service__WEBPACK_IMPORTED_MODULE_5__["default"].showErrorMsg();
+
+        _this.props.toggleLoader(false);
       });
     });
 
@@ -730,7 +734,7 @@ function () {
     }
   }, {
     key: "export",
-    value: function _export(param, callback) {
+    value: function _export(param, callback, errorHandle) {
       var url = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl(DataApi);
       var exportParam = Object.assign({}, param, {
         IsExport: true
@@ -745,6 +749,8 @@ function () {
         }
 
         callback();
+      }).catch(function (error) {
+        errorHandle && errorHandle();
       });
     }
   }, {
