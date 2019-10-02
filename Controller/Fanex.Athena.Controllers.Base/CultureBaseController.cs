@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="BaseController.cs" company="Microsoft">
+// <copyright file="BaseController.cs" company="">
 // TODO: Update copyright text.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -23,10 +23,6 @@ namespace Fanex.Athena.Controllers
     public class CultureBaseController : Controller
     {
         protected const string DefaultLanguage = "en-US";
-
-        private readonly ILanguageService _langService;
-
-        private readonly ISessionService _sessionService;
 
         private IAppSettings _appSettings;
 
@@ -54,21 +50,15 @@ namespace Fanex.Athena.Controllers
             ILicenseeSettingService licenseeSettingService
             )
         {
-            _langService = languageService ?? AutofacDependencyResolver.Current.GetService<ILanguageService>();
-            _sessionService = sessionService ?? AutofacDependencyResolver.Current.GetService<ISessionService>();
+            LangService = languageService ?? AutofacDependencyResolver.Current.GetService<ILanguageService>();
+            SessionService = sessionService ?? AutofacDependencyResolver.Current.GetService<ISessionService>();
             _appSettings = appSettings;
             _licenseeSettingService = licenseeSettingService;
         }
 
-        public ILanguageService LangService
-        {
-            get { return _langService; }
-        }
+        public ILanguageService LangService { get; }
 
-        public ISessionService SessionService
-        {
-            get { return _sessionService; }
-        }
+        public ISessionService SessionService { get; }
 
         public IAppSettings AppSettings
         {
@@ -113,7 +103,8 @@ namespace Fanex.Athena.Controllers
                 Data = data,
             };
         }
-        protected JsonNetResult JsonString(string jsonData)
+       
+        protected static JsonNetResult JsonString(string jsonData)
         {
             return new JsonNetResult(jsonData);
         }

@@ -8,6 +8,8 @@ namespace Fanex.Athena.Module.PlayerAdmin.MetaModel
 {
     public class PlayerWinLossMetaModel : IMetaModelAgent
     {
+        private const int MinimumPageSize = 50;
+
         private string _userName;
 
         [Required]
@@ -24,7 +26,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.MetaModel
             }
         }
 
-        public int PageSize { get; set; } = 50;
+        public int PageSize { get; set; } = MinimumPageSize;
 
         public int PageIndex { get; set; } = 1;
 

@@ -9,28 +9,28 @@ namespace Fanex.Athena.Controllers.Base
 {
     public class JsonNetResult : JsonResult
     {
-        private static JsonSerializerSettings _setting = new JsonSerializerSettings
-        {
-            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-            ContractResolver = new CamelCasePropertyNamesContractResolver()
+        private readonly string _jsonString;
 
-        };
-        private string _jsonString;
         public JsonNetResult(string jsonString)
         {
             _jsonString = jsonString;
         }
+
         public JsonNetResult()
         {
-
         }
-        public JsonSerializerSettings Settings => _setting;
+
+        public static JsonSerializerSettings Settings { get; } = new JsonSerializerSettings
+        {
+            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+            ContractResolver = new CamelCasePropertyNamesContractResolver()
+        };
 
         public override void ExecuteResult(ControllerContext context)
         {
             if (context == null)
             {
-                throw new ArgumentNullException("context");
+                throw new ArgumentNullException(nameof(context));
             }
 
             if (this.JsonRequestBehavior == JsonRequestBehavior.DenyGet
@@ -57,11 +57,11 @@ namespace Fanex.Athena.Controllers.Base
 
             if (!string.IsNullOrEmpty(_jsonString))
             {
-                response.Write(_jsonString.ToString());
+                response.Write(_jsonString);
             }
             else
             {
-                var scriptSerializer = JsonSerializer.Create(this.Settings);
+                var scriptSerializer = JsonSerializer.Create(Settings);
 
                 using (var sw = new StringWriter())
                 {
@@ -69,8 +69,6 @@ namespace Fanex.Athena.Controllers.Base
                     response.Write(sw.ToString());
                 }
             }
-
-
         }
     }
 }

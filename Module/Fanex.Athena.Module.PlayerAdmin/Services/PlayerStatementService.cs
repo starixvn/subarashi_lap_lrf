@@ -55,7 +55,7 @@
 
             var requestContent = new StringContent(GetAuthenticationObjectAsString(siteName), Encoding.UTF8, "application/json");
 
-            using (var response = await _client.PostAsync(GetTokenPath, requestContent).ConfigureAwait(false))
+            using (var response = await _client.PostAsync(new Uri(GetTokenPath, UriKind.Relative), requestContent).ConfigureAwait(false))
             {
                 if (response.Content is null)
                 {
@@ -67,7 +67,7 @@
                 if (!response.IsSuccessStatusCode)
                 {
                     response.Content.Dispose();
-                    throw CreateErrorException(response.StatusCode, content, content);
+                    throw CreateErrorException(response.StatusCode, "Request unsuccessfully", content);
                 }
 
                 try
@@ -87,7 +87,7 @@
             }
         }
 
-        private ServiceException CreateErrorException(HttpStatusCode statusCode, string error, string content)
+        private static ServiceException CreateErrorException(HttpStatusCode statusCode, string error, string content)
         {
             var errorMessage = new StringBuilder($"HTTP Error: {error}");
             errorMessage.AppendLine($"HTTP status code: {statusCode}");

@@ -23,13 +23,13 @@ namespace Fanex.Athena.Module.PlayerAdmin.Controllers
     {
         private const byte AllPlatform = 0;
 
-        private static readonly int[] _statusList = new int[]
+        private static readonly int[] _statusList = new[]
         {
             StatusTypes.Won, StatusTypes.Lose, StatusTypes.Draw, StatusTypes.Void,
             StatusTypes.AbnormalBet, StatusTypes.Reject, StatusTypes.Refund
         };
 
-        private static readonly int[] _liveStatusList = new int[] { LiveStatusTypes.NonLive, LiveStatusTypes.Live, LiveStatusTypes.Mix };
+        private static readonly int[] _liveStatusList = new[] { LiveStatusTypes.NonLive, LiveStatusTypes.Live, LiveStatusTypes.Mix };
 
         private readonly IProductService _productService;
 

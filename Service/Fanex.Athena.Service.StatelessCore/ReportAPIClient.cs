@@ -34,7 +34,7 @@ namespace Fanex.Athena.Service.StatelessCore
 
         private async Task<T> HandleAsync<T>(string path, object value, string language, MediaType mediaType, Func<HttpResponseMessage, Task<T>> codeBlock)
         {
-            using (var httpRequest = new HttpRequestMessage(HttpMethod.Post, path))
+            using (var httpRequest = new HttpRequestMessage(HttpMethod.Post, new Uri(path, UriKind.Relative)))
             {
                 httpRequest.Headers.Add(LANGUAGEKEY, language);
                 HttpResponseMessage response = null;
@@ -76,6 +76,7 @@ namespace Fanex.Athena.Service.StatelessCore
         {
             return await HandleAsync(path, value, language, MediaType.Json, async (x) => { return await x.Content.ReadAsStringAsync(); });
         }
+
         public async Task<byte[]> PostByteContentAsync(string path, object value, string language, MediaType mediaType = MediaType.Json)
         {
             return await HandleAsync(path, value, language, mediaType, async (x) =>
