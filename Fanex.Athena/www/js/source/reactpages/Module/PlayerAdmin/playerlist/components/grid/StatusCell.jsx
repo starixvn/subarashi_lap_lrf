@@ -2,19 +2,19 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { playerStatus, playerStatusByName } from '../../lib/constants';
+import { playerStatus, playerStatusByName, licenseeType } from '../../lib/constants';
 import { ActionCreators } from '../../actions';
 import GridInteractionService from '../../lib/services/gridInteractionService';
 import { buildCurrentActivePlayer } from '../../lib/helpers/playerDataBuilder';
 import LangHelper from '@jsroot/lib/langHelper';
 
 export const StatusCell = (props) => {
-    const { dataItem, statusDropdownPosition, setCurrentActivePlayer, setStatusDropdownPosition } = props;
-    const { Status, IsOnline, IsDeposit } = dataItem;
+    const { dataItem, statusDropdownPosition, setCurrentActivePlayer, setStatusDropdownPosition, type } = props;
+    const { Status, IsOnline, IsDeposit, IsArchived } = dataItem;
 
     const statusName = playerStatus[Status];
     const classname = 'status-text status-' + Status;
-    const canUpdate = Status !== playerStatusByName.Archived && Status !== playerStatusByName.Closed;
+    const canUpdate = type === licenseeType.nonApi &&  !IsArchived && Status !== playerStatusByName.Closed;
 
     const handleToggleStatus = (event) => {
         const currentActivePlayer = buildCurrentActivePlayer(dataItem);
@@ -43,8 +43,8 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-    const { statusDropdownPosition } = state;
-    return Object.assign({}, { statusDropdownPosition });
+    const { statusDropdownPosition, type } = state;
+    return Object.assign({}, { statusDropdownPosition, type });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(StatusCell);
