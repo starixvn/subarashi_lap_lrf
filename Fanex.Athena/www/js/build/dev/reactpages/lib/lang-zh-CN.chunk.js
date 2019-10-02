@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 9/27/2019 5:38:40 PM
+// Generated at: 10/2/2019 11:42:25 AM
 window._language_zh_CN = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -148,6 +148,7 @@ window._language_zh_CN = {
   BACommission: "BA佣金",
   Balance: "余额",
   BankAccountNumber: "银行账号",
+  BankInformation: "银行资讯",
   BaseCurrency: "基础货币",
   Based: "基于",
   BAStatus: "BA 状态",
@@ -433,6 +434,8 @@ window._language_zh_CN = {
   Margin: "利润",
   Market: "市场",
   Match: "赛事",
+  MatchCase: "模糊查询 范例",
+  MatchPrefix: "前缀查询 范例",
   MatchWinLoss: "球赛输赢",
   MatchWinLossTitle: "球赛输赢, {0} - {1}",
   MaxBet: "最高投注",
@@ -516,11 +519,13 @@ window._language_zh_CN = {
   OddsType: "赔率类型",
   of: "之",
   Off: "关",
+  Offline: "离线",
   OK: "OK",
   OldColor: "旧色",
   OldPassword: "旧密码",
   On: "开",
   OneXTwo: "独赢盘",
+  Online: "在线",
   Open: "开启",
   OpeningBalance: "前期余额",
   OriginalBetTicket: "原始注单",
@@ -543,6 +548,8 @@ window._language_zh_CN = {
   Permission: "权限",
   PermissionForUser: "用户权限",
   PersonalMessage: "个人讯息",
+  PlaceholderBankAccount: "精确查询银行帐户号码",
+  PlaceholderEmail: "精确查询电子邮件",
   Platform: "平台",
   Player: "玩家",
   PlayerAdminUpdateFailedMsg: "请重试一次!",

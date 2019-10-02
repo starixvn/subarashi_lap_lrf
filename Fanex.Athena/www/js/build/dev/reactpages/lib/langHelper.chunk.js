@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 9/27/2019 5:38:40 PM
+// Generated at: 10/2/2019 11:42:25 AM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -157,6 +157,7 @@ window._language_en_US = {
   BACommission: "BA Commission",
   Balance: "Balance",
   BankAccountNumber: "Bank Account Number",
+  BankInformation: "Bank Information",
   BaseCurrency: "Base Currency",
   Based: "Based",
   BAStatus: "BA Status",
@@ -481,6 +482,8 @@ window._language_en_US = {
   Margin: "Margin",
   Market: "Market",
   Match: "Match",
+  MatchCase: "Match case e.g",
+  MatchPrefix: "Match prefix e.g",
   MatchWinLoss: "Match Win Loss",
   MatchWinLossTitle: "Match Win Loss, {0} - {1}",
   MaxBet: "Max Bet",
@@ -568,12 +571,14 @@ window._language_en_US = {
   OddsType: "Odds Type",
   of: "of",
   Off: "Off",
+  Offline: "Offline",
   OK: "OK",
   OldColor: "Old color",
   OldPassword: "Old Password",
   On: "On",
   OneTokenRestrictionDefaultMsg: "Who let you here ?",
   OneXTwo: "1 X 2",
+  Online: "Online",
   Open: "Open",
   OpeningBalance: "Opening Balance",
   OriginalBetTicket: "Original Bet Ticket",
@@ -596,6 +601,8 @@ window._language_en_US = {
   Permission: "Permission",
   PermissionForUser: "Permission for User",
   PersonalMessage: "Personal Message",
+  PlaceholderBankAccount: "Search by Exactly Bank Account Number",
+  PlaceholderEmail: "Search by Exactly Email",
   Platform: "Platform",
   PlatformWinLoss: "Platform Win Loss",
   PlatformWinLossTitle: "Platform Win Loss - {0} --&gt; {1} - {2} - {3} - {4}",

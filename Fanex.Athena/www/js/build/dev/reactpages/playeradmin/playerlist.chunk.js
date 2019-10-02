@@ -1803,12 +1803,12 @@ function (_React$Component) {
           }
         }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource('PreviousSearchResult')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
           className: "chevron right icon-separator"
-        }), " Player: ", userName, " ", currency && "(".concat(currency, ")")));
+        }), " ", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource('Player'), ": ", userName, " ", currency && "(".concat(currency, ")")));
       } else {
         var playerCount = this.props.playerCount;
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           key: "searchResult"
-        }, "Search Result: ".concat(playerCount, " Player(s)"));
+        }, "".concat(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource('SearchResult'), ": ").concat(playerCount, " ").concat(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource('Player'), "(s)"));
       }
     }
   }, {
@@ -2092,8 +2092,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
-/* harmony import */ var _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/clientResourceManager */ "./www/js/source/reactpages/lib/clientResourceManager.js");
-
 
 
 
@@ -2118,7 +2116,7 @@ var AthenaSearch = function AthenaSearch(props) {
     autoComplete: "off",
     onChange: onChange,
     onKeyPress: onKeyPress,
-    placeholder: _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_3__["default"].getText('PlaceholderBankAccount')
+    placeholder: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('PlaceholderBankAccount')
   }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12 col-md-4 col-sm-4 col-lg-3 col-xl-2"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2134,7 +2132,7 @@ var AthenaSearch = function AthenaSearch(props) {
     autoComplete: "off",
     onChange: onChange,
     onKeyPress: onKeyPress,
-    placeholder: _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_3__["default"].getText('PlaceholderEmail')
+    placeholder: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('PlaceholderEmail')
   }))));
 };
 
@@ -2162,6 +2160,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/components/dropdown */ "./www/js/source/reactpages/components/dropdown/index.js");
 /* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -2169,6 +2168,7 @@ function _nonIterableRest() { throw new TypeError("Invalid attempt to destructur
 function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -2214,7 +2214,7 @@ var SearchOption = function SearchOption(props) {
     value: _lib_constants__WEBPACK_IMPORTED_MODULE_2__["searchOptions"].matchPrefix,
     checked: selectedValue === _lib_constants__WEBPACK_IMPORTED_MODULE_2__["searchOptions"].matchPrefix,
     onChange: onChange
-  }), "Match prefix e.g. \"", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+  }), _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('MatchPrefix'), " \"", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "keyword"
   }, "test"), "\"ABCD")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], {
     tag: "div"
@@ -2226,7 +2226,7 @@ var SearchOption = function SearchOption(props) {
     value: _lib_constants__WEBPACK_IMPORTED_MODULE_2__["searchOptions"].matchCase,
     checked: selectedValue === _lib_constants__WEBPACK_IMPORTED_MODULE_2__["searchOptions"].matchCase,
     onChange: onChange
-  }), "Match case e.g. AB\"", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+  }), _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('MatchCase'), " AB\"", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "keyword"
   }, "test"), "\"CD")));
 };
@@ -3592,16 +3592,15 @@ function mapStateToProps(state) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _resources__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../resources */ "./www/js/source/reactpages/Module/PlayerAdmin/resources/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _AppContainer_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./AppContainer.jsx */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/components/AppContainer.jsx");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _reducers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../reducers */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/reducers/index.js");
-/* harmony import */ var _jsroot_lib_store__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/lib/store */ "./www/js/source/reactpages/lib/store.js");
-/* harmony import */ var _lib_helpers_gridColumnBuilder__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../lib/helpers/gridColumnBuilder */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/gridColumnBuilder.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _AppContainer_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AppContainer.jsx */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/components/AppContainer.jsx");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _reducers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../reducers */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/reducers/index.js");
+/* harmony import */ var _jsroot_lib_store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/lib/store */ "./www/js/source/reactpages/lib/store.js");
+/* harmony import */ var _lib_helpers_gridColumnBuilder__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../lib/helpers/gridColumnBuilder */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/gridColumnBuilder.js");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -3613,10 +3612,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-
 var type = window.initialState.type;
 var hasBaPermission = window._pConfig.hasBaPermission === 1;
-var displayedColumnList = Object(_lib_helpers_gridColumnBuilder__WEBPACK_IMPORTED_MODULE_7__["buildDefaultColumnList"])(type);
+var displayedColumnList = Object(_lib_helpers_gridColumnBuilder__WEBPACK_IMPORTED_MODULE_6__["buildDefaultColumnList"])(type);
 var siteSetting = {
   isAllowedCustomerComm: false,
   isAllowedBA: false
@@ -3628,15 +3626,15 @@ var defaultState = _objectSpread({}, window.initialState, {
   siteSetting: siteSetting
 });
 
-var store = _jsroot_lib_store__WEBPACK_IMPORTED_MODULE_6__["default"].createStore(_reducers__WEBPACK_IMPORTED_MODULE_5__["default"], defaultState);
+var store = _jsroot_lib_store__WEBPACK_IMPORTED_MODULE_5__["default"].createStore(_reducers__WEBPACK_IMPORTED_MODULE_4__["default"], defaultState);
 
 var App = function App() {
-  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_4__["Provider"], {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_3__["Provider"], {
     store: store
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_AppContainer_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], null));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AppContainer_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null));
 };
 
-Object(react_dom__WEBPACK_IMPORTED_MODULE_2__["render"])(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(App, null), document.getElementById("app-container"));
+Object(react_dom__WEBPACK_IMPORTED_MODULE_1__["render"])(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null), document.getElementById("app-container"));
 
 /***/ }),
 
@@ -5822,180 +5820,6 @@ var defaultSiteSetting = {
 var siteSetting = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(defaultSiteSetting, _defineProperty({}, _actions_types_js__WEBPACK_IMPORTED_MODULE_1__["SET_SITE_SETTING"], function (preState, action) {
   return _objectSpread({}, action.data);
 }));
-
-/***/ }),
-
-/***/ "./www/js/source/reactpages/Module/PlayerAdmin/resources/index.js":
-/*!************************************************************************!*\
-  !*** ./www/js/source/reactpages/Module/PlayerAdmin/resources/index.js ***!
-  \************************************************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/clientResourceManager */ "./www/js/source/reactpages/lib/clientResourceManager.js");
-/* harmony import */ var _resource_en__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./resource.en */ "./www/js/source/reactpages/Module/PlayerAdmin/resources/resource.en.js");
-/* harmony import */ var _resource_cs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./resource.cs */ "./www/js/source/reactpages/Module/PlayerAdmin/resources/resource.cs.js");
-
-
-
-_jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_0__["default"].register('en', _resource_en__WEBPACK_IMPORTED_MODULE_1__["resource_en"]);
-_jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_0__["default"].register('cs', _resource_cs__WEBPACK_IMPORTED_MODULE_2__["resource_cs"]);
-
-/***/ }),
-
-/***/ "./www/js/source/reactpages/Module/PlayerAdmin/resources/resource.cs.js":
-/*!******************************************************************************!*\
-  !*** ./www/js/source/reactpages/Module/PlayerAdmin/resources/resource.cs.js ***!
-  \******************************************************************************/
-/*! exports provided: resource_cs */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resource_cs", function() { return resource_cs; });
-var resource_cs = {
-  BankInformation: '银行资讯',
-  BankName: '银行名称',
-  BankAccountName: '账户名称',
-  BankAccountNumber: '银行账户号码',
-  Country: '地区',
-  Mobile: '手机版',
-  CreatedDate: '创建日期',
-  LastLogin: '最后登入',
-  LastTxn: '最后交易',
-  BAUpdatedBy: '投注总计跟新由',
-  LastUpdatedBy: 'Last Updated By',
-  SpecialLevel: '特殊层级',
-  LastUpdatedSpecialLevel: '最近更新的特殊级别',
-  Margin: '利润',
-  SingleCustomer: '单一会员',
-  BettingTicketCenter: '注单中心',
-  CustomerWinLoss: '会员輸贏',
-  NoSportsbookData: '没有体育平台资料',
-  PlayerBettingStatisticsTitle: '玩家投注统计(月到日)',
-  FastCrossLink: '快速连结',
-  BasedOnSportsbook: '基于体育平台资料',
-  AverageBetSize: '平均投注量',
-  Winnings: '赢',
-  Loss: '输',
-  NetWinLoss: '净输赢',
-  PlayerProfile: '玩家个人资料',
-  ActivityRecord: '活动纪录',
-  MemberId: '会员序号',
-  FirstName: '名字',
-  LastName: '姓名',
-  OperatorId: '厂商ID',
-  SiteCode: '网站代码',
-  ProductCode: '商品代码',
-  CustomInfo1: '玩家信息1',
-  CustomInfo2: '玩家信息2',
-  CustomInfo3: '玩家信息3',
-  CustomInfo4: '玩家信息4',
-  CustomInfo5: '玩家信息5',
-  AgUserId: 'AG使用者ID',
-  GoldDeluxeUserId: 'GD真人娱乐场平台使用者ID',
-  VoidBridgeUserId: 'VB使用者ID',
-  ExchangeUserId: 'Exchange使用者ID',
-  Gender: '性别',
-  DateOfBirth: '生日',
-  Address: '地址',
-  City: '城市',
-  Town: '城镇',
-  State: '州',
-  ZipCode: '邮政编码',
-  SecurityQuestion: '安全问题',
-  SecurityCode: '完全代码',
-  WhereHear: '您是如何知道我们的',
-  PreferredUserName: '使用者名称偏好',
-  PreferredCurrency: '币别偏好',
-  PreferredOdds: '赔率偏好',
-  PreferredLanguage: '语言偏好',
-  LastUpdatedBA: '最后更新BA',
-  Won: '赢',
-  Lose: '输',
-  Draw: '和局',
-  Cancelled: '已取消的',
-  LastTransaction: '最后交易'
-};
-
-/***/ }),
-
-/***/ "./www/js/source/reactpages/Module/PlayerAdmin/resources/resource.en.js":
-/*!******************************************************************************!*\
-  !*** ./www/js/source/reactpages/Module/PlayerAdmin/resources/resource.en.js ***!
-  \******************************************************************************/
-/*! exports provided: resource_en */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resource_en", function() { return resource_en; });
-var resource_en = {
-  BankInformation: 'Bank Information',
-  BankName: 'Bank Name',
-  BankAccountName: 'Bank Account Name',
-  BankAccountNumber: 'Bank Account Number',
-  Country: 'Country',
-  AgUserId: 'AG UserId',
-  GoldDeluxeUserId: 'Gold Deluxe UserID',
-  VoidBridgeUserId: 'VoidBridge UserID',
-  ExchangeUserId: 'Exchange UserID',
-  FirstName: 'First name',
-  LastName: 'Last name',
-  DateOfBirth: 'Date of birth',
-  Mobile: 'Mobile',
-  City: 'City',
-  Town: 'Town',
-  State: 'State',
-  ZipCode: 'Zip Code',
-  SecurityQuestion: 'Security question',
-  SecurityCode: 'Security code',
-  WhereHear: 'Where did you hear about us',
-  PreferredUserName: 'My preferred username',
-  PreferredCurrency: 'My preferred currency',
-  PreferredOdds: 'My preferred odds',
-  PreferredLanguage: 'My preferred language',
-  MemberId: 'Member ID',
-  OperatorId: 'Operator ID',
-  SiteCode: 'Site code',
-  ProductCode: 'Product code',
-  CustomInfo1: 'CustomInfo 1',
-  CustomInfo2: 'CustomInfo 2',
-  CustomInfo3: 'CustomInfo 3',
-  CustomInfo4: 'CustomInfo 4',
-  CustomInfo5: 'CustomInfo 5',
-  CreatedDate: 'Created Date',
-  LastLogin: 'Last Login',
-  BAUpdatedBy: 'BA Updated By',
-  LastUpdatedBA: 'Last Updated BA',
-  SpecialLevel: 'Special Level',
-  LastUpdatedSpecialLevel: 'Last Updated Special Level',
-  Margin: 'Margin',
-  AverageBetSize: 'Average bet size',
-  Winnings: 'Winnings',
-  Loss: 'Loss',
-  NetWinLoss: 'Net Win Loss',
-  BasedOnSportsbook: 'Based on Sportsbook data',
-  NoSportsbookData: 'There is no Sportsbook data.',
-  FastCrossLink: 'Fast Cross-Link',
-  SingleCustomer: 'Single Customer',
-  BettingTicketCenter: 'Betting Ticket Center',
-  CustomerWinLoss: 'Customer Win Loss',
-  PlayerBettingStatisticsTitle: 'Player Betting Statistics (month to date)',
-  PlayerProfile: 'Player Profile',
-  ActivityRecord: 'Activity Record',
-  PlaceholderBankAccount: 'Search by Exactly Bank Account Number',
-  PlaceholderEmail: 'Search by Exactly Email',
-  Gender: 'Gender',
-  Address: 'Address',
-  Won: 'Won',
-  Lose: 'Lose',
-  Draw: 'Draw',
-  Cancelled: 'Cancelled',
-  LastTransaction: 'Last Transaction'
-};
 
 /***/ }),
 
@@ -8243,60 +8067,6 @@ function () {
   }]);
 
   return QueryString;
-}();
-
-
-
-/***/ }),
-
-/***/ "./www/js/source/reactpages/lib/clientResourceManager.js":
-/*!***************************************************************!*\
-  !*** ./www/js/source/reactpages/lib/clientResourceManager.js ***!
-  \***************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ClientResourceManager; });
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var DEFAULT_RESOURCE_KEY = 'en';
-var resources = {
-  'en': {},
-  'cs': {}
-};
-var currentLangKey = window._langKey || DEFAULT_RESOURCE_KEY;
-
-var ClientResourceManager =
-/*#__PURE__*/
-function () {
-  function ClientResourceManager() {
-    _classCallCheck(this, ClientResourceManager);
-  }
-
-  _createClass(ClientResourceManager, null, [{
-    key: "register",
-    value: function register(langKey, resourceValue) {
-      resources[langKey] = _objectSpread({}, resources[langKey], resourceValue);
-    }
-  }, {
-    key: "getText",
-    value: function getText(key) {
-      var currentResource = resources[currentLangKey];
-      return currentResource && (currentResource[key] || resources[DEFAULT_RESOURCE_KEY][key] || key);
-    }
-  }]);
-
-  return ClientResourceManager;
 }();
 
 
