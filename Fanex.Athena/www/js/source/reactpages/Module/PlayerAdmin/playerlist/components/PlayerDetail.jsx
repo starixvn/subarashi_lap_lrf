@@ -2,10 +2,9 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../actions';
-import { heightSlicing, excludedTabNameWithNonDepositAndArchived, contextMenuKeys } from '../lib/constants';
+import { heightSlicing, excludedTabNameWithNonDepositAndArchived, tabNameByContextMenu } from '../lib/constants';
 import { systemType as systemTypeConfig } from '../../../constants/configInfo';
 
-const playerInfoTabName = 'lblPlayerAdminPlayerInfo';
 export class PlayerDetail extends PureComponent {
     constructor(props) {
         super(props);
@@ -41,13 +40,13 @@ export class PlayerDetail extends PureComponent {
 
         return (
             renderedTabList.map((item) => {
-                const isPlayerInfoTab = item.Name === playerInfoTabName && selectedTabName === contextMenuKeys.bankInformation;
-                const action = isPlayerInfoTab ? `${item.Action}?subTab=${contextMenuKeys.bankInformation}` : item.Action;
-                const actionUrl = this._buildActionUrl(item.SystemType, action);
+                const actionUrl = this._buildActionUrl(item.SystemType, item.Action);
+                const tabNameBySelectedMenu = tabNameByContextMenu[selectedTabName];
+                const isActive = tabNameBySelectedMenu === item.Name || selectedTabName === item.Name;
 
                 return (
                     <li className="tab" key={item.Name}>
-                        <a className={(isPlayerInfoTab && selectedTabName === item.Name) ? "active" : ""}
+                        <a className={isActive ? "active" : ""}
                             href={actionUrl} onClick={(event) => this.handleClickMenu(event, item.Name)}>
                             {item.Text}
                         </a>
@@ -74,15 +73,16 @@ export class PlayerDetail extends PureComponent {
 
     _getActionUrl() {
         const { selectedTabName } = this.props;
-        const isPlayerInfoTab = selectedTabName === contextMenuKeys.bankInformation;
-        const actualTabName = isPlayerInfoTab ? playerInfoTabName : selectedTabName;
+        const tabNameBySelectedMenu = tabNameByContextMenu[selectedTabName];
+        const tabItem = selectedTabName ? 
+            this._tabList.find(t => t.Name === tabNameBySelectedMenu || t.Name === selectedTabName) : this._tabList[0];
 
-        const tabItem = actualTabName ? this._tabList.find(t => t.Name === actualTabName) : this._tabList[0];
-
-        const action = isPlayerInfoTab ? `${tabItem.Action}?subTab=${contextMenuKeys.bankInformation}` : tabItem.Action;
+        const action = tabNameBySelectedMenu ? `${tabItem.Action}?subTab=${selectedTabName}` : tabItem.Action;
 
         return tabItem && this._buildActionUrl(tabItem.SystemType, action);
     }
+
+    
 
     render() {
         const { selectedPlayer } = this.props;
@@ -96,7 +96,6 @@ export class PlayerDetail extends PureComponent {
         }
 
         const src = this._getActionUrl();
-        console.log(src);
         if (!src) {
             return null;
         }

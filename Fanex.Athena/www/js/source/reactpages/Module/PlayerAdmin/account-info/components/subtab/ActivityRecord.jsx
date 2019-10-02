@@ -14,7 +14,7 @@ export const ActivityRecord = ({ ibcCustId, getActivityRecord }) => {
         }
     }, [ibcCustId]);
 
-    const { CreatedDateString, LastLoginString, LastTxn,
+    const { CreatedDateString, LastTxn,
         LastUpdateBAString, BAUpdatedBy, LastUpdateSpecialLevelString, SpecialLevelUpdateBy } = data || {};
 
     return (
@@ -24,10 +24,6 @@ export const ActivityRecord = ({ ibcCustId, getActivityRecord }) => {
                     <tr>
                         <td className="first-cell">{ClientResourceManager.getText('CreatedDate')}</td>
                         <td>{CreatedDateString}</td>
-                    </tr>
-                    <tr>
-                        <td>{ClientResourceManager.getText('LastLogin')}</td>
-                        <td>{LastLoginString}</td>
                     </tr>
                     <tr>
                         <td>{ClientResourceManager.getText('LastTransaction')}</td>

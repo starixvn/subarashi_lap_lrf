@@ -5,7 +5,6 @@ import {
     contextMenuList,
     playerStatusByName,
     licenseeType,
-    contextMenuKeys,
     excludedContextMenuWithApiLicensee
 } from '../constants';
 

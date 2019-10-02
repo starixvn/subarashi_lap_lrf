@@ -72,9 +72,14 @@ export const contextMenuKeys = {
 }
 
 export const tabNames = {
+    playerInfo: 'lblPlayerAdminPlayerInfo',
     statement: 'lblPlayerAdminPlayerStatement',
     betlist: 'lblPlayerAdminBetList',
     betLimit: 'lblPlayerAdminBetLimit'
+}
+
+export const tabNameByContextMenu = {
+    [contextMenuKeys.bankInformation]: tabNames.playerInfo
 }
 
 export const excludedTabNameWithNonDepositAndArchived = [tabNames.statement, tabNames.betlist, tabNames.betLimit];
