@@ -1551,11 +1551,13 @@ function (_PureComponent) {
       return renderedTabList.map(function (item) {
         var actionUrl = _this2._buildActionUrl(item.SystemType, item.Action);
 
+        var tabNameBySelectedMenu = _lib_constants__WEBPACK_IMPORTED_MODULE_4__["tabNameByContextMenu"][selectedTabName];
+        var isActive = tabNameBySelectedMenu === item.Name || selectedTabName === item.Name;
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
           className: "tab",
           key: item.Name
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-          className: selectedTabName === item.Name ? "active" : "",
+          className: isActive ? "active" : "",
           href: actionUrl,
           onClick: function onClick(event) {
             return _this2.handleClickMenu(event, item.Name);
@@ -1584,10 +1586,12 @@ function (_PureComponent) {
     key: "_getActionUrl",
     value: function _getActionUrl() {
       var selectedTabName = this.props.selectedTabName;
+      var tabNameBySelectedMenu = _lib_constants__WEBPACK_IMPORTED_MODULE_4__["tabNameByContextMenu"][selectedTabName];
       var tabItem = selectedTabName ? this._tabList.find(function (t) {
-        return t.Name === selectedTabName;
+        return t.Name === tabNameBySelectedMenu || t.Name === selectedTabName;
       }) : this._tabList[0];
-      return tabItem && this._buildActionUrl(tabItem.SystemType, tabItem.Action);
+      var action = tabNameBySelectedMenu ? "".concat(tabItem.Action, "?subTab=").concat(selectedTabName) : tabItem.Action;
+      return tabItem && this._buildActionUrl(tabItem.SystemType, action);
     }
   }, {
     key: "render",
@@ -1749,7 +1753,8 @@ function (_React$Component) {
           playerList = _this$props2.playerList,
           param = _this$props2.param,
           displayedColumnList = _this$props2.displayedColumnList,
-          exportExcel = _this$props2.exportExcel;
+          exportExcel = _this$props2.exportExcel,
+          selectedPlayer = _this$props2.selectedPlayer;
 
       if (displayedColumnList.filter(function (x) {
         return x.show;
@@ -1759,7 +1764,10 @@ function (_React$Component) {
       }
 
       var displayedColumn = Object(_lib_helpers_utils__WEBPACK_IMPORTED_MODULE_7__["buildDisplayedColumnObject"])(displayedColumnList);
-      exportExcel(playerList, param, displayedColumn);
+      var dataList = selectedPlayer ? [playerList.find(function (item) {
+        return item.LicenseeCustId === selectedPlayer.licenseeCustId;
+      })] : playerList;
+      exportExcel(dataList, param, displayedColumn);
     });
 
     return _this;
@@ -2549,7 +2557,8 @@ var ContextMenu = function ContextMenu(props) {
       currentActivePlayer = props.currentActivePlayer,
       setSelectedTabName = props.setSelectedTabName,
       getTabList = props.getTabList,
-      contextMenu = props.contextMenu;
+      contextMenu = props.contextMenu,
+      type = props.type;
   var position = contextMenu.position,
       isOpenContextMenu = contextMenu.isOpen;
 
@@ -2595,7 +2604,7 @@ var ContextMenu = function ContextMenu(props) {
 
   if (currentActivePlayer) {
     var tabList = getTabList();
-    activeMenuList = Object(_lib_helpers_contextMenuHelper__WEBPACK_IMPORTED_MODULE_5__["getActiveTabList"])(currentActivePlayer, tabList);
+    activeMenuList = Object(_lib_helpers_contextMenuHelper__WEBPACK_IMPORTED_MODULE_5__["getActiveTabList"])(currentActivePlayer, tabList, type);
   }
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2606,10 +2615,12 @@ var ContextMenu = function ContextMenu(props) {
     onMouseLeave: handleMouseLeave,
     isOpen: isOpenContextMenu || isOpen
   }, activeMenuList.map(function (item) {
+    var subTabName = item.subTabName;
+    var selectedTabName = subTabName || item.tabName;
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_4__["DropdownItem"], {
       key: item.key,
       onClick: function onClick() {
-        return handleClickMenu(item.tabName);
+        return handleClickMenu(selectedTabName);
       }
     }, item.name);
   })));
@@ -2628,10 +2639,12 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
   var currentActivePlayer = state.currentActivePlayer,
-      contextMenu = state.contextMenu;
+      contextMenu = state.contextMenu,
+      type = state.type;
   return Object.assign({}, {
     currentActivePlayer: currentActivePlayer,
-    contextMenu: contextMenu
+    contextMenu: contextMenu,
+    type: type
   });
 }
 
@@ -3219,13 +3232,15 @@ var StatusCell = function StatusCell(props) {
   var dataItem = props.dataItem,
       statusDropdownPosition = props.statusDropdownPosition,
       setCurrentActivePlayer = props.setCurrentActivePlayer,
-      setStatusDropdownPosition = props.setStatusDropdownPosition;
+      setStatusDropdownPosition = props.setStatusDropdownPosition,
+      type = props.type;
   var Status = dataItem.Status,
       IsOnline = dataItem.IsOnline,
-      IsDeposit = dataItem.IsDeposit;
+      IsDeposit = dataItem.IsDeposit,
+      IsArchived = dataItem.IsArchived;
   var statusName = _lib_constants__WEBPACK_IMPORTED_MODULE_3__["playerStatus"][Status];
-  var classname = 'status-text ' + statusName;
-  var canUpdate = Status !== _lib_constants__WEBPACK_IMPORTED_MODULE_3__["playerStatusByName"].Archived && Status !== _lib_constants__WEBPACK_IMPORTED_MODULE_3__["playerStatusByName"].Closed;
+  var classname = 'status-text status-' + Status;
+  var canUpdate = type === _lib_constants__WEBPACK_IMPORTED_MODULE_3__["licenseeType"].nonApi && !IsArchived && Status !== _lib_constants__WEBPACK_IMPORTED_MODULE_3__["playerStatusByName"].Closed;
 
   var handleToggleStatus = function handleToggleStatus(event) {
     var currentActivePlayer = Object(_lib_helpers_playerDataBuilder__WEBPACK_IMPORTED_MODULE_6__["buildCurrentActivePlayer"])(dataItem);
@@ -3263,9 +3278,11 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-  var statusDropdownPosition = state.statusDropdownPosition;
+  var statusDropdownPosition = state.statusDropdownPosition,
+      type = state.type;
   return Object.assign({}, {
-    statusDropdownPosition: statusDropdownPosition
+    statusDropdownPosition: statusDropdownPosition,
+    type: type
   });
 }
 
@@ -3458,9 +3475,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_helpers_gridHelper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../lib/helpers/gridHelper */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/gridHelper.js");
 /* harmony import */ var _lib_helpers_playerDataBuilder__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../lib/helpers/playerDataBuilder */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/playerDataBuilder.js");
 /* harmony import */ var _lib_helpers_contextMenuHelper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../lib/helpers/contextMenuHelper */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/helpers/contextMenuHelper.js");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -3477,7 +3496,8 @@ var UserNameCell = function UserNameCell(props) {
       setContextMenu = props.setContextMenu,
       contextMenu = props.contextMenu,
       setSelectedTabName = props.setSelectedTabName,
-      getTabList = props.getTabList;
+      getTabList = props.getTabList,
+      type = props.type;
 
   var handleSelectPlayer = function handleSelectPlayer(event) {
     event.preventDefault();
@@ -3493,7 +3513,7 @@ var UserNameCell = function UserNameCell(props) {
     if (!isOpen) {
       var currentActivePlayer = Object(_lib_helpers_playerDataBuilder__WEBPACK_IMPORTED_MODULE_5__["buildCurrentActivePlayer"])(dataItem);
       var tabList = getTabList();
-      var activeMenuList = Object(_lib_helpers_contextMenuHelper__WEBPACK_IMPORTED_MODULE_6__["getActiveTabList"])(currentActivePlayer, tabList);
+      var activeMenuList = Object(_lib_helpers_contextMenuHelper__WEBPACK_IMPORTED_MODULE_6__["getActiveTabList"])(currentActivePlayer, tabList, type);
       var contextMenuHeight = itemContextMenuHeight * activeMenuList.length;
       var rect = event.target.getBoundingClientRect();
       var position = {
@@ -3518,12 +3538,14 @@ var UserNameCell = function UserNameCell(props) {
     }
   };
 
+  var Status = dataItem.Status;
+  var isClosedOrArchived = Status === _lib_constants__WEBPACK_IMPORTED_MODULE_7__["playerStatusByName"].Closed || Status === _lib_constants__WEBPACK_IMPORTED_MODULE_7__["playerStatusByName"].Archived;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "username-cell"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     className: "btn-default btn-link username-link",
     onClick: handleSelectPlayer
-  }, dataItem.UserName), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  }, dataItem.UserName), !isClosedOrArchived && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     className: "btn-default btn-link btn-icon cell-menu",
     onMouseEnter: handleEnterContextMenu,
     onMouseLeave: handleLeaveContextMenu
@@ -3548,9 +3570,11 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-  var contextMenu = state.contextMenu;
+  var contextMenu = state.contextMenu,
+      type = state.type;
   return Object.assign({}, {
-    contextMenu: contextMenu
+    contextMenu: contextMenu,
+    type: type
   });
 }
 
@@ -3620,7 +3644,7 @@ Object(react_dom__WEBPACK_IMPORTED_MODULE_2__["render"])(react__WEBPACK_IMPORTED
 /*!*********************************************************************************!*\
   !*** ./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js ***!
   \*********************************************************************************/
-/*! exports provided: specialLevelListWithColor, oddsGroupListWithStyle, licenseeType, fields, columnList, contextMenuKeys, tabNames, excludedTabNameWithNonDepositAndArchived, contextMenuList, heightSlicing, searchOptions, defaultPagingOption, playerStatus, playerStatusByName, displayedPlayerStatusList, messageUpdateState, baStatusList, headerText, gridItemDropdownHeight, stringTypeFields, apiInfo, apiUpdateInfo, apiSiteSetting, apiSuggestion, excludedContextMenuWithNonDeposit, excludedContextMenuWithClosed, excludedContextMenuWithArchived, playerTypes, emailPattern */
+/*! exports provided: specialLevelListWithColor, oddsGroupListWithStyle, licenseeType, fields, columnList, contextMenuKeys, tabNames, tabNameByContextMenu, excludedTabNameWithNonDepositAndArchived, contextMenuList, heightSlicing, searchOptions, defaultPagingOption, playerStatus, playerStatusByName, displayedPlayerStatusList, messageUpdateState, baStatusList, headerText, gridItemDropdownHeight, stringTypeFields, apiInfo, apiUpdateInfo, apiSiteSetting, apiSuggestion, excludedContextMenuWithNonDeposit, excludedContextMenuWithClosed, excludedContextMenuWithArchived, excludedContextMenuWithApiLicensee, playerTypes, emailPattern */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3632,6 +3656,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "columnList", function() { return columnList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "contextMenuKeys", function() { return contextMenuKeys; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tabNames", function() { return tabNames; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tabNameByContextMenu", function() { return tabNameByContextMenu; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "excludedTabNameWithNonDepositAndArchived", function() { return excludedTabNameWithNonDepositAndArchived; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "contextMenuList", function() { return contextMenuList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "heightSlicing", function() { return heightSlicing; });
@@ -3652,6 +3677,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "excludedContextMenuWithNonDeposit", function() { return excludedContextMenuWithNonDeposit; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "excludedContextMenuWithClosed", function() { return excludedContextMenuWithClosed; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "excludedContextMenuWithArchived", function() { return excludedContextMenuWithArchived; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "excludedContextMenuWithApiLicensee", function() { return excludedContextMenuWithApiLicensee; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "playerTypes", function() { return playerTypes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "emailPattern", function() { return emailPattern; });
 /* harmony import */ var _constants_configInfo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../constants/configInfo */ "./www/js/source/reactpages/Module/constants/configInfo.js");
@@ -3754,7 +3780,7 @@ var columnList = [{
   show: true
 }, {
   key: fields.LastTransaction,
-  value: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('LastTransaction'),
+  value: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('LastTransfer'),
   show: true
 }, {
   key: fields.Email,
@@ -3762,6 +3788,7 @@ var columnList = [{
   show: true
 }];
 var contextMenuKeys = {
+  bankInformation: 'bankInformation',
   note: 'note',
   password: 'password',
   fundtransferLimit: 'fundtransferLimit',
@@ -3770,12 +3797,19 @@ var contextMenuKeys = {
   personalMessage: 'personalMessage'
 };
 var tabNames = {
+  playerInfo: 'lblPlayerAdminPlayerInfo',
   statement: 'lblPlayerAdminPlayerStatement',
   betlist: 'lblPlayerAdminBetList',
   betLimit: 'lblPlayerAdminBetLimit'
 };
+var tabNameByContextMenu = _defineProperty({}, contextMenuKeys.bankInformation, tabNames.playerInfo);
 var excludedTabNameWithNonDepositAndArchived = [tabNames.statement, tabNames.betlist, tabNames.betLimit];
 var contextMenuList = [{
+  key: contextMenuKeys.bankInformation,
+  name: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('BankInformation'),
+  tabName: 'lblPlayerAdminPlayerInfo',
+  subTabName: contextMenuKeys.bankInformation
+}, {
   key: contextMenuKeys.note,
   name: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Note'),
   tabName: 'lblPlayerAdminNote'
@@ -3907,6 +3941,7 @@ var apiSuggestion = {
 var excludedContextMenuWithNonDeposit = [contextMenuKeys.betLimit, contextMenuKeys.statement];
 var excludedContextMenuWithClosed = [contextMenuKeys.password];
 var excludedContextMenuWithArchived = [contextMenuKeys.password, contextMenuKeys.betLimit, contextMenuKeys.statement];
+var excludedContextMenuWithApiLicensee = [contextMenuKeys.password, contextMenuKeys.bankInformation, contextMenuKeys.personalMessage];
 var playerTypes = {
   nonDeposit: 1,
   deposit: 2
@@ -3943,11 +3978,15 @@ var isShowContextMenuItem = function isShowContextMenuItem(item, isDeposit, isAr
 
   return true;
 };
-var getActiveTabList = function getActiveTabList(player, tabList) {
+var getActiveTabList = function getActiveTabList(player, tabList, licType) {
   var isDeposit = player.isDeposit,
       isArchived = player.isArchived,
       status = player.status;
   return _constants__WEBPACK_IMPORTED_MODULE_0__["contextMenuList"].filter(function (item) {
+    if (licType === _constants__WEBPACK_IMPORTED_MODULE_0__["licenseeType"].api && _constants__WEBPACK_IMPORTED_MODULE_0__["excludedContextMenuWithApiLicensee"].includes(item.key)) {
+      return false;
+    }
+
     var isClosedPlayer = status === _constants__WEBPACK_IMPORTED_MODULE_0__["playerStatusByName"].Closed;
     return !!tabList.find(function (t) {
       return item.tabName === t.Name;

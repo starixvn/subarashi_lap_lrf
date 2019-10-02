@@ -1002,16 +1002,16 @@ iframe {
   position: fixed;
   z-index: 1; }
 
-.result-content .Active {
+.result-content .status-0 {
   color: #00ff00 !important; }
 
-.result-content .Locked {
+.result-content .status-1 {
   color: #333333 !important; }
 
-.result-content .Closed {
+.result-content .status-2 {
   color: #ff0000 !important; }
 
-.result-content .Archived {
+.result-content .status-3 {
   color: #333333 !important; }
 
 .result-content .icon-separator {
