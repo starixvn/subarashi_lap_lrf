@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.SessionState;
@@ -85,6 +86,11 @@ namespace Fanex.Athena.Module.PlayerAdmin.Controllers
                 var stream = await _betListApiClient.PostAsyncStream("/BettingTicketCenter/GetBySingleCustomer",
                 metaModel,
                 userSession.Language).ConfigureAwait(false);
+
+                if (stream is null || stream.Length == 0)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.NoContent);
+                }
 
                 return File(stream, "application/octet-stream");
             }
