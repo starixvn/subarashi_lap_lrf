@@ -111,7 +111,7 @@ const SettingContent = (Grid, DataHandling) => {
 
                 const { data } = this.state;
                 const copyRow = data.find(e => e.Id === setting.CopyId);
-                const copyValue = DataHandling.getSubmitData(copyRow);
+                const copyValue = DataHandling.getSubmitRowData(copyRow);
                 const invalidData = DataHandling.validate(copyValue, copyRow);
 
                 if (invalidData !== null) {
@@ -210,7 +210,7 @@ const SettingContent = (Grid, DataHandling) => {
 
                 this.setState({
                     showError: true,
-                    errorBalloon: { msg: invalidData.Message, targetTop: pos.top, targetLeft: pos.left + pos.width / 2 }
+                    errorBalloon: { Id: invalidData.Id, msg: invalidData.Message, targetTop: pos.top, targetLeft: pos.left + pos.width / 2 }
                 }, () => invalidInput.focus());
             }
         }

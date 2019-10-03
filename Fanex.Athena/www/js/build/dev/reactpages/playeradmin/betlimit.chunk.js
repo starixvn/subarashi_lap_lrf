@@ -534,7 +534,7 @@ var SettingContent = function SettingContent(Grid, DataHandling) {
           var copyRow = data.find(function (e) {
             return e.Id === setting.CopyId;
           });
-          var copyValue = DataHandling.getSubmitData(copyRow);
+          var copyValue = DataHandling.getSubmitRowData(copyRow);
           var invalidData = DataHandling.validate(copyValue, copyRow);
 
           if (invalidData !== null) {
@@ -724,6 +724,7 @@ var SettingContent = function SettingContent(Grid, DataHandling) {
           this.setState({
             showError: true,
             errorBalloon: {
+              Id: invalidData.Id,
               msg: invalidData.Message,
               targetTop: pos.top,
               targetLeft: pos.left + pos.width / 2
