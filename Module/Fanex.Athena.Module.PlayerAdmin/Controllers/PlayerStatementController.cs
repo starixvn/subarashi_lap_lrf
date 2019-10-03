@@ -23,9 +23,8 @@
     [FunctionAuthorization(PermissionKeys.PlayerAdminStatement)]
     public class PlayerStatementController : CultureBaseController
     {
-        private const int MaximumYear = 2;
-
         private readonly IPlayerStatementService _playerStatementService;
+        private const int MaximumYear = 2;
 
         public PlayerStatementController(
             ILanguageService languageService,
@@ -57,24 +56,14 @@
         [AjaxRequest]
         [CustomValidateAntiForgery]
         [ValidatePermissionOnData(isObject: true)]
+        [ValidationWebRequest]
         [OutputCache(NoStore = true, Duration = 0, Location = OutputCacheLocation.None, VaryByParam = "*")]
         public async Task<ActionResult> GetStatementUrl(PlayerStatementMetaModel metaModel)
         {
-            if (!ValidateRequestParameter(metaModel))
-            {
-                throw new InvalidOperationException(ViewResources.InvalidParams);
-            }
-
             metaModel.SiteName = SessionService.LicenseeSession.LicenseeName;
             metaModel.Language = SessionService.UserSession.Language;
             return Content(await _playerStatementService.GetUrl(metaModel).ConfigureAwait(false));
         }
 
-        private static bool ValidateRequestParameter(PlayerStatementMetaModel metaModel)
-        {
-            return metaModel.ToDate >= metaModel.FromDate
-                && metaModel.FromDate.Month == metaModel.ToDate.Month
-                && metaModel.FromDate.Year >= (DateTime.Today.Year - MaximumYear);
-        }
     }
 }
