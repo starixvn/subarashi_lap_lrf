@@ -64,12 +64,6 @@
 
                 var content = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
-                if (!response.IsSuccessStatusCode)
-                {
-                    response.Content.Dispose();
-                    throw CreateErrorException(response.StatusCode, "Request unsuccessfully", content);
-                }
-
                 try
                 {
                     var result = JsonConvert.DeserializeObject<ExternalServiceToken>(content);
@@ -79,10 +73,6 @@
                 catch (Exception ex)
                 {
                     throw CreateErrorException(response.StatusCode, ex.Message, content);
-                }
-                finally
-                {
-                    response.Content.Dispose();
                 }
             }
         }

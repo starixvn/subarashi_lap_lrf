@@ -47,7 +47,6 @@ namespace Fanex.Athena
                 {
                     LogService.Error(LogMessageHelper.GenerateMessage(exception), exception);
                 }
-
             }
         }
 

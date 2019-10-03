@@ -58,7 +58,7 @@
         [CustomValidateAntiForgery]
         [ValidatePermissionOnData(isObject: true)]
         [OutputCache(NoStore = true, Duration = 0, Location = OutputCacheLocation.None, VaryByParam = "*")]
-        public async Task<string> GetStatementUrl(PlayerStatementMetaModel metaModel)
+        public async Task<ActionResult> GetStatementUrl(PlayerStatementMetaModel metaModel)
         {
             if (!ValidateRequestParameter(metaModel))
             {
@@ -67,7 +67,7 @@
 
             metaModel.SiteName = SessionService.LicenseeSession.LicenseeName;
             metaModel.Language = SessionService.UserSession.Language;
-            return await _playerStatementService.GetUrl(metaModel).ConfigureAwait(false);
+            return Content(await _playerStatementService.GetUrl(metaModel).ConfigureAwait(false));
         }
 
         private static bool ValidateRequestParameter(PlayerStatementMetaModel metaModel)
