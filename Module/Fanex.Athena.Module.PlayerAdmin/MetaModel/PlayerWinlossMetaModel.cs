@@ -6,13 +6,12 @@ using Fanex.Athena.Model.Core.MetaModel.Product;
 
 namespace Fanex.Athena.Module.PlayerAdmin.MetaModel
 {
-    public class PlayerWinLossMetaModel : IMetaModelAgent
+    public class PlayerWinLossMetaModel : IMetaModelAgent, IMetaModelValidation
     {
         private const int MinimumPageSize = 50;
 
         private string _userName;
 
-        [Required]
         public string Username
         {
             get
@@ -47,5 +46,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.MetaModel
         public bool SystemIdVisible { get; set; }
 
         public string ExcelTitle { get; set; }
+
+        public bool IsValid => !string.IsNullOrEmpty(Username);
     }
 }

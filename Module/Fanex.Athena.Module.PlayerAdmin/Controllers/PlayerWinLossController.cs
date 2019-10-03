@@ -61,16 +61,10 @@ namespace Fanex.Athena.Module.PlayerAdmin.Controllers
         [HttpPost]
         [AjaxRequest]
         [CustomValidateAntiForgery]
+        [ValidationWebRequest]
         [AutoBindMetaModel(BindAgent = true)]
         public async Task<ActionResult> Index([Bind(Include = "Username")]PlayerWinLossMetaModel metaModel)
         {
-            if (!ModelState.IsValid)
-            {
-                return Json(new
-                {
-                    Data = DBNull.Value
-                });
-            }
             var userSession = SessionService.UserSession;
             AssignMetaModelValue(metaModel);
 

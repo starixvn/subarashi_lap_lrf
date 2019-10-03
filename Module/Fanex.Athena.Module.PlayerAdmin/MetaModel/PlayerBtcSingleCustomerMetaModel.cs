@@ -5,7 +5,7 @@ using Fanex.Athena.Model.Core.MetaModel;
 
 namespace Fanex.Athena.Module.PlayerAdmin.MetaModel
 {
-    public class PlayerBtcSingleCustomerMetaModel : IMetaModelAgent, IMetaModelCurrencyList
+    public class PlayerBtcSingleCustomerMetaModel : IMetaModelAgent, IMetaModelCurrencyList, IMetaModelValidation
     {
         private const int DefaultPageSize = 50;
 
@@ -27,7 +27,6 @@ namespace Fanex.Athena.Module.PlayerAdmin.MetaModel
 
         public string AgentListXml { get; set; }
 
-        [Required]
         public string UserName
         {
             get
@@ -75,5 +74,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.MetaModel
         public string SortOrder { get; set; }
 
         public IDictionary<int, string> CurrencyList { get; set; }
+
+        public bool IsValid => !string.IsNullOrEmpty(UserName);
     }
 }

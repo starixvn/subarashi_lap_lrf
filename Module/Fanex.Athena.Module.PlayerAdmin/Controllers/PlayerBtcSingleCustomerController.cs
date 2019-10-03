@@ -63,19 +63,10 @@ namespace Fanex.Athena.Module.PlayerAdmin.Controllers
         [HttpPost]
         [AjaxRequest]
         [CustomValidateAntiForgery]
+        [ValidationWebRequest]
         [AutoBindMetaModel(BindAgent = true, BindCurrencyList = true)]
         public async Task<dynamic> Index([Bind(Include = "Username,PageSize,PageIndex,IsExport,SortBy,SortOrder")]PlayerBtcSingleCustomerMetaModel metaModel)
         {
-            if (!ModelState.IsValid)
-            {
-                return Json(new
-                {
-                    Data = DBNull.Value,
-                    Total = DBNull.Value,
-                    TotalRows = DBNull.Value
-                });
-            }
-
             var userSession = SessionService.UserSession;
             metaModel.HasPlayerCom = SessionService.LicenseeSession.IsAllowedCustomerComm;
 
