@@ -72,7 +72,7 @@
                 }
                 catch (Exception ex)
                 {
-                    throw CreateErrorException(response.StatusCode, ex.Message, content);
+                    CreateErrorException(response.StatusCode, ex.Message, content);
                 }
             }
         }
@@ -82,7 +82,7 @@
             var errorMessage = new StringBuilder($"HTTP Error: {error}");
             errorMessage.AppendLine($"HTTP status code: {statusCode}");
             errorMessage.AppendLine($"Response Content: {content}");
-
+            Logging.Logger.Log.Error(errorMessage.ToString());
             return new ServiceException(errorMessage.ToString(), "External Service");
         }
 
