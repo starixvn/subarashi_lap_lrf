@@ -28,6 +28,7 @@ export class GridCaption extends React.Component {
     _buildDisplayedColumnList() {
         return (
             <MultipleSelect id="columnList" className="selection-column"
+                language={LangHelper.currentLanguage}
                 dataSource={this.props.displayedColumnList}
                 keyField={"key"}
                 valueField={"value"}

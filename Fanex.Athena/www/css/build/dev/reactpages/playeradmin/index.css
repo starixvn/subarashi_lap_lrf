@@ -1042,6 +1042,9 @@ iframe {
   cursor: none;
   pointer-events: none; }
 
+.result-content .dropdown-label-container.disabled {
+  background-color: #d5c8c8; }
+
 /*End Grid*/
 
 

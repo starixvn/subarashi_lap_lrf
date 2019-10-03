@@ -226,5 +226,11 @@ iframe {
         cursor: none;
         pointer-events: none;
     }
+
+    .dropdown-label-container {
+        &.disabled {
+            background-color: #d5c8c8;
+        }
+    }
 }
 /*End Grid*/

@@ -1779,6 +1779,7 @@ function (_React$Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_5___default.a, {
         id: "columnList",
         className: "selection-column",
+        language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].currentLanguage,
         dataSource: this.props.displayedColumnList,
         keyField: "key",
         valueField: "value",
