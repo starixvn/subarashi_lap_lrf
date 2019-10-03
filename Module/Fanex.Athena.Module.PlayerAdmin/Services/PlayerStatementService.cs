@@ -72,7 +72,7 @@
                 }
                 catch (Exception ex)
                 {
-                    CreateErrorException(response.StatusCode, ex.Message, content);
+                    throw CreateErrorException(response.StatusCode, ex.Message, content);
                 }
             }
         }
