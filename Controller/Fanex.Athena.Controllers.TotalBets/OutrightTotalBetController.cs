@@ -8,12 +8,15 @@ namespace Fanex.Athena.Controllers.TotalBets
 {
     using System.Threading.Tasks;
     using System.Web.Mvc;
+
     using DataAccess.TotalBet.Interfaces;
-    using Extension.Utility;
+    using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
-    using Model.Core.DataDomain;
+
     using Model.TotalBet.MetaModel;
     using Model.TotalBet.ViewModel;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
 
@@ -25,9 +28,8 @@ namespace Fanex.Athena.Controllers.TotalBets
         public OutrightTotalBetController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             IOutrightDataAccess outrightDataAccess)
-        : base(languageService, sessionService, appSetting)
+        : base(languageService, sessionService)
         {
             _outrightDataAccess = outrightDataAccess;
         }
@@ -49,26 +51,25 @@ namespace Fanex.Athena.Controllers.TotalBets
         [ValidationWebRequest(IsValidCurrency = true)]
         public async Task<ActionResult> Index(OutrightMetaModel metaModel)
         {
-
             metaModel.LicenseeId = SessionService.LicenseeSession.LicenseeId;
             return await this.GetView(metaModel).ConfigureAwait(false);
         }
 
         private async Task<ActionResult> GetView(OutrightMetaModel metaModel)
         {
-            var currencies = SessionService.UserSession.CurrencyList;
+            var userSession = SessionService.UserSession;
 
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList,
+                metaModel.CurrencyId);
             var dataList = await _outrightDataAccess.GetOutrightDataList(metaModel).ConfigureAwait(false);
             var model = new OutrightViewModel
             {
                 Param = metaModel,
                 MainData = dataList,
-                CurrencyList = currencies
+                CurrencyList = userSession.CurrencyList
             };
 
             return View("~/Views/Desktop/TotalBets/Outright/Main.cshtml", model);
-
         }
     }
 }

@@ -10,11 +10,14 @@ namespace Fanex.Athena.Service.Report
     using System.Collections.Generic;
     using System.Globalization;
     using System.Threading.Tasks;
+
     using Extension.Helper;
+
     using Fanex.Athena.DataAccess.Report.Interfaces;
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Service.Report.Interfaces;
+
     using Model.Report.ResultModel;
 
     /// <summary>

@@ -2,12 +2,13 @@
 {
     using Extension.Utility;
     using Fanex.Athena.Service.Core.Common.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Service.Core.Users.Interfaces;
 
     internal class FakeCultureBaseController : CultureBaseController
     {
-        internal FakeCultureBaseController(ILanguageService languageService, ISessionService sessionService, IAppSettings appSetting)
-            : base(languageService, sessionService, appSetting)
+        internal FakeCultureBaseController(ILanguageService languageService, ISessionService sessionService)
+            : base(languageService, sessionService)
         {
         }
 

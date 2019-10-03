@@ -3,7 +3,8 @@
     using Base.UnitTests;
     using DataAccess.Core.Common.Interfaces;
     using DataAccess.Forecast.Interfaces;
-    using Fanex.Athena.Session.Model;
+    using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Logging;
     using Model.Core.DTO.Common;
     using Model.Forecast.DTO.NewForecastHdpOu;
@@ -382,12 +383,11 @@
             var controller = new NewHandicapOverUnderForecastController(
                 LangService,
                 SessionService,
-                AppSettings,
                 _forecastDataAccess,
                 Substitute.For<ILogger>(),
                 _cacheRefAdapter,
                 _matchService,
-                _leagueDataAccess)
+                _leagueDataAccess, AppSettings)
             {
                 ControllerContext = ControllerContext
             };

@@ -1,8 +1,8 @@
 ﻿namespace Fanex.Athena.Service.Customer.UnitTests
 {
     using System.Threading.Tasks;
-
     using DataAccess.Customer.Interfaces;
+    using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DTO.Common;
     using Model.Customer.MetaModel;
@@ -10,8 +10,6 @@
     using NSubstitute;
 
     using NUnit.Framework;
-
-    using Session.Model;
 
     using UnitTest.Common.Helpers;
 
@@ -22,10 +20,10 @@
 
         private GroupComService _groupComService;
         private ILGAPIClient _lgClient;
+
         [SetUp]
         public void SetUp()
         {
-
             _lgClient = Substitute.For<ILGAPIClient>();
 
             _groupDataAccess = Substitute.For<IGroupComDataAccess>();
@@ -46,23 +44,23 @@
             var licenseeId = FakeHelper.Create<int>();
 
             // Action
-            var result = _groupComService.GetAll(licenseeId);
+            _groupComService.GetAllAsync(licenseeId);
 
             // Assert
-            _groupDataAccess.Received().GetAll(licenseeId);
+            _groupDataAccess.Received().GetAllAsync(licenseeId);
         }
 
         [Test]
-        public void GetDataForExcel_WhenCall_ReturnDataFromDataAccess()
+        public async Task GetDataForExcel_WhenCall_ReturnDataFromDataAccessAsync()
         {
             // Arrange
             var licenseeId = FakeHelper.Create<int>();
 
             // Action
-            var result = _groupComService.GetDataForExcel(licenseeId);
+            _ = await _groupComService.GetDataForExcelAsync(licenseeId);
 
             // Assert
-            _groupDataAccess.Received().GetDataForExcel(licenseeId);
+            _ = await _groupDataAccess.Received().GetDataForExcelAsync(licenseeId);
         }
 
         [Test]
@@ -73,14 +71,14 @@
             var licenseeId = FakeHelper.Create<int>();
 
             // Action
-            var result = _groupComService.GetById(groupCommId, licenseeId);
+            _groupComService.GetById(groupCommId, licenseeId);
 
             // Assert
             _groupDataAccess.Received().GetById(groupCommId, licenseeId);
         }
 
         [Test]
-        public void InsertGroup_WhenCall_ReturnDataFromDataAccess()
+        public async Task InsertGroup_WhenCall_ReturnDataFromDataAccessAsync()
         {
             // Arrange
             var item = FakeHelper.Create<GroupCommMetaModel>();
@@ -88,10 +86,10 @@
             var userId = FakeHelper.Create<int>();
 
             // Action
-            var result = _groupComService.InsertGroup(item, request, userId);
+            await _groupComService.InsertGroupAsync(item, request, userId);
 
             // Assert
-            _groupDataAccess.Received().InsertGroup(item, request, userId);
+            _ = await _groupDataAccess.Received().InsertGroupAsync(item, request, userId);
         }
 
         [Test]
@@ -99,15 +97,15 @@
         {
             // Arrange
             var groupCommMetaModel = new GroupCommMetaModel { IsUpdateCS = false };
-            var userSession = FakeHelper.Create<UserSession>();
+            var userSession = FakeHelper.Create<UserAuthInfo>();
             var request = FakeHelper.Create<Request>();
 
             var expectedResult = FakeHelper.Create<ResultInfo>();
-            _groupDataAccess.UpdateGroup(groupCommMetaModel, request, userSession.UserId)
+            _groupDataAccess.UpdateGroupAsync(groupCommMetaModel, request, userSession.UserId)
                 .Returns(expectedResult);
 
             // Action
-            var result = await _groupComService.UpdateGroup(groupCommMetaModel, request, userSession);
+            var result = await _groupComService.UpdateGroupAsync(groupCommMetaModel, request, userSession);
 
             // Assert
             Assert.Multiple(() =>
@@ -122,15 +120,15 @@
         {
             // Arrange
             var newItem = new GroupCommMetaModel { IsUpdateCS = true };
-            var userSession = FakeHelper.Create<UserSession>();
+            var userSession = FakeHelper.Create<UserAuthInfo>();
             var request = FakeHelper.Create<Request>();
 
             var expectedResult = new ResultInfo { ExtendedData = string.Empty };
-            _groupDataAccess.UpdateGroup(newItem, request, userSession.UserId)
+            _groupDataAccess.UpdateGroupAsync(newItem, request, userSession.UserId)
                 .Returns(expectedResult);
 
             // Action
-            var result = await _groupComService.UpdateGroup(newItem, request, userSession);
+            var result = await _groupComService.UpdateGroupAsync(newItem, request, userSession);
 
             // Assert
             Assert.Multiple(() =>
@@ -145,18 +143,18 @@
         {
             // Arrange
             var newItem = new GroupCommMetaModel { IsUpdateCS = true };
-            var userSession = FakeHelper.Create<UserSession>();
+            var userSession = FakeHelper.Create<UserAuthInfo>();
             var request = FakeHelper.Create<Request>();
 
             var expectedResult = new ResultInfo { ExtendedData = "1,2,3" };
-            _groupDataAccess.UpdateGroup(newItem, request, userSession.UserId)
+            _groupDataAccess.UpdateGroupAsync(newItem, request, userSession.UserId)
                 .Returns(expectedResult);
 
             _lgClient.PostAsync<APIResult<bool>>(Arg.Any<string>(), Arg.Any<RNGCasinoUpdateMemberComMetaModel>(),
                 Arg.Any<string>()).Returns(new APIResult<bool> { Data = true });
 
             // Action
-            var result = await _groupComService.UpdateGroup(newItem, request, userSession);
+            var result = await _groupComService.UpdateGroupAsync(newItem, request, userSession);
 
             // Assert
             Assert.Multiple(() =>
@@ -176,10 +174,10 @@
         {
             // Arrange
             var newItem = new GroupCommMetaModel { IsUpdateCS = true };
-            var userSession = FakeHelper.Create<UserSession>();
+            var userSession = FakeHelper.Create<UserAuthInfo>();
             var request = FakeHelper.Create<Request>();
 
-            _groupDataAccess.UpdateGroup(newItem, request, userSession.UserId)
+            _groupDataAccess.UpdateGroupAsync(newItem, request, userSession.UserId)
                 .Returns(new ResultInfo { ExtendedData = "1,2,3" });
             _lgClient.PostAsync<bool>(Arg.Any<string>(), Arg.Any<RNGCasinoUpdateMemberComMetaModel>(),
     Arg.Any<string>()).Returns(false);
@@ -190,7 +188,7 @@
             };
 
             // Action
-            var result = await _groupComService.UpdateGroup(newItem, request, userSession);
+            var result = await _groupComService.UpdateGroupAsync(newItem, request, userSession);
 
             // Assert
             Assert.Multiple(() =>
@@ -208,7 +206,7 @@
             metaModel.IsRemoveCommSetting = false;
 
             var expectedResult = FakeHelper.Create<ResultInfo>();
-            _groupDataAccess.DeleteGroup(
+            _groupDataAccess.DeleteGroupAsync(
                 metaModel.GroupId,
                 metaModel.LicenseeId,
                 metaModel.UserId,
@@ -219,7 +217,7 @@
             .Returns(expectedResult);
 
             // Action
-            var result = await _groupComService.DeleteGroup(metaModel);
+            var result = await _groupComService.DeleteGroupAsync(metaModel);
 
             // Assert
             Assert.Multiple(() =>
@@ -237,7 +235,7 @@
             metaModel.IsAllowedCSComm = false;
 
             var expectedResult = FakeHelper.Create<ResultInfo>();
-            _groupDataAccess.DeleteGroup(
+            _groupDataAccess.DeleteGroupAsync(
                 metaModel.GroupId,
                 metaModel.LicenseeId,
                 metaModel.UserId,
@@ -248,7 +246,7 @@
             .Returns(expectedResult);
 
             // Action
-            var result = await _groupComService.DeleteGroup(metaModel);
+            var result = await _groupComService.DeleteGroupAsync(metaModel);
 
             // Assert
             Assert.Multiple(() =>
@@ -268,7 +266,7 @@
             metaModel.IsRemoveCommSetting = true;
 
             var expectedResult = new ResultInfo { ExtendedData = string.Empty };
-            _groupDataAccess.DeleteGroup(
+            _groupDataAccess.DeleteGroupAsync(
                 metaModel.GroupId,
                 metaModel.LicenseeId,
                 metaModel.UserId,
@@ -279,7 +277,7 @@
             .Returns(expectedResult);
 
             // Action
-            var result = await _groupComService.DeleteGroup(metaModel);
+            var result = await _groupComService.DeleteGroupAsync(metaModel);
 
             // Assert
             Assert.Multiple(() =>
@@ -299,7 +297,7 @@
             metaModel.IsRemoveCommSetting = true;
 
             var expectedResult = new ResultInfo { ExtendedData = "1,2,3" };
-            _groupDataAccess.DeleteGroup(
+            _groupDataAccess.DeleteGroupAsync(
                 metaModel.GroupId,
                 metaModel.LicenseeId,
                 metaModel.UserId,
@@ -312,12 +310,11 @@
             _lgClient.PostAsync<APIResult<bool>>(Arg.Any<string>(), Arg.Any<RNGCasinoUpdateMemberComMetaModel>(),
                 Arg.Any<string>()).Returns(new APIResult<bool> { Data = true });
             // Action
-            var result = await _groupComService.DeleteGroup(metaModel);
+            var result = await _groupComService.DeleteGroupAsync(metaModel);
 
             // Assert
             Assert.Multiple(() =>
             {
-
                 _lgClient.Received().PostAsync<APIResult<bool>>(Arg.Any<string>(), Arg.Is<RNGCasinoUpdateMemberComMetaModel>(
                     x => x.Comm == 0
                         && string.Join(",", x.CustomerId) == expectedResult.ExtendedData
@@ -336,7 +333,7 @@
             metaModel.IsAllowedCSComm = true;
             metaModel.IsRemoveCommSetting = true;
 
-            _groupDataAccess.DeleteGroup(
+            _groupDataAccess.DeleteGroupAsync(
                 metaModel.GroupId,
                 metaModel.LicenseeId,
                 metaModel.UserId,
@@ -353,7 +350,7 @@ new APIResult<bool> { Data = false });
             var expectedResult = new ResultInfo { Code = 1, Message = "Having errors when calling CasinoAPI to update customer commission." };
 
             // Action
-            var result = await _groupComService.DeleteGroup(metaModel);
+            var result = await _groupComService.DeleteGroupAsync(metaModel);
 
             // Assert
             Assert.Multiple(() =>
@@ -371,7 +368,7 @@ new APIResult<bool> { Data = false });
             var groupName = FakeHelper.Create<string>();
 
             // Action
-            var result = _groupComService.CheckExistingGroupByName(licenseeId, groupName);
+            _groupComService.CheckExistingGroupByName(licenseeId, groupName);
 
             // Assert
             _groupDataAccess.Received().CheckByName(licenseeId, groupName);

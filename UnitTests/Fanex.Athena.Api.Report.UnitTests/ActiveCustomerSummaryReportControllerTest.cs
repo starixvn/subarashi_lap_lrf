@@ -4,23 +4,32 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using Base.UnitTests;
+
     using DataAccess.Report.Interfaces;
+
     using Excel.Base.Entities;
     using Excel.Report;
+
     using Extension.Helper;
     using Extension.Utility;
+
+    using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Model.Auth.Enum;
+
     using Model.Core.DTO.Common;
     using Model.Core.MetaModel.Product;
     using Model.Report.DTO;
     using Model.Report.MetaModel;
     using Model.Report.ResultModel;
     using Model.Report.ViewModel;
+
     using NPOI.SS.UserModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
-    using Session.Enum;
-    using Session.Model;
 
     public class ActiveCustomerSummaryReportControllerTest : BaseApiControllerHelperTest
     {
@@ -209,17 +218,17 @@
                 });
             }
 
-            StubUserSessionData(new UserSession
+            StubUserSessionData(new UserAuthInfo
             {
                 CurrencyList = new Dictionary<int, string>
                 {
                     { model.CurrencyId, nameof(model.CurrencyId) }
                 },
                 ApplicationMode = AppMode.Self,
-                FunctionIdList = new int[0]
+                FunctionList = new List<Function>(),
+                CurrencyAgentList = new Dictionary<int, int[]>()
             });
-            StubLicenseeSessionData(new LicenseeSession { LicenseeId = 0 });
-            SessionService.GenerateAgentListXml(Arg.Any<int>(), Arg.Any<bool>()).Returns(string.Empty);
+            StubLicenseeSessionData(new LicenseeAuthInfo { LicenseeId = 0 });
 
             return model;
         }

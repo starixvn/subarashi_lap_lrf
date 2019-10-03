@@ -12,7 +12,13 @@ var cssPaths = {
     speciallicenseewl: "./www/css/source/reactpages/pages/speciallicenseewl/index.scss",
     bettingticketscenter: "./www/css/source/reactpages/pages/bettingticketscenter/index.scss",
     betlist: "./www/css/source/reactpages/pages/betlist/index.scss",
-    casinoturnover: "./www/css/source/reactpages/pages/casinoturnover/index.scss"
+    casinoturnover: "./www/css/source/reactpages/pages/casinoturnover/index.scss",
+    playeradmin: "./www/css/source/reactpages/pages/playeradmin/index.scss",
+    accountInfo: "./www/css/source/reactpages/pages/playeradmin/account-info.scss",
+    playerrunningbetlist: "./www/css/source/reactpages/pages/playeradmin/running-betlist.scss",
+    playerbetlimit: "./www/css/source/reactpages/pages/playeradmin/betlimit.scss",
+    playerwinloss: "./www/css/source/reactpages/pages/playeradmin/playerwinloss.scss",
+    statement: "./www/css/source/reactpages/pages/playeradmin/statement.scss"
 };
 
 var scriptPaths = {
@@ -34,7 +40,15 @@ var scriptPaths = {
     bettingticketscenter_singlecustomer: "./www/js/source/reactpages/pages/bettingticketscenter/singlecustomer/components/index.jsx",
     bettingticketscenter_refno: "./www/js/source/reactpages/pages/bettingticketscenter/refno/components/index.jsx",
     bettingticketscenter_running: "./www/js/source/reactpages/pages/bettingticketscenter/running/components/index.jsx",
-    casinoturnover: "./www/js/source/reactpages/pages/casinoturnover/components/index.jsx"
+    casinoturnover: "./www/js/source/reactpages/pages/casinoturnover/components/index.jsx",
+
+    playerlist: "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/components/index.jsx",
+    accountinfo: "./www/js/source/reactpages/Module/PlayerAdmin/account-info/components/index.jsx",
+    playerrunningbetlist: "./www/js/source/reactpages/Module/PlayerAdmin/running-betlist/components/index.jsx",
+    playerbetlimit: "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/components/index.jsx",
+    singleCustomer: "./www/js/source/reactpages/Module/PlayerAdmin/single-customer/components/index.jsx",
+    playerwinloss: "./www/js/source/reactpages/Module/PlayerAdmin/playerwinloss/components/index.jsx",
+    statement: "./www/js/source/reactpages/Module/PlayerAdmin/statement/components/index.jsx"
 };
 module.exports = {
     projectRoot: projectRoot,

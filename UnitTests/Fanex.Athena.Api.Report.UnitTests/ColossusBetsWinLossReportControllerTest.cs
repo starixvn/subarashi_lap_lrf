@@ -4,31 +4,37 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using Base.UnitTests;
-    using Excel.Base.Entities;
+
     using Excel.Report;
+
     using Extension.Utility;
+
+    using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Service.Core.Utility.Interfaces;
     using Fanex.Athena.Service.Report.Interfaces;
-    using Model.Core.DTO.Users;
+
     using Model.Core.ResultModel;
     using Model.Report.DTO;
     using Model.Report.MetaModel;
     using Model.Report.ViewModel;
+
     using NPOI.SS.UserModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
-    using Session.Model;
 
     public class ColossusBetsWinLossReportControllerTest : BaseApiControllerHelperTest
     {
         private IColossusBetsWinLossService _service;
         private ColossusBetsWinLossReportController _controller;
         private ICurrencyValidation _currencyValidation;
+
         [SetUp]
         public void SetUp()
         {
-
             _currencyValidation = Substitute.For<ICurrencyValidation>();
             _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
             _service = Substitute.For<IColossusBetsWinLossService>();
@@ -37,6 +43,12 @@
                 SessionService, ProductService, LangService, _currencyValidation);
 
             _controller.When(x => x.ExcelStream(Arg.Any<IWorkbook>(), Arg.Any<string>())).DoNotCallBase();
+            StubUserSessionData(new UserAuthInfo
+            {
+                CurrencyList = new Dictionary<int, string>(),
+                CurrencyAgentList = new Dictionary<int, int[]>()
+            });
+            StubLicenseeSessionData(new LicenseeAuthInfo { LicenseeId = 0 });
         }
 
         [TearDown]
@@ -57,11 +69,6 @@
                 IsExportExcel = false,
                 CurrencyId = 1,
             };
-            StubUserSessionData(new UserSession
-            {
-                CurrencyList = new Dictionary<int, string>()
-            });
-            StubLicenseeSessionData(new LicenseeSession { LicenseeId = 0 });
 
             // Action
             var result = await _controller.Index(model);
@@ -160,7 +167,6 @@
                 Assert.That(custId, Is.EqualTo(model.DrillDownCustomerId));
                 Assert.That(fdate, Is.EqualTo(model.DrillDownFromDate));
                 Assert.That(tdate, Is.EqualTo(model.DrillDownToDate));
-                SessionService.Received().GenerateAgentListXml(currencyId, Arg.Any<bool>());
                 _service.ReceivedWithAnyArgs().GetWinlossDetail(model, UserCurrencyList);
             });
         }
@@ -219,12 +225,13 @@
             var currencyId = 3;
             var custId = 4;
 
-            StubUserSessionData(new UserSession
+            StubUserSessionData(new UserAuthInfo
             {
                 CurrencyList = new Dictionary<int, string> {
                     { modelCurrencyId, "Currency" },
                     { drilldownCurrencyId, "Currency" },
                     { currencyId, "Currency" } },
+                CurrencyAgentList = new Dictionary<int, int[]>()
             });
 
             var expectedFileName = $"ColossusBetsWinLoss_{fdate:ddMMMyyy}_Currency.xls";
@@ -267,16 +274,16 @@
                 ToDate = DateTime.Now.AddDays(-1),
                 DrillDownCurrencyId = drillDownCurrencyId
             };
-            StubUserSessionData(new UserSession
+            StubUserSessionData(new UserAuthInfo
             {
                 CurrencyList = new Dictionary<int, string>
                 {
                     { currencyId, nameof(model.CurrencyId) },
-                    { drillDownCurrencyId, nameof(model.DrillDownCurrencyId) }
-                }
+                    { drillDownCurrencyId, nameof(model.DrillDownCurrencyId) },
+                },
+                CurrencyAgentList = new Dictionary<int, int[]>()
             });
-            StubLicenseeSessionData(new LicenseeSession { LicenseeId = 0 });
-            SessionService.GenerateAgentListXml(Arg.Any<int>(), Arg.Any<bool>()).Returns(string.Empty);
+            StubLicenseeSessionData(new LicenseeAuthInfo { LicenseeId = 0 });
 
             return model;
         }

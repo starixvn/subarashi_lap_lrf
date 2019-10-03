@@ -3,6 +3,7 @@
     using System.Web.Mvc;
     using Base.UnitTests;
     using CustomerLog;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using NSubstitute;
     using NUnit.Framework;
     using Service.Core.Common.Interfaces;
@@ -44,7 +45,7 @@
 
         private CustomerLogController CreateController()
         {
-            return new CustomerLogController(LangService, SessionService, AppSettings, _productService);
+            return new CustomerLogController(LangService, SessionService, _productService);
         }
     }
 }

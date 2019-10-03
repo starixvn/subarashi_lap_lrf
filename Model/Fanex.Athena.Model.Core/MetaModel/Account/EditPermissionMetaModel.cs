@@ -7,7 +7,8 @@
 namespace Fanex.Athena.Model.Core.MetaModel.Account
 {
     using System.Collections.Generic;
-    using Fanex.Athena.Model.Core.DTO.Common;
+
+    using Fanex.Athena.Model.Auth;
 
     public class EditPermissionMetaModel
     {

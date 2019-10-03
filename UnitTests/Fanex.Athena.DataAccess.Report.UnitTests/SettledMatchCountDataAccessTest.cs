@@ -2,10 +2,15 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
     using Core.UnitTests.TestHelpers;
+
     using Model.Report.DTO;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using UnitTest.Common.NUnitExtensions;
 
     [TestFixture]

@@ -10,19 +10,23 @@ namespace Fanex.Athena.Controllers
     using System.IO;
     using System.Linq;
     using System.Text.RegularExpressions;
-    using System.Threading.Tasks;
     using System.Web.Mvc;
     using System.Web.SessionState;
-    using Constant.DataDomain;
+
     using DataAccess.Core.Configuration.Interfaces;
-    using Extension.Utility;
+
     using Extension.Utility.Interfaces;
+    using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
+
     using ONEbook.UM.Filters;
-    using Resources;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
+
     using Web.ActionFilter;
 
     [SessionState(SessionStateBehavior.ReadOnly)]
@@ -47,11 +51,10 @@ namespace Fanex.Athena.Controllers
         public UserGuideController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSettings,
             IFileSystem fileSystem,
             IProductService productService,
             IBalanceUpDataAccess balanceUpDataAccess)
-        : base(languageService, sessionService, appSettings)
+        : base(languageService, sessionService)
         {
             _sessionService = sessionService;
             _productService = productService;

@@ -9,12 +9,15 @@ namespace Fanex.Athena.Controllers.TotalBets
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+
     using DataAccess.TotalBet.Interfaces;
-    using Extension.Utility;
+    using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
-    using Model.Core.DataDomain;
+
     using Model.TotalBet.MetaModel;
     using Model.TotalBet.ViewModel;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
 
@@ -26,9 +29,8 @@ namespace Fanex.Athena.Controllers.TotalBets
         public FirstGoalLastGoalTotalBetController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             IFirstGoalLastGoalDataAccess firstGoalLastGoalDataAccess)
-        : base(languageService, sessionService, appSetting)
+        : base(languageService, sessionService)
         {
             _firstGoalLastGoalDataAccess = firstGoalLastGoalDataAccess;
         }
@@ -56,22 +58,21 @@ namespace Fanex.Athena.Controllers.TotalBets
 
         private async Task<ActionResult> GetView(FirstGoalLastGoalMetaModel metaModel)
         {
-            var currencies = SessionService.UserSession.CurrencyList;
+            var userSession = SessionService.UserSession;
 
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList
+                , metaModel.CurrencyId);
             var result = await _firstGoalLastGoalDataAccess.GetFirstGoalLastGoalDataList(metaModel).ConfigureAwait(false);
 
             var model = new FirstGoalLastGoalViewModel
             {
                 Param = metaModel,
                 MainData = result.DataList.ToList(),
-                CurrencyList = currencies,
+                CurrencyList = userSession.CurrencyList,
                 TotalData = result.TotalData
             };
 
             return View("~/Views/Desktop/TotalBets/FirstGoalLastGoal/Main.cshtml", model);
-            
-
         }
     }
 }

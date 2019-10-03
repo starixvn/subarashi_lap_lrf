@@ -2,8 +2,11 @@
 {
     using System;
     using System.Data;
+
     using Core.Extensions;
+
     using NSubstitute;
+
     using NUnit.Framework;
 
     [TestFixture]

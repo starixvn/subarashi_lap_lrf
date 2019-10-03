@@ -1,12 +1,10 @@
-﻿using Fanex.Athena.Model.Core.MetaModel;
-using Fanex.Athena.Service.Core.Common.Interfaces;
+﻿using System;
+using System.Linq;
+
+using Fanex.Athena.Model.Core.MetaModel;
 using Fanex.Athena.Service.Core.Users.Interfaces;
 using Fanex.Athena.Service.Core.Utility.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Fanex.Athena.Service.StatelessCore.Interfaces;
 
 namespace Fanex.Athena.Service.Core.Utility
 {
@@ -14,11 +12,13 @@ namespace Fanex.Athena.Service.Core.Utility
     {
         private readonly IProductService _productService;
         private readonly ISessionService _sessionService;
+
         public ProductValidation(IProductService productService, ISessionService sessionService)
         {
             _productService = productService;
             _sessionService = sessionService;
         }
+
         public bool IsValid(IMetaModelProductCodeList model, ProductValidationOption option)
         {
             if (string.IsNullOrEmpty(option.FunctionConfig) || model == null
@@ -49,7 +49,6 @@ namespace Fanex.Athena.Service.Core.Utility
             var allowedProductCodes = productAccess.ProductList.Select(x => x.ProductCode).ToArray();
 
             return !productCodes.Except(allowedProductCodes).Any();
-
         }
     }
 }

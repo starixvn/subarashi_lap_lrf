@@ -2,19 +2,25 @@
 {
     using System.Net.Http;
     using System.Web.Hosting;
+
     using Base.Attributes;
-    using Constant.DataDomain;
+
     using DataAccess.Report.Interfaces;
+
     using Excel.Report;
     using Excel.Report.Helpers;
-    using Model.Core.DataDomain;
+    using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Utility;
+
     using Model.Core.ResultModel;
     using Model.Report;
     using Model.Report.MetaModel;
+
     using Resources;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-    using VendorAdapter.Interfaces;
 
     [ApiFunctionAuthorization(PermissionKeys.ReportLicenseeWinLoss, PermissionKeys.ReportCustomerWinLoss)]
     public class PromotionPrizeReportController : ApiReportBaseController
@@ -48,7 +54,7 @@
             var userSession = SessionService.UserSession;
 
             metaModel.DefaultBaseCurrency = userSession.DefaultBaseCurrency;
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId, metaModel.IsExcludedTestData);
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId, metaModel.IsExcludedTestData);
 
             var data = _dataAccess.GetData(metaModel, userSession.CurrencyList);
 
@@ -60,7 +66,5 @@
 
             return CreareExcel(templatePath, title, FileName, data);
         }
-
-
     }
 }

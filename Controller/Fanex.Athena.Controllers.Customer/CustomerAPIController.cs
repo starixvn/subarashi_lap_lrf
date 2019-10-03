@@ -9,28 +9,34 @@ namespace Fanex.Athena.Controllers.Customer
     #region Using
 
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Net;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using System.Web.SessionState;
+
     using DataAccess.Core.Users.Interfaces;
+
     using Extension.Utility;
+
     using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Extension.Helpers;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Customer.MetaModel;
     using Fanex.Athena.Service.Core.Common.Interfaces;
     using Fanex.Athena.Service.Customer.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
     using Fanex.Logging;
-    using Model.Core.DataDomain;
+
     using Model.Core.ViewModel;
+
     using ONEbook.UM.Filters;
+
     using Resources;
+
     using Service.Core.Users.Interfaces;
-    using Service.Core.Utility.Interfaces;
     using Service.Customer.Helpers;
 
     #endregion Using
@@ -48,6 +54,7 @@ namespace Fanex.Athena.Controllers.Customer
         private readonly IGroupComService _groupComService;
         private readonly ILicenseeDataAccess _licenseeDataAccess;
         private readonly IProductService _productService;
+        private readonly IAuthorizationService _authorizationService;
 
         #region Constructor
 
@@ -62,9 +69,12 @@ namespace Fanex.Athena.Controllers.Customer
             ICustomerListService customerListService,
             IGroupComService groupComService,
             ILicenseeDataAccess licenseeDataAccess,
-            IProductService productService)
+            IProductService productService,
+            IAuthorizationService authorizationService,
+             ILicenseeSettingService licenseeSettingService
+            )
 #pragma warning restore S107 // Methods should not have too many parameters
-            : base(languageService, sessionService, appSetting)
+            : base(languageService, sessionService, appSetting, licenseeSettingService)
         {
             _logger = logger;
             _customerCommService = customerCommService;
@@ -72,6 +82,7 @@ namespace Fanex.Athena.Controllers.Customer
             _customerListService = customerListService;
             _groupComService = groupComService;
             _productService = productService;
+            _authorizationService = authorizationService;
         }
 
         #endregion Constructor
@@ -81,6 +92,7 @@ namespace Fanex.Athena.Controllers.Customer
         [HttpPost]
         [AjaxRequest]
         [CustomValidateAntiForgery]
+        [ValidatePermissionOnData]
         public async Task<ActionResult> UpdateCustStatus(int custId, bool isClosed, bool isSuspended)
         {
             try
@@ -127,10 +139,11 @@ namespace Fanex.Athena.Controllers.Customer
         [HttpPost]
         [AjaxRequest]
         [CustomValidateAntiForgery]
+        [ValidatePermissionOnData]
         public ActionResult UpdateSpecialLevel(int custId, int level)
         {
-            var licenseeId = SessionService.LicenseeSession.LicenseeId;
-            var isFakeLicensee = IsFakeLicensee(licenseeId);
+            var licensee = SessionService.LicenseeSession;
+            var isFakeLicensee = IsFakeLicensee(licensee.LicenseeName);
 
             if (!isFakeLicensee)
             {
@@ -139,7 +152,6 @@ namespace Fanex.Athena.Controllers.Customer
                 try
                 {
                     var dataResult = _customerListService.UpdateSpecialLevel(
-                        licenseeId,
                         userSession.UserId,
                         custId,
                         level,
@@ -174,10 +186,11 @@ namespace Fanex.Athena.Controllers.Customer
         [HttpPost]
         [AjaxRequest]
         [CustomValidateAntiForgery]
+        [ValidatePermissionOnData]
         public ActionResult UpdateOddsGroup(int custId, string oddsGroup)
         {
-            var licenseeId = SessionService.LicenseeSession.LicenseeId;
-            var isFakeLicensee = IsFakeLicensee(licenseeId);
+            var licensee = SessionService.LicenseeSession;
+            var isFakeLicensee = IsFakeLicensee(licensee.LicenseeName);
 
             if (!isFakeLicensee)
             {
@@ -187,7 +200,6 @@ namespace Fanex.Athena.Controllers.Customer
                 {
                     var metaModel = new CustomerOddsGroupMetaModel
                     {
-                        LicenseeId = licenseeId,
                         CustId = custId,
                         Ip = Request.UserHostAddress,
                         Language = userSession.Language,
@@ -229,6 +241,7 @@ namespace Fanex.Athena.Controllers.Customer
         [HttpPost]
         [AjaxRequest]
         [CustomValidateAntiForgery]
+        [ValidatePermissionOnData]
         public ActionResult UpdateBAStatus(int custId, bool isAllowBA)
         {
             var licenseeSession = SessionService.LicenseeSession;
@@ -245,7 +258,7 @@ namespace Fanex.Athena.Controllers.Customer
                 Ip = Request.UserHostAddress
             };
 
-            var specialBaPermission = SessionService.IsAllowedSpecialBA(userSession);
+            var specialBaPermission = _authorizationService.IsAllowedSpecialBA(userSession);
             if (!specialBaPermission)
             {
                 var isAllowUpdateBaResult = _licenseeDataAccess.IsAllowUpdateMemberBAStatus(request, licenseeSession.LicenseeId);
@@ -320,7 +333,7 @@ namespace Fanex.Athena.Controllers.Customer
                     }
                     else
                     {
-                        await this.ProcessUpdatingCustomerCom(metaModel, result);
+                        await this.ProcessUpdatingCustomerComAsync(metaModel, result);
                     }
                 }
             }
@@ -357,7 +370,7 @@ namespace Fanex.Athena.Controllers.Customer
                 Language = userSession.Language
             };
             var removalResult = await _customerCommService.RemoveCustomersFromGroupAsync(metaModel, productAccess.IsAllowCS);
-            
+
             var result = new ResultViewModel
             {
                 Success = removalResult.IsSuccessful,
@@ -459,7 +472,7 @@ namespace Fanex.Athena.Controllers.Customer
                                oldGroup.CSComm == metaModel.CSComm;
         }
 
-        private async Task ProcessUpdatingCustomerCom(UpdatedCustomerComMetaModel metaModel, ResultViewModel result)
+        private async Task ProcessUpdatingCustomerComAsync(UpdatedCustomerComMetaModel metaModel, ResultViewModel result)
         {
             metaModel.Language = SessionService.UserSession.Language;
             var temp = await _customerCommService.UpdateCustomersCommissionAsync(metaModel, metaModel.IsAllowedCS);

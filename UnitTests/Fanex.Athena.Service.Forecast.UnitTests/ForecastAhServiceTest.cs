@@ -3,10 +3,14 @@
     using System.Collections.Generic;
     using System.Data;
     using System.Threading.Tasks;
+
     using DataAccess.Forecast.Interfaces;
+
     using Model.Forecast.DTO.ForecastAH;
     using Model.Forecast.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
 
     [TestFixture]

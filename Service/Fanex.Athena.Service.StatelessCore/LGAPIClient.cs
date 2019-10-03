@@ -2,11 +2,10 @@
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web;
 using Fanex.Athena.Extension.Utility;
-using Fanex.Athena.Service.Core.Exception;
+using Fanex.Athena.Service.StatelessCore.CustomException;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
-
+using Fanex.Athena.Service.StatelessCore.RestSharpExtension;
 using Newtonsoft.Json;
 
 using RestSharp;
@@ -20,24 +19,26 @@ namespace Fanex.Athena.Service.StatelessCore
         private const string LANGUAGEKEY = "Language";
 
         private readonly IAppSettings _appSetting;
-        public LGAPIClient(IAppSettings appSettings)
+        private readonly IRestClient _restClient;
+        public LGAPIClient(IAppSettings appSettings, IRestClient restClient)
         {
             _appSetting = appSettings;
+            _restClient = restClient;
         }
         public async Task<T> PostAsync<T>(string path, object value, string language)
         {
-            var client = new RestClient
-            {
-                BaseUrl = new Uri(_appSetting.GetValue("LGAPIHostUrl"))
-            };
+            _restClient.BaseUrl = new Uri(_appSetting.GetValue("LGAPIHostUrl"));
 
-            var request = new RestRequest(path);
+            var request = new RestRequest(path)
+            {
+                JsonSerializer = NewtonsoftJsonSerializer.Default
+            };
             request.AddHeader(KEYNAME, _appSetting.GetValue("LGAPITokenValue"));
             request.AddHeader(LANGUAGEKEY, language);
             request.AddJsonBody(value);
             request.Method = Method.POST;
 
-            var result = await client.ExecuteTaskAsync(request).ConfigureAwait(false);
+            var result = await _restClient.ExecuteTaskAsync(request).ConfigureAwait(false);
 
             if (result.ResponseStatus != ResponseStatus.Completed || result.StatusCode != HttpStatusCode.OK)
             {

@@ -87,7 +87,6 @@
             return new HalfTimeFullTimeTotalBetController(
                             LangService,
                             SessionService,
-                            AppSettings,
                             _halfTimeFullTimeDataAccess);
         }
     }

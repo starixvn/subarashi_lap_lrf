@@ -323,12 +323,15 @@ body {
   font-size: 1.2rem;
   color: #2c2c2c; }
 
-a {
+a, .link {
   color: #147ccc; }
-  a, a:hover {
+  a, a:hover, .link, .link:hover {
     text-decoration: none; }
-  a:hover {
+  a:hover, .link:hover {
     color: inherit; }
+
+.link {
+  cursor: pointer; }
 
 ul {
   padding: 0; }
@@ -381,6 +384,16 @@ ul {
     border-color: #2c2c2c transparent transparent; }
     .arrow-icon.down-arrow.disable {
       border-color: rgba(0, 0, 0, 0.26) transparent transparent; }
+
+.site-caret:after {
+  display: inline-block;
+  margin-left: 0.255em;
+  vertical-align: 0.255em;
+  content: "";
+  border-top: 0.3em solid;
+  border-right: 0.3em solid transparent;
+  border-bottom: 0;
+  border-left: 0.3em solid transparent; }
 
 .caret-block {
   position: absolute;
@@ -695,10 +708,11 @@ ul {
     display: block;
     color: #808080; }
   .form-group .checkbox-group, .form-group .button-group {
-    display: inline-block;
-    margin-top: 15px; }
+    display: inline-block; }
+  .form-group .checkbox-group {
+    margin-top: 20px; }
   .form-group .button-group {
-    margin-top: 18px; }
+    margin-top: 12px; }
 
 .input-text {
   background-color: transparent;
@@ -712,9 +726,9 @@ ul {
   box-shadow: none;
   box-sizing: content-box;
   transition: all 0.3s;
-  height: 2.5rem;
-  line-height: 2.5rem;
-  font-size: 1.3rem;
+  height: 2.2rem;
+  line-height: 2.2rem;
+  font-size: 1.2rem;
   color: #2c2c2c; }
   .input-text:focus:not([readonly]) {
     border-bottom: 1px solid #6790b0;
@@ -1154,7 +1168,7 @@ ul {
   .Select:focus {
     outline: 0; }
   .Select.Select--single > .Select-control .Select-value {
-    line-height: 2.5rem;
+    line-height: 2.2rem;
     padding-left: 0; }
   .Select .Select-clear-zone {
     display: none; }
@@ -1168,11 +1182,11 @@ ul {
     border: none;
     border-bottom: 1px solid #9e9e9e;
     border-radius: 0;
-    height: 2.5rem; }
+    height: 2.2rem; }
     .Select .Select-control .Select-value-label {
       color: #2c2c2c; }
     .Select .Select-control .Select-input {
-      height: 2.5rem;
+      height: 2.2rem;
       padding-left: 0; }
   .Select-menu-outer .Select-option {
     color: #2c2c2c; }
@@ -1209,9 +1223,28 @@ ul {
   outline: 0;
   padding: 0 2rem;
   vertical-align: middle;
-  -webkit-tap-highlight-color: transparent; }
+  -webkit-tap-highlight-color: transparent;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; }
   .btn:hover {
     opacity: 0.9; }
+
+.btn-default {
+  display: inline-block;
+  font-weight: 400;
+  color: #212529;
+  text-align: center;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: .375rem .75rem;
+  font-size: 1.2rem;
+  line-height: 1;
+  border-radius: .25rem;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out; }
 
 .btn-submit {
   color: #fff;
@@ -1221,8 +1254,94 @@ ul {
   color: #fff;
   background-color: #757985; }
 
+.btn-apply {
+  background-color: #4e68b6;
+  color: #fff; }
+  .btn-apply:hover {
+    background: #7287c5; }
+  .btn-apply:focus {
+    background: #4e68b6; }
+
 button:focus {
   outline: none; }
+
+button:not(:disabled) {
+  cursor: pointer; }
+
+.btn-outline {
+  display: inline-block;
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: 4px 10px;
+  font-size: 12px;
+  border-radius: 3px;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; }
+  .btn-outline-light {
+    color: #fff;
+    border-color: #fff; }
+    .btn-outline-light .close {
+      color: #fff; }
+    .btn-outline-light:hover {
+      color: #e6c95a;
+      border-color: #e6c95a; }
+      .btn-outline-light:hover .close {
+        color: #e6c95a; }
+        .btn-outline-light:hover .close:not(:disabled):not(.disabled):hover {
+          opacity: .75; }
+  .btn-outline-secondary {
+    color: #6c757d;
+    border-color: #6c757d; }
+    .btn-outline-secondary:hover {
+      color: #fff;
+      background-color: #6c757d;
+      border-color: #6c757d; }
+
+.close {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  opacity: .5; }
+  .close:hover {
+    color: #000;
+    text-decoration: none; }
+
+button.close {
+  padding: 0;
+  background-color: transparent;
+  border: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none; }
+
+.btn-icon {
+  padding: 0 4px;
+  font-size: 12px;
+  border: none;
+  cursor: pointer; }
+  .btn-icon .material-icons {
+    font-size: 18px; }
+
+.btn-link {
+  font-weight: 400;
+  color: #007bff;
+  text-decoration: none; }
+  .btn-link:hover {
+    color: #0056b3;
+    text-decoration: underline; }
+
+.select-default {
+  width: 100%;
+  padding: 0.2rem 0.3rem;
+  font-size: 1.1rem;
+  line-height: 1rem;
+  border-radius: 0.4rem;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out; }
 
 .page-filter {
   position: relative;
@@ -1235,14 +1354,36 @@ button:focus {
   background: #4C6375;
   padding: 4px 15px;
   color: #fff;
-  font-size: 12px; }
+  font-size: 12px;
+  position: relative; }
   .report-title-container .report-title {
     margin: 0; }
+    .report-title-container .report-title .link {
+      color: #fff; }
+      .report-title-container .report-title .link:hover {
+        text-decoration: underline;
+        cursor: pointer; }
 
 .no-info-row {
   border: 1px solid #ccc;
   padding: 5px;
   background: #fff; }
+
+.chevron {
+  width: 8px;
+  height: 8px;
+  border-top: 1px solid #fff;
+  border-right: 1px solid #fff;
+  transition: 0.3s all cubic-bezier(1, 0.25, 0.25, 0.8);
+  will-change: transform;
+  display: inline-block; }
+  .chevron.down {
+    transform: rotate(135deg);
+    margin-bottom: 3px; }
+  .chevron.up {
+    transform: rotate(-45deg); }
+  .chevron.right {
+    transform: rotate(45deg); }
 
 
 /*# sourceMappingURL=vendor.css.map*/

@@ -2,10 +2,15 @@
 {
     using System;
     using System.Threading.Tasks;
+
     using Core.UnitTests.TestHelpers;
+
     using Model.Customer.DTO.CustomerLog;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using UnitTest.Common.NUnitExtensions;
 
     public class LogInLogDataAccessTest : BaseDataAccessHelperTest<LogInLogDataAccess>

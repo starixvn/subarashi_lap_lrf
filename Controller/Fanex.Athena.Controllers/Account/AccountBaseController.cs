@@ -7,13 +7,18 @@
 namespace Fanex.Athena.Controllers.Account
 {
     using System.Web.Mvc;
-    using Extension.Utility;
-    using Model.Core.DataDomain;
+
+    using Fanex.Athena.Extension.Utility;
+    using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Auth.Enum;
+
     using Model.Core.DTO.Common;
+
     using ONEbook.UM.Filters;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-    using Session.Enum;
+
     using Web.ActionFilter;
 
     [CheckUMFilter]
@@ -22,10 +27,20 @@ namespace Fanex.Athena.Controllers.Account
     public class AccountBaseController : CultureBaseController
     {
         public AccountBaseController(
+       ILanguageService languageService,
+       ISessionService sessionService,
+            IAppSettings appSettings
+       )
+   : base(languageService, sessionService, appSettings, null)
+        {
+        }
+
+        public AccountBaseController(
             ILanguageService languageService,
-            ISessionService sessionService,
-            IAppSettings appSetting)
-        : base(languageService, sessionService, appSetting)
+            ISessionService sessionService
+
+            )
+        : base(languageService, sessionService)
         {
         }
 

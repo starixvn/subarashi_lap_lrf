@@ -8,8 +8,8 @@ namespace Fanex.Athena.Web.ActionFilter
     using System;
     using System.Web.Mvc;
     using System.Web.Routing;
-    using Session;
-    using Session.Interfaces;
+    using Fanex.Athena.Service.Core.Users;
+    using Fanex.Athena.Service.Core.Users.Interfaces;
 
     [AttributeUsage(AttributeTargets.All)]
     public sealed class CustomAuthorizeAttribute : AuthorizeAttribute
@@ -33,7 +33,7 @@ namespace Fanex.Athena.Web.ActionFilter
             if (!skipAuthorization)
             {
                 base.OnAuthorization(filterContext);
-                var authorized = _sessionStorage.LicenseeSession != null && _sessionStorage.UserSession != null;
+                var authorized = _sessionStorage.LicenseeAuthInfo != null && _sessionStorage.UserAuthInfo != null;
                 if (!authorized)
                 {
                     var routeValue = new

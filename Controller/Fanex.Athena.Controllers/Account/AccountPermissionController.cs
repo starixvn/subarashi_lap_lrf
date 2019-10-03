@@ -10,18 +10,25 @@ namespace Fanex.Athena.Controllers.Account
     using System.Globalization;
     using System.Linq;
     using System.Text;
-    using System.Threading.Tasks;
     using System.Web.Mvc;
+
     using DataAccess.Core.Common.Interfaces;
+
     using Extension.Utility;
+
+    using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Utility;
+
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
-    using Model.Core.DTO.Users;
     using Model.Core.MetaModel.Account;
+
     using Resources;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-    using Service.Core.Utility;
+
     using Web.ActionFilter;
 
     public class AccountPermissionController : AccountBaseController
@@ -39,11 +46,10 @@ namespace Fanex.Athena.Controllers.Account
         public AccountPermissionController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             IFunctionService functionService,
             IUserService userService,
-            ICurrencyDataAccess currencyDataAccess)
-        : base(languageService, sessionService, appSetting)
+            ICurrencyDataAccess currencyDataAccess, IAppSettings appSettings)
+        : base(languageService, sessionService, appSettings)
         {
             _functionService = functionService;
             _userService = userService;
@@ -74,7 +80,7 @@ namespace Fanex.Athena.Controllers.Account
         [HttpGet]
         public ActionResult EditPermission()
         {
-            int userId = GetUserId();
+            var userId = GetUserId();
             if (userId > 0 && ValidatePermissionRestriction(userId))
             {
                 var licenseeSession = SessionService.LicenseeSession;

@@ -11,13 +11,18 @@ namespace Fanex.Athena.Service.Report
     using System.Globalization;
     using System.Linq;
     using System.Threading.Tasks;
-    using Constant.DataDomain;
+
     using DataAccess.Report.Interfaces;
+
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Service.Report.Interfaces;
+
+    using Model.Core.DataDomain;
+
     using Resources;
+
     using VendorAdapter.Interfaces;
 
     public class MatchWinLossService : IMatchWinLossService

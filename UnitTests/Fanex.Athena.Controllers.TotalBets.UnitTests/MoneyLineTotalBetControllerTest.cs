@@ -82,7 +82,6 @@
             return new MoneyLineTotalBetController(
                             LangService,
                             SessionService,
-                            AppSettings,
                             _moneyLineDataAccess);
         }
     }

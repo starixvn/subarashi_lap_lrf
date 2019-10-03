@@ -3,11 +3,15 @@
     using System.Collections.Generic;
     using System.Net.Http;
     using System.Threading.Tasks;
-    using Constant.DataDomain;
+
+    using Fanex.Athena.Model.Auth;
+
     using Model.BetList.MetaModel;
+    using Model.Core.DataDomain;
+
     using NSubstitute;
+
     using NUnit.Framework;
-    using Session.Model;
 
     public class RunningBettypesBetListControllerTest : ApiBetListBaseControllerHelperTest
     {
@@ -24,7 +28,7 @@
         {
             MockSessionData();
 
-            AuthorizationService.HasPermissionOnData(SessionLicenseeId, Arg.Any<int>(), Arg.Any<long>()).Returns(true);
+            AuthorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), Arg.Any<int>(), Arg.Any<long>()).Returns(true);
         }
 
         [Test]
@@ -144,7 +148,12 @@
         {
             var metaModel = new BetListMetaModel { CurrencyId = currencyId };
 
-            StubUserSessionData(new UserSession { Language = SessionLanguage, CurrencyList = sessionCurrencyList });
+            StubUserSessionData(new UserAuthInfo
+            {
+                Language = SessionLanguage,
+                CurrencyList = sessionCurrencyList,
+                CurrencyAgentList = new Dictionary<int, int[]>()
+            });
 
             return metaModel;
         }

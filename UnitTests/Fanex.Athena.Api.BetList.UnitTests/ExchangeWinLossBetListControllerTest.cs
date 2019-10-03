@@ -4,13 +4,18 @@
     using System.Collections.Generic;
     using System.Net.Http;
     using System.Threading.Tasks;
+
     using Base.UnitTests;
+
+    using Fanex.Athena.Model.Auth;
+
     using Model.BetList.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
-    using Service.Core.Utility.Interfaces;
+
     using Service.StatelessCore.Interfaces;
-    using Session.Model;
 
     public class ExchangeWinLossBetListControllerTest : BaseApiControllerHelperTest
     {
@@ -76,7 +81,7 @@
                     CustId = 1
                 };
 
-                _authorizationService.HasPermissionOnData(SessionLicenseeId, metaModel.CurrencyId, 0).Returns(false);
+                _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), metaModel.CurrencyId, 0).Returns(false);
 
                 // Action
                 var result = await controller.Index(metaModel);
@@ -125,13 +130,14 @@
                     BaseCurrency = inputBaseCurrency
                 };
 
-                StubUserSessionData(new UserSession
+                StubUserSessionData(new UserAuthInfo
                 {
                     Language = SessionLanguage,
-                    CurrencyList = new Dictionary<int, string> { { currencyId, "Currency" } }
+                    CurrencyList = new Dictionary<int, string> { { currencyId, "Currency" } },
+                    CurrencyAgentList = new Dictionary<int, int[]>()
                 });
 
-                _authorizationService.HasPermissionOnData(SessionLicenseeId, metaModel.CustId, 0).Returns(true);
+                _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), metaModel.CustId, 0).Returns(true);
 
                 var expect = new HttpResponseMessage();
                 _betListApiClient.PostAsync(MainApiPath, metaModel, SessionLanguage).Returns(Task.FromResult(expect));
@@ -149,7 +155,6 @@
             }
         }
 
-      
         [Test]
         public async Task Detail_NoPermission_ReturnEmptyData()
         {
@@ -163,7 +168,7 @@
                     BetId = 1,
                 };
 
-                _authorizationService.HasPermissionOnData(SessionLicenseeId, metaModel.CurrencyId, 0).Returns(false);
+                _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), metaModel.CurrencyId, 0).Returns(false);
 
                 // Action
                 var result = await controller.Detail(metaModel);
@@ -230,13 +235,14 @@
                     CustId = 200
                 };
 
-                StubUserSessionData(new UserSession
+                StubUserSessionData(new UserAuthInfo
                 {
                     Language = SessionLanguage,
-                    CurrencyList = new Dictionary<int, string> { { currencyId, "Currency" } }
+                    CurrencyList = new Dictionary<int, string> { { currencyId, "Currency" } },
+                    CurrencyAgentList = new Dictionary<int, int[]>()
                 });
 
-                _authorizationService.HasPermissionOnData(SessionLicenseeId, metaModel.CustId, 0).Returns(true);
+                _authorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), metaModel.CustId, 0).Returns(true);
 
                 var expect = new HttpResponseMessage();
                 _betListApiClient.PostAsync(DetailApiPath, metaModel, SessionLanguage).Returns(Task.FromResult(expect));

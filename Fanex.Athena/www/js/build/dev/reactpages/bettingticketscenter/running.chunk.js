@@ -516,10 +516,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 
 
-
-var CheckBox = function CheckBox(props) {
+var CheckBox = react__WEBPACK_IMPORTED_MODULE_0___default.a.forwardRef(function (props, ref) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "checkbox-group"
+    className: "checkbox-group",
+    ref: ref
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     type: "checkbox",
     className: "checkbox",
@@ -532,8 +532,7 @@ var CheckBox = function CheckBox(props) {
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
     htmlFor: props.id
   }, props.label));
-};
-
+});
 CheckBox.propTypes = {
   id: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string.isRequired,
   label: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
@@ -597,10 +596,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var NoDataTitle = function NoDataTitle() {
+var NoDataTitle = function NoDataTitle(_ref) {
+  var title = _ref.title;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    className: "no-info-row center-align"
-  }, _lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("NoInfo"));
+    className: "no-info-row center-align",
+    dangerouslySetInnerHTML: {
+      __html: title ? title : _lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("NoInfo")
+    }
+  });
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (NoDataTitle);
@@ -619,12 +622,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Overlay; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -644,7 +645,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -670,7 +670,7 @@ function (_Component) {
       var closeOnOutsideClick = _this.props.closeOnOutsideClick;
 
       if (closeOnOutsideClick) {
-        document.removeEventListener('click', _this._handleClickOutSide, true);
+        document.removeEventListener('click', _this._handleClickOutSide);
       }
     });
 
@@ -697,18 +697,22 @@ function (_Component) {
   _createClass(Overlay, [{
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps, prevState) {
+      var _this2 = this;
+
       if (this.props.isOpening !== prevProps.isOpening) {
         var onOpen = this.props.onOpen;
         this.props.isOpening && onOpen && onOpen();
         this.setState({
           isOpening: this.props.isOpening
         });
+        window.setTimeout(function () {
+          if (_this2.props.isOpening) {
+            _this2._registerEvents();
+          } else {
+            _this2._unRegisterEvents();
+          }
+        }, 0);
       }
-    }
-  }, {
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this._registerEvents();
     }
   }, {
     key: "componentWillUnmount",
@@ -721,7 +725,7 @@ function (_Component) {
       var closeOnOutsideClick = this.props.closeOnOutsideClick;
 
       if (closeOnOutsideClick) {
-        document.addEventListener('click', this._handleClickOutSide, true);
+        document.addEventListener('click', this._handleClickOutSide);
       }
     }
   }, {
@@ -740,7 +744,7 @@ function (_Component) {
       var _this$props = this.props,
           className = _this$props.className,
           children = _this$props.children;
-      var mergedClassName = classnames__WEBPACK_IMPORTED_MODULE_3___default()(wrapperClasses.OVERLAY, _defineProperty({}, wrapperClasses.OVERLAY_OPEN, this.state.isOpening), className);
+      var mergedClassName = classnames__WEBPACK_IMPORTED_MODULE_2___default()(wrapperClasses.OVERLAY, _defineProperty({}, wrapperClasses.OVERLAY_OPEN, this.state.isOpening), className);
       var style = {
         display: this.state.isOpening ? "block" : "none"
       };
@@ -756,10 +760,10 @@ function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 _defineProperty(Overlay, "propTypes", {
-  closeOnOutsideClick: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool,
-  isOpening: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool,
-  onOpen: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
-  onClose: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func
+  closeOnOutsideClick: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  isOpening: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  onOpen: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  onClose: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func
 });
 
 _defineProperty(Overlay, "defaultProps", {
@@ -782,17 +786,39 @@ _defineProperty(Overlay, "defaultProps", {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+
 
 
 var ReportTitle = function ReportTitle(_ref) {
-  var content = _ref.content;
+  var content = _ref.content,
+      tag = _ref.tag,
+      attrs = _objectWithoutProperties(_ref, ["content", "tag"]);
+
+  var Tag = tag;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "report-title-container"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Tag, _extends({
     className: "report-title"
-  }, content));
+  }, attrs), content));
 };
 
+var propTypes = {
+  tag: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
+  content: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.any
+};
+var defaultProps = {
+  tag: 'p'
+};
+ReportTitle.propTypes = propTypes;
+ReportTitle.defaultProps = defaultProps;
 /* harmony default export */ __webpack_exports__["default"] = (ReportTitle);
 
 /***/ }),
@@ -1282,12 +1308,17 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return CollapsiblePanel; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -1324,11 +1355,22 @@ function (_React$Component) {
 
     _defineProperty(_assertThisInitialized(_this), "onClick", function () {
       var newState = !_this.state.isCollapsed;
+      var _this$props = _this.props,
+          onCollapse = _this$props.onCollapse,
+          onExpand = _this$props.onExpand;
+
+      if (newState) {
+        onCollapse && onCollapse();
+      }
 
       _this.setState({
         isCollapsed: newState
       }, function () {
         window.dispatchEvent(new Event('resize'));
+
+        if (!newState) {
+          onExpand && onExpand();
+        }
       });
     });
 
@@ -1341,16 +1383,24 @@ function (_React$Component) {
   _createClass(CollapsiblePanel, [{
     key: "render",
     value: function render() {
-      var stickyFooter = this.props.stickyFooter;
-      var handler = null;
-      var arrowStyle = {
+      var _this$props2 = this.props,
+          stickyFooter = _this$props2.stickyFooter,
+          iconContainerStyle = _this$props2.iconContainerStyle,
+          iconToggle = _this$props2.iconToggle;
+
+      var tag = iconToggle.tag,
+          className = iconToggle.className,
+          style = iconToggle.style,
+          attrs = _objectWithoutProperties(iconToggle, ["tag", "className", "style"]);
+
+      var IconTag = tag;
+      var iconStyle = style || {
         transform: this.state.isCollapsed ? null : 'rotate(180deg)',
         color: '#fff',
         textAlign: 'center',
-        marginTop: '10px',
         background: '#4c6274',
-        height: "20px",
-        width: "25px",
+        height: "15px",
+        width: "20px",
         float: 'left'
       };
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1363,17 +1413,12 @@ function (_React$Component) {
         className: "caret-block"
       }, stickyFooter), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "filter-handle",
-        style: {
-          height: "20px",
-          width: "25px",
-          margin: 'auto',
-          cursor: 'pointer'
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "icon-arrow",
-        onClick: this.onClick,
-        style: arrowStyle
-      })));
+        style: iconContainerStyle,
+        onClick: this.onClick
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(IconTag, _extends({
+        className: className,
+        style: iconStyle
+      }, attrs))));
     }
   }]);
 
@@ -1381,10 +1426,37 @@ function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 _defineProperty(CollapsiblePanel, "propTypes", {
-  stickyFooter: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node
+  stickyFooter: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node,
+  onCollapse: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  onExpand: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func
 });
 
-
+var propTypes = {
+  stickyFooter: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node,
+  onCollapse: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  onExpand: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  iconToggle: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object
+};
+var defaultProps = {
+  iconContainerStyle: {
+    height: '15px',
+    width: '20px',
+    cursor: 'pointer',
+    position: 'absolute',
+    left: 'calc(50% - 10px)',
+    bottom: 0,
+    background: '#4c6274',
+    textAlign: 'center'
+  },
+  iconToggle: {
+    tag: 'i',
+    className: 'icon-arrow',
+    style: null
+  }
+};
+CollapsiblePanel.propTypes = propTypes;
+CollapsiblePanel.defaultProps = defaultProps;
+/* harmony default export */ __webpack_exports__["default"] = (CollapsiblePanel);
 
 /***/ }),
 
@@ -1465,7 +1537,6 @@ var Popup = function Popup(props) {
     className: "txt-title"
   }, title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     className: "popup-close",
-    href: "javascript:;",
     onClick: function onClick() {
       props.onClose && props.onClose();
     }
@@ -1604,8 +1675,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AppLayout; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1623,7 +1692,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 
 
 
@@ -2078,6 +2146,11 @@ function () {
       };
 
       reader.readAsText(blob);
+    }
+  }, {
+    key: "getRootUrl",
+    value: function getRootUrl() {
+      return _rootUrl;
     }
   }]);
 
@@ -3138,7 +3211,7 @@ function (_BaseDataGrid) {
         colSpan: colSpan
       }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource("Totalin") + " " + baseCurrency), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
         className: "right-align"
-      }, item.SumStake), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+      }, item.Stake), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
         className: "right-align",
         colSpan: 5
       }))];

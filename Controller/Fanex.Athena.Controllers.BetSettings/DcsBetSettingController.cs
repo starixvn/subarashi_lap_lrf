@@ -11,15 +11,19 @@ namespace Fanex.Athena.Controllers.BetSettings
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Constant.DataDomain;
-    using Extension.Utility;
+
+    using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
+
     using Model.BetSettings.DTO;
     using Model.BetSettings.MetaModel;
     using Model.BetSettings.ViewModel;
     using Model.Core.Helper;
+
     using Resources;
+
     using Service.BetSettings.Interfaces;
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
@@ -61,17 +65,19 @@ namespace Fanex.Athena.Controllers.BetSettings
         public DcsBetSettingController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             ICoreBetSettingService coreBetSettingService,
             IProductService productService,
-            IDcsBetSettingService betSettingService)
-        : base(languageService, sessionService, appSetting, coreBetSettingService, productService)
+            IDcsBetSettingService betSettingService,
+            ILicenseeSettingService licenseeSettingService)
+
+        : base(languageService, sessionService, coreBetSettingService, productService, licenseeSettingService)
         {
             _betSettingService = betSettingService;
         }
 
         [HttpGet]
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
+        [ValidatePermissionOnData(isObject: true)]
         public async Task<ActionResult> Index(BetSettingMetaModel metaModel)
         {
             if (!ProductViewNameMap.ContainsKey(metaModel.ProductId))
@@ -79,21 +85,20 @@ namespace Fanex.Athena.Controllers.BetSettings
                 throw new ArgumentException("Invalid product id: " + metaModel.ProductId);
             }
 
-            var licenseeId = SessionService.LicenseeSession.LicenseeId;
             var viewModel = new BetSettingViewModel();
-            await AssignRequiredProperties(viewModel, metaModel).ConfigureAwait(false);
+            await AssignRequiredPropertiesAsync(viewModel, metaModel).ConfigureAwait(false);
 
             var viewName = ProductViewNameMap[metaModel.ProductId];
             var viewPath = $"~/Views/Desktop/Customer/BetSetting/{viewName}.cshtml";
 
             if (ProductsHasStatus.Contains(metaModel.ProductId))
             {
-                viewModel.IsEnabled = await _betSettingService.GetStatusAsync(licenseeId, metaModel.CustId, metaModel.ProductId).ConfigureAwait(false);
+                viewModel.IsEnabled = await _betSettingService.GetStatusAsync(metaModel.CustId, metaModel.ProductId).ConfigureAwait(false);
             }
 
             if (ProductsHasBetLimit.Contains(metaModel.ProductId))
             {
-                viewModel.MainData = await _betSettingService.GetBetSettingsAsync(licenseeId, metaModel.CustId, metaModel.ProductId).ConfigureAwait(false);
+                viewModel.MainData = await _betSettingService.GetBetSettingsAsync(metaModel.CustId, metaModel.ProductId).ConfigureAwait(false);
             }
 
             return View(viewPath, viewModel);
@@ -101,10 +106,11 @@ namespace Fanex.Athena.Controllers.BetSettings
 
         [HttpPost]
         [CustomValidateAntiForgery]
+        [ValidatePermissionOnData]
+
         public async Task<JsonResult> UpdateStatus(int custId, string nickName, int status, int productId)
         {
             var userSession = SessionService.UserSession;
-            var licenseeId = SessionService.LicenseeSession.LicenseeId;
 
             if (!CheckPermission(userSession, productId))
             {
@@ -112,12 +118,11 @@ namespace Fanex.Athena.Controllers.BetSettings
             }
 
             var result = await _betSettingService.UpdateStatusAsync(
-                licenseeId,
                 userSession.UserId,
                 custId,
                 Request.UserHostAddress,
                 status == 1,
-                productId).ConfigureAwait(false);
+                productId);
 
             if (result.Code == 0)
             {
@@ -129,6 +134,7 @@ namespace Fanex.Athena.Controllers.BetSettings
 
         [HttpPost]
         [CustomValidateAntiForgery]
+        [ValidatePermissionOnData]
         public async Task<JsonResult> UpdateBetSetting(int productId, string nickName)
         {
             var userSession = SessionService.UserSession;
@@ -148,11 +154,10 @@ namespace Fanex.Athena.Controllers.BetSettings
             }
 
             var result = await _betSettingService.UpdateBetSettingAsync(
-                commonParam.LicenseeId,
                 commonParam.CustId,
                 commonParam.UserId,
                 commonParam.Ip,
-                parameters).ConfigureAwait(false);
+                parameters);
 
             if (result.Code == 0)
             {

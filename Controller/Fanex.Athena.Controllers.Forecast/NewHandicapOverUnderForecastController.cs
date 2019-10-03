@@ -12,21 +12,28 @@ namespace Fanex.Athena.Controllers.Forecast
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+
     using DataAccess.Core.Common.Interfaces;
     using DataAccess.Forecast.Interfaces;
+
     using Extension.Utility;
+
     using Fanex.Athena.Extension.Helpers;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Logging;
-    using Model.Core.DataDomain;
+
     using Model.Forecast.DTO.NewForecastHdpOu;
     using Model.Forecast.MetaModel;
     using Model.Forecast.ViewModel;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-    using Service.Core.Utility.Interfaces;
-    using Service.Forecast.Interfaces;
+
     using VendorAdapter.Interfaces;
+
     using Web.ActionFilter;
 
     [FunctionAuthorization(PermissionKeys.ForecastHandicapOverUnderLive)]
@@ -47,14 +54,15 @@ namespace Fanex.Athena.Controllers.Forecast
         public NewHandicapOverUnderForecastController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             INewForecastDataAccess forecastDataAccess,
             ILogger logger,
             ICacheRefAdapter cacheRefAdapter,
             IMatchService matchService,
-            ILeagueDataAccess leagueDataAccess)
+            ILeagueDataAccess leagueDataAccess,
+            IAppSettings appSettings
+            )
 #pragma warning restore S107 // Methods should not have too many parameters
-        : base(languageService, sessionService, appSetting)
+        : base(languageService, sessionService, appSettings)
         {
             _logger = logger;
             _cacheRefAdapter = cacheRefAdapter;
@@ -115,6 +123,7 @@ namespace Fanex.Athena.Controllers.Forecast
             IList<Match> matchList = new List<Match>();
             IList<League> leagueList = new List<League>();
             var headerInfo = new NewForecastHdpOuMatchInfo();
+            var userSession = SessionService.UserSession;
             var model = new NewForecastHdpOuViewModel
             {
                 Param = metaModel,
@@ -122,11 +131,12 @@ namespace Fanex.Athena.Controllers.Forecast
                 MatchList = matchList,
                 HeaderInfo = headerInfo,
                 MainData = new NewForecastHdpOuData(),
-                CurrencyList = SessionService.UserSession.CurrencyList
+                CurrencyList = userSession.CurrencyList
             };
             try
             {
-                metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
+                metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList,
+                    metaModel.CurrencyId);
 
                 if (!Request.IsAjaxRequest())
                 {

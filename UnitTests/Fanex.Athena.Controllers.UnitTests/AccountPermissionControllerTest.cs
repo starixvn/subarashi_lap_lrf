@@ -2,15 +2,23 @@
 {
     using System.Collections.Specialized;
     using System.Web.Mvc;
+
     using Account;
+
     using Base.UnitTests;
+
     using DataAccess.Core.Common.Interfaces;
+    using Fanex.Athena.Extension.Utility;
+    using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Service.Core.Users.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DTO.Users;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Service.Core.Common.Interfaces;
-    using Session.Model;
 
     [TestFixture]
     public partial class AccountPermissionControllerTest : CultureBaseControllerHelperTest
@@ -76,7 +84,7 @@
             SetUpUserRequestParameter();
             using (var controller = CreateController())
             {
-                StubUserSessionData(new UserSession
+                StubUserSessionData(new UserAuthInfo
                 {
                     UserId = DefaultUserSession.UserId,
                     IsInternal = true
@@ -99,7 +107,7 @@
             SetUpUserRequestParameter();
             using (var controller = CreateController())
             {
-                StubUserSessionData(new UserSession
+                StubUserSessionData(new UserAuthInfo
                 {
                     UserId = DefaultUserSession.UserId,
                     IsInternal = true
@@ -126,7 +134,7 @@
 
                 AppSettings.EnableAssignCurrency.Returns(false);
 
-                StubUserSessionData(new UserSession
+                StubUserSessionData(new UserAuthInfo
                 {
                     UserId = DefaultUserSession.UserId,
                     IsInternal = true
@@ -151,7 +159,7 @@
 
                 AppSettings.EnableAssignCurrency.Returns(false);
 
-                StubUserSessionData(new UserSession
+                StubUserSessionData(new UserAuthInfo
                 {
                     UserId = DefaultUserSession.UserId,
                     IsInternal = false
@@ -170,10 +178,9 @@
             return new AccountPermissionController(
             LangService,
             SessionService,
-            AppSettings,
             _functionService,
             _userService,
-            _currencyDataAccess)
+            _currencyDataAccess, AppSettings)
             {
                 ControllerContext = ControllerContext
             };

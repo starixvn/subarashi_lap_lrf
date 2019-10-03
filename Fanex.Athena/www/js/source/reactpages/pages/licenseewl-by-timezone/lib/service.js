@@ -19,8 +19,8 @@ export default class Service {
         const fromDate = Site.convertDateToString(dateRange.fromDate);
         const toDate = Site.convertDateToString(dateRange.toDate);
         const viewInByCurrency = isConvertAll ? ", " + LangHelper.getSingleResource("BaseCurrency") + ": " + baseCurrency : "";
-        var timeZoneText =  "GMT" + (timeZone < 0 ? timeZone : "+" + timeZone);
-        var currencyText = LangHelper.getSingleResource("Currency") + ": " + currency;
+        const timeZoneText =  "GMT" + (timeZone < 0 ? timeZone : "+" + timeZone);
+        const currencyText = LangHelper.getSingleResource("Currency") + ": " + currency;
         return `${LangHelper.getSingleResource("WinLossByTimeZone")}, ${timeZoneText}, ${fromDate} → ${toDate}, ${currencyText}${viewInByCurrency}`;
     }
 

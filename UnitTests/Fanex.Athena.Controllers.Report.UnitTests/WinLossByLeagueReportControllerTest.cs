@@ -5,16 +5,23 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+
     using Base.UnitTests;
-    using Constant.DataDomain;
+
     using DataAccess.Core.Common.Interfaces;
+
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Model.Core.DTO.Common;
     using Model.Core.MetaModel.Common;
     using Model.Report.ViewModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Report;
-    using Service.Core.Common.Interfaces;
+
     using UnitTest.Common.Helpers;
 
     [TestFixture]
@@ -84,16 +91,15 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                const string AgentListXml = "<xml>";
                 var metaModel = new LeagueMetaModel
                 {
                     CurrencyId = 111
                 };
-                SessionService.GenerateAgentListXml(metaModel.CurrencyId).Returns(AgentListXml);
                 var data = new List<League>
                 {
                     new League { LeagueId = 1, LeagueName = "League1" }
                 };
+
                 _leagueDataAccess.GetLeaguesBySport(metaModel).Returns(data);
 
                 // Action
@@ -102,7 +108,6 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    Assert.That(metaModel.AgentListXml, Is.EqualTo(AgentListXml));
                     Assert.That(ObjectHelper.ToJson(result.Data), Is.EqualTo(@"[{""Key"":1,""Value"":""League1""}]"));
                 });
             }

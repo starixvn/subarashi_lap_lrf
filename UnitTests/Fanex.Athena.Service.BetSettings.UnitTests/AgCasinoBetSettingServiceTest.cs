@@ -1,21 +1,32 @@
 ﻿namespace Fanex.Athena.Service.BetSettings.UnitTests
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using BetSettings;
     using BetSettings.Interfaces;
+
     using DataAccess.BetSettings.Interfaces;
+
     using Extension.Utility;
     using Extension.Utility.Interfaces;
+
     using Fanex.Logging;
+
     using Model.BetSettings.DTO;
     using Model.BetSettings.DTO.AgCasino;
     using Model.Core.DTO.Common;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Resources;
+
     using StatelessCore.Interfaces;
+
     using UnitTest.Common.Helpers;
 
     [TestFixture]
@@ -23,7 +34,6 @@
     {
         private const string FakeApiUrl = "http://api.com";
 
-        private IAuthorizationService _authorizationService;
         private IAgCasinoBetSettingDataAccess _dataAccess;
         private IAppSettings _appSettings;
         private IWebClientService _webClientService;
@@ -33,13 +43,11 @@
         [OneTimeSetUp]
         public void SetUp()
         {
-            _authorizationService = Substitute.For<IAuthorizationService>();
             _dataAccess = Substitute.For<IAgCasinoBetSettingDataAccess>();
             _appSettings = Substitute.For<IAppSettings>();
             _webClientService = Substitute.For<IWebClientService>();
             _logger = Substitute.For<ILogger>();
             _service = new AgCasinoBetSettingService(
-                _authorizationService,
                 _logger,
                 _dataAccess,
                 _appSettings,
@@ -52,7 +60,6 @@
         [OneTimeTearDown]
         public void TearDown()
         {
-            _authorizationService = null;
             _dataAccess = null;
             _appSettings = null;
             _webClientService = null;
@@ -63,7 +70,6 @@
         public async Task GetViewModelAsync_WhenCall_ApiResultRetriviedCorrectly()
         {
             // Arrange
-            var licenseeId = FakeHelper.Create<int>();
             var licenseeName = FakeHelper.Create<string>();
             var custId = FakeHelper.Create<int>();
             var gameType = FakeHelper.Create<string>();
@@ -76,13 +82,12 @@
                 CheckedGroups = new[] { "B" }
             };
 
-            _authorizationService.HasPermissionOnData(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<long>()).Returns(true);
             _dataAccess.GetBetSettingAsync(custId).Returns(Task.FromResult(fakeSetting));
             _webClientService.UploadStringAsync(new Uri(FakeApiUrl), $"SiteName={licenseeName}&Currency=0")
                 .Returns(Task.FromResult($"<Game GameType='{gameType}' Name='{group}'><Group GroupType='{groupType}'><Min>1</Min><Max>100</Max></Group></Game>"));
 
             // Action
-            var result = await _service.GetViewModelAsync(licenseeId, custId, licenseeName);
+            var result = await _service.GetViewModelAsync(custId, licenseeName);
 
             // Assert
             Assert.Multiple(() =>
@@ -97,7 +102,6 @@
         public async Task GetViewModelAsync_CheckGroupsContainAgGroupInSetting_ReturnCorrectViewModel()
         {
             // Arrange
-            var licenseeId = FakeHelper.Create<int>();
             var licenseeName = FakeHelper.Create<string>();
             var custId = FakeHelper.Create<int>();
             var gameType = FakeHelper.Create<string>();
@@ -111,13 +115,12 @@
                 IsEnabled = true
             };
 
-            _authorizationService.HasPermissionOnData(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<long>()).Returns(true);
             _dataAccess.GetBetSettingAsync(custId).Returns(Task.FromResult(fakeSetting));
             _webClientService.UploadStringAsync(new Uri(FakeApiUrl), $"SiteName={licenseeName}&Currency=0")
                 .Returns(Task.FromResult($"<Game GameType='{gameType}' Name='{group}'><Group GroupType='{groupType}'><Min>1</Min><Max>100</Max></Group></Game>"));
 
             // Action
-            var result = await _service.GetViewModelAsync(licenseeId, custId, licenseeName);
+            var result = await _service.GetViewModelAsync(custId, licenseeName);
 
             // Assert
             Assert.Multiple(() =>
@@ -130,23 +133,6 @@
         }
 
         [Test]
-        public async Task GetViewModelAsync_HaveNoPermission_ReturnNull()
-        {
-            // Arrange
-            var licenseeId = FakeHelper.Create<int>();
-            var licenseeName = FakeHelper.Create<string>();
-            var custId = FakeHelper.Create<int>();
-
-            _authorizationService.HasPermissionOnData(licenseeId, custId, 0).Returns(false);
-
-            // Action
-            var result = await _service.GetViewModelAsync(licenseeId, custId, licenseeName);
-
-            // Assert
-            Assert.That(result, Is.EqualTo(null));
-        }
-
-        [Test]
         public async Task UpdateAgCasinoBetSettingAsync_WhenCall_ReturnDataFromDataAccess()
         {
             // Arrange
@@ -154,7 +140,6 @@
             var group = FakeHelper.Create<string>();
             var setting = new CommonBetSetting { LicenseeId = FakeHelper.Create<int>(), CustId = FakeHelper.Create<int>() };
 
-            _authorizationService.HasPermissionOnData(setting.LicenseeId, setting.CustId, 0).Returns(true);
             _dataAccess.GetBetSettingAsync(setting.CustId).Returns(Task.FromResult(new AgCasinoBetSetting
             {
                 IsEnabled = true
@@ -201,8 +186,6 @@
 
             var setting = new CommonBetSetting { LicenseeId = FakeHelper.Create<int>(), CustId = FakeHelper.Create<int>() };
 
-            _authorizationService.HasPermissionOnData(setting.LicenseeId, setting.CustId, 0).Returns(true);
-
             _dataAccess.GetBetSettingAsync(setting.CustId).Returns(Task.FromResult(new AgCasinoBetSetting
             {
                 IsEnabled = false
@@ -220,83 +203,24 @@
         }
 
         [Test]
-        public async Task UpdateAgCasinoBetSettingAsync_HaveNoPermission_ReturnCorrectErrorResult()
-        {
-            // Arrange
-            var expectedResult = new ResultInfo
-            {
-                Code = 1,
-                Message = ViewResources.AccessDeniedMsg
-            };
-            var group = FakeHelper.Create<string>();
-            var setting = new CommonBetSetting { LicenseeId = FakeHelper.Create<int>(), CustId = FakeHelper.Create<int>() };
-
-            _authorizationService.HasPermissionOnData(setting.LicenseeId, setting.CustId, 0).Returns(false);
-
-            _dataAccess.GetBetSettingAsync(setting.CustId).Returns(Task.FromResult(new AgCasinoBetSetting
-            {
-                IsEnabled = true
-            }));
-
-            // Action
-            var result = await _service.UpdateAgCasinoBetSettingAsync(setting, group);
-
-            // Assert
-            Assert.Multiple(() =>
-            {
-                Assert.That(result.Code, Is.EqualTo(expectedResult.Code));
-                Assert.That(result.Message, Is.EqualTo(expectedResult.Message));
-            });
-        }
-
-        [Test]
         public async Task UpdateStatusAsync_WhenCall_ReturnDataFromDataAccess()
         {
             // Arrange
             var expectedResult = FakeHelper.Create<ResultInfo>();
 
-            var licenseeId = FakeHelper.Create<int>();
             var userId = FakeHelper.Create<int>();
             var custId = FakeHelper.Create<int>();
             var language = FakeHelper.Create<string>();
             var ip = FakeHelper.Create<string>();
 
-            _authorizationService.HasPermissionOnData(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<long>()).Returns(true);
             _dataAccess.UpdateStatusAsync(userId, custId, language, ip, true).Returns(Task.FromResult<IResultInfo>(expectedResult));
 
             // Action
-            var result = await _service.UpdateStatusAsync(licenseeId, userId, custId, language, ip, true);
+            var result = await _service.UpdateStatusAsync(userId, custId, language, ip, true);
 
             // Assert
             Assert.That(result.Code, Is.EqualTo(expectedResult.Code));
         }
 
-        [Test]
-        public async Task UpdateStatusAsync_HaveNoPermission_ReturnCorrectErrorResult()
-        {
-            // Arrange
-            var expectedResult = new ResultInfo
-            {
-                Code = 1,
-                Message = ViewResources.AccessDeniedMsg
-            };
-            var licenseeId = FakeHelper.Create<int>();
-            var userId = FakeHelper.Create<int>();
-            var custId = FakeHelper.Create<int>();
-            var language = FakeHelper.Create<string>();
-            var ip = FakeHelper.Create<string>();
-
-            _authorizationService.HasPermissionOnData(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<long>()).Returns(false);
-
-            // Action
-            var result = await _service.UpdateStatusAsync(licenseeId, userId, custId, language, ip, true);
-
-            // Assert
-            Assert.Multiple(() =>
-            {
-                Assert.That(result.Code, Is.EqualTo(expectedResult.Code));
-                Assert.That(result.Message, Is.EqualTo(expectedResult.Message));
-            });
-        }
     }
 }

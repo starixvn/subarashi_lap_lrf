@@ -1,18 +1,25 @@
 ﻿namespace Fanex.Athena.Controllers.TotalBets.UnitTests
 {
+    using Base.UnitTests;
+
+    using DataAccess.Core.Configuration.Interfaces;
+
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
+    using Model.Core.DTO.Common;
+    using Model.Core.DTO.Configuration;
+
+    using NSubstitute;
+
+    using NUnit.Framework;
+
+    using Report.Result;
+
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
-    using Base.UnitTests;
-    using DataAccess.Core.Configuration.Interfaces;
-    using Model.Core.DTO.Common;
-    using Model.Core.DTO.Configuration;
-    using NSubstitute;
-    using NUnit.Framework;
-    using Report.Result;
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Utility.Interfaces;
+
     using UnitTest.Common.Extensions;
 
     [TestFixture]
@@ -136,11 +143,12 @@
             var controller = new ResultReportController(
                 LangService,
                 SessionService,
-                AppSettings,
                 productService,
                 _balanceUpDataAccess,
-                _betListApiClient);
-            controller.ControllerContext = ControllerContext;
+                _betListApiClient)
+            {
+                ControllerContext = ControllerContext
+            };
             return controller;
         }
     }

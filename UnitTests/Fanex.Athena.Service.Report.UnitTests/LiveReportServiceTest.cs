@@ -4,13 +4,18 @@
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
-    using Constant.DataDomain;
+
     using DataAccess.Report.Interfaces;
+
+    using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using Model.Report.DTO.LiveReports;
     using Model.Report.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using VendorAdapter.Interfaces;
 
     public class LiveReportServiceTest

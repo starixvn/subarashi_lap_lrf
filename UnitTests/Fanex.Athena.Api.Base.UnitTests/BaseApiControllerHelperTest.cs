@@ -1,13 +1,20 @@
 ﻿namespace Fanex.Athena.Api.Base.UnitTests
 {
     using System.Collections.Generic;
+
     using Extension.Utility;
+
+    using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Model.Core.DTO.Common;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-    using Session.Model;
 
     public abstract class BaseApiControllerHelperTest
     {
@@ -21,7 +28,7 @@
 
         protected const string SessionLanguage = "en-US";
 
-        protected const string AgentListXml = "XmlData";
+        protected const string AgentListXml = "<ROOT></ROOT>";
 
         protected ISessionService SessionService { get; private set; }
 
@@ -31,17 +38,18 @@
 
         protected ILanguageService LangService { get; private set; }
 
-        protected IDictionary<int, string> UserCurrencyList => 
+        protected IDictionary<int, string> UserCurrencyList =>
             SessionService.UserSession.CurrencyList;
 
         [OneTimeSetUp]
         public virtual void FixtureSetUp()
         {
             SessionService = Substitute.For<ISessionService>();
-            SessionService.UserSession.Returns(new UserSession
+            SessionService.UserSession.Returns(new UserAuthInfo
             {
                 Language = SessionLanguage,
-                CurrencyList = new Dictionary<int, string>()
+                CurrencyList = new Dictionary<int, string>(),
+                CurrencyAgentList = new Dictionary<int, int[]>()
             });
             ProductService = Substitute.For<IProductService>();
             AppSetting = Substitute.For<IAppSettings>();
@@ -62,15 +70,16 @@
 
         protected void MockSessionData()
         {
-            var userSession = new UserSession
+            var userSession = new UserAuthInfo
             {
                 UserId = SessionUserId,
                 UserName = SessionUserName,
-                CurrencyList = new Dictionary<int, string> {{ 1, "EUR" }, { 2, "USD" } },
-                Language = SessionLanguage
+                CurrencyList = new Dictionary<int, string> { { 1, "EUR" }, { 2, "USD" } },
+                Language = SessionLanguage,
+                CurrencyAgentList = new Dictionary<int, int[]>()
             };
 
-            var licenseeSession = new LicenseeSession
+            var licenseeSession = new LicenseeAuthInfo
             {
                 LicenseeId = SessionLicenseeId,
                 LicenseeName = SessionLicenseeName
@@ -78,7 +87,6 @@
 
             StubUserSessionData(userSession);
             StubLicenseeSessionData(licenseeSession);
-            SessionService.GenerateAgentListXml(Arg.Any<int>(), Arg.Any<bool>()).Returns(AgentListXml);
         }
 
         protected void StubSingleWalletProductAccess(string[] productCode)
@@ -105,12 +113,12 @@
             ProductService.GetProductAccess(Arg.Any<int>(), Arg.Any<string>(), functionConfigKey: Arg.Any<string>()).Returns(new ProductAccess(productList));
         }
 
-        protected void StubUserSessionData(UserSession userSession)
+        protected void StubUserSessionData(UserAuthInfo userSession)
         {
             SessionService.UserSession.Returns(userSession);
         }
 
-        protected void StubLicenseeSessionData(LicenseeSession licenseeSession)
+        protected void StubLicenseeSessionData(LicenseeAuthInfo licenseeSession)
         {
             SessionService.LicenseeSession.Returns(licenseeSession);
         }

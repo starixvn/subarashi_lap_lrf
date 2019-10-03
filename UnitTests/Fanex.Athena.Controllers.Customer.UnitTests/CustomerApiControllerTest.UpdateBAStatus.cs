@@ -1,15 +1,20 @@
 ﻿namespace Fanex.Athena.Controllers.UnitTests
 {
     using System.Collections.Generic;
-    using System.Threading.Tasks;
     using System.Web.Mvc;
+
     using Base.UnitTests;
+
+    using Fanex.Athena.Model.Auth;
     using Fanex.Athena.UnitTest.Common.Extensions;
+
     using Model.Core.DTO.Common;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Resources;
-    using Session.Model;
 
     [TestFixture]
     public partial class CustomerApiControllerTest : CultureBaseControllerHelperTest
@@ -20,7 +25,7 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                bool isAllowBa = true;
+                var isAllowBa = true;
                 var productAccess = new ProductAccess(new List<Product>());
                 _productService.GetProductAccess(
                     SessionService.LicenseeSession.LicenseeId,
@@ -33,7 +38,8 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    _customerListService.DidNotReceiveWithAnyArgs().UpdateCustomerBAStatus(0, 0, 0, false, null);
+                    _customerListService.DidNotReceiveWithAnyArgs().UpdateCustomerBAStatus(0, 0, 0, false,
+                        null);
                     Assert.That(resultData.GetValue("IsSuccessful"), Is.False);
                     Assert.That(resultData.GetValue("Message"), Is.EqualTo(ViewResources.NotAllowBA));
                     Assert.That(resultData.GetValue("IsBA"), Is.EqualTo(isAllowBa));
@@ -50,7 +56,7 @@
                 // Arrange
                 const string ResultMessage = "konnichiwa";
                 bool isAllowBa = true;
-                SessionService.IsAllowedSpecialBA(Arg.Any<UserSession>()).Returns(false);
+                _authorizationService.IsAllowedSpecialBA(Arg.Any<UserAuthInfo>()).Returns(false);
                 var productAccess = new ProductAccess(new List<Product>
                 {
                     new Product { ProductCode = Product.BA }
@@ -71,7 +77,8 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    _customerListService.DidNotReceiveWithAnyArgs().UpdateCustomerBAStatus(0, 0, 0, false, null);
+                    _customerListService.DidNotReceiveWithAnyArgs().UpdateCustomerBAStatus(0, 
+                        0, 0, false, null);
                     Assert.That(resultData.GetValue("IsSuccessful"), Is.False);
                     Assert.That(resultData.GetValue("Message"), Is.EqualTo(ResultMessage));
                     Assert.That(resultData.GetValue("IsBA"), Is.EqualTo(isAllowBa));
@@ -89,7 +96,7 @@
                 const string OddsGroup = "Z";
                 const int CustId = 100;
                 bool isAllowBa = true;
-                SessionService.IsAllowedSpecialBA(Arg.Any<UserSession>()).Returns(true);
+                _authorizationService.IsAllowedSpecialBA(Arg.Any<UserAuthInfo>()).Returns(true);
                 var productAccess = new ProductAccess(new List<Product>
                 {
                     new Product { ProductCode = Product.BA }

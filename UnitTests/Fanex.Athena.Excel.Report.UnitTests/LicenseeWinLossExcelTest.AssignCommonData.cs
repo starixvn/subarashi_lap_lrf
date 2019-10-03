@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+
 using Fanex.Athena.Excel.Base.Extension;
 using Fanex.Athena.Model.Core.DTO.Common;
 using Fanex.Athena.Model.Report.DTO;
 using Fanex.Athena.UnitTest.Common.Helpers;
+
 using NSubstitute;
+
 using NUnit.Framework;
 
 namespace Fanex.Athena.Excel.Report.UnitTests

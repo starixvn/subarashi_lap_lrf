@@ -3,11 +3,17 @@
     using System.Collections.Generic;
     using System.Data;
     using System.Linq;
+
     using Base.Helpers;
+
     using Model.Core.MetaModel.Product;
+
     using NPOI.SS.UserModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Report.Helpers;
 
     [TestFixture]
@@ -19,7 +25,7 @@
             // Arrange
             var columns = new[] { "Row0", "Row1", "Row2" };
             var dataRow = GetDataTable(columns.Take(2).ToArray()).Rows[0];
-            
+
             var excelRow = Substitute.For<IRow>();
             var cell = Substitute.For<ICell>();
             excelRow.Cells.Returns(new List<ICell> { cell, cell });

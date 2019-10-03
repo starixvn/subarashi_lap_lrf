@@ -46,4 +46,8 @@ export default class Site {
         }
         reader.readAsText(blob);
     }
+
+    static getRootUrl() {
+        return _rootUrl;
+    }
 }

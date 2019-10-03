@@ -3,10 +3,15 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
+
     using Core.UnitTests.TestHelpers;
+
     using Customer;
+
     using Model.Customer.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
 
     public class DormantCustomerListDataAccessTest : BaseDataAccessHelperTest<DormantCustomerListDataAccess>

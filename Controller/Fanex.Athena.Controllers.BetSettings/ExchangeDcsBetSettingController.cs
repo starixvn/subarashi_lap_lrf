@@ -9,12 +9,16 @@ namespace Fanex.Athena.Controllers.BetSettings
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Extension.Utility;
+
     using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
+
     using Model.BetSettings.MetaModel;
     using Model.BetSettings.ViewModel;
+
     using Resources;
+
     using Service.BetSettings.Interfaces;
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
@@ -30,12 +34,14 @@ namespace Fanex.Athena.Controllers.BetSettings
         public ExchangeDcsBetSettingController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             ICoreBetSettingService coreBetSettingService,
             IProductService productService,
             IDcsBetSettingService betSettingService,
-            IExchangeCommApiService exchangeCommApiService)
-        : base(languageService, sessionService, appSetting, coreBetSettingService, productService)
+            IExchangeCommApiService exchangeCommApiService,
+             ILicenseeSettingService licenseeSettingService
+
+            )
+        : base(languageService, sessionService, coreBetSettingService, productService, licenseeSettingService)
         {
             _betSettingService = betSettingService;
             _exchangeCommApiService = exchangeCommApiService;
@@ -43,18 +49,19 @@ namespace Fanex.Athena.Controllers.BetSettings
 
         [HttpGet]
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
+        [ValidatePermissionOnData(isObject: true)]
         public async Task<ActionResult> Index(BetSettingMetaModel metaModel)
         {
-            var licenseeId = SessionService.LicenseeSession.LicenseeId;
             var viewModel = new ExchangeBetSettingViewModel
             {
                 CommissionList = ValidComms
             };
-            await AssignRequiredProperties(viewModel, metaModel).ConfigureAwait(false);
+            await AssignRequiredPropertiesAsync(viewModel, metaModel);
 
-            viewModel.IsEnabled = await _betSettingService.GetStatusAsync(licenseeId, metaModel.CustId, metaModel.ProductId).ConfigureAwait(false);
+            viewModel.IsEnabled = await
+                _betSettingService.GetStatusAsync(metaModel.CustId, metaModel.ProductId);
 
-            var apiResult = _exchangeCommApiService.GetCommission(licenseeId, metaModel.CustId);
+            var apiResult = _exchangeCommApiService.GetCommission(metaModel.CustId);
             if (apiResult.IsSuccessful)
             {
                 viewModel.Commission = apiResult.ExtendedData;
@@ -78,13 +85,12 @@ namespace Fanex.Athena.Controllers.BetSettings
                 const int InvalidChargeCommissionError = 100;
                 return Json(new ResultInfo { Code = InvalidChargeCommissionError, Message = ViewResources.InvalidChargeCommission });
             }
-
+            var userSession = SessionService.UserSession;
             var result = await _exchangeCommApiService.UpdateCommissionAsync(
-                SessionService.LicenseeSession.LicenseeId,
-                SessionService.UserSession.UserId,
+                userSession.UserId,
                 custId,
                 oldCommission,
-                newCommission).ConfigureAwait(false);
+                newCommission);
 
             return Json(result);
         }

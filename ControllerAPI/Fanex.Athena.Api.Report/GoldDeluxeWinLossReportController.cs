@@ -7,14 +7,21 @@
     using System.Threading.Tasks;
     using System.Web.Hosting;
     using System.Web.Http;
+
     using Base.Attributes;
+
     using DataAccess.Report.Interfaces;
+
     using Fanex.Athena.Excel.Report;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Service.Core.Utility.Interfaces;
-    using Model.Core.DataDomain;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Utility;
+
     using Model.Core.ResultModel;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
 
@@ -124,6 +131,7 @@
             int currencyId = 0,
             int custId = 0)
         {
+            var userSession = SessionService.UserSession;
             if (_currencyValidation.IsValidCurrency(currencyId, true))
             {
                 metaModel.DrillDownCurrencyId = currencyId;
@@ -131,9 +139,10 @@
                 metaModel.DrillDownCustomerId = custId;
                 metaModel.DrillDownFromDate = fdate.HasValue ? fdate.Value : metaModel.DrillDownFromDate;
                 metaModel.DrillDownToDate = tdate.HasValue ? tdate.Value : metaModel.DrillDownToDate;
-                metaModel.AgentListXml = SessionService.GenerateAgentListXml(level == 0 ? metaModel.CurrencyId : currencyId, metaModel.IsExcludedTestData);
+                metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList,
+                    level == 0 ? metaModel.CurrencyId : currencyId, metaModel.IsExcludedTestData);
                 metaModel.LicenseeId = SessionService.LicenseeSession.LicenseeId;
-                metaModel.DefaultBaseCurrency = SessionService.UserSession.DefaultBaseCurrency;
+                metaModel.DefaultBaseCurrency = userSession.DefaultBaseCurrency;
 
                 var result = await GetData(metaModel);
 

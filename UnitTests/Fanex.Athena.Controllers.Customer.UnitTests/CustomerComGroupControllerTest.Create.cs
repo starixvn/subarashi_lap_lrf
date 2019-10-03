@@ -3,11 +3,16 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+
     using Base.UnitTests;
+
     using Model.Core.DTO.Common;
     using Model.Customer.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Resources;
 
     [TestFixture]
@@ -30,7 +35,7 @@
                 _productService.GetProductAccess(
                     licenseeId,
                     SessionService.UserSession.Language).Returns(new ProductAccess(productList));
-                _groupComService.GetAll(licenseeId).Returns(new List<GroupCommMetaModel>
+                _groupComService.GetAllAsync(licenseeId).Returns(new List<GroupCommMetaModel>
                     {
                         new GroupCommMetaModel
                         {
@@ -112,7 +117,7 @@
                     GroupCommId = 999,
                     GroupName = "Belle"
                 };
-                _groupComService.InsertGroup(metaModel, Arg.Any<Request>(), SessionService.UserSession.UserId)
+                _groupComService.InsertGroupAsync(metaModel, Arg.Any<Request>(), SessionService.UserSession.UserId)
                     .Returns(new ResultInfo());
 
                 // Action
@@ -122,7 +127,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    _groupComService.Received(1).InsertGroup(metaModel, Arg.Any<Request>(), SessionService.UserSession.UserId);
+                    _groupComService.Received(1).InsertGroupAsync(metaModel, Arg.Any<Request>(), SessionService.UserSession.UserId);
                     Assert.That(resultInfo.Code, Is.Zero);
                     Assert.That(resultInfo.Message, Is.EqualTo(ViewResources.MessageSuccess));
                     Assert.That(metaModel.IsResetDefault, Is.False);

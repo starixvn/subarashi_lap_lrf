@@ -8,12 +8,15 @@ namespace Fanex.Athena.Controllers.TotalBets
 {
     using System.Threading.Tasks;
     using System.Web.Mvc;
+
     using DataAccess.TotalBet.Interfaces;
-    using Extension.Utility;
+    using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
-    using Model.Core.DataDomain;
+
     using Model.TotalBet.MetaModel;
     using Model.TotalBet.ViewModel;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
 
@@ -25,9 +28,8 @@ namespace Fanex.Athena.Controllers.TotalBets
         public HomeDrawAwayNoBetTotalBetController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             IHomeDrawAwayNoBetDataAccess homeDrawAwayNoBetDataAccess)
-        : base(languageService, sessionService, appSetting)
+        : base(languageService, sessionService)
         {
             _homeDrawAwayNoBetDataAccess = homeDrawAwayNoBetDataAccess;
         }
@@ -55,19 +57,18 @@ namespace Fanex.Athena.Controllers.TotalBets
 
         private async Task<ActionResult> GetView(HomeDrawAwayNoBetMetaModel metaModel)
         {
-            var currencies = SessionService.UserSession.CurrencyList;
-
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
+            var userSession = SessionService.UserSession;
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList,
+                metaModel.CurrencyId);
             var dataList = await _homeDrawAwayNoBetDataAccess.GetHomeDrawAwayNoBetDataList(metaModel).ConfigureAwait(false);
             var model = new HomeDrawAwayNoBetViewModel
             {
                 Param = metaModel,
                 MainData = dataList,
-                CurrencyList = currencies
+                CurrencyList = userSession.CurrencyList
             };
 
             return View("~/Views/Desktop/TotalBets/HomeDrawAwayNoBet/Main.cshtml", model);
-
         }
     }
 }

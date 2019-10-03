@@ -1,4 +1,5 @@
 ﻿@using Fanex.Athena.Service.Core.Users.Interfaces;
+@using Fanex.Athena.Model.Auth.Enum;
 @{
     Layout = null;
 
@@ -8,8 +9,9 @@
     var userCurrencies = userSession == null || userSession.CurrencyList == null ?
         new Dictionary<string, string>() :
         userSession.CurrencyList.ToDictionary(x => x.Key.ToString(), x => x.Value);
-    var isParasiticMode = userSession != null && userSession.ApplicationMode == Fanex.Athena.Session.Enum.AppMode.Parasitic;
+    var isParasiticMode = userSession != null && userSession.ApplicationMode == AppMode.Parasitic;
     var langCode = System.Globalization.CultureInfo.CurrentUICulture.IetfLanguageTag;
+    var rootUrl = Url.Content("~");
 }
 <!DOCTYPE html>
 
@@ -19,21 +21,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <title>@ViewBag.Title</title>
     <meta name="description" content="The Risk & Forecast System" />
+    <base href="@rootUrl" />
     <link href="@Url.ContentLinkByEnv("/www/css/build/reactpages/vendor.css")" rel="stylesheet" type="text/css" />
 
     @RenderSection("pagecss", required: false)
-
 </head>
 <body>
     @Html.AntiForgeryToken()
-   
+
     <div class="wrapper">
         @RenderBody()
     </div>
- 
+
     <script type="text/javascript">
         var PageLanguage = "@langCode";
-        window.rootUrl = '@Url.Content("~/")';
+        window.rootUrl = '@rootUrl';
 
         @RenderSection("globaljscode", required: false)
     </script>
@@ -41,7 +43,7 @@
     <script src="@Url.ContentLinkByEnv("/www/js/build/reactpages/lib/langHelper.chunk.js")"></script>
     @if (langCode != "en-US")
     {
-    <script src="@Url.ContentLinkByEnv("/www/js/build/reactpages/lib/lang-" + langCode + ".chunk.js")"></script>
+        <script src="@Url.ContentLinkByEnv("/www/js/build/reactpages/lib/lang-" + langCode + ".chunk.js")"></script>
     }
 
     @RenderSection("pagejs", required: false)
@@ -55,7 +57,7 @@
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-93927620-1"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
+            function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
 
             gtag('config', 'UA-93927620-1');

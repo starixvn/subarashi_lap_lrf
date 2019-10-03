@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using Fanex.Athena.Model.Customer.MetaModel;
 using Fanex.Athena.Resources;
 using Fanex.Athena.Service.Customer.Helpers;
@@ -54,6 +55,7 @@ namespace Fanex.Athena.Controllers.Customer.Helpers
         }
 
 #pragma warning disable S109 // Magic numbers should not be used
+
         public static int SetComm(decimal comm, int position)
         {
             var actualComm = comm * 10000;
@@ -100,6 +102,7 @@ namespace Fanex.Athena.Controllers.Customer.Helpers
             model.CSComm2 = SetComm(decCsComm, 2);
             model.CSComm3 = SetComm(decCsComm, 3);
         }
+
 #pragma warning restore S109 // Magic numbers should not be used
 
         public static void UpdateMetaModelAfterProcessSuccessfully(GroupCommMetaModel metaModel)

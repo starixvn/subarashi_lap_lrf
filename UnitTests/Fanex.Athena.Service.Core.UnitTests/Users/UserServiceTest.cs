@@ -1,13 +1,20 @@
 ﻿namespace Fanex.Athena.Service.Core.UnitTests.Users
 {
     using System.Collections.Generic;
+
     using Core.Users;
     using Core.Users.Interfaces;
+
     using DataAccess.Core.Users.Interfaces;
+
     using Model.Core.DTO.Users;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Resources;
+
     using UnitTest.Common.Helpers;
 
     [TestFixture]

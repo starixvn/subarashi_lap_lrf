@@ -1,6 +1,7 @@
 ﻿namespace Fanex.Athena.DataAccess.Core.UnitTests.TestHelpers
 {
     using Data;
+
     using NSubstitute;
 
     public static class ResultInfoHelper

@@ -1,9 +1,9 @@
-﻿using Fanex.Athena.Extension.Helper;
-
-namespace Fanex.Athena.Extension.UnitTests.Helper
+﻿namespace Fanex.Athena.Extension.UnitTests.Helper
 {
     using System;
+
     using Extension.Helper;
+
     using NUnit.Framework;
 
     [TestFixture]

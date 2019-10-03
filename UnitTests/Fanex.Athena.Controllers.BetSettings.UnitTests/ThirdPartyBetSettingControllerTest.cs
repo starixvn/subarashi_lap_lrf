@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Constant.DataDomain;
+    using Model.Core.DataDomain;
     using Model.BetSettings.MetaModel;
     using Model.BetSettings.ViewModel;
     using Model.Core.DTO.Common;
@@ -38,8 +38,8 @@
             {
                 // Arrange
                 var metaModel = new BetSettingMetaModel { ProductId = ProductTypes.Macau, CustId = 100 };
-                
-                _betSettingService.GetViewModelAsync(DefaultLicenseeSession.LicenseeId, metaModel.CustId, metaModel.ProductId)
+
+                _betSettingService.GetViewModelAsync( metaModel.CustId, metaModel.ProductId)
                     .Returns(Task.FromResult<ThirdPartyBetSettingViewModel>(null));
 
                 // Action
@@ -55,14 +55,14 @@
         [TestCase(ProductTypes.ColossusBets, "~/Views/Desktop/Customer/BetSetting/ColossusBets.cshtml")]
         [TestCase(ProductTypes.CashOut, "~/Views/Desktop/Customer/BetSetting/CashOut.cshtml")]
         [TestCase(ProductTypes.GoldDeluxe, "~/Views/Desktop/Customer/BetSetting/GoldDeluxe.cshtml")]
-        public async Task Index_HasPermission_ReturnCorrectViewResult(int productId, string viewName)
+        public async Task Index_HasPermission_ReturnCorrectViewResultAsync(int productId, string viewName)
         {
             using (var controller = CreateController())
             {
                 // Arrange
                 var metaModel = new BetSettingMetaModel { ProductId = productId };
 
-                _betSettingService.GetViewModelAsync(DefaultLicenseeSession.LicenseeId, metaModel.CustId, metaModel.ProductId)
+                _betSettingService.GetViewModelAsync( metaModel.CustId, metaModel.ProductId)
                     .Returns(Task.FromResult(new ThirdPartyBetSettingViewModel()));
 
                 // Action
@@ -88,11 +88,11 @@
                 // Arrange
                 var metaModel = new BetSettingMetaModel { ProductId = productId };
 
-                _betSettingService.GetViewModelAsync(DefaultLicenseeSession.LicenseeId, metaModel.CustId, metaModel.ProductId)
+                _betSettingService.GetViewModelAsync( metaModel.CustId, metaModel.ProductId)
                     .Returns(Task.FromResult(new ThirdPartyBetSettingViewModel()));
 
                 // Action
-                AsyncTestDelegate testDelegate = () => controller.Index(metaModel);
+                Task testDelegate() => controller.Index(metaModel);
 
                 // Assert
                 Assert.ThrowsAsync<ArgumentException>(testDelegate, "Not a thirdparty product.");
@@ -133,7 +133,7 @@
                 CoreBetSettingService.IsBetSettingEditable(DefaultUserSession).Returns(true);
 
                 _betSettingService.UpdateStatusAsync(
-                   DefaultLicenseeSession.LicenseeId,
+                   
                    Arg.Any<int>(),
                    DefaultUserSession.UserId,
                    Arg.Any<int>(),
@@ -166,7 +166,7 @@
                 CoreBetSettingService.IsBetSettingEditable(DefaultUserSession).Returns(true);
 
                 _betSettingService.UpdateStatusAsync(
-                   DefaultLicenseeSession.LicenseeId,
+                  
                    Arg.Any<int>(),
                    DefaultUserSession.UserId,
                    Arg.Any<int>(),
@@ -195,7 +195,7 @@
                 CoreBetSettingService.IsBetSettingEditable(DefaultUserSession).Returns(true);
 
                 _betSettingService.UpdateStatusAsync(
-                   DefaultLicenseeSession.LicenseeId,
+                   
                    Arg.Any<int>(),
                    DefaultUserSession.UserId,
                    Arg.Any<int>(),
@@ -228,7 +228,7 @@
                 CoreBetSettingService.IsBetSettingEditable(DefaultUserSession).Returns(true);
 
                 _betSettingService.UpdateStatusAsync(
-                   DefaultLicenseeSession.LicenseeId,
+                   
                    Arg.Any<int>(),
                    DefaultUserSession.UserId,
                    Arg.Any<int>(),
@@ -279,7 +279,7 @@
                 CoreBetSettingService.IsBetSettingEditable(DefaultUserSession).Returns(true);
 
                 _betSettingService.UpdateStatusAsync(
-                   DefaultLicenseeSession.LicenseeId,
+                   
                    Arg.Any<int>(),
                    DefaultUserSession.UserId,
                    Arg.Any<int>(),
@@ -312,7 +312,7 @@
                 CoreBetSettingService.IsBetSettingEditable(DefaultUserSession).Returns(true);
 
                 _betSettingService.UpdateStatusAsync(
-                   DefaultLicenseeSession.LicenseeId,
+                   
                    Arg.Any<int>(),
                    DefaultUserSession.UserId,
                    Arg.Any<int>(),
@@ -363,7 +363,7 @@
                 CoreBetSettingService.IsBetSettingEditable(DefaultUserSession).Returns(true);
 
                 _betSettingService.UpdateStatusAsync(
-                   DefaultLicenseeSession.LicenseeId,
+                   
                    Arg.Any<int>(),
                    DefaultUserSession.UserId,
                    Arg.Any<int>(),
@@ -396,7 +396,7 @@
                 CoreBetSettingService.IsBetSettingEditable(DefaultUserSession).Returns(true);
 
                 _betSettingService.UpdateStatusAsync(
-                   DefaultLicenseeSession.LicenseeId,
+                  
                    Arg.Any<int>(),
                    DefaultUserSession.UserId,
                    Arg.Any<int>(),
@@ -420,10 +420,9 @@
             var controller = new ThirdPartyBetSettingController(
                 LangService,
                 SessionService,
-                AppSettings,
                 CoreBetSettingService,
                 ProductService,
-                _betSettingService)
+                _betSettingService, LicenseeSettingService)
             {
                 ControllerContext = ControllerContext
             };

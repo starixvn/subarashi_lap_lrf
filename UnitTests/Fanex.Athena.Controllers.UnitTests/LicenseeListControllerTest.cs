@@ -1,12 +1,16 @@
 ﻿namespace Fanex.Athena.Controllers.UnitTests
 {
     using System.Collections.Generic;
-    using System.Threading.Tasks;
     using System.Web.Mvc;
+
     using Base.UnitTests;
+
     using DataAccess.Core.Users.Interfaces;
+
     using Model.Core.DTO.Common;
+
     using NSubstitute;
+
     using NUnit.Framework;
 
     [TestFixture]
@@ -133,7 +137,7 @@
 
         private LicenseeListController CreateController()
         {
-            return new LicenseeListController(LangService, SessionService, AppSettings, _licenseeDataAccess);
+            return new LicenseeListController(LangService, SessionService, _licenseeDataAccess);
         }
 
         private void StubLicenseeDataAccessGetByUser(int userId, List<Licensee> fakeResult)

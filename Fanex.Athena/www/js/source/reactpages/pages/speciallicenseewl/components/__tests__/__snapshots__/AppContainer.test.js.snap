@@ -11,6 +11,7 @@ exports[`AppContainer  render() - match with snapshot 1`] = `
   >
     <ReportTitle
       content="title"
+      tag="p"
     />
     <Connect(DataGrid) />
   </div>

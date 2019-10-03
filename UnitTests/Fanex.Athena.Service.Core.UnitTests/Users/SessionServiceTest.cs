@@ -1,24 +1,31 @@
 ﻿namespace Fanex.Athena.Service.Core.UnitTests.Users
 {
+    using Core.Users;
+    using Core.Users.Interfaces;
+
+    using DataAccess.Core.Common.Interfaces;
+    using DataAccess.Core.Users.Interfaces;
+
+    using Extension.Utility;
+
+    using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Utility;
+
+    using Model.Core.DataDomain;
+    using Model.Core.DTO.Common;
+
+    using NSubstitute;
+
+    using NUnit.Framework;
+
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Web;
     using System.Web.SessionState;
-    using Core.Common.Interfaces;
-    using Core.Users;
-    using Core.Users.Interfaces;
-    using DataAccess.Core.Common.Interfaces;
-    using DataAccess.Core.Users.Interfaces;
-    using Extension.Utility;
-    using Model.Core.DataDomain;
-    using Model.Core.DTO.Common;
-    using Model.Core.DTO.Users;
-    using NSubstitute;
-    using NUnit.Framework;
-    using Session.Enum;
-    using Session.Interfaces;
-    using Session.Model;
+
     using UnitTest.Common.Helpers;
 
     [TestFixture]
@@ -38,8 +45,8 @@
         {
             _sessionStorage = Substitute.For<ISessionStorage>();
             _sessionStorage.AssignSessions(
-                Arg.Do<UserSession>(x => _sessionStorage.UserSession.Returns(x)),
-                Arg.Do<LicenseeSession>(x => _sessionStorage.LicenseeSession.Returns(x)));
+                Arg.Do<UserAuthInfo>(x => _sessionStorage.UserAuthInfo.Returns(x)),
+                Arg.Do<LicenseeAuthInfo>(x => _sessionStorage.LicenseeAuthInfo.Returns(x)));
 
             _appSettings = Substitute.For<IAppSettings>();
             _functionService = Substitute.For<IFunctionService>();
@@ -81,6 +88,7 @@
                 new Licensee { Id = 2, Name = "12bet" },
             };
             _licenseeDataAccess.GetByUser(DefaultUserId).Returns(licensees);
+            _functionService.GetUserFunctionList(Arg.Any<int>(), Arg.Any<int>()).Returns(new List<Function>());
             const int OldLicenseeId = 1;
             const int NewLicenseeId = 2;
             CreateDefaultNewSession(OldLicenseeId);
@@ -130,7 +138,8 @@
                 new Licensee { Id = 1, Name = "spondemo" },
                 new Licensee { Id = 2, Name = "12bet" },
             };
-            var functions = new List<Function> { new Function { FunctionId = 42 } };
+            var functions = new List<Function> { new Function { FunctionId = 42,
+                FunctionKey = PermissionKeys.ReportLicenseeWinLoss } };
             _licenseeDataAccess.GetByUser(DefaultUserId).Returns(licensees);
             const int OldLicenseeId = 1;
             const int NewLicenseeId = 2;
@@ -153,7 +162,12 @@
                 new Licensee { Id = 1, Name = "spondemo" },
                 new Licensee { Id = 2, Name = "12bet" },
             };
-            var functions = new List<Function> { new Function { FunctionId = 1, ParentId = 1, IsActive = true, Url = "TestUrl" } };
+            var functions = new List<Function> { new Function {
+                FunctionId = 1, ParentId = 1,
+                IsActive = true,
+                Url = "TestUrl",
+            FunctionKey= PermissionKeys.BettingTicketCenter} };
+
             _licenseeDataAccess.GetByUser(DefaultUserId).Returns(licensees);
             const int OldLicenseeId = 1;
             const int NewLicenseeId = 2;
@@ -176,7 +190,9 @@
                 new Licensee { Id = 1, Name = "spondemo" },
                 new Licensee { Id = 2, Name = "12bet" },
             };
-            var functions = new List<Function> { new Function { FunctionId = 1, ParentId = 1, IsActive = false, Url = "TestUrl" } };
+            var functions = new List<Function> { new Function { FunctionId = 1,
+                ParentId = 1, IsActive = false, Url = "TestUrl",
+                FunctionKey = PermissionKeys.ReportLicenseeWinLoss } };
             _licenseeDataAccess.GetByUser(DefaultUserId).Returns(licensees);
             const int OldLicenseeId = 1;
             const int NewLicenseeId = 2;
@@ -199,7 +215,10 @@
                 new Licensee { Id = 1, Name = "spondemo" },
                 new Licensee { Id = 2, Name = "12bet" },
             };
-            var functions = new List<Function> { new Function { FunctionId = 1, ParentId = 0, IsActive = true, Url = "TestUrl" } };
+            var functions = new List<Function> { new Function {
+                FunctionId = 1, ParentId = 0, IsActive = true, Url = "TestUrl",
+                FunctionKey = PermissionKeys.BettingTicketCenter
+            } };
             _licenseeDataAccess.GetByUser(DefaultUserId).Returns(licensees);
             const int OldLicenseeId = 1;
             const int NewLicenseeId = 2;
@@ -254,117 +273,6 @@
             Assert.That(result, Is.False);
         }
 
-        [Test]
-        public void IsAllowedEditCommission_ApplicationModeIsParasiticAndPortalFunctionListContainCorrectKey_ReturnTrue()
-        {
-            // Arrange
-            var functionList = new string[] { "CommissionGroupList55" };
-            var userSession = new UserSession { PortalFunctionList = functionList, ApplicationMode = AppMode.Parasitic };
-
-            // Action
-            var result = _sessionService.IsAllowedEditCommission(userSession);
-
-            // Assert
-            Assert.That(result, Is.True);
-        }
-
-        [Test]
-        public void IsAllowedEditCommission_ApplicationModeIsParasiticAndPortalFunctionListNotContainCorrectKey_ReturnFalse()
-        {
-            // Arrange
-            var functionList = new string[] { "CommissionGroupList56" };
-            var userSession = new UserSession { PortalFunctionList = functionList, ApplicationMode = AppMode.Parasitic };
-
-            // Action
-            var result = _sessionService.IsAllowedEditCommission(userSession);
-
-            // Assert
-            Assert.That(result, Is.False);
-        }
-
-        [Test]
-        public void IsAllowedEditCommission_ApplicationModeIsNotParasiticAndFunctionIdListContainCorrectKey_ReturnTrue()
-        {
-            // Arrange
-            var functionIdList = new int[] { 55 };
-            var userSession = new UserSession { FunctionIdList = functionIdList, ApplicationMode = AppMode.Self };
-
-            // Action
-            var result = _sessionService.IsAllowedEditCommission(userSession);
-
-            // Assert
-            Assert.That(result, Is.True);
-        }
-
-        [Test]
-        public void IsAllowedEditCommission_ApplicationModeIsNotParasiticAndFunctionIdListNotContainCorrectKey_ReturnFalse()
-        {
-            // Arrange
-            var functionIdList = new int[] { 56 };
-            var userSession = new UserSession { FunctionIdList = functionIdList, ApplicationMode = AppMode.Self };
-
-            // Action
-            var result = _sessionService.IsAllowedEditCommission(userSession);
-
-            // Assert
-            Assert.That(result, Is.False);
-        }
-
-        [Test]
-        public void IsAllowedSpecialBA_ApplicationModeIsParasiticAndPortalFunctionListContainCorrectKey_ReturnTrue()
-        {
-            // Arrange
-            var functionList = new string[] { "SpecialBA54" };
-            var userSession = new UserSession { PortalFunctionList = functionList, ApplicationMode = AppMode.Parasitic };
-
-            // Action
-            var result = _sessionService.IsAllowedSpecialBA(userSession);
-
-            // Assert
-            Assert.That(result, Is.True);
-        }
-
-        [Test]
-        public void IsAllowedSpecialBA_ApplicationModeIsParasiticAndPortalFunctionListNotContainCorrectKey_ReturnFalse()
-        {
-            // Arrange
-            var functionList = new string[] { "SpecialBA55" };
-            var userSession = new UserSession { PortalFunctionList = functionList, ApplicationMode = AppMode.Parasitic };
-
-            // Action
-            var result = _sessionService.IsAllowedSpecialBA(userSession);
-
-            // Assert
-            Assert.That(result, Is.False);
-        }
-
-        [Test]
-        public void IsAllowedSpecialBA_ApplicationModeIsNotParasiticAndFunctionIdListContainCorrectKey_ReturnTrue()
-        {
-            // Arrange
-            var functionIdList = new int[] { 54 };
-            var userSession = new UserSession { FunctionIdList = functionIdList, ApplicationMode = AppMode.Self };
-
-            // Action
-            var result = _sessionService.IsAllowedSpecialBA(userSession);
-
-            // Assert
-            Assert.That(result, Is.True);
-        }
-
-        [Test]
-        public void IsAllowedSpecialBA_ApplicationModeIsNotParasiticAndFunctionIdListNotContainCorrectKey_ReturnFalse()
-        {
-            // Arrange
-            var functionIdList = new int[] { 55 };
-            var userSession = new UserSession { FunctionIdList = functionIdList, ApplicationMode = AppMode.Self };
-
-            // Action
-            var result = _sessionService.IsAllowedSpecialBA(userSession);
-
-            // Assert
-            Assert.That(result, Is.False);
-        }
 
         [Test]
         public void GenerateAgentListXml_CurrencyIdIsNumberAndPositive_ReturnCorrectXmlString()
@@ -395,7 +303,7 @@
             var expectedResult = "<ROOT><Agent AgentId=\"1\" Currency=\"1\"/><Agent AgentId=\"2\" Currency=\"1\"/></ROOT>";
 
             // Action
-            var result = _sessionService.GenerateAgentListXml(0, true);
+            var result = AuthParameterHelper.GenerateAgentListXml(_sessionService.UserSession.CurrencyAgentList, 0, true);
 
             // Assert
             Assert.That(result, Is.EqualTo(expectedResult));
@@ -422,7 +330,7 @@
             var expectedResult = "<ROOT><Agent AgentId=\"1\" Currency=\"1\"/><Agent AgentId=\"2\" Currency=\"1\"/></ROOT>";
 
             // Action
-            var result = _sessionService.GenerateAgentListXml(-2, true);
+            var result = AuthParameterHelper.GenerateAgentListXml(_sessionService.UserSession.CurrencyAgentList, -2, true);
 
             // Assert
             Assert.That(result, Is.EqualTo(expectedResult));
@@ -457,7 +365,7 @@
             var expectedResult = "<ROOT><Agent AgentId=\"3\" Currency=\"2\"/></ROOT>";
 
             // Action
-            var result = _sessionService.GenerateAgentListXml(2, false);
+            var result = AuthParameterHelper.GenerateAgentListXml(_sessionService.UserSession.CurrencyAgentList, 2, false);
 
             // Assert
             Assert.That(result, Is.EqualTo(expectedResult));
@@ -492,7 +400,7 @@
             var expectedResult = "<ROOT><Agent AgentId=\"1\" Currency=\"1\"/><Agent AgentId=\"2\" Currency=\"1\"/></ROOT>";
 
             // Action
-            var result = _sessionService.GenerateAgentListXml(new[] { 1, 20 }, true);
+            var result = AuthParameterHelper.GenerateAgentListXml(_sessionService.UserSession.CurrencyAgentList, new[] { 1, 20 }, true);
 
             // Assert
             Assert.That(result, Is.EqualTo(expectedResult));
@@ -527,7 +435,7 @@
             var expectedResult = "<ROOT><Agent AgentId=\"1\" Currency=\"1\"/><Agent AgentId=\"2\" Currency=\"1\"/><Agent AgentId=\"3\" Currency=\"66\"/></ROOT>";
 
             // Action
-            var result = _sessionService.GenerateAgentListXml(new[] { 0, 1 }, false);
+            var result = AuthParameterHelper.GenerateAgentListXml(_sessionService.UserSession.CurrencyAgentList, new[] { 0, 1 }, false);
 
             // Assert
             Assert.That(result, Is.EqualTo(expectedResult));
@@ -545,7 +453,7 @@
             var expectedResult = "<ROOT><Agent AgentId=\"1\" Currency=\"1\"/></ROOT>";
 
             // Action
-            var result = _sessionService.GenerateAgentListXml(currencyAgentList);
+            var result = AuthParameterHelper.GenerateAgentListXml(_sessionService.UserSession.CurrencyList, currencyAgentList);
 
             // Assert
             Assert.That(result, Is.EqualTo(expectedResult));
@@ -570,8 +478,6 @@
         public void AssignCurrenciesToUserSession_IsNotFakeLicensee_DoNotMergeAgentListWithFakeLicenseeData()
         {
             // Arrange
-            _appSettings.FakeLicenseeList.Returns(Enumerable.Empty<int>());
-
             const int LicenseeId = 1;
             var currencyUserList = new List<CurrencyUser>
             {
@@ -590,7 +496,7 @@
             };
             var activeCurrencyUsers = currencyUserList.Where(x => x.IsActive);
 
-            var userSession = new UserSession();
+            var userSession = new UserAuthInfo();
 
             // Action
             _sessionService.AssignCurrenciesToUserSession(userSession, LicenseeId, currencyUserList);
@@ -609,8 +515,6 @@
         public void AssignCurrenciesToUserSession_KeenOceanLicensee_UpdateCurrencyForKeenOncean()
         {
             // Arrange
-            _appSettings.FakeLicenseeList.Returns(Enumerable.Empty<int>());
-
             const int LicenseeId = LicenseeIdentity.KeenOcean;
             var currencyUserList = new List<CurrencyUser>
             {
@@ -623,9 +527,8 @@
                     AgentIdList = new[] { 1, 2 }
                 }
             };
-            var activeCurrencyUsers = currencyUserList.Where(x => x.IsActive);
 
-            var userSession = new UserSession();
+            var userSession = new UserAuthInfo();
 
             // Action
             _sessionService.AssignCurrenciesToUserSession(userSession, LicenseeId, currencyUserList);

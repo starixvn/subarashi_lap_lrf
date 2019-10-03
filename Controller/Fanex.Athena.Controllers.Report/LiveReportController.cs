@@ -12,21 +12,28 @@ namespace Fanex.Athena.Controllers.Report
     using System.Threading.Tasks;
     using System.Web.Hosting;
     using System.Web.Mvc;
+
     using DataAccess.Core.Configuration.Interfaces;
+
     using Extension.Utility;
+
     using Fanex.Athena.Excel.Base.Entities;
     using Fanex.Athena.Excel.Report;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel.LiveReports;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
     using Fanex.Athena.Web.ResultExtension;
+
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using Model.Report.ResultModel;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
     using Service.Report.Interfaces;
-    using Session.Model;
 
     [FunctionAuthorization(PermissionKeys.ReportLiveReport)]
     public class LiveReportController : ReportBaseController
@@ -39,11 +46,13 @@ namespace Fanex.Athena.Controllers.Report
         public LiveReportController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             IProductService productService,
             IBalanceUpDataAccess balanceUpDataAccess,
-            ILiveReportService liveReportService)
-            : base(languageService, sessionService, appSetting, productService)
+            ILiveReportService liveReportService,
+             ILicenseeSettingService licenseeSettingService,
+             IAppSettings appSettings
+            )
+            : base(languageService, sessionService, appSettings, productService, licenseeSettingService)
         {
             _balanceUpDataAccess = balanceUpDataAccess;
             _liveReportService = liveReportService;
@@ -64,13 +73,12 @@ namespace Fanex.Athena.Controllers.Report
                 CurrencyId = 0,
                 LiveIndicator = 1,
                 BaseCurrency = userSession.DefaultBaseCurrency
-
             };
 
             var productAccess = GetProductAccess(licenseeSession.LicenseeId, userSession.Language);
 
             var model = CreateViewModel(
-                licenseeSession.LicenseeId,
+                licenseeSession.LicenseeName,
                 licenseeSession.IsAllowedCustomerComm,
                 userSession.CurrencyList,
                 metaModel,
@@ -87,13 +95,14 @@ namespace Fanex.Athena.Controllers.Report
             var licenseeSession = SessionService.LicenseeSession;
             var userSession = SessionService.UserSession;
             metaModel.LicenseeId = licenseeSession.LicenseeId;
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList
+                , metaModel.CurrencyId);
 
             var productAccess = GetProductAccess(metaModel.LicenseeId, userSession.Language);
             metaModel.ProductCodeList = string.Join(",", productAccess.ProductList.Select(x => x.ProductCode));
 
             var model = CreateViewModel(
-                licenseeSession.LicenseeId,
+                licenseeSession.LicenseeName,
                 licenseeSession.IsAllowedCustomerComm,
                 userSession.CurrencyList,
                 metaModel,
@@ -110,9 +119,11 @@ namespace Fanex.Athena.Controllers.Report
         public async Task<ActionResult> MatchList(LiveReportMatchListMetalModel metaModel)
         {
             var licenseeSession = SessionService.LicenseeSession;
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
+            var userSession = SessionService.UserSession;
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList
+                , metaModel.CurrencyId);
 
-            var productAccess = GetProductAccess(licenseeSession.LicenseeId, SessionService.UserSession.Language);
+            var productAccess = GetProductAccess(licenseeSession.LicenseeId, userSession.Language);
             var dataList = await _liveReportService.GetLiveReportWinLossByMatch(metaModel).ConfigureAwait(false);
 
             var model = new LiveReportMatchListViewModel
@@ -134,10 +145,13 @@ namespace Fanex.Athena.Controllers.Report
         public async Task<ActionResult> Detail(LiveReportMetaModel metaModel, string productCode)
         {
             var licenseeSession = this.SessionService.LicenseeSession;
+            var userSession = SessionService.UserSession;
             metaModel.LicenseeId = licenseeSession.LicenseeId;
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
 
-            var productAccess = GetProductAccess(licenseeSession.LicenseeId, SessionService.UserSession.Language);
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList
+                , metaModel.CurrencyId);
+
+            var productAccess = GetProductAccess(licenseeSession.LicenseeId, userSession.Language);
             var balanceUpDay = _balanceUpDataAccess.GetBalanceUp().BalanceUpDay;
 
             var resultModel = await GetDetailResult(metaModel, productAccess, productCode).ConfigureAwait(false);
@@ -157,7 +171,7 @@ namespace Fanex.Athena.Controllers.Report
         }
 
         private LiveReportViewModel CreateViewModel(
-            int licenseeId,
+            string licenseeName,
             bool isAllowedCustomerComm,
             IDictionary<int, string> currencyList,
             LiveReportMetaModel metaModel,
@@ -172,7 +186,7 @@ namespace Fanex.Athena.Controllers.Report
                 BalanceUpDate = GetBalanceUpDay(),
                 IsAllowedCustomerCommission = isAllowedCustomerComm,
                 ProductAccess = productAccess,
-                IsFakeLicensee = IsFakeLicensee(licenseeId),
+                IsFakeLicensee = IsFakeLicensee(licenseeName),
                 HasAmountDueToColumn = AppSettings.HasAmountDueToColumn
             };
         }

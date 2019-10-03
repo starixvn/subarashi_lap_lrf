@@ -1,14 +1,20 @@
 ﻿namespace Fanex.Athena.Controllers.BetList.UnitTests
 {
-    using System;
     using Base.UnitTests;
+
     using DataAccess.Core.Configuration.Interfaces;
+
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Model.BetList.MetaModel;
     using Model.Core.DTO.Configuration;
+
     using NSubstitute;
+
     using NUnit.Framework;
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Utility.Interfaces;
+
+    using System;
+
     using VendorAdapter.Interfaces;
 
     public class BetListBaseControllerHelperTest : CultureBaseControllerHelperTest
@@ -27,11 +33,13 @@
 
         protected IBetListApiClient BetListApiClient { get; private set; }
 
+        public ILicenseeSettingService LicenseeSettingService { get; set; }
+
         [OneTimeSetUp]
         public override void FixtureSetUp()
         {
             base.FixtureSetUp();
-
+            LicenseeSettingService = Substitute.For<ILicenseeSettingService>();
             BalanceUpDataAccess = Substitute.For<IBalanceUpDataAccess>();
             ProductService = Substitute.For<IProductService>();
             BetListApiClient = Substitute.For<IBetListApiClient>();
@@ -48,6 +56,7 @@
             BalanceUpDataAccess = null;
             ProductService = null;
             BetListApiClient = null;
+            LicenseeSettingService = null;
         }
 
         protected void AssertDefaultBetListViewModel(BetListMetaModel viewModel, BetListMetaModel metaModel)

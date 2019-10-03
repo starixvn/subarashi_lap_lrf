@@ -3,6 +3,25 @@
 exports[`FormFilter  render correctly 1`] = `
 <CollapsiblePanel
   className="page-filter"
+  iconContainerStyle={
+    Object {
+      "background": "#4c6274",
+      "bottom": 0,
+      "cursor": "pointer",
+      "height": "15px",
+      "left": "calc(50% - 10px)",
+      "position": "absolute",
+      "textAlign": "center",
+      "width": "20px",
+    }
+  }
+  iconToggle={
+    Object {
+      "className": "icon-arrow",
+      "style": null,
+      "tag": "i",
+    }
+  }
   stickyFooter={
     <div>
       <i

@@ -7,26 +7,33 @@
     using System.Threading.Tasks;
     using System.Web.Hosting;
     using System.Web.Mvc;
-    using Constant.DataDomain;
-    using Constant.Helper;
+
     using DataAccess.Core.Configuration.Interfaces;
+
     using Excel.Base.Helpers;
-    using Extension.Utility;
+
     using Fanex.Athena.Excel.Base.Entities;
     using Fanex.Athena.Excel.Report;
+    using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Core;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Core.Helper;
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
     using Fanex.Athena.Web.ResultExtension;
     using Fanex.Common;
+
     using Resources;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
     using Service.Report.Interfaces;
+
     using VendorAdapter.Interfaces;
 
     [FunctionAuthorization(PermissionKeys.ReportMatchWinLoss)]
@@ -46,13 +53,12 @@
         public MatchWinLossReportController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             IProductService productService,
             IBalanceUpDataAccess balanceUpDataAccess,
             ICacheRefAdapter cacheRefAdapter,
             IMatchWinLossService matchWinLossService)
 #pragma warning restore S107 // Methods should not have too many parameters
-            : base(languageService, sessionService, appSetting, productService)
+            : base(languageService, sessionService, productService)
         {
             _balanceUpDataAccess = balanceUpDataAccess;
             _cacheRefAdapter = cacheRefAdapter;
@@ -69,7 +75,6 @@
                 BalanceUpDay = _balanceUpDataAccess.GetBalanceUp().BalanceUpDay.ToShortDateString(),
                 LicenseeId = licenseeSession.LicenseeId,
                 BaseCurrency = userSession.DefaultBaseCurrency
-
             };
 
             var productAccess = ProductService.GetSingleWalletProductAccess(
@@ -108,13 +113,14 @@
                 return File(ExcelHelper.ExportEmptyFile(), "application/vnd.ms-excel", "Empty.xls");
             }
 
-            var licenseeSession = SessionService.LicenseeSession;           
+            var licenseeSession = SessionService.LicenseeSession;
             var productAccess = ProductService.GetSingleWalletProductAccess(
                 licenseeSession.LicenseeId,
                 userSession.Language,
                 FunctionNames.MatchWinLoss);
 
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList
+                , metaModel.CurrencyId);
             var reportData = await _matchWinLossService.GetDataList(metaModel).ConfigureAwait(false);
             IList<MatchWinLoss> reportDataOutrightParlay = new List<MatchWinLoss>();
 
@@ -125,7 +131,7 @@
 
             var total = GetTotal(reportData);
             var grandTotal = GetGrandTotal(reportDataOutrightParlay, total);
-            
+
             var model = new MatchWinLossViewModel
             {
                 Param = metaModel,
@@ -150,14 +156,15 @@
             {
                 return await Task.FromResult(HttpNotFound());
             }
-
+            var userSession = SessionService.UserSession;
             var licenseeSession = SessionService.LicenseeSession;
             var productAccess = ProductService.GetSingleWalletProductAccess(
                     licenseeSession.LicenseeId,
-                    SessionService.UserSession.Language,
+                    userSession.Language,
                     FunctionNames.MatchWinLoss);
 
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList
+                , metaModel.CurrencyId);
             var reportData = await _matchWinLossService.GetDetailDataList(metaModel).ConfigureAwait(false);
 
             var model = new MatchWinLossViewModel
@@ -177,13 +184,13 @@
         {
             const int PageSize = 63000;
             const string FileName = nameof(MatchWinLoss);
-
+            var userSession = SessionService.UserSession;
             var licenseeSession = SessionService.LicenseeSession;
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId);
             var templatePath = HostingEnvironment.MapPath(@"~/App_Data/Template/Reports/MatchWinLoss.xls");
             var productAccess = ProductService.GetSingleWalletProductAccess(
                 licenseeSession.LicenseeId,
-                SessionService.UserSession.Language,
+                userSession.Language,
                 FunctionNames.MatchWinLoss);
             var showingOption = new ShowingOption
             {

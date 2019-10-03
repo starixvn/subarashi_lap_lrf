@@ -10,24 +10,28 @@ namespace Fanex.Athena.Api.CustomerLog
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Http;
+
     using Fanex.Athena.Model.Customer.MetaModel.CustomerLog;
+    using Fanex.Athena.Service.StatelessCore.Utility;
 
     public partial class LogController
     {
         [HttpGet]
         public async Task<dynamic> CustomerSetting(string username, int viewbyid, int year, int month, int fromday, int today)
         {
+            var userSession = SessionService.UserSession;
+            var licenseeSession = SessionService.LicenseeSession;
             var metaModel = new CustomerLogMetaModel
             {
                 UserName = string.IsNullOrEmpty(username) ? string.Empty : username.Trim(),
                 ViewById = viewbyid,
                 Year = year,
                 Month = month,
-                LicenseeId = SessionService.LicenseeSession.LicenseeId,
-                SiteName = SessionService.LicenseeSession.LicenseeName,
+                LicenseeId = licenseeSession.LicenseeId,
+                SiteName = licenseeSession.LicenseeName,
                 FromDay = fromday,
                 ToDay = today,
-                AgentListXml = SessionService.GenerateAgentListXml()
+                AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList)
             };
 
             if (metaModel.IsValid)

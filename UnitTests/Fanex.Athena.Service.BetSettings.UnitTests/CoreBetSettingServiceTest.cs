@@ -3,18 +3,25 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using Constant.DataDomain;
-    using Core.Users.Interfaces;
+
     using Customer.Interfaces;
+
     using DataAccess.BetSettings.Interfaces;
+
+    using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Auth.Enum;
+
     using Model.BetSettings.DTO;
     using Model.Core.DataDomain;
     using Model.Customer.DTO;
+
     using NSubstitute;
+
     using NUnit.Framework;
-    using Session.Enum;
-    using Session.Model;
+
     using StatelessCore.Interfaces;
+
     using UnitTest.Common.Helpers;
 
     [TestFixture]
@@ -25,7 +32,6 @@
         private ICoreBetSettingDataAccess _coreBetSettingDataAccess;
         private IAuthorizationService _authorizationService;
         private ICustomerService _customerService;
-
         private CoreBetSettingService _coreBetSettingService;
 
         [OneTimeSetUp]
@@ -46,10 +52,10 @@
             // Arrange
             const int CustId = 3423423;
             var expectedCustomer = FakeHelper.Create<CustomerInfo>();
-            _customerService.GetCustomerInfo(LicenseeId, CustId).Returns(expectedCustomer);
+            _customerService.GetCustomerInfo(CustId).Returns(expectedCustomer);
 
             // Action
-            var result = _coreBetSettingService.GetCustomerInfo(CustId, LicenseeId);
+            var result = _coreBetSettingService.GetCustomerInfo(CustId);
 
             // Assert
             Assert.That(result, Is.EqualTo(expectedCustomer));
@@ -59,11 +65,15 @@
         public void IsBetSettingEditable_IsParasiticMode_GetPermissionFromPortalFunctionList()
         {
             // Arrange
-            var userSession = new UserSession
+            var userSession = new UserAuthInfo
             {
                 ApplicationMode = AppMode.Parasitic,
                 UserId = 234234,
-                PortalFunctionList = new[] { "sdf", "cxv", "sdfsdf" }
+                PortalFunctionList = new OneAuthPermission[] {
+                    new OneAuthPermission {FunctionKey="sdf" } ,
+                                        new OneAuthPermission {FunctionKey="cxv" } ,
+                                        new OneAuthPermission {FunctionKey="sdfsdf" }
+ }
             };
 
             // Action
@@ -77,18 +87,18 @@
         public void IsBetSettingEditable_IsNotParasiticMode_GetPermissionFromFunctionIdList()
         {
             // Arrange
-            var userSession = new UserSession
+            var userSession = new UserAuthInfo
             {
                 ApplicationMode = AppMode.Self,
                 UserId = 324234,
-                FunctionIdList = new[] { 23, 45, 67 }
+                FunctionList = new List<Function> { new Function { FunctionKey = PermissionKeys.CustomerInfoEditBetSetting } }
             };
 
             // Action
             _coreBetSettingService.IsBetSettingEditable(userSession);
 
             // Assert
-            _authorizationService.Received(1).HasPermissions(userSession.FunctionIdList, PermissionKeys.CustomerInfoEditBetSetting);
+            _authorizationService.Received(1).HasPermissions(userSession.FunctionList, PermissionKeys.CustomerInfoEditBetSetting);
         }
 
         [Test]
@@ -96,7 +106,7 @@
         {
             // Arrange
             const int CustId = 3434;
-            _customerService.GetCustomerInfo(LicenseeId, CustId).Returns(new CustomerInfo { SyncCasino = true });
+            _customerService.GetCustomerInfo(CustId).Returns(new CustomerInfo { SyncCasino = true });
 
             _coreBetSettingDataAccess.GetBetSettingProductsAsync(LicenseeId).Returns(Task.FromResult(GetSampleBetSettingProducts()));
 
@@ -114,7 +124,7 @@
         {
             // Arrange
             const int CustId = 3434;
-            _customerService.GetCustomerInfo(LicenseeId, CustId).Returns(new CustomerInfo { SyncCasino = false });
+            _customerService.GetCustomerInfo(CustId).Returns(new CustomerInfo { SyncCasino = false });
 
             _coreBetSettingDataAccess.GetBetSettingProductsAsync(LicenseeId).Returns(Task.FromResult(GetSampleBetSettingProducts()));
 

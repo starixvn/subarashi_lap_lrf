@@ -1,10 +1,13 @@
 ﻿using System.Web.Mvc;
-using Fanex.Athena.Session.Enum;
-using Fanex.Athena.Session.Interfaces;
-using Fanex.Athena.Session.Model;
+
+using Fanex.Athena.Model.Auth;
+using Fanex.Athena.Model.Auth.Enum;
+using Fanex.Athena.Service.Core.Users.Interfaces;
 using Fanex.Athena.UnitTest.Common.Helpers;
 using Fanex.Athena.Web.ActionFilter;
+
 using NSubstitute;
+
 using NUnit.Framework;
 
 namespace Fanex.Athena.Web.UnitTests.ActionFilter
@@ -32,7 +35,7 @@ namespace Fanex.Athena.Web.UnitTests.ActionFilter
             attribute.OnAuthorization(filterContext);
 
             // Assert
-            var temp = _sessionStorage.DidNotReceive().UserSession;
+            var temp = _sessionStorage.DidNotReceive().UserAuthInfo;
         }
 
         [Test]
@@ -46,7 +49,7 @@ namespace Fanex.Athena.Web.UnitTests.ActionFilter
             attribute.OnAuthorization(filterContext);
 
             // Assert
-            var temp = _sessionStorage.Received(1).UserSession;
+            var temp = _sessionStorage.Received(1).UserAuthInfo;
         }
 
         [Test]
@@ -76,7 +79,7 @@ namespace Fanex.Athena.Web.UnitTests.ActionFilter
             // Arrange
             var filterContext = CreateFilterContext(false);
             var attribute = new AuthorizeRestrictionAttribute(_sessionStorage, appMode);
-            _sessionStorage.UserSession.Returns(new UserSession
+            _sessionStorage.UserAuthInfo.Returns(new UserAuthInfo
             {
                 ApplicationMode = appMode
             });

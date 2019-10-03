@@ -8,10 +8,14 @@ namespace Fanex.Athena.Api.Base
 {
     using System.Threading.Tasks;
     using System.Web.Http;
+
     using Attributes;
+
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using ONEbook.UM.Filters;
+
     using Service.Core.Common.Interfaces;
-    using Service.Core.Configuration.Interfaces;
 
     [CustomApiAuthorize]
     [CheckUMFilter]

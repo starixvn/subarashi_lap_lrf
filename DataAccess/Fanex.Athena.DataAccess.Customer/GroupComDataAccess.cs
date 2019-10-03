@@ -21,7 +21,7 @@ namespace Fanex.Athena.DataAccess.Customer
             Justification = "Reviewed. Suppression is OK here.")]
     public class GroupComDataAccess : BaseDataAccess, IGroupComDataAccess
     {
-        public async Task<IList<GroupCommMetaModel>> GetAll(int licenseeId)
+        public async Task<IList<GroupCommMetaModel>> GetAllAsync(int licenseeId)
         {
             const string UspName = "Lrf_LicenseeGroupCommSel";
 
@@ -33,7 +33,7 @@ namespace Fanex.Athena.DataAccess.Customer
             }
         }
 
-        public async Task<DataTable> GetDataForExcel(int licenseeId)
+        public async Task<DataTable> GetDataForExcelAsync(int licenseeId)
         {
             const string UspName = "Lrf_LicenseeGroupCommSel";
 
@@ -59,7 +59,7 @@ namespace Fanex.Athena.DataAccess.Customer
             }
         }
 
-        public async Task<IResultInfo> InsertGroup(GroupCommMetaModel item, IRequest request, int userId)
+        public async Task<IResultInfo> InsertGroupAsync(GroupCommMetaModel item, IRequest request, int userId)
         {
             const string UspName = "Lrf_LicenseeGroupCommIns";
 
@@ -88,7 +88,7 @@ namespace Fanex.Athena.DataAccess.Customer
             }
         }
 
-        public async Task<IResultInfo> UpdateGroup(GroupCommMetaModel newItem, IRequest request, int userId)
+        public async Task<IResultInfo> UpdateGroupAsync(GroupCommMetaModel newItem, IRequest request, int userId)
         {
             const string UspName = "Lrf_LicenseeGroupCommUpd";
 
@@ -119,7 +119,7 @@ namespace Fanex.Athena.DataAccess.Customer
             }
         }
 
-        public async Task<IResultInfo> DeleteGroup(
+        public async Task<IResultInfo> DeleteGroupAsync(
             int groupId,
             int licenseeId,
             int userId,

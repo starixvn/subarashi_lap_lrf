@@ -10,6 +10,8 @@ namespace Fanex.Athena.Api.CustomerLog
     using System.Threading.Tasks;
     using System.Web.Http;
 
+    using Fanex.Athena.Service.StatelessCore.Utility;
+
     public partial class LogController
     {
         [HttpGet]
@@ -21,8 +23,8 @@ namespace Fanex.Athena.Api.CustomerLog
             }
 
             var licenseeId = SessionService.LicenseeSession.LicenseeId;
-
-            var agentListXml = SessionService.GenerateAgentListXml();
+            var userSession = SessionService.UserSession;
+            var agentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList);
             var dataList = await _logInLogDataAccess.GetDataList(licenseeId, username.Trim(), agentListXml).ConfigureAwait(false);
 
             return new

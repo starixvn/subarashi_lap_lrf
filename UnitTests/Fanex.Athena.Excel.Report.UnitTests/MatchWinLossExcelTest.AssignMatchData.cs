@@ -1,9 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Data;
+
 using Fanex.Athena.Excel.Base.Extension;
 using Fanex.Athena.UnitTest.Common.Helpers;
 using Fanex.Common;
+
 using NSubstitute;
+
 using NUnit.Framework;
 
 namespace Fanex.Athena.Excel.Report.UnitTests

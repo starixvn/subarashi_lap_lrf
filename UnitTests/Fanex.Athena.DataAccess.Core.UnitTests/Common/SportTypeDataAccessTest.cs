@@ -1,12 +1,17 @@
 ﻿namespace Fanex.Athena.DataAccess.Core.UnitTests.Common
 {
-    using System.Data;
     using System.Threading.Tasks;
-    using Constant.DataDomain;
+
     using Core.Common;
+
+    using Model.Core.DataDomain;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using TestHelpers;
+
     using VendorAdapter.Interfaces;
 
     public class SportTypeDataAccessTest : BaseDataAccessHelperTest<SportTypeDataAccess>

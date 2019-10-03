@@ -2,15 +2,21 @@
 {
     using System.Threading.Tasks;
     using System.Web.Mvc;
+
     using DataAccess.Core.Configuration.Interfaces;
-    using Extension.Utility;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Model.BetList.MetaModel;
+
     using Resources;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-    using Service.Core.Utility.Interfaces;
+
     using VendorAdapter.Interfaces;
+
     using Web.ActionFilter;
 
     /// <summary>
@@ -22,14 +28,14 @@
         public WinlossByBetTypeBetListController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             IProductService productService,
             IBalanceUpDataAccess balanceUpDataAccess,
             ICacheRefAdapter cacheRefAdapter,
-            IBetListApiClient betListApiClient)
-        : base(languageService, sessionService, appSetting, productService, balanceUpDataAccess, cacheRefAdapter, betListApiClient)
-        {
-        }
+            IBetListApiClient betListApiClient
+, ILicenseeSettingService licenseeSettingService)
+        : base(languageService, sessionService, productService, balanceUpDataAccess,
+              cacheRefAdapter, betListApiClient, licenseeSettingService)
+        { }
 
         [HttpGet]
         [ValidationWebRequest(IsValidCurrency = true)]

@@ -2,10 +2,13 @@
 {
     using System.Threading.Tasks;
     using System.Web.Http.Controllers;
+
     using Fanex.Athena.Module.Dashboard.Api;
     using Fanex.Athena.Module.Dashboard.Data.Interfaces;
     using Fanex.Athena.Module.Dashboard.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
 
     [TestFixture]

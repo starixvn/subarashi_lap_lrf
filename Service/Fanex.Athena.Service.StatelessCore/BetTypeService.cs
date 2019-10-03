@@ -1,0 +1,70 @@
+﻿// -----------------------------------------------------------------------
+// <copyright file="BetTypeService.cs" company="">
+// TODO: Update copyright text.
+// </copyright>
+// -----------------------------------------------------------------------
+
+namespace Fanex.Athena.Service.StatelessCore
+{
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    using Fanex.Athena.DataAccess.Core.Common.Interfaces;
+    using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
+    /// <summary>
+    ///     TODO: Update summary.
+    /// </summary>
+    public class BetTypeService : IBetTypeService
+    {
+        private readonly IBetTypeDataAccess _betTypeDataAccess;
+
+        public BetTypeService(IBetTypeDataAccess betTypeDataAccess)
+        {
+            _betTypeDataAccess = betTypeDataAccess;
+        }
+
+        /// <summary>
+        /// Get bet type.
+        /// </summary>
+        /// <param name="licenseeId">The licensee id.</param>
+        /// <param name="sports">The sports.</param>
+        /// <param name="languageCode">The language code.</param>
+        /// <returns>The bet type list.</returns>
+        public async Task<IList<CheckedItem>> GetBettypes(int licenseeId, IList<SportProductItem> sports, string languageCode)
+        {
+            const string SportXMLItemPattern = "<product ID=\"{0}\" Sport=\"{1}\"> </product>";
+            var sportItemXML = new StringBuilder();
+
+            if (sports != null && sports.Count > 0 && licenseeId > 0)
+            {
+                var products = sports.Where(i => i.ParentId == -1);
+
+                foreach (var product in products)
+                {
+                    var childSports = sports.Where(i => i.ParentId == product.ID && i.ParentId > -1)
+                        .Select(i => i.ID).ToArray();
+                    if (childSports.Length == 0)
+                    {
+                        childSports = new[] { product.ID };
+                    }
+
+                    sportItemXML.Append(string.Format(SportXMLItemPattern, product.ID, string.Join(",", childSports)));
+                }
+
+                var sportsParameters = "<products>" + sportItemXML + "</products>";
+                return await _betTypeDataAccess.GetBettypes(licenseeId, sportsParameters, languageCode).ConfigureAwait(false);
+            }
+
+            return new List<CheckedItem>();
+        }
+
+        public async Task<IList<CheckedItem>> GetBettypesByProduct(int licenseeId, string productCode, string languageCode)
+        {
+            return await _betTypeDataAccess.GetBettypesByProduct(licenseeId, productCode, languageCode).ConfigureAwait(false);
+        }
+    }
+}

@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Constant.DataDomain;
+    using Model.Core.DataDomain;
     using Model.BetList.MetaModel;
     using Model.BetList.ViewModel;
     using Model.Core.DTO.Common;
@@ -13,7 +13,7 @@
 
     public class RunningBettypesBetListControllerTest : BetListBaseControllerHelperTest
     {
-        private const string AgentListXml = "<xml/>";
+        private const string AgentListXml = "<ROOT></ROOT>";
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
@@ -180,8 +180,6 @@
 
         private void SetUpForExportingExcel(BetListMetaModel metaModel, RunningBettypesBetListController controller)
         {
-            SessionService.GenerateAgentListXml(metaModel.CurrencyId, false).Returns(AgentListXml);
-
             controller.When(async x => await x.ProcessExportExcel(
                 Arg.Any<BetListExcelMetaModel>(),
                 Arg.Any<string>(),
@@ -223,11 +221,10 @@
             return Substitute.ForPartsOf<RunningBettypesBetListController>(
                 LangService,
                 SessionService,
-                AppSettings,
                 ProductService,
                 BalanceUpDataAccess,
                 CacheRefAdapter,
-                BetListApiClient);
+                BetListApiClient, LicenseeSettingService);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+
 using Fanex.Athena.Excel.Base;
 using Fanex.Athena.Excel.Base.Entities;
 using Fanex.Athena.Excel.Base.Extension;
@@ -9,8 +10,11 @@ using Fanex.Athena.Resources;
 using Fanex.Athena.UnitTest.Common.Helpers;
 using Fanex.Athena.VendorAdapter.Interfaces;
 using Fanex.Common;
+
 using NPOI.SS.UserModel;
+
 using NSubstitute;
+
 using NUnit.Framework;
 
 namespace Fanex.Athena.Excel.Report.UnitTests
@@ -251,6 +255,6 @@ namespace Fanex.Athena.Excel.Report.UnitTests
             _totalData.Dispose();
         }
 
-        #endregion
+        #endregion IDisposable Support
     }
 }

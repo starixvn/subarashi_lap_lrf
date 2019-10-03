@@ -6,12 +6,13 @@
 
 namespace Fanex.Athena.Controllers.Report
 {
-    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Report.MetaModel;
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
-    using Model.Core.DataDomain;
+
     using Resources;
 
     public partial class ReportAPIController : NonCultureBaseController
@@ -22,10 +23,11 @@ namespace Fanex.Athena.Controllers.Report
         [ValidationWebRequest]
         public async Task<ActionResult> Turnover(TurnoverMetaModel metaModel)
         {
-            var placeholderUsername = _appSettings.FakeLicenseeList.Contains(SessionService.LicenseeSession.LicenseeId) ?
+            var placeholderUsername = IsFakeLicensee(SessionService.LicenseeSession.LicenseeName) ?
                 ViewResources.ExternalId :
                 ViewResources.ExternalIdOrSystemId;
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId, metaModel.IsExcludeTest);
+            var userSession = SessionService.UserSession;
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId, metaModel.IsExcludeTest);
 
             metaModel.Username = string.IsNullOrWhiteSpace(metaModel.Username) ||
                 metaModel.Username.Trim() == placeholderUsername ? null : metaModel.Username;

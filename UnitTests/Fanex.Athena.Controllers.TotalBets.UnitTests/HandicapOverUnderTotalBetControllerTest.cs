@@ -4,14 +4,20 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+
     using Base.UnitTests;
+
     using DataAccess.TotalBet.Interfaces;
+
     using Fanex.Athena.Controllers.TotalBets;
+
     using Model.Core.ResultModel;
     using Model.TotalBet.DTO;
     using Model.TotalBet.MetaModel;
     using Model.TotalBet.ViewModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
 
     [TestFixture]
@@ -27,7 +33,6 @@
             SetUpDefaultFakeData();
 
             SepUpForService();
-
         }
 
         [OneTimeTearDown]
@@ -87,8 +92,6 @@
                 StringAssert.Contains("TotalBets/HandicapOverUnder/Main.cshtml", viewResult.ViewName);
             }
         }
-
-       
 
         [Test]
         public async Task Index_LicenseeIsNotOfferedNewForecast_ReturnNormalLicenseeView()

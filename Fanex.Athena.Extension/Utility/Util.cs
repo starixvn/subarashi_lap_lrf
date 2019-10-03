@@ -8,7 +8,6 @@ namespace Fanex.Athena.Extension.Utility
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using System.Text.RegularExpressions;
 
     public static class Util

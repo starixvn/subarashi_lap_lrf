@@ -8,50 +8,105 @@ namespace Fanex.Athena.Service.StatelessCore
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Linq;
+
     using Fanex.Athena.DataAccess.Core.Users.Interfaces;
-    using Fanex.Athena.Service.Core.Common.Interfaces;
+    using Fanex.Athena.Extension.Utility.Interfaces;
+    using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Auth.Enum;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     public class AuthorizationService : IAuthorizationService
     {
-        private readonly IAthorizationDataAccess _authorizationDataAccess;
-        private readonly IFunctionService _functionService;
+        private const int OneHourInSecond = 3600;
 
-        public AuthorizationService(IAthorizationDataAccess authorizationDataAccess, IFunctionService functionService)
+        private readonly IAthorizationDataAccess _authorizationDataAccess;
+
+        private readonly IMemoryCacheService _cache;
+
+        public AuthorizationService(IAthorizationDataAccess authorizationDataAccess, IMemoryCacheService cache)
         {
             _authorizationDataAccess = authorizationDataAccess;
-            _functionService = functionService;
+            _cache = cache;
         }
 
-        public bool HasPermissions(IEnumerable<int> userFunctionList, params string[] permissionKeys)
+        public bool HasPermissions(OneAuthPermission[] userPortalFunctionList, params string[] permissionKeys)
         {
-            var allFunctions = _functionService.Functions;
-            var functions = allFunctions.Where(x => permissionKeys.Contains(x.FunctionKey, StringComparer.InvariantCultureIgnoreCase));
-
-            return functions.Any() && userFunctionList.Any(id => functions.Any(x => x.FunctionId == id));
+            return userPortalFunctionList.Any(i => permissionKeys.Contains(i.FunctionKey,
+                StringComparer.InvariantCultureIgnoreCase)
+            || (i.SubFunctionKeys != null && i.SubFunctionKeys.Intersect(permissionKeys).Any()));
         }
 
-        public bool HasPermissions(IEnumerable<string> userFunctionList, params string[] permissionKeys)
+        public bool HasPermissions(IEnumerable<Function> userFunctionList, params string[] permissionKeys)
         {
-            return userFunctionList.Any(x => permissionKeys.Contains(x, StringComparer.InvariantCultureIgnoreCase));
+            return userFunctionList.Any(x => permissionKeys.Contains(x.FunctionKey, StringComparer.InvariantCultureIgnoreCase));
         }
 
-        [DebuggerStepThrough]
-        public bool HasPermissionOnData(int licenseeId, int custId, long transId)
+        public bool IsAllowedEditCommission(UserAuthInfo userAuthInfo)
         {
-            if (licenseeId <= 0)
-            {
-                throw new ArgumentException("licenseeId parameter is invalid.");
-            }
+            return userAuthInfo.ApplicationMode == AppMode.Parasitic ? userAuthInfo.PortalFunctionList != null && userAuthInfo.PortalFunctionList.Any(i => i.FunctionKey
+                   == PermissionKeys.CustomerInfoCommissionGroupList ||
+                   (i.SubFunctionKeys != null && i.SubFunctionKeys.Contains(PermissionKeys.CustomerInfoCommissionGroupList)))
+                   : userAuthInfo.FunctionList != null && userAuthInfo.FunctionList.Any(x => x.FunctionKey == PermissionKeys.CustomerInfoCommissionGroupList);
+        }
 
+        public bool IsAllowedSpecialBA(UserAuthInfo userAuthInfo)
+        {
+            return userAuthInfo.ApplicationMode == AppMode.Parasitic ? userAuthInfo.PortalFunctionList != null && (userAuthInfo.PortalFunctionList.Any(i => i.FunctionKey
+                   == PermissionKeys.CustomerInfoSpecialBA || (i.SubFunctionKeys != null && i.SubFunctionKeys.Contains(PermissionKeys.CustomerInfoSpecialBA))))
+                   : userAuthInfo.FunctionList != null && userAuthInfo.FunctionList.Any(x => x.FunctionKey == PermissionKeys.CustomerInfoSpecialBA);
+        }
+
+        public bool HasPermissionOnData(IDictionary<int, int[]> currencyAgents, int custId, long transId)
+        {
             if (custId == 0 && transId == 0)
             {
                 return true;
             }
 
-            return _authorizationDataAccess.IsCustomerBelonging(licenseeId, custId, transId);
+            var item = _authorizationDataAccess.IsCustomerBelonging(custId, transId);
+
+            return currencyAgents.Any(i => i.Key == item.Item1 && i.Value.Contains(item.Item2));
+        }
+
+        public bool CheckCustomerBelongsTo(IDictionary<int, int[]> currencyAgents, int custId, int currencyId = 0)
+        {
+            var item = _authorizationDataAccess.IsCustomerBelonging(custId, 0);
+
+            return currencyAgents.Any(i => i.Key == item.Item1 && i.Value.Contains(item.Item2) && (currencyId == 0 || item.Item1 == currencyId));
+        }
+
+        public bool HasPermissionOnData(OneAuthCurrency[] currencyAgents, int custId, long transId)
+        {
+            if (custId == 0 && transId == 0)
+            {
+                return true;
+            }
+
+            var item = _authorizationDataAccess.IsCustomerBelonging(custId, transId);
+
+            return currencyAgents.Any(i => i.CurrencyId == item.Item1 && i.AgentId.Contains(item.Item2));
+        }
+
+        public bool CheckProductBelongsTo(string licenseeName, int productId, int[] limitedProductIds = null)
+        {
+            if (limitedProductIds != null && !limitedProductIds.Contains(productId))
+            {
+                return false;
+            }
+
+            var cacheKey = $"Lrf_CheckBelonging_ValidateProduct_{licenseeName}_{productId}";
+
+            if (_cache.Contains(cacheKey))
+            {
+                return _cache.Get<bool>(cacheKey);
+            }
+
+            var isValidProduct = _authorizationDataAccess.IsProductBelonging(productId, licenseeName);
+            _cache.Set(cacheKey, isValidProduct, OneHourInSecond);
+
+            return isValidProduct;
         }
     }
 }

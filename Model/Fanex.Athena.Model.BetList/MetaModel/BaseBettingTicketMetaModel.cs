@@ -8,7 +8,7 @@
     using System.Linq;
     using System.Web.Script.Serialization;
 
-    public class BaseBettingTicketMetaModel : IMetaModelValidation , IMetaModelCurrencyList
+    public class BaseBettingTicketMetaModel : IMetaModelValidation , IMetaModelCurrencyIdList
     {
         private const int DefaultPageSize = 50;
 

@@ -3,10 +3,10 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Constant.DataDomain;
     using Model.BetSettings.DTO;
     using Model.BetSettings.MetaModel;
     using Model.BetSettings.ViewModel;
+    using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using NSubstitute;
     using NUnit.Framework;
@@ -32,33 +32,14 @@
         }
 
         [Test]
-        public async Task Index_NoPermission_RedirectToAccessDeniedPage()
+        public async Task Index_ReturnCorrectViewResult()
         {
             using (var controller = CreateController())
             {
                 // Arrange
                 var metaModel = new BetSettingMetaModel { CustId = 100 };
 
-                _betSettingService.GetViewModelAsync(DefaultLicenseeSession.LicenseeId, metaModel.CustId, DefaultLicenseeSession.LicenseeName)
-                    .Returns(Task.FromResult<AgCasinoBetSettingViewModel>(null));
-
-                // Action
-                var result = await controller.Index(metaModel) as RedirectResult;
-
-                // Assert
-                Assert.That(result.Url, Is.EqualTo("~/Utility/AccessDenied"));
-            }
-        }
-
-        [Test]
-        public async Task Index_HasPermission_ReturnCorrectViewResult()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var metaModel = new BetSettingMetaModel { CustId = 100 };
-
-                _betSettingService.GetViewModelAsync(DefaultLicenseeSession.LicenseeId, metaModel.CustId, DefaultLicenseeSession.LicenseeName)
+                _betSettingService.GetViewModelAsync(metaModel.CustId, DefaultLicenseeSession.LicenseeName)
                     .Returns(new AgCasinoBetSettingViewModel());
 
                 // Action
@@ -107,7 +88,6 @@
                 CoreBetSettingService.IsBetSettingEditable(DefaultUserSession).Returns(true);
 
                 _betSettingService.UpdateStatusAsync(
-                   DefaultLicenseeSession.LicenseeId,
                    DefaultUserSession.UserId,
                    Arg.Any<int>(),
                    DefaultUserSession.Language,
@@ -139,7 +119,6 @@
                 CoreBetSettingService.IsBetSettingEditable(DefaultUserSession).Returns(true);
 
                 _betSettingService.UpdateStatusAsync(
-                   DefaultLicenseeSession.LicenseeId,
                    DefaultUserSession.UserId,
                    Arg.Any<int>(),
                    DefaultUserSession.Language,
@@ -233,14 +212,12 @@
         private AgCasinoBetSettingController CreateController()
         {
             _betSettingService = Substitute.For<IAgCasinoBetSettingService>();
-
             var controller = new AgCasinoBetSettingController(
                 LangService,
                 SessionService,
-                AppSettings,
                 CoreBetSettingService,
                 ProductService,
-                _betSettingService)
+                _betSettingService, LicenseeSettingService)
             {
                 ControllerContext = ControllerContext
             };

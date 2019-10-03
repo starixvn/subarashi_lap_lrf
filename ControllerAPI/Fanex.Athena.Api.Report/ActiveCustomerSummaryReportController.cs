@@ -13,18 +13,25 @@ namespace Fanex.Athena.Api.Report
     using System.Threading.Tasks;
     using System.Web.Hosting;
     using System.Web.Http;
+
     using Base.Attributes;
+
     using DataAccess.Report.Interfaces;
+
     using Fanex.Athena.Excel.Base.Entities;
     using Fanex.Athena.Excel.Report;
     using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Extension.Utility;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
-    using Model.Core.DataDomain;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Utility;
+
     using Model.Report.ResultModel;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
 
@@ -131,8 +138,8 @@ namespace Fanex.Athena.Api.Report
 
         private async Task<dynamic> ProcessRequest(ActiveCustomerMetaModel metaModel)
         {
-
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId, metaModel.IsExcludeTest);
+            var userSession = SessionService.UserSession;
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId, metaModel.IsExcludeTest);
 
             var result =
                 await _activeCustomerSummaryDataAccess.GetActiveCustomers(metaModel);
@@ -153,7 +160,6 @@ namespace Fanex.Athena.Api.Report
                     ProductOptions = metaModel.ProductOptions.ToJson()
                 };
             }
-
 
             return GetEmptyResult(metaModel);
         }

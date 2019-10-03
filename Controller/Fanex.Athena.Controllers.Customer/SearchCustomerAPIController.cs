@@ -1,16 +1,20 @@
 ﻿namespace Fanex.Athena.Controllers.Customer
 {
     using System.Threading.Tasks;
+
     #region Using
 
     using System.Web.Mvc;
     using System.Web.SessionState;
+
     using DataAccess.Customer.Interfaces;
-    using Extension.Utility;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.Core.Common.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
-    using Model.Core.DataDomain;
+
     using ONEbook.UM.Filters;
+
     using Service.Core.Users.Interfaces;
 
     #endregion Using
@@ -31,9 +35,8 @@
         public SearchCustomerAPIController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             ISearchCustomerDataAccess searchCustomerDataAccess)
-            : base(languageService, sessionService, appSetting)
+            : base(languageService, sessionService)
         {
             _searchCustomerDataAccess = searchCustomerDataAccess;
         }
@@ -60,10 +63,9 @@
             }
 
             var userName = query.Trim();
-            var userId = SessionService.UserSession.UserId;
-            var customerNames = await 
-                _searchCustomerDataAccess.SearchCustomers(userId, userName, 
-                SessionService.GenerateAgentListXml(), isIncludeDormant);
+            var userSession = SessionService.UserSession;
+            var customerNames = await _searchCustomerDataAccess.SearchCustomers(userSession.UserId, userName,
+                AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList), isIncludeDormant);
 
             var searchResult = new
             {

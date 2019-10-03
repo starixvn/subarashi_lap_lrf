@@ -1,8 +1,11 @@
 ﻿namespace Fanex.Athena.Extension.UnitTests.Utility
 {
     using System.Collections.Generic;
+
     using ClassTest;
+
     using Extension.Utility;
+
     using NUnit.Framework;
 
     [TestFixture]

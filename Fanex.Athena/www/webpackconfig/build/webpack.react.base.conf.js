@@ -14,7 +14,7 @@ function generateConfig(environment) {
         },
         entry: {
             /*js*/
-            
+
             [`${jsPath}/lib/langHelper`]: pathConfig.scriptPaths.languageResource,
             [`${jsPath}/lib/lang-zh-CN`]: pathConfig.scriptPaths.langCN,
             [`${jsPath}/lib/lang-zh-Hans`]: pathConfig.scriptPaths.langHans,
@@ -30,6 +30,13 @@ function generateConfig(environment) {
             [`${jsPath}/bettingticketscenter/refno`]: pathConfig.scriptPaths.bettingticketscenter_refno,
             [`${jsPath}/bettingticketscenter/running`]: pathConfig.scriptPaths.bettingticketscenter_running,
             [`${jsPath}/report/casinoturnover`]: pathConfig.scriptPaths.casinoturnover,
+            [`${jsPath}/playeradmin/playerlist`]: pathConfig.scriptPaths.playerlist,
+            [`${jsPath}/playeradmin/accountinfo`]: pathConfig.scriptPaths.accountinfo,
+            [`${jsPath}/playeradmin/runningbetlist`]: pathConfig.scriptPaths.playerrunningbetlist,
+            [`${jsPath}/playeradmin/betlimit`]: pathConfig.scriptPaths.playerbetlimit,
+            [`${jsPath}/playeradmin/single-customer`]: pathConfig.scriptPaths.singleCustomer,
+            [`${jsPath}/playeradmin/playerwinloss`]: pathConfig.scriptPaths.playerwinloss,
+            [`${jsPath}/playeradmin/statement`]: pathConfig.scriptPaths.statement,
 
             /*css*/
             [`${cssPath}/vendor`]: pathConfig.cssPaths.layout,
@@ -40,7 +47,13 @@ function generateConfig(environment) {
             [`${cssPath}/speciallicenseewl/index`]: pathConfig.cssPaths.speciallicenseewl,
             [`${cssPath}/bettingticketscenter/index`]: pathConfig.cssPaths.bettingticketscenter,
             [`${cssPath}/betlist/index`]: pathConfig.cssPaths.betlist,
-            [`${cssPath}/casinoturnover/index`]: pathConfig.cssPaths.casinoturnover
+            [`${cssPath}/casinoturnover/index`]: pathConfig.cssPaths.casinoturnover,
+            [`${cssPath}/playeradmin/index`]: pathConfig.cssPaths.playeradmin,
+            [`${cssPath}/playeradmin/account-info`]: pathConfig.cssPaths.accountInfo,
+            [`${cssPath}/playeradmin/running-betlist`]: pathConfig.cssPaths.playerrunningbetlist,
+            [`${cssPath}/playeradmin/betlimit`]: pathConfig.cssPaths.playerbetlimit,
+            [`${cssPath}/playeradmin/playerwinloss`]: pathConfig.cssPaths.playerwinloss,
+            [`${cssPath}/playeradmin/statement`]: pathConfig.cssPaths.statement
         },
         output: {
             path: pathConfig.projectRoot,
@@ -75,9 +88,9 @@ function generateConfig(environment) {
         ],
         optimization: {
             minimizer: [
-             new UglifyJsPlugin({
-                 sourceMap: true
-             })
+                new UglifyJsPlugin({
+                    sourceMap: true
+                })
             ],
             splitChunks: {
                 chunks: 'all',

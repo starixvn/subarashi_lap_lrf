@@ -2,29 +2,36 @@
 {
     using System.Collections.Generic;
     using System.Web.Mvc;
+
     using Extension.Utility;
+
+    using Fanex.Athena.Model.Auth;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-    using Session.Model;
+
     using UnitTest.Common.Helpers;
 
     [TestFixture]
     public abstract class CultureBaseControllerHelperTest
     {
-        protected static readonly UserSession DefaultUserSession = new UserSession
+        protected static readonly UserAuthInfo DefaultUserSession = new UserAuthInfo
         {
             CurrencyList = new Dictionary<int, string> { { 1, "UUS" } },
             UserId = 1,
             Language = "lan",
             UserName = "alex.vn",
             OnUserId = 999,
-            FunctionIdList = new int[0],
-            DefaultBaseCurrency = "EUR"
+            FunctionList = new List<Function>(),
+            DefaultBaseCurrency = "EUR",
+            CurrencyAgentList = new Dictionary<int, int[]>()
         };
 
-        protected static readonly LicenseeSession DefaultLicenseeSession = new LicenseeSession
+        protected static readonly LicenseeAuthInfo DefaultLicenseeSession = new LicenseeAuthInfo
         {
             LicenseeId = 100,
             LicenseeName = "Spondemo"
@@ -66,16 +73,14 @@
             StubUserSessionData(DefaultUserSession);
 
             StubLicenseeSessionData(DefaultLicenseeSession);
-
-            SessionService.GenerateAgentListXml(Arg.Any<int>(), Arg.Any<bool>()).Returns(string.Empty);
         }
 
-        protected void StubUserSessionData(UserSession fakeUserSession)
+        protected void StubUserSessionData(UserAuthInfo fakeUserSession)
         {
             SessionService.UserSession.Returns(fakeUserSession);
         }
 
-        protected void StubLicenseeSessionData(LicenseeSession fakeLicenseeSession)
+        protected void StubLicenseeSessionData(LicenseeAuthInfo fakeLicenseeSession)
         {
             SessionService.LicenseeSession.Returns(fakeLicenseeSession);
         }

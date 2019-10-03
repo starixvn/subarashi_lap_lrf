@@ -69,15 +69,41 @@ describe("Overlay ", () => {
 
             expect(overlay.setState).toHaveBeenCalledWith(expectedState);
         })
-    })
 
-    it("componentDidMount - _registerEvents should be called", () => {
-        const overlay = new Overlay(defaultProps);
-        overlay._registerEvents = jest.fn();
+        it("Change isOpening of next prop to true - _registerEvents should be called", () => {
+            jest.useFakeTimers();
+            const prevProps = {...defaultProps, isOpening: false};
+            const nextProps = { ...defaultProps, isOpening: true };
+            const overlay = new Overlay(nextProps);
 
-        overlay.componentDidMount();
+            overlay.setState = jest.fn();
+            let callback = null;
+            window.setTimeout = jest.fn((cb) => { callback = cb});
+            overlay._registerEvents = jest.fn();
 
-        expect(overlay._registerEvents).toHaveBeenCalled();
+            
+            overlay.componentDidUpdate({...prevProps});
+            callback();
+
+            expect(overlay._registerEvents).toHaveBeenCalled();
+        })
+
+        it("Change isOpening of next prop to true - _unRegisterEvents should be called", () => {
+            jest.useFakeTimers();
+            const prevProps = {...defaultProps, isOpening: true};
+            const nextProps = { ...defaultProps, isOpening: false };
+            const overlay = new Overlay(nextProps);
+
+            overlay.setState = jest.fn();
+            let callback = null;
+            window.setTimeout = jest.fn((cb) => { callback = cb});
+            overlay._unRegisterEvents = jest.fn();
+
+            overlay.componentDidUpdate({...prevProps});
+            callback();
+
+            expect(overlay._unRegisterEvents).toHaveBeenCalled();
+        })
     })
 
     it("componentWillUnmount - _unRegisterEvents should be called", () => {
@@ -107,7 +133,7 @@ describe("Overlay ", () => {
 
             overlay._registerEvents();
 
-            expect(document.addEventListener).not.toHaveBeenCalledWith("click", overlay._handleClickOutSide, true);
+            expect(document.addEventListener).not.toHaveBeenCalledWith("click", overlay._handleClickOutSide);
         })
 
         it("closeOnOutsideClick = true - register _handleClickOutSide on document click event", () => {
@@ -115,7 +141,7 @@ describe("Overlay ", () => {
 
             overlay._registerEvents();
 
-            expect(document.addEventListener).toHaveBeenCalledWith("click", overlay._handleClickOutSide, true);
+            expect(document.addEventListener).toHaveBeenCalledWith("click", overlay._handleClickOutSide);
         })
     })
 
@@ -145,7 +171,7 @@ describe("Overlay ", () => {
 
             overlay._unRegisterEvents();
 
-            expect(document.removeEventListener).toHaveBeenCalledWith("click", overlay._handleClickOutSide, true);
+            expect(document.removeEventListener).toHaveBeenCalledWith("click", overlay._handleClickOutSide);
         })
     })
 

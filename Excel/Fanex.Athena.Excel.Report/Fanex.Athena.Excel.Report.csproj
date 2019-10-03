@@ -55,7 +55,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
-    <CodeAnalysisRuleSet>Fanex.Athena.Excel.Report.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -66,10 +67,11 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
     <CodeAnalysisRuleSet>Fanex.Athena.Excel.Report.ruleset</CodeAnalysisRuleSet>
+    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Fanex.Common, Version=1.0.404.97, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Fanex.Common.1.0.404.97\lib\net40\Fanex.Common.dll</HintPath>
+    <Reference Include="Fanex.Common, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Fanex.Common.1.1.0.1\lib\net40\Fanex.Common.dll</HintPath>
     </Reference>
     <Reference Include="IBCFile, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Fanex.File.1.0.0\lib\net40\IBCFile.dll</HintPath>
@@ -136,7 +138,6 @@
     <Compile Include="PromotionPrizeExcel.cs" />
     <Compile Include="AgCasinoBalanceExcel.cs" />
     <Compile Include="Models\CustomerPendingFundsExcelModel.cs" />
-    <Compile Include="Models\CustomerWinLossExcelModel.cs" />
     <Compile Include="Models\LicenseeWinLossExcelModel.cs" />
     <Compile Include="Models\WinLossByProductExcelModel.cs" />
     <Compile Include="ColossusBetsWinLossExcel.cs" />
@@ -147,7 +148,6 @@
     <Compile Include="CustomerBalanceExcel.cs" />
     <Compile Include="CustomerPendingFundsExcel.cs" />
     <Compile Include="CustomerTurnoverExcel.cs" />
-    <Compile Include="CustomerWinLossExcel.cs" />
     <Compile Include="LicenseeWinLossExcel.cs" />
     <Compile Include="MatchWinLossExcel.cs" />
     <Compile Include="LiveReportExcel.cs" />
@@ -160,10 +160,6 @@
     <ProjectReference Include="..\..\Fanex.Athena.Extension\Fanex.Athena.Extension.csproj">
       <Project>{71F95E53-36D0-4091-828D-ED14C9939C35}</Project>
       <Name>Fanex.Athena.Extension</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Infrastructure\Fanex.Athena.Constant\Fanex.Athena.Constant.csproj">
-      <Project>{6B1431E0-E513-48BB-BE86-0756E5F6F405}</Project>
-      <Name>Fanex.Athena.Constant</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Infrastructure\Fanex.Athena.VendorAdapter\Fanex.Athena.VendorAdapter.csproj">
       <Project>{CE1F7641-A14D-4AF6-9BD3-CAD4873669B4}</Project>
@@ -211,11 +207,6 @@
     <None Include="app.config" />
     <None Include="Fanex.Athena.Excel.Report.ruleset" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.7.14.0.8411\analyzers\Google.Protobuf.dll" />
-    <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.7.14.0.8411\analyzers\SonarAnalyzer.CSharp.dll" />
-    <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.7.14.0.8411\analyzers\SonarAnalyzer.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

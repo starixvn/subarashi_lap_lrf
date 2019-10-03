@@ -1,5 +1,6 @@
 ﻿using Fanex.Athena.Model.Customer.DTO;
 using Fanex.Athena.Model.Customer.ViewModel;
+
 using NPOI.SS.UserModel;
 
 namespace Fanex.Athena.Excel.Customer.UnitTests.TestableClasses

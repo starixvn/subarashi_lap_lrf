@@ -4,11 +4,17 @@
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Security;
+
     using Base.UnitTests;
+
     using Fanex.Athena.Resources;
+
     using Model.Core.DataDomain;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using ONEbook.UM.Models;
     using ONEbook.UM.Services;
 
@@ -89,7 +95,7 @@
         [TestCase(OneAuthorizationErrorCode.TokenIsInValid, "Token is invalid")]
         [TestCase(OneAuthorizationErrorCode.LocationRestrictionMsg, "Direct Access to this website is restricted. Please contact Administrator for further enquiries.")]
         [TestCase(
-            OneAuthorizationErrorCode.UserNotHaveCurrency, 
+            OneAuthorizationErrorCode.UserNotHaveCurrency,
             "You do not have any currency permissions to view this report, please contact your administrator account.")]
         [TestCase(OneAuthorizationErrorCode.YouAreNotAllowToAccessThisPage, "You are not allowed to access this page, please contact your administrator account.")]
         [TestCase(OneAuthorizationErrorCode.NotFoundUser, "Not found user")]

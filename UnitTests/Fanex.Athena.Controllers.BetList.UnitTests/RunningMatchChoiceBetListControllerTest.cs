@@ -60,7 +60,6 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                const string AgentListXml = "<xml/>";
                 var metaModel = new BetListExcelMetaModel
                 {
                     IsExportExcel = true,
@@ -73,8 +72,6 @@
                 CacheRefAdapter.GetBettype(metaModel.BetType).Returns("BetType");
 
                 var expectedTitle = $"(LEAGUENAME) - BetType - {string.Format(ViewResources.Viewin, expectedCurrency)}";
-
-                SessionService.GenerateAgentListXml(metaModel.CurrencyId, false).Returns(AgentListXml);
 
                 controller.When(async x => await x.ProcessExportExcel(
                     Arg.Any<BetListExcelMetaModel>(),
@@ -92,7 +89,7 @@
                         && string.Join(",", x.HiddenColumns) == "7,8,9"
                         && x.LicenseeId == DefaultLicenseeSession.LicenseeId
                         && !x.IsShowSumStake
-                        && x.AgentListXml == AgentListXml),
+                       ),
                     "RunningBetList",
                     null);
             }
@@ -103,11 +100,10 @@
             return Substitute.ForPartsOf<RunningMatchChoiceBetListController>(
                 LangService,
                 SessionService,
-                AppSettings,
                 ProductService,
                 BalanceUpDataAccess,
                 CacheRefAdapter,
-                BetListApiClient);
+                BetListApiClient, LicenseeSettingService);
         }
     }
 }

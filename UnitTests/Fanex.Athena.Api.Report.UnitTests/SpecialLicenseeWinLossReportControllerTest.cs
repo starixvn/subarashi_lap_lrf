@@ -4,18 +4,24 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using Base.UnitTests;
+
     using DataAccess.Report.Interfaces;
-    using Model.Core.DataDomain;
+
+    using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Model.Core.DTO.Common;
     using Model.Core.DTO.Configuration;
     using Model.Core.ResultModel;
     using Model.Report.DTO;
     using Model.Report.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
-    using Service.Core.Configuration.Interfaces;
-    using Session.Model;
 
     public class SpecialLicenseeWinLossReportControllerTest : BaseApiControllerHelperTest
     {
@@ -42,7 +48,7 @@
 
             MockSessionData();
 
-            _reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss)
+            _reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss, Arg.Any<string>())
                .Returns(new ReportSetting { MinDate = new DateTime(2018, 1, 1), MaxDate = new DateTime(2018, 1, 31), BaseCurrencies = "USD" });
         }
 
@@ -132,7 +138,6 @@
             });
         }
 
-
         [TestCase("IvoryBet", "ivorysport")]
         [TestCase("123", "123")]
         public async Task Index_ValidRequest_CallServiceWithCorrectParameters(string licenseeName, string expectedSiteName)
@@ -145,8 +150,8 @@
                             new Product { ProductCode = "P1" }
                         }));
 
-            SessionService.LicenseeSession.Returns(new LicenseeSession { LicenseeName = licenseeName });
-            StubUserSessionData(new UserSession { CurrencyList = new Dictionary<int, string> { { 1, "C1" }, { 2, "C2" } } });
+            SessionService.LicenseeSession.Returns(new LicenseeAuthInfo { LicenseeName = licenseeName });
+            StubUserSessionData(new UserAuthInfo { CurrencyList = new Dictionary<int, string> { { 1, "C1" }, { 2, "C2" } } });
 
             var model = new SpecialLicenseeWinLossMetaModel
             {
@@ -185,7 +190,7 @@
                             new Product { ProductCode = "P1" }
                         }));
 
-            StubUserSessionData(new UserSession { CurrencyList = new Dictionary<int, string> { { 1, "C1" }, { 2, "C2" } } });
+            StubUserSessionData(new UserAuthInfo { CurrencyList = new Dictionary<int, string> { { 1, "C1" }, { 2, "C2" } } });
 
             var model = new SpecialLicenseeWinLossMetaModel
             {

@@ -9,15 +9,17 @@ namespace Fanex.Athena.Api.BetList
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Http;
+
     using Base;
     using Base.Attributes;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Model.BetList.DTO;
     using Model.BetList.MetaModel;
-    using Model.Core.DataDomain;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-    using Service.Core.Utility.Interfaces;
 
     [ApiFunctionAuthorization(PermissionKeys.CustomerInfoCustomerList)]
     public class OutstandingDailyStatementBetListController : BaseApiController
@@ -48,7 +50,7 @@ namespace Fanex.Athena.Api.BetList
             metaModel.LicenseeId = licenseeSession.LicenseeId;
             metaModel.ToDate = metaModel.ToDate.Date.AddDays(1).AddMinutes(-1);
             metaModel.HasPlayerCom = licenseeSession.IsAllowedCustomerComm;
-            if (_authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, metaModel.TransId))
+            if (_authorizationService.HasPermissionOnData(userSession.CurrencyAgentList, metaModel.CustId, metaModel.TransId))
             {
                 return await _betListApiClient.PostAsync("/OutstandingDailyStatementBetList/GetData",
                     metaModel, userSession.Language).ConfigureAwait(false);

@@ -4,13 +4,18 @@
     using System.Linq;
     using System.Net.Http;
     using System.Threading.Tasks;
+
     using Base.UnitTests;
+
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Model.BetList.MetaModel;
     using Model.Core.DTO.Common;
+
     using NSubstitute;
+
     using NUnit.Framework;
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Utility.Interfaces;
+
     using VendorAdapter.Interfaces;
 
     public class LastBetMonitoringBetListControllerTest : BaseApiControllerHelperTest
@@ -86,9 +91,6 @@
                 // Arrange
                 var metaModel = new LastBetsMonitoringMetaModel { Currency = string.Empty };
 
-                const string AgentListXml = "AgentListXmlWithoutCurrency";
-                SessionService.GenerateAgentListXml(0, false).Returns(AgentListXml);
-
                 var expect = new HttpResponseMessage();
                 _betListApiClient.PostAsync(ApiPath, metaModel, SessionLanguage).Returns(Task.FromResult(expect));
 
@@ -99,7 +101,6 @@
                 Assert.Multiple((TestDelegate)(() =>
                 {
                     Assert.That(expect, Is.EqualTo(actual));
-                    Assert.That(metaModel.AgentListXml, Is.EqualTo(AgentListXml));
                     _betListApiClient.Received().PostAsync((string)ApiPath, (object)metaModel, (string)SessionLanguage);
                 }));
             }
@@ -113,9 +114,6 @@
                 // Arrange
                 var metaModel = new LastBetsMonitoringMetaModel { Currency = "1,2" };
 
-                const string AgentListXml = "AgentListXmlWithCurrency";
-                SessionService.GenerateAgentListXml(Arg.Any<IEnumerable<int>>(), false).Returns(AgentListXml);
-
                 var expect = new HttpResponseMessage();
                 _betListApiClient.PostAsync(ApiPath, metaModel, SessionLanguage).Returns(Task.FromResult(expect));
 
@@ -126,7 +124,6 @@
                 Assert.Multiple((TestDelegate)(() =>
                 {
                     Assert.That(expect, Is.EqualTo(actual));
-                    Assert.That(metaModel.AgentListXml, Is.EqualTo(AgentListXml));
                     _betListApiClient.Received().PostAsync((string)ApiPath, (object)metaModel, (string)SessionLanguage);
                 }));
             }

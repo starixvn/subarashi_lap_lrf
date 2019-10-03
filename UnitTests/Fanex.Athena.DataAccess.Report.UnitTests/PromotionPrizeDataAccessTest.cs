@@ -2,14 +2,20 @@
 {
     using System;
     using System.Linq;
+
     using Core.Configuration.Interfaces;
     using Core.UnitTests.TestHelpers;
+
     using Data;
+
     using Model.Core.DataDomain;
     using Model.Core.DTO.Configuration;
     using Model.Report.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using UnitTest.Common.Helpers;
 
     public class PromotionPrizeDataAccessTest : BaseDataAccessHelperTest<PromotionPrizeDataAccess>

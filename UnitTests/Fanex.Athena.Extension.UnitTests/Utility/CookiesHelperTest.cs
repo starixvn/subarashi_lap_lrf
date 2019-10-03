@@ -1,7 +1,9 @@
 ﻿namespace Fanex.Athena.Extension.UnitTests.Utility
 {
     using System.Web;
+
     using Extension.Utility;
+
     using NUnit.Framework;
 
     [TestFixture]

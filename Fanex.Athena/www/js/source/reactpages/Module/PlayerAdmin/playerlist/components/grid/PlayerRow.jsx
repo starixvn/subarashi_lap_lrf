@@ -1,0 +1,63 @@
+import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { ActionCreators } from '../../actions';
+
+import { fields } from '../../lib/constants';
+import { Row, Cell } from '@9softstudio/react-grid';
+import NumberFormat from '@jsroot/lib/numberFormat';
+
+import UserNameCell from './UserNameCell';
+import OddsGroupCell from './OddsGroupCell';
+import SpecialLevelCell from './SpecialLevelCell';
+import StatusCell from './StatusCell';
+import BaStatusCell from './BaStatusCell';
+
+export const PlayerRow = (props) => {
+    const {
+        dataItem,
+        displayedColumn
+    } = props;
+
+    const { 
+        LicenseeCustId, 
+        SystemId, 
+        RealName, 
+        Currency, 
+        CurrentBalance, 
+        OutstandingBalance, 
+        LastLoginIp, 
+        LastTransaction,
+        Email, 
+        OddsGroup, 
+        SpecialLevel, 
+        IsDeposit, 
+        IsArchived 
+    } = dataItem;
+    const canShowMainColumn = IsDeposit && !IsArchived;
+
+    return (
+        <Row key={LicenseeCustId}>
+            {displayedColumn[fields.Status] && <Cell><StatusCell dataItem={dataItem} /></Cell>}
+            {displayedColumn[fields.UserName] && <Cell><UserNameCell dataItem={dataItem} /></Cell>}
+            {displayedColumn[fields.SystemId] && <Cell>{SystemId}</Cell>}
+            {displayedColumn[fields.RealName] && <Cell>{RealName}</Cell>}
+            {displayedColumn[fields.Currency] && <Cell className="center-align">{Currency}</Cell>}
+            {displayedColumn[fields.CurrentBalance] && <Cell className="right-align">{canShowMainColumn && NumberFormat.formatDecimal(CurrentBalance)}</Cell>}
+            {displayedColumn[fields.OutstandingBalance] && <Cell className="right-align">{canShowMainColumn && NumberFormat.formatDecimal(OutstandingBalance)}</Cell>}
+            {displayedColumn[fields.OddsGroup] && <Cell className="center-align">{canShowMainColumn && OddsGroup !== undefined && <OddsGroupCell dataItem={dataItem} />}</Cell>}
+            {displayedColumn[fields.BaStatus] && <BaStatusCell dataItem={dataItem} />}
+            {displayedColumn[fields.SpecialLevel] && <Cell className="center-align">{canShowMainColumn && SpecialLevel !== undefined && <SpecialLevelCell dataItem={dataItem} />}</Cell>}
+            {displayedColumn[fields.LastLoginIp] && <Cell>{LastLoginIp}</Cell>}
+            {displayedColumn[fields.LastTransaction] && <Cell>{LastTransaction}</Cell>}
+            {displayedColumn[fields.Email] && <Cell>{Email}</Cell>}
+        </Row>
+    )
+}
+
+function mapDispatchToProps(dispatch) {
+    const { setSelectedPlayer } = ActionCreators;
+    return bindActionCreators({ setSelectedPlayer }, dispatch);
+}
+
+export default connect(null, mapDispatchToProps)(PlayerRow);

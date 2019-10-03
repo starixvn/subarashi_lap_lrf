@@ -4,17 +4,24 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using Base.UnitTests;
+
     using Excel.Base.Entities;
     using Excel.Report;
+
     using Fanex.Athena.DataAccess.Report.Interfaces;
+
     using Model.Core.DTO.Common;
     using Model.Core.MetaModel.Product;
     using Model.Core.ResultModel;
     using Model.Report.DTO;
     using Model.Report.MetaModel;
+
     using NPOI.SS.UserModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
 
     public class CustomerBalanceReportControllerTest : BaseApiControllerHelperTest

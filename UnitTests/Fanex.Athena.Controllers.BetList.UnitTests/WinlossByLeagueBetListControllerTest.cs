@@ -63,7 +63,6 @@
 
                 // Arrange
 
-                const string AgentListXml = "<xml/>";
                 var metaModel = new WinLossByLeagueBetListMetaModel
                 {
                     IsExportExcel = true,
@@ -76,13 +75,10 @@
                     ToDate = new DateTime(2018, 1, 2)
                 };
 
-                var fakeLicensees = isFakeLicensee ? new[] { DefaultLicenseeSession.LicenseeId } : Enumerable.Empty<int>();
-                AppSettings.FakeLicenseeList.Returns(fakeLicensees);
+                LicenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(isFakeLicensee);
 
                 var currencyTitle = currencyId == 0 ? ViewResources.AllCurrencies : string.Format(ViewResources.Viewin, expectedCurrency);
                 var expectedTitle = $"{ViewResources.CustomerBetList} - 1/1/2018 → 1/2/2018 - External{(isFakeLicensee ? "" : "(System)")} - {currencyTitle}";
-
-                SessionService.GenerateAgentListXml(metaModel.CurrencyId, false).Returns(AgentListXml);
 
                 controller.When(async x => await x.ProcessExportExcel(
                 Arg.Any<BetListExcelMetaModel>(),
@@ -100,7 +96,7 @@
                         && string.Join(",", x.HiddenColumns) == "1,2,8"
                         && x.LicenseeId == DefaultLicenseeSession.LicenseeId
                         && !x.IsShowSumStake
-                        && x.AgentListXml == AgentListXml),
+                        ),
                     "WinLossByLeagueBetList",
                     "/BetList/ExportExcelWinlossByLeague");
             }
@@ -111,11 +107,10 @@
             return Substitute.ForPartsOf<WinlossByLeagueBetListController>(
                 LangService,
                 SessionService,
-                AppSettings,
                 ProductService,
                 BalanceUpDataAccess,
                 CacheRefAdapter,
-                BetListApiClient);
+                BetListApiClient, LicenseeSettingService);
 
         }
     }

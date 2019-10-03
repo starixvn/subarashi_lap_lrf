@@ -11,15 +11,19 @@ namespace Fanex.Athena.Api.BetList
     #region Using
 
     using System.Web.Http;
+
     using Base.Attributes;
-    using Constant.DataDomain;
-    using DataAccess.Core.Configuration.Interfaces;
-    using Model.BetList.MetaModel;
+
     using Model.Core.DataDomain;
+
+    using DataAccess.Core.Configuration.Interfaces;
+
+    using Model.BetList.MetaModel;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-    using Service.Core.Utility.Interfaces;
     using Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Model.Auth.DataDomain;
 
     #endregion Using
 
@@ -75,7 +79,6 @@ namespace Fanex.Athena.Api.BetList
 
         private async Task<dynamic> ProcessRequest(BetListMetaModel metaModel, string uspKey = "Lrf_BetList_SelRunningByBettype")
         {
-            
             return await GetBetListResult(metaModel, uspKey).ConfigureAwait(false);
         }
     }

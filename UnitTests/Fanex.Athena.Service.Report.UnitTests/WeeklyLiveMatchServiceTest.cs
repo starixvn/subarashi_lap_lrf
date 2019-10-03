@@ -3,9 +3,13 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
+
     using DataAccess.Report.Interfaces;
+
     using Model.Report.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
 
     public class WeeklyLiveMatchServiceTest
@@ -83,7 +87,7 @@
                 Assert.That(result.ElementAt(1), Is.EqualTo(expected[1]));
                 Assert.That(result.ElementAt(2), Is.EqualTo(expected[2]));
                 Assert.That(result.Count, Is.EqualTo(NumberOfWeeks));
-            });            
+            });
         }
     }
 }

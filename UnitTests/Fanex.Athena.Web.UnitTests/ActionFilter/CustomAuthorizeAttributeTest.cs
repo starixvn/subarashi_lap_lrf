@@ -1,10 +1,12 @@
 ﻿using System.Web.Mvc;
-using Fanex.Athena.Session.Enum;
-using Fanex.Athena.Session.Interfaces;
-using Fanex.Athena.Session.Model;
+
+using Fanex.Athena.Model.Auth;
+using Fanex.Athena.Service.Core.Users.Interfaces;
 using Fanex.Athena.UnitTest.Common.Helpers;
 using Fanex.Athena.Web.ActionFilter;
+
 using NSubstitute;
+
 using NUnit.Framework;
 
 namespace Fanex.Athena.Web.UnitTests.ActionFilter
@@ -34,7 +36,7 @@ namespace Fanex.Athena.Web.UnitTests.ActionFilter
             _attribute.OnAuthorization(filterContext);
 
             // Assert
-            var temp = _sessionStorage.DidNotReceive().UserSession;
+            var temp = _sessionStorage.DidNotReceive().UserAuthInfo;
         }
 
         [Test]
@@ -47,7 +49,7 @@ namespace Fanex.Athena.Web.UnitTests.ActionFilter
             _attribute.OnAuthorization(filterContext);
 
             // Assert
-            var temp = _sessionStorage.Received(1).LicenseeSession;
+            var temp = _sessionStorage.Received(1).LicenseeAuthInfo;
         }
 
         [Test]
@@ -73,8 +75,8 @@ namespace Fanex.Athena.Web.UnitTests.ActionFilter
         {
             // Arrange
             var filterContext = CreateFilterContext(false);
-            _sessionStorage.LicenseeSession.Returns(new LicenseeSession());
-            _sessionStorage.UserSession.Returns(new UserSession());
+            _sessionStorage.LicenseeAuthInfo.Returns(new LicenseeAuthInfo());
+            _sessionStorage.UserAuthInfo.Returns(new UserAuthInfo());
 
             // Action
             _attribute.OnAuthorization(filterContext);

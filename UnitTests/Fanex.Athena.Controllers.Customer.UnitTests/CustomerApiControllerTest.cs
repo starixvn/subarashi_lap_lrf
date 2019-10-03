@@ -8,6 +8,9 @@
     using Customer;
     using DataAccess.Core.Users.Interfaces;
     using Fanex.Athena.Extension.Helpers;
+    using Fanex.Athena.Extension.Utility;
+    using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Logging;
     using Model.Core.DTO.Common;
     using Model.Core.ViewModel;
@@ -15,10 +18,7 @@
     using NSubstitute;
     using NUnit.Framework;
     using Resources;
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Utility.Interfaces;
     using Service.Customer.Interfaces;
-    using Session.Model;
     using UnitTest.Common.Extensions;
 
     [TestFixture]
@@ -30,26 +30,45 @@
         private IGroupComService _groupComService;
         private ILicenseeDataAccess _licenseeDataAccess;
         private IProductService _productService;
+        private IAuthorizationService _authorizationService;
 
-        [SetUp]
+        private ILicenseeSettingService _licenseeSettingService;
+
+        [OneTimeSetUp]
         public override void FixtureSetUp()
         {
             base.FixtureSetUp();
             SetUpDefaultFakeData();
+        }
+
+        [SetUp]
+        public void SetUp()
+        {
+            _licenseeSettingService = Substitute.For<ILicenseeSettingService>();
+            AppSettings = Substitute.For<IAppSettings>();
             _logger = Substitute.For<ILogger>();
             _customerCommService = Substitute.For<ICustomerCommService>();
             _customerListService = Substitute.For<ICustomerListService>();
             _groupComService = Substitute.For<IGroupComService>();
             _licenseeDataAccess = Substitute.For<ILicenseeDataAccess>();
             _productService = Substitute.For<IProductService>();
+            _authorizationService = Substitute.For<IAuthorizationService>();
         }
 
         [TearDown]
         public void TearDown()
         {
-            AppSettings.ClearReceivedCalls();
             _customerListService.ClearReceivedCalls();
             _groupComService.ClearReceivedCalls();
+            _licenseeSettingService = null;
+            _logger = null;
+            _customerCommService = null;
+            _customerListService = null;
+            _groupComService = null;
+            _licenseeDataAccess = null;
+            _productService = null;
+            _authorizationService = null;
+            AppSettings = null;
         }
 
         [Test]
@@ -74,7 +93,7 @@
         }
 
         [Test]
-        public void UpdateCustStatus_LicenseeAllowStatusFunction_ReturnErrorResult()
+        public async Task UpdateCustStatus_LicenseeAllowStatusFunction_ReturnErrorResultAsync()
         {
             using (var controller = CreateController())
             {
@@ -86,7 +105,7 @@
                 AppSettings.LicenseeOfferStatusFunction.Returns(new[] { licenseeId });
 
                 // Action
-                controller.UpdateCustStatus(CustId, isClosed, isSuspended);
+                await controller.UpdateCustStatus(CustId, isClosed, isSuspended);
 
                 // Assert
                 Assert.Multiple(() =>
@@ -135,7 +154,6 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-
                     _logger.Received(1).Error(errorMessage, exception);
                     Assert.That(resultInfo.Code, Is.EqualTo(1));
                     Assert.That(resultInfo.Message, Is.EqualTo(ViewResources.HttpError_Default));
@@ -149,8 +167,8 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                var fakeLicenseeList = new[] { SessionService.LicenseeSession.LicenseeId };
-                AppSettings.FakeLicenseeList.Returns(fakeLicenseeList);
+
+                _licenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(true);
 
                 // Action
                 var result = controller.UpdateSpecialLevel(0, 0) as JsonResult;
@@ -159,7 +177,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    _customerListService.DidNotReceiveWithAnyArgs().UpdateSpecialLevel(0, 0, 0, 0, string.Empty, string.Empty);
+                    _customerListService.DidNotReceiveWithAnyArgs().UpdateSpecialLevel(0, 0, 0, string.Empty, string.Empty);
                     Assert.That(resultInfo.Success, Is.False);
                     Assert.That(resultInfo.Message, Is.EqualTo(ViewResources.FunctionDeniedMsg));
                 });
@@ -182,7 +200,6 @@
                 Assert.Multiple(() =>
                 {
                     _customerListService.Received(1).UpdateSpecialLevel(
-                        SessionService.LicenseeSession.LicenseeId,
                         SessionService.UserSession.UserId,
                         CustId,
                         Level,
@@ -198,8 +215,7 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                var fakeLicenseeList = new[] { SessionService.LicenseeSession.LicenseeId };
-                AppSettings.FakeLicenseeList.Returns(fakeLicenseeList);
+                _licenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(true);
 
                 // Action
                 var result = controller.UpdateOddsGroup(0, string.Empty) as JsonResult;
@@ -232,7 +248,6 @@
                 {
                     _customerListService.Received(1).UpdateOddsGroup(
                         Arg.Is<CustomerOddsGroupMetaModel>(x =>
-                        x.LicenseeId == SessionService.LicenseeSession.LicenseeId &&
                         x.CustId == CustId &&
                         x.Ip == controller.Request.UserHostAddress &&
                         x.Language == SessionService.UserSession.Language &&
@@ -248,7 +263,7 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                SessionService.LicenseeSession.Returns(new LicenseeSession
+                SessionService.LicenseeSession.Returns(new LicenseeAuthInfo
                 {
                     IsAllowedCustomerComm = false
                 });
@@ -275,7 +290,7 @@
                 const string CustmerIds = "1,2";
                 bool isRemovePlayerComm = true;
                 _productService.GetProductAccess(0, string.Empty, string.Empty).ReturnsForAnyArgs(new ProductAccess(new List<Product>()));
-                SessionService.LicenseeSession.Returns(new LicenseeSession
+                SessionService.LicenseeSession.Returns(new LicenseeAuthInfo
                 {
                     IsAllowedCustomerComm = true
                 });
@@ -362,7 +377,9 @@
                _customerListService,
                _groupComService,
                _licenseeDataAccess,
-               _productService);
+               _productService,
+               _authorizationService, _licenseeSettingService
+               );
             controller.ControllerContext = ControllerContext;
             return controller;
         }

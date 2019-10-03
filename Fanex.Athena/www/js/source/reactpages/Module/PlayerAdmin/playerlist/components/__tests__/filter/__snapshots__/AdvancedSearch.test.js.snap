@@ -1,0 +1,159 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AdvancedSearch render with initial state - should match snapshot 1`] = `
+<Fragment>
+  <div
+    className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2"
+  >
+    <div
+      className="form-group"
+    >
+      <label
+        className="label-text"
+      >
+        Currency
+      </label>
+      <t
+        dataSource={
+          Array [
+            Object {
+              "Id": "eur",
+              "Status": true,
+              "Value": "EUR",
+            },
+            Object {
+              "Id": "usd",
+              "Status": true,
+              "Value": "usd",
+            },
+          ]
+        }
+        hasAllOption={true}
+        hasSearchBox={false}
+        id="currency"
+        keyField="Id"
+        language="en-US"
+        onChange={[Function]}
+        statusField="Status"
+        valueField="Value"
+      />
+    </div>
+  </div>
+  <div
+    className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2"
+  >
+    <div
+      className="form-group"
+    >
+      <label
+        className="label-text"
+      >
+        Odds Group
+      </label>
+      <t
+        dataSource={
+          Array [
+            Object {
+              "Id": "A",
+              "Status": true,
+              "Value": "A",
+            },
+            Object {
+              "Id": "B",
+              "Status": true,
+              "Value": "B",
+            },
+            Object {
+              "Id": "C",
+              "Status": true,
+              "Value": "C",
+            },
+          ]
+        }
+        hasAllOption={true}
+        hasSearchBox={false}
+        id="oddsGroup"
+        keyField="Id"
+        language="en-US"
+        onChange={[Function]}
+        statusField="Status"
+        valueField="Value"
+      />
+    </div>
+  </div>
+  <div
+    className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2"
+  >
+    <div
+      className="form-group"
+    >
+      <label
+        className="label-text"
+      >
+        Special Level
+      </label>
+      <t
+        dataSource={
+          Array [
+            Object {
+              "Id": "1",
+              "Status": true,
+              "Value": "1",
+            },
+            Object {
+              "Id": "2",
+              "Status": true,
+              "Value": "2",
+            },
+          ]
+        }
+        hasAllOption={true}
+        hasSearchBox={false}
+        id="specialLevel"
+        keyField="Id"
+        language="en-US"
+        onChange={[Function]}
+        statusField="Status"
+        valueField="Value"
+      />
+    </div>
+  </div>
+  <div
+    className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2"
+  >
+    <div
+      className="form-group"
+    >
+      <label
+        className="label-text"
+      >
+        BA
+      </label>
+      <t
+        dataSource={
+          Array [
+            Object {
+              "Id": "On",
+              "Status": true,
+              "Value": "On",
+            },
+            Object {
+              "Id": "Off",
+              "Status": true,
+              "Value": "Off",
+            },
+          ]
+        }
+        hasAllOption={true}
+        hasSearchBox={false}
+        id="baStatus"
+        keyField="Id"
+        language="en-US"
+        onChange={[Function]}
+        statusField="Status"
+        valueField="Value"
+      />
+    </div>
+  </div>
+</Fragment>
+`;

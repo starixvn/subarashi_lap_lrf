@@ -6,16 +6,12 @@
 
 namespace Fanex.Athena.Service.BetSettings
 {
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DTO.Common;
 
     public class BetSettingBaseService
     {
-        private readonly IAuthorizationService _authorizationService;
-
-        public BetSettingBaseService(IAuthorizationService authorizationService)
+        protected BetSettingBaseService()
         {
-            _authorizationService = authorizationService;
         }
 
         protected static IResultInfo ErrorResult(string message)
@@ -25,11 +21,6 @@ namespace Fanex.Athena.Service.BetSettings
                 Code = 1,
                 Message = message
             };
-        }
-
-        protected bool HasPermissionOnData(int licenseeId, int custId)
-        {
-            return _authorizationService.HasPermissionOnData(licenseeId, custId, 0);
         }
     }
 }

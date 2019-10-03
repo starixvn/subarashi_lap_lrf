@@ -38,7 +38,8 @@
                 // Arrange
                 var metaModel = new BetSettingMetaModel { CustId = 100 };
 
-                _betSettingService.GetViewModelAsync(DefaultLicenseeSession.LicenseeId, metaModel.CustId).Returns(Task.FromResult(new BetSettingViewModel()));
+                _betSettingService.GetViewModelAsync(
+                    metaModel.CustId).Returns(Task.FromResult(new BetSettingViewModel()));
 
                 // Action
                 var result = await controller.Index(metaModel) as ViewResult;
@@ -193,10 +194,9 @@
             var controller = new SportsbookBetSettingController(
                 LangService,
                 SessionService,
-                AppSettings,
                 CoreBetSettingService,
                 ProductService,
-                _betSettingService)
+                _betSettingService, LicenseeSettingService)
             {
                 ControllerContext = ControllerContext
             };

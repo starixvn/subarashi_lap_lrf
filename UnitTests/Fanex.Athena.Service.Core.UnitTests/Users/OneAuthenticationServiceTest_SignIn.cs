@@ -3,25 +3,32 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Threading.Tasks;
     using System.Web;
+
     using Core.Users.Interfaces;
-    using Core.Utility.Interfaces;
+
     using DataAccess.Core.Users.Interfaces;
+
     using Extension.Utility.Interfaces;
+
     using Fanex.Athena.Extension.Utility;
+    using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Model.Auth.Enum;
     using Fanex.Athena.Service.Core.Users;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Logging;
+
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
-    using Model.Core.DTO.OneAuth;
-    using Model.Core.DTO.Users;
+
     using Newtonsoft.Json;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Resources;
-    using Session.Enum;
-    using Session.Model;
+
     using UnitTest.Common.Helpers;
 
     [TestFixture]
@@ -29,7 +36,7 @@
     {
         private OneAuthenticationService _oneAuthenticationService;
         private ISessionService _sessionService;
-        private ILicenseeDataAccess _licenseeDataAccess;
+        private ILicenseeSettingService _licenseeSettingService;
         private IFormsAuthenticationService _formAuthenticationService;
         private IOneBookSecurityWrapper _oneBookSecurityWrapper;
         private ILogger _logger;
@@ -40,7 +47,7 @@
         public void SetUp()
         {
             _sessionService = Substitute.For<ISessionService>();
-            _licenseeDataAccess = Substitute.For<ILicenseeDataAccess>();
+            _licenseeSettingService = Substitute.For<ILicenseeSettingService>();
             _formAuthenticationService = Substitute.For<IFormsAuthenticationService>();
             _oneBookSecurityWrapper = Substitute.For<IOneBookSecurityWrapper>();
             _logger = Substitute.For<ILogger>();
@@ -50,7 +57,7 @@
             _appSettings.DefaultBaseCurrency.Returns("EUR");
             _oneAuthenticationService = Substitute.ForPartsOf<OneAuthenticationService>(
                 _sessionService,
-                _licenseeDataAccess,
+                _licenseeSettingService,
                 _formAuthenticationService,
                 _oneBookSecurityWrapper,
                 _logger,
@@ -63,17 +70,17 @@
         {
             _oneAuthenticationService = null;
             _sessionService = null;
-            _licenseeDataAccess = null;
+            _licenseeSettingService = null;
             _formAuthenticationService = null;
             _appSettings = null;
         }
 
         [Test]
-        public void SignIn_GetLicenseeByNameReturnNull_ReturnCorrectErrorResultInfo()
+        public void SignIn_GetLicenseeInfoReturnNull_ReturnCorrectErrorResultInfo()
         {
             // Arrange
             var tokenInfo = FakeHelper.Create<OneAuthToken>();
-            _licenseeDataAccess.GetLicenseeByName(tokenInfo.SiteName).Returns(x => { return null; });
+            _licenseeSettingService.GetLicenseeInfo(tokenInfo.SiteName).Returns(x => { return null; });
 
             var expectedResult = new ResultInfo
             {
@@ -103,7 +110,7 @@
             };
 
             var licensee = FakeHelper.Create<Licensee>();
-            _licenseeDataAccess.GetLicenseeByName(tokenInfo.SiteName).Returns(licensee);
+            _licenseeSettingService.GetLicenseeInfo(tokenInfo.SiteName).Returns(licensee);
 
             var expectedResult = new ResultInfo
             {
@@ -132,7 +139,7 @@
             var tokenInfo = CreateValidFakeToken(false);
 
             var licensee = FakeHelper.Create<Licensee>();
-            _licenseeDataAccess.GetLicenseeByName(tokenInfo.SiteName).Returns(licensee);
+            _licenseeSettingService.GetLicenseeInfo(tokenInfo.SiteName).Returns(licensee);
 
             _sessionService.UserSession.Returns(x => null);
             _sessionService.LicenseeSession.Returns(x => null);
@@ -146,12 +153,12 @@
             Assert.Multiple(() =>
             {
                 _sessionService.Received().AssignCurrenciesToUserSession(
-                    Arg.Is<UserSession>(x => AssertNewUserSession(x, tokenInfo)),
+                    Arg.Is<UserAuthInfo>(x => AssertNewUserSession(x, tokenInfo)),
                     licensee.Id,
                     Arg.Any<IEnumerable<CurrencyUser>>());
                 _sessionService.Received().AssignSessions(
-                    Arg.Is<UserSession>(x => AssertNewUserSession(x, tokenInfo)),
-                    Arg.Is<LicenseeSession>(x => AssertNewLicenseeSession(x, licensee)));
+                    Arg.Is<UserAuthInfo>(x => AssertNewUserSession(x, tokenInfo)),
+                    Arg.Is<LicenseeAuthInfo>(x => AssertNewLicenseeSession(x, licensee)));
             });
         }
 
@@ -162,10 +169,10 @@
             var tokenInfo = CreateValidFakeToken(false);
 
             var licensee = FakeHelper.Create<Licensee>();
-            _licenseeDataAccess.GetLicenseeByName(tokenInfo.SiteName).Returns(licensee);
+            _licenseeSettingService.GetLicenseeInfo(tokenInfo.SiteName).Returns(licensee);
 
-            _sessionService.UserSession.Returns(new UserSession());
-            _sessionService.LicenseeSession.Returns(new LicenseeSession());
+            _sessionService.UserSession.Returns(new UserAuthInfo());
+            _sessionService.LicenseeSession.Returns(new LicenseeAuthInfo());
 
             var fakeHttpContext = Substitute.For<HttpContextBase>();
             fakeHttpContext.User.Identity.Returns(x => { return null; });
@@ -177,12 +184,12 @@
             Assert.Multiple(() =>
             {
                 _sessionService.Received().AssignCurrenciesToUserSession(
-                    Arg.Is<UserSession>(x => AssertNewUserSession(x, tokenInfo)),
+                    Arg.Is<UserAuthInfo>(x => AssertNewUserSession(x, tokenInfo)),
                     licensee.Id,
                     Arg.Any<IEnumerable<CurrencyUser>>());
                 _sessionService.Received().AssignSessions(
-                    Arg.Is<UserSession>(x => AssertNewUserSession(x, tokenInfo)),
-                    Arg.Is<LicenseeSession>(x => AssertNewLicenseeSession(x, licensee)));
+                    Arg.Is<UserAuthInfo>(x => AssertNewUserSession(x, tokenInfo)),
+                    Arg.Is<LicenseeAuthInfo>(x => AssertNewLicenseeSession(x, licensee)));
             });
         }
 
@@ -193,9 +200,9 @@
             var tokenInfo = CreateValidFakeToken(false);
 
             var licensee = FakeHelper.Create<Licensee>();
-            _licenseeDataAccess.GetLicenseeByName(tokenInfo.SiteName).Returns(licensee);
+            _licenseeSettingService.GetLicenseeInfo(tokenInfo.SiteName).Returns(licensee);
 
-            var inValidUser = new UserSession
+            var inValidUser = new UserAuthInfo
             {
                 UserId = 0,
                 VendorIdentityID = null,
@@ -205,7 +212,7 @@
             };
             _sessionService.UserSession.Returns(inValidUser);
 
-            var validLicensee = new LicenseeSession
+            var validLicensee = new LicenseeAuthInfo
             {
                 LicenseeId = Math.Abs(FakeHelper.Create<int>()) + 1
             };
@@ -220,12 +227,12 @@
             Assert.Multiple(() =>
             {
                 _sessionService.Received().AssignCurrenciesToUserSession(
-                    Arg.Is<UserSession>(x => AssertNewUserSession(x, tokenInfo)),
+                    Arg.Is<UserAuthInfo>(x => AssertNewUserSession(x, tokenInfo)),
                     licensee.Id,
                     Arg.Any<IEnumerable<CurrencyUser>>());
                 _sessionService.Received().AssignSessions(
-                    Arg.Is<UserSession>(x => AssertNewUserSession(x, tokenInfo)),
-                    Arg.Is<LicenseeSession>(x => AssertNewLicenseeSession(x, licensee)));
+                    Arg.Is<UserAuthInfo>(x => AssertNewUserSession(x, tokenInfo)),
+                    Arg.Is<LicenseeAuthInfo>(x => AssertNewLicenseeSession(x, licensee)));
             });
         }
 
@@ -236,9 +243,9 @@
             var tokenInfo = CreateValidFakeToken(false);
 
             var licensee = FakeHelper.Create<Licensee>();
-            _licenseeDataAccess.GetLicenseeByName(tokenInfo.SiteName).Returns(licensee);
+            _licenseeSettingService.GetLicenseeInfo(tokenInfo.SiteName).Returns(licensee);
 
-            var validUser = new UserSession
+            var validUser = new UserAuthInfo
             {
                 UserId = Math.Abs(FakeHelper.Create<int>()) + 1,
                 VendorIdentityID = FakeHelper.Create<string>(),
@@ -248,7 +255,7 @@
             };
             _sessionService.UserSession.Returns(validUser);
 
-            var inValidLicensee = new LicenseeSession
+            var inValidLicensee = new LicenseeAuthInfo
             {
                 LicenseeId = 0
             };
@@ -263,12 +270,12 @@
             Assert.Multiple(() =>
             {
                 _sessionService.Received().AssignCurrenciesToUserSession(
-                    Arg.Is<UserSession>(x => AssertNewUserSession(x, tokenInfo)),
+                    Arg.Is<UserAuthInfo>(x => AssertNewUserSession(x, tokenInfo)),
                     licensee.Id,
                     Arg.Any<IEnumerable<CurrencyUser>>());
                 _sessionService.Received().AssignSessions(
-                    Arg.Is<UserSession>(x => AssertNewUserSession(x, tokenInfo)),
-                    Arg.Is<LicenseeSession>(x => AssertNewLicenseeSession(x, licensee)));
+                    Arg.Is<UserAuthInfo>(x => AssertNewUserSession(x, tokenInfo)),
+                    Arg.Is<LicenseeAuthInfo>(x => AssertNewLicenseeSession(x, licensee)));
             });
         }
 
@@ -279,9 +286,9 @@
             var tokenInfo = CreateValidFakeToken(false);
 
             var licensee = new Licensee { Id = Math.Abs(FakeHelper.Create<int>()) + 1 };
-            _licenseeDataAccess.GetLicenseeByName(tokenInfo.SiteName).Returns(licensee);
+            _licenseeSettingService.GetLicenseeInfo(tokenInfo.SiteName).Returns(licensee);
 
-            var validAnotherUser = new UserSession
+            var validAnotherUser = new UserAuthInfo
             {
                 UserId = Math.Abs(FakeHelper.Create<int>()) + 1,
                 IsInternal = true,
@@ -292,7 +299,7 @@
             };
             _sessionService.UserSession.Returns(validAnotherUser);
 
-            var validAnotherLicensee = new LicenseeSession
+            var validAnotherLicensee = new LicenseeAuthInfo
             {
                 LicenseeId = licensee.Id + 1
             };
@@ -307,12 +314,12 @@
             Assert.Multiple(() =>
             {
                 _sessionService.Received().AssignCurrenciesToUserSession(
-                    Arg.Is<UserSession>(x => AssertNewUserSession(x, tokenInfo)),
+                    Arg.Is<UserAuthInfo>(x => AssertNewUserSession(x, tokenInfo)),
                     licensee.Id,
                     Arg.Any<IEnumerable<CurrencyUser>>());
                 _sessionService.Received().AssignSessions(
-                    Arg.Is<UserSession>(x => AssertNewUserSession(x, tokenInfo)),
-                    Arg.Is<LicenseeSession>(x => AssertNewLicenseeSession(x, licensee)));
+                    Arg.Is<UserAuthInfo>(x => AssertNewUserSession(x, tokenInfo)),
+                    Arg.Is<LicenseeAuthInfo>(x => AssertNewLicenseeSession(x, licensee)));
             });
         }
 
@@ -323,9 +330,9 @@
             var tokenInfo = CreateValidFakeToken(false, "en");
 
             var licensee = new Licensee { Id = Math.Abs(FakeHelper.Create<int>()) + 1 };
-            _licenseeDataAccess.GetLicenseeByName(tokenInfo.SiteName).Returns(licensee);
+            _licenseeSettingService.GetLicenseeInfo(tokenInfo.SiteName).Returns(licensee);
 
-            var validUser = new UserSession
+            var validUser = new UserAuthInfo
             {
                 UserId = Math.Abs(FakeHelper.Create<int>()) + 1,
                 IsInternal = true,
@@ -337,7 +344,7 @@
             };
             _sessionService.UserSession.Returns(validUser);
 
-            var validLicensee = new LicenseeSession
+            var validLicensee = new LicenseeAuthInfo
             {
                 LicenseeId = licensee.Id
             };
@@ -355,7 +362,6 @@
                     validUser,
                     licensee.Id,
                     Arg.Any<IEnumerable<CurrencyUser>>());
-                Assert.That(string.Join(",", validUser.PortalFunctionList), Is.EqualTo(string.Join(",", tokenInfo.Permissions.Select(y => y.FunctionKey))));
             });
         }
 
@@ -373,9 +379,9 @@
             var tokenInfo = CreateValidFakeToken(false, tokenLanguage);
 
             var licensee = new Licensee { Id = Math.Abs(FakeHelper.Create<int>()) + 1 };
-            _licenseeDataAccess.GetLicenseeByName(tokenInfo.SiteName).Returns(licensee);
+            _licenseeSettingService.GetLicenseeInfo(tokenInfo.SiteName).Returns(licensee);
 
-            var validUser = new UserSession
+            var validUser = new UserAuthInfo
             {
                 UserId = Math.Abs(FakeHelper.Create<int>()) + 1,
                 IsInternal = true,
@@ -387,7 +393,7 @@
             };
             _sessionService.UserSession.Returns(validUser);
 
-            var validLicensee = new LicenseeSession
+            var validLicensee = new LicenseeAuthInfo
             {
                 LicenseeId = licensee.Id
             };
@@ -409,7 +415,7 @@
             var tokenInfo = CreateValidFakeToken(false);
 
             var licensee = FakeHelper.Create<Licensee>();
-            _licenseeDataAccess.GetLicenseeByName(tokenInfo.SiteName).Returns(licensee);
+            _licenseeSettingService.GetLicenseeInfo(tokenInfo.SiteName).Returns(licensee);
 
             _sessionService.UserSession.Returns(x => null);
             _sessionService.LicenseeSession.Returns(x => null);
@@ -423,38 +429,7 @@
             Assert.Multiple(() =>
             {
                 _sessionService.Received().AssignCurrenciesToUserSession(
-                    Arg.Is<UserSession>(
-                        x => string.Join(",", x.PortalFunctionList) == string.Join(",", tokenInfo.Permissions.Select(y => y.FunctionKey))),
-                    licensee.Id,
-                    Arg.Any<IEnumerable<CurrencyUser>>());
-            });
-        }
-
-        [Test]
-        public void SignIn_GetPermissionList_IsAdminstrator_GetFromFile_NoData_ReturnEmptyData()
-        {
-            // Arrange
-            var tokenInfo = CreateValidFakeToken(true);
-
-            var licensee = FakeHelper.Create<Licensee>();
-            _licenseeDataAccess.GetLicenseeByName(tokenInfo.SiteName).Returns(licensee);
-
-            _sessionService.UserSession.Returns(x => null);
-            _sessionService.LicenseeSession.Returns(x => null);
-
-            _oneAuthenticationService.GetStringFromFile(Arg.Any<string>()).Returns(string.Empty);
-
-            var fakeHttpContext = Substitute.For<HttpContextBase>();
-
-            // Action
-            _oneAuthenticationService.SignIn(fakeHttpContext, tokenInfo);
-
-            // Result
-            Assert.Multiple(() =>
-            {
-                _sessionService.Received().AssignCurrenciesToUserSession(
-                    Arg.Is<UserSession>(
-                        x => !x.PortalFunctionList.Any()),
+                    Arg.Any<UserAuthInfo>(),
                     licensee.Id,
                     Arg.Any<IEnumerable<CurrencyUser>>());
             });
@@ -467,7 +442,7 @@
             var tokenInfo = CreateValidFakeToken(true);
 
             var licensee = FakeHelper.Create<Licensee>();
-            _licenseeDataAccess.GetLicenseeByName(tokenInfo.SiteName).Returns(licensee);
+            _licenseeSettingService.GetLicenseeInfo(tokenInfo.SiteName).Returns(licensee);
 
             _sessionService.UserSession.Returns(x => null);
             _sessionService.LicenseeSession.Returns(x => null);
@@ -489,8 +464,7 @@
             Assert.Multiple(() =>
             {
                 _sessionService.Received().AssignCurrenciesToUserSession(
-                    Arg.Is<UserSession>(
-                        x => string.Join(",", x.PortalFunctionList) == string.Join(",", expected.Select(y => y.FunctionKey))),
+                    Arg.Any<UserAuthInfo>(),
                     licensee.Id,
                     Arg.Any<IEnumerable<CurrencyUser>>());
             });
@@ -562,18 +536,18 @@
             };
         }
 
-        private bool AssertNewUserSession(UserSession newUser, OneAuthToken token)
+        private bool AssertNewUserSession(UserAuthInfo newUser, OneAuthToken token)
         => newUser.UserId == token.UserSEQ
                 && newUser.OnUserId == token.UserSEQ
                 && newUser.UserName == token.UserID
                 && newUser.IsInternal
-                && !newUser.FunctionIdList.Any()
+                && !newUser.FunctionList.Any()
                 && newUser.DefaultReportUrl == "LicenseeWinLossReport"
                 && newUser.ApplicationMode == AppMode.Parasitic
                 && newUser.VendorID == token.VendorID
                 && newUser.VendorIdentityID == token.UserID;
 
-        private bool AssertNewLicenseeSession(LicenseeSession newLicensee, Licensee licenseeInfo)
+        private bool AssertNewLicenseeSession(LicenseeAuthInfo newLicensee, Licensee licenseeInfo)
         => newLicensee.LicenseeId == licenseeInfo.Id
                 && newLicensee.IsAllowedCustomerComm == licenseeInfo.IsAllowedCustomerComm
                 && newLicensee.IsEnableBA == licenseeInfo.IsEnableBA

@@ -55,7 +55,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
-    <CodeAnalysisRuleSet>Fanex.Athena.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>
+    </CodeAnalysisRuleSet>
+    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -66,16 +68,16 @@
     <WarningLevel>4</WarningLevel>
     <FilesToIncludeForPublish>OnlyFilesToRunTheApp</FilesToIncludeForPublish>
     <Prefer32Bit>false</Prefer32Bit>
-    <CodeAnalysisRuleSet>Fanex.Athena.ruleset</CodeAnalysisRuleSet>
-    <LangVersion>6</LangVersion>
+    <CodeAnalysisRuleSet>
+    </CodeAnalysisRuleSet>
+    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Antlr3.Runtime">
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="Autofac, Version=4.8.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\packages\Autofac.4.8.1\lib\net45\Autofac.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Autofac, Version=4.9.3.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.9.3\lib\net45\Autofac.dll</HintPath>
     </Reference>
     <Reference Include="Autofac.Integration.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.Mvc5.4.0.2\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
@@ -97,6 +99,9 @@
       <HintPath>..\packages\EasyNetQ.2.3.3\lib\net451\EasyNetQ.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Fanex.Common, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.Common.1.1.0.1\lib\net40\Fanex.Common.dll</HintPath>
+    </Reference>
     <Reference Include="Fanex.Data, Version=3.0.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.Data.3.0.2\lib\net461\Fanex.Data.dll</HintPath>
       <Private>True</Private>
@@ -105,9 +110,8 @@
       <HintPath>..\packages\Fanex.Data.DbSettingProviderExtension.1.0.0.1\lib\net40\Fanex.Data.DbSettingProviderExtension.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Fanex.Logging, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.Logging.2.0.0\lib\net461\Fanex.Logging.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Fanex.Logging, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.Logging.2.0.1\lib\net461\Fanex.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.Logging.RabbitMQ, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.Logging.RabbitMQ.1.0.1\lib\net461\Fanex.Logging.RabbitMQ.dll</HintPath>
@@ -126,8 +130,35 @@
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="MessagePack, Version=1.7.3.4, Culture=neutral, PublicKeyToken=b4a0369545f0a1be, processorArchitecture=MSIL">
-      <HintPath>..\packages\MessagePack.1.7.3.4\lib\net45\MessagePack.dll</HintPath>
+    <Reference Include="MessagePack, Version=1.7.3.7, Culture=neutral, PublicKeyToken=b4a0369545f0a1be, processorArchitecture=MSIL">
+      <HintPath>..\packages\MessagePack.1.7.3.7\lib\net45\MessagePack.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.4.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.9.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.9.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.9.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.9.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.9.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.9.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.9.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.9.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.9.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.9.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.10.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.10.0\lib\net46\Microsoft.ApplicationInsights.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights.Log4NetAppender, Version=2.10.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Log4NetAppender.2.10.0\lib\net45\Microsoft.ApplicationInsights.Log4NetAppender.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.TelemetryCorrelation, Version=1.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.TelemetryCorrelation.1.0.5\lib\net45\Microsoft.AspNet.TelemetryCorrelation.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Diagnostics.Tracing.EventSource, Version=1.1.28.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -189,11 +220,12 @@
     </Reference>
     <Reference Include="sysglobl" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.0.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.3.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.5.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Net.Http, Version=4.1.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Net.Http.4.3.4\lib\net46\System.Net.Http.dll</HintPath>
     </Reference>
@@ -255,7 +287,7 @@
     <Reference Include="System.Web.Mvc, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.6\lib\net45\System.Web.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Optimization">
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -274,10 +306,6 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="TplCore, Version=1.0.4854.17253, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TplCore.1.0.4854.17254\lib\net40\TplCore.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="WebGrease">
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
     </Reference>
@@ -425,6 +453,7 @@
     <Content Include="Content\Fanex.Result\Allbet\template\public\game_result\Sicbo\ScoreBoard_d4.png" />
     <Content Include="Content\Fanex.Result\Allbet\template\public\game_result\Sicbo\ScoreBoard_d5.png" />
     <Content Include="Content\Fanex.Result\Allbet\template\public\game_result\Sicbo\ScoreBoard_d6.png" />
+    <Content Include="karma-new-bypage.conf.js" />
     <Content Include="SpNameConfig\FanexSpName.BACKUPMNL.xml">
       <DependentUpon>FanexSpName.xml.tt</DependentUpon>
     </Content>
@@ -620,6 +649,15 @@
     <Content Include="www\css\build\dev\reactpages\notification\index.chunk.js.map" />
     <Content Include="www\css\build\dev\reactpages\notification\index.css" />
     <Content Include="www\css\build\dev\reactpages\notification\index.css.map" />
+    <Content Include="www\css\build\dev\reactpages\playeradmin\account-info.chunk.js" />
+    <Content Include="www\css\build\dev\reactpages\playeradmin\account-info.css" />
+    <Content Include="www\css\build\dev\reactpages\playeradmin\betlimit.css" />
+    <Content Include="www\css\build\dev\reactpages\playeradmin\index.chunk.js" />
+    <Content Include="www\css\build\dev\reactpages\playeradmin\index.css" />
+    <Content Include="www\css\build\dev\reactpages\playeradmin\playerwinloss.css" />
+    <Content Include="www\css\build\dev\reactpages\playeradmin\running-betlist.chunk.js" />
+    <Content Include="www\css\build\dev\reactpages\playeradmin\running-betlist.css" />
+    <Content Include="www\css\build\dev\reactpages\playeradmin\statement.css" />
     <Content Include="www\css\build\dev\reactpages\speciallicenseewl\index.chunk.js" />
     <Content Include="www\css\build\dev\reactpages\speciallicenseewl\index.css" />
     <Content Include="www\css\build\dev\reactpages\subsidiaryperformance\index.chunk.js" />
@@ -655,6 +693,12 @@
     <Content Include="www\css\build\pro\reactpages\licenseewlbytimezone\index.css" />
     <Content Include="www\css\build\pro\reactpages\notification\index.chunk.js" />
     <Content Include="www\css\build\pro\reactpages\notification\index.css" />
+    <Content Include="www\css\build\pro\reactpages\playeradmin\account-info.css" />
+    <Content Include="www\css\build\pro\reactpages\playeradmin\betlimit.css" />
+    <Content Include="www\css\build\pro\reactpages\playeradmin\index.css" />
+    <Content Include="www\css\build\pro\reactpages\playeradmin\playerwinloss.css" />
+    <Content Include="www\css\build\pro\reactpages\playeradmin\running-betlist.css" />
+    <Content Include="www\css\build\pro\reactpages\playeradmin\statement.css" />
     <Content Include="www\css\build\pro\reactpages\speciallicenseewl\index.chunk.js" />
     <Content Include="www\css\build\pro\reactpages\speciallicenseewl\index.css" />
     <Content Include="www\css\build\pro\reactpages\subsidiaryperformance\index.css" />
@@ -678,8 +722,33 @@
     </Content>
     <Content Include="SiteConfig\Web.Staging.config" />
     <Content Include="Views\Desktop\BetList\CardClubDetail\Main.cshtml" />
+    <Content Include="Views\Desktop\Module\PlayerAdmin\Main.cshtml" />
+    <Content Include="www\css\build\dev\reactpages\playeradmin\index.chunk.js.map" />
+    <Content Include="www\css\build\dev\reactpages\playeradmin\index.css.map" />
+    <Content Include="www\css\build\dev\reactpages\playeradmin\account-info.chunk.js.map" />
+    <Content Include="www\css\build\dev\reactpages\playeradmin\account-info.css.map" />
+    <Content Include="Views\Desktop\Module\PlayerAdmin\PlayerBetList\Running.cshtml" />
+    <Content Include="www\css\build\dev\reactpages\playeradmin\running-betlist.chunk.js.map" />
+    <Content Include="www\css\build\dev\reactpages\playeradmin\running-betlist.css.map" />
+    <Content Include="www\css\source\reactpages\components\alert\index.scss" />
+    <Content Include="www\css\source\reactpages\components\alert\icons.scss" />
+    <Content Include="Views\Desktop\Module\PlayerAdmin\PlayerBetLimit\Index.cshtml" />
+    <Content Include="www\css\build\dev\reactpages\playeradmin\betlimit.css.map" />
+    <Content Include="www\css\source\components\balloon\balloon.scss" />
+    <Content Include="Views\Desktop\Module\PlayerAdmin\SingleCustomer\Index.cshtml" />
+    <Content Include="Views\Desktop\Module\PlayerAdmin\PlayerWinLoss\Index.cshtml" />
+    <Content Include="www\css\build\dev\reactpages\playeradmin\playerwinloss.css.map" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Desktop\Module\PlayerAdmin\PlayerStatement\Statement.cshtml" />
+    <Content Include="www\css\build\dev\reactpages\playeradmin\statement.css.map" />
     <None Include="www\css\source\reactpages\components\custom3rd\react-toastify.scss" />
     <None Include="www\css\source\pages\betlist\result\result.happy5.scss" />
+    <None Include="www\css\source\reactpages\components\alert\icons\error.scss" />
+    <None Include="www\css\source\reactpages\components\alert\icons\info.scss" />
+    <None Include="www\css\source\reactpages\components\alert\icons\success.scss" />
+    <None Include="www\css\source\reactpages\components\alert\icons\warning.scss" />
     <Content Include="www\css\source\reactpages\pages\betlist\images\bonus.png" />
     <Content Include="www\css\source\reactpages\pages\betlist\images\goal-icon.png" />
     <Content Include="www\css\source\reactpages\pages\betlist\images\q_Icon2_1.png" />
@@ -701,6 +770,17 @@
     <Content Include="www\js\build\dev\reactpages\lib\lang-zh-Hans.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\lib\lang-zh-TW.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\lib\xlsx-style-sparta.chunk.js" />
+    <Content Include="www\js\build\dev\reactpages\playeradmin\accountinfo.chunk.js" />
+    <Content Include="www\js\build\dev\reactpages\playeradmin\accountinfo.chunk.js.map" />
+    <Content Include="www\js\build\dev\reactpages\playeradmin\betlimit.chunk.js" />
+    <Content Include="www\js\build\dev\reactpages\playeradmin\betlimit.chunk.js.map" />
+    <Content Include="www\js\build\dev\reactpages\playeradmin\playerlist.chunk.js" />
+    <Content Include="www\js\build\dev\reactpages\playeradmin\playerlist.chunk.js.map" />
+    <Content Include="www\js\build\dev\reactpages\playeradmin\playerwinloss.chunk.js" />
+    <Content Include="www\js\build\dev\reactpages\playeradmin\runningbetlist.chunk.js" />
+    <Content Include="www\js\build\dev\reactpages\playeradmin\runningbetlist.chunk.js.map" />
+    <Content Include="www\js\build\dev\reactpages\playeradmin\single-customer.chunk.js" />
+    <Content Include="www\js\build\dev\reactpages\playeradmin\statement.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\report\casinoturnover.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\report\licenseewlbytimezone.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\notification\notification.chunk.js" />
@@ -724,6 +804,13 @@
     <Content Include="www\js\build\pro\reactpages\lib\lang-zh-TW.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\lib\langHelper.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\lib\xlsx-style-sparta.chunk.js" />
+    <Content Include="www\js\build\pro\reactpages\playeradmin\accountinfo.chunk.js" />
+    <Content Include="www\js\build\pro\reactpages\playeradmin\betlimit.chunk.js" />
+    <Content Include="www\js\build\pro\reactpages\playeradmin\playerlist.chunk.js" />
+    <Content Include="www\js\build\pro\reactpages\playeradmin\playerwinloss.chunk.js" />
+    <Content Include="www\js\build\pro\reactpages\playeradmin\runningbetlist.chunk.js" />
+    <Content Include="www\js\build\pro\reactpages\playeradmin\single-customer.chunk.js" />
+    <Content Include="www\js\build\pro\reactpages\playeradmin\statement.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\report\casinoturnover.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\report\licenseewlbytimezone.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\notification\notification.chunk.js" />
@@ -765,6 +852,7 @@
     <Content Include="www\js\source\reactpages\actions\__tests__\loaderAction.test.js" />
     <Content Include="www\js\source\reactpages\actions\__tests__\productAction.test.js" />
     <Content Include="www\js\source\reactpages\actions\__tests__\userGuideAction.test.js" />
+    <Content Include="www\js\source\reactpages\components\betlist\BetListDataGrid.jsx" />
     <Content Include="www\js\source\reactpages\components\date-range\Calendar.js" />
     <Content Include="www\js\source\reactpages\components\date-range\constants.js" />
     <Content Include="www\js\source\reactpages\components\date-range\DateRange.js" />
@@ -795,7 +883,7 @@
     <Content Include="www\css\build\dev\reactpages\licenseewlbytimezone\index.css.map" />
     <Content Include="www\css\source\reactpages\components\forms\_radio-buttons.scss" />
     <Content Include="www\css\source\reactpages\components\_popup.scss" />
-    <Content Include="Views\Desktop\Report\Notification\Notification.cshtml" />
+    <Content Include="Views\Desktop\Module\Notification\Notification.cshtml" />
     <Content Include="www\css\source\reactpages\pages\notification\index.scss" />
     <Content Include="www\css\source\reactpages\components\_collapsibleRow.scss" />
     <Content Include="www\css\source\reactpages\vendors\notification.scss" />
@@ -872,6 +960,7 @@
     <Content Include="www\js\source\reactpages\components\date-range\__tests__\DayCell.test.js" />
     <Content Include="www\js\source\reactpages\components\date-range\__tests__\defaultOptions.test.js" />
     <Content Include="www\js\source\reactpages\components\date-range\__tests__\PredefinedRanges.test.js" />
+    <Content Include="www\js\source\reactpages\components\Balloon.jsx" />
     <Content Include="www\js\source\reactpages\components\popup\constants.js" />
     <Content Include="www\js\source\reactpages\components\radio\__tests__\RadioGroup.test.js" />
     <Content Include="www\js\source\reactpages\components\radio\__tests__\Radio.test.js" />
@@ -889,8 +978,12 @@
     <Content Include="www\js\source\reactpages\constants\currency.js" />
     <Content Include="www\js\source\reactpages\constants\licensee.js" />
     <Content Include="www\js\source\reactpages\constants\report.js" />
+    <Content Include="www\js\source\reactpages\customHooks\pagingHooks.js" />
     <Content Include="www\js\source\reactpages\layouts\AppLayout.jsx" />
+    <Content Include="www\js\source\reactpages\layouts\betlist\BetListLayout.jsx" />
+    <Content Include="www\js\source\reactpages\layouts\betlist\lib\BetList.js" />
     <Content Include="www\js\source\reactpages\layouts\__tests__\AppLayout.test.js" />
+    <Content Include="www\js\source\reactpages\lib\dateUtils.js" />
     <Content Include="www\js\source\reactpages\lib\excel.js" />
     <Content Include="www\js\source\reactpages\constants\excelStyle.js" />
     <Content Include="www\js\source\reactpages\lib\langHelper.js" />
@@ -911,6 +1004,121 @@
     <Content Include="www\js\source\reactpages\lib\__tests__\QueryString.test.js" />
     <Content Include="www\js\source\reactpages\lib\__tests__\report.test.js" />
     <Content Include="www\js\source\reactpages\lib\__tests__\site.test.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\account-info\actions\index.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\account-info\actions\types.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\account-info\components\AppContainer.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\account-info\components\index.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\account-info\components\subtab\AccountProfile.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\account-info\components\subtab\ActivityRecord.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\account-info\components\subtab\BankInformation.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\account-info\components\TabContent.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\account-info\components\WidgetContent.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\account-info\components\widgets\CustomerBettingStatus.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\account-info\components\widgets\FastCrossLink.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\account-info\lib\constants.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\account-info\lib\playerAccountService.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\account-info\reducers\index.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\actions\index.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\actions\alertAction.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\actions\types.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\AppContainer.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\DataContent.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\FormFilter.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\grid\base\SettingContent.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\grid\base\SettingGrid.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\grid\data-contents\AGCDataContent.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\grid\data-contents\NGDataContent.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\grid\data-contents\GameDataContent.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\grid\data-contents\SportDataContent.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\grid\sport-settings\AGCSettingGrid.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\grid\sport-settings\NGSettingGrid.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\components\index.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\lib\constants.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\lib\dataTransfer.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\lib\gameSettingDataHandling.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\lib\ngDataHandling.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\lib\validatation.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\lib\dataHandling.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\lib\utility.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\reducers\index.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\betlimit\reducers\alertReducer.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\actions\commonAction.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\actions\filterHandlerAction.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\actions\gridHandlerAction.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\actions\index.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\actions\playerDetailHandlerAction.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\actions\types.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\actions\__tests__\commonAction.test.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\actions\__tests__\filterHandlerAction.test.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\actions\__tests__\playerDetailHandlerAction.test.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\AppContainer.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\content-header\BatchUpdateButton.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\content-header\GridCaption.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\Content.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\DataGrid.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\filter\AdvancedSearch.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\filter\AthenaSearch.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\filter\SearchOption.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\FormFilter.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\grid\ContextMenu.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\grid\OddsGroupCell.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\grid\OddsGroupDropdown.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\grid\PlayerRow.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\grid\SpecialLevelCell.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\grid\SpecialLevelDropdown.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\grid\StatusCell.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\grid\StatusDropdown.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\grid\UserNameCell.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\index.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\PlayerDetail.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\__tests__\AppContainer.test.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\__tests__\content-header\BatchUpdateButton.test.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\__tests__\content-header\GridCaption.test.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\__tests__\Content.test.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\__tests__\DataGrid.test.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\__tests__\filter\AdvancedSearch.test.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\__tests__\filter\SearchOption.test.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\__tests__\FormFilter.test.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\__tests__\grid\ContextMenu.test.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\__tests__\PlayerDetail.test.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\lib\constants.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\lib\reportExcel.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\reducers\filterHandlerReducer.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\reducers\gridHandlerReducer.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\reducers\index.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\reducers\playerDetailHandlerReducer.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\reducers\__tests__\filterHandlerReducer.test.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\reducers\__tests__\playerDetailHandlerReducer.test.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerwinloss\actions\index.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerwinloss\actions\types.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerwinloss\components\AppContainer.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerwinloss\components\DataGrid.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerwinloss\components\GridRow.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerwinloss\components\index.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerwinloss\lib\gridHelper.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerwinloss\reducers\index.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\running-betlist\actions\index.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\running-betlist\components\AppContainer.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\running-betlist\components\DataGrid.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\running-betlist\components\FormFilter.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\running-betlist\components\index.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\running-betlist\lib\service.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\running-betlist\reducers\index.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\single-customer\actions\index.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\single-customer\components\AppContainer.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\single-customer\components\Content.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\single-customer\components\DataGrid.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\single-customer\components\index.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\single-customer\components\Title.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\single-customer\lib\constants.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\single-customer\reducers\index.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\statement\actions\index.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\statement\components\AppContainer.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\statement\components\DataContent.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\statement\components\FormFilter.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\statement\components\index.jsx" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\statement\lib\service.js" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\statement\reducers\index.js" />
     <Content Include="www\js\source\reactpages\pages\bettingticketscenter\common\components\action.js" />
     <Content Include="www\js\source\reactpages\pages\bettingticketscenter\common\components\__tests__\PageLayout.redux.test.js" />
     <Content Include="www\js\source\reactpages\pages\bettingticketscenter\common\constants\apiUrl.js" />
@@ -1077,6 +1285,7 @@
     <Content Include="www\js\tests\extensions\prototype-spec.js" />
     <Content Include="www\js\tests\helpers\downloader-spec.js" />
     <Content Include="www\js\tests\pages\customer\betsetting\products\exchange-spec.js" />
+    <Content Include="www\webpackconfig\build\webpack.react.devbypage.conf.js" />
     <Content Include="www\webpackconfig\config\aliasReact.js" />
     <Content Include="www\webpackconfig\config\pathReact.js" />
     <Content Include="www\webpackconfig\config\pluginReact.js" />
@@ -1099,6 +1308,12 @@
     <Content Include="www\css\source\reactpages\components\_button.scss" />
     <Content Include="www\css\source\reactpages\components\_react-grid.scss" />
     <Content Include="www\css\source\reactpages\components\_paging.scss" />
+    <Content Include="www\css\source\reactpages\components\_switch.scss" />
+    <Content Include="www\css\source\reactpages\components\vendors\_switches.scss" />
+    <Content Include="www\css\source\reactpages\components\_dropdown.scss" />
+    <Content Include="www\css\source\reactpages\components\_panel.scss" />
+    <Content Include="www\css\source\reactpages\components\_pureicon.scss" />
+    <Content Include="www\css\source\reactpages\components\_dropdownlabel.scss" />
     <None Include="www\css\source\reactpages\main.scss" />
     <Content Include="www\css\build\dev\reactpages\vendor.css" />
     <Content Include="www\css\build\pro\reactpages\vendor.css" />
@@ -1941,7 +2156,6 @@
     <Content Include="www\webpackconfig\config\plugin.js" />
     <Content Include="App_Code\DesktopRazorHelper.cshtml" />
     <Content Include="App_Code\DesktopReportRazorHelper.cshtml" />
-    <Content Include="App_Data\PortalSystemFunction.json" />
     <None Include="SpNameConfig\FanexSpNameOriginal.xml">
       <SubType>Designer</SubType>
     </None>
@@ -2493,6 +2707,20 @@
     <Content Include="www\js\source\reactpages\pages\casinoturnover\components\FormFilter.jsx" />
     <Content Include="www\js\source\reactpages\pages\casinoturnover\components\index.jsx" />
     <Content Include="www\js\source\reactpages\pages\casinoturnover\components\DataGrid.jsx" />
+    <Content Include="www\css\source\reactpages\pages\playeradmin\index.scss" />
+    <Content Include="www\css\source\reactpages\pages\playeradmin\account-info.scss" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\__tests__\content-header\__snapshots__\BatchUpdateButton.test.js.snap" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\__tests__\content-header\__snapshots__\GridCaption.test.js.snap" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\__tests__\filter\__snapshots__\AdvancedSearch.test.js.snap" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\__tests__\filter\__snapshots__\SearchOption.test.js.snap" />
+    <Content Include="www\js\source\reactpages\Module\PlayerAdmin\playerlist\components\__tests__\grid\__snapshots__\ContextMenu.test.js.snap" />
+    <Content Include="www\css\source\reactpages\pages\playeradmin\running-betlist.scss" />
+    <Content Include="www\css\source\reactpages\pages\playeradmin\betlimit.scss" />
+    <Content Include="www\css\source\reactpages\pages\playeradmin\playerwinloss.scss" />
+    <Content Include="www\js\build\dev\reactpages\playeradmin\playerwinloss.chunk.js.map" />
+    <Content Include="www\js\build\dev\reactpages\playeradmin\single-customer.chunk.js.map" />
+    <Content Include="www\css\source\reactpages\pages\playeradmin\statement.scss" />
+    <Content Include="www\js\build\dev\reactpages\playeradmin\statement.chunk.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="SiteConfig\WebConfigTransforms\SIT.config">
@@ -5420,6 +5648,10 @@
       <Project>{0C22899B-6CE0-4187-9BCF-7F503213F207}</Project>
       <Name>Fanex.Athena.Api.BetList</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ControllerAPI\Fanex.Athena.Api.StatelessBase\Fanex.Athena.Api.StatelessBase.csproj">
+      <Project>{0054161C-59B0-4CB6-AC5F-4E0F0D0294EC}</Project>
+      <Name>Fanex.Athena.Api.StatelessBase</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Controller\Fanex.Athena.Controllers.BetList\Fanex.Athena.Controllers.BetList.csproj">
       <Project>{83f7dc5c-e81c-45e5-bc83-b58e45198a2e}</Project>
       <Name>Fanex.Athena.Controllers.BetList</Name>
@@ -5448,17 +5680,9 @@
       <Project>{5653BC29-0843-4D75-9140-5B370DF2F88C}</Project>
       <Name>Fanex.Athena.DataAccess.Report</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Fanex.Athena.Api.ExternalService\Fanex.Athena.Api.ExternalService.csproj">
-      <Project>{33283837-a60b-44aa-815d-f61f70774de2}</Project>
-      <Name>Fanex.Athena.Api.ExternalService</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Fanex.Athena.Extension\Fanex.Athena.Extension.csproj">
       <Project>{71F95E53-36D0-4091-828D-ED14C9939C35}</Project>
       <Name>Fanex.Athena.Extension</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Fanex.Athena.Module.Dashboard\Fanex.Athena.Module.Dashboard.csproj">
-      <Project>{b5c8656b-6c30-4c82-bdb9-85b1c71b00c3}</Project>
-      <Name>Fanex.Athena.Module.Dashboard</Name>
     </ProjectReference>
     <ProjectReference Include="..\Model\Fanex.Athena.Model.BetList\Fanex.Athena.Model.BetList.csproj">
       <Project>{4956fbd7-5f68-4e7b-af6c-db5fb1f255f0}</Project>
@@ -5472,6 +5696,26 @@
       <Project>{3AA658FF-B635-4990-A49C-AE886841A1CA}</Project>
       <Name>Fanex.Athena.Model.Report</Name>
       <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Module\Fanex.Athena.Module.Dashboard\Fanex.Athena.Module.Dashboard.csproj">
+      <Project>{b5c8656b-6c30-4c82-bdb9-85b1c71b00c3}</Project>
+      <Name>Fanex.Athena.Module.Dashboard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Module\Fanex.Athena.Module.Notification.Api\Fanex.Athena.Module.Notification.Api.csproj">
+      <Project>{43a8ee11-7aa4-4af2-a77f-fa4ebc32298c}</Project>
+      <Name>Fanex.Athena.Module.Notification.Api</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Module\Fanex.Athena.Module.Notification.Report\Fanex.Athena.Module.Notification.Report.csproj">
+      <Project>{eaa832b4-1501-4a05-b459-aeef528b521f}</Project>
+      <Name>Fanex.Athena.Module.Notification.Report</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Module\Fanex.Athena.Module.PlayerAdmin.Api\Fanex.Athena.Module.PlayerAdmin.Api.csproj">
+      <Project>{831ffa8d-8f5e-4abd-ac6a-5660b71b1795}</Project>
+      <Name>Fanex.Athena.Module.PlayerAdmin.Api</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Module\Fanex.Athena.Module.PlayerAdmin\Fanex.Athena.Module.PlayerAdmin.csproj">
+      <Project>{19150cd4-08fc-4bec-800a-57abd7744c41}</Project>
+      <Name>Fanex.Athena.Module.PlayerAdmin</Name>
     </ProjectReference>
     <ProjectReference Include="..\Resources\Fanex.Athena.Resources\Fanex.Athena.Resources.csproj">
       <Project>{17b0022c-4902-4c61-908a-5db81568dc3a}</Project>
@@ -5494,6 +5738,10 @@
       <Project>{DD931ADB-A994-49C0-95A3-72BCB6E22679}</Project>
       <Name>Fanex.Athena.Web</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Service\Fanex.Athena.Service.StatelessCore\Fanex.Athena.Service.StatelessCore.csproj">
+      <Project>{DA9A50E3-C62D-4F12-96C2-3AC289D423FE}</Project>
+      <Name>Fanex.Athena.Service.StatelessCore</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -5508,11 +5756,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="www\js\source\reactpages\pages\subsidiaryperformance\components\index.jsx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\packages\SonarAnalyzer.CSharp.7.14.0.8411\analyzers\Google.Protobuf.dll" />
-    <Analyzer Include="..\packages\SonarAnalyzer.CSharp.7.14.0.8411\analyzers\SonarAnalyzer.CSharp.dll" />
-    <Analyzer Include="..\packages\SonarAnalyzer.CSharp.7.14.0.8411\analyzers\SonarAnalyzer.dll" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -5553,4 +5796,19 @@
     <PostBuildEvent>
     </PostBuildEvent>
   </PropertyGroup>
+  <Import Project="..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.9.0\build\Microsoft.ApplicationInsights.DependencyCollector.targets" Condition="Exists('..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.9.0\build\Microsoft.ApplicationInsights.DependencyCollector.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.9.0\build\Microsoft.ApplicationInsights.DependencyCollector.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.9.0\build\Microsoft.ApplicationInsights.DependencyCollector.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.9.0\build\Microsoft.ApplicationInsights.PerfCounterCollector.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.9.0\build\Microsoft.ApplicationInsights.PerfCounterCollector.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.9.0\build\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.9.0\build\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.ApplicationInsights.WindowsServer.2.9.0\build\Microsoft.ApplicationInsights.WindowsServer.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.ApplicationInsights.WindowsServer.2.9.0\build\Microsoft.ApplicationInsights.WindowsServer.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.ApplicationInsights.Web.2.9.0\build\Microsoft.ApplicationInsights.Web.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.ApplicationInsights.Web.2.9.0\build\Microsoft.ApplicationInsights.Web.targets'))" />
+  </Target>
+  <Import Project="..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.9.0\build\Microsoft.ApplicationInsights.PerfCounterCollector.targets" Condition="Exists('..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.9.0\build\Microsoft.ApplicationInsights.PerfCounterCollector.targets')" />
+  <Import Project="..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.9.0\build\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.targets" Condition="Exists('..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.9.0\build\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.targets')" />
+  <Import Project="..\packages\Microsoft.ApplicationInsights.WindowsServer.2.9.0\build\Microsoft.ApplicationInsights.WindowsServer.targets" Condition="Exists('..\packages\Microsoft.ApplicationInsights.WindowsServer.2.9.0\build\Microsoft.ApplicationInsights.WindowsServer.targets')" />
+  <Import Project="..\packages\Microsoft.ApplicationInsights.Web.2.9.0\build\Microsoft.ApplicationInsights.Web.targets" Condition="Exists('..\packages\Microsoft.ApplicationInsights.Web.2.9.0\build\Microsoft.ApplicationInsights.Web.targets')" />
 </Project>

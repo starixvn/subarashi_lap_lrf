@@ -9,8 +9,9 @@ namespace Fanex.Athena.Api.Base.Attributes
     using System.Net;
     using System.Net.Http;
     using System.Web.Http;
-    using Extensions;
-    using Session.Interfaces;
+
+    using Fanex.Athena.Api.StatelessBase.Attributes.Extensions;
+    using Fanex.Athena.Service.Core.Users.Interfaces;
 
     [AttributeUsage(AttributeTargets.All)]
     public sealed class CustomApiAuthorizeAttribute : AuthorizeAttribute
@@ -19,7 +20,7 @@ namespace Fanex.Athena.Api.Base.Attributes
         {
             var scope = actionContext.Request.GetDependencyScope();
             var sessionStorage = scope.Resolve<ISessionStorage>();
-            return sessionStorage.LicenseeSession != null && sessionStorage.UserSession != null;
+            return sessionStorage.LicenseeAuthInfo != null && sessionStorage.UserAuthInfo != null;
         }
 
         protected override void HandleUnauthorizedRequest(System.Web.Http.Controllers.HttpActionContext actionContext)

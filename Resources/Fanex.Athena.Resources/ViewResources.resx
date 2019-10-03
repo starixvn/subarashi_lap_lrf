@@ -2362,6 +2362,42 @@
   <data name="AGClosingBalance" xml:space="preserve">
     <value>AG Closing Balance</value>
   </data>
+  <data name="BankAccountNumber" xml:space="preserve">
+    <value>Bank Account Number</value>
+    <comment>112658</comment>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+    <comment>112658</comment>
+  </data>
+  <data name="PreviousSearchResult" xml:space="preserve">
+    <value>Previous search result</value>
+    <comment>112658</comment>
+  </data>
+  <data name="AdvancedSearch" xml:space="preserve">
+    <value>Advanced Search</value>
+    <comment>112658</comment>
+  </data>
+  <data name="CurrentBalance" xml:space="preserve">
+    <value>Current Balance</value>
+    <comment>112658</comment>
+  </data>
+  <data name="LastLoginIP" xml:space="preserve">
+    <value>Last Login IP</value>
+    <comment>112658</comment>
+  </data>
+  <data name="LastTransaction" xml:space="preserve">
+    <value>Last Transaction</value>
+    <comment>112658</comment>
+  </data>
+  <data name="OutstandingBalance" xml:space="preserve">
+    <value>Outstanding Balance</value>
+    <comment>112658</comment>
+  </data>
+  <data name="RealName" xml:space="preserve">
+    <value>Real Name</value>
+    <comment>112658</comment>
+  </data>
   <data name="Pending" xml:space="preserve">
     <value>Pending</value>
     <comment>117729</comment>
@@ -2377,5 +2413,133 @@
   <data name="DeepLink" xml:space="preserve">
     <value>Deep Link</value>
     <comment>119010</comment>
+  </data>
+  <data name="FundtransferLimit" xml:space="preserve">
+    <value>Fundtransfer Limit</value>
+    <comment>112658</comment>
+  </data>
+  <data name="BetLimit" xml:space="preserve">
+    <value>Bet Limit</value>
+    <comment>112658</comment>
+  </data>
+  <data name="PersonalMessage" xml:space="preserve">
+    <value>Personal Message</value>
+    <comment>112658</comment>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>Active</value>
+    <comment>112658</comment>
+  </data>
+  <data name="Locked" xml:space="preserve">
+    <value>Locked</value>
+    <comment>112658</comment>
+  </data>
+  <data name="Archived" xml:space="preserve">
+    <value>Archived</value>
+    <comment>112658</comment>
+  </data>
+  <data name="UpdateToLockedConfirmMsg" xml:space="preserve">
+    <value>Are you sure you want to change the status of this player to LOCKED?</value>
+    <comment>112658</comment>
+  </data>
+  <data name="UpdateToClosedConfirmMsg" xml:space="preserve">
+    <value>Are you sure you want to change the status of this player to CLOSED?</value>
+    <comment>112658</comment>
+  </data>
+  <data name="UpdateToActiveConfirmMsg" xml:space="preserve">
+    <value>Are you sure you want to change the status of this player to ACTIVE?</value>
+    <comment>112658</comment>
+  </data>
+  <data name="Unknown" xml:space="preserve">
+    <value>Unknown</value>
+    <comment>112658</comment>
+  </data>
+  <data name="PlayerAdminUpdateFailedMsg" xml:space="preserve">
+    <value>Please try again!</value>
+    <comment>112658</comment>
+  </data>
+  <data name="WarningToLockedMsg" xml:space="preserve">
+    <value>Warning, this player cannot be restored forever!</value>
+    <comment>112658</comment>
+  </data>
+  <data name="WarningToClosedMsg" xml:space="preserve">
+    <value>Warning, this player cannot login!</value>
+    <comment>112658</comment>
+  </data>
+  <data name="WarningToActiveMsg" xml:space="preserve">
+    <value>Warning, this player will be able to log in and bet.</value>
+    <comment>112658</comment>
+  </data>
+  <data name="InvalidEmail" xml:space="preserve">
+    <value>Invalid email address</value>
+    <comment>112658</comment>
+  </data>
+  <data name="Player" xml:space="preserve">
+    <value>Player</value>
+    <comment>112658</comment>
+  </data>
+  <data name="VendorMemberID" xml:space="preserve">
+    <value>Vendor Member ID</value>
+    <comment>112658</comment>
+  </data>
+  <data name="IncorrectMaxBetPerDraw" xml:space="preserve">
+    <value>Incorrect Max Bet Per Draw</value>
+    <comment>112658</comment>
+  </data>
+  <data name="MaxBetCanNotGreaterThanMaxBetPerDraw" xml:space="preserve">
+    <value>Max Bet can not be greater than Max Bet Per Draw</value>
+    <comment>112658</comment>
+  </data>
+  <data name="MaxBetPerDrawLessThanOrEqual" xml:space="preserve">
+    <value>Max Bet Per Draw must be less than or equal to</value>
+    <comment>112658</comment>
+  </data>
+  <data name="MaxBetPerDrawMoreThanOrEqual" xml:space="preserve">
+    <value>Max Bet Per Draw must be more than or equal to</value>
+    <comment>112658</comment>
+  </data>
+  <data name="BettingStatement" xml:space="preserve">
+    <value>Betting Statement</value>
+    <comment>112658</comment>
+  </data>
+  <data name="PlayerStatementSupportMonths" xml:space="preserve">
+    <value>Support data up to 18 months</value>
+    <comment>112658</comment>
+  </data>
+  <data name="LastTransfer" xml:space="preserve">
+    <value>Last Transfer</value>
+    <comment>112658</comment>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Refresh</value>
+    <comment>112658</comment>
+  </data>
+  <data name="BankInformation" xml:space="preserve">
+    <value>Bank Information</value>
+    <comment>112658</comment>
+  </data>
+  <data name="Online" xml:space="preserve">
+    <value>Online</value>
+    <comment>112658</comment>
+  </data>
+  <data name="Offline" xml:space="preserve">
+    <value>Offline</value>
+    <comment>112658</comment>
+  </data>
+  <data name="PlaceholderBankAccount" xml:space="preserve">
+    <value>Search by Exactly Bank Account Number</value>
+    <comment>112658</comment>
+  </data>
+  <data name="PlaceholderEmail" xml:space="preserve">
+    <value>Search by Exactly Email</value>
+    <comment>112658</comment>
+  </data>
+  <data name="MatchPrefix" xml:space="preserve">
+    <value>Match prefix e.g</value>
+    <comment>112658</comment>
+  </data>
+  <data name="MatchCase" xml:space="preserve">
+    <value>Match case e.g</value>
+    <comment>112658</comment>
   </data>
 </root>

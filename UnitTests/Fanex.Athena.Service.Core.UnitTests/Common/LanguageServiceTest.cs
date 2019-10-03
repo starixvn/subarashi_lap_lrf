@@ -2,12 +2,17 @@
 {
     using System.Threading;
     using System.Web;
+
     using Core.Common;
     using Core.Common.Interfaces;
     using Core.Users.Interfaces;
+
+    using Fanex.Athena.Model.Auth;
+
     using NSubstitute;
+
     using NUnit.Framework;
-    using Session.Model;
+
     using UnitTest.Common.Helpers;
 
     [TestFixture]
@@ -35,7 +40,7 @@
         {
             // Arrange
             var expectedLanguage = FakeHelper.Create<string>();
-            _sessionService.UserSession.Returns(new UserSession
+            _sessionService.UserSession.Returns(new UserAuthInfo
             {
                 Language = expectedLanguage
             });
@@ -69,7 +74,7 @@
             HttpContext.Current = GetHttpContext();
             HttpContext.Current.Request.Cookies.Add(new HttpCookie(CookieName, ExpectedLanguage));
 
-            _sessionService.UserSession.Returns(new UserSession
+            _sessionService.UserSession.Returns(new UserAuthInfo
             {
                 Language = string.Empty
             });
@@ -88,7 +93,7 @@
             const string DefaultLanguage = "en-US";
             HttpContext.Current = GetHttpContext();
 
-            _sessionService.UserSession.Returns(new UserSession
+            _sessionService.UserSession.Returns(new UserAuthInfo
             {
                 Language = string.Empty
             });
@@ -139,7 +144,7 @@
             HttpContext.Current = GetHttpContext();
             HttpContext.Current.Request.Cookies.Add(new HttpCookie(CookieName, LanguageCode));
 
-            _sessionService.UserSession.Returns(new UserSession
+            _sessionService.UserSession.Returns(new UserAuthInfo
             {
                 Language = LanguageCode
             });

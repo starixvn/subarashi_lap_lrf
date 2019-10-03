@@ -4,15 +4,18 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
-    using Constant.DataDomain;
-    using Extension.Utility;
+    using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using Model.Report.ViewModel;
+
     using Resources;
+
     using Service.Core.Common.Interfaces;
-    using Service.Core.Configuration.Interfaces;
     using Service.Core.Users.Interfaces;
+
     using Web.ActionFilter;
 
     [FunctionAuthorization(PermissionKeys.ReportCasinoTurnover)]
@@ -23,10 +26,9 @@
         public CasinoTurnoverController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             IProductService productService,
             IReportSettingService reportSettingService)
-        : base(languageService, sessionService, appSetting, productService)
+        : base(languageService, sessionService, productService)
         {
             _reportSettingService = reportSettingService;
         }
@@ -39,7 +41,8 @@
                 SessionService.LicenseeSession.LicenseeId,
                 userSession.Language,
                 FunctionNames.CasinoTurnover);
-            var setting = _reportSettingService.GetSetting(PermissionKeys.ReportCasinoTurnover);
+            var setting = _reportSettingService.GetSetting(PermissionKeys.ReportCasinoTurnover,
+                SessionService.LicenseeSession.LicenseeName);
 
             var viewModel = new CasinoTurnoverViewModel
             {

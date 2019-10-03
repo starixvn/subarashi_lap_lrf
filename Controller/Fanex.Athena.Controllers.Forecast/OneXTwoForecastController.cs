@@ -8,13 +8,16 @@ namespace Fanex.Athena.Controllers.Forecast
 {
     using System.Threading.Tasks;
     using System.Web.Mvc;
+
     using DataAccess.Core.Common.Interfaces;
     using DataAccess.Forecast.Interfaces;
-    using Extension.Utility;
+    using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
-    using Model.Core.DataDomain;
+
     using Model.Forecast.MetaModel;
     using Model.Forecast.ViewModel;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
 
@@ -28,10 +31,9 @@ namespace Fanex.Athena.Controllers.Forecast
         public OneXTwoForecastController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             ILeagueDataAccess leagueDataAccess,
             IForecastOneXTwoDataAccess forecastOneXTwoDataAccess)
-        : base(languageService, sessionService, appSetting)
+        : base(languageService, sessionService)
         {
             _leagueDataAccess = leagueDataAccess;
             _forecastOneXTwoDataAccess = forecastOneXTwoDataAccess;
@@ -78,8 +80,9 @@ namespace Fanex.Athena.Controllers.Forecast
         private async Task<ForecastOneXTwoViewModel> GetViewModel(ForecastOneXTwoMetaModel metaModel)
         {
             var model = new ForecastOneXTwoViewModel();
-
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
+            var userSession = SessionService.UserSession;
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList,
+                metaModel.CurrencyId);
 
             var leagueList = await _leagueDataAccess.GetRunningLeagues(metaModel.AgentListXml, metaModel.BetTypeString);
             var currentLeagueId = metaModel.LeagueId;
@@ -99,7 +102,7 @@ namespace Fanex.Athena.Controllers.Forecast
 
             model.Param = metaModel;
             model.LeagueList = leagueList;
-            model.CurrencyList = SessionService.UserSession.CurrencyList;
+            model.CurrencyList = userSession.CurrencyList;
 
             return model;
         }

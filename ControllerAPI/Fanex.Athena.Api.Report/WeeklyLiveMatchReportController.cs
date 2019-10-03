@@ -12,13 +12,17 @@ namespace Fanex.Athena.Api.Report
     using System.Threading.Tasks;
     using System.Web.Hosting;
     using System.Web.Http;
+
     using Excel.Report;
+
     using Fanex.Athena.Api.Base.Attributes;
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
-    using Fanex.Athena.Service.Report;
     using Fanex.Athena.Service.Report.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Model.Report.ResultModel;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
 

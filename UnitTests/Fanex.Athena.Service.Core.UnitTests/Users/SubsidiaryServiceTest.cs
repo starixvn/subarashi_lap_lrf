@@ -3,14 +3,21 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+
     using Core.Users.Interfaces;
+
     using DataAccess.Core.Users.Interfaces;
+
     using Extension.Utility.Interfaces;
+
+    using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Report.DTO;
+
     using Interfaces;
+
     using NSubstitute;
+
     using NUnit.Framework;
-    using Session.Model;
 
     [TestFixture]
     public class SubsidiaryServiceTest
@@ -27,11 +34,11 @@
             _dataAccess = Substitute.For<ISubsidiaryDataAccess>();
             _cache = Substitute.For<IMemoryCacheService>();
             _sessionService = Substitute.For<ISessionService>();
-            _sessionService.LicenseeSession.Returns(new LicenseeSession
+            _sessionService.LicenseeSession.Returns(new LicenseeAuthInfo
             {
                 LicenseeName = LicenseeName
             });
-            _sessionService.UserSession.Returns(new UserSession
+            _sessionService.UserSession.Returns(new UserAuthInfo
             {
                 CurrencyList = new Dictionary<int, string>() { { 20, "UUS" }, { 51, "IDR" }, { 13, "CNY" } },
                 CurrencyAgentList = GetAgentByCurrencyData()

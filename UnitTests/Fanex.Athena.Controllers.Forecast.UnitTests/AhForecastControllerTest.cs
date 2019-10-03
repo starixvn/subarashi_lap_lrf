@@ -3,14 +3,20 @@
     using System.Collections.Specialized;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+
     using Base.UnitTests;
-    using Constant.DataDomain;
+
+    using Model.Core.DataDomain;
     using Model.Forecast.DTO.ForecastAH;
     using Model.Forecast.MetaModel;
     using Model.Forecast.ViewModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Resources;
+
     using Service.Forecast.Interfaces;
 
     public class AhForecastControllerTest : CultureBaseControllerHelperTest
@@ -68,9 +74,9 @@
         [TestCase((int)BetType.FirstHalfOverUnder, 1, 2, 3)]
         [TestCase((int)BetType.Handicap, 3, 2, 1)]
         public async Task Index_CurrentScoreRequestParamIsNull_CalculateCurrenctCoreCorrectly(
-            int betType, 
-            int liveHomeScore, 
-            int liveAwayScore, 
+            int betType,
+            int liveHomeScore,
+            int liveAwayScore,
             int expectedCurrentCore)
         {
             using (var controller = CreateController())

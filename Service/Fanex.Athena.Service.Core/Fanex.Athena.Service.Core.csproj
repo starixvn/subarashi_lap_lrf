@@ -24,7 +24,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
-    <CodeAnalysisRuleSet>Fanex.Athena.Service.Core.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -35,15 +36,14 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
     <CodeAnalysisRuleSet>Fanex.Athena.Service.Core.ruleset</CodeAnalysisRuleSet>
+    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Fanex.Common, Version=1.0.404.97, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Fanex.Common.1.0.404.97\lib\net40\Fanex.Common.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Fanex.Common, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Fanex.Common.1.1.0.1\lib\net40\Fanex.Common.dll</HintPath>
     </Reference>
-    <Reference Include="Fanex.Logging, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Fanex.Logging.2.0.0\lib\net461\Fanex.Logging.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Fanex.Logging, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Fanex.Logging.2.0.1\lib\net461\Fanex.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Flurl, Version=2.8.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Flurl.2.8.2\lib\net40\Flurl.dll</HintPath>
@@ -58,10 +58,6 @@
     </Reference>
     <Reference Include="ONEbook.Security">
       <HintPath>..\..\DLLs\ONEbook.Security\ONEbook.Security.dll</HintPath>
-    </Reference>
-    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\RestSharp.105.2.3\lib\net46\RestSharp.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="SPSRemoting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\SPSRemoting.1.0.0\lib\net40\SPSRemoting.dll</HintPath>
@@ -101,52 +97,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\BetTypeService.cs" />
-    <Compile Include="Common\FunctionService.cs" />
-    <Compile Include="Common\FunctionStorage.cs" />
-    <Compile Include="Common\Interfaces\IFunctionStorage.cs" />
-    <Compile Include="Configuration\Interfaces\IReportSettingService.cs" />
-    <Compile Include="Configuration\ReportSettingService.cs" />
-    <Compile Include="Configuration\LicenseeSettingService.cs" />
-    <Compile Include="Configuration\Interfaces\ILicenseeSettingService.cs" />
+    <Compile Include="Users\Interfaces\ISessionStorage.cs" />
     <Compile Include="Users\Interfaces\ISubsidiaryService.cs" />
+    <Compile Include="Users\SessionStorage.cs" />
     <Compile Include="Users\SubsidiaryService.cs" />
     <Compile Include="Users\AuthService.cs" />
     <Compile Include="Users\Interfaces\IAuthService.cs" />
-    <Compile Include="Users\Interfaces\IOneBookSecurityWrapper.cs" />
-    <Compile Include="Users\OneBookSecurityWrapper.cs" />
     <Compile Include="Users\Interfaces\IOneAuthenticationService.cs" />
     <Compile Include="Common\LanguageService.cs" />
-    <Compile Include="Common\MatchService.cs" />
-    <Compile Include="Common\ProductService.cs" />
-    <Compile Include="Configuration\MoveBetService.cs" />
-    <Compile Include="Exception\ServiceException.cs" />
-    <Compile Include="Common\Interfaces\IBetTypeService.cs" />
     <Compile Include="Common\Interfaces\IExChangeRateService.cs" />
-    <Compile Include="Common\Interfaces\IFunctionService.cs" />
     <Compile Include="Common\Interfaces\ILanguageService.cs" />
-    <Compile Include="Common\Interfaces\IMatchService.cs" />
-    <Compile Include="Common\Interfaces\IProductService.cs" />
-    <Compile Include="Configuration\Interfaces\IMoveBetService.cs" />
     <Compile Include="Users\OneAuthenticationService.cs" />
     <Compile Include="Users\Interfaces\ISessionService.cs" />
     <Compile Include="Users\Interfaces\IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Users\SessionService.cs" />
     <Compile Include="Users\UserService.cs" />
-    <Compile Include="Utility\BetListApiClient.cs" />
     <Compile Include="Utility\CurrencyValidation.cs" />
     <Compile Include="Utility\Interfaces\ICurrencyValidation.cs" />
-    <Compile Include="Utility\Interfaces\IBetListApiClient.cs" />
     <Compile Include="Utility\Interfaces\IProductValidation.cs" />
     <Compile Include="Utility\Interfaces\IValidationService.cs" />
-    <Compile Include="Utility\KeanOceanBusinessHelper.cs" />
     <Compile Include="Utility\ProductValidation.cs" />
     <Compile Include="Utility\ValidationService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Fanex.Athena.Service.Core.ruleset" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -160,13 +135,9 @@
       <Project>{a6be21e8-6895-4863-ba3a-e6b21d3ce78d}</Project>
       <Name>Fanex.Athena.DataAccess.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Infrastructure\Fanex.Athena.Constant\Fanex.Athena.Constant.csproj">
-      <Project>{6B1431E0-E513-48BB-BE86-0756E5F6F405}</Project>
-      <Name>Fanex.Athena.Constant</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Infrastructure\Fanex.Athena.Session\Fanex.Athena.Session.csproj">
-      <Project>{B41E38EF-54AD-4866-968F-C856DE9DC072}</Project>
-      <Name>Fanex.Athena.Session</Name>
+    <ProjectReference Include="..\..\Model\Fanex.Athena.Model.Auth\Fanex.Athena.Model.Auth.csproj">
+      <Project>{794c0345-2ddd-4ffd-a605-bb96fbb37de8}</Project>
+      <Name>Fanex.Athena.Model.Auth</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Model\Fanex.Athena.Model.Core\Fanex.Athena.Model.Core.csproj">
       <Project>{5f410090-94c0-46a5-9fec-b6c3b745b7a0}</Project>
@@ -175,6 +146,10 @@
     <ProjectReference Include="..\..\Resources\Fanex.Athena.Resources\Fanex.Athena.Resources.csproj">
       <Project>{17b0022c-4902-4c61-908a-5db81568dc3a}</Project>
       <Name>Fanex.Athena.Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.Athena.Service.StatelessCore\Fanex.Athena.Service.StatelessCore.csproj">
+      <Project>{DA9A50E3-C62D-4F12-96C2-3AC289D423FE}</Project>
+      <Name>Fanex.Athena.Service.StatelessCore</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -2,10 +2,14 @@
 {
     using System.Data;
     using System.Threading.Tasks;
+
     using Core.UnitTests.TestHelpers;
+
     using Model.Core.DTO.Common;
     using Model.Customer.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
 
     public class GroupComDataAccessTest : BaseDataAccessHelperTest<GroupComDataAccess>
@@ -25,7 +29,7 @@
             DataAccess.GetObjectDb(Arg.Is(GetLicenseeGroupCommSp)).Returns(ObjectDb);
 
             // Action
-            await DataAccess.GetAll(LicenseeId);
+            await DataAccess.GetAllAsync(LicenseeId);
 
             // Assert
             ObjectDb.Received(1).SetParameterValue("LicenseeID", LicenseeId);
@@ -39,7 +43,7 @@
             ObjectDb.ExecuteDataSetAsync().Returns(new DataSet());
 
             // Action
-            await DataAccess.GetDataForExcel(LicenseeId);
+            await DataAccess.GetDataForExcelAsync(LicenseeId);
 
             // Assert
             ObjectDb.Received(1).SetParameterValue("LicenseeID", LicenseeId);
@@ -57,7 +61,7 @@
             ObjectDb.ExecuteDataSetAsync().Returns(dataSet);
 
             // Action
-            var result = await DataAccess.GetDataForExcel(LicenseeId);
+            var result = await DataAccess.GetDataForExcelAsync(LicenseeId);
 
             // Assert
             Assert.That(result, Is.EqualTo(dataTable));
@@ -92,7 +96,7 @@
             var request = new Request();
 
             // Action
-            await DataAccess.InsertGroup(item, request, UserId);
+            await DataAccess.InsertGroupAsync(item, request, UserId);
 
             // Assert
             Assert.Multiple(() =>
@@ -126,7 +130,7 @@
             var request = new Request();
 
             // Action
-            await DataAccess.UpdateGroup(newItem, request, UserId);
+            await DataAccess.UpdateGroupAsync(newItem, request, UserId);
 
             // Assert
             Assert.Multiple(() =>
@@ -184,7 +188,7 @@
             DataAccess.GetObjectDb(Arg.Is("Lrf_LicenseeGroupCommDel")).Returns(ObjectDb);
 
             // Action
-            await DataAccess.DeleteGroup(GroupId, LicenseeId, UserId, Ip, Language, IsRemoveCommSetting, IsResetDefault);
+            await DataAccess.DeleteGroupAsync(GroupId, LicenseeId, UserId, Ip, Language, IsRemoveCommSetting, IsResetDefault);
 
             // Assert
             Assert.Multiple(() =>

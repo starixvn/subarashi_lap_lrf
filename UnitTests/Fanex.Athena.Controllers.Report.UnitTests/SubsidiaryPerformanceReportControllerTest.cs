@@ -7,17 +7,16 @@
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Script.Serialization;
-    using Constant.DataDomain;
+    using Model.Core.DataDomain;
     using Fanex.Athena.Controllers.Base.UnitTests;
-    using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Core.MetaModel.Product;
     using Fanex.Athena.Model.Report.ViewModel;
-    using Fanex.Athena.Service.Core.Common.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.Report.Interfaces;
     using NSubstitute;
     using NUnit.Framework;
-    using Session.Enum;
 
     [TestFixture]
     public class SubsidiaryPerformanceReportControllerTest : CultureBaseControllerHelperTest
@@ -25,12 +24,10 @@
         private const string FakeProductCode = "TestingCode";
         private const string FakeProductName = "Testing Product Name";
 
-        private static readonly ReadOnlyCollection<string> BaseCurrencyList = new ReadOnlyCollection<string>(
-            new List<string> { "EUR", "USD", "GBP", "MYR", "CNY", "THB", "IDR" });
-
         private ISubsidiaryService _subsidiaryService;
-        private ISubsidiaryPerformanceService _service;
         private JavaScriptSerializer _serializer;
+
+        public ISubsidiaryPerformanceService Service { get; set; }
 
         [SetUp]
         public void SetUp()
@@ -38,7 +35,7 @@
             SetUpDefaultFakeData();
 
             _subsidiaryService = Substitute.For<ISubsidiaryService>();
-            _service = Substitute.For<ISubsidiaryPerformanceService>();
+            Service = Substitute.For<ISubsidiaryPerformanceService>();
             _serializer = new JavaScriptSerializer();
         }
 
@@ -51,7 +48,7 @@
                 var operatorList = new List<string> { "New York", "India", "Irag", "China" };
                 _subsidiaryService.GetSubsidiaryNames().Returns(operatorList);
 
-                SessionService.UserSession.Returns(new Session.Model.UserSession
+                SessionService.UserSession.Returns(new UserAuthInfo
                 {
                     IsManageableSubsidiary = true,
                     Language = DefaultUserSession.Language
@@ -86,7 +83,7 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                SessionService.UserSession.Returns(new Session.Model.UserSession
+                SessionService.UserSession.Returns(new UserAuthInfo
                 {
                     IsManageableSubsidiary = false,
                     Language = DefaultUserSession.Language
@@ -134,7 +131,6 @@
             return new SubsidiaryPerformanceReportController(
                 LangService,
                 SessionService,
-                AppSettings,
                 productService,
                 _subsidiaryService);
         }

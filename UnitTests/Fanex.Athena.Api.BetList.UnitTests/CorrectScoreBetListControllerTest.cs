@@ -3,10 +3,14 @@
     using System.Collections.Generic;
     using System.Net.Http;
     using System.Threading.Tasks;
+
+    using Fanex.Athena.Model.Auth;
+
     using Model.BetList.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
-    using Session.Model;
 
     public class CorrectScoreBetListControllerTest : ApiBetListBaseControllerHelperTest
     {
@@ -19,7 +23,7 @@
         {
             MockSessionData();
 
-            AuthorizationService.HasPermissionOnData(SessionLicenseeId, Arg.Any<int>(), Arg.Any<long>()).Returns(true);
+            AuthorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), Arg.Any<int>(), Arg.Any<long>()).Returns(true);
         }
 
         [TestCase(0)]
@@ -31,9 +35,15 @@
                 // Arrange
                 var metaModel = new BetListMetaModel
                 {
-                    CurrencyId = currencyId
+                    CurrencyId = currencyId,
                 };
-                StubUserSessionData(new UserSession { Language = SessionLanguage, CurrencyList = new Dictionary<int, string> { { currencyId, "Test" } } });
+                StubUserSessionData(new UserAuthInfo
+                {
+                    Language = SessionLanguage,
+                    CurrencyList = new Dictionary<int, string> { { currencyId, "Test" } },
+                    CurrencyAgentList = new Dictionary<int, int[]>()
+                }
+                );
 
                 var expect = new HttpResponseMessage();
                 StubBetListApiPostAsync(metaModel, ApiPath, expect);

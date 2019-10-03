@@ -1,25 +1,28 @@
 ﻿namespace Fanex.Athena.Controllers.UnitTests
 {
     using System.Collections.Generic;
-    using System.Threading.Tasks;
     using System.Web.Mvc;
+
     using Base.UnitTests;
-    using Model.Core.DTO.Common;
+    using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Model.Core.ViewModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
-    using Service.Core.Common.Interfaces;
 
     [TestFixture]
     public partial class MenuControllerTest : CultureBaseControllerHelperTest
     {
         private IFunctionService _functionService;
-
+        ILicenseeSettingService _licenseeSettingService;
         [SetUp]
         public void SetUp()
         {
             _functionService = Substitute.For<IFunctionService>();
-
+            _licenseeSettingService = Substitute.For<ILicenseeSettingService>();
             SetUpDefaultFakeData();
         }
 
@@ -27,6 +30,7 @@
         public void TearDown()
         {
             _functionService = null;
+            _licenseeSettingService = null;
         }
 
         [Test]
@@ -51,10 +55,9 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                SessionService.UserSession.FunctionIdList = new int[] { 1, 2, 3 };
+                SessionService.UserSession.FunctionList = new List<Function> { new Function { FunctionId = 1, FunctionKey = "1" } };
                 _functionService.Functions.Returns(new List<Function>());
-                AppSettings.FakeLicenseeList.Returns(new[] { DefaultLicenseeSession.LicenseeId });
-
+                _licenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(true);
                 // Action
                 var result = controller.Index() as ViewResult;
                 var viewModel = result.Model as MenuViewModel;
@@ -73,7 +76,7 @@
 
         private MenuController CreateController()
         {
-            return new MenuController(LangService, SessionService, AppSettings, _functionService);
+            return new MenuController(LangService, SessionService, _functionService, _licenseeSettingService);
         }
     }
 }

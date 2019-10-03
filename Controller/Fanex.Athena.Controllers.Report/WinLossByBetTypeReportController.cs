@@ -12,18 +12,23 @@ namespace Fanex.Athena.Controllers.Report
     using System.Threading.Tasks;
     using System.Web.Hosting;
     using System.Web.Mvc;
+
     using DataAccess.Core.Configuration.Interfaces;
     using DataAccess.Report.Interfaces;
-    using Extension.Utility;
+
     using Fanex.Athena.Excel.Base.Entities;
     using Fanex.Athena.Excel.Report;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
     using Fanex.Athena.Web.ResultExtension;
-    using Model.Core.DataDomain;
+
     using Model.Core.DTO.Common;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
 
@@ -37,11 +42,10 @@ namespace Fanex.Athena.Controllers.Report
         public WinLossByBetTypeReportController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             IProductService productService,
             IBalanceUpDataAccess balanceUpDataAccess,
             IWinLossByBetTypeDataAccess winLossByBetTypeDataAccess)
-            : base(languageService, sessionService, appSetting, productService)
+            : base(languageService, sessionService, productService)
         {
             _balanceUpDataAccess = balanceUpDataAccess;
             _winLossByBetTypeDataAccess = winLossByBetTypeDataAccess;
@@ -81,7 +85,8 @@ namespace Fanex.Athena.Controllers.Report
         {
             var licenseeSession = SessionService.LicenseeSession;
             var userSession = SessionService.UserSession;
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList
+                , metaModel.CurrencyId);
 
             var reportData = await _winLossByBetTypeDataAccess.GetDataList(metaModel);
 

@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.BetList.MetaModel;
     using NSubstitute;
     using NUnit.Framework;
@@ -11,6 +12,7 @@
 
     public class PendingFundsBetListControllerTest : BetListBaseControllerHelperTest
     {
+       
         [OneTimeSetUp]
         public override void FixtureSetUp()
         {
@@ -68,8 +70,6 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                const string AgentListXml = "<xml/>";
-
                 var metaModel = new BetListExcelMetaModel
                 {
                     IsExportExcel = true,
@@ -80,13 +80,9 @@
                     SystemId = "System"
                 };
 
-                var fakeLicensees = isFakeLicensee ? new[] { DefaultLicenseeSession.LicenseeId } : Enumerable.Empty<int>();
-                AppSettings.FakeLicenseeList.Returns(fakeLicensees);
-
+                LicenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(isFakeLicensee);
                 var currencyTitle = string.Format(ViewResources.Viewin, expectedCurrency);
                 var expectedTitle = $"Running {ViewResources.BetList} - External{(isFakeLicensee ? "" : "(System)")} - {currencyTitle}";
-
-                SessionService.GenerateAgentListXml(metaModel.CurrencyId, false).Returns(AgentListXml);
 
                 controller.When(async x => await x.ProcessExportExcel(
                     Arg.Any<BetListExcelMetaModel>(),
@@ -104,7 +100,7 @@
                         && string.Join(",", x.HiddenColumns) == "1,2,7,8,9"
                         && x.LicenseeId == DefaultLicenseeSession.LicenseeId
                         && !x.IsShowSumStake
-                        && x.AgentListXml == AgentListXml),
+                        ),
                     "CustomerPendingFundsBetList",
                     null);
             }
@@ -115,11 +111,10 @@
             return Substitute.ForPartsOf<PendingFundsBetListController>(
                 LangService,
                 SessionService,
-                AppSettings,
                 ProductService,
                 BalanceUpDataAccess,
                 CacheRefAdapter,
-                BetListApiClient);
+                BetListApiClient, LicenseeSettingService);
         }
     }
 }

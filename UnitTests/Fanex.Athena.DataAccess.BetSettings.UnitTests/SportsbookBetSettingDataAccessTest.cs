@@ -4,12 +4,18 @@
     using System.Data;
     using System.Linq;
     using System.Threading.Tasks;
+
     using Core.UnitTests.TestHelpers;
+
     using Fanex.Athena.Extension.Utility;
+
     using Model.BetSettings.DTO;
     using Model.Core.DTO.Common;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Utility;
 
     [TestFixture]

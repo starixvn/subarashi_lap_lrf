@@ -1,0 +1,130 @@
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { ActionCreators } from '../actions';
+import BetListDataGrid from '@jsroot/components/betlist/BetListDataGrid';
+import AppData from '@jsroot/lib/AppData';
+import Service from '../lib/service';
+import LangHelper from '@jsroot/lib/langHelper';
+
+export class DataGrid extends Component {
+    constructor(props) {
+        super(props);
+
+        this.headerText = Service.getHeaderText();
+        this.totalText = Service.getTotalText();
+
+        this.state = {
+            data: null,
+            total: null,
+            totalRows: 0
+        };
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.requestParam.TimeStamp !== this.props.requestParam.TimeStamp) {
+            this._getData(this.props.requestParam);
+        }
+    }
+
+    componentDidMount() {
+        this._getData(this.props.requestParam);
+    }
+
+    getHeaderName = (column) => {
+        return this.headerText[column];
+    }
+
+    getResource = (key) => {
+        return LangHelper.getSingleResource(key);
+    }
+
+    afterLoad = () => {
+        this.props.toggleLoader(false);
+    }
+
+    onSort = (sortBy, sortOrder) => {
+        let param = { ...this.props.requestParam };
+
+        param.SortBy = sortBy;
+        param.SortOrder = sortOrder;
+
+        this._getData(param);
+        this.props.setRequestParam(param);
+    }
+
+    onPaging = (index, size) => {
+        let param = { ...this.props.requestParam };
+
+        param.PageIndex = index;
+        param.PageSize = size;
+
+        this._getData(param);
+        this.props.setRequestParam(param);
+    }
+
+    _updateState(data, total, totalRows) {
+        this.setState({
+            data: data,
+            total: total,
+            totalRows: totalRows
+        });
+    }
+
+    _handleError() {
+        Service.showErrorMsg();
+        this.props.toggleLoader(false);
+    }
+
+    _getData(param) {
+        this.props.toggleLoader(true);
+
+        Service.getData(param, this._updateState.bind(this), null, this._handleError.bind(this));
+    }
+
+    render() {
+        const { data, total, totalRows } = this.state;
+        const requestParam = this.props.requestParam
+
+        const pageOption = {
+            PageIndex: requestParam.PageIndex,
+            PageSize: requestParam.PageSize,
+            TotalItem: totalRows,
+            PageList: [50, 100, 200, 300, 400, 500, 1000, 2000]
+        };
+
+        return <BetListDataGrid
+            isPaging={true}
+            pageOption={pageOption}
+            onPaging={this.onPaging}
+            getHeaderNameFunc={this.getHeaderName}
+            columns={['Index', 'RefNo', 'TransTime', 'Choice', 'Odds', 'OddsType', 'Stake', 'Status', 'Platform', 'Live']}
+            columnWidths={[40, 110, 150, 400, 70, 70, 100, 80, 80, 80]}
+            sortableColumns={['Stake']}
+            totalColumns={['Stake']}
+            columnAlignments={[
+                'center-align', 'center-align', 'center-align',
+                'right-align', 'right-align', 'right-align', 'right-align',
+                'center-align', 'center-align', 'center-align'
+            ]}
+            data={data}
+            total={total}
+            totalText={this.totalText}
+            afterLoad={this.afterLoad}
+            onSort={this.onSort}
+            adjustedHeight={-20}
+            getResourceFunc={this.getResource}
+        />
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    const { toggleLoader, setRequestParam } = ActionCreators;
+    return bindActionCreators({ toggleLoader, setRequestParam }, dispatch);
+}
+function mapStateToProps(state) {
+    const { requestParam } = state;
+    return Object.assign({}, { requestParam });
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(DataGrid);

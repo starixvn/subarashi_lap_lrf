@@ -4,14 +4,21 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using Base.UnitTests;
+
     using Excel.Report;
+
     using Fanex.Athena.Service.Report.Interfaces;
+
     using Model.Report.DTO;
     using Model.Report.MetaModel;
     using Model.Report.ResultModel;
+
     using NPOI.SS.UserModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
 
     internal class WeeklyLiveMatchReportControllerTest : BaseApiControllerHelperTest

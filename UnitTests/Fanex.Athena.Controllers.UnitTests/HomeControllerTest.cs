@@ -1,28 +1,36 @@
 ﻿namespace Fanex.Athena.Controllers.UnitTests
 {
-    using System.Web.Mvc;
     using Base.UnitTests;
+
+    using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using NSubstitute;
+
     using NUnit.Framework;
-    using Service.Core.Configuration.Interfaces;
-    using Session.Model;
+
+    using System.Web.Mvc;
 
     [TestFixture]
     public partial class HomeControllerTest : CultureBaseControllerHelperTest
     {
         private ILicenseeSettingService _licenseeSettingService;
 
+        [TearDown]
+        public void TearDown()
+        {
+            _licenseeSettingService = null;
+        }
         [OneTimeSetUp]
         public override void FixtureSetUp()
         {
             base.FixtureSetUp();
-            _licenseeSettingService = Substitute.For<ILicenseeSettingService>();
         }
 
         [SetUp]
         public void SetUp()
         {
             SetUpDefaultFakeData();
+            _licenseeSettingService = Substitute.For<ILicenseeSettingService>();
         }
 
         [Test]
@@ -31,7 +39,7 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                StubUserSessionData(new UserSession
+                StubUserSessionData(new UserAuthInfo
                 {
                     UserId = 0
                 });
@@ -78,7 +86,7 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                StubUserSessionData(new UserSession
+                StubUserSessionData(new UserAuthInfo
                 {
                     UserId = 1,
                     UserName = string.Empty
@@ -163,7 +171,7 @@
 
                 AppSettings.LocalTest.Returns(true);
 
-                StubUserSessionData(new UserSession
+                StubUserSessionData(new UserAuthInfo
                 {
                     UserId = 0,
                     IsInternal = isInternal
@@ -220,7 +228,7 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                StubUserSessionData(new UserSession
+                StubUserSessionData(new UserAuthInfo
                 {
                     UserId = 0
                 });
@@ -259,9 +267,8 @@
         {
             return new HomeController(
                 LangService,
-                SessionService,
-                AppSettings,
-                _licenseeSettingService)
+                SessionService, _licenseeSettingService, AppSettings
+                )
             {
                 ControllerContext = ControllerContext
             };

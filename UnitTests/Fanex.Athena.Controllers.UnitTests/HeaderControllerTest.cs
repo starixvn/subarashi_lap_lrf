@@ -1,16 +1,26 @@
 ﻿namespace Fanex.Athena.Controllers.UnitTests
 {
     using System.Web.Mvc;
+
     using Controllers.Base.UnitTests;
+
     using DataAccess.Core.Users.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.ViewModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
 
     public class HeaderControllerTest : CultureBaseControllerHelperTest
     {
         private ILicenseeDataAccess _licenseeDataAccess;
-
+        private ILicenseeSettingService _licenseeSettingService;
+        [SetUp]
+        public void SetUp()
+        {
+            _licenseeSettingService = Substitute.For<ILicenseeSettingService>();
+        }
         [OneTimeSetUp]
         public override void FixtureSetUp()
         {
@@ -53,8 +63,7 @@
                 AppSettings.LocalTest.Returns(!HasRecheckIn);
 
                 const bool IsFakeLicensee = true;
-                AppSettings.FakeLicenseeList.Returns(new[] { DefaultLicenseeSession.LicenseeId });
-
+                _licenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(IsFakeLicensee);
                 // Action
                 var result = controller.Index() as ViewResult;
                 var model = (HeaderPageViewModel)result.Model;
@@ -151,7 +160,7 @@
                 var result = controller.ChangeLanguage(languagesite);
 
                 // Assert
-                Assert.That(result, Is.EqualTo("0")); 
+                Assert.That(result, Is.EqualTo("0"));
             }
         }
 
@@ -177,7 +186,8 @@
 
         private HeaderController CreateController()
         {
-            return new HeaderController(LangService, SessionService, AppSettings, _licenseeDataAccess);
+            return new HeaderController(LangService, SessionService, AppSettings,
+                _licenseeDataAccess, _licenseeSettingService);
         }
     }
 }

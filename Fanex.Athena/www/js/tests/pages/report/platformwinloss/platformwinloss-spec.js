@@ -109,7 +109,7 @@
                     spyOn(Site, "unBlockUI");
 
                     jasmine.Ajax
-                            .stubRequest("api/PlatformWinLossReport/Index")
+                            .stubRequest("PlatformWinLossReport/Index")
                             .andReturn({
                                 responseText: JSON.stringify({
                                     dataList: data
@@ -238,7 +238,7 @@
                     spyOn(Report, "ValidProducts").and.returnValue(true);
 
                     jasmine.Ajax
-                            .stubRequest("api/PlatformWinLossReport/Index")
+                            .stubRequest("PlatformWinLossReport/Index")
                             .andReturn({
                                 responseText: JSON.stringify({
                                     dataList: [{ index: 1 }, { index: 2 }, { index: 4 }]
@@ -328,7 +328,7 @@
                     };
 
                     jasmine.Ajax
-                            .stubRequest("api/PlatformWinLossReport/Index")
+                            .stubRequest("PlatformWinLossReport/Index")
                             .andReturn({
                                 responseText: JSON.stringify({
                                     dataList: [{ index: 1 }, { index: 2 }, { index: 4 }]
@@ -514,7 +514,7 @@
                     spyOn(Site, "unBlockUI");
 
                     jasmine.Ajax
-                            .stubRequest("api/PlatformWinLossReport/Index")
+                            .stubRequest("PlatformWinLossReport/Index")
                             .andReturn({
                                 responseText: JSON.stringify({
                                     dataList: data
@@ -669,7 +669,7 @@
                     spyOn(Report, "ValidProducts").and.returnValue(true);
 
                     jasmine.Ajax
-                            .stubRequest("api/PlatformWinLossReport/Index")
+                            .stubRequest("PlatformWinLossReport/Index")
                             .andReturn({
                                 responseText: JSON.stringify({
                                     dataList: [{ index: 1 }, { index: 2 }, { index: 4 }]
@@ -834,7 +834,7 @@
                     });
 
                     jasmine.Ajax
-                            .stubRequest("api/PlatformWinLossReport/Index")
+                            .stubRequest("PlatformWinLossReport/Index")
                             .andReturn({
                                 responseText: JSON.stringify({
                                     dataList: data,
@@ -905,7 +905,7 @@
                     spyOn(Report, "ValidProducts").and.returnValue(true);
 
                     jasmine.Ajax
-                            .stubRequest("api/PlatformWinLossReport/Index")
+                            .stubRequest("PlatformWinLossReport/Index")
                             .andReturn({
                                 responseText: JSON.stringify({
                                     dataList: [{ index: 1 }, { index: 2 }, { index: 4 }]

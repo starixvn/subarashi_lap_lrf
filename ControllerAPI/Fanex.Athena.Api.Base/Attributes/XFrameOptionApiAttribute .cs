@@ -7,9 +7,10 @@
     using System.Threading;
     using System.Threading.Tasks;
     using System.Web.Http.Filters;
-    using Attributes.Extensions;
-    using Session.Enum;
-    using Session.Interfaces;
+
+    using Fanex.Athena.Api.StatelessBase.Attributes.Extensions;
+    using Fanex.Athena.Model.Auth.Enum;
+    using Fanex.Athena.Service.Core.Users.Interfaces;
 
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public sealed class XFrameOptionApiAttribute : ActionFilterAttribute
@@ -35,7 +36,7 @@
             {
                 var scope = actionExecutedContext.Request.GetDependencyScope();
                 var sessionStorage = scope.Resolve<ISessionStorage>();
-                var user = sessionStorage.UserSession;
+                var user = sessionStorage.UserAuthInfo;
 
                 IEnumerable<string> headerValues;
 

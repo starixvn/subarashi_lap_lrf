@@ -13,22 +13,30 @@ namespace Fanex.Athena.Api.Report
     using System.Threading.Tasks;
     using System.Web.Hosting;
     using System.Web.Http;
+
     using Base.Attributes;
+
     using DataAccess.Report.Interfaces;
+
     using Excel.Report.Models;
+
     using Fanex.Athena.Excel.Base.Entities;
     using Fanex.Athena.Excel.Report;
     using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Extension.Utility;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Utility;
+
     using Model.Core.DataDomain;
     using Model.Core.MetaModel.Product;
     using Model.Core.ResultModel;
+
     using Service.Core.Common.Interfaces;
-    using Service.Core.Configuration.Interfaces;
     using Service.Core.Users.Interfaces;
 
     [ApiFunctionAuthorization(PermissionKeys.ReportLicenseeWinLoss)]
@@ -295,7 +303,8 @@ namespace Fanex.Athena.Api.Report
             int custId = 0,
             string currencyName = null)
         {
-            metaModel.DefaultBaseCurrency = SessionService.UserSession.DefaultBaseCurrency;
+            var userSession = SessionService.UserSession;
+            metaModel.DefaultBaseCurrency = userSession.DefaultBaseCurrency;
             metaModel.DrillDownLevel = level;
             metaModel.DrillDownFromDate = fdate.HasValue ? fdate.Value : metaModel.DrillDownFromDate;
             metaModel.DrillDownToDate = tdate.HasValue ? tdate.Value : metaModel.DrillDownToDate;
@@ -307,7 +316,8 @@ namespace Fanex.Athena.Api.Report
                 metaModel.DrillDownCurrencyName = currencyName;
                 metaModel.DrillDownCustomerId = custId;
 
-                metaModel.AgentListXml = SessionService.GenerateAgentListXml(level == 0 ? metaModel.CurrencyId : currencyId, metaModel.IsExcludedTestData);
+                metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList,
+                    level == 0 ? metaModel.CurrencyId : currencyId, metaModel.IsExcludedTestData);
                 var result = await GetData(metaModel);
 
                 if (metaModel.IsExportExcel)
@@ -334,7 +344,8 @@ namespace Fanex.Athena.Api.Report
 
         protected internal virtual bool IsValidParams(LicenseeWinLossMetaModel metaModel)
         {
-            var setting = _reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss);
+            var setting = _reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss,
+                SessionService.LicenseeSession.LicenseeName);
             if (setting == null)
             {
                 return true;

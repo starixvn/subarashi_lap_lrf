@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Base.UnitTests;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using Model.Report.ViewModel;
@@ -52,7 +53,7 @@
                 LangService,
                 SessionService,
                 AppSettings,
-                productService);
+                productService, Substitute.For<ILicenseeSettingService>());
         }
     }
 }

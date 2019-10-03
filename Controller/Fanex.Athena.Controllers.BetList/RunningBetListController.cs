@@ -8,17 +8,23 @@ namespace Fanex.Athena.Controllers.BetList
 {
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Constant.DataDomain;
+
     using DataAccess.Core.Configuration.Interfaces;
-    using Extension.Utility;
-    using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Utility;
+
     using Model.BetList.MetaModel;
     using Model.BetList.ViewModel;
+    using Model.Core.DataDomain;
+
     using Resources;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-    using Service.Core.Utility.Interfaces;
+
     using VendorAdapter.Interfaces;
+
     using Web.ActionFilter;
 
     /// <summary>
@@ -36,14 +42,13 @@ namespace Fanex.Athena.Controllers.BetList
         public RunningBetListController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             IProductService productService,
             IBalanceUpDataAccess balanceUpDataAccess,
             ICacheRefAdapter cacheRefAdapter,
-            IBetListApiClient betListApiClient)
-        : base(languageService, sessionService, appSetting, productService, balanceUpDataAccess, cacheRefAdapter, betListApiClient)
-        {
-        }
+            IBetListApiClient betListApiClient, ILicenseeSettingService licenseeSettingService)
+        : base(languageService, sessionService, productService, balanceUpDataAccess,
+              cacheRefAdapter, betListApiClient, licenseeSettingService)
+        { }
 
         [HttpGet]
         [FunctionAuthorization(PermissionKeys.TotalBetCleanSheet)]
@@ -89,7 +94,7 @@ namespace Fanex.Athena.Controllers.BetList
 
             if (metaModel.IsExportExcel)
             {
-                metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
+                metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId);
                 return await Excel(metaModel, uspKey).ConfigureAwait(false);
             }
 

@@ -11,12 +11,16 @@
     using System.Web.Http.Controllers;
     using System.Web.Http.Dependencies;
     using System.Web.Http.Filters;
+
     using Extension.Utility;
-    using Extensions;
+
+    using Fanex.Athena.Api.StatelessBase.Attributes.Extensions;
+    using Fanex.Athena.Model.Auth.Enum;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Resources;
+
     using Service.Core.Users.Interfaces;
-    using Session.Enum;
 
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true)]
     public sealed class ApiFunctionAuthorizationAttribute : FilterAttribute, IAuthorizationFilter
@@ -65,7 +69,7 @@
                     antiForgeryService.Validate();
                 }
             }
-            catch
+            catch (Exception)
             {
                 return UnauthorizeAccessHandlerAsync(actionContext);
             }
@@ -112,8 +116,8 @@
             {
                 var authorizationService = scope.Resolve<IAuthorizationService>();
                 authorized = userSession.ApplicationMode == AppMode.Parasitic ?
-                    authorizationService.HasPermissions(userSession.PortalFunctionList, _permissionKeys) :
-                    authorizationService.HasPermissions(userSession.FunctionIdList, _permissionKeys);
+                    userSession.IsSuperAdmin || authorizationService.HasPermissions(userSession.PortalFunctionList, _permissionKeys) :
+                    authorizationService.HasPermissions(userSession.FunctionList, _permissionKeys);
             }
 
             return authorized;

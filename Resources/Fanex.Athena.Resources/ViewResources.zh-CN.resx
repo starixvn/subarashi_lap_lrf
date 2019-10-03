@@ -1505,7 +1505,8 @@
     <value>This customer has never played {0}.</value>
   </data>
   <data name="UpdateSuccess" xml:space="preserve">
-    <value>Update successfully!</value>
+    <value>更新成功!</value>
+    <comment>112658</comment>
   </data>
   <data name="UpdateUnSuccess" xml:space="preserve">
     <value>Update unsucessfully!</value>
@@ -1578,7 +1579,7 @@
     <value>The RNG Keno bet setting of {0} was updated successfully</value>
   </data>
   <data name="InvalidParams" xml:space="preserve">
-    <value>Invalid parameters</value>
+    <value>无效的参数</value>
   </data>
   <data name="RB" xml:space="preserve">
     <value>赛马</value>
@@ -1623,7 +1624,7 @@
     <value>Enable AG Casino</value>
   </data>
   <data name="UpdateAgCasinoBetSettings" xml:space="preserve">
-    <value>Are you sure you want to update all AG Casino bet settings?</value>
+    <value>确定更新所有AG娱乐城的投注设定吗?</value>
     <comment>#19458</comment>
   </data>
   <data name="UpdateAgCasinoBetSettingSuccessMsg" xml:space="preserve">
@@ -2019,5 +2020,184 @@
   <data name="ProductCC" xml:space="preserve">
     <value>嘻嘻俱乐部</value>
     <comment>115449</comment>
+  </data>
+  <data name="BettingStatement" xml:space="preserve">
+    <value>投注详情</value>
+    <comment>112658</comment>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>活跃</value>
+    <comment>112658</comment>
+  </data>
+  <data name="AdvancedSearch" xml:space="preserve">
+    <value>进阶搜寻</value>
+    <comment>112658</comment>
+  </data>
+  <data name="AlertSetOddsGroupForCustomerMsg" xml:space="preserve">
+    <value>确定将此玩家移至odds group {0}?</value>
+    <comment>112658</comment>
+  </data>
+  <data name="BankAccountNumber" xml:space="preserve">
+    <value>银行账号</value>
+    <comment>112658</comment>
+  </data>
+  <data name="BetLimit" xml:space="preserve">
+    <value>投注金额</value>
+    <comment>112658</comment>
+  </data>
+  <data name="CurrentBalance" xml:space="preserve">
+    <value>目前余额</value>
+    <comment>112658</comment>
+  </data>
+  <data name="DetailedBetlist" xml:space="preserve">
+    <value>投注明细历史</value>
+    <comment>112658</comment>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>信箱</value>
+    <comment>112658</comment>
+  </data>
+  <data name="FundtransferLimit" xml:space="preserve">
+    <value>转账额度</value>
+    <comment>112658</comment>
+  </data>
+  <data name="GrandPrizeNote" xml:space="preserve">
+    <value>头奖:会员余额不包含头奖奖金</value>
+    <comment>112658</comment>
+  </data>
+  <data name="IncorrectMaxBetPerDraw" xml:space="preserve">
+    <value>错误的每局最大下注额</value>
+    <comment>112658</comment>
+  </data>
+  <data name="InvalidEmail" xml:space="preserve">
+    <value>无效的信箱地址</value>
+    <comment>112658</comment>
+  </data>
+  <data name="LastLoginIP" xml:space="preserve">
+    <value>最后登入IP位置</value>
+    <comment>112658</comment>
+  </data>
+  <data name="LastTransaction" xml:space="preserve">
+    <value>最后交易</value>
+    <comment>112658</comment>
+  </data>
+  <data name="Locked" xml:space="preserve">
+    <value>锁定</value>
+    <comment>112658</comment>
+  </data>
+  <data name="MaxBetCanNotGreaterThanMaxBetPerDraw" xml:space="preserve">
+    <value>最大下注金额不能超过每局最大下注额</value>
+    <comment>112658</comment>
+  </data>
+  <data name="MaxBetPerDrawLessThanOrEqual" xml:space="preserve">
+    <value>需小于或等于每局最大下注额</value>
+    <comment>112658</comment>
+  </data>
+  <data name="MaxBetPerDrawMoreThanOrEqual" xml:space="preserve">
+    <value>需大于或等于每局最大下注额</value>
+    <comment>112658</comment>
+  </data>
+  <data name="OutstandingBalance" xml:space="preserve">
+    <value>未结余额</value>
+    <comment>112658</comment>
+  </data>
+  <data name="PersonalMessage" xml:space="preserve">
+    <value>个人讯息</value>
+    <comment>112658</comment>
+  </data>
+  <data name="Player" xml:space="preserve">
+    <value>玩家</value>
+    <comment>112658</comment>
+  </data>
+  <data name="PlayerAdminUpdateFailedMsg" xml:space="preserve">
+    <value>请重试一次!</value>
+    <comment>112658</comment>
+  </data>
+  <data name="PlayerStatementSupportMonths" xml:space="preserve">
+    <value>数据最多只支持18个月</value>
+    <comment>112658</comment>
+  </data>
+  <data name="PreviousSearchResult" xml:space="preserve">
+    <value>前次搜寻结果</value>
+    <comment>112658</comment>
+  </data>
+  <data name="ProblemDisplayBetSetting" xml:space="preserve">
+    <value>无法显示投注设定群组的细节</value>
+    <comment>112658</comment>
+  </data>
+  <data name="RealName" xml:space="preserve">
+    <value>真实姓名</value>
+    <comment>112658</comment>
+  </data>
+  <data name="TransactionDetail" xml:space="preserve">
+    <value>账目明细</value>
+    <comment>112658</comment>
+  </data>
+  <data name="Unknown" xml:space="preserve">
+    <value>未知</value>
+    <comment>112658</comment>
+  </data>
+  <data name="UpdateProductBetSettings" xml:space="preserve">
+    <value>确定更新所有 {0} 的投注设定吗?</value>
+    <comment>112658</comment>
+  </data>
+  <data name="UpdateToActiveConfirmMsg" xml:space="preserve">
+    <value>确定要将此玩家更改为活跃吗?</value>
+    <comment>112658</comment>
+  </data>
+  <data name="UpdateToClosedConfirmMsg" xml:space="preserve">
+    <value>确定要将此玩家更改为关闭吗?</value>
+    <comment>112658</comment>
+  </data>
+  <data name="UpdateToLockedConfirmMsg" xml:space="preserve">
+    <value>确定要将此玩家更改为锁定吗?</value>
+    <comment>112658</comment>
+  </data>
+  <data name="VendorMemberID" xml:space="preserve">
+    <value>厂商会员标识符</value>
+    <comment>112658</comment>
+  </data>
+  <data name="WarningToActiveMsg" xml:space="preserve">
+    <value>警告，此玩家将允许登入和下注!</value>
+    <comment>112658</comment>
+  </data>
+  <data name="WarningToClosedMsg" xml:space="preserve">
+    <value>警告，此玩家无法登入!</value>
+    <comment>112658</comment>
+  </data>
+  <data name="WarningToLockedMsg" xml:space="preserve">
+    <value>警告，此玩家将无法再复原!</value>
+    <comment>112658</comment>
+  </data>
+  <data name="Archived" xml:space="preserve">
+    <value>封存</value>
+    <comment>112658</comment>
+  </data>
+  <data name="LastTransfer" xml:space="preserve">
+    <value>最后转帐</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>刷新</value>
+  </data>
+  <data name="BankInformation" xml:space="preserve">
+    <value>银行资讯</value>
+  </data>
+  <data name="Online" xml:space="preserve">
+    <value>在线</value>
+  </data>
+  <data name="Offline" xml:space="preserve">
+    <value>离线</value>
+  </data>
+  <data name="PlaceholderBankAccount" xml:space="preserve">
+    <value>精确查询银行帐户号码</value>
+  </data>
+  <data name="PlaceholderEmail" xml:space="preserve">
+    <value>精确查询电子邮件</value>
+  </data>
+  <data name="MatchPrefix" xml:space="preserve">
+    <value>前缀查询 范例</value>
+  </data>
+  <data name="MatchCase" xml:space="preserve">
+    <value>模糊查询 范例</value>
   </data>
 </root>

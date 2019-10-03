@@ -4,11 +4,11 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Fanex.Athena.Model.Auth;
     using Model.Core.DTO.Common;
     using Model.Customer.ViewModel;
     using NSubstitute;
     using NUnit.Framework;
-    using Session.Model;
 
     public partial class CustomerControllerTest
     {
@@ -20,7 +20,8 @@
                 // Arrange
                 const string UserName = "UserName";
 
-                AppSettings.FakeLicenseeList.Returns(Enumerable.Empty<int>());
+
+                _licenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(false);
                 _productService.GetProductAccess(Arg.Any<int>(), Arg.Any<string>()).Returns(new ProductAccess(new List<Product>()));
 
                 // Action
@@ -40,7 +41,7 @@
                 var username = Resources.ViewResources.ExternalId;
 
                 StubLicenseeSessionData(DefaultLicenseeSession);
-                AppSettings.FakeLicenseeList.Returns(new[] { DefaultLicenseeSession.LicenseeId });
+                _licenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(true);
                 _productService.GetProductAccess(Arg.Any<int>(), Arg.Any<string>()).Returns(new ProductAccess(new List<Product>()));
 
                 // Action
@@ -59,7 +60,7 @@
                 // Arrange
                 var username = Resources.ViewResources.ExternalIdOrSystemId;
 
-                AppSettings.FakeLicenseeList.Returns(Enumerable.Empty<int>());
+                _licenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(false);
                 _productService.GetProductAccess(Arg.Any<int>(), Arg.Any<string>()).Returns(new ProductAccess(new List<Product>()));
 
                 // Action
@@ -78,7 +79,8 @@
                 // Arrange
                 const string BaStatus = "BAStatus";
 
-                AppSettings.FakeLicenseeList.Returns(new[] { DefaultLicenseeSession.LicenseeId });
+
+                _licenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(false);
                 _productService.GetProductAccess(Arg.Any<int>(), Arg.Any<string>()).Returns(new ProductAccess(new List<Product> { new Product { ProductCode = Product.BA } }));
 
                 // Action
@@ -98,7 +100,7 @@
                 const string Status = "Status";
 
                 StubLicenseeSessionData(DefaultLicenseeSession);
-                AppSettings.FakeLicenseeList.Returns(new[] { DefaultLicenseeSession.LicenseeId });
+                _licenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(true);
                 _productService.GetProductAccess(Arg.Any<int>(), Arg.Any<string>()).Returns(new ProductAccess(new List<Product>()));
                 AppSettings.LicenseeOfferStatusFunction.Returns(new[] { DefaultLicenseeSession.LicenseeId });
 
@@ -119,9 +121,9 @@
                 const string Commission = "Commission";
                 const string Group = "Group";
 
-                AppSettings.FakeLicenseeList.Returns(Enumerable.Empty<int>());
+                _licenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(false);
                 _productService.GetProductAccess(Arg.Any<int>(), Arg.Any<string>()).Returns(new ProductAccess(new List<Product>()));
-                StubLicenseeSessionData(new LicenseeSession { IsAllowedCustomerComm = true });
+                StubLicenseeSessionData(new LicenseeAuthInfo { IsAllowedCustomerComm = true });
 
                 // Action
                 var result = (CustomerListViewModel)(await controller.CustomerList() as ViewResult).Model;
@@ -144,9 +146,9 @@
                 const int GroupCommId = 1;
                 const int LicenseeId = 2;
 
-                AppSettings.FakeLicenseeList.Returns(Enumerable.Empty<int>());
+                _licenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(false);
                 _productService.GetProductAccess(Arg.Any<int>(), Arg.Any<string>()).Returns(new ProductAccess(new List<Product>()));
-                StubLicenseeSessionData(new LicenseeSession { IsAllowedCustomerComm = true, LicenseeId = 2 });
+                StubLicenseeSessionData(new LicenseeAuthInfo { IsAllowedCustomerComm = true, LicenseeId = 2 });
 
                 // Action
                 var result = (CustomerListViewModel)(await controller.CustomerList(groupId: GroupCommId) as ViewResult).Model;
@@ -154,7 +156,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    _groupComService.Received().GetAll(LicenseeId);
+                    _groupComService.Received().GetAllAsync(LicenseeId);
                     _groupComService.Received().GetById(GroupCommId, LicenseeId);
                 });
             }
@@ -166,10 +168,10 @@
             using (var controller = CreateContoller())
             {
                 // Arrange
-                AppSettings.FakeLicenseeList.Returns(Enumerable.Empty<int>());
+                _licenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(false);
                 _productService.GetProductAccess(Arg.Any<int>(), Arg.Any<string>()).Returns(new ProductAccess(new List<Product>()));
                 StubLicenseeSessionData(DefaultLicenseeSession);
-                SessionService.IsAllowedSpecialBA(DefaultUserSession).Returns(true);
+                _authorizationService.IsAllowedSpecialBA(DefaultUserSession).Returns(true);
 
                 // Action
                 var result = (CustomerListViewModel)(await controller.CustomerList() as ViewResult).Model;
@@ -187,10 +189,10 @@
             {
                 // Arrange
                 const string BaMessage = "Message";
-                AppSettings.FakeLicenseeList.Returns(Enumerable.Empty<int>());
+                _licenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(false);
                 _productService.GetProductAccess(Arg.Any<int>(), Arg.Any<string>()).Returns(new ProductAccess(new List<Product>()));
                 StubLicenseeSessionData(DefaultLicenseeSession);
-                SessionService.IsAllowedSpecialBA(DefaultUserSession).Returns(false);
+                _authorizationService.IsAllowedSpecialBA(DefaultUserSession).Returns(false);
                 _licenseeDataAccess.IsAllowUpdateMemberBAStatus(Arg.Any<Request>(), Arg.Any<int>()).Returns(new ResultInfo<bool>
                 {
                     Message = BaMessage
@@ -211,10 +213,10 @@
             {
                 // Arrange
                 const string BaMessage = "Message";
-                AppSettings.FakeLicenseeList.Returns(Enumerable.Empty<int>());
+                _licenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(false);
                 _productService.GetProductAccess(Arg.Any<int>(), Arg.Any<string>()).Returns(new ProductAccess(new List<Product> { new Product { ProductCode = Product.BA } }));
                 StubLicenseeSessionData(DefaultLicenseeSession);
-                SessionService.IsAllowedSpecialBA(DefaultUserSession).Returns(false);
+                _authorizationService.IsAllowedSpecialBA(DefaultUserSession).Returns(false);
                 _licenseeDataAccess.IsAllowUpdateMemberBAStatus(Arg.Any<Request>(), Arg.Any<int>()).Returns(new ResultInfo<bool>
                 {
                     Message = BaMessage

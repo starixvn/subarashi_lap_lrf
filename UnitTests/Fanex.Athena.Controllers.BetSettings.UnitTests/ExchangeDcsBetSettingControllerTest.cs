@@ -1,5 +1,6 @@
 ﻿namespace Fanex.Athena.Controllers.BetSettings.UnitTests
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Model.BetSettings.MetaModel;
@@ -34,18 +35,18 @@
 
         [TestCase(true)]
         [TestCase(false)]
-        public async Task Index_CallApiSuccessfully_ReturnCorrectViewResult(bool? isEnabled)
+        public async Task Index_CallApiSuccessfully_ReturnCorrectViewResultAsync(bool? isEnabled)
         {
             using (var controller = CreateController())
             {
                 // Arrange
                 var metaModel = new BetSettingMetaModel { CustId = 100 };
 
-                _betSettingService.GetStatusAsync(DefaultLicenseeSession.LicenseeId, metaModel.CustId, metaModel.ProductId)
+                _betSettingService.GetStatusAsync(metaModel.CustId, metaModel.ProductId)
                     .Returns(Task.FromResult(isEnabled));
 
                 const double ExtendedData = 10d;
-                _exchangeCommApiService.GetCommission(DefaultLicenseeSession.LicenseeId, metaModel.CustId)
+                _exchangeCommApiService.GetCommission(metaModel.CustId)
                     .Returns(new ResultInfo<double> { ExtendedData = ExtendedData });
 
                 // Action
@@ -65,17 +66,17 @@
 
         [TestCase(true)]
         [TestCase(false)]
-        public async Task Index_CallApiFailed_ReturnCorrectViewResult(bool? isEnabled)
+        public async Task Index_CallApiFailed_ReturnCorrectViewResultAsync(bool? isEnabled)
         {
             using (var controller = CreateController())
             {
                 // Arrange
                 var metaModel = new BetSettingMetaModel { CustId = 100 };
 
-                _betSettingService.GetStatusAsync(DefaultLicenseeSession.LicenseeId, metaModel.CustId, metaModel.ProductId)
+                _betSettingService.GetStatusAsync(metaModel.CustId, metaModel.ProductId)
                     .Returns(Task.FromResult(isEnabled));
 
-                _exchangeCommApiService.GetCommission(DefaultLicenseeSession.LicenseeId, metaModel.CustId)
+                _exchangeCommApiService.GetCommission( metaModel.CustId)
                     .Returns(new ResultInfo<double> { Code = 1, Message = "Error" });
 
                 // Action
@@ -96,12 +97,11 @@
         [TestCase(1)]
         [TestCase(1.5)]
         [TestCase(7.5)]
-        public async Task UpdateComm_InvalidNewCommissionValue_ReturnFailedResult(double newComm)
+        public async Task UpdateComm_InvalidNewCommissionValue_ReturnFailedResultAsync(double newComm)
         {
             using (var controller = CreateController())
             {
                 // Arrange
-                var metaModel = new BetSettingMetaModel { CustId = 100 };
 
                 // Action
                 var result = await controller.UpdateComm(0, 0, newComm) as JsonResult;
@@ -119,15 +119,15 @@
         [TestCase(2)]
         [TestCase(3.5)]
         [TestCase(5.5)]
-        public async Task UpdateComm_ValidNewCommissionValue_ReturnCorrectResult(double newComm)
+        public async Task UpdateComm_ValidNewCommissionValue_ReturnCorrectResultAsync(double newComm)
         {
             using (var controller = CreateController())
             {
                 // Arrange
-                var metaModel = new BetSettingMetaModel { CustId = 100 };
                 var expectedResultInfo = new ResultInfo<double> { Code = 1, Message = "Test" };
 
-                _exchangeCommApiService.UpdateCommissionAsync(DefaultLicenseeSession.LicenseeId, DefaultUserSession.UserId, 0, 0, newComm)
+                _exchangeCommApiService.UpdateCommissionAsync(
+                    DefaultUserSession.UserId, 0, 0, newComm)
                     .Returns(Task.FromResult<IResultInfo<double>>(expectedResultInfo));
 
                 // Action
@@ -148,11 +148,10 @@
             var controller = new ExchangeDcsBetSettingController(
                 LangService,
                 SessionService,
-                AppSettings,
                 CoreBetSettingService,
                 ProductService,
                 _betSettingService,
-                _exchangeCommApiService);
+                _exchangeCommApiService, LicenseeSettingService);
 
             return controller;
         }

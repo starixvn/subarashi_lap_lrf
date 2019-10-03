@@ -3,14 +3,18 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using System.Web.Http.Results;
+
     using Base.UnitTests;
-    using Constant.DataDomain;
-    using Fanex.Athena.Resources;
+
+    using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Service.Report.Interfaces;
+
+    using Model.Core.DataDomain;
     using Model.Report.DTO.SubsidiaryPerformance;
     using Model.Report.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
 
     [TestFixture]
@@ -55,11 +59,11 @@
             // Arrange
             var metaModel = GetMetaModel();
             StubSingleWalletProductAccess(new[] { "SB", "BA" });
-            SessionService.GenerateAgentListXml(Arg.Any<int>(), Arg.Any<bool>()).Returns("<Root></Root>");
-            SessionService.UserSession.Returns(new Session.Model.UserSession
+            SessionService.UserSession.Returns(new UserAuthInfo
             {
                 IsManageableSubsidiary = true,
-                UserLevel = UserLevelType.Subsidiary
+                UserLevel = UserLevelType.Subsidiary,
+                CurrencyAgentList = new Dictionary<int, int[]>()
             });
 
             var resultData = new SubsidiaryResultViewModel
@@ -74,7 +78,6 @@
             // Assert
             Assert.Multiple(() =>
             {
-                SessionService.Received().GenerateAgentListXml(0, false);
                 _subsidiaryService.DidNotReceiveWithAnyArgs().GetCurrencyAgentList(Arg.Any<string>(), Arg.Any<bool>(), 0);
             });
         }
@@ -85,11 +88,12 @@
             // Arrange
             var metaModel = GetMetaModel();
             StubSingleWalletProductAccess(new[] { "SB", "BA" });
-            SessionService.GenerateAgentListXml(Arg.Any<IDictionary<int, IEnumerable<int>>>()).Returns("<Root></Root>");
-            SessionService.UserSession.Returns(new Session.Model.UserSession
+            SessionService.UserSession.Returns(new UserAuthInfo
             {
                 IsManageableSubsidiary = true,
-                UserLevel = UserLevelType.Licensee
+                UserLevel = UserLevelType.Licensee,
+                CurrencyAgentList = new Dictionary<int, int[]> { { 1, new[] { 1, 2, 3 } } },
+                CurrencyList = new Dictionary<int, string> { { 1, "USD" }, { 2, "EUR" }, { 3, "VND" } }
             });
 
             var currencyAgentList = new Dictionary<int, IEnumerable<int>> { { 1, new[] { 1, 2, 3 } } };
@@ -107,7 +111,6 @@
             // Assert
             Assert.Multiple(() =>
             {
-                SessionService.Received().GenerateAgentListXml(currencyAgentList);
                 _subsidiaryService.Received().GetCurrencyAgentList(metaModel.SubsidiaryList, metaModel.IsExcludeTest, 0);
             });
         }

@@ -6,14 +6,6 @@
 
 namespace Fanex.Athena
 {
-    using Api.Base.Attributes;
-    using Data;
-    using Fanex.Athena.Extension.Helpers;
-    using Fanex.Athena.Web.ActionFilter;
-    using Fanex.Athena.Web.RouterConfig;
-    using Logging;
-    using Logging.RabbitMQ;
-    using RemotingRef;
     using System;
     using System.Collections.Generic;
     using System.Configuration;
@@ -24,6 +16,16 @@ namespace Fanex.Athena
     using System.Web.Mvc;
     using System.Web.Optimization;
     using System.Web.Routing;
+    using Api.Base.Attributes;
+    using Data;
+    using Fanex.Athena.Extension.Helpers;
+    using Fanex.Athena.Web;
+    using Fanex.Athena.Web.ActionFilter;
+    using Fanex.Athena.Web.RouterConfig;
+    using Logging;
+    using Logging.RabbitMQ;
+    using MessagePack.Resolvers;
+    using RemotingRef;
 
     public class MvcApplication : HttpApplication
     {
@@ -66,7 +68,7 @@ namespace Fanex.Athena
                 ViewEngines.Engines.Add(new RazorViewEngine());
 
                 AreaRegistration.RegisterAllAreas();
-
+                GlobalFilters.Filters.Add(new AiHandleErrorAttribute());
                 GlobalFilters.Filters.Add(new CustomAuthorizeAttribute());
                 RouteTable.Routes.IgnoreRoute("favicon.ico");
                 RouteConfig.RegisterRoutes(RouteTable.Routes);
@@ -93,6 +95,11 @@ namespace Fanex.Athena
                 .FromApplication("Fanex.LAP");
 
                 DIConfig.Register();
+                CompositeResolver.RegisterAndSetAsDefault(
+                       // resolver custom types first
+                       NativeDateTimeResolver.Instance,
+                       // finally use standard resolver
+                       ContractlessStandardResolver.Instance);
             }
         }
 

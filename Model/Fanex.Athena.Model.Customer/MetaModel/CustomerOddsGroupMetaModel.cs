@@ -4,6 +4,8 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
+using System.Collections.Generic;
+
 namespace Fanex.Athena.Model.Customer.MetaModel
 {
     /// <summary>
@@ -11,8 +13,6 @@ namespace Fanex.Athena.Model.Customer.MetaModel
     /// </summary>
     public class CustomerOddsGroupMetaModel
     {
-        public int LicenseeId { get; set; }
-
         public int CustId { get; set; }
 
         public int UserId { get; set; }

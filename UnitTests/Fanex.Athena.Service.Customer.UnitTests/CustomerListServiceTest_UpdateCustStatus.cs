@@ -5,40 +5,23 @@
     using Model.Core.DTO.Common;
     using Model.Customer.DTO;
     using Model.Customer.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Resources;
+
     using UnitTest.Common.Helpers;
 
     [TestFixture]
     public partial class CustomerListServiceTest
     {
         [Test]
-        public async Task UpdateCustClosed_HaveNoPermission_ReturnCorrectResultInfoAsync()
-        {
-            // Arrange
-            var metaModel = FakeHelper.Create<CustomerStatusMetaModel>();
-            _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, 0).Returns(false);
-
-            var expectedResult = new ResultInfo { Code = 1, Message = ViewResources.UpdateSpecialLevelMsg };
-
-            // Action
-            var result = await _customerListService.UpdateCustClosedAsync(metaModel, string.Empty).ConfigureAwait(false);
-
-            // Assert
-            Assert.Multiple(() =>
-            {
-                Assert.That(result.Code, Is.EqualTo(expectedResult.Code));
-                Assert.That(result.Message, Is.EqualTo(expectedResult.Message));
-            });
-        }
-
-        [Test]
         public async Task UpdateCustClosed_NotSyncCasinoInCustomerInfo_NoUpdateCasinoCustomerAsync()
         {
             // Arrange
             var metaModel = FakeHelper.Create<CustomerStatusMetaModel>();
-            _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, 0).Returns(true);
 
             var customerResult = new CustomerInfo { SyncCasino = false };
             _customerDataAccess.GetCustomerInfo(metaModel.CustId).Returns(customerResult);
@@ -64,7 +47,6 @@
         {
             // Arrange
             var metaModel = FakeHelper.Create<CustomerStatusMetaModel>();
-            _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, 0).Returns(true);
 
             var customerResult = new CustomerInfo { SyncCasino = true };
             _customerDataAccess.GetCustomerInfo(metaModel.CustId).Returns(customerResult);
@@ -90,7 +72,6 @@
         {
             // Arrange
             var metaModel = FakeHelper.Create<CustomerStatusMetaModel>();
-            _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, 0).Returns(true);
 
             var customerResult = new CustomerInfo { SyncCasino = true };
             _customerDataAccess.GetCustomerInfo(metaModel.CustId).Returns(customerResult);
@@ -117,7 +98,6 @@
         {
             // Arrange
             var metaModel = FakeHelper.Create<CustomerStatusMetaModel>();
-            _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, 0).Returns(true);
 
             var customerResult = new CustomerInfo { SyncCasino = true };
             _customerDataAccess.GetCustomerInfo(metaModel.CustId).Returns(customerResult);
@@ -155,7 +135,6 @@
         {
             // Arrange
             var metaModel = FakeHelper.Create<CustomerStatusMetaModel>();
-            _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, 0).Returns(true);
 
             var customerResult = new CustomerInfo { SyncCasino = true };
             _customerDataAccess.GetCustomerInfo(metaModel.CustId).Returns(customerResult);
@@ -190,31 +169,10 @@
         }
 
         [Test]
-        public async Task UpdateCustSuspend_HaveNoPermission_ReturnCorrectResultInfoAsync()
-        {
-            // Arrange
-            var metaModel = FakeHelper.Create<CustomerStatusMetaModel>();
-            _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, 0).Returns(false);
-
-            var expectedResult = new ResultInfo { Code = 1, Message = ViewResources.UpdateSpecialLevelMsg };
-
-            // Action
-            var result = await _customerListService.UpdateCustSuspendAsync(metaModel, string.Empty).ConfigureAwait(false);
-
-            // Assert
-            Assert.Multiple(() =>
-            {
-                Assert.That(result.Code, Is.EqualTo(expectedResult.Code));
-                Assert.That(result.Message, Is.EqualTo(expectedResult.Message));
-            });
-        }
-
-        [Test]
         public async Task UpdateCustSuspend_NotSyncCasinoInCustomerInfo_NoUpdateCasinoCustomerAsync()
         {
             // Arrange
             var metaModel = FakeHelper.Create<CustomerStatusMetaModel>();
-            _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, 0).Returns(true);
 
             var customerResult = new CustomerInfo { SyncCasino = false };
             _customerDataAccess.GetCustomerInfo(metaModel.CustId).Returns(customerResult);
@@ -239,7 +197,6 @@
         {
             // Arrange
             var metaModel = FakeHelper.Create<CustomerStatusMetaModel>();
-            _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, 0).Returns(true);
 
             var customerResult = new CustomerInfo { SyncCasino = true };
             _customerDataAccess.GetCustomerInfo(metaModel.CustId).Returns(customerResult);
@@ -264,7 +221,6 @@
         {
             // Arrange
             var metaModel = FakeHelper.Create<CustomerStatusMetaModel>();
-            _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, 0).Returns(true);
 
             var customerResult = new CustomerInfo { SyncCasino = true };
             _customerDataAccess.GetCustomerInfo(metaModel.CustId).Returns(customerResult);
@@ -290,7 +246,6 @@
         {
             // Arrange
             var metaModel = FakeHelper.Create<CustomerStatusMetaModel>();
-            _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, 0).Returns(true);
 
             var customerResult = new CustomerInfo { SyncCasino = true };
             _customerDataAccess.GetCustomerInfo(metaModel.CustId).Returns(customerResult);
@@ -327,7 +282,6 @@
         {
             // Arrange
             var metaModel = FakeHelper.Create<CustomerStatusMetaModel>();
-            _authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, 0).Returns(true);
 
             var customerResult = new CustomerInfo { SyncCasino = true };
             _customerDataAccess.GetCustomerInfo(metaModel.CustId).Returns(customerResult);

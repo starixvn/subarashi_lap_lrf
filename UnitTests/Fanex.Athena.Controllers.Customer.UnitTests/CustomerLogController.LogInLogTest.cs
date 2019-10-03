@@ -1,6 +1,7 @@
 ﻿namespace Fanex.Athena.Controllers.Customer.UnitTests
 {
     using System.Web.Mvc;
+
     using NUnit.Framework;
 
     public partial class CustomerLogControllerTest

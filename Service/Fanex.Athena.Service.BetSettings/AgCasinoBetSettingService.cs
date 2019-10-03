@@ -11,20 +11,24 @@ namespace Fanex.Athena.Service.BetSettings
     using System.Linq;
     using System.Threading.Tasks;
     using System.Xml.Linq;
+
     using Common;
-    using Core.Utility.Interfaces;
+
     using DataAccess.BetSettings.Interfaces;
+
     using Extension.Utility;
     using Extension.Utility.Interfaces;
+
     using Fanex.Athena.Extension.Helpers;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Resources;
     using Fanex.Logging;
+
     using Interfaces;
+
     using Model.BetSettings.DTO;
     using Model.BetSettings.DTO.AgCasino;
     using Model.BetSettings.ViewModel;
     using Model.Core.DTO.Common;
-    using Resources;
 
     public class AgCasinoBetSettingService : BetSettingBaseService, IAgCasinoBetSettingService
     {
@@ -37,12 +41,10 @@ namespace Fanex.Athena.Service.BetSettings
         private readonly IWebClientService _webClientService;
 
         public AgCasinoBetSettingService(
-            IAuthorizationService authorizationService,
             ILogger logger,
             IAgCasinoBetSettingDataAccess betSettingDataAccess,
             IAppSettings appSettings,
             IWebClientService webClientService)
-            : base(authorizationService)
         {
             _logger = logger;
             _betSettingDataAccess = betSettingDataAccess;
@@ -50,13 +52,8 @@ namespace Fanex.Athena.Service.BetSettings
             _webClientService = webClientService;
         }
 
-        public async Task<AgCasinoBetSettingViewModel> GetViewModelAsync(int licenseeId, int custId, string licenseeName)
+        public async Task<AgCasinoBetSettingViewModel> GetViewModelAsync(int custId, string licenseeName)
         {
-            if (!HasPermissionOnData(licenseeId, custId))
-            {
-                return null;
-            }
-
             var betSetting = await _betSettingDataAccess.GetBetSettingAsync(custId);
 
             if (!betSetting.CheckedGroups.Contains(betSetting.AgGroup))
@@ -65,7 +62,7 @@ namespace Fanex.Athena.Service.BetSettings
                     .OrderBy(x => x).ToArray();
             }
 
-            var games = await GetGroupBettingsAsync(custId, licenseeName, betSetting.CurrencyId).ConfigureAwait(false);
+            var games = await GetGroupBettingsAsync(licenseeName, betSetting.CurrencyId).ConfigureAwait(false);
 
             return new AgCasinoBetSettingViewModel
             {
@@ -82,9 +79,9 @@ namespace Fanex.Athena.Service.BetSettings
                 return ErrorResult("Invalid parameter. AG Casino is null");
             }
 
-            var agcasinoSetting = await _betSettingDataAccess.GetBetSettingAsync(setting.CustId).ConfigureAwait(false);
+            var agCasinoSetting = await _betSettingDataAccess.GetBetSettingAsync(setting.CustId).ConfigureAwait(false);
 
-            if (!agcasinoSetting.IsEnabled || !HasPermissionOnData(setting.LicenseeId, setting.CustId))
+            if (!agCasinoSetting.IsEnabled)
             {
                 return ErrorResult(ViewResources.AccessDeniedMsg);
             }
@@ -92,19 +89,15 @@ namespace Fanex.Athena.Service.BetSettings
             return await _betSettingDataAccess.UpdateBetSettingAsync(setting, group);
         }
 
-        public async Task<IResultInfo> UpdateStatusAsync(int licenseeId, int userId, int custId, string language, string ip, bool isEnabled)
+        public async Task<IResultInfo> UpdateStatusAsync(
+            int userId, int custId, string language, string ip, bool isEnabled)
         {
-            if (!HasPermissionOnData(licenseeId, custId))
-            {
-                return ErrorResult(ViewResources.AccessDeniedMsg);
-            }
-
             return await _betSettingDataAccess.UpdateStatusAsync(userId, custId, language, ip, isEnabled);
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes",
             Justification = "Reviewed. Suppression is OK here.")]
-        private async Task<IList<AgCasinoGame>> GetGroupBettingsAsync(int custId, string siteName, int currency)
+        private async Task<IList<AgCasinoGame>> GetGroupBettingsAsync(string siteName, int currency)
         {
             var uri = new Uri(_appSettings.GetValue("AGCasinoApiUrl"));
             var parameters = string.Format("SiteName={0}&Currency={1}", siteName, currency);

@@ -1,9 +1,13 @@
 ﻿namespace Fanex.Athena.Controllers.UnitTests
 {
     using System.Web.Mvc;
+
     using Model.Core.DataDomain;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using ONEbook.UM.Models;
 
     public partial class AuthorizationControllerTest

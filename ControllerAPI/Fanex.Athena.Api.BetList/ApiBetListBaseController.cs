@@ -8,14 +8,18 @@ namespace Fanex.Athena.Api.BetList
 {
     using System;
     using System.Threading.Tasks;
+
     using Base;
+
     using DataAccess.Core.Configuration.Interfaces;
-    using Fanex.Athena.Model.Core.Helper;
+
+    using Fanex.Athena.Service.StatelessCore.Utility;
+
     using Model.BetList.MetaModel;
     using Model.Core.DTO.Configuration;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-    using Service.Core.Utility.Interfaces;
     using Service.StatelessCore.Interfaces;
 
     public class ApiBetListBaseController : BaseApiController
@@ -48,7 +52,7 @@ namespace Fanex.Athena.Api.BetList
         protected void CheckDataPermission(int custId, long transId)
         {
             if (!_authorizationService.HasPermissionOnData(
-                SessionService.LicenseeSession.LicenseeId,
+                SessionService.UserSession.CurrencyAgentList,
                 custId,
                 transId))
             {
@@ -71,7 +75,7 @@ namespace Fanex.Athena.Api.BetList
             metaModel.LicenseeId = licenseeSession.LicenseeId;
             metaModel.BalanceUpDay = DateTime.SpecifyKind(balanceUp.BalanceUpDay.Date, DateTimeKind.Utc);
             metaModel.MoveBetsDay = DateTime.SpecifyKind(balanceUp.MoveBetsDay.Date, DateTimeKind.Utc);
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId);
             metaModel.HasPlayerCom = licenseeSession.IsAllowedCustomerComm;
             metaModel.CurrencyList = userSession.CurrencyList;
             metaModel.UspKey = uspKey;
@@ -98,7 +102,7 @@ namespace Fanex.Athena.Api.BetList
             metaModel.LicenseeId = licenseeSession.LicenseeId;
             metaModel.BalanceUpDay = DateTime.SpecifyKind(balanceUp.BalanceUpDay.Date, DateTimeKind.Utc);
             metaModel.MoveBetsDay = DateTime.SpecifyKind(balanceUp.MoveBetsDay.Date, DateTimeKind.Utc);
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId);
             metaModel.HasPlayerCom = licenseeSession.IsAllowedCustomerComm;
             metaModel.CurrencyList = userSession.CurrencyList;
             metaModel.UspKey = uspKey;
@@ -107,6 +111,5 @@ namespace Fanex.Athena.Api.BetList
                 userSession.Language
                 ).ConfigureAwait(false);
         }
-
     }
 }

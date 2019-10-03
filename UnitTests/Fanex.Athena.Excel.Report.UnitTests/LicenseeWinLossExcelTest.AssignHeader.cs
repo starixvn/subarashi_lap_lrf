@@ -1,10 +1,14 @@
 ﻿using System.Linq;
+
 using Fanex.Athena.Excel.Base;
 using Fanex.Athena.Model.Core.DTO.Common;
 using Fanex.Athena.Resources;
 using Fanex.Athena.UnitTest.Common.Helpers;
+
 using NPOI.SS.UserModel;
+
 using NSubstitute;
+
 using NUnit.Framework;
 
 namespace Fanex.Athena.Excel.Report.UnitTests

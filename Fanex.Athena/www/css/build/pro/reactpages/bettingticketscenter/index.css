@@ -515,6 +515,14 @@ input[type="checkbox"].checkbox {
 .multiple-select-item label {
   margin-bottom: 0; }
 
+.multiple-select-label {
+  height: 23px;
+  padding-top: 3px;
+  padding-bottom: 5px; }
+
+.multiple-select-options-container .multiple-select-item label {
+  color: #2c2c2c; }
+
 .ac-container {
   position: relative; }
   .ac-container > ul {
@@ -589,7 +597,8 @@ input[type="checkbox"].checkbox {
       color: #BFBDBF;
       float: right; }
       .popup-container .flat-popup .popup-title .popup-close .icon-close {
-        font-size: 18px; }
+        font-size: 18px;
+        cursor: pointer; }
       .popup-container .flat-popup .popup-title .popup-close:hover {
         color: #fff; }
   .popup-container .flat-popup .popup-content {

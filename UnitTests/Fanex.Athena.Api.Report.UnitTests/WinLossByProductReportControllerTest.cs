@@ -9,6 +9,7 @@
     using Excel.Report;
     using Excel.Report.Models;
     using Fanex.Athena.Service.Core.Utility.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DTO.Common;
     using Model.Core.MetaModel.Product;
     using Model.Report.DTO;
@@ -24,20 +25,26 @@
     {
         private IWinLossByProductDataAccess _dataAccess;
         private WinLossByProductReportController _controller;
+        private ILicenseeSettingService _licenseeSettingService;
 
         private ICurrencyValidation _currencyValidation;
         [SetUp]
         public void SetUp()
         {
             MockSessionData();
+            _licenseeSettingService = Substitute.For<ILicenseeSettingService>();
 
             _currencyValidation = Substitute.For<ICurrencyValidation>();
             _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
             _dataAccess = Substitute.For<IWinLossByProductDataAccess>();
             _controller = Substitute.ForPartsOf<WinLossByProductReportController>(
-                SessionService, ProductService,
-                AppSetting, LangService, _dataAccess,
-                _currencyValidation
+                SessionService, 
+                ProductService,
+                LangService,
+                _dataAccess,
+                _currencyValidation,
+                _licenseeSettingService,
+                AppSetting
                 );
 
         }
@@ -48,6 +55,7 @@
             _currencyValidation = null;
             _dataAccess = null;
             _controller = null;
+            _licenseeSettingService = null;
         }
 
         [Test]
@@ -238,7 +246,7 @@
             var toDate = new DateTime(2017, 4, 18);
 
             StubProductAccess(new string[0]);
-            AppSetting.FakeLicenseeList.Returns(x => isFakeLicensee ? new int[1] { SessionLicenseeId } : new int[0]);
+            _licenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(isFakeLicensee);
 
             var excel = Substitute.ForPartsOf<WinlossByProductExcel>();
             excel.When(x => x.Export()).DoNotCallBase();
@@ -298,7 +306,7 @@
                 Username = ViewResources.ExternalId
             };
 
-            AppSetting.FakeLicenseeList.Returns(x => isFakeLicensee ? new int[1] { SessionLicenseeId } : new int[0]);
+            _licenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(isFakeLicensee);
 
             var expectedFromDate = fromDate.HasValue ? fromDate : metaModel.DrillDownFromDate;
             var expectedToDate = toDate.HasValue ? toDate : metaModel.DrillDownToDate;

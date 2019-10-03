@@ -17,7 +17,7 @@
         [SetUp]
         public void SetUp()
         {
-            _controller = new FakeCultureBaseController(LangService, SessionService, AppSettings);
+            _controller = new FakeCultureBaseController(LangService, SessionService);
         }
 
         [TearDown]

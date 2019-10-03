@@ -7,22 +7,28 @@
 namespace Fanex.Athena.Api.CustomerLog
 {
     using System.Collections.Generic;
-    using System.IO;
     using System.Linq;
     using System.Text.RegularExpressions;
     using System.Web.Hosting;
     using System.Xml;
+
     using Base;
     using Base.Attributes;
+
     using DataAccess.Customer.Interfaces;
+
     using Extension.Utility;
     using Extension.Utility.Interfaces;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Customer.DTO.CustomerLog;
     using Fanex.Athena.Model.Customer.ViewModel.CustomerLog;
-    using Model.Core.DataDomain;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using RazorEngine;
     using RazorEngine.Templating;
+
     using Resources;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
 

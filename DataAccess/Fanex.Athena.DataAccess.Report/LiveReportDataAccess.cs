@@ -11,11 +11,11 @@ namespace Fanex.Athena.DataAccess.Report
     using System.Data;
     using System.Linq;
     using System.Threading.Tasks;
-    using Constant.DataDomain;
     using Core.Configuration.Interfaces;
     using Extension.Utility;
     using Fanex.Athena.DataAccess.Core;
     using Fanex.Athena.DataAccess.Report.Interfaces;
+    using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Report.DTO.LiveReports;
     using Fanex.Athena.Model.Report.MetaModel;

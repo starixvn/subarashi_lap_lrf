@@ -10,17 +10,20 @@ namespace Fanex.Athena.Controllers.Report
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
+
     using Extension.Helper;
-    using Extension.Utility;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.MetaModel.Product;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
+
     using Model.Core.DTO.Common;
     using Model.Core.DTO.Configuration;
+
     using Service.Core.Common.Interfaces;
-    using Service.Core.Configuration.Interfaces;
     using Service.Core.Users.Interfaces;
 
     [FunctionAuthorization(PermissionKeys.ReportLicenseeWinLoss)]
@@ -31,10 +34,11 @@ namespace Fanex.Athena.Controllers.Report
         public LicenseeWinLossReportController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             IProductService productService,
-            IReportSettingService reportSettingService)
-        : base(languageService, sessionService, appSetting, productService)
+            IReportSettingService reportSettingService,
+            ILicenseeSettingService licenseeSettingService
+            )
+        : base(languageService, sessionService, productService, licenseeSettingService)
         {
             _reportSettingService = reportSettingService;
         }
@@ -42,7 +46,7 @@ namespace Fanex.Athena.Controllers.Report
         [HttpGet]
         public ActionResult Index()
         {
-            if (IsFakeLicensee(SessionService.LicenseeSession.LicenseeId))
+            if (IsFakeLicensee(SessionService.LicenseeSession.LicenseeName))
             {
                 return MapToFakeView();
             }
@@ -79,7 +83,8 @@ namespace Fanex.Athena.Controllers.Report
         {
             var licenseeSession = SessionService.LicenseeSession;
             var userSession = SessionService.UserSession;
-            var reportSetting = _reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss);
+            var reportSetting = _reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss,
+                licenseeSession.LicenseeName);
             var selectedDate = GetSelectedDate(reportSetting);
             var productAccess = ProductService.GetSingleWalletProductAccess(
                 licenseeSession.LicenseeId,
@@ -96,10 +101,9 @@ namespace Fanex.Athena.Controllers.Report
                 ReportBy = ReportByType.Daily,
                 ProductOptions = ToProductOptions(productAccess.ProductList),
                 BaseCurrency = userSession.DefaultBaseCurrency,
-                                CurrencyId = SystemConstants.BaseCurrencyList
+                CurrencyId = SystemConstants.BaseCurrencyList
                 .FirstOrDefault(x => x.Value.Equals(userSession.DefaultBaseCurrency, StringComparison.OrdinalIgnoreCase))
                 .Key
-
             };
 
             var model = new LicenseeWinLossViewModel
@@ -116,7 +120,8 @@ namespace Fanex.Athena.Controllers.Report
         private ActionResult MapToFakeView()
         {
             var userSession = SessionService.UserSession;
-            var reportSetting = _reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss);
+            var reportSetting = _reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss,
+                SessionService.LicenseeSession.LicenseeName);
             var selectedDate = GetSelectedDate(reportSetting);
             var productAccess = ProductService.GetSingleWalletProductAccess(
                 SessionService.LicenseeSession.LicenseeId,

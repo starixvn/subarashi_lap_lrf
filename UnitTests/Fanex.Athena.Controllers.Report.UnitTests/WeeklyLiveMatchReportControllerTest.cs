@@ -2,6 +2,7 @@
 {
     using System.Web.Mvc;
     using Base.UnitTests;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using NSubstitute;
     using NUnit.Framework;
     using Service.Core.Common.Interfaces;
@@ -36,9 +37,8 @@
 
             var controller = Substitute.ForPartsOf<WeeklyLiveMatchReportController>(
                 LangService,
-                SessionService,
-                AppSettings,
-                productService);
+                SessionService
+                );
             return controller;
         }
     }

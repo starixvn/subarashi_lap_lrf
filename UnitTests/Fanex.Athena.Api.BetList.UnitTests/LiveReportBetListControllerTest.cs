@@ -3,10 +3,15 @@
     using System.Collections.Generic;
     using System.Net.Http;
     using System.Threading.Tasks;
+
+    using Fanex.Athena.Model.Auth;
+
     using Model.BetList.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
-    using Session.Model;
+
     using UnitTest.Common.Helpers;
 
     public class LiveReportBetListControllerTest : ApiBetListBaseControllerHelperTest
@@ -34,9 +39,8 @@
         {
             MockSessionData();
 
-            AuthorizationService.HasPermissionOnData(SessionLicenseeId, Arg.Any<int>(), Arg.Any<long>()).Returns(true);
+            AuthorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), Arg.Any<int>(), Arg.Any<long>()).Returns(true);
         }
-
 
         [Test]
         public async Task Outright_InvalidCurrency_ReturnNull()
@@ -54,7 +58,6 @@
             }
         }
 
-       
         [TestCase(0)]
         [TestCase(1)]
         [TestCase(2)]
@@ -76,7 +79,7 @@
                 {
                     NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
                     Assert.That(metaModel.UspKey, Is.EqualTo(SelWinlossByMatchUsp));
-                    BetListApiClient.Received().PostAsync((string)ApiPath, (object)metaModel, (string)SessionLanguage);
+                    BetListApiClient.Received().PostAsync(ApiPath, (object)metaModel, SessionLanguage);
                 }));
             }
         }
@@ -102,7 +105,7 @@
                 {
                     NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
                     Assert.That(metaModel.UspKey, Is.EqualTo(SelWinlossOutrightUsp));
-                    BetListApiClient.Received().PostAsync((string)ApiPath, (object)metaModel, (string)SessionLanguage);
+                    BetListApiClient.Received().PostAsync(ApiPath, (object)metaModel, SessionLanguage);
                 }));
             }
         }
@@ -201,21 +204,30 @@
                     Assert.That(metaModel.UspKey, Is.EqualTo(SelWinlossVHRacingUsp));
                     Assert.That(metaModel.PageIndex, Is.EqualTo(expectedPageIndex));
                     Assert.That(metaModel.PageSize, Is.EqualTo(expectedPageSize));
-                    BetListApiClient.Received().PostAsync((string)PageApiPath, (object)metaModel, (string)SessionLanguage);
+                    BetListApiClient.Received().PostAsync(PageApiPath, (object)metaModel, SessionLanguage);
                 }));
             }
         }
 
         private LiveReportBetListMetaModel CreateInvalidCurrencyMetaModel()
         {
-            StubUserSessionData(new UserSession { CurrencyList = new Dictionary<int, string>() });
+            StubUserSessionData(new UserAuthInfo
+            {
+                CurrencyList = new Dictionary<int, string>(),
+                CurrencyAgentList = new Dictionary<int, int[]>()
+            });
 
             return new LiveReportBetListMetaModel { CurrencyId = FakeHelper.Create<int>() };
         }
 
         private LiveReportBetListMetaModel CreateValidCurrencyMetaModel(int currency)
         {
-            StubUserSessionData(new UserSession { Language = SessionLanguage, CurrencyList = new Dictionary<int, string> { { currency, "Currency Name" } } });
+            StubUserSessionData(new UserAuthInfo
+            {
+                Language = SessionLanguage,
+                CurrencyList = new Dictionary<int, string> { { currency, "Currency Name" } },
+                CurrencyAgentList = new Dictionary<int, int[]>()
+            });
 
             return new LiveReportBetListMetaModel { CurrencyId = currency };
         }

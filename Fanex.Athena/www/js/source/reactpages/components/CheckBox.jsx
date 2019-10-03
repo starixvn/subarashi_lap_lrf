@@ -1,17 +1,19 @@
 ﻿import React from 'react';
 import PropTypes from 'prop-types';
 
-const CheckBox = (props) => {
-    return (<div className="checkbox-group">
-                    <input type="checkbox" className="checkbox"                  
-                        id={props.id}
-                        checked={props.checked} 
-                        disabled={props.disabled}
-                        onChange={() => props.onChange(!props.checked)} />
-                    <label htmlFor={props.id}>{props.label}</label>
-                </div>
+const CheckBox = React.forwardRef((props, ref) => {
+    return (
+        <div className="checkbox-group" ref={ref}>
+            <input type="checkbox" className="checkbox"
+                id={props.id}
+                checked={props.checked}
+                disabled={props.disabled}
+                onChange={() => props.onChange(!props.checked)}
+            />
+            <label htmlFor={props.id}>{props.label}</label>
+        </div>
     )
-}
+});
 
 CheckBox.propTypes = {
     id: PropTypes.string.isRequired,

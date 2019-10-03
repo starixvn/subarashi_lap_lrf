@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using Fanex.Athena.Excel.Base;
 using Fanex.Athena.Excel.Base.Entities;
 using Fanex.Athena.Excel.Report.Helpers;
@@ -12,8 +13,11 @@ using Fanex.Athena.Model.Report.DTO;
 using Fanex.Athena.Model.Report.MetaModel;
 using Fanex.Athena.Resources;
 using Fanex.Athena.UnitTest.Common.Helpers;
+
 using NPOI.SS.UserModel;
+
 using NSubstitute;
+
 using NUnit.Framework;
 
 namespace Fanex.Athena.Excel.Report.UnitTests
@@ -117,7 +121,7 @@ namespace Fanex.Athena.Excel.Report.UnitTests
             var title = ReportExcelHelper.GetTitleCurrencyName(
                 excelModel.ConvertingOption,
                 excelModel.MetaModel);
-            
+
             var reportTitle = ReportExcelHelper.GenerateReportTitle(
                 ViewResources.LicenseeWinLoss,
                 excelModel.MetaModel.FromDate,

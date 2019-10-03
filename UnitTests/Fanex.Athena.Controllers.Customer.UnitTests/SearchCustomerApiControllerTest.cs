@@ -19,16 +19,13 @@
             using (var controller = new SearchCustomerAPIController(
                LangService,
                SessionService,
-               AppSettings,
                searchCustomerDataAccess))
             {
                 // Arrange
                 const string Query = " test   ";
-                const string AgentListXml = "Agent List XML";
                 var expectedCustomerNames = new[] { "test1", "test2" };
 
                 SetUpDefaultFakeData();
-                SessionService.GenerateAgentListXml().Returns(AgentListXml);
                 searchCustomerDataAccess.SearchCustomers(0, string.Empty, string.Empty, false)
                     .ReturnsForAnyArgs(expectedCustomerNames);
 
@@ -42,7 +39,7 @@
                     searchCustomerDataAccess.Received(1).SearchCustomers(
                         SessionService.UserSession.UserId,
                         Query.Trim(),
-                        AgentListXml,
+                        Arg.Any<string>(),
                         false);
                     Assert.That(resultData.GetValue("query"), Is.EqualTo(Query.Trim()));
                     Assert.That(resultData.GetValue("suggestions"), Is.EqualTo(expectedCustomerNames));

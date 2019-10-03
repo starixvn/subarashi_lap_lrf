@@ -8,11 +8,15 @@ namespace Fanex.Athena.Controllers.BetSettings
 {
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Constant.DataDomain;
-    using Extension.Utility;
+
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
+
     using Model.BetSettings.MetaModel;
+    using Model.Core.DataDomain;
+
     using Resources;
+
     using Service.BetSettings.Interfaces;
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
@@ -24,36 +28,33 @@ namespace Fanex.Athena.Controllers.BetSettings
         public AgCasinoBetSettingController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             ICoreBetSettingService coreBetSettingService,
             IProductService productService,
-            IAgCasinoBetSettingService betSettingService)
-        : base(languageService, sessionService, appSetting, coreBetSettingService, productService)
+            IAgCasinoBetSettingService betSettingService,
+             ILicenseeSettingService licenseeSettingService
+            )
+        : base(languageService, sessionService, coreBetSettingService, productService, licenseeSettingService)
         {
             _betSettingService = betSettingService;
         }
 
         [HttpGet]
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
+        [ValidatePermissionOnData(isObject: true)]
         public async Task<ActionResult> Index(BetSettingMetaModel metaModel)
         {
-            var licenseeSession = SessionService.LicenseeSession;
-            var viewModel = await _betSettingService.GetViewModelAsync(licenseeSession.LicenseeId, metaModel.CustId, licenseeSession.LicenseeName);
-            if (viewModel == null)
-            {
-                return Redirect("~/Utility/AccessDenied");
-            }
+            var viewModel = await _betSettingService.GetViewModelAsync(metaModel.CustId, SessionService.LicenseeSession.LicenseeName);
 
-            await AssignRequiredProperties(viewModel, metaModel).ConfigureAwait(false);
+            await AssignRequiredPropertiesAsync(viewModel, metaModel).ConfigureAwait(false);
             return View("~/Views/Desktop/Customer/BetSetting/AgCasino.cshtml", viewModel);
         }
 
         [HttpPost]
         [CustomValidateAntiForgery]
+        [ValidatePermissionOnData]
         public async Task<JsonResult> UpdateStatus(int custId, string nickName, int status)
         {
             var userSession = SessionService.UserSession;
-            var licenseeId = SessionService.LicenseeSession.LicenseeId;
 
             if (!CheckPermission(userSession, ProductTypes.AgCasino))
             {
@@ -61,7 +62,6 @@ namespace Fanex.Athena.Controllers.BetSettings
             }
 
             var result = await _betSettingService.UpdateStatusAsync(
-                licenseeId,
                 userSession.UserId,
                 custId,
                 userSession.Language,
@@ -78,6 +78,7 @@ namespace Fanex.Athena.Controllers.BetSettings
 
         [HttpPost]
         [CustomValidateAntiForgery]
+        [ValidatePermissionOnData]
         public async Task<JsonResult> UpdateBetSetting(string nickName, string group)
         {
             var userSession = SessionService.UserSession;
@@ -89,7 +90,7 @@ namespace Fanex.Athena.Controllers.BetSettings
             }
 
             var setting = GetBetSettingCommonParam(userSession.UserId, licenseeId, userSession.Language);
-            var result = await _betSettingService.UpdateAgCasinoBetSettingAsync(setting, group).ConfigureAwait(false);
+            var result = await _betSettingService.UpdateAgCasinoBetSettingAsync(setting, group);
 
             if (result.Code == 0)
             {

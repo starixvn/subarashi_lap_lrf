@@ -3,12 +3,17 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
     using Base.UnitTests;
+
     using DataAccess.Report.Interfaces;
+
     using Model.Core.ResultModel;
     using Model.Report.DTO;
     using Model.Report.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
 
     [TestFixture]
@@ -36,10 +41,8 @@
         public async Task Index_ValidMetaModel_AssignCorrectAgentListXml()
         {
             // Arrange
-            const string AgentListXml = "<Root><Agent AgentId=\"1\" Currency=\"1\"/></Root>";
             var metaModel = CreateValidMetaModel();
             metaModel.CurrencyId = 999;
-            SessionService.GenerateAgentListXml(metaModel.CurrencyId, metaModel.IsExcludeTestData).Returns(AgentListXml);
             _dataAccess.GetData(metaModel, UserCurrencyList).ReturnsForAnyArgs(new ReportResultModel<LicenseeWinLossByTimeZone>());
 
             // Action
@@ -49,7 +52,7 @@
             }
 
             // Assert
-            await _dataAccess.Received(1).GetData(Arg.Is<LicenseeWinLossByTimeZoneMetaModel>(x => x.AgentListXml == AgentListXml), UserCurrencyList);
+            await _dataAccess.Received(1).GetData(Arg.Any<LicenseeWinLossByTimeZoneMetaModel>(), UserCurrencyList);
         }
 
         [Test]

@@ -10,9 +10,13 @@ namespace Fanex.Athena.Controllers.Forecast
     using System.Linq;
     using System.Web.Mvc;
     using System.Web.SessionState;
+
     using Extension.Utility;
+
     using Model.Core.DTO.Common;
+
     using ONEbook.UM.Filters;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
 
@@ -24,7 +28,14 @@ namespace Fanex.Athena.Controllers.Forecast
             ILanguageService languageService,
             ISessionService sessionService,
             IAppSettings appSetting)
-        : base(languageService, sessionService, appSetting)
+        : base(languageService, sessionService, appSetting, null)
+        {
+        }
+
+        protected ForecastBaseController(
+           ILanguageService languageService,
+           ISessionService sessionService)
+       : base(languageService, sessionService)
         {
         }
 

@@ -44,11 +44,11 @@ namespace Fanex.Athena.Extension.Utility
             }
         }
 
-        public IEnumerable<int> LicenseesWithLargeData
+        public IEnumerable<string> LicenseesWithLargeData
         {
             get
             {
-                return GetIntegers("LicenseesWithLargeData");
+                return GetValue("LicenseesWithLargeData").Split(',');
             }
         }
 
@@ -94,11 +94,6 @@ namespace Fanex.Athena.Extension.Utility
         public string ResultAmendmentAttachmentApiUrl
         {
             get { return GetValue(nameof(ResultAmendmentAttachmentApiUrl)); }
-        }
-
-        public IEnumerable<int> FakeLicenseeList
-        {
-            get { return GetValue("FakeLicenseeList").Split(',').Select(n => Convert.ToInt32(n)); }
         }
 
         public bool IsEnabledMoveBetNotification
@@ -186,7 +181,9 @@ namespace Fanex.Athena.Extension.Utility
         {
             return ConfigurationManager.AppSettings[key];
         }
+
         public int BetListApiClientTimeOutMinutes => int.Parse(GetValue("BetListApiClientTimeOutMinutes"));
+
         private IEnumerable<int> GetIntegers(string key)
         {
             var value = GetValue(key);

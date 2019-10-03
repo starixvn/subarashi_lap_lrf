@@ -10,11 +10,15 @@ namespace Fanex.Athena.Controllers.BetSettings
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Constant.DataDomain;
-    using Extension.Utility;
+
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
+
     using Model.BetSettings.MetaModel;
+    using Model.Core.DataDomain;
+
     using Resources;
+
     using Service.BetSettings.Interfaces;
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
@@ -35,17 +39,19 @@ namespace Fanex.Athena.Controllers.BetSettings
         public ThirdPartyBetSettingController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             ICoreBetSettingService coreBetSettingService,
             IProductService productService,
-            IThirdPartyBetSettingService betSettingService)
-        : base(languageService, sessionService, appSetting, coreBetSettingService, productService)
+            IThirdPartyBetSettingService betSettingService,
+             ILicenseeSettingService licenseeSettingService
+            )
+        : base(languageService, sessionService, coreBetSettingService, productService, licenseeSettingService)
         {
             _betSettingService = betSettingService;
         }
 
         [HttpGet]
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
+        [ValidatePermissionOnData(isObject: true)]
         public async Task<ActionResult> Index(BetSettingMetaModel metaModel)
         {
             if (!ProductViewFileMap.ContainsKey(metaModel.ProductId))
@@ -54,7 +60,6 @@ namespace Fanex.Athena.Controllers.BetSettings
             }
 
             var viewModel = await _betSettingService.GetViewModelAsync(
-                SessionService.LicenseeSession.LicenseeId,
                 metaModel.CustId,
                 metaModel.ProductId);
             if (viewModel == null)
@@ -62,51 +67,52 @@ namespace Fanex.Athena.Controllers.BetSettings
                 return this.Redirect("~/Utility/AccessDenied");
             }
 
-            await AssignRequiredProperties(viewModel, metaModel).ConfigureAwait(false);
+            await AssignRequiredPropertiesAsync(viewModel, metaModel);
             var viewPath = $"~/Views/Desktop/Customer/BetSetting/{ProductViewFileMap[metaModel.ProductId]}.cshtml";
             return View(viewPath, viewModel);
         }
 
         [HttpPost]
         [CustomValidateAntiForgery]
+        [ValidatePermissionOnData]
         public Task<JsonResult> UpdateMacauStatus(int custId, string nickName, int status)
         {
-            return UpdateThirdPartyProductStatus(ProductTypes.Macau, custId, nickName, status);
+            return UpdateThirdPartyProductStatusAsync(ProductTypes.Macau, custId, nickName, status);
         }
 
         [HttpPost]
         [CustomValidateAntiForgery]
+        [ValidatePermissionOnData]
         public Task<JsonResult> UpdateBetTradeStatus(int custId, string nickName, int status)
         {
-            return UpdateThirdPartyProductStatus(ProductTypes.BetTrade, custId, nickName, status);
+            return UpdateThirdPartyProductStatusAsync(ProductTypes.BetTrade, custId, nickName, status);
         }
 
         [HttpPost]
         [CustomValidateAntiForgery]
+        [ValidatePermissionOnData]
         public Task<JsonResult> UpdateColossusBetsStatus(int custId, string nickName, int status)
         {
-            return UpdateThirdPartyProductStatus(ProductTypes.ColossusBets, custId, nickName, status);
+            return UpdateThirdPartyProductStatusAsync(ProductTypes.ColossusBets, custId, nickName, status);
         }
 
         [HttpPost]
         [CustomValidateAntiForgery]
         public Task<JsonResult> UpdateCashOutStatus(int custId, string nickName, int status)
         {
-            return UpdateThirdPartyProductStatus(ProductTypes.CashOut, custId, nickName, status);
+            return UpdateThirdPartyProductStatusAsync(ProductTypes.CashOut, custId, nickName, status);
         }
 
         [HttpPost]
         [CustomValidateAntiForgery]
         public Task<JsonResult> UpdateGoldDeluxeStatus(int custId, string nickName, int status)
         {
-            return UpdateThirdPartyProductStatus(ProductTypes.GoldDeluxe, custId, nickName, status);
+            return UpdateThirdPartyProductStatusAsync(ProductTypes.GoldDeluxe, custId, nickName, status);
         }
 
-        private async Task<JsonResult> UpdateThirdPartyProductStatus(int productId, int custId, string nickName, int status)
+        private async Task<JsonResult> UpdateThirdPartyProductStatusAsync(int productId, int custId, string nickName, int status)
         {
             var userSession = SessionService.UserSession;
-            var licenseeId = SessionService.LicenseeSession.LicenseeId;
-
             if (!CheckPermission(userSession, productId))
             {
                 return AccessDenied();
@@ -114,13 +120,12 @@ namespace Fanex.Athena.Controllers.BetSettings
 
             var isEnabled = status == 1;
             var result = await _betSettingService.UpdateStatusAsync(
-               licenseeId,
                 productId,
                 userSession.UserId,
                 custId,
                 userSession.Language,
                 Request.UserHostAddress,
-                isEnabled).ConfigureAwait(false);
+                isEnabled);
 
             if (result.Code == 0 && string.IsNullOrWhiteSpace(result.Message))
             {

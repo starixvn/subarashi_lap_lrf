@@ -1,19 +1,26 @@
 ﻿namespace Fanex.Athena.Service.Core.UnitTests.Users
 {
     using System.Linq;
-    using System.Threading.Tasks;
     using System.Web;
+
     using Core.Users.Interfaces;
-    using Core.Utility.Interfaces;
+
     using DataAccess.Core.Users.Interfaces;
+
     using Extension.Utility.Interfaces;
+
     using Fanex.Athena.Extension.Utility;
+    using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Service.Core.Users;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Logging;
+
     using Model.Core.DTO.Common;
-    using Model.Core.DTO.OneAuth;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using UnitTest.Common.Helpers;
 
     [TestFixture]
@@ -21,16 +28,17 @@
     {
         private OneAuthenticationService _oneAuthenticationService;
         private ISessionService _sessionService;
-        private ILicenseeDataAccess _licenseeDataAccess;
+        private ILicenseeSettingService _licenseeSettingService;
         private IFormsAuthenticationService _formAuthenticationService;
         private IOneBookSecurityWrapper _oneBookSecurityWrapper;
         private IOneAuthDataAccess _oneAuthDataAccess;
         private IAppSettings _appSettings;
+
         [SetUp]
         public void SetUp()
         {
             _sessionService = Substitute.For<ISessionService>();
-            _licenseeDataAccess = Substitute.For<ILicenseeDataAccess>();
+            _licenseeSettingService = Substitute.For<ILicenseeSettingService>();
             _formAuthenticationService = Substitute.For<IFormsAuthenticationService>();
             _oneBookSecurityWrapper = Substitute.For<IOneBookSecurityWrapper>();
             _oneAuthDataAccess = Substitute.For<IOneAuthDataAccess>();
@@ -40,7 +48,7 @@
 
             _oneAuthenticationService = Substitute.ForPartsOf<OneAuthenticationService>(
                 _sessionService,
-                _licenseeDataAccess,
+                _licenseeSettingService,
                 _formAuthenticationService,
                 _oneBookSecurityWrapper,
                 Substitute.For<ILogger>(),
@@ -53,7 +61,7 @@
         {
             _oneAuthenticationService = null;
             _sessionService = null;
-            _licenseeDataAccess = null;
+            _licenseeSettingService = null;
             _formAuthenticationService = null;
             _appSettings = null;
         }
@@ -74,7 +82,7 @@
             };
 
             var licensee = FakeHelper.Create<Licensee>();
-            _licenseeDataAccess.GetLicenseeByName(tokenInfo.SiteName).Returns(licensee);
+            _licenseeSettingService.GetLicenseeInfo(tokenInfo.SiteName).Returns(licensee);
 
             _sessionService.UserSession.Returns(x => null);
             _sessionService.LicenseeSession.Returns(x => null);

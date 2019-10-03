@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Constant.DataDomain;
+    using Model.Core.DataDomain;
     using Model.BetSettings.DTO;
     using Model.BetSettings.MetaModel;
     using Model.BetSettings.ViewModel;
@@ -41,7 +41,8 @@
                 // Arrange
                 var metaModel = new BetSettingMetaModel { CustId = 100 };
 
-                _betSettingService.GetViewModelAsync(SessionService.LicenseeSession.LicenseeId, metaModel.CustId).Returns(Task.FromResult(new BetSettingViewModel()));
+                _betSettingService.GetViewModelAsync(
+                    metaModel.CustId).Returns(Task.FromResult(new BetSettingViewModel()));
 
                 // Action
                 var result = await controller.Index(metaModel) as ViewResult;
@@ -81,7 +82,7 @@
         [TestCase("0", "2")]
         [TestCase("1", "0")]
         [TestCase("0", "0")]
-        public async Task UpdateBetSetting_InvalidParam_ReturnInvalidParamsResult(string id, string custid)
+        public async Task UpdateBetSetting_InvalidParam_ReturnInvalidParamsResultAsync(string id, string custid)
         {
             using (var controller = CreateController())
             {
@@ -121,7 +122,6 @@
                 controller.HttpContext.Request[Arg.Any<string>()].Returns("1");
 
                 _betSettingService.UpdateBetSettingAsync(
-                   Arg.Any<int>(),
                    Arg.Any<int>(),
                    Arg.Any<int>(),
                    Arg.Any<string>(),
@@ -168,7 +168,6 @@
                 _betSettingService.UpdateBetSettingAsync(
                    Arg.Any<int>(),
                    Arg.Any<int>(),
-                   Arg.Any<int>(),
                    Arg.Any<string>(),
                    Arg.Any<string>(),
                    Arg.Do<KenoBetSetting>(x => param = x)).Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 0 }));
@@ -203,7 +202,6 @@
                 _betSettingService.UpdateBetSettingAsync(
                    Arg.Any<int>(),
                    Arg.Any<int>(),
-                   Arg.Any<int>(),
                    Arg.Any<string>(),
                    Arg.Any<string>(),
                    Arg.Any<KenoBetSetting>()).Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 1, Message = "Error" }));
@@ -222,10 +220,9 @@
             var controller = new KenoBetSettingController(
                 LangService,
                 SessionService,
-                AppSettings,
                 CoreBetSettingService,
                 ProductService,
-                _betSettingService)
+                _betSettingService, LicenseeSettingService)
             {
                 ControllerContext = ControllerContext
             };

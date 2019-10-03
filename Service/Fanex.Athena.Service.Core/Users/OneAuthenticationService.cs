@@ -6,27 +6,28 @@
     using System.Linq;
     using System.Web;
     using System.Web.Hosting;
-    using Constant.DataDomain;
+
     using DataAccess.Core.Users.Interfaces;
+
     using Extension.Utility;
     using Extension.Utility.Interfaces;
+
+    using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Model.Auth.Enum;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Service.Core.Users.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Logging;
+
     using Model.Core.DataDomain;
-    using Model.Core.DTO;
-    using Model.Core.DTO.OneAuth;
-    using Model.Core.DTO.Users;
-    using Newtonsoft.Json;
+
     using Resources;
-    using Session.Enum;
-    using Session.Model;
 
     [CLSCompliant(false)]
     public class OneAuthenticationService : IOneAuthenticationService
     {
         private readonly ISessionService _sessionService;
-        private readonly ILicenseeDataAccess _licenseeDataAccess;
+        private readonly ILicenseeSettingService _licenseeSettingService;
         private readonly IFormsAuthenticationService _formsAuthenticationService;
         private readonly IOneBookSecurityWrapper _oneBookSecurityWrapper;
         private readonly ILogger _logger;
@@ -35,7 +36,7 @@
 
         public OneAuthenticationService(
             ISessionService sessionService,
-            ILicenseeDataAccess licenseeDataAccess,
+            ILicenseeSettingService licenseeSettingService,
             IFormsAuthenticationService formsAuthenticationService,
             IOneBookSecurityWrapper oneBookSecurityWrapper,
             ILogger logger,
@@ -43,7 +44,7 @@
             IOneAuthDataAccess oneAuthDataAccess)
         {
             _sessionService = sessionService;
-            _licenseeDataAccess = licenseeDataAccess;
+            _licenseeSettingService = licenseeSettingService;
             _formsAuthenticationService = formsAuthenticationService;
             _oneBookSecurityWrapper = oneBookSecurityWrapper;
             _logger = logger;
@@ -61,7 +62,7 @@
 
         public IResultInfo SignIn(HttpContextBase currentContext, OneAuthToken tokenInfo)
         {
-            var licensee = _licenseeDataAccess.GetLicenseeByName(tokenInfo.SiteName);
+            var licensee = _licenseeSettingService.GetLicenseeInfo(tokenInfo.SiteName);
             if (licensee == null)
             {
                 return new ResultInfo
@@ -111,14 +112,14 @@
             return _oneBookSecurityWrapper.Authenticate(token);
         }
 
-        private static bool IsSameSession(UserSession userSession, LicenseeSession licenseeSession, OneAuthToken tokenInfo, int licenseeId)
+        private static bool IsSameSession(UserAuthInfo userSession, LicenseeAuthInfo licenseeSession, OneAuthToken tokenInfo, int licenseeId)
         {
             return userSession.UserName == tokenInfo.UserID
                 && userSession.VendorID == tokenInfo.VendorID && userSession.VendorIdentityID == tokenInfo.UserID
                 && licenseeSession.LicenseeId == licenseeId;
         }
 
-        private static bool IsAuthenticated(HttpContextBase currentContext, UserSession userSession, LicenseeSession licenseeSession)
+        private static bool IsAuthenticated(HttpContextBase currentContext, UserAuthInfo userSession, LicenseeAuthInfo licenseeSession)
         {
             if (userSession == null || licenseeSession == null || !IsValidIdentity(currentContext))
             {
@@ -177,7 +178,7 @@
             return new ResultInfo { Code = 0 };
         }
 
-        private void UpdateUserSession(UserSession userSession, OneAuthToken tokenInfo, int licenseeId, OneAuthUserInfo userInfo, string language)
+        private void UpdateUserSession(UserAuthInfo userSession, OneAuthToken tokenInfo, int licenseeId, OneAuthUserInfo userInfo, string language)
         {
             if (!language.Equals(userSession.Language))
             {
@@ -188,7 +189,7 @@
             userSession.UserLevel = userInfo.UserLevel;
             userSession.IsManageableSubsidiary = userInfo.IsEnabledSubsidiary && userInfo.UserLevel != UserLevelType.Subsidiary;
             userSession.OperatorId = userInfo.OperatorID;
-            userSession.PortalFunctionList = GetPermissionList(tokenInfo);
+            userSession.PortalFunctionList = tokenInfo.Permissions;
             userSession.DefaultBaseCurrency = string.IsNullOrEmpty(userInfo.BaseCurrency) ? _appSettings.DefaultBaseCurrency
                 : userInfo.BaseCurrency;
         }
@@ -214,7 +215,7 @@
             Licensee licenseeInfo,
             OneAuthUserInfo userInfo)
         {
-            var licSession = new LicenseeSession
+            var licSession = new LicenseeAuthInfo
             {
                 LicenseeId = licenseeInfo.Id,
                 IsAllowedCustomerComm = licenseeInfo.IsAllowedCustomerComm,
@@ -222,7 +223,7 @@
                 LicenseeName = licenseeInfo.Name
             };
 
-            var userSession = new UserSession
+            var userSession = new UserAuthInfo
             {
                 UserId = tokenInfo.UserSEQ,
                 OnUserId = tokenInfo.UserSEQ,
@@ -231,13 +232,14 @@
                 IsManageableSubsidiary = userInfo.IsEnabledSubsidiary && userInfo.UserLevel != UserLevelType.Subsidiary,
                 OperatorId = userInfo.OperatorID,
                 IsInternal = true,
-                FunctionIdList = new int[0],
-                PortalFunctionList = GetPermissionList(tokenInfo),
+                FunctionList = new List<Function>(),
+                PortalFunctionList = tokenInfo.Permissions,
                 Language = languageCode,
                 DefaultReportUrl = "LicenseeWinLossReport",
                 ApplicationMode = AppMode.Parasitic,
                 VendorID = tokenInfo.VendorID,
                 VendorIdentityID = tokenInfo.UserID,
+                IsSuperAdmin = tokenInfo.IsAdminstrator,
                 DefaultBaseCurrency = string.IsNullOrEmpty(userInfo.BaseCurrency) ? _appSettings.DefaultBaseCurrency
                 : userInfo.BaseCurrency
             };
@@ -245,29 +247,6 @@
             _sessionService.AssignCurrenciesToUserSession(userSession, licenseeInfo.Id, userInfo.CurrencyUserList);
 
             _sessionService.AssignSessions(userSession, licSession);
-        }
-
-        private string[] GetPermissionList(OneAuthToken tokenInfo)
-        {
-            return tokenInfo.IsAdminstrator ? GetFunctionList() : tokenInfo.Permissions.Select(x => x.FunctionKey).ToArray();
-        }
-
-        /// <summary>
-        /// This function will be removed when integrating permission part with LAP.
-        /// </summary>
-        /// <returns>Return the list portal function.</returns>
-        private string[] GetFunctionList()
-        {
-            const string FunctionFilePath = "~/App_Data/PortalSystemFunction.json";
-            IList<PortalSystemFunction> result = null;
-            var temp = GetStringFromFile(FunctionFilePath);
-
-            if (!string.IsNullOrEmpty(temp))
-            {
-                result = JsonConvert.DeserializeObject<IList<PortalSystemFunction>>(temp);
-            }
-
-            return (result ?? new List<PortalSystemFunction>()).Select(x => x.FunctionKey).ToArray();
         }
     }
 }

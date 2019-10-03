@@ -1,22 +1,39 @@
 ﻿namespace Fanex.Athena.Controllers.TotalBets.UnitTests
 {
     using System.Collections.Generic;
-    using System.Linq;
     using System.Web.Mvc;
     using Base.UnitTests;
+    using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using Model.Core.DTO.Configuration;
     using Model.Report.ViewModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Report;
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Configuration.Interfaces;
 
     [TestFixture]
     public class LicenseeWinLossReportControllerTest : CultureBaseControllerHelperTest
     {
+        private ILicenseeSettingService _licenseeSettingService;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _licenseeSettingService = Substitute.For<ILicenseeSettingService>();
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            _licenseeSettingService = null;
+        }
+
         [OneTimeSetUp]
         public override void FixtureSetUp()
         {
@@ -30,9 +47,9 @@
         {
             // Arrange
             var reportSettingService = Substitute.For<IReportSettingService>();
-            reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss).Returns(new ReportSetting());
+            reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss, Arg.Any<string>()).Returns(new ReportSetting());
 
-            AppSettings.FakeLicenseeList.Returns(Enumerable.Empty<int>());
+            _licenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(false);
 
             using (var controller = CreateController(reportSettingService))
             {
@@ -56,9 +73,10 @@
         {
             // Arrange
             var reportSettingService = Substitute.For<IReportSettingService>();
-            reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss).Returns(new ReportSetting { BaseCurrencies = "USD,KKK", TimeZone = 8 });
+            reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss, Arg.Any<string>())
+                .Returns(new ReportSetting { BaseCurrencies = "USD,KKK", TimeZone = 8 });
 
-            AppSettings.FakeLicenseeList.Returns(new[] { DefaultLicenseeSession.LicenseeId });
+            _licenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(true);
 
             using (var controller = CreateController(reportSettingService))
             {
@@ -77,7 +95,7 @@
         }
 
         private LicenseeWinLossReportController CreateController(IReportSettingService reportSettingService)
-        {           
+        {
             var productService = Substitute.For<IProductService>();
             productService.GetSingleWalletProductAccess(
                 SessionService.LicenseeSession.LicenseeId,
@@ -87,9 +105,8 @@
             return new LicenseeWinLossReportController(
                 LangService,
                 SessionService,
-                AppSettings,
                 productService,
-                reportSettingService);
+                reportSettingService, _licenseeSettingService);
         }
     }
 }

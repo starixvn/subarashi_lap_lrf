@@ -2,10 +2,14 @@
 {
     using System.Linq;
     using System.Threading.Tasks;
+
     using Core.UnitTests.TestHelpers;
+
     using Model.TotalBet.DTO;
     using Model.TotalBet.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
 
     public class TotalGoalDataAccessTest : BaseDataAccessHelperTest<TotalGoalDataAccess>

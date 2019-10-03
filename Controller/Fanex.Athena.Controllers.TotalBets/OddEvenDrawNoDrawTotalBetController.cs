@@ -9,12 +9,15 @@ namespace Fanex.Athena.Controllers.TotalBets
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+
     using DataAccess.TotalBet.Interfaces;
-    using Extension.Utility;
+    using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
-    using Model.Core.DataDomain;
+
     using Model.TotalBet.MetaModel;
     using Model.TotalBet.ViewModel;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
 
@@ -26,9 +29,8 @@ namespace Fanex.Athena.Controllers.TotalBets
         public OddEvenDrawNoDrawTotalBetController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             IOddEvenDrawNoDrawDataAccess oddEvenDrawNoDrawDataAccess)
-        : base(languageService, sessionService, appSetting)
+        : base(languageService, sessionService)
         {
             _oddEvenDrawNoDrawDataAccess = oddEvenDrawNoDrawDataAccess;
         }
@@ -58,9 +60,11 @@ namespace Fanex.Athena.Controllers.TotalBets
 
         private async Task<ActionResult> GetView(OddEvenDrawNoDrawMetaModel metaModel)
         {
+            var userSession = SessionService.UserSession;
             var currencies = SessionService.UserSession.CurrencyList;
 
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList,
+                metaModel.CurrencyId);
             var result = await _oddEvenDrawNoDrawDataAccess.GetOddEvenDrawNoDrawDataList(metaModel).ConfigureAwait(false);
             var model = new OddEvenDrawNoDrawViewModel
             {

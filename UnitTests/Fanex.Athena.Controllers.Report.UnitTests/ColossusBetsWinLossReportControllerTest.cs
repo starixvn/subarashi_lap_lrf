@@ -5,7 +5,8 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Base.UnitTests;
-    using Constant.DataDomain;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using Model.Report.ViewModel;
     using NSubstitute;
@@ -63,7 +64,6 @@
             return new ColossusBetsWinLossReportController(
                 LangService,
                 SessionService,
-                AppSettings,
                 productService);
         }
     }

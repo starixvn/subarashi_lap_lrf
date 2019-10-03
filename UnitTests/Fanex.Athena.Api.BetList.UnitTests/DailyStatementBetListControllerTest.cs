@@ -5,14 +5,17 @@
     using System.Net.Http;
     using System.Text;
     using System.Threading.Tasks;
-    using System.Web.Http.Results;
-    using Fanex.Athena.Resources;
+
+    using Fanex.Athena.Model.Auth;
+
     using Model.BetList.MetaModel;
     using Model.Core.DTO.Configuration;
+
     using Newtonsoft.Json;
+
     using NSubstitute;
+
     using NUnit.Framework;
-    using Session.Model;
 
     public class DailyStatementBetListControllerTest : ApiBetListBaseControllerHelperTest
     {
@@ -29,9 +32,8 @@
         {
             MockSessionData();
 
-            AuthorizationService.HasPermissionOnData(SessionLicenseeId, Arg.Any<int>(), Arg.Any<long>()).Returns(true);
+            AuthorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), Arg.Any<int>(), Arg.Any<long>()).Returns(true);
         }
-
 
         [TestCase(0, "01/01/2018", "01/02/2018", UspKeyOld)]
         [TestCase(1, "01/03/2018", "01/02/2018", UspKey)]
@@ -49,7 +51,12 @@
                 };
 
                 BalanceUpDataAccess.GetBalanceUp().Returns(new BalanceUp { BalanceUpDay = DateTime.Parse(balanceUpDay) });
-                StubUserSessionData(new UserSession { Language = SessionLanguage, CurrencyList = new Dictionary<int, string> { { currencyId, "Test" } } });
+                StubUserSessionData(new UserAuthInfo
+                {
+                    Language = SessionLanguage,
+                    CurrencyList = new Dictionary<int, string> { { currencyId, "Test" } },
+                    CurrencyAgentList = new Dictionary<int, int[]>()
+                });
 
                 dynamic betListResult = new
                 {

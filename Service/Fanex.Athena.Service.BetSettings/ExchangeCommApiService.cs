@@ -9,19 +9,27 @@ namespace Fanex.Athena.Service.BetSettings
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
     using CitiXchangeLibrary;
-    using Constant.DataDomain;
+
     using DataAccess.BetSettings.Interfaces;
     using DataAccess.Core.Common.Constants;
     using DataAccess.Core.Common.Interfaces;
+
     using Extension.Utility;
+
     using Fanex.Athena.Extension.Helpers;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Interfaces;
+
     using Logging;
+
     using Model.Core.Constants;
+    using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using Model.Core.MetaModel.Common;
+
     using Resources;
 
     public class ExchangeCommApiService : BetSettingBaseService, IExchangeCommApiService
@@ -49,13 +57,11 @@ namespace Fanex.Athena.Service.BetSettings
         private readonly IDcsBetSettingDataAccess _betSettingDataAccess;
 
         public ExchangeCommApiService(
-            IAuthorizationService authorizationService,
             ILogger logger,
             IUserLogDataAccess userLogDataAccess,
             IDcsBetSettingDataAccess betSettingDataAccess,
             IAppSettings appSetting,
             ICitiXchangeClient apiClient)
-            : base(authorizationService)
         {
             _logger = logger;
             _userLogDataAccess = userLogDataAccess;
@@ -64,13 +70,8 @@ namespace Fanex.Athena.Service.BetSettings
             _apiClient = apiClient;
         }
 
-        public IResultInfo<double> GetCommission(int licenseeId, int custId)
+        public IResultInfo<double> GetCommission(int custId)
         {
-            if (!HasPermissionOnData(licenseeId, custId))
-            {
-                return CreateAccessDeniedResult();
-            }
-
             try
             {
                 var result = _apiClient.getProfile(custId, EnvironmentMap[_appSetting.Environment]);
@@ -83,13 +84,9 @@ namespace Fanex.Athena.Service.BetSettings
             }
         }
 
-        public async Task<IResultInfo<double>> UpdateCommissionAsync(int licenseeId, int userId, int custId, double oldCommission, double newCommission)
+        public async Task<IResultInfo<double>> UpdateCommissionAsync(
+            int userId, int custId, double oldCommission, double newCommission)
         {
-            if (!HasPermissionOnData(licenseeId, custId))
-            {
-                return CreateAccessDeniedResult();
-            }
-
             var isEnable = await _betSettingDataAccess.GetStatusAsync(custId, ProductTypes.Exchange).ConfigureAwait(false);
 
             if (isEnable != true)

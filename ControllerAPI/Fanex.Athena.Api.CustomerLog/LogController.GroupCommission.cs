@@ -8,6 +8,7 @@ namespace Fanex.Athena.Api.CustomerLog
 {
     using System.Threading.Tasks;
     using System.Web.Http;
+
     using Fanex.Athena.Model.Customer.MetaModel.CustomerLog;
 
     public partial class LogController

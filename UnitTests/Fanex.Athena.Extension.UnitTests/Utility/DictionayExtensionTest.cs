@@ -2,7 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
+
     using Extension.Utility;
+
     using NUnit.Framework;
 
     [TestFixture]

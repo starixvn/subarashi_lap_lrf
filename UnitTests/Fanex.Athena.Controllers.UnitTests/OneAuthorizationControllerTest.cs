@@ -1,18 +1,23 @@
 ﻿namespace Fanex.Athena.Controllers.UnitTests
 {
     using System;
-    using System.Threading.Tasks;
+
     using Base.UnitTests;
+
+    using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Logging;
+
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
-    using Model.Core.DTO.OneAuth;
+
     using Newtonsoft.Json;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using ONEbook.UM.Services;
-    using Service.Core.Utility.Interfaces;
 
     [TestFixture]
     public class OneAuthorizationControllerTest : CultureBaseControllerHelperTest

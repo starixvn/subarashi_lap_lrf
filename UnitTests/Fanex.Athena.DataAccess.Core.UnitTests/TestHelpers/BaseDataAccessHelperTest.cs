@@ -2,9 +2,13 @@
 {
     using System.Collections.Generic;
     using System.Data;
+
     using Fanex.Data;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using UnitTest.Common.Helpers;
 
     public class BaseDataAccessHelperTest<T> where T : BaseDataAccess

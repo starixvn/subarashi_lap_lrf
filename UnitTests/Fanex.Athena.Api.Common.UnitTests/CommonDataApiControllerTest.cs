@@ -4,15 +4,24 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using Base;
+
     using DataAccess.Core.Common.Interfaces;
+
+    using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Model.Core.DTO.Common;
     using Model.Core.MetaModel.Common;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-    using Session.Model;
+
     using UnitTest.Common.Helpers;
 
     public class CommonDataApiControllerTest
@@ -25,14 +34,18 @@
 
         private IMatchDataAccess _matchDataAccess = Substitute.For<IMatchDataAccess>();
 
-        private IBetTypeService _betTypeService = Substitute.For<IBetTypeService>();
+        private readonly IBetTypeService _betTypeService = Substitute.For<IBetTypeService>();
 
         [OneTimeSetUp]
         public void FixtureSetUp()
         {
-            _sessionService.LicenseeSession.Returns(new LicenseeSession { LicenseeId = FakeHelper.Create<int>() });
-            _sessionService.UserSession.Returns(new UserSession { UserId = FakeHelper.Create<int>(), Language = FakeHelper.Create<string>() });
-            _sessionService.GenerateAgentListXml(Arg.Any<int>()).Returns(FakeHelper.Create<string>());
+            _sessionService.LicenseeSession.Returns(new LicenseeAuthInfo { LicenseeId = FakeHelper.Create<int>() });
+            _sessionService.UserSession.Returns(new UserAuthInfo
+            {
+                UserId = FakeHelper.Create<int>(),
+                Language = FakeHelper.Create<string>(),
+                CurrencyAgentList = new Dictionary<int, int[]>()
+            });
         }
 
         [OneTimeTearDown]
@@ -105,7 +118,6 @@
             using (var controller = CreateController())
             {
                 // arrange
-                var productCode = FakeHelper.Create<string>();
                 var league = new League { LeagueId = FakeHelper.Create<int>(), LeagueName = FakeHelper.Create<string>() };
 
                 _leagueDataAccess.GetLeaguesBySport(Arg.Any<LeagueMetaModel>())
@@ -132,7 +144,6 @@
             using (var controller = CreateController())
             {
                 // arrange
-                var productCode = FakeHelper.Create<string>();
                 var match = new Match { MatchId = FakeHelper.Create<int>(), MatchName = FakeHelper.Create<string>() };
                 var fromDate = FakeHelper.Create<DateTime>();
                 var toDate = FakeHelper.Create<DateTime>();

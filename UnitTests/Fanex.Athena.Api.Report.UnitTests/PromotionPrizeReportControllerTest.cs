@@ -1,15 +1,20 @@
 ﻿namespace Fanex.Athena.Api.Report.UnitTests
 {
-    using System;
     using Base.UnitTests;
+
     using DataAccess.Report.Interfaces;
+
     using Model.Core.DataDomain;
     using Model.Core.ResultModel;
     using Model.Report;
     using Model.Report.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Resources;
+
     using UnitTest.Common.Helpers;
 
     public class PromotionPrizeReportControllerTest : BaseApiControllerHelperTest

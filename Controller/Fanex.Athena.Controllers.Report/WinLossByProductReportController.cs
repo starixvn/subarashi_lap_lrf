@@ -9,11 +9,15 @@ namespace Fanex.Athena.Controllers.Report
     using System;
     using System.Linq;
     using System.Web.Mvc;
+
     using Extension.Utility;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
 
@@ -24,8 +28,10 @@ namespace Fanex.Athena.Controllers.Report
             ILanguageService languageService,
             ISessionService sessionService,
             IAppSettings appSetting,
-            IProductService productService)
-            : base(languageService, sessionService, appSetting, productService)
+            IProductService productService,
+             ILicenseeSettingService licenseeSettingService
+            )
+            : base(languageService, sessionService, appSetting, productService, licenseeSettingService)
         {
         }
 
@@ -60,7 +66,7 @@ namespace Fanex.Athena.Controllers.Report
                 CurrencyList = userSession.CurrencyList,
                 IsAllowedCustomerCommission = licenseeSession.IsAllowedCustomerComm,
                 ProductAccess = productAccess,
-                IsFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeId),
+                IsFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeName),
                 HasAmountDueToColumn = AppSettings.HasAmountDueToColumn
             };
 

@@ -1,11 +1,13 @@
 ﻿namespace Fanex.Athena.Api.BetList.UnitTests
 {
     using System.Threading.Tasks;
+
     using DataAccess.Core.Configuration.Interfaces;
+
     using Model.BetList.MetaModel;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-    using Service.Core.Utility.Interfaces;
     using Service.StatelessCore.Interfaces;
 
     internal class FakeApiBetListBaseController : ApiBetListBaseController

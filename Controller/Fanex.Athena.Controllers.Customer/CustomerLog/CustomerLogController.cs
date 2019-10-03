@@ -8,10 +8,12 @@ namespace Fanex.Athena.Controllers.Customer.CustomerLog
 {
     using System.Web.Mvc;
     using System.Web.SessionState;
-    using Extension.Utility;
+    using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
-    using Model.Core.DataDomain;
+
     using ONEbook.UM.Filters;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
 
@@ -25,9 +27,8 @@ namespace Fanex.Athena.Controllers.Customer.CustomerLog
         public CustomerLogController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             IProductService productService)
-        : base(languageService, sessionService, appSetting)
+        : base(languageService, sessionService)
         {
             _productService = productService;
         }

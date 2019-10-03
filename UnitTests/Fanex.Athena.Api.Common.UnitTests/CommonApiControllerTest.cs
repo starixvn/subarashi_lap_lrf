@@ -1,11 +1,16 @@
 ﻿namespace Fanex.Athena.Api.Common.UnitTests
 {
     using System.Threading.Tasks;
+
     using Base;
+
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Service.Core.Common.Interfaces;
-    using Service.Core.Configuration.Interfaces;
 
     public class CommonApiControllerTest
     {

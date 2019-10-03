@@ -65,7 +65,6 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                const string AgentListXml = "<xml/>";
                 var metaModel = new BetListExcelMetaModel
                 {
                     IsExportExcel = true,
@@ -78,14 +77,12 @@
                     CurrencyId = currencyId
                 };
 
-                var fakeLicensees = isFakeLicensee ? new[] { DefaultLicenseeSession.LicenseeId } : Enumerable.Empty<int>();
-                AppSettings.FakeLicenseeList.Returns(fakeLicensees);
+                LicenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(isFakeLicensee);
 
                 var currencyTitle = string.Format(ViewResources.Viewin, expectedCurrency);
                 var expectedTitle = $"{ViewResources.Customer} {ViewResources.BetList} - 11/11/2018 --> 12/12/2018 - "
                     + $"External{(isFakeLicensee ? "" : "(System)")} - {currencyTitle}";
 
-                SessionService.GenerateAgentListXml(metaModel.CurrencyId, false).Returns(AgentListXml);
                 controller.When(async x => await x.ProcessExportExcel(
                     Arg.Any<BetListExcelMetaModel>(),
                     Arg.Any<string>(),
@@ -102,7 +99,7 @@
                         && string.Join(",", x.HiddenColumns) == "1,2"
                         && x.LicenseeId == DefaultLicenseeSession.LicenseeId
                         && !x.IsShowSumStake
-                        && x.AgentListXml == AgentListXml),
+                       ),
                     "CustomerWinLossBetList",
                     null);
             }
@@ -113,11 +110,10 @@
             return Substitute.ForPartsOf<CustomerWinLossBetListController>(
                 LangService,
                 SessionService,
-                AppSettings,
                 ProductService,
                 BalanceUpDataAccess,
                 CacheRefAdapter,
-                BetListApiClient);
+                BetListApiClient, LicenseeSettingService);
         }
     }
 }

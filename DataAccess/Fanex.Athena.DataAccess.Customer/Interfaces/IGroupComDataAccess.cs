@@ -14,19 +14,19 @@ namespace Fanex.Athena.DataAccess.Customer.Interfaces
 
     public interface IGroupComDataAccess
     {
-        Task<IResultInfo> InsertGroup(GroupCommMetaModel item, IRequest request, int userId);
+        Task<IResultInfo> InsertGroupAsync(GroupCommMetaModel item, IRequest request, int userId);
 
-        Task<IResultInfo> UpdateGroup(GroupCommMetaModel newItem, IRequest request, int userId);
+        Task<IResultInfo> UpdateGroupAsync(GroupCommMetaModel newItem, IRequest request, int userId);
 
-        Task<IList<GroupCommMetaModel>> GetAll(int licenseeId);
+        Task<IList<GroupCommMetaModel>> GetAllAsync(int licenseeId);
 
-        Task<DataTable> GetDataForExcel(int licenseeId);
+        Task<DataTable> GetDataForExcelAsync(int licenseeId);
 
         GroupCommMetaModel GetById(int groupCommId, int licenseeId);
 
         bool CheckByName(int licenseeId, string groupName);
 
-        Task<IResultInfo> DeleteGroup(
+        Task<IResultInfo> DeleteGroupAsync(
             int groupId,
             int licenseeId,
             int userId,

@@ -1,0 +1,75 @@
+﻿namespace Fanex.Athena.Module.PlayerAdmin.Services
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using System.Xml.Linq;
+    using Fanex.Athena.Extension.Helpers;
+    using Fanex.Athena.Extension.Utility;
+    using Fanex.Athena.Extension.Utility.Interfaces;
+    using Fanex.Athena.Module.PlayerAdmin.DTO;
+    using Fanex.Athena.Module.PlayerAdmin.DTO.BetLimits;
+    using Fanex.Athena.Module.PlayerAdmin.Services.Interfaces;
+    using Fanex.Common;
+    using Fanex.Logging;
+
+    public class AGCasinoBetLimitService : IAGCasinoBetLimitService
+    {
+        private readonly IWebClientService _webClientService;
+
+        private readonly ILogger _logger;
+
+        private readonly IAppSettings _appSettings;
+
+        public AGCasinoBetLimitService(
+            ILogger logger,
+            IAppSettings appSettings,
+            IWebClientService webClientService)
+        {
+            _logger = logger;
+            _appSettings = appSettings;
+            _webClientService = webClientService;
+        }
+
+        public async Task<IList<AgCasinoGame>> GetGroupBettingsAsync(string siteName, int currency)
+        {
+            var uri = new Uri(_appSettings.GetValue("AGCasinoApiUrl"));
+            var parameters = string.Format("SiteName={0}&Currency={1}", siteName, currency);
+            var games = new List<AgCasinoGame>();
+            try
+            {
+                var apiResult = await _webClientService.UploadStringAsync(uri, parameters);
+
+                var xml = XDocument.Parse(apiResult);
+
+                foreach (var xmlGame in xml.Descendants("Game"))
+                {
+                    var game = new AgCasinoGame
+                    {
+                        GameType = xmlGame.Attribute("GameType").Value,
+                        Name = xmlGame.Attribute("Name").Value,
+                        Groups = new List<AgCasinoGroup>()
+                    };
+
+                    foreach (var xmlGroup in xmlGame.Descendants("Group"))
+                    {
+                        game.Groups.Add(new AgCasinoGroup
+                        {
+                            GroupType = xmlGroup.Attribute("GroupType").Value,
+                            Min = Converter.ToInt(xmlGroup.Element("Min").Value),
+                            Max = Converter.ToInt(xmlGroup.Element("Max").Value)
+                        });
+                    }
+
+                    games.Add(game);
+                }
+            }
+            catch (Exception exception)
+            {
+                _logger.Error(LogMessageHelper.GenerateMessage(exception));
+            }
+
+            return games;
+        }
+    }
+}

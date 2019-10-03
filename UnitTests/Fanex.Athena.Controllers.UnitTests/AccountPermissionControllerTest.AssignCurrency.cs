@@ -1,16 +1,20 @@
 ﻿namespace Fanex.Athena.Controllers.UnitTests
 {
     using System.Collections.Generic;
-    using System.Threading.Tasks;
     using System.Web.Mvc;
+
+    using Fanex.Athena.Model.Auth;
+
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using Model.Core.DTO.Users;
     using Model.Core.MetaModel.Account;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Resources;
-    using Session.Model;
 
     public partial class AccountPermissionControllerTest
     {
@@ -75,7 +79,7 @@
                 // Arrange
                 AppSettings.EnableAssignCurrency.Returns(true);
 
-                StubLicenseeSessionData(new LicenseeSession
+                StubLicenseeSessionData(new LicenseeAuthInfo
                 {
                     LicenseeId = LicenseeIdentity.KeenOcean
                 });
@@ -191,7 +195,7 @@
         }
 
         [Test]
-        public void AssignCurrency_ValidUser_BuildCorrectCurrencyList()
+        public void AssignCurrency_ValidUser_BuildCorrectCurrencyListAsync()
         {
             using (var controller = CreateController())
             {
@@ -216,8 +220,7 @@
                 };
 
                 // Action
-                var result = controller.AssignCurrency(model) as JsonResult;
-                var resultInfo = result.Data as ResultInfo;
+                controller.AssignCurrency(model);
 
                 // Assert
                 Assert.That(
@@ -245,9 +248,7 @@
                 };
 
                 // Action
-                var result = controller.AssignCurrency(model) as JsonResult;
-                var resultInfo = result.Data as ResultInfo;
-
+                controller.AssignCurrency(model);
                 // Assert
                 Assert.That(model.CurrencyList, Is.EqualTo("<currencies></currencies>"));
             }
@@ -310,7 +311,7 @@
         private void StubGetCurrenciesByUser(int licenseeId, int userId, List<CurrencyUser> fakeResult)
         {
             LangService.GetCurrentLanguage().Returns(DefaultUserSession.Language);
-            _currencyDataAccess.GetCurrenciesByUser(DefaultLicenseeSession.LicenseeId, DefaultUserSession.UserId).Returns(x => fakeResult);
+            _currencyDataAccess.GetCurrenciesByUser(licenseeId, userId).Returns(x => fakeResult);
         }
 
         private void StubAssignCurrenciesByUser(ResultInfo fakeResult)

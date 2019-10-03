@@ -8,6 +8,7 @@
     using Customer;
     using Excel.Base.Entities;
     using Excel.Customer;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DTO.Common;
     using Model.Customer.MetaModel;
     using NSubstitute;
@@ -102,7 +103,7 @@
                 var productList = new List<Product> { new Product { ProductCode = Product.CS } };
                 var productAccess = new ProductAccess(productList);
                 _productService.GetProductAccess(licenseeId, userSession.Language).Returns(productAccess);
-                _groupComService.DeleteGroup(null).ReturnsForAnyArgs(new ResultInfo());
+                _groupComService.DeleteGroupAsync(null).ReturnsForAnyArgs(new ResultInfo());
 
                 // Action
                 var result = await controller.Delete(GroupId, IsRemovePlayerComm, IsResetDefault) as JsonResult;
@@ -111,7 +112,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    _groupComService.Received(1).DeleteGroup(Arg.Is<DeleteGroupMetaModel>(x =>
+                    _groupComService.Received(1).DeleteGroupAsync(Arg.Is<DeleteGroupMetaModel>(x =>
                         x.GroupId == GroupId &&
                         x.LicenseeId == licenseeId &&
                         x.UserId == userSession.UserId &&
@@ -138,7 +139,7 @@
                     IsDefaultGroup = isDefaultGroup,
                     GroupCommId = 999
                 };
-                _groupComService.GetAll(SessionService.LicenseeSession.LicenseeId)
+                _groupComService.GetAllAsync(SessionService.LicenseeSession.LicenseeId)
                     .Returns(new List<GroupCommMetaModel> { group });
 
                 // Action
@@ -165,7 +166,7 @@
                 _productService.GetProductAccess(licenseeId, SessionService.UserSession.Language)
                     .Returns(new ProductAccess(productList));
                 var dataTable = new DataTable();
-                _groupComService.GetDataForExcel(licenseeId).Returns(dataTable);
+                _groupComService.GetDataForExcelAsync(licenseeId).Returns(dataTable);
                 var excel = Substitute.ForPartsOf<CustomerCommGroupExcel>(string.Empty, dataTable, new ShowingOption());
                 excel.When(x => x.Export()).DoNotCallBase();
                 controller.CreateExcel(string.Empty, dataTable, new ShowingOption()).ReturnsForAnyArgs(excel);
@@ -186,7 +187,6 @@
             var controller = Substitute.ForPartsOf<CustomerComGroupController>(
                LangService,
                SessionService,
-               AppSettings,
                _groupComService,
                _productService);
             controller.ControllerContext = ControllerContext;

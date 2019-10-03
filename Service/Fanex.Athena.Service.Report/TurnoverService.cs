@@ -9,6 +9,7 @@ namespace Fanex.Athena.Service.Report
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using Fanex.Athena.DataAccess.Report.Interfaces;
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;

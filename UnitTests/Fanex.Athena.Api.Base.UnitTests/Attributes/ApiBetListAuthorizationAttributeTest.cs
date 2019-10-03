@@ -6,13 +6,20 @@
     using System.Threading;
     using System.Threading.Tasks;
     using System.Web.Http.Controllers;
+
     using Attributes;
+
     using Autofac;
+
+    using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using NSubstitute;
+
     using NUnit.Framework;
-    using Service.Core.Configuration.Interfaces;
+
     using Service.Core.Users.Interfaces;
-    using Session.Model;
+
     using UnitTest.Common.Helpers;
 
     public class ApiBetListAuthorizationAttributeTest
@@ -32,7 +39,7 @@
         {
             _licenseeSettingService = Substitute.For<ILicenseeSettingService>();
             _sessionService = Substitute.For<ISessionService>();
-            _sessionService.LicenseeSession.Returns(new LicenseeSession
+            _sessionService.LicenseeSession.Returns(new LicenseeAuthInfo
             {
                 LicenseeName = LicenseeName
             });

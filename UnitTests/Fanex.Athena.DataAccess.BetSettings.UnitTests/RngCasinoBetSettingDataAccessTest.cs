@@ -1,10 +1,15 @@
 ﻿namespace Fanex.Athena.DataAccess.BetSettings.UnitTests
 {
     using System.Threading.Tasks;
+
     using Core.UnitTests.TestHelpers;
+
     using Interfaces;
+
     using Model.BetSettings.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
 
     [TestFixture]

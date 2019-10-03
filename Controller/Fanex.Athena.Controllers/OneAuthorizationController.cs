@@ -1,17 +1,19 @@
 ﻿namespace Fanex.Athena.Controllers
 {
     using System.Text;
-    using System.Threading.Tasks;
     using System.Web.Mvc;
+
     using Extension.Helper;
+
     using Fanex.Athena.Extension.Utility;
+    using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Logging;
-    using Model.Core.DTO.OneAuth;
+
     using Newtonsoft.Json;
+
     using ONEbook.UM.Services;
-    using Service.Core.Utility.Interfaces;
 
     public class OneAuthorizationController : Controller
     {

@@ -326,7 +326,6 @@ exports[`BetList  render  show bet list detail popup when show detail state is t
         </div>
         <a
           className="popup-close"
-          href="javascript:;"
           onClick={[Function]}
         >
           <i

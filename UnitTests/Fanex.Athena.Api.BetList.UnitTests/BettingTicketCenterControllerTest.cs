@@ -4,13 +4,17 @@
     using System.Linq;
     using System.Net.Http;
     using System.Threading.Tasks;
-    using System.Web.Http.Results;
+
     using Base.UnitTests;
+
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Model.BetList.MetaModel;
-    using Model.Core.DataDomain;
+
     using NSubstitute;
+
     using NUnit.Framework;
-    using Service.Core.Utility.Interfaces;
+
     using UnitTest.Common.Helpers;
 
     public class BettingTicketCenterControllerTest : BaseApiControllerHelperTest
@@ -67,7 +71,6 @@
                 }));
             }
         }
-
 
         [Test]
         public async Task GetByRunning_ValidMetaModel_CallApiWithCorrectParameters()

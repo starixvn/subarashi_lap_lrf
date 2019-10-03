@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 08/30/2019 3:28:35 PM
+﻿// Generated at: 10/2/2019 11:42:25 AM
 window._language_zh_Hans = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -158,6 +158,7 @@ BetSettingGroups:"Bet Setting Groups",
 BetSettings:"投注设定",
 BetTaken:"匹配时间",
 BettingLimit:"投注限额",
+BettingStatement:"投注详情",
 BettingTicketCenter:"注单中心",
 BettingTicketCenter_MultiCustomersTabNote1:"所有投注类别，联赛和比赛过滤器仅支援1个选定日期",
 BettingTicketCenter_MultiCustomersTabNote2:"显示从{0}开始的资料",

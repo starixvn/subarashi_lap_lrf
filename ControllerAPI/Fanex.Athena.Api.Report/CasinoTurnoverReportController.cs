@@ -1,14 +1,18 @@
 ﻿namespace Fanex.Athena.Api.Report
 {
-    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Http;
+
     using Base.Attributes;
+
     using DataAccess.Report.Interfaces;
-    using Fanex.Athena.Resources;
+    using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Utility;
+
     using Model.Core.DataDomain;
-    using Model.Report.DTO;
     using Model.Report.MetaModel;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
 
@@ -32,8 +36,8 @@
             IsValidProductCodeList = true, FunctionConfig = FunctionNames.CasinoTurnover, IsSingleWalletProduct = true)]
         public async Task<dynamic> GetData(CasinoTurnoverMetaModel metaModel)
         {
-
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
+            var userSession = SessionService.UserSession;
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId);
             var result = await _casinoTurnoverDataAccess.GetData(metaModel).ConfigureAwait(false);
             return new
             {
@@ -41,7 +45,6 @@
                 Total = result.TotalData,
                 result.TotalRows
             };
-
         }
     }
 }

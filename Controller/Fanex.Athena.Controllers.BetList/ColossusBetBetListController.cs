@@ -11,15 +11,21 @@ namespace Fanex.Athena.Controllers.BetList
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using System.Web.UI;
+
     using DataAccess.Core.Configuration.Interfaces;
-    using Extension.Utility;
+    using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Utility;
+
     using Model.BetList.MetaModel;
     using Model.BetList.ViewModel;
     using Model.Core.DataDomain;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-    using Service.Core.Utility.Interfaces;
+
     using VendorAdapter.Interfaces;
+
     using Web.ActionFilter;
 
     #endregion Using
@@ -32,13 +38,14 @@ namespace Fanex.Athena.Controllers.BetList
         public ColossusBetBetListController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             IProductService productService,
             IBalanceUpDataAccess balanceUpDataAccess,
             ICacheRefAdapter cacheRefAdapter,
-            IBetListApiClient betListApiClient)
+            IBetListApiClient betListApiClient, ILicenseeSettingService licenseeSettingService
+)
 #pragma warning restore S107 // Methods should not have too many parameters
-        : base(languageService, sessionService, appSetting, productService, balanceUpDataAccess, cacheRefAdapter, betListApiClient)
+        : base(languageService, sessionService, productService, balanceUpDataAccess,
+              cacheRefAdapter, betListApiClient, licenseeSettingService)
         {
         }
 
@@ -48,7 +55,7 @@ namespace Fanex.Athena.Controllers.BetList
         public async Task<ActionResult> Detail(ColossusBetDetailMetaModel metaModel)
         {
             var userSession = SessionService.UserSession;
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml();
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList);
             metaModel.UserId = userSession.UserId;
 
             var viewModel = await BetListApiClient.PostAsync<ColossusBetDetailViewModel>("/ColossusBetBetList/Detail",

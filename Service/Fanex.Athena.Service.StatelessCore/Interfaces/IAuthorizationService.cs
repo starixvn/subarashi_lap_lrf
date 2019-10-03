@@ -7,14 +7,25 @@
 namespace Fanex.Athena.Service.StatelessCore.Interfaces
 {
     using System.Collections.Generic;
-    using System.Threading.Tasks;
+
+    using Fanex.Athena.Model.Auth;
 
     public interface IAuthorizationService
     {
-        bool HasPermissions(IEnumerable<int> userFunctionList, params string[] permissionKeys);
+        bool HasPermissions(IEnumerable<Function> userFunctionList, params string[] permissionKeys);
 
-        bool HasPermissions(IEnumerable<string> userFunctionList, params string[] permissionKeys);
+        bool HasPermissions(OneAuthPermission[] userPortalFunctionList, params string[] permissionKeys);
 
-        bool HasPermissionOnData(int licenseeId, int custId, long transId);
+        bool HasPermissionOnData(IDictionary<int, int[]> currencyAgents, int custId, long transId);
+
+        bool HasPermissionOnData(OneAuthCurrency[] currencyAgents, int custId, long transId);
+
+        bool IsAllowedEditCommission(UserAuthInfo userAuthInfo);
+
+        bool IsAllowedSpecialBA(UserAuthInfo userAuthInfo);
+
+        bool CheckCustomerBelongsTo(IDictionary<int, int[]> currencyAgents, int custId, int currencyId = 0);
+
+        bool CheckProductBelongsTo(string licenseeName, int productId, int[] limitedProductIds = null);
     }
 }

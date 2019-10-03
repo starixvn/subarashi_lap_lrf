@@ -2,12 +2,17 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using System.Threading.Tasks;
+
     using Core.Common;
-    using Model.Core.DTO.Users;
+
+    using Fanex.Athena.Model.Auth;
+
     using Model.Core.MetaModel.Account;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using TestHelpers;
 
     public class CurrencyDataAccessTest : BaseDataAccessHelperTest<CurrencyDataAccess>

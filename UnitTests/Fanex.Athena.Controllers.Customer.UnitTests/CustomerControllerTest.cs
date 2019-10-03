@@ -6,6 +6,8 @@
     using DataAccess.Core.Users.Interfaces;
     using Excel.Customer;
     using Fanex.Athena.Controllers.Base.UnitTests;
+    using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DTO.Common;
     using Model.Core.DTO.Users;
     using Model.Core.ResultModel;
@@ -17,7 +19,6 @@
     using Service.Core.Common.Interfaces;
     using Service.Customer.Interfaces;
     using Service.Report.Interfaces;
-    using Session.Model;
 
     public partial class CustomerControllerTest : CultureBaseControllerHelperTest
     {
@@ -26,6 +27,14 @@
         private ILicenseeDataAccess _licenseeDataAccess;
         private IProductService _productService;
         private ISubsidiaryService _subsidiaryService;
+        private IAuthorizationService _authorizationService;
+        private ILicenseeSettingService _licenseeSettingService;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _licenseeSettingService = Substitute.For<ILicenseeSettingService>();
+        }
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
@@ -37,12 +46,12 @@
             _licenseeDataAccess = Substitute.For<ILicenseeDataAccess>();
             _productService = Substitute.For<IProductService>();
             _subsidiaryService = Substitute.For<ISubsidiaryService>();
-
+            _authorizationService = Substitute.For<IAuthorizationService>();
             AppSettings.GetValue(Arg.Any<string>()).Returns(string.Empty);
-            SessionService.IsAllowedEditCommission(Arg.Any<UserSession>()).Returns(false);
-            SessionService.IsAllowedSpecialBA(Arg.Any<UserSession>()).Returns(true);
+            _authorizationService.IsAllowedEditCommission(Arg.Any<UserAuthInfo>()).Returns(false);
+            _authorizationService.IsAllowedSpecialBA(Arg.Any<UserAuthInfo>()).Returns(true);
 
-            _groupComService.GetAll(Arg.Any<int>()).Returns(new List<GroupCommMetaModel>());
+            _groupComService.GetAllAsync(Arg.Any<int>()).Returns(new List<GroupCommMetaModel>());
             _groupComService.GetById(Arg.Any<int>(), Arg.Any<int>()).Returns(new GroupCommMetaModel());
         }
 
@@ -62,6 +71,7 @@
             _groupComService.ClearReceivedCalls();
             _customerListService.ClearReceivedCalls();
             _licenseeDataAccess.ClearReceivedCalls();
+            _licenseeSettingService = null;
         }
 
         [Test]
@@ -73,13 +83,15 @@
                 const int CustId = 1;
 
                 StubLicenseeSessionData(DefaultLicenseeSession);
-                _customerListService.GetCustomerLoginInfo(CustId, DefaultLicenseeSession.LicenseeId, DefaultLicenseeSession.LicenseeName).Returns(new LogInfo());
+                _customerListService.GetCustomerLoginInfo(CustId, DefaultLicenseeSession.LicenseeId,
+                    DefaultLicenseeSession.LicenseeName).Returns(new LogInfo());
 
                 // Action
                 var result = controller.LogInfo(CustId);
 
                 // Assert
-                _customerListService.Received().GetCustomerLoginInfo(CustId, DefaultLicenseeSession.LicenseeId, DefaultLicenseeSession.LicenseeName);
+                _customerListService.Received().GetCustomerLoginInfo(CustId,
+                    DefaultLicenseeSession.LicenseeId, DefaultLicenseeSession.LicenseeName);
             }
         }
 
@@ -98,7 +110,8 @@
                 _productService.GetProductAccess(Arg.Any<int>(), Arg.Any<string>()).Returns(productAccess);
 
                 var logInfo = new LogInfo { CustId = CustId };
-                _customerListService.GetCustomerLoginInfo(CustId, DefaultLicenseeSession.LicenseeId, DefaultLicenseeSession.LicenseeName).Returns(logInfo);
+                _customerListService.GetCustomerLoginInfo(CustId,
+                    DefaultLicenseeSession.LicenseeId, DefaultLicenseeSession.LicenseeName).Returns(logInfo);
 
                 // Action
                 var result = controller.LogInfo(CustId) as ViewResult;
@@ -146,7 +159,7 @@
 
         [TestCase(false)]
         [TestCase(true)]
-        public void ExportExcel_IsConvertIsFalse_ExportWithCorrectReportTitle(bool isConvert)
+        public async Task ExportExcel_IsConvertIsFalse_ExportWithCorrectReportTitleAsync(bool isConvert)
         {
             using (var controller = CreateContoller())
             {
@@ -160,9 +173,9 @@
                 controller.Server.MapPath(Arg.Any<string>()).Returns(Path);
                 StubLicenseeSessionData(DefaultLicenseeSession);
                 _productService.GetProductAccess(Arg.Any<int>(), Arg.Any<string>()).Returns(new ProductAccess(new List<Product>()));
-                SessionService.IsAllowedEditCommission(DefaultUserSession).Returns(false);
-                SessionService.IsAllowedSpecialBA(DefaultUserSession).Returns(false);
-                _customerListService.GetActiveCustomers(Arg.Any<CustomerListMetaModel>()).Returns(new ReportResultModel<CustomerDTO>
+                _authorizationService.IsAllowedEditCommission(DefaultUserSession).Returns(false);
+                _authorizationService.IsAllowedSpecialBA(DefaultUserSession).Returns(false);
+                _customerListService.GetActiveCustomersAsync(Arg.Any<CustomerListMetaModel>()).Returns(new ReportResultModel<CustomerDTO>
                 {
                     DataList = new List<CustomerDTO>(),
                     TotalRows = 0
@@ -186,7 +199,7 @@
                 controller.When(x => x.CreateExcel(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<CustomerListViewModel>())).Do(x => actualReportTitle = (string)x[1]);
 
                 // Action
-                controller.ExportExcel(excelParam);
+                await controller.ExportExcel(excelParam);
 
                 // Assert
                 Assert.Multiple(() =>
@@ -207,7 +220,8 @@
                 _groupComService,
                 _licenseeDataAccess,
                 _productService,
-                _subsidiaryService);
+                _subsidiaryService,
+                _authorizationService, _licenseeSettingService);
             controller.ControllerContext = ControllerContext;
 
             return controller;

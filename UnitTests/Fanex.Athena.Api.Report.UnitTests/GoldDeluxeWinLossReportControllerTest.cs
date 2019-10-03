@@ -3,26 +3,34 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
     using Base.UnitTests;
-    using Constant.DataDomain;
+
     using DataAccess.Report.Interfaces;
-    using Excel.Base.Entities;
+
     using Excel.Report;
+
+    using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Model.Auth.Enum;
     using Fanex.Athena.Service.Core.Utility.Interfaces;
+
+    using Model.Core.DataDomain;
     using Model.Core.ResultModel;
     using Model.Report.DTO;
     using Model.Report.MetaModel;
+
     using NPOI.SS.UserModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
-    using Session.Enum;
-    using Session.Model;
 
     public class GoldDeluxeWinLossReportControllerTest : BaseApiControllerHelperTest
     {
         private IGoldDeluxeWinLossDataAccess _dataAccess;
         private GoldDeluxeWinLossReportController _controller;
         private ICurrencyValidation _currencyValidation;
+
         [SetUp]
         public void SetUp()
         {
@@ -62,11 +70,12 @@
                 CurrencyId = 1,
                 ProductId = ProductTypes.GoldDeluxe
             };
-            StubUserSessionData(new UserSession
+            StubUserSessionData(new UserAuthInfo
             {
                 CurrencyList = new Dictionary<int, string>(),
                 ApplicationMode = AppMode.Self,
-                FunctionIdList = new int[0]
+                FunctionList = new List<Function>(),
+                CurrencyAgentList = new Dictionary<int, int[]>()
             });
 
             // Action
@@ -167,7 +176,6 @@
                 Assert.That(model.DrillDownFromDate, Is.EqualTo(fdate));
                 Assert.That(model.DrillDownToDate, Is.EqualTo(tdate));
                 Assert.That(model.LicenseeId, Is.EqualTo(SessionLicenseeId));
-                SessionService.Received().GenerateAgentListXml(currencyId, Arg.Any<bool>());
                 _dataAccess.ReceivedWithAnyArgs().GetAgentWinlossDetail(model, UserCurrencyList);
             });
         }
@@ -196,7 +204,6 @@
                 Assert.That(model.DrillDownFromDate, Is.EqualTo(fdate));
                 Assert.That(model.DrillDownToDate, Is.EqualTo(tdate));
                 Assert.That(model.LicenseeId, Is.EqualTo(SessionLicenseeId));
-                SessionService.Received().GenerateAgentListXml(currencyId, Arg.Any<bool>());
                 _dataAccess.ReceivedWithAnyArgs().GetCustomerWinlossDetail(model, UserCurrencyList);
             });
         }
@@ -270,7 +277,7 @@
                 ProductId = ProductTypes.GoldDeluxe,
                 ProductCode = nameof(ThirdPartyWinLossMetaModel.ProductCode)
             };
-            StubUserSessionData(new UserSession
+            StubUserSessionData(new UserAuthInfo
             {
                 CurrencyList = new Dictionary<int, string>
                 {
@@ -278,9 +285,9 @@
                     { drillDownCurrencyId, nameof(model.DrillDownCurrencyId) }
                 },
                 ApplicationMode = AppMode.Self,
-                FunctionIdList = new int[0]
+                FunctionList = new List<Function>(),
+                CurrencyAgentList = new Dictionary<int, int[]>()
             });
-            SessionService.GenerateAgentListXml(Arg.Any<int>(), Arg.Any<bool>()).Returns(string.Empty);
 
             return model;
         }

@@ -7,14 +7,23 @@
     using System.Threading;
     using System.Threading.Tasks;
     using System.Web.Http.Controllers;
+
     using Attributes;
+
     using Autofac;
+
     using Extension.Utility;
+
+    using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Model.Auth.Enum;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Service.Core.Users.Interfaces;
     using Service.StatelessCore.Interfaces;
-    using Session.Model;
+
     using UnitTest.Common.Helpers;
 
     public class ApiFunctionAuthorizationAttributeTest
@@ -119,8 +128,8 @@
             // Arrange
             var permissionKeys = new[] { "abc", "def" };
             var attribute = new ApiFunctionAuthorizationAttribute(permissionKeys);
-            _sessionService.UserSession.Returns(new UserSession());
-            _sessionService.LicenseeSession.Returns(new LicenseeSession());
+            _sessionService.UserSession.Returns(new UserAuthInfo());
+            _sessionService.LicenseeSession.Returns(new LicenseeAuthInfo());
             var actionContext = CreateActionContext();
             var continuation = Substitute.For<Func<Task<HttpResponseMessage>>>();
 
@@ -128,7 +137,7 @@
             attribute.ExecuteAuthorizationFilterAsync(actionContext, new CancellationToken(), continuation);
 
             // Assert
-            _authorizationService.Received(1).HasPermissions((IList<int>)null, permissionKeys);
+            _authorizationService.Received(1).HasPermissions(Arg.Any<IEnumerable<Function>>(), permissionKeys);
         }
 
         [Test]
@@ -137,8 +146,8 @@
             // Arrange
             var attribute = new ApiFunctionAuthorizationAttribute();
             var actionContext = CreateActionContext();
-            _sessionService.UserSession.Returns(new UserSession { ApplicationMode = Session.Enum.AppMode.Parasitic });
-            _authorizationService.HasPermissions(Arg.Any<IEnumerable<string>>(), Arg.Any<string[]>()).Returns(true);
+            _sessionService.UserSession.Returns(new UserAuthInfo { ApplicationMode = AppMode.Parasitic });
+            _authorizationService.HasPermissions(Arg.Any<IEnumerable<Function>>(), Arg.Any<string[]>()).Returns(true);
 
             // Action
             var result = attribute.ExecuteAuthorizationFilterAsync(actionContext, new CancellationToken(), null);
@@ -153,8 +162,8 @@
             // Arrange
             var attribute = new ApiFunctionAuthorizationAttribute();
             var actionContext = CreateActionContext();
-            _sessionService.UserSession.Returns(new UserSession { ApplicationMode = Session.Enum.AppMode.Self });
-            _authorizationService.HasPermissions(Arg.Any<IEnumerable<int>>(), Arg.Any<string[]>()).Returns(true);
+            _sessionService.UserSession.Returns(new UserAuthInfo { ApplicationMode = AppMode.Self });
+            _authorizationService.HasPermissions(Arg.Any<IEnumerable<Function>>(), Arg.Any<string[]>()).Returns(true);
 
             // Action
             var result = attribute.ExecuteAuthorizationFilterAsync(actionContext, new CancellationToken(), null);

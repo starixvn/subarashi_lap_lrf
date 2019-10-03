@@ -461,10 +461,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var NoDataTitle = function NoDataTitle() {
+var NoDataTitle = function NoDataTitle(_ref) {
+  var title = _ref.title;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    className: "no-info-row center-align"
-  }, _lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("NoInfo"));
+    className: "no-info-row center-align",
+    dangerouslySetInnerHTML: {
+      __html: title ? title : _lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("NoInfo")
+    }
+  });
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (NoDataTitle);
@@ -483,12 +487,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Overlay; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -508,7 +510,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -534,7 +535,7 @@ function (_Component) {
       var closeOnOutsideClick = _this.props.closeOnOutsideClick;
 
       if (closeOnOutsideClick) {
-        document.removeEventListener('click', _this._handleClickOutSide, true);
+        document.removeEventListener('click', _this._handleClickOutSide);
       }
     });
 
@@ -561,18 +562,22 @@ function (_Component) {
   _createClass(Overlay, [{
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps, prevState) {
+      var _this2 = this;
+
       if (this.props.isOpening !== prevProps.isOpening) {
         var onOpen = this.props.onOpen;
         this.props.isOpening && onOpen && onOpen();
         this.setState({
           isOpening: this.props.isOpening
         });
+        window.setTimeout(function () {
+          if (_this2.props.isOpening) {
+            _this2._registerEvents();
+          } else {
+            _this2._unRegisterEvents();
+          }
+        }, 0);
       }
-    }
-  }, {
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this._registerEvents();
     }
   }, {
     key: "componentWillUnmount",
@@ -585,7 +590,7 @@ function (_Component) {
       var closeOnOutsideClick = this.props.closeOnOutsideClick;
 
       if (closeOnOutsideClick) {
-        document.addEventListener('click', this._handleClickOutSide, true);
+        document.addEventListener('click', this._handleClickOutSide);
       }
     }
   }, {
@@ -604,7 +609,7 @@ function (_Component) {
       var _this$props = this.props,
           className = _this$props.className,
           children = _this$props.children;
-      var mergedClassName = classnames__WEBPACK_IMPORTED_MODULE_3___default()(wrapperClasses.OVERLAY, _defineProperty({}, wrapperClasses.OVERLAY_OPEN, this.state.isOpening), className);
+      var mergedClassName = classnames__WEBPACK_IMPORTED_MODULE_2___default()(wrapperClasses.OVERLAY, _defineProperty({}, wrapperClasses.OVERLAY_OPEN, this.state.isOpening), className);
       var style = {
         display: this.state.isOpening ? "block" : "none"
       };
@@ -620,10 +625,10 @@ function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 _defineProperty(Overlay, "propTypes", {
-  closeOnOutsideClick: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool,
-  isOpening: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool,
-  onOpen: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
-  onClose: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func
+  closeOnOutsideClick: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  isOpening: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  onOpen: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  onClose: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func
 });
 
 _defineProperty(Overlay, "defaultProps", {
@@ -646,17 +651,39 @@ _defineProperty(Overlay, "defaultProps", {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+
 
 
 var ReportTitle = function ReportTitle(_ref) {
-  var content = _ref.content;
+  var content = _ref.content,
+      tag = _ref.tag,
+      attrs = _objectWithoutProperties(_ref, ["content", "tag"]);
+
+  var Tag = tag;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "report-title-container"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Tag, _extends({
     className: "report-title"
-  }, content));
+  }, attrs), content));
 };
 
+var propTypes = {
+  tag: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
+  content: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.any
+};
+var defaultProps = {
+  tag: 'p'
+};
+ReportTitle.propTypes = propTypes;
+ReportTitle.defaultProps = defaultProps;
 /* harmony default export */ __webpack_exports__["default"] = (ReportTitle);
 
 /***/ }),
@@ -2820,8 +2847,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AppLayout; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2839,7 +2864,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 
 
 
@@ -2946,10 +2970,15 @@ function () {
   _createClass(Excel, null, [{
     key: "process",
     value: function process(callback) {
-      __webpack_require__.e(/*! import() | xlsx-style-sparta */ "xlsx-style-sparta").then(__webpack_require__.t.bind(null, /*! xlsx-style-sparta */ "./node_modules/xlsx-style-sparta/xlsx.js", 7)).then(function (XLSX) {
-        _XLSX = XLSX;
+      if (window.XLSX) {
+        _XLSX = window.XLSX;
         callback && callback();
-      });
+      } else {
+        Promise.all(/*! import() | xlsx-style-sparta */[__webpack_require__.e("common"), __webpack_require__.e("xlsx-style-sparta")]).then(__webpack_require__.t.bind(null, /*! xlsx-style-sparta */ "./node_modules/xlsx-style-sparta/xlsx.js", 7)).then(function (XLSX) {
+          _XLSX = XLSX;
+          callback && callback();
+        });
+      }
     }
   }, {
     key: "export",
@@ -3179,6 +3208,11 @@ function () {
       var rounded = Number(Math.round(absoluteValue + 'e' + digits) + 'e-' + digits);
       return sign * rounded;
     }
+  }, {
+    key: "parseToString",
+    value: function parseToString(number) {
+      return number.toString().replace(/(\d)(?=(\d{3})+(\.|$))/g, "$1,");
+    }
   }]);
 
   return NumberFormat;
@@ -3356,6 +3390,11 @@ function () {
       };
 
       reader.readAsText(blob);
+    }
+  }, {
+    key: "getRootUrl",
+    value: function getRootUrl() {
+      return _rootUrl;
     }
   }]);
 

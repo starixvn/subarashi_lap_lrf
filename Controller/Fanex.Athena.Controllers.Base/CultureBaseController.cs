@@ -1,16 +1,21 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="BaseController.cs" company="Microsoft">
+// <copyright file="BaseController.cs" company="">
 // TODO: Update copyright text.
 // </copyright>
 // -----------------------------------------------------------------------
 
 namespace Fanex.Athena.Controllers
 {
-    using System.Linq;
     using System.Web.Mvc;
+
+    using Autofac.Integration.Mvc;
+
     using Extension.Utility;
+    using Fanex.Athena.Controllers.Base;
     using Fanex.Athena.Service.Core.Common.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
+
     using Service.Core.Users.Interfaces;
 
     [CustomAuthorize]
@@ -19,35 +24,69 @@ namespace Fanex.Athena.Controllers
     {
         protected const string DefaultLanguage = "en-US";
 
-        private readonly ILanguageService _langService;
+        private IAppSettings _appSettings;
 
-        private readonly ISessionService _sessionService;
+        private ILicenseeSettingService _licenseeSettingService;
 
-        private readonly IAppSettings _appSettings;
+        protected CultureBaseController(
+           ILanguageService languageService,
+           ISessionService sessionService
+           ) : this(languageService, sessionService, null, null)
+        {
+        }
+
+        protected CultureBaseController(
+          ILanguageService languageService,
+          ISessionService sessionService,
+          ILicenseeSettingService licenseeSettingService
+          ) : this(languageService, sessionService, null, licenseeSettingService)
+        {
+        }
 
         protected CultureBaseController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSettings)
+            IAppSettings appSettings,
+            ILicenseeSettingService licenseeSettingService
+            )
         {
-            _langService = languageService;
-            _sessionService = sessionService;
+            LangService = languageService ?? AutofacDependencyResolver.Current.GetService<ILanguageService>();
+            SessionService = sessionService ?? AutofacDependencyResolver.Current.GetService<ISessionService>();
             _appSettings = appSettings;
+            _licenseeSettingService = licenseeSettingService;
         }
 
-        public ILanguageService LangService
-        {
-            get { return _langService; }
-        }
+        public ILanguageService LangService { get; }
 
-        public ISessionService SessionService
-        {
-            get { return _sessionService; }
-        }
+        public ISessionService SessionService { get; }
 
         public IAppSettings AppSettings
         {
-            get { return _appSettings; }
+            get
+            {
+                if (_appSettings == null)
+                {
+                    _appSettings = AutofacDependencyResolver.Current.GetService<IAppSettings>();
+                }
+                return _appSettings;
+            }
+        }
+
+        public ILicenseeSettingService LicenseeSettingService
+        {
+            get
+            {
+                if (_licenseeSettingService == null)
+                {
+                    _licenseeSettingService = AutofacDependencyResolver.Current.GetService<ILicenseeSettingService>();
+                }
+                return _licenseeSettingService;
+            }
+        }
+
+        public bool IsFakeLicensee(string licenseeName)
+        {
+            return LicenseeSettingService.IsFakeLicensee(licenseeName);
         }
 
         protected override void Initialize(System.Web.Routing.RequestContext requestContext)
@@ -57,9 +96,17 @@ namespace Fanex.Athena.Controllers
             LangService.SetPageCulture(currentLanguage);
         }
 
-        protected bool IsFakeLicensee(int licenseeId)
+        protected JsonResult JsonNet(object data)
         {
-            return AppSettings.FakeLicenseeList.Contains(licenseeId);
+            return new JsonNetResult
+            {
+                Data = data,
+            };
+        }
+       
+        protected static JsonNetResult JsonString(string jsonData)
+        {
+            return new JsonNetResult(jsonData);
         }
     }
 }

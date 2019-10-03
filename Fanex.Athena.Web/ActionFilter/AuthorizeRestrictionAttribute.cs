@@ -1,12 +1,13 @@
-﻿namespace Fanex.Athena.Web.ActionFilter
-{
-    using System;
-    using System.Web.Mvc;
-    using System.Web.Routing;
-    using Session;
-    using Session.Enum;
-    using Session.Interfaces;
+﻿using System;
+using System.Web.Mvc;
+using System.Web.Routing;
 
+using Fanex.Athena.Model.Auth.Enum;
+using Fanex.Athena.Service.Core.Users;
+using Fanex.Athena.Service.Core.Users.Interfaces;
+
+namespace Fanex.Athena.Web.ActionFilter
+{
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public sealed class AuthorizeRestrictionAttribute : AuthorizeAttribute
     {
@@ -35,7 +36,7 @@
             if (!skipAuthorization)
             {
                 base.OnAuthorization(filterContext);
-                var userSession = _sessionStorage.UserSession;
+                var userSession = _sessionStorage.UserAuthInfo;
                 var authorized = userSession != null && userSession.ApplicationMode == _appMode;
                 if (!authorized)
                 {

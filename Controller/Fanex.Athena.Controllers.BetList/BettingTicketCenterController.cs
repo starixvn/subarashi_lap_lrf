@@ -2,18 +2,22 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Constant.DataDomain;
+
     using DataAccess.Core.Configuration.Interfaces;
-    using Extension.Utility;
+    using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Model.BetList.ViewModel;
-    using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using Model.Core.MetaModel.Product;
+
     using Resources;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
+
     using Web.ActionFilter;
 
     [FunctionAuthorization(PermissionKeys.BettingTicketCenter)]
@@ -26,10 +30,9 @@
         public BettingTicketCenterController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             IProductService productService,
             IBalanceUpDataAccess balanceUpDataAccess)
-        : base(languageService, sessionService, appSetting)
+        : base(languageService, sessionService)
         {
             _productService = productService;
             _balanceUpDataAccess = balanceUpDataAccess;
@@ -65,7 +68,6 @@
                 ProductOptionList = GetProductOptionList(),
                 IsAllowedCustomerComm = SessionService.LicenseeSession.IsAllowedCustomerComm,
                 SelectedBaseCurrency = SessionService.UserSession.DefaultBaseCurrency
-
             };
             return View("~/Views/Desktop/BetList/BettingTicketCenter/SingleCustomer.cshtml", viewModel);
         }
@@ -88,7 +90,6 @@
                 ProductOptionList = GetProductOptionList(FunctionNames.BettingTicketCenterRunning),
                 IsAllowedCustomerComm = SessionService.LicenseeSession.IsAllowedCustomerComm,
                 SelectedBaseCurrency = SessionService.UserSession.DefaultBaseCurrency
-
             };
 
             return View("~/Views/Desktop/BetList/BettingTicketCenter/Running.cshtml", viewModel);

@@ -7,11 +7,10 @@
 namespace Fanex.Athena.DataAccess.Core.Common
 {
     using System.Collections.Generic;
-    using System.Data;
     using System.Threading.Tasks;
-    using Constant.DataDomain;
     using Fanex.Athena.DataAccess.Core;
     using Fanex.Athena.DataAccess.Core.Common.Interfaces;
+    using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using VendorAdapter.Interfaces;
 

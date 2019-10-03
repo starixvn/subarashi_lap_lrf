@@ -1,13 +1,5 @@
-﻿using Fanex.Athena.Model.Core.DataDomain;
-using Fanex.Athena.Model.Core.Helper;
-using Fanex.Athena.Model.Core.MetaModel;
-using Fanex.Athena.Service.Core.Users.Interfaces;
+﻿using Fanex.Athena.Model.Core.MetaModel;
 using Fanex.Athena.Service.Core.Utility.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Fanex.Athena.Service.Core.Utility
 {
@@ -15,6 +7,7 @@ namespace Fanex.Athena.Service.Core.Utility
     {
         private readonly ICurrencyValidation _currencyValidation;
         private readonly IProductValidation _productValidation;
+
         public ValidationService(ICurrencyValidation currencyValidation, IProductValidation productValidation)
         {
             _currencyValidation = currencyValidation;
@@ -41,7 +34,7 @@ namespace Fanex.Athena.Service.Core.Utility
             }
             if (currencyValidationOption != null && currencyValidationOption.IsValidCurrencyList)
             {
-                result &= IsValidCurrency(model as IMetaModelCurrencyList);
+                result &= IsValidCurrency(model as IMetaModelCurrencyIdList);
             }
             if (productValidationOption != null && productValidationOption.IsValidProductCodeList)
             {
@@ -61,11 +54,10 @@ namespace Fanex.Athena.Service.Core.Utility
             return model != null && _currencyValidation.IsValidCurrency(model.CurrencyId, isIncludeKeanOcean);
         }
 
-        private bool IsValidCurrency(IMetaModelCurrencyList model)
+        private bool IsValidCurrency(IMetaModelCurrencyIdList model)
         {
             return model != null &&
                 _currencyValidation.IsValidCurrency(model.CurrencyIdList);
         }
-
     }
 }

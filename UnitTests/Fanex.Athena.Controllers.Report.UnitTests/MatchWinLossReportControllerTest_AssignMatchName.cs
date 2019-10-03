@@ -3,7 +3,7 @@
     using System;
     using System.Data;
     using Base.UnitTests;
-    using Constant.DataDomain;
+    using Model.Core.DataDomain;
     using DataAccess.Core.Configuration.Interfaces;
     using NSubstitute;
     using NUnit.Framework;
@@ -13,6 +13,7 @@
     using Service.Report.Interfaces;
     using UnitTest.Common.Helpers;
     using VendorAdapter.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     [TestFixture]
     public class MatchWinLossReportControllerTest_AssignMatchName : CultureBaseControllerHelperTest
@@ -105,7 +106,6 @@
             var controller = Substitute.ForPartsOf<MatchWinLossReportController>(
                 LangService,
                 SessionService,
-                AppSettings,
                 Substitute.For<IProductService>(),
                 Substitute.For<IBalanceUpDataAccess>(),
                 _cacheRefAdapter,

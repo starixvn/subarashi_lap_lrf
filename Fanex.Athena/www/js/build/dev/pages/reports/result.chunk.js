@@ -1370,7 +1370,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                     url: Site.resolveClientUrl(KENO_RESULT_API),
                     success: function (response) {
                         window.open(response.Url, '_blank', 'left=20,top=20,width=950,height=650,toolbar=1,resizable=1,scrollbars,status=1');
-                        clearInterval(kenoIntervalId);
+                        clearTimeout(kenoIntervalId);
                         _me.extendKenoSession(vendorProductId, response.UserId);
                     },
                     beforeSend: function () {
@@ -1392,7 +1392,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                     url: Site.resolveClientUrl(KENO_RESULT_API),
                     success: function (response) {
                         window.open(response.Url, '_blank', 'left=20,top=20,width=950,height=650,toolbar=1,resizable=1,scrollbars,status=1');
-                        clearInterval(lotteryIntervalId);
+                        clearTimeout(lotteryIntervalId);
                         _me.extendLotterySession(vendorProductId, response.UserId);
                     },
                     beforeSend: function () {
@@ -1412,7 +1412,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                     return;
                 }
 
-                kenoIntervalId = setInterval(function () {
+                const callBack = function () {
                     const option = {
                         type: 'POST',
                         cache: false,
@@ -1420,11 +1420,18 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                             userId: userId,
                             vendorProductId: vendorProductId
                         },
-                        url: Site.resolveClientUrl(KENO_RESULT_SESSION_API)
+                        url: Site.resolveClientUrl(KENO_RESULT_SESSION_API),
+                        success: function (response) {
+                            if (response === '') {
+                                kenoIntervalId = setTimeout(callBack, 6000);
+                            }
+                        }
                     };
-                    _me.stopAjaxRequest(kenoAjaxRequest);
+
                     kenoAjaxRequest = $.ajax(option);
-                }, 6000);
+                }
+
+                kenoIntervalId = setTimeout(callBack, 6000);
             },
 
             extendLotterySession: function (vendorProductId, userId) {
@@ -1432,7 +1439,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                     return;
                 }
 
-                lotteryIntervalId = setInterval(function () {
+                const callBack = function () {
                     const option = {
                         type: 'POST',
                         cache: false,
@@ -1440,11 +1447,18 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                             userId: userId,
                             vendorProductId: vendorProductId
                         },
-                        url: Site.resolveClientUrl(KENO_RESULT_SESSION_API)
+                        url: Site.resolveClientUrl(KENO_RESULT_SESSION_API),
+                        success: function (response) {
+                            if (response === '') {
+                                lotteryIntervalId = setTimeout(callBack, 6000);
+                            }
+                        }
                     };
-                    _me.stopAjaxRequest(lotteryAjaxRequest);
+
                     lotteryAjaxRequest = $.ajax(option);
-                }, 6000);
+                }
+
+                lotteryIntervalId = setTimeout(callBack, 6000);
             },
 
             getData: function () {

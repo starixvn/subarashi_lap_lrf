@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Base.UnitTests;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DTO.Common;
     using Model.Core.ResultModel;
     using Model.Report.DTO;
@@ -19,11 +20,23 @@
     public partial class ReportAPIControllerTest : CultureBaseControllerHelperTest
     {
         private const int CurrencyId = 134;
-        private const string AgentListXml = "Xml";
 
         private IBetTypeService _betTypeService;
         private ICustomerTurnoverService _customerTurnoverService;
         private ITurnoverService _turnoverService;
+        private ILicenseeSettingService _licenseeSettingService;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _licenseeSettingService = Substitute.For<ILicenseeSettingService>();
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            _licenseeSettingService = null;
+        }
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
@@ -84,7 +97,6 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                SessionService.GenerateAgentListXml(CurrencyId).Returns(AgentListXml);
                 var metaModel = new CustomerTurnoverMetaModel
                 {
                     CurrencyId = CurrencyId
@@ -107,7 +119,6 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    Assert.That(metaModel.AgentListXml, Is.EqualTo(AgentListXml));
                     Assert.That(resultData["Data"], Is.EqualTo(data.DataList));
                     Assert.That(resultData["Total"], Is.EqualTo(data.TotalData));
                     Assert.That(resultData["TotalRow"], Is.EqualTo(data.TotalRows));
@@ -119,10 +130,9 @@
         {
             return new ReportAPIController(
                 SessionService,
-                AppSettings,
                 _betTypeService,
                 _customerTurnoverService,
-                _turnoverService);
+                _turnoverService, _licenseeSettingService);
         }
     }
 }

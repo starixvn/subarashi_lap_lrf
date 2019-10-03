@@ -8,15 +8,13 @@ namespace Fanex.Athena.Model.Core.MetaModel.Common
 {
     using System;
 
-    public class LeagueMetaModel
+    public class LeagueMetaModel : IMetaModelAgent, IMetaModelCurrency, IMetaModelUserId
     {
         public string AgentListXml { get; set; }
 
         public int CurrencyId { get; set; }
 
         public int UserId { get; set; }
-
-        public int LicenseeId { get; set; }
 
         public int SportId { get; set; }
 

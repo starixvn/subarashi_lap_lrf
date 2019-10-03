@@ -2,7 +2,8 @@
 {
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Extension.Utility;
+    using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.BetSettings.DTO;
     using Model.BetSettings.MetaModel;
     using Model.BetSettings.ViewModel;
@@ -10,17 +11,15 @@
     using Service.BetSettings.Interfaces;
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-    using Session.Model;
 
     internal class FakeBetSettingBaseController : BetSettingBaseController
     {
         internal FakeBetSettingBaseController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             ICoreBetSettingService coreBetSettingService,
-            IProductService productService)
-        : base(languageService, sessionService, appSetting, coreBetSettingService, productService)
+            IProductService productService, ILicenseeSettingService licenseeSettingService)
+        : base(languageService, sessionService, coreBetSettingService, productService, licenseeSettingService)
         {
         }
 
@@ -34,9 +33,9 @@
             return base.GetCustomerInfo(custId);
         }
 
-        internal new async Task AssignRequiredProperties(BetSettingBaseViewModel viewModel, BetSettingMetaModel metaModel)
+        internal async Task AssignRequiredProperties(BetSettingBaseViewModel viewModel, BetSettingMetaModel metaModel)
         {
-            await base.AssignRequiredProperties(viewModel, metaModel);
+            await base.AssignRequiredPropertiesAsync(viewModel, metaModel);
         }
 
         internal new CommonBetSetting GetBetSettingCommonParam(int userId, int licenseeId, string language)
@@ -44,7 +43,7 @@
             return base.GetBetSettingCommonParam(userId, licenseeId, language);
         }
 
-        internal new bool IsBetSettingEditable(UserSession userSession)
+        internal new bool IsBetSettingEditable(UserAuthInfo userSession)
         {
             return base.IsBetSettingEditable(userSession);
         }

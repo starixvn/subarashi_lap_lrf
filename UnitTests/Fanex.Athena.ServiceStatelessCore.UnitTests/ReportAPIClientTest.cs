@@ -1,0 +1,116 @@
+﻿using System;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
+using Fanex.Athena.Model.Core.DataDomain;
+using Fanex.Athena.Service.StatelessCore;
+using NSubstitute;
+using NUnit.Framework;
+
+namespace Fanex.Athena.ServiceStatelessCore.UnitTests
+{
+    [TestFixture]
+    public class ReportAPIClientTest
+    {
+        private const string Language = "en-US";
+        private const string ApiUrl = "http://localhost:80/api/Report/Action";
+
+        [Test]
+        public async Task PostAsyncString_WhenCall_HttpRequestParamIsPassedCorrectly()
+        {
+            // Arrange
+            HttpRequestMessage passedRequest = null;
+            var httpResponse = new HttpResponseMessage
+            {
+                StatusCode = HttpStatusCode.OK,
+                Content = new StringContent(string.Empty)
+            };
+            var httpMessageHandler = Substitute.ForPartsOf<MockHttpMessageHandler>();
+            httpMessageHandler.Send(Arg.Any<HttpRequestMessage>()).Returns(x =>
+            {
+                passedRequest = x.ArgAt<HttpRequestMessage>(0);
+
+                return httpResponse;
+            });
+            var client = new HttpClient(httpMessageHandler);
+            var reportApiClient = new ReportAPIClient(client);
+            var content = new
+            {
+                Currency = 1,
+                UserName = "Test"
+            };
+
+            // Action
+            await reportApiClient.PostAsyncString(ApiUrl, content, Language);
+
+            // Assert
+            Assert.That(passedRequest.Headers.GetValues("Accept-Language").ElementAt(0), Is.EqualTo(Language));
+            Assert.That(passedRequest.Headers.GetValues("Accept").ElementAt(0), Is.EqualTo("application/json"));
+            Assert.That(passedRequest.Content, Is.Not.Null);
+        }
+
+        [Test]
+        public async Task PostByteContentAsync_UseMessagePack_HttpRequestParamIsPassedCorrectly()
+        {
+            // Arrange
+            HttpRequestMessage passedRequest = null;
+            var httpResponse = new HttpResponseMessage
+            {
+                StatusCode = HttpStatusCode.OK,
+                Content = new StringContent(string.Empty)
+            };
+            var httpMessageHandler = Substitute.ForPartsOf<MockHttpMessageHandler>();
+            httpMessageHandler.Send(Arg.Any<HttpRequestMessage>()).Returns(x =>
+            {
+                passedRequest = x.ArgAt<HttpRequestMessage>(0);
+
+                return httpResponse;
+            });
+            var client = new HttpClient(httpMessageHandler);
+            var reportApiClient = new ReportAPIClient(client);
+            var content = "param";
+
+            // Action
+            await reportApiClient.PostByteContentAsync(ApiUrl, content, Language, MediaType.MsgPack);
+
+            // Assert
+            Assert.That(passedRequest.Headers.GetValues("Accept-Language").ElementAt(0), Is.EqualTo(Language));
+            Assert.That(passedRequest.Headers.GetValues("Accept").ElementAt(0), Is.EqualTo("application/x-msgpack"));
+            Assert.That(passedRequest.Content.Headers.ContentType.MediaType, Is.EqualTo("application/x-msgpack"));
+        }
+
+        [Test]
+        public void PostAsyncString_UnSuccessful_ThrowException()
+        {
+            // Arrange
+            var httpResponse = new HttpResponseMessage
+            {
+                StatusCode = HttpStatusCode.InternalServerError,
+                Content = new StringContent(string.Empty)
+            };
+            var httpMessageHandler = Substitute.ForPartsOf<MockHttpMessageHandler>();
+            httpMessageHandler.Send(Arg.Any<HttpRequestMessage>()).Returns(httpResponse);
+            var client = new HttpClient(httpMessageHandler);
+            var reportApiClient = new ReportAPIClient(client);
+
+            // Action
+            AsyncTestDelegate testDelegate = async () => await reportApiClient.PostAsyncString(ApiUrl, null, Language);
+
+            // Assert
+            Assert.ThrowsAsync<InvalidOperationException>(testDelegate);
+        }
+    }
+
+    public abstract class MockHttpMessageHandler : HttpMessageHandler
+    {
+        public abstract HttpResponseMessage Send(HttpRequestMessage request);
+
+        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
+            CancellationToken cancellationToken)
+        {
+            return Task.FromResult(Send(request));
+        }
+    }
+}

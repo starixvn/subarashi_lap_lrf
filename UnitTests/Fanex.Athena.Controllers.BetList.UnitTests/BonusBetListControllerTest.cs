@@ -47,7 +47,6 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                const string AgentListXml = "<xml/>";
                 var metaModel = new BetListExcelMetaModel
                 {
                     IsExportExcel = true,
@@ -55,7 +54,6 @@
                     ToDate = new DateTime(2018, 12, 12)
                 };
 
-                SessionService.GenerateAgentListXml(metaModel.CurrencyId, false).Returns(AgentListXml);
                 controller.When(async x => await x.ProcessExportExcel(
                     Arg.Any<BetListExcelMetaModel>(),
                     Arg.Any<string>(),
@@ -70,7 +68,7 @@
                         && !x.ShowingOption.GrandTotalVisible
                         && x.Title == ViewResources.TransactionDetail
                         && string.Join(",", x.HiddenColumns) == "1,2,8"
-                        && x.AgentListXml == AgentListXml),
+                        ),
                     "BonusTransactionDetail",
                     null);
             }
@@ -81,11 +79,10 @@
             var controller = Substitute.ForPartsOf<BonusBetListController>(
                 LangService,
                 SessionService,
-                AppSettings,
                 ProductService,
                 BalanceUpDataAccess,
                 CacheRefAdapter,
-                BetListApiClient);
+                BetListApiClient, LicenseeSettingService);
             return controller;
         }
     }

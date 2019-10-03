@@ -31,13 +31,13 @@ export class DataGrid extends Component {
         this.props.toggleLoader(true);
         Report.fetchGridData(Url, { xsrfToken: this.props.xsrfToken, data: this.props.params })
             .then(response => {
-                var result = response.data;
+                const result = response.data;
 
-                var mainData = result.Data;
+                const mainData = result.Data;
                 if (mainData && mainData.length > 1) {
                     Service.sort(mainData, this.props.params.SortBy, this.props.params.SortOrder);
 
-                    var sortedResult = Object.assign({}, result, { Data: mainData });
+                    const sortedResult = Object.assign({}, result, { Data: mainData });
 
                     this.setState({ gridData: sortedResult });
                 }
@@ -69,14 +69,14 @@ export class DataGrid extends Component {
     _sort = (sortBy, sortOrder) => {
         this.props.toggleLoader(true);
 
-        let param = Object.assign({}, this.props.params, { SortOrder: sortOrder, SortBy: sortBy });
-        var mainData = this.state.gridData.Data;
+        const param = Object.assign({}, this.props.params, { SortOrder: sortOrder, SortBy: sortBy });
+        const mainData = this.state.gridData.Data;
 
         if (mainData && mainData.length > 1) {
 
             Service.sort(mainData, param.SortBy, param.SortOrder);
 
-            var sortedResult = Object.assign({}, this.state.gridData, { Data: mainData })
+            const sortedResult = Object.assign({}, this.state.gridData, { Data: mainData })
 
             this.setState({ gridData: sortedResult })
         }

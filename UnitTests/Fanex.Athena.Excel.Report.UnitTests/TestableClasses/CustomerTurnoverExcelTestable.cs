@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
+
 using Fanex.Athena.Excel.Base.Entities;
-using Fanex.Athena.Excel.Report.Models;
 using Fanex.Athena.Model.Report.DTO;
+
 using NPOI.SS.UserModel;
 
 namespace Fanex.Athena.Excel.Report.UnitTests.TestableClasses

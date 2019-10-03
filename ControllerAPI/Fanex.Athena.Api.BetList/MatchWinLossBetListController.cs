@@ -9,13 +9,15 @@ namespace Fanex.Athena.Api.BetList
     #region Using
 
     using System;
-    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Http;
+
     using Base.Attributes;
+
     using DataAccess.Core.Configuration.Interfaces;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Model.BetList.MetaModel;
-    using Model.Core.DataDomain;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
     using Service.Core.Utility.Interfaces;
@@ -67,7 +69,6 @@ namespace Fanex.Athena.Api.BetList
 
             const string UspKey = "Lrf_BetList_MatchWL_Outright";
             return await GetBetListResult(metaModel, UspKey).ConfigureAwait(false);
-
         }
 
         [HttpGet]
@@ -85,7 +86,6 @@ namespace Fanex.Athena.Api.BetList
             string sortOrder = null)
 #pragma warning restore S107 // Methods should not have too many parameters
         {
-           
             if (_currencyValidation.IsValidBaseCurrency(baseCurrency)
                 && _currencyValidation.IsValidCurrency(currencyId))
             {

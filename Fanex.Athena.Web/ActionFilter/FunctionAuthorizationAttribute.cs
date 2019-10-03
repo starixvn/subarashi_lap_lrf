@@ -10,9 +10,10 @@ namespace Fanex.Athena.Web.ActionFilter
     using System.Net;
     using System.Web.Mvc;
     using System.Web.Routing;
+    using Fanex.Athena.Model.Auth.Enum;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Session.Enum;
-    using Session.Interfaces;
+
+    using Fanex.Athena.Service.Core.Users.Interfaces;
 
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true)]
     public sealed class FunctionAuthorizationAttribute : ActionFilterAttribute
@@ -36,14 +37,14 @@ namespace Fanex.Athena.Web.ActionFilter
         {
             var context = filterContext.HttpContext;
 
-            var licenseeSession = SessionStorage.LicenseeSession;
-            var userSession = SessionStorage.UserSession;
+            var licenseeSession = SessionStorage.LicenseeAuthInfo;
+            var userSession = SessionStorage.UserAuthInfo;
             var authorized = userSession != null && licenseeSession != null;
             if (authorized)
             {
                 authorized = userSession.ApplicationMode == AppMode.Parasitic ?
-                              AuthorizationServiceInstance.HasPermissions(userSession.PortalFunctionList, _permissionKeys) :
-                              AuthorizationServiceInstance.HasPermissions(userSession.FunctionIdList, _permissionKeys);
+                             userSession.IsSuperAdmin || AuthorizationServiceInstance.HasPermissions(userSession.PortalFunctionList, _permissionKeys) :
+                              AuthorizationServiceInstance.HasPermissions(userSession.FunctionList, _permissionKeys);
             }
 
             if (!authorized)

@@ -12,6 +12,7 @@
 
     public class PlatformWinLossBetListControllerTest : BetListBaseControllerHelperTest
     {
+
         [OneTimeSetUp]
         public override void FixtureSetUp()
         {
@@ -76,7 +77,6 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                const string AgentListXml = "<xml/>";
                 var metaModel = new BetListExcelMetaModel
                 {
                     IsExportExcel = true,
@@ -90,13 +90,11 @@
                     PlatformType = platform
                 };
 
-                var fakeLicensees = isFakeLic ? new[] { DefaultLicenseeSession.LicenseeId } : Enumerable.Empty<int>();
-                AppSettings.FakeLicenseeList.Returns(fakeLicensees);
+                LicenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(isFakeLic);
 
                 var expectedTitle = $"{ViewResources.Customer} {ViewResources.BetList} - 1/1/2018 --> 2/2/2018 - External{(isFakeLic ? "" : "(System)")}"
                     + $" - {ViewResources.Platform}: {ViewResources.ResourceManager.GetString(platformName)} - {string.Format(ViewResources.Viewin, expectedCurrency)}";
 
-                SessionService.GenerateAgentListXml(metaModel.CurrencyId, false).Returns(AgentListXml);
                 controller.When(async x => await x.ProcessExportExcel(
                     Arg.Any<BetListExcelMetaModel>(),
                     Arg.Any<string>(),
@@ -113,7 +111,7 @@
                         && string.Join(",", x.HiddenColumns) == "1,2,8"
                         && x.LicenseeId == DefaultLicenseeSession.LicenseeId
                         && !x.IsShowSumStake
-                        && x.AgentListXml == AgentListXml),
+                       ),
                     "PlatformWinLossBetList",
                     null);
             }
@@ -124,11 +122,10 @@
             return Substitute.ForPartsOf<PlatformWinLossBetListController>(
                 LangService,
                 SessionService,
-                AppSettings,
                 ProductService,
                 BalanceUpDataAccess,
                 CacheRefAdapter,
-                BetListApiClient);
+                BetListApiClient, LicenseeSettingService);
         }
     }
 }

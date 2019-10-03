@@ -10,7 +10,7 @@
 
     public class LiveReportBetListControllerTest : BetListBaseControllerHelperTest
     {
-        private const string AgentListXml = "<xml/>";
+        private const string AgentListXml = "<ROOT></ROOT>";
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
@@ -329,8 +329,6 @@
 
         private void SetUpForExportingExcel(LiveReportBetListMetaModel metaModel, LiveReportBetListController controller)
         {
-            SessionService.GenerateAgentListXml(metaModel.CurrencyId, false).Returns(AgentListXml);
-
             controller.When(async x => await x.ProcessExportExcel(
                 Arg.Any<BetListExcelMetaModel>(),
                 Arg.Any<string>(),
@@ -367,11 +365,10 @@
             return Substitute.ForPartsOf<LiveReportBetListController>(
                 LangService,
                 SessionService,
-                AppSettings,
                 ProductService,
                 BalanceUpDataAccess,
                 CacheRefAdapter,
-                BetListApiClient);
+                BetListApiClient, LicenseeSettingService);
         }
     }
 }

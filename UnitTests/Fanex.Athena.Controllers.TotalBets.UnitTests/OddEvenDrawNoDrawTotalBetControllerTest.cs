@@ -71,7 +71,6 @@
             return new OddEvenDrawNoDrawTotalBetController(
                             LangService,
                             SessionService,
-                            AppSettings,
                             _oddEvenDrawNoDrawDataAccess);
         }
 

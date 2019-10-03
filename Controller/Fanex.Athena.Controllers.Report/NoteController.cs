@@ -6,14 +6,17 @@
 
 namespace Fanex.Athena.Controllers.Report
 {
-    using System.Threading.Tasks;
     using System.Web.Mvc;
     using System.Web.SessionState;
+
     using DataAccess.Core.Configuration.Interfaces;
-    using Extension.Utility;
+
     using Fanex.Athena.Model.Report.ViewModel.Note;
     using Fanex.Athena.Service.Core.Common.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using ONEbook.UM.Filters;
+
     using Service.Core.Users.Interfaces;
 
     [SessionState(SessionStateBehavior.ReadOnly)]
@@ -27,10 +30,9 @@ namespace Fanex.Athena.Controllers.Report
         public NoteController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             IProductService productService,
             IBalanceUpDataAccess balanceUpDataAccess)
-            : base(languageService, sessionService, appSetting)
+            : base(languageService, sessionService)
         {
             _balanceUpDataAccess = balanceUpDataAccess;
             _productService = productService;

@@ -2,9 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
-    using Constant.DataDomain;
-    using Constant.Helper;
     using DTO.Common;
+    using Fanex.Athena.Model.Core.DataDomain;
     using Resources;
 
     public static class ProductHelper
@@ -44,7 +43,8 @@
                 { Product.AB, nameof(ViewResources.ProductAB) },
                 { Product.PP, nameof(ViewResources.ProductPP) },
                 { Product.FW, nameof(ViewResources.ProductFW) },
-                { Product.CC, nameof(ViewResources.ProductCC) }
+                { Product.CC, nameof(ViewResources.ProductCC) },
+                { Product.AGC, nameof(ViewResources.ProductAGC) }
             };
 
         public static string GetProductCode(int productId)

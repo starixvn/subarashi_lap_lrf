@@ -2,7 +2,7 @@
 
 exports[`MonthPicker render render correct content 1`] = `
 <div
-  className="month-picker"
+  className="month-picker "
 >
   <div
     className="month"

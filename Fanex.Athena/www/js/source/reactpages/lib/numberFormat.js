@@ -20,4 +20,8 @@ export default class NumberFormat {
 
         return sign * rounded;
     }
+
+    static parseToString(number) {
+        return number.toString().replace(/(\d)(?=(\d{3})+(\.|$))/g, "$1,");
+    }
 }

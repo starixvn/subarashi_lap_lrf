@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "LAP - Betting Ticket Center - Single Customer";
+    Layout = "~/Views/Desktop/Shared/_ReactPageLayout.cshtml";
+}
+
+@model Fanex.Athena.Module.PlayerAdmin.ViewModels.PlayerBtcSingleCustomerViewModel
+@{
+    var now = DateTime.Now;
+    var fromDate = new DateTime(now.Year, now.Month, 1).ToString("MM/dd/yyyy");
+    var toDate = now.ToString("MM/dd/yyyy");
+
+    const string TitlePattern = "{0}: {1}, {2}→{3}, {4}: {5}, {6}: {7}";
+    var reportTitle = string.Format(TitlePattern,
+        ViewResources.Player, Model.UserName,
+        fromDate, toDate,
+        ViewResources.Currency, Model.CurrencyName,
+        ViewResources.Product, Model.ProductCodeListString);
+}
+
+@section pagecss {
+    <link href="@Url.ContentLinkByEnv("/www/css/build/reactpages/betlist/index.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.ContentLinkByEnv("/www/css/build/reactpages/bettingticketscenter/index.css")" rel="stylesheet" type="text/css" />
+    <style>
+        .caret-block {
+            bottom: 2px;
+        }
+
+            .caret-block .icon-excel-wrapper {
+                margin-left: 10px;
+                background: #fff;
+                text-align: center;
+                width: 24px;
+                height: 22px;
+            }
+
+        #app-container {
+            margin-top: 10px;
+        }
+    </style>
+}
+@section pagejs {
+    <script src="@Url.ContentLinkByEnv("/www/js/build/reactpages/playeradmin/single-customer.chunk.js")"></script>
+}
+
+@section globaljscode{
+    window.initialState = {
+    isLoading: false,
+    requestParam: {userName: '@Model.UserName'}
+    };
+
+    window._AppData = {
+    isAllowedCustomerComm: @Model.IsAllowedCustomerComm.ToJson(),
+    reportTitle: '@reportTitle'
+    };
+}
+<div id="app-container">
+</div>

@@ -4,7 +4,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Constant.DataDomain;
+    using Model.Core.DataDomain;
     using Model.BetSettings.DTO;
     using Model.BetSettings.MetaModel;
     using Model.BetSettings.ViewModel;
@@ -52,7 +52,7 @@
                 controller.GetCustomerInfo(CustId);
 
                 // Assert
-                CoreBetSettingService.Received(1).GetCustomerInfo(CustId, DefaultLicenseeSession.LicenseeId);
+                CoreBetSettingService.Received(1).GetCustomerInfo(CustId);
             }
         }
 
@@ -76,7 +76,7 @@
 
         [TestCase(true)]
         [TestCase(false)]
-        public async Task AssignRequiredProperties_WhenCall_AssignCorrectBetSettingProducts(bool isEnableRngCasino)
+        public async Task AssignRequiredProperties_WhenCall_AssignCorrectBetSettingProductsAsync(bool isEnableRngCasino)
         {
             using (var controller = CreateController())
             {
@@ -88,7 +88,8 @@
                 {
                     new BetSettingProduct { ProductId = ProductTypes.RngCasino, IsEnable = isEnableRngCasino }
                 };
-                CoreBetSettingService.GetBetSettingProductsAsync(metaModel.CustId, DefaultLicenseeSession.LicenseeId)
+                CoreBetSettingService.GetBetSettingProductsAsync(metaModel.CustId,
+                    DefaultLicenseeSession.LicenseeId)
                     .Returns(Task.FromResult<IEnumerable<BetSettingProduct>>(betSettingProducts));
 
                 // Action
@@ -239,9 +240,8 @@
             var controller = new FakeBetSettingBaseController(
                 LangService,
                 SessionService,
-                AppSettings,
                 CoreBetSettingService,
-                ProductService)
+                ProductService, LicenseeSettingService)
             {
                 ControllerContext = ControllerContext
             };

@@ -3,11 +3,16 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+
     using Base.UnitTests;
+
     using Model.Report.DTO;
     using Model.Report.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using UnitTest.Common.Helpers;
 
     [TestFixture]
@@ -19,7 +24,6 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                SessionService.GenerateAgentListXml(CurrencyId, Arg.Any<bool>()).Returns(AgentListXml);
                 var metaModel = new TurnoverMetaModel
                 {
                     CurrencyId = CurrencyId
@@ -39,7 +43,6 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    Assert.That(metaModel.AgentListXml, Is.EqualTo(AgentListXml));
                     Assert.That(resultData["Data"], Is.EqualTo(data));
                     Assert.That(resultData["TotalData"], Is.EqualTo(total));
                 });

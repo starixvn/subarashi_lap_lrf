@@ -3,19 +3,24 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
     using Base.UnitTests;
+
     using DataAccess.Report.Interfaces;
-    using Fanex.Athena.Excel.Base.Entities;
+
     using Fanex.Athena.Excel.Report;
-    using Fanex.Athena.Model.Report.ViewModel;
+    using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Service.Core.Utility.Interfaces;
+
     using Model.Core.ResultModel;
     using Model.Report.DTO;
     using Model.Report.MetaModel;
+
     using NPOI.SS.UserModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
-    using Session.Model;
 
     public class AgCasinoWinLossReportControllerTest : BaseApiControllerHelperTest
     {
@@ -41,8 +46,14 @@
             _controller = Substitute.ForPartsOf<AgCasinoWinLossReportController>(_dataAccess, SessionService,
                 ProductService, LangService, _currencyValidation);
             _controller.When(x => x.ExcelStream(Arg.Any<IWorkbook>(), Arg.Any<string>())).DoNotCallBase();
-
+            StubUserSessionData(new UserAuthInfo
+            {
+                CurrencyList = new Dictionary<int, string>(),
+                CurrencyAgentList = new Dictionary<int, int[]>()
+            });
+            StubLicenseeSessionData(new LicenseeAuthInfo { LicenseeId = 0 });
         }
+
         [OneTimeTearDown]
         public override void FixtureTearDown()
         {
@@ -71,11 +82,6 @@
             {
                 CurrencyId = 1
             };
-            StubUserSessionData(new UserSession
-            {
-                CurrencyList = new Dictionary<int, string>()
-            });
-            StubLicenseeSessionData(new LicenseeSession { LicenseeId = 0 });
 
             // Action
             var result = await _controller.Index(model);
@@ -216,9 +222,10 @@
         public void Index_ExportExcelLevel0_ExportWithCorrectData()
         {
             // Arrange
-            StubUserSessionData(new UserSession
+            StubUserSessionData(new UserAuthInfo
             {
                 CurrencyList = new Dictionary<int, string> { { 0, "CurrencyName0" }, { 1, "CurrencyName1" } },
+                CurrencyAgentList = new Dictionary<int, int[]>()
             });
 
             var model = new ThirdPartyWinLossMetaModel
@@ -254,9 +261,10 @@
             // Arrange
             var currencyId = 2;
 
-            StubUserSessionData(new UserSession
+            StubUserSessionData(new UserAuthInfo
             {
                 CurrencyList = new Dictionary<int, string> { { 1, "CurrencyName1" }, { 2, "CurrencyName2" } },
+                CurrencyAgentList = new Dictionary<int, int[]>()
             });
 
             var model = new ThirdPartyWinLossMetaModel

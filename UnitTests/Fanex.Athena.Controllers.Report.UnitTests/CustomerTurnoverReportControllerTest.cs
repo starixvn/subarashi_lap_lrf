@@ -6,6 +6,7 @@
     using DataAccess.Core.Common.Interfaces;
     using Excel.Base.Entities;
     using Excel.Report;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DTO.Common;
     using Model.Core.ResultModel;
     using Model.Report.DTO;
@@ -159,8 +160,6 @@
             var controller = Substitute.ForPartsOf<CustomerTurnoverReportController>(
                 LangService,
                 SessionService,
-                AppSettings,
-                Substitute.For<IProductService>(),
                 _sportTypeDataAccess,
                 _customerTurnoverService);
             controller.When(x => x.CreateExcel(string.Empty, string.Empty, null, null, string.Empty)).DoNotCallBase();

@@ -13,42 +13,56 @@ namespace Fanex.Athena.Api.Report
     using System.Threading.Tasks;
     using System.Web.Hosting;
     using System.Web.Http;
+
     using Base.Attributes;
+
     using DataAccess.Report.Interfaces;
+
     using Excel.Report.Models;
+
     using Extension.Utility;
+
     using Fanex.Athena.Excel.Report;
     using Fanex.Athena.Extension.Helper;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DataDomain;
-    using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Service.Core.Utility.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Utility;
+
     using Model.Core.MetaModel.Product;
     using Model.Report.ResultModel;
+
     using Resources;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
 
     [ApiFunctionAuthorization(PermissionKeys.ReportWinLossByProduct)]
     public class WinLossByProductReportController : ApiReportBaseController
     {
-        private readonly IAppSettings _appSettings;
-
+        private readonly ILicenseeSettingService _licenseeSettingService;
         private readonly IWinLossByProductDataAccess _winlossByProductDataAccess;
         private readonly ICurrencyValidation _currencyValidation;
+        private readonly IAppSettings _appSettings;
+
         public WinLossByProductReportController(
             ISessionService sessionService,
             IProductService productService,
-            IAppSettings appSettings,
             ILanguageService langService,
             IWinLossByProductDataAccess winlossByProductDataAccess,
-             ICurrencyValidation currencyValidation)
+            ICurrencyValidation currencyValidation,
+            ILicenseeSettingService licenseeSettingService,
+            IAppSettings appSettings
+             )
             : base(sessionService, productService, langService)
         {
-            _appSettings = appSettings;
+            _licenseeSettingService = licenseeSettingService;
             _winlossByProductDataAccess = winlossByProductDataAccess;
             _currencyValidation = currencyValidation;
+            _appSettings = appSettings;
         }
 
         [HttpPost]
@@ -194,7 +208,7 @@ namespace Fanex.Athena.Api.Report
                 TotalData = resultModel.TotalData,
                 CustomerCommVisible = licenseeSession.IsAllowedCustomerComm,
                 BAVisible = productAccess.IsAllowBA,
-                SystemIdVisible = !_appSettings.FakeLicenseeList.Contains(licenseeSession.LicenseeId),
+                SystemIdVisible = !_licenseeSettingService.IsFakeLicensee(licenseeSession.LicenseeName),
                 HasAmountDueToColumn = _appSettings.HasAmountDueToColumn
             };
 
@@ -239,10 +253,11 @@ namespace Fanex.Athena.Api.Report
             {
                 return BadRequest(ViewResources.InvalidParams);
             }
-
-            metaModel.DefaultBaseCurrency = SessionService.UserSession.DefaultBaseCurrency;
+            var userSession = SessionService.UserSession;
+            metaModel.DefaultBaseCurrency = userSession.DefaultBaseCurrency;
             metaModel.Username = ValidateUserName(metaModel.Username);
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(level == 0 ? metaModel.CurrencyId : currencyId, metaModel.IsExcludedTestData);
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList,
+                level == 0 ? metaModel.CurrencyId : currencyId, metaModel.IsExcludedTestData);
             metaModel.DrillDownCurrencyId = currencyId;
             metaModel.DrillDownCurrencyName = currencyName;
             metaModel.Level = level;
@@ -287,7 +302,7 @@ namespace Fanex.Athena.Api.Report
 
         private string ValidateUserName(string userName)
         {
-            var placeholderUsername = _appSettings.FakeLicenseeList.Contains(SessionService.LicenseeSession.LicenseeId) ?
+            var placeholderUsername = _licenseeSettingService.IsFakeLicensee(SessionService.LicenseeSession.LicenseeName) ?
                             ViewResources.ExternalId :
                             ViewResources.ExternalIdOrSystemId;
             return !string.IsNullOrWhiteSpace(userName)

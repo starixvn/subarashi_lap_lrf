@@ -8,10 +8,13 @@ namespace Fanex.Athena.Service.Forecast
 {
     using System.Data;
     using System.Threading.Tasks;
+
     using DataAccess.Forecast.Interfaces;
-    using Extension.Helper;
+
     using Fanex.Common;
+
     using Interfaces;
+
     using Model.Forecast.DTO.ForecastAH;
     using Model.Forecast.MetaModel;
 

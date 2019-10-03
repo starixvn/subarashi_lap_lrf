@@ -10,7 +10,7 @@
 
     public class MatchWinLossBetListControllerTest : BetListBaseControllerHelperTest
     {
-        private const string AgentListXml = "<xml/>";
+        private const string AgentListXml = "<ROOT></ROOT>";
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
@@ -135,8 +135,8 @@
             }
         }
 
-        [TestCase(1,"USD", null, "USD")]
-        [TestCase(1,"USD", "eur", "EUR")]
+        [TestCase(1, "USD", null, "USD")]
+        [TestCase(1, "USD", "eur", "EUR")]
         [TestCase(0, "", "", "EUR")]
         [TestCase(0, "", "CNY", "CNY")]
         public async Task MixParlay_ExportExcel_PassCorrectParam(
@@ -207,8 +207,6 @@
 
         private void SetUpForExportingExcel(BetListMetaModel metaModel, MatchWinLossBetListController controller)
         {
-            SessionService.GenerateAgentListXml(metaModel.CurrencyId, false).Returns(AgentListXml);
-
             controller.When(async x => await x.ProcessExportExcel(
                 Arg.Any<BetListExcelMetaModel>(),
                 Arg.Any<string>(),
@@ -233,11 +231,10 @@
             var controller = Substitute.ForPartsOf<MatchWinLossBetListController>(
                 LangService,
                 SessionService,
-                AppSettings,
                 ProductService,
                 BalanceUpDataAccess,
                 CacheRefAdapter,
-                BetListApiClient);
+                BetListApiClient, LicenseeSettingService);
             return controller;
         }
     }

@@ -9,13 +9,17 @@ namespace Fanex.Athena.Controllers.BetSettings
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Constant.DataDomain;
-    using Extension.Utility;
+
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
+
     using Model.BetSettings.DTO;
     using Model.BetSettings.MetaModel;
+    using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
+
     using Resources;
+
     using Service.BetSettings.Interfaces;
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
@@ -27,26 +31,32 @@ namespace Fanex.Athena.Controllers.BetSettings
         public KenoBetSettingController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             ICoreBetSettingService coreBetSettingService,
             IProductService productService,
-            IKenoBetSettingService betSettingService)
-        : base(languageService, sessionService, appSetting, coreBetSettingService, productService)
+            IKenoBetSettingService betSettingService,
+             ILicenseeSettingService licenseeSettingService
+
+            )
+        : base(languageService, sessionService, coreBetSettingService, productService, licenseeSettingService)
         {
             _betSettingService = betSettingService;
         }
 
         [HttpGet]
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
+        [ValidatePermissionOnData(isObject: true)]
+
         public async Task<ActionResult> Index(BetSettingMetaModel metaModel)
         {
-            var viewModel = await _betSettingService.GetViewModelAsync(SessionService.LicenseeSession.LicenseeId, metaModel.CustId);
-            await AssignRequiredProperties(viewModel, metaModel).ConfigureAwait(false);
+            var viewModel = await _betSettingService.GetViewModelAsync(
+                metaModel.CustId);
+            await AssignRequiredPropertiesAsync(viewModel, metaModel);
             return View("~/Views/Desktop/Customer/BetSetting/Keno.cshtml", viewModel);
         }
 
         [HttpPost]
         [CustomValidateAntiForgery]
+        [ValidatePermissionOnData]
         public async Task<JsonResult> UpdateBetSetting(string nickName)
         {
             var userSession = SessionService.UserSession;
@@ -68,12 +78,11 @@ namespace Fanex.Athena.Controllers.BetSettings
             var betSetting = GetBetSetting(id);
 
             var result = await _betSettingService.UpdateBetSettingAsync(
-                commonParam.LicenseeId,
                 commonParam.CustId,
                 commonParam.UserId,
                 commonParam.Language,
                 commonParam.Ip,
-                betSetting).ConfigureAwait(false);
+                betSetting);
 
             if (result.Code == 0)
             {

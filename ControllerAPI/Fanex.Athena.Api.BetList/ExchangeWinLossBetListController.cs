@@ -3,18 +3,19 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Http;
+
     using Base;
     using Base.Attributes;
-    using Fanex.Athena.Model.Core.Helper;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Utility;
+
     using Model.BetList.DTO;
     using Model.BetList.MetaModel;
     using Model.BetList.ViewModel;
-    using Model.Core.DataDomain;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-    using Service.Core.Utility;
-    using Service.Core.Utility.Interfaces;
 
     [ApiFunctionAuthorization(PermissionKeys.ReportExchangeWinLoss)]
     public class ExchangeWinLossBetListController : BaseApiController
@@ -48,10 +49,12 @@
                 };
             }
 
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId, metaModel.ExcludeTestData);
+            var userSession = SessionService.UserSession;
+
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId, metaModel.ExcludeTestData);
 
             return await _betListApiClient.PostAsync("/ExchangeWinLossBetList/GetData",
-                metaModel, SessionService.UserSession.Language).ConfigureAwait(false);
+                metaModel, userSession.Language).ConfigureAwait(false);
         }
 
         [HttpPost]
@@ -62,17 +65,17 @@
             {
                 return new List<ExchangeTicketDetail>();
             }
+            var userSession = SessionService.UserSession;
 
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId, metaModel.ExcludeTestData);
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId, metaModel.ExcludeTestData);
 
             return await _betListApiClient.PostAsync("/ExchangeWinLossBetList/Detail",
-                metaModel, SessionService.UserSession.Language).ConfigureAwait(false);
+                metaModel, userSession.Language).ConfigureAwait(false);
         }
 
         private bool IsValidRequest(BaseExchangeBetListMetaModel metaModel)
         {
-            var licenseId = SessionService.LicenseeSession.LicenseeId;
-            return _authorizationService.HasPermissionOnData(licenseId, metaModel.CustId, 0);
+            return _authorizationService.HasPermissionOnData(SessionService.UserSession.CurrencyAgentList, metaModel.CustId, 0);
         }
     }
 }

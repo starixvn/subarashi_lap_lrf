@@ -1,0 +1,52 @@
+﻿namespace Fanex.Athena.Service.StatelessCore.Utility
+{
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Model.Core.DataDomain;
+
+    /// <summary>
+    /// <![CDATA[https://nexdev.net/projects/lrf-licensee-risk-and-forecast/wiki/Add_INH_for_KeenOcean.]]>
+    ///  This business class is used for special business of KeanOcean.
+    ///  Remove CNY=13 , Rename HKD=66 to CNY.
+    /// </summary>
+    public static class KeanOceanBusinessHelper
+    {
+        public static IEnumerable<CurrencyUser> ModifyCurrenciesForKeenOcean(IEnumerable<CurrencyUser> currencies)
+        {
+            var currencyList = currencies.Where(x => x.CurrencyId != CurrencyType.Cny).ToList();
+
+            var currency = currencyList.FirstOrDefault(x => x.CurrencyId == CurrencyType.Hkd && !x.CurrencyName.Equals("CNY"));
+            if (currency != null)
+            {
+                currency.CurrencyName = "CNY";
+            }
+
+            return currencyList;
+        }
+
+        public static void KeepHKDCurrencyName(IEnumerable<CurrencyUser> currencies)
+        {
+            var currency = currencies.FirstOrDefault(x => x.CurrencyId == CurrencyType.Hkd);
+            if (currency != null)
+            {
+                currency.CurrencyName = "HKD";
+            }
+        }
+
+        public static bool VerifyKeanOceanCurrencyRequest(IDictionary<int, string> currenyList, int licenseeId, int selectedCurrencyId)
+        {
+            return currenyList.ContainsKey(selectedCurrencyId) || (
+                licenseeId == LicenseeIdentity.KeenOcean && selectedCurrencyId == CurrencyType.Cny);
+        }
+
+        public static void AddHKDCurrencyForTurnOverReport(IDictionary<int, string> currenyList, int licenseeId)
+        {
+            if (licenseeId == LicenseeIdentity.KeenOcean && !currenyList.Values.Contains("CNY"))
+            {
+                currenyList.Add(CurrencyType.Hkd, "CNY");
+            }
+        }
+    }
+}

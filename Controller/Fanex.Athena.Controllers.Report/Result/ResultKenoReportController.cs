@@ -2,13 +2,15 @@
 {
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Extension.Utility;
+    using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Logging;
-    using Model.Core.DataDomain;
+
     using Model.Report.DTO.Result;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-    using Service.Core.Utility.Interfaces;
+
     using Web.ActionFilter;
 
     [FunctionAuthorization(PermissionKeys.ReportResults)]
@@ -21,11 +23,10 @@
         public ResultKenoReportController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             IProductService productService,
             ILogger logger,
             IBetListApiClient betListApiClient)
-            : base(languageService, sessionService, appSetting, productService)
+            : base(languageService, sessionService, null, productService, null)
         {
             _logger = logger;
             _betListApiClient = betListApiClient;
@@ -77,7 +78,10 @@
 
             if (result.ErrorCode > 0)
             {
-                _logger.Error("Keno Session: " + result.ErrorMsg);
+                _logger.Info($"Keno Session: {result.ErrorMsg}"
+                    + $"\nError Code: {result.ErrorCode}"
+                    + $"\nUser Name: {userSession.UserName}"
+                    + $"\nProduct Id: {vendorProductId}");
                 return Url.Action("AccessDenied", "Utility", null, Request.Url.Scheme);
             }
 

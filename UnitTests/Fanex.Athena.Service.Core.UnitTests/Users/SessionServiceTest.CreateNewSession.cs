@@ -1,8 +1,11 @@
 ﻿namespace Fanex.Athena.Service.Core.UnitTests.Users
 {
     using System.Collections.Generic;
+
     using Model.Core.DTO.Common;
+
     using NSubstitute;
+
     using NUnit.Framework;
 
     [TestFixture]

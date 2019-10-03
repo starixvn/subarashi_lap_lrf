@@ -36,7 +36,8 @@
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <Prefer32Bit>false</Prefer32Bit>
-    <CodeAnalysisRuleSet>Fanex.Athena.Model.Report.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -47,10 +48,11 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
     <CodeAnalysisRuleSet>Fanex.Athena.Model.Report.ruleset</CodeAnalysisRuleSet>
+    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Fanex.Common, Version=1.0.404.97, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Fanex.Common.1.0.404.97\lib\net40\Fanex.Common.dll</HintPath>
+    <Reference Include="Fanex.Common, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Fanex.Common.1.1.0.1\lib\net40\Fanex.Common.dll</HintPath>
     </Reference>
     <Reference Include="IBCFile, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Fanex.File.1.0.0\lib\net40\IBCFile.dll</HintPath>
@@ -135,9 +137,6 @@
     <Compile Include="DTO\ExchangeWinLoss.cs" />
     <Compile Include="DTO\ActiveCustomer.cs" />
     <Compile Include="DTO\AgCasinoBalance.cs" />
-    <Compile Include="DTO\Notification.cs" />
-    <Compile Include="DTO\NotificationMessage.cs" />
-    <Compile Include="DTO\ResultAmendment.cs" />
     <Compile Include="DTO\ColossusBetWinLoss.cs" />
     <Compile Include="DTO\LicenseeWinLossByTimeZone.cs" />
     <Compile Include="DTO\Result\KenoExtendedToken.cs" />
@@ -172,13 +171,11 @@
     <Compile Include="MetaModel\BaseReportMetaModel.cs" />
     <Compile Include="MetaModel\ActiveCustomerMetaModel.cs" />
     <Compile Include="MetaModel\LicenseeWinLossByTimeZoneMetaModel.cs" />
+    <Compile Include="MetaModel\PlatformWinLossApiMetaModel.cs" />
     <Compile Include="MetaModel\Result\GetSportResultMetaModel.cs" />
     <Compile Include="MetaModel\Result\ResultMetaModel.cs" />
     <Compile Include="MetaModel\PromotionPrizeMetaModel.cs" />
     <Compile Include="MetaModel\SpecialLicenseeWinLossMetaModel.cs" />
-    <Compile Include="MetaModel\NotificationAttachmentMetaModel.cs" />
-    <Compile Include="MetaModel\NotificationMarkAsReadMetaModel.cs" />
-    <Compile Include="MetaModel\NotificationMetaModel.cs" />
     <Compile Include="MetaModel\SubsidiaryPerformanceMetaModel.cs" />
     <Compile Include="MetaModel\ColossusBetsWinLossMetaModel.cs" />
     <Compile Include="MetaModel\ThirdPartyWinLossMetaModel.cs" />
@@ -214,7 +211,6 @@
     <Compile Include="ViewModel\ActiveCustomerViewModel.cs" />
     <Compile Include="ViewModel\ColossusBetWinLossViewModel.cs" />
     <Compile Include="ViewModel\LicenseeWinLossByTimeZoneViewModel.cs" />
-    <Compile Include="ViewModel\NotificationViewModel.cs" />
     <Compile Include="ViewModel\SubsidiaryPerformanceViewModel.cs" />
     <Compile Include="ViewModel\ThirdPartyWinLossViewModel.cs" />
     <Compile Include="ViewModel\WinLossByLeagueViewModel.cs" />
@@ -256,11 +252,6 @@
       <Project>{17b0022c-4902-4c61-908a-5db81568dc3a}</Project>
       <Name>Fanex.Athena.Resources</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.7.14.0.8411\analyzers\Google.Protobuf.dll" />
-    <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.7.14.0.8411\analyzers\SonarAnalyzer.CSharp.dll" />
-    <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.7.14.0.8411\analyzers\SonarAnalyzer.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

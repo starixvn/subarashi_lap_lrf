@@ -11,6 +11,7 @@
     using Excel.Base.Entities;
     using Excel.Report;
     using Extension.Utility;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DTO.Common;
     using Model.Core.DTO.Configuration;
     using Model.Report.DTO;
@@ -27,7 +28,7 @@
     {
         private const int CurrencyId = 999;
 
-        private const string AgentListXml = "<abc>";
+        private const string AgentListXml = "<ROOT></ROOT>";
 
         private static readonly DateTime BalanceUpDate = new DateTime(2017, 3, 4);
 
@@ -50,7 +51,6 @@
 
             SetUpDefaultFakeData();
 
-            SessionService.GenerateAgentListXml(CurrencyId).Returns(AgentListXml);
         }
 
         [Test]
@@ -180,7 +180,6 @@
             var controller = Substitute.ForPartsOf<WinLossByBetTypeReportController>(
                 LangService,
                 SessionService,
-                AppSettings,
                 productService,
                 _balanceUpDataAccess,
                 _winLossByBetTypeDataAccess);

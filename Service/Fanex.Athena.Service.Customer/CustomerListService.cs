@@ -6,6 +6,7 @@
 
 namespace Fanex.Athena.Service.Customer
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using DataAccess.Customer.Interfaces;
@@ -14,9 +15,9 @@ namespace Fanex.Athena.Service.Customer
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Customer.DTO;
     using Fanex.Athena.Model.Customer.MetaModel;
-    using Fanex.Athena.Service.Core.Common.Interfaces;
     using Fanex.Athena.Service.Customer.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
+
 
     using Model.Core.ResultModel;
 
@@ -30,8 +31,6 @@ namespace Fanex.Athena.Service.Customer
 
         private readonly IDormantCustomerListDataAccess _dormantCustomerListDataAccess;
 
-        private readonly IAuthorizationService _authorizationService;
-
         private readonly IProductService _productService;
 
         private readonly IAppSettings _appSettings;
@@ -41,55 +40,41 @@ namespace Fanex.Athena.Service.Customer
             ICustomerDataAccess customerDataAccess,
             ICustomerListDataAccess customerListDataAccess,
             IDormantCustomerListDataAccess dormantCustomerListDataAccess,
-            IAuthorizationService authorizationService,
             IProductService productService,
             IAppSettings appSettings, ILGAPIClient lgClient)
         {
             _customerDataAccess = customerDataAccess;
             _customerListDataAccess = customerListDataAccess;
             _dormantCustomerListDataAccess = dormantCustomerListDataAccess;
-            _authorizationService = authorizationService;
             _productService = productService;
             _appSettings = appSettings;
             _lgClient = lgClient;
         }
 
-        public async Task<ReportResultModel<CustomerDTO>> GetActiveCustomers(CustomerListMetaModel metaModel)
+        public async Task<ReportResultModel<CustomerDTO>> GetActiveCustomersAsync(CustomerListMetaModel metaModel)
         {
             return await _customerListDataAccess.GetActiveCustomers(metaModel).ConfigureAwait(false);
         }
 
-        public async Task<ReportResultModel<DormantCustomer>> GetDormantCustomers(CustomerListMetaModel metaModel)
+        public async Task<ReportResultModel<DormantCustomer>> GetDormantCustomersAsync(CustomerListMetaModel metaModel)
         {
             return await _dormantCustomerListDataAccess.GetDormantCustomers(metaModel).ConfigureAwait(false);
         }
 
         public LogInfo GetCustomerLoginInfo(int custId, int licenseeId, string siteName)
         {
-            return _authorizationService.HasPermissionOnData(licenseeId, custId, 0)
-                ? _customerListDataAccess.GetCustomerLoginInfo(custId, licenseeId, siteName)
-                : new LogInfo();
+            return _customerListDataAccess.GetCustomerLoginInfo(custId, licenseeId, siteName);
         }
 
         #region Update
 
         public IResultInfo UpdateOddsGroup(CustomerOddsGroupMetaModel metaModel)
         {
-            if (!_authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, 0))
-            {
-                return CreateErrorResult();
-            }
-
             return _customerListDataAccess.UpdateOddsGroup(metaModel);
         }
 
         public async Task<IResultInfo> UpdateCustClosedAsync(CustomerStatusMetaModel metaModel, string languageCode)
         {
-            if (!_authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, 0))
-            {
-                return CreateErrorResult();
-            }
-
             var customerInfo = _customerDataAccess.GetCustomerInfo(metaModel.CustId);
             var closeCasinoResult = true;
             var productAccess = this._productService.GetProductAccess(metaModel.LicenseeId, languageCode);
@@ -128,11 +113,6 @@ namespace Fanex.Athena.Service.Customer
 
         public async Task<IResultInfo> UpdateCustSuspendAsync(CustomerStatusMetaModel metaModel, string languageCode)
         {
-            if (!_authorizationService.HasPermissionOnData(metaModel.LicenseeId, metaModel.CustId, 0))
-            {
-                return CreateErrorResult();
-            }
-
             var customerInfo = _customerDataAccess.GetCustomerInfo(metaModel.CustId);
             var suspendCasinoResult = true;
             var productAccess = this._productService.GetProductAccess(metaModel.LicenseeId, languageCode);
@@ -176,11 +156,6 @@ namespace Fanex.Athena.Service.Customer
             bool allowBA,
             Request request)
         {
-            if (!_authorizationService.HasPermissionOnData(licenseeId, custId, 0))
-            {
-                return CreateErrorResult();
-            }
-
             return this._customerListDataAccess.UpdateCustomerBAStatus(
                 licenseeId,
                    custId,
@@ -189,23 +164,9 @@ namespace Fanex.Athena.Service.Customer
                    request);
         }
 
-        public IResultInfo UpdateSpecialLevel(int licenseeId, int userId, int custId, int level, string ip, string language)
+        public IResultInfo UpdateSpecialLevel(int userId, int custId, int level, string ip, string language)
         {
-            if (!_authorizationService.HasPermissionOnData(licenseeId, custId, 0))
-            {
-                return CreateErrorResult();
-            }
-
             return _customerListDataAccess.UpdateSpecialLevel(userId, custId, level, ip, language);
-        }
-
-        private static IResultInfo CreateErrorResult()
-        {
-            return new ResultInfo
-            {
-                Code = 1,
-                Message = ViewResources.UpdateSpecialLevelMsg
-            };
         }
 
         #endregion Update

@@ -1,21 +1,25 @@
 ﻿namespace Fanex.Athena.Api.Report
 {
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Net.Http;
     using System.Threading.Tasks;
     using System.Web.Hosting;
     using System.Web.Http;
+
     using DataAccess.Report.Interfaces;
+
     using Excel.Base.Entities;
     using Excel.Report;
     using Excel.Report.Models;
-    using Extension.Utility;
+
     using Fanex.Athena.Api.Base.Attributes;
-    using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Utility;
+
     using Model.Core.ResultModel;
     using Model.Report.DTO;
     using Model.Report.MetaModel;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
 
@@ -24,19 +28,20 @@
     {
         private const int PageSizeExcel = int.MaxValue - 1000;
 
-        private readonly IAppSettings _appSettings;
+        private readonly ILicenseeSettingService _licenseeSettingService;
 
         private readonly ICustPendingFundsDataAccess _custPendingFundsDataAccess;
 
         public CustomerPendingFundsReportController(
-            IAppSettings appSettings,
             ICustPendingFundsDataAccess custPendingFundsDataAccess,
             ISessionService sessionService,
             IProductService productService,
-            ILanguageService langService)
+            ILanguageService langService,
+            ILicenseeSettingService licenseeSettingService
+            )
             : base(sessionService, productService, langService)
         {
-            _appSettings = appSettings;
+            _licenseeSettingService = licenseeSettingService;
             _custPendingFundsDataAccess = custPendingFundsDataAccess;
         }
 
@@ -58,7 +63,6 @@
         [ValidationApiRequest]
         public async Task<HttpResponseMessage> ExportExcel(CustomerPendingFundsMetaModel metaModel)
         {
-           
             const string FileName = "CustomerPendingFunds.xls";
             const string TemplatePath = @"~/App_Data/Template/CustomerReports/CustomerPendingFunds.xls";
 
@@ -79,7 +83,7 @@
                 ConvertingOption = convertingOption,
                 DataList = data.DataList,
                 TotalData = data.TotalData,
-                SystemIdVisible = !_appSettings.FakeLicenseeList.Contains(SessionService.LicenseeSession.LicenseeId)
+                SystemIdVisible = !_licenseeSettingService.IsFakeLicensee(SessionService.LicenseeSession.LicenseeName)
             };
             var custPendingFundsExcel = CreateExcel(templatePath, excelModel);
             custPendingFundsExcel.Export();
@@ -94,7 +98,8 @@
 
         private async Task<ReportResultModel<CustPendingFunds>> GetData(CustomerPendingFundsMetaModel metaModel)
         {
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
+            var userSession = SessionService.UserSession;
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId);
             return await _custPendingFundsDataAccess.GetDataList(metaModel).ConfigureAwait(false);
         }
     }

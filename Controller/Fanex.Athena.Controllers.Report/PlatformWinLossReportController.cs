@@ -6,26 +6,32 @@
 
 namespace Fanex.Athena.Controllers.Report
 {
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Extension.Utility;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
+
     using Model.Core.DataDomain;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
 
     [FunctionAuthorization(PermissionKeys.ReportPlatformWinLoss)]
     public class PlatformWinLossReportController : ReportBaseController
     {
+        private readonly IReportAPIClient _reportAPIClient;
+
         public PlatformWinLossReportController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
-            IProductService productService)
-            : base(languageService, sessionService, appSetting, productService)
+            IProductService productService, IReportAPIClient reportAPIClient)
+            : base(languageService, sessionService, productService)
         {
+            _reportAPIClient = reportAPIClient;
         }
 
         [HttpGet]
@@ -38,7 +44,6 @@ namespace Fanex.Athena.Controllers.Report
             {
                 LicenseeId = licenseeId,
                 BaseCurrency = userSession.DefaultBaseCurrency,
-
             };
             var productAccess = ProductService.GetSingleWalletProductAccess(
                 licenseeId,
@@ -56,6 +61,55 @@ namespace Fanex.Athena.Controllers.Report
             };
 
             return View("~/Views/Desktop/Report/PlatformWinLoss/Main.cshtml", model);
+        }
+
+        [HttpPost]
+        [ValidationWebRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
+        [AutoBindMetaModel(BindAgent = true)]
+        public async Task<ActionResult> Index(PlatformWinLossMetaModel metaModel)
+        {
+            return await ProcessRequest(metaModel);
+        }
+
+        private async Task<ActionResult> ProcessRequest(PlatformWinLossMetaModel metaModel)
+        {
+            var userSession = SessionService.UserSession;
+            metaModel.HasComm = SessionService.LicenseeSession.IsAllowedCustomerComm;
+
+            return metaModel.Level == (int)ReportLevel.Main
+                ? await ProcessSummaryLevel(metaModel, userSession.Language)
+                : await ProcessMemberLevel(metaModel, userSession.Language);
+        }
+
+        private async Task<ActionResult> ProcessMemberLevel(PlatformWinLossMetaModel metaModel, string language)
+        {
+            const string FileName = "PlatformWinLossMember.xls";
+
+            metaModel.CurrencyList = SessionService.UserSession.CurrencyList
+                .Select(x => new Currency { ID = x.Key, Name = x.Value }).ToList();
+            if (metaModel.IsExportExcel)
+            {
+                var data = await _reportAPIClient.PostByteContentAsync("api/PlatformWinLoss/ExportMemberData", metaModel, language, MediaType.MsgPack).ConfigureAwait(false);
+                return File(data, "application/octet-stream", FileName);
+            }
+            else
+            {
+                return JsonString(await _reportAPIClient.PostAsyncString("api/PlatformWinLoss/GetMemberData", metaModel, language).ConfigureAwait(false));
+            }
+        }
+
+        private async Task<ActionResult> ProcessSummaryLevel(PlatformWinLossMetaModel metaModel, string language)
+        {
+            if (metaModel.IsExportExcel)
+            {
+                const string FileName = "PlatformWinLossSummary.xls";
+                var data = await _reportAPIClient.PostByteContentAsync("api/PlatformWinLoss/ExportSummaryData", metaModel, language, MediaType.MsgPack).ConfigureAwait(false);
+                return File(data, "application/octet-stream", FileName);
+            }
+            else
+            {
+                return JsonString(await _reportAPIClient.PostAsyncString("api/PlatformWinLoss/GetSummaryData", metaModel, language).ConfigureAwait(false));
+            }
         }
     }
 }

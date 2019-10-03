@@ -1,25 +1,30 @@
 ﻿namespace Fanex.Athena.Controllers.BetList
 {
     using System;
-    using System.Linq;
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using System.Web.SessionState;
+
     using DataAccess.Core.Configuration.Interfaces;
+
     using Excel.Base.Helpers;
-    using Extension.Utility;
+
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Service.Core.Common.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Utility;
+
     using Model.BetList.MetaModel;
     using Model.Core.DTO.Configuration;
+
     using ONEbook.UM.Filters;
+
     using Resources;
+
     using Service.Core.Users.Interfaces;
-    using Service.Core.Utility;
-    using Service.Core.Utility.Interfaces;
+
     using VendorAdapter.Interfaces;
-    using Fanex.Athena.Model.Core.Helper;
 
     [SessionState(SessionStateBehavior.ReadOnly)]
     [CheckUMFilter]
@@ -48,13 +53,14 @@
         public BetListBaseController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             IProductService productService,
             IBalanceUpDataAccess balanceUpDataAccess,
             ICacheRefAdapter cacheRefAdapter,
-            IBetListApiClient betListApiClient)
+            IBetListApiClient betListApiClient,
+            ILicenseeSettingService licenseeSettingService
+            )
 #pragma warning restore S107 // Methods should not have too many parameters
-        : base(languageService, sessionService, appSetting)
+        : base(languageService, sessionService, licenseeSettingService)
         {
             _productService = productService;
             _balanceUpDataAccess = balanceUpDataAccess;
@@ -136,9 +142,10 @@
             defaultMetaModel.FromDate = DateTime.SpecifyKind(defaultMetaModel.FromDate.Date, DateTimeKind.Unspecified);
             defaultMetaModel.ToDate = DateTime.SpecifyKind(defaultMetaModel.ToDate.Date, DateTimeKind.Unspecified);
             defaultMetaModel.Date = DateTime.SpecifyKind(defaultMetaModel.Date.Date, DateTimeKind.Unspecified);
-            defaultMetaModel.IsFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeId);
+            defaultMetaModel.IsFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeName);
             defaultMetaModel.CurrencyList = UserCurrencyList;
-            defaultMetaModel.AgentListXml = SessionService.GenerateAgentListXml(defaultMetaModel.CurrencyId);
+            defaultMetaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList,
+                defaultMetaModel.CurrencyId);
 
             var balanceUp = GetBalanceUp();
             defaultMetaModel.BalanceUpDay = DateTime.SpecifyKind(balanceUp.BalanceUpDay.Date, DateTimeKind.Unspecified);

@@ -3,16 +3,23 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
     using Core.Configuration.Interfaces;
     using Core.UnitTests.TestHelpers;
+
     using Extension.Utility;
+
     using Fanex.Athena.Model.Core.DTO.Configuration;
+
     using Model.Core.DataDomain;
     using Model.Core.ResultModel;
     using Model.Report.DTO;
     using Model.Report.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using UnitTest.Common.Helpers;
 
     public class CashOutWinLossDataAccessTest : BaseDataAccessHelperTest<CashOutWinLossDataAccess>

@@ -1,17 +1,23 @@
 ﻿namespace Fanex.Athena.Api.Report.UnitTests
 {
     using System;
-    using System.Collections.Generic;
     using System.Threading.Tasks;
+
     using Base.UnitTests;
+
     using DataAccess.Report.Interfaces;
+
+    using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Model.Core.DataDomain;
     using Model.Core.DTO.Configuration;
     using Model.Report.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
-    using Service.Core.Configuration.Interfaces;
-    using Session.Model;
 
     public class ExchangeWinLossReportControllerTest : BaseApiControllerHelperTest
     {
@@ -27,7 +33,7 @@
         {
             base.FixtureSetUp();
             _reportSettingService = Substitute.For<IReportSettingService>();
-            _reportSettingService.GetSetting(PermissionKeys.ReportExchangeWinLoss).Returns(new ReportSetting
+            _reportSettingService.GetSetting(PermissionKeys.ReportExchangeWinLoss, Arg.Any<string>()).Returns(new ReportSetting
             {
                 MinDate = _minDate,
                 MaxDate = _maxDate
@@ -127,7 +133,7 @@
         {
             // Arrange
             const int LicenseeId = LicenseeIdentity.OneTwoBet + 1;
-            StubLicenseeSessionData(new LicenseeSession
+            StubLicenseeSessionData(new LicenseeAuthInfo
             {
                 LicenseeId = LicenseeId
             });
@@ -155,7 +161,7 @@
         public async Task Index_Level1AndIsOneTwoBet_GetLicenseeDataAsync()
         {
             // Arrange
-            StubLicenseeSessionData(new LicenseeSession
+            StubLicenseeSessionData(new LicenseeAuthInfo
             {
                 LicenseeId = LicenseeIdentity.OneTwoBet
             });

@@ -60,7 +60,6 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                const string AgentListXml = "<xml/>";
                 var metaModel = new BetListExcelMetaModel
                 {
                     Date = new DateTime(2018, 2, 5),
@@ -68,8 +67,6 @@
                     CurrencyId = 0
                 };
                 var expectedTitle = $"{ViewResources.ProductCS} - {ViewResources.DetailedBetlist} - {metaModel.Date.ToString("MM/dd/yyyy")}";
-
-                SessionService.GenerateAgentListXml(metaModel.CurrencyId, false).Returns(AgentListXml);
 
                 controller.When(async x => await x.ProcessExportExcel(
                     Arg.Any<BetListExcelMetaModel>(),
@@ -86,7 +83,7 @@
                         && string.Join(",", x.HiddenColumns) == "1,2,8,9"
                         && x.LicenseeId == DefaultLicenseeSession.LicenseeId
                         && !x.IsShowSumStake
-                        && x.AgentListXml == AgentListXml),
+                        ),
                     "RngCasinoDetail",
                     null);
             }
@@ -97,11 +94,10 @@
             var controller = Substitute.ForPartsOf<RNGCasinoBetListController>(
                 LangService,
                 SessionService,
-                AppSettings,
                 ProductService,
                 BalanceUpDataAccess,
                 CacheRefAdapter,
-                BetListApiClient);
+                BetListApiClient, LicenseeSettingService);
             return controller;
         }
     }

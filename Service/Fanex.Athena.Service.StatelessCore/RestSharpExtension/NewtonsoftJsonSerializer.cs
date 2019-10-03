@@ -1,11 +1,10 @@
-﻿using System.IO;
-using Newtonsoft.Json;
-using RestSharp;
-using RestSharp.Deserializers;
-using RestSharp.Serializers;
-
-namespace Fanex.Athena.Service.StatelessCore.RestSharpExtension
+﻿namespace Fanex.Athena.Service.StatelessCore.RestSharpExtension
 {
+    using System.IO;
+    using Newtonsoft.Json;
+    using RestSharp.Deserializers;
+    using RestSharp.Serializers;
+
     public class NewtonsoftJsonSerializer : ISerializer, IDeserializer
     {
         private readonly Newtonsoft.Json.JsonSerializer serializer;
@@ -15,12 +14,10 @@ namespace Fanex.Athena.Service.StatelessCore.RestSharpExtension
             this.serializer = serializer;
         }
 
-        public string ContentType
-        {
-            get { return "application/json"; }
-            set { }
-        }
+        public string ContentType { get; set; } = "application/json";
+
         public DateTimeZoneHandling TimeZoneHandling { get; set; } = DateTimeZoneHandling.Unspecified;
+
         public string DateFormat { get; set; }
 
         public string Namespace { get; set; }

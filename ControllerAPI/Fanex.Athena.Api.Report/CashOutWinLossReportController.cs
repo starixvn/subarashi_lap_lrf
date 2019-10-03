@@ -13,16 +13,24 @@ namespace Fanex.Athena.Api.Report
     using System.Threading.Tasks;
     using System.Web.Hosting;
     using System.Web.Http;
+
     using Base.Attributes;
+
     using DataAccess.Report.Interfaces;
+
     using Fanex.Athena.Excel.Report;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
     using Fanex.Athena.Service.Core.Utility.Interfaces;
-    using Model.Core.DataDomain;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Utility;
+
     using Model.Core.ResultModel;
+
     using Resources;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
 
@@ -31,6 +39,7 @@ namespace Fanex.Athena.Api.Report
     {
         private readonly ICashOutWinLossDataAccess _cashOutWinLossDataAccess;
         private readonly ICurrencyValidation _currencyValidation;
+
         public CashOutWinLossReportController(
             ICashOutWinLossDataAccess cashOutWinLossDataAccess,
             ISessionService sessionService,
@@ -168,13 +177,15 @@ namespace Fanex.Athena.Api.Report
             int currencyId,
             int custId)
         {
+            var userSession = SessionService.UserSession;
             metaModel.DrillDownCurrencyId = currencyId;
             metaModel.DrillDownLevel = level;
             metaModel.DrillDownCustomerId = custId;
             metaModel.DrillDownFromDate = fdate ?? metaModel.DrillDownFromDate;
             metaModel.DrillDownToDate = tdate ?? metaModel.DrillDownToDate;
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(level > 0 ? currencyId : metaModel.CurrencyId, metaModel.IsExcludedTestData);
-            metaModel.DefaultBaseCurrency = SessionService.UserSession.DefaultBaseCurrency;
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList,
+                level > 0 ? currencyId : metaModel.CurrencyId, metaModel.IsExcludedTestData);
+            metaModel.DefaultBaseCurrency = userSession.DefaultBaseCurrency;
         }
 
         private async Task<SortableReportResultModel<CashOutWinLoss>> GetData(ThirdPartyWinLossMetaModel metaModel)

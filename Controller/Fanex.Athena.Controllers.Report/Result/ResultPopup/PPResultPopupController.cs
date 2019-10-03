@@ -2,10 +2,11 @@ namespace Fanex.Athena.Controllers.Report.Result.ResultPopup
 {
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Extension.Utility;
+
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-    using Service.Core.Utility.Interfaces;
 
     public class PPResultPopupController : ContentBaseController
     {
@@ -14,9 +15,9 @@ namespace Fanex.Athena.Controllers.Report.Result.ResultPopup
         public PPResultPopupController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
-            IBetListApiClient betListApiClient)
-            : base(languageService, sessionService, appSetting)
+            IBetListApiClient betListApiClient
+            )
+            : base(languageService, sessionService)
         {
             _betListApiClient = betListApiClient;
         }

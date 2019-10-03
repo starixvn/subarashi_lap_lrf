@@ -6,6 +6,7 @@
     using System.Web.Mvc;
     using Base.UnitTests;
     using DataAccess.Core.Configuration.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DTO.Common;
     using Model.Core.DTO.Configuration;
     using Model.Report.ViewModel.Note;
@@ -68,7 +69,6 @@
             return new NoteController(
                 LangService,
                 SessionService,
-                AppSettings,
                 _productService,
                 _balanceUpDataAccess);
         }

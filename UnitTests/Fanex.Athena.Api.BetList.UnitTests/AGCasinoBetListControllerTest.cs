@@ -1,9 +1,13 @@
 ﻿namespace Fanex.Athena.Api.BetList.UnitTests
 {
+    using System.Collections.Generic;
     using System.Net.Http;
     using System.Threading.Tasks;
+
     using Model.BetList.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
 
     [TestFixture]
@@ -18,7 +22,7 @@
         {
             MockSessionData();
 
-            AuthorizationService.HasPermissionOnData(SessionLicenseeId, Arg.Any<int>(), Arg.Any<long>()).Returns(true);
+            AuthorizationService.HasPermissionOnData(Arg.Any<IDictionary<int, int[]>>(), Arg.Any<int>(), Arg.Any<long>()).Returns(true);
         }
 
         [Test]
@@ -46,7 +50,7 @@
                 {
                     NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
                     Assert.That(metaModel.UspKey, Is.EqualTo(UspKey));
-                    BetListApiClient.Received().PostAsync((string)ApiPath, (object)metaModel, (string)SessionLanguage);
+                    BetListApiClient.Received().PostAsync(ApiPath, (object)metaModel, SessionLanguage);
                 }));
             }
         }

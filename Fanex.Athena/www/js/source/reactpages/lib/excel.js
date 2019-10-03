@@ -1,15 +1,23 @@
 const EXCEL_TYPE = "xlsx";
 const MapExcelType = {
-    "number": "n", "string": "s", "boolean": "b", "object": "d"
+    "number": "n",
+    "string": "s",
+    "boolean": "b",
+    "object": "d"
 };
 
 let _XLSX = null;
 export default class Excel {
-    static process(callback){
-        import(/* webpackChunkName: "xlsx-style-sparta" */ 'xlsx-style-sparta').then(XLSX => {
-            _XLSX = XLSX;
+    static process(callback) {
+        if (window.XLSX) {
+            _XLSX = window.XLSX;
             callback && callback();
-        });
+        } else {
+            import ( /* webpackChunkName: "xlsx-style-sparta" */ 'xlsx-style-sparta').then(XLSX => {
+                _XLSX = XLSX;
+                callback && callback();
+            });
+        }
     }
 
     static export (worksheet, fileName) {
@@ -21,7 +29,7 @@ export default class Excel {
         this.download(workbookOutput, fileName);
     }
 
-    static getCellType(value){
+    static getCellType(value) {
         return MapExcelType[typeof value];
     }
 

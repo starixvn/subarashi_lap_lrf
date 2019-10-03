@@ -1,15 +1,18 @@
 ﻿namespace Fanex.Athena.Controllers.Report.UnitTests
 {
-    using System;
-    using System.Web.Mvc;
     using Base.UnitTests;
-    using Model.Core.DataDomain;
+    using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Model.Core.DTO.Configuration;
     using Model.Report.ViewModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Configuration.Interfaces;
+
+    using System;
+    using System.Web.Mvc;
 
     public class ExchangeWinLossReportControllerTest : CultureBaseControllerHelperTest
     {
@@ -59,7 +62,7 @@
         private ExchangeWinLossReportController CreateController()
         {
             var reportSettingService = Substitute.For<IReportSettingService>();
-            reportSettingService.GetSetting(PermissionKeys.ReportExchangeWinLoss).Returns(new ReportSetting
+            reportSettingService.GetSetting(PermissionKeys.ReportExchangeWinLoss, Arg.Any<string>()).Returns(new ReportSetting
             {
                 MinDate = _minDate,
                 MaxDate = _maxDate
@@ -67,9 +70,8 @@
             var controller = Substitute.ForPartsOf<ExchangeWinLossReportController>(
                 LangService,
                 SessionService,
-                AppSettings,
-                Substitute.For<IProductService>(),
                 reportSettingService);
+
             return controller;
         }
     }

@@ -29,7 +29,6 @@ exports[`UserGuide  onClickHandler update state to true - content is empty - pop
         />
         <a
           className="popup-close"
-          href="javascript:;"
           onClick={[Function]}
         >
           <i
@@ -79,7 +78,6 @@ exports[`UserGuide  onClickHandler update state to true - content is not empty -
         />
         <a
           className="popup-close"
-          href="javascript:;"
           onClick={[Function]}
         >
           <i
@@ -129,7 +127,6 @@ exports[`UserGuide  render popup component is hidden 1`] = `
         />
         <a
           className="popup-close"
-          href="javascript:;"
           onClick={[Function]}
         >
           <i

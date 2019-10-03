@@ -8,11 +8,15 @@ namespace Fanex.Athena.Controllers.Report
 {
     using System.Threading.Tasks;
     using System.Web.Mvc;
+
     using Fanex.Athena.Extension.Utility;
-    using Model.Core.DataDomain;
+    using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
     using Service.Report.Interfaces;
+
     using Web.ActionFilter;
 
     [FunctionAuthorization(PermissionKeys.ReportSettledMatchCount)]
@@ -26,7 +30,7 @@ namespace Fanex.Athena.Controllers.Report
             IAppSettings appSetting,
             IProductService productService,
             ISettledMatchCountService settledMatchCountService)
-            : base(languageService, sessionService, appSetting, productService)
+            : base(languageService, sessionService, appSetting, productService, null)
         {
             _settledMatchCountService = settledMatchCountService;
         }

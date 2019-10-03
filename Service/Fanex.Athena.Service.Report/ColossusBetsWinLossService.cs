@@ -8,10 +8,12 @@ namespace Fanex.Athena.Service.Report
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using Fanex.Athena.DataAccess.Report.Interfaces;
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Service.Report.Interfaces;
+
     using Model.Core.ResultModel;
 
     public class ColossusBetsWinLossService : IColossusBetsWinLossService
@@ -24,7 +26,7 @@ namespace Fanex.Athena.Service.Report
         }
 
         public async Task<SortableReportResultModel<ColossusBetWinLoss>> GetWinlossDetail(
-            ColossusBetsWinLossMetaModel metaModel, 
+            ColossusBetsWinLossMetaModel metaModel,
             IDictionary<int, string> currencyList)
         {
             return await _colossusBetsWinLossDataAccess.GetWinlossDetail(metaModel, currencyList).ConfigureAwait(false);

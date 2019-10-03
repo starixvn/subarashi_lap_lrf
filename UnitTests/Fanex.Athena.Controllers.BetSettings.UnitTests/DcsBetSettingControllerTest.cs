@@ -5,7 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Constant.DataDomain;
+    using Model.Core.DataDomain;
     using Model.BetSettings.DTO;
     using Model.BetSettings.MetaModel;
     using Model.BetSettings.ViewModel;
@@ -45,7 +45,7 @@
                 var metaModel = new BetSettingMetaModel { ProductId = productId };
 
                 // Action
-                AsyncTestDelegate testDelegate = () => controller.Index(metaModel);
+                Task testDelegate() => controller.Index(metaModel);
 
                 // Assert
                 Assert.ThrowsAsync<ArgumentException>(testDelegate, "Invalid product id: " + productId);
@@ -60,7 +60,7 @@
         [TestCase(ProductTypes.Lottery, "Lottery", true, true)]
         [TestCase(ProductTypes.Exchange, "Exchange", true, false)]
         [TestCase(ProductTypes.PP, "PP", true, false)]
-        public async Task Index_ValidProduct_ReturnCorrectViewResult(int productId, string viewName, bool hasStatus, bool hasBetLimit)
+        public async Task Index_ValidProduct_ReturnCorrectViewResultAsync(int productId, string viewName, bool hasStatus, bool hasBetLimit)
         {
             using (var controller = CreateController())
             {
@@ -73,14 +73,14 @@
                 if (hasStatus)
                 {
                     expectedStatus = true;
-                    _betSettingService.GetStatusAsync(DefaultLicenseeSession.LicenseeId, metaModel.CustId, metaModel.ProductId)
+                    _betSettingService.GetStatusAsync( metaModel.CustId, metaModel.ProductId)
                         .Returns(Task.FromResult(expectedStatus));
                 }
 
                 if (hasBetLimit)
                 {
                     expectedNumberOfMainData = 1;
-                    _betSettingService.GetBetSettingsAsync(DefaultLicenseeSession.LicenseeId, metaModel.CustId, metaModel.ProductId)
+                    _betSettingService.GetBetSettingsAsync( metaModel.CustId, metaModel.ProductId)
                         .Returns(Task.FromResult<IList<BetSetting>>(new List<BetSetting> { new BetSetting() }));
                 }
 
@@ -107,7 +107,7 @@
         [TestCase(ProductTypes.Lottery)]
         [TestCase(ProductTypes.Exchange)]
         [TestCase(ProductTypes.PP)]
-        public async Task UpdateStatus_NoPermission_ReturnAccessDeniedResult(int productId)
+        public async Task UpdateStatus_NoPermission_ReturnAccessDeniedResultAsync(int productId)
         {
             using (var controller = CreateController())
             {
@@ -136,7 +136,7 @@
         [TestCase(ProductTypes.Lottery)]
         [TestCase(ProductTypes.Exchange)]
         [TestCase(ProductTypes.PP)]
-        public async Task UpdateStatus_UpdateSuccessfully_ReturnSuccessfullResultInfo(int productId)
+        public async Task UpdateStatus_UpdateSuccessfully_ReturnSuccessfullResultInfoAsync(int productId)
         {
             using (var controller = CreateController())
             {
@@ -147,7 +147,6 @@
                 CoreBetSettingService.IsBetSettingEditable(DefaultUserSession).Returns(true);
 
                 _betSettingService.UpdateStatusAsync(
-                   DefaultLicenseeSession.LicenseeId,
                    DefaultUserSession.UserId,
                    Arg.Any<int>(),
                    Arg.Any<string>(),
@@ -175,7 +174,7 @@
         [TestCase(ProductTypes.Lottery)]
         [TestCase(ProductTypes.Exchange)]
         [TestCase(ProductTypes.PP)]
-        public async Task UpdateStatus_UpdateFailed_ReturnFailedResultInfo(int productId)
+        public async Task UpdateStatus_UpdateFailed_ReturnFailedResultInfoAsync(int productId)
         {
             using (var controller = CreateController())
             {
@@ -186,7 +185,6 @@
                 CoreBetSettingService.IsBetSettingEditable(DefaultUserSession).Returns(true);
 
                 _betSettingService.UpdateStatusAsync(
-                   DefaultLicenseeSession.LicenseeId,
                    DefaultUserSession.UserId,
                    Arg.Any<int>(),
                    Arg.Any<string>(),
@@ -210,7 +208,7 @@
         [TestCase(ProductTypes.Lottery)]
         [TestCase(ProductTypes.Exchange)]
         [TestCase(ProductTypes.PP)]
-        public async Task UpdateBetSetting_NoPermission_ReturnAccessDeniedResult(int productId)
+        public async Task UpdateBetSetting_NoPermission_ReturnAccessDeniedResultAsync(int productId)
         {
             using (var controller = CreateController())
             {
@@ -234,7 +232,7 @@
         [TestCase(ProductTypes.VirtualSports, "180,181,182,183,184,185,186")]
         [TestCase(ProductTypes.VirtualSports2, "190,191,192,193,199")]
         [TestCase(ProductTypes.Lottery, "220")]
-        public async Task UpdateBetSetting_ProductHaveBetLimit_GetCorrectParam(int productId, string expectedBetLimits)
+        public async Task UpdateBetSetting_ProductHaveBetLimit_GetCorrectParamAsync(int productId, string expectedBetLimits)
         {
             using (var controller = CreateController())
             {
@@ -246,7 +244,6 @@
 
                 IEnumerable<DcsBetSetting> param = null;
                 _betSettingService.UpdateBetSettingAsync(
-                   Arg.Any<int>(),
                    Arg.Any<int>(),
                    Arg.Any<int>(),
                    Arg.Any<string>(),
@@ -266,7 +263,7 @@
         [TestCase(ProductTypes.Voidbridge)]
         [TestCase(ProductTypes.FishingWorld)]
         [TestCase(ProductTypes.Exchange)]
-        public async Task UpdateBetSetting_ProductDoesNotHaveBetLimit_ReturnInvalidParamsResult(int productId)
+        public async Task UpdateBetSetting_ProductDoesNotHaveBetLimit_ReturnInvalidParamsResultAsync(int productId)
         {
             using (var controller = CreateController())
             {
@@ -331,7 +328,6 @@
                 _betSettingService.UpdateBetSettingAsync(
                    Arg.Any<int>(),
                    Arg.Any<int>(),
-                   Arg.Any<int>(),
                    Arg.Any<string>(),
                    Arg.Any<IEnumerable<DcsBetSetting>>()).Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 0 }));
 
@@ -364,7 +360,6 @@
                 _betSettingService.UpdateBetSettingAsync(
                    Arg.Any<int>(),
                    Arg.Any<int>(),
-                   Arg.Any<int>(),
                    Arg.Any<string>(),
                    Arg.Any<IEnumerable<DcsBetSetting>>()).Returns(Task.FromResult<IResultInfo>(new ResultInfo { Code = 1, Message = "Error" }));
 
@@ -382,10 +377,9 @@
             var controller = new DcsBetSettingController(
                 LangService,
                 SessionService,
-                AppSettings,
                 CoreBetSettingService,
                 ProductService,
-                _betSettingService)
+                _betSettingService, LicenseeSettingService)
             {
                 ControllerContext = ControllerContext
             };

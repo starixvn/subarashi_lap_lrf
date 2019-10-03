@@ -11,15 +11,22 @@ namespace Fanex.Athena.Controllers.Report
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+
     using DataAccess.Core.Common.Interfaces;
+
     using Extension.Utility;
-    using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
+
     using Model.Core.MetaModel.Common;
+
     using Resources;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
 
@@ -39,8 +46,9 @@ namespace Fanex.Athena.Controllers.Report
             IProductService productService,
             ISportTypeDataAccess sportTypeDataAccess,
             ILeagueDataAccess leagueDataAccess,
-            IMatchService matchService)
-            : base(languageService, sessionService, appSetting, productService)
+            IMatchService matchService
+            )
+            : base(languageService, sessionService, appSetting, productService, null)
 #pragma warning restore S107 // Methods should not have too many parameters
         {
             _sportTypeDataAccess = sportTypeDataAccess;
@@ -64,7 +72,6 @@ namespace Fanex.Athena.Controllers.Report
                 ToDate = date,
                 ProductOptions = ToProductOptions(productList),
                 BaseCurrency = userSession.DefaultBaseCurrency
-
             };
 
             var sports = (await this._sportTypeDataAccess.GetSportsAndProducts(licenseeSession.LicenseeId, userSession.Language, Product.SB).ConfigureAwait(true))
@@ -72,11 +79,11 @@ namespace Fanex.Athena.Controllers.Report
             var leagues = await this._leagueDataAccess.GetLeaguesBySport(
                             new LeagueMetaModel
                             {
-                                LicenseeId = licenseeSession.LicenseeId,
                                 UserId = userSession.UserId,
                                 FromDate = metaModel.FromDate,
                                 ToDate = metaModel.ToDate,
-                                AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId)
+                                AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList,
+                                metaModel.CurrencyId)
                             }).ConfigureAwait(false);
 
             var firstLeague = leagues.FirstOrDefault();
@@ -100,11 +107,9 @@ namespace Fanex.Athena.Controllers.Report
         [HttpPost]
         [AjaxRequest]
         [CustomValidateAntiForgery]
+        [AutoBindMetaModel(BindAgent = true, BindUserId = true)]
         public async Task<ActionResult> GetLeaguesBySport(LeagueMetaModel metaModel)
         {
-            metaModel.LicenseeId = SessionService.LicenseeSession.LicenseeId;
-            metaModel.UserId = SessionService.UserSession.UserId;
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
             var leagues = (await _leagueDataAccess.GetLeaguesBySport(metaModel).ConfigureAwait(false))
                             .Select(x => new { Key = x.LeagueId, Value = x.LeagueName });
             return Json(leagues);

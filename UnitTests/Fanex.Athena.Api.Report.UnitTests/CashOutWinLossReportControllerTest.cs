@@ -4,20 +4,30 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using Base.UnitTests;
+
     using DataAccess.Report.Interfaces;
-    using Excel.Base.Entities;
+
     using Excel.Report;
+
     using Extension.Utility;
+
     using Fanex.Athena.Service.Core.Utility.Interfaces;
+
     using Model.Core.ResultModel;
     using Model.Report.DTO;
     using Model.Report.MetaModel;
     using Model.Report.ViewModel;
+
     using NPOI.SS.UserModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Report;
+
     using UnitTest.Common.Helpers;
 
     public class CashOutWinLossReportControllerTest : BaseApiControllerHelperTest
@@ -29,7 +39,6 @@
         [SetUp]
         public void Setup()
         {
-
             MockSessionData();
             _dataAccess = Substitute.For<ICashOutWinLossDataAccess>();
             _currencyValidation = Substitute.For<ICurrencyValidation>();
@@ -80,9 +89,8 @@
                 DrillDownLevel = 0,
                 DrillDownCurrencyId = CurrencyId,
                 DrillDownCustomerId = CustId,
-                AgentListXml = "XmlData"
+                AgentListXml = "<ROOT></ROOT>"
             };
-            SessionService.GenerateAgentListXml(CurrencyId, metaModel.IsExcludedTestData).Returns("XmlData");
             var dataListResult = new SortableList<CashOutWinLoss>
             {
                 new CashOutWinLoss()
@@ -120,9 +128,8 @@
                 DrillDownLevel = Level,
                 DrillDownCurrencyId = CurrencyId,
                 DrillDownCustomerId = CustId,
-                AgentListXml = "XmlData"
+                AgentListXml = "<ROOT></ROOT>"
             };
-            SessionService.GenerateAgentListXml(CurrencyId, metaModel.IsExcludedTestData).Returns("XmlData");
             var dataListResult = new SortableList<CashOutWinLoss>
             {
                 new CashOutWinLoss()
@@ -159,9 +166,8 @@
                 DrillDownLevel = Level,
                 DrillDownCurrencyId = CurrencyId,
                 DrillDownCustomerId = CustId,
-                AgentListXml = "XmlData"
+                AgentListXml = "<ROOT></ROOT>"
             };
-            SessionService.GenerateAgentListXml(CurrencyId, metaModel.IsExcludedTestData).Returns("XmlData");
 
             _dataAccess.GetDetail(Arg.Any<ThirdPartyWinLossMetaModel>(), UserCurrencyList).ReturnsForAnyArgs(new SortableReportResultModel<CashOutWinLoss>());
 
@@ -216,7 +222,6 @@
             // Assert
             _controller.Received().ExcelStream(Arg.Any<IWorkbook>(), Arg.Any<string>());
         }
-
 
         public async Task Index_IsExportExcelTrueWithDifferentLevelAndCurrency_UpdateMetanData(
             )
@@ -273,7 +278,7 @@
         {
             return metaModel.DrillDownCurrencyId == -2 && metaModel.DrillDownLevel == level &&
                 metaModel.DrillDownCustomerId == 1 && metaModel.DrillDownFromDate == new DateTime(2017, 4, 1) &&
-                metaModel.DrillDownToDate == new DateTime(2017, 4, 18) && metaModel.AgentListXml == "XmlData";
+                metaModel.DrillDownToDate == new DateTime(2017, 4, 18) && metaModel.AgentListXml == "<ROOT></ROOT>";
         }
 
         private string CreateResultData(List<CashOutWinLoss> data, List<CashOutWinLoss> total, Dictionary<string, CashOutWinLoss> summaryTotal)

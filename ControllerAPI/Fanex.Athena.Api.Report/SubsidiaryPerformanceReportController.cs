@@ -1,16 +1,19 @@
 ﻿namespace Fanex.Athena.Api.Report
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Http;
+
     using Base.Attributes;
-    using Constant.DataDomain;
-    using Fanex.Athena.Resources;
+    using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Utility;
+
     using Model.Core.DataDomain;
     using Model.Report.DTO.SubsidiaryPerformance;
     using Model.Report.MetaModel;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
     using Service.Report.Interfaces;
@@ -47,12 +50,12 @@
             string agentListXml = null;
             if (isSubsidiary)
             {
-                agentListXml = SessionService.GenerateAgentListXml(isExcludeTestData: metaModel.IsExcludeTest);
+                agentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, isExcludeTestData: metaModel.IsExcludeTest);
             }
             else
             {
                 var agentIdListByCurrency = _subsidiaryService.GetCurrencyAgentList(metaModel.SubsidiaryList, metaModel.IsExcludeTest);
-                agentListXml = SessionService.GenerateAgentListXml(agentIdListByCurrency);
+                agentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyList, agentIdListByCurrency);
             }
 
             metaModel.AgentListXml = agentListXml;
@@ -65,14 +68,15 @@
         public async Task<dynamic> Detail(SubsidiaryPerformanceMetaModel metaModel)
         {
             var licenseeName = SessionService.LicenseeSession.LicenseeName;
+            var userSession = SessionService.UserSession;
             metaModel.LicenseeName = licenseeName;
             var agentIdListByCurrency = _subsidiaryService.GetCurrencyAgentList(metaModel.SubsidiaryId, metaModel.IsExcludeTest);
 
             if (agentIdListByCurrency.Any())
             {
-                metaModel.AgentListXml = SessionService.GenerateAgentListXml(agentIdListByCurrency);
+                metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyList, agentIdListByCurrency);
 
-                var result = await _subsidiaryPerformanceService.GetDetailData(metaModel, SessionService.UserSession.CurrencyList).ConfigureAwait(false);
+                var result = await _subsidiaryPerformanceService.GetDetailData(metaModel, userSession.CurrencyList).ConfigureAwait(false);
 
                 return new
                 {

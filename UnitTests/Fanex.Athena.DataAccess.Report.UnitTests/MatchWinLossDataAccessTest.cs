@@ -3,13 +3,18 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
     using Core.Configuration.Interfaces;
     using Core.UnitTests.TestHelpers;
+
     using Model.Core.DTO.Configuration;
     using Model.Core.MetaModel.Product;
     using Model.Report.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using VendorAdapter.Interfaces;
 
     [TestFixture]
@@ -47,7 +52,7 @@
             balanceUpDataAccess.GetBalanceUp().Returns(_balance);
 
             DataAccess = Substitute.ForPartsOf<MatchWinLossDataAccess>(
-                balanceUpDataAccess, 
+                balanceUpDataAccess,
                 Substitute.For<ICacheRefAdapter>());
         }
 

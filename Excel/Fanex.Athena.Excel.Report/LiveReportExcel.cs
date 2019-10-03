@@ -10,7 +10,7 @@ namespace Fanex.Athena.Excel.Report
     using System.Linq;
     using Base;
     using Base.Entities;
-    using Constant.DataDomain;
+    using Model.Core.DataDomain;
     using Fanex.Athena.Excel.Base.Extension;
     using Helpers;
     using Model.Report.DTO.LiveReports;

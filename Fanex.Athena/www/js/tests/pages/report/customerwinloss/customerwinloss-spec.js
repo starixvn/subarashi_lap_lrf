@@ -237,7 +237,7 @@
 
                 it("CustomerWinLoss.viewWinlossBetList() should be called if BetList link is clicked", function () {
                     setFixtures('<div class="main-content">'
-                        + '<a class="bet-list-link" data-drill-down=\'{"CustId":1,"SystemId":2, "ExternalId":3}\'></a>'
+                        + '<a class="bet-list-link" data-drill-down=\'{"custId":1,"systemId":2, "externalId":3}\'></a>'
                         + '</div>');
                     spyOn(CustomerWinLoss, "viewWinlossBetList");
 
@@ -315,17 +315,17 @@
 
                 beforeEach(function () {
                     setFixtures('<form id="CustomerWinlossForm">'
-                                + '<input type="hidden" name="CurrencyName" value="USD" />'
-                                + '<input type="hidden" name="FromDate" value="01/01/2011" />'
-                                + '<input type="hidden" name="ToDate" value="01/11/2011" />'
-                                + '<input type="hidden" id="BaseCurrency" name="BaseCurrency" value="eur" />'
-                                + '<input type="hidden" id="Username" name="Username" value="name" />'
-                                + '<div id="ProductList">'
-                                + '<div class="childCheckbox" data-product-code="Code1" data-original="true"></div>'
-                                + '<div class="childCheckbox" data-product-code="Code2" data-original="false"></div>'
-                                + '<div class="childCheckbox" data-product-code="Code3" data-original="true"></div>'
-                                + '</div>'
-                                + '</form>');
+                        + '<input type="hidden" name="CurrencyName" value="USD" />'
+                        + '<input type="hidden" name="FromDate" value="01/01/2011" />'
+                        + '<input type="hidden" name="ToDate" value="01/11/2011" />'
+                        + '<input type="hidden" id="BaseCurrency" name="BaseCurrency" value="eur" />'
+                        + '<input type="hidden" id="Username" name="Username" value="name" />'
+                        + '<div id="ProductList">'
+                        + '<div class="childCheckbox" data-product-code="Code1" data-original="true"></div>'
+                        + '<div class="childCheckbox" data-product-code="Code2" data-original="false"></div>'
+                        + '<div class="childCheckbox" data-product-code="Code3" data-original="true"></div>'
+                        + '</div>'
+                        + '</form>');
 
                     spyOn(CustomerWinLoss, "bindData");
                     spyOn(Report, "setOriginalProduct");
@@ -410,13 +410,13 @@
                 });
 
                 it("jqGridAdditional.clearGrid should be called", function () {
-                    CustomerWinLoss.bindData({ TotalRows: 0 });
+                    CustomerWinLoss.bindData({ totalRows: 0 });
 
                     expect(jqGridAdditional.clearGrid).toHaveBeenCalled();
                 });
 
                 it("jqGridAdditional.setNoInfo should be called if response data is empty", function () {
-                    CustomerWinLoss.bindData({ TotalRows: 0 });
+                    CustomerWinLoss.bindData({ totalRows: 0 });
 
                     expect(jqGridAdditional.setNoInfo).toHaveBeenCalled();
                     expect(CustomerWinLossOption.setGroupHeaderColumns).not.toHaveBeenCalled();
@@ -425,26 +425,26 @@
                 it("Promotion Prize link should be hide if response data is empty", function () {
                     setFixtures('<div id="ExportPromotionPrizeLink"></div>');
 
-                    CustomerWinLoss.bindData({ TotalRows: 0 });
+                    CustomerWinLoss.bindData({ totalRows: 0 });
 
                     expect($("#ExportPromotionPrizeLink").css("display")).toEqual("none");
                 });
 
                 it("grid should be rendered if response data is not empty", function () {
-                    CustomerWinLoss.bindData({ TotalRows: 2000, Data: [1] });
+                    CustomerWinLoss.bindData({ totalRows: 2000, dataList: [1] });
 
                     expect($.fn.jqGrid).toHaveBeenCalled();
                     expect(CustomerWinLossOption.setGroupHeaderColumns).toHaveBeenCalled();
                 });
 
                 it("pager should not be rendered if total data is not greater than number rows of a page", function () {
-                    CustomerWinLoss.bindData({ TotalRows: 1, Data: [1] });
+                    CustomerWinLoss.bindData({ totalRows: 1, dataList: [1] });
 
                     expect(PagingHelper.render).not.toHaveBeenCalled();
                 });
 
                 it("pager should be rendered if total data is greater than number rows of a page", function () {
-                    CustomerWinLoss.bindData({ TotalRows: 2000, Data: [1] });
+                    CustomerWinLoss.bindData({ totalRows: 2000, dataList: [1] });
 
                     expect(PagingHelper.render).toHaveBeenCalled();
                 });
@@ -452,7 +452,7 @@
                 it("Promotion Prize link should be hide if no Promotion Prize ticket counted", function () {
                     setFixtures('<div id="ExportPromotionPrizeLink"></div>');
 
-                    CustomerWinLoss.bindData({ TotalRows: 1, Data: [1], PromotionPrize: '' });
+                    CustomerWinLoss.bindData({ totalRows: 1, dataList: [1], promotionPrize: '' });
 
                     expect($("#ExportPromotionPrizeLink").css("display")).toEqual("none");
                 });
@@ -460,7 +460,7 @@
                 it("Promotion Prize link should be shown if Promotion Prize ticket counted", function () {
                     setFixtures('<div id="ExportPromotionPrizeLink" style="{display: none}"></div>');
 
-                    CustomerWinLoss.bindData({ TotalRows: 1, Data: [1], PromotionPrize: '1' });
+                    CustomerWinLoss.bindData({ totalRows: 1, dataList: [1], promotionPrize: '1' });
 
                     expect($("#ExportPromotionPrizeLink").css("display")).toEqual("block");
                 });
@@ -477,7 +477,7 @@
                     });
 
                     it("should not be sorted if grid has only 1 row", function () {
-                        CustomerWinLoss.bindData({ TotalRows: 1, Data: [1] });
+                        CustomerWinLoss.bindData({ totalRows: 1, dataList: [1] });
 
                         gridOption.onSortCol(0);
                         jasmine.clock().tick(101);
@@ -486,7 +486,7 @@
                     });
 
                     it("CustomerWinLoss.submit should be called when sorting", function () {
-                        CustomerWinLoss.bindData({ TotalRows: 2, Data: [1, 2] });
+                        CustomerWinLoss.bindData({ totalRows: 2, dataList: [1, 2] });
 
                         gridOption.onSortCol(0);
                         jasmine.clock().tick(101);
@@ -496,7 +496,7 @@
 
                     it("grid should be sorted ascending on the first time", function () {
                         var sortType = "";
-                        CustomerWinLoss.bindData({ TotalRows: 2, Data: [1, 2] });
+                        CustomerWinLoss.bindData({ totalRows: 2, dataList: [1, 2] });
 
                         gridOption.onSortCol(1);
                         jasmine.clock().tick(101);
@@ -507,7 +507,7 @@
 
                     it("grid should be sorted descending on the second time", function () {
                         var sortType = "";
-                        CustomerWinLoss.bindData({ TotalRows: 2, Data: [1, 2] });
+                        CustomerWinLoss.bindData({ totalRows: 2, dataList: [1, 2] });
 
                         gridOption.onSortCol(2);
                         jasmine.clock().tick(101);
@@ -524,7 +524,7 @@
 
                     it("grid should be sorted ascending on the third time", function () {
                         var sortType = "";
-                        CustomerWinLoss.bindData({ TotalRows: 2, Data: [1, 2] });
+                        CustomerWinLoss.bindData({ totalRows: 2, dataList: [1, 2] });
 
                         gridOption.onSortCol(2);
                         jasmine.clock().tick(101);
@@ -556,10 +556,10 @@
                     });
 
                     it("jqGridAdditional.gridComplete should be called", function () {
-                        CustomerWinLoss.bindData({ TotalRows: 1, Data: [1] });
+                        CustomerWinLoss.bindData({ totalRows: 1, dataList: [1] });
 
                         gridOption.gridComplete(gridOption, {
-                            Total: {}
+                            total: {}
                         });
 
                         expect(jqGridAdditional.gridComplete).toHaveBeenCalled();
@@ -567,27 +567,27 @@
 
                     it("does nothing if grid is not rendered the first time after submitting", function () {
                         gridOption.gridComplete(gridOption, {
-                            Total: {}
+                            total: {}
                         });
 
                         expect(jqGridAdditional.gridComplete).not.toHaveBeenCalled();
                     });
 
                     it("jqGridAdditional.addSortableHeaders should be called if total rows is greater than 1", function () {
-                        CustomerWinLoss.bindData({ TotalRows: 2, Data: [1] });
+                        CustomerWinLoss.bindData({ totalRows: 2, dataList: [1] });
 
                         gridOption.gridComplete(gridOption, {
-                            Total: {}
+                            total: {}
                         });
 
                         expect(jqGridAdditional.addSortableHeaders).toHaveBeenCalled();
                     });
 
                     it("jqGridAdditional.removeCursorOnNonSortableHeader should be called if total rows is 1", function () {
-                        CustomerWinLoss.bindData({ TotalRows: 1, Data: [1] });
+                        CustomerWinLoss.bindData({ totalRows: 1, dataList: [1] });
 
                         gridOption.gridComplete(gridOption, {
-                            Total: {}
+                            total: {}
                         });
 
                         expect(jqGridAdditional.removeCursorOnNonSortableHeader).toHaveBeenCalled();
@@ -628,19 +628,19 @@
                     spyOn(Report, "ValidProducts").and.returnValues(true);
 
                     setFixtures('<form id="CustomerWinlossForm">'
-                            + '<input type="hidden" name="CurrencyId" value="0" />'
-                            + '<input type="hidden" name="CurrencyName" value="USD" />'
-                            + '<input type="hidden" name="FromDate" value="01/01/2011" />'
-                            + '<input type="hidden" name="ToDate" value="01/11/2011" />'
-                            + '<input type="hidden" name="BaseCurrency" value="eur" />'
-                            + '<input type="hidden" id="IsHistory" name="IsHistory" value="True" />'
-                            + '<div id="ProductList">'
-                            + '<div class="childCheckbox" data-product-code="Code1" data-original="true"></div>'
-                            + '<div class="childCheckbox" data-product-code="Code2" data-original="false"></div>'
-                            + '<div class="childCheckbox" data-product-code="Code3" data-original="true"></div>'
-                            + '</div>'
-                            + '<div id="SubmitButton"></div>'
-                            + '</form>');
+                        + '<input type="hidden" name="CurrencyId" value="0" />'
+                        + '<input type="hidden" name="CurrencyName" value="USD" />'
+                        + '<input type="hidden" name="FromDate" value="01/01/2011" />'
+                        + '<input type="hidden" name="ToDate" value="01/11/2011" />'
+                        + '<input type="hidden" name="BaseCurrency" value="eur" />'
+                        + '<input type="hidden" id="IsHistory" name="IsHistory" value="True" />'
+                        + '<div id="ProductList">'
+                        + '<div class="childCheckbox" data-product-code="Code1" data-original="true"></div>'
+                        + '<div class="childCheckbox" data-product-code="Code2" data-original="false"></div>'
+                        + '<div class="childCheckbox" data-product-code="Code3" data-original="true"></div>'
+                        + '</div>'
+                        + '<div id="SubmitButton"></div>'
+                        + '</form>');
 
                     CustomerWinLoss.initEvent();
                     $('#SubmitButton').click();

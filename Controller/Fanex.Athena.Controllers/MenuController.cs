@@ -8,12 +8,14 @@ namespace Fanex.Athena.Controllers
 {
     using System.Linq;
     using System.Web.Mvc;
-    using Extension.Utility;
+    using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Auth.Enum;
     using Fanex.Athena.Model.Core.ViewModel;
     using Fanex.Athena.Service.Core.Common.Interfaces;
-    using Model.Core.DataDomain;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Service.Core.Users.Interfaces;
-    using Session.Enum;
+
     using Web.ActionFilter;
 
     [AuthorizeRestriction(AppMode.Self)]
@@ -24,9 +26,10 @@ namespace Fanex.Athena.Controllers
         public MenuController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
-            IFunctionService functionService)
-        : base(languageService, sessionService, appSetting)
+            IFunctionService functionService,
+            ILicenseeSettingService licenseeSettingService
+            )
+        : base(languageService, sessionService, licenseeSettingService)
         {
             _functionService = functionService;
         }
@@ -36,17 +39,17 @@ namespace Fanex.Athena.Controllers
         {
             var userSession = SessionService.UserSession;
             var licenseeSession = SessionService.LicenseeSession;
-            var systemFunctions = userSession.FunctionIdList;
+            var systemFunctions = userSession.FunctionList;
 
-            var canManageMember = userSession.FunctionIdList.Contains((int)FunctionType.CustomerList);
+            var canManageMember = userSession.FunctionList.Any(x => x.FunctionKey == PermissionKeys.CustomerInfoCustomerList);
 
             var viewModel = new MenuViewModel
             {
-                UserFunctions = _functionService.Functions.Where(i => systemFunctions.Contains(i.FunctionId)).ToList(),
+                UserFunctions = _functionService.Functions.Where(i => systemFunctions.Any(x => x.FunctionKey == i.FunctionKey)).ToList(),
                 IsAllowedCustonmerCommission = licenseeSession.IsAllowedCustomerComm,
                 IsInternalLogin = userSession.IsInternal,
                 IsAllowedManagementMember = canManageMember,
-                IsFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeId)
+                IsFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeName)
             };
 
             viewModel.MasterFunctions = _functionService.GetMasterFunctions(viewModel.UserFunctions);

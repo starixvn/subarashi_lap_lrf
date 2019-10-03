@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Constant.DataDomain;
+    using Model.Core.DataDomain;
     using Model.BetSettings.DTO;
     using Model.BetSettings.MetaModel;
     using Model.BetSettings.ViewModel;
@@ -40,7 +40,7 @@
                 // Arrange
                 var metaModel = new BetSettingMetaModel { CustId = 100 };
 
-                _betSettingService.GetViewModelAsync(SessionService.LicenseeSession.LicenseeId, metaModel.CustId)
+                _betSettingService.GetViewModelAsync(metaModel.CustId)
                     .Returns(Task.FromResult(new BetSettingViewModel()));
 
                 // Action
@@ -123,7 +123,8 @@
 
                 _betSettingService.UpdateBetSettingAsync(
                    Arg.Any<CommonBetSetting>(),
-                   Arg.Any<Hashtable>()).Returns(new ResultInfo { Code = 1, Message = "Error" });
+                   Arg.Any<Hashtable>())
+                   .Returns(new ResultInfo { Code = 1, Message = "Error" });
 
                 // Action
                 var result = await controller.UpdateBetSetting(string.Empty) as JsonResult;
@@ -182,10 +183,9 @@
             var controller = new NumberGameBetSettingController(
                 LangService,
                 SessionService,
-                AppSettings,
                 CoreBetSettingService,
                 ProductService,
-                _betSettingService)
+                _betSettingService, LicenseeSettingService)
             {
                 ControllerContext = ControllerContext
             };

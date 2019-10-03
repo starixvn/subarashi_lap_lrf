@@ -8,6 +8,7 @@
     using Base.UnitTests;
     using DataAccess.Core.Configuration.Interfaces;
     using Excel.Report;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using Model.Core.DTO.Configuration;
@@ -26,7 +27,7 @@
     {
         private const int CurrencyId = 999;
 
-        private const string AgentListXml = "melody";
+        private const string AgentListXml = "<ROOT></ROOT>";
 
         private static readonly DateTime BalanceUpDate = new DateTime(2017, 3, 4);
 
@@ -48,7 +49,6 @@
             base.FixtureSetUp();
 
             SetUpDefaultFakeData();
-            SessionService.GenerateAgentListXml(CurrencyId).Returns(AgentListXml);
         }
 
         [Test]
@@ -107,7 +107,6 @@
             var controller = Substitute.ForPartsOf<MatchWinLossReportController>(
                 LangService,
                 SessionService,
-                AppSettings,
                 productService,
                 _balanceUpDataAccess,
                 Substitute.For<ICacheRefAdapter>(),

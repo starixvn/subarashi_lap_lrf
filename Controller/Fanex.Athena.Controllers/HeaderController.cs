@@ -7,15 +7,19 @@
 namespace Fanex.Athena.Controllers
 {
     using System.Linq;
-    using System.Threading.Tasks;
     using System.Web.Mvc;
+
     using DataAccess.Core.Users.Interfaces;
+
     using Fanex.Athena.Extension.Utility;
+    using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Auth.Enum;
     using Fanex.Athena.Model.Core.ViewModel;
-    using Model.Core.DataDomain;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-    using Session.Enum;
+
     using Web.ActionFilter;
 
     [AuthorizeRestriction(AppMode.Self)]
@@ -27,8 +31,9 @@ namespace Fanex.Athena.Controllers
             ILanguageService languageService,
             ISessionService sessionService,
             IAppSettings appSetting,
-            ILicenseeDataAccess licenseeDataAccess)
-        : base(languageService, sessionService, appSetting)
+            ILicenseeDataAccess licenseeDataAccess,
+            ILicenseeSettingService licenseeSettingService)
+        : base(languageService, sessionService, appSetting, licenseeSettingService)
         {
             _licenseeDataAccess = licenseeDataAccess;
         }
@@ -37,7 +42,7 @@ namespace Fanex.Athena.Controllers
         public ActionResult Index()
         {
             var userSession = SessionService.UserSession;
-            var licenseeId = SessionService.LicenseeSession.LicenseeId;
+            var licensee = SessionService.LicenseeSession;
             var viewModel = new HeaderPageViewModel
             {
                 Language = userSession.Language,
@@ -47,10 +52,10 @@ namespace Fanex.Athena.Controllers
                 HasRecheckIn = !AppSettings.LocalTest,
                 SupportedLanguageList = Util.SupportedLanguages,
                 UserName = userSession.UserName,
-                CurrentLicenseeId = licenseeId,
-                IsAllowedManagementMember = userSession.FunctionIdList.Contains((int)FunctionType.CustomerList),
-                IsFakeLicensee = IsFakeLicensee(licenseeId),
-                IsAllowedNotification = userSession.FunctionIdList.Contains((int)FunctionType.ResultAmendment_Recalculation)
+                CurrentLicenseeId = licensee.LicenseeId,
+                IsAllowedManagementMember = userSession.FunctionList.Any(x => x.FunctionKey == PermissionKeys.CustomerInfoCustomerList),
+                IsFakeLicensee = IsFakeLicensee(licensee.LicenseeName),
+                IsAllowedNotification = userSession.FunctionList.Any(x => x.FunctionKey == PermissionKeys.ResultAmendmentNotificationReport)
             };
             return View("~/Views/Desktop/Header/Index.cshtml", viewModel);
         }

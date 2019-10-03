@@ -6,25 +6,30 @@
 
 namespace Fanex.Athena.Controllers.Report
 {
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Hosting;
     using System.Web.Mvc;
+
     using DataAccess.Core.Common.Interfaces;
-    using Extension.Utility;
+
     using Fanex.Athena.Excel.Base.Entities;
     using Fanex.Athena.Excel.Report;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
     using Fanex.Athena.Web.ResultExtension;
-    using Model.Core.DataDomain;
+
     using Model.Core.DTO.Common;
     using Model.Core.ResultModel;
     using Model.Report.DTO;
+
     using Newtonsoft.Json;
+
     using Resources;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
     using Service.Report.Interfaces;
@@ -39,11 +44,9 @@ namespace Fanex.Athena.Controllers.Report
         public CustomerTurnoverReportController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
-            IProductService productService,
             ISportTypeDataAccess sportTypeDataAccess,
             ICustomerTurnoverService customerTurnoverService)
-            : base(languageService, sessionService, appSetting, productService)
+            : base(languageService, sessionService)
         {
             _sportTypeDataAccess = sportTypeDataAccess;
             _customerTurnoverService = customerTurnoverService;
@@ -69,8 +72,8 @@ namespace Fanex.Athena.Controllers.Report
         {
             var productCode = $"{Product.SB},{Product.NG},{Product.VS},{Product.VS2}";
             var data = await _sportTypeDataAccess.GetSportsAndProducts(
-                SessionService.LicenseeSession.LicenseeId, 
-                SessionService.UserSession.Language, 
+                SessionService.LicenseeSession.LicenseeId,
+                SessionService.UserSession.Language,
                 productCode)
                 .ConfigureAwait(false);
             return Json(data, JsonRequestBehavior.AllowGet);
@@ -86,14 +89,15 @@ namespace Fanex.Athena.Controllers.Report
                 return null;
             }
             var metaModel = JsonConvert.DeserializeObject<CustomerTurnoverMetaModel>(excelParam);
-            if(!metaModel.IsValid)
+            if (!metaModel.IsValid)
             {
                 return null;
             }
 
             var licenseeSession = SessionService.LicenseeSession;
             var userSession = SessionService.UserSession;
-            metaModel.AgentListXml = SessionService.GenerateAgentListXml(metaModel.CurrencyId);
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList
+                , metaModel.CurrencyId);
             const string FileName = "CustomerTurnover";
             metaModel.IsExportExcel = true;
 

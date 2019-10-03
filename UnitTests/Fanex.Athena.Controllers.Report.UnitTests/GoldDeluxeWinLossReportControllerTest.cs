@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Base.UnitTests;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DTO.Common;
     using Model.Report.ViewModel;
     using NSubstitute;
@@ -77,7 +78,6 @@
             return new GoldDeluxeWinLossReportController(
                 LangService,
                 SessionService,
-                AppSettings,
                 productService);
         }
     }

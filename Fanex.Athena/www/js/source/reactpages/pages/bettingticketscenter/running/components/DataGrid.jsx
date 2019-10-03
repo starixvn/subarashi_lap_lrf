@@ -31,7 +31,7 @@ export class DataGrid extends BaseDataGrid {
         return [(
             <Row className="fixed-table-grant-total" key={1}>
                <Cell className="right-align" colSpan={colSpan}>{LangHelper.getSingleResource("Totalin") + " " + baseCurrency}</Cell>
-               <Cell className="right-align">{item.SumStake}</Cell>
+               <Cell className="right-align">{item.Stake}</Cell>
                <Cell className="right-align" colSpan={5}></Cell>
             </Row>
         )]

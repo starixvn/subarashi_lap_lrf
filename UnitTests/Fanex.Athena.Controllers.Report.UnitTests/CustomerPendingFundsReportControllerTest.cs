@@ -1,16 +1,21 @@
 ﻿namespace Fanex.Athena.Controllers.TotalBets.UnitTests
 {
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
     using Base.UnitTests;
+
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using Model.Report.ViewModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Report;
-    using Service.Core.Common.Interfaces;
+
+    using System.Collections.Generic;
+    using System.Web.Mvc;
 
     [TestFixture]
     public class CustomerPendingFundsReportControllerTest : CultureBaseControllerHelperTest
@@ -51,8 +56,7 @@
             return new CustomerPendingFundsReportController(
                 LangService,
                 SessionService,
-                AppSettings,
-                productService);
+                productService, Substitute.For<ILicenseeSettingService>());
         }
     }
 }

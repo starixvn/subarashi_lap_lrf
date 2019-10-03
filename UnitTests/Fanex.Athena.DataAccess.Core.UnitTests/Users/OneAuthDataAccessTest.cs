@@ -1,9 +1,11 @@
 ﻿namespace Fanex.Athena.DataAccess.Core.UnitTests.Users
 {
-    using System.Data;
     using Core.Users;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using TestHelpers;
 
     [TestFixture]

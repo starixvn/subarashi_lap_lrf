@@ -385,6 +385,14 @@
 .multiple-select-item label {
   margin-bottom: 0; }
 
+.multiple-select-label {
+  height: 23px;
+  padding-top: 3px;
+  padding-bottom: 5px; }
+
+.multiple-select-options-container .multiple-select-item label {
+  color: #2c2c2c; }
+
 /* z-index */
 /* Table */
 /* Label Text */
@@ -401,12 +409,15 @@ body {
   font-size: 1.2rem;
   color: #2c2c2c; }
 
-a {
+a, .link {
   color: #147ccc; }
-  a, a:hover {
+  a, a:hover, .link, .link:hover {
     text-decoration: none; }
-  a:hover {
+  a:hover, .link:hover {
     color: inherit; }
+
+.link {
+  cursor: pointer; }
 
 ul {
   padding: 0; }
@@ -460,6 +471,16 @@ ul {
     .arrow-icon.down-arrow.disable {
       border-color: rgba(0, 0, 0, 0.26) transparent transparent; }
 
+.site-caret:after {
+  display: inline-block;
+  margin-left: 0.255em;
+  vertical-align: 0.255em;
+  content: "";
+  border-top: 0.3em solid;
+  border-right: 0.3em solid transparent;
+  border-bottom: 0;
+  border-left: 0.3em solid transparent; }
+
 .month-picker {
   display: flex;
   flex-wrap: wrap;
@@ -471,6 +492,9 @@ ul {
     flex: 0 0 25%;
     max-width: 25%;
     padding-left: 10px; }
+  .month-picker.month-only .month {
+    flex: 0 0 100%;
+    max-width: 100%; }
 
 .month-container {
   width: 100%;

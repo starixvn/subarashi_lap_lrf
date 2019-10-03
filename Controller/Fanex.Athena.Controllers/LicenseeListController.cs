@@ -1,12 +1,14 @@
 ﻿namespace Fanex.Athena.Controllers
 {
-    using System.Threading.Tasks;
     using System.Web.Mvc;
+
     using DataAccess.Core.Users.Interfaces;
-    using Extension.Utility;
+
+    using Fanex.Athena.Model.Auth.Enum;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-    using Session.Enum;
+
     using Web.ActionFilter;
 
     [AuthorizeRestriction(AppMode.Self)]
@@ -19,9 +21,8 @@
         public LicenseeListController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSettings,
             ILicenseeDataAccess licenseeDataAccess)
-        : base(languageService, sessionService, appSettings)
+        : base(languageService, sessionService)
         {
             _sessionService = sessionService;
             _licenseeDataAccess = licenseeDataAccess;

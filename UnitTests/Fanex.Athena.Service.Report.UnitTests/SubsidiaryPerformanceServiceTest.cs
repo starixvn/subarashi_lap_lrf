@@ -3,15 +3,24 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Constant.DataDomain;
+
     using Core.Users.Interfaces;
+
     using DataAccess.Report.Interfaces;
+
+    using Fanex.Athena.Model.Auth;
+
     using Interfaces;
+
+    using Model.Core.DataDomain;
     using Model.Report.DTO;
     using Model.Report.DTO.SubsidiaryPerformance;
     using Model.Report.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using UnitTest.Common.Helpers;
 
     [TestFixture]
@@ -40,7 +49,7 @@
             _subsidiaryService = Substitute.For<ISubsidiaryService>();
             _service = new SubsidiaryPerformanceService(_sessionService, _subsidiaryService, _dataAccess);
 
-            _sessionService.UserSession.Returns(new Session.Model.UserSession());
+            _sessionService.UserSession.Returns(new UserAuthInfo());
         }
 
         [TearDown]
@@ -116,7 +125,7 @@
                 LicenseeName = LicenseeName
             };
 
-            _sessionService.UserSession.Returns(new Session.Model.UserSession { UserLevel = UserLevelType.Subsidiary, OperatorId = "123" });
+            _sessionService.UserSession.Returns(new UserAuthInfo { UserLevel = UserLevelType.Subsidiary, OperatorId = "123" });
             _subsidiaryService.GetSubsidiaryList().Returns(_subsidiaryList);
 
             var resultData = GetFakeEntityDataList();

@@ -1,7 +1,9 @@
 ﻿using System.Data;
+
 using Fanex.Athena.Excel.Base.Entities;
 using Fanex.Athena.Model.Report.MetaModel;
 using Fanex.Athena.VendorAdapter.Interfaces;
+
 using NPOI.SS.UserModel;
 
 namespace Fanex.Athena.Excel.Report.UnitTests.TestableClasses

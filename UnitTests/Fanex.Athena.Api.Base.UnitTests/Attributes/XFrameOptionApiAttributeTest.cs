@@ -5,13 +5,17 @@
     using System.Net.Http;
     using System.Web.Http.Controllers;
     using System.Web.Http.Filters;
+
     using Autofac;
+
+    using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Model.Auth.Enum;
+    using Fanex.Athena.Service.Core.Users.Interfaces;
+
     using NSubstitute;
+
     using NUnit.Framework;
-    using Service.Core.Users.Interfaces;
-    using Session.Enum;
-    using Session.Interfaces;
-    using Session.Model;
+
     using UnitTest.Common.Helpers;
 
     public class XFrameOptionApiAttributeTest
@@ -52,7 +56,7 @@
         {
             // Arrange
             var attribute = new XFrameOptionApiAttribute();
-            _sessionStorage.UserSession.Returns(new UserSession
+            _sessionStorage.UserAuthInfo.Returns(new UserAuthInfo
             {
                 ApplicationMode = AppMode.Parasitic
             });
@@ -77,7 +81,7 @@
             {
                 Response = new HttpResponseMessage()
             };
-            
+
             return actionExecutedContext;
         }
     }

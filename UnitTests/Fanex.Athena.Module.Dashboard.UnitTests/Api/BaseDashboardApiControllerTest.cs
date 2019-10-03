@@ -1,7 +1,9 @@
 ﻿namespace Fanex.Athena.Module.Dashboard.UnitTests.Api
 {
     using System.Web.Http.Controllers;
+
     using Fanex.Athena.Module.Dashboard.MetaModel;
+
     using NUnit.Framework;
 
     public class BaseDashboardApiControllerTest

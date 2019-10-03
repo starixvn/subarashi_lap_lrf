@@ -16,7 +16,7 @@
 
         bool IsDisableExportLargeBetList { get; }
 
-        IEnumerable<int> LicenseesWithLargeData { get; }
+        IEnumerable<string> LicenseesWithLargeData { get; }
 
         IEnumerable<int> LicenseeOfferNewForecast { get; }
 
@@ -37,8 +37,6 @@
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Sonar Code Smell", "S3996:UriPropertiesShouldNotBeStrings",
             Justification = "Reviewed. Suppression is OK here.")]
         string ResultAmendmentAttachmentApiUrl { get; }
-
-        IEnumerable<int> FakeLicenseeList { get; }
 
         bool IsEnabledMoveBetNotification { get; }
 
@@ -71,6 +69,7 @@
         string TempFilePath { get; }
 
         string GetValue(string key);
+
         int BetListApiClientTimeOutMinutes { get; }
     }
 }

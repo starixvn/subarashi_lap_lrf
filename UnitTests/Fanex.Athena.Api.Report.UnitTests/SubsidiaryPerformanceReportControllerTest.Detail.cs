@@ -2,17 +2,19 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
     using Base.UnitTests;
+
     using Model.Core.ResultModel;
     using Model.Report.DTO.SubsidiaryPerformance;
-    using Model.Report.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
 
     [TestFixture]
     public partial class SubsidiaryPerformanceReportControllerTest : BaseApiControllerHelperTest
     {
-
         [Test]
         public async Task Detail_EmptyAgentList_ReturnEmptyData()
         {
@@ -20,7 +22,7 @@
             var metaModel = GetMetaModel();
             StubSingleWalletProductAccess(new[] { "SB", "BA" });
             _subsidiaryService.GetCurrencyAgentList(Arg.Any<string>(), Arg.Any<bool>()).Returns(new Dictionary<int, IEnumerable<int>>());
-           
+
             // Action
             var result = await _controller.Detail(metaModel);
 
@@ -32,7 +34,6 @@
         public async Task Detail_WhenCall_ReturnDataFromService()
         {
             // Arrange
-            const string AgentListXml = "<sml>So Much Lie</sml>";
             var metaModel = GetMetaModel();
             var agentList = new Dictionary<int, IEnumerable<int>>
             {
@@ -45,7 +46,6 @@
                 TotalData = new SubsidiaryPerformanceDetail()
             };
             _subsidiaryService.GetCurrencyAgentList(Arg.Any<string>(), Arg.Any<bool>()).Returns(agentList);
-            SessionService.GenerateAgentListXml(agentList).Returns(AgentListXml);
             _service.GetDetailData(metaModel, Arg.Any<IDictionary<int, string>>()).Returns(resultData);
 
             // Action
@@ -54,7 +54,6 @@
             // Assert
             Assert.Multiple(() =>
             {
-                Assert.That(metaModel.AgentListXml, Is.EqualTo(AgentListXml));
                 Assert.That(result.Data, Is.EqualTo(resultData.DataList));
                 Assert.That(result.Total, Is.EqualTo(resultData.SummaryTotal));
                 Assert.That(result.GrandTotal, Is.EqualTo(resultData.TotalData));

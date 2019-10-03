@@ -7,10 +7,10 @@
 namespace Fanex.Athena.Controllers.Report
 {
     using System.Web.Mvc;
-    using Extension.Utility;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Web.ActionFilter;
-    using Model.Core.DataDomain;
+
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
 
@@ -19,10 +19,8 @@ namespace Fanex.Athena.Controllers.Report
     {
         public WeeklyLiveMatchReportController(
             ILanguageService languageService,
-            ISessionService sessionService,
-            IAppSettings appSetting,
-            IProductService productService)
-        : base(languageService, sessionService, appSetting, productService)
+            ISessionService sessionService)
+        : base(languageService, sessionService)
         {
         }
 

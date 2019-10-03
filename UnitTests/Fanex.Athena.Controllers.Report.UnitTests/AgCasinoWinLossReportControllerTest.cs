@@ -2,6 +2,7 @@
 {
     using System.Web.Mvc;
     using Base.UnitTests;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Report.ViewModel;
     using NSubstitute;
     using NUnit.Framework;
@@ -41,9 +42,8 @@
         {
             return new AgCasinoWinLossReportController(
                 LangService,
-                SessionService,
-                AppSettings,
-                Substitute.For<IProductService>());
+                SessionService
+              );
         }
     }
 }

@@ -3,16 +3,21 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+
     using Base.UnitTests;
+
+    using Fanex.Athena.Model.Auth;
     using Fanex.Athena.UnitTest.Common.Extensions;
+
     using Model.Core.DTO.Common;
-    using Model.Core.DTO.Users;
     using Model.Core.ViewModel;
     using Model.Customer.MetaModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
+
     using Resources;
-    using Session.Model;
 
     [TestFixture]
     public partial class CustomerApiControllerTest : CultureBaseControllerHelperTest
@@ -23,7 +28,7 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                SessionService.LicenseeSession.Returns(new LicenseeSession
+                SessionService.LicenseeSession.Returns(new LicenseeAuthInfo
                 {
                     IsAllowedCustomerComm = false
                 });
@@ -47,7 +52,7 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                SessionService.LicenseeSession.Returns(new LicenseeSession
+                SessionService.LicenseeSession.Returns(new LicenseeAuthInfo
                 {
                     IsAllowedCustomerComm = true
                 });
@@ -71,7 +76,7 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                SessionService.LicenseeSession.Returns(new LicenseeSession
+                SessionService.LicenseeSession.Returns(new LicenseeAuthInfo
                 {
                     IsAllowedCustomerComm = true
                 });
@@ -101,7 +106,7 @@
             {
                 // Arrange
                 _productService.GetProductAccess(0, string.Empty).ReturnsForAnyArgs(new ProductAccess(new List<Product>()));
-                SessionService.LicenseeSession.Returns(new LicenseeSession
+                SessionService.LicenseeSession.Returns(new LicenseeAuthInfo
                 {
                     IsAllowedCustomerComm = true
                 });
@@ -132,7 +137,7 @@
             {
                 // Arrange
                 _productService.GetProductAccess(0, string.Empty).ReturnsForAnyArgs(new ProductAccess(new List<Product>()));
-                SessionService.LicenseeSession.Returns(new LicenseeSession
+                SessionService.LicenseeSession.Returns(new LicenseeAuthInfo
                 {
                     IsAllowedCustomerComm = true
                 });

@@ -9,19 +9,24 @@
     using System.Web.Hosting;
     using System.Web.Mvc;
     using System.Web.SessionState;
-    using Extension.Utility;
+
     using Fanex.Athena.Excel.Base.Entities;
     using Fanex.Athena.Excel.Customer;
+    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Customer.MetaModel;
     using Fanex.Athena.Service.Core.Common.Interfaces;
     using Fanex.Athena.Service.Customer.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
     using Fanex.Athena.Web.ResultExtension;
+
     using Helpers;
-    using Model.Core.DataDomain;
+
     using ONEbook.UM.Filters;
+
     using Resources;
+
     using Service.Core.Users.Interfaces;
 
     [SessionState(SessionStateBehavior.ReadOnly)]
@@ -39,10 +44,10 @@
         public CustomerComGroupController(
             ILanguageService languageService,
             ISessionService sessionService,
-            IAppSettings appSetting,
             IGroupComService groupComService,
-            IProductService productService)
-        : base(languageService, sessionService, appSetting)
+            IProductService productService
+            )
+        : base(languageService, sessionService)
         {
             _groupComService = groupComService;
             _productService = productService;
@@ -55,7 +60,7 @@
         {
             var licenseeId = SessionService.LicenseeSession.LicenseeId;
             var productAccess = _productService.GetProductAccess(licenseeId, SessionService.UserSession.Language);
-            var model = await _groupComService.GetAll(licenseeId);
+            var model = await _groupComService.GetAllAsync(licenseeId);
             ViewBag.IsAllowNG = productAccess.IsAllowNG;
             ViewBag.IsAllowCS = productAccess.IsAllowCS;
 
@@ -98,7 +103,7 @@
                         Language = userSession.Language,
                         Ip = Request.UserHostAddress
                     };
-                    result = await _groupComService.InsertGroup(metaModel, request, userSession.UserId);
+                    result = await _groupComService.InsertGroupAsync(metaModel, request, userSession.UserId);
 
                     result.Message = CustomerComGroupHelper.GetCreateGroupErrorMessage(result.Code);
 
@@ -194,7 +199,7 @@
             var userSession = SessionService.UserSession;
             var productAccess = _productService.GetProductAccess(licenseeId, userSession.Language);
 
-            var result = await _groupComService.DeleteGroup(
+            var result = await _groupComService.DeleteGroupAsync(
                 new DeleteGroupMetaModel
                 {
                     GroupId = groupId,
@@ -223,7 +228,7 @@
         [HttpGet]
         public async Task<JsonResult> GetDefaultGroup()
         {
-            var groupList = await _groupComService.GetAll(SessionService.LicenseeSession.LicenseeId);
+            var groupList = await _groupComService.GetAllAsync(SessionService.LicenseeSession.LicenseeId);
             var defaultGroupId = groupList.FirstOrDefault(x => x.IsDefaultGroup)?.GroupCommId ?? 0;
 
             return Json(new { id = defaultGroupId }, JsonRequestBehavior.AllowGet);
@@ -250,7 +255,7 @@
                 ABVisible = productAccess.IsAllowAB
             };
 
-            var mainTable = await _groupComService.GetDataForExcel(licenseeId);
+            var mainTable = await _groupComService.GetDataForExcelAsync(licenseeId);
 
             var excel = CreateExcel(templatePath, mainTable, showingOption);
 
@@ -276,10 +281,12 @@
                     result.Code = InvalidGroupName;
                     result.Message = ViewResources.ChooseGroupNameMsg;
                     break;
+
                 case InvalidCommvalue:
                     result.Code = InvalidCommvalue;
                     result.Message = ViewResources.MessageInvalidCommValue;
                     break;
+
                 default:
                     result.Code = InvalidParams;
                     result.Message = ViewResources.InvalidParams;
@@ -291,7 +298,7 @@
         {
             var licenseeId = SessionService.LicenseeSession.LicenseeId;
             var productAccess = _productService.GetProductAccess(licenseeId, SessionService.UserSession.Language);
-            var groupList = await _groupComService.GetAll(licenseeId);
+            var groupList = await _groupComService.GetAllAsync(licenseeId);
             var defaultGroupId = groupList.FirstOrDefault(x => x.IsDefaultGroup)?.GroupCommId ?? 0;
 
             metaModel.LicenseeId = licenseeId;
@@ -312,7 +319,7 @@
                     Language = userSession.Language,
                     Ip = Request.UserHostAddress
                 };
-                var result = await _groupComService.UpdateGroup(metaModel, request, userSession);
+                var result = await _groupComService.UpdateGroupAsync(metaModel, request, userSession);
                 if (string.IsNullOrWhiteSpace(result.Message))
                 {
                     result.Message = CustomerComGroupHelper.GetUpdateGroupErrorMessage(result.Code);
