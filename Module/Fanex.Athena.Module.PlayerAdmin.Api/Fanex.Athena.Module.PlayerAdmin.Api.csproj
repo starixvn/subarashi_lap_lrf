@@ -80,6 +80,7 @@
     <Compile Include="MetaModel\PlayerSearchingMetaModel.cs" />
     <Compile Include="MetaModel\BaStatusUpdatingMetaModel.cs" />
     <Compile Include="MetaModel\OddsGroupUpdatingMetaModel.cs" />
+    <Compile Include="MetaModel\PlayerUpdatingLogMetaModel.cs" />
     <Compile Include="MetaModel\SpecialLevelUpdatingMetaModel.cs" />
     <Compile Include="PlayerActivityRecordController.cs" />
     <Compile Include="PlayerBaStatusController.cs" />
@@ -89,6 +90,8 @@
     <Compile Include="PlayerOddsGroupController.cs" />
     <Compile Include="PlayerSpecialLevelController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\Interfaces\IPlayerLogRepository.cs" />
+    <Compile Include="Repository\PlayerLogRepository.cs" />
     <Compile Include="Services\Interfaces\IPlayerActivityRecordService.cs" />
     <Compile Include="Services\Interfaces\IPlayerBaStatusService.cs" />
     <Compile Include="Services\Interfaces\IPlayerBettingStatisticsService.cs" />
@@ -102,6 +105,7 @@
     <Compile Include="Services\PlayerOddsGroupService.cs" />
     <Compile Include="Services\PlayerSpecialLevelService.cs" />
     <Compile Include="SiteSettingController.cs" />
+    <Compile Include="Utilities\LogTextConstants.cs" />
     <Compile Include="Utilities\ResourceKeyConstants.cs" />
     <Compile Include="ViewModels\PlayerListResultViewModel.cs" />
     <Compile Include="ViewModels\SiteSettingViewModel.cs" />
@@ -136,8 +140,6 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Repository\Interfaces\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

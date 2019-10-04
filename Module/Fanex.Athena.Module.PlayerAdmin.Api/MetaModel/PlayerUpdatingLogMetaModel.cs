@@ -1,0 +1,26 @@
+﻿namespace Fanex.Athena.Module.PlayerAdmin.Api.MetaModel
+{
+    public class PlayerUpdatingLogMetaModel
+    {
+        public int UserId { get; set; }
+
+        public int CustId { get; set; }
+
+        public int ActionId { get; set; }
+
+        public string SiteName { get; set; }
+
+        public int ActionDetailId { get; set; }
+
+        public string Status { get; set; }
+
+        public string NewValue { get; set; }
+
+        public string OldValue { get; set; }
+
+        public string GetLogContent()
+        {
+            return $"LAP - {SiteName} - {ActionDetailId} - {Status} - {NewValue} - {OldValue}";
+        }
+    }
+}

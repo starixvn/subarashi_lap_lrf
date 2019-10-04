@@ -1,5 +1,7 @@
 ﻿using Fanex.Athena.Extension.Utility.Interfaces;
+using Fanex.Athena.Model.Auth.DataDomain;
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
+using Fanex.Athena.Module.PlayerAdmin.Api.Repository.Interfaces;
 using Fanex.Athena.Module.PlayerAdmin.Api.Services;
 using Fanex.Data;
 using NSubstitute;
@@ -41,8 +43,12 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
             };
             const string ExpectedOddsGroup = "C";
             objectDb.GetParameterValue("OddsGroup").Returns(ExpectedOddsGroup);
+            objectDb.GetParameterValue("ErrCode").Returns(0);
 
-            var service = new PlayerBaStatusService(_dbFactory);
+            var logRepository = Substitute.For<IPlayerLogRepository>();
+
+            var service = new PlayerBaStatusService(_dbFactory, logRepository);
+            var expectedLogContent = $"LAP - {metaModel.SiteName} - {LogActionId.PlayerAdminActionDetailUpdateBA} - Success - ON - OFF";
 
             // Action
             var result = service.Update(metaModel);
@@ -63,6 +69,8 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
                 objectDb.Received(1).ExecuteNonQuery();
 
                 Assert.That(result.ExtendedData, Is.EqualTo(ExpectedOddsGroup));
+
+                logRepository.Received(1).Write(metaModel.CustId, metaModel.UserId, LogActionId.PlayerAdminUpdateBAStatus, expectedLogContent);
             });
         }
     }

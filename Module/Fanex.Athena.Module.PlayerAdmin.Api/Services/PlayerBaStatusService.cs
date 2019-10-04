@@ -1,9 +1,12 @@
-﻿using Fanex.Athena.Extension.Utility.Interfaces;
+﻿using System;
+using System.Globalization;
+using Fanex.Athena.Extension.Utility.Interfaces;
+using Fanex.Athena.Model.Auth.DataDomain;
 using Fanex.Athena.Model.Core.ViewModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
+using Fanex.Athena.Module.PlayerAdmin.Api.Repository.Interfaces;
 using Fanex.Athena.Module.PlayerAdmin.Api.Services.Interfaces;
-using System;
-using System.Globalization;
+using Fanex.Athena.Module.PlayerAdmin.Api.Utilities;
 
 namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
 {
@@ -11,14 +14,18 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
     {
         private readonly IDbFactory _dbFactory;
 
-        public PlayerBaStatusService(IDbFactory dbFactory)
+        private readonly IPlayerLogRepository _playerLogRepository;
+
+        public PlayerBaStatusService(IDbFactory dbFactory, IPlayerLogRepository playerLogRepository)
         {
             _dbFactory = dbFactory;
+            _playerLogRepository = playerLogRepository;
         }
 
         public ResultViewModel Update(BaStatusUpdatingMetaModel metaModel)
         {
             const string UspName = "Lrf_CustomerUpdMemberBAStatus";
+            ResultViewModel result;
 
             using (var db = _dbFactory.GetObjectDb(UspName))
             {
@@ -37,7 +44,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
                 var message = Convert.ToString(db.GetParameterValue("ErrMsg"));
                 var oddsGroup = db.GetParameterValue("OddsGroup");
 
-                return new ResultViewModel
+                result = new ResultViewModel
                 {
                     Success = code == 0,
                     Message = message,
@@ -45,6 +52,21 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
                     ExtendedData = Convert.ToString(oddsGroup).ToUpper(CultureInfo.CurrentCulture)
                 };
             }
+
+            var logMetaModel = new PlayerUpdatingLogMetaModel
+            {
+                SiteName = metaModel.SiteName,
+                UserId = metaModel.UserId,
+                CustId = metaModel.CustId,
+                ActionId = LogActionId.PlayerAdminUpdateBAStatus,
+                ActionDetailId = LogActionId.PlayerAdminActionDetailUpdateBA,
+                Status = result.Success ? LogTextConstants.Success : LogTextConstants.False,
+                NewValue = metaModel.IsBa ? LogTextConstants.On : LogTextConstants.Off,
+                OldValue = !metaModel.IsBa ? LogTextConstants.On : LogTextConstants.Off
+            };
+            _playerLogRepository.Write(logMetaModel.CustId, logMetaModel.UserId, logMetaModel.ActionId, logMetaModel.GetLogContent());
+
+            return result;
         }
     }
 }
