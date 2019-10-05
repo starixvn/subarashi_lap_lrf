@@ -75,17 +75,9 @@
         }
 
         [HttpPost]
+        [ValidationWebRequest]
         public ActionResult ResultAmendment(NotificationMetaModel metaModel)
         {
-            if (!metaModel.IsValid)
-            {
-                return Json(new ReportResultModel<ResultAmendment>
-                {
-                    DataList = new List<ResultAmendment>(),
-                    TotalRows = 0
-                });
-            }
-
             UpdateMetaModel(metaModel);
 
             var result = _notificationService.GetResultAmendment(metaModel);
@@ -114,21 +106,14 @@
         }
 
         [HttpPost]
-        public HttpResponseMessage DownLoadFileAttachment(NotificationAttachmentMetaModel metaModel)
+        public ActionResult DownLoadFileAttachment(NotificationAttachmentMetaModel metaModel)
         {
             var data = _notificationService.GetFileAttachmentData(metaModel);
-            if (data.Code != 0)
+            if (data.Code == 0)
             {
-                return new HttpResponseMessage(HttpStatusCode.NoContent);
+                return File(Convert.FromBase64String(data.ExtendedData), "application/octet-stream");
             }
-
-            var result = new HttpResponseMessage(HttpStatusCode.OK)
-            {
-                Content = new ByteArrayContent(Convert.FromBase64String(data.ExtendedData))
-            };
-            result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
-
-            return result;
+            return Content("");
         }
 
         private void UpdateMetaModel(NotificationMetaModel metaModel)

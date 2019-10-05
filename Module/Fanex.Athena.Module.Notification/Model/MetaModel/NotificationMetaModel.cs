@@ -1,9 +1,10 @@
 ﻿namespace Fanex.Athena.Module.Notification.MetaModel
 {
     using Extension.Helper;
+    using Fanex.Athena.Model.Core.MetaModel;
     using System;
 
-    public class NotificationMetaModel
+    public class NotificationMetaModel : IMetaModelValidation
     {
         private const int MaximumMonthRangeConst = 6;
 
