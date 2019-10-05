@@ -109,11 +109,13 @@
         public ActionResult DownLoadFileAttachment(NotificationAttachmentMetaModel metaModel)
         {
             var data = _notificationService.GetFileAttachmentData(metaModel);
+
             if (data.Code == 0)
             {
                 return File(Convert.FromBase64String(data.ExtendedData), "application/octet-stream");
             }
-            return Content("");
+
+            return new HttpStatusCodeResult(HttpStatusCode.NoContent);
         }
 
         private void UpdateMetaModel(NotificationMetaModel metaModel)
