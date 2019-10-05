@@ -58,28 +58,6 @@
             }
         }
 
-        [TestCase("2/1/2019", "1/1/2019")]
-        [TestCase("1/1/2019", "2/2/2019")]
-        [TestCase("1/1/2016", "1/1/2016")]
-        public void GetStatementUrl_InvalidRequest_ThrowException(DateTime fromDate, DateTime toDate)
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var metaModel = new PlayerStatementMetaModel
-                {
-                    FromDate = fromDate,
-                    ToDate = toDate
-                };
-
-                // Action
-                AsyncTestDelegate testDelegate = async () => await controller.GetStatementUrl(metaModel);
-
-                // Assert
-                Assert.ThrowsAsync<InvalidOperationException>(testDelegate);
-            }
-        }
-
         [Test]
         public async Task GetStatementUrl_ValidRequest_CallService()
         {
