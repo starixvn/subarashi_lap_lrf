@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CurrencyUser.cs" />
+    <Compile Include="DataDomain\LogActionDetailId.cs" />
     <Compile Include="DataDomain\LogActionId.cs" />
     <Compile Include="Enum\AppMode.cs" />
     <Compile Include="ExternalServiceToken.cs" />

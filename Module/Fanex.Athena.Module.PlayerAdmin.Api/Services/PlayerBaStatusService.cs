@@ -60,7 +60,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
                 UserId = metaModel.UserId,
                 CustId = metaModel.CustId,
                 ActionId = LogActionId.PlayerAdminUpdateBAStatus,
-                ActionDetailId = LogActionId.PlayerAdminActionDetailUpdateBA,
+                ActionDetailId = LogActionDetailId.PlayerAdminActionUpdateBA,
                 Status = result.Success ? LogTextConstants.Success : LogTextConstants.False,
                 NewValue = metaModel.IsBa ? LogTextConstants.On : LogTextConstants.Off,
                 OldValue = !metaModel.IsBa ? LogTextConstants.On : LogTextConstants.Off

@@ -16,12 +16,8 @@ using Fanex.Athena.Api.StatelessBase.Logger;
 using Fanex.Athena.DataAccess.Report;
 using Fanex.Athena.DataAccess.Report.Interfaces;
 using Fanex.Athena.Extension;
-using Fanex.Athena.Extension.Utility;
 using Fanex.Athena.Extension.Utility.Internal;
 using Fanex.Athena.Module.PlayerAdmin;
-using Fanex.Athena.Module.PlayerAdmin.Api;
-using Fanex.Athena.Module.PlayerAdmin.Services;
-using Fanex.Athena.Module.PlayerAdmin.Services.Interfaces;
 using Fanex.Athena.Service.StatelessCore;
 using Fanex.Athena.Service.StatelessCore.Extensions;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -82,10 +78,10 @@ namespace Fanex.Athena
         {
             var moduleAssemblies = GetModuleAssemblies(assemblies);
 
-            builder.RegisteModuleApiModule(moduleAssemblies, "Fanex.Athena.Module.Notification.Api");
-            builder.RegisteModuleApiModule(moduleAssemblies, "Fanex.Athena.Module.PlayerAdmin.Api");
             builder.RegisteModuleApiModule(moduleAssemblies, "Fanex.Athena.Module.Dashboard");
+            builder.RegisteModuleModuleAndApi(moduleAssemblies, "Fanex.Athena.Module.Notification");
             builder.RegisteModulePlayerAdmin(moduleAssemblies);
+            builder.RegisteModuleApiModule(moduleAssemblies, "Fanex.Athena.Module.PlayerAdmin.Api");
         }
 
         private static void RegisterHttpClient(ContainerBuilder builder)

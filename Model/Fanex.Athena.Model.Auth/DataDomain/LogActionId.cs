@@ -9,7 +9,5 @@
         public const int PlayerAdminUpdateSpecialLevel = 5552;
 
         public const int PlayerAdminUpdateBetLimit = 5561;
-
-        public const int PlayerAdminActionDetailUpdateBA = 3;
     }
 }

@@ -14,7 +14,6 @@ namespace Fanex.Athena.Extension
         public static void WithHttpClient(this ContainerBuilder builder, string clientName,
             string baseAdress, IDictionary<string, string> headerValues = null)
         {
-
             builder.Register<HttpClient>(x =>
             {
                 var endPoint = new Uri(baseAdress);
@@ -42,12 +41,14 @@ namespace Fanex.Athena.Extension
             builder.RegisterAssemblyTypes(items).AsImplementedInterfaces();
             builder.RegisterApiControllers(items);
         }
-        public static void RegisteModuleModule(this ContainerBuilder builder,
+
+        public static void RegisteModuleModuleAndApi(this ContainerBuilder builder,
           IEnumerable<Assembly> assemblies, string moduleName)
         {
             var items = assemblies.Where(ass => ass.FullName.Contains(moduleName)).ToArray();
             builder.RegisterAssemblyTypes(items).AsImplementedInterfaces();
             builder.RegisterControllers(items);
+            builder.RegisterApiControllers(items);
         }
     }
 }
