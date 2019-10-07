@@ -19,10 +19,10 @@ namespace Fanex.Athena.DataAccess.BetSettings
 
     public class CoreCasinoBetSettingDataAccess : BaseDataAccess, ICoreCasinoBetSettingDataAccess
     {
-        private readonly IUserLogDataAccess _userLogDataAccess;
+        private readonly ISPLogDataAccess _userLogDataAccess;
 
         public CoreCasinoBetSettingDataAccess(
-            IUserLogDataAccess userLogDataAccess)
+            ISPLogDataAccess userLogDataAccess)
         {
             _userLogDataAccess = userLogDataAccess;
         }
@@ -50,7 +50,7 @@ namespace Fanex.Athena.DataAccess.BetSettings
                 var trackingValue1 = GetTrackingValueForUpdateStatus(metaModel, UspName, sportId, metaModel.Status == 1 ? 0 : 1);
                 var trackingValue2 = GetTrackingValueForUpdateStatus(metaModel, UspName, sportId, metaModel.Status, errorCode, errorMessage);
 
-                await _userLogDataAccess.WriteLog(new UserLogMetaModel
+                await _userLogDataAccess.WriteLog(new SPLogMetaModel
                 {
                     UserId = metaModel.UserId,
                     CustID = metaModel.CustId,

@@ -1,6 +1,6 @@
 ﻿namespace Fanex.Athena.Model.Core.MetaModel.Common
 {
-    public class UserLogMetaModel
+    public class SPLogMetaModel
     {
         public int UserId { get; set; }
 

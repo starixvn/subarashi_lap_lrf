@@ -9,8 +9,8 @@ using Fanex.Athena.Model.Core.MetaModel.Common;
 
 namespace Fanex.Athena.DataAccess.Core.Common.Interfaces
 {
-    public interface IUserLogDataAccess
+    public interface ISPLogDataAccess
     {
-        Task WriteLog(UserLogMetaModel metaModel);
+        Task WriteLog(SPLogMetaModel metaModel);
     }
 }

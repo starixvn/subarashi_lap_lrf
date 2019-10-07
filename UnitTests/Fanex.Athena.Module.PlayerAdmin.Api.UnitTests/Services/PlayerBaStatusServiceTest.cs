@@ -1,9 +1,10 @@
 ﻿using Fanex.Athena.DataAccess.Core.Common.Interfaces;
 using Fanex.Athena.Extension.Utility.Interfaces;
 using Fanex.Athena.Model.Auth.DataDomain;
-using Fanex.Athena.Model.Core.MetaModel.Common;
+using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.Services;
+using Fanex.Athena.Service.StatelessCore.Interfaces;
 using Fanex.Data;
 using NSubstitute;
 using NUnit.Framework;
@@ -46,11 +47,9 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
             objectDb.GetParameterValue("OddsGroup").Returns(ExpectedOddsGroup);
             objectDb.GetParameterValue("ErrCode").Returns(0);
 
-            var logUserControlDataAccess = Substitute.For<ILogUserControlDataAccess>();
+            var businessLogService = Substitute.For<IBusinessLogService>();
 
-            var service = new PlayerBaStatusService(_dbFactory, logUserControlDataAccess);
-            var expectedLogContent = $"LAP - {metaModel.SiteName} - {LogActionId.PlayerAdminActionDetailUpdateBA} - Success - ON - OFF";
-
+            var service = new PlayerBaStatusService(_dbFactory, businessLogService);
             // Action
             var result = service.Update(metaModel);
 
@@ -71,9 +70,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
 
                 Assert.That(result.ExtendedData, Is.EqualTo(ExpectedOddsGroup));
 
-                logUserControlDataAccess.Received(1).Write(Arg.Is<LogUserControlMetaModel>(x =>
-                                x.CustId == metaModel.CustId && x.UserId == metaModel.UserId &&
-                                x.ActionId == LogActionId.PlayerAdminUpdateBAStatus && x.Content == expectedLogContent));
+                businessLogService.Received(1).Write(BusinessLogType.CustomerBA, metaModel);
             });
         }
     }

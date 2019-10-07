@@ -11,20 +11,24 @@ namespace Fanex.Athena.Extension
         public static void WithHttpClient(this ContainerBuilder builder, string clientName,
             string baseAdress, IDictionary<string, string> headerValues = null)
         {
-            var endPoint = new Uri(baseAdress);
-            var httpClient = new HttpClient
-            {
-                BaseAddress = endPoint
-            };
 
-            if (headerValues != null)
+            builder.Register<HttpClient>(x =>
             {
-                foreach (var item in headerValues)
+                var endPoint = new Uri(baseAdress);
+                var httpClient = new HttpClient
                 {
-                    httpClient.DefaultRequestHeaders.Add(item.Key, item.Value);
+                    BaseAddress = endPoint
+                };
+
+                if (headerValues != null)
+                {
+                    foreach (var item in headerValues)
+                    {
+                        httpClient.DefaultRequestHeaders.Add(item.Key, item.Value);
+                    }
                 }
-            }
-            builder.Register<HttpClient>(x => httpClient).Named<HttpClient>(clientName)
+                return httpClient;
+            }).Named<HttpClient>(clientName)
                 .SingleInstance();
         }
     }

@@ -14,7 +14,7 @@
 
     using UnitTest.Common.Helpers;
 
-    public class UserLogDataAccessTest : BaseDataAccessHelperTest<UserLogDataAccess>
+    public class UserLogDataAccessTest : BaseDataAccessHelperTest<SPLogDataAccess>
     {
         [OneTimeSetUp]
         public override void FixtureSetUp()
@@ -28,7 +28,7 @@
         public async Task WriteLog_WhenCall_ParametersPassedCorrectly()
         {
             // Arrange
-            var metaModel = FakeHelper.Create<UserLogMetaModel>();
+            var metaModel = FakeHelper.Create<SPLogMetaModel>();
 
             // Action
             await DataAccess.WriteLog(metaModel);
@@ -51,7 +51,7 @@
         public async Task WriteLog_WhenCall_ExecuteNonQuery()
         {
             // Arrange
-            var metaModel = new UserLogMetaModel();
+            var metaModel = new SPLogMetaModel();
 
             // Action
             await DataAccess.WriteLog(metaModel);

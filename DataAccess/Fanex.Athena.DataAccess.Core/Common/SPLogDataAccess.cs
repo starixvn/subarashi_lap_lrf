@@ -10,9 +10,9 @@ namespace Fanex.Athena.DataAccess.Core.Common
     using Interfaces;
     using Model.Core.MetaModel.Common;
 
-    public class UserLogDataAccess : BaseDataAccess, IUserLogDataAccess
+    public class SPLogDataAccess : BaseDataAccess, ISPLogDataAccess
     {
-        public async Task WriteLog(UserLogMetaModel metaModel)
+        public async Task WriteLog(SPLogMetaModel metaModel)
         {
             const string UspName = "WriteLog_UserLog_RunSP";
 

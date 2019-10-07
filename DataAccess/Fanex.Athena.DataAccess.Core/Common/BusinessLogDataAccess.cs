@@ -1,21 +1,21 @@
 ﻿using System;
 using Fanex.Athena.DataAccess.Core.Common.Interfaces;
-using Fanex.Athena.Model.Core.MetaModel.Common;
+using Fanex.Athena.Model.Core.DTO.Common;
 using Fanex.Logging;
 
 namespace Fanex.Athena.DataAccess.Core.Common
 {
-    public class LogUserControlDataAccess : BaseDataAccess, ILogUserControlDataAccess
+    public class BusinessLogDataAccess : BaseDataAccess, IBusinessLogDataAccess
     {
         private readonly ILogger _logger;
 
         [CLSCompliant(false)]
-        public LogUserControlDataAccess(ILogger logger)
+        public BusinessLogDataAccess(ILogger logger)
         {
             _logger = logger;
         }
 
-        public void Write(LogUserControlMetaModel metaModel)
+        public void Write(BusinessLogItem bussinessLogItem)
         {
             const string UspName = "WriteLog_UserLog_UserControl";
 
@@ -23,11 +23,7 @@ namespace Fanex.Athena.DataAccess.Core.Common
             {
                 using (var db = base.GetObjectDb(UspName))
                 {
-                    db.SetParameterValue("CustID", metaModel.CustId);
-                    db.SetParameterValue("UserId", metaModel.UserId);
-                    db.SetParameterValue("ActionId", metaModel.ActionId);
-                    db.SetParameterValue("doing", metaModel.Content);
-                    db.ExecuteNonQuery();
+                    db.ExecuteNonQuery(bussinessLogItem);
                 }
             }
             catch (Exception ex)

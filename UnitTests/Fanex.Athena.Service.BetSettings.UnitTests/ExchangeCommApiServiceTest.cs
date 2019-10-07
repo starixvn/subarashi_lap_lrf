@@ -32,7 +32,7 @@
         private readonly int _userId = FakeHelper.Create<int>();
 
         private ILogger _logger;
-        private IUserLogDataAccess _userLogDataAccess;
+        private ISPLogDataAccess _userLogDataAccess;
         private IDcsBetSettingDataAccess _betSettingDataAccess;
         private IAppSettings _appSetting;
         private ICitiXchangeClient _apiClient;
@@ -41,7 +41,7 @@
         public void Setup()
         {
             _logger = Substitute.For<ILogger>();
-            _userLogDataAccess = Substitute.For<IUserLogDataAccess>();
+            _userLogDataAccess = Substitute.For<ISPLogDataAccess>();
             _betSettingDataAccess = Substitute.For<IDcsBetSettingDataAccess>();
             _appSetting = Substitute.For<IAppSettings>();
             _apiClient = Substitute.For<ICitiXchangeClient>();
@@ -162,7 +162,7 @@
             // Assert
             Assert.Multiple(() =>
             {
-                _userLogDataAccess.Received(1).WriteLog(Arg.Is<UserLogMetaModel>(x =>
+                _userLogDataAccess.Received(1).WriteLog(Arg.Is<SPLogMetaModel>(x =>
                     x.ActionID == UserLogAction.ExchangeCommission &&
                     x.UserId == _userId &&
                     x.CustID == _custId &&

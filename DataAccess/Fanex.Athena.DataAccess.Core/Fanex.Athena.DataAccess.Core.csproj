@@ -78,23 +78,23 @@
   <ItemGroup>
     <Compile Include="BaseDataAccess.cs" />
     <Compile Include="Common\BetTypeDataAccess.cs" />
+    <Compile Include="Common\BusinessLogDataAccess.cs" />
     <Compile Include="Common\Constants\UserLogAction.cs" />
     <Compile Include="Common\Interfaces\IBetTypeDataAccess.cs" />
+    <Compile Include="Common\Interfaces\IBusinessLogDataAccess.cs" />
     <Compile Include="Common\Interfaces\ICurrencyDataAccess.cs" />
     <Compile Include="Common\Interfaces\IFunctionDataAccess.cs" />
-    <Compile Include="Common\Interfaces\ILogUserControlDataAccess.cs" />
-    <Compile Include="Common\Interfaces\IUserLogDataAccess.cs" />
     <Compile Include="Common\Interfaces\ILeagueDataAccess.cs" />
     <Compile Include="Common\Interfaces\IMatchDataAccess.cs" />
     <Compile Include="Common\Interfaces\IProductDataAccess.cs" />
+    <Compile Include="Common\Interfaces\ISPLogDataAccess.cs" />
     <Compile Include="Common\Interfaces\ISportTypeDataAccess.cs" />
     <Compile Include="Common\CurrencyDataAccess.cs" />
     <Compile Include="Common\FunctionDataAccess.cs" />
-    <Compile Include="Common\LogUserControlDataAccess.cs" />
-    <Compile Include="Common\UserLogDataAccess.cs" />
     <Compile Include="Common\LeagueDataAccess.cs" />
     <Compile Include="Common\MatchDataAccess.cs" />
     <Compile Include="Common\ProductDataAccess.cs" />
+    <Compile Include="Common\SPLogDataAccess.cs" />
     <Compile Include="Common\SportTypeDataAccess.cs" />
     <Compile Include="Configuration\BalanceUpDataAccess.cs" />
     <Compile Include="Configuration\Interfaces\IBalanceUpDataAccess.cs" />
