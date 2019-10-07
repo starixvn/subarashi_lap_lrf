@@ -1,7 +1,6 @@
-﻿using System;
-
-using Fanex.Athena.Extension.Utility.Interfaces;
+﻿using Fanex.Athena.Extension.Utility.Interfaces;
 using Fanex.Data;
+using System;
 
 namespace Fanex.Athena.Extension.Utility
 {
@@ -10,7 +9,7 @@ namespace Fanex.Athena.Extension.Utility
         [CLSCompliant(false)]
         public IObjectDb GetObjectDb(string spName, int timeout = 120)
         {
-            return new ObjectDb(spName, timeout);
+            return ObjectDbFactory.CreateInstance(spName, timeout);
         }
     }
 }

@@ -1,21 +1,13 @@
 ﻿namespace Fanex.Athena.DataAccess.Core.UnitTests.Configuration
 {
-    using System;
-
     using Core.Configuration;
-
     using Data;
-
     using Extension.Utility.Interfaces;
-
     using Logging;
-
     using Model.Core.DTO.Configuration;
-
     using NSubstitute;
-
     using NUnit.Framework;
-
+    using System;
     using TestHelpers;
 
     public class BalanceUpDataAccessTest : BaseDataAccessHelperTest<BalanceUpDataAccess>
@@ -118,7 +110,7 @@
         public void GetBalanceUpDay_WhenObjectDbThrowsException_WriteLog()
         {
             // Arrange
-            var exception = new ObjectDbException();
+            var exception = new Exception();
             _cache.Get<BalanceUp>(Arg.Any<string>()).Returns(x => { return null; });
 
             DataAccess.GetObjectDb(Arg.Is(UspName)).Returns(x => { throw exception; });
