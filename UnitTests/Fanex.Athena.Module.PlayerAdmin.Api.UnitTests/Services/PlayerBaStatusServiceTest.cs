@@ -1,6 +1,7 @@
 ﻿using Fanex.Athena.DataAccess.Core.Common.Interfaces;
 using Fanex.Athena.Extension.Utility.Interfaces;
 using Fanex.Athena.Model.Auth.DataDomain;
+using Fanex.Athena.Model.Core.MetaModel.Common;
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.Services;
 using Fanex.Data;
@@ -70,7 +71,9 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
 
                 Assert.That(result.ExtendedData, Is.EqualTo(ExpectedOddsGroup));
 
-                logUserControlDataAccess.Received(1).Write(metaModel.CustId, metaModel.UserId, LogActionId.PlayerAdminUpdateBAStatus, expectedLogContent);
+                logUserControlDataAccess.Received(1).Write(Arg.Is<LogUserControlMetaModel>(x =>
+                                x.CustId == metaModel.CustId && x.UserId == metaModel.UserId &&
+                                x.ActionId == LogActionId.PlayerAdminUpdateBAStatus && x.Content == expectedLogContent));
             });
         }
     }

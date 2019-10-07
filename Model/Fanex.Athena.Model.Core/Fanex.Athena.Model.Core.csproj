@@ -129,6 +129,7 @@
     <Compile Include="Helper\BettypeHelper.cs" />
     <Compile Include="Helper\MetaModelValidationHelper.cs" />
     <Compile Include="Helper\ProductHelper.cs" />
+    <Compile Include="MetaModel\Common\LogUserControlMetaModel.cs" />
     <Compile Include="MetaModel\CurrencyValidationOption.cs" />
     <Compile Include="MetaModel\IMetalModelCustomerIdentity.cs" />
     <Compile Include="MetaModel\IMetaModelAgent.cs" />

@@ -1,7 +1,9 @@
-﻿namespace Fanex.Athena.DataAccess.Core.Common.Interfaces
+﻿using Fanex.Athena.Model.Core.MetaModel.Common;
+
+namespace Fanex.Athena.DataAccess.Core.Common.Interfaces
 {
     public interface ILogUserControlDataAccess
     {
-        void Write(int custId, int userId, int actionId, string content);
+        void Write(LogUserControlMetaModel metaModel);
     }
 }

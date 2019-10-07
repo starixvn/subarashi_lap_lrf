@@ -1,5 +1,6 @@
 ﻿using System;
 using Fanex.Athena.DataAccess.Core.Common.Interfaces;
+using Fanex.Athena.Model.Core.MetaModel.Common;
 using Fanex.Logging;
 
 namespace Fanex.Athena.DataAccess.Core.Common
@@ -14,7 +15,7 @@ namespace Fanex.Athena.DataAccess.Core.Common
             _logger = logger;
         }
 
-        public void Write(int custId, int userId, int actionId, string content)
+        public void Write(LogUserControlMetaModel metaModel)
         {
             const string UspName = "WriteLog_UserLog_UserControl";
 
@@ -22,10 +23,10 @@ namespace Fanex.Athena.DataAccess.Core.Common
             {
                 using (var db = base.GetObjectDb(UspName))
                 {
-                    db.SetParameterValue("CustID", custId);
-                    db.SetParameterValue("UserId", userId);
-                    db.SetParameterValue("ActionId", actionId);
-                    db.SetParameterValue("doing", content);
+                    db.SetParameterValue("CustID", metaModel.CustId);
+                    db.SetParameterValue("UserId", metaModel.UserId);
+                    db.SetParameterValue("ActionId", metaModel.ActionId);
+                    db.SetParameterValue("doing", metaModel.Content);
                     db.ExecuteNonQuery();
                 }
             }

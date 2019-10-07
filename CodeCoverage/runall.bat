@@ -5,7 +5,6 @@ Fanex.Athena.Controllers.TotalBets.UnitTests ^
 Fanex.Athena.Controllers.UnitTests ^
 Fanex.Athena.Controllers.Customer.UnitTests ^
 Fanex.Athena.Controllers.Report.UnitTests ^
-Fanex.Athena.Controllers.Customer.UnitTests ^
 Fanex.Athena.Controllers.BetList.UnitTests ^
 Fanex.Athena.Controllers.BetSettings.UnitTests ^
 Fanex.Athena.Controllers.Forecast.UnitTests ^

@@ -3,6 +3,7 @@ using System.Globalization;
 using Fanex.Athena.DataAccess.Core.Common.Interfaces;
 using Fanex.Athena.Extension.Utility.Interfaces;
 using Fanex.Athena.Model.Auth.DataDomain;
+using Fanex.Athena.Model.Core.MetaModel.Common;
 using Fanex.Athena.Model.Core.ViewModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.Services.Interfaces;
@@ -64,7 +65,16 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
                 NewValue = metaModel.IsBa ? LogTextConstants.On : LogTextConstants.Off,
                 OldValue = !metaModel.IsBa ? LogTextConstants.On : LogTextConstants.Off
             };
-            _logUserControlDataAccess.Write(logMetaModel.CustId, logMetaModel.UserId, logMetaModel.ActionId, logMetaModel.GetLogContent());
+
+            var logUserControlMetaModel = new LogUserControlMetaModel
+            {
+                CustId = logMetaModel.CustId,
+                UserId = logMetaModel.UserId,
+                ActionId = logMetaModel.ActionId,
+                Content = logMetaModel.GetLogContent()
+            };
+
+            _logUserControlDataAccess.Write(logUserControlMetaModel);
 
             return result;
         }
