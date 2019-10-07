@@ -18,6 +18,8 @@ using Fanex.Athena.DataAccess.Report.Interfaces;
 using Fanex.Athena.Extension;
 using Fanex.Athena.Extension.Utility;
 using Fanex.Athena.Extension.Utility.Internal;
+using Fanex.Athena.Module.PlayerAdmin;
+using Fanex.Athena.Module.PlayerAdmin.Api;
 using Fanex.Athena.Module.PlayerAdmin.Services;
 using Fanex.Athena.Module.PlayerAdmin.Services.Interfaces;
 using Fanex.Athena.Service.StatelessCore;
@@ -68,15 +70,22 @@ namespace Fanex.Athena
             builder.RegisterType<ApiExceptionLogger>().As<IExceptionLogger>();
             RegisterHttpClient(builder);
 
-            builder.Register<PlayerStatementService>(x => new PlayerStatementService(
-                  x.Resolve<IAppSettings>(),
-                  x.ResolveNamed<HttpClient>("EXTServiceTokenClient")
-                )).As<IPlayerStatementService>()
-                .InstancePerDependency();
+            RegisterModule(builder, assemblies);
+
             var container = builder.Build();
 
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
+        }
+
+        private static void RegisterModule(ContainerBuilder builder, Assembly[] assemblies)
+        {
+            var moduleAssemblies = GetModuleAssemblies(assemblies);
+
+            builder.RegisteModuleApiModule(moduleAssemblies, "Fanex.Athena.Module.Notification.Api");
+            builder.RegisteModuleApiModule(moduleAssemblies, "Fanex.Athena.Module.PlayerAdmin.Api");
+            builder.RegisteModuleApiModule(moduleAssemblies, "Fanex.Athena.Module.Dashboard");
+            builder.RegisteModulePlayerAdmin(moduleAssemblies);
         }
 
         private static void RegisterHttpClient(ContainerBuilder builder)
@@ -139,9 +148,9 @@ namespace Fanex.Athena
             return assemblies.Where(ass => ass.FullName.Contains("Fanex.Athena.Api")).ToArray();
         }
 
-        private static Assembly[] GetModuleAssemblies(Assembly[] assemblies)
+        private static IEnumerable<Assembly> GetModuleAssemblies(Assembly[] assemblies)
         {
-            return assemblies.Where(ass => ass.FullName.Contains("Fanex.Athena.Module")).ToArray();
+            return assemblies.Where(ass => ass.FullName.Contains("Fanex.Athena.Module"));
         }
 
         private static void RegisterSingleton(ContainerBuilder builder)

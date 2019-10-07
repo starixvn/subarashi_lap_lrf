@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
-
+using System.Reflection;
 using Autofac;
+using Autofac.Integration.Mvc;
+using Autofac.Integration.WebApi;
 
 namespace Fanex.Athena.Extension
 {
@@ -30,6 +33,21 @@ namespace Fanex.Athena.Extension
                 return httpClient;
             }).Named<HttpClient>(clientName)
                 .SingleInstance();
+        }
+
+        public static void RegisteModuleApiModule(this ContainerBuilder builder,
+           IEnumerable<Assembly> assemblies, string moduleName)
+        {
+            var items = assemblies.Where(ass => ass.FullName.Contains(moduleName)).ToArray();
+            builder.RegisterAssemblyTypes(items).AsImplementedInterfaces();
+            builder.RegisterApiControllers(items);
+        }
+        public static void RegisteModuleModule(this ContainerBuilder builder,
+          IEnumerable<Assembly> assemblies, string moduleName)
+        {
+            var items = assemblies.Where(ass => ass.FullName.Contains(moduleName)).ToArray();
+            builder.RegisterAssemblyTypes(items).AsImplementedInterfaces();
+            builder.RegisterControllers(items);
         }
     }
 }
