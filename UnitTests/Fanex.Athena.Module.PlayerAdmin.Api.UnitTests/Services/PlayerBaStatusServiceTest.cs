@@ -1,6 +1,4 @@
-﻿using Fanex.Athena.DataAccess.Core.Common.Interfaces;
-using Fanex.Athena.Extension.Utility.Interfaces;
-using Fanex.Athena.Model.Auth.DataDomain;
+﻿using Fanex.Athena.Extension.Utility.Interfaces;
 using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.Services;
@@ -70,7 +68,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
 
                 Assert.That(result.ExtendedData, Is.EqualTo(ExpectedOddsGroup));
 
-                businessLogService.Received(1).Write(BusinessLogType.CustomerBA, metaModel);
+                businessLogService.Received(1).Write(BusinessLogType.CustomerUpdateBA, metaModel);
             });
         }
     }

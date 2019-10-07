@@ -101,6 +101,8 @@
     <Compile Include="DTO\PlayerActivityRecord.cs" />
     <Compile Include="DTO\Player.cs" />
     <Compile Include="DTO\PlayerBettingStatistics.cs" />
+    <Compile Include="Extensions\CommonCustomerSettingLogFactory.cs" />
+    <Compile Include="Extensions\CommonCustomerSettingLogBuilder.cs" />
     <Compile Include="MetaModel\PlayerActivityRecordMetaModel.cs" />
     <Compile Include="MetaModel\PlayerBettingStatisticsMetaModel.cs" />
     <Compile Include="MetaModel\PlayerListBaseMetaModel.cs" />

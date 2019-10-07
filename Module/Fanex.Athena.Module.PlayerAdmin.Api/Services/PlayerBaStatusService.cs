@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using Fanex.Athena.DataAccess.Core.Common.Interfaces;
 using Fanex.Athena.Extension.Utility.Interfaces;
 using Fanex.Athena.Model.Auth.DataDomain;
 using Fanex.Athena.Model.Core.DataDomain;
@@ -66,7 +65,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
                 NewValue = metaModel.IsBa ? LogTextConstants.On : LogTextConstants.Off,
                 OldValue = !metaModel.IsBa ? LogTextConstants.On : LogTextConstants.Off
             };
-            _businessLogService.Write(BusinessLogType.CustomerBA, logMetaModel);
+            _businessLogService.Write(BusinessLogType.CustomerUpdateBA, logMetaModel);
 
             return result;
         }

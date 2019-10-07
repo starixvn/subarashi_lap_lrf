@@ -4,6 +4,6 @@ namespace Fanex.Athena.Service.StatelessCore.Interfaces
 {
     public interface IBusinessLogBuilderFactory
     {
-        IBusinessLogBuilderExtension GetBuilder(BusinessLogType bussinessLogType);
+        IBusinessLogBuilderExtension GetBuilder(BusinessLogType businessLogType);
     }
 }
