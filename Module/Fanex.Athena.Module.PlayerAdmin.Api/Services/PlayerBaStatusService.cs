@@ -67,15 +67,6 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
                 OldValue = !metaModel.IsBa ? LogTextConstants.On : LogTextConstants.Off
             };
             _businessLogService.Write(BusinessLogType.CustomerBA, logMetaModel);
-            var logUserControlMetaModel = new LogUserControlMetaModel
-            {
-                CustId = logMetaModel.CustId,
-                UserId = logMetaModel.UserId,
-                ActionId = logMetaModel.ActionId,
-                Content = logMetaModel.GetLogContent()
-            };
-
-            _logUserControlDataAccess.Write(logUserControlMetaModel);
 
             return result;
         }
