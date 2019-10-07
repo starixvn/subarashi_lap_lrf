@@ -70,28 +70,6 @@
         }
 
         [Test]
-        public void ResultAmendment_InValidMetaModel_ReturnEmptyResult()
-        {
-            // Arrange
-            var metaModel = new NotificationMetaModel
-            {
-                FromDate = DateTime.Today,
-                ToDate = DateTime.Today.AddDays(-1)
-            };
-
-            // Action
-            var result = _controller.ResultAmendment(metaModel) as JsonResult;
-
-            // Asset
-            Assert.Multiple(() =>
-            {
-                _service.DidNotReceive().GetResultAmendment(Arg.Any<NotificationMetaModel>());
-                Assert.That(result.Data.GetType().GetProperty("TotalRows").GetValue(result.Data), Is.Zero);
-                Assert.That(result.Data.GetType().GetProperty("DataList").GetValue(result.Data), Is.Empty);
-            });
-        }
-
-        [Test]
         public void ResultAmendment_WhenCall_CallServiceWithCorrectParameter()
         {
             // Arrange
@@ -168,10 +146,10 @@
             _service.GetFileAttachmentData(metaModel).Returns(new ResultInfo { Code = 1 });
 
             // Action
-            var result = _controller.DownLoadFileAttachment(metaModel);
+            var result = (HttpStatusCodeResult)_controller.DownLoadFileAttachment(metaModel);
 
             // Asset
-            Assert.That(result.StatusCode, Is.EqualTo(HttpStatusCode.NoContent));
+            Assert.That(result.StatusCode, Is.EqualTo((int)HttpStatusCode.NoContent));
         }
 
         [Test]
@@ -188,8 +166,7 @@
             // Asset
             Assert.Multiple(() =>
             {
-                Assert.That(result.StatusCode, Is.EqualTo(HttpStatusCode.OK));
-                Assert.That(result.Content, Is.Not.Null);
+                Assert.That(result is FileResult, Is.True);
             });
         }
     }

@@ -15,7 +15,8 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
     public class ReportAPIClientTest
     {
         private const string Language = "en-US";
-        private const string ApiUrl = "http://localhost:80/api/Report/Action";
+        private const string ApiUrl = "/api/Report/Action";
+        private readonly Uri BaseAddress = new Uri("http://localhost:80");
 
         [Test]
         public async Task PostAsyncString_WhenCall_HttpRequestParamIsPassedCorrectly()
@@ -34,7 +35,7 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
 
                 return httpResponse;
             });
-            var client = new HttpClient(httpMessageHandler);
+            var client = new HttpClient(httpMessageHandler) { BaseAddress = BaseAddress };
             var reportApiClient = new ReportAPIClient(client);
             var content = new
             {
@@ -68,7 +69,7 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
 
                 return httpResponse;
             });
-            var client = new HttpClient(httpMessageHandler);
+            var client = new HttpClient(httpMessageHandler) { BaseAddress = BaseAddress };
             var reportApiClient = new ReportAPIClient(client);
             var content = "param";
 
@@ -92,7 +93,7 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
             };
             var httpMessageHandler = Substitute.ForPartsOf<MockHttpMessageHandler>();
             httpMessageHandler.Send(Arg.Any<HttpRequestMessage>()).Returns(httpResponse);
-            var client = new HttpClient(httpMessageHandler);
+            var client = new HttpClient(httpMessageHandler) { BaseAddress = BaseAddress };
             var reportApiClient = new ReportAPIClient(client);
 
             // Action
