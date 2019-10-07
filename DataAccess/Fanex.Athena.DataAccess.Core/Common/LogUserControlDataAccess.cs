@@ -1,29 +1,26 @@
 ﻿using System;
-using Fanex.Athena.Extension.Utility.Interfaces;
-using Fanex.Athena.Module.PlayerAdmin.Api.Repository.Interfaces;
+using Fanex.Athena.DataAccess.Core.Common.Interfaces;
 using Fanex.Logging;
 
-namespace Fanex.Athena.Module.PlayerAdmin.Api.Repository
+namespace Fanex.Athena.DataAccess.Core.Common
 {
-    public class PlayerLogRepository : IPlayerLogRepository
+    public class LogUserControlDataAccess : BaseDataAccess, ILogUserControlDataAccess
     {
-        private readonly IDbFactory _dbFactory;
-
         private readonly ILogger _logger;
 
-        public PlayerLogRepository(IDbFactory dbFactory, ILogger logger)
+        [CLSCompliant(false)]
+        public LogUserControlDataAccess(ILogger logger)
         {
-            _dbFactory = dbFactory;
             _logger = logger;
         }
 
         public void Write(int custId, int userId, int actionId, string content)
         {
-            const string UspName = "WriteLog_UserLog_UserControl_Wrapper";
+            const string UspName = "WriteLog_UserLog_UserControl";
 
             try
             {
-                using (var db = _dbFactory.GetObjectDb(UspName))
+                using (var db = base.GetObjectDb(UspName))
                 {
                     db.SetParameterValue("CustID", custId);
                     db.SetParameterValue("UserId", userId);
@@ -34,7 +31,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Repository
             }
             catch (Exception ex)
             {
-                _logger.Error("WriteLog_UserLog_UserControl_Wrapper \n" + ex.Message, ex);
+                _logger.Error("WriteLog_UserLog_UserControl \n" + ex.Message, ex);
             }
         }
     }

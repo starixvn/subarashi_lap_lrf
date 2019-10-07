@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Globalization;
+using Fanex.Athena.DataAccess.Core.Common.Interfaces;
 using Fanex.Athena.Extension.Utility.Interfaces;
 using Fanex.Athena.Model.Auth.DataDomain;
 using Fanex.Athena.Model.Core.ViewModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
-using Fanex.Athena.Module.PlayerAdmin.Api.Repository.Interfaces;
 using Fanex.Athena.Module.PlayerAdmin.Api.Services.Interfaces;
 using Fanex.Athena.Module.PlayerAdmin.Api.Utilities;
 
@@ -14,12 +14,12 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
     {
         private readonly IDbFactory _dbFactory;
 
-        private readonly IPlayerLogRepository _playerLogRepository;
+        private readonly ILogUserControlDataAccess _logUserControlDataAccess;
 
-        public PlayerBaStatusService(IDbFactory dbFactory, IPlayerLogRepository playerLogRepository)
+        public PlayerBaStatusService(IDbFactory dbFactory, ILogUserControlDataAccess logUserControlDataAccess)
         {
             _dbFactory = dbFactory;
-            _playerLogRepository = playerLogRepository;
+            _logUserControlDataAccess = logUserControlDataAccess;
         }
 
         public ResultViewModel Update(BaStatusUpdatingMetaModel metaModel)
@@ -64,7 +64,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
                 NewValue = metaModel.IsBa ? LogTextConstants.On : LogTextConstants.Off,
                 OldValue = !metaModel.IsBa ? LogTextConstants.On : LogTextConstants.Off
             };
-            _playerLogRepository.Write(logMetaModel.CustId, logMetaModel.UserId, logMetaModel.ActionId, logMetaModel.GetLogContent());
+            _logUserControlDataAccess.Write(logMetaModel.CustId, logMetaModel.UserId, logMetaModel.ActionId, logMetaModel.GetLogContent());
 
             return result;
         }
