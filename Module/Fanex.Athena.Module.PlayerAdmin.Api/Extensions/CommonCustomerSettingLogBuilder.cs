@@ -18,6 +18,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Extensions
                 CustID = currentItem.CustId,
                 UserId = currentItem.UserId,
                 ActionID = currentItem.ActionId,
+                TypeId = 2,
                 Doing = $"LAP - {currentItem.SiteName} - {currentItem.LicenseeCustId} - {currentItem.ActionDetailId} - {currentItem.Status} - {currentItem.NewValue} - {currentItem.OldValue}"
             };
         }

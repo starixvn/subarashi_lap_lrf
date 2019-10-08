@@ -11,5 +11,7 @@
         public string Doing { get; set; }
 
         public byte Duration { get; set; }
+
+        public byte TypeId { get; set; }
     }
 }
