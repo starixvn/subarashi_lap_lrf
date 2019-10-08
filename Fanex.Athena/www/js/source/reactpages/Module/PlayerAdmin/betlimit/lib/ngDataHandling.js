@@ -6,6 +6,7 @@ export default class NGDataHandling extends DataHandling {
     getViewRowData(rawData) {
         let row = super.getViewRowData(rawData);
         row.MaxPerBall = Utility.formatValue(rawData.MaxPerBall);
+        row.OldMaxPerBall = rawData.MaxPerBall;
         row.MaxPerBallMax = rawData.MaxPerBallMax;
         row.OriginalMaxPerBall = row.MaxPerBall;
 
@@ -15,6 +16,7 @@ export default class NGDataHandling extends DataHandling {
     getSubmitRowData(row) {
         let data = super.getSubmitRowData(row);
         data.MaxPerBall = Utility.getValueAsNumber(row.MaxPerBall);
+        data.OldMaxPerBall = row.OldMaxPerBall;
         data.IsUpdated = data.IsUpdated || row.MaxPerBall !== row.OriginalMaxPerBall;
 
         return data;

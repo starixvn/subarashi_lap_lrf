@@ -115,6 +115,7 @@
     <Compile Include="DTO\BetLimits\AgCasinoGroup.cs" />
     <Compile Include="DTO\PlayerBetLimit.cs" />
     <Compile Include="DTO\PlayerBetLimitProduct.cs" />
+    <Compile Include="MetaModel\AgCasinoBetLimitMetaModel.cs" />
     <Compile Include="MetaModel\PlayerBetLimitSelectMetaModel.cs" />
     <Compile Include="MetaModel\PlayerBetLimitUpdateMetaModel.cs" />
     <Compile Include="MetaModel\PlayerBetLimitMetaModel.cs" />

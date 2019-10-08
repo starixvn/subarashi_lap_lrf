@@ -1,6 +1,7 @@
 ﻿namespace Fanex.Athena.Module.PlayerAdmin.MetaModel
 {
     using System.Collections.Generic;
+    using System.Linq;
     using Fanex.Athena.Model.Core.MetaModel;
 
     public class PlayerBetLimitUpdateMetaModel<T> : IMetalModelCustomerIdentity, IMetaModelProduct

@@ -64,12 +64,12 @@
         [AjaxRequest]
         [ValidatePermissionOnData(isObject: true)]
         [FunctionAuthorization(PermissionKeys.PlayerAdminBetLimit_Write)]
-        public async Task<JsonResult> UpdateSetting(PlayerBetLimitUpdateMetaModel<string> metaModel)
+        public async Task<JsonResult> UpdateSetting(PlayerBetLimitUpdateMetaModel<AgCasinoBetLimitMetaModel> metaModel)
         {
             var user = SessionService.UserSession;
             var licenseeName = SessionService.LicenseeSession.LicenseeName;
 
-            if (metaModel.Setting is null || string.IsNullOrWhiteSpace(metaModel.Setting.FirstOrDefault()))
+            if (metaModel.Setting is null || string.IsNullOrWhiteSpace(metaModel.Setting.FirstOrDefault()?.Group))
             {
                 return Json(new { Code = 1, Message = ViewResources.InvalidParams });
             }

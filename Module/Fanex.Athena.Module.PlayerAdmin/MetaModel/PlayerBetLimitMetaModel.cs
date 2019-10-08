@@ -14,6 +14,14 @@
 
         public decimal MaxPerBall { get; set; }
 
+        public decimal OldMinBet { get; set; }
+
+        public decimal OldMaxBet { get; set; }
+
+        public decimal OldMaxPerMatch { get; set; }
+
+        public decimal OldMaxPerBall { get; set; }
+
         public bool IsUpdated { get; set; }
     }
 }

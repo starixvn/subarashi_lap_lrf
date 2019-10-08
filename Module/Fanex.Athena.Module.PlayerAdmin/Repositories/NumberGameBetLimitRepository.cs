@@ -119,10 +119,10 @@
             {
                 var item = setting.FirstOrDefault(x => x.Id == type);
 
-                db.SetParameterValue("minbetv" + item.Id, item?.MinBet);
-                db.SetParameterValue("maxbetv" + item.Id, item?.MaxBet);
-                db.SetParameterValue("maxpermatchv" + item.Id, item?.MaxPerMatch);
-                db.SetParameterValue("maxperballv" + item.Id, item?.MaxPerBall);
+                db.SetParameterValue("minbetv" + type, item?.MinBet);
+                db.SetParameterValue("maxbetv" + type, item?.MaxBet);
+                db.SetParameterValue("maxpermatchv" + type, item?.MaxPerMatch);
+                db.SetParameterValue("maxperballv" + type, item?.MaxPerBall);
             }
         }
     }

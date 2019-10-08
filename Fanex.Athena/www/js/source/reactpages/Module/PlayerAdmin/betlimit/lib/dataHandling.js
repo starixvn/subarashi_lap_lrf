@@ -20,7 +20,10 @@ export default class DataHandling {
             BetValueMin: rawData.BetValueMin,
             BetValueMax: rawData.BetValueMax,
             MaxPerMatchMin: rawData.MaxPerMatchMin,
-            MaxPerMatchMax: rawData.MaxPerMatchMax
+            MaxPerMatchMax: rawData.MaxPerMatchMax,
+            OldMinBet: rawData.MinBet,
+            OldMaxBet: rawData.MaxBet,
+            OldMaxPerMatch: rawData.MaxPerMatch,
         };
 
         row.OriginalMinBet = row.MinBet;
@@ -38,6 +41,9 @@ export default class DataHandling {
             MinBet: Utility.getValueAsNumber(row.MinBet),
             MaxBet: Utility.getValueAsNumber(row.MaxBet),
             MaxPerMatch: Utility.getValueAsNumber(row.MaxPerMatch),
+            OldMinBet: row.OldMinBet,
+            OldMaxBet: row.OldMaxBet,
+            OldMaxPerMatch: row.OldMaxPerMatch,
             IsUpdated: row.MinBet !== row.OriginalMinBet
                 || row.MaxBet !== row.OriginalMaxBet
                 || row.MaxPerMatch !== row.OriginalMaxPerMatch

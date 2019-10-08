@@ -41,14 +41,14 @@ export class AGCDataContent extends PureComponent {
     }
 
     onSubmit = () => {
-        const { selectedGroup, data } = this.state;
+        const { selectedGroup, data, setting } = this.state;
         const invalid = this._isDisabledButton(data, selectedGroup);
 
         if (invalid) {
             this.setState({ disabledButton: true });
         }
         else {
-            this._showConfirmation(() => this._submit(selectedGroup));
+            this._showConfirmation(() => this._submit(selectedGroup, setting.BetSetting.AgGroup));
         }
     }
 
@@ -96,10 +96,10 @@ export class AGCDataContent extends PureComponent {
         DataTransfer.getData(param, this._updateState.bind(this), null, this._handleError.bind(this));
     }
 
-    _submit(group) {
+    _submit(group, oldGroup) {
         this.props.toggleLoader(true);
 
-        const param = Object.assign({}, this.props.requestParam, { Setting: [group] });
+        const param = Object.assign({}, this.props.requestParam, { Setting: [{ group, oldGroup }] });
 
         DataTransfer.updateData(param, this._showSubmitResult.bind(this), () => this.props.toggleLoader(false), this._handleError.bind(this));
     }
