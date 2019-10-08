@@ -21,6 +21,7 @@ using Fanex.Athena.Extension.Utility.Internal;
 using Fanex.Athena.Module.PlayerAdmin.Services;
 using Fanex.Athena.Module.PlayerAdmin.Services.Interfaces;
 using Fanex.Athena.Service.StatelessCore;
+using Fanex.Athena.Service.StatelessCore.Extensions;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
 using Fanex.Logging;
 using ONEbook.UM.Services;
@@ -70,7 +71,7 @@ namespace Fanex.Athena
                 )).As<IPlayerStatementService>()
                 .InstancePerDependency();
             var container = builder.Build();
-
+            builder.RegisterOnebookSecurity();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
         }
