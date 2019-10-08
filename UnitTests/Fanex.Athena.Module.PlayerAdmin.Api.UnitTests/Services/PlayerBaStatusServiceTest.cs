@@ -1,6 +1,6 @@
 ﻿using Fanex.Athena.Extension.Utility.Interfaces;
-using Fanex.Athena.Model.Auth.DataDomain;
 using Fanex.Athena.Model.Core.DataDomain;
+using Fanex.Athena.Module.PlayerAdmin.Api.DataDomains;
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.Services;
 using Fanex.Athena.Service.StatelessCore.Interfaces;

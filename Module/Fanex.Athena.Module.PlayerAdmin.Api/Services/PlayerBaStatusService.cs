@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Globalization;
+using Autofac.Features.AttributeFilters;
 using Fanex.Athena.Extension.Utility.Interfaces;
-using Fanex.Athena.Model.Auth.DataDomain;
 using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Model.Core.ViewModel;
+using Fanex.Athena.Module.PlayerAdmin.Api.DataDomains;
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.Services.Interfaces;
-using Fanex.Athena.Module.PlayerAdmin.Api.Utilities;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
 
 namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
@@ -17,7 +17,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
 
         private readonly IBusinessLogService _businessLogService;
 
-        public PlayerBaStatusService(IDbFactory dbFactory, IBusinessLogService businessLogService)
+        public PlayerBaStatusService(IDbFactory dbFactory, [KeyFilter("PlayerAdminCommonCustomerSettingLogService")]IBusinessLogService businessLogService)
         {
             _dbFactory = dbFactory;
             _businessLogService = businessLogService;
@@ -61,9 +61,9 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
                 CustId = metaModel.CustId,
                 ActionId = LogActionId.PlayerAdminUpdateBAStatus,
                 ActionDetailId = LogActionDetailId.PlayerAdminActionUpdateBA,
-                Status = result.Success ? LogTextConstants.Success : LogTextConstants.False,
-                NewValue = metaModel.IsBa ? LogTextConstants.On : LogTextConstants.Off,
-                OldValue = !metaModel.IsBa ? LogTextConstants.On : LogTextConstants.Off
+                Status = result.Success ? LogText.Success : LogText.False,
+                NewValue = metaModel.IsBa ? LogText.On : LogText.Off,
+                OldValue = !metaModel.IsBa ? LogText.On : LogText.Off
             };
             _businessLogService.Write(BusinessLogType.CustomerUpdateBA, logMetaModel);
 

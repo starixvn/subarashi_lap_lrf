@@ -1,4 +1,4 @@
-﻿namespace Fanex.Athena.Model.Auth.DataDomain
+﻿namespace Fanex.Athena.Module.PlayerAdmin.Api.DataDomains
 {
     public static class LogActionDetailId
     {

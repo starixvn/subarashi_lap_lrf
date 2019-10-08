@@ -1,6 +1,6 @@
-﻿namespace Fanex.Athena.Module.PlayerAdmin.Api.Utilities
+﻿namespace Fanex.Athena.Module.PlayerAdmin.Api.DataDomains
 {
-    public static class LogTextConstants
+    public static class LogText
     {
         public const string Success = "Success";
 
