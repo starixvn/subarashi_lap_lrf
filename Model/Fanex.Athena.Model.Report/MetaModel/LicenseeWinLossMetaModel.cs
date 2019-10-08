@@ -14,8 +14,6 @@ namespace Fanex.Athena.Model.Report.MetaModel
 
         public int DrawFilter { get; set; }
 
-        public bool IsExcludedTestData { get; set; }
-
         public string DrillDownCurrencyName { get; set; }
 
         public string SortBy { get; set; }

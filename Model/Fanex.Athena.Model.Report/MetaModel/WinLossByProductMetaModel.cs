@@ -6,7 +6,6 @@
 
 namespace Fanex.Athena.Model.Report.MetaModel
 {
-    using Fanex.Athena.Model.Core.MetaModel;
     using System;
 
     public class WinLossByProductMetaModel : BaseReportMetaModel
@@ -18,8 +17,6 @@ namespace Fanex.Athena.Model.Report.MetaModel
         public byte ReportBy { get; set; }
 
         public int DrawFilter { get; set; }
-
-        public bool IsExcludedTestData { get; set; }
 
         /// <summary>
         /// Gets or sets level.

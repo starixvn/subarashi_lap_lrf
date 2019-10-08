@@ -6,13 +6,12 @@
 
 namespace Fanex.Athena.Model.Report.MetaModel
 {
-    using Fanex.Athena.Model.Core.DataDomain;
-    using Fanex.Athena.Model.Core.MetaModel;
     using System;
     using System.Collections.Generic;
-    using DataDomain = Model.Core.DataDomain;
+    using Fanex.Athena.Model.Core.DataDomain;
+    using DataDomain = Core.DataDomain;
 
-    public class PlatformWinLossMetaModel : BaseReportMetaModel, IMetaModelValidation
+    public class PlatformWinLossMetaModel : BaseReportMetaModel
     {
         public PlatformWinLossMetaModel()
         {
@@ -51,8 +50,6 @@ namespace Fanex.Athena.Model.Report.MetaModel
         public int DrawFilter { get; set; }
 
         public int PlatformType { get; set; }
-
-        public bool IsExcludedTestData { get; set; }
 
         public string SortBy { get; set; }
 

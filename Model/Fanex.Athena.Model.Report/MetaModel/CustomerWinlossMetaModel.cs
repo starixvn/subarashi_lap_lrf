@@ -22,8 +22,6 @@ namespace Fanex.Athena.Model.Report.MetaModel
 
         public bool IsHistory { get; set; }
 
-        public bool IsExcludedTestData { get; set; }
-
         public int OrderItem { get; set; }
 
         public bool IsAscSort { get; set; }

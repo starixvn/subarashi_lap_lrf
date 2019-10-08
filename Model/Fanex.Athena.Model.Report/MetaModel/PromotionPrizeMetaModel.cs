@@ -3,7 +3,7 @@
     using Fanex.Athena.Model.Core.MetaModel;
     using System;
 
-    public class PromotionPrizeMetaModel : IMetaModelValidation, IMetaModelCurrency
+    public class PromotionPrizeMetaModel : IMetaModelValidation, IMetaModelCurrency, IMetaModelAgent
     {
         public DateTime FromDate { get; set; }
 
