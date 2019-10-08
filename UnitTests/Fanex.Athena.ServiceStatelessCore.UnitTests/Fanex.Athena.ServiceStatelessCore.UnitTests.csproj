@@ -97,6 +97,7 @@
     <Compile Include="AuthorizationServiceTest.cs" />
     <Compile Include="BetListApiClientTest.cs" />
     <Compile Include="BetTypeServiceTest.cs" />
+    <Compile Include="BusinessLogServiceTest.cs" />
     <Compile Include="FunctionServiceTest.cs" />
     <Compile Include="FunctionStorageTest.cs" />
     <Compile Include="LicenseeSettingServiceTest.cs" />
