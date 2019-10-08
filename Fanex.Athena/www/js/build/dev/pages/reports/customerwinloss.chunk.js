@@ -6816,8 +6816,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
         const bacommColumn =
         {
-            name: 'bAComm',
-            index: 'bAComm',
+            name: 'baComm',
+            index: 'baComm',
             width: 100,
             align: 'right',
             sortable: true,
