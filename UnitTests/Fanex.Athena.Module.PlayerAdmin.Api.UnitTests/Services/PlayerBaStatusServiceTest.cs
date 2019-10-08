@@ -28,7 +28,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
         }
 
         [Test]
-        public void Update_WhenCall_AssignCorrectParam()
+        public void Update_WhenCall_AssignCorrectParamAndWriteLog()
         {
             // Arrange
             var objectDb = Substitute.For<IObjectDb>();
@@ -71,7 +71,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
 
                 businessLogService.Received(1).Write(BusinessLogType.CustomerUpdateBA,
                     Arg.Is<PlayerUpdatingLogMetaModel>(x => x.CustId == metaModel.CustId && x.UserId == metaModel.UserId &&
-                    x.ActionId == LogActionId.PlayerAdminUpdateBAStatus && x.ActionDetailId == LogActionDetailId.PlayerAdminActionUpdateBA));
+                    x.ActionId == LogActionId.PlayerAdminUpdateBAStatus && x.ActionDetailId == LogActionDetailId.UpdatingBA));
             });
         }
     }

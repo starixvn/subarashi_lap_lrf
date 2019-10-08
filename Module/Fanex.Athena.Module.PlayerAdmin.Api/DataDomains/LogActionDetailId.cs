@@ -2,6 +2,10 @@
 {
     public static class LogActionDetailId
     {
-        public const int PlayerAdminActionUpdateBA = 3;
+        public const int UpdatingOddsGroup = 2;
+
+        public const int UpdatingBA = 3;
+
+        public const int UpdatingSpecialLevel = 4;
     }
 }

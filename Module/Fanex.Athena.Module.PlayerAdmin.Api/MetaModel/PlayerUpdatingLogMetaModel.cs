@@ -2,6 +2,8 @@
 {
     public class PlayerUpdatingLogMetaModel
     {
+        public int LicenseeCustId { get; set; }
+
         public int UserId { get; set; }
 
         public int CustId { get; set; }

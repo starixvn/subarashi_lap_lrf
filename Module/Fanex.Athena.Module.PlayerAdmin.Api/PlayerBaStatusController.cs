@@ -1,11 +1,11 @@
-﻿using Fanex.Athena.Api.StatelessBase;
+﻿using System.Web.Http;
+using Fanex.Athena.Api.StatelessBase;
 using Fanex.Athena.Api.StatelessBase.Attributes;
 using Fanex.Athena.Model.Auth.DataDomain;
 using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Model.Core.ViewModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.Services.Interfaces;
-using System.Web.Http;
 
 namespace Fanex.Athena.Module.PlayerAdmin.Api
 {
@@ -27,6 +27,5 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api
         {
             return _playerBaStatusService.Update(metaModel);
         }
-
     }
 }

@@ -118,7 +118,6 @@
     <Compile Include="PlayerBaStatusController.cs" />
     <Compile Include="PlayerBettingStatisticsController.cs" />
     <Compile Include="PlayerListController.cs" />
-    <Compile Include="PlayerLogController.cs" />
     <Compile Include="PlayerOddsGroupController.cs" />
     <Compile Include="PlayerSpecialLevelController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

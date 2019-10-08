@@ -147,9 +147,8 @@ namespace Fanex.Athena.Api.StatelessBase.Attributes
             var balanceUpDataAccess = actionContext.Request.GetDependencyScope().Resolve<IBalanceUpDataAccess>();
             var item = actionContext.ActionArguments.Where(x => x.Value is IMetaModelBalanceUpAndMoveBet)
              .Select(x => x).FirstOrDefault();
-            var value = item.Value as IMetaModelBalanceUpAndMoveBet;
 
-            if (value != null)
+            if (item.Value is IMetaModelBalanceUpAndMoveBet value)
             {
                 var temp = balanceUpDataAccess.GetBalanceUp();
                 value.BalanceUpDay = temp.BalanceUpDay;

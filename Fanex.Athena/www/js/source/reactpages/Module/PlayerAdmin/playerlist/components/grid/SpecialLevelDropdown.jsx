@@ -39,10 +39,12 @@ const SpecialLevelDropdown = (props) => {
         const confirmProps = {
             onClick: () => {
                 if (currentActivePlayer && value !== currentActivePlayer.specialLevel) {
-                    const { ibcCustId } = currentActivePlayer;
+                    const { ibcCustId, licenseeCustId, specialLevel } = currentActivePlayer;
                     const param = {
                         custId: ibcCustId,
-                        specialLevel: value
+                        specialLevel: value,
+                        oldValue: specialLevel,
+                        licenseeCustId
                     }
 
                     toggleLoader(true);

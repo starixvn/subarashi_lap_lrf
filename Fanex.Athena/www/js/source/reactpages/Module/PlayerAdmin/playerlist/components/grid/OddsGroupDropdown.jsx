@@ -39,10 +39,12 @@ export const OddsGroupDropdown = (props) => {
         const confirmProps = {
             onClick: () => {
                 if (currentActivePlayer && value !== currentActivePlayer.oddsGroup) {
-                    const { ibcCustId } = currentActivePlayer;
+                    const { ibcCustId, licenseeCustId, oddsGroup } = currentActivePlayer;
                     const param = {
                         custId: ibcCustId,
-                        oddsGroup: value
+                        oddsGroup: value,
+                        oldValue: oddsGroup,
+                        licenseeCustId
                     }
 
                     toggleLoader(true);

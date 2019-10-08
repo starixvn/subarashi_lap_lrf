@@ -1,6 +1,9 @@
 ﻿using Fanex.Athena.Extension.Utility.Interfaces;
+using Fanex.Athena.Model.Core.DataDomain;
+using Fanex.Athena.Module.PlayerAdmin.Api.DataDomains;
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.Services;
+using Fanex.Athena.Service.StatelessCore.Interfaces;
 using Fanex.Data;
 using NSubstitute;
 using NUnit.Framework;
@@ -25,7 +28,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
         }
 
         [Test]
-        public void Update_WhenCall_AssignCorrectParam()
+        public void Update_WhenCall_AssignCorrectParamAndWriteLog()
         {
             // Arrange
             var objectDb = Substitute.For<IObjectDb>();
@@ -36,9 +39,13 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
                 CustId = 2,
                 Ip = "127.0.0.1",
                 Language = "en-US",
-                OddsGroup = "C"
+                OddsGroup = "C",
+                SiteName = "sitenametest",
+                OldValue = "A",
+                LicenseeCustId = 11
             };
-            var service = new PlayerOddsGroupService(_dbFactory);
+            var businessLogService = Substitute.For<IBusinessLogService>();
+            var service = new PlayerOddsGroupService(_dbFactory, businessLogService);
 
             // Action
             var result = service.Update(metaModel);
@@ -57,6 +64,11 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
                 objectDb.Received(1).ExecuteNonQuery();
 
                 Assert.That(result, Is.Not.Null);
+
+                businessLogService.Received(1).Write(BusinessLogType.CustomerUpdateOddsGroup,
+                    Arg.Is<PlayerUpdatingLogMetaModel>(x => x.CustId == metaModel.CustId && x.UserId == metaModel.UserId &&
+                    x.ActionId == LogActionId.PlayerAdminUpdateOddsGroup && x.ActionDetailId == LogActionDetailId.UpdatingOddsGroup &&
+                    x.SiteName == metaModel.SiteName && x.OldValue == metaModel.OldValue && x.LicenseeCustId == metaModel.LicenseeCustId));
             });
         }
     }

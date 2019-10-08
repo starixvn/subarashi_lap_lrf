@@ -17,7 +17,8 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
 
         private readonly IBusinessLogService _businessLogService;
 
-        public PlayerBaStatusService(IDbFactory dbFactory, [KeyFilter("PlayerAdminCommonCustomerSettingLogService")]IBusinessLogService businessLogService)
+        public PlayerBaStatusService(IDbFactory dbFactory,
+            [KeyFilter("PlayerAdminCommonCustomerSettingLogService")]IBusinessLogService businessLogService)
         {
             _dbFactory = dbFactory;
             _businessLogService = businessLogService;
@@ -56,11 +57,12 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
 
             var logMetaModel = new PlayerUpdatingLogMetaModel
             {
+                LicenseeCustId = metaModel.LicenseeCustId,
                 SiteName = metaModel.SiteName,
                 UserId = metaModel.UserId,
                 CustId = metaModel.CustId,
                 ActionId = LogActionId.PlayerAdminUpdateBAStatus,
-                ActionDetailId = LogActionDetailId.PlayerAdminActionUpdateBA,
+                ActionDetailId = LogActionDetailId.UpdatingBA,
                 Status = result.Success ? LogText.Success : LogText.False,
                 NewValue = metaModel.IsBa ? LogText.On : LogText.Off,
                 OldValue = !metaModel.IsBa ? LogText.On : LogText.Off

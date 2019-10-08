@@ -4,7 +4,7 @@ using Fanex.Athena.Model.Core.MetaModel;
 
 namespace Fanex.Athena.Module.PlayerAdmin.Api.MetaModel
 {
-    public class PlayerUpdatingBaseMetaModel : IMetalModelCustomerIdentity, IMetaModelIp, IMetaModelUserId, IMetaModelLanguage
+    public class PlayerUpdatingBaseMetaModel : IMetalModelCustomerIdentity, IMetaModelIp, IMetaModelUserId, IMetaModelLanguage, IMetaModelSiteName
     {
         public IEnumerable<OneAuthCurrency> CurrencyPermission { get; set; }
 
@@ -17,5 +17,11 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.MetaModel
         public string Language { get; set; }
 
         public int CurrencyId { get; set; }
+
+        public string SiteName { get; set; }
+
+        public string OldValue { get; set; }
+
+        public int LicenseeCustId { get; set; }
     }
 }

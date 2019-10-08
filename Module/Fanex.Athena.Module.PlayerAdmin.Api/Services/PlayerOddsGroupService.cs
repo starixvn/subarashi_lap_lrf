@@ -1,8 +1,12 @@
-﻿using Fanex.Athena.Extension.Utility.Interfaces;
+﻿using System;
+using Autofac.Features.AttributeFilters;
+using Fanex.Athena.Extension.Utility.Interfaces;
+using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Model.Core.ViewModel;
+using Fanex.Athena.Module.PlayerAdmin.Api.DataDomains;
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.Services.Interfaces;
-using System;
+using Fanex.Athena.Service.StatelessCore.Interfaces;
 
 namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
 {
@@ -10,14 +14,19 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
     {
         private readonly IDbFactory _dbFactory;
 
-        public PlayerOddsGroupService(IDbFactory dbFactory)
+        private readonly IBusinessLogService _businessLogService;
+
+        public PlayerOddsGroupService(IDbFactory dbFactory,
+            [KeyFilter("PlayerAdminCommonCustomerSettingLogService")]IBusinessLogService businessLogService)
         {
             _dbFactory = dbFactory;
+            _businessLogService = businessLogService;
         }
 
         public ResultViewModel Update(OddsGroupUpdatingMetaModel metaModel)
         {
             const string UspName = "Lrf_CustomerUpdUgroup";
+            ResultViewModel result;
 
             using (var db = _dbFactory.GetObjectDb(UspName))
             {
@@ -34,13 +43,29 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
                 var code = Convert.ToInt32(db.GetParameterValue("ErrCode"));
                 var message = Convert.ToString(db.GetParameterValue("ErrMsg"));
 
-                return new ResultViewModel
+                result = new ResultViewModel
                 {
                     Success = code == 0,
                     Message = message,
                     ErrorCode = code
                 };
             }
+
+            var logMetaModel = new PlayerUpdatingLogMetaModel
+            {
+                LicenseeCustId = metaModel.LicenseeCustId,
+                SiteName = metaModel.SiteName,
+                UserId = metaModel.UserId,
+                CustId = metaModel.CustId,
+                ActionId = LogActionId.PlayerAdminUpdateOddsGroup,
+                ActionDetailId = LogActionDetailId.UpdatingOddsGroup,
+                Status = result.Success ? LogText.Success : LogText.False,
+                NewValue = metaModel.OddsGroup,
+                OldValue = metaModel.OldValue
+            };
+            _businessLogService.Write(BusinessLogType.CustomerUpdateOddsGroup, logMetaModel);
+
+            return result;
         }
     }
 }

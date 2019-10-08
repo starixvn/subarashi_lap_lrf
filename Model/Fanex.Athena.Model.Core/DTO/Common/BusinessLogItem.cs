@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Fanex.Athena.Model.Core.DTO.Common
+﻿namespace Fanex.Athena.Model.Core.DTO.Common
 {
     public class BusinessLogItem
     {
@@ -16,5 +10,6 @@ namespace Fanex.Athena.Model.Core.DTO.Common
 
         public string Doing { get; set; }
 
+        public byte Duration { get; set; }
     }
 }
