@@ -107,7 +107,7 @@
         }
 
         [Test]
-        public void GetBalanceUpDay_WhenObjectDbThrowsException_WriteLog()
+        public void GetBalanceUpDay_WhenThrowsException_WriteLog()
         {
             // Arrange
             var exception = new Exception();
