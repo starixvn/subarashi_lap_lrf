@@ -12,13 +12,13 @@ namespace Fanex.Athena.Service.StatelessCore.Extensions
     {
         public static void RegisterOnebookSecurity(this ContainerBuilder builder)
         {
-            builder.Register<IStorageProvider>(x =>
+            builder.Register<SqlServerProvider>(x =>
             {
                 var encryptedConnectionString = ConfigurationManager.ConnectionStrings["ConnectionString_ClearinghouseDB"].ConnectionString;
                 var descryptor = new ConnectionStringDecryptor();
                 var connectionString = descryptor.Decrypt(encryptedConnectionString);
                 return new SqlServerProvider(connectionString);
-            }).SingleInstance();
+            }).As<IStorageProvider>().SingleInstance();
         }
     }
 }
