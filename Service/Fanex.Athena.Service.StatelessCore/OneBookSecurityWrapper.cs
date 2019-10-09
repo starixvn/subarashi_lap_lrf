@@ -15,18 +15,15 @@
 
         public OneAuthToken Authenticate(string token)
         {
-            OneAuthToken result = null;
             try
             {
                 var oneBookSecurity = new Auth<OneAuthToken>(_storageProvider);
-                oneBookSecurity.Authenticate(token, ref result);
+                return oneBookSecurity.Authenticate(token);
             }
             catch (Exception exception)
             {
                 throw new Exception("An error occurred when processing LAP.Token", exception);
             }
-
-            return result;
         }
     }
 }
