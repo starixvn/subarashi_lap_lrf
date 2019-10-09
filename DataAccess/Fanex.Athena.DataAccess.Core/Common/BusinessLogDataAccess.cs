@@ -15,7 +15,7 @@ namespace Fanex.Athena.DataAccess.Core.Common
             _logger = logger;
         }
 
-        public void Write(BusinessLogItem bussinessLogItem)
+        public void Write(BusinessLogItem businessLogItem)
         {
             const string UspName = "WriteLog_UserLog_UserControl";
 
@@ -23,7 +23,7 @@ namespace Fanex.Athena.DataAccess.Core.Common
             {
                 using (var db = base.GetObjectDb(UspName))
                 {
-                    db.ExecuteNonQuery(bussinessLogItem);
+                    db.ExecuteNonQuery(businessLogItem);
                 }
             }
             catch (Exception ex)

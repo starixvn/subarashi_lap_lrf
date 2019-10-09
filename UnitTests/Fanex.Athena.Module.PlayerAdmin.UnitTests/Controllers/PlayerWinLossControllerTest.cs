@@ -19,7 +19,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers
     {
         private IReportAPIClient _reportApiClient;
 
-        [OneTimeSetUp]
+        [SetUp]
         public override void FixtureSetUp()
         {
             base.FixtureSetUp();

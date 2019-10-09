@@ -88,6 +88,7 @@
     <Compile Include="Controllers\NumberGameBetLimitControllerTest.cs" />
     <Compile Include="Controllers\PlayerBetlistControllerTest.cs" />
     <Compile Include="Controllers\PlayerBetLimitControllerTest.cs" />
+    <Compile Include="Controllers\PlayerBtcSingleCustomerControllerTest.cs" />
     <Compile Include="Controllers\PlayerStatementControllerTest.cs" />
     <Compile Include="Controllers\PlayerWinLossControllerTest.cs" />
     <Compile Include="Controllers\SportBookBetLimitControllerTest.cs" />
