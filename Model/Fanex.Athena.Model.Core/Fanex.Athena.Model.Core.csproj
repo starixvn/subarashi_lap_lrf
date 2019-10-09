@@ -80,6 +80,7 @@
   <ItemGroup>
     <Compile Include="Constants\SystemEnvironment.cs" />
     <Compile Include="DataDomain\BaseCurrencyType.cs" />
+    <Compile Include="DataDomain\UserControlLogType.cs" />
     <Compile Include="DataDomain\BusinessLogType.cs" />
     <Compile Include="DataDomain\Currency.cs" />
     <Compile Include="DataDomain\BetType.cs" />
