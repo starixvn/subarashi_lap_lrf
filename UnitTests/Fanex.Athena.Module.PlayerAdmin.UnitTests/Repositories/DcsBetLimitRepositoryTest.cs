@@ -108,7 +108,6 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Repositories
                 _objectDb.Received(1).SetParameterValue("custid", metaModel.CustId);
                 _objectDb.Received(1).SetParameterValue("userid", metaModel.UserId);
                 _objectDb.Received(1).SetParameterValue("ip", metaModel.Ip);
-                _objectDb.Received(1).SetParameterValue("userid", metaModel.UserId);
                 _objectDb.Received(1).SetParameterValue("errcode", null);
                 _objectDb.Received(1).SetParameterValue("errmsg", null);
             });

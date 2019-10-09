@@ -98,6 +98,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AGCasinoBetLimitRepositoryTest.cs" />
     <Compile Include="Repositories\DcsBetLimitRepositoryTest.cs" />
+    <Compile Include="Repositories\NumberGameBetLimitRepositoryTest.cs" />
+    <Compile Include="Repositories\PlayerBetLimitRepositoryTest.cs" />
     <Compile Include="TestUtility.cs" />
   </ItemGroup>
   <ItemGroup>
