@@ -36,7 +36,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Repositories
         }
 
         [Test]
-        public async Task GetBetSettingAsync_WhenCall_AssignParamCorrectly()
+        public async Task GetBetSettingAsync_WhenCall_AssignCorrectParamAndReturnCorrectData()
         {
             // Arrange
             const string UspName = "Lrf_AGC_SelCustSetting";
@@ -58,26 +58,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Repositories
                 _objectDb.Received(1).SetParameterValue("IsEnabled", null);
                 _objectDb.Received(1).SetParameterValue("IsLineEnabled", null);
                 _objectDb.Received(1).SetParameterValue("CheckedGroups", null);
-            });
-        }
 
-        [Test]
-        public async Task GetBetSettingAsync_WhenCall_ReturnCorrectData()
-        {
-            // Arrange
-            const string UspName = "Lrf_AGC_SelCustSetting";
-            var expectedResult = FakeHelper.Create<AgCasinoBetSetting>();
-            FakeAgCasinoBetSetting(_objectDb, expectedResult);
-            _db.GetObjectDb(UspName).Returns(_objectDb);
-
-            var repository = new AGCasinoBetLimitRepository(_db);
-
-            // Action
-            var result = await repository.GetBetSettingAsync(CustId);
-
-            // Assert
-            Assert.Multiple(() =>
-            {
                 Assert.That(result.CurrencyId, Is.EqualTo(expectedResult.CurrencyId));
                 Assert.That(result.AgGroup, Is.EqualTo(expectedResult.AgGroup));
                 Assert.That(result.IsEnabled, Is.EqualTo(expectedResult.IsEnabled));
@@ -87,12 +68,12 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Repositories
         }
 
         [Test]
-        public async Task UpdateSettingAsync_WhenCall_AssignParamCorrectly()
+        public async Task UpdateSettingAsync_WhenCall_AssignCorrectParamAndReturnCorrectResult()
         {
             // Arrange
             const string UspName = "Lrf_AGC_UpdCustSetting";
             var expectedResult = FakeHelper.Create<ResultInfo>();
-            FakeResultInfo(_objectDb, expectedResult);
+            TestUtility.FakeResultInfo(_objectDb, expectedResult);
             _db.GetObjectDb(UspName).Returns(_objectDb);
 
             var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<string>>();
@@ -111,27 +92,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Repositories
                 _objectDb.Received(1).SetParameterValue("custid", metaModel.CustId);
                 _objectDb.Received(1).SetParameterValue("ErrCode", null);
                 _objectDb.Received(1).SetParameterValue("ErrMsg", null);
-            });
-        }
 
-        [Test]
-        public async Task UpdateSettingAsync_WhenCall_ReturnCorrectResult()
-        {
-            // Arrange
-            const string UspName = "Lrf_AGC_UpdCustSetting";
-            var expectedResult = FakeHelper.Create<ResultInfo>();
-            FakeResultInfo(_objectDb, expectedResult);
-            _db.GetObjectDb(UspName).Returns(_objectDb);
-
-            var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<string>>();
-            var repository = new AGCasinoBetLimitRepository(_db);
-
-            // Action
-            var result = await repository.UpdateSettingAsync(metaModel);
-
-            // Assert
-            Assert.Multiple(() =>
-            {
                 Assert.That(result.Code, Is.EqualTo(expectedResult.Code));
                 Assert.That(result.Message, Is.EqualTo(expectedResult.Message));
             });
@@ -144,12 +105,6 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Repositories
             objectDb.GetParameterValue("IsEnabled").Returns(expectedBetSetting.IsEnabled);
             objectDb.GetParameterValue("IsLineEnabled").Returns(expectedBetSetting.IsLineEnabled);
             objectDb.GetParameterValue("CheckedGroups").Returns(string.Join(",", expectedBetSetting.CheckedGroups));
-        }
-
-        private static void FakeResultInfo(IObjectDb objectDb, ResultInfo expectedResultInfo)
-        {
-            objectDb.GetParameterValue("ErrCode").Returns(expectedResultInfo.Code);
-            objectDb.GetParameterValue("ErrMsg").Returns(expectedResultInfo.Message);
         }
     }
 }
