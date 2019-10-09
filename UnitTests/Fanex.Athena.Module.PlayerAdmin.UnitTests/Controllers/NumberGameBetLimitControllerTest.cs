@@ -9,7 +9,7 @@
     using Fanex.Athena.Module.PlayerAdmin.Controllers;
     using Fanex.Athena.Module.PlayerAdmin.DTO;
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
-    using Fanex.Athena.Module.PlayerAdmin.Repositories.Interfaces;
+    using Fanex.Athena.Module.PlayerAdmin.Services.Interfaces;
     using Fanex.Athena.Module.PlayerAdmin.ViewModels;
     using Fanex.Athena.Resources;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -20,7 +20,7 @@
 
     public class NumberGameBetLimitControllerTest : CultureBaseControllerHelperTest
     {
-        private INumberGameBetLimitRepository _repository;
+        private INumberGameBetLimitService _service;
 
         private IAuthorizationService _authService;
 
@@ -31,7 +31,7 @@
         {
             base.FixtureSetUp();
 
-            _repository = Substitute.For<INumberGameBetLimitRepository>();
+            _service = Substitute.For<INumberGameBetLimitService>();
             _authService = Substitute.For<IAuthorizationService>();
             _cacheRefAdapter = Substitute.For<ICacheRefAdapter>();
 
@@ -43,7 +43,7 @@
         {
             base.FixtureTearDown();
 
-            _repository = null;
+            _service = null;
             _authService = null;
             _cacheRefAdapter = null;
         }
@@ -62,7 +62,7 @@
 
                 var setting = FakeHelper.Create<PlayerBetLimit>(x => x.Id, 0);
                 var settings = new List<PlayerBetLimit> { setting };
-                _repository.GetSettingAsync(metaModel.CustId).Returns(Task.FromResult(settings.AsEnumerable()));
+                _service.GetSettingAsync(metaModel.CustId).Returns(Task.FromResult(settings.AsEnumerable()));
                 
                 var sportName = FakeHelper.Create<string>();
                 _cacheRefAdapter.GetSportName(setting.Id).Returns(sportName);
@@ -86,7 +86,7 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<PlayerBetLimitMetaModel>>();
+                var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>>>();
 
                 // Action
                 await controller.UpdateSetting(metaModel).ConfigureAwait(false);
@@ -108,10 +108,10 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<PlayerBetLimitMetaModel>>();
+                var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>>>();
 
                 var updateResult = new ResultInfo { Code = 1, Message = FakeHelper.Create<string>() };
-                _repository.UpdateSettingAsync(metaModel).Returns(Task.FromResult<IResultInfo>(updateResult));
+                _service.UpdateSettingAsync(metaModel).Returns(Task.FromResult<IResultInfo>(updateResult));
 
                 // Action
                 var result = await controller.UpdateSetting(metaModel).ConfigureAwait(false);
@@ -132,10 +132,10 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<PlayerBetLimitMetaModel>>();
+                var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>>>();
 
                 var updateResult = new ResultInfo { Code = 0, Message = FakeHelper.Create<string>() };
-                _repository.UpdateSettingAsync(metaModel).Returns(Task.FromResult<IResultInfo>(updateResult));
+                _service.UpdateSettingAsync(metaModel).Returns(Task.FromResult<IResultInfo>(updateResult));
 
                 // Action
                 var result = await controller.UpdateSetting(metaModel).ConfigureAwait(false);
@@ -157,7 +157,7 @@
                 SessionService,
                 _cacheRefAdapter,
                 _authService,
-                _repository)
+                _service)
             {
                 ControllerContext = ControllerContext
             };

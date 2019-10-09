@@ -1,6 +1,5 @@
 ﻿namespace Fanex.Athena.Module.PlayerAdmin.Repositories
 {
-    using System.Linq;
     using System.Threading.Tasks;
     using Fanex.Athena.Extension.Utility.Interfaces;
     using Fanex.Athena.Model.Core.DTO.Common;
@@ -56,7 +55,7 @@
 
         private static void AddUpdateParameter(IObjectDb db, PlayerBetLimitUpdateMetaModel<AgCasinoBetLimitMetaModel> metaModel)
         {
-            db.SetParameterValue("aggroup", metaModel.Setting.First().Group);
+            db.SetParameterValue("aggroup", metaModel.Setting.Group);
             db.SetParameterValue("ip", metaModel.Ip);
             db.SetParameterValue("language", metaModel.Language);
             db.SetParameterValue("userid", metaModel.UserId);

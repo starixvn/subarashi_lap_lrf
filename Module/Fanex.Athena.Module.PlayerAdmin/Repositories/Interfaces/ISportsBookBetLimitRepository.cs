@@ -1,4 +1,4 @@
-﻿namespace Fanex.Athena.Module.PlayerAdmin.Services.Interfaces
+﻿namespace Fanex.Athena.Module.PlayerAdmin.Repositories.Interfaces
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -6,10 +6,10 @@
     using Fanex.Athena.Module.PlayerAdmin.DTO;
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
 
-    public interface ISportBookBetLimitService
+    public interface ISportsBookBetLimitRepository
     {
         Task<IEnumerable<PlayerBetLimit>> GetSettingAsync(int custId, bool isShowMixedSport);
 
-        Task<IResultInfo> UpdateSettingAsync(PlayerBetLimitUpdateMetaModel<PlayerBetLimitMetaModel> metaModel, bool isShowMixedSport);
+        Task<IResultInfo> UpdateSettingAsync(PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>> metaModel, bool isShowMixedSport);
     }
 }

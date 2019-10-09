@@ -14,7 +14,7 @@
     using Fanex.Common.Extensions;
     using Fanex.Data;
 
-    public class SportBookBetLimitRepository : ISportBookBetLimitRepository
+    public class SportsBookBetLimitRepository : ISportsBookBetLimitRepository
     {
         private const string MixedSportId = "99MP";
 
@@ -32,7 +32,7 @@
 
         private readonly IDbFactory _db;
 
-        public SportBookBetLimitRepository(IDbFactory dbFactory)
+        public SportsBookBetLimitRepository(IDbFactory dbFactory)
         {
             _db = dbFactory;
         }
@@ -56,7 +56,7 @@
             return Enumerable.Empty<PlayerBetLimit>();
         }
 
-        public async Task<IResultInfo> UpdateSettingAsync(PlayerBetLimitUpdateMetaModel<PlayerBetLimitMetaModel> metaModel, bool isShowMixedSport)
+        public async Task<IResultInfo> UpdateSettingAsync(PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>> metaModel, bool isShowMixedSport)
         {
             const string UspName = "Lrf_CustomerUpdMember_All";
 
@@ -113,7 +113,7 @@
             return sport;
         }
 
-        private static void AddUpdateParameter(IObjectDb db, PlayerBetLimitUpdateMetaModel<PlayerBetLimitMetaModel> metaModel, bool isShowMixedSport)
+        private static void AddUpdateParameter(IObjectDb db, PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>> metaModel, bool isShowMixedSport)
         {
             db.SetParameterValue("licenseeName", metaModel.SiteName);
             db.SetParameterValue("ip", metaModel.Ip);

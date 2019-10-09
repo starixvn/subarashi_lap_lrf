@@ -76,7 +76,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Repositories
             TestUtility.FakeResultInfo(_objectDb, expectedResult);
             _db.GetObjectDb(UspName).Returns(_objectDb);
 
-            var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<string>>();
+            var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<AgCasinoBetLimitMetaModel>>();
             var repository = new AGCasinoBetLimitRepository(_db);
 
             // Action
@@ -85,7 +85,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Repositories
             // Assert
             Assert.Multiple(() =>
             {
-                _objectDb.Received(1).SetParameterValue("aggroup", metaModel.Setting.First());
+                _objectDb.Received(1).SetParameterValue("aggroup", metaModel.Setting.Group);
                 _objectDb.Received(1).SetParameterValue("ip", metaModel.Ip);
                 _objectDb.Received(1).SetParameterValue("language", metaModel.Language);
                 _objectDb.Received(1).SetParameterValue("userid", metaModel.UserId);

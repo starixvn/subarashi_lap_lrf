@@ -1,7 +1,6 @@
 ﻿namespace Fanex.Athena.Module.PlayerAdmin.MetaModel
 {
     using System.Collections.Generic;
-    using System.Linq;
     using Fanex.Athena.Model.Core.MetaModel;
 
     public class PlayerBetLimitUpdateMetaModel<T> : IMetalModelCustomerIdentity, IMetaModelProduct
@@ -20,6 +19,17 @@
 
         public int ProductId { get; set; }
 
-        public IEnumerable<T> Setting { get; set; }
+        public int LicenseeCustId { get; set; }
+
+        public T Setting { get; set; }
+
+        public PlayerBetLimitLogMetaModel CreateLogInfo(IEnumerable<PlayerBetLimitDetailedLogMetaModel> detail) => new PlayerBetLimitLogMetaModel
+        {
+            CustId = CustId,
+            UserId = UserId,
+            SiteName = SiteName,
+            LicenseeCustId = LicenseeCustId,
+            Detail = detail
+        };
     }
 }

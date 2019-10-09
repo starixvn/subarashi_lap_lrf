@@ -4,7 +4,6 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Fanex.Athena.Controllers.Base.UnitTests;
-
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Module.PlayerAdmin.Controllers;
@@ -19,7 +18,7 @@
     using NSubstitute;
     using NUnit.Framework;
 
-    public class SportBookBetLimitControllerTest : CultureBaseControllerHelperTest
+    public class SportsBookBetLimitControllerTest : CultureBaseControllerHelperTest
     {
         private const string MixedSportId = "99MP";
 
@@ -27,7 +26,7 @@
 
         private ICacheRefAdapter _cacheRefAdapter;
 
-        private ISportBookBetLimitService _service;
+        private ISportsBookBetLimitService _service;
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
@@ -36,7 +35,7 @@
 
             _authService = Substitute.For<IAuthorizationService>();
             _cacheRefAdapter = Substitute.For<ICacheRefAdapter>();
-            _service = Substitute.For<ISportBookBetLimitService>();
+            _service = Substitute.For<ISportsBookBetLimitService>();
 
             SetUpDefaultFakeData();
         }
@@ -86,7 +85,7 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<PlayerBetLimitMetaModel>>();
+                var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>>>();
 
                 // Action
                 await controller.UpdateSetting(metaModel).ConfigureAwait(false);
@@ -108,7 +107,7 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<PlayerBetLimitMetaModel>>();
+                var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>>>();
 
                 var updateResult = new ResultInfo { Code = 1, Message = FakeHelper.Create<string>() };
                 _service.UpdateSettingAsync(metaModel, AppSettings.IsShowMixedSport).Returns(Task.FromResult<IResultInfo>(updateResult));
@@ -132,7 +131,7 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<PlayerBetLimitMetaModel>>();
+                var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>>>();
 
                 var updateResult = new ResultInfo { Code = 0, Message = FakeHelper.Create<string>() };
                 _service.UpdateSettingAsync(metaModel, AppSettings.IsShowMixedSport).Returns(Task.FromResult<IResultInfo>(updateResult));
@@ -150,9 +149,9 @@
             }
         }
 
-        private SportBookBetLimitController CreateController()
+        private SportsBookBetLimitController CreateController()
         {
-            return new SportBookBetLimitController(
+            return new SportsBookBetLimitController(
                 LangService,
                 SessionService,
                 AppSettings,

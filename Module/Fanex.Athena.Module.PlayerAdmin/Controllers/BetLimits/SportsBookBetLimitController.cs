@@ -1,5 +1,6 @@
 ﻿namespace Fanex.Athena.Module.PlayerAdmin.Controllers
 {
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
@@ -16,17 +17,17 @@
     using Fanex.Athena.VendorAdapter.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
 
-    public class SportBookBetLimitController : PlayerBetLimitBaseControler
+    public class SportsBookBetLimitController : PlayerBetLimitBaseControler
     {
-        private readonly ISportBookBetLimitService _service;
+        private readonly ISportsBookBetLimitService _service;
 
-        public SportBookBetLimitController(
+        public SportsBookBetLimitController(
             ILanguageService languageService,
             ISessionService sessionService,
             IAppSettings appSettings,            
             ICacheRefAdapter cacheRefAdapter,
             IAuthorizationService authorizationService,
-            ISportBookBetLimitService sportBookBetLimitService)
+            ISportsBookBetLimitService sportBookBetLimitService)
             : base(languageService, sessionService, appSettings, cacheRefAdapter, authorizationService)
         {
             _service = sportBookBetLimitService;
@@ -56,7 +57,7 @@
         [AjaxRequest]
         [ValidatePermissionOnData(isObject:true)]
         [FunctionAuthorization(PermissionKeys.PlayerAdminBetLimit_Write)]
-        public async Task<JsonResult> UpdateSetting(PlayerBetLimitUpdateMetaModel<PlayerBetLimitMetaModel> metaModel)
+        public async Task<JsonResult> UpdateSetting(PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>> metaModel)
         {
             var user = SessionService.UserSession;
             AddUpdateInfo(metaModel, user.UserId, user.Language, SessionService.LicenseeSession.LicenseeName, Request.UserHostAddress);

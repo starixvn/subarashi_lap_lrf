@@ -79,7 +79,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Repositories
 
             var settingItem1 = FakeHelper.Create<PlayerBetLimitMetaModel>(x => x.Id, numberGameSportType);
             var settingList = new List<PlayerBetLimitMetaModel> { settingItem1 };
-            var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<PlayerBetLimitMetaModel>>();
+            var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>>>();
             metaModel.ProductId = ProductTypes.VirtualSports;
             metaModel.Setting = settingList;
 

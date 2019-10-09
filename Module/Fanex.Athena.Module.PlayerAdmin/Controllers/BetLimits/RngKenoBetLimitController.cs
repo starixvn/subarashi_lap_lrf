@@ -7,7 +7,7 @@
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Module.PlayerAdmin.DTO;
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
-    using Fanex.Athena.Module.PlayerAdmin.Repositories.Interfaces;
+    using Fanex.Athena.Module.PlayerAdmin.Services.Interfaces;
     using Fanex.Athena.Module.PlayerAdmin.ViewModels;
     using Fanex.Athena.Resources;
     using Fanex.Athena.Service.Core.Common.Interfaces;
@@ -19,17 +19,17 @@
     [ValidateProductPermission(ProductTypes.Keno)]
     public class RngKenoBetLimitController : PlayerBetLimitBaseControler
     {
-        private readonly IRngKenoBetLimitRepository _repository;
+        private readonly IRngKenoBetLimitService _service;
 
         public RngKenoBetLimitController(
             ILanguageService languageService,
             ISessionService sessionService,
             ICacheRefAdapter cacheRefAdapter,
             IAuthorizationService authorizationService,
-            IRngKenoBetLimitRepository rngKenoBetLimitRepository)
+            IRngKenoBetLimitService rngKenoBetLimitService)
             : base(languageService, sessionService, cacheRefAdapter, authorizationService)
         {
-            _repository = rngKenoBetLimitRepository;
+            _service = rngKenoBetLimitService;
         }
 
         [HttpPost]
@@ -38,7 +38,7 @@
         public async Task<JsonResult> GetSetting(PlayerBetLimitSelectMetaModel metaModel)
         {
             var isEditable = HasEditPermission();
-            var data = await _repository.GetSettingAsync(metaModel.CustId).ConfigureAwait(false);
+            var data = await _service.GetSettingAsync(metaModel.CustId).ConfigureAwait(false);
 
             var viewModel = new PlayerBetLimitViewModel
             {
@@ -53,12 +53,12 @@
         [AjaxRequest]
         [ValidatePermissionOnData(isObject:true)]
         [FunctionAuthorization(PermissionKeys.PlayerAdminBetLimit_Write)]
-        public async Task<JsonResult> UpdateSetting(PlayerBetLimitUpdateMetaModel<PlayerBetLimitMetaModel> metaModel)
+        public async Task<JsonResult> UpdateSetting(PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>> metaModel)
         {
             var user = SessionService.UserSession;
             AddUpdateInfo(metaModel, user.UserId, user.Language, SessionService.LicenseeSession.LicenseeName, Request.UserHostAddress);
 
-            var result = await _repository.UpdateSettingAsync(metaModel).ConfigureAwait(false);
+            var result = await _service.UpdateSettingAsync(metaModel).ConfigureAwait(false);
 
             if (result.Code == 0)
             {

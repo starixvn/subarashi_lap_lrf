@@ -51,7 +51,7 @@
             return sportList;
         }
 
-        public async Task<IResultInfo> UpdateSettingAsync(PlayerBetLimitUpdateMetaModel<PlayerBetLimitMetaModel> metaModel)
+        public async Task<IResultInfo> UpdateSettingAsync(PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>> metaModel)
         {
             const string UspName = "Lrf_CustomerUpdMember_MinMaxBetKN";
 
@@ -72,7 +72,7 @@
             }
         }
 
-        private static void AddUpdateParameter(IObjectDb db, PlayerBetLimitUpdateMetaModel<PlayerBetLimitMetaModel> metaModel)
+        private static void AddUpdateParameter(IObjectDb db, PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>> metaModel)
         {
             db.SetParameterValue("ip", metaModel.Ip);
             db.SetParameterValue("language", metaModel.Language);

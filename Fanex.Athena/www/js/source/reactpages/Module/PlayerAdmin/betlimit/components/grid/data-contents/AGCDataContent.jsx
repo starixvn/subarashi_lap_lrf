@@ -99,7 +99,7 @@ export class AGCDataContent extends PureComponent {
     _submit(group, oldGroup) {
         this.props.toggleLoader(true);
 
-        const param = Object.assign({}, this.props.requestParam, { Setting: [{ group, oldGroup }] });
+        const param = Object.assign({}, this.props.requestParam, { Setting: { group, oldGroup } });
 
         DataTransfer.updateData(param, this._showSubmitResult.bind(this), () => this.props.toggleLoader(false), this._handleError.bind(this));
     }

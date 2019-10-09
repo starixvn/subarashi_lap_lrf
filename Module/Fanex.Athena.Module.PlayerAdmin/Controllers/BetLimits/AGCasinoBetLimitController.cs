@@ -20,19 +20,15 @@
     {
         private readonly IAGCasinoBetLimitService _service;
 
-        private readonly IAGCasinoBetLimitRepository _repository;
-
         public AGCasinoBetLimitController(
             ILanguageService languageService,
             ISessionService sessionService,
             ICacheRefAdapter cacheRefAdapter,
             IAuthorizationService authorizationService,
-            IAGCasinoBetLimitService agCasinoBetLimitService,
-            IAGCasinoBetLimitRepository agCasinoBetLimitRepository)
+            IAGCasinoBetLimitService agCasinoBetLimitService)
             : base(languageService, sessionService, cacheRefAdapter, authorizationService)
         {
             _service = agCasinoBetLimitService;
-            _repository = agCasinoBetLimitRepository;
         }
 
         [HttpPost]
@@ -42,7 +38,7 @@
         {
             var isEditable = HasEditPermission();
             var getGroupBettingsTask = _service.GetGroupBettingsAsync(SessionService.LicenseeSession.LicenseeName, metaModel.CurrencyId);
-            var getSettingTask = _repository.GetBetSettingAsync(metaModel.CustId);
+            var getSettingTask = _service.GetBetSettingAsync(metaModel.CustId);
 
             await Task.WhenAll(getGroupBettingsTask, getSettingTask);
 
@@ -69,12 +65,12 @@
             var user = SessionService.UserSession;
             var licenseeName = SessionService.LicenseeSession.LicenseeName;
 
-            if (metaModel.Setting is null || string.IsNullOrWhiteSpace(metaModel.Setting.FirstOrDefault()?.Group))
+            if (metaModel.Setting is null)
             {
                 return Json(new { Code = 1, Message = ViewResources.InvalidParams });
             }
 
-            var setting = await _repository.GetBetSettingAsync(metaModel.CustId).ConfigureAwait(false);
+            var setting = await _service.GetBetSettingAsync(metaModel.CustId).ConfigureAwait(false);
 
             if (!setting.IsEnabled)
             {
@@ -82,7 +78,7 @@
             }
 
             AddUpdateInfo(metaModel, user.UserId, user.Language, licenseeName, Request.UserHostAddress);
-            var result = await _repository.UpdateSettingAsync(metaModel).ConfigureAwait(false);
+            var result = await _service.UpdateSettingAsync(metaModel).ConfigureAwait(false);
 
             if (result.Code == 0)
             {
