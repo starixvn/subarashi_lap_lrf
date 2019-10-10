@@ -81,8 +81,9 @@ namespace Fanex.Athena
 
             builder.RegisteModuleApiModule(moduleAssemblies, "Fanex.Athena.Module.Dashboard");
             builder.RegisteModuleModuleAndApi(moduleAssemblies, "Fanex.Athena.Module.Notification");
-            builder.RegisteModulePlayerAdmin(moduleAssemblies);
+
             builder.RegisteModulePlayerAdminApi(moduleAssemblies);
+            builder.RegisteModulePlayerAdmin(moduleAssemblies);
         }
 
         private static void RegisterHttpClient(ContainerBuilder builder)

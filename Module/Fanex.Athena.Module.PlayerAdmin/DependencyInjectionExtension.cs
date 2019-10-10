@@ -6,6 +6,7 @@
     using System.Reflection;
     using Autofac;
     using Autofac.Core;
+    using Autofac.Features.AttributeFilters;
     using Autofac.Integration.Mvc;
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Module.PlayerAdmin.Extensions;
@@ -26,6 +27,10 @@
                 .As<IPlayerStatementService>()
                 .InstancePerDependency();
 
+            builder.RegisterAssemblyTypes(items).AsImplementedInterfaces();
+
+            builder.RegisterControllers(items);
+
             builder.RegisterType<PlayerAdminBusinessLogBuilderFactory>()
                 .As<IBusinessLogBuilderFactory>()
                 .Keyed<IBusinessLogBuilderFactory>("PlayerAdminLogBuilder");
@@ -37,9 +42,12 @@
                    (pi, ctx) => ctx.ResolveKeyed<IBusinessLogBuilderFactory>("PlayerAdminLogBuilder")))
                    .Keyed<IBusinessLogService>("PlayerAdminLogService");
 
-            builder.RegisterAssemblyTypes(items).AsImplementedInterfaces();
-
-            builder.RegisterControllers(items);
+            // Specify WithAttributeFiltering for the consumer
+            builder.RegisterType<AGCasinoBetLimitService>().As<IAGCasinoBetLimitService>().WithAttributeFiltering();
+            builder.RegisterType<DcsBetLimitService>().As<IDcsBetLimitService>().WithAttributeFiltering();
+            builder.RegisterType<NumberGameBetLimitService>().As<INumberGameBetLimitService>().WithAttributeFiltering();
+            builder.RegisterType<RngKenoBetLimitService>().As<IRngKenoBetLimitService>().WithAttributeFiltering();
+            builder.RegisterType<SportsBookBetLimitService>().As<ISportsBookBetLimitService>().WithAttributeFiltering();
         }
     }
 }
