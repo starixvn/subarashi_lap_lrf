@@ -83,6 +83,7 @@ namespace Fanex.Athena.Controllers.Report
         [HttpPost]
         [CustomValidateAntiForgery]
         [ValidationWebRequest]
+        [AutoBindMetaModel(BindAgent = true)]
         public async Task<ActionResult> Excel(TurnoverMetaModel metaModel)
         {
             var licenseeSession = SessionService.LicenseeSession;
@@ -91,8 +92,6 @@ namespace Fanex.Athena.Controllers.Report
             var placeholderUsername = IsFakeLicensee(licenseeSession.LicenseeName) ? ViewResources.ExternalId : ViewResources.ExternalIdOrSystemId;
             metaModel.Username = string.IsNullOrWhiteSpace(metaModel.Username) ||
                 metaModel.Username.Trim() == placeholderUsername ? null : metaModel.Username;
-            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList
-                , metaModel.CurrencyId, metaModel.IsExcludeTest);
 
             var dataList = await _turnoverService.GetDataList(metaModel);
 

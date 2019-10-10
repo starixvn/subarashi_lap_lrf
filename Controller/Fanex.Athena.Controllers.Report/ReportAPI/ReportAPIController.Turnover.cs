@@ -10,7 +10,6 @@ namespace Fanex.Athena.Controllers.Report
     using System.Web.Mvc;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Report.MetaModel;
-    using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
 
     using Resources;
@@ -21,13 +20,13 @@ namespace Fanex.Athena.Controllers.Report
         [FunctionAuthorization(PermissionKeys.ReportTurnover)]
         [CustomValidateAntiForgery]
         [ValidationWebRequest]
+        [AutoBindMetaModel(BindAgent = true)]
         public async Task<ActionResult> Turnover(TurnoverMetaModel metaModel)
         {
             var placeholderUsername = IsFakeLicensee(SessionService.LicenseeSession.LicenseeName) ?
                 ViewResources.ExternalId :
                 ViewResources.ExternalIdOrSystemId;
             var userSession = SessionService.UserSession;
-            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId, metaModel.IsExcludeTest);
 
             metaModel.Username = string.IsNullOrWhiteSpace(metaModel.Username) ||
                 metaModel.Username.Trim() == placeholderUsername ? null : metaModel.Username;

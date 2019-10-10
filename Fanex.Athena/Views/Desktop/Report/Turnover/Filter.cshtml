@@ -31,14 +31,14 @@
         </div>
         <div class="row">
             @DesktopRazorHelper.RenderProductFilter(Model.Param.ProductOptions)
-            
+
             <div class="input-field input col l2 m3 s12 offset-l1">
-                <input type="radio" value="true" class="with-gap" @(Model.Param.IsExcludeTest == true ? "checked=checked" : "") name="IsExcludeTest" id="IsExcludeTest0" />
-                <label for="IsExcludeTest0">
+                <input type="radio" value="true" class="with-gap" @(Model.Param.IsExcludedTestData == true ? "checked=checked" : "") name="IsExcludedTestData" id="IsExcludedTestData0" />
+                <label for="IsExcludedTestData0">
                     @ViewResources.Yes
                 </label>
-                <input type="radio" class="with-gap" value="false" @(Model.Param.IsExcludeTest == false ? "checked=checked" : "") name="IsExcludeTest" id="IsExcludeTest1" />
-                <label for="IsExcludeTest1">
+                <input type="radio" class="with-gap" value="false" @(Model.Param.IsExcludedTestData == false ? "checked=checked" : "") name="IsExcludedTestData" id="IsExcludedTestData1" />
+                <label for="IsExcludedTestData1">
                     @ViewResources.No
                 </label>
 
@@ -67,5 +67,5 @@
             <input type="hidden" id="MinDate" value="@minDate.ToString("yyyy/M/d")" />
             <input type="hidden" id="MaxDate" value="@appSettings.MaxDate.ToString("yyyy/M/d")" />
         </div>
-                }
+    }
 </div>

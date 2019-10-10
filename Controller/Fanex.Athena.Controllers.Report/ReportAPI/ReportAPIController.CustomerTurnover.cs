@@ -11,10 +11,7 @@ namespace Fanex.Athena.Controllers.Report
     using System.Web.Mvc;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Report.MetaModel;
-    using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
-
-    using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
 
     public partial class ReportAPIController : NonCultureBaseController
@@ -39,12 +36,11 @@ namespace Fanex.Athena.Controllers.Report
         [FunctionAuthorization(PermissionKeys.ReportCustomerTurnover)]
         [CustomValidateAntiForgery]
         [ValidationWebRequest]
+        [AutoBindMetaModel(BindAgent = true)]
         public async Task<ActionResult> CustomerTurnover(CustomerTurnoverMetaModel metaModel)
         {
             metaModel.IsExportExcel = false;
             var userSession = SessionService.UserSession;
-
-            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId);
             var result = await _customerTurnoverService.GetDataList(metaModel, userSession.CurrencyList, userSession.Language).ConfigureAwait(false);
 
             return Json(new { Data = result.DataList, Total = result.TotalData, TotalRow = result.TotalRows });

@@ -6,7 +6,6 @@
 
 namespace Fanex.Athena.Model.Report.MetaModel
 {
-    using Fanex.Athena.Model.Core.MetaModel;
     using System;
 
     /// <summary>
@@ -20,7 +19,7 @@ namespace Fanex.Athena.Model.Report.MetaModel
             Month = DateTime.Today.Month;
             FromDay = 1;
             ToDay = DateTime.Today.Day;
-            IsExcludeTest = true;
+            IsExcludedTestData = true;
         }
 
         public int FromDay { get; set; }
@@ -47,9 +46,6 @@ namespace Fanex.Athena.Model.Report.MetaModel
             }
         }
 
-        public bool IsExcludeTest { get; set; }
-
         public string Username { get; set; }
-
     }
 }
