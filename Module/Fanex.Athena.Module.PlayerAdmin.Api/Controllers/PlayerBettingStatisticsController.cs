@@ -7,7 +7,7 @@ using Fanex.Athena.Module.PlayerAdmin.Api.DTO;
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.Services.Interfaces;
 
-namespace Fanex.Athena.Module.PlayerAdmin.Api
+namespace Fanex.Athena.Module.PlayerAdmin.Api.Controllers
 {
     [ApiOneAuthorization(AllowFunctionKeys = PermissionKeys.AccountInfo)]
     public class PlayerBettingStatisticsController : ExternalApiBaseController

@@ -6,7 +6,7 @@ using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Module.PlayerAdmin.Api.ViewModels;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
 
-namespace Fanex.Athena.Module.PlayerAdmin.Api
+namespace Fanex.Athena.Module.PlayerAdmin.Api.Controllers
 {
     [ApiOneAuthorization(AllowFunctionKeys = PermissionKeys.PlayerAdmin)]
     public class SiteSettingController : ExternalApiBaseController

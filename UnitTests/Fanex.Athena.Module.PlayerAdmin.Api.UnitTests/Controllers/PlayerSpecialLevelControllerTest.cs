@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using Fanex.Athena.Model.Core.ViewModel;
+using Fanex.Athena.Module.PlayerAdmin.Api.Controllers;
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.Services.Interfaces;
 using Fanex.Athena.Module.PlayerAdmin.Api.Utilities;
@@ -11,19 +12,19 @@ using Fanex.Logging;
 using NSubstitute;
 using NUnit.Framework;
 
-namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests
+namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Controllers
 {
     [TestFixture]
-    public class PlayerOddsGroupControllerTest
+    public class PlayerSpecialLevelControllerTest
     {
-        private IPlayerOddsGroupService _playerOddsGroupService;
+        private IPlayerSpecialLevelService _playerSpecialLevelService;
         private ILicenseeSettingService _licenseeSettingService;
         private ILogger _logger;
 
         [SetUp]
         public void Setup()
         {
-            _playerOddsGroupService = Substitute.For<IPlayerOddsGroupService>();
+            _playerSpecialLevelService = Substitute.For<IPlayerSpecialLevelService>();
             _licenseeSettingService = Substitute.For<ILicenseeSettingService>();
             _logger = Substitute.For<ILogger>();
         }
@@ -31,7 +32,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests
         [TearDown]
         public void TearDown()
         {
-            _playerOddsGroupService = null;
+            _playerSpecialLevelService = null;
             _licenseeSettingService = null;
             _logger = null;
         }
@@ -70,7 +71,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests
             {
                 Success = true
             };
-            _playerOddsGroupService.Update(metaModel).Returns(expectedReturnedData);
+            _playerSpecialLevelService.Update(metaModel).Returns(expectedReturnedData);
 
             using (var controller = CreateController())
             {
@@ -94,7 +95,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests
             {
                 Success = true
             };
-            _playerOddsGroupService.Update(metaModel).Returns(x => { throw new Exception(); });
+            _playerSpecialLevelService.Update(metaModel).Returns(x => { throw new Exception(); });
 
             using (var controller = CreateController())
             {
@@ -106,7 +107,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests
             }
         }
 
-        private PlayerOddsGroupController CreateController()
+        private PlayerSpecialLevelController CreateController()
         {
             var actionContext = ExternalApiHelper.CreateMockActionContext();
             var httpContext = ExternalApiHelper.CreateHttpContext();
@@ -114,8 +115,8 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests
             var request = new HttpRequestMessage();
             request.Properties["MS_HttpContext"] = httpContext;
 
-            return new PlayerOddsGroupController(
-                _playerOddsGroupService,
+            return new PlayerSpecialLevelController(
+                _playerSpecialLevelService,
                 _licenseeSettingService,
                 _logger)
             {
@@ -124,12 +125,12 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests
             };
         }
 
-        private static OddsGroupUpdatingMetaModel CreateMetaModel()
+        private static SpecialLevelUpdatingMetaModel CreateMetaModel()
         {
-            return new OddsGroupUpdatingMetaModel
+            return new SpecialLevelUpdatingMetaModel
             {
                 CustId = 1,
-                OddsGroup = "A"
+                SpecialLevel = 2
             };
         }
     }

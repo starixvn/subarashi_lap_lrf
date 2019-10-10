@@ -114,12 +114,12 @@
     <Compile Include="MetaModel\OddsGroupUpdatingMetaModel.cs" />
     <Compile Include="MetaModel\PlayerUpdatingLogMetaModel.cs" />
     <Compile Include="MetaModel\SpecialLevelUpdatingMetaModel.cs" />
-    <Compile Include="PlayerActivityRecordController.cs" />
-    <Compile Include="PlayerBaStatusController.cs" />
-    <Compile Include="PlayerBettingStatisticsController.cs" />
-    <Compile Include="PlayerListController.cs" />
-    <Compile Include="PlayerOddsGroupController.cs" />
-    <Compile Include="PlayerSpecialLevelController.cs" />
+    <Compile Include="Controllers\PlayerActivityRecordController.cs" />
+    <Compile Include="Controllers\PlayerBaStatusController.cs" />
+    <Compile Include="Controllers\PlayerBettingStatisticsController.cs" />
+    <Compile Include="Controllers\PlayerListController.cs" />
+    <Compile Include="Controllers\PlayerOddsGroupController.cs" />
+    <Compile Include="Controllers\PlayerSpecialLevelController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Interfaces\IPlayerActivityRecordService.cs" />
     <Compile Include="Services\Interfaces\IPlayerBaStatusService.cs" />
@@ -133,7 +133,7 @@
     <Compile Include="Services\PlayerListService.cs" />
     <Compile Include="Services\PlayerOddsGroupService.cs" />
     <Compile Include="Services\PlayerSpecialLevelService.cs" />
-    <Compile Include="SiteSettingController.cs" />
+    <Compile Include="Controllers\SiteSettingController.cs" />
     <Compile Include="DataDomains\LogActionDetailId.cs" />
     <Compile Include="DataDomains\LogText.cs" />
     <Compile Include="Utilities\ResourceKeyConstants.cs" />

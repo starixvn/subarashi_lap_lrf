@@ -11,7 +11,7 @@ using Fanex.Athena.Module.PlayerAdmin.Api.Utilities;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
 using Fanex.Logging;
 
-namespace Fanex.Athena.Module.PlayerAdmin.Api
+namespace Fanex.Athena.Module.PlayerAdmin.Api.Controllers
 {
     [ApiOneAuthorization(AllowFunctionKeys = PermissionKeys.PlayerAdminUpdateOddsGroup)]
     public class PlayerOddsGroupController : ExternalApiBaseController

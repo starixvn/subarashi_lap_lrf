@@ -93,12 +93,12 @@
   <ItemGroup>
     <Compile Include="Extensions\CommonCustomerSettingLogBuilderTest.cs" />
     <Compile Include="Extensions\CommonCustomerSettingLogFactoryTest.cs" />
-    <Compile Include="PlayerActivityRecordControllerTest.cs" />
-    <Compile Include="PlayerBaStatusControllerTest.cs" />
-    <Compile Include="PlayerBettingStatisticsControllerTest.cs" />
-    <Compile Include="PlayerListControllerTest.cs" />
-    <Compile Include="PlayerOddsGroupControllerTest.cs" />
-    <Compile Include="PlayerSpecialLevelControllerTest.cs" />
+    <Compile Include="Controllers\PlayerActivityRecordControllerTest.cs" />
+    <Compile Include="Controllers\PlayerBaStatusControllerTest.cs" />
+    <Compile Include="Controllers\PlayerBettingStatisticsControllerTest.cs" />
+    <Compile Include="Controllers\PlayerListControllerTest.cs" />
+    <Compile Include="Controllers\PlayerOddsGroupControllerTest.cs" />
+    <Compile Include="Controllers\PlayerSpecialLevelControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\PlayerActivityRecordServiceTest.cs" />
     <Compile Include="Services\PlayerBettingStatisticsServiceTest.cs" />
@@ -106,7 +106,7 @@
     <Compile Include="Services\PlayerSpecialLevelServiceTest.cs" />
     <Compile Include="Services\PlayerBaStatusServiceTest.cs" />
     <Compile Include="Services\PlayerListServiceTest.cs" />
-    <Compile Include="SiteSettingControllerTest.cs" />
+    <Compile Include="Controllers\SiteSettingControllerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\ControllerAPI\Fanex.Athena.Api.Base\Fanex.Athena.Api.Base.csproj">

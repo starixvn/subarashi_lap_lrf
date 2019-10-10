@@ -1,12 +1,13 @@
 ﻿using System.Net.Http;
 using Fanex.Athena.Model.Core.ViewModel;
+using Fanex.Athena.Module.PlayerAdmin.Api.Controllers;
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.Services.Interfaces;
 using Fanex.Athena.UnitTest.Common.Helpers;
 using NSubstitute;
 using NUnit.Framework;
 
-namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests
+namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Controllers
 {
     [TestFixture]
     public class PlayerBaStatusControllerTest

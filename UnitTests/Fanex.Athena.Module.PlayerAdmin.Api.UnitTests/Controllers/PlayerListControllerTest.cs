@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Fanex.Athena.Module.PlayerAdmin.Api;
+using Fanex.Athena.Module.PlayerAdmin.Api.Controllers;
 using Fanex.Athena.Module.PlayerAdmin.Api.DTO;
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.Services.Interfaces;
@@ -8,7 +8,7 @@ using Fanex.Athena.UnitTest.Common.Helpers;
 using NSubstitute;
 using NUnit.Framework;
 
-namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Api
+namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Controllers
 {
     [TestFixture]
     public class PlayerListControllerTest
