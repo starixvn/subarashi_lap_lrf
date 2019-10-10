@@ -101,7 +101,7 @@
     <Compile Include="Repositories\NumberGameBetLimitRepositoryTest.cs" />
     <Compile Include="Repositories\PlayerBetLimitRepositoryTest.cs" />
     <Compile Include="Repositories\RngKenoBetLimitRepositoryTest.cs" />
-    <Compile Include="Repositories\SportBookBetLimitRepositoryTest.cs" />
+    <Compile Include="Repositories\SportsBookBetLimitRepositoryTest.cs" />
     <Compile Include="TestUtility.cs" />
   </ItemGroup>
   <ItemGroup>

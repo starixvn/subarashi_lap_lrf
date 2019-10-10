@@ -15,7 +15,7 @@ using NUnit.Framework;
 
 namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Repositories
 {
-    public class SportBookBetLimitRepositoryTest
+    public class SportsBookBetLimitRepositoryTest
     {
         private const string MixedSportId = "99MP";
 
@@ -62,7 +62,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Repositories
             _db.GetObjectDb(UspName).Returns(_objectDb);
 
             const int CustId = 1;
-            var repository = new SportBookBetLimitRepository(_db);
+            var repository = new SportsBookBetLimitRepository(_db);
             var expectedResultLength = isShowMixedSport ? SportTypes.Length + 1 : SportTypes.Length;
 
             // Action
@@ -87,10 +87,10 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Repositories
             _db.GetObjectDb(UspName).Returns(_objectDb);
 
             var settingList = CreateSettingList(isShowMixedSport);
-            var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<PlayerBetLimitMetaModel>>();
+            var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>>>();
             metaModel.Setting = settingList;
 
-            var repository = new SportBookBetLimitRepository(_db);
+            var repository = new SportsBookBetLimitRepository(_db);
 
             // Action
             var result = await repository.UpdateSettingAsync(metaModel, isShowMixedSport);

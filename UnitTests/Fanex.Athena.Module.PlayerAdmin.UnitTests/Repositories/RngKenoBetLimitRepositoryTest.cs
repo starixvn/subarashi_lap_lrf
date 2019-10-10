@@ -73,7 +73,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Repositories
             {
                 FakeHelper.Create<PlayerBetLimitMetaModel>()
             };
-            var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<PlayerBetLimitMetaModel>>();
+            var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>>>();
             metaModel.Setting = settingList;
 
             var repository = new RngKenoBetLimitRepository(_db);
