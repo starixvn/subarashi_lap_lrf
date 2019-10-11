@@ -1,6 +1,7 @@
 ﻿namespace Fanex.Athena.Api.StatelessBase.UnitTests.Attributes.UnitTests
 {
     using System;
+    using System.Linq;
     using System.Net;
     using System.Threading;
     using System.Web.Http.Controllers;
@@ -12,7 +13,7 @@
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.UnitTest.Common.Helpers;
     using Fanex.Logging;
-
+    using LAP.ONEBook.Security;
     using NSubstitute;
 
     using NUnit.Framework;
@@ -96,7 +97,7 @@
             // Arrange
             var attribute = new ApiOneAuthorizationAttribute();
             var actionContext = CreateActionContext(hasAuthToken: true);
-            var token = new OneAuthToken
+            var token = new DefaultAuthInfo<OneAuthPermission, OneAuthCurrency>
             {
                 UserSEQ = 1,
                 SiteName = "spondemo"
@@ -120,7 +121,7 @@
             // Arrange
             var attribute = new ApiOneAuthorizationAttribute { AllowFunctionKeys = "func2" };
             var actionContext = CreateActionContext(hasAuthToken: true);
-            var token = new OneAuthToken
+            var token = new DefaultAuthInfo<OneAuthPermission, OneAuthCurrency>
             {
                 UserSEQ = 1,
                 SiteName = "spondemo",
@@ -148,7 +149,7 @@
             // Arrange
             var attribute = new ApiOneAuthorizationAttribute();
             var actionContext = CreateActionContext(hasAuthToken: true);
-            var token = new OneAuthToken
+            var token = new DefaultAuthInfo<OneAuthPermission, OneAuthCurrency>
             {
                 UserSEQ = 1,
                 SiteName = "spondemo",
@@ -167,7 +168,7 @@
             {
                 Assert.That(actionContext.ActionArguments["licenseeid"], Is.EqualTo(licensee.Id));
                 Assert.That(actionContext.ActionArguments["userid"], Is.EqualTo(token.UserSEQ));
-                Assert.That(actionContext.ActionArguments["currencyIDList"], Is.EqualTo(token.Currency[0].CurrencyId.ToString()));
+                Assert.That(actionContext.ActionArguments["currencyIDList"], Is.EqualTo(token.Currency.First().CurrencyId.ToString()));
                 Assert.That(actionContext.ActionArguments["username"], Is.EqualTo(token.UserID));
                 Assert.That(actionContext.ActionArguments["sitename"], Is.EqualTo(token.SiteName));
             });

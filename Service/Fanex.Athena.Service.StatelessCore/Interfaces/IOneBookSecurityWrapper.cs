@@ -1,9 +1,10 @@
 ﻿namespace Fanex.Athena.Service.StatelessCore.Interfaces
 {
     using Fanex.Athena.Model.Auth;
+    using LAP.ONEBook.Security;
 
     public interface IOneBookSecurityWrapper
     {
-        OneAuthToken Authenticate(string token);
+        DefaultAuthInfo<OneAuthPermission, OneAuthCurrency> Authenticate(string token);
     }
 }

@@ -36,7 +36,7 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
         public void Authenticate_WithoutException_ReturnExpectedResult(string token, bool status)
         {
             //Arrange
-            var expectedData = new OneAuthToken();
+            var expectedData = new DefaultAuthInfo<OneAuthPermission, OneAuthCurrency>();
             const string tokenHavingData = "havedata";
             _storageProvider.Authenticate(Arg.Is<string>(x => x == tokenHavingData))
                 .Returns(JsonConvert.SerializeObject(expectedData));

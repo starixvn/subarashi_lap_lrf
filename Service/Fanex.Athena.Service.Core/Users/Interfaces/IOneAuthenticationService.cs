@@ -4,11 +4,12 @@
 
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Core.DTO.Common;
+    using LAP.ONEBook.Security;
 
     public interface IOneAuthenticationService
     {
-        IResultInfo SignIn(HttpContextBase currentContext, OneAuthToken tokenInfo);
+        IResultInfo SignIn(HttpContextBase currentContext, DefaultAuthInfo<OneAuthPermission, OneAuthCurrency> tokenInfo);
 
-        OneAuthToken GetTokenInfo(string token);
+        DefaultAuthInfo<OneAuthPermission, OneAuthCurrency> GetTokenInfo(string token);
     }
 }

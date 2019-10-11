@@ -10,7 +10,7 @@
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Logging;
-
+    using LAP.ONEBook.Security;
     using Newtonsoft.Json;
 
     using ONEbook.UM.Services;
@@ -66,13 +66,13 @@
             return Redirect(Url.Content(ReturnUrl + OneAuthorizationErrorCode.TokenIsInValid));
         }
 
-        private static bool VerifyToken(OneAuthToken token)
+        private static bool VerifyToken(DefaultAuthInfo<OneAuthPermission, OneAuthCurrency> token)
         {
             return token.UserSEQ > 0 &&
                 !StringHelper.IsAnyNullOrEmpty(token.SiteName, token.VendorID, token.UserID, token.Language, token.ActionLink);
         }
 
-        private string Authorize(string returnPath, OneAuthToken tokenInfo)
+        private string Authorize(string returnPath, DefaultAuthInfo<OneAuthPermission, OneAuthCurrency> tokenInfo)
         {
             if (IsInternalDomain(tokenInfo.ActionLink))
             {

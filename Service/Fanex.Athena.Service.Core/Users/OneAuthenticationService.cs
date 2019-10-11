@@ -18,7 +18,7 @@
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Logging;
-
+    using LAP.ONEBook.Security;
     using Model.Core.DataDomain;
 
     using Resources;
@@ -60,7 +60,7 @@
             }
         }
 
-        public IResultInfo SignIn(HttpContextBase currentContext, OneAuthToken tokenInfo)
+        public IResultInfo SignIn(HttpContextBase currentContext, DefaultAuthInfo<OneAuthPermission, OneAuthCurrency> tokenInfo)
         {
             var licensee = _licenseeSettingService.GetLicenseeInfo(tokenInfo.SiteName);
             if (licensee == null)
@@ -107,12 +107,12 @@
             return SetAuthorize(tokenInfo);
         }
 
-        public OneAuthToken GetTokenInfo(string token)
+        public DefaultAuthInfo<OneAuthPermission, OneAuthCurrency> GetTokenInfo(string token)
         {
             return _oneBookSecurityWrapper.Authenticate(token);
         }
 
-        private static bool IsSameSession(UserAuthInfo userSession, LicenseeAuthInfo licenseeSession, OneAuthToken tokenInfo, int licenseeId)
+        private static bool IsSameSession(UserAuthInfo userSession, LicenseeAuthInfo licenseeSession, DefaultAuthInfo<OneAuthPermission, OneAuthCurrency> tokenInfo, int licenseeId)
         {
             return userSession.UserName == tokenInfo.UserID
                 && userSession.VendorID == tokenInfo.VendorID && userSession.VendorIdentityID == tokenInfo.UserID
@@ -137,7 +137,7 @@
             return identity != null && identity.IsAuthenticated && !string.IsNullOrEmpty(identity.Name);
         }
 
-        protected internal virtual IResultInfo SetAuthorize(OneAuthToken tokenInfo)
+        protected internal virtual IResultInfo SetAuthorize(DefaultAuthInfo<OneAuthPermission, OneAuthCurrency> tokenInfo)
         {
             var authName = $"{tokenInfo.VendorID}_{tokenInfo.SiteName}_{tokenInfo.UserID}";
             _formsAuthenticationService.SetAuthCookie(authName, false);
@@ -178,7 +178,7 @@
             return new ResultInfo { Code = 0 };
         }
 
-        private void UpdateUserSession(UserAuthInfo userSession, OneAuthToken tokenInfo, int licenseeId, OneAuthUserInfo userInfo, string language)
+        private void UpdateUserSession(UserAuthInfo userSession, DefaultAuthInfo<OneAuthPermission, OneAuthCurrency> tokenInfo, int licenseeId, OneAuthUserInfo userInfo, string language)
         {
             if (!language.Equals(userSession.Language))
             {
@@ -189,12 +189,12 @@
             userSession.UserLevel = userInfo.UserLevel;
             userSession.IsManageableSubsidiary = userInfo.IsEnabledSubsidiary && userInfo.UserLevel != UserLevelType.Subsidiary;
             userSession.OperatorId = userInfo.OperatorID;
-            userSession.PortalFunctionList = tokenInfo.Permissions;
+            userSession.PortalFunctionList = tokenInfo.Permissions.ToArray();
             userSession.DefaultBaseCurrency = string.IsNullOrEmpty(userInfo.BaseCurrency) ? _appSettings.DefaultBaseCurrency
                 : userInfo.BaseCurrency;
         }
 
-        private OneAuthUserInfo GetUserInfo(OneAuthToken tokenInfo)
+        private OneAuthUserInfo GetUserInfo(DefaultAuthInfo<OneAuthPermission, OneAuthCurrency> tokenInfo)
         {
             var userInfo = _oneAuthDataAccess.GetUserInfo(tokenInfo.UserSEQ, tokenInfo.VendorID);
 
@@ -211,7 +211,7 @@
 
         private void CreateSession(
             string languageCode,
-            OneAuthToken tokenInfo,
+            DefaultAuthInfo<OneAuthPermission, OneAuthCurrency> tokenInfo,
             Licensee licenseeInfo,
             OneAuthUserInfo userInfo)
         {
@@ -233,7 +233,7 @@
                 OperatorId = userInfo.OperatorID,
                 IsInternal = true,
                 FunctionList = new List<Function>(),
-                PortalFunctionList = tokenInfo.Permissions,
+                PortalFunctionList = tokenInfo.Permissions.ToArray(),
                 Language = languageCode,
                 DefaultReportUrl = "LicenseeWinLossReport",
                 ApplicationMode = AppMode.Parasitic,

@@ -14,6 +14,7 @@ using Fanex.Athena.Model.Auth;
 using Fanex.Athena.Resources;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
 using Fanex.Logging;
+using LAP.ONEBook.Security;
 using ONEbook.UM.Services;
 
 namespace Fanex.Athena.Api.StatelessBase.Attributes
@@ -82,7 +83,7 @@ namespace Fanex.Athena.Api.StatelessBase.Attributes
             }
         }
 
-        private bool HasPermission(OneAuthToken token)
+        private bool HasPermission(DefaultAuthInfo<OneAuthPermission, OneAuthCurrency> token)
         {
             var allowedFunctionKeyList = GetAllowedFunctionKeyList();
             if (allowedFunctionKeyList != null && allowedFunctionKeyList.Any())
@@ -106,7 +107,7 @@ namespace Fanex.Athena.Api.StatelessBase.Attributes
             return functionKeys.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim());
         }
 
-        private static void AssignActionArguments(HttpActionContext actionContext, OneAuthToken token)
+        private static void AssignActionArguments(HttpActionContext actionContext, DefaultAuthInfo<OneAuthPermission, OneAuthCurrency> token)
         {
             actionContext.ActionArguments["userid"] = token.UserSEQ;
             actionContext.ActionArguments["currencyIDList"] = string.Join(",", token.Currency.Select(i => i.CurrencyId).ToArray());

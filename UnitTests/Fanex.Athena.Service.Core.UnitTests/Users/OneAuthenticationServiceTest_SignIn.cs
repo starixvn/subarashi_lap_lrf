@@ -17,7 +17,7 @@
     using Fanex.Athena.Service.Core.Users;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Logging;
-
+    using LAP.ONEBook.Security;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
 
@@ -79,7 +79,7 @@
         public void SignIn_GetLicenseeInfoReturnNull_ReturnCorrectErrorResultInfo()
         {
             // Arrange
-            var tokenInfo = FakeHelper.Create<OneAuthToken>();
+            var tokenInfo = FakeHelper.Create<DefaultAuthInfo<OneAuthPermission, OneAuthCurrency>>();
             _licenseeSettingService.GetLicenseeInfo(tokenInfo.SiteName).Returns(x => { return null; });
 
             var expectedResult = new ResultInfo
@@ -103,7 +103,7 @@
         public void SignIn_InvalidCurrencyList_ReturnCorrectErrorResultInfo()
         {
             // Arrange
-            var tokenInfo = new OneAuthToken
+            var tokenInfo = new DefaultAuthInfo<OneAuthPermission, OneAuthCurrency>
             {
                 SiteName = FakeHelper.Create<string>(),
                 Currency = null
@@ -522,9 +522,9 @@
             return fakeHttpContext;
         }
 
-        private OneAuthToken CreateValidFakeToken(bool isAdminstrator = false, string language = "")
+        private DefaultAuthInfo<OneAuthPermission, OneAuthCurrency> CreateValidFakeToken(bool isAdminstrator = false, string language = "")
         {
-            return new OneAuthToken
+            return new DefaultAuthInfo<OneAuthPermission, OneAuthCurrency>
             {
                 SiteName = FakeHelper.Create<string>(),
                 Currency = FakeHelper.CreateMany<OneAuthCurrency>(2).ToArray(),
@@ -536,7 +536,7 @@
             };
         }
 
-        private bool AssertNewUserSession(UserAuthInfo newUser, OneAuthToken token)
+        private bool AssertNewUserSession(UserAuthInfo newUser, DefaultAuthInfo<OneAuthPermission, OneAuthCurrency> token)
         => newUser.UserId == token.UserSEQ
                 && newUser.OnUserId == token.UserSEQ
                 && newUser.UserName == token.UserID

@@ -13,11 +13,11 @@
             _storageProvider = storageProvider;
         }
 
-        public OneAuthToken Authenticate(string token)
+        public DefaultAuthInfo<OneAuthPermission, OneAuthCurrency> Authenticate(string token)
         {
             try
             {
-                var oneBookSecurity = new Auth<OneAuthToken>(_storageProvider);
+                var oneBookSecurity = new Auth<DefaultAuthInfo<OneAuthPermission, OneAuthCurrency>>(_storageProvider);
                 return oneBookSecurity.Authenticate(token);
             }
             catch (Exception exception)

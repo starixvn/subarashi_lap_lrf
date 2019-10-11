@@ -128,11 +128,11 @@
     <Reference Include="ILogger, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ILogger.1.0.0.0\lib\net40\ILogger.dll</HintPath>
     </Reference>
-    <Reference Include="LAP.ONEBook.Security, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\LAP.ONEBook.Security.1.0.5\lib\net461\LAP.ONEBook.Security.dll</HintPath>
+    <Reference Include="LAP.ONEBook.Security, Version=1.0.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\LAP.ONEBook.Security.1.0.7\lib\net461\LAP.ONEBook.Security.dll</HintPath>
     </Reference>
-    <Reference Include="LAP.ONEBook.Security.StorageProvider.SqlServer, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\LAP.ONEBook.Security.StorageProvider.SqlServer.1.0.4\lib\net461\LAP.ONEBook.Security.StorageProvider.SqlServer.dll</HintPath>
+    <Reference Include="LAP.ONEBook.Security.StorageProvider.SqlServer, Version=1.0.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\LAP.ONEBook.Security.StorageProvider.SqlServer.1.0.7\lib\net461\LAP.ONEBook.Security.StorageProvider.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
