@@ -5164,7 +5164,7 @@ function (_Component) {
         FromDate: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_7__["default"].convertDateToString(fromDate),
         ToDate: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_7__["default"].convertDateToString(toDate),
         ReportBy: this.props.selectedReportBy,
-        ExcludeTestData: this.props.isExcludeTest,
+        IsExcludedTestData: this.props.isExcludeTest,
         Level: 0
       };
       return {
