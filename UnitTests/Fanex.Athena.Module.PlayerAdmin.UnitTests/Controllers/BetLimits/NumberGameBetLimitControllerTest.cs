@@ -1,4 +1,4 @@
-﻿namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers
+﻿namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers.BetLimits
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -18,24 +18,22 @@
     using NSubstitute;
     using NUnit.Framework;
 
-    public class SportsBookBetLimitControllerTest : CultureBaseControllerHelperTest
+    public class NumberGameBetLimitControllerTest : CultureBaseControllerHelperTest
     {
-        private const string MixedSportId = "99MP";
+        private INumberGameBetLimitService _service;
 
         private IAuthorizationService _authService;
 
         private ICacheRefAdapter _cacheRefAdapter;
-
-        private ISportsBookBetLimitService _service;
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
         {
             base.FixtureSetUp();
 
+            _service = Substitute.For<INumberGameBetLimitService>();
             _authService = Substitute.For<IAuthorizationService>();
             _cacheRefAdapter = Substitute.For<ICacheRefAdapter>();
-            _service = Substitute.For<ISportsBookBetLimitService>();
 
             SetUpDefaultFakeData();
         }
@@ -45,9 +43,9 @@
         {
             base.FixtureTearDown();
 
+            _service = null;
             _authService = null;
             _cacheRefAdapter = null;
-            _service = null;
         }
 
         [TestCase(false)]
@@ -62,9 +60,12 @@
                 _authService.HasPermissions(DefaultUserSession.PortalFunctionList, PermissionKeys.PlayerAdminBetLimit_Write)
                     .Returns(isEditable);
 
-                var setting = FakeHelper.Create<PlayerBetLimit>(x => x.Id, MixedSportId);
+                var setting = FakeHelper.Create<PlayerBetLimit>(x => x.Id, 0);
                 var settings = new List<PlayerBetLimit> { setting };
-                _service.GetSettingAsync(metaModel.CustId, AppSettings.IsShowMixedSport).Returns(Task.FromResult(settings.AsEnumerable()));
+                _service.GetSettingAsync(metaModel.CustId).Returns(Task.FromResult(settings.AsEnumerable()));
+
+                var sportName = FakeHelper.Create<string>();
+                _cacheRefAdapter.GetSportName(setting.Id).Returns(sportName);
 
                 // Action
                 var result = await controller.GetSetting(metaModel).ConfigureAwait(false);
@@ -73,7 +74,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    Assert.That(viewModel.Data.First().BetSettingType, Is.EqualTo(ViewResources.MixSportsParlay));
+                    Assert.That(viewModel.Data.First().BetSettingType, Is.EqualTo(sportName));
                     Assert.That(viewModel.Editable, Is.EqualTo(isEditable));
                 });
             }
@@ -110,7 +111,7 @@
                 var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>>>();
 
                 var updateResult = new ResultInfo { Code = 1, Message = FakeHelper.Create<string>() };
-                _service.UpdateSettingAsync(metaModel, AppSettings.IsShowMixedSport).Returns(Task.FromResult<IResultInfo>(updateResult));
+                _service.UpdateSettingAsync(metaModel).Returns(Task.FromResult<IResultInfo>(updateResult));
 
                 // Action
                 var result = await controller.UpdateSetting(metaModel).ConfigureAwait(false);
@@ -134,7 +135,7 @@
                 var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>>>();
 
                 var updateResult = new ResultInfo { Code = 0, Message = FakeHelper.Create<string>() };
-                _service.UpdateSettingAsync(metaModel, AppSettings.IsShowMixedSport).Returns(Task.FromResult<IResultInfo>(updateResult));
+                _service.UpdateSettingAsync(metaModel).Returns(Task.FromResult<IResultInfo>(updateResult));
 
                 // Action
                 var result = await controller.UpdateSetting(metaModel).ConfigureAwait(false);
@@ -149,12 +150,11 @@
             }
         }
 
-        private SportsBookBetLimitController CreateController()
+        private NumberGameBetLimitController CreateController()
         {
-            return new SportsBookBetLimitController(
+            return new NumberGameBetLimitController(
                 LangService,
                 SessionService,
-                AppSettings,
                 _cacheRefAdapter,
                 _authService,
                 _service)
