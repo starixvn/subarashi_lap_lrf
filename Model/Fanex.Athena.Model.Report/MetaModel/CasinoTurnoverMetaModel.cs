@@ -1,13 +1,12 @@
 ﻿namespace Fanex.Athena.Model.Report.MetaModel
 {
-    using Fanex.Athena.Model.Core.DataDomain;
-    using Fanex.Athena.Model.Core.Helper;
-    using Fanex.Athena.Model.Core.MetaModel;
     using System;
     using System.Linq;
+    using Fanex.Athena.Model.Core.Helper;
+    using Fanex.Athena.Model.Core.MetaModel;
 
     public class CasinoTurnoverMetaModel : IMetaModelValidation,
-        IMetaModelCurrency, IMetaModelProductCodeList
+        IMetaModelCurrency, IMetaModelProductCodeList, IMetaModelAgent
     {
         private int[] _status;
 
@@ -44,9 +43,12 @@
         public int PageIndex { get; set; }
 
         public bool IsExportExcel { get; set; }
+
         private bool IsValidBaseCurrency => MetaModelValidationHelper.ValidateBaseCurrency(BaseCurrency);
+
         public bool IsValid => FromDate <= ToDate && !string.IsNullOrEmpty(ProductCodeList) && Status.Any()
             && IsValidBaseCurrency;
 
+        public bool IsExcludedTestData { get; set; }
     }
 }

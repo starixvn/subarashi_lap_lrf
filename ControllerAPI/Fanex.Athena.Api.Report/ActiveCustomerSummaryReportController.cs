@@ -28,7 +28,6 @@ namespace Fanex.Athena.Api.Report
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Utility;
 
     using Model.Report.ResultModel;
 
@@ -52,6 +51,7 @@ namespace Fanex.Athena.Api.Report
 
         [HttpPost]
         [ValidationApiRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
+        [ApiAutoBindMetaModel(BindAgent = true)]
         public Task<dynamic> Index(ActiveCustomerMetaModel metaModel)
         {
             return ProcessRequest(metaModel);
@@ -139,7 +139,6 @@ namespace Fanex.Athena.Api.Report
         private async Task<dynamic> ProcessRequest(ActiveCustomerMetaModel metaModel)
         {
             var userSession = SessionService.UserSession;
-            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId, metaModel.IsExcludeTest);
 
             var result =
                 await _activeCustomerSummaryDataAccess.GetActiveCustomers(metaModel);

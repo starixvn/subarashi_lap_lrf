@@ -1,12 +1,10 @@
 ﻿namespace Fanex.Athena.Model.Report.MetaModel
 {
-    using Fanex.Athena.Model.Core.DataDomain;
+    using System;
     using Fanex.Athena.Model.Core.Helper;
     using Fanex.Athena.Model.Core.MetaModel;
-    using System;
-    using System.Linq;
 
-    public class LicenseeWinLossByTimeZoneMetaModel : IMetaModelValidation
+    public class LicenseeWinLossByTimeZoneMetaModel : IMetaModelValidation, IMetaModelAgent, IMetaModelCurrency
     {
         public string AgentListXml { get; set; }
 
@@ -24,8 +22,6 @@
 
         public bool IsConvertAll { get; set; }
 
-        public bool IsExcludeTestData { get; set; }
-
         public short TimeZone { get; set; }
 
         public byte ReportBy { get; set; }
@@ -35,5 +31,7 @@
         public bool IsValid => FromDate <= ToDate &&
                                 !string.IsNullOrEmpty(ProductCodeList)
             && MetaModelValidationHelper.ValidateBaseCurrency(BaseCurrency, false);
+
+        public bool IsExcludedTestData { get; set; }
     }
 }

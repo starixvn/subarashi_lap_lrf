@@ -14,10 +14,6 @@
     using Fanex.Athena.Api.Base.Attributes;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Utility;
-
-    using Model.Core.ResultModel;
-    using Model.Report.DTO;
     using Model.Report.MetaModel;
 
     using Service.Core.Common.Interfaces;
@@ -47,9 +43,10 @@
 
         [HttpPost]
         [ValidationApiRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
+        [ApiAutoBindMetaModel(BindAgent = true)]
         public async Task<dynamic> Index(CustomerPendingFundsMetaModel metaModel)
         {
-            var data = await GetData(metaModel).ConfigureAwait(false);
+            var data = await _custPendingFundsDataAccess.GetDataList(metaModel).ConfigureAwait(false);
 
             return new
             {
@@ -61,6 +58,7 @@
 
         [HttpPost]
         [ValidationApiRequest]
+        [ApiAutoBindMetaModel(BindAgent = true)]
         public async Task<HttpResponseMessage> ExportExcel(CustomerPendingFundsMetaModel metaModel)
         {
             const string FileName = "CustomerPendingFunds.xls";
@@ -77,13 +75,15 @@
 
             metaModel.PageIndex = 1;
             metaModel.PageSize = PageSizeExcel;
-            var data = await GetData(metaModel);
+            var licenseeName = SessionService.LicenseeSession.LicenseeName;
+
+            var data = await _custPendingFundsDataAccess.GetDataList(metaModel).ConfigureAwait(false);
             var excelModel = new CustomerPendingFundsExcelModel
             {
                 ConvertingOption = convertingOption,
                 DataList = data.DataList,
                 TotalData = data.TotalData,
-                SystemIdVisible = !_licenseeSettingService.IsFakeLicensee(SessionService.LicenseeSession.LicenseeName)
+                SystemIdVisible = !_licenseeSettingService.IsFakeLicensee(licenseeName)
             };
             var custPendingFundsExcel = CreateExcel(templatePath, excelModel);
             custPendingFundsExcel.Export();
@@ -94,13 +94,6 @@
         protected internal virtual CustomerPendingFundsExcel CreateExcel(string templatePath, CustomerPendingFundsExcelModel excelModel)
         {
             return new CustomerPendingFundsExcel(templatePath, excelModel);
-        }
-
-        private async Task<ReportResultModel<CustPendingFunds>> GetData(CustomerPendingFundsMetaModel metaModel)
-        {
-            var userSession = SessionService.UserSession;
-            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId);
-            return await _custPendingFundsDataAccess.GetDataList(metaModel).ConfigureAwait(false);
         }
     }
 }

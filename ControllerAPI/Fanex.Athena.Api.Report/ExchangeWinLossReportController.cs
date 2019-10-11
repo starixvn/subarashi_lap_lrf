@@ -12,7 +12,6 @@
     using Extension.Helper;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Utility;
 
     using Model.Core.DataDomain;
     using Model.Core.ResultModel;
@@ -43,13 +42,13 @@
 
         [HttpPost]
         [ValidationApiRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
+        [ApiAutoBindMetaModel(BindAgent = true)]
         public async Task<dynamic> Index(ExchangeWinLossMetaModel metaModel)
         {
             var userSession = SessionService.UserSession;
             var currencyList = userSession.CurrencyList;
             if (IsValidParams(metaModel))
             {
-                metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId, metaModel.ExcludeTestData);
                 metaModel.LicenseeId = SessionService.LicenseeSession.LicenseeId;
                 metaModel.DefaultBaseCurrency = userSession.DefaultBaseCurrency;
                 if (metaModel.Level == (int)ReportLevel.Main)

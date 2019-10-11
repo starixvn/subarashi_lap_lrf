@@ -6,7 +6,6 @@
 
 namespace Fanex.Athena.Model.Report.MetaModel
 {
-    using Fanex.Athena.Model.Core.MetaModel;
     using System;
 
     public class CustomerBalanceMetaModel : BaseReportMetaModel
@@ -14,13 +13,11 @@ namespace Fanex.Athena.Model.Report.MetaModel
         public CustomerBalanceMetaModel()
         {
             FromDate = ToDate = DateTime.Today;
-            IsExcludeTest = true;
             PageIndex = 1;
             PageSize = DefaultPageSize;
             OrderItem = 1;
+            IsExcludedTestData = true;
         }
-
-        public bool IsExcludeTest { get; set; }
 
         public int TopCount { get; set; }
 

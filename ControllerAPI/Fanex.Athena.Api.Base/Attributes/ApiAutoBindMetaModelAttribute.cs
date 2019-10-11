@@ -85,7 +85,7 @@ namespace Fanex.Athena.Api.Base.Attributes
 
             if (item.Value is IMetaModelAgent itemWithAgent)
             {
-                itemWithAgent.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, currencyId);
+                itemWithAgent.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, currencyId, itemWithAgent.IsExcludedTestData);
                 actionContext.ActionArguments[item.Key] = itemWithAgent;
             }
         }

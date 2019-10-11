@@ -8,7 +8,6 @@
     using DataAccess.Report.Interfaces;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Utility;
 
     using Model.Core.DataDomain;
     using Model.Report.MetaModel;
@@ -34,10 +33,9 @@
         [HttpPost]
         [ValidationApiRequest(IsValidCurrency = true, IsIncludeKeanOcean = true,
             IsValidProductCodeList = true, FunctionConfig = FunctionNames.CasinoTurnover, IsSingleWalletProduct = true)]
+        [ApiAutoBindMetaModel(BindAgent = true)]
         public async Task<dynamic> GetData(CasinoTurnoverMetaModel metaModel)
         {
-            var userSession = SessionService.UserSession;
-            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId);
             var result = await _casinoTurnoverDataAccess.GetData(metaModel).ConfigureAwait(false);
             return new
             {
