@@ -1031,7 +1031,8 @@ function (_PureComponent) {
     _defineProperty(_assertThisInitialized(_this), "onSubmit", function () {
       var _this$state2 = _this.state,
           selectedGroup = _this$state2.selectedGroup,
-          data = _this$state2.data;
+          data = _this$state2.data,
+          setting = _this$state2.setting;
 
       var invalid = _this._isDisabledButton(data, selectedGroup);
 
@@ -1041,7 +1042,7 @@ function (_PureComponent) {
         });
       } else {
         _this._showConfirmation(function () {
-          return _this._submit(selectedGroup);
+          return _this._submit(selectedGroup, setting.BetSetting.AgGroup);
         });
       }
     });
@@ -1135,12 +1136,15 @@ function (_PureComponent) {
     }
   }, {
     key: "_submit",
-    value: function _submit(group) {
+    value: function _submit(group, oldGroup) {
       var _this2 = this;
 
       this.props.toggleLoader(true);
       var param = Object.assign({}, this.props.requestParam, {
-        Setting: [group]
+        Setting: {
+          group: group,
+          oldGroup: oldGroup
+        }
       });
       _lib_dataTransfer__WEBPACK_IMPORTED_MODULE_6__["default"].updateData(param, this._showSubmitResult.bind(this), function () {
         return _this2.props.toggleLoader(false);
@@ -1203,7 +1207,7 @@ function (_PureComponent) {
           children: content,
           onClose: _this4.onRefresh,
           icon: isSuccess ? 'success' : 'error',
-          height: 180,
+          height: 225,
           buttons: buttons
         });
       });
@@ -1667,7 +1671,10 @@ function () {
         BetValueMin: rawData.BetValueMin,
         BetValueMax: rawData.BetValueMax,
         MaxPerMatchMin: rawData.MaxPerMatchMin,
-        MaxPerMatchMax: rawData.MaxPerMatchMax
+        MaxPerMatchMax: rawData.MaxPerMatchMax,
+        OldMinBet: rawData.MinBet,
+        OldMaxBet: rawData.MaxBet,
+        OldMaxPerMatch: rawData.MaxPerMatch
       };
       row.OriginalMinBet = row.MinBet;
       row.OriginalMaxBet = row.MaxBet;
@@ -1684,6 +1691,9 @@ function () {
         MinBet: _utility__WEBPACK_IMPORTED_MODULE_1__["default"].getValueAsNumber(row.MinBet),
         MaxBet: _utility__WEBPACK_IMPORTED_MODULE_1__["default"].getValueAsNumber(row.MaxBet),
         MaxPerMatch: _utility__WEBPACK_IMPORTED_MODULE_1__["default"].getValueAsNumber(row.MaxPerMatch),
+        OldMinBet: row.OldMinBet,
+        OldMaxBet: row.OldMaxBet,
+        OldMaxPerMatch: row.OldMaxPerMatch,
         IsUpdated: row.MinBet !== row.OriginalMinBet || row.MaxBet !== row.OriginalMaxBet || row.MaxPerMatch !== row.OriginalMaxPerMatch
       };
     }
@@ -1773,7 +1783,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var Url = (_Url = {}, _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].SB, 'SportBookBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].VS, 'DcsBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].VS2, 'DcsBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].LT, 'DcsBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].NG, 'NumberGameBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].KN, 'RngKenoBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].AGC, 'AGCasinoBetLimit'), _Url);
+var Url = (_Url = {}, _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].SB, 'SportsBookBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].VS, 'DcsBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].VS2, 'DcsBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].LT, 'DcsBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].NG, 'NumberGameBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].KN, 'RngKenoBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].AGC, 'AGCasinoBetLimit'), _Url);
 
 var DataTransfer =
 /*#__PURE__*/
@@ -1962,6 +1972,7 @@ function (_DataHandling) {
       var row = _get(_getPrototypeOf(NGDataHandling.prototype), "getViewRowData", this).call(this, rawData);
 
       row.MaxPerBall = _utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(rawData.MaxPerBall);
+      row.OldMaxPerBall = rawData.MaxPerBall;
       row.MaxPerBallMax = rawData.MaxPerBallMax;
       row.OriginalMaxPerBall = row.MaxPerBall;
       return row;
@@ -1972,6 +1983,7 @@ function (_DataHandling) {
       var data = _get(_getPrototypeOf(NGDataHandling.prototype), "getSubmitRowData", this).call(this, row);
 
       data.MaxPerBall = _utility__WEBPACK_IMPORTED_MODULE_1__["default"].getValueAsNumber(row.MaxPerBall);
+      data.OldMaxPerBall = row.OldMaxPerBall;
       data.IsUpdated = data.IsUpdated || row.MaxPerBall !== row.OriginalMaxPerBall;
       return data;
     }

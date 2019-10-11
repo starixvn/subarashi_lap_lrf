@@ -1465,7 +1465,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/actions/index.js");
 /* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
-/* harmony import */ var _constants_configInfo__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../constants/configInfo */ "./www/js/source/reactpages/Module/constants/configInfo.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1485,7 +1484,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -1528,7 +1526,7 @@ function (_PureComponent) {
           currencyId = selectedPlayer.currencyId,
           currency = selectedPlayer.currency,
           userName = selectedPlayer.userName;
-      var custIdQueryString = systemType === _constants_configInfo__WEBPACK_IMPORTED_MODULE_5__["systemType"].lrf ? "custId=".concat(ibcCustId) : "custId=".concat(ibcCustId, "&licenseeCustId=").concat(licenseeCustId);
+      var custIdQueryString = "custId=".concat(ibcCustId, "&licenseeCustId=").concat(licenseeCustId);
       var nameValuePairString = custIdQueryString + "&currencyId=".concat(currencyId, "&currencyName=").concat(currency, "&userName=").concat(userName);
       var queryString = (action.indexOf('?') !== -1 ? '&' : '?') + nameValuePairString;
       var urlByPlayer = action + queryString;
@@ -2424,7 +2422,8 @@ var BaStatusCell = function BaStatusCell(props) {
   var IbcCustId = dataItem.IbcCustId,
       BaStatus = dataItem.BaStatus,
       OddsGroup = dataItem.OddsGroup,
-      IsArchived = dataItem.IsArchived;
+      IsArchived = dataItem.IsArchived,
+      LicenseeCustId = dataItem.LicenseeCustId;
 
   var handleChangeBaStatus = function handleChangeBaStatus(event) {
     event.preventDefault();
@@ -2447,7 +2446,8 @@ var BaStatusCell = function BaStatusCell(props) {
       onClick: function onClick() {
         var param = {
           custId: IbcCustId,
-          isBa: isBa
+          isBa: isBa,
+          LicenseeCustId: LicenseeCustId
         };
         toggleLoader(true);
         updateBaStatus(param).then(function (response) {
@@ -2794,10 +2794,14 @@ var OddsGroupDropdown = function OddsGroupDropdown(props) {
     var confirmProps = {
       onClick: function onClick() {
         if (currentActivePlayer && value !== currentActivePlayer.oddsGroup) {
-          var ibcCustId = currentActivePlayer.ibcCustId;
+          var ibcCustId = currentActivePlayer.ibcCustId,
+              licenseeCustId = currentActivePlayer.licenseeCustId,
+              oddsGroup = currentActivePlayer.oddsGroup;
           var param = {
             custId: ibcCustId,
-            oddsGroup: value
+            oddsGroup: value,
+            oldValue: oddsGroup,
+            licenseeCustId: licenseeCustId
           };
           toggleLoader(true);
           updateOddsGroup(param).then(function (response) {
@@ -3122,10 +3126,14 @@ var SpecialLevelDropdown = function SpecialLevelDropdown(props) {
     var confirmProps = {
       onClick: function onClick() {
         if (currentActivePlayer && value !== currentActivePlayer.specialLevel) {
-          var ibcCustId = currentActivePlayer.ibcCustId;
+          var ibcCustId = currentActivePlayer.ibcCustId,
+              licenseeCustId = currentActivePlayer.licenseeCustId,
+              specialLevel = currentActivePlayer.specialLevel;
           var param = {
             custId: ibcCustId,
-            specialLevel: value
+            specialLevel: value,
+            oldValue: specialLevel,
+            licenseeCustId: licenseeCustId
           };
           toggleLoader(true);
           updateSpecialLevel(param).then(function (response) {
