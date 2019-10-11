@@ -20,15 +20,12 @@
     using NSubstitute;
     using NUnit.Framework;
     using Report;
-    using Service.Core.Common.Interfaces;
     using Web.ResultExtension;
 
     [TestFixture]
     public class WinLossByBetTypeReportControllerTest : CultureBaseControllerHelperTest
     {
         private const int CurrencyId = 999;
-
-        private const string AgentListXml = "<ROOT></ROOT>";
 
         private static readonly DateTime BalanceUpDate = new DateTime(2017, 3, 4);
 
@@ -50,7 +47,6 @@
             base.FixtureSetUp();
 
             SetUpDefaultFakeData();
-
         }
 
         [Test]
@@ -106,7 +102,6 @@
                     Assert.That(viewResult.ViewName, Is.EqualTo("~/Views/Desktop/Report/WinLossByBetType/Main.cshtml"));
                     Assert.That(viewModel.Param, Is.EqualTo(metaModel));
                     Assert.That(viewModel.BalanceUpDay, Is.EqualTo(BalanceUpDate));
-                    Assert.That(viewModel.Param.AgentListXml, Is.EqualTo(AgentListXml));
                     Assert.That(viewModel.CurrencyList, Is.EqualTo(SessionService.UserSession.CurrencyList));
                     Assert.That(viewModel.MainResult, Is.EqualTo(expectedData));
                     Assert.That(viewModel.ColumnCount, Is.EqualTo(expectedColumnCount));

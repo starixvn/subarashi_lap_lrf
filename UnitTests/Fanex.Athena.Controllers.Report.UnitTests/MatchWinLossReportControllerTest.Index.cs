@@ -73,7 +73,6 @@
                 {
                     Assert.That(viewResult.ViewName, Is.EqualTo("~/Views/Desktop/Report/MatchWinLoss/Main.cshtml"));
                     Assert.That(viewModel.Param, Is.EqualTo(metaModel));
-                    Assert.That(viewModel.Param.AgentListXml, Is.EqualTo(AgentListXml));
                     Assert.That(viewModel.MainResult, Is.EqualTo(expectedData));
                     Assert.That(viewModel.ColumnCount, Is.EqualTo(expectedColumnCount));
                 });

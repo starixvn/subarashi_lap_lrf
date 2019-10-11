@@ -21,7 +21,6 @@
     using NSubstitute;
     using NUnit.Framework;
     using Report;
-    using Service.Core.Common.Interfaces;
     using Service.Report.Interfaces;
     using Web.ResultExtension;
 
@@ -29,8 +28,6 @@
     public class LiveReportControllerTest : CultureBaseControllerHelperTest
     {
         private const int CurrencyId = 999;
-
-        private const string AgentListXml = "<ROOT></ROOT>";
 
         private static readonly DateTime BalanceUpDate = new DateTime(2017, 3, 4);
 
@@ -107,7 +104,6 @@
                     Assert.That(viewResult.ViewName, Is.EqualTo("~/Views/Desktop/Report/LiveReport/Main.cshtml"));
                     Assert.That(viewModel.Param, Is.EqualTo(metaModel));
                     Assert.That(viewModel.BalanceUpDate, Is.EqualTo(BalanceUpDate));
-                    Assert.That(viewModel.Param.AgentListXml, Is.EqualTo(AgentListXml));
                     Assert.That(viewModel.Param.LicenseeId, Is.EqualTo(SessionService.LicenseeSession.LicenseeId));
                     Assert.That(viewModel.Param.ProductCodeList, Is.EqualTo("AB,BC,CD"));
                     Assert.That(viewModel.MainResult, Is.EqualTo(expectedData));
@@ -123,7 +119,6 @@
             string productCodeList,
             bool expectedBaVisible)
         {
-
             using (var controller = CreateController(productCodeList))
             {
                 // Arrange
@@ -188,7 +183,6 @@
                     Assert.That(viewModel.MainResult, Is.EqualTo(dataList));
                     Assert.That(viewModel.Param, Is.EqualTo(metaModel));
                     Assert.That(viewModel.CurrencyName, Is.EqualTo(metaModel.CurrencyName));
-                    Assert.That(metaModel.AgentListXml, Is.EqualTo(AgentListXml));
                 });
             }
         }
@@ -224,7 +218,6 @@
                     Assert.That(viewModel.BySports, Is.EqualTo(resultModel.DataBySport));
                     Assert.That(viewModel.ByCurrencies, Is.EqualTo(resultModel.DataByCurrency));
                     Assert.That(viewModel.ByBetType, Is.EqualTo(resultModel.DataByBetType));
-                    Assert.That(metaModel.AgentListXml, Is.EqualTo(AgentListXml));
                     Assert.That(metaModel.ProductCodeList, Is.EqualTo(expectedProductCodeList));
                 });
             }
