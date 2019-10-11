@@ -48,7 +48,7 @@ describe('FormFilter ', () => {
                 const formFilter = new FormFilter(formFilterPropsForEventHandler);
 
                 const selectList = formFilter._renderTimeZoneSelectList();
-                selectList.props.onChange({value: 8});
+                selectList.props.onChange({ value: 8 });
 
                 expect(formFilterPropsForEventHandler.setSelectedTimeZone).toHaveBeenCalledWith(8);
             })
@@ -57,7 +57,7 @@ describe('FormFilter ', () => {
                 const formFilter = new FormFilter(formFilterPropsForEventHandler);
 
                 const selectList = formFilter._renderReportBySelectList();
-                selectList.props.onChange({value: 8});
+                selectList.props.onChange({ value: 8 });
 
                 expect(formFilterPropsForEventHandler.setSelectedReportBy).toHaveBeenCalledWith(8);
             })
@@ -75,7 +75,7 @@ describe('FormFilter ', () => {
                 const formFilter = new FormFilter(formFilterPropsForEventHandler);
 
                 const selectList = formFilter._renderBaseCurrencySelectList();
-                selectList.props.onChange({value: 123});
+                selectList.props.onChange({ value: 123 });
 
                 expect(formFilterPropsForEventHandler.setSelectedBaseCurrency).toHaveBeenCalledWith(123);
             })
@@ -141,7 +141,7 @@ describe('FormFilter ', () => {
                 it('filter data is valid - return correct param data', () => {
                     const { convertDateToString } = Site;
                     Site.convertDateToString = jest.fn((date) => date);
-                    const expectedResult =  { 
+                    const expectedResult = {
                         data: {
                             BaseCurrency: formFilterPropsForEventHandler.selectedBaseCurrency,
                             CurrencyId: formFilterPropsForEventHandler.selectedCurrency.value,
@@ -153,10 +153,10 @@ describe('FormFilter ', () => {
                             TimeZone: formFilterPropsForEventHandler.selectedTimeZone,
                             ReportBy: formFilterPropsForEventHandler.selectedReportBy,
                             GroupBy: formFilterPropsForEventHandler.groupBy,
-                            IsExcludeTestData: formFilterPropsForEventHandler.isExcludeTest
+                            IsExcludedTestData: formFilterPropsForEventHandler.isExcludeTest
                         }
                     };
-                  
+
                     const formFilter = new FormFilter(formFilterPropsForEventHandler);
 
                     const result = formFilter._getParams();
@@ -234,9 +234,9 @@ describe('FormFilter ', () => {
                 })
 
                 describe('_getParams return data ', () => {
-                    const fakeResponse = { 
-                        data: { 
-                            Data:[1, 2]
+                    const fakeResponse = {
+                        data: {
+                            Data: [1, 2]
                         }
                     };
                     const promise = Promise.resolve(fakeResponse);
@@ -271,8 +271,8 @@ describe('FormFilter ', () => {
 
                         Promise.resolve().then(() => {
                             expect(reportExcelMock).toHaveBeenCalledWith(
-                                fakeResponse.data, 
-                                fakeReportTitle, 
+                                fakeResponse.data,
+                                fakeReportTitle,
                                 formFilterPropsForEventHandler.selectedReportBy,
                                 formFilterPropsForEventHandler.groupBy,
                                 formFilterPropsForEventHandler.selectedBaseCurrency);
