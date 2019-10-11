@@ -4,7 +4,7 @@ import Site from '@jsroot/lib/site';
 import { BetLimitProduct } from './constants';
 
 const Url = {
-    [BetLimitProduct.SB]: 'SportBookBetLimit',
+    [BetLimitProduct.SB]: 'SportsBookBetLimit',
     [BetLimitProduct.VS]: 'DcsBetLimit',
     [BetLimitProduct.VS2]: 'DcsBetLimit',
     [BetLimitProduct.LT]: 'DcsBetLimit',

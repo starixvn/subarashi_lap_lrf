@@ -147,7 +147,7 @@ export class AGCDataContent extends PureComponent {
             children: content,
             onClose: this.onRefresh,
             icon: isSuccess ? 'success' : 'error',
-            height: 180,
+            height: 225,
             buttons: buttons
         }));
     }

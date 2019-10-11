@@ -58,7 +58,7 @@
         [FunctionAuthorization(PermissionKeys.PlayerAdminBetLimit_Write)]
         public async Task<JsonResult> UpdateSetting(PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>> metaModel)
         {
-            if (!metaModel.Setting.Any())
+            if (metaModel.Setting is null || !metaModel.Setting.Any())
             {
                 return Json(new { Code = 1, Message = ViewResources.InvalidParams });
             }

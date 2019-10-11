@@ -9,6 +9,7 @@
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Module.PlayerAdmin.DataDomains;
     using Fanex.Athena.Module.PlayerAdmin.DTO;
+    using Fanex.Athena.Module.PlayerAdmin.Helpers;
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
     using Fanex.Athena.Module.PlayerAdmin.Repositories.Interfaces;
     using Fanex.Athena.Module.PlayerAdmin.Services.Interfaces;
@@ -53,105 +54,61 @@
 
         public async Task<IResultInfo> UpdateSettingAsync(PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>> metaModel, bool isShowMixedSport)
         {
-            if (metaModel.Setting is null || !metaModel.Setting.Any(x => x.Id == ((int)SportType.Esports).ToString()))
+            var esportsTypeId = ((int)SportType.Esports).ToString();
+            if (!metaModel.Setting.Any(x => x.Id == esportsTypeId))
             {
-                return new ResultInfo
-                {
-                    Code = 1,
-                    Message = "Invalid parameters. Setting is null."
-                };
+                return new ResultInfo { Code = 1, Message = "Invalid parameters. Setting is null."};
             }
 
-            var result = await UpdateSportsBookSettingAsync(metaModel, isShowMixedSport).ConfigureAwait(false);
-            if (!result.IsSuccessful)
-            {
-                return result;
-            }
-
-            var esportsSetting = metaModel.Setting.Where(x => x.IsUpdated && x.Id == ((int)SportType.Esports).ToString()).ToList();
-
-            if (!esportsSetting.Any())
-            {
-                return result;
-            }
-
-            var dcsMetaModel = new PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>>
-            {
-                CustId = metaModel.CustId,
-                UserId = metaModel.UserId,
-                SiteName = metaModel.SiteName,
-                Ip = metaModel.Ip,
-                Setting = esportsSetting,
-                ProductId = ProductTypes.Sportsbooks2,
-                LicenseeCustId = metaModel.LicenseeCustId
-            };
-            return await UpdateEsportsSettingAsync(dcsMetaModel).ConfigureAwait(false);
-        }
-
-        private async Task<IResultInfo> UpdateSportsBookSettingAsync(PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>> metaModel, bool isShowMixedSport)
-        {
             var result = await _betSetting.UpdateSettingAsync(metaModel, isShowMixedSport).ConfigureAwait(false);
+            var logInfo = PlayerAdminBetLimitActionLogHelper.CreateLogInfo(
+                metaModel,
+                GetDetailedLog(metaModel.Setting.Where(x => x.Id != esportsTypeId), result.Code == 0));
 
-            WriteLog(metaModel, result.IsSuccessful);
+            if (result.Code > 0)
+            {
+                _businessLogService.Write(BusinessLogType.CustomerBetSetting, logInfo);
+                return result;
+            }
 
+            var esportsSetting = metaModel.Setting.Where(x => x.IsUpdated && x.Id == esportsTypeId).ToList();
+            if (esportsSetting.Any())
+            {
+                var dcsMetaModel = new PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>>
+                {
+                    CustId = metaModel.CustId,
+                    UserId = metaModel.UserId,
+                    SiteName = metaModel.SiteName,
+                    Ip = metaModel.Ip,
+                    Setting = esportsSetting,
+                    ProductId = ProductTypes.Sportsbooks2,
+                    LicenseeCustId = metaModel.LicenseeCustId
+                };
+                result = await _dcsBetSetting.UpdateSettingAsync(dcsMetaModel).ConfigureAwait(false);
+
+                if (logInfo is null)
+                {
+                    logInfo = PlayerAdminBetLimitActionLogHelper.CreateLogInfo(
+                        metaModel,
+                        GetDetailedLog(esportsSetting, result.Code == 0));
+                }
+                else
+                {
+                    logInfo.Detail = logInfo.Detail.Concat(GetDetailedLog(esportsSetting, result.Code == 0));
+                }
+            }
+
+            _businessLogService.Write(BusinessLogType.CustomerBetSetting, logInfo);
             return result;
         }
 
-        private async Task<IResultInfo> UpdateEsportsSettingAsync(PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>> metaModel)
+        private static IEnumerable<PlayerBetLimitDetailedLogMetaModel> GetDetailedLog(IEnumerable<PlayerBetLimitMetaModel> setting, bool isSuccessful)
         {
-            var result = await _dcsBetSetting.UpdateSettingAsync(metaModel).ConfigureAwait(false);
-
-            WriteLog(metaModel, result.IsSuccessful);
-
-            return result;
-        }
-
-        private static IEnumerable<PlayerBetLimitDetailedLogMetaModel> CreateLogDetail(PlayerBetLimitMetaModel setting, bool isSuccessful)
-        {
-            if (setting.MinBet != setting.OldMinBet)
-            {
-                yield return new PlayerBetLimitDetailedLogMetaModel
-                {
-                    DetailedId = LogActionDetailId.UpdatingMinBet,
-                    SportType = setting.Id,
-                    Status = isSuccessful ? LogText.Success : LogText.False,
-                    Old = setting.OldMinBet.ToString(),
-                    New = setting.MinBet.ToString()
-                };
-            }
-
-            if (setting.MaxBet != setting.OldMaxBet)
-            {
-                yield return new PlayerBetLimitDetailedLogMetaModel
-                {
-                    DetailedId = LogActionDetailId.UpdatingMaxBet,
-                    SportType = setting.Id,
-                    Status = isSuccessful ? LogText.Success : LogText.False,
-                    Old = setting.OldMaxBet.ToString(),
-                    New = setting.MaxBet.ToString()
-                };
-            }
-
-            if (setting.MaxPerMatch != setting.OldMaxPerMatch)
-            {
-                yield return new PlayerBetLimitDetailedLogMetaModel
-                {
-                    DetailedId = LogActionDetailId.UpdatingMaxPerMatch,
-                    SportType = setting.Id,
-                    Status = isSuccessful ? LogText.Success : LogText.False,
-                    Old = setting.OldMaxPerMatch.ToString(),
-                    New = setting.MaxPerMatch.ToString()
-                };
-            }
-        }
-
-        private void WriteLog(PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>> metaModel, bool isSuccessful)
-        {
-            var logDetail = metaModel.Setting
-                .Where(x => x.IsUpdated)
-                .SelectMany(x => CreateLogDetail(x, isSuccessful));
-
-            _businessLogService.Write(BusinessLogType.CustomerBetSetting, metaModel.CreateLogInfo(logDetail));
+           return PlayerAdminBetLimitActionLogHelper.BuildBetLimitLogDetail(
+                setting,
+                x => x.Id,
+                isSuccessful,
+                new int[3] { LogActionDetailId.UpdatingMinBet, LogActionDetailId.UpdatingMaxBet, LogActionDetailId.UpdatingMaxPerMatch });
         }
     }
 }

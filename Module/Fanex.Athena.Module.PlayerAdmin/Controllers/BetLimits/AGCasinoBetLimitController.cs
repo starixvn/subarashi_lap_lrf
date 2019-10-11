@@ -6,7 +6,6 @@
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
-    using Fanex.Athena.Module.PlayerAdmin.Repositories.Interfaces;
     using Fanex.Athena.Module.PlayerAdmin.Services.Interfaces;
     using Fanex.Athena.Resources;
     using Fanex.Athena.Service.Core.Common.Interfaces;

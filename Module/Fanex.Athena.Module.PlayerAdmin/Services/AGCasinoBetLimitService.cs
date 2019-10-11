@@ -13,6 +13,7 @@
     using Fanex.Athena.Module.PlayerAdmin.DataDomains;
     using Fanex.Athena.Module.PlayerAdmin.DTO;
     using Fanex.Athena.Module.PlayerAdmin.DTO.BetLimits;
+    using Fanex.Athena.Module.PlayerAdmin.Helpers;
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
     using Fanex.Athena.Module.PlayerAdmin.Repositories.Interfaces;
     using Fanex.Athena.Module.PlayerAdmin.Services.Interfaces;
@@ -89,25 +90,16 @@
 
         public async Task<AgCasinoBetSetting> GetBetSettingAsync(int custId)
         {
-            return await _repository.GetBetSettingAsync(custId);
+            return await _repository.GetBetSettingAsync(custId).ConfigureAwait(false);
         }
 
         public async Task<IResultInfo> UpdateSettingAsync(PlayerBetLimitUpdateMetaModel<AgCasinoBetLimitMetaModel> metaModel)
         {
             var result = await _repository.UpdateSettingAsync(metaModel).ConfigureAwait(false);
 
-            var logDetail = new PlayerBetLimitDetailedLogMetaModel[1]
-                {
-                    new PlayerBetLimitDetailedLogMetaModel
-                    {
-                        DetailedId = LogActionDetailId.UpdatingAGGroup,
-                        SportType = ((int)SportType.AgCasino).ToString(),
-                        Status = result.IsSuccessful ? LogText.Success : LogText.False,
-                        Old = metaModel.Setting.OldGroup,
-                        New = metaModel.Setting.Group
-                    }
-                };
-            _businessLogService.Write(BusinessLogType.CustomerBetSetting, metaModel.CreateLogInfo(logDetail));
+            var logInfo = PlayerAdminBetLimitActionLogHelper.CreateLogInfo(metaModel, result.Code == 0);
+
+            _businessLogService.Write(BusinessLogType.CustomerBetSetting, logInfo);
 
             return result;
         }

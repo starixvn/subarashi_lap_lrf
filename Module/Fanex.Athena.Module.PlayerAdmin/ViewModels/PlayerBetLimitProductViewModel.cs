@@ -10,6 +10,8 @@
 
         public int CurrencyId { get; set; }
 
+        public int LicenseeCustId { get; set; }
+
         public IDictionary<int, string> ProductList { get; set; }
     }
 }

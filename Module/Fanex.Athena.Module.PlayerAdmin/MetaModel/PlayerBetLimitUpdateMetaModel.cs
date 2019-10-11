@@ -22,14 +22,5 @@
         public int LicenseeCustId { get; set; }
 
         public T Setting { get; set; }
-
-        public PlayerBetLimitLogMetaModel CreateLogInfo(IEnumerable<PlayerBetLimitDetailedLogMetaModel> detail) => new PlayerBetLimitLogMetaModel
-        {
-            CustId = CustId,
-            UserId = UserId,
-            SiteName = SiteName,
-            LicenseeCustId = LicenseeCustId,
-            Detail = detail
-        };
     }
 }

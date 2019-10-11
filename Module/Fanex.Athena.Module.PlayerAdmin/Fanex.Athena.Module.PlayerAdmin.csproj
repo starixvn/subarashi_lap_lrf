@@ -110,7 +110,6 @@
     <Compile Include="Controllers\PlayerStatementController.cs" />
     <Compile Include="Controllers\PlayerBetLimitController.cs" />
     <Compile Include="DataDomains\LogActionDetailId.cs" />
-    <Compile Include="DataDomains\LogText.cs" />
     <Compile Include="DependencyInjectionExtension.cs" />
     <Compile Include="DTO\BetLimits\AgCasinoBetSetting.cs" />
     <Compile Include="DTO\BetLimits\AgCasinoGame.cs" />
@@ -119,6 +118,7 @@
     <Compile Include="DTO\PlayerBetLimitProduct.cs" />
     <Compile Include="Extensions\PlayerAdminBusinessLogBuilderFactory.cs" />
     <Compile Include="Extensions\PlayerBetLimitLogBuilder.cs" />
+    <Compile Include="Helpers\PlayerAdminBetLimitActionLogHelper.cs" />
     <Compile Include="MetaModel\AgCasinoBetLimitMetaModel.cs" />
     <Compile Include="MetaModel\PlayerBetLimitDetailedLogMetaModel.cs" />
     <Compile Include="MetaModel\PlayerBetLimitLogMetaModel.cs" />

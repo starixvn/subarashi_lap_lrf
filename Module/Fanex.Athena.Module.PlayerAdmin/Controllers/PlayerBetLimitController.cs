@@ -35,7 +35,7 @@
 
         [HttpGet]
         [ValidatePermissionOnData]
-        public async Task<ViewResult> Index(int custId, int currencyId)
+        public async Task<ViewResult> Index(int custId, int currencyId, int licenseeCustId)
         {
             var productList = await GetProducts(SessionService.LicenseeSession.LicenseeName).ConfigureAwait(false);
             var viewModel = new PlayerBetLimitProductViewModel
@@ -43,6 +43,7 @@
                 CustId = custId,
                 ProductList = productList,
                 CurrencyId = currencyId,
+                LicenseeCustId = licenseeCustId,
                 ProductId = productList.FirstOrDefault().Key
             };
 
