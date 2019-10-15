@@ -70,11 +70,6 @@ export class AGCDataContent extends PureComponent {
         return !gamesHaveGroup || gamesHaveGroup.length !== data.length;
     }
 
-    _handleError() {
-        Utility.showErrorMsg();
-        this.props.toggleLoader(false);
-    }
-
     _updateState(data, setting) {
         if (setting.BetSetting) {
             const groups = setting.BetSetting ? setting.BetSetting.CheckedGroups.map(x => { return { value: x, label: x }; }) : [];
@@ -93,7 +88,7 @@ export class AGCDataContent extends PureComponent {
     _getData(param) {
         this.props.toggleLoader(true);
 
-        DataTransfer.getData(param, this._updateState.bind(this), null, this._handleError.bind(this));
+        DataTransfer.getData(param, this._updateState.bind(this));
     }
 
     _submit(group, oldGroup) {
@@ -101,7 +96,7 @@ export class AGCDataContent extends PureComponent {
 
         const param = Object.assign({}, this.props.requestParam, { Setting: { group, oldGroup } });
 
-        DataTransfer.updateData(param, this._showSubmitResult.bind(this), () => this.props.toggleLoader(false), this._handleError.bind(this));
+        DataTransfer.updateData(param, this._showSubmitResult.bind(this));
     }
 
     _showConfirmation(onOK) {
@@ -141,15 +136,18 @@ export class AGCDataContent extends PureComponent {
                 className: 'btn btn-apply btn-alone'
             }];
 
-        this.setState({ disabledButton: true }, () => this.props.setAlertOption({
-            isShow: true,
-            title: title,
-            children: content,
-            onClose: this.onRefresh,
-            icon: isSuccess ? 'success' : 'error',
-            height: 225,
-            buttons: buttons
-        }));
+        this.setState({ disabledButton: true }, () => {
+            this.props.setAlertOption({
+                isShow: true,
+                title: title,
+                children: content,
+                onClose: this.onRefresh,
+                icon: isSuccess ? 'success' : 'error',
+                height: 225,
+                buttons: buttons
+            });
+            this.props.toggleLoader(false);
+        });
     }
 
     render() {

@@ -1,6 +1,7 @@
 ﻿import LangHelper from '@jsroot/lib/langHelper';
 import Site from '@jsroot/lib/site';
 import DataService from '@jsroot/lib/DataService';
+import axios from 'axios';
 
 const HeaderText = {
     Index: "#",
@@ -24,10 +25,6 @@ export default class Service {
         return HeaderText;
     }
 
-    static showErrorMsg() {
-        alert(LangHelper.getSingleResource('ErrorProcessingMsg'));
-    }
-
     static getReportTitle(currency) {
         return currency ? `${LangHelper.getSingleResource('Currency')}: ${currency.toUpperCase()}` : '';
     }
@@ -36,7 +33,7 @@ export default class Service {
         return LangHelper.getSingleResource('Total');
     }
 
-    static export(param, callback, errorHandle) {
+    static export(param, callback) {
         const url = Site.resolveClientUrl(DataApi);
         const exportParam = Object.assign({}, param, { IsExport: true });
         DataService.getFile(url, exportParam).then((response) => {
@@ -51,11 +48,15 @@ export default class Service {
             callback();
         })
         .catch(error => {
-            errorHandle && errorHandle();
+            console.log(error.message);
+            if (error.response) {
+                alert(LangHelper.getSingleResource("ErrorProcessingMsg"));
+                callback();
+            }
         });
     }
 
-    static getData(param, processDataFunc, successCallBack, errorHandle) {
+    static getData(param, callBack) {
         const url = Site.resolveClientUrl(DataApi);
         DataService.postData(url, param)
             .then(response => {
@@ -63,16 +64,15 @@ export default class Service {
 
                 const data = result.Data;
                 if (data && data.length > 0) {
-                    processDataFunc && processDataFunc(data, result.Total, result.TotalRows);
+                    callBack && callBack(data, result.Total, result.TotalRows);
                 }
                 else {
-                    processDataFunc && processDataFunc([], {}, 0);
+                    callBack && callBack([], {}, 0);
                 }
-
-                successCallBack && successCallBack();
             })
             .catch(error => {
-                errorHandle && errorHandle();
+                console.log(error.message);
+                callBack && callBack([], {}, 0);
             });
     }
 }

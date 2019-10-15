@@ -13,10 +13,6 @@ const ConfirmationMsg = {
 }
 
 export default class Utility {
-    static showErrorMsg() {
-        alert(LangHelper.getSingleResource('ErrorProcessingMsg'));
-    }
-
     static getConfirmationMsg(productId) {
         const message = LangHelper.getSingleResource(ConfirmationMsg[productId].Msg);
 

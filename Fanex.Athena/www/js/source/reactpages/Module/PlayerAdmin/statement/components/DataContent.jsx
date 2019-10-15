@@ -1,7 +1,5 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { ActionCreators } from '../actions/index.js';
-import { bindActionCreators } from 'redux';
 import LangHelper from '@jsroot/lib/langHelper';
 import Service, { BreadcrumbText, Level } from '../lib/service';
 import NoDataTitle from '@jsroot/components/NoDataTitle';
@@ -57,15 +55,8 @@ export class DataContent extends PureComponent {
         this.setState({ src: src, level: Level.level1 });
     }
 
-    _handleError() {
-        Service.showErrorMsg();
-        this.props.toggleLoader(false);
-    }
-
     _getUrl(param) {
-        this.props.toggleLoader(true);
-
-        Service.getData(param, this._updateSrc.bind(this), () => this.props.toggleLoader(false), this._handleError.bind(this));
+        Service.getData(param, this._updateSrc.bind(this));
     }
 
     _renderBreadcrumb() {
@@ -133,13 +124,9 @@ export class DataContent extends PureComponent {
     }
 }
 
-function mapDispatchToProps(dispatch) {
-    const { toggleLoader } = ActionCreators;
-    return bindActionCreators({ toggleLoader }, dispatch);
-}
 function mapStateToProps(state) {
     const { requestParam } = state;
     return Object.assign({}, { requestParam });
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DataContent);
+export default connect(mapStateToProps)(DataContent);

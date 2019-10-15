@@ -5,21 +5,15 @@ import LangHelper from '@jsroot/lib/langHelper';
 const RelativeUrl = 'PlayerStatement/GetStatementUrl';
 
 export default class Service {
-    static showErrorMsg() {
-        alert(LangHelper.getSingleResource('ErrorProcessingMsg'));
-    }
-
-    static getData(param, processDataFunc, successCallBack, errorHandle) {
+    static getData(param, callBack) {
         const url = Site.resolveClientUrl(RelativeUrl);
         DataService.postData(url, param)
             .then(response => {
-                processDataFunc && processDataFunc(response.data);
-
-                successCallBack && successCallBack();
+                callBack && callBack(response.data);
             })
             .catch(error => {
-                processDataFunc && processDataFunc(null);
-                errorHandle && errorHandle();
+                console.log(error.message);
+                callBack && callBack(null);
             });
     }
 }

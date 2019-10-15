@@ -14,23 +14,21 @@ const Url = {
 };
 
 export default class DataTransfer {
-    static getData(param, processDataFunc, successCallBack, errorHandle) {
+    static getData(param, callBack) {
         const url = Site.resolveClientUrl(Url[param.ProductId] + '/GetSetting');
         DataService.postData(url, param)
             .then(response => {
                 const { Data, ...setting } = response.data;
 
-                processDataFunc && processDataFunc(Data, setting);
-
-                successCallBack && successCallBack();
+                callBack && callBack(Data, setting);
             })
             .catch(error => {
-                processDataFunc && processDataFunc([], {});
-                errorHandle && errorHandle();
+                console.log(error.message);
+                callBack && callBack([], {});
             });
     }
 
-    static updateData(param, processDataFunc, successCallBack, errorHandle) {
+    static updateData(param, callBack) {
         const url = Site.resolveClientUrl(Url[param.ProductId] + '/UpdateSetting');
         DataService.postData(url, param)
             .then(response => {
@@ -40,11 +38,11 @@ export default class DataTransfer {
                     LangHelper.getSingleResource('MessageSuccess') :
                     LangHelper.getSingleResource('Fail');
 
-                processDataFunc && processDataFunc(title, result.Message, isSuccess);
-                successCallBack && successCallBack();
+                callBack && callBack(title, result.Message, isSuccess);
             })
             .catch(error => {
-                errorHandle && errorHandle();
+                console.log(error.message);
+                callBack(LangHelper.getSingleResource('Error'), LangHelper.getSingleResource('ErrorProcessingMsg'), false);
             });
     }
 }
