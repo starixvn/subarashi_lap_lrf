@@ -5,7 +5,7 @@ import { fields, headerText } from '../constants';
 export default class GridHelper {
     static renderHeader(displayedColumn) {
         const { Status, UserName, SystemId, RealName, Currency, CurrentBalance, OutstandingBalance,
-            OddsGroup, BaStatus, SpecialLevel, LastLoginIp, LastTransaction, Email } = fields;
+            OddsGroup, BaStatus, SpecialLevel, LastTransaction, Email } = fields;
 
         return (
             <HeaderRow style={{ height: 32 }}>
@@ -21,7 +21,6 @@ export default class GridHelper {
                 {displayedColumn[OddsGroup] && <HeaderCell colWidth={50} sortBy={OddsGroup}>{headerText.OddsGroup}</HeaderCell>}
                 {displayedColumn[BaStatus] && <HeaderCell colWidth={50} sortBy={BaStatus}>{headerText.BaStatus}</HeaderCell>}
                 {displayedColumn[SpecialLevel] && <HeaderCell colWidth={50} sortBy={SpecialLevel}>{headerText.SpecialLevel}</HeaderCell>}
-                {displayedColumn[LastLoginIp] && <HeaderCell colWidth={60}>{headerText.LastLoginIp}</HeaderCell>}
                 {displayedColumn[LastTransaction] && <HeaderCell colWidth={60} sortBy={LastTransaction}>{headerText.LastTransaction}</HeaderCell>}
                 {displayedColumn[Email] && <HeaderCell colWidth={100}>{headerText.Email}</HeaderCell>}
             </HeaderRow>

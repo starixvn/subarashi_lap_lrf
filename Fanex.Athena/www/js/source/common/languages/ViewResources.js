@@ -1,4 +1,4 @@
-﻿// Generated at: 10/2/2019 11:42:25 AM
+﻿// Generated at: 10/15/2019 9:25:08 AM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -339,7 +339,6 @@ Last:"Last",
 LastBetsMonitoring:"Last Bets Monitoring",
 LastGoal:"Last Goal",
 LastLogin:"Last Login",
-LastLoginIP:"Last Login IP",
 Lastmonth:"Last month",
 LastName:"Last Name",
 LastTransaction:"Last Transaction",

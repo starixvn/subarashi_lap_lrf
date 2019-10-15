@@ -2073,10 +2073,6 @@
     <value>无效的信箱地址</value>
     <comment>112658</comment>
   </data>
-  <data name="LastLoginIP" xml:space="preserve">
-    <value>最后登入IP位置</value>
-    <comment>112658</comment>
-  </data>
   <data name="LastTransaction" xml:space="preserve">
     <value>最后交易</value>
     <comment>112658</comment>

@@ -3112,15 +3112,6 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Last Login IP.
-        /// </summary>
-        public static string LastLoginIP {
-            get {
-                return ResourceManager.GetString("LastLoginIP", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Last month.
         /// </summary>
         public static string Lastmonth {

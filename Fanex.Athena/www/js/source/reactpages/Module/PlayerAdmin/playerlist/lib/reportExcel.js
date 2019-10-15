@@ -155,10 +155,6 @@ export default class ReportExcel {
             [MAIN_SECTION_STYLE]: bodyCellStyle.center,
             width: 70
         }, {
-            field: fields.LastLoginIp,
-            [MAIN_SECTION_STYLE]: bodyCellStyle.left,
-            width: 100
-        }, {
             field: fields.LastTransaction,
             [MAIN_SECTION_STYLE]: bodyCellStyle.left,
             width: 150

@@ -40,7 +40,6 @@ export const fields = {
     OddsGroup: 'OddsGroup',
     BaStatus: 'BaStatus',
     SpecialLevel: 'SpecialLevel',
-    LastLoginIp: 'LastLoginIp',
     LastTransaction: 'LastTransaction',
     Email: 'Email'
 }
@@ -56,7 +55,6 @@ export const columnList = [
     { key: fields.OddsGroup, value: LangHelper.getSingleResource('OddsGroup'), show: true },
     { key: fields.BaStatus, value: LangHelper.getSingleResource('BAStatus'), show: true },
     { key: fields.SpecialLevel, value: LangHelper.getSingleResource('SpecialLevel'), show: true },
-    { key: fields.LastLoginIp, value: LangHelper.getSingleResource('LastLoginIP'), show: true },
     { key: fields.LastTransaction, value: LangHelper.getSingleResource('LastTransfer'), show: true },
     { key: fields.Email, value: LangHelper.getSingleResource('Email'), show: true }
 ];
@@ -155,7 +153,6 @@ export const headerText = {
     OddsGroup: LangHelper.getSingleResource('OddsGroup'),
     BaStatus: LangHelper.getSingleResource('BAStatus'),
     SpecialLevel: LangHelper.getSingleResource('SpecialLevel'),
-    LastLoginIp: LangHelper.getSingleResource('LastLoginIP'),
     LastTransaction: LangHelper.getSingleResource('LastTransfer'),
     Email: LangHelper.getSingleResource('Email')
 }
