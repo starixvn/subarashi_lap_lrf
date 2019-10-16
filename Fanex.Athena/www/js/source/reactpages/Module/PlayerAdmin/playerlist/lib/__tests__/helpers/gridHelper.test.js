@@ -30,6 +30,7 @@ describe('GridHelper', () => {
         }
 
         runTest(40, 100, 100);
+        runTest(40, 1000, 960);
     })
 
     it('renderHeader -  match snapshot', () => {
