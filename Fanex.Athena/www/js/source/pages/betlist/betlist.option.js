@@ -61,7 +61,7 @@
     {
         name: 'Stake',
         index: 'Stake',
-        width: 80,
+        width: 85,
         align: 'right',
         sortable: true,
         resizable: false
@@ -70,7 +70,7 @@
     {
         name: 'WinLoss',
         index: 'WinLoss',
-        width: 75,
+        width: 80,
         align: 'right',
         sortable: true,
         resizable: false,
@@ -80,7 +80,7 @@
     {
         name: 'BetEffective',
         index: 'BetEffective',
-        width: 115,
+        width: 105,
         align: 'right',
         sortable: true,
         resizable: false,
