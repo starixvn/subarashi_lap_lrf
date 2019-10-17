@@ -6,7 +6,7 @@
     {
         name: 'Index',
         index: 'Index',
-        width: 50,
+        width: 40,
         align: 'center',
         sortable: false,
         resizable: false
@@ -61,7 +61,7 @@
     {
         name: 'Stake',
         index: 'Stake',
-        width: 70,
+        width: 80,
         align: 'right',
         sortable: true,
         resizable: false
