@@ -639,27 +639,17 @@ var SettingContent = function SettingContent(Grid, DataHandling) {
     }, {
       key: "_submit",
       value: function _submit(data) {
-        var _this2 = this;
-
         this.props.toggleLoader(true);
         var requestParam = this.props.requestParam;
         var param = Object.assign({}, this.props.requestParam, {
           Setting: data
         });
-        _lib_dataTransfer__WEBPACK_IMPORTED_MODULE_6__["default"].updateData(param, this._showSubmitResult.bind(this), function () {
-          return _this2.props.toggleLoader(false);
-        }, this._handleError.bind(this));
-      }
-    }, {
-      key: "_handleError",
-      value: function _handleError() {
-        _lib_utility__WEBPACK_IMPORTED_MODULE_7__["default"].showErrorMsg();
-        this.props.toggleLoader(false);
+        _lib_dataTransfer__WEBPACK_IMPORTED_MODULE_6__["default"].updateData(param, this._showSubmitResult.bind(this));
       }
     }, {
       key: "_showConfirmation",
       value: function _showConfirmation(onOK) {
-        var _this3 = this;
+        var _this2 = this;
 
         var buttons = [{
           text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('OK'),
@@ -676,13 +666,13 @@ var SettingContent = function SettingContent(Grid, DataHandling) {
         this.setState({
           disabledButton: true
         }, function () {
-          return _this3.props.setAlertOption({
+          return _this2.props.setAlertOption({
             isShow: true,
             title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Confirmation'),
             children: msg,
             buttons: buttons,
             icon: '',
-            onClose: _this3.onCloseAlert,
+            onClose: _this2.onCloseAlert,
             height: 130
           });
         });
@@ -690,7 +680,7 @@ var SettingContent = function SettingContent(Grid, DataHandling) {
     }, {
       key: "_showSubmitResult",
       value: function _showSubmitResult(title, msg, isSuccess) {
-        var _this4 = this;
+        var _this3 = this;
 
         var content = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
           className: "center-align"
@@ -703,15 +693,17 @@ var SettingContent = function SettingContent(Grid, DataHandling) {
         this.setState({
           disabledButton: true
         }, function () {
-          return _this4.props.setAlertOption({
+          _this3.props.setAlertOption({
             isShow: true,
             title: title,
             children: content,
-            onClose: _this4.onRefresh,
+            onClose: _this3.onRefresh,
             icon: isSuccess ? 'success' : 'error',
             height: 225,
             buttons: buttons
           });
+
+          _this3.props.toggleLoader(false);
         });
       }
     }, {
@@ -752,7 +744,7 @@ var SettingContent = function SettingContent(Grid, DataHandling) {
       key: "_getData",
       value: function _getData(param) {
         this.props.toggleLoader(true);
-        _lib_dataTransfer__WEBPACK_IMPORTED_MODULE_6__["default"].getData(param, this._refreshState.bind(this), null, this._handleError.bind(this));
+        _lib_dataTransfer__WEBPACK_IMPORTED_MODULE_6__["default"].getData(param, this._refreshState.bind(this));
       }
     }, {
       key: "render",
@@ -1101,12 +1093,6 @@ function (_PureComponent) {
       return !gamesHaveGroup || gamesHaveGroup.length !== data.length;
     }
   }, {
-    key: "_handleError",
-    value: function _handleError() {
-      _lib_utility__WEBPACK_IMPORTED_MODULE_5__["default"].showErrorMsg();
-      this.props.toggleLoader(false);
-    }
-  }, {
     key: "_updateState",
     value: function _updateState(data, setting) {
       if (setting.BetSetting) {
@@ -1132,13 +1118,11 @@ function (_PureComponent) {
     key: "_getData",
     value: function _getData(param) {
       this.props.toggleLoader(true);
-      _lib_dataTransfer__WEBPACK_IMPORTED_MODULE_6__["default"].getData(param, this._updateState.bind(this), null, this._handleError.bind(this));
+      _lib_dataTransfer__WEBPACK_IMPORTED_MODULE_6__["default"].getData(param, this._updateState.bind(this));
     }
   }, {
     key: "_submit",
     value: function _submit(group, oldGroup) {
-      var _this2 = this;
-
       this.props.toggleLoader(true);
       var param = Object.assign({}, this.props.requestParam, {
         Setting: {
@@ -1146,17 +1130,15 @@ function (_PureComponent) {
           oldGroup: oldGroup
         }
       });
-      _lib_dataTransfer__WEBPACK_IMPORTED_MODULE_6__["default"].updateData(param, this._showSubmitResult.bind(this), function () {
-        return _this2.props.toggleLoader(false);
-      }, this._handleError.bind(this));
+      _lib_dataTransfer__WEBPACK_IMPORTED_MODULE_6__["default"].updateData(param, this._showSubmitResult.bind(this));
     }
   }, {
     key: "_showConfirmation",
     value: function _showConfirmation(onOK) {
-      var _this3 = this;
+      var _this2 = this;
 
       var onClose = function onClose() {
-        return _this3.onCloseAlert(false);
+        return _this2.onCloseAlert(false);
       };
 
       var buttons = [{
@@ -1174,7 +1156,7 @@ function (_PureComponent) {
       this.setState({
         disabledButton: true
       }, function () {
-        return _this3.props.setAlertOption({
+        return _this2.props.setAlertOption({
           isShow: true,
           title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Confirmation'),
           children: msg,
@@ -1188,7 +1170,7 @@ function (_PureComponent) {
   }, {
     key: "_showSubmitResult",
     value: function _showSubmitResult(title, msg, isSuccess) {
-      var _this4 = this;
+      var _this3 = this;
 
       var content = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "center-align"
@@ -1201,15 +1183,17 @@ function (_PureComponent) {
       this.setState({
         disabledButton: true
       }, function () {
-        return _this4.props.setAlertOption({
+        _this3.props.setAlertOption({
           isShow: true,
           title: title,
           children: content,
-          onClose: _this4.onRefresh,
+          onClose: _this3.onRefresh,
           icon: isSuccess ? 'success' : 'error',
           height: 225,
           buttons: buttons
         });
+
+        _this3.props.toggleLoader(false);
       });
     }
   }, {
@@ -1794,32 +1778,31 @@ function () {
 
   _createClass(DataTransfer, null, [{
     key: "getData",
-    value: function getData(param, processDataFunc, successCallBack, errorHandle) {
+    value: function getData(param, callBack) {
       var url = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_2__["default"].resolveClientUrl(Url[param.ProductId] + '/GetSetting');
       _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_1__["default"].postData(url, param).then(function (response) {
         var _response$data = response.data,
             Data = _response$data.Data,
             setting = _objectWithoutProperties(_response$data, ["Data"]);
 
-        processDataFunc && processDataFunc(Data, setting);
-        successCallBack && successCallBack();
+        callBack && callBack(Data, setting);
       }).catch(function (error) {
-        processDataFunc && processDataFunc([], {});
-        errorHandle && errorHandle();
+        console.log(error.message);
+        callBack && callBack([], {});
       });
     }
   }, {
     key: "updateData",
-    value: function updateData(param, processDataFunc, successCallBack, errorHandle) {
+    value: function updateData(param, callBack) {
       var url = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_2__["default"].resolveClientUrl(Url[param.ProductId] + '/UpdateSetting');
       _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_1__["default"].postData(url, param).then(function (response) {
         var result = response.data;
         var isSuccess = Number(result.Code) === 0;
         var title = isSuccess ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('MessageSuccess') : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Fail');
-        processDataFunc && processDataFunc(title, result.Message, isSuccess);
-        successCallBack && successCallBack();
+        callBack && callBack(title, result.Message, isSuccess);
       }).catch(function (error) {
-        errorHandle && errorHandle();
+        console.log(error.message);
+        callBack(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Error'), _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('ErrorProcessingMsg'), false);
       });
     }
   }]);
@@ -2086,11 +2069,6 @@ function () {
   }
 
   _createClass(Utility, null, [{
-    key: "showErrorMsg",
-    value: function showErrorMsg() {
-      alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('ErrorProcessingMsg'));
-    }
-  }, {
     key: "getConfirmationMsg",
     value: function getConfirmationMsg(productId) {
       var message = _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource(ConfirmationMsg[productId].Msg);

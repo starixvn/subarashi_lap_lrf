@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 10/2/2019 11:42:25 AM
+// Generated at: 10/15/2019 9:25:08 AM
 window._language_zh_CN = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -389,7 +389,6 @@ window._language_zh_CN = {
   LastBetsMonitoring: "最后投注监测",
   LastGoal: "最后进球",
   LastLogin: "最后登入",
-  LastLoginIP: "最后登入IP位置",
   Lastmonth: "上个月",
   LastName: "姓",
   LastTransaction: "最后交易",
