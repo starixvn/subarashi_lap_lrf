@@ -5,211 +5,118 @@ exports[`FormFilter _renderUserGuide - should match snapshot 1`] = `
   <UserGuide
     className="icon-book right"
     content="Player Admin User Guide"
-    contentTitle=""
+    contentTitle="PlayerAdmin"
     onClick={[Function]}
     title="UserGuide"
   />
 </div>
 `;
 
-exports[`FormFilter render isShowAdvancedSearch = false - should match snapshot without AdvancedSearch 1`] = `
-<CollapsiblePanel
-  className="page-filter"
-  iconContainerStyle={
-    Object {
-      "background": "#4c6274",
-      "bottom": 0,
-      "cursor": "pointer",
-      "height": "15px",
-      "left": "calc(50% - 10px)",
-      "position": "absolute",
-      "textAlign": "center",
-      "width": "20px",
+exports[`FormFilter render match snapshot 1`] = `
+<div>
+  <CollapsiblePanel
+    className="page-filter"
+    iconContainerStyle={
+      Object {
+        "background": "#4c6274",
+        "bottom": 0,
+        "cursor": "pointer",
+        "height": "15px",
+        "left": "calc(50% - 10px)",
+        "position": "absolute",
+        "textAlign": "center",
+        "width": "20px",
+      }
     }
-  }
-  iconToggle={
-    Object {
-      "className": "chevron up",
-      "style": Object {},
-      "tag": "div",
+    iconToggle={
+      Object {
+        "className": "chevron up",
+        "style": Object {},
+        "tag": "div",
+      }
     }
-  }
-  onCollapse={[Function]}
-  onExpand={[Function]}
-  stickyFooter={
-    <UserGuide
-      className="icon-book right"
-      content="Player Admin User Guide"
-      contentTitle=""
-      onClick={[Function]}
-      title="UserGuide"
-    />
-  }
->
-  <div
-    className="row"
+    onCollapse={[Function]}
+    onExpand={[Function]}
+    stickyFooter={
+      <UserGuide
+        className="icon-book right"
+        content="Player Admin User Guide"
+        contentTitle="PlayerAdmin"
+        onClick={[Function]}
+        title="UserGuide"
+      />
+    }
   >
     <div
-      className="col-12 col-md-4 col-sm-4 col-lg-3 col-xl-2"
+      className="row"
     >
       <div
-        className="form-group"
-      >
-        <label
-          className="label-text"
-        >
-          UserName 
-          <SearchOption
-            onChange={[Function]}
-            value="2"
-          />
-        </label>
-        <input
-          autoComplete="off"
-          className="input-text"
-          id="userName"
-          name="userName"
-          onChange={[Function]}
-          type="text"
-          value=""
-        />
-      </div>
-    </div>
-    <div
-      className="col-12 col-md-2 col-sm-2 col-lg-1 col-xl-1"
-    >
-      <div
-        className="form-group"
+        className="col-12 col-md-4 col-sm-4 col-lg-3 col-xl-2"
       >
         <div
-          className="button-group"
+          className="form-group"
         >
-          <button
-            className="btn btn-submit"
-            onClick={[Function]}
-            type="button"
+          <label
+            className="label-text"
           >
-            Submit
-          </button>
+            Username
+            <SearchOption
+              onChange={[Function]}
+              value="2"
+            />
+          </label>
+          <ForwardRef
+            getSuggestionList={[MockFunction]}
+            minChar={3}
+            onChange={[Function]}
+            onKeyPress={[Function]}
+            onSelectItem={[Function]}
+            searchOption="2"
+          />
+        </div>
+      </div>
+      <Memo(AthenaSearch)
+        bankAccountNumber=""
+        email=""
+        onChange={[Function]}
+        onKeyPress={[Function]}
+      />
+      <div
+        className="col-12 col-md-2 col-sm-2 col-lg-2 col-xl-1"
+      >
+        <div
+          className="form-group"
+        >
+          <div
+            className="button-group"
+          >
+            <button
+              className="btn btn-submit"
+              disabled={true}
+              onClick={[Function]}
+              type="button"
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        className="col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2"
+      >
+        <div
+          className="form-group"
+        >
+          <ForwardRef
+            checked={false}
+            disabled={false}
+            id="isAdvancedSearch"
+            label="AdvancedSearch"
+            onChange={[Function]}
+          />
         </div>
       </div>
     </div>
-    <div
-      className="col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2"
-    >
-      <div
-        className="form-group"
-      >
-        <CheckBox
-          checked={true}
-          disabled={false}
-          id="isAdvancedSearch"
-          label="Advanced Search"
-          onChange={[Function]}
-        />
-      </div>
-    </div>
-  </div>
-</CollapsiblePanel>
-`;
-
-exports[`FormFilter render isShowAdvancedSearch = true - should match snapshot with AdvancedSearch 1`] = `
-<CollapsiblePanel
-  className="page-filter"
-  iconContainerStyle={
-    Object {
-      "background": "#4c6274",
-      "bottom": 0,
-      "cursor": "pointer",
-      "height": "15px",
-      "left": "calc(50% - 10px)",
-      "position": "absolute",
-      "textAlign": "center",
-      "width": "20px",
-    }
-  }
-  iconToggle={
-    Object {
-      "className": "chevron up",
-      "style": Object {},
-      "tag": "div",
-    }
-  }
-  onCollapse={[Function]}
-  onExpand={[Function]}
-  stickyFooter={
-    <UserGuide
-      className="icon-book right"
-      content="Player Admin User Guide"
-      contentTitle=""
-      onClick={[Function]}
-      title="UserGuide"
-    />
-  }
->
-  <div
-    className="row"
-  >
-    <div
-      className="col-12 col-md-4 col-sm-4 col-lg-3 col-xl-2"
-    >
-      <div
-        className="form-group"
-      >
-        <label
-          className="label-text"
-        >
-          UserName 
-          <SearchOption
-            onChange={[Function]}
-            value="2"
-          />
-        </label>
-        <input
-          autoComplete="off"
-          className="input-text"
-          id="userName"
-          name="userName"
-          onChange={[Function]}
-          type="text"
-          value="test"
-        />
-      </div>
-    </div>
-    <div
-      className="col-12 col-md-2 col-sm-2 col-lg-1 col-xl-1"
-    >
-      <div
-        className="form-group"
-      >
-        <div
-          className="button-group"
-        >
-          <button
-            className="btn btn-submit"
-            onClick={[Function]}
-            type="button"
-          >
-            Submit
-          </button>
-        </div>
-      </div>
-    </div>
-    <div
-      className="col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2"
-    >
-      <div
-        className="form-group"
-      >
-        <CheckBox
-          checked={true}
-          disabled={false}
-          id="isAdvancedSearch"
-          label="Advanced Search"
-          onChange={[Function]}
-        />
-      </div>
-    </div>
-  </div>
-</CollapsiblePanel>
+  </CollapsiblePanel>
+</div>
 `;

@@ -5,14 +5,27 @@ import { UserNameCell } from '../../grid/UserNameCell';
 describe('UserNameCell', () => {
     const defaultProps = {
         dataItem: {
-            CustId: 1,
+            LicenseeCustId: 11,
+            IbcCustId: 1,
             UserName: 'test',
-            Currency: 'USD'
+            CurrencyId: 20,
+            Currency: 'UUS',
+            Status: 0,
+            IsDeposit: true,
+            IsArchived: false,
+            OddsGroup: 'A',
+            SpecialLevel: 0
         },
         setSelectedPlayer: jest.fn(),
-        handleEnterContextMenu: jest.fn(),
-        handleLeaveContextMenu: jest.fn(),
-        setCurrentActivePlayer: jest.fn()
+        setCurrentActivePlayer: jest.fn(),
+        setContextMenu: jest.fn(),
+        setSelectedTabName: jest.fn(),
+        getTabList: jest.fn(() => {
+            return [
+                { key: 'note', name: 'Note', tabName: 'Note' },
+                { key: 'password', name: 'Password', tabName: 'Setting' }
+            ]
+        })
     }
 
     it('should match snapshot', () => {
@@ -27,10 +40,15 @@ describe('UserNameCell', () => {
             setSelectedPlayer: jest.fn()
         }
         const wrapper = shallow(<UserNameCell {...props} />);
+        const { IbcCustId, LicenseeCustId, UserName, Currency, IsDeposit, IsArchived, CurrencyId } = props.dataItem;
         const expectedParam = {
-            custId: props.dataItem.CustId,
-            userName: props.dataItem.UserName,
-            currency: props.dataItem.Currency
+            ibcCustId: IbcCustId,
+            licenseeCustId: LicenseeCustId,
+            userName: UserName,
+            currency: Currency,
+            isDeposit: IsDeposit,
+            isArchived: IsArchived,
+            currencyId: CurrencyId
         }
 
         wrapper.find('.username-link').simulate('click', { preventDefault: jest.fn() });
@@ -41,29 +59,51 @@ describe('UserNameCell', () => {
     it('onMouseEnter event with menu icon - setCurrentActivePlayer should be called with correct parameter', () => {
         const props = {
             ...defaultProps,
+            contextMenu: { isOpen: false },
             setCurrentActivePlayer: jest.fn()
         }
+
         const wrapper = shallow(<UserNameCell {...props} />);
+        const { IbcCustId, UserName, Currency, Status, OddsGroup, SpecialLevel, IsDeposit, IsArchived, LicenseeCustId, CurrencyId } = props.dataItem;
         const expectedParam = {
-            custId: props.dataItem.CustId,
-            userName: props.dataItem.UserName,
-            currency: props.dataItem.Currency
+            ibcCustId: IbcCustId,
+            licenseeCustId: LicenseeCustId,
+            userName: UserName,
+            currency: Currency,
+            status: Status,
+            oddsGroup: OddsGroup,
+            specialLevel: SpecialLevel,
+            isDeposit: IsDeposit,
+            isArchived: IsArchived,
+            currencyId: CurrencyId
         }
 
-        wrapper.find('.cell-menu').simulate('mouseenter', { preventDefault: jest.fn() });
+        const event = {
+            preventDefault: jest.fn(),
+            target: {
+                getBoundingClientRect: jest.fn(() => ({ top: 100, left: 100 }))
+            }
+        }
 
+        wrapper.find('.cell-menu').simulate('mouseenter', event);
+
+        expect(props.setContextMenu).toHaveBeenCalled();
         expect(props.setCurrentActivePlayer).toHaveBeenCalledWith(expectedParam);
     })
 
     it('onMouseLeave event with menu icon - handleLeaveContextMenu should be called', () => {
         const props = {
             ...defaultProps,
-            handleLeaveContextMenu: jest.fn()
+            contextMenu: {isOpen: true},
+            setContextMenu: jest.fn()
         }
         const wrapper = shallow(<UserNameCell {...props} />);
+        const event = {
+            preventDefault: jest.fn()
+        }
 
-        wrapper.find('.cell-menu').simulate('mouseleave');
+        wrapper.find('.cell-menu').simulate('mouseleave', event);
 
-        expect(props.handleLeaveContextMenu).toHaveBeenCalled();
+        expect(props.setContextMenu).toHaveBeenCalledWith({isOpen: false});
     })
 })

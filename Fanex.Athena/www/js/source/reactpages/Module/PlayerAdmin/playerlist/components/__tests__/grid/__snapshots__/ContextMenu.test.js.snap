@@ -20,7 +20,7 @@ exports[`ContextMenu onMouseLeave - isOpen should rely on props.isOpenContextMen
   style={null}
 >
   <DropdownMenu
-    isOpen={true}
+    isOpen={false}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
     tag="div"

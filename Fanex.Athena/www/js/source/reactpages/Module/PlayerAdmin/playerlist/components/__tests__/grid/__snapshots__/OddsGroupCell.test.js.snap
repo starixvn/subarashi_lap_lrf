@@ -2,7 +2,14 @@
 
 exports[`OddsGroupCell should match snapshot 1`] = `
 <Memo(DropdownLabel)
-  onClick={[MockFunction]}
-  text="2"
+  className="disabled"
+  labelStyle={
+    Object {
+      "backgroundColor": "#006400",
+      "color": "#fff",
+    }
+  }
+  onClick={[Function]}
+  text="A"
 />
 `;

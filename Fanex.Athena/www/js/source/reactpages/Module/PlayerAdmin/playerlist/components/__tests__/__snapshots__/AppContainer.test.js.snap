@@ -6,7 +6,7 @@ exports[`AppContainer render - match with snapshot 1`] = `
     isLoading={true}
   />
   <Connect(FormFilter) />
-  <Connect(Component) />
+  <Connect(Content) />
   <Connect(PlayerDetail) />
 </AppLayout>
 `;
@@ -17,7 +17,7 @@ exports[`AppContainer render - match with snapshot 2`] = `
     isLoading={false}
   />
   <Connect(FormFilter) />
-  <Connect(Component) />
+  <Connect(Content) />
   <Connect(PlayerDetail) />
 </AppLayout>
 `;

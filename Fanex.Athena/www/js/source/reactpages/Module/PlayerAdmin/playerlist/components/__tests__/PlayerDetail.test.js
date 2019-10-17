@@ -56,7 +56,11 @@ describe('PlayerDetail', () => {
             const props = {
                 ...defaultProps,
                 selectedPlayer: {
-                    custId: 1
+                    ibcCustId: 1, 
+                    licenseeCustId: 11, 
+                    currencyId: 20, 
+                    currency: 'UUS', 
+                    userName: 'test'
                 },
                 getLink: jest.fn()
             }
@@ -69,14 +73,23 @@ describe('PlayerDetail', () => {
             expect(props.getLink).toHaveBeenCalledWith(systemType, expectedUrl);
         }
 
-        runTest('test/index', 'test/index?custId=1');
-        runTest('test/index?param1=value1', 'test/index?param1=value1&custId=1');
+        runTest('test/index', 'test/index?custId=1&licenseeCustId=11&currencyId=20&currencyName=UUS&userName=test');
+        runTest('test/index?param1=value1', 'test/index?param1=value1&custId=1&licenseeCustId=11&currencyId=20&currencyName=UUS&userName=test');
     })
 
     it('_renderTabList - should match snapshot', () => {
         const runTest = (tabName) => {
             const props = {
                 ...defaultProps,
+                selectedPlayer: {
+                    ibcCustId: 1, 
+                    licenseeCustId: 11, 
+                    currencyId: 20, 
+                    currency: 'UUS', 
+                    userName: 'test',
+                    isDeposit: true,
+                    isArchived: false
+                },
                 selectedTabName: tabName
             }
             const instance = new PlayerDetail({ ...props });

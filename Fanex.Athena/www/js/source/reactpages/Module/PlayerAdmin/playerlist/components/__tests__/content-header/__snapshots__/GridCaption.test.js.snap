@@ -33,7 +33,7 @@ exports[`GridCaption _buildDisplayedColumnList - should match snapshot 1`] = `
 exports[`GridCaption _buildLeftPart have not selected any item yet - should render player count information 1`] = `
 <div>
   <span>
-    Search Result: 0 Player(s)
+    SearchResult: 0 Player(s)
   </span>
 </div>
 `;
@@ -45,17 +45,18 @@ exports[`GridCaption _buildLeftPart selectedPlayer is not null - should render c
       className="link"
       onClick={[Function]}
     >
-      Previous search result
+      PreviousSearchResult
     </span>
     <span>
       <i
         className="chevron right icon-separator"
       />
-       Player: 
+       
+      Player
+      : 
       test
-       (
-      USD
-      )
+       
+      (USD)
     </span>
   </React.Fragment>
 </div>

@@ -116,14 +116,20 @@ describe('GridCaption', () => {
             ...defaultProps,
             type,
             param,
-            exportExcel: jest.fn()
+            exportExcel: jest.fn(),
+            playerList: [{userName: 'test1'}, {userName: 'test2'}],
+            displayedColumnList: [{key: 'userName', show: true}]
+        }
+
+        const displayedColumn = {
+            userName: true
         }
 
         const instance = new GridCaption({ ...props });
 
         instance.handleExportExcel();
 
-        expect(props.exportExcel).toHaveBeenCalledWith(type, param);
+        expect(props.exportExcel).toHaveBeenCalledWith(props.playerList, param, displayedColumn);
     })
 
     it('render - should match snapshot', () => {

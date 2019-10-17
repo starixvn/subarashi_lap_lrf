@@ -2,31 +2,22 @@
 
 exports[`PlayerRow render - match snapshot 1`] = `
 <Component
-  key="1"
+  key="11"
 >
-  <Component
-    className="center-align"
-  >
-    <Memo(StatusCell)
-      handleToggleStatus={[Function]}
-      isOnline={true}
-      value="online"
-    />
-  </Component>
-  <Component
-    className="center-align"
-  >
-    <Connect(Component)
+  <Component>
+    <Connect(StatusCell)
       dataItem={
         Object {
           "BaStatus": true,
           "Currency": "USD",
           "CurrentBalance": 100,
-          "CustId": 1,
           "Email": "abc@yahoo.com",
+          "IsArchived": false,
+          "IsDeposit": true,
           "IsOnline": true,
           "LastLoginIp": "1.1.1.",
           "LastTransaction": "06/14/2019",
+          "LicenseeCustId": 11,
           "OddsGroup": "A",
           "OutstandingBalance": "200",
           "RealName": "test1 real",
@@ -36,18 +27,9 @@ exports[`PlayerRow render - match snapshot 1`] = `
           "UserName": "test1",
         }
       }
-      handleEnterContextMenu={[MockFunction]}
-      handleLeaveContextMenu={[MockFunction]}
     />
   </Component>
-  <Component
-    className="center-align"
-  >
-    abc
-  </Component>
-  <Component
-    className="center-align"
-  >
+  <Component>
     test1 real
   </Component>
   <Component
@@ -56,37 +38,65 @@ exports[`PlayerRow render - match snapshot 1`] = `
     USD
   </Component>
   <Component
-    className="center-align"
+    className="right-align"
   >
-    100
+    100.00
   </Component>
+  <Component
+    className="right-align"
+  />
   <Component
     className="center-align"
   >
-    200
-  </Component>
-  <Component
-    className="center-align"
-  >
-    <Memo(OddsGroupCell)
-      handleToggleOddsGroup={[Function]}
-      value="A"
+    <Connect(OddsGroupCell)
+      dataItem={
+        Object {
+          "BaStatus": true,
+          "Currency": "USD",
+          "CurrentBalance": 100,
+          "Email": "abc@yahoo.com",
+          "IsArchived": false,
+          "IsDeposit": true,
+          "IsOnline": true,
+          "LastLoginIp": "1.1.1.",
+          "LastTransaction": "06/14/2019",
+          "LicenseeCustId": 11,
+          "OddsGroup": "A",
+          "OutstandingBalance": "200",
+          "RealName": "test1 real",
+          "SpecialLevel": 1,
+          "Status": "online",
+          "SystemId": "abc",
+          "UserName": "test1",
+        }
+      }
     />
   </Component>
   <Component
     className="center-align"
   >
-    <Switcher
-      checked={true}
-      onChange={[Function]}
-    />
-  </Component>
-  <Component
-    className="center-align"
-  >
-    <Memo(SpecialLevelCell)
-      handleToggleSpecialLevel={[Function]}
-      value={1}
+    <Connect(SpecialLevelCell)
+      dataItem={
+        Object {
+          "BaStatus": true,
+          "Currency": "USD",
+          "CurrentBalance": 100,
+          "Email": "abc@yahoo.com",
+          "IsArchived": false,
+          "IsDeposit": true,
+          "IsOnline": true,
+          "LastLoginIp": "1.1.1.",
+          "LastTransaction": "06/14/2019",
+          "LicenseeCustId": 11,
+          "OddsGroup": "A",
+          "OutstandingBalance": "200",
+          "RealName": "test1 real",
+          "SpecialLevel": 1,
+          "Status": "online",
+          "SystemId": "abc",
+          "UserName": "test1",
+        }
+      }
     />
   </Component>
 </Component>
