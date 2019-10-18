@@ -36,6 +36,10 @@ const SettingContent = (Grid, DataHandling) => {
                 this.props.toggleLoader(false);
                 this.props.setAlertOption({ isShow: false });
             }
+
+            if(prevProps.requestParam !== this.props.requestParam){
+                this._getData(this.props.requestParam);
+            }
         }
 
         componentWillUnmount() {
@@ -145,7 +149,6 @@ const SettingContent = (Grid, DataHandling) => {
         _submit(data) {
             this.props.toggleLoader(true);
 
-            const requestParam = this.props.requestParam;
             const param = Object.assign({}, this.props.requestParam, { Setting: data });
 
             DataTransfer.updateData(param, this._showSubmitResult.bind(this));

@@ -1,10 +1,9 @@
 import React from 'react';
 import Utility from '../../../lib/utility';
-import LangHelper from '@jsroot/lib/langHelper';
 import { BetLimitType, InputClassName } from '../../../lib/constants';
 
 const SettingGrid = (props) => {
-    const { setting, data, isCopy, onChange, getHeaderName } = props;
+    const { setting, data, onChange, getHeaderName } = props;
     const setInputRef = props.setInputRef;
 
     const onInputChange = (type, id, value) => {

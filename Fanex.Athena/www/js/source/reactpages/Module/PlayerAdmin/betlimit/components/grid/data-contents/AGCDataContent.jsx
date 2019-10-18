@@ -29,7 +29,7 @@ export class AGCDataContent extends PureComponent {
 
     onGroupChange = (item) => {
         if (this.state.selectedGroup !== item.value) {
-            const { selectedGroup, data } = this.state;
+            const { data } = this.state;
             const disabledButton = this._isDisabledButton(data, item.value);
 
             this.setState({ selectedGroup: item.value, disabledButton: disabledButton });
