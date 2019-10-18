@@ -9,5 +9,6 @@
     {
         Task<string> PostAsyncString(string path, object value, string language);
         Task<byte[]> PostByteContentAsync(string path, object value, string language, MediaType mediaType = MediaType.Json);
+        Task<HttpResponseMessage> PostContentAsync(string path, object value, string language, MediaType mediaType = MediaType.Json);
     }
 }

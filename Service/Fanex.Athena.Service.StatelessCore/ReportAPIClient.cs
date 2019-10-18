@@ -84,5 +84,13 @@ namespace Fanex.Athena.Service.StatelessCore
                  return await x.Content.ReadAsByteArrayAsync();
              }).ConfigureAwait(false);
         }
+
+        public async Task<HttpResponseMessage> PostContentAsync(string path, object value, string language, MediaType mediaType = MediaType.Json)
+        {
+            return await HandleAsync(path, value, language, mediaType, async (x) =>
+            {
+                return x;
+            }).ConfigureAwait(false);
+        }
     }
 }

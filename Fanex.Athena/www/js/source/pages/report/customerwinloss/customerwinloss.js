@@ -23,6 +23,7 @@
         'use strict';
 
         const EXCEL_FILENAME = 'CustomerWinLoss.xls';
+        const ZIP_FILENAME = 'CustomerWinLoss.zip';
         const EXCEL_PP_FILENAME = 'PP_PromotionPrize.xls';
         const SORTING_CODE = {
             'externalId': 2,
@@ -121,7 +122,7 @@
                 data.PageIndex = 1;
                 data.isExportExcel = true;
 
-                exportExcel(CustomerWinLossOption.urlExcelData, data, EXCEL_FILENAME);
+                exportFile(CustomerWinLossOption.urlExcelData, data);
             });
 
             $(_selector.PromotionPrizeLink).click(function () {
@@ -136,7 +137,7 @@
                     IsExcludedTestData: filterData.IsExcludedTestData
                 };
 
-                exportExcel(CustomerWinLossOption.urlPromotionPrizeExcelData, data, EXCEL_PP_FILENAME);
+                exportFile(CustomerWinLossOption.urlPromotionPrizeExcelData, data, EXCEL_PP_FILENAME);
             });
 
             $(_selector.HistoryLink).click(function () {
@@ -165,7 +166,7 @@
             });
         }
 
-        function exportExcel(url, data, fileName) {
+        function exportFile(url, data) {
             const option = {
                 type: 'POST',
                 data: data,
@@ -175,6 +176,7 @@
                 cache: false,
                 url: Site.resolveClientUrl(url),
                 success: function (response) {
+                    let fileName = response.type && response.type === "application/zip" ? ZIP_FILENAME : EXCEL_FILENAME;
                     Downloader.download(response, fileName);
                 },
                 beforeSend: function () {
