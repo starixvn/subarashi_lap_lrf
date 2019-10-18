@@ -81,7 +81,7 @@
 
             if (result.Code == 0)
             {
-                result.Message = string.Format(ViewResources.UpdateSuccess);
+                result.Message = ViewResources.UpdateSuccess;
             }
 
             return Json(result);
