@@ -611,6 +611,10 @@ var SettingContent = function SettingContent(Grid, DataHandling) {
             isShow: false
           });
         }
+
+        if (prevProps.requestParam !== this.props.requestParam) {
+          this._getData(this.props.requestParam);
+        }
       }
     }, {
       key: "componentWillUnmount",
@@ -640,7 +644,6 @@ var SettingContent = function SettingContent(Grid, DataHandling) {
       key: "_submit",
       value: function _submit(data) {
         this.props.toggleLoader(true);
-        var requestParam = this.props.requestParam;
         var param = Object.assign({}, this.props.requestParam, {
           Setting: data
         });
@@ -835,8 +838,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _lib_utility__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../lib/utility */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/utility.js");
-/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
-/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/constants.js");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/constants.js");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -845,11 +847,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-
 var SettingGrid = function SettingGrid(props) {
   var setting = props.setting,
       data = props.data,
-      isCopy = props.isCopy,
       onChange = props.onChange,
       getHeaderName = props.getHeaderName;
   var setInputRef = props.setInputRef;
@@ -889,7 +889,7 @@ var SettingGrid = function SettingGrid(props) {
   var buildCell = function buildCell(type, value, disabled) {
     var isChanged = value[type] !== value['Original' + type];
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-      className: isChanged ? _lib_constants__WEBPACK_IMPORTED_MODULE_3__["InputClassName"].OnChangedClassName : _lib_constants__WEBPACK_IMPORTED_MODULE_3__["InputClassName"].ClassName,
+      className: isChanged ? _lib_constants__WEBPACK_IMPORTED_MODULE_2__["InputClassName"].OnChangedClassName : _lib_constants__WEBPACK_IMPORTED_MODULE_2__["InputClassName"].ClassName,
       type: "text",
       ref: function ref(e) {
         return setInputRef(type, value.Id, e);
@@ -917,11 +917,11 @@ var SettingGrid = function SettingGrid(props) {
         key: item.Id
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, item.BetSettingType), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
         className: "pa-betlimit-cell"
-      }, buildCell(_lib_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitType"].MinBet, item, disabled), item.BetValueMin > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " >= ".concat(_lib_utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(item.BetValueMin)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+      }, buildCell(_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitType"].MinBet, item, disabled), item.BetValueMin > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " >= ".concat(_lib_utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(item.BetValueMin)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
         className: "pa-betlimit-cell"
-      }, buildCell(_lib_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitType"].MaxBet, item, disabled), item.BetValueMax > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " <= ".concat(_lib_utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(item.BetValueMax)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+      }, buildCell(_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitType"].MaxBet, item, disabled), item.BetValueMax > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " <= ".concat(_lib_utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(item.BetValueMax)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
         className: "pa-betlimit-cell"
-      }, buildCell(_lib_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitType"].MaxPerMatch, item, disabled), item.MaxPerMatchMax > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " <= ".concat(_lib_utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(item.MaxPerMatchMax))))));
+      }, buildCell(_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitType"].MaxPerMatch, item, disabled), item.MaxPerMatchMax > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " <= ".concat(_lib_utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(item.MaxPerMatchMax))))));
     }
 
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, rows);
@@ -1003,9 +1003,7 @@ function (_PureComponent) {
 
     _defineProperty(_assertThisInitialized(_this), "onGroupChange", function (item) {
       if (_this.state.selectedGroup !== item.value) {
-        var _this$state = _this.state,
-            selectedGroup = _this$state.selectedGroup,
-            data = _this$state.data;
+        var data = _this.state.data;
 
         var disabledButton = _this._isDisabledButton(data, item.value);
 
@@ -1021,10 +1019,10 @@ function (_PureComponent) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "onSubmit", function () {
-      var _this$state2 = _this.state,
-          selectedGroup = _this$state2.selectedGroup,
-          data = _this$state2.data,
-          setting = _this$state2.setting;
+      var _this$state = _this.state,
+          selectedGroup = _this$state.selectedGroup,
+          data = _this$state.data,
+          setting = _this$state.setting;
 
       var invalid = _this._isDisabledButton(data, selectedGroup);
 
@@ -1199,9 +1197,9 @@ function (_PureComponent) {
   }, {
     key: "render",
     value: function render() {
-      var _this$state3 = this.state,
-          data = _this$state3.data,
-          setting = _this$state3.setting;
+      var _this$state2 = this.state,
+          data = _this$state2.data,
+          setting = _this$state2.setting;
 
       if (setting.BetSetting && !setting.BetSetting.IsLineEnabled) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_9__["default"], {
@@ -1213,10 +1211,10 @@ function (_PureComponent) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_9__["default"], null);
       }
 
-      var _this$state4 = this.state,
-          groups = _this$state4.groups,
-          selectedGroup = _this$state4.selectedGroup,
-          disabledButton = _this$state4.disabledButton;
+      var _this$state3 = this.state,
+          groups = _this$state3.groups,
+          selectedGroup = _this$state3.selectedGroup,
+          disabledButton = _this$state3.disabledButton;
       var hasData = data.length > 0;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "pa-betlimit"
@@ -3670,12 +3668,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "requestParam", function() { return requestParam; });
 /* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/types */ "./www/js/source/reactpages/actions/types.js");
 /* harmony import */ var _lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
 var requestParam = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, _defineProperty({}, _actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_REQUEST_PARAM"], function (state, action) {
-  return action.data;
+  return _objectSpread({}, action.data);
 }));
 
 /***/ })
