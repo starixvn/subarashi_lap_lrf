@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Fanex.Athena.Controllers.Base;
@@ -81,9 +82,9 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers
 
             using (var controller = CreateController(productAccess, licenseeSettingService))
             {
-                _reportApiClient.PostByteContentAsync(Arg.Any<string>(),
+                _reportApiClient.PostAsync(Arg.Any<string>(),
                 Arg.Any<PlayerWinLossMetaModel>(), Arg.Any<string>())
-                .Returns(Task.FromResult<byte[]>(new byte[] { 1 }));
+                .Returns(new HttpResponseMessage { Content = new ByteArrayContent(new byte[] { 1 }) });
 
                 // Action
                 await controller.Index(new PlayerWinLossMetaModel { IsExportExcel = true });
@@ -91,7 +92,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    _reportApiClient.Received(1).PostByteContentAsync(
+                    _reportApiClient.Received(1).PostAsync(
                     Arg.Is<string>(x => x == "api/CustomerWinLoss/ExportExcel"),
                         Arg.Is<PlayerWinLossMetaModel>(x =>
                         x.IsAllowedCustomerComm && x.IsAllowBA && !x.SystemIdVisible),

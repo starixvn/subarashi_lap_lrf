@@ -175,15 +175,13 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
 
             //Action
             var result =
-              await _betListApiClient.PostAsyncStream(TestPath, TestValue, LANG, 0).ConfigureAwait(false);
+              await _betListApiClient.PostAsyncBytes(TestPath, TestValue, LANG, 0).ConfigureAwait(false);
 
             //Assert
-            Assert.IsTrue(result is Stream);
-            using (var reader = new StreamReader(result))
-            {
-                var actualContent = await reader.ReadToEndAsync();
-                Assert.AreEqual(Result, actualContent);
-            }
+            Assert.IsTrue(result is byte[]);
+
+            Assert.AreEqual(Result, Encoding.UTF8.GetString(result));
+
 
 
         }

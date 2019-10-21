@@ -95,12 +95,11 @@
              }, timeout).ConfigureAwait(false);
         }
 
-        public async Task<Stream> PostAsyncStream(string path, object value, string language, int timeout = 0)
+        public async Task<byte[]> PostAsyncBytes(string path, object value, string language, int timeout = 0)
         {
             return await HandleAsync(path, value, language, async (x) =>
             {
-                Stream stream = new MemoryStream(x.RawBytes);
-                return await Task.FromResult(stream).ConfigureAwait(false);
+               return await Task.FromResult(x.RawBytes);
             }, timeout).ConfigureAwait(false);
         }
 

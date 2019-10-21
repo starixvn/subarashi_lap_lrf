@@ -40,21 +40,18 @@
             // Arrange
             const string ExpectedStreamData = "Hello everyone";
             using (var controller = CreateController())
-            using (var excelStream = new MemoryStream(Encoding.UTF8.GetBytes(ExpectedStreamData)))
             {
                 var metaModel = new ResultMetaModel();
                 const string Url = "/ResultReport/ResultExcel";
-                _betListApiClient.PostAsyncStream(Url, metaModel, SessionService.UserSession.Language).Returns(excelStream);
+                _betListApiClient.PostAsyncBytes(Url, metaModel, SessionService.UserSession.Language).Returns(Encoding.UTF8.GetBytes(ExpectedStreamData));
 
                 // Action
                 var result = controller.ResultExcel(metaModel).Result as FileStreamResult;
 
                 // Assert
-                Assert.Multiple(() =>
-                {
-                    Assert.That(result.FileDownloadName, Is.EqualTo("LRF-Result.xls"));
-                    Assert.That(result.FileStream, Is.EqualTo(excelStream));
-                });
+                Assert.That(result.FileDownloadName, Is.EqualTo("LRF-Result.xls"));
+                _betListApiClient.Received(1).PostAsyncBytes(Url, metaModel, SessionService.UserSession.Language);
+
             }
         }
     }

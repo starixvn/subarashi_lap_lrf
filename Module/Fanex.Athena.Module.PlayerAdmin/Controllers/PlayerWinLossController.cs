@@ -72,10 +72,10 @@ namespace Fanex.Athena.Module.PlayerAdmin.Controllers
             {
                 AssignMetaModelForExcel(metaModel);
                 const string FileName = "CustomerWinLoss.xls";
-                var stream = await _reportAPIClient.PostByteContentAsync("api/CustomerWinLoss/ExportExcel",
+                var respponse = await _reportAPIClient.PostAsync("api/CustomerWinLoss/ExportExcel",
                     metaModel, userSession.Language, MediaType.MsgPack).ConfigureAwait(false);
 
-                return File(stream, "application/octet-stream", FileName);
+                return File(await respponse.Content.ReadAsStreamAsync(), "application/octet-stream", FileName);
             }
 
             return JsonString(await _reportAPIClient.PostAsyncString("api/CustomerWinLoss/Index",

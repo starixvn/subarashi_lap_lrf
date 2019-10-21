@@ -106,7 +106,7 @@
                 // Assert
                 Assert.Multiple(async () =>
                 {
-                    await _reportAPIClient.Received().PostByteContentAsync("api/PlatformWinLoss/ExportSummaryData", metaModel, SessionService.UserSession.Language, MediaType.MsgPack);
+                    await _reportAPIClient.Received().PostAsync("api/PlatformWinLoss/ExportSummaryData", metaModel, SessionService.UserSession.Language, MediaType.MsgPack);
                 });
             }
         }
@@ -125,7 +125,7 @@
                 // Assert
                 Assert.Multiple(async () =>
                 {
-                    await _reportAPIClient.Received().PostByteContentAsync("api/PlatformWinLoss/ExportMemberData", metaModel, SessionService.UserSession.Language, MediaType.MsgPack);
+                    await _reportAPIClient.Received().PostAsync("api/PlatformWinLoss/ExportMemberData", metaModel, SessionService.UserSession.Language, MediaType.MsgPack);
                 });
             }
         }

@@ -183,8 +183,8 @@
             string fileName,
             string apiPath = null)
         {
-            var stream = await _betListApiClient.PostAsyncStream(apiPath ?? "/BetList/ExportExcel", metaModel, SessionService.UserSession.Language).ConfigureAwait(false);
-            return File(stream, "application/vnd.ms-excel", fileName + ".xls");
+            var data = await _betListApiClient.PostAsyncBytes(apiPath ?? "/BetList/ExportExcel", metaModel, SessionService.UserSession.Language).ConfigureAwait(false);
+            return File(data, "application/vnd.ms-excel", fileName + ".xls");
         }
 
         protected async Task<ActionResult> ProcessDefaultRequest(BetListExcelMetaModel model, string viewPath, string uspKey)

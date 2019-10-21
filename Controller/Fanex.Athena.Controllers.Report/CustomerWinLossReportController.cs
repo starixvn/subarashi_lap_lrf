@@ -6,6 +6,7 @@
 namespace Fanex.Athena.Controllers.Report
 {
     using System;
+    using System.Net.Http;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Fanex.Athena.Model.Auth.DataDomain;
@@ -59,12 +60,10 @@ namespace Fanex.Athena.Controllers.Report
             if (metaModel.IsExportExcel)
             {
                 AssignMetaModelForExcel(metaModel);
-                const string FileName = "CustomerWinLoss.xls";
-                var httpResponse = await _reportAPIClient.PostContentAsync("api/CustomerWinLoss/ExportFile",
+                const string FileName = "CustomerWinLoss";
+                var httpResponse = await _reportAPIClient.PostAsync("api/CustomerWinLoss/ExportFile",
                     metaModel, userSession.Language).ConfigureAwait(false);
-                var stream = await httpResponse.Content.ReadAsByteArrayAsync();
-
-                return File(stream, httpResponse.Content.Headers.ContentType.MediaType, FileName);
+                return File(await httpResponse.Content.ReadAsStreamAsync(), httpResponse.Content.Headers.ContentType.MediaType, FileName);
             }
 
             return JsonString(await _reportAPIClient.PostAsyncString("api/CustomerWinLoss/Index", metaModel, userSession.Language).ConfigureAwait(false));

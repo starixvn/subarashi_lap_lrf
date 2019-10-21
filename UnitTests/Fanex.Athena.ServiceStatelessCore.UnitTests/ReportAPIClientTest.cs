@@ -74,7 +74,7 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
             var content = "param";
 
             // Action
-            await reportApiClient.PostByteContentAsync(ApiUrl, content, Language, MediaType.MsgPack);
+            await reportApiClient.PostAsync(ApiUrl, content, Language, MediaType.MsgPack);
 
             // Assert
             Assert.That(passedRequest.Headers.GetValues("Accept-Language").ElementAt(0), Is.EqualTo(Language));

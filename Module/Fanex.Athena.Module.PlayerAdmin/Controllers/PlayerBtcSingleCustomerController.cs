@@ -74,7 +74,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Controllers
 
             if (metaModel.IsExport)
             {
-                var stream = await _betListApiClient.PostAsyncStream("/BettingTicketCenter/GetBySingleCustomer",
+                var stream = await _betListApiClient.PostAsyncBytes("/BettingTicketCenter/GetBySingleCustomer",
                 metaModel,
                 userSession.Language).ConfigureAwait(false);
 

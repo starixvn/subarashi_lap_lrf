@@ -32,7 +32,9 @@ namespace Fanex.Athena.Service.StatelessCore
             _client = client;
         }
 
-        private async Task<T> HandleAsync<T>(string path, object value, string language, MediaType mediaType, Func<HttpResponseMessage, Task<T>> codeBlock)
+        private async Task<T>
+            HandleAsync<T>(string path, object value, string language, MediaType mediaType, Func<HttpResponseMessage, Task<T>> codeBlock)
+            where T : class
         {
             using (var httpRequest = new HttpRequestMessage(HttpMethod.Post, new Uri(path, UriKind.Relative)))
             {
@@ -68,7 +70,7 @@ namespace Fanex.Athena.Service.StatelessCore
                     throw new InvalidOperationException(errorMessage.ToString());
                 }
 
-                return await codeBlock(response).ConfigureAwait(false);
+                return codeBlock != null ? await codeBlock(response).ConfigureAwait(false) : response as T;
             }
         }
 
@@ -77,20 +79,11 @@ namespace Fanex.Athena.Service.StatelessCore
             return await HandleAsync(path, value, language, MediaType.Json, async (x) => { return await x.Content.ReadAsStringAsync(); });
         }
 
-        public async Task<byte[]> PostByteContentAsync(string path, object value, string language, MediaType mediaType = MediaType.Json)
+        public async Task<HttpResponseMessage> PostAsync(string path, object value, string language, MediaType mediaType = MediaType.Json)
         {
-            return await HandleAsync(path, value, language, mediaType, async (x) =>
-             {
-                 return await x.Content.ReadAsByteArrayAsync();
-             }).ConfigureAwait(false);
+            return await HandleAsync<HttpResponseMessage>(path, value, language, mediaType, null).ConfigureAwait(false);
         }
 
-        public async Task<HttpResponseMessage> PostContentAsync(string path, object value, string language, MediaType mediaType = MediaType.Json)
-        {
-            return await HandleAsync(path, value, language, mediaType, async (x) =>
-            {
-                return x;
-            }).ConfigureAwait(false);
-        }
+
     }
 }
