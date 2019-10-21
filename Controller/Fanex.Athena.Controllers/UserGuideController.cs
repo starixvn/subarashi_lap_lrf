@@ -71,7 +71,6 @@ namespace Fanex.Athena.Controllers
             content = content.Replace("{rooturl}", Url.Content("~"));
             content = AddSpecialProducts(content, products);
             content = AddBalanceUpDate(content);
-            content = AddPPPromotionPrizeLink(content, products);
 
             return View("~/Views/UserGuide/Index.cshtml", null, content);
         }
@@ -123,28 +122,6 @@ namespace Fanex.Athena.Controllers
             customcontent = RemoveProductSection(customcontent, products, ProductTypes.VirtualSports, "VS");
             customcontent = RemoveProductSection(customcontent, products, ProductTypes.VirtualSports2, "VS2");
             return customcontent;
-        }
-
-        private static string AddPPPromotionPrizeLink(string content, IEnumerable<Product> products)
-        {
-            const string Holder = "{PP-Promotion-Prize-Link}";
-            if (!content.Contains(Holder))
-            {
-                return content;
-            }
-
-            var result = content;
-            if (products.Any(x => x.ProductID == ProductTypes.PP))
-            {
-                result = result.Replace("{PP-Promotion-Prize-Link}", string.Empty);
-                result = result.Replace("{/PP-Promotion-Prize-Link}", string.Empty);
-            }
-            else
-            {
-                result = new Regex(@"\{PP-Promotion-Prize-Link\}.*\{/PP-Promotion-Prize-Link\}").Replace(result, string.Empty);
-            }
-
-            return result;
         }
 
         private static string RemoveProductSection(string content, IEnumerable<Product> products, int productId, string productCode)
