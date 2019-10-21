@@ -23,7 +23,7 @@
         'use strict';
 
         const EXCEL_FILENAME = 'CustomerWinLoss.xlsx';
-        const EXCEL_PP_FILENAME = 'PP_PromotionPrize.xls';
+        const EXCEL_PP_FILENAME = 'PromotionPrize.xls';
         const SORTING_CODE = {
             'externalId': 2,
             'systemId': 1,
@@ -296,7 +296,7 @@
             url = QueryString.setParam(url, 'todate', _submitData.ToDate);
             url = QueryString.setParam(url, 'ishistoryreport', $('input#IsHistory').val());
 
-            const popH = Math.min($(window).height() - 100, 650), popW = 920;
+            const popH = Math.min($(window).height() - 100, 650), popW = 950;
             const popupOption = { id: 'betlist-popup', width: popW + 50, height: popH + 50, title: Site.getSingleResource('CustomerBetList') };
             Popup.openPopupWithIframe(url, popupOption);
             window.logOpenBetlistEvent && window.logOpenBetlistEvent();

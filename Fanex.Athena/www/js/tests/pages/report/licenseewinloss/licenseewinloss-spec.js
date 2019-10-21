@@ -406,7 +406,7 @@
 
                             $('#ExportPromotionPrizeLink').click();
 
-                            expect(LicenseeWinLoss.exportExcel).toHaveBeenCalledWith(LicenseeWinLossOption.urlPromotionPrizeExcelData, expectedParamData, "PP_PromotionPrize.xls");
+                            expect(LicenseeWinLoss.exportExcel).toHaveBeenCalledWith(LicenseeWinLossOption.urlPromotionPrizeExcelData, expectedParamData, "PromotionPrize.xls");
                         });
                     });
                 });
@@ -733,7 +733,7 @@
 
                             $('#ExportPromotionPrizeLink').click();
 
-                            expect(LicenseeWinLoss.exportExcel).toHaveBeenCalledWith(LicenseeWinLossOption.urlPromotionPrizeExcelData, expectedParamData, "PP_PromotionPrize.xls");
+                            expect(LicenseeWinLoss.exportExcel).toHaveBeenCalledWith(LicenseeWinLossOption.urlPromotionPrizeExcelData, expectedParamData, "PromotionPrize.xls");
                         });
                     });
                 });
