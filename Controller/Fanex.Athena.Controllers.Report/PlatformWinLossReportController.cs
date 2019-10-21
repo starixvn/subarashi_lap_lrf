@@ -99,7 +99,7 @@ namespace Fanex.Athena.Controllers.Report
         {
             if (metaModel.IsExportExcel)
             {
-                const string FileName = "PlatformWinLossSummary.xls";
+                const string FileName = "PlatformWinLossSummary.xlsx";
                 var data = await _reportAPIClient.PostByteContentAsync("api/PlatformWinLoss/ExportSummaryData", metaModel, language, MediaType.MsgPack).ConfigureAwait(false);
                 return File(data, "application/octet-stream", FileName);
             }

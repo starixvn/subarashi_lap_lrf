@@ -22,7 +22,7 @@
         PagingHelper, ExcelHelper, AutoComplete, Downloader, Toast) {
         'use strict';
 
-        const EXCEL_FILENAME = 'CustomerWinLoss.xls';
+        const EXCEL_FILENAME = 'CustomerWinLoss.xlsx';
         const ZIP_FILENAME = 'CustomerWinLoss.zip';
         const EXCEL_PP_FILENAME = 'PP_PromotionPrize.xls';
         const SORTING_CODE = {
