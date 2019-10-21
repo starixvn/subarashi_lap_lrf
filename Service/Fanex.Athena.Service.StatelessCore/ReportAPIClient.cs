@@ -32,9 +32,12 @@ namespace Fanex.Athena.Service.StatelessCore
         {
             return await HandleAsync(path, value, language, mediaType, async (x) =>
             {
-                var data = await x.Content.ReadAsByteArrayAsync();
-                var contentType = x.Content.Headers.ContentType.MediaType;
-                return Tuple.Create(data, contentType);
+                using (x)
+                {
+                    var data = await x.Content.ReadAsByteArrayAsync();
+                    var contentType = x.Content.Headers.ContentType.MediaType;
+                    return Tuple.Create(data, contentType);
+                }
             }
             ).ConfigureAwait(false);
         }

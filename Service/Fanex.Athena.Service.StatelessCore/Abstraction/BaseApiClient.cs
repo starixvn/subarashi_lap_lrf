@@ -42,29 +42,30 @@ namespace Fanex.Athena.Service.StatelessCore.Abstraction
             {
                 httpRequest.Headers.Add(LANGUAGEKEY, language);
                 HttpResponseMessage response = null;
-                if (mediaType == MediaType.MsgPack)
+                try
                 {
-                    httpRequest.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(MsgPackContentType));
-                    using (var content = new ByteArrayContent(MessagePackSerializer.Serialize(value)))
+                    if (mediaType == MediaType.MsgPack)
                     {
-                        content.Headers.ContentType = new MediaTypeHeaderValue(MsgPackContentType);
-                        httpRequest.Content = content;
-                        response = await _client.SendAsync(httpRequest).ConfigureAwait(false);
+                        httpRequest.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(MsgPackContentType));
+                        using (var content = new ByteArrayContent(MessagePackSerializer.Serialize(value)))
+                        {
+                            content.Headers.ContentType = new MediaTypeHeaderValue(MsgPackContentType);
+                            httpRequest.Content = content;
+                            response = await _client.SendAsync(httpRequest).ConfigureAwait(false);
+                        }
                     }
-                }
 
-                if (mediaType == MediaType.Json)
-                {
-                    httpRequest.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(JsonContentType));
-                    using (var content = new StringContent(JsonConvert.SerializeObject(value, _jsonSerializerSettings),
-                        Encoding.UTF8, JsonContentType))
+                    if (mediaType == MediaType.Json)
                     {
-                        httpRequest.Content = content;
-                        response = await _client.SendAsync(httpRequest).ConfigureAwait(false);
+                        httpRequest.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(JsonContentType));
+                        using (var content = new StringContent(JsonConvert.SerializeObject(value, _jsonSerializerSettings),
+                            Encoding.UTF8, JsonContentType))
+                        {
+                            httpRequest.Content = content;
+                            response = await _client.SendAsync(httpRequest).ConfigureAwait(false);
+                        }
                     }
-                }
-                using (response)
-                {
+                    response.EnsureSuccessStatusCode();
                     if (response is null || response.StatusCode != HttpStatusCode.OK)
                     {
                         var errorMessage = new StringBuilder($"Http Error ={await response?.Content.ReadAsStringAsync()}\n Error occur when query {ApiName} data");
@@ -73,8 +74,13 @@ namespace Fanex.Athena.Service.StatelessCore.Abstraction
                     }
 
                     return await codeBlock(response).ConfigureAwait(false);
-                }
 
+                }
+                catch (Exception ex)
+                {
+                    response?.Dispose();
+                    throw new Exception("Exception on BaseApiClient.HandleAsync", ex);
+                }
             }
 
         }
@@ -87,8 +93,11 @@ namespace Fanex.Athena.Service.StatelessCore.Abstraction
                 MediaType.Json,
                   async (x) =>
                   {
-                      var result = JsonConvert.DeserializeObject<T>(await x.Content.ReadAsStringAsync());
-                      return (T)result;
+                      using (x)
+                      {
+                          var result = JsonConvert.DeserializeObject<T>(await x.Content.ReadAsStringAsync());
+                          return (T)result;
+                      }
                   }
                ).ConfigureAwait(false);
         }
