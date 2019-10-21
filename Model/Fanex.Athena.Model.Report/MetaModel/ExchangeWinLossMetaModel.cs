@@ -7,8 +7,6 @@ namespace Fanex.Athena.Model.Report.MetaModel
     {
         public byte ReportBy { get; set; }
 
-        public bool ExcludeTestData { get; set; }
-
         public int CustId { get; set; }
 
         public int Level { get; set; }
@@ -21,7 +19,7 @@ namespace Fanex.Athena.Model.Report.MetaModel
                     .ValidateBaseCurrency(BaseCurrency);
             }
         }
-        public string DefaultBaseCurrency { get; set; }
 
+        public string DefaultBaseCurrency { get; set; }
     }
 }

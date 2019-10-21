@@ -23,7 +23,6 @@
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
     using Fanex.Athena.Web.ResultExtension;
     using Fanex.Common;
@@ -98,6 +97,7 @@
         [HttpPost]
         [CustomValidateAntiForgery]
         [ValidationWebRequest]
+        [AutoBindMetaModel(BindAgent = true)]
         public async Task<ActionResult> Index(MatchWinLossMetaModel metaModel)
         {
             var userSession = SessionService.UserSession;
@@ -119,8 +119,6 @@
                 userSession.Language,
                 FunctionNames.MatchWinLoss);
 
-            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList
-                , metaModel.CurrencyId);
             var reportData = await _matchWinLossService.GetDataList(metaModel).ConfigureAwait(false);
             IList<MatchWinLoss> reportDataOutrightParlay = new List<MatchWinLoss>();
 
@@ -150,6 +148,7 @@
 
         [HttpPost]
         [CustomValidateAntiForgery]
+        [AutoBindMetaModel(BindAgent = true)]
         public async Task<ActionResult> Detail(MatchWinLossMetaModel metaModel)
         {
             if (!metaModel.IsValidDetailRequest)
@@ -163,8 +162,6 @@
                     userSession.Language,
                     FunctionNames.MatchWinLoss);
 
-            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList
-                , metaModel.CurrencyId);
             var reportData = await _matchWinLossService.GetDetailDataList(metaModel).ConfigureAwait(false);
 
             var model = new MatchWinLossViewModel
@@ -180,13 +177,14 @@
         [HttpPost]
         [CustomValidateAntiForgery]
         [ValidationWebRequest]
+        [AutoBindMetaModel(BindAgent = true)]
         public async Task<ActionResult> Excel(MatchWinLossMetaModel metaModel)
         {
             const int PageSize = 63000;
             const string FileName = nameof(MatchWinLoss);
             var userSession = SessionService.UserSession;
             var licenseeSession = SessionService.LicenseeSession;
-            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId);
+
             var templatePath = HostingEnvironment.MapPath(@"~/App_Data/Template/Reports/MatchWinLoss.xls");
             var productAccess = ProductService.GetSingleWalletProductAccess(
                 licenseeSession.LicenseeId,

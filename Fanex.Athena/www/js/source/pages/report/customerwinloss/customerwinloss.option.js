@@ -135,8 +135,8 @@
 
         const bacommColumn =
         {
-            name: 'bAComm',
-            index: 'bAComm',
+            name: 'baComm',
+            index: 'baComm',
             width: 100,
             align: 'right',
             sortable: true,

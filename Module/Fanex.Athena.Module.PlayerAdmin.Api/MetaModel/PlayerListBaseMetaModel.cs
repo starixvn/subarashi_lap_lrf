@@ -9,5 +9,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.MetaModel
         public string CurrencyIdList { get; set; }
 
         public string AgentListXml { get; set; }
+
+        public bool IsExcludedTestData { get; set; }
     }
 }

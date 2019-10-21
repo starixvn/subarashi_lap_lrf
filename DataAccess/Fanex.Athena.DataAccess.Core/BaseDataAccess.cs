@@ -6,13 +6,13 @@
 
 namespace Fanex.Athena.DataAccess.Core
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Common;
     using Fanex.Data;
     using Model.Core.DataDomain;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
     public class BaseDataAccess
     {
@@ -42,7 +42,7 @@ namespace Fanex.Athena.DataAccess.Core
         [CLSCompliant(false)]
         protected internal virtual IObjectDb GetObjectDb(string spname, int timeout = 120)
         {
-            return new ObjectDb(spname, timeout);
+            return ObjectDbFactory.CreateInstance(spname, timeout);
         }
 
         protected static IDictionary<string, T> InitSummaryTotalList<T>(string defaultBaseCurrency, Func<T> initialData, string baseCurrencySetting = "") where T : class
@@ -58,7 +58,7 @@ namespace Fanex.Athena.DataAccess.Core
             }
 
             if (!string.IsNullOrEmpty(defaultBaseCurrency) &&
-                !baseCurrencies.Any(x => x.Equals(defaultBaseCurrency, StringComparison.OrdinalIgnoreCase)) )
+                !baseCurrencies.Any(x => x.Equals(defaultBaseCurrency, StringComparison.OrdinalIgnoreCase)))
             {
                 summary.Add(defaultBaseCurrency.ToUpperInvariant(), initialData());
             }

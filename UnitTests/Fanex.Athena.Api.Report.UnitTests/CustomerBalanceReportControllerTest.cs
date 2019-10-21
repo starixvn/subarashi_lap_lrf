@@ -24,6 +24,7 @@
 
     using NUnit.Framework;
 
+    [TestFixture]
     public class CustomerBalanceReportControllerTest : BaseApiControllerHelperTest
     {
         private ICustBalanceDataAccess _dataAccess;

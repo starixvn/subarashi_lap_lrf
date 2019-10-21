@@ -23,7 +23,6 @@ namespace Fanex.Athena.Controllers.Report
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
     using Fanex.Athena.Web.ResultExtension;
 
@@ -81,12 +80,11 @@ namespace Fanex.Athena.Controllers.Report
         [HttpPost]
         [CustomValidateAntiForgery]
         [ValidationWebRequest]
+        [AutoBindMetaModel(BindAgent = true)]
         public async Task<ActionResult> Index(WinLossByBetTypeMetaModel metaModel)
         {
             var licenseeSession = SessionService.LicenseeSession;
             var userSession = SessionService.UserSession;
-            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList
-                , metaModel.CurrencyId);
 
             var reportData = await _winLossByBetTypeDataAccess.GetDataList(metaModel);
 

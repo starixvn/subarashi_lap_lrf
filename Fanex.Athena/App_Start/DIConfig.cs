@@ -21,6 +21,7 @@ using Fanex.Athena.Extension.Utility.Internal;
 using Fanex.Athena.Module.PlayerAdmin.Services;
 using Fanex.Athena.Module.PlayerAdmin.Services.Interfaces;
 using Fanex.Athena.Service.StatelessCore;
+using Fanex.Athena.Service.StatelessCore.Extensions;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
 using Fanex.Logging;
 using ONEbook.UM.Services;
@@ -38,10 +39,13 @@ namespace Fanex.Athena
             var serviceAssemblies = GetServiceAssemblies(assemblies);
             var controllerAssemblies = GetControllerAssemblies(assemblies);
             var apiControllerAssemblies = GetApiControllerAssemblies(assemblies);
-            var moduleAssemblies = GetModuleAssemblies(assemblies);
+
+            builder.RegisterOnebookSecurity();
             builder.RegisterAssemblyTypes(serviceAssemblies).AsImplementedInterfaces();
             builder.RegisterControllers(controllerAssemblies);
             builder.RegisterApiControllers(apiControllerAssemblies);
+
+            var moduleAssemblies = GetModuleAssemblies(assemblies);
 
             builder.RegisterAssemblyTypes(moduleAssemblies).AsImplementedInterfaces();
             builder.RegisterControllers(moduleAssemblies);
@@ -93,6 +97,7 @@ namespace Fanex.Athena
 
             builder.Register(x => (ICitiXchangeClient)Activator.GetObject(typeof(ICitiXchangeClient), ConfigurationManager.AppSettings["ExchangeProductApiHost"]))
                 .As<ICitiXchangeClient>()
+                .SingleInstance()
                 .ExternallyOwned();
         }
 
@@ -118,7 +123,8 @@ namespace Fanex.Athena
             {
                 "Fanex.Athena.Controllers",
                 "Fanex.Athena.Api",
-                "Fanex.Athena.Module"
+                "Fanex.Athena.Module",
+                "LAP.ONEBook.Security"
             };
             return assemblies.Where(ass => !controllerFileNames.Any(x => ass.FullName.Contains(x))).ToArray();
         }

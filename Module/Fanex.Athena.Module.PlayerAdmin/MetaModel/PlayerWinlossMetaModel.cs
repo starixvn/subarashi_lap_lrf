@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using Fanex.Athena.Model.Core.MetaModel;
 using Fanex.Athena.Model.Core.MetaModel.Product;
 
@@ -48,5 +47,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.MetaModel
         public string ExcelTitle { get; set; }
 
         public bool IsValid => !string.IsNullOrEmpty(Username);
+
+        public bool IsExcludedTestData { get; set; }
     }
 }

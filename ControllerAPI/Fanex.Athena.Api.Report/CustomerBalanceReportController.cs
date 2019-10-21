@@ -14,7 +14,6 @@
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Utility;
 
     using Model.Core.ResultModel;
     using Model.Report.DTO;
@@ -41,9 +40,10 @@
 
         [HttpPost]
         [ValidationApiRequest]
+        [ApiAutoBindMetaModel(BindAgent = true)]
         public async Task<dynamic> Index(CustomerBalanceMetaModel metaModel)
         {
-            var result = await GetData(metaModel).ConfigureAwait(false);
+            var result = await _custBalanceDataAccess.GetDataList(metaModel).ConfigureAwait(false);
 
             return new
             {
@@ -55,6 +55,7 @@
 
         [HttpPost]
         [ValidationApiRequest]
+        [ApiAutoBindMetaModel(BindAgent = true)]
         public async Task<HttpResponseMessage> ExportExcel(CustomerBalanceMetaModel metaModel)
         {
             const string FileName = "CustomerBalance.xls";
@@ -83,7 +84,7 @@
 
             metaModel.PageIndex = 1;
             metaModel.PageSize = PageSizeExcel;
-            var result = await GetData(metaModel).ConfigureAwait(false);
+            var result = await _custBalanceDataAccess.GetDataList(metaModel).ConfigureAwait(false);
 
             var custBalanceExcel = CreateExcel(templatePath, metaModel, result, showingOption, convertingOption);
             custBalanceExcel.Export();
@@ -99,14 +100,6 @@
             ConvertingOption convertingOption)
         {
             return new CustomerBalanceExcel(templatePath, metaModel, result.DataList, result.TotalData, showingOption, convertingOption);
-        }
-
-        private async Task<ReportResultModel<CustBalance>> GetData(CustomerBalanceMetaModel metaModel)
-        {
-            var userSession = SessionService.UserSession;
-            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList,
-                metaModel.CurrencyId, metaModel.IsExcludeTest);
-            return await _custBalanceDataAccess.GetDataList(metaModel).ConfigureAwait(false);
         }
     }
 }

@@ -426,7 +426,10 @@
                     Result.extendKenoSession(1, 2);
                     jasmine.clock().tick(6001);
 
-                    expect(option).toEqual(expectedOption);
+                    expect(option.type).toEqual(expectedOption.type);
+                    expect(option.cache).toEqual(expectedOption.cache);
+                    expect(option.data).toEqual(expectedOption.data);
+                    expect(option.url).toEqual(expectedOption.url);
                 });
             });
 
@@ -464,7 +467,10 @@
                     Result.extendLotterySession(1, 2);
                     jasmine.clock().tick(6001);
 
-                    expect(option).toEqual(expectedOption);
+                    expect(option.type).toEqual(expectedOption.type);
+                    expect(option.cache).toEqual(expectedOption.cache);
+                    expect(option.data).toEqual(expectedOption.data);
+                    expect(option.url).toEqual(expectedOption.url);
                 });
             });
 

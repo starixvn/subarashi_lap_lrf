@@ -7,7 +7,7 @@
     using Fanex.Athena.Service.Core.Users;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Logging;
-
+    using LAP.ONEBook.Security;
     using NSubstitute;
 
     using NUnit.Framework;
@@ -53,7 +53,7 @@
             // Arrange
             var token = FakeHelper.Create<string>();
 
-            var expectedResult = new OneAuthToken
+            var expectedResult = new DefaultAuthInfo<OneAuthPermission, OneAuthCurrency>
             {
                 IsAdminstrator = true,
                 Currency = new OneAuthCurrency[]

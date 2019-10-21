@@ -45,22 +45,19 @@
         }
 
         [Test]
-        public void GetActiveCustomers_WhenCall_ParametersPassedCorrectly()
+        public async Task GetActiveCustomers_WhenCall_ParametersPassedCorrectly()
         {
             // Action
-            DataAccess.GetActiveCustomers(_metaModel);
+            await DataAccess.GetActiveCustomers(_metaModel);
 
             // Assert
             Assert.Multiple(() =>
             {
-                ObjectDb.SetParameterValue("licenseeid", _metaModel.LicenseeId);
-                ObjectDb.SetParameterValue("userid", _metaModel.UserId);
-                ObjectDb.SetParameterValue("currencyid", _metaModel.CurrencyId);
-                ObjectDb.SetParameterValue("fromdate", _metaModel.FromDate);
-                ObjectDb.SetParameterValue("todate", _metaModel.ToDate);
-                ObjectDb.SetParameterValue("products", "SB, NG");
-                ObjectDb.SetParameterValue("excludetest", _metaModel.IsExcludeTest);
-                ObjectDb.SetParameterValue("TotalActive", null);
+                ObjectDb.Received(1).SetParameterValue("fromdate", _metaModel.FromDate);
+                ObjectDb.Received(1).SetParameterValue("todate", _metaModel.ToDate);
+                ObjectDb.Received(1).SetParameterValue("products", "SB,NG");
+                ObjectDb.Received(1).SetParameterValue("AgentList", _metaModel.AgentListXml);
+                ObjectDb.Received(1).SetParameterValue("TotalActive", null);
             });
         }
 

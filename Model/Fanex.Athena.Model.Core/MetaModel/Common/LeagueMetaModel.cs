@@ -21,5 +21,7 @@ namespace Fanex.Athena.Model.Core.MetaModel.Common
         public DateTime? FromDate { get; set; }
 
         public DateTime? ToDate { get; set; }
+
+        public bool IsExcludedTestData { get; set; }
     }
 }

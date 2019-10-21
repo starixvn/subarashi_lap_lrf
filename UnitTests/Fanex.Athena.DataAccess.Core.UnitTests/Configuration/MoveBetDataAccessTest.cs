@@ -1,17 +1,12 @@
 ﻿namespace Fanex.Athena.DataAccess.Core.UnitTests.Configuration
 {
-    using System.Threading.Tasks;
-
     using Core.Configuration;
-
     using Data;
-
     using Logging;
-
     using NSubstitute;
-
     using NUnit.Framework;
-
+    using System;
+    using System.Threading.Tasks;
     using TestHelpers;
 
     public class MoveBetDataAccessTest : BaseDataAccessHelperTest<MoveBetDataAccess>
@@ -84,7 +79,7 @@
         public async Task GetMoveBetNotification_WhenObjectDbThrowsException_WriteLog()
         {
             // Arrange
-            var sqlException = new ObjectDbException("Error");
+            var sqlException = new ObjectDbException("Error", new ArgumentException());
             DataAccess.GetObjectDb(Arg.Is(UspName)).Returns(x => { throw sqlException; });
 
             // Action

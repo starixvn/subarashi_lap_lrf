@@ -14,7 +14,7 @@
     using Fanex.Athena.Service.Core.Users;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Logging;
-
+    using LAP.ONEBook.Security;
     using Model.Core.DTO.Common;
 
     using NSubstitute;
@@ -70,7 +70,7 @@
         public void SignIn_SetAuthorize_UpdateCookieAndReturnCorrectResult()
         {
             // Arrange
-            var tokenInfo = new OneAuthToken
+            var tokenInfo = new DefaultAuthInfo<OneAuthPermission, OneAuthCurrency>
             {
                 SiteName = FakeHelper.Create<string>(),
                 Currency = FakeHelper.CreateMany<OneAuthCurrency>(2).ToArray(),

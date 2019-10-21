@@ -4,8 +4,6 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-using Fanex.Athena.Model.Core.MetaModel;
-
 namespace Fanex.Athena.Model.Report.MetaModel
 {
     /// <summary>
@@ -15,7 +13,7 @@ namespace Fanex.Athena.Model.Report.MetaModel
     {
         public ActiveCustomerMetaModel()
         {
-            IsExcludeTest = true;
+            IsExcludedTestData = true;
         }
 
         public byte ReportBy { get; set; }
@@ -23,7 +21,5 @@ namespace Fanex.Athena.Model.Report.MetaModel
         public string SortBy { get; set; }
 
         public string SortOrder { get; set; }
-
-        public bool IsExcludeTest { get; set; }
     }
 }

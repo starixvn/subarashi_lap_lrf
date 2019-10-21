@@ -11,7 +11,6 @@
     using Excel.Report.Helpers;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Utility;
 
     using Model.Core.ResultModel;
     using Model.Report;
@@ -46,6 +45,7 @@
         }
 
         [ValidationApiRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
+        [ApiAutoBindMetaModel(BindAgent = true)]
         public HttpResponseMessage ExportExcel(PromotionPrizeMetaModel metaModel)
         {
             const string FileName = "PP_PromotionPrize.xls";
@@ -54,7 +54,6 @@
             var userSession = SessionService.UserSession;
 
             metaModel.DefaultBaseCurrency = userSession.DefaultBaseCurrency;
-            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId, metaModel.IsExcludedTestData);
 
             var data = _dataAccess.GetData(metaModel, userSession.CurrencyList);
 

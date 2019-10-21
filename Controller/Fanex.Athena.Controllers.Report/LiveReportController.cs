@@ -23,7 +23,6 @@ namespace Fanex.Athena.Controllers.Report
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel.LiveReports;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
     using Fanex.Athena.Web.ResultExtension;
 
@@ -90,13 +89,12 @@ namespace Fanex.Athena.Controllers.Report
         [HttpPost]
         [CustomValidateAntiForgery]
         [ValidationWebRequest]
+        [AutoBindMetaModel(BindAgent = true)]
         public async Task<ActionResult> Index(LiveReportMetaModel metaModel)
         {
             var licenseeSession = SessionService.LicenseeSession;
             var userSession = SessionService.UserSession;
             metaModel.LicenseeId = licenseeSession.LicenseeId;
-            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList
-                , metaModel.CurrencyId);
 
             var productAccess = GetProductAccess(metaModel.LicenseeId, userSession.Language);
             metaModel.ProductCodeList = string.Join(",", productAccess.ProductList.Select(x => x.ProductCode));
@@ -116,12 +114,11 @@ namespace Fanex.Athena.Controllers.Report
 
         [HttpGet]
         [ValidationWebRequest]
+        [AutoBindMetaModel(BindAgent = true)]
         public async Task<ActionResult> MatchList(LiveReportMatchListMetalModel metaModel)
         {
             var licenseeSession = SessionService.LicenseeSession;
             var userSession = SessionService.UserSession;
-            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList
-                , metaModel.CurrencyId);
 
             var productAccess = GetProductAccess(licenseeSession.LicenseeId, userSession.Language);
             var dataList = await _liveReportService.GetLiveReportWinLossByMatch(metaModel).ConfigureAwait(false);
@@ -142,14 +139,12 @@ namespace Fanex.Athena.Controllers.Report
         [AjaxRequest]
         [CustomValidateAntiForgery]
         [ValidationWebRequest]
+        [AutoBindMetaModel(BindAgent = true)]
         public async Task<ActionResult> Detail(LiveReportMetaModel metaModel, string productCode)
         {
             var licenseeSession = this.SessionService.LicenseeSession;
             var userSession = SessionService.UserSession;
             metaModel.LicenseeId = licenseeSession.LicenseeId;
-
-            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList
-                , metaModel.CurrencyId);
 
             var productAccess = GetProductAccess(licenseeSession.LicenseeId, userSession.Language);
             var balanceUpDay = _balanceUpDataAccess.GetBalanceUp().BalanceUpDay;

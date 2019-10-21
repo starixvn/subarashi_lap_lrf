@@ -18,7 +18,6 @@
     using NSubstitute;
     using NUnit.Framework;
     using Report;
-    using Service.Core.Common.Interfaces;
     using Service.Report.Interfaces;
     using VendorAdapter.Interfaces;
 
@@ -26,8 +25,6 @@
     public partial class MatchWinLossReportControllerTest : CultureBaseControllerHelperTest
     {
         private const int CurrencyId = 999;
-
-        private const string AgentListXml = "<ROOT></ROOT>";
 
         private static readonly DateTime BalanceUpDate = new DateTime(2017, 3, 4);
 
@@ -63,7 +60,6 @@
                     ProductCodeList = "SB,NG",
                     MatchId = 1,
                     LeagueId = 1
-                    
                 };
                 var dataList = new List<MatchWinLoss>
                 {

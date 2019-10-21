@@ -109,6 +109,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AgCasinoWinLossReportControllerTest.cs" />
+    <Compile Include="CasinoTurnoverReportControllerTest.cs" />
     <Compile Include="ExchangeWinLossReportControllerTest.cs" />
     <Compile Include="LicenseeWinLossReportControllerTest_IsValidParams.cs" />
     <Compile Include="LicenseeWinLossReportControllerTest.cs" />

@@ -109,7 +109,7 @@ export class FormFilter extends Component {
             FromDate: Site.convertDateToString(fromDate),
             ToDate: Site.convertDateToString(toDate),
             ReportBy: this.props.selectedReportBy,
-            ExcludeTestData: this.props.isExcludeTest,
+            IsExcludedTestData: this.props.isExcludeTest,
             Level: 0
         };
         

@@ -7,16 +7,13 @@
 namespace Fanex.Athena.Model.Report.MetaModel
 {
     using Fanex.Athena.Model.Core.Helper;
-    using Fanex.Athena.Model.Core.MetaModel;
     using System;
 
-    public class ThirdPartyWinLossMetaModel : BaseDrilldownReportMetaModel, IMetaModelValidation
+    public class ThirdPartyWinLossMetaModel : BaseDrilldownReportMetaModel
     {
         private DateTime? _fromDate;
 
         private DateTime? _toDate;
-
-        public bool IsExcludedTestData { get; set; }
 
         public byte ReportBy { get; set; }
 

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 using Fanex.Athena.Model.Auth;
 using Fanex.Athena.Model.Core.MetaModel;
@@ -16,9 +13,13 @@ namespace Fanex.Athena.Web.ActionFilter
     public sealed class AutoBindMetaModelAttribute : ActionFilterAttribute
     {
         public bool BindAgent { get; set; }
+
         public bool BindCurrencyList { get; set; }
+
         public bool BindUserId { get; set; }
+
         public ISessionStorage SessionStorage { get; set; }
+
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             var userSession = SessionStorage.UserAuthInfo;
@@ -74,7 +75,7 @@ namespace Fanex.Athena.Web.ActionFilter
 
             if (item.Value is IMetaModelAgent itemWithAgent)
             {
-                itemWithAgent.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, currencyId);
+                itemWithAgent.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, currencyId, itemWithAgent.IsExcludedTestData);
                 filterContext.ActionParameters[item.Key] = itemWithAgent;
             }
         }

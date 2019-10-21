@@ -7,7 +7,7 @@
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Logging;
-
+    using LAP.ONEBook.Security;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
 
@@ -109,7 +109,7 @@
             {
                 // Arrange
                 var expectedUrl = "Utility/OneTokenRestriction?code=" + OneAuthorizationErrorCode.TokenIsInValid;
-                _oneAuthenticationService.GetTokenInfo(Arg.Any<string>()).Returns(x => new OneAuthToken { UserSEQ = 0 });
+                _oneAuthenticationService.GetTokenInfo(Arg.Any<string>()).Returns(x => new DefaultAuthInfo<OneAuthPermission, OneAuthCurrency> { UserSEQ = 0 });
 
                 // Action
                 var result = controller.CreateSession(token);
@@ -151,7 +151,7 @@
                 // Arrange
                 const string Token = "GasgSDgS";
 
-                var tokenInfo = new OneAuthToken
+                var tokenInfo = new DefaultAuthInfo<OneAuthPermission, OneAuthCurrency>
                 {
                     UserID = "1",
                     SiteName = "spondemo",
@@ -183,7 +183,7 @@
             {
                 // Arrange
                 const string Token = "GasgSDgS";
-                _oneAuthenticationService.GetTokenInfo(Token).Returns(x => new OneAuthToken
+                _oneAuthenticationService.GetTokenInfo(Token).Returns(x => new DefaultAuthInfo<OneAuthPermission, OneAuthCurrency>
                 {
                     SiteName = "spondemo",
                     UserSEQ = 1,
@@ -214,7 +214,7 @@
             {
                 // Arrange
                 const string Token = "GasgSDgS";
-                var tokenInfo = new OneAuthToken
+                var tokenInfo = new DefaultAuthInfo<OneAuthPermission, OneAuthCurrency>
                 {
                     SiteName = siteName,
                     UserSEQ = 1,
@@ -248,7 +248,7 @@
                 // Arrange
                 const string Token = "GasgSDgS";
 
-                var tokenInfo = new OneAuthToken
+                var tokenInfo = new DefaultAuthInfo<OneAuthPermission, OneAuthCurrency>
                 {
                     SiteName = "spondemo",
                     UserSEQ = 1,

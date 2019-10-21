@@ -96,7 +96,7 @@ export class FormFilter extends Component {
                 TimeZone: this.props.selectedTimeZone,
                 ReportBy: this.props.selectedReportBy,
                 GroupBy: this.props.groupBy,
-                IsExcludeTestData: this.props.isExcludeTest
+                IsExcludedTestData: this.props.isExcludeTest
             }
         }
     }
