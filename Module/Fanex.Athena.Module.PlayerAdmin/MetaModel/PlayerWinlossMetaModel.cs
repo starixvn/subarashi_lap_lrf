@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Model.Core.MetaModel;
 using Fanex.Athena.Model.Core.MetaModel.Product;
 
 namespace Fanex.Athena.Module.PlayerAdmin.MetaModel
 {
-    public class PlayerWinLossMetaModel : IMetaModelAgent, IMetaModelValidation
+    public class PlayerWinLossMetaModel : IMetaModelAgent, IMetaModelValidation, IMetaModelFunctionContract
     {
         private const int MinimumPageSize = 50;
 
@@ -49,5 +50,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.MetaModel
         public bool IsValid => !string.IsNullOrEmpty(Username);
 
         public bool IsExcludedTestData { get; set; }
+
+        public string FunctionKey => FunctionNames.CustomerWinLoss;
     }
 }

@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using Fanex.Athena.Service.Core.Users;
 using Fanex.Athena.Service.Core.Users.Interfaces;
+using Fanex.Athena.Service.StatelessCore.Interfaces;
 using Fanex.Athena.Service.StatelessCore.Utility;
 
 namespace Fanex.Athena.Web.ActionFilter
@@ -14,7 +15,10 @@ namespace Fanex.Athena.Web.ActionFilter
         public bool BindDictionaryCurrencyList { get; set; }
         public bool BindCurrencyList { get; set; }
         public bool BindUserId { get; set; }
-        private static readonly ISessionStorage _sessionStorage = new SessionStorage();
+        public bool BindLicenseeContract { get; set; }
+        public ISessionStorage SessionStorage { get; set; }
+        public IProductService ProductService { get; set; }
+        public ILicenseeSettingService LicenseeSettingService { get; set; }
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             var userSession = _sessionStorage.UserAuthInfo;
@@ -38,9 +42,70 @@ namespace Fanex.Athena.Web.ActionFilter
             {
                 AutoBindMetaModelService.MapCurrencyList(actionArgument, userSession.CurrencyList);
             }
+            if (BindLicenseeContract)
+            {
+                MapLicenseeContract(filterContext, userSession);
+            }
             base.OnActionExecuting(filterContext);
 
         }
 
+        private void MapLicenseeContract(ActionExecutingContext filterContext, UserAuthInfo userSession)
+        {
+            var item = filterContext.ActionParameters.Where(x => x.Value is IMetaModelFunctionContract)
+                    .Select(x => x).FirstOrDefault();
+
+            if (item.Value is IMetaModelFunctionContract metaModel)
+            {
+                var licenseeSession = SessionStorage.LicenseeAuthInfo;
+                var productAccess = ProductService.GetSingleWalletProductAccess(
+                    licenseeSession.LicenseeId,
+                    "en-US",
+                    metaModel.FunctionKey);
+
+                metaModel.IsAllowedCustomerComm = licenseeSession.IsAllowedCustomerComm;
+                metaModel.IsAllowBA = productAccess.IsAllowBA;
+                metaModel.SystemIdVisible = !LicenseeSettingService.IsFakeLicensee(licenseeSession.LicenseeName);
+
+                filterContext.ActionParameters[item.Key] = item;
+            }
+
+        }
+
+        private static void MapUserId(ActionExecutingContext filterContext, UserAuthInfo userSession)
+        {
+            var item = filterContext.ActionParameters.Where(x => x.Value is IMetaModelUserId)
+             .Select(x => x).FirstOrDefault();
+            var value = item.Value as IMetaModelUserId;
+            value.UserId = userSession.UserId;
+            filterContext.ActionParameters[item.Key] = value;
+        }
+
+        private static void MapCurrencyList(ActionExecutingContext filterContext, Model.Auth.UserAuthInfo userSession)
+        {
+            var item = filterContext.ActionParameters.Where(x => x.Value is IMetaModelCurrencyList)
+              .Select(x => x).FirstOrDefault();
+            var value = item.Value as IMetaModelCurrencyList;
+            value.CurrencyList = userSession.CurrencyList;
+            filterContext.ActionParameters[item.Key] = value;
+        }
+
+        private static void MapAgentXml(ActionExecutingContext filterContext, Model.Auth.UserAuthInfo userSession)
+        {
+            var item = filterContext.ActionParameters.Where(x => x.Value is IMetaModelAgent)
+                    .Select(x => x).FirstOrDefault();
+
+            var currencyId = 0;
+            if (item.Value is IMetaModelCurrency itemWithCurrency)
+            {
+                currencyId = itemWithCurrency.CurrencyId;
+            }
+
+            if (item.Value is IMetaModelAgent itemWithAgent)
+            {
+                itemWithAgent.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, currencyId, itemWithAgent.IsExcludedTestData);
+                filterContext.ActionParameters[item.Key] = itemWithAgent;
+            }
+        }
     }
 }

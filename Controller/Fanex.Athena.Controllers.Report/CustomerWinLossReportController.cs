@@ -52,14 +52,13 @@ namespace Fanex.Athena.Controllers.Report
         }
 
         [HttpPost]
-        [AutoBindMetaModel(BindAgent = true)]
+        [AutoBindMetaModel(BindAgent = true, BindLicenseeContract = true)]
         [ValidationWebRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
         public async Task<ActionResult> Index(CustomerWinLossMetaModel metaModel)
         {
             var userSession = SessionService.UserSession;
             if (metaModel.IsExportExcel)
             {
-                AssignMetaModelForExcel(metaModel);
                 const string FileName = "CustomerWinLoss";
                 var httpResponse = await _reportAPIClient.PostAsync("api/CustomerWinLoss/ExportFile",
                     metaModel, userSession.Language).ConfigureAwait(false);
