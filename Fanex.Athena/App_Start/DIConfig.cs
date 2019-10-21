@@ -64,6 +64,11 @@ namespace Fanex.Athena
             builder.RegisterControllers(controllerAssemblies);
             builder.RegisterApiControllers(apiControllerAssemblies);
 
+            builder.Register(x => new PlayerStatementService(
+                  x.Resolve<IAppSettings>(),
+                  x.ResolveNamed<HttpClient>("EXTServiceTokenClient")
+                )).As<IPlayerStatementService>()
+                .InstancePerDependency();
             var container = builder.Build();
 
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
@@ -87,6 +92,16 @@ namespace Fanex.Athena
             { { "AUTH_TOKEN", ConfigurationManager.AppSettings["ReportAPITokenValue"] } };
 
             builder.WithHttpClient("ReportAPIClient", ConfigurationManager.AppSettings["ReportAPIHostUrl"], reportAPIheader);
+
+            var betListAPIheader = new Dictionary<string, string>
+            { { "BETLIST_TOKEN_KEY", ConfigurationManager.AppSettings["BetListApiTokenValue"] } };
+
+            builder.WithHttpClient("BETLISTAPICLIENT", ConfigurationManager.AppSettings["BetListApiHostUrl"], betListAPIheader);
+
+            var lgApiheaedr = new Dictionary<string, string>
+            { { "LGAPI_TOKEN_KEY", ConfigurationManager.AppSettings["LGAPITokenValue"] } };
+            builder.WithHttpClient("LGAPICLIENT", ConfigurationManager.AppSettings["LGAPIHostUrl"], lgApiheaedr);
+
             builder.WithHttpClient("EXTServiceTokenClient", ConfigurationManager.AppSettings["ExtAPITokenHostUrl"]);
         }
 
@@ -151,6 +166,15 @@ namespace Fanex.Athena
             builder.Register<ReportAPIClient>(x => new ReportAPIClient(
                  x.ResolveNamed<HttpClient>("ReportAPIClient")
                 )).As<IReportAPIClient>().SingleInstance();
+
+            builder.Register<BetListApiClient>(x => new BetListApiClient(
+                 x.ResolveNamed<HttpClient>("BETLISTAPICLIENT")
+                )).As<IBetListApiClient>().SingleInstance();
+
+            builder.Register<LGAPIClient>(x => new LGAPIClient(
+                 x.ResolveNamed<HttpClient>("LGAPICLIENT")
+                )).As<ILGAPIClient>().SingleInstance();
+
         }
     }
 }

@@ -70,11 +70,11 @@ namespace Fanex.Athena.Module.PlayerAdmin.Controllers
 
             if (metaModel.IsExportExcel)
             {
-                const string FileName = "CustomerWinLoss.xls";
+                const string FileName = "CustomerWinLoss.xlsx";
                 var respponse = await _reportAPIClient.PostAsync("api/CustomerWinLoss/ExportExcel",
                     metaModel, userSession.Language, MediaType.MsgPack).ConfigureAwait(false);
 
-                return File(await respponse.Content.ReadAsStreamAsync(), "application/octet-stream", FileName);
+                return File(respponse.Item1, "application/octet-stream", FileName);
             }
 
             return JsonString(await _reportAPIClient.PostAsyncString("api/CustomerWinLoss/Index",

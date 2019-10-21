@@ -63,7 +63,7 @@ namespace Fanex.Athena.Controllers.Report
                 var httpResponse = await _reportAPIClient.PostAsync("api/CustomerWinLoss/ExportFile",
                     metaModel, userSession.Language).ConfigureAwait(false);
 
-                return File(await httpResponse.Content.ReadAsStreamAsync(), httpResponse.Content.Headers.ContentType.MediaType, FileName);
+                return File(httpResponse.Item1, httpResponse.Item2, FileName);
 
             }
 
@@ -106,17 +106,5 @@ namespace Fanex.Athena.Controllers.Report
             return View("~/Views/Desktop/Report/CustomerWinLoss/Main.cshtml", model);
         }
 
-        private void AssignMetaModelForExcel(CustomerWinLossMetaModel metaModel)
-        {
-            var licenseeSession = SessionService.LicenseeSession;
-            var productAccess = ProductService.GetSingleWalletProductAccess(
-                licenseeSession.LicenseeId,
-                SessionService.UserSession.Language,
-                FunctionNames.CustomerWinLoss);
-
-            metaModel.IsAllowedCustomerComm = licenseeSession.IsAllowedCustomerComm;
-            metaModel.IsAllowBA = productAccess.IsAllowBA;
-            metaModel.SystemIdVisible = !IsFakeLicensee(licenseeSession.LicenseeName);
-        }
     }
 }

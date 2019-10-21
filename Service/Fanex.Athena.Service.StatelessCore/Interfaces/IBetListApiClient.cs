@@ -6,12 +6,12 @@ namespace Fanex.Athena.Service.StatelessCore.Interfaces
 {
     public interface IBetListApiClient
     {
-        Task<HttpResponseMessage> PostAsync(string path, object value, string language, int timeout = 0);
+        Task<HttpResponseMessage> PostAsync(string path, object value, string language);
 
-        Task<T> PostAsync<T>(string path, object value, string language, int timeout = 0);
+        Task<T> PostAsync<T>(string path, object value, string language) where T : class;
 
-        Task<byte[]> PostAsyncBytes(string path, object value, string language, int timeout = 0);
+        Task<byte[]> PostAsyncBytes(string path, object value, string language);
 
-        Task<string> PostAsyncString(string path, object value, string language, int timeout = 0);
+        Task<string> PostAsyncString(string path, object value, string language);
     }
 }
