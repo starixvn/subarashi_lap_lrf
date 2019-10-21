@@ -86,8 +86,11 @@ namespace Fanex.Athena.Controllers.Report
 
             if (metaModel.IsExportExcel)
             {
-                var response = await _reportAPIClient.PostAsync("api/PlatformWinLoss/ExportMemberData", metaModel, language, MediaType.MsgPack).ConfigureAwait(false);
+
+                var response = await _reportAPIClient.PostAsync("api/PlatformWinLoss/ExportMemberData", metaModel,
+                language, MediaType.MsgPack).ConfigureAwait(false);
                 return File(await response.Content.ReadAsStreamAsync(), "application/octet-stream", FileName);
+
             }
             else
             {
@@ -100,8 +103,12 @@ namespace Fanex.Athena.Controllers.Report
             if (metaModel.IsExportExcel)
             {
                 const string FileName = "PlatformWinLossSummary.xlsx";
-                var response = await _reportAPIClient.PostAsync("api/PlatformWinLoss/ExportSummaryData", metaModel, language, MediaType.MsgPack).ConfigureAwait(false);
+
+                var response = await _reportAPIClient.PostAsync("api/PlatformWinLoss/ExportSummaryData",
+                metaModel, language, MediaType.MsgPack).ConfigureAwait(false);
+
                 return File(await response.Content.ReadAsStreamAsync(), "application/octet-stream", FileName);
+
             }
             else
             {

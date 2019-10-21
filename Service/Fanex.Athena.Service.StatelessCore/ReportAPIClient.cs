@@ -71,12 +71,13 @@ namespace Fanex.Athena.Service.StatelessCore
                 }
 
                 return codeBlock != null ? await codeBlock(response).ConfigureAwait(false) : response as T;
+
             }
         }
 
         public async Task<string> PostAsyncString(string path, object value, string language)
         {
-            return await HandleAsync(path, value, language, MediaType.Json, async (x) => { return await x.Content.ReadAsStringAsync(); });
+            return await HandleAsync(path, value, language, MediaType.Json, async (x) => { using (x) { return await x.Content.ReadAsStringAsync(); } });
         }
 
         public async Task<HttpResponseMessage> PostAsync(string path, object value, string language, MediaType mediaType = MediaType.Json)

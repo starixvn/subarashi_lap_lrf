@@ -62,7 +62,9 @@ namespace Fanex.Athena.Controllers.Report
                 const string FileName = "CustomerWinLoss";
                 var httpResponse = await _reportAPIClient.PostAsync("api/CustomerWinLoss/ExportFile",
                     metaModel, userSession.Language).ConfigureAwait(false);
+
                 return File(await httpResponse.Content.ReadAsStreamAsync(), httpResponse.Content.Headers.ContentType.MediaType, FileName);
+
             }
 
             return JsonString(await _reportAPIClient.PostAsyncString("api/CustomerWinLoss/Index", metaModel, userSession.Language).ConfigureAwait(false));
