@@ -59,9 +59,6 @@
     <Reference Include="LAP.ONEBook.Security, Version=1.0.7.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\LAP.ONEBook.Security.1.0.7\lib\net461\LAP.ONEBook.Security.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.ApplicationInsights, Version=2.10.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.2.10.0\lib\net46\Microsoft.ApplicationInsights.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
@@ -148,7 +145,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ActionFilter\AiHandleErrorAttribute.cs" />
     <Compile Include="ActionFilter\AuthorizeRestrictionAttribute.cs" />
     <Compile Include="ActionFilter\AutoBindMetaModelAttribute.cs" />
     <Compile Include="ActionFilter\ValidateProductPermissionAttribute.cs" />
