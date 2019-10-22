@@ -109,8 +109,7 @@
                 turnoverSB = 200,
                 reporttype = "20170101",
                 nickname = "nickname test",
-                custid = 108,
-                PromotionPrize = 1
+                custid = 108
             };
 
             MapReaderData(readerDataMapping);
@@ -128,7 +127,6 @@
                 Assert.That(firstOriginalItem.CustomerId, Is.EqualTo(readerDataMapping.custid));
                 Assert.That(firstOriginalItem.LicenseeWL["SB"], Is.EqualTo(readerDataMapping.LicenseeWLSB));
                 Assert.That(firstOriginalItem.TurnOver["SB"], Is.EqualTo(readerDataMapping.turnoverSB));
-                Assert.That(result.AdditionalInfo, Is.EqualTo(readerDataMapping.PromotionPrize.ToString()));
             });
         }
 
@@ -154,7 +152,8 @@
                 LicenseeWLSB = 300,
                 turnoverSB = 400,
                 winlost = 500,
-                winlostUSD = 600
+                winlostUSD = 600,
+                PromotionPrize = 1
             };
             MapReaderData(readerDataMapping);
 
@@ -170,6 +169,7 @@
                 Assert.That(result.SummaryTotal[_metaModel.DefaultBaseCurrency].CustomerWinLoss, Is.EqualTo(readerDataMapping.winlost));
                 Assert.That(result.SummaryTotal[_metaModel.DefaultBaseCurrency].LicenseeWL["SB"], Is.EqualTo(readerDataMapping.LicenseeWLSB));
                 Assert.That(result.SummaryTotal[_metaModel.DefaultBaseCurrency].TurnOver["SB"], Is.EqualTo(readerDataMapping.turnoverSB));
+                Assert.That(result.AdditionalInfo, Is.EqualTo(readerDataMapping.PromotionPrize.ToString()));
             });
         }
 
@@ -202,6 +202,7 @@
                 Assert.That(result.SummaryTotal["USD"].LicenseeWL, Is.Empty);
                 Assert.That(result.SummaryTotal[_metaModel.DefaultBaseCurrency].CustomerWinLoss, Is.Zero);
                 Assert.That(result.SummaryTotal[_metaModel.DefaultBaseCurrency].TurnOver, Is.Empty);
+                Assert.That(result.AdditionalInfo, Is.EqualTo("0"));
             });
         }
 

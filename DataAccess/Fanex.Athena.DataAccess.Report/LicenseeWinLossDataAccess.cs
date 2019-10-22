@@ -221,7 +221,6 @@
             var hasCustomerId = reader.HasColumn("custid");
             var isMonthly = metaModel.ReportBy == ReportByType.Monthly;
 
-            var sumPromotionPrize = 0;
             var index = 0;
             while (reader.Read())
             {
@@ -241,16 +240,18 @@
                 };
                 ReadData(reader, item);
 
-                sumPromotionPrize += reader.ToInt("PromotionPrize");
                 dataList.Add(item);
             }
+
+            var hasSummaryData = reader.NextResult() && reader.Read();
+            var promotionPrize = hasSummaryData ? reader.ToInt("PromotionPrize") : 0;
 
             return new SortableReportResultModel<LicenseeWinLoss>
             {
                 DataList = dataList,
                 TotalDataList = CalculateTotal(dataList),
-                SummaryTotal = GetSummaryTotal(reader, metaModel, reader.NextResult() && reader.Read()),
-                AdditionalInfo = sumPromotionPrize.ToString()
+                SummaryTotal = GetSummaryTotal(reader, metaModel, hasSummaryData),
+                AdditionalInfo = promotionPrize.ToString()
             };
         }
 
