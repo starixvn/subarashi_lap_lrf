@@ -1,13 +1,14 @@
-﻿using Fanex.Athena.Api.StatelessBase.Attributes.Extensions;
-using Fanex.Athena.Model.Auth;
-using Fanex.Athena.Model.Core.MetaModel;
-using Fanex.Athena.Service.StatelessCore.Interfaces;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
+using Fanex.Athena.Api.StatelessBase.Attributes.Extensions;
+using Fanex.Athena.Model.Auth;
+using Fanex.Athena.Model.Core.MetaModel;
+using Fanex.Athena.Service.StatelessCore.Interfaces;
 
 namespace Fanex.Athena.Api.StatelessBase.Attributes
 {
@@ -45,9 +46,8 @@ namespace Fanex.Athena.Api.StatelessBase.Attributes
             }
             var isAuthorized = false;
             if (actionContext.ActionArguments.ContainsKey("currencyAgentList")
-                && actionContext.ActionArguments["currencyAgentList"] is OneAuthCurrency[] authCurrencyList)
+                && actionContext.ActionArguments["currencyAgentList"] is IEnumerable<OneAuthCurrency> authCurrencyList)
             {
-
                 isAuthorized = authorizationService.HasPermissionOnData(authCurrencyList, custId, 0);
             }
 

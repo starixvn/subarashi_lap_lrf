@@ -18,7 +18,7 @@ namespace Fanex.Athena.Service.StatelessCore.Interfaces
 
         bool HasPermissionOnData(IDictionary<int, int[]> currencyAgents, int custId, long transId);
 
-        bool HasPermissionOnData(OneAuthCurrency[] currencyAgents, int custId, long transId);
+        bool HasPermissionOnData(IEnumerable<OneAuthCurrency> currencyAgents, int custId, long transId);
 
         bool IsAllowedEditCommission(UserAuthInfo userAuthInfo);
 

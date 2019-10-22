@@ -1,8 +1,8 @@
-﻿using Fanex.Athena.Model.Auth;
+﻿using System.Collections;
+using System.Collections.Generic;
+using Fanex.Athena.Model.Auth;
 using Fanex.Athena.Service.StatelessCore.Utility;
 using NUnit.Framework;
-using System.Collections;
-using System.Collections.Generic;
 
 namespace Fanex.Athena.ServiceStatelessCore.UnitTests.Utility
 {
@@ -29,7 +29,7 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests.Utility
             }
         }
 
-        private static OneAuthCurrency[] CreateAuthCurrencyList()
+        private static IEnumerable<OneAuthCurrency> CreateAuthCurrencyList()
         {
             return new OneAuthCurrency[]
             {

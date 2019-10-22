@@ -1,7 +1,8 @@
-﻿using Fanex.Athena.Model.Auth;
-using NSubstitute;
+﻿using System.Collections.Generic;
 using System.Web;
 using System.Web.Http.Controllers;
+using Fanex.Athena.Model.Auth;
+using NSubstitute;
 
 namespace Fanex.Athena.UnitTest.Common.Helpers
 {
@@ -16,7 +17,7 @@ namespace Fanex.Athena.UnitTest.Common.Helpers
 
         public const string DefaultClientIp = "127.0.0.1";
 
-        public static HttpActionContext CreateMockActionContext(OneAuthCurrency[] authCurrencyList = null)
+        public static HttpActionContext CreateMockActionContext(IEnumerable<OneAuthCurrency> authCurrencyList = null)
         {
             return new HttpActionContext
             {
@@ -45,7 +46,7 @@ namespace Fanex.Athena.UnitTest.Common.Helpers
             return httpContext;
         }
 
-        public static OneAuthCurrency[] CreateAuthCurrencyList()
+        public static IEnumerable<OneAuthCurrency> CreateAuthCurrencyList()
         {
             return new OneAuthCurrency[]
             {
