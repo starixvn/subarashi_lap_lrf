@@ -44,7 +44,7 @@ namespace Fanex.Athena
             builder.RegisterControllers(controllerAssemblies);
             builder.RegisterApiControllers(apiControllerAssemblies);
 
-            var moduleAssemblies = GetModuleAssemblies(assemblies);
+            var moduleAssemblies = GetModuleAssemblies(assemblies).ToArray();
 
             builder.RegisterAssemblyTypes(moduleAssemblies).AsImplementedInterfaces();
             builder.RegisterControllers(moduleAssemblies);
