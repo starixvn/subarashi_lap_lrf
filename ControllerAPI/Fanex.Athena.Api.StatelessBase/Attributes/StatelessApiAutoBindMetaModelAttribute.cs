@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Web.Http.Controllers;
@@ -122,7 +123,7 @@ namespace Fanex.Athena.Api.StatelessBase.Attributes
         private static void MapAgentXml(HttpActionContext actionContext)
         {
             if (actionContext.ActionArguments.ContainsKey("currencyAgentList")
-                && actionContext.ActionArguments["currencyAgentList"] is OneAuthCurrency[] currencyWithAgent)
+                && actionContext.ActionArguments["currencyAgentList"] is IEnumerable<OneAuthCurrency> currencyWithAgent)
             {
                 var item = actionContext.ActionArguments.Where(x => x.Value is IMetaModelAgent)
                         .Select(x => x).FirstOrDefault();

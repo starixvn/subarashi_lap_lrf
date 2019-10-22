@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Web.Http.Controllers;
 using Autofac;
@@ -42,7 +43,7 @@ namespace Fanex.Athena.Api.StatelessBase.UnitTests.Attributes
             metaModel.CustId.Returns(CustId);
             actionContext.ActionArguments.Add("metaModel", metaModel);
             actionContext.ActionArguments.Add("custId", CustId);
-            var authCurrencyList = actionContext.ActionArguments["currencyAgentList"] as OneAuthCurrency[];
+            var authCurrencyList = actionContext.ActionArguments["currencyAgentList"] as IEnumerable<OneAuthCurrency>;
 
             _authorizationService.HasPermissionOnData(authCurrencyList, CustId, 0).Returns(isAuthorized);
 

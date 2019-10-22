@@ -77,7 +77,7 @@ namespace Fanex.Athena.Service.StatelessCore
             return currencyAgents.Any(i => i.Key == item.Item1 && i.Value.Contains(item.Item2) && (currencyId == 0 || item.Item1 == currencyId));
         }
 
-        public bool HasPermissionOnData(OneAuthCurrency[] currencyAgents, int custId, long transId)
+        public bool HasPermissionOnData(IEnumerable<OneAuthCurrency> currencyAgents, int custId, long transId)
         {
             if (custId == 0 && transId == 0)
             {

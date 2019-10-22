@@ -1,11 +1,12 @@
-﻿using Fanex.Athena.Model.Auth;
+﻿using System.Collections.Generic;
+using Fanex.Athena.Model.Auth;
 using Fanex.Athena.Model.Core.MetaModel;
 
 namespace Fanex.Athena.Module.PlayerAdmin.Api.MetaModel
 {
     public class PlayerUpdatingBaseMetaModel : IMetalModelCustomerIdentity, IMetaModelIp, IMetaModelUserId, IMetaModelLanguage
     {
-        public OneAuthCurrency[] CurrencyPermission { get; set; }
+        public IEnumerable<OneAuthCurrency> CurrencyPermission { get; set; }
 
         public int UserId { get; set; }
 
