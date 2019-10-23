@@ -1113,7 +1113,6 @@
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\statement\reducers\index.js" />
     <Content Include="www\js\source\reactpages\pages\bettingticketscenter\common\components\action.js" />
     <Content Include="www\js\source\reactpages\pages\bettingticketscenter\common\components\BaseDataGrid.jsx" />
-    <Content Include="www\js\source\reactpages\pages\bettingticketscenter\common\components\__tests__\PageLayout.redux.test.js" />
     <Content Include="www\js\source\reactpages\actions\gridDataAction.js" />
     <Content Include="www\js\source\reactpages\pages\bettingticketscenter\common\lib\constants.js" />
     <Content Include="www\js\source\reactpages\pages\bettingticketscenter\common\lib\Service.js" />
@@ -5746,6 +5745,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Logs\" />
+    <Folder Include="www\js\source\reactpages\pages\bettingticketscenter\common\components\__tests__\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="www\js\source\reactpages\pages\subsidiaryperformance\components\index.jsx" />

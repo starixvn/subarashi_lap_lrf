@@ -16,7 +16,7 @@ export const BaseDataGrid = (props) => {
     const pageOption = {
         PageIndex: requestParam.PageIndex,
         PageSize: requestParam.PageSize,
-        TotalItem: gridData.TotalRows ? gridData.TotalRows : DefaultPageSize,
+        TotalItem: gridData && gridData.TotalRows ? gridData.TotalRows : DefaultPageSize,
         PageList: [DefaultPageSize, 100, 200, 300, 400, 500, 1000, 2000]
     };
 

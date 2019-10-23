@@ -2,10 +2,12 @@
 
 exports[`AppContainer  render correctly 1`] = `
 <Connect(PageLayout)
-  isLoading={true}
   selectedTabIndex="1"
 >
+  <Loader
+    isLoading={true}
+  />
   <Connect(FormFilter) />
-  <Connect(DataGrid) />
+  <DataGrid />
 </Connect(PageLayout)>
 `;
