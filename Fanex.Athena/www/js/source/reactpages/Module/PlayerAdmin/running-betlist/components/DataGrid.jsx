@@ -44,20 +44,14 @@ export class DataGrid extends Component {
     }
 
     onSort = (sortBy, sortOrder) => {
-        let param = { ...this.props.requestParam };
-
-        param.SortBy = sortBy;
-        param.SortOrder = sortOrder;
+        const param = Object.assign({}, this.props.requestParam, { SortBy: sortBy, SortOrder: sortOrder });
 
         this._getData(param);
         this.props.setRequestParam(param);
     }
 
     onPaging = (index, size) => {
-        let param = { ...this.props.requestParam };
-
-        param.PageIndex = index;
-        param.PageSize = size;
+        const param = Object.assign({}, this.props.requestParam, { PageIndex: index, PageSize: size });
 
         this._getData(param);
         this.props.setRequestParam(param);

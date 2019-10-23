@@ -19,7 +19,7 @@ import AppData from '@jsroot/lib/AppData'
 
 import DataService from '@jsroot/lib/DataService.js'
 import Service from '../../common/lib/Service'
-import ApiUrl from '../../common/constants/apiUrl'
+import { ApiUrl } from '../../common/lib/constants'
 import { validateBaseCurrency } from '@jsroot/lib/validationHelper'
 
 const ToastMsg = () => (

@@ -2334,8 +2334,8 @@
     <comment>103698</comment>
   </data>
   <data name="BettingTicketCenter_RefnoTabNote2" xml:space="preserve">
-    <value>For RNG Keno, Lottery: Please provide username also in order to search ticket later than {0}</value>
-    <comment>103555</comment>
+    <value>For RNG Keno, Lottery, Colossus Bets: Please provide username also in order to search ticket later than {0}</value>
+    <comment>122267</comment>
   </data>
   <data name="ResultPending" xml:space="preserve">
     <value>Result Pending</value>

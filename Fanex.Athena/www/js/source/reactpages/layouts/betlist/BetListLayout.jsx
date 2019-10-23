@@ -44,8 +44,8 @@ class BetListLayout extends Component {
         };
 
         // show detail popup (in choice column)
-        window.showCombMPDetail = (transId, refNo, betId, custId, betTeam, baseCurrency) => {
-            const { rootUrl } = this.props;
+        window.showCombMPDetail = (transId, refNo, betId, custId, betTeam) => {
+            const { rootUrl, baseCurrency } = this.props;
 
             const url = BetList.getParlayDetailUrl(rootUrl, transId, refNo, betId, custId, betTeam, baseCurrency);
             this._openPopup(url, betTeam);

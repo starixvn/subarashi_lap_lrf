@@ -1,4 +1,4 @@
-﻿// Generated at: 10/31/2019 2:18:13 PM
+﻿// Generated at: 10/23/2019 11:04:06 AM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -84,7 +84,7 @@ BettingTicketCenter:"Betting Ticket Center",
 BettingTicketCenter_MultiCustomersTabNote1:"All bettypes, League, and Match filter available only when 1 day is selected",
 BettingTicketCenter_MultiCustomersTabNote2:"Data is available from {0}",
 BettingTicketCenter_RefnoTabNote1:"For Sportsbook, the search result includes the related Bonus/Cash tickets.",
-BettingTicketCenter_RefnoTabNote2:"For RNG Keno, Lottery: Please provide username also in order to search ticket later than {0}",
+BettingTicketCenter_RefnoTabNote2:"For RNG Keno, Lottery, Colossus Bets: Please provide username also in order to search ticket later than {0}",
 BetTradeCommission:"Bet Trade Commission",
 BetTradeNotOfferCurrency:"BetTrade is not offered for this currency.",
 BetType:"Bet type",

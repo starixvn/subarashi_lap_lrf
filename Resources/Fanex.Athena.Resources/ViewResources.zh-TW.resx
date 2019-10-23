@@ -1977,7 +1977,8 @@
     <value>在體育的搜尋結果將包含相關的紅利與現金注單</value>
   </data>
   <data name="BettingTicketCenter_RefnoTabNote2" xml:space="preserve">
-    <value>關於快樂彩以及彩票：請輸入用戶名，以便搜尋{0}之後的注單</value>
+    <value>For RNG Keno, Lottery, Colossus Bets: Please provide username also in order to search ticket later than {0}</value>
+    <comment>122267</comment>
   </data>
   <data name="AbnormalBet" xml:space="preserve">
     <value>非正規註單</value>
