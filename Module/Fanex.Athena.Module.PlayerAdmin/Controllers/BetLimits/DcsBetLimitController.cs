@@ -39,7 +39,7 @@
         {
             var isEditable = HasEditPermission();
             var data = _service.GetSettingAsync(metaModel.CustId, metaModel.ProductId);
-            var status = _service.GetStatusAsync(metaModel.CurrencyId, metaModel.ProductId);
+            var status = _service.GetStatusAsync(metaModel.CustId, metaModel.ProductId);
 
             await Task.WhenAll(data, status).ConfigureAwait(false);
 
