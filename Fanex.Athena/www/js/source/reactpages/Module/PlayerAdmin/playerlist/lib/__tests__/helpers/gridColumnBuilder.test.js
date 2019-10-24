@@ -1,5 +1,5 @@
 import { buildDefaultColumnList, buildColumnList } from '../../helpers/gridColumnBuilder';
-import { fields, columnList, licenseeType } from '../../constants';
+import { fields, licenseeType } from '../../constants';
 
 describe('gridColumnBuilder', () => {
     const {
@@ -13,7 +13,6 @@ describe('gridColumnBuilder', () => {
         OddsGroup,
         BaStatus,
         SpecialLevel,
-        LastLoginIp,
         LastTransaction,
         Email
     } = fields;
@@ -26,11 +25,11 @@ describe('gridColumnBuilder', () => {
         }
 
         runTest(licenseeType.api, [Status, UserName, SystemId, Currency, CurrentBalance,
-            OutstandingBalance, OddsGroup, SpecialLevel, LastTransaction
+            OutstandingBalance, OddsGroup, SpecialLevel
         ])
 
         runTest(licenseeType.nonApi, [Status, UserName, SystemId, RealName, Currency, CurrentBalance,
-            OutstandingBalance, OddsGroup, SpecialLevel, LastLoginIp, LastTransaction, Email
+            OutstandingBalance, OddsGroup, SpecialLevel, LastTransaction, Email
         ])
     })
 
@@ -42,11 +41,11 @@ describe('gridColumnBuilder', () => {
         }
 
         runTest(licenseeType.api, true, [Status, UserName, SystemId, Currency, CurrentBalance,
-            OutstandingBalance, OddsGroup, BaStatus, SpecialLevel, LastTransaction
+            OutstandingBalance, OddsGroup, BaStatus, SpecialLevel
         ])
 
         runTest(licenseeType.nonApi, false, [Status, UserName, SystemId, RealName, Currency, CurrentBalance,
-            OutstandingBalance, OddsGroup, SpecialLevel, LastLoginIp, LastTransaction, Email
+            OutstandingBalance, OddsGroup, SpecialLevel, LastTransaction, Email
         ])
     })
 })
