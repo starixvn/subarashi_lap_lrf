@@ -39,16 +39,8 @@ namespace Fanex.Athena
             var controllerAssemblies = GetControllerAssemblies(assemblies);
             var apiControllerAssemblies = GetApiControllerAssemblies(assemblies);
 
-            builder.RegisterOnebookSecurity();
             builder.RegisterAssemblyTypes(serviceAssemblies).AsImplementedInterfaces();
-            builder.RegisterControllers(controllerAssemblies);
-            builder.RegisterApiControllers(apiControllerAssemblies);
-
-            var moduleAssemblies = GetModuleAssemblies(assemblies).ToArray();
-
-            builder.RegisterAssemblyTypes(moduleAssemblies).AsImplementedInterfaces();
-            builder.RegisterControllers(moduleAssemblies);
-            builder.RegisterApiControllers(moduleAssemblies);
+            builder.RegisterOnebookSecurity();
 
             builder.RegisterFilterProvider();
             builder.RegisterWebApiFilterProvider(config);
@@ -68,6 +60,9 @@ namespace Fanex.Athena
             RegisterHttpClient(builder);
 
             RegisterModule(builder, assemblies);
+
+            builder.RegisterControllers(controllerAssemblies);
+            builder.RegisterApiControllers(apiControllerAssemblies);
 
             var container = builder.Build();
 

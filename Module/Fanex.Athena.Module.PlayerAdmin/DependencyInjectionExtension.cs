@@ -23,13 +23,11 @@
 
             var items = assemblies.Where(ass => ass.FullName.Contains(moduleName) && !ass.FullName.Contains("Fanex.Athena.Module.PlayerAdmin.Api")).ToArray();
 
+            builder.RegisterAssemblyTypes(items).AsImplementedInterfaces();
+
             builder.Register<PlayerStatementService>(x => new PlayerStatementService(x.Resolve<IAppSettings>(), x.ResolveNamed<HttpClient>("EXTServiceTokenClient")))
                 .As<IPlayerStatementService>()
                 .InstancePerDependency();
-
-            builder.RegisterAssemblyTypes(items).AsImplementedInterfaces();
-
-            builder.RegisterControllers(items);
 
             builder.RegisterType<PlayerAdminBusinessLogBuilderFactory>()
                 .As<IBusinessLogBuilderFactory>()
@@ -48,6 +46,8 @@
             builder.RegisterType<NumberGameBetLimitService>().As<INumberGameBetLimitService>().WithAttributeFiltering();
             builder.RegisterType<RngKenoBetLimitService>().As<IRngKenoBetLimitService>().WithAttributeFiltering();
             builder.RegisterType<SportsBookBetLimitService>().As<ISportsBookBetLimitService>().WithAttributeFiltering();
+
+            builder.RegisterControllers(items);
         }
     }
 }
