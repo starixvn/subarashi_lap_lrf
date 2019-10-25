@@ -17,12 +17,12 @@
     [TestFixture]
     public class CoreCasinoBetSettingDataAccessTest : BaseDataAccessHelperTest<CoreCasinoBetSettingDataAccess>
     {
-        private IUserLogDataAccess _userLogDataAccess;
+        private ISPLogDataAccess _userLogDataAccess;
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
         {
-            _userLogDataAccess = Substitute.For<IUserLogDataAccess>();
+            _userLogDataAccess = Substitute.For<ISPLogDataAccess>();
             base.FixtureSetUp();
         }
 
@@ -86,18 +86,18 @@
             // Action
             await DataAccess.UpdateCasinoStatusAsync(metaModel, SportId);
 
-            Func<UserLogMetaModel, bool> matchUserInfo = x =>
+            Func<SPLogMetaModel, bool> matchUserInfo = x =>
                 x.ActionID == UserLogAction.LiveCasinoBetSetting &&
                 x.CustID == metaModel.CustId &&
                 x.UserId == metaModel.UserId;
 
-            Func<UserLogMetaModel, bool> matchTrackingValues = x =>
+            Func<SPLogMetaModel, bool> matchTrackingValues = x =>
                 x.SPName == SPName &&
                 x.TrackingValue1 == string.Format(TrackingValueTemplate, expectedTrackingStatus1) &&
                 x.TrackingValue2 == string.Format(TrackingValueTemplate, status);
 
             // Assert
-            await _userLogDataAccess.Received(1).WriteLog(Arg.Is<UserLogMetaModel>(x =>
+            await _userLogDataAccess.Received(1).WriteLog(Arg.Is<SPLogMetaModel>(x =>
                 matchUserInfo(x) &&
                 matchTrackingValues(x)));
         }

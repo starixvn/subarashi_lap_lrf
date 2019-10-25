@@ -1,14 +1,18 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
+import { licenseeType } from '../../../lib/constants';
 import { ContextMenu } from '../../grid/ContextMenu';
 import { DropdownMenu } from '@jsroot/components/dropdown';
 
 describe('ContextMenu', () => {
     const defaultProps = {
         currentActivePlayer: { custId: 1 },
-        position: null,
-        isOpenContextMenu: false,
+        contextMenu: {
+            position: null,
+            isOpen: false
+        },
+        type: licenseeType.nonApi,
         setSelectedPlayer: jest.fn(),
         setSelectedTabName: jest.fn(),
         getTabList: jest.fn(() => {
@@ -17,7 +21,7 @@ describe('ContextMenu', () => {
                 { key: 'password', name: 'Password', tabName: 'Setting' }
             ]
         })
-    }
+    }   
 
     it('with default props and inital state - should match snapshot', () => {
         const wrapper = shallow(<ContextMenu {...defaultProps} />);

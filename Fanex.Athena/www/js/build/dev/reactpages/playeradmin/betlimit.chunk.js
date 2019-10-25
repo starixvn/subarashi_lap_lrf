@@ -611,6 +611,10 @@ var SettingContent = function SettingContent(Grid, DataHandling) {
             isShow: false
           });
         }
+
+        if (prevProps.requestParam !== this.props.requestParam) {
+          this._getData(this.props.requestParam);
+        }
       }
     }, {
       key: "componentWillUnmount",
@@ -639,27 +643,16 @@ var SettingContent = function SettingContent(Grid, DataHandling) {
     }, {
       key: "_submit",
       value: function _submit(data) {
-        var _this2 = this;
-
         this.props.toggleLoader(true);
-        var requestParam = this.props.requestParam;
         var param = Object.assign({}, this.props.requestParam, {
           Setting: data
         });
-        _lib_dataTransfer__WEBPACK_IMPORTED_MODULE_6__["default"].updateData(param, this._showSubmitResult.bind(this), function () {
-          return _this2.props.toggleLoader(false);
-        }, this._handleError.bind(this));
-      }
-    }, {
-      key: "_handleError",
-      value: function _handleError() {
-        _lib_utility__WEBPACK_IMPORTED_MODULE_7__["default"].showErrorMsg();
-        this.props.toggleLoader(false);
+        _lib_dataTransfer__WEBPACK_IMPORTED_MODULE_6__["default"].updateData(param, this._showSubmitResult.bind(this));
       }
     }, {
       key: "_showConfirmation",
       value: function _showConfirmation(onOK) {
-        var _this3 = this;
+        var _this2 = this;
 
         var buttons = [{
           text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('OK'),
@@ -676,13 +669,13 @@ var SettingContent = function SettingContent(Grid, DataHandling) {
         this.setState({
           disabledButton: true
         }, function () {
-          return _this3.props.setAlertOption({
+          return _this2.props.setAlertOption({
             isShow: true,
             title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Confirmation'),
             children: msg,
             buttons: buttons,
             icon: '',
-            onClose: _this3.onCloseAlert,
+            onClose: _this2.onCloseAlert,
             height: 130
           });
         });
@@ -690,7 +683,7 @@ var SettingContent = function SettingContent(Grid, DataHandling) {
     }, {
       key: "_showSubmitResult",
       value: function _showSubmitResult(title, msg, isSuccess) {
-        var _this4 = this;
+        var _this3 = this;
 
         var content = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
           className: "center-align"
@@ -703,15 +696,17 @@ var SettingContent = function SettingContent(Grid, DataHandling) {
         this.setState({
           disabledButton: true
         }, function () {
-          return _this4.props.setAlertOption({
+          _this3.props.setAlertOption({
             isShow: true,
             title: title,
             children: content,
-            onClose: _this4.onRefresh,
+            onClose: _this3.onRefresh,
             icon: isSuccess ? 'success' : 'error',
             height: 225,
             buttons: buttons
           });
+
+          _this3.props.toggleLoader(false);
         });
       }
     }, {
@@ -752,7 +747,7 @@ var SettingContent = function SettingContent(Grid, DataHandling) {
       key: "_getData",
       value: function _getData(param) {
         this.props.toggleLoader(true);
-        _lib_dataTransfer__WEBPACK_IMPORTED_MODULE_6__["default"].getData(param, this._refreshState.bind(this), null, this._handleError.bind(this));
+        _lib_dataTransfer__WEBPACK_IMPORTED_MODULE_6__["default"].getData(param, this._refreshState.bind(this));
       }
     }, {
       key: "render",
@@ -843,8 +838,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _lib_utility__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../lib/utility */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/utility.js");
-/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
-/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/constants.js");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/betlimit/lib/constants.js");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -853,11 +847,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-
 var SettingGrid = function SettingGrid(props) {
   var setting = props.setting,
       data = props.data,
-      isCopy = props.isCopy,
       onChange = props.onChange,
       getHeaderName = props.getHeaderName;
   var setInputRef = props.setInputRef;
@@ -897,7 +889,7 @@ var SettingGrid = function SettingGrid(props) {
   var buildCell = function buildCell(type, value, disabled) {
     var isChanged = value[type] !== value['Original' + type];
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-      className: isChanged ? _lib_constants__WEBPACK_IMPORTED_MODULE_3__["InputClassName"].OnChangedClassName : _lib_constants__WEBPACK_IMPORTED_MODULE_3__["InputClassName"].ClassName,
+      className: isChanged ? _lib_constants__WEBPACK_IMPORTED_MODULE_2__["InputClassName"].OnChangedClassName : _lib_constants__WEBPACK_IMPORTED_MODULE_2__["InputClassName"].ClassName,
       type: "text",
       ref: function ref(e) {
         return setInputRef(type, value.Id, e);
@@ -925,11 +917,11 @@ var SettingGrid = function SettingGrid(props) {
         key: item.Id
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, item.BetSettingType), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
         className: "pa-betlimit-cell"
-      }, buildCell(_lib_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitType"].MinBet, item, disabled), item.BetValueMin > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " >= ".concat(_lib_utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(item.BetValueMin)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+      }, buildCell(_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitType"].MinBet, item, disabled), item.BetValueMin > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " >= ".concat(_lib_utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(item.BetValueMin)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
         className: "pa-betlimit-cell"
-      }, buildCell(_lib_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitType"].MaxBet, item, disabled), item.BetValueMax > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " <= ".concat(_lib_utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(item.BetValueMax)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+      }, buildCell(_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitType"].MaxBet, item, disabled), item.BetValueMax > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " <= ".concat(_lib_utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(item.BetValueMax)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
         className: "pa-betlimit-cell"
-      }, buildCell(_lib_constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitType"].MaxPerMatch, item, disabled), item.MaxPerMatchMax > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " <= ".concat(_lib_utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(item.MaxPerMatchMax))))));
+      }, buildCell(_lib_constants__WEBPACK_IMPORTED_MODULE_2__["BetLimitType"].MaxPerMatch, item, disabled), item.MaxPerMatchMax > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " <= ".concat(_lib_utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(item.MaxPerMatchMax))))));
     }
 
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, rows);
@@ -1011,9 +1003,7 @@ function (_PureComponent) {
 
     _defineProperty(_assertThisInitialized(_this), "onGroupChange", function (item) {
       if (_this.state.selectedGroup !== item.value) {
-        var _this$state = _this.state,
-            selectedGroup = _this$state.selectedGroup,
-            data = _this$state.data;
+        var data = _this.state.data;
 
         var disabledButton = _this._isDisabledButton(data, item.value);
 
@@ -1029,9 +1019,10 @@ function (_PureComponent) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "onSubmit", function () {
-      var _this$state2 = _this.state,
-          selectedGroup = _this$state2.selectedGroup,
-          data = _this$state2.data;
+      var _this$state = _this.state,
+          selectedGroup = _this$state.selectedGroup,
+          data = _this$state.data,
+          setting = _this$state.setting;
 
       var invalid = _this._isDisabledButton(data, selectedGroup);
 
@@ -1041,7 +1032,7 @@ function (_PureComponent) {
         });
       } else {
         _this._showConfirmation(function () {
-          return _this._submit(selectedGroup);
+          return _this._submit(selectedGroup, setting.BetSetting.AgGroup);
         });
       }
     });
@@ -1100,12 +1091,6 @@ function (_PureComponent) {
       return !gamesHaveGroup || gamesHaveGroup.length !== data.length;
     }
   }, {
-    key: "_handleError",
-    value: function _handleError() {
-      _lib_utility__WEBPACK_IMPORTED_MODULE_5__["default"].showErrorMsg();
-      this.props.toggleLoader(false);
-    }
-  }, {
     key: "_updateState",
     value: function _updateState(data, setting) {
       if (setting.BetSetting) {
@@ -1131,28 +1116,27 @@ function (_PureComponent) {
     key: "_getData",
     value: function _getData(param) {
       this.props.toggleLoader(true);
-      _lib_dataTransfer__WEBPACK_IMPORTED_MODULE_6__["default"].getData(param, this._updateState.bind(this), null, this._handleError.bind(this));
+      _lib_dataTransfer__WEBPACK_IMPORTED_MODULE_6__["default"].getData(param, this._updateState.bind(this));
     }
   }, {
     key: "_submit",
-    value: function _submit(group) {
-      var _this2 = this;
-
+    value: function _submit(group, oldGroup) {
       this.props.toggleLoader(true);
       var param = Object.assign({}, this.props.requestParam, {
-        Setting: [group]
+        Setting: {
+          group: group,
+          oldGroup: oldGroup
+        }
       });
-      _lib_dataTransfer__WEBPACK_IMPORTED_MODULE_6__["default"].updateData(param, this._showSubmitResult.bind(this), function () {
-        return _this2.props.toggleLoader(false);
-      }, this._handleError.bind(this));
+      _lib_dataTransfer__WEBPACK_IMPORTED_MODULE_6__["default"].updateData(param, this._showSubmitResult.bind(this));
     }
   }, {
     key: "_showConfirmation",
     value: function _showConfirmation(onOK) {
-      var _this3 = this;
+      var _this2 = this;
 
       var onClose = function onClose() {
-        return _this3.onCloseAlert(false);
+        return _this2.onCloseAlert(false);
       };
 
       var buttons = [{
@@ -1170,7 +1154,7 @@ function (_PureComponent) {
       this.setState({
         disabledButton: true
       }, function () {
-        return _this3.props.setAlertOption({
+        return _this2.props.setAlertOption({
           isShow: true,
           title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Confirmation'),
           children: msg,
@@ -1184,7 +1168,7 @@ function (_PureComponent) {
   }, {
     key: "_showSubmitResult",
     value: function _showSubmitResult(title, msg, isSuccess) {
-      var _this4 = this;
+      var _this3 = this;
 
       var content = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "center-align"
@@ -1197,23 +1181,25 @@ function (_PureComponent) {
       this.setState({
         disabledButton: true
       }, function () {
-        return _this4.props.setAlertOption({
+        _this3.props.setAlertOption({
           isShow: true,
           title: title,
           children: content,
-          onClose: _this4.onRefresh,
+          onClose: _this3.onRefresh,
           icon: isSuccess ? 'success' : 'error',
-          height: 180,
+          height: 225,
           buttons: buttons
         });
+
+        _this3.props.toggleLoader(false);
       });
     }
   }, {
     key: "render",
     value: function render() {
-      var _this$state3 = this.state,
-          data = _this$state3.data,
-          setting = _this$state3.setting;
+      var _this$state2 = this.state,
+          data = _this$state2.data,
+          setting = _this$state2.setting;
 
       if (setting.BetSetting && !setting.BetSetting.IsLineEnabled) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_9__["default"], {
@@ -1225,10 +1211,10 @@ function (_PureComponent) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_9__["default"], null);
       }
 
-      var _this$state4 = this.state,
-          groups = _this$state4.groups,
-          selectedGroup = _this$state4.selectedGroup,
-          disabledButton = _this$state4.disabledButton;
+      var _this$state3 = this.state,
+          groups = _this$state3.groups,
+          selectedGroup = _this$state3.selectedGroup,
+          disabledButton = _this$state3.disabledButton;
       var hasData = data.length > 0;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "pa-betlimit"
@@ -1667,7 +1653,10 @@ function () {
         BetValueMin: rawData.BetValueMin,
         BetValueMax: rawData.BetValueMax,
         MaxPerMatchMin: rawData.MaxPerMatchMin,
-        MaxPerMatchMax: rawData.MaxPerMatchMax
+        MaxPerMatchMax: rawData.MaxPerMatchMax,
+        OldMinBet: rawData.MinBet,
+        OldMaxBet: rawData.MaxBet,
+        OldMaxPerMatch: rawData.MaxPerMatch
       };
       row.OriginalMinBet = row.MinBet;
       row.OriginalMaxBet = row.MaxBet;
@@ -1684,6 +1673,9 @@ function () {
         MinBet: _utility__WEBPACK_IMPORTED_MODULE_1__["default"].getValueAsNumber(row.MinBet),
         MaxBet: _utility__WEBPACK_IMPORTED_MODULE_1__["default"].getValueAsNumber(row.MaxBet),
         MaxPerMatch: _utility__WEBPACK_IMPORTED_MODULE_1__["default"].getValueAsNumber(row.MaxPerMatch),
+        OldMinBet: row.OldMinBet,
+        OldMaxBet: row.OldMaxBet,
+        OldMaxPerMatch: row.OldMaxPerMatch,
         IsUpdated: row.MinBet !== row.OriginalMinBet || row.MaxBet !== row.OriginalMaxBet || row.MaxPerMatch !== row.OriginalMaxPerMatch
       };
     }
@@ -1773,7 +1765,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var Url = (_Url = {}, _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].SB, 'SportBookBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].VS, 'DcsBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].VS2, 'DcsBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].LT, 'DcsBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].NG, 'NumberGameBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].KN, 'RngKenoBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].AGC, 'AGCasinoBetLimit'), _Url);
+var Url = (_Url = {}, _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].SB, 'SportsBookBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].VS, 'DcsBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].VS2, 'DcsBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].LT, 'DcsBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].NG, 'NumberGameBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].KN, 'RngKenoBetLimit'), _defineProperty(_Url, _constants__WEBPACK_IMPORTED_MODULE_3__["BetLimitProduct"].AGC, 'AGCasinoBetLimit'), _Url);
 
 var DataTransfer =
 /*#__PURE__*/
@@ -1784,32 +1776,31 @@ function () {
 
   _createClass(DataTransfer, null, [{
     key: "getData",
-    value: function getData(param, processDataFunc, successCallBack, errorHandle) {
+    value: function getData(param, callBack) {
       var url = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_2__["default"].resolveClientUrl(Url[param.ProductId] + '/GetSetting');
       _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_1__["default"].postData(url, param).then(function (response) {
         var _response$data = response.data,
             Data = _response$data.Data,
             setting = _objectWithoutProperties(_response$data, ["Data"]);
 
-        processDataFunc && processDataFunc(Data, setting);
-        successCallBack && successCallBack();
+        callBack && callBack(Data, setting);
       }).catch(function (error) {
-        processDataFunc && processDataFunc([], {});
-        errorHandle && errorHandle();
+        console.log(error.message);
+        callBack && callBack([], {});
       });
     }
   }, {
     key: "updateData",
-    value: function updateData(param, processDataFunc, successCallBack, errorHandle) {
+    value: function updateData(param, callBack) {
       var url = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_2__["default"].resolveClientUrl(Url[param.ProductId] + '/UpdateSetting');
       _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_1__["default"].postData(url, param).then(function (response) {
         var result = response.data;
         var isSuccess = Number(result.Code) === 0;
         var title = isSuccess ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('MessageSuccess') : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Fail');
-        processDataFunc && processDataFunc(title, result.Message, isSuccess);
-        successCallBack && successCallBack();
+        callBack && callBack(title, result.Message, isSuccess);
       }).catch(function (error) {
-        errorHandle && errorHandle();
+        console.log(error.message);
+        callBack(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Error'), _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('ErrorProcessingMsg'), false);
       });
     }
   }]);
@@ -1962,6 +1953,7 @@ function (_DataHandling) {
       var row = _get(_getPrototypeOf(NGDataHandling.prototype), "getViewRowData", this).call(this, rawData);
 
       row.MaxPerBall = _utility__WEBPACK_IMPORTED_MODULE_1__["default"].formatValue(rawData.MaxPerBall);
+      row.OldMaxPerBall = rawData.MaxPerBall;
       row.MaxPerBallMax = rawData.MaxPerBallMax;
       row.OriginalMaxPerBall = row.MaxPerBall;
       return row;
@@ -1972,6 +1964,7 @@ function (_DataHandling) {
       var data = _get(_getPrototypeOf(NGDataHandling.prototype), "getSubmitRowData", this).call(this, row);
 
       data.MaxPerBall = _utility__WEBPACK_IMPORTED_MODULE_1__["default"].getValueAsNumber(row.MaxPerBall);
+      data.OldMaxPerBall = row.OldMaxPerBall;
       data.IsUpdated = data.IsUpdated || row.MaxPerBall !== row.OriginalMaxPerBall;
       return data;
     }
@@ -2074,11 +2067,6 @@ function () {
   }
 
   _createClass(Utility, null, [{
-    key: "showErrorMsg",
-    value: function showErrorMsg() {
-      alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('ErrorProcessingMsg'));
-    }
-  }, {
     key: "getConfirmationMsg",
     value: function getConfirmationMsg(productId) {
       var message = _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource(ConfirmationMsg[productId].Msg);
@@ -3680,12 +3668,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "requestParam", function() { return requestParam; });
 /* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/types */ "./www/js/source/reactpages/actions/types.js");
 /* harmony import */ var _lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
 var requestParam = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, _defineProperty({}, _actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_REQUEST_PARAM"], function (state, action) {
-  return action.data;
+  return _objectSpread({}, action.data);
 }));
 
 /***/ })

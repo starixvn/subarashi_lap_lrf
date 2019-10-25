@@ -19,6 +19,8 @@
 
         public int ProductId { get; set; }
 
-        public IEnumerable<T> Setting { get; set; }
+        public int LicenseeCustId { get; set; }
+
+        public T Setting { get; set; }
     }
 }

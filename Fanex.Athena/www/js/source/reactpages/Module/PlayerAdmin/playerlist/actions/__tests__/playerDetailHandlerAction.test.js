@@ -1,9 +1,9 @@
 import * as playerDetailHandlerAction from '../playerDetailHandlerAction';
-import { SET_SELECTED_PLAYERID_LIST } from '../types';
+import { SET_SELECTED_PLAYERID_LIST, SET_SELECTED_TAB_NAME } from '../types';
 
 const mockGetLink = jest.fn();
 const mockGetTabList = jest.fn();
-jest.mock('../../lib/playerListService', () => {
+jest.mock('../../lib/services/playerQueryService', () => {
     return jest.fn().mockImplementation(() => {
         return {
             getLink: mockGetLink,
@@ -36,6 +36,18 @@ describe('playerDetailHandlerAction', () => {
         }
 
         const result = playerDetailHandlerAction.setSelectedPlayerIdList(data);
+
+        expect(result).toEqual(expectedResult);
+    })
+
+    it('setSelectedTabName - should return correct data', () => {
+        const data = 'playerInfo';
+        const expectedResult = {
+            type: SET_SELECTED_TAB_NAME,
+            data
+        }
+
+        const result = playerDetailHandlerAction.setSelectedTabName(data);
 
         expect(result).toEqual(expectedResult);
     })

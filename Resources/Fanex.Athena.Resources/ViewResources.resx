@@ -2382,10 +2382,6 @@
     <value>Current Balance</value>
     <comment>112658</comment>
   </data>
-  <data name="LastLoginIP" xml:space="preserve">
-    <value>Last Login IP</value>
-    <comment>112658</comment>
-  </data>
   <data name="LastTransaction" xml:space="preserve">
     <value>Last Transaction</value>
     <comment>112658</comment>

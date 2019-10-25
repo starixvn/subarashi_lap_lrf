@@ -72,7 +72,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
             var reader = Substitute.For<IDataReader>();
             objectDb.ExecuteReader().Returns(reader);
             reader.Read().Returns(true, true, false);
-            reader.NextResult().Returns(true, false);
+            reader.NextResult().Returns(true);
 
             var expectedData = new
             {

@@ -48,7 +48,7 @@ namespace Fanex.Athena.Service.BetSettings
 
         private readonly ILogger _logger;
 
-        private readonly IUserLogDataAccess _userLogDataAccess;
+        private readonly ISPLogDataAccess _userLogDataAccess;
 
         private readonly IAppSettings _appSetting;
 
@@ -58,7 +58,7 @@ namespace Fanex.Athena.Service.BetSettings
 
         public ExchangeCommApiService(
             ILogger logger,
-            IUserLogDataAccess userLogDataAccess,
+            ISPLogDataAccess userLogDataAccess,
             IDcsBetSettingDataAccess betSettingDataAccess,
             IAppSettings appSetting,
             ICitiXchangeClient apiClient)
@@ -97,7 +97,7 @@ namespace Fanex.Athena.Service.BetSettings
             try
             {
                 var result = _apiClient.updateCommission(custId, newCommission, EnvironmentMap[_appSetting.Environment]);
-                await _userLogDataAccess.WriteLog(new UserLogMetaModel
+                await _userLogDataAccess.WriteLog(new SPLogMetaModel
                 {
                     ActionID = UserLogAction.ExchangeCommission,
                     UserId = userId,

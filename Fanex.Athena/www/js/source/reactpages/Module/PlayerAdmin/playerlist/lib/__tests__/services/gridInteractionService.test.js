@@ -1,7 +1,5 @@
 import GridInteractionService from '../../services/gridInteractionService';
 import GridHelper from '../../helpers/gridHelper';
-import { gridItemDropdownHeight, stringTypeFields, fields } from '../../constants';
-import * as dataReducer from '@jsroot/lib/dataReducer';
 
 describe('gridInteractionService', () => {
     describe('getNextDropdownPosition', () => {

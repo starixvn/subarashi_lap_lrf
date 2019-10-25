@@ -1,9 +1,13 @@
-﻿using Fanex.Athena.Extension.Utility.Interfaces;
+﻿using System;
+using System.Globalization;
+using Autofac.Features.AttributeFilters;
+using Fanex.Athena.Extension.Utility.Interfaces;
+using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Model.Core.ViewModel;
+using Fanex.Athena.Module.PlayerAdmin.Api.DataDomains;
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.Services.Interfaces;
-using System;
-using System.Globalization;
+using Fanex.Athena.Service.StatelessCore.Interfaces;
 
 namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
 {
@@ -11,14 +15,19 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
     {
         private readonly IDbFactory _dbFactory;
 
-        public PlayerBaStatusService(IDbFactory dbFactory)
+        private readonly IBusinessLogService _businessLogService;
+
+        public PlayerBaStatusService(IDbFactory dbFactory,
+            [KeyFilter("PlayerAdminCommonCustomerSettingLogService")]IBusinessLogService businessLogService)
         {
             _dbFactory = dbFactory;
+            _businessLogService = businessLogService;
         }
 
         public ResultViewModel Update(BaStatusUpdatingMetaModel metaModel)
         {
             const string UspName = "Lrf_CustomerUpdMemberBAStatus";
+            ResultViewModel result;
 
             using (var db = _dbFactory.GetObjectDb(UspName))
             {
@@ -37,7 +46,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
                 var message = Convert.ToString(db.GetParameterValue("ErrMsg"));
                 var oddsGroup = db.GetParameterValue("OddsGroup");
 
-                return new ResultViewModel
+                result = new ResultViewModel
                 {
                     Success = code == 0,
                     Message = message,
@@ -45,6 +54,22 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Services
                     ExtendedData = Convert.ToString(oddsGroup).ToUpper(CultureInfo.CurrentCulture)
                 };
             }
+
+            var logMetaModel = new PlayerUpdatingLogMetaModel
+            {
+                LicenseeCustId = metaModel.LicenseeCustId,
+                SiteName = metaModel.SiteName,
+                UserId = metaModel.UserId,
+                CustId = metaModel.CustId,
+                ActionId = LogActionId.PlayerAdminUpdateBAStatus,
+                ActionDetailId = LogActionDetailId.UpdatingBA,
+                Status = result.Success ? LogText.Success : LogText.False,
+                NewValue = metaModel.IsBa ? LogText.On : LogText.Off,
+                OldValue = !metaModel.IsBa ? LogText.On : LogText.Off
+            };
+            _businessLogService.Write(BusinessLogType.CustomerUpdateBA, logMetaModel);
+
+            return result;
         }
     }
 }

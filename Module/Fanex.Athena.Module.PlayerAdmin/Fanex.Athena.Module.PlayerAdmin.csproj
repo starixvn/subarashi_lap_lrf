@@ -33,8 +33,11 @@
     <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac, Version=4.9.3.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Autofac.4.9.3\lib\net45\Autofac.dll</HintPath>
+    <Reference Include="Autofac, Version=4.9.4.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Autofac.4.9.4\lib\net45\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Autofac.Mvc5.4.0.2\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Dapper.2.0.30\lib\net461\Dapper.dll</HintPath>
@@ -70,20 +73,23 @@
     <Reference Include="System.Security" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Mvc, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.6\lib\net45\System.Web.Mvc.dll</HintPath>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.6\lib\net45\System.Web.Razor.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.WebPages.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -97,17 +103,25 @@
     <Compile Include="Controllers\BetLimits\NumberGameBetLimitController.cs" />
     <Compile Include="Controllers\BetLimits\PlayerBetLimitBaseControler.cs" />
     <Compile Include="Controllers\BetLimits\RngKenoBetLimitController.cs" />
-    <Compile Include="Controllers\BetLimits\SportBookBetLimitController.cs" />
+    <Compile Include="Controllers\BetLimits\SportsBookBetLimitController.cs" />
     <Compile Include="Controllers\PlayerBtcSingleCustomerController.cs" />
     <Compile Include="Controllers\PlayerWinLossController.cs" />
     <Compile Include="Controllers\PlayerBetListController.cs" />
     <Compile Include="Controllers\PlayerStatementController.cs" />
     <Compile Include="Controllers\PlayerBetLimitController.cs" />
+    <Compile Include="DataDomains\LogActionDetailId.cs" />
+    <Compile Include="DependencyInjectionExtension.cs" />
     <Compile Include="DTO\BetLimits\AgCasinoBetSetting.cs" />
     <Compile Include="DTO\BetLimits\AgCasinoGame.cs" />
     <Compile Include="DTO\BetLimits\AgCasinoGroup.cs" />
     <Compile Include="DTO\PlayerBetLimit.cs" />
     <Compile Include="DTO\PlayerBetLimitProduct.cs" />
+    <Compile Include="Extensions\PlayerAdminBusinessLogBuilderFactory.cs" />
+    <Compile Include="Extensions\PlayerBetLimitLogBuilder.cs" />
+    <Compile Include="Helpers\PlayerAdminBetLimitActionLogHelper.cs" />
+    <Compile Include="MetaModel\AgCasinoBetLimitMetaModel.cs" />
+    <Compile Include="MetaModel\PlayerBetLimitDetailedLogMetaModel.cs" />
+    <Compile Include="MetaModel\PlayerBetLimitLogMetaModel.cs" />
     <Compile Include="MetaModel\PlayerBetLimitSelectMetaModel.cs" />
     <Compile Include="MetaModel\PlayerBetLimitUpdateMetaModel.cs" />
     <Compile Include="MetaModel\PlayerBetLimitMetaModel.cs" />
@@ -119,21 +133,27 @@
     <Compile Include="Repositories\AGCasinoBetLimitRepository.cs" />
     <Compile Include="Repositories\DcsBetLimitRepository.cs" />
     <Compile Include="Repositories\Interfaces\IAGCasinoBetLimitRepository.cs" />
-    <Compile Include="Repositories\Interfaces\ISportBookBetLimitRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ISportsBookBetLimitRepository.cs" />
     <Compile Include="Repositories\NumberGameBetLimitRepository.cs" />
     <Compile Include="Repositories\RngKenoBetLimitRepository.cs" />
-    <Compile Include="Repositories\SportBookBetLimitRepository.cs" />
     <Compile Include="Repositories\Interfaces\IDcsBetLinitRepository.cs" />
     <Compile Include="Repositories\Interfaces\INumberGameBetLimitRepository.cs" />
     <Compile Include="Repositories\Interfaces\IPlayerBetLimitRepository.cs" />
     <Compile Include="Repositories\Interfaces\IRngKenoBetLimitRepository.cs" />
+    <Compile Include="Repositories\SportsBookBetLimitRepository.cs" />
     <Compile Include="Services\AGCasinoBetLimitService.cs" />
     <Compile Include="Repositories\PlayerBetLimitRepository.cs" />
+    <Compile Include="Services\DcsBetLimitService.cs" />
     <Compile Include="Services\Interfaces\IAGCasinoBetLimitService.cs" />
+    <Compile Include="Services\Interfaces\IDcsBetLimitService.cs" />
+    <Compile Include="Services\Interfaces\INumberGameBetLimitService.cs" />
     <Compile Include="Services\Interfaces\IPlayerStatementService.cs" />
-    <Compile Include="Services\Interfaces\ISportBookBetLimitService.cs" />
+    <Compile Include="Services\Interfaces\IRngKenoBetLimitService.cs" />
+    <Compile Include="Services\Interfaces\ISportsBookBetLimitService.cs" />
+    <Compile Include="Services\NumberGameBetLimitService.cs" />
     <Compile Include="Services\PlayerStatementService.cs" />
-    <Compile Include="Services\SportBookBetLimitService.cs" />
+    <Compile Include="Services\RngKenoBetLimitService.cs" />
+    <Compile Include="Services\SportsBookBetLimitService.cs" />
     <Compile Include="ViewModels\PlayerBetLimitProductViewModel.cs" />
     <Compile Include="ViewModels\PlayerBetLimitViewModel.cs" />
     <Compile Include="ViewModels\PlayerBtcSingleCustomerViewModel.cs" />

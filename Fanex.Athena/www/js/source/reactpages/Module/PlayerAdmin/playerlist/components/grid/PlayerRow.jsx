@@ -25,8 +25,7 @@ export const PlayerRow = (props) => {
         RealName, 
         Currency, 
         CurrentBalance, 
-        OutstandingBalance, 
-        LastLoginIp, 
+        OutstandingBalance,
         LastTransaction,
         Email, 
         OddsGroup, 
@@ -48,7 +47,6 @@ export const PlayerRow = (props) => {
             {displayedColumn[fields.OddsGroup] && <Cell className="center-align">{canShowMainColumn && OddsGroup !== undefined && <OddsGroupCell dataItem={dataItem} />}</Cell>}
             {displayedColumn[fields.BaStatus] && <BaStatusCell dataItem={dataItem} />}
             {displayedColumn[fields.SpecialLevel] && <Cell className="center-align">{canShowMainColumn && SpecialLevel !== undefined && <SpecialLevelCell dataItem={dataItem} />}</Cell>}
-            {displayedColumn[fields.LastLoginIp] && <Cell>{LastLoginIp}</Cell>}
             {displayedColumn[fields.LastTransaction] && <Cell>{LastTransaction}</Cell>}
             {displayedColumn[fields.Email] && <Cell>{Email}</Cell>}
         </Row>

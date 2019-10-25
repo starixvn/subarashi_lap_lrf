@@ -311,6 +311,8 @@ namespace Fanex.Athena.Model.Core.DataDomain
 
         VirtualBasketball = 193,
 
-        PP = 248
+        PP = 248,
+
+        AgCasino = 250
     }
 }

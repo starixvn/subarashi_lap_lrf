@@ -5,9 +5,15 @@ import { DropdownItem } from '@jsroot/components/dropdown';
 
 describe('OddsGroupDropdown', () => {
     const defaultProps = {
-        position: null,
-        onClose: jest.fn(),
-        onChange: jest.fn()
+        oddsGroupDropdownPosition: {top: 100, left: 100},
+        currentActivePlayer: {oddsGroup: 'A', ibcCustId: 1, licenseeCustId: 11},
+        playerList: [{oddsGroup: 'A', ibcCustId: 1, licenseeCustId: 11}],
+
+        setOddsGroupDropdownPosition: jest.fn(),
+        updateOddsGroup: jest.fn(),
+        setPlayerList: jest.fn(),
+        toggleLoader: jest.fn(),
+        setSweetAlertOption: jest.fn()
     }
 
     describe('render', () => {
@@ -31,15 +37,20 @@ describe('OddsGroupDropdown', () => {
     it('click on menu item - props.onChange should be called with correct parameter', () => {
         const props = {
             ...defaultProps,
-            position: { x: 10, y: 5 },
-            onChange: jest.fn()
+            onChange: jest.fn(),
+            updateOddsGroup: jest.fn(() => {
+                return{
+                    then: jest.fn(),
+                    catch: jest.fn()
+                }
+            })
         }
         const wrapper = shallow(<OddsGroupDropdown {...props} />);
         const dropdownItem = wrapper.find(DropdownItem).get(0);
 
-        const event = {};
+        const event = {preventDefault: jest.fn()};
         dropdownItem.props.onClick(event);
 
-        expect(props.onChange).toHaveBeenCalledWith(event, 'A');
+        expect(props.setSweetAlertOption).toHaveBeenCalled();
     })
 })

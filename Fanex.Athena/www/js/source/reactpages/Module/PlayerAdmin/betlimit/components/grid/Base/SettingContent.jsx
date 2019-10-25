@@ -36,6 +36,10 @@ const SettingContent = (Grid, DataHandling) => {
                 this.props.toggleLoader(false);
                 this.props.setAlertOption({ isShow: false });
             }
+
+            if(prevProps.requestParam !== this.props.requestParam){
+                this._getData(this.props.requestParam);
+            }
         }
 
         componentWillUnmount() {
@@ -145,15 +149,9 @@ const SettingContent = (Grid, DataHandling) => {
         _submit(data) {
             this.props.toggleLoader(true);
 
-            const requestParam = this.props.requestParam;
             const param = Object.assign({}, this.props.requestParam, { Setting: data });
 
-            DataTransfer.updateData(param, this._showSubmitResult.bind(this), () => this.props.toggleLoader(false), this._handleError.bind(this));
-        }
-
-        _handleError() {
-            Utility.showErrorMsg();
-            this.props.toggleLoader(false);
+            DataTransfer.updateData(param, this._showSubmitResult.bind(this));
         }
 
         _showConfirmation(onOK) {
@@ -191,15 +189,18 @@ const SettingContent = (Grid, DataHandling) => {
                     className: 'btn btn-apply btn-alone'
                 }];
 
-            this.setState({ disabledButton: true }, () => this.props.setAlertOption({
-                isShow: true,
-                title: title,
-                children: content,
-                onClose: this.onRefresh,
-                icon: isSuccess ? 'success' : 'error',
-                height: 225,
-                buttons: buttons
-            }));
+            this.setState({ disabledButton: true }, () => {
+                this.props.setAlertOption({
+                    isShow: true,
+                    title: title,
+                    children: content,
+                    onClose: this.onRefresh,
+                    icon: isSuccess ? 'success' : 'error',
+                    height: 225,
+                    buttons: buttons
+                });
+                this.props.toggleLoader(false);
+            });
         }
 
         _showError(invalidData) {
@@ -229,7 +230,7 @@ const SettingContent = (Grid, DataHandling) => {
         _getData(param) {
             this.props.toggleLoader(true);
 
-            DataTransfer.getData(param, this._refreshState.bind(this), null, this._handleError.bind(this));
+            DataTransfer.getData(param, this._refreshState.bind(this));
         }
 
         render() {

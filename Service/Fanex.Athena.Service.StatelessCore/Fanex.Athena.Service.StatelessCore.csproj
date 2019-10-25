@@ -99,6 +99,10 @@
     <Compile Include="AuthorizationService.cs" />
     <Compile Include="BetTypeService.cs" />
     <Compile Include="Extensions\OneBookSecurityDependencyExtension.cs" />
+    <Compile Include="BusinessLogService.cs" />
+    <Compile Include="Interfaces\IBusinessLogBuilderExtension.cs" />
+    <Compile Include="Interfaces\IBusinessLogBuilderFactory.cs" />
+    <Compile Include="Interfaces\IBusinessLogService.cs" />
     <Compile Include="Interfaces\ILicenseeSettingService.cs" />
     <Compile Include="Interfaces\IReportSettingService.cs" />
     <Compile Include="LicenseeSettingService.cs" />

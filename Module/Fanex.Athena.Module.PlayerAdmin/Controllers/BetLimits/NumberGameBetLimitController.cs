@@ -1,11 +1,13 @@
 ﻿namespace Fanex.Athena.Module.PlayerAdmin.Controllers
 {
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
-    using Fanex.Athena.Module.PlayerAdmin.Repositories.Interfaces;
+    using Fanex.Athena.Module.PlayerAdmin.Services.Interfaces;
     using Fanex.Athena.Module.PlayerAdmin.ViewModels;
     using Fanex.Athena.Resources;
     using Fanex.Athena.Service.Core.Common.Interfaces;
@@ -17,17 +19,17 @@
     [ValidateProductPermission(ProductTypes.NumberGame)]
     public class NumberGameBetLimitController : PlayerBetLimitBaseControler
     {
-        private readonly INumberGameBetLimitRepository _repository;
+        private readonly INumberGameBetLimitService _service;
 
         public NumberGameBetLimitController(
             ILanguageService languageService,
             ISessionService sessionService,
             ICacheRefAdapter cacheRefAdapter,
             IAuthorizationService authorizationService,
-            INumberGameBetLimitRepository numberGameBetLimitRepository)
+            INumberGameBetLimitService numberGameBetLimitService)
             : base(languageService, sessionService, cacheRefAdapter, authorizationService)
         {
-            _repository = numberGameBetLimitRepository;
+            _service = numberGameBetLimitService;
         }
 
         [HttpPost]
@@ -36,7 +38,7 @@
         public async Task<JsonResult> GetSetting(PlayerBetLimitSelectMetaModel metaModel)
         {
             var isEditable = HasEditPermission();
-            var data = await _repository.GetSettingAsync(metaModel.CustId).ConfigureAwait(false);
+            var data = await _service.GetSettingAsync(metaModel.CustId).ConfigureAwait(false);
 
             var viewModel = new PlayerBetLimitViewModel
             {
@@ -51,12 +53,17 @@
         [AjaxRequest]
         [ValidatePermissionOnData(isObject:true)]
         [FunctionAuthorization(PermissionKeys.PlayerAdminBetLimit_Write)]
-        public async Task<JsonResult> UpdateSetting(PlayerBetLimitUpdateMetaModel<PlayerBetLimitMetaModel> metaModel)
+        public async Task<JsonResult> UpdateSetting(PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>> metaModel)
         {
+            if (metaModel.Setting is null || !metaModel.Setting.Any())
+            {
+                return Json(new { Code = 1, Message = ViewResources.InvalidParams });
+            }
+
             var user = SessionService.UserSession;
             AddUpdateInfo(metaModel, user.UserId, user.Language, SessionService.LicenseeSession.LicenseeName, Request.UserHostAddress);
 
-            var result = await _repository.UpdateSettingAsync(metaModel).ConfigureAwait(false);
+            var result = await _service.UpdateSettingAsync(metaModel).ConfigureAwait(false);
 
             if (result.Code == 0)
             {

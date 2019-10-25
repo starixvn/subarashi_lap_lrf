@@ -36,11 +36,23 @@
     <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Dapper.2.0.30\lib\net461\Dapper.dll</HintPath>
     </Reference>
+    <Reference Include="Autofac, Version=4.9.4.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Autofac.4.9.4\lib\net45\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Autofac.Mvc5.4.0.2\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.WebApi, Version=4.3.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Autofac.WebApi2.4.3.1\lib\net45\Autofac.Integration.WebApi.dll</HintPath>
+    </Reference>
     <Reference Include="Fanex.Data, Version=4.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Fanex.Data.4.2.0\lib\net461\Fanex.Data.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.Logging, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Fanex.Logging.2.0.1\lib\net461\Fanex.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -56,11 +68,29 @@
     <Reference Include="System.Web.Cors, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.6\lib\net45\System.Web.Cors.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Http, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.6\lib\net45\System.Web.Http.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Http.Cors, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.6\lib\net45\System.Web.Http.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -69,9 +99,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DependencyInjectionExtension.cs" />
     <Compile Include="DTO\PlayerActivityRecord.cs" />
     <Compile Include="DTO\Player.cs" />
     <Compile Include="DTO\PlayerBettingStatistics.cs" />
+    <Compile Include="Extensions\CommonCustomerSettingLogFactory.cs" />
+    <Compile Include="Extensions\CommonCustomerSettingLogBuilder.cs" />
     <Compile Include="MetaModel\PlayerActivityRecordMetaModel.cs" />
     <Compile Include="MetaModel\PlayerBettingStatisticsMetaModel.cs" />
     <Compile Include="MetaModel\PlayerListBaseMetaModel.cs" />
@@ -80,14 +113,14 @@
     <Compile Include="MetaModel\PlayerSearchingMetaModel.cs" />
     <Compile Include="MetaModel\BaStatusUpdatingMetaModel.cs" />
     <Compile Include="MetaModel\OddsGroupUpdatingMetaModel.cs" />
+    <Compile Include="MetaModel\PlayerUpdatingLogMetaModel.cs" />
     <Compile Include="MetaModel\SpecialLevelUpdatingMetaModel.cs" />
-    <Compile Include="PlayerActivityRecordController.cs" />
-    <Compile Include="PlayerBaStatusController.cs" />
-    <Compile Include="PlayerBettingStatisticsController.cs" />
-    <Compile Include="PlayerListController.cs" />
-    <Compile Include="PlayerLogController.cs" />
-    <Compile Include="PlayerOddsGroupController.cs" />
-    <Compile Include="PlayerSpecialLevelController.cs" />
+    <Compile Include="Controllers\PlayerActivityRecordController.cs" />
+    <Compile Include="Controllers\PlayerBaStatusController.cs" />
+    <Compile Include="Controllers\PlayerBettingStatisticsController.cs" />
+    <Compile Include="Controllers\PlayerListController.cs" />
+    <Compile Include="Controllers\PlayerOddsGroupController.cs" />
+    <Compile Include="Controllers\PlayerSpecialLevelController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Interfaces\IPlayerActivityRecordService.cs" />
     <Compile Include="Services\Interfaces\IPlayerBaStatusService.cs" />
@@ -101,7 +134,9 @@
     <Compile Include="Services\PlayerListService.cs" />
     <Compile Include="Services\PlayerOddsGroupService.cs" />
     <Compile Include="Services\PlayerSpecialLevelService.cs" />
-    <Compile Include="SiteSettingController.cs" />
+    <Compile Include="Controllers\SiteSettingController.cs" />
+    <Compile Include="DataDomains\LogActionDetailId.cs" />
+    <Compile Include="DataDomains\LogText.cs" />
     <Compile Include="Utilities\ResourceKeyConstants.cs" />
     <Compile Include="ViewModels\PlayerListResultViewModel.cs" />
     <Compile Include="ViewModels\SiteSettingViewModel.cs" />
@@ -136,8 +171,6 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Repository\Interfaces\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

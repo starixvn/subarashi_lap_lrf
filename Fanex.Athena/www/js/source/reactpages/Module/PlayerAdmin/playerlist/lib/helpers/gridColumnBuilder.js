@@ -1,6 +1,6 @@
 import { fields, columnList, licenseeType } from '../constants';
 
-const excludedKeyForApiType = [fields.RealName, fields.LastLoginIp, fields.Email];
+const excludedKeyForApiType = [fields.RealName, fields.Email, fields.LastTransaction];
 
 export const buildDefaultColumnList = (licType) => {
     const isApiType = licType === licenseeType.api;

@@ -69,17 +69,14 @@ export class DataGrid extends Component {
             total: total,
             totalRows: totalRows
         });
-    }
 
-    _handleError() {
-        Service.showErrorMsg();
         this.props.toggleLoader(false);
     }
 
     _getData(param) {
         this.props.toggleLoader(true);
 
-        Service.getData(param, this._updateState.bind(this), null, this._handleError.bind(this));
+        Service.getData(param, this._updateState.bind(this));
     }
 
     render() {

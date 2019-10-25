@@ -1,6 +1,5 @@
 ﻿namespace Fanex.Athena.Module.PlayerAdmin.Repositories
 {
-    using System.Linq;
     using System.Threading.Tasks;
     using Fanex.Athena.Extension.Utility.Interfaces;
     using Fanex.Athena.Model.Core.DTO.Common;
@@ -33,7 +32,7 @@
             }
         }
 
-        public async Task<IResultInfo> UpdateSettingAsync(PlayerBetLimitUpdateMetaModel<string> metaModel)
+        public async Task<IResultInfo> UpdateSettingAsync(PlayerBetLimitUpdateMetaModel<AgCasinoBetLimitMetaModel> metaModel)
         {
             const string UspName = "Lrf_AGC_UpdCustSetting";
 
@@ -54,9 +53,9 @@
             }
         }
 
-        private static void AddUpdateParameter(IObjectDb db, PlayerBetLimitUpdateMetaModel<string> metaModel)
+        private static void AddUpdateParameter(IObjectDb db, PlayerBetLimitUpdateMetaModel<AgCasinoBetLimitMetaModel> metaModel)
         {
-            db.SetParameterValue("aggroup", metaModel.Setting.First());
+            db.SetParameterValue("aggroup", metaModel.Setting.Group);
             db.SetParameterValue("ip", metaModel.Ip);
             db.SetParameterValue("language", metaModel.Language);
             db.SetParameterValue("userid", metaModel.UserId);

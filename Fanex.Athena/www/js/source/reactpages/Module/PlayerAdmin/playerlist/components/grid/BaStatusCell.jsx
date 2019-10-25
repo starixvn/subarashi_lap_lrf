@@ -12,7 +12,7 @@ import { generateDefaultConfirmOption, generateDefaultAlertOption, predefinedIco
 
 const BaStatusCell = (props) => {
     const { dataItem, setPlayerList, toggleLoader, updateBaStatus, setSweetAlertOption, playerList, hasBaPermission } = props;
-    const { IbcCustId, BaStatus, OddsGroup, IsArchived } = dataItem;
+    const { IbcCustId, BaStatus, OddsGroup, IsArchived, LicenseeCustId } = dataItem;
 
     const handleChangeBaStatus = (event) => {
         event.preventDefault();
@@ -34,7 +34,7 @@ const BaStatusCell = (props) => {
 
         const confirmProps = {
             onClick: () => {
-                const param = { custId: IbcCustId, isBa };
+                const param = { custId: IbcCustId, isBa, LicenseeCustId };
                 toggleLoader(true);
                 updateBaStatus(param).then(response => {
                     const { Success, Message, ErrorMessage, ExtendedData } = response.data;

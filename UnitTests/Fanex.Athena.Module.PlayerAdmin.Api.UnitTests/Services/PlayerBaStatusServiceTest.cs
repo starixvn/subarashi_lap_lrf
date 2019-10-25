@@ -1,6 +1,9 @@
 ﻿using Fanex.Athena.Extension.Utility.Interfaces;
+using Fanex.Athena.Model.Core.DataDomain;
+using Fanex.Athena.Module.PlayerAdmin.Api.DataDomains;
 using Fanex.Athena.Module.PlayerAdmin.Api.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Api.Services;
+using Fanex.Athena.Service.StatelessCore.Interfaces;
 using Fanex.Data;
 using NSubstitute;
 using NUnit.Framework;
@@ -25,7 +28,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
         }
 
         [Test]
-        public void Update_WhenCall_AssignCorrectParam()
+        public void Update_WhenCall_AssignCorrectParamAndWriteLog()
         {
             // Arrange
             var objectDb = Substitute.For<IObjectDb>();
@@ -41,9 +44,11 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
             };
             const string ExpectedOddsGroup = "C";
             objectDb.GetParameterValue("OddsGroup").Returns(ExpectedOddsGroup);
+            objectDb.GetParameterValue("ErrCode").Returns(0);
 
-            var service = new PlayerBaStatusService(_dbFactory);
+            var businessLogService = Substitute.For<IBusinessLogService>();
 
+            var service = new PlayerBaStatusService(_dbFactory, businessLogService);
             // Action
             var result = service.Update(metaModel);
 
@@ -63,6 +68,10 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Services
                 objectDb.Received(1).ExecuteNonQuery();
 
                 Assert.That(result.ExtendedData, Is.EqualTo(ExpectedOddsGroup));
+
+                businessLogService.Received(1).Write(BusinessLogType.CustomerUpdateBA,
+                    Arg.Is<PlayerUpdatingLogMetaModel>(x => x.CustId == metaModel.CustId && x.UserId == metaModel.UserId &&
+                    x.ActionId == LogActionId.PlayerAdminUpdateBAStatus && x.ActionDetailId == LogActionDetailId.UpdatingBA));
             });
         }
     }

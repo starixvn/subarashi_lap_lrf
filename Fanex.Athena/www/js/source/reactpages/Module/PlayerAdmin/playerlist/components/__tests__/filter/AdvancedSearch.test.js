@@ -7,12 +7,13 @@ import { JestEnvironment } from '@jest/environment';
 describe('AdvancedSearch', () => {
     const defaultProps = {
         param: {
-            currency: '',
+            currencyIdList: '20,9',
             oddsGroup: '',
             specialLevel: '',
-            baStatus: ''
+            baFilter: 0
         },
-        onChange: jest.fn()
+        onChange: jest.fn(),
+        currencyList: [{Id: 20, Value: 'UUS'}, {Id: 9, Value: 'AUD'}]
     }
 
     it('_createSelectData - return correct data list', () => {

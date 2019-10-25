@@ -13,7 +13,7 @@ exports[`UserNameCell should match snapshot 1`] = `
   <button
     className="btn-default btn-link btn-icon cell-menu"
     onMouseEnter={[Function]}
-    onMouseLeave={[MockFunction]}
+    onMouseLeave={[Function]}
   >
     <i
       className="material-icons"

@@ -4,31 +4,47 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Xml.Linq;
+    using Autofac.Features.AttributeFilters;
     using Fanex.Athena.Extension.Helpers;
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Extension.Utility.Interfaces;
+    using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Athena.Module.PlayerAdmin.DataDomains;
     using Fanex.Athena.Module.PlayerAdmin.DTO;
     using Fanex.Athena.Module.PlayerAdmin.DTO.BetLimits;
+    using Fanex.Athena.Module.PlayerAdmin.Helpers;
+    using Fanex.Athena.Module.PlayerAdmin.MetaModel;
+    using Fanex.Athena.Module.PlayerAdmin.Repositories.Interfaces;
     using Fanex.Athena.Module.PlayerAdmin.Services.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Common;
     using Fanex.Logging;
 
     public class AGCasinoBetLimitService : IAGCasinoBetLimitService
     {
-        private readonly IWebClientService _webClientService;
-
         private readonly ILogger _logger;
 
         private readonly IAppSettings _appSettings;
 
+        private readonly IWebClientService _webClientService;
+
+        private readonly IAGCasinoBetLimitRepository _repository;
+
+        private readonly IBusinessLogService _businessLogService;
+
         public AGCasinoBetLimitService(
             ILogger logger,
             IAppSettings appSettings,
-            IWebClientService webClientService)
+            IWebClientService webClientService,
+            IAGCasinoBetLimitRepository repository,
+            [KeyFilter("PlayerAdminLogService")]IBusinessLogService businessLogService)
         {
             _logger = logger;
             _appSettings = appSettings;
             _webClientService = webClientService;
+            _repository = repository;
+            _businessLogService = businessLogService;
         }
 
         public async Task<IList<AgCasinoGame>> GetGroupBettingsAsync(string siteName, int currency)
@@ -70,6 +86,22 @@
             }
 
             return games;
+        }
+
+        public async Task<AgCasinoBetSetting> GetBetSettingAsync(int custId)
+        {
+            return await _repository.GetBetSettingAsync(custId).ConfigureAwait(false);
+        }
+
+        public async Task<IResultInfo> UpdateSettingAsync(PlayerBetLimitUpdateMetaModel<AgCasinoBetLimitMetaModel> metaModel)
+        {
+            var result = await _repository.UpdateSettingAsync(metaModel).ConfigureAwait(false);
+
+            var logInfo = PlayerAdminBetLimitActionLogHelper.CreateLogInfo(metaModel, result.Code == 0);
+
+            _businessLogService.Write(BusinessLogType.CustomerBetSetting, logInfo);
+
+            return result;
         }
     }
 }

@@ -74,7 +74,7 @@
             return dataList;
         }
 
-        public async Task<IResultInfo> UpdateSettingAsync(PlayerBetLimitUpdateMetaModel<PlayerBetLimitMetaModel> metaModel)
+        public async Task<IResultInfo> UpdateSettingAsync(PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>> metaModel)
         {
             const string UspName = "Acc_Dep_CustSetting_BetLimitUpd";
 
@@ -118,7 +118,7 @@
             return false;
         }
 
-        private static void AddUpdateParameter(IObjectDb db, PlayerBetLimitUpdateMetaModel<PlayerBetLimitMetaModel> metaModel)
+        private static void AddUpdateParameter(IObjectDb db, PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>> metaModel)
         {
             db.SetParameterValue("custid", metaModel.CustId);
             db.SetParameterValue("userid", metaModel.UserId);

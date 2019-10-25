@@ -433,18 +433,13 @@ function (_Component) {
         total: total,
         totalRows: totalRows
       });
-    }
-  }, {
-    key: "_handleError",
-    value: function _handleError() {
-      _lib_service__WEBPACK_IMPORTED_MODULE_6__["default"].showErrorMsg();
       this.props.toggleLoader(false);
     }
   }, {
     key: "_getData",
     value: function _getData(param) {
       this.props.toggleLoader(true);
-      _lib_service__WEBPACK_IMPORTED_MODULE_6__["default"].getData(param, this._updateState.bind(this), null, this._handleError.bind(this));
+      _lib_service__WEBPACK_IMPORTED_MODULE_6__["default"].getData(param, this._updateState.bind(this));
     }
   }, {
     key: "render",
@@ -578,10 +573,6 @@ function (_Component) {
 
       _lib_service__WEBPACK_IMPORTED_MODULE_5__["default"].export(requestParam, function () {
         _this.props.toggleLoader(false);
-      }, function () {
-        _lib_service__WEBPACK_IMPORTED_MODULE_5__["default"].showErrorMsg();
-
-        _this.props.toggleLoader(false);
       });
     });
 
@@ -680,11 +671,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
 /* harmony import */ var _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/DataService */ "./www/js/source/reactpages/lib/DataService.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 
 
 
@@ -718,11 +712,6 @@ function () {
       return HeaderText;
     }
   }, {
-    key: "showErrorMsg",
-    value: function showErrorMsg() {
-      alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('ErrorProcessingMsg'));
-    }
-  }, {
     key: "getReportTitle",
     value: function getReportTitle(currency) {
       return currency ? "".concat(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Currency'), ": ").concat(currency.toUpperCase()) : '';
@@ -734,7 +723,7 @@ function () {
     }
   }, {
     key: "export",
-    value: function _export(param, callback, errorHandle) {
+    value: function _export(param, callback) {
       var url = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl(DataApi);
       var exportParam = Object.assign({}, param, {
         IsExport: true
@@ -750,26 +739,30 @@ function () {
 
         callback();
       }).catch(function (error) {
-        errorHandle && errorHandle();
+        console.log(error.message);
+
+        if (error.response) {
+          alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("ErrorProcessingMsg"));
+          callback();
+        }
       });
     }
   }, {
     key: "getData",
-    value: function getData(param, processDataFunc, successCallBack, errorHandle) {
+    value: function getData(param, callBack) {
       var url = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl(DataApi);
       _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_2__["default"].postData(url, param).then(function (response) {
         var result = response.data;
         var data = result.Data;
 
         if (data && data.length > 0) {
-          processDataFunc && processDataFunc(data, result.Total, result.TotalRows);
+          callBack && callBack(data, result.Total, result.TotalRows);
         } else {
-          processDataFunc && processDataFunc([], {}, 0);
+          callBack && callBack([], {}, 0);
         }
-
-        successCallBack && successCallBack();
       }).catch(function (error) {
-        errorHandle && errorHandle();
+        console.log(error.message);
+        callBack && callBack([], {}, 0);
       });
     }
   }]);
@@ -2678,12 +2671,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "requestParam", function() { return requestParam; });
 /* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/types */ "./www/js/source/reactpages/actions/types.js");
 /* harmony import */ var _lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
 var requestParam = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, _defineProperty({}, _actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_REQUEST_PARAM"], function (state, action) {
-  return action.data;
+  return _objectSpread({}, action.data);
 }));
 
 /***/ })

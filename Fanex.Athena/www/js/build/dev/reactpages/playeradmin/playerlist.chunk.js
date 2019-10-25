@@ -1465,7 +1465,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/actions/index.js");
 /* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/Module/PlayerAdmin/playerlist/lib/constants.js");
-/* harmony import */ var _constants_configInfo__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../constants/configInfo */ "./www/js/source/reactpages/Module/constants/configInfo.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1485,7 +1484,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -1528,7 +1526,7 @@ function (_PureComponent) {
           currencyId = selectedPlayer.currencyId,
           currency = selectedPlayer.currency,
           userName = selectedPlayer.userName;
-      var custIdQueryString = systemType === _constants_configInfo__WEBPACK_IMPORTED_MODULE_5__["systemType"].lrf ? "custId=".concat(ibcCustId) : "custId=".concat(ibcCustId, "&licenseeCustId=").concat(licenseeCustId);
+      var custIdQueryString = "custId=".concat(ibcCustId, "&licenseeCustId=").concat(licenseeCustId);
       var nameValuePairString = custIdQueryString + "&currencyId=".concat(currencyId, "&currencyName=").concat(currency, "&userName=").concat(userName);
       var queryString = (action.indexOf('?') !== -1 ? '&' : '?') + nameValuePairString;
       var urlByPlayer = action + queryString;
@@ -2424,7 +2422,8 @@ var BaStatusCell = function BaStatusCell(props) {
   var IbcCustId = dataItem.IbcCustId,
       BaStatus = dataItem.BaStatus,
       OddsGroup = dataItem.OddsGroup,
-      IsArchived = dataItem.IsArchived;
+      IsArchived = dataItem.IsArchived,
+      LicenseeCustId = dataItem.LicenseeCustId;
 
   var handleChangeBaStatus = function handleChangeBaStatus(event) {
     event.preventDefault();
@@ -2447,7 +2446,8 @@ var BaStatusCell = function BaStatusCell(props) {
       onClick: function onClick() {
         var param = {
           custId: IbcCustId,
-          isBa: isBa
+          isBa: isBa,
+          LicenseeCustId: LicenseeCustId
         };
         toggleLoader(true);
         updateBaStatus(param).then(function (response) {
@@ -2794,10 +2794,14 @@ var OddsGroupDropdown = function OddsGroupDropdown(props) {
     var confirmProps = {
       onClick: function onClick() {
         if (currentActivePlayer && value !== currentActivePlayer.oddsGroup) {
-          var ibcCustId = currentActivePlayer.ibcCustId;
+          var ibcCustId = currentActivePlayer.ibcCustId,
+              licenseeCustId = currentActivePlayer.licenseeCustId,
+              oddsGroup = currentActivePlayer.oddsGroup;
           var param = {
             custId: ibcCustId,
-            oddsGroup: value
+            oddsGroup: value,
+            oldValue: oddsGroup,
+            licenseeCustId: licenseeCustId
           };
           toggleLoader(true);
           updateOddsGroup(param).then(function (response) {
@@ -2929,7 +2933,6 @@ var PlayerRow = function PlayerRow(props) {
       Currency = dataItem.Currency,
       CurrentBalance = dataItem.CurrentBalance,
       OutstandingBalance = dataItem.OutstandingBalance,
-      LastLoginIp = dataItem.LastLoginIp,
       LastTransaction = dataItem.LastTransaction,
       Email = dataItem.Email,
       OddsGroup = dataItem.OddsGroup,
@@ -2959,7 +2962,7 @@ var PlayerRow = function PlayerRow(props) {
     className: "center-align"
   }, canShowMainColumn && SpecialLevel !== undefined && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SpecialLevelCell__WEBPACK_IMPORTED_MODULE_9__["default"], {
     dataItem: dataItem
-  })), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].LastLoginIp] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], null, LastLoginIp), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].LastTransaction] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], null, LastTransaction), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].Email] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], null, Email));
+  })), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].LastTransaction] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], null, LastTransaction), displayedColumn[_lib_constants__WEBPACK_IMPORTED_MODULE_4__["fields"].Email] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], null, Email));
 };
 
 function mapDispatchToProps(dispatch) {
@@ -3122,10 +3125,14 @@ var SpecialLevelDropdown = function SpecialLevelDropdown(props) {
     var confirmProps = {
       onClick: function onClick() {
         if (currentActivePlayer && value !== currentActivePlayer.specialLevel) {
-          var ibcCustId = currentActivePlayer.ibcCustId;
+          var ibcCustId = currentActivePlayer.ibcCustId,
+              licenseeCustId = currentActivePlayer.licenseeCustId,
+              specialLevel = currentActivePlayer.specialLevel;
           var param = {
             custId: ibcCustId,
-            specialLevel: value
+            specialLevel: value,
+            oldValue: specialLevel,
+            licenseeCustId: licenseeCustId
           };
           toggleLoader(true);
           updateSpecialLevel(param).then(function (response) {
@@ -3745,7 +3752,6 @@ var fields = {
   OddsGroup: 'OddsGroup',
   BaStatus: 'BaStatus',
   SpecialLevel: 'SpecialLevel',
-  LastLoginIp: 'LastLoginIp',
   LastTransaction: 'LastTransaction',
   Email: 'Email'
 };
@@ -3788,10 +3794,6 @@ var columnList = [{
 }, {
   key: fields.SpecialLevel,
   value: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('SpecialLevel'),
-  show: true
-}, {
-  key: fields.LastLoginIp,
-  value: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('LastLoginIP'),
   show: true
 }, {
   key: fields.LastTransaction,
@@ -3895,7 +3897,6 @@ var headerText = {
   OddsGroup: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('OddsGroup'),
   BaStatus: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('BAStatus'),
   SpecialLevel: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('SpecialLevel'),
-  LastLoginIp: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('LastLoginIP'),
   LastTransaction: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('LastTransfer'),
   Email: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Email')
 };
@@ -4028,7 +4029,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
-var excludedKeyForApiType = [_constants__WEBPACK_IMPORTED_MODULE_0__["fields"].RealName, _constants__WEBPACK_IMPORTED_MODULE_0__["fields"].LastLoginIp, _constants__WEBPACK_IMPORTED_MODULE_0__["fields"].Email];
+var excludedKeyForApiType = [_constants__WEBPACK_IMPORTED_MODULE_0__["fields"].RealName, _constants__WEBPACK_IMPORTED_MODULE_0__["fields"].Email, _constants__WEBPACK_IMPORTED_MODULE_0__["fields"].LastTransaction];
 var buildDefaultColumnList = function buildDefaultColumnList(licType) {
   var isApiType = licType === _constants__WEBPACK_IMPORTED_MODULE_0__["licenseeType"].api;
   return _constants__WEBPACK_IMPORTED_MODULE_0__["columnList"].filter(function (item) {
@@ -4099,7 +4100,6 @@ function () {
           OddsGroup = _constants__WEBPACK_IMPORTED_MODULE_2__["fields"].OddsGroup,
           BaStatus = _constants__WEBPACK_IMPORTED_MODULE_2__["fields"].BaStatus,
           SpecialLevel = _constants__WEBPACK_IMPORTED_MODULE_2__["fields"].SpecialLevel,
-          LastLoginIp = _constants__WEBPACK_IMPORTED_MODULE_2__["fields"].LastLoginIp,
           LastTransaction = _constants__WEBPACK_IMPORTED_MODULE_2__["fields"].LastTransaction,
           Email = _constants__WEBPACK_IMPORTED_MODULE_2__["fields"].Email;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderRow"], {
@@ -4135,9 +4135,7 @@ function () {
       }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].BaStatus), displayedColumn[SpecialLevel] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
         colWidth: 50,
         sortBy: SpecialLevel
-      }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].SpecialLevel), displayedColumn[LastLoginIp] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
-        colWidth: 60
-      }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].LastLoginIp), displayedColumn[LastTransaction] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
+      }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].SpecialLevel), displayedColumn[LastTransaction] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
         colWidth: 60,
         sortBy: LastTransaction
       }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].LastTransaction), displayedColumn[Email] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
@@ -4204,7 +4202,6 @@ var buildLapPlayerList = function buildLapPlayerList(playerList) {
         Currency = item.Currency,
         Status = item.Status,
         RealName = item.RealName,
-        IP = item.IP,
         email = item.email,
         isOnline = item.isOnline,
         IBCCustId = item.IBCCustId,
@@ -4224,7 +4221,6 @@ var buildLapPlayerList = function buildLapPlayerList(playerList) {
       Status: Status,
       RealName: RealName,
       LastTransaction: LastTransaction,
-      LastLoginIp: IP,
       Email: email,
       IsOnline: isOnline,
       IsDeposit: IBCCustId > 0,
@@ -4311,7 +4307,6 @@ function () {
           SpecialLevel = lrfItem.SpecialLevel;
       var Status = lapItem.Status,
           RealName = lapItem.RealName,
-          IP = lapItem.IP,
           email = lapItem.email,
           isOnline = lapItem.isOnline,
           IBCCustId = lapItem.IBCCustId,
@@ -4334,7 +4329,6 @@ function () {
         Status: Status,
         RealName: RealName,
         LastTransaction: LastTransaction,
-        LastLoginIp: IP,
         Email: email,
         IsOnline: isOnline,
         IsDeposit: IBCCustId > 0,
@@ -4626,7 +4620,6 @@ function () {
           _ref10,
           _ref11,
           _ref12,
-          _ref13,
           _this2 = this;
 
       return [(_ref = {
@@ -4650,12 +4643,10 @@ function () {
       }, _defineProperty(_ref9, MAIN_SECTION_STYLE, _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["bodyCellStyle"].center), _defineProperty(_ref9, "width", 70), _ref9), (_ref10 = {
         field: _constants__WEBPACK_IMPORTED_MODULE_2__["fields"].SpecialLevel
       }, _defineProperty(_ref10, MAIN_SECTION_STYLE, _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["bodyCellStyle"].center), _defineProperty(_ref10, "width", 70), _ref10), (_ref11 = {
-        field: _constants__WEBPACK_IMPORTED_MODULE_2__["fields"].LastLoginIp
-      }, _defineProperty(_ref11, MAIN_SECTION_STYLE, _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["bodyCellStyle"].left), _defineProperty(_ref11, "width", 100), _ref11), (_ref12 = {
         field: _constants__WEBPACK_IMPORTED_MODULE_2__["fields"].LastTransaction
-      }, _defineProperty(_ref12, MAIN_SECTION_STYLE, _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["bodyCellStyle"].left), _defineProperty(_ref12, "width", 150), _ref12), (_ref13 = {
+      }, _defineProperty(_ref11, MAIN_SECTION_STYLE, _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["bodyCellStyle"].left), _defineProperty(_ref11, "width", 150), _ref11), (_ref12 = {
         field: _constants__WEBPACK_IMPORTED_MODULE_2__["fields"].Email
-      }, _defineProperty(_ref13, MAIN_SECTION_STYLE, _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["bodyCellStyle"].left), _defineProperty(_ref13, "width", 200), _ref13)].filter(function (x) {
+      }, _defineProperty(_ref12, MAIN_SECTION_STYLE, _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["bodyCellStyle"].left), _defineProperty(_ref12, "width", 200), _ref12)].filter(function (x) {
         return !!_this2.displayedColumn[x.field];
       });
     }

@@ -3,11 +3,16 @@
 exports[`OddsGroupDropdown render isOpen: false - should match snapshot 1`] = `
 <div
   className="dropdown oddsgroup-menu"
-  style={null}
+  style={
+    Object {
+      "left": undefined,
+      "top": undefined,
+    }
+  }
 >
   <DropdownMenu
-    isOpen={false}
-    onClose={[MockFunction]}
+    isOpen={true}
+    onClose={[Function]}
     tag="div"
   >
     <DropdownItem
@@ -17,7 +22,7 @@ exports[`OddsGroupDropdown render isOpen: false - should match snapshot 1`] = `
       onClick={[Function]}
       style={
         Object {
-          "backgroundColor": "#007C00",
+          "backgroundColor": "#006400",
           "color": "#fff",
         }
       }
@@ -32,7 +37,7 @@ exports[`OddsGroupDropdown render isOpen: false - should match snapshot 1`] = `
       onClick={[Function]}
       style={
         Object {
-          "backgroundColor": "#3298FD",
+          "backgroundColor": "#0099ff",
           "color": "#fff",
         }
       }
@@ -89,14 +94,14 @@ exports[`OddsGroupDropdown render isOpen: true - should match snapshot 1`] = `
   className="dropdown oddsgroup-menu"
   style={
     Object {
-      "left": 10,
-      "top": 50,
+      "left": undefined,
+      "top": undefined,
     }
   }
 >
   <DropdownMenu
     isOpen={true}
-    onClose={[MockFunction]}
+    onClose={[Function]}
     tag="div"
   >
     <DropdownItem
@@ -106,7 +111,7 @@ exports[`OddsGroupDropdown render isOpen: true - should match snapshot 1`] = `
       onClick={[Function]}
       style={
         Object {
-          "backgroundColor": "#007C00",
+          "backgroundColor": "#006400",
           "color": "#fff",
         }
       }
@@ -121,7 +126,7 @@ exports[`OddsGroupDropdown render isOpen: true - should match snapshot 1`] = `
       onClick={[Function]}
       style={
         Object {
-          "backgroundColor": "#3298FD",
+          "backgroundColor": "#0099ff",
           "color": "#fff",
         }
       }

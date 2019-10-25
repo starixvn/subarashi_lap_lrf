@@ -4,39 +4,24 @@ exports[`DataGrid render selectedPlayer has no value - should render all items i
 <div>
   <React.Fragment>
     <t
-      adjustedHeight={32}
-      autoHeight={false}
+      adjustedHeight={0}
+      autoHeight={true}
       autoWidth={true}
       body="Data List"
-      bodyHeight={300}
+      bodyHeight={0}
       containerPadding={30}
       header="Header"
       isPaging={false}
       maxWidth={0}
       minWidth={650}
-      onSort={null}
+      onSort={[Function]}
       shouldResetScrollPosition={true}
       width={0}
     />
-    <Connect(Component)
-      isOpenContextMenu={false}
-      position={null}
-    />
-    <Memo(SpecialLevelDropdown)
-      onChange={[Function]}
-      onClose={[Function]}
-      position={null}
-    />
-    <Memo(OddsGroupDropdown)
-      onChange={[Function]}
-      onClose={[Function]}
-      position={null}
-    />
-    <Memo(StatusDropdown)
-      onChange={[Function]}
-      onClose={[Function]}
-      position={null}
-    />
+    <Connect(ContextMenu) />
+    <Connect(SpecialLevelDropdown) />
+    <Connect(OddsGroupDropdown) />
+    <Connect(StatusDropdown) />
   </React.Fragment>
 </div>
 `;
@@ -45,39 +30,24 @@ exports[`DataGrid render selectedPlayer has value - should render only one row 1
 <div>
   <React.Fragment>
     <t
-      adjustedHeight={32}
-      autoHeight={false}
+      adjustedHeight={0}
+      autoHeight={true}
       autoWidth={true}
       body="Data List"
-      bodyHeight={300}
+      bodyHeight={0}
       containerPadding={30}
       header="Header"
       isPaging={false}
       maxWidth={0}
       minWidth={650}
-      onSort={null}
+      onSort={[Function]}
       shouldResetScrollPosition={true}
       width={0}
     />
-    <Connect(Component)
-      isOpenContextMenu={false}
-      position={null}
-    />
-    <Memo(SpecialLevelDropdown)
-      onChange={[Function]}
-      onClose={[Function]}
-      position={null}
-    />
-    <Memo(OddsGroupDropdown)
-      onChange={[Function]}
-      onClose={[Function]}
-      position={null}
-    />
-    <Memo(StatusDropdown)
-      onChange={[Function]}
-      onClose={[Function]}
-      position={null}
-    />
+    <Connect(ContextMenu) />
+    <Connect(SpecialLevelDropdown) />
+    <Connect(OddsGroupDropdown) />
+    <Connect(StatusDropdown) />
   </React.Fragment>
 </div>
 `;

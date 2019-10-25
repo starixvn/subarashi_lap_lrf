@@ -80,6 +80,8 @@
   <ItemGroup>
     <Compile Include="Constants\SystemEnvironment.cs" />
     <Compile Include="DataDomain\BaseCurrencyType.cs" />
+    <Compile Include="DataDomain\UserControlLogType.cs" />
+    <Compile Include="DataDomain\BusinessLogType.cs" />
     <Compile Include="DataDomain\Currency.cs" />
     <Compile Include="DataDomain\BetType.cs" />
     <Compile Include="DataDomain\CurrencyType.cs" />
@@ -87,6 +89,7 @@
     <Compile Include="DataDomain\ErrorType.cs" />
     <Compile Include="DataDomain\FormatKey.cs" />
     <Compile Include="DataDomain\LiveStatusTypes.cs" />
+    <Compile Include="DataDomain\LogActionId.cs" />
     <Compile Include="DataDomain\MediaType.cs" />
     <Compile Include="DataDomain\OneAuthorizationErrorCode.cs" />
     <Compile Include="DataDomain\FunctionNames.cs" />
@@ -103,6 +106,7 @@
     <Compile Include="DataDomain\SystemConstants.cs" />
     <Compile Include="DTO\Common\APIResult.cs" />
     <Compile Include="DataDomain\UserLevelType.cs" />
+    <Compile Include="DTO\Common\BusinessLogItem.cs" />
     <Compile Include="DTO\Common\CheckedItem.cs" />
     <Compile Include="DTO\Common\ExChangeRate.cs" />
     <Compile Include="DTO\Common\IRequest.cs" />
@@ -129,6 +133,7 @@
     <Compile Include="Helper\BettypeHelper.cs" />
     <Compile Include="Helper\MetaModelValidationHelper.cs" />
     <Compile Include="Helper\ProductHelper.cs" />
+    <Compile Include="MetaModel\Common\SPLogMetaModel.cs" />
     <Compile Include="MetaModel\CurrencyValidationOption.cs" />
     <Compile Include="MetaModel\IMetalModelCustomerIdentity.cs" />
     <Compile Include="MetaModel\IMetaModelAgent.cs" />
@@ -140,7 +145,6 @@
     <Compile Include="MetaModel\Account\ResetPasswordMetaModel.cs" />
     <Compile Include="MetaModel\BaseMetaModel.cs" />
     <Compile Include="MetaModel\Common\LeagueMetaModel.cs" />
-    <Compile Include="MetaModel\Common\UserLogMetaModel.cs" />
     <Compile Include="MetaModel\IMetaModelCurrencyIdList.cs" />
     <Compile Include="MetaModel\IMetaModelIP.cs" />
     <Compile Include="MetaModel\IMetaModelLanguage.cs" />

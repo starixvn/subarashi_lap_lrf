@@ -41,13 +41,14 @@
 
                 var custId = FakeHelper.Create<int>();
                 var currencyId = FakeHelper.Create<int>();
+                var licenseeCustId = FakeHelper.Create<int>();
 
                 var products = FakeHelper.CreateMany<PlayerBetLimitProduct>(2);
                 _playerBetLimitRepository.GetEnableBetLimitProducts(DefaultLicenseeSession.LicenseeName)
                     .Returns(Task.FromResult(products));
 
                 // Action
-                var viewResult = await controller.Index(custId, currencyId).ConfigureAwait(false);
+                var viewResult = await controller.Index(custId, currencyId, licenseeCustId).ConfigureAwait(false);
                 var viewModel = (PlayerBetLimitProductViewModel)viewResult.Model;
 
                 // Assert

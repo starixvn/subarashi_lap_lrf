@@ -17,14 +17,14 @@ exports[`AdvancedSearch render with initial state - should match snapshot 1`] = 
         dataSource={
           Array [
             Object {
-              "Id": "eur",
-              "Status": true,
-              "Value": "EUR",
+              "Id": 20,
+              "Status": false,
+              "Value": "UUS",
             },
             Object {
-              "Id": "usd",
-              "Status": true,
-              "Value": "usd",
+              "Id": 9,
+              "Status": false,
+              "Value": "AUD",
             },
           ]
         }
@@ -48,7 +48,7 @@ exports[`AdvancedSearch render with initial state - should match snapshot 1`] = 
       <label
         className="label-text"
       >
-        Odds Group
+        OddsGroup
       </label>
       <t
         dataSource={
@@ -67,6 +67,21 @@ exports[`AdvancedSearch render with initial state - should match snapshot 1`] = 
               "Id": "C",
               "Status": true,
               "Value": "C",
+            },
+            Object {
+              "Id": "D",
+              "Status": true,
+              "Value": "D",
+            },
+            Object {
+              "Id": "E",
+              "Status": true,
+              "Value": "E",
+            },
+            Object {
+              "Id": "F",
+              "Status": true,
+              "Value": "F",
             },
           ]
         }
@@ -90,11 +105,16 @@ exports[`AdvancedSearch render with initial state - should match snapshot 1`] = 
       <label
         className="label-text"
       >
-        Special Level
+        SpecialLevel
       </label>
       <t
         dataSource={
           Array [
+            Object {
+              "Id": "0",
+              "Status": true,
+              "Value": "None",
+            },
             Object {
               "Id": "1",
               "Status": true,
@@ -105,48 +125,51 @@ exports[`AdvancedSearch render with initial state - should match snapshot 1`] = 
               "Status": true,
               "Value": "2",
             },
+            Object {
+              "Id": "3",
+              "Status": true,
+              "Value": "3",
+            },
+            Object {
+              "Id": "4",
+              "Status": true,
+              "Value": "4",
+            },
+            Object {
+              "Id": "5",
+              "Status": true,
+              "Value": "5",
+            },
+            Object {
+              "Id": "6",
+              "Status": true,
+              "Value": "6",
+            },
+            Object {
+              "Id": "7",
+              "Status": true,
+              "Value": "7",
+            },
+            Object {
+              "Id": "8",
+              "Status": true,
+              "Value": "8",
+            },
+            Object {
+              "Id": "9",
+              "Status": true,
+              "Value": "9",
+            },
+            Object {
+              "Id": "10",
+              "Status": true,
+              "Value": "10",
+            },
           ]
         }
         hasAllOption={true}
         hasSearchBox={false}
         id="specialLevel"
-        keyField="Id"
-        language="en-US"
-        onChange={[Function]}
-        statusField="Status"
-        valueField="Value"
-      />
-    </div>
-  </div>
-  <div
-    className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2"
-  >
-    <div
-      className="form-group"
-    >
-      <label
-        className="label-text"
-      >
-        BA
-      </label>
-      <t
-        dataSource={
-          Array [
-            Object {
-              "Id": "On",
-              "Status": true,
-              "Value": "On",
-            },
-            Object {
-              "Id": "Off",
-              "Status": true,
-              "Value": "Off",
-            },
-          ]
-        }
-        hasAllOption={true}
-        hasSearchBox={false}
-        id="baStatus"
         keyField="Id"
         language="en-US"
         onChange={[Function]}
