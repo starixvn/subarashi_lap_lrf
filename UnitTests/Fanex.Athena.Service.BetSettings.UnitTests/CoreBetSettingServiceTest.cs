@@ -62,7 +62,7 @@
         }
 
         [Test]
-        public void IsBetSettingEditable_IsParasiticMode_GetPermissionFromPortalFunctionList()
+        public void IsBetSettingEditable_WhenCall_ReturnCorrectData()
         {
             // Arrange
             var userSession = new UserAuthInfo
@@ -73,32 +73,15 @@
                     new OneAuthPermission {FunctionKey="sdf" } ,
                                         new OneAuthPermission {FunctionKey="cxv" } ,
                                         new OneAuthPermission {FunctionKey="sdfsdf" }
- }
+                }
             };
+            _authorizationService.HasPermissions(userSession, PermissionKeys.CustomerInfoEditBetSetting).Returns(true);
 
             // Action
-            _coreBetSettingService.IsBetSettingEditable(userSession);
+            var result = _coreBetSettingService.IsBetSettingEditable(userSession);
 
             // Assert
-            _authorizationService.Received(1).HasPermissions(userSession.PortalFunctionList, PermissionKeys.CustomerInfoEditBetSetting);
-        }
-
-        [Test]
-        public void IsBetSettingEditable_IsNotParasiticMode_GetPermissionFromFunctionIdList()
-        {
-            // Arrange
-            var userSession = new UserAuthInfo
-            {
-                ApplicationMode = AppMode.Self,
-                UserId = 324234,
-                FunctionList = new List<Function> { new Function { FunctionKey = PermissionKeys.CustomerInfoEditBetSetting } }
-            };
-
-            // Action
-            _coreBetSettingService.IsBetSettingEditable(userSession);
-
-            // Assert
-            _authorizationService.Received(1).HasPermissions(userSession.FunctionList, PermissionKeys.CustomerInfoEditBetSetting);
+            Assert.That(result, Is.True);
         }
 
         [Test]

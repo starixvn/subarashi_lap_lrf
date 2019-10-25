@@ -228,17 +228,24 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
             Assert.That(result, Is.False);
         }
 
-        [TestCase("alex", "alex2", "any,any2", false)]
-        [TestCase("alex", "any2", "alex,any2", true)]
-        [TestCase("alex", "any2", "alex", true)]
-        public void HasPermissions_WhenCallWithPortalFunctionKey_ReturnCorrectResult(string permissionKey1, string permissinKey2, string userPermissionKey, bool expectedResult)
+        [TestCase("alex", "alex2", "any,any2", false, false)]
+        [TestCase("alex", "any2", "alex,any2", false, true)]
+        [TestCase("alex", "any2", "alex", false, true)]
+        [TestCase("alex", "alex2", "any,any2", true, true)]
+        public void HasPermissions_WhenCallWithPortalFunctionKey_ReturnCorrectResult(
+            string permissionKey1,
+            string permissinKey2,
+            string userPermissionKey,
+            bool isAdmin,
+            bool expectedResult)
         {
             //Arrange
             var userFunctionList = userPermissionKey.Split(',').Select(x => new OneAuthPermission { FunctionKey = x }).ToArray();
+            var userAuthInfo = new UserAuthInfo { PortalFunctionList = userFunctionList, IsSuperAdmin = isAdmin, ApplicationMode = AppMode.Parasitic };
 
             //Action
 
-            var result = _authorizationService.HasPermissions(userPortalFunctionList: userFunctionList, permissionKey1, permissinKey2);
+            var result = _authorizationService.HasPermissions(userAuthInfo, permissionKey1, permissinKey2);
 
             //Assert
 
@@ -252,10 +259,11 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
         {
             //Arrange
             var userFunctionList = new OneAuthPermission[] { new OneAuthPermission { SubFunctionKeys = userPermissionKey.Split(',') } };
+            var userAuthInfo = new UserAuthInfo { PortalFunctionList = userFunctionList, ApplicationMode = AppMode.Parasitic };
 
             //Action
 
-            var result = _authorizationService.HasPermissions(userPortalFunctionList: userFunctionList, permissionKey1, permissinKey2);
+            var result = _authorizationService.HasPermissions(userAuthInfo, permissionKey1, permissinKey2);
 
             //Assert
 
@@ -268,11 +276,12 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
         public void HasPermissions_WhenCallWithFunctionKey_ReturnCorrectResult(string permissionKey1, string permissinKey2, string userPermissionKey, bool expectedResult)
         {
             //Arrange
-            var userFunctionList = userPermissionKey.Split(',').Select(x => new Function { FunctionKey = x }).ToArray();
+            var userFunctionList = userPermissionKey.Split(',').Select(x => new Function { FunctionKey = x }).ToList();
+            var userAuthInfo = new UserAuthInfo { FunctionList = userFunctionList, ApplicationMode = AppMode.Self };
 
             //Action
 
-            var result = _authorizationService.HasPermissions(userFunctionList, permissionKey1, permissinKey2);
+            var result = _authorizationService.HasPermissions(userAuthInfo, permissionKey1, permissinKey2);
 
             //Assert
 
