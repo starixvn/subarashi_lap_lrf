@@ -35,14 +35,12 @@ namespace Fanex.Athena.Service.BetSettings
 
         public CustomerInfo GetCustomerInfo(int custId)
         {
-            return _customerService.GetCustomerInfo( custId);
+            return _customerService.GetCustomerInfo(custId);
         }
 
         public bool IsBetSettingEditable(UserAuthInfo userSession)
         {
-            return userSession.ApplicationMode == AppMode.Parasitic ?
-                      _authorizationService.HasPermissions(userSession, PermissionKeys.CustomerInfoEditBetSetting) :
-                      _authorizationService.HasPermissions(userSession.FunctionList, PermissionKeys.CustomerInfoEditBetSetting);
+            return _authorizationService.HasPermissions(userSession, PermissionKeys.CustomerInfoEditBetSetting);
         }
 
         public async Task<IEnumerable<BetSettingProduct>> GetBetSettingProductsAsync(int custId, int licenseeId)

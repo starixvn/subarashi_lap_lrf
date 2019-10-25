@@ -42,9 +42,7 @@ namespace Fanex.Athena.Web.ActionFilter
             var authorized = userSession != null && licenseeSession != null;
             if (authorized)
             {
-                authorized = userSession.ApplicationMode == AppMode.Parasitic ?
-                             AuthorizationServiceInstance.HasPermissions(userSession, _permissionKeys) :
-                              AuthorizationServiceInstance.HasPermissions(userSession.FunctionList, _permissionKeys);
+                authorized = AuthorizationServiceInstance.HasPermissions(userSession, _permissionKeys);
             }
 
             if (!authorized)

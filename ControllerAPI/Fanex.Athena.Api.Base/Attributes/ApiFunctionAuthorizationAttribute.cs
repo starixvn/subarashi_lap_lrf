@@ -115,9 +115,7 @@
             if (authorized)
             {
                 var authorizationService = scope.Resolve<IAuthorizationService>();
-                authorized = userSession.ApplicationMode == AppMode.Parasitic ?
-                    authorizationService.HasPermissions(userSession, _permissionKeys) :
-                    authorizationService.HasPermissions(userSession.FunctionList, _permissionKeys);
+                authorized = authorizationService.HasPermissions(userSession, _permissionKeys);
             }
 
             return authorized;

@@ -33,21 +33,20 @@ namespace Fanex.Athena.Service.StatelessCore
 
         public bool HasPermissions(UserAuthInfo userAuthInfo, params string[] permissionKeys)
         {
-            if (userAuthInfo.IsSuperAdmin)
+            if (userAuthInfo.ApplicationMode == AppMode.Parasitic)
             {
-                return true;
+                if (userAuthInfo.IsSuperAdmin)
+                {
+                    return true;
+                }
+
+                return userAuthInfo.PortalFunctionList.Any(i => permissionKeys.Contains(i.FunctionKey,
+                    StringComparer.InvariantCultureIgnoreCase)
+                || (i.SubFunctionKeys != null && i.SubFunctionKeys.Intersect(permissionKeys).Any()));
             }
 
-            return userAuthInfo.PortalFunctionList.Any(i => permissionKeys.Contains(i.FunctionKey,
-                StringComparer.InvariantCultureIgnoreCase)
-            || (i.SubFunctionKeys != null && i.SubFunctionKeys.Intersect(permissionKeys).Any()));
+            return userAuthInfo.FunctionList.Any(x => permissionKeys.Contains(x.FunctionKey, StringComparer.InvariantCultureIgnoreCase));
         }
-
-        public bool HasPermissions(IEnumerable<Function> userFunctionList, params string[] permissionKeys)
-        {
-            return userFunctionList.Any(x => permissionKeys.Contains(x.FunctionKey, StringComparer.InvariantCultureIgnoreCase));
-        }
-
         public bool IsAllowedEditCommission(UserAuthInfo userAuthInfo)
         {
             if (userAuthInfo.ApplicationMode == AppMode.Parasitic)
