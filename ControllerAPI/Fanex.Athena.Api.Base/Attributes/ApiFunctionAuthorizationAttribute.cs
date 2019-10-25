@@ -116,7 +116,7 @@
             {
                 var authorizationService = scope.Resolve<IAuthorizationService>();
                 authorized = userSession.ApplicationMode == AppMode.Parasitic ?
-                    userSession.IsSuperAdmin || authorizationService.HasPermissions(userSession.PortalFunctionList, _permissionKeys) :
+                    authorizationService.HasPermissions(userSession, _permissionKeys) :
                     authorizationService.HasPermissions(userSession.FunctionList, _permissionKeys);
             }
 

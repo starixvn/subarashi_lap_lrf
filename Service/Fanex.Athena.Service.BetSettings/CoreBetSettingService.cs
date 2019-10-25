@@ -41,7 +41,7 @@ namespace Fanex.Athena.Service.BetSettings
         public bool IsBetSettingEditable(UserAuthInfo userSession)
         {
             return userSession.ApplicationMode == AppMode.Parasitic ?
-                      _authorizationService.HasPermissions(userSession.PortalFunctionList, PermissionKeys.CustomerInfoEditBetSetting) :
+                      _authorizationService.HasPermissions(userSession, PermissionKeys.CustomerInfoEditBetSetting) :
                       _authorizationService.HasPermissions(userSession.FunctionList, PermissionKeys.CustomerInfoEditBetSetting);
         }
 

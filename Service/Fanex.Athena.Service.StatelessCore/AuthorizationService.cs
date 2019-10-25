@@ -31,9 +31,14 @@ namespace Fanex.Athena.Service.StatelessCore
             _cache = cache;
         }
 
-        public bool HasPermissions(OneAuthPermission[] userPortalFunctionList, params string[] permissionKeys)
+        public bool HasPermissions(UserAuthInfo userAuthInfo, params string[] permissionKeys)
         {
-            return userPortalFunctionList.Any(i => permissionKeys.Contains(i.FunctionKey,
+            if (userAuthInfo.IsSuperAdmin)
+            {
+                return true;
+            }
+
+            return userAuthInfo.PortalFunctionList.Any(i => permissionKeys.Contains(i.FunctionKey,
                 StringComparer.InvariantCultureIgnoreCase)
             || (i.SubFunctionKeys != null && i.SubFunctionKeys.Intersect(permissionKeys).Any()));
         }
@@ -45,17 +50,34 @@ namespace Fanex.Athena.Service.StatelessCore
 
         public bool IsAllowedEditCommission(UserAuthInfo userAuthInfo)
         {
-            return userAuthInfo.ApplicationMode == AppMode.Parasitic ? userAuthInfo.PortalFunctionList != null && userAuthInfo.PortalFunctionList.Any(i => i.FunctionKey
-                   == PermissionKeys.CustomerInfoCommissionGroupList ||
-                   (i.SubFunctionKeys != null && i.SubFunctionKeys.Contains(PermissionKeys.CustomerInfoCommissionGroupList)))
-                   : userAuthInfo.FunctionList != null && userAuthInfo.FunctionList.Any(x => x.FunctionKey == PermissionKeys.CustomerInfoCommissionGroupList);
+            if (userAuthInfo.ApplicationMode == AppMode.Parasitic)
+            {
+                if (userAuthInfo.IsSuperAdmin)
+                {
+                    return true;
+                }
+                return userAuthInfo.PortalFunctionList != null && userAuthInfo.PortalFunctionList.Any(i => i.FunctionKey
+                      == PermissionKeys.CustomerInfoCommissionGroupList ||
+                      (i.SubFunctionKeys != null && i.SubFunctionKeys.Contains(PermissionKeys.CustomerInfoCommissionGroupList)));
+
+            }
+            return userAuthInfo.FunctionList != null && userAuthInfo.FunctionList.Any(x => x.FunctionKey == PermissionKeys.CustomerInfoCommissionGroupList);
         }
 
         public bool IsAllowedSpecialBA(UserAuthInfo userAuthInfo)
         {
-            return userAuthInfo.ApplicationMode == AppMode.Parasitic ? userAuthInfo.PortalFunctionList != null && (userAuthInfo.PortalFunctionList.Any(i => i.FunctionKey
-                   == PermissionKeys.CustomerInfoSpecialBA || (i.SubFunctionKeys != null && i.SubFunctionKeys.Contains(PermissionKeys.CustomerInfoSpecialBA))))
-                   : userAuthInfo.FunctionList != null && userAuthInfo.FunctionList.Any(x => x.FunctionKey == PermissionKeys.CustomerInfoSpecialBA);
+            if (userAuthInfo.ApplicationMode == AppMode.Parasitic)
+            {
+                if (userAuthInfo.IsSuperAdmin)
+                {
+                    return true;
+                }
+                return userAuthInfo.PortalFunctionList != null && (userAuthInfo.PortalFunctionList.Any(i => i.FunctionKey
+                     == PermissionKeys.CustomerInfoSpecialBA
+                     || (i.SubFunctionKeys != null && i.SubFunctionKeys.Contains(PermissionKeys.CustomerInfoSpecialBA))));
+
+            }
+            return userAuthInfo.FunctionList != null && userAuthInfo.FunctionList.Any(x => x.FunctionKey == PermissionKeys.CustomerInfoSpecialBA);
         }
 
         public bool HasPermissionOnData(IDictionary<int, int[]> currencyAgents, int custId, long transId)
