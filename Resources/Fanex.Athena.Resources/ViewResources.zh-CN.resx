@@ -1991,7 +1991,7 @@
     <value>在体育的搜寻结果将包含相关的红利与现金注单</value>
   </data>
   <data name="BettingTicketCenter_RefnoTabNote2" xml:space="preserve">
-    <value>For RNG Keno, Lottery, Colossus Bets: Please provide username also in order to search ticket later than {0}</value>
+    <value>For RNG Keno, Lottery, Colossus Bets, RNG Casino, AllBet, Macau Games, Fishing World, Card Club, PP: Please provide username also in order to search ticket later than {0}</value>
     <comment>122267</comment>
   </data>
   <data name="AbnormalBet" xml:space="preserve">

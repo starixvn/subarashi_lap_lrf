@@ -817,7 +817,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to For RNG Keno, Lottery, Colossus Bets: Please provide username also in order to search ticket later than {0}.
+        ///   Looks up a localized string similar to For RNG Keno, Lottery, Colossus Bets, RNG Casino, AllBet, Macau Games, Fishing World, Card Club, PP: Please provide username also in order to search ticket later than {0}.
         /// </summary>
         public static string BettingTicketCenter_RefnoTabNote2 {
             get {
