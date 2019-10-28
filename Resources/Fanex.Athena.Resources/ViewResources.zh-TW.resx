@@ -2012,4 +2012,8 @@
     <value>投注詳情</value>
     <comment>112658</comment>
   </data>
+  <data name="Promotion" xml:space="preserve">
+    <value>促銷活動</value>
+    <comment>120333</comment>
+  </data>
 </root>

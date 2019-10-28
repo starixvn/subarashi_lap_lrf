@@ -52,6 +52,7 @@ namespace Fanex.Athena.DataAccess.Report
                 AffiliateTransfer = reader.ToDecimal("AffiliateTransfer"),
                 Bonus = reader.ToDecimal("Bonus"),
                 Adjustment = reader.ToDecimal("Adjustment"),
+                Promotion = reader.ToDecimal("Promotion"),
                 Turnover = reader.ToDecimal("Turnover"),
                 PendingFunds = reader.ToDecimal("PendingFund"),
                 WinLoss = reader.ToDecimal("WinLoss"),

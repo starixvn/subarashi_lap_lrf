@@ -27,21 +27,22 @@ namespace Fanex.Athena.Excel.Report.UnitTests
         private const int ColumnWithdrawal = 4;
         private const int ColumnBonus = 5;
         private const int ColumnAdjustment = 6;
-        private const int ColumnTurnOver = 7;
-        private const int ColumnDrawGame = 8;
-        private const int ColumnNetTurnOver = 9;
-        private const int ColumnPendingFunds = 10;
-        private const int ColumnCustomerWinLoss = 11;
-        private const int ColumnCustomerComm = 12;
-        private const int ColumnCustomerTotal = 13;
-        private const int ColumnClosingBalance = 14;
-        private const int ColumnAffiliateTransfer = 15;
-        private const int ColumnCasinoTransfer = 16;
-        private const int ColumnTurnoverBa = 17;
-        private const int ColumnCommBa = 18;
-        private const int ColumnAmountDueToBa = 19;
+        private const int ColumnPromotion = 7;
+        private const int ColumnTurnOver = 8;
+        private const int ColumnDrawGame = 9;
+        private const int ColumnNetTurnOver = 10;
+        private const int ColumnPendingFunds = 11;
+        private const int ColumnCustomerWinLoss = 12;
+        private const int ColumnCustomerComm = 13;
+        private const int ColumnCustomerTotal = 14;
+        private const int ColumnClosingBalance = 15;
+        private const int ColumnAffiliateTransfer = 16;
+        private const int ColumnCasinoTransfer = 17;
+        private const int ColumnTurnoverBa = 18;
+        private const int ColumnCommBa = 19;
+        private const int ColumnAmountDueToBa = 20;
 
-        private const int ColumnCount = 20;
+        private const int ColumnCount = 21;
 
         private static readonly TurnoverDTO DataItem = FakeHelper.Create<TurnoverDTO>();
 
@@ -77,6 +78,7 @@ namespace Fanex.Athena.Excel.Report.UnitTests
                 ViewResources.Withdrawal,
                 ViewResources.Bonus,
                 ViewResources.Adjustment,
+                ViewResources.Promotion,
                 ViewResources.Turnover,
                 ViewResources.DrawGame,
                 ViewResources.NetTurnover,
@@ -230,6 +232,7 @@ namespace Fanex.Athena.Excel.Report.UnitTests
             row.Cells[ColumnWithdrawal].Received(1).SetCellValue(item.Withdrawal);
             row.Cells[ColumnBonus].Received(1).SetCellValue(item.Bonus);
             row.Cells[ColumnAdjustment].Received(1).SetCellValue(item.Adjustment);
+            row.Cells[ColumnPromotion].Received(1).SetCellValue(item.Promotion);
             row.Cells[ColumnTurnOver].Received(1).SetCellValue(item.Turnover);
             row.Cells[ColumnDrawGame].Received(1).SetCellValue(item.DrawGame);
             row.Cells[ColumnNetTurnOver].Received(1).SetCellValue(item.NetTurnover);

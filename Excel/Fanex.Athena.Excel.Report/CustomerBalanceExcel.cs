@@ -20,24 +20,25 @@ namespace Fanex.Athena.Excel.Report
     public class CustomerBalanceExcel : ReportBase
     {
         private const int ColumnAdjustment = 7;
-        private const int ColumnAffiliateTransfer = 16;
-        private const int ColumnAmountDueToBa = 19;
+        private const int ColumnAffiliateTransfer = 17;
+        private const int ColumnAmountDueToBa = 20;
         private const int ColumnBonus = 6;
-        private const int ColumnClosingBalance = 15;
-        private const int ColumnCommBa = 18;
-        private const int ColumnCustomerComm = 13;
-        private const int ColumnCustomerTotal = 14;
-        private const int ColumnCustomerWinLoss = 12;
+        private const int ColumnClosingBalance = 16;
+        private const int ColumnCommBa = 19;
+        private const int ColumnCustomerComm = 14;
+        private const int ColumnCustomerTotal = 15;
+        private const int ColumnCustomerWinLoss = 13;
         private const int ColumnDeposit = 4;
-        private const int ColumnDrawGame = 9;
+        private const int ColumnDrawGame = 10;
         private const int ColumnExternalId = 1;
-        private const int ColumnNetTurnOver = 10;
+        private const int ColumnNetTurnOver = 11;
         private const int ColumnOpeningBalance = 3;
-        private const int ColumnPendingFunds = 11;
+        private const int ColumnPendingFunds = 12;
+        private const int ColumnPromotion = 8;
         private const int ColumnSystemId = 2;
-        private const int ColumnTemplateCount = 20;
-        private const int ColumnTurnOver = 8;
-        private const int ColumnTurnoverBa = 17;
+        private const int ColumnTemplateCount = 21;
+        private const int ColumnTurnOver = 9;
+        private const int ColumnTurnoverBa = 18;
         private const int ColumnWithdrawal = 5;
         private const int RowContentTemplate = 3;
         private const int RowNoInfoTemplate = 5;
@@ -116,6 +117,7 @@ namespace Fanex.Athena.Excel.Report
                 ViewResources.Withdrawal,
                 ViewResources.Bonus,
                 ViewResources.Adjustment,
+                ViewResources.Promotion,
                 ViewResources.Turnover,
                 ViewResources.DrawGame,
                 ViewResources.NetTurnover,
@@ -167,6 +169,7 @@ namespace Fanex.Athena.Excel.Report
                 row.Cells[ColumnWithdrawal].SetCellValue(item.Withdrawal);
                 row.Cells[ColumnBonus].SetCellValue(item.Bonus);
                 row.Cells[ColumnAdjustment].SetCellValue(item.Adjustment);
+                row.Cells[ColumnPromotion].SetCellValue(item.Promotion);
                 row.Cells[ColumnTurnOver].SetCellValue(item.Turnover);
                 row.Cells[ColumnDrawGame].SetCellValue(item.DrawGame);
                 row.Cells[ColumnNetTurnOver].SetCellValue(item.NetTurnover);
@@ -233,6 +236,7 @@ namespace Fanex.Athena.Excel.Report
             row.Cells[ColumnWithdrawal].SetCellValue(_totalData.Withdrawal);
             row.Cells[ColumnBonus].SetCellValue(_totalData.Bonus);
             row.Cells[ColumnAdjustment].SetCellValue(_totalData.Adjustment);
+            row.Cells[ColumnPromotion].SetCellValue(_totalData.Promotion);
             row.Cells[ColumnTurnOver].SetCellValue(_totalData.Turnover);
             row.Cells[ColumnDrawGame].SetCellValue(_totalData.DrawGame);
             row.Cells[ColumnNetTurnOver].SetCellValue(_totalData.NetTurnover);
