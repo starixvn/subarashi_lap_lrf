@@ -59,7 +59,7 @@
                 // Arrange
                 var metaModel = FakeHelper.Create<PlayerBetLimitSelectMetaModel>();
 
-                _authService.HasPermissions(DefaultUserSession.PortalFunctionList, PermissionKeys.PlayerAdminBetLimit_Write)
+                _authService.HasPermissions(DefaultUserSession, PermissionKeys.PlayerAdminBetLimit_Write)
                     .Returns(isEditable);
 
                 var setting = FakeHelper.Create<PlayerBetLimit>(x => x.Id, MixedSportId);

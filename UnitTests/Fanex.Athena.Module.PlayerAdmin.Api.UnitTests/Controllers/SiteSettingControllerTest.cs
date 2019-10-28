@@ -33,7 +33,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.UnitTests.Controllers
         public void GetSetting_WhenCall_ReturnCorrectResult()
         {
             // Arrange
-            var expectedLicenseeInfo = new Licensee { IsAllowedCustomerComm = true };
+            var expectedLicenseeInfo = new Licensee { IsAllowedCustomerComm = true, IsEnableBA = true };
             _licenseeSettingService.GetLicenseeInfo(ExternalApiHelper.DefaultSiteName).Returns(expectedLicenseeInfo);
             _authService.CheckProductBelongsTo(ExternalApiHelper.DefaultSiteName, ProductTypes.BA).Returns(true);
 

@@ -137,7 +137,7 @@
             attribute.ExecuteAuthorizationFilterAsync(actionContext, new CancellationToken(), continuation);
 
             // Assert
-            _authorizationService.Received(1).HasPermissions(Arg.Any<IEnumerable<Function>>(), permissionKeys);
+            _authorizationService.Received(1).HasPermissions(Arg.Any<UserAuthInfo>(), permissionKeys);
         }
 
         [Test]
@@ -147,7 +147,7 @@
             var attribute = new ApiFunctionAuthorizationAttribute();
             var actionContext = CreateActionContext();
             _sessionService.UserSession.Returns(new UserAuthInfo { ApplicationMode = AppMode.Parasitic });
-            _authorizationService.HasPermissions(Arg.Any<IEnumerable<Function>>(), Arg.Any<string[]>()).Returns(true);
+            _authorizationService.HasPermissions(Arg.Any<UserAuthInfo>(), Arg.Any<string[]>()).Returns(true);
 
             // Action
             var result = attribute.ExecuteAuthorizationFilterAsync(actionContext, new CancellationToken(), null);
@@ -163,7 +163,7 @@
             var attribute = new ApiFunctionAuthorizationAttribute();
             var actionContext = CreateActionContext();
             _sessionService.UserSession.Returns(new UserAuthInfo { ApplicationMode = AppMode.Self });
-            _authorizationService.HasPermissions(Arg.Any<IEnumerable<Function>>(), Arg.Any<string[]>()).Returns(true);
+            _authorizationService.HasPermissions(Arg.Any<UserAuthInfo>(), Arg.Any<string[]>()).Returns(true);
 
             // Action
             var result = attribute.ExecuteAuthorizationFilterAsync(actionContext, new CancellationToken(), null);

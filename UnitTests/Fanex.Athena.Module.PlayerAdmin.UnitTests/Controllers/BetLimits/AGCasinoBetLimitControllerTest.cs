@@ -57,7 +57,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers.BetLimits
             // Arrange
             const bool IsEditable = true;
             var metaModel = FakeHelper.Create<PlayerBetLimitSelectMetaModel>();
-            _authService.HasPermissions(Arg.Any<OneAuthPermission[]>(), PermissionKeys.PlayerAdminBetLimit_Write).Returns(IsEditable);
+            _authService.HasPermissions(Arg.Any<UserAuthInfo>(), PermissionKeys.PlayerAdminBetLimit_Write).Returns(IsEditable);
 
             var groupBettingTask = FakeHelper.Create<Task<IList<AgCasinoGame>>>();
             _service.GetGroupBettingsAsync(SessionService.LicenseeSession.LicenseeName, metaModel.CurrencyId).Returns(groupBettingTask);
