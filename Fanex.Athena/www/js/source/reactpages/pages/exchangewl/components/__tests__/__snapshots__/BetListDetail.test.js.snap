@@ -269,7 +269,10 @@ exports[`BetListDetail  render  show grid when gridData is not empty - match sna
 exports[`BetListDetail  render  show no data title when gridData is empty - match snapshot 1`] = `
 <p
   className="no-info-row center-align"
->
-  NoInfo
-</p>
+  dangerouslySetInnerHTML={
+    Object {
+      "__html": "NoInfo",
+    }
+  }
+/>
 `;

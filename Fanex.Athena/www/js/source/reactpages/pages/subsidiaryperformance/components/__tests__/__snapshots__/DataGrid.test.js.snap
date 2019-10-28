@@ -1053,7 +1053,10 @@ exports[`DataGrid  Data is not empty Level MAIN render correct content 1`] = `
 exports[`DataGrid  No data gridData length is 0 - render correct content 1`] = `
 <p
   className="no-info-row center-align"
->
-  NoInfo
-</p>
+  dangerouslySetInnerHTML={
+    Object {
+      "__html": "NoInfo",
+    }
+  }
+/>
 `;

@@ -30,6 +30,7 @@ exports[`FormFilter  render() - match with snapshot 1`] = `
             }
           }
           onChange={[Function]}
+          showDate={true}
           toDate="01/02/2018"
           toDateOption={
             Object {
@@ -246,6 +247,7 @@ exports[`FormFilter  render() - productOptions is empty - no render dropdown for
             }
           }
           onChange={[Function]}
+          showDate={true}
           toDate="01/02/2018"
           toDateOption={
             Object {

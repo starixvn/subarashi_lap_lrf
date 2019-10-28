@@ -93,14 +93,6 @@ exports[`GridHelper renderHeader -  match snapshot 1`] = `
     <t
       colWidth={60}
       onSort={null}
-      sortBy={null}
-      sortOrder={null}
-    >
-      LastLoginIP
-    </t>
-    <t
-      colWidth={60}
-      onSort={null}
       sortBy="LastTransaction"
       sortOrder={null}
     >

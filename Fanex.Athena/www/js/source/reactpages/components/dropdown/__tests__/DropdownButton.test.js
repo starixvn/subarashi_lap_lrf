@@ -21,7 +21,7 @@ describe('DropdownButton', () => {
         },
         dropdownMenu: {
             tag: undefined,
-            children: undefined,
+            children: 'children',
             className: undefined
         }
     }
@@ -54,7 +54,8 @@ describe('DropdownButton', () => {
                 },
                 dropdownMenu: {
                     tag: 'ul',
-                    className: 'custom-dropdown-menu'
+                    className: 'custom-dropdown-menu',
+                    children: 'children'
                 }
             }
 
