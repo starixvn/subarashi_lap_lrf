@@ -50,8 +50,6 @@ namespace Fanex.Athena.Controllers.BetList
         public async Task<ActionResult> Detail(SystemParlayDetailMetaModel metaModel)
         {
             var userSession = SessionService.UserSession;
-            metaModel.IsAllowedCustomerComm = SessionService.LicenseeSession.IsAllowedCustomerComm;
-
             var data = await BetListApiClient.PostAsyncString("/SystemParlayBetList/Detail", metaModel, userSession.Language).ConfigureAwait(false);
 
             var viewModel = new SystemParlayDetailViewModel

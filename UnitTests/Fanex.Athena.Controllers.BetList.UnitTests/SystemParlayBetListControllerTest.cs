@@ -55,7 +55,6 @@
 
                 // Assert
                 Assert.That(model.DetailText, Is.EqualTo(systemParlayText));
-                Assert.That(metaModel.IsAllowedCustomerComm, Is.EqualTo(SessionService.LicenseeSession.IsAllowedCustomerComm));
             }
         }
 
