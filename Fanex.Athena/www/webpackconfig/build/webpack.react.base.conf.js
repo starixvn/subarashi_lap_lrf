@@ -37,6 +37,7 @@ function generateConfig(environment) {
             [`${jsPath}/playeradmin/single-customer`]: pathConfig.scriptPaths.singleCustomer,
             [`${jsPath}/playeradmin/playerwinloss`]: pathConfig.scriptPaths.playerwinloss,
             [`${jsPath}/playeradmin/statement`]: pathConfig.scriptPaths.statement,
+            [`${jsPath}/report/dailybets`]: pathConfig.scriptPaths.dailybets,
 
             /*css*/
             [`${cssPath}/vendor`]: pathConfig.cssPaths.layout,

@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "LAP - " + ViewResources.Report +
+    " - " + ViewResources.LicenseeWinLoss;
+    Layout = "~/Views/Desktop/Shared/_ReactPageLayout.cshtml";
+}
+@using Fanex.Athena.Model.Core.DataDomain;
+@model Fanex.Athena.Model.Report.ViewModel.DailyBetsViewModel
+@{
+    var productOptions = Model.ProductOptions;
+    var selectedProductCode = string.Join(",", productOptions.Where(x => x.Status).Select(x => x.Code));
+
+    var currencyList = Model.CurrencyList.Select(x => new { Key = x.Key, Value = x.Value, Status = true });
+
+    var selectedCurrency = string.Join(",", currencyList.Select(x => x.Key));
+
+    var today = DateTime.Now.Date;
+    var minDate = today.AddMonths(-3).ToString("MM/dd/yyyy");
+
+    var todayString = today.ToString("MM/dd/yyyy");
+}
+
+@section pagecss {
+    <link href="@Url.ContentLinkByEnv("/www/css/build/reactpages/licenseewlbytimezone/index.css")" rel="stylesheet" type="text/css" />
+
+}
+@section pagejs {
+    <script src="@Url.ContentLinkByEnv("/www/js/build/reactpages/report/dailybets.chunk.js")"></script>
+}
+
+@section globaljscode{
+    window.initialState = {
+    selectedProduct: '@(selectedProductCode)',
+    selectedCurrency: '@(selectedCurrency)',
+    isLoading: false,
+    selectedDate: '@todayString',
+    dateConstraint: {minDate: '@minDate', maxDate: '@todayString'}
+    }
+    window._AppData = {
+    productOptions: @Html.Raw(productOptions.ToJson()),
+    currencyList: @Html.Raw(currencyList.ToJson())
+    };
+}
+<div id="app-container">
+</div>
