@@ -74,8 +74,19 @@
 
         public ActionResult RefNo()
         {
+            const string defaultProductCodes = "KN,LT,CB,CS,AB,VB,FW,CC,PP";
+
+            var productAccess = _productService.GetSingleWalletProductAccess(
+                SessionService.LicenseeSession.LicenseeId,
+                SessionService.UserSession.Language);
+            var products = productAccess.ProductList.AsEnumerable()
+                .Where(product => defaultProductCodes.Contains(product.ProductCode));
+            var productNamesSequence = string.Join(", ", products.Select(product => product.ProductName));
+
+            ViewBag.ProductNamesSequence = productNamesSequence;
             ViewBag.BalanceUpDay = _balanceUpDataAccess.GetBalanceUp().BalanceUpDay;
             ViewBag.SelectedBaseCurrency = SessionService.UserSession.DefaultBaseCurrency;
+
             return View(
                 "~/Views/Desktop/BetList/BettingTicketCenter/RefNo.cshtml",
                 SessionService.LicenseeSession.IsAllowedCustomerComm);

@@ -111,6 +111,7 @@ export class FormFilter extends Component {
     }
 
     render() {
+        console.log('anh debug', AppData);
         const excelButton = <div>
                                 <i className="icon-excel right" onClick={this.exportExcel} title={LangHelper.getSingleResource("ExportToExcel")}></i>
                                 {this._renderUserGuide()}
@@ -168,7 +169,8 @@ export class FormFilter extends Component {
                         <div className="col-9">
                             * {LangHelper.getSingleResource('BettingTicketCenter_RefnoTabNote1')}
                             <br />
-                            * {LangHelper.getSingleResource('BettingTicketCenter_RefnoTabNote2').replace('{0}', AppData.balanceUpDay)}
+                            * {LangHelper.getSingleResource('BettingTicketCenter_RefnoTabNote2')
+                            .replace('{0}', AppData.productNamesSequence).replace('{1}', AppData.balanceUpDay)}
                         </div>
                </div>
             </CollapsiblePanel>
