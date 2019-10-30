@@ -34,7 +34,7 @@ export const renderDataSection = (dataList, isTotalRow) => {
 }
 
 const buildDataRow = (dataItem) => {
-    const { index, playerName, currencyName, refNo, transTime, productCode, betType, turnover, winLoss, status } = dataItem;
+    const { index, playerName, currencyName, refNo, transTimeString, productCode, betType, turnover, winLoss, status } = dataItem;
 
     return (
         <Row key={index}>
@@ -42,7 +42,7 @@ const buildDataRow = (dataItem) => {
             <Cell>{playerName}</Cell>
             <Cell className="center-align">{currencyName}</Cell>
             <Cell className="center-align">{refNo}</Cell>
-            <Cell className="center-align">{transTime}</Cell>
+            <Cell className="center-align">{transTimeString}</Cell>
             <Cell>{productCode}</Cell>
             <Cell>{betType}</Cell>
             <Cell className="right-align">{NumberFormat.formatDecimal(turnover)}</Cell>
