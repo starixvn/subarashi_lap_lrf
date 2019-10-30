@@ -18,7 +18,8 @@ var cssPaths = {
     playerrunningbetlist: "./www/css/source/reactpages/pages/playeradmin/running-betlist.scss",
     playerbetlimit: "./www/css/source/reactpages/pages/playeradmin/betlimit.scss",
     playerwinloss: "./www/css/source/reactpages/pages/playeradmin/playerwinloss.scss",
-    statement: "./www/css/source/reactpages/pages/playeradmin/statement.scss"
+    statement: "./www/css/source/reactpages/pages/playeradmin/statement.scss",
+    dailybets: "./www/css/source/reactpages/pages/dailybets/index.scss",
 };
 
 var scriptPaths = {

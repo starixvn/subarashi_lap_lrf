@@ -1,34 +1,40 @@
-import { Row, Cell } from '@9softstudio/react-grid';
-import {headerText} from './constants';
+import React from 'react';
+import { Row, Cell, HeaderRow, HeaderCell } from '@9softstudio/react-grid';
+import { headerText } from './constants';
+import NumberFormat from '@jsroot/lib/numberFormat';
 
 export const renderHeader = () => {
     return (
         <HeaderRow style={{ height: 32 }}>
             <HeaderCell colWidth={40}>#</HeaderCell>
-            <HeaderCell colWidth={130}>{headerText.systemId}</HeaderCell>
-            <HeaderCell colWidth={60}>{headerText.currency}</HeaderCell>
-            <HeaderCell colWidth={120}>{headerText.refNo}</HeaderCell>
+            <HeaderCell colWidth={100}>{headerText.systemId}</HeaderCell>
+            <HeaderCell colWidth={50}>{headerText.currency}</HeaderCell>
+            <HeaderCell colWidth={100}>{headerText.refNo}</HeaderCell>
             <HeaderCell colWidth={100}>{headerText.transTime}</HeaderCell>
             <HeaderCell colWidth={80}>{headerText.product}</HeaderCell>
-            <HeaderCell colWidth={80}>{headerText.betType}</HeaderCell>
-            <HeaderCell colWidth={100} sortBy={turnover}>{headerText.turnover}</HeaderCell>
-            <HeaderCell colWidth={100} sortBy={winLoss}>{headerText.winloss}</HeaderCell>
+            <HeaderCell colWidth={150}>{headerText.betType}</HeaderCell>
+            <HeaderCell colWidth={80} sortBy={'turnover'}>{headerText.turnover}</HeaderCell>
+            <HeaderCell colWidth={80} sortBy={'winLoss'}>{headerText.winloss}</HeaderCell>
             <HeaderCell colWidth={50}>{headerText.status}</HeaderCell>
         </HeaderRow>
     )
 }
 
-export const renderDataSection = (dataList) => {
-        const dataRows = [];
-        for (let i = 0; i < dataList.length; i++) {
-            dataRows.push(buildDataRow(dataList[i]));
-        }
+export const renderDataSection = (dataList, isTotalRow) => {
+    if (isTotalRow) {
+        return buildTotalRow(dataList[0]);
+    }
 
-        return dataRows;
+    const dataRows = [];
+    for (let i = 0; i < dataList.length; i++) {
+        dataRows.push(buildDataRow(dataList[i]));
+    }
+
+    return dataRows;
 }
 
 const buildDataRow = (dataItem) => {
-    const {index, playerName, currencyName, refNo, transTime, productCode, betType, turnover, winLoss, status} = dataItem;
+    const { index, playerName, currencyName, refNo, transTime, productCode, betType, turnover, winLoss, status } = dataItem;
 
     return (
         <Row key={index}>
@@ -39,9 +45,20 @@ const buildDataRow = (dataItem) => {
             <Cell className="center-align">{transTime}</Cell>
             <Cell>{productCode}</Cell>
             <Cell>{betType}</Cell>
-            <Cell className="right-align">{turnover}</Cell>
-            <Cell className="right-align">{winLoss}</Cell>
+            <Cell className="right-align">{NumberFormat.formatDecimal(turnover)}</Cell>
+            <Cell className="right-align">{NumberFormat.formatDecimal(winLoss)}</Cell>
             <Cell className="center-align">{status}</Cell>
+        </Row>
+    )
+}
+
+const buildTotalRow = (dataItem) => {
+    const { turnover, winLoss } = dataItem;
+    return (
+        <Row key="totalRowUSD">
+            <Cell className="right-align" colSpan="7">Total In USD</Cell>
+            <Cell className="right-align">{NumberFormat.formatDecimal(turnover)}</Cell>
+            <Cell className="right-align">{NumberFormat.formatDecimal(winLoss)}</Cell>
         </Row>
     )
 }

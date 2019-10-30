@@ -1,25 +1,32 @@
-import * as gridDataAction from '@jsroot/actions/gridDataAction';
-import * as productAction from '@jsroot/actions/productAction';
-import * as currencyAction from '@jsroot/actions/currencyAction';
 import * as loaderAction from '@jsroot/actions/loaderAction';
 import * as requestParamAction from '@jsroot/actions/requestParamAction';
 import * as reportTitleAction from '@jsroot/actions/reportTitleAction';
+import * as pagingOptionAction from '@jsroot/actions/pagingOptionAction';
 
-import { SET_DATE } from './types';
+import Site from '@jsroot/lib/site';
+import DataService from '@jsroot/lib/DataService';
 
-const setDate = (data) => {
-    return {
-        type: SET_DATE,
-        data
-    }
+const apiUrl = Site.resolveClientUrl('DailyBetsReport/Index');
+const getData = (param) => () => {
+    return DataService.postData(apiUrl, param)
+        .then(response => {
+            const { dataList, total, totalRows } = response.data;
+
+            return {
+                dataList: dataList || [],
+                total: total || {},
+                totalRows
+            };
+        })
+        .catch(error => {
+            console.log(error.message);
+            return { dataList: [], total: {}, totalRows: 0 };
+        });
 }
 
 export const ActionCreators = Object.assign({},
-    gridDataAction,
-    productAction,
-    currencyAction,
     loaderAction,
     requestParamAction,
     reportTitleAction,
-    setDate
+    pagingOptionAction, { getData }
 );

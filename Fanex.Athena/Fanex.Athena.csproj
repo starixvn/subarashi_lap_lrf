@@ -2707,6 +2707,7 @@
     <Content Include="www\js\build\dev\reactpages\playeradmin\single-customer.chunk.js.map" />
     <Content Include="www\css\source\reactpages\pages\playeradmin\statement.scss" />
     <Content Include="www\js\build\dev\reactpages\playeradmin\statement.chunk.js.map" />
+    <Content Include="www\css\source\reactpages\pages\dailybets\index.scss" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="SiteConfig\WebConfigTransforms\SIT.config">

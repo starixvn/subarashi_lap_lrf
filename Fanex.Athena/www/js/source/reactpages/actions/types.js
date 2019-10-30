@@ -41,3 +41,6 @@ export const SET_USERNAME = "SET_USERNAME"
 export const SET_REQUEST_PARAM = "SET_REQUEST_PARAM"
 
 export const SET_REPORT_TITLE = "SET_REPORT_TITLE"
+
+/* Live Status  */
+export const SET_PAGING_OPTION = 'SET_PAGING_OPTION';

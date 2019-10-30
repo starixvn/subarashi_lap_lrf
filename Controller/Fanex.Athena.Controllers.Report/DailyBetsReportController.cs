@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using Fanex.Athena.Extension.Utility;
 using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Model.Core.DTO.Common;
 using Fanex.Athena.Model.Core.MetaModel.Product;
@@ -11,7 +12,6 @@ using Fanex.Athena.Model.Report.ViewModel;
 using Fanex.Athena.Service.Core.Common.Interfaces;
 using Fanex.Athena.Service.Core.Users.Interfaces;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
-using Fanex.Athena.Web.ActionFilter;
 
 namespace Fanex.Athena.Controllers.Report
 {
@@ -19,12 +19,16 @@ namespace Fanex.Athena.Controllers.Report
     {
         private readonly IReportAPIClient _reportAPIClient;
 
+        private readonly IDictionary<string, string> _siteNameList = new Dictionary<string, string>
+        {
+            { "IvoryBet", "ivorysport" }
+        };
+
         public DailyBetsReportController(
             ILanguageService languageService,
             ISessionService sessionService,
             IProductService productService,
-            ILicenseeSettingService licenseeSettingService,
-            IReportAPIClient reportAPIClient) : base(languageService, sessionService, productService, licenseeSettingService)
+            IReportAPIClient reportAPIClient) : base(languageService, sessionService, productService)
         {
             _reportAPIClient = reportAPIClient;
         }
@@ -33,25 +37,37 @@ namespace Fanex.Athena.Controllers.Report
         public ActionResult Index()
         {
             var userSession = SessionService.UserSession;
-            var productAccess = ProductService.GetSingleWalletProductAccess(
-                SessionService.LicenseeSession.LicenseeId,
-                userSession.Language,
-                FunctionNames.SpecialLicenseeWinLoss);
-
             var viewModel = new DailyBetsViewModel
             {
                 CurrencyList = userSession.CurrencyList,
-                ProductOptions = GetFakeProductOptions(productAccess.ProductList)
+                ProductOptions = GetProductAccess().ProductList.Select(i => new ProductOption
+                {
+                    Code = i.ProductCode,
+                    Name = i.ProductCode.Equals(Product.CS, StringComparison.InvariantCultureIgnoreCase) ? "RNG" : i.ProductName,
+                    Status = true
+                }).ToList()
             };
 
             return View("~/Views/Desktop/Report/DailyBets/Index.cshtml", viewModel);
         }
 
         [HttpPost]
-        [AutoBindMetaModel(BindAgent = true)]
-        [ValidationWebRequest(IsValidCurrency = true)]
         public async Task<ActionResult> Index(DailyBetsMetaModel metaModel)
         {
+            if (!IsValidProduct(metaModel.ProductCodes) || string.IsNullOrEmpty(metaModel.SelectedCurrency))
+            {
+                return JsonNet(new
+                {
+                    dataList = DBNull.Value,
+                    total = DBNull.Value,
+                    totalRows = 0
+                });
+            }
+
+            var licenseeName = SessionService.LicenseeSession.LicenseeName;
+            metaModel.SiteName = _siteNameList.GetValueOrDefault(licenseeName, defaultValue: licenseeName);
+            metaModel.CurrencyList = GenerateCurrencyListXml(metaModel.SelectedCurrency);
+
             var userSession = SessionService.UserSession;
             if (metaModel.IsExportExcel)
             {
@@ -66,14 +82,35 @@ namespace Fanex.Athena.Controllers.Report
             return JsonString(await _reportAPIClient.PostAsyncString("api/DailyBets/Index", metaModel, userSession.Language).ConfigureAwait(false));
         }
 
-        private static IList<ProductOption> GetFakeProductOptions(IEnumerable<Product> productList)
+        private string GenerateCurrencyListXml(string selectedCurrency)
         {
-            return productList.Select(i => new ProductOption
+            var selectedCurrencyList = selectedCurrency.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            var currencyList = SessionService.UserSession.CurrencyList
+               .Where(i => selectedCurrencyList.Contains(i.Key.ToString()))
+               .Select(i => $"<CR Id=\"{i.Key}\" Code=\"{i.Value}\" />");
+
+            return $"<ROOT>{string.Join("", currencyList)}</ROOT>";
+        }
+
+        private bool IsValidProduct(string selectedProduct)
+        {
+            if (string.IsNullOrEmpty(selectedProduct))
             {
-                Code = i.ProductCode,
-                Name = i.ProductCode.Equals(Product.CS, StringComparison.InvariantCultureIgnoreCase) ? "RNG" : i.ProductName,
-                Status = true
-            }).ToList();
+                return false;
+            }
+
+            var selectedProductList = selectedProduct.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            var productList = GetProductAccess().ProductList.Select(x => x.ProductCode);
+
+            return productList.Intersect(selectedProductList).Count() == selectedProductList.Count();
+        }
+
+        private ProductAccess GetProductAccess()
+        {
+            return ProductService.GetSingleWalletProductAccess(
+                SessionService.LicenseeSession.LicenseeId,
+                SessionService.UserSession.Language,
+                FunctionNames.SpecialLicenseeWinLoss);
         }
     }
 }

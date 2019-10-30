@@ -1,6 +1,4 @@
-﻿var merge = require('webpack-merge');
-var utils = require('./utils');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+﻿const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const devConfig = require('./webpack.react.dev.conf.js');
 var pathConfig = require('../config/pathReact');
@@ -14,6 +12,7 @@ const entry = {
     [`${cssPath}/vendor`]: pathConfig.cssPaths.layout,
 
     [`${jsPath}/report/dailybets`]: pathConfig.scriptPaths.dailybets,
+    [`${cssPath}/dailybets/index`]: pathConfig.cssPaths.dailybets,
 }
 
 const devByPageConfig = {

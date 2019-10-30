@@ -4,8 +4,24 @@ import AppContainer from './AppContainer.jsx';
 import { Provider } from 'react-redux';
 import reducer from '../reducers';
 import Store from '@jsroot/lib/store';
+import AppData from '@jsroot/lib/AppData';
 
-const defaultState = { ...window.initialState };
+const { productOptions, currencyList } = AppData;
+const selectedProduct = productOptions.map(x => x.Code).join(',');
+const selectedCurrency = currencyList.map(x => x.Key).join(',');
+
+const { today, ...initialState } = window.initialState;
+const requestParam = {
+  pageSize: 50,
+  pageIndex: 1,
+  sortBy: '',
+  sortOrder: '',
+  productCodes: selectedProduct,
+  selectedCurrency: selectedCurrency,
+  date: today
+}
+
+const defaultState = { ...initialState, requestParam };
 const store = Store.createStore(reducer, defaultState);
 
 const App = () => {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import MultipleSelect from '@9softstudio/react-multiselect';
@@ -6,14 +6,17 @@ import MultipleSelect from '@9softstudio/react-multiselect';
 import { ActionCreators } from '../actions';
 import LangHelper from '@jsroot/lib/langHelper';
 import AppData from '@jsroot/lib/AppData';
-import { DatePicker } from '@jsroot/components/date-range/index';
+import { DatePicker } from '@9softstudio/react-datepicker';
 
 export const FormFilter = (props) => {
     const { productOptions, currencyList } = AppData;
+    const { requestParam } = props;
+    const { productCodes, date, pageSize, pageIndex, sortBy, sortOrder } = requestParam;
 
-    const productChangeHandler = (currentItem, selectedItemsKey) => {
-        props.setSelectedProduct(selectedItemsKey)
-    }
+    const [selectedProduct, setSelectedProduct] = useState(productCodes);
+    const [selectedCurrency, setSelectedCurrency] = useState(requestParam.selectedCurrency);
+    const [selectedDate, setSelectedDate] = useState(date);
+
     const renderProductSelectList = () => {
         return (
             <MultipleSelect id="ProductList"
@@ -22,7 +25,7 @@ export const FormFilter = (props) => {
                 keyField={"Code"}
                 valueField={"Name"}
                 statusField={"Status"}
-                onChange={productChangeHandler} />
+                onChange={(currentItem, selectedItemsKey) => setSelectedProduct(selectedItemsKey)} />
         );
     }
 
@@ -34,38 +37,27 @@ export const FormFilter = (props) => {
                 keyField={"Key"}
                 valueField={"Value"}
                 statusField={"Status"}
-                onChange={(currentItem, selectedItemsKey) => props.setSelectedCurrency(selectedItemsKey)} />);
-    }
-
-    const handleChangeDate = (momentDate) => {
-        console.log(momentDate.format("DD/MM/YYYY"));
+                onChange={(currentItem, selectedItemsKey) => setSelectedCurrency(selectedItemsKey)} />);
     }
 
     const submit = (event) => {
         event.preventDefault();
-        const params = getParams();
-
-        console.log(params);
-        //props.setReportTitle(Service.getTitle(null, null, params.IsConvertAll ? params.BaseCurrencyName : ''));
-        props.setRequestParam(params);
-        //props.toggleLoader(true);
-        //props.getGridData(ApiUrl.RUNNING_DATA_URL, params);
-    }
-
-    const getParams = () => {
-        const { pageSize, sortBy, sortOrder } = props.requestParam;
-
-        return {
-            pageSize,
+        const params = {
+            pageSize: 50,
             pageIndex: 1,
-            productCodeList: props.selectedProduct,
-            currencyIdList: props.selectedCurrency,
             sortBy,
-            sortOrder
-        }
+            sortOrder,
+            selectedCurrency,
+            productCodes: selectedProduct,
+            date: selectedDate
+        };
+
+        props.setRequestParam(params);
     }
 
-    const { dateConstraint, selectedDate } = props;
+    const { dateConstraint } = props;
+    const dateParts = selectedDate.split('/');
+    const dateString = `${dateParts[1]}/${dateParts[0]}/${dateParts[2]}`;
 
     return (
         <div className="page-filter">
@@ -73,9 +65,9 @@ export const FormFilter = (props) => {
                 <div className="col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2">
                     <div className="form-group">
                         <label className="label-text">{LangHelper.getSingleResource("Date")}</label>
-                        <DatePicker
-                            minDate={dateConstraint.minDate} maxDate={dateConstraint.maxDate} date={selectedDate}
-                            onChange={handleChangeDate} />
+                        <DatePicker format="DD/MM/YYYY"
+                            minDate={dateConstraint.minDate} maxDate={dateConstraint.maxDate} date={dateString}
+                            onChange={(momentDate) => setSelectedDate(momentDate.format("MM/DD/YYYY"))} />
                     </div>
                 </div>
                 {
@@ -113,11 +105,12 @@ export const FormFilter = (props) => {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators(ActionCreators, dispatch);
+    const { setRequestParam } = ActionCreators;
+    return bindActionCreators({ setRequestParam }, dispatch);
 }
 function mapStateToProps(state) {
-    const { requestParam, selectedProduct, selectedCurrency, selectedDate, dateConstraint } = state;
-    return Object.assign({}, { requestParam, selectedProduct, selectedCurrency, selectedDate, dateConstraint });
+    const { requestParam, dateConstraint } = state;
+    return Object.assign({}, { requestParam, dateConstraint });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FormFilter);

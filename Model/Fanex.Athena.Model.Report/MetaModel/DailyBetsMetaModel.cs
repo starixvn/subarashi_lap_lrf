@@ -10,9 +10,9 @@ namespace Fanex.Athena.Model.Report.MetaModel
 
         public string ProductCodes { get; set; }
 
-        public string CurrencyList { get; set; }
+        public string SelectedCurrency { get; set; }
 
-        public string BaseCurrency { get; set; }
+        public string CurrencyList { get; set; }
 
         public int PageIndex { get; set; }
 

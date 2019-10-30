@@ -54,7 +54,8 @@ function generateConfig(environment) {
             [`${cssPath}/playeradmin/running-betlist`]: pathConfig.cssPaths.playerrunningbetlist,
             [`${cssPath}/playeradmin/betlimit`]: pathConfig.cssPaths.playerbetlimit,
             [`${cssPath}/playeradmin/playerwinloss`]: pathConfig.cssPaths.playerwinloss,
-            [`${cssPath}/playeradmin/statement`]: pathConfig.cssPaths.statement
+            [`${cssPath}/playeradmin/statement`]: pathConfig.cssPaths.statement,
+            [`${cssPath}/dailybets/index`]: pathConfig.cssPaths.dailybets,
         },
         output: {
             path: pathConfig.projectRoot,

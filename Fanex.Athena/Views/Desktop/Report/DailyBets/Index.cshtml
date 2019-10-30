@@ -7,20 +7,18 @@
 @model Fanex.Athena.Model.Report.ViewModel.DailyBetsViewModel
 @{
     var productOptions = Model.ProductOptions;
-    var selectedProductCode = string.Join(",", productOptions.Where(x => x.Status).Select(x => x.Code));
 
     var currencyList = Model.CurrencyList.Select(x => new { Key = x.Key, Value = x.Value, Status = true });
 
-    var selectedCurrency = string.Join(",", currencyList.Select(x => x.Key));
-
     var today = DateTime.Now.Date;
-    var minDate = today.AddMonths(-3).ToString("MM/dd/yyyy");
+    var minDate = today.AddMonths(-2).ToString("dd/MM/yyyy");
+    var maxDate = today.ToString("dd/MM/yyyy");
 
     var todayString = today.ToString("MM/dd/yyyy");
 }
 
 @section pagecss {
-    <link href="@Url.ContentLinkByEnv("/www/css/build/reactpages/licenseewlbytimezone/index.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.ContentLinkByEnv("/www/css/build/reactpages/dailybets/index.css")" rel="stylesheet" type="text/css" />
 
 }
 @section pagejs {
@@ -29,11 +27,9 @@
 
 @section globaljscode{
     window.initialState = {
-    selectedProduct: '@(selectedProductCode)',
-    selectedCurrency: '@(selectedCurrency)',
     isLoading: false,
-    selectedDate: '@todayString',
-    dateConstraint: {minDate: '@minDate', maxDate: '@todayString'}
+    today: '@todayString',
+    dateConstraint: {minDate: '@minDate', maxDate: '@maxDate'}
     }
     window._AppData = {
     productOptions: @Html.Raw(productOptions.ToJson()),
