@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import DataGrid from './DataGrid';
 import FormFilter from './FormFilter';
+import GridCaption from './GridCaption';
 import Loader from '@jsroot/components/Loader';
 import AppLayout from '@jsroot/layouts/AppLayout';
 
@@ -10,6 +11,7 @@ export const AppContainer = (props) => {
         <AppLayout>
             <Loader isLoading={props.isLoading} />
             <FormFilter />
+            <GridCaption />
             <DataGrid />
         </AppLayout>
     );
