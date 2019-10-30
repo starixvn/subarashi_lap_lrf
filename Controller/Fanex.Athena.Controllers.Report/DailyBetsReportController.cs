@@ -66,14 +66,14 @@ namespace Fanex.Athena.Controllers.Report
 
             var licenseeName = SessionService.LicenseeSession.LicenseeName;
             metaModel.SiteName = _siteNameList.GetValueOrDefault(licenseeName, defaultValue: licenseeName);
-            metaModel.CurrencyList = GenerateCurrencyListXml(metaModel.SelectedCurrency);
+            metaModel.CurrencyList = GetCurrencyList(metaModel.SelectedCurrency);
 
             var userSession = SessionService.UserSession;
             if (metaModel.IsExportExcel)
             {
                 //AssignMetaModelForExcel(metaModel);
                 const string FileName = "DailyBets.xls";
-                var stream = await _reportAPIClient.PostByteContentAsync("api/DailyBets/ExportExcel",
+                var stream = await _reportAPIClient.PostByteContentAsync("api/DailyBets/Export",
                     metaModel, userSession.Language).ConfigureAwait(false);
 
                 return File(stream, "application/octet-stream", FileName);
@@ -82,14 +82,13 @@ namespace Fanex.Athena.Controllers.Report
             return JsonString(await _reportAPIClient.PostAsyncString("api/DailyBets/Index", metaModel, userSession.Language).ConfigureAwait(false));
         }
 
-        private string GenerateCurrencyListXml(string selectedCurrency)
+        private IEnumerable<Currency> GetCurrencyList(string selectedCurrency)
         {
             var selectedCurrencyList = selectedCurrency.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-            var currencyList = SessionService.UserSession.CurrencyList
-               .Where(i => selectedCurrencyList.Contains(i.Key.ToString()))
-               .Select(i => $"<CR Id=\"{i.Key}\" Code=\"{i.Value}\" />");
 
-            return $"<ROOT>{string.Join("", currencyList)}</ROOT>";
+            return SessionService.UserSession.CurrencyList
+               .Where(i => selectedCurrencyList.Contains(i.Key.ToString()))
+               .Select(i => new Currency { ID = i.Key, Name = i.Value });
         }
 
         private bool IsValidProduct(string selectedProduct)

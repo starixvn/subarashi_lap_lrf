@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using Fanex.Athena.Model.Core.DataDomain;
 
 namespace Fanex.Athena.Model.Report.MetaModel
 {
@@ -12,7 +14,7 @@ namespace Fanex.Athena.Model.Report.MetaModel
 
         public string SelectedCurrency { get; set; }
 
-        public string CurrencyList { get; set; }
+        public IEnumerable<Currency> CurrencyList { get; set; }
 
         public int PageIndex { get; set; }
 
