@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using Fanex.Athena.Model.Core.MetaModel;
 
-    public class PlayerRunningBetListMetalModel : IMetalModelCustomerIdentity, IMetaModelAgent, IMetaModelCurrencyList
+    public class PlayerRunningBetListMetalModel : IMetalModelCustomerIdentity, IMetaModelAgent, IMetaModelDictionaryCurrencyList
     {
         private const int PageSizeMaximum = 2000;
 

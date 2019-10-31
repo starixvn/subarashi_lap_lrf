@@ -65,7 +65,7 @@ namespace Fanex.Athena.Controllers.Report
 
         [HttpPost]
         [ValidationWebRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
-        [AutoBindMetaModel(BindAgent = true)]
+        [AutoBindMetaModel(BindAgent = true, BindCurrencyList = true)]
         public async Task<ActionResult> Index(PlatformWinLossMetaModel metaModel)
         {
             return await ProcessRequest(metaModel);
@@ -85,8 +85,6 @@ namespace Fanex.Athena.Controllers.Report
         {
             const string FileName = "PlatformWinLossMember.xls";
 
-            metaModel.CurrencyList = SessionService.UserSession.CurrencyList
-                .Select(x => new Currency { ID = x.Key, Name = x.Value }).ToList();
             if (metaModel.IsExportExcel)
             {
                 var data = await _reportAPIClient.PostByteContentAsync("api/PlatformWinLoss/ExportMemberData", metaModel, language, MediaType.MsgPack).ConfigureAwait(false);

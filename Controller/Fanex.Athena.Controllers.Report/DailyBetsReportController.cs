@@ -57,6 +57,7 @@ namespace Fanex.Athena.Controllers.Report
         }
 
         [HttpPost]
+        [AutoBindMetaModel(BindCurrencyListByFilter = true)]
         public async Task<ActionResult> Index(DailyBetsMetaModel metaModel)
         {
             if (!IsValidProduct(metaModel.ProductCodes) || string.IsNullOrEmpty(metaModel.SelectedCurrency))
@@ -71,7 +72,6 @@ namespace Fanex.Athena.Controllers.Report
 
             var licenseeName = SessionService.LicenseeSession.LicenseeName;
             metaModel.SiteName = _siteNameList.GetValueOrDefault(licenseeName, defaultValue: licenseeName);
-            metaModel.CurrencyList = GetCurrencyList(metaModel.SelectedCurrency);
 
             var userSession = SessionService.UserSession;
             if (metaModel.IsExportExcel)
@@ -84,15 +84,6 @@ namespace Fanex.Athena.Controllers.Report
             }
 
             return JsonString(await _reportAPIClient.PostAsyncString("api/DailyBets/Index", metaModel, userSession.Language).ConfigureAwait(false));
-        }
-
-        private IEnumerable<Currency> GetCurrencyList(string selectedCurrency)
-        {
-            var selectedCurrencyList = selectedCurrency.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-
-            return SessionService.UserSession.CurrencyList
-               .Where(i => selectedCurrencyList.Contains(i.Key.ToString()))
-               .Select(i => new Currency { ID = i.Key, Name = i.Value });
         }
 
         private bool IsValidProduct(string selectedProduct)

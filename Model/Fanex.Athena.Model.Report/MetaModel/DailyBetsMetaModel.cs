@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using Fanex.Athena.Model.Core.DataDomain;
+using Fanex.Athena.Model.Core.MetaModel;
 
 namespace Fanex.Athena.Model.Report.MetaModel
 {
-    public class DailyBetsMetaModel
+    public class DailyBetsMetaModel : IMetaModelCurrencyList
     {
         public string SiteName { get; set; }
 

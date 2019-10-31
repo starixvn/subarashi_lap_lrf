@@ -5,7 +5,7 @@ using Fanex.Athena.Model.Core.MetaModel;
 
 namespace Fanex.Athena.Module.PlayerAdmin.MetaModel
 {
-    public class PlayerBtcSingleCustomerMetaModel : IMetaModelAgent, IMetaModelCurrencyList, IMetaModelValidation
+    public class PlayerBtcSingleCustomerMetaModel : IMetaModelAgent, IMetaModelDictionaryCurrencyList, IMetaModelValidation
     {
         private const int DefaultPageSize = 50;
 
