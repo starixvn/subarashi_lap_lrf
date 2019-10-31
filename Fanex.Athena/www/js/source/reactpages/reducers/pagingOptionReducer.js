@@ -9,7 +9,7 @@ const defaultPagingOption = {
 };
 
 export const pagingOption = createReducer(defaultPagingOption, {
-    [SET_PAGING_OPTION](state, action) {
-        return { ...action.data }
+    [SET_PAGING_OPTION](prevState, action) {
+        return { ...prevState, ...action.data }
     }
 });

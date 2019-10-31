@@ -808,6 +808,7 @@
     <Content Include="www\js\source\helpers\downloader.js" />
     <Content Include="www\js\source\pages\customer\customerlist\customerlist.gridoption.dormant.js" />
     <Content Include="www\js\source\pages\customer\customerlist\customerlist.service.dormant.js" />
+    <Content Include="www\js\source\reactpages\actions\pagingOptionAction.js" />
     <Content Include="www\js\source\reactpages\actions\reportTitleAction.js" />
     <Content Include="www\js\source\reactpages\actions\requestParamAction.js" />
     <Content Include="www\js\source\reactpages\actions\dateRangeAction.js" />
@@ -1154,6 +1155,7 @@
     <Content Include="www\js\source\reactpages\pages\subsidiaryperformance\components\__tests__\AppContainer.redux.test.js" />
     <Content Include="www\js\source\reactpages\pages\subsidiaryperformance\components\__tests__\AppContainer.test.js" />
     <Content Include="www\js\source\reactpages\reducers\convertAllReducer.js" />
+    <Content Include="www\js\source\reactpages\reducers\pagingOptionReducer.js" />
     <Content Include="www\js\source\reactpages\reducers\requestParamReducer.js" />
     <Content Include="www\js\source\reactpages\reducers\gridDataReducer.js" />
     <Content Include="www\js\source\reactpages\pages\exchangewl\actions\dataHandlerAction.js" />

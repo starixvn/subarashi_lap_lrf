@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../actions';
@@ -7,7 +7,6 @@ import { Table } from '@9softstudio/react-grid';
 import { renderHeader, renderDataSection } from '../lib/gridUtils';
 
 export const DataGrid = (props) => {
-    const [data, setData] = useState(null);
     const isFirstRun = useRef(true);
 
     useEffect(() => {
@@ -16,31 +15,18 @@ export const DataGrid = (props) => {
             return;
         }
 
-        const { getData, pagingOption, setPagingOption, toggleLoader } = props;
+        const { getData } = props;
         const param = { ...props.requestParam };
-
-        toggleLoader(true);
-        getData(param).then(response => {
-            const { dataList, total, totalRows } = response;
-            setData({ dataList, total });
-
-            const newPagingOption = { 
-                ...pagingOption, 
-                TotalItem: totalRows, 
-                PageSize: param.pageSize, 
-                PageIndex: param.pageIndex 
-            }
-            setPagingOption(newPagingOption);
-            toggleLoader(false);
-        })
+        getData(param);
     }, [props.requestParam])
 
-    if (!data) {
+    const { gridData } = props;
+    const { dataList, total } = gridData;
+    if (!dataList) {
         return null;
     }
 
     const { pagingOption, requestParam } = props;
-    const { dataList, total } = data;
 
     return (
         <Table minWidth={650}
@@ -58,12 +44,12 @@ export const DataGrid = (props) => {
 }
 
 function mapDispatchToProps(dispatch) {
-    const { setRequestParam, getData, setPagingOption, toggleLoader } = ActionCreators;
-    return bindActionCreators({ setRequestParam, getData, setPagingOption, toggleLoader }, dispatch);
+    const { setRequestParam, getData } = ActionCreators;
+    return bindActionCreators({ setRequestParam, getData }, dispatch);
 }
 function mapStateToProps(state) {
-    const { requestParam, pagingOption } = state;
-    return Object.assign({}, { requestParam, pagingOption });
+    const { requestParam, pagingOption, gridData } = state;
+    return Object.assign({}, { requestParam, pagingOption, gridData });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DataGrid);

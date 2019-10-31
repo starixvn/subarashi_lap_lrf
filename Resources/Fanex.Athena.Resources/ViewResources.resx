@@ -2538,4 +2538,16 @@
     <value>Match case e.g</value>
     <comment>112658</comment>
   </data>
+  <data name="Currencies" xml:space="preserve">
+    <value>Currencies</value>
+    <comment>122789</comment>
+  </data>
+  <data name="TotalTickets" xml:space="preserve">
+    <value>Total tickets</value>
+    <comment>122789</comment>
+  </data>
+  <data name="DailyBets" xml:space="preserve">
+    <value>Daily Bets</value>
+    <comment>122789</comment>
+  </data>
 </root>

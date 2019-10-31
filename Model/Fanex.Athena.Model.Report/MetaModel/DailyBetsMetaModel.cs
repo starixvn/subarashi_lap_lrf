@@ -25,5 +25,7 @@ namespace Fanex.Athena.Model.Report.MetaModel
         public string SortOrder { get; set; }
 
         public bool IsExportExcel { get; set; }
+
+        public string BaseCurrency => "USD";
     }
 }

@@ -1,32 +1,46 @@
-import * as loaderAction from '@jsroot/actions/loaderAction';
+import { toggleLoader } from '@jsroot/actions/loaderAction';
 import * as requestParamAction from '@jsroot/actions/requestParamAction';
 import * as reportTitleAction from '@jsroot/actions/reportTitleAction';
-import * as pagingOptionAction from '@jsroot/actions/pagingOptionAction';
+import { setPagingOption } from '@jsroot/actions/pagingOptionAction';
+import { setGridData } from '@jsroot/actions/gridDataAction';
 
 import Site from '@jsroot/lib/site';
 import DataService from '@jsroot/lib/DataService';
 
+const emptyData = { dataList: [], total: {} };
+const defaultPaingOption = { TotalItem: 0 };
+
+const dispatchResult = (dispatch, data, pagingOption) => {
+    dispatch(setGridData(data));
+    dispatch(setPagingOption(pagingOption));
+    dispatch(toggleLoader(false));
+}
+
 const apiUrl = Site.resolveClientUrl('DailyBetsReport/Index');
-const getData = (param) => () => {
-    return DataService.postData(apiUrl, param)
+const getData = (param) => (dispatch) => {
+    dispatch(toggleLoader(true));
+
+    DataService.postData(apiUrl, param)
         .then(response => {
             const { dataList, total, totalRows } = response.data;
-
-            return {
+            const data = {
                 dataList: dataList || [],
-                total: total || {},
-                totalRows
+                total: total || {}
             };
+            const newPagingOption = {
+                TotalItem: totalRows,
+                PageSize: param.pageSize,
+                PageIndex: param.pageIndex
+            }
+            dispatchResult(dispatch, data, newPagingOption);
         })
         .catch(error => {
             console.log(error.message);
-            return { dataList: [], total: {}, totalRows: 0 };
+            dispatchResult(dispatch, {...emptyData }, {...defaultPaingOption });
         });
 }
 
 export const ActionCreators = Object.assign({},
-    loaderAction,
     requestParamAction,
-    reportTitleAction,
-    pagingOptionAction, { getData }
+    reportTitleAction, { getData }
 );

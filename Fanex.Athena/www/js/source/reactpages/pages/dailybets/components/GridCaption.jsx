@@ -21,11 +21,12 @@ const buildCurrencytext = (selectedCurrency) => {
             return result;
         }, []).join(', ');
 
-        return (selectedCurrencyList.length > 1 ? 'Currencies: ' : 'Currency: ') + selectedCurrencyText;
+        const resourceKey = selectedCurrencyList.length > 1 ? 'Currencies' : 'Currency';
 
+        return `${LangHelper.getSingleResource(resourceKey)}: ` + selectedCurrencyText;
     }
 
-    return 'All Currencies';
+    return LangHelper.getSingleResource('AllCurrencies');
 }
 
 export const GridCaption = (props) => {
@@ -43,9 +44,9 @@ export const GridCaption = (props) => {
 
         const dateString = getFormattedDate(date);
         const currencyText = buildCurrencytext(selectedCurrency);
-        const totalTicketText = `Total tickets: ${NumberFormat.format(pagingOption.TotalItem)}`;
+        const totalTicketText = `${LangHelper.getSingleResource('TotalTickets')}: ${NumberFormat.format(pagingOption.TotalItem)}`;
 
-        const content = `Daily Bets, ${dateString} - ${currencyText} - ${totalTicketText}`;
+        const content = `${LangHelper.getSingleResource('DailyBets')}, ${dateString} - ${currencyText} - ${totalTicketText}`;
         setContent(content);
     }, [props.requestParam, props.pagingOption]);
 
