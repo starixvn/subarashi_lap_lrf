@@ -8,14 +8,12 @@ namespace Fanex.Athena.Controllers.BetList
 {
     #region Using
 
-    using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
 
     using DataAccess.Core.Configuration.Interfaces;
 
     using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
 
     using Model.BetList.MetaModel;
@@ -48,14 +46,10 @@ namespace Fanex.Athena.Controllers.BetList
 
         [HttpGet]
         [ValidationWebRequest]
+        [AutoBindMetaModel(BindAgent = true)]
         public async Task<ActionResult> Detail(SystemParlayDetailMetaModel metaModel)
         {
-            var balanceUp = GetBalanceUp();
-            metaModel.BalanceUpDay = DateTime.SpecifyKind(balanceUp.BalanceUpDay.Date, DateTimeKind.Utc);
-            metaModel.MoveBetsDay = DateTime.SpecifyKind(balanceUp.MoveBetsDay.Date, DateTimeKind.Utc);
             var userSession = SessionService.UserSession;
-            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId);
-
             var data = await BetListApiClient.PostAsyncString("/SystemParlayBetList/Detail", metaModel, userSession.Language).ConfigureAwait(false);
 
             var viewModel = new SystemParlayDetailViewModel
