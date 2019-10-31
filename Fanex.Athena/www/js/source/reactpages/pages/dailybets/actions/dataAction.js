@@ -44,9 +44,7 @@ export const exportExcel = (param) => (dispatch) => {
 
     DataService.getFile(apiUrl, param)
         .then(response => {
-            const NoContentStatusCode = 204;
-
-            if (response.status === NoContentStatusCode) {
+            if (response.data.size === 0) {
                 alert(LangHelper.getSingleResource("NoInfo"));
             } else {
                 Site.downloadFile(response.data, 'DailyBetsReport.zip');

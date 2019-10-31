@@ -5675,9 +5675,7 @@ var exportExcel = function exportExcel(param) {
   return function (dispatch) {
     dispatch(Object(_jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_0__["toggleLoader"])(true));
     _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_4__["default"].getFile(apiUrl, param).then(function (response) {
-      var NoContentStatusCode = 204;
-
-      if (response.status === NoContentStatusCode) {
+      if (response.data.size === 0) {
         alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource("NoInfo"));
       } else {
         _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_3__["default"].downloadFile(response.data, 'DailyBetsReport.zip');
