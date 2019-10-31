@@ -612,9 +612,9 @@ namespace Fanex.Athena.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Daily Bets.
         /// </summary>
-        public static string Menu_82 {
+        public static string Menu_81 {
             get {
-                return ResourceManager.GetString("Menu_82", resourceCulture);
+                return ResourceManager.GetString("Menu_81", resourceCulture);
             }
         }
         
