@@ -5605,27 +5605,26 @@ function () {
 
 /***/ }),
 
-/***/ "./www/js/source/reactpages/pages/dailybets/actions/index.js":
-/*!*******************************************************************!*\
-  !*** ./www/js/source/reactpages/pages/dailybets/actions/index.js ***!
-  \*******************************************************************/
-/*! exports provided: ActionCreators */
+/***/ "./www/js/source/reactpages/pages/dailybets/actions/dataAction.js":
+/*!************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/dailybets/actions/dataAction.js ***!
+  \************************************************************************/
+/*! exports provided: getData, exportExcel */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ActionCreators", function() { return ActionCreators; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getData", function() { return getData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "exportExcel", function() { return exportExcel; });
 /* harmony import */ var _jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/actions/loaderAction */ "./www/js/source/reactpages/actions/loaderAction.js");
-/* harmony import */ var _jsroot_actions_requestParamAction__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/actions/requestParamAction */ "./www/js/source/reactpages/actions/requestParamAction.js");
-/* harmony import */ var _jsroot_actions_reportTitleAction__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/actions/reportTitleAction */ "./www/js/source/reactpages/actions/reportTitleAction.js");
-/* harmony import */ var _jsroot_actions_pagingOptionAction__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/actions/pagingOptionAction */ "./www/js/source/reactpages/actions/pagingOptionAction.js");
-/* harmony import */ var _jsroot_actions_gridDataAction__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/actions/gridDataAction */ "./www/js/source/reactpages/actions/gridDataAction.js");
-/* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
-/* harmony import */ var _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/lib/DataService */ "./www/js/source/reactpages/lib/DataService.js");
+/* harmony import */ var _jsroot_actions_pagingOptionAction__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/actions/pagingOptionAction */ "./www/js/source/reactpages/actions/pagingOptionAction.js");
+/* harmony import */ var _jsroot_actions_gridDataAction__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/actions/gridDataAction */ "./www/js/source/reactpages/actions/gridDataAction.js");
+/* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
+/* harmony import */ var _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/DataService */ "./www/js/source/reactpages/lib/DataService.js");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -5642,17 +5641,16 @@ var defaultPaingOption = {
 };
 
 var dispatchResult = function dispatchResult(dispatch, data, pagingOption) {
-  dispatch(Object(_jsroot_actions_gridDataAction__WEBPACK_IMPORTED_MODULE_4__["setGridData"])(data));
-  dispatch(Object(_jsroot_actions_pagingOptionAction__WEBPACK_IMPORTED_MODULE_3__["setPagingOption"])(pagingOption));
+  dispatch(Object(_jsroot_actions_gridDataAction__WEBPACK_IMPORTED_MODULE_2__["setGridData"])(data));
+  dispatch(Object(_jsroot_actions_pagingOptionAction__WEBPACK_IMPORTED_MODULE_1__["setPagingOption"])(pagingOption));
   dispatch(Object(_jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_0__["toggleLoader"])(false));
 };
 
-var apiUrl = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_5__["default"].resolveClientUrl('DailyBetsReport/Index');
-
+var apiUrl = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_3__["default"].resolveClientUrl('DailyBetsReport/Index');
 var getData = function getData(param) {
   return function (dispatch) {
     dispatch(Object(_jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_0__["toggleLoader"])(true));
-    _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_6__["default"].postData(apiUrl, param).then(function (response) {
+    _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_4__["default"].postData(apiUrl, param).then(function (response) {
       var _response$data = response.data,
           dataList = _response$data.dataList,
           total = _response$data.total,
@@ -5673,10 +5671,45 @@ var getData = function getData(param) {
     });
   };
 };
+var exportExcel = function exportExcel(param) {
+  return function (dispatch) {
+    dispatch(Object(_jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_0__["toggleLoader"])(true));
+    _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_4__["default"].getFile(apiUrl, param).then(function (response) {
+      var NoContentStatusCode = 204;
 
-var ActionCreators = Object.assign({}, _jsroot_actions_requestParamAction__WEBPACK_IMPORTED_MODULE_1__, _jsroot_actions_reportTitleAction__WEBPACK_IMPORTED_MODULE_2__, {
-  getData: getData
-});
+      if (response.status === NoContentStatusCode) {
+        alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource("NoInfo"));
+      } else {
+        _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_3__["default"].downloadFile(response.data, 'DailyBetsReport.zip');
+      }
+
+      dispatch(Object(_jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_0__["toggleLoader"])(true));
+    }).catch(function (error) {
+      console.log(error.message);
+      dispatch(Object(_jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_0__["toggleLoader"])(true));
+    });
+  };
+};
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/dailybets/actions/index.js":
+/*!*******************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/dailybets/actions/index.js ***!
+  \*******************************************************************/
+/*! exports provided: ActionCreators */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ActionCreators", function() { return ActionCreators; });
+/* harmony import */ var _jsroot_actions_requestParamAction__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/actions/requestParamAction */ "./www/js/source/reactpages/actions/requestParamAction.js");
+/* harmony import */ var _jsroot_actions_reportTitleAction__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/actions/reportTitleAction */ "./www/js/source/reactpages/actions/reportTitleAction.js");
+/* harmony import */ var _dataAction__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./dataAction */ "./www/js/source/reactpages/pages/dailybets/actions/dataAction.js");
+
+
+
+var ActionCreators = Object.assign({}, _jsroot_actions_requestParamAction__WEBPACK_IMPORTED_MODULE_0__, _jsroot_actions_reportTitleAction__WEBPACK_IMPORTED_MODULE_1__, _dataAction__WEBPACK_IMPORTED_MODULE_2__);
 
 /***/ }),
 
@@ -5899,9 +5932,8 @@ var FormFilter = function FormFilter(props) {
     return setSelectedCurrency(selectedItemsKey);
   };
 
-  var submit = function submit(event) {
-    event.preventDefault();
-    var params = {
+  var buildParam = function buildParam() {
+    return {
       pageSize: pageSize,
       pageIndex: 1,
       sortBy: sortBy,
@@ -5910,7 +5942,19 @@ var FormFilter = function FormFilter(props) {
       productCodes: selectedProduct,
       date: selectedDate
     };
+  };
+
+  var submit = function submit(event) {
+    event.preventDefault();
+    var params = buildParam();
     props.setRequestParam(params);
+  };
+
+  var exportExcel = function exportExcel(event) {
+    event.preventDefault();
+    var params = buildParam();
+    params.isExportExcel = true;
+    props.exportExcel(params);
   };
 
   var productOptions = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_5__["default"].productOptions,
@@ -5959,13 +6003,21 @@ var FormFilter = function FormFilter(props) {
     className: "btn btn-submit",
     disabled: !isValidParam,
     onClick: submit
-  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource("Submit")))))));
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource("Submit"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "caret-block"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "icon-excel right",
+    onClick: exportExcel,
+    title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('ExportToExcel')
+  }))));
 };
 
 function mapDispatchToProps(dispatch) {
-  var setRequestParam = _actions__WEBPACK_IMPORTED_MODULE_3__["ActionCreators"].setRequestParam;
+  var setRequestParam = _actions__WEBPACK_IMPORTED_MODULE_3__["ActionCreators"].setRequestParam,
+      exportExcel = _actions__WEBPACK_IMPORTED_MODULE_3__["ActionCreators"].exportExcel;
   return Object(redux__WEBPACK_IMPORTED_MODULE_2__["bindActionCreators"])({
-    setRequestParam: setRequestParam
+    setRequestParam: setRequestParam,
+    exportExcel: exportExcel
   }, dispatch);
 }
 
@@ -6174,7 +6226,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 
 var headerText = {
-  systemId: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('SystemId'),
+  playerName: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('PlayerName'),
   currency: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Currency'),
   refNo: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('RefNo'),
   transTime: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('TransTime'),
@@ -6261,7 +6313,7 @@ var renderHeader = function renderHeader() {
     colWidth: 40
   }, "#"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
     colWidth: 100
-  }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].systemId), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
+  }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].playerName), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
     colWidth: 50
   }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].currency), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
     colWidth: 100
@@ -6301,7 +6353,7 @@ var buildDataRow = function buildDataRow(dataItem) {
       currencyName = dataItem.currencyName,
       refNo = dataItem.refNo,
       transTimeString = dataItem.transTimeString,
-      productCode = dataItem.productCode,
+      productName = dataItem.productName,
       betType = dataItem.betType,
       turnover = dataItem.turnover,
       winLoss = dataItem.winLoss,
@@ -6316,7 +6368,7 @@ var buildDataRow = function buildDataRow(dataItem) {
     className: "center-align"
   }, refNo), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
     className: "center-align"
-  }, transTimeString), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], null, productCode), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], null, betType), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
+  }, transTimeString), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], null, productName), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], null, betType), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
     className: "right-align"
   }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_3__["default"].formatDecimal(turnover)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
     className: "right-align"

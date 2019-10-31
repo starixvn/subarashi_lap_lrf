@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 10/31/2019 9:55:15 AM
+// Generated at: 10/31/2019 2:18:13 PM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -609,6 +609,7 @@ window._language_en_US = {
   PlatformWinLossTitle: "Platform Win Loss - {0} --&gt; {1} - {2} - {3} - {4}",
   Player: "Player",
   PlayerAdminUpdateFailedMsg: "Please try again!",
+  PlayerName: "Player Name",
   PlayerStatementSupportMonths: "Support data up to 18 months",
   PreGame: "Pre Game",
   Prev: "Prev",
