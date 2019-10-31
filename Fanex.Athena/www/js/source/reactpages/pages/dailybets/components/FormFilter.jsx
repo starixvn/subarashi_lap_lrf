@@ -20,23 +20,32 @@ export const FormFilter = (props) => {
     const handleChangeProduct = (currentItem, selectedItemsKey) => setSelectedProduct(selectedItemsKey);
     const handleChangeCurrency = (currentItem, selectedItemsKey) => setSelectedCurrency(selectedItemsKey);
 
+    const buildParam = () => ({
+        pageSize: pageSize,
+        pageIndex: 1,
+        sortBy,
+        sortOrder,
+        selectedCurrency,
+        productCodes: selectedProduct,
+        date: selectedDate
+    });
+
     const submit = (event) => {
         event.preventDefault();
-        const params = {
-            pageSize: pageSize,
-            pageIndex: 1,
-            sortBy,
-            sortOrder,
-            selectedCurrency,
-            productCodes: selectedProduct,
-            date: selectedDate
-        };
+        const params = buildParam();
 
         props.setRequestParam(params);
     }
 
-    const { productOptions, currencyList } = AppData;
+    const exportExcel = (event) => {
+        event.preventDefault();
+        const params = buildParam();
+        params.isExportExcel = true;
 
+        props.exportExcel(params);
+    }
+
+    const { productOptions, currencyList } = AppData;
     const { dateConstraint } = props;
     const dateString = getFormattedDate(selectedDate);
 
@@ -83,14 +92,18 @@ export const FormFilter = (props) => {
                         </div>
                     </div>
                 </div>
+
+                <div className="caret-block">
+                    <i className="icon-excel right" onClick={exportExcel} title={LangHelper.getSingleResource('ExportToExcel')}></i>
+                </div>
             </div>
         </div>
     )
 }
 
 function mapDispatchToProps(dispatch) {
-    const { setRequestParam } = ActionCreators;
-    return bindActionCreators({ setRequestParam }, dispatch);
+    const { setRequestParam, exportExcel } = ActionCreators;
+    return bindActionCreators({ setRequestParam, exportExcel }, dispatch);
 }
 function mapStateToProps(state) {
     const { requestParam, dateConstraint } = state;

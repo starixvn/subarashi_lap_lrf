@@ -7,7 +7,7 @@ export const renderHeader = () => {
     return (
         <HeaderRow style={{ height: 32 }}>
             <HeaderCell colWidth={40}>#</HeaderCell>
-            <HeaderCell colWidth={100}>{headerText.systemId}</HeaderCell>
+            <HeaderCell colWidth={100}>{headerText.playerName}</HeaderCell>
             <HeaderCell colWidth={50}>{headerText.currency}</HeaderCell>
             <HeaderCell colWidth={100}>{headerText.refNo}</HeaderCell>
             <HeaderCell colWidth={100}>{headerText.transTime}</HeaderCell>
@@ -34,7 +34,7 @@ export const renderDataSection = (dataList, isTotalRow) => {
 }
 
 const buildDataRow = (dataItem) => {
-    const { index, playerName, currencyName, refNo, transTimeString, productCode, betType, turnover, winLoss, status } = dataItem;
+    const { index, playerName, currencyName, refNo, transTimeString, productName, betType, turnover, winLoss, status } = dataItem;
 
     return (
         <Row key={index}>
@@ -43,7 +43,7 @@ const buildDataRow = (dataItem) => {
             <Cell className="center-align">{currencyName}</Cell>
             <Cell className="center-align">{refNo}</Cell>
             <Cell className="center-align">{transTimeString}</Cell>
-            <Cell>{productCode}</Cell>
+            <Cell>{productName}</Cell>
             <Cell>{betType}</Cell>
             <Cell className="right-align">{NumberFormat.formatDecimal(turnover)}</Cell>
             <Cell className="right-align">{NumberFormat.formatDecimal(winLoss)}</Cell>

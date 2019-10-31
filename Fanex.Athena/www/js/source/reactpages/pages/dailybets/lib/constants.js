@@ -1,7 +1,7 @@
 import LangHelper from '@jsroot/lib/langHelper';
 
 export const headerText = {
-    systemId: LangHelper.getSingleResource('SystemId'),
+    playerName: LangHelper.getSingleResource('PlayerName'),
     currency: LangHelper.getSingleResource('Currency'),
     refNo: LangHelper.getSingleResource('RefNo'),
     transTime: LangHelper.getSingleResource('TransTime'),
