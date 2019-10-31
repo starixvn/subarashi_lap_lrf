@@ -5,6 +5,7 @@ import { ActionCreators } from '../actions';
 
 import { Table } from '@9softstudio/react-grid';
 import { renderHeader, renderDataSection } from '../lib/gridUtils';
+import NoDataTitle from '@jsroot/components/NoDataTitle';
 
 export const DataGrid = (props) => {
     const isFirstRun = useRef(true);
@@ -24,6 +25,10 @@ export const DataGrid = (props) => {
     const { dataList, total } = gridData;
     if (!dataList) {
         return null;
+    }
+
+    if (!dataList.length) {
+        return <NoDataTitle />;
     }
 
     const { pagingOption, requestParam } = props;

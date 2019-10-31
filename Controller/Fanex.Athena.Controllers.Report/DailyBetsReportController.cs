@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Fanex.Athena.Extension.Utility;
+using Fanex.Athena.Model.Auth.DataDomain;
+using Fanex.Athena.Model.Core.Constants;
 using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Model.Core.DTO.Common;
 using Fanex.Athena.Model.Core.MetaModel.Product;
@@ -12,9 +14,11 @@ using Fanex.Athena.Model.Report.ViewModel;
 using Fanex.Athena.Service.Core.Common.Interfaces;
 using Fanex.Athena.Service.Core.Users.Interfaces;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
+using Fanex.Athena.Web.ActionFilter;
 
 namespace Fanex.Athena.Controllers.Report
 {
+    [FunctionAuthorization(PermissionKeys.ReportDailyBets)]
     public class DailyBetsReportController : ReportBaseController
     {
         private readonly IReportAPIClient _reportAPIClient;
@@ -45,7 +49,8 @@ namespace Fanex.Athena.Controllers.Report
                     Code = i.ProductCode,
                     Name = i.ProductCode.Equals(Product.CS, StringComparison.InvariantCultureIgnoreCase) ? "RNG" : i.ProductName,
                     Status = true
-                }).ToList()
+                }).ToList(),
+                TodayByGmt8 = DateTimeConverter.ToGMT(DateTime.Now, TimeZoneId.GmtPlus8)
             };
 
             return View("~/Views/Desktop/Report/DailyBets/Index.cshtml", viewModel);
@@ -71,7 +76,6 @@ namespace Fanex.Athena.Controllers.Report
             var userSession = SessionService.UserSession;
             if (metaModel.IsExportExcel)
             {
-                //AssignMetaModelForExcel(metaModel);
                 const string FileName = "DailyBets.xls";
                 var stream = await _reportAPIClient.PostByteContentAsync("api/DailyBets/Export",
                     metaModel, userSession.Language).ConfigureAwait(false);

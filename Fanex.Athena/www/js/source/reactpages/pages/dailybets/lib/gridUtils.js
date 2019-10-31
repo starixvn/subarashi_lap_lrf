@@ -59,6 +59,7 @@ const buildTotalRow = (dataItem) => {
             <Cell className="right-align" colSpan="7">Total In USD</Cell>
             <Cell className="right-align">{NumberFormat.formatDecimal(turnover)}</Cell>
             <Cell className="right-align">{NumberFormat.formatDecimal(winLoss)}</Cell>
+            <Cell></Cell>
         </Row>
     )
 }

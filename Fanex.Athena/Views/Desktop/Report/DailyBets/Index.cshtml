@@ -10,8 +10,8 @@
 
     var currencyList = Model.CurrencyList.Select(x => new { Key = x.Key, Value = x.Value, Status = true });
 
-    var today = DateTime.Now.Date;
-    var minDate = today.AddMonths(-2).ToString("dd/MM/yyyy");
+    var today = Model.TodayByGmt8;
+    var minDate = Model.MinDate.ToString("dd/MM/yyyy");
     var maxDate = today.ToString("dd/MM/yyyy");
 
     var todayString = today.ToString("MM/dd/yyyy");
