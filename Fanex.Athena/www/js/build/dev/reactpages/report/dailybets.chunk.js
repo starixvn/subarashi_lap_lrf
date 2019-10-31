@@ -5903,18 +5903,19 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var FormFilter = function FormFilter(props) {
   var requestParam = props.requestParam;
-  var productCodes = requestParam.productCodes,
+  var productCodeList = requestParam.productCodeList,
+      currencyIdList = requestParam.currencyIdList,
       date = requestParam.date,
       pageSize = requestParam.pageSize,
       sortBy = requestParam.sortBy,
       sortOrder = requestParam.sortOrder;
 
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(productCodes),
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(productCodeList),
       _useState2 = _slicedToArray(_useState, 2),
       selectedProduct = _useState2[0],
       setSelectedProduct = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(requestParam.selectedCurrency),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(currencyIdList),
       _useState4 = _slicedToArray(_useState3, 2),
       selectedCurrency = _useState4[0],
       setSelectedCurrency = _useState4[1];
@@ -5938,8 +5939,8 @@ var FormFilter = function FormFilter(props) {
       pageIndex: 1,
       sortBy: sortBy,
       sortOrder: sortOrder,
-      selectedCurrency: selectedCurrency,
-      productCodes: selectedProduct,
+      currencyIdList: selectedCurrency,
+      productCodeList: selectedProduct,
       date: selectedDate
     };
   };
@@ -6192,8 +6193,8 @@ var requestParam = {
   pageIndex: 1,
   sortBy: '',
   sortOrder: '',
-  productCodes: selectedProduct,
-  selectedCurrency: selectedCurrency,
+  productCodeList: selectedProduct,
+  currencyIdList: selectedCurrency,
   date: today
 };
 
