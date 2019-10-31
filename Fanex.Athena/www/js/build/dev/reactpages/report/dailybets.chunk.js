@@ -5683,10 +5683,10 @@ var exportExcel = function exportExcel(param) {
         _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_3__["default"].downloadFile(response.data, 'DailyBetsReport.zip');
       }
 
-      dispatch(Object(_jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_0__["toggleLoader"])(true));
+      dispatch(Object(_jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_0__["toggleLoader"])(false));
     }).catch(function (error) {
       console.log(error.message);
-      dispatch(Object(_jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_0__["toggleLoader"])(true));
+      dispatch(Object(_jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_0__["toggleLoader"])(false));
     });
   };
 };
@@ -6111,9 +6111,9 @@ var GridCaption = function GridCaption(props) {
     var requestParam = props.requestParam,
         pagingOption = props.pagingOption;
     var date = requestParam.date,
-        selectedCurrency = requestParam.selectedCurrency;
+        currencyIdList = requestParam.currencyIdList;
     var dateString = Object(_lib_utils__WEBPACK_IMPORTED_MODULE_3__["getFormattedDate"])(date);
-    var currencyText = buildCurrencytext(selectedCurrency);
+    var currencyText = buildCurrencytext(currencyIdList);
     var totalTicketText = "".concat(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource('TotalTickets'), ": ").concat(_jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_6__["default"].format(pagingOption.TotalItem));
     var content = "".concat(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource('DailyBets'), ", ").concat(dateString, " - ").concat(currencyText, " - ").concat(totalTicketText);
     setContent(content);

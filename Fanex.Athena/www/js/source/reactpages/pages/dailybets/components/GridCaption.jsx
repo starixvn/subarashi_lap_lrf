@@ -40,10 +40,10 @@ export const GridCaption = (props) => {
         }
 
         const { requestParam, pagingOption } = props;
-        const { date, selectedCurrency } = requestParam;
+        const { date, currencyIdList } = requestParam;
 
         const dateString = getFormattedDate(date);
-        const currencyText = buildCurrencytext(selectedCurrency);
+        const currencyText = buildCurrencytext(currencyIdList);
         const totalTicketText = `${LangHelper.getSingleResource('TotalTickets')}: ${NumberFormat.format(pagingOption.TotalItem)}`;
 
         const content = `${LangHelper.getSingleResource('DailyBets')}, ${dateString} - ${currencyText} - ${totalTicketText}`;

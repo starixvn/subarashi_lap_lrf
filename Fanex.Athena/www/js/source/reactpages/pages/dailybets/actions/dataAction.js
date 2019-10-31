@@ -51,10 +51,10 @@ export const exportExcel = (param) => (dispatch) => {
             } else {
                 Site.downloadFile(response.data, 'DailyBetsReport.zip');
             }
-            dispatch(toggleLoader(true));
+            dispatch(toggleLoader(false));
         })
         .catch(error => {
             console.log(error.message);
-            dispatch(toggleLoader(true));
+            dispatch(toggleLoader(false));
         });
 }
