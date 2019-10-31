@@ -16,8 +16,8 @@ const requestParam = {
   pageIndex: 1,
   sortBy: '',
   sortOrder: '',
-  productCodes: selectedProduct,
-  selectedCurrency: selectedCurrency,
+  productCodeList: selectedProduct,
+  currencyIdList: selectedCurrency,
   date: today
 }
 

@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using Fanex.Athena.Extension.Utility;
 using Fanex.Athena.Model.Auth.DataDomain;
-using Fanex.Athena.Model.Core.Constants;
 using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Model.Core.DTO.Common;
 using Fanex.Athena.Model.Core.MetaModel.Product;
@@ -23,24 +21,26 @@ namespace Fanex.Athena.Controllers.Report
     {
         private readonly IReportAPIClient _reportAPIClient;
 
-        private readonly IDictionary<string, string> _siteNameList = new Dictionary<string, string>
-        {
-            { "IvoryBet", "ivorysport" }
-        };
+        private readonly ILicenseeSettingService _licenseeSettingService;
 
         public DailyBetsReportController(
             ILanguageService languageService,
             ISessionService sessionService,
             IProductService productService,
-            IReportAPIClient reportAPIClient) : base(languageService, sessionService, productService)
+            ILicenseeSettingService licenseeSettingService,
+            IReportAPIClient reportAPIClient) : base(languageService, sessionService, productService, licenseeSettingService)
         {
             _reportAPIClient = reportAPIClient;
+            _licenseeSettingService = licenseeSettingService;
         }
 
         [HttpGet]
         public ActionResult Index()
         {
             var userSession = SessionService.UserSession;
+            var licenseeSetting = LicenseeSettingService.GetFakeLicenseeSetting(SessionService.LicenseeSession.LicenseeName);
+            var today = licenseeSetting.TimeZone.HasValue ? DateTime.UtcNow.AddHours(licenseeSetting.TimeZone.Value) : DateTime.Now;
+
             var viewModel = new DailyBetsViewModel
             {
                 CurrencyList = userSession.CurrencyList,
@@ -50,25 +50,18 @@ namespace Fanex.Athena.Controllers.Report
                     Name = i.ProductCode.Equals(Product.CS, StringComparison.InvariantCultureIgnoreCase) ? "RNG" : i.ProductName,
                     Status = true
                 }).ToList(),
-                TodayByGmt8 = DateTimeConverter.ToGMT(DateTime.Now, TimeZoneId.GmtPlus8)
+                TodayByGmt8 = today,
+                MinDate = today.AddMonths(-licenseeSetting.LimitRecentMonths)
             };
 
             return View("~/Views/Desktop/Report/DailyBets/Index.cshtml", viewModel);
         }
 
         [HttpPost]
+        [ValidationWebRequest(IsValidCurrencyList = true, IsValidProductCodeList = true, IsSingleWallet = true, FunctionConfig = FunctionNames.DailyBets, ObjectName = "metaModel")]
         [AutoBindMetaModel(BindCurrencyListByFilter = true)]
         public async Task<ActionResult> Index(DailyBetsMetaModel metaModel)
         {
-            if (!IsValidProduct(metaModel.ProductCodes) || string.IsNullOrEmpty(metaModel.SelectedCurrency))
-            {
-                return JsonNet(new
-                {
-                    dataList = DBNull.Value,
-                    total = DBNull.Value,
-                    totalRows = 0
-                });
-            }
 
             var licenseeName = SessionService.LicenseeSession.LicenseeName;
             metaModel.SiteName = _siteNameList.GetValueOrDefault(licenseeName, defaultValue: licenseeName);

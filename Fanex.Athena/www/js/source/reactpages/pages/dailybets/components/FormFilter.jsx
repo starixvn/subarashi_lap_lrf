@@ -11,10 +11,10 @@ import { renderProductSelectList, renderCurrencySelectList } from '../lib/formFi
 
 export const FormFilter = (props) => {
     const { requestParam } = props;
-    const { productCodes, date, pageSize, sortBy, sortOrder } = requestParam;
+    const { productCodeList, currencyIdList, date, pageSize, sortBy, sortOrder } = requestParam;
 
-    const [selectedProduct, setSelectedProduct] = useState(productCodes);
-    const [selectedCurrency, setSelectedCurrency] = useState(requestParam.selectedCurrency);
+    const [selectedProduct, setSelectedProduct] = useState(productCodeList);
+    const [selectedCurrency, setSelectedCurrency] = useState(currencyIdList);
     const [selectedDate, setSelectedDate] = useState(date);
 
     const handleChangeProduct = (currentItem, selectedItemsKey) => setSelectedProduct(selectedItemsKey);
@@ -25,8 +25,8 @@ export const FormFilter = (props) => {
         pageIndex: 1,
         sortBy,
         sortOrder,
-        selectedCurrency,
-        productCodes: selectedProduct,
+        currencyIdList: selectedCurrency,
+        productCodeList: selectedProduct,
         date: selectedDate
     });
 

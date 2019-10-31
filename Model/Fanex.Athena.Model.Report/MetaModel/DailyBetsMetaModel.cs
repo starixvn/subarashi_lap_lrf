@@ -5,15 +5,15 @@ using Fanex.Athena.Model.Core.MetaModel;
 
 namespace Fanex.Athena.Model.Report.MetaModel
 {
-    public class DailyBetsMetaModel : IMetaModelCurrencyList
+    public class DailyBetsMetaModel : IMetaModelProductCodeList, IMetaModelCurrencyIdList, IMetaModelValidation
     {
         public string SiteName { get; set; }
 
         public DateTime Date { get; set; }
 
-        public string ProductCodes { get; set; }
+        public string ProductCodeList { get; set; }
 
-        public string SelectedCurrency { get; set; }
+        public string CurrencyIdList { get; set; }
 
         public IEnumerable<Currency> CurrencyList { get; set; }
 
@@ -28,5 +28,7 @@ namespace Fanex.Athena.Model.Report.MetaModel
         public bool IsExportExcel { get; set; }
 
         public string BaseCurrency => "USD";
+
+        public bool IsValid => !string.IsNullOrWhiteSpace(ProductCodeList) && !string.IsNullOrWhiteSpace(CurrencyIdList);
     }
 }
