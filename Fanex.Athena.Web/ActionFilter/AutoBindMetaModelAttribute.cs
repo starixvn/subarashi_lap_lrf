@@ -80,7 +80,7 @@ namespace Fanex.Athena.Web.ActionFilter
                 var value = item.Value as IMetaModelCurrencyList;
                 if (isFilter)
                 {
-                    var selectedCurrencyList = value.SelectedCurrency?.Split(new[] { ',' },
+                    var selectedCurrencyList = value.CurrencyIdList?.Split(new[] { ',' },
                         StringSplitOptions.RemoveEmptyEntries);
                     value.CurrencyList = userSession.CurrencyList.Where(i =>
                     selectedCurrencyList.Contains(i.Key.ToString()))

@@ -5,7 +5,7 @@ using Fanex.Athena.Model.Core.MetaModel;
 
 namespace Fanex.Athena.Model.Report.MetaModel
 {
-    public class DailyBetsMetaModel : IMetaModelProductCodeList, IMetaModelCurrencyIdList, IMetaModelValidation
+    public class DailyBetsMetaModel : IMetaModelProductCodeList, IMetaModelCurrencyIdList, IMetaModelValidation, IMetaModelCurrencyList
     {
         public string SiteName { get; set; }
 

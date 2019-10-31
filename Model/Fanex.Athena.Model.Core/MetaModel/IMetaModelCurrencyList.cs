@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Fanex.Athena.Model.Core.DataDomain;
 
 namespace Fanex.Athena.Model.Core.MetaModel
@@ -10,7 +6,7 @@ namespace Fanex.Athena.Model.Core.MetaModel
     public interface IMetaModelCurrencyList
     {
         IEnumerable<Currency> CurrencyList { get; set; }
-        string SelectedCurrency { get; set; }
 
+        string CurrencyIdList { get; set; }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -41,10 +40,15 @@ namespace Fanex.Athena.Controllers.Report
             var licenseeSetting = LicenseeSettingService.GetFakeLicenseeSetting(SessionService.LicenseeSession.LicenseeName);
             var today = licenseeSetting.TimeZone.HasValue ? DateTime.UtcNow.AddHours(licenseeSetting.TimeZone.Value) : DateTime.Now;
 
+            var productAccess = ProductService.GetSingleWalletProductAccess(
+                SessionService.LicenseeSession.LicenseeId,
+                userSession.Language,
+                FunctionNames.DailyBets);
+
             var viewModel = new DailyBetsViewModel
             {
                 CurrencyList = userSession.CurrencyList,
-                ProductOptions = GetProductAccess().ProductList.Select(i => new ProductOption
+                ProductOptions = productAccess.ProductList.Select(i => new ProductOption
                 {
                     Code = i.ProductCode,
                     Name = i.ProductCode.Equals(Product.CS, StringComparison.InvariantCultureIgnoreCase) ? "RNG" : i.ProductName,
@@ -62,9 +66,7 @@ namespace Fanex.Athena.Controllers.Report
         [AutoBindMetaModel(BindCurrencyListByFilter = true)]
         public async Task<ActionResult> Index(DailyBetsMetaModel metaModel)
         {
-
-            var licenseeName = SessionService.LicenseeSession.LicenseeName;
-            metaModel.SiteName = _siteNameList.GetValueOrDefault(licenseeName, defaultValue: licenseeName);
+            metaModel.SiteName = SessionService.LicenseeSession.LicenseeName;
 
             var userSession = SessionService.UserSession;
             if (metaModel.IsExportExcel)
@@ -76,27 +78,6 @@ namespace Fanex.Athena.Controllers.Report
             }
 
             return JsonString(await _reportAPIClient.PostAsyncString("api/DailyBets/Index", metaModel, userSession.Language).ConfigureAwait(false));
-        }
-
-        private bool IsValidProduct(string selectedProduct)
-        {
-            if (string.IsNullOrEmpty(selectedProduct))
-            {
-                return false;
-            }
-
-            var selectedProductList = selectedProduct.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-            var productList = GetProductAccess().ProductList.Select(x => x.ProductCode);
-
-            return productList.Intersect(selectedProductList).Count() == selectedProductList.Count();
-        }
-
-        private ProductAccess GetProductAccess()
-        {
-            return ProductService.GetSingleWalletProductAccess(
-                SessionService.LicenseeSession.LicenseeId,
-                SessionService.UserSession.Language,
-                FunctionNames.SpecialLicenseeWinLoss);
         }
     }
 }
