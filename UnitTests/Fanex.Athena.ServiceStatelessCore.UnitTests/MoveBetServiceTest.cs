@@ -24,14 +24,14 @@
 
         private IMoveBetDataAccess _moveBetDataAccess;
         private IMoveBetService _moveBetService;
-        private IMemoryCacheService _cache;
+        private ICustomMemoryCacheService _cache;
         private ILogger _logger;
 
         [SetUp]
         public void SetUp()
         {
             _moveBetDataAccess = Substitute.For<IMoveBetDataAccess>();
-            _cache = Substitute.For<IMemoryCacheService>();
+            _cache = Substitute.For<ICustomMemoryCacheService>();
             _logger = Substitute.For<ILogger>();
             _moveBetService = new MoveBetService(_logger, _moveBetDataAccess, _cache);
         }

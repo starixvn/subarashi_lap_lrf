@@ -28,133 +28,37 @@ namespace Fanex.Athena.Api.StatelessBase.Attributes
         public bool BindIp { get; set; }
 
         public bool BindBalanceUpAndMoveBetDay { get; set; }
-
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
+            var actionArgument = actionContext.ActionArguments;
             if (BindAgent)
             {
-                MapAgentXml(actionContext);
+                AutoBindMetaModelService.MapAgentXml(actionArgument);
             }
             if (BindSiteName)
             {
-                MapSiteName(actionContext);
+                AutoBindMetaModelService.MapSiteName(actionArgument);
             }
             if (BindLanguage)
             {
-                MapLanguage(actionContext);
+                AutoBindMetaModelService.MapLanguage(actionArgument);
             }
             if (BindUserId)
             {
-                MapUserId(actionContext);
+                AutoBindMetaModelService.MapUserId(actionArgument);
             }
             if (BindIp)
             {
-                MapIp(actionContext);
+                AutoBindMetaModelService.MapIp(actionArgument, actionContext.Request);
             }
 
             if (BindBalanceUpAndMoveBetDay)
             {
-                MapBalanceUpAndMoveBet(actionContext);
+                AutoBindMetaModelService.MapBalanceUpAndMoveBet(actionArgument);
             }
 
             base.OnActionExecuting(actionContext);
         }
 
-        private static void MapIp(HttpActionContext actionContext)
-        {
-            var item = actionContext.ActionArguments.Where(x => x.Value is IMetaModelIp)
-                    .Select(x => x).FirstOrDefault();
-
-            if (item.Value is IMetaModelIp model)
-            {
-                model.Ip = ClientHelper.GetClientIpAddress(actionContext.Request);
-                actionContext.ActionArguments[item.Key] = model;
-            }
-        }
-
-        private static void MapUserId(HttpActionContext actionContext)
-        {
-            if (actionContext.ActionArguments.ContainsKey("userid")
-                         && actionContext.ActionArguments["userid"] is int userId)
-            {
-                var item = actionContext.ActionArguments.Where(x => x.Value is IMetaModelUserId)
-                        .Select(x => x).FirstOrDefault();
-
-                if (item.Value is IMetaModelUserId model)
-                {
-                    model.UserId = userId;
-                    actionContext.ActionArguments[item.Key] = model;
-                }
-            }
-        }
-
-        private static void MapLanguage(HttpActionContext actionContext)
-        {
-            if (actionContext.ActionArguments.ContainsKey("language")
-                          && actionContext.ActionArguments["language"] is string lang)
-            {
-                var item = actionContext.ActionArguments.Where(x => x.Value is IMetaModelLanguage)
-                        .Select(x => x).FirstOrDefault();
-
-                if (item.Value is IMetaModelLanguage model)
-                {
-                    model.Language = Util.MapIetfLanguageCodes[lang];
-                    actionContext.ActionArguments[item.Key] = model;
-                }
-            }
-        }
-
-        private static void MapSiteName(HttpActionContext actionContext)
-        {
-            if (actionContext.ActionArguments.ContainsKey("sitename")
-                && actionContext.ActionArguments["sitename"] is string siteName)
-            {
-                var item = actionContext.ActionArguments.Where(x => x.Value is IMetaModelSiteName)
-                        .Select(x => x).FirstOrDefault();
-
-                if (item.Value is IMetaModelSiteName model)
-                {
-                    model.SiteName = siteName;
-                    actionContext.ActionArguments[item.Key] = model;
-                }
-            }
-        }
-
-        private static void MapAgentXml(HttpActionContext actionContext)
-        {
-            if (actionContext.ActionArguments.ContainsKey("currencyAgentList")
-                && actionContext.ActionArguments["currencyAgentList"] is IEnumerable<OneAuthCurrency> currencyWithAgent)
-            {
-                var item = actionContext.ActionArguments.Where(x => x.Value is IMetaModelAgent)
-                        .Select(x => x).FirstOrDefault();
-
-                var currencyIdList = string.Empty;
-                if (item.Value is IMetaModelCurrencyIdList itemWithCurrency)
-                {
-                    currencyIdList = itemWithCurrency.CurrencyIdList;
-                }
-
-                if (item.Value is IMetaModelAgent itemWithAgent)
-                {
-                    itemWithAgent.AgentListXml = AuthParameterHelper.GenerateAgentListXml(currencyWithAgent, currencyIdList);
-                    actionContext.ActionArguments[item.Key] = itemWithAgent;
-                }
-            }
-        }
-
-        private static void MapBalanceUpAndMoveBet(HttpActionContext actionContext)
-        {
-            var balanceUpDataAccess = actionContext.Request.GetDependencyScope().Resolve<IBalanceUpDataAccess>();
-            var item = actionContext.ActionArguments.Where(x => x.Value is IMetaModelBalanceUpAndMoveBet)
-             .Select(x => x).FirstOrDefault();
-
-            if (item.Value is IMetaModelBalanceUpAndMoveBet value)
-            {
-                var temp = balanceUpDataAccess.GetBalanceUp();
-                value.BalanceUpDay = temp.BalanceUpDay;
-                value.MoveBetsDay = temp.MoveBetsDay;
-                actionContext.ActionArguments[item.Key] = value;
-            }
-        }
     }
 }

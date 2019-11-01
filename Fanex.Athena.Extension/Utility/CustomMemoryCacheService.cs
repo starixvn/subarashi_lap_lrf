@@ -8,13 +8,13 @@
 
     using Newtonsoft.Json;
 
-    public class MemoryCacheService : IMemoryCacheService
+    public class CustomMemoryCacheService : ICustomMemoryCacheService
     {
         private const int TIMEOUT = 900; // 15 minutes.
         private const string REGIONNAME = "LAP_MAIN_MEMORY";
         private readonly ICustomMemoryCache _cache;
 
-        public MemoryCacheService(ICustomMemoryCache cache)
+        public CustomMemoryCacheService(ICustomMemoryCache cache)
         {
             _cache = cache;
         }

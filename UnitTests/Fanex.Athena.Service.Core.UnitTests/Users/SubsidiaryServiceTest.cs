@@ -25,14 +25,14 @@
         private const string LicenseeName = "12Bet";
         private ISessionService _sessionService;
         private ISubsidiaryDataAccess _dataAccess;
-        private IMemoryCacheService _cache;
+        private ICustomMemoryCacheService _cache;
         private ISubsidiaryService _service;
 
         [SetUp]
         public void SetUp()
         {
             _dataAccess = Substitute.For<ISubsidiaryDataAccess>();
-            _cache = Substitute.For<IMemoryCacheService>();
+            _cache = Substitute.For<ICustomMemoryCacheService>();
             _sessionService = Substitute.For<ISessionService>();
             _sessionService.LicenseeSession.Returns(new LicenseeAuthInfo
             {

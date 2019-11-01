@@ -10,6 +10,8 @@ namespace Fanex.Athena.DataAccess.Core.Configuration
     using Extension.Utility.Interfaces;
     using Fanex.Athena.DataAccess.Core;
     using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
+    using Fanex.Athena.Extension.Utility;
+    using Fanex.Athena.Extension.Utility.Internal;
     using Fanex.Athena.Model.Core.DTO.Configuration;
     using Fanex.Common.Extensions;
     using Logging;
@@ -18,17 +20,17 @@ namespace Fanex.Athena.DataAccess.Core.Configuration
     {
         private const int CacheTimeoutSeconds = 60;
 
-        private readonly IMemoryCacheService _cache;
+        private readonly ICustomMemoryCacheService _cache;
 
         private readonly ILogger _logger;
 
         [CLSCompliant(false)]
         public BalanceUpDataAccess(
             ILogger logger,
-            IMemoryCacheService cache)
+            ICustomMemoryCacheService cache)
         {
-            _logger = logger;
-            _cache = cache;
+            _logger = logger ?? LogService.LoggerInstance;
+            _cache = cache ?? new CustomMemoryCacheService(new CustomMemoryCache());
         }
 
         public BalanceUp GetBalanceUp()

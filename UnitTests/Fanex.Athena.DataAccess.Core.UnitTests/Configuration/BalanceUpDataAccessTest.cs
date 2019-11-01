@@ -15,13 +15,13 @@
         private const string UspName = "Lrf_SelBalanceUpDay";
 
         private ILogger _logger;
-        private IMemoryCacheService _cache;
+        private ICustomMemoryCacheService _cache;
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
         {
             _logger = Substitute.For<ILogger>();
-            _cache = Substitute.For<IMemoryCacheService>();
+            _cache = Substitute.For<ICustomMemoryCacheService>();
             DataAccess = Substitute.ForPartsOf<BalanceUpDataAccess>(
                 _logger,
                 _cache);

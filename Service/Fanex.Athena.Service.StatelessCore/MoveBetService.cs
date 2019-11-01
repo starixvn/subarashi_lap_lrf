@@ -24,9 +24,9 @@
 
         private readonly IMoveBetDataAccess _moveBetDataAccess;
 
-        private readonly IMemoryCacheService _cache;
+        private readonly ICustomMemoryCacheService _cache;
 
-        public MoveBetService(ILogger logger, IMoveBetDataAccess moveBetDataAccess, IMemoryCacheService cache)
+        public MoveBetService(ILogger logger, IMoveBetDataAccess moveBetDataAccess, ICustomMemoryCacheService cache)
         {
             _logger = logger;
             _moveBetDataAccess = moveBetDataAccess;

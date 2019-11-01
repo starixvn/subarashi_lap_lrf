@@ -53,7 +53,7 @@
         [AjaxRequest]
         [CustomValidateAntiForgery]
         [ValidatePermissionOnData(isObject: true)]
-        [AutoBindMetaModel(BindAgent = true, BindCurrencyList = true)]
+        [AutoBindMetaModel(BindAgent = true, BindDictionaryCurrencyList = true)]
         [OutputCache(NoStore = true, Duration = 0, Location = OutputCacheLocation.None, VaryByParam = "*")]
         public async Task<dynamic> GetRunningBetList(PlayerRunningBetListMetalModel metaModel)
         {

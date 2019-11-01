@@ -22,11 +22,11 @@
 
         private readonly ISessionService _sessionService;
 
-        private readonly IMemoryCacheService _cache;
+        private readonly ICustomMemoryCacheService _cache;
 
         private readonly ISubsidiaryDataAccess _subLicenseeDataAccess;
 
-        public SubsidiaryService(ISessionService sessionService, ISubsidiaryDataAccess subsidiaryDataAccess, IMemoryCacheService cache)
+        public SubsidiaryService(ISessionService sessionService, ISubsidiaryDataAccess subsidiaryDataAccess, ICustomMemoryCacheService cache)
         {
             _sessionService = sessionService;
             _cache = cache;

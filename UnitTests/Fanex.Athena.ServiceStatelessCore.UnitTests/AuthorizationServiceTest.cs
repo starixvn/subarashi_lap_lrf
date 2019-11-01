@@ -22,13 +22,13 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
 
         private IAthorizationDataAccess _authorizationDataAccess;
 
-        private IMemoryCacheService _cache;
+        private ICustomMemoryCacheService _cache;
 
         [SetUp]
         public void SetUp()
         {
             _authorizationDataAccess = Substitute.For<IAthorizationDataAccess>();
-            _cache = Substitute.For<IMemoryCacheService>();
+            _cache = Substitute.For<ICustomMemoryCacheService>();
             _authorizationService = new AuthorizationService(_authorizationDataAccess, _cache);
         }
 

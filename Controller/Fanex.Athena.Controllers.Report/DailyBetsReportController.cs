@@ -63,7 +63,7 @@ namespace Fanex.Athena.Controllers.Report
 
         [HttpPost]
         [ValidationWebRequest(IsValidCurrencyList = true, IsValidProductCodeList = true, IsSingleWallet = true, FunctionConfig = FunctionNames.DailyBets, ObjectName = "metaModel")]
-        [AutoBindMetaModel(BindCurrencyListByFilter = true)]
+        [AutoBindMetaModel(BindCurrencyList = true)]
         public async Task<ActionResult> Index(DailyBetsMetaModel metaModel)
         {
             metaModel.SiteName = SessionService.LicenseeSession.LicenseeName;

@@ -2,7 +2,7 @@
 
 namespace Fanex.Athena.Extension.Utility.Interfaces
 {
-    public interface IMemoryCacheService
+    public interface ICustomMemoryCacheService
     {
         void Clear();
 

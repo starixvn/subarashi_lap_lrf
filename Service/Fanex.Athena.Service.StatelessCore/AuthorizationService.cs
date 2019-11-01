@@ -23,9 +23,9 @@ namespace Fanex.Athena.Service.StatelessCore
 
         private readonly IAthorizationDataAccess _authorizationDataAccess;
 
-        private readonly IMemoryCacheService _cache;
+        private readonly ICustomMemoryCacheService _cache;
 
-        public AuthorizationService(IAthorizationDataAccess authorizationDataAccess, IMemoryCacheService cache)
+        public AuthorizationService(IAthorizationDataAccess authorizationDataAccess, ICustomMemoryCacheService cache)
         {
             _authorizationDataAccess = authorizationDataAccess;
             _cache = cache;

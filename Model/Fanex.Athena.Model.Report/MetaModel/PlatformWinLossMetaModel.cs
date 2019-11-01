@@ -67,6 +67,5 @@ namespace Fanex.Athena.Model.Report.MetaModel
         }
 
         public bool HasComm { get; set; }
-        public string CurrencyIdList { get; set; }
     }
 }
