@@ -110,6 +110,7 @@
     <Compile Include="ReportAPIClientTest.cs" />
     <Compile Include="ReportSettingServiceTest.cs" />
     <Compile Include="Utility\AuthParameterHelperTest.cs" />
+    <Compile Include="Utility\AutoBindMetaModelServiceTest.cs" />
     <Compile Include="Utility\KeanOceanBusinessHelperTest.cs" />
   </ItemGroup>
   <ItemGroup>

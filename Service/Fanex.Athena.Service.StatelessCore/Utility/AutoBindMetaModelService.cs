@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using Fanex.Athena.DataAccess.Core.Configuration;
 using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
 using Fanex.Athena.Extension.Helper;
 using Fanex.Athena.Extension.Utility;
@@ -35,7 +34,6 @@ namespace Fanex.Athena.Service.StatelessCore.Utility
                     }
                 }
             }
-
         }
 
         public static void MapAgentXml(IDictionary<string, object> actionArguments, IDictionary<int, int[]> currencyAgentList)
@@ -99,10 +97,14 @@ namespace Fanex.Athena.Service.StatelessCore.Utility
         {
             var item = actionArguments.Where(x => x.Value is IMetaModelUserId)
              .Select(x => x).FirstOrDefault();
-            var value = item.Value as IMetaModelUserId;
-            value.UserId = userId;
-            actionArguments[item.Key] = value;
+
+            if (item.Value is IMetaModelUserId value)
+            {
+                value.UserId = userId;
+                actionArguments[item.Key] = value;
+            }
         }
+
         public static void MapUserId(IDictionary<string, object> actionArguments)
         {
             if (actionArguments.ContainsKey("userid")
@@ -118,6 +120,7 @@ namespace Fanex.Athena.Service.StatelessCore.Utility
                 }
             }
         }
+
         public static void MapSiteName(IDictionary<string, object> actionArguments)
         {
             if (actionArguments.ContainsKey("sitename")
@@ -162,9 +165,8 @@ namespace Fanex.Athena.Service.StatelessCore.Utility
             }
         }
 
-        public static void MapBalanceUpAndMoveBet(IDictionary<string, object> actionArguments)
+        public static void MapBalanceUpAndMoveBet(IDictionary<string, object> actionArguments, IBalanceUpDataAccess balanceUpDataAccess)
         {
-            var balanceUpDataAccess = new BalanceUpDataAccess(null, null);
             var item = actionArguments.Where(x => x.Value is IMetaModelBalanceUpAndMoveBet)
              .Select(x => x).FirstOrDefault();
 
@@ -176,6 +178,5 @@ namespace Fanex.Athena.Service.StatelessCore.Utility
                 actionArguments[item.Key] = value;
             }
         }
-
     }
 }

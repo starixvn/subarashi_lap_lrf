@@ -6,7 +6,6 @@
 
 namespace Fanex.Athena.Controllers.Report
 {
-    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Fanex.Athena.Model.Auth.DataDomain;
@@ -65,7 +64,7 @@ namespace Fanex.Athena.Controllers.Report
 
         [HttpPost]
         [ValidationWebRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
-        [AutoBindMetaModel(BindAgent = true, BindDictionaryCurrencyList = true)]
+        [AutoBindMetaModel(BindAgent = true, BindCurrencyList = true)]
         public async Task<ActionResult> Index(PlatformWinLossMetaModel metaModel)
         {
             return await ProcessRequest(metaModel);
