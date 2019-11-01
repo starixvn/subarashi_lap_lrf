@@ -1,12 +1,9 @@
 ﻿namespace Fanex.Athena.Model.BetList.MetaModel
 {
-    using Fanex.Athena.Model.Core.DataDomain;
+    using System;
+
     using Fanex.Athena.Model.Core.Helper;
     using Fanex.Athena.Model.Core.MetaModel;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Web.Script.Serialization;
 
     public class BaseBettingTicketMetaModel : IMetaModelValidation , IMetaModelCurrencyIdList
     {
@@ -77,9 +74,6 @@
             && MetaModelValidationHelper.ValidateBaseCurrency(BaseCurrency);
 
         public bool HasPlayerCom { get; set; }
-
-        [ScriptIgnore]
-        public IDictionary<int, string> UserCurrencyList { get; set; }
 
         public bool IsConvertAll { get; set; }
 

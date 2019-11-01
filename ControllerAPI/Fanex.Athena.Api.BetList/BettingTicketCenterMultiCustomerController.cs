@@ -63,7 +63,6 @@
 
             metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, currencyList);
             metaModel.HasPlayerCom = SessionService.LicenseeSession.IsAllowedCustomerComm;
-            metaModel.UserCurrencyList = userCurrencyList;
 
             return await _betListApiClient.PostAsync("/BettingTicketCenterMultiCustomer/GetData",
                 metaModel, userSession.Language).ConfigureAwait(false);

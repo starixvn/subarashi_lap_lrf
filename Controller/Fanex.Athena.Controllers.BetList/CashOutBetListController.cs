@@ -41,7 +41,6 @@
             var userSession = SessionService.UserSession;
             metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList);
             metaModel.HasPlayerComm = SessionService.LicenseeSession.IsAllowedCustomerComm;
-            metaModel.UserCurrencyList = userSession.CurrencyList;
 
             var viewModel = await BetListApiClient.PostAsync<CashOutBetListDetailViewModel>("/CashOutBetList/Detail", metaModel, userSession.Language).ConfigureAwait(false);
 

@@ -14,8 +14,6 @@ namespace Fanex.Athena.Web.ActionFilter
     public sealed class AutoBindMetaModelAttribute : ActionFilterAttribute
     {
         public bool BindAgent { get; set; }
-        public bool BindDictionaryCurrencyList { get; set; }
-        public bool BindCurrencyList { get; set; }
         public bool BindUserId { get; set; }
         public bool BindLicenseeContract { get; set; }
 
@@ -38,14 +36,6 @@ namespace Fanex.Athena.Web.ActionFilter
                 AutoBindMetaModelService.MapUserId(actionArgument, userSession.UserId);
             }
 
-            if (BindDictionaryCurrencyList)
-            {
-                AutoBindMetaModelService.MapDictionaryCurrencyList(actionArgument, userSession.CurrencyList);
-            }
-            if (BindCurrencyList)
-            {
-                AutoBindMetaModelService.MapCurrencyList(actionArgument, userSession.CurrencyList);
-            }
             if (BindLicenseeContract)
             {
                 MapLicenseeContract(filterContext, userSession);

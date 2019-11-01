@@ -143,7 +143,6 @@
             defaultMetaModel.ToDate = DateTime.SpecifyKind(defaultMetaModel.ToDate.Date, DateTimeKind.Unspecified);
             defaultMetaModel.Date = DateTime.SpecifyKind(defaultMetaModel.Date.Date, DateTimeKind.Unspecified);
             defaultMetaModel.IsFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeName);
-            defaultMetaModel.CurrencyList = UserCurrencyList;
             defaultMetaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList,
                 defaultMetaModel.CurrencyId);
 
