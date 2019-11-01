@@ -79,7 +79,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants\SystemEnvironment.cs" />
-    <Compile Include="Constants\TimeZoneId.cs" />
     <Compile Include="DataDomain\BaseCurrencyType.cs" />
     <Compile Include="DataDomain\UserControlLogType.cs" />
     <Compile Include="DataDomain\BusinessLogType.cs" />

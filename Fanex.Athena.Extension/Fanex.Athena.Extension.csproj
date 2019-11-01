@@ -154,7 +154,6 @@
     <Compile Include="Helper\StringHelper.cs" />
     <Compile Include="Utility\AntiForgeryService.cs" />
     <Compile Include="Utility\AppSettings.cs" />
-    <Compile Include="Utility\DateTimeConverter.cs" />
     <Compile Include="Utility\DbFactory.cs" />
     <Compile Include="Utility\Interfaces\IDbFactory.cs" />
     <Compile Include="Utility\Interfaces\IWebClientService.cs" />
