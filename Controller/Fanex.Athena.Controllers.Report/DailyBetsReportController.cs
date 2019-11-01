@@ -22,6 +22,8 @@ namespace Fanex.Athena.Controllers.Report
 
         private readonly ILicenseeSettingService _licenseeSettingService;
 
+        private const int DefaultLimitedMonthRange = 3;
+
         public DailyBetsReportController(
             ILanguageService languageService,
             ISessionService sessionService,
@@ -38,13 +40,15 @@ namespace Fanex.Athena.Controllers.Report
         {
             var userSession = SessionService.UserSession;
             var licenseeSetting = LicenseeSettingService.GetFakeLicenseeSetting(SessionService.LicenseeSession.LicenseeName);
-            var today = licenseeSetting.TimeZone.HasValue ? DateTime.UtcNow.AddHours(licenseeSetting.TimeZone.Value) : DateTime.Now;
+            var today = licenseeSetting != null && licenseeSetting.TimeZone.HasValue ?
+                DateTime.UtcNow.AddHours(licenseeSetting.TimeZone.Value) : DateTime.Now;
 
             var productAccess = ProductService.GetSingleWalletProductAccess(
                 SessionService.LicenseeSession.LicenseeId,
                 userSession.Language,
                 FunctionNames.DailyBets);
 
+            var limitedMonthRange = licenseeSetting != null ? licenseeSetting.LimitRecentMonths : DefaultLimitedMonthRange;
             var viewModel = new DailyBetsViewModel
             {
                 CurrencyList = userSession.CurrencyList,
@@ -55,7 +59,7 @@ namespace Fanex.Athena.Controllers.Report
                     Status = true
                 }).ToList(),
                 TodayByGmt8 = today,
-                MinDate = today.AddMonths(-licenseeSetting.LimitRecentMonths)
+                MinDate = today.AddMonths(-limitedMonthRange)
             };
 
             return View("~/Views/Desktop/Report/DailyBets/Index.cshtml", viewModel);
