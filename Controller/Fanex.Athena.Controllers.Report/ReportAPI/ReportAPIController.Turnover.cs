@@ -26,7 +26,6 @@ namespace Fanex.Athena.Controllers.Report
             var placeholderUsername = IsFakeLicensee(SessionService.LicenseeSession.LicenseeName) ?
                 ViewResources.ExternalId :
                 ViewResources.ExternalIdOrSystemId;
-            var userSession = SessionService.UserSession;
 
             metaModel.Username = string.IsNullOrWhiteSpace(metaModel.Username) ||
                 metaModel.Username.Trim() == placeholderUsername ? null : metaModel.Username;

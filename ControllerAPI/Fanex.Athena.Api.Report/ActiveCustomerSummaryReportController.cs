@@ -138,8 +138,6 @@ namespace Fanex.Athena.Api.Report
 
         private async Task<dynamic> ProcessRequest(ActiveCustomerMetaModel metaModel)
         {
-            var userSession = SessionService.UserSession;
-
             var result =
                 await _activeCustomerSummaryDataAccess.GetActiveCustomers(metaModel);
 

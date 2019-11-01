@@ -54,8 +54,8 @@
                 x => x.Id,
                 result.Code == 0,
                 metaModel.ProductId == ProductTypes.Lottery
-                    ? new int[3] { LogActionDetailId.UpdatingMinBet, LogActionDetailId.UpdatingMaxBet, LogActionDetailId.UpdatingMaxBetPerDraw }
-                    : new int[3] { LogActionDetailId.UpdatingMinBet, LogActionDetailId.UpdatingMaxBet, LogActionDetailId.UpdatingMaxPerMatch });
+                    ? new int[] { LogActionDetailId.UpdatingMinBet, LogActionDetailId.UpdatingMaxBet, LogActionDetailId.UpdatingMaxBetPerDraw }
+                    : new int[] { LogActionDetailId.UpdatingMinBet, LogActionDetailId.UpdatingMaxBet, LogActionDetailId.UpdatingMaxPerMatch });
 
             _businessLogService.Write(BusinessLogType.CustomerBetSetting, logInfo);
 
