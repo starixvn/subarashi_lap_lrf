@@ -974,6 +974,7 @@
     <Content Include="www\js\source\reactpages\layouts\AppLayout.jsx" />
     <Content Include="www\js\source\reactpages\layouts\betlist\BetListLayout.jsx" />
     <Content Include="www\js\source\reactpages\layouts\betlist\lib\BetList.js" />
+    <Content Include="www\js\source\reactpages\layouts\betlist\lib\constants.js" />
     <Content Include="www\js\source\reactpages\layouts\__tests__\AppLayout.test.js" />
     <Content Include="www\js\source\reactpages\lib\dateUtils.js" />
     <Content Include="www\js\source\reactpages\lib\excel.js" />

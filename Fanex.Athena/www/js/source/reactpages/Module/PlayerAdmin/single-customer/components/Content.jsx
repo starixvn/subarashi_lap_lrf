@@ -73,8 +73,8 @@ export const Content = (props) => {
             getResourceFunc={dataGridProps.getResource}
             formatDateStringFunc={formatDateString}
             baseCurrency=''
-            beforeShowParlayFunc={() => props.toggleLoader(true)}
-            afterShowParlayFunc={() => props.toggleLoader(false)}>
+            beforeShowFunc={() => props.toggleLoader(true)}
+            afterShowFunc={() => props.toggleLoader(false)}>
             <DataGrid {...dataGridProps} />
         </BetListLayout>
     )

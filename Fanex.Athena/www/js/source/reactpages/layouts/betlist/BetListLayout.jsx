@@ -3,6 +3,7 @@ import DataService from '@jsroot/lib/DataService';
 import BetList from './lib/BetList';
 import Popup from '@jsroot/components/popup';
 import PropTypes from 'prop-types';
+import { SportType } from './lib/constants';
 
 class BetListLayout extends Component {
     constructor(props) {
@@ -21,9 +22,41 @@ class BetListLayout extends Component {
             window.logOpenBetlistEvent && window.logOpenBetlistEvent(this.props.pageName);
         };
         
-        window.ViewResult = (...args) => {
-            const url = BetList.getResultUrl.apply(BetList, [this.props.rootUrl, ...args]);
-            this._openPopup(url, this._getResource('Result'));
+        window.ViewResult = (matchid, raceNo, bettype, sporttype, refno,
+            username, winlostdate, refnoMixParlay, league, isOutright, extension1, extension2, custid, transdecs) => {
+            const title = this._getResource('Result');
+            const rootUrl = this.props.rootUrl;
+
+            if (sporttype === SportType.RNG_GAME || sporttype === SportType.RNG_MINIGAME || sporttype === SportType.RNG_MOBILE) {
+                const url = BetList.getRngCasinoResultUrl(rootUrl)
+                this._showRngCasinoResult(refno, url, title);
+            }
+            else if (sporttype === SportType.VOIDBRIDGE) {
+                const url = BetList.getVoidbridgeResultUrl(rootUrl, custid, extension2);
+                this._showThirdPartyResult(url, title);
+            }
+            else if (sporttype === SportType.PP) {
+                const url = BetList.getPPResultUrl(rootUrl, custid, extension2);
+                this._showThirdPartyResult(url, title);
+            }
+            else if (sporttype === SportType.CARDCLUB) {
+                const url = BetList.getCardClubResultUrl(rootUrl, custid, bettype, extension2);
+                this._showThirdPartyResult(url, title);
+            }
+            else if (sporttype === SportType.ALLBET) {
+                const url = BetList.getAllBetResultUrl(rootUrl, transdecs, extension2, bettype);
+                console.log(url);
+                this._openPopup(url, title);
+            }
+            else if (sporttype === SportType.GLOBALGAMING) {
+                const url = BetList.getGlobalGamingResultUrl(rootUrl, custid, extension2);
+                this._showThirdPartyResult(url, title);
+            }
+            else {
+                const url = BetList.getResultUrl(rootUrl, matchid, raceNo, bettype,
+                    sporttype, winlostdate, refnoMixParlay, league, isOutright, extension1, extension2, custid);
+                this._openPopup(url, title);
+            }
         };
 
         window.showMP = (transId) => {
@@ -173,12 +206,12 @@ class BetListLayout extends Component {
         return this.props.formatDateStringFunc ? this.props.formatDateStringFunc(dateString) : dateString;
     }
 
-    _beforeShowParlay() {
-        this.props.beforeShowParlayFunc && this.props.beforeShowParlayFunc();
+    _beforeShow() {
+        this.props.beforeShowFunc && this.props.beforeShowFunc();
     }
 
-    _afterShowParlay() {
-        this.props.afterShowParlayFunc && this.props.afterShowParlayFunc();
+    _afterShow() {
+        this.props.afterShowFunc && this.props.afterShowFunc();
     }
 
     _resolveClientUrl(relativeUrl) {
@@ -188,7 +221,7 @@ class BetListLayout extends Component {
     _showMixParlayDetail(transId, divEvent) {
         if (divEvent.style.display === 'none') {
             const url = this._resolveClientUrl('api/MixParlayBetList/Detail?transId=' + transId);
-            this._beforeShowParlay();// this.props.toggleLoader(true);
+            this._beforeShow();// this.props.toggleLoader(true);
 
             DataService.getData(url)
                 .then((result) => {
@@ -201,11 +234,12 @@ class BetListLayout extends Component {
                         }
                     }
 
-                    this._afterShowParlay();// this.props.toggleLoader(false);
                     divEvent.innerHTML = choice;
                     divEvent.style.display = 'block';
-                }).catch(function (error) {
+                }).catch((error) => {
                     console.log(error);
+                }).finally(() => {
+                    this._afterShow();
                 });
         }
         else {
@@ -222,25 +256,60 @@ class BetListLayout extends Component {
 
         if (divEvent.style.display == 'none') {
             let url = BetList.getChoiceParlayDetailUrl(rootUrl, transId, refNo, handicap1, handicap2, betcheck, betteam, custId);
-            this._beforeShowParlay();//this.props.toggleLoader(true);
+            this._beforeShow();//this.props.toggleLoader(true);
             DataService.getData(url)
-               .then((result) => {       
-                   let choice = BetList.buildChoiceParlayDetail(result.data);
+                .then((result) => {       
+                    let choice = BetList.buildChoiceParlayDetail(result.data);
 
-                   divEvent.innerHTML = choice;
-                   divEvent.style.display = 'block';
-                   nameDiv.style.display = 'none';
-
-                   this._afterShowParlay();// this.props.toggleLoader(false);
-               }).catch(function (error) {
+                    divEvent.innerHTML = choice;
+                    divEvent.style.display = 'block';
+                    nameDiv.style.display = 'none';
+                }).catch((error) => {
                    console.log(error);
-               });
+                }).finally(() => {
+                    this._afterShow();
+                });
         }
         else {
             divEvent.style.display = 'none';
             divEvent.innerHTML = '';
             nameDiv.style.display = 'block';
         }
+    }
+
+    _showThirdPartyResult(url, title) {
+        this._beforeShow();//this.props.toggleLoader(true);
+        DataService.getData(url)
+            .then((result) => {
+                if (result.data !== '') {
+                    this._openPopup(result, title);
+                }
+            }).catch((error) => {
+                console.log(error);
+            }).finally(() => {
+                this._afterShow();
+            });
+    }
+
+    _showRngCasinoResult(refno, url, title) {
+        this._beforeShow();
+        DataService.postData(url, { refno })
+            .then((result) => {
+                if (result.data.Success) {
+                    if (result.data.Result === '') {
+                        return;
+                    }
+
+                    this._openPopup(result.data.Result, title);
+                }
+                else {
+                    alert(this._getResource("ErrorProcessingMsg"));
+                }
+            }).catch((error) => {
+                console.log(error);
+            }).finally(() => {
+                this._afterShow();
+            });
     }
 
     _openPopup(url, title) {
@@ -273,8 +342,10 @@ BetListLayout.propTypes = {
     rootUrl: PropTypes.string.isRequired,
     getResourceFunc: PropTypes.func,
     baseCurrency: PropTypes.string,
-    beforeShowParlayFunc: PropTypes.func,
-    afterShowParlayFunc: PropTypes.func,
+    beforeShowFunc: PropTypes.func,
+    afterShowFunc: PropTypes.func,
+    beforeShowFunc: PropTypes.func,
+    afterShowFunc: PropTypes.func,
     formatDateStringFunc: PropTypes.func
 }
 

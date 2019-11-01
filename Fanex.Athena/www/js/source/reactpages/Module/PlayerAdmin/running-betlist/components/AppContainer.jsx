@@ -31,11 +31,11 @@ export class AppContainer extends Component {
         return `${month < 10 ? '0' + month : month}/${day < 10 ? '0' + day : day}/${date.getFullYear()}`;
     }
 
-    beforeShowParlay = () => {
+    beforeShow = () => {
         this.props.toggleLoader(true);
     }
 
-    afterShowParlay = () => {
+    afterShow = () => {
         this.props.toggleLoader(false);
     }
 
@@ -48,8 +48,8 @@ export class AppContainer extends Component {
                     getResourceFunc={this.getResource}
                     formatDateStringFunc={this.formatDateString}
                     baseCurrency=''
-                    beforeShowParlayFunc={this.beforeShowParlay}
-                    afterShowParlayFunc={this.afterShowParlay}>
+                    beforeShowFunc={this.beforeShow}
+                    afterShowFunc={this.afterShow}>
                     <Loader isLoading={this.props.isLoading} />
                     <FormFilter />
                     <div className="betlist-container result-content">

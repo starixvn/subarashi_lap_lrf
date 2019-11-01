@@ -23,11 +23,11 @@ export const PageLayout = (props) => {
         return `${month < 10 ? '0' + month : month}/${day < 10 ? '0' + day : day}/${date.getFullYear()}`;
     }
 
-    const beforeShowParlay = () => {
+    const beforeShow = () => {
         toggleLoader(true);
     }
 
-    const afterShowParlay = () => {
+    const afterShow = () => {
         toggleLoader(false);
     }
 
@@ -39,8 +39,8 @@ export const PageLayout = (props) => {
                 getResourceFunc={getResource}
                 formatDateStringFunc={formatDateString}
                 baseCurrency={isConvertAll ? selectedBaseCurrency : ''}
-                beforeShowParlayFunc={beforeShowParlay}
-                afterShowParlayFunc={afterShowParlay}
+                beforeShowFunc={beforeShow}
+                afterShowFunc={afterShow}
             >
                 <Tabs>
                     <Tab isActive={selectedTabIndex == 0} label={LangHelper.getSingleResource("MultiCustomers")}
