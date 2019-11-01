@@ -1965,7 +1965,7 @@
     <comment>119010</comment>
   </data>
   <data name="BettingTicketCenter_RefnoTabNote2" xml:space="preserve">
-    <value>For RNG Keno, Lottery, Colossus Bets, RNG Casino, AllBet, Macau Games, Fishing World, Card Club, PP: Please provide username also in order to search ticket later than {0}</value>
+    <value>For {0}: Please provide username also in order to search ticket later than {1}</value>
     <comment>122267</comment>
   </data>
   <data name="BettingTicketCenter_RefnoTabNote1" xml:space="preserve">
