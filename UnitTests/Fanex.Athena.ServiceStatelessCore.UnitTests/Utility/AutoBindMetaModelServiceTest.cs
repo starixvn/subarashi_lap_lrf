@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
+using Fanex.Athena.Model.Auth;
 using Fanex.Athena.Model.Core.DTO.Configuration;
 using Fanex.Athena.Model.Core.MetaModel;
 using Fanex.Athena.Service.StatelessCore.Utility;
@@ -15,13 +17,15 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests.Utility
     public class AutoBindMetaModelServiceTest
     {
         [Test]
-        public void MapAgentXml_WhenCall_AgentListXmlIsAssignedCorrectly()
+        public void MapAgentXml_CallWithActionArgumentParam_AgentListXmlIsAssignedCorrectly()
         {
             // Arrange
             var metaModel = Substitute.For<IMetaModelCurrencyIdList, IMetaModelAgent>();
             metaModel.CurrencyIdList.Returns("1,2");
 
             var actionArgument = CreateActionArgument(metaModel);
+            var currencyAgentList = new List<OneAuthCurrency> { new OneAuthCurrency { AgentId = new int[] { 11, 22 }, CurrencyId = 1 } };
+            actionArgument.Add("currencyAgentList", currencyAgentList);
 
             // Action
             AutoBindMetaModelService.MapAgentXml(actionArgument);
@@ -120,7 +124,7 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests.Utility
         }
 
         [Test]
-        public void MapUserId_WhenCall_UserIdIsAssignedCorrectly()
+        public void MapUserId_CallWithActionArgumentAndUserId_UserIdIsAssignedCorrectly()
         {
             // Arrange
             const int UserId = 111;
@@ -148,6 +152,22 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests.Utility
 
             // Assert
             Assert.That(metaModel.UserId, Is.Zero);
+        }
+
+        [Test]
+        public void MapUserId_CallWithActionArgument_UserIdIsAssignedCorrectly()
+        {
+            // Arrange
+            const int UserId = 111;
+            var metaModel = Substitute.For<IMetaModelUserId>();
+            var actionArgument = CreateActionArgument(metaModel);
+            actionArgument.Add("userid", UserId);
+
+            // Action
+            AutoBindMetaModelService.MapUserId(actionArgument);
+
+            // Assert
+            Assert.That(metaModel.UserId, Is.EqualTo(UserId));
         }
 
         [Test]
@@ -188,6 +208,56 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests.Utility
             // Assert
             Assert.That(metaModel.MoveBetsDay, Is.EqualTo(DateTime.MinValue));
             Assert.That(metaModel.BalanceUpDay, Is.EqualTo(DateTime.MinValue));
+        }
+
+        [Test]
+        public void MapSiteName_WhenCall_MetaModelAssignedCorrectly()
+        {
+            // Arrange
+            const string SiteName = "Demo";
+            var metaModel = Substitute.For<IMetaModelSiteName>();
+            var actionArgument = CreateActionArgument(metaModel);
+            actionArgument.Add("sitename", SiteName);
+
+            // Action
+            AutoBindMetaModelService.MapSiteName(actionArgument);
+
+            // Assert
+            Assert.That(metaModel.SiteName, Is.EqualTo(SiteName));
+        }
+
+        [Test]
+        public void MapLanguage_WhenCall_MetaModelAssignedCorrectly()
+        {
+            // Arrange
+            const string Language = "en-US";
+            var metaModel = Substitute.For<IMetaModelLanguage>();
+            var actionArgument = CreateActionArgument(metaModel);
+            actionArgument.Add("language", Language);
+
+            // Action
+            AutoBindMetaModelService.MapLanguage(actionArgument);
+
+            // Assert
+            Assert.That(metaModel.Language, Is.EqualTo(Language));
+        }
+
+        [Test]
+        public void MapIp_WhenCall_MetaModelAssignedCorrectly()
+        {
+            // Arrange
+            const string IpValue = ExternalApiHelper.DefaultClientIp;
+            var metaModel = Substitute.For<IMetaModelIp>();
+            var actionArgument = CreateActionArgument(metaModel);
+            var httpContext = ExternalApiHelper.CreateHttpContext();
+            var request = new HttpRequestMessage(HttpMethod.Get, new Uri("http://localhost/api/test"));
+            request.Properties["MS_HttpContext"] = httpContext;
+
+            // Action
+            AutoBindMetaModelService.MapIp(actionArgument, request);
+
+            // Assert
+            Assert.That(metaModel.Ip, Is.EqualTo(IpValue));
         }
 
         private IDictionary<string, object> CreateActionArgument(object metaModel)
