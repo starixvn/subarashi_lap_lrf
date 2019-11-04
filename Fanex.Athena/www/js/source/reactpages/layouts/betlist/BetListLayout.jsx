@@ -236,10 +236,11 @@ class BetListLayout extends Component {
 
                     divEvent.innerHTML = choice;
                     divEvent.style.display = 'block';
-                }).catch((error) => {
-                    console.log(error);
-                }).finally(() => {
+
                     this._afterShow();
+                }).catch((error) => {
+                    this._afterShow();
+                    console.log(error);
                 });
         }
         else {
@@ -264,10 +265,11 @@ class BetListLayout extends Component {
                     divEvent.innerHTML = choice;
                     divEvent.style.display = 'block';
                     nameDiv.style.display = 'none';
-                }).catch((error) => {
-                   console.log(error);
-                }).finally(() => {
+
                     this._afterShow();
+                }).catch((error) => {
+                    this._afterShow();
+                   console.log(error);
                 });
         }
         else {
@@ -284,10 +286,11 @@ class BetListLayout extends Component {
                 if (result.data !== '') {
                     this._openPopup(result, title);
                 }
-            }).catch((error) => {
-                console.log(error);
-            }).finally(() => {
+
                 this._afterShow();
+            }).catch((error) => {
+                this._afterShow();
+                console.log(error);
             });
     }
 
@@ -305,10 +308,11 @@ class BetListLayout extends Component {
                 else {
                     alert(this._getResource("ErrorProcessingMsg"));
                 }
-            }).catch((error) => {
-                console.log(error);
-            }).finally(() => {
+
                 this._afterShow();
+            }).catch((error) => {
+                this._afterShow();
+                console.log(error);
             });
     }
 

@@ -111,7 +111,6 @@ export class FormFilter extends Component {
     }
 
     render() {
-        console.log('anh debug', AppData);
         const excelButton = <div>
                                 <i className="icon-excel right" onClick={this.exportExcel} title={LangHelper.getSingleResource("ExportToExcel")}></i>
                                 {this._renderUserGuide()}
