@@ -57,8 +57,6 @@
             }
 
             var userSession = SessionService.UserSession;
-
-            var userCurrencyList = userSession.CurrencyList;
             var currencyList = metaModel.CurrencyIdList?.Split(',').Select(x => int.Parse(x)).ToArray();
 
             metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, currencyList);

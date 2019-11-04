@@ -40,7 +40,7 @@
                 metaModel,
                 x => x.Id,
                 result.Code == 0,
-                new int[] { LogActionDetailId.UpdatingMinBet, LogActionDetailId.UpdatingMaxBet, LogActionDetailId.UpdatingMaxPerMatch, LogActionDetailId.UpdatingMaxPerBall });
+                new [] { LogActionDetailId.UpdatingMinBet, LogActionDetailId.UpdatingMaxBet, LogActionDetailId.UpdatingMaxPerMatch, LogActionDetailId.UpdatingMaxPerBall });
 
             _businessLogService.Write(BusinessLogType.CustomerBetSetting, logInfo);
 
