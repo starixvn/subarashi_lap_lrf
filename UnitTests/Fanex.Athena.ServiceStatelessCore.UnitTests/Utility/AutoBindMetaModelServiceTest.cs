@@ -230,7 +230,8 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests.Utility
         public void MapLanguage_WhenCall_MetaModelAssignedCorrectly()
         {
             // Arrange
-            const string Language = "en-US";
+            const string Language = "en";
+            const string ExpectedLanguage = "en-US";
             var metaModel = Substitute.For<IMetaModelLanguage>();
             var actionArgument = CreateActionArgument(metaModel);
             actionArgument.Add("language", Language);
@@ -239,7 +240,7 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests.Utility
             AutoBindMetaModelService.MapLanguage(actionArgument);
 
             // Assert
-            Assert.That(metaModel.Language, Is.EqualTo(Language));
+            Assert.That(metaModel.Language, Is.EqualTo(ExpectedLanguage));
         }
 
         [Test]
