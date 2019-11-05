@@ -284,7 +284,7 @@ class BetListLayout extends Component {
         DataService.getData(url)
             .then((result) => {
                 if (result.data !== '') {
-                    this._openPopup(result, title);
+                    this._openPopup(result.data, title);
                 }
 
                 this._afterShow();
