@@ -29,7 +29,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api.Controllers
             return new SiteSettingViewModel
             {
                 IsAllowedCustomerComm = licenseeInfo != null && licenseeInfo.IsAllowedCustomerComm,
-                IsAllowedBA = licenseeInfo.IsEnableBA &&
+                IsAllowedBA = licenseeInfo != null && licenseeInfo.IsEnableBA &&
                 _authService.CheckProductBelongsTo(SiteName, ProductTypes.BA)
             };
         }

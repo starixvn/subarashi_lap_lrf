@@ -1,12 +1,12 @@
 ﻿namespace Fanex.Athena.Module.PlayerAdmin.Helpers
 {
-    using Fanex.Athena.Model.Core.DataDomain;
-    using Fanex.Athena.Module.PlayerAdmin.DataDomains;
-    using Fanex.Athena.Module.PlayerAdmin.MetaModel;
     using System;
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
+    using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Module.PlayerAdmin.DataDomains;
+    using Fanex.Athena.Module.PlayerAdmin.MetaModel;
 
     public static class PlayerAdminBetLimitActionLogHelper
     {
@@ -29,7 +29,7 @@
             PlayerBetLimitUpdateMetaModel<AgCasinoBetLimitMetaModel> metaModel,
             bool isSuccessful)
         {
-            return CreateLogInfo(metaModel, new PlayerBetLimitDetailedLogMetaModel[] { BuildGroupLogDetail(metaModel.Setting, isSuccessful) });
+            return CreateLogInfo(metaModel, new[] { BuildGroupLogDetail(metaModel.Setting, isSuccessful) });
         }
 
         public static PlayerBetLimitLogMetaModel CreateLogInfo<T>(
