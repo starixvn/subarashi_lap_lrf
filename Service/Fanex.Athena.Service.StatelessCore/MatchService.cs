@@ -22,9 +22,9 @@ namespace Fanex.Athena.Service.StatelessCore
 
         private readonly IMatchDataAccess _matchDataAccess;
 
-        private readonly IMemoryCacheService _cache;
+        private readonly ICustomMemoryCacheService _cache;
 
-        public MatchService(IMatchDataAccess matchDataAccess, IMemoryCacheService cache)
+        public MatchService(IMatchDataAccess matchDataAccess, ICustomMemoryCacheService cache)
         {
             _matchDataAccess = matchDataAccess;
             _cache = cache;

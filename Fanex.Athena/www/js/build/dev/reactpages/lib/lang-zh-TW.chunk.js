@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 10/15/2019 9:25:08 AM
+// Generated at: 10/31/2019 2:18:13 PM
 window._language_zh_TW = {
   AA: "客客",
   AbnormalBet: "非正規註單",

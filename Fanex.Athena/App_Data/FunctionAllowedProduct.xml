@@ -20,6 +20,7 @@
     <Function Name="ResultPage_GetNormalSports" Product="SB,BA,NG,VS,KN,LT"></Function>
     <Function Name="LiveReport" Product="SB,BA,NG,VS,KN,CS,VB,FW,AB,VS2,LT,PP,CC"></Function>
     <Function Name="CasinoTurnover" Product="CS,VB,AB"></Function>
+    <Function Name="DailyBets" Product="SB,NG,CS,LC"></Function>
   </Group>
 
   <Group Name="BetList">

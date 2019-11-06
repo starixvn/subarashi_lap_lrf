@@ -20,13 +20,13 @@
             @"[{ ""SiteName"": ""IvoryBet"", ""DisableBetList"": true, ""MinDate"": ""02/01/2018"", ""MaxDate"": ""yesterday"" }]";
 
         private LicenseeSettingService _licenseeSettingService;
-        private IMemoryCacheService _cache;
+        private ICustomMemoryCacheService _cache;
         private ILicenseeDataAccess _licenseeDataAccess;
 
         [SetUp]
         public void SetUp()
         {
-            _cache = Substitute.For<IMemoryCacheService>();
+            _cache = Substitute.For<ICustomMemoryCacheService>();
             _licenseeDataAccess = Substitute.For<ILicenseeDataAccess>();
 
             _licenseeSettingService = Substitute.ForPartsOf<LicenseeSettingService>(_cache, _licenseeDataAccess);

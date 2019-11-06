@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Linq;
 using System.Web.Mvc;
-using Fanex.Athena.Model.Auth;
-using Fanex.Athena.Model.Core.MetaModel;
+using Fanex.Athena.Service.Core.Users;
 using Fanex.Athena.Service.Core.Users.Interfaces;
 using Fanex.Athena.Service.StatelessCore.Utility;
 
@@ -13,71 +11,36 @@ namespace Fanex.Athena.Web.ActionFilter
     public sealed class AutoBindMetaModelAttribute : ActionFilterAttribute
     {
         public bool BindAgent { get; set; }
-
+        public bool BindDictionaryCurrencyList { get; set; }
         public bool BindCurrencyList { get; set; }
-
         public bool BindUserId { get; set; }
-
-        public ISessionStorage SessionStorage { get; set; }
-
+        private static readonly ISessionStorage _sessionStorage = new SessionStorage();
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            var userSession = SessionStorage.UserAuthInfo;
+            var userSession = _sessionStorage.UserAuthInfo;
 
-
+            var actionArgument = filterContext.ActionParameters;
             if (BindAgent)
             {
-                MapAgentXml(filterContext, userSession);
+                AutoBindMetaModelService.MapAgentXml(actionArgument, userSession.CurrencyAgentList);
             }
 
             if (BindUserId)
             {
-                MapUserId(filterContext, userSession);
+                AutoBindMetaModelService.MapUserId(actionArgument, userSession.UserId);
             }
 
+            if (BindDictionaryCurrencyList)
+            {
+                AutoBindMetaModelService.MapDictionaryCurrencyList(actionArgument, userSession.CurrencyList);
+            }
             if (BindCurrencyList)
             {
-                MapCurrencyList(filterContext, userSession);
+                AutoBindMetaModelService.MapCurrencyList(actionArgument, userSession.CurrencyList);
             }
-
             base.OnActionExecuting(filterContext);
 
         }
 
-        private static void MapUserId(ActionExecutingContext filterContext, UserAuthInfo userSession)
-        {
-            var item = filterContext.ActionParameters.Where(x => x.Value is IMetaModelUserId)
-             .Select(x => x).FirstOrDefault();
-            var value = item.Value as IMetaModelUserId;
-            value.UserId = userSession.UserId;
-            filterContext.ActionParameters[item.Key] = value;
-        }
-
-        private static void MapCurrencyList(ActionExecutingContext filterContext, Model.Auth.UserAuthInfo userSession)
-        {
-            var item = filterContext.ActionParameters.Where(x => x.Value is IMetaModelCurrencyList)
-              .Select(x => x).FirstOrDefault();
-            var value = item.Value as IMetaModelCurrencyList;
-            value.CurrencyList = userSession.CurrencyList;
-            filterContext.ActionParameters[item.Key] = value;
-        }
-
-        private static void MapAgentXml(ActionExecutingContext filterContext, Model.Auth.UserAuthInfo userSession)
-        {
-            var item = filterContext.ActionParameters.Where(x => x.Value is IMetaModelAgent)
-                    .Select(x => x).FirstOrDefault();
-
-            var currencyId = 0;
-            if (item.Value is IMetaModelCurrency itemWithCurrency)
-            {
-                currencyId = itemWithCurrency.CurrencyId;
-            }
-
-            if (item.Value is IMetaModelAgent itemWithAgent)
-            {
-                itemWithAgent.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, currencyId, itemWithAgent.IsExcludedTestData);
-                filterContext.ActionParameters[item.Key] = itemWithAgent;
-            }
-        }
     }
 }

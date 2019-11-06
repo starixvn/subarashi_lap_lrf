@@ -1,6 +1,4 @@
-﻿var merge = require('webpack-merge');
-var utils = require('./utils');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+﻿const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const devConfig = require('./webpack.react.dev.conf.js');
 var pathConfig = require('../config/pathReact');
@@ -12,19 +10,9 @@ const entry = {
     [`${jsPath}/lib/langHelper`]: pathConfig.scriptPaths.languageResource,
     [`${jsPath}/lib/lang-zh-CN`]: pathConfig.scriptPaths.langCN,
     [`${cssPath}/vendor`]: pathConfig.cssPaths.layout,
-    [`${jsPath}/playeradmin/playerlist`]: pathConfig.scriptPaths.playerlist,
-    [`${cssPath}/playeradmin/index`]: pathConfig.cssPaths.playeradmin,
-    [`${jsPath}/playeradmin/runningbetlist`]: pathConfig.scriptPaths.playerrunningbetlist,
-    [`${cssPath}/playeradmin/running-betlist`]: pathConfig.cssPaths.playerrunningbetlist,
-    [`${jsPath}/playeradmin/betlimit`]: pathConfig.scriptPaths.playerbetlimit,
-    [`${cssPath}/playeradmin/betlimit`]: pathConfig.cssPaths.playerbetlimit,
-    [`${jsPath}/playeradmin/accountinfo`]: pathConfig.scriptPaths.accountinfo,
-    [`${cssPath}/playeradmin/account-info`]: pathConfig.cssPaths.accountInfo,
-    [`${jsPath}/playeradmin/single-customer`]: pathConfig.scriptPaths.singleCustomer,
-    [`${jsPath}/playeradmin/playerwinloss`]: pathConfig.scriptPaths.playerwinloss,
-    [`${cssPath}/playeradmin/playerwinloss`]: pathConfig.cssPaths.playerwinloss,
-    [`${jsPath}/playeradmin/statement`]: pathConfig.scriptPaths.statement,
-    [`${cssPath}/playeradmin/statement`]: pathConfig.cssPaths.statement
+
+    [`${jsPath}/report/dailybets`]: pathConfig.scriptPaths.dailybets,
+    [`${cssPath}/dailybets/index`]: pathConfig.cssPaths.dailybets,
 }
 
 const devByPageConfig = {

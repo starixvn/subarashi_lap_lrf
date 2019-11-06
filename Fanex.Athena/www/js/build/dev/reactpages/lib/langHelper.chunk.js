@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 10/15/2019 9:25:08 AM
+// Generated at: 10/31/2019 2:18:13 PM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -247,6 +247,7 @@ window._language_en_US = {
   CreditDebit: "Credit/Debit",
   CS: "CS",
   CSComm: "CS Comm",
+  Currencies: "Currencies",
   Currency: "Currency",
   CurrentBalance: "Current Balance",
   Currentmonth: "Current month",
@@ -273,6 +274,7 @@ window._language_en_US = {
   CustomerWinnings: "Customer&apos;s Winnings",
   DA: "DA",
   Daily: "Daily",
+  DailyBets: "Daily Bets",
   DailyStatement: "Daily Statement",
   DailyStatementMsg: "Support data up to 4 months only",
   Data: "data",
@@ -607,6 +609,7 @@ window._language_en_US = {
   PlatformWinLossTitle: "Platform Win Loss - {0} --&gt; {1} - {2} - {3} - {4}",
   Player: "Player",
   PlayerAdminUpdateFailedMsg: "Please try again!",
+  PlayerName: "Player Name",
   PlayerStatementSupportMonths: "Support data up to 18 months",
   PreGame: "Pre Game",
   Prev: "Prev",
@@ -732,6 +735,7 @@ window._language_en_US = {
   TotalGoal: "Total Goal",
   TotalHome: "Total Home",
   Totalin: "Total in",
+  TotalTickets: "Total tickets",
   TotalTransaction: "Total Transaction",
   TotalTurnover: "Total Turnover",
   ToViewHistoryRptMsg: "Please click to view history report",

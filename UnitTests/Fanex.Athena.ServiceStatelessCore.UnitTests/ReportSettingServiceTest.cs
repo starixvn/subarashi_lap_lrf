@@ -24,7 +24,7 @@
     {
         private ReportSettingService _reportSettingService;
 
-        private IMemoryCacheService _cache;
+        private ICustomMemoryCacheService _cache;
 
         private IAppSettings _appSettings;
 
@@ -35,7 +35,7 @@
         [SetUp]
         public void SetUp()
         {
-            _cache = Substitute.For<IMemoryCacheService>();
+            _cache = Substitute.For<ICustomMemoryCacheService>();
             _appSettings = Substitute.For<IAppSettings>();
             _fakeLicenseeSettingService = Substitute.For<ILicenseeSettingService>();
             _reportSettingService = Substitute.ForPartsOf<ReportSettingService>(

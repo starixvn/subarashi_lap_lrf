@@ -26,11 +26,11 @@ namespace Fanex.Athena.Service.StatelessCore
         private const string FakeLicenseeSettingsCacheKey = "LRF_FakeLicenseeSettings";
         private const int OneDayInSecond = 86400;
 
-        private readonly IMemoryCacheService _cache;
+        private readonly ICustomMemoryCacheService _cache;
 
         private readonly ILicenseeDataAccess _licenseeDataAccess;
 
-        public LicenseeSettingService(IMemoryCacheService cache, ILicenseeDataAccess licenseeDataAccess)
+        public LicenseeSettingService(ICustomMemoryCacheService cache, ILicenseeDataAccess licenseeDataAccess)
         {
             _cache = cache;
             _licenseeDataAccess = licenseeDataAccess;

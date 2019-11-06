@@ -146,12 +146,13 @@
     <Compile Include="MetaModel\BaseMetaModel.cs" />
     <Compile Include="MetaModel\Common\LeagueMetaModel.cs" />
     <Compile Include="MetaModel\IMetaModelCurrencyIdList.cs" />
+    <Compile Include="MetaModel\IMetaModelCurrencyList.cs" />
     <Compile Include="MetaModel\IMetaModelIP.cs" />
     <Compile Include="MetaModel\IMetaModelLanguage.cs" />
     <Compile Include="MetaModel\IMetaModelProduct.cs" />
     <Compile Include="MetaModel\IMetaModelProductCodeList.cs" />
     <Compile Include="MetaModel\IMetalModelValidation.cs" />
-    <Compile Include="MetaModel\IMetaModelCurrencyList.cs" />
+    <Compile Include="MetaModel\IMetaModelDictionaryCurrencyList.cs" />
     <Compile Include="MetaModel\IMetaModelSiteName.cs" />
     <Compile Include="MetaModel\IMetaModelUserId.cs" />
     <Compile Include="MetaModel\Product\ProductOption.cs" />

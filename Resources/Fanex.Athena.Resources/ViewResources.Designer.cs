@@ -1429,6 +1429,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Currencies.
+        /// </summary>
+        public static string Currencies {
+            get {
+                return ResourceManager.GetString("Currencies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Currency.
         /// </summary>
         public static string Currency {
@@ -1659,6 +1668,15 @@ namespace Fanex.Athena.Resources {
         public static string Daily {
             get {
                 return ResourceManager.GetString("Daily", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Daily Bets.
+        /// </summary>
+        public static string DailyBets {
+            get {
+                return ResourceManager.GetString("DailyBets", resourceCulture);
             }
         }
         
@@ -4669,6 +4687,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Player Name.
+        /// </summary>
+        public static string PlayerName {
+            get {
+                return ResourceManager.GetString("PlayerName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Support data up to 18 months.
         /// </summary>
         public static string PlayerStatementSupportMonths {
@@ -5790,6 +5817,15 @@ namespace Fanex.Athena.Resources {
         public static string Totalin {
             get {
                 return ResourceManager.GetString("Totalin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total tickets.
+        /// </summary>
+        public static string TotalTickets {
+            get {
+                return ResourceManager.GetString("TotalTickets", resourceCulture);
             }
         }
         

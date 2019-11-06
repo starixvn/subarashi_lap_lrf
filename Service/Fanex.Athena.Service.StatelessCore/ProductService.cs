@@ -27,9 +27,9 @@
 
         private readonly IXDocumentWrapper _xmlWrapper;
 
-        private readonly IMemoryCacheService _cache;
+        private readonly ICustomMemoryCacheService _cache;
 
-        public ProductService(IAppSettings appSettings, IProductDataAccess productDataAccess, IXDocumentWrapper xmlWrapper, IMemoryCacheService cache)
+        public ProductService(IAppSettings appSettings, IProductDataAccess productDataAccess, IXDocumentWrapper xmlWrapper, ICustomMemoryCacheService cache)
         {
             _appSettings = appSettings;
             _productDataAccess = productDataAccess;

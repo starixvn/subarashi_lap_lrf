@@ -1,9 +1,9 @@
-﻿using Fanex.Athena.Model.Core.MetaModel;
-using Fanex.Athena.Service.Core.Utility.Interfaces;
-using System;
+﻿using System;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Fanex.Athena.Model.Core.MetaModel;
+using Fanex.Athena.Service.Core.Utility.Interfaces;
 
 namespace Fanex.Athena.Web.ActionFilter
 {
@@ -16,6 +16,14 @@ namespace Fanex.Athena.Web.ActionFilter
 
         public bool IsValidCurrency { get; set; }
 
+        public bool IsValidCurrencyList { get; set; }
+
+        public bool IsValidProductCodeList { get; set; }
+
+        public bool IsSingleWallet { get; set; }
+
+        public string FunctionConfig { get; set; }
+
         public bool IsIncludeKeanOcean { get; set; }
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
@@ -25,13 +33,18 @@ namespace Fanex.Athena.Web.ActionFilter
                  : filterContext.ActionParameters.Where(x => x.Value is IMetaModelValidation)
                       .Select(x => x.Value).FirstOrDefault();
 
-            var result = ValidationService.IsValid(model
-                ,
+            var result = ValidationService.IsValid(model,
                  new CurrencyValidationOption
                  {
                      IsValidCurrency = IsValidCurrency,
                      IsIncludeKeanOcean = IsIncludeKeanOcean,
-
+                     IsValidCurrencyList = IsValidCurrencyList
+                 },
+                 new ProductValidationOption
+                 {
+                     IsValidProductCodeList = IsValidProductCodeList,
+                     IsSingleWallet = IsSingleWallet,
+                     FunctionConfig = FunctionConfig
                  });
 
             if (!result)
@@ -43,9 +56,6 @@ namespace Fanex.Athena.Web.ActionFilter
                     err = "400"
                 }));
             }
-
         }
-
-
     }
 }

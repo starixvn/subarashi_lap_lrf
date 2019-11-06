@@ -21,7 +21,7 @@ namespace Fanex.Athena.Service.StatelessCore
         private const string JsonContentType = "application/json";
         private readonly HttpClient _client;
 
-        private static JsonSerializerSettings _jsonSerializerSettings = new JsonSerializerSettings
+        private static readonly JsonSerializerSettings _jsonSerializerSettings = new JsonSerializerSettings
         {
             DateTimeZoneHandling = DateTimeZoneHandling.Unspecified,
             NullValueHandling = NullValueHandling.Ignore,
@@ -40,7 +40,7 @@ namespace Fanex.Athena.Service.StatelessCore
                 HttpResponseMessage response = null;
                 if (mediaType == MediaType.MsgPack)
                 {
-                    httpRequest.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(MsgPackContentType));                    
+                    httpRequest.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(MsgPackContentType));
                     using (var content = new ByteArrayContent(MessagePackSerializer.Serialize(value)))
                     {
                         content.Headers.ContentType = new MediaTypeHeaderValue(MsgPackContentType);
@@ -60,7 +60,8 @@ namespace Fanex.Athena.Service.StatelessCore
                     }
                 }
 
-                if (response is null || response.StatusCode != HttpStatusCode.OK)
+                if (response is null ||
+                    (response.StatusCode != HttpStatusCode.OK && response.StatusCode != HttpStatusCode.NoContent))
                 {
                     var errorMessage = new StringBuilder($"Http Error ={await response?.Content.ReadAsStringAsync()}\n Error occur when query report data");
                     errorMessage.AppendLine($"HTTP status code ={ response?.StatusCode }");
@@ -69,7 +70,6 @@ namespace Fanex.Athena.Service.StatelessCore
 
                 return await codeBlock(response).ConfigureAwait(false);
             }
-
         }
 
         public async Task<string> PostAsyncString(string path, object value, string language)

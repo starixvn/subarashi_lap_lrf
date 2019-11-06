@@ -106,7 +106,6 @@
   <ItemGroup>
     <Compile Include="Attributes\ApiOneAuthorizationAttributeTest.cs" />
     <Compile Include="Attributes\ApiPermissionOnDataAttributeTest.cs" />
-    <Compile Include="Attributes\StatelessApiAutoBindMetaModelAttributeTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

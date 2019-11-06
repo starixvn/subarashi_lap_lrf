@@ -33,5 +33,7 @@
         public const string BettingTicketCenterMultiCustomers = "BettingTicketCenter_MultiCustomers";
 
         public const string CasinoTurnover = "CasinoTurnover";
+
+        public const string DailyBets = "DailyBets";
     }
 }

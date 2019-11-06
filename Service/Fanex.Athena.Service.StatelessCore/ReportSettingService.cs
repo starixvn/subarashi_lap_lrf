@@ -26,14 +26,14 @@ namespace Fanex.Athena.Service.StatelessCore
     {
         private const string CacheKey = "LRF_ReportSettings";
 
-        private readonly IMemoryCacheService _cache;
+        private readonly ICustomMemoryCacheService _cache;
 
         private readonly IAppSettings _appSettings;
 
         private readonly ILicenseeSettingService _licenseeSettingService;
 
         public ReportSettingService(
-            IMemoryCacheService cache,
+            ICustomMemoryCacheService cache,
             IAppSettings appSettings,
             ILicenseeSettingService licenseeSettingService
            )

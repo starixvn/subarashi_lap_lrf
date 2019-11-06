@@ -29,7 +29,7 @@
         private IProductDataAccess _productDataAccess;
         private IXDocumentWrapper _xmlWrapper;
         private IProductService _productService;
-        private IMemoryCacheService _cache;
+        private ICustomMemoryCacheService _cache;
 
         [SetUp]
         public void SetUp()
@@ -37,7 +37,7 @@
             _appSettings = Substitute.For<IAppSettings>();
             _productDataAccess = Substitute.For<IProductDataAccess>();
             _xmlWrapper = Substitute.For<IXDocumentWrapper>();
-            _cache = Substitute.For<IMemoryCacheService>();
+            _cache = Substitute.For<ICustomMemoryCacheService>();
 
             _productService = Substitute.ForPartsOf<ProductService>(_appSettings, _productDataAccess, _xmlWrapper, _cache);
 

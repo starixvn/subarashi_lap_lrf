@@ -29,14 +29,14 @@
                 new Match { MatchId = 1 }
             };
 
-        private IMemoryCacheService _cache;
+        private ICustomMemoryCacheService _cache;
         private IMatchDataAccess _matchDataAccess;
         private IMatchService _matchService;
 
         [SetUp]
         public void SetUp()
         {
-            _cache = Substitute.For<IMemoryCacheService>();
+            _cache = Substitute.For<ICustomMemoryCacheService>();
             _matchDataAccess = Substitute.For<IMatchDataAccess>();
             _matchService = new MatchService(_matchDataAccess, _cache);
         }
