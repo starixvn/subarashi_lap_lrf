@@ -13,11 +13,15 @@ namespace Fanex.Athena.Web.ActionFilter
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
     public sealed class AutoBindMetaModelAttribute : ActionFilterAttribute
     {
+        private static readonly ISessionStorage _sessionStorage = new SessionStorage();
+
         public bool BindAgent { get; set; }
+
+        public bool BindCurrencyList { get; set; }
+
         public bool BindUserId { get; set; }
         public bool BindLicenseeContract { get; set; }
 
-        private static readonly ISessionStorage _sessionStorage = new SessionStorage();
         public IProductService ProductService { get; set; }
         public ILicenseeSettingService LicenseeSettingService { get; set; }
 
@@ -40,6 +44,11 @@ namespace Fanex.Athena.Web.ActionFilter
             {
                 MapLicenseeContract(filterContext, userSession);
             }
+            if (BindCurrencyList)
+            {
+                AutoBindMetaModelService.MapCurrencyList(actionArgument, userSession.CurrencyList);
+            }
+
             base.OnActionExecuting(filterContext);
         }
 

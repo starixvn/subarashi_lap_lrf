@@ -88,22 +88,6 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests.Utility
         }
 
         [Test]
-        public void MapDictionaryCurrencyList_WhenCall_DictionaryCurrencyAssignedCorrectly()
-        {
-            // Arrange
-            var metaModel = Substitute.For<IMetaModelDictionaryCurrencyList>();
-            var actionArgument = CreateActionArgument(metaModel);
-
-            var dictionaryCurrency = FakeHelper.Create<IDictionary<int, string>>();
-
-            // Action
-            AutoBindMetaModelService.MapDictionaryCurrencyList(actionArgument, dictionaryCurrency);
-
-            // Assert
-            Assert.That(metaModel.CurrencyList, Is.EqualTo(dictionaryCurrency));
-        }
-
-        [Test]
         public void MapCurrencyList_WithCurrencyIdListString_CurrencyListAssignCorrectly()
         {
             // Arrange

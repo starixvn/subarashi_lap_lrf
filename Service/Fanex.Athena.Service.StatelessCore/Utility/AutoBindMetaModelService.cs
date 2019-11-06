@@ -54,19 +54,8 @@ namespace Fanex.Athena.Service.StatelessCore.Utility
             }
         }
 
-        public static void MapDictionaryCurrencyList(IDictionary<string, object> actionArguments, IDictionary<int, string> currencyList)
-        {
-            var itemByDictionary = actionArguments.FirstOrDefault(x => x.Value is IMetaModelDictionaryCurrencyList)
-;
-            if (itemByDictionary.Value != null)
-            {
-                var value = itemByDictionary.Value as IMetaModelDictionaryCurrencyList;
-                value.CurrencyList = currencyList;
-                actionArguments[itemByDictionary.Key] = value;
-            }
-        }
-
-        public static void MapCurrencyList(IDictionary<string, object> actionArguments,
+        public static void MapCurrencyList(
+            IDictionary<string, object> actionArguments,
             IDictionary<int, string> currencyList)
         {
             var item = actionArguments.FirstOrDefault(x => x.Value is IMetaModelCurrencyList);
