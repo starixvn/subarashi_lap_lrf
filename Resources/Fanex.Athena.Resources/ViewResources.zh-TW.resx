@@ -1977,7 +1977,7 @@
     <value>在體育的搜尋結果將包含相關的紅利與現金注單</value>
   </data>
   <data name="BettingTicketCenter_RefnoTabNote2" xml:space="preserve">
-    <value>For {0}: Please provide username also in order to search ticket later than {1}</value>
+    <value>{0}: 請提供用戶名以便查詢{1}之後的注單</value>
     <comment>122267</comment>
   </data>
   <data name="AbnormalBet" xml:space="preserve">

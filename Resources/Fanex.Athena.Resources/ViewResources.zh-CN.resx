@@ -1991,7 +1991,7 @@
     <value>在体育的搜寻结果将包含相关的红利与现金注单</value>
   </data>
   <data name="BettingTicketCenter_RefnoTabNote2" xml:space="preserve">
-    <value>For {0}: Please provide username also in order to search ticket later than {1}</value>
+    <value>{0}: 请提供用户名以便查询{1}之后的注单</value>
     <comment>122267</comment>
   </data>
   <data name="AbnormalBet" xml:space="preserve">
