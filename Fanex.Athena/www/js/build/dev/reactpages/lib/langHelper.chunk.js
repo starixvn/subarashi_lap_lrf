@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 10/31/2019 2:18:13 PM
+// Generated at: 11/06/2019 2:37:43 PM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -179,7 +179,7 @@ window._language_en_US = {
   BettingTicketCenter_MultiCustomersTabNote1: "All bettypes, League, and Match filter available only when 1 day is selected",
   BettingTicketCenter_MultiCustomersTabNote2: "Data is available from {0}",
   BettingTicketCenter_RefnoTabNote1: "For Sportsbook, the search result includes the related Bonus/Cash tickets.",
-  BettingTicketCenter_RefnoTabNote2: "For RNG Keno, Lottery: Please provide username also in order to search ticket later than {0}",
+  BettingTicketCenter_RefnoTabNote2: "For {0}: Please provide username also in order to search ticket later than {1}",
   BetTradeCommission: "Bet Trade Commission",
   BetTradeNotOfferCurrency: "BetTrade is not offered for this currency.",
   BetType: "Bet type",
