@@ -8367,7 +8367,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
             //level 0,1,2
             urlData: 'api/LicenseeWinLossReport/Index',
             urlExcelData: 'api/LicenseeWinLossReport/Index',
-            urlPromotionPrizeExcelData: 'api/PromotionPrizeReport/ExportExcel',
+            urlPromotionPrizeExcelData: 'PromotionPrizeReport/ExportExcel',
             gridOption:
             {
                 datatype: 'local',

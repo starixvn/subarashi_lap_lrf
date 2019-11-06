@@ -5389,6 +5389,18 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
         };
 
+        const promotionColumn =
+        {
+            name: 'Promotion',
+            index: 'Promotion',
+            width: 80,
+            align: 'right',
+            sortable: false,
+            resizable: false,
+            formatter: 'currency',
+            formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
+        };
+
         const turnoverColumn =
         {
             name: 'Turnover',
@@ -5554,6 +5566,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         'Withdrawal',
         'Bonus',
         'Adjustment',
+        'Promotion',
         'Turnover',
         'DrawGame',
         'NetTurnover',
@@ -5571,6 +5584,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             withdrawalColumn,
             bonusColumn,
             adjustmentColumn,
+            promotionColumn,
             turnoverColumn,
             drawGameColumn,
             netTurnoverColumn,
@@ -5605,8 +5619,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             urlExcelData: 'api/CustomerBalanceReport/ExportExcel',
             hasCustomerComm: true,
             isAllowBA: true,
-            customerCommIndex: 11,
-            productBAIndex: 13,
+            customerCommIndex: 12,
+            productBAIndex: 14,
             totalColspan: 3,
             gridOption:
             {

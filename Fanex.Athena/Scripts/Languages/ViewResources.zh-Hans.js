@@ -1,4 +1,4 @@
-﻿// Generated at: 11/06/2019 2:37:50 PM
+﻿// Generated at: 11/06/2019 11:42:40 AM
 var _language_zh_Hans = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -432,6 +432,7 @@ ProductNG:"百练赛",
 ProductSB:"体育博彩",
 ProductVS:"虚拟运动",
 ProductVS2:"虚拟运动2",
+Promotion:"促销活动",
 PromotionPrize:"活动奖金",
 RB:"赛马",
 RecommendBrowserOnReportPageMsg:"若页面大小 &gt; 1,000, 请您考虑使用火狐或Chrome以获得更好的体验",

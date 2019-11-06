@@ -6871,7 +6871,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         {
             urlData: 'CustomerWinLossReport/Index',
             urlExcelData: 'CustomerWinLossReport/Index',
-            urlPromotionPrizeExcelData: 'api/PromotionPrizeReport/ExportExcel',
+            urlPromotionPrizeExcelData: 'PromotionPrizeReport/ExportExcel',
             hasCustomerComm: true,
             isAllowBA: true,
             customerCommIndex: 11,
