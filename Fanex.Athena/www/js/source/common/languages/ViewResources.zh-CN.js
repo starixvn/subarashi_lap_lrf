@@ -1,4 +1,4 @@
-﻿// Generated at: 10/30/2019 1:46:47 PM
+﻿// Generated at: 11/06/2019 2:37:43 PM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -75,7 +75,7 @@ BettingTicketCenter:"注单中心",
 BettingTicketCenter_MultiCustomersTabNote1:"所有投注类别，联赛和比赛过滤器仅支援1个选定日期",
 BettingTicketCenter_MultiCustomersTabNote2:"显示从{0}开始的资料",
 BettingTicketCenter_RefnoTabNote1:"在体育的搜寻结果将包含相关的红利与现金注单",
-BettingTicketCenter_RefnoTabNote2:"For RNG Keno, Lottery, Colossus Bets: Please provide username also in order to search ticket later than {0}",
+BettingTicketCenter_RefnoTabNote2:"{0}: 请提供用户名以便查询{1}之后的注单",
 BetType:"投注类别",
 BONTeamToScore:"双方/一方/两者皆不得分",
 Bonus:"红利",
