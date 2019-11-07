@@ -28,7 +28,7 @@
     window._AppData = {
     isAllowedCustomerComm: @Model.ToJson(),
     baseCurrencyList:@Html.Raw(baseCurrencyList.ToJson()),
-    balanceUpDay: '@(ViewBag.BalanceUpDay.ToString("MM/dd/yyyy"))'
+    productsRequireUseNameNote: '@ViewBag.ProductsRequireUseNameNote'
     };
 }
 <div id="app-container">

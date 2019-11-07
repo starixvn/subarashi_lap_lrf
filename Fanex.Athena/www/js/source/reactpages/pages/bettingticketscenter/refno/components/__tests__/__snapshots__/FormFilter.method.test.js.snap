@@ -211,7 +211,7 @@ exports[`FormFilter  render correctly 1`] = `
       <div
         className="form-group"
       >
-        <CheckBox
+        <ForwardRef
           checked={true}
           disabled={false}
           id="IsConvertAll"

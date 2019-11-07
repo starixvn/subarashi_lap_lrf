@@ -74,8 +74,12 @@
 
         public ActionResult RefNo()
         {
-            ViewBag.BalanceUpDay = _balanceUpDataAccess.GetBalanceUp().BalanceUpDay;
+            ViewBag.ProductsRequireUseNameNote = string.Format(
+                ViewResources.BettingTicketCenter_RefnoTabNote2,
+                GetProductsRequireUseName(),
+                _balanceUpDataAccess.GetBalanceUp().BalanceUpDay.ToString(FormatKey.DateFormat));
             ViewBag.SelectedBaseCurrency = SessionService.UserSession.DefaultBaseCurrency;
+
             return View(
                 "~/Views/Desktop/BetList/BettingTicketCenter/RefNo.cshtml",
                 SessionService.LicenseeSession.IsAllowedCustomerComm);
@@ -93,6 +97,32 @@
             };
 
             return View("~/Views/Desktop/BetList/BettingTicketCenter/Running.cshtml", viewModel);
+        }
+
+        private string GetProductsRequireUseName()
+        {
+            var productsRequireUseName = new[]
+            {
+                Product.KN,
+                Product.LT,
+                Product.CB,
+                Product.CS,
+                Product.AB,
+                Product.VB,
+                Product.FW,
+                Product.CC,
+                Product.PP
+            };
+
+            var productAccess = _productService.GetSingleWalletProductAccess(
+                SessionService.LicenseeSession.LicenseeId,
+                SessionService.UserSession.Language);
+
+            var licProductsRequireUseName = productAccess.ProductList
+                .Where(product => productsRequireUseName.Contains(product.ProductCode))
+                .Select(x => x.ProductName);
+
+            return string.Join(", ", licProductsRequireUseName);
         }
 
         private static IEnumerable<CheckedItem> GetRunningStatusList()

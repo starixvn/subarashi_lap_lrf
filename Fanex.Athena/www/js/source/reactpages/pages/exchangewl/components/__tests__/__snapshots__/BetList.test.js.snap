@@ -296,9 +296,12 @@ exports[`BetList  render  show bet list detail popup when show detail state is t
     >
       <p
         className="no-info-row center-align"
-      >
-        NoInfo
-      </p>
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": "NoInfo",
+          }
+        }
+      />
     </div>
   </div>
   <div
@@ -338,9 +341,12 @@ exports[`BetList  render  show bet list detail popup when show detail state is t
       >
         <p
           className="no-info-row center-align"
-        >
-          NoInfo
-        </p>
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "NoInfo",
+            }
+          }
+        />
       </div>
     </div>
   </div>
@@ -827,9 +833,12 @@ exports[`BetList  render  show no data title when gridData is empty - match snap
     >
       <p
         className="no-info-row center-align"
-      >
-        NoInfo
-      </p>
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": "NoInfo",
+          }
+        }
+      />
     </div>
   </div>
 </div>

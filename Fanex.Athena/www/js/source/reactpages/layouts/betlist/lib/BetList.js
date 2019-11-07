@@ -1,14 +1,9 @@
 ﻿import QueryString from '@jsroot/lib/QueryString'
-
-const BETTYPE_CASHOUT = 911;
-const BETTYPE_MIXPARLAY = 9, BETTYPE_SYSTEMPARLAY = 29, BETTYPE_MIXPARLAY_BETRADAR = 2799;
-const MIN_BETTYPE_FASTMARKET = 221;
-const MAX_BETTYPE_FASTMARKET = 227;
+import { BetType } from './constants'
 
 class BetList {
-
     _isFastMarket(bettype) {
-        return bettype >= MIN_BETTYPE_FASTMARKET && bettype <= MAX_BETTYPE_FASTMARKET;
+        return bettype >= BetType.MIN_FASTMARKET && bettype <= BetType.MAX_FASTMARKET;
     }
 
     _getMixParlayResultUrl(rootUrl, refno, winlostdate, bettype) {
@@ -39,11 +34,11 @@ class BetList {
         return url;
     }
 
-    getResultUrl(rootUrl, matchid, raceNo, bettype, sporttype, refno,
-        username, winlostdate, refnoMixParlay, league, isOutright, extension1, extension2, custid) {
+    getResultUrl(rootUrl, matchid, raceNo, bettype, sporttype, winlostdate, refnoMixParlay, league, isOutright, extension1, extension2, custid) {
+
         bettype = Number(bettype);
 
-        let isParlay = bettype === BETTYPE_MIXPARLAY || bettype === BETTYPE_SYSTEMPARLAY || bettype === BETTYPE_MIXPARLAY_BETRADAR;
+        let isParlay = bettype === BetType.MIXPARLAY || bettype === BetType.SYSTEMPARLAY || bettype === BetType.MIXPARLAY_BETRADAR;
         let url = isParlay
             ? this._getMixParlayResultUrl(rootUrl, refnoMixParlay, winlostdate, bettype)
             : this._getSportBookResultUrl(rootUrl, matchid, bettype, raceNo, sporttype, league, isOutright, extension1, extension2, custid);
@@ -98,7 +93,7 @@ class BetList {
     }
 
     getCashOutHistoryPopupSetting(rootUrl, baseCurrency, transId, refNo, betType, betdaqId) {
-        var isCashOut = betdaqId < 1 || betType === BETTYPE_CASHOUT;
+        var isCashOut = betdaqId < 1 || betType === BetType.CASHOUT;
         var url = rootUrl + 'CashOutBetList/Detail';
         url = QueryString.setParam(url, 'transId', transId);
         url = QueryString.setParam(url, 'refNo', refNo);
@@ -206,6 +201,54 @@ class BetList {
         url = QueryString.setParam(url, 'custId', custId);
         url = QueryString.setParam(url, 'transType', transType);
         url = QueryString.setParam(url, 'BaseCurrency', baseCurrency);
+
+        return url;
+    }
+
+
+    getRngCasinoResultUrl(rootUrl) {
+        return rootUrl + 'ResultReport/ShowRngCasinoSingleWalletResult';
+    }
+
+    getVoidbridgeResultUrl(rootUrl, custid, gamePlayID) {
+        let url = rootUrl + 'ResultReport/VoidbridgeResult';
+        url = QueryString.setParam(url, 'custid', custid);
+        url = QueryString.setParam(url, 'gamePlayID', gamePlayID);
+
+        return url;
+    }
+
+    getPPResultUrl(rootUrl, custid, gamePlayId) {
+        let url = rootUrl + 'PPResultPopup/Index';
+        url = QueryString.setParam(url, 'custid', custid);
+        url = QueryString.setParam(url, 'gamePlayId', gamePlayId);
+
+        return url;
+    }
+
+    getCardClubResultUrl(rootUrl, custid, gameTypeId, transId3rd) {
+        let url = rootUrl + 'CardClubResultPopup/Index';
+        url = QueryString.setParam(url, 'custid', custid);
+        url = QueryString.setParam(url, 'gameTypeId', gameTypeId);
+        url = QueryString.setParam(url, 'transId3rd', transId3rd);
+
+        return url;
+    }
+
+    getAllBetResultUrl(rootUrl, transdesc, betcheck, bettype) {
+        let url = rootUrl + 'ResultReport/AllBetResult';       
+        url = QueryString.setParam(url, 'betcheck', betcheck);
+        url = QueryString.setParam(url, 'bettype', bettype);
+        url = QueryString.setParam(url, 'transdesc', encodeURIComponent(transdesc));
+
+        return url;
+
+    }
+
+    getGlobalGamingResultUrl(rootUrl, custid, gameId) {
+        let url = rootUrl + 'ResultReport/GlobalGamingResult';
+        url = QueryString.setParam(url, 'custid', custid);
+        url = QueryString.setParam(url, 'gameId', gameId);
 
         return url;
     }

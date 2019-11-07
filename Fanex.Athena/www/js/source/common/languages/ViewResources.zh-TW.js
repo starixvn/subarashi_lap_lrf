@@ -1,4 +1,4 @@
-﻿// Generated at: 10/31/2019 2:18:13 PM
+﻿// Generated at: 11/06/2019 2:37:43 PM
 window._language_zh_TW = {
 AA:"客客",
 AbnormalBet:"非正規註單",
@@ -68,7 +68,7 @@ BettingTicketCenter:"注單中心",
 BettingTicketCenter_MultiCustomersTabNote1:"所有投注類別，聯賽和比賽過濾器僅支援1個選定日期",
 BettingTicketCenter_MultiCustomersTabNote2:"顯示從{0}開始的資料",
 BettingTicketCenter_RefnoTabNote1:"在體育的搜尋結果將包含相關的紅利與現金注單",
-BettingTicketCenter_RefnoTabNote2:"關於快樂彩以及彩票：請輸入用戶名，以便搜尋{0}之後的注單",
+BettingTicketCenter_RefnoTabNote2:"{0}: 請提供用戶名以便查詢{1}之後的注單",
 BetType:"投注類別",
 BONTeamToScore:"雙方/一方/兩者皆不得分",
 Bonus:"紅利",

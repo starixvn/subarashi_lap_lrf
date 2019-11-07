@@ -1,8 +1,8 @@
-﻿jest.mock('react-redux')
+jest.mock('react-redux')
 jest.mock('redux')
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { ActionCreators } from '../../actions/index.js'
+import { ActionCreators } from '../action.js'
 
 describe('connect ', () => {
     let mapStateToProps, mapDispatchToProps;
@@ -14,21 +14,21 @@ describe('connect ', () => {
             mapDispatchToProps = mapDispatchToPropsFunc;
             return connectMock;
         });
-        require('../DataGrid').default;
+        require('../BaseDataGrid').default;
     });
 
     it('props should be mapped correctly', () => {
         const expectedResult = {
-            requestParam: '123',
-            gridData: [1,2,3],
-            reportTitle: 'Test'
+            gridData: [],
+            requestParam: 'request',
+            reportTitle: 'title'
         }
 
         const state = {
-            requestParam: '123',
-            gridData: [1,2,3],
-            reportTitle: 'Test',
-            anotherProp: 'not included'
+            gridData: [],
+            requestParam: 'request',
+            reportTitle: 'title',
+            anotherProp: 'Not included'
         }
 
         const result = mapStateToProps(state);
@@ -39,17 +39,21 @@ describe('connect ', () => {
     it('bindActionCreators should be called with correct parameter', () => {
         const mockBindAction = jest.fn();
         bindActionCreators.mockImplementationOnce(mockBindAction);
+        const expectedActionCreator = {
+            toggleLoader: ActionCreators.toggleLoader,
+            getGridData: ActionCreators.getGridData,
+            setRequestParam: ActionCreators.setRequestParam
+        }
 
         const dispatch = {};
-
         mapDispatchToProps(dispatch);
 
-        expect(mockBindAction).toHaveBeenCalledWith(ActionCreators, dispatch);
+        expect(mockBindAction).toHaveBeenCalledWith(expectedActionCreator, dispatch);
     })
 
     it('returned function of connect should be called with correct parameter', () => {
-        const DataGrid = require('../DataGrid').DataGrid;
+        const BaseDataGrid = require('../BaseDataGrid').BaseDataGrid;
 
-        expect(connectMock).toHaveBeenCalledWith(DataGrid);
+        expect(connectMock).toHaveBeenCalledWith(BaseDataGrid);
     })
 })

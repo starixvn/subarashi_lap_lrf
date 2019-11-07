@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import DataGrid from './DataGrid'
 import FormFilter from './FormFilter'
 import PageLayout from '../../common/components/PageLayout'
+import Loader from '@jsroot/components/Loader';
 
 export class AppContainer extends Component {
     constructor(props) {
@@ -11,7 +12,8 @@ export class AppContainer extends Component {
 
     render() {
         return (
-            <PageLayout selectedTabIndex="3" isLoading={this.props.isLoading}>
+            <PageLayout selectedTabIndex="3">
+                <Loader isLoading={this.props.isLoading} />
                 <FormFilter />
                 <DataGrid />
             </PageLayout>

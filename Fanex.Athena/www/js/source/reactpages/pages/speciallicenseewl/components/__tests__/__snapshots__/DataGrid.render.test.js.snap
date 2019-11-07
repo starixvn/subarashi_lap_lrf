@@ -3,9 +3,12 @@
 exports[`DataGrid   gridData length is 0 - render no content 1`] = `
 <p
   className="no-info-row center-align"
->
-  NoInfo
-</p>
+  dangerouslySetInnerHTML={
+    Object {
+      "__html": "NoInfo",
+    }
+  }
+/>
 `;
 
 exports[`DataGrid   gridData length is greater than 0 - expand licensee wl columns - render correctly 1`] = `

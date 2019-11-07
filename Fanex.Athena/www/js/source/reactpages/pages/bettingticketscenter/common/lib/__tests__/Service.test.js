@@ -44,28 +44,4 @@ describe('Service ', () => {
             expect(result).toBe(expectedResult);
         })
     })
-
-    describe('HeaderText', () => {
-        it('header text should has correct content', () => {
-            const expectedResult = {
-                Index: "#",
-                Platform: LangHelper.getSingleResource("Platform"),
-                ExternalId : LangHelper.getSingleResource("ExternalId"),
-                SystemId: LangHelper.getSingleResource("SystemId"),
-                RefNo: LangHelper.getSingleResource("RefNo"),
-                TransTime: LangHelper.getSingleResource("TransTime"),
-                Choice: LangHelper.getSingleResource("Choice"),
-                Odds: LangHelper.getSingleResource("Odds"),
-                OddsType: LangHelper.getSingleResource("OddsType"),
-                Stake: LangHelper.getSingleResource("Stake"),
-                WinLoss: LangHelper.getSingleResource("WinLoss"),
-                LicenseeWL: LangHelper.getSingleResource("LicenseeWL"),
-                Comm: LangHelper.getSingleResource("Comm"),
-                Status: LangHelper.getSingleResource("Status"),
-                Live: LangHelper.getSingleResource("Live")
-            };
-
-            expect(Service.getHeaderText()).toEqual(expectedResult);
-        })
-    })
 })

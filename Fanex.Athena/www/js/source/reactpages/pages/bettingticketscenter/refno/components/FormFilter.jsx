@@ -11,7 +11,7 @@ import LangHelper from '@jsroot/lib/langHelper'
 import Site from '@jsroot/lib/site'
 import AppData from '@jsroot/lib/AppData'
 import DataService from '@jsroot/lib/DataService.js'
-import ApiUrl from '../../common/constants/apiUrl'
+import { ApiUrl } from '../../common/lib/constants'
 import Service from '../../common/lib/Service'
 import UserGuide from '@jsroot/components/UserGuide'
 import { validateBaseCurrency } from '@jsroot/lib/validationHelper'
@@ -168,7 +168,7 @@ export class FormFilter extends Component {
                         <div className="col-9">
                             * {LangHelper.getSingleResource('BettingTicketCenter_RefnoTabNote1')}
                             <br />
-                            * {LangHelper.getSingleResource('BettingTicketCenter_RefnoTabNote2').replace('{0}', AppData.balanceUpDay)}
+                            * {AppData.productsRequireUseNameNote}
                         </div>
                </div>
             </CollapsiblePanel>

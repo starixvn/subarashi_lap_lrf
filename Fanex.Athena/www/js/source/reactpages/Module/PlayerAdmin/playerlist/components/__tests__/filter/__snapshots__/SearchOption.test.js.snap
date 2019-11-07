@@ -32,7 +32,8 @@ exports[`SearchOption handleClose - isOpen should be false - match snapshot 1`] 
         type="radio"
         value="1"
       />
-      Match prefix e.g. "
+      MatchPrefix
+       "
       <span
         className="keyword"
       >
@@ -54,7 +55,8 @@ exports[`SearchOption handleClose - isOpen should be false - match snapshot 1`] 
         type="radio"
         value="2"
       />
-      Match case e.g. AB"
+      MatchCase
+       AB"
       <span
         className="keyword"
       >
@@ -98,7 +100,8 @@ exports[`SearchOption handleClose - isOpen should be false - match snapshot 2`] 
         type="radio"
         value="1"
       />
-      Match prefix e.g. "
+      MatchPrefix
+       "
       <span
         className="keyword"
       >
@@ -120,7 +123,8 @@ exports[`SearchOption handleClose - isOpen should be false - match snapshot 2`] 
         type="radio"
         value="2"
       />
-      Match case e.g. AB"
+      MatchCase
+       AB"
       <span
         className="keyword"
       >
@@ -164,7 +168,8 @@ exports[`SearchOption handleToggleDropdown - isOpen should be changed - match sn
         type="radio"
         value="1"
       />
-      Match prefix e.g. "
+      MatchPrefix
+       "
       <span
         className="keyword"
       >
@@ -186,7 +191,8 @@ exports[`SearchOption handleToggleDropdown - isOpen should be changed - match sn
         type="radio"
         value="2"
       />
-      Match case e.g. AB"
+      MatchCase
+       AB"
       <span
         className="keyword"
       >
@@ -230,7 +236,8 @@ exports[`SearchOption handleToggleDropdown - isOpen should be changed - match sn
         type="radio"
         value="1"
       />
-      Match prefix e.g. "
+      MatchPrefix
+       "
       <span
         className="keyword"
       >
@@ -252,7 +259,8 @@ exports[`SearchOption handleToggleDropdown - isOpen should be changed - match sn
         type="radio"
         value="2"
       />
-      Match case e.g. AB"
+      MatchCase
+       AB"
       <span
         className="keyword"
       >
@@ -296,7 +304,8 @@ exports[`SearchOption with initial state - should match snapshot 1`] = `
         type="radio"
         value="1"
       />
-      Match prefix e.g. "
+      MatchPrefix
+       "
       <span
         className="keyword"
       >
@@ -318,7 +327,8 @@ exports[`SearchOption with initial state - should match snapshot 1`] = `
         type="radio"
         value="2"
       />
-      Match case e.g. AB"
+      MatchCase
+       AB"
       <span
         className="keyword"
       >

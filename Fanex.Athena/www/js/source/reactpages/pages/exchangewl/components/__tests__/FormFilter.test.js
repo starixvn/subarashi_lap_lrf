@@ -295,7 +295,7 @@ describe('FormFilter ', () => {
                         FromDate: filterProps.dateRange.fromDate,
                         ToDate: filterProps.dateRange.toDate,
                         ReportBy: filterProps.selectedReportBy,
-                        ExcludeTestData: filterProps.isExcludeTest,
+                        IsExcludedTestData: filterProps.isExcludeTest,
                         Level: 0
                     }
                 };

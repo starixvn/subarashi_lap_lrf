@@ -3,7 +3,7 @@ import { FormFilter } from '../FormFilter';
 import AppData from '@jsroot/lib/AppData';
 import LangHelper from '@jsroot/lib/langHelper';
 import DataService from '@jsroot/lib/DataService.js';
-import ApiUrl from '../../../common/constants/apiUrl';
+import { ApiUrl } from '../../../common/lib/constants';
 import Site from '@jsroot/lib/site';
 import Service from '../../../common/lib/Service';
 

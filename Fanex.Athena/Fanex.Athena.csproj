@@ -974,6 +974,7 @@
     <Content Include="www\js\source\reactpages\layouts\AppLayout.jsx" />
     <Content Include="www\js\source\reactpages\layouts\betlist\BetListLayout.jsx" />
     <Content Include="www\js\source\reactpages\layouts\betlist\lib\BetList.js" />
+    <Content Include="www\js\source\reactpages\layouts\betlist\lib\constants.js" />
     <Content Include="www\js\source\reactpages\layouts\__tests__\AppLayout.test.js" />
     <Content Include="www\js\source\reactpages\lib\dateUtils.js" />
     <Content Include="www\js\source\reactpages\lib\excel.js" />
@@ -1112,12 +1113,10 @@
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\statement\lib\service.js" />
     <Content Include="www\js\source\reactpages\Module\PlayerAdmin\statement\reducers\index.js" />
     <Content Include="www\js\source\reactpages\pages\bettingticketscenter\common\components\action.js" />
-    <Content Include="www\js\source\reactpages\pages\bettingticketscenter\common\components\__tests__\PageLayout.redux.test.js" />
-    <Content Include="www\js\source\reactpages\pages\bettingticketscenter\common\constants\apiUrl.js" />
-    <Content Include="www\js\source\reactpages\pages\bettingticketscenter\common\lib\BetList.js" />
+    <Content Include="www\js\source\reactpages\pages\bettingticketscenter\common\components\BaseDataGrid.jsx" />
     <Content Include="www\js\source\reactpages\actions\gridDataAction.js" />
+    <Content Include="www\js\source\reactpages\pages\bettingticketscenter\common\lib\constants.js" />
     <Content Include="www\js\source\reactpages\pages\bettingticketscenter\common\lib\Service.js" />
-    <Content Include="www\js\source\reactpages\pages\bettingticketscenter\common\lib\__tests__\BetList.test.js" />
     <Content Include="www\js\source\reactpages\pages\bettingticketscenter\common\lib\__tests__\Service.test.js" />
     <Content Include="www\js\source\reactpages\pages\bettingticketscenter\multicustomer\actions\matchAction.js" />
     <Content Include="www\js\source\reactpages\pages\bettingticketscenter\multicustomer\actions\leagueAction.js" />
@@ -2685,7 +2684,6 @@
     <Content Include="www\js\source\reactpages\pages\bettingticketscenter\running\components\FormFilter.jsx" />
     <Content Include="www\js\source\reactpages\pages\bettingticketscenter\running\components\index.jsx" />
     <Content Include="www\js\source\reactpages\pages\bettingticketscenter\common\components\PageLayout.jsx" />
-    <Content Include="www\js\source\reactpages\pages\bettingticketscenter\common\components\BaseDataGrid.jsx" />
     <Content Include="www\js\source\reactpages\pages\bettingticketscenter\running\components\DataGrid.jsx" />
     <Content Include="www\js\source\reactpages\layouts\BetListPopupLayout.jsx" />
     <Content Include="www\js\source\reactpages\components\popup\index.jsx" />
@@ -5748,6 +5746,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Logs\" />
+    <Folder Include="www\js\source\reactpages\pages\bettingticketscenter\common\components\__tests__\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="www\js\source\reactpages\pages\subsidiaryperformance\components\index.jsx" />

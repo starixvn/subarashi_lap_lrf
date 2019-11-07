@@ -252,11 +252,11 @@ function (_Component) {
       return "".concat(month < 10 ? '0' + month : month, "/").concat(day < 10 ? '0' + day : day, "/").concat(date.getFullYear());
     });
 
-    _defineProperty(_assertThisInitialized(_this), "beforeShowParlay", function () {
+    _defineProperty(_assertThisInitialized(_this), "beforeShow", function () {
       _this.props.toggleLoader(true);
     });
 
-    _defineProperty(_assertThisInitialized(_this), "afterShowParlay", function () {
+    _defineProperty(_assertThisInitialized(_this), "afterShow", function () {
       _this.props.toggleLoader(false);
     });
 
@@ -273,8 +273,8 @@ function (_Component) {
         getResourceFunc: this.getResource,
         formatDateStringFunc: this.formatDateString,
         baseCurrency: "",
-        beforeShowParlayFunc: this.beforeShowParlay,
-        afterShowParlayFunc: this.afterShowParlay
+        beforeShowFunc: this.beforeShow,
+        afterShowFunc: this.afterShow
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Loader__WEBPACK_IMPORTED_MODULE_10__["default"], {
         isLoading: this.props.isLoading
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormFilter__WEBPACK_IMPORTED_MODULE_5__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -329,8 +329,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -382,10 +380,10 @@ function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "onSort", function (sortBy, sortOrder) {
-      var param = _objectSpread({}, _this.props.requestParam);
-
-      param.SortBy = sortBy;
-      param.SortOrder = sortOrder;
+      var param = Object.assign({}, _this.props.requestParam, {
+        SortBy: sortBy,
+        SortOrder: sortOrder
+      });
 
       _this._getData(param);
 
@@ -393,10 +391,10 @@ function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "onPaging", function (index, size) {
-      var param = _objectSpread({}, _this.props.requestParam);
-
-      param.PageIndex = index;
-      param.PageSize = size;
+      var param = Object.assign({}, _this.props.requestParam, {
+        PageIndex: index,
+        PageSize: size
+      });
 
       _this._getData(param);
 
@@ -1536,6 +1534,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_components_popup__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/components/popup */ "./www/js/source/reactpages/components/popup/index.jsx");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./lib/constants */ "./www/js/source/reactpages/layouts/betlist/lib/constants.js");
+var _BetListLayout$propTy;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1553,6 +1556,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -1588,14 +1592,42 @@ function (_Component) {
         window.logOpenBetlistEvent && window.logOpenBetlistEvent(_this2.props.pageName);
       };
 
-      window.ViewResult = function () {
-        for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-          args[_key] = arguments[_key];
+      window.ViewResult = function (matchid, raceNo, bettype, sporttype, refno, username, winlostdate, refnoMixParlay, league, isOutright, extension1, extension2, custid, transdecs) {
+        var title = _this2._getResource('Result');
+
+        var rootUrl = _this2.props.rootUrl;
+
+        if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].RNG_GAME || sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].RNG_MINIGAME || sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].RNG_MOBILE) {
+          var url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getRngCasinoResultUrl(rootUrl);
+
+          _this2._showRngCasinoResult(refno, url, title);
+        } else if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].VOIDBRIDGE) {
+          var _url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getVoidbridgeResultUrl(rootUrl, custid, extension2);
+
+          _this2._showThirdPartyResult(_url, title);
+        } else if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].PP) {
+          var _url2 = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getPPResultUrl(rootUrl, custid, extension2);
+
+          _this2._showThirdPartyResult(_url2, title);
+        } else if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].CARDCLUB) {
+          var _url3 = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getCardClubResultUrl(rootUrl, custid, bettype, extension2);
+
+          _this2._showThirdPartyResult(_url3, title);
+        } else if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].ALLBET) {
+          var _url4 = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getAllBetResultUrl(rootUrl, transdecs, extension2, bettype);
+
+          console.log(_url4);
+
+          _this2._openPopup(_url4, title);
+        } else if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].GLOBALGAMING) {
+          var _url5 = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getGlobalGamingResultUrl(rootUrl, custid, extension2);
+
+          _this2._showThirdPartyResult(_url5, title);
+        } else {
+          var _url6 = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getResultUrl(rootUrl, matchid, raceNo, bettype, sporttype, winlostdate, refnoMixParlay, league, isOutright, extension1, extension2, custid);
+
+          _this2._openPopup(_url6, title);
         }
-
-        var url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getResultUrl.apply(_lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"], [_this2.props.rootUrl].concat(args));
-
-        _this2._openPopup(url, _this2._getResource('Result'));
       };
 
       window.showMP = function (transId) {
@@ -1614,25 +1646,27 @@ function (_Component) {
 
 
       window.showNewCombMP = function () {
-        for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-          args[_key2] = arguments[_key2];
+        for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+          args[_key] = arguments[_key];
         }
 
         _this2._showNewParlayDetail.apply(_this2, [_this2.props.rootUrl].concat(args));
       }; // show detail popup (in choice column)
 
 
-      window.showCombMPDetail = function (transId, refNo, betId, custId, betTeam, baseCurrency) {
-        var rootUrl = _this2.props.rootUrl;
+      window.showCombMPDetail = function (transId, refNo, betId, custId, betTeam) {
+        var _this2$props = _this2.props,
+            rootUrl = _this2$props.rootUrl,
+            baseCurrency = _this2$props.baseCurrency;
         var url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getParlayDetailUrl(rootUrl, transId, refNo, betId, custId, betTeam, baseCurrency);
 
         _this2._openPopup(url, betTeam);
       };
 
       window.ViewCashOutHistory = function (transId, refNo, betType, betdaqId) {
-        var _this2$props = _this2.props,
-            rootUrl = _this2$props.rootUrl,
-            baseCurrency = _this2$props.baseCurrency;
+        var _this2$props2 = _this2.props,
+            rootUrl = _this2$props2.rootUrl,
+            baseCurrency = _this2$props2.baseCurrency;
 
         var _BetList$getCashOutHi = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getCashOutHistoryPopupSetting(rootUrl, baseCurrency, transId, refNo, betType, betdaqId),
             url = _BetList$getCashOutHi.url,
@@ -1644,9 +1678,9 @@ function (_Component) {
       };
 
       window.ShowBonusDetails = function (refCode, transId) {
-        var _this2$props2 = _this2.props,
-            rootUrl = _this2$props2.rootUrl,
-            baseCurrency = _this2$props2.baseCurrency;
+        var _this2$props3 = _this2.props,
+            rootUrl = _this2$props3.rootUrl,
+            baseCurrency = _this2$props3.baseCurrency;
         var url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getBonusDetailUrl(rootUrl, refCode, transId, baseCurrency);
 
         var title = _this2._getResource('TransactionDetail');
@@ -1655,9 +1689,9 @@ function (_Component) {
       };
 
       window.showAGCasinoDetails = function (transId, winlostDate, custId, transType) {
-        var _this2$props3 = _this2.props,
-            rootUrl = _this2$props3.rootUrl,
-            baseCurrency = _this2$props3.baseCurrency;
+        var _this2$props4 = _this2.props,
+            rootUrl = _this2$props4.rootUrl,
+            baseCurrency = _this2$props4.baseCurrency;
         var url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getAGCasinoDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
 
         var title = _this2._getResource('AGCasino') + ' - ' + _this2._getResource('DetailedBetlist') + ' - ' + _this2._formatDateString(winlostDate);
@@ -1666,9 +1700,9 @@ function (_Component) {
       };
 
       window.showRnGCasinoDetails = function (transId, winlostDate, custId, transType) {
-        var _this2$props4 = _this2.props,
-            rootUrl = _this2$props4.rootUrl,
-            baseCurrency = _this2$props4.baseCurrency;
+        var _this2$props5 = _this2.props,
+            rootUrl = _this2$props5.rootUrl,
+            baseCurrency = _this2$props5.baseCurrency;
         var url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getRnGCasinoDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
 
         var title = _this2._getResource('ProductCS') + ' - ' + _this2._getResource('DetailedBetlist') + ' - ' + _this2._formatDateString(winlostDate);
@@ -1677,9 +1711,9 @@ function (_Component) {
       };
 
       window.showVoidBridgeDetails = function (transId, winlostDate, custId, transType) {
-        var _this2$props5 = _this2.props,
-            rootUrl = _this2$props5.rootUrl,
-            baseCurrency = _this2$props5.baseCurrency;
+        var _this2$props6 = _this2.props,
+            rootUrl = _this2$props6.rootUrl,
+            baseCurrency = _this2$props6.baseCurrency;
         var url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getVoidBridgeDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
 
         var title = _this2._getResource('ProductVB') + ' - ' + _this2._getResource('DetailedBetlist') + ' - ' + _this2._formatDateString(winlostDate);
@@ -1688,9 +1722,9 @@ function (_Component) {
       };
 
       window.showTodayRunningBetsDetails = function (transId, winlostDate, custId, transType) {
-        var _this2$props6 = _this2.props,
-            rootUrl = _this2$props6.rootUrl,
-            baseCurrency = _this2$props6.baseCurrency;
+        var _this2$props7 = _this2.props,
+            rootUrl = _this2$props7.rootUrl,
+            baseCurrency = _this2$props7.baseCurrency;
         var url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getAllBetDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
 
         var title = _this2._getResource('ProductAB') + ' - ' + _this2._getResource('DetailedBetlist') + ' - ' + _this2._formatDateString(winlostDate);
@@ -1699,9 +1733,9 @@ function (_Component) {
       };
 
       window.showColossusBetsDetails = function (refNo, winlostDate, transId, custId, betCheck) {
-        var _this2$props7 = _this2.props,
-            rootUrl = _this2$props7.rootUrl,
-            baseCurrency = _this2$props7.baseCurrency;
+        var _this2$props8 = _this2.props,
+            rootUrl = _this2$props8.rootUrl,
+            baseCurrency = _this2$props8.baseCurrency;
         var url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getColossusBetsDetailUrl(rootUrl, baseCurrency, refNo, winlostDate, transId, custId, betCheck);
 
         var title = _this2._getResource('TicketDetailOf').replace('{0}', refNo);
@@ -1710,9 +1744,9 @@ function (_Component) {
       };
 
       window.showGlobalGaming = function (transId, winlostDate, custId, transType) {
-        var _this2$props8 = _this2.props,
-            rootUrl = _this2$props8.rootUrl,
-            baseCurrency = _this2$props8.baseCurrency;
+        var _this2$props9 = _this2.props,
+            rootUrl = _this2$props9.rootUrl,
+            baseCurrency = _this2$props9.baseCurrency;
         var url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getGlobalGamingDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
 
         var title = _this2._getResource('ProductFW') + ' - ' + _this2._getResource('DetailedBetlist') + ' - ' + _this2._formatDateString(winlostDate);
@@ -1721,9 +1755,9 @@ function (_Component) {
       };
 
       window.showPPDetails = function (transId, winlostDate, custId, transType) {
-        var _this2$props9 = _this2.props,
-            rootUrl = _this2$props9.rootUrl,
-            baseCurrency = _this2$props9.baseCurrency;
+        var _this2$props10 = _this2.props,
+            rootUrl = _this2$props10.rootUrl,
+            baseCurrency = _this2$props10.baseCurrency;
         var url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getPPDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
 
         var title = _this2._getResource('ProductPP') + ' - ' + _this2._getResource('DetailedBetlist') + ' - ' + _this2._formatDateString(winlostDate);
@@ -1732,9 +1766,9 @@ function (_Component) {
       };
 
       window.showVideoPokerGameDetails = function (transId, winlostDate, custId, transType) {
-        var _this2$props10 = _this2.props,
-            rootUrl = _this2$props10.rootUrl,
-            baseCurrency = _this2$props10.baseCurrency;
+        var _this2$props11 = _this2.props,
+            rootUrl = _this2$props11.rootUrl,
+            baseCurrency = _this2$props11.baseCurrency;
         var url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getVideoPokerGameDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
 
         var title = _this2._getResource('ProductCC') + ' - ' + _this2._getResource('DetailedBetlist') + ' - ' + _this2._formatDateString(winlostDate);
@@ -1771,14 +1805,14 @@ function (_Component) {
       return this.props.formatDateStringFunc ? this.props.formatDateStringFunc(dateString) : dateString;
     }
   }, {
-    key: "_beforeShowParlay",
-    value: function _beforeShowParlay() {
-      this.props.beforeShowParlayFunc && this.props.beforeShowParlayFunc();
+    key: "_beforeShow",
+    value: function _beforeShow() {
+      this.props.beforeShowFunc && this.props.beforeShowFunc();
     }
   }, {
-    key: "_afterShowParlay",
-    value: function _afterShowParlay() {
-      this.props.afterShowParlayFunc && this.props.afterShowParlayFunc();
+    key: "_afterShow",
+    value: function _afterShow() {
+      this.props.afterShowFunc && this.props.afterShowFunc();
     }
   }, {
     key: "_resolveClientUrl",
@@ -1793,7 +1827,7 @@ function (_Component) {
       if (divEvent.style.display === 'none') {
         var url = this._resolveClientUrl('api/MixParlayBetList/Detail?transId=' + transId);
 
-        this._beforeShowParlay(); // this.props.toggleLoader(true);
+        this._beforeShow(); // this.props.toggleLoader(true);
 
 
         _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_1__["default"].getData(url).then(function (result) {
@@ -1808,12 +1842,13 @@ function (_Component) {
             }
           }
 
-          _this3._afterShowParlay(); // this.props.toggleLoader(false);
-
-
           divEvent.innerHTML = choice;
           divEvent.style.display = 'block';
+
+          _this3._afterShow();
         }).catch(function (error) {
+          _this3._afterShow();
+
           console.log(error);
         });
       } else {
@@ -1833,7 +1868,7 @@ function (_Component) {
       if (divEvent.style.display == 'none') {
         var url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getChoiceParlayDetailUrl(rootUrl, transId, refNo, handicap1, handicap2, betcheck, betteam, custId);
 
-        this._beforeShowParlay(); //this.props.toggleLoader(true);
+        this._beforeShow(); //this.props.toggleLoader(true);
 
 
         _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_1__["default"].getData(url).then(function (result) {
@@ -1842,9 +1877,10 @@ function (_Component) {
           divEvent.style.display = 'block';
           nameDiv.style.display = 'none';
 
-          _this4._afterShowParlay(); // this.props.toggleLoader(false);
-
+          _this4._afterShow();
         }).catch(function (error) {
+          _this4._afterShow();
+
           console.log(error);
         });
       } else {
@@ -1852,6 +1888,53 @@ function (_Component) {
         divEvent.innerHTML = '';
         nameDiv.style.display = 'block';
       }
+    }
+  }, {
+    key: "_showThirdPartyResult",
+    value: function _showThirdPartyResult(url, title) {
+      var _this5 = this;
+
+      this._beforeShow(); //this.props.toggleLoader(true);
+
+
+      _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_1__["default"].getData(url).then(function (result) {
+        if (result.data !== '') {
+          _this5._openPopup(result.data, title);
+        }
+
+        _this5._afterShow();
+      }).catch(function (error) {
+        _this5._afterShow();
+
+        console.log(error);
+      });
+    }
+  }, {
+    key: "_showRngCasinoResult",
+    value: function _showRngCasinoResult(refno, url, title) {
+      var _this6 = this;
+
+      this._beforeShow();
+
+      _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_1__["default"].postData(url, {
+        refno: refno
+      }).then(function (result) {
+        if (result.data.Success) {
+          if (result.data.Result === '') {
+            return;
+          }
+
+          _this6._openPopup(result.data.Result, title);
+        } else {
+          alert(_this6._getResource("ErrorProcessingMsg"));
+        }
+
+        _this6._afterShow();
+      }).catch(function (error) {
+        _this6._afterShow();
+
+        console.log(error);
+      });
     }
   }, {
     key: "_openPopup",
@@ -1872,7 +1955,7 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this5 = this;
+      var _this7 = this;
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "betlist-layout"
@@ -1883,7 +1966,7 @@ function (_Component) {
         width: 900,
         height: 600,
         onClose: function onClose() {
-          return _this5._closePopup();
+          return _this7._closePopup();
         }
       }));
     }
@@ -1892,15 +1975,14 @@ function (_Component) {
   return BetListLayout;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
-BetListLayout.propTypes = {
+BetListLayout.propTypes = (_BetListLayout$propTy = {
   pageName: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string.isRequired,
   rootUrl: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string.isRequired,
   getResourceFunc: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func,
   baseCurrency: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string,
-  beforeShowParlayFunc: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func,
-  afterShowParlayFunc: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func,
-  formatDateStringFunc: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func
-};
+  beforeShowFunc: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func,
+  afterShowFunc: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func
+}, _defineProperty(_BetListLayout$propTy, "beforeShowFunc", prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func), _defineProperty(_BetListLayout$propTy, "afterShowFunc", prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func), _defineProperty(_BetListLayout$propTy, "formatDateStringFunc", prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func), _BetListLayout$propTy);
 BetListLayout.defaultProps = {
   rootUrl: '/',
   baseCurrency: ''
@@ -1919,6 +2001,7 @@ BetListLayout.defaultProps = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/QueryString */ "./www/js/source/reactpages/lib/QueryString.js");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./constants */ "./www/js/source/reactpages/layouts/betlist/lib/constants.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -1926,12 +2009,7 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
-var BETTYPE_CASHOUT = 911;
-var BETTYPE_MIXPARLAY = 9,
-    BETTYPE_SYSTEMPARLAY = 29,
-    BETTYPE_MIXPARLAY_BETRADAR = 2799;
-var MIN_BETTYPE_FASTMARKET = 221;
-var MAX_BETTYPE_FASTMARKET = 227;
+
 
 var BetList =
 /*#__PURE__*/
@@ -1943,7 +2021,7 @@ function () {
   _createClass(BetList, [{
     key: "_isFastMarket",
     value: function _isFastMarket(bettype) {
-      return bettype >= MIN_BETTYPE_FASTMARKET && bettype <= MAX_BETTYPE_FASTMARKET;
+      return bettype >= _constants__WEBPACK_IMPORTED_MODULE_1__["BetType"].MIN_FASTMARKET && bettype <= _constants__WEBPACK_IMPORTED_MODULE_1__["BetType"].MAX_FASTMARKET;
     }
   }, {
     key: "_getMixParlayResultUrl",
@@ -1976,9 +2054,9 @@ function () {
     }
   }, {
     key: "getResultUrl",
-    value: function getResultUrl(rootUrl, matchid, raceNo, bettype, sporttype, refno, username, winlostdate, refnoMixParlay, league, isOutright, extension1, extension2, custid) {
+    value: function getResultUrl(rootUrl, matchid, raceNo, bettype, sporttype, winlostdate, refnoMixParlay, league, isOutright, extension1, extension2, custid) {
       bettype = Number(bettype);
-      var isParlay = bettype === BETTYPE_MIXPARLAY || bettype === BETTYPE_SYSTEMPARLAY || bettype === BETTYPE_MIXPARLAY_BETRADAR;
+      var isParlay = bettype === _constants__WEBPACK_IMPORTED_MODULE_1__["BetType"].MIXPARLAY || bettype === _constants__WEBPACK_IMPORTED_MODULE_1__["BetType"].SYSTEMPARLAY || bettype === _constants__WEBPACK_IMPORTED_MODULE_1__["BetType"].MIXPARLAY_BETRADAR;
       var url = isParlay ? this._getMixParlayResultUrl(rootUrl, refnoMixParlay, winlostdate, bettype) : this._getSportBookResultUrl(rootUrl, matchid, bettype, raceNo, sporttype, league, isOutright, extension1, extension2, custid);
       return url;
     }
@@ -2036,7 +2114,7 @@ function () {
   }, {
     key: "getCashOutHistoryPopupSetting",
     value: function getCashOutHistoryPopupSetting(rootUrl, baseCurrency, transId, refNo, betType, betdaqId) {
-      var isCashOut = betdaqId < 1 || betType === BETTYPE_CASHOUT;
+      var isCashOut = betdaqId < 1 || betType === _constants__WEBPACK_IMPORTED_MODULE_1__["BetType"].CASHOUT;
       var url = rootUrl + 'CashOutBetList/Detail';
       url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId', transId);
       url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'refNo', refNo);
@@ -2147,12 +2225,91 @@ function () {
       url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
       return url;
     }
+  }, {
+    key: "getRngCasinoResultUrl",
+    value: function getRngCasinoResultUrl(rootUrl) {
+      return rootUrl + 'ResultReport/ShowRngCasinoSingleWalletResult';
+    }
+  }, {
+    key: "getVoidbridgeResultUrl",
+    value: function getVoidbridgeResultUrl(rootUrl, custid, gamePlayID) {
+      var url = rootUrl + 'ResultReport/VoidbridgeResult';
+      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custid', custid);
+      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'gamePlayID', gamePlayID);
+      return url;
+    }
+  }, {
+    key: "getPPResultUrl",
+    value: function getPPResultUrl(rootUrl, custid, gamePlayId) {
+      var url = rootUrl + 'PPResultPopup/Index';
+      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custid', custid);
+      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'gamePlayId', gamePlayId);
+      return url;
+    }
+  }, {
+    key: "getCardClubResultUrl",
+    value: function getCardClubResultUrl(rootUrl, custid, gameTypeId, transId3rd) {
+      var url = rootUrl + 'CardClubResultPopup/Index';
+      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custid', custid);
+      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'gameTypeId', gameTypeId);
+      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId3rd', transId3rd);
+      return url;
+    }
+  }, {
+    key: "getAllBetResultUrl",
+    value: function getAllBetResultUrl(rootUrl, transdesc, betcheck, bettype) {
+      var url = rootUrl + 'ResultReport/AllBetResult';
+      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'betcheck', betcheck);
+      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'bettype', bettype);
+      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transdesc', encodeURIComponent(transdesc));
+      return url;
+    }
+  }, {
+    key: "getGlobalGamingResultUrl",
+    value: function getGlobalGamingResultUrl(rootUrl, custid, gameId) {
+      var url = rootUrl + 'ResultReport/GlobalGamingResult';
+      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custid', custid);
+      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'gameId', gameId);
+      return url;
+    }
   }]);
 
   return BetList;
 }();
 
 /* harmony default export */ __webpack_exports__["default"] = (new BetList());
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/layouts/betlist/lib/constants.js":
+/*!*******************************************************************!*\
+  !*** ./www/js/source/reactpages/layouts/betlist/lib/constants.js ***!
+  \*******************************************************************/
+/*! exports provided: BetType, SportType */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BetType", function() { return BetType; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SportType", function() { return SportType; });
+var BetType = {
+  CASHOUT: 911,
+  MIXPARLAY: 9,
+  SYSTEMPARLAY: 29,
+  MIXPARLAY_BETRADAR: 2799,
+  MIN_FASTMARKET: 221,
+  MAX_FASTMARKET: 227
+};
+var SportType = {
+  RNG_GAME: 208,
+  RNG_MINIGAME: 209,
+  RNG_MOBILE: 210,
+  ALLBET: 211,
+  VOIDBRIDGE: 212,
+  PP: 248,
+  GLOBALGAMING: 219,
+  CARDCLUB: 165
+};
 
 /***/ }),
 
