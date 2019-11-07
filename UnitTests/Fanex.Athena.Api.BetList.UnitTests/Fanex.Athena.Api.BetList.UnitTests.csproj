@@ -130,6 +130,7 @@
     <Compile Include="RunningBettypesOfMatchBetListControllerTest.cs" />
     <Compile Include="RunningMatchBetListControllerTest.cs" />
     <Compile Include="RunningMatchChoiceBetListControllerTest.cs" />
+    <Compile Include="SingleMatchParlayBetListControllerTest.cs" />
     <Compile Include="VoidbridgeBetListControllerTest.cs" />
     <Compile Include="WinlossByBetTypeBetListControllerTest.cs" />
     <Compile Include="WinlossByLeagueBetListControllerTest.cs" />

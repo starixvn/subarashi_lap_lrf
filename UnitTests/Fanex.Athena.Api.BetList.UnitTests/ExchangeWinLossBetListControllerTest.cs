@@ -148,9 +148,11 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
-                    _betListApiClient.Received().PostAsync(MainApiPath,
-Arg.Is<ExchangeBetListMetaModel>(x => x == metaModel && x.BaseCurrency == expectedBaseCurrency), SessionLanguage);
+                    Assert.That(expect, Is.EqualTo(actual));
+                    _betListApiClient.Received().PostAsync(
+                        MainApiPath,
+                        Arg.Is<ExchangeBetListMetaModel>(x => x == metaModel && x.BaseCurrency == expectedBaseCurrency),
+                        SessionLanguage);
                 });
             }
         }
@@ -253,7 +255,7 @@ Arg.Is<ExchangeBetListMetaModel>(x => x == metaModel && x.BaseCurrency == expect
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
+                    Assert.That(expect, Is.EqualTo(actual));
                     _betListApiClient.Received().PostAsync(DetailApiPath, metaModel, SessionLanguage);
                 });
             }

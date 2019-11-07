@@ -66,7 +66,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
+                    Assert.That(expect, Is.EqualTo(actual));
                     Assert.That(metaModel.UspKey, Is.EqualTo(UspKey));
                     Assert.That(metaModel.BetType, Is.EqualTo((int)BetType.CleanSheet));
                     BetListApiClient.Received().PostAsync(ApiPath, metaModel, SessionLanguage);
@@ -93,7 +93,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
+                    Assert.That(expect, Is.EqualTo(actual));
                     Assert.That(metaModel.UspKey, Is.EqualTo(UspKey));
                     Assert.That(metaModel.BetType, Is.EqualTo((int)BetType.ToWinToNil));
                     BetListApiClient.Received().PostAsync(ApiPath, metaModel, SessionLanguage);
@@ -120,7 +120,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
+                    Assert.That(expect, Is.EqualTo(actual));
                     Assert.That(metaModel.UspKey, Is.EqualTo(MultipleBettypeUspKey));
                     Assert.That(metaModel.MultipleBettype, Is.EqualTo($"{(int)BetType.ThreeWayHandicap},{(int)BetType.FirstHalfThreeWayHandicap}"));
                     BetListApiClient.Received().PostAsync(ApiPath, metaModel, SessionLanguage);

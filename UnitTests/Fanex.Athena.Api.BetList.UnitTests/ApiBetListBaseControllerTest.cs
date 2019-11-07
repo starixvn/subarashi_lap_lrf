@@ -79,19 +79,16 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    Assert.Multiple(() =>
-                    {
-                        NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
-                        Assert.That(metaModel.PageIndex, Is.EqualTo(1));
-                        Assert.That(metaModel.PageSize, Is.EqualTo(int.MaxValue - 1));
-                        Assert.That(metaModel.LicenseeId, Is.EqualTo(SessionLicenseeId));
-                        Assert.That(metaModel.BalanceUpDay, Is.EqualTo(DateTime.SpecifyKind(DefaultBalanceUp.BalanceUpDay.Date, DateTimeKind.Utc)));
-                        Assert.That(metaModel.MoveBetsDay, Is.EqualTo(DateTime.SpecifyKind(DefaultBalanceUp.MoveBetsDay.Date, DateTimeKind.Utc)));
-                        Assert.That(metaModel.AgentListXml, Is.EqualTo(AgentListXml));
-                        Assert.That(metaModel.HasPlayerCom, Is.EqualTo(SessionService.LicenseeSession.IsAllowedCustomerComm));
-                        Assert.That(metaModel.UspKey, Is.EqualTo(uspKey));
-                        BetListApiClient.Received().PostAsync(apiPath, metaModel, SessionLanguage);
-                    });
+                    Assert.That(expect, Is.EqualTo(actual));
+                    Assert.That(metaModel.PageIndex, Is.EqualTo(1));
+                    Assert.That(metaModel.PageSize, Is.EqualTo(int.MaxValue - 1));
+                    Assert.That(metaModel.LicenseeId, Is.EqualTo(SessionLicenseeId));
+                    Assert.That(metaModel.BalanceUpDay, Is.EqualTo(DateTime.SpecifyKind(DefaultBalanceUp.BalanceUpDay.Date, DateTimeKind.Utc)));
+                    Assert.That(metaModel.MoveBetsDay, Is.EqualTo(DateTime.SpecifyKind(DefaultBalanceUp.MoveBetsDay.Date, DateTimeKind.Utc)));
+                    Assert.That(metaModel.AgentListXml, Is.EqualTo(AgentListXml));
+                    Assert.That(metaModel.HasPlayerCom, Is.EqualTo(SessionService.LicenseeSession.IsAllowedCustomerComm));
+                    Assert.That(metaModel.UspKey, Is.EqualTo(uspKey));
+                    BetListApiClient.Received().PostAsync(apiPath, metaModel, SessionLanguage);
                 });
             }
         }
@@ -117,20 +114,17 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    Assert.Multiple(() =>
-                    {
-                        NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
-                        Assert.That(metaModel.IsServerPaging, Is.True);
-                        Assert.That(metaModel.PageIndex, Is.EqualTo(expectedPageIndex));
-                        Assert.That(metaModel.PageSize, Is.EqualTo(expectedPageSize));
-                        Assert.That(metaModel.LicenseeId, Is.EqualTo(SessionLicenseeId));
-                        Assert.That(metaModel.BalanceUpDay, Is.EqualTo(DateTime.SpecifyKind(DefaultBalanceUp.BalanceUpDay.Date, DateTimeKind.Utc)));
-                        Assert.That(metaModel.MoveBetsDay, Is.EqualTo(DateTime.SpecifyKind(DefaultBalanceUp.MoveBetsDay.Date, DateTimeKind.Utc)));
-                        Assert.That(metaModel.AgentListXml, Is.EqualTo(AgentListXml));
-                        Assert.That(metaModel.HasPlayerCom, Is.EqualTo(SessionService.LicenseeSession.IsAllowedCustomerComm));
-                        Assert.That(metaModel.UspKey, Is.EqualTo(uspKey));
-                        BetListApiClient.Received().PostAsync(apiPath, metaModel, SessionLanguage);
-                    });
+                    Assert.That(expect, Is.EqualTo(actual));
+                    Assert.That(metaModel.IsServerPaging, Is.True);
+                    Assert.That(metaModel.PageIndex, Is.EqualTo(expectedPageIndex));
+                    Assert.That(metaModel.PageSize, Is.EqualTo(expectedPageSize));
+                    Assert.That(metaModel.LicenseeId, Is.EqualTo(SessionLicenseeId));
+                    Assert.That(metaModel.BalanceUpDay, Is.EqualTo(DateTime.SpecifyKind(DefaultBalanceUp.BalanceUpDay.Date, DateTimeKind.Utc)));
+                    Assert.That(metaModel.MoveBetsDay, Is.EqualTo(DateTime.SpecifyKind(DefaultBalanceUp.MoveBetsDay.Date, DateTimeKind.Utc)));
+                    Assert.That(metaModel.AgentListXml, Is.EqualTo(AgentListXml));
+                    Assert.That(metaModel.HasPlayerCom, Is.EqualTo(SessionService.LicenseeSession.IsAllowedCustomerComm));
+                    Assert.That(metaModel.UspKey, Is.EqualTo(uspKey));
+                    BetListApiClient.Received().PostAsync(apiPath, metaModel, SessionLanguage);
                 });
             }
         }

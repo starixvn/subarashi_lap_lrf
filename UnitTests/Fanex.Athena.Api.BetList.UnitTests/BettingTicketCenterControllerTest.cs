@@ -66,7 +66,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
+                    Assert.That(expect, Is.EqualTo(actual));
                     _betListApiClient.Received().PostAsync(ApiPath, metaModel, SessionLanguage);
                 });
             }
@@ -96,7 +96,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
+                    Assert.That(expect, Is.EqualTo(actual));
                     _betListApiClient.Received().PostAsync(ApiPath, metaModel, SessionLanguage);
                 });
             }
@@ -150,7 +150,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
+                    Assert.That(expect, Is.EqualTo(actual));
                     _betListApiClient.Received().PostAsync(ApiPath, metaModel, SessionLanguage);
                 });
             }

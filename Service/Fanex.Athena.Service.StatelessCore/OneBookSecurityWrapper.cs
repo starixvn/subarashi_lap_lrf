@@ -8,6 +8,7 @@
     public class OneBookSecurityWrapper : IOneBookSecurityWrapper
     {
         private readonly IStorageProvider _storageProvider;
+
         public OneBookSecurityWrapper(IStorageProvider storageProvider)
         {
             _storageProvider = storageProvider;

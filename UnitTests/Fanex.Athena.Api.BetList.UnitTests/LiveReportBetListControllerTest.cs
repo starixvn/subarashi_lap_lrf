@@ -77,7 +77,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
+                    Assert.That(expect, Is.EqualTo(actual));
                     Assert.That(metaModel.UspKey, Is.EqualTo(SelWinlossByMatchUsp));
                     BetListApiClient.Received().PostAsync(ApiPath, metaModel, SessionLanguage);
                 });
@@ -103,7 +103,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
+                    Assert.That(expect, Is.EqualTo(actual));
                     Assert.That(metaModel.UspKey, Is.EqualTo(SelWinlossOutrightUsp));
                     BetListApiClient.Received().PostAsync(ApiPath, metaModel, SessionLanguage);
                 });
@@ -134,7 +134,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
+                    Assert.That(expect, Is.EqualTo(actual));
                     Assert.That(metaModel.UspKey, Is.EqualTo(SelWinlossNumberGameUsp));
                     Assert.That(metaModel.PageIndex, Is.EqualTo(expectedPageIndex));
                     Assert.That(metaModel.PageSize, Is.EqualTo(expectedPageSize));
@@ -167,7 +167,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
+                    Assert.That(expect, Is.EqualTo(actual));
                     Assert.That(metaModel.UspKey, Is.EqualTo(SelWinlossParlayUsp));
                     Assert.That(metaModel.PageIndex, Is.EqualTo(expectedPageIndex));
                     Assert.That(metaModel.PageSize, Is.EqualTo(expectedPageSize));
@@ -200,7 +200,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
+                    Assert.That(expect, Is.EqualTo(actual));
                     Assert.That(metaModel.UspKey, Is.EqualTo(SelWinlossVHRacingUsp));
                     Assert.That(metaModel.PageIndex, Is.EqualTo(expectedPageIndex));
                     Assert.That(metaModel.PageSize, Is.EqualTo(expectedPageSize));
