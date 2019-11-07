@@ -265,6 +265,8 @@ namespace Fanex.Athena.Model.Core.DataDomain
 
         NumberGameHappy5OddEven = 8102,
 
-        PromotionPrize = 4300
+        PromotionPrize = 4300,
+
+        SingleMatchParlay = 38
     }
 }

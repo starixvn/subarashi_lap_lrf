@@ -171,6 +171,7 @@
     <Compile Include="PlatformWinLossBetListController.cs" />
     <Compile Include="RNGCasinoBetListController.cs" />
     <Compile Include="RunningMatchChoiceBetListController.cs" />
+    <Compile Include="SingleMatchParlayBetListController.cs" />
     <Compile Include="VoidbridgeBetListController.cs" />
     <Compile Include="WinlossByBetTypeBetListController.cs" />
     <Compile Include="WinlossByLeagueBetListController.cs" />

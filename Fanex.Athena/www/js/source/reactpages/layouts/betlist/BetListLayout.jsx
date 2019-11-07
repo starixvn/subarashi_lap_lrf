@@ -75,6 +75,11 @@ class BetListLayout extends Component {
             this._showNewParlayDetail.apply(this, [this.props.rootUrl, ...args]);
         };
 
+        // expand choice content
+        window.showSingleMatchParlayDetail = (...args) => {
+            this._showSingleMatchParlayDetail.apply(this, [this.props.rootUrl, ...args]);
+        };
+
         // show detail popup (in choice column)
         window.showCombMPDetail = (transId, refNo, betId, custId, betTeam) => {
             const { rootUrl, baseCurrency } = this.props;
@@ -195,6 +200,7 @@ class BetListLayout extends Component {
         window.showColossusBetsDetails = undefined;
         window.showGlobalGaming = undefined;
         window.showPPDetails = undefined;
+        window.showSingleMatchParlayDetail = undefined;
     }
 
     _getResource(key) {
@@ -313,6 +319,29 @@ class BetListLayout extends Component {
                 this._afterShow();
                 console.log(error);
             });
+    }
+
+    _showSingleMatchParlayDetail(rootUrl, transId, custId, status, transIndex) {
+        const divEvent = document.querySelector('#divEvent_' + transId + '' + transIndex);
+
+        if (divEvent.style.display == 'none') {
+            const url = BetList.getSingleMatchParlayDetailUrl(transId, custId, status);
+            this._beforeShow();
+            axios.get(url)
+                .then((result) => {
+                    const selection = BetList.buildSingleMatchParlayDetail(result.data);
+
+                    divEvent.innerHTML = selection;
+                    divEvent.style.display = 'block';
+                    this._afterShow();
+                }).catch(function (error) {
+                    console.log(error);
+                });
+        }
+        else {
+            divEvent.style.display = 'none';
+            divEvent.innerHTML = '';
+        }
     }
 
     _openPopup(url, title) {
