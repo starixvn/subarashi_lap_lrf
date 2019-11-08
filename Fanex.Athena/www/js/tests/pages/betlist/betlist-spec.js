@@ -654,7 +654,7 @@
                     var expectedUrl = "localhost";
                     var expectedPOpupOption = {
                         width: 775,
-                        height: 370,
+                        height: 520,
                         title: "Result",
                         id: "betlist-popup-result"
                     };

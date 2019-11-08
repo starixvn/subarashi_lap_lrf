@@ -325,14 +325,15 @@ class BetListLayout extends Component {
         const divEvent = document.querySelector('#divEvent_' + transId + '' + transIndex);
 
         if (divEvent.style.display == 'none') {
-            const url = BetList.getSingleMatchParlayDetailUrl(transId, custId, status);
+            const url = BetList.getSingleMatchParlayDetailUrl(rootUrl, transId, custId, status);
             this._beforeShow();
-            axios.get(url)
+            DataService.getData(url)
                 .then((result) => {
                     const selection = BetList.buildSingleMatchParlayDetail(result.data);
 
                     divEvent.innerHTML = selection;
                     divEvent.style.display = 'block';
+
                     this._afterShow();
                 }).catch(function (error) {
                     console.log(error);
