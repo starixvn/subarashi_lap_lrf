@@ -19,6 +19,7 @@ namespace Fanex.Athena.Service.StatelessCore.Extensions
                 var connectionString = descryptor.Decrypt(encryptedConnectionString);
                 return new SqlServerProvider(connectionString);
             }).As<IStorageProvider>().SingleInstance();
+            builder.RegisterType<OneBookSecurityWrapper>().AsImplementedInterfaces().SingleInstance();
         }
     }
 }

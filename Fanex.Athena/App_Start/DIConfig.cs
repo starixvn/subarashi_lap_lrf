@@ -19,6 +19,8 @@ using Fanex.Athena.Extension;
 using Fanex.Athena.Extension.Utility.Internal;
 using Fanex.Athena.Module.PlayerAdmin;
 using Fanex.Athena.Module.PlayerAdmin.Api;
+using Fanex.Athena.Service.Core.Users;
+using Fanex.Athena.Service.Core.Users.Interfaces;
 using Fanex.Athena.Service.StatelessCore;
 using Fanex.Athena.Service.StatelessCore.Extensions;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -44,25 +46,23 @@ namespace Fanex.Athena
 
             builder.RegisterFilterProvider();
             builder.RegisterWebApiFilterProvider(config);
-
-            RegisterThirdpartyServices(builder);
-            RegisterSingleton(builder);
-
             // generic types
             builder.RegisterGeneric(typeof(ThirdPartyWinLossDataAccess<>))
                 .As(typeof(IThirdPartyWinLossDataAccess<>));
 
-            // static services
-            builder.RegisterType<CustomMemoryCache>().As<ICustomMemoryCache>().SingleInstance()
-                .OnRelease(x => x.Dispose());
+            RegisterThirdpartyServices(builder);
 
-            builder.RegisterType<ApiExceptionLogger>().As<IExceptionLogger>();
+            RegisterSingleton(builder);
+
             RegisterHttpClient(builder);
 
             RegisterModule(builder, assemblies);
 
             builder.RegisterControllers(controllerAssemblies);
             builder.RegisterApiControllers(apiControllerAssemblies);
+
+
+            builder.RegisterType<ApiExceptionLogger>().As<IExceptionLogger>();
 
             var container = builder.Build();
 
@@ -102,7 +102,7 @@ namespace Fanex.Athena
 
         private static void RegisterThirdpartyServices(ContainerBuilder builder)
         {
-            builder.RegisterType<MaintenanceService>().As<IMaintenanceService>();
+            builder.RegisterType<MaintenanceService>().As<IMaintenanceService>().SingleInstance();
 
             builder.RegisterInstance(Logger.Log).As<Logging.ILogger>();
             builder.RegisterType<RestSharp.RestClient>().As<RestSharp.IRestClient>().InstancePerDependency();
@@ -158,6 +158,10 @@ namespace Fanex.Athena
 
         private static void RegisterSingleton(ContainerBuilder builder)
         {
+            builder.RegisterType<CustomMemoryCache>().As<ICustomMemoryCache>().SingleInstance()
+             .OnRelease(x => x.Dispose());
+            builder.RegisterType<SessionStorage>().As<ISessionStorage>().SingleInstance();
+            builder.RegisterType<SessionService>().As<ISessionService>().SingleInstance();
             builder.Register<ReportAPIClient>(x => new ReportAPIClient(
                  x.ResolveNamed<HttpClient>("ReportAPIClient")
                 )).As<IReportAPIClient>().SingleInstance();
