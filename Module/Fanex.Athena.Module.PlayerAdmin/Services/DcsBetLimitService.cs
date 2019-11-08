@@ -16,7 +16,7 @@
 
     public class DcsBetLimitService : IDcsBetLimitService
     {
-        private static readonly int[] ProductsHasStatus = new[] { ProductTypes.Lottery };
+        private static readonly int[] ProductsHasStatus = { ProductTypes.Lottery };
 
         private readonly IDcsBetLinitRepository _repository;
 

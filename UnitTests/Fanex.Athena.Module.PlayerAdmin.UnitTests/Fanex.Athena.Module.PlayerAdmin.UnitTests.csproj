@@ -123,6 +123,12 @@
     <Compile Include="Repositories\PlayerBetLimitRepositoryTest.cs" />
     <Compile Include="Repositories\RngKenoBetLimitRepositoryTest.cs" />
     <Compile Include="Repositories\SportsBookBetLimitRepositoryTest.cs" />
+    <Compile Include="Services\AGCasinoBetLimitServiceTest.cs" />
+    <Compile Include="Services\DcsBetLimitServiceTest.cs" />
+    <Compile Include="Services\NumberGameBetLimitServiceTest.cs" />
+    <Compile Include="Services\PlayerStatementServiceTest.cs" />
+    <Compile Include="Services\RngKenoBetLimitServiceTest.cs" />
+    <Compile Include="Services\SportsBookBetLimitServiceTest.cs" />
     <Compile Include="TestUtility.cs" />
   </ItemGroup>
   <ItemGroup>
