@@ -64,11 +64,6 @@ namespace Fanex.Athena
             builder.RegisterControllers(controllerAssemblies);
             builder.RegisterApiControllers(apiControllerAssemblies);
 
-            builder.Register(x => new PlayerStatementService(
-                  x.Resolve<IAppSettings>(),
-                  x.ResolveNamed<HttpClient>("EXTServiceTokenClient")
-                )).As<IPlayerStatementService>()
-                .InstancePerDependency();
             var container = builder.Build();
 
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
@@ -174,7 +169,6 @@ namespace Fanex.Athena
             builder.Register<LGAPIClient>(x => new LGAPIClient(
                  x.ResolveNamed<HttpClient>("LGAPICLIENT")
                 )).As<ILGAPIClient>().SingleInstance();
-
         }
     }
 }

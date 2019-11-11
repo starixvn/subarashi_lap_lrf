@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
+using Fanex.Athena.Model.Auth;
+using Fanex.Athena.Model.Core.MetaModel;
 using Fanex.Athena.Service.Core.Users;
 using Fanex.Athena.Service.Core.Users.Interfaces;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -8,7 +11,6 @@ using Fanex.Athena.Service.StatelessCore.Utility;
 namespace Fanex.Athena.Web.ActionFilter
 {
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
-
     public sealed class AutoBindMetaModelAttribute : ActionFilterAttribute
     {
         public bool BindAgent { get; set; }
@@ -16,9 +18,11 @@ namespace Fanex.Athena.Web.ActionFilter
         public bool BindCurrencyList { get; set; }
         public bool BindUserId { get; set; }
         public bool BindLicenseeContract { get; set; }
-        public ISessionStorage SessionStorage { get; set; }
+
+        private static readonly ISessionStorage _sessionStorage = new SessionStorage();
         public IProductService ProductService { get; set; }
         public ILicenseeSettingService LicenseeSettingService { get; set; }
+
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             var userSession = _sessionStorage.UserAuthInfo;
@@ -47,7 +51,6 @@ namespace Fanex.Athena.Web.ActionFilter
                 MapLicenseeContract(filterContext, userSession);
             }
             base.OnActionExecuting(filterContext);
-
         }
 
         private void MapLicenseeContract(ActionExecutingContext filterContext, UserAuthInfo userSession)
@@ -57,7 +60,7 @@ namespace Fanex.Athena.Web.ActionFilter
 
             if (item.Value is IMetaModelFunctionContract metaModel)
             {
-                var licenseeSession = SessionStorage.LicenseeAuthInfo;
+                var licenseeSession = _sessionStorage.LicenseeAuthInfo;
                 var productAccess = ProductService.GetSingleWalletProductAccess(
                     licenseeSession.LicenseeId,
                     "en-US",
@@ -68,43 +71,6 @@ namespace Fanex.Athena.Web.ActionFilter
                 metaModel.SystemIdVisible = !LicenseeSettingService.IsFakeLicensee(licenseeSession.LicenseeName);
 
                 filterContext.ActionParameters[item.Key] = item;
-            }
-
-        }
-
-        private static void MapUserId(ActionExecutingContext filterContext, UserAuthInfo userSession)
-        {
-            var item = filterContext.ActionParameters.Where(x => x.Value is IMetaModelUserId)
-             .Select(x => x).FirstOrDefault();
-            var value = item.Value as IMetaModelUserId;
-            value.UserId = userSession.UserId;
-            filterContext.ActionParameters[item.Key] = value;
-        }
-
-        private static void MapCurrencyList(ActionExecutingContext filterContext, Model.Auth.UserAuthInfo userSession)
-        {
-            var item = filterContext.ActionParameters.Where(x => x.Value is IMetaModelCurrencyList)
-              .Select(x => x).FirstOrDefault();
-            var value = item.Value as IMetaModelCurrencyList;
-            value.CurrencyList = userSession.CurrencyList;
-            filterContext.ActionParameters[item.Key] = value;
-        }
-
-        private static void MapAgentXml(ActionExecutingContext filterContext, Model.Auth.UserAuthInfo userSession)
-        {
-            var item = filterContext.ActionParameters.Where(x => x.Value is IMetaModelAgent)
-                    .Select(x => x).FirstOrDefault();
-
-            var currencyId = 0;
-            if (item.Value is IMetaModelCurrency itemWithCurrency)
-            {
-                currencyId = itemWithCurrency.CurrencyId;
-            }
-
-            if (item.Value is IMetaModelAgent itemWithAgent)
-            {
-                itemWithAgent.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, currencyId, itemWithAgent.IsExcludedTestData);
-                filterContext.ActionParameters[item.Key] = itemWithAgent;
             }
         }
     }
