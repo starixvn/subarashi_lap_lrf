@@ -6,8 +6,7 @@
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Extension.Utility.Interfaces;
     using Fanex.Athena.Model.Core.DataDomain;
-    using Fanex.Athena.Model.Core.DTO.Common;
-    using Fanex.Athena.Module.PlayerAdmin.Helpers;
+    using Fanex.Athena.Module.PlayerAdmin.DataDomains;
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
     using Fanex.Athena.Module.PlayerAdmin.Repositories.Interfaces;
     using Fanex.Athena.Module.PlayerAdmin.Services;
@@ -16,12 +15,10 @@
     using Fanex.Logging;
     using NSubstitute;
     using NUnit.Framework;
-    using System.Linq;
-    using System.Collections.Generic;
 
     public class AGCasinoBetLimitServiceTest
     {
-        private const string FakeApiUrl = "http://api.com";
+        private const string FakeApiUrl = "http://localhost";
 
         private ILogger _logger;
 
@@ -36,7 +33,7 @@
         private AGCasinoBetLimitService _service;
 
         [OneTimeSetUp]
-        public void SetUp()
+        public void OneTimeSetUp()
         {
             _logger = Substitute.For<ILogger>();
             _appSettings = Substitute.For<IAppSettings>();
@@ -56,9 +53,15 @@
         }
 
         [OneTimeTearDown]
-        public void TearDown()
+        public void OneTimeTearDown()
         {
             _service = null;
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            _businessLogService.ClearReceivedCalls();
         }
 
         [Test]
@@ -78,35 +81,50 @@
         }
 
         [Test]
-        public async Task UpdateSettingAsync_WhenCall_ReturnsMetamodelAndWritesLog()
+        public async Task UpdateSettingAsync_WhenCall_CallMethodsFromDependencies()
         {
             // Arrange
             var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<AgCasinoBetLimitMetaModel>>();
-            var expectedResult = FakeHelper.Create<ResultInfo>();
-            _repository.UpdateSettingAsync(metaModel).Returns(expectedResult);
 
             // Action
-            var result = await _service.UpdateSettingAsync(metaModel);
+            await _service.UpdateSettingAsync(metaModel);
 
             // Assert
             Assert.Multiple(() =>
             {
-                Assert.That(result, Is.EqualTo(expectedResult));
+                _repository.Received(1).UpdateSettingAsync(metaModel);
                 _businessLogService.Received(1).Write(BusinessLogType.CustomerBetSetting, Arg.Any<PlayerBetLimitLogMetaModel>());
             });
         }
 
         [Test]
-        public async Task GetGroupBettingsAsync_WhenCallAndRetriviedInvalidApiResult_ReturnsEmptyListAndLogsError()
+        public async Task UpdateSettingAsync_WhenCall_WriteCorrectLogInfo()
         {
             // Arrange
-            var siteName = FakeHelper.Create<string>();
-            var currency = FakeHelper.Create<int>();
-            var expectedApiResult = FakeHelper.Create<string>();
-            _webClientService.UploadStringAsync(new Uri(FakeApiUrl), $"SiteName={siteName}&Currency={currency}").Returns(Task.FromResult(expectedApiResult));
+            var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<AgCasinoBetLimitMetaModel>>();
 
             // Action
-            var games = await _service.GetGroupBettingsAsync(siteName, currency);
+            await _service.UpdateSettingAsync(metaModel);
+
+            // Assert
+            Assert.Multiple(() =>
+            {
+                _businessLogService.Received(1).Write(
+                    BusinessLogType.CustomerBetSetting,
+                    Arg.Is<PlayerBetLimitLogMetaModel>(x => x.Detail.First().DetailedId == LogActionDetailId.UpdatingAGGroup)
+                );
+            });
+        }
+
+        [Test]
+        public async Task GetGroupBettingsAsync_InvalidApiResult_LogsError()
+        {
+            // Arrange
+            _webClientService.UploadStringAsync(Arg.Any<Uri>(), Arg.Any<string>())
+                .Returns(Task.FromResult(FakeHelper.Create<string>()));
+
+            // Action
+            var games = await _service.GetGroupBettingsAsync(FakeHelper.Create<string>(), FakeHelper.Create<int>());
 
             // Assert
             Assert.Multiple(() =>
@@ -117,13 +135,14 @@
         }
 
         [Test]
-        public async Task GetGroupBettingsAsync_WhenCallAndRetriviedValidApiResult_ReturnsList()
+        public async Task GetGroupBettingsAsync_ValidApiResult_ReturnsCorrectResult()
         {
             // Arrange
             var siteName = FakeHelper.Create<string>();
             var currency = FakeHelper.Create<int>();
             const string expectedApiResult = "<Game GameType='AGType' Name='AGName'><Group GroupType='AGGroupType'><Min>1</Min><Max>100</Max></Group></Game>";
-            _webClientService.UploadStringAsync(new Uri(FakeApiUrl), $"SiteName={siteName}&Currency={currency}").Returns(Task.FromResult(expectedApiResult));
+            _webClientService.UploadStringAsync(Arg.Any<Uri>(), Arg.Any<string>())
+                .Returns(Task.FromResult(expectedApiResult));
 
             // Action
             var games = await _service.GetGroupBettingsAsync(siteName, currency);
@@ -138,6 +157,9 @@
                 Assert.That(games[0].Groups[0].GroupType, Is.EqualTo("AGGroupType"));
                 Assert.That(games[0].Groups[0].Min, Is.EqualTo(1));
                 Assert.That(games[0].Groups[0].Max, Is.EqualTo(100));
+                _webClientService.Received(1).UploadStringAsync(
+                    Arg.Is<Uri>(x => x.OriginalString == FakeApiUrl),
+                    Arg.Is<string>(x => x == $"SiteName={siteName}&Currency={currency}"));
             });
         }
     }

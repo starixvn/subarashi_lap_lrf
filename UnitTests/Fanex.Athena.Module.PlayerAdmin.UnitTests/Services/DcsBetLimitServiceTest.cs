@@ -4,7 +4,6 @@
     using System.Threading.Tasks;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
-    using Fanex.Athena.Module.PlayerAdmin.Helpers;
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
     using Fanex.Athena.Module.PlayerAdmin.Repositories.Interfaces;
     using Fanex.Athena.Module.PlayerAdmin.Services;
@@ -60,7 +59,7 @@
         {
             // Arrange
             var custId = FakeHelper.Create<int>();
-            var productId = ProductTypes.Lottery + FakeHelper.Create<int>();
+            var productId = ProductTypes.Sportsbook;
 
             // Action
             var result = await _service.GetStatusAsync(custId, productId);
@@ -70,7 +69,7 @@
         }
 
         [Test]
-        public async Task GetStatusAsync_ProductsHasStatusContainingProductId_ReturnsStatusFromReposity()
+        public async Task GetStatusAsync_ProductsHasStatusContainingProductId_ReturnsStatusFromRepository()
         {
             // Arrange
             var custId = FakeHelper.Create<int>();

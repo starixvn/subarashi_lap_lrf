@@ -44,9 +44,9 @@
                 throw new InvalidOperationException("There is no E-sport setting data.");
             }
 
-            var getSBSettingTask = await _betSetting.GetSettingAsync(custId, isShowMixedSport).ConfigureAwait(false);
+            var sbSettings = await _betSetting.GetSettingAsync(custId, isShowMixedSport).ConfigureAwait(false);
 
-            var result = getSBSettingTask.ToList();
+            var result = sbSettings.ToList();
             result.Insert(EsportIndex, eSportSetting.First());
 
             return result;

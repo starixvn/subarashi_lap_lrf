@@ -9,7 +9,6 @@
     using Fanex.Athena.Module.PlayerAdmin.Helpers;
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
     using Fanex.Athena.UnitTest.Common.Helpers;
-    using NSubstitute;
     using NUnit.Framework;
 
     public class PlayerAdminBetLimitActionLogHelperTest
@@ -23,7 +22,7 @@
         {
             // Arrange
             var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<AgCasinoBetLimitMetaModel>>();
-            var detail = Substitute.For<IEnumerable<PlayerBetLimitDetailedLogMetaModel>>();
+            var detail = Enumerable.Empty<PlayerBetLimitDetailedLogMetaModel>();
 
             // Action
             var logInfo = PlayerAdminBetLimitActionLogHelper.CreateLogInfo(metaModel, detail);
@@ -37,7 +36,7 @@
         {
             // Arrange
             var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<AgCasinoBetLimitMetaModel>>();
-            var expectedetail = FakeHelper.Create<IEnumerable<PlayerBetLimitDetailedLogMetaModel>>();
+            var expectedetail = FakeHelper.CreateMany<PlayerBetLimitDetailedLogMetaModel>();
 
             // Action
             var logInfo = PlayerAdminBetLimitActionLogHelper.CreateLogInfo(metaModel, expectedetail);
@@ -53,13 +52,12 @@
             });
         }
 
-        [Test]
-        public void CreateLogInfo_AgCasinoBetLimitMetaModel_ReturnsCorrectMetaModel()
+        [TestCase(true, Success)]
+        [TestCase(false, False)]
+        public void CreateLogInfo_AgCasinoBetLimit_ReturnsCorrectLogDetail(bool isSuccessful, string expectedStatus)
         {
             // Arrange
             var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<AgCasinoBetLimitMetaModel>>();
-            var isSuccessful = FakeHelper.Create<bool>();
-            var expectedStatus = isSuccessful ? Success : False;
 
             // Action
             var logInfo = PlayerAdminBetLimitActionLogHelper.CreateLogInfo(metaModel, isSuccessful);
@@ -68,10 +66,7 @@
             // Assert
             Assert.Multiple(() =>
             {
-                Assert.That(logInfo.CustId, Is.EqualTo(metaModel.CustId));
-                Assert.That(logInfo.UserId, Is.EqualTo(metaModel.UserId));
-                Assert.That(logInfo.SiteName, Is.EqualTo(metaModel.SiteName));
-                Assert.That(logInfo.LicenseeCustId, Is.EqualTo(metaModel.LicenseeCustId));
+                Assert.That(logInfo.Detail.Count(), Is.EqualTo(1));
                 Assert.That(actualFirstElement.DetailedId, Is.EqualTo(LogActionDetailId.UpdatingAGGroup));
                 Assert.That(actualFirstElement.SportType, Is.EqualTo(((int)SportType.AgCasino).ToString()));
                 Assert.That(actualFirstElement.Status, Is.EqualTo(expectedStatus));
@@ -81,18 +76,18 @@
         }
 
         [Test]
-        public void BuildBetLimitLogDetail_AllItemInSettingHavingIsUpdatedFalse_ReturnsEmptyList()
+        public void BuildBetLimitLogDetail_ItemSettingsAreNotUpdated_ReturnsEmptyList()
         {
             // Arrange
-            var setting = FakeHelper.CreateMany<PlayerBetLimitMetaModel>(5);
-            foreach (var item in setting)
-            {
-                item.IsUpdated = false;
-            }
+            var item1 = FakeHelper.Create<PlayerBetLimitMetaModel>(x => x.IsUpdated, false);
+            var item2 = FakeHelper.Create<PlayerBetLimitMetaModel>(x => x.IsUpdated, true);
+            item2.MinBet = item2.OldMinBet;
+
+            var setting = new List<PlayerBetLimitMetaModel> { item1, item2 };
 
             var isSuccessful = FakeHelper.Create<bool>();
-            var getSportTypeFunc = FakeHelper.Create<Func<PlayerBetLimitMetaModel, string>>();
-            var logDetailIds = FakeHelper.Create<int[]>();
+            string getSportTypeFunc(PlayerBetLimitMetaModel x) { return string.Empty; }
+            var logDetailIds = new[] { LogActionDetailId.UpdatingMinBet };
 
             // Action
             var logInfo = PlayerAdminBetLimitActionLogHelper.BuildBetLimitLogDetail(setting, getSportTypeFunc, isSuccessful, logDetailIds);
@@ -101,26 +96,27 @@
             Assert.IsEmpty(logInfo);
         }
 
-        [Test]
-        public void BuildBetLimitLogDetail_UpdatingMinBet_ReturnsListMetaModel()
+        [TestCase(true, Success)]
+        [TestCase(false, False)]
+        public void BuildBetLimitLogDetail_UpdatingMinBet_ReturnsLogDetailItem(bool isSuccessful, string expectedStatus)
         {
             // Arrange
-            var item = FakeHelper.Create<PlayerBetLimitMetaModel>();
-            item.IsUpdated = true;
-            item.OldMinBet = item.MinBet + FakeHelper.Create<int>();
-            var setting = new List<PlayerBetLimitMetaModel> { item };
-            var isSuccessful = FakeHelper.Create<bool>();
-            Func<PlayerBetLimitMetaModel, string> getSportTypeFunc = x => x.Id;
+            var item = FakeHelper.Create<PlayerBetLimitMetaModel>(x => x.IsUpdated, true);
+            item.MinBet = item.OldMinBet + 1;
+            var unUpdateItem = FakeHelper.Create<PlayerBetLimitMetaModel>(x => x.IsUpdated, false);
+            var setting = new List<PlayerBetLimitMetaModel> { item, unUpdateItem };
+            string getSportTypeFunc(PlayerBetLimitMetaModel x) => x.Id;
             var logDetailIds = new[] { LogActionDetailId.UpdatingMinBet };
-            var expectedStatus = isSuccessful ? Success : False;
 
             // Action
-            var actual = PlayerAdminBetLimitActionLogHelper.BuildBetLimitLogDetail(setting, getSportTypeFunc, isSuccessful, logDetailIds).First();
+            var result = PlayerAdminBetLimitActionLogHelper.BuildBetLimitLogDetail(setting, getSportTypeFunc, isSuccessful, logDetailIds);
+            var actual = result.First();
 
             // Assert
             Assert.Multiple(() =>
             {
-                Assert.That(actual.DetailedId, Is.EqualTo(logDetailIds[0]));
+                Assert.That(result.Count(), Is.EqualTo(setting.Count(x => x.IsUpdated)));
+                Assert.That(actual.DetailedId, Is.EqualTo(LogActionDetailId.UpdatingMinBet));
                 Assert.That(actual.SportType, Is.EqualTo(item.Id));
                 Assert.That(actual.Status, Is.EqualTo(expectedStatus));
                 Assert.That(actual.Old, Is.EqualTo(item.OldMinBet.ToString(CultureInfo.InvariantCulture)));
@@ -128,18 +124,16 @@
             });
         }
 
-        [Test]
-        public void BuildBetLimitLogDetail_UpdatingMaxBet_ReturnsListMetaModel()
+        [TestCase(true, Success)]
+        [TestCase(false, False)]
+        public void BuildBetLimitLogDetail_UpdatingMaxBet_ReturnsLogDetailItem(bool isSuccessful, string expectedStatus)
         {
             // Arrange
-            var item = FakeHelper.Create<PlayerBetLimitMetaModel>();
-            item.IsUpdated = true;
-            item.OldMaxBet = item.MaxBet + FakeHelper.Create<int>();
+            var item = FakeHelper.Create<PlayerBetLimitMetaModel>(x => x.IsUpdated, true);
+            item.MaxBet = item.OldMaxBet + 1;
             var setting = new List<PlayerBetLimitMetaModel> { item };
-            var isSuccessful = FakeHelper.Create<bool>();
-            Func<PlayerBetLimitMetaModel, string> getSportTypeFunc = x => x.Id;
+            string getSportTypeFunc(PlayerBetLimitMetaModel x) => x.Id;
             var logDetailIds = new[] { LogActionDetailId.UpdatingMaxBet };
-            var expectedStatus = isSuccessful ? Success : False;
 
             // Action
             var actual = PlayerAdminBetLimitActionLogHelper.BuildBetLimitLogDetail(setting, getSportTypeFunc, isSuccessful, logDetailIds).First();
@@ -147,7 +141,7 @@
             // Assert
             Assert.Multiple(() =>
             {
-                Assert.That(actual.DetailedId, Is.EqualTo(logDetailIds[0]));
+                Assert.That(actual.DetailedId, Is.EqualTo(LogActionDetailId.UpdatingMaxBet));
                 Assert.That(actual.SportType, Is.EqualTo(item.Id));
                 Assert.That(actual.Status, Is.EqualTo(expectedStatus));
                 Assert.That(actual.Old, Is.EqualTo(item.OldMaxBet.ToString(CultureInfo.InvariantCulture)));
@@ -155,20 +149,16 @@
             });
         }
 
-        [Test]
-        [TestCase(LogActionDetailId.UpdatingMaxPerMatch)]
-        [TestCase(LogActionDetailId.UpdatingMaxBetPerDraw)]
-        public void BuildBetLimitLogDetail_UpdatingMaxPerMatchOrUpdatingMaxBetPerDraw_ReturnsListMetaModel(int logDetailId)
+        [TestCase(LogActionDetailId.UpdatingMaxPerMatch, true, Success)]
+        [TestCase(LogActionDetailId.UpdatingMaxBetPerDraw, true, Success)]
+        public void BuildBetLimitLogDetail_UpdatingMaxPerMatch_ReturnsLogDetailItem(int logDetailId, bool isSuccessful, string expectedStatus)
         {
             // Arrange
-            var item = FakeHelper.Create<PlayerBetLimitMetaModel>();
-            item.IsUpdated = true;
-            item.OldMaxPerMatch = item.MaxPerMatch + FakeHelper.Create<int>();
+            var item = FakeHelper.Create<PlayerBetLimitMetaModel>(x => x.IsUpdated, true);
+            item.MaxPerMatch = item.OldMaxPerMatch + 1;
             var setting = new List<PlayerBetLimitMetaModel> { item };
-            var isSuccessful = FakeHelper.Create<bool>();
-            Func<PlayerBetLimitMetaModel, string> getSportTypeFunc = x => x.Id;
+            string getSportTypeFunc(PlayerBetLimitMetaModel x) => x.Id;
             var logDetailIds = new[] { logDetailId };
-            var expectedStatus = isSuccessful ? Success : False;
 
             // Action
             var actual = PlayerAdminBetLimitActionLogHelper.BuildBetLimitLogDetail(setting, getSportTypeFunc, isSuccessful, logDetailIds).First();
@@ -176,7 +166,7 @@
             // Assert
             Assert.Multiple(() =>
             {
-                Assert.That(actual.DetailedId, Is.EqualTo(logDetailIds[0]));
+                Assert.That(actual.DetailedId, Is.EqualTo(logDetailId));
                 Assert.That(actual.SportType, Is.EqualTo(item.Id));
                 Assert.That(actual.Status, Is.EqualTo(expectedStatus));
                 Assert.That(actual.Old, Is.EqualTo(item.OldMaxPerMatch.ToString(CultureInfo.InvariantCulture)));
@@ -184,18 +174,16 @@
             });
         }
 
-        [Test]
-        public void BuildBetLimitLogDetail_UpdatingMaxPerBall_ReturnsListMetaModel()
+        [TestCase(true, Success)]
+        [TestCase(false, False)]
+        public void BuildBetLimitLogDetail_UpdatingMaxPerBall_ReturnsLogDetailItem(bool isSuccessful, string expectedStatus)
         {
             // Arrange
-            var item = FakeHelper.Create<PlayerBetLimitMetaModel>();
-            item.IsUpdated = true;
-            item.OldMaxPerBall = item.MaxPerBall + FakeHelper.Create<int>();
+            var item = FakeHelper.Create<PlayerBetLimitMetaModel>(x => x.IsUpdated, true);
+            item.MaxPerBall = item.OldMaxPerBall + 1;
             var setting = new List<PlayerBetLimitMetaModel> { item };
-            var isSuccessful = FakeHelper.Create<bool>();
-            Func<PlayerBetLimitMetaModel, string> getSportTypeFunc = x => x.Id;
+            string getSportTypeFunc(PlayerBetLimitMetaModel x) => x.Id;
             var logDetailIds = new[] { LogActionDetailId.UpdatingMaxPerBall };
-            var expectedStatus = isSuccessful ? Success : False;
 
             // Action
             var actual = PlayerAdminBetLimitActionLogHelper.BuildBetLimitLogDetail(setting, getSportTypeFunc, isSuccessful, logDetailIds).First();
@@ -203,7 +191,7 @@
             // Assert
             Assert.Multiple(() =>
             {
-                Assert.That(actual.DetailedId, Is.EqualTo(logDetailIds[0]));
+                Assert.That(actual.DetailedId, Is.EqualTo(LogActionDetailId.UpdatingMaxPerBall));
                 Assert.That(actual.SportType, Is.EqualTo(item.Id));
                 Assert.That(actual.Status, Is.EqualTo(expectedStatus));
                 Assert.That(actual.Old, Is.EqualTo(item.OldMaxPerBall.ToString(CultureInfo.InvariantCulture)));
@@ -217,7 +205,7 @@
             // Arrange
             var metaModel = FakeHelper.Create<IEnumerable<PlayerBetLimitMetaModel>>();
             var isSuccessful = FakeHelper.Create<bool>();
-            var getSportTypeFunc = FakeHelper.Create<Func<PlayerBetLimitMetaModel, string>>();
+            string getSportTypeFunc(PlayerBetLimitMetaModel x) => string.Empty;
             var logDetailIds = new[] { 1 };
 
             // Action
