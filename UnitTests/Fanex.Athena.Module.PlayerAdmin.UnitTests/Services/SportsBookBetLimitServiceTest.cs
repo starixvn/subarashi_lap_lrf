@@ -6,9 +6,7 @@
     using System.Threading.Tasks;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
-    using Fanex.Athena.Module.PlayerAdmin.DataDomains;
     using Fanex.Athena.Module.PlayerAdmin.DTO;
-    using Fanex.Athena.Module.PlayerAdmin.Helpers;
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
     using Fanex.Athena.Module.PlayerAdmin.Repositories.Interfaces;
     using Fanex.Athena.Module.PlayerAdmin.Services;
@@ -29,7 +27,7 @@
 
         private SportsBookBetLimitService _service;
 
-        [OneTimeSetUp]
+        [SetUp]
         public void SetUp()
         {
             _betSetting = Substitute.For<ISportsBookBetLimitRepository>();
@@ -38,7 +36,7 @@
             _service = new SportsBookBetLimitService(_betSetting, _dcsBetSetting, _businessLogService);
         }
 
-        [OneTimeTearDown]
+        [TearDown]
         public void TearDown()
         {
             _service = null;
@@ -181,20 +179,9 @@
             var expectedResult = Substitute.For<IResultInfo>();
             _betSetting.UpdateSettingAsync(metaModel, isShowMixedSport).Returns(Task.FromResult(expectedResult));
 
-            var esportsSetting = setting;
-            var dcsMetaModel = new PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>>
-            {
-                CustId = metaModel.CustId,
-                UserId = metaModel.UserId,
-                SiteName = metaModel.SiteName,
-                Ip = metaModel.Ip,
-                Setting = esportsSetting,
-                ProductId = ProductTypes.Sportsbooks2,
-                LicenseeCustId = metaModel.LicenseeCustId
-            };
-
+            var dcsMetaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>>>();
             var expectedDcsResult = Substitute.For<IResultInfo>();
-            _dcsBetSetting.UpdateSettingAsync(dcsMetaModel).Returns(Task.FromResult(expectedDcsResult));
+            _dcsBetSetting.UpdateSettingAsync(dcsMetaModel).ReturnsForAnyArgs(Task.FromResult(expectedDcsResult));
 
             // Action
             var result = await _service.UpdateSettingAsync(metaModel, isShowMixedSport);
