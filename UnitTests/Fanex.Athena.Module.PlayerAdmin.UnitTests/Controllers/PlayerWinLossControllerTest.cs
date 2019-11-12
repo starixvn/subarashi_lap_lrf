@@ -64,37 +64,24 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers
         public async Task PostIndex_ExportExcel_MetaModelIsAssignedCorrectly()
         {
             // Arrange
-            StubLicenseeSessionData(new Model.Auth.LicenseeAuthInfo
-            {
-                LicenseeId = 100,
-                LicenseeName = "Spondemo",
-                IsAllowedCustomerComm = true
-            });
-            var licenseeSession = SessionService.LicenseeSession;
-            var expectedLanguage = SessionService.UserSession.Language;
+            var language = SessionService.UserSession.Language;
+            var metaModel = new PlayerWinLossMetaModel { IsExportExcel = true };
 
             var productAccess = new ProductAccess(
                     new List<Product> { new Product { ProductCode = Product.BA } });
 
-            var expectedResponseData = new Tuple<byte[], string>(new byte[] { 1 }, "application/json");
+            var expectedResponseData = new Tuple<byte[], string>(new byte[] { 1 }, "application/octet-stream");
 
             using (var controller = CreateController(productAccess))
             {
-                _reportApiClient.PostAsync(Arg.Any<string>(),
-                Arg.Any<PlayerWinLossMetaModel>(), Arg.Any<string>(), MediaType.MsgPack).Returns(expectedResponseData);
+                _reportApiClient.PostAsync("api/CustomerWinLoss/ExportExcel", metaModel, language, MediaType.MsgPack).Returns(expectedResponseData);
 
                 // Action
-                await controller.Index(new PlayerWinLossMetaModel { IsExportExcel = true });
+                var result = await controller.Index(metaModel) as FileContentResult;
 
                 // Assert
-                Assert.Multiple(() =>
-                {
-                    _reportApiClient.Received(1).PostAsync(
-                    Arg.Is<string>(x => x == "api/CustomerWinLoss/ExportExcel"),
-                        Arg.Any<PlayerWinLossMetaModel>(),
-                        Arg.Is<string>(x => x == expectedLanguage),
-                        MediaType.MsgPack);
-                });
+                Assert.That(result.FileContents, Is.EqualTo(expectedResponseData.Item1));
+                Assert.That(result.ContentType, Is.EqualTo(expectedResponseData.Item2));
             }
         }
 
@@ -102,17 +89,16 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers
         public async Task PostIndex_GetData_ReturnCorrectResult()
         {
             // Arrange
-            var licenseeSession = SessionService.LicenseeSession;
             var userSession = SessionService.UserSession;
+            var metaModel = new PlayerWinLossMetaModel();
 
             using (var controller = CreateController())
             {
                 const string ExpectedResult = "json result";
-                _reportApiClient.PostAsyncString("api/CustomerWinLoss/Index",
-                    Arg.Any<PlayerWinLossMetaModel>(), userSession.Language).Returns(ExpectedResult);
+                _reportApiClient.PostAsyncString("api/CustomerWinLoss/Index", metaModel, userSession.Language).Returns(ExpectedResult);
 
                 // Action
-                var result = await controller.Index(new PlayerWinLossMetaModel()) as JsonNetResult;
+                var result = await controller.Index(metaModel) as JsonNetResult;
 
                 // Assert
                 Assert.That(result, Is.Not.Null);
