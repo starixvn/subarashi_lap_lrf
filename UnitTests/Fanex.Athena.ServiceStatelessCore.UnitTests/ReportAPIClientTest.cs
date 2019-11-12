@@ -2,10 +2,10 @@
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Threading;
 using System.Threading.Tasks;
 using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Service.StatelessCore;
+using Fanex.Athena.ServiceStatelessCore.UnitTests.MockHelper;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -100,18 +100,7 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
             AsyncTestDelegate testDelegate = async () => await reportApiClient.PostAsyncString(ApiUrl, null, Language);
 
             // Assert
-            Assert.ThrowsAsync<InvalidOperationException>(testDelegate);
-        }
-    }
-
-    public abstract class MockHttpMessageHandler : HttpMessageHandler
-    {
-        public abstract HttpResponseMessage Send(HttpRequestMessage request);
-
-        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
-            CancellationToken cancellationToken)
-        {
-            return Task.FromResult(Send(request));
+            Assert.ThrowsAsync<Exception>(testDelegate);
         }
     }
 }

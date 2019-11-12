@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Net.Http;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Fanex.Athena.Controllers.Base;
@@ -71,20 +71,17 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers
                 IsAllowedCustomerComm = true
             });
             var licenseeSession = SessionService.LicenseeSession;
-            var userSession = SessionService.UserSession;
-            var expectedLanguage = userSession.Language;
+            var expectedLanguage = SessionService.UserSession.Language;
 
             var productAccess = new ProductAccess(
                     new List<Product> { new Product { ProductCode = Product.BA } });
 
-            var licenseeSettingService = Substitute.For<ILicenseeSettingService>();
-            licenseeSettingService.IsFakeLicensee(licenseeSession.LicenseeName).Returns(true);
+            var expectedResponseData = new Tuple<byte[], string>(new byte[] { 1 }, "application/json");
 
-            using (var controller = CreateController(productAccess, licenseeSettingService))
+            using (var controller = CreateController(productAccess))
             {
                 _reportApiClient.PostAsync(Arg.Any<string>(),
-                Arg.Any<PlayerWinLossMetaModel>(), Arg.Any<string>())
-                .Returns(new HttpResponseMessage { Content = new ByteArrayContent(new byte[] { 1 }) });
+                Arg.Any<PlayerWinLossMetaModel>(), Arg.Any<string>(), MediaType.MsgPack).Returns(expectedResponseData);
 
                 // Action
                 await controller.Index(new PlayerWinLossMetaModel { IsExportExcel = true });
@@ -94,8 +91,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers
                 {
                     _reportApiClient.Received(1).PostAsync(
                     Arg.Is<string>(x => x == "api/CustomerWinLoss/ExportExcel"),
-                        Arg.Is<PlayerWinLossMetaModel>(x =>
-                        x.IsAllowedCustomerComm && x.IsAllowBA && !x.SystemIdVisible),
+                        Arg.Any<PlayerWinLossMetaModel>(),
                         Arg.Is<string>(x => x == expectedLanguage),
                         MediaType.MsgPack);
                 });

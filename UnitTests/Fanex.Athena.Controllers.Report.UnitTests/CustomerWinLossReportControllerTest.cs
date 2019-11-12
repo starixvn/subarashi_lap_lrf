@@ -1,8 +1,7 @@
 ﻿namespace Fanex.Athena.Controllers.TotalBets.UnitTests
 {
+    using System;
     using System.Collections.Generic;
-    using System.IO;
-    using System.Net.Http;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Base.UnitTests;
@@ -78,20 +77,17 @@
                 IsAllowedCustomerComm = true
             });
             var licenseeSession = SessionService.LicenseeSession;
-            var userSession = SessionService.UserSession;
-            var expectedLanguage = userSession.Language;
+            var expectedLanguage = SessionService.UserSession.Language;
 
-            var productAccess = new ProductAccess(
-                    new List<Product> { new Product { ProductCode = Product.BA } });
-
+            var productAccess = new ProductAccess(new List<Product> { new Product { ProductCode = Product.BA } });
             var licenseeSettingService = Substitute.For<ILicenseeSettingService>();
-            licenseeSettingService.IsFakeLicensee(licenseeSession.LicenseeName).Returns(true);
+
+            var expectedResponseData = new Tuple<byte[], string>(new byte[] { 1 }, "application/json");
 
             using (var controller = CreateController(productAccess, licenseeSettingService))
             {
                 _reportApiClient.PostAsync(Arg.Any<string>(),
-                Arg.Any<CustomerWinLossMetaModel>(), Arg.Any<string>())
-                .Returns(new HttpResponseMessage { Content = new ByteArrayContent(new byte[] { 1 }) });
+                Arg.Any<CustomerWinLossMetaModel>(), Arg.Any<string>()).Returns(expectedResponseData);
 
                 // Action
                 await controller.Index(new CustomerWinLossMetaModel { IsExportExcel = true });
@@ -100,9 +96,8 @@
                 Assert.Multiple(() =>
                 {
                     _reportApiClient.Received(1).PostAsync(
-                    Arg.Is<string>(x => x == "api/CustomerWinLoss/ExportExcel"),
-                        Arg.Is<CustomerWinLossMetaModel>(x =>
-                        x.IsAllowedCustomerComm && x.IsAllowBA && !x.SystemIdVisible),
+                    Arg.Is<string>(x => x == "api/CustomerWinLoss/ExportFile"),
+                        Arg.Any<CustomerWinLossMetaModel>(),
                         Arg.Is<string>(x => x == expectedLanguage));
                 });
             }

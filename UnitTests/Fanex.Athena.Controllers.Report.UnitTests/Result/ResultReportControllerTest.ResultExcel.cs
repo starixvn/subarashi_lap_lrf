@@ -1,6 +1,5 @@
 ﻿namespace Fanex.Athena.Controllers.TotalBets.UnitTests
 {
-    using System.IO;
     using System.Net;
     using System.Text;
     using System.Web.Mvc;
@@ -38,20 +37,19 @@
         public void ResultExcel_ValidModelState_ReturnCorrectResponse()
         {
             // Arrange
-            const string ExpectedStreamData = "Hello everyone";
+            const string ExpectedDataContent = "Hello everyone";
             using (var controller = CreateController())
             {
                 var metaModel = new ResultMetaModel();
                 const string Url = "/ResultReport/ResultExcel";
-                _betListApiClient.PostAsyncBytes(Url, metaModel, SessionService.UserSession.Language).Returns(Encoding.UTF8.GetBytes(ExpectedStreamData));
+                _betListApiClient.PostAsyncBytes(Url, metaModel, SessionService.UserSession.Language).Returns(Encoding.UTF8.GetBytes(ExpectedDataContent));
 
                 // Action
-                var result = controller.ResultExcel(metaModel).Result as FileStreamResult;
+                var result = controller.ResultExcel(metaModel).Result as FileContentResult;
 
                 // Assert
                 Assert.That(result.FileDownloadName, Is.EqualTo("LRF-Result.xls"));
-                _betListApiClient.Received(1).PostAsyncBytes(Url, metaModel, SessionService.UserSession.Language);
-
+                Assert.That(result.FileContents, Is.Not.Null);
             }
         }
     }

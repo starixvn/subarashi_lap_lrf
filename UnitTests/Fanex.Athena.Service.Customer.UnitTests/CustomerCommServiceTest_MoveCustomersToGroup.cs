@@ -97,7 +97,7 @@
             // Assert
             Assert.Multiple(() =>
             {
-                _lgClient.DidNotReceive().PostAsync<bool>(Arg.Any<string>(), Arg.Any<RNGCasinoUpdateMemberComMetaModel>(), Arg.Any<string>());
+                _lgClient.DidNotReceive().PostAsync<APIResult<bool>>(Arg.Any<string>(), Arg.Any<RNGCasinoUpdateMemberComMetaModel>(), Arg.Any<string>());
                 Assert.That(result, Is.EqualTo(expectedResult));
             });
         }

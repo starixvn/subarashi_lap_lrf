@@ -1,5 +1,6 @@
 ﻿namespace Fanex.Athena.Controllers.TotalBets.UnitTests
 {
+    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
@@ -92,41 +93,25 @@
             }
         }
 
-        [Test]
-        public async Task Index_WhenExportWithLevel0_CallCorrectApi()
+        [TestCase(0, "api/PlatformWinLoss/ExportSummaryData")]
+        [TestCase(1, "api/PlatformWinLoss/ExportMemberData")]
+        public async Task Index_WhenExportByLevel_ReturnCorrectResult(int level, string apiUrl)
         {
             // Arrange
-            var metaModel = CreateMetaModel(0, true);
+            var metaModel = CreateMetaModel(level, true);
+            var language = SessionService.UserSession.Language;
+
+            var expectedResponse = new Tuple<byte[], string>(new byte[] { 1 }, "application/octet-stream");
+            _reportAPIClient.PostAsync(apiUrl, metaModel, language, MediaType.MsgPack).Returns(expectedResponse);
 
             using (var controller = CreateController())
             {
                 // Action
-                var result = await controller.Index(metaModel);
+                var result = await controller.Index(metaModel) as FileContentResult;
 
                 // Assert
-                Assert.Multiple(async () =>
-                {
-                    await _reportAPIClient.Received().PostAsync("api/PlatformWinLoss/ExportSummaryData", metaModel, SessionService.UserSession.Language, MediaType.MsgPack);
-                });
-            }
-        }
-
-        [Test]
-        public async Task Index_WhenExportWithLevel1_CallCorrectApi()
-        {
-            // Arrange
-            var metaModel = CreateMetaModel(1, true);
-
-            using (var controller = CreateController())
-            {
-                // Action
-                var result = await controller.Index(metaModel);
-
-                // Assert
-                Assert.Multiple(async () =>
-                {
-                    await _reportAPIClient.Received().PostAsync("api/PlatformWinLoss/ExportMemberData", metaModel, SessionService.UserSession.Language, MediaType.MsgPack);
-                });
+                Assert.That(result.FileContents, Is.EqualTo(expectedResponse.Item1));
+                Assert.That(result.ContentType, Is.EqualTo(expectedResponse.Item2));
             }
         }
 
