@@ -6237,7 +6237,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         PagingHelper, ExcelHelper, AutoComplete, Downloader, Toast) {
         'use strict';
 
-        const EXCEL_FILENAME = 'CustomerWinLoss.xls';
+        const EXCEL_FILENAME = 'CustomerWinLoss.xlsx';
         const EXCEL_PP_FILENAME = 'PP_PromotionPrize.xls';
         const SORTING_CODE = {
             'externalId': 2,
