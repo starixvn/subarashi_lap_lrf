@@ -19,17 +19,20 @@ namespace Fanex.Athena.Service.StatelessCore.Abstraction
         private const string MsgPackContentType = "application/x-msgpack";
         private const string JsonContentType = "application/json";
         private readonly HttpClient _client;
-        private static JsonSerializerSettings _jsonSerializerSettings = new JsonSerializerSettings
+
+        private static readonly JsonSerializerSettings _jsonSerializerSettings = new JsonSerializerSettings
         {
             DateTimeZoneHandling = DateTimeZoneHandling.Unspecified,
             NullValueHandling = NullValueHandling.Ignore,
         };
+
         protected virtual string ApiName => "Base API Client";
+
         protected BaseApiClient(HttpClient client)
         {
             _client = client;
-
         }
+
         protected async Task<T>
            HandleAsync<T>(string path, object value, string language, MediaType mediaType, Func<HttpResponseMessage, Task<T>> codeBlock)
         {
@@ -65,8 +68,8 @@ namespace Fanex.Athena.Service.StatelessCore.Abstraction
                             response = await _client.SendAsync(httpRequest).ConfigureAwait(false);
                         }
                     }
-                    response.EnsureSuccessStatusCode();
-                    if (response is null || response.StatusCode != HttpStatusCode.OK)
+
+                    if (response is null || (response.StatusCode != HttpStatusCode.OK && response.StatusCode != HttpStatusCode.NoContent))
                     {
                         var errorMessage = new StringBuilder($"Http Error ={await response?.Content.ReadAsStringAsync()}\n Error occur when query {ApiName} data");
                         errorMessage.AppendLine($"HTTP status code ={ response?.StatusCode }");
@@ -74,7 +77,6 @@ namespace Fanex.Athena.Service.StatelessCore.Abstraction
                     }
 
                     return await codeBlock(response).ConfigureAwait(false);
-
                 }
                 catch (Exception ex)
                 {
@@ -82,8 +84,8 @@ namespace Fanex.Athena.Service.StatelessCore.Abstraction
                     throw new Exception("Exception on BaseApiClient.HandleAsync", ex);
                 }
             }
-
         }
+
         public virtual async Task<T> PostAsync<T>(string path, object value, string language) where T : class
         {
             return await HandleAsync<T>(
@@ -96,11 +98,10 @@ namespace Fanex.Athena.Service.StatelessCore.Abstraction
                       using (x)
                       {
                           var result = JsonConvert.DeserializeObject<T>(await x.Content.ReadAsStringAsync());
-                          return (T)result;
+                          return result;
                       }
                   }
                ).ConfigureAwait(false);
         }
-
     }
 }

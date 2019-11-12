@@ -1,26 +1,21 @@
 ﻿using System;
-using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 
 using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Service.StatelessCore.Abstraction;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
 
-using MessagePack;
-
-using Newtonsoft.Json;
-
 namespace Fanex.Athena.Service.StatelessCore
 {
     public class ReportAPIClient : BaseApiClient, IReportAPIClient
     {
+        private const string DefaultContentType = "application/octet-stream";
 
         public ReportAPIClient(HttpClient client) : base(client)
         {
         }
+
         protected override string ApiName => "Report";
 
         public async Task<string> PostAsyncString(string path, object value, string language)
@@ -35,13 +30,11 @@ namespace Fanex.Athena.Service.StatelessCore
                 using (x)
                 {
                     var data = await x.Content.ReadAsByteArrayAsync();
-                    var contentType = x.Content.Headers.ContentType.MediaType;
+                    var contentType = x.Content.Headers.ContentType?.MediaType ?? DefaultContentType;
                     return Tuple.Create(data, contentType);
                 }
             }
             ).ConfigureAwait(false);
         }
-
-
     }
 }

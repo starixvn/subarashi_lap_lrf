@@ -70,7 +70,7 @@ namespace Fanex.Athena.Web.ActionFilter
                 metaModel.IsAllowBA = productAccess.IsAllowBA;
                 metaModel.SystemIdVisible = !LicenseeSettingService.IsFakeLicensee(licenseeSession.LicenseeName);
 
-                filterContext.ActionParameters[item.Key] = item;
+                filterContext.ActionParameters[item.Key] = metaModel;
             }
         }
     }
