@@ -132,7 +132,7 @@
             };
         }
 
-        private IList<SubsidiaryPerformanceBase> GetProducts(IEnumerable<SubsidiaryPerformance> productList, SubsidiaryPerformanceBase baseSumTotal)
+        private static IList<SubsidiaryPerformanceBase> GetProducts(IEnumerable<SubsidiaryPerformance> productList, SubsidiaryPerformanceBase baseSumTotal)
         {
             var groupedProduct = productList.GroupBy(
                 x => x.ProductCode,

@@ -122,8 +122,8 @@
     <Reference Include="ILogger, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ILogger.1.0.0.0\lib\net40\ILogger.dll</HintPath>
     </Reference>
-    <Reference Include="LAP.ONEBook.Security, Version=1.0.7.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\LAP.ONEBook.Security.1.0.7\lib\net461\LAP.ONEBook.Security.dll</HintPath>
+    <Reference Include="LAP.ONEBook.Security, Version=1.0.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\LAP.ONEBook.Security.1.0.8\lib\net461\LAP.ONEBook.Security.dll</HintPath>
     </Reference>
     <Reference Include="LAP.ONEBook.Security.StorageProvider.SqlServer, Version=1.0.6.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\LAP.ONEBook.Security.StorageProvider.SqlServer.1.0.7\lib\net461\LAP.ONEBook.Security.StorageProvider.SqlServer.dll</HintPath>

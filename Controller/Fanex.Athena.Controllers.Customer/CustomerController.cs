@@ -106,7 +106,7 @@ namespace Fanex.Athena.Controllers.Customer
                 IsShowStatusDropdown = allowLicensees.Contains(licensee.LicenseeId),
                 GridColumns = InitGridColumns(productAccess.IsAllow(Product.BA), allowLicensees),
                 OddsGroups = GetOddsGroups(),
-                BaseCurrency = userSession.DefaultBaseCurrency
+                BaseCurrency = userSession.DefaultBaseCurrency,
             };
 
             var model = await CreateCustomerViewModelAsync(metaModel);
@@ -302,8 +302,6 @@ namespace Fanex.Athena.Controllers.Customer
             var licenseeSession = SessionServiceInstance.LicenseeSession;
             var userSession = SessionServiceInstance.UserSession;
             var isSubsidiary = userSession.UserLevel == UserLevelType.Subsidiary;
-            var subsidiaryNames = userSession.IsManageableSubsidiary ? _subsidiaryService.GetSubsidiaryNames() : new string[] { };
-
             var model = new CustomerListViewModel
             {
                 Param = metaModel,
@@ -313,13 +311,9 @@ namespace Fanex.Athena.Controllers.Customer
                 IsAllowedUserChangeBA = _authorizationService.IsAllowedSpecialBA(userSession),
                 IsAllowedCustomerCommission = licenseeSession.IsAllowedCustomerComm,
                 IsFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeName),
-                IsSubsidiary = isSubsidiary,
-                HasSubsidiaryList = userSession.IsManageableSubsidiary,
-                SubsidiaryList = subsidiaryNames.Select(x => new CheckedItem
-                {
-                    Name = x,
-                    Checked = true
-                }).ToList()
+                GroupSubsidiaryList = _subsidiaryService.GetGroupSubsidiaries(userSession.WhiteLabelID),
+                ViewType = (SubsidiaryViewType)userSession.SubsidiaryViewType,
+                IsSubsidiary = isSubsidiary
             };
             if (!isSubsidiary && licenseeSession.IsAllowedCustomerComm)
             {
@@ -411,12 +405,12 @@ namespace Fanex.Athena.Controllers.Customer
         private string GetAgentListXml(string subsidiaryList, int currencyId)
         {
             var userSession = SessionServiceInstance.UserSession;
-            if (userSession.IsManageableSubsidiary)
+            var viewType = (SubsidiaryViewType)userSession.SubsidiaryViewType;
+            if (viewType == SubsidiaryViewType.MasterManagement || viewType == SubsidiaryViewType.NormalManagement)
             {
                 var currencyAgentList = _subsidiaryService.GetCurrencyAgentList(subsidiaryList, currencyId: currencyId);
                 return AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyList, currencyAgentList);
             }
-
             return AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, currencyId);
         }
     }

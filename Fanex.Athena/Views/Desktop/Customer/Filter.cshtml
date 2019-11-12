@@ -10,7 +10,7 @@
         showUserGuide = !Model.IsFakeLicensee,
         showStatus = Model.Param.IsShowStatusDropdown,
         showBA = !Model.IsSubsidiary && Model.ProductAccess.IsAllowBA,
-        showSubsidiary = Model.HasSubsidiaryList
+        showSubsidiary = Model.ViewType != Fanex.Athena.Model.Core.DataDomain.SubsidiaryViewType.NotManagement
     };
 }
 <div class="page-form">
@@ -171,5 +171,5 @@
 }
 @if (showOption.showSubsidiary)
 {
-    @Html.Hidden("SubsidiaryList", Model.SubsidiaryList.ToJson())
+    @Html.Hidden("SubsidiaryList", Model.GroupSubsidiaryList.ToJson())
 }

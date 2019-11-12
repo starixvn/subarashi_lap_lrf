@@ -40,8 +40,8 @@
     <Reference Include="Fanex.Logging, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Fanex.Logging.2.0.1\lib\net461\Fanex.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="LAP.ONEBook.Security, Version=1.0.7.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\LAP.ONEBook.Security.1.0.7\lib\net461\LAP.ONEBook.Security.dll</HintPath>
+    <Reference Include="LAP.ONEBook.Security, Version=1.0.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\LAP.ONEBook.Security.1.0.8\lib\net461\LAP.ONEBook.Security.dll</HintPath>
     </Reference>
     <Reference Include="LAP.ONEBook.Security.StorageProvider.SqlServer, Version=1.0.6.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\LAP.ONEBook.Security.StorageProvider.SqlServer.1.0.7\lib\net461\LAP.ONEBook.Security.StorageProvider.SqlServer.dll</HintPath>
@@ -130,6 +130,7 @@
     <Compile Include="Utility\AuthParameterHelper.cs" />
     <Compile Include="BetListApiClient.cs" />
     <Compile Include="Utility\KeanOceanBusinessHelper.cs" />
+    <Compile Include="Utility\SubsidiaryManagementHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\DataAccess\Fanex.Athena.DataAccess.Core\Fanex.Athena.DataAccess.Core.csproj">

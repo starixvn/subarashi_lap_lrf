@@ -5,10 +5,16 @@
     using System.Data;
     using Core;
     using Core.Users.Interfaces;
+    using Fanex.Athena.Model.Core.DTO.Users;
     using Model.Report.DTO;
 
     public class SubsidiaryDataAccess : BaseDataAccess, ISubsidiaryDataAccess
     {
+        public IEnumerable<GroupSubsidiary> GetGroupSubsidiaries(string licenseeName)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Subsidiary> GetSubsidiaryList(string licenseeName)
         {
             var dataList = new List<Subsidiary>();

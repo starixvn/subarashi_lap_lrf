@@ -9,7 +9,7 @@
     using DataAccess.Core.Users.Interfaces;
 
     using Extension.Utility.Interfaces;
-
+    using Fanex.Athena.Model.Core.DTO.Users;
     using Fanex.Athena.Service.Report.Interfaces;
 
     using Model.Core.DataDomain;
@@ -33,12 +33,13 @@
             _subLicenseeDataAccess = subsidiaryDataAccess;
         }
 
-        public IEnumerable<string> GetSubsidiaryNames()
+        public IEnumerable<GroupSubsidiary> GetGroupSubsidiaries(int? whitteLabelId)
         {
-            var subsidiaryList = GetSubsidiaryList();
-            return subsidiaryList.Select(x => x.OperatorId).Distinct();
+            var licenseeName = _sessionService.LicenseeSession.LicenseeName;
+            var cacheKey = string.Format(CacheKey.MemorycacheGroupSubsidiaryListByLicensee, licenseeName);
+            var groupSubsidiaryList = _cache.Get(cacheKey, () => _subLicenseeDataAccess.GetGroupSubsidiaries(licenseeName), CacheTimeoutSeconds);
+            return whitteLabelId.HasValue ? groupSubsidiaryList.Where(x => x.WhiteLabelID == whitteLabelId.Value).ToList() : groupSubsidiaryList;
         }
-
         public IEnumerable<Subsidiary> GetSubsidiaryList()
         {
             var licenseeName = _sessionService.LicenseeSession.LicenseeName;
@@ -89,5 +90,7 @@
 
             return currencyAgentList;
         }
+
+
     }
 }

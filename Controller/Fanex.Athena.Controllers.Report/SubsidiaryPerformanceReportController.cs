@@ -1,7 +1,7 @@
 ﻿namespace Fanex.Athena.Controllers.Report
 {
     using Fanex.Athena.Model.Auth.DataDomain;
-
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using Model.Core.MetaModel.Product;
@@ -33,8 +33,6 @@
                 licenseeSession.LicenseeId,
                 userSession.Language,
                 FunctionNames.SubsidiaryPerformance);
-            var subsidiaryNames = userSession.IsManageableSubsidiary ? _subsidiaryService.GetSubsidiaryNames() : null;
-
             var model = new SubsidiaryPerformanceViewModel
             {
                 ProductOptionList = productAccess.ProductList.Select(i => new ProductOption
@@ -43,11 +41,8 @@
                     Name = i.ProductName,
                     Status = true
                 }).ToList(),
-                SubsidiaryList = subsidiaryNames?.Select(x => new CheckedItem
-                {
-                    Name = x,
-                    Checked = true
-                }).ToList()
+                GroupSubsidiaryList = _subsidiaryService.GetGroupSubsidiaries(userSession.WhiteLabelID),
+                ViewType = (SubsidiaryViewType)userSession.SubsidiaryViewType
             };
             ViewBag.DefaultSelectedBaseCurrency = userSession.DefaultBaseCurrency;
             return View("~/Views/Desktop/Report/SubsidiaryPerformance/Main.cshtml", model);

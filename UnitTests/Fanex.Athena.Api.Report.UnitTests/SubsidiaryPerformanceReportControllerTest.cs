@@ -61,7 +61,7 @@
             StubSingleWalletProductAccess(new[] { "SB", "BA" });
             SessionService.UserSession.Returns(new UserAuthInfo
             {
-                IsManageableSubsidiary = true,
+                SubsidiaryViewType = (byte)SubsidiaryViewType.NormalManagement,
                 UserLevel = UserLevelType.Subsidiary,
                 CurrencyAgentList = new Dictionary<int, int[]>()
             });
@@ -90,7 +90,7 @@
             StubSingleWalletProductAccess(new[] { "SB", "BA" });
             SessionService.UserSession.Returns(new UserAuthInfo
             {
-                IsManageableSubsidiary = true,
+                SubsidiaryViewType = (byte)SubsidiaryViewType.NormalManagement,
                 UserLevel = UserLevelType.Licensee,
                 CurrencyAgentList = new Dictionary<int, int[]> { { 1, new[] { 1, 2, 3 } } },
                 CurrencyList = new Dictionary<int, string> { { 1, "USD" }, { 2, "EUR" }, { 3, "VND" } }

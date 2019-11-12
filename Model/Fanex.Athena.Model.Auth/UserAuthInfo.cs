@@ -21,9 +21,8 @@ namespace Fanex.Athena.Model.Auth
         public string UserName { get; set; }
 
         public byte UserLevel { get; set; }
-
-        public bool IsManageableSubsidiary { get; set; }
-
+        public byte SubsidiaryViewType { get; set; }
+        public int? WhiteLabelID { get; set; }
         public string OperatorId { get; set; }
         public bool IsSuperAdmin { get; set; }
         /// <summary>

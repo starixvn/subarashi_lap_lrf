@@ -17,6 +17,7 @@
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Logging;
     using LAP.ONEBook.Security;
     using Model.Core.DataDomain;
@@ -178,7 +179,9 @@
             return new ResultInfo { Code = 0 };
         }
 
-        private void UpdateUserSession(UserAuthInfo userSession, DefaultAuthInfo<OneAuthPermission, OneAuthCurrency> tokenInfo, int licenseeId, OneAuthUserInfo userInfo, string language)
+        private void UpdateUserSession(UserAuthInfo userSession, 
+            DefaultAuthInfo<OneAuthPermission, OneAuthCurrency> tokenInfo,
+            int licenseeId, OneAuthUserInfo userInfo, string language)
         {
             if (!language.Equals(userSession.Language))
             {
@@ -187,7 +190,9 @@
 
             _sessionService.AssignCurrenciesToUserSession(userSession, licenseeId, userInfo.CurrencyUserList);
             userSession.UserLevel = userInfo.UserLevel;
-            userSession.IsManageableSubsidiary = userInfo.IsEnabledSubsidiary && userInfo.UserLevel != UserLevelType.Subsidiary;
+            userSession.WhiteLabelID = tokenInfo.WhiteLabelID;
+            userSession.SubsidiaryViewType = (byte)SubsidiaryManagementHelper.GetView(userInfo.IsEnabledSubsidiary,
+                tokenInfo.IsMasterLicensee, userInfo.UserLevel, tokenInfo.WhiteLabelID);
             userSession.OperatorId = userInfo.OperatorID;
             userSession.PortalFunctionList = tokenInfo.Permissions.ToArray();
             userSession.DefaultBaseCurrency = string.IsNullOrEmpty(userInfo.BaseCurrency) ? _appSettings.DefaultBaseCurrency
@@ -229,8 +234,10 @@
                 OnUserId = tokenInfo.UserSEQ,
                 UserName = tokenInfo.UserID,
                 UserLevel = userInfo.UserLevel,
-                IsManageableSubsidiary = userInfo.IsEnabledSubsidiary && userInfo.UserLevel != UserLevelType.Subsidiary,
+                SubsidiaryViewType = (byte)SubsidiaryManagementHelper.GetView(userInfo.IsEnabledSubsidiary,
+                tokenInfo.IsMasterLicensee, userInfo.UserLevel, tokenInfo.WhiteLabelID),
                 OperatorId = userInfo.OperatorID,
+                WhiteLabelID = tokenInfo.WhiteLabelID,
                 IsInternal = true,
                 FunctionList = new List<Function>(),
                 PortalFunctionList = tokenInfo.Permissions.ToArray(),

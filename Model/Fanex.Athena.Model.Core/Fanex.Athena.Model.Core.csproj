@@ -80,6 +80,7 @@
   <ItemGroup>
     <Compile Include="Constants\SystemEnvironment.cs" />
     <Compile Include="DataDomain\BaseCurrencyType.cs" />
+    <Compile Include="DataDomain\SubsidiaryViewType.cs" />
     <Compile Include="DataDomain\UserControlLogType.cs" />
     <Compile Include="DataDomain\BusinessLogType.cs" />
     <Compile Include="DataDomain\Currency.cs" />
@@ -127,6 +128,7 @@
     <Compile Include="DTO\Configuration\BalanceUp.cs" />
     <Compile Include="DTO\Configuration\CacheKey.cs" />
     <Compile Include="DTO\Configuration\MoveBetNotification.cs" />
+    <Compile Include="DTO\Users\GroupSubsidiary.cs" />
     <Compile Include="DTO\Users\Subsidiary.cs" />
     <Compile Include="DTO\Users\User.cs" />
     <Compile Include="DTO\Users\UserRole.cs" />
