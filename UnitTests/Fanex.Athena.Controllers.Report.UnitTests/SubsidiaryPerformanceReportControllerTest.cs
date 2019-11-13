@@ -3,6 +3,7 @@
     using Fanex.Athena.Controllers.Base.UnitTests;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Athena.Model.Core.DTO.Users;
     using Fanex.Athena.Model.Core.MetaModel.Product;
     using Fanex.Athena.Model.Report.ViewModel;
     using Fanex.Athena.Service.Report.Interfaces;
@@ -53,7 +54,7 @@
 
                 var expectedViewModelData = new SubsidiaryPerformanceViewModel
                 {
-                    GroupSubsidiaryList = null,
+                    GroupSubsidiaryList = new List<GroupSubsidiary>(),
                     ProductOptionList = new List<ProductOption>
                     {
                         new ProductOption { Code = FakeProductCode, Name = FakeProductName, Status = true }
