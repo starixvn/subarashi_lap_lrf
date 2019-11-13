@@ -76,7 +76,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    Assert.AreEqual(expectedData, result.Data);
+                    Assert.That(result.Data, Is.EqualTo(expectedData));
                     Assert.AreEqual(expectedEditable, result.Editable);
                 });
             }
@@ -109,7 +109,7 @@
                 var result = (await controller.UpdateSetting(metaModel)).Data as ResultInfo;
 
                 // Assert
-                Assert.AreEqual(expectedResult, result);
+                Assert.That(result, Is.EqualTo(expectedResult));
             }
         }
 
@@ -139,7 +139,7 @@
                 var result = (await controller.UpdateSetting(metaModel)).Data as ResultInfo;
 
                 // Assert
-                Assert.AreEqual(expectedResult, result);
+                Assert.That(result, Is.EqualTo(expectedResult));
             }
         }
 
