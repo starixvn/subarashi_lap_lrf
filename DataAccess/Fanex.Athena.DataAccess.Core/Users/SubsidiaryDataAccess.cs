@@ -16,7 +16,6 @@
             var dataList = new List<GroupSubsidiary>();
 
             const string SpName = "Portal_Sub_GetSubsidiaryList";
-            int[] statusList = { 0, 1, 2, 3 };
             const int reportQueryMode = 0;
             const string statusListTableName = "dbo.TVP_Int";
             using (var objectDb = GetObjectDb(SpName))
@@ -24,6 +23,7 @@
                 using (var dataTable = new DataTable())
                 {
                     dataTable.Columns.Add("Val", typeof(int));
+                    int[] statusList = { 0, 1, 2, 3 };
                     foreach (var status in statusList)
                     {
                         dataTable.Rows.Add(status);

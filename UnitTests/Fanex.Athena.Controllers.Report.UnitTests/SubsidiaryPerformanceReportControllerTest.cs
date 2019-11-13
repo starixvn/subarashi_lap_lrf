@@ -6,6 +6,7 @@
     using Fanex.Athena.Model.Core.DTO.Users;
     using Fanex.Athena.Model.Core.MetaModel.Product;
     using Fanex.Athena.Model.Report.ViewModel;
+    using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.Report.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 

@@ -1,23 +1,25 @@
-﻿namespace Fanex.Athena.Service.Report.UnitTests
+﻿namespace Fanex.Athena.Service.Core.UnitTests
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-
     using Core.Users.Interfaces;
 
     using DataAccess.Core.Users.Interfaces;
 
+    using Extension.Utility;
     using Extension.Utility.Interfaces;
 
+    using Fanex.Athena.Extension.Utility.Internal;
     using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Model.Core.DTO.Configuration;
+    using Fanex.Athena.Model.Core.DTO.Users;
     using Fanex.Athena.Model.Report.DTO;
-
-    using Interfaces;
-
+    using Fanex.Athena.Service.Core.Users;
     using NSubstitute;
 
     using NUnit.Framework;
+
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
     [TestFixture]
     public class SubsidiaryServiceTest
@@ -32,6 +34,7 @@
         public void SetUp()
         {
             _dataAccess = Substitute.For<ISubsidiaryDataAccess>();
+            _cache?.Clear();
             _cache = Substitute.For<ICustomMemoryCacheService>();
             _sessionService = Substitute.For<ISessionService>();
             _sessionService.LicenseeSession.Returns(new LicenseeAuthInfo
@@ -57,6 +60,43 @@
             _cache = null;
             _dataAccess = null;
             _service = null;
+        }
+
+        [TestCase(1)]
+        [TestCase(null)]
+        public void GetGroupSubsidiaries_DataIsInCache_DoNotCallDataAccess(int? whitelabelId)
+        {
+            // Arrange
+            var cacheKey = string.Format(CacheKey.MemorycacheGroupSubsidiaryListByLicensee, LicenseeName);
+            _cache.Get(cacheKey, Arg.Any<Func<IEnumerable<GroupSubsidiary>>>(), Arg.Any<int>())
+              .Returns(FakeGroupSubsidiaryData());
+            // Action
+            _service.GetGroupSubsidiaries(whitelabelId);
+
+            // Assert
+            _dataAccess.DidNotReceiveWithAnyArgs().GetGroupSubsidiaries(LicenseeName);
+        }
+
+        [TestCase(201)]
+        [TestCase(null)]
+        [TestCase(1)]
+        public void GetGroupSubsidiaries_WhenCall_SetDataToCacheAndFilterByWhiteLabelID(int? whitelabelId)
+        {
+            // Arrange
+            var cacheKey = string.Format(CacheKey.MemorycacheGroupSubsidiaryListByLicensee, LicenseeName);
+            var data = FakeGroupSubsidiaryData();
+            _dataAccess.GetGroupSubsidiaries(LicenseeName).Returns(data);
+            ICustomMemoryCache customCache = new CustomMemoryCache();
+            _cache = new CustomMemoryCacheService(customCache);
+            _service = new SubsidiaryService(_sessionService, _dataAccess, _cache);
+            // Action
+            var result = _service.GetGroupSubsidiaries(whitelabelId);
+
+            // Assert
+            Assert.True(_cache.Contains(cacheKey));
+            _dataAccess.Received(1).GetGroupSubsidiaries(LicenseeName);
+            Assert.True(!whitelabelId.HasValue && result.Count() == data.Count()
+                || !result.Any(x => x.WhiteLabelID != whitelabelId.Value));
         }
 
         [Test]
@@ -173,7 +213,19 @@
                     { 13, new[] { 131, 132 } }
                 };
         }
-
+        private static IEnumerable<GroupSubsidiary> FakeGroupSubsidiaryData()
+        {
+            yield return new GroupSubsidiary
+            {
+                WhiteLabelID = 201,
+                WhiteLabelName = "201",
+                OperatorId = "alex"
+            };
+            yield return new GroupSubsidiary
+            {
+                OperatorId = "alex2"
+            };
+        }
         private static IEnumerable<Subsidiary> GetSubsidiaryData()
         {
             yield return new Subsidiary

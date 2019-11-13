@@ -1,22 +1,28 @@
 ﻿namespace Fanex.Athena.Controllers.Customer.UnitTests
 {
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
     using DataAccess.Core.Users.Interfaces;
+
     using Excel.Customer;
+
     using Fanex.Athena.Controllers.Base.UnitTests;
     using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using Model.Core.DTO.Common;
     using Model.Core.ResultModel;
     using Model.Customer.DTO;
     using Model.Customer.MetaModel;
     using Model.Customer.ViewModel;
+
     using NSubstitute;
+
     using NUnit.Framework;
     using Service.Customer.Interfaces;
-    using Service.Report.Interfaces;
+
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
 
     public partial class CustomerControllerTest : CultureBaseControllerHelperTest
     {

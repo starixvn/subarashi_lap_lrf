@@ -1,20 +1,20 @@
-﻿namespace Fanex.Athena.Service.Report
+﻿namespace Fanex.Athena.Service.Core.Users
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-
     using Core.Users.Interfaces;
 
     using DataAccess.Core.Users.Interfaces;
 
     using Extension.Utility.Interfaces;
+
     using Fanex.Athena.Model.Core.DTO.Users;
-    using Fanex.Athena.Service.Report.Interfaces;
 
     using Model.Core.DataDomain;
     using Model.Core.DTO.Configuration;
     using Model.Report.DTO;
+
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
     public class SubsidiaryService : ISubsidiaryService
     {

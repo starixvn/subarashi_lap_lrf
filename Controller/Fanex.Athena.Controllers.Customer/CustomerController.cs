@@ -28,7 +28,6 @@ namespace Fanex.Athena.Controllers.Customer
 
     using Resources;
 
-    using Service.Report.Interfaces;
 
     using System;
     using System.Collections.Generic;

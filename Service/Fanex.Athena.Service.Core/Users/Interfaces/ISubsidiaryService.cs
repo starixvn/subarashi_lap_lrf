@@ -1,4 +1,4 @@
-﻿namespace Fanex.Athena.Service.Report.Interfaces
+﻿namespace Fanex.Athena.Service.Core.Users.Interfaces
 {
     using System.Collections.Generic;
     using Fanex.Athena.Model.Core.DTO.Users;

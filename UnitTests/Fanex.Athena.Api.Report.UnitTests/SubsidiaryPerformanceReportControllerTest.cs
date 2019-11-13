@@ -7,6 +7,7 @@
     using Base.UnitTests;
 
     using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.Report.Interfaces;
 
     using Model.Core.DataDomain;
