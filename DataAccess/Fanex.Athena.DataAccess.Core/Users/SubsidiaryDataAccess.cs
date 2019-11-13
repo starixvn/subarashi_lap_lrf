@@ -5,6 +5,7 @@
     using System.Data;
     using Core;
     using Core.Users.Interfaces;
+    using Dapper;
     using Fanex.Athena.Model.Core.DTO.Users;
     using Model.Report.DTO;
 
@@ -12,7 +13,42 @@
     {
         public IEnumerable<GroupSubsidiary> GetGroupSubsidiaries(string licenseeName)
         {
-            throw new NotImplementedException();
+            var dataList = new List<GroupSubsidiary>();
+
+            const string SpName = "Portal_Sub_GetSubsidiaryList";
+            int[] statusList = { 0, 1, 2, 3 };
+            const int reportQueryMode = 0;
+            const string statusListTableName = "dbo.TVP_Int";
+            using (var objectDb = GetObjectDb(SpName))
+            {
+                using (var dataTable = new DataTable())
+                {
+                    dataTable.Columns.Add("Val", typeof(int));
+                    foreach (var status in statusList)
+                    {
+                        dataTable.Rows.Add(status);
+                    }
+                    using (var reader = objectDb.ExecuteReader(new
+                    {
+                        SiteName = licenseeName,
+                        StatusList = dataTable.AsTableValuedParameter(statusListTableName),
+                        ForMgm = reportQueryMode
+                    }))
+                    {
+                        while (reader.Read())
+                        {
+                            dataList.Add(new GroupSubsidiary
+                            {
+                                WhiteLabelID = reader["WhiteLabelID"] as int? ?? default,
+                                WhiteLabelName = reader["Name"] != DBNull.Value ? reader["Name"] as string : string.Empty,
+                                OperatorId = reader["OperatorId"] as string
+                            });
+                        }
+                    }
+                }
+            }
+
+            return dataList;
         }
 
         public IEnumerable<Subsidiary> GetSubsidiaryList(string licenseeName)
