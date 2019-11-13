@@ -214,6 +214,8 @@
   <Function Name="SiteConfig">
     <Setting Key="Lrf_SubsidiarySel" SpName="Lrf_SubsidiarySel" DbName="DBCUST.SiteConfig.bodbLicenseeNet" />
     <Setting Key="Lrf_GetUserLevelInfo" SpName="Lrf_GetUserLevelInfo" DbName="DBCUST.SiteConfig.bodbLicenseeNet" />
+    <Setting Key="Portal_Sub_GetSubsidiaryList" SpName="Portal_Sub_GetSubsidiaryList" DbName="DBCUST.SiteConfig.bodbLicenseeNet" />
+
   </Function>
 </Functions>
 		
