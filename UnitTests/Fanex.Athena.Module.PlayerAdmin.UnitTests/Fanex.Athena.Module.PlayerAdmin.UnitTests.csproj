@@ -108,7 +108,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\BetLimits\AGCasinoBetLimitControllerTest.cs" />
+    <Compile Include="Controllers\BetLimits\DcsBetLimitControllerTest.cs" />
     <Compile Include="Controllers\BetLimits\NumberGameBetLimitControllerTest.cs" />
+    <Compile Include="Controllers\BetLimits\RngKenoBetLimitControllerTest.cs" />
     <Compile Include="Controllers\PlayerBetlistControllerTest.cs" />
     <Compile Include="Controllers\PlayerBetLimitControllerTest.cs" />
     <Compile Include="Controllers\PlayerBtcSingleCustomerControllerTest.cs" />
