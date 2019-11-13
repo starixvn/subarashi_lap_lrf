@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
+using Fanex.Athena.Extension.Helper;
 using Fanex.Athena.Model.Auth;
 using Fanex.Athena.Model.Core.DTO.Configuration;
 using Fanex.Athena.Model.Core.MetaModel;
@@ -239,7 +240,7 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests.Utility
             request.Properties["MS_HttpContext"] = httpContext;
 
             // Action
-            AutoBindMetaModelService.MapIp(actionArgument, request);
+            AutoBindMetaModelService.MapIp(actionArgument, ClientHelper.GetClientIp(request));
 
             // Assert
             Assert.That(metaModel.Ip, Is.EqualTo(IpValue));

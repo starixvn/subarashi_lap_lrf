@@ -55,14 +55,6 @@
             _cacheRefAdapter = cacheRefAdapter;
         }
 
-        protected static void AddUpdateInfo<T>(PlayerBetLimitUpdateMetaModel<T> metaModel, int userId, string language, string siteName, string ip)
-        {
-            metaModel.UserId = userId;
-            metaModel.Language = language;
-            metaModel.SiteName = siteName;
-            metaModel.Ip = ip;
-        }
-
         protected IEnumerable<PlayerBetLimit> AddSettingTypeName(IEnumerable<PlayerBetLimit> data)
         {
             foreach (var item in data)

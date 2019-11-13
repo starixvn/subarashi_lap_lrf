@@ -110,6 +110,17 @@ namespace Fanex.Athena.Service.StatelessCore.Utility
             }
         }
 
+        public static void MapSiteName(IDictionary<string, object> actionArguments, string siteName)
+        {
+            var item = actionArguments.Where(x => x.Value is IMetaModelSiteName)
+           .Select(x => x).FirstOrDefault();
+
+            if (item.Value is IMetaModelSiteName value)
+            {
+                value.SiteName = siteName;
+                actionArguments[item.Key] = value;
+            }
+        }
         public static void MapSiteName(IDictionary<string, object> actionArguments)
         {
             if (actionArguments.ContainsKey("sitename")
@@ -142,14 +153,14 @@ namespace Fanex.Athena.Service.StatelessCore.Utility
             }
         }
 
-        public static void MapIp(IDictionary<string, object> actionArguments, HttpRequestMessage request)
+        public static void MapIp(IDictionary<string, object> actionArguments, string ip)
         {
             var item = actionArguments.Where(x => x.Value is IMetaModelIp)
                     .Select(x => x).FirstOrDefault();
 
             if (item.Value is IMetaModelIp model)
             {
-                model.Ip = ClientHelper.GetClientIpAddress(request);
+                model.Ip = ip;
                 actionArguments[item.Key] = model;
             }
         }

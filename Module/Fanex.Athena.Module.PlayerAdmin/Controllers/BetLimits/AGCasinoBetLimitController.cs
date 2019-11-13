@@ -57,26 +57,18 @@
 
         [HttpPost]
         [AjaxRequest]
+        [ValidationWebRequest(HandlingAjaxRequestWithJsonResult = true)]
+        [AutoBindMetaModel(BindIp = true, BindLanguage = true, BindSiteName = true, BindUserId = true)]
         [ValidatePermissionOnData(isObject: true)]
         [FunctionAuthorization(PermissionKeys.PlayerAdminBetLimit_Write)]
         public async Task<JsonResult> UpdateSetting(PlayerBetLimitUpdateMetaModel<AgCasinoBetLimitMetaModel> metaModel)
         {
-            var user = SessionService.UserSession;
-            var licenseeName = SessionService.LicenseeSession.LicenseeName;
-
-            if (metaModel.Setting is null)
-            {
-                return Json(new { Code = 1, Message = ViewResources.InvalidParams });
-            }
-
             var setting = await _service.GetBetSettingAsync(metaModel.CustId).ConfigureAwait(false);
 
             if (!setting.IsEnabled)
             {
                 return Json(new { Code = 1, Message = ViewResources.FunctionDeniedMsg });
             }
-
-            AddUpdateInfo(metaModel, user.UserId, user.Language, licenseeName, Request.UserHostAddress);
             var result = await _service.UpdateSettingAsync(metaModel).ConfigureAwait(false);
 
             if (result.Code == 0)

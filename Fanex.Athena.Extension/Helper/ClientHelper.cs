@@ -1,4 +1,5 @@
 ﻿using System.Net.Http;
+using System.Web;
 
 namespace Fanex.Athena.Extension.Helper
 {
@@ -6,7 +7,7 @@ namespace Fanex.Athena.Extension.Helper
     {
         private const string HttpContext = "MS_HttpContext";
 
-        public static string GetClientIpAddress(HttpRequestMessage request)
+        public static string GetClientIp(HttpRequestMessage request)
         {
             if (request.Properties.ContainsKey(HttpContext))
             {
@@ -18,6 +19,19 @@ namespace Fanex.Athena.Extension.Helper
             }
 
             return string.Empty;
+        }
+
+        public static string GetClientIp(HttpContextBase httpContext)
+        {
+            var ip =
+                httpContext.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+
+            if (string.IsNullOrEmpty(ip))
+            {
+                ip = httpContext.Request.ServerVariables["REMOTE_ADDR"];
+            }
+
+            return ip;
         }
     }
 }

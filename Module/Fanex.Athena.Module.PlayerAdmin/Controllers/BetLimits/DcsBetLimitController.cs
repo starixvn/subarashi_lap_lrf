@@ -54,18 +54,12 @@
 
         [HttpPost]
         [AjaxRequest]
+        [ValidationWebRequest(HandlingAjaxRequestWithJsonResult = true)]
+        [AutoBindMetaModel(BindIp = true, BindLanguage = true, BindSiteName = true, BindUserId = true)]
         [ValidatePermissionOnData(isObject: true)]
         [FunctionAuthorization(PermissionKeys.PlayerAdminBetLimit_Write)]
         public async Task<JsonResult> UpdateSetting(PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>> metaModel)
         {
-            if (metaModel.Setting is null || !metaModel.Setting.Any())
-            {
-                return Json(new { Code = 1, Message = ViewResources.InvalidParams });
-            }
-
-            var user = SessionService.UserSession;
-            AddUpdateInfo(metaModel, user.UserId, user.Language, SessionService.LicenseeSession.LicenseeName, Request.UserHostAddress);
-
             var result = await _service.UpdateSettingAsync(metaModel).ConfigureAwait(false);
 
             if (result.Code == 0)

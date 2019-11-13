@@ -1,4 +1,6 @@
-﻿namespace Fanex.Athena.Module.PlayerAdmin.MetaModel
+﻿using Fanex.Athena.Model.Core.MetaModel;
+
+namespace Fanex.Athena.Module.PlayerAdmin.MetaModel
 {
     public class PlayerBetLimitMetaModel
     {
@@ -23,5 +25,6 @@
         public decimal OldMaxPerBall { get; set; }
 
         public bool IsUpdated { get; set; }
+
     }
 }
