@@ -30,8 +30,8 @@
 
         private IDcsBetLimitService _dcsBetLimitService;
 
-        [SetUp]
-        public void SetUp()
+        [OneTimeSetUp]
+        public override void FixtureSetUp()
         {
             base.FixtureSetUp();
 
@@ -42,14 +42,22 @@
             SetUpDefaultFakeData();
         }
 
-        [TearDown]
-        public void TearDown()
+        [OneTimeTearDown]
+        public override void FixtureTearDown()
         {
             base.FixtureTearDown();
 
             _cacheRefAdapter = null;
             _authorizationService = null;
             _dcsBetLimitService = null;
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            _cacheRefAdapter.ClearReceivedCalls();
+            _authorizationService.ClearReceivedCalls();
+            _dcsBetLimitService.ClearReceivedCalls();
         }
 
         [Test]
@@ -91,18 +99,10 @@
         [Test]
         public async Task UpdateSetting_ResultCodeRetrieveZero_ReturnsCorrectJsonResult()
         {
-            var userHostAddress = FakeHelper.Create<string>();
-            using (var controller = CreateController(userHostAddress))
+            using (var controller = CreateController())
             {
                 // Arrange
                 var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>>>();
-                var user = SessionService.UserSession;
-
-                metaModel.UserId = user.UserId;
-                metaModel.Language = user.Language;
-                metaModel.SiteName = SessionService.LicenseeSession.LicenseeName;
-                metaModel.Ip = userHostAddress;
-
                 var expectedResult = new ResultInfo
                 {
                     Code = 0,
@@ -122,18 +122,10 @@
         [Test]
         public async Task UpdateSetting_ResultCodeRetrieveNoneZero_ReturnsCorrectJsonResult()
         {
-            var userHostAddress = FakeHelper.Create<string>();
-            using (var controller = CreateController(userHostAddress))
+            using (var controller = CreateController())
             {
                 // Arrange
                 var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>>>();
-                var user = SessionService.UserSession;
-
-                metaModel.UserId = user.UserId;
-                metaModel.Language = user.Language;
-                metaModel.SiteName = SessionService.LicenseeSession.LicenseeName;
-                metaModel.Ip = userHostAddress;
-
                 var expectedResult = new ResultInfo
                 {
                     Code = 1
@@ -149,21 +141,9 @@
             }
         }
 
-        private DcsBetLimitController CreateController(string userHostAddress = null)
+        private DcsBetLimitController CreateController()
         {
-            var controller = new DcsBetLimitController(LangService, SessionService, _cacheRefAdapter, _authorizationService, _dcsBetLimitService);
-            if (userHostAddress == null)
-            {
-                return controller;
-            }
-
-            var request = Substitute.For<HttpRequestBase>();
-            request.UserHostAddress.Returns(userHostAddress);
-            var mockContext = Substitute.For<HttpContextBase>();
-            mockContext.Request.Returns(request);
-            var context = new ControllerContext(mockContext, new RouteData(), Substitute.For<ControllerBase>());
-            controller.ControllerContext = context;
-            return controller;
+            return new DcsBetLimitController(LangService, SessionService, _cacheRefAdapter, _authorizationService, _dcsBetLimitService);
         }
 
         private string GetSportName(string sportId) => sportId == MixedSportId ? ViewResources.MixSportsParlay : _cacheRefAdapter.GetSportName(sportId);

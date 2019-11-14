@@ -30,6 +30,19 @@
             SetUpDefaultFakeData();
         }
 
+        [OneTimeTearDown]
+        public override void FixtureTearDown()
+        {
+            base.FixtureTearDown();
+            _reportSettingService = null;
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            _reportSettingService.ClearReceivedCalls();
+        }
+
         [Test]
         public void Index_AssignViewBagData_AssignsCorrectDefaultSelectedBaseCurrency()
         {

@@ -37,6 +37,21 @@
             SetUpDefaultFakeData();
         }
 
+        [OneTimeTearDown]
+        public override void FixtureTearDown()
+        {
+            base.FixtureTearDown();
+            _reportAPIClient = null;
+            _licenseeSettingService = null;
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            _reportAPIClient.ClearReceivedCalls();
+            _licenseeSettingService.ClearReceivedCalls();
+        }
+
         [Test]
         public void Index_WhenCall_ReturnsDailyBetsReportView()
         {

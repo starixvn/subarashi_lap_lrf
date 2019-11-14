@@ -35,10 +35,16 @@
             _betListApiClient = null;
         }
 
+        [TearDown]
+        public void TearDown()
+        {
+            _betListApiClient.ClearReceivedCalls();
+        }
+
         [Test]
         public async Task GetData_AllExportConditionIsTrue_ReturnsObjectError()
         {
-            using (var controller = new BettingTicketCenterMultiCustomerController(SessionService, ProductService, LangService, AppSetting, _betListApiClient))
+            using (var controller = CreateController())
             {
                 // Arrange
                 var licenseeSession = SessionService.LicenseeSession;
@@ -66,7 +72,7 @@
         [Test]
         public async Task GetData_NotExportAndLargeDataContainLicenseeName_CallsApiWithCorrectParameters()
         {
-            using (var controller = new BettingTicketCenterMultiCustomerController(SessionService, ProductService, LangService, AppSetting, _betListApiClient))
+            using (var controller = CreateController())
             {
                 // Arrange
                 var metaModel = new MultipleCustomersBetListMetaModel
@@ -92,7 +98,7 @@
         [Test]
         public async Task GetData_NotExportAndLargeDataNotContainLicenseeName_CallsApiWithCorrectParameters()
         {
-            using (var controller = new BettingTicketCenterMultiCustomerController(SessionService, ProductService, LangService, AppSetting, _betListApiClient))
+            using (var controller = CreateController())
             {
                 // Arrange
                 var metaModel = new MultipleCustomersBetListMetaModel
@@ -112,6 +118,11 @@
                 // Assert
                 Assert.That(actual, Is.EqualTo(actual));
             }
+        }
+
+        private BettingTicketCenterMultiCustomerController CreateController()
+        {
+            return new BettingTicketCenterMultiCustomerController(SessionService, ProductService, LangService, AppSetting, _betListApiClient);
         }
     }
 }

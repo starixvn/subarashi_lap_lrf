@@ -50,6 +50,14 @@
             _rngKenoBetLimitService = null;
         }
 
+        [TearDown]
+        public void TearDown()
+        {
+            _authorizationService.ClearReceivedCalls();
+            _cacheRefAdapter.ClearReceivedCalls();
+            _rngKenoBetLimitService.ClearReceivedCalls();
+        }
+
         [Test]
         public async Task GetSetting_WhenCall_ReturnsCorrectResult()
         {
@@ -68,6 +76,7 @@
                 {
                     item.BetSettingType = ViewResources.ProductKN;
                 }
+
                 _rngKenoBetLimitService.GetSettingAsync(metaModel.CustId).Returns(expectedData);
 
                 // Action
@@ -85,18 +94,10 @@
         [Test]
         public async Task UpdateSetting_ResultCodeRetrieveZero_ReturnsCorrectJsonResult()
         {
-            var userHostAddress = FakeHelper.Create<string>();
-            using (var controller = CreateController(userHostAddress))
+            using (var controller = CreateController())
             {
                 // Arrange
                 var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>>>();
-                var user = SessionService.UserSession;
-
-                metaModel.UserId = user.UserId;
-                metaModel.Language = user.Language;
-                metaModel.SiteName = SessionService.LicenseeSession.LicenseeName;
-                metaModel.Ip = userHostAddress;
-
                 var expectedResult = new ResultInfo
                 {
                     Code = 0,
@@ -116,18 +117,10 @@
         [Test]
         public async Task UpdateSetting_ResultCodeRetrieveNoneZero_ReturnsCorrectJsonResult()
         {
-            var userHostAddress = FakeHelper.Create<string>();
-            using (var controller = CreateController(userHostAddress))
+            using (var controller = CreateController())
             {
                 // Arrange
                 var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>>>();
-                var user = SessionService.UserSession;
-
-                metaModel.UserId = user.UserId;
-                metaModel.Language = user.Language;
-                metaModel.SiteName = SessionService.LicenseeSession.LicenseeName;
-                metaModel.Ip = userHostAddress;
-
                 var expectedResult = new ResultInfo
                 {
                     Code = 1
@@ -143,21 +136,9 @@
             }
         }
 
-        private RngKenoBetLimitController CreateController(string userHostAddress = null)
+        private RngKenoBetLimitController CreateController()
         {
-            var controller = new RngKenoBetLimitController(LangService, SessionService, _cacheRefAdapter, _authorizationService, _rngKenoBetLimitService);
-            if (userHostAddress == null)
-            {
-                return controller;
-            }
-
-            var request = Substitute.For<HttpRequestBase>();
-            request.UserHostAddress.Returns(userHostAddress);
-            var mockContext = Substitute.For<HttpContextBase>();
-            mockContext.Request.Returns(request);
-            var context = new ControllerContext(mockContext, new RouteData(), Substitute.For<ControllerBase>());
-            controller.ControllerContext = context;
-            return controller;
+            return new RngKenoBetLimitController(LangService, SessionService, _cacheRefAdapter, _authorizationService, _rngKenoBetLimitService);
         }
     }
 }
