@@ -28,8 +28,8 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers.BetLimits
 
         private ICacheRefAdapter _cacheRefAdapter;
 
-        [SetUp]
-        public void SetUp()
+        [OneTimeSetUp]
+        public override void FixtureSetUp()
         {
             base.FixtureSetUp();
 
@@ -40,14 +40,22 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers.BetLimits
             SetUpDefaultFakeData();
         }
 
-        [TearDown]
-        public void TearDown()
+        [OneTimeTearDown]
+        public override void FixtureTearDown()
         {
             base.FixtureTearDown();
 
             _service = null;
             _authService = null;
             _cacheRefAdapter = null;
+        }
+
+        [OneTimeTearDown]
+        public void TearDown()
+        {
+            _service.ClearReceivedCalls();
+            _authService.ClearReceivedCalls();
+            _cacheRefAdapter.ClearReceivedCalls();
         }
 
         [TestCase("AGGroup1,AGGroup2,AGGroup3", "AGGroup1", "AGGroup1,AGGroup2,AGGroup3")]
@@ -90,26 +98,6 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers.BetLimits
         }
 
         [Test]
-        public async Task UpdateSetting_SettingDataIsNull_ReturnFailedResult()
-        {
-            // Arrange
-            var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<AgCasinoBetLimitMetaModel>>();
-            metaModel.Setting = null;
-
-            var expectedResult = JsonConvert.SerializeObject(new { Code = 1, Message = ViewResources.InvalidParams });
-
-            using (var controller = CreateController())
-            {
-                // Action
-                var jsonResult = await controller.UpdateSetting(metaModel) as JsonResult;
-                var result = JsonConvert.SerializeObject(jsonResult.Data);
-
-                // Assert
-                Assert.That(result, Is.EqualTo(expectedResult));
-            }
-        }
-
-        [Test]
         public async Task UpdateSetting_SettingIsDisabled_ReturnFailedResult()
         {
             // Arrange
@@ -132,38 +120,51 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers.BetLimits
             }
         }
 
-        [TestCase(0, "Update successfully!")]
-        [TestCase(1, "Update failed!")]
-        public async Task UpdateSetting_ValidDataForSetting_AssignCorrectParamAndReturnCorrectResult(int code, string message)
+        [Test]
+        public async Task UpdateSetting_ValidDataForSettingAndResultCodeIsZero_ReturnsCorrectResult()
         {
             // Arrange
             var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<AgCasinoBetLimitMetaModel>>();
-
             var betSetting = FakeHelper.Create<AgCasinoBetSetting>();
             betSetting.IsEnabled = true;
             _service.GetBetSettingAsync(metaModel.CustId).Returns(Task.FromResult(betSetting));
 
-            IResultInfo expectedResult = new ResultInfo { Code = code, Message = message };
+            IResultInfo expectedResult = new ResultInfo { Code = 0 };
             _service.UpdateSettingAsync(metaModel).Returns(Task.FromResult(expectedResult));
 
-            var user = SessionService.UserSession;
             using (var controller = CreateController())
             {
                 // Action
-                var jsonResult = await controller.UpdateSetting(metaModel) as JsonResult;
-                var result = jsonResult.Data as IResultInfo;
+                var result = (await controller.UpdateSetting(metaModel)).Data as ResultInfo;
 
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    Assert.That(result.Code, Is.EqualTo(code));
-                    Assert.That(result.Message, Is.EqualTo(message));
-
-                    Assert.That(metaModel.UserId, Is.EqualTo(user.UserId));
-                    Assert.That(metaModel.Language, Is.EqualTo(user.Language));
-                    Assert.That(metaModel.SiteName, Is.EqualTo(SessionService.LicenseeSession.LicenseeName));
-                    Assert.That(metaModel.Ip, Is.EqualTo(controller.Request.UserHostAddress));
+                    Assert.That(result.Code, Is.EqualTo(0));
+                    Assert.That(result.Message, Is.EqualTo(ViewResources.UpdateSuccess));
                 });
+            }
+        }
+
+        [Test]
+        public async Task UpdateSetting_ValidDataForSettingAndResultCodeNotZero_ReturnsCorrectResult()
+        {
+            // Arrange
+            var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<AgCasinoBetLimitMetaModel>>();
+            var betSetting = FakeHelper.Create<AgCasinoBetSetting>();
+            betSetting.IsEnabled = true;
+            _service.GetBetSettingAsync(metaModel.CustId).Returns(Task.FromResult(betSetting));
+
+            IResultInfo expectedResult = new ResultInfo { Code = 0 };
+            _service.UpdateSettingAsync(metaModel).Returns(Task.FromResult(expectedResult));
+
+            using (var controller = CreateController())
+            {
+                // Action
+                var result = (await controller.UpdateSetting(metaModel)).Data as ResultInfo;
+
+                // Assert
+                Assert.That(result, Is.EqualTo(expectedResult));
             }
         }
 

@@ -50,6 +50,14 @@
             _service = null;
         }
 
+        [TearDown]
+        public void TearDown()
+        {
+            _authService.ClearReceivedCalls();
+            _cacheRefAdapter.ClearReceivedCalls();
+            _service.ClearReceivedCalls();
+        }
+
         [TestCase(false)]
         [TestCase(true)]
         public async Task GetSetting_WhenCall_ReturnCorrectViewModel(bool isEditable)
@@ -75,28 +83,6 @@
                 {
                     Assert.That(viewModel.Data.First().BetSettingType, Is.EqualTo(ViewResources.MixSportsParlay));
                     Assert.That(viewModel.Editable, Is.EqualTo(isEditable));
-                });
-            }
-        }
-
-        [Test]
-        public async Task UpdateSetting_WhenCall_AddCorrectDataToMetaModel()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>>>();
-
-                // Action
-                await controller.UpdateSetting(metaModel).ConfigureAwait(false);
-
-                // Assert
-                Assert.Multiple(() =>
-                {
-                    Assert.That(metaModel.UserId, Is.EqualTo(DefaultUserSession.UserId));
-                    Assert.That(metaModel.Language, Is.EqualTo(DefaultUserSession.Language));
-                    Assert.That(metaModel.SiteName, Is.EqualTo(DefaultLicenseeSession.LicenseeName));
-                    Assert.That(metaModel.Ip, Is.EqualTo(controller.Request.UserHostAddress));
                 });
             }
         }
