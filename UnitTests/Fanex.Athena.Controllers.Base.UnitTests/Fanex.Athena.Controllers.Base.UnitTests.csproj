@@ -140,6 +140,7 @@
     <Compile Include="CultureBaseControllerTest.cs" />
     <Compile Include="FakeCultureBaseController.cs" />
     <Compile Include="FakeContentBaseController.cs" />
+    <Compile Include="JsonNetResultTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -168,6 +168,7 @@
     <Compile Include="DailyBetsReportControllerTest.cs" />
     <Compile Include="MatchWinLossReportControllerTest_AssignLeagueName.cs" />
     <Compile Include="MatchWinLossReportControllerTest_AssignMatchName.cs" />
+    <Compile Include="PromotionPrizeReportControllerTest.cs" />
     <Compile Include="Result\ResultKenoReportControllerTest.cs" />
     <Compile Include="Result\ResultReportControllerTest.cs" />
     <Compile Include="Result\ResultReportControllerTest.GetSports.cs" />
