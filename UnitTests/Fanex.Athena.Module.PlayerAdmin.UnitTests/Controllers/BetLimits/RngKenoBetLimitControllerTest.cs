@@ -2,9 +2,6 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using System.Web;
-    using System.Web.Mvc;
-    using System.Web.Routing;
     using Fanex.Athena.Controllers.Base.UnitTests;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
