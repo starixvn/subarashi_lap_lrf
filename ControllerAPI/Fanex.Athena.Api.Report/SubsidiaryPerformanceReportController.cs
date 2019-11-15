@@ -54,7 +54,7 @@
             }
             else
             {
-                var agentIdListByCurrency = _subsidiaryService.GetCurrencyAgentList(metaModel.SubsidiaryList, metaModel.IsExcludeTest);
+                var agentIdListByCurrency = _subsidiaryService.GetCurrencyAgentList(userSession, metaModel.LicenseeName, metaModel.SubsidiaryList, metaModel.IsExcludeTest);
                 agentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyList, agentIdListByCurrency);
             }
 
@@ -70,7 +70,7 @@
             var licenseeName = SessionService.LicenseeSession.LicenseeName;
             var userSession = SessionService.UserSession;
             metaModel.LicenseeName = licenseeName;
-            var agentIdListByCurrency = _subsidiaryService.GetCurrencyAgentList(metaModel.SubsidiaryId, metaModel.IsExcludeTest);
+            var agentIdListByCurrency = _subsidiaryService.GetCurrencyAgentList(userSession, licenseeName, metaModel.SubsidiaryId, metaModel.IsExcludeTest);
 
             if (agentIdListByCurrency.Any())
             {

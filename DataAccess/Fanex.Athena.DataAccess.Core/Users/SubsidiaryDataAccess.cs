@@ -3,6 +3,8 @@
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using System.Data.SqlClient;
+    using System.Linq;
     using Core;
     using Core.Users.Interfaces;
     using Dapper;
@@ -28,21 +30,40 @@
                     {
                         dataTable.Rows.Add(status);
                     }
-                    using (var reader = objectDb.ExecuteReader(new
-                    {
-                        SiteName = licenseeName,
-                        StatusList = dataTable.AsTableValuedParameter(statusListTableName),
-                        ForMgm = reportQueryMode
-                    }))
+                    using (var db = new SqlConnection(objectDb.DbSetting.ConnectionString))
+                    using (var reader = db.ExecuteReader(
+                        objectDb.DbSetting.SpName,
+                        new
+                        {
+                            SiteName = licenseeName,
+                            StatusList = dataTable.AsTableValuedParameter(statusListTableName),
+                            ForMgm = reportQueryMode
+                        },
+                        commandType: CommandType.StoredProcedure))
                     {
                         while (reader.Read())
                         {
-                            dataList.Add(new GroupSubsidiary
+                            var whiteLabelID = reader["WhiteLabelID"] as int?;
+                            var whiteLabel = dataList.FirstOrDefault(x => x.WhiteLabelID == whiteLabelID);
+
+                            if (whiteLabel is null)
                             {
-                                WhiteLabelID = reader["WhiteLabelID"] as int? ?? default,
-                                WhiteLabelName = reader["Name"] != DBNull.Value ? reader["Name"] as string : string.Empty,
-                                OperatorId = reader["OperatorId"] as string
-                            });
+                                dataList.Add(new GroupSubsidiary
+                                {
+                                    WhiteLabelID = whiteLabelID,
+                                    WhiteLabelName = reader["Name"] != DBNull.Value ? reader["Name"] as string : string.Empty,
+                                    OperatorIds = new List<string> { reader["OperatorId"] as string }
+                                });
+
+                                continue;
+                            }
+
+                            var operatorId = reader["OperatorId"] as string;
+
+                            if (whiteLabel.OperatorIds.Contains(operatorId))
+                            {
+                                whiteLabel.OperatorIds.Add(operatorId);
+                            }
                         }
                     }
                 }

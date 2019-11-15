@@ -3,6 +3,7 @@ define(['jquery', 'common/site', './customerlist.gridoption', 'lib/jqgrid/jquery
     'lib/jqgrid/jquery.jqGrid.en', 'lib/jqgrid/jquery.jqGrid.min', 'extensions/jquery.extension'],
 function ($, Site, CustomerListOption, jqGridAdditional, PagingHelper, CustomerListState) {
     const _POPUP_LIST = ['#ViewOptionList', '#update-cust-status-popup', '#LevelListContainer', '#OddsGroupListContainer'];
+    const _OTHER_SUBSIDIARY_KEY = '(others)';
     let _isAllowedCustomerCommission, _isAllowedUserEditComm;
     let _productList;
     let _ajaxRequest = null;
@@ -289,6 +290,63 @@ function ($, Site, CustomerListOption, jqGridAdditional, PagingHelper, CustomerL
 
         closePopup: function (popUpSelector) {
             $(popUpSelector).fadeOut();
+        },
+
+        getSubsidiaryTree: function (data) {
+            let tree = [];
+
+            const total = data.length;
+            if (!total) {
+                return tree;
+            }
+
+            
+            if (data.length === 1 && data[0].WhiteLabelID === null) {
+                const items = data[0].OperatorIds
+                const totalItems = items.length;
+
+                for (let i = 0; i < totalItems; i++) {
+                    tree.push({
+                        Value: items[i],
+                        Text: items[i] === _OTHER_SUBSIDIARY_KEY ? Site.getSingleResource('Others') : items[i],
+                        Checked: true,
+                        Enable: true
+                    });
+                }
+
+                return tree;
+            }
+
+            for (let i = 0; i < total; i++) {
+                const item = data[i];
+                const totalItems = item.OperatorIds.length;
+                let children = [];
+
+                if (totalItems) {
+                    for (let j = 0; j < totalItems; j++) {
+                        const child = item.OperatorIds[j];
+
+                        children.push({
+                            Value: child,
+                            Text: child,
+                            ParrentId: item.WhiteLabelID,
+                            Checked: true,
+                            Enable: true
+                        });
+                    }
+                }
+
+                tree.push({
+                    Id: i,
+                    Value: item.WhiteLabelID,
+                    Text: item.WhiteLabelName ? item.WhiteLabelName : Site.getSingleResource('Others'),
+                    Checked: true,
+                    Enable: true,
+                    Items: children
+                });
+            }
+
+            return tree;
         }
     };
 

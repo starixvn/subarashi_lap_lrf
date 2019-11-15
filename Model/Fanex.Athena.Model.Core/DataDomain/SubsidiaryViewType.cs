@@ -10,7 +10,7 @@ namespace Fanex.Athena.Model.Core.DataDomain
     {
         NotManagement = 0,
         NormalManagement = 1,
-        MasterManagement = 1,
+        MasterManagement = 2,
 
     }
 }

@@ -10,8 +10,6 @@
 
     using Fanex.Athena.Model.Auth;
 
-    using Interfaces;
-
     using Model.Core.DataDomain;
     using Model.Report.DTO;
     using Model.Report.DTO.SubsidiaryPerformance;
@@ -50,6 +48,7 @@
             _service = new SubsidiaryPerformanceService(_sessionService, _subsidiaryService, _dataAccess);
 
             _sessionService.UserSession.Returns(new UserAuthInfo());
+            _sessionService.LicenseeSession.Returns(new LicenseeAuthInfo { LicenseeName = LicenseeName });
         }
 
         [TearDown]
@@ -97,7 +96,7 @@
                 LicenseeName = LicenseeName
             };
 
-            _subsidiaryService.GetSubsidiaryList().Returns(_subsidiaryList);
+            _subsidiaryService.GetAllSubsidiaries(Arg.Any<string>(), Arg.Any<UserAuthInfo>()).Returns(_subsidiaryList);
 
             var fakeEntityDataList = GetFakeEntityDataList();
 
@@ -126,7 +125,7 @@
             };
 
             _sessionService.UserSession.Returns(new UserAuthInfo { UserLevel = UserLevelType.Subsidiary, OperatorId = "123" });
-            _subsidiaryService.GetSubsidiaryList().Returns(_subsidiaryList);
+            _subsidiaryService.GetAllSubsidiaries(Arg.Any<string>(), Arg.Any<UserAuthInfo>()).Returns(_subsidiaryList);
 
             var resultData = GetFakeEntityDataList();
 
@@ -156,7 +155,7 @@
                 LicenseeName = LicenseeName
             };
 
-            _subsidiaryService.GetSubsidiaryList().Returns(_subsidiaryList);
+            _subsidiaryService.GetAllSubsidiaries(Arg.Any<string>(), Arg.Any<UserAuthInfo>()).Returns(_subsidiaryList);
 
             var resultData = GetFakeEntityDataList();
 
@@ -186,7 +185,7 @@
                 LicenseeName = LicenseeName
             };
 
-            _subsidiaryService.GetSubsidiaryList().Returns(_subsidiaryList);
+            _subsidiaryService.GetAllSubsidiaries(Arg.Any<string>(), Arg.Any<UserAuthInfo>()).Returns(_subsidiaryList);
 
             var resultData = GetFakeEntityDataList();
 

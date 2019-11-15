@@ -1,14 +1,18 @@
 ﻿namespace Fanex.Athena.Service.Core.Users.Interfaces
 {
     using System.Collections.Generic;
+    using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Core.DTO.Users;
-    using Model.Report.DTO;
+    using Fanex.Athena.Model.Report.DTO;
 
     public interface ISubsidiaryService
     {
-        IEnumerable<GroupSubsidiary> GetGroupSubsidiaries(int? whitteLabelId);
-        IEnumerable<Subsidiary> GetSubsidiaryList();
+        IEnumerable<GroupSubsidiary> GetGroupSubsidiariesByViewType(string licenseeName, int? whitteLabelId, UserAuthInfo user);
 
-        IDictionary<int, IEnumerable<int>> GetCurrencyAgentList(string subsidiaryNames, bool isExcludeTest = false, int currencyId = 0);
+        IEnumerable<GroupSubsidiary> GetGroupSubsidiaries(string licenseeName, int? whitteLabelId);
+
+        IEnumerable<Subsidiary> GetAllSubsidiaries(string licenseeName, UserAuthInfo user);
+
+        IDictionary<int, IEnumerable<int>> GetCurrencyAgentList(UserAuthInfo user, string licenseeName, string subsidiaryNames, bool isExcludeTest = false, int currencyId = 0);
     }
 }

@@ -25,10 +25,11 @@
     public class SubsidiaryServiceTest
     {
         private const string LicenseeName = "12Bet";
-        private ISessionService _sessionService;
         private ISubsidiaryDataAccess _dataAccess;
         private ICustomMemoryCacheService _cache;
         private ISubsidiaryService _service;
+
+        private UserAuthInfo _userAuthInfo;
 
         [SetUp]
         public void SetUp()
@@ -36,22 +37,18 @@
             _dataAccess = Substitute.For<ISubsidiaryDataAccess>();
             _cache?.Clear();
             _cache = Substitute.For<ICustomMemoryCacheService>();
-            _sessionService = Substitute.For<ISessionService>();
-            _sessionService.LicenseeSession.Returns(new LicenseeAuthInfo
-            {
-                LicenseeName = LicenseeName
-            });
-            _sessionService.UserSession.Returns(new UserAuthInfo
-            {
-                CurrencyList = new Dictionary<int, string>() { { 20, "UUS" }, { 51, "IDR" }, { 13, "CNY" } },
-                CurrencyAgentList = GetAgentByCurrencyData()
-            });
 
             _dataAccess.GetSubsidiaryList(Arg.Any<string>()).Returns(GetSubsidiaryData());
             _cache.Get(Arg.Any<string>(), Arg.Any<Func<IEnumerable<Subsidiary>>>(), Arg.Any<int>())
                 .Returns(GetSubsidiaryData());
 
-            _service = new SubsidiaryService(_sessionService, _dataAccess, _cache);
+            _service = new SubsidiaryService(_dataAccess, _cache);
+
+            _userAuthInfo = new UserAuthInfo
+            {
+                CurrencyList = new Dictionary<int, string>() { { 20, "UUS" }, { 51, "IDR" }, { 13, "CNY" } },
+                CurrencyAgentList = GetAgentByCurrencyData()
+            };
         }
 
         [TearDown]
@@ -71,7 +68,7 @@
             _cache.Get(cacheKey, Arg.Any<Func<IEnumerable<GroupSubsidiary>>>(), Arg.Any<int>())
               .Returns(FakeGroupSubsidiaryData());
             // Action
-            _service.GetGroupSubsidiaries(whitelabelId);
+            _service.GetGroupSubsidiaries(LicenseeName, whitelabelId);
 
             // Assert
             _dataAccess.DidNotReceiveWithAnyArgs().GetGroupSubsidiaries(LicenseeName);
@@ -88,9 +85,9 @@
             _dataAccess.GetGroupSubsidiaries(LicenseeName).Returns(data);
             ICustomMemoryCache customCache = new CustomMemoryCache();
             _cache = new CustomMemoryCacheService(customCache);
-            _service = new SubsidiaryService(_sessionService, _dataAccess, _cache);
+            _service = new SubsidiaryService(_dataAccess, _cache);
             // Action
-            var result = _service.GetGroupSubsidiaries(whitelabelId);
+            var result = _service.GetGroupSubsidiaries(LicenseeName, whitelabelId);
 
             // Assert
             Assert.True(_cache.Contains(cacheKey));
@@ -100,27 +97,27 @@
         }
 
         [Test]
-        public void GetOperatorList_DataIsInCache_DoNotCallDataAccess()
+        public void GetAllSubsidiaries_DataIsInCache_DoNotCallDataAccess()
         {
             // Arrange
             var cacheKey = $"SubsidiaryList_{LicenseeName}";
 
             // Action
-            _service.GetSubsidiaryList();
+            _service.GetAllSubsidiaries(LicenseeName, _userAuthInfo);
 
             // Assert
             _dataAccess.DidNotReceiveWithAnyArgs().GetSubsidiaryList(LicenseeName);
         }
 
         [Test]
-        public void GetOperatorList_FilterOperatorByUserAgents_ReturnCorrectlyOperatorList()
+        public void GetAllSubsidiaries_FilterOperatorByUserAgents_ReturnCorrectlyOperatorList()
         {
             // Arrange
             var cacheKey = $"SubsidiaryList_{LicenseeName}";
             var expectedResult = GetAgentByCurrencyData().SelectMany(i => i.Value);
 
             // Action
-            var result = _service.GetSubsidiaryList().Select(i => i.AgentId);
+            var result = _service.GetAllSubsidiaries(LicenseeName, _userAuthInfo).Select(i => i.AgentId);
 
             // Assert
             Assert.AreEqual(true, result.Except(expectedResult).Count() == 0);
@@ -132,7 +129,7 @@
         public void GetCurrencyAgentList_NullOrEmptySubsidairyName_ReturnEmptyList(string subsidairyNames)
         {
             // Action
-            var result = _service.GetCurrencyAgentList(subsidairyNames, false, 0);
+            var result = _service.GetCurrencyAgentList(_userAuthInfo, LicenseeName, subsidairyNames, false, 0);
 
             // Assert
             Assert.AreEqual(false, result.Any());
@@ -146,7 +143,7 @@
             string subsidiaryNames, bool isExcludeTest, int currencyId = 0)
         {
             // Action
-            var result = _service.GetCurrencyAgentList(subsidiaryNames, isExcludeTest, currencyId);
+            var result = _service.GetCurrencyAgentList(_userAuthInfo, LicenseeName, subsidiaryNames, isExcludeTest, currencyId);
 
             // Assert
             Assert.AreEqual(isExcludeTest, isExcludeTest && !result.Keys.Contains(20));
@@ -163,7 +160,7 @@
             List<int> expectedResult = GetAgentListBySubsidairyNames(subsidiaryNames, currencyId);
 
             // Action
-            var result = _service.GetCurrencyAgentList(subsidiaryNames, false, currencyId)
+            var result = _service.GetCurrencyAgentList(_userAuthInfo, LicenseeName, subsidiaryNames, false, currencyId)
             .SelectMany(i => i.Value);
 
             // Assert
@@ -186,7 +183,7 @@
                 .Union(GetAgentListBySubsidairyNames(subsidiaryNames, currencyId));
 
             // Action
-            var result = _service.GetCurrencyAgentList(subsidiaryNames, false, currencyId)
+            var result = _service.GetCurrencyAgentList(_userAuthInfo, LicenseeName, subsidiaryNames, false, currencyId)
             .SelectMany(i => i.Value);
 
             // Assert
@@ -219,11 +216,11 @@
             {
                 WhiteLabelID = 201,
                 WhiteLabelName = "201",
-                OperatorId = "alex"
+                OperatorIds = new[] { "alex" }
             };
             yield return new GroupSubsidiary
             {
-                OperatorId = "alex2"
+                OperatorIds = new[] { "alex2" }
             };
         }
         private static IEnumerable<Subsidiary> GetSubsidiaryData()

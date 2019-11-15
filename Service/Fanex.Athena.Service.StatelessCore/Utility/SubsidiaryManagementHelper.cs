@@ -1,12 +1,7 @@
-﻿using Fanex.Athena.Model.Core.DataDomain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Fanex.Athena.Service.StatelessCore.Utility
+﻿namespace Fanex.Athena.Service.StatelessCore.Utility
 {
+    using Fanex.Athena.Model.Core.DataDomain;
+
     public static class SubsidiaryManagementHelper
     {
         public static SubsidiaryViewType GetView(bool isEnabledSubsidiary, bool isMaster, int userLevel, int? whiteLabelID)

@@ -143,47 +143,25 @@ define(['jquery', 'common/site', './customerlist.state', './customerlist.service
             },
 
             initSubsidiaryOption: function () {
-                let data = $('#SubsidiaryList').val();
+                const data = $('#SubsidiaryList').val();
                 if (!data) {
                     return;
                 }
 
-                data = $.parseJSON(data);
-                const totalColumns = data.length;
-                const dataUI = [{
-                    Value: '(others)',
-                    Text: Site.getSingleResource('Others'),
-                    Checked: true,
-                    Enable: true
-                }];
-                let checkedCount = 0;
-                for (let i = 0; i < totalColumns; i++) {
-                    const isChecked = Site.asBool(data[i].Checked);
-                    if (isChecked) {
-                        checkedCount++;
-                    }
+                const groupData = CustomerListService.getSubsidiaryTree($.parseJSON(data));
 
-                    dataUI.push({
-                        Value: data[i].Name,
-                        Text: data[i].Name,
-                        Checked: isChecked,
-                        Enable: true
-                    });
-                }
-
-                const ischeckAll = checkedCount === totalColumns;
                 $('#subsidiary-multiselect').multiSelect(
                 {
                     minWidth: 100,
                     maxHeight: 400,
                     shadow: true,
-                    showSearchBox: true,
                     showHeader: true,
-                    isCheckAll: ischeckAll,
+                    isCheckAll: true,
                     showFooter: false,
                     checkAllText: Site.getSingleResource('All'),
                     selectedText: Site.getSingleResource('SelectedItemCount'),
-                    listData: dataUI,
+                    noneSelectedText: Site.getSingleResource('Subsidiary'),
+                    listData: groupData,
                     onCheck: function () {
                         const checkedItems = $('#subsidiary-multiselect').multiSelect('getCheckedItems');
                         $('#SubmitButton').prop('disabled', checkedItems.length === 0);

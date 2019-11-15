@@ -11,8 +11,10 @@ namespace Fanex.Athena.Controllers.Customer
     using Excel.Base.Helpers;
 
     using Fanex.Athena.Excel.Customer;
+    using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Athena.Model.Core.DTO.Users;
     using Fanex.Athena.Model.Customer.MetaModel;
     using Fanex.Athena.Model.Customer.ViewModel;
     using Fanex.Athena.Service.Customer.Interfaces;
@@ -171,10 +173,10 @@ namespace Fanex.Athena.Controllers.Customer
             var metaModel = JsonConvert.DeserializeObject<CustomerListMetaModel>(excelParam);
             if (metaModel != null && metaModel.IsValid)
             {
-                var licenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
-                metaModel.IsShowStatusDropdown = AppSettingInstance.LicenseeOfferStatusFunction.Contains(licenseeId);
-                metaModel.LicenseeId = licenseeId;
-                metaModel.AgentListXml = GetAgentListXml(metaModel.SubsidiaryList, metaModel.CurrencyId);
+                var licensee = SessionServiceInstance.LicenseeSession;
+                metaModel.IsShowStatusDropdown = AppSettingInstance.LicenseeOfferStatusFunction.Contains(licensee.LicenseeId);
+                metaModel.LicenseeId = licensee.LicenseeId;
+                metaModel.AgentListXml = GetAgentListXml(SessionServiceInstance.UserSession, licensee.LicenseeName, metaModel.SubsidiaryList, metaModel.CurrencyId);
 
                 if (metaModel.GridColumns.Any(i => i.Checked))
                 {
@@ -208,8 +210,9 @@ namespace Fanex.Athena.Controllers.Customer
             var metaModel = JsonConvert.DeserializeObject<CustomerListMetaModel>(excelParam);
             if (metaModel != null && metaModel.IsValid)
             {
-                metaModel.LicenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
-                metaModel.AgentListXml = GetAgentListXml(metaModel.SubsidiaryList, metaModel.CurrencyId);
+                var licensee = SessionServiceInstance.LicenseeSession;
+                metaModel.LicenseeId = licensee.LicenseeId;
+                metaModel.AgentListXml = GetAgentListXml(SessionServiceInstance.UserSession, licensee.LicenseeName, metaModel.SubsidiaryList, metaModel.CurrencyId);
 
                 var templatePath = Server.MapPath(@"~/App_Data/Template/Customers/DormantCustomerList.xls");
 
@@ -293,7 +296,7 @@ namespace Fanex.Athena.Controllers.Customer
             metaModel.LicenseeId = licensee.LicenseeId;
             metaModel.IsShowStatusDropdown = AppSettingInstance.LicenseeOfferStatusFunction.Contains(metaModel.LicenseeId);
             metaModel.Username = metaModel.Username == placeholderUsername ? string.Empty : metaModel.Username;
-            metaModel.AgentListXml = GetAgentListXml(metaModel.SubsidiaryList, metaModel.CurrencyId);
+            metaModel.AgentListXml = GetAgentListXml(SessionService.UserSession, licensee.LicenseeName, metaModel.SubsidiaryList, metaModel.CurrencyId);
         }
 
         private async Task<CustomerListViewModel> CreateCustomerViewModelAsync(CustomerListMetaModel metaModel)
@@ -310,7 +313,7 @@ namespace Fanex.Athena.Controllers.Customer
                 IsAllowedUserChangeBA = _authorizationService.IsAllowedSpecialBA(userSession),
                 IsAllowedCustomerCommission = licenseeSession.IsAllowedCustomerComm,
                 IsFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeName),
-                GroupSubsidiaryList = _subsidiaryService.GetGroupSubsidiaries(userSession.WhiteLabelID),
+                GroupSubsidiaryList = _subsidiaryService.GetGroupSubsidiariesByViewType(licenseeSession.LicenseeName, userSession.WhiteLabelID, userSession),
                 ViewType = (SubsidiaryViewType)userSession.SubsidiaryViewType,
                 IsSubsidiary = isSubsidiary
             };
@@ -401,16 +404,15 @@ namespace Fanex.Athena.Controllers.Customer
 
         #endregion Ultilities
 
-        private string GetAgentListXml(string subsidiaryList, int currencyId)
+        private string GetAgentListXml(UserAuthInfo user, string licenseeName, string subsidiaryList, int currencyId)
         {
-            var userSession = SessionServiceInstance.UserSession;
-            var viewType = (SubsidiaryViewType)userSession.SubsidiaryViewType;
+            var viewType = (SubsidiaryViewType)user.SubsidiaryViewType;
             if (viewType == SubsidiaryViewType.MasterManagement || viewType == SubsidiaryViewType.NormalManagement)
             {
-                var currencyAgentList = _subsidiaryService.GetCurrencyAgentList(subsidiaryList, currencyId: currencyId);
-                return AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyList, currencyAgentList);
+                var currencyAgentList = _subsidiaryService.GetCurrencyAgentList(user, licenseeName, subsidiaryList, currencyId: currencyId);
+                return AuthParameterHelper.GenerateAgentListXml(user.CurrencyList, currencyAgentList);
             }
-            return AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, currencyId);
+            return AuthParameterHelper.GenerateAgentListXml(user.CurrencyAgentList, currencyId);
         }
     }
 }
