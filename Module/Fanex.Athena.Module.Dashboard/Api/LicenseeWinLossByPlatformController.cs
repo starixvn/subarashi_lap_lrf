@@ -13,21 +13,16 @@
     public class LicenseeWinLossByPlatformController : BaseDashboardApiController
     {
         private readonly ILicenseeDataByPlatformDataAccess _dataAccess;
-
         public LicenseeWinLossByPlatformController(ILicenseeDataByPlatformDataAccess dataAccess)
         {
             this._dataAccess = dataAccess;
         }
 
         [HttpGet]
+        [StatelessApiAutoBindMetaModel(BindAgent = true)]
+        [StatelessApiRequestValidation(ResponseContent = DefaultWidgetResult)]
         public async Task<WidgetByPlatformViewModel> GetData([FromUri] DashboardBaseModel metaModel)
         {
-            if (!metaModel.IsValid)
-            {
-                return new WidgetByPlatformViewModel();
-            }
-
-            AssignAuthProperties(metaModel);
             var now = DateTime.Now.Date;
             metaModel.FromDate = new DateTime(now.Year, now.Month, 1);
             metaModel.ToDate = now;

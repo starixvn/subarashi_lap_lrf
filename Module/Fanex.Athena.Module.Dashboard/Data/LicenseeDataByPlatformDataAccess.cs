@@ -50,8 +50,7 @@
             {
                 var param = new
                 {
-                    LicenseeID = metaModel.LicenseeId,
-                    metaModel.CurrencyIDList,
+                    AgentList = metaModel.AgentListXml,
                     FromDate = metaModel.FromDate,
                     ToDate = metaModel.ToDate,
                     BaseCurrency = metaModel.BaseCurrency

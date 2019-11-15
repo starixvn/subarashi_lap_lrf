@@ -30,8 +30,7 @@
             // Arrange
             var metaModel = new DashboardBaseModel
             {
-                LicenseeId = 1,
-                CurrencyIDList = "1,2,3",
+                CurrencyId = 0,
                 BaseCurrency = "EUR"
             };
             Hashtable passedParam = null;
@@ -43,9 +42,7 @@
             // Assert
             Assert.Multiple(() =>
             {
-                Assert.That(passedParam.Count, Is.EqualTo(3));
-                Assert.That(passedParam["LicenseeID"], Is.EqualTo(metaModel.LicenseeId));
-                Assert.That(passedParam["CurrencyIDList"], Is.EqualTo(metaModel.CurrencyIDList));
+                Assert.That(passedParam.Count, Is.EqualTo(2));
                 Assert.That(passedParam["BaseCurrency"], Is.EqualTo(metaModel.BaseCurrency));
             });
         }
@@ -74,8 +71,6 @@
             // Arrange
             var metaModel = new DashboardBaseModel
             {
-                LicenseeId = 1,
-                CurrencyIDList = "1,2,3",
                 BaseCurrency = "EUR",
                 FromDate = new System.DateTime(2017, 1, 1)
             };
@@ -88,9 +83,7 @@
             // Assert
             Assert.Multiple(() =>
             {
-                Assert.That(passedParam.Count, Is.EqualTo(4));
-                Assert.That(passedParam["LicenseeID"], Is.EqualTo(metaModel.LicenseeId));
-                Assert.That(passedParam["CurrencyIDList"], Is.EqualTo(metaModel.CurrencyIDList));
+                Assert.That(passedParam.Count, Is.EqualTo(3));
                 Assert.That(passedParam["ReportDate"], Is.EqualTo(metaModel.FromDate));
                 Assert.That(passedParam["BaseCurrency"], Is.EqualTo(metaModel.BaseCurrency));
             });
@@ -128,9 +121,7 @@
             // Assert
             Assert.Multiple(() =>
             {
-                Assert.That(passedParam.Count, Is.EqualTo(4));
-                Assert.That(passedParam["LicenseeID"], Is.EqualTo(metaModel.LicenseeId));
-                Assert.That(passedParam["CurrencyIDList"], Is.EqualTo(metaModel.CurrencyIDList));
+                Assert.That(passedParam.Count, Is.EqualTo(3));
                 Assert.That(passedParam["ReportDate"], Is.EqualTo(metaModel.FromDate));
                 Assert.That(passedParam["BaseCurrency"], Is.EqualTo(metaModel.BaseCurrency));
             });
@@ -168,9 +159,7 @@
             // Assert
             Assert.Multiple(() =>
             {
-                Assert.That(passedParam.Count, Is.EqualTo(4));
-                Assert.That(passedParam["LicenseeID"], Is.EqualTo(metaModel.LicenseeId));
-                Assert.That(passedParam["CurrencyIDList"], Is.EqualTo(metaModel.CurrencyIDList));
+                Assert.That(passedParam.Count, Is.EqualTo(3));
                 Assert.That(passedParam["ReportDate"], Is.EqualTo(metaModel.FromDate));
                 Assert.That(passedParam["BaseCurrency"], Is.EqualTo(metaModel.BaseCurrency));
             });

@@ -51,23 +51,6 @@
             }
         }
 
-        [TestCase(0, ActionCurrencyIdList)]
-        [TestCase(3, "3")]
-        public void AssignAuthProperties_WhenCall_AssignCurrencyIdListForModel(int currencyId, string expected)
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var model = new DashboardBaseModel { CurrencyId = currencyId };
-
-                // Action
-                controller.AssignAuthProperties(model);
-
-                // Assert
-                Assert.That(model.CurrencyIDList, Is.EqualTo(expected));
-            }
-        }
-
         private static FakeBaseDashboardApiController CreateController()
         {
             var mockActionContext = new HttpActionContext

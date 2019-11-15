@@ -90,6 +90,7 @@
     <Compile Include="Attributes\ApiProductPermissionAttribute.cs" />
     <Compile Include="Attributes\ApiPermissionOnDataAttribute.cs" />
     <Compile Include="Attributes\Extensions\DependencyScopeExtension.cs" />
+    <Compile Include="Attributes\StatelessApiRequestValidationAttribute.cs" />
     <Compile Include="ExternalApiBaseController.cs" />
     <Compile Include="Logger\ApiExceptionLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

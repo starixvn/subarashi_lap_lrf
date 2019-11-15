@@ -34,8 +34,7 @@
             using (var db = this.GetObjectDb(uspName))
             {
                 var param = new Hashtable();
-                param.Add("LicenseeID", metaModel.LicenseeId);
-                param.Add("CurrencyIDList", metaModel.CurrencyIDList);
+                param.Add("AgentList", metaModel.AgentListXml);
                 param.Add("BaseCurrency", metaModel.BaseCurrency);
                 if (hasReportDate)
                 {

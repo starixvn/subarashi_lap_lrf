@@ -5,10 +5,7 @@
 
     public class BaseDashboardApiController : ExternalApiBaseController
     {
-        protected void AssignAuthProperties(DashboardBaseModel model)
-        {
-            model.LicenseeId = this.LicenseeId;
-            model.CurrencyIDList = model.CurrencyId == 0 ? CurrencyIDList : model.CurrencyId.ToString();
-        }
+        protected const string DefaultWidgetResult = "{'Total':0,'Data':[] }";
+
     }
 }

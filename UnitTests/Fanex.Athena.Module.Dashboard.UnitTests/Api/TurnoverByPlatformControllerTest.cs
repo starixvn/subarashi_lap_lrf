@@ -30,25 +30,6 @@
             _dataAccess = null;
         }
 
-        [TestCase("CLMV")]
-        public async Task GetTurnover_InvalidBaseCurrency_ReturnNullData(string baseCurrency)
-        {
-            // Arrange
-            var metaModel = new DashboardBaseModel
-            {
-                BaseCurrency = baseCurrency
-            };
-
-            using (var controller = CreateController())
-            {
-                // Action
-                var result = await controller.GetData(metaModel);
-
-                // Assert
-                Assert.That(result.Data, Is.Null);
-            }
-        }
-
         [Test]
         public async Task GetTurnover_WhenCall_ReturnCorrectData()
         {

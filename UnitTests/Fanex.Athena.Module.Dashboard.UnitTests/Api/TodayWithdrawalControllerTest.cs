@@ -28,26 +28,6 @@
             _dataAccess = null;
         }
 
-        [TestCase("CLMV")]
-        public async Task GetData_InvalidBaseCurrency_ReturnZero(string baseCurrency)
-        {
-            // Arrange
-            var metaModel = new DashboardBaseModel
-            {
-                BaseCurrency = baseCurrency
-            };
-
-            using (var controller = CreateController())
-            {
-                // Action
-                var result = await controller.GetData(metaModel);
-
-                // Assert
-                Assert.That(result, Is.Zero);
-                await _dataAccess.DidNotReceive().GetTodayWithdrawal(metaModel);
-            }
-        }
-
         [TestCase(500_000)]
         public async Task GetData_WhenCall_ReturnCorrectData(decimal expected)
         {

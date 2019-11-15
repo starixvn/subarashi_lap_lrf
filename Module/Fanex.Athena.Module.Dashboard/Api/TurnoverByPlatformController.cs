@@ -13,21 +13,17 @@
     public class TurnoverByPlatformController : BaseDashboardApiController
     {
         private readonly ILicenseeDataByPlatformDataAccess _dataAccess;
-
+        const string _defaultResult = "{'Total':0,'Data':[] }";
         public TurnoverByPlatformController(ILicenseeDataByPlatformDataAccess licenseeDataByPlatformService)
         {
             this._dataAccess = licenseeDataByPlatformService;
         }
 
         [HttpGet]
+        [StatelessApiAutoBindMetaModel(BindAgent = true)]
+        [StatelessApiRequestValidation(ResponseContent = DefaultWidgetResult)]
         public async Task<WidgetByPlatformViewModel> GetData([FromUri] DashboardBaseModel metaModel)
         {
-            if (!metaModel.IsValid)
-            {
-                return new WidgetByPlatformViewModel();
-            }
-
-            AssignAuthProperties(metaModel);
             var now = DateTime.Now.Date;
             metaModel.FromDate = new DateTime(now.Year, now.Month, 1);
             metaModel.ToDate = now;
