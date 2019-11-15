@@ -8,6 +8,6 @@
 
         public string WhiteLabelName { get; set; }
 
-        public IList<string> OperatorIds { get; set; }
+        public string OperatorId { get; set; }
     }
 }

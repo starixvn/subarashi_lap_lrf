@@ -5,6 +5,9 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Model.Core.DTO.Users;
+    using Fanex.Athena.UnitTest.Common.Helpers;
     using Model.Core.DTO.Common;
     using Model.Customer.ViewModel;
     using NSubstitute;
@@ -19,7 +22,6 @@
             {
                 // Arrange
                 const string UserName = "UserName";
-
 
                 _licenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(false);
                 _productService.GetProductAccess(Arg.Any<int>(), Arg.Any<string>()).Returns(new ProductAccess(new List<Product>()));
@@ -53,7 +55,7 @@
         }
 
         [Test]
-        public async Task GetCustomerList_IsFakeLicensee_PlaceholderUsernameIsExternalIdOrSystemId()
+        public async Task GetCustomerList_IsNotFakeLicensee_PlaceholderUsernameIsExternalIdOrSystemId()
         {
             using (var controller = CreateController())
             {
@@ -168,9 +170,9 @@
             using (var controller = CreateController())
             {
                 // Arrange
+                SetUpDefaultFakeData();
                 _licenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(false);
                 _productService.GetProductAccess(Arg.Any<int>(), Arg.Any<string>()).Returns(new ProductAccess(new List<Product>()));
-                StubLicenseeSessionData(DefaultLicenseeSession);
                 _authorizationService.IsAllowedSpecialBA(DefaultUserSession).Returns(true);
 
                 // Action
@@ -191,8 +193,7 @@
                 const string BaMessage = "Message";
                 _licenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(false);
                 _productService.GetProductAccess(Arg.Any<int>(), Arg.Any<string>()).Returns(new ProductAccess(new List<Product>()));
-                StubLicenseeSessionData(DefaultLicenseeSession);
-                _authorizationService.IsAllowedSpecialBA(DefaultUserSession).Returns(false);
+                _authorizationService.IsAllowedSpecialBA(Arg.Any<UserAuthInfo>()).Returns(false);
                 _licenseeDataAccess.IsAllowUpdateMemberBAStatus(Arg.Any<Request>(), Arg.Any<int>()).Returns(new ResultInfo<bool>
                 {
                     Message = BaMessage
@@ -213,10 +214,10 @@
             {
                 // Arrange
                 const string BaMessage = "Message";
+                SetUpDefaultFakeData();
                 _licenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(false);
                 _productService.GetProductAccess(Arg.Any<int>(), Arg.Any<string>()).Returns(new ProductAccess(new List<Product> { new Product { ProductCode = Product.BA } }));
-                StubLicenseeSessionData(DefaultLicenseeSession);
-                _authorizationService.IsAllowedSpecialBA(DefaultUserSession).Returns(false);
+                _authorizationService.IsAllowedSpecialBA(Arg.Any<UserAuthInfo>()).Returns(false);
                 _licenseeDataAccess.IsAllowUpdateMemberBAStatus(Arg.Any<Request>(), Arg.Any<int>()).Returns(new ResultInfo<bool>
                 {
                     Message = BaMessage
@@ -227,6 +228,45 @@
 
                 // Assert
                 Assert.That(result.BATimeCheck, Is.EqualTo(BaMessage));
+            }
+        }
+
+        [Test]
+        public async Task GetCustomerList_IsNotSubsidiaryManagement_GroupSubsidiariesIsEmpty()
+        {
+            using (var controller = CreateContoller())
+            {
+                // Arrange
+                StubUserSessionData(new UserAuthInfo { SubsidiaryViewType = (int)SubsidiaryViewType.NotManagement });
+                _productService.GetProductAccess(Arg.Any<int>(), Arg.Any<string>()).Returns(new ProductAccess(new List<Product>()));
+
+                // Action
+                var result = (CustomerListViewModel)(await controller.CustomerList() as ViewResult).Model;
+
+                // Assert
+                Assert.That(result.GroupSubsidiaryList, Is.Empty);
+            }
+        }
+
+        [Test]
+        public async Task GetCustomerList_IsSubsidiaryManagement_GroupSubsidiariesIsReturnedFromService()
+        {
+            using (var controller = CreateContoller())
+            {
+                // Arrange
+                var user = new UserAuthInfo { SubsidiaryViewType = (int)SubsidiaryViewType.MasterManagement, WhiteLabelID = FakeHelper.Create<int?>() };
+                StubUserSessionData(user);
+
+                var expected = FakeHelper.CreateMany<GroupSubsidiary>();
+                _subsidiaryService.GetGroupSubsidiaries(DefaultLicenseeSession.LicenseeName, user.WhiteLabelID).Returns(expected);
+
+                _productService.GetProductAccess(Arg.Any<int>(), Arg.Any<string>()).Returns(new ProductAccess(new List<Product>()));
+
+                // Action
+                var result = (CustomerListViewModel)(await controller.CustomerList() as ViewResult).Model;
+
+                // Assert
+                Assert.That(result.GroupSubsidiaryList, Is.EqualTo(expected));
             }
         }
     }

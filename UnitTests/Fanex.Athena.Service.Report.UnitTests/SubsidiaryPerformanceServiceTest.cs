@@ -96,7 +96,7 @@
                 LicenseeName = LicenseeName
             };
 
-            _subsidiaryService.GetAllSubsidiaries(Arg.Any<string>(), Arg.Any<UserAuthInfo>()).Returns(_subsidiaryList);
+            _subsidiaryService.GetAllSubsidiaries(Arg.Any<UserAuthInfo>(), Arg.Any<string>()).Returns(_subsidiaryList);
 
             var fakeEntityDataList = GetFakeEntityDataList();
 
@@ -125,7 +125,7 @@
             };
 
             _sessionService.UserSession.Returns(new UserAuthInfo { UserLevel = UserLevelType.Subsidiary, OperatorId = "123" });
-            _subsidiaryService.GetAllSubsidiaries(Arg.Any<string>(), Arg.Any<UserAuthInfo>()).Returns(_subsidiaryList);
+            _subsidiaryService.GetAllSubsidiaries(Arg.Any<UserAuthInfo>(), Arg.Any<string>()).Returns(_subsidiaryList);
 
             var resultData = GetFakeEntityDataList();
 
@@ -155,7 +155,7 @@
                 LicenseeName = LicenseeName
             };
 
-            _subsidiaryService.GetAllSubsidiaries(Arg.Any<string>(), Arg.Any<UserAuthInfo>()).Returns(_subsidiaryList);
+            _subsidiaryService.GetAllSubsidiaries(Arg.Any<UserAuthInfo>(), Arg.Any<string>()).Returns(_subsidiaryList);
 
             var resultData = GetFakeEntityDataList();
 
@@ -185,7 +185,7 @@
                 LicenseeName = LicenseeName
             };
 
-            _subsidiaryService.GetAllSubsidiaries(Arg.Any<string>(), Arg.Any<UserAuthInfo>()).Returns(_subsidiaryList);
+            _subsidiaryService.GetAllSubsidiaries(Arg.Any<UserAuthInfo>(), Arg.Any<string>()).Returns(_subsidiaryList);
 
             var resultData = GetFakeEntityDataList();
 

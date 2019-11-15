@@ -3,24 +3,28 @@
     using System;
     using System.Collections.Generic;
     using System.Data;
-    using System.Data.SqlClient;
-    using System.Linq;
-    using Core;
     using Core.Users.Interfaces;
-    using Dapper;
+    using Fanex.Athena.Extension.Utility.Interfaces;
     using Fanex.Athena.Model.Core.DTO.Users;
     using Model.Report.DTO;
 
-    public class SubsidiaryDataAccess : BaseDataAccess, ISubsidiaryDataAccess
+    [CLSCompliant(false)]
+    public class SubsidiaryDataAccess : ISubsidiaryDataAccess
     {
+        private readonly IDbFactory _dbFactory;
+
+        public SubsidiaryDataAccess(IDbFactory dbFactory)
+        {
+            _dbFactory = dbFactory;
+        }
+
         public IEnumerable<GroupSubsidiary> GetGroupSubsidiaries(string licenseeName)
         {
             var dataList = new List<GroupSubsidiary>();
 
             const string SpName = "Portal_Sub_GetSubsidiaryList";
             const int reportQueryMode = 0;
-            const string statusListTableName = "dbo.TVP_Int";
-            using (var objectDb = GetObjectDb(SpName))
+            using (var objectDb = _dbFactory.GetObjectDb(SpName))
             {
                 using (var dataTable = new DataTable())
                 {
@@ -30,40 +34,24 @@
                     {
                         dataTable.Rows.Add(status);
                     }
-                    using (var db = new SqlConnection(objectDb.DbSetting.ConnectionString))
-                    using (var reader = db.ExecuteReader(
-                        objectDb.DbSetting.SpName,
-                        new
-                        {
-                            SiteName = licenseeName,
-                            StatusList = dataTable.AsTableValuedParameter(statusListTableName),
-                            ForMgm = reportQueryMode
-                        },
-                        commandType: CommandType.StoredProcedure))
+
+                    var parameter = new
+                    {
+                        SiteName = licenseeName,
+                        StatusList = dataTable,
+                        ForMgm = reportQueryMode
+                    };
+
+                    using (var reader = objectDb.ExecuteReader(parameter))
                     {
                         while (reader.Read())
                         {
-                            var whiteLabelID = reader["WhiteLabelID"] as int?;
-                            var whiteLabel = dataList.FirstOrDefault(x => x.WhiteLabelID == whiteLabelID);
-
-                            if (whiteLabel is null)
+                            dataList.Add(new GroupSubsidiary
                             {
-                                dataList.Add(new GroupSubsidiary
-                                {
-                                    WhiteLabelID = whiteLabelID,
-                                    WhiteLabelName = reader["Name"] != DBNull.Value ? reader["Name"] as string : string.Empty,
-                                    OperatorIds = new List<string> { reader["OperatorId"] as string }
-                                });
-
-                                continue;
-                            }
-
-                            var operatorId = reader["OperatorId"] as string;
-
-                            if (whiteLabel.OperatorIds.Contains(operatorId))
-                            {
-                                whiteLabel.OperatorIds.Add(operatorId);
-                            }
+                                WhiteLabelID = reader["WhiteLabelID"] as int?,
+                                WhiteLabelName = reader["Name"] as string,
+                                OperatorId = reader["OperatorId"] as string
+                            });
                         }
                     }
                 }
@@ -78,7 +66,7 @@
 
             const string SpName = "Lrf_SubsidiarySel";
 
-            using (var objectDb = GetObjectDb(SpName))
+            using (var objectDb = _dbFactory.GetObjectDb(SpName))
             {
                 objectDb.SetParameterValue("LicenseeName", licenseeName);
 

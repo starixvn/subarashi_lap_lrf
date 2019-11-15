@@ -67,7 +67,7 @@
         private IEnumerable<Subsidiary> GetSelectedSubsidiaryList(string subsidiaryList)
         {
             var userSession = _sessionService.UserSession;
-            var allSubsidiaries = _subsidiaryService.GetAllSubsidiaries(_sessionService.LicenseeSession.LicenseeName, userSession);
+            var allSubsidiaries = _subsidiaryService.GetAllSubsidiaries(userSession, _sessionService.LicenseeSession.LicenseeName);
             if (_sessionService.UserSession.UserLevel == UserLevelType.Subsidiary)
             {
                 var operatorId = userSession.OperatorId;

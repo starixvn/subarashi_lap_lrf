@@ -6,7 +6,6 @@
 namespace Fanex.Athena.Model.Customer.ViewModel
 {
     using System.Collections.Generic;
-    using Core.DTO.Common;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Users;
     using Fanex.Athena.Model.Customer.DTO;

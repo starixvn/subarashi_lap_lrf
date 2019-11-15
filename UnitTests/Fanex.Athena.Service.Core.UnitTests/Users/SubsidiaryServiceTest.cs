@@ -103,7 +103,7 @@
             var cacheKey = $"SubsidiaryList_{LicenseeName}";
 
             // Action
-            _service.GetAllSubsidiaries(LicenseeName, _userAuthInfo);
+            _service.GetAllSubsidiaries(_userAuthInfo, LicenseeName);
 
             // Assert
             _dataAccess.DidNotReceiveWithAnyArgs().GetSubsidiaryList(LicenseeName);
@@ -117,7 +117,7 @@
             var expectedResult = GetAgentByCurrencyData().SelectMany(i => i.Value);
 
             // Action
-            var result = _service.GetAllSubsidiaries(LicenseeName, _userAuthInfo).Select(i => i.AgentId);
+            var result = _service.GetAllSubsidiaries(_userAuthInfo, LicenseeName).Select(i => i.AgentId);
 
             // Assert
             Assert.AreEqual(true, result.Except(expectedResult).Count() == 0);
@@ -216,11 +216,11 @@
             {
                 WhiteLabelID = 201,
                 WhiteLabelName = "201",
-                OperatorIds = new[] { "alex" }
+                OperatorId = "alex"
             };
             yield return new GroupSubsidiary
             {
-                OperatorIds = new[] { "alex2" }
+                OperatorId = "alex2"
             };
         }
         private static IEnumerable<Subsidiary> GetSubsidiaryData()

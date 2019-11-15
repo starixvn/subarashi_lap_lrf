@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
     using Model.Core.ResultModel;
     using Model.Customer.DTO;
     using Model.Customer.MetaModel;
@@ -66,7 +67,7 @@
         }
 
         [Test]
-        public async System.Threading.Tasks.Task PostCustomerList_IsFakeLicensee_PlaceholderUsernameIsExternalIdOrSystemIdAsync()
+        public async Task PostCustomerList_IsFakeLicensee_PlaceholderUsernameIsExternalIdOrSystemIdAsync()
         {
             using (var controller = CreateController())
             {

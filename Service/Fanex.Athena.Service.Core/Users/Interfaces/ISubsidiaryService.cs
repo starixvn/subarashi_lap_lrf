@@ -7,11 +7,9 @@
 
     public interface ISubsidiaryService
     {
-        IEnumerable<GroupSubsidiary> GetGroupSubsidiariesByViewType(string licenseeName, int? whitteLabelId, UserAuthInfo user);
-
         IEnumerable<GroupSubsidiary> GetGroupSubsidiaries(string licenseeName, int? whitteLabelId);
 
-        IEnumerable<Subsidiary> GetAllSubsidiaries(string licenseeName, UserAuthInfo user);
+        IEnumerable<Subsidiary> GetAllSubsidiaries(UserAuthInfo user, string licenseeName);
 
         IDictionary<int, IEnumerable<int>> GetCurrencyAgentList(UserAuthInfo user, string licenseeName, string subsidiaryNames, bool isExcludeTest = false, int currencyId = 0);
     }

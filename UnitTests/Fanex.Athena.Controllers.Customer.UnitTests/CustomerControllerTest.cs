@@ -38,6 +38,7 @@
         public void SetUp()
         {
             _licenseeSettingService = Substitute.For<ILicenseeSettingService>();
+            _licenseeDataAccess = Substitute.For<ILicenseeDataAccess>();
         }
 
         [OneTimeSetUp]
@@ -74,7 +75,7 @@
         {
             _groupComService.ClearReceivedCalls();
             _customerListService.ClearReceivedCalls();
-            _licenseeDataAccess.ClearReceivedCalls();
+            _licenseeDataAccess = null;
             _licenseeSettingService = null;
         }
 

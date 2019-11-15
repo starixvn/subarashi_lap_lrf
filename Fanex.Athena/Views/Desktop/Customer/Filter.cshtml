@@ -1,5 +1,6 @@
 ﻿@using Fanex.Athena.Model.Customer.ViewModel;
 @using Fanex.Athena.Model.Customer.MetaModel;
+@using Fanex.Athena.Model.Core.DataDomain;
 @model CustomerListViewModel
 @{
     var showOption = new
@@ -10,7 +11,7 @@
         showUserGuide = !Model.IsFakeLicensee,
         showStatus = Model.Param.IsShowStatusDropdown,
         showBA = !Model.IsSubsidiary && Model.ProductAccess.IsAllowBA,
-        showSubsidiary = Model.ViewType != Fanex.Athena.Model.Core.DataDomain.SubsidiaryViewType.NotManagement
+        showSubsidiary = Model.ViewType != SubsidiaryViewType.NotManagement
     };
 }
 <div class="page-form">
@@ -171,5 +172,6 @@
 }
 @if (showOption.showSubsidiary)
 {
+    @Html.Hidden("IsMasterSubsidiaryView", Model.ViewType == SubsidiaryViewType.MasterManagement ? 1 : 0)
     @Html.Hidden("SubsidiaryList", Model.GroupSubsidiaryList.ToJson())
 }

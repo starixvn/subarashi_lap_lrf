@@ -2,8 +2,10 @@
 {
     using System;
     using System.Collections.Generic;
-    using Core.UnitTests.TestHelpers;
+    using System.Data;
+    using Fanex.Athena.Extension.Utility.Interfaces;
     using Fanex.Athena.Model.Core.DTO.Users;
+    using Fanex.Data;
     using Model.Report.DTO;
 
     using NSubstitute;
@@ -11,57 +13,75 @@
     using NUnit.Framework;
 
     using UnitTest.Common.Helpers;
-    using static Dapper.SqlMapper;
 
     [TestFixture]
-    public class SubsidiaryDataAccessTest : BaseDataAccessHelperTest<SubsidiaryDataAccess>
+    public class SubsidiaryDataAccessTest
     {
-        protected override void SetUpDataAccess()
+        private IDbFactory _dbFactory;
+
+        protected IObjectDb _objectDb { get; set; }
+
+        private SubsidiaryDataAccess _dataAccess;
+
+        [OneTimeSetUp]
+        public void OneTimeSetUp()
         {
-            DataAccess = Substitute.ForPartsOf<SubsidiaryDataAccess>();
+            _dbFactory = Substitute.For<IDbFactory>();
+            _objectDb = Substitute.For<IObjectDb>();
+            _dataAccess = new SubsidiaryDataAccess(_dbFactory);
         }
 
-        ////[Test]
+        [OneTimeTearDown]
+        public void OneTimeTearDown()
+        {
+            _dbFactory = null;
+            _objectDb = null;
+            _dataAccess = null;
+        }
+
+        [SetUp]
+        public void SetUp()
+        {
+            _objectDb.ClearReceivedCalls();
+        }
+
+        [Test]
         public void GetGroupSubsidiaries_WhenCall_PassCorrectParams()
         {
             // Arrange
             const string SpName = "Portal_Sub_GetSubsidiaryList";
-            DataAccess.GetObjectDb(Arg.Is(SpName)).Returns(ObjectDb);
-            Reader.Read().Returns(false);
             const string LisenseeName = "12Bet";
 
+            var reader = Substitute.For<IDataReader>();
+
+            reader.Read().Returns(false);
+            _dbFactory.GetObjectDb(Arg.Is(SpName)).Returns(_objectDb);
+            _objectDb.ExecuteReader(Arg.Any<object>()).Returns(reader);
+
             // Action
-            DataAccess.GetGroupSubsidiaries(LisenseeName);
+            _dataAccess.GetGroupSubsidiaries(LisenseeName);
 
             // Assert
-            ObjectDb.Received(1).ExecuteReader(Arg.Is<object>(x => x != null
-            && ValidateInputParameterFor_GetGroupSubsidiaries(x, LisenseeName)
-            ), null);
+            _objectDb.Received(1).ExecuteReader(
+                Arg.Is<object>(x => x != null && ValidateInputParameterFor_GetGroupSubsidiaries(x, LisenseeName)),
+                null);
         }
 
-        private static bool ValidateInputParameterFor_GetGroupSubsidiaries(object x, string licenseeName)
-        {
-            const int reportQueryMode = 0;
-            var type = x.GetType();
-            var siteName = type.GetProperty("SiteName").GetValue(x) as string;
-            var mode = (int)type.GetProperty("ForMgm").GetValue(x);
-            var status = type.GetProperty("StatusList").GetValue(x) as ICustomQueryParameter;
-            return siteName.Equals(licenseeName, StringComparison.OrdinalIgnoreCase)
-                && mode == reportQueryMode && status != null;
-        }
-
-        ////[Test]
+        [Test]
         public void GetGroupSubsidiaries_WhenCall_ReturnCorrectData()
         {
             // Arrange
             const string SpName = "Portal_Sub_GetSubsidiaryList";
-            DataAccess.GetObjectDb(Arg.Is(SpName)).Returns(ObjectDb);
-            Reader.Read().Returns(true, false);
-
             const string LisenseeName = "12Bet";
             const int whitelabelId = 1234;
             const string operatorId = "Abc";
             const string whitelabelName = "India";
+
+            var reader = Substitute.For<IDataReader>();
+
+            _dbFactory.GetObjectDb(Arg.Is(SpName)).Returns(_objectDb);
+            _objectDb.ExecuteReader(Arg.Any<object>()).Returns(reader);
+            reader.Read().Returns(true, false);
 
             var readerDataMapping = new Dictionary<string, object>(StringComparer.InvariantCultureIgnoreCase)
             {
@@ -69,21 +89,21 @@
                 { "Name", whitelabelName },
                 { "OperatorId", operatorId }
             };
-            DataAccessTestHelper.MapReaderData(Reader, readerDataMapping);
+            DataAccessTestHelper.MapReaderData(reader, readerDataMapping);
 
             var expectedData = new List<GroupSubsidiary>
             {
                 new GroupSubsidiary
                 {
                     WhiteLabelID=whitelabelId,
-                    OperatorIds = new[] { operatorId },
+                    OperatorId = operatorId,
                     WhiteLabelName = whitelabelName
                 }
             };
             var expectedResult = ObjectHelper.ToJson(expectedData);
 
             // Action
-            var result = ObjectHelper.ToJson(DataAccess.GetGroupSubsidiaries(LisenseeName));
+            var result = ObjectHelper.ToJson(_dataAccess.GetGroupSubsidiaries(LisenseeName));
 
             // Assert
             Assert.That(result, Is.EqualTo(expectedResult));
@@ -93,16 +113,19 @@
         {
             // Arrange
             const string SpName = "Lrf_SubsidiarySel";
-            DataAccess.GetObjectDb(Arg.Is(SpName)).Returns(ObjectDb);
-            Reader.Read().Returns(false);
-
             const string LisenseeName = "12Bet";
 
+            var reader = Substitute.For<IDataReader>();
+
+            _dbFactory.GetObjectDb(Arg.Is(SpName)).Returns(_objectDb);
+            _objectDb.ExecuteReader().Returns(reader);
+            reader.Read().Returns(false);
+
             // Action
-            DataAccess.GetSubsidiaryList(LisenseeName);
+            _dataAccess.GetSubsidiaryList(LisenseeName);
 
             // Assert
-            ObjectDb.Received(1).SetParameterValue("LicenseeName", LisenseeName);
+            _objectDb.Received(1).SetParameterValue("LicenseeName", LisenseeName);
         }
 
         [Test]
@@ -110,8 +133,12 @@
         {
             // Arrange
             const string SpName = "Lrf_SubsidiarySel";
-            DataAccess.GetObjectDb(Arg.Is(SpName)).Returns(ObjectDb);
-            Reader.Read().Returns(true, false);
+
+            var reader = Substitute.For<IDataReader>();
+
+            _dbFactory.GetObjectDb(Arg.Is(SpName)).Returns(_objectDb);
+            _objectDb.ExecuteReader().Returns(reader);
+            reader.Read().Returns(true, false);
 
             const string LisenseeName = "12Bet";
             const int AgentId = 1234;
@@ -124,7 +151,7 @@
                 { "OperatorID", OperatorName },
                 { "Currency", CurrencyId }
             };
-            DataAccessTestHelper.MapReaderData(Reader, readerDataMapping);
+            DataAccessTestHelper.MapReaderData(reader, readerDataMapping);
 
             var expectedData = new List<Subsidiary>
             {
@@ -138,10 +165,21 @@
             var expectedResult = ObjectHelper.ToJson(expectedData);
 
             // Action
-            var result = ObjectHelper.ToJson(DataAccess.GetSubsidiaryList(LisenseeName));
+            var result = ObjectHelper.ToJson(_dataAccess.GetSubsidiaryList(LisenseeName));
 
             // Assert
             Assert.That(result, Is.EqualTo(expectedResult));
+        }
+
+        private static bool ValidateInputParameterFor_GetGroupSubsidiaries(object x, string licenseeName)
+        {
+            const int reportQueryMode = 0;
+            var type = x.GetType();
+            var siteName = type.GetProperty("SiteName").GetValue(x) as string;
+            var mode = (int)type.GetProperty("ForMgm").GetValue(x);
+            var status = type.GetProperty("StatusList").GetValue(x) as DataTable;
+            return siteName.Equals(licenseeName, StringComparison.OrdinalIgnoreCase)
+                && mode == reportQueryMode && status != null;
         }
     }
 }

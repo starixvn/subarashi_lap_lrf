@@ -1,6 +1,14 @@
 ﻿'use strict';
-define(['jquery', 'common/site', './customerlist.gridoption', 'lib/jqgrid/jquery.jqgrid.additional', 'components/paging', './customerlist.state',
-    'lib/jqgrid/jquery.jqGrid.en', 'lib/jqgrid/jquery.jqGrid.min', 'extensions/jquery.extension'],
+define(['jquery',
+    'common/site',
+    './customerlist.gridoption',
+    'lib/jqgrid/jquery.jqgrid.additional',
+    'components/paging',
+    './customerlist.state',
+    'lib/jqgrid/jquery.jqGrid.en',
+    'lib/jqgrid/jquery.jqGrid.min',
+    'extensions/jquery.extension',
+    'lib/linq'],
 function ($, Site, CustomerListOption, jqGridAdditional, PagingHelper, CustomerListState) {
     const _POPUP_LIST = ['#ViewOptionList', '#update-cust-status-popup', '#LevelListContainer', '#OddsGroupListContainer'];
     const _OTHER_SUBSIDIARY_KEY = '(others)';
@@ -292,7 +300,7 @@ function ($, Site, CustomerListOption, jqGridAdditional, PagingHelper, CustomerL
             $(popUpSelector).fadeOut();
         },
 
-        getSubsidiaryTree: function (data) {
+        getSubsidiaryTree: function (data, isMaster) {
             let tree = [];
 
             const total = data.length;
@@ -300,53 +308,50 @@ function ($, Site, CustomerListOption, jqGridAdditional, PagingHelper, CustomerL
                 return tree;
             }
 
-            
-            if (data.length === 1 && data[0].WhiteLabelID === null) {
-                const items = data[0].OperatorIds
-                const totalItems = items.length;
+            const others = Site.getSingleResource('Others');
 
-                for (let i = 0; i < totalItems; i++) {
-                    tree.push({
-                        Value: items[i],
-                        Text: items[i] === _OTHER_SUBSIDIARY_KEY ? Site.getSingleResource('Others') : items[i],
+            if (isMaster) {
+                return Enumerable.From(data)
+                    .GroupBy(
+                        function (key) { return { Value: key.WhiteLabelID, Text: key.WhiteLabelName }; },
+                        function (item) {
+                            return {
+                                Value: item.OperatorId,
+                                Text: item.OperatorId,
+                                Checked: true,
+                                Enable: true,
+                            }
+                        },
+                        function (key, group) {
+                            return {
+                                Value: key.Value,
+                                Text: key.Value !== null ? key.Text : others,
+                                Checked: true,
+                                Enable: true,
+                                Items: group.source
+                            }
+                        },
+                        function (compare) { return compare.Value; })
+                    .ToArray();
+            }
+
+            return Enumerable.From(data)
+                .Distinct(function (x) { return x.OperatorId; })
+                .Select(function (item) {
+                    return {
+                        Value: item.OperatorId,
+                        Text: item.OperatorId,
                         Checked: true,
                         Enable: true
-                    });
-                }
-
-                return tree;
-            }
-
-            for (let i = 0; i < total; i++) {
-                const item = data[i];
-                const totalItems = item.OperatorIds.length;
-                let children = [];
-
-                if (totalItems) {
-                    for (let j = 0; j < totalItems; j++) {
-                        const child = item.OperatorIds[j];
-
-                        children.push({
-                            Value: child,
-                            Text: child,
-                            ParrentId: item.WhiteLabelID,
-                            Checked: true,
-                            Enable: true
-                        });
-                    }
-                }
-
-                tree.push({
-                    Id: i,
-                    Value: item.WhiteLabelID,
-                    Text: item.WhiteLabelName ? item.WhiteLabelName : Site.getSingleResource('Others'),
+                    };
+                })
+                .Union([{
+                    Value: _OTHER_SUBSIDIARY_KEY,
+                    Text: others,
                     Checked: true,
-                    Enable: true,
-                    Items: children
-                });
-            }
-
-            return tree;
+                    Enable: true
+                }])
+                .ToArray();
         }
     };
 

@@ -107,7 +107,7 @@ namespace Fanex.Athena.Controllers.Customer
                 IsShowStatusDropdown = allowLicensees.Contains(licensee.LicenseeId),
                 GridColumns = InitGridColumns(productAccess.IsAllow(Product.BA), allowLicensees),
                 OddsGroups = GetOddsGroups(),
-                BaseCurrency = userSession.DefaultBaseCurrency,
+                BaseCurrency = userSession.DefaultBaseCurrency
             };
 
             var model = await CreateCustomerViewModelAsync(metaModel);
@@ -174,15 +174,24 @@ namespace Fanex.Athena.Controllers.Customer
             if (metaModel != null && metaModel.IsValid)
             {
                 var licensee = SessionServiceInstance.LicenseeSession;
-                metaModel.IsShowStatusDropdown = AppSettingInstance.LicenseeOfferStatusFunction.Contains(licensee.LicenseeId);
+                var user = SessionServiceInstance.UserSession;
+                metaModel.IsShowStatusDropdown = AppSettings.LicenseeOfferStatusFunction.Contains(licensee.LicenseeId);
                 metaModel.LicenseeId = licensee.LicenseeId;
-                metaModel.AgentListXml = GetAgentListXml(SessionServiceInstance.UserSession, licensee.LicenseeName, metaModel.SubsidiaryList, metaModel.CurrencyId);
+                metaModel.AgentListXml = GetAgentListXml(user, licensee.LicenseeName, metaModel.SubsidiaryList, metaModel.CurrencyId);
 
                 if (metaModel.GridColumns.Any(i => i.Checked))
                 {
                     var templatePath = Server.MapPath(@"~/App_Data/Template/Customers/CustomerList.xls");
 
-                    var model = await GetCustomersAsync(metaModel);
+                    var data = await _customerListService.GetActiveCustomersAsync(metaModel).ConfigureAwait(false);
+                    var model = new CustomerListViewModel
+                    {
+                        Param = metaModel,
+                        DataList = data.DataList,
+                        TotalRows = data.TotalRows,
+                        IsAllowedCustomerCommission = licensee.IsAllowedCustomerComm,
+                        ProductAccess = this._productService.GetProductAccess(licensee.LicenseeId, user.Language)
+                    };
                     var fileName = "CustomerList_" + DateTime.Now.ToString("MM-dd-yyyy");
                     var reportTitle = ViewResources.CustomerList + " - "
                         + string.Format(ViewResources.Viewin, metaModel.IsConvert ? metaModel.BaseCurrency.ToUpper(CultureInfo.CurrentCulture) : metaModel.CurrencyName);
@@ -313,7 +322,9 @@ namespace Fanex.Athena.Controllers.Customer
                 IsAllowedUserChangeBA = _authorizationService.IsAllowedSpecialBA(userSession),
                 IsAllowedCustomerCommission = licenseeSession.IsAllowedCustomerComm,
                 IsFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeName),
-                GroupSubsidiaryList = _subsidiaryService.GetGroupSubsidiariesByViewType(licenseeSession.LicenseeName, userSession.WhiteLabelID, userSession),
+                GroupSubsidiaryList = userSession.SubsidiaryViewType == (int)SubsidiaryViewType.NotManagement
+                    ? Enumerable.Empty<GroupSubsidiary>()
+                    : _subsidiaryService.GetGroupSubsidiaries(licenseeSession.LicenseeName, userSession.WhiteLabelID),
                 ViewType = (SubsidiaryViewType)userSession.SubsidiaryViewType,
                 IsSubsidiary = isSubsidiary
             };
@@ -322,17 +333,6 @@ namespace Fanex.Athena.Controllers.Customer
                 model.GroupCommDataList = await _groupComService.GetAllAsync(licenseeSession.LicenseeId);
                 model.CurrentGroupComm = _groupComService.GetById(metaModel.GroupCommId, licenseeSession.LicenseeId);
             }
-
-            return model;
-        }
-
-        private async Task<CustomerListViewModel> GetCustomersAsync(CustomerListMetaModel metaModel)
-        {
-            var model = await CreateCustomerViewModelAsync(metaModel).ConfigureAwait(false);
-
-            var result = await _customerListService.GetActiveCustomersAsync(model.Param).ConfigureAwait(false);
-            model.DataList = result.DataList;
-            model.TotalRows = result.TotalRows;
 
             return model;
         }

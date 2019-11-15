@@ -1,36 +1,25 @@
 ﻿namespace Fanex.Athena.Controllers.Report.UnitTests
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Web.Mvc;
     using Fanex.Athena.Controllers.Base.UnitTests;
-    using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Core.DTO.Users;
-    using Fanex.Athena.Model.Core.MetaModel.Product;
     using Fanex.Athena.Model.Report.ViewModel;
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.Report.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
-
     using Model.Core.DataDomain;
-
     using NSubstitute;
-
     using NUnit.Framework;
-
-    using System.Collections.Generic;
-    using System.Web;
-    using System.Web.Mvc;
-    using System.Web.Script.Serialization;
 
     [TestFixture]
     public class SubsidiaryPerformanceReportControllerTest : CultureBaseControllerHelperTest
     {
-        private const string FakeProductCode = "TestingCode";
-        private const string FakeProductName = "Testing Product Name";
-
         private ISubsidiaryService _subsidiaryService;
-        private JavaScriptSerializer _serializer;
-
-        public ISubsidiaryPerformanceService Service { get; set; }
+        private IProductService _productService;
+        private ISubsidiaryPerformanceService _service;
 
         [SetUp]
         public void SetUp()
@@ -38,60 +27,44 @@
             SetUpDefaultFakeData();
 
             _subsidiaryService = Substitute.For<ISubsidiaryService>();
-            Service = Substitute.For<ISubsidiaryPerformanceService>();
-            _serializer = new JavaScriptSerializer();
+            _service = Substitute.For<ISubsidiaryPerformanceService>();
+            _productService = Substitute.For<IProductService>();
         }
 
         [Test]
-        public void Index_IsManageableSubsidiaryIsFalse_SubsidiaryListIsNull()
+        public void Index_WhenCall_ReturnCorrectResult()
         {
             using (var controller = CreateController())
             {
                 // Arrange
-                SessionService.UserSession.Returns(new UserAuthInfo
-                {
-                    Language = DefaultUserSession.Language
-                });
+                var product = new Product { ProductCode = "Test", ProductName = "Test Name" };
+                _productService.GetSingleWalletProductAccess(DefaultLicenseeSession.LicenseeId, DefaultUserSession.Language, FunctionNames.SubsidiaryPerformance)
+                    .Returns(new ProductAccess(new List<Product> { product }));
 
-                var expectedViewModelData = new SubsidiaryPerformanceViewModel
-                {
-                    GroupSubsidiaryList = new List<GroupSubsidiary>(),
-                    ProductOptionList = new List<ProductOption>
-                    {
-                        new ProductOption { Code = FakeProductCode, Name = FakeProductName, Status = true }
-                    }
-                };
+                var groupSubsidiaryList = new List<GroupSubsidiary>();
+                _subsidiaryService.GetGroupSubsidiaries(DefaultLicenseeSession.LicenseeName, DefaultUserSession.WhiteLabelID).Returns(groupSubsidiaryList);
 
-                var expectedModel = _serializer.Serialize(expectedViewModelData);
                 var expectedViewName = "~/Views/Desktop/Report/SubsidiaryPerformance/Main.cshtml";
-                HttpContext.Current = GetHttpContext();
 
                 // Action
                 var viewResult = controller.Index() as ViewResult;
-                var modelResult = _serializer.Serialize(viewResult.Model);
+                var viewModel = viewResult.Model as SubsidiaryPerformanceViewModel;
 
                 // Assert
-                Assert.That(viewResult.ViewName, Is.EqualTo(expectedViewName));
-                Assert.That(modelResult, Is.EqualTo(expectedModel));
+                Assert.Multiple(() =>
+                {
+                    Assert.That(viewResult.ViewName, Is.EqualTo(expectedViewName));
+                    Assert.That(viewModel.ViewType, Is.EqualTo((SubsidiaryViewType)DefaultUserSession.SubsidiaryViewType));
+                    Assert.That(viewModel.GroupSubsidiaryList, Is.EqualTo(groupSubsidiaryList));
+                    Assert.That(viewModel.ProductOptionList.First().Code, Is.EqualTo(product.ProductCode));
+                    Assert.That(viewModel.ProductOptionList.First().Name, Is.EqualTo(product.ProductName));
+                    Assert.That(viewModel.ProductOptionList.First().Status, Is.True);
+                });
             }
-        }
-
-        private static HttpContext GetHttpContext()
-        {
-            return new HttpContext(
-                new HttpRequest(null, "http://tempuri.org", null),
-                new HttpResponse(null));
         }
 
         private SubsidiaryPerformanceReportController CreateController()
         {
-            var productService = Substitute.For<IProductService>();
-            productService.GetSingleWalletProductAccess(
-                SessionService.LicenseeSession.LicenseeId,
-                SessionService.UserSession.Language,
-                FunctionNames.SubsidiaryPerformance)
-                .Returns(new ProductAccess(new List<Product> { new Product { ProductCode = FakeProductCode, ProductName = FakeProductName } }));
-
             return new SubsidiaryPerformanceReportController(_subsidiaryService)
             {
                 ProductServiceInstance = productService,

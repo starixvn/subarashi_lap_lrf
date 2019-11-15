@@ -99,7 +99,7 @@
             SessionService.UserSession.Returns(user);
 
             var currencyAgentList = new Dictionary<int, IEnumerable<int>> { { 1, new[] { 1, 2, 3 } } };
-            _subsidiaryService.GetCurrencyAgentList(Arg.Any<UserAuthInfo>(), Arg.Any<string>(), Arg.Any<string>(), Arg.Any<bool>(), Arg.Any<int>())
+            _subsidiaryService.GetCurrencyAgentList(Arg.Any<UserAuthInfo>(), Arg.Any<string>(), Arg.Any<string>(), Arg.Any<bool>(), 0)
                 .Returns(currencyAgentList);
 
             var resultData = new SubsidiaryResultViewModel
