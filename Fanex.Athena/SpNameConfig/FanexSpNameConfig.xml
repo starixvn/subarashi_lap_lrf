@@ -8,5 +8,5 @@
   <SpNameConfig Environment="BACKUPMNL" SpName="Lrf_CheckIn" EnvironmentText="_mnl"></SpNameConfig>
   <!--Do not delete this-->
 
-  <SpNameConfig Environment="LOCAL" SpName="Portal_Sub_GetSubsidiaryList" EnvironmentText="_UAT1"></SpNameConfig>
+  <SpNameConfig Environment="LOCAL,DEV" SpName="Portal_Sub_GetSubsidiaryList" EnvironmentText="_UAT1"></SpNameConfig>
 </Root>
