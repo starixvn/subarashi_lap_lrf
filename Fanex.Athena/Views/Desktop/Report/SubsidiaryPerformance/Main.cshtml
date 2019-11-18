@@ -4,14 +4,21 @@
     Layout = "~/Views/Desktop/Shared/_ReactPageLayout.cshtml";
 }
 @using Fanex.Athena.Model.Core.DataDomain;
-@using Fanex.Athena.Service.Core;
 @model Fanex.Athena.Model.Report.ViewModel.SubsidiaryPerformanceViewModel
 @{
     var productOptions = Model.ProductOptionList;
     var selectedProductCode = string.Join(",", productOptions.Where(x => x.Status).Select(x => x.Code).ToArray());
     var baseCurrencyList = SystemConstants.BaseCurrencyList.Select(c => new { value = c.Value, label = c.Value }).ToList();
-    var subsidiaryList = Model.GroupSubsidiaryList;
-    var selectedSubsidiary = subsidiaryList == null ? null : string.Join(",", subsidiaryList.Select(x => x.WhiteLabelName).ToArray());
+    var subsidiaryList = Model.GroupSubsidiaryList.GroupBy(
+        x => new { x.WhiteLabelID, x.WhiteLabelName },
+        (key, group) => new
+        {
+            key = key.WhiteLabelID,
+            value = key.WhiteLabelName,
+            subList = group.Select(x => new { key = x.OperatorId, value = x.OperatorId }).ToList()
+        }).ToList();
+
+    var selectedSubsidiary = string.Join(",", Model.GroupSubsidiaryList.SelectMany(x => x.OperatorId).Distinct().ToArray());
 
     var appSettings = new AppSettings();
     var minDate = appSettings.HistoryDate;

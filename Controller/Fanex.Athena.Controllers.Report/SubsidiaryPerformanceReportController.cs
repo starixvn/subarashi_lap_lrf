@@ -1,6 +1,8 @@
 ﻿namespace Fanex.Athena.Controllers.Report
 {
     using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Core.DTO.Users;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DataDomain;
     using Model.Core.MetaModel.Product;
     using Model.Report.ViewModel;
@@ -38,7 +40,9 @@
                     Name = i.ProductName,
                     Status = true
                 }).ToList(),
-                GroupSubsidiaryList = _subsidiaryService.GetGroupSubsidiaries(licenseeSession.LicenseeName, userSession.WhiteLabelID),
+                GroupSubsidiaryList = userSession.SubsidiaryViewType == (int)SubsidiaryViewType.NotManagement
+                    ?  Enumerable.Empty<GroupSubsidiary>()
+                    : _subsidiaryService.GetGroupSubsidiaries(licenseeSession.LicenseeName, userSession.WhiteLabelID),
                 ViewType = (SubsidiaryViewType)userSession.SubsidiaryViewType
             };
             ViewBag.DefaultSelectedBaseCurrency = userSession.DefaultBaseCurrency;
