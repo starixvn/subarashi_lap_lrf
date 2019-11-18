@@ -39,7 +39,7 @@ export const resource_cs = {
     CustomInfo5: '玩家信息5',
     AgUserId: 'AG使用者ID',
     GoldDeluxeUserId: 'GD真人娱乐场平台使用者ID',
-    VoidBridgeUserId: 'VB使用者ID',
+    MacauGamesUserId: 'Macau Games UserID',
     ExchangeUserId: 'Exchange使用者ID',
     Gender: '性别',
     DateOfBirth: '生日',

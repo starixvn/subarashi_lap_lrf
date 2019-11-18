@@ -6,6 +6,8 @@ export const AthenaProfile = ({ data }) => {
         FirstName, LastName, Gender, Birthday, Phone, Country, Address, City, Town, State, ZipCode,
         SecurityQuestion, SecurityCode, HowToKnow, PreferredUserName, PreferredCurrency, PreferredOdds, PreferredLanguage } = data || {};
 
+    console.log(ClientResourceManager.getText('MacauGamesUserId'));
+
     return (
         <tbody>
             <tr>
@@ -17,7 +19,7 @@ export const AthenaProfile = ({ data }) => {
                 <td>{GoldDeluxeUserId}</td>
             </tr>
             <tr>
-                <td>{ClientResourceManager.getText('VoidBridgeUserId')}</td>
+                <td>{ClientResourceManager.getText('MacauGamesUserId')}</td>
                 <td>{VoidbridgeUserId}</td>
             </tr>
             <tr>
