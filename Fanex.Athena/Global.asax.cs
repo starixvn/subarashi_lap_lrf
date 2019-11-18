@@ -6,17 +6,6 @@
 
 namespace Fanex.Athena
 {
-    using Api.Base.Attributes;
-    using Data;
-    using Fanex.Athena.Extension.Helpers;
-    using Fanex.Athena.Web;
-    using Fanex.Athena.Web.ActionFilter;
-    using Fanex.Athena.Web.RouterConfig;
-    using Fanex.Data.SqlServer;
-    using Logging;
-    using Logging.RabbitMQ;
-    using MessagePack.Resolvers;
-    using RemotingRef;
     using System;
     using System.Collections.Generic;
     using System.Configuration;
@@ -27,6 +16,17 @@ namespace Fanex.Athena
     using System.Web.Mvc;
     using System.Web.Optimization;
     using System.Web.Routing;
+    using Api.Base.Attributes;
+    using Data;
+    using Fanex.Athena.Extension.Helpers;
+    using Fanex.Athena.Web.ActionFilter;
+    using Fanex.Athena.Web.RouterConfig;
+    using Fanex.Data.SqlServer;
+    using Fanex.Logging.Sentry.RavenClient;
+    using Logging;
+    using MessagePack.Resolvers;
+    using RemotingRef;
+    using SharpRaven;
 
     public class MvcApplication : HttpApplication
     {
@@ -59,10 +59,10 @@ namespace Fanex.Athena
             {
                 LogManager
                     .SetDefaultLogCategory(ConfigurationManager.AppSettings["Fanex.Logging-LogCategory"])
-                    .Use(new List<ILogEngine>
-                     {
-                         new RabbitMQLogging(ConfigurationManager.AppSettings["RabbitMQ-ConnectionString"])
-                     });
+                    .Use(new SentryLogging(new SentryEngineOptions
+                    {
+                        Dsn = new Dsn(ConfigurationManager.AppSettings["Sentry-Dsn"])
+                    }));
 
                 ViewEngines.Engines.Clear();
                 ViewEngines.Engines.Add(new RazorViewEngine());
