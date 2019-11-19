@@ -6,7 +6,6 @@
 
     using BetSettings;
 
-
     using DataAccess.BetSettings.Interfaces;
 
     using Extension.Utility;
@@ -188,7 +187,8 @@
             };
 
             _appSettings.IsDisableRngCasino.Returns(false);
-            _lgClient.PostAsync<bool>(Arg.Any<string>(), Arg.Any<BetSettingCasinoStatusMetaModel>(), Arg.Any<string>()).Returns(true);
+            _lgClient.PostAsync<APIResult<bool>>(Arg.Any<string>(), Arg.Any<BetSettingCasinoStatusMetaModel>(), Arg.Any<string>())
+                .Returns(new APIResult<bool> { Data = true });
 
             // Action
             await _service.UpdateStatusAsync(metaModel);

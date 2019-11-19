@@ -1,5 +1,6 @@
 ﻿namespace Fanex.Athena.Controllers.TotalBets.UnitTests
 {
+    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
@@ -66,43 +67,25 @@
         }
 
         [Test]
-        public async Task PostIndex_ExportExcel_MetaModelIsAssignedCorrectly()
+        public async Task PostIndex_ExportExcel_ReturnCorrectFileContentResult()
         {
             // Arrange
-            StubLicenseeSessionData(new Model.Auth.LicenseeAuthInfo
+            var language = SessionService.UserSession.Language;
+            var expectedResponseData = new Tuple<byte[], string>(new byte[] { 1 }, "application/octet-stream");
+
+            var metaModel = new CustomerWinLossMetaModel { IsExportExcel = true };
+
+            using (var controller = CreateController())
             {
-                LicenseeId = 100,
-                LicenseeName = "Spondemo",
-                IsAllowedCustomerComm = true
-            });
-            var licenseeSession = SessionService.LicenseeSession;
-            var userSession = SessionService.UserSession;
-            var expectedLanguage = userSession.Language;
-
-            var productAccess = new ProductAccess(
-                    new List<Product> { new Product { ProductCode = Product.BA } });
-
-            var licenseeSettingService = Substitute.For<ILicenseeSettingService>();
-            licenseeSettingService.IsFakeLicensee(licenseeSession.LicenseeName).Returns(true);
-
-            using (var controller = CreateController(productAccess, licenseeSettingService))
-            {
-                _reportApiClient.PostByteContentAsync(Arg.Any<string>(),
-                Arg.Any<CustomerWinLossMetaModel>(), Arg.Any<string>())
-                .Returns(Task.FromResult<byte[]>(new byte[] { 1 }));
+                _reportApiClient.PostAsync("api/CustomerWinLoss/ExportExcel", metaModel, language)
+                    .Returns(expectedResponseData);
 
                 // Action
-                await controller.Index(new CustomerWinLossMetaModel { IsExportExcel = true });
+                var result = await controller.Index(metaModel) as FileContentResult;
 
                 // Assert
-                Assert.Multiple(() =>
-                {
-                    _reportApiClient.Received(1).PostByteContentAsync(
-                    Arg.Is<string>(x => x == "api/CustomerWinLoss/ExportExcel"),
-                        Arg.Is<CustomerWinLossMetaModel>(x =>
-                        x.IsAllowedCustomerComm && x.IsAllowBA && !x.SystemIdVisible),
-                        Arg.Is<string>(x => x == expectedLanguage));
-                });
+                Assert.That(result.FileContents, Is.EqualTo(expectedResponseData.Item1));
+                Assert.That(result.ContentType, Is.EqualTo(expectedResponseData.Item2));
             }
         }
 
@@ -110,7 +93,6 @@
         public async Task PostIndex_GetData_ReturnCorrectResult()
         {
             // Arrange
-            var licenseeSession = SessionService.LicenseeSession;
             var userSession = SessionService.UserSession;
 
             using (var controller = CreateController())

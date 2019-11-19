@@ -10,8 +10,6 @@
 
     using NUnit.Framework;
 
-    using Resources;
-
     using UnitTest.Common.Helpers;
 
     [TestFixture]
@@ -87,7 +85,7 @@
             // Assert
             Assert.Multiple(() =>
             {
-                _lgClient.DidNotReceive().PostAsync<bool>(Arg.Any<string>(), Arg.Any<CustomerStatusMetaModel>(), Arg.Any<string>());
+                _lgClient.DidNotReceive().PostAsync<APIResult<bool>>(Arg.Any<string>(), Arg.Any<CustomerStatusMetaModel>(), Arg.Any<string>());
                 Assert.That(result.Code, Is.EqualTo(expectedResult.Code));
                 Assert.That(result.Message, Is.EqualTo(expectedResult.Message));
             });
@@ -145,7 +143,6 @@
 
             _lgClient.PostAsync<APIResult<bool>>(Arg.Any<string>(), Arg.Any<CustomerStatusMetaModel>(),
                 Arg.Any<string>()).Returns(new APIResult<bool> { Data = false });
-
 
             var expectedResult = new ResultInfo { Code = 1, Message = "Error when update closed status on casino db" };
 
@@ -236,7 +233,7 @@
             // Assert
             Assert.Multiple(() =>
             {
-                _lgClient.DidNotReceive().PostAsync<bool>(Arg.Any<string>(), Arg.Any<CustomerStatusMetaModel>(), Arg.Any<string>()); Assert.That(result.Code, Is.EqualTo(expectedResult.Code));
+                _lgClient.DidNotReceive().PostAsync<APIResult<bool>>(Arg.Any<string>(), Arg.Any<CustomerStatusMetaModel>(), Arg.Any<string>()); Assert.That(result.Code, Is.EqualTo(expectedResult.Code));
                 Assert.That(result.Message, Is.EqualTo(expectedResult.Message));
             });
         }
@@ -265,7 +262,6 @@
             // Assert
             Assert.Multiple(() =>
             {
-
                 _lgClient.Received().PostAsync<APIResult<bool>>(Arg.Any<string>(), Arg.Is<CustomerStatusMetaModel>(param =>
                                         param.CustId == metaModel.CustId &&
                                         param.LicenseeName == metaModel.LicenseeName.ToUpperInvariant() &&
@@ -290,28 +286,28 @@
 
             _appSettings.IsDisableRngCasino.Returns(false);
 
-            _lgClient.PostAsync < APIResult<bool>>(Arg.Any<string>(), Arg.Any<CustomerStatusMetaModel>(),
+            _lgClient.PostAsync<APIResult<bool>>(Arg.Any<string>(), Arg.Any<CustomerStatusMetaModel>(),
                    Arg.Any<string>()).Returns(new APIResult<bool> { Data = false });
 
-                var expectedResult = new ResultInfo { Code = 1, Message = "Error when update suspend status on casino db" };
+            var expectedResult = new ResultInfo { Code = 1, Message = "Error when update suspend status on casino db" };
 
-                // Action
-                var result = await _customerListService.UpdateCustSuspendAsync(metaModel, string.Empty).ConfigureAwait(false);
+            // Action
+            var result = await _customerListService.UpdateCustSuspendAsync(metaModel, string.Empty).ConfigureAwait(false);
 
-                // Assert
-                Assert.Multiple(() =>
-                {
-                    _lgClient.Received().PostAsync<APIResult<bool>>(Arg.Any<string>(), Arg.Is<CustomerStatusMetaModel>(param =>
-                                            param.CustId == metaModel.CustId &&
-                                            param.LicenseeName == metaModel.LicenseeName.ToUpperInvariant() &&
-                                            param.IsOn == metaModel.IsOn &&
-                                            param.ModifyById == metaModel.ModifyById &&
-                                            param.ModifyByUsername == metaModel.ModifyByUsername &&
-                                            param.Ip == metaModel.Ip), Arg.Any<string>());
-                    _customerListDataAccess.DidNotReceive().UpdateCustSuspend(metaModel);
-                    Assert.That(result.Code, Is.EqualTo(expectedResult.Code));
-                    Assert.That(result.Message, Is.EqualTo(expectedResult.Message));
-                });
-            }
+            // Assert
+            Assert.Multiple(() =>
+            {
+                _lgClient.Received().PostAsync<APIResult<bool>>(Arg.Any<string>(), Arg.Is<CustomerStatusMetaModel>(param =>
+                                        param.CustId == metaModel.CustId &&
+                                        param.LicenseeName == metaModel.LicenseeName.ToUpperInvariant() &&
+                                        param.IsOn == metaModel.IsOn &&
+                                        param.ModifyById == metaModel.ModifyById &&
+                                        param.ModifyByUsername == metaModel.ModifyByUsername &&
+                                        param.Ip == metaModel.Ip), Arg.Any<string>());
+                _customerListDataAccess.DidNotReceive().UpdateCustSuspend(metaModel);
+                Assert.That(result.Code, Is.EqualTo(expectedResult.Code));
+                Assert.That(result.Message, Is.EqualTo(expectedResult.Message));
+            });
         }
     }
+}

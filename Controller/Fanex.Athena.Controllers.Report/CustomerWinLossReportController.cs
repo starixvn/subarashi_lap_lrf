@@ -51,19 +51,18 @@ namespace Fanex.Athena.Controllers.Report
         }
 
         [HttpPost]
-        [AutoBindMetaModel(BindAgent = true)]
+        [AutoBindMetaModel(BindAgent = true, BindLicenseeContract = true)]
         [ValidationWebRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
         public async Task<ActionResult> Index(CustomerWinLossMetaModel metaModel)
         {
             var userSession = SessionService.UserSession;
             if (metaModel.IsExportExcel)
             {
-                AssignMetaModelForExcel(metaModel);
-                const string FileName = "CustomerWinLoss.xls";
-                var stream = await _reportAPIClient.PostByteContentAsync("api/CustomerWinLoss/ExportExcel",
+                const string FileName = "CustomerWinLoss";
+                var httpResponse = await _reportAPIClient.PostAsync("api/CustomerWinLoss/ExportExcel",
                     metaModel, userSession.Language).ConfigureAwait(false);
 
-                return File(stream, "application/octet-stream", FileName);
+                return File(httpResponse.Item1, httpResponse.Item2, FileName);
             }
 
             return JsonString(await _reportAPIClient.PostAsyncString("api/CustomerWinLoss/Index", metaModel, userSession.Language).ConfigureAwait(false));
@@ -103,19 +102,6 @@ namespace Fanex.Athena.Controllers.Report
             };
 
             return View("~/Views/Desktop/Report/CustomerWinLoss/Main.cshtml", model);
-        }
-
-        private void AssignMetaModelForExcel(CustomerWinLossMetaModel metaModel)
-        {
-            var licenseeSession = SessionService.LicenseeSession;
-            var productAccess = ProductService.GetSingleWalletProductAccess(
-                licenseeSession.LicenseeId,
-                SessionService.UserSession.Language,
-                FunctionNames.CustomerWinLoss);
-
-            metaModel.IsAllowedCustomerComm = licenseeSession.IsAllowedCustomerComm;
-            metaModel.IsAllowBA = productAccess.IsAllowBA;
-            metaModel.SystemIdVisible = !IsFakeLicensee(licenseeSession.LicenseeName);
         }
     }
 }

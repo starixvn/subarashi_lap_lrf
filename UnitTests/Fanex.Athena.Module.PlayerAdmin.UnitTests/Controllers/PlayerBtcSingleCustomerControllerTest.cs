@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Fanex.Athena.Controllers.Base.UnitTests;
@@ -135,8 +135,9 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers
             {
                 IsExport = true
             };
-            _betListApiClient.PostAsyncStream("/BettingTicketCenter/GetBySingleCustomer", metaModel, SessionService.UserSession.Language)
-                .Returns(new MemoryStream(new byte[] { }));
+            var expectedResponse = new HttpResponseMessage(HttpStatusCode.NoContent);
+            _betListApiClient.PostAsync("/BettingTicketCenter/GetBySingleCustomer", metaModel, SessionService.UserSession.Language)
+                .Returns(expectedResponse);
 
             using (var controller = CreateController())
             {
@@ -157,16 +158,16 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers
             {
                 IsExport = true
             };
-            _betListApiClient.PostAsyncStream("/BettingTicketCenter/GetBySingleCustomer", metaModel, SessionService.UserSession.Language)
-                .Returns(new MemoryStream(new byte[] { 1, 2, 3 }));
+            _betListApiClient.PostAsyncBytes("/BettingTicketCenter/GetBySingleCustomer", metaModel, SessionService.UserSession.Language)
+                .Returns(new byte[] { 1, 2, 3 });
 
             using (var controller = CreateController())
             {
                 // Action
-                var result = await controller.Index(metaModel) as FileStreamResult;
+                var result = await controller.Index(metaModel) as FileContentResult;
 
                 // Assert
-                Assert.That(result.FileStream.Length, Is.EqualTo(3));
+                Assert.That(result.FileContents.Length, Is.EqualTo(3));
                 Assert.That(result.ContentType, Is.EqualTo("application/octet-stream"));
             }
         }

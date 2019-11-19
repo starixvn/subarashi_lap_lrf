@@ -103,6 +103,7 @@
     <Compile Include="FunctionStorageTest.cs" />
     <Compile Include="LicenseeSettingServiceTest.cs" />
     <Compile Include="MatchServiceTest.cs" />
+    <Compile Include="MockHelper\MockHttpMessageHandler.cs" />
     <Compile Include="MoveBetServiceTest.cs" />
     <Compile Include="OneBookSecurityWrapperTest.cs" />
     <Compile Include="ProductServiceTest.GetProductAccess.cs" />

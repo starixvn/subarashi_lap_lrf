@@ -53,8 +53,13 @@
         }
 
         [Test]
-        public void RefNo_WhenCall_ReturnCorrectView()
+        public void RefNo_WhenCall_ReturnCorrectViewResult()
         {
+            var productCodes = FakeHelper.CreateMany<Product>(3).ToList();
+            _productService.GetSingleWalletProductAccess(
+                SessionService.LicenseeSession.LicenseeId,
+                SessionService.UserSession.Language).Returns(new ProductAccess(productCodes));
+
             using (var controller = CreateController())
             {
                 // Action
@@ -62,18 +67,6 @@
 
                 // Assert
                 Assert.That(result.ViewName, Is.EqualTo("~/Views/Desktop/BetList/BettingTicketCenter/RefNo.cshtml"));
-            }
-        }
-
-        [Test]
-        public void RefNo_WhenCall_ReturnCorrectViewModel()
-        {
-            using (var controller = CreateController())
-            {
-                // Action
-                var result = controller.RefNo() as ViewResult;
-
-                // Assert
                 Assert.That(result.Model, Is.EqualTo(DefaultLicenseeSession.IsAllowedCustomerComm));
             }
         }

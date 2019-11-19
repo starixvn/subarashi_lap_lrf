@@ -75,10 +75,10 @@ namespace Fanex.Athena.Controllers.Report
             var userSession = SessionService.UserSession;
             if (metaModel.IsExportExcel)
             {
-                var stream = await _reportAPIClient.PostByteContentAsync("api/DailyBets/Export",
+                var httpResponse = await _reportAPIClient.PostAsync("api/DailyBets/Export",
                     metaModel, userSession.Language).ConfigureAwait(false);
 
-                return File(stream, "application/octet-stream");
+                return File(httpResponse.Item1, httpResponse.Item2);
             }
 
             return JsonString(await _reportAPIClient.PostAsyncString("api/DailyBets/Index", metaModel, userSession.Language).ConfigureAwait(false));

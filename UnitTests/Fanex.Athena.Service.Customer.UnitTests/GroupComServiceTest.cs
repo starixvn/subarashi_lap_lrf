@@ -110,7 +110,7 @@
             // Assert
             Assert.Multiple(() =>
             {
-                _lgClient.DidNotReceive().PostAsync<bool>(Arg.Any<string>(), Arg.Any<RNGCasinoUpdateMemberComMetaModel>(), Arg.Any<string>());
+                _lgClient.DidNotReceive().PostAsync<APIResult<bool>>(Arg.Any<string>(), Arg.Any<RNGCasinoUpdateMemberComMetaModel>(), Arg.Any<string>());
                 Assert.That(result, Is.EqualTo(expectedResult));
             });
         }
@@ -133,7 +133,7 @@
             // Assert
             Assert.Multiple(() =>
             {
-                _lgClient.DidNotReceive().PostAsync<bool>(Arg.Any<string>(), Arg.Any<RNGCasinoUpdateMemberComMetaModel>(), Arg.Any<string>());
+                _lgClient.DidNotReceive().PostAsync<APIResult<bool>>(Arg.Any<string>(), Arg.Any<RNGCasinoUpdateMemberComMetaModel>(), Arg.Any<string>());
                 Assert.That(result, Is.EqualTo(expectedResult));
             });
         }
@@ -179,8 +179,8 @@
 
             _groupDataAccess.UpdateGroupAsync(newItem, request, userSession.UserId)
                 .Returns(new ResultInfo { ExtendedData = "1,2,3" });
-            _lgClient.PostAsync<bool>(Arg.Any<string>(), Arg.Any<RNGCasinoUpdateMemberComMetaModel>(),
-    Arg.Any<string>()).Returns(false);
+            _lgClient.PostAsync<APIResult<bool>>(Arg.Any<string>(), Arg.Any<RNGCasinoUpdateMemberComMetaModel>(),
+    Arg.Any<string>()).Returns(new APIResult<bool> { Data = false });
             var expectedResult = new ResultInfo
             {
                 Code = 1,
@@ -222,7 +222,7 @@
             // Assert
             Assert.Multiple(() =>
             {
-                _lgClient.DidNotReceive().PostAsync<bool>(Arg.Any<string>(),
+                _lgClient.DidNotReceive().PostAsync<APIResult<bool>>(Arg.Any<string>(),
                     Arg.Any<RNGCasinoUpdateMemberComMetaModel>(), Arg.Any<string>()); Assert.That(result, Is.EqualTo(expectedResult));
             });
         }
@@ -251,7 +251,7 @@
             // Assert
             Assert.Multiple(() =>
             {
-                _lgClient.DidNotReceive().PostAsync<bool>(Arg.Any<string>(),
+                _lgClient.DidNotReceive().PostAsync<APIResult<bool>>(Arg.Any<string>(),
                     Arg.Any<RNGCasinoUpdateMemberComMetaModel>(), Arg.Any<string>());
                 Assert.That(result, Is.EqualTo(expectedResult));
             });
@@ -282,7 +282,7 @@
             // Assert
             Assert.Multiple(() =>
             {
-                _lgClient.DidNotReceive().PostAsync<bool>(Arg.Any<string>(),
+                _lgClient.DidNotReceive().PostAsync<APIResult<bool>>(Arg.Any<string>(),
                     Arg.Any<RNGCasinoUpdateMemberComMetaModel>(), Arg.Any<string>());
                 Assert.That(result, Is.EqualTo(expectedResult));
             });

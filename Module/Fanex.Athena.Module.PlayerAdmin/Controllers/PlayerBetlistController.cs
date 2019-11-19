@@ -72,7 +72,7 @@
 
         public async Task<ActionResult> ExportRunningBetListDataAsync(PlayerRunningBetListMetalModel metaModel)
         {
-            var stream = await _betListApiClient.PostAsyncStream("/PlayerAdminBetList/Export",
+            var stream = await _betListApiClient.PostAsyncBytes("/PlayerAdminBetList/Export",
                 metaModel,
                 SessionService.UserSession.Language).ConfigureAwait(false);
 

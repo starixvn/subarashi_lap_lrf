@@ -7,8 +7,10 @@
 namespace Fanex.Athena.Model.Report.MetaModel
 {
     using System;
+    using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Model.Core.MetaModel;
 
-    public class CustomerWinLossMetaModel : BaseReportMetaModel
+    public class CustomerWinLossMetaModel : BaseReportMetaModel, IMetaModelFunctionContract
     {
         public CustomerWinLossMetaModel()
         {
@@ -33,5 +35,7 @@ namespace Fanex.Athena.Model.Report.MetaModel
         public bool IsAllowedCustomerComm { get; set; }
 
         public bool SystemIdVisible { get; set; }
+
+        public string FunctionKey => FunctionNames.CustomerWinLoss;
     }
 }

@@ -133,7 +133,8 @@
                 var language = FakeHelper.Create<string>();
                 StubUserSessionData(new UserAuthInfo { Language = language });
 
-                _betListApiClient.PostAsyncStream("/PlayerAdminBetList/Export", metaModel, language).Returns(Task.FromResult<Stream>(new MemoryStream(0)));
+                _betListApiClient.PostAsyncBytes("/PlayerAdminBetList/Export", metaModel, language)
+                    .Returns(new byte[] { 1 });
 
                 // Action
                 await controller.GetRunningBetList(metaModel);
@@ -141,7 +142,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    _betListApiClient.Received(1).PostAsyncStream(
+                    _betListApiClient.Received(1).PostAsyncBytes(
                         Arg.Is<string>(x => x == "/PlayerAdminBetList/Export"),
                         Arg.Is(metaModel),
                         Arg.Is<string>(x => x == language));

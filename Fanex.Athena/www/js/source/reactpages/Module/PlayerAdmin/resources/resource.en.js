@@ -6,7 +6,7 @@ export const resource_en = {
     Country: 'Country',
     AgUserId: 'AG UserId',
     GoldDeluxeUserId: 'Gold Deluxe UserID',
-    VoidBridgeUserId: 'VoidBridge UserID',
+    MacauGamesUserId: 'Macau Games UserID',
     ExchangeUserId: 'Exchange UserID',
     FirstName: 'First name',
     LastName: 'Last name',

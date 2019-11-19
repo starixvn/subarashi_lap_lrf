@@ -62,20 +62,19 @@ namespace Fanex.Athena.Module.PlayerAdmin.Controllers
         [AjaxRequest]
         [CustomValidateAntiForgery]
         [ValidationWebRequest]
-        [AutoBindMetaModel(BindAgent = true)]
+        [AutoBindMetaModel(BindAgent = true, BindLicenseeContract = true)]
         public async Task<ActionResult> Index([Bind(Include = "Username")]PlayerWinLossMetaModel metaModel)
         {
             var userSession = SessionService.UserSession;
-            AssignMetaModelValue(metaModel);
+            SetDefaultProductOptionValue(metaModel);
 
             if (metaModel.IsExportExcel)
             {
-                AssignMetaModelForExcel(metaModel);
-                const string FileName = "CustomerWinLoss.xls";
-                var stream = await _reportAPIClient.PostByteContentAsync("api/CustomerWinLoss/ExportExcel",
+                const string FileName = "CustomerWinLoss.xlsx";
+                var response = await _reportAPIClient.PostAsync("api/CustomerWinLoss/ExportExcel",
                     metaModel, userSession.Language, MediaType.MsgPack).ConfigureAwait(false);
 
-                return File(stream, "application/octet-stream", FileName);
+                return File(response.Item1, response.Item2, FileName);
             }
 
             return JsonString(await _reportAPIClient.PostAsyncString("api/CustomerWinLoss/Index",
@@ -90,7 +89,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Controllers
                 FunctionNames.CustomerWinLoss);
         }
 
-        private void AssignMetaModelValue(PlayerWinLossMetaModel metaModel)
+        private void SetDefaultProductOptionValue(PlayerWinLossMetaModel metaModel)
         {
             var now = DateTime.Now;
             var productList = GetProductAccess().ProductList;
@@ -98,15 +97,6 @@ namespace Fanex.Athena.Module.PlayerAdmin.Controllers
             metaModel.ProductOptions = productList.Select(p => new ProductOption { Code = p.ProductCode, Name = p.ProductName, Status = true });
             metaModel.FromDate = new DateTime(now.Year, now.Month, 1);
             metaModel.ToDate = now;
-        }
-
-        private void AssignMetaModelForExcel(PlayerWinLossMetaModel metaModel)
-        {
-            var licenseeSession = SessionService.LicenseeSession;
-
-            metaModel.IsAllowedCustomerComm = licenseeSession.IsAllowedCustomerComm;
-            metaModel.IsAllowBA = GetProductAccess().IsAllowBA;
-            metaModel.SystemIdVisible = !_licenseeSettingService.IsFakeLicensee(licenseeSession.LicenseeName);
         }
     }
 }
