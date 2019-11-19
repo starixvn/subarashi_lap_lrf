@@ -230,7 +230,8 @@
                 var result = await controller.Index(metaModel) as FileContentResult;
 
                 // Assert
-                Assert.That(expectedFileContent, Is.EqualTo(result.FileContents));
+                Assert.That(result.FileContents, Is.EqualTo(expectedFileContent.Item1));
+                Assert.That(result.ContentType, Is.EqualTo(expectedFileContent.Item2));
             }
         }
 

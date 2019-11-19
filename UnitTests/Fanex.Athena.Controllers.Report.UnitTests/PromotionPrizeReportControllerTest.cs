@@ -53,10 +53,11 @@
                 _reportAPIClient.PostAsync("api/PromotionPrize/Export", metaModel, SessionService.UserSession.Language, MediaType.MsgPack).Returns(Task.FromResult(expectedData));
 
                 // Action
-                var result = (await controller.ExportExcel(metaModel) as FileContentResult).FileContents;
+                var result = await controller.ExportExcel(metaModel) as FileContentResult;
 
                 // Assert
-                Assert.That(result, Is.EqualTo(expectedData));
+                Assert.That(result.FileContents, Is.EqualTo(expectedData.Item1));
+                Assert.That(result.ContentType, Is.EqualTo(expectedData.Item2));
             }
         }
     }
