@@ -1,5 +1,6 @@
 ﻿namespace Fanex.Athena.Controllers.Report.UnitTests
 {
+    using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Fanex.Athena.Controllers.Base.UnitTests;
@@ -48,8 +49,8 @@
             {
                 // Arrange
                 var metaModel = new PromotionPrizeMetaModel();
-                var expectedData = FakeHelper.Create<byte[]>();
-                _reportAPIClient.PostByteContentAsync("api/PromotionPrize/Export", metaModel, SessionService.UserSession.Language, MediaType.MsgPack).Returns(Task.FromResult(expectedData));
+                var expectedData = FakeHelper.Create<Tuple<byte[], string>>();
+                _reportAPIClient.PostAsync("api/PromotionPrize/Export", metaModel, SessionService.UserSession.Language, MediaType.MsgPack).Returns(Task.FromResult(expectedData));
 
                 // Action
                 var result = (await controller.ExportExcel(metaModel) as FileContentResult).FileContents;

@@ -85,7 +85,7 @@
                 var licenseesWithLargeData = new List<string> { SessionService.LicenseeSession.LicenseeName };
                 AppSetting.LicenseesWithLargeData.Returns(licenseesWithLargeData);
                 AppSetting.BetListApiClientTimeOutMinutes.Returns(120);
-                _betListApiClient.PostAsync(ApiPath, metaModel, SessionLanguage, 120).Returns(Task.FromResult(expected));
+                _betListApiClient.PostAsync(ApiPath, metaModel, SessionLanguage).Returns(Task.FromResult(expected));
 
                 // Action
                 var actual = await controller.GetData(metaModel);
@@ -110,7 +110,7 @@
                 var expected = new HttpResponseMessage();
                 AppSetting.LicenseesWithLargeData.Returns(new List<string>());
                 AppSetting.BetListApiClientTimeOutMinutes.Returns(120);
-                _betListApiClient.PostAsync(ApiPath, metaModel, SessionLanguage, 0).Returns(Task.FromResult(expected));
+                _betListApiClient.PostAsync(ApiPath, metaModel, SessionLanguage).Returns(Task.FromResult(expected));
 
                 // Action
                 var actual = await controller.GetData(metaModel);

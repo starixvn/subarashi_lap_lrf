@@ -32,8 +32,8 @@
             var userSession = SessionService.UserSession;
             metaModel.DefaultBaseCurrency = userSession.DefaultBaseCurrency;
 
-            var data = await _reportAPIClient.PostByteContentAsync("api/PromotionPrize/Export", metaModel, userSession.Language, MediaType.MsgPack).ConfigureAwait(false);
-            return File(data, "application/octet-stream");
+            var result = await _reportAPIClient.PostAsync("api/PromotionPrize/Export", metaModel, userSession.Language, MediaType.MsgPack).ConfigureAwait(false);
+            return File(result.Item1, result.Item2);
         }
     }
 }

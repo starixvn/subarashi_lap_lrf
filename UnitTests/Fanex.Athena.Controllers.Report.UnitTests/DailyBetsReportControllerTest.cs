@@ -223,8 +223,8 @@
                     IsExportExcel = true
                 };
 
-                var expectedFileContent = FakeHelper.Create<byte[]>();
-                _reportAPIClient.PostByteContentAsync("api/DailyBets/Export", metaModel, SessionService.UserSession.Language).Returns(expectedFileContent);
+                var expectedFileContent = FakeHelper.Create<Tuple<byte[], string>>();
+                _reportAPIClient.PostAsync("api/DailyBets/Export", metaModel, SessionService.UserSession.Language).Returns(expectedFileContent);
 
                 // Action
                 var result = await controller.Index(metaModel) as FileContentResult;
