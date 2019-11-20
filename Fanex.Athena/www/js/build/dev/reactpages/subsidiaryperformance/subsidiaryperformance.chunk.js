@@ -4234,6 +4234,7 @@ function (_Component) {
     _defineProperty(_assertThisInitialized(_this), "exportExcel", function (event) {
       event.preventDefault();
       var isCustomerLevel = _this.props.params.Level == _constants_report__WEBPACK_IMPORTED_MODULE_12__["ReportLevel"].CUSTOMER;
+      var isMaster = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].isSubsidiaryMasterView;
       var params = isCustomerLevel ? _this.props.params : _this._getParams();
 
       if (!params) {
@@ -4255,7 +4256,7 @@ function (_Component) {
         }
 
         var title = _lib_service__WEBPACK_IMPORTED_MODULE_11__["Service"].getReportTitle(params.FromDate, params.ToDate, params.BaseCurrency);
-        var excel = new _lib_reportExcel__WEBPACK_IMPORTED_MODULE_8__["default"](response.data, title, isCustomerLevel, params.BaseCurrency);
+        var excel = new _lib_reportExcel__WEBPACK_IMPORTED_MODULE_8__["default"](response.data, title, isMaster, isCustomerLevel, params.BaseCurrency);
         excel.export(function () {
           _this.props.toggleLoader(false);
         });
@@ -4642,34 +4643,23 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
-var COLUMN_COUNT = 7;
-var COLUMN_DETAIL_COUNT = 8;
 var TITLE_ROW_INDEX = 0;
 var HEADER_ROW_INDEX = 1;
 var DATA_ROW_INDEX = 2;
-var INDEX_COLUM_INDEX = 0;
-var EXTERNALID_COLUM_INDEX = 1;
-var SUBSIDIARY_COLUMN_INDEX = 0;
-var CURRENCY_COLUMN_INDEX = 1;
-var CURRENCY_DETAIL_COLUMN_INDEX = 3;
-var PRODUCT_COLUMN_INDEX = 2;
-var BETCOUNT_COLUMN_INDEX = 3;
-var BETCOUNT_DETAIL_COLUMN_INDEX = 4;
-var SUBSIDIARYWL_COLUMN_INDEX = 6;
-var SUBSIDIARYWL_DETAIL_COLUMN_INDEX = 7;
-var MAIN_SECTION_STYLE = "mainSectionStyle";
-var TOTAL_SECTION_STYLE = "totalSectionStyle";
-var GRAND_TOTAL_SECTION_STYLE = "grandTotalSectionStyle";
+var MAIN_SECTION_STYLE = 'mainSectionStyle';
+var TOTAL_SECTION_STYLE = 'totalSectionStyle';
+var GRAND_TOTAL_SECTION_STYLE = 'grandTotalSectionStyle';
 var fields = {
-  subsidiary: "Subsidiary",
-  currencyName: "CurrencyName",
-  product: "Product",
-  betCount: "BetCount",
-  turnover: "Turnover",
-  customerWinLoss: "CustomerWinLoss",
-  subsidiaryWinLoss: "SubsidiaryWinLoss",
-  externalId: "ExternalId",
-  systemId: "SystemId"
+  whiteLabel: 'WhiteLabel',
+  subsidiary: 'Subsidiary',
+  currencyName: 'CurrencyName',
+  product: 'Product',
+  betCount: 'BetCount',
+  turnover: 'Turnover',
+  customerWinLoss: 'CustomerWinLoss',
+  subsidiaryWinLoss: 'SubsidiaryWinLoss',
+  externalId: 'ExternalId',
+  systemId: 'SystemId'
 };
 
 var ReportExcel =
@@ -4678,9 +4668,10 @@ function () {
   function ReportExcel() {
     var gridData = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
     var title = arguments.length > 1 ? arguments[1] : undefined;
-    var isCustomerLevel = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var baseCurrency = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : "";
-    var fileName = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : "SubsidiaryPerformance";
+    var isMaster = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+    var isCustomerLevel = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+    var baseCurrency = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : '';
+    var fileName = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 'SubsidiaryPerformance';
 
     _classCallCheck(this, ReportExcel);
 
@@ -4690,9 +4681,11 @@ function () {
     this.gridData = gridData;
     this.currentRowIndex = DATA_ROW_INDEX;
     this.mergeConfig = [];
-    this.columnConfigs = this._getcolumnConfigs(isCustomerLevel);
+    this.columnConfigs = this._getcolumnConfigs(isMaster, isCustomerLevel);
     this.baseCurrency = baseCurrency;
     this.isCustomerLevel = isCustomerLevel;
+    this.isMaster = isMaster;
+    this.columnPosition = this._getcolumnPosition(isMaster, isCustomerLevel);
   }
 
   _createClass(ReportExcel, [{
@@ -4728,7 +4721,7 @@ function () {
         },
         e: {
           r: TITLE_ROW_INDEX,
-          c: this.isCustomerLevel ? COLUMN_DETAIL_COUNT - 1 : COLUMN_COUNT - 1
+          c: this.columnPosition.SubsidiaryWL
         }
       });
       var address = _lib_excel__WEBPACK_IMPORTED_MODULE_0__["default"].getCellAddress({
@@ -4736,7 +4729,7 @@ function () {
         r: TITLE_ROW_INDEX
       });
       this.worksheet[address] = {
-        t: "s",
+        t: 's',
         v: this.title,
         s: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["titleCellStyle"]
       };
@@ -4752,7 +4745,7 @@ function () {
         });
         var header = _lib_service__WEBPACK_IMPORTED_MODULE_3__["HeaderText"][fieldName];
         this.worksheet[address] = {
-          t: "s",
+          t: 's',
           v: header,
           s: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["headerCellStyle"]
         };
@@ -4780,51 +4773,72 @@ function () {
     value: function _createBodyData() {
       var mainData = this.gridData.Data;
 
-      for (var i = 0; i < mainData.length; i++) {
-        var item = mainData[i];
-        var details = item.Details;
+      for (var w = 0; w < mainData.length; w++) {
+        var subData = mainData[w];
 
-        this._createRowByColumnIndex({
-          Subsidiary: item.Subsidiary
-        }, MAIN_SECTION_STYLE, SUBSIDIARY_COLUMN_INDEX, SUBSIDIARY_COLUMN_INDEX);
-
-        this.mergeConfig.push({
-          s: {
-            r: this.currentRowIndex,
-            c: 0
-          },
-          e: {
-            r: this.currentRowIndex + item.TotalItem - 1,
-            c: 0
-          }
-        });
-        var currencies = Object.keys(item.Details);
-
-        for (var j = 0; j < currencies.length; j++) {
-          var currency = currencies[j];
-          var products = item.Details[currency];
-
+        if (this.isMaster) {
           this._createRowByColumnIndex({
-            CurrencyName: currency
-          }, MAIN_SECTION_STYLE, CURRENCY_COLUMN_INDEX, CURRENCY_COLUMN_INDEX);
+            WhiteLabel: subData.WhiteLabel
+          }, MAIN_SECTION_STYLE, this.columnPosition.WhiteLabel, this.columnPosition.WhiteLabel);
 
           this.mergeConfig.push({
             s: {
               r: this.currentRowIndex,
-              c: 1
+              c: this.columnPosition.WhiteLabel
             },
             e: {
-              r: this.currentRowIndex + products.length - 1,
-              c: 1
+              r: this.currentRowIndex + subData.TotalItem - 1,
+              c: this.columnPosition.WhiteLabel
             }
           });
+        }
 
-          for (var k = 0; k < products.length; k++) {
-            var product = products[k];
+        for (var i = 0; i < subData.Details.length; i++) {
+          var item = subData.Details[i];
+          var details = item.Details;
 
-            this._createRowByColumnIndex(product, MAIN_SECTION_STYLE, PRODUCT_COLUMN_INDEX, SUBSIDIARYWL_COLUMN_INDEX);
+          this._createRowByColumnIndex({
+            Subsidiary: item.Subsidiary
+          }, MAIN_SECTION_STYLE, this.columnPosition.Subsidiary, this.columnPosition.Subsidiary);
 
-            this.currentRowIndex++;
+          this.mergeConfig.push({
+            s: {
+              r: this.currentRowIndex,
+              c: this.columnPosition.Subsidiary
+            },
+            e: {
+              r: this.currentRowIndex + item.TotalItem - 1,
+              c: this.columnPosition.Subsidiary
+            }
+          });
+          var currencies = Object.keys(item.Details);
+
+          for (var j = 0; j < currencies.length; j++) {
+            var currency = currencies[j];
+            var products = item.Details[currency];
+
+            this._createRowByColumnIndex({
+              CurrencyName: currency
+            }, MAIN_SECTION_STYLE, this.columnPosition.Currency, this.columnPosition.Currency);
+
+            this.mergeConfig.push({
+              s: {
+                r: this.currentRowIndex,
+                c: this.columnPosition.Currency
+              },
+              e: {
+                r: this.currentRowIndex + products.length - 1,
+                c: this.columnPosition.Currency
+              }
+            });
+
+            for (var k = 0; k < products.length; k++) {
+              var product = products[k];
+
+              this._createRowByColumnIndex(product, MAIN_SECTION_STYLE, this.columnPosition.Product, this.columnPosition.SubsidiaryWL);
+
+              this.currentRowIndex++;
+            }
           }
         }
       }
@@ -4838,7 +4852,7 @@ function () {
         var item = mainData[i];
         item.Index = i + 1;
 
-        this._createRowByColumnIndex(item, MAIN_SECTION_STYLE, INDEX_COLUM_INDEX, SUBSIDIARYWL_DETAIL_COLUMN_INDEX);
+        this._createRowByColumnIndex(item, MAIN_SECTION_STYLE, this.columnPosition.Index, this.columnPosition.SubsidiaryWL);
 
         this.currentRowIndex++;
       }
@@ -4852,23 +4866,41 @@ function () {
       for (var i = 0; i < subs.length; i++) {
         var item = totalDataList[subs[i]];
 
-        this._createRowByColumnIndex({
-          Subsidiary: _lib_service__WEBPACK_IMPORTED_MODULE_3__["TotalText"].Total + " " + subs[i],
-          CurrencyName: _lib_service__WEBPACK_IMPORTED_MODULE_3__["TotalText"].Based + " " + this.baseCurrency
-        }, TOTAL_SECTION_STYLE, SUBSIDIARY_COLUMN_INDEX, CURRENCY_COLUMN_INDEX);
+        if (this.isMaster) {
+          this._createRowByColumnIndex({
+            WhiteLabel: _lib_service__WEBPACK_IMPORTED_MODULE_3__["TotalText"].Total + ' ' + subs[i],
+            CurrencyName: _lib_service__WEBPACK_IMPORTED_MODULE_3__["TotalText"].Based + ' ' + this.baseCurrency
+          }, TOTAL_SECTION_STYLE, this.columnPosition.WhiteLabel, this.columnPosition.Currency);
+
+          this.mergeConfig.push({
+            s: {
+              r: this.currentRowIndex,
+              c: this.columnPosition.WhiteLabel
+            },
+            e: {
+              r: this.currentRowIndex,
+              c: this.columnPosition.Subsidiary
+            }
+          });
+        } else {
+          this._createRowByColumnIndex({
+            Subsidiary: _lib_service__WEBPACK_IMPORTED_MODULE_3__["TotalText"].Total + ' ' + subs[i],
+            CurrencyName: _lib_service__WEBPACK_IMPORTED_MODULE_3__["TotalText"].Based + ' ' + this.baseCurrency
+          }, TOTAL_SECTION_STYLE, this.columnPosition.Subsidiary, this.columnPosition.Currency);
+        }
 
         this.mergeConfig.push({
           s: {
             r: this.currentRowIndex,
-            c: 1
+            c: this.columnPosition.Currency
           },
           e: {
             r: this.currentRowIndex,
-            c: 2
+            c: this.columnPosition.Product
           }
         });
 
-        this._createRowByColumnIndex(item, TOTAL_SECTION_STYLE, BETCOUNT_COLUMN_INDEX, SUBSIDIARYWL_COLUMN_INDEX);
+        this._createRowByColumnIndex(item, TOTAL_SECTION_STYLE, this.columnPosition.BetCount, this.columnPosition.SubsidiaryWL);
 
         this.currentRowIndex++;
       }
@@ -4881,8 +4913,8 @@ function () {
       var rowSpan = subs.length;
 
       this._createRowByColumnIndex({
-        Index: _lib_service__WEBPACK_IMPORTED_MODULE_3__["TotalText"].TotalIn + " " + this.baseCurrency
-      }, TOTAL_SECTION_STYLE, INDEX_COLUM_INDEX, INDEX_COLUM_INDEX);
+        Index: _lib_service__WEBPACK_IMPORTED_MODULE_3__["TotalText"].TotalIn + ' ' + this.baseCurrency
+      }, TOTAL_SECTION_STYLE, this.columnPosition.Index, this.columnPosition.Index);
 
       this.mergeConfig.push({
         s: {
@@ -4898,7 +4930,7 @@ function () {
       for (var i = 0; i < rowSpan; i++) {
         var item = totalDataList[subs[i]];
 
-        this._createRowByColumnIndex(item, TOTAL_SECTION_STYLE, CURRENCY_DETAIL_COLUMN_INDEX, SUBSIDIARYWL_DETAIL_COLUMN_INDEX);
+        this._createRowByColumnIndex(item, TOTAL_SECTION_STYLE, this.columnPosition.Currency, this.columnPosition.SubsidiaryWL);
 
         this.currentRowIndex++;
       }
@@ -4906,24 +4938,43 @@ function () {
   }, {
     key: "_createGrandTotalData",
     value: function _createGrandTotalData() {
+      var grandTotal = this.gridData.GrandTotal;
+
+      if (this.isMaster) {
+        this.mergeConfig.push({
+          s: {
+            r: this.currentRowIndex,
+            c: this.columnPosition.WhiteLabel
+          },
+          e: {
+            r: this.currentRowIndex,
+            c: this.columnPosition.Subsidiary
+          }
+        });
+
+        this._createRowByColumnIndex({
+          WhiteLabel: _lib_service__WEBPACK_IMPORTED_MODULE_3__["TotalText"].Total,
+          CurrencyName: _lib_service__WEBPACK_IMPORTED_MODULE_3__["TotalText"].Based + ' ' + this.baseCurrency
+        }, GRAND_TOTAL_SECTION_STYLE, this.columnPosition.WhiteLabel, this.columnPosition.Currency);
+      } else {
+        this._createRowByColumnIndex({
+          Subsidiary: _lib_service__WEBPACK_IMPORTED_MODULE_3__["TotalText"].Total,
+          CurrencyName: _lib_service__WEBPACK_IMPORTED_MODULE_3__["TotalText"].Based + ' ' + this.baseCurrency
+        }, GRAND_TOTAL_SECTION_STYLE, this.columnPosition.Subsidiary, this.columnPosition.Currency);
+      }
+
       this.mergeConfig.push({
         s: {
           r: this.currentRowIndex,
-          c: 1
+          c: this.columnPosition.Currency
         },
         e: {
           r: this.currentRowIndex,
-          c: 2
+          c: this.columnPosition.Product
         }
       });
-      var grandTotal = this.gridData.GrandTotal;
 
-      this._createRowByColumnIndex({
-        Subsidiary: _lib_service__WEBPACK_IMPORTED_MODULE_3__["TotalText"].Total,
-        CurrencyName: _lib_service__WEBPACK_IMPORTED_MODULE_3__["TotalText"].Based + " " + this.baseCurrency
-      }, GRAND_TOTAL_SECTION_STYLE, SUBSIDIARY_COLUMN_INDEX, CURRENCY_COLUMN_INDEX);
-
-      this._createRowByColumnIndex(grandTotal, GRAND_TOTAL_SECTION_STYLE, BETCOUNT_COLUMN_INDEX, SUBSIDIARYWL_COLUMN_INDEX);
+      this._createRowByColumnIndex(grandTotal, GRAND_TOTAL_SECTION_STYLE, this.columnPosition.BetCount, this.columnPosition.SubsidiaryWL);
     }
   }, {
     key: "_createGrandTotalDetailData",
@@ -4941,10 +4992,10 @@ function () {
       var grandTotal = this.gridData.GrandTotal;
 
       this._createRowByColumnIndex({
-        Index: _lib_service__WEBPACK_IMPORTED_MODULE_3__["TotalText"].TotalIn + " " + this.baseCurrency
-      }, GRAND_TOTAL_SECTION_STYLE, INDEX_COLUM_INDEX, INDEX_COLUM_INDEX);
+        Index: _lib_service__WEBPACK_IMPORTED_MODULE_3__["TotalText"].TotalIn + ' ' + this.baseCurrency
+      }, GRAND_TOTAL_SECTION_STYLE, this.columnPosition.Index, this.columnPosition.Index);
 
-      this._createRowByColumnIndex(grandTotal, GRAND_TOTAL_SECTION_STYLE, BETCOUNT_DETAIL_COLUMN_INDEX, SUBSIDIARYWL_DETAIL_COLUMN_INDEX);
+      this._createRowByColumnIndex(grandTotal, GRAND_TOTAL_SECTION_STYLE, this.columnPosition.BetCount, this.columnPosition.SubsidiaryWL);
     }
   }, {
     key: "_createExcelConfig",
@@ -4955,10 +5006,10 @@ function () {
       });
       var cellEnd = _lib_excel__WEBPACK_IMPORTED_MODULE_0__["default"].getCellAddress({
         r: this.currentRowIndex,
-        c: this.isCustomerLevel ? COLUMN_DETAIL_COUNT - 1 : COLUMN_COUNT - 1
+        c: this.columnPosition.SubsidiaryWL
       });
-      this.worksheet["!merges"] = this.mergeConfig;
-      this.worksheet["!ref"] = "".concat(cellStart, ":").concat(cellEnd);
+      this.worksheet['!merges'] = this.mergeConfig;
+      this.worksheet['!ref'] = "".concat(cellStart, ":").concat(cellEnd);
       var wscols = this.isCustomerLevel ? [{
         wpx: 30
       }, {
@@ -4969,6 +5020,22 @@ function () {
         wpx: 180
       }, {
         wpx: 180
+      }, {
+        wpx: 250
+      }, {
+        wpx: 250
+      }, {
+        wpx: 250
+      }] : this.isMaster ? [{
+        wpx: 150
+      }, {
+        wpx: 120
+      }, {
+        wpx: 180
+      }, {
+        wpx: 120
+      }, {
+        wpx: 250
       }, {
         wpx: 250
       }, {
@@ -5027,8 +5094,8 @@ function () {
         c: columnIndex,
         r: this.currentRowIndex
       });
-      var type = typeof item[columnConfig.field] === "number" ? "n" : "s";
-      var value = item[field] !== null ? item[field] : "";
+      var type = typeof item[columnConfig.field] === 'number' ? 'n' : 's';
+      var value = item[field] !== null ? item[field] : '';
       var style = columnConfig[sectionStyle];
 
       if (field === fields.subsidiaryWinLoss) {
@@ -5044,8 +5111,8 @@ function () {
     }
   }, {
     key: "_getcolumnConfigs",
-    value: function _getcolumnConfigs(isCustomerLevel) {
-      var _columns$push8, _columns$push9, _columns$push10, _columns$push11;
+    value: function _getcolumnConfigs(isMaster, isCustomerLevel) {
+      var _columns$push10, _columns$push11, _columns$push12, _columns$push13;
 
       var columns = [];
 
@@ -5053,7 +5120,7 @@ function () {
         var _columns$push, _columns$push4;
 
         columns.push((_columns$push = {
-          field: "Index"
+          field: 'Index'
         }, _defineProperty(_columns$push, MAIN_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].center), _defineProperty(_columns$push, TOTAL_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["totalCellStyle"].center), _defineProperty(_columns$push, GRAND_TOTAL_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["grandTotalCellStyle"].center), _columns$push), _defineProperty({
           field: fields.externalId
         }, MAIN_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].center), _defineProperty({
@@ -5062,36 +5129,81 @@ function () {
           field: fields.currencyName
         }, _defineProperty(_columns$push4, MAIN_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].center), _defineProperty(_columns$push4, TOTAL_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["totalCellStyle"].center), _columns$push4));
       } else {
-        var _columns$push5, _columns$push6;
+        var _columns$push8;
 
-        columns.push((_columns$push5 = {
-          field: fields.subsidiary
-        }, _defineProperty(_columns$push5, MAIN_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].rowspan), _defineProperty(_columns$push5, TOTAL_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["totalCellStyle"].default), _defineProperty(_columns$push5, GRAND_TOTAL_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["grandTotalCellStyle"].default), _columns$push5), (_columns$push6 = {
+        if (isMaster) {
+          var _columns$push5;
+
+          columns.push((_columns$push5 = {
+            field: fields.whiteLabel
+          }, _defineProperty(_columns$push5, MAIN_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].rowspan), _defineProperty(_columns$push5, TOTAL_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["totalCellStyle"].default), _defineProperty(_columns$push5, GRAND_TOTAL_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["grandTotalCellStyle"].default), _columns$push5), _defineProperty({
+            field: fields.subsidiary
+          }, MAIN_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].rowspan));
+        } else {
+          var _columns$push7;
+
+          columns.push((_columns$push7 = {
+            field: fields.subsidiary
+          }, _defineProperty(_columns$push7, MAIN_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].rowspan), _defineProperty(_columns$push7, TOTAL_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["totalCellStyle"].default), _defineProperty(_columns$push7, GRAND_TOTAL_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["grandTotalCellStyle"].default), _columns$push7));
+        }
+
+        columns.push((_columns$push8 = {
           field: fields.currencyName
-        }, _defineProperty(_columns$push6, MAIN_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].center), _defineProperty(_columns$push6, TOTAL_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["totalCellStyle"].center), _defineProperty(_columns$push6, GRAND_TOTAL_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["grandTotalCellStyle"].center), _columns$push6), _defineProperty({
+        }, _defineProperty(_columns$push8, MAIN_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].center), _defineProperty(_columns$push8, TOTAL_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["totalCellStyle"].center), _defineProperty(_columns$push8, GRAND_TOTAL_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["grandTotalCellStyle"].center), _columns$push8), _defineProperty({
           field: fields.product
         }, MAIN_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].default));
       }
 
-      columns.push((_columns$push8 = {
+      columns.push((_columns$push10 = {
         field: fields.betCount
-      }, _defineProperty(_columns$push8, MAIN_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].number), _defineProperty(_columns$push8, TOTAL_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["totalCellStyle"].number), _defineProperty(_columns$push8, GRAND_TOTAL_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["grandTotalCellStyle"].number), _columns$push8), (_columns$push9 = {
+      }, _defineProperty(_columns$push10, MAIN_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].number), _defineProperty(_columns$push10, TOTAL_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["totalCellStyle"].number), _defineProperty(_columns$push10, GRAND_TOTAL_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["grandTotalCellStyle"].number), _columns$push10), (_columns$push11 = {
         field: fields.turnover
-      }, _defineProperty(_columns$push9, MAIN_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].decimal), _defineProperty(_columns$push9, TOTAL_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["totalCellStyle"].decimal), _defineProperty(_columns$push9, GRAND_TOTAL_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["grandTotalCellStyle"].decimal), _columns$push9), (_columns$push10 = {
+      }, _defineProperty(_columns$push11, MAIN_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].decimal), _defineProperty(_columns$push11, TOTAL_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["totalCellStyle"].decimal), _defineProperty(_columns$push11, GRAND_TOTAL_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["grandTotalCellStyle"].decimal), _columns$push11), (_columns$push12 = {
         field: fields.customerWinLoss
-      }, _defineProperty(_columns$push10, MAIN_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].decimal), _defineProperty(_columns$push10, TOTAL_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["totalCellStyle"].decimal), _defineProperty(_columns$push10, GRAND_TOTAL_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["grandTotalCellStyle"].decimal), _columns$push10), (_columns$push11 = {
+      }, _defineProperty(_columns$push12, MAIN_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].decimal), _defineProperty(_columns$push12, TOTAL_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["totalCellStyle"].decimal), _defineProperty(_columns$push12, GRAND_TOTAL_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["grandTotalCellStyle"].decimal), _columns$push12), (_columns$push13 = {
         field: fields.subsidiaryWinLoss
-      }, _defineProperty(_columns$push11, MAIN_SECTION_STYLE, {
+      }, _defineProperty(_columns$push13, MAIN_SECTION_STYLE, {
         positive: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].decimal,
         negative: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].negativeDecimal
-      }), _defineProperty(_columns$push11, TOTAL_SECTION_STYLE, {
+      }), _defineProperty(_columns$push13, TOTAL_SECTION_STYLE, {
         positive: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["totalCellStyle"].decimal,
         negative: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["totalCellStyle"].negativeDecimal
-      }), _defineProperty(_columns$push11, GRAND_TOTAL_SECTION_STYLE, {
+      }), _defineProperty(_columns$push13, GRAND_TOTAL_SECTION_STYLE, {
         positive: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["grandTotalCellStyle"].decimal,
         negative: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["grandTotalCellStyle"].negativeDecimal
-      }), _columns$push11));
+      }), _columns$push13));
       return columns;
+    }
+  }, {
+    key: "_getcolumnPosition",
+    value: function _getcolumnPosition(isMaster, isCustomerLevel) {
+      if (isCustomerLevel) {
+        return {
+          Index: 0,
+          Currency: 3,
+          BetCount: 4,
+          SubsidiaryWL: 7
+        };
+      }
+
+      if (isMaster) {
+        return {
+          WhiteLabel: 0,
+          Subsidiary: 1,
+          Currency: 2,
+          Product: 3,
+          BetCount: 4,
+          SubsidiaryWL: 7
+        };
+      }
+
+      return {
+        Subsidiary: 0,
+        Currency: 1,
+        Product: 2,
+        BetCount: 3,
+        SubsidiaryWL: 6
+      };
     }
   }]);
 
