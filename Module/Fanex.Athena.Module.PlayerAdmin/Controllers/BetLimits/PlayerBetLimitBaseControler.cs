@@ -33,23 +33,8 @@
         private readonly ICacheRefAdapter _cacheRefAdapter;
 
         public PlayerBetLimitBaseControler(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IAppSettings appSettings,
             ICacheRefAdapter cacheRefAdapter,
             IAuthorizationService authorizationService)
-            : base(languageService, sessionService, appSettings, null)
-        {
-            _authService = authorizationService;
-            _cacheRefAdapter = cacheRefAdapter;
-        }
-
-        public PlayerBetLimitBaseControler(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            ICacheRefAdapter cacheRefAdapter,
-            IAuthorizationService authorizationService)
-            : base(languageService, sessionService, null, null)
         {
             _authService = authorizationService;
             _cacheRefAdapter = cacheRefAdapter;
@@ -65,7 +50,7 @@
             return data;
         }
 
-        protected bool HasEditPermission() => _authService.HasPermissions(SessionService.UserSession, PermissionKeys.PlayerAdminBetLimit_Write);
+        protected bool HasEditPermission() => _authService.HasPermissions(SessionServiceInstance.UserSession, PermissionKeys.PlayerAdminBetLimit_Write);
 
         protected string GetSportName(string sportId) => sportId == MixedSportId ? ViewResources.MixSportsParlay : _cacheRefAdapter.GetSportName(sportId);
     }

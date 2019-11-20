@@ -63,14 +63,12 @@ namespace Fanex.Athena.Controllers.BetSettings
         private readonly IDcsBetSettingService _betSettingService;
 
         public DcsBetSettingController(
-            ILanguageService languageService,
-            ISessionService sessionService,
             ICoreBetSettingService coreBetSettingService,
             IProductService productService,
-            IDcsBetSettingService betSettingService,
-            ILicenseeSettingService licenseeSettingService)
+            IDcsBetSettingService betSettingService
+            )
 
-        : base(languageService, sessionService, coreBetSettingService, productService, licenseeSettingService)
+        : base(coreBetSettingService, productService)
         {
             _betSettingService = betSettingService;
         }
@@ -110,7 +108,7 @@ namespace Fanex.Athena.Controllers.BetSettings
 
         public async Task<JsonResult> UpdateStatus(int custId, string nickName, int status, int productId)
         {
-            var userSession = SessionService.UserSession;
+            var userSession = SessionServiceInstance.UserSession;
 
             if (!CheckPermission(userSession, productId))
             {
@@ -137,8 +135,8 @@ namespace Fanex.Athena.Controllers.BetSettings
         [ValidatePermissionOnData]
         public async Task<JsonResult> UpdateBetSetting(int productId, string nickName)
         {
-            var userSession = SessionService.UserSession;
-            var licenseeId = SessionService.LicenseeSession.LicenseeId;
+            var userSession = SessionServiceInstance.UserSession;
+            var licenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
 
             if (!CheckPermission(userSession, productId))
             {

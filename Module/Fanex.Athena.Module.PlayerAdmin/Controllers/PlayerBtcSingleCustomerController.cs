@@ -37,10 +37,8 @@ namespace Fanex.Athena.Module.PlayerAdmin.Controllers
         private readonly IBetListApiClient _betListApiClient;
 
         public PlayerBtcSingleCustomerController(
-            ILanguageService languageService,
-            ISessionService sessionService,
             IBetListApiClient betListApiClient,
-            IProductService productService) : base(languageService, sessionService)
+            IProductService productService) 
         {
             _betListApiClient = betListApiClient;
             _productService = productService;
@@ -53,7 +51,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Controllers
             {
                 UserName = userName?.Trim(),
                 CurrencyName = currencyName?.Trim(),
-                IsAllowedCustomerComm = SessionService.LicenseeSession.IsAllowedCustomerComm,
+                IsAllowedCustomerComm = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm,
                 ProductCodeListString = GetProductCode()
             };
 
@@ -67,8 +65,8 @@ namespace Fanex.Athena.Module.PlayerAdmin.Controllers
         [AutoBindMetaModel(BindAgent = true)]
         public async Task<dynamic> Index([Bind(Include = "Username,PageSize,PageIndex,IsExport,SortBy,SortOrder")]PlayerBtcSingleCustomerMetaModel metaModel)
         {
-            var userSession = SessionService.UserSession;
-            metaModel.HasPlayerCom = SessionService.LicenseeSession.IsAllowedCustomerComm;
+            var userSession = SessionServiceInstance.UserSession;
+            metaModel.HasPlayerCom = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm;
 
             AssignMetaModelValue(metaModel);
 
@@ -118,8 +116,8 @@ namespace Fanex.Athena.Module.PlayerAdmin.Controllers
         private string GetProductCode(string functionConfigKey = FunctionNames.BettingTicketCenter)
         {
             var productAccess = _productService.GetSingleWalletProductAccess(
-                SessionService.LicenseeSession.LicenseeId,
-                SessionService.UserSession.Language,
+                SessionServiceInstance.LicenseeSession.LicenseeId,
+                SessionServiceInstance.UserSession.Language,
                 functionConfigKey);
 
             return string.Join(",", productAccess.ProductList.Select(i => i.ProductCode));

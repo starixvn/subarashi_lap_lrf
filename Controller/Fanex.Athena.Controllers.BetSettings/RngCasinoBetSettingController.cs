@@ -29,14 +29,11 @@ namespace Fanex.Athena.Controllers.BetSettings
         private readonly IRngCasinoBetSettingService _betSettingService;
 
         public RngCasinoBetSettingController(
-            ILanguageService languageService,
-            ISessionService sessionService,
             ICoreBetSettingService coreBetSettingService,
             IProductService productService,
-            IRngCasinoBetSettingService betSettingService,
-             ILicenseeSettingService licenseeSettingService
+            IRngCasinoBetSettingService betSettingService
             )
-        : base(languageService, sessionService, coreBetSettingService, productService, licenseeSettingService)
+        : base(coreBetSettingService, productService)
         {
             _betSettingService = betSettingService;
         }
@@ -48,7 +45,7 @@ namespace Fanex.Athena.Controllers.BetSettings
         {
             var customer = GetCustomerInfo(metaModel.CustId);
             var viewModel = await _betSettingService.GetViewModelAsync(metaModel.CustId, customer,
-                SessionService.UserSession.Language);
+                SessionServiceInstance.UserSession.Language);
 
             await AssignRequiredPropertiesAsync(viewModel, metaModel).ConfigureAwait(false);
 
@@ -60,8 +57,8 @@ namespace Fanex.Athena.Controllers.BetSettings
         [ValidatePermissionOnData]
         public async Task<JsonResult> UpdateBetSetting(int custId, string gameTypeChangedList)
         {
-            var userSession = SessionService.UserSession;
-            var licenseeSession = SessionService.LicenseeSession;
+            var userSession = SessionServiceInstance.UserSession;
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
 
             if (!CheckPermission(userSession, ProductTypes.RngCasino))
             {
@@ -102,7 +99,7 @@ namespace Fanex.Athena.Controllers.BetSettings
         [ValidatePermissionOnData]
         public async Task<JsonResult> UpdateStatus(int custId, string nickName, int status)
         {
-            var userSession = SessionService.UserSession;
+            var userSession = SessionServiceInstance.UserSession;
             if (!CheckPermission(userSession, ProductTypes.RngCasino))
             {
                 return AccessDenied();

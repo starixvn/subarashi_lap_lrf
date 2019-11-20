@@ -26,10 +26,7 @@
         private readonly IBetListApiClient _betListApiClient;
 
         public PlayerBetListController(
-            ILanguageService languageService,
-            ISessionService sessionService,
             IBetListApiClient betListApiClient)
-            : base(languageService, sessionService)
         {
             _betListApiClient = betListApiClient;
         }
@@ -38,7 +35,7 @@
         [ValidatePermissionOnData]
         public ViewResult Running(int custId, int currencyId)
         {
-            var currencyList = SessionService.UserSession.CurrencyList;
+            var currencyList = SessionServiceInstance.UserSession.CurrencyList;
 
             var viewModel = new PlayerRunningBetListViewModel
             {
@@ -67,14 +64,14 @@
             return JsonString(await _betListApiClient.PostAsyncString(
                     "/PlayerAdminBetList/GetBetList",
                     metaModel,
-                    SessionService.UserSession.Language).ConfigureAwait(false));
+                    SessionServiceInstance.UserSession.Language).ConfigureAwait(false));
         }
 
         public async Task<ActionResult> ExportRunningBetListDataAsync(PlayerRunningBetListMetalModel metaModel)
         {
             var stream = await _betListApiClient.PostAsyncBytes("/PlayerAdminBetList/Export",
                 metaModel,
-                SessionService.UserSession.Language).ConfigureAwait(false);
+                SessionServiceInstance.UserSession.Language).ConfigureAwait(false);
 
             if (stream is null || stream.Length == 0)
             {

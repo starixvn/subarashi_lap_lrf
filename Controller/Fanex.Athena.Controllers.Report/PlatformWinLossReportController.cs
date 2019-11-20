@@ -25,10 +25,7 @@ namespace Fanex.Athena.Controllers.Report
         private readonly IReportAPIClient _reportAPIClient;
 
         public PlatformWinLossReportController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IProductService productService, IReportAPIClient reportAPIClient)
-            : base(languageService, sessionService, productService)
+            IReportAPIClient reportAPIClient)
         {
             _reportAPIClient = reportAPIClient;
         }
@@ -36,15 +33,15 @@ namespace Fanex.Athena.Controllers.Report
         [HttpGet]
         public ActionResult Index()
         {
-            var licenseeSession = SessionService.LicenseeSession;
-            var userSession = SessionService.UserSession;
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
+            var userSession = SessionServiceInstance.UserSession;
             var licenseeId = licenseeSession.LicenseeId;
             var metaModel = new PlatformWinLossMetaModel
             {
                 LicenseeId = licenseeId,
                 BaseCurrency = userSession.DefaultBaseCurrency,
             };
-            var productAccess = ProductService.GetSingleWalletProductAccess(
+            var productAccess = ProductServiceInstance.GetSingleWalletProductAccess(
                 licenseeId,
                 userSession.Language,
                 FunctionNames.PlatformWinloss);
@@ -72,8 +69,8 @@ namespace Fanex.Athena.Controllers.Report
 
         private async Task<ActionResult> ProcessRequest(PlatformWinLossMetaModel metaModel)
         {
-            var userSession = SessionService.UserSession;
-            metaModel.HasComm = SessionService.LicenseeSession.IsAllowedCustomerComm;
+            var userSession = SessionServiceInstance.UserSession;
+            metaModel.HasComm = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm;
 
             return metaModel.Level == (int)ReportLevel.Main
                 ? await ProcessSummaryLevel(metaModel, userSession.Language)

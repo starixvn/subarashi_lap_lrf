@@ -17,13 +17,6 @@ namespace Fanex.Athena.Controllers.Report
     [FunctionAuthorization(PermissionKeys.ReportWeeklyLiveMatches)]
     public class WeeklyLiveMatchReportController : ReportBaseController
     {
-        public WeeklyLiveMatchReportController(
-            ILanguageService languageService,
-            ISessionService sessionService)
-        : base(languageService, sessionService)
-        {
-        }
-
         [HttpGet]
         public ActionResult Index()
         {

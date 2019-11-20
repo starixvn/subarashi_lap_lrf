@@ -24,12 +24,8 @@ namespace Fanex.Athena.Controllers
         private readonly IFunctionService _functionService;
 
         public MenuController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IFunctionService functionService,
-            ILicenseeSettingService licenseeSettingService
+            IFunctionService functionService
             )
-        : base(languageService, sessionService, licenseeSettingService)
         {
             _functionService = functionService;
         }
@@ -37,8 +33,8 @@ namespace Fanex.Athena.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var userSession = SessionService.UserSession;
-            var licenseeSession = SessionService.LicenseeSession;
+            var userSession = SessionServiceInstance.UserSession;
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
             var systemFunctions = userSession.FunctionList;
 
             var canManageMember = userSession.FunctionList.Any(x => x.FunctionKey == PermissionKeys.CustomerInfoCustomerList);

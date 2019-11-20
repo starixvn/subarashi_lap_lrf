@@ -27,10 +27,7 @@ namespace Fanex.Athena.Controllers.TotalBets
         private readonly IMoneyLineDataAccess _moneyLineDataAccess;
 
         public MoneyLineTotalBetController(
-            ILanguageService languageService,
-            ISessionService sessionService,
             IMoneyLineDataAccess moneyLineDataAccess)
-        : base(languageService, sessionService)
         {
             _moneyLineDataAccess = moneyLineDataAccess;
         }
@@ -40,8 +37,8 @@ namespace Fanex.Athena.Controllers.TotalBets
         {
             var param = new MoneyLineMetaModel
             {
-                LicenseeId = SessionService.LicenseeSession.LicenseeId,
-                BaseCurrency = SessionService.UserSession.DefaultBaseCurrency
+                LicenseeId = SessionServiceInstance.LicenseeSession.LicenseeId,
+                BaseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency
             };
 
             return await this.GetView(param).ConfigureAwait(false);
@@ -52,13 +49,13 @@ namespace Fanex.Athena.Controllers.TotalBets
         [ValidationWebRequest(IsValidCurrency = true)]
         public async Task<ActionResult> Index(MoneyLineMetaModel metaModel)
         {
-            metaModel.LicenseeId = SessionService.LicenseeSession.LicenseeId;
+            metaModel.LicenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
             return await this.GetView(metaModel).ConfigureAwait(false);
         }
 
         private async Task<ActionResult> GetView(MoneyLineMetaModel metaModel)
         {
-            var userSession = SessionService.UserSession;
+            var userSession = SessionServiceInstance.UserSession;
             var currencies = userSession.CurrencyList;
 
             metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList,

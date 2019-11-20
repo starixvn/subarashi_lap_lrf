@@ -24,21 +24,13 @@ namespace Fanex.Athena.Controllers.Report
     [FunctionAuthorization(PermissionKeys.ReportGoldDeluxeWinloss)]
     public class GoldDeluxeWinLossReportController : ReportBaseController
     {
-        public GoldDeluxeWinLossReportController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IProductService productService)
-            : base(languageService, sessionService, productService)
-        {
-        }
-
         [HttpGet]
         public ActionResult Index()
         {
-            var licenseeSession = this.SessionService.LicenseeSession;
-            var userSession = SessionService.UserSession;
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
+            var userSession = SessionServiceInstance.UserSession;
             var date = DateTime.Now.AddDays(-1);
-            var productAccess = ProductService.GetProductAccess(licenseeSession.LicenseeId, userSession.Language);
+            var productAccess = ProductServiceInstance.GetProductAccess(licenseeSession.LicenseeId, userSession.Language);
 
             var product = productAccess.ProductList.SingleOrDefault(p => p.ProductCode == Product.GD);
 

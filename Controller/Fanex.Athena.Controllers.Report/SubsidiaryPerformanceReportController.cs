@@ -22,20 +22,16 @@
         private readonly ISubsidiaryService _subsidiaryService;
 
         public SubsidiaryPerformanceReportController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IProductService productService,
             ISubsidiaryService subsidiaryService)
-            : base(languageService, sessionService, productService)
         {
             _subsidiaryService = subsidiaryService;
         }
 
         public ActionResult Index()
         {
-            var licenseeSession = SessionService.LicenseeSession;
-            var userSession = SessionService.UserSession;
-            var productAccess = this.ProductService.GetSingleWalletProductAccess(
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
+            var userSession = SessionServiceInstance.UserSession;
+            var productAccess = this.ProductServiceInstance.GetSingleWalletProductAccess(
                 licenseeSession.LicenseeId,
                 userSession.Language,
                 FunctionNames.SubsidiaryPerformance);

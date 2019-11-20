@@ -20,15 +20,12 @@ namespace Fanex.Athena.Controllers.Customer.CustomerLog
     [SessionState(SessionStateBehavior.ReadOnly)]
     [CheckUMFilter]
     [FunctionAuthorization(PermissionKeys.CustomerInfoCustomerLog)]
-    public partial class CustomerLogController : ContentBaseController
+    public partial class CustomerLogController : CultureBaseController
     {
         private readonly IProductService _productService;
 
         public CustomerLogController(
-            ILanguageService languageService,
-            ISessionService sessionService,
             IProductService productService)
-        : base(languageService, sessionService)
         {
             _productService = productService;
         }

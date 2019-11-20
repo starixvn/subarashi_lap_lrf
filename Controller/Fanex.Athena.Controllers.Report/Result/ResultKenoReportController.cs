@@ -21,12 +21,8 @@
         private readonly IBetListApiClient _betListApiClient;
 
         public ResultKenoReportController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IProductService productService,
             ILogger logger,
             IBetListApiClient betListApiClient)
-            : base(languageService, sessionService, null, productService, null)
         {
             _logger = logger;
             _betListApiClient = betListApiClient;
@@ -36,7 +32,7 @@
         [AjaxRequest]
         public async Task<ActionResult> Index(int vendorProductId)
         {
-            var userSession = SessionService.UserSession;
+            var userSession = SessionServiceInstance.UserSession;
             var model = new
             {
                 vendorProductId,
@@ -59,7 +55,7 @@
         [CustomValidateAntiForgery]
         public async Task<string> KeepSession(string userId, int vendorProductId)
         {
-            var userSession = SessionService.UserSession;
+            var userSession = SessionServiceInstance.UserSession;
             if (string.IsNullOrEmpty(userId) || !userSession.UserId.ToString().Equals(userId))
             {
                 _logger.Error("Keno Result page just submited invalid userId");

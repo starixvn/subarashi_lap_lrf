@@ -20,20 +20,12 @@ namespace Fanex.Athena.Controllers.Report
     [FunctionAuthorization(PermissionKeys.ReportActiveCustomerSummary)]
     public class ActiveCustomerSummaryReportController : ReportBaseController
     {
-        public ActiveCustomerSummaryReportController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IProductService productService)
-        : base(languageService, sessionService, productService)
-        {
-        }
-
         [HttpGet]
         public ActionResult Index()
         {
-            var licenseeSession = this.SessionService.LicenseeSession;
-            var userSession = SessionService.UserSession;
-            var productAccess = this.ProductService.GetProductAccessForActiveCustomerSummary(licenseeSession.LicenseeId, userSession.Language);
+            var licenseeSession = this.SessionServiceInstance.LicenseeSession;
+            var userSession = SessionServiceInstance.UserSession;
+            var productAccess = this.ProductServiceInstance.GetProductAccessForActiveCustomerSummary(licenseeSession.LicenseeId, userSession.Language);
             var defaultDate = DateTime.Now.AddDays(-1);
             var metaModel = new ActiveCustomerMetaModel
             {

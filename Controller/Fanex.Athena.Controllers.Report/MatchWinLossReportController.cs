@@ -47,17 +47,10 @@
         private readonly ICacheRefAdapter _cacheRefAdapter;
         private readonly IMatchWinLossService _matchWinLossService;
 
-#pragma warning disable S107 // Methods should not have too many parameters
-
         public MatchWinLossReportController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IProductService productService,
             IBalanceUpDataAccess balanceUpDataAccess,
             ICacheRefAdapter cacheRefAdapter,
             IMatchWinLossService matchWinLossService)
-#pragma warning restore S107 // Methods should not have too many parameters
-            : base(languageService, sessionService, productService)
         {
             _balanceUpDataAccess = balanceUpDataAccess;
             _cacheRefAdapter = cacheRefAdapter;
@@ -67,8 +60,8 @@
         [HttpGet]
         public ActionResult Index()
         {
-            var licenseeSession = SessionService.LicenseeSession;
-            var userSession = SessionService.UserSession;
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
+            var userSession = SessionServiceInstance.UserSession;
             var metaModel = new MatchWinLossMetaModel
             {
                 BalanceUpDay = _balanceUpDataAccess.GetBalanceUp().BalanceUpDay.ToShortDateString(),
@@ -76,7 +69,7 @@
                 BaseCurrency = userSession.DefaultBaseCurrency
             };
 
-            var productAccess = ProductService.GetSingleWalletProductAccess(
+            var productAccess = ProductServiceInstance.GetSingleWalletProductAccess(
                 licenseeSession.LicenseeId,
                 userSession.Language,
                 FunctionNames.MatchWinLoss);
@@ -100,7 +93,7 @@
         [AutoBindMetaModel(BindAgent = true)]
         public async Task<ActionResult> Index(MatchWinLossMetaModel metaModel)
         {
-            var userSession = SessionService.UserSession;
+            var userSession = SessionServiceInstance.UserSession;
             var currencies = userSession.CurrencyList;
 
             if (metaModel.IsExportExcel)
@@ -113,8 +106,8 @@
                 return File(ExcelHelper.ExportEmptyFile(), "application/vnd.ms-excel", "Empty.xls");
             }
 
-            var licenseeSession = SessionService.LicenseeSession;
-            var productAccess = ProductService.GetSingleWalletProductAccess(
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
+            var productAccess = ProductServiceInstance.GetSingleWalletProductAccess(
                 licenseeSession.LicenseeId,
                 userSession.Language,
                 FunctionNames.MatchWinLoss);
@@ -155,9 +148,9 @@
             {
                 return await Task.FromResult(HttpNotFound());
             }
-            var userSession = SessionService.UserSession;
-            var licenseeSession = SessionService.LicenseeSession;
-            var productAccess = ProductService.GetSingleWalletProductAccess(
+            var userSession = SessionServiceInstance.UserSession;
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
+            var productAccess = ProductServiceInstance.GetSingleWalletProductAccess(
                     licenseeSession.LicenseeId,
                     userSession.Language,
                     FunctionNames.MatchWinLoss);
@@ -182,11 +175,11 @@
         {
             const int PageSize = 63000;
             const string FileName = nameof(MatchWinLoss);
-            var userSession = SessionService.UserSession;
-            var licenseeSession = SessionService.LicenseeSession;
+            var userSession = SessionServiceInstance.UserSession;
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
 
             var templatePath = HostingEnvironment.MapPath(@"~/App_Data/Template/Reports/MatchWinLoss.xls");
-            var productAccess = ProductService.GetSingleWalletProductAccess(
+            var productAccess = ProductServiceInstance.GetSingleWalletProductAccess(
                 licenseeSession.LicenseeId,
                 userSession.Language,
                 FunctionNames.MatchWinLoss);

@@ -20,12 +20,10 @@
         private readonly IAGCasinoBetLimitService _service;
 
         public AGCasinoBetLimitController(
-            ILanguageService languageService,
-            ISessionService sessionService,
             ICacheRefAdapter cacheRefAdapter,
             IAuthorizationService authorizationService,
             IAGCasinoBetLimitService agCasinoBetLimitService)
-            : base(languageService, sessionService, cacheRefAdapter, authorizationService)
+            : base(cacheRefAdapter, authorizationService)
         {
             _service = agCasinoBetLimitService;
         }
@@ -36,7 +34,7 @@
         public async Task<JsonResult> GetSetting(PlayerBetLimitSelectMetaModel metaModel)
         {
             var isEditable = HasEditPermission();
-            var getGroupBettingsTask = _service.GetGroupBettingsAsync(SessionService.LicenseeSession.LicenseeName, metaModel.CurrencyId);
+            var getGroupBettingsTask = _service.GetGroupBettingsAsync(SessionServiceInstance.LicenseeSession.LicenseeName, metaModel.CurrencyId);
             var getSettingTask = _service.GetBetSettingAsync(metaModel.CustId);
 
             await Task.WhenAll(getGroupBettingsTask, getSettingTask);

@@ -22,13 +22,10 @@
         private readonly ISportsBookBetLimitService _service;
 
         public SportsBookBetLimitController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IAppSettings appSettings,
             ICacheRefAdapter cacheRefAdapter,
             IAuthorizationService authorizationService,
             ISportsBookBetLimitService sportBookBetLimitService)
-            : base(languageService, sessionService, appSettings, cacheRefAdapter, authorizationService)
+            : base(cacheRefAdapter, authorizationService)
         {
             _service = sportBookBetLimitService;
         }
@@ -39,7 +36,7 @@
         public async Task<JsonResult> GetSetting(PlayerBetLimitSelectMetaModel metaModel)
         {
             var isEditable = HasEditPermission();
-            var data = await _service.GetSettingAsync(metaModel.CustId, AppSettings.IsShowMixedSport).ConfigureAwait(false);
+            var data = await _service.GetSettingAsync(metaModel.CustId, AppSettingInstance.IsShowMixedSport).ConfigureAwait(false);
             var copySportId = ((int)SportType.Soccer).ToString();
 
             var viewModel = new PlayerBetLimitViewModel
@@ -61,7 +58,7 @@
         [FunctionAuthorization(PermissionKeys.PlayerAdminBetLimit_Write)]
         public async Task<JsonResult> UpdateSetting(PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>> metaModel)
         {
-            var result = await _service.UpdateSettingAsync(metaModel, AppSettings.IsShowMixedSport).ConfigureAwait(false);
+            var result = await _service.UpdateSettingAsync(metaModel, AppSettingInstance.IsShowMixedSport).ConfigureAwait(false);
 
             if (result.Code == 0)
             {

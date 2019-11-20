@@ -22,12 +22,10 @@
         private readonly IDcsBetLimitService _service;
 
         public DcsBetLimitController(
-            ILanguageService languageService,
-            ISessionService sessionService,
             ICacheRefAdapter cacheRefAdapter,
             IAuthorizationService authorizationService,
             IDcsBetLimitService dcsBetLimitService)
-            : base(languageService, sessionService, cacheRefAdapter, authorizationService)
+            : base(cacheRefAdapter, authorizationService)
         {
             _service = dcsBetLimitService;
         }

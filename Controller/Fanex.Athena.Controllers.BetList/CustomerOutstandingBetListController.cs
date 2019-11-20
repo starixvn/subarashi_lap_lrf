@@ -35,18 +35,6 @@ namespace Fanex.Athena.Controllers.BetList
         private const string BetListCustomerOutstandingName = "BetList_CustomerOutstanding";
         private const string BetListCustomerOutstandingRunningName = "BetList_CustomerOutstandingRunning";
 
-        public CustomerOutstandingBetListController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IProductService productService,
-            IBalanceUpDataAccess balanceUpDataAccess,
-            ICacheRefAdapter cacheRefAdapter,
-            IBetListApiClient betListApiClient, ILicenseeSettingService licenseeSettingService)
-        : base(languageService, sessionService, productService, balanceUpDataAccess,
-              cacheRefAdapter, betListApiClient, licenseeSettingService)
-        {
-        }
-
         [ValidationWebRequest]
         public ActionResult Index(BetListMetaModel metaModel)
         {
@@ -58,7 +46,7 @@ namespace Fanex.Athena.Controllers.BetList
 
             var productAccess = ProductService.GetProductAccess(
                 viewParam.LicenseeId,
-                SessionService.UserSession.Language,
+                SessionServiceInstance.UserSession.Language,
                 isRunningBetlist ? BetListCustomerOutstandingRunningName : BetListCustomerOutstandingName);
 
             var viewModel = new BetListBaseViewModel

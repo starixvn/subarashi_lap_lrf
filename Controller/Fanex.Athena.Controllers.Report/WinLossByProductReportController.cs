@@ -24,23 +24,12 @@ namespace Fanex.Athena.Controllers.Report
     [FunctionAuthorization(PermissionKeys.ReportWinLossByProduct)]
     public class WinLossByProductReportController : ReportBaseController
     {
-        public WinLossByProductReportController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IAppSettings appSetting,
-            IProductService productService,
-             ILicenseeSettingService licenseeSettingService
-            )
-            : base(languageService, sessionService, appSetting, productService, licenseeSettingService)
-        {
-        }
-
         [HttpGet]
         public ActionResult Index()
         {
-            var licenseeSession = this.SessionService.LicenseeSession;
-            var userSession = SessionService.UserSession;
-            var productAccess = this.ProductService.GetSingleWalletProductAccess(
+            var licenseeSession = this.SessionServiceInstance.LicenseeSession;
+            var userSession = SessionServiceInstance.UserSession;
+            var productAccess = this.ProductServiceInstance.GetSingleWalletProductAccess(
                 licenseeSession.LicenseeId,
                 userSession.Language,
                 FunctionNames.WinLossByProduct);
@@ -67,7 +56,7 @@ namespace Fanex.Athena.Controllers.Report
                 IsAllowedCustomerCommission = licenseeSession.IsAllowedCustomerComm,
                 ProductAccess = productAccess,
                 IsFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeName),
-                HasAmountDueToColumn = AppSettings.HasAmountDueToColumn
+                HasAmountDueToColumn = AppSettingInstance.HasAmountDueToColumn
             };
 
             return View("~/Views/Desktop/Report/WinLossByProduct/Main.cshtml", model);

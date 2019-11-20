@@ -26,10 +26,7 @@ namespace Fanex.Athena.Controllers.TotalBets
         private readonly IOutrightDataAccess _outrightDataAccess;
 
         public OutrightTotalBetController(
-            ILanguageService languageService,
-            ISessionService sessionService,
             IOutrightDataAccess outrightDataAccess)
-        : base(languageService, sessionService)
         {
             _outrightDataAccess = outrightDataAccess;
         }
@@ -39,8 +36,8 @@ namespace Fanex.Athena.Controllers.TotalBets
         {
             var param = new OutrightMetaModel
             {
-                LicenseeId = SessionService.LicenseeSession.LicenseeId,
-                BaseCurrency = SessionService.UserSession.DefaultBaseCurrency
+                LicenseeId = SessionServiceInstance.LicenseeSession.LicenseeId,
+                BaseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency
             };
 
             return await this.GetView(param).ConfigureAwait(false);
@@ -51,13 +48,13 @@ namespace Fanex.Athena.Controllers.TotalBets
         [ValidationWebRequest(IsValidCurrency = true)]
         public async Task<ActionResult> Index(OutrightMetaModel metaModel)
         {
-            metaModel.LicenseeId = SessionService.LicenseeSession.LicenseeId;
+            metaModel.LicenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
             return await this.GetView(metaModel).ConfigureAwait(false);
         }
 
         private async Task<ActionResult> GetView(OutrightMetaModel metaModel)
         {
-            var userSession = SessionService.UserSession;
+            var userSession = SessionServiceInstance.UserSession;
 
             metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList,
                 metaModel.CurrencyId);

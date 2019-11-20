@@ -21,62 +21,11 @@
 
     [SessionState(SessionStateBehavior.ReadOnly)]
     [CheckUMFilter]
-    public class ReportBaseController : ContentBaseController
+    public class ReportBaseController : CultureBaseController
     {
         public const int PageSizeExcel = int.MaxValue - 1000;
 
-        private IProductService _productService;
-
-        public ReportBaseController(
-          ILanguageService languageService,
-          ISessionService sessionService
-          )
-      : this(languageService, sessionService, null)
-        {
-        }
-
-        public ReportBaseController(
-           ILanguageService languageService,
-           ISessionService sessionService,
-           IProductService productService
-           ) : this(languageService, sessionService, null, productService, null)
-        {
-        }
-
-        public ReportBaseController(
-           ILanguageService languageService,
-           ISessionService sessionService,
-           IProductService productService,
-           ILicenseeSettingService licenseeSettingService
-           )
-       : this(languageService, sessionService, null, productService, licenseeSettingService)
-        {
-        }
-
-        public ReportBaseController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IAppSettings appSetting,
-            IProductService productService,
-            ILicenseeSettingService licenseeSettingService
-            )
-        : base(languageService, sessionService, appSetting, licenseeSettingService)
-        {
-            _productService = productService;
-        }
-
-        protected IProductService ProductService
-        {
-            get
-            {
-                if (_productService == null)
-                {
-                    _productService = AutofacDependencyResolver.Current.GetService<IProductService>();
-                }
-
-                return _productService;
-            }
-        }
+        public IProductService ProductServiceInstance { get; set; }
 
         protected static IList<ProductOption> ToProductOptions(IEnumerable<Product> productList)
         {

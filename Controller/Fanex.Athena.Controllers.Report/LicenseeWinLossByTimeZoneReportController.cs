@@ -12,19 +12,11 @@ namespace Fanex.Athena.Controllers.Report
     [FunctionAuthorization(PermissionKeys.ReportLicenseeWinLossByTimeZone)]
     public class LicenseeWinLossByTimeZoneReportController : ReportBaseController
     {
-        public LicenseeWinLossByTimeZoneReportController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IProductService productService)
-            : base(languageService, sessionService, productService)
-        {
-        }
-
         public ActionResult Index()
         {
-            var licenseeSession = SessionService.LicenseeSession;
-            var userSession = SessionService.UserSession;
-            var productAccess = this.ProductService.GetSingleWalletProductAccess(
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
+            var userSession = SessionServiceInstance.UserSession;
+            var productAccess = this.ProductServiceInstance.GetSingleWalletProductAccess(
                 licenseeSession.LicenseeId,
                 userSession.Language,
                 FunctionNames.WinLossByTimeZone);

@@ -23,21 +23,13 @@ namespace Fanex.Athena.Controllers.Report
     [FunctionAuthorization(PermissionKeys.ReportColossusBetsWinLoss)]
     public class ColossusBetsWinLossReportController : ReportBaseController
     {
-        public ColossusBetsWinLossReportController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IProductService productService)
-        : base(languageService, sessionService, productService)
-        {
-        }
-
         [HttpGet]
         public ActionResult Index()
         {
-            var licenseeSession = this.SessionService.LicenseeSession;
-            var userSession = SessionService.UserSession;
+            var licenseeSession = this.SessionServiceInstance.LicenseeSession;
+            var userSession = SessionServiceInstance.UserSession;
             var date = DateTime.Now;
-            var productAccess = ProductService.GetProductAccess(licenseeSession.LicenseeId, userSession.Language);
+            var productAccess = ProductServiceInstance.GetProductAccess(licenseeSession.LicenseeId, userSession.Language);
 
             if (!productAccess.IsAllow(ProductTypes.ColossusBets))
             {

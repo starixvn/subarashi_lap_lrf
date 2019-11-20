@@ -58,8 +58,8 @@ namespace Fanex.Athena
 
             RegisterModule(builder, assemblies);
 
-            builder.RegisterControllers(controllerAssemblies);
-            builder.RegisterApiControllers(apiControllerAssemblies);
+            builder.RegisterControllers(controllerAssemblies).PropertiesAutowired();
+            builder.RegisterApiControllers(apiControllerAssemblies).PropertiesAutowired();
 
 
             builder.RegisterType<ApiExceptionLogger>().As<IExceptionLogger>();

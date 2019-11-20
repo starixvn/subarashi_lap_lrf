@@ -26,18 +26,15 @@ namespace Fanex.Athena.Controllers.Account
         private readonly IUserService _userService;
 
         public AccountController(
-            ILanguageService languageService,
-            ISessionService sessionService,
             IUserService userService)
-        : base(languageService, sessionService)
         {
             _userService = userService;
         }
 
         public ActionResult Manage()
         {
-            var userSession = SessionService.UserSession;
-            var licenseeSession = SessionService.LicenseeSession;
+            var userSession = SessionServiceInstance.UserSession;
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
             var model = _userService.GetByLicensee(licenseeSession.LicenseeId, userSession.IsInternal)
                 .Where(i => i.UserID != userSession.UserId).ToList();
 
@@ -54,12 +51,12 @@ namespace Fanex.Athena.Controllers.Account
         [HttpGet]
         public ActionResult EditAccount()
         {
-            var userSession = SessionService.UserSession;
+            var userSession = SessionServiceInstance.UserSession;
             var userId = GetUserId();
 
             if (userId > 0 && userId != userSession.UserId)
             {
-                var user = _userService.GetUserInfo(SessionService.LicenseeSession.LicenseeId, userId);
+                var user = _userService.GetUserInfo(SessionServiceInstance.LicenseeSession.LicenseeId, userId);
 
                 if (user != null && user.IsInternal == userSession.IsInternal)
                 {
@@ -90,8 +87,8 @@ namespace Fanex.Athena.Controllers.Account
         {
             if (ModelState.IsValid)
             {
-                var userSession = SessionService.UserSession;
-                var licenseeId = SessionService.LicenseeSession.LicenseeId;
+                var userSession = SessionServiceInstance.UserSession;
+                var licenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
                 var user = _userService.GetUserInfo(licenseeId, model.UserId);
 
                 if (user != null && user.IsInternal == userSession.IsInternal)
@@ -152,8 +149,8 @@ namespace Fanex.Athena.Controllers.Account
                 return JsonErrorResult(ViewResources.InvalidRequestMsg);
             }
 
-            var userSession = SessionService.UserSession;
-            var user = _userService.GetUserInfo(SessionService.LicenseeSession.LicenseeId, model.UserId);
+            var userSession = SessionServiceInstance.UserSession;
+            var user = _userService.GetUserInfo(SessionServiceInstance.LicenseeSession.LicenseeId, model.UserId);
 
             if (user == null || user.IsInternal != userSession.IsInternal)
             {

@@ -23,7 +23,7 @@ namespace Fanex.Athena.Controllers.Report
         [AutoBindMetaModel(BindAgent = true)]
         public async Task<ActionResult> Turnover(TurnoverMetaModel metaModel)
         {
-            var placeholderUsername = IsFakeLicensee(SessionService.LicenseeSession.LicenseeName) ?
+            var placeholderUsername = IsFakeLicensee(SessionServiceInstance.LicenseeSession.LicenseeName) ?
                 ViewResources.ExternalId :
                 ViewResources.ExternalIdOrSystemId;
 

@@ -37,14 +37,11 @@ namespace Fanex.Athena.Controllers.BetSettings
         private readonly IThirdPartyBetSettingService _betSettingService;
 
         public ThirdPartyBetSettingController(
-            ILanguageService languageService,
-            ISessionService sessionService,
             ICoreBetSettingService coreBetSettingService,
             IProductService productService,
-            IThirdPartyBetSettingService betSettingService,
-             ILicenseeSettingService licenseeSettingService
+            IThirdPartyBetSettingService betSettingService
             )
-        : base(languageService, sessionService, coreBetSettingService, productService, licenseeSettingService)
+        : base(coreBetSettingService, productService)
         {
             _betSettingService = betSettingService;
         }
@@ -112,7 +109,7 @@ namespace Fanex.Athena.Controllers.BetSettings
 
         private async Task<JsonResult> UpdateThirdPartyProductStatusAsync(int productId, int custId, string nickName, int status)
         {
-            var userSession = SessionService.UserSession;
+            var userSession = SessionServiceInstance.UserSession;
             if (!CheckPermission(userSession, productId))
             {
                 return AccessDenied();

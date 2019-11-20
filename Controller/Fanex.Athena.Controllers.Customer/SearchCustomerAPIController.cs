@@ -28,15 +28,12 @@
         PermissionKeys.CustomerInfoCustomerLog,
         PermissionKeys.CustomerInfoCustomerList,
         PermissionKeys.BettingTicketCenter)]
-    public class SearchCustomerAPIController : ContentBaseController
+    public class SearchCustomerAPIController : CultureBaseController
     {
         private readonly ISearchCustomerDataAccess _searchCustomerDataAccess;
 
         public SearchCustomerAPIController(
-            ILanguageService languageService,
-            ISessionService sessionService,
             ISearchCustomerDataAccess searchCustomerDataAccess)
-            : base(languageService, sessionService)
         {
             _searchCustomerDataAccess = searchCustomerDataAccess;
         }
@@ -63,7 +60,7 @@
             }
 
             var userName = query.Trim();
-            var userSession = SessionService.UserSession;
+            var userSession = SessionServiceInstance.UserSession;
             var customerNames = await _searchCustomerDataAccess.SearchCustomers(userSession.UserId, userName,
                 AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList), isIncludeDormant);
 

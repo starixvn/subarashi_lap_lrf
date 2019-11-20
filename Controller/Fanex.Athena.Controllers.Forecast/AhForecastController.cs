@@ -34,11 +34,7 @@ namespace Fanex.Athena.Controllers.Forecast
         private readonly IForecastAhService _forecastAhService;
 
         public AhForecastController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IAppSettings appSetting,
             IForecastAhService forecastAhService)
-        : base(languageService, sessionService, appSetting)
         {
             _forecastAhService = forecastAhService;
         }
@@ -46,7 +42,7 @@ namespace Fanex.Athena.Controllers.Forecast
         [ValidationWebRequest]
         public async Task<ActionResult> Index(ForecastAHMetaModel metaModel)
         {
-            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(SessionService.UserSession.CurrencyAgentList, metaModel.CurrencyId);
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(SessionServiceInstance.UserSession.CurrencyAgentList, metaModel.CurrencyId);
 
             var model = await GetViewModel(metaModel).ConfigureAwait(false);
 
@@ -57,11 +53,8 @@ namespace Fanex.Athena.Controllers.Forecast
         {
             const int MaxLink = 10;
             var forecastLink = new List<string>();
-            var endIndex = 0;
-
             var startIndex = ((currentScore < 0 && IsOverUnder(betType)) ? 0 : currentScore) + 5;
-            endIndex = startIndex - MaxLink;
-
+            int endIndex = startIndex - MaxLink;
             if (endIndex < 0 && IsOverUnder(betType))
             {
                 endIndex = 0;
@@ -116,7 +109,7 @@ namespace Fanex.Athena.Controllers.Forecast
                         metaModel.BetType, forecastHeaderParam.LiveHomeScore, forecastHeaderParam.LiveAwayScore);
                 }
 
-                var userSession = SessionService.UserSession;
+                var userSession = SessionServiceInstance.UserSession;
                 /*Handicap or 1st Handicap*/
                 if (metaModel.BetType == (int)BetType.Handicap || metaModel.BetType == (int)BetType.FirstHalfHandicap)
                 {

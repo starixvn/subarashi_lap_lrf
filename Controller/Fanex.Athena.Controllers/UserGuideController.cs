@@ -40,8 +40,6 @@ namespace Fanex.Athena.Controllers
             ProductTypes.AllBet, ProductTypes.RngCasino, ProductTypes.Voidbridge
         };
 
-        private readonly ISessionService _sessionService;
-
         private readonly IProductService _productService;
 
         private readonly IFileSystem _fileSystem;
@@ -49,14 +47,10 @@ namespace Fanex.Athena.Controllers
         private readonly IBalanceUpDataAccess _balanceUpDataAccess;
 
         public UserGuideController(
-            ILanguageService languageService,
-            ISessionService sessionService,
             IFileSystem fileSystem,
             IProductService productService,
             IBalanceUpDataAccess balanceUpDataAccess)
-        : base(languageService, sessionService)
         {
-            _sessionService = sessionService;
             _productService = productService;
             _fileSystem = fileSystem;
             _balanceUpDataAccess = balanceUpDataAccess;
@@ -66,7 +60,7 @@ namespace Fanex.Athena.Controllers
         public ActionResult Index(string resourceName)
         {
             var content = GetFileContent(resourceName);
-            var products = _productService.GetProductList(SessionService.LicenseeSession.LicenseeId, SessionService.UserSession.Language);
+            var products = _productService.GetProductList(SessionServiceInstance.LicenseeSession.LicenseeId, SessionServiceInstance.UserSession.Language);
 
             content = content.Replace("{rooturl}", Url.Content("~"));
             content = AddSpecialProducts(content, products);
@@ -78,8 +72,8 @@ namespace Fanex.Athena.Controllers
         [FunctionAuthorization(PermissionKeys.CustomerInfoCustomerList)]
         public FilePathResult DownloadCustomerListPdf()
         {
-            var language = _sessionService.UserSession.Language;
-            var fileName = _sessionService.LicenseeSession.IsEnableBA ? "Odds Group Feature_Licensee_BA.pdf" : "Odds Group Feature_Licensee.pdf";
+            var language = SessionServiceInstance.UserSession.Language;
+            var fileName = SessionServiceInstance.LicenseeSession.IsEnableBA ? "Odds Group Feature_Licensee_BA.pdf" : "Odds Group Feature_Licensee.pdf";
             var filePath = Server.MapPath(string.Format(@"~/App_Data/UserGuide/{0}/pdf/{1}/{2}", CustomerListResourceName, language, fileName));
             filePath = GetDefaultFilePathIfNotExist(language, filePath);
             return File(filePath, System.Net.Mime.MediaTypeNames.Application.Pdf, Path.GetFileName(filePath));
@@ -89,7 +83,7 @@ namespace Fanex.Athena.Controllers
         public FilePathResult CashoutReportPdf()
         {
             var chineseCodes = new[] { "zh-CN", "zh-TW", "zh-Hans" };
-            var suffix = chineseCodes.Contains(_sessionService.UserSession.Language) ? "CN" : "EN";
+            var suffix = chineseCodes.Contains(SessionServiceInstance.UserSession.Language) ? "CN" : "EN";
             var fileName = $"Cash Out WL Report guideline_{suffix}.pdf";
             var filePath = Server.MapPath(string.Format(@"~/App_Data/UserGuide/CashOutWL/pdf/{0}", fileName));
             return File(filePath, System.Net.Mime.MediaTypeNames.Application.Pdf, Path.GetFileName(filePath));
@@ -171,7 +165,7 @@ namespace Fanex.Athena.Controllers
 
         private string GetFileContent(string resourceName)
         {
-            var language = _sessionService.UserSession.Language;
+            var language = SessionServiceInstance.UserSession.Language;
 
             var filePath = Server.MapPath(string.Format(@"~/App_Data/UserGuide/{0}/{1}.htm", resourceName, language));
             filePath = GetDefaultFilePathIfNotExist(language, filePath);

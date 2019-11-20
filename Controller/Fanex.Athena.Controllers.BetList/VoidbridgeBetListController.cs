@@ -20,19 +20,6 @@
     public class VoidbridgeBetListController : BetListBaseController
     {
         private static readonly int[] HiddenColumns = new[] { ExternalIdColumn, SystemIdColumn, BetEffectiveColumn, LicenseeWLColumn };
-
-        public VoidbridgeBetListController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IProductService productService,
-            IBalanceUpDataAccess balanceUpDataAccess,
-            ICacheRefAdapter cacheRefAdapter,
-            IBetListApiClient betListApiClient
-, ILicenseeSettingService licenseeSettingService)
-        : base(languageService, sessionService, productService, balanceUpDataAccess,
-              cacheRefAdapter, betListApiClient, licenseeSettingService)
-        { }
-
         [HttpGet]
         [ValidationWebRequest(IsValidCurrency = true)]
         public async Task<ActionResult> Detail(BetListExcelMetaModel metaModel)
@@ -45,7 +32,7 @@
         {
             metaModel.ShowingOption = new BetListShowingOption
             {
-                CustomerCommVisible = SessionService.LicenseeSession.IsAllowedCustomerComm
+                CustomerCommVisible = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm
             };
             metaModel.Title = GetBetListDetailTitle(ViewResources.ProductVB, metaModel.Date);
 

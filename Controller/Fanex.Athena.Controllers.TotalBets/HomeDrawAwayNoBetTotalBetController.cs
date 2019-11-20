@@ -26,10 +26,7 @@ namespace Fanex.Athena.Controllers.TotalBets
         private readonly IHomeDrawAwayNoBetDataAccess _homeDrawAwayNoBetDataAccess;
 
         public HomeDrawAwayNoBetTotalBetController(
-            ILanguageService languageService,
-            ISessionService sessionService,
             IHomeDrawAwayNoBetDataAccess homeDrawAwayNoBetDataAccess)
-        : base(languageService, sessionService)
         {
             _homeDrawAwayNoBetDataAccess = homeDrawAwayNoBetDataAccess;
         }
@@ -39,8 +36,8 @@ namespace Fanex.Athena.Controllers.TotalBets
         {
             var param = new HomeDrawAwayNoBetMetaModel
             {
-                LicenseeId = SessionService.LicenseeSession.LicenseeId,
-                BaseCurrency = SessionService.UserSession.DefaultBaseCurrency
+                LicenseeId = SessionServiceInstance.LicenseeSession.LicenseeId,
+                BaseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency
             };
 
             return await this.GetView(param).ConfigureAwait(false);
@@ -51,13 +48,13 @@ namespace Fanex.Athena.Controllers.TotalBets
         [ValidationWebRequest(IsValidCurrency = true)]
         public async Task<ActionResult> Index(HomeDrawAwayNoBetMetaModel metaModel)
         {
-            metaModel.LicenseeId = SessionService.LicenseeSession.LicenseeId;
+            metaModel.LicenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
             return await this.GetView(metaModel).ConfigureAwait(false);
         }
 
         private async Task<ActionResult> GetView(HomeDrawAwayNoBetMetaModel metaModel)
         {
-            var userSession = SessionService.UserSession;
+            var userSession = SessionServiceInstance.UserSession;
             metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList,
                 metaModel.CurrencyId);
             var dataList = await _homeDrawAwayNoBetDataAccess.GetHomeDrawAwayNoBetDataList(metaModel).ConfigureAwait(false);

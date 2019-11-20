@@ -1,17 +1,10 @@
 ﻿namespace Fanex.Athena.Controllers.BetList
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-    using System.Web.SessionState;
-
     using DataAccess.Core.Configuration.Interfaces;
 
     using Excel.Base.Helpers;
 
     using Fanex.Athena.Model.Core.DataDomain;
-    using Fanex.Athena.Service.Core.Common.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
 
@@ -22,13 +15,17 @@
 
     using Resources;
 
-    using Service.Core.Users.Interfaces;
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
+    using System.Web.SessionState;
 
     using VendorAdapter.Interfaces;
 
     [SessionState(SessionStateBehavior.ReadOnly)]
     [CheckUMFilter]
-    public class BetListBaseController : ContentBaseController
+    public class BetListBaseController : CultureBaseController
     {
         protected const int PageSizeExcel = 63000;
 
@@ -40,50 +37,14 @@
 
         protected static readonly int[] HiddenColumnIndexes = new[] { WinLostColumn, BetEffectiveColumn, LicenseeWLColumn };
 
-        private readonly IBalanceUpDataAccess _balanceUpDataAccess;
+        public IBalanceUpDataAccess BalanceUpDataAccessInstance { get; set; }
 
-        private readonly ICacheRefAdapter _cacheRefAdapter;
+        protected IDictionary<int, string> UserCurrencyList => SessionServiceInstance.UserSession.CurrencyList;
 
-        private readonly IProductService _productService;
+        public IProductService ProductService { get; set; }
 
-        private readonly IBetListApiClient _betListApiClient;
-
-#pragma warning disable S107 // Methods should not have too many parameters
-
-        public BetListBaseController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IProductService productService,
-            IBalanceUpDataAccess balanceUpDataAccess,
-            ICacheRefAdapter cacheRefAdapter,
-            IBetListApiClient betListApiClient,
-            ILicenseeSettingService licenseeSettingService
-            )
-#pragma warning restore S107 // Methods should not have too many parameters
-        : base(languageService, sessionService, licenseeSettingService)
-        {
-            _productService = productService;
-            _balanceUpDataAccess = balanceUpDataAccess;
-            _cacheRefAdapter = cacheRefAdapter;
-            _betListApiClient = betListApiClient;
-        }
-
-        protected IDictionary<int, string> UserCurrencyList => SessionService.UserSession.CurrencyList;
-
-        protected IProductService ProductService
-        {
-            get { return _productService; }
-        }
-
-        protected ICacheRefAdapter CacheRefAdapter
-        {
-            get { return _cacheRefAdapter; }
-        }
-
-        protected IBetListApiClient BetListApiClient
-        {
-            get { return _betListApiClient; }
-        }
+        public ICacheRefAdapter CacheRefAdapter { get; set; }
+        public IBetListApiClient BetListApiClient { get; set; }
 
         protected static string GetViewInCurrency(BetListMetaModel metaModel)
         {
@@ -122,7 +83,7 @@
 
         protected BalanceUp GetBalanceUp()
         {
-            return _balanceUpDataAccess.GetBalanceUp();
+            return BalanceUpDataAccessInstance.GetBalanceUp();
         }
 
         /// <summary>
@@ -133,12 +94,12 @@
         /// <returns>The bet list metal model.</returns>
         protected BetListMetaModel CreateDefaultMetaModel(BetListMetaModel metaModel = null)
         {
-            var licenseeSession = SessionService.LicenseeSession;
-            var userSession = SessionService.UserSession;
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
+            var userSession = SessionServiceInstance.UserSession;
             var defaultMetaModel = metaModel ?? new BetListMetaModel();
             defaultMetaModel.LicenseeId = licenseeSession.LicenseeId;
             defaultMetaModel.UserId = userSession.UserId;
-            defaultMetaModel.HasPlayerCom = SessionService.LicenseeSession.IsAllowedCustomerComm;
+            defaultMetaModel.HasPlayerCom = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm;
             defaultMetaModel.FromDate = DateTime.SpecifyKind(defaultMetaModel.FromDate.Date, DateTimeKind.Unspecified);
             defaultMetaModel.ToDate = DateTime.SpecifyKind(defaultMetaModel.ToDate.Date, DateTimeKind.Unspecified);
             defaultMetaModel.Date = DateTime.SpecifyKind(defaultMetaModel.Date.Date, DateTimeKind.Unspecified);
@@ -158,7 +119,7 @@
             if (metaModel != null && string.IsNullOrEmpty(metaModel.BaseCurrency)
                 && metaModel.CurrencyId == 0)
             {
-                metaModel.BaseCurrency = SessionService.UserSession.DefaultBaseCurrency;
+                metaModel.BaseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency;
             }
         }
 
@@ -182,7 +143,7 @@
             string fileName,
             string apiPath = null)
         {
-            var data = await _betListApiClient.PostAsyncBytes(apiPath ?? "/BetList/ExportExcel", metaModel, SessionService.UserSession.Language).ConfigureAwait(false);
+            var data = await BetListApiClient.PostAsyncBytes(apiPath ?? "/BetList/ExportExcel", metaModel, SessionServiceInstance.UserSession.Language).ConfigureAwait(false);
             return File(data, "application/vnd.ms-excel", fileName + ".xls");
         }
 

@@ -27,18 +27,13 @@ namespace Fanex.Athena.Module.PlayerAdmin.Controllers
 
         private readonly IReportAPIClient _reportAPIClient;
 
-        private readonly ILicenseeSettingService _licenseeSettingService;
-
         public PlayerWinLossController(
-            ILanguageService languageService,
-            ISessionService sessionService,
             IProductService productService,
-            IReportAPIClient reportAPIClient,
-            ILicenseeSettingService licenseeSettingService) : base(languageService, sessionService)
+            IReportAPIClient reportAPIClient
+            )
         {
             _productService = productService;
             _reportAPIClient = reportAPIClient;
-            _licenseeSettingService = licenseeSettingService;
         }
 
         [HttpGet]
@@ -51,7 +46,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Controllers
                 UserName = userName?.Trim(),
                 CurrencyName = currencyName?.Trim(),
                 ProductCodeListString = string.Join(",", productAccess.ProductList.Select(i => i.ProductCode)),
-                IsAllowedCustomerCommission = SessionService.LicenseeSession.IsAllowedCustomerComm,
+                IsAllowedCustomerCommission = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm,
                 IsAllowedBA = productAccess.IsAllowBA
             };
 
@@ -65,7 +60,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Controllers
         [AutoBindMetaModel(BindAgent = true, BindLicenseeContract = true)]
         public async Task<ActionResult> Index([Bind(Include = "Username")]PlayerWinLossMetaModel metaModel)
         {
-            var userSession = SessionService.UserSession;
+            var userSession = SessionServiceInstance.UserSession;
             SetDefaultProductOptionValue(metaModel);
 
             if (metaModel.IsExportExcel)
@@ -84,8 +79,8 @@ namespace Fanex.Athena.Module.PlayerAdmin.Controllers
         private ProductAccess GetProductAccess()
         {
             return _productService.GetSingleWalletProductAccess(
-                SessionService.LicenseeSession.LicenseeId,
-                SessionService.UserSession.Language,
+                SessionServiceInstance.LicenseeSession.LicenseeId,
+                SessionServiceInstance.UserSession.Language,
                 FunctionNames.CustomerWinLoss);
         }
 

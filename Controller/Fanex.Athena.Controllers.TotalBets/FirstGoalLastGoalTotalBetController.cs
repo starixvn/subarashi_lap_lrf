@@ -27,10 +27,7 @@ namespace Fanex.Athena.Controllers.TotalBets
         private readonly IFirstGoalLastGoalDataAccess _firstGoalLastGoalDataAccess;
 
         public FirstGoalLastGoalTotalBetController(
-            ILanguageService languageService,
-            ISessionService sessionService,
             IFirstGoalLastGoalDataAccess firstGoalLastGoalDataAccess)
-        : base(languageService, sessionService)
         {
             _firstGoalLastGoalDataAccess = firstGoalLastGoalDataAccess;
         }
@@ -40,8 +37,8 @@ namespace Fanex.Athena.Controllers.TotalBets
         {
             var param = new FirstGoalLastGoalMetaModel
             {
-                LicenseeId = SessionService.LicenseeSession.LicenseeId,
-                BaseCurrency = SessionService.UserSession.DefaultBaseCurrency
+                LicenseeId = SessionServiceInstance.LicenseeSession.LicenseeId,
+                BaseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency
             };
 
             return await this.GetView(param).ConfigureAwait(false);
@@ -52,13 +49,13 @@ namespace Fanex.Athena.Controllers.TotalBets
         [ValidationWebRequest(IsValidCurrency = true)]
         public async Task<ActionResult> Index(FirstGoalLastGoalMetaModel metaModel)
         {
-            metaModel.LicenseeId = SessionService.LicenseeSession.LicenseeId;
+            metaModel.LicenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
             return await this.GetView(metaModel).ConfigureAwait(false);
         }
 
         private async Task<ActionResult> GetView(FirstGoalLastGoalMetaModel metaModel)
         {
-            var userSession = SessionService.UserSession;
+            var userSession = SessionServiceInstance.UserSession;
 
             metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList
                 , metaModel.CurrencyId);

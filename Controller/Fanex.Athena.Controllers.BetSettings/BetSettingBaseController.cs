@@ -35,29 +35,25 @@ namespace Fanex.Athena.Controllers.BetSettings
     [SessionState(SessionStateBehavior.ReadOnly)]
     [CheckUMFilter]
     [FunctionAuthorization(PermissionKeys.CustomerInfoCustomerList)]
-    public class BetSettingBaseController : ContentBaseController
+    public class BetSettingBaseController : CultureBaseController
     {
         private readonly ICoreBetSettingService _coreBetSettingService;
 
         private readonly IProductService _productService;
 
         protected BetSettingBaseController(
-            ILanguageService languageService,
-            ISessionService sessionService,
             ICoreBetSettingService coreBetSettingService,
-            IProductService productService,
-            ILicenseeSettingService licenseeSettingService)
-        : base(languageService, sessionService, licenseeSettingService)
+            IProductService productService)
         {
-            _coreBetSettingService = coreBetSettingService ?? AutofacDependencyResolver.Current.GetService<ICoreBetSettingService>();
-            _productService = productService ?? AutofacDependencyResolver.Current.GetService<IProductService>();
+            _coreBetSettingService = coreBetSettingService;
+            _productService = productService;
         }
 
         protected ProductAccess GetProductAccess()
         {
             return _productService.GetProductAccess(
-                    SessionService.LicenseeSession.LicenseeId,
-                    SessionService.UserSession.Language);
+                    SessionServiceInstance.LicenseeSession.LicenseeId,
+                    SessionServiceInstance.UserSession.Language);
         }
 
         protected JsonResult AccessDenied()
@@ -72,8 +68,8 @@ namespace Fanex.Athena.Controllers.BetSettings
 
         protected async Task AssignRequiredPropertiesAsync(BetSettingBaseViewModel viewModel, BetSettingMetaModel metaModel)
         {
-            var licensee = SessionService.LicenseeSession;
-            var userSession = SessionService.UserSession;
+            var licensee = SessionServiceInstance.LicenseeSession;
+            var userSession = SessionServiceInstance.UserSession;
             metaModel.IsFakeLicensee = IsFakeLicensee(licensee.LicenseeName);
             viewModel.Param = metaModel;
             viewModel.Editable = IsBetSettingEditable(userSession);

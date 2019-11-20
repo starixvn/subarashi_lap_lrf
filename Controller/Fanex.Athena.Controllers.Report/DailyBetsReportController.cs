@@ -20,31 +20,24 @@ namespace Fanex.Athena.Controllers.Report
     {
         private readonly IReportAPIClient _reportAPIClient;
 
-        private readonly ILicenseeSettingService _licenseeSettingService;
-
         private const int DefaultLimitedMonthRange = 3;
 
         public DailyBetsReportController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IProductService productService,
-            ILicenseeSettingService licenseeSettingService,
-            IReportAPIClient reportAPIClient) : base(languageService, sessionService, productService, licenseeSettingService)
+            IReportAPIClient reportAPIClient)
         {
             _reportAPIClient = reportAPIClient;
-            _licenseeSettingService = licenseeSettingService;
         }
 
         [HttpGet]
         public ActionResult Index()
         {
-            var userSession = SessionService.UserSession;
-            var licenseeSetting = LicenseeSettingService.GetFakeLicenseeSetting(SessionService.LicenseeSession.LicenseeName);
+            var userSession = SessionServiceInstance.UserSession;
+            var licenseeSetting = LicenseeSettingServiceInstance.GetFakeLicenseeSetting(SessionServiceInstance.LicenseeSession.LicenseeName);
             var today = licenseeSetting != null && licenseeSetting.TimeZone.HasValue ?
                 DateTime.UtcNow.AddHours(licenseeSetting.TimeZone.Value) : DateTime.Now;
 
-            var productAccess = ProductService.GetSingleWalletProductAccess(
-                SessionService.LicenseeSession.LicenseeId,
+            var productAccess = ProductServiceInstance.GetSingleWalletProductAccess(
+                SessionServiceInstance.LicenseeSession.LicenseeId,
                 userSession.Language,
                 FunctionNames.DailyBets);
 
@@ -70,9 +63,9 @@ namespace Fanex.Athena.Controllers.Report
         [AutoBindMetaModel(BindCurrencyList = true)]
         public async Task<ActionResult> Index(DailyBetsMetaModel metaModel)
         {
-            metaModel.SiteName = SessionService.LicenseeSession.LicenseeName;
+            metaModel.SiteName = SessionServiceInstance.LicenseeSession.LicenseeName;
 
-            var userSession = SessionService.UserSession;
+            var userSession = SessionServiceInstance.UserSession;
             if (metaModel.IsExportExcel)
             {
                 var httpResponse = await _reportAPIClient.PostAsync("api/DailyBets/Export",

@@ -16,16 +16,6 @@
     [CheckUMFilter]
     public class NonCultureBaseController : Controller
     {
-        private readonly ISessionService _sessionService;
-
-        public NonCultureBaseController(ISessionService sessionService)
-        {
-            _sessionService = sessionService ?? AutofacDependencyResolver.Current.GetService<ISessionService>();
-        }
-
-        public ISessionService SessionService
-        {
-            get { return _sessionService; }
-        }
+        public ISessionService SessionServiceInstance { get; set; }
     }
 }

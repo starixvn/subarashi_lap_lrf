@@ -55,26 +55,14 @@ namespace Fanex.Athena.Controllers.Customer
         private readonly ILicenseeDataAccess _licenseeDataAccess;
         private readonly IProductService _productService;
         private readonly IAuthorizationService _authorizationService;
-
-        #region Constructor
-
-#pragma warning disable S107 // Methods should not have too many parameters
-
         public CustomerApiController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IAppSettings appSetting,
             ILogger logger,
             ICustomerCommService customerCommService,
             ICustomerListService customerListService,
             IGroupComService groupComService,
             ILicenseeDataAccess licenseeDataAccess,
             IProductService productService,
-            IAuthorizationService authorizationService,
-             ILicenseeSettingService licenseeSettingService
-            )
-#pragma warning restore S107 // Methods should not have too many parameters
-            : base(languageService, sessionService, appSetting, licenseeSettingService)
+            IAuthorizationService authorizationService)
         {
             _logger = logger;
             _customerCommService = customerCommService;
@@ -85,7 +73,6 @@ namespace Fanex.Athena.Controllers.Customer
             _authorizationService = authorizationService;
         }
 
-        #endregion Constructor
 
         #region Level & Status API
 
@@ -97,10 +84,10 @@ namespace Fanex.Athena.Controllers.Customer
         {
             try
             {
-                var licenseeSession = SessionService.LicenseeSession;
-                if (AppSettings.LicenseeOfferStatusFunction.Contains(licenseeSession.LicenseeId))
+                var licenseeSession = SessionServiceInstance.LicenseeSession;
+                if (AppSettingInstance.LicenseeOfferStatusFunction.Contains(licenseeSession.LicenseeId))
                 {
-                    var userSession = SessionService.UserSession;
+                    var userSession = SessionServiceInstance.UserSession;
                     var customerStatusMetaModel = new CustomerStatusMetaModel
                     {
                         LicenseeId = licenseeSession.LicenseeId,
@@ -142,12 +129,12 @@ namespace Fanex.Athena.Controllers.Customer
         [ValidatePermissionOnData]
         public ActionResult UpdateSpecialLevel(int custId, int level)
         {
-            var licensee = SessionService.LicenseeSession;
+            var licensee = SessionServiceInstance.LicenseeSession;
             var isFakeLicensee = IsFakeLicensee(licensee.LicenseeName);
 
             if (!isFakeLicensee)
             {
-                var userSession = SessionService.UserSession;
+                var userSession = SessionServiceInstance.UserSession;
 
                 try
                 {
@@ -189,12 +176,12 @@ namespace Fanex.Athena.Controllers.Customer
         [ValidatePermissionOnData]
         public ActionResult UpdateOddsGroup(int custId, string oddsGroup)
         {
-            var licensee = SessionService.LicenseeSession;
+            var licensee = SessionServiceInstance.LicenseeSession;
             var isFakeLicensee = IsFakeLicensee(licensee.LicenseeName);
 
             if (!isFakeLicensee)
             {
-                var userSession = SessionService.UserSession;
+                var userSession = SessionServiceInstance.UserSession;
 
                 try
                 {
@@ -244,8 +231,8 @@ namespace Fanex.Athena.Controllers.Customer
         [ValidatePermissionOnData]
         public ActionResult UpdateBAStatus(int custId, bool isAllowBA)
         {
-            var licenseeSession = SessionService.LicenseeSession;
-            var userSession = SessionService.UserSession;
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
+            var userSession = SessionServiceInstance.UserSession;
             var productAccess = _productService.GetProductAccess(licenseeSession.LicenseeId, userSession.Language);
             if (!productAccess.IsAllowBA)
             {
@@ -293,7 +280,7 @@ namespace Fanex.Athena.Controllers.Customer
         [FunctionAuthorization(PermissionKeys.CustomerInfoCommissionGroupList)]
         public async Task<ActionResult> UpdateCustomerCom(UpdatedCustomerComMetaModel metaModel)
         {
-            var licenseeSession = SessionService.LicenseeSession;
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
             if (!licenseeSession.IsAllowedCustomerComm)
             {
                 return AccessDenied();
@@ -311,7 +298,7 @@ namespace Fanex.Athena.Controllers.Customer
                                 metaModel.ParlayComm,
                                 metaModel.NGComm,
                                 metaModel.CSComm);
-                var userSession = SessionService.UserSession;
+                var userSession = SessionServiceInstance.UserSession;
 
                 var productAccess = _productService.GetProductAccess(licenseeSession.LicenseeId, userSession.Language);
                 if (isvalid)
@@ -347,13 +334,13 @@ namespace Fanex.Athena.Controllers.Customer
         [FunctionAuthorization(PermissionKeys.CustomerInfoCommissionGroupList)]
         public async Task<ActionResult> RemoveFromGroupCom(string customerIds, bool isRemovePlayercomm)
         {
-            var licenseeSession = SessionService.LicenseeSession;
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
             if (!licenseeSession.IsAllowedCustomerComm)
             {
                 return AccessDenied();
             }
 
-            var userSession = SessionService.UserSession;
+            var userSession = SessionServiceInstance.UserSession;
 
             var productAccess = _productService.GetProductAccess(
                 licenseeSession.LicenseeId,
@@ -397,13 +384,13 @@ namespace Fanex.Athena.Controllers.Customer
         [FunctionAuthorization(PermissionKeys.CustomerInfoCommissionGroupList)]
         public async Task<ActionResult> MoveToGroupCom(string customerIds, int groupComId)
         {
-            var licenseeSession = SessionService.LicenseeSession;
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
             if (!licenseeSession.IsAllowedCustomerComm)
             {
                 return AccessDenied();
             }
 
-            var userSession = SessionService.UserSession;
+            var userSession = SessionServiceInstance.UserSession;
             var productAccess = _productService.GetProductAccess(
                 licenseeSession.LicenseeId,
                 userSession.Language,
@@ -474,7 +461,7 @@ namespace Fanex.Athena.Controllers.Customer
 
         private async Task ProcessUpdatingCustomerComAsync(UpdatedCustomerComMetaModel metaModel, ResultViewModel result)
         {
-            metaModel.Language = SessionService.UserSession.Language;
+            metaModel.Language = SessionServiceInstance.UserSession.Language;
             var temp = await _customerCommService.UpdateCustomersCommissionAsync(metaModel, metaModel.IsAllowedCS);
             result.Success = temp.IsSuccessful;
             result.Message = ViewResources.MessageSuccess;

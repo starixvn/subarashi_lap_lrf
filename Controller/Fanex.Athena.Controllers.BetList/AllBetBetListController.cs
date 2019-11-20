@@ -25,21 +25,6 @@ namespace Fanex.Athena.Controllers.BetList
 
     public class AllBetBetListController : BetListBaseController
     {
-        public AllBetBetListController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IProductService productService,
-            IBalanceUpDataAccess balanceUpDataAccess,
-            ICacheRefAdapter cacheRefAdapter,
-            IBetListApiClient betListApiClient,
-             ILicenseeSettingService licenseeSettingService
-
-            )
-        : base(languageService, sessionService, productService, balanceUpDataAccess,
-              cacheRefAdapter, betListApiClient, licenseeSettingService)
-        {
-        }
-
         [HttpGet]
         [ValidationWebRequest(IsValidCurrency = true)]
         public async Task<ActionResult> Detail(BetListExcelMetaModel metaModel)
@@ -53,7 +38,7 @@ namespace Fanex.Athena.Controllers.BetList
             metaModel.ShowingOption = new BetListShowingOption
             {
                 GrandTotalVisible = false,
-                CustomerCommVisible = SessionService.LicenseeSession.IsAllowedCustomerComm
+                CustomerCommVisible = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm
             };
 
             metaModel.HiddenColumns = new[] { ExternalIdColumn, SystemIdColumn, BetEffectiveColumn, LicenseeWLColumn };

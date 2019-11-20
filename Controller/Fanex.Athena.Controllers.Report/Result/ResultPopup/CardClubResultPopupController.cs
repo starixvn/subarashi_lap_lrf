@@ -6,15 +6,11 @@ namespace Fanex.Athena.Controllers.Report.Result.ResultPopup
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
 
-    public class CardClubResultPopupController : ContentBaseController
+    public class CardClubResultPopupController : CultureBaseController
     {
         private readonly IBetListApiClient _betListApiClient;
-
         public CardClubResultPopupController(
-            ILanguageService languageService,
-            ISessionService sessionService,
             IBetListApiClient betListApiClient)
-            : base(languageService, sessionService)
         {
             _betListApiClient = betListApiClient;
         }
@@ -22,7 +18,7 @@ namespace Fanex.Athena.Controllers.Report.Result.ResultPopup
         [HttpGet]
         public async Task<string> Index(string custId, string gameTypeId, string transId3rd)
         {
-            var language = SessionService.UserSession.Language;
+            var language = SessionServiceInstance.UserSession.Language;
             var model = new
             {
                 custId,

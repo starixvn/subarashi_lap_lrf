@@ -21,28 +21,18 @@ namespace Fanex.Athena.Controllers.Report
     [FunctionAuthorization(PermissionKeys.ReportCustomerPendingFunds)]
     public class CustomerPendingFundsReportController : ReportBaseController
     {
-        public CustomerPendingFundsReportController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IProductService productService,
-             ILicenseeSettingService licenseeSettingService
-            )
-        : base(languageService, sessionService, productService, licenseeSettingService)
-        {
-        }
-
         [HttpGet]
         public ActionResult Index()
         {
-            var licenseeSession = SessionService.LicenseeSession;
-            var userSession = SessionService.UserSession;
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
+            var userSession = SessionServiceInstance.UserSession;
             var metaModel = new CustomerPendingFundsMetaModel
             {
                 LicenseeId = licenseeSession.LicenseeId,
                 UserId = userSession.UserId,
                 BaseCurrency = userSession.DefaultBaseCurrency
             };
-            var productAccess = ProductService.GetSingleWalletProductAccess(
+            var productAccess = ProductServiceInstance.GetSingleWalletProductAccess(
                 metaModel.LicenseeId,
                 userSession.Language,
                 FunctionNames.CustomerPendingFunds);

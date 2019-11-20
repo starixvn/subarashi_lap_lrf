@@ -23,19 +23,11 @@ namespace Fanex.Athena.Controllers.Report
     [FunctionAuthorization(PermissionKeys.ReportCustomerBalance)]
     public class CustomerBalanceReportController : ReportBaseController
     {
-        public CustomerBalanceReportController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IProductService productService)
-        : base(languageService, sessionService, productService)
-        {
-        }
-
         [HttpGet]
         public ActionResult Index()
         {
-            var licenseeSession = SessionService.LicenseeSession;
-            var userSession = SessionService.UserSession;
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
+            var userSession = SessionServiceInstance.UserSession;
 
             var metaModel = new CustomerBalanceMetaModel
             {
@@ -43,7 +35,7 @@ namespace Fanex.Athena.Controllers.Report
                 CurrencyId = 0
             };
 
-            var productAccess = ProductService.GetSingleWalletProductAccess(
+            var productAccess = ProductServiceInstance.GetSingleWalletProductAccess(
                 licenseeSession.LicenseeId,
                 userSession.Language,
                 FunctionNames.CustomerBalance);

@@ -21,18 +21,15 @@
     using Web.ActionFilter;
 
     [FunctionAuthorization(PermissionKeys.BettingTicketCenter)]
-    public class BettingTicketCenterController : ContentBaseController
+    public class BettingTicketCenterController : CultureBaseController
     {
         private readonly IProductService _productService;
 
         private readonly IBalanceUpDataAccess _balanceUpDataAccess;
 
         public BettingTicketCenterController(
-            ILanguageService languageService,
-            ISessionService sessionService,
             IProductService productService,
             IBalanceUpDataAccess balanceUpDataAccess)
-        : base(languageService, sessionService)
         {
             _productService = productService;
             _balanceUpDataAccess = balanceUpDataAccess;
@@ -52,8 +49,8 @@
                 StatusList = GetStatusList(),
                 ProductOptionList = GetProductOptionList(FunctionNames.BettingTicketCenterMultiCustomers),
                 MinDate = _balanceUpDataAccess.GetBalanceUp().BalanceUpDay,
-                IsAllowedCustomerComm = SessionService.LicenseeSession.IsAllowedCustomerComm,
-                SelectedBaseCurrency = SessionService.UserSession.DefaultBaseCurrency
+                IsAllowedCustomerComm = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm,
+                SelectedBaseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency
             };
             return View("~/Views/Desktop/BetList/BettingTicketCenter/MultiCustomer.cshtml", viewModel);
         }
@@ -66,8 +63,8 @@
                 StatusList = GetStatusList(),
                 PlatformList = GetPlatformList(),
                 ProductOptionList = GetProductOptionList(),
-                IsAllowedCustomerComm = SessionService.LicenseeSession.IsAllowedCustomerComm,
-                SelectedBaseCurrency = SessionService.UserSession.DefaultBaseCurrency
+                IsAllowedCustomerComm = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm,
+                SelectedBaseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency
             };
             return View("~/Views/Desktop/BetList/BettingTicketCenter/SingleCustomer.cshtml", viewModel);
         }
@@ -78,11 +75,11 @@
                 ViewResources.BettingTicketCenter_RefnoTabNote2,
                 GetProductsRequireUseName(),
                 _balanceUpDataAccess.GetBalanceUp().BalanceUpDay.ToString(FormatKey.DateFormat));
-            ViewBag.SelectedBaseCurrency = SessionService.UserSession.DefaultBaseCurrency;
+            ViewBag.SelectedBaseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency;
 
             return View(
                 "~/Views/Desktop/BetList/BettingTicketCenter/RefNo.cshtml",
-                SessionService.LicenseeSession.IsAllowedCustomerComm);
+                SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm);
         }
 
         public ActionResult Running()
@@ -92,8 +89,8 @@
                 StatusList = GetRunningStatusList(),
                 CurrencyList = GetCurrencyList(),
                 ProductOptionList = GetProductOptionList(FunctionNames.BettingTicketCenterRunning),
-                IsAllowedCustomerComm = SessionService.LicenseeSession.IsAllowedCustomerComm,
-                SelectedBaseCurrency = SessionService.UserSession.DefaultBaseCurrency
+                IsAllowedCustomerComm = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm,
+                SelectedBaseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency
             };
 
             return View("~/Views/Desktop/BetList/BettingTicketCenter/Running.cshtml", viewModel);
@@ -115,8 +112,8 @@
             };
 
             var productAccess = _productService.GetSingleWalletProductAccess(
-                SessionService.LicenseeSession.LicenseeId,
-                SessionService.UserSession.Language);
+                SessionServiceInstance.LicenseeSession.LicenseeId,
+                SessionServiceInstance.UserSession.Language);
 
             var licProductsRequireUseName = productAccess.ProductList
                 .Where(product => productsRequireUseName.Contains(product.ProductCode))
@@ -179,14 +176,14 @@
 
         private IDictionary<int, string> GetCurrencyList()
         {
-            return SessionService.UserSession.CurrencyList;
+            return SessionServiceInstance.UserSession.CurrencyList;
         }
 
         private IEnumerable<ProductOption> GetProductOptionList(string functionConfigKey = FunctionNames.BettingTicketCenter)
         {
             var productAccess = _productService.GetSingleWalletProductAccess(
-                SessionService.LicenseeSession.LicenseeId,
-                SessionService.UserSession.Language,
+                SessionServiceInstance.LicenseeSession.LicenseeId,
+                SessionServiceInstance.UserSession.Language,
                 functionConfigKey);
 
             return productAccess.ProductList.Select(i => new ProductOption

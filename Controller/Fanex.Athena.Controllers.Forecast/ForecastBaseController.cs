@@ -22,23 +22,8 @@ namespace Fanex.Athena.Controllers.Forecast
 
     [SessionState(SessionStateBehavior.ReadOnly)]
     [CheckUMFilter]
-    public class ForecastBaseController : ContentBaseController
+    public class ForecastBaseController : CultureBaseController
     {
-        protected ForecastBaseController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IAppSettings appSetting)
-        : base(languageService, sessionService, appSetting, null)
-        {
-        }
-
-        protected ForecastBaseController(
-           ILanguageService languageService,
-           ISessionService sessionService)
-       : base(languageService, sessionService)
-        {
-        }
-
         protected static int GetLeagueId(int leagueId, IEnumerable<League> leagueList)
         {
             if (leagueList.Any(l => l.LeagueId == leagueId))

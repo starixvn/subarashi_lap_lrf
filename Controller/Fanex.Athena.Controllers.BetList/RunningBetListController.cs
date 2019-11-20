@@ -39,17 +39,6 @@ namespace Fanex.Athena.Controllers.BetList
     /// </summary>
     public class RunningBetListController : BetListBaseController
     {
-        public RunningBetListController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IProductService productService,
-            IBalanceUpDataAccess balanceUpDataAccess,
-            ICacheRefAdapter cacheRefAdapter,
-            IBetListApiClient betListApiClient, ILicenseeSettingService licenseeSettingService)
-        : base(languageService, sessionService, productService, balanceUpDataAccess,
-              cacheRefAdapter, betListApiClient, licenseeSettingService)
-        { }
-
         [HttpGet]
         [FunctionAuthorization(PermissionKeys.TotalBetCleanSheet)]
         [ValidationWebRequest(IsValidCurrency = true)]
@@ -86,7 +75,7 @@ namespace Fanex.Athena.Controllers.BetList
 
         private async Task<ActionResult> ProcessRequest(BetListExcelMetaModel metaModel, string uspKey = "Lrf_BetList_SelRunningByBettype")
         {
-            var userSession = SessionService.UserSession;
+            var userSession = SessionServiceInstance.UserSession;
             var currencies = userSession.CurrencyList;
 
             CreateDefaultMetaModel(metaModel);
@@ -104,7 +93,7 @@ namespace Fanex.Athena.Controllers.BetList
                 Param = metaModel,
                 CurrencyList = currencies,
                 ProductAccess = ProductService.GetProductAccess(metaModel.LicenseeId, userSession.Language),
-                IsAllowedCustomerCommission = SessionService.LicenseeSession.IsAllowedCustomerComm
+                IsAllowedCustomerCommission = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm
             };
 
             return View("~/Views/Desktop/BetList/RunningBetList/Main.cshtml", model);
@@ -116,7 +105,7 @@ namespace Fanex.Athena.Controllers.BetList
 
             metaModel.ShowingOption = new BetListShowingOption
             {
-                CustomerCommVisible = SessionService.LicenseeSession.IsAllowedCustomerComm,
+                CustomerCommVisible = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm,
             };
 
             var baseCurrency = GetViewInCurrency(metaModel);

@@ -27,10 +27,7 @@ namespace Fanex.Athena.Controllers.TotalBets
         private readonly IOddEvenDrawNoDrawDataAccess _oddEvenDrawNoDrawDataAccess;
 
         public OddEvenDrawNoDrawTotalBetController(
-            ILanguageService languageService,
-            ISessionService sessionService,
             IOddEvenDrawNoDrawDataAccess oddEvenDrawNoDrawDataAccess)
-        : base(languageService, sessionService)
         {
             _oddEvenDrawNoDrawDataAccess = oddEvenDrawNoDrawDataAccess;
         }
@@ -40,8 +37,8 @@ namespace Fanex.Athena.Controllers.TotalBets
         {
             var param = new OddEvenDrawNoDrawMetaModel
             {
-                LicenseeId = SessionService.LicenseeSession.LicenseeId,
-                BaseCurrency = SessionService.UserSession.DefaultBaseCurrency
+                LicenseeId = SessionServiceInstance.LicenseeSession.LicenseeId,
+                BaseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency
             };
 
             return await this.GetView(param).ConfigureAwait(false);
@@ -52,7 +49,7 @@ namespace Fanex.Athena.Controllers.TotalBets
         [ValidationWebRequest(IsValidCurrency = true)]
         public async Task<ActionResult> Index(OddEvenDrawNoDrawMetaModel metaModel)
         {
-            metaModel.LicenseeId = SessionService.LicenseeSession.LicenseeId;
+            metaModel.LicenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
             return await this.GetView(metaModel).ConfigureAwait(false);
         }
 
@@ -60,8 +57,8 @@ namespace Fanex.Athena.Controllers.TotalBets
 
         private async Task<ActionResult> GetView(OddEvenDrawNoDrawMetaModel metaModel)
         {
-            var userSession = SessionService.UserSession;
-            var currencies = SessionService.UserSession.CurrencyList;
+            var userSession = SessionServiceInstance.UserSession;
+            var currencies = SessionServiceInstance.UserSession.CurrencyList;
 
             metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList,
                 metaModel.CurrencyId);

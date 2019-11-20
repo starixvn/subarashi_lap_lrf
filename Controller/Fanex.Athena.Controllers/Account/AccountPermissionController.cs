@@ -44,12 +44,9 @@ namespace Fanex.Athena.Controllers.Account
         private IEnumerable<Function> _allUserFunctionList;
 
         public AccountPermissionController(
-            ILanguageService languageService,
-            ISessionService sessionService,
             IFunctionService functionService,
             IUserService userService,
-            ICurrencyDataAccess currencyDataAccess, IAppSettings appSettings)
-        : base(languageService, sessionService, appSettings)
+            ICurrencyDataAccess currencyDataAccess)
         {
             _functionService = functionService;
             _userService = userService;
@@ -64,11 +61,11 @@ namespace Fanex.Athena.Controllers.Account
             var userId = GetUserId();
             if (userId > 0 && ValidatePermissionRestriction(userId))
             {
-                var user = _userService.GetUserInfo(SessionService.LicenseeSession.LicenseeId, userId);
+                var user = _userService.GetUserInfo(SessionServiceInstance.LicenseeSession.LicenseeId, userId);
 
                 if (user != null)
                 {
-                    ViewBag.EnableAssignCurrency = AppSettings.EnableAssignCurrency;
+                    ViewBag.EnableAssignCurrency = AppSettingInstance.EnableAssignCurrency;
 
                     return View("~/Views/Account/PermissionPage.cshtml", user);
                 }
@@ -83,7 +80,7 @@ namespace Fanex.Athena.Controllers.Account
             var userId = GetUserId();
             if (userId > 0 && ValidatePermissionRestriction(userId))
             {
-                var licenseeSession = SessionService.LicenseeSession;
+                var licenseeSession = SessionServiceInstance.LicenseeSession;
                 var user = _userService.GetUserInfo(licenseeSession.LicenseeId, userId);
 
                 if (user != null)
@@ -117,8 +114,8 @@ namespace Fanex.Athena.Controllers.Account
                 return JsonErrorResult(ViewResources.FunctionDeniedMsg);
             }
 
-            var userSession = SessionService.UserSession;
-            var licenseeSession = SessionService.LicenseeSession;
+            var userSession = SessionServiceInstance.UserSession;
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
 
             if (model.UserId > 0 && !string.IsNullOrEmpty(model.FunctionIdList))
             {
@@ -143,15 +140,15 @@ namespace Fanex.Athena.Controllers.Account
         [HttpGet]
         public ActionResult AssignCurrency(int userId)
         {
-            if (!AppSettings.EnableAssignCurrency)
+            if (!AppSettingInstance.EnableAssignCurrency)
             {
                 return new EmptyResult();
             }
 
             if (userId > 0)
             {
-                var currencies = _currencyDataAccess.GetCurrenciesByUser(SessionService.LicenseeSession.LicenseeId, userId);
-                if (SessionService.LicenseeSession.LicenseeId == LicenseeIdentity.KeenOcean)
+                var currencies = _currencyDataAccess.GetCurrenciesByUser(SessionServiceInstance.LicenseeSession.LicenseeId, userId);
+                if (SessionServiceInstance.LicenseeSession.LicenseeId == LicenseeIdentity.KeenOcean)
                 {
                     KeanOceanBusinessHelper.KeepHKDCurrencyName(currencies);
                 }
@@ -177,7 +174,7 @@ namespace Fanex.Athena.Controllers.Account
                 });
             }
 
-            if (!AppSettings.EnableAssignCurrency || !ValidatePermissionRestriction(model.UserId))
+            if (!AppSettingInstance.EnableAssignCurrency || !ValidatePermissionRestriction(model.UserId))
             {
                 const int FunctionDeniedErrorCode = -1;
                 return Json(new ResultInfo
@@ -187,8 +184,8 @@ namespace Fanex.Athena.Controllers.Account
                 });
             }
 
-            var licenseeId = SessionService.LicenseeSession.LicenseeId;
-            var userSession = SessionService.UserSession;
+            var licenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
+            var userSession = SessionServiceInstance.UserSession;
             model.LicenseeId = licenseeId;
             model.IP = Request.UserHostAddress;
             model.LangKey = LangService.GetCurrentLanguage();
@@ -234,7 +231,7 @@ namespace Fanex.Athena.Controllers.Account
         /// <returns>True of false.</returns>
         private bool ValidatePermissionRestriction(int editingUserId)
         {
-            var currentUser = SessionService.UserSession;
+            var currentUser = SessionServiceInstance.UserSession;
 
             if (currentUser.UserId == editingUserId)
             {
@@ -248,7 +245,7 @@ namespace Fanex.Athena.Controllers.Account
             }
 
             // is normal user, only allow to edit normal other users
-            var editingUser = _userService.GetUserInfo(SessionService.LicenseeSession.LicenseeId, editingUserId);
+            var editingUser = _userService.GetUserInfo(SessionServiceInstance.LicenseeSession.LicenseeId, editingUserId);
 
             if (editingUser == null || !editingUser.IsInternal)
             {
@@ -260,7 +257,7 @@ namespace Fanex.Athena.Controllers.Account
 
         private void InitializeFunctions(int userId)
         {
-            var licenseeId = SessionService.LicenseeSession.LicenseeId;
+            var licenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
 
             // get all functions of licensee
             var allLicenseeFunctionList = _functionService.GetLicenseeFunctionList(licenseeId);

@@ -32,16 +32,12 @@ namespace Fanex.Athena.Controllers.BetSettings
         private readonly IExchangeCommApiService _exchangeCommApiService;
 
         public ExchangeDcsBetSettingController(
-            ILanguageService languageService,
-            ISessionService sessionService,
             ICoreBetSettingService coreBetSettingService,
             IProductService productService,
             IDcsBetSettingService betSettingService,
-            IExchangeCommApiService exchangeCommApiService,
-             ILicenseeSettingService licenseeSettingService
-
+            IExchangeCommApiService exchangeCommApiService
             )
-        : base(languageService, sessionService, coreBetSettingService, productService, licenseeSettingService)
+        : base(coreBetSettingService, productService)
         {
             _betSettingService = betSettingService;
             _exchangeCommApiService = exchangeCommApiService;
@@ -85,7 +81,7 @@ namespace Fanex.Athena.Controllers.BetSettings
                 const int InvalidChargeCommissionError = 100;
                 return Json(new ResultInfo { Code = InvalidChargeCommissionError, Message = ViewResources.InvalidChargeCommission });
             }
-            var userSession = SessionService.UserSession;
+            var userSession = SessionServiceInstance.UserSession;
             var result = await _exchangeCommApiService.UpdateCommissionAsync(
                 userSession.UserId,
                 custId,

@@ -18,8 +18,8 @@ namespace Fanex.Athena.Controllers.Customer.CustomerLog
         [HttpGet]
         public ActionResult CustomerSetting()
         {
-            var licenseeSession = SessionService.LicenseeSession;
-            var productOption = _productService.GetProductAccess(licenseeSession.LicenseeId, SessionService.UserSession.Language);
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
+            var productOption = _productService.GetProductAccess(licenseeSession.LicenseeId, SessionServiceInstance.UserSession.Language);
 
             var model = new CustomerLogViewModel
             {

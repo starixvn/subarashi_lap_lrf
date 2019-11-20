@@ -25,14 +25,9 @@ namespace Fanex.Athena.Controllers.Report
         private readonly IReportAPIClient _reportAPIClient;
 
         public CustomerWinLossReportController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IProductService productService,
             IReportSettingService reportSettingService,
-            ILicenseeSettingService licenseeSettingService,
             IReportAPIClient reportAPIClient
             )
-            : base(languageService, sessionService, productService, licenseeSettingService)
         {
             _reportSettingService = reportSettingService;
             _reportAPIClient = reportAPIClient;
@@ -55,7 +50,7 @@ namespace Fanex.Athena.Controllers.Report
         [ValidationWebRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
         public async Task<ActionResult> Index(CustomerWinLossMetaModel metaModel)
         {
-            var userSession = SessionService.UserSession;
+            var userSession = SessionServiceInstance.UserSession;
             if (metaModel.IsExportExcel)
             {
                 const string FileName = "CustomerWinLoss";
@@ -70,8 +65,8 @@ namespace Fanex.Athena.Controllers.Report
 
         private ActionResult GetView(bool isHistory)
         {
-            var licenseeSession = SessionService.LicenseeSession;
-            var userSession = SessionService.UserSession;
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
+            var userSession = SessionServiceInstance.UserSession;
             var metaModel = new CustomerWinLossMetaModel
             {
                 IsExcludedTestData = true,
@@ -80,7 +75,7 @@ namespace Fanex.Athena.Controllers.Report
                 BaseCurrency = userSession.DefaultBaseCurrency
             };
 
-            var productAccess = ProductService.GetSingleWalletProductAccess(
+            var productAccess = ProductServiceInstance.GetSingleWalletProductAccess(
                 licenseeSession.LicenseeId,
                 userSession.Language,
                 FunctionNames.CustomerWinLoss);

@@ -23,10 +23,7 @@
         private readonly IReportSettingService _reportSettingService;
 
         public ExchangeWinLossReportController(
-            ILanguageService languageService,
-            ISessionService sessionService,
             IReportSettingService reportSettingService)
-        : base(languageService, sessionService)
         {
             _reportSettingService = reportSettingService;
         }
@@ -40,8 +37,8 @@
 
         private ExchangeWinLossViewModel CreateViewModel()
         {
-            var licensee = SessionService.LicenseeSession;
-            var userSession = SessionService.UserSession;
+            var licensee = SessionServiceInstance.LicenseeSession;
+            var userSession = SessionServiceInstance.UserSession;
             var currencyList = new Dictionary<int, string>
             {
                 { BaseCurrencyType.All, ViewResources.All },

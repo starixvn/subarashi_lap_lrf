@@ -25,18 +25,6 @@
     [FunctionAuthorization(PermissionKeys.ReportWinLossByBetType)]
     public class WinlossByBetTypeBetListController : BetListBaseController
     {
-        public WinlossByBetTypeBetListController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IProductService productService,
-            IBalanceUpDataAccess balanceUpDataAccess,
-            ICacheRefAdapter cacheRefAdapter,
-            IBetListApiClient betListApiClient
-, ILicenseeSettingService licenseeSettingService)
-        : base(languageService, sessionService, productService, balanceUpDataAccess,
-              cacheRefAdapter, betListApiClient, licenseeSettingService)
-        { }
-
         [HttpGet]
         [ValidationWebRequest(IsValidCurrency = true)]
         public async Task<ActionResult> Index(BetListExcelMetaModel metaModel)
@@ -70,7 +58,7 @@
                 viewinCurrency);
             metaModel.ShowingOption = new BetListShowingOption
             {
-                CustomerCommVisible = SessionService.LicenseeSession.IsAllowedCustomerComm
+                CustomerCommVisible = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm
             };
             metaModel.HiddenColumns = new[] { BetEffectiveColumn };
             return await ProcessExportExcel(metaModel, "WinLossByBetTypeBetList").ConfigureAwait(false);

@@ -38,10 +38,7 @@ namespace Fanex.Athena.Controllers.BetList
         private readonly ISportTypeDataAccess _sportTypeDataAccess;
 
         public LastBetsMonitoringBetListController(
-            ILanguageService languageService,
-            ISessionService sessionService,
             ISportTypeDataAccess sportTypeDataAccess)
-        : base(languageService, sessionService)
         {
             _sportTypeDataAccess = sportTypeDataAccess;
         }
@@ -52,13 +49,13 @@ namespace Fanex.Athena.Controllers.BetList
             var metaModel = new BetListMetaModel
             {
                 LicenseeId =
-                SessionService.LicenseeSession.LicenseeId,
-                BaseCurrency = SessionService.UserSession.DefaultBaseCurrency
+                SessionServiceInstance.LicenseeSession.LicenseeId,
+                BaseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency
             };
 
             var model = new LastBetsMonitoringViewModel
             {
-                CurrencyList = SessionService.UserSession.CurrencyList,
+                CurrencyList = SessionServiceInstance.UserSession.CurrencyList,
                 SportsList = await GetSports().ConfigureAwait(false),
                 Param = metaModel
             };

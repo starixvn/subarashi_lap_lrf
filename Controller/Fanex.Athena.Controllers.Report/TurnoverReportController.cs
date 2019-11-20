@@ -38,13 +38,8 @@ namespace Fanex.Athena.Controllers.Report
         private readonly ITurnoverService _turnoverService;
 
         public TurnoverReportController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IAppSettings appSetting,
-            IProductService productService,
-            ITurnoverService turnoverService,
-             ILicenseeSettingService licenseeSettingService)
-            : base(languageService, sessionService, appSetting, productService, licenseeSettingService)
+            ITurnoverService turnoverService
+)
         {
             _turnoverService = turnoverService;
         }
@@ -52,8 +47,8 @@ namespace Fanex.Athena.Controllers.Report
         [HttpGet]
         public ActionResult Index()
         {
-            var licenseeSession = SessionService.LicenseeSession;
-            var userSession = SessionService.UserSession;
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
+            var userSession = SessionServiceInstance.UserSession;
             var metaModel = new TurnoverMetaModel
             {
                 LicenseeId = licenseeSession.LicenseeId,
@@ -61,7 +56,7 @@ namespace Fanex.Athena.Controllers.Report
                 BaseCurrency = userSession.DefaultBaseCurrency
             };
 
-            var productAccess = ProductService.GetSingleWalletProductAccess(
+            var productAccess = ProductServiceInstance.GetSingleWalletProductAccess(
                 licenseeSession.LicenseeId,
                 userSession.Language,
                 FunctionNames.Turnover);
@@ -73,7 +68,7 @@ namespace Fanex.Athena.Controllers.Report
                 ProductAccess = productAccess,
                 IsAllowedCustomerCommission = licenseeSession.IsAllowedCustomerComm,
                 CurrencyList = GetCurrenciesForTurnoverReport(licenseeSession.LicenseeId),
-                IsAllowedCasinoTransfer = AppSettings.LicenseeAllowCasinoTransfer.Contains(licenseeSession.LicenseeId),
+                IsAllowedCasinoTransfer = AppSettingInstance.LicenseeAllowCasinoTransfer.Contains(licenseeSession.LicenseeId),
                 IsFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeName)
             };
 
@@ -86,8 +81,8 @@ namespace Fanex.Athena.Controllers.Report
         [AutoBindMetaModel(BindAgent = true)]
         public async Task<ActionResult> Excel(TurnoverMetaModel metaModel)
         {
-            var licenseeSession = SessionService.LicenseeSession;
-            var userSession = SessionService.UserSession;
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
+            var userSession = SessionServiceInstance.UserSession;
 
             var placeholderUsername = IsFakeLicensee(licenseeSession.LicenseeName) ? ViewResources.ExternalId : ViewResources.ExternalIdOrSystemId;
             metaModel.Username = string.IsNullOrWhiteSpace(metaModel.Username) ||
@@ -100,7 +95,7 @@ namespace Fanex.Athena.Controllers.Report
                 DataList = dataList,
                 TotalData = _turnoverService.SumTotalData(dataList),
                 Param = metaModel,
-                ProductAccess = ProductService.GetSingleWalletProductAccess(
+                ProductAccess = ProductServiceInstance.GetSingleWalletProductAccess(
                     licenseeSession.LicenseeId,
                     userSession.Language,
                     FunctionNames.Turnover),
@@ -118,20 +113,20 @@ namespace Fanex.Athena.Controllers.Report
 
             var templatePath = HostingEnvironment.MapPath("~/App_Data/Template/Reports/Turnover.xls");
 
-            var licenseeId = SessionService.LicenseeSession.LicenseeId;
+            var licenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
 
-            var productAccess = ProductService.GetSingleWalletProductAccess(
+            var productAccess = ProductServiceInstance.GetSingleWalletProductAccess(
                 licenseeId,
-                SessionService.UserSession.Language,
+                SessionServiceInstance.UserSession.Language,
                 FunctionNames.Turnover);
 
             var showingOption = new ShowingOption
             {
-                CustomerCommVisible = this.SessionService.LicenseeSession.IsAllowedCustomerComm,
+                CustomerCommVisible = this.SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm,
                 BAVisible = productAccess.IsAllowBA
             };
 
-            var isShowCasinoTransfer = AppSettings.LicenseeAllowCasinoTransfer.Contains(licenseeId);
+            var isShowCasinoTransfer = AppSettingInstance.LicenseeAllowCasinoTransfer.Contains(licenseeId);
             var excel = CreateExcel(templatePath, viewModel, showingOption, isShowCasinoTransfer);
 
             excel.Export();
@@ -150,7 +145,7 @@ namespace Fanex.Athena.Controllers.Report
 
         private IDictionary<int, string> GetCurrenciesForTurnoverReport(int licenseeId)
         {
-            var currencyList = SessionService.UserSession.CurrencyList;
+            var currencyList = SessionServiceInstance.UserSession.CurrencyList;
             KeanOceanBusinessHelper.AddHKDCurrencyForTurnOverReport(currencyList, licenseeId);
             return currencyList;
         }

@@ -27,20 +27,6 @@ namespace Fanex.Athena.Controllers.BetList
     {
         private static readonly int[] HiddenColumns = new[] { ExternalIdColumn, SystemIdColumn };
 
-        public CustomerWinLossBetListController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IProductService productService,
-            IBalanceUpDataAccess balanceUpDataAccess,
-            ICacheRefAdapter cacheRefAdapter,
-            IBetListApiClient betListApiClient,
-            ILicenseeSettingService licenseeSettingService
-            )
-        : base(languageService, sessionService, productService, balanceUpDataAccess, cacheRefAdapter,
-              betListApiClient, licenseeSettingService)
-        {
-        }
-
         [HttpGet]
         [ValidationWebRequest(IsValidCurrency = true)]
         public async Task<ActionResult> Index(BetListExcelMetaModel metaModel)
@@ -56,7 +42,7 @@ namespace Fanex.Athena.Controllers.BetList
             metaModel.Title = GetCustomerBetListTitle(metaModel, GetViewInCurrency(metaModel));
             metaModel.ShowingOption = new BetListShowingOption
             {
-                CustomerCommVisible = SessionService.LicenseeSession.IsAllowedCustomerComm,
+                CustomerCommVisible = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm,
             };
             metaModel.HiddenColumns = HiddenColumns;
             return await ProcessExportExcel(metaModel, "CustomerWinLossBetList").ConfigureAwait(false);

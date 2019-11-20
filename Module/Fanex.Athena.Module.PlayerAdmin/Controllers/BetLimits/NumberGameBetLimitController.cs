@@ -22,19 +22,17 @@
         private readonly INumberGameBetLimitService _service;
 
         public NumberGameBetLimitController(
-            ILanguageService languageService,
-            ISessionService sessionService,
             ICacheRefAdapter cacheRefAdapter,
             IAuthorizationService authorizationService,
             INumberGameBetLimitService numberGameBetLimitService)
-            : base(languageService, sessionService, cacheRefAdapter, authorizationService)
+            : base(cacheRefAdapter, authorizationService)
         {
             _service = numberGameBetLimitService;
         }
 
         [HttpPost]
         [AjaxRequest]
-        [ValidatePermissionOnData(isObject:true)]
+        [ValidatePermissionOnData(isObject: true)]
         public async Task<JsonResult> GetSetting(PlayerBetLimitSelectMetaModel metaModel)
         {
             var isEditable = HasEditPermission();
@@ -53,7 +51,7 @@
         [AjaxRequest]
         [ValidationWebRequest(HandlingAjaxRequestWithJsonResult = true)]
         [AutoBindMetaModel(BindIp = true, BindLanguage = true, BindSiteName = true, BindUserId = true)]
-        [ValidatePermissionOnData(isObject:true)]
+        [ValidatePermissionOnData(isObject: true)]
         [FunctionAuthorization(PermissionKeys.PlayerAdminBetLimit_Write)]
         public async Task<JsonResult> UpdateSetting(PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>> metaModel)
         {

@@ -23,18 +23,11 @@ namespace Fanex.Athena.Controllers.Report
     [FunctionAuthorization(PermissionKeys.ReportCashOutWinLoss)]
     public class CashOutWinLossReportController : ReportBaseController
     {
-        public CashOutWinLossReportController(
-            ILanguageService languageService,
-            ISessionService sessionService)
-        : base(languageService, sessionService)
-        {
-        }
-
         [HttpGet]
         public ActionResult Index()
         {
-            var licenseeSession = this.SessionService.LicenseeSession;
-            var userSession = SessionService.UserSession;
+            var licenseeSession = this.SessionServiceInstance.LicenseeSession;
+            var userSession = SessionServiceInstance.UserSession;
 
             var metaModel = new ThirdPartyWinLossMetaModel
             {

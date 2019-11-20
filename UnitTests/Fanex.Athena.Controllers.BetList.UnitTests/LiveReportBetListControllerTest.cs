@@ -165,7 +165,7 @@
                 var betlistCaption = "Home vs Away ";
                 var expectedTitle = $"{ViewResources.BetList} - {betlistCaption} - 11/11/2018 --> 12/12/2018 - {viewInCaption}";
 
-                SetUpForExportingExcel(metaModel, controller);
+                SetUpForExportingExcel(controller);
 
                 // Action
                 await controller.Match(metaModel);
@@ -204,7 +204,7 @@
                 var betlistCaption = string.Empty;
                 var expectedTitle = $"{ViewResources.BetList} - {betlistCaption} - 11/11/2018 --> 12/12/2018 - {viewInCaption}";
 
-                SetUpForExportingExcel(metaModel, controller);
+                SetUpForExportingExcel(controller);
 
                 // Action
                 await controller.MixParlay(metaModel);
@@ -240,7 +240,7 @@
                 var betlistCaption = ViewResources.Outright;
                 var expectedTitle = $"{ViewResources.BetList} - {betlistCaption} - 11/11/2018 --> 12/12/2018 - {viewInCaption}";
 
-                SetUpForExportingExcel(metaModel, controller);
+                SetUpForExportingExcel(controller);
 
                 // Action
                 await controller.Outright(metaModel);
@@ -278,7 +278,7 @@
                 var betlistCaption = ViewResources.ProductNG;
                 var expectedTitle = $"{ViewResources.BetList} - {betlistCaption} - 11/11/2018 --> 12/12/2018 - {viewInCaption}";
 
-                SetUpForExportingExcel(metaModel, controller);
+                SetUpForExportingExcel(controller);
 
                 // Action
                 await controller.NumberGame(metaModel);
@@ -317,7 +317,7 @@
                 var viewInCaption = string.Format(ViewResources.Viewin, expectedCurrency);
                 var expectedTitle = $"{ViewResources.BetList} - {BetlistCaption} - 11/11/2018 --> 12/12/2018 - {viewInCaption}";
 
-                SetUpForExportingExcel(metaModel, controller);
+                SetUpForExportingExcel(controller);
 
                 // Action
                 await controller.VirtualSports(metaModel);
@@ -327,7 +327,7 @@
             }
         }
 
-        private void SetUpForExportingExcel(LiveReportBetListMetaModel metaModel, LiveReportBetListController controller)
+        private void SetUpForExportingExcel(LiveReportBetListController controller)
         {
             controller.When(async x => await x.ProcessExportExcel(
                 Arg.Any<BetListExcelMetaModel>(),

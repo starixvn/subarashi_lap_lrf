@@ -42,11 +42,8 @@ namespace Fanex.Athena.Controllers.Report
         private readonly ICustomerTurnoverService _customerTurnoverService;
 
         public CustomerTurnoverReportController(
-            ILanguageService languageService,
-            ISessionService sessionService,
             ISportTypeDataAccess sportTypeDataAccess,
             ICustomerTurnoverService customerTurnoverService)
-            : base(languageService, sessionService)
         {
             _sportTypeDataAccess = sportTypeDataAccess;
             _customerTurnoverService = customerTurnoverService;
@@ -55,12 +52,12 @@ namespace Fanex.Athena.Controllers.Report
         [HttpGet]
         public ActionResult Index()
         {
-            var licenseeSession = SessionService.LicenseeSession;
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
             var model = new CustomerTurnoverViewModel
             {
                 Param = new CustomerTurnoverMetaModel { LicenseeId = licenseeSession.LicenseeId },
                 IsAllowedCustomerCommission = licenseeSession.IsAllowedCustomerComm,
-                CurrencyList = SessionService.UserSession.CurrencyList,
+                CurrencyList = SessionServiceInstance.UserSession.CurrencyList,
             };
 
             return View("~/Views/Desktop/Report/CustomerTurnover/Main.cshtml", model);
@@ -72,8 +69,8 @@ namespace Fanex.Athena.Controllers.Report
         {
             var productCode = $"{Product.SB},{Product.NG},{Product.VS},{Product.VS2}";
             var data = await _sportTypeDataAccess.GetSportsAndProducts(
-                SessionService.LicenseeSession.LicenseeId,
-                SessionService.UserSession.Language,
+                SessionServiceInstance.LicenseeSession.LicenseeId,
+                SessionServiceInstance.UserSession.Language,
                 productCode)
                 .ConfigureAwait(false);
             return Json(data, JsonRequestBehavior.AllowGet);
@@ -94,8 +91,8 @@ namespace Fanex.Athena.Controllers.Report
                 return null;
             }
 
-            var licenseeSession = SessionService.LicenseeSession;
-            var userSession = SessionService.UserSession;
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
+            var userSession = SessionServiceInstance.UserSession;
             metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList
                 , metaModel.CurrencyId);
             const string FileName = "CustomerTurnover";

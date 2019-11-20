@@ -16,11 +16,7 @@
     {
         private readonly IReportAPIClient _reportAPIClient;
 
-        public PromotionPrizeReportController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IProductService productService, IReportAPIClient reportAPIClient)
-            : base(languageService, sessionService, productService)
+        public PromotionPrizeReportController(IReportAPIClient reportAPIClient)
         {
             _reportAPIClient = reportAPIClient;
         }
@@ -29,7 +25,7 @@
         [AutoBindMetaModel(BindAgent = true)]
         public async Task<ActionResult> ExportExcel(PromotionPrizeMetaModel metaModel)
         {
-            var userSession = SessionService.UserSession;
+            var userSession = SessionServiceInstance.UserSession;
             metaModel.DefaultBaseCurrency = userSession.DefaultBaseCurrency;
 
             var result = await _reportAPIClient.PostAsync("api/PromotionPrize/Export", metaModel, userSession.Language, MediaType.MsgPack).ConfigureAwait(false);

@@ -46,17 +46,6 @@ namespace Fanex.Athena.Controllers.BetList
 
         private const string BONTeamToScoreBettypes = "26,145,146,170,188,427,433";
 
-        public RunningBettypesBetListController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IProductService productService,
-            IBalanceUpDataAccess balanceUpDataAccess,
-            ICacheRefAdapter cacheRefAdapter,
-            IBetListApiClient betListApiClient, ILicenseeSettingService licenseeSettingService)
-        : base(languageService, sessionService, productService, balanceUpDataAccess,
-              cacheRefAdapter, betListApiClient, licenseeSettingService)
-        { }
-
         [HttpGet]
         [FunctionAuthorization(PermissionKeys.TotalBetMixParlay)]
         [ValidationWebRequest]
@@ -92,8 +81,8 @@ namespace Fanex.Athena.Controllers.BetList
 
         private async Task<ActionResult> ProcessRequest(BetListExcelMetaModel metaModel)
         {
-            var licenseeSession = SessionService.LicenseeSession;
-            var userSession = SessionService.UserSession;
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
+            var userSession = SessionServiceInstance.UserSession;
             var currencies = userSession.CurrencyList;
 
             CreateDefaultMetaModel(metaModel);
@@ -123,7 +112,7 @@ namespace Fanex.Athena.Controllers.BetList
 
             metaModel.ShowingOption = new BetListShowingOption
             {
-                CustomerCommVisible = SessionService.LicenseeSession.IsAllowedCustomerComm,
+                CustomerCommVisible = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm,
             };
 
             var firstBettype = metaModel.MultipleBettype.Split(',').FirstOrDefault();

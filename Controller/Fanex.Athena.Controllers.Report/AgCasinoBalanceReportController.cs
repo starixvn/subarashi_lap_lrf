@@ -23,19 +23,11 @@ namespace Fanex.Athena.Controllers.Report
     [FunctionAuthorization(PermissionKeys.ReportAGCasinoBalance)]
     public class AgCasinoBalanceReportController : ReportBaseController
     {
-        public AgCasinoBalanceReportController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IProductService productService)
-        : base(languageService, sessionService, productService)
-        {
-        }
-
         [HttpGet]
         public ActionResult Index()
         {
-            var licenseeSession = this.SessionService.LicenseeSession;
-            var userSession = SessionService.UserSession;
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
+            var userSession = SessionServiceInstance.UserSession;
             var toDate = DateTime.Now.AddDays(-2);
 
             var metaModel = new ThirdPartyWinLossMetaModel

@@ -42,7 +42,7 @@ namespace Fanex.Athena.Controllers.Customer
     using Service.Report.Interfaces;
 
     [FunctionAuthorization(PermissionKeys.CustomerInfoCustomerList)]
-    public class CustomerController : ContentBaseController
+    public class CustomerController : CultureBaseController
     {
         private const string GROUP = "Group";
         private const string BASTATUS = "BAStatus";
@@ -74,23 +74,14 @@ namespace Fanex.Athena.Controllers.Customer
         private readonly IProductService _productService;
         private readonly ISubsidiaryService _subsidiaryService;
         private readonly IAuthorizationService _authorizationService;
-
-#pragma warning disable S107 // Methods should not have too many parameters
-
         public CustomerController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IAppSettings appSetting,
             ICustomerListService customerListService,
             IGroupComService groupComService,
             ILicenseeDataAccess licenseeDataAccess,
             IProductService productService,
             ISubsidiaryService subsidiaryService,
-            IAuthorizationService authorizationService,
-            ILicenseeSettingService licenseeSettingService
+            IAuthorizationService authorizationService
             )
-#pragma warning restore S107 // Methods should not have too many parameters
-            : base(languageService, sessionService, appSetting, licenseeSettingService)
         {
             _customerListService = customerListService;
             _groupComService = groupComService;
@@ -105,10 +96,10 @@ namespace Fanex.Athena.Controllers.Customer
         [HttpGet]
         public async Task<ActionResult> CustomerList(string userName = "", int groupId = -1)
         {
-            var licensee = SessionService.LicenseeSession;
-            var userSession = SessionService.UserSession;
+            var licensee = SessionServiceInstance.LicenseeSession;
+            var userSession = SessionServiceInstance.UserSession;
             var productAccess = this._productService.GetProductAccess(licensee.LicenseeId, userSession.Language);
-            var allowLicensees = AppSettings.LicenseeOfferStatusFunction;
+            var allowLicensees = AppSettingInstance.LicenseeOfferStatusFunction;
             var placeholderUsername = IsFakeLicensee(licensee.LicenseeName) ? ViewResources.ExternalId : ViewResources.ExternalIdOrSystemId;
             var metaModel = new CustomerListMetaModel
             {
@@ -184,8 +175,8 @@ namespace Fanex.Athena.Controllers.Customer
             var metaModel = JsonConvert.DeserializeObject<CustomerListMetaModel>(excelParam);
             if (metaModel != null && metaModel.IsValid)
             {
-                var licenseeId = SessionService.LicenseeSession.LicenseeId;
-                metaModel.IsShowStatusDropdown = AppSettings.LicenseeOfferStatusFunction.Contains(licenseeId);
+                var licenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
+                metaModel.IsShowStatusDropdown = AppSettingInstance.LicenseeOfferStatusFunction.Contains(licenseeId);
                 metaModel.LicenseeId = licenseeId;
                 metaModel.AgentListXml = GetAgentListXml(metaModel.SubsidiaryList, metaModel.CurrencyId);
 
@@ -221,7 +212,7 @@ namespace Fanex.Athena.Controllers.Customer
             var metaModel = JsonConvert.DeserializeObject<CustomerListMetaModel>(excelParam);
             if (metaModel != null && metaModel.IsValid)
             {
-                metaModel.LicenseeId = SessionService.LicenseeSession.LicenseeId;
+                metaModel.LicenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
                 metaModel.AgentListXml = GetAgentListXml(metaModel.SubsidiaryList, metaModel.CurrencyId);
 
                 var templatePath = Server.MapPath(@"~/App_Data/Template/Customers/DormantCustomerList.xls");
@@ -248,8 +239,8 @@ namespace Fanex.Athena.Controllers.Customer
         [ValidatePermissionOnData]
         public ActionResult LogInfo(int custId)
         {
-            var licenseeSession = SessionService.LicenseeSession;
-            var userSession = SessionService.UserSession;
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
+            var userSession = SessionServiceInstance.UserSession;
             var logInfo = _customerListService.GetCustomerLoginInfo(custId,
                 licenseeSession.LicenseeId, licenseeSession.LicenseeName);
 
@@ -298,21 +289,21 @@ namespace Fanex.Athena.Controllers.Customer
 
         private void AssignMetaModelData(CustomerListMetaModel metaModel)
         {
-            var licensee = SessionService.LicenseeSession;
+            var licensee = SessionServiceInstance.LicenseeSession;
             var placeholderUsername = IsFakeLicensee(licensee.LicenseeName) ?
                             ViewResources.ExternalId :
                             ViewResources.ExternalIdOrSystemId;
 
             metaModel.LicenseeId = licensee.LicenseeId;
-            metaModel.IsShowStatusDropdown = AppSettings.LicenseeOfferStatusFunction.Contains(metaModel.LicenseeId);
+            metaModel.IsShowStatusDropdown = AppSettingInstance.LicenseeOfferStatusFunction.Contains(metaModel.LicenseeId);
             metaModel.Username = metaModel.Username == placeholderUsername ? string.Empty : metaModel.Username;
             metaModel.AgentListXml = GetAgentListXml(metaModel.SubsidiaryList, metaModel.CurrencyId);
         }
 
         private async Task<CustomerListViewModel> CreateCustomerViewModelAsync(CustomerListMetaModel metaModel)
         {
-            var licenseeSession = SessionService.LicenseeSession;
-            var userSession = SessionService.UserSession;
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
+            var userSession = SessionServiceInstance.UserSession;
             var isSubsidiary = userSession.UserLevel == UserLevelType.Subsidiary;
             var subsidiaryNames = userSession.IsManageableSubsidiary ? _subsidiaryService.GetSubsidiaryNames() : new string[] { };
 
@@ -362,8 +353,8 @@ namespace Fanex.Athena.Controllers.Customer
         /// <param name="model">The view model.</param>
         private void SetValueForBaStatus(CustomerListViewModel model)
         {
-            var licenseeSession = SessionService.LicenseeSession;
-            var userSession = SessionService.UserSession;
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
+            var userSession = SessionServiceInstance.UserSession;
             var specialBaPermission = _authorizationService.IsAllowedSpecialBA(userSession);
             var productAccess = _productService.GetProductAccess(licenseeSession.LicenseeId, userSession.Language);
             var request = new Request
@@ -389,8 +380,8 @@ namespace Fanex.Athena.Controllers.Customer
 
         private IEnumerable<CheckedItem> InitGridColumns(bool isAllowBA, IEnumerable<int> allowLicensees)
         {
-            var licenseeSession = SessionService.LicenseeSession;
-            var isSubsidiary = SessionService.UserSession.UserLevel == UserLevelType.Subsidiary;
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
+            var isSubsidiary = SessionServiceInstance.UserSession.UserLevel == UserLevelType.Subsidiary;
             var isFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeName);
             var gridColumns = isFakeLicensee ? GridColumnsForFakeLincesee : GridColumns;
             var items = new List<CheckedItem>();
@@ -422,7 +413,7 @@ namespace Fanex.Athena.Controllers.Customer
 
         private string GetAgentListXml(string subsidiaryList, int currencyId)
         {
-            var userSession = SessionService.UserSession;
+            var userSession = SessionServiceInstance.UserSession;
             if (userSession.IsManageableSubsidiary)
             {
                 var currencyAgentList = _subsidiaryService.GetCurrencyAgentList(subsidiaryList, currencyId: currencyId);

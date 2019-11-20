@@ -23,19 +23,17 @@
         private readonly IRngKenoBetLimitService _service;
 
         public RngKenoBetLimitController(
-            ILanguageService languageService,
-            ISessionService sessionService,
             ICacheRefAdapter cacheRefAdapter,
             IAuthorizationService authorizationService,
             IRngKenoBetLimitService rngKenoBetLimitService)
-            : base(languageService, sessionService, cacheRefAdapter, authorizationService)
+            : base(cacheRefAdapter, authorizationService)
         {
             _service = rngKenoBetLimitService;
         }
 
         [HttpPost]
         [AjaxRequest]
-        [ValidatePermissionOnData(isObject:true)]
+        [ValidatePermissionOnData(isObject: true)]
         public async Task<JsonResult> GetSetting(PlayerBetLimitSelectMetaModel metaModel)
         {
             var isEditable = HasEditPermission();
@@ -54,7 +52,7 @@
         [AjaxRequest]
         [ValidationWebRequest(HandlingAjaxRequestWithJsonResult = true)]
         [AutoBindMetaModel(BindIp = true, BindLanguage = true, BindSiteName = true, BindUserId = true)]
-        [ValidatePermissionOnData(isObject:true)]
+        [ValidatePermissionOnData(isObject: true)]
         [FunctionAuthorization(PermissionKeys.PlayerAdminBetLimit_Write)]
         public async Task<JsonResult> UpdateSetting(PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>> metaModel)
         {

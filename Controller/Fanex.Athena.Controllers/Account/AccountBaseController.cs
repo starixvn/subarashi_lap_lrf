@@ -26,24 +26,6 @@ namespace Fanex.Athena.Controllers.Account
     [AuthorizeRestriction(AppMode.Self)]
     public class AccountBaseController : CultureBaseController
     {
-        public AccountBaseController(
-       ILanguageService languageService,
-       ISessionService sessionService,
-            IAppSettings appSettings
-       )
-   : base(languageService, sessionService, appSettings, null)
-        {
-        }
-
-        public AccountBaseController(
-            ILanguageService languageService,
-            ISessionService sessionService
-
-            )
-        : base(languageService, sessionService)
-        {
-        }
-
         protected JsonResult JsonErrorResult(string message)
         {
             return Json(new ResultInfo
@@ -55,8 +37,7 @@ namespace Fanex.Athena.Controllers.Account
 
         protected int GetUserId()
         {
-            var userId = 0;
-            int.TryParse(Request.Params["UserId"], out userId);
+            int.TryParse(Request.Params["UserId"], out int userId);
             return userId;
         }
     }

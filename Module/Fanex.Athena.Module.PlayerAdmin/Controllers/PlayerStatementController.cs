@@ -27,10 +27,7 @@
         private const int MaximumYear = 2;
 
         public PlayerStatementController(
-            ILanguageService languageService,
-            ISessionService sessionService,
             IPlayerStatementService playerStatementService)
-        : base(languageService, sessionService)
         {
             _playerStatementService = playerStatementService;
         }
@@ -60,8 +57,8 @@
         [OutputCache(NoStore = true, Duration = 0, Location = OutputCacheLocation.None, VaryByParam = "*")]
         public async Task<ActionResult> GetStatementUrl(PlayerStatementMetaModel metaModel)
         {
-            metaModel.SiteName = SessionService.LicenseeSession.LicenseeName;
-            metaModel.Language = SessionService.UserSession.Language;
+            metaModel.SiteName = SessionServiceInstance.LicenseeSession.LicenseeName;
+            metaModel.Language = SessionServiceInstance.UserSession.Language;
             return Content(await _playerStatementService.GetUrl(metaModel).ConfigureAwait(false));
         }
 
