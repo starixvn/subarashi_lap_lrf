@@ -2558,4 +2558,8 @@
     <value>Promotion</value>
     <comment>120333</comment>
   </data>
+  <data name="WhiteLabel" xml:space="preserve">
+    <value>Whitelabel</value>
+    <comment>123651</comment>
+  </data>
 </root>

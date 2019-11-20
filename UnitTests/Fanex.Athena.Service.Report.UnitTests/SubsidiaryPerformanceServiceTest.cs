@@ -129,7 +129,7 @@
 
             var resultData = GetFakeEntityDataList();
 
-            var expectedData = new List<SubsidiaryPerformanceDataModel>();
+            var expectedData = new List<SubsidiaryPerformanceSummary>();
             var expectedResult = ObjectHelper.ToJson(expectedData);
 
             _dataAccess.GetData(metaModel, _currencyList).Returns(resultData);
@@ -265,7 +265,7 @@
             };
         }
 
-        private static IEnumerable<SubsidiaryPerformanceDataModel> GetExpectedDataModelList()
+        private static IEnumerable<SubsidiaryPerformanceSummary> GetExpectedDataModelList()
         {
             var dataDetail1 = new List<SubsidiaryPerformanceBase>
             {
@@ -288,13 +288,13 @@
                 new SubsidiaryPerformanceBase { Product = "Sportsbook", BetCount = 50, Turnover = 100m, CustomerWinLoss = 100m, SubsidiaryWinLoss = -100m }
             };
 
-            return new List<SubsidiaryPerformanceDataModel>
+            return new List<SubsidiaryPerformanceSummary>
             {
-                new SubsidiaryPerformanceDataModel
+                new SubsidiaryPerformanceSummary
                 {
                     Subsidiary = "New York", TotalItem = 4, Details = new Dictionary<string, IEnumerable<SubsidiaryPerformanceBase>> { { "USD", dataDetail1 } }
                 },
-                new SubsidiaryPerformanceDataModel
+                new SubsidiaryPerformanceSummary
                 {
                     Subsidiary = "India", TotalItem = 5, Details = new Dictionary<string, IEnumerable<SubsidiaryPerformanceBase>> { { "USD", dataDetail2 }, { "EUR", dataDetail3 } }
                 }

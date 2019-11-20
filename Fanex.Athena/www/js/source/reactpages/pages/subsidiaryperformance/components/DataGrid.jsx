@@ -9,6 +9,7 @@ import NoDataTitle from '../../../components/NoDataTitle'
 import { Service, HeaderText, TotalText, Api } from '../lib/service'
 import Report from '../../../lib/report'
 import { ReportLevel } from '../../../constants/report'
+import AppData from '@jsroot/lib/AppData'
 
 export class DataGrid extends Component {
     constructor(props) {
@@ -31,7 +32,7 @@ export class DataGrid extends Component {
         this.props.toggleLoader(true);
         Report.fetchGridData(url, { xsrfToken: this.props.xsrfToken, data: params })
             .then(response => {
-                this.setState({ gridData: response.data })
+                this.setState({ gridData: response.data });
                 this.props.toggleLoader(false);
             })
             .catch(error => {
@@ -41,11 +42,7 @@ export class DataGrid extends Component {
     }
 
     _drillDown(subsidiary) {
-        let params = Object.assign({}, this.props.params);
-
-        this.subsidiaryListMainLevel = params.SubsidiaryList;
-        params.SubsidiaryId = subsidiary;
-        params.Level = ReportLevel.CUSTOMER;
+        let params = Object.assign({}, this.props.params, { SubsidiaryId: subsidiary, Level: ReportLevel.CUSTOMER });
 
         this.level = ReportLevel.CUSTOMER;
 
@@ -58,15 +55,16 @@ export class DataGrid extends Component {
 
         return (
             <HeaderRow style={{ height: 32 }}>
-                { customerLevel && <HeaderCell colWidth={30} title={HeaderText.Index}>{HeaderText.Index}</HeaderCell> }
-                <HeaderCell colWidth={150} title={customerLevel ? HeaderText.ExternalId : HeaderText.Subsidiary}>{customerLevel ? HeaderText.ExternalId : HeaderText.Subsidiary}</HeaderCell>
-                { customerLevel && <HeaderCell colWidth={150} title={HeaderText.SystemId}>{HeaderText.SystemId}</HeaderCell> }
-                <HeaderCell colWidth={150} title={HeaderText.CurrencyName}>{HeaderText.CurrencyName}</HeaderCell>
-                { !customerLevel && <HeaderCell colWidth={200} title={HeaderText.Product}>{HeaderText.Product}</HeaderCell> }
-                <HeaderCell colWidth={150} title={HeaderText.BetCount}>{HeaderText.BetCount}</HeaderCell>
-                <HeaderCell colWidth={200} title={HeaderText.Turnover}>{HeaderText.Turnover}</HeaderCell>
-                <HeaderCell colWidth={200} title={HeaderText.CustomerWinLoss}>{HeaderText.CustomerWinLoss}</HeaderCell>
-                <HeaderCell colWidth={200} title={HeaderText.SubsidiaryWinLoss}>{HeaderText.SubsidiaryWinLoss}</HeaderCell>
+                { !customerLevel && AppData.isSubsidiaryMasterView && <HeaderCell colWidth={150}>{HeaderText.WhiteLabel}</HeaderCell> }
+                { customerLevel && <HeaderCell colWidth={30}>{HeaderText.Index}</HeaderCell> }
+                <HeaderCell colWidth={150}>{customerLevel ? HeaderText.ExternalId : HeaderText.Subsidiary}</HeaderCell>
+                { customerLevel && <HeaderCell colWidth={150}>{HeaderText.SystemId}</HeaderCell> }
+                <HeaderCell colWidth={150}>{HeaderText.CurrencyName}</HeaderCell>
+                { !customerLevel && <HeaderCell colWidth={200}>{HeaderText.Product}</HeaderCell> }
+                <HeaderCell colWidth={150}>{HeaderText.BetCount}</HeaderCell>
+                <HeaderCell colWidth={200}>{HeaderText.Turnover}</HeaderCell>
+                <HeaderCell colWidth={200}>{HeaderText.CustomerWinLoss}</HeaderCell>
+                <HeaderCell colWidth={200}>{HeaderText.SubsidiaryWinLoss}</HeaderCell>
             </HeaderRow>
         )
     }
@@ -76,35 +74,46 @@ export class DataGrid extends Component {
 
         let rows = [];
         let key = 0;
-        for (let sub = 0; sub < data.length; sub++) {
-            const item = data[sub];
-            const totalItem = item.TotalItem;
-            const currencies = Object.keys(item.Details);
 
-            for (let cur = 0; cur < currencies.length; cur++) {
-                const currency = currencies[cur];
-                const products = item.Details[currency];
-                const rowSpan = products.length;
+        for (let label = 0; label < data.length; label++) {
+            const subData = data[label];
 
-                for (let pro = 0; pro < rowSpan; pro++) {
-                    const product = products[pro];
+            for (let sub = 0; sub < subData.Details.length; sub++) {
+                const item = subData.Details[sub];
+                const currencies = Object.keys(item.Details);
 
-                    rows.push(
-                        <Row key={key}>
-                            { 
-                              cur === 0 
-                              && pro === 0 
-                              && <Cell title={item.Subsidiary} rowSpan={totalItem}><a href="javascript:;" onClick={() => this._drillDown(item.Subsidiary)}>{item.Subsidiary}</a></Cell> 
-                            }
-                            { pro === 0 && <Cell title={currency} rowSpan={rowSpan} className="center-align">{currency}</Cell> }
-                            <Cell title={product.Product}>{product.Product}</Cell>
-                            { this._buildCommonCells(product, key) }
-                        </Row>
-                    );
+                for (let cur = 0; cur < currencies.length; cur++) {
+                    const currency = currencies[cur];
+                    const products = item.Details[currency];
+                    const rowSpan = products.length;
 
-                    key++;
+                    for (let pro = 0; pro < rowSpan; pro++) {
+                        const product = products[pro];
+
+                        rows.push(
+                            <Row key={key}>
+                                {
+                                    AppData.isSubsidiaryMasterView
+                                    && cur === 0
+                                    && pro === 0
+                                    && sub === 0
+                                    && <Cell title={subData.WhiteLabel} rowSpan={subData.TotalItem}>{subData.WhiteLabel}</Cell>
+                                }
+                                {
+                                    cur === 0
+                                    && pro === 0
+                                    && <Cell title={item.Subsidiary} rowSpan={item.TotalItem}><a href="javascript:;" onClick={() => this._drillDown(item.Subsidiary)}>{item.Subsidiary}</a></Cell>
+                                }
+                                {pro === 0 && <Cell title={currency} rowSpan={rowSpan} className="center-align">{currency}</Cell>}
+                                <Cell title={product.Product}>{product.Product}</Cell>
+                                {this._buildCommonCells(product, key)}
+                            </Row>
+                        );
+
+                        key++;
+                    }
                 }
-            }     
+            }
         }
 
         return rows;
@@ -137,6 +146,7 @@ export class DataGrid extends Component {
     _buildMainFooter() {
         const totalData = this.state.gridData.Total;
         const subs = Object.keys(totalData);
+        const colSpan = AppData.isSubsidiaryMasterView ? 2 : 1;
         
         let footer = [];
         for (let i = 0; i < subs.length; i++) {
@@ -145,7 +155,7 @@ export class DataGrid extends Component {
 
             footer.push(
                 <Row className="fixed-table-total" key={`total${i}`}>
-                    <Cell title={`${TotalText.Total} ${totalName}`}>{`${TotalText.Total} ${totalName}`}</Cell>
+                    <Cell colSpan={colSpan} title={`${TotalText.Total} ${totalName}`}>{`${TotalText.Total} ${totalName}`}</Cell>
                     <Cell title={`${TotalText.Based} ${item.CurrencyName}`} className="center-align" colSpan='2'>{`${TotalText.Based} ${item.CurrencyName}`}</Cell>
                     { this._buildCommonCells(item, `total${i}`) }
                 </Row>
@@ -163,9 +173,11 @@ export class DataGrid extends Component {
             return null;
         }
 
+        const colSpan = AppData.isSubsidiaryMasterView ? 2 : 1;
+
         return (
             <Row key="grandTotal" className="fixed-table-grant-total">
-                <Cell title={TotalText.Total}>{TotalText.Total}</Cell>
+                <Cell colSpan={colSpan} title={TotalText.Total}>{TotalText.Total}</Cell>
                 <Cell title={`${TotalText.Based} ${grandTotal.CurrencyName}`} className="center-align" colSpan='2'>{`${TotalText.Based} ${grandTotal.CurrencyName}`}</Cell>
                 { this._buildCommonCells(grandTotal, 'grandTotal') }
             </Row>

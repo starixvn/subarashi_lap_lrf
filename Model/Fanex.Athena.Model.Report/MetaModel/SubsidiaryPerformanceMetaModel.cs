@@ -1,10 +1,8 @@
 ﻿namespace Fanex.Athena.Model.Report.MetaModel
 {
-    using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.Helper;
     using Fanex.Athena.Model.Core.MetaModel;
     using System;
-    using System.Linq;
 
     public class SubsidiaryPerformanceMetaModel: IMetaModelValidation, IMetaModelProductCodeList
     {
@@ -17,6 +15,8 @@
         public string ProductCodeList { get; set; }
 
         public string SubsidiaryList { get; set; } = string.Empty;
+
+        public string WhiteLabelList { get; set; } = string.Empty;
 
         public string SubsidiaryId { get; set; }
 

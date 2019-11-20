@@ -140,8 +140,9 @@
     <Compile Include="DTO\ColossusBetWinLoss.cs" />
     <Compile Include="DTO\LicenseeWinLossByTimeZone.cs" />
     <Compile Include="DTO\Result\KenoExtendedToken.cs" />
+    <Compile Include="DTO\SubsidiaryPerformance\SubsidiaryPerformanceGroup.cs" />
+    <Compile Include="DTO\SubsidiaryPerformance\SubsidiaryPerformanceSummary.cs" />
     <Compile Include="DTO\SubsidiaryPerformance\SubsidiaryPerformanceDetail.cs" />
-    <Compile Include="DTO\SubsidiaryPerformance\SubsidiaryPerformanceDataModel.cs" />
     <Compile Include="DTO\SubsidiaryPerformance\SubsidiaryPerformance.cs" />
     <Compile Include="DTO\SubsidiaryPerformance\SubsidiaryPerformanceBase.cs" />
     <Compile Include="DTO\SubsidiaryPerformance\SubsidiaryResultViewModel.cs" />

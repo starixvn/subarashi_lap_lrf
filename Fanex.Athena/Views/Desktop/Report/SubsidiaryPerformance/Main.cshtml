@@ -11,8 +11,12 @@
     var baseCurrencyList = SystemConstants.BaseCurrencyList.Select(c => new { value = c.Value, label = c.Value }).ToList();
 
     var selectedSubsidiary = Model.IsSubsidiaryMasterView
-        ? string.Join(",", Model.GroupSubsidiaryList.SelectMany(x => x.Value).Distinct())
+        ? string.Join(",", Model.GroupSubsidiaryList.SelectMany(x => x.Children.Select(y => y.Value)).Distinct())
         : string.Join(",", Model.GroupSubsidiaryList.Select(x => x.Value));
+
+    var selectedWhiteLable = Model.IsSubsidiaryMasterView
+        ? string.Join(",", Model.GroupSubsidiaryList.Select(x => x.Value))
+        : string.Empty;
 
     var appSettings = new AppSettings();
     var minDate = appSettings.HistoryDate;
@@ -33,6 +37,7 @@
         selectedProduct: '@(selectedProductCode)',
         selectedBaseCurrency: '@ViewBag.DefaultSelectedBaseCurrency',
         selectedSubsidiary: '@(selectedSubsidiary)',
+        selectedWhiteLabel: '@(selectedWhiteLable)',
         convertAll: false,
         dateRange: {fromDate: '@Model.FromDate.ToString("MM/dd/yyyy")', toDate: '@Model.ToDate.ToString("MM/dd/yyyy")'},
         isLoading: false,

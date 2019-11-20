@@ -77,6 +77,7 @@ export class FormFilter extends Component {
         return {
             BaseCurrency: this.props.selectedBaseCurrency,
             SubsidiaryList: this.props.selectedSubsidiary,
+            WhiteLabelList: this.props.selectedWhiteLabel,
             ProductCodeList: this.props.selectedProduct,
             ConvertAll: this.props.convertAll,
             FromDate: Site.convertDateToString(fromDate),
@@ -93,6 +94,18 @@ export class FormFilter extends Component {
     }
 
     subsidiaryChangeHandler = (currentItem, selectedItemsKey, treeViewList) => {
+        if (AppData.isSubsidiaryMasterView) {           
+            let selectedParentItems = [];
+            for (let i = 0; i < treeViewList.length; i++) {
+                const item = treeViewList[i];
+                if (item.checked && item.level === 0 && selectedParentItems.indexOf(item.paramsKey) < 0) {
+                    selectedParentItems.push(item.paramsKey);
+                }
+            }
+
+            this.props.setSelectedWhiteLabel(selectedParentItems.join(','));
+        }
+
         this.props.setSelectedSubsidiary(selectedItemsKey);
     }
 

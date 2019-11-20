@@ -114,7 +114,7 @@
         public IEnumerable<GroupSubsidiary> GetGroupSubsidiaryList(UserAuthInfo user, string licenseeName, string subsidiaryList, string whiteLabelList)
         {
             var selectedSubsidiaries = subsidiaryList.Split(',');
-            var selectedWhiteLabels = whiteLabelList.Split(',').Select(x => x == OtherWhiteaLableId ? int.Parse(x) : (int?)null);
+            var selectedWhiteLabels = whiteLabelList.Split(',').Select(x => x == OtherWhiteaLableId ? (int?)null : int.Parse(x));
 
             var allGroups = GetAllGroupSubsidiaries(licenseeName, user.WhiteLabelID);
 
