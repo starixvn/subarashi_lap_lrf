@@ -7,8 +7,7 @@ define(['jquery',
     './customerlist.state',
     'lib/jqgrid/jquery.jqGrid.en',
     'lib/jqgrid/jquery.jqGrid.min',
-    'extensions/jquery.extension',
-    'lib/linq'],
+    'extensions/jquery.extension'],
 function ($, Site, CustomerListOption, jqGridAdditional, PagingHelper, CustomerListState) {
     const _POPUP_LIST = ['#ViewOptionList', '#update-cust-status-popup', '#LevelListContainer', '#OddsGroupListContainer'];
     const _OTHER_SUBSIDIARY_KEY = '(others)';
@@ -300,7 +299,7 @@ function ($, Site, CustomerListOption, jqGridAdditional, PagingHelper, CustomerL
             $(popUpSelector).fadeOut();
         },
 
-        getSubsidiaryTree: function (data, isMaster) {
+        getSubsidiaryTree: function (data) {
             let tree = [];
 
             const total = data.length;
@@ -308,50 +307,38 @@ function ($, Site, CustomerListOption, jqGridAdditional, PagingHelper, CustomerL
                 return tree;
             }
 
-            const others = Site.getSingleResource('Others');
-
-            if (isMaster) {
-                return Enumerable.From(data)
-                    .GroupBy(
-                        function (key) { return { Value: key.WhiteLabelID, Text: key.WhiteLabelName }; },
-                        function (item) {
-                            return {
-                                Value: item.OperatorId,
-                                Text: item.OperatorId,
-                                Checked: true,
-                                Enable: true,
-                            }
-                        },
-                        function (key, group) {
-                            return {
-                                Value: key.Value,
-                                Text: key.Value !== null ? key.Text : others,
-                                Checked: true,
-                                Enable: true,
-                                Items: group.source
-                            }
-                        },
-                        function (compare) { return compare.Value; })
-                    .ToArray();
+            const createItem = function (item) {
+                return {
+                    Value: item.Value,
+                    Text: item.Name,
+                    Checked: true,
+                    Enable: true,
+                }
             }
 
-            return Enumerable.From(data)
-                .Distinct(function (x) { return x.OperatorId; })
-                .Select(function (item) {
-                    return {
-                        Value: item.OperatorId,
-                        Text: item.OperatorId,
-                        Checked: true,
-                        Enable: true
-                    };
-                })
-                .Union([{
-                    Value: _OTHER_SUBSIDIARY_KEY,
-                    Text: others,
-                    Checked: true,
-                    Enable: true
-                }])
-                .ToArray();
+            const getSubTree = function (subData) {
+                let subTree = createItem(subData);
+
+                if (subData.Children) {
+                    const totalChild = subData.Children.length;
+
+                    let items = [];
+
+                    for (let c = 0; c < totalChild; c++) {
+                        items.push(getSubTree(subData.Children[c]));
+                    }
+
+                    subTree.Items = items;
+                }
+
+                return subTree;
+            }
+
+            for (let i = 0; i < total; i++) {
+                tree.push(getSubTree(data[i]));
+            }
+
+            return tree;
         }
     };
 

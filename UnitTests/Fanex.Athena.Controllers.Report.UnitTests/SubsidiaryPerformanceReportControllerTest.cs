@@ -41,8 +41,8 @@
                 _productService.GetSingleWalletProductAccess(DefaultLicenseeSession.LicenseeId, DefaultUserSession.Language, FunctionNames.SubsidiaryPerformance)
                     .Returns(new ProductAccess(new List<Product> { product }));
 
-                var groupSubsidiaryList = new List<GroupSubsidiary>();
-                _subsidiaryService.GetGroupSubsidiaries(DefaultLicenseeSession.LicenseeName, DefaultUserSession.WhiteLabelID).Returns(groupSubsidiaryList);
+                var subsidiaryTree = new List<CheckedItem>();
+                _subsidiaryService.GetSubsidiaryTree(DefaultUserSession, DefaultLicenseeSession.LicenseeName, false).Returns(subsidiaryTree);
 
                 var expectedViewName = "~/Views/Desktop/Report/SubsidiaryPerformance/Main.cshtml";
 
@@ -54,8 +54,7 @@
                 Assert.Multiple(() =>
                 {
                     Assert.That(viewResult.ViewName, Is.EqualTo(expectedViewName));
-                    Assert.That(viewModel.ViewType, Is.EqualTo((SubsidiaryViewType)DefaultUserSession.SubsidiaryViewType));
-                    Assert.That(viewModel.GroupSubsidiaryList, Is.EqualTo(groupSubsidiaryList));
+                    Assert.That(viewModel.GroupSubsidiaryList, Is.EqualTo(subsidiaryTree));
                     Assert.That(viewModel.ProductOptionList.First().Code, Is.EqualTo(product.ProductCode));
                     Assert.That(viewModel.ProductOptionList.First().Name, Is.EqualTo(product.ProductName));
                     Assert.That(viewModel.ProductOptionList.First().Status, Is.True);

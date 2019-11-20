@@ -148,8 +148,7 @@ define(['jquery', 'common/site', './customerlist.state', './customerlist.service
                     return;
                 }
 
-                const isMaster = $('#IsMasterSubsidiaryView').val() === '1';
-                const groupData = CustomerListService.getSubsidiaryTree($.parseJSON(data), isMaster);
+                const groupData = CustomerListService.getSubsidiaryTree($.parseJSON(data));
 
                 $('#subsidiary-multiselect').multiSelect(
                 {

@@ -257,8 +257,8 @@
                 var user = new UserAuthInfo { SubsidiaryViewType = (int)SubsidiaryViewType.MasterManagement, WhiteLabelID = FakeHelper.Create<int?>() };
                 StubUserSessionData(user);
 
-                var expected = FakeHelper.CreateMany<GroupSubsidiary>();
-                _subsidiaryService.GetGroupSubsidiaries(DefaultLicenseeSession.LicenseeName, user.WhiteLabelID).Returns(expected);
+                var expected = FakeHelper.CreateMany<CheckedItem>();
+                _subsidiaryService.GetSubsidiaryTree(user, DefaultLicenseeSession.LicenseeName, true).Returns(expected);
 
                 _productService.GetProductAccess(Arg.Any<int>(), Arg.Any<string>()).Returns(new ProductAccess(new List<Product>()));
 

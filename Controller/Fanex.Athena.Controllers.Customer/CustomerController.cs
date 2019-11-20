@@ -322,9 +322,7 @@ namespace Fanex.Athena.Controllers.Customer
                 IsAllowedUserChangeBA = _authorizationService.IsAllowedSpecialBA(userSession),
                 IsAllowedCustomerCommission = licenseeSession.IsAllowedCustomerComm,
                 IsFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeName),
-                GroupSubsidiaryList = userSession.SubsidiaryViewType == (int)SubsidiaryViewType.NotManagement
-                    ? Enumerable.Empty<GroupSubsidiary>()
-                    : _subsidiaryService.GetGroupSubsidiaries(licenseeSession.LicenseeName, userSession.WhiteLabelID),
+                GroupSubsidiaryList = _subsidiaryService.GetSubsidiaryTree(userSession, licenseeSession.LicenseeName, true),
                 ViewType = (SubsidiaryViewType)userSession.SubsidiaryViewType,
                 IsSubsidiary = isSubsidiary
             };

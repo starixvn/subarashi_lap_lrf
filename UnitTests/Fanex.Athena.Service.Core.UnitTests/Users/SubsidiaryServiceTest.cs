@@ -61,14 +61,14 @@
 
         [TestCase(1)]
         [TestCase(null)]
-        public void GetGroupSubsidiaries_DataIsInCache_DoNotCallDataAccess(int? whitelabelId)
+        public void GetAllGroupSubsidiaries_DataIsInCache_DoNotCallDataAccess(int? whitelabelId)
         {
             // Arrange
             var cacheKey = string.Format(CacheKey.MemorycacheGroupSubsidiaryListByLicensee, LicenseeName);
             _cache.Get(cacheKey, Arg.Any<Func<IEnumerable<GroupSubsidiary>>>(), Arg.Any<int>())
               .Returns(FakeGroupSubsidiaryData());
             // Action
-            _service.GetGroupSubsidiaries(LicenseeName, whitelabelId);
+            _service.GetAllGroupSubsidiaries(LicenseeName, whitelabelId);
 
             // Assert
             _dataAccess.DidNotReceiveWithAnyArgs().GetGroupSubsidiaries(LicenseeName);
@@ -77,7 +77,7 @@
         [TestCase(201)]
         [TestCase(null)]
         [TestCase(1)]
-        public void GetGroupSubsidiaries_WhenCall_SetDataToCacheAndFilterByWhiteLabelID(int? whitelabelId)
+        public void GetAllGroupSubsidiaries_WhenCall_SetDataToCacheAndFilterByWhiteLabelID(int? whitelabelId)
         {
             // Arrange
             var cacheKey = string.Format(CacheKey.MemorycacheGroupSubsidiaryListByLicensee, LicenseeName);
@@ -87,7 +87,7 @@
             _cache = new CustomMemoryCacheService(customCache);
             _service = new SubsidiaryService(_dataAccess, _cache);
             // Action
-            var result = _service.GetGroupSubsidiaries(LicenseeName, whitelabelId);
+            var result = _service.GetAllGroupSubsidiaries(LicenseeName, whitelabelId);
 
             // Assert
             Assert.True(_cache.Contains(cacheKey));

@@ -4,8 +4,6 @@
     using System.Collections.Generic;
     using Core.DTO.Common;
     using Core.MetaModel.Product;
-    using Fanex.Athena.Model.Core.DataDomain;
-    using Fanex.Athena.Model.Core.DTO.Users;
 
     public class SubsidiaryPerformanceViewModel
     {
@@ -15,7 +13,7 @@
             ToDate = DateTime.Today;
         }
 
-        public IEnumerable<GroupSubsidiary> GroupSubsidiaryList { get; set; }
+        public IEnumerable<CheckedItem> GroupSubsidiaryList { get; set; }
 
         public DateTime FromDate { get; set; }
 
@@ -25,6 +23,6 @@
 
         public bool ConvertAll { get; set; }
 
-        public SubsidiaryViewType ViewType { get; set; }
+        public bool IsSubsidiaryMasterView { get; set; }
     }
 }

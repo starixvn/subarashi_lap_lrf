@@ -172,6 +172,5 @@
 }
 @if (showOption.showSubsidiary)
 {
-    @Html.Hidden("IsMasterSubsidiaryView", Model.ViewType == SubsidiaryViewType.MasterManagement ? 1 : 0)
     @Html.Hidden("SubsidiaryList", Model.GroupSubsidiaryList.ToJson())
 }

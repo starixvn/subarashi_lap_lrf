@@ -89,11 +89,11 @@ export class FormFilter extends Component {
     }
 
     productChangeHandler = (currentItem, selectedItemsKey) => {
-        this.props.setSelectedProduct(selectedItemsKey)
+        this.props.setSelectedProduct(selectedItemsKey);
     }
 
-    subsidiaryChangeHandler = (currentItem, selectedItemsKey) => {
-        this.props.setSelectedSubsidiary(selectedItemsKey)
+    subsidiaryChangeHandler = (currentItem, selectedItemsKey, treeViewList) => {
+        this.props.setSelectedSubsidiary(selectedItemsKey);
     }
 
     applyDateRangeHandler = (date, isValidMonthRange = true) => {
@@ -109,12 +109,12 @@ export class FormFilter extends Component {
     _renderSubsidiarySelectList() {
         const subsidiaryList = AppData.subsidiaryList;
         const treeViewOption = {
-            childrenField: 'subList',
-            keyField: 'key',
-            valueField: 'value',
-            statusField: 'checked',
+            childrenField: 'Children',
+            keyField: 'Value',
+            valueField: 'Name',
+            statusField: 'Checked',
             indent: 30,
-            includeSelectedParentKey: true,
+            includeSelectedParentKey: false,
             useOriginalDataSource: false
         }
 
@@ -123,9 +123,9 @@ export class FormFilter extends Component {
                 language={LangHelper.currentLanguage}
                 id="SubsidiaryTreeView"
                 dataSource={subsidiaryList}
-                keyField="key"
-                valueField="value"
-                statusField="checked"
+                keyField="Value"
+                valueField="Name"
+                statusField="Checked"
                 texts={{ SelectOptions: "Please select", All: "All", SelectedItemCount: "# selected" }}
                 isAllTextShown={false}
                 hasSearchBox={true}
