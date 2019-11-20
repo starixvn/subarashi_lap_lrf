@@ -40,6 +40,7 @@ export class FormFilter extends Component {
         event.preventDefault();
 
         const isCustomerLevel = this.props.params.Level == ReportLevel.CUSTOMER
+        const isMaster = AppData.isSubsidiaryMasterView;
         const params = isCustomerLevel ? this.props.params : this._getParams();
         if (!params) {
             return;
@@ -56,7 +57,7 @@ export class FormFilter extends Component {
                 }
 
                 const title = Service.getReportTitle(params.FromDate, params.ToDate, params.BaseCurrency);
-                const excel = new ReportExcel(response.data, title, isCustomerLevel, params.BaseCurrency);
+                const excel = new ReportExcel(response.data, title, isMaster, isCustomerLevel, params.BaseCurrency);
                 excel.export(() => {
                     this.props.toggleLoader(false);
                 });
