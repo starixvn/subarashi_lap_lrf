@@ -6640,8 +6640,15 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
 
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js?fe57"), __webpack_require__(/*! common/site */ "./www/js/source/common/site.js"), __webpack_require__(/*! ./customerlist.gridoption */ "./www/js/source/pages/customer/customerlist/customerlist.gridoption.js"), __webpack_require__(/*! lib/jqgrid/jquery.jqgrid.additional */ "./www/js/source/lib/jqgrid/jquery.jqgrid.additional.js"), __webpack_require__(/*! components/paging */ "./www/js/source/components/paging.js"), __webpack_require__(/*! ./customerlist.state */ "./www/js/source/pages/customer/customerlist/customerlist.state.js"),
-    __webpack_require__(/*! lib/jqgrid/jquery.jqGrid.en */ "./www/js/source/lib/jqgrid/jquery.jqGrid.en.js"), __webpack_require__(/*! lib/jqgrid/jquery.jqGrid.min */ "./www/js/source/lib/jqgrid/jquery.jqGrid.min.js"), __webpack_require__(/*! extensions/jquery.extension */ "./www/js/source/extensions/jquery.extension.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, Site, CustomerListOption, jqGridAdditional, PagingHelper, CustomerListState) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js?fe57"),
+    __webpack_require__(/*! common/site */ "./www/js/source/common/site.js"),
+    __webpack_require__(/*! ./customerlist.gridoption */ "./www/js/source/pages/customer/customerlist/customerlist.gridoption.js"),
+    __webpack_require__(/*! lib/jqgrid/jquery.jqgrid.additional */ "./www/js/source/lib/jqgrid/jquery.jqgrid.additional.js"),
+    __webpack_require__(/*! components/paging */ "./www/js/source/components/paging.js"),
+    __webpack_require__(/*! ./customerlist.state */ "./www/js/source/pages/customer/customerlist/customerlist.state.js"),
+    __webpack_require__(/*! lib/jqgrid/jquery.jqGrid.en */ "./www/js/source/lib/jqgrid/jquery.jqGrid.en.js"),
+    __webpack_require__(/*! lib/jqgrid/jquery.jqGrid.min */ "./www/js/source/lib/jqgrid/jquery.jqGrid.min.js"),
+    __webpack_require__(/*! extensions/jquery.extension */ "./www/js/source/extensions/jquery.extension.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, Site, CustomerListOption, jqGridAdditional, PagingHelper, CustomerListState) {
     const _POPUP_LIST = ['#ViewOptionList', '#update-cust-status-popup', '#LevelListContainer', '#OddsGroupListContainer'];
     const _OTHER_SUBSIDIARY_KEY = '(others)';
     let _isAllowedCustomerCommission, _isAllowedUserEditComm;
@@ -6940,50 +6947,35 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                 return tree;
             }
 
-            
-            if (data.length === 1 && data[0].WhiteLabelID === null) {
-                const items = data[0].OperatorIds
-                const totalItems = items.length;
+            const createItem = function (item) {
+                return {
+                    Value: item.Value,
+                    Text: item.Name,
+                    Checked: true,
+                    Enable: true,
+                }
+            }
 
-                for (let i = 0; i < totalItems; i++) {
-                    tree.push({
-                        Value: items[i],
-                        Text: items[i] === _OTHER_SUBSIDIARY_KEY ? Site.getSingleResource('Others') : items[i],
-                        Checked: true,
-                        Enable: true
-                    });
+            const getSubTree = function (subData) {
+                let subTree = createItem(subData);
+
+                if (subData.Children) {
+                    const totalChild = subData.Children.length;
+
+                    let items = [];
+
+                    for (let c = 0; c < totalChild; c++) {
+                        items.push(getSubTree(subData.Children[c]));
+                    }
+
+                    subTree.Items = items;
                 }
 
-                return tree;
+                return subTree;
             }
 
             for (let i = 0; i < total; i++) {
-                const item = data[i];
-                const totalItems = item.OperatorIds.length;
-                let children = [];
-
-                if (totalItems) {
-                    for (let j = 0; j < totalItems; j++) {
-                        const child = item.OperatorIds[j];
-
-                        children.push({
-                            Value: child,
-                            Text: child,
-                            ParrentId: item.WhiteLabelID,
-                            Checked: true,
-                            Enable: true
-                        });
-                    }
-                }
-
-                tree.push({
-                    Id: i,
-                    Value: item.WhiteLabelID,
-                    Text: item.WhiteLabelName ? item.WhiteLabelName : Site.getSingleResource('Others'),
-                    Checked: true,
-                    Enable: true,
-                    Items: children
-                });
+                tree.push(getSubTree(data[i]));
             }
 
             return tree;

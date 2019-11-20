@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 11/06/2019 11:42:44 AM
+﻿// Generated at: 11/20/2019 8:15:23 AM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -824,6 +824,7 @@ We:"We",
 Wednesday:"Wednesday",
 WeeklyLiveMatches:"Weekly Live Matches",
 Welcome:"Welcome",
+WhiteLabel:"Whitelabel",
 WinLoss:"Win Loss",
 WinLossByBetType:"Win Loss By Bet Type",
 WinLossByBetTypeTitle:"Win Loss By Bet Type, {0} --&gt; {1} - {2}",

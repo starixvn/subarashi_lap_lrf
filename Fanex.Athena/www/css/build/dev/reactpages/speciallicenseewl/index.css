@@ -385,6 +385,71 @@
 .multiple-select-item label {
   margin-bottom: 0; }
 
+.multiple-select-container .treeview-select-item {
+  position: relative; }
+
+.multiple-select-container .treeview-select-item .option-checkbox {
+  margin-left: 5px; }
+
+.multiple-select-container .treeview-select-item .btnCaretOption {
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  padding: 0;
+  font-size: 4px;
+  line-height: 1.42857143;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  outline: none;
+  background: transparent; }
+
+.multiple-select-container .treeview-select-item .treeview-caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  vertical-align: middle;
+  border-top: 5px solid;
+  border-right: 5px solid transparent;
+  border-left: 5px solid transparent; }
+
+.multiple-select-container .treeview-select-item .treeview-caret.collapse {
+  transform: rotate(-90deg); }
+
+.multiple-select-container .close {
+  position: relative;
+  display: inline-block;
+  top: 0;
+  opacity: .3;
+  cursor: pointer;
+  width: 16px;
+  height: 16px; }
+
+.multiple-select-container .close:hover {
+  opacity: 1; }
+
+.multiple-select-container .close:after, .multiple-select-container .close:before {
+  position: absolute;
+  content: " ";
+  height: 16px;
+  width: 2px;
+  background-color: #333; }
+
+.multiple-select-container .close:before {
+  transform: rotate(45deg); }
+
+.multiple-select-container .close:after {
+  transform: rotate(-45deg); }
+
 .multiple-select-label {
   height: 23px;
   padding-top: 3px;

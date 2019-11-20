@@ -3482,12 +3482,13 @@ var validateBaseCurrency = function validateBaseCurrency() {
 /*!*********************************************************************************************!*\
   !*** ./www/js/source/reactpages/pages/subsidiaryperformance/actions/filterHandlerAction.js ***!
   \*********************************************************************************************/
-/*! exports provided: setSelectedSubsidiary, setDateRange, changeConvertAll, changeIncludeDrawData, setParams */
+/*! exports provided: setSelectedSubsidiary, setSelectedWhiteLabel, setDateRange, changeConvertAll, changeIncludeDrawData, setParams */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSelectedSubsidiary", function() { return setSelectedSubsidiary; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSelectedWhiteLabel", function() { return setSelectedWhiteLabel; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setDateRange", function() { return setDateRange; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "changeConvertAll", function() { return changeConvertAll; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "changeIncludeDrawData", function() { return changeIncludeDrawData; });
@@ -3498,6 +3499,12 @@ var setSelectedSubsidiary = function setSelectedSubsidiary(subsidiaryKeys) {
   return {
     type: _types_js__WEBPACK_IMPORTED_MODULE_0__["SET_SUBSIDIARY"],
     data: subsidiaryKeys
+  };
+};
+var setSelectedWhiteLabel = function setSelectedWhiteLabel(whiteLabelKeys) {
+  return {
+    type: _types_js__WEBPACK_IMPORTED_MODULE_0__["SET_WHITELABEL"],
+    data: whiteLabelKeys
   };
 };
 var setDateRange = function setDateRange(dateRange) {
@@ -3559,7 +3566,7 @@ var ActionCreators = Object.assign({}, _filterHandlerAction_js__WEBPACK_IMPORTED
 /*!*******************************************************************************!*\
   !*** ./www/js/source/reactpages/pages/subsidiaryperformance/actions/types.js ***!
   \*******************************************************************************/
-/*! exports provided: FETCH_DATA, SET_GRID_DATA, SET_SUBSIDIARY, SET_DATE_RANGE, CHANGE_CONVERT_ALL, CHANGE_INCLUDE_DRAW_DATA, SET_PARAMS */
+/*! exports provided: FETCH_DATA, SET_GRID_DATA, SET_SUBSIDIARY, SET_WHITELABEL, SET_DATE_RANGE, CHANGE_CONVERT_ALL, CHANGE_INCLUDE_DRAW_DATA, SET_PARAMS */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3567,15 +3574,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FETCH_DATA", function() { return FETCH_DATA; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_GRID_DATA", function() { return SET_GRID_DATA; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SUBSIDIARY", function() { return SET_SUBSIDIARY; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_WHITELABEL", function() { return SET_WHITELABEL; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_DATE_RANGE", function() { return SET_DATE_RANGE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CHANGE_CONVERT_ALL", function() { return CHANGE_CONVERT_ALL; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CHANGE_INCLUDE_DRAW_DATA", function() { return CHANGE_INCLUDE_DRAW_DATA; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_PARAMS", function() { return SET_PARAMS; });
 var FETCH_DATA = 'FETCH_DATA';
-var SET_GRID_DATA = "SET_GRID_DATA";
-var SET_SUBSIDIARY = "SET_SUBSIDIARY";
-var SET_DATE_RANGE = "SET_DATE_RANGE";
-var CHANGE_CONVERT_ALL = "CHANGE_CONVERT_ALL";
+var SET_GRID_DATA = 'SET_GRID_DATA';
+var SET_SUBSIDIARY = 'SET_SUBSIDIARY';
+var SET_WHITELABEL = 'SET_WHITELABEL';
+var SET_DATE_RANGE = 'SET_DATE_RANGE';
+var CHANGE_CONVERT_ALL = 'CHANGE_CONVERT_ALL';
 var CHANGE_INCLUDE_DRAW_DATA = 'CHANGE_INCLUDE_DRAW_DATA';
 var SET_PARAMS = 'SET_PARAMS';
 
@@ -3743,6 +3752,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../lib/service */ "./www/js/source/reactpages/pages/subsidiaryperformance/lib/service.js");
 /* harmony import */ var _lib_report__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../lib/report */ "./www/js/source/reactpages/lib/report.js");
 /* harmony import */ var _constants_report__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../constants/report */ "./www/js/source/reactpages/constants/report.js");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3760,6 +3770,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -3827,10 +3838,10 @@ function (_Component) {
   }, {
     key: "_drillDown",
     value: function _drillDown(subsidiary) {
-      var params = Object.assign({}, this.props.params);
-      this.subsidiaryListMainLevel = params.SubsidiaryList;
-      params.SubsidiaryId = subsidiary;
-      params.Level = _constants_report__WEBPACK_IMPORTED_MODULE_10__["ReportLevel"].CUSTOMER;
+      var params = Object.assign({}, this.props.params, {
+        SubsidiaryId: subsidiary,
+        Level: _constants_report__WEBPACK_IMPORTED_MODULE_10__["ReportLevel"].CUSTOMER
+      });
       this.level = _constants_report__WEBPACK_IMPORTED_MODULE_10__["ReportLevel"].CUSTOMER;
 
       this._getGridData(_lib_service__WEBPACK_IMPORTED_MODULE_8__["Api"].DetailUrl, params);
@@ -3845,33 +3856,26 @@ function (_Component) {
         style: {
           height: 32
         }
-      }, customerLevel && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
-        colWidth: 30,
-        title: _lib_service__WEBPACK_IMPORTED_MODULE_8__["HeaderText"].Index
+      }, !customerLevel && _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].isSubsidiaryMasterView && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
+        colWidth: 150
+      }, _lib_service__WEBPACK_IMPORTED_MODULE_8__["HeaderText"].WhiteLabel), customerLevel && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
+        colWidth: 30
       }, _lib_service__WEBPACK_IMPORTED_MODULE_8__["HeaderText"].Index), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
-        colWidth: 150,
-        title: customerLevel ? _lib_service__WEBPACK_IMPORTED_MODULE_8__["HeaderText"].ExternalId : _lib_service__WEBPACK_IMPORTED_MODULE_8__["HeaderText"].Subsidiary
+        colWidth: 150
       }, customerLevel ? _lib_service__WEBPACK_IMPORTED_MODULE_8__["HeaderText"].ExternalId : _lib_service__WEBPACK_IMPORTED_MODULE_8__["HeaderText"].Subsidiary), customerLevel && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
-        colWidth: 150,
-        title: _lib_service__WEBPACK_IMPORTED_MODULE_8__["HeaderText"].SystemId
+        colWidth: 150
       }, _lib_service__WEBPACK_IMPORTED_MODULE_8__["HeaderText"].SystemId), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
-        colWidth: 150,
-        title: _lib_service__WEBPACK_IMPORTED_MODULE_8__["HeaderText"].CurrencyName
+        colWidth: 150
       }, _lib_service__WEBPACK_IMPORTED_MODULE_8__["HeaderText"].CurrencyName), !customerLevel && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
-        colWidth: 200,
-        title: _lib_service__WEBPACK_IMPORTED_MODULE_8__["HeaderText"].Product
+        colWidth: 200
       }, _lib_service__WEBPACK_IMPORTED_MODULE_8__["HeaderText"].Product), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
-        colWidth: 150,
-        title: _lib_service__WEBPACK_IMPORTED_MODULE_8__["HeaderText"].BetCount
+        colWidth: 150
       }, _lib_service__WEBPACK_IMPORTED_MODULE_8__["HeaderText"].BetCount), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
-        colWidth: 200,
-        title: _lib_service__WEBPACK_IMPORTED_MODULE_8__["HeaderText"].Turnover
+        colWidth: 200
       }, _lib_service__WEBPACK_IMPORTED_MODULE_8__["HeaderText"].Turnover), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
-        colWidth: 200,
-        title: _lib_service__WEBPACK_IMPORTED_MODULE_8__["HeaderText"].CustomerWinLoss
+        colWidth: 200
       }, _lib_service__WEBPACK_IMPORTED_MODULE_8__["HeaderText"].CustomerWinLoss), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
-        colWidth: 200,
-        title: _lib_service__WEBPACK_IMPORTED_MODULE_8__["HeaderText"].SubsidiaryWinLoss
+        colWidth: 200
       }, _lib_service__WEBPACK_IMPORTED_MODULE_8__["HeaderText"].SubsidiaryWinLoss));
     }
   }, {
@@ -3883,42 +3887,48 @@ function (_Component) {
       var rows = [];
       var key = 0;
 
-      var _loop = function _loop(sub) {
-        var item = data[sub];
-        var totalItem = item.TotalItem;
-        var currencies = Object.keys(item.Details);
+      for (var label = 0; label < data.length; label++) {
+        var subData = data[label];
 
-        for (var cur = 0; cur < currencies.length; cur++) {
-          var currency = currencies[cur];
-          var products = item.Details[currency];
-          var rowSpan = products.length;
+        var _loop = function _loop(sub) {
+          var item = subData.Details[sub];
+          var currencies = Object.keys(item.Details);
 
-          for (var pro = 0; pro < rowSpan; pro++) {
-            var product = products[pro];
-            rows.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Row"], {
-              key: key
-            }, cur === 0 && pro === 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
-              title: item.Subsidiary,
-              rowSpan: totalItem
-            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-              href: "javascript:;",
-              onClick: function onClick() {
-                return _this3._drillDown(item.Subsidiary);
-              }
-            }, item.Subsidiary)), pro === 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
-              title: currency,
-              rowSpan: rowSpan,
-              className: "center-align"
-            }, currency), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
-              title: product.Product
-            }, product.Product), _this3._buildCommonCells(product, key)));
-            key++;
+          for (var cur = 0; cur < currencies.length; cur++) {
+            var currency = currencies[cur];
+            var products = item.Details[currency];
+            var rowSpan = products.length;
+
+            for (var pro = 0; pro < rowSpan; pro++) {
+              var product = products[pro];
+              rows.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Row"], {
+                key: key
+              }, _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].isSubsidiaryMasterView && cur === 0 && pro === 0 && sub === 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+                title: subData.WhiteLabel,
+                rowSpan: subData.TotalItem
+              }, subData.WhiteLabel), cur === 0 && pro === 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+                title: item.Subsidiary,
+                rowSpan: item.TotalItem
+              }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+                href: "javascript:;",
+                onClick: function onClick() {
+                  return _this3._drillDown(item.Subsidiary);
+                }
+              }, item.Subsidiary)), pro === 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+                title: currency,
+                rowSpan: rowSpan,
+                className: "center-align"
+              }, currency), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+                title: product.Product
+              }, product.Product), _this3._buildCommonCells(product, key)));
+              key++;
+            }
           }
-        }
-      };
+        };
 
-      for (var sub = 0; sub < data.length; sub++) {
-        _loop(sub);
+        for (var sub = 0; sub < subData.Details.length; sub++) {
+          _loop(sub);
+        }
       }
 
       return rows;
@@ -3963,6 +3973,7 @@ function (_Component) {
     value: function _buildMainFooter() {
       var totalData = this.state.gridData.Total;
       var subs = Object.keys(totalData);
+      var colSpan = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].isSubsidiaryMasterView ? 2 : 1;
       var footer = [];
 
       for (var i = 0; i < subs.length; i++) {
@@ -3972,6 +3983,7 @@ function (_Component) {
           className: "fixed-table-total",
           key: "total".concat(i)
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+          colSpan: colSpan,
           title: "".concat(_lib_service__WEBPACK_IMPORTED_MODULE_8__["TotalText"].Total, " ").concat(totalName)
         }, "".concat(_lib_service__WEBPACK_IMPORTED_MODULE_8__["TotalText"].Total, " ").concat(totalName)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
           title: "".concat(_lib_service__WEBPACK_IMPORTED_MODULE_8__["TotalText"].Based, " ").concat(item.CurrencyName),
@@ -3992,10 +4004,12 @@ function (_Component) {
         return null;
       }
 
+      var colSpan = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].isSubsidiaryMasterView ? 2 : 1;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Row"], {
         key: "grandTotal",
         className: "fixed-table-grant-total"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+        colSpan: colSpan,
         title: _lib_service__WEBPACK_IMPORTED_MODULE_8__["TotalText"].Total
       }, _lib_service__WEBPACK_IMPORTED_MODULE_8__["TotalText"].Total), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
         title: "".concat(_lib_service__WEBPACK_IMPORTED_MODULE_8__["TotalText"].Based, " ").concat(grandTotal.CurrencyName),
@@ -4256,7 +4270,21 @@ function (_Component) {
       _this.props.setSelectedProduct(selectedItemsKey);
     });
 
-    _defineProperty(_assertThisInitialized(_this), "subsidiaryChangeHandler", function (currentItem, selectedItemsKey) {
+    _defineProperty(_assertThisInitialized(_this), "subsidiaryChangeHandler", function (currentItem, selectedItemsKey, treeViewList) {
+      if (_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].isSubsidiaryMasterView) {
+        var selectedParentItems = [];
+
+        for (var i = 0; i < treeViewList.length; i++) {
+          var item = treeViewList[i];
+
+          if (item.checked && item.level === 0 && selectedParentItems.indexOf(item.paramsKey) < 0) {
+            selectedParentItems.push(item.paramsKey);
+          }
+        }
+
+        _this.props.setSelectedWhiteLabel(selectedParentItems.join(','));
+      }
+
       _this.props.setSelectedSubsidiary(selectedItemsKey);
     });
 
@@ -4287,6 +4315,7 @@ function (_Component) {
       return {
         BaseCurrency: this.props.selectedBaseCurrency,
         SubsidiaryList: this.props.selectedSubsidiary,
+        WhiteLabelList: this.props.selectedWhiteLabel,
         ProductCodeList: this.props.selectedProduct,
         ConvertAll: this.props.convertAll,
         FromDate: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_9__["default"].convertDateToString(fromDate),
@@ -4301,13 +4330,30 @@ function (_Component) {
     key: "_renderSubsidiarySelectList",
     value: function _renderSubsidiarySelectList() {
       var subsidiaryList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].subsidiaryList;
-      return subsidiaryList && subsidiaryList.length ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_5___default.a, {
+      var treeViewOption = {
+        childrenField: 'Children',
+        keyField: 'Value',
+        valueField: 'Name',
+        statusField: 'Checked',
+        indent: 30,
+        includeSelectedParentKey: false,
+        useOriginalDataSource: false
+      };
+      return subsidiaryList && subsidiaryList.length ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_5__["TreeViewSelect"], {
         language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].currentLanguage,
-        hasSearchBox: true,
+        id: "SubsidiaryTreeView",
         dataSource: subsidiaryList,
-        keyField: "Name",
+        keyField: "Value",
         valueField: "Name",
         statusField: "Checked",
+        texts: {
+          SelectOptions: "Please select",
+          All: "All",
+          SelectedItemCount: "# selected"
+        },
+        isAllTextShown: false,
+        hasSearchBox: true,
+        treeViewOption: treeViewOption,
         onChange: this.subsidiaryChangeHandler
       }) : null;
     }
@@ -5082,6 +5128,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 var HeaderText = {
   Index: '#',
+  WhiteLabel: _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("Whitelabel"),
   Subsidiary: _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("Subsidiary"),
   CurrencyName: _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("Currency"),
   Product: _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("Product"),
@@ -5134,12 +5181,13 @@ function () {
 /*!***********************************************************************************************!*\
   !*** ./www/js/source/reactpages/pages/subsidiaryperformance/reducers/filterHandlerReducer.js ***!
   \***********************************************************************************************/
-/*! exports provided: selectedSubsidiary, dateRange, convertAll, includeDrawData, params */
+/*! exports provided: selectedSubsidiary, selectedWhiteLabel, dateRange, convertAll, includeDrawData, params */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectedSubsidiary", function() { return selectedSubsidiary; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectedWhiteLabel", function() { return selectedWhiteLabel; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dateRange", function() { return dateRange; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "convertAll", function() { return convertAll; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "includeDrawData", function() { return includeDrawData; });
@@ -5151,6 +5199,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 var selectedSubsidiary = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])({}, _defineProperty({}, _actions_types_js__WEBPACK_IMPORTED_MODULE_1__["SET_SUBSIDIARY"], function (state, action) {
+  return action.data;
+}));
+var selectedWhiteLabel = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])({}, _defineProperty({}, _actions_types_js__WEBPACK_IMPORTED_MODULE_1__["SET_WHITELABEL"], function (state, action) {
   return action.data;
 }));
 var dateRange = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])({}, _defineProperty({}, _actions_types_js__WEBPACK_IMPORTED_MODULE_1__["SET_DATE_RANGE"], function (state, action) {
