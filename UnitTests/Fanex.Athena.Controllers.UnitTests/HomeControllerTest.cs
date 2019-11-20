@@ -266,11 +266,14 @@
         private HomeController CreateController()
         {
             return new HomeController(
-                LangService,
-                SessionService, _licenseeSettingService, AppSettings
+               
                 )
             {
-                ControllerContext = ControllerContext
+                ControllerContext = ControllerContext,
+                LangService = LangService,
+                SessionServiceInstance = SessionService,
+                AppSettingInstance = AppSettings
+
             };
         }
     }

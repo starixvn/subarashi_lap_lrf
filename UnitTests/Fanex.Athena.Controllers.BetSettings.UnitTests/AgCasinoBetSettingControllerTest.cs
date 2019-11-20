@@ -213,13 +213,15 @@
         {
             _betSettingService = Substitute.For<IAgCasinoBetSettingService>();
             var controller = new AgCasinoBetSettingController(
-                LangService,
-                SessionService,
                 CoreBetSettingService,
                 ProductService,
-                _betSettingService, LicenseeSettingService)
+                _betSettingService)
             {
-                ControllerContext = ControllerContext
+                ControllerContext = ControllerContext,
+                LangService = LangService,
+                SessionServiceInstance = SessionService,
+                LicenseeSettingServiceInstance = LicenseeSettingService,
+                AppSettingInstance = AppSettings
             };
 
             controller.HttpContext.Request["custid"].Returns("1");

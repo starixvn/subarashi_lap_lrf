@@ -8,7 +8,6 @@
     internal class FakeCultureBaseController : CultureBaseController
     {
         internal FakeCultureBaseController(ILanguageService languageService, ISessionService sessionService)
-            : base(languageService, sessionService)
         {
         }
 

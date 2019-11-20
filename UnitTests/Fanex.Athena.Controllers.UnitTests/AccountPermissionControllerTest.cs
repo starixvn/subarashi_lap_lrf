@@ -176,13 +176,16 @@
         private AccountPermissionController CreateController()
         {
             return new AccountPermissionController(
-            LangService,
-            SessionService,
             _functionService,
             _userService,
-            _currencyDataAccess, AppSettings)
+            _currencyDataAccess)
             {
-                ControllerContext = ControllerContext
+                ControllerContext = ControllerContext,
+                LangService = LangService,
+                SessionServiceInstance = SessionService,
+                LicenseeSettingServiceInstance = LicenseeSettingService,
+                AppSettingInstance = AppSettings
+
             };
         }
 

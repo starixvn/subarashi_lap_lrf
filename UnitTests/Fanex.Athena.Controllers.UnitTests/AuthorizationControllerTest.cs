@@ -373,14 +373,16 @@
         private AuthorizationController CreateController()
         {
             return new AuthorizationController(
-               LangService,
-               SessionService,
                _maintenanceService,
                _userService,
                _authService,
-               _formAuthenticationService, AppSettings)
+               _formAuthenticationService)
             {
-                ControllerContext = ControllerContext
+                ControllerContext = ControllerContext,
+                LangService = LangService,
+                SessionServiceInstance = SessionService,
+                AppSettingInstance = AppSettings
+
             };
         }
     }

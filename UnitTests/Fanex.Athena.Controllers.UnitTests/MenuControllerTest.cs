@@ -76,7 +76,13 @@
 
         private MenuController CreateController()
         {
-            return new MenuController(LangService, SessionService, _functionService, _licenseeSettingService);
+            return new MenuController(_functionService)
+            {
+                LangService = LangService,
+                SessionServiceInstance = SessionService,
+                AppSettingInstance = AppSettings
+
+            };
         }
     }
 }

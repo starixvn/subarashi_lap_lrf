@@ -9,7 +9,6 @@
     internal class FakeContentBaseController : ContentBaseController
     {
         internal FakeContentBaseController(ILanguageService languageService, ISessionService sessionService)
-            : base(languageService, sessionService)
         {
         }
 
