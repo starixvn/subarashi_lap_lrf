@@ -9,4 +9,5 @@
   <!--Do not delete this-->
 
   <SpNameConfig Environment="LOCAL,DEV" SpName="Portal_Sub_GetSubsidiaryList" EnvironmentText="_UAT1"></SpNameConfig>
+  <SpNameConfig Environment="SIT" SpName="Portal_Sub_GetSubsidiaryList" EnvironmentText="_test"></SpNameConfig>
 </Root>
