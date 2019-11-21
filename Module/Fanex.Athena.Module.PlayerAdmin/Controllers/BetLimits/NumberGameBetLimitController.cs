@@ -22,10 +22,7 @@
         private readonly INumberGameBetLimitService _service;
 
         public NumberGameBetLimitController(
-            ICacheRefAdapter cacheRefAdapter,
-            IAuthorizationService authorizationService,
             INumberGameBetLimitService numberGameBetLimitService)
-            : base(cacheRefAdapter, authorizationService)
         {
             _service = numberGameBetLimitService;
         }

@@ -22,10 +22,7 @@
         private readonly IDcsBetLimitService _service;
 
         public DcsBetLimitController(
-            ICacheRefAdapter cacheRefAdapter,
-            IAuthorizationService authorizationService,
             IDcsBetLimitService dcsBetLimitService)
-            : base(cacheRefAdapter, authorizationService)
         {
             _service = dcsBetLimitService;
         }

@@ -47,7 +47,7 @@
             builder.RegisterType<RngKenoBetLimitService>().As<IRngKenoBetLimitService>().WithAttributeFiltering();
             builder.RegisterType<SportsBookBetLimitService>().As<ISportsBookBetLimitService>().WithAttributeFiltering();
 
-            builder.RegisterControllers(items);
+            builder.RegisterControllers(items).PropertiesAutowired();
         }
     }
 }

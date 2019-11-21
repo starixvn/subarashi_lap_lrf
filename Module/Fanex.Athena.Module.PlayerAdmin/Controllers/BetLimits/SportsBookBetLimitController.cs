@@ -1,31 +1,23 @@
 ﻿namespace Fanex.Athena.Module.PlayerAdmin.Controllers
 {
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-    using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
     using Fanex.Athena.Module.PlayerAdmin.Services.Interfaces;
     using Fanex.Athena.Module.PlayerAdmin.ViewModels;
     using Fanex.Athena.Resources;
-    using Fanex.Athena.Service.Core.Common.Interfaces;
-    using Fanex.Athena.Service.Core.Users.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Athena.VendorAdapter.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
 
     public class SportsBookBetLimitController : PlayerBetLimitBaseControler
     {
         private readonly ISportsBookBetLimitService _service;
 
         public SportsBookBetLimitController(
-            ICacheRefAdapter cacheRefAdapter,
-            IAuthorizationService authorizationService,
             ISportsBookBetLimitService sportBookBetLimitService)
-            : base(cacheRefAdapter, authorizationService)
         {
             _service = sportBookBetLimitService;
         }

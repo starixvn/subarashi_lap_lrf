@@ -39,7 +39,7 @@ namespace Fanex.Athena.Extension
         {
             var items = assemblies.Where(ass => ass.FullName.Contains(moduleName)).ToArray();
             builder.RegisterAssemblyTypes(items).AsImplementedInterfaces();
-            builder.RegisterApiControllers(items);
+            builder.RegisterApiControllers(items).PropertiesAutowired();
         }
 
         public static void RegisteModuleModuleAndApi(this ContainerBuilder builder,
@@ -47,8 +47,8 @@ namespace Fanex.Athena.Extension
         {
             var items = assemblies.Where(ass => ass.FullName.Contains(moduleName)).ToArray();
             builder.RegisterAssemblyTypes(items).AsImplementedInterfaces();
-            builder.RegisterControllers(items);
-            builder.RegisterApiControllers(items);
+            builder.RegisterControllers(items).PropertiesAutowired();
+            builder.RegisterApiControllers(items).PropertiesAutowired();
         }
     }
 }

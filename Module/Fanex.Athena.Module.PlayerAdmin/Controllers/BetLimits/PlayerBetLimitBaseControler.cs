@@ -28,17 +28,9 @@
     {
         private const string MixedSportId = "99MP";
 
-        private readonly IAuthorizationService _authService;
+        public  IAuthorizationService AuthServiceInstance;
 
-        private readonly ICacheRefAdapter _cacheRefAdapter;
-
-        public PlayerBetLimitBaseControler(
-            ICacheRefAdapter cacheRefAdapter,
-            IAuthorizationService authorizationService)
-        {
-            _authService = authorizationService;
-            _cacheRefAdapter = cacheRefAdapter;
-        }
+        public  ICacheRefAdapter CacheRefAdapterInstance;
 
         protected IEnumerable<PlayerBetLimit> AddSettingTypeName(IEnumerable<PlayerBetLimit> data)
         {
@@ -50,8 +42,8 @@
             return data;
         }
 
-        protected bool HasEditPermission() => _authService.HasPermissions(SessionServiceInstance.UserSession, PermissionKeys.PlayerAdminBetLimit_Write);
+        protected bool HasEditPermission() => AuthServiceInstance.HasPermissions(SessionServiceInstance.UserSession, PermissionKeys.PlayerAdminBetLimit_Write);
 
-        protected string GetSportName(string sportId) => sportId == MixedSportId ? ViewResources.MixSportsParlay : _cacheRefAdapter.GetSportName(sportId);
+        protected string GetSportName(string sportId) => sportId == MixedSportId ? ViewResources.MixSportsParlay : CacheRefAdapterInstance.GetSportName(sportId);
     }
 }

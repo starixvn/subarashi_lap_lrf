@@ -1,18 +1,15 @@
 ﻿namespace Fanex.Athena.Module.PlayerAdmin.Controllers
 {
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
     using Fanex.Athena.Module.PlayerAdmin.Services.Interfaces;
     using Fanex.Athena.Resources;
-    using Fanex.Athena.Service.Core.Common.Interfaces;
-    using Fanex.Athena.Service.Core.Users.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Athena.VendorAdapter.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
+
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
 
     [ValidateProductPermission(ProductTypes.AgCasino)]
     public class AGCasinoBetLimitController : PlayerBetLimitBaseControler
@@ -20,10 +17,7 @@
         private readonly IAGCasinoBetLimitService _service;
 
         public AGCasinoBetLimitController(
-            ICacheRefAdapter cacheRefAdapter,
-            IAuthorizationService authorizationService,
             IAGCasinoBetLimitService agCasinoBetLimitService)
-            : base(cacheRefAdapter, authorizationService)
         {
             _service = agCasinoBetLimitService;
         }

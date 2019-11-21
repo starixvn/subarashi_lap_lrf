@@ -23,10 +23,7 @@
         private readonly IRngKenoBetLimitService _service;
 
         public RngKenoBetLimitController(
-            ICacheRefAdapter cacheRefAdapter,
-            IAuthorizationService authorizationService,
             IRngKenoBetLimitService rngKenoBetLimitService)
-            : base(cacheRefAdapter, authorizationService)
         {
             _service = rngKenoBetLimitService;
         }

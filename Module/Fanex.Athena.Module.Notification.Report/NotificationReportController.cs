@@ -26,7 +26,7 @@
     [FunctionAuthorization(PermissionKeys.ResultAmendmentNotificationReport)]
     [SessionState(SessionStateBehavior.ReadOnly)]
     [CheckUMFilter]
-    public class NotificationReportController : ContentBaseController
+    public class NotificationReportController : CultureBaseController
     {
         private readonly INotificationService _notificationService;
         public NotificationReportController(
