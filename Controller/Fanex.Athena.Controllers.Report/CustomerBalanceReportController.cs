@@ -6,20 +6,37 @@
 
 namespace Fanex.Athena.Controllers.Report
 {
+    using System.Linq;
+    using System.Web.Mvc;
+    using System.Threading.Tasks;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
 
     using Model.Core.DataDomain;
 
-    using System.Linq;
-    using System.Web.Mvc;
+    using Service.Core.Common.Interfaces;
+    using Service.Core.Users.Interfaces;
 
     [FunctionAuthorization(PermissionKeys.ReportCustomerBalance)]
     public class CustomerBalanceReportController : ReportBaseController
     {
+
+        private readonly IReportAPIClient _reportAPIClient;
+
+        public CustomerBalanceReportController(
+            ILanguageService languageService,
+            ISessionService sessionService,
+            IProductService productService,
+            IReportAPIClient reportAPIClient)
+        : base(languageService, sessionService, productService)
+        {
+            _reportAPIClient = reportAPIClient;
+        }
+
         [HttpGet]
         public ActionResult Index()
         {
@@ -48,6 +65,24 @@ namespace Fanex.Athena.Controllers.Report
             };
 
             return View("~/Views/Desktop/Report/CustomerBalance/Main.cshtml", model);
+        }
+
+        [HttpPost]
+        [AutoBindMetaModel(BindAgent = true)]
+        [ValidationWebRequest]
+        public async Task<ActionResult> Index(CustomerBalanceMetaModel metaModel)
+        {
+            var userSession = SessionService.UserSession;
+            if (metaModel.IsExportExcel)
+            {
+                const string FileName = "CustomerBalance";
+                var httpResponse = await _reportAPIClient.PostAsync("api/CustomerBalance/ExportExcel",
+                    metaModel, userSession.Language).ConfigureAwait(false);
+
+                return File(httpResponse.Item1, httpResponse.Item2, FileName);
+            }
+
+            return JsonString(await _reportAPIClient.PostAsyncString("api/CustomerBalance/Index", metaModel, userSession.Language).ConfigureAwait(false));
         }
     }
 }
