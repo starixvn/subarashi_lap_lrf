@@ -68,10 +68,10 @@
                 };
                 var expectedTitle = $"{ViewResources.ProductAGC} - {ViewResources.DetailedBetlist} - {metaModel.Date.ToString("MM/dd/yyyy")}";
 
-                //controller.When(async x => await x.ProcessExportExcel(
-                //    Arg.Any<BetListExcelMetaModel>(),
-                //    Arg.Any<string>(),
-                //    Arg.Any<string>())).DoNotCallBase();
+                controller.When(async x => await x.ProcessExportExcel(
+                    Arg.Any<BetListExcelMetaModel>(),
+                    Arg.Any<string>(),
+                    Arg.Any<string>())).DoNotCallBase();
 
                 // Action
                 await controller.Detail(metaModel);
@@ -91,14 +91,15 @@
 
         private AGCasinoBetListController CreateController()
         {
-            return new AGCasinoBetListController()
-            {
-                SessionServiceInstance = SessionService,
-                LangService = LangService,
-                LicenseeSettingServiceInstance = LicenseeSettingService,
-                BalanceUpDataAccessInstance = BalanceUpDataAccess,
-                BetListApiClient = BetListApiClient
-            };
+            var controller = Substitute.ForPartsOf<AGCasinoBetListController>();
+
+            controller.SessionServiceInstance = SessionService;
+            controller.LangService = LangService;
+            controller.LicenseeSettingServiceInstance = LicenseeSettingService;
+            controller.BalanceUpDataAccessInstance = BalanceUpDataAccess;
+            controller.BetListApiClient = BetListApiClient;
+
+            return controller;
         }
     }
 }

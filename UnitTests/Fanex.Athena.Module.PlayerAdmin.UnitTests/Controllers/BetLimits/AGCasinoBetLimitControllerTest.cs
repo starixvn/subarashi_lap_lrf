@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Web.Mvc;
 using Fanex.Athena.Controllers.Base.UnitTests;
 using Fanex.Athena.Model.Auth;
 using Fanex.Athena.Model.Auth.DataDomain;
@@ -12,7 +11,6 @@ using Fanex.Athena.Module.PlayerAdmin.Services.Interfaces;
 using Fanex.Athena.Resources;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
 using Fanex.Athena.UnitTest.Common.Helpers;
-using Fanex.Athena.VendorAdapter.Interfaces;
 using Newtonsoft.Json;
 using NSubstitute;
 using NUnit.Framework;
@@ -26,8 +24,6 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers.BetLimits
 
         private IAuthorizationService _authService;
 
-        private ICacheRefAdapter _cacheRefAdapter;
-
         [OneTimeSetUp]
         public override void FixtureSetUp()
         {
@@ -35,7 +31,6 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers.BetLimits
 
             _service = Substitute.For<IAGCasinoBetLimitService>();
             _authService = Substitute.For<IAuthorizationService>();
-            _cacheRefAdapter = Substitute.For<ICacheRefAdapter>();
 
             SetUpDefaultFakeData();
         }
@@ -47,7 +42,6 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers.BetLimits
 
             _service = null;
             _authService = null;
-            _cacheRefAdapter = null;
         }
 
         [OneTimeTearDown]
@@ -55,7 +49,6 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers.BetLimits
         {
             _service.ClearReceivedCalls();
             _authService.ClearReceivedCalls();
-            _cacheRefAdapter.ClearReceivedCalls();
         }
 
         [TestCase("AGGroup1,AGGroup2,AGGroup3", "AGGroup1", "AGGroup1,AGGroup2,AGGroup3")]
@@ -80,7 +73,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers.BetLimits
             using (var controller = CreateController())
             {
                 // Action
-                var jsonResult = await controller.GetSetting(metaModel) as JsonResult;
+                var jsonResult = await controller.GetSetting(metaModel);
                 var result = JsonConvert.SerializeObject(jsonResult.Data);
 
                 setting.CheckedGroups = expectedGroupString.Split(',');
@@ -112,7 +105,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers.BetLimits
             using (var controller = CreateController())
             {
                 // Action
-                var jsonResult = await controller.UpdateSetting(metaModel) as JsonResult;
+                var jsonResult = await controller.UpdateSetting(metaModel);
                 var result = JsonConvert.SerializeObject(jsonResult.Data);
 
                 // Assert
@@ -172,7 +165,8 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers.BetLimits
         {
             var result = new AGCasinoBetLimitController(_service)
             {
-                ControllerContext = ControllerContext
+                ControllerContext = ControllerContext,
+                AuthServiceInstance = _authService
             };
             result.LangService = LangService;
             result.SessionServiceInstance = SessionService;

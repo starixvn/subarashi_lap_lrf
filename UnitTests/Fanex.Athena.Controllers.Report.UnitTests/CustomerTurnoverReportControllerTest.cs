@@ -157,12 +157,11 @@
 
         private CustomerTurnoverReportController CreateController()
         {
-            var controller = Substitute.ForPartsOf<CustomerTurnoverReportController>(
-                LangService,
-                SessionService,
-                _sportTypeDataAccess,
-                _customerTurnoverService);
+            var controller = Substitute.ForPartsOf<CustomerTurnoverReportController>(_sportTypeDataAccess, _customerTurnoverService);
+            controller.LangService = LangService;
+            controller.SessionServiceInstance = SessionService;
             controller.When(x => x.CreateExcel(string.Empty, string.Empty, null, null, string.Empty)).DoNotCallBase();
+
             return controller;
         }
     }

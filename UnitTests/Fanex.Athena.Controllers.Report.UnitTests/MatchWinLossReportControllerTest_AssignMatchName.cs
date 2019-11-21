@@ -104,12 +104,14 @@
         private MatchWinLossReportController CreateController(string productCodeList = null)
         {
             var controller = Substitute.ForPartsOf<MatchWinLossReportController>(
-                LangService,
-                SessionService,
-                Substitute.For<IProductService>(),
                 Substitute.For<IBalanceUpDataAccess>(),
                 _cacheRefAdapter,
                 Substitute.For<IMatchWinLossService>());
+
+            controller.LangService = LangService;
+            controller.SessionServiceInstance = SessionService;
+            controller.ProductServiceInstance = Substitute.For<IProductService>();
+
             return controller;
         }
     }

@@ -138,14 +138,13 @@
 
         private NumberGameBetLimitController CreateController()
         {
-            var result = new NumberGameBetLimitController(_service)
+            return new NumberGameBetLimitController(_service)
             {
-                ControllerContext = ControllerContext
+                LangService = LangService,
+                SessionServiceInstance = SessionService,
+                AuthServiceInstance = _authService,
+                CacheRefAdapterInstance = _cacheRefAdapter
             };
-            result.LangService = LangService;
-            result.SessionServiceInstance = SessionService;
-
-            return result;
         }
     }
 }

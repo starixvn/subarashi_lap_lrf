@@ -6,7 +6,7 @@
 
     using Service.Core.Users.Interfaces;
 
-    internal class FakeContentBaseController : ContentBaseController
+    internal class FakeContentBaseController
     {
         internal FakeContentBaseController(ILanguageService languageService, ISessionService sessionService)
         {

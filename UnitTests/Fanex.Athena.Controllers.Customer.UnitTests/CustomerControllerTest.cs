@@ -216,20 +216,21 @@
 
         private CustomerController CreateController()
         {
-            return new CustomerController(
+            var result = Substitute.ForPartsOf<CustomerController>(
                 _customerListService,
                 _groupComService,
                 _licenseeDataAccess,
                 _productService,
                 _subsidiaryService,
-                _authorizationService)
-            {
-                LangService = LangService,
-                SessionServiceInstance = SessionService,
-                AppSettingInstance = AppSettings,
-                LicenseeSettingServiceInstance = _licenseeSettingService,
-                ControllerContext = ControllerContext
-            };
+                _authorizationService);
+
+            result.LangService = LangService;
+            result.SessionServiceInstance = SessionService;
+            result.AppSettingInstance = AppSettings;
+            result.LicenseeSettingServiceInstance = _licenseeSettingService;
+            result.ControllerContext = ControllerContext;
+
+            return result;
         }
     }
 }

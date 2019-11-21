@@ -191,8 +191,8 @@
             {
                 LangService = LangService,
                 SessionServiceInstance = SessionService,
-                AppSettingInstance = AppSettings
-
+                AppSettingInstance = AppSettings,
+                LicenseeSettingServiceInstance = _licenseeSettingService
             };
         }
     }

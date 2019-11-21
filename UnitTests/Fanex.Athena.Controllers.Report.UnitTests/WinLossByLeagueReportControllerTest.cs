@@ -157,7 +157,8 @@
                 SessionServiceInstance = SessionService,
                 LangService = LangService,
                 LicenseeSettingServiceInstance = Substitute.For<ILicenseeSettingService>(),
-                AppSettingInstance = AppSettings
+                AppSettingInstance = AppSettings,
+                ProductServiceInstance = productService
             };
         }
     }

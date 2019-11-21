@@ -238,18 +238,22 @@
                 {
                     ProductCode = x
                 });
+
             var productService = Substitute.For<IProductService>();
             productService.GetProductAccess(
                 SessionService.LicenseeSession.LicenseeId,
                 SessionService.UserSession.Language,
                 FunctionNames.LiveReport).Returns(new ProductAccess(productList.ToList()));
-            var controller = Substitute.ForPartsOf<LiveReportController>(
-                LangService,
-                SessionService,
-                productService,
-                _balanceUpDataAccess,
-                _liveReportService, Substitute.For<ILicenseeSettingService>(), AppSettings);
+
+            var controller = Substitute.ForPartsOf<LiveReportController>(_balanceUpDataAccess, _liveReportService);
+
+            controller.LangService = LangService;
+            controller.SessionServiceInstance = SessionService;
+            controller.ProductServiceInstance = productService;
+            controller.LicenseeSettingServiceInstance = Substitute.For<ILicenseeSettingService>();
+            controller.AppSettingInstance = AppSettings;
             controller.When(x => x.CreateExcel(string.Empty, null, null, null, null)).DoNotCallBase();
+
             return controller;
         }
     }

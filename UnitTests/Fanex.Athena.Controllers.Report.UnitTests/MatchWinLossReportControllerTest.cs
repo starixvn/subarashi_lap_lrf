@@ -95,19 +95,23 @@
                 {
                     ProductCode = x
                 });
+
             var productService = Substitute.For<IProductService>();
             productService.GetSingleWalletProductAccess(
                 SessionService.LicenseeSession.LicenseeId,
                 SessionService.UserSession.Language,
                 FunctionNames.MatchWinLoss).Returns(new ProductAccess(productList.ToList()));
+
             var controller = Substitute.ForPartsOf<MatchWinLossReportController>(
-                LangService,
-                SessionService,
-                productService,
                 _balanceUpDataAccess,
                 Substitute.For<ICacheRefAdapter>(),
                 _matchWinLossService);
+
+            controller.LangService = LangService;
+            controller.SessionServiceInstance = SessionService;
+            controller.ProductServiceInstance = productService;
             controller.When(x => x.CreateExcel(string.Empty, null, null, null, null, null)).DoNotCallBase();
+
             return controller;
         }
     }

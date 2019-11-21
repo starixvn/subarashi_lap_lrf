@@ -1,12 +1,12 @@
 ﻿namespace Fanex.Athena.Module.Notification.Report.UnitTests
 {
+    using System;
+    using System.Web.Mvc;
     using Fanex.Athena.Controllers.Base.UnitTests;
     using Fanex.Athena.Module.Notification.Service.Interfaces;
     using Fanex.Athena.Module.Notification.ViewModel;
     using NSubstitute;
     using NUnit.Framework;
-    using System;
-    using System.Web.Mvc;
 
     public class NotificationReportControllerTest : CultureBaseControllerHelperTest
     {
@@ -17,11 +17,13 @@
         {
             _notificationService = Substitute.For<INotificationService>();
         }
+
         [TearDown]
         public void TearDown()
         {
             _notificationService = null;
         }
+
         [OneTimeSetUp]
         public override void FixtureSetUp()
         {
@@ -64,12 +66,10 @@
 
         private NotificationReportController CreateController()
         {
+            var controller = Substitute.ForPartsOf<NotificationReportController>(_notificationService);
+            controller.LangService = LangService;
+            controller.SessionServiceInstance = SessionService;
 
-            var controller = Substitute.ForPartsOf<NotificationReportController>(
-                LangService,
-                SessionService,
-                _notificationService
-                );
             return controller;
         }
     }

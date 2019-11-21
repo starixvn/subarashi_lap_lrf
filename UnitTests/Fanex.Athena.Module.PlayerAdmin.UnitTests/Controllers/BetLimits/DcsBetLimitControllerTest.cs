@@ -2,9 +2,6 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using System.Web;
-    using System.Web.Mvc;
-    using System.Web.Routing;
     using Fanex.Athena.Controllers.Base.UnitTests;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
@@ -143,11 +140,13 @@
 
         private DcsBetLimitController CreateController()
         {
-            var result = new DcsBetLimitController(_dcsBetLimitService);
-            result.LangService = LangService;
-            result.SessionServiceInstance = SessionService;
-
-            return result;
+            return new DcsBetLimitController(_dcsBetLimitService)
+            {
+                LangService = LangService,
+                SessionServiceInstance = SessionService,
+                AuthServiceInstance = _authorizationService,
+                CacheRefAdapterInstance = _cacheRefAdapter
+            };
         }
 
         private string GetSportName(string sportId) => sportId == MixedSportId ? ViewResources.MixSportsParlay : _cacheRefAdapter.GetSportName(sportId);

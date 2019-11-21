@@ -17,7 +17,8 @@
     public partial class MenuControllerTest : CultureBaseControllerHelperTest
     {
         private IFunctionService _functionService;
-        ILicenseeSettingService _licenseeSettingService;
+        private ILicenseeSettingService _licenseeSettingService;
+
         [SetUp]
         public void SetUp()
         {
@@ -80,8 +81,8 @@
             {
                 LangService = LangService,
                 SessionServiceInstance = SessionService,
-                AppSettingInstance = AppSettings
-
+                AppSettingInstance = AppSettings,
+                LicenseeSettingServiceInstance = _licenseeSettingService
             };
         }
     }

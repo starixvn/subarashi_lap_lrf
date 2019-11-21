@@ -359,16 +359,17 @@
 
         private LiveReportBetListController CreateController()
         {
-            return new LiveReportBetListController()
-            {
-                LangService = LangService,
-                SessionServiceInstance = SessionService,
-                ProductService = ProductService,
-                BalanceUpDataAccessInstance = BalanceUpDataAccess,
-                CacheRefAdapter = CacheRefAdapter,
-                BetListApiClient = BetListApiClient,
-                LicenseeSettingServiceInstance = LicenseeSettingService
-            };
+            var controller = Substitute.ForPartsOf<LiveReportBetListController>();
+
+            controller.SessionServiceInstance = SessionService;
+            controller.LangService = LangService;
+            controller.LicenseeSettingServiceInstance = LicenseeSettingService;
+            controller.BalanceUpDataAccessInstance = BalanceUpDataAccess;
+            controller.BetListApiClient = BetListApiClient;
+            controller.ProductService = ProductService;
+            controller.CacheRefAdapter = CacheRefAdapter;
+
+            return controller;
         }
     }
 }
