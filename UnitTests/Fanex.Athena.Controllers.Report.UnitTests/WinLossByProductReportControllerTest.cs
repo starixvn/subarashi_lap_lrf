@@ -49,11 +49,15 @@
                 SessionService.LicenseeSession.LicenseeId,
                 SessionService.UserSession.Language,
                 FunctionNames.WinLossByProduct).Returns(new ProductAccess(new List<Product>()));
-            return new WinLossByProductReportController(
-                LangService,
-                SessionService,
-                AppSettings,
-                productService, Substitute.For<ILicenseeSettingService>());
+
+            return new WinLossByProductReportController()
+            {
+                LangService = LangService,
+                SessionServiceInstance = SessionService,
+                ProductServiceInstance = productService,
+                LicenseeSettingServiceInstance = Substitute.For<ILicenseeSettingService>(),
+                AppSettingInstance = AppSettings
+            };
         }
     }
 }

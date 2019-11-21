@@ -67,12 +67,14 @@
             productService.GetProductAccess(
                 SessionService.LicenseeSession.LicenseeId,
                 SessionService.UserSession.Language).Returns(new ProductAccess(new List<Product>()));
-            return new SettledMatchCountReportController(
-                LangService,
-                SessionService,
-                AppSettings,
-                productService,
-                _settledMatchCountService);
+
+            return new SettledMatchCountReportController(_settledMatchCountService)
+            {
+                LangService = LangService,
+                SessionServiceInstance = SessionService,
+                AppSettingInstance = AppSettings,
+                ProductServiceInstance = productService
+            };
         }
     }
 }

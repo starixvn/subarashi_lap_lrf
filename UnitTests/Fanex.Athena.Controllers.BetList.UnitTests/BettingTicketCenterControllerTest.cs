@@ -266,12 +266,11 @@
 
         private BettingTicketCenterController CreateController()
         {
-            var controller = Substitute.ForPartsOf<BettingTicketCenterController>(
-                LangService,
-                SessionService,
-                _productService,
-                _balanceUpDataAccess);
-            return controller;
+            return new BettingTicketCenterController(_productService, _balanceUpDataAccess)
+            {
+                LangService = LangService,
+                SessionServiceInstance = SessionService
+            };
         }
     }
 }

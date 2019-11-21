@@ -152,10 +152,12 @@
 
         private PlayerBetListController CreateController()
         {
-            return new PlayerBetListController(
-                LangService,
-                SessionService,
-                _betListApiClient);
+
+            var result = new PlayerBetListController(_betListApiClient);
+            result.LangService = LangService;
+            result.SessionServiceInstance = SessionService;
+
+            return result;
         }
     }
 }

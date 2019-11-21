@@ -53,7 +53,6 @@
             }
         }
 
-       
         [TestCase("USD", null, "EUR", 0, "1,2,3")]
         [TestCase("USD", "eur", "EUR", 1, "2")]
         [TestCase("USD", "eur", "EUR", 0, "")]
@@ -112,13 +111,16 @@
 
         private RunningBettypesOfMatchBetListController CreateController()
         {
-            return Substitute.ForPartsOf<RunningBettypesOfMatchBetListController>(
-                LangService,
-                SessionService,
-                ProductService,
-                BalanceUpDataAccess,
-                CacheRefAdapter,
-                BetListApiClient, LicenseeSettingService);
+            return new RunningBettypesOfMatchBetListController()
+            {
+                LangService = LangService,
+                SessionServiceInstance = SessionService,
+                ProductService = ProductService,
+                BalanceUpDataAccessInstance = BalanceUpDataAccess,
+                CacheRefAdapter = CacheRefAdapter,
+                BetListApiClient = BetListApiClient,
+                LicenseeSettingServiceInstance = LicenseeSettingService
+            };
         }
     }
 }

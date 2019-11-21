@@ -1,7 +1,6 @@
 ﻿namespace Fanex.Athena.Controllers.BetList.UnitTests
 {
     using System;
-    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Model.BetList.MetaModel;
@@ -110,14 +109,16 @@
 
         private LicenseeWinLossBetListController CreateController()
         {
-            var controller = Substitute.ForPartsOf<LicenseeWinLossBetListController>(
-                LangService,
-                SessionService,
-                ProductService,
-                BalanceUpDataAccess,
-                CacheRefAdapter,
-                BetListApiClient, LicenseeSettingService);
-            return controller;
+            return new LicenseeWinLossBetListController()
+            {
+                LangService = LangService,
+                SessionServiceInstance = SessionService,
+                ProductService = ProductService,
+                BalanceUpDataAccessInstance = BalanceUpDataAccess,
+                CacheRefAdapter = CacheRefAdapter,
+                BetListApiClient = BetListApiClient,
+                LicenseeSettingServiceInstance = LicenseeSettingService
+            };
         }
     }
 }

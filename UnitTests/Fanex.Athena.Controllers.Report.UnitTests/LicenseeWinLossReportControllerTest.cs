@@ -102,11 +102,13 @@
                 SessionService.UserSession.Language,
                 Arg.Is<string>(x => x == FunctionNames.LicenseeWinLoss || x == FunctionNames.SpecialLicenseeWinLoss))
                 .Returns(new ProductAccess(new List<Product>()));
-            return new LicenseeWinLossReportController(
-                LangService,
-                SessionService,
-                productService,
-                reportSettingService, _licenseeSettingService);
+            return new LicenseeWinLossReportController(reportSettingService)
+            {
+                LangService = LangService,
+                SessionServiceInstance = SessionService,
+                ProductServiceInstance = productService,
+                LicenseeSettingServiceInstance = _licenseeSettingService
+            };
         }
     }
 }

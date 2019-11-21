@@ -97,13 +97,16 @@
 
         private RunningMatchChoiceBetListController CreateController()
         {
-            return Substitute.ForPartsOf<RunningMatchChoiceBetListController>(
-                LangService,
-                SessionService,
-                ProductService,
-                BalanceUpDataAccess,
-                CacheRefAdapter,
-                BetListApiClient, LicenseeSettingService);
+            return new RunningMatchChoiceBetListController()
+            {
+                LangService = LangService,
+                SessionServiceInstance = SessionService,
+                ProductService = ProductService,
+                BalanceUpDataAccessInstance = BalanceUpDataAccess,
+                CacheRefAdapter = CacheRefAdapter,
+                BetListApiClient = BetListApiClient,
+                LicenseeSettingServiceInstance = LicenseeSettingService
+            };
         }
     }
 }

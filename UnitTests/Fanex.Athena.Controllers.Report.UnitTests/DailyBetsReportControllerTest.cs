@@ -240,12 +240,20 @@
             var productList = productIdList == null ?
                 new List<Product>() :
                 productIdList.Select(x => new Product { ProductID = x });
+
             var productService = Substitute.For<IProductService>();
             productService.GetSingleWalletProductAccess(
                 SessionService.LicenseeSession.LicenseeId,
                 SessionService.UserSession.Language,
                 FunctionNames.DailyBets).ReturnsForAnyArgs(new ProductAccess(productList.ToList()));
-            return new DailyBetsReportController(LangService, SessionService, productService, _licenseeSettingService, _reportAPIClient);
+
+            return new DailyBetsReportController(_reportAPIClient)
+            {
+                LangService = LangService,
+                SessionServiceInstance = SessionService,
+                ProductServiceInstance = productService,
+                LicenseeSettingServiceInstance = _licenseeSettingService
+            };
         }
     }
 }

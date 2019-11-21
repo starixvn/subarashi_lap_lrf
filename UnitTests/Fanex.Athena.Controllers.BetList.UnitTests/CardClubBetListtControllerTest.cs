@@ -91,15 +91,16 @@
 
         private CardClubBetListController CreateController()
         {
-            var controller = Substitute.ForPartsOf<CardClubBetListController>(
-                LangService,
-                SessionService,
-                ProductService,
-                BalanceUpDataAccess,
-                CacheRefAdapter,
-                BetListApiClient,
-                LicenseeSettingService);
-            return controller;
+            return new CardClubBetListController()
+            {
+                LangService = LangService,
+                SessionServiceInstance = SessionService,
+                ProductService = ProductService,
+                BalanceUpDataAccessInstance = BalanceUpDataAccess,
+                CacheRefAdapter = CacheRefAdapter,
+                BetListApiClient = BetListApiClient,
+                LicenseeSettingServiceInstance = LicenseeSettingService
+            };
         }
     }
 }

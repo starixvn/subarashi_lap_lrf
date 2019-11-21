@@ -15,7 +15,7 @@
         [Test]
         public async Task GetCustomerList_UserNameIsNotEqualPlaceholderUsername_ReturnUserName()
         {
-            using (var controller = CreateContoller())
+            using (var controller = CreateController())
             {
                 // Arrange
                 const string UserName = "UserName";
@@ -35,7 +35,7 @@
         [Test]
         public async Task GetCustomerList_IsFakeLicensee_PlaceholderUsernameIsExternalId()
         {
-            using (var controller = CreateContoller())
+            using (var controller = CreateController())
             {
                 // Arrange
                 var username = Resources.ViewResources.ExternalId;
@@ -55,7 +55,7 @@
         [Test]
         public async Task GetCustomerList_IsFakeLicensee_PlaceholderUsernameIsExternalIdOrSystemId()
         {
-            using (var controller = CreateContoller())
+            using (var controller = CreateController())
             {
                 // Arrange
                 var username = Resources.ViewResources.ExternalIdOrSystemId;
@@ -74,7 +74,7 @@
         [Test]
         public async Task GetCustomerList_InitGridColumns_IsAllowBA_AddBAStatusColumn()
         {
-            using (var controller = CreateContoller())
+            using (var controller = CreateController())
             {
                 // Arrange
                 const string BaStatus = "BAStatus";
@@ -94,7 +94,7 @@
         [Test]
         public async Task GetCustomerList_InitGridColumns_AllowLicensees_AddStatusColumn()
         {
-            using (var controller = CreateContoller())
+            using (var controller = CreateController())
             {
                 // Arrange
                 const string Status = "Status";
@@ -115,7 +115,7 @@
         [Test]
         public async Task GetCustomerList_InitGridColumns_AllowCustomerCommAndRealLicensee_AddCommissionColumn()
         {
-            using (var controller = CreateContoller())
+            using (var controller = CreateController())
             {
                 // Arrange
                 const string Commission = "Commission";
@@ -140,7 +140,7 @@
         [Test]
         public async Task GetCustomerList_CreateCustomerViewModel_IsAllowedCustomerComm_AddDataForGroupComm()
         {
-            using (var controller = CreateContoller())
+            using (var controller = CreateController())
             {
                 // Arrange
                 const int GroupCommId = 1;
@@ -151,7 +151,7 @@
                 StubLicenseeSessionData(new LicenseeAuthInfo { IsAllowedCustomerComm = true, LicenseeId = 2 });
 
                 // Action
-                var result = (CustomerListViewModel)(await controller.CustomerList(groupId: GroupCommId) as ViewResult).Model;
+                await controller.CustomerList(groupId: GroupCommId);
 
                 // Assert
                 Assert.Multiple(() =>
@@ -165,7 +165,7 @@
         [Test]
         public async Task GetCustomerList_SetValueForBaStatus_IsAllowedSpecialBA_DonotAddBAMessage()
         {
-            using (var controller = CreateContoller())
+            using (var controller = CreateController())
             {
                 // Arrange
                 _licenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(false);
@@ -185,7 +185,7 @@
         [Test]
         public async Task GetCustomerList_SetValueForBaStatus_IsNotAllowedSpecialBA_AddBAMessage()
         {
-            using (var controller = CreateContoller())
+            using (var controller = CreateController())
             {
                 // Arrange
                 const string BaMessage = "Message";
@@ -209,7 +209,7 @@
         [Test]
         public async Task GetCustomerList_SetValueForBaStatus_IsAllowedBAAndNotSpecialBA_AddBATimeCheck()
         {
-            using (var controller = CreateContoller())
+            using (var controller = CreateController())
             {
                 // Arrange
                 const string BaMessage = "Message";

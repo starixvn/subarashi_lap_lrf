@@ -143,7 +143,11 @@
 
         private DcsBetLimitController CreateController()
         {
-            return new DcsBetLimitController(LangService, SessionService, _cacheRefAdapter, _authorizationService, _dcsBetLimitService);
+            var result = new DcsBetLimitController(_dcsBetLimitService);
+            result.LangService = LangService;
+            result.SessionServiceInstance = SessionService;
+
+            return result;
         }
 
         private string GetSportName(string sportId) => sportId == MixedSportId ? ViewResources.MixSportsParlay : _cacheRefAdapter.GetSportName(sportId);

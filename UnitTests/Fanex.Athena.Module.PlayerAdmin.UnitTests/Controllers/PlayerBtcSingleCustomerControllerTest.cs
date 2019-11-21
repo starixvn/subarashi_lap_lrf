@@ -180,11 +180,11 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers
                 SessionService.UserSession.Language,
                 FunctionNames.BettingTicketCenter).Returns(expectedProductAccess ?? new ProductAccess(new List<Product>()));
 
-            return new PlayerBtcSingleCustomerController(
-                LangService,
-                SessionService,
-                _betListApiClient,
-                productService);
+            var result = new PlayerBtcSingleCustomerController(_betListApiClient, productService);
+            result.LangService = LangService;
+            result.SessionServiceInstance = SessionService;
+
+            return result;
         }
     }
 }

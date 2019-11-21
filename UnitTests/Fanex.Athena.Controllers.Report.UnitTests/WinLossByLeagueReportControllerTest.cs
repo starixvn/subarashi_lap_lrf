@@ -148,14 +148,17 @@
             productService.GetProductAccess(
                 SessionService.LicenseeSession.LicenseeId,
                 SessionService.UserSession.Language).Returns(new ProductAccess(new List<Product>()));
+
             return new WinLossByLeagueReportController(
-                LangService,
-                SessionService,
-                AppSettings,
-                productService,
                 _sportTypeDataAccess,
                 _leagueDataAccess,
-                _matchService);
+                _matchService)
+            {
+                SessionServiceInstance = SessionService,
+                LangService = LangService,
+                LicenseeSettingServiceInstance = Substitute.For<ILicenseeSettingService>(),
+                AppSettingInstance = AppSettings
+            };
         }
     }
 }

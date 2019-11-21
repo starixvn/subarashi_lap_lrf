@@ -1,20 +1,14 @@
 ﻿namespace Fanex.Athena.Controllers.TotalBets.UnitTests
 {
-    using Base.UnitTests;
-
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
-
-    using Model.Core.DTO.Common;
-    using Model.Report.ViewModel;
-
-    using NSubstitute;
-
-    using NUnit.Framework;
-
-    using Report;
-
     using System.Collections.Generic;
     using System.Web.Mvc;
+    using Base.UnitTests;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Model.Core.DTO.Common;
+    using Model.Report.ViewModel;
+    using NSubstitute;
+    using NUnit.Framework;
+    using Report;
 
     [TestFixture]
     public class ActiveCustomerSummaryReportControllerTest : CultureBaseControllerHelperTest
@@ -52,10 +46,12 @@
                 SessionService.LicenseeSession.LicenseeId,
                 SessionService.UserSession.Language)
                 .Returns(new ProductAccess(new List<Product>()));
-            return new ActiveCustomerSummaryReportController(
-                LangService,
-                SessionService,
-                productService);
+            return new ActiveCustomerSummaryReportController()
+            {
+                LangService = LangService,
+                SessionServiceInstance = SessionService,
+                ProductServiceInstance = productService
+            };
         }
     }
 }

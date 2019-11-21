@@ -137,16 +137,16 @@
 
         private SportsBookBetLimitController CreateController()
         {
-            return new SportsBookBetLimitController(
-                LangService,
-                SessionService,
-                AppSettings,
-                _cacheRefAdapter,
-                _authService,
-                _service)
+            var result = new SportsBookBetLimitController(_service)
             {
                 ControllerContext = ControllerContext
             };
+
+            result.AppSettingInstance = AppSettings;
+            result.LangService = LangService;
+            result.SessionServiceInstance = SessionService;
+
+            return result;
         }
     }
 }

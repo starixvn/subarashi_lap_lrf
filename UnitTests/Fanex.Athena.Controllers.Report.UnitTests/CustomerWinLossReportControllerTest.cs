@@ -124,13 +124,13 @@
             var licenseeSettingService = stubLicenseeSettingService ?? Substitute.For<ILicenseeSettingService>();
             _reportApiClient = Substitute.For<IReportAPIClient>();
 
-            return new CustomerWinLossReportController(
-                LangService,
-                SessionService,
-                productService,
-                reportSettingService,
-                licenseeSettingService,
-                _reportApiClient);
+            return new CustomerWinLossReportController(reportSettingService, _reportApiClient)
+            {
+                LangService = LangService,
+                SessionServiceInstance = SessionService,
+                ProductServiceInstance = productService,
+                LicenseeSettingServiceInstance = licenseeSettingService
+            };
         }
     }
 }

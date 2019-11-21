@@ -174,15 +174,13 @@
 
         private ResultKenoReportController CreateController()
         {
-            var controller = new ResultKenoReportController(
-                LangService,
-                SessionService,
-                Substitute.For<IProductService>(),
-                _logger,
-                _betListApiClient)
+            var controller = new ResultKenoReportController(_logger, _betListApiClient)
             {
                 ControllerContext = ControllerContext,
-                Url = Substitute.ForPartsOf<UrlHelper>(ControllerContext.RequestContext)
+                Url = Substitute.ForPartsOf<UrlHelper>(ControllerContext.RequestContext),
+                LangService = LangService,
+                SessionServiceInstance = SessionService,
+                ProductServiceInstance = Substitute.For<IProductService>()
             };
             return controller;
         }

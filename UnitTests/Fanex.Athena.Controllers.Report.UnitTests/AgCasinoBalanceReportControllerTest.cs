@@ -7,7 +7,6 @@
     using NSubstitute;
     using NUnit.Framework;
     using Report;
-    using Service.Core.Common.Interfaces;
 
     [TestFixture]
     public class AgCasinoBalanceReportControllerTest : CultureBaseControllerHelperTest
@@ -40,10 +39,12 @@
 
         private AgCasinoBalanceReportController CreateController()
         {
-            return new AgCasinoBalanceReportController(
-                LangService,
-                SessionService,
-                Substitute.For<IProductService>());
+            return new AgCasinoBalanceReportController()
+            {
+                LangService = LangService,
+                SessionServiceInstance = SessionService,
+                ProductServiceInstance = Substitute.For<IProductService>()
+            };
         }
     }
 }

@@ -45,7 +45,7 @@
         [Test]
         public async Task ExportExcel_WhenCall_ReturnsCorrectFileContent()
         {
-            using (var controller = new PromotionPrizeReportController(LangService, SessionService, _productService, _reportAPIClient))
+            using (var controller = new PromotionPrizeReportController(_reportAPIClient))
             {
                 // Arrange
                 var metaModel = new PromotionPrizeMetaModel();
@@ -59,6 +59,16 @@
                 Assert.That(result.FileContents, Is.EqualTo(expectedData.Item1));
                 Assert.That(result.ContentType, Is.EqualTo(expectedData.Item2));
             }
+        }
+
+        private PromotionPrizeReportController CreateController()
+        {
+            return new PromotionPrizeReportController(_reportAPIClient)
+            {
+                ProductServiceInstance = _productService,
+                LangService = LangService,
+                SessionServiceInstance = SessionService
+            };
         }
     }
 }

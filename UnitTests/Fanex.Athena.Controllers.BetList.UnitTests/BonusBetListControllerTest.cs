@@ -21,7 +21,6 @@
                 .Returns(new ProductAccess(new List<Product> { new Product { ProductCode = Product.AB } }));
 
             SetUpDefaultFakeData();
-
         }
 
         [Test]
@@ -76,14 +75,16 @@
 
         private BonusBetListController CreateController()
         {
-            var controller = Substitute.ForPartsOf<BonusBetListController>(
-                LangService,
-                SessionService,
-                ProductService,
-                BalanceUpDataAccess,
-                CacheRefAdapter,
-                BetListApiClient, LicenseeSettingService);
-            return controller;
+            return new BonusBetListController()
+            {
+                LangService = LangService,
+                SessionServiceInstance = SessionService,
+                ProductService = ProductService,
+                BalanceUpDataAccessInstance = BalanceUpDataAccess,
+                CacheRefAdapter = CacheRefAdapter,
+                BetListApiClient = BetListApiClient,
+                LicenseeSettingServiceInstance = LicenseeSettingService
+            };
         }
     }
 }

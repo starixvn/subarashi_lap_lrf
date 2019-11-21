@@ -6,7 +6,6 @@
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using NSubstitute;
     using NUnit.Framework;
-    using Service.Core.Common.Interfaces;
 
     public partial class CustomerLogControllerTest : CultureBaseControllerHelperTest
     {
@@ -45,7 +44,11 @@
 
         private CustomerLogController CreateController()
         {
-            return new CustomerLogController(LangService, SessionService, _productService);
+            return new CustomerLogController(_productService)
+            {
+                LangService = LangService,
+                SessionServiceInstance = SessionService,
+            };
         }
     }
 }

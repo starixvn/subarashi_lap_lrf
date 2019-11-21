@@ -117,12 +117,14 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers
             var licenseeSettingService = stubLicenseeSettingService ?? Substitute.For<ILicenseeSettingService>();
             _reportApiClient = Substitute.For<IReportAPIClient>();
 
-            return new PlayerWinLossController(
-                LangService,
-                SessionService,
+            var result = new PlayerWinLossController(
                 productService,
-                _reportApiClient,
-                licenseeSettingService);
+                _reportApiClient);
+            result.LangService = LangService;
+            result.LicenseeSettingServiceInstance = licenseeSettingService;
+            result.SessionServiceInstance = SessionService;
+
+            return result;
         }
     }
 }

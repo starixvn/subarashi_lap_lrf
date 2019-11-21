@@ -170,15 +170,14 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers.BetLimits
 
         private AGCasinoBetLimitController CreateController()
         {
-            return new AGCasinoBetLimitController(
-                LangService,
-                SessionService,
-                _cacheRefAdapter,
-                _authService,
-                _service)
+            var result = new AGCasinoBetLimitController(_service)
             {
                 ControllerContext = ControllerContext
             };
+            result.LangService = LangService;
+            result.SessionServiceInstance = SessionService;
+
+            return result;
         }
     }
 }

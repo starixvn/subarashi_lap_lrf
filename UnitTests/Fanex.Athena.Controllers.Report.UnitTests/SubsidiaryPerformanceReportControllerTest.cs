@@ -128,11 +128,12 @@
                 FunctionNames.SubsidiaryPerformance)
                 .Returns(new ProductAccess(new List<Product> { new Product { ProductCode = FakeProductCode, ProductName = FakeProductName } }));
 
-            return new SubsidiaryPerformanceReportController(
-                LangService,
-                SessionService,
-                productService,
-                _subsidiaryService);
+            return new SubsidiaryPerformanceReportController(_subsidiaryService)
+            {
+                ProductServiceInstance = productService,
+                LangService = LangService,
+                SessionServiceInstance = SessionService,
+            };
         }
     }
 }

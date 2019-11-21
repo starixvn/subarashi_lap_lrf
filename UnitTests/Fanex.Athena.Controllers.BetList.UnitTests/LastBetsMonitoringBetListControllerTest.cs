@@ -22,7 +22,6 @@
             _sportTypeDataAccess = Substitute.For<ISportTypeDataAccess>();
 
             SetUpDefaultFakeData();
-
         }
 
         [Test]
@@ -70,11 +69,11 @@
 
         private LastBetsMonitoringBetListController CreateController()
         {
-            var controller = Substitute.ForPartsOf<LastBetsMonitoringBetListController>(
-                LangService,
-                SessionService,
-                _sportTypeDataAccess);
-            return controller;
+            return new LastBetsMonitoringBetListController(_sportTypeDataAccess)
+            {
+                LangService = LangService,
+                SessionServiceInstance = SessionService
+            };
         }
     }
 }

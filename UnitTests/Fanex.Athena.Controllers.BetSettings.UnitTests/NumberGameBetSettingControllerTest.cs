@@ -181,13 +181,13 @@
             _betSettingService = Substitute.For<INumberGameBetSettingService>();
 
             var controller = new NumberGameBetSettingController(
-                LangService,
-                SessionService,
                 CoreBetSettingService,
                 ProductService,
-                _betSettingService, LicenseeSettingService)
+                _betSettingService)
             {
-                ControllerContext = ControllerContext
+                ControllerContext = ControllerContext,
+                SessionServiceInstance = SessionService,
+                LicenseeSettingServiceInstance = LicenseeSettingService
             };
 
             return controller;

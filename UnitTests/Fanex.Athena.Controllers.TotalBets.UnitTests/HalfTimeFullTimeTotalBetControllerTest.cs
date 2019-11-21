@@ -84,10 +84,11 @@
 
         private HalfTimeFullTimeTotalBetController CreateController()
         {
-            return new HalfTimeFullTimeTotalBetController(
-                            LangService,
-                            SessionService,
-                            _halfTimeFullTimeDataAccess);
+            return new HalfTimeFullTimeTotalBetController(_halfTimeFullTimeDataAccess)
+            {
+                LangService = LangService,
+                SessionServiceInstance = SessionService
+            };
         }
     }
 }

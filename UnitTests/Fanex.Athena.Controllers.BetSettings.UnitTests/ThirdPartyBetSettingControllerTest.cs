@@ -4,9 +4,9 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Model.Core.DataDomain;
     using Model.BetSettings.MetaModel;
     using Model.BetSettings.ViewModel;
+    using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using NSubstitute;
     using NUnit.Framework;
@@ -39,7 +39,7 @@
                 // Arrange
                 var metaModel = new BetSettingMetaModel { ProductId = ProductTypes.Macau, CustId = 100 };
 
-                _betSettingService.GetViewModelAsync( metaModel.CustId, metaModel.ProductId)
+                _betSettingService.GetViewModelAsync(metaModel.CustId, metaModel.ProductId)
                     .Returns(Task.FromResult<ThirdPartyBetSettingViewModel>(null));
 
                 // Action
@@ -62,7 +62,7 @@
                 // Arrange
                 var metaModel = new BetSettingMetaModel { ProductId = productId };
 
-                _betSettingService.GetViewModelAsync( metaModel.CustId, metaModel.ProductId)
+                _betSettingService.GetViewModelAsync(metaModel.CustId, metaModel.ProductId)
                     .Returns(Task.FromResult(new ThirdPartyBetSettingViewModel()));
 
                 // Action
@@ -88,7 +88,7 @@
                 // Arrange
                 var metaModel = new BetSettingMetaModel { ProductId = productId };
 
-                _betSettingService.GetViewModelAsync( metaModel.CustId, metaModel.ProductId)
+                _betSettingService.GetViewModelAsync(metaModel.CustId, metaModel.ProductId)
                     .Returns(Task.FromResult(new ThirdPartyBetSettingViewModel()));
 
                 // Action
@@ -133,7 +133,7 @@
                 CoreBetSettingService.IsBetSettingEditable(DefaultUserSession).Returns(true);
 
                 _betSettingService.UpdateStatusAsync(
-                   
+
                    Arg.Any<int>(),
                    DefaultUserSession.UserId,
                    Arg.Any<int>(),
@@ -166,7 +166,7 @@
                 CoreBetSettingService.IsBetSettingEditable(DefaultUserSession).Returns(true);
 
                 _betSettingService.UpdateStatusAsync(
-                  
+
                    Arg.Any<int>(),
                    DefaultUserSession.UserId,
                    Arg.Any<int>(),
@@ -195,7 +195,7 @@
                 CoreBetSettingService.IsBetSettingEditable(DefaultUserSession).Returns(true);
 
                 _betSettingService.UpdateStatusAsync(
-                   
+
                    Arg.Any<int>(),
                    DefaultUserSession.UserId,
                    Arg.Any<int>(),
@@ -228,7 +228,7 @@
                 CoreBetSettingService.IsBetSettingEditable(DefaultUserSession).Returns(true);
 
                 _betSettingService.UpdateStatusAsync(
-                   
+
                    Arg.Any<int>(),
                    DefaultUserSession.UserId,
                    Arg.Any<int>(),
@@ -279,7 +279,7 @@
                 CoreBetSettingService.IsBetSettingEditable(DefaultUserSession).Returns(true);
 
                 _betSettingService.UpdateStatusAsync(
-                   
+
                    Arg.Any<int>(),
                    DefaultUserSession.UserId,
                    Arg.Any<int>(),
@@ -312,7 +312,7 @@
                 CoreBetSettingService.IsBetSettingEditable(DefaultUserSession).Returns(true);
 
                 _betSettingService.UpdateStatusAsync(
-                   
+
                    Arg.Any<int>(),
                    DefaultUserSession.UserId,
                    Arg.Any<int>(),
@@ -363,7 +363,7 @@
                 CoreBetSettingService.IsBetSettingEditable(DefaultUserSession).Returns(true);
 
                 _betSettingService.UpdateStatusAsync(
-                   
+
                    Arg.Any<int>(),
                    DefaultUserSession.UserId,
                    Arg.Any<int>(),
@@ -396,7 +396,7 @@
                 CoreBetSettingService.IsBetSettingEditable(DefaultUserSession).Returns(true);
 
                 _betSettingService.UpdateStatusAsync(
-                  
+
                    Arg.Any<int>(),
                    DefaultUserSession.UserId,
                    Arg.Any<int>(),
@@ -418,13 +418,14 @@
             _betSettingService = Substitute.For<IThirdPartyBetSettingService>();
 
             var controller = new ThirdPartyBetSettingController(
-                LangService,
-                SessionService,
                 CoreBetSettingService,
                 ProductService,
-                _betSettingService, LicenseeSettingService)
+                _betSettingService)
             {
-                ControllerContext = ControllerContext
+                ControllerContext = ControllerContext,
+                LangService = LangService,
+                SessionServiceInstance = SessionService,
+                LicenseeSettingServiceInstance = LicenseeSettingService
             };
             return controller;
         }

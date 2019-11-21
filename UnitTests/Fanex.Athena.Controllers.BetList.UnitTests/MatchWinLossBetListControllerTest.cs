@@ -101,7 +101,6 @@
             }
         }
 
-
         [TestCase(1, "Lrf_BetList_MatchWL_Bettype")]
         public async Task MatchBetType_ExportExcel_PassCorrectParam(int betTypeId, string uspKey)
         {
@@ -228,14 +227,16 @@
 
         private MatchWinLossBetListController CreateController()
         {
-            var controller = Substitute.ForPartsOf<MatchWinLossBetListController>(
-                LangService,
-                SessionService,
-                ProductService,
-                BalanceUpDataAccess,
-                CacheRefAdapter,
-                BetListApiClient, LicenseeSettingService);
-            return controller;
+            return new MatchWinLossBetListController()
+            {
+                LangService = LangService,
+                SessionServiceInstance = SessionService,
+                ProductService = ProductService,
+                BalanceUpDataAccessInstance = BalanceUpDataAccess,
+                CacheRefAdapter = CacheRefAdapter,
+                BetListApiClient = BetListApiClient,
+                LicenseeSettingServiceInstance = LicenseeSettingService
+            };
         }
     }
 }

@@ -135,20 +135,21 @@
                 {
                     ProductCode = x
                 });
+
             var productService = Substitute.For<IProductService>();
             productService.GetProductAccess(
                 SessionService.LicenseeSession.LicenseeId,
                 SessionService.UserSession.Language,
                 Arg.Any<string>()).Returns(new ProductAccess(productList.ToList()));
-            var controller = new ResultReportController(
-                LangService,
-                SessionService,
-                productService,
-                _balanceUpDataAccess,
-                _betListApiClient)
+
+            var controller = new ResultReportController(_balanceUpDataAccess, _betListApiClient)
             {
-                ControllerContext = ControllerContext
+                ControllerContext = ControllerContext,
+                LangService = LangService,
+                SessionServiceInstance = SessionService,
+                ProductServiceInstance = productService
             };
+
             return controller;
         }
     }

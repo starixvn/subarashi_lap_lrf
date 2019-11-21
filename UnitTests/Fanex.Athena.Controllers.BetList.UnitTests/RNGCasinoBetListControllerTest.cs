@@ -53,7 +53,6 @@
             }
         }
 
-
         [Test]
         public async Task Detail_ExportExcel_PassCorrectParam()
         {
@@ -91,14 +90,16 @@
 
         private RNGCasinoBetListController CreateController()
         {
-            var controller = Substitute.ForPartsOf<RNGCasinoBetListController>(
-                LangService,
-                SessionService,
-                ProductService,
-                BalanceUpDataAccess,
-                CacheRefAdapter,
-                BetListApiClient, LicenseeSettingService);
-            return controller;
+            return new RNGCasinoBetListController()
+            {
+                LangService = LangService,
+                SessionServiceInstance = SessionService,
+                ProductService = ProductService,
+                BalanceUpDataAccessInstance = BalanceUpDataAccess,
+                CacheRefAdapter = CacheRefAdapter,
+                BetListApiClient = BetListApiClient,
+                LicenseeSettingServiceInstance = LicenseeSettingService
+            };
         }
     }
 }

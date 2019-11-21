@@ -218,13 +218,13 @@
         private KenoBetSettingController CreateController()
         {
             var controller = new KenoBetSettingController(
-                LangService,
-                SessionService,
                 CoreBetSettingService,
                 ProductService,
-                _betSettingService, LicenseeSettingService)
+                _betSettingService)
             {
-                ControllerContext = ControllerContext
+                ControllerContext = ControllerContext,
+                SessionServiceInstance = SessionService,
+                LicenseeSettingServiceInstance = LicenseeSettingService
             };
 
             return controller;

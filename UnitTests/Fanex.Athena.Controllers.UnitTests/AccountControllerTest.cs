@@ -76,12 +76,12 @@
 
         private AccountController CreateController()
         {
-            return new AccountController(
-            LangService,
-            SessionService,
-            _userService)
+            return new AccountController(_userService)
             {
-                ControllerContext = ControllerContext
+                ControllerContext = ControllerContext,
+                LangService = LangService,
+                SessionServiceInstance = SessionService
+
             };
         }
 

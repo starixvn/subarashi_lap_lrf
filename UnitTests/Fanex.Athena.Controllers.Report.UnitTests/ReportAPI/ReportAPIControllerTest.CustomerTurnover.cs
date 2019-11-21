@@ -129,10 +129,12 @@
         private ReportAPIController CreateController()
         {
             return new ReportAPIController(
-                SessionService,
                 _betTypeService,
                 _customerTurnoverService,
-                _turnoverService, _licenseeSettingService);
+                _turnoverService, _licenseeSettingService)
+            {
+                SessionServiceInstance = SessionService
+            };
         }
     }
 }

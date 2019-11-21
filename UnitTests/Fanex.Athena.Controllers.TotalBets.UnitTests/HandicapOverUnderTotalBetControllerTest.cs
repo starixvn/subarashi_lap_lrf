@@ -171,11 +171,12 @@
 
         private HandicapOverUnderTotalBetController CreateController()
         {
-            return new HandicapOverUnderTotalBetController(
-                            LangService,
-                            SessionService,
-                            AppSettings,
-                            _handicapOverUnderDataAccess);
+            return new HandicapOverUnderTotalBetController(_handicapOverUnderDataAccess)
+            {
+                LangService = LangService,
+                SessionServiceInstance = SessionService,
+                AppSettingInstance = AppSettings
+            };
         }
     }
 }

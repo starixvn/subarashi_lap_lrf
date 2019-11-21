@@ -133,8 +133,8 @@
             }
         }
 
-        [TestCase(1,"USD", null, "USD")]
-        [TestCase(1,"USD", "eur", "EUR")]
+        [TestCase(1, "USD", null, "USD")]
+        [TestCase(1, "USD", "eur", "EUR")]
         [TestCase(0, "", "CNY", "CNY")]
         public async Task Match_ExportExcel_PassCorrectParam(
             int currencyId,
@@ -175,7 +175,6 @@
             }
         }
 
-
         [TestCase(1, "USD", null, "USD")]
         [TestCase(1, "USD", "eur", "EUR")]
         public async Task MixParlay_ExportExcel_PassCorrectParam(
@@ -214,8 +213,8 @@
             }
         }
 
-        [TestCase(1,"USD", null, "USD")]
-        [TestCase(1,"USD", "eur", "EUR")]
+        [TestCase(1, "USD", null, "USD")]
+        [TestCase(1, "USD", "eur", "EUR")]
         public async Task Outright_ExportExcel_PassCorrectParam(
             int currencyId,
             string currency, string baseCurrency, string expectedCurrency)
@@ -249,7 +248,6 @@
                 await AssertExcelParameters(startIndex, expectedTitle, "Lrf_BetList_LiveReport_SelWinlossOutright", controller);
             }
         }
-
 
         [TestCase(1, "USD", null, "USD")]
         [TestCase(1, "USD", "eur", "EUR")]
@@ -287,7 +285,6 @@
                 await AssertExcelParameters(startIndex, expectedTitle, "Lrf_BetList_LiveReport_SelWinlossNumberGame", controller);
             }
         }
-
 
         [TestCase(1, "USD", null, "USD")]
         [TestCase(1, "USD", "eur", "EUR")]
@@ -362,13 +359,16 @@
 
         private LiveReportBetListController CreateController()
         {
-            return Substitute.ForPartsOf<LiveReportBetListController>(
-                LangService,
-                SessionService,
-                ProductService,
-                BalanceUpDataAccess,
-                CacheRefAdapter,
-                BetListApiClient, LicenseeSettingService);
+            return new LiveReportBetListController()
+            {
+                LangService = LangService,
+                SessionServiceInstance = SessionService,
+                ProductService = ProductService,
+                BalanceUpDataAccessInstance = BalanceUpDataAccess,
+                CacheRefAdapter = CacheRefAdapter,
+                BetListApiClient = BetListApiClient,
+                LicenseeSettingServiceInstance = LicenseeSettingService
+            };
         }
     }
 }

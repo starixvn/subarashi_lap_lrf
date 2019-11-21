@@ -3,9 +3,9 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Model.Core.DataDomain;
     using Model.BetList.MetaModel;
     using Model.BetList.ViewModel;
+    using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using NSubstitute;
     using NUnit.Framework;
@@ -24,7 +24,6 @@
                 .Returns(new ProductAccess(new List<Product> { new Product { ProductCode = Product.AB } }));
 
             SetUpDefaultFakeData();
-
         }
 
         [Test]
@@ -215,13 +214,16 @@
 
         private RunningBetListController CreateController()
         {
-            return Substitute.ForPartsOf<RunningBetListController>(
-                LangService,
-                SessionService,
-                ProductService,
-                BalanceUpDataAccess,
-                CacheRefAdapter,
-                BetListApiClient, LicenseeSettingService);
+            return new RunningBetListController()
+            {
+                LangService = LangService,
+                SessionServiceInstance = SessionService,
+                ProductService = ProductService,
+                BalanceUpDataAccessInstance = BalanceUpDataAccess,
+                CacheRefAdapter = CacheRefAdapter,
+                BetListApiClient = BetListApiClient,
+                LicenseeSettingServiceInstance = LicenseeSettingService
+            };
         }
     }
 }

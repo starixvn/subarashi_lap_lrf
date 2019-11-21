@@ -9,14 +9,12 @@
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DTO.Common;
-    using Model.Core.DTO.Users;
     using Model.Core.ResultModel;
     using Model.Customer.DTO;
     using Model.Customer.MetaModel;
     using Model.Customer.ViewModel;
     using NSubstitute;
     using NUnit.Framework;
-    using Service.Core.Common.Interfaces;
     using Service.Customer.Interfaces;
     using Service.Report.Interfaces;
 
@@ -77,7 +75,7 @@
         [Test]
         public void LogInfo_WhenCall_CallServiceToGetData()
         {
-            using (var controller = CreateContoller())
+            using (var controller = CreateController())
             {
                 // Arrange
                 const int CustId = 1;
@@ -98,7 +96,7 @@
         [Test]
         public void LogInfo_WhenCall_ReturnCorrectResult()
         {
-            using (var controller = CreateContoller())
+            using (var controller = CreateController())
             {
                 // Arrange
                 const int CustId = 2;
@@ -130,7 +128,7 @@
         [Test]
         public async Task ExportExcel_ParameterIsNull_ReturnNull()
         {
-            using (var controller = CreateContoller())
+            using (var controller = CreateController())
             {
                 // Action
                 var result = await controller.ExportExcel(null);
@@ -143,7 +141,7 @@
         [Test]
         public async Task ExportExcel_GridColumnIsEmpty_ReturnEmptyFile()
         {
-            using (var controller = CreateContoller())
+            using (var controller = CreateController())
             {
                 // Arrange
                 const string ExcelFileName = "Empty.xls";
@@ -161,7 +159,7 @@
         [TestCase(true)]
         public async Task ExportExcel_IsConvertIsFalse_ExportWithCorrectReportTitleAsync(bool isConvert)
         {
-            using (var controller = CreateContoller())
+            using (var controller = CreateController())
             {
                 // Arrange
                 const string CurrencyName = "CNY";
@@ -191,11 +189,17 @@
                 var reportTitle = Resources.ViewResources.CustomerList + " - "
                         + string.Format(Resources.ViewResources.Viewin, isConvert ? BaseCurrency.ToUpperInvariant() : CurrencyName);
                 var path = string.Empty;
+
                 controller.CreateExcel(
                    path,
                    reportTitle,
-                   new CustomerListViewModel { DataList = new List<CustomerDTO>(), Param = new CustomerListMetaModel { GridColumns = new List<CheckedItem>() } })
-                   .ReturnsForAnyArgs(excel);
+                   new CustomerListViewModel {
+                       DataList = new List<CustomerDTO>(),
+                       Param = new CustomerListMetaModel {
+                           GridColumns = new List<CheckedItem>()
+                       }
+                   }).ReturnsForAnyArgs(excel);
+
                 controller.When(x => x.CreateExcel(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<CustomerListViewModel>())).Do(x => actualReportTitle = (string)x[1]);
 
                 // Action
@@ -210,21 +214,22 @@
             }
         }
 
-        private CustomerController CreateContoller()
+        private CustomerController CreateController()
         {
-            var controller = Substitute.ForPartsOf<CustomerController>(
-                LangService,
-                SessionService,
-                AppSettings,
+            return new CustomerController(
                 _customerListService,
                 _groupComService,
                 _licenseeDataAccess,
                 _productService,
                 _subsidiaryService,
-                _authorizationService, _licenseeSettingService);
-            controller.ControllerContext = ControllerContext;
-
-            return controller;
+                _authorizationService)
+            {
+                LangService = LangService,
+                SessionServiceInstance = SessionService,
+                AppSettingInstance = AppSettings,
+                LicenseeSettingServiceInstance = _licenseeSettingService,
+                ControllerContext = ControllerContext
+            };
         }
     }
 }

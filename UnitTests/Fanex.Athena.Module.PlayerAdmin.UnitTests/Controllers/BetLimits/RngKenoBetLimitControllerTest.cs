@@ -135,7 +135,11 @@
 
         private RngKenoBetLimitController CreateController()
         {
-            return new RngKenoBetLimitController(LangService, SessionService, _cacheRefAdapter, _authorizationService, _rngKenoBetLimitService);
+            var result = new RngKenoBetLimitController(_rngKenoBetLimitService);
+            result.LangService = LangService;
+            result.SessionServiceInstance = SessionService;
+
+            return result;
         }
     }
 }

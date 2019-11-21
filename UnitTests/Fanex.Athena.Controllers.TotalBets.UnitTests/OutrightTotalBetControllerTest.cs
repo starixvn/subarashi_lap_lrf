@@ -67,10 +67,11 @@
 
         private OutrightTotalBetController CreateController()
         {
-            return new OutrightTotalBetController(
-                            LangService,
-                            SessionService,
-                            _outrightDataAccess);
+            return new OutrightTotalBetController(_outrightDataAccess)
+            {
+                LangService = LangService,
+                SessionServiceInstance = SessionService
+            };
         }
 
         private void SepUpForService()

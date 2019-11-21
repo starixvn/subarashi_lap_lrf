@@ -145,11 +145,13 @@
                 SessionService.LicenseeSession.LicenseeId,
                 SessionService.UserSession.Language,
                 FunctionNames.PlatformWinloss).Returns(new ProductAccess(new List<Product>()));
-            return new PlatformWinLossReportController(
-                LangService,
-                SessionService,
-                productService,
-                _reportAPIClient);
+
+            return new PlatformWinLossReportController(_reportAPIClient)
+            {
+                LangService = LangService,
+                SessionServiceInstance = SessionService,
+                ProductServiceInstance = productService
+            };
         }
     }
 }

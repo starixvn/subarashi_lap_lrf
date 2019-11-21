@@ -69,7 +69,11 @@
 
         private TotalGoalTotalBetController CreateController()
         {
-            return new TotalGoalTotalBetController(LangService, SessionService, _totalGoalDataAccess);
+            return new TotalGoalTotalBetController(_totalGoalDataAccess)
+            {
+                LangService = LangService,
+                SessionServiceInstance = SessionService
+            };
         }
 
         private void SepUpForService()

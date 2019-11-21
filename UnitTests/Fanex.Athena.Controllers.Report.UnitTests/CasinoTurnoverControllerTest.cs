@@ -7,6 +7,7 @@
     using Fanex.Athena.Controllers.Base.UnitTests;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Core.MetaModel.Product;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
@@ -14,7 +15,6 @@
     using Model.Report.ViewModel;
     using NSubstitute;
     using NUnit.Framework;
-    using Fanex.Athena.Model.Core.MetaModel.Product;
 
     public class CasinoTurnoverControllerTest : CultureBaseControllerHelperTest
     {
@@ -125,12 +125,19 @@
             var productList = productIdList == null ?
                 new List<Product>() :
                 productIdList.Select(x => new Product { ProductID = x });
+
             var productService = Substitute.For<IProductService>();
             productService.GetSingleWalletProductAccess(
                 SessionService.LicenseeSession.LicenseeId,
                 SessionService.UserSession.Language,
                 FunctionNames.CasinoTurnover).ReturnsForAnyArgs(new ProductAccess(productList.ToList()));
-            return new CasinoTurnoverController(LangService, SessionService, productService, _reportSettingService);
+
+            return new CasinoTurnoverController(_reportSettingService)
+            {
+                LangService = LangService,
+                SessionServiceInstance = SessionService,
+                ProductServiceInstance = productService
+            };
         }
     }
 }
