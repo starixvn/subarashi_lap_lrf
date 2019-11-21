@@ -6,20 +6,6 @@
 
 namespace Fanex.Athena.Controllers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Drawing;
-    using System.Drawing.Imaging;
-    using System.Globalization;
-    using System.IO;
-    using System.Text;
-    using System.Text.RegularExpressions;
-    using System.Web;
-    using System.Web.Caching;
-    using System.Web.Mvc;
-    using System.Web.Security;
-    using System.Web.UI;
-
     using Extension.Utility.Interfaces;
 
     using Fanex.Athena.Extension.Utility;
@@ -35,7 +21,19 @@ namespace Fanex.Athena.Controllers
 
     using Resources;
 
-    using Service.Core.Common.Interfaces;
+    using System;
+    using System.Collections.Generic;
+    using System.Drawing;
+    using System.Drawing.Imaging;
+    using System.Globalization;
+    using System.IO;
+    using System.Text;
+    using System.Text.RegularExpressions;
+    using System.Web;
+    using System.Web.Caching;
+    using System.Web.Mvc;
+    using System.Web.Security;
+    using System.Web.UI;
 
     public class AuthorizationController : CultureBaseController
     {

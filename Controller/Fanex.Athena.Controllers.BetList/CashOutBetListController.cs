@@ -11,7 +11,6 @@
 
     public class CashOutBetListController : BetListBaseController
     {
-
         [HttpGet]
         [ValidationWebRequest]
         public async Task<ActionResult> Detail(CashOutBetListDetailMetaModel metaModel)

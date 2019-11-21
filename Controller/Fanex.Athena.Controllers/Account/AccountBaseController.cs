@@ -6,9 +6,6 @@
 
 namespace Fanex.Athena.Controllers.Account
 {
-    using System.Web.Mvc;
-
-    using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Auth.Enum;
 
@@ -16,8 +13,7 @@ namespace Fanex.Athena.Controllers.Account
 
     using ONEbook.UM.Filters;
 
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
+    using System.Web.Mvc;
 
     using Web.ActionFilter;
 

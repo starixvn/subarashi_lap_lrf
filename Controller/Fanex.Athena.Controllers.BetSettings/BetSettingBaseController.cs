@@ -6,12 +6,6 @@
 
 namespace Fanex.Athena.Controllers.BetSettings
 {
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-    using System.Web.SessionState;
-
-    using Autofac.Integration.Mvc;
-
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.BetSettings.DTO;
@@ -27,8 +21,10 @@ namespace Fanex.Athena.Controllers.BetSettings
     using Resources;
 
     using Service.BetSettings.Interfaces;
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
+
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
+    using System.Web.SessionState;
 
     using Web.ActionFilter;
 

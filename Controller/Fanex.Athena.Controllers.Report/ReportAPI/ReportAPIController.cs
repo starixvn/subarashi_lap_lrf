@@ -8,7 +8,6 @@ namespace Fanex.Athena.Controllers.Report
 {
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
-    using Service.Core.Users.Interfaces;
     using Service.Report.Interfaces;
 
     public partial class ReportAPIController : NonCultureBaseController

@@ -6,12 +6,6 @@
 
 namespace Fanex.Athena.Controllers.BetSettings
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -25,8 +19,12 @@ namespace Fanex.Athena.Controllers.BetSettings
     using Resources;
 
     using Service.BetSettings.Interfaces;
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
+
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
 
     public class DcsBetSettingController : BetSettingBaseController
     {
@@ -105,7 +103,6 @@ namespace Fanex.Athena.Controllers.BetSettings
         [HttpPost]
         [CustomValidateAntiForgery]
         [ValidatePermissionOnData]
-
         public async Task<JsonResult> UpdateStatus(int custId, string nickName, int status, int productId)
         {
             var userSession = SessionServiceInstance.UserSession;

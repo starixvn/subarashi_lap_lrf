@@ -1,13 +1,7 @@
 namespace Fanex.Athena.Controllers.Report.Result
 {
-    using System;
-    using System.Linq;
-    using System.Net;
-    using System.Threading.Tasks;
-    using System.Web;
-    using System.Web.Mvc;
-
     using DataAccess.Core.Configuration.Interfaces;
+
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -17,8 +11,12 @@ namespace Fanex.Athena.Controllers.Report.Result
     using Model.Report.MetaModel.Result;
     using Model.Report.ViewModel.Result;
 
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
+    using System;
+    using System.Linq;
+    using System.Net;
+    using System.Threading.Tasks;
+    using System.Web;
+    using System.Web.Mvc;
 
     public class ResultReportController : ReportBaseController
     {

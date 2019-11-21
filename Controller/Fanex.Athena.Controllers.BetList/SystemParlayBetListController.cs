@@ -8,27 +8,18 @@ namespace Fanex.Athena.Controllers.BetList
 {
     #region Using
 
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-
-    using DataAccess.Core.Configuration.Interfaces;
-
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
 
     using Model.BetList.MetaModel;
     using Model.BetList.ViewModel;
 
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
-
-    using VendorAdapter.Interfaces;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
 
     #endregion Using
 
     public class SystemParlayBetListController : BetListBaseController
     {
-
         [HttpGet]
         [ValidationWebRequest]
         [AutoBindMetaModel(BindAgent = true)]

@@ -8,23 +8,13 @@ namespace Fanex.Athena.Controllers.Customer
 {
     #region Using
 
-    using System;
-    using System.Linq;
-    using System.Net;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-    using System.Web.SessionState;
-
     using DataAccess.Core.Users.Interfaces;
-
-    using Extension.Utility;
 
     using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Extension.Helpers;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Customer.MetaModel;
-    using Fanex.Athena.Service.Core.Common.Interfaces;
     using Fanex.Athena.Service.Customer.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
@@ -36,15 +26,21 @@ namespace Fanex.Athena.Controllers.Customer
 
     using Resources;
 
-    using Service.Core.Users.Interfaces;
     using Service.Customer.Helpers;
+
+    using System;
+    using System.Linq;
+    using System.Net;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
+    using System.Web.SessionState;
 
     #endregion Using
 
     [SessionState(SessionStateBehavior.ReadOnly)]
     [CheckUMFilter]
     [FunctionAuthorization(PermissionKeys.CustomerInfoCustomerList)]
-    public class CustomerApiController : ContentBaseController
+    public class CustomerApiController : CultureBaseController
     {
         private const string CustomerAPIRemoveFromGroupComName = "CustomerAPI_RemoveFromGroupCom";
 
@@ -55,6 +51,7 @@ namespace Fanex.Athena.Controllers.Customer
         private readonly ILicenseeDataAccess _licenseeDataAccess;
         private readonly IProductService _productService;
         private readonly IAuthorizationService _authorizationService;
+
         public CustomerApiController(
             ILogger logger,
             ICustomerCommService customerCommService,
@@ -72,7 +69,6 @@ namespace Fanex.Athena.Controllers.Customer
             _productService = productService;
             _authorizationService = authorizationService;
         }
-
 
         #region Level & Status API
 

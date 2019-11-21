@@ -1,14 +1,14 @@
 namespace Fanex.Athena.Controllers.Report.Result.ResultPopup
 {
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
 
     public class CardClubResultPopupController : CultureBaseController
     {
         private readonly IBetListApiClient _betListApiClient;
+
         public CardClubResultPopupController(
             IBetListApiClient betListApiClient)
         {

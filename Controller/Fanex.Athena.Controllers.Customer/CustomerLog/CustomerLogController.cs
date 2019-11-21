@@ -6,16 +6,14 @@
 
 namespace Fanex.Athena.Controllers.Customer.CustomerLog
 {
-    using System.Web.Mvc;
-    using System.Web.SessionState;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
 
     using ONEbook.UM.Filters;
 
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
+    using System.Web.Mvc;
+    using System.Web.SessionState;
 
     [SessionState(SessionStateBehavior.ReadOnly)]
     [CheckUMFilter]

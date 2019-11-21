@@ -55,21 +55,18 @@
             int[] logDetailIds)
         {
             var status = isSuccessful ? Success : False;
-
-            foreach (var item in setting)
+            var updatedItems = setting.Where(x => x.IsUpdated);
+            foreach (var item in updatedItems)
             {
-                if (item.IsUpdated)
+                var id = getSportTypeFunc?.Invoke(item);
+                for (var i = 0; i < logDetailIds.Length; i++)
                 {
-                    var id = getSportTypeFunc(item);
-                    for (var i = 0; i < logDetailIds.Length; i++)
-                    {
-                        var logDetailId = logDetailIds[i];
-                        var betLimitLogDetailItem = GetBetLimitLogDetailItem(logDetailId, id, status, item);
+                    var logDetailId = logDetailIds[i];
+                    var betLimitLogDetailItem = GetBetLimitLogDetailItem(logDetailId, id, status, item);
 
-                        if (betLimitLogDetailItem != null)
-                        {
-                            yield return betLimitLogDetailItem;
-                        }
+                    if (betLimitLogDetailItem != null)
+                    {
+                        yield return betLimitLogDetailItem;
                     }
                 }
             }

@@ -6,10 +6,6 @@
 
 namespace Fanex.Athena.Controllers.BetSettings
 {
-    using System;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
 
@@ -21,8 +17,10 @@ namespace Fanex.Athena.Controllers.BetSettings
     using Resources;
 
     using Service.BetSettings.Interfaces;
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
+
+    using System;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
 
     public class KenoBetSettingController : BetSettingBaseController
     {
@@ -41,7 +39,6 @@ namespace Fanex.Athena.Controllers.BetSettings
         [HttpGet]
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         [ValidatePermissionOnData(isObject: true)]
-
         public async Task<ActionResult> Index(BetSettingMetaModel metaModel)
         {
             var viewModel = await _betSettingService.GetViewModelAsync(

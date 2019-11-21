@@ -8,22 +8,15 @@ namespace Fanex.Athena.Controllers.BetList
 {
     #region Using
 
-    using System;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-
-    using DataAccess.Core.Configuration.Interfaces;
     using Fanex.Athena.Model.Auth.DataDomain;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     using Model.BetList.MetaModel;
 
     using Resources;
 
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
-
-    using VendorAdapter.Interfaces;
+    using System;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
 
     using Web.ActionFilter;
 
@@ -36,6 +29,7 @@ namespace Fanex.Athena.Controllers.BetList
 
         private static readonly int[] HiddenColList =
             new[] { ExternalIdColumn, SystemIdColumn, WinLostColumn, BetEffectiveColumn, LicenseeWLColumn };
+
         [HttpGet]
         [ValidationWebRequest(IsValidCurrency = true)]
         public async Task<ActionResult> Index(BetListExcelMetaModel metaModel)

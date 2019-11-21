@@ -7,11 +7,14 @@
 namespace Fanex.Athena.Controllers
 {
     using Extension.Utility;
+
     using Fanex.Athena.Controllers.Base;
     using Fanex.Athena.Service.Core.Common.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
+
     using Service.Core.Users.Interfaces;
+
     using System.Web.Mvc;
 
     [CustomAuthorize]
@@ -23,6 +26,7 @@ namespace Fanex.Athena.Controllers
         public ISessionService SessionServiceInstance { get; set; }
         public IAppSettings AppSettingInstance { get; set; }
         public ILicenseeSettingService LicenseeSettingServiceInstance { get; set; }
+
         public bool IsFakeLicensee(string licenseeName)
         {
             return LicenseeSettingServiceInstance.IsFakeLicensee(licenseeName);
@@ -42,7 +46,7 @@ namespace Fanex.Athena.Controllers
                 Data = data,
             };
         }
-       
+
         protected static JsonNetResult JsonString(string jsonData)
         {
             return new JsonNetResult(jsonData);

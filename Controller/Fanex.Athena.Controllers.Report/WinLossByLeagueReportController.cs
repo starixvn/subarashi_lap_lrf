@@ -6,15 +6,8 @@
 
 namespace Fanex.Athena.Controllers.Report
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-
     using DataAccess.Core.Common.Interfaces;
 
-    using Extension.Utility;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Report.MetaModel;
@@ -27,8 +20,11 @@ namespace Fanex.Athena.Controllers.Report
 
     using Resources;
 
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
 
     [FunctionAuthorization(PermissionKeys.ReportWinLossByLeague)]
     public class WinLossByLeagueReportController : ReportBaseController
@@ -36,6 +32,7 @@ namespace Fanex.Athena.Controllers.Report
         private readonly ISportTypeDataAccess _sportTypeDataAccess;
         private readonly ILeagueDataAccess _leagueDataAccess;
         private readonly IMatchService _matchService;
+
         public WinLossByLeagueReportController(
 
             ISportTypeDataAccess sportTypeDataAccess,

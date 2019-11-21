@@ -6,18 +6,15 @@
 
 namespace Fanex.Athena.Controllers.Report
 {
-    using System.Web.Mvc;
-    using System.Web.SessionState;
-
     using DataAccess.Core.Configuration.Interfaces;
 
     using Fanex.Athena.Model.Report.ViewModel.Note;
-    using Fanex.Athena.Service.Core.Common.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     using ONEbook.UM.Filters;
 
-    using Service.Core.Users.Interfaces;
+    using System.Web.Mvc;
+    using System.Web.SessionState;
 
     [SessionState(SessionStateBehavior.ReadOnly)]
     [CheckUMFilter]

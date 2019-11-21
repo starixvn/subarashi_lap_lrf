@@ -6,12 +6,6 @@
 
 namespace Fanex.Athena.Controllers.Forecast
 {
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-
-    using Extension.Utility;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Forecast.DTO.ForecastAH;
     using Fanex.Athena.Service.StatelessCore.Utility;
@@ -22,9 +16,12 @@ namespace Fanex.Athena.Controllers.Forecast
 
     using Resources;
 
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
     using Service.Forecast.Interfaces;
+
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
 
     using Web.ActionFilter;
 

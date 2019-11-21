@@ -1,21 +1,10 @@
 ﻿namespace Fanex.Athena.Controllers.Customer
 {
-    using System;
-    using System.Data;
-    using System.Globalization;
-    using System.Linq;
-    using System.Net;
-    using System.Threading.Tasks;
-    using System.Web.Hosting;
-    using System.Web.Mvc;
-    using System.Web.SessionState;
-
     using Fanex.Athena.Excel.Base.Entities;
     using Fanex.Athena.Excel.Customer;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Customer.MetaModel;
-    using Fanex.Athena.Service.Core.Common.Interfaces;
     using Fanex.Athena.Service.Customer.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
@@ -27,7 +16,15 @@
 
     using Resources;
 
-    using Service.Core.Users.Interfaces;
+    using System;
+    using System.Data;
+    using System.Globalization;
+    using System.Linq;
+    using System.Net;
+    using System.Threading.Tasks;
+    using System.Web.Hosting;
+    using System.Web.Mvc;
+    using System.Web.SessionState;
 
     [SessionState(SessionStateBehavior.ReadOnly)]
     [CheckUMFilter]
@@ -127,7 +124,7 @@
         [HttpGet]
         public string Validate(string groupName)
         {
-            return string.IsNullOrEmpty(groupName) 
+            return string.IsNullOrEmpty(groupName)
                 || _groupComService.CheckExistingGroupByName(SessionServiceInstance.LicenseeSession.LicenseeId, groupName)
                 ? "NO" : "OK";
         }

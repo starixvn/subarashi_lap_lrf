@@ -30,14 +30,12 @@
         {
             get
             {
-                var result = Setting != null;
-                if (result)
+                var result = !Equals(Setting, default(T));
+                if (result && Setting is IEnumerable<object> enumerable)
                 {
-                    if (Setting is IEnumerable<object> enumerable)
-                    {
-                        return result && enumerable.Any();
-                    }
+                    return result && enumerable.Any();
                 }
+
                 return result;
             }
         }

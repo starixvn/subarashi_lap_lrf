@@ -6,13 +6,8 @@
 
 namespace Fanex.Athena.Controllers.TotalBets
 {
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-
     using DataAccess.TotalBet.Interfaces;
 
-    using Extension.Utility;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
@@ -20,8 +15,9 @@ namespace Fanex.Athena.Controllers.TotalBets
     using Model.TotalBet.MetaModel;
     using Model.TotalBet.ViewModel;
 
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
 
     [FunctionAuthorization(PermissionKeys.TotalBetHandicapOverUnderLive)]
     public class HandicapOverUnderTotalBetController : TotalBetBaseController

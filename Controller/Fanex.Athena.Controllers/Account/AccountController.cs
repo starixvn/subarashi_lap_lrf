@@ -6,9 +6,6 @@
 
 namespace Fanex.Athena.Controllers.Account
 {
-    using System.Linq;
-    using System.Web.Mvc;
-
     using Extension.Utility;
 
     using Model.Core.DTO.Common;
@@ -16,8 +13,10 @@ namespace Fanex.Athena.Controllers.Account
 
     using Resources;
 
-    using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
+
+    using System.Linq;
+    using System.Web.Mvc;
 
     using Web.ActionFilter;
 

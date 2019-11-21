@@ -27,7 +27,14 @@ namespace Fanex.Athena.Model.Report.MetaModel
 
         public bool IsExportExcel { get; set; }
 
-        public string BaseCurrency => "USD";
+        public string BaseCurrency
+        {
+            get
+            {
+                const string usd = "USD";
+                return usd;
+            }
+        }
 
         public bool IsValid => !string.IsNullOrWhiteSpace(ProductCodeList) && !string.IsNullOrWhiteSpace(CurrencyIdList);
     }

@@ -6,25 +6,15 @@
 
 namespace Fanex.Athena.Controllers.Customer
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-
     using DataAccess.Core.Users.Interfaces;
 
     using Excel.Base.Helpers;
-
-    using Extension.Utility;
 
     using Fanex.Athena.Excel.Customer;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Customer.MetaModel;
     using Fanex.Athena.Model.Customer.ViewModel;
-    using Fanex.Athena.Service.Core.Common.Interfaces;
     using Fanex.Athena.Service.Customer.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
@@ -38,8 +28,14 @@ namespace Fanex.Athena.Controllers.Customer
 
     using Resources;
 
-    using Service.Core.Users.Interfaces;
     using Service.Report.Interfaces;
+
+    using System;
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
 
     [FunctionAuthorization(PermissionKeys.CustomerInfoCustomerList)]
     public class CustomerController : CultureBaseController
@@ -74,6 +70,7 @@ namespace Fanex.Athena.Controllers.Customer
         private readonly IProductService _productService;
         private readonly ISubsidiaryService _subsidiaryService;
         private readonly IAuthorizationService _authorizationService;
+
         public CustomerController(
             ICustomerListService customerListService,
             IGroupComService groupComService,

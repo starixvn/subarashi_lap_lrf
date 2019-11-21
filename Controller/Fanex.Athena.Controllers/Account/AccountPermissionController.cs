@@ -6,15 +6,7 @@
 
 namespace Fanex.Athena.Controllers.Account
 {
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.Linq;
-    using System.Text;
-    using System.Web.Mvc;
-
     using DataAccess.Core.Common.Interfaces;
-
-    using Extension.Utility;
 
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -26,8 +18,13 @@ namespace Fanex.Athena.Controllers.Account
 
     using Resources;
 
-    using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
+
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System.Linq;
+    using System.Text;
+    using System.Web.Mvc;
 
     using Web.ActionFilter;
 

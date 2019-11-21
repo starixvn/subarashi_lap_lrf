@@ -15,6 +15,5 @@ namespace Fanex.Athena.Controllers.TotalBets
     [CheckUMFilter]
     public class TotalBetBaseController : CultureBaseController
     {
-
     }
 }

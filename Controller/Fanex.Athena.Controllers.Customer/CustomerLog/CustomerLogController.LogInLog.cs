@@ -6,12 +6,12 @@
 
 namespace Fanex.Athena.Controllers.Customer.CustomerLog
 {
-    using System.Collections.Generic;
-    using System.Web.Mvc;
-
     using Fanex.Athena.Model.Customer.DTO.CustomerLog;
     using Fanex.Athena.Model.Customer.MetaModel.CustomerLog;
     using Fanex.Athena.Model.Customer.ViewModel.CustomerLog;
+
+    using System.Collections.Generic;
+    using System.Web.Mvc;
 
     public partial class CustomerLogController
     {

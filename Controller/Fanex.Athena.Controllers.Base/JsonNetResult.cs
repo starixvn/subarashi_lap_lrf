@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+
+using System;
 using System.IO;
 using System.Web.Mvc;
-
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 
 namespace Fanex.Athena.Controllers.Base
 {
@@ -41,7 +41,6 @@ namespace Fanex.Athena.Controllers.Base
                 throw new InvalidOperationException("JSON GET is not allowed");
             }
 
-
             var response = context.HttpContext.Response;
             response.ContentType =
                 string.IsNullOrEmpty(this.ContentType) ? "application/json" : this.ContentType;
@@ -72,4 +71,3 @@ namespace Fanex.Athena.Controllers.Base
         }
     }
 }
-

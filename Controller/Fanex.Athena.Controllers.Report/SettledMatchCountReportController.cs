@@ -6,16 +6,12 @@
 
 namespace Fanex.Athena.Controllers.Report
 {
+    using Fanex.Athena.Model.Auth.DataDomain;
+
+    using Service.Report.Interfaces;
+
     using System.Threading.Tasks;
     using System.Web.Mvc;
-
-    using Fanex.Athena.Extension.Utility;
-    using Fanex.Athena.Model.Auth.DataDomain;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
-
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
-    using Service.Report.Interfaces;
 
     using Web.ActionFilter;
 

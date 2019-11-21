@@ -121,7 +121,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CultureBaseController.cs" />
-    <Compile Include="ContentBaseController.cs" />
     <Compile Include="JsonNetResult.cs" />
     <Compile Include="NonCultureBaseController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

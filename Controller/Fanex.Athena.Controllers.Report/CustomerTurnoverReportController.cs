@@ -6,11 +6,6 @@
 
 namespace Fanex.Athena.Controllers.Report
 {
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Hosting;
-    using System.Web.Mvc;
-
     using DataAccess.Core.Common.Interfaces;
 
     using Fanex.Athena.Excel.Base.Entities;
@@ -30,9 +25,12 @@ namespace Fanex.Athena.Controllers.Report
 
     using Resources;
 
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
     using Service.Report.Interfaces;
+
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Hosting;
+    using System.Web.Mvc;
 
     [FunctionAuthorization(PermissionKeys.ReportCustomerTurnover)]
     public class CustomerTurnoverReportController : ReportBaseController

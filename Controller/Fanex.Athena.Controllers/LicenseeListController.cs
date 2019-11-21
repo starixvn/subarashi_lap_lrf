@@ -1,13 +1,10 @@
 ﻿namespace Fanex.Athena.Controllers
 {
-    using System.Web.Mvc;
-
     using DataAccess.Core.Users.Interfaces;
 
     using Fanex.Athena.Model.Auth.Enum;
 
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
+    using System.Web.Mvc;
 
     using Web.ActionFilter;
 

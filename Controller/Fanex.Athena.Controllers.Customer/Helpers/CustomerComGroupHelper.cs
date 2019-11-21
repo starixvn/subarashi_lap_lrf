@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Fanex.Athena.Model.Customer.MetaModel;
+﻿using Fanex.Athena.Model.Customer.MetaModel;
 using Fanex.Athena.Resources;
 using Fanex.Athena.Service.Customer.Helpers;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Fanex.Athena.Controllers.Customer.Helpers
 {

@@ -1,13 +1,11 @@
 ﻿namespace Fanex.Athena.Controllers
 {
-    using System.Web.Mvc;
-    using System.Web.SessionState;
-
-    using Autofac.Integration.Mvc;
-
     using Fanex.Athena.Service.Core.Users.Interfaces;
 
     using ONEbook.UM.Filters;
+
+    using System.Web.Mvc;
+    using System.Web.SessionState;
 
     using Web.ActionFilter;
 
