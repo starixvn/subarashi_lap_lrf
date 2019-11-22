@@ -119,6 +119,7 @@
     <Compile Include="Controllers\BetLimits\SportsBookBetLimitControllerTest.cs" />
     <Compile Include="Extensions\PlayerBetLimitLogBuilderTest.cs" />
     <Compile Include="Helpers\PlayerAdminBetLimitActionLogHelperTest.cs" />
+    <Compile Include="MetaModel\PlayerBetLimitUpdateMetaModelTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AGCasinoBetLimitRepositoryTest.cs" />
     <Compile Include="Repositories\DcsBetLimitRepositoryTest.cs" />
