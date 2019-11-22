@@ -73,6 +73,7 @@
     <Compile Include="DTO\BetSettingProduct.cs" />
     <Compile Include="DTO\BetSettingWriteLog.cs" />
     <Compile Include="DTO\CommonBetSetting.cs" />
+    <Compile Include="DTO\Exchange\ExchangeCommission.cs" />
     <Compile Include="DTO\KenoBetSetting.cs" />
     <Compile Include="DTO\LogParam.cs" />
     <Compile Include="DTO\NumberGameBetSetting.cs" />

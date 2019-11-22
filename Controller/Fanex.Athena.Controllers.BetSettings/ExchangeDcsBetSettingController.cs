@@ -33,7 +33,7 @@ namespace Fanex.Athena.Controllers.BetSettings
             ICoreBetSettingService coreBetSettingService,
             IProductService productService,
             IDcsBetSettingService betSettingService,
-            IExchangeCommApiService exchangeCommApiService
+            IExchangeCommApiService exchangeCommApiService,
             )
         : base(coreBetSettingService, productService)
         {
@@ -55,7 +55,7 @@ namespace Fanex.Athena.Controllers.BetSettings
             viewModel.IsEnabled = await
                 _betSettingService.GetStatusAsync(metaModel.CustId, metaModel.ProductId);
 
-            var apiResult = _exchangeCommApiService.GetCommission(metaModel.CustId);
+            var apiResult = await _exchangeCommApiService.GetCommission(metaModel.CustId, SessionService.UserSession.Language);
             if (apiResult.IsSuccessful)
             {
                 viewModel.Commission = apiResult.ExtendedData;
@@ -84,7 +84,8 @@ namespace Fanex.Athena.Controllers.BetSettings
                 userSession.UserId,
                 custId,
                 oldCommission,
-                newCommission);
+                newCommission,
+                SessionService.UserSession.Language);
 
             return Json(result);
         }

@@ -1,17 +1,14 @@
 ﻿namespace Fanex.Athena.Service.BetSettings.UnitTests
 {
-    using System;
-    using System.Collections.Generic;
     using System.Threading.Tasks;
-
-    using CitiXchangeLibrary;
 
     using DataAccess.BetSettings.Interfaces;
     using DataAccess.Core.Common.Constants;
     using DataAccess.Core.Common.Interfaces;
 
     using Extension.Utility;
-
+    using Fanex.Athena.Model.BetSettings.DTO.Exchange;
+    using Fanex.Athena.Model.Core.DTO.Common;
     using Logging;
 
     using Model.Core.DataDomain;
@@ -35,8 +32,9 @@
         private ISPLogDataAccess _userLogDataAccess;
         private IDcsBetSettingDataAccess _betSettingDataAccess;
         private IAppSettings _appSetting;
-        private ICitiXchangeClient _apiClient;
+        private ILGAPIClient _lgClient;
         private ExchangeCommApiService _service;
+
         [SetUp]
         public void Setup()
         {
@@ -44,8 +42,8 @@
             _userLogDataAccess = Substitute.For<ISPLogDataAccess>();
             _betSettingDataAccess = Substitute.For<IDcsBetSettingDataAccess>();
             _appSetting = Substitute.For<IAppSettings>();
-            _apiClient = Substitute.For<ICitiXchangeClient>();
-            _service = new ExchangeCommApiService(_logger, _userLogDataAccess, _betSettingDataAccess, _appSetting, _apiClient);
+            _lgClient = Substitute.For<ILGAPIClient>();
+            _service = new ExchangeCommApiService(_logger, _userLogDataAccess, _betSettingDataAccess, _appSetting, _lgClient);
 
             _appSetting.Environment.Returns("PRO");
         }
@@ -56,51 +54,33 @@
             _logger = null;
             _userLogDataAccess = null;
             _appSetting = null;
-            _apiClient = null;
+            _lgClient = null;
             _service = null;
         }
-
 
         [TestCase(1, true)]
         [TestCase(0, false)]
         [TestCase(2, false)]
-        public void GetCommission_WhenCall_ReturnCorrectResult(int returnStatus, bool isSuccess)
+        public async Task GetCommission_WhenCall_ReturnCorrectResult(int returnStatus, bool isSuccess)
         {
             // Arrange
+            const string apiPath = "/ExchangeClient/GetCommission";
+            const string Language = "en-US";
             var expectedComm = FakeHelper.Create<double>();
-            _apiClient.getProfile(_custId, Enviro.PRD).Returns(new GetProfile
-            {
-                status = (CitiStatus)returnStatus,
-                commission = (decimal)expectedComm
-            });
+            _lgClient.PostAsync<APIResult<ExchangeCommission>>(apiPath, Arg.Any<object>(), Language).Returns(Task.FromResult(
+                new APIResult<ExchangeCommission>
+                {
+                    Data = new ExchangeCommission { Status = returnStatus, Commission = expectedComm }
+                }));
 
             // Action
-            var result = _service.GetCommission(_custId);
+            var result = await _service.GetCommission(_custId, Language);
 
             // Assert
             Assert.Multiple(() =>
             {
                 Assert.That(result.IsSuccessful, Is.EqualTo(isSuccess));
                 Assert.That(result.ExtendedData, Is.EqualTo(expectedComm));
-                _apiClient.Received(1).getProfile(_custId, Enviro.PRD);
-            });
-        }
-
-        [Test]
-        public void GetCommission_ApiThrowException_LogAndReturnFailedResult()
-        {
-            // Arrange
-            var errorMsg = FakeHelper.Create<string>();
-            _apiClient.getProfile(0, Enviro.PRD).ReturnsForAnyArgs(x => { throw new Exception(errorMsg); });
-
-            // Action
-            var result = _service.GetCommission(_custId);
-
-            // Assert
-            Assert.Multiple(() =>
-            {
-                _logger.Received(1).Error($"Exchange Api getProfile (custid: {_custId}): " + errorMsg);
-                Assert.That(result.IsSuccessful, Is.False);
             });
         }
 
@@ -110,15 +90,16 @@
         {
             // Arrange
             _betSettingDataAccess.GetStatusAsync(0, 0).ReturnsForAnyArgs(Task.FromResult(isEnable));
+            const string Language = "en-US";
 
             // Action
-            var result = await _service.UpdateCommissionAsync(_userId, _custId, 0, 0);
+            var result = await _service.UpdateCommissionAsync(_userId, _custId, 0, 0, Language);
 
             // Assert
             Assert.Multiple(() =>
             {
                 Assert.That(result.IsSuccessful, Is.False);
-                _apiClient.DidNotReceiveWithAnyArgs().getProfile(0, Enviro.PRD);
+                _lgClient.DidNotReceiveWithAnyArgs().PostAsync<APIResult<ExchangeCommission>>(Arg.Any<string>(), Arg.Any<object>(), Arg.Any<string>());
             });
         }
 
@@ -130,21 +111,23 @@
             // Arrange
             var expectedComm = FakeHelper.Create<double>();
             _betSettingDataAccess.GetStatusAsync(_custId, ProductTypes.Exchange).Returns(Task.FromResult((bool?)true));
-            _apiClient.updateCommission(_custId, expectedComm, Enviro.PRD).Returns(new CommissionInfo
-            {
-                status = (CitiStatus)returnStatus,
-                commission = expectedComm
-            });
+
+            const string apiPath = "/ExchangeClient/UpdateCommission";
+            const string Language = "en-US";
+            _lgClient.PostAsync<APIResult<ExchangeCommission>>(apiPath, Arg.Any<object>(), Language).Returns(Task.FromResult(
+                new APIResult<ExchangeCommission>
+                {
+                    Data = new ExchangeCommission { Status = returnStatus, Commission = expectedComm }
+                }));
 
             // Action
-            var result = await _service.UpdateCommissionAsync(_userId, _custId, 0, expectedComm);
+            var result = await _service.UpdateCommissionAsync(_userId, _custId, 0, expectedComm, Language);
 
             // Assert
             Assert.Multiple(() =>
             {
                 Assert.That(result.IsSuccessful, Is.EqualTo(isSuccess));
                 Assert.That(result.ExtendedData, Is.EqualTo(expectedComm));
-                _apiClient.Received(1).updateCommission(_custId, expectedComm, Enviro.PRD);
             });
         }
 
@@ -156,8 +139,16 @@
             var newComm = FakeHelper.Create<double>();
             _betSettingDataAccess.GetStatusAsync(_custId, ProductTypes.Exchange).ReturnsForAnyArgs(Task.FromResult((bool?)true));
 
+            const string apiPath = "/ExchangeClient/UpdateCommission";
+            const string Language = "en-US";
+            _lgClient.PostAsync<APIResult<ExchangeCommission>>(apiPath, Arg.Any<object>(), Language).Returns(Task.FromResult(
+                new APIResult<ExchangeCommission>
+                {
+                    Data = new ExchangeCommission { Status = 1, Commission = 5.5d }
+                }));
+
             // Action
-            var result = await _service.UpdateCommissionAsync(_userId, _custId, oldComm, newComm);
+            var result = await _service.UpdateCommissionAsync(_userId, _custId, oldComm, newComm, Language);
 
             // Assert
             Assert.Multiple(() =>

@@ -17,8 +17,7 @@ namespace Fanex.Athena.Service.BetSettings
     using DataAccess.Core.Common.Interfaces;
 
     using Extension.Utility;
-
-    using Fanex.Athena.Extension.Helpers;
+    using Fanex.Athena.Model.BetSettings.DTO.Exchange;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     using Interfaces;
@@ -38,6 +37,8 @@ namespace Fanex.Athena.Service.BetSettings
 
         private const int ApiProcessingErrorCode = 102;
 
+        private const int SuccessStatus = 1;
+
         private static readonly IDictionary<string, Enviro> EnvironmentMap =
             new Dictionary<string, Enviro>(StringComparer.OrdinalIgnoreCase)
         {
@@ -52,7 +53,7 @@ namespace Fanex.Athena.Service.BetSettings
 
         private readonly IAppSettings _appSetting;
 
-        private readonly ICitiXchangeClient _apiClient;
+        private readonly ILGAPIClient _lgClient;
 
         private readonly IDcsBetSettingDataAccess _betSettingDataAccess;
 
@@ -61,31 +62,25 @@ namespace Fanex.Athena.Service.BetSettings
             ISPLogDataAccess userLogDataAccess,
             IDcsBetSettingDataAccess betSettingDataAccess,
             IAppSettings appSetting,
-            ICitiXchangeClient apiClient)
+            ILGAPIClient lgClient)
         {
             _logger = logger;
             _userLogDataAccess = userLogDataAccess;
             _betSettingDataAccess = betSettingDataAccess;
             _appSetting = appSetting;
-            _apiClient = apiClient;
+            _lgClient = lgClient;
         }
 
-        public IResultInfo<double> GetCommission(int custId)
+        public async Task<IResultInfo<double>> GetCommission(int custId, string language)
         {
-            try
-            {
-                var result = _apiClient.getProfile(custId, EnvironmentMap[_appSetting.Environment]);
-                return CreateApiResult(result.status, (double)result.commission);
-            }
-            catch (Exception exception)
-            {
-                _logger.Error($"Exchange Api getProfile (custid: {custId}): " + exception.Message);
-                return CreateApiErrorResult();
-            }
+            const string apiPath = "/ExchangeClient/GetCommission";
+            var result = await _lgClient.PostAsync<APIResult<ExchangeCommission>>(apiPath, new { custId, environment = _appSetting.Environment }, language).ConfigureAwait(false);
+
+            return result.Data == null ? CreateApiErrorResult() : CreateApiResult(result.Data.Status, result.Data.Commission);
         }
 
         public async Task<IResultInfo<double>> UpdateCommissionAsync(
-            int userId, int custId, double oldCommission, double newCommission)
+            int userId, int custId, double oldCommission, double newCommission, string language)
         {
             var isEnable = await _betSettingDataAccess.GetStatusAsync(custId, ProductTypes.Exchange).ConfigureAwait(false);
 
@@ -94,30 +89,24 @@ namespace Fanex.Athena.Service.BetSettings
                 return CreateAccessDeniedResult();
             }
 
-            try
-            {
-                var result = _apiClient.updateCommission(custId, newCommission, EnvironmentMap[_appSetting.Environment]);
-                await _userLogDataAccess.WriteLog(new SPLogMetaModel
-                {
-                    ActionID = UserLogAction.ExchangeCommission,
-                    UserId = userId,
-                    CustID = custId,
-                    Doing = $"<ChargeCommission OldValue='{oldCommission}' NewValue='{newCommission}' />"
-                }).ConfigureAwait(false);
-                return CreateApiResult(result.status, result.commission);
-            }
-            catch (Exception exception)
-            {
-                var message = "Exchange Api updateCommission:\n" + LogMessageHelper.GenerateMessage(exception);
+            const string apiPath = "/ExchangeClient/UpdateCommission";
+            var requestParam = new { custId, commission = newCommission, environment = _appSetting.Environment };
+            var result = await _lgClient.PostAsync<APIResult<ExchangeCommission>>(apiPath, requestParam, language).ConfigureAwait(false);
 
-                _logger.Error(message, exception);
-                return CreateApiErrorResult();
-            }
+            await _userLogDataAccess.WriteLog(new SPLogMetaModel
+            {
+                ActionID = UserLogAction.ExchangeCommission,
+                UserId = userId,
+                CustID = custId,
+                Doing = $"<ChargeCommission OldValue='{oldCommission}' NewValue='{newCommission}' />"
+            }).ConfigureAwait(false);
+
+            return result.Data == null ? CreateApiErrorResult() : CreateApiResult(result.Data.Status, result.Data.Commission);
         }
 
-        private static IResultInfo<double> CreateApiResult(CitiStatus status, double commission)
+        private static IResultInfo<double> CreateApiResult(int status, double commission)
         {
-            if (status == CitiStatus.Success)
+            if (status == SuccessStatus)
             {
                 return new ResultInfo<double>
                 {
@@ -129,7 +118,7 @@ namespace Fanex.Athena.Service.BetSettings
 
             return new ResultInfo<double>
             {
-                Code = status == 0 ? 1 : (int)status,
+                Code = status == 0 ? 1 : status,
                 Message = ViewResources.ErrorProcessingMsg,
                 ExtendedData = commission
             };
