@@ -82,7 +82,7 @@
         public async Task GetBettypes_WhenCall_ReturnResultFromDataAccess()
         {
             // Arrange
-            var expectedResult = FakeHelper.CreateMany<CheckedItem>(10).ToList();
+            var expectedResult = new List<CheckedItem> { new CheckedItem() };
             var sports = new List<SportProductItem>
             {
                 new SportProductItem()

@@ -17,6 +17,7 @@ namespace Fanex.Athena.Controllers.Customer
     using Fanex.Athena.Model.Core.DTO.Users;
     using Fanex.Athena.Model.Customer.MetaModel;
     using Fanex.Athena.Model.Customer.ViewModel;
+    using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.Customer.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
@@ -175,7 +176,7 @@ namespace Fanex.Athena.Controllers.Customer
             {
                 var licensee = SessionServiceInstance.LicenseeSession;
                 var user = SessionServiceInstance.UserSession;
-                metaModel.IsShowStatusDropdown = AppSettings.LicenseeOfferStatusFunction.Contains(licensee.LicenseeId);
+                metaModel.IsShowStatusDropdown = AppSettingInstance.LicenseeOfferStatusFunction.Contains(licensee.LicenseeId);
                 metaModel.LicenseeId = licensee.LicenseeId;
                 metaModel.AgentListXml = GetAgentListXml(user, licensee.LicenseeName, metaModel.SubsidiaryList, metaModel.CurrencyId);
 
@@ -305,7 +306,7 @@ namespace Fanex.Athena.Controllers.Customer
             metaModel.LicenseeId = licensee.LicenseeId;
             metaModel.IsShowStatusDropdown = AppSettingInstance.LicenseeOfferStatusFunction.Contains(metaModel.LicenseeId);
             metaModel.Username = metaModel.Username == placeholderUsername ? string.Empty : metaModel.Username;
-            metaModel.AgentListXml = GetAgentListXml(SessionService.UserSession, licensee.LicenseeName, metaModel.SubsidiaryList, metaModel.CurrencyId);
+            metaModel.AgentListXml = GetAgentListXml(SessionServiceInstance.UserSession, licensee.LicenseeName, metaModel.SubsidiaryList, metaModel.CurrencyId);
         }
 
         private async Task<CustomerListViewModel> CreateCustomerViewModelAsync(CustomerListMetaModel metaModel)

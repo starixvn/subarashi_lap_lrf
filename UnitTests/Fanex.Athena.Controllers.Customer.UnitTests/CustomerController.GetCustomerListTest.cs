@@ -6,7 +6,6 @@
     using System.Web.Mvc;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Core.DataDomain;
-    using Fanex.Athena.Model.Core.DTO.Users;
     using Fanex.Athena.UnitTest.Common.Helpers;
     using Model.Core.DTO.Common;
     using Model.Customer.ViewModel;
@@ -234,7 +233,7 @@
         [Test]
         public async Task GetCustomerList_IsNotSubsidiaryManagement_GroupSubsidiariesIsEmpty()
         {
-            using (var controller = CreateContoller())
+            using (var controller = CreateController())
             {
                 // Arrange
                 StubUserSessionData(new UserAuthInfo { SubsidiaryViewType = (int)SubsidiaryViewType.NotManagement });
@@ -251,13 +250,13 @@
         [Test]
         public async Task GetCustomerList_IsSubsidiaryManagement_GroupSubsidiariesIsReturnedFromService()
         {
-            using (var controller = CreateContoller())
+            using (var controller = CreateController())
             {
                 // Arrange
                 var user = new UserAuthInfo { SubsidiaryViewType = (int)SubsidiaryViewType.MasterManagement, WhiteLabelID = FakeHelper.Create<int?>() };
                 StubUserSessionData(user);
 
-                var expected = FakeHelper.CreateMany<CheckedItem>();
+                var expected = new List<CheckedItem> { new CheckedItem() };
                 _subsidiaryService.GetSubsidiaryTree(user, DefaultLicenseeSession.LicenseeName, true).Returns(expected);
 
                 _productService.GetProductAccess(Arg.Any<int>(), Arg.Any<string>()).Returns(new ProductAccess(new List<Product>()));

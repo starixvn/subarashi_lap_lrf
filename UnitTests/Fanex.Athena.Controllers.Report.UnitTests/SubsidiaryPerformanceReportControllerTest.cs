@@ -5,7 +5,6 @@
     using System.Web.Mvc;
     using Fanex.Athena.Controllers.Base.UnitTests;
     using Fanex.Athena.Model.Core.DTO.Common;
-    using Fanex.Athena.Model.Core.DTO.Users;
     using Fanex.Athena.Model.Report.ViewModel;
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.Report.Interfaces;
@@ -66,7 +65,7 @@
         {
             return new SubsidiaryPerformanceReportController(_subsidiaryService)
             {
-                ProductServiceInstance = productService,
+                ProductServiceInstance = _productService,
                 LangService = LangService,
                 SessionServiceInstance = SessionService,
             };

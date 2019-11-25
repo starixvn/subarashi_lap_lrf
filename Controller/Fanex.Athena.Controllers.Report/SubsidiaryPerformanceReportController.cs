@@ -1,20 +1,12 @@
 ﻿namespace Fanex.Athena.Controllers.Report
 {
-    using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
-    using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Auth.DataDomain;
-    using Fanex.Athena.Model.Core.DTO.Common;
-    using Fanex.Athena.Model.Core.DTO.Users;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Service.Core.Users.Interfaces;
     using Model.Core.DataDomain;
     using Model.Core.MetaModel.Product;
     using Model.Report.ViewModel;
-
-
-    using System.Linq;
-    using System.Web.Mvc;
 
     using Web.ActionFilter;
 
