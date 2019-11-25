@@ -355,15 +355,15 @@
 
             if (level == 0)
             {
-                _dataAccess.GetSummaryWinloss(metaModel, Arg.Any<IDictionary<int, string>>()).Returns(result);
+                _dataAccess.GetSummaryWinloss(metaModel, Arg.Any<IDictionary<int, string>>(), !metaModel.IsExportExcel).Returns(result);
             }
             else if (level == 1)
             {
-                _dataAccess.GetAgentWinlossDetail(metaModel, Arg.Any<IDictionary<int, string>>()).Returns(result);
+                _dataAccess.GetAgentWinlossDetail(metaModel, Arg.Any<IDictionary<int, string>>(), !metaModel.IsExportExcel).Returns(result);
             }
             else
             {
-                _dataAccess.GetCustomerWinlossDetail(metaModel, Arg.Any<IDictionary<int, string>>()).Returns(result);
+                _dataAccess.GetCustomerWinlossDetail(metaModel, Arg.Any<IDictionary<int, string>>(), !metaModel.IsExportExcel).Returns(result);
             }
 
             return result;

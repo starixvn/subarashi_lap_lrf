@@ -16,14 +16,17 @@ namespace Fanex.Athena.DataAccess.Report.Interfaces
     {
         Task<SortableReportResultModel<LicenseeWinLoss>> GetAgentWinlossDetail(
             LicenseeWinLossMetaModel metaModel,
-            IDictionary<int, string> currencyList);
+            IDictionary<int, string> currencyList,
+            bool checkPromotionPrize = false);
 
         Task<SortableReportResultModel<LicenseeWinLoss>> GetCustomerWinlossDetail(
             LicenseeWinLossMetaModel metaModel,
-            IDictionary<int, string> currencyList);
+            IDictionary<int, string> currencyList,
+            bool checkPromotionPrize = false);
 
         Task<SortableReportResultModel<LicenseeWinLoss>> GetSummaryWinloss(
             LicenseeWinLossMetaModel metaModel,
-            IDictionary<int, string> currencyList);
+            IDictionary<int, string> currencyList,
+            bool checkPromotionPrize = false);
     }
 }

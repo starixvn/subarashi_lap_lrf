@@ -272,15 +272,15 @@ namespace Fanex.Athena.Api.Report
                 SortableReportResultModel<LicenseeWinLoss> result;
                 if (metaModel.DrillDownLevel == 0)
                 {
-                    result = await _licenseeWinLossDataAccess.GetSummaryWinloss(metaModel, userCurrencyList).ConfigureAwait(false);
+                    result = await _licenseeWinLossDataAccess.GetSummaryWinloss(metaModel, userCurrencyList, !metaModel.IsExportExcel).ConfigureAwait(false);
                 }
                 else if (metaModel.LicenseeId != LicenseeIdentity.OneTwoBet || metaModel.DrillDownLevel == (int)ReportLevel.Customer)
                 {
-                    result = await _licenseeWinLossDataAccess.GetCustomerWinlossDetail(metaModel, userCurrencyList).ConfigureAwait(false);
+                    result = await _licenseeWinLossDataAccess.GetCustomerWinlossDetail(metaModel, userCurrencyList, !metaModel.IsExportExcel).ConfigureAwait(false);
                 }
                 else
                 {
-                    result = await _licenseeWinLossDataAccess.GetAgentWinlossDetail(metaModel, userCurrencyList).ConfigureAwait(false);
+                    result = await _licenseeWinLossDataAccess.GetAgentWinlossDetail(metaModel, userCurrencyList, !metaModel.IsExportExcel).ConfigureAwait(false);
                 }
 
                 return result;
