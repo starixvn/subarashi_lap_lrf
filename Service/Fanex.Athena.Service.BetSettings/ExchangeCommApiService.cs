@@ -6,11 +6,7 @@
 
 namespace Fanex.Athena.Service.BetSettings
 {
-    using System;
-    using System.Collections.Generic;
     using System.Threading.Tasks;
-
-    using CitiXchangeLibrary;
 
     using DataAccess.BetSettings.Interfaces;
     using DataAccess.Core.Common.Constants;
@@ -23,8 +19,6 @@ namespace Fanex.Athena.Service.BetSettings
     using Interfaces;
 
     using Logging;
-
-    using Model.Core.Constants;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using Model.Core.MetaModel.Common;
@@ -38,14 +32,6 @@ namespace Fanex.Athena.Service.BetSettings
         private const int ApiProcessingErrorCode = 102;
 
         private const int SuccessStatus = 1;
-
-        private static readonly IDictionary<string, Enviro> EnvironmentMap =
-            new Dictionary<string, Enviro>(StringComparer.OrdinalIgnoreCase)
-        {
-            { SystemEnvironment.Production, Enviro.PRD },
-            { SystemEnvironment.UAT, Enviro.UAT },
-            { SystemEnvironment.SIT, Enviro.SIT }
-        };
 
         private readonly ILogger _logger;
 

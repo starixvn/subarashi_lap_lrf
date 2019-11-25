@@ -11,7 +11,6 @@ using System.Web.Mvc;
 using Autofac;
 using Autofac.Integration.Mvc;
 using Autofac.Integration.WebApi;
-using CitiXchangeLibrary;
 using Fanex.Athena.Api.StatelessBase.Logger;
 using Fanex.Athena.DataAccess.Report;
 using Fanex.Athena.DataAccess.Report.Interfaces;
@@ -106,11 +105,6 @@ namespace Fanex.Athena
 
             builder.RegisterInstance(Logger.Log).As<Logging.ILogger>();
             builder.RegisterType<RestSharp.RestClient>().As<RestSharp.IRestClient>().InstancePerDependency();
-
-            builder.Register(x => (ICitiXchangeClient)Activator.GetObject(typeof(ICitiXchangeClient), ConfigurationManager.AppSettings["ExchangeProductApiHost"]))
-                .As<ICitiXchangeClient>()
-                .SingleInstance()
-                .ExternallyOwned();
         }
 
         private static Assembly[] GetAssemblies()
