@@ -1,16 +1,12 @@
 ﻿namespace Fanex.Athena.Service.StatelessCore
 {
+    using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Service.StatelessCore.Abstraction;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using System.IO;
     using System.Net.Http;
     using System.Net.Http.Headers;
     using System.Threading.Tasks;
-
-    using Fanex.Athena.Extension.Utility;
-    using Fanex.Athena.Model.Core.DataDomain;
-    using Fanex.Athena.Service.StatelessCore.Abstraction;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
-
-    using Newtonsoft.Json;
 
 
     public class BetListApiClient : BaseApiClient, IBetListApiClient
@@ -24,34 +20,30 @@
         public async Task<HttpResponseMessage> PostAsync(string path, object value, string language)
         {
             return await HandleAsync(path, value, language, MediaType.Json,
-                 async (x) => await Task.FromResult(x)
+                 async (x) =>
+                 {
+                     var stream = new MemoryStream();
+                     await x.Content.CopyToAsync(stream);
+                     var result = new HttpResponseMessage(x.StatusCode)
+                     {
+                         Content = new StreamContent(stream),
+
+                     };
+                     result.Content.Headers.ContentType = x.Content.Headers.ContentType;
+                     return result;
+                 }
                 ).ConfigureAwait(false);
         }
-        public async Task<byte[]> PostAsyncBytes(string path, object value, string language)
+        public async Task<MemoryStream> PostAsyncBytes(string path, object value, string language)
         {
             return await HandleAsync(path, value, language, MediaType.Json, async (x) =>
             {
-                using (x)
-                {
-                    return await x.Content.ReadAsByteArrayAsync();
-                }
+                var stream = new MemoryStream();
+                await x.Content.CopyToAsync(stream);
+                return stream;
             }
-
           ).ConfigureAwait(false);
         }
 
-        public async Task<string> PostAsyncString(string path, object value, string language)
-        {
-            return await HandleAsync<string>(path, value, language, MediaType.Json,
-                async (x) =>
-                {
-                    using (x)
-                    {
-                        return await x.Content.ReadAsStringAsync();
-                    }
-                }
-
-            ).ConfigureAwait(false);
-        }
     }
 }
