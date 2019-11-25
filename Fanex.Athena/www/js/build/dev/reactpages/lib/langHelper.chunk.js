@@ -638,6 +638,7 @@ window._language_en_US = {
   ProductVG: "Macau",
   ProductVS: "Virtual Sports",
   ProductVS2: "Virtual Sports 2",
+  Promotion: "Promotion",
   PromotionPrize: "Promotion Prize",
   RB: "RB",
   RealName: "Real Name",
