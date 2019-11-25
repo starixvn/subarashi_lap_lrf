@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Base.UnitTests;
@@ -101,16 +102,16 @@
             var metaModel = CreateMetaModel(level, true);
             var language = SessionService.UserSession.Language;
 
-            var expectedResponse = new Tuple<byte[], string>(new byte[] { 1 }, "application/octet-stream");
+            var expectedResponse = new Tuple<MemoryStream, string>(new MemoryStream(new byte[] { 1 }), "application/octet-stream");
             _reportAPIClient.PostAsync(apiUrl, metaModel, language, MediaType.MsgPack).Returns(expectedResponse);
 
             using (var controller = CreateController())
             {
                 // Action
-                var result = await controller.Index(metaModel) as FileContentResult;
+                var result = await controller.Index(metaModel) as FileStreamResult;
 
                 // Assert
-                Assert.That(result.FileContents, Is.EqualTo(expectedResponse.Item1));
+                Assert.That(result.FileStream, Is.EqualTo(expectedResponse.Item1));
                 Assert.That(result.ContentType, Is.EqualTo(expectedResponse.Item2));
             }
         }

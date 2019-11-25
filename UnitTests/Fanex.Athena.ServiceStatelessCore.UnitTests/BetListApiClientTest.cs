@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -81,7 +82,7 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
             var httpResponse = new HttpResponseMessage
             {
                 StatusCode = HttpStatusCode.OK,
-                Content = new StringContent(string.Empty)
+                Content = new StreamContent(new MemoryStream(new byte[] { 1 }))
             };
             var httpMessageHandler = Substitute.ForPartsOf<MockHttpMessageHandler>();
             httpMessageHandler.Send(Arg.Any<HttpRequestMessage>()).Returns(httpResponse);
@@ -92,7 +93,7 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
             var result = await betListApiClient.PostAsync(TestPath, TestValue, LANG).ConfigureAwait(false);
 
             // Assert
-            Assert.That(result, Is.EqualTo(httpResponse));
+            Assert.That(result.StatusCode, Is.EqualTo(HttpStatusCode.OK));
         }
     }
 }

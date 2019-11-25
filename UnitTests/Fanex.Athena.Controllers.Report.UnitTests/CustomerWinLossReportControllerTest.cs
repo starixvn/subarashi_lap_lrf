@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Base.UnitTests;
@@ -71,7 +72,7 @@
         {
             // Arrange
             var language = SessionService.UserSession.Language;
-            var expectedResponseData = new Tuple<byte[], string>(new byte[] { 1 }, "application/octet-stream");
+            var expectedResponseData = new Tuple<MemoryStream, string>(new MemoryStream(new byte[] { 1 }), "application/octet-stream");
 
             var metaModel = new CustomerWinLossMetaModel { IsExportExcel = true };
 
@@ -81,10 +82,10 @@
                     .Returns(expectedResponseData);
 
                 // Action
-                var result = await controller.Index(metaModel) as FileContentResult;
+                var result = await controller.Index(metaModel) as FileStreamResult;
 
                 // Assert
-                Assert.That(result.FileContents, Is.EqualTo(expectedResponseData.Item1));
+                Assert.That(result.FileStream, Is.EqualTo(expectedResponseData.Item1));
                 Assert.That(result.ContentType, Is.EqualTo(expectedResponseData.Item2));
             }
         }

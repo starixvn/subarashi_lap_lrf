@@ -134,7 +134,7 @@
                 StubUserSessionData(new UserAuthInfo { Language = language });
 
                 _betListApiClient.PostAsyncBytes("/PlayerAdminBetList/Export", metaModel, language)
-                    .Returns(new byte[] { 1 });
+                    .Returns(new MemoryStream(new byte[] { 1 }));
 
                 // Action
                 await controller.GetRunningBetList(metaModel);
@@ -152,7 +152,6 @@
 
         private PlayerBetListController CreateController()
         {
-
             var result = new PlayerBetListController(_betListApiClient);
             result.LangService = LangService;
             result.SessionServiceInstance = SessionService;

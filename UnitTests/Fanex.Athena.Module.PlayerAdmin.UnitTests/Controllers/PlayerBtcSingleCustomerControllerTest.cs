@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -159,15 +160,15 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers
                 IsExport = true
             };
             _betListApiClient.PostAsyncBytes("/BettingTicketCenter/GetBySingleCustomer", metaModel, SessionService.UserSession.Language)
-                .Returns(new byte[] { 1, 2, 3 });
+                .Returns(new MemoryStream(new byte[] { 1, 2, 3 }));
 
             using (var controller = CreateController())
             {
                 // Action
-                var result = await controller.Index(metaModel) as FileContentResult;
+                var result = await controller.Index(metaModel) as FileStreamResult;
 
                 // Assert
-                Assert.That(result.FileContents.Length, Is.EqualTo(3));
+                Assert.That(result.FileStream.Length, Is.EqualTo(3));
                 Assert.That(result.ContentType, Is.EqualTo("application/octet-stream"));
             }
         }

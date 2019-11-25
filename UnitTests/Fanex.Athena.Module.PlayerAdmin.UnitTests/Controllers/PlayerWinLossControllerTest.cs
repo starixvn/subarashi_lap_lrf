@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Fanex.Athena.Controllers.Base;
@@ -70,7 +71,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers
             var productAccess = new ProductAccess(
                     new List<Product> { new Product { ProductCode = Product.BA } });
 
-            var expectedResponseData = new Tuple<byte[], string>(new byte[] { 1 }, "application/octet-stream");
+            var expectedResponseData = new Tuple<MemoryStream, string>(new MemoryStream(new byte[] { 1 }), "application/octet-stream");
 
             using (var controller = CreateController(productAccess))
             {

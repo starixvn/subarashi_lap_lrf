@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
@@ -223,14 +224,14 @@
                     IsExportExcel = true
                 };
 
-                var expectedFileContent = FakeHelper.Create<Tuple<byte[], string>>();
+                var expectedFileContent = FakeHelper.Create<Tuple<MemoryStream, string>>();
                 _reportAPIClient.PostAsync("api/DailyBets/Export", metaModel, SessionService.UserSession.Language).Returns(expectedFileContent);
 
                 // Action
-                var result = await controller.Index(metaModel) as FileContentResult;
+                var result = await controller.Index(metaModel) as FileStreamResult;
 
                 // Assert
-                Assert.That(result.FileContents, Is.EqualTo(expectedFileContent.Item1));
+                Assert.That(result.FileStream, Is.EqualTo(expectedFileContent.Item1));
                 Assert.That(result.ContentType, Is.EqualTo(expectedFileContent.Item2));
             }
         }

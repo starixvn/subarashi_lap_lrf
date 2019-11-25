@@ -1,6 +1,7 @@
 ﻿namespace Fanex.Athena.Controllers.Report.UnitTests
 {
     using System;
+    using System.IO;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Fanex.Athena.Controllers.Base.UnitTests;
@@ -49,7 +50,7 @@
             {
                 // Arrange
                 var metaModel = new PromotionPrizeMetaModel();
-                var expectedData = FakeHelper.Create<Tuple<byte[], string>>();
+                var expectedData = FakeHelper.Create<Tuple<MemoryStream, string>>();
                 _reportAPIClient.PostAsync("api/PromotionPrize/Export", metaModel, SessionService.UserSession.Language, MediaType.MsgPack).Returns(Task.FromResult(expectedData));
 
                 // Action

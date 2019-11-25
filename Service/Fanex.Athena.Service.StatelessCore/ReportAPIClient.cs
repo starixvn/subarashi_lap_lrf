@@ -25,6 +25,7 @@ namespace Fanex.Athena.Service.StatelessCore
             {
                 var stream = new MemoryStream();
                 await x.Content.CopyToAsync(stream);
+                stream.Seek(0, SeekOrigin.Begin);
                 var contentType = x.Content.Headers.ContentType?.MediaType ?? DefaultContentType;
                 return Tuple.Create(stream, contentType);
             }
