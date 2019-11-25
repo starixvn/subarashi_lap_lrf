@@ -4,7 +4,7 @@ import { ActionCreators } from '../../actions/index.js';
 import { bindActionCreators } from 'redux';
 import ClientResourceManager from '@jsroot/lib/clientResourceManager';
 
-export const ActivityRecord = ({ ibcCustId, getActivityRecord }) => {
+export const ActivityRecord = ({ ibcCustId, createdDate, getActivityRecord }) => {
     const [data, setData] = useState(null);
 
     useEffect(() => {
@@ -14,8 +14,7 @@ export const ActivityRecord = ({ ibcCustId, getActivityRecord }) => {
         }
     }, [ibcCustId]);
 
-    const { CreatedDateString, LastTxn,
-        LastUpdateBAString, BAUpdatedBy, LastUpdateSpecialLevelString, SpecialLevelUpdateBy } = data || {};
+    const { LastTxn, LastUpdateBAString, BAUpdatedBy, LastUpdateSpecialLevelString, SpecialLevelUpdateBy } = data || {};
 
     return (
         <div className="left-side-content activity-record-container">
@@ -23,7 +22,7 @@ export const ActivityRecord = ({ ibcCustId, getActivityRecord }) => {
                 <tbody>
                     <tr>
                         <td className="first-cell">{ClientResourceManager.getText('CreatedDate')}</td>
-                        <td>{CreatedDateString}</td>
+                        <td>{createdDate}</td>
                     </tr>
                     <tr>
                         <td>{ClientResourceManager.getText('LastTransaction')}</td>
@@ -63,8 +62,8 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-    const { ibcCustId } = state;
-    return Object.assign({}, { ibcCustId });
+    const { ibcCustId, createdDate } = state;
+    return Object.assign({}, { ibcCustId, createdDate });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ActivityRecord);
