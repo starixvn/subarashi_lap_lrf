@@ -5713,23 +5713,23 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                     isCheckAll: ischeckAll,
                     showFooter: false,
                     checkAllText: Site.getSingleResource('All'),
-                    noneSelectedText: Site.getSingleResource('Columns'),
+                    noneSelectedText: Site.getSingleResource('SelectOptions'),
+                    tooltipNoItem: Site.getSingleResource('ThereIsNoSelectedItem'),
                     selectedText: Site.getSingleResource('SelectedItemCount'),
                     listData: dataUI,
                     onCheck: function () {
                         const checkedItems = $('#grid-columns-multiselect').multiSelect('getCheckedItems');
-                        if (checkedItems.length === 0) {
+                        if (!checkedItems.length) {
                             $('#SubmitButton').prop('disabled', true);
-                            $('#grid-columns-multiselect-null').removeClass('hide');
-                            $('#grid-columns-option-container input[type=checkbox]:checked').prop('checked', false);
                         }
                         else {
-                            $('#grid-columns-option-container input[type=checkbox]:checked').prop('checked', false);
-                            for (let i = 0; i < checkedItems.length; i++) {
-                                $('#grid-columns-option-container input#' + checkedItems[i]).prop('checked', true);
-                            }
-                            $('#SubmitButton').prop('disabled', false);
-                            $('#grid-columns-multiselect-null').addClass('hide');
+                            const validOddItems = !$('#odds-group-multiselect').length
+                                || $('#odds-group-multiselect').multiSelect('getCheckedItems').length;
+                            const validSubItems = !$('#subsidiary-multiselect').length
+                                || !$('#IsViewOnSubsidiary').is(':checked')
+                                || $('#subsidiary-multiselect').multiSelect('getCheckedItems').length;
+
+                            $('#SubmitButton').prop('disabled', !(validOddItems && validSubItems));
                         }
                     }
                 });
@@ -5771,12 +5771,23 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                     isCheckAll: ischeckAll,
                     showFooter: false,
                     checkAllText: Site.getSingleResource('All'),
-                    noneSelectedText: Site.getSingleResource('Odds'),
+                    noneSelectedText: Site.getSingleResource('SelectOptions'),
+                    tooltipNoItem: Site.getSingleResource('ThereIsNoSelectedItem'),
                     selectedText: Site.getSingleResource('SelectedItemCount'),
                     listData: dataUI,
                     onCheck: function () {
                         const checkedItems = $('#odds-group-multiselect').multiSelect('getCheckedItems');
-                        $('#SubmitButton').prop('disabled', checkedItems.length === 0);
+                        if (!checkedItems.length) {
+                            $('#SubmitButton').prop('disabled', true);
+                        }
+                        else {
+                            const validColumnsItems = $('#grid-columns-multiselect').multiSelect('getCheckedItems').length;
+                            const validSubItems = !$('#subsidiary-multiselect').length
+                                || !$('#IsViewOnSubsidiary').is(':checked')
+                                || $('#subsidiary-multiselect').multiSelect('getCheckedItems').length;
+
+                            $('#SubmitButton').prop('disabled', !(validColumnsItems && validSubItems));
+                        }
                     }
                 });
             },
@@ -5787,9 +5798,24 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                     return;
                 }
 
+                const enableSubmitButton = function (isViewOnSubsidiary) {
+                    const checkedItems = $('#subsidiary-multiselect').multiSelect('getCheckedItems');
+                    if (isViewOnSubsidiary && !checkedItems.length) {
+                        $('#SubmitButton').prop('disabled', true);
+                    }
+                    else {
+                        const validColumnsItems = $('#grid-columns-multiselect').multiSelect('getCheckedItems').length;
+                        const validOddItems = !$('#odds-group-multiselect').length
+                            || $('#odds-group-multiselect').multiSelect('getCheckedItems').length;
+
+                        $('#SubmitButton').prop('disabled', !(validColumnsItems && validOddItems));
+                    }
+                }
+
                 $('#IsViewOnSubsidiary').on('change', function (e) {
                     const checked = e.target.checked;
                     $('#subsidiary-view').toggleClass('hide', !checked);
+                    enableSubmitButton(checked);
                 });
 
                 const groupData = CustomerListService.getSubsidiaryTree($.parseJSON(data));
@@ -5804,8 +5830,12 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                     showFooter: false,
                     checkAllText: Site.getSingleResource('All'),
                     selectedText: Site.getSingleResource('SelectedItemCount'),
-                    noneSelectedText: Site.getSingleResource('Subsidiary'),
-                    listData: groupData
+                    noneSelectedText: Site.getSingleResource('SelectOptions'),
+                    tooltipNoItem: Site.getSingleResource('ThereIsNoSelectedItem'),
+                    listData: groupData,
+                    onCheck: function () {
+                        enableSubmitButton(true);
+                    }
                 });
             }
         };
@@ -6527,6 +6557,10 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
         submit: function () {
             
             const data = _me.getPostData();
+            if (!data) {
+                return;
+            }
+
             const option = {
                 type: 'POST',
                 data: data,
@@ -6555,7 +6589,13 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
             const data = {};
 
             if ($('#subsidiary-multiselect').length > 0) {
-                data.SubsidiaryList = $('#subsidiary-multiselect').multiSelect('getCheckedItems').join();
+                const subsidiaryList = $('#subsidiary-multiselect').multiSelect('getCheckedItems');
+
+                if (!subsidiaryList.length) {
+                    return null;
+                }
+
+                data.SubsidiaryList = subsidiaryList.join();
             }
 
             data.PageIndex = _state.pagingOption.pageindex;
@@ -6564,6 +6604,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
             data.Username = Site.asNull($('#Username').val());
             data.CurrencyName = $('#CurrencyName').val();
             data.BaseCurrency = $('#BaseCurrency').val();
+            data.IsViewOnSubsidiary = $('#IsViewOnSubsidiary').is(':checked');
 
             $('#excelDormantParam').val(JSON.stringify(data));
 
@@ -6671,6 +6712,10 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
             _state.checkedAllRows = false;
 
             const data = _me.getPostData();
+            if (!data) {
+                return;
+            }
+
             const option = {
                 type: 'POST',
                 data: data,
@@ -6710,7 +6755,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
 
             const gridColumnCount = data.GridColumns.filter(function (item) { return item.Checked; }).length;
             if (gridColumnCount === 0) {
-                return;
+                return null;
             }
 
             if ($('#OddsGroups').length > 0) {
@@ -6725,12 +6770,18 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
 
                 const oddsGroupCount = data.OddsGroups.filter(function (item) { return item.Checked; }).length;
                 if (oddsGroupCount === 0) {
-                    return;
+                    return null;
                 }
             }
 
             if ($('#subsidiary-multiselect').length > 0) {
-                data.SubsidiaryList = $('#subsidiary-multiselect').multiSelect('getCheckedItems').join();
+                const subsidiaryList = $('#subsidiary-multiselect').multiSelect('getCheckedItems');
+
+                if (!subsidiaryList.length) {
+                    return null;
+                }
+
+                data.SubsidiaryList = subsidiaryList.join();
             }
 
             data.PageIndex = _state.pagingOption.pageindex;
@@ -6949,8 +7000,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                 return tree;
             }
 
-            const createItem = function (item) {
+            const createItem = function (item, id) {
                 return {
+                    Id: id,
                     Value: item.Value,
                     Text: item.Name,
                     Checked: true,
@@ -6958,8 +7010,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                 }
             }
 
-            const getSubTree = function (subData) {
-                let subTree = createItem(subData);
+            const getSubTree = function (subData, id) {
+                let subTree = createItem(subData, id);
 
                 if (subData.Children) {
                     const totalChild = subData.Children.length;
@@ -6967,7 +7019,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                     let items = [];
 
                     for (let c = 0; c < totalChild; c++) {
-                        items.push(getSubTree(subData.Children[c]));
+                        const child = subData.Children[c];
+                        items.push(getSubTree(child, id + '-' + child.Value));
                     }
 
                     subTree.Items = items;
@@ -6977,7 +7030,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
             }
 
             for (let i = 0; i < total; i++) {
-                tree.push(getSubTree(data[i]));
+                const subTree = data[i];
+                tree.push(getSubTree(subTree, subTree.Value));
             }
 
             return tree;

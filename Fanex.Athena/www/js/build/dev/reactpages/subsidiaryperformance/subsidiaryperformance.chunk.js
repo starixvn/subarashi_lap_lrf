@@ -3953,11 +3953,9 @@ function (_Component) {
           title: index + 1,
           className: "center-align"
         }, index + 1), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
-          title: item.ExternalId,
-          className: "center-align"
+          title: item.ExternalId
         }, item.ExternalId), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
-          title: item.SystemId,
-          className: "center-align"
+          title: item.SystemId
         }, item.SystemId), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
           title: item.CurrencyName,
           className: "center-align"
@@ -4285,8 +4283,8 @@ function (_Component) {
         for (var i = 0; i < treeViewList.length; i++) {
           var item = treeViewList[i];
 
-          if (item.checked && item.level === 0 && selectedParentItems.indexOf(item.key) < 0) {
-            selectedParentItems.push(item.key);
+          if (item.checked && item.level === 1 && selectedParentItems.indexOf(item.parentKey) < 0) {
+            selectedParentItems.push(item.parentKey);
           }
         }
 
@@ -5130,9 +5128,9 @@ function () {
           field: 'Index'
         }, _defineProperty(_columns$push, MAIN_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].center), _defineProperty(_columns$push, TOTAL_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["totalCellStyle"].center), _defineProperty(_columns$push, GRAND_TOTAL_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["grandTotalCellStyle"].center), _columns$push), _defineProperty({
           field: fields.externalId
-        }, MAIN_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].center), _defineProperty({
+        }, MAIN_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].left), _defineProperty({
           field: fields.systemId
-        }, MAIN_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].center), (_columns$push4 = {
+        }, MAIN_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].left), (_columns$push4 = {
           field: fields.currencyName
         }, _defineProperty(_columns$push4, MAIN_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["bodyCellStyle"].center), _defineProperty(_columns$push4, TOTAL_SECTION_STYLE, _constants_excelStyle__WEBPACK_IMPORTED_MODULE_2__["totalCellStyle"].center), _columns$push4));
       } else {
