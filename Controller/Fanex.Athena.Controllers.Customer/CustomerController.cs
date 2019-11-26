@@ -411,7 +411,8 @@ namespace Fanex.Athena.Controllers.Customer
             var viewType = (SubsidiaryViewType)user.SubsidiaryViewType;
             if (metaModel.IsViewOnSubsidiary && (viewType == SubsidiaryViewType.MasterManagement || viewType == SubsidiaryViewType.NormalManagement))
             {
-                var currencyAgentList = _subsidiaryService.GetCurrencyAgentList(user, licenseeName, metaModel.SubsidiaryList, currencyId: metaModel.CurrencyId);
+                var currencyAgentList = _subsidiaryService.GetCurrencyAgentList(user, licenseeName,
+                    metaModel.SubsidiaryList, currencyId: metaModel.CurrencyId);
                 return AuthParameterHelper.GenerateAgentListXml(user.CurrencyList, currencyAgentList);
             }
             return AuthParameterHelper.GenerateAgentListXml(user.CurrencyAgentList, metaModel.CurrencyId);

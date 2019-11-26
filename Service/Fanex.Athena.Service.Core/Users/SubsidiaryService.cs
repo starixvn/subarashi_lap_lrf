@@ -47,28 +47,40 @@
             return subsidiaryList.Where(i => userAgentList.Contains(i.AgentId));
         }
 
-        public IDictionary<int, IEnumerable<int>> GetCurrencyAgentList(UserAuthInfo user, string licenseeName, string subsidiaryNames, bool isExcludeTest = false, int currencyId = 0)
+        public IDictionary<int, IEnumerable<int>> GetCurrencyAgentList(UserAuthInfo user, string licenseeName,
+            string subsidiaryNames, bool isExcludeTest = false, int currencyId = CurrencyAll)
         {
-            var currencyAgentList = new Dictionary<int, IEnumerable<int>>();
-
             if (string.IsNullOrWhiteSpace(subsidiaryNames) || (isExcludeTest && currencyId == CurrencyType.Uus))
             {
-                return currencyAgentList;
+                return new Dictionary<int, IEnumerable<int>>();
             }
 
             var subsidiaryNameList = subsidiaryNames.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
-            var subsidiaryData = GetAllSubsidiaries(user, licenseeName);
-            var dataGroupByCurrency = subsidiaryData
-                .Where(x => (currencyId == CurrencyAll || x.CurrencyId == currencyId) && (!isExcludeTest || x.CurrencyId != CurrencyType.Uus) && subsidiaryNameList.Contains(x.OperatorId))
-                .GroupBy(x => x.CurrencyId);
-
-            foreach (var item in dataGroupByCurrency)
+            var subsidiaryData = GetAllSubsidiaries(user, licenseeName).ToList();
+            var isFilterByCurrencyId = currencyId != CurrencyAll;
+            var result = new List<Subsidiary>();
+            for (var i = 0; i < subsidiaryData.Count; i++)
             {
-                currencyAgentList.Add(item.Key, item.Select(x => x.AgentId));
+                var item = subsidiaryData[i];
+                if (!subsidiaryNameList.Contains(item.OperatorId))
+                {
+                    continue;
+                }
+                if (isFilterByCurrencyId && item.CurrencyId != currencyId)
+                {
+                    continue;
+                }
+                if (isExcludeTest && item.CurrencyId == CurrencyType.Uus)
+                {
+                    continue;
+                }
+
+                result.Add(item);
             }
 
-            return currencyAgentList;
+            return result.GroupBy(x => x.CurrencyId).ToDictionary(x => x.Key, x => x.Select(i => i.AgentId));
+
         }
 
         public IEnumerable<CheckedItem> GetSubsidiaryTree(UserAuthInfo user, string licenseeName)
@@ -130,7 +142,7 @@
             return allSubsidiaries.Where(x => x.OperatorId.Equals(user.OperatorId, StringComparison.OrdinalIgnoreCase)).ToList();
         }
 
-        private IEnumerable<CheckedItem> GetWhiteLableTree(IEnumerable<GroupSubsidiary> groupSubsidiaries)
+        private static IEnumerable<CheckedItem> GetWhiteLableTree(IEnumerable<GroupSubsidiary> groupSubsidiaries)
         {
             return groupSubsidiaries
                 .OrderByDescending(x => x.WhiteLabelID)
@@ -145,7 +157,7 @@
                     }).ToList();
         }
 
-        private IEnumerable<CheckedItem> GetOperatorTree(IEnumerable<GroupSubsidiary> groupSubsidiaries)
+        private static IEnumerable<CheckedItem> GetOperatorTree(IEnumerable<GroupSubsidiary> groupSubsidiaries)
         {
             return groupSubsidiaries.GroupBy(x => x.OperatorId, (key, group) => new CheckedItem { Value = key, Name = key, Checked = true }).ToList();
         }

@@ -72,6 +72,7 @@
             var mainModel = new List<SubsidiaryPerformanceSummary>();
             var totalModel = new Dictionary<string, SubsidiaryPerformanceBase>();
             var grandTotal = new SubsidiaryPerformanceBase { CurrencyName = metaModel.BaseCurrency.ToUpperInvariant() };
+
             var operators = _subsidiaryService.GetSubsidiaryList(user, metaModel.LicenseeName, metaModel.SubsidiaryList);
             var totalItem = 0;
 
@@ -132,7 +133,7 @@
             };
         }
 
-        private IDictionary<string, SubsidiaryPerformanceBase> GroupSubsidiaryTotalByWhiteLabel(
+        private static IDictionary<string, SubsidiaryPerformanceBase> GroupSubsidiaryTotalByWhiteLabel(
             IDictionary<string, SubsidiaryPerformanceBase> subsidiaryTotal,
             IEnumerable<GroupSubsidiary> whiteLabels,
             string currencyName)
@@ -160,7 +161,7 @@
                 ).ToDictionary(key => key.WhiteLabel, value => value.Total);
         }
 
-        private IEnumerable<SubsidiaryPerformanceGroup> GroupSubsidiaryByWhiteLabel(
+        private static IEnumerable<SubsidiaryPerformanceGroup> GroupSubsidiaryByWhiteLabel(
             IEnumerable<SubsidiaryPerformanceSummary> subsidiaryGroup,
             IEnumerable<GroupSubsidiary> whiteLabels)
         {
