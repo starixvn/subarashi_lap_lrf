@@ -3,13 +3,13 @@
     using System;
     using System.Net;
     using System.Net.Http;
+    using System.Net.Http.Headers;
     using System.Text;
     using System.Threading.Tasks;
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
     using Fanex.Athena.Module.PlayerAdmin.Services.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.CustomException;
 
     using Newtonsoft.Json;
 
@@ -52,38 +52,19 @@
         private async Task<string> GetToken(string siteName)
         {
             const string GetTokenPath = "api/auth";
-
-            var requestContent = new StringContent(GetAuthenticationObjectAsString(siteName), Encoding.UTF8, "application/json");
-
-            using (var response = await _client.PostAsync(new Uri(GetTokenPath, UriKind.Relative), requestContent).ConfigureAwait(false))
+            using (var request = new HttpRequestMessage(HttpMethod.Post, new Uri(GetTokenPath, UriKind.Relative)))
             {
-                if (response.Content is null)
+                request.Content = new StringContent(GetAuthenticationObjectAsString(siteName), Encoding.UTF8, "application/json");
+                request.Headers.CacheControl = new CacheControlHeaderValue { NoCache = true, NoStore = true, MaxAge = new TimeSpan(0) };
+                using (var response = await _client.SendAsync(request))
                 {
-                    throw CreateErrorException(response.StatusCode, "Content is null", "null");
-                }
-
-                var content = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-
-                try
-                {
-                    var result = JsonConvert.DeserializeObject<ExternalServiceToken>(content);
-
-                    return result.AccessToken;
-                }
-                catch (Exception ex)
-                {
-                    throw CreateErrorException(response.StatusCode, ex.Message, content);
+                    response.EnsureSuccessStatusCode();
+                    var content = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var result = response.StatusCode == HttpStatusCode.OK ? JsonConvert.DeserializeObject<ExternalServiceToken>(content) : default;
+                    response.Content = null;
+                    return result?.AccessToken;
                 }
             }
-        }
-
-        private static ServiceException CreateErrorException(HttpStatusCode statusCode, string error, string content)
-        {
-            var errorMessage = new StringBuilder($"HTTP Error: {error}");
-            errorMessage.AppendLine($"HTTP status code: {statusCode}");
-            errorMessage.AppendLine($"Response Content: {content}");
-            Logging.Logger.Log.Error(errorMessage.ToString());
-            return new ServiceException(errorMessage.ToString(), "External Service");
         }
 
         private string GetAuthenticationObjectAsString(string siteName)
