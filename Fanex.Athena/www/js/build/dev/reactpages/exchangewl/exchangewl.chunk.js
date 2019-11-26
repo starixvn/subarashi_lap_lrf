@@ -2992,13 +2992,14 @@ var Licensee = {
 /*!******************************************************!*\
   !*** ./www/js/source/reactpages/constants/report.js ***!
   \******************************************************/
-/*! exports provided: ReportLevel, ReportBy */
+/*! exports provided: ReportLevel, ReportBy, SubsidiaryViewType */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReportLevel", function() { return ReportLevel; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReportBy", function() { return ReportBy; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SubsidiaryViewType", function() { return SubsidiaryViewType; });
 var ReportLevel = {
   MAIN: 0,
   LICENSEE: 1,
@@ -3007,6 +3008,11 @@ var ReportLevel = {
 var ReportBy = {
   DAILY: 1,
   MONTHLY: 2
+};
+var SubsidiaryViewType = {
+  NOT_MANAGEMENT: 0,
+  NORMAL_MANAGEMENT: 1,
+  MASTER_MANAGEMENT: 2
 };
 
 /***/ }),

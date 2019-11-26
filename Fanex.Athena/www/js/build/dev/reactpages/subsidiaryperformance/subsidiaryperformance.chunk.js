@@ -2820,13 +2820,14 @@ var grandTotalCellStyle = {
 /*!******************************************************!*\
   !*** ./www/js/source/reactpages/constants/report.js ***!
   \******************************************************/
-/*! exports provided: ReportLevel, ReportBy */
+/*! exports provided: ReportLevel, ReportBy, SubsidiaryViewType */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReportLevel", function() { return ReportLevel; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReportBy", function() { return ReportBy; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SubsidiaryViewType", function() { return SubsidiaryViewType; });
 var ReportLevel = {
   MAIN: 0,
   LICENSEE: 1,
@@ -2835,6 +2836,11 @@ var ReportLevel = {
 var ReportBy = {
   DAILY: 1,
   MONTHLY: 2
+};
+var SubsidiaryViewType = {
+  NOT_MANAGEMENT: 0,
+  NORMAL_MANAGEMENT: 1,
+  MASTER_MANAGEMENT: 2
 };
 
 /***/ }),
@@ -4234,7 +4240,7 @@ function (_Component) {
     _defineProperty(_assertThisInitialized(_this), "exportExcel", function (event) {
       event.preventDefault();
       var isCustomerLevel = _this.props.params.Level == _constants_report__WEBPACK_IMPORTED_MODULE_12__["ReportLevel"].CUSTOMER;
-      var isMaster = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].isSubsidiaryMasterView;
+      var isMaster = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].viewType === _constants_report__WEBPACK_IMPORTED_MODULE_12__["SubsidiaryViewType"].MASTER_MANAGEMENT;
       var params = isCustomerLevel ? _this.props.params : _this._getParams();
 
       if (!params) {
@@ -4272,14 +4278,14 @@ function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "subsidiaryChangeHandler", function (currentItem, selectedItemsKey, treeViewList) {
-      if (_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].isSubsidiaryMasterView) {
+      if (_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].viewType === _constants_report__WEBPACK_IMPORTED_MODULE_12__["SubsidiaryViewType"].MASTER_MANAGEMENT) {
         var selectedParentItems = [];
 
         for (var i = 0; i < treeViewList.length; i++) {
           var item = treeViewList[i];
 
-          if (item.checked && item.level === 0 && selectedParentItems.indexOf(item.paramsKey) < 0) {
-            selectedParentItems.push(item.paramsKey);
+          if (item.checked && item.level === 0 && selectedParentItems.indexOf(item.key) < 0) {
+            selectedParentItems.push(item.key);
           }
         }
 
@@ -4340,7 +4346,7 @@ function (_Component) {
         includeSelectedParentKey: false,
         useOriginalDataSource: false
       };
-      return subsidiaryList && subsidiaryList.length ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_5__["TreeViewSelect"], {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_multiselect__WEBPACK_IMPORTED_MODULE_5__["TreeViewSelect"], {
         language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].currentLanguage,
         id: "SubsidiaryTreeView",
         dataSource: subsidiaryList,
@@ -4353,10 +4359,10 @@ function (_Component) {
           SelectedItemCount: "# selected"
         },
         isAllTextShown: false,
-        hasSearchBox: true,
+        hasSearchBox: false,
         treeViewOption: treeViewOption,
         onChange: this.subsidiaryChangeHandler
-      }) : null;
+      });
     }
   }, {
     key: "_renderProductSelectList",
@@ -4410,14 +4416,14 @@ function (_Component) {
 
       var subsidiaryDropdown = false;
 
-      if (_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].subsidiaryList) {
+      if (_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].viewType !== _constants_report__WEBPACK_IMPORTED_MODULE_12__["SubsidiaryViewType"].NOT_MANAGEMENT) {
         subsidiaryDropdown = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "col-12 col-md-3 col-sm-5 col-lg-3 col-xl-3"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "form-group"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
           className: "label-text"
-        }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("Subsidiary")), this._renderSubsidiarySelectList()));
+        }, _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].viewType === _constants_report__WEBPACK_IMPORTED_MODULE_12__["SubsidiaryViewType"].MASTER_MANAGEMENT ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("WhiteLabel") : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("Subsidiary")), this._renderSubsidiarySelectList()));
       }
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -4515,7 +4521,7 @@ function (_Component) {
       var _this$props = this.props,
           selectedSubsidiary = _this$props.selectedSubsidiary,
           selectedProduct = _this$props.selectedProduct;
-      return (!_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].subsidiaryList || selectedSubsidiary !== "") && selectedProduct !== "" && Object(_lib_validationHelper__WEBPACK_IMPORTED_MODULE_14__["validateBaseCurrency"])(this.props.selectedBaseCurrency, false);
+      return selectedSubsidiary !== "" && selectedProduct !== "" && Object(_lib_validationHelper__WEBPACK_IMPORTED_MODULE_14__["validateBaseCurrency"])(this.props.selectedBaseCurrency, false);
     }
   }]);
 

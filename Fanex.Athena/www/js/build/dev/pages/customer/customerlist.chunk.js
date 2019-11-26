@@ -5787,6 +5787,11 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                     return;
                 }
 
+                $('#IsViewOnSubsidiary').on('change', function (e) {
+                    const checked = e.target.checked;
+                    $('#subsidiary-view').toggleClass('hide', !checked);
+                });
+
                 const groupData = CustomerListService.getSubsidiaryTree($.parseJSON(data));
 
                 $('#subsidiary-multiselect').multiSelect(
@@ -5800,11 +5805,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                     checkAllText: Site.getSingleResource('All'),
                     selectedText: Site.getSingleResource('SelectedItemCount'),
                     noneSelectedText: Site.getSingleResource('Subsidiary'),
-                    listData: groupData,
-                    onCheck: function () {
-                        const checkedItems = $('#subsidiary-multiselect').multiSelect('getCheckedItems');
-                        $('#SubmitButton').prop('disabled', checkedItems.length === 0);
-                    }
+                    listData: groupData
                 });
             }
         };
@@ -6742,6 +6743,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
             data.GroupCommId = $('#DdlGroupCommId').val();
             data.BaseCurrency = $('#BaseCurrency').val();
             data.CustStatus = $('#CustStatusOption').val();
+            data.IsViewOnSubsidiary = $('#IsViewOnSubsidiary').is(':checked');
 
             $('#excelParam').val(JSON.stringify(data));
 
