@@ -599,6 +599,7 @@
     <Content Include="www\css\build\dev\reactpages\casinoturnover\index.chunk.js" />
     <Content Include="www\css\build\dev\reactpages\casinoturnover\index.css" />
     <Content Include="www\css\build\dev\reactpages\dailybets\index.css" />
+    <Content Include="www\css\build\dev\reactpages\exchangevoided\index.css" />
     <Content Include="www\css\build\dev\reactpages\exchangewl\index.chunk.js" />
     <Content Include="www\css\build\dev\reactpages\exchangewl\index.css" />
     <Content Include="www\css\build\dev\reactpages\licenseewlbytimezone\index.chunk.js" />
@@ -705,6 +706,8 @@
     <Content Include="www\css\build\dev\reactpages\playeradmin\statement.css.map" />
     <Content Include="Views\Desktop\Report\DailyBets\Index.cshtml" />
     <Content Include="www\css\build\dev\reactpages\dailybets\index.css.map" />
+    <Content Include="Views\Desktop\BetList\ExchangeVoided\Index.cshtml" />
+    <Content Include="www\css\build\dev\reactpages\exchangevoided\index.css.map" />
     <None Include="www\css\source\reactpages\components\custom3rd\react-toastify.scss" />
     <None Include="www\css\source\pages\betlist\result\result.happy5.scss" />
     <None Include="www\css\source\reactpages\components\alert\icons\error.scss" />
@@ -2686,6 +2689,7 @@
     <Content Include="www\js\build\dev\reactpages\playeradmin\statement.chunk.js.map" />
     <Content Include="www\css\source\reactpages\pages\dailybets\index.scss" />
     <Content Include="www\js\build\dev\reactpages\report\dailybets.chunk.js.map" />
+    <Content Include="www\css\source\reactpages\pages\exchangevoided\index.scss" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="SiteConfig\WebConfigTransforms\SIT.config">
