@@ -26,7 +26,7 @@ namespace Fanex.Athena.Controllers.Report.Result.ResultPopup
                 gamePlayId,
                 languageCode = language
             };
-            return await _betListApiClient.PostAsyncString("/PPResultPopup/Index", model, language).ConfigureAwait(false);
+            return await _betListApiClient.PostAsyncStringAsync("/PPResultPopup/Index", model, language).ConfigureAwait(false);
         }
     }
 }

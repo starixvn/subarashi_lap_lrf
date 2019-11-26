@@ -28,9 +28,9 @@
     {
         private const string MixedSportId = "99MP";
 
-        public  IAuthorizationService AuthServiceInstance;
+        public IAuthorizationService AuthServiceInstance { get; set; }
 
-        public  ICacheRefAdapter CacheRefAdapterInstance;
+        public ICacheRefAdapter CacheRefAdapterInstance { get; set; }
 
         protected IEnumerable<PlayerBetLimit> AddSettingTypeName(IEnumerable<PlayerBetLimit> data)
         {

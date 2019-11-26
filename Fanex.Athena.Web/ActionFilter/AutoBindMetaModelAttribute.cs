@@ -62,7 +62,7 @@ namespace Fanex.Athena.Web.ActionFilter
             }
             if (BindLicenseeContract)
             {
-                MapLicenseeContract(filterContext, userSession);
+                MapLicenseeContract(filterContext);
             }
             if (BindCurrencyList)
             {
@@ -72,7 +72,7 @@ namespace Fanex.Athena.Web.ActionFilter
             base.OnActionExecuting(filterContext);
         }
 
-        private void MapLicenseeContract(ActionExecutingContext filterContext, UserAuthInfo userSession)
+        private void MapLicenseeContract(ActionExecutingContext filterContext)
         {
             var item = filterContext.ActionParameters.Where(x => x.Value is IMetaModelFunctionContract)
                     .Select(x => x).FirstOrDefault();

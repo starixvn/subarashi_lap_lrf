@@ -33,7 +33,7 @@ namespace Fanex.Athena.Service.StatelessCore.Abstraction
         {
             _client = client;
         }
-        public async Task<string> PostAsyncString(string path, object value, string language)
+        public virtual async Task<string> PostAsyncStringAsync(string path, object value, string language)
         {
             return await HandleAsync<string>(path, value, language, MediaType.Json,
                 async (x) =>
@@ -43,7 +43,7 @@ namespace Fanex.Athena.Service.StatelessCore.Abstraction
 
             ).ConfigureAwait(false);
         }
-        protected async Task<T>
+        protected virtual async Task<T>
            HandleAsync<T>(string path, object value, string language, MediaType mediaType, Func<HttpResponseMessage, Task<T>> codeBlock)
         {
             if (codeBlock == null)

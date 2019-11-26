@@ -72,7 +72,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Controllers
                 return File(response.Item1, response.Item2, FileName);
             }
 
-            return JsonString(await _reportAPIClient.PostAsyncString("api/CustomerWinLoss/Index",
+            return JsonString(await _reportAPIClient.PostAsyncStringAsync("api/CustomerWinLoss/Index",
                     metaModel, userSession.Language).ConfigureAwait(false));
         }
 

@@ -33,7 +33,7 @@
                 ).ConfigureAwait(false);
         }
 
-        public async Task<MemoryStream> PostAsyncBytes(string path, object value, string language)
+        public async Task<MemoryStream> PostAsyncStream(string path, object value, string language)
         {
             return await HandleAsync(path, value, language, MediaType.Json, async (x) =>
             {

@@ -27,7 +27,7 @@
             });
             var betListApiClient = Substitute.For<IBetListApiClient>();
 
-            betListApiClient.PostAsyncString(Url, Arg.Any<object>(), SessionService.UserSession.Language).Returns(ExpectedResult);
+            betListApiClient.PostAsyncStringAsync(Url, Arg.Any<object>(), SessionService.UserSession.Language).Returns(ExpectedResult);
             using (var controller = CreateController(betListApiClient))
             {
                 // Action
@@ -36,7 +36,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    betListApiClient.Received(1).PostAsyncString(
+                    betListApiClient.Received(1).PostAsyncStringAsync(
                         Url,
                         Arg.Is<object>(
                             x => (string)x.GetValue("custId") == CustId &&

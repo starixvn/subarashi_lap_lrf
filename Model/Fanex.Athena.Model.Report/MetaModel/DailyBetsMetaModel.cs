@@ -27,7 +27,7 @@ namespace Fanex.Athena.Model.Report.MetaModel
 
         public bool IsExportExcel { get; set; }
 
-        public string BaseCurrency
+        public static string BaseCurrency
         {
             get
             {

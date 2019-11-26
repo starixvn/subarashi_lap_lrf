@@ -96,7 +96,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers
             using (var controller = CreateController())
             {
                 const string ExpectedResult = "json result";
-                _reportApiClient.PostAsyncString("api/CustomerWinLoss/Index", metaModel, userSession.Language).Returns(ExpectedResult);
+                _reportApiClient.PostAsyncStringAsync("api/CustomerWinLoss/Index", metaModel, userSession.Language).Returns(ExpectedResult);
 
                 // Action
                 var result = await controller.Index(metaModel) as JsonNetResult;

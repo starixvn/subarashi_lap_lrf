@@ -73,7 +73,7 @@ namespace Fanex.Athena.Controllers.Report
                 return File(httpResponse.Item1, httpResponse.Item2);
             }
 
-            return JsonString(await _reportAPIClient.PostAsyncString("api/DailyBets/Index", metaModel, userSession.Language).ConfigureAwait(false));
+            return JsonString(await _reportAPIClient.PostAsyncStringAsync("api/DailyBets/Index", metaModel, userSession.Language).ConfigureAwait(false));
         }
     }
 }

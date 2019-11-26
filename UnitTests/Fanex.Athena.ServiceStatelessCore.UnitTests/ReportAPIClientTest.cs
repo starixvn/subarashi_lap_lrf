@@ -44,7 +44,7 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
             };
 
             // Action
-            await reportApiClient.PostAsyncString(ApiUrl, content, Language);
+            await reportApiClient.PostAsyncStringAsync(ApiUrl, content, Language);
 
             // Assert
             Assert.That(passedRequest.Headers.GetValues("Accept-Language").ElementAt(0), Is.EqualTo(Language));
@@ -97,7 +97,7 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
             var reportApiClient = new ReportAPIClient(client);
 
             // Action
-            AsyncTestDelegate testDelegate = async () => await reportApiClient.PostAsyncString(ApiUrl, null, Language);
+            AsyncTestDelegate testDelegate = async () => await reportApiClient.PostAsyncStringAsync(ApiUrl, null, Language);
 
             // Assert
             Assert.ThrowsAsync<HttpRequestException>(testDelegate);

@@ -37,7 +37,7 @@
                 // Arrange
                 const string ExpectedData = "Abc";
                 const string Url = "/ResultReport/ResultPopup";
-                _betListApiClient.PostAsyncString(Url, Arg.Any<object>(), SessionService.UserSession.Language).Returns(ExpectedData);
+                _betListApiClient.PostAsyncStringAsync(Url, Arg.Any<object>(), SessionService.UserSession.Language).Returns(ExpectedData);
                 var metaModel = new ResultPopupMetalModel();
 
                 // Action
@@ -46,7 +46,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    _betListApiClient.Received(1).PostAsyncString(Url, metaModel, SessionService.UserSession.Language);
+                    _betListApiClient.Received(1).PostAsyncStringAsync(Url, metaModel, SessionService.UserSession.Language);
 
                     Assert.That(result.ViewBag.Data, Is.EqualTo(ExpectedData));
                     Assert.That(result.ViewName, Is.EqualTo("~/Views/Desktop/Report/Result/Popup/Main.cshtml"));

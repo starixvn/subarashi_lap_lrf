@@ -159,7 +159,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers
             {
                 IsExport = true
             };
-            _betListApiClient.PostAsyncBytes("/BettingTicketCenter/GetBySingleCustomer", metaModel, SessionService.UserSession.Language)
+            _betListApiClient.PostAsyncStream("/BettingTicketCenter/GetBySingleCustomer", metaModel, SessionService.UserSession.Language)
                 .Returns(new MemoryStream(new byte[] { 1, 2, 3 }));
 
             using (var controller = CreateController())

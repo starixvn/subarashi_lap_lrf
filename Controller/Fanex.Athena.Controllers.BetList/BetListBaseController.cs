@@ -143,7 +143,7 @@
             string fileName,
             string apiPath = null)
         {
-            var data = await BetListApiClient.PostAsyncBytes(apiPath ?? "/BetList/ExportExcel", metaModel, SessionServiceInstance.UserSession.Language).ConfigureAwait(false);
+            var data = await BetListApiClient.PostAsyncStream(apiPath ?? "/BetList/ExportExcel", metaModel, SessionServiceInstance.UserSession.Language).ConfigureAwait(false);
             return File(data, "application/vnd.ms-excel", fileName + ".xls");
         }
 
