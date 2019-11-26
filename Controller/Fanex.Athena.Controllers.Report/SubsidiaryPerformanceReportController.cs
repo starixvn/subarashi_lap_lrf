@@ -38,7 +38,7 @@
                     Status = true
                 }).ToList(),
                 GroupSubsidiaryList = _subsidiaryService.GetSubsidiaryTree(userSession, licenseeSession.LicenseeName),
-                IsSubsidiaryMasterView = userSession.SubsidiaryViewType == (int)SubsidiaryViewType.MasterManagement
+                ViewType = userSession.SubsidiaryViewType
             };
             ViewBag.DefaultSelectedBaseCurrency = userSession.DefaultBaseCurrency;
             return View("~/Views/Desktop/Report/SubsidiaryPerformance/Main.cshtml", model);

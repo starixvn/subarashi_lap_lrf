@@ -10,11 +10,11 @@
     var selectedProductCode = string.Join(",", productOptions.Where(x => x.Status).Select(x => x.Code).ToArray());
     var baseCurrencyList = SystemConstants.BaseCurrencyList.Select(c => new { value = c.Value, label = c.Value }).ToList();
 
-    var selectedSubsidiary = Model.IsSubsidiaryMasterView
+    var selectedSubsidiary = Model.ViewType == (byte)SubsidiaryViewType.MasterManagement
         ? string.Join(",", Model.GroupSubsidiaryList.SelectMany(x => x.Children.Select(y => y.Value)).Distinct())
         : string.Join(",", Model.GroupSubsidiaryList.Select(x => x.Value));
 
-    var selectedWhiteLable = Model.IsSubsidiaryMasterView
+    var selectedWhiteLable = Model.ViewType == (byte)SubsidiaryViewType.MasterManagement
         ? string.Join(",", Model.GroupSubsidiaryList.Select(x => x.Value))
         : string.Empty;
 
@@ -49,7 +49,7 @@
         baseCurrencyList: @Html.Raw(baseCurrencyList.ToJson()),
         subsidiaryList: @Html.Raw(Model.GroupSubsidiaryList.ToJson()),
         dateConstraint: {minDate: '@minDate.ToString("MM/dd/yyyy")', maxDate: '@maxDate.ToString("MM/dd/yyyy")'},
-        isSubsidiaryMasterView: @Model.IsSubsidiaryMasterView.ToJson()
+        viewType: @Model.ViewType
     };
 }
 <div id="app-container">

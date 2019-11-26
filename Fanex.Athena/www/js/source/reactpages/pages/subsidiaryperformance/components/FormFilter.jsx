@@ -10,9 +10,10 @@ import ReportExcel from '../lib/reportExcel'
 import Site from '@jsroot/lib/site'
 import AppData from '@jsroot/lib/AppData'
 import { Service, Api } from '../lib/service'
-import { ReportLevel } from '../../../constants/report'
+import { ReportLevel, SubsidiaryViewType } from '../../../constants/report'
 import Report from '../../../lib/report'
 import { validateBaseCurrency } from '../../../lib/validationHelper'
+import { fail } from 'assert';
 const RANGE_MONTH_CONSTRAINT = 3;
 
 export class FormFilter extends Component {
@@ -22,7 +23,7 @@ export class FormFilter extends Component {
 
     get isValidModel() {
         const { selectedSubsidiary, selectedProduct } = this.props;
-        return (!AppData.subsidiaryList || selectedSubsidiary !== "") && selectedProduct !== ""
+        return selectedSubsidiary !== "" && selectedProduct !== ""
             && validateBaseCurrency(this.props.selectedBaseCurrency, false);
     }
 
@@ -40,7 +41,7 @@ export class FormFilter extends Component {
         event.preventDefault();
 
         const isCustomerLevel = this.props.params.Level == ReportLevel.CUSTOMER
-        const isMaster = AppData.isSubsidiaryMasterView;
+        const isMaster = AppData.viewType === SubsidiaryViewType.MASTER_MANAGEMENT;
         const params = isCustomerLevel ? this.props.params : this._getParams();
         if (!params) {
             return;
@@ -95,12 +96,12 @@ export class FormFilter extends Component {
     }
 
     subsidiaryChangeHandler = (currentItem, selectedItemsKey, treeViewList) => {
-        if (AppData.isSubsidiaryMasterView) {           
+        if (AppData.viewType === SubsidiaryViewType.MASTER_MANAGEMENT) {           
             let selectedParentItems = [];
             for (let i = 0; i < treeViewList.length; i++) {
                 const item = treeViewList[i];
-                if (item.checked && item.level === 0 && selectedParentItems.indexOf(item.paramsKey) < 0) {
-                    selectedParentItems.push(item.paramsKey);
+                if (item.checked && item.level === 0 && selectedParentItems.indexOf(item.key) < 0) {
+                    selectedParentItems.push(item.key);
                 }
             }
 
@@ -132,8 +133,7 @@ export class FormFilter extends Component {
             useOriginalDataSource: false
         }
 
-        return subsidiaryList && subsidiaryList.length ? (
-            <TreeViewSelect
+        return <TreeViewSelect
                 language={LangHelper.currentLanguage}
                 id="SubsidiaryTreeView"
                 dataSource={subsidiaryList}
@@ -142,10 +142,9 @@ export class FormFilter extends Component {
                 statusField="Checked"
                 texts={{ SelectOptions: "Please select", All: "All", SelectedItemCount: "# selected" }}
                 isAllTextShown={false}
-                hasSearchBox={true}
+                hasSearchBox={false}
                 treeViewOption={treeViewOption}
-                onChange={this.subsidiaryChangeHandler} />
-        ) : null;
+                onChange={this.subsidiaryChangeHandler} />;
     }
 
     _renderProductSelectList() {
@@ -187,11 +186,13 @@ export class FormFilter extends Component {
 
     render() {
         let subsidiaryDropdown = false;
-        if (AppData.subsidiaryList) {
+        if (AppData.viewType !== SubsidiaryViewType.NOT_MANAGEMENT) {
             subsidiaryDropdown =
                 (<div className="col-12 col-md-3 col-sm-5 col-lg-3 col-xl-3">
-                    <div className="form-group">
-                        <label className="label-text">{LangHelper.getSingleResource("Subsidiary")}</label>
+                <div className="form-group">
+                    <label className="label-text">
+                        {AppData.viewType === SubsidiaryViewType.MASTER_MANAGEMENT ? LangHelper.getSingleResource("WhiteLabel") : LangHelper.getSingleResource("Subsidiary")}
+                    </label>
                         {this._renderSubsidiarySelectList()}
                     </div>
                 </div>)
