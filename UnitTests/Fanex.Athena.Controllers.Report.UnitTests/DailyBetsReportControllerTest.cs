@@ -15,7 +15,6 @@
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Athena.UnitTest.Common.Helpers;
     using NSubstitute;
     using NUnit.Framework;
 
@@ -224,7 +223,7 @@
                     IsExportExcel = true
                 };
 
-                var expectedFileContent = FakeHelper.Create<Tuple<MemoryStream, string>>();
+                var expectedFileContent = new Tuple<MemoryStream, string>(new MemoryStream(new byte[] { 1 }), "application/octet-stream");
                 _reportAPIClient.PostAsync("api/DailyBets/Export", metaModel, SessionService.UserSession.Language).Returns(expectedFileContent);
 
                 // Action

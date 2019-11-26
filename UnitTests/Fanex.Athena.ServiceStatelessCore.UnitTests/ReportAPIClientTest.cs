@@ -100,7 +100,7 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
             AsyncTestDelegate testDelegate = async () => await reportApiClient.PostAsyncString(ApiUrl, null, Language);
 
             // Assert
-            Assert.ThrowsAsync<Exception>(testDelegate);
+            Assert.ThrowsAsync<HttpRequestException>(testDelegate);
         }
     }
 }

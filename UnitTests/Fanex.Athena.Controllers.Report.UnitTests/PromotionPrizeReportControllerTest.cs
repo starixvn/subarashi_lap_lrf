@@ -8,7 +8,6 @@
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Athena.UnitTest.Common.Helpers;
     using NSubstitute;
     using NUnit.Framework;
 
@@ -50,14 +49,14 @@
             {
                 // Arrange
                 var metaModel = new PromotionPrizeMetaModel();
-                var expectedData = FakeHelper.Create<Tuple<MemoryStream, string>>();
+                var expectedData = new Tuple<MemoryStream, string>(new MemoryStream(new byte[] { 1 }), "application/octet-stream");
                 _reportAPIClient.PostAsync("api/PromotionPrize/Export", metaModel, SessionService.UserSession.Language, MediaType.MsgPack).Returns(Task.FromResult(expectedData));
 
                 // Action
-                var result = await controller.ExportExcel(metaModel) as FileContentResult;
+                var result = await controller.ExportExcel(metaModel) as FileStreamResult;
 
                 // Assert
-                Assert.That(result.FileContents, Is.EqualTo(expectedData.Item1));
+                Assert.That(result.FileStream, Is.EqualTo(expectedData.Item1));
                 Assert.That(result.ContentType, Is.EqualTo(expectedData.Item2));
             }
         }

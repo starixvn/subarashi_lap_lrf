@@ -78,10 +78,10 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers
                 _reportApiClient.PostAsync("api/CustomerWinLoss/ExportExcel", metaModel, language, MediaType.MsgPack).Returns(expectedResponseData);
 
                 // Action
-                var result = await controller.Index(metaModel) as FileContentResult;
+                var result = await controller.Index(metaModel) as FileStreamResult;
 
                 // Assert
-                Assert.That(result.FileContents, Is.EqualTo(expectedResponseData.Item1));
+                Assert.That(result.FileStream, Is.EqualTo(expectedResponseData.Item1));
                 Assert.That(result.ContentType, Is.EqualTo(expectedResponseData.Item2));
             }
         }
