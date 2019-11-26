@@ -66,19 +66,25 @@ namespace Fanex.Athena.Controllers.Report
 
         [HttpPost]
         [AutoBindMetaModel(BindAgent = true)]
-        [ValidationWebRequest(FunctionConfig = FunctionNames.CustomerBalance)]
+        [ValidationWebRequest]
         public async Task<ActionResult> Index(CustomerBalanceMetaModel metaModel)
         {
             var userSession = SessionService.UserSession;
-            if (metaModel.IsExportExcel)
-            {
-                var httpResponse = await _reportAPIClient.PostAsync("api/CustomerBalance/ExportExcel",
-                    metaModel, userSession.Language).ConfigureAwait(false);
-
-                return File(httpResponse.Item1, httpResponse.Item2);
-            }
 
             return JsonString(await _reportAPIClient.PostAsyncString("api/CustomerBalance/Index", metaModel, userSession.Language).ConfigureAwait(false));
+        }
+
+
+        [HttpPost]
+        [AutoBindMetaModel(BindAgent = true)]
+        [ValidationWebRequest]
+        public async Task<FileResult> ExportExcel(CustomerBalanceMetaModel metaModel)
+        {
+            var userSession = SessionService.UserSession;
+            const string fileName = "CustomerBalance.csv";
+            var httpResponse = await _reportAPIClient.PostAsync("api/CustomerBalance/ExportExcel",
+                metaModel, userSession.Language).ConfigureAwait(false);
+            return File(httpResponse.Item1, httpResponse.Item2, fileName);
         }
     }
 }

@@ -325,7 +325,7 @@
         const _me =
         {
             urlData: 'CustomerBalanceReport/Index',
-            urlExcelData: 'CustomerBalanceReport/Index',
+            urlExcelData: 'CustomerBalanceReport/ExportExcel',
             hasCustomerComm: true,
             isAllowBA: true,
             customerCommIndex: 12,

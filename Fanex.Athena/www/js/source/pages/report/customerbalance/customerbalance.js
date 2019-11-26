@@ -8,14 +8,11 @@
     'helpers/daterange',
     'components/paging',
     '../report',
-    'components/toast',
     'lib/jqgrid/jquery.jqGrid.en',
     'lib/jqgrid/jquery.jqGrid.min',
     'extensions/jquery.extension'],
-    function ($, Site, jqGridAdditional, CustomerBalanceOption, DatePicker, MultiSelect, DateHelper, PagingHelper, Report, Toast) {
+    function ($, Site, jqGridAdditional, CustomerBalanceOption, DatePicker, MultiSelect, DateHelper, PagingHelper, Report) {
         'use strict';
-
-        const EXCEL_FILENAME = 'CustomerBalance.csv';
 
         const VALID_MONTH_RANGE = 2;
 
@@ -78,11 +75,12 @@
                     return false;
                 }
 
-                const data = getPostData();
-                data.PageIndex = 1;
-                data.IsExportExcel = true;
-
-                exportExcel(CustomerBalanceOption.urlExcelData, data, EXCEL_FILENAME);
+                const mainForm = $(_selector.Form);
+                const url = Site.resolveClientUrl(CustomerBalanceOption.urlExcelData);
+                $(_selector.OrderItemInput, _selector.Form).val(_orderColumnCode);
+                mainForm.attr('action', url);
+                mainForm.submit();
+                return false;
             });
 
             $(window).on('resize', function () {
@@ -244,52 +242,13 @@
             jqGridAdditional.updateGridWidth(reportGrid);
         }
 
-        function getPostData() {
-            const param = $(_selector.Form).serializeObject();
-            param.PageIndex = _pagingOption.pageindex;
-            param.PageSize = _pagingOption.pagesize;
-            param.OrderItem = _orderColumnCode;
-
-            if (param.Username === undefined) {
-                param.Username = '';
-            }
-
-            return param;
-        }
-
-        function exportExcel(url, data, fileName) {
-            const option = {
-                type: 'POST',
-                data: data,
-                dataType: 'binary',
-                responseType: 'text/csv',
-                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                cache: false,
-                url: Site.resolveClientUrl(url),
-                success: function (response) {
-                    console.log(response, Downloader);
-                    Downloader.download(response, fileName);
-                },
-                error: function (error) {
-                    console.log(error);
-                },
-                beforeSend: function () {
-                    Toast.show();
-                }
-            };
-            $.ajax(option);
-
-            return false;
-        }
-
         const _me = {
             initialize: initialize,
             initEvent: initEvent,
             submit: submit,
             bindData: bindData,
             ajaxPaging: ajaxPaging,
-            initSetting: initSetting,
-            getSubmitData: getPostData
+            initSetting: initSetting
         };
 
         return _me;
