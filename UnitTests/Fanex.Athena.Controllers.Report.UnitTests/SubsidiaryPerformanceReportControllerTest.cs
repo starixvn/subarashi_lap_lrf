@@ -41,7 +41,7 @@
                     .Returns(new ProductAccess(new List<Product> { product }));
 
                 var subsidiaryTree = new List<CheckedItem>();
-                _subsidiaryService.GetSubsidiaryTree(DefaultUserSession, DefaultLicenseeSession.LicenseeName, false).Returns(subsidiaryTree);
+                _subsidiaryService.GetSubsidiaryTree(DefaultUserSession, DefaultLicenseeSession.LicenseeName).Returns(subsidiaryTree);
 
                 var expectedViewName = "~/Views/Desktop/Report/SubsidiaryPerformance/Main.cshtml";
 

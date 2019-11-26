@@ -257,7 +257,7 @@
                 StubUserSessionData(user);
 
                 var expected = new List<CheckedItem> { new CheckedItem() };
-                _subsidiaryService.GetSubsidiaryTree(user, DefaultLicenseeSession.LicenseeName, true).Returns(expected);
+                _subsidiaryService.GetSubsidiaryTree(user, DefaultLicenseeSession.LicenseeName).Returns(expected);
 
                 _productService.GetProductAccess(Arg.Any<int>(), Arg.Any<string>()).Returns(new ProductAccess(new List<Product>()));
 

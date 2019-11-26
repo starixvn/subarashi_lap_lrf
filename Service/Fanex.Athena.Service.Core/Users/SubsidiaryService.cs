@@ -147,7 +147,7 @@
 
         private IEnumerable<CheckedItem> GetOperatorTree(IEnumerable<GroupSubsidiary> groupSubsidiaries)
         {
-            var tree = groupSubsidiaries.GroupBy(x => x.OperatorId, (key, group) => new CheckedItem { Value = key, Name = key, Checked = true }).ToList();
+            return groupSubsidiaries.GroupBy(x => x.OperatorId, (key, group) => new CheckedItem { Value = key, Name = key, Checked = true }).ToList();
         }
     }
 }
