@@ -74,23 +74,23 @@ define(['jquery', 'common/site', './customerlist.state', './customerlist.service
                     isCheckAll: ischeckAll,
                     showFooter: false,
                     checkAllText: Site.getSingleResource('All'),
-                    noneSelectedText: Site.getSingleResource('Columns'),
+                    noneSelectedText: Site.getSingleResource('SelectOptions'),
+                    tooltipNoItem: Site.getSingleResource('ThereIsNoSelectedItem'),
                     selectedText: Site.getSingleResource('SelectedItemCount'),
                     listData: dataUI,
                     onCheck: function () {
                         const checkedItems = $('#grid-columns-multiselect').multiSelect('getCheckedItems');
-                        if (checkedItems.length === 0) {
+                        if (!checkedItems.length) {
                             $('#SubmitButton').prop('disabled', true);
-                            $('#grid-columns-multiselect-null').removeClass('hide');
-                            $('#grid-columns-option-container input[type=checkbox]:checked').prop('checked', false);
                         }
                         else {
-                            $('#grid-columns-option-container input[type=checkbox]:checked').prop('checked', false);
-                            for (let i = 0; i < checkedItems.length; i++) {
-                                $('#grid-columns-option-container input#' + checkedItems[i]).prop('checked', true);
-                            }
-                            $('#SubmitButton').prop('disabled', false);
-                            $('#grid-columns-multiselect-null').addClass('hide');
+                            const validOddItems = !$('#odds-group-multiselect').length
+                                || $('#odds-group-multiselect').multiSelect('getCheckedItems').length;
+                            const validSubItems = !$('#subsidiary-multiselect').length
+                                || !$('#IsViewOnSubsidiary').is(':checked')
+                                || $('#subsidiary-multiselect').multiSelect('getCheckedItems').length;
+
+                            $('#SubmitButton').prop('disabled', !(validOddItems && validSubItems));
                         }
                     }
                 });
@@ -132,12 +132,23 @@ define(['jquery', 'common/site', './customerlist.state', './customerlist.service
                     isCheckAll: ischeckAll,
                     showFooter: false,
                     checkAllText: Site.getSingleResource('All'),
-                    noneSelectedText: Site.getSingleResource('Odds'),
+                    noneSelectedText: Site.getSingleResource('SelectOptions'),
+                    tooltipNoItem: Site.getSingleResource('ThereIsNoSelectedItem'),
                     selectedText: Site.getSingleResource('SelectedItemCount'),
                     listData: dataUI,
                     onCheck: function () {
                         const checkedItems = $('#odds-group-multiselect').multiSelect('getCheckedItems');
-                        $('#SubmitButton').prop('disabled', checkedItems.length === 0);
+                        if (!checkedItems.length) {
+                            $('#SubmitButton').prop('disabled', true);
+                        }
+                        else {
+                            const validColumnsItems = $('#grid-columns-multiselect').multiSelect('getCheckedItems').length;
+                            const validSubItems = !$('#subsidiary-multiselect').length
+                                || !$('#IsViewOnSubsidiary').is(':checked')
+                                || $('#subsidiary-multiselect').multiSelect('getCheckedItems').length;
+
+                            $('#SubmitButton').prop('disabled', !(validColumnsItems && validSubItems));
+                        }
                     }
                 });
             },
@@ -148,9 +159,24 @@ define(['jquery', 'common/site', './customerlist.state', './customerlist.service
                     return;
                 }
 
+                const enableSubmitButton = function (isViewOnSubsidiary) {
+                    const checkedItems = $('#subsidiary-multiselect').multiSelect('getCheckedItems');
+                    if (isViewOnSubsidiary && !checkedItems.length) {
+                        $('#SubmitButton').prop('disabled', true);
+                    }
+                    else {
+                        const validColumnsItems = $('#grid-columns-multiselect').multiSelect('getCheckedItems').length;
+                        const validOddItems = !$('#odds-group-multiselect').length
+                            || $('#odds-group-multiselect').multiSelect('getCheckedItems').length;
+
+                        $('#SubmitButton').prop('disabled', !(validColumnsItems && validOddItems));
+                    }
+                }
+
                 $('#IsViewOnSubsidiary').on('change', function (e) {
                     const checked = e.target.checked;
                     $('#subsidiary-view').toggleClass('hide', !checked);
+                    enableSubmitButton(checked);
                 });
 
                 const groupData = CustomerListService.getSubsidiaryTree($.parseJSON(data));
@@ -165,8 +191,12 @@ define(['jquery', 'common/site', './customerlist.state', './customerlist.service
                     showFooter: false,
                     checkAllText: Site.getSingleResource('All'),
                     selectedText: Site.getSingleResource('SelectedItemCount'),
-                    noneSelectedText: Site.getSingleResource('Subsidiary'),
-                    listData: groupData
+                    noneSelectedText: Site.getSingleResource('SelectOptions'),
+                    tooltipNoItem: Site.getSingleResource('ThereIsNoSelectedItem'),
+                    listData: groupData,
+                    onCheck: function () {
+                        enableSubmitButton(true);
+                    }
                 });
             }
         };

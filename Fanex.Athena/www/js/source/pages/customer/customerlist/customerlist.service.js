@@ -30,6 +30,10 @@ function ($, Site, CustomerListOption, jqGridAdditional, PagingHelper, CustomerL
             _state.checkedAllRows = false;
 
             const data = _me.getPostData();
+            if (!data) {
+                return;
+            }
+
             const option = {
                 type: 'POST',
                 data: data,
@@ -69,7 +73,7 @@ function ($, Site, CustomerListOption, jqGridAdditional, PagingHelper, CustomerL
 
             const gridColumnCount = data.GridColumns.filter(function (item) { return item.Checked; }).length;
             if (gridColumnCount === 0) {
-                return;
+                return null;
             }
 
             if ($('#OddsGroups').length > 0) {
@@ -84,12 +88,18 @@ function ($, Site, CustomerListOption, jqGridAdditional, PagingHelper, CustomerL
 
                 const oddsGroupCount = data.OddsGroups.filter(function (item) { return item.Checked; }).length;
                 if (oddsGroupCount === 0) {
-                    return;
+                    return null;
                 }
             }
 
             if ($('#subsidiary-multiselect').length > 0) {
-                data.SubsidiaryList = $('#subsidiary-multiselect').multiSelect('getCheckedItems').join();
+                const subsidiaryList = $('#subsidiary-multiselect').multiSelect('getCheckedItems');
+
+                if (!subsidiaryList.length) {
+                    return null;
+                }
+
+                data.SubsidiaryList = subsidiaryList.join();
             }
 
             data.PageIndex = _state.pagingOption.pageindex;
@@ -308,8 +318,9 @@ function ($, Site, CustomerListOption, jqGridAdditional, PagingHelper, CustomerL
                 return tree;
             }
 
-            const createItem = function (item) {
+            const createItem = function (item, id) {
                 return {
+                    Id: id,
                     Value: item.Value,
                     Text: item.Name,
                     Checked: true,
@@ -317,8 +328,8 @@ function ($, Site, CustomerListOption, jqGridAdditional, PagingHelper, CustomerL
                 }
             }
 
-            const getSubTree = function (subData) {
-                let subTree = createItem(subData);
+            const getSubTree = function (subData, id) {
+                let subTree = createItem(subData, id);
 
                 if (subData.Children) {
                     const totalChild = subData.Children.length;
@@ -326,7 +337,8 @@ function ($, Site, CustomerListOption, jqGridAdditional, PagingHelper, CustomerL
                     let items = [];
 
                     for (let c = 0; c < totalChild; c++) {
-                        items.push(getSubTree(subData.Children[c]));
+                        const child = subData.Children[c];
+                        items.push(getSubTree(child, id + '-' + child.Value));
                     }
 
                     subTree.Items = items;
@@ -336,7 +348,8 @@ function ($, Site, CustomerListOption, jqGridAdditional, PagingHelper, CustomerL
             }
 
             for (let i = 0; i < total; i++) {
-                tree.push(getSubTree(data[i]));
+                const subTree = data[i];
+                tree.push(getSubTree(subTree, subTree.Value));
             }
 
             return tree;

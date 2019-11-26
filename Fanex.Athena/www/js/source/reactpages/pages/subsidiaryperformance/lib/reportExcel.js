@@ -251,11 +251,11 @@ export default class ReportExcel {
                 },
                 {
                     field: fields.externalId,
-                    [MAIN_SECTION_STYLE]: bodyCellStyle.center
+                    [MAIN_SECTION_STYLE]: bodyCellStyle.left
                 },
                 {
                     field: fields.systemId,
-                    [MAIN_SECTION_STYLE]: bodyCellStyle.center
+                    [MAIN_SECTION_STYLE]: bodyCellStyle.left
                 },
                 {
                     field: fields.currencyName,

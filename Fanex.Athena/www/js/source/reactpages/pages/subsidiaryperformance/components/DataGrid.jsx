@@ -126,8 +126,8 @@ export class DataGrid extends Component {
         const rows = data.map((item, index) => {
             return <Row key={index}>
                         <Cell title={index + 1} className="center-align">{index + 1}</Cell>
-                        <Cell title={item.ExternalId} className="center-align">{item.ExternalId}</Cell>
-                        <Cell title={item.SystemId} className="center-align">{item.SystemId}</Cell>
+                        <Cell title={item.ExternalId}>{item.ExternalId}</Cell>
+                        <Cell title={item.SystemId}>{item.SystemId}</Cell>
                         <Cell title={item.CurrencyName} className="center-align">{item.CurrencyName}</Cell>
                         { this._buildCommonCells(item, index) }
                     </Row>

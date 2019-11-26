@@ -30,15 +30,9 @@
                 </div>
                 <div class="col l2 m2 s12 input-field">
                     <div class="multiselect-container">
-                        <select id="grid-columns-multiselect">
-                            @for (var i = 0; i < Model.Param.GridColumns.Count(); i++)
-                            {
-                                var column = @Model.Param.GridColumns.ElementAt(i);
-                                <option value="@column.ID">@column.Name</option>
-                            }
-                        </select>
+                        <select id="grid-columns-multiselect"></select>
+                        <label>@ViewResources.Show/@ViewResources.hide</label>
                     </div>
-                    <label>@ViewResources.Show/@ViewResources.hide</label>
                 </div>
                 @if (showOption.showOddsGroup)
                 {

@@ -6,7 +6,6 @@
 
 namespace Fanex.Athena.Model.Customer.MetaModel
 {
-    using System;
     using System.Collections.Generic;
     using Core.MetaModel;
     using Fanex.Athena.Model.Core.DTO.Common;
@@ -57,5 +56,8 @@ namespace Fanex.Athena.Model.Customer.MetaModel
         public bool IsSubsidiary { get; set; }
 
         public bool IsViewOnSubsidiary { get; set; }
+
+        public override bool IsValid => base.IsValid
+            && (!IsViewOnSubsidiary || !string.IsNullOrWhiteSpace(SubsidiaryList));
     }
 }

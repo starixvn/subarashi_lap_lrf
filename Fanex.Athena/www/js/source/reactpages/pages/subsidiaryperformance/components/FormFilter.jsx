@@ -100,8 +100,8 @@ export class FormFilter extends Component {
             let selectedParentItems = [];
             for (let i = 0; i < treeViewList.length; i++) {
                 const item = treeViewList[i];
-                if (item.checked && item.level === 0 && selectedParentItems.indexOf(item.key) < 0) {
-                    selectedParentItems.push(item.key);
+                if (item.checked && item.level === 1 && selectedParentItems.indexOf(item.parentKey) < 0) {
+                    selectedParentItems.push(item.parentKey);
                 }
             }
 
