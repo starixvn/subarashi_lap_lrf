@@ -13,7 +13,7 @@ import { Service, Api } from '../lib/service'
 import { ReportLevel, SubsidiaryViewType } from '../../../constants/report'
 import Report from '../../../lib/report'
 import { validateBaseCurrency } from '../../../lib/validationHelper'
-import { fail } from 'assert';
+
 const RANGE_MONTH_CONSTRAINT = 3;
 
 export class FormFilter extends Component {
@@ -96,7 +96,7 @@ export class FormFilter extends Component {
     }
 
     subsidiaryChangeHandler = (currentItem, selectedItemsKey, treeViewList) => {
-        if (AppData.viewType === SubsidiaryViewType.MASTER_MANAGEMENT) {           
+        if (AppData.viewType === SubsidiaryViewType.MASTER_MANAGEMENT) {
             let selectedParentItems = [];
             for (let i = 0; i < treeViewList.length; i++) {
                 const item = treeViewList[i];
