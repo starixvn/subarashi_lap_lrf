@@ -178,7 +178,7 @@ namespace Fanex.Athena.Controllers.Customer
                 var user = SessionServiceInstance.UserSession;
                 metaModel.IsShowStatusDropdown = AppSettingInstance.LicenseeOfferStatusFunction.Contains(licensee.LicenseeId);
                 metaModel.LicenseeId = licensee.LicenseeId;
-                metaModel.AgentListXml = GetAgentListXml(user, licensee.LicenseeName, metaModel.SubsidiaryList, metaModel.CurrencyId);
+                metaModel.AgentListXml = GetAgentListXml(user, licensee.LicenseeName, metaModel);
 
                 if (metaModel.GridColumns.Any(i => i.Checked))
                 {
@@ -222,7 +222,7 @@ namespace Fanex.Athena.Controllers.Customer
             {
                 var licensee = SessionServiceInstance.LicenseeSession;
                 metaModel.LicenseeId = licensee.LicenseeId;
-                metaModel.AgentListXml = GetAgentListXml(SessionServiceInstance.UserSession, licensee.LicenseeName, metaModel.SubsidiaryList, metaModel.CurrencyId);
+                metaModel.AgentListXml = GetAgentListXml(SessionServiceInstance.UserSession, licensee.LicenseeName, metaModel);
 
                 var templatePath = Server.MapPath(@"~/App_Data/Template/Customers/DormantCustomerList.xls");
 
@@ -306,7 +306,10 @@ namespace Fanex.Athena.Controllers.Customer
             metaModel.LicenseeId = licensee.LicenseeId;
             metaModel.IsShowStatusDropdown = AppSettingInstance.LicenseeOfferStatusFunction.Contains(metaModel.LicenseeId);
             metaModel.Username = metaModel.Username == placeholderUsername ? string.Empty : metaModel.Username;
-            metaModel.AgentListXml = GetAgentListXml(SessionServiceInstance.UserSession, licensee.LicenseeName, metaModel.SubsidiaryList, metaModel.CurrencyId);
+            metaModel.AgentListXml = GetAgentListXml(
+                SessionServiceInstance.UserSession,
+                licensee.LicenseeName,
+                metaModel);
         }
 
         private async Task<CustomerListViewModel> CreateCustomerViewModelAsync(CustomerListMetaModel metaModel)
@@ -323,7 +326,7 @@ namespace Fanex.Athena.Controllers.Customer
                 IsAllowedUserChangeBA = _authorizationService.IsAllowedSpecialBA(userSession),
                 IsAllowedCustomerCommission = licenseeSession.IsAllowedCustomerComm,
                 IsFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeName),
-                GroupSubsidiaryList = _subsidiaryService.GetSubsidiaryTree(userSession, licenseeSession.LicenseeName, true),
+                GroupSubsidiaryList = _subsidiaryService.GetSubsidiaryTree(userSession, licenseeSession.LicenseeName),
                 ViewType = (SubsidiaryViewType)userSession.SubsidiaryViewType,
                 IsSubsidiary = isSubsidiary
             };
@@ -403,15 +406,15 @@ namespace Fanex.Athena.Controllers.Customer
 
         #endregion Ultilities
 
-        private string GetAgentListXml(UserAuthInfo user, string licenseeName, string subsidiaryList, int currencyId)
+        private string GetAgentListXml(UserAuthInfo user, string licenseeName, CustomerListMetaModel metaModel)
         {
             var viewType = (SubsidiaryViewType)user.SubsidiaryViewType;
-            if (viewType == SubsidiaryViewType.MasterManagement || viewType == SubsidiaryViewType.NormalManagement)
+            if (metaModel.IsViewOnSubsidiary && (viewType == SubsidiaryViewType.MasterManagement || viewType == SubsidiaryViewType.NormalManagement))
             {
-                var currencyAgentList = _subsidiaryService.GetCurrencyAgentList(user, licenseeName, subsidiaryList, currencyId: currencyId);
+                var currencyAgentList = _subsidiaryService.GetCurrencyAgentList(user, licenseeName, metaModel.SubsidiaryList, currencyId: metaModel.CurrencyId);
                 return AuthParameterHelper.GenerateAgentListXml(user.CurrencyList, currencyAgentList);
             }
-            return AuthParameterHelper.GenerateAgentListXml(user.CurrencyAgentList, currencyId);
+            return AuthParameterHelper.GenerateAgentListXml(user.CurrencyAgentList, metaModel.CurrencyId);
         }
     }
 }

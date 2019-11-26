@@ -18,8 +18,6 @@
     {
         private const int CurrencyAll = 0;
 
-        private const string OtherOperatorId = "___(others)___";
-
         private const string OtherWhiteaLableId = "-2147483648";
 
         private const int CacheTimeoutSeconds = 60;
@@ -62,7 +60,7 @@
 
             var subsidiaryData = GetAllSubsidiaries(user, licenseeName);
             var dataGroupByCurrency = subsidiaryData
-                .Where(x => (currencyId == CurrencyAll || x.CurrencyId == currencyId) && subsidiaryNameList.Contains(x.OperatorId))
+                .Where(x => (currencyId == CurrencyAll || x.CurrencyId == currencyId) && (!isExcludeTest || x.CurrencyId != CurrencyType.Uus) && subsidiaryNameList.Contains(x.OperatorId))
                 .GroupBy(x => x.CurrencyId);
 
             foreach (var item in dataGroupByCurrency)
@@ -70,28 +68,24 @@
                 currencyAgentList.Add(item.Key, item.Select(x => x.AgentId));
             }
 
-            if (subsidiaryNameList.Contains(OtherOperatorId))
-            {
-                var exceptedAgentList = subsidiaryData
-                    .Where(x => !subsidiaryNameList.Contains(x.OperatorId)).Select(x => x.AgentId).ToList();
-                var otherAgentList = user.CurrencyAgentList
-                    .Where(x => x.Key == currencyId || currencyId == CurrencyAll).ToDictionary(x => x.Key, x => x.Value.AsEnumerable());
-
-                currencyAgentList = currencyAgentList.Union(otherAgentList).GroupBy(x => x.Key)
-                    .ToDictionary(x => x.Key, x => x.SelectMany(g => g.Value).Except(exceptedAgentList).Distinct());
-                currencyAgentList = currencyAgentList.Where(x => x.Value.Any()).ToDictionary(x => x.Key, x => x.Value);
-            }
-
-            if (isExcludeTest && currencyAgentList.ContainsKey(CurrencyType.Uus))
-            {
-                currencyAgentList.Remove(CurrencyType.Uus);
-            }
-
             return currencyAgentList;
         }
 
-        public IEnumerable<CheckedItem> GetSubsidiaryTree(UserAuthInfo user, string licenseeName, bool hasOtherOperator = false)
+        public IEnumerable<CheckedItem> GetSubsidiaryTree(UserAuthInfo user, string licenseeName)
         {
+            if (user.UserLevel == UserLevelType.Subsidiary && !string.IsNullOrWhiteSpace(user.OperatorId))
+            {
+                return new List<CheckedItem>
+                {
+                    new CheckedItem
+                    {
+                        Value = user.OperatorId,
+                        Name = user.OperatorId,
+                        Checked = true
+                    }
+                };
+            }
+
             if (user.SubsidiaryViewType == (int)SubsidiaryViewType.NotManagement)
             {
                 return Enumerable.Empty<CheckedItem>();
@@ -101,7 +95,7 @@
 
             return user.SubsidiaryViewType == (int)SubsidiaryViewType.MasterManagement
                 ? GetWhiteLableTree(groupSub)
-                : GetOperatorTree(groupSub, hasOtherOperator);
+                : GetOperatorTree(groupSub);
         }
 
         public IEnumerable<Subsidiary> GetSubsidiaryList(UserAuthInfo user, string licenseeName, string subsidiaryList)
@@ -138,7 +132,9 @@
 
         private IEnumerable<CheckedItem> GetWhiteLableTree(IEnumerable<GroupSubsidiary> groupSubsidiaries)
         {
-            return groupSubsidiaries.GroupBy(
+            return groupSubsidiaries
+                .OrderByDescending(x => x.WhiteLabelID)
+                .GroupBy(
                     x => new { x.WhiteLabelID, x.WhiteLabelName },
                     (key, group) => new CheckedItem
                     {
@@ -149,16 +145,9 @@
                     }).ToList();
         }
 
-        private IEnumerable<CheckedItem> GetOperatorTree(IEnumerable<GroupSubsidiary> groupSubsidiaries, bool hasOther)
+        private IEnumerable<CheckedItem> GetOperatorTree(IEnumerable<GroupSubsidiary> groupSubsidiaries)
         {
-            var tree = groupSubsidiaries.GroupBy(x => x.OperatorId, (key, group) => new CheckedItem { Value = key, Name = key, Checked = true });
-
-            if (hasOther)
-            {
-                return tree.Concat(new[] { new CheckedItem { Value = OtherOperatorId, Name = ViewResources.Others, Checked = true } }).ToList();
-            }
-
-            return tree.ToList();
+            var tree = groupSubsidiaries.GroupBy(x => x.OperatorId, (key, group) => new CheckedItem { Value = key, Name = key, Checked = true }).ToList();
         }
     }
 }

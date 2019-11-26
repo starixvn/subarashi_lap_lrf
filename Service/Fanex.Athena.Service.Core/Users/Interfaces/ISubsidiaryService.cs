@@ -12,7 +12,7 @@
 
         IEnumerable<Subsidiary> GetAllSubsidiaries(UserAuthInfo user, string licenseeName);
 
-        IEnumerable<CheckedItem> GetSubsidiaryTree(UserAuthInfo user, string licenseeName, bool hasOtherOperator = false);
+        IEnumerable<CheckedItem> GetSubsidiaryTree(UserAuthInfo user, string licenseeName);
 
         IDictionary<int, IEnumerable<int>> GetCurrencyAgentList(UserAuthInfo user, string licenseeName, string subsidiaryNames, bool isExcludeTest = false, int currencyId = 0);
 

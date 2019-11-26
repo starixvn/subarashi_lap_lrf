@@ -148,6 +148,11 @@ define(['jquery', 'common/site', './customerlist.state', './customerlist.service
                     return;
                 }
 
+                $('#IsViewOnSubsidiary').on('change', function (e) {
+                    const checked = e.target.checked;
+                    $('#subsidiary-view').toggleClass('hide', !checked);
+                });
+
                 const groupData = CustomerListService.getSubsidiaryTree($.parseJSON(data));
 
                 $('#subsidiary-multiselect').multiSelect(
@@ -161,11 +166,7 @@ define(['jquery', 'common/site', './customerlist.state', './customerlist.service
                     checkAllText: Site.getSingleResource('All'),
                     selectedText: Site.getSingleResource('SelectedItemCount'),
                     noneSelectedText: Site.getSingleResource('Subsidiary'),
-                    listData: groupData,
-                    onCheck: function () {
-                        const checkedItems = $('#subsidiary-multiselect').multiSelect('getCheckedItems');
-                        $('#SubmitButton').prop('disabled', checkedItems.length === 0);
-                    }
+                    listData: groupData
                 });
             }
         };

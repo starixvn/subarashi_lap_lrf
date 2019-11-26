@@ -102,6 +102,7 @@ function ($, Site, CustomerListOption, jqGridAdditional, PagingHelper, CustomerL
             data.GroupCommId = $('#DdlGroupCommId').val();
             data.BaseCurrency = $('#BaseCurrency').val();
             data.CustStatus = $('#CustStatusOption').val();
+            data.IsViewOnSubsidiary = $('#IsViewOnSubsidiary').is(':checked');
 
             $('#excelParam').val(JSON.stringify(data));
 

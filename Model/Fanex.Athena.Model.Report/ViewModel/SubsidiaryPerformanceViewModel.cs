@@ -23,6 +23,6 @@
 
         public bool ConvertAll { get; set; }
 
-        public bool IsSubsidiaryMasterView { get; set; }
+        public byte ViewType { get; set; }
     }
 }
