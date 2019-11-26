@@ -8,7 +8,7 @@ import NumberFormat from '../../../lib/numberFormat'
 import NoDataTitle from '../../../components/NoDataTitle'
 import { Service, HeaderText, TotalText, Api } from '../lib/service'
 import Report from '../../../lib/report'
-import { ReportLevel } from '../../../constants/report'
+import { ReportLevel, SubsidiaryViewType } from '../../../constants/report'
 import AppData from '@jsroot/lib/AppData'
 
 export class DataGrid extends Component {
@@ -55,7 +55,7 @@ export class DataGrid extends Component {
 
         return (
             <HeaderRow style={{ height: 32 }}>
-                { !customerLevel && AppData.isSubsidiaryMasterView && <HeaderCell colWidth={150}>{HeaderText.WhiteLabel}</HeaderCell> }
+                { !customerLevel && AppData.viewType === SubsidiaryViewType.MASTER_MANAGEMENT && <HeaderCell colWidth={150}>{HeaderText.WhiteLabel}</HeaderCell>}
                 { customerLevel && <HeaderCell colWidth={30}>{HeaderText.Index}</HeaderCell> }
                 <HeaderCell colWidth={150}>{customerLevel ? HeaderText.ExternalId : HeaderText.Subsidiary}</HeaderCell>
                 { customerLevel && <HeaderCell colWidth={150}>{HeaderText.SystemId}</HeaderCell> }
@@ -71,6 +71,7 @@ export class DataGrid extends Component {
 
     _buildMainBody() {
         const data = this.state.gridData.Data;
+        const isMasterView = AppData.viewType === SubsidiaryViewType.MASTER_MANAGEMENT;
 
         let rows = [];
         let key = 0;
@@ -93,7 +94,7 @@ export class DataGrid extends Component {
                         rows.push(
                             <Row key={key}>
                                 {
-                                    AppData.isSubsidiaryMasterView
+                                    isMasterView
                                     && cur === 0
                                     && pro === 0
                                     && sub === 0
@@ -146,7 +147,7 @@ export class DataGrid extends Component {
     _buildMainFooter() {
         const totalData = this.state.gridData.Total;
         const subs = Object.keys(totalData);
-        const colSpan = AppData.isSubsidiaryMasterView ? 2 : 1;
+        const colSpan = AppData.viewType === SubsidiaryViewType.MASTER_MANAGEMENT ? 2 : 1;
         
         let footer = [];
         for (let i = 0; i < subs.length; i++) {
@@ -173,7 +174,7 @@ export class DataGrid extends Component {
             return null;
         }
 
-        const colSpan = AppData.isSubsidiaryMasterView ? 2 : 1;
+        const colSpan = AppData.viewType === SubsidiaryViewType.MASTER_MANAGEMENT ? 2 : 1;
 
         return (
             <Row key="grandTotal" className="fixed-table-grant-total">

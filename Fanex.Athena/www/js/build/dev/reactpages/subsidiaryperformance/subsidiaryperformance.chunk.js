@@ -3862,7 +3862,7 @@ function (_Component) {
         style: {
           height: 32
         }
-      }, !customerLevel && _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].isSubsidiaryMasterView && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
+      }, !customerLevel && _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].viewType === _constants_report__WEBPACK_IMPORTED_MODULE_10__["SubsidiaryViewType"].MASTER_MANAGEMENT && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
         colWidth: 150
       }, _lib_service__WEBPACK_IMPORTED_MODULE_8__["HeaderText"].WhiteLabel), customerLevel && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
         colWidth: 30
@@ -3890,6 +3890,7 @@ function (_Component) {
       var _this3 = this;
 
       var data = this.state.gridData.Data;
+      var isMasterView = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].viewType === _constants_report__WEBPACK_IMPORTED_MODULE_10__["SubsidiaryViewType"].MASTER_MANAGEMENT;
       var rows = [];
       var key = 0;
 
@@ -3909,7 +3910,7 @@ function (_Component) {
               var product = products[pro];
               rows.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Row"], {
                 key: key
-              }, _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].isSubsidiaryMasterView && cur === 0 && pro === 0 && sub === 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+              }, isMasterView && cur === 0 && pro === 0 && sub === 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
                 title: subData.WhiteLabel,
                 rowSpan: subData.TotalItem
               }, subData.WhiteLabel), cur === 0 && pro === 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
@@ -3979,7 +3980,7 @@ function (_Component) {
     value: function _buildMainFooter() {
       var totalData = this.state.gridData.Total;
       var subs = Object.keys(totalData);
-      var colSpan = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].isSubsidiaryMasterView ? 2 : 1;
+      var colSpan = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].viewType === _constants_report__WEBPACK_IMPORTED_MODULE_10__["SubsidiaryViewType"].MASTER_MANAGEMENT ? 2 : 1;
       var footer = [];
 
       for (var i = 0; i < subs.length; i++) {
@@ -4010,7 +4011,7 @@ function (_Component) {
         return null;
       }
 
-      var colSpan = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].isSubsidiaryMasterView ? 2 : 1;
+      var colSpan = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].viewType === _constants_report__WEBPACK_IMPORTED_MODULE_10__["SubsidiaryViewType"].MASTER_MANAGEMENT ? 2 : 1;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Row"], {
         key: "grandTotal",
         className: "fixed-table-grant-total"
