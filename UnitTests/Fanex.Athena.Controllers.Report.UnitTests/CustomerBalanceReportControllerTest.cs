@@ -1,9 +1,13 @@
 ﻿namespace Fanex.Athena.Controllers.Report.UnitTests
 {
+    using System;
     using System.Collections.Generic;
+    using System.Threading.Tasks;
     using System.Web.Mvc;
     using Base.UnitTests;
+    using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.UnitTest.Common.Helpers;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using Model.Report.ViewModel;
@@ -14,12 +18,28 @@
     [TestFixture]
     public class CustomerBalanceReportControllerTest : CultureBaseControllerHelperTest
     {
+        private IReportAPIClient _reportAPIClient;
+
         [OneTimeSetUp]
         public override void FixtureSetUp()
         {
             base.FixtureSetUp();
 
+            _reportAPIClient = Substitute.For<IReportAPIClient>();
+
             SetUpDefaultFakeData();
+        }
+
+        [OneTimeTearDown]
+        public override void FixtureTearDown()
+        {
+            _reportAPIClient = null;
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            _reportAPIClient.ClearReceivedCalls();
         }
 
         [Test]
@@ -40,6 +60,51 @@
             }
         }
 
+        [Test]
+        public async Task IndexPost_WhenCall_CallsCorrectlyAPI()
+        {
+            using (var controller = CreateController())
+            {
+                // Arrange
+                var metaModel = new CustomerBalanceMetaModel();
+
+                // Action
+                await controller.Index(metaModel);
+
+                // Assert
+                Assert.Multiple(() =>
+                {
+                    _reportAPIClient.Received(1).PostAsyncString("api/CustomerBalance/Index", metaModel, SessionService.UserSession.Language);
+                });
+            }
+        }
+
+        [Test]
+        public async Task ExportExcel_WhenCall_ReturnsCorrectlyResult()
+        {
+            using (var controller = CreateController())
+            {
+                // Arrange
+                const string fileName = "CustomerBalance.csv";
+                var metaModel = new CustomerBalanceMetaModel();
+                var content = FakeHelper.Create<byte[]>();
+                var contentType = FakeHelper.Create<string>();
+                var expectedResult = Tuple.Create(content, contentType);
+                _reportAPIClient.PostAsync("api/CustomerBalance/ExportExcel", metaModel, SessionService.UserSession.Language).Returns(Task.FromResult(expectedResult));
+
+                // Action
+                var result = await controller.ExportExcel(metaModel) as FileContentResult;
+
+                // Assert
+                Assert.Multiple(() =>
+                {
+                    Assert.That(result.ContentType, Is.EqualTo(contentType));
+                    Assert.That(result.FileNPH促销活动DownloadName, Is.EqualTo(fileName));
+                    Assert.That(result.FileContents, Is.EqualTo(content));
+                });
+            }
+        }
+
         private CustomerBalanceReportController CreateController()
         {
             var productService = Substitute.For<IProductService>();
@@ -47,13 +112,11 @@
                 SessionService.LicenseeSession.LicenseeId,
                 SessionService.UserSession.Language,
                 FunctionNames.CustomerBalance).Returns(new ProductAccess(new List<Product>()));
-
-            return new CustomerBalanceReportController()
-            {
-                LangService = LangService,
-                SessionServiceInstance = SessionService,
-                ProductServiceInstance = productService,
-            };
+            return new CustomerBalanceReportController(
+                LangService,
+                SessionService,
+                productService,
+                _reportAPIClient);
         }
     }
 }
