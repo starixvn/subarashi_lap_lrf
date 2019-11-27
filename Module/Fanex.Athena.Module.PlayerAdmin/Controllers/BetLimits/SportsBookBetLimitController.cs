@@ -1,5 +1,9 @@
 ﻿namespace Fanex.Athena.Module.PlayerAdmin.Controllers
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
@@ -7,10 +11,6 @@
     using Fanex.Athena.Module.PlayerAdmin.ViewModels;
     using Fanex.Athena.Resources;
     using Fanex.Athena.Web.ActionFilter;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
 
     public class SportsBookBetLimitController : PlayerBetLimitBaseControler
     {
@@ -52,10 +52,7 @@
         {
             var result = await _service.UpdateSettingAsync(metaModel, AppSettingInstance.IsShowMixedSport).ConfigureAwait(false);
 
-            if (result.Code == 0)
-            {
-                result.Message = string.Format(ViewResources.UpdateSuccess);
-            }
+            result.Message = result.Code == 0 ? ViewResources.UpdateSuccess : result.Message;
 
             return Json(result);
         }

@@ -81,10 +81,6 @@ namespace Fanex.Athena.Service.StatelessCore.Abstraction
                     return await codeBlock(response).ConfigureAwait(false);
 
                 }
-                catch (Exception)
-                {
-                    throw;
-                }
                 finally
                 {
                     response?.Dispose();

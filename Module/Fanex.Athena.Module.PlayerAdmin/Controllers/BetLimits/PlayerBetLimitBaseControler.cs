@@ -5,14 +5,10 @@
     using System.Web.SessionState;
     using System.Web.UI;
     using Fanex.Athena.Controllers;
-    using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Auth.Enum;
     using Fanex.Athena.Module.PlayerAdmin.DTO;
-    using Fanex.Athena.Module.PlayerAdmin.MetaModel;
     using Fanex.Athena.Resources;
-    using Fanex.Athena.Service.Core.Common.Interfaces;
-    using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.VendorAdapter.Interfaces;
     using Fanex.Athena.Web.ActionFilter;

@@ -58,7 +58,6 @@
       <HintPath>..\..\packages\NUnit.3.10.1\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http, Version=4.1.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -130,7 +129,6 @@
     <Compile Include="Services\AGCasinoBetLimitServiceTest.cs" />
     <Compile Include="Services\DcsBetLimitServiceTest.cs" />
     <Compile Include="Services\NumberGameBetLimitServiceTest.cs" />
-    <Compile Include="Services\PlayerStatementServiceTest.cs" />
     <Compile Include="Services\RngKenoBetLimitServiceTest.cs" />
     <Compile Include="Services\SportsBookBetLimitServiceTest.cs" />
     <Compile Include="TestUtility.cs" />

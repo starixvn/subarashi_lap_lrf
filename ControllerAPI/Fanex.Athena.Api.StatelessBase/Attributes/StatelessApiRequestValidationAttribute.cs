@@ -1,15 +1,13 @@
-﻿using Fanex.Athena.Model.Core.MetaModel;
-using Fanex.Athena.Resources;
-using Fanex.Athena.Service.StatelessCore;
-using Fanex.Athena.Service.StatelessCore.Interfaces;
-
-using System;
+﻿using System;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Formatting;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
+using Fanex.Athena.Model.Core.MetaModel;
+using Fanex.Athena.Resources;
+using Fanex.Athena.Service.StatelessCore;
+using Fanex.Athena.Service.StatelessCore.Interfaces;
 
 namespace Fanex.Athena.Api.StatelessBase.Attributes
 {
@@ -17,7 +15,9 @@ namespace Fanex.Athena.Api.StatelessBase.Attributes
     public sealed class StatelessApiRequestValidationAttribute : ActionFilterAttribute
     {
         private static readonly IStatelessValidationService _service = new StatelessValidationService();
+
         public string ResponseContent { get; set; }
+
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
             base.OnActionExecuting(actionContext);
@@ -31,24 +31,17 @@ namespace Fanex.Athena.Api.StatelessBase.Attributes
 
             if (!_service.IsValid(model as IMetaModelValidation))
             {
-                if (ResponseContent != null)
-                {
-                    actionContext.Response = new HttpResponseMessage
+                actionContext.Response = ResponseContent != null
+                    ? new HttpResponseMessage
                     {
                         StatusCode = HttpStatusCode.OK,
                         Content = new StringContent(ResponseContent)
-                    };
-                }
-                else
-                {
-                    actionContext.Response = new HttpResponseMessage
+                    } : new HttpResponseMessage
                     {
                         StatusCode = HttpStatusCode.Forbidden,
                         Content = new StringContent(ViewResources.InvalidRequestMsg)
                     };
-                }
             }
-
         }
     }
 }

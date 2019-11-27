@@ -51,7 +51,8 @@
             };
         }
 
-        public async Task<ReportResultModel<SubsidiaryPerformanceDetail>> GetDetailData(SubsidiaryPerformanceMetaModel metaModel, IDictionary<int, string> currencyList)
+        public async Task<ReportResultModel<SubsidiaryPerformanceDetail>> GetDetailData(
+            SubsidiaryPerformanceMetaModel metaModel, IDictionary<int, string> currencyList)
         {
             return await _subLicenseePerformanceDataAccess.GetDetailData(metaModel, currencyList).ConfigureAwait(false);
         }
@@ -123,7 +124,8 @@
                 };
             }
 
-            var whiteLabels = _subsidiaryService.GetGroupSubsidiaryList(user, metaModel.LicenseeName, metaModel.SubsidiaryList, metaModel.WhiteLabelList);
+            var whiteLabels = _subsidiaryService.GetGroupSubsidiaryList(
+                user, metaModel.LicenseeName, metaModel.SubsidiaryList, metaModel.WhiteLabelList);
 
             return new SubsidiaryResultViewModel
             {

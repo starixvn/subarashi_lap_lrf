@@ -1,7 +1,6 @@
 ﻿namespace Fanex.Athena.Module.PlayerAdmin.Controllers
 {
     using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Fanex.Athena.Model.Auth.DataDomain;
@@ -10,10 +9,6 @@
     using Fanex.Athena.Module.PlayerAdmin.Services.Interfaces;
     using Fanex.Athena.Module.PlayerAdmin.ViewModels;
     using Fanex.Athena.Resources;
-    using Fanex.Athena.Service.Core.Common.Interfaces;
-    using Fanex.Athena.Service.Core.Users.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Athena.VendorAdapter.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
 
     [ValidateProductPermission(limitedProductIds: new[] { ProductTypes.VirtualSports, ProductTypes.VirtualSports2, ProductTypes.Lottery })]
@@ -57,10 +52,7 @@
         {
             var result = await _service.UpdateSettingAsync(metaModel).ConfigureAwait(false);
 
-            if (result.Code == 0)
-            {
-                result.Message = string.Format(ViewResources.UpdateSuccess);
-            }
+            result.Message = result.Code == 0 ? ViewResources.UpdateSuccess : result.Message;
 
             return Json(result);
         }

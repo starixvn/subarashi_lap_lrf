@@ -1,15 +1,14 @@
 ﻿namespace Fanex.Athena.Module.PlayerAdmin.Controllers
 {
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
     using Fanex.Athena.Module.PlayerAdmin.Services.Interfaces;
     using Fanex.Athena.Resources;
     using Fanex.Athena.Web.ActionFilter;
-
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
 
     [ValidateProductPermission(ProductTypes.AgCasino)]
     public class AGCasinoBetLimitController : PlayerBetLimitBaseControler
@@ -62,11 +61,7 @@
                 return Json(new { Code = 1, Message = ViewResources.FunctionDeniedMsg });
             }
             var result = await _service.UpdateSettingAsync(metaModel).ConfigureAwait(false);
-
-            if (result.Code == 0)
-            {
-                result.Message = ViewResources.UpdateSuccess;
-            }
+            result.Message = result.Code == 0 ? ViewResources.UpdateSuccess : result.Message;
 
             return Json(result);
         }

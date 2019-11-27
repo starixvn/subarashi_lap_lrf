@@ -58,11 +58,11 @@
             var updatedItems = setting.Where(x => x.IsUpdated);
             foreach (var item in updatedItems)
             {
-                var id = getSportTypeFunc?.Invoke(item);
+                var sportId = getSportTypeFunc?.Invoke(item);
                 for (var i = 0; i < logDetailIds.Length; i++)
                 {
                     var logDetailId = logDetailIds[i];
-                    var betLimitLogDetailItem = GetBetLimitLogDetailItem(logDetailId, id, status, item);
+                    var betLimitLogDetailItem = CreateLogDetailItemByAction(logDetailId, sportId, status, item);
 
                     if (betLimitLogDetailItem != null)
                     {
@@ -72,32 +72,32 @@
             }
         }
 
-        private static PlayerBetLimitDetailedLogMetaModel GetBetLimitLogDetailItem(
+        private static PlayerBetLimitDetailedLogMetaModel CreateLogDetailItemByAction(
             int logDetailId,
-            string id,
+            string sportId,
             string status,
             PlayerBetLimitMetaModel item)
         {
             if (logDetailId == LogActionDetailId.UpdatingMinBet && item.MinBet != item.OldMinBet)
             {
-                return CreateBetLimitLogDetailItem(logDetailId, id, status, item.OldMinBet, item.MinBet);
+                return CreateLogDetailItem(logDetailId, sportId, status, item.OldMinBet, item.MinBet);
             }
 
             if (logDetailId == LogActionDetailId.UpdatingMaxBet && item.MaxBet != item.OldMaxBet)
             {
-                return CreateBetLimitLogDetailItem(logDetailId, id, status, item.OldMaxBet, item.MaxBet);
+                return CreateLogDetailItem(logDetailId, sportId, status, item.OldMaxBet, item.MaxBet);
             }
 
             if ((logDetailId == LogActionDetailId.UpdatingMaxPerMatch
                 || logDetailId == LogActionDetailId.UpdatingMaxBetPerDraw)
                 && item.MaxPerMatch != item.OldMaxPerMatch)
             {
-                return CreateBetLimitLogDetailItem(logDetailId, id, status, item.OldMaxPerMatch, item.MaxPerMatch);
+                return CreateLogDetailItem(logDetailId, sportId, status, item.OldMaxPerMatch, item.MaxPerMatch);
             }
 
             if (logDetailId == LogActionDetailId.UpdatingMaxPerBall && item.MaxPerBall != item.OldMaxPerBall)
             {
-                return CreateBetLimitLogDetailItem(logDetailId, id, status, item.OldMaxPerBall, item.MaxPerBall);
+                return CreateLogDetailItem(logDetailId, sportId, status, item.OldMaxPerBall, item.MaxPerBall);
             }
 
             return null;
@@ -115,7 +115,7 @@
             };
         }
 
-        private static PlayerBetLimitDetailedLogMetaModel CreateBetLimitLogDetailItem(
+        private static PlayerBetLimitDetailedLogMetaModel CreateLogDetailItem(
             int logDetailId,
             string id,
             string status,

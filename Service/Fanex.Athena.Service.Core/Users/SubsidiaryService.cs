@@ -112,9 +112,15 @@
 
         public IEnumerable<Subsidiary> GetSubsidiaryList(UserAuthInfo user, string licenseeName, string subsidiaryList)
         {
-            return user.UserLevel == UserLevelType.Subsidiary
-                ? GetOperatorIdListForSubsidiaryUser(user, licenseeName)
-                : GetOperatorIdListForLicenseeUser(user, licenseeName, subsidiaryList);
+            var allSubsidiaries = GetAllSubsidiaries(user, licenseeName);
+
+            if (user.UserLevel == UserLevelType.Subsidiary)
+            {
+                return allSubsidiaries.Where(x => x.OperatorId.Equals(user.OperatorId, StringComparison.OrdinalIgnoreCase)).ToList();
+            }
+
+            var selectedSubsidiaries = subsidiaryList.Split(',');
+            return allSubsidiaries.Where(x => selectedSubsidiaries.Contains(x.OperatorId)).ToList();
         }
 
         public IEnumerable<GroupSubsidiary> GetGroupSubsidiaryList(UserAuthInfo user, string licenseeName, string subsidiaryList, string whiteLabelList)
@@ -125,21 +131,6 @@
             var allGroups = GetAllGroupSubsidiaries(licenseeName, user.WhiteLabelID);
 
             return allGroups.Where(x => selectedSubsidiaries.Contains(x.OperatorId) && selectedWhiteLabels.Contains(x.WhiteLabelID)).ToList();
-        }
-
-        private IEnumerable<Subsidiary> GetOperatorIdListForLicenseeUser(UserAuthInfo user, string licenseeName, string subsidiaryList)
-        {
-            var allSubsidiaries = GetAllSubsidiaries(user, licenseeName);
-            var selectedSubsidiaries = subsidiaryList.Split(',');
-
-            return allSubsidiaries.Where(x => selectedSubsidiaries.Contains(x.OperatorId)).ToList();
-        }
-
-        private IEnumerable<Subsidiary> GetOperatorIdListForSubsidiaryUser(UserAuthInfo user, string licenseeName)
-        {
-            var allSubsidiaries = GetAllSubsidiaries(user, licenseeName);
-
-            return allSubsidiaries.Where(x => x.OperatorId.Equals(user.OperatorId, StringComparison.OrdinalIgnoreCase)).ToList();
         }
 
         private static IEnumerable<CheckedItem> GetWhiteLableTree(IEnumerable<GroupSubsidiary> groupSubsidiaries)

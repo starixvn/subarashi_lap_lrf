@@ -47,7 +47,8 @@
             var sbSettings = await _betSetting.GetSettingAsync(custId, isShowMixedSport).ConfigureAwait(false);
 
             var result = sbSettings.ToList();
-            result.Insert(EsportIndex, eSportSetting.First());
+            var sbSettingTotal = sbSettings.Count();
+            result.Insert(sbSettingTotal > EsportIndex ? EsportIndex: sbSettingTotal, eSportSetting.First());
 
             return result;
         }
