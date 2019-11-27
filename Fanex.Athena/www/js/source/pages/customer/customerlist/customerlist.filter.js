@@ -1,6 +1,6 @@
 ﻿'use strict';
 define(['jquery', 'common/site', './customerlist.state', './customerlist.service', './customerlist.service.dormant',
-    'components/pluginhelper/autocomplete', 'lib/jquery.multiselect'],
+    'components/pluginhelper/autocomplete', 'lib/jquery.multiselect.nlevel'],
     function ($, Site, CustomerListState, CustomerListService, CustomerListServiceDormant, AutoComplete) {
         let _state;
         let _dormantState;

@@ -324,7 +324,7 @@ function ($, Site, CustomerListOption, jqGridAdditional, PagingHelper, CustomerL
                     Value: item.Value,
                     Text: item.Name,
                     Checked: true,
-                    Enable: true,
+                    Enable: true
                 }
             }
 
