@@ -4009,14 +4009,18 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*! bignumber.js v2.4.0 https://github.com/Mik
 
 /***/ }),
 
-/***/ "./www/js/source/lib/jquery.multiselect.js":
-/*!*************************************************!*\
-  !*** ./www/js/source/lib/jquery.multiselect.js ***!
-  \*************************************************/
+/***/ "./www/js/source/lib/jquery.multiselect.nlevel.js":
+/*!********************************************************!*\
+  !*** ./www/js/source/lib/jquery.multiselect.nlevel.js ***!
+  \********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(jQuery) {﻿///
+/*
+*Edited by Alex.Nguyen
+* Support get checked item.
+*/
 (function ($) {
     var currentTriggerEvents = [];
     var methods = {
@@ -4039,20 +4043,15 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*! bignumber.js v2.4.0 https://github.com/Mik
         checkAllItems: function () {
             var $inputs = $(this).next('div.ui-multiselect-options').find('label').not('.ui-multiselect-state-disabled').find('input');
             $inputs.not(':disabled').attr('checked', 'checked');
-            var numChecked = $(this).next('div.ui-multiselect-options').find('label').not('.ui-multiselect-state-disabled').not('.ui-multiselect-group-mark').find('input').not("#" + $(this).attr('id') + "HeaderCheckBox").filter('[checked]').length;
-            if (o.isUsedCustomCheckAllText) {
-                $(this).find('input').val(o.customCheckAllText);
-            }
-            else {
-                $(this).find('input').val(numChecked + " selected");
-            }
+            var numChecked = $(this).next('div.ui-multiselect-options').find('label').not('.ui-multiselect-state-disabled').not('.ui-multiselect-group-mark').find('input').not("#" + $(this).attr('id') + "HeaderCheckBox").filter(':checked').length;
         },
         unCheckAllItems: function () {
             var $inputs = $(this).next('div.ui-multiselect-options').find('label').not('.ui-multiselect-state-disabled').find('input');
             $inputs.not(':disabled').removeAttr('checked');
-            var numChecked = $(this).next('div.ui-multiselect-options').find('label').not('.ui-multiselect-state-disabled').find('input').filter('[checked]').length;
+            var numChecked = $(this).next('div.ui-multiselect-options').find('label').not('.ui-multiselect-state-disabled').find('input').filter(':checked').length;
 
             $(this).find('input').val($.fn.multiSelect.defaults.noneSelectedText);
+
         },
         getUncheckItems: function () {
             var listChecked = $(this).next('div.ui-multiselect-options').find('label:not(.ui-multiselect-state-disabled,.ui-multiselect-group-mark)').find('input:not(:checked)').not("#" + $(this).attr('id') + "HeaderCheckBox");
@@ -4063,15 +4062,22 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*! bignumber.js v2.4.0 https://github.com/Mik
             return tempArray;
         },
         getCheckedItems: function () {
-            var listChecked = $(this).next('div.ui-multiselect-options').find('label:not(.ui-multiselect-state-disabled,.ui-multiselect-group-mark)').find('input:not(#' + $(this).attr('id') + "HeaderCheckBox)").filter('[checked]');
+            var listChecked = $(this).next('div.ui-multiselect-options').find('label:not(.ui-multiselect-state-disabled,.ui-multiselect-group-mark)').find('input:not(#' + $(this).attr('id') + "HeaderCheckBox)").filter(':checked');
             var tempArray = [];
+
             for (var i = 0; i < listChecked.length; i++) {
                 tempArray.push(listChecked[i].value);
             }
+
             return tempArray;
         },
+
+        getMainParentCheckedItems: function () {
+            var listChecked = $(this).attr('parent-checked-value').split(',');
+            return listChecked;
+        },
         getCheckedItemsByText: function () {
-            var listChecked = $(this).next('div.ui-multiselect-options').find('label:not(.ui-multiselect-state-disabled,.ui-multiselect-group-mark)').find('input:not(#' + $(this).attr('id') + "HeaderCheckBox)").filter('[checked]');
+            var listChecked = $(this).next('div.ui-multiselect-options').find('label:not(.ui-multiselect-state-disabled,.ui-multiselect-group-mark)').find('input:not(#' + $(this).attr('id') + "HeaderCheckBox)").filter(':checked');
             var tempArray = [];
             for (var i = 0; i < listChecked.length; i++) {
                 tempArray.push(listChecked[i].title);
@@ -4084,6 +4090,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*! bignumber.js v2.4.0 https://github.com/Mik
         openMe: function (waiting) {
             //$(this).find('#ui-multiselect-options-' + $(this).find(":first-child").attr("id")).trigger('open', false);
             $(this).next('div.ui-multiselect-options').trigger('open', false);
+
         }
     };
 
@@ -4099,7 +4106,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*! bignumber.js v2.4.0 https://github.com/Mik
             //throw error
         }
     };
-    //// Detect Browser
+    //// Detect Browser 
     //// Grid Scroller
     var matchedBrowser, browserDectect;
 
@@ -4137,6 +4144,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*! bignumber.js v2.4.0 https://github.com/Mik
         browserDectect.safari = true;
     }
 
+
     // counter to dynamically generate label/option IDs if they don't exist
     var multiselectID = 0;
     // built up a multiselect
@@ -4144,7 +4152,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*! bignumber.js v2.4.0 https://github.com/Mik
         //global variables
         var $original = $(select);
         var $select = $original,
-            $searchBox, $clearSearchButton, $options, $header, $labels, $footer, $listGroupCheckBox, $body, $listItem, $listCollapse, $divHover,
+            $options, $header, $labels, $footer, $listGroupCheckBox, $body, $listItem, $listCollapse, $divHover,
             $allLabel, $inputHeaderCheckBox, $selectinput, $headerCheckbox, $checkedInput, $dropdownlist,
             html = [],
             optgroups = [],
@@ -4154,7 +4162,6 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*! bignumber.js v2.4.0 https://github.com/Mik
             isShowGroup = false,
             isOpenning = false,
             numGroup = 0;
-
         //render MultiSleclect Interface
         var RenderInterface = function (id, idDisable, noneSelectedText, title) {
             //remove old
@@ -4171,7 +4178,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*! bignumber.js v2.4.0 https://github.com/Mik
             tempHtml.push('<input readonly="readonly" type="text" class="ui-multiselect-state-default" value="' + noneSelectedText + '" title="' + select.title + '" /><span class="ui-multiselect-icon ui-multiselect-icon-triangle-1-s"></span></a>');
             return tempHtml.join('');
         };
-        //render Header
+        //render Header 
         var checkShouldShowGroupOrNo = function () {
             for (var i = 0; i < o.listData.length; i++) {
                 if (typeof o.listData[i].Items !== 'undefined' && o.listData[i].Items.length > 0) {
@@ -4180,18 +4187,11 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*! bignumber.js v2.4.0 https://github.com/Mik
                 }
             }
         }
-        var renderSearchBox = function () {
-            var html = [];
-            html.push('<div style="width:100%;height:30px">');
-            html.push('<input class="_SearchBox" type="text" placeholder="Search data" style="padding: 5px;width:calc(100% - 13px)"/>');
-            html.push('<span class="_ClearSearchButton" style="position:absolute;top:7px;right:10px;cursor:pointer">X</span>');
-            html.push('</div>');
-            return html.join('');
-        };
         var RenderHeader = function (id, checkAllText) {
             var tempHtml = [];
-
-            tempHtml.push('<div class="ui-multiselect-widget-header ui-multiselect-helper-clearfix ui-multiselect-header custom-ui-widget-header">');
+            //html.push('<div class="ui-multiselect-widget-header ui-multiselect-helper-clearfix ui-multiselect-corner-all ui-multiselect-header">');
+            //html.push('<ul class="ui-multiselect-helper-reset ui-multiselect-checkboxes" style="overflow-y:hidden;">');
+            tempHtml.push('<div class="ui-multiselect-widget-header ui-multiselect-helper-clearfix ui-multiselect-header custom-ui-widget-header" ' + (o.showCheckAll ? '' : 'style="display:none;"') + '>');
             tempHtml.push('<ul class="ui-multiselect-helper-reset ui-multiselect-checkboxes-head" style="overflow-y:hidden;">');
             tempHtml.push('<li style="display:inline;">');
             tempHtml.push('<label class="ui-multiselect-corner-all" style="color: #000;" for="' + id + "HeaderCheckBox" + '">');
@@ -4252,6 +4252,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*! bignumber.js v2.4.0 https://github.com/Mik
                     if (isNoGroup == true && isShowGroup) {
                         divClasses += (isShowGroup == false ? "" : ((isLastChildItem == true) ? ' rtBot' : ' rtMid'));
                         tempHtml.push('<div class="' + divClasses + '">');
+
                     }
                     else {
                         tempHtml.push('<div class="' + divClasses + '" style="margin-left:10px;">');
@@ -4286,6 +4287,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*! bignumber.js v2.4.0 https://github.com/Mik
                     //var nextGroupIdAtt = "ui-multiselect-option-group-" + currentGroupId + "-" + index.toString();
                     tempHtml.push('<ul class="ui-multiselect-ul-group custom-multi-select-rtUL" childgroupid="' + groupIdAttr + '">');
                     for (var j = 0; j < tempData.Items.length; j++) {
+
                         if (typeof tempData.Items[j].Items === 'undefined'
                         || tempData.Items[j].Items == null
                         || tempData.Items[j].Items.length === 0) {
@@ -4322,7 +4324,6 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*! bignumber.js v2.4.0 https://github.com/Mik
                 tempHtml.push(InsertRow(tempGroup, i, isChild, isLastChildItem, isNoGroup, siblingIsGroup, groupIdAttr, currentGroupId));
             }
             tempHtml.push('</ul>');
-            tempHtml.push('<div class="_NoItemText" style="display:none">' + o.noItemText + '</div>');
             return tempHtml.join('');
         };
         //render Footer
@@ -4344,7 +4345,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*! bignumber.js v2.4.0 https://github.com/Mik
         };
         // binding event
         var checkCheckAll = function () {
-            if (numGroup == $options.find('input[childgroupid="ui-multiselect-option-group-0"]').filter('[checked]').length) {
+            if (numGroup == $options.find('input[childgroupid="ui-multiselect-option-group-0"]').filter(':checked').length) {
                 $headerCheckbox.prop('checked', true);
                 $headerCheckbox.attr('checked', 'checked');
                 $listGroupCheckBox.prop('checked', true);
@@ -4353,7 +4354,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*! bignumber.js v2.4.0 https://github.com/Mik
         };
         var UpdateSelected = function () {
             var $inputs = $inputHeaderCheckBox,
-                    $checked = $inputs.filter('[checked]'),
+                    $checked = $inputs.filter(':checked'),
                     value = '',
                     numChecked = $checked.length;
 
@@ -4371,11 +4372,34 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*! bignumber.js v2.4.0 https://github.com/Mik
                         }
                         value = arrayItemChecked.join(', ');
                         if (value.length * 8 > o.minWidth) {
-                            value = o.selectedText.replace('#', numChecked).replace('#', $inputs.length);
+                            value = o.selectedText.replace('#', numChecked);
                         }
                     }
                     else {
-                        value = o.selectedText.replace('#', numChecked).replace('#', $inputs.length);
+                        if (o.showParentSelectedText) {
+                            var $parentChecked = $mainParentGroup.find('input:checked');
+                            var parentCheckValue = [];
+                            if ($parentChecked.length > 0) {
+                                var arrayItemChecked = [];
+                                numChecked = $parentChecked.length;
+                                for (var i = 0; i < numChecked; i++) {
+                                    arrayItemChecked.push($parentChecked[i].title);
+                                    parentCheckValue.push($parentChecked[i].value);
+                                }
+                                value = arrayItemChecked.join(', ');
+                                if (value.length * 8 > o.minWidth) {
+                                    value = o.selectedText.replace('#', numChecked);
+                                }
+                            }
+                            else {
+                                value = o.noneSelectedText;
+                            }
+
+                            $select.attr('parent-checked-value', parentCheckValue.join(','));
+                        }
+                        else {
+                            value = o.selectedText.replace('#', numChecked);
+                        }
                     }
                 }
             }
@@ -4397,7 +4421,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*! bignumber.js v2.4.0 https://github.com/Mik
             var parentGroup = currentGroup.parent().parent();
             if (parentGroup.prop("tagName").toLowerCase() == 'ul' && parentGroup.length > 0) {
                 var currentChildren = parentGroup.find("li > div > label > input");
-                var currentChildSelected = currentChildren.filter('[checked]').length;
+                var currentChildSelected = currentChildren.filter(':checked').length;
                 if (currentChildren.length == currentChildSelected) {
                     parentGroup.prev().find('input').prop('checked', true);
                     parentGroup.prev().find('input').attr('checked', 'checked');
@@ -4419,28 +4443,6 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*! bignumber.js v2.4.0 https://github.com/Mik
         };
 
         var BindingEvent = function () {
-            // search box
-
-            if (o.showSearchBox) {
-                $searchBox.on('input', function () {
-                    var searchText = this.value.toLowerCase();
-                    if (searchText === '') {
-                        $body.find('li').show();
-                    } else {
-                        $body.find('li').each(function () {
-                            var itemText = $(this).find('label').text().toLowerCase();
-                            $(this).toggle(itemText.indexOf(searchText) === 0);
-                        });
-                    }
-
-                    $options.find('._NoItemText').toggle($body.find('li:visible').length === 0);
-                });
-
-                $clearSearchButton.click(function () {
-                    $searchBox.val('').trigger('input');
-                });
-            }
-
             // build header links
             if (o.showHeader) {
                 $header.find('input').click(function (e) {
@@ -4461,6 +4463,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*! bignumber.js v2.4.0 https://github.com/Mik
             //build footer link
             if (o.showFooter) {
                 $footer.find('a').click(function (e) {
+
                     o.onUpdateResult.call(this);
                     e.preventDefault();
                 });
@@ -4475,6 +4478,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*! bignumber.js v2.4.0 https://github.com/Mik
                             gravity: 'sw'
                         }
                     );
+
                 }
                 catch (e) { };
             }
@@ -4520,6 +4524,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*! bignumber.js v2.4.0 https://github.com/Mik
                     if (!$select.hasClass('ui-multiselect-state-disabled')) {
                         $(this).addClass('ui-multiselect-state-hover');
                     };
+
                 },
                 mouseleave: function () {
                     $(this).removeClass('ui-multiselect-state-hover');
@@ -4534,6 +4539,9 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*! bignumber.js v2.4.0 https://github.com/Mik
                 }
             });
             // bind custom events to the options div
+            $options.unbind('close');
+            $options.unbind('open');
+            $options.unbind('toggle');
             $options.bind({
                 'close': function (e, others, isRetrieveData, targetId) {
                     if ($options.css('display') != 'none') {
@@ -4562,16 +4570,18 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*! bignumber.js v2.4.0 https://github.com/Mik
                                 }
                             }
                             $allLabel.find('input').removeAttr('isCheck');
-                            isOpenning = false;
                         }
                         UpdateSelected();
                         //$.fn.multiSelect.defaults.onLeave();
-                        if (typeof (targetId) != "undefined" && (targetId != $select.attr("id") || targetId == 'html')) {
+                        if (typeof (targetId) != "undefined" && (targetId != $select.attr("id") || targetId == 'html') && isOpenning == true) {
                             o.onLeave.call($select);
                         }
+
+                        isOpenning = false;
                     }
                 },
                 'open': function (e, closeOthers) {
+
                     // bail if this widget is disabled
                     if ($select.hasClass('ui-multiselect-state-disabled')) {
                         return;
@@ -4590,7 +4600,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*! bignumber.js v2.4.0 https://github.com/Mik
                     // hide all other options
                     if (closeOthers || typeof closeOthers === 'undefined') {
                         //$options.trigger('close', [true, true]);
-                        $('div.ui-multiselect-options').trigger('close', [true, true]);
+                        $('div.ui-multiselect-options').trigger('close', [true, true, 'html']);
                     }
 
                     // calculate positioning
@@ -4601,7 +4611,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*! bignumber.js v2.4.0 https://github.com/Mik
                     } else {
                         top = (offset.top + $select.outerHeight());
                     }
-                    top += 3; // padding extra 3px to seperate options with multi select div
+                    top += 3; // padding extra 3px to seperate options with multi select div 
 
                     // calculate the width of the options menu
                     if (browserDectect.msie) {
@@ -4632,12 +4642,11 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*! bignumber.js v2.4.0 https://github.com/Mik
                         }
                     }
                     if (o.isRetrieveDataAfterClose) {
-                        $allLabel.find('input').filter('[checked]').attr("ischeck", "true");
-                        isOpenning = true;
+                        $allLabel.find('input').filter(':checked').attr("ischeck", "true");
                     }
-                    //o.onOpen.call($options[0]);
 
-                    $searchBox.focus();
+                    isOpenning = true;
+                    //o.onOpen.call($options[0]);
                 },
                 'toggle': function () {
                     var isHide = $(this).is(':hidden');
@@ -4670,6 +4679,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*! bignumber.js v2.4.0 https://github.com/Mik
                     UpdateSelected();
                 });
 
+
                 //handler chilren checkbox event
                 var childrenNodes = $this.find('input[childgroupid="' + $this.attr("childgroupid") + '"]');
                 childrenNodes.click(function () {
@@ -4682,22 +4692,13 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*! bignumber.js v2.4.0 https://github.com/Mik
                     else if (current.prop('checked') == true) {
                         current.attr('checked', 'checked');
                         var currentGroup = parent;
-                        var currentChildSelected = childrenNodes.filter('[checked]').length;
+                        var currentChildSelected = childrenNodes.filter(':checked').length;
                         var currentChildLength = childrenNodes.length;
                         if (currentChildLength == currentChildSelected) {
                             currentGroup.prev().find('input').prop('checked', true);
                             currentGroup.prev().find('input').attr('checked', 'checked');
                             UpdateSelectedFromChild(current.parent().parent().parent().parent());
                         }
-
-                        //                        if (currentGroup.find('label').not('.ui-multiselect-state-disabled').not('.ui-multiselect-group-mark').find('input').not("#" + currentGroup.attr('id') + "HeaderCheckBox").filter('[checked]').length
-                        //                                === currentGroup.find('label').not('.ui-multiselect-state-disabled').not('.ui-multiselect-group-mark').find('input').not("#" + currentGroup.attr('id') + "HeaderCheckBox").length) {
-                        //                            currentGroup.prev().find('input').attr('checked', 'checked');
-                        //                        }
-                        //                        if (parent.find('input:not(:disabled)').length === (parent.find('input[checked]').length)) {
-                        //                            parent.prev().find('input').attr('checked', 'checked');
-                        //                        }
-
                         checkCheckAll();
                     }
                     o.onCheck.call(this);
@@ -4709,7 +4710,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*! bignumber.js v2.4.0 https://github.com/Mik
                 if ($(this).hasClass("ui-multiselect-icon-collapse")) {
                     $(this).removeClass("ui-multiselect-icon-collapse").addClass("ui-multiselect-icon-expand");
                     $options.find('ul.ui-multiselect-ul-group:not(.ui-multiselect-checkboxes):visible').hide();
-                    $options.find('span.collapseClass').removeClass('rtMinus').addClass('rtPlus');;
+                    $options.find('span.collapseClass').removeClass('rtMinus').addClass('rtPlus'); ;
                     //$(this).text('Expande All');
                 }
                 else {
@@ -4742,7 +4743,6 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*! bignumber.js v2.4.0 https://github.com/Mik
             html.push(RenderInterface(id, isDisabled || o.disabled, o.noneSelectedText));
             html.push('<div class="ui-multiselect-options RadTreeView RadTreeView_Office2010Silver' + (o.shadow ? ' ui-multiselect-shadow' : '') + ' ui-multiselect-widget ui-multiselect-widget-content ui-multiselect-corner-all" >');
             if (o.listData.length != 0) {
-                o.showSearchBox && html.push(renderSearchBox());
                 html.push(RenderHeader(id, o.checkAllText));
                 html.push(RenderBody());
             }
@@ -4755,10 +4755,9 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*! bignumber.js v2.4.0 https://github.com/Mik
             html.push('</div>');
 
             //add global variable
+
             $select = $select.after(html.join('')).next('a.ui-multiselect');
             $options = $select.next('div.ui-multiselect-options');
-            $searchBox = $options.find('._SearchBox');
-            $clearSearchButton = $options.find('._ClearSearchButton');
             $options.attr('id', 'ui-multiselect-options-' + id);
             $options = $('#ui-multiselect-options-' + id);
             $header = $options.find('div.ui-multiselect-header');
@@ -4770,6 +4769,10 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*! bignumber.js v2.4.0 https://github.com/Mik
             $listCollapse = $options.find('span.collapseClass');
             $listGroupCheckBox = $options.find('label.ui-multiselect-group-mark').find('input');
             $divHover = $options.find('div.ui-multiselect-div');
+            $mainParentGroup = $options.children().filter('ul.ui-multiselect-checkboxes')
+                            .children()
+                            .children()
+                            .filter('.ui-multiselect-div');
 
             AddPropertyValue();
             BindingEvent();
@@ -4777,7 +4780,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*! bignumber.js v2.4.0 https://github.com/Mik
             $inputHeaderCheckBox = $labels.find('input').not("#" + id + "HeaderCheckBox");
             $selectinput = $select.find('input');
             $headerCheckbox = $options.find("#" + id + "HeaderCheckBox");
-            $checkedInput = $labels.find('input[checked]');
+            $checkedInput = $labels.find('input:checked');
 
             InitialSetup();
             // remove the original input element
@@ -4787,7 +4790,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*! bignumber.js v2.4.0 https://github.com/Mik
         return $select;
     };
     // close each select when clicking on any other element/anywhere else on the page
-    $(document).delegate('html', 'click', function (e, isInsideCall) {
+    $(document).delegate('html', 'click.monpickr', function (e, isInsideCall) {
         var $target = $(e.target);
         if (!$target.closest('div.ui-multiselect-options').length && !$target.parent().hasClass('ui-multiselect')) {
             if (!$target.hasClass('exeption-multiselect-click')) {
@@ -4795,9 +4798,11 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*! bignumber.js v2.4.0 https://github.com/Mik
             }
         }
     });
+
+
     // default options
     $.fn.multiSelect.defaults = {
-        showSearchBox: false,
+        showCheckAll: true,
         showHeader: true,
         showFooter: true,
         showTooltip: false,
@@ -4825,6 +4830,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*! bignumber.js v2.4.0 https://github.com/Mik
         isUsedCustomCheckAllText: false,
         customCheckAllText: '',
         columnNumber: 1,
+        showParentSelectedText: false,
         onLeave: function () { },
         onCheck: function () { }, /* when an individual checkbox is clicked */
         onOpen: function () { }, /* when the select menu is opened */
@@ -4833,7 +4839,9 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*! bignumber.js v2.4.0 https://github.com/Mik
         onOptgroupToggle: function () { }, /* when the optgroup heading is clicked */
         onUpdateResult: function () { }
     };
+
 })(jQuery);
+
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js?fe57")))
 
 /***/ }),
@@ -5640,7 +5648,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/* This colum
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
 !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js?fe57"), __webpack_require__(/*! common/site */ "./www/js/source/common/site.js"), __webpack_require__(/*! ./customerlist.state */ "./www/js/source/pages/customer/customerlist/customerlist.state.js"), __webpack_require__(/*! ./customerlist.service */ "./www/js/source/pages/customer/customerlist/customerlist.service.js"), __webpack_require__(/*! ./customerlist.service.dormant */ "./www/js/source/pages/customer/customerlist/customerlist.service.dormant.js"),
-    __webpack_require__(/*! components/pluginhelper/autocomplete */ "./www/js/source/components/pluginhelper/autocomplete.js"), __webpack_require__(/*! lib/jquery.multiselect */ "./www/js/source/lib/jquery.multiselect.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, Site, CustomerListState, CustomerListService, CustomerListServiceDormant, AutoComplete) {
+    __webpack_require__(/*! components/pluginhelper/autocomplete */ "./www/js/source/components/pluginhelper/autocomplete.js"), __webpack_require__(/*! lib/jquery.multiselect.nlevel */ "./www/js/source/lib/jquery.multiselect.nlevel.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, Site, CustomerListState, CustomerListService, CustomerListServiceDormant, AutoComplete) {
         let _state;
         let _dormantState;
 
@@ -7006,7 +7014,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                     Value: item.Value,
                     Text: item.Name,
                     Checked: true,
-                    Enable: true,
+                    Enable: true
                 }
             }
 
