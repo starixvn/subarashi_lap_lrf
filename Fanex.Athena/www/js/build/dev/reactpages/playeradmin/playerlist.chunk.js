@@ -1525,7 +1525,7 @@ function (_PureComponent) {
           userName = selectedPlayer.userName,
           createdDate = selectedPlayer.createdDate;
       var custIdQueryString = "custId=".concat(ibcCustId, "&licenseeCustId=").concat(licenseeCustId);
-      var nameValuePairString = custIdQueryString + "&currencyId=".concat(currencyId, "&currencyName=").concat(currency, "&userName=").concat(userName, "&createdDate=").concat(createdDate);
+      var nameValuePairString = custIdQueryString + "&currencyId=".concat(currencyId, "&currencyName=").concat(currency, "&userName=").concat(userName, "&createdDate=").concat(encodeURIComponent(createdDate));
       var queryString = (action.indexOf('?') !== -1 ? '&' : '?') + nameValuePairString;
       var urlByPlayer = action + queryString;
       return this.props.getLink(systemType, urlByPlayer);
