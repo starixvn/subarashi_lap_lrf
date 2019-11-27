@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 import { ActionCreators } from '../actions';
 import { bindActionCreators } from 'redux';
 import { renderHeader, renderDataSection } from '../lib/gridUtils';
+import NoDataTitle from '@jsroot/components/NoDataTitle';
+import { Table } from '@9softstudio/react-grid';
+import ReportTitle from '@jsroot/components/ReportTitle';
+import LangHelper from '@jsroot/lib/langHelper';
 
 const DataGrid = (props) => {
     const isFirstRun = useRef(true);
@@ -28,23 +32,36 @@ const DataGrid = (props) => {
         return <NoDataTitle />;
     }
 
+    const { pagingOption, requestParam } = props;
+    const startIndex = (pagingOption.PageIndex - 1) * pagingOption.PageSize + 1;
+
+    const reportTitle = `${LangHelper.getSingleResource('BettingTicketCenter')}, ${requestParam.selectedDate}`;
+    console.log(pagingOption);
+
     return (
-        <Table minWidth={650}
-            autoWidth={true}
-            autoHeight={true}
-            header={renderHeader()}
-            body={renderDataSection(dataList)}
-            containerPadding={30} />
+        <>
+            <ReportTitle content={reportTitle} />
+            <Table minWidth={650}
+                autoWidth={true}
+                autoHeight={true}
+                header={renderHeader()}
+                body={renderDataSection(dataList, startIndex)}
+                containerPadding={30}
+                isPaging={true}
+                pageOption={pagingOption}
+                onPaging={(pageIndex) => props.setRequestParam({ ...requestParam, pageIndex })} />
+        </>
     );
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators(ActionCreators, dispatch);
+    const { setRequestParam, getData } = ActionCreators;
+    return bindActionCreators({ setRequestParam, getData }, dispatch);
 };
 
 function mapStateToProps(state) {
-    const { gridData, requestParam } = state;
-    return Object.assign({}, { gridData, requestParam });
+    const { gridData, requestParam, pagingOption } = state;
+    return Object.assign({}, { gridData, requestParam, pagingOption });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DataGrid);

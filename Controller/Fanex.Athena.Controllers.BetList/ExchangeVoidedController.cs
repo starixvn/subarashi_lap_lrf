@@ -34,7 +34,7 @@ namespace Fanex.Athena.Controllers.BetList
         {
             metaModel.Environment = _appSetting.Environment;
             const string apiPath = "/ExchangeSettleBetHistory/Index";
-            return await _lgClient.PostAsync<dynamic>(apiPath, metaModel, SessionService.UserSession.Language).ConfigureAwait(false);
+            return JsonNet(await _lgClient.PostAsync<dynamic>(apiPath, metaModel, SessionService.UserSession.Language).ConfigureAwait(false));
         }
     }
 }

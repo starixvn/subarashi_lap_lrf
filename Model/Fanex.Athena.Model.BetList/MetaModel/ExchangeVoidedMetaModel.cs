@@ -12,7 +12,7 @@ namespace Fanex.Athena.Model.BetList.MetaModel
 
         public string RefNo { get; set; }
 
-        public int PageNumber { get; set; }
+        public int PageIndex { get; set; }
 
         public string Environment { get; set; }
     }

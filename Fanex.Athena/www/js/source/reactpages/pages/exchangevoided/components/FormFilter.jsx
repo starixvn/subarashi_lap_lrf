@@ -4,6 +4,7 @@ import { ActionCreators } from '../actions';
 import { bindActionCreators } from 'redux';
 import LangHelper from '../../../lib/langHelper';
 import { DatePicker } from '@9softstudio/react-datepicker';
+import Note from './Note';
 
 export class FormFilter extends Component {
     constructor(props) {
@@ -30,7 +31,7 @@ export class FormFilter extends Component {
     _getParams() {
         return {
             ...this.state,
-            pageNumber: 1
+            pageIndex: 1
         }
     }
 
@@ -77,18 +78,19 @@ export class FormFilter extends Component {
                     </div>
 
                     <div className="col-12 col-md-2 col-sm-2 col-lg-2 col-xl-1">
-                    <div className="form-group">
-                        <div className="button-group">
-                            <button type="button" className="btn btn-submit"
-                                onClick={this.submit}>{LangHelper.getSingleResource("Submit")}</button>
+                        <div className="form-group">
+                            <div className="button-group">
+                                <button type="button" className="btn btn-submit"
+                                    onClick={this.submit}>{LangHelper.getSingleResource("Submit")}</button>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div className="caret-block">
-                    <i className="icon-excel right" onClick={this.exportExcel} title={LangHelper.getSingleResource('ExportToExcel')}></i>
+                    <div className="caret-block">
+                        <i className="icon-excel right" onClick={this.exportExcel} title={LangHelper.getSingleResource('ExportToExcel')}></i>
+                    </div>
                 </div>
-                </div>
+                <Note />
             </div>
         );
     }

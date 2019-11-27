@@ -16,10 +16,10 @@ export const renderHeader = () => {
     )
 }
 
-export const renderDataSection = (dataList) => {
+export const renderDataSection = (dataList, startIndex) => {
     const dataRows = [];
     for (let i = 0; i < dataList.length; i++) {
-        dataRows.push(buildDataRow(index, dataList[i]));
+        dataRows.push(buildDataRow(startIndex + i, dataList[i]));
     }
 
     return dataRows;

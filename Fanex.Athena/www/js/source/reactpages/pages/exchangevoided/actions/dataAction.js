@@ -9,6 +9,7 @@ import LangHelper from '@jsroot/lib/langHelper';
 const emptyData = { dataList: [], total: {} };
 const defaultPaingOption = { TotalItem: 0 };
 
+const PAGESIZE = 2000;
 const dispatchResult = (dispatch, data, pagingOption) => {
     dispatch(setGridData(data));
     dispatch(setPagingOption(pagingOption));
@@ -22,21 +23,19 @@ export const getData = (param) => (dispatch) => {
     DataService.postData(apiUrl, param)
         .then(response => {
             console.log(response.data);
-            // const { dataList, total, totalRows } = response.data;
-            // const data = {
-            //     dataList: dataList || [],
-            //     total: total || {}
-            // };
-            // const newPagingOption = {
-            //     TotalItem: totalRows,
-            //     PageSize: param.pageSize,
-            //     PageIndex: param.pageIndex
-            // }
-            // dispatchResult(dispatch, data, newPagingOption);
+            const { DataList, TotalPage } = response.data;
+            const data = { dataList: DataList || [] };
+
+            const newPagingOption = {
+                TotalItem: TotalPage * PAGESIZE,
+                PageSize: PAGESIZE,
+                PageIndex: param.pageIndex
+            }
+            dispatchResult(dispatch, data, newPagingOption);
         })
         .catch(error => {
             console.log(error.message);
-            //dispatchResult(dispatch, {...emptyData }, {...defaultPaingOption });
+            dispatchResult(dispatch, [], {...defaultPaingOption });
         });
 }
 
