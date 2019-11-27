@@ -23,7 +23,7 @@ export class PlayerDetail extends PureComponent {
         const { selectedPlayer } = this.props;
         const { ibcCustId, licenseeCustId, currencyId, currency, userName, createdDate } = selectedPlayer;
         const custIdQueryString = `custId=${ibcCustId}&licenseeCustId=${licenseeCustId}`;
-        const nameValuePairString = custIdQueryString + `&currencyId=${currencyId}&currencyName=${currency}&userName=${userName}&createdDate=${createdDate}`;
+        const nameValuePairString = custIdQueryString + `&currencyId=${currencyId}&currencyName=${currency}&userName=${userName}&createdDate=${encodeURIComponent(createdDate)}`;
         const queryString = (action.indexOf('?') !== -1 ? '&' : '?') + nameValuePairString;
         const urlByPlayer = action + queryString;
 
