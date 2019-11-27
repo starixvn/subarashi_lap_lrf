@@ -39,9 +39,9 @@ namespace Fanex.Athena.Module.PlayerAdmin.MetaModel
 
         public bool IsExportExcel { get; set; }
 
-        public bool IsAllowBA { get; set; }
+        public bool IsAllowedBA { get; set; }
 
-        public bool IsAllowedCustomerComm { get; set; }
+        public bool HasComm { get; set; }
 
         public bool SystemIdVisible { get; set; }
 
