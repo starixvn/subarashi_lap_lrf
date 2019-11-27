@@ -15,7 +15,7 @@ namespace Fanex.Athena.Service.StatelessCore.Abstraction
 {
     public abstract class BaseApiClient
     {
-        private const string LANGUAGEKEY = "Accept-Language";
+        private const string LANGUAGEKEY = "Language";
         private const string MsgPackContentType = "application/x-msgpack";
         private const string JsonContentType = "application/json";
         private readonly HttpClient _client;
