@@ -1522,9 +1522,10 @@ function (_PureComponent) {
           licenseeCustId = selectedPlayer.licenseeCustId,
           currencyId = selectedPlayer.currencyId,
           currency = selectedPlayer.currency,
-          userName = selectedPlayer.userName;
+          userName = selectedPlayer.userName,
+          createdDate = selectedPlayer.createdDate;
       var custIdQueryString = "custId=".concat(ibcCustId, "&licenseeCustId=").concat(licenseeCustId);
-      var nameValuePairString = custIdQueryString + "&currencyId=".concat(currencyId, "&currencyName=").concat(currency, "&userName=").concat(userName);
+      var nameValuePairString = custIdQueryString + "&currencyId=".concat(currencyId, "&currencyName=").concat(currency, "&userName=").concat(userName, "&createdDate=").concat(createdDate);
       var queryString = (action.indexOf('?') !== -1 ? '&' : '?') + nameValuePairString;
       var urlByPlayer = action + queryString;
       return this.props.getLink(systemType, urlByPlayer);
@@ -4174,7 +4175,8 @@ var buildSelectedPlayer = function buildSelectedPlayer(dataItem) {
       IsDeposit = dataItem.IsDeposit,
       IsArchived = dataItem.IsArchived,
       LicenseeCustId = dataItem.LicenseeCustId,
-      CurrencyId = dataItem.CurrencyId;
+      CurrencyId = dataItem.CurrencyId,
+      CreatedDate = dataItem.CreatedDate;
   return {
     ibcCustId: IbcCustId,
     licenseeCustId: LicenseeCustId,
@@ -4182,7 +4184,8 @@ var buildSelectedPlayer = function buildSelectedPlayer(dataItem) {
     currency: Currency,
     isDeposit: IsDeposit,
     isArchived: IsArchived,
-    currencyId: CurrencyId
+    currencyId: CurrencyId,
+    createdDate: CreatedDate
   };
 };
 var buildLapPlayerList = function buildLapPlayerList(playerList) {
@@ -4204,7 +4207,8 @@ var buildLapPlayerList = function buildLapPlayerList(playerList) {
         LastTransaction = item.LastTransaction,
         CurrencyCode = item.CurrencyCode,
         OutBalance = item.OutBalance,
-        IBCUserName = item.IBCUserName;
+        IBCUserName = item.IBCUserName,
+        CreatedDateString = item.CreatedDateString;
     return {
       IbcCustId: IBCCustId,
       LicenseeCustId: CustId,
@@ -4220,7 +4224,8 @@ var buildLapPlayerList = function buildLapPlayerList(playerList) {
       IsOnline: isOnline,
       IsDeposit: IBCCustId > 0,
       IsArchived: !!isArchived,
-      CurrencyId: Currency
+      CurrencyId: Currency,
+      CreatedDate: CreatedDateString
     };
   });
 };
@@ -4309,7 +4314,8 @@ function () {
           LastTransaction = lapItem.LastTransaction,
           CurrencyCode = lapItem.CurrencyCode,
           OutBalance = lapItem.OutBalance,
-          IBCUserName = lapItem.IBCUserName;
+          IBCUserName = lapItem.IBCUserName,
+          CreatedDateString = lapItem.CreatedDateString;
       return {
         IbcCustId: IBCCustId,
         LicenseeCustId: lapItem.CustId,
@@ -4328,7 +4334,8 @@ function () {
         IsOnline: isOnline,
         IsDeposit: IBCCustId > 0,
         IsArchived: !!isArchived,
-        CurrencyId: lapItem.Currency
+        CurrencyId: lapItem.Currency,
+        CreatedDate: CreatedDateString
       };
     }
   }, {
