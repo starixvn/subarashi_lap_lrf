@@ -1,6 +1,7 @@
 ﻿namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers.BetLimits
 {
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using Fanex.Athena.Controllers.Base.UnitTests;
     using Fanex.Athena.Model.Auth.DataDomain;
@@ -19,8 +20,6 @@
 
     public class DcsBetLimitControllerTest : CultureBaseControllerHelperTest
     {
-        private const string MixedSportId = "99MP";
-
         private ICacheRefAdapter _cacheRefAdapter;
 
         private IAuthorizationService _authorizationService;
@@ -49,37 +48,21 @@
             _dcsBetLimitService = null;
         }
 
-        [TearDown]
-        public void TearDown()
-        {
-            _cacheRefAdapter.ClearReceivedCalls();
-            _authorizationService.ClearReceivedCalls();
-            _dcsBetLimitService.ClearReceivedCalls();
-        }
-
-        [Test]
-        public async Task GetSetting_WhenCall_ReturnsCorrectResult()
+        [TestCase(false, false, false)]
+        [TestCase(false, true, false)]
+        [TestCase(true, false, false)]
+        [TestCase(true, true, true)]
+        public async Task GetSetting_WhenCall_ReturnsCorrectResult(bool hasEditPermission, bool status, bool expectedEditable)
         {
             using (var controller = CreateController())
             {
                 // Arrange
-                var isEditable = FakeHelper.Create<bool>();
-                _authorizationService.HasPermissions(SessionService.UserSession, PermissionKeys.PlayerAdminBetLimit_Write).Returns(isEditable);
-                var metaModel = new PlayerBetLimitSelectMetaModel
-                {
-                    CustId = 1,
-                    ProductId = 1
-                };
+                _authorizationService.HasPermissions(SessionService.UserSession, PermissionKeys.PlayerAdminBetLimit_Write).Returns(hasEditPermission);
+                var metaModel = FakeHelper.Create<PlayerBetLimitSelectMetaModel>();
 
-                var expectedData = new List<PlayerBetLimit> { new PlayerBetLimit() };
-                foreach (var item in expectedData)
-                {
-                    item.BetSettingType = GetSportName(item.Id);
-                }
-
-                _dcsBetLimitService.GetSettingAsync(metaModel.CustId, metaModel.ProductId).Returns(expectedData);
-                var expectedStatus = FakeHelper.Create<bool>();
-                _dcsBetLimitService.GetStatusAsync(metaModel.CustId, metaModel.ProductId).Returns(expectedStatus);
+                var expectedData = Enumerable.Empty<PlayerBetLimit>();
+                _dcsBetLimitService.GetSettingAsync(metaModel.CustId, metaModel.ProductId).Returns(Task.FromResult(expectedData));
+                _dcsBetLimitService.GetStatusAsync(metaModel.CustId, metaModel.ProductId).Returns(Task.FromResult(status));
 
                 // Action
                 var result = (await controller.GetSetting(metaModel)).Data as PlayerBetLimitViewModel;
@@ -88,23 +71,19 @@
                 Assert.Multiple(() =>
                 {
                     Assert.That(result.Data, Is.EqualTo(expectedData));
-                    Assert.AreEqual(isEditable && expectedStatus, result.Editable);
+                    Assert.That(result.Editable, Is.EqualTo(expectedEditable));
                 });
             }
         }
 
         [Test]
-        public async Task UpdateSetting_ResultCodeRetrieveZero_ReturnsCorrectJsonResult()
+        public async Task UpdateSetting_UpdateSuccessfully_ReturnSuccessJsonResult()
         {
             using (var controller = CreateController())
             {
                 // Arrange
                 var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>>>();
-                var expectedResult = new ResultInfo
-                {
-                    Code = 0,
-                    Message = string.Format(ViewResources.UpdateSuccess)
-                };
+                var expectedResult = new ResultInfo { Code = 0 };
 
                 _dcsBetLimitService.UpdateSettingAsync(metaModel).Returns(expectedResult);
 
@@ -112,12 +91,12 @@
                 var result = (await controller.UpdateSetting(metaModel)).Data as ResultInfo;
 
                 // Assert
-                Assert.That(result, Is.EqualTo(expectedResult));
+                Assert.That(result.Message, Is.EqualTo(ViewResources.UpdateSuccess));
             }
         }
 
         [Test]
-        public async Task UpdateSetting_ResultCodeRetrieveNoneZero_ReturnsCorrectJsonResult()
+        public async Task UpdateSetting_UpdateFailed_ReturnsErrorJsonResult()
         {
             using (var controller = CreateController())
             {
@@ -125,7 +104,8 @@
                 var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>>>();
                 var expectedResult = new ResultInfo
                 {
-                    Code = 1
+                    Code = 1,
+                    Message = FakeHelper.Create<string>()
                 };
 
                 _dcsBetLimitService.UpdateSettingAsync(metaModel).Returns(expectedResult);
@@ -134,7 +114,7 @@
                 var result = (await controller.UpdateSetting(metaModel)).Data as ResultInfo;
 
                 // Assert
-                Assert.That(result, Is.EqualTo(expectedResult));
+                Assert.That(result.Message, Is.EqualTo(expectedResult.Message));
             }
         }
 
@@ -148,7 +128,5 @@
                 CacheRefAdapterInstance = _cacheRefAdapter
             };
         }
-
-        private string GetSportName(string sportId) => sportId == MixedSportId ? ViewResources.MixSportsParlay : _cacheRefAdapter.GetSportName(sportId);
     }
 }

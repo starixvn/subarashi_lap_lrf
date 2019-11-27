@@ -1,9 +1,11 @@
 ﻿namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Services
 {
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Athena.Module.PlayerAdmin.DataDomains;
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
     using Fanex.Athena.Module.PlayerAdmin.Repositories.Interfaces;
     using Fanex.Athena.Module.PlayerAdmin.Services;
@@ -86,21 +88,91 @@
         }
 
         [Test]
-        public async Task UpdateSettingAsync_WhenCall_ReturnsCorectResultAndWritesLog()
+        public async Task UpdateSettingAsync_WhenCall_ReturnsCorectResult()
         {
             // Arrange
             var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>>>();
-            var expectedResult = Substitute.For<IResultInfo>();
-            _repository.UpdateSettingAsync(metaModel).Returns(Task.FromResult(expectedResult));
+            var expectedResult = FakeHelper.Create<ResultInfo>();
+            _repository.UpdateSettingAsync(metaModel).Returns(Task.FromResult<IResultInfo>(expectedResult));
 
             // Action
             var result = await _service.UpdateSettingAsync(metaModel);
 
             // Assert
+            Assert.That(result, Is.EqualTo(expectedResult));
+        }
+
+        [Test]
+        public async Task UpdateSettingAsync_UpdateLotteryProduct_WriteLogWithCorrectData()
+        {
+            // Arrange
+            var actionLogs = new[] { LogActionDetailId.UpdatingMinBet, LogActionDetailId.UpdatingMaxBet, LogActionDetailId.UpdatingMaxBetPerDraw };
+
+            var betSetting = new PlayerBetLimitMetaModel
+            {
+                MinBet = 1,
+                OldMinBet = 2,
+                MaxBet = 1,
+                OldMaxBet = 2,
+                MaxPerMatch = 1,
+                OldMaxPerMatch = 2,
+                MaxPerBall = 1,
+                OldMaxPerBall = 2,
+                IsUpdated = true
+            };
+            var metaModel = new PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>>
+            {
+                Setting = new List<PlayerBetLimitMetaModel> { betSetting },
+                ProductId = ProductTypes.Lottery
+            };
+
+            // Action
+            await _service.UpdateSettingAsync(metaModel);
+
+            // Assert
             Assert.Multiple(() =>
             {
-                Assert.That(result, Is.EqualTo(expectedResult));
-                _businessLogService.Received(1).Write(BusinessLogType.CustomerBetSetting, Arg.Any<PlayerBetLimitLogMetaModel>());
+                _businessLogService.Received(1).Write(
+                    BusinessLogType.CustomerBetSetting,
+                    Arg.Is<PlayerBetLimitLogMetaModel>(x => x.Detail.Count() == actionLogs.Length
+                        && !x.Detail.Any(d => !actionLogs.Contains(d.DetailedId))));
+            });
+        }
+
+        [Test]
+        public async Task UpdateSettingAsync_UpdateOtherProducts_WriteLogWithCorrectData()
+        {
+            // Arrange
+            var actionLogs = new[] { LogActionDetailId.UpdatingMinBet, LogActionDetailId.UpdatingMaxBet, LogActionDetailId.UpdatingMaxPerMatch };
+
+            var betSetting = new PlayerBetLimitMetaModel
+            {
+                MinBet = 1,
+                OldMinBet = 2,
+                MaxBet = 1,
+                OldMaxBet = 2,
+                MaxPerMatch = 1,
+                OldMaxPerMatch = 2,
+                MaxPerBall = 1,
+                OldMaxPerBall = 2,
+                IsUpdated = true
+            };
+            var metaModel = new PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>>
+            {
+                Setting = new List<PlayerBetLimitMetaModel> { betSetting },
+                ProductId = ProductTypes.Exchange
+            };
+
+            // Action
+            await _service.UpdateSettingAsync(metaModel);
+
+            // Assert
+            Assert.Multiple(() =>
+            {
+                _businessLogService.Received(1).Write(
+                    BusinessLogType.CustomerBetSetting,
+                    Arg.Is<PlayerBetLimitLogMetaModel>(x => x.Detail.Count() == actionLogs.Length
+                        && !x.Detail.Any(d => !actionLogs.Contains(d.DetailedId))));
             });
         }
     }

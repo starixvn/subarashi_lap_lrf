@@ -1,6 +1,5 @@
 ﻿namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Helpers
 {
-    using System;
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;

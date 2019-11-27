@@ -1,6 +1,7 @@
 ﻿namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers.BetLimits
 {
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using Fanex.Athena.Controllers.Base.UnitTests;
     using Fanex.Athena.Model.Auth.DataDomain;
@@ -47,34 +48,18 @@
             _rngKenoBetLimitService = null;
         }
 
-        [TearDown]
-        public void TearDown()
-        {
-            _authorizationService.ClearReceivedCalls();
-            _cacheRefAdapter.ClearReceivedCalls();
-            _rngKenoBetLimitService.ClearReceivedCalls();
-        }
-
-        [Test]
-        public async Task GetSetting_WhenCall_ReturnsCorrectResult()
+        [TestCase(false)]
+        [TestCase(true)]
+        public async Task GetSetting_WhenCall_ReturnsCorrectResult(bool hasEditPermission)
         {
             using (var controller = CreateController())
             {
                 // Arrange
-                var expectedEditable = FakeHelper.Create<bool>();
-                var metaModel = new PlayerBetLimitSelectMetaModel
-                {
-                    CustId = 1
-                };
+                _authorizationService.HasPermissions(SessionService.UserSession, PermissionKeys.PlayerAdminBetLimit_Write).Returns(hasEditPermission);
+                var metaModel = FakeHelper.Create<PlayerBetLimitSelectMetaModel>();
 
-                _authorizationService.HasPermissions(SessionService.UserSession, PermissionKeys.PlayerAdminBetLimit_Write).Returns(expectedEditable);
-                var expectedData = FakeHelper.Create<IEnumerable<PlayerBetLimit>>();
-                foreach (var item in expectedData)
-                {
-                    item.BetSettingType = ViewResources.ProductKN;
-                }
-
-                _rngKenoBetLimitService.GetSettingAsync(metaModel.CustId).Returns(expectedData);
+                var expectedData = FakeHelper.CreateMany<PlayerBetLimit>();
+                _rngKenoBetLimitService.GetSettingAsync(metaModel.CustId).Returns(Task.FromResult(expectedData));
 
                 // Action
                 var result = (await controller.GetSetting(metaModel)).Data as PlayerBetLimitViewModel;
@@ -83,23 +68,20 @@
                 Assert.Multiple(() =>
                 {
                     Assert.That(result.Data, Is.EqualTo(expectedData));
-                    Assert.AreEqual(expectedEditable, result.Editable);
+                    Assert.That(result.Data.Any(x => x.BetSettingType != ViewResources.ProductKN), Is.False);
+                    Assert.That(result.Editable, Is.EqualTo(hasEditPermission));
                 });
             }
         }
 
         [Test]
-        public async Task UpdateSetting_ResultCodeRetrieveZero_ReturnsCorrectJsonResult()
+        public async Task UpdateSetting_UpdateSuccessfully_ReturnSuccessJsonResult()
         {
             using (var controller = CreateController())
             {
                 // Arrange
                 var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>>>();
-                var expectedResult = new ResultInfo
-                {
-                    Code = 0,
-                    Message = string.Format(ViewResources.UpdateSuccess)
-                };
+                var expectedResult = new ResultInfo { Code = 0 };
 
                 _rngKenoBetLimitService.UpdateSettingAsync(metaModel).Returns(expectedResult);
 
@@ -107,12 +89,12 @@
                 var result = (await controller.UpdateSetting(metaModel)).Data as ResultInfo;
 
                 // Assert
-                Assert.That(result, Is.EqualTo(expectedResult));
+                Assert.That(result.Message, Is.EqualTo(ViewResources.UpdateSuccess));
             }
         }
 
         [Test]
-        public async Task UpdateSetting_ResultCodeRetrieveNoneZero_ReturnsCorrectJsonResult()
+        public async Task UpdateSetting_UpdateFailed_ReturnsErrorJsonResult()
         {
             using (var controller = CreateController())
             {
@@ -120,7 +102,8 @@
                 var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>>>();
                 var expectedResult = new ResultInfo
                 {
-                    Code = 1
+                    Code = 1,
+                    Message = FakeHelper.Create<string>()
                 };
 
                 _rngKenoBetLimitService.UpdateSettingAsync(metaModel).Returns(expectedResult);
@@ -129,7 +112,7 @@
                 var result = (await controller.UpdateSetting(metaModel)).Data as ResultInfo;
 
                 // Assert
-                Assert.That(result, Is.EqualTo(expectedResult));
+                Assert.That(result.Message, Is.EqualTo(expectedResult.Message));
             }
         }
 

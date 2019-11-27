@@ -6,6 +6,7 @@
     using System.Threading.Tasks;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Athena.Module.PlayerAdmin.DataDomains;
     using Fanex.Athena.Module.PlayerAdmin.DTO;
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
     using Fanex.Athena.Module.PlayerAdmin.Repositories.Interfaces;
@@ -17,8 +18,6 @@
 
     public class SportsBookBetLimitServiceTest
     {
-        private const int EsportIndex = 2;
-
         private ISportsBookBetLimitRepository _betSetting;
 
         private IDcsBetLinitRepository _dcsBetSetting;
@@ -48,32 +47,32 @@
             // Arrange
             var custId = FakeHelper.Create<int>();
             var isShowMixedSport = FakeHelper.Create<bool>();
-            var expectedESportSetting = Substitute.For<IEnumerable<PlayerBetLimit>>();
+            var expectedESportSetting = Enumerable.Empty<PlayerBetLimit>();
             _dcsBetSetting.GetSettingAsync(custId, ProductTypes.Sportsbooks2).Returns(Task.FromResult(expectedESportSetting));
 
             // Action
-            var exception = Assert.ThrowsAsync<InvalidOperationException>(() => _service.GetSettingAsync(custId, isShowMixedSport));
+            AsyncTestDelegate delegateCall = async () => await _service.GetSettingAsync(custId, isShowMixedSport);
 
             // Assert
-            Assert.Multiple(() =>
-            {
-                Assert.IsInstanceOf(typeof(InvalidOperationException), exception);
-                Assert.That(exception.Message.Contains("There is no E-sport setting data."));
-            });
+            Assert.ThrowsAsync<InvalidOperationException>(delegateCall);
         }
 
-        [Test]
-        public async Task GetSettingAsync_WhenCallAndRetrieveAnyESportSetting_ReturnsCorrectResult()
+        [TestCase(4, 2)]
+        [TestCase(3, 2)]
+        [TestCase(2, 2)]
+        [TestCase(1, 1)]
+        [TestCase(0, 0)]
+        public async Task GetSettingAsync_WhenCall_EsportIsInCorrectIndex(int totalSBSetting, int expectedEsportIndex)
         {
             // Arrange
             var custId = FakeHelper.Create<int>();
             var isShowMixedSport = FakeHelper.Create<bool>();
-            var expectedESportSetting = FakeHelper.Create<IEnumerable<PlayerBetLimit>>();
-            var expectedGetSBSettingTask = FakeHelper.Create<IEnumerable<PlayerBetLimit>>();
-            _dcsBetSetting.GetSettingAsync(custId, ProductTypes.Sportsbooks2).Returns(Task.FromResult(expectedESportSetting));
-            _betSetting.GetSettingAsync(custId, isShowMixedSport).Returns(Task.FromResult(expectedGetSBSettingTask));
-            var expectedResult = expectedGetSBSettingTask.ToList();
-            expectedResult.Insert(EsportIndex, expectedESportSetting.First());
+
+            var esportSetting = FakeHelper.CreateMany<PlayerBetLimit>();
+            var sbSetting = FakeHelper.CreateMany<PlayerBetLimit>(totalSBSetting);
+
+            _dcsBetSetting.GetSettingAsync(custId, ProductTypes.Sportsbooks2).Returns(Task.FromResult(esportSetting));
+            _betSetting.GetSettingAsync(custId, isShowMixedSport).Returns(Task.FromResult(sbSetting));
 
             // Action
             var result = await _service.GetSettingAsync(custId, isShowMixedSport);
@@ -81,118 +80,147 @@
             // Assert
             Assert.Multiple(() =>
             {
-                Assert.That(result, Is.EqualTo(expectedResult));
+                Assert.That(result.Count(), Is.EqualTo(sbSetting.Count() + 1));
+                Assert.That(result.ElementAt(expectedEsportIndex), Is.EqualTo(esportSetting.First()));
             });
         }
 
         [Test]
-        public async Task UpdateSettingAsync_NotHasEsportsType_ReturnsExpectedResult()
+        public async Task UpdateSettingAsync_NotHasEsportsType_ReturnsErrorResult()
         {
             // Arrange
-            var item = FakeHelper.Create<PlayerBetLimitMetaModel>();
-            var esportsTypeId = ((int)SportType.Esports + 1).ToString();
-            item.Id = esportsTypeId;
-            var setting = new List<PlayerBetLimitMetaModel> { item };
-            var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>>>();
-            metaModel.Setting = setting;
+            var item = FakeHelper.Create<PlayerBetLimitMetaModel>(x => x.Id, ((int)SportType.OtherSports).ToString());
+            var metaModel = new PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>>
+            {
+                Setting = new List<PlayerBetLimitMetaModel> { item }
+            };
             var isShowMixedSport = FakeHelper.Create<bool>();
-            var expectedResult = new ResultInfo { Code = 1, Message = "Invalid parameters. Setting is null." };
 
             // Action
             var result = await _service.UpdateSettingAsync(metaModel, isShowMixedSport);
 
             // Assert
-            Assert.Multiple(() =>
-            {
-                Assert.That(result.Code, Is.EqualTo(expectedResult.Code));
-                Assert.That(result.Message, Is.EqualTo(expectedResult.Message));
-            });
+            Assert.That(result.Code, Is.EqualTo(1));
         }
 
         [Test]
-        public async Task UpdateSettingAsync_HasEsportsTypeAndPositiveResultCode_ReturnsExpectedResultAndWritesLog()
+        public async Task UpdateSettingAsync_UpdateSBFailed_WriteSBLog()
         {
             // Arrange
-            var item = FakeHelper.Create<PlayerBetLimitMetaModel>();
-            var esportsTypeId = ((int)SportType.Esports).ToString();
-            item.Id = esportsTypeId;
-            var setting = new List<PlayerBetLimitMetaModel> { item };
-            var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>>>();
-            metaModel.Setting = setting;
+            var actionLogs = new[] { LogActionDetailId.UpdatingMinBet, LogActionDetailId.UpdatingMaxBet, LogActionDetailId.UpdatingMaxPerMatch };
+
+            var sbItem = new PlayerBetLimitMetaModel
+            {
+                Id = ((int)SportType.Soccer).ToString(),
+                MinBet = 1,
+                OldMinBet = 2,
+                MaxBet = 1,
+                OldMaxBet = 2,
+                MaxPerMatch = 1,
+                OldMaxPerMatch = 2,
+                MaxPerBall = 1,
+                OldMaxPerBall = 2,
+                IsUpdated = true
+            };
+            var esportsItem = new PlayerBetLimitMetaModel
+            {
+                Id = ((int)SportType.Esports).ToString(),
+                MinBet = 1,
+                OldMinBet = 2,
+                IsUpdated = true
+            };
+            var metaModel = new PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>>
+            {
+                Setting = new List<PlayerBetLimitMetaModel> { esportsItem, sbItem }
+            };
+
             var isShowMixedSport = FakeHelper.Create<bool>();
-            var expectedResult = Substitute.For<IResultInfo>();
-            expectedResult.Code = FakeHelper.Create<int>();
-            _betSetting.UpdateSettingAsync(metaModel, isShowMixedSport).Returns(Task.FromResult(expectedResult));
+            var expectedResult = FakeHelper.Create<ResultInfo>(x => x.Code, 1);
+            _betSetting.UpdateSettingAsync(metaModel, isShowMixedSport).Returns(Task.FromResult<IResultInfo>(expectedResult));
 
             // Action
-            var result = await _service.UpdateSettingAsync(metaModel, isShowMixedSport);
+            await _service.UpdateSettingAsync(metaModel, isShowMixedSport);
 
             // Assert
             Assert.Multiple(() =>
             {
-                Assert.That(result, Is.EqualTo(expectedResult));
-                _betSetting.Received(1).UpdateSettingAsync(metaModel, isShowMixedSport);
-                _businessLogService.Received(1).Write(BusinessLogType.CustomerBetSetting, Arg.Any<PlayerBetLimitLogMetaModel>());
+                _businessLogService.Received(1).Write(
+                    BusinessLogType.CustomerBetSetting,
+                    Arg.Is<PlayerBetLimitLogMetaModel>(x => x.Detail.Count() == actionLogs.Length
+                        && !x.Detail.Any(d => !actionLogs.Contains(d.DetailedId))
+                        && !x.Detail.Any(d => d.SportType == ((int)SportType.Esports).ToString())));
             });
         }
 
         [Test]
-        public async Task UpdateSettingAsync_HasEsportsTypeAndResultCodeIsNotPositiveAndNotUpdated_ReturnsExpectedResultAndWritesLog()
+        public async Task UpdateSettingAsync_OnlyHaveEsports_WriteEsportsLog()
         {
             // Arrange
-            var item = FakeHelper.Create<PlayerBetLimitMetaModel>();
-            var esportsTypeId = ((int)SportType.Esports).ToString();
-            item.Id = esportsTypeId;
-            item.IsUpdated = false;
-            var setting = new List<PlayerBetLimitMetaModel> { item };
-            var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>>>();
-            metaModel.Setting = setting;
+            var esportsItem = new PlayerBetLimitMetaModel
+            {
+                Id = ((int)SportType.Esports).ToString(),
+                MinBet = 1,
+                OldMinBet = 2,
+                IsUpdated = true
+            };
+
+            var metaModel = new PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>>
+            {
+                Setting = new List<PlayerBetLimitMetaModel> { esportsItem }
+            };
+
             var isShowMixedSport = FakeHelper.Create<bool>();
-            var expectedResult = Substitute.For<IResultInfo>();
-            _betSetting.UpdateSettingAsync(metaModel, isShowMixedSport).Returns(Task.FromResult(expectedResult));
+            var expectedResult = FakeHelper.Create<ResultInfo>(x => x.Code, 0);
+            _betSetting.UpdateSettingAsync(metaModel, isShowMixedSport).Returns(Task.FromResult<IResultInfo>(expectedResult));
 
             // Action
-            var result = await _service.UpdateSettingAsync(metaModel, isShowMixedSport);
+            await _service.UpdateSettingAsync(metaModel, isShowMixedSport);
 
             // Assert
             Assert.Multiple(() =>
             {
-                Assert.That(result, Is.EqualTo(expectedResult));
-                _betSetting.Received(1).UpdateSettingAsync(metaModel, isShowMixedSport);
-                _businessLogService.Received(1).Write(BusinessLogType.CustomerBetSetting, Arg.Any<PlayerBetLimitLogMetaModel>());
+                _businessLogService.Received(1).Write(
+                    BusinessLogType.CustomerBetSetting,
+                    Arg.Is<PlayerBetLimitLogMetaModel>(x => !x.Detail.Any(d => d.SportType != ((int)SportType.Esports).ToString())));
             });
         }
 
         [Test]
-        public async Task UpdateSettingAsync_HasEsportsTypeAndResultCodeIsNotPositiveAndUpdated_ReturnsExpectedResultAndWritesLog()
+        public async Task UpdateSettingAsync_AllSettingsUpdatedSuccessfully_WriteCorrectLog()
         {
             // Arrange
-            var item = FakeHelper.Create<PlayerBetLimitMetaModel>();
-            var esportsTypeId = ((int)SportType.Esports).ToString();
-            item.Id = esportsTypeId;
-            item.IsUpdated = true;
-            var setting = new List<PlayerBetLimitMetaModel> { item };
-            var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>>>();
-            metaModel.Setting = setting;
+            var sbItem = new PlayerBetLimitMetaModel
+            {
+                Id = ((int)SportType.Soccer).ToString(),
+                MinBet = 1,
+                OldMinBet = 2,
+                IsUpdated = true
+            };
+            var esportsItem = new PlayerBetLimitMetaModel
+            {
+                Id = ((int)SportType.Esports).ToString(),
+                MinBet = 1,
+                OldMinBet = 2,
+                IsUpdated = true
+            };
+            var metaModel = new PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>>
+            {
+                Setting = new List<PlayerBetLimitMetaModel> { esportsItem, sbItem }
+            };
+
             var isShowMixedSport = FakeHelper.Create<bool>();
-
-            var expectedResult = Substitute.For<IResultInfo>();
-            _betSetting.UpdateSettingAsync(metaModel, isShowMixedSport).Returns(Task.FromResult(expectedResult));
-
-            var dcsMetaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>>>();
-            var expectedDcsResult = Substitute.For<IResultInfo>();
-            _dcsBetSetting.UpdateSettingAsync(dcsMetaModel).ReturnsForAnyArgs(Task.FromResult(expectedDcsResult));
+            var expectedResult = FakeHelper.Create<ResultInfo>(x => x.Code, 0);
+            _betSetting.UpdateSettingAsync(metaModel, isShowMixedSport).Returns(Task.FromResult<IResultInfo>(expectedResult));
 
             // Action
-            var result = await _service.UpdateSettingAsync(metaModel, isShowMixedSport);
+            await _service.UpdateSettingAsync(metaModel, isShowMixedSport);
 
             // Assert
             Assert.Multiple(() =>
             {
-                Assert.That(result, Is.EqualTo(expectedDcsResult));
-                _betSetting.Received(1).UpdateSettingAsync(metaModel, isShowMixedSport);
-                _dcsBetSetting.Received(1).UpdateSettingAsync(Arg.Any<PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>>>());
-                _businessLogService.Received(1).Write(BusinessLogType.CustomerBetSetting, Arg.Any<PlayerBetLimitLogMetaModel>());
+                _businessLogService.Received(1).Write(
+                    BusinessLogType.CustomerBetSetting,
+                    Arg.Is<PlayerBetLimitLogMetaModel>(x => !x.Detail.Any(d => d.SportType != sbItem.Id && d.SportType != esportsItem.Id)));
             });
         }
     }

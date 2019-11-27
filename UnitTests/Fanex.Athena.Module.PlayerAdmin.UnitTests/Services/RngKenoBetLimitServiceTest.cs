@@ -1,10 +1,11 @@
 ﻿namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Services
 {
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
-    using Fanex.Athena.Module.PlayerAdmin.Helpers;
+    using Fanex.Athena.Module.PlayerAdmin.DataDomains;
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
     using Fanex.Athena.Module.PlayerAdmin.Repositories.Interfaces;
     using Fanex.Athena.Module.PlayerAdmin.Services;
@@ -22,7 +23,7 @@
         private RngKenoBetLimitService _service;
 
         [OneTimeSetUp]
-        public void SetUp()
+        public void OneTimeSetUp()
         {
             _repository = Substitute.For<IRngKenoBetLimitRepository>();
             _businessLogService = Substitute.For<IBusinessLogService>();
@@ -30,7 +31,7 @@
         }
 
         [OneTimeTearDown]
-        public void Teardown()
+        public void OneTimeTearDown()
         {
             _service = null;
         }
@@ -52,12 +53,12 @@
         }
 
         [Test]
-        public async Task UpdateSettingAsync_WhenCall_ReturnsCorrectResultAndWritesLog()
+        public async Task UpdateSettingAsync_WhenCall_ReturnCorrectResult()
         {
             // Arrange
             var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>>>();
-            var expectedResult = Substitute.For<IResultInfo>();
-            _repository.UpdateSettingAsync(metaModel).Returns(expectedResult);
+            var expectedResult = FakeHelper.Create<IResultInfo>();
+            _repository.UpdateSettingAsync(metaModel).Returns(Task.FromResult(expectedResult));
 
             // Action
             var result = await _service.UpdateSettingAsync(metaModel);
@@ -66,7 +67,48 @@
             Assert.Multiple(() =>
             {
                 Assert.That(result, Is.EqualTo(expectedResult));
-                _businessLogService.Write(BusinessLogType.CustomerBetSetting, Arg.Any<PlayerBetLimitLogMetaModel>());
+                _repository.Received(1).UpdateSettingAsync(metaModel);
+            });
+        }
+
+        [Test]
+        public async Task UpdateSettingAsync_WhenCall_WriteLogWithCorrectData()
+        {
+            // Arrange
+            var actionLogs = new[]
+            {
+                LogActionDetailId.UpdatingMinBet,
+                LogActionDetailId.UpdatingMaxBet,
+                LogActionDetailId.UpdatingMaxBetPerDraw
+            };
+
+            var betSetting = new PlayerBetLimitMetaModel
+            {
+                MinBet = 1,
+                OldMinBet = 2,
+                MaxBet = 1,
+                OldMaxBet = 2,
+                MaxPerMatch = 1,
+                OldMaxPerMatch = 2,
+                MaxPerBall = 1,
+                OldMaxPerBall = 2,
+                IsUpdated = true
+            };
+            var metaModel = new PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>>
+            {
+                Setting = new List<PlayerBetLimitMetaModel> { betSetting }
+            };
+
+            // Action
+            await _service.UpdateSettingAsync(metaModel);
+
+            // Assert
+            Assert.Multiple(() =>
+            {
+                _businessLogService.Received(1).Write(
+                    BusinessLogType.CustomerBetSetting,
+                    Arg.Is<PlayerBetLimitLogMetaModel>(x => x.Detail.Count() == actionLogs.Length
+                        && !x.Detail.Any(d => !actionLogs.Contains(d.DetailedId))));
             });
         }
     }
