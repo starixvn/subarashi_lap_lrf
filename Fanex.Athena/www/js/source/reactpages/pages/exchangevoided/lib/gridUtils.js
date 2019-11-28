@@ -26,14 +26,14 @@ export const renderDataSection = (dataList, startIndex) => {
 }
 
 const buildDataRow = (index, dataItem) => {
-    const { RefNo, EventType, Event } = dataItem;
+    const { refNo, eventType, event } = dataItem;
 
     return (
         <Row key={index}>
             <Cell className="center-align">{index}</Cell>
-            <Cell>{RefNo}</Cell>
-            <Cell>{EventType}</Cell>
-            <Cell>{Event}</Cell>
+            <Cell>{refNo}</Cell>
+            <Cell>{eventType}</Cell>
+            <Cell>{event}</Cell>
             <Cell className="center-align">{VOIDED_STATUS}</Cell>
         </Row>
     )

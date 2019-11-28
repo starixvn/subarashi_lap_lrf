@@ -23,11 +23,11 @@ export const getData = (param) => (dispatch) => {
     DataService.postData(apiUrl, param)
         .then(response => {
             console.log(response.data);
-            const { DataList, TotalPage } = response.data;
-            const data = { dataList: DataList || [] };
+            const { dataList, totalPage } = response.data;
+            const data = { dataList: dataList || [] };
 
             const newPagingOption = {
-                TotalItem: TotalPage * PAGESIZE,
+                TotalItem: totalPage * PAGESIZE,
                 PageSize: PAGESIZE,
                 PageIndex: param.pageIndex
             }
@@ -35,7 +35,7 @@ export const getData = (param) => (dispatch) => {
         })
         .catch(error => {
             console.log(error.message);
-            dispatchResult(dispatch, [], {...defaultPaingOption });
+            dispatchResult(dispatch, { dataList: [] }, {...defaultPaingOption });
         });
 }
 
