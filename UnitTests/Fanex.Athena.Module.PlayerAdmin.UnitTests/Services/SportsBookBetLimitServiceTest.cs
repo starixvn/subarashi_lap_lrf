@@ -26,8 +26,8 @@
 
         private SportsBookBetLimitService _service;
 
-        [SetUp]
-        public void SetUp()
+        [OneTimeSetUp]
+        public void FixtureSetUp()
         {
             _betSetting = Substitute.For<ISportsBookBetLimitRepository>();
             _dcsBetSetting = Substitute.For<IDcsBetLinitRepository>();
@@ -35,10 +35,16 @@
             _service = new SportsBookBetLimitService(_betSetting, _dcsBetSetting, _businessLogService);
         }
 
+        [OneTimeTearDown]
+        public void FixtureTearDown()
+        {
+            _service = null;
+        }
+
         [TearDown]
         public void TearDown()
         {
-            _service = null;
+            _businessLogService.ClearReceivedCalls();
         }
 
         [Test]

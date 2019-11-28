@@ -23,7 +23,7 @@
         private DcsBetLimitService _service;
 
         [OneTimeSetUp]
-        public void SetUp()
+        public void FixtureSetUp()
         {
             _repository = Substitute.For<IDcsBetLinitRepository>();
             _businessLogService = Substitute.For<IBusinessLogService>();
@@ -34,9 +34,15 @@
         }
 
         [OneTimeTearDown]
-        public void TearDown()
+        public void FixtureTearDown()
         {
             _service = null;
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            _businessLogService.ClearReceivedCalls();
         }
 
         [Test]

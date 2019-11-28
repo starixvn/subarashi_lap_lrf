@@ -48,7 +48,6 @@
         public void TearDown()
         {
             _reportAPIClient.ClearReceivedCalls();
-            _licenseeSettingService.ClearReceivedCalls();
         }
 
         [TestCase("test", "test name", "test name")]

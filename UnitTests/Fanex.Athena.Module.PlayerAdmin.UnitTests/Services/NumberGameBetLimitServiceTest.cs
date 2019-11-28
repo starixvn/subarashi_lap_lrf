@@ -36,6 +36,12 @@
             _service = null;
         }
 
+        [TearDown]
+        public void TearDown()
+        {
+            _businessLogService.ClearReceivedCalls();
+        }
+
         [Test]
         public async Task GetSettingAsync_WhenCall_ReturnsSettingFromRepository()
         {

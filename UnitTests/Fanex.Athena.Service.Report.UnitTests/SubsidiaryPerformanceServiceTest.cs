@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using Core.Users.Interfaces;
@@ -96,7 +97,8 @@
                 LicenseeName = LicenseeName
             };
 
-            _subsidiaryService.GetAllSubsidiaries(Arg.Any<UserAuthInfo>(), Arg.Any<string>()).Returns(_subsidiaryList);
+            _subsidiaryService.GetSubsidiaryList(Arg.Any<UserAuthInfo>(), LicenseeName, Arg.Any<string>())
+                .Returns(_subsidiaryList);
 
             var fakeEntityDataList = GetFakeEntityDataList();
 
@@ -105,10 +107,10 @@
             _dataAccess.GetData(metaModel, _currencyList).Returns(fakeEntityDataList);
 
             // Action
-            var result = ObjectHelper.ToJson((await _service.GetData(metaModel, _currencyList)).Data);
+            var result = await _service.GetData(metaModel, _currencyList);
 
             // Assert
-            Assert.That(result, Is.EqualTo(expectedResult));
+            Assert.That(ObjectHelper.ToJson(result.Data.First().Details), Is.EqualTo(expectedResult));
         }
 
         [Test]
@@ -125,20 +127,18 @@
             };
 
             _sessionService.UserSession.Returns(new UserAuthInfo { UserLevel = UserLevelType.Subsidiary, OperatorId = "123" });
-            _subsidiaryService.GetAllSubsidiaries(Arg.Any<UserAuthInfo>(), Arg.Any<string>()).Returns(_subsidiaryList);
+            _subsidiaryService.GetSubsidiaryList(Arg.Any<UserAuthInfo>(), LicenseeName, Arg.Any<string>())
+                .Returns(new List<Subsidiary>());
 
             var resultData = GetFakeEntityDataList();
-
-            var expectedData = new List<SubsidiaryPerformanceSummary>();
-            var expectedResult = ObjectHelper.ToJson(expectedData);
 
             _dataAccess.GetData(metaModel, _currencyList).Returns(resultData);
 
             // Action
-            var result = ObjectHelper.ToJson((await _service.GetData(metaModel, _currencyList)).Data);
+            var result = await _service.GetData(metaModel, _currencyList);
 
             // Assert
-            Assert.That(result, Is.EqualTo(expectedResult));
+            Assert.That(result.Data.First().Details, Is.Empty);
         }
 
         [Test]
@@ -155,7 +155,8 @@
                 LicenseeName = LicenseeName
             };
 
-            _subsidiaryService.GetAllSubsidiaries(Arg.Any<UserAuthInfo>(), Arg.Any<string>()).Returns(_subsidiaryList);
+            _subsidiaryService.GetSubsidiaryList(Arg.Any<UserAuthInfo>(), LicenseeName, Arg.Any<string>())
+                .Returns(_subsidiaryList);
 
             var resultData = GetFakeEntityDataList();
 
@@ -185,7 +186,8 @@
                 LicenseeName = LicenseeName
             };
 
-            _subsidiaryService.GetAllSubsidiaries(Arg.Any<UserAuthInfo>(), Arg.Any<string>()).Returns(_subsidiaryList);
+            _subsidiaryService.GetSubsidiaryList(Arg.Any<UserAuthInfo>(), LicenseeName, Arg.Any<string>())
+                .Returns(_subsidiaryList);
 
             var resultData = GetFakeEntityDataList();
 

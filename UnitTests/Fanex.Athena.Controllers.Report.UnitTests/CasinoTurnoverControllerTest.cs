@@ -35,12 +35,6 @@
             _reportSettingService = null;
         }
 
-        [TearDown]
-        public void TearDown()
-        {
-            _reportSettingService.ClearReceivedCalls();
-        }
-
         [Test]
         public void Index_WhenCall_ReturnsCorrectResult()
         {

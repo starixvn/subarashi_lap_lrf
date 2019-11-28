@@ -1,7 +1,7 @@
 ﻿namespace Fanex.Athena.Api.BetList.UnitTests
 {
     using System.Collections.Generic;
-    using System.Net.Http;
+    using System.Linq;
     using System.Threading.Tasks;
     using Fanex.Athena.Api.Base.UnitTests;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -42,13 +42,12 @@
         }
 
         [Test]
-        public async Task GetData_AllExportConditionIsTrue_ReturnsObjectError()
+        public async Task GetData_ExportIsNotAvailable_ReturnsObjectError()
         {
             using (var controller = CreateController())
             {
                 // Arrange
-                var licenseeSession = SessionService.LicenseeSession;
-                var licenseesWithLargeData = new List<string> { licenseeSession.LicenseeName };
+                var licenseesWithLargeData = new List<string> { SessionLicenseeName };
                 var metaModel = new MultipleCustomersBetListMetaModel
                 {
                     IsExport = true
@@ -70,7 +69,7 @@
         }
 
         [Test]
-        public async Task GetData_NotExportAndLargeDataContainLicenseeName_CallsApiWithCorrectParameters()
+        public async Task GetData_WhenNotExport_CallsApiWithCorrectParameters()
         {
             using (var controller = CreateController())
             {
@@ -81,42 +80,63 @@
                     CurrencyIdList = "1,2"
                 };
 
-                var expected = new HttpResponseMessage();
-                var licenseesWithLargeData = new List<string> { SessionService.LicenseeSession.LicenseeName };
-                AppSetting.LicenseesWithLargeData.Returns(licenseesWithLargeData);
-                AppSetting.BetListApiClientTimeOutMinutes.Returns(120);
-                _betListApiClient.PostAsync(ApiPath, metaModel, SessionLanguage).Returns(Task.FromResult(expected));
-
                 // Action
-                var actual = await controller.GetData(metaModel);
+                await controller.GetData(metaModel);
 
                 // Assert
-                Assert.That(actual, Is.EqualTo(actual));
+                Assert.Multiple(() =>
+                {
+                    _betListApiClient.Received(1).PostAsync(ApiPath, metaModel, SessionLanguage);
+                });
             }
         }
 
         [Test]
-        public async Task GetData_NotExportAndLargeDataNotContainLicenseeName_CallsApiWithCorrectParameters()
+        public async Task GetData_Export_EnableLargeBetList_CallsApiWithCorrectParameters()
         {
             using (var controller = CreateController())
             {
                 // Arrange
                 var metaModel = new MultipleCustomersBetListMetaModel
                 {
-                    IsExport = false,
+                    IsExport = true,
                     CurrencyIdList = "1,2"
                 };
-
-                var expected = new HttpResponseMessage();
-                AppSetting.LicenseesWithLargeData.Returns(new List<string>());
-                AppSetting.BetListApiClientTimeOutMinutes.Returns(120);
-                _betListApiClient.PostAsync(ApiPath, metaModel, SessionLanguage).Returns(Task.FromResult(expected));
+                AppSetting.IsDisableExportLargeBetList.Returns(false);
 
                 // Action
-                var actual = await controller.GetData(metaModel);
+                await controller.GetData(metaModel);
 
                 // Assert
-                Assert.That(actual, Is.EqualTo(actual));
+                Assert.Multiple(() =>
+                {
+                    _betListApiClient.Received(1).PostAsync(ApiPath, metaModel, SessionLanguage);
+                });
+            }
+        }
+
+        [Test]
+        public async Task GetData_Export_IsNotLargeBetList_CallsApiWithCorrectParameters()
+        {
+            using (var controller = CreateController())
+            {
+                // Arrange
+                var metaModel = new MultipleCustomersBetListMetaModel
+                {
+                    IsExport = true,
+                    CurrencyIdList = "1,2"
+                };
+                AppSetting.IsDisableExportLargeBetList.Returns(true);
+                AppSetting.LicenseesWithLargeData.Returns(Enumerable.Empty<string>());
+
+                // Action
+                await controller.GetData(metaModel);
+
+                // Assert
+                Assert.Multiple(() =>
+                {
+                    _betListApiClient.Received(1).PostAsync(ApiPath, metaModel, SessionLanguage);
+                });
             }
         }
 
