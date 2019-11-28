@@ -1516,7 +1516,7 @@ function (_PureComponent) {
     }
   }, {
     key: "_buildActionUrl",
-    value: function _buildActionUrl(systemType, action) {
+    value: function _buildActionUrl(systemType, action, tabName) {
       var selectedPlayer = this.props.selectedPlayer;
       var ibcCustId = selectedPlayer.ibcCustId,
           licenseeCustId = selectedPlayer.licenseeCustId,
@@ -1525,9 +1525,14 @@ function (_PureComponent) {
           userName = selectedPlayer.userName,
           createdDate = selectedPlayer.createdDate;
       var custIdQueryString = "custId=".concat(ibcCustId, "&licenseeCustId=").concat(licenseeCustId);
-      var nameValuePairString = custIdQueryString + "&currencyId=".concat(currencyId, "&currencyName=").concat(currency, "&userName=").concat(userName, "&createdDate=").concat(encodeURIComponent(createdDate));
+      var nameValuePairString = custIdQueryString + "&currencyId=".concat(currencyId, "&currencyName=").concat(currency, "&userName=").concat(userName);
       var queryString = (action.indexOf('?') !== -1 ? '&' : '?') + nameValuePairString;
       var urlByPlayer = action + queryString;
+
+      if (tabName === _lib_constants__WEBPACK_IMPORTED_MODULE_4__["tabNames"].playerInfo) {
+        urlByPlayer += "&createdDate=".concat(encodeURIComponent(createdDate));
+      }
+
       return this.props.getLink(systemType, urlByPlayer);
     }
   }, {
@@ -1545,7 +1550,7 @@ function (_PureComponent) {
         return !_lib_constants__WEBPACK_IMPORTED_MODULE_4__["excludedTabNameWithNonDepositAndArchived"].includes(item.Name);
       }) : tabList;
       return renderedTabList.map(function (item) {
-        var actionUrl = _this2._buildActionUrl(item.SystemType, item.Action);
+        var actionUrl = _this2._buildActionUrl(item.SystemType, item.Action, item.Name);
 
         var tabNameBySelectedMenu = _lib_constants__WEBPACK_IMPORTED_MODULE_4__["tabNameByContextMenu"][selectedTabName];
         var isActive = tabNameBySelectedMenu === item.Name || selectedTabName === item.Name;
@@ -1587,7 +1592,7 @@ function (_PureComponent) {
         return t.Name === tabNameBySelectedMenu || t.Name === selectedTabName;
       }) : this._tabList[0];
       var action = tabNameBySelectedMenu ? "".concat(tabItem.Action, "?subTab=").concat(selectedTabName) : tabItem.Action;
-      return tabItem && this._buildActionUrl(tabItem.SystemType, action);
+      return tabItem && this._buildActionUrl(tabItem.SystemType, action, tabItem.Name);
     }
   }, {
     key: "render",
@@ -2575,7 +2580,8 @@ var ContextMenu = function ContextMenu(props) {
         isDeposit = currentActivePlayer.isDeposit,
         isArchived = currentActivePlayer.isArchived,
         licenseeCustId = currentActivePlayer.licenseeCustId,
-        currencyId = currentActivePlayer.currencyId;
+        currencyId = currentActivePlayer.currencyId,
+        createdDate = currentActivePlayer.createdDate;
     var selectedPlayer = {
       ibcCustId: ibcCustId,
       userName: userName,
@@ -2583,7 +2589,8 @@ var ContextMenu = function ContextMenu(props) {
       isDeposit: isDeposit,
       isArchived: isArchived,
       licenseeCustId: licenseeCustId,
-      currencyId: currencyId
+      currencyId: currencyId,
+      createdDate: createdDate
     };
     setSelectedPlayer(selectedPlayer);
   };
@@ -4239,7 +4246,8 @@ var buildCurrentActivePlayer = function buildCurrentActivePlayer(dataItem) {
       IsDeposit = dataItem.IsDeposit,
       IsArchived = dataItem.IsArchived,
       LicenseeCustId = dataItem.LicenseeCustId,
-      CurrencyId = dataItem.CurrencyId;
+      CurrencyId = dataItem.CurrencyId,
+      CreatedDate = dataItem.CreatedDate;
   return {
     ibcCustId: IbcCustId,
     licenseeCustId: LicenseeCustId,
@@ -4250,7 +4258,8 @@ var buildCurrentActivePlayer = function buildCurrentActivePlayer(dataItem) {
     specialLevel: SpecialLevel,
     isDeposit: IsDeposit,
     isArchived: IsArchived,
-    currencyId: CurrencyId
+    currencyId: CurrencyId,
+    createdDate: CreatedDate
   };
 };
 
