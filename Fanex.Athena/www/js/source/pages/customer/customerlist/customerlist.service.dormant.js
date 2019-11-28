@@ -45,7 +45,8 @@ function ($, Site, CustomerListOptionDormant, jqGridAdditional, PagingHelper, Cu
         getPostData: function () {
             const data = {};
 
-            if ($('#subsidiary-multiselect').length > 0) {
+            data.IsViewOnSubsidiary = $('#IsViewOnSubsidiary').is(':checked');
+            if ($('#subsidiary-multiselect').length > 0 && data.IsViewOnSubsidiary) {
                 const subsidiaryList = $('#subsidiary-multiselect').multiSelect('getCheckedItems');
 
                 if (!subsidiaryList.length) {

@@ -6596,7 +6596,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
         getPostData: function () {
             const data = {};
 
-            if ($('#subsidiary-multiselect').length > 0) {
+            data.IsViewOnSubsidiary = $('#IsViewOnSubsidiary').is(':checked');
+            if ($('#subsidiary-multiselect').length > 0 && data.IsViewOnSubsidiary) {
                 const subsidiaryList = $('#subsidiary-multiselect').multiSelect('getCheckedItems');
 
                 if (!subsidiaryList.length) {
@@ -6782,7 +6783,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                 }
             }
 
-            if ($('#subsidiary-multiselect').length > 0) {
+            data.IsViewOnSubsidiary = $('#IsViewOnSubsidiary').is(':checked');
+            if ($('#subsidiary-multiselect').length > 0 && data.IsViewOnSubsidiary) {
                 const subsidiaryList = $('#subsidiary-multiselect').multiSelect('getCheckedItems');
 
                 if (!subsidiaryList.length) {
@@ -6801,8 +6803,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
             data.BaFilter = $('#BAFilterOption').val();
             data.GroupCommId = $('#DdlGroupCommId').val();
             data.BaseCurrency = $('#BaseCurrency').val();
-            data.CustStatus = $('#CustStatusOption').val();
-            data.IsViewOnSubsidiary = $('#IsViewOnSubsidiary').is(':checked');
+            data.CustStatus = $('#CustStatusOption').val();           
 
             $('#excelParam').val(JSON.stringify(data));
 

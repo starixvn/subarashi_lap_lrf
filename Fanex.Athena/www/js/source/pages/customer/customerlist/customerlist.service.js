@@ -92,7 +92,8 @@ function ($, Site, CustomerListOption, jqGridAdditional, PagingHelper, CustomerL
                 }
             }
 
-            if ($('#subsidiary-multiselect').length > 0) {
+            data.IsViewOnSubsidiary = $('#IsViewOnSubsidiary').is(':checked');
+            if ($('#subsidiary-multiselect').length > 0 && data.IsViewOnSubsidiary) {
                 const subsidiaryList = $('#subsidiary-multiselect').multiSelect('getCheckedItems');
 
                 if (!subsidiaryList.length) {
@@ -112,7 +113,6 @@ function ($, Site, CustomerListOption, jqGridAdditional, PagingHelper, CustomerL
             data.GroupCommId = $('#DdlGroupCommId').val();
             data.BaseCurrency = $('#BaseCurrency').val();
             data.CustStatus = $('#CustStatusOption').val();
-            data.IsViewOnSubsidiary = $('#IsViewOnSubsidiary').is(':checked');
 
             $('#excelParam').val(JSON.stringify(data));
 
