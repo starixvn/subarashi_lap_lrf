@@ -8,10 +8,6 @@
 
     public interface ISubsidiaryService
     {
-        IEnumerable<GroupSubsidiary> GetAllGroupSubsidiaries(string licenseeName, int? whitteLabelId);
-
-        IEnumerable<Subsidiary> GetAllSubsidiaries(UserAuthInfo user, string licenseeName);
-
         IEnumerable<CheckedItem> GetSubsidiaryTree(UserAuthInfo user, string licenseeName);
 
         IDictionary<int, IEnumerable<int>> GetCurrencyAgentList(UserAuthInfo user, string licenseeName, string subsidiaryNames, bool isExcludeTest = false, int currencyId = 0);

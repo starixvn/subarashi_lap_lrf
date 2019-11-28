@@ -1,5 +1,6 @@
 ﻿namespace Fanex.Athena.Service.Report
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -145,7 +146,8 @@
                     whiteLabels,
                     sub => sub.Key,
                     label => label.OperatorId,
-                    (sub, label) => new { WhiteLabel = label.WhiteLabelName, Total = sub.Value })
+                    (sub, label) => new { WhiteLabel = label.WhiteLabelName, Total = sub.Value },
+                    StringComparer.OrdinalIgnoreCase)
                 .GroupBy(
                     data => data.WhiteLabel,
                     (whiteLabel, group) => new
@@ -172,7 +174,8 @@
                     whiteLabels,
                     sub => sub.Subsidiary,
                     label => label.OperatorId,
-                    (sub, label) => new { WhiteLabel = label.WhiteLabelName, Subsidiary = sub })
+                    (sub, label) => new { WhiteLabel = label.WhiteLabelName, Subsidiary = sub },
+                    StringComparer.OrdinalIgnoreCase)
                 .GroupBy(
                     data => data.WhiteLabel,
                     (whiteLabel, group) => new SubsidiaryPerformanceGroup
