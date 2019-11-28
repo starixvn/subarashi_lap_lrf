@@ -59,7 +59,7 @@ export const buildLapPlayerList = (playerList) => {
 }
 
 export const buildCurrentActivePlayer = (dataItem) => {
-    const { IbcCustId, UserName, Currency, Status, OddsGroup, SpecialLevel, IsDeposit, IsArchived, LicenseeCustId, CurrencyId } = dataItem;
+    const { IbcCustId, UserName, Currency, Status, OddsGroup, SpecialLevel, IsDeposit, IsArchived, LicenseeCustId, CurrencyId, CreatedDate } = dataItem;
 
     return {
         ibcCustId: IbcCustId,
@@ -71,6 +71,7 @@ export const buildCurrentActivePlayer = (dataItem) => {
         specialLevel: SpecialLevel,
         isDeposit: IsDeposit,
         isArchived: IsArchived,
-        currencyId: CurrencyId
+        currencyId: CurrencyId,
+        createdDate: CreatedDate
     };
 }

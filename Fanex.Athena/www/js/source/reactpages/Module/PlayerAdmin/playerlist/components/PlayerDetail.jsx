@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../actions';
-import { heightSlicing, excludedTabNameWithNonDepositAndArchived, tabNameByContextMenu } from '../lib/constants';
+import { heightSlicing, excludedTabNameWithNonDepositAndArchived, tabNameByContextMenu, tabNames } from '../lib/constants';
 
 export class PlayerDetail extends PureComponent {
     constructor(props) {
@@ -19,13 +19,17 @@ export class PlayerDetail extends PureComponent {
         this.props.setSelectedTabName(tabName);
     }
 
-    _buildActionUrl(systemType, action) {
+    _buildActionUrl(systemType, action, tabName) {
         const { selectedPlayer } = this.props;
         const { ibcCustId, licenseeCustId, currencyId, currency, userName, createdDate } = selectedPlayer;
         const custIdQueryString = `custId=${ibcCustId}&licenseeCustId=${licenseeCustId}`;
-        const nameValuePairString = custIdQueryString + `&currencyId=${currencyId}&currencyName=${currency}&userName=${userName}&createdDate=${encodeURIComponent(createdDate)}`;
+        const nameValuePairString = custIdQueryString + `&currencyId=${currencyId}&currencyName=${currency}&userName=${userName}`;
         const queryString = (action.indexOf('?') !== -1 ? '&' : '?') + nameValuePairString;
-        const urlByPlayer = action + queryString;
+
+        let urlByPlayer = action + queryString;
+        if(tabName === tabNames.playerInfo){
+            urlByPlayer += `&createdDate=${encodeURIComponent(createdDate)}`;
+        }
 
         return this.props.getLink(systemType, urlByPlayer);
     }
@@ -39,7 +43,7 @@ export class PlayerDetail extends PureComponent {
 
         return (
             renderedTabList.map((item) => {
-                const actionUrl = this._buildActionUrl(item.SystemType, item.Action);
+                const actionUrl = this._buildActionUrl(item.SystemType, item.Action, item.Name);
                 const tabNameBySelectedMenu = tabNameByContextMenu[selectedTabName];
                 const isActive = tabNameBySelectedMenu === item.Name || selectedTabName === item.Name;
 
@@ -78,7 +82,7 @@ export class PlayerDetail extends PureComponent {
 
         const action = tabNameBySelectedMenu ? `${tabItem.Action}?subTab=${selectedTabName}` : tabItem.Action;
 
-        return tabItem && this._buildActionUrl(tabItem.SystemType, action);
+        return tabItem && this._buildActionUrl(tabItem.SystemType, action, tabItem.Name);
     }
 
     
