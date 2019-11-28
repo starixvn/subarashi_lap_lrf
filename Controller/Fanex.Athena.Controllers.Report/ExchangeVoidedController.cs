@@ -1,12 +1,12 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Mvc;
 using Fanex.Athena.Extension.Utility;
-using Fanex.Athena.Model.BetList.MetaModel;
+using Fanex.Athena.Model.Report.MetaModel;
 using Fanex.Athena.Service.Core.Common.Interfaces;
 using Fanex.Athena.Service.Core.Users.Interfaces;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
 
-namespace Fanex.Athena.Controllers.BetList
+namespace Fanex.Athena.Controllers.Report
 {
     public class ExchangeVoidedController : ContentBaseController
     {
@@ -26,7 +26,7 @@ namespace Fanex.Athena.Controllers.BetList
         [HttpGet]
         public ActionResult Index()
         {
-            return View("~/Views/Desktop/BetList/ExchangeVoided/Index.cshtml");
+            return View("~/Views/Desktop/Report/ExchangeVoided/Index.cshtml");
         }
 
         [HttpPost]

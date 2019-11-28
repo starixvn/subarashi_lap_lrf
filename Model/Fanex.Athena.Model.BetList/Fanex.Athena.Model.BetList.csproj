@@ -104,7 +104,6 @@
     <Compile Include="MetaModel\ColossusBetDetailMetaModel.cs" />
     <Compile Include="MetaModel\ExchangeBetListDetailMetaModel.cs" />
     <Compile Include="MetaModel\ExchangeBetListMetaModel.cs" />
-    <Compile Include="MetaModel\ExchangeVoidedMetaModel.cs" />
     <Compile Include="MetaModel\LastBetsMonitoringMetaModel.cs" />
     <Compile Include="MetaModel\LiveReportBetListMetaModel.cs" />
     <Compile Include="MetaModel\MixParlayDetailMetaModel.cs" />

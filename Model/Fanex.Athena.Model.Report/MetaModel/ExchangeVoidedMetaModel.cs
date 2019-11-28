@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Fanex.Athena.Model.BetList.MetaModel
+namespace Fanex.Athena.Model.Report.MetaModel
 {
     public class ExchangeVoidedMetaModel
     {
