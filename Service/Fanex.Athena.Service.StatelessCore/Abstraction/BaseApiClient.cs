@@ -51,7 +51,7 @@ namespace Fanex.Athena.Service.StatelessCore.Abstraction
             {
                 return await Task.FromResult(default(T));
             }
-            using (var httpRequest = new HttpRequestMessage(HttpMethod.Post, new Uri(_client.BaseAddress, path)))
+            using (var httpRequest = new HttpRequestMessage(HttpMethod.Post, new Uri(_client.BaseAddress + path)))
             {
                 httpRequest.Headers.Add(LANGUAGEKEY, language);
                 HttpResponseMessage response = null;

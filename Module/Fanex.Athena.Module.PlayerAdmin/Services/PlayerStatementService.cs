@@ -23,6 +23,8 @@
 
         private const string FormatDate = "MM-dd-yyyy";
 
+        private const int PageSize = 1000;
+
         private readonly IAppSettings _appSetting;
 
         private readonly HttpClient _client;
@@ -35,7 +37,7 @@
 
         public async Task<string> GetUrl(PlayerStatementMetaModel metaModel)
         {
-            const string GetStatementPath = @"{0}Statement/Summary?cid={1}&fd={2}&td={3}&lang={4}&access_token={5}";
+            const string GetStatementPath = @"{0}Statement/Summary?cid={1}&fd={2}&td={3}&ps={4}&lang={5}&access_token={6}";
 
             var token = await GetToken(metaModel.SiteName).ConfigureAwait(false);
 
@@ -45,6 +47,7 @@
                 metaModel.CustId,
                 metaModel.FromDate.ToString(FormatDate),
                 metaModel.ToDate.ToString(FormatDate),
+                PageSize,
                 metaModel.Language,
                 token);
         }
