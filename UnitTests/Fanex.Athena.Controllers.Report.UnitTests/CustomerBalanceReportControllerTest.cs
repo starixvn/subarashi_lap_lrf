@@ -20,11 +20,14 @@
     {
         private IReportAPIClient _reportAPIClient;
 
+        private IProductService _productService;
+
         [OneTimeSetUp]
         public override void FixtureSetUp()
         {
             base.FixtureSetUp();
 
+            _productService = Substitute.For<IProductService>();
             _reportAPIClient = Substitute.For<IReportAPIClient>();
 
             SetUpDefaultFakeData();
@@ -33,6 +36,7 @@
         [OneTimeTearDown]
         public override void FixtureTearDown()
         {
+            _productService = null;
             _reportAPIClient = null;
         }
 
@@ -105,17 +109,46 @@
             }
         }
 
+        [Test]
+        public async Task ExportExcel_WhenCall_ChangesCorrectlyMetaModel()
+        {
+            using (var controller = CreateController())
+            {
+                // Arrange
+                var licenseeSession = SessionService.LicenseeSession;
+                var productAccess = _productService.GetSingleWalletProductAccess(
+                    licenseeSession.LicenseeId,
+                    SessionService.UserSession.Language,
+                    FunctionNames.CustomerBalance);
+                var metaModel = new CustomerBalanceMetaModel();
+                var content = FakeHelper.Create<byte[]>();
+                var contentType = FakeHelper.Create<string>();
+                var expectedResult = Tuple.Create(content, contentType);
+                _reportAPIClient.PostAsync("api/CustomerBalance/ExportExcel", metaModel, SessionService.UserSession.Language).Returns(Task.FromResult(expectedResult));
+
+                // Action
+                await controller.ExportExcel(metaModel);
+
+                // Assert
+                Assert.Multiple(() =>
+                {
+                    Assert.That(metaModel.IsAllowedBA, Is.EqualTo(productAccess.IsAllowBA));
+                    Assert.That(metaModel.HasComm, Is.EqualTo(licenseeSession.IsAllowedCustomerComm));
+                });
+            }
+        }
+
         private CustomerBalanceReportController CreateController()
         {
-            var productService = Substitute.For<IProductService>();
-            productService.GetSingleWalletProductAccess(
+            _productService.GetSingleWalletProductAccess(
                 SessionService.LicenseeSession.LicenseeId,
                 SessionService.UserSession.Language,
                 FunctionNames.CustomerBalance).Returns(new ProductAccess(new List<Product>()));
+
             return new CustomerBalanceReportController(
                 LangService,
                 SessionService,
-                productService,
+                _productService,
                 _reportAPIClient);
         }
     }
