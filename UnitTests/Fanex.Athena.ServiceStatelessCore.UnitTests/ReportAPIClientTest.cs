@@ -47,7 +47,7 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
             await reportApiClient.PostAsyncStringAsync(ApiUrl, content, Language);
 
             // Assert
-            Assert.That(passedRequest.Headers.GetValues("Accept-Language").ElementAt(0), Is.EqualTo(Language));
+            Assert.That(passedRequest.Headers.GetValues("Language").ElementAt(0), Is.EqualTo(Language));
             Assert.That(passedRequest.Headers.GetValues("Accept").ElementAt(0), Is.EqualTo("application/json"));
             Assert.That(passedRequest.Content, Is.Not.Null);
         }
@@ -77,7 +77,7 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
             await reportApiClient.PostAsync(ApiUrl, content, Language, MediaType.MsgPack);
 
             // Assert
-            Assert.That(passedRequest.Headers.GetValues("Accept-Language").ElementAt(0), Is.EqualTo(Language));
+            Assert.That(passedRequest.Headers.GetValues("Language").ElementAt(0), Is.EqualTo(Language));
             Assert.That(passedRequest.Headers.GetValues("Accept").ElementAt(0), Is.EqualTo("application/x-msgpack"));
             Assert.That(passedRequest.Content.Headers.ContentType.MediaType, Is.EqualTo("application/x-msgpack"));
         }

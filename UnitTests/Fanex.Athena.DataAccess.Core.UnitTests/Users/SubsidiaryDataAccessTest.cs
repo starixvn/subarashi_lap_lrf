@@ -24,7 +24,7 @@
         private SubsidiaryDataAccess _dataAccess;
 
         [OneTimeSetUp]
-        public void OneTimeSetUp()
+        public void FixtureSetUp()
         {
             _dbFactory = Substitute.For<IDbFactory>();
             _objectDb = Substitute.For<IObjectDb>();
@@ -32,7 +32,7 @@
         }
 
         [OneTimeTearDown]
-        public void OneTimeTearDown()
+        public void FixtureTearDown()
         {
             _dbFactory = null;
             _objectDb = null;

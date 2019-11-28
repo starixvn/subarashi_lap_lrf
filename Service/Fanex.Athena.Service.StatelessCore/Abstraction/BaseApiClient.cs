@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -33,6 +32,7 @@ namespace Fanex.Athena.Service.StatelessCore.Abstraction
         {
             _client = client;
         }
+
         public virtual async Task<string> PostAsyncStringAsync(string path, object value, string language)
         {
             return await HandleAsync<string>(path, value, language, MediaType.Json,
@@ -43,6 +43,7 @@ namespace Fanex.Athena.Service.StatelessCore.Abstraction
 
             ).ConfigureAwait(false);
         }
+
         protected virtual async Task<T>
            HandleAsync<T>(string path, object value, string language, MediaType mediaType, Func<HttpResponseMessage, Task<T>> codeBlock)
         {
@@ -50,7 +51,7 @@ namespace Fanex.Athena.Service.StatelessCore.Abstraction
             {
                 return await Task.FromResult(default(T));
             }
-            using (var httpRequest = new HttpRequestMessage(HttpMethod.Post, _client.BaseAddress + path))
+            using (var httpRequest = new HttpRequestMessage(HttpMethod.Post, new Uri(_client.BaseAddress, path)))
             {
                 httpRequest.Headers.Add(LANGUAGEKEY, language);
                 HttpResponseMessage response = null;

@@ -17,13 +17,13 @@
         private PlayerBetLimitLogBuilder _fakeObject;
 
         [OneTimeSetUp]
-        public void OneTimeSetUp()
+        public void FixtureSetUp()
         {
             _fakeObject = new PlayerBetLimitLogBuilder();
         }
 
         [OneTimeTearDown]
-        public void OneTimeTearDown()
+        public void FixtureTearDown()
         {
             _fakeObject = null;
         }

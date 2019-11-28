@@ -23,7 +23,7 @@
         private NumberGameBetLimitService _service;
 
         [OneTimeSetUp]
-        public void OneTimeSetUp()
+        public void FixtureSetUp()
         {
             _repository = Substitute.For<INumberGameBetLimitRepository>();
             _businessLogService = Substitute.For<IBusinessLogService>();
@@ -31,7 +31,7 @@
         }
 
         [OneTimeTearDown]
-        public void OneTimeTearDown()
+        public void FixtureTearDown()
         {
             _service = null;
         }
@@ -57,8 +57,8 @@
         {
             // Arrange
             var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>>>();
-            var expectedResult = FakeHelper.Create<IResultInfo>();
-            _repository.UpdateSettingAsync(metaModel).Returns(Task.FromResult(expectedResult));
+            var expectedResult = FakeHelper.Create<ResultInfo>();
+            _repository.UpdateSettingAsync(metaModel).Returns(Task.FromResult<IResultInfo>(expectedResult));
 
             // Action
             var result = await _service.UpdateSettingAsync(metaModel);

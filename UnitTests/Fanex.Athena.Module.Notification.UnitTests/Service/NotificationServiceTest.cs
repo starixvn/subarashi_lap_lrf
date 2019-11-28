@@ -30,7 +30,7 @@
         private INotificationService _notificationService;
 
         [OneTimeSetUp]
-        public void OneTimeSetUp()
+        public void FixtureSetUp()
         {
             _logger = Substitute.For<ILogger>();
             _appSettings = Substitute.For<IAppSettings>();
@@ -39,7 +39,7 @@
         }
 
         [OneTimeTearDown]
-        public void OneTimeTearDown()
+        public void FixtureTearDown()
         {
             _logger = null;
             _appSettings = null;

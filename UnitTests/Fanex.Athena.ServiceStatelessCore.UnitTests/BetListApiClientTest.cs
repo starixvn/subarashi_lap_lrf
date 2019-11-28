@@ -44,7 +44,7 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
             var result = await betListApiClient.PostAsyncStringAsync(TestPath, TestValue, LANG).ConfigureAwait(false);
 
             // Assert
-            Assert.That(passedRequest.Headers.GetValues("Accept-Language").ElementAt(0), Is.EqualTo(LANG));
+            Assert.That(passedRequest.Headers.GetValues("Language").ElementAt(0), Is.EqualTo(LANG));
             Assert.That(passedRequest.Headers.GetValues("Accept").ElementAt(0), Is.EqualTo("application/json"));
             Assert.That(passedRequest.Content, Is.Not.Null);
             Assert.That(result, Is.EqualTo(Result));

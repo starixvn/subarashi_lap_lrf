@@ -33,7 +33,7 @@
         private AGCasinoBetLimitService _service;
 
         [OneTimeSetUp]
-        public void OneTimeSetUp()
+        public void FixtureSetUp()
         {
             _logger = Substitute.For<ILogger>();
             _appSettings = Substitute.For<IAppSettings>();
@@ -53,7 +53,7 @@
         }
 
         [OneTimeTearDown]
-        public void OneTimeTearDown()
+        public void FixtureTearDown()
         {
             _service = null;
         }
