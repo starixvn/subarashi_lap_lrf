@@ -5,20 +5,14 @@ import FormFilter from './FormFilter'
 import Loader from '@jsroot/components/Loader'
 import AppLayout from '@jsroot/layouts/AppLayout'
 
-export class AppContainer extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        return (
-          <AppLayout>
-            <Loader isLoading={this.props.isLoading} />
-            <FormFilter />
-            <DataGrid />
-          </AppLayout>
-        );
-    }
+export const AppContainer = (props) => {
+  return (
+    <AppLayout>
+      <Loader isLoading={props.isLoading} />
+      <FormFilter />
+      <DataGrid />
+    </AppLayout>
+  );
 }
 
 function mapStateToProps(state) {

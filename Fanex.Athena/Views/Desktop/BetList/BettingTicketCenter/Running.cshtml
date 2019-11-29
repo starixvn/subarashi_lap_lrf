@@ -33,14 +33,15 @@
     selectedBaseCurrency: '@(Model.SelectedBaseCurrency)',
     isLoading: false,
     selectedStatus: '@(selectedStatus)',
-    isConvertAll: true
+    isConvertAll: true,
+    hasExchange: '@Model.HasExchange.ToString()' === 'True'
     };
     window._AppData = {
     isAllowedCustomerComm: @Model.IsAllowedCustomerComm.ToJson(),
     productOptions: @Html.Raw(productOptions.ToJson()),
     currencyList: @Html.Raw(Model.CurrencyList.Select(x => new { Id = x.Key, Value = x.Value, Status = true }).ToJson()),
     baseCurrencyList: @Html.Raw(baseCurrencyList.ToJson()),
-    statusList: @Html.Raw(Model.StatusList.Select(x => new { Id = x.ID, Value = x.Name, Status = x.Checked }).ToJson()),
+    statusList: @Html.Raw(Model.StatusList.Select(x => new { Id = x.ID, Value = x.Name, Status = x.Checked }).ToJson())
     };
 }
 <div id="app-container">

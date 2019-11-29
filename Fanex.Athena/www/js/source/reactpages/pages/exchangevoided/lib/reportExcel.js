@@ -1,5 +1,5 @@
 import Excel from '@jsroot/lib/excel';
-import { headerCellStyle, bodyCellStyle } from '@jsroot/constants/excelStyle';
+import { titleCellStyle, headerCellStyle, bodyCellStyle } from '@jsroot/constants/excelStyle';
 import { headerText, fields, VOIDED_STATUS } from './constants';
 
 const TITLE_ROW_INDEX = 0;
@@ -42,7 +42,8 @@ export default class ReportExcel {
         });
         this.worksheet[address] = {
             t: "s",
-            v: this._title
+            v: this._title,
+            s: titleCellStyle
         }
     }
 

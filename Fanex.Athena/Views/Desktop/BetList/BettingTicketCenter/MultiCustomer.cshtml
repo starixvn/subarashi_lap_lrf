@@ -37,7 +37,8 @@
     bettypeList: [],
     selectedBettype: 0,
     username: '',
-    isConvertAll: true
+    isConvertAll: true,
+    hasExchange: '@Model.HasExchange.ToString()' === 'True'
     };
     window._AppData = {
     baseCurrencyList: @Html.Raw(baseCurrencyList.ToJson()),

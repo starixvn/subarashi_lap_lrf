@@ -4,7 +4,7 @@ import { ActionCreators } from '../actions';
 import { bindActionCreators } from 'redux';
 import { renderHeader, renderDataSection } from '../lib/gridUtils';
 import NoDataTitle from '@jsroot/components/NoDataTitle';
-import { Table } from '@9softstudio/react-grid';
+import { Table, Pager } from '@9softstudio/react-grid';
 import ReportTitle from '@jsroot/components/ReportTitle';
 import LangHelper from '@jsroot/lib/langHelper';
 
@@ -38,18 +38,17 @@ const DataGrid = (props) => {
     const reportTitle = `${LangHelper.getSingleResource('BettingTicketCenter')}, ${requestParam.selectedDate}`;
 
     return (
-        <>
+        <div>
             <ReportTitle content={reportTitle} />
             <Table minWidth={650}
                 autoWidth={true}
                 autoHeight={true}
                 header={renderHeader()}
                 body={renderDataSection(dataList, startIndex)}
-                containerPadding={30}
-                isPaging={true}
-                pageOption={pagingOption}
+                containerPadding={30} />
+            <Pager pageOption={pagingOption} isShowPagingInfo={false}
                 onPaging={(pageIndex) => props.setRequestParam({ ...requestParam, pageIndex })} />
-        </>
+        </div>
     );
 }
 

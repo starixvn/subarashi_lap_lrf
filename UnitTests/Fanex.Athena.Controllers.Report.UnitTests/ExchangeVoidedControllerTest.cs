@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using Fanex.Athena.Controllers.Base.UnitTests;
 using Fanex.Athena.DataAccess.Report.Interfaces;
 using Fanex.Athena.Extension.Utility;
+using Fanex.Athena.Model.Core.DTO.Common;
 using Fanex.Athena.Model.Report.DTO;
 using Fanex.Athena.Model.Report.MetaModel;
 using Fanex.Athena.Model.Report.ViewModel;
@@ -23,6 +24,8 @@ namespace Fanex.Athena.Controllers.Report.UnitTests
 
         private IExchangeVoidedDataAccess _dataAccess;
 
+        private IProductService _productService;
+
         [SetUp]
         public override void FixtureSetUp()
         {
@@ -30,6 +33,7 @@ namespace Fanex.Athena.Controllers.Report.UnitTests
 
             _lgAPIClient = Substitute.For<ILGAPIClient>();
             _dataAccess = Substitute.For<IExchangeVoidedDataAccess>();
+            _productService = Substitute.For<IProductService>();
 
             SetUpDefaultFakeData();
         }
@@ -56,6 +60,28 @@ namespace Fanex.Athena.Controllers.Report.UnitTests
 
                 // Assert
                 Assert.That(result.ViewName, Is.EqualTo(ExpectedView));
+                Assert.That((bool)result.Model, Is.True);
+            }
+        }
+
+        [Test]
+        public async Task Index_DoNotHavePermission_ReturnEmptyResult()
+        {
+            // Arrange
+            var metaModel = new ExchangeVoidedMetaModel();
+
+            using (var controller = CreateController(new List<Product>()))
+            {
+                var expectedResult = JsonConvert.SerializeObject(
+                    new ExchangeVoidedViewModel { DataList = new List<ExchangeVoidedItem>(), TotalPage = 0 });
+
+                // Action
+                var result = await controller.Index(metaModel) as JsonResult;
+                var jsonData = JsonConvert.SerializeObject(result.Data);
+
+                // Assert
+                Assert.That(jsonData, Is.EqualTo(expectedResult));
+                await _lgAPIClient.DidNotReceiveWithAnyArgs().PostAsync<ExchangeVoidedViewModel>(default, default, default);
             }
         }
 
@@ -185,17 +211,27 @@ namespace Fanex.Athena.Controllers.Report.UnitTests
             }
         }
 
-        private ExchangeVoidedController CreateController()
+        private ExchangeVoidedController CreateController(IList<Product> productList = null)
         {
             var appSetting = Substitute.For<IAppSettings>();
             appSetting.Environment.Returns(Environment);
+
+            var fakeProductList = productList ??
+                new List<Product>
+                {
+                    new Product { ProductCode = Product.Exchange }
+                };
+            var licenseeId = SessionService.LicenseeSession.LicenseeId;
+            var language = SessionService.UserSession.Language;
+            _productService.GetProductList(licenseeId, language).Returns(fakeProductList);
 
             return new ExchangeVoidedController(
                 LangService,
                 SessionService,
                 _lgAPIClient,
                 appSetting,
-                _dataAccess
+                _dataAccess,
+                _productService
                 );
         }
     }

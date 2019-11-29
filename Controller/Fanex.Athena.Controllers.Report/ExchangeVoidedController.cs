@@ -1,8 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Fanex.Athena.DataAccess.Report.Interfaces;
 using Fanex.Athena.Extension.Utility;
+using Fanex.Athena.Model.Auth.DataDomain;
+using Fanex.Athena.Model.Core.DTO.Common;
 using Fanex.Athena.Model.Report.DTO;
 using Fanex.Athena.Model.Report.MetaModel;
 using Fanex.Athena.Model.Report.ViewModel;
@@ -13,8 +17,11 @@ using Fanex.Athena.Web.ActionFilter;
 
 namespace Fanex.Athena.Controllers.Report
 {
+    [FunctionAuthorization(PermissionKeys.BettingTicketCenter)]
     public class ExchangeVoidedController : ContentBaseController
     {
+        private readonly IProductService _productService;
+
         private readonly ILGAPIClient _lgClient;
 
         private readonly IAppSettings _appSetting;
@@ -26,17 +33,21 @@ namespace Fanex.Athena.Controllers.Report
                   ISessionService sessionService,
                   ILGAPIClient lgClient,
                   IAppSettings appSetting,
-                  IExchangeVoidedDataAccess dataAccess) : base(languageService, sessionService)
+                  IExchangeVoidedDataAccess dataAccess,
+                  IProductService productService) : base(languageService, sessionService)
         {
             _lgClient = lgClient;
             _appSetting = appSetting;
             _dataAccess = dataAccess;
+            _productService = productService;
         }
 
         [HttpGet]
         public ActionResult Index()
         {
-            return View("~/Views/Desktop/Report/ExchangeVoided/Index.cshtml");
+            var hasPermission = HasPermission();
+
+            return View("~/Views/Desktop/Report/ExchangeVoided/Index.cshtml", model: hasPermission);
         }
 
         [HttpPost]
@@ -44,6 +55,11 @@ namespace Fanex.Athena.Controllers.Report
         [AutoBindMetaModel(BindAgent = true)]
         public async Task<ActionResult> Index(ExchangeVoidedMetaModel metaModel)
         {
+            if (!HasPermission())
+            {
+                return JsonNet(new ExchangeVoidedViewModel { DataList = new List<ExchangeVoidedItem>(), TotalPage = 0 });
+            }
+
             var userName = metaModel.UserName?.Trim();
             var custId = 0;
             if (!string.IsNullOrEmpty(userName))
@@ -68,6 +84,15 @@ namespace Fanex.Athena.Controllers.Report
             const string apiPath = "/ExchangeSettleBetHistory/Index";
 
             return JsonNet(await _lgClient.PostAsync<ExchangeVoidedViewModel>(apiPath, apiMetaModel, SessionService.UserSession.Language).ConfigureAwait(false));
+        }
+
+        private bool HasPermission()
+        {
+            var productList = _productService.GetProductList(
+                SessionService.LicenseeSession.LicenseeId,
+                SessionService.UserSession.Language);
+
+            return productList.Any(x => string.Equals(Product.Exchange, x.ProductCode, StringComparison.InvariantCultureIgnoreCase));
         }
     }
 }

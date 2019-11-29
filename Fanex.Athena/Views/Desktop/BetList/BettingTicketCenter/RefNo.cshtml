@@ -23,7 +23,8 @@
     username: "",
     selectedBaseCurrency: '@ViewBag.SelectedBaseCurrency',
     isLoading: false,
-    isConvertAll: true
+    isConvertAll: true,
+    hasExchange: '@ViewBag.HasExchange.ToString()' === 'True'
     };
     window._AppData = {
     isAllowedCustomerComm: @Model.ToJson(),
@@ -32,5 +33,4 @@
     };
 }
 <div id="app-container">
-
 </div>

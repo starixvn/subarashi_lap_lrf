@@ -9,7 +9,7 @@ import LangHelper from '@jsroot/lib/langHelper';
 import Site from '@jsroot/lib/site';
 
 export const PageLayout = (props) => {
-    const { toggleLoader, isConvertAll, selectedBaseCurrency, selectedTabIndex, children } = props;
+    const { toggleLoader, isConvertAll, selectedBaseCurrency, selectedTabIndex, children, hasExchange } = props;
     
     const getResource = (key) => {
         return LangHelper.getSingleResource(key);
@@ -55,6 +55,12 @@ export const PageLayout = (props) => {
                     <Tab isActive={selectedTabIndex == 3} label={LangHelper.getSingleResource("Running")}
                         url={Site.resolveClientUrl("BettingTicketCenter/Running")}>
                     </Tab>
+                    {
+                        hasExchange && 
+                        <Tab isActive={selectedTabIndex == 4} label={LangHelper.getSingleResource("Exchange")}
+                            url={Site.resolveClientUrl("ExchangeVoided")}>
+                        </Tab>
+                    }
                 </Tabs>
                 <div>
                     {children}
@@ -70,8 +76,8 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-    const { isConvertAll, selectedBaseCurrency } = state;
-    return Object.assign({}, { isConvertAll, selectedBaseCurrency });
+    const { isConvertAll, selectedBaseCurrency, hasExchange } = state;
+    return Object.assign({}, { isConvertAll, selectedBaseCurrency, hasExchange });
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PageLayout);
