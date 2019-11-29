@@ -1,21 +1,10 @@
 ﻿namespace Fanex.Athena.Controllers.Customer
 {
-    using System;
-    using System.Data;
-    using System.Globalization;
-    using System.Linq;
-    using System.Net;
-    using System.Threading.Tasks;
-    using System.Web.Hosting;
-    using System.Web.Mvc;
-    using System.Web.SessionState;
-
     using Fanex.Athena.Excel.Base.Entities;
     using Fanex.Athena.Excel.Customer;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Customer.MetaModel;
-    using Fanex.Athena.Service.Core.Common.Interfaces;
     using Fanex.Athena.Service.Customer.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
@@ -27,12 +16,20 @@
 
     using Resources;
 
-    using Service.Core.Users.Interfaces;
+    using System;
+    using System.Data;
+    using System.Globalization;
+    using System.Linq;
+    using System.Net;
+    using System.Threading.Tasks;
+    using System.Web.Hosting;
+    using System.Web.Mvc;
+    using System.Web.SessionState;
 
     [SessionState(SessionStateBehavior.ReadOnly)]
     [CheckUMFilter]
     [FunctionAuthorization(PermissionKeys.CustomerInfoCommissionGroupList)]
-    public class CustomerComGroupController : ContentBaseController
+    public class CustomerComGroupController : CultureBaseController
     {
         private const int InvalidGroupName = 1;
         private const int InvalidCommvalue = 2;
@@ -42,12 +39,9 @@
         private readonly IProductService _productService;
 
         public CustomerComGroupController(
-            ILanguageService languageService,
-            ISessionService sessionService,
             IGroupComService groupComService,
             IProductService productService
             )
-        : base(languageService, sessionService)
         {
             _groupComService = groupComService;
             _productService = productService;
@@ -58,8 +52,8 @@
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            var licenseeId = SessionService.LicenseeSession.LicenseeId;
-            var productAccess = _productService.GetProductAccess(licenseeId, SessionService.UserSession.Language);
+            var licenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
+            var productAccess = _productService.GetProductAccess(licenseeId, SessionServiceInstance.UserSession.Language);
             var model = await _groupComService.GetAllAsync(licenseeId);
             ViewBag.IsAllowNG = productAccess.IsAllowNG;
             ViewBag.IsAllowCS = productAccess.IsAllowCS;
@@ -85,8 +79,8 @@
         [CustomValidateAntiForgery]
         public async Task<ActionResult> Create(GroupCommMetaModel metaModel)
         {
-            var licenseeSession = SessionService.LicenseeSession;
-            var userSession = SessionService.UserSession;
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
+            var userSession = SessionServiceInstance.UserSession;
             IResultInfo result = new ResultInfo();
             metaModel.LicenseeId = licenseeSession.LicenseeId;
 
@@ -130,8 +124,8 @@
         [HttpGet]
         public string Validate(string groupName)
         {
-            return string.IsNullOrEmpty(groupName) 
-                || _groupComService.CheckExistingGroupByName(SessionService.LicenseeSession.LicenseeId, groupName)
+            return string.IsNullOrEmpty(groupName)
+                || _groupComService.CheckExistingGroupByName(SessionServiceInstance.LicenseeSession.LicenseeId, groupName)
                 ? "NO" : "OK";
         }
 
@@ -142,7 +136,7 @@
         [HttpGet]
         public async Task<ActionResult> Update(int groupId)
         {
-            var model = _groupComService.GetById(groupId, SessionService.LicenseeSession.LicenseeId);
+            var model = _groupComService.GetById(groupId, SessionServiceInstance.LicenseeSession.LicenseeId);
             if (model == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.NotFound);
@@ -160,7 +154,7 @@
         public async Task<ActionResult> Update(GroupCommMetaModel metaModel)
         {
             IResultInfo result = new ResultInfo();
-            metaModel.LicenseeId = SessionService.LicenseeSession.LicenseeId;
+            metaModel.LicenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
 
             if (ModelState.IsValid)
             {
@@ -195,8 +189,8 @@
         [CustomValidateAntiForgery]
         public async Task<JsonResult> Delete(int groupId, bool isRemovePlayerComm, bool isResetDefault)
         {
-            var licenseeId = SessionService.LicenseeSession.LicenseeId;
-            var userSession = SessionService.UserSession;
+            var licenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
+            var userSession = SessionServiceInstance.UserSession;
             var productAccess = _productService.GetProductAccess(licenseeId, userSession.Language);
 
             var result = await _groupComService.DeleteGroupAsync(
@@ -228,7 +222,7 @@
         [HttpGet]
         public async Task<JsonResult> GetDefaultGroup()
         {
-            var groupList = await _groupComService.GetAllAsync(SessionService.LicenseeSession.LicenseeId);
+            var groupList = await _groupComService.GetAllAsync(SessionServiceInstance.LicenseeSession.LicenseeId);
             var defaultGroupId = groupList.FirstOrDefault(x => x.IsDefaultGroup)?.GroupCommId ?? 0;
 
             return Json(new { id = defaultGroupId }, JsonRequestBehavior.AllowGet);
@@ -245,8 +239,8 @@
             const string FileName = "CustomerCommGroup";
             var templatePath = HostingEnvironment.MapPath(@"~/App_Data/Template/CustomerGroup/CustomerCommGroup.xls");
 
-            var licenseeId = SessionService.LicenseeSession.LicenseeId;
-            var productAccess = _productService.GetProductAccess(licenseeId, SessionService.UserSession.Language);
+            var licenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
+            var productAccess = _productService.GetProductAccess(licenseeId, SessionServiceInstance.UserSession.Language);
             var showingOption = new ShowingOption
             {
                 SBVisible = productAccess.IsAllowSB,
@@ -296,8 +290,8 @@
 
         private async Task CreateMetaModel(GroupCommMetaModel metaModel)
         {
-            var licenseeId = SessionService.LicenseeSession.LicenseeId;
-            var productAccess = _productService.GetProductAccess(licenseeId, SessionService.UserSession.Language);
+            var licenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
+            var productAccess = _productService.GetProductAccess(licenseeId, SessionServiceInstance.UserSession.Language);
             var groupList = await _groupComService.GetAllAsync(licenseeId);
             var defaultGroupId = groupList.FirstOrDefault(x => x.IsDefaultGroup)?.GroupCommId ?? 0;
 
@@ -310,7 +304,7 @@
 
         private async Task<IResultInfo> UpdateGroupComm(GroupCommMetaModel metaModel)
         {
-            var userSession = SessionService.UserSession;
+            var userSession = SessionServiceInstance.UserSession;
             var currentGroup = _groupComService.GetById(metaModel.GroupCommId, metaModel.LicenseeId);
             if (currentGroup != null && !CustomerComGroupHelper.IsSameGroup(currentGroup, metaModel))
             {

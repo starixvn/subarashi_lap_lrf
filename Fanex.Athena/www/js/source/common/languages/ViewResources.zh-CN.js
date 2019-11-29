@@ -1,4 +1,4 @@
-﻿// Generated at: 11/06/2019 2:37:43 PM
+﻿// Generated at: 11/06/2019 11:42:44 AM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -471,6 +471,7 @@ ProductNG:"百练赛",
 ProductSB:"体育博彩",
 ProductVS:"虚拟运动",
 ProductVS2:"虚拟运动2",
+Promotion:"促销活动",
 PromotionPrize:"活动奖金",
 RB:"赛马",
 RealName:"真实姓名",

@@ -6,24 +6,15 @@
 
 namespace Fanex.Athena.Controllers.Report
 {
-    using System.Web.Mvc;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Web.ActionFilter;
 
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
+    using System.Web.Mvc;
 
     [FunctionAuthorization(PermissionKeys.ReportWeeklyLiveMatches)]
     public class WeeklyLiveMatchReportController : ReportBaseController
     {
-        public WeeklyLiveMatchReportController(
-            ILanguageService languageService,
-            ISessionService sessionService)
-        : base(languageService, sessionService)
-        {
-        }
-
         [HttpGet]
         public ActionResult Index()
         {

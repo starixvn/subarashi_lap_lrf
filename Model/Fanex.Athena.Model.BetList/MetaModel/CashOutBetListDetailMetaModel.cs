@@ -22,8 +22,6 @@ namespace Fanex.Athena.Model.BetList.MetaModel
 
         public bool HasPlayerComm { get; set; }
 
-        public IDictionary<int, string> UserCurrencyList { get; set; }
-
         public bool IsValid => MetaModelValidationHelper.ValidateBaseCurrency(BaseCurrency);
     }
 }

@@ -53,7 +53,6 @@
             }
         }
 
-       
         [Test]
         public async Task Detail_ExportExcel_PassCorrectParam()
         {
@@ -92,13 +91,15 @@
 
         private AGCasinoBetListController CreateController()
         {
-            return Substitute.ForPartsOf<AGCasinoBetListController>(
-                LangService,
-                SessionService,
-                ProductService,
-                BalanceUpDataAccess,
-                CacheRefAdapter,
-                BetListApiClient, LicenseeSettingService);
+            var controller = Substitute.ForPartsOf<AGCasinoBetListController>();
+
+            controller.SessionServiceInstance = SessionService;
+            controller.LangService = LangService;
+            controller.LicenseeSettingServiceInstance = LicenseeSettingService;
+            controller.BalanceUpDataAccessInstance = BalanceUpDataAccess;
+            controller.BetListApiClient = BetListApiClient;
+
+            return controller;
         }
     }
 }

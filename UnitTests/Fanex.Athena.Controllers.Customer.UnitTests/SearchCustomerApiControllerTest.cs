@@ -16,10 +16,7 @@
         public async Task SearchCustomer_WhenCall_ReturnCorrectData()
         {
             var searchCustomerDataAccess = Substitute.For<ISearchCustomerDataAccess>();
-            using (var controller = new SearchCustomerAPIController(
-               LangService,
-               SessionService,
-               searchCustomerDataAccess))
+            using (var controller = CreateController(searchCustomerDataAccess))
             {
                 // Arrange
                 const string Query = " test   ";
@@ -45,6 +42,15 @@
                     Assert.That(resultData.GetValue("suggestions"), Is.EqualTo(expectedCustomerNames));
                 });
             }
+        }
+
+        private SearchCustomerAPIController CreateController(ISearchCustomerDataAccess searchCustomerDataAccess)
+        {
+            return new SearchCustomerAPIController(searchCustomerDataAccess)
+            {
+                LangService = LangService,
+                SessionServiceInstance = SessionService,
+            };
         }
     }
 }

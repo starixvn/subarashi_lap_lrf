@@ -2554,4 +2554,16 @@
     <value>Player Name</value>
     <comment>122789</comment>
   </data>
+  <data name="Promotion" xml:space="preserve">
+    <value>Promotion</value>
+    <comment>120333</comment>
+  </data>
+  <data name="WhiteLabel" xml:space="preserve">
+    <value>Whitelabel</value>
+    <comment>123651</comment>
+  </data>
+  <data name="SubsidiarySearch" xml:space="preserve">
+    <value>Subsidiary Search</value>
+    <comment>123651</comment>
+  </data>
 </root>

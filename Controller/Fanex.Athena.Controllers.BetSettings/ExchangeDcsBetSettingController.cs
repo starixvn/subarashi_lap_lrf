@@ -6,10 +6,6 @@
 
 namespace Fanex.Athena.Controllers.BetSettings
 {
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
@@ -20,8 +16,10 @@ namespace Fanex.Athena.Controllers.BetSettings
     using Resources;
 
     using Service.BetSettings.Interfaces;
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
+
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
 
     public class ExchangeDcsBetSettingController : BetSettingBaseController
     {
@@ -32,16 +30,12 @@ namespace Fanex.Athena.Controllers.BetSettings
         private readonly IExchangeCommApiService _exchangeCommApiService;
 
         public ExchangeDcsBetSettingController(
-            ILanguageService languageService,
-            ISessionService sessionService,
             ICoreBetSettingService coreBetSettingService,
             IProductService productService,
             IDcsBetSettingService betSettingService,
-            IExchangeCommApiService exchangeCommApiService,
-             ILicenseeSettingService licenseeSettingService
-
+            IExchangeCommApiService exchangeCommApiService
             )
-        : base(languageService, sessionService, coreBetSettingService, productService, licenseeSettingService)
+        : base(coreBetSettingService, productService)
         {
             _betSettingService = betSettingService;
             _exchangeCommApiService = exchangeCommApiService;
@@ -85,7 +79,7 @@ namespace Fanex.Athena.Controllers.BetSettings
                 const int InvalidChargeCommissionError = 100;
                 return Json(new ResultInfo { Code = InvalidChargeCommissionError, Message = ViewResources.InvalidChargeCommission });
             }
-            var userSession = SessionService.UserSession;
+            var userSession = SessionServiceInstance.UserSession;
             var result = await _exchangeCommApiService.UpdateCommissionAsync(
                 userSession.UserId,
                 custId,

@@ -8,7 +8,6 @@ namespace Fanex.Athena.Controllers.Report
 {
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
-    using Service.Core.Users.Interfaces;
     using Service.Report.Interfaces;
 
     public partial class ReportAPIController : NonCultureBaseController
@@ -18,15 +17,13 @@ namespace Fanex.Athena.Controllers.Report
         private readonly ICustomerTurnoverService _customerTurnoverService;
 
         private readonly ITurnoverService _turnoverService;
-        private ILicenseeSettingService _licenseeSettingService;
+        private readonly ILicenseeSettingService _licenseeSettingService;
 
         public ReportAPIController(
-            ISessionService sessionService,
             IBetTypeService betTypeService,
             ICustomerTurnoverService customerTurnoverService,
             ITurnoverService turnoverService,
             ILicenseeSettingService licenseeSettingService)
-            : base(sessionService)
         {
             _betTypeService = betTypeService;
             _customerTurnoverService = customerTurnoverService;

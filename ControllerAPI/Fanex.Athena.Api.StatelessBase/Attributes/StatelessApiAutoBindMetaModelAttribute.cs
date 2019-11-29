@@ -2,6 +2,7 @@
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 using Fanex.Athena.DataAccess.Core.Configuration;
+using Fanex.Athena.Extension.Helper;
 using Fanex.Athena.Service.StatelessCore.Utility;
 
 namespace Fanex.Athena.Api.StatelessBase.Attributes
@@ -42,7 +43,8 @@ namespace Fanex.Athena.Api.StatelessBase.Attributes
             }
             if (BindIp)
             {
-                AutoBindMetaModelService.MapIp(actionArgument, actionContext.Request);
+                AutoBindMetaModelService.MapIp(actionArgument, 
+                    ClientHelper.GetClientIp(actionContext.Request));
             }
 
             if (BindBalanceUpAndMoveBetDay)

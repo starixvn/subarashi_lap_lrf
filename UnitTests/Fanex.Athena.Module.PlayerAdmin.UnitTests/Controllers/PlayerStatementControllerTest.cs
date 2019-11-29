@@ -87,10 +87,12 @@
 
         private PlayerStatementController CreateController()
         {
-            return new PlayerStatementController(
-                LangService,
-                SessionService,
+            var result = new PlayerStatementController(
                 _playerStatementService);
+            result.LangService = LangService;
+            result.SessionServiceInstance = SessionService;
+
+            return result;
         }
     }
 }

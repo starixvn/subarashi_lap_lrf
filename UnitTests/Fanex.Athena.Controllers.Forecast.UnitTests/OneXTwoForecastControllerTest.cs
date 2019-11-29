@@ -150,13 +150,11 @@
             _forecastOneXTwoDataAccess = Substitute.For<IForecastOneXTwoDataAccess>();
             _leagueDataAccess = Substitute.For<ILeagueDataAccess>();
 
-            var controller = new OneXTwoForecastController(
-                LangService,
-                SessionService,
-                _leagueDataAccess,
-                _forecastOneXTwoDataAccess)
+            var controller = new OneXTwoForecastController(_leagueDataAccess, _forecastOneXTwoDataAccess)
             {
-                ControllerContext = ControllerContext
+                ControllerContext = ControllerContext,
+                LangService = LangService,
+                SessionServiceInstance = SessionService
             };
 
             return controller;

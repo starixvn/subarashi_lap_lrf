@@ -3,6 +3,7 @@ import Site from '../../../lib/site'
 
 export const HeaderText = {
     Index: '#',
+    WhiteLabel: LangHelper.getSingleResource("Whitelabel"),
     Subsidiary: LangHelper.getSingleResource("Subsidiary"),
     CurrencyName: LangHelper.getSingleResource("Currency"),
     Product: LangHelper.getSingleResource("Product"),
@@ -11,7 +12,7 @@ export const HeaderText = {
     CustomerWinLoss: LangHelper.getSingleResource("CustomerW_L"),
     SubsidiaryWinLoss: `${LangHelper.getSingleResource("SubsidiaryWL")}`,
     ExternalId: LangHelper.getSingleResource("ExternalId"),
-    SystemId: LangHelper.getSingleResource("SystemId"),
+    SystemId: LangHelper.getSingleResource("SystemId")
 }
 
 export const TotalText = {

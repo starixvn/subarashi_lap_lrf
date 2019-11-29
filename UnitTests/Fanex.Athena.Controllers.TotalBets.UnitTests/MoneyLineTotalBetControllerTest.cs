@@ -79,10 +79,11 @@
 
         private MoneyLineTotalBetController CreateController()
         {
-            return new MoneyLineTotalBetController(
-                            LangService,
-                            SessionService,
-                            _moneyLineDataAccess);
+            return new MoneyLineTotalBetController(_moneyLineDataAccess)
+            {
+                LangService = LangService,
+                SessionServiceInstance = SessionService
+            };
         }
     }
 }

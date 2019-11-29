@@ -26,16 +26,12 @@
     [FunctionAuthorization(PermissionKeys.ResultAmendmentNotificationReport)]
     [SessionState(SessionStateBehavior.ReadOnly)]
     [CheckUMFilter]
-    public class NotificationReportController : ContentBaseController
+    public class NotificationReportController : CultureBaseController
     {
         private readonly INotificationService _notificationService;
-
         public NotificationReportController(
-            ILanguageService languageService,
-            ISessionService sessionService,
              INotificationService notificationService
             )
-        : base(languageService, sessionService)
         {
             _notificationService = notificationService;
         }
@@ -47,7 +43,7 @@
             {
                 FromDate = DateTimeHelper.GetFirstDateOfWeek(DateTime.Now, DayOfWeek.Sunday),
                 ToDate = DateTime.Now,
-                LicenseeName = SessionService.LicenseeSession.LicenseeName
+                LicenseeName = SessionServiceInstance.LicenseeSession.LicenseeName
             };
 
             return View("~/Views/Desktop/Module/Notification/Notification.cshtml", model);
@@ -92,8 +88,8 @@
         [HttpPost]
         public ActionResult MarkNotificationAsRead(NotificationMarkAsReadMetaModel metaModel)
         {
-            metaModel.UserName = SessionService.UserSession.UserName;
-            metaModel.LicenseeName = SessionService.LicenseeSession.LicenseeName;
+            metaModel.UserName = SessionServiceInstance.UserSession.UserName;
+            metaModel.LicenseeName = SessionServiceInstance.LicenseeSession.LicenseeName;
 
             var result = _notificationService.MarkNotificationAsRead(metaModel);
 
@@ -120,9 +116,9 @@
 
         private void UpdateMetaModel(NotificationMetaModel metaModel)
         {
-            var userSession = SessionService.UserSession;
+            var userSession = SessionServiceInstance.UserSession;
             metaModel.UserName = userSession.UserName;
-            metaModel.LicenseeName = SessionService.LicenseeSession.LicenseeName;
+            metaModel.LicenseeName = SessionServiceInstance.LicenseeSession.LicenseeName;
             metaModel.Language = Util.MapLanguages.GetValueOrDefault(userSession.Language, "en");
         }
     }

@@ -4,7 +4,7 @@ namespace Fanex.Athena.Model.Report.DTO.SubsidiaryPerformance
 {
     public class SubsidiaryResultViewModel
     {
-        public IEnumerable<SubsidiaryPerformanceDataModel> Data { get; set; }
+        public IEnumerable<SubsidiaryPerformanceGroup> Data { get; set; }
 
         public IDictionary<string, SubsidiaryPerformanceBase> Total { get; set; }
 

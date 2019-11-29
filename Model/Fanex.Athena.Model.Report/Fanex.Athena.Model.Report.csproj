@@ -140,8 +140,9 @@
     <Compile Include="DTO\ColossusBetWinLoss.cs" />
     <Compile Include="DTO\LicenseeWinLossByTimeZone.cs" />
     <Compile Include="DTO\Result\KenoExtendedToken.cs" />
+    <Compile Include="DTO\SubsidiaryPerformance\SubsidiaryPerformanceGroup.cs" />
+    <Compile Include="DTO\SubsidiaryPerformance\SubsidiaryPerformanceSummary.cs" />
     <Compile Include="DTO\SubsidiaryPerformance\SubsidiaryPerformanceDetail.cs" />
-    <Compile Include="DTO\SubsidiaryPerformance\SubsidiaryPerformanceDataModel.cs" />
     <Compile Include="DTO\SubsidiaryPerformance\SubsidiaryPerformance.cs" />
     <Compile Include="DTO\SubsidiaryPerformance\SubsidiaryPerformanceBase.cs" />
     <Compile Include="DTO\SubsidiaryPerformance\SubsidiaryResultViewModel.cs" />
@@ -172,9 +173,9 @@
     <Compile Include="MetaModel\BaseReportMetaModel.cs" />
     <Compile Include="MetaModel\ActiveCustomerMetaModel.cs" />
     <Compile Include="MetaModel\LicenseeWinLossByTimeZoneMetaModel.cs" />
+    <Compile Include="MetaModel\PromotionPrizeMetaModel.cs" />
     <Compile Include="MetaModel\Result\GetSportResultMetaModel.cs" />
     <Compile Include="MetaModel\Result\ResultMetaModel.cs" />
-    <Compile Include="MetaModel\PromotionPrizeMetaModel.cs" />
     <Compile Include="MetaModel\SpecialLicenseeWinLossMetaModel.cs" />
     <Compile Include="MetaModel\SubsidiaryPerformanceMetaModel.cs" />
     <Compile Include="MetaModel\ColossusBetsWinLossMetaModel.cs" />
@@ -194,7 +195,6 @@
     <Compile Include="MetaModel\PlatformWinLossMetaModel.cs" />
     <Compile Include="MetaModel\TurnoverMetaModel.cs" />
     <Compile Include="MetaModel\WinLossByBetTypeMetaModel.cs" />
-    <Compile Include="PromotionPrize.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResultModel\ActiveCustomerSummaryResultModel.cs" />
     <Compile Include="ResultModel\LiveReportDetailResultModel.cs" />

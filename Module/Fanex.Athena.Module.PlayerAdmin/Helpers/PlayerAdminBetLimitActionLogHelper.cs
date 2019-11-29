@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Linq;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Module.PlayerAdmin.DataDomains;
@@ -28,7 +29,7 @@
             PlayerBetLimitUpdateMetaModel<AgCasinoBetLimitMetaModel> metaModel,
             bool isSuccessful)
         {
-            return CreateLogInfo(metaModel, new PlayerBetLimitDetailedLogMetaModel[1] { BuildGroupLogDetail(metaModel.Setting, isSuccessful) });
+            return CreateLogInfo(metaModel, new[] { BuildGroupLogDetail(metaModel.Setting, isSuccessful) });
         }
 
         public static PlayerBetLimitLogMetaModel CreateLogInfo<T>(
@@ -54,40 +55,52 @@
             int[] logDetailIds)
         {
             var status = isSuccessful ? Success : False;
-
-            foreach (var item in setting)
+            var updatedItems = setting.Where(x => x.IsUpdated);
+            foreach (var item in updatedItems)
             {
-                if (item.IsUpdated)
+                var sportId = getSportTypeFunc?.Invoke(item);
+                for (var i = 0; i < logDetailIds.Length; i++)
                 {
-                    var id = getSportTypeFunc(item);
-                    for (var i = 0; i < logDetailIds.Length; i++)
+                    var logDetailId = logDetailIds[i];
+                    var betLimitLogDetailItem = CreateLogDetailItemByAction(logDetailId, sportId, status, item);
+
+                    if (betLimitLogDetailItem != null)
                     {
-                        var logDetailId = logDetailIds[i];
-                        
-                        if (logDetailId == LogActionDetailId.UpdatingMinBet && item.MinBet != item.OldMinBet)
-                        {
-                            yield return CreateBetLimitLogDetailItem(logDetailId, id, status, item.OldMinBet, item.MinBet);
-                        }
-
-                        if (logDetailId == LogActionDetailId.UpdatingMaxBet && item.MaxBet != item.OldMaxBet)
-                        {
-                            yield return CreateBetLimitLogDetailItem(logDetailId, id, status, item.OldMaxBet, item.MaxBet);
-                        }
-
-                        if ((logDetailId == LogActionDetailId.UpdatingMaxPerMatch
-                            || logDetailId == LogActionDetailId.UpdatingMaxBetPerDraw)
-                            && item.MaxPerMatch != item.OldMaxPerMatch)
-                        {
-                            yield return CreateBetLimitLogDetailItem(logDetailId, id, status, item.OldMaxPerMatch, item.MaxPerMatch);
-                        }
-
-                        if (logDetailId == LogActionDetailId.UpdatingMaxPerBall && item.MaxPerBall != item.OldMaxPerBall)
-                        {
-                            yield return CreateBetLimitLogDetailItem(logDetailId, id, status, item.OldMaxPerBall, item.MaxPerBall);
-                        }
+                        yield return betLimitLogDetailItem;
                     }
                 }
             }
+        }
+
+        private static PlayerBetLimitDetailedLogMetaModel CreateLogDetailItemByAction(
+            int logDetailId,
+            string sportId,
+            string status,
+            PlayerBetLimitMetaModel item)
+        {
+            if (logDetailId == LogActionDetailId.UpdatingMinBet && item.MinBet != item.OldMinBet)
+            {
+                return CreateLogDetailItem(logDetailId, sportId, status, item.OldMinBet, item.MinBet);
+            }
+
+            if (logDetailId == LogActionDetailId.UpdatingMaxBet && item.MaxBet != item.OldMaxBet)
+            {
+                return CreateLogDetailItem(logDetailId, sportId, status, item.OldMaxBet, item.MaxBet);
+            }
+
+            if ((logDetailId == LogActionDetailId.UpdatingMaxPerMatch
+                || logDetailId == LogActionDetailId.UpdatingMaxBetPerDraw)
+                && item.MaxPerMatch != item.OldMaxPerMatch)
+            {
+                return CreateLogDetailItem(logDetailId, sportId, status, item.OldMaxPerMatch, item.MaxPerMatch);
+            }
+
+            if (logDetailId == LogActionDetailId.UpdatingMaxPerBall && item.MaxPerBall != item.OldMaxPerBall)
+            {
+                return CreateLogDetailItem(logDetailId, sportId, status, item.OldMaxPerBall, item.MaxPerBall);
+            }
+
+            return null;
         }
 
         private static PlayerBetLimitDetailedLogMetaModel BuildGroupLogDetail(AgCasinoBetLimitMetaModel setting, bool isSuccessful)
@@ -102,7 +115,7 @@
             };
         }
 
-        private static PlayerBetLimitDetailedLogMetaModel CreateBetLimitLogDetailItem(
+        private static PlayerBetLimitDetailedLogMetaModel CreateLogDetailItem(
             int logDetailId,
             string id,
             string status,
@@ -114,8 +127,8 @@
                 DetailedId = logDetailId,
                 SportType = id,
                 Status = status,
-                Old = oldValue.ToString(),
-                New = newValue.ToString()
+                Old = oldValue.ToString(CultureInfo.InvariantCulture),
+                New = newValue.ToString(CultureInfo.InvariantCulture)
             };
         }
     }

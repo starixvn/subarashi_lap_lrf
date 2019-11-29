@@ -76,7 +76,7 @@
                 _betSettingService.GetStatusAsync(metaModel.CustId, metaModel.ProductId)
                     .Returns(Task.FromResult(isEnabled));
 
-                _exchangeCommApiService.GetCommission( metaModel.CustId)
+                _exchangeCommApiService.GetCommission(metaModel.CustId)
                     .Returns(new ResultInfo<double> { Code = 1, Message = "Error" });
 
                 // Action
@@ -146,12 +146,17 @@
         private ExchangeDcsBetSettingController CreateController()
         {
             var controller = new ExchangeDcsBetSettingController(
-                LangService,
-                SessionService,
                 CoreBetSettingService,
                 ProductService,
                 _betSettingService,
-                _exchangeCommApiService, LicenseeSettingService);
+                _exchangeCommApiService)
+            {
+                LangService = LangService,
+                SessionServiceInstance = SessionService,
+                LicenseeSettingServiceInstance = LicenseeSettingService,
+                AppSettingInstance = AppSettings
+
+            };
 
             return controller;
         }

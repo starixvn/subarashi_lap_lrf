@@ -35,7 +35,7 @@
         private HttpActionContext _actionContext;
 
         [OneTimeSetUp]
-        public void OneTimeSetUp()
+        public void FixtureSetUp()
         {
             _licenseeSettingService = Substitute.For<ILicenseeSettingService>();
             _sessionService = Substitute.For<ISessionService>();

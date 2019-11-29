@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
     using Model.Core.ResultModel;
     using Model.Customer.DTO;
     using Model.Customer.MetaModel;
@@ -13,7 +14,7 @@
         [Test]
         public void PostCustomerList_UserNameIsNotEqualPlaceholderUsername_ReturnUserName()
         {
-            using (var controller = CreateContoller())
+            using (var controller = CreateController())
             {
                 // Arrange
                 const string UserName = "UserName";
@@ -40,7 +41,7 @@
         [Test]
         public void PostCustomerList_IsFakeLicensee_PlaceholderUsernameIsExternalId()
         {
-            using (var controller = CreateContoller())
+            using (var controller = CreateController())
             {
                 // Arrange
                 var userName = Resources.ViewResources.ExternalId;
@@ -66,9 +67,9 @@
         }
 
         [Test]
-        public async System.Threading.Tasks.Task PostCustomerList_IsFakeLicensee_PlaceholderUsernameIsExternalIdOrSystemIdAsync()
+        public async Task PostCustomerList_IsFakeLicensee_PlaceholderUsernameIsExternalIdOrSystemIdAsync()
         {
-            using (var controller = CreateContoller())
+            using (var controller = CreateController())
             {
                 // Arrange
                 var userName = Resources.ViewResources.ExternalIdOrSystemId;
@@ -95,7 +96,7 @@
         [Test]
         public void PostCustomerList_WhenCall_CallServiceToGetData()
         {
-            using (var controller = CreateContoller())
+            using (var controller = CreateController())
             {
                 // Arrange
                 var metaModel = new CustomerListMetaModel();

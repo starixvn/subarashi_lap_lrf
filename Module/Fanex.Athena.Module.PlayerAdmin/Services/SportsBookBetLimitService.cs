@@ -44,10 +44,11 @@
                 throw new InvalidOperationException("There is no E-sport setting data.");
             }
 
-            var getSBSettingTask = await _betSetting.GetSettingAsync(custId, isShowMixedSport).ConfigureAwait(false);
+            var sbSettings = await _betSetting.GetSettingAsync(custId, isShowMixedSport).ConfigureAwait(false);
 
-            var result = getSBSettingTask.ToList();
-            result.Insert(EsportIndex, eSportSetting.First());
+            var result = sbSettings.ToList();
+            var sbSettingTotal = sbSettings.Count();
+            result.Insert(sbSettingTotal > EsportIndex ? EsportIndex: sbSettingTotal, eSportSetting.First());
 
             return result;
         }
@@ -108,7 +109,7 @@
                 setting,
                 x => x.Id,
                 isSuccessful,
-                new int[3] { LogActionDetailId.UpdatingMinBet, LogActionDetailId.UpdatingMaxBet, LogActionDetailId.UpdatingMaxPerMatch });
+                new [] { LogActionDetailId.UpdatingMinBet, LogActionDetailId.UpdatingMaxBet, LogActionDetailId.UpdatingMaxPerMatch });
         }
     }
 }

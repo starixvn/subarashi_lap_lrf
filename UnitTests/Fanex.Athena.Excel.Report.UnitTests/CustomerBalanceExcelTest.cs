@@ -24,23 +24,24 @@ namespace Fanex.Athena.Excel.Report.UnitTests
     public class CustomerBalanceExcelTest : BaseReportExcelTest
     {
         private const int ColumnAdjustment = 7;
-        private const int ColumnAffiliateTransfer = 16;
-        private const int ColumnAmountDueToBa = 19;
+        private const int ColumnAffiliateTransfer = 17;
+        private const int ColumnAmountDueToBa = 20;
         private const int ColumnBonus = 6;
-        private const int ColumnClosingBalance = 15;
-        private const int ColumnCommBa = 18;
-        private const int ColumnCustomerComm = 13;
-        private const int ColumnCustomerTotal = 14;
-        private const int ColumnCustomerWinLoss = 12;
+        private const int ColumnClosingBalance = 16;
+        private const int ColumnCommBa = 19;
+        private const int ColumnCustomerComm = 14;
+        private const int ColumnCustomerTotal = 15;
+        private const int ColumnCustomerWinLoss = 13;
         private const int ColumnDeposit = 4;
-        private const int ColumnDrawGame = 9;
+        private const int ColumnDrawGame = 10;
         private const int ColumnExternalId = 1;
-        private const int ColumnNetTurnOver = 10;
+        private const int ColumnNetTurnOver = 11;
         private const int ColumnOpeningBalance = 3;
-        private const int ColumnPendingFunds = 11;
+        private const int ColumnPendingFunds = 12;
+        private const int ColumnPromotion = 8;
         private const int ColumnSystemId = 2;
-        private const int ColumnTurnOver = 8;
-        private const int ColumnTurnoverBa = 17;
+        private const int ColumnTurnOver = 9;
+        private const int ColumnTurnoverBa = 18;
         private const int ColumnWithdrawal = 5;
 
         private const int ColumnCount = 21;
@@ -113,7 +114,7 @@ namespace Fanex.Athena.Excel.Report.UnitTests
             var headerTextList = new[]
             {
                 "#", ViewResources.ExternalId, ViewResources.SystemId, ViewResources.OpeningBalance, ViewResources.Deposit,
-                ViewResources.Withdrawal, ViewResources.Bonus, ViewResources.Adjustment, ViewResources.Turnover,
+                ViewResources.Withdrawal, ViewResources.Bonus, ViewResources.Adjustment, ViewResources.Promotion, ViewResources.Turnover,
                 ViewResources.DrawGame, ViewResources.NetTurnover, ViewResources.PendingFunds, ViewResources.CustomerW_L,
                 ViewResources.CustomerW_L, ViewResources.CustomerW_L, ViewResources.ClosingBalance, ViewResources.AffiliateTransfer,
                 ViewResources.ProductBA
@@ -230,6 +231,7 @@ namespace Fanex.Athena.Excel.Report.UnitTests
                 row.Cells[ColumnWithdrawal].Received(1).SetCellValue(DataItem.Withdrawal);
                 row.Cells[ColumnBonus].Received(1).SetCellValue(DataItem.Bonus);
                 row.Cells[ColumnAdjustment].Received(1).SetCellValue(DataItem.Adjustment);
+                row.Cells[ColumnPromotion].Received(1).SetCellValue(DataItem.Promotion);
                 row.Cells[ColumnTurnOver].Received(1).SetCellValue(DataItem.Turnover);
                 row.Cells[ColumnDrawGame].Received(1).SetCellValue(DataItem.DrawGame);
                 row.Cells[ColumnNetTurnOver].Received(1).SetCellValue(DataItem.NetTurnover);

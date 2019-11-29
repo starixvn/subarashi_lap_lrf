@@ -192,13 +192,13 @@
             _betSettingService = Substitute.For<ISportsbookBetSettingService>();
 
             var controller = new SportsbookBetSettingController(
-                LangService,
-                SessionService,
                 CoreBetSettingService,
                 ProductService,
-                _betSettingService, LicenseeSettingService)
+                _betSettingService)
             {
-                ControllerContext = ControllerContext
+                ControllerContext = ControllerContext,
+                SessionServiceInstance = SessionService,
+                LicenseeSettingServiceInstance = LicenseeSettingService
             };
 
             controller.HttpContext.Request["custid"].Returns("1");

@@ -168,17 +168,18 @@
                 {
                     ProductCode = x
                 });
+
             var productService = Substitute.For<IProductService>();
             productService.GetProductAccess(
                 SessionService.LicenseeSession.LicenseeId,
                 SessionService.UserSession.Language).Returns(new ProductAccess(productList.ToList()));
-            var controller = Substitute.ForPartsOf<WinLossByBetTypeReportController>(
-                LangService,
-                SessionService,
-                productService,
-                _balanceUpDataAccess,
-                _winLossByBetTypeDataAccess);
+
+            var controller = Substitute.ForPartsOf<WinLossByBetTypeReportController>(_balanceUpDataAccess, _winLossByBetTypeDataAccess);
+            controller.LangService = LangService;
+            controller.SessionServiceInstance = SessionService;
+            controller.ProductServiceInstance = productService;
             controller.When(x => x.CreateExcel(string.Empty, null, null, null)).DoNotCallBase();
+
             return controller;
         }
     }

@@ -6,43 +6,30 @@
 
 namespace Fanex.Athena.Controllers.Report
 {
-    using System.Web.Mvc;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
 
     using Model.Core.DataDomain;
 
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
+    using System.Web.Mvc;
 
     [FunctionAuthorization(PermissionKeys.ReportCustomerPendingFunds)]
     public class CustomerPendingFundsReportController : ReportBaseController
     {
-        public CustomerPendingFundsReportController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IProductService productService,
-             ILicenseeSettingService licenseeSettingService
-            )
-        : base(languageService, sessionService, productService, licenseeSettingService)
-        {
-        }
-
         [HttpGet]
         public ActionResult Index()
         {
-            var licenseeSession = SessionService.LicenseeSession;
-            var userSession = SessionService.UserSession;
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
+            var userSession = SessionServiceInstance.UserSession;
             var metaModel = new CustomerPendingFundsMetaModel
             {
                 LicenseeId = licenseeSession.LicenseeId,
                 UserId = userSession.UserId,
                 BaseCurrency = userSession.DefaultBaseCurrency
             };
-            var productAccess = ProductService.GetSingleWalletProductAccess(
+            var productAccess = ProductServiceInstance.GetSingleWalletProductAccess(
                 metaModel.LicenseeId,
                 userSession.Language,
                 FunctionNames.CustomerPendingFunds);

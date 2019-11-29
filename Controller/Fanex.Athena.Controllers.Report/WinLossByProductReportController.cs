@@ -6,41 +6,25 @@
 
 namespace Fanex.Athena.Controllers.Report
 {
-    using System;
-    using System.Linq;
-    using System.Web.Mvc;
-
-    using Extension.Utility;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
 
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
+    using System;
+    using System.Linq;
+    using System.Web.Mvc;
 
     [FunctionAuthorization(PermissionKeys.ReportWinLossByProduct)]
     public class WinLossByProductReportController : ReportBaseController
     {
-        public WinLossByProductReportController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IAppSettings appSetting,
-            IProductService productService,
-             ILicenseeSettingService licenseeSettingService
-            )
-            : base(languageService, sessionService, appSetting, productService, licenseeSettingService)
-        {
-        }
-
         [HttpGet]
         public ActionResult Index()
         {
-            var licenseeSession = this.SessionService.LicenseeSession;
-            var userSession = SessionService.UserSession;
-            var productAccess = this.ProductService.GetSingleWalletProductAccess(
+            var licenseeSession = this.SessionServiceInstance.LicenseeSession;
+            var userSession = SessionServiceInstance.UserSession;
+            var productAccess = this.ProductServiceInstance.GetSingleWalletProductAccess(
                 licenseeSession.LicenseeId,
                 userSession.Language,
                 FunctionNames.WinLossByProduct);
@@ -67,7 +51,7 @@ namespace Fanex.Athena.Controllers.Report
                 IsAllowedCustomerCommission = licenseeSession.IsAllowedCustomerComm,
                 ProductAccess = productAccess,
                 IsFakeLicensee = IsFakeLicensee(licenseeSession.LicenseeName),
-                HasAmountDueToColumn = AppSettings.HasAmountDueToColumn
+                HasAmountDueToColumn = AppSettingInstance.HasAmountDueToColumn
             };
 
             return View("~/Views/Desktop/Report/WinLossByProduct/Main.cshtml", model);

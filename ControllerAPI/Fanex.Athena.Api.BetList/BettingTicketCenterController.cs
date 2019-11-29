@@ -36,7 +36,6 @@
         {
             var userSession = SessionService.UserSession;
             metaModel.HasPlayerCom = SessionService.LicenseeSession.IsAllowedCustomerComm;
-            metaModel.UserCurrencyList = userSession.CurrencyList;
             metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList);
 
             return await _betListApiClient.PostAsync("/BettingTicketCenter/GetBySingleCustomer",
@@ -52,7 +51,6 @@
             var userSession = SessionService.UserSession;
             metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList);
             metaModel.HasPlayerCom = SessionService.LicenseeSession.IsAllowedCustomerComm;
-            metaModel.UserCurrencyList = userSession.CurrencyList;
 
             return await _betListApiClient.PostAsync("/BettingTicketCenter/GetByRefno",
                 metaModel,
@@ -69,7 +67,6 @@
 
             metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, currencyList);
             metaModel.HasPlayerCom = SessionService.LicenseeSession.IsAllowedCustomerComm;
-            metaModel.UserCurrencyList = userSession.CurrencyList;
 
             return await _betListApiClient.PostAsync("/BettingTicketCenter/GetByRunning",
                 metaModel,

@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    public class SubsidiaryPerformanceDataModel
+    public class SubsidiaryPerformanceSummary
     {
         public string Subsidiary { get; set; }
 

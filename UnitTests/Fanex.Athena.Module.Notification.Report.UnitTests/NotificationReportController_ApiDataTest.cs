@@ -1,21 +1,17 @@
 ﻿namespace Fanex.Athena.Module.Notification.Report.UnitTests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Net;
+    using System.Web.Mvc;
     using Fanex.Athena.Controllers.Base.UnitTests;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Core.ResultModel;
     using Fanex.Athena.Module.Notification.DTO;
     using Fanex.Athena.Module.Notification.MetaModel;
-    using Fanex.Athena.Module.Notification.Report;
     using Fanex.Athena.Module.Notification.Service.Interfaces;
-
     using NSubstitute;
-
     using NUnit.Framework;
-
-    using System;
-    using System.Collections.Generic;
-    using System.Net;
-    using System.Web.Mvc;
 
     public class NotificationReportController_ApiDataTest : CultureBaseControllerHelperTest
     {
@@ -33,10 +29,9 @@
             SetUpDefaultFakeData();
 
             _service = Substitute.For<INotificationService>();
-            _controller = Substitute.ForPartsOf<NotificationReportController>(
-                LangService,
-                SessionService,
-                _service);
+            _controller = Substitute.ForPartsOf<NotificationReportController>(_service);
+            _controller.LangService = LangService;
+            _controller.SessionServiceInstance = SessionService;
         }
 
         [OneTimeTearDown]

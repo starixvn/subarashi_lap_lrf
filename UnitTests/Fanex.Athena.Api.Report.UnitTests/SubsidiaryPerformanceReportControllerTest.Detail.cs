@@ -4,7 +4,7 @@
     using System.Threading.Tasks;
 
     using Base.UnitTests;
-
+    using Fanex.Athena.Model.Auth;
     using Model.Core.ResultModel;
     using Model.Report.DTO.SubsidiaryPerformance;
 
@@ -21,7 +21,7 @@
             // Arrange
             var metaModel = GetMetaModel();
             StubSingleWalletProductAccess(new[] { "SB", "BA" });
-            _subsidiaryService.GetCurrencyAgentList(Arg.Any<string>(), Arg.Any<bool>()).Returns(new Dictionary<int, IEnumerable<int>>());
+            _subsidiaryService.GetCurrencyAgentList(Arg.Any<UserAuthInfo>(), Arg.Any<string>(), Arg.Any<string>(), Arg.Any<bool>()).Returns(new Dictionary<int, IEnumerable<int>>());
 
             // Action
             var result = await _controller.Detail(metaModel);
@@ -45,7 +45,7 @@
                 SummaryTotal = new Dictionary<string, SubsidiaryPerformanceDetail> { { "abc", new SubsidiaryPerformanceDetail() } },
                 TotalData = new SubsidiaryPerformanceDetail()
             };
-            _subsidiaryService.GetCurrencyAgentList(Arg.Any<string>(), Arg.Any<bool>()).Returns(agentList);
+            _subsidiaryService.GetCurrencyAgentList(Arg.Any<UserAuthInfo>(), Arg.Any<string>(), Arg.Any<string>(), Arg.Any<bool>()).Returns(agentList);
             _service.GetDetailData(metaModel, Arg.Any<IDictionary<int, string>>()).Returns(resultData);
 
             // Action

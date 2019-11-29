@@ -6,7 +6,7 @@
 
 namespace Fanex.Athena.Model.Core.DTO.Common
 {
-    using System;
+    using System.Collections.Generic;
 
     public class CheckedItem
     {
@@ -14,6 +14,10 @@ namespace Fanex.Athena.Model.Core.DTO.Common
 
         public int ID { get; set; }
 
+        public string Value { get; set; }
+
         public bool Checked { get; set; }
+
+        public IEnumerable<CheckedItem> Children { get; set; }
     }
 }

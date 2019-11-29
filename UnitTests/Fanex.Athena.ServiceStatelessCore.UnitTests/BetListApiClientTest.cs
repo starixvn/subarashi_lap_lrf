@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -40,10 +41,10 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
             var betListApiClient = new BetListApiClient(client);
 
             // Action
-            var result = await betListApiClient.PostAsyncString(TestPath, TestValue, LANG).ConfigureAwait(false);
+            var result = await betListApiClient.PostAsyncStringAsync(TestPath, TestValue, LANG).ConfigureAwait(false);
 
             // Assert
-            Assert.That(passedRequest.Headers.GetValues("Accept-Language").ElementAt(0), Is.EqualTo(LANG));
+            Assert.That(passedRequest.Headers.GetValues("Language").ElementAt(0), Is.EqualTo(LANG));
             Assert.That(passedRequest.Headers.GetValues("Accept").ElementAt(0), Is.EqualTo("application/json"));
             Assert.That(passedRequest.Content, Is.Not.Null);
             Assert.That(result, Is.EqualTo(Result));
@@ -65,7 +66,7 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
             var betListApiClient = new BetListApiClient(client);
 
             // Action
-            var result = await betListApiClient.PostAsyncString(TestPath, TestValue, LANG).ConfigureAwait(false);
+            var result = await betListApiClient.PostAsyncStringAsync(TestPath, TestValue, LANG).ConfigureAwait(false);
 
             // Assert
             Assert.That(result.Length, Is.EqualTo(3));
@@ -81,7 +82,7 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
             var httpResponse = new HttpResponseMessage
             {
                 StatusCode = HttpStatusCode.OK,
-                Content = new StringContent(string.Empty)
+                Content = new StreamContent(new MemoryStream(new byte[] { 1 }))
             };
             var httpMessageHandler = Substitute.ForPartsOf<MockHttpMessageHandler>();
             httpMessageHandler.Send(Arg.Any<HttpRequestMessage>()).Returns(httpResponse);
@@ -92,7 +93,7 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
             var result = await betListApiClient.PostAsync(TestPath, TestValue, LANG).ConfigureAwait(false);
 
             // Assert
-            Assert.That(result, Is.EqualTo(httpResponse));
+            Assert.That(result.StatusCode, Is.EqualTo(HttpStatusCode.OK));
         }
     }
 }

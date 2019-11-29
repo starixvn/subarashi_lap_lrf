@@ -33,8 +33,8 @@
             });
             var betListApiClient = Substitute.For<IBetListApiClient>();
 
-            betListApiClient.PostAsyncString(Url, Arg.Any<object>(), SessionService.UserSession.Language).Returns(ExpectedResult);
-            using (var controller = new PPResultPopupController(LangService, SessionService, betListApiClient))
+            betListApiClient.PostAsyncStringAsync(Url, Arg.Any<object>(), SessionService.UserSession.Language).Returns(ExpectedResult);
+            using (var controller = CreateController(betListApiClient))
             {
                 // Action
                 var result = await controller.Index(CustId, GamePlayId);
@@ -42,7 +42,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    betListApiClient.Received(1).PostAsyncString(
+                    betListApiClient.Received(1).PostAsyncStringAsync(
                         Url,
                         Arg.Is<object>(
                             x => (string)x.GetValue("custId") == CustId &&
@@ -51,6 +51,16 @@
                     Assert.That(result, Is.EqualTo(ExpectedResult));
                 });
             }
+        }
+
+        private PPResultPopupController CreateController(IBetListApiClient betListApiClient)
+        {
+            return new PPResultPopupController(betListApiClient)
+            {
+                LangService = LangService,
+                SessionServiceInstance = SessionService,
+                AppSettingInstance = AppSettings
+            };
         }
     }
 }

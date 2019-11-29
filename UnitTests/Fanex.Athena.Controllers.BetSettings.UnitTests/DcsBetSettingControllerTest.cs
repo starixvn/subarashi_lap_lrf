@@ -375,13 +375,16 @@
         private DcsBetSettingController CreateController()
         {
             var controller = new DcsBetSettingController(
-                LangService,
-                SessionService,
                 CoreBetSettingService,
                 ProductService,
-                _betSettingService, LicenseeSettingService)
+                _betSettingService)
             {
-                ControllerContext = ControllerContext
+                ControllerContext = ControllerContext,
+                LangService = LangService,
+                SessionServiceInstance = SessionService,
+                LicenseeSettingServiceInstance = LicenseeSettingService,
+                AppSettingInstance = AppSettings
+
             };
 
             return controller;

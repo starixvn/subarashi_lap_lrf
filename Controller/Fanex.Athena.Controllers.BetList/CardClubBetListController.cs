@@ -1,31 +1,17 @@
 ﻿namespace Fanex.Athena.Controllers.BetList
 {
+    using Fanex.Athena.Web.ActionFilter;
+
+    using Model.BetList.MetaModel;
+
+    using Resources;
+
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using DataAccess.Core.Configuration.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Athena.Web.ActionFilter;
-    using Model.BetList.MetaModel;
-    using Resources;
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
-    using VendorAdapter.Interfaces;
 
     public class CardClubBetListController : BetListBaseController
     {
         private static readonly int[] HiddenColumns = new[] { ExternalIdColumn, SystemIdColumn, BetEffectiveColumn, LicenseeWLColumn };
-
-        public CardClubBetListController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IProductService productService,
-            IBalanceUpDataAccess balanceUpDataAccess,
-            ICacheRefAdapter cacheRefAdapter,
-            IBetListApiClient betListApiClient,
-            ILicenseeSettingService licenseeSettingService)
-        : base(languageService, sessionService, productService, balanceUpDataAccess, cacheRefAdapter, betListApiClient, licenseeSettingService)
-        {
-        }
 
         [HttpGet]
         [ValidationWebRequest(IsValidCurrency = true)]
@@ -39,7 +25,7 @@
         {
             metaModel.ShowingOption = new BetListShowingOption
             {
-                CustomerCommVisible = SessionService.LicenseeSession.IsAllowedCustomerComm
+                CustomerCommVisible = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm
             };
             metaModel.HiddenColumns = HiddenColumns;
             metaModel.Title = GetBetListDetailTitle(ViewResources.ProductCC, metaModel.Date);

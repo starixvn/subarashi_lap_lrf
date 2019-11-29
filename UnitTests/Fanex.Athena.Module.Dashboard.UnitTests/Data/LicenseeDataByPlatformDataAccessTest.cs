@@ -132,8 +132,6 @@
         {
             Assert.Multiple(() =>
             {
-                Assert.That(passedParam.GetValue("LicenseeID"), Is.EqualTo(metaModel.LicenseeId));
-                Assert.That(passedParam.GetValue("CurrencyIDList"), Is.EqualTo(metaModel.CurrencyIDList));
                 Assert.That(passedParam.GetValue("FromDate"), Is.EqualTo(metaModel.FromDate));
                 Assert.That(passedParam.GetValue("ToDate"), Is.EqualTo(metaModel.ToDate));
                 Assert.That(passedParam.GetValue("BaseCurrency"), Is.EqualTo(metaModel.BaseCurrency));

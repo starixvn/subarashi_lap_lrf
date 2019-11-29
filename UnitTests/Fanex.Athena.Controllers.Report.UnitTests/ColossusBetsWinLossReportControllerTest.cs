@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using System.Threading.Tasks;
     using System.Web.Mvc;
     using Base.UnitTests;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -12,7 +11,6 @@
     using NSubstitute;
     using NUnit.Framework;
     using Report;
-    using Service.Core.Common.Interfaces;
 
     [TestFixture]
     public class ColossusBetsWinLossReportControllerTest : CultureBaseControllerHelperTest
@@ -61,10 +59,12 @@
             productService.GetProductAccess(
                 SessionService.LicenseeSession.LicenseeId,
                 SessionService.UserSession.Language).Returns(new ProductAccess(productList.ToList()));
-            return new ColossusBetsWinLossReportController(
-                LangService,
-                SessionService,
-                productService);
+            return new ColossusBetsWinLossReportController()
+            {
+                LangService = LangService,
+                SessionServiceInstance = SessionService,
+                ProductServiceInstance = productService
+            };
         }
     }
 }

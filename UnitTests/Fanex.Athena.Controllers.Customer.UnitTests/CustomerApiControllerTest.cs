@@ -369,17 +369,19 @@
         private CustomerApiController CreateController()
         {
             var controller = Substitute.ForPartsOf<CustomerApiController>(
-               LangService,
-               SessionService,
-               AppSettings,
                _logger,
                _customerCommService,
                _customerListService,
                _groupComService,
                _licenseeDataAccess,
                _productService,
-               _authorizationService, _licenseeSettingService
+               _authorizationService
                );
+
+            controller.LangService = LangService;
+            controller.SessionServiceInstance = SessionService;
+            controller.AppSettingInstance = AppSettings;
+            controller.LicenseeSettingServiceInstance = _licenseeSettingService;
             controller.ControllerContext = ControllerContext;
             return controller;
         }

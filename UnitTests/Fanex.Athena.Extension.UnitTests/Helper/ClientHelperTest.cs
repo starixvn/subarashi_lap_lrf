@@ -14,7 +14,7 @@ namespace Fanex.Athena.Extension.UnitTests.Helper
             var request = new HttpRequestMessage();
             request.Properties[propertyKey] = propertyValue;
 
-            return ClientHelper.GetClientIpAddress(request);
+            return ClientHelper.GetClientIp(request);
         }
     }
 

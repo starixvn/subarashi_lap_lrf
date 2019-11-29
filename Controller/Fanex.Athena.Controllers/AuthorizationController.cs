@@ -6,20 +6,6 @@
 
 namespace Fanex.Athena.Controllers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Drawing;
-    using System.Drawing.Imaging;
-    using System.Globalization;
-    using System.IO;
-    using System.Text;
-    using System.Text.RegularExpressions;
-    using System.Web;
-    using System.Web.Caching;
-    using System.Web.Mvc;
-    using System.Web.Security;
-    using System.Web.UI;
-
     using Extension.Utility.Interfaces;
 
     using Fanex.Athena.Extension.Utility;
@@ -35,7 +21,19 @@ namespace Fanex.Athena.Controllers
 
     using Resources;
 
-    using Service.Core.Common.Interfaces;
+    using System;
+    using System.Collections.Generic;
+    using System.Drawing;
+    using System.Drawing.Imaging;
+    using System.Globalization;
+    using System.IO;
+    using System.Text;
+    using System.Text.RegularExpressions;
+    using System.Web;
+    using System.Web.Caching;
+    using System.Web.Mvc;
+    using System.Web.Security;
+    using System.Web.UI;
 
     public class AuthorizationController : CultureBaseController
     {
@@ -55,16 +53,11 @@ namespace Fanex.Athena.Controllers
 #pragma warning disable S107 // Methods should not have too many parameters
 
         public AuthorizationController(
-            ILanguageService languageService,
-            ISessionService sessionService,
             IMaintenanceService maintenanceService,
             IUserService userService,
             IAuthService authService,
-            IFormsAuthenticationService formAuthenticationService,
-            IAppSettings appSettings
+            IFormsAuthenticationService formAuthenticationService
             )
-            : base(languageService, sessionService, appSettings, null)
-#pragma warning restore S107 // Methods should not have too many parameters
         {
             _maintenanceService = maintenanceService;
             _userService = userService;
@@ -80,7 +73,7 @@ namespace Fanex.Athena.Controllers
         {
             var requestHost = Request.Url.AbsoluteUri;
 
-            var isInternalDomain = requestHost.Contains(AppSettings.GetValue("InternalSubDomain"));
+            var isInternalDomain = requestHost.Contains(AppSettingInstance.GetValue("InternalSubDomain"));
 
             if (!isInternalDomain)
             {
@@ -110,7 +103,7 @@ namespace Fanex.Athena.Controllers
             }
             else if (!IsValidCaptcha(model.Captcha))
             {
-                SessionService.CaptchaCode = CreateRandomCaptchaCode();
+                SessionServiceInstance.CaptchaCode = CreateRandomCaptchaCode();
                 SetErrorForView(InvalidCaptchaError, ViewResources.InvalidCaptchaMsg);
             }
             else
@@ -159,7 +152,7 @@ namespace Fanex.Athena.Controllers
                 return Json(RecheckInResult(ErrorType.UnderMaintenance, message), JsonRequestBehavior.AllowGet);
             }
 
-            var userSession = SessionService.UserSession;
+            var userSession = SessionServiceInstance.UserSession;
             var currentLoginId = Request["onid"];
             if (!Request.IsAuthenticated || string.IsNullOrEmpty(currentLoginId) || userSession == null)
             {
@@ -194,7 +187,7 @@ namespace Fanex.Athena.Controllers
 
             var code = CreateRandomCaptchaCode();
 
-            SessionService.CaptchaCode = code;
+            SessionServiceInstance.CaptchaCode = code;
 
             var img = CreateCaptcha(code);
 
@@ -265,7 +258,7 @@ namespace Fanex.Athena.Controllers
                 });
             }
 
-            var userSession = SessionService.UserSession;
+            var userSession = SessionServiceInstance.UserSession;
             if (userSession.IsInternal)
             {
                 return Json(new
@@ -318,9 +311,9 @@ namespace Fanex.Athena.Controllers
 
         private bool IsValidCaptcha(string inputCaptcha)
         {
-            var isAllowAutomationCaptchaCode = AppSettings.GetValue("AllowAutomationCaptchaCode") == "1";
+            var isAllowAutomationCaptchaCode = AppSettingInstance.GetValue("AllowAutomationCaptchaCode") == "1";
             if (isAllowAutomationCaptchaCode ||
-                inputCaptcha == SessionService.CaptchaCode ||
+                inputCaptcha == SessionServiceInstance.CaptchaCode ||
                 IsValidSecretCaptcha(inputCaptcha))
             {
                 return true;
@@ -331,15 +324,15 @@ namespace Fanex.Athena.Controllers
 
         private bool IsValidSecretCaptcha(string inputCaptcha)
         {
-            var secretCaptcha = AppSettings.GetValue("SecretCaptcha");
+            var secretCaptcha = AppSettingInstance.GetValue("SecretCaptcha");
             return !string.IsNullOrWhiteSpace(secretCaptcha) && inputCaptcha == secretCaptcha &&
-                 Regex.IsMatch(Request.UserHostAddress, AppSettings.GetValue("CompanyIP"));
+                 Regex.IsMatch(Request.UserHostAddress, AppSettingInstance.GetValue("CompanyIP"));
         }
 
         private void CreateSession(User user)
         {
             var onuserId = _authService.LoginOnUser(user, Session.SessionID, user.ServerId, Request.UserHostAddress);
-            SessionService.CreateNewSession(
+            SessionServiceInstance.CreateNewSession(
                 user.UserID,
                 onuserId,
                 user.Username,
@@ -351,7 +344,7 @@ namespace Fanex.Athena.Controllers
 
         private void DoSignOut()
         {
-            var userSession = SessionService.UserSession;
+            var userSession = SessionServiceInstance.UserSession;
             if (userSession != null)
             {
                 _authService.Logout(userSession.OnUserId);

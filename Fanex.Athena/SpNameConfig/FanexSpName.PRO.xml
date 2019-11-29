@@ -100,7 +100,6 @@
     <Setting Key="Lrf_Rpt_ExchangeWinloss_Ag" SpName="Lrf_Rpt_ExchangeWinloss_Ag" DbName="DBEXT.bodb02.bodbLicenseeNet" />
     <Setting Key="Lrf_Rpt_ExchangeWinloss_Mem" SpName="Lrf_Rpt_ExchangeWinloss_Mem" DbName="DBEXT.bodb02.bodbLicenseeNet" />
     <Setting Key="Lrf_Rpt_CasinoTurnover" SpName="Lrf_Rpt_CasinoTurnover" DbName="DBEXT.bodb02.bodbLicenseeNet" />
-    <Setting Key="Lrf_Rpt_PP_PromotionPrize" SpName="Lrf_Rpt_PP_PromotionPrize" DbName="DBEXT.bodb02.bodbLicenseeNet" />
   </Function>
 
   <Function Name="CustomerInformation">
@@ -215,6 +214,8 @@
   <Function Name="SiteConfig">
     <Setting Key="Lrf_SubsidiarySel" SpName="Lrf_SubsidiarySel" DbName="DBCUST.SiteConfig.bodbLicenseeNet" />
     <Setting Key="Lrf_GetUserLevelInfo" SpName="Lrf_GetUserLevelInfo" DbName="DBCUST.SiteConfig.bodbLicenseeNet" />
+    <Setting Key="Portal_Sub_GetSubsidiaryList" SpName="Portal_Sub_GetSubsidiaryList" DbName="DBCUST.SiteConfig.Dot_Admin_Portal" />
+
   </Function>
 </Functions>
 		

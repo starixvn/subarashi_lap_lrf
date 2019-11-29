@@ -75,10 +75,11 @@
 
         private LicenseeWinLossByTimeZoneReportController CreateController()
         {
-            var controller = Substitute.ForPartsOf<LicenseeWinLossByTimeZoneReportController>(
-                LangService,
-                SessionService,
-                _productService);
+            var controller = Substitute.ForPartsOf<LicenseeWinLossByTimeZoneReportController>();
+            controller.LangService = LangService;
+            controller.SessionServiceInstance = SessionService;
+            controller.ProductServiceInstance = _productService;
+
             return controller;
         }
     }

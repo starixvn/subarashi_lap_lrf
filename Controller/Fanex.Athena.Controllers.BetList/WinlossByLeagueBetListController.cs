@@ -6,22 +6,15 @@
 
 namespace Fanex.Athena.Controllers.BetList
 {
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-
-    using DataAccess.Core.Configuration.Interfaces;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DataDomain;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     using Model.BetList.MetaModel;
 
     using Resources;
 
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
-
-    using VendorAdapter.Interfaces;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
 
     using Web.ActionFilter;
 
@@ -29,18 +22,6 @@ namespace Fanex.Athena.Controllers.BetList
     public class WinlossByLeagueBetListController : BetListBaseController
     {
         private static readonly int[] HiddenColumns = new[] { ExternalIdColumn, SystemIdColumn, BetEffectiveColumn };
-
-        public WinlossByLeagueBetListController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IProductService productService,
-            IBalanceUpDataAccess balanceUpDataAccess,
-            ICacheRefAdapter cacheRefAdapter,
-            IBetListApiClient betListApiClient
-, ILicenseeSettingService licenseeSettingService)
-        : base(languageService, sessionService, productService, balanceUpDataAccess,
-              cacheRefAdapter, betListApiClient, licenseeSettingService)
-        { }
 
         [HttpGet]
         [ValidationWebRequest(IsValidCurrency = true)]
@@ -66,7 +47,7 @@ namespace Fanex.Athena.Controllers.BetList
                 viewinCurrency);
             metaModel.ShowingOption = new BetListShowingOption
             {
-                CustomerCommVisible = SessionService.LicenseeSession.IsAllowedCustomerComm,
+                CustomerCommVisible = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm,
             };
             metaModel.HiddenColumns = HiddenColumns;
             return await ProcessExportExcel(metaModel, "WinLossByLeagueBetList", "/BetList/ExportExcelWinlossByLeague").ConfigureAwait(false);

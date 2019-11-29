@@ -269,7 +269,7 @@ namespace Fanex.Athena.Api.Report
             if (metaModel.IsValid)
             {
                 var userCurrencyList = SessionService.UserSession.CurrencyList;
-                SortableReportResultModel<LicenseeWinLoss> result = null;
+                SortableReportResultModel<LicenseeWinLoss> result;
                 if (metaModel.DrillDownLevel == 0)
                 {
                     result = await _licenseeWinLossDataAccess.GetSummaryWinloss(metaModel, userCurrencyList).ConfigureAwait(false);
@@ -306,8 +306,8 @@ namespace Fanex.Athena.Api.Report
             var userSession = SessionService.UserSession;
             metaModel.DefaultBaseCurrency = userSession.DefaultBaseCurrency;
             metaModel.DrillDownLevel = level;
-            metaModel.DrillDownFromDate = fdate.HasValue ? fdate.Value : metaModel.DrillDownFromDate;
-            metaModel.DrillDownToDate = tdate.HasValue ? tdate.Value : metaModel.DrillDownToDate;
+            metaModel.DrillDownFromDate = fdate ?? metaModel.DrillDownFromDate;
+            metaModel.DrillDownToDate = tdate ?? metaModel.DrillDownToDate;
 
             if (IsValidParams(metaModel))
             {

@@ -8,13 +8,8 @@ namespace Fanex.Athena.Controllers.BetList
 {
     #region Using
 
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-    using System.Web.SessionState;
-
     using DataAccess.Core.Common.Interfaces;
+
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Web.ActionFilter;
 
@@ -25,23 +20,23 @@ namespace Fanex.Athena.Controllers.BetList
 
     using Resources;
 
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
+    using System.Web.SessionState;
 
     #endregion Using
 
     [SessionState(SessionStateBehavior.ReadOnly)]
     [CheckUMFilter]
     [FunctionAuthorization(PermissionKeys.ReportLastBetsMonitoring)]
-    public class LastBetsMonitoringBetListController : ContentBaseController
+    public class LastBetsMonitoringBetListController : CultureBaseController
     {
         private readonly ISportTypeDataAccess _sportTypeDataAccess;
 
         public LastBetsMonitoringBetListController(
-            ILanguageService languageService,
-            ISessionService sessionService,
             ISportTypeDataAccess sportTypeDataAccess)
-        : base(languageService, sessionService)
         {
             _sportTypeDataAccess = sportTypeDataAccess;
         }
@@ -52,13 +47,13 @@ namespace Fanex.Athena.Controllers.BetList
             var metaModel = new BetListMetaModel
             {
                 LicenseeId =
-                SessionService.LicenseeSession.LicenseeId,
-                BaseCurrency = SessionService.UserSession.DefaultBaseCurrency
+                SessionServiceInstance.LicenseeSession.LicenseeId,
+                BaseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency
             };
 
             var model = new LastBetsMonitoringViewModel
             {
-                CurrencyList = SessionService.UserSession.CurrencyList,
+                CurrencyList = SessionServiceInstance.UserSession.CurrencyList,
                 SportsList = await GetSports().ConfigureAwait(false),
                 Param = metaModel
             };

@@ -1,5 +1,6 @@
 ﻿@using Fanex.Athena.Model.Customer.ViewModel;
 @using Fanex.Athena.Model.Customer.MetaModel;
+@using Fanex.Athena.Model.Core.DataDomain;
 @model CustomerListViewModel
 @{
     var showOption = new
@@ -10,15 +11,15 @@
         showUserGuide = !Model.IsFakeLicensee,
         showStatus = Model.Param.IsShowStatusDropdown,
         showBA = !Model.IsSubsidiary && Model.ProductAccess.IsAllowBA,
-        showSubsidiary = Model.HasSubsidiaryList
+        showSubsidiary = Model.ViewType != SubsidiaryViewType.NotManagement,
+        isMasterSubsidiaryView = Model.ViewType == SubsidiaryViewType.MasterManagement
     };
 }
 <div class="page-form">
     @using (Html.BeginForm("CustomerList", "Customer", FormMethod.Post, new { @id = "CustomerForm" }))
     {
-        <div class="@(Model.IsFakeLicensee ? "row" : string.Empty)">
             @Html.AntiForgeryToken()
-            <div class="@(!Model.IsFakeLicensee ? "row" : string.Empty)">
+            <div class="row">
                 <div class="col l2 m2 s12 input-field">
                     @DesktopRazorHelper.CurrencyList(Model.CurrencyList, "select", Model.Param.CurrencyId)
                     <label>@ViewResources.Currency</label>
@@ -29,15 +30,9 @@
                 </div>
                 <div class="col l2 m2 s12 input-field">
                     <div class="multiselect-container">
-                        <select id="grid-columns-multiselect">
-                            @for (var i = 0; i < Model.Param.GridColumns.Count(); i++)
-                            {
-                                var column = @Model.Param.GridColumns.ElementAt(i);
-                                <option value="@column.ID">@column.Name</option>
-                            }
-                        </select>
+                        <select id="grid-columns-multiselect"></select>
+                        <label>@ViewResources.Show/@ViewResources.hide</label>
                     </div>
-                    <label>@ViewResources.Show/@ViewResources.hide</label>
                 </div>
                 @if (showOption.showOddsGroup)
                 {
@@ -64,24 +59,6 @@
                         </label>
                     </div>
                 }
-                @if (showOption.showSubsidiary)
-                {
-                    <div class="col l2 m2 s12 input-field">
-                        <div class="multiselect-container">
-                            <select id="subsidiary-multiselect" name="subsidiary-multiselect"></select>
-                        </div>
-                        <label>@ViewResources.Subsidiary</label>
-                    </div>
-                }
-                @if (showOption.showUserGuide)
-                {
-                    <div class="col right icon-block">
-                        <i class="icon-book right" id="UserGuide" title="@ViewResources.UserGuide"></i>
-                    </div>
-                }
-            </div>
-
-            <div class="@(!Model.IsFakeLicensee ? "row" : string.Empty)">
                 @if (showOption.showSpecialLevel)
                 {
                     <div class="col l2 m2 s12 input-field">
@@ -97,7 +74,15 @@
                         <label>@ViewResources.SpecialLevel</label>
                     </div>
                 }
+                @if (showOption.showUserGuide)
+                {
+                    <div class="col right icon-block">
+                        <i class="icon-book right" id="UserGuide" title="@ViewResources.UserGuide"></i>
+                    </div>
+                }
+            </div>
 
+            <div class="row">
                 @if (showOption.showBA)
                 {
                     <div class="col l2 m2 s12 input-field">
@@ -136,18 +121,32 @@
                         <label>@ViewResources.Group</label>
                     </div>
                 }
-
                 <div class="col l2 m2 s12 input-field">
                     @Html.TextBox("Username", null, new { placeholder = (Model.IsFakeLicensee ? ViewResources.ExternalId : ViewResources.ExternalIdOrSystemId), autocomplete = "off" })
                     <label>@ViewResources.Username</label>
                     <ul id="suggestionDropdown" class="dropdown-content ac-dropdown"></ul>
                 </div>
-
+                @if (showOption.showSubsidiary)
+                {
+                    <div class="col l2 m2 s12 input-field hide" id="subsidiary-view">
+                        <div class="multiselect-container">
+                            <select id="subsidiary-multiselect" name="subsidiary-multiselect"></select>
+                        </div>
+                        <label>@(showOption.isMasterSubsidiaryView ? ViewResources.WhiteLabel : ViewResources.Subsidiary)</label>
+                    </div>
+                }
                 <div class="col l2 m2 s12 button-block">
                     <button type="button" id="SubmitButton" class="btn btn-primary">@ViewResources.Submit</button>
                 </div>
+
+                @if (showOption.showSubsidiary)
+                {
+                    <div class="col l2 m2 s12 input-field">
+                        <input id="IsViewOnSubsidiary" type="checkbox" />
+                        <label for="IsViewOnSubsidiary">@ViewResources.SubsidiarySearch</label>
+                    </div>
+                }
             </div>
-        </div>
         <div id="hiddenfield">
             @Html.Hidden("CurrencyId", Model.Param.CurrencyId)
             @Html.Hidden("BaFilter", Model.Param.BAFilter)
@@ -171,5 +170,5 @@
 }
 @if (showOption.showSubsidiary)
 {
-    @Html.Hidden("SubsidiaryList", Model.SubsidiaryList.ToJson())
+    @Html.Hidden("SubsidiaryList", Model.GroupSubsidiaryList.ToJson())
 }

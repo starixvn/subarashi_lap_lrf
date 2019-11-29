@@ -2,10 +2,8 @@
 {
     using System.Web.Mvc;
     using Base.UnitTests;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using NSubstitute;
     using NUnit.Framework;
-    using Service.Core.Common.Interfaces;
 
     public class WeeklyLiveMatchReportControllerTest : CultureBaseControllerHelperTest
     {
@@ -33,13 +31,7 @@
 
         private WeeklyLiveMatchReportController CreateController()
         {
-            var productService = Substitute.For<IProductService>();
-
-            var controller = Substitute.ForPartsOf<WeeklyLiveMatchReportController>(
-                LangService,
-                SessionService
-                );
-            return controller;
+            return Substitute.ForPartsOf<WeeklyLiveMatchReportController>();
         }
     }
 }

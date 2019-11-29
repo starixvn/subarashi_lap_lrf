@@ -167,6 +167,7 @@
             Reader["withdrawal"].Returns(expected.Withdrawal);
             Reader["bonus"].Returns(expected.Bonus);
             Reader["adjustment"].Returns(expected.Adjustment);
+            Reader["Promotion"].Returns(expected.Promotion);
             Reader["turnover"].Returns(expected.Turnover);
             Reader["drawgame"].Returns(expected.DrawGame);
             Reader["outstanding"].Returns(expected.PendingFunds);
@@ -186,6 +187,7 @@
             Reader["sumwithdrawal"].Returns(expected.Withdrawal);
             Reader["sumbonus"].Returns(expected.Bonus);
             Reader["sumadjustment"].Returns(expected.Adjustment);
+            Reader["sumpromotion"].Returns(expected.Promotion);
             Reader["sumturnover"].Returns(expected.Turnover);
             Reader["sumdrawgame"].Returns(expected.DrawGame);
             Reader["sumoutstanding"].Returns(expected.PendingFunds);

@@ -8,14 +8,12 @@
     using System.Web.SessionState;
 
     using DataAccess.Customer.Interfaces;
+
     using Fanex.Athena.Model.Auth.DataDomain;
-    using Fanex.Athena.Service.Core.Common.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
 
     using ONEbook.UM.Filters;
-
-    using Service.Core.Users.Interfaces;
 
     #endregion Using
 
@@ -28,15 +26,12 @@
         PermissionKeys.CustomerInfoCustomerLog,
         PermissionKeys.CustomerInfoCustomerList,
         PermissionKeys.BettingTicketCenter)]
-    public class SearchCustomerAPIController : ContentBaseController
+    public class SearchCustomerAPIController : CultureBaseController
     {
         private readonly ISearchCustomerDataAccess _searchCustomerDataAccess;
 
         public SearchCustomerAPIController(
-            ILanguageService languageService,
-            ISessionService sessionService,
             ISearchCustomerDataAccess searchCustomerDataAccess)
-            : base(languageService, sessionService)
         {
             _searchCustomerDataAccess = searchCustomerDataAccess;
         }
@@ -63,7 +58,7 @@
             }
 
             var userName = query.Trim();
-            var userSession = SessionService.UserSession;
+            var userSession = SessionServiceInstance.UserSession;
             var customerNames = await _searchCustomerDataAccess.SearchCustomers(userSession.UserId, userName,
                 AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList), isIncludeDormant);
 

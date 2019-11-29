@@ -7,6 +7,12 @@ export const selectedSubsidiary = createReducer({}, {
     }
 })
 
+export const selectedWhiteLabel = createReducer({}, {
+    [types.SET_WHITELABEL](state, action) {
+        return action.data;
+    }
+})
+
 export const dateRange = createReducer({}, {
     [types.SET_DATE_RANGE](state, action) {
         return action.data;

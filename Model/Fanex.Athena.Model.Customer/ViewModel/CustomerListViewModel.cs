@@ -6,7 +6,8 @@
 namespace Fanex.Athena.Model.Customer.ViewModel
 {
     using System.Collections.Generic;
-    using Core.DTO.Common;
+    using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Customer.DTO;
     using Fanex.Athena.Model.Customer.MetaModel;
     using Model.Core.ViewModel;
@@ -37,8 +38,8 @@ namespace Fanex.Athena.Model.Customer.ViewModel
 
         public bool IsSubsidiary { get; set; }
 
-        public bool HasSubsidiaryList { get; set; }
+        public SubsidiaryViewType ViewType { get; set; }
 
-        public IEnumerable<CheckedItem> SubsidiaryList { get; set; }
+        public IEnumerable<CheckedItem> GroupSubsidiaryList { get; set; }
     }
 }

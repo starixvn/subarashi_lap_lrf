@@ -1,4 +1,4 @@
-﻿// Generated at: 11/06/2019 2:37:50 PM
+﻿// Generated at: 11/06/2019 11:42:40 AM
 var _language_zh_TW = {
 AA:"客客",
 AbnormalBet:"非正規註單",
@@ -435,6 +435,7 @@ ProductNG:"百練賽",
 ProductSB:"體育博彩",
 ProductVS:"虛擬運動",
 ProductVS2:"虛擬運動2",
+Promotion:"促銷活動",
 PromotionPrize:"活動獎金",
 RB:"賽馬",
 RecommendBrowserOnReportPageMsg:"若頁面大小&gt; 1,000，請您考慮使用火狐或Chrome瀏覽器以獲得更好的體驗",

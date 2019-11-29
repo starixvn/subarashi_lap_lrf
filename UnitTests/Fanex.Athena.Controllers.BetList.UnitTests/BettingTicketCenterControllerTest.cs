@@ -1,13 +1,14 @@
 ﻿namespace Fanex.Athena.Controllers.BetList.UnitTests
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
 
     using Base.UnitTests;
 
     using DataAccess.Core.Configuration.Interfaces;
-
+    using Fanex.Athena.Resources;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     using Model.BetList.ViewModel;
@@ -62,12 +63,52 @@
 
             using (var controller = CreateController())
             {
+                // Arrange
+                _productService.GetSingleWalletProductAccess(
+                    DefaultLicenseeSession.LicenseeId,
+                    DefaultUserSession.Language).Returns(new ProductAccess(new List<Product>()));
+
                 // Action
                 var result = controller.RefNo() as ViewResult;
 
                 // Assert
-                Assert.That(result.ViewName, Is.EqualTo("~/Views/Desktop/BetList/BettingTicketCenter/RefNo.cshtml"));
-                Assert.That(result.Model, Is.EqualTo(DefaultLicenseeSession.IsAllowedCustomerComm));
+                Assert.Multiple(() =>
+                {
+                    Assert.That(result.ViewName, Is.EqualTo("~/Views/Desktop/BetList/BettingTicketCenter/RefNo.cshtml"));
+                    Assert.That(result.Model, Is.EqualTo(DefaultLicenseeSession.IsAllowedCustomerComm));
+                });
+            }
+        }
+
+        [Test]
+        public void RefNo_WhenCall_ReturnCorrectViewBag()
+        {
+            using (var controller = CreateController())
+            {
+                // Arrange
+                var productKN = new Product { ProductCode = Product.KN, ProductName = FakeHelper.Create<string>() };
+                var productLT = new Product { ProductCode = Product.LT, ProductName = FakeHelper.Create<string>() };
+                var productSB = new Product { ProductCode = Product.SB, ProductName = FakeHelper.Create<string>() };
+                var offerProducts = new ProductAccess(new List<Product> { productKN, productLT, productSB });
+
+                _productService.GetSingleWalletProductAccess(
+                    DefaultLicenseeSession.LicenseeId,
+                    DefaultUserSession.Language).Returns(offerProducts);
+
+                var expectedProductsNote = string.Format(
+                    ViewResources.BettingTicketCenter_RefnoTabNote2,
+                    productKN.ProductName + ", " + productLT.ProductName,
+                    BalanceUpDate.ToString(FormatKey.DateFormat));
+
+                // Action
+                var result = controller.RefNo() as ViewResult;
+
+                // Assert
+                Assert.Multiple(() =>
+                {
+                    Assert.That(result.ViewBag.SelectedBaseCurrency, Is.EqualTo(DefaultUserSession.DefaultBaseCurrency));
+                    Assert.That(result.ViewBag.ProductsRequireUseNameNote, Is.EqualTo(expectedProductsNote));
+                });
             }
         }
 
@@ -225,12 +266,11 @@
 
         private BettingTicketCenterController CreateController()
         {
-            var controller = Substitute.ForPartsOf<BettingTicketCenterController>(
-                LangService,
-                SessionService,
-                _productService,
-                _balanceUpDataAccess);
-            return controller;
+            return new BettingTicketCenterController(_productService, _balanceUpDataAccess)
+            {
+                LangService = LangService,
+                SessionServiceInstance = SessionService
+            };
         }
     }
 }

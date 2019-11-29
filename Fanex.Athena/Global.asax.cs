@@ -6,8 +6,25 @@
 
 namespace Fanex.Athena
 {
+    using Api.Base.Attributes;
+
+    using Data;
+
+    using Fanex.Athena.Extension.Helpers;
+    using Fanex.Athena.Web.ActionFilter;
+    using Fanex.Athena.Web.RouterConfig;
+    using Fanex.Data.SqlServer;
+    using Fanex.Logging.Sentry.RavenClient;
+
+    using Logging;
+
+    using MessagePack.Resolvers;
+
+    using RemotingRef;
+
+    using SharpRaven;
+
     using System;
-    using System.Collections.Generic;
     using System.Configuration;
     using System.Diagnostics.CodeAnalysis;
     using System.Web;
@@ -16,17 +33,6 @@ namespace Fanex.Athena
     using System.Web.Mvc;
     using System.Web.Optimization;
     using System.Web.Routing;
-    using Api.Base.Attributes;
-    using Data;
-    using Fanex.Athena.Extension.Helpers;
-    using Fanex.Athena.Web.ActionFilter;
-    using Fanex.Athena.Web.RouterConfig;
-    using Fanex.Data.SqlServer;
-    using Fanex.Logging.Sentry.RavenClient;
-    using Logging;
-    using MessagePack.Resolvers;
-    using RemotingRef;
-    using SharpRaven;
 
     public class MvcApplication : HttpApplication
     {
@@ -86,8 +92,6 @@ namespace Fanex.Athena
                     .WithSqlServer(resourcePath: "~/SpNameConfig/FanexSpName.xml")
                     .Run();
 
-                log4net.Config.XmlConfigurator.Configure();
-                log4net.LogManager.GetLogger("GeneralLog").Info("Start");
                 RefDataTypeContainer
                 .ConnectTo(new Uri(ConfigurationManager.AppSettings["Fanex.RemotingRef.Service.Url"]))
                 .FromApplication("Fanex.LAP");

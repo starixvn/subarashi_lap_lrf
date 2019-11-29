@@ -6,13 +6,8 @@
 
 namespace Fanex.Athena.Controllers.TotalBets
 {
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-
     using DataAccess.TotalBet.Interfaces;
 
-    using Extension.Utility;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
@@ -20,8 +15,9 @@ namespace Fanex.Athena.Controllers.TotalBets
     using Model.TotalBet.MetaModel;
     using Model.TotalBet.ViewModel;
 
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
 
     [FunctionAuthorization(PermissionKeys.TotalBetHandicapOverUnderLive)]
     public class HandicapOverUnderTotalBetController : TotalBetBaseController
@@ -29,11 +25,7 @@ namespace Fanex.Athena.Controllers.TotalBets
         private readonly IHandicapOverUnderDataAccess _handicapOverUnderDataAccess;
 
         public HandicapOverUnderTotalBetController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IAppSettings appSetting,
             IHandicapOverUnderDataAccess handicapOverUnderDataAccess)
-        : base(languageService, sessionService, appSetting)
         {
             _handicapOverUnderDataAccess = handicapOverUnderDataAccess;
         }
@@ -43,8 +35,8 @@ namespace Fanex.Athena.Controllers.TotalBets
         {
             var param = new HandicapOverUnderMetaModel
             {
-                LicenseeId = SessionService.LicenseeSession.LicenseeId,
-                BaseCurrency = SessionService.UserSession.DefaultBaseCurrency
+                LicenseeId = SessionServiceInstance.LicenseeSession.LicenseeId,
+                BaseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency
             };
 
             return await this.GetView(param).ConfigureAwait(false);
@@ -55,14 +47,14 @@ namespace Fanex.Athena.Controllers.TotalBets
         [ValidationWebRequest(IsValidCurrency = true)]
         public async Task<ActionResult> Index(HandicapOverUnderMetaModel metaModel)
         {
-            metaModel.LicenseeId = SessionService.LicenseeSession.LicenseeId;
+            metaModel.LicenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
             return await this.GetView(metaModel).ConfigureAwait(false);
         }
 
         private async Task<ActionResult> GetView(HandicapOverUnderMetaModel metaModel)
         {
-            var userSession = SessionService.UserSession;
-            var licenseeSession = SessionService.LicenseeSession;
+            var userSession = SessionServiceInstance.UserSession;
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
             var currencies = userSession.CurrencyList;
 
             metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList,
@@ -77,7 +69,7 @@ namespace Fanex.Athena.Controllers.TotalBets
                 TotalData = result.TotalData
             };
 
-            ViewBag.LicenseeView = AppSettings.LicenseeOfferNewForecast.Contains(licenseeSession.LicenseeId) ?
+            ViewBag.LicenseeView = AppSettingInstance.LicenseeOfferNewForecast.Contains(licenseeSession.LicenseeId) ?
                 "ContentDataBodog.cshtml" :
                 "ContentData.cshtml";
 

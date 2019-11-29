@@ -8,8 +8,6 @@
 
         public string ProductCode { get; set; }
 
-        public string Subsidiary { get; set; }
-
         public SubsidiaryPerformanceBase BaseCurrencyData { get; set; }
     }
 }

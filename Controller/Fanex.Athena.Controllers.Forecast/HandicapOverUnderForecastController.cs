@@ -6,14 +6,9 @@
 
 namespace Fanex.Athena.Controllers.Forecast
 {
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-
     using DataAccess.Core.Common.Interfaces;
     using DataAccess.Forecast.Interfaces;
 
-    using Extension.Utility;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
@@ -21,8 +16,9 @@ namespace Fanex.Athena.Controllers.Forecast
     using Model.Forecast.MetaModel;
     using Model.Forecast.ViewModel;
 
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
 
     [FunctionAuthorization(PermissionKeys.ForecastHandicapOverUnderLive)]
     public class HandicapOverUnderForecastController : ForecastBaseController
@@ -32,12 +28,8 @@ namespace Fanex.Athena.Controllers.Forecast
         private readonly IForecastDataAccess _forecastDataAccess;
 
         public HandicapOverUnderForecastController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IAppSettings appSetting,
             ILeagueDataAccess leagueDataAccess,
             IForecastDataAccess forecastDataAccess)
-        : base(languageService, sessionService, appSetting)
         {
             _leagueDataAaccess = leagueDataAccess;
             _forecastDataAccess = forecastDataAccess;
@@ -46,9 +38,9 @@ namespace Fanex.Athena.Controllers.Forecast
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            var liceseeSession = SessionService.LicenseeSession;
-            var userSession = SessionService.UserSession;
-            if (AppSettings.LicenseeOfferNewForecast.Contains(liceseeSession.LicenseeId))
+            var liceseeSession = SessionServiceInstance.LicenseeSession;
+            var userSession = SessionServiceInstance.UserSession;
+            if (AppSettingInstance.LicenseeOfferNewForecast.Contains(liceseeSession.LicenseeId))
             {
                 return this.RedirectToAction("Index", "NewHandicapOverUnderForecast");
             }
@@ -77,7 +69,7 @@ namespace Fanex.Athena.Controllers.Forecast
 
         private async Task<ForecastHdpOuViewModel> GetViewModel(ForecastHandicapOverUnderMetaModel metaModel)
         {
-            var userSession = SessionService.UserSession;
+            var userSession = SessionServiceInstance.UserSession;
             metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId);
             var leagueList = await _leagueDataAaccess.GetRunningLeagues(metaModel.AgentListXml, metaModel.BetTypeString);
             var currentLeagueId = metaModel.LeagueId;

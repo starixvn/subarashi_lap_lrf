@@ -85,7 +85,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    _betListApiClient.Received(1).PostAsyncString(
+                    _betListApiClient.Received(1).PostAsyncStringAsync(
                         Arg.Is<string>(x => x == "/PlayerAdminBetList/GetBetList"),
                         Arg.Is<PlayerRunningBetListMetalModel>(x => x.SortBy == expectedSortBy && x.SortOrder == expectedSortOrder),
                         Arg.Is<string>(x => x == language));
@@ -115,7 +115,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    _betListApiClient.Received(1).PostAsyncString(
+                    _betListApiClient.Received(1).PostAsyncStringAsync(
                         Arg.Is<string>(x => x == "/PlayerAdminBetList/GetBetList"),
                         Arg.Is<PlayerRunningBetListMetalModel>(x => x.PageSize == expectedPageSize),
                         Arg.Is<string>(x => x == language));
@@ -133,8 +133,8 @@
                 var language = FakeHelper.Create<string>();
                 StubUserSessionData(new UserAuthInfo { Language = language });
 
-                _betListApiClient.PostAsyncBytes("/PlayerAdminBetList/Export", metaModel, language)
-                    .Returns(new byte[] { 1 });
+                _betListApiClient.PostAsyncStream("/PlayerAdminBetList/Export", metaModel, language)
+                    .Returns(new MemoryStream(new byte[] { 1 }));
 
                 // Action
                 await controller.GetRunningBetList(metaModel);
@@ -142,7 +142,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    _betListApiClient.Received(1).PostAsyncBytes(
+                    _betListApiClient.Received(1).PostAsyncStream(
                         Arg.Is<string>(x => x == "/PlayerAdminBetList/Export"),
                         Arg.Is(metaModel),
                         Arg.Is<string>(x => x == language));
@@ -152,10 +152,11 @@
 
         private PlayerBetListController CreateController()
         {
-            return new PlayerBetListController(
-                LangService,
-                SessionService,
-                _betListApiClient);
+            var result = new PlayerBetListController(_betListApiClient);
+            result.LangService = LangService;
+            result.SessionServiceInstance = SessionService;
+
+            return result;
         }
     }
 }

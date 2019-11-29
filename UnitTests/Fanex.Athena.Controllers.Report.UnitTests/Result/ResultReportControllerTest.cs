@@ -60,7 +60,7 @@
                 const string RefNo = "hohoho";
                 const string ExpectedData = "huhuhu";
                 const string Url = "/ResultReport/ShowRngCasinoSingleWalletResult";
-                _betListApiClient.PostAsyncString(Url, Arg.Any<object>(),
+                _betListApiClient.PostAsyncStringAsync(Url, Arg.Any<object>(),
                     SessionService.UserSession.Language).Returns(ExpectedData);
 
                 // Action
@@ -69,7 +69,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    _betListApiClient.Received(1).PostAsyncString(
+                    _betListApiClient.Received(1).PostAsyncStringAsync(
                            Url,
                            Arg.Is<object>(x => (string)x.GetValue("refNo") == RefNo),
                            SessionService.UserSession.Language
@@ -86,7 +86,7 @@
             {
                 // Arrange
                 const string Url = "/ResultReport/ResultDetail";
-                _betListApiClient.PostAsyncString(Url, Arg.Any<object>(), SessionService.UserSession.Language).Returns(x => (string)null);
+                _betListApiClient.PostAsyncStringAsync(Url, Arg.Any<object>(), SessionService.UserSession.Language).Returns(x => (string)null);
 
                 // Action
                 var result = controller.ResultDetail(0, 0).Result as RedirectResult;
@@ -106,7 +106,7 @@
                 const int MatchId = 1;
                 const int SportId = 11111;
                 const string Url = "/ResultReport/ResultDetail";
-                _betListApiClient.PostAsyncString(Url, Arg.Any<object>(),
+                _betListApiClient.PostAsyncStringAsync(Url, Arg.Any<object>(),
                     SessionService.UserSession.Language).Returns(ExpectedData);
 
                 // Action
@@ -115,7 +115,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    _betListApiClient.Received(1).PostAsyncString(
+                    _betListApiClient.Received(1).PostAsyncStringAsync(
                         Url,
                         Arg.Is<object>(
                             x => (int)x.GetValue("matchId") == MatchId &&
@@ -135,20 +135,21 @@
                 {
                     ProductCode = x
                 });
+
             var productService = Substitute.For<IProductService>();
             productService.GetProductAccess(
                 SessionService.LicenseeSession.LicenseeId,
                 SessionService.UserSession.Language,
                 Arg.Any<string>()).Returns(new ProductAccess(productList.ToList()));
-            var controller = new ResultReportController(
-                LangService,
-                SessionService,
-                productService,
-                _balanceUpDataAccess,
-                _betListApiClient)
+
+            var controller = new ResultReportController(_balanceUpDataAccess, _betListApiClient)
             {
-                ControllerContext = ControllerContext
+                ControllerContext = ControllerContext,
+                LangService = LangService,
+                SessionServiceInstance = SessionService,
+                ProductServiceInstance = productService
             };
+
             return controller;
         }
     }

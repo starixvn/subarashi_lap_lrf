@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using System.Threading.Tasks;
     using System.Web.Mvc;
     using Base.UnitTests;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -11,7 +10,6 @@
     using NSubstitute;
     using NUnit.Framework;
     using Report;
-    using Service.Core.Common.Interfaces;
 
     [TestFixture]
     public class GoldDeluxeWinLossReportControllerTest : CultureBaseControllerHelperTest
@@ -43,7 +41,7 @@
         [Test]
         public void Index_GoldDeluxeIsAvaiable_ReturnCorrectViewResult()
         {
-            // Arrange 
+            // Arrange
             var product = new Product
             {
                 ProductCode = Product.GD,
@@ -75,10 +73,12 @@
             productService.GetProductAccess(
                 SessionService.LicenseeSession.LicenseeId,
                 SessionService.UserSession.Language).Returns(new ProductAccess(productList));
-            return new GoldDeluxeWinLossReportController(
-                LangService,
-                SessionService,
-                productService);
+            return new GoldDeluxeWinLossReportController()
+            {
+                LangService = LangService,
+                SessionServiceInstance = SessionService,
+                ProductServiceInstance = productService
+            };
         }
     }
 }

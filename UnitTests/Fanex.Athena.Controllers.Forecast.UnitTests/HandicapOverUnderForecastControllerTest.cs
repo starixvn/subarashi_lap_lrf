@@ -140,14 +140,12 @@
             _forecastDataAccess = Substitute.For<IForecastDataAccess>();
             _leagueDataAccess = Substitute.For<ILeagueDataAccess>();
 
-            var controller = new HandicapOverUnderForecastController(
-                LangService,
-                SessionService,
-                AppSettings,
-                _leagueDataAccess,
-                _forecastDataAccess)
+            var controller = new HandicapOverUnderForecastController(_leagueDataAccess, _forecastDataAccess)
             {
-                ControllerContext = ControllerContext
+                ControllerContext = ControllerContext,
+                LangService = LangService,
+                SessionServiceInstance = SessionService,
+                AppSettingInstance = AppSettings
             };
 
             return controller;

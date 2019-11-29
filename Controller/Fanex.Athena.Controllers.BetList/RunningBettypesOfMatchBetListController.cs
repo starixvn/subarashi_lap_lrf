@@ -12,34 +12,15 @@ namespace Fanex.Athena.Controllers.BetList
 
     using System.Web.Mvc;
 
-    using DataAccess.Core.Configuration.Interfaces;
-
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
     using Fanex.Common;
 
     using Model.BetList.MetaModel;
 
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
-
-    using VendorAdapter.Interfaces;
-
     #endregion Using
 
     public class RunningBettypesOfMatchBetListController : BetListBaseController
     {
-        public RunningBettypesOfMatchBetListController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IProductService productService,
-            IBalanceUpDataAccess balanceUpDataAccess,
-            ICacheRefAdapter cacheRefAdapter,
-            IBetListApiClient betListApiClient, ILicenseeSettingService licenseeSettingService)
-        : base(languageService, sessionService, productService, balanceUpDataAccess,
-              cacheRefAdapter, betListApiClient, licenseeSettingService)
-        { }
-
         [HttpGet]
         [ValidationWebRequest(IsValidCurrency = true)]
         public async Task<ActionResult> Index(BetListExcelMetaModel metaModel)
@@ -62,7 +43,7 @@ namespace Fanex.Athena.Controllers.BetList
             metaModel.Title = $"(LEAGUENAME) - {CacheRefAdapter.GetBettype(bettype)} - {GetViewInCurrency(metaModel)}";
             metaModel.ShowingOption = new BetListShowingOption
             {
-                CustomerCommVisible = SessionService.LicenseeSession.IsAllowedCustomerComm,
+                CustomerCommVisible = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm,
             };
             metaModel.HiddenColumns = HiddenColumnIndexes;
             return await ProcessExportExcel(metaModel, "RunningBetList").ConfigureAwait(false);

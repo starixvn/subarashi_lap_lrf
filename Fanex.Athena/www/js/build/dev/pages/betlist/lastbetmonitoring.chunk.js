@@ -5342,7 +5342,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
     {
         name: 'Index',
         index: 'Index',
-        width: 50,
+        width: 40,
         align: 'center',
         sortable: false,
         resizable: false
@@ -5397,7 +5397,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
     {
         name: 'Stake',
         index: 'Stake',
-        width: 70,
+        width: 85,
         align: 'right',
         sortable: true,
         resizable: false
@@ -5406,7 +5406,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
     {
         name: 'WinLoss',
         index: 'WinLoss',
-        width: 75,
+        width: 80,
         align: 'right',
         sortable: true,
         resizable: false,
@@ -5416,7 +5416,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
     {
         name: 'BetEffective',
         index: 'BetEffective',
-        width: 115,
+        width: 105,
         align: 'right',
         sortable: true,
         resizable: false,

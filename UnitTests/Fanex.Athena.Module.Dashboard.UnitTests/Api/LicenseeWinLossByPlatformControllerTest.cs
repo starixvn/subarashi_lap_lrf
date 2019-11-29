@@ -30,29 +30,6 @@
             _dataAccess = null;
         }
 
-        [TestCase("CLMV")]
-        public async Task GetWinLoss_InvalidBaseCurrency_ReturnNullData(string baseCurrency)
-        {
-            // Arrange
-            var metaModel = new DashboardBaseModel
-            {
-                BaseCurrency = baseCurrency
-            };
-
-            using (var controller = CreateController())
-            {
-                // Action
-                var result = await controller.GetData(metaModel);
-
-                // Assert
-                Assert.Multiple(() =>
-                {
-                    Assert.That(result.Data, Is.Null);
-                    Assert.That(result.Total, Is.Zero);
-                });
-            }
-        }
-
         [Test]
         public async Task GetWinLoss_WhenCall_ReturnCorrectData()
         {

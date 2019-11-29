@@ -1,7 +1,6 @@
 ﻿namespace Fanex.Athena.Module.PlayerAdmin.Services
 {
     using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
     using Autofac.Features.AttributeFilters;
     using Fanex.Athena.Model.Core.DataDomain;
@@ -41,7 +40,7 @@
                 metaModel,
                 x => x.Id,
                 result.Code == 0,
-                new int[4] { LogActionDetailId.UpdatingMinBet, LogActionDetailId.UpdatingMaxBet, LogActionDetailId.UpdatingMaxPerMatch, LogActionDetailId.UpdatingMaxPerBall });
+                new [] { LogActionDetailId.UpdatingMinBet, LogActionDetailId.UpdatingMaxBet, LogActionDetailId.UpdatingMaxPerMatch, LogActionDetailId.UpdatingMaxPerBall });
 
             _businessLogService.Write(BusinessLogType.CustomerBetSetting, logInfo);
 

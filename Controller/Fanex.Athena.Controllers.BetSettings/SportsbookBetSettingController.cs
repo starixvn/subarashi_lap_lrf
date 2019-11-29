@@ -6,10 +6,6 @@
 
 namespace Fanex.Athena.Controllers.BetSettings
 {
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-
     using Fanex.Athena.Model.BetSettings.MetaModel;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
@@ -20,23 +16,22 @@ namespace Fanex.Athena.Controllers.BetSettings
     using Resources;
 
     using Service.BetSettings.Interfaces;
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
+
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
 
     public class SportsbookBetSettingController : BetSettingBaseController
     {
         private readonly ISportsbookBetSettingService _betSettingService;
 
         public SportsbookBetSettingController(
-            ILanguageService languageService,
-            ISessionService sessionService,
             ICoreBetSettingService coreBetSettingService,
             IProductService productService,
-            ISportsbookBetSettingService betSettingService,
-             ILicenseeSettingService licenseeSettingService
+            ISportsbookBetSettingService betSettingService
 
             )
-        : base(languageService, sessionService, coreBetSettingService, productService, licenseeSettingService)
+        : base(coreBetSettingService, productService)
         {
             _betSettingService = betSettingService;
         }
@@ -59,8 +54,8 @@ namespace Fanex.Athena.Controllers.BetSettings
         [ValidatePermissionOnData]
         public async Task<JsonResult> UpdateBetSetting(string nickName)
         {
-            var userSession = SessionService.UserSession;
-            var licenseeId = SessionService.LicenseeSession.LicenseeId;
+            var userSession = SessionServiceInstance.UserSession;
+            var licenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
 
             if (!CheckPermission(userSession, ProductTypes.Sportsbook))
             {
@@ -72,7 +67,6 @@ namespace Fanex.Athena.Controllers.BetSettings
             var esportSetting = GetESportSetting();
             var result = await _betSettingService.UpdateBetSettingAsync(commonParam, param,
                 esportSetting);
-
 
             if (result.Code == 0)
             {

@@ -6,18 +6,15 @@
 
 namespace Fanex.Athena.Controllers.Report
 {
-    using System.Web.Mvc;
-    using System.Web.SessionState;
-
     using DataAccess.Core.Configuration.Interfaces;
 
     using Fanex.Athena.Model.Report.ViewModel.Note;
-    using Fanex.Athena.Service.Core.Common.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     using ONEbook.UM.Filters;
 
-    using Service.Core.Users.Interfaces;
+    using System.Web.Mvc;
+    using System.Web.SessionState;
 
     [SessionState(SessionStateBehavior.ReadOnly)]
     [CheckUMFilter]
@@ -28,11 +25,8 @@ namespace Fanex.Athena.Controllers.Report
         private readonly IProductService _productService;
 
         public NoteController(
-            ILanguageService languageService,
-            ISessionService sessionService,
             IProductService productService,
             IBalanceUpDataAccess balanceUpDataAccess)
-            : base(languageService, sessionService)
         {
             _balanceUpDataAccess = balanceUpDataAccess;
             _productService = productService;
@@ -42,8 +36,8 @@ namespace Fanex.Athena.Controllers.Report
         public ActionResult Index(string viewName)
         {
             var balanceUp = this._balanceUpDataAccess.GetBalanceUp();
-            var licenseeId = this.SessionService.LicenseeSession.LicenseeId;
-            var productList = this._productService.GetProductList(licenseeId, SessionService.UserSession.Language);
+            var licenseeId = this.SessionServiceInstance.LicenseeSession.LicenseeId;
+            var productList = this._productService.GetProductList(licenseeId, SessionServiceInstance.UserSession.Language);
             var model = new NoteViewModel
             {
                 MoveBetsDate = balanceUp.MoveBetsDay,

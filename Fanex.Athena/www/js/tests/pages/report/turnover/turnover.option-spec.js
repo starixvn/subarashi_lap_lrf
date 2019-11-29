@@ -48,8 +48,8 @@
 	        it("colNames should return correctly", function () {
 	            spyOn(Site, "getResources").and.callFake(function (resource) { return resource; });
 	            var expected = ['#', 'Day', "OpeningBalance", "Deposit", 'Withdrawal', 'Bonus', 'Adjustment',
-				'Turnover', 'DrawGame', 'NetTurnover', 'PendingFunds', 'WinLoss', 'Comm', 'Total', 'ClosingBalance',
-				 'AffiliateTransfer', 'CasinoTransfer', 'Turnover', 'Comm', 'AmountDueTo'];
+				'Promotion', 'Turnover', 'DrawGame', 'NetTurnover', 'PendingFunds', 'WinLoss', 'Comm', 'Total', 'ClosingBalance',
+				'AffiliateTransfer', 'CasinoTransfer', 'Turnover', 'Comm', 'AmountDueTo'];
 
 	            var result = TurnoverOption.getColName();
 
@@ -64,13 +64,13 @@
 
 	            var result = TurnoverOption.getColModel();
 
-	            expect(result.length).toBe(20);
-	            expect(result[12].hidden).toBe(false); //playerCommColumn
-	            expect(result[13].hidden).toBe(false); //winlossCommColumn
-	            expect(result[16].hidden).toBe(true); //transfer3rdColumn
-	            expect(result[17].hidden).toBe(false); //turnoverBAColumn
-	            expect(result[18].hidden).toBe(false); //commBAColumn
-	            expect(result[19].hidden).toBe(false); //amountDueToBAColumn
+	            expect(result.length).toBe(21);
+	            expect(result[13].hidden).toBe(false); //playerCommColumn
+	            expect(result[14].hidden).toBe(false); //winlossCommColumn
+	            expect(result[17].hidden).toBe(true); //transfer3rdColumn
+	            expect(result[18].hidden).toBe(false); //turnoverBAColumn
+	            expect(result[19].hidden).toBe(false); //commBAColumn
+	            expect(result[20].hidden).toBe(false); //amountDueToBAColumn
 	        });
 	    });
 

@@ -7,6 +7,7 @@
     using Base.UnitTests;
 
     using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.Report.Interfaces;
 
     using Model.Core.DataDomain;
@@ -61,7 +62,7 @@
             StubSingleWalletProductAccess(new[] { "SB", "BA" });
             SessionService.UserSession.Returns(new UserAuthInfo
             {
-                IsManageableSubsidiary = true,
+                SubsidiaryViewType = (byte)SubsidiaryViewType.NormalManagement,
                 UserLevel = UserLevelType.Subsidiary,
                 CurrencyAgentList = new Dictionary<int, int[]>()
             });
@@ -78,7 +79,7 @@
             // Assert
             Assert.Multiple(() =>
             {
-                _subsidiaryService.DidNotReceiveWithAnyArgs().GetCurrencyAgentList(Arg.Any<string>(), Arg.Any<bool>(), 0);
+                _subsidiaryService.DidNotReceiveWithAnyArgs().GetCurrencyAgentList(Arg.Any<UserAuthInfo>(), Arg.Any<string>(), Arg.Any<string>(), Arg.Any<bool>(), 0);
             });
         }
 
@@ -88,16 +89,18 @@
             // Arrange
             var metaModel = GetMetaModel();
             StubSingleWalletProductAccess(new[] { "SB", "BA" });
-            SessionService.UserSession.Returns(new UserAuthInfo
+            var user = new UserAuthInfo
             {
-                IsManageableSubsidiary = true,
+                SubsidiaryViewType = (byte)SubsidiaryViewType.NormalManagement,
                 UserLevel = UserLevelType.Licensee,
                 CurrencyAgentList = new Dictionary<int, int[]> { { 1, new[] { 1, 2, 3 } } },
                 CurrencyList = new Dictionary<int, string> { { 1, "USD" }, { 2, "EUR" }, { 3, "VND" } }
-            });
+            };
+            SessionService.UserSession.Returns(user);
 
             var currencyAgentList = new Dictionary<int, IEnumerable<int>> { { 1, new[] { 1, 2, 3 } } };
-            _subsidiaryService.GetCurrencyAgentList(Arg.Any<string>(), Arg.Any<bool>(), Arg.Any<int>()).Returns(currencyAgentList);
+            _subsidiaryService.GetCurrencyAgentList(Arg.Any<UserAuthInfo>(), Arg.Any<string>(), Arg.Any<string>(), Arg.Any<bool>(), 0)
+                .Returns(currencyAgentList);
 
             var resultData = new SubsidiaryResultViewModel
             {
@@ -111,7 +114,7 @@
             // Assert
             Assert.Multiple(() =>
             {
-                _subsidiaryService.Received().GetCurrencyAgentList(metaModel.SubsidiaryList, metaModel.IsExcludeTest, 0);
+                _subsidiaryService.Received().GetCurrencyAgentList(user, SessionLicenseeName, metaModel.SubsidiaryList, metaModel.IsExcludeTest, 0);
             });
         }
 

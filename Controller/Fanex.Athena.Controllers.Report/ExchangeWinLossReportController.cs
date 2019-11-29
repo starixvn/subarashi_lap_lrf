@@ -1,9 +1,5 @@
 ﻿namespace Fanex.Athena.Controllers.Report
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Web.Mvc;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Report.ViewModel;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -12,8 +8,10 @@
 
     using Resources;
 
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Web.Mvc;
 
     using Web.ActionFilter;
 
@@ -23,10 +21,7 @@
         private readonly IReportSettingService _reportSettingService;
 
         public ExchangeWinLossReportController(
-            ILanguageService languageService,
-            ISessionService sessionService,
             IReportSettingService reportSettingService)
-        : base(languageService, sessionService)
         {
             _reportSettingService = reportSettingService;
         }
@@ -40,8 +35,8 @@
 
         private ExchangeWinLossViewModel CreateViewModel()
         {
-            var licensee = SessionService.LicenseeSession;
-            var userSession = SessionService.UserSession;
+            var licensee = SessionServiceInstance.LicenseeSession;
+            var userSession = SessionServiceInstance.UserSession;
             var currencyList = new Dictionary<int, string>
             {
                 { BaseCurrencyType.All, ViewResources.All },

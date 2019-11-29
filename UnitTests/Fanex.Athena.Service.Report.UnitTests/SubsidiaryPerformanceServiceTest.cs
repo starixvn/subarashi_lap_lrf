@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using Core.Users.Interfaces;
@@ -9,8 +10,6 @@
     using DataAccess.Report.Interfaces;
 
     using Fanex.Athena.Model.Auth;
-
-    using Interfaces;
 
     using Model.Core.DataDomain;
     using Model.Report.DTO;
@@ -50,6 +49,7 @@
             _service = new SubsidiaryPerformanceService(_sessionService, _subsidiaryService, _dataAccess);
 
             _sessionService.UserSession.Returns(new UserAuthInfo());
+            _sessionService.LicenseeSession.Returns(new LicenseeAuthInfo { LicenseeName = LicenseeName });
         }
 
         [TearDown]
@@ -97,7 +97,8 @@
                 LicenseeName = LicenseeName
             };
 
-            _subsidiaryService.GetSubsidiaryList().Returns(_subsidiaryList);
+            _subsidiaryService.GetSubsidiaryList(Arg.Any<UserAuthInfo>(), LicenseeName, Arg.Any<string>())
+                .Returns(_subsidiaryList);
 
             var fakeEntityDataList = GetFakeEntityDataList();
 
@@ -106,10 +107,10 @@
             _dataAccess.GetData(metaModel, _currencyList).Returns(fakeEntityDataList);
 
             // Action
-            var result = ObjectHelper.ToJson((await _service.GetData(metaModel, _currencyList)).Data);
+            var result = await _service.GetData(metaModel, _currencyList);
 
             // Assert
-            Assert.That(result, Is.EqualTo(expectedResult));
+            Assert.That(ObjectHelper.ToJson(result.Data.First().Details), Is.EqualTo(expectedResult));
         }
 
         [Test]
@@ -126,20 +127,18 @@
             };
 
             _sessionService.UserSession.Returns(new UserAuthInfo { UserLevel = UserLevelType.Subsidiary, OperatorId = "123" });
-            _subsidiaryService.GetSubsidiaryList().Returns(_subsidiaryList);
+            _subsidiaryService.GetSubsidiaryList(Arg.Any<UserAuthInfo>(), LicenseeName, Arg.Any<string>())
+                .Returns(new List<Subsidiary>());
 
             var resultData = GetFakeEntityDataList();
-
-            var expectedData = new List<SubsidiaryPerformanceDataModel>();
-            var expectedResult = ObjectHelper.ToJson(expectedData);
 
             _dataAccess.GetData(metaModel, _currencyList).Returns(resultData);
 
             // Action
-            var result = ObjectHelper.ToJson((await _service.GetData(metaModel, _currencyList)).Data);
+            var result = await _service.GetData(metaModel, _currencyList);
 
             // Assert
-            Assert.That(result, Is.EqualTo(expectedResult));
+            Assert.That(result.Data.First().Details, Is.Empty);
         }
 
         [Test]
@@ -156,7 +155,8 @@
                 LicenseeName = LicenseeName
             };
 
-            _subsidiaryService.GetSubsidiaryList().Returns(_subsidiaryList);
+            _subsidiaryService.GetSubsidiaryList(Arg.Any<UserAuthInfo>(), LicenseeName, Arg.Any<string>())
+                .Returns(_subsidiaryList);
 
             var resultData = GetFakeEntityDataList();
 
@@ -186,7 +186,8 @@
                 LicenseeName = LicenseeName
             };
 
-            _subsidiaryService.GetSubsidiaryList().Returns(_subsidiaryList);
+            _subsidiaryService.GetSubsidiaryList(Arg.Any<UserAuthInfo>(), LicenseeName, Arg.Any<string>())
+                .Returns(_subsidiaryList);
 
             var resultData = GetFakeEntityDataList();
 
@@ -266,7 +267,7 @@
             };
         }
 
-        private static IEnumerable<SubsidiaryPerformanceDataModel> GetExpectedDataModelList()
+        private static IEnumerable<SubsidiaryPerformanceSummary> GetExpectedDataModelList()
         {
             var dataDetail1 = new List<SubsidiaryPerformanceBase>
             {
@@ -289,13 +290,13 @@
                 new SubsidiaryPerformanceBase { Product = "Sportsbook", BetCount = 50, Turnover = 100m, CustomerWinLoss = 100m, SubsidiaryWinLoss = -100m }
             };
 
-            return new List<SubsidiaryPerformanceDataModel>
+            return new List<SubsidiaryPerformanceSummary>
             {
-                new SubsidiaryPerformanceDataModel
+                new SubsidiaryPerformanceSummary
                 {
                     Subsidiary = "New York", TotalItem = 4, Details = new Dictionary<string, IEnumerable<SubsidiaryPerformanceBase>> { { "USD", dataDetail1 } }
                 },
-                new SubsidiaryPerformanceDataModel
+                new SubsidiaryPerformanceSummary
                 {
                     Subsidiary = "India", TotalItem = 5, Details = new Dictionary<string, IEnumerable<SubsidiaryPerformanceBase>> { { "USD", dataDetail2 }, { "EUR", dataDetail3 } }
                 }

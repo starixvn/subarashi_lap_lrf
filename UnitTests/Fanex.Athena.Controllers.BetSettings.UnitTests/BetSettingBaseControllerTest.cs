@@ -1,15 +1,13 @@
 ﻿namespace Fanex.Athena.Controllers.BetSettings.UnitTests
 {
     using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Model.Core.DataDomain;
     using Model.BetSettings.DTO;
     using Model.BetSettings.MetaModel;
     using Model.BetSettings.ViewModel;
+    using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
-    using Model.Customer.DTO;
     using NSubstitute;
     using NUnit.Framework;
     using Resources;
@@ -237,13 +235,12 @@
 
         private FakeBetSettingBaseController CreateController()
         {
-            var controller = new FakeBetSettingBaseController(
-                LangService,
-                SessionService,
-                CoreBetSettingService,
-                ProductService, LicenseeSettingService)
+            var controller = new FakeBetSettingBaseController(CoreBetSettingService, ProductService)
             {
-                ControllerContext = ControllerContext
+                ControllerContext = ControllerContext,
+                LangService = LangService,
+                SessionServiceInstance = SessionService,
+                LicenseeSettingServiceInstance = LicenseeSettingService
             };
 
             return controller;

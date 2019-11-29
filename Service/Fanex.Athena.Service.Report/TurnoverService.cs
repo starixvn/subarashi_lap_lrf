@@ -37,6 +37,7 @@ namespace Fanex.Athena.Service.Report
                 Withdrawal = dataList.Sum(p => p.Withdrawal),
                 Bonus = dataList.Sum(p => p.Bonus),
                 Adjustment = dataList.Sum(p => p.Adjustment),
+                Promotion = dataList.Sum(p => p.Promotion),
                 Turnover = dataList.Sum(p => p.Turnover),
                 DrawGame = dataList.Sum(p => p.DrawGame),
                 NetTurnover = dataList.Sum(p => p.NetTurnover),

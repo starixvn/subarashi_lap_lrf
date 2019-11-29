@@ -1,7 +1,6 @@
 ﻿namespace Fanex.Athena.Controllers.TotalBets.UnitTests
 {
     using System.Collections.Generic;
-    using System.Threading.Tasks;
     using System.Web.Mvc;
     using Base.UnitTests;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -11,7 +10,6 @@
     using NSubstitute;
     using NUnit.Framework;
     using Report;
-    using Service.Core.Common.Interfaces;
 
     [TestFixture]
     public class CustomerBalanceReportControllerTest : CultureBaseControllerHelperTest
@@ -49,10 +47,13 @@
                 SessionService.LicenseeSession.LicenseeId,
                 SessionService.UserSession.Language,
                 FunctionNames.CustomerBalance).Returns(new ProductAccess(new List<Product>()));
-            return new CustomerBalanceReportController(
-                LangService,
-                SessionService,
-                productService);
+
+            return new CustomerBalanceReportController()
+            {
+                LangService = LangService,
+                SessionServiceInstance = SessionService,
+                ProductServiceInstance = productService,
+            };
         }
     }
 }

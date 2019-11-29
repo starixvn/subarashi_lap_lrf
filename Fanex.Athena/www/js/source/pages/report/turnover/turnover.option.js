@@ -73,6 +73,16 @@
         frozen: true,
         formatter: 'currency'
     };
+    const promotionColumn = {
+        name: 'Promotion',
+        index: 'Promotion',
+        width: 75,
+        align: 'right',
+        sortable: false,
+        resizable: false,
+        frozen: true,
+        formatter: 'currency'
+    };
     const turnoverColumn = {
         name: 'Turnover',
         index: 'Turnover',
@@ -197,14 +207,14 @@
         };
 
         const colNameList = ['#', 'Day', 'OpeningBalance', 'Deposit', 'Withdrawal', 'Bonus', 'Adjustment',
-                    'Turnover', 'DrawGame', 'NetTurnover', 'PendingFunds',
+                    'Promotion', 'Turnover', 'DrawGame', 'NetTurnover', 'PendingFunds',
                     'WinLoss', 'Comm', 'Total', 'ClosingBalance',
                      'AffiliateTransfer', 'CasinoTransfer', 'Turnover', 'Comm', 'AmountDueTo'];
         const colModelList = [indexColumn, dateColumn, openingBalanceColumn, depositColumn, withdrawalColumn, bonusColumn, adjustmentColumn,
-                     turnoverColumn, drawGameColumn, netTurnoverColumn, pendingFundsColumn,
+                     promotionColumn, turnoverColumn, drawGameColumn, netTurnoverColumn, pendingFundsColumn,
                      winLossColumn, playerCommColumn, winlossCommColumn, closingBalanceColumn,
                     affiliateTransferColumn, transfer3rdColumn, turnoverBAColumn, commBAColumn, amountDueToBAColumn];
-        const customerWlTotalIndex = 11;
+        const customerWlTotalIndex = 12;
 
         const _me = {
             licenseeId: 0,

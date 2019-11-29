@@ -1,54 +1,44 @@
-﻿namespace Fanex.Athena.Service.Report.UnitTests
+﻿namespace Fanex.Athena.Service.Core.UnitTests
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-
     using Core.Users.Interfaces;
-
     using DataAccess.Core.Users.Interfaces;
-
     using Extension.Utility.Interfaces;
-
     using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Model.Core.DTO.Configuration;
+    using Fanex.Athena.Model.Core.DTO.Users;
     using Fanex.Athena.Model.Report.DTO;
-
-    using Interfaces;
-
+    using Fanex.Athena.Service.Core.Users;
     using NSubstitute;
-
     using NUnit.Framework;
 
     [TestFixture]
     public class SubsidiaryServiceTest
     {
         private const string LicenseeName = "12Bet";
-        private ISessionService _sessionService;
         private ISubsidiaryDataAccess _dataAccess;
         private ICustomMemoryCacheService _cache;
         private ISubsidiaryService _service;
+
+        private UserAuthInfo _userAuthInfo;
 
         [SetUp]
         public void SetUp()
         {
             _dataAccess = Substitute.For<ISubsidiaryDataAccess>();
+            _cache?.Clear();
             _cache = Substitute.For<ICustomMemoryCacheService>();
-            _sessionService = Substitute.For<ISessionService>();
-            _sessionService.LicenseeSession.Returns(new LicenseeAuthInfo
-            {
-                LicenseeName = LicenseeName
-            });
-            _sessionService.UserSession.Returns(new UserAuthInfo
+
+            _service = new SubsidiaryService(_dataAccess, _cache);
+
+            _userAuthInfo = new UserAuthInfo
             {
                 CurrencyList = new Dictionary<int, string>() { { 20, "UUS" }, { 51, "IDR" }, { 13, "CNY" } },
                 CurrencyAgentList = GetAgentByCurrencyData()
-            });
-
-            _dataAccess.GetSubsidiaryList(Arg.Any<string>()).Returns(GetSubsidiaryData());
-            _cache.Get(Arg.Any<string>(), Arg.Any<Func<IEnumerable<Subsidiary>>>(), Arg.Any<int>())
-                .Returns(GetSubsidiaryData());
-
-            _service = new SubsidiaryService(_sessionService, _dataAccess, _cache);
+            };
         }
 
         [TearDown]
@@ -59,40 +49,23 @@
             _service = null;
         }
 
-        [Test]
-        public void GetOperatorList_DataIsInCache_DoNotCallDataAccess()
-        {
-            // Arrange
-            var cacheKey = $"SubsidiaryList_{LicenseeName}";
-
-            // Action
-            _service.GetSubsidiaryList();
-
-            // Assert
-            _dataAccess.DidNotReceiveWithAnyArgs().GetSubsidiaryList(LicenseeName);
-        }
-
-        [Test]
-        public void GetOperatorList_FilterOperatorByUserAgents_ReturnCorrectlyOperatorList()
-        {
-            // Arrange
-            var cacheKey = $"SubsidiaryList_{LicenseeName}";
-            var expectedResult = GetAgentByCurrencyData().SelectMany(i => i.Value);
-
-            // Action
-            var result = _service.GetSubsidiaryList().Select(i => i.AgentId);
-
-            // Assert
-            Assert.AreEqual(true, result.Except(expectedResult).Count() == 0);
-        }
-
         [TestCase(null)]
         [TestCase("")]
         [TestCase(" , ")]
         public void GetCurrencyAgentList_NullOrEmptySubsidairyName_ReturnEmptyList(string subsidairyNames)
         {
             // Action
-            var result = _service.GetCurrencyAgentList(subsidairyNames, false, 0);
+            var result = _service.GetCurrencyAgentList(_userAuthInfo, LicenseeName, subsidairyNames, false, 0);
+
+            // Assert
+            Assert.AreEqual(false, result.Any());
+        }
+
+        [Test]
+        public void GetCurrencyAgentList_CurrencyIsUUSAndExcludeTestData_ReturnEmptyList()
+        {
+            // Action
+            var result = _service.GetCurrencyAgentList(_userAuthInfo, LicenseeName, string.Empty, true, CurrencyType.Uus);
 
             // Assert
             Assert.AreEqual(false, result.Any());
@@ -105,8 +78,12 @@
         public void GetCurrencyAgentList_FilterTestData_ReturnCorrectlyAgentList(
             string subsidiaryNames, bool isExcludeTest, int currencyId = 0)
         {
+            // Arrange
+            _cache.Get(Arg.Any<string>(), Arg.Any<Func<IEnumerable<Subsidiary>>>(), Arg.Any<int>())
+                .Returns(GetSubsidiaryData());
+
             // Action
-            var result = _service.GetCurrencyAgentList(subsidiaryNames, isExcludeTest, currencyId);
+            var result = _service.GetCurrencyAgentList(_userAuthInfo, LicenseeName, subsidiaryNames, isExcludeTest, currencyId);
 
             // Assert
             Assert.AreEqual(isExcludeTest, isExcludeTest && !result.Keys.Contains(20));
@@ -120,40 +97,19 @@
           string subsidiaryNames, int currencyId = 0)
         {
             // Arrange
+            _cache.Get(Arg.Any<string>(), Arg.Any<Func<IEnumerable<Subsidiary>>>(), Arg.Any<int>())
+                .Returns(GetSubsidiaryData());
             List<int> expectedResult = GetAgentListBySubsidairyNames(subsidiaryNames, currencyId);
 
             // Action
-            var result = _service.GetCurrencyAgentList(subsidiaryNames, false, currencyId)
+            var result = _service.GetCurrencyAgentList(_userAuthInfo, LicenseeName, subsidiaryNames, false, currencyId)
             .SelectMany(i => i.Value);
 
             // Assert
-            Assert.AreEqual(expectedResult.Count(), result.Count());
-
+            Assert.AreEqual(expectedResult.Count, result.Count());
             Assert.AreEqual(0, result.Except(expectedResult).Count());
         }
 
-        [TestCase("(others)", 0)]
-        [TestCase("(others),alex,qc", 0)]
-        [TestCase("(others)", 20)]
-        [TestCase("(others),qc", 51)]
-        public void GetCurrencyAgentList_FilterAgentByOtherOption_ReturnCorrectlyAgentList(
-         string subsidiaryNames, int currencyId = 0)
-        {
-            // Arrange
-            var expectedResult = GetAgentByCurrencyData().Where(i => i.Key == currencyId || currencyId == 0)
-                .SelectMany(i => i.Value).ToList()
-                .Except(GetSubsidiaryData().Select(i => i.AgentId))
-                .Union(GetAgentListBySubsidairyNames(subsidiaryNames, currencyId));
-
-            // Action
-            var result = _service.GetCurrencyAgentList(subsidiaryNames, false, currencyId)
-            .SelectMany(i => i.Value);
-
-            // Assert
-            Assert.AreEqual(expectedResult.Count(), result.Count());
-
-            Assert.AreEqual(0, result.Except(expectedResult).Count());
-        }
 
         private static List<int> GetAgentListBySubsidairyNames(string subsidiaryNames, int currencyId)
         {
@@ -173,7 +129,19 @@
                     { 13, new[] { 131, 132 } }
                 };
         }
-
+        private static IEnumerable<GroupSubsidiary> FakeGroupSubsidiaryData()
+        {
+            yield return new GroupSubsidiary
+            {
+                WhiteLabelID = 201,
+                WhiteLabelName = "201",
+                OperatorId = "alex"
+            };
+            yield return new GroupSubsidiary
+            {
+                OperatorId = "alex2"
+            };
+        }
         private static IEnumerable<Subsidiary> GetSubsidiaryData()
         {
             yield return new Subsidiary

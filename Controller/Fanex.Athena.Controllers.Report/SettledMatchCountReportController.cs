@@ -6,16 +6,12 @@
 
 namespace Fanex.Athena.Controllers.Report
 {
+    using Fanex.Athena.Model.Auth.DataDomain;
+
+    using Service.Report.Interfaces;
+
     using System.Threading.Tasks;
     using System.Web.Mvc;
-
-    using Fanex.Athena.Extension.Utility;
-    using Fanex.Athena.Model.Auth.DataDomain;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
-
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
-    using Service.Report.Interfaces;
 
     using Web.ActionFilter;
 
@@ -24,13 +20,7 @@ namespace Fanex.Athena.Controllers.Report
     {
         private readonly ISettledMatchCountService _settledMatchCountService;
 
-        public SettledMatchCountReportController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IAppSettings appSetting,
-            IProductService productService,
-            ISettledMatchCountService settledMatchCountService)
-            : base(languageService, sessionService, appSetting, productService, null)
+        public SettledMatchCountReportController(ISettledMatchCountService settledMatchCountService)
         {
             _settledMatchCountService = settledMatchCountService;
         }
@@ -38,9 +28,9 @@ namespace Fanex.Athena.Controllers.Report
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            var licenseeId = SessionService.LicenseeSession.LicenseeId;
-            var producAccess = ProductService.GetProductAccess(licenseeId, SessionService.UserSession.Language);
-            var model = await _settledMatchCountService.GetDataList(AppSettings.IsShowAllDataForSettleMatchCountReport, licenseeId, producAccess).ConfigureAwait(false);
+            var licenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
+            var producAccess = ProductServiceInstance.GetProductAccess(licenseeId, SessionServiceInstance.UserSession.Language);
+            var model = await _settledMatchCountService.GetDataList(AppSettingInstance.IsShowAllDataForSettleMatchCountReport, licenseeId, producAccess).ConfigureAwait(false);
 
             return View("~/Views/Desktop/Report/SettledMatchCount/Main.cshtml", model);
         }

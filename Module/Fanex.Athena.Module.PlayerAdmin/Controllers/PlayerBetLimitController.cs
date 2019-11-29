@@ -25,10 +25,7 @@
         private readonly IPlayerBetLimitRepository _playerBetLimitRepository;
 
         public PlayerBetLimitController(
-            ILanguageService languageService,
-            ISessionService sessionService,
             IPlayerBetLimitRepository playerBetLimitRepository)
-            : base(languageService, sessionService)
         {
             _playerBetLimitRepository = playerBetLimitRepository;
         }
@@ -37,7 +34,7 @@
         [ValidatePermissionOnData]
         public async Task<ViewResult> Index(int custId, int currencyId, int licenseeCustId)
         {
-            var productList = await GetProducts(SessionService.LicenseeSession.LicenseeName).ConfigureAwait(false);
+            var productList = await GetProducts(SessionServiceInstance.LicenseeSession.LicenseeName).ConfigureAwait(false);
             var viewModel = new PlayerBetLimitProductViewModel
             {
                 CustId = custId,

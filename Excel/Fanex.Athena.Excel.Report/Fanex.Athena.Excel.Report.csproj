@@ -135,7 +135,6 @@
     <Compile Include="CashOutWinLossExcel.cs" />
     <Compile Include="ActiveCustomerSummaryExcel.cs" />
     <Compile Include="Helpers\ReportExcelHelper.cs" />
-    <Compile Include="PromotionPrizeExcel.cs" />
     <Compile Include="AgCasinoBalanceExcel.cs" />
     <Compile Include="Models\CustomerPendingFundsExcelModel.cs" />
     <Compile Include="Models\LicenseeWinLossExcelModel.cs" />

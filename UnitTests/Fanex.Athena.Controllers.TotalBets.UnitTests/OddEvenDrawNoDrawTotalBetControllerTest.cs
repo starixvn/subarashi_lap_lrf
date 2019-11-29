@@ -68,10 +68,11 @@
 
         private OddEvenDrawNoDrawTotalBetController CreateController()
         {
-            return new OddEvenDrawNoDrawTotalBetController(
-                            LangService,
-                            SessionService,
-                            _oddEvenDrawNoDrawDataAccess);
+            return new OddEvenDrawNoDrawTotalBetController(_oddEvenDrawNoDrawDataAccess)
+            {
+                LangService = LangService,
+                SessionServiceInstance = SessionService
+            };
         }
 
         private void SepUpForService()

@@ -67,10 +67,11 @@
     
         private HomeDrawAwayNoBetTotalBetController CreateController()
         {
-            return new HomeDrawAwayNoBetTotalBetController(
-                            LangService,
-                            SessionService,
-                            _homeDrawAwayNoBetDataAccess);
+            return new HomeDrawAwayNoBetTotalBetController(_homeDrawAwayNoBetDataAccess)
+            {
+                LangService = LangService,
+                SessionServiceInstance = SessionService
+            };
         }
 
         private void SepUpForService()

@@ -1,7 +1,6 @@
 ﻿namespace Fanex.Athena.Controllers.BetList.UnitTests
 {
     using System;
-    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Model.BetList.MetaModel;
@@ -54,7 +53,6 @@
             }
         }
 
- 
         [TestCase(1, "USD", null, "USD", true)]
         [TestCase(1, "USD", "eur", "EUR", false)]
         public async Task Index_ExportExcel_PassCorrectParam(
@@ -107,13 +105,17 @@
 
         private CustomerWinLossBetListController CreateController()
         {
-            return Substitute.ForPartsOf<CustomerWinLossBetListController>(
-                LangService,
-                SessionService,
-                ProductService,
-                BalanceUpDataAccess,
-                CacheRefAdapter,
-                BetListApiClient, LicenseeSettingService);
+            var controller = Substitute.ForPartsOf<CustomerWinLossBetListController>();
+
+            controller.SessionServiceInstance = SessionService;
+            controller.LangService = LangService;
+            controller.LicenseeSettingServiceInstance = LicenseeSettingService;
+            controller.BalanceUpDataAccessInstance = BalanceUpDataAccess;
+            controller.BetListApiClient = BetListApiClient;
+            controller.ProductService = ProductService;
+            controller.CacheRefAdapter = CacheRefAdapter;
+
+            return controller;
         }
     }
 }

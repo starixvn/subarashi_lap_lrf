@@ -6,12 +6,7 @@
 
 namespace Fanex.Athena.Controllers.BetList
 {
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-
-    using DataAccess.Core.Configuration.Interfaces;
     using Fanex.Athena.Model.Auth.DataDomain;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
 
     using Model.BetList.MetaModel;
@@ -20,10 +15,8 @@ namespace Fanex.Athena.Controllers.BetList
 
     using Resources;
 
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
-
-    using VendorAdapter.Interfaces;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
 
     using Web.ActionFilter;
 
@@ -39,17 +32,6 @@ namespace Fanex.Athena.Controllers.BetList
     /// </summary>
     public class RunningBetListController : BetListBaseController
     {
-        public RunningBetListController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IProductService productService,
-            IBalanceUpDataAccess balanceUpDataAccess,
-            ICacheRefAdapter cacheRefAdapter,
-            IBetListApiClient betListApiClient, ILicenseeSettingService licenseeSettingService)
-        : base(languageService, sessionService, productService, balanceUpDataAccess,
-              cacheRefAdapter, betListApiClient, licenseeSettingService)
-        { }
-
         [HttpGet]
         [FunctionAuthorization(PermissionKeys.TotalBetCleanSheet)]
         [ValidationWebRequest(IsValidCurrency = true)]
@@ -86,7 +68,7 @@ namespace Fanex.Athena.Controllers.BetList
 
         private async Task<ActionResult> ProcessRequest(BetListExcelMetaModel metaModel, string uspKey = "Lrf_BetList_SelRunningByBettype")
         {
-            var userSession = SessionService.UserSession;
+            var userSession = SessionServiceInstance.UserSession;
             var currencies = userSession.CurrencyList;
 
             CreateDefaultMetaModel(metaModel);
@@ -104,7 +86,7 @@ namespace Fanex.Athena.Controllers.BetList
                 Param = metaModel,
                 CurrencyList = currencies,
                 ProductAccess = ProductService.GetProductAccess(metaModel.LicenseeId, userSession.Language),
-                IsAllowedCustomerCommission = SessionService.LicenseeSession.IsAllowedCustomerComm
+                IsAllowedCustomerCommission = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm
             };
 
             return View("~/Views/Desktop/BetList/RunningBetList/Main.cshtml", model);
@@ -116,7 +98,7 @@ namespace Fanex.Athena.Controllers.BetList
 
             metaModel.ShowingOption = new BetListShowingOption
             {
-                CustomerCommVisible = SessionService.LicenseeSession.IsAllowedCustomerComm,
+                CustomerCommVisible = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm,
             };
 
             var baseCurrency = GetViewInCurrency(metaModel);

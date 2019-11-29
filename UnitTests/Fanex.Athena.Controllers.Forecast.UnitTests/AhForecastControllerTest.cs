@@ -277,13 +277,12 @@
         {
             _forecastAhService = Substitute.For<IForecastAhService>();
 
-            var controller = new AhForecastController(
-                LangService,
-                SessionService,
-                AppSettings,
-                _forecastAhService)
+            var controller = new AhForecastController(_forecastAhService)
             {
-                ControllerContext = ControllerContext
+                ControllerContext = ControllerContext,
+                LangService = LangService,
+                SessionServiceInstance = SessionService,
+                AppSettingInstance = AppSettings
             };
 
             return controller;

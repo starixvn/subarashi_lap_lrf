@@ -7,6 +7,13 @@ export const setSelectedSubsidiary = (subsidiaryKeys) => {
     }
 }
 
+export const setSelectedWhiteLabel = (whiteLabelKeys) => {
+    return {
+        type: types.SET_WHITELABEL,
+        data: whiteLabelKeys
+    }
+}
+
 export const setDateRange = (dateRange) => {
     const range = {
         fromDate: dateRange.startDate,

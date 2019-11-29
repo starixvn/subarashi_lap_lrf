@@ -15,7 +15,7 @@ export default class PlayerListDataHelper {
 
     static mergePlayerItem(lrfItem, lapItem) {
         const { OddsGroup, BaStatus, SpecialLevel } = lrfItem;
-        const { Status, RealName, email, isOnline, IBCCustId, isArchived, LastTransaction, CurrencyCode, OutBalance, IBCUserName } = lapItem;
+        const { Status, RealName, email, isOnline, IBCCustId, isArchived, LastTransaction, CurrencyCode, OutBalance, IBCUserName, CreatedDateString } = lapItem;
 
         return {
             IbcCustId: IBCCustId,
@@ -35,7 +35,8 @@ export default class PlayerListDataHelper {
             IsOnline: isOnline,
             IsDeposit: IBCCustId > 0,
             IsArchived: !!isArchived,
-            CurrencyId: lapItem.Currency
+            CurrencyId: lapItem.Currency,
+            CreatedDate: CreatedDateString
         };
     }
 

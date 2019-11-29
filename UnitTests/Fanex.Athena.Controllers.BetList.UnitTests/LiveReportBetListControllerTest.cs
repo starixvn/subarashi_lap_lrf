@@ -133,8 +133,8 @@
             }
         }
 
-        [TestCase(1,"USD", null, "USD")]
-        [TestCase(1,"USD", "eur", "EUR")]
+        [TestCase(1, "USD", null, "USD")]
+        [TestCase(1, "USD", "eur", "EUR")]
         [TestCase(0, "", "CNY", "CNY")]
         public async Task Match_ExportExcel_PassCorrectParam(
             int currencyId,
@@ -165,7 +165,7 @@
                 var betlistCaption = "Home vs Away ";
                 var expectedTitle = $"{ViewResources.BetList} - {betlistCaption} - 11/11/2018 --> 12/12/2018 - {viewInCaption}";
 
-                SetUpForExportingExcel(metaModel, controller);
+                SetUpForExportingExcel(controller);
 
                 // Action
                 await controller.Match(metaModel);
@@ -174,7 +174,6 @@
                 await AssertExcelParameters(startIndex, expectedTitle, "Lrf_BetList_LiveReport_SelWinlossByMatch", controller);
             }
         }
-
 
         [TestCase(1, "USD", null, "USD")]
         [TestCase(1, "USD", "eur", "EUR")]
@@ -204,7 +203,7 @@
                 var betlistCaption = string.Empty;
                 var expectedTitle = $"{ViewResources.BetList} - {betlistCaption} - 11/11/2018 --> 12/12/2018 - {viewInCaption}";
 
-                SetUpForExportingExcel(metaModel, controller);
+                SetUpForExportingExcel(controller);
 
                 // Action
                 await controller.MixParlay(metaModel);
@@ -214,8 +213,8 @@
             }
         }
 
-        [TestCase(1,"USD", null, "USD")]
-        [TestCase(1,"USD", "eur", "EUR")]
+        [TestCase(1, "USD", null, "USD")]
+        [TestCase(1, "USD", "eur", "EUR")]
         public async Task Outright_ExportExcel_PassCorrectParam(
             int currencyId,
             string currency, string baseCurrency, string expectedCurrency)
@@ -240,7 +239,7 @@
                 var betlistCaption = ViewResources.Outright;
                 var expectedTitle = $"{ViewResources.BetList} - {betlistCaption} - 11/11/2018 --> 12/12/2018 - {viewInCaption}";
 
-                SetUpForExportingExcel(metaModel, controller);
+                SetUpForExportingExcel(controller);
 
                 // Action
                 await controller.Outright(metaModel);
@@ -249,7 +248,6 @@
                 await AssertExcelParameters(startIndex, expectedTitle, "Lrf_BetList_LiveReport_SelWinlossOutright", controller);
             }
         }
-
 
         [TestCase(1, "USD", null, "USD")]
         [TestCase(1, "USD", "eur", "EUR")]
@@ -278,7 +276,7 @@
                 var betlistCaption = ViewResources.ProductNG;
                 var expectedTitle = $"{ViewResources.BetList} - {betlistCaption} - 11/11/2018 --> 12/12/2018 - {viewInCaption}";
 
-                SetUpForExportingExcel(metaModel, controller);
+                SetUpForExportingExcel(controller);
 
                 // Action
                 await controller.NumberGame(metaModel);
@@ -287,7 +285,6 @@
                 await AssertExcelParameters(startIndex, expectedTitle, "Lrf_BetList_LiveReport_SelWinlossNumberGame", controller);
             }
         }
-
 
         [TestCase(1, "USD", null, "USD")]
         [TestCase(1, "USD", "eur", "EUR")]
@@ -317,7 +314,7 @@
                 var viewInCaption = string.Format(ViewResources.Viewin, expectedCurrency);
                 var expectedTitle = $"{ViewResources.BetList} - {BetlistCaption} - 11/11/2018 --> 12/12/2018 - {viewInCaption}";
 
-                SetUpForExportingExcel(metaModel, controller);
+                SetUpForExportingExcel(controller);
 
                 // Action
                 await controller.VirtualSports(metaModel);
@@ -327,7 +324,7 @@
             }
         }
 
-        private void SetUpForExportingExcel(LiveReportBetListMetaModel metaModel, LiveReportBetListController controller)
+        private void SetUpForExportingExcel(LiveReportBetListController controller)
         {
             controller.When(async x => await x.ProcessExportExcel(
                 Arg.Any<BetListExcelMetaModel>(),
@@ -362,13 +359,17 @@
 
         private LiveReportBetListController CreateController()
         {
-            return Substitute.ForPartsOf<LiveReportBetListController>(
-                LangService,
-                SessionService,
-                ProductService,
-                BalanceUpDataAccess,
-                CacheRefAdapter,
-                BetListApiClient, LicenseeSettingService);
+            var controller = Substitute.ForPartsOf<LiveReportBetListController>();
+
+            controller.SessionServiceInstance = SessionService;
+            controller.LangService = LangService;
+            controller.LicenseeSettingServiceInstance = LicenseeSettingService;
+            controller.BalanceUpDataAccessInstance = BalanceUpDataAccess;
+            controller.BetListApiClient = BetListApiClient;
+            controller.ProductService = ProductService;
+            controller.CacheRefAdapter = CacheRefAdapter;
+
+            return controller;
         }
     }
 }

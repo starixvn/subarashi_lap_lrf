@@ -6,32 +6,17 @@
 
 namespace Fanex.Athena.Controllers
 {
-    using System.Web.Mvc;
-
-    using Extension.Utility;
-
     using Fanex.Athena.Model.Auth.Enum;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     using ONEbook.UM.Filters;
 
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
+    using System.Web.Mvc;
 
     using Web.ActionFilter;
 
     [CheckUMFilter]
     public class HomeController : CultureBaseController
     {
-        public HomeController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            ILicenseeSettingService licenseeSettingService, IAppSettings appSettings
-           )
-        : base(languageService, sessionService, appSettings, licenseeSettingService)
-        {
-        }
-
         [AuthorizeRestriction(AppMode.Self)]
         public ActionResult Index()
         {
@@ -55,9 +40,9 @@ namespace Fanex.Athena.Controllers
         {
             if (!HttpContext.Response.IsRequestBeingRedirected)
             {
-                var user = SessionService.UserSession;
+                var user = SessionServiceInstance.UserSession;
                 if (user == null || user.UserId <= 0
-                    || string.IsNullOrEmpty(user.UserName) || SessionService.LicenseeSession == null)
+                    || string.IsNullOrEmpty(user.UserName) || SessionServiceInstance.LicenseeSession == null)
                 {
                     Session.Clear();
                     return RedirectToAction("LocationRestriction", "Utility");
@@ -70,13 +55,13 @@ namespace Fanex.Athena.Controllers
         private void AssignViewBagData()
         {
             var returnPath = TempData["ReturnPath"];
-            var userSession = SessionService.UserSession;
+            var userSession = SessionServiceInstance.UserSession;
             ViewBag.DefaultReportUrl = returnPath == null ? userSession.DefaultReportUrl : returnPath.ToString();
             ViewBag.OnUserId = userSession.OnUserId;
             ViewBag.IsInternal = userSession.IsInternal ? "1" : "0";
-            ViewBag.HasRecheckIn = AppSettings.LocalTest ? "0" : "1";
-            ViewBag.IsEnabledMoveBetNotification = AppSettings.IsEnabledMoveBetNotification
-                && !IsFakeLicensee(SessionService.LicenseeSession?.LicenseeName);
+            ViewBag.HasRecheckIn = AppSettingInstance.LocalTest ? "0" : "1";
+            ViewBag.IsEnabledMoveBetNotification = AppSettingInstance.IsEnabledMoveBetNotification
+                && !IsFakeLicensee(SessionServiceInstance.LicenseeSession?.LicenseeName);
         }
     }
 }

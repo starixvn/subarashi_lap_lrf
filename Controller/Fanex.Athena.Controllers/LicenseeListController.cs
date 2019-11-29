@@ -1,30 +1,21 @@
 ﻿namespace Fanex.Athena.Controllers
 {
-    using System.Web.Mvc;
-
     using DataAccess.Core.Users.Interfaces;
 
     using Fanex.Athena.Model.Auth.Enum;
 
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
+    using System.Web.Mvc;
 
     using Web.ActionFilter;
 
     [AuthorizeRestriction(AppMode.Self)]
     public class LicenseeListController : CultureBaseController
     {
-        private readonly ISessionService _sessionService;
-
         private readonly ILicenseeDataAccess _licenseeDataAccess;
 
         public LicenseeListController(
-            ILanguageService languageService,
-            ISessionService sessionService,
             ILicenseeDataAccess licenseeDataAccess)
-        : base(languageService, sessionService)
         {
-            _sessionService = sessionService;
             _licenseeDataAccess = licenseeDataAccess;
         }
 
@@ -32,7 +23,7 @@
         [AllowAnonymous]
         public ActionResult Index(int? licenseeId)
         {
-            var userSession = _sessionService.UserSession;
+            var userSession = SessionServiceInstance.UserSession;
             if (userSession == null || userSession.UserId <= 0)
             {
                 return RedirectToAction("SignIn", "Authorization");
@@ -65,7 +56,7 @@
 
         private ActionResult RedirectToHome(int licenseeId)
         {
-            _sessionService.UpdateLiceseeSession(licenseeId);
+            SessionServiceInstance.UpdateLiceseeSession(licenseeId);
 
             return RedirectToAction(nameof(Index), "Home");
         }

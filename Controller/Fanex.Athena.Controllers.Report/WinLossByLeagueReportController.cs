@@ -6,15 +6,8 @@
 
 namespace Fanex.Athena.Controllers.Report
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-
     using DataAccess.Core.Common.Interfaces;
 
-    using Extension.Utility;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Report.MetaModel;
@@ -27,8 +20,11 @@ namespace Fanex.Athena.Controllers.Report
 
     using Resources;
 
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
 
     [FunctionAuthorization(PermissionKeys.ReportWinLossByLeague)]
     public class WinLossByLeagueReportController : ReportBaseController
@@ -37,19 +33,12 @@ namespace Fanex.Athena.Controllers.Report
         private readonly ILeagueDataAccess _leagueDataAccess;
         private readonly IMatchService _matchService;
 
-#pragma warning disable S107 // Methods should not have too many parameters
-
         public WinLossByLeagueReportController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IAppSettings appSetting,
-            IProductService productService,
+
             ISportTypeDataAccess sportTypeDataAccess,
             ILeagueDataAccess leagueDataAccess,
             IMatchService matchService
             )
-            : base(languageService, sessionService, appSetting, productService, null)
-#pragma warning restore S107 // Methods should not have too many parameters
         {
             _sportTypeDataAccess = sportTypeDataAccess;
             _leagueDataAccess = leagueDataAccess;
@@ -59,10 +48,10 @@ namespace Fanex.Athena.Controllers.Report
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            var licenseeSession = SessionService.LicenseeSession;
-            var userSession = SessionService.UserSession;
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
+            var userSession = SessionServiceInstance.UserSession;
             var date = DateTime.Now;
-            var productAccess = ProductService.GetProductAccess(licenseeSession.LicenseeId, userSession.Language);
+            var productAccess = ProductServiceInstance.GetProductAccess(licenseeSession.LicenseeId, userSession.Language);
             var productList = productAccess.ProductList.Where(x => x.ProductCode == Product.SB || x.ProductCode == Product.BA);
             var metaModel = new WinLossByLeagueMetaModel
             {
@@ -98,7 +87,7 @@ namespace Fanex.Athena.Controllers.Report
                 Sports = sports.ToDictionary(x => x.ID, y => y.Name),
                 Leagues = leagues.ToDictionary(x => x.LeagueId, y => y.LeagueName),
                 Matches = matches.ToDictionary(x => x.MatchId, y => y.MatchName),
-                HasAmountDueToColumn = AppSettings.HasAmountDueToColumn
+                HasAmountDueToColumn = AppSettingInstance.HasAmountDueToColumn
             };
 
             return View("~/Views/Desktop/Report/WinLossByLeague/Main.cshtml", viewModel);

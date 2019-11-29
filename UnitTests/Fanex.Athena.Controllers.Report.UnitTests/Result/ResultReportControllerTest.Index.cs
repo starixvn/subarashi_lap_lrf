@@ -50,7 +50,7 @@
                 const string Url = "/ResultReport/Index";
                 const string ExpectResult = "dffffffffffffff";
                 var metaModel = new ResultMetaModel();
-                _betListApiClient.PostAsyncString(Url, metaModel,
+                _betListApiClient.PostAsyncStringAsync(Url, metaModel,
                     SessionService.UserSession.Language).Returns(ExpectResult);
 
                 // Action

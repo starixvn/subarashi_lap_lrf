@@ -8,13 +8,7 @@ namespace Fanex.Athena.Controllers.BetList
 {
     #region Using
 
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-
-    using DataAccess.Core.Configuration.Interfaces;
     using Fanex.Athena.Model.Auth.DataDomain;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
 
@@ -24,10 +18,9 @@ namespace Fanex.Athena.Controllers.BetList
 
     using Resources;
 
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
-
-    using VendorAdapter.Interfaces;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
 
     #endregion Using
 
@@ -45,17 +38,6 @@ namespace Fanex.Athena.Controllers.BetList
         private const string DoubleChangeBettypes = "24,151,186,410,431";
 
         private const string BONTeamToScoreBettypes = "26,145,146,170,188,427,433";
-
-        public RunningBettypesBetListController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IProductService productService,
-            IBalanceUpDataAccess balanceUpDataAccess,
-            ICacheRefAdapter cacheRefAdapter,
-            IBetListApiClient betListApiClient, ILicenseeSettingService licenseeSettingService)
-        : base(languageService, sessionService, productService, balanceUpDataAccess,
-              cacheRefAdapter, betListApiClient, licenseeSettingService)
-        { }
 
         [HttpGet]
         [FunctionAuthorization(PermissionKeys.TotalBetMixParlay)]
@@ -92,8 +74,8 @@ namespace Fanex.Athena.Controllers.BetList
 
         private async Task<ActionResult> ProcessRequest(BetListExcelMetaModel metaModel)
         {
-            var licenseeSession = SessionService.LicenseeSession;
-            var userSession = SessionService.UserSession;
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
+            var userSession = SessionServiceInstance.UserSession;
             var currencies = userSession.CurrencyList;
 
             CreateDefaultMetaModel(metaModel);
@@ -123,7 +105,7 @@ namespace Fanex.Athena.Controllers.BetList
 
             metaModel.ShowingOption = new BetListShowingOption
             {
-                CustomerCommVisible = SessionService.LicenseeSession.IsAllowedCustomerComm,
+                CustomerCommVisible = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm,
             };
 
             var firstBettype = metaModel.MultipleBettype.Split(',').FirstOrDefault();

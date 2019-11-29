@@ -87,7 +87,6 @@
                 metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, currencyIdList);
             }
 
-            metaModel.UserCurrencyList = UserCurrencyList;
             return await _betListApiClient.PostAsync("/LastBetMonitoringBetList/GetData",
                 metaModel, userSession.Language).ConfigureAwait(false);
         }

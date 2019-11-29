@@ -320,13 +320,13 @@
             _betSettingService = Substitute.For<IRngCasinoBetSettingService>();
 
             var controller = new RngCasinoBetSettingController(
-                LangService,
-                SessionService,
                 CoreBetSettingService,
                 ProductService,
-                _betSettingService, LicenseeSettingService)
+                _betSettingService)
             {
-                ControllerContext = ControllerContext
+                ControllerContext = ControllerContext,
+                SessionServiceInstance = SessionService,
+                LicenseeSettingServiceInstance = LicenseeSettingService
             };
 
             return controller;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -158,16 +159,16 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers
             {
                 IsExport = true
             };
-            _betListApiClient.PostAsyncBytes("/BettingTicketCenter/GetBySingleCustomer", metaModel, SessionService.UserSession.Language)
-                .Returns(new byte[] { 1, 2, 3 });
+            _betListApiClient.PostAsyncStream("/BettingTicketCenter/GetBySingleCustomer", metaModel, SessionService.UserSession.Language)
+                .Returns(new MemoryStream(new byte[] { 1, 2, 3 }));
 
             using (var controller = CreateController())
             {
                 // Action
-                var result = await controller.Index(metaModel) as FileContentResult;
+                var result = await controller.Index(metaModel) as FileStreamResult;
 
                 // Assert
-                Assert.That(result.FileContents.Length, Is.EqualTo(3));
+                Assert.That(result.FileStream.Length, Is.EqualTo(3));
                 Assert.That(result.ContentType, Is.EqualTo("application/octet-stream"));
             }
         }
@@ -180,11 +181,11 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers
                 SessionService.UserSession.Language,
                 FunctionNames.BettingTicketCenter).Returns(expectedProductAccess ?? new ProductAccess(new List<Product>()));
 
-            return new PlayerBtcSingleCustomerController(
-                LangService,
-                SessionService,
-                _betListApiClient,
-                productService);
+            var result = new PlayerBtcSingleCustomerController(_betListApiClient, productService);
+            result.LangService = LangService;
+            result.SessionServiceInstance = SessionService;
+
+            return result;
         }
     }
 }

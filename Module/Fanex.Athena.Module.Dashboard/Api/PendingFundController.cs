@@ -17,14 +17,11 @@
             _dataAccess = dataAccess;
         }
 
+        [StatelessApiAutoBindMetaModel(BindAgent = true)]
+        [StatelessApiRequestValidation(ResponseContent = "0")]
         public async Task<decimal> GetData([FromUri] DashboardBaseModel metaModel)
         {
-            if (!metaModel.IsValid)
-            {
-                return 0;
-            }
 
-            AssignAuthProperties(metaModel);
             return await _dataAccess.GetPendingFunds(metaModel).ConfigureAwait(false);
         }
     }

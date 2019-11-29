@@ -5,14 +5,10 @@
     using System.Web.SessionState;
     using System.Web.UI;
     using Fanex.Athena.Controllers;
-    using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Auth.Enum;
     using Fanex.Athena.Module.PlayerAdmin.DTO;
-    using Fanex.Athena.Module.PlayerAdmin.MetaModel;
     using Fanex.Athena.Resources;
-    using Fanex.Athena.Service.Core.Common.Interfaces;
-    using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.VendorAdapter.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
@@ -28,40 +24,9 @@
     {
         private const string MixedSportId = "99MP";
 
-        private readonly IAuthorizationService _authService;
+        public IAuthorizationService AuthServiceInstance { get; set; }
 
-        private readonly ICacheRefAdapter _cacheRefAdapter;
-
-        public PlayerBetLimitBaseControler(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IAppSettings appSettings,
-            ICacheRefAdapter cacheRefAdapter,
-            IAuthorizationService authorizationService)
-            : base(languageService, sessionService, appSettings, null)
-        {
-            _authService = authorizationService;
-            _cacheRefAdapter = cacheRefAdapter;
-        }
-
-        public PlayerBetLimitBaseControler(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            ICacheRefAdapter cacheRefAdapter,
-            IAuthorizationService authorizationService)
-            : base(languageService, sessionService, null, null)
-        {
-            _authService = authorizationService;
-            _cacheRefAdapter = cacheRefAdapter;
-        }
-
-        protected static void AddUpdateInfo<T>(PlayerBetLimitUpdateMetaModel<T> metaModel, int userId, string language, string siteName, string ip)
-        {
-            metaModel.UserId = userId;
-            metaModel.Language = language;
-            metaModel.SiteName = siteName;
-            metaModel.Ip = ip;
-        }
+        public ICacheRefAdapter CacheRefAdapterInstance { get; set; }
 
         protected IEnumerable<PlayerBetLimit> AddSettingTypeName(IEnumerable<PlayerBetLimit> data)
         {
@@ -73,8 +38,8 @@
             return data;
         }
 
-        protected bool HasEditPermission() => _authService.HasPermissions(SessionService.UserSession, PermissionKeys.PlayerAdminBetLimit_Write);
+        protected bool HasEditPermission() => AuthServiceInstance.HasPermissions(SessionServiceInstance.UserSession, PermissionKeys.PlayerAdminBetLimit_Write);
 
-        protected string GetSportName(string sportId) => sportId == MixedSportId ? ViewResources.MixSportsParlay : _cacheRefAdapter.GetSportName(sportId);
+        protected string GetSportName(string sportId) => sportId == MixedSportId ? ViewResources.MixSportsParlay : CacheRefAdapterInstance.GetSportName(sportId);
     }
 }

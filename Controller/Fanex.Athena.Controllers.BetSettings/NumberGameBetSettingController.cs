@@ -6,10 +6,6 @@
 
 namespace Fanex.Athena.Controllers.BetSettings
 {
-    using System.Collections;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
 
@@ -19,23 +15,21 @@ namespace Fanex.Athena.Controllers.BetSettings
     using Resources;
 
     using Service.BetSettings.Interfaces;
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
+
+    using System.Collections;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
 
     public class NumberGameBetSettingController : BetSettingBaseController
     {
         private readonly INumberGameBetSettingService _betSettingService;
 
         public NumberGameBetSettingController(
-            ILanguageService languageService,
-            ISessionService sessionService,
             ICoreBetSettingService coreBetSettingService,
             IProductService productService,
-            INumberGameBetSettingService betSettingService,
-             ILicenseeSettingService licenseeSettingService
-
+            INumberGameBetSettingService betSettingService
             )
-        : base(languageService, sessionService, coreBetSettingService, productService, licenseeSettingService)
+        : base(coreBetSettingService, productService)
         {
             _betSettingService = betSettingService;
         }
@@ -56,8 +50,8 @@ namespace Fanex.Athena.Controllers.BetSettings
         [ValidatePermissionOnData]
         public async Task<JsonResult> UpdateBetSetting(string nickName)
         {
-            var userSession = SessionService.UserSession;
-            var licenseeId = SessionService.LicenseeSession.LicenseeId;
+            var userSession = SessionServiceInstance.UserSession;
+            var licenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
 
             if (!CheckPermission(userSession, ProductTypes.NumberGame))
             {

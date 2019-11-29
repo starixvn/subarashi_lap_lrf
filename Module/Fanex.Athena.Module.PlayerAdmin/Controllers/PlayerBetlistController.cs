@@ -26,10 +26,7 @@
         private readonly IBetListApiClient _betListApiClient;
 
         public PlayerBetListController(
-            ILanguageService languageService,
-            ISessionService sessionService,
             IBetListApiClient betListApiClient)
-            : base(languageService, sessionService)
         {
             _betListApiClient = betListApiClient;
         }
@@ -38,7 +35,7 @@
         [ValidatePermissionOnData]
         public ViewResult Running(int custId, int currencyId)
         {
-            var currencyList = SessionService.UserSession.CurrencyList;
+            var currencyList = SessionServiceInstance.UserSession.CurrencyList;
 
             var viewModel = new PlayerRunningBetListViewModel
             {
@@ -53,7 +50,7 @@
         [AjaxRequest]
         [CustomValidateAntiForgery]
         [ValidatePermissionOnData(isObject: true)]
-        [AutoBindMetaModel(BindAgent = true, BindDictionaryCurrencyList = true)]
+        [AutoBindMetaModel(BindAgent = true)]
         [OutputCache(NoStore = true, Duration = 0, Location = OutputCacheLocation.None, VaryByParam = "*")]
         public async Task<dynamic> GetRunningBetList(PlayerRunningBetListMetalModel metaModel)
         {
@@ -64,17 +61,17 @@
 
         public async Task<dynamic> GetRunningBetListDataAsync(PlayerRunningBetListMetalModel metaModel)
         {
-            return JsonString(await _betListApiClient.PostAsyncString(
+            return JsonString(await _betListApiClient.PostAsyncStringAsync(
                     "/PlayerAdminBetList/GetBetList",
                     metaModel,
-                    SessionService.UserSession.Language).ConfigureAwait(false));
+                    SessionServiceInstance.UserSession.Language).ConfigureAwait(false));
         }
 
         public async Task<ActionResult> ExportRunningBetListDataAsync(PlayerRunningBetListMetalModel metaModel)
         {
-            var stream = await _betListApiClient.PostAsyncBytes("/PlayerAdminBetList/Export",
+            var stream = await _betListApiClient.PostAsyncStream("/PlayerAdminBetList/Export",
                 metaModel,
-                SessionService.UserSession.Language).ConfigureAwait(false);
+                SessionServiceInstance.UserSession.Language).ConfigureAwait(false);
 
             if (stream is null || stream.Length == 0)
             {

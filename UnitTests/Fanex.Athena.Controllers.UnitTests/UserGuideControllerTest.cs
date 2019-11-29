@@ -366,13 +366,15 @@
         private UserGuideController CreateController()
         {
             var controller = new UserGuideController(
-                LangService,
-                SessionService,
                 _fileSystem,
                 _productService,
                 _balanceUpDataAccess)
             {
-                ControllerContext = ControllerContext
+                ControllerContext = ControllerContext,
+                LangService = LangService,
+                SessionServiceInstance = SessionService,
+                AppSettingInstance = AppSettings
+
             };
 
             controller.Server.MapPath(Arg.Any<string>()).Returns(x => x.ArgAt<string>(0));

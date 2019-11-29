@@ -6,10 +6,6 @@
 
 namespace Fanex.Athena.Controllers.BetSettings
 {
-    using System;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
 
@@ -21,23 +17,21 @@ namespace Fanex.Athena.Controllers.BetSettings
     using Resources;
 
     using Service.BetSettings.Interfaces;
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
+
+    using System;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
 
     public class KenoBetSettingController : BetSettingBaseController
     {
         private readonly IKenoBetSettingService _betSettingService;
 
         public KenoBetSettingController(
-            ILanguageService languageService,
-            ISessionService sessionService,
             ICoreBetSettingService coreBetSettingService,
             IProductService productService,
-            IKenoBetSettingService betSettingService,
-             ILicenseeSettingService licenseeSettingService
-
+            IKenoBetSettingService betSettingService
             )
-        : base(languageService, sessionService, coreBetSettingService, productService, licenseeSettingService)
+        : base(coreBetSettingService, productService)
         {
             _betSettingService = betSettingService;
         }
@@ -45,7 +39,6 @@ namespace Fanex.Athena.Controllers.BetSettings
         [HttpGet]
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         [ValidatePermissionOnData(isObject: true)]
-
         public async Task<ActionResult> Index(BetSettingMetaModel metaModel)
         {
             var viewModel = await _betSettingService.GetViewModelAsync(
@@ -59,8 +52,8 @@ namespace Fanex.Athena.Controllers.BetSettings
         [ValidatePermissionOnData]
         public async Task<JsonResult> UpdateBetSetting(string nickName)
         {
-            var userSession = SessionService.UserSession;
-            var licenseeId = SessionService.LicenseeSession.LicenseeId;
+            var userSession = SessionServiceInstance.UserSession;
+            var licenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
 
             if (!CheckPermission(userSession, ProductTypes.Keno))
             {

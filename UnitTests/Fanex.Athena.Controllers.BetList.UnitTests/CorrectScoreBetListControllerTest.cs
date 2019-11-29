@@ -21,7 +21,6 @@
                 .Returns(new ProductAccess(new List<Product> { new Product { ProductCode = Product.AB } }));
 
             SetUpDefaultFakeData();
-
         }
 
         [Test]
@@ -55,9 +54,8 @@
             }
         }
 
-
-        [TestCase(1,"CNY", null, "CNY")]
-        [TestCase(0,"", "", "EUR")]
+        [TestCase(1, "CNY", null, "CNY")]
+        [TestCase(0, "", "", "EUR")]
         [TestCase(0, "", "GBP", "GBP")]
         public async Task Index_ExportExcel_PassCorrectParam(
             int currencyId,
@@ -103,13 +101,17 @@
 
         private CorrectScoreBetListController CreateController()
         {
-            return Substitute.ForPartsOf<CorrectScoreBetListController>(
-                LangService,
-                SessionService,
-                ProductService,
-                BalanceUpDataAccess,
-                CacheRefAdapter,
-                BetListApiClient, LicenseeSettingService);
+            var controller = Substitute.ForPartsOf<CorrectScoreBetListController>();
+
+            controller.SessionServiceInstance = SessionService;
+            controller.LangService = LangService;
+            controller.LicenseeSettingServiceInstance = LicenseeSettingService;
+            controller.BalanceUpDataAccessInstance = BalanceUpDataAccess;
+            controller.BetListApiClient = BetListApiClient;
+            controller.ProductService = ProductService;
+            controller.CacheRefAdapter = CacheRefAdapter;
+
+            return controller;
         }
     }
 }

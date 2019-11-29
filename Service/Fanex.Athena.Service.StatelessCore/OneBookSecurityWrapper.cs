@@ -22,7 +22,7 @@
             }
             catch (Exception exception)
             {
-                throw new Exception("An error occurred when processing LAP.Token", exception);
+                throw new InvalidOperationException("An error occurred when processing LAP.Token", exception);
             }
         }
     }

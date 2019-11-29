@@ -18,14 +18,10 @@
             _dataAccess = todayWithdrawal;
         }
 
+        [StatelessApiAutoBindMetaModel(BindAgent = true)]
+        [StatelessApiRequestValidation(ResponseContent = "0")]
         public async Task<decimal> GetData([FromUri] DashboardBaseModel metaModel)
         {
-            if (!metaModel.IsValid)
-            {
-                return 0;
-            }
-
-            AssignAuthProperties(metaModel);
             metaModel.FromDate = DateTime.Now.Date;
             return await _dataAccess.GetTodayWithdrawal(metaModel).ConfigureAwait(false);
         }

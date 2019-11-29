@@ -1,10 +1,8 @@
 ﻿namespace Fanex.Athena.Controllers.BetList.UnitTests
 {
     using System;
-    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.BetList.MetaModel;
     using NSubstitute;
     using NUnit.Framework;
@@ -12,7 +10,6 @@
 
     public class PendingFundsBetListControllerTest : BetListBaseControllerHelperTest
     {
-       
         [OneTimeSetUp]
         public override void FixtureSetUp()
         {
@@ -108,13 +105,17 @@
 
         private PendingFundsBetListController CreateController()
         {
-            return Substitute.ForPartsOf<PendingFundsBetListController>(
-                LangService,
-                SessionService,
-                ProductService,
-                BalanceUpDataAccess,
-                CacheRefAdapter,
-                BetListApiClient, LicenseeSettingService);
+            var controller = Substitute.ForPartsOf<PendingFundsBetListController>();
+
+            controller.SessionServiceInstance = SessionService;
+            controller.LangService = LangService;
+            controller.LicenseeSettingServiceInstance = LicenseeSettingService;
+            controller.BalanceUpDataAccessInstance = BalanceUpDataAccess;
+            controller.BetListApiClient = BetListApiClient;
+            controller.ProductService = ProductService;
+            controller.CacheRefAdapter = CacheRefAdapter;
+
+            return controller;
         }
     }
 }

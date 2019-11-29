@@ -6,15 +6,8 @@
 
 namespace Fanex.Athena.Controllers.BetList
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Web.Mvc;
-
-    using DataAccess.Core.Configuration.Interfaces;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.MetaModel.Product;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     using Model.BetList.MetaModel;
     using Model.BetList.ViewModel;
@@ -22,10 +15,10 @@ namespace Fanex.Athena.Controllers.BetList
 
     using Resources;
 
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
-
-    using VendorAdapter.Interfaces;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Web.Mvc;
 
     using Web.ActionFilter;
 
@@ -34,18 +27,6 @@ namespace Fanex.Athena.Controllers.BetList
     {
         private const string BetListCustomerOutstandingName = "BetList_CustomerOutstanding";
         private const string BetListCustomerOutstandingRunningName = "BetList_CustomerOutstandingRunning";
-
-        public CustomerOutstandingBetListController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IProductService productService,
-            IBalanceUpDataAccess balanceUpDataAccess,
-            ICacheRefAdapter cacheRefAdapter,
-            IBetListApiClient betListApiClient, ILicenseeSettingService licenseeSettingService)
-        : base(languageService, sessionService, productService, balanceUpDataAccess,
-              cacheRefAdapter, betListApiClient, licenseeSettingService)
-        {
-        }
 
         [ValidationWebRequest]
         public ActionResult Index(BetListMetaModel metaModel)
@@ -58,7 +39,7 @@ namespace Fanex.Athena.Controllers.BetList
 
             var productAccess = ProductService.GetProductAccess(
                 viewParam.LicenseeId,
-                SessionService.UserSession.Language,
+                SessionServiceInstance.UserSession.Language,
                 isRunningBetlist ? BetListCustomerOutstandingRunningName : BetListCustomerOutstandingName);
 
             var viewModel = new BetListBaseViewModel

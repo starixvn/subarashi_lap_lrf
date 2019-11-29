@@ -10,7 +10,6 @@
     using Fanex.Athena.Extension.Utility.Interfaces;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
-    using Fanex.Athena.Module.PlayerAdmin.DataDomains;
     using Fanex.Athena.Module.PlayerAdmin.DTO;
     using Fanex.Athena.Module.PlayerAdmin.DTO.BetLimits;
     using Fanex.Athena.Module.PlayerAdmin.Helpers;

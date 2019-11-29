@@ -1,8 +1,16 @@
 ﻿'use strict';
-define(['jquery', 'common/site', './customerlist.gridoption', 'lib/jqgrid/jquery.jqgrid.additional', 'components/paging', './customerlist.state',
-    'lib/jqgrid/jquery.jqGrid.en', 'lib/jqgrid/jquery.jqGrid.min', 'extensions/jquery.extension'],
+define(['jquery',
+    'common/site',
+    './customerlist.gridoption',
+    'lib/jqgrid/jquery.jqgrid.additional',
+    'components/paging',
+    './customerlist.state',
+    'lib/jqgrid/jquery.jqGrid.en',
+    'lib/jqgrid/jquery.jqGrid.min',
+    'extensions/jquery.extension'],
 function ($, Site, CustomerListOption, jqGridAdditional, PagingHelper, CustomerListState) {
     const _POPUP_LIST = ['#ViewOptionList', '#update-cust-status-popup', '#LevelListContainer', '#OddsGroupListContainer'];
+    const _OTHER_SUBSIDIARY_KEY = '(others)';
     let _isAllowedCustomerCommission, _isAllowedUserEditComm;
     let _productList;
     let _ajaxRequest = null;
@@ -22,6 +30,10 @@ function ($, Site, CustomerListOption, jqGridAdditional, PagingHelper, CustomerL
             _state.checkedAllRows = false;
 
             const data = _me.getPostData();
+            if (!data) {
+                return;
+            }
+
             const option = {
                 type: 'POST',
                 data: data,
@@ -61,7 +73,7 @@ function ($, Site, CustomerListOption, jqGridAdditional, PagingHelper, CustomerL
 
             const gridColumnCount = data.GridColumns.filter(function (item) { return item.Checked; }).length;
             if (gridColumnCount === 0) {
-                return;
+                return null;
             }
 
             if ($('#OddsGroups').length > 0) {
@@ -76,12 +88,19 @@ function ($, Site, CustomerListOption, jqGridAdditional, PagingHelper, CustomerL
 
                 const oddsGroupCount = data.OddsGroups.filter(function (item) { return item.Checked; }).length;
                 if (oddsGroupCount === 0) {
-                    return;
+                    return null;
                 }
             }
 
-            if ($('#subsidiary-multiselect').length > 0) {
-                data.SubsidiaryList = $('#subsidiary-multiselect').multiSelect('getCheckedItems').join();
+            data.IsViewOnSubsidiary = $('#IsViewOnSubsidiary').is(':checked');
+            if ($('#subsidiary-multiselect').length > 0 && data.IsViewOnSubsidiary) {
+                const subsidiaryList = $('#subsidiary-multiselect').multiSelect('getCheckedItems');
+
+                if (!subsidiaryList.length) {
+                    return null;
+                }
+
+                data.SubsidiaryList = subsidiaryList.join();
             }
 
             data.PageIndex = _state.pagingOption.pageindex;
@@ -289,6 +308,51 @@ function ($, Site, CustomerListOption, jqGridAdditional, PagingHelper, CustomerL
 
         closePopup: function (popUpSelector) {
             $(popUpSelector).fadeOut();
+        },
+
+        getSubsidiaryTree: function (data) {
+            let tree = [];
+
+            const total = data.length;
+            if (!total) {
+                return tree;
+            }
+
+            const createItem = function (item, id) {
+                return {
+                    Id: id,
+                    Value: item.Value,
+                    Text: item.Name,
+                    Checked: true,
+                    Enable: true
+                }
+            }
+
+            const getSubTree = function (subData, id) {
+                let subTree = createItem(subData, id);
+
+                if (subData.Children) {
+                    const totalChild = subData.Children.length;
+
+                    let items = [];
+
+                    for (let c = 0; c < totalChild; c++) {
+                        const child = subData.Children[c];
+                        items.push(getSubTree(child, id + '-' + child.Value));
+                    }
+
+                    subTree.Items = items;
+                }
+
+                return subTree;
+            }
+
+            for (let i = 0; i < total; i++) {
+                const subTree = data[i];
+                tree.push(getSubTree(subTree, subTree.Value));
+            }
+
+            return tree;
         }
     };
 

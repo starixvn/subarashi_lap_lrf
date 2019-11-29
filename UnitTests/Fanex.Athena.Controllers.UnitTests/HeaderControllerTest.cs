@@ -186,8 +186,14 @@
 
         private HeaderController CreateController()
         {
-            return new HeaderController(LangService, SessionService, AppSettings,
-                _licenseeDataAccess, _licenseeSettingService);
+            return new HeaderController(
+                _licenseeDataAccess)
+            {
+                LangService = LangService,
+                SessionServiceInstance = SessionService,
+                AppSettingInstance = AppSettings,
+                LicenseeSettingServiceInstance = _licenseeSettingService
+            };
         }
     }
 }

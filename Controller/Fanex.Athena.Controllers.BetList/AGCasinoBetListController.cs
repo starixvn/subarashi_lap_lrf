@@ -6,39 +6,17 @@
 
 namespace Fanex.Athena.Controllers.BetList
 {
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-
-    using DataAccess.Core.Configuration.Interfaces;
-
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
 
     using Model.BetList.MetaModel;
 
     using Resources;
 
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
-
-    using VendorAdapter.Interfaces;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
 
     public class AGCasinoBetListController : BetListBaseController
     {
-        public AGCasinoBetListController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IProductService productService,
-            IBalanceUpDataAccess balanceUpDataAccess,
-            ICacheRefAdapter cacheRefAdapter,
-            IBetListApiClient betListApiClient,
-            ILicenseeSettingService licenseeSettingService
-            )
-        : base(languageService, sessionService, productService, balanceUpDataAccess, cacheRefAdapter, betListApiClient,
-              licenseeSettingService)
-        {
-        }
-
         [HttpGet]
         [ValidationWebRequest(IsValidCurrency = true)]
         public async Task<ActionResult> Detail(BetListExcelMetaModel metaModel)
@@ -52,7 +30,7 @@ namespace Fanex.Athena.Controllers.BetList
             metaModel.ShowingOption = new BetListShowingOption
             {
                 GrandTotalVisible = false,
-                CustomerCommVisible = SessionService.LicenseeSession.IsAllowedCustomerComm
+                CustomerCommVisible = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm
             };
 
             metaModel.HiddenColumns = new[] { ExternalIdColumn, SystemIdColumn, BetEffectiveColumn, LicenseeWLColumn };

@@ -2,17 +2,16 @@
 {
     using System.Data;
     using Base.UnitTests;
-    using Model.Core.DataDomain;
     using DataAccess.Core.Configuration.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Model.Core.DataDomain;
     using NSubstitute;
     using NUnit.Framework;
     using Report;
     using Resources;
-    using Service.Core.Common.Interfaces;
     using Service.Report.Interfaces;
     using UnitTest.Common.Helpers;
     using VendorAdapter.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     [TestFixture]
     public class MatchWinLossReportControllerTest_AssignLeagueName : CultureBaseControllerHelperTest
@@ -77,12 +76,14 @@
         private MatchWinLossReportController CreateController(string productCodeList = null)
         {
             var controller = Substitute.ForPartsOf<MatchWinLossReportController>(
-                LangService,
-                SessionService,
-                Substitute.For<IProductService>(),
                 Substitute.For<IBalanceUpDataAccess>(),
                 _cacheRefAdapter,
                 Substitute.For<IMatchWinLossService>());
+
+            controller.LangService = LangService;
+            controller.SessionServiceInstance = SessionService;
+            controller.ProductServiceInstance = Substitute.For<IProductService>();
+
             return controller;
         }
     }

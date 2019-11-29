@@ -6,9 +6,6 @@
 
 namespace Fanex.Athena.Controllers.Report
 {
-    using System;
-    using System.Linq;
-    using System.Web.Mvc;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
@@ -16,24 +13,18 @@ namespace Fanex.Athena.Controllers.Report
 
     using Model.Core.DataDomain;
 
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
+    using System;
+    using System.Linq;
+    using System.Web.Mvc;
 
     [FunctionAuthorization(PermissionKeys.ReportAGCasinoWinLoss)]
     public class AgCasinoWinLossReportController : ReportBaseController
     {
-        public AgCasinoWinLossReportController(
-            ILanguageService languageService,
-            ISessionService sessionService)
-        : base(languageService, sessionService)
-        {
-        }
-
         [HttpGet]
         public ActionResult Index()
         {
-            var licenseeSession = this.SessionService.LicenseeSession;
-            var userSession = SessionService.UserSession;
+            var licenseeSession = this.SessionServiceInstance.LicenseeSession;
+            var userSession = SessionServiceInstance.UserSession;
             var date = DateTime.Now.AddDays(-1);
 
             var metaModel = new ThirdPartyWinLossMetaModel

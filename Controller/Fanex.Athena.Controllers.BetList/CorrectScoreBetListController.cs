@@ -12,9 +12,7 @@ namespace Fanex.Athena.Controllers.BetList
 
     using System.Web.Mvc;
 
-    using DataAccess.Core.Configuration.Interfaces;
     using Fanex.Athena.Model.Auth.DataDomain;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
 
     using Model.BetList.MetaModel;
@@ -22,36 +20,19 @@ namespace Fanex.Athena.Controllers.BetList
 
     using Resources;
 
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
-
-    using VendorAdapter.Interfaces;
-
     #endregion Using
 
     [FunctionAuthorization(PermissionKeys.TotalBetCorrectScore)]
     public class CorrectScoreBetListController : BetListBaseController
     {
-        public CorrectScoreBetListController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IProductService productService,
-            IBalanceUpDataAccess balanceUpDataAccess,
-            ICacheRefAdapter cacheRefAdapter,
-            IBetListApiClient betListApiClient, ILicenseeSettingService licenseeSettingService)
-      : base(languageService, sessionService, productService, balanceUpDataAccess,
-              cacheRefAdapter, betListApiClient, licenseeSettingService)
-        {
-        }
-
         [HttpGet]
         public ActionResult Index()
         {
             var metaModel = CreateDefaultMetaModel();
             InitBaseCurrencyValue(metaModel);
 
-            var licenseeSession = SessionService.LicenseeSession;
-            var userSession = SessionService.UserSession;
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
+            var userSession = SessionServiceInstance.UserSession;
 
             var model = new BetListBaseViewModel
             {
@@ -70,7 +51,7 @@ namespace Fanex.Athena.Controllers.BetList
         [ValidationWebRequest(IsValidCurrency = true)]
         public async Task<ActionResult> Index(BetListExcelMetaModel metaModel)
         {
-            var licenseeSession = SessionService.LicenseeSession;
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
             const string UspKey = "Lrf_TotalBets_Sel430";
 
             CreateDefaultMetaModel(metaModel);

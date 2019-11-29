@@ -2,12 +2,9 @@
 {
     using System.Web.Mvc;
     using Base.UnitTests;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Report.ViewModel;
-    using NSubstitute;
     using NUnit.Framework;
     using Report;
-    using Service.Core.Common.Interfaces;
 
     [TestFixture]
     public class CashOutWinLossReportControllerTest : CultureBaseControllerHelperTest
@@ -40,9 +37,11 @@
 
         private CashOutWinLossReportController CreateController()
         {
-            return new CashOutWinLossReportController(
-                LangService,
-                SessionService);
+            return new CashOutWinLossReportController()
+            {
+                LangService = LangService,
+                SessionServiceInstance = SessionService
+            };
         }
     }
 }

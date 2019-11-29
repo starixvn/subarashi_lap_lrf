@@ -22,7 +22,6 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api
             var items = assemblies.Where(ass => ass.FullName.Contains(moduleName)).ToArray();
 
             builder.RegisterAssemblyTypes(items).AsImplementedInterfaces();
-            builder.RegisterApiControllers(items);
 
             builder.RegisterType<CommonCustomerSettingLogFactory>()
                 .As<IBusinessLogBuilderFactory>()
@@ -39,6 +38,9 @@ namespace Fanex.Athena.Module.PlayerAdmin.Api
             builder.RegisterType<PlayerBaStatusService>().As<IPlayerBaStatusService>().WithAttributeFiltering();
             builder.RegisterType<PlayerOddsGroupService>().As<IPlayerOddsGroupService>().WithAttributeFiltering();
             builder.RegisterType<PlayerSpecialLevelService>().As<IPlayerSpecialLevelService>().WithAttributeFiltering();
+
+            builder.RegisterApiControllers(items).PropertiesAutowired();
+
         }
     }
 }

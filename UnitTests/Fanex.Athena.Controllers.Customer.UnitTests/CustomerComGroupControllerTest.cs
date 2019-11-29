@@ -185,11 +185,13 @@
         private CustomerComGroupController CreateController()
         {
             var controller = Substitute.ForPartsOf<CustomerComGroupController>(
-               LangService,
-               SessionService,
                _groupComService,
                _productService);
+
+            controller.LangService = LangService;
+            controller.SessionServiceInstance = SessionService;
             controller.ControllerContext = ControllerContext;
+
             return controller;
         }
     }

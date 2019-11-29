@@ -98,6 +98,18 @@
             formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
         };
 
+        const promotionColumn =
+        {
+            name: 'Promotion',
+            index: 'Promotion',
+            width: 80,
+            align: 'right',
+            sortable: false,
+            resizable: false,
+            formatter: 'currency',
+            formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
+        };
+
         const turnoverColumn =
         {
             name: 'Turnover',
@@ -263,6 +275,7 @@
         'Withdrawal',
         'Bonus',
         'Adjustment',
+        'Promotion',
         'Turnover',
         'DrawGame',
         'NetTurnover',
@@ -280,6 +293,7 @@
             withdrawalColumn,
             bonusColumn,
             adjustmentColumn,
+            promotionColumn,
             turnoverColumn,
             drawGameColumn,
             netTurnoverColumn,
@@ -314,8 +328,8 @@
             urlExcelData: 'api/CustomerBalanceReport/ExportExcel',
             hasCustomerComm: true,
             isAllowBA: true,
-            customerCommIndex: 11,
-            productBAIndex: 13,
+            customerCommIndex: 12,
+            productBAIndex: 14,
             totalColspan: 3,
             gridOption:
             {

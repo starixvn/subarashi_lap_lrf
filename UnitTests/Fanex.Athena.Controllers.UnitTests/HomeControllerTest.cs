@@ -1,14 +1,11 @@
 ﻿namespace Fanex.Athena.Controllers.UnitTests
 {
+    using System.Web.Mvc;
     using Base.UnitTests;
-
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using NSubstitute;
-
     using NUnit.Framework;
-
-    using System.Web.Mvc;
 
     [TestFixture]
     public partial class HomeControllerTest : CultureBaseControllerHelperTest
@@ -20,6 +17,7 @@
         {
             _licenseeSettingService = null;
         }
+
         [OneTimeSetUp]
         public override void FixtureSetUp()
         {
@@ -265,12 +263,13 @@
 
         private HomeController CreateController()
         {
-            return new HomeController(
-                LangService,
-                SessionService, _licenseeSettingService, AppSettings
-                )
+            return new HomeController()
             {
-                ControllerContext = ControllerContext
+                ControllerContext = ControllerContext,
+                LangService = LangService,
+                SessionServiceInstance = SessionService,
+                AppSettingInstance = AppSettings,
+                LicenseeSettingServiceInstance = _licenseeSettingService
             };
         }
     }

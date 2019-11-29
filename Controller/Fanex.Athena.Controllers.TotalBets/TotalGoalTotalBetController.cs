@@ -6,11 +6,8 @@
 
 namespace Fanex.Athena.Controllers.TotalBets
 {
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-
     using DataAccess.TotalBet.Interfaces;
+
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
@@ -18,8 +15,9 @@ namespace Fanex.Athena.Controllers.TotalBets
     using Model.TotalBet.MetaModel;
     using Model.TotalBet.ViewModel;
 
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
 
     [FunctionAuthorization(PermissionKeys.TotalBetTotalGoal)]
     public class TotalGoalTotalBetController : TotalBetBaseController
@@ -27,10 +25,7 @@ namespace Fanex.Athena.Controllers.TotalBets
         private readonly ITotalGoalDataAccess _totalGoalDataAccess;
 
         public TotalGoalTotalBetController(
-            ILanguageService languageService,
-            ISessionService sessionService,
             ITotalGoalDataAccess totalGoalDataAccess)
-        : base(languageService, sessionService)
         {
             _totalGoalDataAccess = totalGoalDataAccess;
         }
@@ -40,8 +35,8 @@ namespace Fanex.Athena.Controllers.TotalBets
         {
             var param = new TotalGoalMetaModel
             {
-                LicenseeId = SessionService.LicenseeSession.LicenseeId,
-                BaseCurrency = SessionService.UserSession.DefaultBaseCurrency
+                LicenseeId = SessionServiceInstance.LicenseeSession.LicenseeId,
+                BaseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency
             };
 
             return await this.GetView(param).ConfigureAwait(false);
@@ -52,7 +47,7 @@ namespace Fanex.Athena.Controllers.TotalBets
         [ValidationWebRequest(IsValidCurrency = true)]
         public async Task<ActionResult> Index(TotalGoalMetaModel metaModel)
         {
-            metaModel.LicenseeId = SessionService.LicenseeSession.LicenseeId;
+            metaModel.LicenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
             return await this.GetView(metaModel).ConfigureAwait(false);
         }
 
@@ -60,7 +55,7 @@ namespace Fanex.Athena.Controllers.TotalBets
 
         private async Task<ActionResult> GetView(TotalGoalMetaModel metaModel)
         {
-            var userSession = SessionService.UserSession;
+            var userSession = SessionServiceInstance.UserSession;
             metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList,
                 metaModel.CurrencyId);
             var result = await _totalGoalDataAccess.GetTotalGoalDataList(metaModel).ConfigureAwait(false);

@@ -6,17 +6,8 @@
 
 namespace Fanex.Athena.Controllers.Forecast
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-
     using DataAccess.Core.Common.Interfaces;
     using DataAccess.Forecast.Interfaces;
-
-    using Extension.Utility;
 
     using Fanex.Athena.Extension.Helpers;
     using Fanex.Athena.Model.Auth.DataDomain;
@@ -29,8 +20,12 @@ namespace Fanex.Athena.Controllers.Forecast
     using Model.Forecast.MetaModel;
     using Model.Forecast.ViewModel;
 
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
 
     using VendorAdapter.Interfaces;
 
@@ -49,20 +44,13 @@ namespace Fanex.Athena.Controllers.Forecast
 
         private readonly INewForecastDataAccess _forecastDataAccess;
 
-#pragma warning disable S107 // Methods should not have too many parameters
-
         public NewHandicapOverUnderForecastController(
-            ILanguageService languageService,
-            ISessionService sessionService,
             INewForecastDataAccess forecastDataAccess,
             ILogger logger,
             ICacheRefAdapter cacheRefAdapter,
             IMatchService matchService,
-            ILeagueDataAccess leagueDataAccess,
-            IAppSettings appSettings
+            ILeagueDataAccess leagueDataAccess
             )
-#pragma warning restore S107 // Methods should not have too many parameters
-        : base(languageService, sessionService, appSettings)
         {
             _logger = logger;
             _cacheRefAdapter = cacheRefAdapter;
@@ -74,17 +62,17 @@ namespace Fanex.Athena.Controllers.Forecast
         [HttpGet]
         public async Task<ActionResult> Index(int leagueId = 0, int matchId = 0, int currencyId = 0, string baseCurrency = null)
         {
-            var licenseeId = SessionService.LicenseeSession.LicenseeId;
-            if (AppSettings.LicenseeOfferNewForecast.Contains(licenseeId))
+            var licenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
+            if (AppSettingInstance.LicenseeOfferNewForecast.Contains(licenseeId))
             {
                 var metaModel = new NewForecastHandicapOverUnderMetaModel
                 {
                     LicenseeId = licenseeId,
-                    UserId = SessionService.UserSession.UserId,
+                    UserId = SessionServiceInstance.UserSession.UserId,
                     MatchId = matchId,
                     CurrencyId = currencyId,
                     LeagueId = leagueId,
-                    BaseCurrency = string.IsNullOrEmpty(baseCurrency) ? SessionService.UserSession.DefaultBaseCurrency
+                    BaseCurrency = string.IsNullOrEmpty(baseCurrency) ? SessionServiceInstance.UserSession.DefaultBaseCurrency
                     : baseCurrency
                 };
 
@@ -102,8 +90,8 @@ namespace Fanex.Athena.Controllers.Forecast
         [ValidationWebRequest]
         public async Task<ActionResult> Index(NewForecastHandicapOverUnderMetaModel metaModel)
         {
-            metaModel.LicenseeId = SessionService.LicenseeSession.LicenseeId;
-            metaModel.UserId = SessionService.UserSession.UserId;
+            metaModel.LicenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
+            metaModel.UserId = SessionServiceInstance.UserSession.UserId;
 
             var viewModel = await GetViewModel(metaModel);
             return View("~/Views/Desktop/Forecast/NewForecastHdpOu/Main.cshtml", viewModel);
@@ -123,7 +111,7 @@ namespace Fanex.Athena.Controllers.Forecast
             IList<Match> matchList = new List<Match>();
             IList<League> leagueList = new List<League>();
             var headerInfo = new NewForecastHdpOuMatchInfo();
-            var userSession = SessionService.UserSession;
+            var userSession = SessionServiceInstance.UserSession;
             var model = new NewForecastHdpOuViewModel
             {
                 Param = metaModel,

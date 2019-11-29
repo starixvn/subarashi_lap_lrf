@@ -6,9 +6,6 @@
 
 namespace Fanex.Athena.Controllers.BetSettings
 {
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
 
@@ -18,22 +15,20 @@ namespace Fanex.Athena.Controllers.BetSettings
     using Resources;
 
     using Service.BetSettings.Interfaces;
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
+
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
 
     public class AgCasinoBetSettingController : BetSettingBaseController
     {
         private readonly IAgCasinoBetSettingService _betSettingService;
 
         public AgCasinoBetSettingController(
-            ILanguageService languageService,
-            ISessionService sessionService,
             ICoreBetSettingService coreBetSettingService,
             IProductService productService,
-            IAgCasinoBetSettingService betSettingService,
-             ILicenseeSettingService licenseeSettingService
+            IAgCasinoBetSettingService betSettingService
             )
-        : base(languageService, sessionService, coreBetSettingService, productService, licenseeSettingService)
+        : base(coreBetSettingService, productService)
         {
             _betSettingService = betSettingService;
         }
@@ -43,7 +38,7 @@ namespace Fanex.Athena.Controllers.BetSettings
         [ValidatePermissionOnData(isObject: true)]
         public async Task<ActionResult> Index(BetSettingMetaModel metaModel)
         {
-            var viewModel = await _betSettingService.GetViewModelAsync(metaModel.CustId, SessionService.LicenseeSession.LicenseeName);
+            var viewModel = await _betSettingService.GetViewModelAsync(metaModel.CustId, SessionServiceInstance.LicenseeSession.LicenseeName);
 
             await AssignRequiredPropertiesAsync(viewModel, metaModel).ConfigureAwait(false);
             return View("~/Views/Desktop/Customer/BetSetting/AgCasino.cshtml", viewModel);
@@ -54,7 +49,7 @@ namespace Fanex.Athena.Controllers.BetSettings
         [ValidatePermissionOnData]
         public async Task<JsonResult> UpdateStatus(int custId, string nickName, int status)
         {
-            var userSession = SessionService.UserSession;
+            var userSession = SessionServiceInstance.UserSession;
 
             if (!CheckPermission(userSession, ProductTypes.AgCasino))
             {
@@ -81,8 +76,8 @@ namespace Fanex.Athena.Controllers.BetSettings
         [ValidatePermissionOnData]
         public async Task<JsonResult> UpdateBetSetting(string nickName, string group)
         {
-            var userSession = SessionService.UserSession;
-            var licenseeId = SessionService.LicenseeSession.LicenseeId;
+            var userSession = SessionServiceInstance.UserSession;
+            var licenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
 
             if (!CheckPermission(userSession, ProductTypes.AgCasino))
             {

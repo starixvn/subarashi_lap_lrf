@@ -81,10 +81,11 @@
 
         private FirstGoalLastGoalTotalBetController CreateController()
         {
-            return new FirstGoalLastGoalTotalBetController(
-                            LangService,
-                            SessionService,
-                            _firstGoalLastGoalDataAccess);
+            return new FirstGoalLastGoalTotalBetController(_firstGoalLastGoalDataAccess)
+            {
+                LangService = LangService,
+                SessionServiceInstance = SessionService
+            };
         }
     }
 }

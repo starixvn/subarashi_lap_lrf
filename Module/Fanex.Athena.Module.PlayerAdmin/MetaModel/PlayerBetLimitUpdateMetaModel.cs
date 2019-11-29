@@ -1,9 +1,12 @@
 ﻿namespace Fanex.Athena.Module.PlayerAdmin.MetaModel
 {
-    using System.Collections.Generic;
     using Fanex.Athena.Model.Core.MetaModel;
 
-    public class PlayerBetLimitUpdateMetaModel<T> : IMetalModelCustomerIdentity, IMetaModelProduct
+    using System.Collections.Generic;
+    using System.Linq;
+    public class PlayerBetLimitUpdateMetaModel<T> :
+        IMetalModelCustomerIdentity, IMetaModelProduct, IMetaModelValidation, IMetaModelUserId, IMetaModelSiteName
+        , IMetaModelIp, IMetaModelLanguage
     {
         public int CustId { get; set; }
 
@@ -22,5 +25,20 @@
         public int LicenseeCustId { get; set; }
 
         public T Setting { get; set; }
+
+        public bool IsValid
+        {
+            get
+            {
+                var result = !Equals(Setting, default(T));
+                if (result && Setting is IEnumerable<object> enumerable)
+                {
+                    return result && enumerable.Any();
+                }
+
+                return result;
+            }
+        }
+
     }
 }

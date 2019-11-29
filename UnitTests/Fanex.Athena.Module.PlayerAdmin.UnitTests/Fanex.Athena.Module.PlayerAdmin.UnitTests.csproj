@@ -107,13 +107,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\BetLimits\AGCasinoBetLimitControllerTest.cs" />
+    <Compile Include="Controllers\BetLimits\DcsBetLimitControllerTest.cs" />
     <Compile Include="Controllers\BetLimits\NumberGameBetLimitControllerTest.cs" />
+    <Compile Include="Controllers\BetLimits\RngKenoBetLimitControllerTest.cs" />
     <Compile Include="Controllers\PlayerBetlistControllerTest.cs" />
     <Compile Include="Controllers\PlayerBetLimitControllerTest.cs" />
     <Compile Include="Controllers\PlayerBtcSingleCustomerControllerTest.cs" />
     <Compile Include="Controllers\PlayerStatementControllerTest.cs" />
     <Compile Include="Controllers\PlayerWinLossControllerTest.cs" />
     <Compile Include="Controllers\BetLimits\SportsBookBetLimitControllerTest.cs" />
+    <Compile Include="Extensions\PlayerBetLimitLogBuilderTest.cs" />
+    <Compile Include="Helpers\PlayerAdminBetLimitActionLogHelperTest.cs" />
+    <Compile Include="MetaModel\PlayerBetLimitUpdateMetaModelTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AGCasinoBetLimitRepositoryTest.cs" />
     <Compile Include="Repositories\DcsBetLimitRepositoryTest.cs" />
@@ -121,6 +126,11 @@
     <Compile Include="Repositories\PlayerBetLimitRepositoryTest.cs" />
     <Compile Include="Repositories\RngKenoBetLimitRepositoryTest.cs" />
     <Compile Include="Repositories\SportsBookBetLimitRepositoryTest.cs" />
+    <Compile Include="Services\AGCasinoBetLimitServiceTest.cs" />
+    <Compile Include="Services\DcsBetLimitServiceTest.cs" />
+    <Compile Include="Services\NumberGameBetLimitServiceTest.cs" />
+    <Compile Include="Services\RngKenoBetLimitServiceTest.cs" />
+    <Compile Include="Services\SportsBookBetLimitServiceTest.cs" />
     <Compile Include="TestUtility.cs" />
   </ItemGroup>
   <ItemGroup>

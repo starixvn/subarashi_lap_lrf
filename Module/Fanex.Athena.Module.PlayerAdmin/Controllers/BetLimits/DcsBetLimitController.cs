@@ -1,7 +1,6 @@
 ﻿namespace Fanex.Athena.Module.PlayerAdmin.Controllers
 {
     using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Fanex.Athena.Model.Auth.DataDomain;
@@ -10,10 +9,6 @@
     using Fanex.Athena.Module.PlayerAdmin.Services.Interfaces;
     using Fanex.Athena.Module.PlayerAdmin.ViewModels;
     using Fanex.Athena.Resources;
-    using Fanex.Athena.Service.Core.Common.Interfaces;
-    using Fanex.Athena.Service.Core.Users.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Athena.VendorAdapter.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
 
     [ValidateProductPermission(limitedProductIds: new[] { ProductTypes.VirtualSports, ProductTypes.VirtualSports2, ProductTypes.Lottery })]
@@ -22,12 +17,7 @@
         private readonly IDcsBetLimitService _service;
 
         public DcsBetLimitController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            ICacheRefAdapter cacheRefAdapter,
-            IAuthorizationService authorizationService,
             IDcsBetLimitService dcsBetLimitService)
-            : base(languageService, sessionService, cacheRefAdapter, authorizationService)
         {
             _service = dcsBetLimitService;
         }
@@ -54,24 +44,15 @@
 
         [HttpPost]
         [AjaxRequest]
+        [ValidationWebRequest(HandlingAjaxRequestWithJsonResult = true)]
+        [AutoBindMetaModel(BindIp = true, BindLanguage = true, BindSiteName = true, BindUserId = true)]
         [ValidatePermissionOnData(isObject: true)]
         [FunctionAuthorization(PermissionKeys.PlayerAdminBetLimit_Write)]
         public async Task<JsonResult> UpdateSetting(PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>> metaModel)
         {
-            if (metaModel.Setting is null || !metaModel.Setting.Any())
-            {
-                return Json(new { Code = 1, Message = ViewResources.InvalidParams });
-            }
-
-            var user = SessionService.UserSession;
-            AddUpdateInfo(metaModel, user.UserId, user.Language, SessionService.LicenseeSession.LicenseeName, Request.UserHostAddress);
-
             var result = await _service.UpdateSettingAsync(metaModel).ConfigureAwait(false);
 
-            if (result.Code == 0)
-            {
-                result.Message = string.Format(ViewResources.UpdateSuccess);
-            }
+            result.Message = result.Code == 0 ? ViewResources.UpdateSuccess : result.Message;
 
             return Json(result);
         }

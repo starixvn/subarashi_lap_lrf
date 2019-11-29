@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 11/06/2019 2:37:43 PM
+// Generated at: 11/20/2019 8:15:23 AM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -638,6 +638,7 @@ window._language_en_US = {
   ProductVG: "Macau",
   ProductVS: "Virtual Sports",
   ProductVS2: "Virtual Sports 2",
+  Promotion: "Promotion",
   PromotionPrize: "Promotion Prize",
   RB: "RB",
   RealName: "Real Name",
@@ -823,6 +824,7 @@ window._language_en_US = {
   Wednesday: "Wednesday",
   WeeklyLiveMatches: "Weekly Live Matches",
   Welcome: "Welcome",
+  WhiteLabel: "Whitelabel",
   WinLoss: "Win Loss",
   WinLossByBetType: "Win Loss By Bet Type",
   WinLossByBetTypeTitle: "Win Loss By Bet Type, {0} --&gt; {1} - {2}",

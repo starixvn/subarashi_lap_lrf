@@ -1,7 +1,6 @@
 ﻿namespace Fanex.Athena.Controllers.BetList.UnitTests
 {
     using System;
-    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Model.BetList.MetaModel;
@@ -12,7 +11,6 @@
 
     public class PlatformWinLossBetListControllerTest : BetListBaseControllerHelperTest
     {
-
         [OneTimeSetUp]
         public override void FixtureSetUp()
         {
@@ -56,22 +54,22 @@
             }
         }
 
-        [TestCase(1,"USD", "eur", "EUR", false, PlatformType.Asia, nameof(PlatformType.Asia))]
-        [TestCase(1,"USD", "usd", "USD", true, PlatformType.China, nameof(PlatformType.China))]
-        [TestCase(1,"USD", "gbp", "GBP", true, PlatformType.Euro, nameof(PlatformType.Euro))]
-        [TestCase(1,"USD", null, "USD", true, PlatformType.Wap, nameof(PlatformType.Wap))]
-        [TestCase(1,"USD", null, "USD", true, PlatformType.Mobile, nameof(PlatformType.Mobile))]
-        [TestCase(1,"USD", null, "USD", true, PlatformType.Tablet, nameof(PlatformType.Tablet))]
-        [TestCase(0,"", null, "EUR", true, PlatformType.NewAsia, nameof(PlatformType.NewAsia))]
+        [TestCase(1, "USD", "eur", "EUR", false, PlatformType.Asia, nameof(PlatformType.Asia))]
+        [TestCase(1, "USD", "usd", "USD", true, PlatformType.China, nameof(PlatformType.China))]
+        [TestCase(1, "USD", "gbp", "GBP", true, PlatformType.Euro, nameof(PlatformType.Euro))]
+        [TestCase(1, "USD", null, "USD", true, PlatformType.Wap, nameof(PlatformType.Wap))]
+        [TestCase(1, "USD", null, "USD", true, PlatformType.Mobile, nameof(PlatformType.Mobile))]
+        [TestCase(1, "USD", null, "USD", true, PlatformType.Tablet, nameof(PlatformType.Tablet))]
+        [TestCase(0, "", null, "EUR", true, PlatformType.NewAsia, nameof(PlatformType.NewAsia))]
         [TestCase(0, "", null, "EUR", true, PlatformType.DeepLink, nameof(PlatformType.DeepLink))]
-        [TestCase(0,"", null, "EUR", true, PlatformType.All, nameof(PlatformType.All))]
+        [TestCase(0, "", null, "EUR", true, PlatformType.All, nameof(PlatformType.All))]
         public async Task Index_ExportExcel_PassCorrectParam(
             int currencyId,
-            string currency, 
-            string baseCurrency, 
-            string expectedCurrency, 
-            bool isFakeLic, 
-            int platform, 
+            string currency,
+            string baseCurrency,
+            string expectedCurrency,
+            bool isFakeLic,
+            int platform,
             string platformName)
         {
             using (var controller = CreateController())
@@ -119,13 +117,17 @@
 
         private PlatformWinLossBetListController CreateController()
         {
-            return Substitute.ForPartsOf<PlatformWinLossBetListController>(
-                LangService,
-                SessionService,
-                ProductService,
-                BalanceUpDataAccess,
-                CacheRefAdapter,
-                BetListApiClient, LicenseeSettingService);
+            var controller = Substitute.ForPartsOf<PlatformWinLossBetListController>();
+
+            controller.SessionServiceInstance = SessionService;
+            controller.LangService = LangService;
+            controller.LicenseeSettingServiceInstance = LicenseeSettingService;
+            controller.BalanceUpDataAccessInstance = BalanceUpDataAccess;
+            controller.BetListApiClient = BetListApiClient;
+            controller.ProductService = ProductService;
+            controller.CacheRefAdapter = CacheRefAdapter;
+
+            return controller;
         }
     }
 }

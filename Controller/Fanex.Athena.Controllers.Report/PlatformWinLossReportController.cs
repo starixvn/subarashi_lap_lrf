@@ -6,8 +6,6 @@
 
 namespace Fanex.Athena.Controllers.Report
 {
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
@@ -16,8 +14,8 @@ namespace Fanex.Athena.Controllers.Report
 
     using Model.Core.DataDomain;
 
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
 
     [FunctionAuthorization(PermissionKeys.ReportPlatformWinLoss)]
     public class PlatformWinLossReportController : ReportBaseController
@@ -25,10 +23,7 @@ namespace Fanex.Athena.Controllers.Report
         private readonly IReportAPIClient _reportAPIClient;
 
         public PlatformWinLossReportController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IProductService productService, IReportAPIClient reportAPIClient)
-            : base(languageService, sessionService, productService)
+            IReportAPIClient reportAPIClient)
         {
             _reportAPIClient = reportAPIClient;
         }
@@ -36,15 +31,15 @@ namespace Fanex.Athena.Controllers.Report
         [HttpGet]
         public ActionResult Index()
         {
-            var licenseeSession = SessionService.LicenseeSession;
-            var userSession = SessionService.UserSession;
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
+            var userSession = SessionServiceInstance.UserSession;
             var licenseeId = licenseeSession.LicenseeId;
             var metaModel = new PlatformWinLossMetaModel
             {
                 LicenseeId = licenseeId,
                 BaseCurrency = userSession.DefaultBaseCurrency,
             };
-            var productAccess = ProductService.GetSingleWalletProductAccess(
+            var productAccess = ProductServiceInstance.GetSingleWalletProductAccess(
                 licenseeId,
                 userSession.Language,
                 FunctionNames.PlatformWinloss);
@@ -64,7 +59,7 @@ namespace Fanex.Athena.Controllers.Report
 
         [HttpPost]
         [ValidationWebRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
-        [AutoBindMetaModel(BindAgent = true, BindCurrencyList = true)]
+        [AutoBindMetaModel(BindAgent = true)]
         public async Task<ActionResult> Index(PlatformWinLossMetaModel metaModel)
         {
             return await ProcessRequest(metaModel);
@@ -72,8 +67,8 @@ namespace Fanex.Athena.Controllers.Report
 
         private async Task<ActionResult> ProcessRequest(PlatformWinLossMetaModel metaModel)
         {
-            var userSession = SessionService.UserSession;
-            metaModel.HasComm = SessionService.LicenseeSession.IsAllowedCustomerComm;
+            var userSession = SessionServiceInstance.UserSession;
+            metaModel.HasComm = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm;
 
             return metaModel.Level == (int)ReportLevel.Main
                 ? await ProcessSummaryLevel(metaModel, userSession.Language)
@@ -83,7 +78,6 @@ namespace Fanex.Athena.Controllers.Report
         private async Task<ActionResult> ProcessMemberLevel(PlatformWinLossMetaModel metaModel, string language)
         {
             const string FileName = "PlatformWinLossMember.xls";
-
             if (metaModel.IsExportExcel)
             {
                 var response = await _reportAPIClient.PostAsync("api/PlatformWinLoss/ExportMemberData", metaModel,
@@ -92,7 +86,7 @@ namespace Fanex.Athena.Controllers.Report
             }
             else
             {
-                return JsonString(await _reportAPIClient.PostAsyncString("api/PlatformWinLoss/GetMemberData", metaModel, language).ConfigureAwait(false));
+                return JsonString(await _reportAPIClient.PostAsyncStringAsync("api/PlatformWinLoss/GetMemberData", metaModel, language).ConfigureAwait(false));
             }
         }
 
@@ -108,7 +102,7 @@ namespace Fanex.Athena.Controllers.Report
             }
             else
             {
-                return JsonString(await _reportAPIClient.PostAsyncString("api/PlatformWinLoss/GetSummaryData", metaModel, language).ConfigureAwait(false));
+                return JsonString(await _reportAPIClient.PostAsyncStringAsync("api/PlatformWinLoss/GetSummaryData", metaModel, language).ConfigureAwait(false));
             }
         }
     }

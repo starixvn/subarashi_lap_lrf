@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.Mvc;
 using Fanex.Athena.Model.Auth;
 using Fanex.Athena.Model.Core.MetaModel;
+using Fanex.Athena.Extension.Helper;
 using Fanex.Athena.Service.Core.Users;
 using Fanex.Athena.Service.Core.Users.Interfaces;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -13,13 +14,19 @@ namespace Fanex.Athena.Web.ActionFilter
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
     public sealed class AutoBindMetaModelAttribute : ActionFilterAttribute
     {
+        private static readonly ISessionStorage _sessionStorage = new SessionStorage();
+
         public bool BindAgent { get; set; }
-        public bool BindDictionaryCurrencyList { get; set; }
+
         public bool BindCurrencyList { get; set; }
+
         public bool BindUserId { get; set; }
+        public bool BindSiteName { get; set; }
         public bool BindLicenseeContract { get; set; }
 
-        private static readonly ISessionStorage _sessionStorage = new SessionStorage();
+        public bool BindLanguage { get; set; }
+
+        public bool BindIp { get; set; }
         public IProductService ProductService { get; set; }
         public ILicenseeSettingService LicenseeSettingService { get; set; }
 
@@ -37,23 +44,35 @@ namespace Fanex.Athena.Web.ActionFilter
             {
                 AutoBindMetaModelService.MapUserId(actionArgument, userSession.UserId);
             }
-
-            if (BindDictionaryCurrencyList)
+            if (BindSiteName)
             {
-                AutoBindMetaModelService.MapDictionaryCurrencyList(actionArgument, userSession.CurrencyList);
+                var licensee = _sessionStorage.LicenseeAuthInfo;
+                AutoBindMetaModelService.MapSiteName(actionArgument, licensee.LicenseeName);
+            }
+            if (BindLanguage)
+            {
+                AutoBindMetaModelService.MapLanguage(actionArgument);
+            }
+
+            if (BindIp)
+            {
+                AutoBindMetaModelService.MapIp(actionArgument,
+                    ClientHelper.GetClientIp(httpContext: filterContext.HttpContext)
+                    );
+            }
+            if (BindLicenseeContract)
+            {
+                MapLicenseeContract(filterContext);
             }
             if (BindCurrencyList)
             {
                 AutoBindMetaModelService.MapCurrencyList(actionArgument, userSession.CurrencyList);
             }
-            if (BindLicenseeContract)
-            {
-                MapLicenseeContract(filterContext, userSession);
-            }
+
             base.OnActionExecuting(filterContext);
         }
 
-        private void MapLicenseeContract(ActionExecutingContext filterContext, UserAuthInfo userSession)
+        private void MapLicenseeContract(ActionExecutingContext filterContext)
         {
             var item = filterContext.ActionParameters.Where(x => x.Value is IMetaModelFunctionContract)
                     .Select(x => x).FirstOrDefault();
@@ -66,8 +85,8 @@ namespace Fanex.Athena.Web.ActionFilter
                     "en-US",
                     metaModel.FunctionKey);
 
-                metaModel.IsAllowedCustomerComm = licenseeSession.IsAllowedCustomerComm;
-                metaModel.IsAllowBA = productAccess.IsAllowBA;
+                metaModel.HasComm = licenseeSession.IsAllowedCustomerComm;
+                metaModel.IsAllowedBA = productAccess.IsAllowBA;
                 metaModel.SystemIdVisible = !LicenseeSettingService.IsFakeLicensee(licenseeSession.LicenseeName);
 
                 filterContext.ActionParameters[item.Key] = metaModel;

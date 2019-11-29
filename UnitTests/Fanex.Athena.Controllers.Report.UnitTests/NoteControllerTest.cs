@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Threading.Tasks;
     using System.Web.Mvc;
     using Base.UnitTests;
     using DataAccess.Core.Configuration.Interfaces;
@@ -13,7 +12,6 @@
     using NSubstitute;
     using NUnit.Framework;
     using Report;
-    using Service.Core.Common.Interfaces;
 
     [TestFixture]
     public class NoteControllerTest : CultureBaseControllerHelperTest
@@ -66,11 +64,11 @@
 
         private NoteController CreateController()
         {
-            return new NoteController(
-                LangService,
-                SessionService,
-                _productService,
-                _balanceUpDataAccess);
+            return new NoteController(_productService, _balanceUpDataAccess)
+            {
+                LangService = LangService,
+                SessionServiceInstance = SessionService
+            };
         }
     }
 }

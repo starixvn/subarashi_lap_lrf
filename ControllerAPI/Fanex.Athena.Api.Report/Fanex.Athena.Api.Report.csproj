@@ -165,7 +165,6 @@
     <Compile Include="GoldDeluxeWinLossReportController.cs" />
     <Compile Include="LicenseeWinLossByTimeZoneReportController.cs" />
     <Compile Include="CasinoTurnoverReportController.cs" />
-    <Compile Include="PromotionPrizeReportController.cs" />
     <Compile Include="SpecialLicenseeWinLossReportController.cs" />
     <Compile Include="SubsidiaryPerformanceReportController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

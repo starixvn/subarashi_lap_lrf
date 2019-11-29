@@ -13,7 +13,7 @@
             ToDate = DateTime.Today;
         }
 
-        public IEnumerable<CheckedItem> SubsidiaryList { get; set; }
+        public IEnumerable<CheckedItem> GroupSubsidiaryList { get; set; }
 
         public DateTime FromDate { get; set; }
 
@@ -22,5 +22,7 @@
         public IEnumerable<ProductOption> ProductOptionList { get; set; }
 
         public bool ConvertAll { get; set; }
+
+        public byte ViewType { get; set; }
     }
 }

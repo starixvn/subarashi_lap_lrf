@@ -1,10 +1,10 @@
 ﻿namespace Fanex.Athena.Module.PlayerAdmin.MetaModel
 {
     using System;
-    using System.Collections.Generic;
+
     using Fanex.Athena.Model.Core.MetaModel;
 
-    public class PlayerRunningBetListMetalModel : IMetalModelCustomerIdentity, IMetaModelAgent, IMetaModelDictionaryCurrencyList
+    public class PlayerRunningBetListMetalModel : IMetalModelCustomerIdentity, IMetaModelAgent
     {
         private const int PageSizeMaximum = 2000;
 
@@ -57,9 +57,6 @@
         public bool IsExcludedTestData { get; set; }
 
         public int PageIndex { get; set; }
-
-        public IDictionary<int, string> CurrencyList { get; set; }
-
         public bool IsExport { get; set; }
     }
 }

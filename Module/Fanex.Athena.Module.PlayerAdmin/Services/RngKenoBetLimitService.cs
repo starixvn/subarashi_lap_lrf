@@ -40,7 +40,7 @@
                 metaModel,
                 x => ((int)SportType.Keno).ToString(),
                 result.Code == 0,
-                new int[3] { LogActionDetailId.UpdatingMinBet, LogActionDetailId.UpdatingMaxBet, LogActionDetailId.UpdatingMaxBetPerDraw });
+                new [] { LogActionDetailId.UpdatingMinBet, LogActionDetailId.UpdatingMaxBet, LogActionDetailId.UpdatingMaxBetPerDraw });
 
             _businessLogService.Write(BusinessLogType.CustomerBetSetting, logInfo);
 

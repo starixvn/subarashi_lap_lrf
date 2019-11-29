@@ -1,15 +1,13 @@
 ﻿namespace Fanex.Athena.Controllers.Report.Result
 {
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Logging;
 
     using Model.Report.DTO.Result;
 
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
 
     using Web.ActionFilter;
 
@@ -21,12 +19,8 @@
         private readonly IBetListApiClient _betListApiClient;
 
         public ResultKenoReportController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IProductService productService,
             ILogger logger,
             IBetListApiClient betListApiClient)
-            : base(languageService, sessionService, null, productService, null)
         {
             _logger = logger;
             _betListApiClient = betListApiClient;
@@ -36,13 +30,13 @@
         [AjaxRequest]
         public async Task<ActionResult> Index(int vendorProductId)
         {
-            var userSession = SessionService.UserSession;
+            var userSession = SessionServiceInstance.UserSession;
             var model = new
             {
                 vendorProductId,
                 UserId = userSession.UserId.ToString()
             };
-            var kenoUrl = await _betListApiClient.PostAsyncString("/ResultKenoReport/GetKenoResultUrl",
+            var kenoUrl = await _betListApiClient.PostAsyncStringAsync("/ResultKenoReport/GetKenoResultUrl",
                 model, userSession.Language).ConfigureAwait(false);
 
             return Json(
@@ -59,7 +53,7 @@
         [CustomValidateAntiForgery]
         public async Task<string> KeepSession(string userId, int vendorProductId)
         {
-            var userSession = SessionService.UserSession;
+            var userSession = SessionServiceInstance.UserSession;
             if (string.IsNullOrEmpty(userId) || !userSession.UserId.ToString().Equals(userId))
             {
                 _logger.Error("Keno Result page just submited invalid userId");

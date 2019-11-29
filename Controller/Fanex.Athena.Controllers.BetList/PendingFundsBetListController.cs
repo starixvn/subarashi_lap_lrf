@@ -8,22 +8,15 @@ namespace Fanex.Athena.Controllers.BetList
 {
     #region Using
 
-    using System;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-
-    using DataAccess.Core.Configuration.Interfaces;
     using Fanex.Athena.Model.Auth.DataDomain;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     using Model.BetList.MetaModel;
 
     using Resources;
 
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
-
-    using VendorAdapter.Interfaces;
+    using System;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
 
     using Web.ActionFilter;
 
@@ -36,19 +29,6 @@ namespace Fanex.Athena.Controllers.BetList
 
         private static readonly int[] HiddenColList =
             new[] { ExternalIdColumn, SystemIdColumn, WinLostColumn, BetEffectiveColumn, LicenseeWLColumn };
-
-        public PendingFundsBetListController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IProductService productService,
-            IBalanceUpDataAccess balanceUpDataAccess,
-            ICacheRefAdapter cacheRefAdapter,
-            IBetListApiClient betListApiClient, ILicenseeSettingService licenseeSettingService
-)
-       : base(languageService, sessionService, productService, balanceUpDataAccess,
-              cacheRefAdapter, betListApiClient, licenseeSettingService)
-        {
-        }
 
         [HttpGet]
         [ValidationWebRequest(IsValidCurrency = true)]
@@ -66,7 +46,7 @@ namespace Fanex.Athena.Controllers.BetList
         {
             metaModel.ShowingOption = new BetListShowingOption
             {
-                CustomerCommVisible = SessionService.LicenseeSession.IsAllowedCustomerComm,
+                CustomerCommVisible = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm,
             };
 
             metaModel.Title = "Running " + ViewResources.BetList

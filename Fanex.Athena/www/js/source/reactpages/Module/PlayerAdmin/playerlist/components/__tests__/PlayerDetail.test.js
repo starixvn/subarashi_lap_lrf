@@ -52,6 +52,7 @@ describe('PlayerDetail', () => {
     })
 
     it('_buildActionUrl - props.getLink should be called with correct parameters', () => {
+        const createdDate = '11/06/2008 10:35:11 AM';
         const runTest = (action, expectedUrl) => {
             const props = {
                 ...defaultProps,
@@ -60,7 +61,8 @@ describe('PlayerDetail', () => {
                     licenseeCustId: 11, 
                     currencyId: 20, 
                     currency: 'UUS', 
-                    userName: 'test'
+                    userName: 'test',
+                    createdDate
                 },
                 getLink: jest.fn()
             }
@@ -73,8 +75,9 @@ describe('PlayerDetail', () => {
             expect(props.getLink).toHaveBeenCalledWith(systemType, expectedUrl);
         }
 
-        runTest('test/index', 'test/index?custId=1&licenseeCustId=11&currencyId=20&currencyName=UUS&userName=test');
-        runTest('test/index?param1=value1', 'test/index?param1=value1&custId=1&licenseeCustId=11&currencyId=20&currencyName=UUS&userName=test');
+        const encodedCreatedDate = encodeURIComponent(createdDate);
+        runTest('test/index', 'test/index?custId=1&licenseeCustId=11&currencyId=20&currencyName=UUS&userName=test&createdDate=' + encodedCreatedDate);
+        runTest('test/index?param1=value1', 'test/index?param1=value1&custId=1&licenseeCustId=11&currencyId=20&currencyName=UUS&userName=test&createdDate=' + encodedCreatedDate);
     })
 
     it('_renderTabList - should match snapshot', () => {

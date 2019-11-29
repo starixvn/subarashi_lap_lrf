@@ -5,17 +5,16 @@
 
 namespace Fanex.Athena.Controllers.Report
 {
-    using System;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
+
+    using System;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
 
     [FunctionAuthorization(PermissionKeys.ReportCustomerWinLoss)]
     public class CustomerWinLossReportController : ReportBaseController
@@ -25,14 +24,9 @@ namespace Fanex.Athena.Controllers.Report
         private readonly IReportAPIClient _reportAPIClient;
 
         public CustomerWinLossReportController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IProductService productService,
             IReportSettingService reportSettingService,
-            ILicenseeSettingService licenseeSettingService,
             IReportAPIClient reportAPIClient
             )
-            : base(languageService, sessionService, productService, licenseeSettingService)
         {
             _reportSettingService = reportSettingService;
             _reportAPIClient = reportAPIClient;
@@ -55,7 +49,7 @@ namespace Fanex.Athena.Controllers.Report
         [ValidationWebRequest(IsValidCurrency = true, IsIncludeKeanOcean = true)]
         public async Task<ActionResult> Index(CustomerWinLossMetaModel metaModel)
         {
-            var userSession = SessionService.UserSession;
+            var userSession = SessionServiceInstance.UserSession;
             if (metaModel.IsExportExcel)
             {
                 const string FileName = "CustomerWinLoss";
@@ -65,13 +59,13 @@ namespace Fanex.Athena.Controllers.Report
                 return File(httpResponse.Item1, httpResponse.Item2, FileName);
             }
 
-            return JsonString(await _reportAPIClient.PostAsyncString("api/CustomerWinLoss/Index", metaModel, userSession.Language).ConfigureAwait(false));
+            return JsonString(await _reportAPIClient.PostAsyncStringAsync("api/CustomerWinLoss/Index", metaModel, userSession.Language).ConfigureAwait(false));
         }
 
         private ActionResult GetView(bool isHistory)
         {
-            var licenseeSession = SessionService.LicenseeSession;
-            var userSession = SessionService.UserSession;
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
+            var userSession = SessionServiceInstance.UserSession;
             var metaModel = new CustomerWinLossMetaModel
             {
                 IsExcludedTestData = true,
@@ -80,7 +74,7 @@ namespace Fanex.Athena.Controllers.Report
                 BaseCurrency = userSession.DefaultBaseCurrency
             };
 
-            var productAccess = ProductService.GetSingleWalletProductAccess(
+            var productAccess = ProductServiceInstance.GetSingleWalletProductAccess(
                 licenseeSession.LicenseeId,
                 userSession.Language,
                 FunctionNames.CustomerWinLoss);

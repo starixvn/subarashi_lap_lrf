@@ -16,7 +16,6 @@
     using NSubstitute;
     using NUnit.Framework;
     using Report;
-    using Service.Core.Common.Interfaces;
     using Service.Report.Interfaces;
     using Web.ResultExtension;
 
@@ -42,7 +41,6 @@
             base.FixtureSetUp();
 
             SetUpDefaultFakeData();
-
         }
 
         [TearDown]
@@ -79,9 +77,7 @@
         [TestCase(false, "  External ID or System ID ", null)]
         [TestCase(false, "External ID", "External ID")]
         [TestCase(false, "   ", null)]
-        public async Task Excel_WhenCall_AssignCorrectUsername(bool isFakeLicensee,
-            string inputUserName,
-            string expectedUserName)
+        public async Task Excel_WhenCall_AssignCorrectUsername(bool isFakeLicensee, string inputUserName, string expectedUserName)
         {
             using (var controller = CreateController())
             {
@@ -156,20 +152,22 @@
                 {
                     ProductCode = x
                 });
+
             var productService = Substitute.For<IProductService>();
             productService.GetSingleWalletProductAccess(
                 SessionService.LicenseeSession.LicenseeId,
                 SessionService.UserSession.Language,
                 FunctionNames.Turnover).Returns(new ProductAccess(productList.ToList()));
-            var controller = Substitute.ForPartsOf<TurnoverReportController>(
-                LangService,
-                SessionService,
-                AppSettings,
-                productService,
-                _turnoverService
-                , _licenseeSettingService
-                );
+
+            var controller = Substitute.ForPartsOf<TurnoverReportController>(_turnoverService);
+
+            controller.LangService = LangService;
+            controller.SessionServiceInstance = SessionService;
+            controller.ProductServiceInstance = productService;
+            controller.AppSettingInstance = AppSettings;
+            controller.LicenseeSettingServiceInstance = _licenseeSettingService;
             controller.WhenForAnyArgs(x => x.CreateExcel(string.Empty, null, null, false)).DoNotCallBase();
+
             return controller;
         }
     }

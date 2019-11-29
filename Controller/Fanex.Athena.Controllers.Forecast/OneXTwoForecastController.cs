@@ -6,11 +6,9 @@
 
 namespace Fanex.Athena.Controllers.Forecast
 {
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-
     using DataAccess.Core.Common.Interfaces;
     using DataAccess.Forecast.Interfaces;
+
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
@@ -18,8 +16,8 @@ namespace Fanex.Athena.Controllers.Forecast
     using Model.Forecast.MetaModel;
     using Model.Forecast.ViewModel;
 
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
 
     [FunctionAuthorization(PermissionKeys.ForecastOneXTwo)]
     public class OneXTwoForecastController : ForecastBaseController
@@ -29,11 +27,8 @@ namespace Fanex.Athena.Controllers.Forecast
         private readonly IForecastOneXTwoDataAccess _forecastOneXTwoDataAccess;
 
         public OneXTwoForecastController(
-            ILanguageService languageService,
-            ISessionService sessionService,
             ILeagueDataAccess leagueDataAccess,
             IForecastOneXTwoDataAccess forecastOneXTwoDataAccess)
-        : base(languageService, sessionService)
         {
             _leagueDataAccess = leagueDataAccess;
             _forecastOneXTwoDataAccess = forecastOneXTwoDataAccess;
@@ -44,8 +39,8 @@ namespace Fanex.Athena.Controllers.Forecast
         {
             var metaModel = new ForecastOneXTwoMetaModel
             {
-                LicenseeId = SessionService.LicenseeSession.LicenseeId,
-                BaseCurrency = SessionService.UserSession.DefaultBaseCurrency
+                LicenseeId = SessionServiceInstance.LicenseeSession.LicenseeId,
+                BaseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency
             };
 
             return await ProcessAction(metaModel).ConfigureAwait(false);
@@ -69,7 +64,7 @@ namespace Fanex.Athena.Controllers.Forecast
         {
             if (metaModel.LicenseeId <= 0)
             {
-                metaModel.LicenseeId = SessionService.LicenseeSession.LicenseeId;
+                metaModel.LicenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
             }
 
             var model = await GetViewModel(metaModel).ConfigureAwait(false);
@@ -80,7 +75,7 @@ namespace Fanex.Athena.Controllers.Forecast
         private async Task<ForecastOneXTwoViewModel> GetViewModel(ForecastOneXTwoMetaModel metaModel)
         {
             var model = new ForecastOneXTwoViewModel();
-            var userSession = SessionService.UserSession;
+            var userSession = SessionServiceInstance.UserSession;
             metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList,
                 metaModel.CurrencyId);
 

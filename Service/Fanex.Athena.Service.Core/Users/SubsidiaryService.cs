@@ -1,93 +1,170 @@
-﻿namespace Fanex.Athena.Service.Report
+﻿namespace Fanex.Athena.Service.Core.Users
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-
     using Core.Users.Interfaces;
-
     using DataAccess.Core.Users.Interfaces;
-
     using Extension.Utility.Interfaces;
-
-    using Fanex.Athena.Service.Report.Interfaces;
-
+    using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Athena.Model.Core.DTO.Users;
+    using Fanex.Athena.Resources;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Configuration;
     using Model.Report.DTO;
 
     public class SubsidiaryService : ISubsidiaryService
     {
-        private const int CacheTimeoutSeconds = 60;
+        private const int CurrencyAll = 0;
 
-        private readonly ISessionService _sessionService;
+        private const string OtherWhiteaLableId = "-2147483648";
+
+        private const int CacheTimeoutSeconds = 60;
 
         private readonly ICustomMemoryCacheService _cache;
 
         private readonly ISubsidiaryDataAccess _subLicenseeDataAccess;
 
-        public SubsidiaryService(ISessionService sessionService, ISubsidiaryDataAccess subsidiaryDataAccess, ICustomMemoryCacheService cache)
+        public SubsidiaryService(ISubsidiaryDataAccess subsidiaryDataAccess, ICustomMemoryCacheService cache)
         {
-            _sessionService = sessionService;
             _cache = cache;
             _subLicenseeDataAccess = subsidiaryDataAccess;
         }
 
-        public IEnumerable<string> GetSubsidiaryNames()
+        public IDictionary<int, IEnumerable<int>> GetCurrencyAgentList(UserAuthInfo user, string licenseeName,
+            string subsidiaryNames, bool isExcludeTest = false, int currencyId = CurrencyAll)
         {
-            var subsidiaryList = GetSubsidiaryList();
-            return subsidiaryList.Select(x => x.OperatorId).Distinct();
-        }
-
-        public IEnumerable<Subsidiary> GetSubsidiaryList()
-        {
-            var licenseeName = _sessionService.LicenseeSession.LicenseeName;
-            var cacheKey = string.Format(CacheKey.MemorycacheSubsidiaryListByLicensee, licenseeName);
-            var subsidiaryList = _cache.Get(cacheKey, () => _subLicenseeDataAccess.GetSubsidiaryList(licenseeName), CacheTimeoutSeconds);
-            var userAgentList = _sessionService.UserSession.CurrencyAgentList.SelectMany(i => i.Value);
-            return subsidiaryList.Where(i => userAgentList.Contains(i.AgentId));
-        }
-
-        public IDictionary<int, IEnumerable<int>> GetCurrencyAgentList(string subsidiaryNames, bool isExcludeTest = false, int currencyId = 0)
-        {
-            const int CurrencyAll = 0;
-            const string OtherMembersKey = "(others)";
-            var currencyAgentList = new Dictionary<int, IEnumerable<int>>();
-            if (string.IsNullOrWhiteSpace(subsidiaryNames))
+            if (string.IsNullOrWhiteSpace(subsidiaryNames) || (isExcludeTest && currencyId == CurrencyType.Uus))
             {
-                return currencyAgentList;
+                return new Dictionary<int, IEnumerable<int>>();
             }
 
             var subsidiaryNameList = subsidiaryNames.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
-            var subsidiaryData = GetSubsidiaryList();
-            var dataGroupByCurrency = subsidiaryData
-                .Where(x => (currencyId == CurrencyAll || x.CurrencyId == currencyId) && subsidiaryNameList.Contains(x.OperatorId))
-                .GroupBy(x => x.CurrencyId);
-
-            foreach (var item in dataGroupByCurrency)
+            var subsidiaryData = GetUserSubsidiaries(user, licenseeName).ToList();
+            var isFilterByCurrencyId = currencyId != CurrencyAll;
+            var result = new List<Subsidiary>();
+            for (var i = 0; i < subsidiaryData.Count; i++)
             {
-                currencyAgentList.Add(item.Key, item.Select(x => x.AgentId));
+                var item = subsidiaryData[i];
+                if (!subsidiaryNameList.Any(x => x.Equals(item.OperatorId, StringComparison.OrdinalIgnoreCase)))
+                {
+                    continue;
+                }
+                if (isFilterByCurrencyId && item.CurrencyId != currencyId)
+                {
+                    continue;
+                }
+                if (isExcludeTest && item.CurrencyId == CurrencyType.Uus)
+                {
+                    continue;
+                }
+
+                result.Add(item);
             }
 
-            if (subsidiaryNameList.Contains(OtherMembersKey))
-            {
-                var exceptedAgentList = subsidiaryData
-                    .Where(x => !subsidiaryNameList.Contains(x.OperatorId)).Select(x => x.AgentId).ToList();
-                var otherAgentList = _sessionService.UserSession.CurrencyAgentList
-                    .Where(x => x.Key == currencyId || currencyId == CurrencyAll).ToDictionary(x => x.Key, x => x.Value.AsEnumerable());
+            return result.GroupBy(x => x.CurrencyId).ToDictionary(x => x.Key, x => x.Select(i => i.AgentId));
 
-                currencyAgentList = currencyAgentList.Union(otherAgentList).GroupBy(x => x.Key)
-                    .ToDictionary(x => x.Key, x => x.SelectMany(g => g.Value).Except(exceptedAgentList).Distinct());
-                currencyAgentList = currencyAgentList.Where(x => x.Value.Any()).ToDictionary(x => x.Key, x => x.Value);
+        }
+
+        public IEnumerable<CheckedItem> GetSubsidiaryTree(UserAuthInfo user, string licenseeName)
+        {
+            if (user.UserLevel == UserLevelType.Subsidiary && !string.IsNullOrWhiteSpace(user.OperatorId))
+            {
+                return new List<CheckedItem>
+                {
+                    new CheckedItem
+                    {
+                        Value = user.OperatorId,
+                        Name = user.OperatorId,
+                        Checked = true
+                    }
+                };
             }
 
-            if (isExcludeTest && currencyAgentList.ContainsKey(CurrencyType.Uus))
+            if (user.SubsidiaryViewType == (int)SubsidiaryViewType.NotManagement)
             {
-                currencyAgentList.Remove(CurrencyType.Uus);
+                return Enumerable.Empty<CheckedItem>();
             }
 
-            return currencyAgentList;
+            var groupSub = GetAllGroupSubsidiaries(user, licenseeName, user.WhiteLabelID);
+
+            return user.SubsidiaryViewType == (int)SubsidiaryViewType.MasterManagement
+                ? GetWhiteLableTree(groupSub)
+                : GetOperatorTree(groupSub);
+        }
+
+        public IEnumerable<Subsidiary> GetSubsidiaryList(UserAuthInfo user, string licenseeName, string subsidiaryList)
+        {
+            var allSubsidiaries = GetUserSubsidiaries(user, licenseeName);
+
+            if (user.UserLevel == UserLevelType.Subsidiary)
+            {
+                return allSubsidiaries
+                    .Where(x => x.OperatorId.Equals(user.OperatorId, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+            }
+
+            var selectedSubsidiaries = subsidiaryList.Split(',');
+            return allSubsidiaries
+                .Where(x => selectedSubsidiaries.Any(s => s.Equals(x.OperatorId, StringComparison.OrdinalIgnoreCase)))
+                .ToList();
+        }
+
+        public IEnumerable<GroupSubsidiary> GetGroupSubsidiaryList(UserAuthInfo user, string licenseeName, string subsidiaryList, string whiteLabelList)
+        {
+            var selectedSubsidiaries = subsidiaryList.Split(',');
+            var selectedWhiteLabels = whiteLabelList.Split(',').Select(x => x == OtherWhiteaLableId ? (int?)null : int.Parse(x));
+
+            var allGroups = GetAllGroupSubsidiaries(user, licenseeName, user.WhiteLabelID);
+
+            return allGroups
+                .Where(x => selectedSubsidiaries.Any(s => s.Equals(x.OperatorId, StringComparison.OrdinalIgnoreCase)) && selectedWhiteLabels.Contains(x.WhiteLabelID))
+                .ToList();
+        }
+
+        private static IEnumerable<CheckedItem> GetWhiteLableTree(IEnumerable<GroupSubsidiary> groupSubsidiaries)
+        {
+            return groupSubsidiaries
+                .OrderByDescending(x => x.WhiteLabelID)
+                .GroupBy(
+                    x => new { x.WhiteLabelID, x.WhiteLabelName },
+                    (key, group) => new CheckedItem
+                    {
+                        Value = key.WhiteLabelID?.ToString() ?? OtherWhiteaLableId,
+                        Name = key.WhiteLabelName ?? ViewResources.Others,
+                        Checked = true,
+                        Children = group.Select(x => new CheckedItem { Value = x.OperatorId, Name = x.OperatorId, Checked = true }).ToList()
+                    }).ToList();
+        }
+
+        private static IEnumerable<CheckedItem> GetOperatorTree(IEnumerable<GroupSubsidiary> groupSubsidiaries)
+        {
+            return groupSubsidiaries
+                .GroupBy(x => x.OperatorId, (key, group) => new CheckedItem { Value = key, Name = key, Checked = true }, StringComparer.OrdinalIgnoreCase)
+                .ToList();
+        }
+
+        private IEnumerable<GroupSubsidiary> GetAllGroupSubsidiaries(UserAuthInfo user, string licenseeName, int? whitteLabelId)
+        {
+            var cacheKey = string.Format(CacheKey.MemorycacheGroupSubsidiaryListByLicensee, licenseeName);
+            var groupSubsidiaryList = _cache.Get(cacheKey, () => _subLicenseeDataAccess.GetGroupSubsidiaries(licenseeName), CacheTimeoutSeconds);
+            var operators = this.GetUserSubsidiaries(user, licenseeName);
+
+            return groupSubsidiaryList
+                .Where(x =>
+                    (!whitteLabelId.HasValue || x.WhiteLabelID == whitteLabelId)
+                    && operators.Any(o => o.OperatorId.Equals(x.OperatorId, StringComparison.OrdinalIgnoreCase)))
+                .ToList();
+        }
+
+        private IEnumerable<Subsidiary> GetUserSubsidiaries(UserAuthInfo user, string licenseeName)
+        {
+            var cacheKey = string.Format(CacheKey.MemorycacheSubsidiaryListByLicensee, licenseeName);
+            var subsidiaryList = _cache.Get(cacheKey, () => _subLicenseeDataAccess.GetSubsidiaryList(licenseeName), CacheTimeoutSeconds);
+            var userAgentList = user.CurrencyAgentList.SelectMany(i => i.Value);
+            return subsidiaryList.Where(i => userAgentList.Contains(i.AgentId));
         }
     }
 }

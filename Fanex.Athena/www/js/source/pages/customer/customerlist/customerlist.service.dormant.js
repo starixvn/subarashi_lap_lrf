@@ -14,6 +14,10 @@ function ($, Site, CustomerListOptionDormant, jqGridAdditional, PagingHelper, Cu
         submit: function () {
             
             const data = _me.getPostData();
+            if (!data) {
+                return;
+            }
+
             const option = {
                 type: 'POST',
                 data: data,
@@ -41,8 +45,15 @@ function ($, Site, CustomerListOptionDormant, jqGridAdditional, PagingHelper, Cu
         getPostData: function () {
             const data = {};
 
-            if ($('#subsidiary-multiselect').length > 0) {
-                data.SubsidiaryList = $('#subsidiary-multiselect').multiSelect('getCheckedItems').join();
+            data.IsViewOnSubsidiary = $('#IsViewOnSubsidiary').is(':checked');
+            if ($('#subsidiary-multiselect').length > 0 && data.IsViewOnSubsidiary) {
+                const subsidiaryList = $('#subsidiary-multiselect').multiSelect('getCheckedItems');
+
+                if (!subsidiaryList.length) {
+                    return null;
+                }
+
+                data.SubsidiaryList = subsidiaryList.join();
             }
 
             data.PageIndex = _state.pagingOption.pageindex;
@@ -51,6 +62,7 @@ function ($, Site, CustomerListOptionDormant, jqGridAdditional, PagingHelper, Cu
             data.Username = Site.asNull($('#Username').val());
             data.CurrencyName = $('#CurrencyName').val();
             data.BaseCurrency = $('#BaseCurrency').val();
+            data.IsViewOnSubsidiary = $('#IsViewOnSubsidiary').is(':checked');
 
             $('#excelDormantParam').val(JSON.stringify(data));
 

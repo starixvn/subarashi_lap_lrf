@@ -103,10 +103,9 @@ namespace Fanex.Athena.Excel.Customer
 
         protected override void AssignSheetData(ISheet sheet)
         {
-            var rowCount = _viewModel.DataList.Count();
             var startNumOfRow = (_viewModel.Param.PageIndex - 1) * _viewModel.Param.PageSize;
             startNumOfRow += 1;
-            for (int index = 0; index < rowCount; index++)
+            for (int index = 0; index < TotalRows; index++)
             {
                 var item = _viewModel.DataList.ElementAt(index);
                 var rowIndex = index + RowContentTemplate;

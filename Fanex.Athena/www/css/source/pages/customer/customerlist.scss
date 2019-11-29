@@ -168,12 +168,14 @@
 }
 
 /* Index column */
-input[type="checkbox"] + label {
-    margin: 0;
-    top: 0;
-    vertical-align: middle;
-    height: 15px;
-    width: 15px;
+td, th {
+    input[type="checkbox"] + label {
+        margin: 0;
+        top: 0;
+        vertical-align: middle;
+        height: 15px;
+        width: 15px;
+    }
 }
 
 /* Customer Option */

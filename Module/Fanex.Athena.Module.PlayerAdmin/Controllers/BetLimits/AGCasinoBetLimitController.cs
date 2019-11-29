@@ -8,10 +8,6 @@
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
     using Fanex.Athena.Module.PlayerAdmin.Services.Interfaces;
     using Fanex.Athena.Resources;
-    using Fanex.Athena.Service.Core.Common.Interfaces;
-    using Fanex.Athena.Service.Core.Users.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Athena.VendorAdapter.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
 
     [ValidateProductPermission(ProductTypes.AgCasino)]
@@ -20,12 +16,7 @@
         private readonly IAGCasinoBetLimitService _service;
 
         public AGCasinoBetLimitController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            ICacheRefAdapter cacheRefAdapter,
-            IAuthorizationService authorizationService,
             IAGCasinoBetLimitService agCasinoBetLimitService)
-            : base(languageService, sessionService, cacheRefAdapter, authorizationService)
         {
             _service = agCasinoBetLimitService;
         }
@@ -36,7 +27,7 @@
         public async Task<JsonResult> GetSetting(PlayerBetLimitSelectMetaModel metaModel)
         {
             var isEditable = HasEditPermission();
-            var getGroupBettingsTask = _service.GetGroupBettingsAsync(SessionService.LicenseeSession.LicenseeName, metaModel.CurrencyId);
+            var getGroupBettingsTask = _service.GetGroupBettingsAsync(SessionServiceInstance.LicenseeSession.LicenseeName, metaModel.CurrencyId);
             var getSettingTask = _service.GetBetSettingAsync(metaModel.CustId);
 
             await Task.WhenAll(getGroupBettingsTask, getSettingTask);
@@ -57,32 +48,20 @@
 
         [HttpPost]
         [AjaxRequest]
+        [ValidationWebRequest(HandlingAjaxRequestWithJsonResult = true)]
+        [AutoBindMetaModel(BindIp = true, BindLanguage = true, BindSiteName = true, BindUserId = true)]
         [ValidatePermissionOnData(isObject: true)]
         [FunctionAuthorization(PermissionKeys.PlayerAdminBetLimit_Write)]
         public async Task<JsonResult> UpdateSetting(PlayerBetLimitUpdateMetaModel<AgCasinoBetLimitMetaModel> metaModel)
         {
-            var user = SessionService.UserSession;
-            var licenseeName = SessionService.LicenseeSession.LicenseeName;
-
-            if (metaModel.Setting is null)
-            {
-                return Json(new { Code = 1, Message = ViewResources.InvalidParams });
-            }
-
             var setting = await _service.GetBetSettingAsync(metaModel.CustId).ConfigureAwait(false);
 
             if (!setting.IsEnabled)
             {
                 return Json(new { Code = 1, Message = ViewResources.FunctionDeniedMsg });
             }
-
-            AddUpdateInfo(metaModel, user.UserId, user.Language, licenseeName, Request.UserHostAddress);
             var result = await _service.UpdateSettingAsync(metaModel).ConfigureAwait(false);
-
-            if (result.Code == 0)
-            {
-                result.Message = ViewResources.UpdateSuccess;
-            }
+            result.Message = result.Code == 0 ? ViewResources.UpdateSuccess : result.Message;
 
             return Json(result);
         }

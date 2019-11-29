@@ -53,11 +53,11 @@
             }
         }
 
-        [TestCase(1,"USD", null, "USD", true)]
-        [TestCase(1,"USD", "eur", "EUR", false)]
+        [TestCase(1, "USD", null, "USD", true)]
+        [TestCase(1, "USD", "eur", "EUR", false)]
         public async Task Index_ExportExcel_PassCorrectParam(
             int currencyId,
-            string currency, string baseCurrency, 
+            string currency, string baseCurrency,
             string expectedCurrency, bool hasMainTickets)
         {
             using (var controller = CreateController())
@@ -94,7 +94,7 @@
                         && string.Join(",", x.HiddenColumns) == "8"
                         && x.LicenseeId == DefaultLicenseeSession.LicenseeId
                         && !x.IsShowSumStake
-                    
+
                         && x.PageIndex == 1
                         && x.PageSize == int.MaxValue - 1),
                     "WinLossByBetTypeBetList",
@@ -104,13 +104,17 @@
 
         private WinlossByBetTypeBetListController CreateController()
         {
-            return Substitute.ForPartsOf<WinlossByBetTypeBetListController>(
-                LangService,
-                SessionService,
-                ProductService,
-                BalanceUpDataAccess,
-                CacheRefAdapter,
-                BetListApiClient, LicenseeSettingService);
+            var controller = Substitute.ForPartsOf<WinlossByBetTypeBetListController>();
+
+            controller.SessionServiceInstance = SessionService;
+            controller.LangService = LangService;
+            controller.LicenseeSettingServiceInstance = LicenseeSettingService;
+            controller.BalanceUpDataAccessInstance = BalanceUpDataAccess;
+            controller.BetListApiClient = BetListApiClient;
+            controller.ProductService = ProductService;
+            controller.CacheRefAdapter = CacheRefAdapter;
+
+            return controller;
         }
     }
 }

@@ -6,12 +6,6 @@
 
 namespace Fanex.Athena.Controllers.BetSettings
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -25,8 +19,12 @@ namespace Fanex.Athena.Controllers.BetSettings
     using Resources;
 
     using Service.BetSettings.Interfaces;
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
+
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
 
     public class DcsBetSettingController : BetSettingBaseController
     {
@@ -63,14 +61,12 @@ namespace Fanex.Athena.Controllers.BetSettings
         private readonly IDcsBetSettingService _betSettingService;
 
         public DcsBetSettingController(
-            ILanguageService languageService,
-            ISessionService sessionService,
             ICoreBetSettingService coreBetSettingService,
             IProductService productService,
-            IDcsBetSettingService betSettingService,
-            ILicenseeSettingService licenseeSettingService)
+            IDcsBetSettingService betSettingService
+            )
 
-        : base(languageService, sessionService, coreBetSettingService, productService, licenseeSettingService)
+        : base(coreBetSettingService, productService)
         {
             _betSettingService = betSettingService;
         }
@@ -107,10 +103,9 @@ namespace Fanex.Athena.Controllers.BetSettings
         [HttpPost]
         [CustomValidateAntiForgery]
         [ValidatePermissionOnData]
-
         public async Task<JsonResult> UpdateStatus(int custId, string nickName, int status, int productId)
         {
-            var userSession = SessionService.UserSession;
+            var userSession = SessionServiceInstance.UserSession;
 
             if (!CheckPermission(userSession, productId))
             {
@@ -137,8 +132,8 @@ namespace Fanex.Athena.Controllers.BetSettings
         [ValidatePermissionOnData]
         public async Task<JsonResult> UpdateBetSetting(int productId, string nickName)
         {
-            var userSession = SessionService.UserSession;
-            var licenseeId = SessionService.LicenseeSession.LicenseeId;
+            var userSession = SessionServiceInstance.UserSession;
+            var licenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
 
             if (!CheckPermission(userSession, productId))
             {

@@ -54,19 +54,8 @@ namespace Fanex.Athena.Service.StatelessCore.Utility
             }
         }
 
-        public static void MapDictionaryCurrencyList(IDictionary<string, object> actionArguments, IDictionary<int, string> currencyList)
-        {
-            var itemByDictionary = actionArguments.FirstOrDefault(x => x.Value is IMetaModelDictionaryCurrencyList)
-;
-            if (itemByDictionary.Value != null)
-            {
-                var value = itemByDictionary.Value as IMetaModelDictionaryCurrencyList;
-                value.CurrencyList = currencyList;
-                actionArguments[itemByDictionary.Key] = value;
-            }
-        }
-
-        public static void MapCurrencyList(IDictionary<string, object> actionArguments,
+        public static void MapCurrencyList(
+            IDictionary<string, object> actionArguments,
             IDictionary<int, string> currencyList)
         {
             var item = actionArguments.FirstOrDefault(x => x.Value is IMetaModelCurrencyList);
@@ -121,6 +110,17 @@ namespace Fanex.Athena.Service.StatelessCore.Utility
             }
         }
 
+        public static void MapSiteName(IDictionary<string, object> actionArguments, string siteName)
+        {
+            var item = actionArguments.Where(x => x.Value is IMetaModelSiteName)
+           .Select(x => x).FirstOrDefault();
+
+            if (item.Value is IMetaModelSiteName value)
+            {
+                value.SiteName = siteName;
+                actionArguments[item.Key] = value;
+            }
+        }
         public static void MapSiteName(IDictionary<string, object> actionArguments)
         {
             if (actionArguments.ContainsKey("sitename")
@@ -153,14 +153,14 @@ namespace Fanex.Athena.Service.StatelessCore.Utility
             }
         }
 
-        public static void MapIp(IDictionary<string, object> actionArguments, HttpRequestMessage request)
+        public static void MapIp(IDictionary<string, object> actionArguments, string ip)
         {
             var item = actionArguments.Where(x => x.Value is IMetaModelIp)
                     .Select(x => x).FirstOrDefault();
 
             if (item.Value is IMetaModelIp model)
             {
-                model.Ip = ClientHelper.GetClientIpAddress(request);
+                model.Ip = ip;
                 actionArguments[item.Key] = model;
             }
         }

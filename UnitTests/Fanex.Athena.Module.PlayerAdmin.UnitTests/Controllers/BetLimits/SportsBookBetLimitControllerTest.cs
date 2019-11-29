@@ -80,28 +80,6 @@
         }
 
         [Test]
-        public async Task UpdateSetting_WhenCall_AddCorrectDataToMetaModel()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<IEnumerable<PlayerBetLimitMetaModel>>>();
-
-                // Action
-                await controller.UpdateSetting(metaModel).ConfigureAwait(false);
-
-                // Assert
-                Assert.Multiple(() =>
-                {
-                    Assert.That(metaModel.UserId, Is.EqualTo(DefaultUserSession.UserId));
-                    Assert.That(metaModel.Language, Is.EqualTo(DefaultUserSession.Language));
-                    Assert.That(metaModel.SiteName, Is.EqualTo(DefaultLicenseeSession.LicenseeName));
-                    Assert.That(metaModel.Ip, Is.EqualTo(controller.Request.UserHostAddress));
-                });
-            }
-        }
-
-        [Test]
         public async Task UpdateSetting_UpdateFailed_ReturnErrorResult()
         {
             using (var controller = CreateController())
@@ -151,15 +129,14 @@
 
         private SportsBookBetLimitController CreateController()
         {
-            return new SportsBookBetLimitController(
-                LangService,
-                SessionService,
-                AppSettings,
-                _cacheRefAdapter,
-                _authService,
-                _service)
+            return new SportsBookBetLimitController(_service)
             {
-                ControllerContext = ControllerContext
+                ControllerContext = ControllerContext,
+                LangService = LangService,
+                SessionServiceInstance = SessionService,
+                AuthServiceInstance = _authService,
+                CacheRefAdapterInstance = _cacheRefAdapter,
+                AppSettingInstance = AppSettings
             };
         }
     }

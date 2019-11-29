@@ -67,10 +67,10 @@
                 MinDate = _minDate,
                 MaxDate = _maxDate
             });
-            var controller = Substitute.ForPartsOf<ExchangeWinLossReportController>(
-                LangService,
-                SessionService,
-                reportSettingService);
+
+            var controller = Substitute.ForPartsOf<ExchangeWinLossReportController>(reportSettingService);
+            controller.LangService = LangService;
+            controller.SessionServiceInstance = SessionService;
 
             return controller;
         }

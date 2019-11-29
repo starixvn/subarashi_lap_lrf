@@ -28,6 +28,7 @@
         private IFunctionService _functionService;
         private IUserService _userService;
         private ICurrencyDataAccess _currencyDataAccess;
+        private ILicenseeSettingService _licenseeSettingService;
 
         [SetUp]
         public void SetUp()
@@ -35,6 +36,7 @@
             _functionService = Substitute.For<IFunctionService>();
             _userService = Substitute.For<IUserService>();
             _currencyDataAccess = Substitute.For<ICurrencyDataAccess>();
+            _licenseeSettingService = Substitute.For<ILicenseeSettingService>();
 
             SetUpDefaultFakeData();
         }
@@ -45,6 +47,7 @@
             _functionService = null;
             _userService = null;
             _currencyDataAccess = null;
+            _licenseeSettingService = null;
         }
 
         [Test]
@@ -176,13 +179,16 @@
         private AccountPermissionController CreateController()
         {
             return new AccountPermissionController(
-            LangService,
-            SessionService,
             _functionService,
             _userService,
-            _currencyDataAccess, AppSettings)
+            _currencyDataAccess)
             {
-                ControllerContext = ControllerContext
+                ControllerContext = ControllerContext,
+                LangService = LangService,
+                SessionServiceInstance = SessionService,
+                LicenseeSettingServiceInstance = _licenseeSettingService,
+                AppSettingInstance = AppSettings
+
             };
         }
 

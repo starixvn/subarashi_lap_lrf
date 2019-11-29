@@ -64,10 +64,11 @@
 
         private PlayerBetLimitController CreateController()
         {
-            return new PlayerBetLimitController(
-                LangService,
-                SessionService,
-                _playerBetLimitRepository);
+            var result = new PlayerBetLimitController(_playerBetLimitRepository);
+            result.LangService = LangService;
+            result.SessionServiceInstance = SessionService;
+
+            return result;
         }
     }
 }

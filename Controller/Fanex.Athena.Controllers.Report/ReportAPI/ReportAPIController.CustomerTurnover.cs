@@ -6,13 +6,15 @@
 
 namespace Fanex.Athena.Controllers.Report
 {
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Web.ActionFilter;
+
     using Model.Core.DTO.Common;
+
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
 
     public partial class ReportAPIController : NonCultureBaseController
     {
@@ -27,7 +29,7 @@ namespace Fanex.Athena.Controllers.Report
                 return Json(new List<SportProductItem>());
             }
 
-            var data = await _betTypeService.GetBettypes(SessionService.LicenseeSession.LicenseeId, sports, SessionService.UserSession.Language).ConfigureAwait(false);
+            var data = await _betTypeService.GetBettypes(SessionServiceInstance.LicenseeSession.LicenseeId, sports, SessionServiceInstance.UserSession.Language).ConfigureAwait(false);
 
             return Json(data);
         }
@@ -40,7 +42,7 @@ namespace Fanex.Athena.Controllers.Report
         public async Task<ActionResult> CustomerTurnover(CustomerTurnoverMetaModel metaModel)
         {
             metaModel.IsExportExcel = false;
-            var userSession = SessionService.UserSession;
+            var userSession = SessionServiceInstance.UserSession;
             var result = await _customerTurnoverService.GetDataList(metaModel, userSession.CurrencyList, userSession.Language).ConfigureAwait(false);
 
             return Json(new { Data = result.DataList, Total = result.TotalData, TotalRow = result.TotalRows });

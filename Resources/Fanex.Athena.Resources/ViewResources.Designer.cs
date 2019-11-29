@@ -4948,6 +4948,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Promotion.
+        /// </summary>
+        public static string Promotion {
+            get {
+                return ResourceManager.GetString("Promotion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Promotion Prize.
         /// </summary>
         public static string PromotionPrize {
@@ -5511,6 +5520,15 @@ namespace Fanex.Athena.Resources {
         public static string SubsidiaryPerformance {
             get {
                 return ResourceManager.GetString("SubsidiaryPerformance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Subsidiary Search.
+        /// </summary>
+        public static string SubsidiarySearch {
+            get {
+                return ResourceManager.GetString("SubsidiarySearch", resourceCulture);
             }
         }
         
@@ -6609,6 +6627,15 @@ namespace Fanex.Athena.Resources {
         public static string Welcome {
             get {
                 return ResourceManager.GetString("Welcome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Whitelabel.
+        /// </summary>
+        public static string WhiteLabel {
+            get {
+                return ResourceManager.GetString("WhiteLabel", resourceCulture);
             }
         }
         

@@ -1,9 +1,5 @@
 ﻿namespace Fanex.Athena.Controllers.Report
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Web.Mvc;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
@@ -13,8 +9,10 @@
 
     using Resources;
 
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Web.Mvc;
 
     using Web.ActionFilter;
 
@@ -24,11 +22,7 @@
         private readonly IReportSettingService _reportSettingService;
 
         public CasinoTurnoverController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IProductService productService,
             IReportSettingService reportSettingService)
-        : base(languageService, sessionService, productService)
         {
             _reportSettingService = reportSettingService;
         }
@@ -36,19 +30,19 @@
         [HttpGet]
         public ActionResult Index()
         {
-            var userSession = SessionService.UserSession;
-            var productAccess = ProductService.GetSingleWalletProductAccess(
-                SessionService.LicenseeSession.LicenseeId,
+            var userSession = SessionServiceInstance.UserSession;
+            var productAccess = ProductServiceInstance.GetSingleWalletProductAccess(
+                SessionServiceInstance.LicenseeSession.LicenseeId,
                 userSession.Language,
                 FunctionNames.CasinoTurnover);
             var setting = _reportSettingService.GetSetting(PermissionKeys.ReportCasinoTurnover,
-                SessionService.LicenseeSession.LicenseeName);
+                SessionServiceInstance.LicenseeSession.LicenseeName);
 
             var viewModel = new CasinoTurnoverViewModel
             {
                 FromDate = DateTime.Today,
                 ToDate = DateTime.Today,
-                CurrencyList = SessionService.UserSession.CurrencyList,
+                CurrencyList = SessionServiceInstance.UserSession.CurrencyList,
                 BaseCurrencies = SystemConstants.BaseCurrencyList.Select(i => i.Value),
                 ProductOptions = ToProductOptions(productAccess.ProductList),
                 Status = GetStatusList(),

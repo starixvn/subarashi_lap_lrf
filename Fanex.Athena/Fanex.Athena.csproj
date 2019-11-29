@@ -119,17 +119,11 @@
     <Reference Include="ICSharpCode.SharpZipLib, Version=1.0.0.999, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpZipLib.1.0.0\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
-    <Reference Include="ILogger, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ILogger.1.0.0.0\lib\net40\ILogger.dll</HintPath>
-    </Reference>
-    <Reference Include="LAP.ONEBook.Security, Version=1.0.7.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\LAP.ONEBook.Security.1.0.7\lib\net461\LAP.ONEBook.Security.dll</HintPath>
+    <Reference Include="LAP.ONEBook.Security, Version=1.0.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\LAP.ONEBook.Security.1.0.8\lib\net461\LAP.ONEBook.Security.dll</HintPath>
     </Reference>
     <Reference Include="LAP.ONEBook.Security.StorageProvider.SqlServer, Version=1.0.6.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\LAP.ONEBook.Security.StorageProvider.SqlServer.1.0.7\lib\net461\LAP.ONEBook.Security.StorageProvider.SqlServer.dll</HintPath>
-    </Reference>
-    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="MessagePack, Version=1.7.3.7, Culture=neutral, PublicKeyToken=b4a0369545f0a1be, processorArchitecture=MSIL">
       <HintPath>..\packages\MessagePack.1.7.3.7\lib\net45\MessagePack.dll</HintPath>
@@ -609,10 +603,12 @@
     <Content Include="www\assets\images\ajax-loader.gif" />
     <Content Include="www\assets\images\new-system.svg" />
     <Content Include="www\css\build\dev\pages\betlist\images\lotto_ball.png" />
+    <Content Include="www\css\build\dev\pages\betlist\images\nphPromotion.png" />
     <Content Include="www\css\build\dev\pages\betlist\images\rebateBonus.png" />
     <Content Include="www\css\build\dev\reactpages\betlist\images\bonus.png" />
     <Content Include="www\css\build\dev\reactpages\betlist\images\goal-icon.png" />
     <Content Include="www\css\build\dev\reactpages\betlist\images\lotto_ball.png" />
+    <Content Include="www\css\build\dev\reactpages\betlist\images\nphPromotion.png" />
     <Content Include="www\css\build\dev\reactpages\betlist\images\q_Icon2_1.png" />
     <Content Include="www\css\build\dev\reactpages\betlist\images\q_Icon_2.png" />
     <Content Include="www\css\build\dev\reactpages\betlist\images\rebateBonus.png" />
@@ -658,10 +654,12 @@
     <Content Include="www\css\build\images\ui-icons_2e83ff_256x240-1.png" />
     <Content Include="www\css\build\images\ui-icons_2e83ff_256x240-2.png" />
     <Content Include="www\css\build\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="www\css\build\pro\pages\betlist\images\nphPromotion.png" />
     <Content Include="www\css\build\pro\pages\betlist\images\rebateBonus.png" />
     <Content Include="www\css\build\pro\reactpages\betlist\images\bonus.png" />
     <Content Include="www\css\build\pro\reactpages\betlist\images\goal-icon.png" />
     <Content Include="www\css\build\pro\reactpages\betlist\images\lotto_ball.png" />
+    <Content Include="www\css\build\pro\reactpages\betlist\images\nphPromotion.png" />
     <Content Include="www\css\build\pro\reactpages\betlist\images\q_Icon2_1.png" />
     <Content Include="www\css\build\pro\reactpages\betlist\images\q_Icon_2.png" />
     <Content Include="www\css\build\pro\reactpages\betlist\images\rebateBonus.png" />
@@ -686,7 +684,6 @@
     <Content Include="www\css\build\pro\reactpages\speciallicenseewl\index.chunk.js" />
     <Content Include="www\css\build\pro\reactpages\speciallicenseewl\index.css" />
     <Content Include="www\css\build\pro\reactpages\subsidiaryperformance\index.css" />
-    <Content Include="App_Data\Template\Reports\PP_PromotionPrize.xls" />
     <Content Include="SiteConfig\Web.AppSettings.UATTW.config">
       <SubType>Designer</SubType>
     </Content>
@@ -2168,7 +2165,6 @@
     <Content Include="App_Data\Template\Reports\ThirdPartyWinLoss.xls" />
     <Content Include="App_Data\Template\RNGCasino\HandHistory.xls" />
     <Content Include="App_Data\Template\Reports\AgCasinoBalance.xls" />
-    <Content Include="App_Data\Template\Reports\PlatformWinLossSummary.xls" />
     <Content Include="GruntFilters.json" />
     <Content Include="App_Data\Template\Reports\WeeklyLiveMatch.xls" />
     <Content Include="App_Data\UserGuide\CustomerList\pdf\en-US\Odds Group Feature_Licensee.pdf" />
@@ -5579,7 +5575,6 @@
     <Content Include="App_Data\Template\Reports\LicenseeWinLoss.xls" />
     <Content Include="App_Data\Template\Reports\LiveReport.xls" />
     <Content Include="App_Data\Template\Reports\MatchWinLoss.xls" />
-    <Content Include="App_Data\Template\Reports\PlatformWinLossMember.xls" />
     <Content Include="App_Data\Template\Reports\Turnover.xls" />
     <Content Include="App_Data\Template\Reports\WinLossByBetType.xls" />
     <Content Include="App_Data\Template\Reports\WinLossByProducts.xls" />

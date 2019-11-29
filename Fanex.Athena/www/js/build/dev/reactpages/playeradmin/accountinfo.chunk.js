@@ -20523,6 +20523,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ActivityRecord = function ActivityRecord(_ref) {
   var ibcCustId = _ref.ibcCustId,
+      createdDate = _ref.createdDate,
       getActivityRecord = _ref.getActivityRecord;
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null),
@@ -20542,7 +20543,6 @@ var ActivityRecord = function ActivityRecord(_ref) {
   }, [ibcCustId]);
 
   var _ref2 = data || {},
-      CreatedDateString = _ref2.CreatedDateString,
       LastTxn = _ref2.LastTxn,
       LastUpdateBAString = _ref2.LastUpdateBAString,
       BAUpdatedBy = _ref2.BAUpdatedBy,
@@ -20555,7 +20555,7 @@ var ActivityRecord = function ActivityRecord(_ref) {
     className: "table"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     className: "first-cell"
-  }, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_4__["default"].getText('CreatedDate')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, CreatedDateString)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_4__["default"].getText('LastTransaction')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, LastTxn)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+  }, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_4__["default"].getText('CreatedDate')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, createdDate)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_4__["default"].getText('LastTransaction')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, LastTxn)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     colSpan: "2"
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_4__["default"].getText('BAUpdatedBy')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, BAUpdatedBy)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _jsroot_lib_clientResourceManager__WEBPACK_IMPORTED_MODULE_4__["default"].getText('LastUpdatedBA')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, LastUpdateBAString)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     colSpan: "2"
@@ -20570,9 +20570,11 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-  var ibcCustId = state.ibcCustId;
+  var ibcCustId = state.ibcCustId,
+      createdDate = state.createdDate;
   return Object.assign({}, {
-    ibcCustId: ibcCustId
+    ibcCustId: ibcCustId,
+    createdDate: createdDate
   });
 }
 
@@ -21275,7 +21277,7 @@ function () {
 /*!********************************************************************************************!*\
   !*** ./www/js/source/reactpages/Module/PlayerAdmin/account-info/reducers/commonReducer.js ***!
   \********************************************************************************************/
-/*! exports provided: licenseeCustId, ibcCustId, licenseeType, userName, currencyName, subTabKey */
+/*! exports provided: licenseeCustId, ibcCustId, licenseeType, userName, currencyName, subTabKey, createdDate */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -21286,6 +21288,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "userName", function() { return userName; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "currencyName", function() { return currencyName; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "subTabKey", function() { return subTabKey; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createdDate", function() { return createdDate; });
 /* harmony import */ var _lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
 
 var licenseeCustId = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(null, {});
@@ -21294,6 +21297,7 @@ var licenseeType = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["de
 var userName = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])('', {});
 var currencyName = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])('', {});
 var subTabKey = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])('', {});
+var createdDate = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])('', {});
 
 /***/ }),
 

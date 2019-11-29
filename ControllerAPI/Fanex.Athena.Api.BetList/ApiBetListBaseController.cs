@@ -77,7 +77,6 @@ namespace Fanex.Athena.Api.BetList
             metaModel.MoveBetsDay = DateTime.SpecifyKind(balanceUp.MoveBetsDay.Date, DateTimeKind.Utc);
             metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId);
             metaModel.HasPlayerCom = licenseeSession.IsAllowedCustomerComm;
-            metaModel.CurrencyList = userSession.CurrencyList;
             metaModel.UspKey = uspKey;
 
             return await BridgeClientService.PostAsync(apiPath ?? "/BetList/GetBetList", metaModel, userSession.Language).ConfigureAwait(false);
@@ -104,7 +103,6 @@ namespace Fanex.Athena.Api.BetList
             metaModel.MoveBetsDay = DateTime.SpecifyKind(balanceUp.MoveBetsDay.Date, DateTimeKind.Utc);
             metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId);
             metaModel.HasPlayerCom = licenseeSession.IsAllowedCustomerComm;
-            metaModel.CurrencyList = userSession.CurrencyList;
             metaModel.UspKey = uspKey;
             return await BridgeClientService.PostAsync(apiPath ?? "/BetList/GetBetListPaging",
                 metaModel,

@@ -25,6 +25,8 @@ namespace Fanex.Athena.Model.Report.DTO
 
         public decimal Adjustment { get; set; }
 
+        public decimal Promotion { get; set; }
+
         public decimal Turnover { get; set; }
 
         public decimal DrawGame { get; set; }

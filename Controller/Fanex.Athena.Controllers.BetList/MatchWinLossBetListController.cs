@@ -12,18 +12,11 @@ namespace Fanex.Athena.Controllers.BetList
 
     using System.Web.Mvc;
 
-    using DataAccess.Core.Configuration.Interfaces;
     using Fanex.Athena.Model.Auth.DataDomain;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     using Model.BetList.MetaModel;
 
     using Resources;
-
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
-
-    using VendorAdapter.Interfaces;
 
     using Web.ActionFilter;
 
@@ -33,18 +26,6 @@ namespace Fanex.Athena.Controllers.BetList
     public class MatchWinLossBetListController : BetListBaseController
     {
         private static readonly int[] HiddenColumns = new[] { BetEffectiveColumn };
-
-        public MatchWinLossBetListController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IProductService productService,
-            IBalanceUpDataAccess balanceUpDataAccess,
-            ICacheRefAdapter cacheRefAdapter,
-            IBetListApiClient betListApiClient, ILicenseeSettingService licenseeSettingService)
-        : base(languageService, sessionService, productService, balanceUpDataAccess,
-              cacheRefAdapter, betListApiClient, licenseeSettingService)
-        {
-        }
 
         [HttpGet]
         [ValidationWebRequest(IsValidCurrency = true)]
@@ -88,7 +69,7 @@ namespace Fanex.Athena.Controllers.BetList
 
             metaModel.ShowingOption = new BetListShowingOption
             {
-                CustomerCommVisible = SessionService.LicenseeSession.IsAllowedCustomerComm,
+                CustomerCommVisible = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm,
             };
 
             var matchName = metaModel.HomeId > 0 && metaModel.AwayId > 0

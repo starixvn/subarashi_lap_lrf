@@ -40,7 +40,6 @@ namespace Fanex.Athena.Api.BetList
             {
                 CustId = custId,
                 TransId = transId,
-                UserCurrencyList = UserCurrencyList
             };
 
             return await BridgeClientService.PostAsync("/MixParlayBetList/Detail", metaModel
@@ -60,7 +59,6 @@ namespace Fanex.Athena.Api.BetList
                 Handicap1 = handicap1,
                 Handicap2 = handicap2,
                 CustId = custId,
-                UserCurrencyList = UserCurrencyList
             };
             return await BridgeClientService.PostAsync("/MixParlayBetList/NewParlayDetail",
                 metaModel, SessionService.UserSession.Language).ConfigureAwait(false);

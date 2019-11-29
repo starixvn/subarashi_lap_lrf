@@ -6,11 +6,6 @@
 
 namespace Fanex.Athena.Controllers.BetSettings
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
 
@@ -20,8 +15,11 @@ namespace Fanex.Athena.Controllers.BetSettings
     using Resources;
 
     using Service.BetSettings.Interfaces;
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
+
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
 
     public class ThirdPartyBetSettingController : BetSettingBaseController
     {
@@ -37,14 +35,11 @@ namespace Fanex.Athena.Controllers.BetSettings
         private readonly IThirdPartyBetSettingService _betSettingService;
 
         public ThirdPartyBetSettingController(
-            ILanguageService languageService,
-            ISessionService sessionService,
             ICoreBetSettingService coreBetSettingService,
             IProductService productService,
-            IThirdPartyBetSettingService betSettingService,
-             ILicenseeSettingService licenseeSettingService
+            IThirdPartyBetSettingService betSettingService
             )
-        : base(languageService, sessionService, coreBetSettingService, productService, licenseeSettingService)
+        : base(coreBetSettingService, productService)
         {
             _betSettingService = betSettingService;
         }
@@ -112,7 +107,7 @@ namespace Fanex.Athena.Controllers.BetSettings
 
         private async Task<JsonResult> UpdateThirdPartyProductStatusAsync(int productId, int custId, string nickName, int status)
         {
-            var userSession = SessionService.UserSession;
+            var userSession = SessionServiceInstance.UserSession;
             if (!CheckPermission(userSession, productId))
             {
                 return AccessDenied();

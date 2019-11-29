@@ -1,5 +1,5 @@
 export const buildSelectedPlayer = (dataItem) => {
-    const { IbcCustId, UserName, Currency, IsDeposit, IsArchived, LicenseeCustId, CurrencyId } = dataItem;
+    const { IbcCustId, UserName, Currency, IsDeposit, IsArchived, LicenseeCustId, CurrencyId, CreatedDate } = dataItem;
 
     return {
         ibcCustId: IbcCustId,
@@ -8,7 +8,8 @@ export const buildSelectedPlayer = (dataItem) => {
         currency: Currency,
         isDeposit: IsDeposit,
         isArchived: IsArchived,
-        currencyId: CurrencyId
+        currencyId: CurrencyId,
+        createdDate: CreatedDate
     };
 }
 
@@ -32,7 +33,8 @@ export const buildLapPlayerList = (playerList) => {
             LastTransaction,
             CurrencyCode,
             OutBalance,
-            IBCUserName
+            IBCUserName,
+            CreatedDateString
         } = item;
 
         return {
@@ -50,13 +52,14 @@ export const buildLapPlayerList = (playerList) => {
             IsOnline: isOnline,
             IsDeposit: IBCCustId > 0,
             IsArchived: !!isArchived,
-            CurrencyId: Currency
+            CurrencyId: Currency,
+            CreatedDate: CreatedDateString
         };
     });
 }
 
 export const buildCurrentActivePlayer = (dataItem) => {
-    const { IbcCustId, UserName, Currency, Status, OddsGroup, SpecialLevel, IsDeposit, IsArchived, LicenseeCustId, CurrencyId } = dataItem;
+    const { IbcCustId, UserName, Currency, Status, OddsGroup, SpecialLevel, IsDeposit, IsArchived, LicenseeCustId, CurrencyId, CreatedDate } = dataItem;
 
     return {
         ibcCustId: IbcCustId,
@@ -68,6 +71,7 @@ export const buildCurrentActivePlayer = (dataItem) => {
         specialLevel: SpecialLevel,
         isDeposit: IsDeposit,
         isArchived: IsArchived,
-        currencyId: CurrencyId
+        currencyId: CurrencyId,
+        createdDate: CreatedDate
     };
 }

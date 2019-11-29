@@ -6238,7 +6238,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         'use strict';
 
         const EXCEL_FILENAME = 'CustomerWinLoss.xlsx';
-        const EXCEL_PP_FILENAME = 'PP_PromotionPrize.xls';
+        const EXCEL_PP_FILENAME = 'PromotionPrize.xls';
         const SORTING_CODE = {
             'externalId': 2,
             'systemId': 1,
@@ -6511,7 +6511,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             url = QueryString.setParam(url, 'todate', _submitData.ToDate);
             url = QueryString.setParam(url, 'ishistoryreport', $('input#IsHistory').val());
 
-            const popH = Math.min($(window).height() - 100, 650), popW = 920;
+            const popH = Math.min($(window).height() - 100, 650), popW = 950;
             const popupOption = { id: 'betlist-popup', width: popW + 50, height: popH + 50, title: Site.getSingleResource('CustomerBetList') };
             Popup.openPopupWithIframe(url, popupOption);
             window.logOpenBetlistEvent && window.logOpenBetlistEvent();
@@ -6871,7 +6871,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         {
             urlData: 'CustomerWinLossReport/Index',
             urlExcelData: 'CustomerWinLossReport/Index',
-            urlPromotionPrizeExcelData: 'api/PromotionPrizeReport/ExportExcel',
+            urlPromotionPrizeExcelData: 'PromotionPrizeReport/ExportExcel',
             hasCustomerComm: true,
             isAllowBA: true,
             customerCommIndex: 11,
