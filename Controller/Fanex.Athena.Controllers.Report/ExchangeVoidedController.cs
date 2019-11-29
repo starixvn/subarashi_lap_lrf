@@ -10,15 +10,13 @@ using Fanex.Athena.Model.Core.DTO.Common;
 using Fanex.Athena.Model.Report.DTO;
 using Fanex.Athena.Model.Report.MetaModel;
 using Fanex.Athena.Model.Report.ViewModel;
-using Fanex.Athena.Service.Core.Common.Interfaces;
-using Fanex.Athena.Service.Core.Users.Interfaces;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
 using Fanex.Athena.Web.ActionFilter;
 
 namespace Fanex.Athena.Controllers.Report
 {
     [FunctionAuthorization(PermissionKeys.BettingTicketCenter)]
-    public class ExchangeVoidedController : ContentBaseController
+    public class ExchangeVoidedController : ReportBaseController
     {
         private readonly IProductService _productService;
 
@@ -29,12 +27,10 @@ namespace Fanex.Athena.Controllers.Report
         private readonly IExchangeVoidedDataAccess _dataAccess;
 
         public ExchangeVoidedController(
-            ILanguageService languageService,
-                  ISessionService sessionService,
                   ILGAPIClient lgClient,
                   IAppSettings appSetting,
                   IExchangeVoidedDataAccess dataAccess,
-                  IProductService productService) : base(languageService, sessionService)
+                  IProductService productService)
         {
             _lgClient = lgClient;
             _appSetting = appSetting;
@@ -83,14 +79,14 @@ namespace Fanex.Athena.Controllers.Report
 
             const string apiPath = "/ExchangeSettleBetHistory/Index";
 
-            return JsonNet(await _lgClient.PostAsync<ExchangeVoidedViewModel>(apiPath, apiMetaModel, SessionService.UserSession.Language).ConfigureAwait(false));
+            return JsonNet(await _lgClient.PostAsync<ExchangeVoidedViewModel>(apiPath, apiMetaModel, SessionServiceInstance.UserSession.Language).ConfigureAwait(false));
         }
 
         private bool HasPermission()
         {
             var productList = _productService.GetProductList(
-                SessionService.LicenseeSession.LicenseeId,
-                SessionService.UserSession.Language);
+                SessionServiceInstance.LicenseeSession.LicenseeId,
+                SessionServiceInstance.UserSession.Language);
 
             return productList.Any(x => string.Equals(Product.Exchange, x.ProductCode, StringComparison.InvariantCultureIgnoreCase));
         }

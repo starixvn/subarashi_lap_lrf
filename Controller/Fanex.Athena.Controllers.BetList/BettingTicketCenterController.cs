@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
-
+    using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -14,10 +14,6 @@
     using Model.Core.MetaModel.Product;
 
     using Resources;
-
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Web.Mvc;
 
     using Web.ActionFilter;
 
@@ -52,7 +48,7 @@
                 MinDate = _balanceUpDataAccess.GetBalanceUp().BalanceUpDay,
                 IsAllowedCustomerComm = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm,
                 SelectedBaseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency,
-				HasExchange = HasExchange()
+                HasExchange = HasExchange()
             };
             return View("~/Views/Desktop/BetList/BettingTicketCenter/MultiCustomer.cshtml", viewModel);
         }
@@ -66,8 +62,9 @@
                 PlatformList = GetPlatformList(),
                 ProductOptionList = GetProductOptionList(),
                 IsAllowedCustomerComm = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm,
-                SelectedBaseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency
-				HasExchange = HasExchange()            };
+                SelectedBaseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency,
+                HasExchange = HasExchange()
+            };
             return View("~/Views/Desktop/BetList/BettingTicketCenter/SingleCustomer.cshtml", viewModel);
         }
 
@@ -93,8 +90,9 @@
                 CurrencyList = GetCurrencyList(),
                 ProductOptionList = GetProductOptionList(FunctionNames.BettingTicketCenterRunning),
                 IsAllowedCustomerComm = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm,
-                SelectedBaseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency
-				HasExchange = HasExchange()            };
+                SelectedBaseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency,
+                HasExchange = HasExchange()
+            };
 
             return View("~/Views/Desktop/BetList/BettingTicketCenter/Running.cshtml", viewModel);
         }
@@ -199,7 +197,7 @@
 
         private bool HasExchange()
         {
-            return _productService.GetProductList(SessionService.LicenseeSession.LicenseeId, SessionService.UserSession.Language)
+            return _productService.GetProductList(SessionServiceInstance.LicenseeSession.LicenseeId, SessionServiceInstance.UserSession.Language)
                 .Any(x => string.Equals(Product.Exchange, x.ProductCode, StringComparison.InvariantCultureIgnoreCase));
         }
     }

@@ -75,7 +75,7 @@
                 _betSettingService.GetStatusAsync(metaModel.CustId, metaModel.ProductId)
                     .Returns(Task.FromResult(isEnabled));
 
-                _exchangeCommApiService.GetCommission(metaModel.CustId)
+                _exchangeCommApiService.GetCommission(metaModel.CustId, SessionService.UserSession.Language)
                     .Returns(new ResultInfo<double> { Code = 1, Message = "Error" });
 
                 // Action
@@ -154,7 +154,6 @@
                 SessionServiceInstance = SessionService,
                 LicenseeSettingServiceInstance = LicenseeSettingService,
                 AppSettingInstance = AppSettings
-
             };
 
             return controller;

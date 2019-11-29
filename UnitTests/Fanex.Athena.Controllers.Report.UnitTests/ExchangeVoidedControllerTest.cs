@@ -45,6 +45,7 @@ namespace Fanex.Athena.Controllers.Report.UnitTests
 
             _lgAPIClient = null;
             _dataAccess = null;
+            _productService = null;
         }
 
         [Test]
@@ -226,13 +227,14 @@ namespace Fanex.Athena.Controllers.Report.UnitTests
             _productService.GetProductList(licenseeId, language).Returns(fakeProductList);
 
             return new ExchangeVoidedController(
-                LangService,
-                SessionService,
                 _lgAPIClient,
                 appSetting,
                 _dataAccess,
                 _productService
-                );
+                )
+            {
+                SessionServiceInstance = SessionService
+            };
         }
     }
 }
