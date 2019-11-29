@@ -164,6 +164,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="ExchangeVoidedControllerTest.cs" />
     <Compile Include="CasinoTurnoverControllerTest.cs" />
     <Compile Include="DailyBetsReportControllerTest.cs" />
     <Compile Include="MatchWinLossReportControllerTest_AssignLeagueName.cs" />
