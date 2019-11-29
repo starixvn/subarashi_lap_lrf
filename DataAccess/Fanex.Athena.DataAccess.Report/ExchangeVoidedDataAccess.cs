@@ -1,11 +1,12 @@
-﻿using Fanex.Athena.DataAccess.Core;
+﻿using System.Threading.Tasks;
+using Fanex.Athena.DataAccess.Core;
 using Fanex.Athena.DataAccess.Report.Interfaces;
 
 namespace Fanex.Athena.DataAccess.Report
 {
     public class ExchangeVoidedDataAccess : BaseDataAccess, IExchangeVoidedDataAccess
     {
-        public int GetCustId(string userName, string agentList)
+        public async Task<int> GetCustIdAsync(string userName, string agentList)
         {
             const string SpName = "Lrf_UserInfoByUserNameSel";
 
@@ -14,7 +15,7 @@ namespace Fanex.Athena.DataAccess.Report
                 objectDb.SetParameterValue("UserName", userName);
                 objectDb.SetParameterValue("AgentList", agentList);
 
-                return objectDb.QueryEntity<int>();
+                return await objectDb.QueryEntityAsync<int>();
             }
         }
     }

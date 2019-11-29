@@ -48,7 +48,7 @@ namespace Fanex.Athena.Controllers.Report
             var custId = 0;
             if (!string.IsNullOrEmpty(userName))
             {
-                custId = _dataAccess.GetCustId(userName, metaModel.AgentListXml);
+                custId = await _dataAccess.GetCustIdAsync(userName, metaModel.AgentListXml);
 
                 if (custId == 0)
                 {

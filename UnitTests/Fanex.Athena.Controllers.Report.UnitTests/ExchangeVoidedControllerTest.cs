@@ -78,7 +78,8 @@ namespace Fanex.Athena.Controllers.Report.UnitTests
 
             using (var controller = CreateController())
             {
-                _dataAccess.GetCustId(metaModel.UserName, metaModel.AgentListXml).Returns(ExpectedCustId);
+                _dataAccess.GetCustIdAsync(metaModel.UserName, metaModel.AgentListXml)
+                    .Returns(Task.FromResult(ExpectedCustId));
 
                 // Action
                 var result = await controller.Index(metaModel) as JsonResult;
@@ -118,7 +119,10 @@ namespace Fanex.Athena.Controllers.Report.UnitTests
                 const string apiPath = "/ExchangeSettleBetHistory/Index";
                 var language = SessionService.UserSession.Language;
                 object passedParam = null;
-                _dataAccess.GetCustId(metaModel.UserName, metaModel.AgentListXml).Returns(ExpectedCustId);
+
+                _dataAccess.GetCustIdAsync(metaModel.UserName, metaModel.AgentListXml)
+                    .Returns(Task.FromResult(ExpectedCustId));
+
                 _lgAPIClient.PostAsync<ExchangeVoidedViewModel>(apiPath, Arg.Any<object>(), language)
                     .Returns(x =>
                     {
@@ -177,7 +181,7 @@ namespace Fanex.Athena.Controllers.Report.UnitTests
 
                 // Assert
                 Assert.That(jsonPassedParam, Is.EqualTo(expectedResult));
-                _dataAccess.DidNotReceiveWithAnyArgs().GetCustId(default, default);
+                await _dataAccess.DidNotReceiveWithAnyArgs().GetCustIdAsync(default, default);
             }
         }
 

@@ -1,7 +1,9 @@
-﻿namespace Fanex.Athena.DataAccess.Report.Interfaces
+﻿using System.Threading.Tasks;
+
+namespace Fanex.Athena.DataAccess.Report.Interfaces
 {
     public interface IExchangeVoidedDataAccess
     {
-        int GetCustId(string userName, string agentList);
+        Task<int> GetCustIdAsync(string userName, string agentList);
     }
 }
