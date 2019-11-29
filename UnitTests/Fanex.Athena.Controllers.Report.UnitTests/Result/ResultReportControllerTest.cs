@@ -60,7 +60,7 @@
                 const string RefNo = "hohoho";
                 const string ExpectedData = "huhuhu";
                 const string Url = "/ResultReport/ShowRngCasinoSingleWalletResult";
-                _betListApiClient.PostAsyncStringAsync(Url, Arg.Any<object>(),
+                _betListApiClient.PostStringAsync(Url, Arg.Any<object>(),
                     SessionService.UserSession.Language).Returns(ExpectedData);
 
                 // Action
@@ -69,7 +69,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    _betListApiClient.Received(1).PostAsyncStringAsync(
+                    _betListApiClient.Received(1).PostStringAsync(
                            Url,
                            Arg.Is<object>(x => (string)x.GetValue("refNo") == RefNo),
                            SessionService.UserSession.Language
@@ -86,7 +86,7 @@
             {
                 // Arrange
                 const string Url = "/ResultReport/ResultDetail";
-                _betListApiClient.PostAsyncStringAsync(Url, Arg.Any<object>(), SessionService.UserSession.Language).Returns(x => (string)null);
+                _betListApiClient.PostStringAsync(Url, Arg.Any<object>(), SessionService.UserSession.Language).Returns(x => (string)null);
 
                 // Action
                 var result = controller.ResultDetail(0, 0).Result as RedirectResult;
@@ -106,7 +106,7 @@
                 const int MatchId = 1;
                 const int SportId = 11111;
                 const string Url = "/ResultReport/ResultDetail";
-                _betListApiClient.PostAsyncStringAsync(Url, Arg.Any<object>(),
+                _betListApiClient.PostStringAsync(Url, Arg.Any<object>(),
                     SessionService.UserSession.Language).Returns(ExpectedData);
 
                 // Action
@@ -115,7 +115,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    _betListApiClient.Received(1).PostAsyncStringAsync(
+                    _betListApiClient.Received(1).PostStringAsync(
                         Url,
                         Arg.Is<object>(
                             x => (int)x.GetValue("matchId") == MatchId &&

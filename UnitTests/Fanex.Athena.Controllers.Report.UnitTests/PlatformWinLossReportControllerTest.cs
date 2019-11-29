@@ -70,7 +70,7 @@
                 // Assert
                 Assert.Multiple(async () =>
                 {
-                    await _reportAPIClient.Received().PostAsyncStringAsync("api/PlatformWinLoss/GetSummaryData", metaModel, SessionService.UserSession.Language);
+                    await _reportAPIClient.Received().PostStringAsync("api/PlatformWinLoss/GetSummaryData", metaModel, SessionService.UserSession.Language);
                 });
             }
         }
@@ -89,7 +89,7 @@
                 // Assert
                 Assert.Multiple(async () =>
                 {
-                    await _reportAPIClient.Received().PostAsyncStringAsync("api/PlatformWinLoss/GetMemberData", metaModel, SessionService.UserSession.Language);
+                    await _reportAPIClient.Received().PostStringAsync("api/PlatformWinLoss/GetMemberData", metaModel, SessionService.UserSession.Language);
                 });
             }
         }

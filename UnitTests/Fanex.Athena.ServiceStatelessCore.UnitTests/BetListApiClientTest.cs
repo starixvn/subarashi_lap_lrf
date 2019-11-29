@@ -41,7 +41,7 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
             var betListApiClient = new BetListApiClient(client);
 
             // Action
-            var result = await betListApiClient.PostAsyncStringAsync(TestPath, TestValue, LANG).ConfigureAwait(false);
+            var result = await betListApiClient.PostStringAsync(TestPath, TestValue, LANG).ConfigureAwait(false);
 
             // Assert
             Assert.That(passedRequest.Headers.GetValues("Language").ElementAt(0), Is.EqualTo(LANG));
@@ -66,7 +66,7 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
             var betListApiClient = new BetListApiClient(client);
 
             // Action
-            var result = await betListApiClient.PostAsyncStringAsync(TestPath, TestValue, LANG).ConfigureAwait(false);
+            var result = await betListApiClient.PostStringAsync(TestPath, TestValue, LANG).ConfigureAwait(false);
 
             // Assert
             Assert.That(result.Length, Is.EqualTo(3));

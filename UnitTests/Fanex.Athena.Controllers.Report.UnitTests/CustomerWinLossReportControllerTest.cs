@@ -99,7 +99,7 @@
             using (var controller = CreateController())
             {
                 const string ExpectedResult = "json result";
-                _reportApiClient.PostAsyncStringAsync("api/CustomerWinLoss/Index",
+                _reportApiClient.PostStringAsync("api/CustomerWinLoss/Index",
                     Arg.Any<CustomerWinLossMetaModel>(), userSession.Language).Returns(ExpectedResult);
 
                 // Action

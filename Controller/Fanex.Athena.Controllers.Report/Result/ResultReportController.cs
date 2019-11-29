@@ -67,7 +67,7 @@ namespace Fanex.Athena.Controllers.Report.Result
         {
             if (ModelState.IsValid)
             {
-                var data = await _betListApiClient.PostAsyncStringAsync(
+                var data = await _betListApiClient.PostStringAsync(
                     "/ResultReport/Index",
                     metaModel,
                     SessionServiceInstance.UserSession.Language
@@ -112,7 +112,7 @@ namespace Fanex.Athena.Controllers.Report.Result
                    language,
                    ResultPageGetNormalSportsName);
                 metaModel.ProductCodeList = string.Join(",", productAccess.ProductList.Select(x => x.ProductCode));
-                var result = await _betListApiClient.PostAsyncStringAsync(
+                var result = await _betListApiClient.PostStringAsync(
                     "/ResultReport/GetSports",
                     metaModel,
                     language
@@ -133,7 +133,7 @@ namespace Fanex.Athena.Controllers.Report.Result
         {
             if (ModelState.IsValid)
             {
-                var result = await _betListApiClient.PostAsyncStringAsync(
+                var result = await _betListApiClient.PostStringAsync(
                     "/ResultReport/ResultPopup",
                     metaModel,
                     SessionServiceInstance.UserSession.Language
@@ -150,7 +150,7 @@ namespace Fanex.Athena.Controllers.Report.Result
         [CustomValidateAntiForgery]
         public async Task<ActionResult> ShowRngCasinoSingleWalletResult(string refNo)
         {
-            var result = await _betListApiClient.PostAsyncStringAsync(
+            var result = await _betListApiClient.PostStringAsync(
                 "/ResultReport/ShowRngCasinoSingleWalletResult",
                 new { refNo },
                 SessionServiceInstance.UserSession.Language
@@ -170,7 +170,7 @@ namespace Fanex.Athena.Controllers.Report.Result
                 gamePlayId,
                 languageCode = language
             };
-            return await _betListApiClient.PostAsyncStringAsync("/VoidbridgeResultPopup/Index",
+            return await _betListApiClient.PostStringAsync("/VoidbridgeResultPopup/Index",
                 model, language).ConfigureAwait(false);
         }
 
@@ -185,7 +185,7 @@ namespace Fanex.Athena.Controllers.Report.Result
                 betType,
                 languageCode = language
             };
-            var data = await _betListApiClient.PostAsyncStringAsync("/AllBetResultPopup/Index", model, language).ConfigureAwait(false);
+            var data = await _betListApiClient.PostStringAsync("/AllBetResultPopup/Index", model, language).ConfigureAwait(false);
             ViewBag.Data = data.Replace("{rootUrl}", HttpRuntime.AppDomainAppVirtualPath.TrimEnd('/'));
             return View("~/Views/Desktop/Report/Result/Popup/AllBet.cshtml");
         }
@@ -198,7 +198,7 @@ namespace Fanex.Athena.Controllers.Report.Result
                 custId,
                 gameId
             };
-            return await _betListApiClient.PostAsyncStringAsync("/GlobalGamingResultPopup/Index",
+            return await _betListApiClient.PostStringAsync("/GlobalGamingResultPopup/Index",
                 model, SessionServiceInstance.UserSession.Language).ConfigureAwait(false);
         }
 
@@ -218,7 +218,7 @@ namespace Fanex.Athena.Controllers.Report.Result
                 sportType,
                 languageCode = language
             };
-            var result = await _betListApiClient.PostAsyncStringAsync("/ResultReport/ResultDetail", model, language).ConfigureAwait(false);
+            var result = await _betListApiClient.PostStringAsync("/ResultReport/ResultDetail", model, language).ConfigureAwait(false);
 
             if (!string.IsNullOrEmpty(result))
             {

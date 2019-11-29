@@ -59,7 +59,7 @@ namespace Fanex.Athena.Controllers.Report
                 return File(httpResponse.Item1, httpResponse.Item2, FileName);
             }
 
-            return JsonString(await _reportAPIClient.PostAsyncStringAsync("api/CustomerWinLoss/Index", metaModel, userSession.Language).ConfigureAwait(false));
+            return JsonString(await _reportAPIClient.PostStringAsync("api/CustomerWinLoss/Index", metaModel, userSession.Language).ConfigureAwait(false));
         }
 
         private ActionResult GetView(bool isHistory)

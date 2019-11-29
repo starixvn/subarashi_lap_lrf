@@ -161,7 +161,7 @@
                 Assert.Multiple(() =>
                 {
                     Assert.IsInstanceOf<JsonNetResult>(result);
-                    _reportAPIClient.Received(1).PostAsyncStringAsync("api/DailyBets/Index", metaModel, DefaultUserSession.Language);
+                    _reportAPIClient.Received(1).PostStringAsync("api/DailyBets/Index", metaModel, DefaultUserSession.Language);
                 });
             }
         }

@@ -85,7 +85,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    _betListApiClient.Received(1).PostAsyncStringAsync(
+                    _betListApiClient.Received(1).PostStringAsync(
                         Arg.Is<string>(x => x == "/PlayerAdminBetList/GetBetList"),
                         Arg.Is<PlayerRunningBetListMetalModel>(x => x.SortBy == expectedSortBy && x.SortOrder == expectedSortOrder),
                         Arg.Is<string>(x => x == language));
@@ -115,7 +115,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    _betListApiClient.Received(1).PostAsyncStringAsync(
+                    _betListApiClient.Received(1).PostStringAsync(
                         Arg.Is<string>(x => x == "/PlayerAdminBetList/GetBetList"),
                         Arg.Is<PlayerRunningBetListMetalModel>(x => x.PageSize == expectedPageSize),
                         Arg.Is<string>(x => x == language));

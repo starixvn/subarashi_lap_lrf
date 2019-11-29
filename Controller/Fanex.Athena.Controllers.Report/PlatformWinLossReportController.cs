@@ -86,7 +86,7 @@ namespace Fanex.Athena.Controllers.Report
             }
             else
             {
-                return JsonString(await _reportAPIClient.PostAsyncStringAsync("api/PlatformWinLoss/GetMemberData", metaModel, language).ConfigureAwait(false));
+                return JsonString(await _reportAPIClient.PostStringAsync("api/PlatformWinLoss/GetMemberData", metaModel, language).ConfigureAwait(false));
             }
         }
 
@@ -102,7 +102,7 @@ namespace Fanex.Athena.Controllers.Report
             }
             else
             {
-                return JsonString(await _reportAPIClient.PostAsyncStringAsync("api/PlatformWinLoss/GetSummaryData", metaModel, language).ConfigureAwait(false));
+                return JsonString(await _reportAPIClient.PostStringAsync("api/PlatformWinLoss/GetSummaryData", metaModel, language).ConfigureAwait(false));
             }
         }
     }
