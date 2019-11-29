@@ -1,8 +1,6 @@
 import React from 'react';
 import { Row, Cell, HeaderRow, HeaderCell } from '@9softstudio/react-grid';
-import { headerText } from './constants';
-
-const VOIDED_STATUS = "Void";
+import { headerText, VOIDED_STATUS } from './constants';
 
 export const renderHeader = () => {
     return (

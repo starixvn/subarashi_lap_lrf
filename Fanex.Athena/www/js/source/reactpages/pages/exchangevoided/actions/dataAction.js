@@ -5,6 +5,7 @@ import { setGridData } from '@jsroot/actions/gridDataAction';
 import Site from '@jsroot/lib/site';
 import DataService from '@jsroot/lib/DataService';
 import LangHelper from '@jsroot/lib/langHelper';
+import ReportExcel from '../lib/reportExcel';
 
 const emptyData = { dataList: [], total: {} };
 const defaultPaingOption = { TotalItem: 0 };
@@ -39,20 +40,7 @@ export const getData = (param) => (dispatch) => {
         });
 }
 
-export const exportExcel = (param) => (dispatch) => {
-    dispatch(toggleLoader(true));
-
-    DataService.getFile(apiUrl, param)
-        .then(response => {
-            if (response.data.size === 0) {
-                alert(LangHelper.getSingleResource("NoInfo"));
-            } else {
-                //Site.downloadFile(response.data, 'ExchangeVoidTicket.zip');
-            }
-            dispatch(toggleLoader(false));
-        })
-        .catch(error => {
-            console.log(error.message);
-            dispatch(toggleLoader(false));
-        });
+export const exportExcel = (dataList, title) => () => {
+    const service = new ReportExcel(dataList, title);
+    service.export();
 }

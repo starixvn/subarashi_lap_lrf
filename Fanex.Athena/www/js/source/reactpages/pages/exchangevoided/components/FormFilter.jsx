@@ -15,24 +15,25 @@ export class FormFilter extends Component {
 
     submit = (event) => {
         event.preventDefault();
-        const params = this._getParams();
-        if (!params) {
-            return;
-        }
+        const params = {
+            ...this.state,
+            pageIndex: 1
+        };
 
-        console.log(params);
         this.props.setRequestParam(params);
     }
 
     exportExcel = (event) => {
         event.preventDefault();
-    }
+        const { gridData } = this.props;
 
-    _getParams() {
-        return {
-            ...this.state,
-            pageIndex: 1
+        if(!gridData.dataList){
+            window.alert(LangHelper.getSingleResource("NoInfo"));
+            return;
         }
+
+        const reportTitle = `${LangHelper.getSingleResource('BettingTicketCenter')}, ${this.state.selectedDate}`;
+        this.props.exportExcel(gridData.dataList, reportTitle);
     }
 
     handleChangeDate = (momentDate) => {
@@ -102,8 +103,8 @@ function mapDispatchToProps(dispatch) {
 };
 
 function mapStateToProps(state) {
-    const { requestParam, dateConstraint } = state;
-    return Object.assign({}, { requestParam, dateConstraint });
+    const { requestParam, dateConstraint, gridData } = state;
+    return Object.assign({}, { requestParam, dateConstraint, gridData });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FormFilter);

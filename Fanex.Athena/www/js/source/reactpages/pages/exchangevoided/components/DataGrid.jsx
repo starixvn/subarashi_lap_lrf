@@ -36,7 +36,6 @@ const DataGrid = (props) => {
     const startIndex = (pagingOption.PageIndex - 1) * pagingOption.PageSize + 1;
 
     const reportTitle = `${LangHelper.getSingleResource('BettingTicketCenter')}, ${requestParam.selectedDate}`;
-    console.log(pagingOption);
 
     return (
         <>
