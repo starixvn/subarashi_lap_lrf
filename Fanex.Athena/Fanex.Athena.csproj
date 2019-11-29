@@ -651,6 +651,7 @@
     <Content Include="www\css\build\pro\reactpages\casinoturnover\index.chunk.js" />
     <Content Include="www\css\build\pro\reactpages\casinoturnover\index.css" />
     <Content Include="www\css\build\pro\reactpages\dailybets\index.css" />
+    <Content Include="www\css\build\pro\reactpages\exchangevoided\index.css" />
     <Content Include="www\css\build\pro\reactpages\exchangewl\index.css" />
     <Content Include="www\css\build\pro\reactpages\licenseewlbytimezone\index.css" />
     <Content Include="www\css\build\pro\reactpages\notification\index.chunk.js" />
@@ -729,6 +730,7 @@
     <Content Include="www\js\build\dev\reactpages\bettingticketscenter\refno.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\bettingticketscenter\running.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\bettingticketscenter\singlecustomer.chunk.js" />
+    <Content Include="www\js\build\dev\reactpages\exchangevoided\exchangevoided.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\exchangewl\exchangewl.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\lib\common.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\lib\lang-zh-CN.chunk.js" />
@@ -763,6 +765,7 @@
     <Content Include="www\js\build\pro\reactpages\bettingticketscenter\refno.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\bettingticketscenter\running.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\bettingticketscenter\singlecustomer.chunk.js" />
+    <Content Include="www\js\build\pro\reactpages\exchangevoided\exchangevoided.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\exchangewl\exchangewl.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\lib\common.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\lib\lang-zh-CN.chunk.js" />
@@ -2690,6 +2693,7 @@
     <Content Include="www\css\source\reactpages\pages\dailybets\index.scss" />
     <Content Include="www\js\build\dev\reactpages\report\dailybets.chunk.js.map" />
     <Content Include="www\css\source\reactpages\pages\exchangevoided\index.scss" />
+    <Content Include="www\js\build\dev\reactpages\exchangevoided\exchangevoided.chunk.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="SiteConfig\WebConfigTransforms\SIT.config">
