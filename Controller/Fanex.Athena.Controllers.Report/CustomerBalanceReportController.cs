@@ -16,26 +16,15 @@ namespace Fanex.Athena.Controllers.Report
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
     using Model.Core.DataDomain;
-    using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
 
     [FunctionAuthorization(PermissionKeys.ReportCustomerBalance)]
     public class CustomerBalanceReportController : ReportBaseController
     {
-        private const int PageSizeExcel = int.MaxValue - 1000;
-
         private readonly IReportAPIClient _reportAPIClient;
 
-        public CustomerBalanceReportController(
-            ILanguageService languageService,
-            ISessionService sessionService,
-            IProductService productService,
-            IReportAPIClient reportAPIClient)
+        public CustomerBalanceReportController(IReportAPIClient reportAPIClient)
         {
             _reportAPIClient = reportAPIClient;
-            LangService = languageService;
-            SessionServiceInstance = sessionService;
-            ProductServiceInstance = productService;
         }
 
         [HttpGet]
@@ -95,7 +84,7 @@ namespace Fanex.Athena.Controllers.Report
             metaModel.IsAllowedBA = productAccess.IsAllowBA;
             metaModel.HasComm = licenseeSession.IsAllowedCustomerComm;
             metaModel.PageIndex = 1;
-            metaModel.PageSize = PageSizeExcel;
+            metaModel.PageSize = int.MaxValue - 1000;
 
             var httpResponse = await _reportAPIClient.PostAsync("api/CustomerBalance/ExportExcel",
                 metaModel, userSession.Language).ConfigureAwait(false);

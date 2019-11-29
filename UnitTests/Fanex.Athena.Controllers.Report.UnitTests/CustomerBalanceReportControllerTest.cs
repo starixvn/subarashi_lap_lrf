@@ -1,8 +1,8 @@
 ﻿namespace Fanex.Athena.Controllers.Report.UnitTests
 {
     using System;
-    using System.IO;
     using System.Collections.Generic;
+    using System.IO;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Base.UnitTests;
@@ -15,9 +15,6 @@
     using NSubstitute;
     using NUnit.Framework;
     using Report;
-    using Fanex.Athena.Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     [TestFixture]
     public class CustomerBalanceReportControllerTest : CultureBaseControllerHelperTest
@@ -149,7 +146,12 @@
                 SessionService.UserSession.Language,
                 FunctionNames.CustomerBalance).Returns(new ProductAccess(new List<Product>()));
 
-            return new CustomerBalanceReportController(LangService, SessionService, _productService, _reportAPIClient);
+            return new CustomerBalanceReportController(_reportAPIClient)
+            {
+                ProductServiceInstance = _productService,
+                LangService = LangService,
+                SessionServiceInstance = SessionService
+            };
         }
     }
 }
