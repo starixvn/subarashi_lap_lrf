@@ -1,6 +1,7 @@
 ﻿namespace Fanex.Athena.Controllers.Report.UnitTests
 {
     using System;
+    using System.IO;
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
@@ -14,6 +15,9 @@
     using NSubstitute;
     using NUnit.Framework;
     using Report;
+    using Fanex.Athena.Service.Core.Common.Interfaces;
+    using Service.Core.Users.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     [TestFixture]
     public class CustomerBalanceReportControllerTest : CultureBaseControllerHelperTest
@@ -78,7 +82,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    _reportAPIClient.Received(1).PostAsyncString("api/CustomerBalance/Index", metaModel, SessionService.UserSession.Language);
+                    _reportAPIClient.Received(1).PostAsyncStringAsync("api/CustomerBalance/Index", metaModel, SessionService.UserSession.Language);
                 });
             }
         }
@@ -91,20 +95,20 @@
                 // Arrange
                 const string fileName = "CustomerBalance.csv";
                 var metaModel = new CustomerBalanceMetaModel();
-                var content = FakeHelper.Create<byte[]>();
+                var content = new MemoryStream();
                 var contentType = FakeHelper.Create<string>();
                 var expectedResult = Tuple.Create(content, contentType);
                 _reportAPIClient.PostAsync("api/CustomerBalance/ExportExcel", metaModel, SessionService.UserSession.Language).Returns(Task.FromResult(expectedResult));
 
                 // Action
-                var result = await controller.ExportExcel(metaModel) as FileContentResult;
+                var result = await controller.ExportExcel(metaModel);
 
                 // Assert
                 Assert.Multiple(() =>
                 {
                     Assert.That(result.ContentType, Is.EqualTo(contentType));
-                    Assert.That(result.FileNPH促销活动DownloadName, Is.EqualTo(fileName));
-                    Assert.That(result.FileContents, Is.EqualTo(content));
+                    Assert.That(result.FileDownloadName, Is.EqualTo(fileName));
+                    _reportAPIClient.Received(1).PostAsync("api/CustomerBalance/ExportExcel", metaModel, SessionService.UserSession.Language);
                 });
             }
         }
@@ -121,7 +125,7 @@
                     SessionService.UserSession.Language,
                     FunctionNames.CustomerBalance);
                 var metaModel = new CustomerBalanceMetaModel();
-                var content = FakeHelper.Create<byte[]>();
+                var content = new MemoryStream();
                 var contentType = FakeHelper.Create<string>();
                 var expectedResult = Tuple.Create(content, contentType);
                 _reportAPIClient.PostAsync("api/CustomerBalance/ExportExcel", metaModel, SessionService.UserSession.Language).Returns(Task.FromResult(expectedResult));
@@ -145,11 +149,7 @@
                 SessionService.UserSession.Language,
                 FunctionNames.CustomerBalance).Returns(new ProductAccess(new List<Product>()));
 
-            return new CustomerBalanceReportController(
-                LangService,
-                SessionService,
-                _productService,
-                _reportAPIClient);
+            return new CustomerBalanceReportController(LangService, SessionService, _productService, _reportAPIClient);
         }
     }
 }

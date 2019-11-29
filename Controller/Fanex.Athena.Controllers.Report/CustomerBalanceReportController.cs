@@ -22,6 +22,8 @@ namespace Fanex.Athena.Controllers.Report
     [FunctionAuthorization(PermissionKeys.ReportCustomerBalance)]
     public class CustomerBalanceReportController : ReportBaseController
     {
+        private const int PageSizeExcel = int.MaxValue - 1000;
+
         private readonly IReportAPIClient _reportAPIClient;
 
         public CustomerBalanceReportController(
@@ -29,9 +31,11 @@ namespace Fanex.Athena.Controllers.Report
             ISessionService sessionService,
             IProductService productService,
             IReportAPIClient reportAPIClient)
-        : base(languageService, sessionService, productService)
         {
             _reportAPIClient = reportAPIClient;
+            LangService = languageService;
+            SessionServiceInstance = sessionService;
+            ProductServiceInstance = productService;
         }
 
         [HttpGet]
@@ -69,9 +73,9 @@ namespace Fanex.Athena.Controllers.Report
         [ValidationWebRequest]
         public async Task<ActionResult> Index(CustomerBalanceMetaModel metaModel)
         {
-            var userSession = SessionService.UserSession;
+            var userSession = SessionServiceInstance.UserSession;
 
-            return JsonString(await _reportAPIClient.PostAsyncString("api/CustomerBalance/Index", metaModel, userSession.Language).ConfigureAwait(false));
+            return JsonString(await _reportAPIClient.PostAsyncStringAsync("api/CustomerBalance/Index", metaModel, userSession.Language).ConfigureAwait(false));
         }
 
         [HttpPost]
@@ -79,17 +83,19 @@ namespace Fanex.Athena.Controllers.Report
         [ValidationWebRequest]
         public async Task<FileResult> ExportExcel(CustomerBalanceMetaModel metaModel)
         {
-            var userSession = SessionService.UserSession;
+            var userSession = SessionServiceInstance.UserSession;
             const string fileName = "CustomerBalance.csv";
 
-            var licenseeSession = SessionService.LicenseeSession;
-            var productAccess = ProductService.GetSingleWalletProductAccess(
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
+            var productAccess = ProductServiceInstance.GetSingleWalletProductAccess(
                 licenseeSession.LicenseeId,
-                SessionService.UserSession.Language,
+                SessionServiceInstance.UserSession.Language,
                 FunctionNames.CustomerBalance);
 
             metaModel.IsAllowedBA = productAccess.IsAllowBA;
             metaModel.HasComm = licenseeSession.IsAllowedCustomerComm;
+            metaModel.PageIndex = 1;
+            metaModel.PageSize = PageSizeExcel;
 
             var httpResponse = await _reportAPIClient.PostAsync("api/CustomerBalance/ExportExcel",
                 metaModel, userSession.Language).ConfigureAwait(false);
