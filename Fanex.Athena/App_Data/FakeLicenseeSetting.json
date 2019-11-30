@@ -25,5 +25,14 @@
     "BaseCurrencies": "USD",
     "LimitRecentMonths": 3,
     "TimeZone": 8
+  },
+  {
+    "SiteName": "12B",
+    "DisableBetList": true,
+    "MinDate": "12/01/2019",
+    "MaxDate": "today",
+    "BaseCurrencies": "USD",
+    "LimitRecentMonths": 3,
+    "TimeZone": 8
   }
 ]
