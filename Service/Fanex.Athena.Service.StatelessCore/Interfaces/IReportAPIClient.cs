@@ -9,6 +9,6 @@
     {
         Task<string> PostStringAsync(string path, object value, string language);
 
-        Task<Tuple<MemoryStream, string>> PostAsync(string path, object value, string language, MediaType mediaType = MediaType.Json);
+        Task<Tuple<Stream, string>> PostAsync(string path, object value, string language, MediaType mediaType = MediaType.Json);
     }
 }

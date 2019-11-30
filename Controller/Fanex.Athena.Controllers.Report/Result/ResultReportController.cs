@@ -90,7 +90,7 @@ namespace Fanex.Athena.Controllers.Report.Result
 
             const string FileName = "LRF-Result.xls";
             metaModel.LicenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
-            var stream = await _betListApiClient.PostAsyncStream(
+            var stream = await _betListApiClient.PostStreamAsync(
                 "/ResultReport/ResultExcel",
                 metaModel,
                 SessionServiceInstance.UserSession.Language

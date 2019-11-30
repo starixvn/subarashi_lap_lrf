@@ -10,7 +10,7 @@ namespace Fanex.Athena.Service.StatelessCore.Interfaces
 
         Task<T> PostAsync<T>(string path, object value, string language) where T : class;
 
-        Task<MemoryStream> PostAsyncStream(string path, object value, string language);
+        Task<Stream> PostStreamAsync(string path, object value, string language);
 
         Task<string> PostStringAsync(string path, object value, string language);
     }

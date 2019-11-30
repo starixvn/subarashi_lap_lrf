@@ -72,7 +72,7 @@
         {
             // Arrange
             var language = SessionService.UserSession.Language;
-            var expectedResponseData = new Tuple<MemoryStream, string>(new MemoryStream(new byte[] { 1 }), "application/octet-stream");
+            var expectedResponseData = new Tuple<Stream, string>(new MemoryStream(new byte[] { 1 }), "application/octet-stream");
 
             var metaModel = new CustomerWinLossMetaModel { IsExportExcel = true };
 

@@ -25,6 +25,7 @@ namespace Fanex.Athena.Service.StatelessCore.Abstraction
             DateTimeZoneHandling = DateTimeZoneHandling.Unspecified,
             NullValueHandling = NullValueHandling.Ignore,
         };
+        private static readonly JsonSerializer _serializer = new JsonSerializer();
 
         protected virtual string ApiName => "Base API Client";
 
@@ -35,17 +36,39 @@ namespace Fanex.Athena.Service.StatelessCore.Abstraction
 
         public virtual async Task<string> PostStringAsync(string path, object value, string language)
         {
-            return await HandleAsync<string>(path, value, language, MediaType.Json,
-                async (x) =>
+            return await HandleAsync(path, value, language, MediaType.Json,
+                async (response) =>
                 {
-                    return await x.Content.ReadAsStringAsync();
+                    using (response)
+                    {
+                        using (var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
+                        {
+                            using (var streamReader = new StreamReader(stream))
+                            {
+                                using (var textWriter = new StringWriter())
+                                {
+                                    const int chunkLength = 4096;
+                                    var buffer = new char[chunkLength];
+                                    int readChunkLength;
+                                    do
+                                    {
+                                        readChunkLength = streamReader.ReadBlock(buffer, 0, chunkLength);
+                                        textWriter.Write(buffer, 0, readChunkLength);
+                                    } while (readChunkLength > 0);
+
+                                    return textWriter.ToString();
+                                }
+                            }
+                        }
+                    }
                 }
 
             ).ConfigureAwait(false);
         }
 
         protected virtual async Task<T>
-           HandleAsync<T>(string path, object value, string language, MediaType mediaType, Func<HttpResponseMessage, Task<T>> codeBlock)
+           HandleAsync<T>(string path, object value, string language, MediaType mediaType, Func<HttpResponseMessage, Task<T>> codeBlock,
+            bool disposeHttpResponse = true)
         {
             if (codeBlock == null)
             {
@@ -75,16 +98,23 @@ namespace Fanex.Athena.Service.StatelessCore.Abstraction
                             Encoding.UTF8, JsonContentType))
                         {
                             httpRequest.Content = content;
-                            response = await _client.SendAsync(httpRequest).ConfigureAwait(false);
+                            response = await _client.SendAsync(httpRequest, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
                         }
                     }
                     response?.EnsureSuccessStatusCode();
                     return await codeBlock(response).ConfigureAwait(false);
-
+                }
+                catch (Exception)
+                {
+                    disposeHttpResponse = true;
+                    throw;
                 }
                 finally
                 {
-                    response?.Dispose();
+                    if (disposeHttpResponse && response != null)
+                    {
+                        response.Dispose();
+                    }
                 }
 
             }
@@ -97,17 +127,23 @@ namespace Fanex.Athena.Service.StatelessCore.Abstraction
                 value,
                 language,
                 MediaType.Json,
-                  async (x) =>
+                 async (response) =>
                   {
-                      using (var stream = await x.Content.ReadAsStreamAsync().ConfigureAwait(false))
+                      using (response)
                       {
-                          using (var reader = new StreamReader(stream))
-                          using (var jsonReader = new JsonTextReader(reader))
+                          using (var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
                           {
-                              var serializer = new JsonSerializer();
-                              return serializer.Deserialize<T>(jsonReader);
+                              using (var reader = new StreamReader(stream))
+                              {
+                                  using (var jsonReader = new JsonTextReader(reader))
+                                  {
+                                      return _serializer.Deserialize<T>(jsonReader);
+                                  }
+
+                              }
                           }
                       }
+
                   }
                ).ConfigureAwait(false);
         }

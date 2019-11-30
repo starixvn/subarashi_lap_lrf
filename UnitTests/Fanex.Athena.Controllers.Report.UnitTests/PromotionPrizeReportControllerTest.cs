@@ -49,7 +49,7 @@
             {
                 // Arrange
                 var metaModel = new PromotionPrizeMetaModel();
-                var expectedData = new Tuple<MemoryStream, string>(new MemoryStream(new byte[] { 1 }), "application/octet-stream");
+                var expectedData = new Tuple<Stream, string>(new MemoryStream(new byte[] { 1 }), "application/octet-stream");
                 _reportAPIClient.PostAsync("api/PromotionPrize/Export", metaModel, SessionService.UserSession.Language, MediaType.MsgPack).Returns(Task.FromResult(expectedData));
 
                 // Action
@@ -64,7 +64,6 @@
         private PromotionPrizeReportController CreateController()
         {
             var controller = Substitute.ForPartsOf<PromotionPrizeReportController>(_reportAPIClient);
-            controller.ProductServiceInstance = _productService;
             controller.LangService = LangService;
             controller.SessionServiceInstance = SessionService;
 
