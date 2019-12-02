@@ -77,7 +77,7 @@ namespace Fanex.Athena.Controllers.Report
                 _appSetting.Environment
             };
 
-            const string apiPath = "/ExchangeSettleBetHistory/Index";
+            const string apiPath = "/ExchangeBetHistory/Index";
 
             return JsonNet(await _lgClient.PostAsync<ExchangeVoidedViewModel>(apiPath, apiMetaModel, SessionServiceInstance.UserSession.Language).ConfigureAwait(false));
         }

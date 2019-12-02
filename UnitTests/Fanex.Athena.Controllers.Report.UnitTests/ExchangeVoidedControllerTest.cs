@@ -143,7 +143,7 @@ namespace Fanex.Athena.Controllers.Report.UnitTests
 
             using (var controller = CreateController())
             {
-                const string apiPath = "/ExchangeSettleBetHistory/Index";
+                const string apiPath = "/ExchangeBetHistory/Index";
                 var language = SessionService.UserSession.Language;
                 object passedParam = null;
 
@@ -191,7 +191,7 @@ namespace Fanex.Athena.Controllers.Report.UnitTests
 
             using (var controller = CreateController())
             {
-                const string apiPath = "/ExchangeSettleBetHistory/Index";
+                const string apiPath = "/ExchangeBetHistory/Index";
                 var language = SessionService.UserSession.Language;
                 object passedParam = null;
                 _lgAPIClient.PostAsync<ExchangeVoidedViewModel>(apiPath, Arg.Any<object>(), language)
