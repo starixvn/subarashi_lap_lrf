@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Fanex.Athena.Service.StatelessCore.Abstraction
 {
-    public abstract class BaseApiClient
+    public class BaseApiClient
     {
         private const string LANGUAGEKEY = "Language";
         private const string MsgPackContentType = "application/x-msgpack";
