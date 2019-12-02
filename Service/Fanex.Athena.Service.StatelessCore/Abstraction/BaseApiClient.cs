@@ -87,7 +87,7 @@ namespace Fanex.Athena.Service.StatelessCore.Abstraction
                         {
                             content.Headers.ContentType = new MediaTypeHeaderValue(MsgPackContentType);
                             httpRequest.Content = content;
-                            response = await _client.SendAsync(httpRequest).ConfigureAwait(false);
+                            response = await _client.SendAsync(httpRequest, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
                         }
                     }
 
