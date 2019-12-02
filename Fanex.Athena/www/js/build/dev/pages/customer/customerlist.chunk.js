@@ -6803,7 +6803,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
             data.BaFilter = $('#BAFilterOption').val();
             data.GroupCommId = $('#DdlGroupCommId').val();
             data.BaseCurrency = $('#BaseCurrency').val();
-            data.CustStatus = $('#CustStatusOption').val();           
+            data.CustStatus = $('#CustStatusOption').val();
 
             $('#excelParam').val(JSON.stringify(data));
 
