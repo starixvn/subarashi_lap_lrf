@@ -241,10 +241,12 @@
 
             createPaging(response.totalRows);
 
+            const isShowPromotionPrizeLink = Site.isNumber(response.promotionPrize)
+                && parseInt(response.promotionPrize, 10) > 0;
             if (response.totalRows === 0) {
                 jqGridAdditional.setNoInfo();
                 Site.unBlockUI();
-                showPromotionPrizeLink(false);
+                showPromotionPrizeLink(isShowPromotionPrizeLink);
                 return;
             }
 
@@ -264,8 +266,7 @@
             reportGrid.jqGrid(gridOption);
 
             CustomerWinLossOption.setGroupHeaderColumns(reportGrid);
-            const pprizeCount = response.promotionPrize;
-            showPromotionPrizeLink(Site.isNumber(pprizeCount) && parseInt(pprizeCount, 10) > 0);
+            showPromotionPrizeLink(isShowPromotionPrizeLink);
         }
 
         function ajaxPaging() {
