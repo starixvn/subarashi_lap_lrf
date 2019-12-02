@@ -15,7 +15,8 @@
     using Extension.Helper;
     using Extension.Utility;
 
-    using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Core.DTO.Configuration;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     using Model.Core.DTO.Common;
@@ -68,18 +69,29 @@
             _dataAccess = null;
         }
 
+        [TearDown]
+        public void TearDown()
+        {
+            _reportSettingService.GetSetting(Arg.Any<string>(), Arg.Any<string>()).Returns(x => null);
+        }
+
         [Test]
-        public async Task Index_InvalidModel_ReturnEmptyData()
+        public async Task Index_InvalidParams_ReturnEmptyData()
         {
             // Arrange
             var model = new LicenseeWinLossMetaModel
             {
-                CurrencyId = -100,
-                ProductOptions = new List<ProductOption>
-                {
-                    new ProductOption()
-                }
+                FromDate = new DateTime(2019, 2, 1),
+                ToDate = new DateTime(2019, 2, 28)
             };
+            var reportSetting = new ReportSetting
+            {
+                MinDate = new DateTime(2019, 2, 15),
+                MaxDate = new DateTime(2019, 3, 30),
+            };
+
+            _reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss, SessionLicenseeName).
+                Returns(reportSetting);
 
             // Action
             var result = await _controller.Index(model);
@@ -91,20 +103,31 @@
                 Assert.That(result.Total, Is.Empty);
                 Assert.That(result.SummaryTotal, Is.Empty);
                 Assert.That(result.ProductOptions, Is.EqualTo(model.ProductOptions.ToJson()));
+                Assert.That(result.PromotionPrize, Is.EqualTo("0"));
             });
         }
 
         [Test]
-        public async Task Index_InvalidRequest_ReturnEmptyData()
+        public async Task Index_Drilldown_InvalidParams_ReturnEmptyData()
         {
             // Arrange
-            var model = new LicenseeWinLossMetaModel
+            const int Level = 2;
+            var fromDate = new DateTime(2019, 2, 1);
+            var toDate = new DateTime(2019, 2, 28);
+
+            var model = new LicenseeWinLossMetaModel();
+
+            var reportSetting = new ReportSetting
             {
-                CurrencyId = 3
+                MinDate = new DateTime(2019, 1, 1),
+                MaxDate = new DateTime(2019, 2, 15),
             };
 
+            _reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss, SessionLicenseeName).
+                Returns(reportSetting);
+
             // Action
-            var result = await _controller.Index(model);
+            var result = await _controller.Index(model, fromDate, toDate, Level);
 
             // Assert
             Assert.Multiple(() =>
@@ -113,6 +136,7 @@
                 Assert.That(result.Total, Is.Empty);
                 Assert.That(result.SummaryTotal, Is.Empty);
                 Assert.That(result.ProductOptions, Is.EqualTo(model.ProductOptions.ToJson()));
+                Assert.That(result.PromotionPrize, Is.EqualTo("0"));
             });
         }
 
@@ -127,7 +151,31 @@
             var result = await _controller.Index(metaModel);
 
             // Assert
-            Assert.That(result.Data.Count, Is.EqualTo(expectedResult.DataList.Count));
+            Assert.Multiple(() =>
+            {
+                Assert.That(result.Data.Count, Is.EqualTo(expectedResult.DataList.Count));
+                Assert.That(result.PromotionPrize, Is.EqualTo(expectedResult.AdditionalInfo));
+            });
+        }
+
+        [Test]
+        public async Task Index_DataIsEmptyButHavePromotionPrize_ReturnEmptyDataWithPromotionPrize()
+        {
+            // Arrange
+            var metaModel = CreateValidMetaModel();
+            var expectedResult = SetUpForGettingData(metaModel, totalItem: 0);
+
+            // Action
+            var result = await _controller.Index(metaModel);
+
+            // Assert
+            Assert.Multiple(() =>
+            {
+                Assert.That(result.Data, Is.Empty);
+                Assert.That(result.Total, Is.Empty);
+                Assert.That(result.SummaryTotal, Is.Empty);
+                Assert.That(result.PromotionPrize, Is.EqualTo(expectedResult.AdditionalInfo));
+            });
         }
 
         [TestCase("ActualStake")]
@@ -176,7 +224,7 @@
                Arg.Any<LicenseeWinLossExcelModel>())).Do(p => actualExcelModel = (LicenseeWinLossExcelModel)p[1]);
 
             // Action
-            var result = await _controller.Index(metaModel);
+            await _controller.Index(metaModel);
 
             // Assert
             Assert.That(actualExcelModel.DataList.SelectMany(x => x.LicenseeWL.Values).ToArray(), Is.EqualTo(expectedResult));
@@ -310,18 +358,6 @@
                     }
                 }
             };
-
-            StubUserSessionData(new UserAuthInfo
-            {
-                CurrencyList = new Dictionary<int, string>
-                {
-                    { model.CurrencyId, nameof(model.CurrencyId) }
-                },
-                FunctionList = new List<Function>(),
-                CurrencyAgentList = new Dictionary<int, int[]>()
-            });
-            StubLicenseeSessionData(new LicenseeAuthInfo { LicenseeId = 1 });
-
             return model;
         }
 
@@ -350,7 +386,8 @@
             {
                 DataList = dataList,
                 TotalDataList = new List<LicenseeWinLoss>(),
-                SummaryTotal = new Dictionary<string, LicenseeWinLoss>()
+                SummaryTotal = new Dictionary<string, LicenseeWinLoss>(),
+                AdditionalInfo = "1"
             };
 
             if (level == 0)

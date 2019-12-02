@@ -79,7 +79,7 @@ namespace Fanex.Athena.Api.Report
             return ProcessRequest(metaModel, null, null);
         }
 
-        private static dynamic GetEmptyResult(IEnumerable<ProductOption> productOptions)
+        private static dynamic GetEmptyResult(IEnumerable<ProductOption> productOptions, string promotionPrize = "0")
         {
             return new
             {
@@ -87,7 +87,7 @@ namespace Fanex.Athena.Api.Report
                 Total = new List<LicenseeWinLossGridViewModel>(),
                 SummaryTotal = new Dictionary<string, LicenseeWinLossGridViewModel>(),
                 ProductOptions = productOptions.ToJson(),
-                PromotionPrize = 0
+                PromotionPrize = promotionPrize
             };
         }
 
@@ -325,18 +325,20 @@ namespace Fanex.Athena.Api.Report
                     return ExportExcel(metaModel, result);
                 }
 
-                if (result.DataList.Any())
+                if (!result.DataList.Any())
                 {
-                    var summaryTotalView = result.SummaryTotal.ToDictionary(d => d.Key, d => MapToGridView(d.Value));
-                    return new
-                    {
-                        Data = result.DataList.Select(MapToGridView).ToList(),
-                        Total = result.TotalDataList.Select(MapToGridView).ToList(),
-                        SummaryTotal = summaryTotalView,
-                        ProductOptions = metaModel.ProductOptions.ToJson(),
-                        PromotionPrize = result.AdditionalInfo
-                    };
+                    return GetEmptyResult(metaModel.ProductOptions, result.AdditionalInfo);
                 }
+
+                var summaryTotalView = result.SummaryTotal.ToDictionary(d => d.Key, d => MapToGridView(d.Value));
+                return new
+                {
+                    Data = result.DataList.Select(MapToGridView).ToList(),
+                    Total = result.TotalDataList.Select(MapToGridView).ToList(),
+                    SummaryTotal = summaryTotalView,
+                    ProductOptions = metaModel.ProductOptions.ToJson(),
+                    PromotionPrize = result.AdditionalInfo
+                };
             }
 
             return GetEmptyResult(metaModel.ProductOptions);
