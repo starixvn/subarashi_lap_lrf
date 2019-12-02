@@ -95,6 +95,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstraction\BaseApiClientTest.cs" />
+    <Compile Include="Abstraction\BaseApiClientTestable.cs" />
     <Compile Include="AuthorizationServiceTest.cs" />
     <Compile Include="BetListApiClientTest.cs" />
     <Compile Include="BetTypeServiceTest.cs" />

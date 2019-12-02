@@ -107,7 +107,7 @@ namespace Fanex.Athena.Service.StatelessCore.Abstraction
                 catch (Exception ex)
                 {
                     disposeHttpResponse = true;
-                    throw new ServiceException(ex.Message, nameof(BaseApiClient), ex);
+                    throw new ServiceException(ex.Message, ApiName, ex);
                 }
                 finally
                 {
