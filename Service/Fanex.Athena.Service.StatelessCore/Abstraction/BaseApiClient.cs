@@ -1,5 +1,5 @@
 ﻿using Fanex.Athena.Model.Core.DataDomain;
-
+using Fanex.Athena.Service.StatelessCore.CustomException;
 using MessagePack;
 
 using Newtonsoft.Json;
@@ -104,10 +104,10 @@ namespace Fanex.Athena.Service.StatelessCore.Abstraction
                     response?.EnsureSuccessStatusCode();
                     return await codeBlock(response).ConfigureAwait(false);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     disposeHttpResponse = true;
-                    throw;
+                    throw new ServiceException(ex.Message, nameof(BaseApiClient), ex);
                 }
                 finally
                 {
