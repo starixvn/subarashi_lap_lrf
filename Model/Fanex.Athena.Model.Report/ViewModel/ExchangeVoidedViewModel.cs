@@ -8,5 +8,7 @@ namespace Fanex.Athena.Model.Report.ViewModel
         public IList<ExchangeVoidedItem> DataList { get; set; }
 
         public int TotalPage { get; set; }
+
+        public int ErrCode { get; set; }
     }
 }

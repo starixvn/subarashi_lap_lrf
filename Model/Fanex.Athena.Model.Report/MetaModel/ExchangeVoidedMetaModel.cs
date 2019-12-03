@@ -3,7 +3,7 @@ using Fanex.Athena.Model.Core.MetaModel;
 
 namespace Fanex.Athena.Model.Report.MetaModel
 {
-    public class ExchangeVoidedMetaModel : IMetaModelValidation, IMetaModelAgent
+    public class ExchangeVoidedMetaModel : IMetaModelValidation, IMetaModelAgent, IMetaModelSiteName
     {
         public DateTime SelectedDate { get; set; }
 
@@ -14,6 +14,12 @@ namespace Fanex.Athena.Model.Report.MetaModel
         public int PageIndex { get; set; }
 
         public string AgentListXml { get; set; }
+
+        public string Language { get; set; }
+
+        public string Environment { get; set; }
+
+        public string SiteName { get; set; }
 
         public bool IsExcludedTestData { get; set; }
 

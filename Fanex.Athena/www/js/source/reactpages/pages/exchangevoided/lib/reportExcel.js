@@ -20,7 +20,7 @@ export default class ReportExcel {
     }
 
     export (onFinished) {
-        if (!this._dataList) {
+        if (!this._dataList || this._dataList.length === 0) {
             return;
         }
 
