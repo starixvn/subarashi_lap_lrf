@@ -64,7 +64,7 @@
         public async Task GetCommission_WhenCall_ReturnCorrectResult(int returnStatus, bool isSuccess)
         {
             // Arrange
-            const string apiPath = "/ExchangeClient/GetCommission";
+            const string apiPath = "/Exchange/GetCommission";
             const string Language = "en-US";
             var expectedComm = FakeHelper.Create<double>();
             _lgClient.PostAsync<APIResult<ExchangeCommission>>(apiPath, Arg.Any<object>(), Language).Returns(Task.FromResult(
@@ -112,7 +112,7 @@
             var expectedComm = FakeHelper.Create<double>();
             _betSettingDataAccess.GetStatusAsync(_custId, ProductTypes.Exchange).Returns(Task.FromResult((bool?)true));
 
-            const string apiPath = "/ExchangeClient/UpdateCommission";
+            const string apiPath = "/Exchange/UpdateCommission";
             const string Language = "en-US";
             _lgClient.PostAsync<APIResult<ExchangeCommission>>(apiPath, Arg.Any<object>(), Language).Returns(Task.FromResult(
                 new APIResult<ExchangeCommission>
@@ -139,7 +139,7 @@
             var newComm = FakeHelper.Create<double>();
             _betSettingDataAccess.GetStatusAsync(_custId, ProductTypes.Exchange).ReturnsForAnyArgs(Task.FromResult((bool?)true));
 
-            const string apiPath = "/ExchangeClient/UpdateCommission";
+            const string apiPath = "/Exchange/UpdateCommission";
             const string Language = "en-US";
             _lgClient.PostAsync<APIResult<ExchangeCommission>>(apiPath, Arg.Any<object>(), Language).Returns(Task.FromResult(
                 new APIResult<ExchangeCommission>

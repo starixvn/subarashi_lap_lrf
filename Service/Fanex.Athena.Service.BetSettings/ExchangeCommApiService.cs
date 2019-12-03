@@ -59,7 +59,7 @@ namespace Fanex.Athena.Service.BetSettings
 
         public async Task<IResultInfo<double>> GetCommission(int custId, string language)
         {
-            const string apiPath = "/ExchangeClient/GetCommission";
+            const string apiPath = "/Exchange/GetCommission";
             var result = await _lgClient.PostAsync<APIResult<ExchangeCommission>>(apiPath, new { custId, environment = _appSetting.Environment }, language).ConfigureAwait(false);
 
             return result.Data == null ? CreateApiErrorResult() : CreateApiResult(result.Data.Status, result.Data.Commission);
@@ -75,7 +75,7 @@ namespace Fanex.Athena.Service.BetSettings
                 return CreateAccessDeniedResult();
             }
 
-            const string apiPath = "/ExchangeClient/UpdateCommission";
+            const string apiPath = "/Exchange/UpdateCommission";
             var requestParam = new { custId, commission = newCommission, environment = _appSetting.Environment };
             var result = await _lgClient.PostAsync<APIResult<ExchangeCommission>>(apiPath, requestParam, language).ConfigureAwait(false);
 
