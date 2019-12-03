@@ -1380,52 +1380,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _FormFilter__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./FormFilter */ "./www/js/source/reactpages/pages/exchangevoided/components/FormFilter.jsx");
 /* harmony import */ var _jsroot_components_Loader__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/components/Loader */ "./www/js/source/reactpages/components/Loader.jsx");
 /* harmony import */ var _jsroot_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/layouts/AppLayout */ "./www/js/source/reactpages/layouts/AppLayout.jsx");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
 
 
 
 
-
-var AppContainer =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(AppContainer, _Component);
-
-  function AppContainer(props) {
-    _classCallCheck(this, AppContainer);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(AppContainer).call(this, props));
-  }
-
-  _createClass(AppContainer, [{
-    key: "render",
-    value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_5__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Loader__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        isLoading: this.props.isLoading
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormFilter__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DataGrid__WEBPACK_IMPORTED_MODULE_2__["default"], null));
-    }
-  }]);
-
-  return AppContainer;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+var AppContainer = function AppContainer(props) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_5__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Loader__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    isLoading: props.isLoading
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormFilter__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DataGrid__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+};
 
 function mapStateToProps(state) {
   return Object.assign({}, {
@@ -1434,6 +1399,51 @@ function mapStateToProps(state) {
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(AppContainer));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/exchangevoided/components/BTCContainer.jsx":
+/*!***********************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/exchangevoided/components/BTCContainer.jsx ***!
+  \***********************************************************************************/
+/*! exports provided: BTCContainer, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BTCContainer", function() { return BTCContainer; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @9softstudio/react-simple-tab */ "./node_modules/@9softstudio/react-simple-tab/dist/index.js");
+/* harmony import */ var _9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
+/* harmony import */ var _AppContainer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./AppContainer */ "./www/js/source/reactpages/pages/exchangevoided/components/AppContainer.jsx");
+
+
+
+
+
+var BTCContainer = function BTCContainer(props) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_1__["Tabs"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_1__["Tab"], {
+    label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource("MultiCustomers"),
+    url: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_3__["default"].resolveClientUrl("BettingTicketCenter/MultipleCustomers")
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_1__["Tab"], {
+    label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource("SingleCustomer"),
+    url: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_3__["default"].resolveClientUrl("BettingTicketCenter/SingleCustomer")
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_1__["Tab"], {
+    label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource("RefNo"),
+    url: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_3__["default"].resolveClientUrl("BettingTicketCenter/RefNo")
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_1__["Tab"], {
+    label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource("Running"),
+    url: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_3__["default"].resolveClientUrl("BettingTicketCenter/Running")
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_1__["Tab"], {
+    isActive: true,
+    label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource("Exchange"),
+    url: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_3__["default"].resolveClientUrl("ExchangeVoided")
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AppContainer__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
+};
+/* harmony default export */ __webpack_exports__["default"] = (BTCContainer);
 
 /***/ }),
 
@@ -1500,7 +1510,7 @@ var DataGrid = function DataGrid(props) {
       requestParam = props.requestParam;
   var startIndex = (pagingOption.PageIndex - 1) * pagingOption.PageSize + 1;
   var reportTitle = "".concat(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource('BettingTicketCenter'), ", ").concat(requestParam.selectedDate);
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_ReportTitle__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_ReportTitle__WEBPACK_IMPORTED_MODULE_7__["default"], {
     content: reportTitle
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_6__["Table"], {
     minWidth: 650,
@@ -1508,9 +1518,10 @@ var DataGrid = function DataGrid(props) {
     autoHeight: true,
     header: Object(_lib_gridUtils__WEBPACK_IMPORTED_MODULE_4__["renderHeader"])(),
     body: Object(_lib_gridUtils__WEBPACK_IMPORTED_MODULE_4__["renderDataSection"])(dataList, startIndex),
-    containerPadding: 30,
-    isPaging: true,
+    containerPadding: 30
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_6__["Pager"], {
     pageOption: pagingOption,
+    isShowPagingInfo: false,
     onPaging: function onPaging(pageIndex) {
       return props.setRequestParam(_objectSpread({}, requestParam, {
         pageIndex: pageIndex
@@ -1790,7 +1801,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _AppContainer_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AppContainer.jsx */ "./www/js/source/reactpages/pages/exchangevoided/components/AppContainer.jsx");
+/* harmony import */ var _BTCContainer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./BTCContainer */ "./www/js/source/reactpages/pages/exchangevoided/components/BTCContainer.jsx");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _reducers_index_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../reducers/index.js */ "./www/js/source/reactpages/pages/exchangevoided/reducers/index.js");
 /* harmony import */ var _lib_store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../lib/store */ "./www/js/source/reactpages/lib/store.js");
@@ -1845,7 +1856,7 @@ function (_React$Component) {
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_3__["Provider"], {
         store: store
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AppContainer_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_BTCContainer__WEBPACK_IMPORTED_MODULE_2__["default"], null));
     }
   }]);
 
@@ -2022,7 +2033,8 @@ function () {
       });
       this.worksheet[address] = {
         t: "s",
-        v: this._title
+        v: this._title,
+        s: _jsroot_constants_excelStyle__WEBPACK_IMPORTED_MODULE_1__["titleCellStyle"]
       };
     }
   }, {
