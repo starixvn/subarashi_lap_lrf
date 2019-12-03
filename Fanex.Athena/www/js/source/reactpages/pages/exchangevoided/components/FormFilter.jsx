@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { ActionCreators } from '../actions';
 import { bindActionCreators } from 'redux';
@@ -6,7 +6,7 @@ import LangHelper from '../../../lib/langHelper';
 import { DatePicker } from '@9softstudio/react-datepicker';
 import Note from './Note';
 
-export class FormFilter extends Component {
+export class FormFilter extends React.PureComponent {
     constructor(props) {
         super(props);
 
@@ -51,28 +51,28 @@ export class FormFilter extends Component {
         const { selectedDate } = this.state;
 
         return (
-            <div className='page-filter'>
-                <div className='row'>
-                    <div className='col-12 col-sm-7 col-md-3 col-xl-2'>
-                        <div className='form-group'>
-                            <label className='label-text'>{LangHelper.getSingleResource('Date')}</label>
+            <div className="page-filter">
+                <div className="row">
+                    <div className="col-12 col-sm-7 col-md-3 col-xl-2">
+                        <div className="form-group">
+                            <label className="label-text">{LangHelper.getSingleResource('Date')} (GMT+8)</label>
                             <DatePicker
                                 minDate={dateConstraint.minDate} maxDate={dateConstraint.maxDate} date={selectedDate}
                                 onChange={this.handleChangeDate} />
                         </div>
                     </div>
 
-                    <div className='col-12 col-sm-4 col-md-3 col-xl-2'>
-                        <div className='form-group'>
-                            <label className='label-text'>{LangHelper.getSingleResource('RefNo')}</label>
+                    <div className="col-12 col-sm-4 col-md-3 col-xl-2">
+                        <div className="form-group">
+                            <label className="label-text">{LangHelper.getSingleResource('RefNo')}</label>
                             <input className="input-text" id="refNo" name="refNo" type="text"
                                 autoComplete="off" onChange={this.handleChangeInput} />
                         </div>
                     </div>
 
-                    <div className='col-12 col-sm-4 col-md-3 col-xl-2'>
-                        <div className='form-group'>
-                            <label className='label-text'>{LangHelper.getSingleResource('Username')}</label>
+                    <div className="col-12 col-sm-4 col-md-3 col-xl-2">
+                        <div className="form-group">
+                            <label className="label-text">{LangHelper.getSingleResource('Username')}</label>
                             <input className="input-text" id="userName" name="userName" type="text"
                                 autoComplete="off" onChange={this.handleChangeInput} />
                         </div>

@@ -1607,8 +1607,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var FormFilter =
 /*#__PURE__*/
-function (_Component) {
-  _inherits(FormFilter, _Component);
+function (_React$PureComponent) {
+  _inherits(FormFilter, _React$PureComponent);
 
   function FormFilter(props) {
     var _this;
@@ -1674,7 +1674,7 @@ function (_Component) {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "label-text"
-      }, _lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Date')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_datepicker__WEBPACK_IMPORTED_MODULE_5__["DatePicker"], {
+      }, _lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Date'), " (GMT+8)"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_datepicker__WEBPACK_IMPORTED_MODULE_5__["DatePicker"], {
         minDate: dateConstraint.minDate,
         maxDate: dateConstraint.maxDate,
         date: selectedDate,
@@ -1726,7 +1726,7 @@ function (_Component) {
   }]);
 
   return FormFilter;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.PureComponent);
 
 function mapDispatchToProps(dispatch) {
   var setRequestParam = _actions__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"].setRequestParam,
