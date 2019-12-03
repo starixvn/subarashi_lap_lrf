@@ -1999,6 +1999,7 @@ function () {
     this.worksheet = {};
     this.currentRowIndex = DATA_ROW_INDEX;
     this.columnConfigs = this._getcolumnConfigs();
+    this.mergeConfig = [];
   }
 
   _createClass(ReportExcel, [{
@@ -2027,6 +2028,16 @@ function () {
   }, {
     key: "_createTitle",
     value: function _createTitle() {
+      this.mergeConfig.push({
+        s: {
+          r: TITLE_ROW_INDEX,
+          c: 0
+        },
+        e: {
+          r: TITLE_ROW_INDEX,
+          c: this.columnConfigs.length - 1
+        }
+      });
       var address = _jsroot_lib_excel__WEBPACK_IMPORTED_MODULE_0__["default"].getCellAddress({
         c: 0,
         r: TITLE_ROW_INDEX
@@ -2107,6 +2118,7 @@ function () {
           wpx: x.width
         };
       });
+      this.worksheet["!merges"] = this.mergeConfig;
     }
   }, {
     key: "_getcolumnConfigs",

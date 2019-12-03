@@ -16,6 +16,7 @@ export default class ReportExcel {
         this.worksheet = {};
         this.currentRowIndex = DATA_ROW_INDEX;
         this.columnConfigs = this._getcolumnConfigs();
+        this.mergeConfig = [];
     }
 
     export (onFinished) {
@@ -36,6 +37,8 @@ export default class ReportExcel {
     }
 
     _createTitle() {
+        this.mergeConfig.push({ s: { r: TITLE_ROW_INDEX, c: 0 }, e: { r: TITLE_ROW_INDEX, c: this.columnConfigs.length - 1 } });
+
         const address = Excel.getCellAddress({
             c: 0,
             r: TITLE_ROW_INDEX
@@ -108,6 +111,7 @@ export default class ReportExcel {
 
         this.worksheet["!ref"] = `${cellStart}:${cellEnd}`;
         this.worksheet['!cols'] = this.columnConfigs.map(x => ({ wpx: x.width }));
+        this.worksheet["!merges"] = this.mergeConfig;
     }
 
     _getcolumnConfigs() {
