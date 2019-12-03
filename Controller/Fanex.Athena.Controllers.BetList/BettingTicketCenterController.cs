@@ -1,6 +1,5 @@
 ﻿namespace Fanex.Athena.Controllers.BetList
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
@@ -24,12 +23,16 @@
 
         private readonly IBalanceUpDataAccess _balanceUpDataAccess;
 
+        private readonly IAuthorizationService _authService;
+
         public BettingTicketCenterController(
             IProductService productService,
-            IBalanceUpDataAccess balanceUpDataAccess)
+            IBalanceUpDataAccess balanceUpDataAccess,
+            IAuthorizationService authService)
         {
             _productService = productService;
             _balanceUpDataAccess = balanceUpDataAccess;
+            _authService = authService;
         }
 
         public ActionResult Index()
@@ -197,8 +200,7 @@
 
         private bool HasExchange()
         {
-            return _productService.GetProductList(SessionServiceInstance.LicenseeSession.LicenseeId, SessionServiceInstance.UserSession.Language)
-                .Any(x => string.Equals(Product.Exchange, x.ProductCode, StringComparison.InvariantCultureIgnoreCase));
+            return _authService.CheckProductBelongsTo(SessionServiceInstance.LicenseeSession.LicenseeName, ProductTypes.Exchange);
         }
     }
 }

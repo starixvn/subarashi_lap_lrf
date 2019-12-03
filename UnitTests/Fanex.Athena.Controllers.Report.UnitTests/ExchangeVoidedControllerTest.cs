@@ -4,7 +4,7 @@ using System.Web.Mvc;
 using Fanex.Athena.Controllers.Base.UnitTests;
 using Fanex.Athena.DataAccess.Report.Interfaces;
 using Fanex.Athena.Extension.Utility;
-using Fanex.Athena.Model.Core.DTO.Common;
+using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Model.Report.DTO;
 using Fanex.Athena.Model.Report.MetaModel;
 using Fanex.Athena.Model.Report.ViewModel;
@@ -24,7 +24,7 @@ namespace Fanex.Athena.Controllers.Report.UnitTests
 
         private IExchangeVoidedDataAccess _dataAccess;
 
-        private IProductService _productService;
+        private IAuthorizationService _authService;
 
         [SetUp]
         public override void FixtureSetUp()
@@ -33,7 +33,7 @@ namespace Fanex.Athena.Controllers.Report.UnitTests
 
             _lgAPIClient = Substitute.For<ILGAPIClient>();
             _dataAccess = Substitute.For<IExchangeVoidedDataAccess>();
-            _productService = Substitute.For<IProductService>();
+            _authService = Substitute.For<IAuthorizationService>();
 
             SetUpDefaultFakeData();
         }
@@ -45,7 +45,7 @@ namespace Fanex.Athena.Controllers.Report.UnitTests
 
             _lgAPIClient = null;
             _dataAccess = null;
-            _productService = null;
+            _authService = null;
         }
 
         [Test]
@@ -70,8 +70,9 @@ namespace Fanex.Athena.Controllers.Report.UnitTests
         {
             // Arrange
             var metaModel = new ExchangeVoidedMetaModel();
+            const bool HasExchangePermission = false;
 
-            using (var controller = CreateController(new List<Product>()))
+            using (var controller = CreateController(HasExchangePermission))
             {
                 var expectedResult = JsonConvert.SerializeObject(
                     new ExchangeVoidedViewModel { DataList = new List<ExchangeVoidedItem>(), TotalPage = 0 });
@@ -212,25 +213,19 @@ namespace Fanex.Athena.Controllers.Report.UnitTests
             }
         }
 
-        private ExchangeVoidedController CreateController(IList<Product> productList = null)
+        private ExchangeVoidedController CreateController(bool hasExchangePermission = true)
         {
             var appSetting = Substitute.For<IAppSettings>();
             appSetting.Environment.Returns(Environment);
 
-            var fakeProductList = productList ??
-                new List<Product>
-                {
-                    new Product { ProductCode = Product.Exchange }
-                };
-            var licenseeId = SessionService.LicenseeSession.LicenseeId;
-            var language = SessionService.UserSession.Language;
-            _productService.GetProductList(licenseeId, language).Returns(fakeProductList);
+            var licenseeName = SessionService.LicenseeSession.LicenseeName;
+            _authService.CheckProductBelongsTo(licenseeName, ProductTypes.Exchange).Returns(hasExchangePermission);
 
             return new ExchangeVoidedController(
                 _lgAPIClient,
                 appSetting,
                 _dataAccess,
-                _productService
+                _authService
                 )
             {
                 SessionServiceInstance = SessionService
