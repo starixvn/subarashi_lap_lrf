@@ -1285,6 +1285,7 @@
     <Content Include="www\css\source\reactpages\components\_panel.scss" />
     <Content Include="www\css\source\reactpages\components\_pureicon.scss" />
     <Content Include="www\css\source\reactpages\components\_dropdownlabel.scss" />
+    <Content Include="www\css\source\reactpages\components\_simple-pagingation.scss" />
     <None Include="www\css\source\reactpages\main.scss" />
     <Content Include="www\css\build\dev\reactpages\vendor.css" />
     <Content Include="www\css\build\pro\reactpages\vendor.css" />

@@ -5,18 +5,20 @@ import { bindActionCreators } from 'redux';
 import LangHelper from '../../../lib/langHelper';
 import { DatePicker } from '@9softstudio/react-datepicker';
 import Note from './Note';
+import CollapsiblePanel from '@jsroot/components/collapsible-panel';
 
 export class FormFilter extends React.PureComponent {
     constructor(props) {
         super(props);
 
-        this.state = { ...this.props.requestParam };
+        this.state = { ...this.props.requestParam, isFilterCollapsing: false };
     }
 
     submit = (event) => {
         event.preventDefault();
+        const { isFilterCollapsing, ...inputParam } = this.state;
         const params = {
-            ...this.state,
+            ...inputParam,
             pageIndex: 1
         };
 
@@ -27,7 +29,7 @@ export class FormFilter extends React.PureComponent {
         event.preventDefault();
         const { gridData } = this.props;
 
-        if(!gridData.dataList){
+        if (!gridData.dataList) {
             window.alert(LangHelper.getSingleResource("NoInfo"));
             return;
         }
@@ -46,12 +48,22 @@ export class FormFilter extends React.PureComponent {
         this.setState({ [name]: value });
     }
 
+    handleCollapse = (isCollapse) => {
+        this.setState({isFilterCollapsing: isCollapse});
+    }
+
     render() {
         const { dateConstraint } = this.props;
-        const { selectedDate } = this.state;
+        const { selectedDate, isFilterCollapsing } = this.state;
+        const iconToggle = {
+            tag: 'div',
+            className: isFilterCollapsing ? 'chevron down' : 'chevron up',
+            style: {}
+        }
 
         return (
-            <div className="page-filter">
+            <CollapsiblePanel className="page-filter" iconToggle={iconToggle}
+                onCollapse={() => this.handleCollapse(true)} onExpand={() => this.handleCollapse(false)}>
                 <div className="row">
                     <div className="col-12 col-sm-7 col-md-3 col-xl-2">
                         <div className="form-group">
@@ -65,16 +77,16 @@ export class FormFilter extends React.PureComponent {
                     <div className="col-12 col-sm-4 col-md-3 col-xl-2">
                         <div className="form-group">
                             <label className="label-text">{LangHelper.getSingleResource('RefNo')}</label>
-                            <input className="input-text" id="refNo" name="refNo" type="text"
-                                autoComplete="off" onChange={this.handleChangeInput} />
+                            <input className="input-text" id="refNo" name="refNo" type="text" autoComplete="off"
+                                placeholder={LangHelper.getSingleResource("RefNo")} onChange={this.handleChangeInput} />
                         </div>
                     </div>
 
                     <div className="col-12 col-sm-4 col-md-3 col-xl-2">
                         <div className="form-group">
                             <label className="label-text">{LangHelper.getSingleResource('Username')}</label>
-                            <input className="input-text" id="userName" name="userName" type="text"
-                                autoComplete="off" onChange={this.handleChangeInput} />
+                            <input className="input-text" id="userName" name="userName" type="text" autoComplete="off"
+                                placeholder={LangHelper.getSingleResource("ExternalIdOrSystemId")} onChange={this.handleChangeInput} />
                         </div>
                     </div>
 
@@ -92,7 +104,7 @@ export class FormFilter extends React.PureComponent {
                     </div>
                 </div>
                 <Note />
-            </div>
+            </CollapsiblePanel>
         );
     }
 }

@@ -1,15 +1,17 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import { ActionCreators } from '../actions';
 import { bindActionCreators } from 'redux';
 import { renderHeader, renderDataSection } from '../lib/gridUtils';
 import NoDataTitle from '@jsroot/components/NoDataTitle';
-import { Table, Pager } from '@9softstudio/react-grid';
+import { Table } from '@9softstudio/react-grid';
 import ReportTitle from '@jsroot/components/ReportTitle';
 import LangHelper from '@jsroot/lib/langHelper';
+import SimplePagination from '@jsroot/components/SimplePagination';
 
 const DataGrid = (props) => {
     const isFirstRun = useRef(true);
+    const [pagingOption, setPagingOption] = useState({pageIndex: 1, totalPage: 0});
 
     useEffect(() => {
         if (isFirstRun.current) {
@@ -22,8 +24,20 @@ const DataGrid = (props) => {
         getData(param);
     }, [props.requestParam])
 
-    const { gridData } = props;
-    const { dataList } = gridData;
+    useEffect(() => {
+        const { gridData } = props;
+
+        if(gridData && gridData.totalPage && gridData.totalPage !== pagingOption.totalPage){
+            setPagingOption({ ...pagingOption, totalPage: gridData.totalPage });
+        }
+    }, [props.gridData])
+
+    const handleChangePaging = pageIndex => {
+        setPagingOption({ ...pagingOption, pageIndex });
+        props.setRequestParam({...props.requestParam, pageIndex});
+    }
+
+    const { dataList } = props.gridData;
     if (!dataList) {
         return null;
     }
@@ -32,10 +46,11 @@ const DataGrid = (props) => {
         return <NoDataTitle />;
     }
 
-    const { pagingOption, requestParam } = props;
-    const startIndex = (pagingOption.PageIndex - 1) * pagingOption.PageSize + 1;
+    const { requestParam } = props;
 
     const reportTitle = `${LangHelper.getSingleResource('BettingTicketCenter')}, ${requestParam.selectedDate}`;
+
+    const {pageIndex, totalPage} = pagingOption;
 
     return (
         <div>
@@ -44,10 +59,10 @@ const DataGrid = (props) => {
                 autoWidth={true}
                 autoHeight={true}
                 header={renderHeader()}
-                body={renderDataSection(dataList, startIndex)}
+                body={renderDataSection(dataList)}
                 containerPadding={30} />
-            <Pager pageOption={pagingOption} isShowPagingInfo={false}
-                onPaging={(pageIndex) => props.setRequestParam({ ...requestParam, pageIndex })} />
+            {totalPage > 1 && <SimplePagination pageIndex={pageIndex} totalPage={totalPage} 
+                onPageChanged={handleChangePaging} />}
         </div>
     );
 }
@@ -58,8 +73,8 @@ function mapDispatchToProps(dispatch) {
 };
 
 function mapStateToProps(state) {
-    const { gridData, requestParam, pagingOption } = state;
-    return Object.assign({}, { gridData, requestParam, pagingOption });
+    const { gridData, requestParam } = state;
+    return Object.assign({}, { gridData, requestParam });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DataGrid);

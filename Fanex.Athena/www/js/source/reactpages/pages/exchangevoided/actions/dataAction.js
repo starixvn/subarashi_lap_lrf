@@ -1,20 +1,15 @@
 import { toggleLoader } from '@jsroot/actions/loaderAction';
-import { setPagingOption } from '@jsroot/actions/pagingOptionAction';
 import { setGridData } from '@jsroot/actions/gridDataAction';
 
 import Site from '@jsroot/lib/site';
 import DataService from '@jsroot/lib/DataService';
-import LangHelper from '@jsroot/lib/langHelper';
 import ReportExcel from '../lib/reportExcel';
-
-const defaultPaingOption = { TotalItem: 0 };
 
 const UM_ERR_CODE = 101;
 const UM_MESSAGE = 'Exchange product is under maintenance now';
-const PAGESIZE = 2000;
-const dispatchResult = (dispatch, data, pagingOption) => {
+const ERROR_MESSAGE = 'Your request cannot be processed now, please try again later';
+const dispatchResult = (dispatch, data) => {
     dispatch(setGridData(data));
-    dispatch(setPagingOption(pagingOption));
     dispatch(toggleLoader(false));
 }
 
@@ -28,21 +23,16 @@ export const getData = (param) => (dispatch) => {
             if (errCode === UM_ERR_CODE) {
                 window.alert(UM_MESSAGE);
             } else if (errCode !== 0) {
-                dispatchResult(dispatch, { dataList: [] }, {...defaultPaingOption });
+                dispatchResult(dispatch, { dataList: [], totalPage });
+                window.alert(ERROR_MESSAGE);
             } else {
-                const data = { dataList: dataList || [] };
-
-                const newPagingOption = {
-                    TotalItem: totalPage * PAGESIZE,
-                    PageSize: PAGESIZE,
-                    PageIndex: param.pageIndex
-                }
-                dispatchResult(dispatch, data, newPagingOption);
+                const data = { dataList: dataList || [], totalPage };
+                dispatchResult(dispatch, data);
             }
         })
         .catch(error => {
             console.log(error.message);
-            dispatchResult(dispatch, { dataList: [] }, {...defaultPaingOption });
+            dispatchResult(dispatch, { dataList: [], totalPage });
         });
 }
 
