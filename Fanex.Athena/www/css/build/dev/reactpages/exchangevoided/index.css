@@ -427,5 +427,45 @@
           font-weight: bold;
           border-bottom: 3px solid #f05b1f; }
 
+.simple-pagingation-container {
+  padding: 10px;
+  text-align: center; }
+  .simple-pagingation-container .btn-move {
+    display: inline-block;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: 3px;
+    font-size: 11px;
+    border-radius: 1px;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    color: #6c757d;
+    border-color: #8a8f94; }
+    .simple-pagingation-container .btn-move:hover {
+      color: #fff;
+      background-color: #6c757d;
+      border-color: #6c757d; }
+    .simple-pagingation-container .btn-move:disabled {
+      border: none; }
+  .simple-pagingation-container .btn-prev {
+    margin-right: 5px; }
+  .simple-pagingation-container .btn-next {
+    margin-left: 5px; }
+
+.chevron {
+  width: 8px;
+  height: 8px;
+  border-top: 1px solid #fff;
+  border-right: 1px solid #fff;
+  transition: 0.3s all cubic-bezier(1, 0.25, 0.25, 0.8);
+  will-change: transform;
+  display: inline-block; }
+  .chevron.down {
+    transform: rotate(135deg);
+    margin-bottom: 3px; }
+  .chevron.up {
+    transform: rotate(-45deg); }
+  .chevron.right {
+    transform: rotate(45deg); }
+
 
 /*# sourceMappingURL=index.css.map*/

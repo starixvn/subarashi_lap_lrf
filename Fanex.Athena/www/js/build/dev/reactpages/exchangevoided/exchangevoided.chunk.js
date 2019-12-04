@@ -312,27 +312,6 @@ var toggleLoader = function toggleLoader(show) {
 
 /***/ }),
 
-/***/ "./www/js/source/reactpages/actions/pagingOptionAction.js":
-/*!****************************************************************!*\
-  !*** ./www/js/source/reactpages/actions/pagingOptionAction.js ***!
-  \****************************************************************/
-/*! exports provided: setPagingOption */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setPagingOption", function() { return setPagingOption; });
-/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./www/js/source/reactpages/actions/types.js");
-
-var setPagingOption = function setPagingOption(data) {
-  return {
-    type: _types__WEBPACK_IMPORTED_MODULE_0__["SET_PAGING_OPTION"],
-    data: data
-  };
-};
-
-/***/ }),
-
 /***/ "./www/js/source/reactpages/actions/requestParamAction.js":
 /*!****************************************************************!*\
   !*** ./www/js/source/reactpages/actions/requestParamAction.js ***!
@@ -533,6 +512,261 @@ var defaultProps = {
 ReportTitle.propTypes = propTypes;
 ReportTitle.defaultProps = defaultProps;
 /* harmony default export */ __webpack_exports__["default"] = (ReportTitle);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/components/SimplePagination.jsx":
+/*!******************************************************************!*\
+  !*** ./www/js/source/reactpages/components/SimplePagination.jsx ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+
+
+var MIN_PAGE_INDEX = 1;
+
+var SimplePagination = function SimplePagination(props) {
+  var gotoPage = function gotoPage(page) {
+    var totalPage = props.totalPage,
+        onPageChanged = props.onPageChanged;
+    var currentPage = Math.max(MIN_PAGE_INDEX, Math.min(page, totalPage));
+    onPageChanged && onPageChanged(currentPage);
+  };
+
+  var handleMovePrev = function handleMovePrev(evt) {
+    evt.preventDefault();
+    var pageIndex = props.pageIndex,
+        totalPage = props.totalPage;
+    var nextPageIndex = pageIndex - 1;
+
+    if (nextPageIndex >= 1 && nextPageIndex <= totalPage) {
+      gotoPage(nextPageIndex);
+    }
+  };
+
+  var handleMoveNext = function handleMoveNext(evt) {
+    evt.preventDefault();
+    var pageIndex = props.pageIndex,
+        totalPage = props.totalPage;
+    var nextPageIndex = pageIndex + 1;
+
+    if (nextPageIndex >= 1 && nextPageIndex <= totalPage) {
+      gotoPage(nextPageIndex);
+    }
+  };
+
+  var pageIndex = props.pageIndex,
+      totalPage = props.totalPage;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "simple-pagingation-container"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    type: "button",
+    className: "btn-move btn-prev",
+    disabled: pageIndex <= MIN_PAGE_INDEX,
+    onClick: handleMovePrev
+  }, "Prev"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "page-info"
+  }, pageIndex), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    type: "button",
+    className: "btn-move btn-next",
+    disabled: pageIndex >= totalPage,
+    onClick: handleMoveNext
+  }, "Next"));
+};
+
+SimplePagination.propTypes = {
+  pageIndex: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
+  totalPage: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
+  onPageChanged: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func
+};
+SimplePagination.defaultProps = {
+  pageIndex: 0,
+  totalPage: 0
+};
+/* harmony default export */ __webpack_exports__["default"] = (SimplePagination);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/components/collapsible-panel/CollapsiblePanel.jsx":
+/*!************************************************************************************!*\
+  !*** ./www/js/source/reactpages/components/collapsible-panel/CollapsiblePanel.jsx ***!
+  \************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+var CollapsiblePanel =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(CollapsiblePanel, _React$Component);
+
+  function CollapsiblePanel(props) {
+    var _this;
+
+    _classCallCheck(this, CollapsiblePanel);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(CollapsiblePanel).call(this, props));
+
+    _defineProperty(_assertThisInitialized(_this), "onClick", function () {
+      var newState = !_this.state.isCollapsed;
+      var _this$props = _this.props,
+          onCollapse = _this$props.onCollapse,
+          onExpand = _this$props.onExpand;
+
+      if (newState) {
+        onCollapse && onCollapse();
+      }
+
+      _this.setState({
+        isCollapsed: newState
+      }, function () {
+        window.dispatchEvent(new Event('resize'));
+
+        if (!newState) {
+          onExpand && onExpand();
+        }
+      });
+    });
+
+    _this.state = {
+      isCollapsed: false
+    };
+    return _this;
+  }
+
+  _createClass(CollapsiblePanel, [{
+    key: "render",
+    value: function render() {
+      var _this$props2 = this.props,
+          stickyFooter = _this$props2.stickyFooter,
+          iconContainerStyle = _this$props2.iconContainerStyle,
+          iconToggle = _this$props2.iconToggle;
+
+      var tag = iconToggle.tag,
+          className = iconToggle.className,
+          style = iconToggle.style,
+          attrs = _objectWithoutProperties(iconToggle, ["tag", "className", "style"]);
+
+      var IconTag = tag;
+      var iconStyle = style || {
+        transform: this.state.isCollapsed ? null : 'rotate(180deg)',
+        color: '#fff',
+        textAlign: 'center',
+        background: '#4c6274',
+        height: "15px",
+        width: "20px",
+        float: 'left'
+      };
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "".concat(this.props.className)
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        style: {
+          display: this.state.isCollapsed ? 'none' : 'block'
+        }
+      }, this.props.children), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "caret-block"
+      }, stickyFooter), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "filter-handle",
+        style: iconContainerStyle,
+        onClick: this.onClick
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(IconTag, _extends({
+        className: className,
+        style: iconStyle
+      }, attrs))));
+    }
+  }]);
+
+  return CollapsiblePanel;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+_defineProperty(CollapsiblePanel, "propTypes", {
+  stickyFooter: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node,
+  onCollapse: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  onExpand: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func
+});
+
+var propTypes = {
+  stickyFooter: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node,
+  onCollapse: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  onExpand: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  iconToggle: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object
+};
+var defaultProps = {
+  iconContainerStyle: {
+    height: '15px',
+    width: '20px',
+    cursor: 'pointer',
+    position: 'absolute',
+    left: 'calc(50% - 10px)',
+    bottom: 0,
+    background: '#4c6274',
+    textAlign: 'center'
+  },
+  iconToggle: {
+    tag: 'i',
+    className: 'icon-arrow',
+    style: null
+  }
+};
+CollapsiblePanel.propTypes = propTypes;
+CollapsiblePanel.defaultProps = defaultProps;
+/* harmony default export */ __webpack_exports__["default"] = (CollapsiblePanel);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/components/collapsible-panel/index.jsx":
+/*!*************************************************************************!*\
+  !*** ./www/js/source/reactpages/components/collapsible-panel/index.jsx ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _CollapsiblePanel__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CollapsiblePanel */ "./www/js/source/reactpages/components/collapsible-panel/CollapsiblePanel.jsx");
+
+/* harmony default export */ __webpack_exports__["default"] = (_CollapsiblePanel__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 /***/ }),
 
@@ -1278,67 +1512,61 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getData", function() { return getData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "exportExcel", function() { return exportExcel; });
 /* harmony import */ var _jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/actions/loaderAction */ "./www/js/source/reactpages/actions/loaderAction.js");
-/* harmony import */ var _jsroot_actions_pagingOptionAction__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/actions/pagingOptionAction */ "./www/js/source/reactpages/actions/pagingOptionAction.js");
-/* harmony import */ var _jsroot_actions_gridDataAction__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/actions/gridDataAction */ "./www/js/source/reactpages/actions/gridDataAction.js");
-/* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
-/* harmony import */ var _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/DataService */ "./www/js/source/reactpages/lib/DataService.js");
-/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
-/* harmony import */ var _lib_reportExcel__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../lib/reportExcel */ "./www/js/source/reactpages/pages/exchangevoided/lib/reportExcel.js");
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+/* harmony import */ var _jsroot_actions_gridDataAction__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/actions/gridDataAction */ "./www/js/source/reactpages/actions/gridDataAction.js");
+/* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
+/* harmony import */ var _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/DataService */ "./www/js/source/reactpages/lib/DataService.js");
+/* harmony import */ var _lib_reportExcel__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../lib/reportExcel */ "./www/js/source/reactpages/pages/exchangevoided/lib/reportExcel.js");
 
 
 
 
 
+var UM_ERR_CODE = 101;
+var UM_MESSAGE = 'Exchange product is under maintenance now';
+var ERROR_MESSAGE = 'Your request cannot be processed now, please try again later';
 
-
-
-var emptyData = {
-  dataList: [],
-  total: {}
-};
-var defaultPaingOption = {
-  TotalItem: 0
-};
-var PAGESIZE = 2000;
-
-var dispatchResult = function dispatchResult(dispatch, data, pagingOption) {
-  dispatch(Object(_jsroot_actions_gridDataAction__WEBPACK_IMPORTED_MODULE_2__["setGridData"])(data));
-  dispatch(Object(_jsroot_actions_pagingOptionAction__WEBPACK_IMPORTED_MODULE_1__["setPagingOption"])(pagingOption));
+var dispatchResult = function dispatchResult(dispatch, data) {
+  dispatch(Object(_jsroot_actions_gridDataAction__WEBPACK_IMPORTED_MODULE_1__["setGridData"])(data));
   dispatch(Object(_jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_0__["toggleLoader"])(false));
 };
 
-var apiUrl = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_3__["default"].resolveClientUrl('ExchangeVoided/Index');
+var apiUrl = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_2__["default"].resolveClientUrl('ExchangeVoided/Index');
 var getData = function getData(param) {
   return function (dispatch) {
     dispatch(Object(_jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_0__["toggleLoader"])(true));
-    _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_4__["default"].postData(apiUrl, param).then(function (response) {
-      console.log(response.data);
+    _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_3__["default"].postData(apiUrl, param).then(function (response) {
       var _response$data = response.data,
           dataList = _response$data.dataList,
-          totalPage = _response$data.totalPage;
-      var data = {
-        dataList: dataList || []
-      };
-      var newPagingOption = {
-        TotalItem: totalPage * PAGESIZE,
-        PageSize: PAGESIZE,
-        PageIndex: param.pageIndex
-      };
-      dispatchResult(dispatch, data, newPagingOption);
+          totalPage = _response$data.totalPage,
+          errCode = _response$data.errCode;
+
+      if (errCode === UM_ERR_CODE) {
+        window.alert(UM_MESSAGE);
+      } else if (errCode !== 0) {
+        dispatchResult(dispatch, {
+          dataList: [],
+          totalPage: totalPage
+        });
+        window.alert(ERROR_MESSAGE);
+      } else {
+        var data = {
+          dataList: dataList || [],
+          totalPage: totalPage
+        };
+        dispatchResult(dispatch, data);
+      }
     }).catch(function (error) {
       console.log(error.message);
       dispatchResult(dispatch, {
-        dataList: []
-      }, _objectSpread({}, defaultPaingOption));
+        dataList: [],
+        totalPage: totalPage
+      });
     });
   };
 };
 var exportExcel = function exportExcel(dataList, title) {
   return function () {
-    var service = new _lib_reportExcel__WEBPACK_IMPORTED_MODULE_6__["default"](dataList, title);
+    var service = new _lib_reportExcel__WEBPACK_IMPORTED_MODULE_4__["default"](dataList, title);
     service.export();
   };
 };
@@ -1467,9 +1695,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _jsroot_components_ReportTitle__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/components/ReportTitle */ "./www/js/source/reactpages/components/ReportTitle.jsx");
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_components_SimplePagination__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @jsroot/components/SimplePagination */ "./www/js/source/reactpages/components/SimplePagination.jsx");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -1483,6 +1721,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var DataGrid = function DataGrid(props) {
   var isFirstRun = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(true);
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
+    pageIndex: 1,
+    totalPage: 0
+  }),
+      _useState2 = _slicedToArray(_useState, 2),
+      pagingOption = _useState2[0],
+      setPagingOption = _useState2[1];
+
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     if (isFirstRun.current) {
       isFirstRun.current = false;
@@ -1495,8 +1742,26 @@ var DataGrid = function DataGrid(props) {
 
     getData(param);
   }, [props.requestParam]);
-  var gridData = props.gridData;
-  var dataList = gridData.dataList;
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    var gridData = props.gridData;
+
+    if (gridData && gridData.totalPage && gridData.totalPage !== pagingOption.totalPage) {
+      setPagingOption(_objectSpread({}, pagingOption, {
+        totalPage: gridData.totalPage
+      }));
+    }
+  }, [props.gridData]);
+
+  var handleChangePaging = function handleChangePaging(pageIndex) {
+    setPagingOption(_objectSpread({}, pagingOption, {
+      pageIndex: pageIndex
+    }));
+    props.setRequestParam(_objectSpread({}, props.requestParam, {
+      pageIndex: pageIndex
+    }));
+  };
+
+  var dataList = props.gridData.dataList;
 
   if (!dataList) {
     return null;
@@ -1506,10 +1771,10 @@ var DataGrid = function DataGrid(props) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_5__["default"], null);
   }
 
-  var pagingOption = props.pagingOption,
-      requestParam = props.requestParam;
-  var startIndex = (pagingOption.PageIndex - 1) * pagingOption.PageSize + 1;
+  var requestParam = props.requestParam;
   var reportTitle = "".concat(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource('BettingTicketCenter'), ", ").concat(requestParam.selectedDate);
+  var pageIndex = pagingOption.pageIndex,
+      totalPage = pagingOption.totalPage;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_ReportTitle__WEBPACK_IMPORTED_MODULE_7__["default"], {
     content: reportTitle
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_6__["Table"], {
@@ -1517,16 +1782,12 @@ var DataGrid = function DataGrid(props) {
     autoWidth: true,
     autoHeight: true,
     header: Object(_lib_gridUtils__WEBPACK_IMPORTED_MODULE_4__["renderHeader"])(),
-    body: Object(_lib_gridUtils__WEBPACK_IMPORTED_MODULE_4__["renderDataSection"])(dataList, startIndex),
+    body: Object(_lib_gridUtils__WEBPACK_IMPORTED_MODULE_4__["renderDataSection"])(dataList),
     containerPadding: 30
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_6__["Pager"], {
-    pageOption: pagingOption,
-    isShowPagingInfo: false,
-    onPaging: function onPaging(pageIndex) {
-      return props.setRequestParam(_objectSpread({}, requestParam, {
-        pageIndex: pageIndex
-      }));
-    }
+  }), totalPage > 1 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_SimplePagination__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    pageIndex: pageIndex,
+    totalPage: totalPage,
+    onPageChanged: handleChangePaging
   }));
 };
 
@@ -1543,12 +1804,10 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
   var gridData = state.gridData,
-      requestParam = state.requestParam,
-      pagingOption = state.pagingOption;
+      requestParam = state.requestParam;
   return Object.assign({}, {
     gridData: gridData,
-    requestParam: requestParam,
-    pagingOption: pagingOption
+    requestParam: requestParam
   });
 }
 
@@ -1576,9 +1835,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _9softstudio_react_datepicker__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @9softstudio/react-datepicker */ "./node_modules/@9softstudio/react-datepicker/dist/index.js");
 /* harmony import */ var _9softstudio_react_datepicker__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_9softstudio_react_datepicker__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _Note__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Note */ "./www/js/source/reactpages/pages/exchangevoided/components/Note.jsx");
+/* harmony import */ var _jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/components/collapsible-panel */ "./www/js/source/reactpages/components/collapsible-panel/index.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -1605,6 +1869,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 var FormFilter =
 /*#__PURE__*/
 function (_React$PureComponent) {
@@ -1620,7 +1885,11 @@ function (_React$PureComponent) {
     _defineProperty(_assertThisInitialized(_this), "submit", function (event) {
       event.preventDefault();
 
-      var params = _objectSpread({}, _this.state, {
+      var _this$state = _this.state,
+          isFilterCollapsing = _this$state.isFilterCollapsing,
+          inputParam = _objectWithoutProperties(_this$state, ["isFilterCollapsing"]);
+
+      var params = _objectSpread({}, inputParam, {
         pageIndex: 1
       });
 
@@ -1655,17 +1924,41 @@ function (_React$PureComponent) {
       _this.setState(_defineProperty({}, name, value));
     });
 
-    _this.state = _objectSpread({}, _this.props.requestParam);
+    _defineProperty(_assertThisInitialized(_this), "handleCollapse", function (isCollapse) {
+      _this.setState({
+        isFilterCollapsing: isCollapse
+      });
+    });
+
+    _this.state = _objectSpread({}, _this.props.requestParam, {
+      isFilterCollapsing: false
+    });
     return _this;
   }
 
   _createClass(FormFilter, [{
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       var dateConstraint = this.props.dateConstraint;
-      var selectedDate = this.state.selectedDate;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "page-filter"
+      var _this$state2 = this.state,
+          selectedDate = _this$state2.selectedDate,
+          isFilterCollapsing = _this$state2.isFilterCollapsing;
+      var iconToggle = {
+        tag: 'div',
+        className: isFilterCollapsing ? 'chevron down' : 'chevron up',
+        style: {}
+      };
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        className: "page-filter",
+        iconToggle: iconToggle,
+        onCollapse: function onCollapse() {
+          return _this2.handleCollapse(true);
+        },
+        onExpand: function onExpand() {
+          return _this2.handleCollapse(false);
+        }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1691,6 +1984,7 @@ function (_React$PureComponent) {
         name: "refNo",
         type: "text",
         autoComplete: "off",
+        placeholder: _lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource("RefNo"),
         onChange: this.handleChangeInput
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-12 col-sm-4 col-md-3 col-xl-2"
@@ -1704,6 +1998,7 @@ function (_React$PureComponent) {
         name: "userName",
         type: "text",
         autoComplete: "off",
+        placeholder: _lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource("ExternalIdOrSystemId"),
         onChange: this.handleChangeInput
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-12 col-md-2 col-sm-2 col-lg-2 col-xl-1"
@@ -1829,15 +2124,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-var pagingOption = {
-  PageIndex: 1,
-  PageSize: 2000,
-  TotalItem: 0,
-  PageList: [2000]
-};
-var defaultState = Object.assign({}, window.initialState, {
-  pagingOption: pagingOption
-});
+var defaultState = Object.assign({}, window.initialState);
 var store = _lib_store__WEBPACK_IMPORTED_MODULE_5__["default"].createStore(_reducers_index_js__WEBPACK_IMPORTED_MODULE_4__["default"], defaultState);
 
 var App =
@@ -1934,11 +2221,11 @@ var renderHeader = function renderHeader() {
     colWidth: 70
   }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].status));
 };
-var renderDataSection = function renderDataSection(dataList, startIndex) {
+var renderDataSection = function renderDataSection(dataList) {
   var dataRows = [];
 
   for (var i = 0; i < dataList.length; i++) {
-    dataRows.push(buildDataRow(startIndex + i, dataList[i]));
+    dataRows.push(buildDataRow(i + 1, dataList[i]));
   }
 
   return dataRows;
@@ -2007,7 +2294,7 @@ function () {
     value: function _export(onFinished) {
       var _this = this;
 
-      if (!this._dataList) {
+      if (!this._dataList || this._dataList.length === 0) {
         return;
       }
 
@@ -2159,17 +2446,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _jsroot_reducers_loaderReducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/reducers/loaderReducer */ "./www/js/source/reactpages/reducers/loaderReducer.js");
 /* harmony import */ var _jsroot_reducers_requestParamReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/reducers/requestParamReducer */ "./www/js/source/reactpages/reducers/requestParamReducer.js");
-/* harmony import */ var _jsroot_reducers_pagingOptionReducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/reducers/pagingOptionReducer */ "./www/js/source/reactpages/reducers/pagingOptionReducer.js");
-/* harmony import */ var _jsroot_reducers_gridDataReducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/reducers/gridDataReducer */ "./www/js/source/reactpages/reducers/gridDataReducer.js");
-/* harmony import */ var _jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
+/* harmony import */ var _jsroot_reducers_gridDataReducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/reducers/gridDataReducer */ "./www/js/source/reactpages/reducers/gridDataReducer.js");
+/* harmony import */ var _jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
 
 
 
 
 
-
-var dateConstraint = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_5__["default"])({}, {});
-/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(Object.assign(_jsroot_reducers_loaderReducer__WEBPACK_IMPORTED_MODULE_1__, _jsroot_reducers_requestParamReducer__WEBPACK_IMPORTED_MODULE_2__, _jsroot_reducers_pagingOptionReducer__WEBPACK_IMPORTED_MODULE_3__, _jsroot_reducers_gridDataReducer__WEBPACK_IMPORTED_MODULE_4__, {
+var dateConstraint = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_4__["default"])({}, {});
+/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(Object.assign(_jsroot_reducers_loaderReducer__WEBPACK_IMPORTED_MODULE_1__, _jsroot_reducers_requestParamReducer__WEBPACK_IMPORTED_MODULE_2__, _jsroot_reducers_gridDataReducer__WEBPACK_IMPORTED_MODULE_3__, {
   dateConstraint: dateConstraint
 })));
 
@@ -2215,36 +2500,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var isLoading = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, _defineProperty({}, _actions_types__WEBPACK_IMPORTED_MODULE_0__["TOGGLE_LOADER"], function (state, action) {
   return action.data;
-}));
-
-/***/ }),
-
-/***/ "./www/js/source/reactpages/reducers/pagingOptionReducer.js":
-/*!******************************************************************!*\
-  !*** ./www/js/source/reactpages/reducers/pagingOptionReducer.js ***!
-  \******************************************************************/
-/*! exports provided: pagingOption */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pagingOption", function() { return pagingOption; });
-/* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/types */ "./www/js/source/reactpages/actions/types.js");
-/* harmony import */ var _lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
-
-var defaultPagingOption = {
-  PageIndex: 1,
-  PageSize: 50,
-  TotalItem: 0,
-  PageList: [50, 100, 200, 500]
-};
-var pagingOption = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(defaultPagingOption, _defineProperty({}, _actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_PAGING_OPTION"], function (prevState, action) {
-  return _objectSpread({}, prevState, action.data);
 }));
 
 /***/ }),
