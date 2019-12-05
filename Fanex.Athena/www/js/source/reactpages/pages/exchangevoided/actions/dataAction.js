@@ -5,6 +5,7 @@ import Site from '@jsroot/lib/site';
 import DataService from '@jsroot/lib/DataService';
 import ReportExcel from '../lib/reportExcel';
 
+const SUCCESS_CODE = 1;
 const UM_ERR_CODE = 101;
 const UM_MESSAGE = 'Exchange product is under maintenance now';
 const ERROR_MESSAGE = 'Your request cannot be processed now, please try again later';
@@ -22,7 +23,7 @@ export const getData = (param) => (dispatch) => {
             const { dataList, totalPage, errCode } = response.data;
             if (errCode === UM_ERR_CODE) {
                 window.alert(UM_MESSAGE);
-            } else if (errCode !== 0) {
+            } else if (errCode !== SUCCESS_CODE) {
                 dispatchResult(dispatch, { dataList: [], totalPage });
                 window.alert(ERROR_MESSAGE);
             } else {

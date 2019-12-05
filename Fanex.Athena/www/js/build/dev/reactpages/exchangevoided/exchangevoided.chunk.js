@@ -1521,6 +1521,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+var SUCCESS_CODE = 1;
 var UM_ERR_CODE = 101;
 var UM_MESSAGE = 'Exchange product is under maintenance now';
 var ERROR_MESSAGE = 'Your request cannot be processed now, please try again later';
@@ -1542,7 +1543,7 @@ var getData = function getData(param) {
 
       if (errCode === UM_ERR_CODE) {
         window.alert(UM_MESSAGE);
-      } else if (errCode !== 0) {
+      } else if (errCode !== SUCCESS_CODE) {
         dispatchResult(dispatch, {
           dataList: [],
           totalPage: totalPage
