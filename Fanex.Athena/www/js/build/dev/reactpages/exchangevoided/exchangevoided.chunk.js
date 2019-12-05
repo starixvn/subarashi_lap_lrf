@@ -1540,22 +1540,13 @@ var getData = function getData(param) {
           dataList = _response$data.dataList,
           totalPage = _response$data.totalPage,
           errCode = _response$data.errCode;
-
-      if (errCode === UM_ERR_CODE) {
-        window.alert(UM_MESSAGE);
-      } else if (errCode !== SUCCESS_CODE) {
-        dispatchResult(dispatch, {
-          dataList: [],
-          totalPage: totalPage
-        });
-        window.alert(ERROR_MESSAGE);
-      } else {
-        var data = {
-          dataList: dataList || [],
-          totalPage: totalPage
-        };
-        dispatchResult(dispatch, data);
-      }
+      var isSuccess = errCode === SUCCESS_CODE;
+      var data = {
+        dataList: isSuccess ? dataList : [],
+        totalPage: totalPage
+      };
+      dispatchResult(dispatch, data);
+      !isSuccess && window.alert(errCode === UM_ERR_CODE ? UM_MESSAGE : ERROR_MESSAGE);
     }).catch(function (error) {
       console.log(error.message);
       dispatchResult(dispatch, {

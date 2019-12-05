@@ -21,15 +21,11 @@ export const getData = (param) => (dispatch) => {
     DataService.postData(apiUrl, param)
         .then(response => {
             const { dataList, totalPage, errCode } = response.data;
-            if (errCode === UM_ERR_CODE) {
-                window.alert(UM_MESSAGE);
-            } else if (errCode !== SUCCESS_CODE) {
-                dispatchResult(dispatch, { dataList: [], totalPage });
-                window.alert(ERROR_MESSAGE);
-            } else {
-                const data = { dataList: dataList || [], totalPage };
-                dispatchResult(dispatch, data);
-            }
+            const isSuccess = errCode === SUCCESS_CODE;
+            const data = { dataList: isSuccess ? dataList : [], totalPage };
+            dispatchResult(dispatch, data);
+
+            !isSuccess && window.alert(errCode === UM_ERR_CODE ? UM_MESSAGE : ERROR_MESSAGE);
         })
         .catch(error => {
             console.log(error.message);

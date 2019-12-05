@@ -439,13 +439,15 @@
     border-radius: 1px;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     color: #6c757d;
-    border-color: #8a8f94; }
+    border-color: #8a8f94;
+    cursor: pointer; }
     .simple-pagingation-container .btn-move:hover {
       color: #fff;
       background-color: #6c757d;
       border-color: #6c757d; }
     .simple-pagingation-container .btn-move:disabled {
-      border: none; }
+      border: none;
+      cursor: default; }
   .simple-pagingation-container .btn-prev {
     margin-right: 5px; }
   .simple-pagingation-container .btn-next {
