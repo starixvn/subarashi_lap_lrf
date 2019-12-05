@@ -22,10 +22,10 @@ namespace Fanex.Athena.Service.StatelessCore.CustomException
         {
             _serviceName = serviceName;
         }
-
-        private ServiceException(SerializationInfo info, StreamingContext context) : base(info, context)
+        public ServiceException(string message, string serviceName, Exception exception)
+          : base(message, exception)
         {
-            _serviceName = info.GetString(nameof(_serviceName));
+            _serviceName = serviceName;
         }
 
         public override string Message

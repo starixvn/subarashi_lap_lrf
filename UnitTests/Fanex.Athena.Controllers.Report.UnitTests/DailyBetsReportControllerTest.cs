@@ -161,7 +161,7 @@
                 Assert.Multiple(() =>
                 {
                     Assert.IsInstanceOf<JsonNetResult>(result);
-                    _reportAPIClient.Received(1).PostAsyncStringAsync("api/DailyBets/Index", metaModel, DefaultUserSession.Language);
+                    _reportAPIClient.Received(1).PostStringAsync("api/DailyBets/Index", metaModel, DefaultUserSession.Language);
                 });
             }
         }
@@ -177,7 +177,7 @@
                     IsExportExcel = true
                 };
 
-                var expectedFileContent = new Tuple<MemoryStream, string>(new MemoryStream(new byte[] { 1 }), "application/octet-stream");
+                var expectedFileContent = new Tuple<Stream, string>(new MemoryStream(new byte[] { 1 }), "application/octet-stream");
                 _reportAPIClient.PostAsync("api/DailyBets/Export", metaModel, DefaultUserSession.Language).Returns(expectedFileContent);
 
                 // Action

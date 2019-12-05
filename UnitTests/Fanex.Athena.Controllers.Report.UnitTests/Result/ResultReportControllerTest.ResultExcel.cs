@@ -44,7 +44,7 @@
                 var byteContent = Encoding.UTF8.GetBytes(ExpectedDataContent);
                 var metaModel = new ResultMetaModel();
                 const string Url = "/ResultReport/ResultExcel";
-                _betListApiClient.PostAsyncStream(Url, metaModel, SessionService.UserSession.Language).Returns(new MemoryStream(byteContent));
+                _betListApiClient.PostStreamAsync(Url, metaModel, SessionService.UserSession.Language).Returns(new MemoryStream(byteContent));
 
                 // Action
                 var result = controller.ResultExcel(metaModel).Result as FileStreamResult;

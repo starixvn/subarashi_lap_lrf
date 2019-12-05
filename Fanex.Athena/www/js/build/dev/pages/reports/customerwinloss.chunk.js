@@ -6456,10 +6456,12 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
             createPaging(response.totalRows);
 
+            const isShowPromotionPrizeLink = Site.isNumber(response.promotionPrize)
+                && parseInt(response.promotionPrize, 10) > 0;
             if (response.totalRows === 0) {
                 jqGridAdditional.setNoInfo();
                 Site.unBlockUI();
-                showPromotionPrizeLink(false);
+                showPromotionPrizeLink(isShowPromotionPrizeLink);
                 return;
             }
 
@@ -6479,8 +6481,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             reportGrid.jqGrid(gridOption);
 
             CustomerWinLossOption.setGroupHeaderColumns(reportGrid);
-            const pprizeCount = response.promotionPrize;
-            showPromotionPrizeLink(Site.isNumber(pprizeCount) && parseInt(pprizeCount, 10) > 0);
+            showPromotionPrizeLink(isShowPromotionPrizeLink);
         }
 
         function ajaxPaging() {

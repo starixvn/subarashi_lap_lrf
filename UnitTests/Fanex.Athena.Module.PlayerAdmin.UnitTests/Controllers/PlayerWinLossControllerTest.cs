@@ -71,7 +71,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers
             var productAccess = new ProductAccess(
                     new List<Product> { new Product { ProductCode = Product.BA } });
 
-            var expectedResponseData = new Tuple<MemoryStream, string>(new MemoryStream(new byte[] { 1 }), "application/octet-stream");
+            var expectedResponseData = new Tuple<Stream, string>(new MemoryStream(new byte[] { 1 }), "application/octet-stream");
 
             using (var controller = CreateController(productAccess))
             {
@@ -96,7 +96,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers
             using (var controller = CreateController())
             {
                 const string ExpectedResult = "json result";
-                _reportApiClient.PostAsyncStringAsync("api/CustomerWinLoss/Index", metaModel, userSession.Language).Returns(ExpectedResult);
+                _reportApiClient.PostStringAsync("api/CustomerWinLoss/Index", metaModel, userSession.Language).Returns(ExpectedResult);
 
                 // Action
                 var result = await controller.Index(metaModel) as JsonNetResult;

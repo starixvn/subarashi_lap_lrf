@@ -26,7 +26,7 @@ namespace Fanex.Athena.Controllers.Report.Result.ResultPopup
                 transId3rd,
                 languageCode = language
             };
-            return await _betListApiClient.PostAsyncStringAsync("/CardClubResultPopup/Index", model, language).ConfigureAwait(false);
+            return await _betListApiClient.PostStringAsync("/CardClubResultPopup/Index", model, language).ConfigureAwait(false);
         }
     }
 }

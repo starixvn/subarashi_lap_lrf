@@ -36,7 +36,7 @@
                 vendorProductId,
                 UserId = userSession.UserId.ToString()
             };
-            var kenoUrl = await _betListApiClient.PostAsyncStringAsync("/ResultKenoReport/GetKenoResultUrl",
+            var kenoUrl = await _betListApiClient.PostStringAsync("/ResultKenoReport/GetKenoResultUrl",
                 model, userSession.Language).ConfigureAwait(false);
 
             return Json(

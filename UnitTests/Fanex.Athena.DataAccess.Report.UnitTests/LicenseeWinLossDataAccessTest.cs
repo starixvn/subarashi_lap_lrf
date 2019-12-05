@@ -69,20 +69,21 @@
             base.FixtureTearDown();
         }
 
-        [Test]
-        public async Task GetSummaryWinloss_WhenCall_ParametersPassedCorrectly()
+        [TestCase(true)]
+        [TestCase(false)]
+        public async Task GetSummaryWinloss_WhenCall_ParametersPassedCorrectly(bool checkPromotionPrize)
         {
             // Arrange
             DataAccess.GetObjectDb(Arg.Is(GetSummaryWinlossSp)).Returns(ObjectDb);
 
             // Action
-            await DataAccess.GetSummaryWinloss(_metaModel, UserCurrencyList);
+            await DataAccess.GetSummaryWinloss(_metaModel, UserCurrencyList, checkPromotionPrize);
 
             // Assert
             Assert.Multiple(() =>
             {
                 ObjectDb.Received(1).SetParameterValue("reporttype", _metaModel.ReportBy);
-                AssertCommonSpParameters(isDrilldown: false);
+                AssertCommonSpParameters(isDrilldown: false, checkPromotionPrize);
             });
         }
 
@@ -206,37 +207,39 @@
             });
         }
 
-        [Test]
-        public async Task GetCustomerWinlossDetail_WhenCall_ParametersPassedCorrectly()
+        [TestCase(true)]
+        [TestCase(false)]
+        public async Task GetCustomerWinlossDetail_WhenCall_ParametersPassedCorrectly(bool checkPromotionPrize)
         {
             // Arrange
             DataAccess.GetObjectDb(Arg.Is(GetCustomerWinlossDetailSp)).Returns(ObjectDb);
 
             // Action
-            await DataAccess.GetCustomerWinlossDetail(_metaModel, UserCurrencyList);
+            await DataAccess.GetCustomerWinlossDetail(_metaModel, UserCurrencyList, checkPromotionPrize);
 
             // Assert
             Assert.Multiple(() =>
             {
                 ObjectDb.Received(1).SetParameterValue("custid", _metaModel.DrillDownCustomerId);
-                AssertCommonSpParameters(isDrilldown: true);
+                AssertCommonSpParameters(isDrilldown: true, checkPromotionPrize);
             });
         }
 
-        [Test]
-        public async Task GetAgentWinlossDetail_WhenCall_ParametersPassedCorrectly()
+        [TestCase(true)]
+        [TestCase(false)]
+        public async Task GetAgentWinlossDetail_WhenCall_ParametersPassedCorrectly(bool checkPromotionPrize)
         {
             // Arrange
             DataAccess.GetObjectDb(Arg.Is(GetAgentWinlossDetailSp)).Returns(ObjectDb);
 
             // Action
-            await DataAccess.GetAgentWinlossDetail(_metaModel, UserCurrencyList);
+            await DataAccess.GetAgentWinlossDetail(_metaModel, UserCurrencyList, checkPromotionPrize);
 
             // Assert
-            AssertCommonSpParameters(isDrilldown: true);
+            AssertCommonSpParameters(isDrilldown: true, checkPromotionPrize);
         }
 
-        private void AssertCommonSpParameters(bool isDrilldown)
+        private void AssertCommonSpParameters(bool isDrilldown, bool checkPromotionPrize)
         {
             ObjectDb.Received(1).SetParameterValue("licenseeid", _metaModel.LicenseeId);
             ObjectDb.Received(1).SetParameterValue("AgentList", _metaModel.AgentListXml);
@@ -247,6 +250,7 @@
             ObjectDb.Received(1).SetParameterValue("showNG", false);
             ObjectDb.Received(1).SetParameterValue("BaseCurrency", _metaModel.BaseCurrency);
             ObjectDb.Received(1).SetParameterValue("DefaultBaseCurrency", _metaModel.DefaultBaseCurrency);
+            ObjectDb.Received(1).SetParameterValue("CheckPromotionPrize", checkPromotionPrize);
         }
 
         private IList<ProductOption> GetProductOptions()

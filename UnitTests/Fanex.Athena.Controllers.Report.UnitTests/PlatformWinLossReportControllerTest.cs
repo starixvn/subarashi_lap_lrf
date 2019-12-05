@@ -70,7 +70,7 @@
                 // Assert
                 Assert.Multiple(async () =>
                 {
-                    await _reportAPIClient.Received().PostAsyncStringAsync("api/PlatformWinLoss/GetSummaryData", metaModel, SessionService.UserSession.Language);
+                    await _reportAPIClient.Received().PostStringAsync("api/PlatformWinLoss/GetSummaryData", metaModel, SessionService.UserSession.Language);
                 });
             }
         }
@@ -89,7 +89,7 @@
                 // Assert
                 Assert.Multiple(async () =>
                 {
-                    await _reportAPIClient.Received().PostAsyncStringAsync("api/PlatformWinLoss/GetMemberData", metaModel, SessionService.UserSession.Language);
+                    await _reportAPIClient.Received().PostStringAsync("api/PlatformWinLoss/GetMemberData", metaModel, SessionService.UserSession.Language);
                 });
             }
         }
@@ -102,7 +102,7 @@
             var metaModel = CreateMetaModel(level, true);
             var language = SessionService.UserSession.Language;
 
-            var expectedResponse = new Tuple<MemoryStream, string>(new MemoryStream(new byte[] { 1 }), "application/octet-stream");
+            var expectedResponse = new Tuple<Stream, string>(new MemoryStream(new byte[] { 1 }), "application/octet-stream");
             _reportAPIClient.PostAsync(apiUrl, metaModel, language, MediaType.MsgPack).Returns(expectedResponse);
 
             using (var controller = CreateController())

@@ -172,7 +172,7 @@
                         var response = "Binary Data";
                         ajaxOption.success(response);
 
-                        expect(Downloader.download).toHaveBeenCalledWith(response, "CustomerWinLoss.xls");
+                        expect(Downloader.download).toHaveBeenCalledWith(response, "CustomerWinLoss.xlsx");
                     });
                 });
 
@@ -422,14 +422,6 @@
                     expect(CustomerWinLossOption.setGroupHeaderColumns).not.toHaveBeenCalled();
                 });
 
-                it("Promotion Prize link should be hide if response data is empty", function () {
-                    setFixtures('<div id="ExportPromotionPrizeLink"></div>');
-
-                    CustomerWinLoss.bindData({ totalRows: 0 });
-
-                    expect($("#ExportPromotionPrizeLink").css("display")).toEqual("none");
-                });
-
                 it("grid should be rendered if response data is not empty", function () {
                     CustomerWinLoss.bindData({ totalRows: 2000, dataList: [1] });
 
@@ -452,7 +444,7 @@
                 it("Promotion Prize link should be hide if no Promotion Prize ticket counted", function () {
                     setFixtures('<div id="ExportPromotionPrizeLink"></div>');
 
-                    CustomerWinLoss.bindData({ totalRows: 1, dataList: [1], promotionPrize: '' });
+                    CustomerWinLoss.bindData({ totalRows: 0, dataList: [1], promotionPrize: '' });
 
                     expect($("#ExportPromotionPrizeLink").css("display")).toEqual("none");
                 });

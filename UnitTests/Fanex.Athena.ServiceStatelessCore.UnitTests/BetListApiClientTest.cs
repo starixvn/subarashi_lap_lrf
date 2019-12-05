@@ -21,61 +21,6 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
         private readonly string LANG = "vi-VN";
 
         [Test]
-        public async Task PostAsyncString_WhenCall_HttpRequestParamIsPassedCorrectly()
-        {
-            // Arrange
-            HttpRequestMessage passedRequest = null;
-            var httpResponse = new HttpResponseMessage
-            {
-                StatusCode = HttpStatusCode.OK,
-                Content = new StringContent(Result)
-            };
-            var httpMessageHandler = Substitute.ForPartsOf<MockHttpMessageHandler>();
-            httpMessageHandler.Send(Arg.Any<HttpRequestMessage>()).Returns(x =>
-            {
-                passedRequest = x.ArgAt<HttpRequestMessage>(0);
-
-                return httpResponse;
-            });
-            var client = new HttpClient(httpMessageHandler) { BaseAddress = new Uri(APIURL) };
-            var betListApiClient = new BetListApiClient(client);
-
-            // Action
-            var result = await betListApiClient.PostAsyncStringAsync(TestPath, TestValue, LANG).ConfigureAwait(false);
-
-            // Assert
-            Assert.That(passedRequest.Headers.GetValues("Language").ElementAt(0), Is.EqualTo(LANG));
-            Assert.That(passedRequest.Headers.GetValues("Accept").ElementAt(0), Is.EqualTo("application/json"));
-            Assert.That(passedRequest.Content, Is.Not.Null);
-            Assert.That(result, Is.EqualTo(Result));
-        }
-
-        [Test]
-        public async Task PostAsyncString_WhenCall_ReturnCorrectByteArrayResult()
-        {
-            // Arrange
-            var byteArrayContent = new byte[] { 1, 2, 3 };
-            var httpResponse = new HttpResponseMessage
-            {
-                StatusCode = HttpStatusCode.OK,
-                Content = new ByteArrayContent(byteArrayContent)
-            };
-            var httpMessageHandler = Substitute.ForPartsOf<MockHttpMessageHandler>();
-            httpMessageHandler.Send(Arg.Any<HttpRequestMessage>()).Returns(httpResponse);
-            var client = new HttpClient(httpMessageHandler) { BaseAddress = new Uri(APIURL) };
-            var betListApiClient = new BetListApiClient(client);
-
-            // Action
-            var result = await betListApiClient.PostAsyncStringAsync(TestPath, TestValue, LANG).ConfigureAwait(false);
-
-            // Assert
-            Assert.That(result.Length, Is.EqualTo(3));
-            Assert.That(result[0], Is.EqualTo(byteArrayContent[0]));
-            Assert.That(result[1], Is.EqualTo(byteArrayContent[1]));
-            Assert.That(result[2], Is.EqualTo(byteArrayContent[2]));
-        }
-
-        [Test]
         public async Task PostAsync_WhenCall_ReturnCorrectResponse()
         {
             // Arrange
@@ -94,6 +39,28 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
 
             // Assert
             Assert.That(result.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+        }
+
+        [Test]
+        public async Task PostStreamAsync_WhenCall_ReturnCorrectResponse()
+        {
+            // Arrange
+            var httpResponse = new HttpResponseMessage
+            {
+                StatusCode = HttpStatusCode.OK,
+                Content = new StreamContent(new MemoryStream(new byte[] { 1 }))
+            };
+            var httpMessageHandler = Substitute.ForPartsOf<MockHttpMessageHandler>();
+            httpMessageHandler.Send(Arg.Any<HttpRequestMessage>()).Returns(httpResponse);
+            var client = new HttpClient(httpMessageHandler) { BaseAddress = new Uri(APIURL) };
+            var betListApiClient = new BetListApiClient(client);
+
+            // Action
+            var result = await betListApiClient.PostStreamAsync(TestPath, TestValue, LANG).ConfigureAwait(false);
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.That(result is Stream);
         }
     }
 }

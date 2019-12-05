@@ -85,7 +85,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    _betListApiClient.Received(1).PostAsyncStringAsync(
+                    _betListApiClient.Received(1).PostStringAsync(
                         Arg.Is<string>(x => x == "/PlayerAdminBetList/GetBetList"),
                         Arg.Is<PlayerRunningBetListMetalModel>(x => x.SortBy == expectedSortBy && x.SortOrder == expectedSortOrder),
                         Arg.Is<string>(x => x == language));
@@ -115,7 +115,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    _betListApiClient.Received(1).PostAsyncStringAsync(
+                    _betListApiClient.Received(1).PostStringAsync(
                         Arg.Is<string>(x => x == "/PlayerAdminBetList/GetBetList"),
                         Arg.Is<PlayerRunningBetListMetalModel>(x => x.PageSize == expectedPageSize),
                         Arg.Is<string>(x => x == language));
@@ -133,7 +133,7 @@
                 var language = FakeHelper.Create<string>();
                 StubUserSessionData(new UserAuthInfo { Language = language });
 
-                _betListApiClient.PostAsyncStream("/PlayerAdminBetList/Export", metaModel, language)
+                _betListApiClient.PostStreamAsync("/PlayerAdminBetList/Export", metaModel, language)
                     .Returns(new MemoryStream(new byte[] { 1 }));
 
                 // Action
@@ -142,7 +142,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    _betListApiClient.Received(1).PostAsyncStream(
+                    _betListApiClient.Received(1).PostStreamAsync(
                         Arg.Is<string>(x => x == "/PlayerAdminBetList/Export"),
                         Arg.Is(metaModel),
                         Arg.Is<string>(x => x == language));

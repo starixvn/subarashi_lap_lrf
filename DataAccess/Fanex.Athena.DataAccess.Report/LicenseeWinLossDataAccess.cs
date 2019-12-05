@@ -34,14 +34,16 @@
         }
 
         public async Task<SortableReportResultModel<LicenseeWinLoss>> GetSummaryWinloss(
-            LicenseeWinLossMetaModel metaModel, IDictionary<int, string> currencyList)
+            LicenseeWinLossMetaModel metaModel,
+            IDictionary<int, string> currencyList,
+            bool checkPromotionPrize = false)
         {
             const string UspName = "Lrf_Rpt_LicWinloss";
 
             using (var db = this.GetObjectDb(UspName))
             {
                 db.SetParameterValue("reporttype", metaModel.ReportBy);
-                UpdateUspParams(db, metaModel, false);
+                UpdateUspParams(db, metaModel, false, checkPromotionPrize);
 
                 using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))
                 {
@@ -52,14 +54,15 @@
 
         public async Task<SortableReportResultModel<LicenseeWinLoss>> GetCustomerWinlossDetail(
             LicenseeWinLossMetaModel metaModel,
-            IDictionary<int, string> currencyList)
+            IDictionary<int, string> currencyList,
+            bool checkPromotionPrize = false)
         {
             const string UspName = "Lrf_Rpt_LicWinlossDetail";
 
             using (var db = this.GetObjectDb(UspName))
             {
                 db.SetParameterValue("custid", metaModel.DrillDownCustomerId);
-                UpdateUspParams(db, metaModel, true);
+                UpdateUspParams(db, metaModel, true, checkPromotionPrize);
                 using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))
                 {
                     return GetData(reader, currencyList, metaModel, true);
@@ -67,13 +70,16 @@
             }
         }
 
-        public async Task<SortableReportResultModel<LicenseeWinLoss>> GetAgentWinlossDetail(LicenseeWinLossMetaModel metaModel, IDictionary<int, string> currencyList)
+        public async Task<SortableReportResultModel<LicenseeWinLoss>> GetAgentWinlossDetail(
+            LicenseeWinLossMetaModel metaModel,
+            IDictionary<int, string> currencyList,
+            bool checkPromotionPrize = false)
         {
             const string UspName = "Lrf_Rpt_LicWinlossDetail_Ag";
 
             using (var db = this.GetObjectDb(UspName))
             {
-                UpdateUspParams(db, metaModel, true);
+                UpdateUspParams(db, metaModel, true, checkPromotionPrize);
                 using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))
                 {
                     return GetData(reader, currencyList, metaModel, true);
@@ -189,7 +195,7 @@
             }).ToList();
         }
 
-        private void UpdateUspParams(IObjectDb db, LicenseeWinLossMetaModel metaModel, bool drilldown)
+        private void UpdateUspParams(IObjectDb db, LicenseeWinLossMetaModel metaModel, bool drilldown, bool checkPromotionPrize)
         {
             db.SetParameterValue("licenseeid", metaModel.LicenseeId);
             db.SetParameterValue("AgentList", metaModel.AgentListXml);
@@ -199,6 +205,7 @@
             db.SetParameterValue("movebetsday", _balanceUpDataAccess.GetBalanceUp().MoveBetsDay);
             db.SetParameterValue("BaseCurrency", metaModel.BaseCurrency);
             db.SetParameterValue("DefaultBaseCurrency", metaModel.DefaultBaseCurrency);
+            db.SetParameterValue("CheckPromotionPrize", checkPromotionPrize);
 
             foreach (var product in metaModel.ProductOptions)
             {

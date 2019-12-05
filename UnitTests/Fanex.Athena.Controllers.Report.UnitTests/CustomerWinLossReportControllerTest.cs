@@ -72,7 +72,7 @@
         {
             // Arrange
             var language = SessionService.UserSession.Language;
-            var expectedResponseData = new Tuple<MemoryStream, string>(new MemoryStream(new byte[] { 1 }), "application/octet-stream");
+            var expectedResponseData = new Tuple<Stream, string>(new MemoryStream(new byte[] { 1 }), "application/octet-stream");
 
             var metaModel = new CustomerWinLossMetaModel { IsExportExcel = true };
 
@@ -99,7 +99,7 @@
             using (var controller = CreateController())
             {
                 const string ExpectedResult = "json result";
-                _reportApiClient.PostAsyncStringAsync("api/CustomerWinLoss/Index",
+                _reportApiClient.PostStringAsync("api/CustomerWinLoss/Index",
                     Arg.Any<CustomerWinLossMetaModel>(), userSession.Language).Returns(ExpectedResult);
 
                 // Action
