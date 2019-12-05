@@ -25,10 +25,10 @@ const DataGrid = (props) => {
     }, [props.requestParam])
 
     useEffect(() => {
-        const { gridData } = props;
+        const { gridData, requestParam } = props;
 
-        if(gridData && gridData.totalPage && gridData.totalPage !== pagingOption.totalPage){
-            setPagingOption({ ...pagingOption, totalPage: gridData.totalPage });
+        if(gridData && gridData.totalPage !== undefined){
+            setPagingOption({ pageIndex: requestParam.pageIndex, totalPage: gridData.totalPage });
         }
     }, [props.gridData])
 

@@ -1744,12 +1744,14 @@ var DataGrid = function DataGrid(props) {
     getData(param);
   }, [props.requestParam]);
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    var gridData = props.gridData;
+    var gridData = props.gridData,
+        requestParam = props.requestParam;
 
-    if (gridData && gridData.totalPage && gridData.totalPage !== pagingOption.totalPage) {
-      setPagingOption(_objectSpread({}, pagingOption, {
+    if (gridData && gridData.totalPage !== undefined) {
+      setPagingOption({
+        pageIndex: requestParam.pageIndex,
         totalPage: gridData.totalPage
-      }));
+      });
     }
   }, [props.gridData]);
 
