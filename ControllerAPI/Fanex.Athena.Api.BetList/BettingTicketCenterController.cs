@@ -13,7 +13,6 @@
     using Model.BetList.MetaModel;
 
     using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
 
     [ApiFunctionAuthorization(PermissionKeys.BettingTicketCenter)]
     public class BettingTicketCenterController : BaseApiController
@@ -21,11 +20,9 @@
         private readonly IBetListApiClient _betListApiClient;
 
         public BettingTicketCenterController(
-            ISessionService sessionService,
-            IProductService productService,
             ILanguageService langService,
             IBetListApiClient betListApiClient)
-            : base(sessionService, productService, langService)
+            : base(langService)
         {
             _betListApiClient = betListApiClient;
         }

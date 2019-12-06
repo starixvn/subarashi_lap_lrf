@@ -19,7 +19,6 @@
     using Model.Report.MetaModel;
 
     using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
 
     [ApiFunctionAuthorization(PermissionKeys.ReportExchangeWinLoss)]
     public class ExchangeWinLossReportController : ApiReportBaseController
@@ -29,12 +28,10 @@
         private readonly IExchangeWinLossDataAccess _dataAccess;
 
         public ExchangeWinLossReportController(
-            ISessionService sessionService,
-            IProductService productService,
             ILanguageService langService,
             IReportSettingService reportSettingService,
             IExchangeWinLossDataAccess dataAccess)
-            : base(sessionService, productService, langService)
+            : base(langService)
         {
             _reportSettingService = reportSettingService;
             _dataAccess = dataAccess;

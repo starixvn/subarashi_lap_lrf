@@ -17,7 +17,6 @@
     using Model.Report.MetaModel;
 
     using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
 
     [ApiFunctionAuthorization(PermissionKeys.ReportCustomerPendingFunds)]
     public class CustomerPendingFundsReportController : ApiReportBaseController
@@ -30,12 +29,10 @@
 
         public CustomerPendingFundsReportController(
             ICustPendingFundsDataAccess custPendingFundsDataAccess,
-            ISessionService sessionService,
-            IProductService productService,
             ILanguageService langService,
             ILicenseeSettingService licenseeSettingService
             )
-            : base(sessionService, productService, langService)
+            : base(langService)
         {
             _licenseeSettingService = licenseeSettingService;
             _custPendingFundsDataAccess = custPendingFundsDataAccess;

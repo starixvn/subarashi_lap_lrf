@@ -22,7 +22,6 @@ namespace Fanex.Athena.Api.CustomerLog
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Customer.DTO.CustomerLog;
     using Fanex.Athena.Model.Customer.ViewModel.CustomerLog;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     using RazorEngine;
     using RazorEngine.Templating;
@@ -30,7 +29,6 @@ namespace Fanex.Athena.Api.CustomerLog
     using Resources;
 
     using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
 
     [ApiFunctionAuthorization(PermissionKeys.CustomerInfoCustomerLog)]
     public partial class LogController : BaseApiController
@@ -59,14 +57,12 @@ namespace Fanex.Athena.Api.CustomerLog
         private readonly IFileSystem _fileSystem;
 
         public LogController(
-            ISessionService sessionService,
-            IProductService productService,
             ILanguageService languageService,
             ICustomerLogDataAccess customerLogDataAccess,
             ILogInLogDataAccess logInLogDataAccess,
             IAppSettings appSettings,
             IFileSystem fileSystem)
-        : base(sessionService, productService, languageService)
+        : base(languageService)
         {
             _customerLogDataAccess = customerLogDataAccess;
             _logInLogDataAccess = logInLogDataAccess;

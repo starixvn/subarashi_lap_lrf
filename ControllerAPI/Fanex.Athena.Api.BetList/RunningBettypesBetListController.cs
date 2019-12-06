@@ -21,7 +21,6 @@ namespace Fanex.Athena.Api.BetList
     using Model.BetList.MetaModel;
 
     using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
     using Service.StatelessCore.Interfaces;
     using Fanex.Athena.Model.Auth.DataDomain;
 
@@ -43,13 +42,11 @@ namespace Fanex.Athena.Api.BetList
         private const string BONTeamToScoreBettypes = "26,145,146,433,170,188,427";
 
         public RunningBettypesBetListController(
-            ISessionService sessionService,
-            IProductService productService,
             ILanguageService languageService,
             IAuthorizationService authorizationService,
             IBetListApiClient betListApiClient,
             IBalanceUpDataAccess balanceUpDataAccess)
-        : base(sessionService, productService, languageService, authorizationService, betListApiClient, balanceUpDataAccess)
+        : base(languageService, authorizationService, betListApiClient, balanceUpDataAccess)
         {
         }
 

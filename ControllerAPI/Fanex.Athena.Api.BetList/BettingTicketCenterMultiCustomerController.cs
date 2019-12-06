@@ -17,7 +17,6 @@
     using Resources;
 
     using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
 
     [ApiFunctionAuthorization(PermissionKeys.BettingTicketCenter)]
     public class BettingTicketCenterMultiCustomerController : BaseApiController
@@ -29,12 +28,10 @@
         private readonly IBetListApiClient _betListApiClient;
 
         public BettingTicketCenterMultiCustomerController(
-            ISessionService sessionService,
-            IProductService productService,
             ILanguageService langService,
             IAppSettings appSettings,
             IBetListApiClient betListApiClient)
-            : base(sessionService, productService, langService)
+            : base(langService)
         {
             _appSettings = appSettings;
             _betListApiClient = betListApiClient;

@@ -22,12 +22,10 @@ namespace Fanex.Athena.Api.Report
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     using Model.Core.ResultModel;
 
     using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
 
     [ApiFunctionAuthorization(PermissionKeys.ReportWinLossByLeague)]
     public class WinLossByLeagueReportController : ApiReportBaseController
@@ -37,12 +35,10 @@ namespace Fanex.Athena.Api.Report
         private readonly IAppSettings _appSettings;
 
         public WinLossByLeagueReportController(
-            ISessionService sessionService,
-            IProductService productService,
             ILanguageService langService,
             IWinLossByLeagueDataAccess winlossByLeagueService,
             IAppSettings appSetting)
-            : base(sessionService, productService, langService)
+            : base(langService)
         {
             _winlossByLeagueDataAccess = winlossByLeagueService;
             _appSettings = appSetting;

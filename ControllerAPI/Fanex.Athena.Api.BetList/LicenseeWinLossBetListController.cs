@@ -14,7 +14,6 @@
     using Model.BetList.MetaModel;
 
     using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
     using Service.StatelessCore.Interfaces;
 
     [ApiFunctionAuthorization(PermissionKeys.ReportLicenseeWinLoss, PermissionKeys.ReportWinLossByProduct, PermissionKeys.ReportColossusBetsWinLoss)]
@@ -24,14 +23,12 @@
         private readonly IReportSettingService _reportSettingService;
 
         public LicenseeWinLossBetListController(
-            ISessionService sessionService,
-            IProductService productService,
             ILanguageService languageService,
             IAuthorizationService authorizationService,
             IBetListApiClient betListApiClient,
             IBalanceUpDataAccess balanceUpDataAccess,
             IReportSettingService reportSettingService)
-        : base(sessionService, productService, languageService, authorizationService, betListApiClient, balanceUpDataAccess)
+        : base(languageService, authorizationService, betListApiClient, balanceUpDataAccess)
         {
             _reportSettingService = reportSettingService;
         }

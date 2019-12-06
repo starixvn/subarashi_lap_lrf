@@ -7,12 +7,10 @@
 
     using DataAccess.Report.Interfaces;
     using Fanex.Athena.Model.Auth.DataDomain;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     using Model.Report.MetaModel;
 
     using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
 
     [ApiFunctionAuthorization(PermissionKeys.ReportLicenseeWinLossByTimeZone)]
     public class LicenseeWinLossByTimeZoneReportController : ApiReportBaseController
@@ -20,11 +18,9 @@
         private readonly ILicenseeWinLossByTimeZoneDataAccess _licenseeWinLossByTimeZoneDataAccess;
 
         public LicenseeWinLossByTimeZoneReportController(
-            ISessionService sessionService,
-            IProductService productService,
             ILanguageService langService,
             ILicenseeWinLossByTimeZoneDataAccess licenseeWinLossByTimeZoneDataAccess)
-            : base(sessionService, productService, langService)
+            : base(langService)
         {
             _licenseeWinLossByTimeZoneDataAccess = licenseeWinLossByTimeZoneDataAccess;
         }

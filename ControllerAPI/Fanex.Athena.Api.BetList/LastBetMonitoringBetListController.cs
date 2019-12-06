@@ -15,8 +15,6 @@
 
     using Model.BetList.MetaModel;
 
-    using Service.Core.Users.Interfaces;
-
     using VendorAdapter.Interfaces;
 
     [ApiFunctionAuthorization(PermissionKeys.ReportLastBetsMonitoring)]
@@ -29,13 +27,11 @@
         private readonly ICacheRefAdapter _cacheRefAdapter;
 
         public LastBetMonitoringBetListController(
-            ISessionService sessionService,
-            IProductService productService,
             ILanguageService languageService,
             IBetListApiClient betListApiClient,
             IMatchService matchService,
             ICacheRefAdapter cacheRefAdapter)
-        : base(sessionService, productService, languageService)
+        : base(languageService)
         {
             _betListApiClient = betListApiClient;
             _matchService = matchService;

@@ -19,12 +19,10 @@ namespace Fanex.Athena.Api.Report
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Service.Report.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     using Model.Report.ResultModel;
 
     using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
 
     public class WeeklyLiveMatchReportController : ApiReportBaseController
     {
@@ -32,10 +30,8 @@ namespace Fanex.Athena.Api.Report
 
         public WeeklyLiveMatchReportController(
             IWeeklyLiveMatchService service,
-            ISessionService sessionService,
-            IProductService productService,
             ILanguageService langService)
-            : base(sessionService, productService, langService)
+            : base(langService)
         {
             _weeklyLiveMatchService = service;
         }

@@ -20,7 +20,6 @@ namespace Fanex.Athena.Api.BetList
     using Model.BetList.MetaModel;
 
     using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
     using Service.StatelessCore.Interfaces;
 
     #endregion Using
@@ -29,13 +28,11 @@ namespace Fanex.Athena.Api.BetList
     public class PlatformWinLossBetListController : ApiBetListBaseController
     {
         public PlatformWinLossBetListController(
-            ISessionService sessionService,
-            IProductService productService,
             ILanguageService languageService,
             IAuthorizationService authorizationService,
             IBetListApiClient betListApiClient,
             IBalanceUpDataAccess balanceUpDataAccess)
-        : base(sessionService, productService, languageService, authorizationService, betListApiClient, balanceUpDataAccess)
+        : base(languageService, authorizationService, betListApiClient, balanceUpDataAccess)
         {
         }
 

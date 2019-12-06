@@ -37,7 +37,6 @@ namespace Fanex.Athena.Api.Report
     using Model.Core.ResultModel;
 
     using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
 
     [ApiFunctionAuthorization(PermissionKeys.ReportLicenseeWinLoss)]
     public class LicenseeWinLossReportController : ApiReportBaseController
@@ -47,12 +46,10 @@ namespace Fanex.Athena.Api.Report
         private readonly ILicenseeWinLossDataAccess _licenseeWinLossDataAccess;
 
         public LicenseeWinLossReportController(
-            ISessionService sessionService,
-            IProductService productService,
             IReportSettingService reportSettingService,
             ILanguageService langService,
             ILicenseeWinLossDataAccess licenseeWinLossDataAccess)
-            : base(sessionService, productService, langService)
+            : base(langService)
         {
             _reportSettingService = reportSettingService;
             _licenseeWinLossDataAccess = licenseeWinLossDataAccess;

@@ -15,7 +15,6 @@
     using Model.BetList.ViewModel;
 
     using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
 
     [ApiFunctionAuthorization(PermissionKeys.ReportExchangeWinLoss)]
     public class ExchangeWinLossBetListController : BaseApiController
@@ -25,13 +24,11 @@
         private readonly IAuthorizationService _authorizationService;
 
         public ExchangeWinLossBetListController(
-            ISessionService sessionService,
-            IProductService productService,
             ILanguageService languageService,
             IBetListApiClient betListApiClient,
             IAuthorizationService authorizationService)
 
-        : base(sessionService, productService, languageService)
+        : base(languageService)
         {
             _betListApiClient = betListApiClient;
             _authorizationService = authorizationService;
