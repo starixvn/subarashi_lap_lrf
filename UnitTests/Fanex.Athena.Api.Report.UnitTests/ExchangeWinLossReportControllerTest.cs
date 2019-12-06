@@ -40,14 +40,21 @@
             });
 
             _dataAccess = Substitute.For<IExchangeWinLossDataAccess>();
-            _controller = Substitute.ForPartsOf<ExchangeWinLossReportController>(
-                SessionService,
-                ProductService,
-                LangService,
-                _reportSettingService,
-                _dataAccess);
+            CreateController();
 
             MockSessionData();
+        }
+
+        private void CreateController()
+        {
+            _controller = new ExchangeWinLossReportController(
+                            LangService,
+                            _reportSettingService,
+                            _dataAccess)
+            {
+                SessionService = SessionService,
+                ProductService = ProductService
+            };
         }
 
         [OneTimeTearDown]

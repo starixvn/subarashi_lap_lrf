@@ -38,18 +38,24 @@
 
             _dataAccess = Substitute.For<ISpecialLicenseeWinLossDataAccess>();
             _reportSettingService = Substitute.For<IReportSettingService>();
-
-            _controller = Substitute.ForPartsOf<SpecialLicenseeWinLossReportController>(
-                SessionService,
-                ProductService,
-                _reportSettingService,
-                LangService,
-                _dataAccess);
+            CreateController();
 
             MockSessionData();
 
             _reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss, Arg.Any<string>())
                .Returns(new ReportSetting { MinDate = new DateTime(2018, 1, 1), MaxDate = new DateTime(2018, 1, 31), BaseCurrencies = "USD" });
+        }
+
+        private void CreateController()
+        {
+            _controller = new SpecialLicenseeWinLossReportController(
+                            _reportSettingService,
+                            LangService,
+                            _dataAccess)
+            {
+                SessionService = SessionService,
+                ProductService = ProductService
+            };
         }
 
         [OneTimeTearDown]

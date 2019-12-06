@@ -33,8 +33,17 @@
             base.FixtureSetUp();
             _subsidiaryService = Substitute.For<ISubsidiaryService>();
             _service = Substitute.For<ISubsidiaryPerformanceService>();
-            _controller = Substitute.ForPartsOf<SubsidiaryPerformanceReportController>(SessionService, ProductService, LangService, _subsidiaryService, _service);
+            CreateController();
             MockSessionData();
+        }
+
+        private void CreateController()
+        {
+            _controller = new SubsidiaryPerformanceReportController(LangService, _subsidiaryService, _service)
+            {
+                SessionService = SessionService,
+                ProductService = ProductService
+            };
         }
 
         [OneTimeTearDown]

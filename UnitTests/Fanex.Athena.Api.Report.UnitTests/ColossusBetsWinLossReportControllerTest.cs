@@ -38,17 +38,23 @@
             _currencyValidation = Substitute.For<ICurrencyValidation>();
             _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
             _service = Substitute.For<IColossusBetsWinLossService>();
-
-            _controller = Substitute.ForPartsOf<ColossusBetsWinLossReportController>(_service,
-                SessionService, ProductService, LangService, _currencyValidation);
-
-            _controller.When(x => x.ExcelStream(Arg.Any<IWorkbook>(), Arg.Any<string>())).DoNotCallBase();
+            CreateController();
             StubUserSessionData(new UserAuthInfo
             {
                 CurrencyList = new Dictionary<int, string>(),
                 CurrencyAgentList = new Dictionary<int, int[]>()
             });
             StubLicenseeSessionData(new LicenseeAuthInfo { LicenseeId = 0 });
+        }
+
+        private void CreateController()
+        {
+            _controller = Substitute.ForPartsOf<ColossusBetsWinLossReportController>(_service,
+                            LangService, _currencyValidation);
+            _controller.SessionService = SessionService;
+            _controller.ProductService = ProductService;
+
+            _controller.When(x => x.ExcelStream(Arg.Any<IWorkbook>(), Arg.Any<string>())).DoNotCallBase();
         }
 
         [TearDown]

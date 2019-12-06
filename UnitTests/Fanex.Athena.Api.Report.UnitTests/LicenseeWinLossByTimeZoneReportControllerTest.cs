@@ -99,11 +99,13 @@
 
         private LicenseeWinLossByTimeZoneReportController CreateController()
         {
-            return Substitute.ForPartsOf<LicenseeWinLossByTimeZoneReportController>(
-                SessionService,
-                ProductService,
+            return new LicenseeWinLossByTimeZoneReportController(
                 LangService,
-                _dataAccess);
+                _dataAccess)
+            {
+                SessionService = SessionService,
+                ProductService = ProductService
+            };
         }
     }
 }

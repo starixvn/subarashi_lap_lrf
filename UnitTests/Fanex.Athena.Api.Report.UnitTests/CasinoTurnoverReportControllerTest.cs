@@ -48,10 +48,12 @@ namespace Fanex.Athena.Api.Report.UnitTests
         private CasinoTurnoverReportController CreateController()
         {
             return new CasinoTurnoverReportController(
-                SessionService,
-                ProductService,
                 LangService,
-                _casinoTurnoverDataAccess);
+                _casinoTurnoverDataAccess)
+            {
+                ProductService = ProductService,
+                SessionService = SessionService
+            };
         }
     }
 }

@@ -39,15 +39,7 @@
             _customerLogDataAccess = Substitute.For<ICustomerLogDataAccess>();
             _appSettings = Substitute.For<IAppSettings>();
             _logInLogDataAccess = Substitute.For<ILogInLogDataAccess>();
-
-            _controller = Substitute.ForPartsOf<LogController>(
-                SessionService,
-                ProductService,
-                LangService,
-                _customerLogDataAccess,
-                _logInLogDataAccess,
-                _appSettings,
-                Substitute.For<IFileSystem>());
+            CreateController();
         }
 
         [OneTimeTearDown]
@@ -147,6 +139,20 @@
                 Assert.That(rows.Select(x => x.LogId), Is.EqualTo(new[] { 4, 3, 2, 1 }));
                 Assert.That(rows[0].TrackingValue, Is.EqualTo("<doc GroupColor=\"Red\" />"));
             });
+        }
+
+        private void CreateController()
+        {
+            _controller = new LogController(
+                LangService,
+                _customerLogDataAccess,
+                _logInLogDataAccess,
+                _appSettings,
+                Substitute.For<IFileSystem>())
+            {
+                SessionService = SessionService,
+                ProductService = ProductService
+            };
         }
     }
 }

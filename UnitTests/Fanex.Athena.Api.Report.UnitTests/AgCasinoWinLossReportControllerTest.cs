@@ -43,15 +43,22 @@
             _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
 
             _dataAccess = Substitute.For<IThirdPartyWinLossDataAccess<ThirdPartyWinLoss>>();
-            _controller = Substitute.ForPartsOf<AgCasinoWinLossReportController>(_dataAccess, SessionService,
-                ProductService, LangService, _currencyValidation);
-            _controller.When(x => x.ExcelStream(Arg.Any<IWorkbook>(), Arg.Any<string>())).DoNotCallBase();
+            CreateController();
             StubUserSessionData(new UserAuthInfo
             {
                 CurrencyList = new Dictionary<int, string>(),
                 CurrencyAgentList = new Dictionary<int, int[]>()
             });
             StubLicenseeSessionData(new LicenseeAuthInfo { LicenseeId = 0 });
+        }
+
+        private void CreateController()
+        {
+            _controller = Substitute.ForPartsOf<AgCasinoWinLossReportController>(_dataAccess,
+                LangService, _currencyValidation);
+            _controller.SessionService = SessionService;
+            _controller.ProductService = ProductService;
+            _controller.When(x => x.ExcelStream(Arg.Any<IWorkbook>(), Arg.Any<string>())).DoNotCallBase();
         }
 
         [OneTimeTearDown]

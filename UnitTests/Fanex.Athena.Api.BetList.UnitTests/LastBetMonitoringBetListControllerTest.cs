@@ -98,11 +98,11 @@
                 var actual = await controller.Index(metaModel);
 
                 // Assert
-                Assert.Multiple((TestDelegate)(() =>
+                Assert.Multiple(() =>
                 {
                     Assert.That(expect, Is.EqualTo(actual));
-                    _betListApiClient.Received().PostAsync((string)ApiPath, (object)metaModel, (string)SessionLanguage);
-                }));
+                    _betListApiClient.Received().PostAsync(ApiPath, metaModel, SessionLanguage);
+                });
             }
         }
 
@@ -121,17 +121,21 @@
                 var actual = await controller.Index(metaModel);
 
                 // Assert
-                Assert.Multiple((TestDelegate)(() =>
+                Assert.Multiple(() =>
                 {
                     Assert.That(expect, Is.EqualTo(actual));
-                    _betListApiClient.Received().PostAsync((string)ApiPath, (object)metaModel, (string)SessionLanguage);
-                }));
+                    _betListApiClient.Received().PostAsync(ApiPath, metaModel, SessionLanguage);
+                });
             }
         }
 
         private LastBetMonitoringBetListController CreateController()
         {
-            return new LastBetMonitoringBetListController(SessionService, ProductService, LangService, _betListApiClient, _matchService, _cacheRefAdapter);
+            return new LastBetMonitoringBetListController(LangService, _betListApiClient, _matchService, _cacheRefAdapter)
+            {
+                SessionService = SessionService,
+                ProductService = ProductService
+            };
         }
     }
 }

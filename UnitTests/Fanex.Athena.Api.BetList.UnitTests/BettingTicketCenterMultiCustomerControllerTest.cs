@@ -142,7 +142,11 @@
 
         private BettingTicketCenterMultiCustomerController CreateController()
         {
-            return new BettingTicketCenterMultiCustomerController(SessionService, ProductService, LangService, AppSetting, _betListApiClient);
+            return new BettingTicketCenterMultiCustomerController(LangService, AppSetting, _betListApiClient)
+            {
+                SessionService = SessionService,
+                ProductService = ProductService
+            };
         }
     }
 }

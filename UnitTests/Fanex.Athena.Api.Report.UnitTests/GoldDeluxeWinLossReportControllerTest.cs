@@ -37,18 +37,22 @@
             _currencyValidation = Substitute.For<ICurrencyValidation>();
             _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
             _dataAccess = Substitute.For<IGoldDeluxeWinLossDataAccess>();
-
-            _controller = Substitute.ForPartsOf<GoldDeluxeWinLossReportController>(
-                _dataAccess,
-                SessionService,
-                ProductService,
-                LangService,
-                _currencyValidation
-                );
-
-            _controller.When(x => x.ExcelStream(Arg.Any<IWorkbook>(), Arg.Any<string>())).DoNotCallBase();
+            CreateController();
 
             MockSessionData();
+        }
+
+        private void CreateController()
+        {
+            _controller = Substitute.ForPartsOf<GoldDeluxeWinLossReportController>(
+                            _dataAccess,
+                            LangService,
+                            _currencyValidation
+                            );
+            _controller.SessionService = SessionService;
+            _controller.ProductService = ProductService;
+
+            _controller.When(x => x.ExcelStream(Arg.Any<IWorkbook>(), Arg.Any<string>())).DoNotCallBase();
         }
 
         [TearDown]

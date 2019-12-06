@@ -40,9 +40,15 @@
 
             _currencyValidation = Substitute.For<ICurrencyValidation>();
             _dataAccess = Substitute.For<IAgCasinoBalanceDataAccess>();
+            CreateController();
+        }
 
-            _controller = Substitute.ForPartsOf<AgCasinoBalanceReportController>(_dataAccess,
-                SessionService, ProductService, LangService, _currencyValidation);
+        private void CreateController()
+        {
+            _controller = Substitute.ForPartsOf<AgCasinoBalanceReportController>(
+                _dataAccess, LangService, _currencyValidation);
+            _controller.SessionService = SessionService;
+            _controller.ProductService = ProductService;
         }
 
         [TearDown]

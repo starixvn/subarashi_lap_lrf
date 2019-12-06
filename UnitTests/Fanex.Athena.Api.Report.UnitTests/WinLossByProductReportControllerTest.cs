@@ -28,6 +28,7 @@
         private ILicenseeSettingService _licenseeSettingService;
 
         private ICurrencyValidation _currencyValidation;
+
         [SetUp]
         public void SetUp()
         {
@@ -37,16 +38,20 @@
             _currencyValidation = Substitute.For<ICurrencyValidation>();
             _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
             _dataAccess = Substitute.For<IWinLossByProductDataAccess>();
-            _controller = Substitute.ForPartsOf<WinLossByProductReportController>(
-                SessionService, 
-                ProductService,
-                LangService,
-                _dataAccess,
-                _currencyValidation,
-                _licenseeSettingService,
-                AppSetting
-                );
+            CreateController();
+        }
 
+        private void CreateController()
+        {
+            _controller = Substitute.ForPartsOf<WinLossByProductReportController>(
+                            LangService,
+                            _dataAccess,
+                            _currencyValidation,
+                            _licenseeSettingService,
+                            AppSetting
+                            );
+            _controller.SessionService = SessionService;
+            _controller.ProductService = ProductService;
         }
 
         [TearDown]

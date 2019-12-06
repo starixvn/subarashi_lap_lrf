@@ -87,12 +87,12 @@
                 var actual = await controller.Index(Page, Rows, currencyId, CurrencyName, baseCurrency, fromDate, toDate, BetType, SortBy, SortOrder);
 
                 // Assert
-                Assert.Multiple((TestDelegate)(() =>
+                Assert.Multiple(() =>
                 {
                     NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
                     BetListApiClient.Received().PostAsync(
-(string)ApiPath,
-(object)Arg.Is<BetListMetaModel>((System.Linq.Expressions.Expression<Predicate<BetListMetaModel>>)(x => (bool)(x.UspKey == UspKey
+                        ApiPath,
+                        Arg.Is<BetListMetaModel>(x => x.UspKey == UspKey
                             && x.PageIndex == Page
                             && x.PageSize == Rows
                             && x.BetType == BetType
@@ -101,24 +101,25 @@
                             && x.CurrencyName == CurrencyName
                             && x.BaseCurrency == expectedBaseCurrency
                             && x.SortBy == SortBy
-                            && x.SortOrder == SortOrder))),
-(string)SessionLanguage
-                        );
-                }));
+                            && x.SortOrder == SortOrder),
+                        SessionLanguage);
+                });
             }
         }
 
         private WinlossByBetTypeBetListController CreateController()
         {
             return new WinlossByBetTypeBetListController(
-                SessionService,
-                ProductService,
                 LangService,
                 AuthorizationService,
                 BetListApiClient,
                 BalanceUpDataAccess,
                 _currencyValidation
-                );
+                )
+            {
+                SessionService = SessionService,
+                ProductService = ProductService
+            };
         }
     }
 }
