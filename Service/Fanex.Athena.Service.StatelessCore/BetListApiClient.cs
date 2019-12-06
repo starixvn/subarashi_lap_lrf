@@ -18,7 +18,7 @@
         public async Task<HttpResponseMessage> PostAsync(string path, object value, string language, int timeOut = 100)
         {
             return await HandleAsync(path, value, language, MediaType.Json,
-                  (response) => Task.FromResult(response)
+                 (response) => Task.FromResult(response)
                 , false, timeOut).ConfigureAwait(false);
         }
 
