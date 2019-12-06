@@ -18,9 +18,9 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests.Abstraction
 
         public Task<T> InvokeHandleAsync<T>(string path, object value, string language, MediaType mediaType,
             Func<HttpResponseMessage, Task<T>> codeBlock,
-            bool disposeHttpResponse = true)
+            bool disposeHttpResponse = true, int timeOut = 100)
         {
-            return HandleAsync<T>(path, value, language, mediaType, codeBlock, disposeHttpResponse);
+            return HandleAsync<T>(path, value, language, mediaType, codeBlock, disposeHttpResponse, timeOut);
         }
     }
 }
