@@ -10,10 +10,8 @@
     public class ApiReportBaseController : BaseApiController
     {
         protected ApiReportBaseController(
-            ISessionService sessionService,
-            IProductService productService,
             ILanguageService langService)
-            : base(sessionService, productService, langService)
+            : base(langService)
         {
         }
     }

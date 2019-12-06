@@ -41,10 +41,8 @@ namespace Fanex.Athena.Api.Report
 
         public ActiveCustomerSummaryReportController(
             IActiveCustomerSummaryDataAccess activeCustomerSummaryDataAccess,
-            ISessionService sessionService,
-            IProductService productService,
             ILanguageService langService)
-            : base(sessionService, productService, langService)
+            : base(langService)
         {
             _activeCustomerSummaryDataAccess = activeCustomerSummaryDataAccess;
         }
