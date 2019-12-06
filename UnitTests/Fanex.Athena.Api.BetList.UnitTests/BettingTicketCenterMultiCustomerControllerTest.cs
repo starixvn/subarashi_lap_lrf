@@ -86,7 +86,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    _betListApiClient.Received(1).PostAsync(ApiPath, metaModel, SessionLanguage);
+                    _betListApiClient.Received(1).PostAsync(ApiPath, metaModel, SessionLanguage, BetListTimeOut);
                 });
             }
         }
@@ -110,7 +110,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    _betListApiClient.Received(1).PostAsync(ApiPath, metaModel, SessionLanguage);
+                    _betListApiClient.Received(1).PostAsync(ApiPath, metaModel, SessionLanguage, BetListTimeOut);
                 });
             }
         }
@@ -135,7 +135,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    _betListApiClient.Received(1).PostAsync(ApiPath, metaModel, SessionLanguage);
+                    _betListApiClient.Received(1).PostAsync(ApiPath, metaModel, SessionLanguage, BetListTimeOut);
                 });
             }
         }

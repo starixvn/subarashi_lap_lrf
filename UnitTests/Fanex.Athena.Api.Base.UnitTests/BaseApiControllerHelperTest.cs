@@ -19,7 +19,7 @@
     public abstract class BaseApiControllerHelperTest
     {
         protected const int SessionLicenseeId = 1;
-
+        protected const int BetListTimeOut = 100;
         protected const string SessionLicenseeName = "Test";
 
         protected const int SessionUserId = 1;
@@ -57,6 +57,7 @@
 
             LangService.GetCurrentLanguage().Returns("en-US");
             LangService.When(x => x.SetPageCulture(Arg.Any<string>())).DoNotCallBase();
+            AppSetting.GetValue("BetListApiOutInSecond").Returns(BetListTimeOut.ToString());
         }
 
         [OneTimeTearDown]
