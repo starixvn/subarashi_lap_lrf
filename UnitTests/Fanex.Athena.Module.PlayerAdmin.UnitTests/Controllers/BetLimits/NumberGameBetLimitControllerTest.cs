@@ -48,14 +48,6 @@
             _cacheRefAdapter = null;
         }
 
-        [TearDown]
-        public void TearDown()
-        {
-            _service.ClearReceivedCalls();
-            _authService.ClearReceivedCalls();
-            _cacheRefAdapter.ClearReceivedCalls();
-        }
-
         [TestCase(false)]
         [TestCase(true)]
         public async Task GetSetting_WhenCall_ReturnCorrectViewModel(bool isEditable)

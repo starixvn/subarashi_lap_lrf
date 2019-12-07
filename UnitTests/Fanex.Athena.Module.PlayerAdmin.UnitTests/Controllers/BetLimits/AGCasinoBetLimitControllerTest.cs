@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Fanex.Athena.Controllers.Base.UnitTests;
-using Fanex.Athena.Model.Auth;
 using Fanex.Athena.Model.Auth.DataDomain;
 using Fanex.Athena.Model.Core.DTO.Common;
 using Fanex.Athena.Module.PlayerAdmin.Controllers;
@@ -10,8 +10,8 @@ using Fanex.Athena.Module.PlayerAdmin.MetaModel;
 using Fanex.Athena.Module.PlayerAdmin.Services.Interfaces;
 using Fanex.Athena.Resources;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
+using Fanex.Athena.UnitTest.Common.Extensions;
 using Fanex.Athena.UnitTest.Common.Helpers;
-using Newtonsoft.Json;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -44,49 +44,67 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers.BetLimits
             _authService = null;
         }
 
-        [OneTimeTearDown]
-        public void TearDown()
-        {
-            _service.ClearReceivedCalls();
-            _authService.ClearReceivedCalls();
-        }
-
         [TestCase("AGGroup1,AGGroup2,AGGroup3", "AGGroup1", "AGGroup1,AGGroup2,AGGroup3")]
         [TestCase("AGGroup2,AGGroup3", "AGGroup1", "AGGroup1,AGGroup2,AGGroup3")]
-        public async Task GetSetting_WhenCall_ReturnCorrectResult(string checkedGroupString, string agGroup, string expectedGroupString)
+        public async Task GetSetting_WhenCall_ReturnCorrectSettingData(string checkedGroupString, string agGroup, string expectedGroupString)
         {
             // Arrange
-            const bool IsEditable = true;
             var metaModel = FakeHelper.Create<PlayerBetLimitSelectMetaModel>();
-            _authService.HasPermissions(Arg.Any<UserAuthInfo>(), PermissionKeys.PlayerAdminBetLimit_Write).Returns(IsEditable);
 
-            var groupBettingTask = FakeHelper.Create<Task<IList<AgCasinoGame>>>();
-            _service.GetGroupBettingsAsync(SessionService.LicenseeSession.LicenseeName, metaModel.CurrencyId).Returns(groupBettingTask);
+            var groupBetting = FakeHelper.CreateMany<AgCasinoGame>().ToList();
+            _service.GetGroupBettingsAsync(SessionService.LicenseeSession.LicenseeName, metaModel.CurrencyId)
+                .Returns(Task.FromResult<IList<AgCasinoGame>>(groupBetting));
 
-            var settingTask = FakeHelper.Create<Task<AgCasinoBetSetting>>();
-            _service.GetBetSettingAsync(metaModel.CustId).Returns(settingTask);
-
-            var setting = await settingTask;
-            setting.CheckedGroups = checkedGroupString.Split(',');
+            var setting = FakeHelper.Create<AgCasinoBetSetting>(x => x.CheckedGroups, checkedGroupString.Split(','));
             setting.AgGroup = agGroup;
+            _service.GetBetSettingAsync(metaModel.CustId).Returns(Task.FromResult(setting));
 
             using (var controller = CreateController())
             {
                 // Action
-                var jsonResult = await controller.GetSetting(metaModel);
-                var result = JsonConvert.SerializeObject(jsonResult.Data);
-
-                setting.CheckedGroups = expectedGroupString.Split(',');
-                var expectedData = new
-                {
-                    Data = await groupBettingTask,
-                    BetSetting = setting,
-                    Editable = IsEditable && setting.IsEnabled && setting.IsLineEnabled
-                };
-                var expectedResult = JsonConvert.SerializeObject(expectedData);
+                var result = (await controller.GetSetting(metaModel)).Data;
+                var actualBetSetting = (AgCasinoBetSetting)result.GetValue("BetSetting");
 
                 // Assert
-                Assert.That(result, Is.EqualTo(expectedResult));
+                Assert.Multiple(() =>
+                {
+                    Assert.That(result.GetValue("Data"), Is.EqualTo(groupBetting));
+                    Assert.That(string.Join(",", actualBetSetting.CheckedGroups), Is.EqualTo(expectedGroupString));
+                });
+            }
+        }
+
+        [TestCase(false, false, false, false)]
+        [TestCase(true, true, true, true)]
+        [TestCase(true, false, true, false)]
+        [TestCase(false, true, true, false)]
+        [TestCase(true, true, false, false)]
+        public async Task GetSetting_WhenCall_ReturnCorrectEditableStatus(bool hasPermision, bool isEnabled, bool isLineEnabled, bool expected)
+        {
+            // Arrange
+            var metaModel = FakeHelper.Create<PlayerBetLimitSelectMetaModel>();
+
+            _authService.HasPermissions(DefaultUserSession, PermissionKeys.PlayerAdminBetLimit_Write).Returns(hasPermision);
+
+            var groupBetting = FakeHelper.CreateMany<AgCasinoGame>().ToList();
+            _service.GetGroupBettingsAsync(SessionService.LicenseeSession.LicenseeName, metaModel.CurrencyId)
+                .Returns(Task.FromResult<IList<AgCasinoGame>>(groupBetting));
+
+            var setting = FakeHelper.Create<AgCasinoBetSetting>(x => x.CheckedGroups, Enumerable.Empty<string>());
+            setting.IsEnabled = isEnabled;
+            setting.IsLineEnabled = isLineEnabled;
+            _service.GetBetSettingAsync(metaModel.CustId).Returns(Task.FromResult(setting));
+
+            using (var controller = CreateController())
+            {
+                // Action
+                var result = (await controller.GetSetting(metaModel)).Data;
+
+                // Assert
+                Assert.Multiple(() =>
+                {
+                    Assert.That(result.GetValue("Editable"), Is.EqualTo(expected));
+                });
             }
         }
 
@@ -96,30 +114,32 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers.BetLimits
             // Arrange
             var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<AgCasinoBetLimitMetaModel>>();
 
-            var betSetting = FakeHelper.Create<AgCasinoBetSetting>();
-            betSetting.IsEnabled = false;
+            var betSetting = FakeHelper.Create<AgCasinoBetSetting>(x => x.IsEnabled, false);
             _service.GetBetSettingAsync(metaModel.CustId).Returns(Task.FromResult(betSetting));
 
-            var expectedResult = JsonConvert.SerializeObject(new { Code = 1, Message = ViewResources.FunctionDeniedMsg });
+            var expectedResult = new { Code = 1, Message = ViewResources.FunctionDeniedMsg };
 
             using (var controller = CreateController())
             {
                 // Action
-                var jsonResult = await controller.UpdateSetting(metaModel);
-                var result = JsonConvert.SerializeObject(jsonResult.Data);
+                var result = (await controller.UpdateSetting(metaModel)).Data as ResultInfo;
 
                 // Assert
-                Assert.That(result, Is.EqualTo(expectedResult));
+                Assert.Multiple(() =>
+                {
+                    Assert.That(result.Code, Is.EqualTo(expectedResult.Code));
+                    Assert.That(result.Message, Is.EqualTo(expectedResult.Message));
+                });
             }
         }
 
         [Test]
-        public async Task UpdateSetting_ValidDataForSettingAndResultCodeIsZero_ReturnsCorrectResult()
+        public async Task UpdateSetting_UpdateSuccessfully_ReturnsSuccessResult()
         {
             // Arrange
             var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<AgCasinoBetLimitMetaModel>>();
-            var betSetting = FakeHelper.Create<AgCasinoBetSetting>();
-            betSetting.IsEnabled = true;
+
+            var betSetting = FakeHelper.Create<AgCasinoBetSetting>(x => x.IsEnabled, true);
             _service.GetBetSettingAsync(metaModel.CustId).Returns(Task.FromResult(betSetting));
 
             IResultInfo expectedResult = new ResultInfo { Code = 0 };
@@ -133,22 +153,22 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers.BetLimits
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    Assert.That(result.Code, Is.EqualTo(0));
+                    Assert.That(result.Code, Is.EqualTo(expectedResult.Code));
                     Assert.That(result.Message, Is.EqualTo(ViewResources.UpdateSuccess));
                 });
             }
         }
 
         [Test]
-        public async Task UpdateSetting_ValidDataForSettingAndResultCodeNotZero_ReturnsCorrectResult()
+        public async Task UpdateSetting_UpdateFailed_ReturnsFailedResult()
         {
             // Arrange
             var metaModel = FakeHelper.Create<PlayerBetLimitUpdateMetaModel<AgCasinoBetLimitMetaModel>>();
-            var betSetting = FakeHelper.Create<AgCasinoBetSetting>();
-            betSetting.IsEnabled = true;
+
+            var betSetting = FakeHelper.Create<AgCasinoBetSetting>(x => x.IsEnabled, true);
             _service.GetBetSettingAsync(metaModel.CustId).Returns(Task.FromResult(betSetting));
 
-            IResultInfo expectedResult = new ResultInfo { Code = 0 };
+            IResultInfo expectedResult = new ResultInfo { Code = 0, Message = "Error" };
             _service.UpdateSettingAsync(metaModel).Returns(Task.FromResult(expectedResult));
 
             using (var controller = CreateController())
@@ -157,7 +177,12 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers.BetLimits
                 var result = (await controller.UpdateSetting(metaModel)).Data as ResultInfo;
 
                 // Assert
-                Assert.That(result, Is.EqualTo(expectedResult));
+                // Assert
+                Assert.Multiple(() =>
+                {
+                    Assert.That(result.Code, Is.EqualTo(expectedResult.Code));
+                    Assert.That(result.Message, Is.EqualTo(expectedResult.Message));
+                });
             }
         }
 
@@ -166,10 +191,10 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers.BetLimits
             var result = new AGCasinoBetLimitController(_service)
             {
                 ControllerContext = ControllerContext,
-                AuthServiceInstance = _authService
+                AuthServiceInstance = _authService,
+                LangService = LangService,
+                SessionServiceInstance = SessionService
             };
-            result.LangService = LangService;
-            result.SessionServiceInstance = SessionService;
 
             return result;
         }

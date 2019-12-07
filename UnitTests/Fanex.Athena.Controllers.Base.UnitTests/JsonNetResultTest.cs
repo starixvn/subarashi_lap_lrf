@@ -1,20 +1,17 @@
 ﻿namespace Fanex.Athena.Controllers.Base.UnitTests
 {
     using System;
-    using System.IO;
     using System.Web.Mvc;
     using System.Web.Routing;
 
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Serialization;
     using NSubstitute;
     using NUnit.Framework;
     using Fanex.Athena.Controllers.Base;
     using System.Web;
+    using System.Text;
 
     public class JsonNetResultTest
     {
-
         [Test]
         public void ExecuteResult_NullContext_ThrowsArgumentNullException()
         {
@@ -22,55 +19,38 @@
             var jsonNetResult = CreateObject();
 
             // Action
-            var exception = Assert.Throws<ArgumentNullException>(() => jsonNetResult.ExecuteResult(null));
+            void testDelegate() => jsonNetResult.ExecuteResult(null);
 
             // Assert
-            StringAssert.Contains("context", exception.Message);
+            Assert.Throws<ArgumentNullException>(testDelegate);
         }
 
         [Test]
         public void ExecuteResult_DenyGet_ThrowsInvalidOperationException()
         {
             // Arrange
-            var request = Substitute.For<HttpRequestBase>();
-            request.HttpMethod.Returns("GET");
-            var mockHttpContext = Substitute.For<HttpContextBase>();
-            mockHttpContext.Request.Returns(request);
-            var context = new ControllerContext(mockHttpContext, new RouteData(), Substitute.For<ControllerBase>());
+            var context = CreateContext("GET");
             var jsonNetResult = CreateObject();
             jsonNetResult.JsonRequestBehavior = JsonRequestBehavior.DenyGet;
 
             // Action
-            var exception = Assert.Throws<InvalidOperationException>(() => jsonNetResult.ExecuteResult(context));
+            void testDelegate() => jsonNetResult.ExecuteResult(context);
 
             // Assert
-            StringAssert.Contains("JSON GET is not allowed", exception.Message);
+            Assert.Throws<InvalidOperationException>(testDelegate);
         }
 
         [Test]
-        public void ExecuteResult_AllowGetAndNullDataAndNullJsonString_ThrowsInvalidOperationException()
+        public void ExecuteResult_DataIsNull_DoNotThing()
         {
             // Arrange
-            var request = Substitute.For<HttpRequestBase>();
-            request.HttpMethod.Returns("POST");
-            var mockHttpContext = Substitute.For<HttpContextBase>();
-            mockHttpContext.Request.Returns(request);
-
-            const string jsonString = null;
-            var jsonNetResult = CreateObject(jsonString);
+            var jsonNetResult = CreateObject();
             jsonNetResult.Data = null;
-
-            var response = Substitute.For<HttpResponseBase>();
-            response.ContentType = string.IsNullOrEmpty(jsonNetResult.ContentType) ? "application/json" : jsonNetResult.ContentType;
-            if (jsonNetResult.ContentEncoding != null)
-            {
-                response.ContentEncoding = jsonNetResult.ContentEncoding;
-            }
-
-            mockHttpContext.Response.Returns(response);
-
             jsonNetResult.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
-            var context = new ControllerContext(mockHttpContext, new RouteData(), Substitute.For<ControllerBase>());
+
+            var context = CreateContext("POST");
+            var response = Substitute.For<HttpResponseBase>();
+            context.HttpContext.Response.Returns(response);
 
             // Action
             jsonNetResult.ExecuteResult(context);
@@ -78,33 +58,48 @@
             // Assert
             Assert.Multiple(() =>
             {
-                response.Received(0).Write(jsonString);
+                response.DidNotReceiveWithAnyArgs().Write(Arg.Any<string>());
             });
         }
 
         [Test]
-        public void ExecuteResult_AllowGetNotNullJsonString_ThrowsInvalidOperationException()
+        public void ExecuteResult_WhenCallWithContentType_UpdateResponseContentType()
         {
             // Arrange
-            var request = Substitute.For<HttpRequestBase>();
-            request.HttpMethod.Returns("POST");
-            var mockHttpContext = Substitute.For<HttpContextBase>();
-            mockHttpContext.Request.Returns(request);
-
-            const string jsonString = "json string";
-            var jsonNetResult = CreateObject(jsonString);
-
-            var response = Substitute.For<HttpResponseBase>();
-            response.ContentType = string.IsNullOrEmpty(jsonNetResult.ContentType) ? "application/json" : jsonNetResult.ContentType;
-            if (jsonNetResult.ContentEncoding != null)
-            {
-                response.ContentEncoding = jsonNetResult.ContentEncoding;
-            }
-
-            mockHttpContext.Response.Returns(response);
-
+            var jsonNetResult = CreateObject();
+            jsonNetResult.Data = null;
             jsonNetResult.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
-            var context = new ControllerContext(mockHttpContext, new RouteData(), Substitute.For<ControllerBase>());
+            jsonNetResult.ContentType = "Test";
+            jsonNetResult.ContentEncoding = Encoding.Default;
+
+            var context = CreateContext("POST");
+            var response = Substitute.For<HttpResponseBase>();
+            context.HttpContext.Response.Returns(response);
+
+            // Action
+            jsonNetResult.ExecuteResult(context);
+
+            // Assert
+            Assert.Multiple(() =>
+            {
+                Assert.That(response.ContentType, Is.EqualTo(jsonNetResult.ContentType));
+                Assert.That(response.ContentEncoding, Is.EqualTo(jsonNetResult.ContentEncoding));
+            });
+        }
+
+        [Test]
+        public void ExecuteResult_WhenCallWithJsonString_WriteJsonStringToResponse()
+        {
+            // Arrange
+            var jsonString = "{}";
+
+            var jsonNetResult = CreateObject(jsonString);
+            jsonNetResult.Data = null;
+            jsonNetResult.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+
+            var context = CreateContext("POST");
+            var response = Substitute.For<HttpResponseBase>();
+            context.HttpContext.Response.Returns(response);
 
             // Action
             jsonNetResult.ExecuteResult(context);
@@ -117,36 +112,16 @@
         }
 
         [Test]
-        public void ExecuteResult_AllowGetAndNotNullDataAndNullJsonString_ThrowsInvalidOperationException()
+        public void ExecuteResult_WhenCallWithData_WriteDataToResponse()
         {
             // Arrange
-            var request = Substitute.For<HttpRequestBase>();
-            request.HttpMethod.Returns("POST");
-            var mockHttpContext = Substitute.For<HttpContextBase>();
-            mockHttpContext.Request.Returns(request);
-
-            const string jsonString = null;
-            var jsonNetResult = CreateObject(jsonString);
-            jsonNetResult.Data = new JsonResult();
-
-            var scriptSerializer = JsonSerializer.Create(JsonNetResult.Settings);
-
-            var sw = new StringWriter();
-            scriptSerializer.Serialize(sw, jsonNetResult.Data);
-            var writeString = sw.ToString();
-            sw.Close();
-
-            var response = Substitute.For<HttpResponseBase>();
-            response.ContentType = string.IsNullOrEmpty(jsonNetResult.ContentType) ? "application/json" : jsonNetResult.ContentType;
-            if (jsonNetResult.ContentEncoding != null)
-            {
-                response.ContentEncoding = jsonNetResult.ContentEncoding;
-            }
-
-            mockHttpContext.Response.Returns(response);
-
+            var jsonNetResult = CreateObject();
+            jsonNetResult.Data = new { Id = 1 };
             jsonNetResult.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
-            var context = new ControllerContext(mockHttpContext, new RouteData(), Substitute.For<ControllerBase>());
+
+            var context = CreateContext("POST");
+            var response = Substitute.For<HttpResponseBase>();
+            context.HttpContext.Response.Returns(response);
 
             // Action
             jsonNetResult.ExecuteResult(context);
@@ -154,16 +129,11 @@
             // Assert
             Assert.Multiple(() =>
             {
-                response.Received(1).Write(writeString);
+                response.Received(1).Write("{\"id\":1}");
             });
         }
 
-        private JsonNetResult CreateObject()
-        {
-            return new JsonNetResult();
-        }
-
-        private JsonNetResult CreateObject(string jsonString)
+        private JsonNetResult CreateObject(string jsonString = null)
         {
             if (jsonString == null)
             {
@@ -171,6 +141,17 @@
             }
 
             return new JsonNetResult(jsonString);
+        }
+
+        private ControllerContext CreateContext(string httpMethod)
+        {
+            var request = Substitute.For<HttpRequestBase>();
+            request.HttpMethod.Returns(httpMethod);
+
+            var mockHttpContext = Substitute.For<HttpContextBase>();
+            mockHttpContext.Request.Returns(request);
+
+            return new ControllerContext(mockHttpContext, new RouteData(), Substitute.For<ControllerBase>());
         }
     }
 }
