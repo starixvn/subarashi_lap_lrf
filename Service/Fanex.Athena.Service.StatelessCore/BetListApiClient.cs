@@ -18,17 +18,7 @@
         public async Task<HttpResponseMessage> PostAsync(string path, object value, string language)
         {
             return await HandleAsync(path, value, language, MediaType.Json,
-                 async (response) =>
-                 {
-                     var result = new HttpResponseMessage(response.StatusCode);
-
-                     result.Content = response.StatusCode == System.Net.HttpStatusCode.NoContent ?
-                     new StreamContent(new MemoryStream()) :
-                     new StreamContent(await response.Content.ReadAsStreamAsync());
-
-                     result.Content.Headers.ContentType = response.Content.Headers.ContentType;
-                     return result;
-                 }
+                  (response) => Task.FromResult(response)
                 , false).ConfigureAwait(false);
         }
 
