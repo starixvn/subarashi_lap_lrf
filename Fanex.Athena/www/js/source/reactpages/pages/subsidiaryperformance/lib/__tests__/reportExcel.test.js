@@ -5,7 +5,7 @@ import ReportExcel from '../reportExcel'
 
 import { totalData, bodyData, grandTotalData, bodyDetailData, totalDetailData } from './fakeData';
 
-const gridData = { Data: bodyData, Total: totalData, GrandTotal: grandTotalData };
+const gridData = { Data: [{ Details: bodyData }], Total: totalData, GrandTotal: grandTotalData };
 const gridDetailData = { Data: bodyDetailData, Total: totalDetailData, GrandTotal: grandTotalData };
 const title = "Report Title";
 const fileName = "SubsidiaryPerformance";
@@ -68,7 +68,7 @@ describe('reportExcel ', () => {
         it('Level CUSTOMER - mergeConfig should has correct value', () => {
             const mergeConfig = [{ s: { r: TITLE_ROW_INDEX, c: 0 }, e: { r: TITLE_ROW_INDEX, c: DETAIL_COLUMN_COUNT - 1 } }];
 
-            const reportExcel = new ReportExcel({}, title, true);
+            const reportExcel = new ReportExcel({}, title, false, true);
 
             reportExcel._createTitle();
 
@@ -121,7 +121,7 @@ describe('reportExcel ', () => {
                 H2: { t: "s", v: "SubsidiaryWL", s: headerCellStyle }
             };
 
-            const reportExcel = new ReportExcel({}, title, true);
+            const reportExcel = new ReportExcel({}, title, false, true);
 
             reportExcel._createHeader();
             const result = reportExcel.worksheet;
@@ -190,7 +190,7 @@ describe('reportExcel ', () => {
 
                 const mergeConfig = [];
 
-                const reportExcel = new ReportExcel(gridDetailData, title, true);
+                const reportExcel = new ReportExcel(gridDetailData, title, false, true);
                 reportExcel._createBodyDetailData();
 
                 expect(reportExcel.mergeConfig).toEqual(mergeConfig);
@@ -199,16 +199,16 @@ describe('reportExcel ', () => {
             it('worksheet should has correct value', () => {
                 const expectedWorksheet = {
                     A3: { t: "n", v: 1, s: bodyCellStyle.center },
-                    B3: { t: "s", v: "Ex1", s: bodyCellStyle.center },
-                    C3: { t: "s", v: "Sys1", s: bodyCellStyle.center },
+                    B3: { t: "s", v: "Ex1", s: bodyCellStyle.left },
+                    C3: { t: "s", v: "Sys1", s: bodyCellStyle.left },
                     D3: { t: "s", v: "USD", s: bodyCellStyle.center },
                     E3: { t: "n", v: 52, s: bodyCellStyle.number },
                     F3: { t: "n", v: 322.0000, s: bodyCellStyle.decimal },
                     G3: { t: "n", v: 142.3210, s: bodyCellStyle.decimal },
                     H3: { t: "n", v: -141.7636, s: bodyCellStyle.negativeDecimal },
                     A4: { t: "n", v: 2, s: bodyCellStyle.center },
-                    B4: { t: "s", v: "Ex2", s: bodyCellStyle.center },
-                    C4: { t: "s", v: "Sys2", s: bodyCellStyle.center },
+                    B4: { t: "s", v: "Ex2", s: bodyCellStyle.left },
+                    C4: { t: "s", v: "Sys2", s: bodyCellStyle.left },
                     D4: { t: "s", v: "EUR", s: bodyCellStyle.center },
                     E4: { t: "n", v: 4, s: bodyCellStyle.number },
                     F4: { t: "n", v: 0.0000, s: bodyCellStyle.decimal },
@@ -216,7 +216,7 @@ describe('reportExcel ', () => {
                     H4: { t: "n", v: 0.5574, s: bodyCellStyle.decimal },
                 };
 
-                const reportExcel = new ReportExcel(gridDetailData, title, true);
+                const reportExcel = new ReportExcel(gridDetailData, title, false, true);
 
                 reportExcel._createBodyDetailData();
                 const result = reportExcel.worksheet;
@@ -238,7 +238,7 @@ describe('reportExcel ', () => {
                     G3: { t: "n", v: -224.7238, s: totalCellStyle.negativeDecimal }
                 };
 
-                const reportExcel = new ReportExcel(gridData, title, false, 'EUR');
+                const reportExcel = new ReportExcel(gridData, title, false, false, 'EUR');
 
                 reportExcel._createFooterData();
                 const result = reportExcel.worksheet;
@@ -277,7 +277,7 @@ describe('reportExcel ', () => {
                     H4: { t: "n", v: 0.5574, s: totalCellStyle.decimal }
                 };
 
-                const reportExcel = new ReportExcel(gridDetailData, title, true, 'EUR');
+                const reportExcel = new ReportExcel(gridDetailData, title, false, true, 'EUR');
 
                 reportExcel._createFooterDetailData();
                 const result = reportExcel.worksheet;
@@ -292,7 +292,7 @@ describe('reportExcel ', () => {
                     { s: { r: currentRowIndex, c: 0 }, e: { r: currentRowIndex + 1, c: 2 } }
                 ];
 
-                const reportExcel = new ReportExcel(gridDetailData, title, true);
+                const reportExcel = new ReportExcel(gridDetailData, title, false, true);
 
                 reportExcel._createFooterDetailData();
 
@@ -312,7 +312,7 @@ describe('reportExcel ', () => {
                 G3: { t: "n", v: 14046469.750504408, s: grandTotalCellStyle.decimal }
             };
 
-            const reportExcel = new ReportExcel(gridData, title, false, 'EUR');
+            const reportExcel = new ReportExcel(gridData, title, false, false, 'EUR');
 
             reportExcel._createGrandTotalData();
             const result = reportExcel.worksheet;
@@ -329,7 +329,7 @@ describe('reportExcel ', () => {
                 H3: { t: "n", v: 14046469.750504408, s: grandTotalCellStyle.decimal }
             };
 
-            const reportExcel = new ReportExcel(gridDetailData, title, true, 'EUR');
+            const reportExcel = new ReportExcel(gridDetailData, title, false, true, 'EUR');
 
             reportExcel._createGrandTotalDetailData();
             const result = reportExcel.worksheet;
@@ -341,7 +341,7 @@ describe('reportExcel ', () => {
     describe('_createSheetData', () => {
         describe('Level MAIN', () => {
             it('revelant functions should be called', () => {
-                const reportExcel = new ReportExcel(gridData, title, false, 'EUR');
+                const reportExcel = new ReportExcel(gridData, title, false, false, 'EUR');
                 reportExcel._createBodyData = jest.fn();
                 reportExcel._createFooterData = jest.fn();
                 reportExcel._createGrandTotalData = jest.fn();
@@ -356,7 +356,7 @@ describe('reportExcel ', () => {
 
             it('currentRowIndex should has correct value', () => {
                 const expectedCurrentRowIndex = 7;
-                const reportExcel = new ReportExcel(gridData, title, false, 'EUR');
+                const reportExcel = new ReportExcel(gridData, title, false, false, 'EUR');
 
                 reportExcel._createSheetData();
                 const result = reportExcel.currentRowIndex;
@@ -367,7 +367,7 @@ describe('reportExcel ', () => {
 
         describe('Level CUSTOMER', () => {
             it('revelant functions should be called', () => {
-                const reportExcel = new ReportExcel(gridDetailData, title, true, 'EUR');
+                const reportExcel = new ReportExcel(gridDetailData, title, false, true, 'EUR');
                 reportExcel._createBodyDetailData = jest.fn();
                 reportExcel._createFooterDetailData = jest.fn();
                 reportExcel._createGrandTotalDetailData = jest.fn();
@@ -382,7 +382,7 @@ describe('reportExcel ', () => {
 
             it('currentRowIndex should has correct value', () => {
                 const expectedCurrentRowIndex = 6;
-                const reportExcel = new ReportExcel(gridDetailData, title, true, 'EUR');
+                const reportExcel = new ReportExcel(gridDetailData, title, false, true, 'EUR');
 
                 reportExcel._createSheetData();
                 const result = reportExcel.currentRowIndex;
@@ -423,7 +423,7 @@ describe('reportExcel ', () => {
                 "!cols": wscols
             };
 
-            const reportExcel = new ReportExcel(undefined, title, true);
+            const reportExcel = new ReportExcel(undefined, title, false, true);
             reportExcel.currentRowIndex = 6;
             reportExcel.mergeConfig = mergeConfig;
             reportExcel._createExcelConfig();

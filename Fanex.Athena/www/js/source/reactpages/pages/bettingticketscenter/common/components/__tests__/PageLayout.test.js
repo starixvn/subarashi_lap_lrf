@@ -27,7 +27,7 @@ describe('PageLayout ', () => {
         expect(result).toMatchSnapshot();
     });
 
-    it('show loading before showing Parlay', () => {
+    it('show loading before showing', () => {
         const props = { toggleLoader: jest.fn(), children: [], selectedTabIndex: 1, isConvertAll: true, selectedBaseCurrency: 'eur' };
 
         const shallowRenderer = new ShallowRenderer();
@@ -35,12 +35,12 @@ describe('PageLayout ', () => {
         const result = shallowRenderer.getRenderOutput();
 
         const betListComponent = result.props.children;
-        betListComponent.props.beforeShowParlayFunc();
+        betListComponent.props.beforeShowFunc();
 
         expect(props.toggleLoader).toHaveBeenCalledWith(true);
     });
 
-    it('hide loading after showing Parlay', () => {
+    it('hide loading after showing', () => {
         const props = { toggleLoader: jest.fn(), children: [], selectedTabIndex: 1, isConvertAll: true, selectedBaseCurrency: 'eur' };
 
         const shallowRenderer = new ShallowRenderer();
@@ -48,7 +48,7 @@ describe('PageLayout ', () => {
         const result = shallowRenderer.getRenderOutput();
 
         const betListComponent = result.props.children;
-        betListComponent.props.afterShowParlayFunc();
+        betListComponent.props.afterShowFunc();
 
         expect(props.toggleLoader).toHaveBeenCalledWith(false);
     });

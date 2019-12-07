@@ -77,7 +77,7 @@ describe('FormFilter ', () => {
             it('date range is valid month range - setDateRange should be called with correct parameter', () => {
                 const formFilter = new FormFilter(defaultProps);
                 defaultProps.setDateRange = jest.fn();
-                const date = "09/28/2017"
+                const date = "09/28/2017";
 
                 const dateRange = formFilter._renderDateRange();
                 dateRange.props.onChange(date);
@@ -274,7 +274,7 @@ describe('FormFilter ', () => {
                         formFilter.exportExcel(event);
 
                         Promise.resolve().then(() => {
-                            expect(reportExcelMock).toHaveBeenCalledWith(fakeResponse.data, fakeReportTitle, true, props.params.BaseCurrency);
+                            expect(reportExcelMock).toHaveBeenCalledWith(fakeResponse.data, fakeReportTitle, false, true, props.params.BaseCurrency);
                         })
                     })
 

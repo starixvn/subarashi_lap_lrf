@@ -28,7 +28,6 @@
         private readonly int _custId = FakeHelper.Create<int>();
         private readonly int _userId = FakeHelper.Create<int>();
 
-        private ILogger _logger;
         private ISPLogDataAccess _userLogDataAccess;
         private IDcsBetSettingDataAccess _betSettingDataAccess;
         private IAppSettings _appSetting;
@@ -38,12 +37,11 @@
         [SetUp]
         public void Setup()
         {
-            _logger = Substitute.For<ILogger>();
             _userLogDataAccess = Substitute.For<ISPLogDataAccess>();
             _betSettingDataAccess = Substitute.For<IDcsBetSettingDataAccess>();
             _appSetting = Substitute.For<IAppSettings>();
             _lgClient = Substitute.For<ILGAPIClient>();
-            _service = new ExchangeCommApiService(_logger, _userLogDataAccess, _betSettingDataAccess, _appSetting, _lgClient);
+            _service = new ExchangeCommApiService(_userLogDataAccess, _betSettingDataAccess, _appSetting, _lgClient);
 
             _appSetting.Environment.Returns("PRO");
         }
@@ -51,7 +49,6 @@
         [TearDown]
         public void TearDown()
         {
-            _logger = null;
             _userLogDataAccess = null;
             _appSetting = null;
             _lgClient = null;

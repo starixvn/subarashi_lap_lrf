@@ -5,6 +5,8 @@ namespace Fanex.Athena.Model.Report.MetaModel
 {
     public class ExchangeVoidedMetaModel : IMetaModelValidation, IMetaModelAgent, IMetaModelSiteName
     {
+        private const int MaximumSelectedMonths = 2;
+
         public DateTime SelectedDate { get; set; }
 
         public string UserName { get; set; }
@@ -23,6 +25,6 @@ namespace Fanex.Athena.Model.Report.MetaModel
 
         public bool IsExcludedTestData { get; set; }
 
-        public bool IsValid => DateTime.Compare(DateTime.Now.Date.AddMonths(-2), SelectedDate.Date) <= 0;
+        public bool IsValid => DateTime.Compare(DateTime.Now.Date.AddMonths(-MaximumSelectedMonths), SelectedDate.Date) <= 0;
     }
 }

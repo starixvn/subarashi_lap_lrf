@@ -18,7 +18,6 @@ namespace Fanex.Athena.Service.BetSettings
 
     using Interfaces;
 
-    using Logging;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using Model.Core.MetaModel.Common;
@@ -33,8 +32,6 @@ namespace Fanex.Athena.Service.BetSettings
 
         private const int SuccessStatus = 1;
 
-        private readonly ILogger _logger;
-
         private readonly ISPLogDataAccess _userLogDataAccess;
 
         private readonly IAppSettings _appSetting;
@@ -44,13 +41,11 @@ namespace Fanex.Athena.Service.BetSettings
         private readonly IDcsBetSettingDataAccess _betSettingDataAccess;
 
         public ExchangeCommApiService(
-            ILogger logger,
             ISPLogDataAccess userLogDataAccess,
             IDcsBetSettingDataAccess betSettingDataAccess,
             IAppSettings appSetting,
             ILGAPIClient lgClient)
         {
-            _logger = logger;
             _userLogDataAccess = userLogDataAccess;
             _betSettingDataAccess = betSettingDataAccess;
             _appSetting = appSetting;
