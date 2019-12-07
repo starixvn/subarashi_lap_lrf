@@ -20,10 +20,12 @@
             return await HandleAsync(path, value, language, MediaType.Json,
                  async (response) =>
                  {
-                     var result = new HttpResponseMessage(response.StatusCode)
-                     {
-                         Content = new StreamContent(await response.Content.ReadAsStreamAsync()),
-                     };
+                     var result = new HttpResponseMessage(response.StatusCode);
+
+                     result.Content = response.StatusCode == System.Net.HttpStatusCode.NoContent ?
+                     new StreamContent(new MemoryStream()) :
+                     new StreamContent(await response.Content.ReadAsStreamAsync());
+
                      result.Content.Headers.ContentType = response.Content.Headers.ContentType;
                      return result;
                  }
@@ -34,6 +36,11 @@
         {
             return await HandleAsync(path, value, language, MediaType.Json, async (response) =>
             {
+                if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
+                {
+                    Stream emptyStream = new MemoryStream();
+                    return emptyStream;
+                }
                 return await response.Content.ReadAsStreamAsync();
             }
           , false).ConfigureAwait(false);

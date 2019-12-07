@@ -76,7 +76,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Controllers
                 metaModel,
                 userSession.Language).ConfigureAwait(false);
 
-                if (stream is null || stream.Length == 0)
+                if (stream is null || stream.Length == 0) //should not use this code to check No-content
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.NoContent);
                 }
