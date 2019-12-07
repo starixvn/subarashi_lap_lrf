@@ -2,6 +2,7 @@
 {
     using System.Linq;
     using System.Net;
+    using System.Net.Http;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using System.Web.SessionState;
@@ -69,16 +70,16 @@
 
         public async Task<ActionResult> ExportRunningBetListDataAsync(PlayerRunningBetListMetalModel metaModel)
         {
-            var stream = await _betListApiClient.PostStreamAsync("/PlayerAdminBetList/Export",
+            var httpResponse = await _betListApiClient.PostAsync<HttpResponseMessage>("/PlayerAdminBetList/Export",
                 metaModel,
                 SessionServiceInstance.UserSession.Language).ConfigureAwait(false);
 
-            if (stream is null || stream.Length == 0)
+            if (httpResponse.StatusCode == HttpStatusCode.NoContent)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.NoContent);
             }
 
-            return File(stream, "application/octet-stream");
+            return File(await httpResponse.Content.ReadAsStreamAsync(), "application/octet-stream");
         }
     }
 }
