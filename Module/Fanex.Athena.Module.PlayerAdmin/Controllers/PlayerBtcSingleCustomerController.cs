@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.SessionState;
@@ -38,7 +39,7 @@ namespace Fanex.Athena.Module.PlayerAdmin.Controllers
 
         public PlayerBtcSingleCustomerController(
             IBetListApiClient betListApiClient,
-            IProductService productService) 
+            IProductService productService)
         {
             _betListApiClient = betListApiClient;
             _productService = productService;
@@ -72,16 +73,16 @@ namespace Fanex.Athena.Module.PlayerAdmin.Controllers
 
             if (metaModel.IsExport)
             {
-                var stream = await _betListApiClient.PostStreamAsync("/BettingTicketCenter/GetBySingleCustomer",
+                var httpResponse = await _betListApiClient.PostAsync("/BettingTicketCenter/GetBySingleCustomer",
                 metaModel,
                 userSession.Language).ConfigureAwait(false);
 
-                if (stream is null || stream.Length == 0)
+                if (httpResponse.StatusCode == HttpStatusCode.NoContent)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.NoContent);
-                }
 
-                return File(stream, "application/octet-stream");
+                }
+                return File(await httpResponse.Content.ReadAsStreamAsync(), "application/octet-stream");
             }
 
             return await _betListApiClient.PostAsync<dynamic>("/BettingTicketCenter/GetBySingleCustomer",

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -22,10 +23,15 @@ namespace Fanex.Athena.Service.StatelessCore
         public async Task<Tuple<Stream, string>> PostAsync(string path, object value, string language, MediaType mediaType = MediaType.Json)
         {
             return await HandleAsync(path, value, language, mediaType, async (response) =>
-            {
-                var contentType = response.Content.Headers.ContentType?.MediaType ?? DefaultContentType;
-                return Tuple.Create(await response.Content.ReadAsStreamAsync(), contentType);
-            },
+             {
+                 var contentType = response.Content.Headers.ContentType?.MediaType ?? DefaultContentType;
+                 if (response.StatusCode == HttpStatusCode.NoContent)
+                 {
+                     Stream emptyStream = new MemoryStream();
+                     return Tuple.Create(emptyStream, contentType);
+                 }
+                 return Tuple.Create(await response.Content.ReadAsStreamAsync(), contentType);
+             },
             false).ConfigureAwait(false);
         }
     }

@@ -18,15 +18,7 @@
         public async Task<HttpResponseMessage> PostAsync(string path, object value, string language)
         {
             return await HandleAsync(path, value, language, MediaType.Json,
-                 async (response) =>
-                 {
-                     var result = new HttpResponseMessage(response.StatusCode)
-                     {
-                         Content = new StreamContent(await response.Content.ReadAsStreamAsync()),
-                     };
-                     result.Content.Headers.ContentType = response.Content.Headers.ContentType;
-                     return result;
-                 }
+                  (response) => Task.FromResult(response)
                 , false).ConfigureAwait(false);
         }
 
@@ -34,6 +26,11 @@
         {
             return await HandleAsync(path, value, language, MediaType.Json, async (response) =>
             {
+                if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
+                {
+                    Stream emptyStream = new MemoryStream();
+                    return emptyStream;
+                }
                 return await response.Content.ReadAsStreamAsync();
             }
           , false).ConfigureAwait(false);
