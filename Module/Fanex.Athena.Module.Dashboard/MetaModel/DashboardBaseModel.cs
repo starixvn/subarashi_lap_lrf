@@ -36,7 +36,8 @@
         {
             get
             {
-                return string.IsNullOrEmpty(BaseCurrency) || DashboardConfig.SupportedBaseCurrencies.Contains(BaseCurrency.ToUpperInvariant());
+                return !string.IsNullOrEmpty(AgentListXml)
+                    && (string.IsNullOrEmpty(BaseCurrency) || DashboardConfig.SupportedBaseCurrencies.Contains(BaseCurrency.ToUpperInvariant()));
             }
         }
 
