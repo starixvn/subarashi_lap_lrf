@@ -13,7 +13,7 @@ namespace Fanex.Athena.Service.StatelessCore.CustomException
     /// Service exception class.
     /// </summary>
     [Serializable]
-    public sealed class ServiceException : Exception
+    public sealed class ServiceException : Exception, ISerializable
     {
         private readonly string _serviceName;
 
