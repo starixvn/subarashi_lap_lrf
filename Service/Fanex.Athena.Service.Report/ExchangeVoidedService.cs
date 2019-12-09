@@ -15,6 +15,8 @@ namespace Fanex.Athena.Service.Report
 
         private readonly ILGAPIClient _lgClient;
 
+        private const int SuccessCode = 1;
+
         public ExchangeVoidedService(
                   ILGAPIClient lgClient,
                   IExchangeVoidedDataAccess dataAccess)
@@ -33,7 +35,7 @@ namespace Fanex.Athena.Service.Report
 
                 if (custId == 0)
                 {
-                    return new ExchangeVoidedViewModel { DataList = new List<ExchangeVoidedItem>(), TotalPage = 0 };
+                    return new ExchangeVoidedViewModel { DataList = new List<ExchangeVoidedItem>(), TotalPage = 0, ErrCode = SuccessCode };
                 }
             }
 

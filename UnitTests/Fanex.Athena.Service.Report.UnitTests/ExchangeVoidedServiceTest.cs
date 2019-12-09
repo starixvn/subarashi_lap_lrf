@@ -52,6 +52,7 @@ namespace Fanex.Athena.Service.Report.UnitTests
             // Assert
             Assert.That(result.DataList.Count, Is.Zero);
             Assert.That(result.TotalPage, Is.Zero);
+            Assert.That(result.ErrCode, Is.EqualTo(1));
             await _lgAPIClient.DidNotReceiveWithAnyArgs().PostAsync<ExchangeVoidedViewModel>(default, default, default);
         }
 
