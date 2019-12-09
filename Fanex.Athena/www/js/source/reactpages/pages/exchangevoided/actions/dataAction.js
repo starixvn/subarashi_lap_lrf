@@ -17,20 +17,23 @@ const dispatchResult = (dispatch, data) => {
 const apiUrl = Site.resolveClientUrl('ExchangeVoided/Index');
 export const getData = (param) => (dispatch) => {
     dispatch(toggleLoader(true));
+    if (isNaN(param.refNo)) {
+        dispatchResult(dispatch, { dataList: [], totalPage: 0 });
+    } else {
+        DataService.postData(apiUrl, param)
+            .then(response => {
+                const { dataList, totalPage, errCode } = response.data;
+                const isSuccess = errCode === SUCCESS_CODE;
+                const data = { dataList: isSuccess ? dataList : [], totalPage };
+                dispatchResult(dispatch, data);
 
-    DataService.postData(apiUrl, param)
-        .then(response => {
-            const { dataList, totalPage, errCode } = response.data;
-            const isSuccess = errCode === SUCCESS_CODE;
-            const data = { dataList: isSuccess ? dataList : [], totalPage };
-            dispatchResult(dispatch, data);
-
-            !isSuccess && window.alert(errCode === UM_ERR_CODE ? UM_MESSAGE : ERROR_MESSAGE);
-        })
-        .catch(error => {
-            console.log(error.message);
-            dispatchResult(dispatch, { dataList: [], totalPage });
-        });
+                !isSuccess && window.alert(errCode === UM_ERR_CODE ? UM_MESSAGE : ERROR_MESSAGE);
+            })
+            .catch(error => {
+                console.log(error.message);
+                dispatchResult(dispatch, { dataList: [], totalPage });
+            });
+    }
 }
 
 export const exportExcel = (dataList, title) => () => {

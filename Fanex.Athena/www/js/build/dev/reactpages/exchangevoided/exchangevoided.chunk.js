@@ -1535,25 +1535,33 @@ var apiUrl = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_2__["default"].resolveCli
 var getData = function getData(param) {
   return function (dispatch) {
     dispatch(Object(_jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_0__["toggleLoader"])(true));
-    _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_3__["default"].postData(apiUrl, param).then(function (response) {
-      var _response$data = response.data,
-          dataList = _response$data.dataList,
-          totalPage = _response$data.totalPage,
-          errCode = _response$data.errCode;
-      var isSuccess = errCode === SUCCESS_CODE;
-      var data = {
-        dataList: isSuccess ? dataList : [],
-        totalPage: totalPage
-      };
-      dispatchResult(dispatch, data);
-      !isSuccess && window.alert(errCode === UM_ERR_CODE ? UM_MESSAGE : ERROR_MESSAGE);
-    }).catch(function (error) {
-      console.log(error.message);
+
+    if (isNaN(param.refNo)) {
       dispatchResult(dispatch, {
         dataList: [],
-        totalPage: totalPage
+        totalPage: 0
       });
-    });
+    } else {
+      _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_3__["default"].postData(apiUrl, param).then(function (response) {
+        var _response$data = response.data,
+            dataList = _response$data.dataList,
+            totalPage = _response$data.totalPage,
+            errCode = _response$data.errCode;
+        var isSuccess = errCode === SUCCESS_CODE;
+        var data = {
+          dataList: isSuccess ? dataList : [],
+          totalPage: totalPage
+        };
+        dispatchResult(dispatch, data);
+        !isSuccess && window.alert(errCode === UM_ERR_CODE ? UM_MESSAGE : ERROR_MESSAGE);
+      }).catch(function (error) {
+        console.log(error.message);
+        dispatchResult(dispatch, {
+          dataList: [],
+          totalPage: totalPage
+        });
+      });
+    }
   };
 };
 var exportExcel = function exportExcel(dataList, title) {
