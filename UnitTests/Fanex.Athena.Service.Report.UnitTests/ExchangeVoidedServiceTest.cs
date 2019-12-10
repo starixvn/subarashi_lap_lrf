@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Fanex.Athena.DataAccess.Report.Interfaces;
-using Fanex.Athena.Model.Report.DTO;
 using Fanex.Athena.Model.Report.MetaModel;
 using Fanex.Athena.Model.Report.ViewModel;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -19,6 +17,10 @@ namespace Fanex.Athena.Service.Report.UnitTests
 
         private IExchangeVoidedDataAccess _dataAccess;
 
+        private const int SuccessCode = 1;
+
+        private const string _refNoParam = "123";
+
         [SetUp]
         public void SetUp()
         {
@@ -33,13 +35,31 @@ namespace Fanex.Athena.Service.Report.UnitTests
             _dataAccess = null;
         }
 
+        [TestCase("abc")]
+        [TestCase("3147483647")]
+        public async Task GetData_InValidRefNo_ReturnEmptyResult(string refNo)
+        {
+            // Arrange
+            var metaModel = CreateMetaModel(refNo);
+
+            var service = new ExchangeVoidedService(_lgAPIClient, _dataAccess);
+
+            // Action
+            var result = await service.GetData(metaModel);
+
+            // Assert
+            Assert.That(result.DataList, Is.Empty);
+            Assert.That(result.TotalPage, Is.Zero);
+            Assert.That(result.ErrCode, Is.EqualTo(SuccessCode));
+            await _lgAPIClient.DidNotReceiveWithAnyArgs().PostAsync<ExchangeVoidedViewModel>(default, default, default);
+            await _dataAccess.DidNotReceiveWithAnyArgs().GetCustIdAsync(metaModel.UserName, metaModel.AgentListXml);
+        }
+
         [Test]
         public async Task GetData_UserNameHasValueButCanNotGetCustId_ReturnEmptyResult()
         {
             // Arrange
-            var metaModel = FakeHelper.Create<ExchangeVoidedMetaModel>();
-            var expectedResult = new ExchangeVoidedViewModel { DataList = new List<ExchangeVoidedItem>(), TotalPage = 0 };
-
+            var metaModel = CreateMetaModel();
             const int ExpectedCustId = 0;
 
             _dataAccess.GetCustIdAsync(metaModel.UserName, metaModel.AgentListXml)
@@ -52,7 +72,7 @@ namespace Fanex.Athena.Service.Report.UnitTests
             // Assert
             Assert.That(result.DataList.Count, Is.Zero);
             Assert.That(result.TotalPage, Is.Zero);
-            Assert.That(result.ErrCode, Is.EqualTo(1));
+            Assert.That(result.ErrCode, Is.EqualTo(SuccessCode));
             await _lgAPIClient.DidNotReceiveWithAnyArgs().PostAsync<ExchangeVoidedViewModel>(default, default, default);
         }
 
@@ -60,7 +80,7 @@ namespace Fanex.Athena.Service.Report.UnitTests
         public async Task GetData_UserNameHasValueAndGetCorrectCustId_CallClientApiWithCorrectParameter()
         {
             // Arrange
-            var metaModel = FakeHelper.Create<ExchangeVoidedMetaModel>();
+            var metaModel = CreateMetaModel();
             const int ExpectedCustId = 1;
             var apiMetaModel = new
             {
@@ -101,7 +121,7 @@ namespace Fanex.Athena.Service.Report.UnitTests
         public async Task GetData_UserNameIsEmpty_DoNotGetCustIdAndCallClientApiWithCorrectParameter()
         {
             // Arrange
-            var metaModel = FakeHelper.Create<ExchangeVoidedMetaModel>();
+            var metaModel = CreateMetaModel();
             metaModel.UserName = null;
             var apiMetaModel = new
             {
@@ -133,6 +153,14 @@ namespace Fanex.Athena.Service.Report.UnitTests
             // Assert
             Assert.That(jsonPassedParam, Is.EqualTo(expectedResult));
             await _dataAccess.DidNotReceiveWithAnyArgs().GetCustIdAsync(default, default);
+        }
+
+        private ExchangeVoidedMetaModel CreateMetaModel(string refNo = _refNoParam)
+        {
+            var metaModel = FakeHelper.Create<ExchangeVoidedMetaModel>();
+            metaModel.RefNo = refNo;
+
+            return metaModel;
         }
     }
 }
