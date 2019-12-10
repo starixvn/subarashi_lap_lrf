@@ -48,7 +48,7 @@
         {
             if (string.IsNullOrEmpty(metaModel.AgentListXml))
             {
-                return new WidgetByPlatformViewModel { Total = 0, Data = new List<KeyValuePair<string, decimal>>() };
+                return new WidgetByPlatformViewModel { Total = 0, Data = new List<KeyValuePair<string, decimal>>(0) };
             }
 
             using (var db = this.GetObjectDb(uspName))

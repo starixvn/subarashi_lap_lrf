@@ -31,7 +31,8 @@
             var metaModel = new DashboardBaseModel
             {
                 CurrencyId = 0,
-                BaseCurrency = "EUR"
+                BaseCurrency = "EUR",
+                AgentListXml = "<Root></Root>"
             };
             Hashtable passedParam = null;
             ObjectDb.When(x => x.ExecuteReaderAsync(Arg.Any<Hashtable>())).Do(x => passedParam = (Hashtable)x[0]);
@@ -56,7 +57,7 @@
             Reader.Read().Returns(true, false);
             Reader["PendingFund"].Returns(expected);
 
-            var metaModel = new DashboardBaseModel { BaseCurrency = "EUR" };
+            var metaModel = new DashboardBaseModel { BaseCurrency = "EUR", AgentListXml = "<Root></Root>" };
 
             // Action
             var result = await DataAccess.GetPendingFunds(metaModel);
@@ -72,7 +73,8 @@
             var metaModel = new DashboardBaseModel
             {
                 BaseCurrency = "EUR",
-                FromDate = new System.DateTime(2017, 1, 1)
+                FromDate = new System.DateTime(2017, 1, 1),
+                AgentListXml = "<Root></Root>"
             };
             Hashtable passedParam = null;
             ObjectDb.When(x => x.ExecuteReaderAsync(Arg.Any<Hashtable>())).Do(x => passedParam = (Hashtable)x[0]);
@@ -98,7 +100,7 @@
             Reader.Read().Returns(true, false);
             Reader["Withdrawal"].Returns(expected);
 
-            var metaModel = new DashboardBaseModel { BaseCurrency = "EUR" };
+            var metaModel = new DashboardBaseModel { BaseCurrency = "EUR", AgentListXml = "<Root></Root>" };
 
             // Action
             var result = await DataAccess.GetTodayWithdrawal(metaModel);
@@ -136,7 +138,7 @@
             Reader.Read().Returns(true, false);
             Reader["ClosingBalance"].Returns(expected);
 
-            var metaModel = new DashboardBaseModel { BaseCurrency = "EUR" };
+            var metaModel = new DashboardBaseModel { BaseCurrency = "EUR", AgentListXml = "<Root></Root>" };
 
             // Action
             var result = await DataAccess.GetCustomerBalance(metaModel);
@@ -174,7 +176,7 @@
             Reader.Read().Returns(true, false);
             Reader["Deposit"].Returns(expected);
 
-            var metaModel = new DashboardBaseModel { BaseCurrency = "EUR" };
+            var metaModel = new DashboardBaseModel { BaseCurrency = "EUR", AgentListXml = "<Root></Root>" };
 
             // Action
             var result = await DataAccess.GetTodayDeposit(metaModel);
