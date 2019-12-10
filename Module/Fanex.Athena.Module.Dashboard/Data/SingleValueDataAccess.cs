@@ -31,6 +31,11 @@
 
         private async Task<decimal> GetData(DashboardBaseModel metaModel, string uspName, string columnName, bool hasReportDate = true)
         {
+            if (string.IsNullOrEmpty(metaModel.AgentListXml))
+            {
+                return 0;
+            }
+
             using (var db = this.GetObjectDb(uspName))
             {
                 var param = new Hashtable();
