@@ -64,7 +64,7 @@ namespace Fanex.Athena.Controllers.Report
         {
             var userSession = SessionServiceInstance.UserSession;
 
-            return JsonString(await _reportAPIClient.PostAsyncStringAsync("api/CustomerBalance/Index", metaModel, userSession.Language).ConfigureAwait(false));
+            return JsonString(await _reportAPIClient.PostStringAsync("api/CustomerBalance/Index", metaModel, userSession.Language).ConfigureAwait(false));
         }
 
         [HttpPost]

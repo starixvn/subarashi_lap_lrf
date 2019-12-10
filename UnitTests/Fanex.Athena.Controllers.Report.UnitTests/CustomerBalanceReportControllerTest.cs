@@ -79,7 +79,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    _reportAPIClient.Received(1).PostAsyncStringAsync("api/CustomerBalance/Index", metaModel, SessionService.UserSession.Language);
+                    _reportAPIClient.Received(1).PostStringAsync("api/CustomerBalance/Index", metaModel, SessionService.UserSession.Language);
                 });
             }
         }
@@ -92,7 +92,7 @@
                 // Arrange
                 const string fileName = "CustomerBalance.csv";
                 var metaModel = new CustomerBalanceMetaModel();
-                var content = new MemoryStream();
+                Stream content = new MemoryStream();
                 var contentType = FakeHelper.Create<string>();
                 var expectedResult = Tuple.Create(content, contentType);
                 _reportAPIClient.PostAsync("api/CustomerBalance/ExportExcel", metaModel, SessionService.UserSession.Language).Returns(Task.FromResult(expectedResult));
@@ -122,7 +122,7 @@
                     SessionService.UserSession.Language,
                     FunctionNames.CustomerBalance);
                 var metaModel = new CustomerBalanceMetaModel();
-                var content = new MemoryStream();
+                Stream content = new MemoryStream();
                 var contentType = FakeHelper.Create<string>();
                 var expectedResult = Tuple.Create(content, contentType);
                 _reportAPIClient.PostAsync("api/CustomerBalance/ExportExcel", metaModel, SessionService.UserSession.Language).Returns(Task.FromResult(expectedResult));
