@@ -27,6 +27,12 @@ namespace Fanex.Athena.Service.Report
 
         public async Task<ExchangeVoidedViewModel> GetData(ExchangeVoidedMetaModel metaModel)
         {
+            var refNoString = metaModel.RefNo?.Trim();
+            if (!string.IsNullOrEmpty(refNoString) && !int.TryParse(refNoString, out int refNo))
+            {
+                return CreateEmptyResult();
+            }
+
             var userName = metaModel.UserName?.Trim();
             var custId = 0;
             if (!string.IsNullOrEmpty(userName))
@@ -35,7 +41,7 @@ namespace Fanex.Athena.Service.Report
 
                 if (custId == 0)
                 {
-                    return new ExchangeVoidedViewModel { DataList = new List<ExchangeVoidedItem>(), TotalPage = 0, ErrCode = SuccessCode };
+                    return CreateEmptyResult();
                 }
             }
 
@@ -45,13 +51,18 @@ namespace Fanex.Athena.Service.Report
                 metaModel.SelectedDate,
                 metaModel.PageIndex,
                 metaModel.Environment,
-                metaModel.RefNo,
+                RefNo = refNoString,
                 metaModel.SiteName
             };
 
             const string apiPath = "/ExchangeBetHistory/Index";
 
             return await _lgClient.PostAsync<ExchangeVoidedViewModel>(apiPath, apiMetaModel, metaModel.Language).ConfigureAwait(false);
+        }
+
+        private static ExchangeVoidedViewModel CreateEmptyResult()
+        {
+            return new ExchangeVoidedViewModel { DataList = new List<ExchangeVoidedItem>(), TotalPage = 0, ErrCode = SuccessCode };
         }
     }
 }

@@ -1525,6 +1525,7 @@ var SUCCESS_CODE = 1;
 var UM_ERR_CODE = 101;
 var UM_MESSAGE = 'Exchange product is under maintenance now';
 var ERROR_MESSAGE = 'Your request cannot be processed now, please try again later';
+var MAX_REFNO = 2147483647;
 
 var dispatchResult = function dispatchResult(dispatch, data) {
   dispatch(Object(_jsroot_actions_gridDataAction__WEBPACK_IMPORTED_MODULE_1__["setGridData"])(data));
@@ -1536,7 +1537,7 @@ var getData = function getData(param) {
   return function (dispatch) {
     dispatch(Object(_jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_0__["toggleLoader"])(true));
 
-    if (isNaN(param.refNo)) {
+    if (isNaN(param.refNo) || Number(param.refNo) > MAX_REFNO) {
       dispatchResult(dispatch, {
         dataList: [],
         totalPage: 0
@@ -1550,7 +1551,7 @@ var getData = function getData(param) {
         var isSuccess = errCode === SUCCESS_CODE;
         var data = {
           dataList: isSuccess ? dataList : [],
-          totalPage: totalPage
+          totalPage: param.refNo ? 0 : totalPage
         };
         dispatchResult(dispatch, data);
         !isSuccess && window.alert(errCode === UM_ERR_CODE ? UM_MESSAGE : ERROR_MESSAGE);
@@ -1558,7 +1559,7 @@ var getData = function getData(param) {
         console.log(error.message);
         dispatchResult(dispatch, {
           dataList: [],
-          totalPage: totalPage
+          totalPage: 0
         });
       });
     }

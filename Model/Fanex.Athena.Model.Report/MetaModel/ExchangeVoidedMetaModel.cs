@@ -11,7 +11,7 @@ namespace Fanex.Athena.Model.Report.MetaModel
 
         public string UserName { get; set; }
 
-        public int RefNo { get; set; }
+        public string RefNo { get; set; }
 
         public int PageIndex { get; set; }
 
