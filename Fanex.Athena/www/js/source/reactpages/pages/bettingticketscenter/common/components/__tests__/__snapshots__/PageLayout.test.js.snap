@@ -3,9 +3,9 @@
 exports[`PageLayout  render with correct active tab 1`] = `
 <AppLayout>
   <BetListLayout
-    afterShowParlayFunc={[Function]}
+    afterShowFunc={[Function]}
     baseCurrency="eur"
-    beforeShowParlayFunc={[Function]}
+    beforeShowFunc={[Function]}
     formatDateStringFunc={[Function]}
     getResourceFunc={[Function]}
     pageName="BTC"

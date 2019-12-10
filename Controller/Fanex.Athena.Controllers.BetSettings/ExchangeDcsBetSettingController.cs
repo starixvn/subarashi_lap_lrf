@@ -6,20 +6,16 @@
 
 namespace Fanex.Athena.Controllers.BetSettings
 {
-    using Fanex.Athena.Model.Core.DTO.Common;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Athena.Web.ActionFilter;
-
-    using Model.BetSettings.MetaModel;
-    using Model.BetSettings.ViewModel;
-
-    using Resources;
-
-    using Service.BetSettings.Interfaces;
-
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Fanex.Athena.Web.ActionFilter;
+    using Model.BetSettings.MetaModel;
+    using Model.BetSettings.ViewModel;
+    using Resources;
+    using Service.BetSettings.Interfaces;
 
     public class ExchangeDcsBetSettingController : BetSettingBaseController
     {
@@ -55,7 +51,7 @@ namespace Fanex.Athena.Controllers.BetSettings
             viewModel.IsEnabled = await
                 _betSettingService.GetStatusAsync(metaModel.CustId, metaModel.ProductId);
 
-            var apiResult = _exchangeCommApiService.GetCommission(metaModel.CustId);
+            var apiResult = await _exchangeCommApiService.GetCommission(metaModel.CustId, SessionServiceInstance.UserSession.Language);
             if (apiResult.IsSuccessful)
             {
                 viewModel.Commission = apiResult.ExtendedData;
@@ -84,7 +80,8 @@ namespace Fanex.Athena.Controllers.BetSettings
                 userSession.UserId,
                 custId,
                 oldCommission,
-                newCommission);
+                newCommission,
+                userSession.Language);
 
             return Json(result);
         }

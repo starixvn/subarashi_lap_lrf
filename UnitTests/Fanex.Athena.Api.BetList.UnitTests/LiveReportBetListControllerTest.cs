@@ -75,12 +75,12 @@
                 var actual = await controller.Match(metaModel);
 
                 // Assert
-                Assert.Multiple((TestDelegate)(() =>
+                Assert.Multiple(() =>
                 {
                     NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
                     Assert.That(metaModel.UspKey, Is.EqualTo(SelWinlossByMatchUsp));
-                    BetListApiClient.Received().PostAsync(ApiPath, (object)metaModel, SessionLanguage);
-                }));
+                    BetListApiClient.Received().PostAsync(ApiPath, metaModel, SessionLanguage);
+                });
             }
         }
 
@@ -101,12 +101,12 @@
                 var actual = await controller.Outright(metaModel);
 
                 // Assert
-                Assert.Multiple((TestDelegate)(() =>
+                Assert.Multiple(() =>
                 {
                     NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
                     Assert.That(metaModel.UspKey, Is.EqualTo(SelWinlossOutrightUsp));
-                    BetListApiClient.Received().PostAsync(ApiPath, (object)metaModel, SessionLanguage);
-                }));
+                    BetListApiClient.Received().PostAsync(ApiPath, metaModel, SessionLanguage);
+                });
             }
         }
 
@@ -132,14 +132,14 @@
                 var actual = await controller.NumberGame(metaModel, pageIndex, pageSize);
 
                 // Assert
-                Assert.Multiple((TestDelegate)(() =>
+                Assert.Multiple(() =>
                 {
                     NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
                     Assert.That(metaModel.UspKey, Is.EqualTo(SelWinlossNumberGameUsp));
                     Assert.That(metaModel.PageIndex, Is.EqualTo(expectedPageIndex));
                     Assert.That(metaModel.PageSize, Is.EqualTo(expectedPageSize));
-                    BetListApiClient.Received().PostAsync((string)PageApiPath, (object)metaModel, (string)SessionLanguage);
-                }));
+                    BetListApiClient.Received().PostAsync(PageApiPath, metaModel, SessionLanguage);
+                });
             }
         }
 
@@ -165,14 +165,14 @@
                 var actual = await controller.MixParlay(metaModel, pageIndex, pageSize);
 
                 // Assert
-                Assert.Multiple((TestDelegate)(() =>
+                Assert.Multiple(() =>
                 {
                     NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
                     Assert.That(metaModel.UspKey, Is.EqualTo(SelWinlossParlayUsp));
                     Assert.That(metaModel.PageIndex, Is.EqualTo(expectedPageIndex));
                     Assert.That(metaModel.PageSize, Is.EqualTo(expectedPageSize));
-                    BetListApiClient.Received().PostAsync((string)PageApiPath, (object)metaModel, (string)SessionLanguage);
-                }));
+                    BetListApiClient.Received().PostAsync(PageApiPath, metaModel, SessionLanguage);
+                });
             }
         }
 
@@ -198,14 +198,14 @@
                 var actual = await controller.VirtualSports(metaModel, pageIndex, pageSize);
 
                 // Assert
-                Assert.Multiple((TestDelegate)(() =>
+                Assert.Multiple(() =>
                 {
                     NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
                     Assert.That(metaModel.UspKey, Is.EqualTo(SelWinlossVHRacingUsp));
                     Assert.That(metaModel.PageIndex, Is.EqualTo(expectedPageIndex));
                     Assert.That(metaModel.PageSize, Is.EqualTo(expectedPageSize));
-                    BetListApiClient.Received().PostAsync(PageApiPath, (object)metaModel, SessionLanguage);
-                }));
+                    BetListApiClient.Received().PostAsync(PageApiPath, metaModel, SessionLanguage);
+                });
             }
         }
 
@@ -235,12 +235,14 @@
         private LiveReportBetListController CreateController()
         {
             return new LiveReportBetListController(
-                SessionService,
-                ProductService,
                 LangService,
                 AuthorizationService,
                 BetListApiClient,
-                BalanceUpDataAccess);
+                BalanceUpDataAccess)
+            {
+                SessionService = SessionService,
+                ProductService = ProductService
+            };
         }
     }
 }

@@ -23,7 +23,6 @@
     using Model.Report.DTO;
 
     using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
 
     [ApiFunctionAuthorization(PermissionKeys.ReportLicenseeWinLoss)]
     public class SpecialLicenseeWinLossReportController : ApiReportBaseController
@@ -38,12 +37,10 @@
         };
 
         public SpecialLicenseeWinLossReportController(
-            ISessionService sessionService,
-            IProductService productService,
             IReportSettingService reportSettingService,
             ILanguageService langService,
             ISpecialLicenseeWinLossDataAccess licenseeWinLossDataAccess)
-            : base(sessionService, productService, langService)
+            : base(langService)
         {
             _reportSettingService = reportSettingService;
             _licenseeWinLossDataAccess = licenseeWinLossDataAccess;
@@ -103,7 +100,7 @@
             if (IsValidParams(metaModel, setting))
             {
                 var userSession = SessionService.UserSession;
-                var licenseeName= SessionService.LicenseeSession.LicenseeName;
+                var licenseeName = SessionService.LicenseeSession.LicenseeName;
                 metaModel.BaseCurrencySetting = setting.BaseCurrencies;
                 metaModel.SiteName = _siteNameList.GetValueOrDefault(licenseeName, defaultValue: licenseeName);
                 metaModel.CurrencyListXml = GenerateCurrencyListXml(metaModel);

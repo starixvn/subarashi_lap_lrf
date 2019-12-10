@@ -52,24 +52,26 @@
                 var actual = await controller.Index(1, 10, metaModel);
 
                 // Assert
-                Assert.Multiple((TestDelegate)(() =>
+                Assert.Multiple(() =>
                 {
                     NUnit.Framework.Assert.That(actual, Is.EqualTo(expect));
                     Assert.That(metaModel.UspKey, Is.EqualTo(UspKey));
-                    BetListApiClient.Received().PostAsync((string)ApiPath, (object)metaModel, (string)SessionLanguage);
-                }));
+                    BetListApiClient.Received().PostAsync(ApiPath, metaModel, SessionLanguage);
+                });
             }
         }
 
         private OutStandingCompletedBetListController CreateController()
         {
             return new OutStandingCompletedBetListController(
-                SessionService,
-                ProductService,
                 LangService,
                 AuthorizationService,
                 BetListApiClient,
-                BalanceUpDataAccess);
+                BalanceUpDataAccess)
+            {
+                SessionService = SessionService,
+                ProductService = ProductService
+            };
         }
     }
 }

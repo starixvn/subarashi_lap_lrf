@@ -138,7 +138,6 @@
   <ItemGroup>
     <Compile Include="CultureBaseControllerHelperTest.cs" />
     <Compile Include="CultureBaseControllerTest.cs" />
-    <Compile Include="FakeContentBaseController.cs" />
     <Compile Include="FakeCultureBaseController.cs" />
     <Compile Include="JsonNetResultTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

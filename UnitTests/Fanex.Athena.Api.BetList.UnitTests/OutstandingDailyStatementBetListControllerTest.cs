@@ -79,17 +79,21 @@
                 var actual = await controller.Index(metaModel);
 
                 // Assert
-                Assert.Multiple((TestDelegate)(() =>
+                Assert.Multiple(() =>
                 {
                     NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
-                    _betListApiClient.Received().PostAsync((string)ApiPath, (object)metaModel, (string)SessionLanguage);
-                }));
+                    _betListApiClient.Received().PostAsync(ApiPath, metaModel, SessionLanguage);
+                });
             }
         }
 
         private OutstandingDailyStatementBetListController CreateController()
         {
-            return new OutstandingDailyStatementBetListController(SessionService, ProductService, LangService, _betListApiClient, _authorizationService);
+            return new OutstandingDailyStatementBetListController(LangService, _betListApiClient, _authorizationService)
+            {
+                SessionService = SessionService,
+                ProductService = ProductService
+            };
         }
     }
 }

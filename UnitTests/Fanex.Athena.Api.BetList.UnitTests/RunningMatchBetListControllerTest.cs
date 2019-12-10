@@ -50,24 +50,26 @@
                 var actual = await controller.Index(metaModel);
 
                 // Assert
-                Assert.Multiple((TestDelegate)(() =>
+                Assert.Multiple(() =>
                 {
                     NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
                     Assert.That(metaModel.UspKey, Is.EqualTo(UspKey));
-                    BetListApiClient.Received().PostAsync((string)ApiPath, (object)metaModel, (string)SessionLanguage);
-                }));
+                    BetListApiClient.Received().PostAsync(ApiPath, metaModel, SessionLanguage);
+                });
             }
         }
 
         private RunningMatchBetListController CreateController()
         {
             return new RunningMatchBetListController(
-                SessionService,
-                ProductService,
                 LangService,
                 AuthorizationService,
                 BetListApiClient,
-                BalanceUpDataAccess);
+                BalanceUpDataAccess)
+            {
+                SessionService = SessionService,
+                ProductService = ProductService
+            };
         }
     }
 }

@@ -2566,4 +2566,8 @@
     <value>Subsidiary Search</value>
     <comment>123651</comment>
   </data>
+  <data name="EventType" xml:space="preserve">
+    <value>Event Type</value>
+    <comment>124316</comment>
+  </data>
 </root>

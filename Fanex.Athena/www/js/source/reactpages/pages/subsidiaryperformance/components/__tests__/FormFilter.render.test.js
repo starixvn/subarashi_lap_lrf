@@ -44,7 +44,7 @@ describe('FormFilter ', () => {
                 const expectedResult = {
                     language: "en-US",
                     dataSource: defaultAppData.subsidiaryList,
-                    keyField: "Name",
+                    keyField: "Value",
                     valueField: "Name",
                     statusField: "Checked"
                 }

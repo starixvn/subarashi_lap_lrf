@@ -9,6 +9,7 @@ using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Fanex.Athena.Service.StatelessCore.Abstraction
@@ -68,55 +69,62 @@ namespace Fanex.Athena.Service.StatelessCore.Abstraction
 
         protected virtual async Task<T>
            HandleAsync<T>(string path, object value, string language, MediaType mediaType, Func<HttpResponseMessage, Task<T>> codeBlock,
-            bool disposeHttpResponse = true)
+            bool disposeHttpResponse = true, int timeOut = 100)
         {
             if (codeBlock == null)
             {
                 return await Task.FromResult(default(T));
             }
-            using (var httpRequest = new HttpRequestMessage(HttpMethod.Post, new Uri(_client.BaseAddress + path)))
+            using (var cancelToken = new CancellationTokenSource(new TimeSpan(0, 0, timeOut)))
             {
-                httpRequest.Headers.Add(LANGUAGEKEY, language);
-                HttpResponseMessage response = null;
-                try
+
+                using (var httpRequest = new HttpRequestMessage(HttpMethod.Post, new Uri(_client.BaseAddress + path)))
                 {
-                    if (mediaType == MediaType.MsgPack)
+                    httpRequest.Headers.Add(LANGUAGEKEY, language);
+                    HttpResponseMessage response = null;
+                    try
                     {
-                        httpRequest.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(MsgPackContentType));
-                        using (var content = new ByteArrayContent(MessagePackSerializer.Serialize(value)))
+                        if (mediaType == MediaType.MsgPack)
                         {
-                            content.Headers.ContentType = new MediaTypeHeaderValue(MsgPackContentType);
-                            httpRequest.Content = content;
-                            response = await _client.SendAsync(httpRequest, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
+                            httpRequest.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(MsgPackContentType));
+                            using (var content = new ByteArrayContent(MessagePackSerializer.Serialize(value)))
+                            {
+                                content.Headers.ContentType = new MediaTypeHeaderValue(MsgPackContentType);
+                                httpRequest.Content = content;
+                                response = await _client.SendAsync(httpRequest, HttpCompletionOption.ResponseHeadersRead, cancelToken.Token).ConfigureAwait(false);
+                            }
+                        }
+
+                        if (mediaType == MediaType.Json)
+                        {
+                            httpRequest.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(JsonContentType));
+                            using (var content = new StringContent(JsonConvert.SerializeObject(value, _jsonSerializerSettings),
+                                Encoding.UTF8, JsonContentType))
+                            {
+                                httpRequest.Content = content;
+                                response = await _client.SendAsync(httpRequest, HttpCompletionOption.ResponseHeadersRead, cancelToken.Token).ConfigureAwait(false);
+                            }
+                        }
+                        response?.EnsureSuccessStatusCode();
+                        return await codeBlock(response).ConfigureAwait(false);
+                    }
+                    catch (Exception ex)
+                    {
+                        if (!disposeHttpResponse)
+                        {
+                            response?.Dispose();
+                        }
+
+                        throw new ServiceException(ex.Message, ApiName, ex);
+                    }
+                    finally
+                    {
+                        if (disposeHttpResponse && response != null)
+                        {
+                            response.Dispose();
                         }
                     }
-
-                    if (mediaType == MediaType.Json)
-                    {
-                        httpRequest.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(JsonContentType));
-                        using (var content = new StringContent(JsonConvert.SerializeObject(value, _jsonSerializerSettings),
-                            Encoding.UTF8, JsonContentType))
-                        {
-                            httpRequest.Content = content;
-                            response = await _client.SendAsync(httpRequest, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-                        }
-                    }
-                    response?.EnsureSuccessStatusCode();
-                    return await codeBlock(response).ConfigureAwait(false);
                 }
-                catch (Exception ex)
-                {
-                    disposeHttpResponse = true;
-                    throw new ServiceException(ex.Message, ApiName, ex);
-                }
-                finally
-                {
-                    if (disposeHttpResponse && response != null)
-                    {
-                        response.Dispose();
-                    }
-                }
-
             }
         }
 

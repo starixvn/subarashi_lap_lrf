@@ -53,6 +53,9 @@
       <HintPath>..\..\packages\SharpZipLib.1.0.0\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="NPOI, Version=2.4.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
       <HintPath>..\..\packages\NPOI.2.4.1\lib\net45\NPOI.dll</HintPath>
     </Reference>
@@ -125,6 +128,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="ColossusBetsWinLossServiceTest.cs" />
+    <Compile Include="ExchangeVoidedServiceTest.cs" />
     <Compile Include="LiveReportServiceTest.cs" />
     <Compile Include="SettledMatchCountServiceTest.cs" />
     <Compile Include="CustomerTurnoverServiceTest.cs" />
@@ -178,6 +182,10 @@
     <ProjectReference Include="..\..\Service\Fanex.Athena.Service.Report\Fanex.Athena.Service.Report.csproj">
       <Project>{AE7D3FED-BFFF-4AD6-816B-3A1644940511}</Project>
       <Name>Fanex.Athena.Service.Report</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Service\Fanex.Athena.Service.StatelessCore\Fanex.Athena.Service.StatelessCore.csproj">
+      <Project>{DA9A50E3-C62D-4F12-96C2-3AC289D423FE}</Project>
+      <Name>Fanex.Athena.Service.StatelessCore</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -14,7 +14,6 @@
     public class PromotionPrizeReportControllerTest : CultureBaseControllerHelperTest
     {
         private IReportAPIClient _reportAPIClient;
-        private IProductService _productService;
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
@@ -22,7 +21,6 @@
             base.FixtureSetUp();
 
             _reportAPIClient = Substitute.For<IReportAPIClient>();
-            _productService = Substitute.For<IProductService>();
 
             SetUpDefaultFakeData();
         }
@@ -33,13 +31,6 @@
             base.FixtureTearDown();
 
             _reportAPIClient = null;
-            _productService = null;
-        }
-
-        [TearDown]
-        public void TeadDown()
-        {
-            _reportAPIClient.ClearReceivedCalls();
         }
 
         [Test]
@@ -49,25 +40,33 @@
             {
                 // Arrange
                 var metaModel = new PromotionPrizeMetaModel();
-                var expectedData = new Tuple<Stream, string>(new MemoryStream(new byte[] { 1 }), "application/octet-stream");
-                _reportAPIClient.PostAsync("api/PromotionPrize/Export", metaModel, SessionService.UserSession.Language, MediaType.MsgPack).Returns(Task.FromResult(expectedData));
+                var expectedData = new Tuple<Stream, string>(new MemoryStream(new byte[0]), "application/octet-stream");
+                _reportAPIClient.PostAsync(
+                    "api/PromotionPrize/Export",
+                    metaModel,
+                    DefaultUserSession.Language,
+                    MediaType.MsgPack)
+                    .Returns(Task.FromResult(expectedData));
 
                 // Action
                 var result = await controller.ExportExcel(metaModel) as FileStreamResult;
 
                 // Assert
-                Assert.That(result.FileStream, Is.EqualTo(expectedData.Item1));
-                Assert.That(result.ContentType, Is.EqualTo(expectedData.Item2));
+                Assert.Multiple(() =>
+                {
+                    Assert.That(result.FileStream, Is.EqualTo(expectedData.Item1));
+                    Assert.That(result.ContentType, Is.EqualTo(expectedData.Item2));
+                });
             }
         }
 
         private PromotionPrizeReportController CreateController()
         {
-            var controller = Substitute.ForPartsOf<PromotionPrizeReportController>(_reportAPIClient);
-            controller.LangService = LangService;
-            controller.SessionServiceInstance = SessionService;
-
-            return controller;
+            return new PromotionPrizeReportController(_reportAPIClient)
+            {
+                LangService = LangService,
+                SessionServiceInstance = SessionService
+            };
         }
     }
 }

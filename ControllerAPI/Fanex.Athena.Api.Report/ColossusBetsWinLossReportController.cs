@@ -22,7 +22,6 @@ namespace Fanex.Athena.Api.Report
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
     using Fanex.Athena.Service.Core.Utility.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
 
     using Model.Core.ResultModel;
@@ -30,7 +29,6 @@ namespace Fanex.Athena.Api.Report
     using Resources;
 
     using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
     using Service.Report.Interfaces;
 
     [ApiFunctionAuthorization(PermissionKeys.ReportColossusBetsWinLoss)]
@@ -41,11 +39,9 @@ namespace Fanex.Athena.Api.Report
 
         public ColossusBetsWinLossReportController(
             IColossusBetsWinLossService colossusBetsWinLossService,
-            ISessionService sessionService,
-            IProductService productService,
             ILanguageService langService,
             ICurrencyValidation currencyValidation)
-            : base(sessionService, productService, langService)
+            : base(langService)
         {
             _colossusBetsWinLossService = colossusBetsWinLossService;
 

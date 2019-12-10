@@ -43,10 +43,15 @@
             _dataAccess = Substitute.For<ICashOutWinLossDataAccess>();
             _currencyValidation = Substitute.For<ICurrencyValidation>();
             _currencyValidation.IsValidCurrency(Arg.Any<int>(), Arg.Any<bool>()).Returns(true);
+            CreateController();
+        }
 
+        private void CreateController()
+        {
             _controller = Substitute.ForPartsOf<CashOutWinLossReportController>(_dataAccess,
-                SessionService,
-                ProductService, LangService, _currencyValidation);
+                            LangService, _currencyValidation);
+            _controller.SessionService = SessionService;
+            _controller.ProductService = ProductService;
         }
 
         [TearDown]

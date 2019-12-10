@@ -15,14 +15,14 @@
 
         protected override string ApiName => "BETLIST";
 
-        public async Task<HttpResponseMessage> PostAsync(string path, object value, string language)
+        public async Task<HttpResponseMessage> PostAsync(string path, object value, string language, int timeOut = 100)
         {
             return await HandleAsync(path, value, language, MediaType.Json,
-                  (response) => Task.FromResult(response)
-                , false).ConfigureAwait(false);
+                 (response) => Task.FromResult(response)
+                , false, timeOut).ConfigureAwait(false);
         }
 
-        public async Task<Stream> PostStreamAsync(string path, object value, string language)
+        public async Task<Stream> PostStreamAsync(string path, object value, string language, int timeOut = 100)
         {
             return await HandleAsync(path, value, language, MediaType.Json, async (response) =>
             {
@@ -33,7 +33,7 @@
                 }
                 return await response.Content.ReadAsStreamAsync();
             }
-          , false).ConfigureAwait(false);
+          , false, timeOut).ConfigureAwait(false);
         }
     }
 }

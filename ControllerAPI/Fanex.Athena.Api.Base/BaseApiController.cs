@@ -26,33 +26,15 @@ namespace Fanex.Athena.Api.Base
     public class BaseApiController : ApiController
     {
         private readonly ILanguageService _langService;
-        private readonly IProductService _productService;
-        private readonly ISessionService _sessionService;
-
-        protected internal BaseApiController(ISessionService sessionService, IProductService productService, ILanguageService languageService)
+        protected internal BaseApiController(ILanguageService languageService)
         {
-            _sessionService = sessionService ?? throw new ArgumentNullException(nameof(sessionService));
-            _productService = productService ?? throw new ArgumentNullException(nameof(productService));
             _langService = languageService ?? throw new ArgumentNullException(nameof(languageService));
         }
 
-        protected IDictionary<int, string> UserCurrencyList => _sessionService.UserSession.CurrencyList;
+        protected IDictionary<int, string> UserCurrencyList => SessionService.UserSession.CurrencyList;
 
-        protected IProductService ProductService
-        {
-            get
-            {
-                return _productService;
-            }
-        }
-
-        protected ISessionService SessionService
-        {
-            get
-            {
-                return _sessionService;
-            }
-        }
+        public IProductService ProductService { get; set; }
+        public ISessionService SessionService { get; set; }
 
         [System.CLSCompliant(false)]
         protected internal virtual HttpResponseMessage ExcelStream(IWorkbook workbook, string fileName)

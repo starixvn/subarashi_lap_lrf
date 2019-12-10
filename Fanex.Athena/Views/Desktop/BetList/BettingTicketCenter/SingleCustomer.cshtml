@@ -34,7 +34,8 @@
     selectedStatus: '@(selectedStatus)',
     selectedLiveStatus: '@(selectedLiveStatus)',
     selectedPlatform: 0,
-    isConvertAll: true
+    isConvertAll: true,
+    hasExchange: '@Model.HasExchange.ToString()' === 'True'
     };
     window._AppData = {
     liveStatusList: @Html.Raw(Model.LiveStatusList.Select(x => new { Id = x.Key, Value = x.Value, Status = true }).ToJson()),

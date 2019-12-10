@@ -93,7 +93,6 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers
             };
             var liveStatusList = new[] { LiveStatusTypes.NonLive, LiveStatusTypes.Live, LiveStatusTypes.Mix };
 
-            var userSession = SessionService.UserSession;
             var now = DateTime.Now;
             var metaModel = new PlayerBtcSingleCustomerMetaModel
             {
@@ -131,7 +130,6 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers
         public async Task PostIndex_ExportExcelWithNoContent_ReturnCorrectResult()
         {
             // Arrange
-            var userSession = SessionService.UserSession;
             var metaModel = new PlayerBtcSingleCustomerMetaModel
             {
                 IsExport = true
@@ -147,29 +145,6 @@ namespace Fanex.Athena.Module.PlayerAdmin.UnitTests.Controllers
 
                 // Assert
                 Assert.That(result.StatusCode, Is.EqualTo((int)HttpStatusCode.NoContent));
-            }
-        }
-
-        [Test]
-        public async Task PostIndex_ExportExcelAndHasContent_ReturnCorrectResult()
-        {
-            // Arrange
-            var userSession = SessionService.UserSession;
-            var metaModel = new PlayerBtcSingleCustomerMetaModel
-            {
-                IsExport = true
-            };
-            _betListApiClient.PostStreamAsync("/BettingTicketCenter/GetBySingleCustomer", metaModel, SessionService.UserSession.Language)
-                .Returns(new MemoryStream(new byte[] { 1, 2, 3 }));
-
-            using (var controller = CreateController())
-            {
-                // Action
-                var result = await controller.Index(metaModel) as FileStreamResult;
-
-                // Assert
-                Assert.That(result.FileStream.Length, Is.EqualTo(3));
-                Assert.That(result.ContentType, Is.EqualTo("application/octet-stream"));
             }
         }
 

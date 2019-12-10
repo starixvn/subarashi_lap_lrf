@@ -7,7 +7,6 @@
 
     using Base.Attributes;
     using Fanex.Athena.Model.Auth.DataDomain;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
 
     using Model.Core.DataDomain;
@@ -26,12 +25,10 @@
         private readonly ISubsidiaryPerformanceService _subsidiaryPerformanceService;
 
         public SubsidiaryPerformanceReportController(
-            ISessionService sessionService,
-            IProductService productService,
             ILanguageService langService,
             ISubsidiaryService subsidiaryService,
             ISubsidiaryPerformanceService subLicenseePerformanceService)
-            : base(sessionService, productService, langService)
+            : base(langService)
         {
             _subsidiaryService = subsidiaryService;
             _subsidiaryPerformanceService = subLicenseePerformanceService;

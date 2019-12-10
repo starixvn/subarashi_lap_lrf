@@ -16,6 +16,7 @@ import * as matchReducer from './matchReducer'
 import * as usernameReducer from '@jsroot/reducers/usernameReducer'
 import * as convertAllReducer from '@jsroot/reducers/convertAllReducer'
 import * as userGuideReducer from '@jsroot/reducers/userGuideReducer'
+import * as commonReducer from '../../common/components/reducer';
 
 export default combineReducers(Object.assign(
     gridDataReducer,
@@ -34,5 +35,6 @@ export default combineReducers(Object.assign(
     matchReducer,
     usernameReducer,
     convertAllReducer,
-    userGuideReducer
+    userGuideReducer,
+    commonReducer
 ));

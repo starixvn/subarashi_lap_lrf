@@ -30,10 +30,8 @@
 
         public CustomerBalanceReportController(
             ICustBalanceDataAccess custBalanceDataAccess,
-            ISessionService sessionService,
-            IProductService productService,
             ILanguageService langService)
-            : base(sessionService, productService, langService)
+            : base(langService)
         {
             _custBalanceDataAccess = custBalanceDataAccess;
         }

@@ -80,13 +80,13 @@
                 var actual = await controller.MixParlay(metaModel);
 
                 // Assert
-                Assert.Multiple((TestDelegate)(() =>
+                Assert.Multiple(() =>
                 {
                     NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
                     Assert.That(metaModel.UspKey, Is.EqualTo(UspKey));
                     Assert.That(metaModel.MultipleBettype, Is.EqualTo(((int)BetType.CombinationMixParlay).ToString()));
-                    BetListApiClient.Received().PostAsync((string)ApiPath, (object)metaModel, (string)SessionLanguage);
-                }));
+                    BetListApiClient.Received().PostAsync(ApiPath, metaModel, SessionLanguage);
+                });
             }
         }
 
@@ -107,13 +107,13 @@
                 var actual = await controller.DoubleChange(metaModel);
 
                 // Assert
-                Assert.Multiple((TestDelegate)(() =>
+                Assert.Multiple(() =>
                 {
                     NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
                     Assert.That(metaModel.UspKey, Is.EqualTo(UspKey));
                     Assert.That(metaModel.MultipleBettype, Is.EqualTo(DoubleChangeBettypes));
-                    BetListApiClient.Received().PostAsync((string)ApiPath, (object)metaModel, (string)SessionLanguage);
-                }));
+                    BetListApiClient.Received().PostAsync(ApiPath, metaModel, SessionLanguage);
+                });
             }
         }
 
@@ -134,13 +134,13 @@
                 var actual = await controller.BONTeamToScore(metaModel);
 
                 // Assert
-                Assert.Multiple((TestDelegate)(() =>
+                Assert.Multiple(() =>
                 {
                     NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
                     Assert.That(metaModel.UspKey, Is.EqualTo(UspKey));
                     Assert.That(metaModel.MultipleBettype, Is.EqualTo(BONTeamToScoreBettypes));
-                    BetListApiClient.Received().PostAsync((string)ApiPath, (object)metaModel, (string)SessionLanguage);
-                }));
+                    BetListApiClient.Received().PostAsync(ApiPath, metaModel, SessionLanguage);
+                });
             }
         }
 
@@ -161,12 +161,14 @@
         private RunningBettypesBetListController CreateController()
         {
             return new RunningBettypesBetListController(
-                SessionService,
-                ProductService,
                 LangService,
                 AuthorizationService,
                 BetListApiClient,
-                BalanceUpDataAccess);
+                BalanceUpDataAccess)
+            {
+                SessionService = SessionService,
+                ProductService = ProductService
+            };
         }
     }
 }

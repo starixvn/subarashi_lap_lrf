@@ -19,7 +19,6 @@ namespace Fanex.Athena.Api.BetList
     using Model.BetList.MetaModel;
 
     using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
 
     [ApiFunctionAuthorization(PermissionKeys.CustomerInfoCustomerList)]
     public class OutstandingDailyStatementBetListController : BaseApiController
@@ -29,12 +28,10 @@ namespace Fanex.Athena.Api.BetList
         private readonly IAuthorizationService _authorizationService;
 
         public OutstandingDailyStatementBetListController(
-            ISessionService sessionService,
-            IProductService productService,
             ILanguageService languageService,
             IBetListApiClient betListApiClient,
             IAuthorizationService authorizationService)
-        : base(sessionService, productService, languageService)
+        : base(languageService)
         {
             _betListApiClient = betListApiClient;
             _authorizationService = authorizationService;

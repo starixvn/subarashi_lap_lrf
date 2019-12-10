@@ -30,6 +30,8 @@
 
         private IBalanceUpDataAccess _balanceUpDataAccess;
 
+        private IAuthorizationService _authService;
+
         [OneTimeSetUp]
         public override void FixtureSetUp()
         {
@@ -41,6 +43,7 @@
             {
                 BalanceUpDay = BalanceUpDate
             });
+            _authService = Substitute.For<IAuthorizationService>();
 
             SetUpDefaultFakeData();
         }
@@ -51,6 +54,7 @@
             base.FixtureTearDown();
 
             _productService = null;
+            _authService = null;
         }
 
         [Test]
@@ -80,10 +84,11 @@
             }
         }
 
-        [Test]
-        public void RefNo_WhenCall_ReturnCorrectViewBag()
+        [TestCase(true)]
+        [TestCase(false)]
+        public void RefNo_WhenCall_ReturnCorrectViewBag(bool hasExchangePermission)
         {
-            using (var controller = CreateController())
+            using (var controller = CreateController(hasExchangePermission))
             {
                 // Arrange
                 var productKN = new Product { ProductCode = Product.KN, ProductName = FakeHelper.Create<string>() };
@@ -108,6 +113,7 @@
                 {
                     Assert.That(result.ViewBag.SelectedBaseCurrency, Is.EqualTo(DefaultUserSession.DefaultBaseCurrency));
                     Assert.That(result.ViewBag.ProductsRequireUseNameNote, Is.EqualTo(expectedProductsNote));
+                    Assert.That((bool)result.ViewBag.HasExchange, Is.EqualTo(hasExchangePermission));
                 });
             }
         }
@@ -135,10 +141,11 @@
             }
         }
 
-        [Test]
-        public void Running_WhenCall_ReturnCorrectViewModel()
+        [TestCase(true)]
+        [TestCase(false)]
+        public void Running_WhenCall_ReturnCorrectViewModel(bool hasExchangePermission)
         {
-            using (var controller = CreateController())
+            using (var controller = CreateController(hasExchangePermission))
             {
                 // Arrange
                 var productCodes = FakeHelper.CreateMany<Product>(3).ToList();
@@ -157,6 +164,7 @@
                     Assert.That(viewModel.CurrencyList, Is.EqualTo(DefaultUserSession.CurrencyList));
                     Assert.That(viewModel.ProductOptionList.Count(), Is.EqualTo(productCodes.Count));
                     Assert.That(viewModel.IsAllowedCustomerComm, Is.EqualTo(DefaultLicenseeSession.IsAllowedCustomerComm));
+                    Assert.That(viewModel.HasExchange, Is.EqualTo(hasExchangePermission));
                 });
             }
         }
@@ -184,10 +192,11 @@
             }
         }
 
-        [Test]
-        public void SingleCustomer_WhenCall_ReturnCorrectViewModel()
+        [TestCase(true)]
+        [TestCase(false)]
+        public void SingleCustomer_WhenCall_ReturnCorrectViewModel(bool hasExchangePermission)
         {
-            using (var controller = CreateController())
+            using (var controller = CreateController(hasExchangePermission))
             {
                 // Arrange
                 var productCodes = FakeHelper.CreateMany<Product>(3).ToList();
@@ -208,6 +217,7 @@
                     Assert.That(viewModel.PlatformList, Is.Not.Empty);
                     Assert.That(viewModel.ProductOptionList.Count(), Is.EqualTo(productCodes.Count));
                     Assert.That(viewModel.IsAllowedCustomerComm, Is.EqualTo(DefaultLicenseeSession.IsAllowedCustomerComm));
+                    Assert.That(viewModel.HasExchange, Is.EqualTo(hasExchangePermission));
                 });
             }
         }
@@ -235,10 +245,11 @@
             }
         }
 
-        [Test]
-        public void MultipleCustomers_WhenCall_ReturnCorrectViewModel()
+        [TestCase(true)]
+        [TestCase(false)]
+        public void MultipleCustomers_WhenCall_ReturnCorrectViewModel(bool hasExchangePermission)
         {
-            using (var controller = CreateController())
+            using (var controller = CreateController(hasExchangePermission))
             {
                 // Arrange
                 var productCodes = FakeHelper.CreateMany<Product>(3).ToList();
@@ -260,13 +271,16 @@
                     Assert.That(viewModel.ProductOptionList.Count(), Is.EqualTo(productCodes.Count));
                     Assert.That(viewModel.MinDate, Is.EqualTo(BalanceUpDate));
                     Assert.That(viewModel.IsAllowedCustomerComm, Is.EqualTo(DefaultLicenseeSession.IsAllowedCustomerComm));
+                    Assert.That(viewModel.HasExchange, Is.EqualTo(hasExchangePermission));
                 });
             }
         }
 
-        private BettingTicketCenterController CreateController()
+        private BettingTicketCenterController CreateController(bool hasExchangePermission = true)
         {
-            return new BettingTicketCenterController(_productService, _balanceUpDataAccess)
+            _authService.CheckProductBelongsTo(SessionService.LicenseeSession.LicenseeName, ProductTypes.Exchange).Returns(hasExchangePermission);
+
+            return new BettingTicketCenterController(_productService, _balanceUpDataAccess, _authService)
             {
                 LangService = LangService,
                 SessionServiceInstance = SessionService

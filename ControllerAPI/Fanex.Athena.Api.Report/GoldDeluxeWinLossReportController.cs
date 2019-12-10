@@ -17,13 +17,11 @@
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Service.Core.Utility.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
 
     using Model.Core.ResultModel;
 
     using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
 
     [ApiFunctionAuthorization(PermissionKeys.ReportGoldDeluxeWinloss)]
     public class GoldDeluxeWinLossReportController : ApiReportBaseController
@@ -33,12 +31,10 @@
 
         public GoldDeluxeWinLossReportController(
             IGoldDeluxeWinLossDataAccess dataAccess,
-            ISessionService sessionService,
-            IProductService productService,
             ILanguageService langService,
             ICurrencyValidation currencyValidation
             )
-            : base(sessionService, productService, langService)
+            : base(langService)
         {
             _dataAccess = dataAccess;
             _currencyValidation = currencyValidation;

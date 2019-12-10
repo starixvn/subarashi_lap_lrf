@@ -3457,7 +3457,8 @@ var PageLayout = function PageLayout(props) {
       isConvertAll = props.isConvertAll,
       selectedBaseCurrency = props.selectedBaseCurrency,
       selectedTabIndex = props.selectedTabIndex,
-      children = props.children;
+      children = props.children,
+      hasExchange = props.hasExchange;
 
   var getResource = function getResource(key) {
     return _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource(key);
@@ -3502,6 +3503,10 @@ var PageLayout = function PageLayout(props) {
     isActive: selectedTabIndex == 3,
     label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("Running"),
     url: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_8__["default"].resolveClientUrl("BettingTicketCenter/Running")
+  }), hasExchange && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_6__["Tab"], {
+    isActive: selectedTabIndex == 4,
+    label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("Exchange"),
+    url: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_8__["default"].resolveClientUrl("ExchangeVoided")
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, children)));
 };
 
@@ -3514,10 +3519,12 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
   var isConvertAll = state.isConvertAll,
-      selectedBaseCurrency = state.selectedBaseCurrency;
+      selectedBaseCurrency = state.selectedBaseCurrency,
+      hasExchange = state.hasExchange;
   return Object.assign({}, {
     isConvertAll: isConvertAll,
-    selectedBaseCurrency: selectedBaseCurrency
+    selectedBaseCurrency: selectedBaseCurrency,
+    hasExchange: hasExchange
   });
 }
 
@@ -3542,6 +3549,22 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var ActionCreators = Object.assign({}, _jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_0__, _jsroot_actions_gridDataAction__WEBPACK_IMPORTED_MODULE_1__, _jsroot_actions_requestParamAction__WEBPACK_IMPORTED_MODULE_2__);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/bettingticketscenter/common/components/reducer.js":
+/*!******************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/bettingticketscenter/common/components/reducer.js ***!
+  \******************************************************************************************/
+/*! exports provided: hasExchange */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hasExchange", function() { return hasExchange; });
+/* harmony import */ var _jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
+
+var hasExchange = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(false, {});
 
 /***/ }),
 
@@ -4236,6 +4259,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_reducers_requestParamReducer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/reducers/requestParamReducer */ "./www/js/source/reactpages/reducers/requestParamReducer.js");
 /* harmony import */ var _jsroot_reducers_reportTitleReducer__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @jsroot/reducers/reportTitleReducer */ "./www/js/source/reactpages/reducers/reportTitleReducer.js");
 /* harmony import */ var _jsroot_reducers_userGuideReducer__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @jsroot/reducers/userGuideReducer */ "./www/js/source/reactpages/reducers/userGuideReducer.js");
+/* harmony import */ var _common_components_reducer__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../common/components/reducer */ "./www/js/source/reactpages/pages/bettingticketscenter/common/components/reducer.js");
 
 
 
@@ -4246,7 +4270,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(Object.assign(_jsroot_reducers_gridDataReducer_js__WEBPACK_IMPORTED_MODULE_1__, _filterHandlerReducer_js__WEBPACK_IMPORTED_MODULE_2__, _jsroot_reducers_usernameReducer__WEBPACK_IMPORTED_MODULE_3__, _jsroot_reducers_baseCurrencyReducer__WEBPACK_IMPORTED_MODULE_4__, _jsroot_reducers_loaderReducer__WEBPACK_IMPORTED_MODULE_5__, _jsroot_reducers_convertAllReducer__WEBPACK_IMPORTED_MODULE_6__, _jsroot_reducers_requestParamReducer__WEBPACK_IMPORTED_MODULE_7__, _jsroot_reducers_reportTitleReducer__WEBPACK_IMPORTED_MODULE_8__, _jsroot_reducers_userGuideReducer__WEBPACK_IMPORTED_MODULE_9__)));
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(Object.assign(_jsroot_reducers_gridDataReducer_js__WEBPACK_IMPORTED_MODULE_1__, _filterHandlerReducer_js__WEBPACK_IMPORTED_MODULE_2__, _jsroot_reducers_usernameReducer__WEBPACK_IMPORTED_MODULE_3__, _jsroot_reducers_baseCurrencyReducer__WEBPACK_IMPORTED_MODULE_4__, _jsroot_reducers_loaderReducer__WEBPACK_IMPORTED_MODULE_5__, _jsroot_reducers_convertAllReducer__WEBPACK_IMPORTED_MODULE_6__, _jsroot_reducers_requestParamReducer__WEBPACK_IMPORTED_MODULE_7__, _jsroot_reducers_reportTitleReducer__WEBPACK_IMPORTED_MODULE_8__, _jsroot_reducers_userGuideReducer__WEBPACK_IMPORTED_MODULE_9__, _common_components_reducer__WEBPACK_IMPORTED_MODULE_10__)));
 
 /***/ }),
 

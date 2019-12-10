@@ -5,6 +5,7 @@
     using System.Web.Mvc;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Module.PlayerAdmin.MetaModel;
     using Fanex.Athena.Module.PlayerAdmin.Services.Interfaces;
     using Fanex.Athena.Resources;
@@ -58,7 +59,7 @@
 
             if (!setting.IsEnabled)
             {
-                return Json(new { Code = 1, Message = ViewResources.FunctionDeniedMsg });
+                return Json(new ResultInfo { Code = 1, Message = ViewResources.FunctionDeniedMsg });
             }
             var result = await _service.UpdateSettingAsync(metaModel).ConfigureAwait(false);
             result.Message = result.Code == 0 ? ViewResources.UpdateSuccess : result.Message;

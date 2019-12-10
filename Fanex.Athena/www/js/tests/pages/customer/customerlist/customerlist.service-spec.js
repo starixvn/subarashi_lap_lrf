@@ -305,7 +305,7 @@ function ($, Site, CustomerListOption, jqGridAdditional, PagingHelper, CustomerL
             var ajaxObj = jasmine.createSpyObj("ajaxObj", ["abort"]);
 
             beforeAll(function () {
-                spyOn(CustomerListService, "getPostData");
+                spyOn(CustomerListService, "getPostData").and.returnValue({});
                 spyOn(CustomerListService, "bindData");
                 spyOn(window, "alert");
 
@@ -381,7 +381,7 @@ function ($, Site, CustomerListOption, jqGridAdditional, PagingHelper, CustomerL
 
                 var data = CustomerListService.getPostData();
 
-                expect(data).toBe(undefined);
+                expect(data).toBe(null);
             });
 
             it("does not return data if no odd group is checked", function () {
@@ -391,7 +391,7 @@ function ($, Site, CustomerListOption, jqGridAdditional, PagingHelper, CustomerL
 
                 var data = CustomerListService.getPostData();
 
-                expect(data).toBe(undefined);
+                expect(data).toBe(null);
             });
 
             it("returns correct data without odd groups", function () {
@@ -409,7 +409,8 @@ function ($, Site, CustomerListOption, jqGridAdditional, PagingHelper, CustomerL
                     BaseCurrency: "1",
                     CustStatus: "0",
                     GridColumns: [{ Name: "col1", Checked: true }],
-                    OddsGroups: [{ Name: "odd1", Checked: true }]
+                    OddsGroups: [{ Name: "odd1", Checked: true }],
+                    IsViewOnSubsidiary: false
                 };
                 setFixturesForValue(expectedData);
                 setFixturesForColumnMultiSelect(['<input type="checkbox" checked name="col1">']);
@@ -435,7 +436,8 @@ function ($, Site, CustomerListOption, jqGridAdditional, PagingHelper, CustomerL
                     GroupCommId: "1",
                     BaseCurrency: "1",
                     CustStatus: "0",
-                    GridColumns: [{ Name: "col1", Checked: true }]
+                    GridColumns: [{ Name: "col1", Checked: true }],
+                    IsViewOnSubsidiary: false
                 };
                 setFixturesForValue(expectedData);
                 setFixturesForColumnMultiSelect(['<input type="checkbox" checked name="col1">']);

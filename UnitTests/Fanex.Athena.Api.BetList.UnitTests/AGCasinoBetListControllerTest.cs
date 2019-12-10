@@ -29,12 +29,11 @@
         public async Task Detail_WhenCall_CallBetListApiWithCorrectParameters()
         {
             using (var controller = new AGCasinoBetListController(
-                SessionService,
-                ProductService,
                 LangService,
                 AuthorizationService,
                 BetListApiClient,
-                BalanceUpDataAccess))
+                BalanceUpDataAccess)
+            { ProductService = ProductService, SessionService = SessionService })
             {
                 // Arrange
                 var expect = new HttpResponseMessage();
@@ -46,12 +45,12 @@
                 var actual = await controller.Detail(metaModel);
 
                 // Assert
-                Assert.Multiple((TestDelegate)(() =>
+                Assert.Multiple(() =>
                 {
                     NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
                     Assert.That(metaModel.UspKey, Is.EqualTo(UspKey));
-                    BetListApiClient.Received().PostAsync(ApiPath, (object)metaModel, SessionLanguage);
-                }));
+                    BetListApiClient.Received().PostAsync(ApiPath, metaModel, SessionLanguage);
+                });
             }
         }
     }

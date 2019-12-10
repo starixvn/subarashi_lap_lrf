@@ -17,7 +17,6 @@
     using Resources;
 
     using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
 
     [ApiFunctionAuthorization(PermissionKeys.BettingTicketCenter)]
     public class BettingTicketCenterMultiCustomerController : BaseApiController
@@ -29,12 +28,10 @@
         private readonly IBetListApiClient _betListApiClient;
 
         public BettingTicketCenterMultiCustomerController(
-            ISessionService sessionService,
-            IProductService productService,
             ILanguageService langService,
             IAppSettings appSettings,
             IBetListApiClient betListApiClient)
-            : base(sessionService, productService, langService)
+            : base(langService)
         {
             _appSettings = appSettings;
             _betListApiClient = betListApiClient;
@@ -61,9 +58,9 @@
 
             metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, currencyList);
             metaModel.HasPlayerCom = SessionService.LicenseeSession.IsAllowedCustomerComm;
-
+            var timeOutInSecond = int.Parse(_appSettings.GetValue("BetListApiOutInSecond"));
             return await _betListApiClient.PostAsync("/BettingTicketCenterMultiCustomer/GetData",
-                metaModel, userSession.Language).ConfigureAwait(false);
+                metaModel, userSession.Language, timeOutInSecond).ConfigureAwait(false);
         }
     }
 }

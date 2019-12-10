@@ -13,19 +13,6 @@
         private const string ActionCurrencyIdList = "1";
 
         [Test]
-        public void LicenseeId_WhenCall_ReturnCorrectValue()
-        {
-            using (var controller = CreateController())
-            {
-                // Action
-                var actual = controller.LicenseeId;
-
-                // Assert
-                Assert.That(actual, Is.EqualTo(ActionLicenseeId));
-            }
-        }
-
-        [Test]
         public void UserId_WhenCall_ReturnCorrectValue()
         {
             using (var controller = CreateController())

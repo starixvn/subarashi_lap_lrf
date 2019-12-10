@@ -32,17 +32,21 @@
         {
             _dataAccess = Substitute.For<ILicenseeWinLossDataAccess>();
             _reportSettingService = Substitute.For<IReportSettingService>();
-
-            _controller = Substitute.ForPartsOf<LicenseeWinLossReportController>(
-                SessionService,
-                ProductService,
-                _reportSettingService,
-                LangService,
-                _dataAccess);
-
-            _controller.When(x => x.ExcelStream(Arg.Any<IWorkbook>(), Arg.Any<string>())).DoNotCallBase();
+            CreateController();
 
             MockSessionData();
+        }
+
+        private void CreateController()
+        {
+            _controller = Substitute.ForPartsOf<LicenseeWinLossReportController>(
+                            _reportSettingService,
+                            LangService,
+                            _dataAccess);
+            _controller.SessionService = SessionService;
+            _controller.ProductService = ProductService;
+
+            _controller.When(x => x.ExcelStream(Arg.Any<IWorkbook>(), Arg.Any<string>())).DoNotCallBase();
         }
 
         [Test]

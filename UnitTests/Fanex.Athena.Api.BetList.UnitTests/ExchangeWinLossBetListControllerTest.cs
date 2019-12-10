@@ -146,12 +146,12 @@
                 var actual = await controller.Index(metaModel);
 
                 // Assert
-                Assert.Multiple((TestDelegate)(() =>
+                Assert.Multiple(() =>
                 {
                     NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
-                    _betListApiClient.Received().PostAsync((string)MainApiPath,
-(object)Arg.Is<ExchangeBetListMetaModel>((System.Linq.Expressions.Expression<Predicate<ExchangeBetListMetaModel>>)(x => (bool)(x == metaModel && x.BaseCurrency == expectedBaseCurrency))), (string)SessionLanguage);
-                }));
+                    _betListApiClient.Received().PostAsync(MainApiPath,
+Arg.Is<ExchangeBetListMetaModel>(x => x == metaModel && x.BaseCurrency == expectedBaseCurrency), SessionLanguage);
+                });
             }
         }
 
@@ -251,17 +251,21 @@
                 var actual = await controller.Detail(metaModel);
 
                 // Assert
-                Assert.Multiple((TestDelegate)(() =>
+                Assert.Multiple(() =>
                 {
                     NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
-                    _betListApiClient.Received().PostAsync((string)DetailApiPath, (object)metaModel, (string)SessionLanguage);
-                }));
+                    _betListApiClient.Received().PostAsync(DetailApiPath, metaModel, SessionLanguage);
+                });
             }
         }
 
         private ExchangeWinLossBetListController CreateController()
         {
-            return new ExchangeWinLossBetListController(SessionService, ProductService, LangService, _betListApiClient, _authorizationService);
+            return new ExchangeWinLossBetListController(LangService, _betListApiClient, _authorizationService)
+            {
+                SessionService = SessionService,
+                ProductService = ProductService
+            };
         }
     }
 }

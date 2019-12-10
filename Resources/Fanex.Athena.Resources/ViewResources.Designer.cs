@@ -2257,6 +2257,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Event Type.
+        /// </summary>
+        public static string EventType {
+            get {
+                return ResourceManager.GetString("EventType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This file exceeded 65535 entries. Please contact administrator for more details..
         /// </summary>
         public static string ExcelExceedRowsMsg {

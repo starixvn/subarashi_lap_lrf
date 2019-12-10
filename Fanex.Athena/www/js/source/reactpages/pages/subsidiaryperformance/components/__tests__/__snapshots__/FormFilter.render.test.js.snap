@@ -34,11 +34,31 @@ exports[`FormFilter  render methods render whole component match to snapshot 1`]
             ]
           }
           hasAllOption={true}
-          hasSearchBox={true}
-          keyField="Name"
+          hasSearchBox={false}
+          id="SubsidiaryTreeView"
+          isAllTextShown={false}
+          keyField="Value"
           language="en-US"
           onChange={[Function]}
           statusField="Checked"
+          texts={
+            Object {
+              "All": "All",
+              "SelectOptions": "Please select",
+              "SelectedItemCount": "# selected",
+            }
+          }
+          treeViewOption={
+            Object {
+              "childrenField": "Children",
+              "includeSelectedParentKey": false,
+              "indent": 30,
+              "keyField": "Value",
+              "statusField": "Checked",
+              "useOriginalDataSource": false,
+              "valueField": "Name",
+            }
+          }
           valueField="Name"
         />
       </div>

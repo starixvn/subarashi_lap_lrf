@@ -1,0 +1,64 @@
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Web.Mvc;
+using Fanex.Athena.Extension.Utility;
+using Fanex.Athena.Model.Auth.DataDomain;
+using Fanex.Athena.Model.Core.DataDomain;
+using Fanex.Athena.Model.Report.DTO;
+using Fanex.Athena.Model.Report.MetaModel;
+using Fanex.Athena.Model.Report.ViewModel;
+using Fanex.Athena.Service.Report.Interfaces;
+using Fanex.Athena.Service.StatelessCore.Interfaces;
+using Fanex.Athena.Web.ActionFilter;
+
+namespace Fanex.Athena.Controllers.Report
+{
+    [FunctionAuthorization(PermissionKeys.BettingTicketCenter)]
+    public class ExchangeVoidedController : ReportBaseController
+    {
+        private readonly IAppSettings _appSetting;
+
+        private readonly IAuthorizationService _authService;
+
+        private readonly IExchangeVoidedService _exchangeService;
+
+        public ExchangeVoidedController(
+                  IAppSettings appSetting,
+                  IAuthorizationService authService,
+                  IExchangeVoidedService exchangeService)
+        {
+            _appSetting = appSetting;
+            _authService = authService;
+            _exchangeService = exchangeService;
+        }
+
+        [HttpGet]
+        public ActionResult Index()
+        {
+            var hasPermission = HasPermission();
+
+            return View("~/Views/Desktop/Report/ExchangeVoided/Index.cshtml", model: hasPermission);
+        }
+
+        [HttpPost]
+        [ValidationWebRequest(ObjectName = "metaModel")]
+        [AutoBindMetaModel(BindAgent = true, BindSiteName = true)]
+        public async Task<ActionResult> Index(ExchangeVoidedMetaModel metaModel)
+        {
+            if (!HasPermission())
+            {
+                return JsonNet(new ExchangeVoidedViewModel { DataList = new List<ExchangeVoidedItem>(), TotalPage = 0 });
+            }
+
+            metaModel.Environment = _appSetting.Environment;
+            metaModel.Language = SessionServiceInstance.UserSession.Language;
+
+            return JsonNet(await _exchangeService.GetData(metaModel).ConfigureAwait(false));
+        }
+
+        private bool HasPermission()
+        {
+            return _authService.CheckProductBelongsTo(SessionServiceInstance.LicenseeSession.LicenseeName, ProductTypes.Exchange);
+        }
+    }
+}

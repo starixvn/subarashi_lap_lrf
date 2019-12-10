@@ -20,6 +20,7 @@ var cssPaths = {
     playerwinloss: "./www/css/source/reactpages/pages/playeradmin/playerwinloss.scss",
     statement: "./www/css/source/reactpages/pages/playeradmin/statement.scss",
     dailybets: "./www/css/source/reactpages/pages/dailybets/index.scss",
+    exchangevoided: "./www/css/source/reactpages/pages/exchangevoided/index.scss"
 };
 
 var scriptPaths = {
@@ -52,6 +53,7 @@ var scriptPaths = {
     statement: "./www/js/source/reactpages/Module/PlayerAdmin/statement/components/index.jsx",
 
     dailybets: "./www/js/source/reactpages/pages/dailybets/components/index.jsx",
+    exchangevoided: "./www/js/source/reactpages/pages/exchangevoided/components/index.jsx"
 };
 module.exports = {
     projectRoot: projectRoot,

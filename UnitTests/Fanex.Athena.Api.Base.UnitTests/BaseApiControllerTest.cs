@@ -36,7 +36,7 @@
             // Arrange
             const string FileName = "excel.sml";
             var workbook = Substitute.For<IWorkbook>();
-            var controller = new BaseApiController(_sessionService, _productService, _langService);
+            var controller = new BaseApiController(_langService) { SessionService = _sessionService, ProductService = _productService };
 
             // Action
             var result = controller.ExcelStream(workbook, FileName);

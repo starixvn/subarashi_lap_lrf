@@ -10,6 +10,7 @@ import * as reportTitleReducer from '@jsroot/reducers/reportTitleReducer'
 import * as statusReducer from '@jsroot/reducers/statusReducer'
 import * as convertAllReducer from '@jsroot/reducers/convertAllReducer'
 import * as userGuideReducer from '@jsroot/reducers/userGuideReducer'
+import * as commonReducer from '../../common/components/reducer'
 
 export default combineReducers(Object.assign(
     gridDataReducer,
@@ -22,5 +23,6 @@ export default combineReducers(Object.assign(
     reportTitleReducer,
     statusReducer,
     convertAllReducer,
-    userGuideReducer
+    userGuideReducer,
+    commonReducer
 ));

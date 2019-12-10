@@ -6,8 +6,6 @@
     using System.Threading.Tasks;
 
     using Base.UnitTests;
-
-    using DataAccess.Core.Configuration.Interfaces;
     using DataAccess.Report.Interfaces;
 
     using Excel.Report;
@@ -15,8 +13,6 @@
     using Extension.Utility;
 
     using Fanex.Athena.Model.Core.MetaModel.Product;
-
-    using Model.Core.DTO.Configuration;
     using Model.Core.ResultModel;
     using Model.Report.DTO;
     using Model.Report.MetaModel;
@@ -39,18 +35,22 @@
         {
             base.FixtureSetUp();
 
-            var appSettings = Substitute.For<IAppSettings>();
             _dataAccess = Substitute.For<IWinLossByLeagueDataAccess>();
-
-            _controller = Substitute.ForPartsOf<WinLossByLeagueReportController>(
-                SessionService,
-                ProductService,
-                LangService,
-                _dataAccess,
-                appSettings);
-            _controller.Request = new HttpRequestMessage();
+            CreateController();
 
             MockSessionData();
+        }
+
+        private void CreateController()
+        {
+            var appSettings = Substitute.For<IAppSettings>();
+            _controller = Substitute.ForPartsOf<WinLossByLeagueReportController>(
+                            LangService,
+                            _dataAccess,
+                            appSettings);
+            _controller.SessionService = SessionService;
+            _controller.ProductService = ProductService;
+            _controller.Request = new HttpRequestMessage();
         }
 
         [OneTimeTearDown]

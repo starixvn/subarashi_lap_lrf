@@ -42,12 +42,10 @@ namespace Fanex.Athena.Api.Report
 
         public CashOutWinLossReportController(
             ICashOutWinLossDataAccess cashOutWinLossDataAccess,
-            ISessionService sessionService,
-            IProductService productService,
             ILanguageService langService,
             ICurrencyValidation currencyValidation
             )
-            : base(sessionService, productService, langService)
+            : base(langService)
         {
             _cashOutWinLossDataAccess = cashOutWinLossDataAccess;
             _currencyValidation = currencyValidation;

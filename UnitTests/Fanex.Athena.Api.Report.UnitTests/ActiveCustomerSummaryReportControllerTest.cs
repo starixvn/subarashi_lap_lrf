@@ -42,12 +42,18 @@
             base.FixtureSetUp();
 
             _dataAccess = Substitute.For<IActiveCustomerSummaryDataAccess>();
-
-            _controller = Substitute.ForPartsOf<ActiveCustomerSummaryReportController>(_dataAccess, SessionService, ProductService, LangService);
-
-            _controller.When(x => x.ExcelStream(Arg.Any<IWorkbook>(), Arg.Any<string>())).DoNotCallBase();
+            CreateController();
 
             MockSessionData();
+        }
+
+        private void CreateController()
+        {
+            _controller = Substitute.ForPartsOf<ActiveCustomerSummaryReportController>(_dataAccess, LangService);
+            _controller.SessionService = SessionService;
+            _controller.ProductService = ProductService;
+
+            _controller.When(x => x.ExcelStream(Arg.Any<IWorkbook>(), Arg.Any<string>())).DoNotCallBase();
         }
 
         [OneTimeTearDown]

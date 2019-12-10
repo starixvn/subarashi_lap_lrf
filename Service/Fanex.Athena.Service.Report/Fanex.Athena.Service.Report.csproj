@@ -138,7 +138,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExchangeVoidedService.cs" />
     <Compile Include="Interfaces\IColossusBetsWinLossService.cs" />
+    <Compile Include="Interfaces\IExchangeVoidedService.cs" />
     <Compile Include="Interfaces\ISubsidiaryPerformanceService.cs" />
     <Compile Include="Interfaces\IWeeklyLiveMatchService.cs" />
     <Compile Include="ColossusBetsWinLossService.cs" />
@@ -192,6 +194,10 @@
     <ProjectReference Include="..\Fanex.Athena.Service.Core\Fanex.Athena.Service.Core.csproj">
       <Project>{fcfd7434-085b-4c93-848f-e1cbcedcc5a0}</Project>
       <Name>Fanex.Athena.Service.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.Athena.Service.StatelessCore\Fanex.Athena.Service.StatelessCore.csproj">
+      <Project>{DA9A50E3-C62D-4F12-96C2-3AC289D423FE}</Project>
+      <Name>Fanex.Athena.Service.StatelessCore</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

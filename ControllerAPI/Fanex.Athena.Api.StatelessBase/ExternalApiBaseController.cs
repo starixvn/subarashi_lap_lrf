@@ -16,12 +16,6 @@ namespace Fanex.Athena.Api.StatelessBase
 
         public string Language => (string)ActionContext.ActionArguments["language"];
 
-        /// <summary>
-        /// will be remove soon
-        /// </summary>
-        [Obsolete]
-        public int LicenseeId => (int)ActionContext.ActionArguments["licenseeid"];
-
         public int UserId => (int)ActionContext.ActionArguments["userid"];
 
         public string CurrencyIDList => (string)ActionContext.ActionArguments["currencyIDList"];

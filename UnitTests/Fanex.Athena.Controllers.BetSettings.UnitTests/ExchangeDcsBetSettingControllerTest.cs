@@ -1,6 +1,5 @@
 ﻿namespace Fanex.Athena.Controllers.BetSettings.UnitTests
 {
-    using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Model.BetSettings.MetaModel;
@@ -46,7 +45,7 @@
                     .Returns(Task.FromResult(isEnabled));
 
                 const double ExtendedData = 10d;
-                _exchangeCommApiService.GetCommission(metaModel.CustId)
+                _exchangeCommApiService.GetCommission(metaModel.CustId, SessionService.UserSession.Language)
                     .Returns(new ResultInfo<double> { ExtendedData = ExtendedData });
 
                 // Action
@@ -76,7 +75,7 @@
                 _betSettingService.GetStatusAsync(metaModel.CustId, metaModel.ProductId)
                     .Returns(Task.FromResult(isEnabled));
 
-                _exchangeCommApiService.GetCommission(metaModel.CustId)
+                _exchangeCommApiService.GetCommission(metaModel.CustId, SessionService.UserSession.Language)
                     .Returns(new ResultInfo<double> { Code = 1, Message = "Error" });
 
                 // Action
@@ -127,7 +126,7 @@
                 var expectedResultInfo = new ResultInfo<double> { Code = 1, Message = "Test" };
 
                 _exchangeCommApiService.UpdateCommissionAsync(
-                    DefaultUserSession.UserId, 0, 0, newComm)
+                    DefaultUserSession.UserId, 0, 0, newComm, SessionService.UserSession.Language)
                     .Returns(Task.FromResult<IResultInfo<double>>(expectedResultInfo));
 
                 // Action
@@ -155,7 +154,6 @@
                 SessionServiceInstance = SessionService,
                 LicenseeSettingServiceInstance = LicenseeSettingService,
                 AppSettingInstance = AppSettings
-
             };
 
             return controller;

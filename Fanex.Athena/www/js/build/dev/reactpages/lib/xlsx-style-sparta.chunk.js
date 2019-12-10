@@ -2081,7 +2081,7 @@ function fromByteArray (uint8) {
 
   var Buffer;
   try {
-    Buffer = __webpack_require__(/*! buffer */ 20).Buffer;
+    Buffer = __webpack_require__(/*! buffer */ 21).Buffer;
   } catch (e) {
   }
 
@@ -5523,7 +5523,7 @@ if (typeof self === 'object') {
 } else {
   // Node.js or Web worker with no crypto support
   try {
-    var crypto = __webpack_require__(/*! crypto */ 21);
+    var crypto = __webpack_require__(/*! crypto */ 22);
     if (typeof crypto.randomBytes !== 'function')
       throw new Error('Not supported');
 
@@ -30310,7 +30310,7 @@ util.inherits = __webpack_require__(/*! inherits */ "./node_modules/inherits/inh
 /*</replacement>*/
 
 /*<replacement>*/
-var debugUtil = __webpack_require__(/*! util */ 18);
+var debugUtil = __webpack_require__(/*! util */ 19);
 var debug = void 0;
 if (debugUtil && debugUtil.debuglog) {
   debug = debugUtil.debuglog('stream');
@@ -32199,7 +32199,7 @@ Writable.prototype._destroy = function (err, cb) {
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Buffer = __webpack_require__(/*! safe-buffer */ "./node_modules/safe-buffer/index.js").Buffer;
-var util = __webpack_require__(/*! util */ 19);
+var util = __webpack_require__(/*! util */ 20);
 
 function copyBuffer(src, target, offset) {
   src.copy(target, offset);
@@ -46718,17 +46718,6 @@ var XLS = XLSX;
 
 /***/ }),
 
-/***/ 18:
-/*!**********************!*\
-  !*** util (ignored) ***!
-  \**********************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-/* (ignored) */
-
-/***/ }),
-
 /***/ 19:
 /*!**********************!*\
   !*** util (ignored) ***!
@@ -46741,6 +46730,17 @@ var XLS = XLSX;
 /***/ }),
 
 /***/ 20:
+/*!**********************!*\
+  !*** util (ignored) ***!
+  \**********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/* (ignored) */
+
+/***/ }),
+
+/***/ 21:
 /*!************************!*\
   !*** buffer (ignored) ***!
   \************************/
@@ -46751,7 +46751,7 @@ var XLS = XLSX;
 
 /***/ }),
 
-/***/ 21:
+/***/ 22:
 /*!************************!*\
   !*** crypto (ignored) ***!
   \************************/

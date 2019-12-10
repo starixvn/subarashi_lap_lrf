@@ -123,33 +123,6 @@
             }
         }
 
-        [Test]
-        public async Task ExportRunningBetList_WhenCall_CallApiWithCorrectParameter()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var metaModel = FakeHelper.Create<PlayerRunningBetListMetalModel>(x => x.IsExport, true);
-                var language = FakeHelper.Create<string>();
-                StubUserSessionData(new UserAuthInfo { Language = language });
-
-                _betListApiClient.PostStreamAsync("/PlayerAdminBetList/Export", metaModel, language)
-                    .Returns(new MemoryStream(new byte[] { 1 }));
-
-                // Action
-                await controller.GetRunningBetList(metaModel);
-
-                // Assert
-                Assert.Multiple(() =>
-                {
-                    _betListApiClient.Received(1).PostStreamAsync(
-                        Arg.Is<string>(x => x == "/PlayerAdminBetList/Export"),
-                        Arg.Is(metaModel),
-                        Arg.Is<string>(x => x == language));
-                });
-            }
-        }
-
         private PlayerBetListController CreateController()
         {
             var result = new PlayerBetListController(_betListApiClient);

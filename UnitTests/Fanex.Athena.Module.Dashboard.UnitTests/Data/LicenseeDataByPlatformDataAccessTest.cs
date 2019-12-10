@@ -62,7 +62,7 @@
                     new KeyValuePair<string, decimal>(nameof(PlatformType.Asia), 100M),
                 }
             };
-            var metaModel = new DashboardBaseModel { BaseCurrency = "EUR" };
+            var metaModel = new DashboardBaseModel { BaseCurrency = "EUR", AgentListXml = "<Root></Root>" };
             Reader.Read().Returns(true, false);
             Reader["PlatformType"].Returns(PlatformType.Asia);
             Reader["LicenseeWL"].Returns(100M);
@@ -110,7 +110,7 @@
                     new KeyValuePair<string, decimal>(nameof(PlatformType.Asia), 100M),
                 }
             };
-            var metaModel = new DashboardBaseModel { BaseCurrency = "EUR" };
+            var metaModel = new DashboardBaseModel { BaseCurrency = "EUR", AgentListXml = "<Root></Root>" };
             Reader.Read().Returns(true, false);
             Reader["PlatformType"].Returns(PlatformType.Asia);
             Reader["Turnover"].Returns(100M);

@@ -46,6 +46,11 @@
 
         private async Task<WidgetByPlatformViewModel> GetData(DashboardBaseModel metaModel, string uspName, string winlossColumnName)
         {
+            if (string.IsNullOrEmpty(metaModel.AgentListXml))
+            {
+                return new WidgetByPlatformViewModel { Total = 0, Data = new List<KeyValuePair<string, decimal>>(0) };
+            }
+
             using (var db = this.GetObjectDb(uspName))
             {
                 var param = new

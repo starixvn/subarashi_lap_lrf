@@ -21,11 +21,9 @@
         private readonly ICasinoTurnoverDataAccess _casinoTurnoverDataAccess;
 
         public CasinoTurnoverReportController(
-            ISessionService sessionService,
-            IProductService productService,
             ILanguageService langService,
             ICasinoTurnoverDataAccess dataAccess)
-            : base(sessionService, productService, langService)
+            : base(langService)
         {
             _casinoTurnoverDataAccess = dataAccess;
         }

@@ -19,7 +19,7 @@
     {
         private ICustPendingFundsDataAccess _dataAccess;
         private CustomerPendingFundsReportController _controller;
-        ILicenseeSettingService _licenseeSettingService;
+        private ILicenseeSettingService _licenseeSettingService;
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
@@ -29,13 +29,18 @@
             _licenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(false);
 
             _dataAccess = Substitute.For<ICustPendingFundsDataAccess>();
-
-            _controller = Substitute.ForPartsOf<CustomerPendingFundsReportController>
-                (_dataAccess, SessionService, ProductService, LangService, _licenseeSettingService);
-
-            _controller.When(x => x.ExcelStream(Arg.Any<IWorkbook>(), Arg.Any<string>())).DoNotCallBase();
+            CreateController();
 
             MockSessionData();
+        }
+
+        private void CreateController()
+        {
+            _controller = Substitute.ForPartsOf<CustomerPendingFundsReportController>
+                            (_dataAccess, LangService, _licenseeSettingService);
+            _controller.SessionService = SessionService;
+            _controller.ProductService = ProductService;
+            _controller.When(x => x.ExcelStream(Arg.Any<IWorkbook>(), Arg.Any<string>())).DoNotCallBase();
         }
 
         [OneTimeTearDown]
@@ -46,7 +51,6 @@
             _controller = null;
             _dataAccess = null;
             _licenseeSettingService = null;
-
         }
 
         [Test]

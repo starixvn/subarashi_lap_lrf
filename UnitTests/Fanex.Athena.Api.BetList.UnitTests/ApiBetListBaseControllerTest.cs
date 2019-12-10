@@ -77,9 +77,9 @@
                 var actual = await controller.GetBetListResult(metaModel, uspKey, apiPath);
 
                 // Assert
-                Assert.Multiple((TestDelegate)(() =>
+                Assert.Multiple(() =>
                 {
-                    Assert.Multiple((TestDelegate)(() =>
+                    Assert.Multiple(() =>
                     {
                         NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
                         Assert.That(metaModel.PageIndex, Is.EqualTo(1));
@@ -90,9 +90,9 @@
                         Assert.That(metaModel.AgentListXml, Is.EqualTo(AgentListXml));
                         Assert.That(metaModel.HasPlayerCom, Is.EqualTo(SessionService.LicenseeSession.IsAllowedCustomerComm));
                         Assert.That(metaModel.UspKey, Is.EqualTo(uspKey));
-                        BetListApiClient.Received().PostAsync((string)apiPath, (object)metaModel, (string)SessionLanguage);
-                    }));
-                }));
+                        BetListApiClient.Received().PostAsync(apiPath, metaModel, SessionLanguage);
+                    });
+                });
             }
         }
 
@@ -115,9 +115,9 @@
                 var actual = await controller.GetPagingBetListResult(metaModel, uspKey, pageIndex, pageSize, apiPath);
 
                 // Assert
-                Assert.Multiple((TestDelegate)(() =>
+                Assert.Multiple(() =>
                 {
-                    Assert.Multiple((TestDelegate)(() =>
+                    Assert.Multiple(() =>
                     {
                         NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
                         Assert.That(metaModel.IsServerPaging, Is.True);
@@ -129,21 +129,23 @@
                         Assert.That(metaModel.AgentListXml, Is.EqualTo(AgentListXml));
                         Assert.That(metaModel.HasPlayerCom, Is.EqualTo(SessionService.LicenseeSession.IsAllowedCustomerComm));
                         Assert.That(metaModel.UspKey, Is.EqualTo(uspKey));
-                        BetListApiClient.Received().PostAsync(apiPath, (object)metaModel, SessionLanguage);
-                    }));
-                }));
+                        BetListApiClient.Received().PostAsync(apiPath, metaModel, SessionLanguage);
+                    });
+                });
             }
         }
 
         private FakeApiBetListBaseController CreateController()
         {
             return new FakeApiBetListBaseController(
-                SessionService,
-                ProductService,
                 LangService,
                 AuthorizationService,
                 BetListApiClient,
-                BalanceUpDataAccess);
+                BalanceUpDataAccess)
+            {
+                SessionService = SessionService,
+                ProductService = ProductService
+            };
         }
     }
 }

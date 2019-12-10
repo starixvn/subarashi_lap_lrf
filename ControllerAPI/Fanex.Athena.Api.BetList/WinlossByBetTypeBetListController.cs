@@ -11,7 +11,6 @@
     using Model.BetList.MetaModel;
 
     using Service.Core.Common.Interfaces;
-    using Service.Core.Users.Interfaces;
     using Service.Core.Utility.Interfaces;
     using Service.StatelessCore.Interfaces;
 
@@ -21,15 +20,13 @@
         private readonly ICurrencyValidation _currencyValidation;
 
         public WinlossByBetTypeBetListController(
-            ISessionService sessionService,
-            IProductService productService,
             ILanguageService languageService,
             IAuthorizationService authorizationService,
             IBetListApiClient betListApiClient,
             IBalanceUpDataAccess balanceUpDataAccess,
              ICurrencyValidation currencyValidation
             )
-        : base(sessionService, productService, languageService, authorizationService, betListApiClient, balanceUpDataAccess)
+        : base(languageService, authorizationService, betListApiClient, balanceUpDataAccess)
         {
             _currencyValidation = currencyValidation;
         }

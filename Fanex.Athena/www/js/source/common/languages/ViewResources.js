@@ -1,4 +1,4 @@
-﻿// Generated at: 11/20/2019 8:15:23 AM
+﻿// Generated at: 12/4/2019 5:46:27 PM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -244,6 +244,7 @@ ErrorProcessingMsg:"Sorry, an error occurred while processing your request.",
 Euro:"Euro",
 Event:"Event",
 EventDate:"Event Date",
+EventType:"Event Type",
 ExcelExceedRowsMsg:"This file exceeded 65535 entries. Please contact administrator for more details.",
 ExchangeWinLoss:"Exchange Win Loss",
 ExcludeTestData:"Exclude Test Data",
@@ -607,6 +608,7 @@ Subject:"Subject",
 Submit:"Submit",
 Subsidiary:"Subsidiary",
 SubsidiaryPerformance:"Subsidiary Performance",
+SubsidiarySearch:"Subsidiary Search",
 SubsidiaryWL:"Subsidiary W/L",
 Summary:"Summary",
 Sunday:"Sunday",

@@ -155,6 +155,7 @@
     <Compile Include="ColossusBetsWinLossReportController.cs" />
     <Compile Include="CashOutWinLossReportController.cs" />
     <Compile Include="DailyBetsReportController.cs" />
+    <Compile Include="ExchangeVoidedController.cs" />
     <Compile Include="ExchangeWinLossReportController.cs" />
     <Compile Include="LicenseeWinLossReportController.cs" />
     <Compile Include="LiveReportController.cs" />

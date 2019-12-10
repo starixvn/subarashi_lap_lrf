@@ -34,7 +34,14 @@
             MockSessionData();
 
             _service = Substitute.For<IWeeklyLiveMatchService>();
-            _controller = Substitute.ForPartsOf<WeeklyLiveMatchReportController>(_service, SessionService, ProductService, LangService);
+            CreateController();
+        }
+
+        private void CreateController()
+        {
+            _controller = Substitute.ForPartsOf<WeeklyLiveMatchReportController>(_service, LangService);
+            _controller.SessionService = SessionService;
+            _controller.ProductService = ProductService;
             _controller.When(x => x.ExcelStream(Arg.Any<IWorkbook>(), Arg.Any<string>())).DoNotCallBase();
         }
 
