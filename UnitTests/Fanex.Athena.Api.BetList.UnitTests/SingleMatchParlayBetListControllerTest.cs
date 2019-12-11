@@ -51,12 +51,14 @@
         private SingleMatchParlayBetListController CreateController()
         {
             return new SingleMatchParlayBetListController(
-                SessionService,
-                ProductService,
                 LangService,
                 AuthorizationService,
                 BetListApiClient,
-                BalanceUpDataAccess);
+                BalanceUpDataAccess)
+            {
+                SessionService = SessionService,
+                ProductService = ProductService
+            };
         }
     }
 }

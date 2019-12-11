@@ -6,19 +6,16 @@
     using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
     using Fanex.Athena.Model.BetList.MetaModel;
     using Fanex.Athena.Service.Core.Common.Interfaces;
-    using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     public class SingleMatchParlayBetListController : ApiBetListBaseController
     {
         public SingleMatchParlayBetListController(
-             ISessionService sessionService,
-             IProductService productService,
              ILanguageService languageService,
              IAuthorizationService authorizationService,
              IBetListApiClient betListApiClient,
              IBalanceUpDataAccess balanceUpDataAccess)
-        : base(sessionService, productService, languageService, authorizationService, betListApiClient, balanceUpDataAccess)
+        : base(languageService, authorizationService, betListApiClient, balanceUpDataAccess)
         {
         }
 
