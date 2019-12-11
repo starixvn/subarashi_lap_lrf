@@ -2579,6 +2579,9 @@
     <value>Event Type</value>
     <comment>124316</comment>
   </data>
+  <data name="ProductSG" xml:space="preserve">
+    <value>SG</value>
+  </data>
   <data name="BetfromOthers" xml:space="preserve">
     <value>Others</value>
     <comment>125553</comment>
