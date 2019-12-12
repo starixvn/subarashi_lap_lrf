@@ -72,13 +72,13 @@ namespace Fanex.Athena.Controllers.Report
         [ValidationWebRequest]
         public async Task<FileResult> ExportExcel(CustomerBalanceMetaModel metaModel)
         {
-            var userSession = SessionServiceInstance.UserSession;
+            var language = SessionServiceInstance.UserSession.Language;
             const string fileName = "CustomerBalance.csv";
 
             var licenseeSession = SessionServiceInstance.LicenseeSession;
             var productAccess = ProductServiceInstance.GetSingleWalletProductAccess(
                 licenseeSession.LicenseeId,
-                SessionServiceInstance.UserSession.Language,
+                language,
                 FunctionNames.CustomerBalance);
 
             metaModel.IsAllowedBA = productAccess.IsAllowBA;
@@ -86,8 +86,7 @@ namespace Fanex.Athena.Controllers.Report
             metaModel.PageIndex = 1;
             metaModel.PageSize = int.MaxValue - 1000;
 
-            var httpResponse = await _reportAPIClient.PostAsync("api/CustomerBalance/ExportExcel",
-                metaModel, userSession.Language).ConfigureAwait(false);
+            var httpResponse = await _reportAPIClient.PostAsync("api/CustomerBalance/ExportExcel", metaModel, language).ConfigureAwait(false);
 
             return File(httpResponse.Item1, httpResponse.Item2, fileName);
         }

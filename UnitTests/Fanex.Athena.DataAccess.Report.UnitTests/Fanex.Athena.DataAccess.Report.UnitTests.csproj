@@ -112,7 +112,6 @@
     <Compile Include="CashOutWinLossDataAccessTest.cs" />
     <Compile Include="ColossusBetsWinLossDataAccessTest.cs" />
     <Compile Include="CasinoTurnoverDataAccessTest.cs" />
-    <Compile Include="CustomerBalanceDataAccessTest.cs" />
     <Compile Include="CustomerPendingFundsDataAccessTest.cs" />
     <Compile Include="CustomerTurnoverDataAccessTest.cs" />
     <Compile Include="ExchangeVoidedDataAccessTest.cs" />

@@ -141,7 +141,6 @@
     <Compile Include="ThirdPartyWinLossExcel.cs" />
     <Compile Include="WeeklyLiveMatchExcel.cs" />
     <Compile Include="WinlossByLeagueExcel.cs" />
-    <Compile Include="CustomerBalanceExcel.cs" />
     <Compile Include="CustomerPendingFundsExcel.cs" />
     <Compile Include="CustomerTurnoverExcel.cs" />
     <Compile Include="LicenseeWinLossExcel.cs" />

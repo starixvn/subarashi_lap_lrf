@@ -116,7 +116,6 @@
     <Compile Include="ActiveCustomerSummaryReportControllerTest.cs" />
     <Compile Include="AgCasinoBalanceReportControllerTest.cs" />
     <Compile Include="ColossusBetsWinLossReportControllerTest.cs" />
-    <Compile Include="CustomerBalanceReportControllerTest.cs" />
     <Compile Include="CustomerPendingFundsReportControllerTest.cs" />
     <Compile Include="LicenseeWinLossByTimeZoneReportControllerTest.cs" />
     <Compile Include="SpecialLicenseeWinLossReportControllerTest.cs" />
