@@ -50,6 +50,9 @@
         [Test]
         public void Index_WhenGet_ReturnCorrectViewResult()
         {
+            // Arrange
+            var userSession = SessionService.UserSession;
+
             using (var controller = CreateController())
             {
                 // Action
@@ -61,6 +64,10 @@
                 {
                     StringAssert.Contains("Report/CustomerBalance/Main.cshtml", viewResult.ViewName);
                     Assert.That(viewModel.Param.LicenseeId, Is.EqualTo(SessionService.LicenseeSession.LicenseeId));
+                    Assert.That(viewModel.Param.CurrencyId, Is.Zero);
+                    Assert.That(viewModel.Param.ProductOptions, Is.Empty);
+                    Assert.That(viewModel.CurrencyList, Is.EqualTo(userSession.CurrencyList));
+                    Assert.That(viewModel.ProductAccess.ProductList, Is.Empty);
                 });
             }
         }
@@ -113,19 +120,18 @@
         [Test]
         public async Task ExportExcel_WhenCall_ChangesCorrectlyMetaModel()
         {
-            using (var controller = CreateController())
+            // Arrange
+            var licenseeSession = SessionService.LicenseeSession;
+            var productAccess = new ProductAccess(new List<Product> { new Product { ProductCode = Product.BA } });
+            var metaModel = new CustomerBalanceMetaModel();
+            Stream content = new MemoryStream();
+            var contentType = FakeHelper.Create<string>();
+            var expectedResult = Tuple.Create(content, contentType);
+
+            using (var controller = CreateController(productAccess))
             {
-                // Arrange
-                var licenseeSession = SessionService.LicenseeSession;
-                var productAccess = _productService.GetSingleWalletProductAccess(
-                    licenseeSession.LicenseeId,
-                    SessionService.UserSession.Language,
-                    FunctionNames.CustomerBalance);
-                var metaModel = new CustomerBalanceMetaModel();
-                Stream content = new MemoryStream();
-                var contentType = FakeHelper.Create<string>();
-                var expectedResult = Tuple.Create(content, contentType);
-                _reportAPIClient.PostAsync("api/CustomerBalance/ExportExcel", metaModel, SessionService.UserSession.Language).Returns(Task.FromResult(expectedResult));
+                _reportAPIClient.PostAsync("api/CustomerBalance/ExportExcel", metaModel, SessionService.UserSession.Language)
+                    .Returns(Task.FromResult(expectedResult));
 
                 // Action
                 await controller.ExportExcel(metaModel);
@@ -133,18 +139,20 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    Assert.That(metaModel.IsAllowedBA, Is.EqualTo(productAccess.IsAllowBA));
+                    Assert.That(metaModel.IsAllowedBA, Is.True);
                     Assert.That(metaModel.HasComm, Is.EqualTo(licenseeSession.IsAllowedCustomerComm));
+                    Assert.That(metaModel.PageIndex, Is.EqualTo(1));
+                    Assert.That(metaModel.PageSize, Is.EqualTo(int.MaxValue - 1000));
                 });
             }
         }
 
-        private CustomerBalanceReportController CreateController()
+        private CustomerBalanceReportController CreateController(ProductAccess productAccess = null)
         {
             _productService.GetSingleWalletProductAccess(
                 SessionService.LicenseeSession.LicenseeId,
                 SessionService.UserSession.Language,
-                FunctionNames.CustomerBalance).Returns(new ProductAccess(new List<Product>()));
+                FunctionNames.CustomerBalance).Returns(productAccess ?? new ProductAccess(new List<Product>()));
 
             return new CustomerBalanceReportController(_reportAPIClient)
             {
