@@ -1,19 +1,18 @@
-﻿namespace Fanex.Athena.Controllers.TotalBets.UnitTests
+﻿namespace Fanex.Athena.Controllers.Report.UnitTests
 {
     using System;
     using System.Data;
     using Base.UnitTests;
-    using Model.Core.DataDomain;
     using DataAccess.Core.Configuration.Interfaces;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Model.Core.DataDomain;
     using NSubstitute;
     using NUnit.Framework;
     using Report;
     using Resources;
-    using Service.Core.Common.Interfaces;
     using Service.Report.Interfaces;
     using UnitTest.Common.Helpers;
     using VendorAdapter.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     [TestFixture]
     public class MatchWinLossReportControllerTest_AssignMatchName : CultureBaseControllerHelperTest
@@ -27,7 +26,7 @@
 
             base.FixtureSetUp();
         }
-        
+
         [Test]
         public void AssignMatchName_NumberGame_AssignCorrectMatchName()
         {

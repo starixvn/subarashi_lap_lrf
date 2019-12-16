@@ -1,4 +1,4 @@
-﻿namespace Fanex.Athena.Controllers.TotalBets.UnitTests
+﻿namespace Fanex.Athena.Controllers.Report.UnitTests
 {
     using System.Threading.Tasks;
     using System.Web.Mvc;
@@ -6,7 +6,6 @@
     using DataAccess.Core.Common.Interfaces;
     using Excel.Base.Entities;
     using Excel.Report;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DTO.Common;
     using Model.Core.ResultModel;
     using Model.Report.DTO;
@@ -15,7 +14,6 @@
     using NSubstitute;
     using NUnit.Framework;
     using Report;
-    using Service.Core.Common.Interfaces;
     using Service.Report.Interfaces;
     using Web.ResultExtension;
 
@@ -127,7 +125,7 @@
                 MockCreatingExcel(controller);
                 var resultModel = new ReportResultModel<CustTurnover>();
                 _customerTurnoverService.GetDataList(
-                    Arg.Any<CustomerTurnoverMetaModel>(), 
+                    Arg.Any<CustomerTurnoverMetaModel>(),
                     UserCurrencyList,
                     SessionService.UserSession.Language).Returns(resultModel);
 

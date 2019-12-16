@@ -1,4 +1,4 @@
-﻿namespace Fanex.Athena.Controllers.TotalBets.UnitTests
+﻿namespace Fanex.Athena.Controllers.Report.UnitTests
 {
     using System.Data;
     using Base.UnitTests;
