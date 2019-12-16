@@ -43,17 +43,17 @@ export const PageLayout = (props) => {
                 afterShowFunc={afterShow}
             >
                 <Tabs>
-                    <Tab isActive={selectedTabIndex == 0} label={LangHelper.getSingleResource("MultiCustomers")}
-                        url={Site.resolveClientUrl("BettingTicketCenter/MultipleCustomers")}>
-                    </Tab>
-                    <Tab isActive={selectedTabIndex == 1} label={LangHelper.getSingleResource("SingleCustomer")}
+                    <Tab isActive={selectedTabIndex == 0} label={LangHelper.getSingleResource("SingleCustomer")}
                         url={Site.resolveClientUrl("BettingTicketCenter/SingleCustomer")}>
                     </Tab>
-                    <Tab isActive={selectedTabIndex == 2} label={LangHelper.getSingleResource("RefNo")}
+                    <Tab isActive={selectedTabIndex == 1} label={LangHelper.getSingleResource("RefNo")}
                         url={Site.resolveClientUrl("BettingTicketCenter/RefNo")}>
                     </Tab>
-                    <Tab isActive={selectedTabIndex == 3} label={LangHelper.getSingleResource("Running")}
+                    <Tab isActive={selectedTabIndex == 2} label={LangHelper.getSingleResource("Running")}
                         url={Site.resolveClientUrl("BettingTicketCenter/Running")}>
+                    </Tab>
+                    <Tab isActive={selectedTabIndex == 3} label={LangHelper.getSingleResource("AdvancedSearch")}
+                        url={Site.resolveClientUrl("BettingTicketCenter/AdvancedSearch")}>
                     </Tab>
                     {
                         hasExchange && 

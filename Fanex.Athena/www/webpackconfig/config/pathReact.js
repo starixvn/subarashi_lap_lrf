@@ -38,7 +38,7 @@ var scriptPaths = {
     notification: "./www/js/source/reactpages/pages/notification/components/resultAmendment/index.jsx",
     exchangewl: "./www/js/source/reactpages/pages/exchangewl/components/index.jsx",
     speciallicenseewl: "./www/js/source/reactpages/pages/speciallicenseewl/components/index.jsx",
-    bettingticketscenter_multicustomer: "./www/js/source/reactpages/pages/bettingticketscenter/multicustomer/components/index.jsx",
+    bettingticketscenter_advancedsearch: "./www/js/source/reactpages/pages/bettingticketscenter/advancedsearch/components/index.jsx",
     bettingticketscenter_singlecustomer: "./www/js/source/reactpages/pages/bettingticketscenter/singlecustomer/components/index.jsx",
     bettingticketscenter_refno: "./www/js/source/reactpages/pages/bettingticketscenter/refno/components/index.jsx",
     bettingticketscenter_running: "./www/js/source/reactpages/pages/bettingticketscenter/running/components/index.jsx",

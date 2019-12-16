@@ -1936,7 +1936,7 @@
   <data name="TipSharing" xml:space="preserve">
     <value>打赏分成</value>
   </data>
-  <data name="BettingTicketCenter_MultiCustomersTabNote2" xml:space="preserve">
+  <data name="BettingTicketCenter_AdvancedSearchTabNote2" xml:space="preserve">
     <value>显示从{0}开始的资料</value>
   </data>
   <data name="Note" xml:space="preserve">
@@ -1948,7 +1948,7 @@
   <data name="MultiCustomers" xml:space="preserve">
     <value>多个会员</value>
   </data>
-  <data name="BettingTicketCenter_MultiCustomersTabNote1" xml:space="preserve">
+  <data name="BettingTicketCenter_AdvancedSearchTabNote1" xml:space="preserve">
     <value>所有投注类别，联赛和比赛过滤器仅支援1个选定日期</value>
   </data>
   <data name="ServerBusyMessage" xml:space="preserve">

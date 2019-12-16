@@ -534,8 +534,8 @@
     <comment>114797</comment>
   </data>
   <data name="ExternalIdOrSystemId" xml:space="preserve">
-    <value>用户名或系统账号</value>
-    <comment>114797</comment>
+    <value>或系统帐号(支援前坠搜寻)</value>
+    <comment>108298</comment>
   </data>
   <data name="Fail" xml:space="preserve">
     <value>失败</value>
@@ -792,7 +792,7 @@
     <value>承租公司输赢</value>
   </data>
   <data name="Live" xml:space="preserve">
-    <value>滚球</value>
+    <value>滚球(不含混合)</value>
   </data>
   <data name="LiveGame" xml:space="preserve">
     <value>滚球游戏</value>
@@ -915,7 +915,8 @@
     <value>最低赔率</value>
   </data>
   <data name="MixLiveAndNoneLive" xml:space="preserve">
-    <value>混合滚球&amp;非滚球</value>
+    <value>混合过关</value>
+    <comment>108298</comment>
   </data>
   <data name="Mo" xml:space="preserve">
     <value>Mo</value>
@@ -985,7 +986,8 @@
     <value>None level</value>
   </data>
   <data name="NoneLive" xml:space="preserve">
-    <value>非滚球</value>
+    <value>非滚球(不含混合)</value>
+    <comment>108298</comment>
   </data>
   <data name="NonEntered" xml:space="preserve">
     <value>成绩还没输入场数</value>
@@ -1953,8 +1955,8 @@
   <data name="MobileLiteVersion" xml:space="preserve">
     <value>手机轻量版</value>
   </data>
-  <data name="BettingTicketCenter_MultiCustomersTabNote2" xml:space="preserve">
-    <value>显示从{0}开始的资料</value>
+  <data name="BettingTicketCenter_AdvancedSearchTabNote2" xml:space="preserve">
+    <value>仅支援{0}以后的注单</value>
   </data>
   <data name="Note" xml:space="preserve">
     <value>注意</value>
@@ -1965,8 +1967,8 @@
   <data name="MultiCustomers" xml:space="preserve">
     <value>多个会员</value>
   </data>
-  <data name="BettingTicketCenter_MultiCustomersTabNote1" xml:space="preserve">
-    <value>所有投注类别，联赛和比赛过滤器仅支援1个选定日期</value>
+  <data name="BettingTicketCenter_AdvancedSearchTabNote1" xml:space="preserve">
+    <value>全部联赛与全部赛事仅支援单日搜寻</value>
   </data>
   <data name="BTCExportExcelMsg1" xml:space="preserve">
     <value>您的搜寻结果超过系统设定的范围.</value>
@@ -2207,5 +2209,20 @@
   </data>
   <data name="DeepLink" xml:space="preserve">
     <value>数据API</value>
+  </data>
+  <data name="CurrencyErrorSolution" xml:space="preserve">
+    <value>请洽你们的最高管理者替你设置币别权限</value>
+  </data>
+  <data name="ErrorCurrencyMsg" xml:space="preserve">
+    <value>你尚未设置任何币别权限</value>
+  </data>
+  <data name="ErrorNotification" xml:space="preserve">
+    <value>遭遇问题了!</value>
+  </data>
+  <data name="Solution" xml:space="preserve">
+    <value>解决方法</value>
+  </data>
+  <data name="UserNotHaveCurrency1" xml:space="preserve">
+    <value>你尚未设置任何币别权限</value>
   </data>
 </root>

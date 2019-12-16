@@ -16,7 +16,7 @@ describe('PageLayout ', () => {
     })
 
     it('render with correct active tab', () => {
-        const props = { toggleLoader: jest.fn(), children: [], selectedTabIndex: 1, isConvertAll: true, selectedBaseCurrency: 'eur'};
+        const props = { toggleLoader: jest.fn(), children: [], selectedTabIndex: 0, isConvertAll: true, selectedBaseCurrency: 'eur'};
         
         const shallowRenderer = new ShallowRenderer();
         shallowRenderer.render(<PageLayout {...props} />);
@@ -28,7 +28,7 @@ describe('PageLayout ', () => {
     });
 
     it('show loading before showing', () => {
-        const props = { toggleLoader: jest.fn(), children: [], selectedTabIndex: 1, isConvertAll: true, selectedBaseCurrency: 'eur' };
+        const props = { toggleLoader: jest.fn(), children: [], selectedTabIndex: 0, isConvertAll: true, selectedBaseCurrency: 'eur' };
 
         const shallowRenderer = new ShallowRenderer();
         shallowRenderer.render(<PageLayout {...props} />);
@@ -41,7 +41,7 @@ describe('PageLayout ', () => {
     });
 
     it('hide loading after showing', () => {
-        const props = { toggleLoader: jest.fn(), children: [], selectedTabIndex: 1, isConvertAll: true, selectedBaseCurrency: 'eur' };
+        const props = { toggleLoader: jest.fn(), children: [], selectedTabIndex: 0, isConvertAll: true, selectedBaseCurrency: 'eur' };
 
         const shallowRenderer = new ShallowRenderer();
         shallowRenderer.render(<PageLayout {...props} />);
@@ -54,7 +54,7 @@ describe('PageLayout ', () => {
     });
 
     it('getResource - LangHelper.getSingleResource is called', () => {
-        const props = { toggleLoader: jest.fn(), children: [], selectedTabIndex: 1, isConvertAll: true, selectedBaseCurrency: 'eur' };
+        const props = { toggleLoader: jest.fn(), children: [], selectedTabIndex: 0, isConvertAll: true, selectedBaseCurrency: 'eur' };
         const key = 'Resource';
 
         const shallowRenderer = new ShallowRenderer();

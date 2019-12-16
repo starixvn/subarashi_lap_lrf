@@ -1,6 +1,8 @@
 ﻿@{
     Layout = null;
     Page.Title = "Error!!!!!";
+
+    var langCode = System.Globalization.CultureInfo.CurrentUICulture.IetfLanguageTag;
 }
 <!DOCTYPE html>
 <html>
@@ -20,51 +22,72 @@
             width: 50%;
             padding: 10px;
         }
+
         ol {
             counter-reset: item;
         }
 
-        ol li {
-            display: block;
-        }
+            ol li {
+                display: block;
+            }
 
-        ol li:before {
-            content: counter(item) ". ";
-            counter-increment: item;
-            font-weight: bold;
-        }
+                ol li:before {
+                    content: counter(item) ". ";
+                    counter-increment: item;
+                    font-weight: bold;
+                }
     </style>
 </head>
 <body>
     <div class="error-content">
         <img src="@Url.ContentLink("/www/assets/images/lap-restriction-page.png")" />
         <div class="center">
-            <div>
-                <strong>You're here because of one of those reasons:</strong>
-            </div>
-            <ol style="list-style-type: decimal;">
-                @if (ViewBag.Message == ViewResources.OneTokenRestrictionDefaultMsg)
-                {
-                <li>
-                    Your internet connection might be temporally broken.
-                </li>
-                <li>
-                    Your authorization may be no longer valid since web browser's caches are cleared.
-                </li>
-                }
-                <li style="color:red">
-                    @ViewBag.Message
-                </li>
-            </ol>
-            <div>
-                Please try to login again:
-            </div>
-            <ol style="list-style-type: decimal;">
-                <li>Login at Licensee Admin</li>
-                <li>
-                    Access the reports/ functions you want.
-                </li>
-            </ol>
+            @if (@ViewBag.Message == ViewResources.UserNotHaveCurrency && langCode == "zh-CN")
+            {
+                <div>
+                    <strong>@ViewResources.ErrorNotification</strong>
+                </div>
+                <ol style="list-style-type: decimal;">
+                    <li style="color:red">
+                        @ViewResources.UserNotHaveCurrency
+                    </li>
+                </ol>
+                <div>
+                    @ViewResources.Solution
+                </div>
+                <ol style="list-style-type: decimal;">
+                    <li>@ViewResources.CurrencyErrorSolution"</li>
+                </ol>
+            }
+            else
+            {
+                <div>
+                    <strong>@ViewResources.ErrorNotification</strong>
+                </div>
+                <ol style="list-style-type: decimal;">
+                    @if (ViewBag.Message == ViewResources.OneTokenRestrictionDefaultMsg)
+                    {
+                        <li>
+                            Your internet connection might be temporally broken.
+                        </li>
+                        <li>
+                            Your authorization may be no longer valid since web browser's caches are cleared.
+                        </li>
+                    }
+                    <li style="color:red">
+                        @ViewBag.Message
+                    </li>
+                </ol>
+                <div>
+                    Please try to login again:
+                </div>
+                <ol style="list-style-type: decimal;">
+                    <li>Login at Licensee Admin</li>
+                    <li>
+                        Access the reports/ functions you want.
+                    </li>
+                </ol>
+            }
         </div>
     </div>
 </body>

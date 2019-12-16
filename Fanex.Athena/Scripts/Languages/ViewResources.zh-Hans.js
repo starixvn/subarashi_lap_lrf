@@ -1,4 +1,4 @@
-﻿// Generated at: 11/06/2019 11:42:40 AM
+﻿// Generated at: 12/16/2019 9:11:38 AM
 var _language_zh_Hans = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -65,8 +65,8 @@ BetTaken:"匹配时间",
 BettingLimit:"投注限额",
 BettingStatement:"投注详情",
 BettingTicketCenter:"注单中心",
-BettingTicketCenter_MultiCustomersTabNote1:"所有投注类别，联赛和比赛过滤器仅支援1个选定日期",
-BettingTicketCenter_MultiCustomersTabNote2:"显示从{0}开始的资料",
+BettingTicketCenter_AdvancedSearchTabNote1:"所有投注类别，联赛和比赛过滤器仅支援1个选定日期",
+BettingTicketCenter_AdvancedSearchTabNote2:"显示从{0}开始的资料",
 BettingTicketCenter_RefnoTabNote1:"在体育的搜寻结果将包含相关的红利与现金注单",
 BettingTicketCenter_RefnoTabNote2:"{0}: 请提供用户名以便查询{1}之后的注单",
 BetType:"投注类别",

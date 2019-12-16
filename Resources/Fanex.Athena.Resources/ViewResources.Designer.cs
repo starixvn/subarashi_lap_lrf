@@ -801,18 +801,18 @@ namespace Fanex.Athena.Resources {
         /// <summary>
         ///   Looks up a localized string similar to All bettypes, League, and Match filter available only when 1 day is selected.
         /// </summary>
-        public static string BettingTicketCenter_MultiCustomersTabNote1 {
+        public static string BettingTicketCenter_AdvancedSearchTabNote1 {
             get {
-                return ResourceManager.GetString("BettingTicketCenter_MultiCustomersTabNote1", resourceCulture);
+                return ResourceManager.GetString("BettingTicketCenter_AdvancedSearchTabNote1", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Data is available from {0}.
         /// </summary>
-        public static string BettingTicketCenter_MultiCustomersTabNote2 {
+        public static string BettingTicketCenter_AdvancedSearchTabNote2 {
             get {
-                return ResourceManager.GetString("BettingTicketCenter_MultiCustomersTabNote2", resourceCulture);
+                return ResourceManager.GetString("BettingTicketCenter_AdvancedSearchTabNote2", resourceCulture);
             }
         }
         
@@ -1452,6 +1452,15 @@ namespace Fanex.Athena.Resources {
         public static string Currency {
             get {
                 return ResourceManager.GetString("Currency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please try to login again.
+        /// </summary>
+        public static string CurrencyErrorSolution {
+            get {
+                return ResourceManager.GetString("CurrencyErrorSolution", resourceCulture);
             }
         }
         
@@ -2226,6 +2235,15 @@ namespace Fanex.Athena.Resources {
         public static string Error {
             get {
                 return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You&apos;re here because of one of those reasons:.
+        /// </summary>
+        public static string ErrorNotification {
+            get {
+                return ResourceManager.GetString("ErrorNotification", resourceCulture);
             }
         }
         
@@ -5421,6 +5439,15 @@ namespace Fanex.Athena.Resources {
         public static string SingleCustomer {
             get {
                 return ResourceManager.GetString("SingleCustomer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Solution.
+        /// </summary>
+        public static string Solution {
+            get {
+                return ResourceManager.GetString("Solution", resourceCulture);
             }
         }
         

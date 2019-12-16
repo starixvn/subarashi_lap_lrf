@@ -2,7 +2,7 @@
 
 namespace Fanex.Athena.Model.BetList.MetaModel
 {
-    public class MultipleCustomersBetListMetaModel : BaseBettingTicketMetaModel, IMetaModelValidation
+    public class AdvancedSearchBetListMetaModel : BaseBettingTicketMetaModel, IMetaModelValidation
     {
         public string LiveStatus { get; set; }
 

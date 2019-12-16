@@ -2253,7 +2253,7 @@
     <value>Void</value>
     <comment>80941</comment>
   </data>
-  <data name="BettingTicketCenter_MultiCustomersTabNote1" xml:space="preserve">
+  <data name="BettingTicketCenter_AdvancedSearchTabNote1" xml:space="preserve">
     <value>All bettypes, League, and Match filter available only when 1 day is selected</value>
     <comment>80941</comment>
   </data>
@@ -2301,7 +2301,7 @@
     <value>Virtual Soccer Asian Cup</value>
     <comment>105409</comment>
   </data>
-  <data name="BettingTicketCenter_MultiCustomersTabNote2" xml:space="preserve">
+  <data name="BettingTicketCenter_AdvancedSearchTabNote2" xml:space="preserve">
     <value>Data is available from {0}</value>
     <comment>103046</comment>
   </data>
@@ -2565,6 +2565,15 @@
   <data name="SubsidiarySearch" xml:space="preserve">
     <value>Subsidiary Search</value>
     <comment>123651</comment>
+  </data>
+  <data name="CurrencyErrorSolution" xml:space="preserve">
+    <value>Please try to login again</value>
+  </data>
+  <data name="ErrorNotification" xml:space="preserve">
+    <value>You're here because of one of those reasons:</value>
+  </data>
+  <data name="Solution" xml:space="preserve">
+    <value>Solution</value>
   </data>
   <data name="EventType" xml:space="preserve">
     <value>Event Type</value>

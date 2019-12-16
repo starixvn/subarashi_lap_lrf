@@ -37,23 +37,23 @@
 
         public ActionResult Index()
         {
-            return MultipleCustomers();
+            return SingleCustomer();
         }
 
-        public ActionResult MultipleCustomers()
+        public ActionResult AdvancedSearch()
         {
             var viewModel = new BettingTicketCenterViewModel
             {
                 CurrencyList = GetCurrencyList(),
                 LiveStatusList = GetLiveStatusList(),
                 StatusList = GetStatusList(),
-                ProductOptionList = GetProductOptionList(FunctionNames.BettingTicketCenterMultiCustomers),
+                ProductOptionList = GetProductOptionList(FunctionNames.BettingTicketCenterAdvancedSearch),
                 MinDate = _balanceUpDataAccess.GetBalanceUp().BalanceUpDay,
                 IsAllowedCustomerComm = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm,
                 SelectedBaseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency,
                 HasExchange = HasExchange()
             };
-            return View("~/Views/Desktop/BetList/BettingTicketCenter/MultiCustomer.cshtml", viewModel);
+            return View("~/Views/Desktop/BetList/BettingTicketCenter/AdvancedSearch.cshtml", viewModel);
         }
 
         public ActionResult SingleCustomer()

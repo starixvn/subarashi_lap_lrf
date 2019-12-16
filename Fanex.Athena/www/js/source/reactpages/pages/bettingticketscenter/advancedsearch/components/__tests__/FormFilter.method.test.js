@@ -95,7 +95,7 @@ describe('FormFilter ', () => {
             expect(props.setReportTitle).toHaveBeenCalledWith(title);
             expect(props.setRequestParam).toHaveBeenCalledWith(params);
             expect(props.toggleLoader).toHaveBeenCalledWith(true);
-            expect(props.getGridData).toHaveBeenCalledWith(ApiUrl.MULTICUSTOMER_DATA_URL, params);
+            expect(props.getGridData).toHaveBeenCalledWith(ApiUrl.ADVANCEDSEARCH_DATA_URL, params);
         });
     })
 

@@ -6,7 +6,7 @@ import { ToastContainer, toast, Flip } from 'react-toastify';
 
 import Select from 'react-select'
 import MultipleSelect from '@9softstudio/react-multiselect'
-import { DateRange } from '@jsroot/components/date-range/index'
+import { DateRange } from '@jsroot/components/date-range'
 import AutoComplete from '@jsroot/components/auto-complete'
 import CheckBox from '@jsroot/components/CheckBox'
 import CollapsiblePanel from '@jsroot/components/collapsible-panel'
@@ -74,7 +74,7 @@ export class FormFilter extends Component {
         this.props.setReportTitle(title);
         this.props.setRequestParam(params);
         this.props.toggleLoader(true);
-        this.props.getGridData(ApiUrl.MULTICUSTOMER_DATA_URL, params);
+        this.props.getGridData(ApiUrl.ADVANCEDSEARCH_DATA_URL, params);
     }
 
     _getParams() {
@@ -119,7 +119,7 @@ export class FormFilter extends Component {
 
         params.IsExport = true;
         this.props.toggleLoader(true);
-        DataService.getFile(ApiUrl.MULTICUSTOMER_DATA_URL, params).then((response) => {
+        DataService.getFile(ApiUrl.ADVANCEDSEARCH_DATA_URL, params).then((response) => {
             toast.dismiss();
             const contentType = response.headers["content-type"];
             if (contentType && contentType.indexOf('application/json') > -1) {
@@ -141,7 +141,7 @@ export class FormFilter extends Component {
                     alert(LangHelper.getSingleResource("NoInfo"));
                 }
                 else {
-                    const fileName = "BettingTicketsCenter_MultiCustomer." +
+                    const fileName = "BettingTicketsCenter_AdvancedSearch." +
                         (response.headers["content-type"] === "application/zip" ? "zip" : "xls");
 
                     Site.downloadFile(response.data, fileName);
@@ -159,7 +159,7 @@ export class FormFilter extends Component {
         const userGuideContent = this.props.userGuideContent;
 
         if (!userGuideContent || userGuideContent.length === 0) {
-            this.props.getUserGuideContent('BettingTicketCenterMultiple');
+            this.props.getUserGuideContent('BettingTicketCenterAdvancedSearch');
         }
     }
 
@@ -469,9 +469,9 @@ export class FormFilter extends Component {
                         {LangHelper.getSingleResource('Note')}:
                     </div>
                     <div className="col-9">
-                        * {LangHelper.getSingleResource('BettingTicketCenter_MultiCustomersTabNote1')}
+                        * {LangHelper.getSingleResource('BettingTicketCenter_AdvancedSearchTabNote1')}
                         <br />
-                        * {LangHelper.getSingleResource('BettingTicketCenter_MultiCustomersTabNote2').replace("{0}", AppData.dateConstraint.minDate)}
+                        * {LangHelper.getSingleResource('BettingTicketCenter_AdvancedSearchTabNote2').replace("{0}", AppData.dateConstraint.minDate)}
                     </div>
                 </div>
 

@@ -223,7 +223,7 @@
         }
 
         [Test]
-        public void MultipleCustomers_WhenCall_ReturnCorrectView()
+        public void AdvancedSearch_WhenCall_ReturnCorrectView()
         {
             using (var controller = CreateController())
             {
@@ -235,19 +235,18 @@
                 _productService.GetSingleWalletProductAccess(
                     DefaultLicenseeSession.LicenseeId,
                     DefaultUserSession.Language,
-                    FunctionNames.BettingTicketCenterMultiCustomers).Returns(new ProductAccess(productCodes));
+                    FunctionNames.BettingTicketCenterAdvancedSearch).Returns(new ProductAccess(productCodes));
 
                 // Action
-                var result = controller.MultipleCustomers() as ViewResult;
+                var result = controller.AdvancedSearch() as ViewResult;
 
                 // Assert
-                Assert.That(result.ViewName, Is.EqualTo("~/Views/Desktop/BetList/BettingTicketCenter/MultiCustomer.cshtml"));
+                Assert.That(result.ViewName, Is.EqualTo("~/Views/Desktop/BetList/BettingTicketCenter/AdvancedSearch.cshtml"));
             }
         }
 
-        [TestCase(true)]
-        [TestCase(false)]
-        public void MultipleCustomers_WhenCall_ReturnCorrectViewModel(bool hasExchangePermission)
+        [Test]
+        public void AdvancedSearch_WhenCall_ReturnCorrectViewModel()
         {
             using (var controller = CreateController(hasExchangePermission))
             {
@@ -256,10 +255,10 @@
                 _productService.GetSingleWalletProductAccess(
                     DefaultLicenseeSession.LicenseeId,
                     DefaultUserSession.Language,
-                    FunctionNames.BettingTicketCenterMultiCustomers).Returns(new ProductAccess(productCodes));
+                    FunctionNames.BettingTicketCenterAdvancedSearch).Returns(new ProductAccess(productCodes));
 
                 // Action
-                var result = controller.MultipleCustomers() as ViewResult;
+                var result = controller.AdvancedSearch() as ViewResult;
                 var viewModel = result.Model as BettingTicketCenterViewModel;
 
                 // Assert
