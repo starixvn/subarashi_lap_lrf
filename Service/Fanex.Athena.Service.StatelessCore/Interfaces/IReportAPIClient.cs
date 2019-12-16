@@ -7,8 +7,8 @@
 
     public interface IReportAPIClient
     {
-        Task<string> PostStringAsync(string path, object value, string language);
+        Task<string> PostStringAsync(string path, object value, string language, int timeOut = 100);
 
-        Task<Tuple<Stream, string>> PostAsync(string path, object value, string language, MediaType mediaType = MediaType.Json);
+        Task<Tuple<Stream, string>> PostAsync(string path, object value, string language, MediaType mediaType = MediaType.Json, int timeOut = 100);
     }
 }

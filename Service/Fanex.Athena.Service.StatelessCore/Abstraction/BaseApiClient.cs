@@ -1,16 +1,14 @@
-﻿using Fanex.Athena.Model.Core.DataDomain;
-using Fanex.Athena.Service.StatelessCore.CustomException;
-using MessagePack;
-
-using Newtonsoft.Json;
-
-using System;
+﻿using System;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Fanex.Athena.Model.Core.DataDomain;
+using Fanex.Athena.Service.StatelessCore.CustomException;
+using MessagePack;
+using Newtonsoft.Json;
 
 namespace Fanex.Athena.Service.StatelessCore.Abstraction
 {
@@ -26,6 +24,7 @@ namespace Fanex.Athena.Service.StatelessCore.Abstraction
             DateTimeZoneHandling = DateTimeZoneHandling.Unspecified,
             NullValueHandling = NullValueHandling.Ignore,
         };
+
         private static readonly JsonSerializer _serializer = new JsonSerializer();
 
         protected virtual string ApiName => "Base API Client";
@@ -35,7 +34,7 @@ namespace Fanex.Athena.Service.StatelessCore.Abstraction
             _client = client;
         }
 
-        public virtual async Task<string> PostStringAsync(string path, object value, string language)
+        public virtual async Task<string> PostStringAsync(string path, object value, string language, int timeOut = 100)
         {
             return await HandleAsync(path, value, language, MediaType.Json,
                 async (response) =>
@@ -62,8 +61,8 @@ namespace Fanex.Athena.Service.StatelessCore.Abstraction
                             }
                         }
                     }
-                }
-
+                },
+                timeOut: timeOut
             ).ConfigureAwait(false);
         }
 
@@ -77,7 +76,6 @@ namespace Fanex.Athena.Service.StatelessCore.Abstraction
             }
             using (var cancelToken = new CancellationTokenSource(new TimeSpan(0, 0, timeOut)))
             {
-
                 using (var httpRequest = new HttpRequestMessage(HttpMethod.Post, new Uri(_client.BaseAddress + path)))
                 {
                     httpRequest.Headers.Add(LANGUAGEKEY, language);
@@ -147,11 +145,9 @@ namespace Fanex.Athena.Service.StatelessCore.Abstraction
                                   {
                                       return _serializer.Deserialize<T>(jsonReader);
                                   }
-
                               }
                           }
                       }
-
                   }
                ).ConfigureAwait(false);
         }

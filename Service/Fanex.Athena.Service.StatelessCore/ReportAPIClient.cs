@@ -20,7 +20,7 @@ namespace Fanex.Athena.Service.StatelessCore
 
         protected override string ApiName => "Report";
 
-        public async Task<Tuple<Stream, string>> PostAsync(string path, object value, string language, MediaType mediaType = MediaType.Json)
+        public async Task<Tuple<Stream, string>> PostAsync(string path, object value, string language, MediaType mediaType = MediaType.Json, int timeOut = 100)
         {
             return await HandleAsync(path, value, language, mediaType, async (response) =>
              {
@@ -32,7 +32,7 @@ namespace Fanex.Athena.Service.StatelessCore
                  }
                  return Tuple.Create(await response.Content.ReadAsStreamAsync(), contentType);
              },
-            false).ConfigureAwait(false);
+            false, timeOut).ConfigureAwait(false);
         }
     }
 }

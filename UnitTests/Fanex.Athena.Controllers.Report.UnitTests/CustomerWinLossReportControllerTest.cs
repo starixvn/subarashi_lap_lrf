@@ -1,4 +1,4 @@
-﻿namespace Fanex.Athena.Controllers.TotalBets.UnitTests
+﻿namespace Fanex.Athena.Controllers.Report.UnitTests
 {
     using System;
     using System.Collections.Generic;
@@ -22,6 +22,8 @@
     public class CustomerWinLossReportControllerTest : CultureBaseControllerHelperTest
     {
         private IReportAPIClient _reportApiClient;
+
+        private const int TimeOutInSecond = 180;
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
@@ -78,7 +80,7 @@
 
             using (var controller = CreateController())
             {
-                _reportApiClient.PostAsync("api/CustomerWinLoss/ExportExcel", metaModel, language)
+                _reportApiClient.PostAsync("api/CustomerWinLoss/ExportExcel", metaModel, language, timeOut: TimeOutInSecond)
                     .Returns(expectedResponseData);
 
                 // Action
@@ -100,7 +102,7 @@
             {
                 const string ExpectedResult = "json result";
                 _reportApiClient.PostStringAsync("api/CustomerWinLoss/Index",
-                    Arg.Any<CustomerWinLossMetaModel>(), userSession.Language).Returns(ExpectedResult);
+                    Arg.Any<CustomerWinLossMetaModel>(), userSession.Language, TimeOutInSecond).Returns(ExpectedResult);
 
                 // Action
                 var result = await controller.Index(new CustomerWinLossMetaModel()) as JsonNetResult;
