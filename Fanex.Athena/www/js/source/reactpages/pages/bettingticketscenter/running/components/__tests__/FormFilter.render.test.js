@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import { FormFilter } from '../FormFilter';
-import ShallowRenderer from 'react-test-renderer/shallow';
+import { shallow } from 'enzyme';
 import AppData from '@jsroot/lib/AppData'
 import LangHelper from '@jsroot/lib/langHelper';
 
@@ -32,8 +32,7 @@ describe('FormFilter ', () => {
     });
 
     it('render correctly', () => {
-        const renderer = new ShallowRenderer();
-        const result = renderer.render(<FormFilter {...props} />);
+        const result = shallow(<FormFilter {...props} />);
 
         expect(result).toMatchSnapshot();
     });
@@ -42,8 +41,7 @@ describe('FormFilter ', () => {
         Object.assign(AppData, { isAllowedCustomerComm: true });
 
         const filter = new FormFilter(props);
-        const renderer = new ShallowRenderer();
-        const result = renderer.render(filter._renderBaseCurrencySelectList());
+        const result = shallow(filter._renderBaseCurrencySelectList());
 
         expect(result).toMatchSnapshot();
     });
