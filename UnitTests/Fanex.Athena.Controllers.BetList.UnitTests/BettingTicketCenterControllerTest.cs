@@ -245,8 +245,9 @@
             }
         }
 
-        [Test]
-        public void AdvancedSearch_WhenCall_ReturnCorrectViewModel()
+        [TestCase(true)]
+        [TestCase(false)]
+        public void AdvancedSearch_WhenCall_ReturnCorrectViewModel(bool hasExchangePermission)
         {
             using (var controller = CreateController(hasExchangePermission))
             {

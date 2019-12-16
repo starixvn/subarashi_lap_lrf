@@ -29,8 +29,6 @@
         private readonly IBetListApiClient _betListApiClient;
 
         public BettingTicketCenterAdvancedSearchController(
-            ISessionService sessionService,
-            IProductService productService,
             ILanguageService langService,
             IAppSettings appSettings,
             IBetListApiClient betListApiClient)
