@@ -34,7 +34,7 @@ describe('FormFilter ', () => {
         Object.assign(AppData, { isAllowedCustomerComm: true });
 
         const filter = new FormFilter(props);
-        const result = shallow(filter._renderBaseCurrencySelectList());
+        const result = shallow(<div>{filter._renderBaseCurrencySelectList()}</div>);
 
         expect(result).toMatchSnapshot();
     });
