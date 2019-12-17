@@ -378,7 +378,7 @@ function (_PureComponent) {
       var _this$state = this.state,
           src = _this$state.src,
           height = _this$state.height;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this._renderBreadcrumb(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: {
           height: height
         },

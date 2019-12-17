@@ -111,7 +111,6 @@ export class DataContent extends PureComponent {
 
         return (
             <div>
-                {this._renderBreadcrumb()}
                 <div style={{ height: height }} ref={this.contentRef}>
                 {
                     src
