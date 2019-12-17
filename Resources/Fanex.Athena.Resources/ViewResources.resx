@@ -2566,14 +2566,14 @@
     <value>Subsidiary Search</value>
     <comment>123651</comment>
   </data>
-  <data name="CurrencyErrorSolution" xml:space="preserve">
-    <value>Please try to login again</value>
+  <data name="Solution" xml:space="preserve">
+    <value>&lt;li&gt;Please try to login again&lt;/li&gt;&lt;li&gt;Access the reports/ functions you want.&lt;/li&gt;</value>
   </data>
   <data name="ErrorNotification" xml:space="preserve">
     <value>You're here because of one of those reasons:</value>
   </data>
-  <data name="Solution" xml:space="preserve">
-    <value>Solution</value>
+  <data name="TryLogin" xml:space="preserve">
+    <value>Please try to login again:</value>
   </data>
   <data name="EventType" xml:space="preserve">
     <value>Event Type</value>

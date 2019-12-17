@@ -1,8 +1,6 @@
 ﻿@{
     Layout = null;
     Page.Title = "Error!!!!!";
-
-    var langCode = System.Globalization.CultureInfo.CurrentUICulture.IetfLanguageTag;
 }
 <!DOCTYPE html>
 <html>
@@ -42,52 +40,29 @@
     <div class="error-content">
         <img src="@Url.ContentLink("/www/assets/images/lap-restriction-page.png")" />
         <div class="center">
-            @if (@ViewBag.Message == ViewResources.UserNotHaveCurrency && langCode == "zh-CN")
-            {
-                <div>
-                    <strong>@ViewResources.ErrorNotification</strong>
-                </div>
-                <ol style="list-style-type: decimal;">
-                    <li style="color:red">
-                        @ViewResources.UserNotHaveCurrency
-                    </li>
-                </ol>
-                <div>
-                    @ViewResources.Solution
-                </div>
-                <ol style="list-style-type: decimal;">
-                    <li>@ViewResources.CurrencyErrorSolution"</li>
-                </ol>
-            }
-            else
-            {
-                <div>
-                    <strong>@ViewResources.ErrorNotification</strong>
-                </div>
-                <ol style="list-style-type: decimal;">
-                    @if (ViewBag.Message == ViewResources.OneTokenRestrictionDefaultMsg)
-                    {
-                        <li>
-                            Your internet connection might be temporally broken.
-                        </li>
-                        <li>
-                            Your authorization may be no longer valid since web browser's caches are cleared.
-                        </li>
-                    }
-                    <li style="color:red">
-                        @ViewBag.Message
-                    </li>
-                </ol>
-                <div>
-                    Please try to login again:
-                </div>
-                <ol style="list-style-type: decimal;">
-                    <li>Login at Licensee Admin</li>
+            <div>
+                <strong>@ViewResources.ErrorNotification</strong>
+            </div>
+            <ol style="list-style-type: decimal;">
+                @if (ViewBag.Message == ViewResources.OneTokenRestrictionDefaultMsg)
+                {
                     <li>
-                        Access the reports/ functions you want.
+                        Your internet connection might be temporally broken.
                     </li>
-                </ol>
-            }
+                    <li>
+                        Your authorization may be no longer valid since web browser's caches are cleared.
+                    </li>
+                }
+                <li style="color:red">
+                    @ViewBag.Message
+                </li>
+            </ol>
+            <div>
+                @ViewResources.TryLogin
+            </div>
+            <ol style="list-style-type: decimal;">
+                @Html.Raw(ViewResources.Solution)
+            </ol>
         </div>
     </div>
 </body>

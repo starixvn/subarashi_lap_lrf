@@ -1456,15 +1456,6 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please try to login again.
-        /// </summary>
-        public static string CurrencyErrorSolution {
-            get {
-                return ResourceManager.GetString("CurrencyErrorSolution", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Current Balance.
         /// </summary>
         public static string CurrentBalance {
@@ -5443,7 +5434,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Solution.
+        ///   Looks up a localized string similar to &lt;li&gt;Please try to login again&lt;/li&gt;&lt;li&gt;Access the reports/ functions you want.&lt;/li&gt;.
         /// </summary>
         public static string Solution {
             get {
@@ -5970,6 +5961,15 @@ namespace Fanex.Athena.Resources {
         public static string TransTime {
             get {
                 return ResourceManager.GetString("TransTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please try to login again:.
+        /// </summary>
+        public static string TryLogin {
+            get {
+                return ResourceManager.GetString("TryLogin", resourceCulture);
             }
         }
         

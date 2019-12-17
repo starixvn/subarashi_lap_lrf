@@ -2210,8 +2210,8 @@
   <data name="DeepLink" xml:space="preserve">
     <value>数据API</value>
   </data>
-  <data name="CurrencyErrorSolution" xml:space="preserve">
-    <value>请洽你们的最高管理者替你设置币别权限</value>
+  <data name="Solution" xml:space="preserve">
+    <value>&lt;li&gt;请洽你们的最高管理者替你设置币别权限&lt;/li&gt;</value>
   </data>
   <data name="ErrorCurrencyMsg" xml:space="preserve">
     <value>你尚未设置任何币别权限</value>
@@ -2219,7 +2219,7 @@
   <data name="ErrorNotification" xml:space="preserve">
     <value>遭遇问题了!</value>
   </data>
-  <data name="Solution" xml:space="preserve">
+  <data name="TryLogin" xml:space="preserve">
     <value>解决方法</value>
   </data>
   <data name="UserNotHaveCurrency1" xml:space="preserve">
