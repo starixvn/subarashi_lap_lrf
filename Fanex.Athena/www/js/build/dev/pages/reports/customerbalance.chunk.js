@@ -5164,17 +5164,17 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             jqGridAdditional.clearGrid(_selector.GridId);
             _isFirstLoad = true;
 
-            createPaging(response.TotalRows);
+            createPaging(response.totalRows);
 
-            if (response.TotalRows === 0) {
+            if (response.totalRows === 0) {
                 jqGridAdditional.setNoInfo();
                 Site.unBlockUI();
                 return;
             }
 
-            const gridOption = CustomerBalanceOption.getGridOption(response.TotalRows);
-            gridOption.rowNum = response.Data.length;
-            gridOption.data = response.Data;
+            const gridOption = CustomerBalanceOption.getGridOption(response.totalRows);
+            gridOption.rowNum = response.data.length;
+            gridOption.data = response.data;
             gridOption.onSortCol = function (index) {
                 sort(index);
                 return 'stop';
@@ -5257,7 +5257,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                     jqGridAdditional.removeCursorOnNonSortableHeader(reportGrid);
                 }
 
-                jqGridAdditional.assignTotal(response.Total, gridOption.colModel);
+                jqGridAdditional.assignTotal(response.total, gridOption.colModel);
                 jqGridAdditional.setGroupFooters(CustomerBalanceOption.totalColspan);
                 _isFirstLoad = false;
             }
@@ -5296,7 +5296,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
         const indexColumn =
         {
-            name: 'Index',
+            name: 'index',
             index: 'Index',
             resizable: false,
             width: 40,
@@ -5307,7 +5307,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
         const externalIdColumn =
         {
-            name: 'ExternalId',
+            name: 'externalId',
             index: 'ExternalId',
             resizable: false,
             width: 120,
@@ -5321,7 +5321,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
         const systemIdColumn =
         {
-            name: 'SystemId',
+            name: 'systemId',
             index: 'SystemId',
             resizable: false,
             width: 120,
@@ -5332,7 +5332,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
         const openingBalanceColumn =
         {
-            name: 'OpeningBalance',
+            name: 'openingBalance',
             index: 'OpeningBalance',
             width: 110,
             align: 'right',
@@ -5344,7 +5344,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
         const depositColumn =
         {
-            name: 'Deposit',
+            name: 'deposit',
             index: 'Deposit',
             width: 90,
             align: 'right',
@@ -5356,7 +5356,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
         const withdrawalColumn =
         {
-            name: 'Withdrawal',
+            name: 'withdrawal',
             index: 'Withdrawal',
             width: 100,
             align: 'right',
@@ -5368,7 +5368,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
         const bonusColumn =
         {
-            name: 'Bonus',
+            name: 'bonus',
             index: 'Bonus',
             width: 60,
             align: 'right',
@@ -5380,7 +5380,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
         const adjustmentColumn =
         {
-            name: 'Adjustment',
+            name: 'adjustment',
             index: 'Adjustment',
             width: 80,
             align: 'right',
@@ -5404,7 +5404,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
         const turnoverColumn =
         {
-            name: 'Turnover',
+            name: 'turnover',
             index: 'Turnover',
             width: 100,
             align: 'right',
@@ -5416,7 +5416,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
         const drawGameColumn =
         {
-            name: 'DrawGame',
+            name: 'drawGame',
             index: 'DrawGame',
             width: 100,
             align: 'right',
@@ -5428,7 +5428,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
         const netTurnoverColumn =
         {
-            name: 'NetTurnover',
+            name: 'netTurnover',
             index: 'NetTurnover',
             width: 100,
             align: 'right',
@@ -5440,7 +5440,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
         const pendingFundsColumn =
         {
-            name: 'PendingFunds',
+            name: 'pendingFunds',
             index: 'PendingFunds',
             width: 100,
             align: 'right',
@@ -5452,7 +5452,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
         const customerWinLossMergeColumn =
         {
-            name: 'WinLoss',
+            name: 'winLoss',
             index: 'CustomerW_L',
             width: 200,
             align: 'right',
@@ -5464,7 +5464,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
         const customerWinLossColumn =
         {
-            name: 'WinLoss',
+            name: 'winLoss',
             index: 'CustomerWinLoss',
             width: 100,
             align: 'right',
@@ -5476,7 +5476,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
         const customerCommColumn =
         {
-            name: 'PlayerComm',
+            name: 'playerComm',
             index: 'CustomerComm',
             width: 80,
             align: 'right',
@@ -5488,7 +5488,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
         const customerTotalColumn =
         {
-            name: 'TotalWL',
+            name: 'totalWL',
             index: 'CustomerTotal',
             width: 100,
             align: 'right',
@@ -5500,7 +5500,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
         const closingBalanceColumn =
         {
-            name: 'ClosingBalance',
+            name: 'closingBalance',
             index: 'ClosingBalance',
             width: 100,
             align: 'right',
@@ -5512,7 +5512,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
         const affiliateTransferColumn =
         {
-            name: 'AffiliateTransfer',
+            name: 'affiliateTransfer',
             index: 'AffiliateTransfer',
             width: 100,
             align: 'right',
@@ -5524,7 +5524,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
         const productBATurnoverColumn =
         {
-            name: 'TurnoverBA',
+            name: 'turnoverBA',
             index: 'ProductBATurnover',
             width: 100,
             align: 'right',
@@ -5536,7 +5536,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
         const productBACommColumn =
         {
-            name: 'CommBA',
+            name: 'commBA',
             index: 'ProductBAComm',
             width: 80,
             align: 'right',
@@ -5548,7 +5548,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
         const productBAAmountDueToColumn =
         {
-            name: 'AmountDueToBA',
+            name: 'amountDueToBA',
             index: 'ProductBAAmountDueTo',
             width: 100,
             align: 'right',
@@ -5616,8 +5616,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
         const _me =
         {
-            urlData: 'api/CustomerBalanceReport/Index',
-            urlExcelData: 'api/CustomerBalanceReport/ExportExcel',
+            urlData: 'CustomerBalanceReport/Index',
+            urlExcelData: 'CustomerBalanceReport/ExportExcel',
             hasCustomerComm: true,
             isAllowBA: true,
             customerCommIndex: 12,
@@ -5652,14 +5652,14 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             setGroupHeaderColumns: function ($grid) {
                 const groupCustomerWinloss = _me.hasCustomerComm ?
                 {
-                    startColumnName: 'WinLoss',
+                    startColumnName: 'winLoss',
                     numberOfColumns: 3,
                     titleText: Site.getSingleResource('CustomerW_L')
                 } : {};
 
                 const groupProductBA = _me.isAllowBA ?
                 {
-                    startColumnName: 'TurnoverBA',
+                    startColumnName: 'turnoverBA',
                     numberOfColumns: 3,
                     titleText: Site.getSingleResource('ProductBA')
                 } : {};
