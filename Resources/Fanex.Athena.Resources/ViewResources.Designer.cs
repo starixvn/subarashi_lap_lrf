@@ -5434,7 +5434,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;li&gt;Please try to login again&lt;/li&gt;&lt;li&gt;Access the reports/ functions you want.&lt;/li&gt;.
+        ///   Looks up a localized string similar to Login at Licensee Admin. Access the reports/ functions you want..
         /// </summary>
         public static string Solution {
             get {

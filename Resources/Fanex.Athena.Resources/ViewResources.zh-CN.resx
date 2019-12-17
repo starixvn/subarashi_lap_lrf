@@ -2211,7 +2211,7 @@
     <value>数据API</value>
   </data>
   <data name="Solution" xml:space="preserve">
-    <value>&lt;li&gt;请洽你们的最高管理者替你设置币别权限&lt;/li&gt;</value>
+    <value>请洽你们的最高管理者替你设置币别权限</value>
   </data>
   <data name="ErrorCurrencyMsg" xml:space="preserve">
     <value>你尚未设置任何币别权限</value>
