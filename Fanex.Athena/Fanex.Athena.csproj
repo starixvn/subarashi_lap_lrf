@@ -788,6 +788,11 @@
     <Content Include="www\js\build\pro\reactpages\notification\notification.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\report\speciallicenseewl.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\subsidiaryperformance\subsidiaryperformance.chunk.js" />
+    <Content Include="www\js\source\common\languages\ViewResources.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViewResources.tt</DependentUpon>
+    </Content>
     <Content Include="www\js\source\components\toast.js" />
     <Content Include="www\js\source\extensions\ajaxBinaryTransporting.js" />
     <Content Include="www\js\source\helpers\datahelper.js" />
@@ -1817,11 +1822,6 @@
     <Content Include="www\js\source\common\languages\ViewResources.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ViewResources.txt</LastGenOutput>
-    </Content>
-    <Content Include="www\js\source\common\languages\ViewResources.txt">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ViewResources.tt</DependentUpon>
     </Content>
     <Content Include="www\js\source\common\languages\ViewResources.zh-CN.js">
       <DependentUpon>ViewResources.tt</DependentUpon>

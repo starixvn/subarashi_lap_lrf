@@ -41,7 +41,7 @@
         <img src="@Url.ContentLink("/www/assets/images/lap-restriction-page.png")" />
         <div class="center">
             <div>
-                <strong>@ViewResources.ErrorNotification</strong>
+                <strong>@Html.Raw(ViewResources.ErrorNotification)</strong>
             </div>
             <ol style="list-style-type: decimal;">
                 @if (ViewBag.Message == ViewResources.OneTokenRestrictionDefaultMsg)
@@ -54,15 +54,15 @@
                     </li>
                 }
                 <li style="color:red">
-                    @ViewBag.Message
+                    @Html.Raw(ViewBag.Message)
                 </li>
             </ol>
             <div>
-                @ViewResources.TryLogin
+                @Html.Raw(ViewResources.TryLogin)
             </div>
-            <ol style="list-style-type: decimal;">
-                <li>@ViewResources.Solution</li>
-            </ol>
+            <ul style="list-style-type: none;">
+                @Html.Raw(ViewResources.SolutionForRestriction)
+            </ul>
         </div>
     </div>
 </body>

@@ -534,7 +534,7 @@
     <comment>114797</comment>
   </data>
   <data name="ExternalIdOrSystemId" xml:space="preserve">
-    <value>用户名或系统账号</value>
+    <value>或系统帐号(支援前坠搜寻)</value>
     <comment>114797</comment>
   </data>
   <data name="Fail" xml:space="preserve">
@@ -792,7 +792,7 @@
     <value>承租公司输赢</value>
   </data>
   <data name="Live" xml:space="preserve">
-    <value>滚球</value>
+    <value>滚球(不含混合)</value>
   </data>
   <data name="LiveGame" xml:space="preserve">
     <value>滚球游戏</value>
@@ -915,7 +915,7 @@
     <value>最低赔率</value>
   </data>
   <data name="MixLiveAndNoneLive" xml:space="preserve">
-    <value>混合滚球&amp;非滚球</value>
+    <value>混合过关</value>
   </data>
   <data name="Mo" xml:space="preserve">
     <value>Mo</value>
@@ -985,7 +985,7 @@
     <value>None level</value>
   </data>
   <data name="NoneLive" xml:space="preserve">
-    <value>非滚球</value>
+    <value>非滚球(不含混合)</value>
   </data>
   <data name="NonEntered" xml:space="preserve">
     <value>成绩还没输入场数</value>
@@ -1937,7 +1937,7 @@
     <value>打赏分成</value>
   </data>
   <data name="BettingTicketCenter_AdvancedSearchTabNote2" xml:space="preserve">
-    <value>显示从{0}开始的资料</value>
+    <value>仅支援{0}以后的注单</value>
   </data>
   <data name="Note" xml:space="preserve">
     <value>注意</value>
@@ -1949,7 +1949,7 @@
     <value>多个会员</value>
   </data>
   <data name="BettingTicketCenter_AdvancedSearchTabNote1" xml:space="preserve">
-    <value>所有投注类别，联赛和比赛过滤器仅支援1个选定日期</value>
+    <value>全部联赛与全部赛事仅支援单日搜寻</value>
   </data>
   <data name="ServerBusyMessage" xml:space="preserve">
     <value>由于服务器繁忙，您的请求现在无法处理。请稍后再试。</value>
@@ -2013,5 +2013,8 @@
   </data>
   <data name="DeepLink" xml:space="preserve">
     <value>数据API</value>
+  </data>
+  <data name="AdvancedSearch" xml:space="preserve">
+    <value>进阶搜寻</value>
   </data>
 </root>

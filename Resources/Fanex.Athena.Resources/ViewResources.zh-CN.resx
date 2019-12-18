@@ -1759,9 +1759,6 @@
     <value>输赢的进位值仅供参考。因此，所有输赢相加的总计有可能和小计有差数。</value>
     <comment>78931</comment>
   </data>
-  <data name="UserNotHaveCurrency" xml:space="preserve">
-    <value>您没有任何币别的权限可以观看这份报告, 请联络贵司的后台管理人员.</value>
-  </data>
   <data name="Tablet" xml:space="preserve">
     <value>平板</value>
   </data>
@@ -2210,19 +2207,7 @@
   <data name="DeepLink" xml:space="preserve">
     <value>数据API</value>
   </data>
-  <data name="Solution" xml:space="preserve">
-    <value>请洽你们的最高管理者替你设置币别权限</value>
-  </data>
   <data name="ErrorCurrencyMsg" xml:space="preserve">
-    <value>你尚未设置任何币别权限</value>
-  </data>
-  <data name="ErrorNotification" xml:space="preserve">
-    <value>遭遇问题了!</value>
-  </data>
-  <data name="TryLogin" xml:space="preserve">
-    <value>解决方法</value>
-  </data>
-  <data name="UserNotHaveCurrency1" xml:space="preserve">
     <value>你尚未设置任何币别权限</value>
   </data>
 </root>
