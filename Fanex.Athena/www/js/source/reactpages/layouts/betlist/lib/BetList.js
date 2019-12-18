@@ -230,6 +230,16 @@ class BetList {
         return url;
     }
 
+    getSGDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
+        let url = rootUrl + 'SGBetList/Detail';
+        url = QueryString.setParam(url, 'transId', transId);
+        url = QueryString.setParam(url, 'date', winlostDate);
+        url = QueryString.setParam(url, 'custId', custId);
+        url = QueryString.setParam(url, 'transType', transType);
+        url = QueryString.setParam(url, 'BaseCurrency', baseCurrency);
+
+        return url;
+    }
 
     getRngCasinoResultUrl(rootUrl) {
         return rootUrl + 'ResultReport/ShowRngCasinoSingleWalletResult';
@@ -256,6 +266,14 @@ class BetList {
         url = QueryString.setParam(url, 'custid', custid);
         url = QueryString.setParam(url, 'gameTypeId', gameTypeId);
         url = QueryString.setParam(url, 'transId3rd', transId3rd);
+
+        return url;
+    }
+
+    getSGResultUrl(rootUrl, custid, gamePlayId) {
+        let url = rootUrl + 'SGResultPopup/Index';
+        url = QueryString.setParam(url, 'custid', custid);
+        url = QueryString.setParam(url, 'gamePlayId', gamePlayId);
 
         return url;
     }

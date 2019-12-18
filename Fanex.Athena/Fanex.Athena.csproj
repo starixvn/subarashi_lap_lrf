@@ -711,6 +711,7 @@
     <Content Include="SiteConfig\WebConfigTransforms\BACKUPMNLStatic.config" />
     <Content Include="SiteConfig\Web.BACKUPMNLStatic.config" />
     <Content Include="www\css\build\dev\reactpages\dailybets\index.css.map" />
+    <Content Include="Views\Desktop\BetList\SGDetail\Main.cshtml" />
     <None Include="www\css\source\reactpages\components\custom3rd\react-toastify.scss" />
     <None Include="www\css\source\pages\betlist\result\result.happy5.scss" />
     <None Include="www\css\source\reactpages\components\alert\icons\error.scss" />
