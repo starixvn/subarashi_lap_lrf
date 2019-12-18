@@ -86,10 +86,6 @@
     <Reference Include="Autofac.Integration.WebApi, Version=4.3.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.WebApi2.4.3.1\lib\net45\Autofac.Integration.WebApi.dll</HintPath>
     </Reference>
-    <Reference Include="CitiXchangeLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\DLLs\ExchangeProduct\CitiXchangeLibrary.dll</HintPath>
-    </Reference>
     <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapper.2.0.30\lib\net461\Dapper.dll</HintPath>
     </Reference>
@@ -603,6 +599,7 @@
     <Content Include="www\css\build\dev\reactpages\casinoturnover\index.chunk.js" />
     <Content Include="www\css\build\dev\reactpages\casinoturnover\index.css" />
     <Content Include="www\css\build\dev\reactpages\dailybets\index.css" />
+    <Content Include="www\css\build\dev\reactpages\exchangevoided\index.css" />
     <Content Include="www\css\build\dev\reactpages\exchangewl\index.chunk.js" />
     <Content Include="www\css\build\dev\reactpages\exchangewl\index.css" />
     <Content Include="www\css\build\dev\reactpages\licenseewlbytimezone\index.chunk.js" />
@@ -654,6 +651,7 @@
     <Content Include="www\css\build\pro\reactpages\casinoturnover\index.chunk.js" />
     <Content Include="www\css\build\pro\reactpages\casinoturnover\index.css" />
     <Content Include="www\css\build\pro\reactpages\dailybets\index.css" />
+     <Content Include="www\css\build\pro\reactpages\exchangevoided\index.css" />
     <Content Include="www\css\build\pro\reactpages\exchangewl\index.css" />
     <Content Include="www\css\build\pro\reactpages\licenseewlbytimezone\index.css" />
     <Content Include="www\css\build\pro\reactpages\notification\index.chunk.js" />
@@ -708,6 +706,10 @@
     <Content Include="Views\Desktop\Module\PlayerAdmin\PlayerStatement\Statement.cshtml" />
     <Content Include="www\css\build\dev\reactpages\playeradmin\statement.css.map" />
     <Content Include="Views\Desktop\Report\DailyBets\Index.cshtml" />
+    <Content Include="Views\Desktop\Report\ExchangeVoided\Index.cshtml" />
+    <Content Include="www\css\build\dev\reactpages\exchangevoided\index.css.map" />
+    <Content Include="SiteConfig\WebConfigTransforms\BACKUPMNLStatic.config" />
+    <Content Include="SiteConfig\Web.BACKUPMNLStatic.config" />
     <Content Include="www\css\build\dev\reactpages\dailybets\index.css.map" />
     <None Include="www\css\source\reactpages\components\custom3rd\react-toastify.scss" />
     <None Include="www\css\source\pages\betlist\result\result.happy5.scss" />
@@ -730,6 +732,7 @@
     <Content Include="www\js\build\dev\reactpages\bettingticketscenter\refno.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\bettingticketscenter\running.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\bettingticketscenter\singlecustomer.chunk.js" />
+    <Content Include="www\js\build\dev\reactpages\exchangevoided\exchangevoided.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\exchangewl\exchangewl.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\lib\common.chunk.js" />
     <Content Include="www\js\build\dev\reactpages\lib\lang-zh-CN.chunk.js" />
@@ -764,6 +767,7 @@
     <Content Include="www\js\build\pro\reactpages\bettingticketscenter\refno.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\bettingticketscenter\running.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\bettingticketscenter\singlecustomer.chunk.js" />
+    <Content Include="www\js\build\pro\reactpages\exchangevoided\exchangevoided.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\exchangewl\exchangewl.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\lib\common.chunk.js" />
     <Content Include="www\js\build\pro\reactpages\lib\lang-zh-CN.chunk.js" />
@@ -1299,6 +1303,7 @@
     <Content Include="www\css\source\reactpages\components\_panel.scss" />
     <Content Include="www\css\source\reactpages\components\_pureicon.scss" />
     <Content Include="www\css\source\reactpages\components\_dropdownlabel.scss" />
+    <Content Include="www\css\source\reactpages\components\_simple-pagingation.scss" />
     <None Include="www\css\source\reactpages\main.scss" />
     <Content Include="www\css\build\dev\reactpages\vendor.css" />
     <Content Include="www\css\build\pro\reactpages\vendor.css" />
@@ -2700,6 +2705,8 @@
     <Content Include="www\js\build\dev\reactpages\playeradmin\statement.chunk.js.map" />
     <Content Include="www\css\source\reactpages\pages\dailybets\index.scss" />
     <Content Include="www\js\build\dev\reactpages\report\dailybets.chunk.js.map" />
+    <Content Include="www\css\source\reactpages\pages\exchangevoided\index.scss" />
+    <Content Include="www\js\build\dev\reactpages\exchangevoided\exchangevoided.chunk.js.map" />
     <Content Include="www\js\source\reactpages\pages\bettingticketscenter\advancedsearch\components\__tests__\__snapshots__\AppContainer.render.test.js.snap" />
     <Content Include="www\js\source\reactpages\pages\bettingticketscenter\advancedsearch\components\__tests__\__snapshots__\DataGrid.test.js.snap" />
     <Content Include="www\js\source\reactpages\pages\bettingticketscenter\advancedsearch\components\__tests__\__snapshots__\FormFilter.render.test.js.snap" />
