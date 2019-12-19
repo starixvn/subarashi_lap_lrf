@@ -1,4 +1,4 @@
-﻿// Generated at: 12/4/2019 5:46:27 PM
+﻿// Generated at: 12/19/2019 10:02:19 AM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -69,6 +69,7 @@ BAStatus:"BA Status",
 BAUpdatedBy:"BA Updated By",
 BBAmtComm:"BB Amt + Comm",
 BetCount:"Bet Count",
+BetfromOthers:"Others",
 BetId:"Bet ID",
 BetLimit:"Bet Limit",
 BetList:"Bet List",

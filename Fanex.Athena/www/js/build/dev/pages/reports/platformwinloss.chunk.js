@@ -8422,7 +8422,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 '7': Site.getSingleResource('NewAsia'),
                 '8': Site.getSingleResource('MobileApp'),
                 '9': Site.getSingleResource('MobileLiteVersion'),
-                '10': Site.getSingleResource('DeepLink')
+                '10': Site.getSingleResource('DeepLink'),
+                '11': Site.getSingleResource('BetfromOthers')
             };
 
             _me.initEvent();
