@@ -27,6 +27,8 @@
 
         public const int DeepLink = 10;
 
+        public const int BetfromOthers = 11;
+
         private static readonly IDictionary<int, string> MapPlatformKeys = new Dictionary<int, string>
         {
             { All, nameof(All) },
@@ -39,7 +41,8 @@
             { NewAsia, nameof(NewAsia) },
             { MobileApp, nameof(MobileApp) },
             { MobileLiteVersion, nameof(MobileLiteVersion) },
-            { DeepLink, nameof(DeepLink) }
+            { DeepLink, nameof(DeepLink) },
+            { BetfromOthers, nameof(BetfromOthers) }
         };
 
         public static string GetPlatformKey(int type)
@@ -74,13 +77,14 @@
                 case "o": return ViewResources.MobileApp;
                 case "c": return ViewResources.MobileLiteVersion;
                 case "t": return ViewResources.DeepLink;
+                case "v": return ViewResources.BetfromOthers;
                 default: return ViewResources.Others;
             }
         }
 
         public static bool IsValidPlatform(int type)
         {
-            return type >= All && type <= DeepLink;
+            return type >= All && type <= BetfromOthers;
         }
     }
 }
