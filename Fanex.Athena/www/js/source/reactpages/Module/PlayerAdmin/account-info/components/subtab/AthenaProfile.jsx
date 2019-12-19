@@ -6,8 +6,6 @@ export const AthenaProfile = ({ data }) => {
         FirstName, LastName, Gender, Birthday, Phone, Country, Address, City, Town, State, ZipCode,
         SecurityQuestion, SecurityCode, HowToKnow, PreferredUserName, PreferredCurrency, PreferredOdds, PreferredLanguage } = data || {};
 
-    console.log(ClientResourceManager.getText('MacauGamesUserId'));
-
     return (
         <tbody>
             <tr>

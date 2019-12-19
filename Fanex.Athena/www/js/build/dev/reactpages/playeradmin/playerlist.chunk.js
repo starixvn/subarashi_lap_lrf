@@ -1354,7 +1354,10 @@ function (_PureComponent) {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "label-text"
-      }, this._getUserNameLabel()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filter_UserNameInput__WEBPACK_IMPORTED_MODULE_12__["default"], {
+      }, this._getUserNameLabel(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filter_SearchOption__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        value: searchOption,
+        onChange: this.handleChange
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filter_UserNameInput__WEBPACK_IMPORTED_MODULE_12__["default"], {
         ref: this.userNameRef,
         onSelectItem: function onSelectItem(value) {
           return _this2.handleUserNameChange(value);
@@ -2325,13 +2328,15 @@ var UserNameInput = react__WEBPACK_IMPORTED_MODULE_0___default.a.forwardRef(func
         var result = cachedData[cacheKey];
         handleSuggestionResult(result);
       } else {
-        handleSuggestionResult([]); // temporary not call api for suggestion
-        // const param = { keyword: value, searchType: searchOption };
-        // getSuggestionList(param).then(response => {
-        //     const result = response.data || [];
-        //     handleSuggestionResult(result);
-        //     cachedData[cacheKey] = result;
-        // })
+        var param = {
+          keyword: value,
+          searchType: searchOption
+        };
+        getSuggestionList(param).then(function (response) {
+          var result = response.data || [];
+          handleSuggestionResult(result);
+          cachedData[cacheKey] = result;
+        });
       }
     } else {
       setIsOpenSuggestion(false);

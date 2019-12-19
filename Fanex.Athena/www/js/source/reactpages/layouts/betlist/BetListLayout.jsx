@@ -45,7 +45,6 @@ class BetListLayout extends Component {
             }
             else if (sporttype === SportType.ALLBET) {
                 const url = BetList.getAllBetResultUrl(rootUrl, transdecs, extension2, bettype);
-                console.log(url);
                 this._openPopup(url, title);
             }
             else if (sporttype === SportType.GLOBALGAMING) {

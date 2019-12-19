@@ -165,7 +165,7 @@ export class FormFilter extends PureComponent {
                         <div className="form-group">
                             <label className="label-text">
                                 {this._getUserNameLabel()}
-                                {/* {(<SearchOption value={searchOption} onChange={this.handleChange} />)} */}
+                                {(<SearchOption value={searchOption} onChange={this.handleChange} />)}
                             </label>
                             <UserNameInput ref={this.userNameRef} onSelectItem={(value) => this.handleUserNameChange(value)}
                                 minChar={3} getSuggestionList={getSuggestionList} searchOption={searchOption}

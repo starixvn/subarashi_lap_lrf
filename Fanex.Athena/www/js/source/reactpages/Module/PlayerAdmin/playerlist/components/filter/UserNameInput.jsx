@@ -43,14 +43,13 @@ export const UserNameInput = React.forwardRef((props, userNameRef) => {
                 handleSuggestionResult(result);
             }
             else {
-                handleSuggestionResult([]); // temporary not call api for suggestion
-                // const param = { keyword: value, searchType: searchOption };
-                // getSuggestionList(param).then(response => {
-                //     const result = response.data || [];
-                //     handleSuggestionResult(result);
+                const param = { keyword: value, searchType: searchOption };
+                getSuggestionList(param).then(response => {
+                    const result = response.data || [];
+                    handleSuggestionResult(result);
 
-                //     cachedData[cacheKey] = result;
-                // })
+                    cachedData[cacheKey] = result;
+                })
             }
         }
         else {
