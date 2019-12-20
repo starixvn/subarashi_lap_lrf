@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Fanex.Athena.Extension.Utility;
 using Fanex.Athena.Model.Auth.DataDomain;
+using Fanex.Athena.Model.Auth.Enum;
 using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Model.Report.DTO;
 using Fanex.Athena.Model.Report.MetaModel;
@@ -35,7 +37,9 @@ namespace Fanex.Athena.Controllers.Report
         [HttpGet]
         public ActionResult Index()
         {
-            var hasPermission = HasPermission();
+            var tabList = GetEnableTabList();
+            var hasPermission = HasPermission(tabList.Any());
+            ViewBag.TabList = tabList;
 
             return View("~/Views/Desktop/Report/ExchangeVoided/Index.cshtml", model: hasPermission);
         }
@@ -45,7 +49,7 @@ namespace Fanex.Athena.Controllers.Report
         [AutoBindMetaModel(BindAgent = true, BindSiteName = true)]
         public async Task<ActionResult> Index(ExchangeVoidedMetaModel metaModel)
         {
-            if (!HasPermission())
+            if (!HasPermission(GetEnableTabList().Any()))
             {
                 return JsonNet(new ExchangeVoidedViewModel { DataList = new List<ExchangeVoidedItem>(), TotalPage = 0 });
             }
@@ -56,9 +60,19 @@ namespace Fanex.Athena.Controllers.Report
             return JsonNet(await _exchangeService.GetData(metaModel).ConfigureAwait(false));
         }
 
-        private bool HasPermission()
+        private bool HasPermission(bool hasActivedTab)
         {
-            return _authService.CheckProductBelongsTo(SessionServiceInstance.LicenseeSession.LicenseeName, ProductTypes.Exchange);
+            return hasActivedTab && _authService.CheckProductBelongsTo(SessionServiceInstance.LicenseeSession.LicenseeName, ProductTypes.Exchange);
+        }
+
+        private IEnumerable<string> GetEnableTabList()
+        {
+            var userSession = SessionServiceInstance.UserSession;
+            var userFunctionKeyList = userSession.ApplicationMode == AppMode.Parasitic ?
+                userSession.PortalFunctionList.Select(x => x.FunctionKey) :
+                userSession.FunctionList.Select(x => x.FunctionKey);
+
+            return BtcViewInfo.TabList.Intersect(userFunctionKeyList);
         }
     }
 }

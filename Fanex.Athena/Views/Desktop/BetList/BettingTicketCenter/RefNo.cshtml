@@ -29,7 +29,8 @@
     window._AppData = {
     isAllowedCustomerComm: @Model.ToJson(),
     baseCurrencyList:@Html.Raw(baseCurrencyList.ToJson()),
-    productsRequireUseNameNote: '@ViewBag.ProductsRequireUseNameNote'
+    productsRequireUseNameNote: '@ViewBag.ProductsRequireUseNameNote',
+    tabList: @Html.Raw((ViewBag.TabList as IEnumerable<string>).ToJson())
     };
 }
 <div id="app-container">

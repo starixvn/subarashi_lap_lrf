@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CurrencyUser.cs" />
+    <Compile Include="DataDomain\BtcViewInfo.cs" />
     <Compile Include="Enum\AppMode.cs" />
     <Compile Include="ExternalServiceToken.cs" />
     <Compile Include="Function.cs" />

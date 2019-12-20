@@ -19,7 +19,7 @@
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
 
-    [ApiFunctionAuthorization(PermissionKeys.BettingTicketCenter)]
+    [ApiFunctionAuthorization(PermissionKeys.BtcMultiCustomers)]
     public class BettingTicketCenterAdvancedSearchController : BaseApiController
     {
         private const int ServerBusyErrorCode = 1002;
@@ -39,6 +39,7 @@
         }
 
         [HttpPost]
+        [ApiFunctionAuthorization(PermissionKeys.BtcMultiCustomers)]
         [ValidationApiRequest(IsValidCurrencyList = true)]
         public async Task<dynamic> GetData(AdvancedSearchBetListMetaModel metaModel)
         {
