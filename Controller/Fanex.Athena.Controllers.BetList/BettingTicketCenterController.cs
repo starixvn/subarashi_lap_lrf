@@ -36,10 +36,30 @@
             _authService = authService;
         }
 
-        [FunctionAuthorization(PermissionKeys.BtcSingleCustomer)]
         public ActionResult Index()
         {
-            return SingleCustomer();
+            var tabList = GetEnableTabList();
+
+            if (tabList.Any(x => PermissionKeys.BtcMultiCustomers == x))
+            {
+                return MultipleCustomers();
+            }
+            else if (tabList.Any(x => PermissionKeys.BtcSingleCustomer == x))
+            {
+                return SingleCustomer();
+            }
+            else if (tabList.Any(x => PermissionKeys.BtcRefNo == x))
+            {
+                return RefNo();
+            }
+            else if (tabList.Any(x => PermissionKeys.BtcRunning == x))
+            {
+                return Running();
+            }
+            else
+            {
+                return SingleCustomer();
+            }
         }
 
         [FunctionAuthorization(PermissionKeys.BtcMultiCustomers)]
