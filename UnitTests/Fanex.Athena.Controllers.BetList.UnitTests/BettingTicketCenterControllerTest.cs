@@ -8,6 +8,9 @@
     using Base.UnitTests;
 
     using DataAccess.Core.Configuration.Interfaces;
+    using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Auth.Enum;
     using Fanex.Athena.Resources;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
@@ -15,7 +18,7 @@
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using Model.Core.DTO.Configuration;
-
+    using Newtonsoft.Json;
     using NSubstitute;
 
     using NUnit.Framework;
@@ -57,13 +60,48 @@
             _authService = null;
         }
 
+        [TestCase(PermissionKeys.BtcMultiCustomers, AppMode.Self, "~/Views/Desktop/BetList/BettingTicketCenter/MultiCustomer.cshtml")]
+        [TestCase(PermissionKeys.BtcSingleCustomer, AppMode.Self, "~/Views/Desktop/BetList/BettingTicketCenter/SingleCustomer.cshtml")]
+        [TestCase(PermissionKeys.BtcRefNo, AppMode.Self, "~/Views/Desktop/BetList/BettingTicketCenter/RefNo.cshtml")]
+        [TestCase(PermissionKeys.BtcRunning, AppMode.Self, "~/Views/Desktop/BetList/BettingTicketCenter/Running.cshtml")]
+        [TestCase(PermissionKeys.BtcMultiCustomers, AppMode.Parasitic, "~/Views/Desktop/BetList/BettingTicketCenter/MultiCustomer.cshtml")]
+        public void Index_CheckByPermission_ReturnCorrectView(string permissionKey, AppMode appMode, string expectedView)
+        {
+            // Arrange
+            CreateAndStubUserSession(permissionKey, appMode);
+            MockProductService();
+
+            using (var controller = CreateController())
+            {
+                // Action
+                var result = controller.Index() as ViewResult;
+
+                // Assert
+                Assert.That(expectedView, Is.EqualTo(result.ViewName));
+            }
+        }
+
+        [Test]
+        public void Index_NotHaveAnyPermissionTab_ReturnDefaultView()
+        {
+            // Arrange
+            CreateAndStubUserSession("AnotherPermissionKey");
+            MockProductService();
+
+            using (var controller = CreateController())
+            {
+                // Action
+                var result = controller.Index() as ViewResult;
+
+                // Assert
+                Assert.That("~/Views/Desktop/BetList/BettingTicketCenter/MultiCustomer.cshtml", Is.EqualTo(result.ViewName));
+            }
+        }
+
         [Test]
         public void RefNo_WhenCall_ReturnCorrectViewResult()
         {
-            var productCodes = FakeHelper.CreateMany<Product>(3).ToList();
-            _productService.GetSingleWalletProductAccess(
-                SessionService.LicenseeSession.LicenseeId,
-                SessionService.UserSession.Language).Returns(new ProductAccess(productCodes));
+            MockProductService();
 
             using (var controller = CreateController())
             {
@@ -91,6 +129,7 @@
             using (var controller = CreateController(hasExchangePermission))
             {
                 // Arrange
+                CreateAndStubUserSession(PermissionKeys.BtcRefNo);
                 var productKN = new Product { ProductCode = Product.KN, ProductName = FakeHelper.Create<string>() };
                 var productLT = new Product { ProductCode = Product.LT, ProductName = FakeHelper.Create<string>() };
                 var productSB = new Product { ProductCode = Product.SB, ProductName = FakeHelper.Create<string>() };
@@ -127,11 +166,7 @@
                 var historyDate = FakeHelper.Create<DateTime>();
                 AppSettings.HistoryDate.Returns(historyDate);
 
-                var productCodes = FakeHelper.CreateMany<Product>(3).ToList();
-                _productService.GetSingleWalletProductAccess(
-                    DefaultLicenseeSession.LicenseeId,
-                    DefaultUserSession.Language,
-                    FunctionNames.BettingTicketCenterRunning).Returns(new ProductAccess(productCodes));
+                MockProductService();
 
                 // Action
                 var result = controller.Running() as ViewResult;
@@ -148,11 +183,8 @@
             using (var controller = CreateController(hasExchangePermission))
             {
                 // Arrange
-                var productCodes = FakeHelper.CreateMany<Product>(3).ToList();
-                _productService.GetSingleWalletProductAccess(
-                    DefaultLicenseeSession.LicenseeId,
-                    DefaultUserSession.Language,
-                    FunctionNames.BettingTicketCenterRunning).Returns(new ProductAccess(productCodes));
+                CreateAndStubUserSession(PermissionKeys.BtcRunning);
+                var productCodes = MockProductService();
 
                 // Action
                 var result = controller.Running() as ViewResult;
@@ -162,7 +194,7 @@
                 Assert.Multiple(() =>
                 {
                     Assert.That(viewModel.CurrencyList, Is.EqualTo(DefaultUserSession.CurrencyList));
-                    Assert.That(viewModel.ProductOptionList.Count(), Is.EqualTo(productCodes.Count));
+                    Assert.That(viewModel.ProductOptionList.Count(), Is.EqualTo(productCodes.Count()));
                     Assert.That(viewModel.IsAllowedCustomerComm, Is.EqualTo(DefaultLicenseeSession.IsAllowedCustomerComm));
                     Assert.That(viewModel.HasExchange, Is.EqualTo(hasExchangePermission));
                 });
@@ -178,11 +210,7 @@
                 var historyDate = FakeHelper.Create<DateTime>();
                 AppSettings.HistoryDate.Returns(historyDate);
 
-                var productCodes = FakeHelper.CreateMany<Product>(3).ToList();
-                _productService.GetSingleWalletProductAccess(
-                    DefaultLicenseeSession.LicenseeId,
-                    DefaultUserSession.Language,
-                    FunctionNames.BettingTicketCenter).Returns(new ProductAccess(productCodes));
+                MockProductService();
 
                 // Action
                 var result = controller.SingleCustomer() as ViewResult;
@@ -199,11 +227,8 @@
             using (var controller = CreateController(hasExchangePermission))
             {
                 // Arrange
-                var productCodes = FakeHelper.CreateMany<Product>(3).ToList();
-                _productService.GetSingleWalletProductAccess(
-                    DefaultLicenseeSession.LicenseeId,
-                    DefaultUserSession.Language,
-                    FunctionNames.BettingTicketCenter).Returns(new ProductAccess(productCodes));
+                CreateAndStubUserSession(PermissionKeys.BtcSingleCustomer);
+                var productCodes = MockProductService();
 
                 // Action
                 var result = controller.SingleCustomer() as ViewResult;
@@ -215,7 +240,7 @@
                     Assert.That(viewModel.LiveStatusList, Is.Not.Empty);
                     Assert.That(viewModel.StatusList, Is.Not.Empty);
                     Assert.That(viewModel.PlatformList, Is.Not.Empty);
-                    Assert.That(viewModel.ProductOptionList.Count(), Is.EqualTo(productCodes.Count));
+                    Assert.That(viewModel.ProductOptionList.Count(), Is.EqualTo(productCodes.Count()));
                     Assert.That(viewModel.IsAllowedCustomerComm, Is.EqualTo(DefaultLicenseeSession.IsAllowedCustomerComm));
                     Assert.That(viewModel.HasExchange, Is.EqualTo(hasExchangePermission));
                 });
@@ -231,11 +256,7 @@
                 var historyDate = FakeHelper.Create<DateTime>();
                 AppSettings.HistoryDate.Returns(historyDate);
 
-                var productCodes = FakeHelper.CreateMany<Product>(3).ToList();
-                _productService.GetSingleWalletProductAccess(
-                    DefaultLicenseeSession.LicenseeId,
-                    DefaultUserSession.Language,
-                    FunctionNames.BettingTicketCenterAdvancedSearch).Returns(new ProductAccess(productCodes));
+                MockProductService();
 
                 // Action
                 var result = controller.AdvancedSearch() as ViewResult;
@@ -252,11 +273,8 @@
             using (var controller = CreateController(hasExchangePermission))
             {
                 // Arrange
-                var productCodes = FakeHelper.CreateMany<Product>(3).ToList();
-                _productService.GetSingleWalletProductAccess(
-                    DefaultLicenseeSession.LicenseeId,
-                    DefaultUserSession.Language,
-                    FunctionNames.BettingTicketCenterAdvancedSearch).Returns(new ProductAccess(productCodes));
+                CreateAndStubUserSession(PermissionKeys.BtcMultiCustomers);
+                var productCodes = MockProductService();
 
                 // Action
                 var result = controller.AdvancedSearch() as ViewResult;
@@ -268,7 +286,7 @@
                     Assert.That(viewModel.CurrencyList, Is.EqualTo(DefaultUserSession.CurrencyList));
                     Assert.That(viewModel.LiveStatusList, Is.Not.Empty);
                     Assert.That(viewModel.StatusList, Is.Not.Empty);
-                    Assert.That(viewModel.ProductOptionList.Count(), Is.EqualTo(productCodes.Count));
+                    Assert.That(viewModel.ProductOptionList.Count(), Is.EqualTo(productCodes.Count()));
                     Assert.That(viewModel.MinDate, Is.EqualTo(BalanceUpDate));
                     Assert.That(viewModel.IsAllowedCustomerComm, Is.EqualTo(DefaultLicenseeSession.IsAllowedCustomerComm));
                     Assert.That(viewModel.HasExchange, Is.EqualTo(hasExchangePermission));
@@ -285,6 +303,36 @@
                 LangService = LangService,
                 SessionServiceInstance = SessionService
             };
+        }
+
+        private IEnumerable<Product> MockProductService()
+        {
+            var productCodes = FakeHelper.CreateMany<Product>(3).ToList();
+            _productService.GetSingleWalletProductAccess(
+                DefaultLicenseeSession.LicenseeId,
+                DefaultUserSession.Language,
+                Arg.Is<string>(x =>
+                string.IsNullOrEmpty(x) ||
+                x == FunctionNames.BettingTicketCenterMultiCustomers ||
+                x == FunctionNames.BettingTicketCenterRunning ||
+                x == FunctionNames.BettingTicketCenter)).Returns(new ProductAccess(productCodes));
+
+            return productCodes;
+        }
+
+        private void CreateAndStubUserSession(string permissionKey, AppMode appMode = AppMode.Parasitic)
+        {
+            var userSession = JsonConvert.DeserializeObject<UserAuthInfo>(JsonConvert.SerializeObject(DefaultUserSession));
+            userSession.ApplicationMode = appMode;
+            userSession.PortalFunctionList = new OneAuthPermission[]
+            {
+                    new OneAuthPermission { FunctionKey =  permissionKey }
+            };
+            userSession.FunctionList = new List<Function>
+            {
+                new Function { FunctionKey =  permissionKey }
+            };
+            StubUserSessionData(userSession);
         }
     }
 }
