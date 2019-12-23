@@ -27,7 +27,7 @@ exports[`SearchOption handleClose - isOpen should be false - match snapshot 1`] 
       className="selection-item"
     >
       <input
-        checked={false}
+        checked={true}
         name="searchOption"
         type="radio"
         value="1"
@@ -50,7 +50,7 @@ exports[`SearchOption handleClose - isOpen should be false - match snapshot 1`] 
       className="selection-item"
     >
       <input
-        checked={true}
+        checked={false}
         name="searchOption"
         type="radio"
         value="2"
@@ -95,7 +95,7 @@ exports[`SearchOption handleClose - isOpen should be false - match snapshot 2`] 
       className="selection-item"
     >
       <input
-        checked={false}
+        checked={true}
         name="searchOption"
         type="radio"
         value="1"
@@ -118,7 +118,7 @@ exports[`SearchOption handleClose - isOpen should be false - match snapshot 2`] 
       className="selection-item"
     >
       <input
-        checked={true}
+        checked={false}
         name="searchOption"
         type="radio"
         value="2"
@@ -163,7 +163,7 @@ exports[`SearchOption handleToggleDropdown - isOpen should be changed - match sn
       className="selection-item"
     >
       <input
-        checked={false}
+        checked={true}
         name="searchOption"
         type="radio"
         value="1"
@@ -186,7 +186,7 @@ exports[`SearchOption handleToggleDropdown - isOpen should be changed - match sn
       className="selection-item"
     >
       <input
-        checked={true}
+        checked={false}
         name="searchOption"
         type="radio"
         value="2"
@@ -231,7 +231,7 @@ exports[`SearchOption handleToggleDropdown - isOpen should be changed - match sn
       className="selection-item"
     >
       <input
-        checked={false}
+        checked={true}
         name="searchOption"
         type="radio"
         value="1"
@@ -254,7 +254,7 @@ exports[`SearchOption handleToggleDropdown - isOpen should be changed - match sn
       className="selection-item"
     >
       <input
-        checked={true}
+        checked={false}
         name="searchOption"
         type="radio"
         value="2"
@@ -299,7 +299,7 @@ exports[`SearchOption with initial state - should match snapshot 1`] = `
       className="selection-item"
     >
       <input
-        checked={false}
+        checked={true}
         name="searchOption"
         type="radio"
         value="1"
@@ -322,7 +322,7 @@ exports[`SearchOption with initial state - should match snapshot 1`] = `
       className="selection-item"
     >
       <input
-        checked={true}
+        checked={false}
         name="searchOption"
         type="radio"
         value="2"

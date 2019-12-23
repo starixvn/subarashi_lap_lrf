@@ -1200,7 +1200,7 @@ function (_PureComponent) {
       oddsGroup: _this.allOddsGroupString,
       specialLevel: _this.allSpecialLevel,
       baFilter: _lib_constants__WEBPACK_IMPORTED_MODULE_8__["baStatusList"].All,
-      searchOption: _lib_constants__WEBPACK_IMPORTED_MODULE_8__["searchOptions"].matchCase
+      searchOption: _lib_constants__WEBPACK_IMPORTED_MODULE_8__["searchOptions"].matchPrefix
     };
     return _this;
   }
@@ -2199,7 +2199,7 @@ var SearchOption = function SearchOption(props) {
   var toggleButton = {
     className: 'toggle-outline toggle-outline-light'
   };
-  var selectedValue = value || _lib_constants__WEBPACK_IMPORTED_MODULE_2__["searchOptions"].matchCase;
+  var selectedValue = value || _lib_constants__WEBPACK_IMPORTED_MODULE_2__["searchOptions"].matchPrefix;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_1__["DropdownButton"], {
     className: "search-option",
     isOpen: isOpen,

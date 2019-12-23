@@ -18,7 +18,7 @@ const SearchOption = (props) => {
         className: 'toggle-outline toggle-outline-light'
     }
 
-    const selectedValue = value || searchOptions.matchCase;
+    const selectedValue = value || searchOptions.matchPrefix;
 
     return (
         <DropdownButton className="search-option" isOpen={isOpen} toggleButton={toggleButton}

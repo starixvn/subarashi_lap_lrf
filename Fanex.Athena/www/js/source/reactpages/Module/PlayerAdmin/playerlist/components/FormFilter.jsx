@@ -34,7 +34,7 @@ export class FormFilter extends PureComponent {
             oddsGroup: this.allOddsGroupString,
             specialLevel: this.allSpecialLevel,
             baFilter: baStatusList.All,
-            searchOption: searchOptions.matchCase
+            searchOption: searchOptions.matchPrefix
         }
     }
 
