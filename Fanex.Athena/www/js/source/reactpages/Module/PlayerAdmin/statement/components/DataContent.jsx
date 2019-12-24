@@ -1,10 +1,9 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import LangHelper from '@jsroot/lib/langHelper';
-import Service, { BreadcrumbText, Level } from '../lib/service';
+import Service from '../lib/service';
 import NoDataTitle from '@jsroot/components/NoDataTitle';
 import Timer from '@jsroot/components/utils/timer';
-import { Breadcrumb } from '@9softstudio/react-breadcrumb';
 
 const MinimumContentHeight = 200;
 
@@ -16,11 +15,9 @@ export class DataContent extends PureComponent {
 
         this.state = {
             src: '',
-            height: 0,
-            level: Level.level1
+            height: 0
         }
 
-        this.isDrilldown = false;
         this.resize = Timer.debounce(this._handleResize, 15).bind(this);
     }
 
@@ -51,59 +48,11 @@ export class DataContent extends PureComponent {
     }
 
     _updateSrc(src) {
-        this.isDrilldown = false;
-        this.setState({ src: src, level: Level.level1 });
+        this.setState({ src: src });
     }
 
     _getUrl(param) {
         Service.getData(param, this._updateSrc.bind(this));
-    }
-
-    _renderBreadcrumb() {
-        const items = [{
-            label: BreadcrumbText.level1,
-            value: Level.level1,
-            }, {
-                label: BreadcrumbText.level2,
-                value: Level.level2,
-            }, {
-                label: BreadcrumbText.level3,
-                value: Level.level3
-            }
-        ];
-
-        const level = this.state.level;
-
-        return <Breadcrumb items={items} value={level} onChange={this.onBack} />
-    }
-
-    onBack = (item) => {
-        const level = this.state.level;
-        const newLevel = item.value;
-        let step = -1;
-
-        if (level === Level.level3 && newLevel === Level.level1) {
-            step = -2;
-        }
-
-        this.isDrilldown = false;
-        this.setState({ level: newLevel }, () => window.history.go(step));
-    }
-
-    onLoad = (e) => {
-        if (!this.isDrilldown) {
-            this.isDrilldown = true;
-            return;
-        }
-
-        const level = this.state.level; 
-
-        if (level === Level.level1) {
-            this.setState({ level: Level.level2 }, () => this._handleResize());
-        }
-        else if (level === Level.level2) {
-            this.setState({ level: Level.level3 });
-        }   
     }
 
     render() {
@@ -114,7 +63,7 @@ export class DataContent extends PureComponent {
                 <div style={{ height: height }} ref={this.contentRef}>
                 {
                     src
-                    ? <iframe frameBorder="0" src={src} width="100%" height="100%" onLoad={this.onLoad} />
+                    ? <iframe frameBorder="0" src={src} width="100%" height="100%" />
                     : <NoDataTitle />
                 }
                 </div>
