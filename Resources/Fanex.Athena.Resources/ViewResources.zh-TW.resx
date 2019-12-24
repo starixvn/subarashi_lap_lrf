@@ -2016,4 +2016,11 @@
     <value>促銷活動</value>
     <comment>120333</comment>
   </data>
+  <data name="BetfromOthers" xml:space="preserve">
+    <value>其他</value>
+    <comment>125553</comment>
+  </data>
+  <data name="DeepLink" xml:space="preserve">
+    <value>數據API</value>
+  </data>
 </root>

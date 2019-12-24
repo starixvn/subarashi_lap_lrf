@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 11/20/2019 8:15:23 AM
+﻿// Generated at: 12/19/2019 12:58:35 PM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -164,6 +164,7 @@ BAStatus:"BA Status",
 BAUpdatedBy:"BA Updated By",
 BBAmtComm:"BB Amt + Comm",
 BetCount:"Bet Count",
+BetfromOthers:"Others",
 BetId:"Bet ID",
 BetLimit:"Bet Limit",
 BetList:"Bet List",
@@ -339,6 +340,7 @@ ErrorProcessingMsg:"Sorry, an error occurred while processing your request.",
 Euro:"Euro",
 Event:"Event",
 EventDate:"Event Date",
+EventType:"Event Type",
 ExcelExceedRowsMsg:"This file exceeded 65535 entries. Please contact administrator for more details.",
 ExchangeWinLoss:"Exchange Win Loss",
 ExcludeTestData:"Exclude Test Data",
@@ -702,6 +704,7 @@ Subject:"Subject",
 Submit:"Submit",
 Subsidiary:"Subsidiary",
 SubsidiaryPerformance:"Subsidiary Performance",
+SubsidiarySearch:"Subsidiary Search",
 SubsidiaryWL:"Subsidiary W/L",
 Summary:"Summary",
 Sunday:"Sunday",

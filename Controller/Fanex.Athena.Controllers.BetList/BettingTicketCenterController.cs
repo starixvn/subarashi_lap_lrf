@@ -164,7 +164,8 @@
                 { PlatformType.NewAsia, ViewResources.NewAsia },
                 { PlatformType.MobileApp, ViewResources.MobileApp },
                 { PlatformType.MobileLiteVersion, ViewResources.MobileLiteVersion },
-                { PlatformType.DeepLink, ViewResources.DeepLink }
+                { PlatformType.DeepLink, ViewResources.DeepLink },
+                { PlatformType.BetfromOthers, ViewResources.BetfromOthers }
             };
         }
 

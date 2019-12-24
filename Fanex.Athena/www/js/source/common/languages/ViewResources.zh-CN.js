@@ -1,4 +1,4 @@
-﻿// Generated at: 12/4/2019 5:46:27 PM
+﻿// Generated at: 12/19/2019 12:58:35 PM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -60,6 +60,7 @@ BAStatus:"BA 状态",
 BAUpdatedBy:"投注总计跟新由",
 BBAmtComm:"回购金额+即时兑现佣金",
 BetCount:"投注数",
+BetfromOthers:"其他",
 BetId:"投注单号",
 BetLimit:"投注金额",
 BetList:"投注历史",
@@ -172,6 +173,7 @@ DD:"和和",
 Dec:"十二月",
 December:"十二月",
 DecimalOdds:"欧洲盘赔率",
+DeepLink:"数据API",
 DefaultGroup:"默认组",
 DefaultGroupMsg:"这是默认组。是否继续?",
 Delete:"删除",
