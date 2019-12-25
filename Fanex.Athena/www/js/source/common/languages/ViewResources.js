@@ -1,4 +1,4 @@
-﻿// Generated at: 12/19/2019 12:58:35 PM
+﻿// Generated at: 12/25/2019 1:20:25 PM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -657,7 +657,7 @@ TransferIn:"Transfer In",
 TransferOut:"Transfer Out",
 TransTime:"Trans.Time",
 TryLogin:"Please try to login again:&lt;br/&gt;解决方法",
-Tu:"解决方法",
+Tu:"Tu",
 Tuesday:"Tuesday",
 TurnOffBaTooltip:"Click to turn off",
 TurnOnBaTooltip:"Click to turn on",

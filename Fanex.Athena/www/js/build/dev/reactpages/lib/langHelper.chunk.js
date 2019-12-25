@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 12/19/2019 12:58:35 PM
+// Generated at: 12/25/2019 1:20:25 PM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -177,8 +177,8 @@ window._language_en_US = {
   BettingLimit: "Betting Limit",
   BettingStatement: "Betting Statement",
   BettingTicketCenter: "Betting Ticket Center",
-  BettingTicketCenter_MultiCustomersTabNote1: "All bettypes, League, and Match filter available only when 1 day is selected",
-  BettingTicketCenter_MultiCustomersTabNote2: "Data is available from {0}",
+  BettingTicketCenter_AdvancedSearchTabNote1: "All bettypes, League, and Match filter available only when 1 day is selected",
+  BettingTicketCenter_AdvancedSearchTabNote2: "Data is available from {0}",
   BettingTicketCenter_RefnoTabNote1: "For Sportsbook, the search result includes the related Bonus/Cash tickets.",
   BettingTicketCenter_RefnoTabNote2: "For {0}: Please provide username also in order to search ticket later than {1}",
   BetTradeCommission: "Bet Trade Commission",
@@ -336,6 +336,7 @@ window._language_en_US = {
   EndDate: "End Date",
   Entered: "Entered",
   Error: "Error",
+  ErrorNotification: "You&apos;re here because of one of those reasons: &lt;br/&gt;遭遇问题了!",
   ErrorProcessingMsg: "Sorry, an error occurred while processing your request.",
   Euro: "Euro",
   Event: "Event",
@@ -691,6 +692,7 @@ window._language_en_US = {
   ShowOldValue: "Show old value",
   Sincelastmonth: "Since last month",
   SingleCustomer: "Single Customer",
+  SolutionForRestriction: "1. Login at Licensee Admin.&lt;br/&gt;2. Access the reports/ functions you want. &lt;br/&gt; 请洽你们的最高管理者替你设置币别权限",
   SpecialLevel: "Special Level",
   SpecificDate: "Specific Date",
   Sport: "Sport",
@@ -749,6 +751,7 @@ window._language_en_US = {
   TransferIn: "Transfer In",
   TransferOut: "Transfer Out",
   TransTime: "Trans.Time",
+  TryLogin: "Please try to login again:&lt;br/&gt;解决方法",
   Tu: "Tu",
   Tuesday: "Tuesday",
   TurnOffBaTooltip: "Click to turn off",
@@ -796,7 +799,7 @@ window._language_en_US = {
   UserInformation: "User Information",
   Username: "Username",
   UserNotExist: "Not found user",
-  UserNotHaveCurrency: "You do not have any currency permissions to view this report, please contact your administrator account.",
+  UserNotHaveCurrency: "You do not have any currency permissions to view this report, please contact your administrator account. &lt;br/&gt;你尚未设置任何币别权限",
   UserTooManyLicensees: "This account is assigned to more than 1 licensee.",
   ValidBetAmount: "Valid Bet Amount",
   VendorMemberID: "Vendor Member ID",

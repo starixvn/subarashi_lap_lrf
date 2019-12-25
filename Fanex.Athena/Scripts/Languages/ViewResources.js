@@ -1,4 +1,4 @@
-﻿// Generated at: 12/18/2019 11:28:14 AM
+﻿// Generated at: 12/25/2019 1:20:07 PM
 var _language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -69,6 +69,7 @@ BAStatus:"BA Status",
 BAUpdatedBy:"BA Updated By",
 BBAmtComm:"BB Amt + Comm",
 BetCount:"Bet Count",
+BetfromOthers:"Others",
 BetId:"Bet ID",
 BetLimit:"Bet Limit",
 BetList:"Bet List",
@@ -656,7 +657,7 @@ TransferIn:"Transfer In",
 TransferOut:"Transfer Out",
 TransTime:"Trans.Time",
 TryLogin:"Please try to login again:&lt;br/&gt;解决方法",
-Tu:"解决方法",
+Tu:"Tu",
 Tuesday:"Tuesday",
 TurnOffBaTooltip:"Click to turn off",
 TurnOnBaTooltip:"Click to turn on",
