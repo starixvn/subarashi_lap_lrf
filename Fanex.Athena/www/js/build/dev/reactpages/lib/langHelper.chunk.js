@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 12/4/2019 5:46:27 PM
+// Generated at: 12/19/2019 12:58:35 PM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -164,6 +164,7 @@ window._language_en_US = {
   BAUpdatedBy: "BA Updated By",
   BBAmtComm: "BB Amt + Comm",
   BetCount: "Bet Count",
+  BetfromOthers: "Others",
   BetId: "Bet ID",
   BetLimit: "Bet Limit",
   BetList: "Bet List",

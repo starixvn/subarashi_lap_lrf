@@ -60,6 +60,10 @@ exports[`FormFilter render match snapshot 1`] = `
             className="label-text"
           >
             Username
+            <SearchOption
+              onChange={[Function]}
+              value="2"
+            />
           </label>
           <ForwardRef
             getSuggestionList={[MockFunction]}

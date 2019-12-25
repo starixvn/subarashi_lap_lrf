@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 12/4/2019 5:46:27 PM
+// Generated at: 12/19/2019 12:58:35 PM
 window._language_zh_TW = {
   AA: "客客",
   AbnormalBet: "非正規註單",
@@ -149,6 +149,7 @@ window._language_zh_TW = {
   BAUpdatedBy: "投注總計跟新由",
   BBAmtComm: "回購金額+即時兌現傭金",
   BetCount: "投注數",
+  BetfromOthers: "其他",
   BetId: "投注單號",
   BetList: "投注歷史",
   BetListRunning: "投注歷史(進行中)",
@@ -259,6 +260,7 @@ window._language_zh_TW = {
   Dec: "十二月",
   December: "十二月",
   DecimalOdds: "歐洲盤賠率",
+  DeepLink: "數據API",
   DefaultGroup: "預設組",
   DefaultGroupMsg: "這是默認組。是否繼續?",
   Delete: "刪除",
