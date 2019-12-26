@@ -4,7 +4,7 @@
         const indexColumn = {
             name: 'Index',
             index: 'Index',
-            width: 30,
+            width: 20,
             align: 'center',
             valign: 'middle',
             sortable: false,
@@ -28,9 +28,19 @@
                 newformat: 'm/d/Y'
             }
         };
-        const userNameColumn = {
-            name: 'UserName',
-            index: 'UserName',
+        const externalIdColumn = {
+            name: 'ExternalId',
+            index: 'ExternalId',
+            width: 85,
+            align: 'left',
+            sortable: false,
+            frozen: true,
+            resizable: false,
+            cellattr: jqGridAdditional.rowSpanSetting
+        };
+        const systemIdColumn = {
+            name: 'SystemId',
+            index: 'SystemId',
             width: 85,
             align: 'left',
             sortable: false,
@@ -143,18 +153,18 @@
             formatter: jqGridAdditional.formatDecimal
         };
         //#endregion
-        const colNameList = ['#', 'Date', 'Username', 'Currency', 'Sport', 'BetType', 'EffectiveBettingValue',
+        const colNameList = ['#', 'Date', 'ExternalId', 'SystemId', 'Currency', 'Sport', 'BetType', 'EffectiveBettingValue',
         'TotalTransaction', 'Turnover', 'TotalTurnover', '@[Win]/@[Loss]', 'Comm', 'Total'];
 
-        const colModelList = [indexColumn, dateColumn, userNameColumn, currencyColumn, sportColumn, bettypeColumn,
+        const colModelList = [indexColumn, dateColumn, externalIdColumn, systemIdColumn, currencyColumn, sportColumn, bettypeColumn,
                         effectiveBettingVlueColumn, totalTransColumn, turnoverColumn, totalturnoverColumn,
                         customerWlColumn, playerCommColumn, customerWlTotalColumn];
-        const customerWlTotalIndex = 12;
+        const customerWlTotalIndex = 13;
 
         const _me = {
             urlData: 'reportapi/CustomerTurnover',
             hasCustomerComm: false,
-            totalColspan: 6,
+            totalColspan: 7,
             reportBy: 1, //1:daily ,2 :monthly,
             gridOption: {
                 datatype: 'local',

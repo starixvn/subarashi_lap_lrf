@@ -22,19 +22,20 @@ namespace Fanex.Athena.Excel.Report
     public class CustomerTurnoverExcel : ReportBase
     {
         private const int ColumnDate = 1;
-        private const int ColumnUserName = 2;
-        private const int ColumnCurrency = 3;
-        private const int ColumnSport = 4;
-        private const int ColumnBetType = 5;
-        private const int ColumnEffectiveBettingValue = 6;
-        private const int ColumnTotalTransaction = 7;
-        private const int ColumnTurnover = 8;
-        private const int ColumnTotalTurnover = 9;
-        private const int ColumnCustomerWl = 10;
-        private const int ColumnCustomerComm = 11;
-        private const int ColumnCustomerTotal = 12;
+        private const int ColumnExternalId = 2;
+        private const int ColumnSystemId = 3;
+        private const int ColumnCurrency = 4;
+        private const int ColumnSport = 5;
+        private const int ColumnBetType = 6;
+        private const int ColumnEffectiveBettingValue = 7;
+        private const int ColumnTotalTransaction = 8;
+        private const int ColumnTurnover = 9;
+        private const int ColumnTotalTurnover = 10;
+        private const int ColumnCustomerWl = 11;
+        private const int ColumnCustomerComm = 12;
+        private const int ColumnCustomerTotal = 13;
 
-        private const int ColumnTemplateCount = 12;
+        private const int ColumnTemplateCount = 14;
 
         private const int RowContentTemplate = 3;
         private const int RowNoInfoTemplate = 5;
@@ -85,7 +86,8 @@ namespace Fanex.Athena.Excel.Report
             {
                 "#",
                 ViewResources.Date,
-                ViewResources.Username,
+                ViewResources.ExternalId,
+                ViewResources.SystemId,
                 ViewResources.Currency,
                 ViewResources.Sport,
                 ViewResources.BetType,
@@ -125,7 +127,8 @@ namespace Fanex.Athena.Excel.Report
                 {
                     row.Cells[ColumnIndex].SetCellValue(customerTurnover.Index);
                     row.Cells[ColumnDate].SetCellValue(customerTurnover.ReportBy.ToString(_formatDateTime));
-                    row.Cells[ColumnUserName].SetCellValue(customerTurnover.UserName);
+                    row.Cells[ColumnExternalId].SetCellValue(customerTurnover.ExternalId);
+                    row.Cells[ColumnSystemId].SetCellValue(customerTurnover.SystemId);
                     row.Cells[ColumnCurrency].SetCellValue(customerTurnover.Currency);
                     row.Cells[ColumnTotalTurnover].SetCellValue(customerTurnover.TotalTurnover);
                 }
@@ -139,7 +142,8 @@ namespace Fanex.Athena.Excel.Report
                 {
                     sheet.MergeRows(realIndex, (customerTurnover.RowSpan - 1) + realIndex, ColumnIndex);
                     sheet.MergeRows(realIndex, (customerTurnover.RowSpan - 1) + realIndex, ColumnDate);
-                    sheet.MergeRows(realIndex, (customerTurnover.RowSpan - 1) + realIndex, ColumnUserName);
+                    sheet.MergeRows(realIndex, (customerTurnover.RowSpan - 1) + realIndex, ColumnExternalId);
+                    sheet.MergeRows(realIndex, (customerTurnover.RowSpan - 1) + realIndex, ColumnSystemId);
                     sheet.MergeRows(realIndex, (customerTurnover.RowSpan - 1) + realIndex, ColumnCurrency);
                     sheet.MergeRows(realIndex, (customerTurnover.RowSpan - 1) + realIndex, ColumnTotalTurnover);
                 }
@@ -197,7 +201,8 @@ namespace Fanex.Athena.Excel.Report
             row.Cells[ColumnCurrency].SetCellValue(string.Empty);
             row.Cells[ColumnBetType].SetCellValue(string.Empty);
             row.Cells[ColumnSport].SetCellValue(string.Empty);
-            row.Cells[ColumnUserName].SetCellValue(string.Empty);
+            row.Cells[ColumnExternalId].SetCellValue(string.Empty);
+            row.Cells[ColumnSystemId].SetCellValue(string.Empty);
             row.Cells[ColumnEffectiveBettingValue].SetCellValue(_total.EffectiveBettingValue);
             row.Cells[ColumnTotalTransaction].SetCellValue(_total.TotalTransactions);
             row.Cells[ColumnTurnover].SetCellValue(_total.Turnover);

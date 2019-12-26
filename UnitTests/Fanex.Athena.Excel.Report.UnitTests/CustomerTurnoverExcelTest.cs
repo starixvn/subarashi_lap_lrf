@@ -20,17 +20,18 @@ namespace Fanex.Athena.Excel.Report.UnitTests
     public class CustomerTurnoverExcelTest : BaseReportExcelTest
     {
         private const int ColumnDate = 1;
-        private const int ColumnUserName = 2;
-        private const int ColumnCurrency = 3;
-        private const int ColumnSport = 4;
-        private const int ColumnBetType = 5;
-        private const int ColumnEffectiveBettingValue = 6;
-        private const int ColumnTotalTransaction = 7;
-        private const int ColumnTurnover = 8;
-        private const int ColumnTotalTurnover = 9;
-        private const int ColumnCustomerWl = 10;
-        private const int ColumnCustomerComm = 11;
-        private const int ColumnCustomerTotal = 12;
+        private const int ColumnExternalId = 2;
+        private const int ColumnSystemId = 3;
+        private const int ColumnCurrency = 4;
+        private const int ColumnSport = 5;
+        private const int ColumnBetType = 6;
+        private const int ColumnEffectiveBettingValue = 7;
+        private const int ColumnTotalTransaction = 8;
+        private const int ColumnTurnover = 9;
+        private const int ColumnTotalTurnover = 10;
+        private const int ColumnCustomerWl = 11;
+        private const int ColumnCustomerComm = 12;
+        private const int ColumnCustomerTotal = 13;
 
         private const string DateTimeFormat = "yyyy/mm/dd";
         private const string ReportTitle = "haaaaaaaaaaaaaaaaaa";
@@ -47,7 +48,7 @@ namespace Fanex.Athena.Excel.Report.UnitTests
             var excel = CreateExcel();
             var headerTextList = new[]
             {
-                "#", ViewResources.Date, ViewResources.Username,
+                "#", ViewResources.Date, ViewResources.ExternalId, ViewResources.SystemId,
                 ViewResources.Currency, ViewResources.Sport, ViewResources.BetType,
                 ViewResources.EffectiveBettingValue, ViewResources.TotalTransaction, ViewResources.Turnover,
                 ViewResources.Total + " " + ViewResources.Turnover, ViewResources.CustomerW_L,
@@ -97,7 +98,8 @@ namespace Fanex.Athena.Excel.Report.UnitTests
             {
                 row.Cells[0].Received(1).SetCellValue(DataItem.Index);
                 row.Cells[ColumnDate].Received(1).SetCellValue(DataItem.ReportBy.ToString(DateTimeFormat));
-                row.Cells[ColumnUserName].Received(1).SetCellValue(DataItem.UserName);
+                row.Cells[ColumnExternalId].Received(1).SetCellValue(DataItem.ExternalId);
+                row.Cells[ColumnSystemId].Received(1).SetCellValue(DataItem.SystemId);
                 row.Cells[ColumnCurrency].Received(1).SetCellValue(DataItem.Currency);
                 row.Cells[ColumnTotalTurnover].Received(1).SetCellValue(DataItem.TotalTurnover);
                 row.Cells[ColumnSport].Received(1).SetCellValue(DataItem.SportType);
@@ -143,7 +145,7 @@ namespace Fanex.Athena.Excel.Report.UnitTests
             excel.Public_ProcessUI(FakeSheet);
 
             // Assert
-            AssertHideColumns(FakeSheet, 12, 11);
+            AssertHideColumns(FakeSheet, ColumnCustomerTotal, ColumnCustomerComm);
         }
 
         [Test]
@@ -163,7 +165,8 @@ namespace Fanex.Athena.Excel.Report.UnitTests
                 row.Cells[ColumnCurrency].Received(1).SetCellValue(string.Empty);
                 row.Cells[ColumnBetType].Received(1).SetCellValue(string.Empty);
                 row.Cells[ColumnSport].Received(1).SetCellValue(string.Empty);
-                row.Cells[ColumnUserName].Received(1).SetCellValue(string.Empty);
+                row.Cells[ColumnExternalId].Received(1).SetCellValue(string.Empty);
+                row.Cells[ColumnSystemId].Received(1).SetCellValue(string.Empty);
                 row.Cells[ColumnEffectiveBettingValue].Received(1).SetCellValue(DataItem.EffectiveBettingValue);
                 row.Cells[ColumnTotalTransaction].Received(1).SetCellValue(DataItem.TotalTransactions);
                 row.Cells[ColumnTurnover].Received(1).SetCellValue(DataItem.Turnover);

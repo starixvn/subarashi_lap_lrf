@@ -14,7 +14,9 @@ namespace Fanex.Athena.Model.Report.DTO
 
         public DateTime ReportBy { get; set; }
 
-        public string UserName { get; set; }
+        public string ExternalId { get; set; }
+
+        public string SystemId { get; set; }
 
         public int RowSpan { get; set; }
 
