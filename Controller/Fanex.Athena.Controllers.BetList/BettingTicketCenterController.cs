@@ -165,6 +165,7 @@
                 { PlatformType.MobileApp, ViewResources.MobileApp },
                 { PlatformType.MobileLiteVersion, ViewResources.MobileLiteVersion },
                 { PlatformType.DeepLink, ViewResources.DeepLink },
+                { PlatformType.NativeApp, ViewResources.NativeApp },
                 { PlatformType.BetfromOthers, ViewResources.BetfromOthers }
             };
         }
