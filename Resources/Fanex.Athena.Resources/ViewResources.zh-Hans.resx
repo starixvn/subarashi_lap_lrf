@@ -2017,4 +2017,8 @@
   <data name="AdvancedSearch" xml:space="preserve">
     <value>进阶搜寻</value>
   </data>
+  <data name="NativeApp" xml:space="preserve">
+    <value>原生App</value>
+    <comment>125824</comment>
+  </data>
 </root>
