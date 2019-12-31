@@ -654,7 +654,7 @@
                     var expectedUrl = "localhost";
                     var expectedPOpupOption = {
                         width: 775,
-                        height: 370,
+                        height: 520,
                         title: "Result",
                         id: "betlist-popup-result"
                     };
@@ -1312,6 +1312,47 @@
                     BetList.ViewCasinoHandHistory(refNo);
 
                     expect(Site.redirect).toHaveBeenCalledWith(expectedUrl);
+                });
+            });
+
+            describe('showSingleMatchParlayDetail(transId, custId, status, transIndex)', function () {
+                it('divEvent should be shown correct content if divEvent is not hidden and reponse ajax data is not empty', function () {
+                    var transId = 1, custId = 2, status = 3, transIndex = 4;
+                    setFixtures('<div id="divEvent_14" style="display:none">');
+                    spyOn(QueryString, 'setParam');
+                    spyOn($, 'ajax').and.callFake(function (option) {
+                        option.success(['Text1', 'Text2']);
+                    });
+                    var expectedContent = '<div class="single-match-parlay-detail">Text1Text2</div>';
+
+                    BetList.showSingleMatchParlayDetail(transId, custId, status, transIndex);
+
+                    expect($('#divEvent_14').is(':hidden')).toEqual(false);
+                    expect($('#divEvent_14').html()).toEqual(expectedContent);
+                });
+
+                it('divEvent should not be shown if divEvent is not hidden and reponse ajax data is null', function () {
+                    var transId = 1, custId = 2, status = 3, transIndex = 4;
+                    setFixtures('<div id="divEvent_14" style="display:none">');
+                    spyOn(QueryString, 'setParam');
+                    spyOn($, 'ajax').and.callFake(function (option) {
+                        option.success(null);
+                    });
+
+                    BetList.showSingleMatchParlayDetail(transId, custId, status, transIndex);
+
+                    expect($('#divEvent_14').is(':hidden')).toEqual(true);
+                    expect($('#divEvent_14').html()).toEqual('');
+                });
+
+                it('divEvent should be hide correct content if divEvent is showing', function () {
+                    var transId = 1, custId = 2, status = 3, transIndex = 4;
+                    setFixtures('<div id="divEvent_14" style="display:block">Test</div>');
+
+                    BetList.showSingleMatchParlayDetail(transId, custId, status, transIndex);
+
+                    expect($('#divEvent_14').is(':hidden')).toEqual(true);
+                    expect($('#divEvent_14').html()).toEqual('');
                 });
             });
         });

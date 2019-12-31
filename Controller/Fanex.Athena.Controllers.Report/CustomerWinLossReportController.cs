@@ -5,6 +5,9 @@
 
 namespace Fanex.Athena.Controllers.Report
 {
+    using System;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Report.MetaModel;
@@ -12,16 +15,14 @@ namespace Fanex.Athena.Controllers.Report
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
 
-    using System;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-
     [FunctionAuthorization(PermissionKeys.ReportCustomerWinLoss)]
     public class CustomerWinLossReportController : ReportBaseController
     {
         private readonly IReportSettingService _reportSettingService;
 
         private readonly IReportAPIClient _reportAPIClient;
+
+        private const int TimeOutInSecond = 180;
 
         public CustomerWinLossReportController(
             IReportSettingService reportSettingService,
@@ -54,12 +55,12 @@ namespace Fanex.Athena.Controllers.Report
             {
                 const string FileName = "CustomerWinLoss";
                 var httpResponse = await _reportAPIClient.PostAsync("api/CustomerWinLoss/ExportExcel",
-                    metaModel, userSession.Language).ConfigureAwait(false);
+                    metaModel, userSession.Language, timeOut: TimeOutInSecond).ConfigureAwait(false);
 
                 return File(httpResponse.Item1, httpResponse.Item2, FileName);
             }
 
-            return JsonString(await _reportAPIClient.PostStringAsync("api/CustomerWinLoss/Index", metaModel, userSession.Language).ConfigureAwait(false));
+            return JsonString(await _reportAPIClient.PostStringAsync("api/CustomerWinLoss/Index", metaModel, userSession.Language, TimeOutInSecond).ConfigureAwait(false));
         }
 
         private ActionResult GetView(bool isHistory)

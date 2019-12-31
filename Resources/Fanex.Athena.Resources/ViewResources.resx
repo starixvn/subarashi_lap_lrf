@@ -2039,7 +2039,7 @@
     <comment>#77447</comment>
   </data>
   <data name="UserNotHaveCurrency" xml:space="preserve">
-    <value>You do not have any currency permissions to view this report, please contact your administrator account.</value>
+    <value>You do not have any currency permissions to view this report, please contact your administrator account. &lt;br/&gt;你尚未设置任何币别权限</value>
     <comment>#73925</comment>
   </data>
   <data name="ProductVS2" xml:space="preserve">
@@ -2253,7 +2253,7 @@
     <value>Void</value>
     <comment>80941</comment>
   </data>
-  <data name="BettingTicketCenter_MultiCustomersTabNote1" xml:space="preserve">
+  <data name="BettingTicketCenter_AdvancedSearchTabNote1" xml:space="preserve">
     <value>All bettypes, League, and Match filter available only when 1 day is selected</value>
     <comment>80941</comment>
   </data>
@@ -2301,7 +2301,7 @@
     <value>Virtual Soccer Asian Cup</value>
     <comment>105409</comment>
   </data>
-  <data name="BettingTicketCenter_MultiCustomersTabNote2" xml:space="preserve">
+  <data name="BettingTicketCenter_AdvancedSearchTabNote2" xml:space="preserve">
     <value>Data is available from {0}</value>
     <comment>103046</comment>
   </data>
@@ -2565,6 +2565,15 @@
   <data name="SubsidiarySearch" xml:space="preserve">
     <value>Subsidiary Search</value>
     <comment>123651</comment>
+  </data>
+  <data name="SolutionForRestriction" xml:space="preserve">
+    <value>1. Login at Licensee Admin.&lt;br/&gt;2. Access the reports/ functions you want. &lt;br/&gt; 请洽你们的最高管理者替你设置币别权限</value>
+  </data>
+  <data name="ErrorNotification" xml:space="preserve">
+    <value>You're here because of one of those reasons: &lt;br/&gt;遭遇问题了!</value>
+  </data>
+  <data name="TryLogin" xml:space="preserve">
+    <value>Please try to login again:&lt;br/&gt;解决方法</value>
   </data>
   <data name="EventType" xml:space="preserve">
     <value>Event Type</value>

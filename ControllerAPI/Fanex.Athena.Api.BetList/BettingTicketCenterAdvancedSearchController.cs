@@ -17,9 +17,10 @@
     using Resources;
 
     using Service.Core.Common.Interfaces;
+    using Service.Core.Users.Interfaces;
 
     [ApiFunctionAuthorization(PermissionKeys.BettingTicketCenter)]
-    public class BettingTicketCenterMultiCustomerController : BaseApiController
+    public class BettingTicketCenterAdvancedSearchController : BaseApiController
     {
         private const int ServerBusyErrorCode = 1002;
 
@@ -27,7 +28,7 @@
 
         private readonly IBetListApiClient _betListApiClient;
 
-        public BettingTicketCenterMultiCustomerController(
+        public BettingTicketCenterAdvancedSearchController(
             ILanguageService langService,
             IAppSettings appSettings,
             IBetListApiClient betListApiClient)
@@ -39,7 +40,7 @@
 
         [HttpPost]
         [ValidationApiRequest(IsValidCurrencyList = true)]
-        public async Task<dynamic> GetData(MultipleCustomersBetListMetaModel metaModel)
+        public async Task<dynamic> GetData(AdvancedSearchBetListMetaModel metaModel)
         {
             var licenseeSession = SessionService.LicenseeSession;
             if (metaModel.IsExport &&
@@ -59,7 +60,7 @@
             metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, currencyList);
             metaModel.HasPlayerCom = SessionService.LicenseeSession.IsAllowedCustomerComm;
             var timeOutInSecond = int.Parse(_appSettings.GetValue("BetListApiOutInSecond"));
-            return await _betListApiClient.PostAsync("/BettingTicketCenterMultiCustomer/GetData",
+            return await _betListApiClient.PostAsync("/BettingTicketCenterAdvancedSearch/GetData",
                 metaModel, userSession.Language, timeOutInSecond).ConfigureAwait(false);
         }
     }

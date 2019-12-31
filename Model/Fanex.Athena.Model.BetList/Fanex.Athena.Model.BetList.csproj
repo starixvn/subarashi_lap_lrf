@@ -107,10 +107,11 @@
     <Compile Include="MetaModel\LastBetsMonitoringMetaModel.cs" />
     <Compile Include="MetaModel\LiveReportBetListMetaModel.cs" />
     <Compile Include="MetaModel\MixParlayDetailMetaModel.cs" />
-    <Compile Include="MetaModel\MultipleCustomersBetListMetaModel.cs" />
+    <Compile Include="MetaModel\AdvancedSearchBetListMetaModel.cs" />
     <Compile Include="MetaModel\NewParlayDetailMetaModel.cs" />
     <Compile Include="MetaModel\RefNoBetListMetaModel.cs" />
     <Compile Include="MetaModel\SingleCustomersBetListMetaModel.cs" />
+    <Compile Include="MetaModel\SingleMatchParlayDetailMetaModel.cs" />
     <Compile Include="MetaModel\SystemParlayDetailMetaModel.cs" />
     <Compile Include="MetaModel\WinLossByLeagueBetListMetaModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

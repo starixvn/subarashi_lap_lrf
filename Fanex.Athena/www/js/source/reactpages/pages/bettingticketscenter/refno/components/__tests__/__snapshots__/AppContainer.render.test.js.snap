@@ -2,7 +2,7 @@
 
 exports[`AppContainer  render correctly 1`] = `
 <Connect(PageLayout)
-  selectedTabIndex="2"
+  selectedTabIndex="1"
 >
   <Loader
     isLoading={true}

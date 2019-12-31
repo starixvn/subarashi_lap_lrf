@@ -13,11 +13,6 @@ exports[`PageLayout  render with correct active tab 1`] = `
   >
     <t>
       <t
-        isActive={false}
-        label="MultiCustomers"
-        url="BettingTicketCenter/MultipleCustomers"
-      />
-      <t
         isActive={true}
         label="SingleCustomer"
         url="BettingTicketCenter/SingleCustomer"
@@ -31,6 +26,11 @@ exports[`PageLayout  render with correct active tab 1`] = `
         isActive={false}
         label="Running"
         url="BettingTicketCenter/Running"
+      />
+      <t
+        isActive={false}
+        label="AdvancedSearch"
+        url="BettingTicketCenter/AdvancedSearch"
       />
     </t>
     <div />

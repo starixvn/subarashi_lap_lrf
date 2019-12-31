@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 12/19/2019 12:58:35 PM
+﻿// Generated at: 12/25/2019 1:20:25 PM
 window._language_zh_TW = {
 AA:"客客",
 AbnormalBet:"非正規註單",
@@ -161,8 +161,8 @@ BetTaken:"匹配時間",
 BettingLimit:"投注限額",
 BettingStatement:"投注詳情",
 BettingTicketCenter:"注單中心",
-BettingTicketCenter_MultiCustomersTabNote1:"所有投注類別，聯賽和比賽過濾器僅支援1個選定日期",
-BettingTicketCenter_MultiCustomersTabNote2:"顯示從{0}開始的資料",
+BettingTicketCenter_AdvancedSearchTabNote1:"所有投注類別，聯賽和比賽過濾器僅支援1個選定日期",
+BettingTicketCenter_AdvancedSearchTabNote2:"顯示從{0}開始的資料",
 BettingTicketCenter_RefnoTabNote1:"在體育的搜尋結果將包含相關的紅利與現金注單",
 BettingTicketCenter_RefnoTabNote2:"{0}: 請提供用戶名以便查詢{1}之後的注單",
 BetType:"投注類別",

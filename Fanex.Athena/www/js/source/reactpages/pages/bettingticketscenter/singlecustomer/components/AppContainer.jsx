@@ -12,7 +12,7 @@ export class AppContainer extends Component {
 
     render() {
         return (
-            <PageLayout selectedTabIndex="1">
+            <PageLayout selectedTabIndex="0">
                 <Loader isLoading={this.props.isLoading} />
                 <FormFilter />
                 <DataGrid />

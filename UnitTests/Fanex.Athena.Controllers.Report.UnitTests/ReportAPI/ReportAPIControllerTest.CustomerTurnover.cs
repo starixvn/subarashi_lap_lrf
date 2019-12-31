@@ -1,4 +1,4 @@
-﻿namespace Fanex.Athena.Controllers.TotalBets.UnitTests
+﻿namespace Fanex.Athena.Controllers.Report.UnitTests.ReportAPI
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -12,7 +12,6 @@
     using NSubstitute;
     using NUnit.Framework;
     using Report;
-    using Service.Core.Common.Interfaces;
     using Service.Report.Interfaces;
     using UnitTest.Common.Helpers;
 

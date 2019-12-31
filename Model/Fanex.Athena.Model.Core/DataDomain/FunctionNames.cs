@@ -30,7 +30,7 @@
 
         public const string BettingTicketCenterRunning = "BettingTicketCenter_Running";
 
-        public const string BettingTicketCenterMultiCustomers = "BettingTicketCenter_MultiCustomers";
+        public const string BettingTicketCenterAdvancedSearch = "BettingTicketCenter_AdvancedSearch";
 
         public const string CasinoTurnover = "CasinoTurnover";
 

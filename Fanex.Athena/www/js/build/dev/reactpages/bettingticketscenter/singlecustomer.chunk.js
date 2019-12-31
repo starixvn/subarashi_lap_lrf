@@ -10,7 +10,7 @@
 /******/ 		var moduleId, chunkId, i = 0, resolves = [];
 /******/ 		for(;i < chunkIds.length; i++) {
 /******/ 			chunkId = chunkIds[i];
-/******/ 			if(installedChunks[chunkId]) {
+/******/ 			if(Object.prototype.hasOwnProperty.call(installedChunks, chunkId) && installedChunks[chunkId]) {
 /******/ 				resolves.push(installedChunks[chunkId][0]);
 /******/ 			}
 /******/ 			installedChunks[chunkId] = 0;
@@ -46,6 +46,7 @@
 /******/ 				result = __webpack_require__(__webpack_require__.s = deferredModule[0]);
 /******/ 			}
 /******/ 		}
+/******/
 /******/ 		return result;
 /******/ 	}
 /******/
@@ -250,7 +251,7 @@ function getGridData(url, params) {
     _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_1__["default"].postData(url, params).then(function (response) {
       response.data.timestamp = new Date().getTime();
       dispatch(setGridData(response.data));
-    }).catch(function (error) {
+    })["catch"](function (error) {
       alert("Sorry, an error occurred while processing your request.");
       dispatch(Object(_jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_2__["toggleLoader"])(false));
     });
@@ -1756,7 +1757,7 @@ function (_React$Component) {
         background: '#4c6274',
         height: "15px",
         width: "20px",
-        float: 'left'
+        "float": 'left'
       };
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "".concat(this.props.className)
@@ -1853,7 +1854,9 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -2104,12 +2107,12 @@ function (_Component) {
         type: "button",
         disabled: this.disablePrevButton,
         style: onlyClasses ? undefined : _objectSpread({}, styles['MonthButton'], {
-          float: 'left'
+          "float": 'left'
         }),
         className: classes.prevButton,
         onClick: this.prevButtonClickHandler.bind(this)
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        style: onlyClasses ? undefined : _objectSpread({}, styles['MonthArrow'], styles['MonthArrowPrev'])
+        style: onlyClasses ? undefined : _objectSpread({}, styles['MonthArrow'], {}, styles['MonthArrowPrev'])
       })) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: classes.month
       }, this.renderMonthList(classes)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
@@ -2120,12 +2123,12 @@ function (_Component) {
         type: "button",
         disabled: this.disableNextButton,
         style: onlyClasses ? undefined : _objectSpread({}, styles['MonthButton'], {
-          float: 'right'
+          "float": 'right'
         }),
         className: classes.nextButton,
         onClick: this.nextButtonClickHandler.bind(this)
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        style: onlyClasses ? undefined : _objectSpread({}, styles['MonthArrow'], styles['MonthArrowNext'])
+        style: onlyClasses ? undefined : _objectSpread({}, styles['MonthArrow'], {}, styles['MonthArrowNext'])
       })) : null);
     }
   }, {
@@ -2264,10 +2267,10 @@ function (_Component) {
           onlyClasses = _this$props7.onlyClasses,
           classNames = _this$props7.classNames;
 
-      var classes = _objectSpread({}, _styles_js__WEBPACK_IMPORTED_MODULE_5__["defaultClasses"], classNames);
+      var classes = _objectSpread({}, _styles_js__WEBPACK_IMPORTED_MODULE_5__["defaultClasses"], {}, classNames);
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        style: onlyClasses ? undefined : _objectSpread({}, styles['Calendar'], this.props.style),
+        style: onlyClasses ? undefined : _objectSpread({}, styles['Calendar'], {}, this.props.style),
         className: classes.calendar
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: classes.monthAndYear
@@ -2287,13 +2290,13 @@ function (_Component) {
       var startDate, endDate;
 
       if (minDate) {
-        startDate = moment__WEBPACK_IMPORTED_MODULE_2___default.a.isMoment(minDate) ? minDate : moment__WEBPACK_IMPORTED_MODULE_2___default()(minDate, _constants__WEBPACK_IMPORTED_MODULE_6__["MomentFormat"].default);
+        startDate = moment__WEBPACK_IMPORTED_MODULE_2___default.a.isMoment(minDate) ? minDate : moment__WEBPACK_IMPORTED_MODULE_2___default()(minDate, _constants__WEBPACK_IMPORTED_MODULE_6__["MomentFormat"]["default"]);
       } else {
         startDate = moment__WEBPACK_IMPORTED_MODULE_2___default()([m.year() - DEFAULT_YEAR_RANGE, START_OF_MONTH]);
       }
 
       if (maxDate) {
-        endDate = moment__WEBPACK_IMPORTED_MODULE_2___default.a.isMoment(maxDate) ? maxDate : moment__WEBPACK_IMPORTED_MODULE_2___default()(maxDate, _constants__WEBPACK_IMPORTED_MODULE_6__["MomentFormat"].default);
+        endDate = moment__WEBPACK_IMPORTED_MODULE_2___default.a.isMoment(maxDate) ? maxDate : moment__WEBPACK_IMPORTED_MODULE_2___default()(maxDate, _constants__WEBPACK_IMPORTED_MODULE_6__["MomentFormat"]["default"]);
       } else {
         endDate = moment__WEBPACK_IMPORTED_MODULE_2___default()([m.year(), END_OF_MONTH]).endOf("month");
       }
@@ -2337,7 +2340,7 @@ function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 Calendar.defaultProps = {
-  format: _constants__WEBPACK_IMPORTED_MODULE_6__["MomentFormat"].default,
+  format: _constants__WEBPACK_IMPORTED_MODULE_6__["MomentFormat"]["default"],
   theme: {},
   showMonthArrow: true,
   disableDaysBeforeToday: false,
@@ -2402,7 +2405,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Calendar_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Calendar.js */ "./www/js/source/reactpages/components/date-range/Calendar.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -2454,7 +2459,7 @@ function (_Component) {
     var locale = props.locale,
         date = props.date,
         format = props.format;
-    _this.locale = _objectSpread({}, _defaultOptions_js__WEBPACK_IMPORTED_MODULE_4__["default"].locale, locale);
+    _this.locale = _objectSpread({}, _defaultOptions_js__WEBPACK_IMPORTED_MODULE_4__["default"].locale, {}, locale);
     var selectedDate = Object(_utils_parseInput_js__WEBPACK_IMPORTED_MODULE_3__["default"])(date, format, 'startOf');
     _this.state = {
       selectedDate: selectedDate,
@@ -2483,7 +2488,7 @@ function (_Component) {
           maxDate = _this$props.maxDate,
           classNames = _this$props.classNames;
 
-      var classes = _objectSpread({}, _styles_js__WEBPACK_IMPORTED_MODULE_6__["defaultClasses"], classNames);
+      var classes = _objectSpread({}, _styles_js__WEBPACK_IMPORTED_MODULE_6__["defaultClasses"], {}, classNames);
 
       var show = this.state.show;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2543,7 +2548,7 @@ _defineProperty(DatePicker, "propTypes", {
 });
 
 _defineProperty(DatePicker, "defaultProps", {
-  format: _constants__WEBPACK_IMPORTED_MODULE_5__["MomentFormat"].default
+  format: _constants__WEBPACK_IMPORTED_MODULE_5__["MomentFormat"]["default"]
 });
 
 
@@ -2576,7 +2581,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Overlay__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../Overlay */ "./www/js/source/reactpages/components/Overlay.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -2651,8 +2658,8 @@ function (_Component) {
     var endDate = Object(_utils_parseInput_js__WEBPACK_IMPORTED_MODULE_3__["default"])(props.endDate, format, 'endOf');
     _this.styles = Object(_styles_js__WEBPACK_IMPORTED_MODULE_6__["default"])(theme);
     _this.calendarSelectionStep = 0;
-    _this.locale = _objectSpread({}, _defaultOptions_js__WEBPACK_IMPORTED_MODULE_9__["default"].locale, props.locale);
-    _this.ranges = _objectSpread({}, _defaultOptions_js__WEBPACK_IMPORTED_MODULE_9__["default"].ranges(props.today, props.minDate, props.maxDate, props.limitedMonthRange), props.ranges);
+    _this.locale = _objectSpread({}, _defaultOptions_js__WEBPACK_IMPORTED_MODULE_9__["default"].locale, {}, props.locale);
+    _this.ranges = _objectSpread({}, _defaultOptions_js__WEBPACK_IMPORTED_MODULE_9__["default"].ranges(props.today, props.minDate, props.maxDate, props.limitedMonthRange), {}, props.ranges);
     _this.isValid = true;
     _this.originalRange = {
       startDate: startDate,
@@ -2792,7 +2799,7 @@ function (_Component) {
           link = _this$state.link;
       var styles = this.styles;
 
-      var classes = _objectSpread({}, _styles_js__WEBPACK_IMPORTED_MODULE_6__["defaultClasses"], classNames);
+      var classes = _objectSpread({}, _styles_js__WEBPACK_IMPORTED_MODULE_6__["defaultClasses"], {}, classNames);
 
       var calendarsCount = Number(calendars) - 1;
       var buttonHandlers = {
@@ -2885,7 +2892,7 @@ function (_Component) {
 DateRange.defaultProps = {
   linkedCalendars: false,
   theme: {},
-  format: _constants__WEBPACK_IMPORTED_MODULE_8__["MomentFormat"].default,
+  format: _constants__WEBPACK_IMPORTED_MODULE_8__["MomentFormat"]["default"],
   calendars: 2,
   onlyClasses: true,
   classNames: {},
@@ -2938,7 +2945,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _styles_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./styles.js */ "./www/js/source/reactpages/components/date-range/styles.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -3041,7 +3050,7 @@ function (_Component) {
       var todayStyle = isToday ? styles['DayToday'] : {};
       var sundayStyle = isSunday ? styles['DaySunday'] : {};
       var specialDayStyle = isSpecialDay ? styles['DaySpecialDay'] : {};
-      return _objectSpread({}, todayStyle, sundayStyle, specialDayStyle, inRangeStyle, hoverStyle, passiveStyle, activeStyle, selectedStyle, startEdgeStyle, endEdgeStyle);
+      return _objectSpread({}, todayStyle, {}, sundayStyle, {}, specialDayStyle, {}, inRangeStyle, {}, hoverStyle, {}, passiveStyle, {}, activeStyle, {}, selectedStyle, {}, startEdgeStyle, {}, endEdgeStyle);
     }
   }, {
     key: "getClassNames",
@@ -3083,7 +3092,7 @@ function (_Component) {
         onMouseDown: this.handleMouseEvent.bind(this),
         onMouseUp: this.handleMouseEvent.bind(this),
         className: classes,
-        style: onlyClasses ? undefined : _objectSpread({}, styles['Day'], stateStyle)
+        style: onlyClasses ? undefined : _objectSpread({}, styles['Day'], {}, stateStyle)
       }, dayMoment.date()));
     }
   }]);
@@ -3136,7 +3145,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _defaultOptions_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./defaultOptions.js */ "./www/js/source/reactpages/components/date-range/defaultOptions.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -3232,7 +3243,7 @@ function (_Component) {
         var active = _this2.selectedItem === name;
         gotActiveRange = !gotActiveRange && active;
 
-        var style = _objectSpread({}, styles['PredefinedRangesItem'], gotActiveRange ? styles['PredefinedRangesItemActive'] : {});
+        var style = _objectSpread({}, styles['PredefinedRangesItem'], {}, gotActiveRange ? styles['PredefinedRangesItemActive'] : {});
 
         var predefinedRangeClass = classnames__WEBPACK_IMPORTED_MODULE_3___default()((_classnames = {}, _defineProperty(_classnames, classes.predefinedRangesItem, true), _defineProperty(_classnames, classes.predefinedRangesItemActive, gotActiveRange), _classnames));
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
@@ -3256,7 +3267,7 @@ function (_Component) {
           onlyClasses = _this$props3.onlyClasses,
           locale = _this$props3.locale;
 
-      var locales = _objectSpread({}, _defaultOptions_js__WEBPACK_IMPORTED_MODULE_6__["default"].locale, locale);
+      var locales = _objectSpread({}, _defaultOptions_js__WEBPACK_IMPORTED_MODULE_6__["default"].locale, {}, locale);
 
       var styles = this.styles;
       var action = {
@@ -3267,14 +3278,14 @@ function (_Component) {
         className: _styles_js__WEBPACK_IMPORTED_MODULE_5__["defaultClasses"].rangeButtonGroup
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: classes.applyButton,
-        style: onlyClasses ? undefined : _objectSpread({}, styles['RangeApplyButton'], style),
+        style: onlyClasses ? undefined : _objectSpread({}, styles['RangeApplyButton'], {}, style),
         type: "button",
         onClick: function onClick(e) {
           return _this3.clickButton(e, action.apply);
         }
       }, locales.applyLabel), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: classes.cancelButton,
-        style: onlyClasses ? undefined : _objectSpread({}, styles['RangeCancelButton'], style),
+        style: onlyClasses ? undefined : _objectSpread({}, styles['RangeCancelButton'], {}, style),
         onClick: function onClick(e) {
           return _this3.clickButton(e, action.cancel);
         },
@@ -3290,10 +3301,10 @@ function (_Component) {
           classNames = _this$props4.classNames;
       var styles = this.styles;
 
-      var classes = _objectSpread({}, _styles_js__WEBPACK_IMPORTED_MODULE_5__["defaultClasses"], classNames);
+      var classes = _objectSpread({}, _styles_js__WEBPACK_IMPORTED_MODULE_5__["defaultClasses"], {}, classNames);
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        style: onlyClasses ? undefined : _objectSpread({}, styles['PredefinedRanges'], style),
+        style: onlyClasses ? undefined : _objectSpread({}, styles['PredefinedRanges'], {}, style),
         className: classes.predefinedRanges
       }, this.renderRangeList(classes), this.renderRangeButtons(classes));
     }
@@ -3326,7 +3337,7 @@ PredefinedRanges.propTypes = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MomentFormat", function() { return MomentFormat; });
 var MomentFormat = {
-  default: "MM/DD/YYYY",
+  "default": "MM/DD/YYYY",
   monthSelect: "MMM"
 };
 
@@ -3346,7 +3357,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var _utils_locale__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./utils/locale */ "./www/js/source/reactpages/components/date-range/utils/locale.js");
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./constants */ "./www/js/source/reactpages/components/date-range/constants.js");
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -3376,9 +3389,9 @@ var addDistanceDays = function addDistanceDays(rangeObj, name, start, end, min, 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   ranges: function ranges(todayDate, minDate, maxDate, limitMonths) {
-    var today = !todayDate ? moment__WEBPACK_IMPORTED_MODULE_0___default()() : !moment__WEBPACK_IMPORTED_MODULE_0___default.a.isMoment(todayDate) ? moment__WEBPACK_IMPORTED_MODULE_0___default()(todayDate, _constants__WEBPACK_IMPORTED_MODULE_3__["MomentFormat"].default) : todayDate;
-    var max = !maxDate ? today : !moment__WEBPACK_IMPORTED_MODULE_0___default.a.isMoment(maxDate) ? moment__WEBPACK_IMPORTED_MODULE_0___default()(maxDate, _constants__WEBPACK_IMPORTED_MODULE_3__["MomentFormat"].default) : maxDate;
-    var min = !minDate ? today : !moment__WEBPACK_IMPORTED_MODULE_0___default.a.isMoment(minDate) ? moment__WEBPACK_IMPORTED_MODULE_0___default()(minDate, _constants__WEBPACK_IMPORTED_MODULE_3__["MomentFormat"].default) : minDate;
+    var today = !todayDate ? moment__WEBPACK_IMPORTED_MODULE_0___default()() : !moment__WEBPACK_IMPORTED_MODULE_0___default.a.isMoment(todayDate) ? moment__WEBPACK_IMPORTED_MODULE_0___default()(todayDate, _constants__WEBPACK_IMPORTED_MODULE_3__["MomentFormat"]["default"]) : todayDate;
+    var max = !maxDate ? today : !moment__WEBPACK_IMPORTED_MODULE_0___default.a.isMoment(maxDate) ? moment__WEBPACK_IMPORTED_MODULE_0___default()(maxDate, _constants__WEBPACK_IMPORTED_MODULE_3__["MomentFormat"]["default"]) : maxDate;
+    var min = !minDate ? today : !moment__WEBPACK_IMPORTED_MODULE_0___default.a.isMoment(minDate) ? moment__WEBPACK_IMPORTED_MODULE_0___default()(minDate, _constants__WEBPACK_IMPORTED_MODULE_3__["MomentFormat"]["default"]) : minDate;
     var range = {};
 
     if (today < min) {
@@ -3452,7 +3465,9 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "defaultClasses", function() { return defaultClasses; });
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -3655,39 +3670,39 @@ var defaultTheme = {
 
   var cellSize = (parseInt(calendarWidth, 10) - parseInt(calendarPadding, 10) * 2) / 7 - parseInt(cellMargin, 10) * 2;
   return {
-    DateRange: _objectSpread({}, defaultTheme.DateRange, customTheme.DateRange),
-    Calendar: _objectSpread({}, defaultTheme.Calendar, customTheme.Calendar),
+    DateRange: _objectSpread({}, defaultTheme.DateRange, {}, customTheme.DateRange),
+    Calendar: _objectSpread({}, defaultTheme.Calendar, {}, customTheme.Calendar),
     Day: _objectSpread({
       width: cellSize,
       height: cellSize,
       lineHeight: cellSize + 'px'
-    }, defaultTheme.Day, customTheme.Day),
-    DayPassive: _objectSpread({}, defaultTheme.DayPassive, customTheme.DayPassive),
-    DayHover: _objectSpread({}, defaultTheme.DayHover, customTheme.DayHover),
-    DayToday: _objectSpread({}, defaultTheme.DayToday, customTheme.DayToday),
-    DaySunday: _objectSpread({}, defaultTheme.DaySunday, customTheme.DaySunday),
-    DaySpecialDay: _objectSpread({}, defaultTheme.DaySpecialDay, customTheme.DaySpecialDay),
-    DayActive: _objectSpread({}, defaultTheme.DayActive, customTheme.DayActive),
-    DaySelected: _objectSpread({}, defaultTheme.DaySelected, customTheme.DaySelected),
-    DayStartEdge: _objectSpread({}, defaultTheme.DayStartEdge, customTheme.DayStartEdge),
-    DayEndEdge: _objectSpread({}, defaultTheme.DayEndEdge, customTheme.DayEndEdge),
-    DayInRange: _objectSpread({}, defaultTheme.DayInRange, customTheme.DayInRange),
+    }, defaultTheme.Day, {}, customTheme.Day),
+    DayPassive: _objectSpread({}, defaultTheme.DayPassive, {}, customTheme.DayPassive),
+    DayHover: _objectSpread({}, defaultTheme.DayHover, {}, customTheme.DayHover),
+    DayToday: _objectSpread({}, defaultTheme.DayToday, {}, customTheme.DayToday),
+    DaySunday: _objectSpread({}, defaultTheme.DaySunday, {}, customTheme.DaySunday),
+    DaySpecialDay: _objectSpread({}, defaultTheme.DaySpecialDay, {}, customTheme.DaySpecialDay),
+    DayActive: _objectSpread({}, defaultTheme.DayActive, {}, customTheme.DayActive),
+    DaySelected: _objectSpread({}, defaultTheme.DaySelected, {}, customTheme.DaySelected),
+    DayStartEdge: _objectSpread({}, defaultTheme.DayStartEdge, {}, customTheme.DayStartEdge),
+    DayEndEdge: _objectSpread({}, defaultTheme.DayEndEdge, {}, customTheme.DayEndEdge),
+    DayInRange: _objectSpread({}, defaultTheme.DayInRange, {}, customTheme.DayInRange),
     Weekday: _objectSpread({
       width: cellSize,
       height: cellSize / 2,
       lineHeight: cellSize / 2 + 'px'
-    }, defaultTheme.Weekday, customTheme.Weekday),
-    MonthAndYear: _objectSpread({}, defaultTheme.MonthAndYear, customTheme.MonthAndYear),
-    MonthAndYearSelect: _objectSpread({}, defaultTheme.MonthAndYearSelect, customTheme.MonthAndYearSelect),
-    MonthButton: _objectSpread({}, defaultTheme.MonthButton, customTheme.MonthButton),
-    MonthArrow: _objectSpread({}, defaultTheme.MonthArrow, customTheme.MonthArrow),
-    MonthArrowPrev: _objectSpread({}, defaultTheme.MonthArrowPrev, customTheme.MonthArrowPrev),
-    MonthArrowNext: _objectSpread({}, defaultTheme.MonthArrowNext, customTheme.MonthArrowNext),
-    PredefinedRanges: _objectSpread({}, defaultTheme.PredefinedRanges, customTheme.PredefinedRanges),
-    PredefinedRangesItem: _objectSpread({}, defaultTheme.PredefinedRangesItem, customTheme.PredefinedRangesItem),
-    PredefinedRangesItemActive: _objectSpread({}, defaultTheme.PredefinedRangesItemActive, customTheme.PredefinedRangesItemActive),
-    RangeApplyButton: _objectSpread({}, defaultTheme.RangeButton, defaultTheme.RangeApplyButton, customTheme.RangeApplyButton),
-    RangeCancelButton: _objectSpread({}, defaultTheme.RangeButton, defaultTheme.RangeCancelButton, customTheme.RangeCancelButton)
+    }, defaultTheme.Weekday, {}, customTheme.Weekday),
+    MonthAndYear: _objectSpread({}, defaultTheme.MonthAndYear, {}, customTheme.MonthAndYear),
+    MonthAndYearSelect: _objectSpread({}, defaultTheme.MonthAndYearSelect, {}, customTheme.MonthAndYearSelect),
+    MonthButton: _objectSpread({}, defaultTheme.MonthButton, {}, customTheme.MonthButton),
+    MonthArrow: _objectSpread({}, defaultTheme.MonthArrow, {}, customTheme.MonthArrow),
+    MonthArrowPrev: _objectSpread({}, defaultTheme.MonthArrowPrev, {}, customTheme.MonthArrowPrev),
+    MonthArrowNext: _objectSpread({}, defaultTheme.MonthArrowNext, {}, customTheme.MonthArrowNext),
+    PredefinedRanges: _objectSpread({}, defaultTheme.PredefinedRanges, {}, customTheme.PredefinedRanges),
+    PredefinedRangesItem: _objectSpread({}, defaultTheme.PredefinedRangesItem, {}, customTheme.PredefinedRangesItem),
+    PredefinedRangesItemActive: _objectSpread({}, defaultTheme.PredefinedRangesItemActive, {}, customTheme.PredefinedRangesItemActive),
+    RangeApplyButton: _objectSpread({}, defaultTheme.RangeButton, {}, defaultTheme.RangeApplyButton, {}, customTheme.RangeApplyButton),
+    RangeCancelButton: _objectSpread({}, defaultTheme.RangeButton, {}, defaultTheme.RangeCancelButton, {}, customTheme.RangeCancelButton)
   };
 });
 
@@ -4124,6 +4139,15 @@ function (_Component) {
         }
 
         _this2._showNewParlayDetail.apply(_this2, [_this2.props.rootUrl].concat(args));
+      }; // expand choice content
+
+
+      window.showSingleMatchParlayDetail = function () {
+        for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+          args[_key2] = arguments[_key2];
+        }
+
+        _this2._showSingleMatchParlayDetail.apply(_this2, [_this2.props.rootUrl].concat(args));
       }; // show detail popup (in choice column)
 
 
@@ -4266,6 +4290,7 @@ function (_Component) {
       window.showColossusBetsDetails = undefined;
       window.showGlobalGaming = undefined;
       window.showPPDetails = undefined;
+      window.showSingleMatchParlayDetail = undefined;
     }
   }, {
     key: "_getResource",
@@ -4319,7 +4344,7 @@ function (_Component) {
           divEvent.style.display = 'block';
 
           _this3._afterShow();
-        }).catch(function (error) {
+        })["catch"](function (error) {
           _this3._afterShow();
 
           console.log(error);
@@ -4351,7 +4376,7 @@ function (_Component) {
           nameDiv.style.display = 'none';
 
           _this4._afterShow();
-        }).catch(function (error) {
+        })["catch"](function (error) {
           _this4._afterShow();
 
           console.log(error);
@@ -4376,7 +4401,7 @@ function (_Component) {
         }
 
         _this5._afterShow();
-      }).catch(function (error) {
+      })["catch"](function (error) {
         _this5._afterShow();
 
         console.log(error);
@@ -4403,11 +4428,37 @@ function (_Component) {
         }
 
         _this6._afterShow();
-      }).catch(function (error) {
+      })["catch"](function (error) {
         _this6._afterShow();
 
         console.log(error);
       });
+    }
+  }, {
+    key: "_showSingleMatchParlayDetail",
+    value: function _showSingleMatchParlayDetail(rootUrl, transId, custId, status, transIndex) {
+      var _this7 = this;
+
+      var divEvent = document.querySelector('#divEvent_' + transId + '' + transIndex);
+
+      if (divEvent.style.display == 'none') {
+        var url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleMatchParlayDetailUrl(rootUrl, transId, custId, status);
+
+        this._beforeShow();
+
+        _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_1__["default"].getData(url).then(function (result) {
+          var selection = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].buildSingleMatchParlayDetail(result.data);
+          divEvent.innerHTML = selection;
+          divEvent.style.display = 'block';
+
+          _this7._afterShow();
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      } else {
+        divEvent.style.display = 'none';
+        divEvent.innerHTML = '';
+      }
     }
   }, {
     key: "_openPopup",
@@ -4428,7 +4479,7 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this7 = this;
+      var _this8 = this;
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "betlist-layout"
@@ -4439,7 +4490,7 @@ function (_Component) {
         width: 900,
         height: 600,
         onClose: function onClose() {
-          return _this7._closePopup();
+          return _this8._closePopup();
         }
       }));
     }
@@ -4572,6 +4623,24 @@ function () {
       return choice;
     }
   }, {
+    key: "buildSingleMatchParlayDetail",
+    value: function buildSingleMatchParlayDetail(data) {
+      var selection = '';
+      var length = data === null ? 0 : data.length;
+
+      if (length > 0) {
+        selection = '<div class="single-match-parlay-detail">';
+
+        for (var i = 0; i < data.length; i++) {
+          selection += data[i];
+        }
+
+        selection += '</div>';
+      }
+
+      return selection;
+    }
+  }, {
     key: "getParlayDetailUrl",
     value: function getParlayDetailUrl(rootUrl, transId, refNo, betId, custId, betTeam, baseCurrency) {
       if (Number(transId) === 0) {
@@ -4582,6 +4651,19 @@ function () {
       url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'refno', refNo);
       url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'betteam', betTeam);
       url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'basecurrency', baseCurrency);
+      return url;
+    }
+  }, {
+    key: "getSingleMatchParlayDetailUrl",
+    value: function getSingleMatchParlayDetailUrl(rootUrl, transId, custId, status) {
+      if (Number(transId) === 0) {
+        return;
+      }
+
+      var url = rootUrl + 'api/SingleMatchParlayBetList/Detail';
+      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId', transId);
+      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custId', custId);
+      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, "status", status);
       return url;
     }
   }, {
@@ -5511,20 +5593,20 @@ var PageLayout = function PageLayout(props) {
     afterShowFunc: afterShow
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_6__["Tabs"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_6__["Tab"], {
     isActive: selectedTabIndex == 0,
-    label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("MultiCustomers"),
-    url: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_8__["default"].resolveClientUrl("BettingTicketCenter/MultipleCustomers")
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_6__["Tab"], {
-    isActive: selectedTabIndex == 1,
     label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("SingleCustomer"),
     url: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_8__["default"].resolveClientUrl("BettingTicketCenter/SingleCustomer")
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_6__["Tab"], {
-    isActive: selectedTabIndex == 2,
+    isActive: selectedTabIndex == 1,
     label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("RefNo"),
     url: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_8__["default"].resolveClientUrl("BettingTicketCenter/RefNo")
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_6__["Tab"], {
-    isActive: selectedTabIndex == 3,
+    isActive: selectedTabIndex == 2,
     label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("Running"),
     url: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_8__["default"].resolveClientUrl("BettingTicketCenter/Running")
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_6__["Tab"], {
+    isActive: selectedTabIndex == 3,
+    label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("AdvancedSearch"),
+    url: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_8__["default"].resolveClientUrl("BettingTicketCenter/AdvancedSearch")
   }), hasExchange && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_6__["Tab"], {
     isActive: selectedTabIndex == 4,
     label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("Exchange"),
@@ -5655,7 +5737,7 @@ var ApiUrl = {
   RUNNING_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl('api/BettingTicketCenter/GetByRunning'),
   REFNO_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl('api/BettingTicketCenter/GetByRefNo'),
   SINGLECUSTOMER_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl('api/BettingTicketCenter/GetBySingleCustomer'),
-  MULTICUSTOMER_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl('api/BettingTicketCenterMultiCustomer/GetData')
+  ADVANCEDSEARCH_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl('api/BettingTicketCenterAdvancedSearch/GetData')
 };
 var HeaderText = {
   Index: "#",
@@ -5774,7 +5856,7 @@ function (_Component) {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_components_PageLayout__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        selectedTabIndex: "1"
+        selectedTabIndex: "0"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Loader__WEBPACK_IMPORTED_MODULE_5__["default"], {
         isLoading: this.props.isLoading
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormFilter__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DataGrid__WEBPACK_IMPORTED_MODULE_2__["default"], null));
@@ -6594,7 +6676,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "requestParam", function() { return requestParam; });
 /* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/types */ "./www/js/source/reactpages/actions/types.js");
 /* harmony import */ var _lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 

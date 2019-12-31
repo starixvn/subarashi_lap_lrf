@@ -105,7 +105,7 @@
     <Compile Include="ApiBetListBaseControllerHelperTest.cs" />
     <Compile Include="ApiBetListBaseControllerTest.cs" />
     <Compile Include="BettingTicketCenterControllerTest.cs" />
-    <Compile Include="BettingTicketCenterMultiCustomerControllerTest.cs" />
+    <Compile Include="BettingTicketCenterAdvancedSearchControllerTest.cs" />
     <Compile Include="BonusBetListControllerTest.cs" />
     <Compile Include="CorrectScoreBetListControllerTest.cs" />
     <Compile Include="CustomerWinLossBetListControllerTest.cs" />
@@ -130,6 +130,7 @@
     <Compile Include="RunningBettypesOfMatchBetListControllerTest.cs" />
     <Compile Include="RunningMatchBetListControllerTest.cs" />
     <Compile Include="RunningMatchChoiceBetListControllerTest.cs" />
+    <Compile Include="SingleMatchParlayBetListControllerTest.cs" />
     <Compile Include="VoidbridgeBetListControllerTest.cs" />
     <Compile Include="WinlossByBetTypeBetListControllerTest.cs" />
     <Compile Include="WinlossByLeagueBetListControllerTest.cs" />

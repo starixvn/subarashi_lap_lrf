@@ -54,7 +54,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    NUnit.Framework.Assert.That(actual, Is.EqualTo(expect));
+                    Assert.That(actual, Is.EqualTo(expect));
                     Assert.That(metaModel.UspKey, Is.EqualTo(UspKey));
                     BetListApiClient.Received().PostAsync(ApiPath, metaModel, SessionLanguage);
                 });

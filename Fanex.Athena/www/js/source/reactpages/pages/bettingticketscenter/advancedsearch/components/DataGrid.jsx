@@ -23,7 +23,7 @@ export const DataGrid = (props) => {
 
     return (
         <BaseDataGrid
-            dataUrl={ApiUrl.MULTICUSTOMER_DATA_URL}
+            dataUrl={ApiUrl.ADVANCEDSEARCH_DATA_URL}
             isPaging={true}
             columns={Columns}
             columnWidths={ColumnWidths}

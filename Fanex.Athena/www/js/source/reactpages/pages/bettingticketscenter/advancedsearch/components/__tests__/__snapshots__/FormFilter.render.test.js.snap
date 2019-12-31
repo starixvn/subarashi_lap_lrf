@@ -354,10 +354,10 @@ exports[`FormFilter  render correctly 1`] = `
       className="col-9"
     >
       * 
-      BettingTicketCenter_MultiCustomersTabNote1
+      BettingTicketCenter_AdvancedSearchTabNote1
       <br />
       * 
-      BettingTicketCenter_MultiCustomersTabNote2
+      BettingTicketCenter_AdvancedSearchTabNote2
     </div>
   </div>
 </CollapsiblePanel>

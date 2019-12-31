@@ -56,7 +56,7 @@ exports[`DataGrid  render correctly 1`] = `
       "Live",
     ]
   }
-  dataUrl="/api/BettingTicketCenterMultiCustomer/GetData"
+  dataUrl="/api/BettingTicketCenterAdvancedSearch/GetData"
   isPaging={true}
   sortableColumns={
     Array [

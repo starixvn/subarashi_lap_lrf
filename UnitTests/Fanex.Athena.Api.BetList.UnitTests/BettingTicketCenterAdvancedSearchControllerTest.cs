@@ -10,10 +10,10 @@
     using NUnit.Framework;
     using Resources;
 
-    public class BettingTicketCenterMultiCustomerControllerTest : BaseApiControllerHelperTest
+    public class BettingTicketCenterAdvancedSearchControllerTest : BaseApiControllerHelperTest
     {
         private const int ServerBusyErrorCode = 1002;
-        private const string ApiPath = "/BettingTicketCenterMultiCustomer/GetData";
+        private const string ApiPath = "/BettingTicketCenterAdvancedSearch/GetData";
 
         private IBetListApiClient _betListApiClient;
 
@@ -48,7 +48,7 @@
             {
                 // Arrange
                 var licenseesWithLargeData = new List<string> { SessionLicenseeName };
-                var metaModel = new MultipleCustomersBetListMetaModel
+                var metaModel = new AdvancedSearchBetListMetaModel
                 {
                     IsExport = true
                 };
@@ -74,7 +74,7 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                var metaModel = new MultipleCustomersBetListMetaModel
+                var metaModel = new AdvancedSearchBetListMetaModel
                 {
                     IsExport = false,
                     CurrencyIdList = "1,2"
@@ -97,7 +97,7 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                var metaModel = new MultipleCustomersBetListMetaModel
+                var metaModel = new AdvancedSearchBetListMetaModel
                 {
                     IsExport = true,
                     CurrencyIdList = "1,2"
@@ -121,7 +121,7 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                var metaModel = new MultipleCustomersBetListMetaModel
+                var metaModel = new AdvancedSearchBetListMetaModel
                 {
                     IsExport = true,
                     CurrencyIdList = "1,2"
@@ -140,9 +140,9 @@
             }
         }
 
-        private BettingTicketCenterMultiCustomerController CreateController()
+        private BettingTicketCenterAdvancedSearchController CreateController()
         {
-            return new BettingTicketCenterMultiCustomerController(LangService, AppSetting, _betListApiClient)
+            return new BettingTicketCenterAdvancedSearchController(LangService, AppSetting, _betListApiClient)
             {
                 SessionService = SessionService,
                 ProductService = ProductService

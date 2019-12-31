@@ -1,4 +1,4 @@
-﻿namespace Fanex.Athena.Controllers.TotalBets.UnitTests
+﻿namespace Fanex.Athena.Controllers.Report.UnitTests.Result
 {
     using System.Threading.Tasks;
     using System.Web.Mvc;
@@ -30,7 +30,7 @@
 
         [OneTimeTearDown]
         public override void FixtureTearDown()
-        {           
+        {
             base.FixtureTearDown();
 
             _logger = null;

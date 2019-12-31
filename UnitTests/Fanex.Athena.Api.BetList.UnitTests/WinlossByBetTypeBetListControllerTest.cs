@@ -89,7 +89,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    NUnit.Framework.Assert.That(expect, NUnit.Framework.Is.EqualTo(actual));
+                    Assert.That(expect, Is.EqualTo(actual));
                     BetListApiClient.Received().PostAsync(
                         ApiPath,
                         Arg.Is<BetListMetaModel>(x => x.UspKey == UspKey
@@ -102,7 +102,8 @@
                             && x.BaseCurrency == expectedBaseCurrency
                             && x.SortBy == SortBy
                             && x.SortOrder == SortOrder),
-                        SessionLanguage);
+                            SessionLanguage
+                        );
                 });
             }
         }

@@ -6,7 +6,7 @@ export const ApiUrl = {
     RUNNING_DATA_URL: Site.resolveClientUrl('api/BettingTicketCenter/GetByRunning'),
     REFNO_DATA_URL: Site.resolveClientUrl('api/BettingTicketCenter/GetByRefNo'),
     SINGLECUSTOMER_DATA_URL: Site.resolveClientUrl('api/BettingTicketCenter/GetBySingleCustomer'),
-    MULTICUSTOMER_DATA_URL: Site.resolveClientUrl('api/BettingTicketCenterMultiCustomer/GetData')
+    ADVANCEDSEARCH_DATA_URL: Site.resolveClientUrl('api/BettingTicketCenterAdvancedSearch/GetData')
 }
 
 export const HeaderText = {

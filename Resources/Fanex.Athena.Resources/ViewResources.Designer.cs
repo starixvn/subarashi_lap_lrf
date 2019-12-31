@@ -801,18 +801,18 @@ namespace Fanex.Athena.Resources {
         /// <summary>
         ///   Looks up a localized string similar to All bettypes, League, and Match filter available only when 1 day is selected.
         /// </summary>
-        public static string BettingTicketCenter_MultiCustomersTabNote1 {
+        public static string BettingTicketCenter_AdvancedSearchTabNote1 {
             get {
-                return ResourceManager.GetString("BettingTicketCenter_MultiCustomersTabNote1", resourceCulture);
+                return ResourceManager.GetString("BettingTicketCenter_AdvancedSearchTabNote1", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Data is available from {0}.
         /// </summary>
-        public static string BettingTicketCenter_MultiCustomersTabNote2 {
+        public static string BettingTicketCenter_AdvancedSearchTabNote2 {
             get {
-                return ResourceManager.GetString("BettingTicketCenter_MultiCustomersTabNote2", resourceCulture);
+                return ResourceManager.GetString("BettingTicketCenter_AdvancedSearchTabNote2", resourceCulture);
             }
         }
         
@@ -2226,6 +2226,15 @@ namespace Fanex.Athena.Resources {
         public static string Error {
             get {
                 return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You&apos;re here because of one of those reasons: &lt;br/&gt;遭遇问题了!.
+        /// </summary>
+        public static string ErrorNotification {
+            get {
+                return ResourceManager.GetString("ErrorNotification", resourceCulture);
             }
         }
         
@@ -5425,6 +5434,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 1. Login at Licensee Admin.&lt;br/&gt;2. Access the reports/ functions you want. &lt;br/&gt; 请洽你们的最高管理者替你设置币别权限.
+        /// </summary>
+        public static string SolutionForRestriction {
+            get {
+                return ResourceManager.GetString("SolutionForRestriction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Special Level.
         /// </summary>
         public static string SpecialLevel {
@@ -5947,6 +5965,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please try to login again:&lt;br/&gt;解决方法.
+        /// </summary>
+        public static string TryLogin {
+            get {
+                return ResourceManager.GetString("TryLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tu.
         /// </summary>
         public static string Tu {
@@ -6370,7 +6397,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You do not have any currency permissions to view this report, please contact your administrator account..
+        ///   Looks up a localized string similar to You do not have any currency permissions to view this report, please contact your administrator account. &lt;br/&gt;你尚未设置任何币别权限.
         /// </summary>
         public static string UserNotHaveCurrency {
             get {

@@ -1,7 +1,6 @@
-﻿namespace Fanex.Athena.Controllers.TotalBets.UnitTests
+﻿namespace Fanex.Athena.Controllers.Report.UnitTests
 {
     using System.Collections.Generic;
-    using System.Threading.Tasks;
     using System.Web.Mvc;
     using Base.UnitTests;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -11,7 +10,6 @@
     using NSubstitute;
     using NUnit.Framework;
     using Report;
-    using Service.Core.Common.Interfaces;
 
     [TestFixture]
     public class WinLossByProductReportControllerTest : CultureBaseControllerHelperTest

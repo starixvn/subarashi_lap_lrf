@@ -2,7 +2,6 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { AdvancedSearch } from '../../filter/AdvancedSearch';
-import { JestEnvironment } from '@jest/environment';
 
 describe('AdvancedSearch', () => {
     const defaultProps = {
@@ -13,18 +12,18 @@ describe('AdvancedSearch', () => {
             baFilter: 0
         },
         onChange: jest.fn(),
-        currencyList: [{Id: 20, Value: 'UUS'}, {Id: 9, Value: 'AUD'}]
+        currencyList: [{ Id: 20, Value: 'UUS' }, { Id: 9, Value: 'AUD' }]
     }
 
     it('_createSelectData - return correct data list', () => {
         const originalList = [
-            { Id: 'eur', Value: 'EUR', Status: true }, 
+            { Id: 'eur', Value: 'EUR', Status: true },
             { Id: 'usd', Value: 'usd', Status: true }
         ];
         const selectedItemString = 'eur';
 
         const expectedResult = [
-            { Id: 'eur', Value: 'EUR', Status: true }, 
+            { Id: 'eur', Value: 'EUR', Status: true },
             { Id: 'usd', Value: 'usd', Status: false }
         ];
 
@@ -38,17 +37,17 @@ describe('AdvancedSearch', () => {
     it('handleChange - props.onChange should be called with correct parameter', () => {
         const name = 'currency';
         const selectedItemKey = 'usd,euro,vnd';
-        const props = {...defaultProps};
+        const props = { ...defaultProps };
         const instance = new AdvancedSearch(props);
 
         instance.handleChange(name, selectedItemKey);
 
         expect(props.onChange).toHaveBeenCalledWith(name, selectedItemKey);
     })
-    
+
     describe('render', () => {
         it('with initial state - should match snapshot', () => {
-            const wrapper = shallow(<AdvancedSearch {...defaultProps}/>);
+            const wrapper = shallow(<AdvancedSearch {...defaultProps} />);
 
             expect(wrapper).toMatchSnapshot();
         })
