@@ -36,6 +36,11 @@
             _authService = authService;
         }
 
+        [FunctionAuthorization(
+            PermissionKeys.BtcAdvancedSearch,
+            PermissionKeys.BtcSingleCustomer,
+            PermissionKeys.BtcRefNo,
+            PermissionKeys.BtcRunning)]
         public ActionResult Index()
         {
             var tabList = GetEnableTabList();
@@ -58,7 +63,7 @@
             }
             else
             {
-                return SingleCustomer();
+                return RedirectToAction("AccessDenied", "Utility");
             }
         }
 
