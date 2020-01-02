@@ -30,34 +30,34 @@ export const HeaderText = {
 export const DefaultPageSize = 50;
 
 export const tabKeys = {
-    multiCustomer: 'BTC_MultiCustomer',
+    advancedSearch: 'BTC_AdvancedSearch',
     singleCustomer: 'BTC_SingleCustomer',
     refNo: 'BTC_RefNo',
     running: 'BTC_Running'
 }
 
 export const tabList = [{
-        key: tabKeys.multiCustomer,
-        label: LangHelper.getSingleResource("MultiCustomers"),
-        url: Site.resolveClientUrl("BettingTicketCenter/MultipleCustomers"),
-        displayOrder: 0
+        key: tabKeys.advancedSearch,
+        label: LangHelper.getSingleResource("AdvancedSearch"),
+        url: Site.resolveClientUrl("BettingTicketCenter/AdvancedSearch"),
+        displayOrder: 3
     },
     {
         key: tabKeys.singleCustomer,
         label: LangHelper.getSingleResource("SingleCustomer"),
         url: Site.resolveClientUrl("BettingTicketCenter/SingleCustomer"),
-        displayOrder: 1
+        displayOrder: 0
     },
     {
         key: tabKeys.refNo,
         label: LangHelper.getSingleResource("RefNo"),
         url: Site.resolveClientUrl("BettingTicketCenter/RefNo"),
-        displayOrder: 2
+        displayOrder: 1
     },
     {
         key: tabKeys.running,
         label: LangHelper.getSingleResource("Running"),
         url: Site.resolveClientUrl("BettingTicketCenter/Running"),
-        displayOrder: 3
+        displayOrder: 2
     }
 ]

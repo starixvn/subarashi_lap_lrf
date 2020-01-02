@@ -143,7 +143,7 @@ namespace Fanex.Athena.Controllers.Report.UnitTests
             userSession.ApplicationMode = AppMode.Self;
             userSession.FunctionList = new List<Function>
             {
-                    new Function{ FunctionKey =  PermissionKeys.BtcMultiCustomers }
+                    new Function{ FunctionKey =  PermissionKeys.BtcAdvancedSearch }
             };
             StubUserSessionData(userSession);
         }

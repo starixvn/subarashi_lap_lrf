@@ -40,9 +40,9 @@
         {
             var tabList = GetEnableTabList();
 
-            if (tabList.Any(x => PermissionKeys.BtcMultiCustomers == x))
+            if (tabList.Any(x => PermissionKeys.BtcAdvancedSearch == x))
             {
-                return MultipleCustomers();
+                return AdvancedSearch();
             }
             else if (tabList.Any(x => PermissionKeys.BtcSingleCustomer == x))
             {
@@ -62,7 +62,7 @@
             }
         }
 
-        [FunctionAuthorization(PermissionKeys.BtcMultiCustomers)]
+        [FunctionAuthorization(PermissionKeys.BtcAdvancedSearch)]
         public ActionResult AdvancedSearch()
         {
             var tabList = GetEnableTabList();

@@ -60,11 +60,11 @@
             _authService = null;
         }
 
-        [TestCase(PermissionKeys.BtcMultiCustomers, AppMode.Self, "~/Views/Desktop/BetList/BettingTicketCenter/MultiCustomer.cshtml")]
+        [TestCase(PermissionKeys.BtcAdvancedSearch, AppMode.Self, "~/Views/Desktop/BetList/BettingTicketCenter/AdvancedSearch.cshtml")]
         [TestCase(PermissionKeys.BtcSingleCustomer, AppMode.Self, "~/Views/Desktop/BetList/BettingTicketCenter/SingleCustomer.cshtml")]
         [TestCase(PermissionKeys.BtcRefNo, AppMode.Self, "~/Views/Desktop/BetList/BettingTicketCenter/RefNo.cshtml")]
         [TestCase(PermissionKeys.BtcRunning, AppMode.Self, "~/Views/Desktop/BetList/BettingTicketCenter/Running.cshtml")]
-        [TestCase(PermissionKeys.BtcMultiCustomers, AppMode.Parasitic, "~/Views/Desktop/BetList/BettingTicketCenter/MultiCustomer.cshtml")]
+        [TestCase(PermissionKeys.BtcAdvancedSearch, AppMode.Parasitic, "~/Views/Desktop/BetList/BettingTicketCenter/AdvancedSearch.cshtml")]
         public void Index_CheckByPermission_ReturnCorrectView(string permissionKey, AppMode appMode, string expectedView)
         {
             // Arrange
@@ -94,7 +94,7 @@
                 var result = controller.Index() as ViewResult;
 
                 // Assert
-                Assert.That("~/Views/Desktop/BetList/BettingTicketCenter/MultiCustomer.cshtml", Is.EqualTo(result.ViewName));
+                Assert.That("~/Views/Desktop/BetList/BettingTicketCenter/SingleCustomer.cshtml", Is.EqualTo(result.ViewName));
             }
         }
 
@@ -273,7 +273,7 @@
             using (var controller = CreateController(hasExchangePermission))
             {
                 // Arrange
-                CreateAndStubUserSession(PermissionKeys.BtcMultiCustomers);
+                CreateAndStubUserSession(PermissionKeys.BtcAdvancedSearch);
                 var productCodes = MockProductService();
 
                 // Action
@@ -313,7 +313,7 @@
                 DefaultUserSession.Language,
                 Arg.Is<string>(x =>
                 string.IsNullOrEmpty(x) ||
-                x == FunctionNames.BettingTicketCenterMultiCustomers ||
+                x == FunctionNames.BettingTicketCenterAdvancedSearch ||
                 x == FunctionNames.BettingTicketCenterRunning ||
                 x == FunctionNames.BettingTicketCenter)).Returns(new ProductAccess(productCodes));
 

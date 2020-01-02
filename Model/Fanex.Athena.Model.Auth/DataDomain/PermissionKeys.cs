@@ -81,7 +81,7 @@
         public const string ResultAmendmentNotificationReport = "ResultAmendment_Recalculation75";
 
         public const string BettingTicketCenter = "BTC79";
-        public const string BtcMultiCustomers = "BTC_MultiCustomer";
+        public const string BtcAdvancedSearch = "BTC_MultiCustomer";
         public const string BtcSingleCustomer = "BTC_SingleCustomer";
         public const string BtcRefNo = "BTC_RefNo";
         public const string BtcRunning = "BTC_Running";
