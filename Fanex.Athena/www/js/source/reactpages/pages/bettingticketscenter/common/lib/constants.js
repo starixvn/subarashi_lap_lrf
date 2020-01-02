@@ -36,12 +36,7 @@ export const tabKeys = {
     running: 'BTC_Running'
 }
 
-export const tabList = [{
-        key: tabKeys.advancedSearch,
-        label: LangHelper.getSingleResource("AdvancedSearch"),
-        url: Site.resolveClientUrl("BettingTicketCenter/AdvancedSearch"),
-        displayOrder: 3
-    },
+export const tabList = [
     {
         key: tabKeys.singleCustomer,
         label: LangHelper.getSingleResource("SingleCustomer"),
@@ -59,5 +54,11 @@ export const tabList = [{
         label: LangHelper.getSingleResource("Running"),
         url: Site.resolveClientUrl("BettingTicketCenter/Running"),
         displayOrder: 2
+    },
+    {
+        key: tabKeys.advancedSearch,
+        label: LangHelper.getSingleResource("AdvancedSearch"),
+        url: Site.resolveClientUrl("BettingTicketCenter/AdvancedSearch"),
+        displayOrder: 3
     }
 ]
