@@ -5547,6 +5547,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/pages/bettingticketscenter/common/lib/constants.js");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+
+
 
 
 
@@ -5583,6 +5587,9 @@ var PageLayout = function PageLayout(props) {
     toggleLoader(false);
   };
 
+  var activedTabList = _lib_constants__WEBPACK_IMPORTED_MODULE_9__["tabList"].filter(function (x) {
+    return _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].tabList.includes(x.key);
+  });
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_4__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_layouts_betlist_BetListLayout__WEBPACK_IMPORTED_MODULE_5__["default"], {
     pageName: "BTC",
     rootUrl: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_8__["default"].getRootUrl(),
@@ -5591,22 +5598,12 @@ var PageLayout = function PageLayout(props) {
     baseCurrency: isConvertAll ? selectedBaseCurrency : '',
     beforeShowFunc: beforeShow,
     afterShowFunc: afterShow
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_6__["Tabs"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_6__["Tab"], {
-    isActive: selectedTabIndex == 0,
-    label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("SingleCustomer"),
-    url: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_8__["default"].resolveClientUrl("BettingTicketCenter/SingleCustomer")
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_6__["Tab"], {
-    isActive: selectedTabIndex == 1,
-    label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("RefNo"),
-    url: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_8__["default"].resolveClientUrl("BettingTicketCenter/RefNo")
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_6__["Tab"], {
-    isActive: selectedTabIndex == 2,
-    label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("Running"),
-    url: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_8__["default"].resolveClientUrl("BettingTicketCenter/Running")
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_6__["Tab"], {
-    isActive: selectedTabIndex == 3,
-    label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("AdvancedSearch"),
-    url: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_8__["default"].resolveClientUrl("BettingTicketCenter/AdvancedSearch")
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_6__["Tabs"], null, activedTabList.map(function (item) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_6__["Tab"], {
+      isActive: selectedTabIndex == item.displayOrder,
+      label: item.label,
+      url: item.url
+    });
   }), hasExchange && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_6__["Tab"], {
     isActive: selectedTabIndex == 4,
     label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("Exchange"),
@@ -5720,7 +5717,7 @@ function () {
 /*!*************************************************************************************!*\
   !*** ./www/js/source/reactpages/pages/bettingticketscenter/common/lib/constants.js ***!
   \*************************************************************************************/
-/*! exports provided: ApiUrl, HeaderText, DefaultPageSize */
+/*! exports provided: ApiUrl, HeaderText, DefaultPageSize, tabKeys, tabList */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5728,6 +5725,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ApiUrl", function() { return ApiUrl; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HeaderText", function() { return HeaderText; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DefaultPageSize", function() { return DefaultPageSize; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tabKeys", function() { return tabKeys; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tabList", function() { return tabList; });
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
 
@@ -5757,6 +5756,33 @@ var HeaderText = {
   Live: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("Live")
 };
 var DefaultPageSize = 50;
+var tabKeys = {
+  advancedSearch: 'BTC_AdvancedSearch',
+  singleCustomer: 'BTC_SingleCustomer',
+  refNo: 'BTC_RefNo',
+  running: 'BTC_Running'
+};
+var tabList = [{
+  key: tabKeys.advancedSearch,
+  label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("AdvancedSearch"),
+  url: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl("BettingTicketCenter/AdvancedSearch"),
+  displayOrder: 3
+}, {
+  key: tabKeys.singleCustomer,
+  label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("SingleCustomer"),
+  url: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl("BettingTicketCenter/SingleCustomer"),
+  displayOrder: 0
+}, {
+  key: tabKeys.refNo,
+  label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("RefNo"),
+  url: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl("BettingTicketCenter/RefNo"),
+  displayOrder: 1
+}, {
+  key: tabKeys.running,
+  label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("Running"),
+  url: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl("BettingTicketCenter/Running"),
+  displayOrder: 2
+}];
 
 /***/ }),
 

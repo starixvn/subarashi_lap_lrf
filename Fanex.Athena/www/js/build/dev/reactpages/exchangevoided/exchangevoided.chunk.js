@@ -1541,7 +1541,7 @@ var ApiUrl = {
   RUNNING_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl('api/BettingTicketCenter/GetByRunning'),
   REFNO_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl('api/BettingTicketCenter/GetByRefNo'),
   SINGLECUSTOMER_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl('api/BettingTicketCenter/GetBySingleCustomer'),
-  MULTICUSTOMER_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl('api/BettingTicketCenterMultiCustomer/GetData')
+  ADVANCEDSEARCH_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl('api/BettingTicketCenterAdvancedSearch/GetData')
 };
 var HeaderText = {
   Index: "#",
@@ -1562,31 +1562,31 @@ var HeaderText = {
 };
 var DefaultPageSize = 50;
 var tabKeys = {
-  multiCustomer: 'BTC_MultiCustomer',
+  advancedSearch: 'BTC_AdvancedSearch',
   singleCustomer: 'BTC_SingleCustomer',
   refNo: 'BTC_RefNo',
   running: 'BTC_Running'
 };
 var tabList = [{
-  key: tabKeys.multiCustomer,
-  label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("MultiCustomers"),
-  url: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl("BettingTicketCenter/MultipleCustomers"),
-  displayOrder: 0
+  key: tabKeys.advancedSearch,
+  label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("AdvancedSearch"),
+  url: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl("BettingTicketCenter/AdvancedSearch"),
+  displayOrder: 3
 }, {
   key: tabKeys.singleCustomer,
   label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("SingleCustomer"),
   url: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl("BettingTicketCenter/SingleCustomer"),
-  displayOrder: 1
+  displayOrder: 0
 }, {
   key: tabKeys.refNo,
   label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("RefNo"),
   url: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl("BettingTicketCenter/RefNo"),
-  displayOrder: 2
+  displayOrder: 1
 }, {
   key: tabKeys.running,
   label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("Running"),
   url: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl("BettingTicketCenter/Running"),
-  displayOrder: 3
+  displayOrder: 2
 }];
 
 /***/ }),
