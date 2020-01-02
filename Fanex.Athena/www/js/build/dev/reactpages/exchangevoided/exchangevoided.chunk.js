@@ -1562,7 +1562,7 @@ var HeaderText = {
 };
 var DefaultPageSize = 50;
 var tabKeys = {
-  advancedSearch: 'BTC_AdvancedSearch',
+  advancedSearch: 'BTC_MultiCustomer',
   singleCustomer: 'BTC_SingleCustomer',
   refNo: 'BTC_RefNo',
   running: 'BTC_Running'
