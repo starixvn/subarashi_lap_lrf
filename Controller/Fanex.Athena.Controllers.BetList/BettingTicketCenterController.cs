@@ -167,7 +167,8 @@
                 Product.VB,
                 Product.FW,
                 Product.CC,
-                Product.PP
+                Product.PP,
+                Product.SG
             };
 
             var productAccess = _productService.GetSingleWalletProductAccess(
