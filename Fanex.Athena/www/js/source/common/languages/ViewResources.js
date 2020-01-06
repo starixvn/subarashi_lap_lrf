@@ -1,4 +1,4 @@
-﻿// Generated at: 12/25/2019 1:20:25 PM
+﻿// Generated at: 12/30/2019 10:57:13 AM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -436,6 +436,7 @@ MoveSuccessfullyMsg:"Successfully moved.",
 MoveToGroup:"Move to Group",
 MultiCustomers:"Multi-Customers",
 Name:"Name",
+NativeApp:"Native App",
 NetTurnover:"Net Turnover",
 NewAsia:"New Asia",
 NewGroup:"New Group",

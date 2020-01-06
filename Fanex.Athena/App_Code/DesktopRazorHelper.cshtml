@@ -7,44 +7,47 @@
 @helper  PlatformList(string id, string className = null)
 {
     /**/
-    <select id="@id" name="@id" class="select @className">
-        <option value="@PlatformType.All">
-            @ViewResources.All
-        </option>
-        <option value="@PlatformType.Asia">
-            @ViewResources.Asia
-        </option>
-        <option value="@PlatformType.China">
-            @ViewResources.China
-        </option>
-        <option value="@PlatformType.Euro">
-            @ViewResources.Euro
-        </option>
-        <option value="@PlatformType.Wap">
-            @ViewResources.Wap
-        </option>
-        <option value="@PlatformType.Mobile">
-            @ViewResources.Mobile
-        </option>
-        <option value="@PlatformType.Tablet">
-            @ViewResources.Tablet
-        </option>
-        <option value="@PlatformType.NewAsia">
-            @ViewResources.NewAsia
-        </option>
-        <option value="@PlatformType.MobileApp">
-            @ViewResources.MobileApp
-        </option>
-        <option value="@PlatformType.MobileLiteVersion">
-            @ViewResources.MobileLiteVersion
-        </option>
-        <option value="@PlatformType.DeepLink">
-            @ViewResources.DeepLink
-        </option>
-        <option value="@PlatformType.BetfromOthers">
-            @ViewResources.BetfromOthers
-        </option>
-    </select>
+<select id="@id" name="@id" class="select @className">
+    <option value="@PlatformType.All">
+        @ViewResources.All
+    </option>
+    <option value="@PlatformType.Asia">
+        @ViewResources.Asia
+    </option>
+    <option value="@PlatformType.China">
+        @ViewResources.China
+    </option>
+    <option value="@PlatformType.Euro">
+        @ViewResources.Euro
+    </option>
+    <option value="@PlatformType.Wap">
+        @ViewResources.Wap
+    </option>
+    <option value="@PlatformType.Mobile">
+        @ViewResources.Mobile
+    </option>
+    <option value="@PlatformType.Tablet">
+        @ViewResources.Tablet
+    </option>
+    <option value="@PlatformType.NewAsia">
+        @ViewResources.NewAsia
+    </option>
+    <option value="@PlatformType.MobileApp">
+        @ViewResources.MobileApp
+    </option>
+    <option value="@PlatformType.MobileLiteVersion">
+        @ViewResources.MobileLiteVersion
+    </option>
+    <option value="@PlatformType.DeepLink">
+        @ViewResources.DeepLink
+    </option>
+    <option value="@PlatformType.NativeApp">
+        @ViewResources.NativeApp
+    </option>
+    <option value="@PlatformType.BetfromOthers">
+        @ViewResources.BetfromOthers
+    </option>
+</select>
 }
 @helper DateRangePicker(DateTime fromDate, DateTime toDate, DateTime minDate, DateTime maxDate)
 {

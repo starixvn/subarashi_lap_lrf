@@ -2210,4 +2210,8 @@
   <data name="ErrorCurrencyMsg" xml:space="preserve">
     <value>你尚未设置任何币别权限</value>
   </data>
+  <data name="NativeApp" xml:space="preserve">
+    <value>原生App</value>
+    <comment>125824</comment>
+  </data>
 </root>

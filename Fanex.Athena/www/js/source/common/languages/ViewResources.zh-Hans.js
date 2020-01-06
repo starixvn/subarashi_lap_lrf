@@ -1,4 +1,4 @@
-﻿// Generated at: 12/25/2019 1:20:25 PM
+﻿// Generated at: 12/30/2019 10:57:13 AM
 window._language_zh_Hans = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -356,6 +356,7 @@ MoveSuccessfullyMsg:"成功移动",
 MoveToGroup:"转移至组",
 MultiCustomers:"多个会员",
 Name:"姓名",
+NativeApp:"原生App",
 NetTurnover:"净交易额",
 NewAsia:"新亚洲版",
 NewGroup:"新组别",

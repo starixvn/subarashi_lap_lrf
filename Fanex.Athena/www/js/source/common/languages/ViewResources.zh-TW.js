@@ -1,4 +1,4 @@
-﻿// Generated at: 12/25/2019 1:20:25 PM
+﻿// Generated at: 12/30/2019 10:57:13 AM
 window._language_zh_TW = {
 AA:"客客",
 AbnormalBet:"非正規註單",
