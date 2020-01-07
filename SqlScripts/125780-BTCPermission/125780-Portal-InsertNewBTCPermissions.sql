@@ -18,19 +18,22 @@ GO
 
 INSERT INTO dbo.UserFuncPermission(UserSEQ, FunctionKey, SiteName, SystemType, IsAllow)
 SELECT UserSEQ, 'BTC_MultiCustomer', SiteName, 1, 1
-FROM Users WITH (NOLOCK)
-WHERE SiteName <> 'Macaubet'
+FROM UserFuncPermission WITH (NOLOCK)
+WHERE FunctionKey = 'BTC79' AND SiteName <> 'Macaubet'
 
 INSERT INTO dbo.UserFuncPermission(UserSEQ, FunctionKey, SiteName, SystemType, IsAllow)
 SELECT UserSEQ, 'BTC_SingleCustomer', SiteName, 1, 1
-FROM Users WITH (NOLOCK)
+FROM UserFuncPermission WITH (NOLOCK)
+WHERE FunctionKey = 'BTC79'
 
 INSERT INTO dbo.UserFuncPermission(UserSEQ, FunctionKey, SiteName, SystemType, IsAllow)
 SELECT UserSEQ, 'BTC_RefNo', SiteName, 1, 1
-FROM Users WITH (NOLOCK)
+FROM UserFuncPermission WITH (NOLOCK)
+WHERE FunctionKey = 'BTC79'
 
 INSERT INTO dbo.UserFuncPermission(UserSEQ, FunctionKey, SiteName, SystemType, IsAllow)
-SELECT UserSEQ, 'BTC_RefNo', SiteName, 1, 1
-FROM Users WITH (NOLOCK)
+SELECT UserSEQ, 'BTC_Running', SiteName, 1, 1
+FROM UserFuncPermission WITH (NOLOCK)
+WHERE FunctionKey = 'BTC79'
 
 GO
