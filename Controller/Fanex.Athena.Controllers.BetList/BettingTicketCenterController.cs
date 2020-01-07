@@ -37,19 +37,15 @@
         }
 
         [FunctionAuthorization(
-            PermissionKeys.BtcAdvancedSearch,
             PermissionKeys.BtcSingleCustomer,
             PermissionKeys.BtcRefNo,
-            PermissionKeys.BtcRunning)]
+            PermissionKeys.BtcRunning,
+            PermissionKeys.BtcAdvancedSearch)]
         public ActionResult Index()
         {
             var tabList = GetEnableTabList();
 
-            if (tabList.Any(x => PermissionKeys.BtcAdvancedSearch == x))
-            {
-                return AdvancedSearch();
-            }
-            else if (tabList.Any(x => PermissionKeys.BtcSingleCustomer == x))
+            if (tabList.Any(x => PermissionKeys.BtcSingleCustomer == x))
             {
                 return SingleCustomer();
             }
@@ -60,6 +56,10 @@
             else if (tabList.Any(x => PermissionKeys.BtcRunning == x))
             {
                 return Running();
+            }
+            else if (tabList.Any(x => PermissionKeys.BtcAdvancedSearch == x))
+            {
+                return AdvancedSearch();
             }
             else
             {
