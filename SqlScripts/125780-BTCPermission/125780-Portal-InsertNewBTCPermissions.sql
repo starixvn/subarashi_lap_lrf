@@ -16,6 +16,28 @@ GO
      BTC_Running: Running
 */
 
+-- For group
+INSERT INTO dbo.GroupFuncPermission(UserGroupSEQ, FunctionKey, SiteName)
+SELECT UserGroupSEQ, 'BTC_MultiCustomer', SiteName
+FROM GroupFuncPermission WITH (NOLOCK)
+WHERE FunctionKey = 'BTC79' AND SiteName <> 'Macaubet'
+
+INSERT INTO dbo.GroupFuncPermission(UserGroupSEQ, FunctionKey, SiteName)
+SELECT UserGroupSEQ, 'BTC_SingleCustomer', SiteName
+FROM GroupFuncPermission WITH (NOLOCK)
+WHERE FunctionKey = 'BTC79'
+
+INSERT INTO dbo.GroupFuncPermission(UserGroupSEQ, FunctionKey, SiteName)
+SELECT UserGroupSEQ, 'BTC_RefNo', SiteName
+FROM GroupFuncPermission WITH (NOLOCK)
+WHERE FunctionKey = 'BTC79'
+
+INSERT INTO dbo.GroupFuncPermission(UserGroupSEQ, FunctionKey, SiteName)
+SELECT UserGroupSEQ, 'BTC_Running', SiteName
+FROM GroupFuncPermission WITH (NOLOCK)
+WHERE FunctionKey = 'BTC79'
+
+-- For individual
 INSERT INTO dbo.UserFuncPermission(UserSEQ, FunctionKey, SiteName, SystemType, IsAllow)
 SELECT UserSEQ, 'BTC_MultiCustomer', SiteName, 1, 1
 FROM UserFuncPermission WITH (NOLOCK)
