@@ -91,10 +91,11 @@
             using (var controller = CreateController())
             {
                 // Action
-                var result = controller.Index() as ViewResult;
+                var result = controller.Index() as RedirectToRouteResult;
 
                 // Assert
-                Assert.That("~/Views/Desktop/BetList/BettingTicketCenter/SingleCustomer.cshtml", Is.EqualTo(result.ViewName));
+                Assert.That("Utility", Is.EqualTo(result.RouteValues["controller"].ToString()));
+                Assert.That("AccessDenied", Is.EqualTo(result.RouteValues["action"].ToString()));
             }
         }
 
