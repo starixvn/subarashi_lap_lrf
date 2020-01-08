@@ -22,6 +22,8 @@ namespace Fanex.Athena.Controllers.Report
     {
         private readonly IReportAPIClient _reportAPIClient;
 
+        private const int ExcelPageSize = int.MaxValue - 1000;
+
         public CustomerBalanceReportController(IReportAPIClient reportAPIClient)
         {
             _reportAPIClient = reportAPIClient;
@@ -84,7 +86,7 @@ namespace Fanex.Athena.Controllers.Report
             metaModel.IsAllowedBA = productAccess.IsAllowBA;
             metaModel.HasComm = licenseeSession.IsAllowedCustomerComm;
             metaModel.PageIndex = 1;
-            metaModel.PageSize = int.MaxValue - 1000;
+            metaModel.PageSize = ExcelPageSize;
 
             var httpResponse = await _reportAPIClient.PostAsync("api/CustomerBalance/ExportExcel", metaModel, language).ConfigureAwait(false);
 
