@@ -9,15 +9,21 @@ namespace Fanex.Athena.Service.StatelessCore.CustomException
     using System;
     using System.Runtime.Serialization;
 
+    [Serializable]
     public sealed class ServiceException : Exception, ISerializable
     {
         private readonly string _serviceName;
+
+        private ServiceException(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+        }
 
         public ServiceException(string message, string serviceName)
             : base(message)
         {
             _serviceName = serviceName;
         }
+
         public ServiceException(string message, string serviceName, Exception exception)
           : base(message, exception)
         {

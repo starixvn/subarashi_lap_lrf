@@ -96,7 +96,7 @@
         [TestCase(OneAuthorizationErrorCode.LocationRestrictionMsg, "Direct Access to this website is restricted. Please contact Administrator for further enquiries.")]
         [TestCase(
             OneAuthorizationErrorCode.UserNotHaveCurrency,
-            "You do not have any currency permissions to view this report, please contact your administrator account.")]
+            "You do not have any currency permissions to view this report, please contact your administrator account. <br/>你尚未设置任何币别权限")]
         [TestCase(OneAuthorizationErrorCode.YouAreNotAllowToAccessThisPage, "You are not allowed to access this page, please contact your administrator account.")]
         [TestCase(OneAuthorizationErrorCode.NotFoundUser, "Not found user")]
         [TestCase(OneAuthorizationErrorCode.InvalidSubsidiaryNameMsg, "Please contact admin to check your subsidiary name.")]

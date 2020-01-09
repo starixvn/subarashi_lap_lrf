@@ -5568,7 +5568,6 @@
     <Content Include="App_Browsers\ie.browser" />
     <Content Include="App_Browsers\firefox.browser" />
     <Content Include="App_Data\Template\CustomerGroup\CustomerCommGroup.xls" />
-    <Content Include="App_Data\Template\CustomerReports\CustomerBalance.xls" />
     <Content Include="App_Data\Template\CustomerReports\CustomerPendingFunds.xls" />
     <Content Include="App_Data\Template\CustomerReports\CustomerTurnover.xls" />
     <Content Include="App_Data\Template\CustomerReports\CustomerWinLoss.xls" />

@@ -28,6 +28,7 @@
         }
 
         [HttpPost]
+        [ApiFunctionAuthorization(PermissionKeys.BtcSingleCustomer)]
         [ValidationApiRequest]
         public async Task<dynamic> GetBySingleCustomer(SingleCustomersBetListMetaModel metaModel)
         {
@@ -42,6 +43,7 @@
         }
 
         [HttpPost]
+        [ApiFunctionAuthorization(PermissionKeys.BtcRefNo)]
         [ValidationApiRequest]
         public async Task<dynamic> GetByRefno(RefNoBetListMetaModel metaModel)
         {
@@ -56,6 +58,7 @@
         }
 
         [HttpPost]
+        [ApiFunctionAuthorization(PermissionKeys.BtcRunning)]
         [ValidationApiRequest(IsValidCurrencyList = true)]
         public async Task<dynamic> GetByRunning(BaseBettingTicketMetaModel metaModel)
         {

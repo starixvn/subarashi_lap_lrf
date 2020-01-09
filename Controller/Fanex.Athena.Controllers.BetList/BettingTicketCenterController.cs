@@ -5,6 +5,7 @@
     using System.Web.Mvc;
     using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
     using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Auth.Enum;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
@@ -35,13 +36,41 @@
             _authService = authService;
         }
 
+        [FunctionAuthorization(
+            PermissionKeys.BtcSingleCustomer,
+            PermissionKeys.BtcRefNo,
+            PermissionKeys.BtcRunning,
+            PermissionKeys.BtcAdvancedSearch)]
         public ActionResult Index()
         {
-            return SingleCustomer();
+            var tabList = GetEnableTabList();
+
+            if (tabList.Any(x => PermissionKeys.BtcSingleCustomer == x))
+            {
+                return SingleCustomer();
+            }
+            else if (tabList.Any(x => PermissionKeys.BtcRefNo == x))
+            {
+                return RefNo();
+            }
+            else if (tabList.Any(x => PermissionKeys.BtcRunning == x))
+            {
+                return Running();
+            }
+            else if (tabList.Any(x => PermissionKeys.BtcAdvancedSearch == x))
+            {
+                return AdvancedSearch();
+            }
+            else
+            {
+                return RedirectToAction("AccessDenied", "Utility");
+            }
         }
 
+        [FunctionAuthorization(PermissionKeys.BtcAdvancedSearch)]
         public ActionResult AdvancedSearch()
         {
+            var tabList = GetEnableTabList();
             var viewModel = new BettingTicketCenterViewModel
             {
                 CurrencyList = GetCurrencyList(),
@@ -51,13 +80,16 @@
                 MinDate = _balanceUpDataAccess.GetBalanceUp().BalanceUpDay,
                 IsAllowedCustomerComm = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm,
                 SelectedBaseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency,
-                HasExchange = HasExchange()
+                HasExchange = tabList.Any() && HasExchange(),
+                TabList = tabList
             };
             return View("~/Views/Desktop/BetList/BettingTicketCenter/AdvancedSearch.cshtml", viewModel);
         }
 
+        [FunctionAuthorization(PermissionKeys.BtcSingleCustomer)]
         public ActionResult SingleCustomer()
         {
+            var tabList = GetEnableTabList();
             var viewModel = new BettingTicketCenterViewModel
             {
                 LiveStatusList = GetLiveStatusList(),
@@ -66,27 +98,34 @@
                 ProductOptionList = GetProductOptionList(),
                 IsAllowedCustomerComm = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm,
                 SelectedBaseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency,
-                HasExchange = HasExchange()
+                HasExchange = tabList.Any() && HasExchange(),
+                TabList = tabList
             };
             return View("~/Views/Desktop/BetList/BettingTicketCenter/SingleCustomer.cshtml", viewModel);
         }
 
+        [FunctionAuthorization(PermissionKeys.BtcRefNo)]
         public ActionResult RefNo()
         {
+            var tabList = GetEnableTabList();
+
             ViewBag.ProductsRequireUseNameNote = string.Format(
                 ViewResources.BettingTicketCenter_RefnoTabNote2,
                 GetProductsRequireUseName(),
                 _balanceUpDataAccess.GetBalanceUp().BalanceUpDay.ToString(FormatKey.DateFormat));
             ViewBag.SelectedBaseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency;
-            ViewBag.HasExchange = HasExchange();
+            ViewBag.HasExchange = tabList.Any() && HasExchange();
+            ViewBag.TabList = tabList;
 
             return View(
                 "~/Views/Desktop/BetList/BettingTicketCenter/RefNo.cshtml",
                 SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm);
         }
 
+        [FunctionAuthorization(PermissionKeys.BtcRunning)]
         public ActionResult Running()
         {
+            var tabList = GetEnableTabList();
             var viewModel = new BettingTicketCenterViewModel
             {
                 StatusList = GetRunningStatusList(),
@@ -94,10 +133,26 @@
                 ProductOptionList = GetProductOptionList(FunctionNames.BettingTicketCenterRunning),
                 IsAllowedCustomerComm = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm,
                 SelectedBaseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency,
-                HasExchange = HasExchange()
+                HasExchange = tabList.Any() && HasExchange(),
+                TabList = tabList
             };
 
             return View("~/Views/Desktop/BetList/BettingTicketCenter/Running.cshtml", viewModel);
+        }
+
+        private IEnumerable<string> GetEnableTabList()
+        {
+            var userSession = SessionServiceInstance.UserSession;
+            if (userSession.IsSuperAdmin)
+            {
+                return BtcViewInfo.TabList.ToList();
+            }
+
+            var userFunctionKeyList = userSession.ApplicationMode == AppMode.Parasitic ?
+                userSession.PortalFunctionList.Select(x => x.FunctionKey) :
+                userSession.FunctionList.Select(x => x.FunctionKey);
+
+            return BtcViewInfo.TabList.Intersect(userFunctionKeyList);
         }
 
         private string GetProductsRequireUseName()

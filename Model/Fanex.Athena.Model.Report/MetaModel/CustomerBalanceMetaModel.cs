@@ -22,5 +22,9 @@ namespace Fanex.Athena.Model.Report.MetaModel
         public int TopCount { get; set; }
 
         public short OrderItem { get; set; }
+
+        public bool IsAllowedBA { get; set; }
+
+        public bool HasComm { get; set; }
     }
 }

@@ -1,8 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Fanex.Athena.Controllers.Base.UnitTests;
 using Fanex.Athena.Extension.Utility;
+using Fanex.Athena.Model.Auth;
+using Fanex.Athena.Model.Auth.DataDomain;
+using Fanex.Athena.Model.Auth.Enum;
 using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Model.Report.DTO;
 using Fanex.Athena.Model.Report.MetaModel;
@@ -52,6 +56,7 @@ namespace Fanex.Athena.Controllers.Report.UnitTests
         public void Index_WhenCall_ReturnCorrectView()
         {
             // Arrange
+            CreateAndStubUserSession();
             const string ExpectedView = "~/Views/Desktop/Report/ExchangeVoided/Index.cshtml";
 
             using (var controller = CreateController())
@@ -62,6 +67,29 @@ namespace Fanex.Athena.Controllers.Report.UnitTests
                 // Assert
                 Assert.That(result.ViewName, Is.EqualTo(ExpectedView));
                 Assert.That((bool)result.Model, Is.True);
+            }
+        }
+
+        [Test]
+        public void Index_IsSuperAdmin_ReturnCorrectViewModelWithAllTab()
+        {
+            // Arrange
+            var userSession = JsonConvert.DeserializeObject<UserAuthInfo>(JsonConvert.SerializeObject(DefaultUserSession));
+            userSession.ApplicationMode = AppMode.Parasitic;
+            userSession.IsSuperAdmin = true;
+            StubUserSessionData(userSession);
+
+            const int TotalTabCount = 4;
+
+            using (var controller = CreateController())
+            {
+                // Action
+                var result = controller.Index() as ViewResult;
+                var tabList = result.ViewBag.TabList as IEnumerable<string>;
+                var hasAllPermissionsOfTab = BtcViewInfo.TabList.Intersect(tabList).Count() == TotalTabCount;
+
+                // Assert
+                Assert.That(hasAllPermissionsOfTab, Is.True);
             }
         }
 
@@ -94,6 +122,7 @@ namespace Fanex.Athena.Controllers.Report.UnitTests
         public async Task Index_HavePermission_CallServiceWithCorrectparameter()
         {
             // Arrange
+            CreateAndStubUserSession();
             var metaModel = new ExchangeVoidedMetaModel();
 
             using (var controller = CreateController())
@@ -130,6 +159,17 @@ namespace Fanex.Athena.Controllers.Report.UnitTests
             {
                 SessionServiceInstance = SessionService
             };
+        }
+
+        private void CreateAndStubUserSession()
+        {
+            var userSession = JsonConvert.DeserializeObject<UserAuthInfo>(JsonConvert.SerializeObject(DefaultUserSession));
+            userSession.ApplicationMode = AppMode.Self;
+            userSession.FunctionList = new List<Function>
+            {
+                    new Function{ FunctionKey =  PermissionKeys.BtcAdvancedSearch }
+            };
+            StubUserSessionData(userSession);
         }
     }
 }

@@ -7,6 +7,8 @@ import BetListLayout from '@jsroot/layouts/betlist/BetListLayout';
 import { Tabs, Tab } from '@9softstudio/react-simple-tab';
 import LangHelper from '@jsroot/lib/langHelper';
 import Site from '@jsroot/lib/site';
+import { tabList } from '../lib/constants';
+import AppData from '@jsroot/lib/AppData';
 
 export const PageLayout = (props) => {
     const { toggleLoader, isConvertAll, selectedBaseCurrency, selectedTabIndex, children, hasExchange } = props;
@@ -31,6 +33,8 @@ export const PageLayout = (props) => {
         toggleLoader(false);
     }
 
+    const activedTabList = tabList.filter(x => AppData.tabList.includes(x.key));
+
     return (
         <AppLayout>
             <BetListLayout
@@ -43,18 +47,10 @@ export const PageLayout = (props) => {
                 afterShowFunc={afterShow}
             >
                 <Tabs>
-                    <Tab isActive={selectedTabIndex == 0} label={LangHelper.getSingleResource("SingleCustomer")}
-                        url={Site.resolveClientUrl("BettingTicketCenter/SingleCustomer")}>
-                    </Tab>
-                    <Tab isActive={selectedTabIndex == 1} label={LangHelper.getSingleResource("RefNo")}
-                        url={Site.resolveClientUrl("BettingTicketCenter/RefNo")}>
-                    </Tab>
-                    <Tab isActive={selectedTabIndex == 2} label={LangHelper.getSingleResource("Running")}
-                        url={Site.resolveClientUrl("BettingTicketCenter/Running")}>
-                    </Tab>
-                    <Tab isActive={selectedTabIndex == 3} label={LangHelper.getSingleResource("AdvancedSearch")}
-                        url={Site.resolveClientUrl("BettingTicketCenter/AdvancedSearch")}>
-                    </Tab>
+                    {
+                        activedTabList.map(item => 
+                            <Tab isActive={selectedTabIndex == item.displayOrder} label={item.label} url={item.url} />)
+                    }
                     {
                         hasExchange && 
                         <Tab isActive={selectedTabIndex == 4} label={LangHelper.getSingleResource("Exchange")}

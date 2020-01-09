@@ -137,17 +137,17 @@
             jqGridAdditional.clearGrid(_selector.GridId);
             _isFirstLoad = true;
 
-            createPaging(response.TotalRows);
+            createPaging(response.totalRows);
 
-            if (response.TotalRows === 0) {
+            if (response.totalRows === 0) {
                 jqGridAdditional.setNoInfo();
                 Site.unBlockUI();
                 return;
             }
 
-            const gridOption = CustomerBalanceOption.getGridOption(response.TotalRows);
-            gridOption.rowNum = response.Data.length;
-            gridOption.data = response.Data;
+            const gridOption = CustomerBalanceOption.getGridOption(response.totalRows);
+            gridOption.rowNum = response.data.length;
+            gridOption.data = response.data;
             gridOption.onSortCol = function (index) {
                 sort(index);
                 return 'stop';
@@ -230,7 +230,7 @@
                     jqGridAdditional.removeCursorOnNonSortableHeader(reportGrid);
                 }
 
-                jqGridAdditional.assignTotal(response.Total, gridOption.colModel);
+                jqGridAdditional.assignTotal(response.total, gridOption.colModel);
                 jqGridAdditional.setGroupFooters(CustomerBalanceOption.totalColspan);
                 _isFirstLoad = false;
             }

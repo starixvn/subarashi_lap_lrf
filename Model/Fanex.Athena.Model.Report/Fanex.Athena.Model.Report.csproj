@@ -148,7 +148,6 @@
     <Compile Include="DTO\ThirdPartyWinLoss.cs" />
     <Compile Include="DTO\WeeklyLiveMatch.cs" />
     <Compile Include="DTO\WinLossByLeague.cs" />
-    <Compile Include="DTO\CustBalance.cs" />
     <Compile Include="DTO\CustPendingFunds.cs" />
     <Compile Include="DTO\CustTurnover.cs" />
     <Compile Include="DTO\CustomerWinLoss.cs" />
