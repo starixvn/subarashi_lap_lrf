@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Fanex.Athena.Controllers.Base.UnitTests;
@@ -66,6 +67,29 @@ namespace Fanex.Athena.Controllers.Report.UnitTests
                 // Assert
                 Assert.That(result.ViewName, Is.EqualTo(ExpectedView));
                 Assert.That((bool)result.Model, Is.True);
+            }
+        }
+
+        [Test]
+        public void Index_IsSuperAdmin_ReturnCorrectViewModelWithAllTab()
+        {
+            // Arrange
+            var userSession = JsonConvert.DeserializeObject<UserAuthInfo>(JsonConvert.SerializeObject(DefaultUserSession));
+            userSession.ApplicationMode = AppMode.Parasitic;
+            userSession.IsSuperAdmin = true;
+            StubUserSessionData(userSession);
+
+            const int TotalTabCount = 4;
+
+            using (var controller = CreateController())
+            {
+                // Action
+                var result = controller.Index() as ViewResult;
+                var tabList = result.ViewBag.TabList as IEnumerable<string>;
+                var hasAllPermissionsOfTab = BtcViewInfo.TabList.Intersect(tabList).Count() == TotalTabCount;
+
+                // Assert
+                Assert.That(hasAllPermissionsOfTab, Is.True);
             }
         }
 
