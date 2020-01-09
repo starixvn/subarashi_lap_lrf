@@ -56,6 +56,8 @@ namespace Fanex.Athena.Model.Core.DTO.Common
 
         public const string SG = "SG";
 
+		public const string VRG = "VRG";
+
         #endregion Field
 
         #region Constructor
