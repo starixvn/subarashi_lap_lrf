@@ -143,6 +143,11 @@
         private IEnumerable<string> GetEnableTabList()
         {
             var userSession = SessionServiceInstance.UserSession;
+            if (userSession.IsSuperAdmin)
+            {
+                return BtcViewInfo.TabList.ToList();
+            }
+
             var userFunctionKeyList = userSession.ApplicationMode == AppMode.Parasitic ?
                 userSession.PortalFunctionList.Select(x => x.FunctionKey) :
                 userSession.FunctionList.Select(x => x.FunctionKey);

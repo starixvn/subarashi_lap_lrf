@@ -82,6 +82,31 @@
         }
 
         [Test]
+        public void Index_IsSuperAdmin_HaveAllPermissionsOfTab()
+        {
+            // Arrange
+            var userSession = JsonConvert.DeserializeObject<UserAuthInfo>(JsonConvert.SerializeObject(DefaultUserSession));
+            userSession.ApplicationMode = AppMode.Parasitic;
+            userSession.IsSuperAdmin = true;
+            StubUserSessionData(userSession);
+            MockProductService();
+
+            const int TotalTabCount = 4;
+
+            using (var controller = CreateController())
+            {
+                // Action
+                var result = controller.Index() as ViewResult;
+                var tabList = (result.Model as BettingTicketCenterViewModel).TabList;
+                var hasAllPermissionsOfTab = BtcViewInfo.TabList.Intersect(tabList).Count() == TotalTabCount;
+
+                // Assert
+                Assert.That("~/Views/Desktop/BetList/BettingTicketCenter/SingleCustomer.cshtml", Is.EqualTo(result.ViewName));
+                Assert.That(hasAllPermissionsOfTab, Is.True);
+            }
+        }
+
+        [Test]
         public void Index_NotHaveAnyPermissionTab_ReturnDefaultView()
         {
             // Arrange
