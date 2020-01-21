@@ -5,7 +5,7 @@
     "MinDate": "03/01/2018",
     "MaxDate": "today",
     "BaseCurrencies": "USD",
-    "LimitRecentMonths": 3,
+    "LimitRecentMonths": 6,
     "TimeZone": 8
   },
   {
@@ -14,7 +14,7 @@
     "MinDate": "03/01/2018",
     "MaxDate": "today",
     "BaseCurrencies": "USD",
-    "LimitRecentMonths": 3,
+    "LimitRecentMonths": 6,
     "TimeZone": 8
   },
   {
@@ -23,7 +23,7 @@
     "MinDate": "08/01/2019",
     "MaxDate": "today",
     "BaseCurrencies": "USD",
-    "LimitRecentMonths": 3,
+    "LimitRecentMonths": 6,
     "TimeZone": 8
   },
   {
@@ -32,7 +32,7 @@
     "MinDate": "12/01/2019",
     "MaxDate": "today",
     "BaseCurrencies": "USD",
-    "LimitRecentMonths": 3,
+    "LimitRecentMonths": 6,
     "TimeZone": 8
   }
 ]
