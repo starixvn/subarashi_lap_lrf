@@ -502,7 +502,7 @@ window._language_zh_CN = {
   NoProductFound: "No product found",
   Normal: "正常",
   NotAllowBA: "此Licensee不允许投注总计",
-  Note: "注意",
+  Note: "记录",
   Notification: "通知",
   NotificationDateRangeLimitNote: "最多可以检索六个月前的资料",
   Nov: "十一月",
