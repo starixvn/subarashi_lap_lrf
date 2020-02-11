@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 12/4/2019 5:46:27 PM
+﻿// Generated at: 12/30/2019 10:57:13 AM
 window._language_zh_TW = {
 AA:"客客",
 AbnormalBet:"非正規註單",
@@ -149,6 +149,7 @@ BAStatus:"BA 狀態",
 BAUpdatedBy:"投注總計跟新由",
 BBAmtComm:"回購金額+即時兌現傭金",
 BetCount:"投注數",
+BetfromOthers:"其他",
 BetId:"投注單號",
 BetList:"投注歷史",
 BetListRunning:"投注歷史(進行中)",
@@ -160,8 +161,8 @@ BetTaken:"匹配時間",
 BettingLimit:"投注限額",
 BettingStatement:"投注詳情",
 BettingTicketCenter:"注單中心",
-BettingTicketCenter_MultiCustomersTabNote1:"所有投注類別，聯賽和比賽過濾器僅支援1個選定日期",
-BettingTicketCenter_MultiCustomersTabNote2:"顯示從{0}開始的資料",
+BettingTicketCenter_AdvancedSearchTabNote1:"所有投注類別，聯賽和比賽過濾器僅支援1個選定日期",
+BettingTicketCenter_AdvancedSearchTabNote2:"顯示從{0}開始的資料",
 BettingTicketCenter_RefnoTabNote1:"在體育的搜尋結果將包含相關的紅利與現金注單",
 BettingTicketCenter_RefnoTabNote2:"{0}: 請提供用戶名以便查詢{1}之後的注單",
 BetType:"投注類別",
@@ -259,6 +260,7 @@ DD:"和和",
 Dec:"十二月",
 December:"十二月",
 DecimalOdds:"歐洲盤賠率",
+DeepLink:"數據API",
 DefaultGroup:"預設組",
 DefaultGroupMsg:"這是默認組。是否繼續?",
 Delete:"刪除",
