@@ -39,6 +39,7 @@ function generateConfig(environment) {
             [`${jsPath}/playeradmin/statement`]: pathConfig.scriptPaths.statement,
             [`${jsPath}/report/dailybets`]: pathConfig.scriptPaths.dailybets,
             [`${jsPath}/exchangevoided/exchangevoided`]: pathConfig.scriptPaths.exchangevoided,
+            [`${jsPath}/playersegmentation/main`]: pathConfig.scriptPaths.playersegmentation,
 
             /*css*/
             [`${cssPath}/vendor`]: pathConfig.cssPaths.layout,
@@ -58,6 +59,7 @@ function generateConfig(environment) {
             [`${cssPath}/playeradmin/statement`]: pathConfig.cssPaths.statement,
             [`${cssPath}/dailybets/index`]: pathConfig.cssPaths.dailybets,
             [`${cssPath}/exchangevoided/index`]: pathConfig.cssPaths.exchangevoided,
+            [`${cssPath}/playersegmentation/index`]: pathConfig.cssPaths.playersegmentation
         },
         output: {
             path: pathConfig.projectRoot,
