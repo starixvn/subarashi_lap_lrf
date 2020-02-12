@@ -168,10 +168,37 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./actions */ "./www/js/source/reactpages/Module/PlayerSegmentation/actions/index.js");
+/* harmony import */ var _jsroot_components_Loader__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/components/Loader */ "./www/js/source/reactpages/components/Loader.jsx");
+/* harmony import */ var _jsroot_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/layouts/AppLayout */ "./www/js/source/reactpages/layouts/AppLayout.jsx");
+/* harmony import */ var _components_tabMenu__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/tabMenu */ "./www/js/source/reactpages/Module/PlayerSegmentation/components/tabMenu.jsx");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./lib/constants */ "./www/js/source/reactpages/Module/PlayerSegmentation/lib/constants.js");
+
+
+
+
+
+
 
 
 var AppContainer = function AppContainer(props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "App Container", props.selectedTab);
+  var selectedTab = props.selectedTab;
+
+  var _getCurrentTab = function _getCurrentTab() {};
+
+  var _onClickTabMenu = function _onClickTabMenu(tabKey) {
+    var setSelectedTab = props.setSelectedTab;
+    setSelectedTab && setSelectedTab(tabKey);
+  };
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_5__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Loader__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    isLoading: false
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_tabMenu__WEBPACK_IMPORTED_MODULE_6__["TabMenu"], {
+    selectedTabMenu: selectedTab,
+    onClickTabMenu: _onClickTabMenu,
+    tabMenuList: _lib_constants__WEBPACK_IMPORTED_MODULE_7__["tabMenuList"]
+  }));
 };
 
 function mapStateToProps(state) {
@@ -181,7 +208,56 @@ function mapStateToProps(state) {
   });
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(AppContainer));
+function mapDispatchToProps(dispatch) {
+  var setSelectedTab = _actions__WEBPACK_IMPORTED_MODULE_3__["default"].setSelectedTab;
+  return Object(redux__WEBPACK_IMPORTED_MODULE_2__["bindActionCreators"])({
+    setSelectedTab: setSelectedTab
+  }, dispatch);
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(AppContainer));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerSegmentation/actions/index.js":
+/*!*****************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerSegmentation/actions/index.js ***!
+  \*****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _tabHandlerAction__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tabHandlerAction */ "./www/js/source/reactpages/Module/PlayerSegmentation/actions/tabHandlerAction.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+/* harmony default export */ __webpack_exports__["default"] = (_objectSpread({}, _tabHandlerAction__WEBPACK_IMPORTED_MODULE_0__));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerSegmentation/actions/tabHandlerAction.js":
+/*!****************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerSegmentation/actions/tabHandlerAction.js ***!
+  \****************************************************************************************/
+/*! exports provided: setSelectedTab */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSelectedTab", function() { return setSelectedTab; });
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./www/js/source/reactpages/Module/PlayerSegmentation/actions/types.js");
+
+var setSelectedTab = function setSelectedTab(selectedTabKey) {
+  return {
+    type: _types__WEBPACK_IMPORTED_MODULE_0__["SET_SELECTED_TAB"],
+    data: selectedTabKey
+  };
+};
 
 /***/ }),
 
@@ -195,7 +271,79 @@ function mapStateToProps(state) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SELECTED_TAB", function() { return SET_SELECTED_TAB; });
-var SET_SELECTED_TAB = 'SWITCH_TAB';
+var SET_SELECTED_TAB = 'SET_SELECTED_TAB';
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerSegmentation/components/TabMenuItem.jsx":
+/*!***************************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerSegmentation/components/TabMenuItem.jsx ***!
+  \***************************************************************************************/
+/*! exports provided: TabMenuItem, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TabMenuItem", function() { return TabMenuItem; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+var TabMenuItem = function TabMenuItem(props) {
+  var item = props.item,
+      isActive = props.isActive,
+      onClickTabMenu = props.onClickTabMenu;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    key: item.key
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    className: isActive ? 'active' : '',
+    onClick: function onClick() {
+      return onClickTabMenu(item.key);
+    }
+  }, item.name));
+};
+/* harmony default export */ __webpack_exports__["default"] = (react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(TabMenuItem));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerSegmentation/components/tabMenu.jsx":
+/*!***********************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerSegmentation/components/tabMenu.jsx ***!
+  \***********************************************************************************/
+/*! exports provided: TabMenu, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TabMenu", function() { return TabMenu; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _TabMenuItem__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TabMenuItem */ "./www/js/source/reactpages/Module/PlayerSegmentation/components/TabMenuItem.jsx");
+
+
+var TabMenu = function TabMenu(props) {
+  var selectedTabMenu = props.selectedTabMenu,
+      onClickTabMenu = props.onClickTabMenu,
+      tabMenuList = props.tabMenuList;
+  var selectedTabMenuItem = tabMenuList.find(function (p) {
+    return p.key === selectedTabMenu;
+  });
+
+  var isActiveTabMenu = function isActiveTabMenu(selectedTabMenu, tabMenuItem) {
+    return selectedTabMenu && selectedTabMenu.key === tabMenuItem.key;
+  };
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "tab-menu"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, tabMenuList.map(function (item) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_TabMenuItem__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      key: item.key,
+      item: item,
+      isActive: isActiveTabMenu(selectedTabMenuItem, item),
+      onClickTabMenu: onClickTabMenu
+    });
+  })));
+};
+/* harmony default export */ __webpack_exports__["default"] = (react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(TabMenu));
 
 /***/ }),
 
@@ -216,6 +364,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _jsroot_lib_store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/store */ "./www/js/source/reactpages/lib/store.js");
 /* harmony import */ var _reducers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./reducers */ "./www/js/source/reactpages/Module/PlayerSegmentation/reducers/index.js");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./lib/constants */ "./www/js/source/reactpages/Module/PlayerSegmentation/lib/constants.js");
+
 
 
 
@@ -223,7 +373,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var defaultState = {
-  selectedTab: 'problemPlayer'
+  selectedTab: _lib_constants__WEBPACK_IMPORTED_MODULE_6__["tabMenuList"][0].key
 };
 var store = _jsroot_lib_store__WEBPACK_IMPORTED_MODULE_4__["default"].createStore(_reducers__WEBPACK_IMPORTED_MODULE_5__["default"], defaultState);
 
@@ -234,6 +384,26 @@ var App = function App() {
 };
 
 Object(react_dom__WEBPACK_IMPORTED_MODULE_1__["render"])(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null), document.getElementById("app-container"));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/Module/PlayerSegmentation/lib/constants.js":
+/*!*****************************************************************************!*\
+  !*** ./www/js/source/reactpages/Module/PlayerSegmentation/lib/constants.js ***!
+  \*****************************************************************************/
+/*! exports provided: tabMenuList */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tabMenuList", function() { return tabMenuList; });
+var tabMenuList = [{
+  key: 'problemPlayer',
+  name: 'Problem Player'
+}, {
+  key: 'vipPlayerManagement',
+  name: 'Vip Player Management'
+}];
 
 /***/ }),
 
@@ -272,17 +442,44 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectedTab", function() { return selectedTab; });
 /* harmony import */ var _jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
 /* harmony import */ var _actions_types_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/types.js */ "./www/js/source/reactpages/Module/PlayerSegmentation/actions/types.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
 var selectedTab = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(null, _defineProperty({}, _actions_types_js__WEBPACK_IMPORTED_MODULE_1__["SET_SELECTED_TAB"], function (prevState, action) {
-  return action.data && _objectSpread({}, action.data);
+  return action.data;
 }));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/components/Loader.jsx":
+/*!********************************************************!*\
+  !*** ./www/js/source/reactpages/components/Loader.jsx ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var Loader = function Loader(_ref) {
+  var isLoading = _ref.isLoading;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "loading-process default",
+    style: {
+      display: "".concat(isLoading ? 'block' : 'none')
+    }
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "icon-loading"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "loader-inner ball-beat"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Loader);
 
 /***/ }),
 
@@ -300,6 +497,66 @@ var debuggingConfig = {
   name: "__lrfConfig__",
   env: "local"
 };
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/layouts/AppLayout.jsx":
+/*!********************************************************!*\
+  !*** ./www/js/source/reactpages/layouts/AppLayout.jsx ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AppLayout; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var AppLayout =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(AppLayout, _Component);
+
+  function AppLayout(props) {
+    _classCallCheck(this, AppLayout);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(AppLayout).call(this, props));
+  }
+
+  _createClass(AppLayout, [{
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "container",
+        className: "container-fluid"
+      }, this.props.children);
+    }
+  }]);
+
+  return AppLayout;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+
 
 /***/ }),
 

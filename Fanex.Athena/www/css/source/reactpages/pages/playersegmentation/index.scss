@@ -1,0 +1,32 @@
+@import './base/variables';
+@import '../../abstracts/variables';
+
+.tab-menu {
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        border-bottom: 1px solid #C4C4C4 !important;
+        background-color: $white;
+    }
+    
+    li {
+        display: inline-block;
+        font-weight: bold;
+        a {
+            display: block;
+            color: $text-default-color;
+            text-transform: uppercase;
+            text-align: center;
+            padding: 10px 20px;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+    }
+    .active {
+        color: $active-color;
+        border-bottom: 2px solid $active-color;
+    }
+}
+    

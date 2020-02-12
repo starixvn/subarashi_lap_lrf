@@ -4,8 +4,12 @@ import AppContainer from './AppContainer.jsx';
 import { Provider } from 'react-redux';
 import Store from '@jsroot/lib/store';
 import reducers from './reducers';
+import { tabMenuList } from './lib/constants';
 
-const defaultState = { selectedTab: 'problemPlayer' };
+
+const defaultState = {
+   selectedTab: tabMenuList[0].key
+}
 const store = Store.createStore(reducers, defaultState);
 
 const App = () => {

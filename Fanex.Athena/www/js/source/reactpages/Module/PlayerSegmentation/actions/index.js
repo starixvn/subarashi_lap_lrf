@@ -1,4 +1,4 @@
 import * as tabHandlerActions from './tabHandlerAction';
-export const ActionCreators = {
+export default {
     ...tabHandlerActions
 }
