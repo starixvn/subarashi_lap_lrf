@@ -136,10 +136,21 @@ namespace Fanex.Athena.Service.StatelessCore
         /// <returns>The master function.</returns>
         public IEnumerable<Function> GetMasterFunctions(IEnumerable<Function> functionList)
         {
-            return MasterFunctions.Where(
+            MasterFunctions.Where(
                     f => functionList.Any(l => l.ParentId == f.FunctionId || l.FunctionId == f.FunctionId))
                                 .OrderBy(f => f.DisplayOrder)
                                 .ToList();
+
+            return RemoveUnsuedMasterFunction(MasterFunctions);
+        }
+
+        private IEnumerable<Function> RemoveUnsuedMasterFunction(IEnumerable<Function> functionList)
+        {
+            const int totalBetFunctionID = 1;
+            const int forcastFunctionID = 2;
+            IList<int> unsedFunction = new List<int>() { totalBetFunctionID, forcastFunctionID };
+
+            return MasterFunctions.Where(f => unsedFunction.All(unf => unf != f.FunctionId)).ToList();
         }
 
         public IDictionary<int, IEnumerable<Function>> GetSubMenus(IEnumerable<Function> functionList)
