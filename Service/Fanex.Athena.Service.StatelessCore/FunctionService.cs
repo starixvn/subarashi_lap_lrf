@@ -148,18 +148,18 @@ namespace Fanex.Athena.Service.StatelessCore
         {
             const int totalBetFunctionID = 1;
             const int forcastFunctionID = 2;
-            const int activeCusSumFunctionID = 64;
-            IList<int> unsedFunction = new List<int>() { totalBetFunctionID, forcastFunctionID, activeCusSumFunctionID };
+            IList<int> unsedFunction = new List<int>() { totalBetFunctionID, forcastFunctionID };
 
             return MasterFunctions.Where(f => unsedFunction.All(unf => unf != f.FunctionId)).ToList();
         }
 
         public IDictionary<int, IEnumerable<Function>> GetSubMenus(IEnumerable<Function> functionList)
         {
+            const int activeCusSumFunctionID = 64;
             var detailFunctions = new Dictionary<int, IEnumerable<Function>>();
             foreach (var function in MasterFunctions)
             {
-                var subFuntions = functionList.Where(f => f.ParentId == function.FunctionId && f.IsMenu)
+                var subFuntions = functionList.Where(f => f.ParentId == function.FunctionId && f.IsMenu && f.FunctionId != activeCusSumFunctionID)
                                               .OrderBy(f => f.DisplayOrder)
                                               .ToList();
                 if (subFuntions.Count > 0)
