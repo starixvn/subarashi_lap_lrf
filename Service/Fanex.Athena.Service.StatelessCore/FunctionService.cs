@@ -141,16 +141,16 @@ namespace Fanex.Athena.Service.StatelessCore
                                 .OrderBy(f => f.DisplayOrder)
                                 .ToList();
 
-            return RemoveUnsuedMasterFunction(MasterFunctions);
+            return RemoveUnusedMasterFunction(MasterFunctions);
         }
 
-        private IEnumerable<Function> RemoveUnsuedMasterFunction(IEnumerable<Function> functionList)
+        private IEnumerable<Function> RemoveUnusedMasterFunction(IEnumerable<Function> functionList)
         {
             const int totalBetFunctionID = 1;
-            const int forcastFunctionID = 2;
-            IList<int> unsedFunction = new List<int>() { totalBetFunctionID, forcastFunctionID };
+            const int forecastFunctionID = 2;
+            IList<int> unusedFunction = new List<int>() { totalBetFunctionID, forecastFunctionID };
 
-            return MasterFunctions.Where(f => unsedFunction.All(unf => unf != f.FunctionId)).ToList();
+            return MasterFunctions.Where(f => unusedFunction.All(unf => unf != f.FunctionId)).ToList();
         }
 
         public IDictionary<int, IEnumerable<Function>> GetSubMenus(IEnumerable<Function> functionList)
