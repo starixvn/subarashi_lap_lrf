@@ -1,0 +1,1 @@
+export const SET_IS_GET_ALL = 'SET_IS_GET_ALL';

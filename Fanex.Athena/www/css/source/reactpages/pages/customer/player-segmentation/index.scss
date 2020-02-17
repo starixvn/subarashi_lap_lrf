@@ -1,0 +1,43 @@
+@import './base/variables';
+@import '../../../abstracts/variables';
+@import '../../../components/forms/checkbox';
+@import '../../../components/date-range/styles';
+@import '../../../components/react-grid';
+@import '../../../components/react-multiselect';
+@import '../../../components/autocomplete';
+@import '../../../components/popup';
+@import '../../../components/_popup-content';
+
+#player-segmentation {
+    .tab-menu {
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            border-bottom: 1px solid #C4C4C4 !important;
+            background-color: $white;
+        }
+        
+        li {
+            display: inline-block;
+            font-weight: bold;
+            cursor: pointer;
+            a {
+                display: block;
+                color: $text-default-color;
+                text-transform: uppercase;
+                text-align: center;
+                padding: 10px 20px;
+                text-decoration: none;
+                text-transform: uppercase;
+            }
+        }
+        .active {
+            color: $active-color;
+            border-bottom: 2px solid $active-color;
+        }
+    }
+}
+
+    
