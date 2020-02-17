@@ -456,7 +456,7 @@
                     _me.viewCardClubResult(custid, bettype, extension2, title);
                 }
                 else if (sporttype === SPORT_SG) {
-                    _me.viewSGResult(custid, bettype, title);
+                    _me.viewSGResult(custid, extension2, title);
                 }
                 else if (sporttype === SPORT_ALLBET) {
                     _me.viewAllBetResult(transdecs, extension2, bettype, title);
