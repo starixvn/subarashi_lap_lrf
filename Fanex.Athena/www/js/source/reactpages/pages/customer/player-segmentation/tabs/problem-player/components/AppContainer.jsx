@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Loader from '@jsroot/components/Loader';
 import FormFilter from './FormFilter';
+import Content from './Content';
 
 export const AppContainer = props => {
     const { isLoading } = props;
@@ -11,6 +12,7 @@ export const AppContainer = props => {
         <div className="problem-player">
             <Loader isLoading={isLoading} />
             <FormFilter />
+            <Content />
         </div>
     )
 }

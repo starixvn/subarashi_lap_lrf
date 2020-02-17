@@ -6,7 +6,6 @@ import AutoComplete from '@jsroot/components/auto-complete'
 import CollapsiblePanel from '@jsroot/components/collapsible-panel'
 import CheckBox from '@jsroot/components/CheckBox'
 import { DateRange } from '@jsroot/components/date-range'
-
 import { ActionCreators } from '../actions/index.js'
 import LangHelper from '@jsroot/lib/langHelper'
 import Site from '@jsroot/lib/site'
@@ -17,29 +16,27 @@ export class FormFilter extends PureComponent {
     constructor(props) {
         super(props);
     }
-
-    submit = (event) => {
+    
+    _submit = (event) => {
         event.preventDefault();
         const params = this._getParams();
         if (!params) {
             return;
         }
-
-        this.props.setReportTitle(Service.getTitle(null, null, params.IsConvertAll ? params.BaseCurrencyName : ''));
-        this.props.setRequestParam(params);
-        this.props.toggleLoader(true);
-        this.props.getGridData(ApiUrl.RUNNING_DATA_URL, params);
+        this.props.setSelectedParams(params);
+        this.props.searchPlayer(params);
     }
 
     _getParams() {
-        const { PageSize, SortBy, SortOrder } = this.props.requestParam;
+        const { selectedParams, username, selectedCurrency, isGetAll, dateRange } = this.props;
         return {
-            PageSize: PageSize,
-            PageIndex: 1,
-            Username: this.props.username,
-            CurrencyIdList: this.props.selectedCurrency,
-            SortBy: SortBy,
-            SortOrder: SortOrder,
+            ...selectedParams, 
+            ...{
+                username,
+                currencyIdList: selectedCurrency,
+                isGetAll,
+                markDateRange: dateRange,
+            }
         }
     }
 
@@ -92,20 +89,16 @@ export class FormFilter extends PureComponent {
     }
 
     _renderCurrencySelectList() {
-        const currencyList = [ { Key: 1, Value: 'USD', Status: true }, { Key: 2, Value: 'VND', Status: true }];
+        const currencyList = [ { key: 1, value: 'USD', status: true }, { key: 2, value: 'VND',  status: true }];
        
         return currencyList && currencyList.length && (
                 <MultipleSelect id="ddlCurrency"
                 language={LangHelper.currentLanguage}
                 dataSource={currencyList}
-                keyField={"Id"}
-                valueField={"Value"}
-                statusField={"Status"}
-                onChange={(currentItem, selectedItemsKey) => this._onChangeCurrency(selectedItemsKey)} />);
-    }
-
-     _onChangeCurrency = (currencyIdList) => {
-        this.props.setSelectedCurrency(currencyIdList)
+                keyField={"key"}
+                valueField={"value"}
+                statusField={"status"}
+                onChange={(_, selectedItemsKey) => { this.props.setSelectedCurrency(selectedItemsKey) } }/>);
     }
 
     _renderExcelIcon() {
@@ -138,7 +131,7 @@ export class FormFilter extends PureComponent {
                             <AutoComplete
                                 onSelect={(value) => this.props.setUsername(value)}
                                 onInput={(value) => this.props.setUsername(value)}
-                                htmlAttributes={{placeholder:LangHelper.getSingleResource("ExternalIdOrSystemId")}} />
+                                htmlAttributes={{placeholder: LangHelper.getSingleResource("ExternalIdOrSystemId")}} />
                         </div>
                     </div>
                     <div className="col-12 col-md-4 col-sm-3 col-lg-3 col-xl-2">
@@ -150,7 +143,7 @@ export class FormFilter extends PureComponent {
                     <div className="col-12 col-md-4 col-sm-3 col-lg-2 col-xl-1">
                         <div className="form-group">
                             <div className="button-group">
-                            <button type="button" className="btn btn-submit" onClick={this.submit}>{LangHelper.getSingleResource("Submit")}</button>
+                            <button type="button" className="btn btn-submit" onClick={this._submit}>{LangHelper.getSingleResource("Submit")}</button>
                             </div>
                         </div>
                     </div>
@@ -161,23 +154,25 @@ export class FormFilter extends PureComponent {
 }
 
 function mapDispatchToProps(dispatch) {
-    const { setDateRange, changeIsGetAll, setUsername, setSelectedCurrency } = ActionCreators;
+    const { setDateRange, changeIsGetAll, setUsername, setSelectedCurrency, setSelectedParams, searchPlayer } = ActionCreators;
     return bindActionCreators(Object.assign({}, {
         setDateRange,
         changeIsGetAll,
         setUsername,
-        setSelectedCurrency
+        setSelectedCurrency,
+        setSelectedParams,
+        searchPlayer
     }), dispatch);
 }
 
 function mapStateToProps(state) {
-    const { dateRange, isGetAll, selectedCurrency, requestParam, username } = state;
+    const { dateRange, isGetAll, selectedCurrency, selectedParams, username } = state;
     return Object.assign({}, {
         dateRange,
         isGetAll,
         selectedCurrency,
         username,
-        requestParam,
+        selectedParams,
     });
 };
 
