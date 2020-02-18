@@ -113,9 +113,9 @@ namespace Fanex.Athena.Model.Report.ViewModel
             get
             {
                 return LicenseeWLBA + LicenseeWLNG + LicenseeWLSB + LicenseeWLVS + LicenseeWLCS +
-                    LicenseeWLKN + LicenseeWLBT + LicenseeWLAGC + LicenseeWLVB + LicenseeWLAB + LicenseeWLFW +
-                    LicenseeWLCO + LicenseeWLVS2 + LicenseeWLLT + LicenseeWLPP + LicenseeWLCC +
-					LicenseeWLSG + LicenseeWLVRG;
+                    LicenseeWLKN + LicenseeWLBT + LicenseeWLAGC + LicenseeWLVB + LicenseeWLAB + 
+                    LicenseeWLFW + LicenseeWLCO + LicenseeWLVS2 + LicenseeWLLT + LicenseeWLPP + 
+                    LicenseeWLCC + LicenseeWLSG + LicenseeWLVRG;
             }
         }
 

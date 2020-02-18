@@ -58,7 +58,7 @@ namespace Fanex.Athena.Excel.Report
         private const int RowTotalSolidBorder = 4;
 
         private const int TotalLicenseeWlProductColumn = 19;
-        private const int TotalTurnoverProductColumn = 20;
+        private const int TotalTurnoverProductColumn = 19;
 
         private static readonly string[] IgnoredLicenseeWLProducts = new[] { Product.BA };
         private static readonly string[] IgnoredTurnoverProducts = new[] { Product.BT, Product.CO };
