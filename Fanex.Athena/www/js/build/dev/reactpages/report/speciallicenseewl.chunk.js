@@ -10,7 +10,7 @@
 /******/ 		var moduleId, chunkId, i = 0, resolves = [];
 /******/ 		for(;i < chunkIds.length; i++) {
 /******/ 			chunkId = chunkIds[i];
-/******/ 			if(installedChunks[chunkId]) {
+/******/ 			if(Object.prototype.hasOwnProperty.call(installedChunks, chunkId) && installedChunks[chunkId]) {
 /******/ 				resolves.push(installedChunks[chunkId][0]);
 /******/ 			}
 /******/ 			installedChunks[chunkId] = 0;
@@ -46,6 +46,7 @@
 /******/ 				result = __webpack_require__(__webpack_require__.s = deferredModule[0]);
 /******/ 			}
 /******/ 		}
+/******/
 /******/ 		return result;
 /******/ 	}
 /******/
@@ -112,7 +113,6 @@
 /******/ 				promises.push(installedChunkData[2] = promise);
 /******/
 /******/ 				// start chunk loading
-/******/ 				var head = document.getElementsByTagName('head')[0];
 /******/ 				var script = document.createElement('script');
 /******/ 				var onScriptComplete;
 /******/
@@ -123,6 +123,8 @@
 /******/ 				}
 /******/ 				script.src = jsonpScriptSrc(chunkId);
 /******/
+/******/ 				// create error before stack unwound to get useful stacktrace later
+/******/ 				var error = new Error();
 /******/ 				onScriptComplete = function (event) {
 /******/ 					// avoid mem leaks in IE.
 /******/ 					script.onerror = script.onload = null;
@@ -132,7 +134,8 @@
 /******/ 						if(chunk) {
 /******/ 							var errorType = event && (event.type === 'load' ? 'missing' : event.type);
 /******/ 							var realSrc = event && event.target && event.target.src;
-/******/ 							var error = new Error('Loading chunk ' + chunkId + ' failed.\n(' + errorType + ': ' + realSrc + ')');
+/******/ 							error.message = 'Loading chunk ' + chunkId + ' failed.\n(' + errorType + ': ' + realSrc + ')';
+/******/ 							error.name = 'ChunkLoadError';
 /******/ 							error.type = errorType;
 /******/ 							error.request = realSrc;
 /******/ 							chunk[1](error);
@@ -144,7 +147,7 @@
 /******/ 					onScriptComplete({ type: 'timeout', target: script });
 /******/ 				}, 120000);
 /******/ 				script.onerror = script.onload = onScriptComplete;
-/******/ 				head.appendChild(script);
+/******/ 				document.head.appendChild(script);
 /******/ 			}
 /******/ 		}
 /******/ 		return Promise.all(promises);
@@ -1332,7 +1335,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "bodyCellStyle", function() { return bodyCellStyle; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "totalCellStyle", function() { return totalCellStyle; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "grandTotalCellStyle", function() { return grandTotalCellStyle; });
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -1428,7 +1433,7 @@ var totalDecimalStyle = _objectSpread({}, totalTextStyle, {
 });
 
 var totalCellStyle = {
-  default: totalTextStyle,
+  "default": totalTextStyle,
   rowspan: _objectSpread({}, totalTextStyle, {
     alignment: {
       horizontal: "center",
@@ -1479,7 +1484,7 @@ var decimalGrandTotalStyle = _objectSpread({}, grandTotalTextStyle, {
 });
 
 var grandTotalCellStyle = {
-  default: grandTotalTextStyle,
+  "default": grandTotalTextStyle,
   rowspan: _objectSpread({}, grandTotalTextStyle, {
     alignment: {
       horizontal: "center",
@@ -2479,7 +2484,7 @@ function (_Component) {
         _this2.props.setReportTitle(_lib_service__WEBPACK_IMPORTED_MODULE_10__["Service"].getReportTitle(_this2.props.params.FromDate, _this2.props.params.ToDate, _this2.props.params.CurrencyId, _this2.props.params.CurrencyName, _this2.props.params.BaseCurrency));
 
         _this2.props.toggleLoader(false);
-      }).catch(function (error) {
+      })["catch"](function (error) {
         _lib_service__WEBPACK_IMPORTED_MODULE_10__["Service"].showErrorMsg();
 
         _this2.props.toggleLoader(false);
@@ -2926,7 +2931,7 @@ function (_Component) {
         data: params
       }).then(function (response) {
         _this._doExportExcel(params, response.data);
-      }).catch(function (error) {
+      })["catch"](function (error) {
         _lib_service__WEBPACK_IMPORTED_MODULE_9__["Service"].showErrorMsg();
 
         _this.props.toggleLoader(false);
@@ -2961,7 +2966,7 @@ function (_Component) {
 
       var title = _lib_service__WEBPACK_IMPORTED_MODULE_9__["Service"].getReportTitle(params.FromDate, params.ToDate, params.CurrencyId, params.CurrencyName, params.BaseCurrency);
       var excel = new _lib_reportExcel__WEBPACK_IMPORTED_MODULE_10__["default"](gridData, title, parseInt(params.ReportBy, 10), params.ProductCodeList);
-      excel.export(function () {
+      excel["export"](function () {
         _this2.props.toggleLoader(false);
       });
     }
@@ -3309,7 +3314,7 @@ function () {
 
         _this._createExcelConfig();
 
-        _lib_excel__WEBPACK_IMPORTED_MODULE_1__["default"].export(_this.worksheet, _this.fileName);
+        _lib_excel__WEBPACK_IMPORTED_MODULE_1__["default"]["export"](_this.worksheet, _this.fileName);
         onFinished && onFinished();
       });
     }

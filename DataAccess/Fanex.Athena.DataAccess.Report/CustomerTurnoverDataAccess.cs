@@ -53,7 +53,8 @@ namespace Fanex.Athena.DataAccess.Report
                         {
                             Index = reader.ToInt("RowNo"),
                             ReportBy = ConvertHelper.ToDateTime(reader.ToString("ReportBy"), metaModel.ReportBy == ReportByType.Monthly),
-                            UserName = reader.ToString("username"),
+                            ExternalId = reader.ToString("nickname"),
+                            SystemId = reader.ToString("username"),
                             Currency = currencyList?.GetValueOrDefault(currencyid, currencyid.ToString()),
                             SportId = sportId,
                             SportType = _cacheRefAdapter.GetSportName(sportId, languageCode),

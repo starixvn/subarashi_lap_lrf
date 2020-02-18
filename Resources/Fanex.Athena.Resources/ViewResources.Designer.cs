@@ -4948,6 +4948,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SG.
+        /// </summary>
+        public static string ProductSG {
+            get {
+                return ResourceManager.GetString("ProductSG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Macau Games.
         /// </summary>
         public static string ProductVB {

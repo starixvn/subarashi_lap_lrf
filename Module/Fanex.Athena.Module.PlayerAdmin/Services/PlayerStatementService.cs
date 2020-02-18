@@ -37,7 +37,7 @@
 
         public async Task<string> GetUrl(PlayerStatementMetaModel metaModel)
         {
-            const string GetStatementPath = @"{0}Statement/Summary?cid={1}&fd={2}&td={3}&ps={4}&lang={5}&access_token={6}";
+            const string GetStatementPath = @"{0}Statement/Summary?cid={1}&fd={2}&td={3}&ps={4}&sb={5}&lang={6}&access_token={7}";
 
             var token = await GetToken(metaModel.SiteName).ConfigureAwait(false);
 
@@ -48,6 +48,7 @@
                 metaModel.FromDate.ToString(FormatDate),
                 metaModel.ToDate.ToString(FormatDate),
                 PageSize,
+                true,
                 metaModel.Language,
                 token);
         }

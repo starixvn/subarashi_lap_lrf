@@ -24,7 +24,7 @@
             });
 
             describe("getColName()", function () {
-                var customerWlTotalIndex = 12;
+                var customerWlTotalIndex = 13;
 
                 it("customerWlTotal column name should be 'Total' if report has Customer comm", function () {
                     CustomerTurnoverOption.hasCustomerComm = true;
@@ -44,8 +44,8 @@
             });
 
             describe("getColModel()", function () {
-                var customerWlIndex = 10;
-                var playerIndex = 11;
+                var customerWlIndex = 11;
+                var playerIndex = 12;
                 var dateIndex = 1;
 
                 it("customerWl columns should be hidden if report does not have Customer comm", function () {

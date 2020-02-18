@@ -101,7 +101,8 @@
             // Arrange
             var expectedResult = new CustTurnover
             {
-                UserName = "UserNameTest",
+                ExternalId = "NickNameTest",
+                SystemId = "UserNameTest",
                 Bettype = "BettypeTest"
             };
 
@@ -134,7 +135,8 @@
             };
             var expectedResult = new CustTurnover
             {
-                UserName = "User name test",
+                ExternalId = "NickNameTest",
+                SystemId = "UserNameTest",
                 Bettype = "BettypeTest",
                 SportId = 1,
                 ReportBy = new DateTime(2016, 8, 31)
@@ -154,7 +156,8 @@
             {
                 Assert.That(firstItem.SportId, Is.EqualTo(expectedResult.SportId));
                 Assert.That(firstItem.ReportBy, Is.EqualTo(expectedResult.ReportBy));
-                Assert.That(firstItem.UserName, Is.EqualTo(expectedResult.UserName));
+                Assert.That(firstItem.ExternalId, Is.EqualTo(expectedResult.ExternalId));
+                Assert.That(firstItem.SystemId, Is.EqualTo(expectedResult.SystemId));
                 Assert.That(firstItem.Currency, Is.EqualTo(CurrencyName));
                 Assert.That(firstItem.Bettype, Is.EqualTo(expectedResult.Bettype));
                 AssertCommonData(firstItem, expectedResult);
@@ -180,7 +183,8 @@
             Reader["Turnover"].Returns(expected.Turnover);
             Reader["sporttype"].Returns(expected.SportId);
             Reader["ReportBy"].Returns("20160831");
-            Reader["username"].Returns(expected.UserName);
+            Reader["nickname"].Returns(expected.ExternalId);
+            Reader["username"].Returns(expected.SystemId);
             Reader["currencyid"].Returns(CurrencyId);
             Reader["BetCount"].Returns(expected.TotalTransactions);
             Reader["Bettype"].Returns(expected.Bettype);

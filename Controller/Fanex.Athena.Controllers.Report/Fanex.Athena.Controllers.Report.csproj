@@ -163,6 +163,7 @@
     <Compile Include="LicenseeWinLossByTimeZoneReportController.cs" />
     <Compile Include="PromotionPrizeReportController.cs" />
     <Compile Include="Result\ResultPopup\CardClubResultPopupController.cs" />
+    <Compile Include="Result\ResultPopup\SGResultPopupController.cs" />
     <Compile Include="Result\ResultPopup\PPResultPopupController.cs" />
     <Compile Include="SubsidiaryPerformanceReportController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

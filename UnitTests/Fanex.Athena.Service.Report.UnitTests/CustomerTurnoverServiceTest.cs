@@ -105,11 +105,11 @@
             };
             var dataList = new List<CustTurnover>
             {
-                new CustTurnover { UserName = "1" },
-                new CustTurnover { UserName = "1" },
-                new CustTurnover { UserName = "2" },
-                new CustTurnover { UserName = "2" },
-                new CustTurnover { UserName = "3" }
+                new CustTurnover { ExternalId = "1" },
+                new CustTurnover { ExternalId = "1" },
+                new CustTurnover { ExternalId = "2" },
+                new CustTurnover { ExternalId = "2" },
+                new CustTurnover { ExternalId = "3" }
             };
             var expectedResult = new ReportResultModel<CustTurnover>
             {

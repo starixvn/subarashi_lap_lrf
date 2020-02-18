@@ -44,7 +44,8 @@
                 { Product.PP, nameof(ViewResources.ProductPP) },
                 { Product.FW, nameof(ViewResources.ProductFW) },
                 { Product.CC, nameof(ViewResources.ProductCC) },
-                { Product.AGC, nameof(ViewResources.ProductAGC) }
+                { Product.AGC, nameof(ViewResources.ProductAGC) },
+                { Product.SG, nameof(ViewResources.ProductSG) }
             };
 
         public static string GetProductCode(int productId)

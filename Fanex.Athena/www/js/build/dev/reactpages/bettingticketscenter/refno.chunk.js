@@ -10,7 +10,7 @@
 /******/ 		var moduleId, chunkId, i = 0, resolves = [];
 /******/ 		for(;i < chunkIds.length; i++) {
 /******/ 			chunkId = chunkIds[i];
-/******/ 			if(installedChunks[chunkId]) {
+/******/ 			if(Object.prototype.hasOwnProperty.call(installedChunks, chunkId) && installedChunks[chunkId]) {
 /******/ 				resolves.push(installedChunks[chunkId][0]);
 /******/ 			}
 /******/ 			installedChunks[chunkId] = 0;
@@ -46,6 +46,7 @@
 /******/ 				result = __webpack_require__(__webpack_require__.s = deferredModule[0]);
 /******/ 			}
 /******/ 		}
+/******/
 /******/ 		return result;
 /******/ 	}
 /******/
@@ -225,7 +226,7 @@ function getGridData(url, params) {
     _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_1__["default"].postData(url, params).then(function (response) {
       response.data.timestamp = new Date().getTime();
       dispatch(setGridData(response.data));
-    }).catch(function (error) {
+    })["catch"](function (error) {
       alert("Sorry, an error occurred while processing your request.");
       dispatch(Object(_jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_2__["toggleLoader"])(false));
     });
@@ -1647,7 +1648,7 @@ function (_React$Component) {
         background: '#4c6274',
         height: "15px",
         width: "20px",
-        float: 'left'
+        "float": 'left'
       };
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "".concat(this.props.className)
@@ -2064,18 +2065,22 @@ function (_Component) {
           var _url3 = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getCardClubResultUrl(rootUrl, custid, bettype, extension2);
 
           _this2._showThirdPartyResult(_url3, title);
+        } else if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].SG) {
+          var _url4 = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getSGResultUrl(rootUrl, custid, extension2);
+
+          _this2._showThirdPartyResult(_url4, title);
         } else if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].ALLBET) {
-          var _url4 = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getAllBetResultUrl(rootUrl, transdecs, extension2, bettype);
+          var _url5 = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getAllBetResultUrl(rootUrl, transdecs, extension2, bettype);
 
-          _this2._openPopup(_url4, title);
+          _this2._openPopup(_url5, title);
         } else if (sporttype === _lib_constants__WEBPACK_IMPORTED_MODULE_5__["SportType"].GLOBALGAMING) {
-          var _url5 = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getGlobalGamingResultUrl(rootUrl, custid, extension2);
+          var _url6 = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getGlobalGamingResultUrl(rootUrl, custid, extension2);
 
-          _this2._showThirdPartyResult(_url5, title);
+          _this2._showThirdPartyResult(_url6, title);
         } else {
-          var _url6 = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getResultUrl(rootUrl, matchid, raceNo, bettype, sporttype, winlostdate, refnoMixParlay, league, isOutright, extension1, extension2, custid);
+          var _url7 = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getResultUrl(rootUrl, matchid, raceNo, bettype, sporttype, winlostdate, refnoMixParlay, league, isOutright, extension1, extension2, custid);
 
-          _this2._openPopup(_url6, title);
+          _this2._openPopup(_url7, title);
         }
       };
 
@@ -2233,6 +2238,17 @@ function (_Component) {
 
         _this2._openPopup(url, title);
       };
+
+      window.showSGDetails = function (transId, winlostDate, custId, transType) {
+        var _this2$props12 = _this2.props,
+            rootUrl = _this2$props12.rootUrl,
+            baseCurrency = _this2$props12.baseCurrency;
+        var url = _lib_BetList__WEBPACK_IMPORTED_MODULE_2__["default"].getSGDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType);
+
+        var title = _this2._getResource('ProductSG') + ' - ' + _this2._getResource('DetailedBetlist') + ' - ' + _this2._formatDateString(winlostDate);
+
+        _this2._openPopup(url, title);
+      };
     }
   }, {
     key: "componentWillUnmount",
@@ -2252,6 +2268,7 @@ function (_Component) {
       window.showGlobalGaming = undefined;
       window.showPPDetails = undefined;
       window.showSingleMatchParlayDetail = undefined;
+      window.showSGDetails = undefined;
     }
   }, {
     key: "_getResource",
@@ -2305,7 +2322,7 @@ function (_Component) {
           divEvent.style.display = 'block';
 
           _this3._afterShow();
-        }).catch(function (error) {
+        })["catch"](function (error) {
           _this3._afterShow();
 
           console.log(error);
@@ -2337,7 +2354,7 @@ function (_Component) {
           nameDiv.style.display = 'none';
 
           _this4._afterShow();
-        }).catch(function (error) {
+        })["catch"](function (error) {
           _this4._afterShow();
 
           console.log(error);
@@ -2362,7 +2379,7 @@ function (_Component) {
         }
 
         _this5._afterShow();
-      }).catch(function (error) {
+      })["catch"](function (error) {
         _this5._afterShow();
 
         console.log(error);
@@ -2389,7 +2406,7 @@ function (_Component) {
         }
 
         _this6._afterShow();
-      }).catch(function (error) {
+      })["catch"](function (error) {
         _this6._afterShow();
 
         console.log(error);
@@ -2413,7 +2430,7 @@ function (_Component) {
           divEvent.style.display = 'block';
 
           _this7._afterShow();
-        }).catch(function (error) {
+        })["catch"](function (error) {
           console.log(error);
         });
       } else {
@@ -2742,6 +2759,17 @@ function () {
       return url;
     }
   }, {
+    key: "getSGDetailUrl",
+    value: function getSGDetailUrl(rootUrl, baseCurrency, transId, winlostDate, custId, transType) {
+      var url = rootUrl + 'SGBetList/Detail';
+      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId', transId);
+      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'date', winlostDate);
+      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custId', custId);
+      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transType', transType);
+      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'BaseCurrency', baseCurrency);
+      return url;
+    }
+  }, {
     key: "getRngCasinoResultUrl",
     value: function getRngCasinoResultUrl(rootUrl) {
       return rootUrl + 'ResultReport/ShowRngCasinoSingleWalletResult';
@@ -2769,6 +2797,14 @@ function () {
       url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custid', custid);
       url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'gameTypeId', gameTypeId);
       url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'transId3rd', transId3rd);
+      return url;
+    }
+  }, {
+    key: "getSGResultUrl",
+    value: function getSGResultUrl(rootUrl, custid, gamePlayId) {
+      var url = rootUrl + 'SGResultPopup/Index';
+      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'custid', custid);
+      url = _jsroot_lib_QueryString__WEBPACK_IMPORTED_MODULE_0__["default"].setParam(url, 'gamePlayId', gamePlayId);
       return url;
     }
   }, {
@@ -2824,7 +2860,8 @@ var SportType = {
   VOIDBRIDGE: 212,
   PP: 248,
   GLOBALGAMING: 219,
-  CARDCLUB: 165
+  CARDCLUB: 165,
+  SG: 247
 };
 
 /***/ }),
@@ -4492,7 +4529,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "requestParam", function() { return requestParam; });
 /* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/types */ "./www/js/source/reactpages/actions/types.js");
 /* harmony import */ var _lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 

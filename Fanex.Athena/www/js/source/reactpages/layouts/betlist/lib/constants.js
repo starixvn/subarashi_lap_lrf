@@ -15,5 +15,6 @@ export const SportType = {
     VOIDBRIDGE: 212,
     PP: 248,
     GLOBALGAMING: 219,
-    CARDCLUB: 165
+    CARDCLUB: 165,
+    SG: 247
 }

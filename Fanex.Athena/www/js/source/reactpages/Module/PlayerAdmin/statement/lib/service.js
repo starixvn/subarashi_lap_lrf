@@ -17,15 +17,3 @@ export default class Service {
             });
     }
 }
-
-export const BreadcrumbText = {
-    level1: LangHelper.getSingleResource('Statement'),
-    level2: LangHelper.getSingleResource('BettingStatement'),
-    level3: LangHelper.getSingleResource('BetList')
-}
-
-export const Level = {
-    level1: 0,
-    level2: 1,
-    level3: 2
-}

@@ -118,7 +118,8 @@
     <Compile Include="PendingFundsBetListControllerTest.cs" />
     <Compile Include="PlatformWinLossBetListControllerTest.cs" />
     <Compile Include="CardClubBetListtControllerTest.cs" />
-    <Compile Include="PragmaticPlayBetListtControllerTest.cs" />
+    <Compile Include="SGBetListControllerTest.cs" />
+    <Compile Include="PragmaticPlayBetListControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RNGCasinoBetListControllerTest.cs" />
     <Compile Include="RunningBetListControllerTest.cs" />

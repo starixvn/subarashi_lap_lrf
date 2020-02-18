@@ -900,7 +900,9 @@
                         "ProductOptions[3].Code": "PP",
                         "ProductOptions[3].Status": true,
                         "ProductOptions[4].Code": "CC",
-                        "ProductOptions[4].Status": true
+                        "ProductOptions[4].Status": true,
+                        "ProductOptions[5].Code": "SG",
+                        "ProductOptions[5].Status": true
                     });
                     spyOn(Report, "ValidProducts").and.returnValue(true);
 

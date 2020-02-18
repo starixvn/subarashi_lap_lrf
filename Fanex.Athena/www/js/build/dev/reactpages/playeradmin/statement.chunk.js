@@ -10,7 +10,7 @@
 /******/ 		var moduleId, chunkId, i = 0, resolves = [];
 /******/ 		for(;i < chunkIds.length; i++) {
 /******/ 			chunkId = chunkIds[i];
-/******/ 			if(installedChunks[chunkId]) {
+/******/ 			if(Object.prototype.hasOwnProperty.call(installedChunks, chunkId) && installedChunks[chunkId]) {
 /******/ 				resolves.push(installedChunks[chunkId][0]);
 /******/ 			}
 /******/ 			installedChunks[chunkId] = 0;
@@ -46,6 +46,7 @@
 /******/ 				result = __webpack_require__(__webpack_require__.s = deferredModule[0]);
 /******/ 			}
 /******/ 		}
+/******/
 /******/ 		return result;
 /******/ 	}
 /******/
@@ -213,8 +214,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../lib/service */ "./www/js/source/reactpages/Module/PlayerAdmin/statement/lib/service.js");
 /* harmony import */ var _jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/components/NoDataTitle */ "./www/js/source/reactpages/components/NoDataTitle.jsx");
 /* harmony import */ var _jsroot_components_utils_timer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/components/utils/timer */ "./www/js/source/reactpages/components/utils/timer.js");
-/* harmony import */ var _9softstudio_react_breadcrumb__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @9softstudio/react-breadcrumb */ "./node_modules/@9softstudio/react-breadcrumb/dist/index.js");
-/* harmony import */ var _9softstudio_react_breadcrumb__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_9softstudio_react_breadcrumb__WEBPACK_IMPORTED_MODULE_6__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -232,9 +231,6 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -254,53 +250,11 @@ function (_PureComponent) {
     _classCallCheck(this, DataContent);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(DataContent).call(this, props));
-
-    _defineProperty(_assertThisInitialized(_this), "onBack", function (item) {
-      var level = _this.state.level;
-      var newLevel = item.value;
-      var step = -1;
-
-      if (level === _lib_service__WEBPACK_IMPORTED_MODULE_3__["Level"].level3 && newLevel === _lib_service__WEBPACK_IMPORTED_MODULE_3__["Level"].level1) {
-        step = -2;
-      }
-
-      _this.isDrilldown = false;
-
-      _this.setState({
-        level: newLevel
-      }, function () {
-        return window.history.go(step);
-      });
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "onLoad", function (e) {
-      if (!_this.isDrilldown) {
-        _this.isDrilldown = true;
-        return;
-      }
-
-      var level = _this.state.level;
-
-      if (level === _lib_service__WEBPACK_IMPORTED_MODULE_3__["Level"].level1) {
-        _this.setState({
-          level: _lib_service__WEBPACK_IMPORTED_MODULE_3__["Level"].level2
-        }, function () {
-          return _this._handleResize();
-        });
-      } else if (level === _lib_service__WEBPACK_IMPORTED_MODULE_3__["Level"].level2) {
-        _this.setState({
-          level: _lib_service__WEBPACK_IMPORTED_MODULE_3__["Level"].level3
-        });
-      }
-    });
-
     _this.contentRef = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
     _this.state = {
       src: '',
-      height: 0,
-      level: _lib_service__WEBPACK_IMPORTED_MODULE_3__["Level"].level1
+      height: 0
     };
-    _this.isDrilldown = false;
     _this.resize = _jsroot_components_utils_timer__WEBPACK_IMPORTED_MODULE_5__["default"].debounce(_this._handleResize, 15).bind(_assertThisInitialized(_this));
     return _this;
   }
@@ -341,36 +295,14 @@ function (_PureComponent) {
   }, {
     key: "_updateSrc",
     value: function _updateSrc(src) {
-      this.isDrilldown = false;
       this.setState({
-        src: src,
-        level: _lib_service__WEBPACK_IMPORTED_MODULE_3__["Level"].level1
+        src: src
       });
     }
   }, {
     key: "_getUrl",
     value: function _getUrl(param) {
       _lib_service__WEBPACK_IMPORTED_MODULE_3__["default"].getData(param, this._updateSrc.bind(this));
-    }
-  }, {
-    key: "_renderBreadcrumb",
-    value: function _renderBreadcrumb() {
-      var items = [{
-        label: _lib_service__WEBPACK_IMPORTED_MODULE_3__["BreadcrumbText"].level1,
-        value: _lib_service__WEBPACK_IMPORTED_MODULE_3__["Level"].level1
-      }, {
-        label: _lib_service__WEBPACK_IMPORTED_MODULE_3__["BreadcrumbText"].level2,
-        value: _lib_service__WEBPACK_IMPORTED_MODULE_3__["Level"].level2
-      }, {
-        label: _lib_service__WEBPACK_IMPORTED_MODULE_3__["BreadcrumbText"].level3,
-        value: _lib_service__WEBPACK_IMPORTED_MODULE_3__["Level"].level3
-      }];
-      var level = this.state.level;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_breadcrumb__WEBPACK_IMPORTED_MODULE_6__["Breadcrumb"], {
-        items: items,
-        value: level,
-        onChange: this.onBack
-      });
     }
   }, {
     key: "render",
@@ -387,8 +319,7 @@ function (_PureComponent) {
         frameBorder: "0",
         src: src,
         width: "100%",
-        height: "100%",
-        onLoad: this.onLoad
+        height: "100%"
       }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
     }
   }]);
@@ -429,7 +360,7 @@ function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArra
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
 
-function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
@@ -562,14 +493,12 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_
 /*!******************************************************************************!*\
   !*** ./www/js/source/reactpages/Module/PlayerAdmin/statement/lib/service.js ***!
   \******************************************************************************/
-/*! exports provided: default, BreadcrumbText, Level */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Service; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BreadcrumbText", function() { return BreadcrumbText; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Level", function() { return Level; });
 /* harmony import */ var _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/DataService */ "./www/js/source/reactpages/lib/DataService.js");
 /* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
@@ -597,7 +526,7 @@ function () {
       var url = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl(RelativeUrl);
       _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_0__["default"].postData(url, param).then(function (response) {
         callBack && callBack(response.data);
-      }).catch(function (error) {
+      })["catch"](function (error) {
         console.log(error.message);
         callBack && callBack(null);
       });
@@ -608,16 +537,6 @@ function () {
 }();
 
 
-var BreadcrumbText = {
-  level1: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('Statement'),
-  level2: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('BettingStatement'),
-  level3: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('BetList')
-};
-var Level = {
-  level1: 0,
-  level2: 1,
-  level3: 2
-};
 
 /***/ }),
 
@@ -2056,7 +1975,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "requestParam", function() { return requestParam; });
 /* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/types */ "./www/js/source/reactpages/actions/types.js");
 /* harmony import */ var _lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
