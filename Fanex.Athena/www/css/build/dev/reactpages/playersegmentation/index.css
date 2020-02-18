@@ -1117,7 +1117,6 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::after {
     text-transform: uppercase; }
 
 #player-segmentation .tab-menu .active {
-  color: #E15F00;
   border-bottom: 2px solid #E15F00; }
 
 

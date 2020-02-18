@@ -20,6 +20,7 @@ export const Content = props => {
             pageIndex,
             pageSize
         }
+        
         searchPlayer(newParam);
     }
 

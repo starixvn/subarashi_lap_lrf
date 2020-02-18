@@ -23,7 +23,7 @@ class GridHelper {
                 {dataHeaders && dataHeaders.length > 0 &&
                  dataHeaders.map(_ => 
                  <HeaderCell colWidth={_.colWidth} sortBy={_.sortBy}>
-                     {_.childrenComponent ? _.childrenComponent : _.text}
+                     {_.childComponent ? _.childComponent : _.text}
                  </HeaderCell>)}
             </HeaderRow>
         )
@@ -44,7 +44,6 @@ const MAX_WIDTH_PAGE = 1920;
 export class DataGrid extends PureComponent {
     constructor(props) {
         super(props);
-
         this.maxWidth = Math.min(document.body.clientWidth, MAX_WIDTH_PAGE);
     }
 

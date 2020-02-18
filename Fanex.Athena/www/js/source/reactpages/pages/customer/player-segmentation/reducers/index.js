@@ -4,5 +4,4 @@ import * as gridHandlerReducer from './gridHandlerReducer';
 
 export default combineReducers({
     ...tabHandlerReducer,
-    ...gridHandlerReducer
 })
