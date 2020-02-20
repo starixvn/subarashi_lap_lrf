@@ -15,13 +15,12 @@ export const Content = props => {
 
     const _handlePaging = (pageIndex, pageSize) => {
         const { selectedParams, searchPlayer } = props;
-        const newParam = {
+        const newParams = {
             ...selectedParams,
             pageIndex,
             pageSize
         }
-        
-        searchPlayer(newParam);
+        searchPlayer(newParams);
     }
 
     return (

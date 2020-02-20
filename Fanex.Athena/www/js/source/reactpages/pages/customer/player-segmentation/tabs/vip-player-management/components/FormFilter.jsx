@@ -5,7 +5,6 @@ import Select from 'react-select'
 import MultipleSelect from '@9softstudio/react-multiselect'
 import AutoComplete from '@jsroot/components/auto-complete'
 import CollapsiblePanel from '@jsroot/components/collapsible-panel'
-import { DateRange } from '@jsroot/components/date-range'
 import { ActionCreators } from '../actions'
 import LangHelper from '@jsroot/lib/langHelper'
 import Site from '@jsroot/lib/site'
@@ -66,7 +65,7 @@ export class FormFilter extends PureComponent {
         const { selectedVipOption, setSelectedVipOption } = this.props;
         return vipOptions && vipOptions.length && (
             <Select instanceId="VipOptions"
-                menuIsOpen={false}
+                isSearchable={false}
                 value={selectedVipOption}
                 options={vipOptions}
                 onChange={(item) => setSelectedVipOption(item.value)} />

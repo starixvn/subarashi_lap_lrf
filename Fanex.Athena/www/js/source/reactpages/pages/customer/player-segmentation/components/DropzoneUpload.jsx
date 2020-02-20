@@ -1,0 +1,82 @@
+import React, { useCallback, useState } from 'react';
+import LangHelper from '@jsroot/lib/langHelper';
+import { useDropzone } from 'react-dropzone';
+
+const MbToByte = 1000 * 1000 * 1000;
+
+const DropzoneUpload = (props) => {
+    const { onSubmit, onClose, multiple, accept, children } = props;
+    const maxSize = props.maxSize * MbToByte;
+
+    const [uploadedFiles, setUploadedFiles] = useState([]);
+
+    const onDrop = useCallback(acceptedFiles => {
+        setUploadedFiles([...uploadedFiles, ...acceptedFiles])
+    })
+
+    const onDropRejected = useCallback(rejectedFiles => {
+        const rejectedFile = rejectedFiles[0];
+        let errorMsg = LangHelper.getSingleResource("Could not load the file, please check file's template again!");
+        if (_isInvalidExtension(rejectedFile)) {
+            errorMsg = `${LangHelper.getSingleResource("Your file's extension is incorrect, please select an file")} (${accept})`;
+        } else if (_isInValidSize(rejectedFile)) {
+            errorMsg =`${LangHelper.getSingleResource("The uploaded file should be less than")} ${props.maxSize}MB`;
+        }
+        alert(errorMsg);
+    })
+
+    const { getRootProps, getInputProps } = useDropzone({ onDrop, onDropRejected, multiple, accept, maxSize });
+
+    const _removeFile = file => () => {
+        const newFiles = [...uploadedFiles]
+        newFiles.splice(newFiles.indexOf(file), 1)
+        setUploadedFiles(newFiles)
+    }
+
+    const _isInValidSize = (file) => {
+        return file.size > maxSize;
+    }
+
+    const _isInvalidExtension = (file) => {
+        const acceptArray = accept.split(',');
+        const isValid = acceptArray.some(_ => file.name.endsWith(_));
+        return !isValid;
+    }
+
+
+    const _renderAcceptedFiles = () => {
+        return <ul className="dropzone-row">{uploadedFiles.map(file => (
+            <li key={file.path} className="file-item">
+                <a className="file-close" onClick={_removeFile(file)}><i className="icon-close"></i></a>
+                <span>{file.name}</span>
+            </li>))}
+        </ul>
+    }
+
+    const _isExistFiles = uploadedFiles && uploadedFiles.length > 0;
+
+    return (
+        <div className="dropzone">
+            <a className="dropzone-close" onClick={() => onClose && onClose()}><i className="icon-close"></i></a>
+            {
+                _isExistFiles ? _renderAcceptedFiles() :
+                    <div className="dropzone-row">
+                        <div {...getRootProps({ className: 'inner-dropzone' })}>
+                            <input {...getInputProps()} />
+                            <p>{LangHelper.getSingleResource('ClickOrDropHere')}</p>
+                        </div>
+                    </div>
+            }
+            <div className="dropzone-row">
+                <button className="btn" disabled={!_isExistFiles} onClick={() => onSubmit && onSubmit(uploadedFiles)}>{LangHelper.getSingleResource('Submit')}</button>
+            </div>
+            {children}
+        </div>
+    );
+}
+
+DropzoneUpload.defaultProps = {
+    maxSize: 1
+}
+
+export default React.memo(DropzoneUpload);

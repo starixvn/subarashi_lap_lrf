@@ -15,7 +15,7 @@ export default (props) => {
 
     return (
         <Row key={ExternalId}>
-            <Cell className="center-align">{ExternalId}</Cell>
+            <Cell className="center-align" onClick={() => alert('1')}>{ExternalId}</Cell>
             <Cell className="center-align">{SystemId}</Cell>
             <Cell className="center-align">{MarkDate}</Cell>
             <VipSwitcherCell dataItem={dataItem} />

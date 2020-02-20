@@ -2,46 +2,33 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Pager } from '@9softstudio/react-grid';
-import LangHelper from '@jsroot/lib/langHelper'
+import LangHelper from '@jsroot/lib/langHelper';
 import GridCaption from '../../../components/GridCaption';
-// import DataGrid from './DataGrid';
+import DataGrid from './DataGrid';
 import { ActionCreators } from '../actions';
 
 export const Content = props => {
     const { pagingOption, playerCount } = props;
-
     if (pagingOption.TotalItem === null) {
         return null;
     }
 
     const _handlePaging = (pageIndex, pageSize) => {
         const { selectedParams, searchPlayer } = props;
-        const newParam = {
+        const newParams = {
             ...selectedParams,
             pageIndex,
             pageSize
         }
 
-        searchPlayer(newParam);
+        searchPlayer(newParams);
     }
 
     return (
         <div className="result-content">
-            <div className="">
-                    <div className="mr-3">
-                        <button type="button" className="btn btn-submit" onClick={() => { }}>{LangHelper.getSingleResource("ActivateVip")}</button>
-                    </div>
-                    <div className="">
-                        <button type="button" className="btn" onClick={() => { }}>{LangHelper.getSingleResource("DeactivateVip")}</button>
-                    </div>
-                    <div className="">
-                        <button type="button" className="btn" onClick={() => { }}>{LangHelper.getSingleResource("UploadVipList")}</button>
-                    </div>
-            </div>
-
-            {/* <GridCaption playerCount={playerCount} />
+            <GridCaption playerCount={playerCount} />
             <DataGrid />
-            <Pager pageOption={pagingOption} onPaging={_handlePaging} /> */}
+            <Pager pageOption={pagingOption} onPaging={_handlePaging} />
         </div>
     )
 }

@@ -5,9 +5,7 @@ import { ActionCreators } from '../actions';
 import { Table } from '@9softstudio/react-grid';
 import PlayerRow from './grid/PlayerRow';
 import NoDataTitle from '@jsroot/components/NoDataTitle';
-import SweetAlert from '@jsroot/components/sweet-alert';
-
-import { HeaderRow, HeaderCell } from '@9softstudio/react-grid';
+import GridHelper from '../../../lib/helpers/gridHelper';
 
 const dataHeaders = [
     { key: 'externalId', text: 'External Id', sortBy: 'ExternalId', colWidth: 100 },
@@ -15,29 +13,6 @@ const dataHeaders = [
     { key: 'markDate', text: 'Mark Date', sortBy: 'MarkDate', colWidth: 100 },
     { key: 'vip', text: 'VIP', sortBy: 'vip', colWidth: 100 },
 ]
-
-class GridHelper {
-    static renderHeader(dataHeaders) {
-        return (
-            <HeaderRow style={{ height: 32 }}>
-                {dataHeaders && dataHeaders.length > 0 &&
-                 dataHeaders.map(_ => 
-                 <HeaderCell colWidth={_.colWidth} sortBy={_.sortBy}>
-                     {_.childComponent ? _.childComponent : _.text}
-                 </HeaderCell>)}
-            </HeaderRow>
-        )
-    }
-
-    static calculateTopPosition(dropdownHeight = 0, currentTop) {
-        const innerHeight = window.innerHeight;
-        const expectedHeight = dropdownHeight + currentTop + 20;
-        return expectedHeight > innerHeight ? currentTop - dropdownHeight : currentTop;
-    }
-}
-
-
-
 
 const MAX_WIDTH_PAGE = 1920;
 
@@ -52,7 +27,10 @@ export class DataGrid extends PureComponent {
         for (let i = 0; i < dataList.length; i++) {
             const dataItem = dataList[i];
             const rowProps = {
-                dataItem
+                dataItem,
+                onClick: () => {
+                    alert(dataItem.ExternalId)
+                }
             }
             dataRows.push(<PlayerRow key={`player_row_${dataItem.ExternalId}_${dataItem.SystemId}`} {...rowProps} />);
         }
@@ -88,7 +66,6 @@ export class DataGrid extends PureComponent {
                     containerPadding={30}
                     shouldResetScrollPosition={true}
                     onSort={this._handleSort} />
-                {sweetAlertOption && <SweetAlert {...sweetAlertOption} />}
             </React.Fragment>
         );
     }
@@ -100,8 +77,8 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-    const { playerList, sweetAlertOption } = state;
-    return Object.assign({}, { playerList, sweetAlertOption });
+    const { playerList } = state;
+    return Object.assign({}, { playerList });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DataGrid);
