@@ -651,7 +651,7 @@
     <Content Include="www\css\build\pro\reactpages\casinoturnover\index.chunk.js" />
     <Content Include="www\css\build\pro\reactpages\casinoturnover\index.css" />
     <Content Include="www\css\build\pro\reactpages\dailybets\index.css" />
-     <Content Include="www\css\build\pro\reactpages\exchangevoided\index.css" />
+    <Content Include="www\css\build\pro\reactpages\exchangevoided\index.css" />
     <Content Include="www\css\build\pro\reactpages\exchangewl\index.css" />
     <Content Include="www\css\build\pro\reactpages\licenseewlbytimezone\index.css" />
     <Content Include="www\css\build\pro\reactpages\notification\index.chunk.js" />
@@ -710,8 +710,11 @@
     <Content Include="www\css\build\dev\reactpages\exchangevoided\index.css.map" />
     <Content Include="SiteConfig\WebConfigTransforms\BACKUPMNLStatic.config" />
     <Content Include="SiteConfig\Web.BACKUPMNLStatic.config" />
-
-    <Content Include="www\css\build\dev\reactpages\dailybets\index.css.map" />    <Content Include="Views\Desktop\BetList\SGDetail\Main.cshtml" />    <Content Include="Views\Desktop\Customer\PlayerSegmentation\Main.cshtml" />    <None Include="www\css\source\reactpages\components\custom3rd\react-toastify.scss" />
+    <Content Include="www\css\build\dev\reactpages\dailybets\index.css.map" />
+    <Content Include="Views\Desktop\BetList\SGDetail\Main.cshtml" />
+    <Content Include="Views\Desktop\Customer\PlayerSegmentation\Main.cshtml" />
+    <None Include="App_Data\Template\Customers\VipPlayerList.xls" />
+    <None Include="www\css\source\reactpages\components\custom3rd\react-toastify.scss" />
     <None Include="www\css\source\pages\betlist\result\result.happy5.scss" />
     <None Include="www\css\source\reactpages\components\alert\icons\error.scss" />
     <None Include="www\css\source\reactpages\components\alert\icons\info.scss" />
