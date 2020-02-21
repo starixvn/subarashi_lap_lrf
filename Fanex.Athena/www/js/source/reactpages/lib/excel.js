@@ -13,7 +13,7 @@ export default class Excel {
             _XLSX = window.XLSX;
             callback && callback();
         } else {
-            import ( /* webpackChunkName: "xlsx-style-sparta" */ 'xlsx-style-sparta').then(XLSX => {
+            import ( /* webpackChunkName: "/lib/xlsx-style-sparta" */ 'xlsx-style-sparta').then(XLSX => {
                 _XLSX = XLSX;
                 callback && callback();
             });
