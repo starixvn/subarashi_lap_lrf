@@ -63,7 +63,7 @@ export class FormFilter extends PureComponent {
     }
     
     _renderDateRange() {
-        const dateRange = this.props.dateRange;
+        const { isGetAll, dateRange } = this.props;
         const dateConstraint = {
             mindDate: '01/01/2019',
             maxDate: '02/16/2020',
@@ -71,10 +71,14 @@ export class FormFilter extends PureComponent {
         };
 
         return (
-            <DateRange startDate={dateRange.fromDate} endDate={dateRange.toDate}
-                minDate={dateConstraint.minDate} maxDate={dateConstraint.maxDate}
-                today={dateRange.toDate} limitedMonthRange={dateConstraint.limitedMonthRange}
-                onChange={this._onChangeDateRange} />
+            <div className={isGetAll ? 'datepicker-disabled' : ''}>
+                <DateRange
+                    startDate={dateRange.fromDate} endDate={dateRange.toDate}
+                    minDate={dateConstraint.minDate} maxDate={dateConstraint.maxDate}
+                    today={dateRange.toDate} limitedMonthRange={dateConstraint.limitedMonthRange}
+                    onChange={this._onChangeDateRange}
+                />
+            </div>
         )
     }
 

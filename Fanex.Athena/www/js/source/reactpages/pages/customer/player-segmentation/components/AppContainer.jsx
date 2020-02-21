@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { connect } from 'react-redux'; 
 import { bindActionCreators } from 'redux';
 import ActionCreators from '../actions';
@@ -10,12 +10,6 @@ export class AppContainer extends React.Component {
     constructor(props) {
         super(props)
     }
-
-    _renderSelectedTab = () => {
-        const selectedTab = tabMenuList.find(_ => _.key === selectedTabKey);
-        const Component = selectedTab.Component;
-        return Component;
-    };
 
     _onClickTabMenu = tabKey => {
         const { setSelectedTab } = this.props;
@@ -30,7 +24,10 @@ export class AppContainer extends React.Component {
             <AppLayout>
                 <div id="player-segmentation">
                     <TabMenu selectedTabMenu={selectedTabKey} onClickTabMenu={this._onClickTabMenu} tabMenuList={tabMenuList} />
-                    {Component && <Component/>}
+                    
+                    {Component && <Suspense fallback={<div>Loading...</div>}>
+                                <Component />
+                            </Suspense>}
                 </div>
             </AppLayout>);
     }

@@ -6,7 +6,7 @@ import reducers from './reducers';
 const data = (() => {
   let data = []
   for(let  i = 1; i < 10; i ++) {
-    data.push({  ExternalId: i, SystemId: i, IsVipTagging:  true });
+    data.push({  externalId: i, systemId: i, isVipTagging:  true, isMarkVoid: i % 3 === 0 ? true : false });
   }
   return data;
 })();

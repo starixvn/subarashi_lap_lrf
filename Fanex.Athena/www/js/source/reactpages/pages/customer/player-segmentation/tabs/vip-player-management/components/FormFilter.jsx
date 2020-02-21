@@ -76,13 +76,13 @@ export class FormFilter extends PureComponent {
         const currencyList = [{ key: 1, value: 'USD', status: true }, { key: 2, value: 'VND', status: true }];
 
         return currencyList && currencyList.length && (
-            <MultipleSelect id="ddlCurrency"
+            <MultipleSelect id="permissionCurrency"
                 language={LangHelper.currentLanguage}
                 dataSource={currencyList}
                 keyField={"key"}
                 valueField={"value"}
                 statusField={"status"}
-                onChange={(_, selectedItemsKey) => { this.props.setSelectedCurrency(selectedItemsKey) }} />);
+                onChange={(_, selectedItemsKey) => this.props.setSelectedCurrency(selectedItemsKey)} />);
     }
 
     _renderExcelIcon() {

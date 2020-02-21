@@ -1,7 +1,17 @@
-import ProblemPlayer from '../tabs/problem-player';
-import VipPlayerManagement from '../tabs/vip-player-management';
+import  React from 'react';
+import LangHelper from '@jsroot/lib/langHelper';
+
+const tabKeys = {
+    problemPlayer: 'problemPlayer',
+    vipPlayerManagement: 'vipPlayerManagement'
+}
+
+const dynamicImports = {
+    [tabKeys.problemPlayer]: () => import(/* webpackChunkName: "playersegmentation/problemPlayer" */ '../tabs/problem-player/index'),
+    [tabKeys.vipPlayerManagement]: () => import(/* webpackChunkName: "playersegmentation/vipPlayerManagement" */ '../tabs/vip-player-management/index')
+}
 
 export const tabMenuList = [
-    { key: 'problemPlayer', name: 'Problem Player', component: ProblemPlayer },
-    { key: 'vipPlayerManagement', name: 'Vip Player Management', component: VipPlayerManagement }
+    { key: tabKeys.problemPlayer, name: 'Problem Player', component: React.lazy(dynamicImports[tabKeys.problemPlayer]), preLoad: dynamicImports[tabKeys.problemPlayer] },
+    { key: tabKeys.vipPlayerManagement, name: 'Vip Player Management', component: React.lazy(tabKeys.vipPlayerManagement), preLoad: dynamicImports[tabKeys.vipPlayerManagement]  }
 ]

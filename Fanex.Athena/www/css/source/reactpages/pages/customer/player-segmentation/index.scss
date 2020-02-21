@@ -16,6 +16,21 @@
 @import "./vip-player-management";
 
 #player-segmentation {
+    .btn {
+        text-transform: uppercase;
+    }
+
+    .icon-warning {
+        font-size: 16px;
+        color: #2446AB;
+    }
+
+    .cell-ticket-void {
+        span {
+            margin-right: 5px;
+            font-size: 14px;
+        }
+    }
 
     .tab-menu {
         ul {
@@ -36,6 +51,7 @@
                 color: $text-default-color;
                 text-transform: uppercase;
                 text-align: center;
+
                 padding: 10px 20px;
                 text-decoration: none;
                 text-transform: uppercase;
@@ -43,6 +59,13 @@
         }
         .active {
             border-bottom: 2px solid $active-color;
+        }
+    }
+
+    .datepicker-disabled {
+        .daterange-container {
+            pointer-events: none;
+            background: $colorDisabled;
         }
     }
 }

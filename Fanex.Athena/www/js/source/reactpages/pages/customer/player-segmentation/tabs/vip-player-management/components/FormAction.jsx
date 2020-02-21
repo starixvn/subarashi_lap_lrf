@@ -6,11 +6,11 @@ import DataService from '@jsroot/lib/DataService';
 import { generateDefaultConfirmOption, generateDefaultAlertOption, predefinedIcons } from '@jsroot/lib/sweetAlert';
 import { ActionCreators } from '../actions';
 import DropzoneUpload from '../../../components/DropzoneUpload';
-import { URL } from '../lib/constants';
+import { Url } from '../lib/constants';
 
 export const FormAction = props => {
     const { setSweetAlertOption, isActiveTaggingAction } = props;
-    const [ displayUploadDropzone, setDisplayUploadDropzone ] = useState(false);
+    const [displayUploadDropzone, setDisplayUploadDropzone] = useState(false);
 
     const _handleActivateVip = (event) => {
         event.preventDefault();
@@ -42,16 +42,16 @@ export const FormAction = props => {
     }
 
     const _renderDropzoneUploadFile = () => {
-        return <DropzoneUpload multiple={false} accept={'.xls,.xlsx'} maxSize={1} 
-        onClose={_handleDisplayUploadDropzone}
-        onSubmit={(files) => {
-            const formData = new FormData();
-            formData.set(files[0].name, files[0], files[0].name);
-            DataService.postData(URL.uploadVipList, formData)
-        }}>
+        return <DropzoneUpload multiple={false} accept={'.xls,.xlsx'} maxSize={1}
+            onClose={_handleDisplayUploadDropzone}
+            onSubmit={(files) => {
+                const formData = new FormData();
+                formData.set(files[0].name, files[0], files[0].name);
+                DataService.postData(Url.uploadVipList, formData)
+            }}>
             <div>
                 <div>
-                    <a href={URL.dowloadVipPlayerList}>*{LangHelper.getSingleResource('ClickHere')}</a>
+                    <a href={Url.dowloadVipPlayerList}>*{LangHelper.getSingleResource('ClickHere')}</a>
                     <span>{LangHelper.getSingleResource('ToDowloadTemplate')}</span>
                 </div>
                 <div>

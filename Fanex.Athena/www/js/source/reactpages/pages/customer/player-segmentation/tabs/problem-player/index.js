@@ -5,8 +5,8 @@ import Store from '@jsroot/lib/store';
 import reducers from './reducers';
 const data = (() => {
   let data = []
-  for(let  i = 1; i <1000; i ++) {
-    data.push({  ExternalId: i, SystemId: i, MarkDate: '12/12/2018', IsVipTagging: i % 3 === 0 ? true : false });
+  for(let  i = 1; i <100; i ++) {
+    data.push({  externalId: i, systemId: i, markDate: '12/12/2018', isVipTagging: i % 3 === 0 ? true : false, isMarkVoid: i % 5 === 0 ? true : false });
   }
   return data;
 })();

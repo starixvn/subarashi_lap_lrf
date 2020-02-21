@@ -12,6 +12,6 @@ export const setSelectedVipOption = option => {
 }
 
 export const setDateRange = dateRangeAction.setDateRange;
-export const setSelectedCurrency =  currencyAction.setSelectedCurrency;
-export const setUsername =  usernameAction.setUsername;
-export const setSelectedParams =  paramHanlderAction.setSelectedParams;
+export const setSelectedCurrency = currencyAction.setSelectedCurrency;
+export const setUsername = usernameAction.setUsername;
+export const setSelectedParams = paramHanlderAction.setSelectedParams;
