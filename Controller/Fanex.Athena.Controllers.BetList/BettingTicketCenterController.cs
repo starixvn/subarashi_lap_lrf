@@ -1,20 +1,17 @@
 ﻿namespace Fanex.Athena.Controllers.BetList
 {
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Web.Mvc;
     using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Auth.Enum;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
-
     using Model.BetList.ViewModel;
     using Model.Core.DTO.Common;
     using Model.Core.MetaModel.Product;
-
     using Resources;
-
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Web.Mvc;
     using Web.ActionFilter;
 
     [FunctionAuthorization(PermissionKeys.BettingTicketCenter)]

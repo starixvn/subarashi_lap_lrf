@@ -81,6 +81,7 @@
     <Compile Include="MetaModel\DeleteGroupMetaModel.cs" />
     <Compile Include="MetaModel\GroupCommMetaModel.cs" />
     <Compile Include="MetaModel\MoveToGroupComMetaModel.cs" />
+    <Compile Include="MetaModel\PlayerSegmentation\PlayerListMetaModel.cs" />
     <Compile Include="MetaModel\RemoveFromGroupComMetaModel.cs" />
     <Compile Include="MetaModel\RNGCasinoUpdateMemberComMetaModel.cs" />
     <Compile Include="MetaModel\UpdatedCustomerComMetaModel.cs" />
@@ -90,6 +91,10 @@
     <Compile Include="ViewModel\CustomerLog\CustomerLogViewModel.cs" />
     <Compile Include="ViewModel\CustomerLog\LogInLogViewModel.cs" />
     <Compile Include="ViewModel\LogInfoViewModel.cs" />
+    <Compile Include="ViewModel\PlayerSegmentation\PlayerViewModel.cs" />
+    <Compile Include="ViewModel\PlayerSegmentation\PlayerListViewModel.cs" />
+    <Compile Include="ViewModel\PlayerSegmentation\ProblemPlayerViewModel.cs" />
+    <Compile Include="ViewModel\PlayerSegmentation\VipPlayerViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.Athena.Model.Core\Fanex.Athena.Model.Core.csproj">
@@ -105,6 +110,9 @@
     <None Include="app.config" />
     <None Include="Fanex.Athena.Model.Customer.ruleset" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DTO\PlayerSegmentation\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

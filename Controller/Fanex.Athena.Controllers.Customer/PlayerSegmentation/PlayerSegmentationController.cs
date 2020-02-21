@@ -13,6 +13,7 @@ namespace Fanex.Athena.Controllers.Customer.PlayerSegmentation
     {
         public PlayerSegmentationController()
         {
+
         }
 
         public ViewResult Index()

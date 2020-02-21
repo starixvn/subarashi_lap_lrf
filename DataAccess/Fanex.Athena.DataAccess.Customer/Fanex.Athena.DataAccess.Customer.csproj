@@ -86,7 +86,9 @@
     <Compile Include="Interfaces\IGroupComDataAccess.cs" />
     <Compile Include="Interfaces\ILogInLogDataAccess.cs" />
     <Compile Include="Interfaces\ISearchCustomerDataAccess.cs" />
+    <Compile Include="Interfaces\IPlayerSegmentationDataAccess.cs" />
     <Compile Include="LogInLogDataAccess.cs" />
+    <Compile Include="PlayerSegmentationDataAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SearchCustomerDataAccess.cs" />
   </ItemGroup>

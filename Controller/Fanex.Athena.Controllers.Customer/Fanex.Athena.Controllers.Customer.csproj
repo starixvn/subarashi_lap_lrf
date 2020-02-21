@@ -129,7 +129,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\CustomerComGroupHelper.cs" />
-    <Compile Include="PlayerSegmentation\PlayerSegmentationController..cs" />
+    <Compile Include="PlayerSegmentation\PlayerSegmentationController.cs" />
     <Compile Include="PlayerSegmentation\PlayerSegmentationController.ProblemPlayer.cs" />
     <Compile Include="PlayerSegmentation\PlayerSegmentationController.VipPlayer.cs" />
     <Compile Include="SearchCustomerAPIController.cs" />
