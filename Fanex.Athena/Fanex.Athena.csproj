@@ -5631,6 +5631,10 @@
       <Project>{a765275a-f566-4122-8e8e-47defab7b56b}</Project>
       <Name>Fanex.Athena.Api.CustomerLog</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ControllerAPI\Fanex.Athena.Api.Customer\Fanex.Athena.Api.Customer.csproj">
+      <Project>{d51c20f8-9f28-47eb-aea2-0bcfed2cff26}</Project>
+      <Name>Fanex.Athena.Api.Customer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ControllerAPI\Fanex.Athena.Api.Report\Fanex.Athena.Api.Report.csproj">
       <Project>{8efb14a8-0a10-4095-a857-c6496e830458}</Project>
       <Name>Fanex.Athena.Api.Report</Name>

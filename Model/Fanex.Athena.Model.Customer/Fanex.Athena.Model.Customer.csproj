@@ -73,6 +73,7 @@
     <Compile Include="DTO\CustomerLog\CustomerLog.cs" />
     <Compile Include="DTO\CustomerLog\LogInLog.cs" />
     <Compile Include="DTO\LogInfo.cs" />
+    <Compile Include="DTO\PlayerSegmentation\PlayerInfo.cs" />
     <Compile Include="MetaModel\BaseCustomerComMetaModel.cs" />
     <Compile Include="MetaModel\CustomerListMetaModel.cs" />
     <Compile Include="MetaModel\CustomerLog\CustomerLogMetaModel.cs" />
@@ -81,7 +82,9 @@
     <Compile Include="MetaModel\DeleteGroupMetaModel.cs" />
     <Compile Include="MetaModel\GroupCommMetaModel.cs" />
     <Compile Include="MetaModel\MoveToGroupComMetaModel.cs" />
-    <Compile Include="MetaModel\PlayerSegmentation\PlayerListMetaModel.cs" />
+    <Compile Include="MetaModel\PlayerSegmentation\BasePlayerListMetaModel.cs" />
+    <Compile Include="MetaModel\PlayerSegmentation\VipPlayerListMetaModel.cs" />
+    <Compile Include="MetaModel\PlayerSegmentation\ProblemPlayerListMetaModel.cs" />
     <Compile Include="MetaModel\RemoveFromGroupComMetaModel.cs" />
     <Compile Include="MetaModel\RNGCasinoUpdateMemberComMetaModel.cs" />
     <Compile Include="MetaModel\UpdatedCustomerComMetaModel.cs" />
@@ -111,9 +114,7 @@
     <None Include="Fanex.Athena.Model.Customer.ruleset" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DTO\PlayerSegmentation\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,13 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using Fanex.Athena.Model.Core.DTO.Common;
+using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
+using Fanex.Athena.Model.Customer.MetaModel;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Fanex.Athena.DataAccess.Customer.Interfaces
 {
     public interface IPlayerSegmentationDataAccess
     {
-        Task<IEnumerable<object>> GetProblemPlayerListAsync();
+        Task<PagingApiResult<PlayerInfo>> GetProblemPlayerListAsync(ProblemPlayerListMetaModel metaModel);
 
-        Task<IEnumerable<object>> GetVipPlayerListAsync();
+        Task<PagingApiResult<PlayerInfo>> GetVipPlayerListAsync(VipPlayerListMetaModel metaModel);
 
         Task<IEnumerable<object>> UpdateVipStatusAsync();
     }

@@ -1,10 +1,11 @@
-﻿using System;
-using System.Web.Http.Controllers;
-using System.Web.Http.Filters;
-using Fanex.Athena.DataAccess.Core.Configuration;
+﻿using Fanex.Athena.DataAccess.Core.Configuration;
+using Fanex.Athena.Extension.Helper;
 using Fanex.Athena.Service.Core.Users;
 using Fanex.Athena.Service.Core.Users.Interfaces;
 using Fanex.Athena.Service.StatelessCore.Utility;
+using System;
+using System.Web.Http.Controllers;
+using System.Web.Http.Filters;
 
 namespace Fanex.Athena.Api.Base.Attributes
 {
@@ -15,6 +16,8 @@ namespace Fanex.Athena.Api.Base.Attributes
 
         public bool BindUserId { get; set; }
 
+        public bool BindIp { get; set; }
+
         public bool BindBalanceUpAndMoveBet { get; set; }
 
         private static readonly ISessionStorage _sessionStorage = new SessionStorage();
@@ -23,6 +26,7 @@ namespace Fanex.Athena.Api.Base.Attributes
         {
             var userSession = _sessionStorage.UserAuthInfo;
             var actionArgument = actionContext.ActionArguments;
+
             if (BindAgent)
             {
                 AutoBindMetaModelService.MapAgentXml(actionArgument, userSession.CurrencyAgentList);
@@ -31,6 +35,13 @@ namespace Fanex.Athena.Api.Base.Attributes
             if (BindUserId)
             {
                 AutoBindMetaModelService.MapUserId(actionArgument, userSession.UserId);
+            }
+
+            if (BindIp)
+            {
+                AutoBindMetaModelService.MapIp(actionArgument,
+                    ClientHelper.GetClientIp(request: actionContext.Request)
+                    );
             }
 
             if (BindBalanceUpAndMoveBet)
