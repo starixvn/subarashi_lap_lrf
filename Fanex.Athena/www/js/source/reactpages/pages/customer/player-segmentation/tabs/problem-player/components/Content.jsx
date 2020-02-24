@@ -5,22 +5,22 @@ import { Pager } from '@9softstudio/react-grid';
 import GridCaption from '../../../components/GridCaption';
 import DataGrid from './DataGrid';
 import { ActionCreators } from '../actions';
+import GridHelper from "../../../lib/helpers/gridHelper";
 
 export const Content = props => {
-    const { pagingOption, playerCount } = props;
+    const { pagingOption, playerCount, selectedParams, searchPlayer, setPagingOption } = props;
 
-    if (pagingOption.TotalItem === null) {
+    if (!pagingOption.TotalItem) {
         return null;
     }
 
     const _handlePaging = (pageIndex, pageSize) => {
-        const { selectedParams, searchPlayer } = props;
         const newParams = {
             ...selectedParams,
             pageIndex,
             pageSize
         }
-        searchPlayer(newParams);
+        searchPlayer(newParams, GridHelper.callBackToUpdatePaging({ pagingOption, setPagingOption }));
     }
 
     return (
@@ -33,8 +33,8 @@ export const Content = props => {
 }
 
 function mapDispatchToProps(dispatch) {
-    const { searchPlayer } = ActionCreators;
-    return bindActionCreators({ searchPlayer }, dispatch);
+    const { searchPlayer, setPagingOption } = ActionCreators;
+    return bindActionCreators({ searchPlayer, setPagingOption }, dispatch);
 }
 function mapStateToProps(state) {
     const { pagingOption, selectedParams, playerList } = state;

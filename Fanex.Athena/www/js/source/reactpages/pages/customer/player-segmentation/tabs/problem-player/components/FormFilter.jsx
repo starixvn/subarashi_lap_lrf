@@ -6,11 +6,13 @@ import AutoComplete from '@jsroot/components/auto-complete'
 import CollapsiblePanel from '@jsroot/components/collapsible-panel'
 import CheckBox from '@jsroot/components/CheckBox'
 import { DateRange } from '@jsroot/components/date-range'
-import { ActionCreators } from '../actions'
 import LangHelper from '@jsroot/lib/langHelper'
-import Site from '@jsroot/lib/site'
 import AppData from '@jsroot/lib/AppData'
 import DataService from '@jsroot/lib/DataService.js'
+import { ActionCreators } from '../actions'
+import ParamHelper from '../lib/helpers/paramHelper';
+import DataSourceHelper from '../../../lib/helpers/dataSourceHelper';
+import GridHelper from "../../../lib/helpers/gridHelper";
 
 export class FormFilter extends PureComponent {
     constructor(props) {
@@ -19,31 +21,17 @@ export class FormFilter extends PureComponent {
     
     _submit = (event) => {
         event.preventDefault();
-        const params = this._getParams();
+        const params = ParamHelper.ConvertToFriendlyParams(this.props);
         if (!params) {
             return;
         }
         this.props.setSelectedParams(params);
-        this.props.searchPlayer(params);
-    }
-
-    _getParams() {
-        const { selectedParams, username, selectedCurrency, isGetAll, dateRange } = this.props;
-        return {
-            ...selectedParams, 
-            ...{
-                username,
-                currencyIdList: selectedCurrency,
-                isGetAll,
-                markDateRange: dateRange,
-            }
-        }
+        this.props.searchPlayer(params, GridHelper.callBackToUpdatePaging(this.props));
     }
 
     exportExcel = (event) => {
         event.preventDefault();
-        
-        const params = this._getParams();
+        const params = this.props.selectedParams;
         if (!params) {
             return;
         }
@@ -65,9 +53,9 @@ export class FormFilter extends PureComponent {
     _renderDateRange() {
         const { isGetAll, dateRange } = this.props;
         const dateConstraint = {
-            mindDate: '01/01/2019',
-            maxDate: '02/16/2020',
-            limitedMonthRange: 1
+            minDate: '01/01/2019',
+            maxDate: '02/16/2021',
+            limitedMonthRange: 3
         };
 
         return (
@@ -75,7 +63,7 @@ export class FormFilter extends PureComponent {
                 <DateRange
                     startDate={dateRange.fromDate} endDate={dateRange.toDate}
                     minDate={dateConstraint.minDate} maxDate={dateConstraint.maxDate}
-                    today={dateRange.toDate} limitedMonthRange={dateConstraint.limitedMonthRange}
+                    toDate={dateRange.toDate} limitedMonthRange={dateConstraint.limitedMonthRange}
                     onChange={this._onChangeDateRange}
                 />
             </div>
@@ -93,12 +81,13 @@ export class FormFilter extends PureComponent {
     }
 
     _renderCurrencySelectList() {
+        const { selectedCurrency } = this.props;
         const currencyList = [ { key: 1, value: 'USD', status: true }, { key: 2, value: 'VND',  status: true }];
-       
+        const dataSource = DataSourceHelper.CreateDataSourceFrom(currencyList, selectedCurrency);
         return currencyList && currencyList.length && (
                 <MultipleSelect id="ddlCurrency"
                 language={LangHelper.currentLanguage}
-                dataSource={currencyList}
+                dataSource={dataSource}
                 keyField={"key"}
                 valueField={"value"}
                 statusField={"status"}
@@ -158,25 +147,27 @@ export class FormFilter extends PureComponent {
 }
 
 function mapDispatchToProps(dispatch) {
-    const { setDateRange, changeIsGetAll, setUsername, setSelectedCurrency, setSelectedParams, searchPlayer } = ActionCreators;
+    const { setDateRange, changeIsGetAll, setUsername, setSelectedCurrency, setSelectedParams, searchPlayer, setPagingOption } = ActionCreators;
     return bindActionCreators(Object.assign({}, {
         setDateRange,
         changeIsGetAll,
         setUsername,
         setSelectedCurrency,
         setSelectedParams,
-        searchPlayer
+        searchPlayer,
+        setPagingOption
     }), dispatch);
 }
 
 function mapStateToProps(state) {
-    const { dateRange, isGetAll, selectedCurrency, selectedParams, username } = state;
+    const { dateRange, isGetAll, selectedCurrency, selectedParams, username, pagingOption } = state;
     return Object.assign({}, {
         dateRange,
         isGetAll,
         selectedCurrency,
         username,
         selectedParams,
+        pagingOption
     });
 };
 

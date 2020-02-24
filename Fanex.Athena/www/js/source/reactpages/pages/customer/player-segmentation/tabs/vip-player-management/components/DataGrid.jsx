@@ -28,16 +28,22 @@ export const DataGrid = (props) => {
             key: 'CheckAll', text: null, colWidth: 100, childComponent: <CheckBox id="IsCheckAll"
                 checked={isCheckAll}
                 onChange={(checked) => {
-                    playerList.forEach(_ => {
-                        !_.isMarkVoid && (_.isSelected = checked);
+                    const newPlayerList = playerList.map(_ => {
+                        return {
+                            ..._,
+                            ...{ isSelected: !_.isMarkVoid && checked }
+                        }
                     });
-                    setPlayerList([...playerList]);
+                    setPlayerList(newPlayerList);
                 }} />
         },
         ...dataGridHeaders
     ]
 
-    const _renderDataSection = dataList => dataList.map(dataItem => <PlayerRow {...{ dataItem }} />)
+    const _renderDataSection = dataList => dataList.map((dataItem, index) => {
+        const { isSelected, ...rest } = dataItem;
+        return <PlayerRow {...rest} index={index} /> 
+    } )
 
     const _handleSort = (sortBy, sortOrder) => {
         //const sortedPlayerList = GridInteractionService.sortPlayerList(playerList, sortBy, sortOrder);
@@ -67,7 +73,7 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
     const { playerList } = state;
-    const isCheckAll = !playerList.some(_ => !_.isSelected && !_.isMarkVoid);
+    const isCheckAll = playerList && !playerList.some(_ => !_.isSelected && !_.isMarkVoid);
     return Object.assign({}, { playerList, isCheckAll });
 };
 

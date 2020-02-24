@@ -21,7 +21,9 @@ export const DataGrid = (props) => {
         return <NoDataTitle />;
     }
 
-    const _renderDataSection = dataList => dataList.map(dataItem => <PlayerRow {...{ dataItem }} />)
+    const _renderDataSection = dataList => dataList.map((dataItem, index) => {
+       return <PlayerRow {...{ dataItem, index }} />
+    })
 
     const _handleSort = (sortBy, sortOrder) => {
         //const sortedPlayerList = GridInteractionService.sortPlayerList(playerList, sortBy, sortOrder);

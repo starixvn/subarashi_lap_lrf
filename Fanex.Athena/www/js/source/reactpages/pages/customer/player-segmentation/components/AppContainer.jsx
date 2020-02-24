@@ -1,14 +1,18 @@
 import React, { Suspense } from 'react';
-import { connect } from 'react-redux'; 
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import ActionCreators from '../actions';
 import AppLayout from '@jsroot/layouts/AppLayout';
 import { TabMenu } from '../components/tabMenu';
-import { tabMenuList } from '../lib/constants';
+import { tabMenuList, preLoadComponents } from '../lib/constants';
 
 export class AppContainer extends React.Component {
     constructor(props) {
         super(props)
+    }
+
+    componentDidMount() {
+        preLoadComponents(tabMenuList);
     }
 
     _onClickTabMenu = tabKey => {
@@ -24,10 +28,10 @@ export class AppContainer extends React.Component {
             <AppLayout>
                 <div id="player-segmentation">
                     <TabMenu selectedTabMenu={selectedTabKey} onClickTabMenu={this._onClickTabMenu} tabMenuList={tabMenuList} />
-                    
+
                     {Component && <Suspense fallback={<div>Loading...</div>}>
-                                <Component />
-                            </Suspense>}
+                        <Component />
+                    </Suspense>}
                 </div>
             </AppLayout>);
     }
@@ -39,7 +43,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    const {  setSelectedTab } = ActionCreators;
+    const { setSelectedTab } = ActionCreators;
     return bindActionCreators({ setSelectedTab }, dispatch);
 }
 

@@ -1,20 +1,12 @@
 import * as types from './types';
 import { toggleLoader } from '@jsroot/actions/loaderAction';
+import DataService from '@jsroot/lib/DataService';
 
-export const searchPlayer = (params) =>  (dispatch) => {
-        dispatch(toggleLoader(true));
-       setTimeout(() => {
-        new Promise(resolve => {
-            resolve([]);
-        }).then(_ => {
-            dispatch(toggleLoader(false));
-            dispatch(setPlayerList(_));
-        }).catch(error =>  {
-            dispatch(toggleLoader(false));
-            throw error;
-        })
-       }, 3000)
-        
+export const searchPlayer = (params, afterSuccess) => async  (dispatch) => {
+    const response = await DataService.postData('api/PlayerSegmentation/GetProblemPlayerList', params);
+    response.isSuccess && afterSuccess && afterSuccess(response);
+    dispatch(setPlayerList(response.data));
+    dispatch(toggleLoader(false));
 }
 
 

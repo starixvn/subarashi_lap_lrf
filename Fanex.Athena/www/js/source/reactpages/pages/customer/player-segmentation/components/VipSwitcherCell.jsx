@@ -7,12 +7,11 @@ import Switcher from '@jsroot/components/Switcher';
 import LangHelper from '@jsroot/lib/langHelper';
 import { generateDefaultConfirmOption, generateDefaultAlertOption, predefinedIcons } from '@jsroot/lib/sweetAlert';
 import {  warningIconMarkup } from '@jsroot/components/sweet-alert/icon';
-
 // import { getErrorMessageForUpdating } from '../../lib/helpers/utils';
 
 const VipSwitcherCell = (props) => {
-    const { dataItem, setPlayerList, updateVipTagging, setSweetAlertOption, playerList } = props;
-    const { systemId, isVipTagging, isMarkVoid  } = dataItem;
+    const { index, setPlayerList, updateVipTagging, setSweetAlertOption, playerList } = props;
+    const { systemId, isVipTagging } =  playerList[index];
 
     const _handleCloseAlert = () => {
         setSweetAlertOption(null);
@@ -28,8 +27,9 @@ const VipSwitcherCell = (props) => {
             updateVipTagging(param).then(response => {
                 const isSucess = response.success;
                 if (isSucess) {
-                    dataItem.isVipTagging = !dataItem.isVipTagging;
-                    setPlayerList([...playerList]);
+                    const newPlayerList = [...playerList];
+                    newPlayerList[index].isVipTagging = !newPlayerList[index].isVipTagging;
+                    setPlayerList([...newPlayerList]);
                 }
                 const resultMessage = isSucess ? LangHelper.getSingleResource('UpdateSuccess') : (Message || LangHelper.getSingleResource(ErrorMessage));
                 const displayIcon = isSucess ? predefinedIcons.success : predefinedIcons.error;
@@ -44,7 +44,6 @@ const VipSwitcherCell = (props) => {
         }
     }
 
-    
     const _handleChangeVipTagging = (event) => {
         event.preventDefault();
         const checked = event.target.checked;
@@ -53,12 +52,9 @@ const VipSwitcherCell = (props) => {
         setSweetAlertOption(confirmOption);
     }
 
-    const a = warningIconMarkup();
-
-
     return (
         <Cell className={"center-align"}>
-             <Switcher disabled={false} checked={isVipTagging} onChange={_handleChangeVipTagging} />
+             <Switcher checked={isVipTagging} onChange={_handleChangeVipTagging} />
         </Cell>
     )
 }

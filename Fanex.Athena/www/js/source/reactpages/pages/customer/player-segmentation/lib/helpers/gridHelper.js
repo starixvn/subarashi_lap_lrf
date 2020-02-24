@@ -19,4 +19,17 @@ export default class GridHelper {
         const expectedHeight = dropdownHeight + currentTop + 20;
         return expectedHeight > innerHeight ? currentTop - dropdownHeight : currentTop;
     }
+
+    static callBackToUpdatePaging = ({ pagingOption, setPagingOption }) => response => {
+        const { totalItems, pageIndex, pageSize } = response;
+        const newPagingOption = {
+            ...pagingOption,
+            ...{
+                PageIndex: pageIndex,           
+                PageSize: pageSize,
+                TotalItem: totalItems
+            }
+        }
+        setPagingOption(newPagingOption);
+    }
 }

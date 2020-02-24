@@ -10,6 +10,9 @@ import LangHelper from '@jsroot/lib/langHelper'
 import Site from '@jsroot/lib/site'
 import AppData from '@jsroot/lib/AppData'
 import DataService from '@jsroot/lib/DataService.js'
+import DataSourceHelper from '../../../lib/helpers/dataSourceHelper';
+import ParamHelper from "../lib/helpers/paramHelper";
+import GridHelper from "../../../lib/helpers/gridHelper";
 
 export class FormFilter extends PureComponent {
     constructor(props) {
@@ -18,29 +21,16 @@ export class FormFilter extends PureComponent {
 
     _submit = (event) => {
         event.preventDefault();
-        const params = this._getParams();
+        const params = ParamHelper.ConvertToFriendlyParams(this.props);
         if (!params) {
             return;
         }
         this.props.setSelectedParams(params);
-        this.props.searchPlayer(params);
-    }
-
-    _getParams() {
-        const { selectedParams, username, selectedCurrency, selectedVipOption } = this.props;
-        return {
-            ...selectedParams,
-            ...{
-                username,
-                currencyIdList: selectedCurrency,
-                selectedVipOption
-            }
-        }
+        this.props.searchPlayer(params, GridHelper.callBackToUpdatePaging(this.props));
     }
 
     exportExcel = (event) => {
         event.preventDefault();
-
         const params = this._getParams();
         if (!params) {
             return;
@@ -73,12 +63,14 @@ export class FormFilter extends PureComponent {
     }
 
     _renderCurrencySelectList() {
+        const { selectedCurrency } = this.props;
         const currencyList = [{ key: 1, value: 'USD', status: true }, { key: 2, value: 'VND', status: true }];
+        const dataSource = DataSourceHelper.CreateDataSourceFrom(currencyList, selectedCurrency);
 
         return currencyList && currencyList.length && (
             <MultipleSelect id="permissionCurrency"
                 language={LangHelper.currentLanguage}
-                dataSource={currencyList}
+                dataSource={dataSource}
                 keyField={"key"}
                 valueField={"value"}
                 statusField={"status"}
@@ -130,25 +122,27 @@ export class FormFilter extends PureComponent {
 }
 
 function mapDispatchToProps(dispatch) {
-    const { setDateRange, setSelectedVipOption, setUsername, setSelectedCurrency, setSelectedParams, searchPlayer } = ActionCreators;
+    const { setDateRange, setSelectedVipOption, setUsername, setSelectedCurrency, setSelectedParams, searchPlayer, setPagingOption } = ActionCreators;
     return bindActionCreators(Object.assign({}, {
         setSelectedVipOption,
         setDateRange,
         setUsername,
         setSelectedCurrency,
         setSelectedParams,
-        searchPlayer
+        searchPlayer,
+        setPagingOption
     }), dispatch);
 }
 
 function mapStateToProps(state) {
-    const { dateRange, selectedVipOption, selectedCurrency, selectedParams, username } = state;
+    const { dateRange, selectedVipOption, selectedCurrency, selectedParams, username, pagingOption } = state;
     return Object.assign({}, {
         selectedVipOption,
         dateRange,
         selectedCurrency,
         username,
         selectedParams,
+        pagingOption
     });
 };
 
