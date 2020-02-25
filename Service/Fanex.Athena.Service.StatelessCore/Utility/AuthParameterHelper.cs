@@ -96,6 +96,15 @@ namespace Fanex.Athena.Service.StatelessCore.Utility
             return builder.ToString();
         }
 
+        public static IEnumerable<int> ParseCurrencyIdList(string currencyIdList)
+        {
+            var selectedCurrencyIdList = currencyIdList.Trim()
+                .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(x => Convert.ToInt32(x));
+
+            return selectedCurrencyIdList;
+        }
+
         private static IEnumerable<OneAuthCurrency> GetSelectedCurrencyAgentList(IEnumerable<OneAuthCurrency> authCurrencyList, string currencyIdList)
         {
             if (string.IsNullOrEmpty(currencyIdList))
@@ -103,9 +112,7 @@ namespace Fanex.Athena.Service.StatelessCore.Utility
                 return authCurrencyList;
             }
 
-            var selectedCurrencyIdList = currencyIdList.Trim()
-                .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                .Select(x => Convert.ToInt32(x));
+            var selectedCurrencyIdList = ParseCurrencyIdList(currencyIdList);
 
             return authCurrencyList.Where(x => selectedCurrencyIdList.Contains(x.CurrencyId));
         }

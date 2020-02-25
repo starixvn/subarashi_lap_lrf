@@ -3,19 +3,21 @@ using System.Linq;
 
 namespace Fanex.Athena.Model.Core.DTO.Common
 {
-    public class PagingApiResult<T>
+    public class ApiPagingResult<T>
     {
-        public PagingApiResult()
+        public ApiPagingResult()
         {
             IsSuccess = true;
             Data = Enumerable.Empty<T>();
         }
 
-        public PagingApiResult(IEnumerable<T> data, int totalItems)
+        public ApiPagingResult(IEnumerable<T> data, int pageIndex, int pageSize, int totalItem)
         {
             IsSuccess = true;
             Data = data;
-            TotalItems = totalItems;
+            PageIndex = pageIndex;
+            PageSize = pageSize;
+            TotalItem = totalItem;
         }
 
         public bool IsSuccess { get; set; }
@@ -23,6 +25,6 @@ namespace Fanex.Athena.Model.Core.DTO.Common
         public IEnumerable<T> Data { get; set; }
         public int PageSize { get; set; }
         public int PageIndex { get; set; }
-        public int TotalItems { get; set; }
+        public int TotalItem { get; set; }
     }
 }
