@@ -8,10 +8,10 @@ namespace Fanex.Athena.DataAccess.Customer.Interfaces
 {
     public interface IPlayerSegmentationDataAccess
     {
-        Task<PagingApiResult<PlayerInfo>> GetProblemPlayerListAsync(ProblemPlayerListMetaModel metaModel);
+        Task<ApiPagingResult<PlayerInfo>> GetProblemPlayerListAsync(ProblemPlayerListMetaModel metaModel);
 
-        Task<PagingApiResult<PlayerInfo>> GetVipPlayerListAsync(VipPlayerListMetaModel metaModel);
+        Task<ApiPagingResult<PlayerInfo>> GetVipPlayerListAsync(VipPlayerListMetaModel metaModel);
 
-        Task<IEnumerable<object>> UpdateVipStatusAsync();
+        Task<IEnumerable<UpdateStatusPlayerResult>> UpdateVipStatusAsync(UpdateStatusPlayerMetaModel metaModel);
     }
 }

@@ -2,6 +2,8 @@
 {
     public class VipPlayerListMetaModel : BasePlayerListMetaModel
     {
-        public short VipOtption { get; set; }
+        public byte VipOption { get; set; }
+
+        public override bool IsValid => VipOption >= 0 && VipOption <= 2;
     }
 }

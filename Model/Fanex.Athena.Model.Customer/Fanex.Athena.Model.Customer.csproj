@@ -74,6 +74,7 @@
     <Compile Include="DTO\CustomerLog\LogInLog.cs" />
     <Compile Include="DTO\LogInfo.cs" />
     <Compile Include="DTO\PlayerSegmentation\PlayerInfo.cs" />
+    <Compile Include="DTO\PlayerSegmentation\UpdateStatusPlayerResult.cs" />
     <Compile Include="MetaModel\BaseCustomerComMetaModel.cs" />
     <Compile Include="MetaModel\CustomerListMetaModel.cs" />
     <Compile Include="MetaModel\CustomerLog\CustomerLogMetaModel.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="MetaModel\GroupCommMetaModel.cs" />
     <Compile Include="MetaModel\MoveToGroupComMetaModel.cs" />
     <Compile Include="MetaModel\PlayerSegmentation\BasePlayerListMetaModel.cs" />
+    <Compile Include="MetaModel\PlayerSegmentation\UpdateStatusPlayerMetaModel.cs" />
     <Compile Include="MetaModel\PlayerSegmentation\VipPlayerListMetaModel.cs" />
     <Compile Include="MetaModel\PlayerSegmentation\ProblemPlayerListMetaModel.cs" />
     <Compile Include="MetaModel\RemoveFromGroupComMetaModel.cs" />
@@ -94,10 +96,6 @@
     <Compile Include="ViewModel\CustomerLog\CustomerLogViewModel.cs" />
     <Compile Include="ViewModel\CustomerLog\LogInLogViewModel.cs" />
     <Compile Include="ViewModel\LogInfoViewModel.cs" />
-    <Compile Include="ViewModel\PlayerSegmentation\PlayerViewModel.cs" />
-    <Compile Include="ViewModel\PlayerSegmentation\PlayerListViewModel.cs" />
-    <Compile Include="ViewModel\PlayerSegmentation\ProblemPlayerViewModel.cs" />
-    <Compile Include="ViewModel\PlayerSegmentation\VipPlayerViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.Athena.Model.Core\Fanex.Athena.Model.Core.csproj">
@@ -114,7 +112,9 @@
     <None Include="Fanex.Athena.Model.Customer.ruleset" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ViewModel\PlayerSegmentation\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

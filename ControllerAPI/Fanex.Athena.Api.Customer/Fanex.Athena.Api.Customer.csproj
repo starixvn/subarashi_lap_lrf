@@ -31,8 +31,24 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=1.0.0.999, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SharpZipLib.1.0.0\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI, Version=2.4.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NPOI.2.4.1\lib\net45\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.4.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NPOI.2.4.1\lib\net45\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.4.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NPOI.2.4.1\lib\net45\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.4.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NPOI.2.4.1\lib\net45\NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Http">
       <HintPath>..\..\Module\Fanex.Athena.Module.PlayerAdmin.Api\bin\Debug\System.Web.Http.dll</HintPath>
     </Reference>
@@ -48,9 +64,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Controller\Fanex.Athena.Controllers.Base\Fanex.Athena.Controllers.Base.csproj">
+      <Project>{255E120A-83BF-4F72-9E31-6050D5704069}</Project>
+      <Name>Fanex.Athena.Controllers.Base</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\DataAccess\Fanex.Athena.DataAccess.Customer\Fanex.Athena.DataAccess.Customer.csproj">
       <Project>{C25DC4BC-2721-401B-8896-D210D70B392B}</Project>
       <Name>Fanex.Athena.DataAccess.Customer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Fanex.Athena.Extension\Fanex.Athena.Extension.csproj">
+      <Project>{71F95E53-36D0-4091-828D-ED14C9939C35}</Project>
+      <Name>Fanex.Athena.Extension</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Model\Fanex.Athena.Model.Auth\Fanex.Athena.Model.Auth.csproj">
       <Project>{794C0345-2DDD-4FFD-A605-BB96FBB37DE8}</Project>
@@ -68,10 +92,18 @@
       <Project>{FCFD7434-085B-4C93-848F-E1CBCEDCC5A0}</Project>
       <Name>Fanex.Athena.Service.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Service\Fanex.Athena.Service.StatelessCore\Fanex.Athena.Service.StatelessCore.csproj">
+      <Project>{DA9A50E3-C62D-4F12-96C2-3AC289D423FE}</Project>
+      <Name>Fanex.Athena.Service.StatelessCore</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Fanex.Athena.Api.Base\Fanex.Athena.Api.Base.csproj">
       <Project>{16D39D7B-00C0-4CC3-82F5-44BBDEE7AE51}</Project>
       <Name>Fanex.Athena.Api.Base</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
