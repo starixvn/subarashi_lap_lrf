@@ -64,7 +64,7 @@ namespace Fanex.Athena.DataAccess.Customer
                         var record = new UpdateStatusPlayerResult();
                         record.Code = Convert.ToInt16(reader["ErrCode"]);
                         record.NumberOfPlayer = Convert.ToInt16(reader["cnt"]);
-                        record.PlayerIds = reader["ErrMsg"] as string;
+                        record.SystemIds = reader["ErrMsg"] as string;
                         result.Add(record);
                     }
 

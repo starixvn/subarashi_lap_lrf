@@ -4,6 +4,6 @@
     {
         public int Code { get; set; }
         public int NumberOfPlayer { get; set; }
-        public string PlayerIds { get; set; } //systemIds
+        public string SystemIds { get; set; }
     }
 }
