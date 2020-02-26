@@ -3,18 +3,11 @@ import AppContainer from './components/AppContainer.jsx';
 import { Provider } from 'react-redux';
 import Store from '@jsroot/lib/store';
 import reducers from './reducers';
-const data = (() => {
-  let data = []
-  for (let i = 1; i < 1; i++) {
-    data.push({ externalId: i, systemId: i, markDate: '12/12/2018', isVipTagging: i % 3 === 0 ? true : false, isMarkVoid: i % 5 === 0 ? true : false });
-  }
-  return data;
-})();
-
-
 
 export default (props) => {
+  const { selectedTabKey } = props;
   const defaultState = {
+    selectedTabKey,
     isLoading: false,
     isGetAll: true,
     playerList: null,
@@ -29,10 +22,12 @@ export default (props) => {
       PageIndex: 1,
       PageSize: 500,
       PageList: [500, 1000, 1500, 2000],
+      TotalItem: null
     }
   }
-  const store = Store.createStore(reducers, defaultState);
 
+  const store = Store.createStore(reducers, defaultState);
+  
   return (
     <Provider store={store}>
       <AppContainer />

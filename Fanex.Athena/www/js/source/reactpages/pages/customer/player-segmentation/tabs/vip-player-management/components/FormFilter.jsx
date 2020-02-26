@@ -13,6 +13,7 @@ import DataService from '@jsroot/lib/DataService.js'
 import DataSourceHelper from '../../../lib/helpers/dataSourceHelper';
 import ParamHelper from "../lib/helpers/paramHelper";
 import GridHelper from "../../../lib/helpers/gridHelper";
+import { tabKeys } from '../../../lib/constants';
 
 export class FormFilter extends PureComponent {
     constructor(props) {
@@ -26,7 +27,7 @@ export class FormFilter extends PureComponent {
             return;
         }
         this.props.setSelectedParams(params);
-        this.props.searchPlayer(params, GridHelper.callBackToUpdatePaging(this.props));
+        this.props.searchPlayer(tabKeys.vipPlayerManagement, params, GridHelper.callBackToUpdatePaging(this.props));
     }
 
     exportExcel = (event) => {

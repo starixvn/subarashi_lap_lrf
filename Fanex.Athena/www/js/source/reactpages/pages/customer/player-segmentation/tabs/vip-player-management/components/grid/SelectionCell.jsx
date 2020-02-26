@@ -9,7 +9,7 @@ const SelectionCell = props => {
     const { rowIndex, playerList, setPlayerList } = props;
     const dataItem = playerList[rowIndex];
    return  (<Cell className="center-align">
-            {!dataItem.isMarkVoid && <CheckBox id={`selectPlayer_${dataItem.systemId}`}
+            {!dataItem.isMarkVoid && <CheckBox id={`selectPlayer_${dataItem.custId}`}
                 checked={dataItem.isSelected === true}
                 onChange={(checked) => {
                     const newDataItem = {

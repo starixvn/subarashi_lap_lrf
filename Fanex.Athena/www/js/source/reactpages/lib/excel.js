@@ -20,6 +20,19 @@ export default class Excel {
         }
     }
 
+    static read(file, sheetIndex, callBack) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            const data = e.target.result;
+            const workbook = _XLSX.read(data, { type: 'binary' });
+            const sheetName = workbook.SheetNames[sheetIndex];
+            const worksheet = workbook.Sheets[sheetName];
+            const json = _XLSX.utils.sheet_to_json(worksheet);
+            callBack && callBack(json);
+        };
+        reader.readAsBinaryString(file);
+    }
+
     static export (worksheet, fileName) {
         const option = { bookType: EXCEL_TYPE, bookSST: false, type: 'binary' };
         const workbook = { SheetNames: [fileName], Sheets: {}, Props: {} };

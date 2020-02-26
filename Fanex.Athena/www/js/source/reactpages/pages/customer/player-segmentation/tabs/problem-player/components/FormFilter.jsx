@@ -12,7 +12,7 @@ import DataService from '@jsroot/lib/DataService.js'
 import { ActionCreators } from '../actions'
 import ParamHelper from '../lib/helpers/paramHelper';
 import DataSourceHelper from '../../../lib/helpers/dataSourceHelper';
-import GridHelper from "../../../lib/helpers/gridHelper";
+import GridHelper from '../../../lib/helpers/gridHelper';
 
 export class FormFilter extends PureComponent {
     constructor(props) {
@@ -21,12 +21,13 @@ export class FormFilter extends PureComponent {
     
     _submit = (event) => {
         event.preventDefault();
+        const { setSelectedParams, searchPlayer, selectedTabKey } = this.props;
         const params = ParamHelper.ConvertToFriendlyParams(this.props);
         if (!params) {
             return;
         }
-        this.props.setSelectedParams(params);
-        this.props.searchPlayer(params, GridHelper.callBackToUpdatePaging(this.props));
+        setSelectedParams(params);
+        searchPlayer(selectedTabKey, params, GridHelper.callBackToUpdatePaging(this.props));
     }
 
     exportExcel = (event) => {
@@ -160,14 +161,15 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-    const { dateRange, isGetAll, selectedCurrency, selectedParams, username, pagingOption } = state;
+    const { dateRange, isGetAll, selectedCurrency, selectedParams, username, pagingOption, selectedTabKey } = state;
     return Object.assign({}, {
         dateRange,
         isGetAll,
         selectedCurrency,
         username,
         selectedParams,
-        pagingOption
+        pagingOption,
+        selectedTabKey
     });
 };
 

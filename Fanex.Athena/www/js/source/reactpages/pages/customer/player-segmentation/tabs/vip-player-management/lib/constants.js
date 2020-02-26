@@ -7,5 +7,7 @@ export const dataGridHeaders = [
 ]
 export const Url = {
     dowloadVipPlayerList: 'PlayerSegmentation/DowloadVipListTemplate',
-    uploadVipList:'PlayerSegmentation/UploadVipList'
+    uploadVipList:'Api/PlayerSegmentation/UploadVipList'
 }
+
+export const ExcelReaderColumn = 'systemid';

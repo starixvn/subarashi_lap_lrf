@@ -1,7 +1,7 @@
 import  React from 'react';
 import LangHelper from '@jsroot/lib/langHelper';
 
-const tabKeys = {
+export const tabKeys = {
     problemPlayer: 'problemPlayer',
     vipPlayerManagement: 'vipPlayerManagement'
 }
@@ -18,4 +18,13 @@ export const tabMenuList = [
 
 export const preLoadComponents = (lazyComponents) => {
     lazyComponents && setTimeout(() => lazyComponents.forEach(_ => _.preLoad && _.preLoad()), 0)
+}
+
+export const errorResponse = {
+    data: null,
+    isSuccess: false
+}
+
+export const successResponse = {
+    isSuccess: true
 }

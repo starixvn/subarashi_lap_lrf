@@ -15,7 +15,7 @@ export const DataGrid = (props) => {
     const MAX_WIDTH = Math.min(document.body.clientWidth, MAX_WIDTH_PAGE);
     const { isCheckAll, playerList, setPlayerList } = props;
 
-    if (!playerList) {
+    if (playerList == null) {
         return null;
     }
 

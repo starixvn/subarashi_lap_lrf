@@ -8,9 +8,9 @@ import { ActionCreators } from '../actions';
 import GridHelper from "../../../lib/helpers/gridHelper";
 
 export const Content = props => {
-    const { pagingOption, playerCount, selectedParams, searchPlayer, setPagingOption } = props;
+    const { pagingOption, playerCount, selectedParams, searchPlayer, setPagingOption, selectedTabKey } = props;
 
-    if (!pagingOption.TotalItem) {
+    if (pagingOption.TotalItem == null) {
         return null;
     }
 
@@ -20,7 +20,7 @@ export const Content = props => {
             pageIndex,
             pageSize
         }
-        searchPlayer(newParams, GridHelper.callBackToUpdatePaging({ pagingOption, setPagingOption }));
+        searchPlayer(selectedTabKey, newParams, GridHelper.callBackToUpdatePaging({ pagingOption, setPagingOption }));
     }
 
     return (
@@ -37,9 +37,9 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators({ searchPlayer, setPagingOption }, dispatch);
 }
 function mapStateToProps(state) {
-    const { pagingOption, selectedParams, playerList } = state;
+    const { pagingOption, selectedParams, playerList,selectedTabKey } = state;
     const playerCount = pagingOption.TotalItem || (playerList && playerList.length) || 0;
-    return Object.assign({}, { pagingOption, selectedParams, playerCount });
+    return Object.assign({}, { pagingOption, selectedParams, playerCount, selectedTabKey });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Content);

@@ -6,13 +6,14 @@ import GridCaption from '../../../components/GridCaption';
 import DataGrid from './DataGrid';
 import { ActionCreators } from '../actions';
 import GridHelper from "../../../lib/helpers/gridHelper";
+import { tabKeys } from '../../../lib/constants';
 
 export const Content = props => {
     const { pagingOption, playerCount } = props;
-    if (!pagingOption.TotalItem) {
+    if (pagingOption.TotalItem == null) {
         return null;
     }
-
+    
     const _handlePaging = (pageIndex, pageSize) => {
         const { selectedParams, searchPlayer, pagingOption, setPagingOption } = props;
         const newParams = {
@@ -22,9 +23,8 @@ export const Content = props => {
                 pageSize
             }
         }
-        searchPlayer(newParams, GridHelper.callBackToUpdatePaging({ pagingOption, setPagingOption }));
+        searchPlayer(tabKeys.vipPlayerManagement, newParams, GridHelper.callBackToUpdatePaging({ pagingOption, setPagingOption }));
     }
-
 
     return (
         <div className="result-content">

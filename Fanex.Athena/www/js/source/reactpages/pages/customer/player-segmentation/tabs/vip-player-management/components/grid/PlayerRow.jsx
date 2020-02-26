@@ -4,9 +4,9 @@ import SelectionCell from './SelectionCell';
 import VipStatusCell from './VipStatusCell';
 
 export const PlayerRow = (props) => {
-    const { externalId, systemId, index, isMarkVoid } = props;
-    return (<Row key={`player_row_${systemId}`}>
-        {<SelectionCell rowIndex={index} systemId={systemId}/>}
+    const { externalId, systemId, index, isMarkVoid, custId } = props;
+    return (<Row key={`player_row_${custId}`}>
+        {<SelectionCell rowIndex={index}/>}
         <Cell className="center-align">{externalId}</Cell>
         <Cell className="center-align">{systemId}</Cell>
         {<VipStatusCell {...{ index, isMarkVoid }}/> }

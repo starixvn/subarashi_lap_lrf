@@ -30,7 +30,7 @@ export class AppContainer extends React.Component {
                     <TabMenu selectedTabMenu={selectedTabKey} onClickTabMenu={this._onClickTabMenu} tabMenuList={tabMenuList} />
 
                     {Component && <Suspense fallback={<div>Loading...</div>}>
-                        <Component />
+                        <Component selectedTabKey={selectedTabKey} />
                     </Suspense>}
                 </div>
             </AppLayout>);

@@ -21,13 +21,13 @@ export default class GridHelper {
     }
 
     static callBackToUpdatePaging = ({ pagingOption, setPagingOption }) => response => {
-        const { totalItems, pageIndex, pageSize } = response;
+        const { totalItem, pageIndex, pageSize } = response;
         const newPagingOption = {
             ...pagingOption,
             ...{
                 PageIndex: pageIndex,           
                 PageSize: pageSize,
-                TotalItem: totalItems
+                TotalItem: totalItem
             }
         }
         setPagingOption(newPagingOption);

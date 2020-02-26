@@ -5,13 +5,12 @@ import ActionCreators from '../actions';
 import { Cell } from '@9softstudio/react-grid';
 import Switcher from '@jsroot/components/Switcher';
 import LangHelper from '@jsroot/lib/langHelper';
-import { generateDefaultConfirmOption, generateDefaultAlertOption, predefinedIcons } from '@jsroot/lib/sweetAlert';
-import {  warningIconMarkup } from '@jsroot/components/sweet-alert/icon';
-// import { getErrorMessageForUpdating } from '../../lib/helpers/utils';
+import { generateDefaultConfirmOption } from '@jsroot/lib/sweetAlert';
+import { UpdateVipStatusAlertOption } from '../lib/helpers/sweetAlertHelper'
 
 const VipSwitcherCell = (props) => {
-    const { index, setPlayerList, updateVipTagging, setSweetAlertOption, playerList } = props;
-    const { systemId, isVipTagging } =  playerList[index];
+    const { index, updateVipStatus, setSweetAlertOption, playerList, selectedParams, selectedTabKey } = props;
+    const { systemId, isVip } = playerList[index];
 
     const _handleCloseAlert = () => {
         setSweetAlertOption(null);
@@ -21,52 +20,43 @@ const VipSwitcherCell = (props) => {
         onClick: _handleCloseAlert
     }
 
-    const _confirmProps = {
-        onClick: () => {
-            const param = { systemId };
-            updateVipTagging(param).then(response => {
-                const isSucess = response.success;
-                if (isSucess) {
-                    const newPlayerList = [...playerList];
-                    newPlayerList[index].isVipTagging = !newPlayerList[index].isVipTagging;
-                    setPlayerList([...newPlayerList]);
-                }
-                const resultMessage = isSucess ? LangHelper.getSingleResource('UpdateSuccess') : (Message || LangHelper.getSingleResource(ErrorMessage));
-                const displayIcon = isSucess ? predefinedIcons.success : predefinedIcons.error;
-                const alertOpt = generateDefaultAlertOption(resultMessage, _handleCloseAlert, null, displayIcon);
-                setSweetAlertOption(alertOpt);
-            })
-                .catch(error => {
-                    const message = 'error';//getErrorMessageForUpdating(error);
-                    const alertOpt = generateDefaultAlertOption(message, _handleCloseAlert, null, predefinedIcons.error);
-                    setSweetAlertOption(alertOpt);
-                })
-        }
+    const _buildAlertOptionUpdateVipStatus = (params, isUpdateVip) => {
+        const confirmMessage = isUpdateVip ? LangHelper.getSingleResource('The bet limit will be reapplied if the selected player(s) is marked VIP. Are your sure you want to activate VIP ?') : 
+                    LangHelper.getSingleResource('Are you sure you want to deactivate VIP  for the player(s) ?');
+        const handlerUpdateVipStatusSuccess = UpdateVipStatusAlertOption.createHandlerAfterUpdateVipStatusSuccess(props);
+        const handlerAfterUpdateVipStatus = UpdateVipStatusAlertOption.createHandlerAfterUpdateVipStatus({ setSweetAlertOption, handlerUpdateVipStatusSuccess, isUpdateVip });
+        const confirmProps = UpdateVipStatusAlertOption.createUpdateVipStatusConfirmProps({ params, updateVipStatus, handlerAfterUpdateVipStatus });
+        const confirmOptions = generateDefaultConfirmOption(confirmMessage, _handleCloseAlert, confirmProps, _cancelProps);
+    
+        return confirmOptions;
     }
 
-    const _handleChangeVipTagging = (event) => {
+    const _handleChangeVipStatus = (event) => {
         event.preventDefault();
         const checked = event.target.checked;
-        const confirmMessage = LangHelper.getSingleResource(checked ? 'AlertTurnOnTaggingVip' : 'AlertTurnOfTaggingVip');
-        const confirmOption = generateDefaultConfirmOption(confirmMessage, _handleCloseAlert, _confirmProps, _cancelProps);
-        setSweetAlertOption(confirmOption);
+        const params = {
+            systemIds: systemId,
+            isVip: !isVip
+        }
+        const alertOption = _buildAlertOptionUpdateVipStatus(params, checked);
+        setSweetAlertOption(alertOption);
     }
 
     return (
         <Cell className={"center-align"}>
-             <Switcher checked={isVipTagging} onChange={_handleChangeVipTagging} />
+            <Switcher checked={isVip} onChange={_handleChangeVipStatus} />
         </Cell>
     )
 }
 
 function mapDispatchToProps(dispatch) {
-    const { setPlayerList, updateVipTagging, setSweetAlertOption } = ActionCreators;
-    return bindActionCreators({ setPlayerList, updateVipTagging, setSweetAlertOption }, dispatch);
+    const { setPlayerList, searchPlayer, updateVipStatus, setSweetAlertOption, setPagingOption } = ActionCreators;
+    return bindActionCreators({ setPlayerList, updateVipStatus, setSweetAlertOption, searchPlayer, setPagingOption }, dispatch);
 }
 
 function mapStateToProps(state) {
-    const { playerList } = state;
-    return Object.assign({}, { playerList });
+    const { playerList, pagingOption, selectedTabKey, selectedParams } = state;
+    return Object.assign({}, { playerList, pagingOption, selectedTabKey, selectedParams });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(React.memo(VipSwitcherCell));
