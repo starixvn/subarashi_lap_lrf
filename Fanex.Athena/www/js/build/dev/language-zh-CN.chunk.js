@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 12/30/2019 10:57:13 AM
+﻿// Generated at: 2/26/2020 4:51:49 PM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -268,7 +268,7 @@ DD:"和和",
 Dec:"十二月",
 December:"十二月",
 DecimalOdds:"欧洲盘赔率",
-DeepLink:"数据API",
+DeepLink:"深度链结",
 DefaultGroup:"默认组",
 DefaultGroupMsg:"这是默认组。是否继续?",
 Delete:"删除",
@@ -502,7 +502,7 @@ NoOfCustmer:"会员数",
 NoProductFound:"No product found",
 Normal:"正常",
 NotAllowBA:"此Licensee不允许投注总计",
-Note:"记录",
+Note:"注意",
 Notification:"通知",
 NotificationDateRangeLimitNote:"最多可以检索六个月前的资料",
 Nov:"十一月",
