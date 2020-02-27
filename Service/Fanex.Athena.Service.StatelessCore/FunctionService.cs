@@ -136,18 +136,30 @@ namespace Fanex.Athena.Service.StatelessCore
         /// <returns>The master function.</returns>
         public IEnumerable<Function> GetMasterFunctions(IEnumerable<Function> functionList)
         {
-            return MasterFunctions.Where(
+            MasterFunctions.Where(
                     f => functionList.Any(l => l.ParentId == f.FunctionId || l.FunctionId == f.FunctionId))
                                 .OrderBy(f => f.DisplayOrder)
                                 .ToList();
+
+            return RemoveUnusedMasterFunction(MasterFunctions);
+        }
+
+        private IEnumerable<Function> RemoveUnusedMasterFunction(IEnumerable<Function> functionList)
+        {
+            const int totalBetFunctionID = 1;
+            const int forecastFunctionID = 2;
+            IList<int> unusedFunction = new List<int>() { totalBetFunctionID, forecastFunctionID };
+
+            return MasterFunctions.Where(f => unusedFunction.All(unf => unf != f.FunctionId)).ToList();
         }
 
         public IDictionary<int, IEnumerable<Function>> GetSubMenus(IEnumerable<Function> functionList)
         {
+            const int activeCusSumFunctionID = 64;
             var detailFunctions = new Dictionary<int, IEnumerable<Function>>();
             foreach (var function in MasterFunctions)
             {
-                var subFuntions = functionList.Where(f => f.ParentId == function.FunctionId && f.IsMenu)
+                var subFuntions = functionList.Where(f => f.ParentId == function.FunctionId && f.IsMenu && f.FunctionId != activeCusSumFunctionID)
                                               .OrderBy(f => f.DisplayOrder)
                                               .ToList();
                 if (subFuntions.Count > 0)
