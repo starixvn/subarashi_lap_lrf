@@ -13,7 +13,7 @@ const MAX_WIDTH_PAGE = 1920;
 
 export const DataGrid = (props) => {
     const MAX_WIDTH = Math.min(document.body.clientWidth, MAX_WIDTH_PAGE);
-    const { isCheckAll, playerList, setPlayerList } = props;
+    const { isCheckAll, playerList, pagingOption, selectedParams, selectedTabKey, setPlayerList, setPagingOption, searchPlayer } = props;
 
     if (playerList == null) {
         return null;
@@ -43,12 +43,19 @@ export const DataGrid = (props) => {
     const _renderDataSection = dataList => dataList.map((dataItem, index) => {
         const { isSelected, ...rest } = dataItem;
         return <PlayerRow {...rest} index={index} /> 
-    } )
+    })
 
-    const _handleSort = (sortBy, sortOrder) => {
-        //const sortedPlayerList = GridInteractionService.sortPlayerList(playerList, sortBy, sortOrder);
-        const sortedPlayerList = playerList
-        setPlayerList(sortedPlayerList);
+    const _handleSort = (orderCol, sortType) => {
+        const sortInfo = GridHelper.getSortInfo(orderCol, sortType);
+        const _pagingOption = {
+            ...pagingOption,
+            ...sortInfo
+        }
+        const params = {
+            ...selectedParams,
+            ..._pagingOption
+        }
+        searchPlayer(selectedTabKey, params, GridHelper.callBackToUpdatePaging({ pagingOption, setPagingOption }));
     }
 
     return (
@@ -67,14 +74,14 @@ export const DataGrid = (props) => {
 }
 
 function mapDispatchToProps(dispatch) {
-    const { setPlayerList } = ActionCreators;
-    return bindActionCreators({ setPlayerList }, dispatch);
+    const { searchPlayer, setPlayerList, setPagingOption } = ActionCreators;
+    return bindActionCreators({ setPlayerList, setPagingOption, searchPlayer }, dispatch);
 }
 
 function mapStateToProps(state) {
-    const { playerList } = state;
+    const { playerList, selectedParams, selectedTabKey, pagingOption } = state;
     const isCheckAll = playerList && !playerList.some(_ => !_.isSelected && !_.isMarkVoid);
-    return Object.assign({}, { playerList, isCheckAll });
+    return Object.assign({}, { playerList, isCheckAll, pagingOption, selectedParams, selectedTabKey });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(React.memo(DataGrid));

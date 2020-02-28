@@ -7,6 +7,7 @@ import CollapsiblePanel from '@jsroot/components/collapsible-panel'
 import CheckBox from '@jsroot/components/CheckBox'
 import { DateRange } from '@jsroot/components/date-range'
 import LangHelper from '@jsroot/lib/langHelper'
+import Site from '@jsroot/lib/site';
 import AppData from '@jsroot/lib/AppData'
 import DataService from '@jsroot/lib/DataService.js'
 import { ActionCreators } from '../actions'
@@ -36,18 +37,13 @@ export class FormFilter extends PureComponent {
         if (!params) {
             return;
         }
-
-        params.IsExport = true;
-        this.props.toggleLoader(true);
-        DataService.getFile(ApiUrl.RUNNING_DATA_URL, params).then((response) => {
+        DataService.getFile('Api/PlayerSegmentation/ExportProblemPlayerList', params).then((response) => {
             const NoContentStatusCode = 204;
-
             if(response.status === NoContentStatusCode){
                 alert(LangHelper.getSingleResource("NoInfo"));
-            }else {
-                Site.downloadFile(response.data, 'BettingTicketsCenter_Running.xls');
+            } else {
+                Site.downloadFile(response.data, 'ProblemPlayerList.xls');
             }
-            this.props.toggleLoader(false);
         });
     }
     

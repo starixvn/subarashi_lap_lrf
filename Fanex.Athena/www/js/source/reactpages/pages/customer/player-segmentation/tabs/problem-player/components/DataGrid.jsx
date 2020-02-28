@@ -12,7 +12,7 @@ const MAX_WIDTH_PAGE = 1920;
 
 export const DataGrid = (props) => {
     const MAX_WIDTH = Math.min(document.body.clientWidth, MAX_WIDTH_PAGE);
-    const { playerList, setPlayerList } = props;
+    const { playerList, pagingOption, selectedParams, selectedTabKey, setPagingOption, searchPlayer } = props;
 
     if (playerList == null) {
         return null;
@@ -22,14 +22,22 @@ export const DataGrid = (props) => {
     }
 
     const _renderDataSection = dataList => dataList.map((dataItem, index) => {
-       return <PlayerRow {...{ dataItem, index }} />
+        return <PlayerRow {...{ dataItem, index }} />
     })
 
-    const _handleSort = (sortBy, sortOrder) => {
-        //const sortedPlayerList = GridInteractionService.sortPlayerList(playerList, sortBy, sortOrder);
-        const sortedPlayerList = playerList
-        setPlayerList(sortedPlayerList);
+    const _handleSort = (orderCol, sortType) => {
+        const sortInfo = GridHelper.getSortInfo(orderCol, sortType);
+        const _pagingOption = {
+            ...pagingOption,
+            ...sortInfo
+        }
+        const params = {
+            ...selectedParams,
+            ..._pagingOption
+        }
+        searchPlayer(selectedTabKey, params, GridHelper.callBackToUpdatePaging({ pagingOption, setPagingOption }));
     }
+
 
     return (
         <React.Fragment>
@@ -47,13 +55,13 @@ export const DataGrid = (props) => {
 }
 
 function mapDispatchToProps(dispatch) {
-    const { setPlayerList } = ActionCreators;
-    return bindActionCreators({ setPlayerList }, dispatch);
+    const { searchPlayer, setPagingOption } = ActionCreators;
+    return bindActionCreators({ setPagingOption, searchPlayer }, dispatch);
 }
 
 function mapStateToProps(state) {
-    const { playerList } = state;
-    return Object.assign({}, { playerList });
+    const { playerList, selectedParams, selectedTabKey, pagingOption } = state;
+    return Object.assign({}, { playerList, pagingOption, selectedParams, selectedTabKey });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(React.memo(DataGrid));

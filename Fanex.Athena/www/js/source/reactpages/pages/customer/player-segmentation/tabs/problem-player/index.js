@@ -14,10 +14,7 @@ export default (props) => {
     selectedCurrency: "1,2",
     dateRange: { fromDate: '02/23/2020', toDate: '02/23/2020' },
     username: null,
-    selectedParams: {
-      pageSize: 500,
-      pageIndex: 1,
-    },
+    selectedParams: null,
     pagingOption: {
       PageIndex: 1,
       PageSize: 500,

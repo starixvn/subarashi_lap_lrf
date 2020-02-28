@@ -5,7 +5,7 @@ import { useDropzone } from 'react-dropzone';
 const MbToByte = 1000 * 1000 * 1000;
 
 const DropzoneUpload = (props) => {
-    const { onSubmit, onClose, multiple, accept, children } = props;
+    const { onSubmit, onClose, multiple, accept, children, isShowInnerZone } = props;
     const maxSize = props.maxSize * MbToByte;
 
     const [uploadedFiles, setUploadedFiles] = useState([]);
@@ -20,7 +20,7 @@ const DropzoneUpload = (props) => {
         if (_isInvalidExtension(rejectedFile)) {
             errorMsg = `${LangHelper.getSingleResource("Your file's extension is incorrect, please select an file")} (${accept})`;
         } else if (_isInValidSize(rejectedFile)) {
-            errorMsg =`${LangHelper.getSingleResource("The uploaded file should be less than")} ${props.maxSize}MB`;
+            errorMsg = `${LangHelper.getSingleResource("The uploaded file should be less than")} ${props.maxSize}MB`;
         }
         alert(errorMsg);
     })
@@ -58,25 +58,28 @@ const DropzoneUpload = (props) => {
     return (
         <div className="dropzone">
             <a className="dropzone-close" onClick={() => onClose && onClose()}><i className="icon-close"></i></a>
-            {
-                _isExistFiles ? _renderAcceptedFiles() :
+            { isShowInnerZone &&
+                (_isExistFiles ? _renderAcceptedFiles() :
                     <div className="dropzone-row">
                         <div {...getRootProps({ className: 'inner-dropzone' })}>
                             <input {...getInputProps()} />
                             <p>{LangHelper.getSingleResource('ClickOrDropHere')}</p>
                         </div>
-                    </div>
+                    </div>)
             }
-            <div className="dropzone-row">
-                <button className="btn" disabled={!_isExistFiles} onClick={() => onSubmit && onSubmit(uploadedFiles)}>{LangHelper.getSingleResource('Submit')}</button>
-            </div>
+            {
+                isShowInnerZone && <div className="dropzone-row">
+                    <button className="btn" disabled={!_isExistFiles} onClick={() => onSubmit && onSubmit(uploadedFiles)}>{LangHelper.getSingleResource('Submit')}</button>
+                </div>
+            }
             {children}
         </div>
     );
 }
 
 DropzoneUpload.defaultProps = {
-    maxSize: 1
+    maxSize: 1,
+    isShowInnerZone: true
 }
 
 export default React.memo(DropzoneUpload);

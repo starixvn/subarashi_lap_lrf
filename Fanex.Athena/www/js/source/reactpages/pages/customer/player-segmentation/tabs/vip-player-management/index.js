@@ -14,14 +14,13 @@ export default (props) => {
     username: null,
     selectedVipOption: 0,
     selectedCurrency: '1,2',
-    selectedParams: {
-      pageSize: 500,
-      pageIndex: 1,
-    },
+    selectedParams: null,
     pagingOption: {
       PageIndex: 1,
       PageSize: 500,
       PageList: [500, 1000, 1500, 2000],
+      orderCol: 0,
+      sortType: 0,
       TotalItem: null
     }
   }

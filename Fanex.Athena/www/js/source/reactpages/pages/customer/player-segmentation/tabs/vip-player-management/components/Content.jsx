@@ -6,24 +6,25 @@ import GridCaption from '../../../components/GridCaption';
 import DataGrid from './DataGrid';
 import { ActionCreators } from '../actions';
 import GridHelper from "../../../lib/helpers/gridHelper";
-import { tabKeys } from '../../../lib/constants';
 
 export const Content = props => {
-    const { pagingOption, playerCount } = props;
+    const { playerCount, selectedParams, selectedTabKey, searchPlayer, pagingOption, setPagingOption } = props;
+    
     if (pagingOption.TotalItem == null) {
         return null;
     }
     
     const _handlePaging = (pageIndex, pageSize) => {
-        const { selectedParams, searchPlayer, pagingOption, setPagingOption } = props;
-        const newParams = {
+        const sortInfo = GridHelper.getSortInfoFromPagingOption(pagingOption);
+        const params = {
             ...selectedParams, 
+            ...sortInfo,
             ...{
                 pageIndex,
                 pageSize
-            }
+            },
         }
-        searchPlayer(tabKeys.vipPlayerManagement, newParams, GridHelper.callBackToUpdatePaging({ pagingOption, setPagingOption }));
+        searchPlayer(selectedTabKey, params, GridHelper.callBackToUpdatePaging({ pagingOption, setPagingOption }));
     }
 
     return (
@@ -40,9 +41,9 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators({ searchPlayer, setPagingOption }, dispatch);
 }
 function mapStateToProps(state) {
-    const { pagingOption, selectedParams, playerList } = state;
+    const { pagingOption, selectedParams, playerList, selectedTabKey } = state;
     const playerCount = pagingOption.TotalItem || (playerList && playerList.length) || 0;
-    return Object.assign({}, { pagingOption, selectedParams, playerCount });
+    return Object.assign({}, { pagingOption, selectedParams, selectedTabKey, playerCount });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Content);

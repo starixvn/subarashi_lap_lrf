@@ -9,7 +9,7 @@ import { generateDefaultConfirmOption } from '@jsroot/lib/sweetAlert';
 import { UpdateVipStatusAlertOption } from '../lib/helpers/sweetAlertHelper'
 
 const VipSwitcherCell = (props) => {
-    const { index, updateVipStatus, setSweetAlertOption, playerList, selectedParams, selectedTabKey } = props;
+    const { index, updateVipStatus, setSweetAlertOption, playerList } = props;
     const { systemId, isVip } = playerList[index];
 
     const _handleCloseAlert = () => {

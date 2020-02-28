@@ -1,4 +1,4 @@
-import  React from 'react';
+import React from 'react';
 import LangHelper from '@jsroot/lib/langHelper';
 
 export const tabKeys = {
@@ -18,6 +18,18 @@ export const tabMenuList = [
 
 export const preLoadComponents = (lazyComponents) => {
     lazyComponents && setTimeout(() => lazyComponents.forEach(_ => _.preLoad && _.preLoad()), 0)
+}
+
+export const SortMapper = {
+    sortCol: {
+        'systemId': 1,
+        'externalId': 2,
+        'markDate': 3
+    },
+    sortType: {
+        'asc': 1,
+        'desc': 2
+    }
 }
 
 export const errorResponse = {

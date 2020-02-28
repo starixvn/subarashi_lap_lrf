@@ -13,6 +13,7 @@ import { UpdateVipStatusAlertOption } from '../../../lib/helpers/sweetAlertHelpe
 export const FormAction = props => {
     const { isActiveTaggingAction, playerList, updateVipStatus, setSweetAlertOption } = props;
     const [displayUploadDropzone, setDisplayUploadDropzone] = useState(false);
+    const [resultMsgSubmitVipListFile, setResultMsgSubmitVipListFile] = useState(null);
 
     const _handleCloseAlert = () => {
         setSweetAlertOption(null);
@@ -32,34 +33,44 @@ export const FormAction = props => {
         return params;
     }
 
-    const _buildAlertOptionUpdateVipStatus = (params, isUpdateVip) => {
-        const confirmMessage = isUpdateVip ? LangHelper.getSingleResource('The bet limit will be reapplied if the selected player(s) is marked VIP. Are your sure you want to activate VIP ?') : 
-                    LangHelper.getSingleResource('Are you sure you want to deactivate VIP  for the player(s) ?');
-        const handlerUpdateVipStatusSuccess = UpdateVipStatusAlertOption.createHandlerAfterUpdateVipStatusSuccess(props);
-        const handlerAfterUpdateVipStatus = UpdateVipStatusAlertOption.createHandlerAfterUpdateVipStatus({ setSweetAlertOption, handlerUpdateVipStatusSuccess, isUpdateVip });
+    const _buildAlertOptionUpdateVipStatus = (params, isUpdateVip, noAlertResult, handlerUpdateVipStatusSuccess) => {
+        const confirmMessage = isUpdateVip ? LangHelper.getSingleResource('The bet limit will be reapplied if the selected player(s) is marked VIP. Are your sure you want to activate VIP ?') :
+            LangHelper.getSingleResource('Are you sure you want to deactivate VIP  for the player(s) ?');
+        handlerUpdateVipStatusSuccess = handlerUpdateVipStatusSuccess || UpdateVipStatusAlertOption.createHandlerAfterUpdateVipStatusSuccess(props);
+        const handlerAfterUpdateVipStatus = UpdateVipStatusAlertOption.createHandlerAfterUpdateVipStatus({ setSweetAlertOption, handlerUpdateVipStatusSuccess, isUpdateVip, noAlertResult });
         const confirmProps = UpdateVipStatusAlertOption.createUpdateVipStatusConfirmProps({ params, updateVipStatus, handlerAfterUpdateVipStatus });
         const confirmOptions = generateDefaultConfirmOption(confirmMessage, _handleCloseAlert, confirmProps, _cancelProps);
-
         return confirmOptions;
     }
 
     const _handleActivateVip = (event) => {
         event.preventDefault();
-        const params = _getParams(true); 
-        const alertOption = _buildAlertOptionUpdateVipStatus(params, true);
+        const params = _getParams(true);
+        const alertOption = _buildAlertOptionUpdateVipStatus(params, true, false);
         setSweetAlertOption(alertOption);
     }
 
 
     const _handleDeactivateVip = (event) => {
         event.preventDefault();
-        const params = _getParams(false); 
-        const alertOption = _buildAlertOptionUpdateVipStatus(params, false);
+        const params = _getParams(false);
+        const alertOption = _buildAlertOptionUpdateVipStatus(params, false, false);
         setSweetAlertOption(alertOption);
     }
 
     const _handleDisplayUploadDropzone = () => {
+        setResultMsgSubmitVipListFile(null);
         setDisplayUploadDropzone(!displayUploadDropzone);
+    }
+
+    const _handleActiveVipStatusFromFile = (params) => {
+        const handlerUpdateVipStatusSuccess = resultMessage => {
+            setSweetAlertOption(null);
+            setResultMsgSubmitVipListFile(resultMessage);
+
+        }
+        const alertOption = _buildAlertOptionUpdateVipStatus(params, true, true, handlerUpdateVipStatusSuccess);
+        setSweetAlertOption(alertOption);
     }
 
     const _onSubmitVipListFile = (files) => {
@@ -67,29 +78,39 @@ export const FormAction = props => {
         Excel.process(() => {
             Excel.read(file, 0, listData => {
                 const column = ExcelHelper.getColumnName(listData[0], ExcelReaderColumn);
+                if(!column) {
+                    alert(LangHelper.getSingleResource("Could not load the file, please check file's template again !"))
+                    return;
+                }
                 const systemIds = listData.map(_ => _[column]).join();
                 const params = {
                     systemIds,
                     isVip: true
                 }
-                const alertOption = _buildAlertOptionUpdateVipStatus(params, true);
-                setSweetAlertOption(alertOption);
+                _handleActiveVipStatusFromFile(params);
             })
         })
+    }
+
+    const _renderNoteDropzoneUploadFile = () => {
+        return (<>
+            <div>
+                <a href={Url.dowloadVipPlayerListTemplate}>*{LangHelper.getSingleResource('ClickHere')}</a>
+                <span>{LangHelper.getSingleResource('ToDowloadTemplate')}</span>
+            </div>
+            <div>
+                <span>{`*${LangHelper.getSingleResource('MaximumUploadFileSize')}: ${1} MB`}</span>
+            </div>
+        </>)
     }
 
     const _renderDropzoneUploadFile = () => {
         return <DropzoneUpload multiple={false} accept={'.xls,.xlsx'} maxSize={1}
             onClose={_handleDisplayUploadDropzone}
-            onSubmit={_onSubmitVipListFile}>
+            onSubmit={_onSubmitVipListFile}
+            isShowInnerZone={!resultMsgSubmitVipListFile}>
             <div>
-                <div>
-                    <a href={Url.dowloadVipPlayerList}>*{LangHelper.getSingleResource('ClickHere')}</a>
-                    <span>{LangHelper.getSingleResource('ToDowloadTemplate')}</span>
-                </div>
-                <div>
-                    <span>{`*${LangHelper.getSingleResource('MaximumUploadFileSize')}: ${1} MB`}</span>
-                </div>
+                {resultMsgSubmitVipListFile ? resultMsgSubmitVipListFile : _renderNoteDropzoneUploadFile()}
             </div>
         </DropzoneUpload>
     }

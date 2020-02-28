@@ -1,5 +1,6 @@
 import React from 'react';
 import { HeaderRow, HeaderCell } from '@9softstudio/react-grid';
+import { SortMapper } from '../constants';
 
 export default class GridHelper {
     static renderHeader(dataHeaders) {
@@ -20,13 +21,32 @@ export default class GridHelper {
         return expectedHeight > innerHeight ? currentTop - dropdownHeight : currentTop;
     }
 
+    
+    static getSortInfo(orderCol, sortType) {
+        const sortInfo = {
+            orderCol: SortMapper.sortCol[orderCol],
+            sortType: SortMapper.sortType[sortType]
+        }
+        return sortInfo;
+    }
+
+    static getSortInfoFromPagingOption(options) {
+        const { orderCol, sortType } = options;
+        return {
+            orderCol,
+            sortType
+        }
+    }
+
     static callBackToUpdatePaging = ({ pagingOption, setPagingOption }) => response => {
-        const { totalItem, pageIndex, pageSize } = response;
+        const { totalItem, pageIndex, pageSize, orderCol, sortType } = response;
         const newPagingOption = {
             ...pagingOption,
             ...{
                 PageIndex: pageIndex,           
                 PageSize: pageSize,
+                orderCol,
+                sortType,
                 TotalItem: totalItem
             }
         }

@@ -6,7 +6,7 @@ export const dataGridHeaders = [
     { key: 'vip', text:LangHelper.getSingleResource('Vip'), colWidth: 100 },
 ]
 export const Url = {
-    dowloadVipPlayerList: 'PlayerSegmentation/DowloadVipListTemplate',
+    dowloadVipPlayerListTemplate: 'PlayerSegmentation/DowloadVipListTemplate',
     uploadVipList:'Api/PlayerSegmentation/UploadVipList'
 }
 

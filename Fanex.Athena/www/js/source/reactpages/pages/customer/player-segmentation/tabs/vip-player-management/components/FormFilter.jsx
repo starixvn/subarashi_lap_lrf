@@ -13,7 +13,6 @@ import DataService from '@jsroot/lib/DataService.js'
 import DataSourceHelper from '../../../lib/helpers/dataSourceHelper';
 import ParamHelper from "../lib/helpers/paramHelper";
 import GridHelper from "../../../lib/helpers/gridHelper";
-import { tabKeys } from '../../../lib/constants';
 
 export class FormFilter extends PureComponent {
     constructor(props) {
@@ -27,27 +26,22 @@ export class FormFilter extends PureComponent {
             return;
         }
         this.props.setSelectedParams(params);
-        this.props.searchPlayer(tabKeys.vipPlayerManagement, params, GridHelper.callBackToUpdatePaging(this.props));
+        this.props.searchPlayer(this.props.selectedTabKey, params, GridHelper.callBackToUpdatePaging(this.props));
     }
 
     exportExcel = (event) => {
         event.preventDefault();
-        const params = this._getParams();
+        const params = this.props.selectedParams;
         if (!params) {
             return;
         }
-
-        params.IsExport = true;
-        this.props.toggleLoader(true);
-        DataService.getFile(ApiUrl.RUNNING_DATA_URL, params).then((response) => {
+        DataService.getFile('Api/PlayerSegmentation/ExportVipPlayerList', params).then((response) => {
             const NoContentStatusCode = 204;
-
-            if (response.status === NoContentStatusCode) {
+            if(response.status === NoContentStatusCode){
                 alert(LangHelper.getSingleResource("NoInfo"));
             } else {
-                Site.downloadFile(response.data, 'BettingTicketsCenter_Running.xls');
+                Site.downloadFile(response.data, 'VipPlayerList.xls');
             }
-            this.props.toggleLoader(false);
         });
     }
 
@@ -136,14 +130,15 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-    const { dateRange, selectedVipOption, selectedCurrency, selectedParams, username, pagingOption } = state;
+    const { dateRange, selectedVipOption, selectedCurrency, selectedParams, username, pagingOption, selectedTabKey } = state;
     return Object.assign({}, {
         selectedVipOption,
         dateRange,
         selectedCurrency,
         username,
         selectedParams,
-        pagingOption
+        pagingOption,
+        selectedTabKey
     });
 };
 
