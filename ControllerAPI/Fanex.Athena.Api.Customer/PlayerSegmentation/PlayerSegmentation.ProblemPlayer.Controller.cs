@@ -2,10 +2,13 @@
 {
     using Fanex.Athena.Api.Base;
     using Fanex.Athena.Api.Base.Attributes;
+    using Fanex.Athena.Excel.Customer;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
     using Fanex.Athena.Model.Customer.MetaModel;
+    using System.Linq;
+    using System.Net.Http;
     using System.Threading.Tasks;
     using System.Web.Http;
     using System.Web.Http.Results;
@@ -20,6 +23,31 @@
         {
             var result = await _playerDataAccess.GetProblemPlayerListAsync(metaModel).ConfigureAwait(false);
             return JsonApi(result);
+        }
+
+        [HttpPost]
+        [ValidationApiRequest]
+        [ApiAutoBindMetaModel(BindAgent = true)]
+        public async Task<HttpResponseMessage> ExportProblemPlayerList(ProblemPlayerListMetaModel metaModel)
+        {
+            if (metaModel.IsValid)
+            {
+                metaModel.PageIndex = 1;
+                metaModel.PageSize = int.MaxValue - 1000;
+
+                var dataSource = await _playerDataAccess.GetProblemPlayerListAsync(metaModel).ConfigureAwait(false);
+                if (dataSource.Data.Any())
+                {
+                    const string fileName = "ProblemPlayerList.xls";
+                    var excel = new ProblemPlayerExcel(dataSource.Data);
+                    excel.Export();
+
+                    var result = ExcelStream(excel.Workbook, fileName);
+                    return result;
+                }
+            }
+
+            return new HttpResponseMessage { StatusCode = System.Net.HttpStatusCode.NoContent };
         }
     }
 }

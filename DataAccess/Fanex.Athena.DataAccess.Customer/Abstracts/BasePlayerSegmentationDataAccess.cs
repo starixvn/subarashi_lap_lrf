@@ -38,14 +38,16 @@ namespace Fanex.Athena.DataAccess.Customer
             objectDb.SetParameterValue("UserName", metaModel.UserName);
             objectDb.SetParameterValue("PageIndex", metaModel.PageIndex);
             objectDb.SetParameterValue("PageSize", metaModel.PageSize);
+            objectDb.SetParameterValue("OrderCol", metaModel.OrderCol);
+            objectDb.SetParameterValue("SortType", metaModel.SortType);
             objectDb.SetParameterValue("TotalItems", 0);
         }
 
         protected static void ReadPlayer(IDataReader reader, PlayerInfo player)
         {
             player.CustId = Convert.ToInt32(reader["CustId"]);
-            player.ExternalId = reader["username"] as string;
-            player.SystemId = reader["username2"]?.ToString();
+            player.ExternalId = reader["username2"] as string;
+            player.SystemId = reader["username"] as string;
             player.IsVip = Convert.ToBoolean(reader["isVIP"]);
             player.IsMarkVoid = Convert.ToBoolean(reader["isMarkVoid"]);
         }

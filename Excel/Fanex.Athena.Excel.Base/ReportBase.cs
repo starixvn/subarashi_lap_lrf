@@ -6,13 +6,13 @@
 
 namespace Fanex.Athena.Excel.Base
 {
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Linq;
     using Excel.Base.Entities;
     using Fanex.Athena.Excel.Base.Extension;
     using NPOI.HSSF.UserModel;
     using NPOI.SS.UserModel;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
 
     public abstract class ReportBase
     {

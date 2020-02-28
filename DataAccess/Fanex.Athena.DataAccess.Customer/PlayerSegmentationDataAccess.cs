@@ -1,14 +1,14 @@
-﻿using Fanex.Athena.DataAccess.Customer.Interfaces;
-using Fanex.Athena.Model.Core.DTO.Common;
-using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
-using Fanex.Athena.Model.Customer.MetaModel;
-using Fanex.Data;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace Fanex.Athena.DataAccess.Customer
+﻿namespace Fanex.Athena.DataAccess.Customer
 {
+    using Fanex.Athena.DataAccess.Customer.Interfaces;
+    using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
+    using Fanex.Athena.Model.Customer.MetaModel;
+    using Fanex.Data;
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
     public class PlayerSegmentationDataAccess : BasePlayerSegmentationDataAccess, IPlayerSegmentationDataAccess
     {
         public async Task<ApiPagingResult<PlayerInfo>> GetProblemPlayerListAsync(ProblemPlayerListMetaModel metaModel)
@@ -26,7 +26,10 @@ namespace Fanex.Athena.DataAccess.Customer
                 });
                 var total = ReadTotal(db);
 
-                var result = new ApiPagingResult<PlayerInfo>(playerList, metaModel.PageIndex, metaModel.PageSize, total);
+                var result = new ApiPagingResult<PlayerInfo>(playerList,
+                    metaModel.PageIndex, metaModel.PageSize,
+                    metaModel.OrderCol, metaModel.SortType,
+                    total);
                 return result;
             }
         }
@@ -43,7 +46,10 @@ namespace Fanex.Athena.DataAccess.Customer
                 var playerList = await ReadPlayerList(db);
                 var total = ReadTotal(db);
 
-                var result = new ApiPagingResult<PlayerInfo>(playerList, metaModel.PageIndex, metaModel.PageSize, total);
+                var result = new ApiPagingResult<PlayerInfo>(playerList,
+                                   metaModel.PageIndex, metaModel.PageSize,
+                                   metaModel.OrderCol, metaModel.SortType,
+                                   total);
                 return result;
             }
         }
@@ -76,7 +82,7 @@ namespace Fanex.Athena.DataAccess.Customer
         private static void AddVipStatusUpdateParams(IObjectDb objectDb, UpdateStatusPlayerMetaModel metaModel)
         {
             objectDb.SetParameterValue("Username", metaModel.SystemIds);
-            objectDb.SetParameterValue("IsVip", metaModel.isVip);
+            objectDb.SetParameterValue("IsVip", metaModel.IsVip);
             objectDb.SetParameterValue("UserID", metaModel.UserId);
             objectDb.SetParameterValue("Ip", metaModel.Ip);
         }

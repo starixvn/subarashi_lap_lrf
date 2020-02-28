@@ -7,24 +7,25 @@ namespace Fanex.Athena.Model.Core.DTO.Common
     {
         public ApiPagingResult()
         {
-            IsSuccess = true;
             Data = Enumerable.Empty<T>();
         }
 
-        public ApiPagingResult(IEnumerable<T> data, int pageIndex, int pageSize, int totalItem)
+        public ApiPagingResult(IEnumerable<T> data, int pageIndex, int pageSize, byte orderCol, byte sortType, int totalItem)
         {
-            IsSuccess = true;
             Data = data;
             PageIndex = pageIndex;
             PageSize = pageSize;
             TotalItem = totalItem;
+            OrderCol = orderCol;
+            SortType = sortType;
         }
 
-        public bool IsSuccess { get; set; }
-        public string Message { get; set; }
         public IEnumerable<T> Data { get; set; }
         public int PageSize { get; set; }
         public int PageIndex { get; set; }
+        public byte OrderCol { get; set; }
+        public byte SortType { get; set; }
+
         public int TotalItem { get; set; }
     }
 }

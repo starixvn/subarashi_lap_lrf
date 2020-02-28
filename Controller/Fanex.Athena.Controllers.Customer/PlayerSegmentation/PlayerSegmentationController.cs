@@ -3,7 +3,6 @@
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Web.ActionFilter;
     using ONEbook.UM.Filters;
-    using System.Web;
     using System.Web.Mvc;
     using System.Web.SessionState;
 
@@ -12,7 +11,7 @@
     [FunctionAuthorization(PermissionKeys.CustomerInfoCustomerLog)]
     public class PlayerSegmentationController : CultureBaseController
     {
-        private static readonly string VIP_LIST_TEMPLATE_PATH = "~/App_Data/Template/Customers/VipPlayerList.xls";
+        private static readonly string VIP_LIST_TEMPLATE_PATH = "~/App_Data/Template/Customers/PlayerSegmentation/VipPlayerUploadTemplate.xls";
 
         public PlayerSegmentationController()
         {
@@ -28,11 +27,6 @@
         {
             var templatePath = Server.MapPath(VIP_LIST_TEMPLATE_PATH);
             return File(templatePath, "application/vnd.ms-excel", "VipPlayerList.xls");
-        }
-
-        private static bool IsValidFile(HttpPostedFileBase file)
-        {
-            return true;
         }
     }
 }

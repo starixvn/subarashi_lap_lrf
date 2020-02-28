@@ -128,6 +128,9 @@
     <Compile Include="CustomerCommGroupExcel.cs" />
     <Compile Include="DormantCustomerListExcel.cs" />
     <Compile Include="CustomerListExcel.cs" />
+    <Compile Include="PlayerSegmentation\VipPlayerExcel.cs" />
+    <Compile Include="PlayerSegmentation\PlayerExcel.cs" />
+    <Compile Include="PlayerSegmentation\ProblemPlayerExcel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -178,6 +181,7 @@
     <None Include="Fanex.Athena.Excel.Customer.ruleset" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
