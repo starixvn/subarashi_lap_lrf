@@ -220,6 +220,9 @@
                 { PlatformType.MobileLiteVersion, ViewResources.MobileLiteVersion },
                 { PlatformType.DeepLink, ViewResources.DeepLink },
                 { PlatformType.NativeApp, ViewResources.NativeApp },
+                { PlatformType.ESportsDesktop, ViewResources.ESportsDesktop },
+                { PlatformType.ESportsMobile, ViewResources.ESportsMobile },
+                { PlatformType.ESportsApp, ViewResources.ESportsApp },
                 { PlatformType.BetfromOthers, ViewResources.BetfromOthers }
             };
         }
