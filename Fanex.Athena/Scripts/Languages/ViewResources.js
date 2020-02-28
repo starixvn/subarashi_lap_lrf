@@ -1,4 +1,4 @@
-﻿// Generated at: 12/25/2019 1:20:07 PM
+﻿// Generated at: 2/28/2020 11:54:49 AM
 var _language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -436,6 +436,7 @@ MoveSuccessfullyMsg:"Successfully moved.",
 MoveToGroup:"Move to Group",
 MultiCustomers:"Multi-Customers",
 Name:"Name",
+NativeApp:"Native App",
 NetTurnover:"Net Turnover",
 NewAsia:"New Asia",
 NewGroup:"New Group",
@@ -542,6 +543,7 @@ ProductNG:"Number Game",
 ProductPP:"PP",
 ProductPTCS:"Playtech Casino",
 ProductSB:"Sportsbook",
+ProductSG:"SG",
 ProductVB:"Macau Games",
 ProductVG:"Macau",
 ProductVS:"Virtual Sports",
