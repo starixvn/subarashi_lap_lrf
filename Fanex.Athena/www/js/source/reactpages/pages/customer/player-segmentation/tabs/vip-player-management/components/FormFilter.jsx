@@ -7,6 +7,7 @@ import AutoComplete from '@jsroot/components/auto-complete'
 import CollapsiblePanel from '@jsroot/components/collapsible-panel'
 import { ActionCreators } from '../actions'
 import LangHelper from '@jsroot/lib/langHelper'
+import StringHelper from '@jsroot/lib/stringHelper'
 import Site from '@jsroot/lib/site'
 import AppData from '@jsroot/lib/AppData'
 import DataService from '@jsroot/lib/DataService.js'
@@ -46,8 +47,8 @@ export class FormFilter extends PureComponent {
     }
 
     _renderVipOptionSelectList() {
-        const vipOptions = [{ value: 0, label: 'All' }, { value: 1, label: 'Yes' }, { value: 2, label: 'No' }];
-        const { selectedVipOption, setSelectedVipOption } = this.props;
+        const { selectedVipOption, setSelectedVipOption, selectedTabKey } = this.props;
+        const vipOptions = AppData[selectedTabKey].vipOptions;
         return vipOptions && vipOptions.length && (
             <Select instanceId="VipOptions"
                 isSearchable={false}
@@ -58,10 +59,9 @@ export class FormFilter extends PureComponent {
     }
 
     _renderCurrencySelectList() {
-        const { selectedCurrency } = this.props;
-        const currencyList = [{ key: 1, value: 'USD', status: true }, { key: 2, value: 'VND', status: true }];
+        const { selectedCurrency, selectedTabKey } = this.props;
+        const currencyList = AppData[selectedTabKey].currencyList;
         const dataSource = DataSourceHelper.CreateDataSourceFrom(currencyList, selectedCurrency);
-
         return currencyList && currencyList.length && (
             <MultipleSelect id="permissionCurrency"
                 language={LangHelper.currentLanguage}
@@ -79,6 +79,7 @@ export class FormFilter extends PureComponent {
     }
 
     render() {
+        const isDisabledSubmit = StringHelper.isEmptyOrWhiteSpace(this.props.selectedCurrency);
         return (
             <CollapsiblePanel className="page-filter" stickyFooter={this._renderExcelIcon()}>
                 <div className="row">
@@ -106,7 +107,7 @@ export class FormFilter extends PureComponent {
                     <div className="col-12 col-md-4 col-sm-3 col-lg-2 col-xl-1">
                         <div className="form-group">
                             <div className="button-group">
-                                <button type="button" className="btn btn-submit" onClick={this._submit}>{LangHelper.getSingleResource("Submit")}</button>
+                                <button type="button" className="btn btn-submit" disabled={isDisabledSubmit} onClick={this._submit}>{LangHelper.getSingleResource("Submit")}</button>
                             </div>
                         </div>
                     </div>

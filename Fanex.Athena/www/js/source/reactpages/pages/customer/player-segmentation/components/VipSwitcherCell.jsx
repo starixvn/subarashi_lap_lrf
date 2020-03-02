@@ -21,13 +21,11 @@ const VipSwitcherCell = (props) => {
     }
 
     const _buildAlertOptionUpdateVipStatus = (params, isUpdateVip) => {
-        const confirmMessage = isUpdateVip ? LangHelper.getSingleResource('The bet limit will be reapplied if the selected player(s) is marked VIP. Are your sure you want to activate VIP ?') : 
-                    LangHelper.getSingleResource('Are you sure you want to deactivate VIP  for the player(s) ?');
+        const confirmMessage = isUpdateVip ? LangHelper.getSingleResource("ConfirmActivateVIPPlayer") : LangHelper.getSingleResource("ConfirmDeactivateVIPPlayer");
         const handlerUpdateVipStatusSuccess = UpdateVipStatusAlertOption.createHandlerAfterUpdateVipStatusSuccess(props);
         const handlerAfterUpdateVipStatus = UpdateVipStatusAlertOption.createHandlerAfterUpdateVipStatus({ setSweetAlertOption, handlerUpdateVipStatusSuccess, isUpdateVip });
         const confirmProps = UpdateVipStatusAlertOption.createUpdateVipStatusConfirmProps({ params, updateVipStatus, handlerAfterUpdateVipStatus });
         const confirmOptions = generateDefaultConfirmOption(confirmMessage, _handleCloseAlert, confirmProps, _cancelProps);
-    
         return confirmOptions;
     }
 

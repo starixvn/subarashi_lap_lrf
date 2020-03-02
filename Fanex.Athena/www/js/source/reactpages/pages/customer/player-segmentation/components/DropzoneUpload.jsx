@@ -16,11 +16,11 @@ const DropzoneUpload = (props) => {
 
     const onDropRejected = useCallback(rejectedFiles => {
         const rejectedFile = rejectedFiles[0];
-        let errorMsg = LangHelper.getSingleResource("Could not load the file, please check file's template again!");
+        let errorMsg = LangHelper.getSingleResource('UploadFileError');
         if (_isInvalidExtension(rejectedFile)) {
-            errorMsg = `${LangHelper.getSingleResource("Your file's extension is incorrect, please select an file")} (${accept})`;
+            errorMsg = `${LangHelper.getSingleResource('FileExtensionIncorrect')} (${accept})`;
         } else if (_isInValidSize(rejectedFile)) {
-            errorMsg = `${LangHelper.getSingleResource("The uploaded file should be less than")} ${props.maxSize}MB`;
+            errorMsg = `${LangHelper.getSingleResource('FileUploadExceedSize')} ${props.maxSize}MB`;
         }
         alert(errorMsg);
     })

@@ -7,6 +7,7 @@ import CollapsiblePanel from '@jsroot/components/collapsible-panel'
 import CheckBox from '@jsroot/components/CheckBox'
 import { DateRange } from '@jsroot/components/date-range'
 import LangHelper from '@jsroot/lib/langHelper'
+import StringHelper from '@jsroot/lib/stringHelper'
 import Site from '@jsroot/lib/site';
 import AppData from '@jsroot/lib/AppData'
 import DataService from '@jsroot/lib/DataService.js'
@@ -37,24 +38,20 @@ export class FormFilter extends PureComponent {
         if (!params) {
             return;
         }
-        DataService.getFile('Api/PlayerSegmentation/ExportProblemPlayerList', params).then((response) => {
-            const NoContentStatusCode = 204;
-            if(response.status === NoContentStatusCode){
-                alert(LangHelper.getSingleResource("NoInfo"));
-            } else {
-                Site.downloadFile(response.data, 'ProblemPlayerList.xls');
-            }
-        });
+        DataService.getFile('Api/PlayerSegmentation/ExportProblemPlayerList', params)
+            .then((response) => {
+                const NoContentStatusCode = 204;
+                if (response.status === NoContentStatusCode) {
+                    alert(LangHelper.getSingleResource("NoInfo"));
+                } else {
+                    Site.downloadFile(response.data, 'ProblemPlayerList.xls');
+                }
+            });
     }
     
     _renderDateRange() {
-        const { isGetAll, dateRange } = this.props;
-        const dateConstraint = {
-            minDate: '01/01/2019',
-            maxDate: '02/16/2021',
-            limitedMonthRange: 3
-        };
-
+        const { isGetAll, dateRange, selectedTabKey } = this.props;
+        const dateConstraint = AppData[selectedTabKey].dateConstraint;
         return (
             <div className={isGetAll ? 'datepicker-disabled' : ''}>
                 <DateRange
@@ -78,8 +75,8 @@ export class FormFilter extends PureComponent {
     }
 
     _renderCurrencySelectList() {
-        const { selectedCurrency } = this.props;
-        const currencyList = [ { key: 1, value: 'USD', status: true }, { key: 2, value: 'VND',  status: true }];
+        const { selectedCurrency, selectedTabKey } = this.props;
+        const currencyList = AppData[selectedTabKey].currencyList;
         const dataSource = DataSourceHelper.CreateDataSourceFrom(currencyList, selectedCurrency);
         return currencyList && currencyList.length && (
                 <MultipleSelect id="ddlCurrency"
@@ -88,7 +85,7 @@ export class FormFilter extends PureComponent {
                 keyField={"key"}
                 valueField={"value"}
                 statusField={"status"}
-                onChange={(_, selectedItemsKey) => { this.props.setSelectedCurrency(selectedItemsKey) } }/>);
+                onChange={(_, selectedItemsKey) => this.props.setSelectedCurrency(selectedItemsKey)}/>);
     }
 
     _renderExcelIcon() {
@@ -98,6 +95,7 @@ export class FormFilter extends PureComponent {
     }
 
      render() {
+         const isDisabledSubmit = StringHelper.isEmptyOrWhiteSpace(this.props.selectedCurrency);
         return (
             <CollapsiblePanel className="page-filter" stickyFooter={this._renderExcelIcon()}>
                 <div className="row">
@@ -112,7 +110,7 @@ export class FormFilter extends PureComponent {
                         <CheckBox id="IsGetAll"
                             checked={this.props.isGetAll}
                             onChange={(checked) => this.props.changeIsGetAll(checked)}
-                            label={LangHelper.getSingleResource("IsGetAll")} />
+                            label={LangHelper.getSingleResource("GetAll")} />
                     </div>
                     </div>
                     <div className="col-12 col-md-4 col-sm-3 col-lg-3 col-xl-2">
@@ -133,7 +131,7 @@ export class FormFilter extends PureComponent {
                     <div className="col-12 col-md-4 col-sm-3 col-lg-2 col-xl-1">
                         <div className="form-group">
                             <div className="button-group">
-                            <button type="button" className="btn btn-submit" onClick={this._submit}>{LangHelper.getSingleResource("Submit")}</button>
+                            <button type="button" className="btn btn-submit" disabled={isDisabledSubmit} onClick={this._submit}>{LangHelper.getSingleResource("Submit")}</button>
                             </div>
                         </div>
                     </div>

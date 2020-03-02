@@ -3,26 +3,25 @@ import AppContainer from './components/AppContainer.jsx';
 import { Provider } from 'react-redux';
 import Store from '@jsroot/lib/store';
 import reducers from './reducers';
+import { tabKeys } from '../../lib/constants';
 
-export default (props) => {
-  const { selectedTabKey } = props;
-  const defaultState = {
-    selectedTabKey,
-    isLoading: false,
-    isGetAll: true,
-    playerList: null,
-    username: null,
-    selectedVipOption: 0,
-    selectedCurrency: '1,2',
-    selectedParams: null,
+const initialState = {
+  ...window.initialState[tabKeys.vipPlayerManagement],
+  ...{
     pagingOption: {
       PageIndex: 1,
       PageSize: 500,
       PageList: [500, 1000, 1500, 2000],
-      orderCol: 0,
-      sortType: 0,
       TotalItem: null
     }
+  }
+}
+
+export default (props) => {
+  const { selectedTabKey } = props;
+  const defaultState = {
+    ...initialState,
+    ...{ selectedTabKey }
   }
   
   const store = Store.createStore(reducers, defaultState);

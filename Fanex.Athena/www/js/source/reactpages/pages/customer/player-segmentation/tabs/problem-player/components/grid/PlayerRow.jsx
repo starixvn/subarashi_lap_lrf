@@ -10,7 +10,7 @@ const PlayerRow = (props) => {
     const _renderVipSwitcherCell = () => {
         return isMarkVoid ?
             <Cell className="center-align">
-                <div className="cell-ticket-void">
+                <div className="cell-ticket-void" title={LangHelper.getSingleResource('DescriptionAbnormalBet')}>
                     <span>{LangHelper.getSingleResource('No')}</span>
                     <i class="icon-warning"></i>
                 </div>

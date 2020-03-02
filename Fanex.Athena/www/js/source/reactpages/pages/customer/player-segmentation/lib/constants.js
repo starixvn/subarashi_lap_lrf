@@ -2,8 +2,8 @@ import React from 'react';
 import LangHelper from '@jsroot/lib/langHelper';
 
 export const tabKeys = {
-    problemPlayer: 'problemPlayer',
-    vipPlayerManagement: 'vipPlayerManagement'
+    problemPlayer: 'ProblemPlayer',
+    vipPlayerManagement: 'VipPlayerManagement'
 }
 
 const dynamicImports = {
@@ -12,8 +12,8 @@ const dynamicImports = {
 }
 
 export const tabMenuList = [
-    { key: tabKeys.problemPlayer, name: 'Problem Player', component: React.lazy(dynamicImports[tabKeys.problemPlayer]), preLoad: dynamicImports[tabKeys.problemPlayer] },
-    { key: tabKeys.vipPlayerManagement, name: 'Vip Player Management', component: React.lazy(dynamicImports[tabKeys.vipPlayerManagement]), preLoad: dynamicImports[tabKeys.vipPlayerManagement] }
+    { key: tabKeys.problemPlayer, name: LangHelper.getSingleResource(tabKeys.problemPlayer), component: React.lazy(dynamicImports[tabKeys.problemPlayer]), preLoad: dynamicImports[tabKeys.problemPlayer] },
+    { key: tabKeys.vipPlayerManagement, name: LangHelper.getSingleResource(tabKeys.vipPlayerManagement), component: React.lazy(dynamicImports[tabKeys.vipPlayerManagement]), preLoad: dynamicImports[tabKeys.vipPlayerManagement] }
 ]
 
 export const preLoadComponents = (lazyComponents) => {

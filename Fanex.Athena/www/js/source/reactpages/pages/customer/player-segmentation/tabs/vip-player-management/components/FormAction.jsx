@@ -34,8 +34,7 @@ export const FormAction = props => {
     }
 
     const _buildAlertOptionUpdateVipStatus = (params, isUpdateVip, noAlertResult, handlerUpdateVipStatusSuccess) => {
-        const confirmMessage = isUpdateVip ? LangHelper.getSingleResource('The bet limit will be reapplied if the selected player(s) is marked VIP. Are your sure you want to activate VIP ?') :
-            LangHelper.getSingleResource('Are you sure you want to deactivate VIP  for the player(s) ?');
+        const confirmMessage = isUpdateVip ? LangHelper.getSingleResource("ConfirmActivateVIPPlayer") : LangHelper.getSingleResource("ConfirmDeactivateVIPPlayer");
         handlerUpdateVipStatusSuccess = handlerUpdateVipStatusSuccess || UpdateVipStatusAlertOption.createHandlerAfterUpdateVipStatusSuccess(props);
         const handlerAfterUpdateVipStatus = UpdateVipStatusAlertOption.createHandlerAfterUpdateVipStatus({ setSweetAlertOption, handlerUpdateVipStatusSuccess, isUpdateVip, noAlertResult });
         const confirmProps = UpdateVipStatusAlertOption.createUpdateVipStatusConfirmProps({ params, updateVipStatus, handlerAfterUpdateVipStatus });
@@ -79,7 +78,7 @@ export const FormAction = props => {
             Excel.read(file, 0, listData => {
                 const column = ExcelHelper.getColumnName(listData[0], ExcelReaderColumn);
                 if(!column) {
-                    alert(LangHelper.getSingleResource("Could not load the file, please check file's template again !"))
+                    alert(LangHelper.getSingleResource("UploadFileError"))
                     return;
                 }
                 const systemIds = listData.map(_ => _[column]).join();

@@ -20,20 +20,19 @@ export default class MessageHelper {
             icon: 'icon-warning'
         },
     }
-
+    
     static GetMsgUpdateVipStatus = {
-        [0]: data => LangHelper.getSingleResource('Successfully update: {0}')
+        [0]: data => LangHelper.getSingleResource('SuccessUpdateVipStatus')
             .replace('{0}', data.numberOfPlayer),
 
-        [100]: data => LangHelper.getSingleResource('Invalid player(s): {0} ({1})')
+        [100]: data => LangHelper.getSingleResource('InvalidPlayerUpdateVipStatus')
             .replace('{0}', data.numberOfPlayer)
             .replace('{1}', data.systemIds),
 
-        [101]: (data, isUpdateVip) => LangHelper.getSingleResource('Already {0}, no update: {1}')
-            .replace('{0}', isUpdateVip ? 'VIP' : 'NO VIP')
-            .replace('{1}', data.numberOfPlayer),
+        [101]: (data, isUpdateVip) => (isUpdateVip ? LangHelper.getSingleResource('AlreadyUpdateVipStatus') : LangHelper.getSingleResource('AlreadyUpdateNotVipStatus'))
+            .replace('{0}', data.numberOfPlayer),
 
-        [102]: data => LangHelper.getSingleResource('Retracted VIP player(s): {0} ({1})')
+        [102]: data => LangHelper.getSingleResource('RetractedPlayerUpdateVipStatus')
             .replace('{0}', data.numberOfPlayer)
             .replace('{1}', data.systemIds)
     }
