@@ -1,5 +1,4 @@
-﻿// Generated at: 2/28/2020 11:54:17 AM
-window._language_zh_Hans = {
+﻿// Generated at: 12/30/2019 10:57:13 AMwindow._language_zh_Hans = {
 AA:"客客",
 AbnormalBet:"非正规注单",
 AccessDeniedMsg:"对不起, 您没有权限访问此页面。",
