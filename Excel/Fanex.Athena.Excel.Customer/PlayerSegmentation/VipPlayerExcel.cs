@@ -13,7 +13,7 @@
         public VipPlayerExcel(IEnumerable<PlayerInfo> _dataSource)
         : base(HostingEnvironment.MapPath(ExcelTemplatePath), string.Empty, _dataSource)
         {
-            _infoHeaders.Insert(2, new Tuple<string, string>(ViewResources.VIP, "IsVip"));
+            _infoHeaders.Insert(2, new Tuple<string, string>(ViewResources.Vip, "IsVip"));
         }
     }
 }

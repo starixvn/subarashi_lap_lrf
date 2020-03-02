@@ -12,11 +12,10 @@
     using System.Web.Http;
     using System.Web.Http.Results;
 
-    [ApiFunctionAuthorization(PermissionKeys.CustomerInfoCustomerLog)]
     public partial class PlayerSegmentationController
     {
         [HttpPost]
-        [ValidationApiRequest]
+        [ValidationApiRequest(IsValidCurrencyList = true)]
         [ApiAutoBindMetaModel(BindAgent = true)]
         public async Task<JsonResult<ApiPagingResult<PlayerInfo>>> GetVipPlayerList(VipPlayerListMetaModel metaModel)
         {
@@ -25,7 +24,7 @@
         }
 
         [HttpPost]
-        [ValidationApiRequest]
+        [ValidationApiRequest(IsValidCurrencyList = true)]
         [ApiAutoBindMetaModel(BindAgent = true)]
         public async Task<HttpResponseMessage> ExportVipPlayerList(VipPlayerListMetaModel metaModel)
         {

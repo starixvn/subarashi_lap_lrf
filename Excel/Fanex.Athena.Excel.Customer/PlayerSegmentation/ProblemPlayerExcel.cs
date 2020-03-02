@@ -16,7 +16,7 @@
             _infoHeaders.Insert(2, new Tuple<string, string>(ViewResources.MarkDate, nameof(ViewResources.MarkDate)));
             if (haveVIPPermission)
             {
-                _infoHeaders.Insert(3, new Tuple<string, string>(ViewResources.VIP, "IsVip"));
+                _infoHeaders.Insert(3, new Tuple<string, string>(ViewResources.Vip, "IsVip"));
             }
         }
     }

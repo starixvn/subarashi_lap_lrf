@@ -1956,7 +1956,7 @@
     <value>仅支援{0}以后的注单</value>
   </data>
   <data name="Note" xml:space="preserve">
-    <value>注意</value>
+    <value>记录</value>
   </data>
   <data name="SingleCustomer" xml:space="preserve">
     <value>单一会员</value>
@@ -2218,12 +2218,96 @@
     <value>标记日期</value>
     <comment>#128082</comment>
   </data>
-  <data name="VIP" xml:space="preserve">
+  <data name="Vip" xml:space="preserve">
     <value>VIP</value>
     <comment>#128082</comment>
   </data>
   <data name="AbnormalBetDescriptionReport" xml:space="preserve">
     <value>(*) Player has problem tickets belong to at least 2 matches</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="ActivateVip" xml:space="preserve">
+    <value>激活为VIP</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="AlreadyUpdateNotVipStatus" xml:space="preserve">
+    <value>已不是VIP，无任何更新: {0}</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="AlreadyUpdateVipStatus" xml:space="preserve">
+    <value>已经是VIP，无任何更新: {0}</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="ClickHere" xml:space="preserve">
+    <value>点击此处</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="ClickOrDropHere" xml:space="preserve">
+    <value>点击或拖曳档案至此</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="ConfirmActivateVIPPlayer" xml:space="preserve">
+    <value>如果所选玩家被标记为VIP，则会恢复该玩家的投注限额。您确定要激活VIP吗?</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="ConfirmDeactivateVIPPlayer" xml:space="preserve">
+    <value>您确定要为玩家解除VIP吗?</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="DeactivateVip" xml:space="preserve">
+    <value>解除VIP</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="DescriptionAbnormalBet" xml:space="preserve">
+    <value>玩家在至少2场不同比赛中被判定为非正规投注</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="FileExtensionIncorrect" xml:space="preserve">
+    <value>档案的后缀名不正确，请选择Excel档案</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="FileUploadExceedSize" xml:space="preserve">
+    <value>上传档案大小需小于</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="GetAll" xml:space="preserve">
+    <value>全选</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="InvalidPlayerUpdateVipStatus" xml:space="preserve">
+    <value>无效的玩家: {0} ({1})</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="MaximumUploadFileSize" xml:space="preserve">
+    <value>上传档案大小限制</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="ProblemPlayer" xml:space="preserve">
+    <value>问题玩家</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="RetractedPlayerUpdateVipStatus" xml:space="preserve">
+    <value>遭撤回VIP的玩家: {0} ({1})</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="SuccessUpdateVipStatus" xml:space="preserve">
+    <value>更新成功: {0}</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="ToDowloadTemplate" xml:space="preserve">
+    <value>以下载范本</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="UploadFileError" xml:space="preserve">
+    <value>无法上传档案，请确认档案格式!</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="UploadVipList" xml:space="preserve">
+    <value>上传VIP清单</value>
+    <comment>#128082</comment>
+  </data>
+  <data name="VipPlayerManagement" xml:space="preserve">
+    <value>VIP玩家管理</value>
     <comment>#128082</comment>
   </data>
 </root>

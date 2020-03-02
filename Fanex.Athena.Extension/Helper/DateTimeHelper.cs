@@ -43,5 +43,15 @@
 
             return (MonthsInAYear * (toDate.Year - fromDate.Year)) + toDate.Month - fromDate.Month + 1;
         }
+
+        public static DateTime ToBeginOfTheDay(DateTime datetime)
+        {
+            return datetime.Date;
+        }
+
+        public static DateTime ToEndOfTheDay(DateTime datetime)
+        {
+            return datetime.Date.AddDays(1).AddSeconds(-3);
+        }
     }
 }

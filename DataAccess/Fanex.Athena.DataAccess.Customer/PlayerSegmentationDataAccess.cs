@@ -1,6 +1,7 @@
 ﻿namespace Fanex.Athena.DataAccess.Customer
 {
     using Fanex.Athena.DataAccess.Customer.Interfaces;
+    using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
     using Fanex.Athena.Model.Customer.MetaModel;
@@ -22,7 +23,8 @@
 
                 var playerList = await ReadPlayerList(db, (reader, player) =>
                 {
-                    player.MarkDate = Convert.ToDateTime(reader["CreatedDate"]);
+                    var date = Convert.ToDateTime(reader["CreatedDate"]);
+                    player.MarkDate = date.ToString(FormatKey.DateTimeFormat);
                 });
                 var total = ReadTotal(db);
 

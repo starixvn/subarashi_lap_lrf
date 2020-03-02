@@ -12,7 +12,6 @@
     using System.Web.Http;
     using System.Web.Http.Results;
 
-    [ApiFunctionAuthorization(PermissionKeys.CustomerInfoCustomerLog)]
     public partial class PlayerSegmentationController : BaseApiController
     {
         private readonly IPlayerSegmentationDataAccess _playerDataAccess;
