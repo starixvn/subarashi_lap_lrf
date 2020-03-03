@@ -1,4 +1,4 @@
-﻿// Generated at: 12/30/2019 10:57:13 AM
+﻿// Generated at: 2/28/2020 11:54:17 AM
 window._language_zh_Hans = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -163,7 +163,7 @@ DD:"和和",
 Dec:"十二月",
 December:"十二月",
 DecimalOdds:"欧洲盘赔率",
-DeepLink:"数据API",
+DeepLink:"深度链结",
 DefaultGroup:"默认组",
 DefaultGroupMsg:"这是默认组。是否继续?",
 Delete:"删除",

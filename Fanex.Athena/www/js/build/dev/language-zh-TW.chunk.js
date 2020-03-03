@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 12/30/2019 10:57:13 AM
+﻿// Generated at: 2/28/2020 11:51:19 AM
 window._language_zh_TW = {
 AA:"客客",
 AbnormalBet:"非正規註單",
@@ -260,7 +260,7 @@ DD:"和和",
 Dec:"十二月",
 December:"十二月",
 DecimalOdds:"歐洲盤賠率",
-DeepLink:"數據API",
+DeepLink:"深度鏈結",
 DefaultGroup:"預設組",
 DefaultGroupMsg:"這是默認組。是否繼續?",
 Delete:"刪除",

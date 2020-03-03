@@ -2205,7 +2205,7 @@
     <comment>125553</comment>
   </data>
   <data name="DeepLink" xml:space="preserve">
-    <value>数据API</value>
+    <value>深度链结</value>
   </data>
   <data name="ErrorCurrencyMsg" xml:space="preserve">
     <value>你尚未设置任何币别权限</value>
