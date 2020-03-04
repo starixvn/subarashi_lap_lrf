@@ -1,4 +1,4 @@
-﻿// Generated at: 2/28/2020 11:54:49 AM
+﻿// Generated at: 3/6/2020 9:50:19 AM
 var _language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -200,6 +200,7 @@ Delete:"Delete",
 DeleteCommissionGroup:"Delete Commission group",
 DeleteGroup:"Delete Group",
 Deposit:"Deposit",
+Deposited:"Deposited",
 DetailedBetlist:"Detailed Bet list",
 Details:"Details",
 DH:"DH",
@@ -392,6 +393,7 @@ Margin:"Margin",
 Market:"Market",
 Match:"Match",
 MatchCase:"Match case e.g",
+MatchPrecise:"Match precise",
 MatchPrefix:"Match prefix e.g",
 MatchWinLoss:"Match Win Loss",
 MatchWinLossTitle:"Match Win Loss, {0} - {1}",

@@ -1969,6 +1969,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Deposited.
+        /// </summary>
+        public static string Deposited {
+            get {
+                return ResourceManager.GetString("Deposited", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Detailed Bet list.
         /// </summary>
         public static string DetailedBetlist {
@@ -3747,6 +3756,15 @@ namespace Fanex.Athena.Resources {
         public static string MatchCase {
             get {
                 return ResourceManager.GetString("MatchCase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Match precise.
+        /// </summary>
+        public static string MatchPrecise {
+            get {
+                return ResourceManager.GetString("MatchPrecise", resourceCulture);
             }
         }
         

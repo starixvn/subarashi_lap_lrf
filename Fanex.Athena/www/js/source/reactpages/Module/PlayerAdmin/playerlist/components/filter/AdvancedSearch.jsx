@@ -1,8 +1,8 @@
-import React from 'react';
+﻿import React from 'react';
 import MultipleSelect from '@9softstudio/react-multiselect';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
-import { baStatusList, specialLevelListWithColor, oddsGroupListWithStyle } from '../../lib/constants';
+import { baStatusList, specialLevelListWithColor, oddsGroupListWithStyle, depositedList } from '../../lib/constants';
 import LangHelper from '@jsroot/lib/langHelper';
 import { getSpecialLevelText } from '../../lib/helpers/utils';
 
@@ -13,6 +13,7 @@ export class AdvancedSearch extends React.Component {
         this.oddsGroupList = Object.keys(oddsGroupListWithStyle).map(item => ({ Id: item, Value: item, Status: true }));
         this.specialLevelList = Object.keys(specialLevelListWithColor).map(item => ({ Id: item, Value: getSpecialLevelText(item), Status: true }));
         this.baStatusList = Object.keys(baStatusList).map(item => ({ value: baStatusList[item], label: LangHelper.getSingleResource(item) }));
+        this.depositedList = Object.keys(depositedList).map(item => ({ value: depositedList[item], label: LangHelper.getSingleResource(item) }));
     }
 
     _createSelectData(originalList, selectedItemString) {
@@ -39,11 +40,12 @@ export class AdvancedSearch extends React.Component {
 
     render() {
         const { currencyList, param, isAllowedBA } = this.props;
-        const { currencyIdList, oddsGroup, specialLevel, baFilter } = param;
+        const { currencyIdList, oddsGroup, specialLevel, baFilter, depositedFilter } = param;
         const convertedCurrencyList = this._createSelectData(currencyList, currencyIdList);
         const oddsGroupList = this._createSelectData(this.oddsGroupList, oddsGroup);
         const specialLevelList = this._createSelectData(this.specialLevelList, specialLevel);
         const selectedBaStatus = isAllowedBA ? this.baStatusList.find(x => x.value === baFilter) : null;
+        const selectedDepositedStatus = this.depositedList.find(x => x.value === depositedFilter);
 
         return (
             <>
@@ -98,6 +100,17 @@ export class AdvancedSearch extends React.Component {
                         </div>
                     )
                 }
+
+                <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
+                    <div className="form-group">
+                        <label className="label-text">{LangHelper.getSingleResource("Deposited")}</label>
+                        <Select instanceId='ddlDeposited'
+                            name='form-field-name'
+                            value={selectedDepositedStatus}
+                            options={this.depositedList}
+                            onChange={(item) => this.handleChangeSingleDropdown('depositedFilter', item)} />
+                    </div>
+                </div>
             </>
         );
     }
@@ -108,7 +121,8 @@ const propTypes = {
         currencyIdList: PropTypes.string.isRequired,
         oddsGroup: PropTypes.string.isRequired,
         specialLevel: PropTypes.string.isRequired,
-        baFilter: PropTypes.number.isRequired
+        baFilter: PropTypes.number.isRequired,
+        depositedFilter: PropTypes.number.isRequired
     }).isRequired,
     onChange: PropTypes.func.isRequired
 };

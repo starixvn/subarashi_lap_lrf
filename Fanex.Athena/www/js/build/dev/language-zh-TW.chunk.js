@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 2/28/2020 11:51:19 AM
+﻿// Generated at: 3/6/2020 1:44:44 PM
 window._language_zh_TW = {
 AA:"客客",
 AbnormalBet:"非正規註單",
@@ -267,6 +267,7 @@ Delete:"刪除",
 DeleteCommissionGroup:"刪除佣金群組",
 DeleteGroup:"刪除組",
 Deposit:"存款",
+Deposited:"已存款",
 Details:"細節",
 DH:"和主",
 DisableAgCasino:"Disable AG Casino",
@@ -417,6 +418,7 @@ March:"三月",
 Margin:"利潤",
 Market:"市場",
 Match:"賽事",
+MatchPrecise:"精準匹配",
 MatchWinLoss:"球賽輸贏",
 MatchWinLossTitle:"球賽輸贏, {0} - {1}",
 MaxBet:"最高投注",

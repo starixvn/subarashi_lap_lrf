@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 2/28/2020 11:51:19 AM
+﻿// Generated at: 3/6/2020 1:44:44 PM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -295,6 +295,7 @@ Delete:"Delete",
 DeleteCommissionGroup:"Delete Commission group",
 DeleteGroup:"Delete Group",
 Deposit:"Deposit",
+Deposited:"Deposited",
 DetailedBetlist:"Detailed Bet list",
 Details:"Details",
 DH:"DH",
@@ -487,6 +488,7 @@ Margin:"Margin",
 Market:"Market",
 Match:"Match",
 MatchCase:"Match case e.g",
+MatchPrecise:"Match precise",
 MatchPrefix:"Match prefix e.g",
 MatchWinLoss:"Match Win Loss",
 MatchWinLossTitle:"Match Win Loss, {0} - {1}",

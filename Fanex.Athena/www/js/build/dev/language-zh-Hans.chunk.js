@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 2/28/2020 11:51:19 AM
+﻿// Generated at: 3/6/2020 1:44:44 PM
 window._language_zh_Hans = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -265,6 +265,7 @@ Delete:"删除",
 DeleteCommissionGroup:"删除佣金群组",
 DeleteGroup:"删除组",
 Deposit:"存款",
+Deposited:"已存款",
 Details:"细节",
 DH:"和主",
 DisableAgCasino:"Disable AG Casino",
@@ -415,6 +416,7 @@ March:"三月",
 Margin:"利润",
 Market:"市场",
 Match:"赛事",
+MatchPrecise:"精准匹配",
 MatchWinLoss:"球赛输赢",
 MatchWinLossTitle:"球赛输赢, {0} - {1}",
 MaxBet:"最高投注",

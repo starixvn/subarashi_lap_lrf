@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { DropdownButton, DropdownItem } from '@jsroot/components/dropdown';
 import { searchOptions } from '../../lib/constants';
 import LangHelper from '@jsroot/lib/langHelper';
@@ -18,13 +18,20 @@ const SearchOption = (props) => {
         className: 'toggle-outline toggle-outline-light'
     }
 
-    const selectedValue = value || searchOptions.matchPrefix;
+    const selectedValue = value || searchOptions.matchPrecise;
 
     return (
         <DropdownButton className="search-option" isOpen={isOpen} toggleButton={toggleButton}
             onToggle={handleToggleDropdown}
             buttonLabel={(<i className="material-icons">settings</i>)}
             onClose={handleClose}>
+            <DropdownItem tag="div">
+                <label className="selection-item">
+                    <input type="radio" name="searchOption" value={searchOptions.matchPrecise}
+                        checked={selectedValue === searchOptions.matchPrecise} onChange={onChange} />
+                    {LangHelper.getSingleResource('MatchPrecise')}
+                </label>
+            </DropdownItem>
             <DropdownItem tag="div">
                 <label className="selection-item">
                     <input type="radio" name="searchOption" value={searchOptions.matchPrefix}

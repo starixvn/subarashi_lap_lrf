@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+﻿import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { ActionCreators } from '../actions/index.js';
 import { bindActionCreators } from 'redux';
@@ -10,7 +10,7 @@ import { licenseeType } from '../lib/constants';
 import CollapsiblePanel from '@jsroot/components/collapsible-panel';
 import UserGuide from '@jsroot/components/UserGuide';
 import LangHelper from '@jsroot/lib/langHelper';
-import { searchOptions, baStatusList, specialLevelListWithColor, emailPattern, oddsGroupListWithStyle } from '../lib/constants';
+import { searchOptions, baStatusList, specialLevelListWithColor, emailPattern, oddsGroupListWithStyle, depositedList } from '../lib/constants';
 import UserNameInput from './filter/UserNameInput';
 import QueryString from '@jsroot/lib/QueryString';
 import { encode } from '@jsroot/lib/htmlHelper';
@@ -34,7 +34,8 @@ export class FormFilter extends PureComponent {
             oddsGroup: this.allOddsGroupString,
             specialLevel: this.allSpecialLevel,
             baFilter: baStatusList.All,
-            searchOption: searchOptions.matchPrefix
+            searchOption: searchOptions.matchPrecise,
+            depositedFilter: depositedList.All
         }
     }
 
@@ -61,8 +62,11 @@ export class FormFilter extends PureComponent {
                 currencyIdList: this.allCurrencyString,
                 oddsGroup: this.allOddsGroupString,
                 specialLevel: this.allSpecialLevel,
-                baFilter: baStatusList.All
+                baFilter: baStatusList.All,
+                depositedFilter: depositedList.All
             });
+        } else if (prevProps.isAdvancedSearch !== isAdvancedSearch && isAdvancedSearch) {
+            this.setState({ depositedFilter: depositedList.Yes });
         }
     }
 
@@ -140,8 +144,8 @@ export class FormFilter extends PureComponent {
 
     _getUserNameLabel() {
         return this.props.type === licenseeType.nonApi ?
-            LangHelper.getSingleResource("Username") :
-            `${LangHelper.getSingleResource("Username")}/${LangHelper.getSingleResource("VendorMemberID")}`
+            `${LangHelper.getSingleResource("Username")}/${LangHelper.getSingleResource("SystemId")}` :
+            `${LangHelper.getSingleResource("Username")}/${LangHelper.getSingleResource("VendorMemberID")}/${LangHelper.getSingleResource("SystemId")}`
     }
 
     render() {
@@ -161,7 +165,7 @@ export class FormFilter extends PureComponent {
             <CollapsiblePanel className="page-filter" iconToggle={iconToggle} stickyFooter={this.userGuide}
                 onCollapse={() => this.props.setCollapseFilter(true)} onExpand={() => this.props.setCollapseFilter(false)}>
                 <div className="row">
-                    <div className="col-12 col-md-4 col-sm-4 col-lg-3 col-xl-2">
+                    <div className="col-12 col-md-4 col-sm-4 col-lg-3 col-xl-3">
                         <div className="form-group">
                             <label className="label-text">
                                 {this._getUserNameLabel()}
