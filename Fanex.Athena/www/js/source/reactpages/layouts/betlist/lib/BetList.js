@@ -278,6 +278,14 @@ class BetList {
         return url;
     }
 
+    getVRGResultUrl(rootUrl, gameId, platform) {
+        let url = rootUrl + 'VirtualGamesResultPopup/Index';
+        url = QueryString.setParam(url, 'gameId', gameId);
+        url = QueryString.setParam(url, 'platform', platform);
+
+        return url;
+    }
+
     getAllBetResultUrl(rootUrl, transdesc, betcheck, bettype) {
         let url = rootUrl + 'ResultReport/AllBetResult';       
         url = QueryString.setParam(url, 'betcheck', betcheck);
